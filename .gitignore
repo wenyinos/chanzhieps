@@ -7,5 +7,11 @@
 /www/data/upload
 /www/js/all.js
 /www/theme/default/all.css
+<<<<<<< HEAD
 .svn
 _chanzhi
+=======
+_chanzhi
+.svn
+ext
+>>>>>>> 048c8009912716e62d2280eacc4bd29db48a6f6c
