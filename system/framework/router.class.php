@@ -987,10 +987,14 @@ class router
         if(file_exists($commonModelFile))
         {
             helper::import($commonModelFile);
-            if(class_exists('commonModel'))
+            if(class_exists('extcommonModel'))
+            {
+                return new extcommonModel();
+            }
+            elseif(class_exists('commonModel'))
             {
                 return new commonModel();
-            }    
+            }
             else
             {
                 return false;
