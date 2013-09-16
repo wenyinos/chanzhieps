@@ -83,6 +83,7 @@ define('TABLE_COMMENT',  $config->db->prefix . 'comment');
 define('TABLE_THREAD',   $config->db->prefix . 'thread');
 define('TABLE_REPLY',    $config->db->prefix . 'reply');
 define('TABLE_USER',     $config->db->prefix . 'user');
+define('TABLE_OPENID',   $config->db->prefix . 'openID');
 define('TABLE_GROUP',    $config->db->prefix . 'group');
 define('TABLE_FILE',     $config->db->prefix . 'file');
 define('TABLE_DOWN',     $config->db->prefix . 'down');
