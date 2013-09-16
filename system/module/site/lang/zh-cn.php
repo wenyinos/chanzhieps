@@ -31,6 +31,7 @@ $lang->site->setBasic     = "设置基本信息";
 $lang->site->setLogo      = "Logo设置";
 $lang->site->setLogoFaild = "设置Logo失败";
 $lang->site->setMenu      = "设置导航";
+$lang->site->setAppkey    = "新浪微博登录设置";
 
 $lang->site->menuManage   = "导航管理";
 $lang->site->addMenu      = "添加导航";
