@@ -263,7 +263,6 @@ class control
 
         /* The main view file, extension view file and hook file. */
         $mainViewFile = $modulePath . 'view' . DS . $methodName . '.' . $this->viewType . '.php';
-            
         /* Extension view file. */
         $commonExtViewFile = $viewExtPath['common'] . $methodName . ".{$this->viewType}.php";
         $siteExtViewFile   = $viewExtPath['site'] . $methodName . ".{$this->viewType}.php";
@@ -289,8 +288,9 @@ class control
      */
     public function getExtViewFile($viewFile)
     {
-        $extPath     = dirname(dirname(realpath($viewFile))) . "/ext/{$this->app->siteCode}/view/";
+        $extPath     = dirname(dirname(realpath($viewFile))) . "/ext/_{$this->app->siteCode}/view/";
         $extViewFile = $extPath . basename($viewFile);
+
         if(file_exists($extViewFile))
         {
             helper::cd($extPath);
