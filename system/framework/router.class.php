@@ -1023,13 +1023,14 @@ class router
      */
     public function setControlFile($exitIfNone = true)
     {
-        $this->controlFile = $this->moduleRoot . $this->moduleName . DS . 'ext' . DS . '_' . $this->siteCode . DS . 'control' . DS . $this->methodName . '.php';
+        $modulePath = $this->getModulePath();
+        $this->controlFile = $modulePath . DS . 'ext' . DS . '_' . $this->siteCode . DS . 'control' . DS . $this->methodName . '.php';
         if(is_file($this->controlFile)) return true;
 
-        $this->controlFile = $this->moduleRoot . $this->moduleName . DS . 'ext' . DS . 'control' . DS . $this->methodName . '.php';
+        $this->controlFile = $modulePath . DS . 'ext' . DS . 'control' . DS . $this->methodName . '.php';
         if(is_file($this->controlFile)) return true;
 
-        $this->controlFile = $this->moduleRoot . $this->moduleName . DS . 'control.php';
+        $this->controlFile = $modulePath . DS . 'control.php';
         if(!is_file($this->controlFile)) header("Location: {$this->config->webRoot}");
 
         return true;
@@ -1058,7 +1059,7 @@ class router
     {
         if($moduleName == '') $moduleName = $this->moduleName;
         $modulePath = $this->getModuleRoot() . strtolower(trim($moduleName)) . DS;
-        if(!file_exists($modulePath)) $modulePath = $this->getModuleRoot() . 'ext' . DS . $this->siteCode . DS . $moduleName . DS;
+        if(!file_exists($modulePath)) $modulePath = $this->getModuleRoot() . 'ext' . DS . '_' . $this->siteCode . DS . $moduleName . DS;
         return $modulePath;
     }
 
