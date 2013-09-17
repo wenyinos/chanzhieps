@@ -1384,9 +1384,15 @@ class router
         {
             $this->config = $config;
             $this->setSiteCode();
-            $commonConfigFile = $this->configRoot . "common.php";
+            $config->siteCode = $this->siteCode;
+
+            if($config->multi)
+            {
+                $mulitConfigFile = $this->configRoot . "multi.php";
+                if(is_file($mulitConfigFile)) include $mulitConfigFile;
+            }
+
             $siteConfigFile = $this->configRoot . "sites/{$this->siteCode}.php";
-            if(is_file($commonConfigFile)) include $commonConfigFile;
             if(is_file($siteConfigFile)) include $siteConfigFile;
         }
 
