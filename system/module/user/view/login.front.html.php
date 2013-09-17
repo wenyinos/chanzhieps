@@ -20,6 +20,17 @@
             <span id='responser' class='a-center'></span>
           </td>
         </tr>
+        <tr>
+          <td colspan='2'>
+            <i><?php echo $lang->user->login->openID;?></i>
+            <?php 
+                foreach($config->user->openID->List as $provider => $name) 
+                {
+                    echo html::a(inlink('openIDLogin', "provider=$provider"), html::image("./theme/default/images/main/openid-$provider.gif"));
+                }
+            ?>
+          </td>
+        </tr>
       </table>
     </form>
   </div>

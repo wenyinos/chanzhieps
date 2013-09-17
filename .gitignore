@@ -1,4 +1,5 @@
 /system/config/my.php
+/system/config/multi.php
 /system/config/sites/*
 /system/tmp/log/*
 /system/tmp/model/*

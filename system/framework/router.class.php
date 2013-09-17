@@ -532,36 +532,7 @@ class router
      */
     public function setSiteCode()
     {
-        $serverName = $this->server->server_name;
-        $nameLength = strlen($serverName);
-
-        /* Get the last dot position. */
-        $lastDot = strrpos($serverName, '.');
-        if($lastDot === false) return $this->siteCode = $serverName;    // If no dot, siteCode = $serverName
-
-        /* Get the second dot position from the last. */
-        $secondDot = strrpos($serverName, '.', ($nameLength - $lastDot  + 1) * -1);
-        if($secondDot === false) return $this->siteCode = substr($serverName, 0, $lastDot);    // Only one dot.
-
-        /* Have two dots, get the postfix from the second dot first. */
-        $postfix = substr($serverName, $secondDot + 1);
-        if(strpos($this->config->domainPostfix, "|$postfix|") !== false)
-        {
-            $thirdDot = strrpos($serverName, '.', ($nameLength - $secondDot + 1) * - 1);
-            if($thirdDot === false) return $this->siteCode = substr($serverName, 0, $secondDot);
-
-            return $this->siteCode = substr($serverName, $thirdDot + 1, $secondDot - $thirdDot - 1);
-        }
-
-        /* If the postfix from the second dot don't exists, get postfix from the last dot.  */
-        $postfix = substr($serverName, $lastDot + 1);
-        if(strpos($this->config->domainPostfix, "|$postfix|") !== false)
-        {
-            return $this->siteCode = substr($serverName, $secondDot + 1, $lastDot - $secondDot - 1);
-        }
-
-        /* Last, return the full server name. */
-        return $this->siteCode = $serverName;
+        return $this->siteCode = helper::getSiteCode($this->server->server_name);
     }
 
     /**
@@ -987,10 +958,14 @@ class router
         if(file_exists($commonModelFile))
         {
             helper::import($commonModelFile);
-            if(class_exists('commonModel'))
+            if(class_exists('extcommonModel'))
+            {
+                return new extcommonModel();
+            }
+            elseif(class_exists('commonModel'))
             {
                 return new commonModel();
-            }    
+            }
             else
             {
                 return false;
@@ -1019,13 +994,14 @@ class router
      */
     public function setControlFile($exitIfNone = true)
     {
-        $this->controlFile = $this->moduleRoot . $this->moduleName . DS . 'ext' . DS . '_' . $this->siteCode . DS . 'control' . DS . $this->methodName . '.php';
+        $modulePath = $this->getModulePath();
+        $this->controlFile = $modulePath . DS . 'ext' . DS . '_' . $this->siteCode . DS . 'control' . DS . $this->methodName . '.php';
         if(is_file($this->controlFile)) return true;
 
-        $this->controlFile = $this->moduleRoot . $this->moduleName . DS . 'ext' . DS . 'control' . DS . $this->methodName . '.php';
+        $this->controlFile = $modulePath . DS . 'ext' . DS . 'control' . DS . $this->methodName . '.php';
         if(is_file($this->controlFile)) return true;
 
-        $this->controlFile = $this->moduleRoot . $this->moduleName . DS . 'control.php';
+        $this->controlFile = $modulePath . DS . 'control.php';
         if(!is_file($this->controlFile)) header("Location: {$this->config->webRoot}");
 
         return true;
@@ -1054,7 +1030,7 @@ class router
     {
         if($moduleName == '') $moduleName = $this->moduleName;
         $modulePath = $this->getModuleRoot() . strtolower(trim($moduleName)) . DS;
-        if(!file_exists($modulePath)) $modulePath = $this->getModuleRoot() . 'ext' . DS . $this->siteCode . DS . $moduleName . DS;
+        if(!file_exists($modulePath)) $modulePath = $this->getModuleRoot() . 'ext' . DS . '_' . $this->siteCode . DS . $moduleName . DS;
         return $modulePath;
     }
 
@@ -1373,6 +1349,8 @@ class router
         if($moduleName == 'common')
         {
             $mainConfigFile = $this->configRoot . 'config.php';
+
+            $extConfigFiles = array();
         }
         else
         {
@@ -1386,14 +1364,11 @@ class router
         }
 
         /* Set the files to include. */
-        if(!is_file($mainConfigFile))
+        $configFiles = array_merge(array($mainConfigFile), $extConfigFiles);
+
+        if(empty($configFiles))
         {
-            if($exitIfNone) self::triggerError("config file $mainConfigFile not found", __FILE__, __LINE__, true);
-            if(empty($extConfigFiles)) $configFiles = array();    // No main and extension config files, set $configFiles as an empty array.
-        }
-        else
-        {
-            $configFiles = array_merge(array($mainConfigFile), $extConfigFiles);
+            if($exitIfNone)  self::triggerError("config file $mainConfigFile not found", __FILE__, __LINE__, true);
         }
         
         if(!is_object($config)) $config = new config();
@@ -1407,6 +1382,16 @@ class router
 
         if($moduleName == 'common')
         {
+            $this->config = $config;
+            $this->setSiteCode();
+            $config->siteCode = $this->siteCode;
+
+            if($config->multi)
+            {
+                $mulitConfigFile = $this->configRoot . "multi.php";
+                if(is_file($mulitConfigFile)) include $mulitConfigFile;
+            }
+
             $siteConfigFile = $this->configRoot . "sites/{$this->siteCode}.php";
             if(is_file($siteConfigFile)) include $siteConfigFile;
         }
@@ -1435,7 +1420,6 @@ class router
 
         /* Assign config to router and set site code if the module is common. */
         $this->config = $config;
-        if($moduleName == 'common') $this->setSiteCode();
         return $config;
     }
 
