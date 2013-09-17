@@ -346,6 +346,25 @@ class helper
         if(substr($string, 0, 3) == pack('CCC', 239, 187, 191)) return substr($string, 3); 
         return $string;
     }
+
+    /**
+     * Get siteCode from domain.
+     * @param string $domain
+     * @return string $siteCode
+     **/ 
+    public static function getSiteCode($domain)
+    {
+        global $config;
+        $items = explode('.', $domain);
+        
+        $postfix = str_replace($items[0] . '.', '', $domain);
+        if(strpos($config->domainPostfix, "|$postfix|") !== false) return $items[0];
+        
+        $postfix = str_replace($items[0] . '.' . $items[1] . '.', '', $domain);
+        if(strpos($config->domainPostfix, "|$postfix|") !== false) return $items[1];
+
+        return $siteCode = $domain;
+    }
 }
 
 /**
@@ -433,40 +452,3 @@ function getWebRoot()
     return substr($path, 0, (strrpos($path, '/') + 1));
 }
 
-/**
- * Parse domain.
- * @param string $domain
- * @return string $siteCode
- **/ 
-function parseDoamin($domain)
-{
-    $nameLength = strlen($domain);
-
-    /* Get the last dot position. */
-    $lastDot = strrpos($domain, '.');
-    if($lastDot === false) return $this->siteCode = $domain;    // If no dot, siteCode = $domain
-
-    /* Get the second dot position from the last. */
-    $secondDot = strrpos($domain, '.', ($nameLength - $lastDot  + 1) * -1);
-    if($secondDot === false) return $this->siteCode = substr($domain, 0, $lastDot);    // Only one dot.
-
-    /* Have two dots, get the postfix from the second dot first. */
-    $postfix = substr($domain, $secondDot + 1);
-    if(strpos($this->config->domainPostfix, "|$postfix|") !== false)
-    {
-        $thirdDot = strrpos($domain, '.', ($nameLength - $secondDot + 1) * - 1);
-        if($thirdDot === false) return $this->siteCode = substr($domain, 0, $secondDot);
-
-        return $this->siteCode = substr($domain, $thirdDot + 1, $secondDot - $thirdDot - 1);
-    }
-
-    /* If the postfix from the second dot don't exists, get postfix from the last dot.  */
-    $postfix = substr($domain, $lastDot + 1);
-    if(strpos($this->config->domainPostfix, "|$postfix|") !== false)
-    {
-        return $this->siteCode = substr($domain, $secondDot + 1, $lastDot - $secondDot - 1);
-    }
-
-    /* Last, return the full server name. */
-    return $this->siteCode = $domain;
-}
