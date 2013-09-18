@@ -39,7 +39,7 @@ class navModel extends model
             $nav = new stdclass();
             $nav->type   = 'system';
             $nav->system = $item;
-            $nav->class  = 'nav-system-home';
+            $nav->class  = 'nav-system-' . $item;
             $nav->title  = $this->lang->nav->system->$item;
             $nav->url    = $url;
             $navs[] = $nav;
