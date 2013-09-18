@@ -3,11 +3,11 @@
   <div class='col-md-6'>
     <div class='panel panel-default'>
       <div class='panel-heading'>
-        <h3>完善帐号信息</h3>
-        <p class='muted'>设置您的帐号用户名及电子邮件</p>
+        <h3><?php echo $lang->user->perfectAccount;?></h3>
+        <p class='muted'><?php echo $lang->user->setAccount;?></p>
       </div>
       <div class='panel-body'>
-        <form method='post' target='hiddenwin' action='<?php echo $this->createLink('user', 'addAccount');?>' role='form'>
+        <form method='post' id='addaccountForm' action='<?php echo $this->createLink('user', 'addAccount');?>' role='form'>
           <div class='form-group'>
             <label for='username'><?php echo $lang->user->account;?></label>
             <?php echo html::input('account', '', "id='username'") . '<font color="red">*</font>' . $lang->user->register->lblAccount;?>
@@ -18,7 +18,7 @@
           </div>
           <?php 
           echo html::hidden('openID', $user['id']);
-          echo html::submitButton('', 'btn btn-success btn-wider') . html::resetButton();
+          echo html::submitButton('', 'btn btn-success btn-wider');
           ?>
         </form>
       </div>
@@ -27,11 +27,11 @@
   <div class='col-md-6'>
     <div class='panel panel-default'>
       <div class='panel-heading'>
-        <h3>绑定云蝉知帐号</h3>
-        <p class='muted'>如果您已注册过云蝉知帐号，请在此绑定</p>
+        <h3><?php echo $lang->user->bind;?></h3>
+        <p class='muted'><?php echo $lang->user->bindOldAccount;?></p>
       </div>
       <div class='panel-body'>
-        <form method='post' target='hiddenwin' action='<?php echo $this->createLink('user', 'bind');?>' role='form'>
+        <form method='post' id='bindForm' action='<?php echo $this->createLink('user', 'bind');?>' role='form'>
           <div class='form-group'>
             <label for='useraccount'><?php echo $lang->account;?></label>
             <?php echo html::input('account', '', "id='useraccount'" )?>
@@ -46,7 +46,7 @@
             <?php echo html::input('password', '', "id='password'")?>
           </div>
           <?php 
-          echo html::submitButton($lang->login, 'btn btn-success btn-wider') . html::resetButton();
+          echo html::submitButton($lang->login, 'btn btn-success btn-wider');
           echo html::hidden('openID', $user['id']);
           ?>
         </form>
