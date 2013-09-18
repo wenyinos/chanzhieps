@@ -528,6 +528,7 @@ class user extends control
         $this->session->set('user', $user);
         $this->app->user = $this->session->user;
         die(js::locate($this->createLink('user', 'control'), 'parent'));
+
     }
 
     /**
@@ -551,16 +552,16 @@ class user extends control
 
             $this->dao->insert(TABLE_USER)->data($user)
                 ->autoCheck()
-                ->batchCheck('account, realname, email', 'notempty')
+                ->batchCheck('account, email', 'notempty')
                 ->check('account', 'unique', '1=1', false)
                 ->check('account', 'account')
                 ->checkIF($this->post->email != false, 'email', 'email')
                 ->exec();
 
-            if(dao::isError()) die(js::error(dao::getError()));
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
             $this->bind($user->account, $this->post->openID);
-            die(js::locate($this->createLink('index', 'index'), 'parent'));
+            $this->send(array('result' => 'success', 'locate' => $this->createLink('index', 'index')));
         }
     }
 
@@ -588,11 +589,12 @@ class user extends control
                 ->set('provider')->eq('sina')
                 ->set('openID')->eq($openID)
                 ->exec(false);
-            die(js::locate($this->createLink('user', 'control'), 'parent'));
+
+            $this->send(array('result' => 'success', 'locate' => $this->createLink('user', 'control')));
         }
         else
         {
-            die(js::error($this->lang->user->loginFailed));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->user->loginFailed));
         }
     }
 }
