@@ -1,4 +1,10 @@
 /* Styles for admin login form. */
+.panel{width: 400px; margin: 5% auto; -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);}
+.panel-body{padding: 20px 10%; min-height: 230px;}
+.form-group input{min-width: 240px;}
+.form-group label a{font-weight: normal;}
+label{display: block;}
+
 .admin{width: 360px; margin: 0 auto 20px; padding: 19px 29px 29px; background-color: #fff; border: 1px solid #e5e5e5;}
 .admin input{margin-bottom: 10px;}
 
