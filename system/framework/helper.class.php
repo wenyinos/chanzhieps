@@ -346,6 +346,25 @@ class helper
         if(substr($string, 0, 3) == pack('CCC', 239, 187, 191)) return substr($string, 3); 
         return $string;
     }
+
+    /**
+     * Get siteCode from domain.
+     * @param string $domain
+     * @return string $siteCode
+     **/ 
+    public static function getSiteCode($domain)
+    {
+        global $config;
+        $items = explode('.', $domain);
+        
+        $postfix = str_replace($items[0] . '.', '', $domain);
+        if(strpos($config->domainPostfix, "|$postfix|") !== false) return $items[0];
+        
+        $postfix = str_replace($items[0] . '.' . $items[1] . '.', '', $domain);
+        if(strpos($config->domainPostfix, "|$postfix|") !== false) return $items[1];
+
+        return $siteCode = $domain;
+    }
 }
 
 /**
