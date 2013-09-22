@@ -42,7 +42,7 @@ $hotProducts   = $this->loadModel('product')->getHot(0, 8);
       <?php foreach($topCategories as $topCategory):?>
       <li>
         <?php
-        $browseLink = $this->createLink('article', 'browse', "categoryID={$topCategory->id}");
+        $browseLink = $this->createLink('product', 'browse', "categoryID={$topCategory->id}");
         echo "<i class='icon-chevron-right'></i>";
         echo html::a($browseLink, $topCategory->name, '', "id='category{$topCategory->id}'");
         ?>

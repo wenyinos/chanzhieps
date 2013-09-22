@@ -55,7 +55,7 @@ $(document).ready(function()
                 items:editorTool,
                 filterMode:true, 
                 cssPath:[v.jsRoot + 'kindeditor/plugins/code/prettify.css'],
-                urlType:'relative', 
+                urlType:'absolute', 
                 uploadJson: createLink('file', 'ajaxUpload'),
                 imageTabIndex:1,
                 allowFileManager:true,

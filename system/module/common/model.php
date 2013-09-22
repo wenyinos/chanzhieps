@@ -140,7 +140,7 @@ class commonModel extends model
     }
 
     /** 
-     * Juage a method of one module is open or not?
+     * Judge a method of one module is open or not?
      * 
      * @param  string $module 
      * @param  string $method 
@@ -182,7 +182,7 @@ class commonModel extends model
             if(commonModel::hasPriv($module, $method))
             {
                 $link  = helper::createLink($module, $method, $vars);
-                $string .= "<li$class><a href='$link' id='menu$key'>$label</a></li>\n";
+                $string .= "<li$class><a href='$link'>$label</a></li>\n";
             }
         }
 
@@ -233,7 +233,7 @@ class commonModel extends model
                 $class = '';
                 if($module == $currentModule && $method == $currentMethod) $class = " class='active'";
                 if($module == $currentModule && strpos($methodAlias, $currentMethod) !== false) $class = " class='active'";
-                $string .= "<li{$class}>" . html::a(helper::createLink($module, $method, $vars), $label, '', "id='submenu$key'") . "</li>\n";
+                $string .= "<li{$class}>" . html::a(helper::createLink($module, $method, $vars), $label) . "</li>\n";
             }
         }
 
@@ -334,7 +334,7 @@ class commonModel extends model
     /**
      * Print the link contains orderBy field.
      *
-     * This method will auto set the orderby param according the params. Fox example, if the order by is desc,
+     * This method will auto set the orderby param according the params. For example, if the order by is desc,
      * will be changed to asc.
      *
      * @param  string $fieldName    the field name to sort by
@@ -350,8 +350,8 @@ class commonModel extends model
     public static function printOrderLink($fieldName, $orderBy, $vars, $label, $module = '', $method = '')
     {
         global $lang, $app;
-        if(empty($module)) $module= $app->getModuleName();
-        if(empty($method)) $method= $app->getMethodName();
+        if(empty($module)) $module = $app->getModuleName();
+        if(empty($method)) $method = $app->getMethodName();
         $className = 'header';
 
         if(strpos($orderBy, $fieldName) !== false)

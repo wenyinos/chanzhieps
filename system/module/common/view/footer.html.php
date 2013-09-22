@@ -1,3 +1,4 @@
+<?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
   <hr/>
   <footer>
     <div class='a-center mb-20px'>

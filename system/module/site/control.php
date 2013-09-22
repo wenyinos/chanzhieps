@@ -23,7 +23,7 @@ class site extends control
         {
             $result = $this->loadModel('setting')->setItems('system.common.site', $_POST);
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
-            $this->send(array('result' => 'fail', 'message' => $this->lang->faild));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
 
         $this->display();
@@ -78,6 +78,24 @@ class site extends control
         }
             
         $this->view->logo = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : false;
+
+        $this->display();
+    }
+
+    /**
+     * set site basic info.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setAppkey()
+    {
+        if(!empty($_POST))
+        {
+            $result = $this->loadModel('setting')->setItems('system.common.site', $_POST);
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+        }
 
         $this->display();
     }

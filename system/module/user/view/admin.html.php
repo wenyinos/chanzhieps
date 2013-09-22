@@ -53,7 +53,7 @@
         <?php 
         foreach($lang->user->forbidDate as $date => $title)
         {
-            echo html::a($this->createLink('user', 'forbid', "userID=$user->id&date=$date"), $title);
+            echo html::a($this->createLink('user', 'forbid', "userID=$user->id&date=$date"), $title, '', "class='forbider'");
         }
         ?>
       </td>

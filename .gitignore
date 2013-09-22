@@ -1,4 +1,5 @@
 /system/config/my.php
+/system/config/multi.php
 /system/config/sites/*
 /system/tmp/log/*
 /system/tmp/model/*
@@ -7,3 +8,6 @@
 /www/data/upload
 /www/js/all.js
 /www/theme/default/all.css
+_chanzhi
+.svn
+ext

@@ -449,4 +449,152 @@ class user extends control
             $this->display();
         }
     }
+
+    /**
+     * OpenID login 
+     * 
+     * @param  string    $provider sina|qq|gmail|github 
+     * @access public
+     * @return void
+     */
+    public function openIDLogin($provider)
+    {
+        if($provider == 'sina')
+        {
+            $this->app->loadClass('sina', $static = true);
+            $sina = new SaeTOAuthV2($this->config->site->akey , $this->config->site->skey);
+            $url  = $sina->getAuthorizeURL($this->config->user->openID->sina->callbackUrl);
+            $this->locate($url);
+        }
+    }
+
+    /**
+     * Callback of sina.
+     * 
+     * @access public
+     * @return void
+     */
+    public function callback()
+    {
+        $this->app->loadClass('sina', $static = true);
+        $sina = new SaeTOAuthV2($this->config->site->akey , $this->config->site->skey);
+
+        $token = array();
+        if(isset($_REQUEST['code'])) 
+        {
+            $keys         = array();
+            $keys['code'] = $_REQUEST['code'];
+            $keys['redirect_uri'] = $this->config->user->openID->sina->callbackUrl;
+            try 
+            {
+                $token = $sina->getAccessToken('code', $keys);
+            } 
+            catch(OAuthException $e){}
+        }
+
+        if(!$token) die(js::error('授权失败'));
+
+        $_SESSION['token'] = $token;
+        setcookie( 'weibojs_'.$sina->client_id, http_build_query($token));
+
+        $sina = new SaeTClientV2($this->config->site->akey , $this->config->site->skey, $_SESSION['token']['access_token'] ); //验证
+        $user = $sina->show_user_by_id($token['uid']);
+        if(!$this->checkOpenID('sina', $user['id']))
+        {
+            $this->view->user    = $user;
+            $this->display();
+        }
+    }
+
+    /**
+     * Check openID if has been logined. 
+     * 
+     * @param  string $provider 
+     * @param  int    $openID 
+     * @access public
+     * @return void
+     */
+    public function checkOpenID($provider, $openID)
+    {
+        if(empty($openID)) return false;
+
+        $account = $this->dao->select('account')->from(TABLE_OPENID)
+            ->where('provider')->eq($provider)
+            ->andWhere('openID')->eq($openID)
+            ->fetch('account', false);
+        if(!$account) return false;
+        $user = $this->user->getByAccount($account);
+        $user->rights = $this->user->authorize($user);
+        $this->session->set('user', $user);
+        $this->app->user = $this->session->user;
+        die(js::locate($this->createLink('user', 'control'), 'parent'));
+
+    }
+
+    /**
+     * Add account for openID.
+     * 
+     * @access public
+     * @return void
+     */
+    public function addAccount()
+    {
+        if($_POST)
+        {
+            $user = fixer::input('post')
+                ->setDefault('join', date('Y-m-d H:i:s'))
+                ->setDefault('last', helper::now())
+                ->setDefault('visits', 1)
+                ->setIF($this->cookie->r != '', 'referer', $this->cookie->r)
+                ->setIF($this->cookie->r == '', 'referer', '')
+                ->remove('openID')
+                ->get();
+
+            $this->dao->insert(TABLE_USER)->data($user)
+                ->autoCheck()
+                ->batchCheck('account, email', 'notempty')
+                ->check('account', 'unique', '1=1', false)
+                ->check('account', 'account')
+                ->checkIF($this->post->email != false, 'email', 'email')
+                ->exec();
+
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            $this->bind($user->account, $this->post->openID);
+            $this->send(array('result' => 'success', 'locate' => $this->createLink('index', 'index')));
+        }
+    }
+
+    /**
+     * Bind openID and zentao user.
+     * 
+     * @param  string $account 
+     * @param  int    $openID 
+     * @access public
+     * @return void
+     */
+    public function bind($account = '', $openID = 0)
+    {
+        $user = $account ? $this->user->getByAccount($account) : $this->user->identify($this->post->account, $this->post->password);
+        if($this->post->openID) $openID = $this->post->openID;
+        if($user)
+        {
+            $user->rights = $this->user->authorize($user);
+            /* Register the session. */
+            $this->session->set('user', $user);
+            $this->app->user = $this->session->user;
+
+            $this->dao->insert(TABLE_OPENID)
+                ->set('account')->eq($user->account)
+                ->set('provider')->eq('sina')
+                ->set('openID')->eq($openID)
+                ->exec(false);
+
+            $this->send(array('result' => 'success', 'locate' => $this->createLink('user', 'control')));
+        }
+        else
+        {
+            $this->send(array('result' => 'fail', 'message' => $this->lang->user->loginFailed));
+        }
+    }
 }

@@ -21,6 +21,7 @@ $config->cookiePath  = '/';               // The path of cookies.
 $config->webRoot     = getWebRoot();      // The web root.
 $config->cookieLife  = time() + 2592000;  // The lifetime of cookies.
 $config->timezone    = 'Asia/Shanghai';   // Time zone setting, more plese visit http://www.php.net/manual/en/timezones.php
+$config->multi       = false;             // The config of multi site.
 
 /* The request settins. */
 $config->requestType = 'PATH_INFO';       // PATH_INFO or GET.
@@ -58,7 +59,7 @@ $config->db->persistant = false;               // Persistant connection or not.
 $config->db->driver     = 'mysql';             // The driver of pdo, only mysql yet.
 $config->db->encoding   = 'UTF8';              // The encoding of the database.
 $config->db->strictMode = false;               // Turn off the strict mode.
-$config->db->prefix     = 'xr_';               // The prefix of the table name.
+$config->db->prefix     = 'eps_';               // The prefix of the table name.
 
 /* Include my.php, domain.php and front or admin.php. */
 $configRoot   = dirname(__FILE__) . DIRECTORY_SEPARATOR;
@@ -83,7 +84,12 @@ define('TABLE_COMMENT',  $config->db->prefix . 'comment');
 define('TABLE_THREAD',   $config->db->prefix . 'thread');
 define('TABLE_REPLY',    $config->db->prefix . 'reply');
 define('TABLE_USER',     $config->db->prefix . 'user');
+define('TABLE_OPENID',   $config->db->prefix . 'openID');
 define('TABLE_GROUP',    $config->db->prefix . 'group');
 define('TABLE_FILE',     $config->db->prefix . 'file');
 define('TABLE_DOWN',     $config->db->prefix . 'down');
 define('TABLE_MESSAGE',  $config->db->prefix . 'message');
+
+/* Include extension config files. */
+$extConfigFiles = glob($configRoot . 'ext/*.php');
+if($extConfigFiles) foreach($extConfigFiles as $extConfigFile) include $extConfigFile;

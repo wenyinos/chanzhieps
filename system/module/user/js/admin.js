@@ -1,11 +1,11 @@
 $(document).ready(function()
 {
     /* Set forbid link options. */
-    $('td.operate a').click(function()
+    $('td.operate a.forbider').click(function()
     {
         $.getJSON($(this).attr('href'),function(data)
         {
-            bootbox.alert(data.message);
+            bootbox.alert(data.message + '');
         });
         return false;
     });
