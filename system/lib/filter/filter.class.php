@@ -112,6 +112,21 @@ class validater
     }
 
     /**
+     * Domain checking. 
+     *
+     * The check rule of filter don't support chinese.
+     * 
+     * @param  string $var 
+     * @static
+     * @access public
+     * @return bool
+     */
+    public static function checkDomain($var)
+    {
+        return preg_match('/^([a-z0-9-]+\.)+[a-z]{2,6}$/', $var);
+    }
+
+    /**
      * IP checking.
      * 
      * @param  ip $var 
