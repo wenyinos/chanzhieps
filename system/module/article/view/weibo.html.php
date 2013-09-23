@@ -1,3 +1,7 @@
+<?php
+js::set('appkey', $this->config->site->akey);
+js::set('ralateUid', $this->config->site->Uid);
+?>
 <script type="text/javascript" charset="utf-8">
 (function(){
   var _w = 72 , _h = 16;
@@ -5,10 +9,10 @@
     url:location.href,
     type:'3',
     count:'1', /**是否显示分享数，1显示(可选)*/
-    appkey:'708769934', /**您申请的应用appkey,显示分享来源(可选)*/
+    appkey: v.appkey , /**您申请的应用appkey,显示分享来源(可选)*/
     title:'', /**分享的文字内容(可选，默认为所在页面的title)*/
     pic:'', /**分享图片的路径(可选)*/
-    ralateUid:'3763971781', /**关联用户的UID，分享微博会@该用户(可选)*/
+    ralateUid: v.ralateUid, /**关联用户的UID，分享微博会@该用户(可选)*/
     language:'zh_cn', /**设置语言，zh_cn|zh_tw(可选)*/
     dpc:1
   }
