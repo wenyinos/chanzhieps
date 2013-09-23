@@ -31,7 +31,6 @@
       <th></th>
       <td>
         <?php echo html::submitButton();?>
-        <span id='responser'></span>
       </td>
     </tr>
   </table>

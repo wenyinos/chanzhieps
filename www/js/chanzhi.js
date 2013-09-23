@@ -25,6 +25,9 @@ $.extend(
                 if(response.result == 'success')
                 {
                     if($.isFunction(callback)) return callback(response);
+
+                    var submitButton = $(formID).find(':submit');
+                    submitButton.tooltip({title:response.message, placement:'right', delay:800}).tooltip('show').tooltip('toggle');
                     if($('#responser').length && response.message && response.message.length)
                     {
                         $('#responser').html(response.message).addClass('red f-12px').show().delay(3000).fadeOut(100);

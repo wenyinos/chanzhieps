@@ -41,7 +41,9 @@
     </tr>
     <tr>
       <th></th>
-      <td><?php echo html::submitButton();?></td>
+      <td>
+        <?php echo html::submitButton($lang->submit);?>
+      </td>
     </tr>
   </table>
 </form>
