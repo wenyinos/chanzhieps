@@ -85,6 +85,7 @@ class article extends control
             $this->lang->help->menu->articlecreate = "发布文章|article|create|type=" . $type;
 
             $this->lang->article->menu = $this->lang->help->menu;
+            $this->lang->menuGroups->article = 'help';
         }
         
         $this->app->loadClass('pager', $static = true);
@@ -133,6 +134,7 @@ class article extends control
             $this->lang->help->menu->articlecreate = "发布文章|article|create|type=" . $type;
 
             $this->lang->article->menu = $this->lang->help->menu;
+            $this->lang->menuGroups->article = 'help';
         }
 
         $categories = $this->loadModel('tree')->getOptionMenu($type, 0, $removeRoot = true);
@@ -175,7 +177,9 @@ class article extends control
             $this->lang->help->menu->articlecreate = "发布文章|article|create|type=" . $type;
 
             $this->lang->article->menu = $this->lang->help->menu;
+            $this->lang->menuGroups->article = 'help';
         }
+
         $article    = $this->article->getByID($articleID);
 
         $categories = $this->loadModel('tree')->getOptionMenu($type, 0, $removeRoot = true);
