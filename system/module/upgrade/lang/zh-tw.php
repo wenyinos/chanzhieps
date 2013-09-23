@@ -6,66 +6,37 @@
  * @license     LGPL (http://www.gnu.org/licenses/lgpl.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     upgrade
- * @version     $Id: zh-tw.php 4989 2013-07-03 07:05:45Z zhujinyonging@gmail.com $
+ * @version     $Id: zh-tw.php 5119 2013-07-12 08:06:42Z wyd621@gmail.com $
  * @link        http://www.zentao.net
  */
 $lang->upgrade->common  = '升級';
+
 $lang->upgrade->result  = '升級結果';
 $lang->upgrade->fail    = '升級失敗';
 $lang->upgrade->success = '升級成功';
 $lang->upgrade->tohome  = '返迴首頁';
-$lang->upgrade->warnning= '警告';
-$lang->upgrade->warnningContent = <<<EOT
-警告！升級有危險，請先備份資料庫，以防萬一。<br />
-備份方法：<br />
-1. 可以通過phpMyAdmin進行備份。<br />
-2. 使用mysql命令行的工具。<br />
-   # mysqldump -u <span class='red'>username</span> -p <span class='red'>dbname</span> > <span class='red'>filename</span> <br />
-   要將上面紅色的部分分別替換成對應的用戶名和禪道系統的資料庫名。<br />
-   比如： mysqldump -u root -p zentao >zentao.bak
-EOT;
-$lang->upgrade->setStatusFile = '<h4>升級之前請先執行下面的命令：</h4>
-                                 <ul>
-                                 <li>windows: 打開命令行，執行<strong>echo ok > %s</strong></li>
-                                 <li>linux: <strong>touch %s;</strong></li>
-                                 <li>或者刪掉"%s" 這個檔案 ，重新創建一個ok檔案，不需要副檔名，不需要內容。</li>
-                                 </ul>
-                                 <strong style="color:red">我已經仔細閲讀上面提示且完成上述工作，<a href="upgrade.php">繼續更新</a></strong>';
-$lang->upgrade->selectVersion = '選擇版本';
-$lang->upgrade->noteVersion   = "務必選擇正確的版本，否則會造成數據丟失。";
-$lang->upgrade->fromVersion   = '原來的版本';
-$lang->upgrade->toVersion     = '升級到';
-$lang->upgrade->confirm       = '確認要執行的SQL語句';
-$lang->upgrade->sureExecute   = '確認執行';
 
-$lang->upgrade->fromVersions['0_3beta']   = '0.3 BETA';
-$lang->upgrade->fromVersions['0_4beta']   = '0.4 BETA';
-$lang->upgrade->fromVersions['0_5beta']   = '0.5 BETA';
-$lang->upgrade->fromVersions['0_6beta']   = '0.6 BETA';
-$lang->upgrade->fromVersions['1_0beta']   = '1.0 BETA';
-$lang->upgrade->fromVersions['1_0rc1']    = '1.0 RC1';
-$lang->upgrade->fromVersions['1_0rc2']    = '1.0 RC2';
-$lang->upgrade->fromVersions['1_0']       = '1.0 STABLE';
-$lang->upgrade->fromVersions['1_0_1']     = '1.0.1';
-$lang->upgrade->fromVersions['1_1']       = '1.1';
-$lang->upgrade->fromVersions['1_2']       = '1.2';
-$lang->upgrade->fromVersions['1_3']       = '1.3';
-$lang->upgrade->fromVersions['1_4']       = '1.4';
-$lang->upgrade->fromVersions['1_5']       = '1.5';
-$lang->upgrade->fromVersions['2_0']       = '2.0';
-$lang->upgrade->fromVersions['2_1']       = '2.1';
-$lang->upgrade->fromVersions['2_2']       = '2.2';
-$lang->upgrade->fromVersions['2_3']       = '2.3';
-$lang->upgrade->fromVersions['2_4']       = '2.4';
-$lang->upgrade->fromVersions['3_0_beta1'] = '3.0 BETA1';
-$lang->upgrade->fromVersions['3_0_beta2'] = '3.0 BETA2';
-$lang->upgrade->fromVersions['3_0']       = '3.0 STABLE';
-$lang->upgrade->fromVersions['3_1']       = '3.1';
-$lang->upgrade->fromVersions['3_2']       = '3.2';
-$lang->upgrade->fromVersions['3_2_1']     = '3.2.1';
-$lang->upgrade->fromVersions['3_3']       = '3.3';
-$lang->upgrade->fromVersions['4_0_beta1'] = '4.0 BETA1';
-$lang->upgrade->fromVersions['4_0_beta2'] = '4.0 BETA2';
-$lang->upgrade->fromVersions['4_0']       = '4.0';
-$lang->upgrade->fromVersions['4_0_1']     = '4.0.1';
-$lang->upgrade->fromVersions['4_1']       = '4.1';
+$lang->upgrade->index         = '檢查是否可以執行升級程序';
+$lang->upgrade->backup        = '備份數據';
+$lang->upgrade->selectVersion = '確認升級之前的版本';
+$lang->upgrade->confirm       = '確認要執行的SQL語句';
+$lang->upgrade->execute       = '確認執行';
+
+$lang->upgrade->setOkFile = <<<EOT
+<h5>請按照下面的步驟操作以確認您的管理員身份。</h5>
+<p><code class='f-14px'>創建 "<strong>%s</strong>" 檔案。如果存在該檔案，使用編輯軟件打開，重新保存一遍。</code></p>
+<a href="upgrade.php" class='btn btn-primary'>下一步</a>
+EOT;
+
+$lang->upgrade->backupData = <<<EOT
+<pre>
+<strong>使用phpMyAdmin或者mysqldump命令備份資料庫。</strong>
+<code class='red'>$ mysqldump -u %s</span> -p%s %s > chanzhi.sql</code>
+</pre>
+<a href="%s" class='btn btn-primary'>下一步</a>
+EOT;
+
+$lang->upgrade->versionNote = "務必選擇正確的版本，否則會造成數據丟失。";
+
+$lang->upgrade->fromVersions['1_1'] = '1.1.stable';
+$lang->upgrade->fromVersions['1_2'] = '1.2.stable';
