@@ -1,3 +1,4 @@
+<?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
 <div class='col-md-3' id='leftmenu'>
   <table class='table table-bordered'>
     <caption><?php echo $lang->user->control->common;?></caption>
