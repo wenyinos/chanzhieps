@@ -25,6 +25,7 @@ js::set('articleID', $article->id);
               $article->copyURL ? print(html::a($article->copyURL, $article->copySite, '_blank')) : print($article->copySite); 
           }
           printf($lang->article->lblViews, $article->views);
+          include './weibo.html.php'; 
           ?>
         </div>
         <p><?php echo $article->content;?></p>
