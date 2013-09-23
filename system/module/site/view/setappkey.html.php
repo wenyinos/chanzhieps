@@ -22,6 +22,10 @@
       <th><?php echo "App Secret";?></th> 
       <td><?php echo html::input('skey', $this->config->site->skey, "class='text-3'");?></td> 
     </tr>
+    <tr>
+      <th><?php echo "Uid";?></th> 
+      <td><?php echo html::input('Uid', $this->config->site->Uid, "class='text-3'");?></td> 
+    </tr>
       <th></th>
       <td><?php echo html::submitButton();?></td>
     </tr>
