@@ -32,7 +32,8 @@
                 <label for="password"><?php echo $lang->user->password;?></label>
                 <?php echo html::password('password','',"placeholder='{$lang->user->inputPassword}'");?>
               </div>
-              <?php echo html::submitButton($lang->user->login->common, 'btn btn-primary btn-wider');?>
+              <?php echo html::submitButton($lang->ugetser->login->common, 'btn btn-primary btn-wider');?>
+              <?php echo html::hidden('referer', $referer);?>
             </form>
           </div>
         </div>
