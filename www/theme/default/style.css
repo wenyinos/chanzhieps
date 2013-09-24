@@ -259,8 +259,9 @@ table tbody tr.v-middle td, table tbody tr.v-middle th{vertical-align: middle;}
 /*---------------------- FRONT ---------------------------*/
 
 /* global settings.*/
-#header {margin-top:10px;}
+#header {margin-top:10px;position: relative;}
 #header #slogan{margin: 30px 0 0 20px; font-size: 18px;}
+#header #headNav{position: absolute;right: 0;}
 
 /* Logo setting.*/
 #logoBox{margin:0;}
@@ -309,6 +310,6 @@ ul.breadcrumb .divider{font-size:20px;color:#3280FC}
 .widget ul li:hover>i.icon-chevron-right{opacity: 1}
 
 /* Contact settings. */
-#contact dl{margin: 0; padding: 5px;}
-#contact dt{width: 50px; float: left; text-align: right;}
-#contact dd{float: left;}
+#contact dl{margin: 0; padding: 5px;display: table-row;}
+#contact dt,#contact dd{display: table-cell;padding: 2px 2px;}
+#contact dt{width: 50px; text-align: right;}
