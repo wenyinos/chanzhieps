@@ -45,14 +45,14 @@
 <div class='row'>
   <div class='col-md-4'>
     <div class="panel radius">
-      <h4><?php echo $lang->index->aboutus;?></h4>
+      <h3><?php echo $lang->index->aboutus;?></h3>
       <p><?php echo $this->config->company->desc;?><?php echo html::a($this->createLink('company', 'index'), $lang->more . $lang->raquo);?></p>
     </div>
   </div>
 
   <div class='col-md-4'>
     <div class="panel radius">
-      <h4><?php echo $lang->index->news;?></h4>
+      <h3><?php echo $lang->index->news;?></h3>
       <ul class='mg-zero pd-zero'>
         <?php foreach($latestArticles as $id => $article): ?>
         <li>
@@ -66,7 +66,7 @@
 
   <div class='col-md-4'>
     <div id='contact' class="panel radius">
-      <h4><?php echo $lang->index->contact;?></h4>
+      <h3><?php echo $lang->index->contact;?></h3>
       <?php foreach($contact as $item => $value):?>
       <dl>
         <dt><?php echo $this->lang->company->$item . $lang->colon;?></dt>
