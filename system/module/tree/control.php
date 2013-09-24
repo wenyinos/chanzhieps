@@ -44,14 +44,20 @@ class tree extends control
 
         if(strpos($type, 'book_') !== false)
         {
-            $this->lang->help->menu = $this->loadModel('help')->createModuleMenu();
-
             $this->lang->category         = $this->lang->directory;
             $this->lang->tree->menu       = $this->lang->help->menu;
             $this->lang->menuGroups->tree = 'help';
         }
 
         $this->view->title    = $this->lang->category->common;
+        if(strpos($type, 'book_') !== false)
+        {
+            $book = $this->loadModel('help')->getBookByCode(str_replace('book_', '', $type));
+            $this->view->book  = $book; 
+            $this->view->title = $book->name;
+            $this->view->backButton  =  html::a(helper::createLink('help', 'admin', "type={$type}"), $this->lang->help->backtobooks, '', "class='btn btn-default btn-sm'");
+        }
+
         $this->view->type     = $type;
         $this->view->root     = $root;
         $this->view->treeMenu = $this->tree->getTreeMenu($type, 0, array('treeModel', 'createManageLink'));

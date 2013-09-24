@@ -89,7 +89,8 @@ class article extends control
         if(strpos($type, 'book') !== false)
         {
             $this->view->categoryBox = $this->loadModel('help')->getCategoryBox($type);
-            $this->lang->article->menu = $this->loadModel('help')->createModuleMenu();
+            unset($this->lang->article->menu);
+            $this->lang->menuGroups->article = 'help';
             $i = 1;
             foreach($articles as $article)
             {
@@ -128,8 +129,9 @@ class article extends control
 
         if(strpos($type, 'book') !== false)
         {
+            $this->view->categoryBox = $this->loadModel('help')->getCategoryBox($type);
             $this->lang->help->menu = $this->loadModel('help')->createModuleMenu();
-            $this->lang->article->menu = $this->lang->help->menu;
+            unset($this->lang->article->menu);
             $this->lang->menuGroups->article = 'help';
         }
 
@@ -168,8 +170,9 @@ class article extends control
 
         if(strpos($type, 'book') !== false)
         {
+            $this->view->categoryBox = $this->loadModel('help')->getCategoryBox($type);
             $this->lang->help->menu = $this->loadModel('help')->createModuleMenu();
-            $this->lang->article->menu = $this->lang->help->menu;
+            unset($this->lang->article->menu);
             $this->lang->menuGroups->article = 'help';
         }
 

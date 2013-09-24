@@ -375,7 +375,7 @@ class html
      * @access public
      * @return string
      */
-    public static function backButton($label = '', $class = "btn", $misc = '')
+    public static function backButton($label = '', $class = "btn btn-default", $misc = '')
     {
         if($label == '')
         {

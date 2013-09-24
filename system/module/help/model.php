@@ -38,47 +38,23 @@ class helpModel extends model
 
     public function getCategoryBox($type)
     {
+        $book = $this->getBookByCode(str_replace('book_', '', $type));
         $treeMenu    = $this->loadModel('tree')->getTreeMenu($type, 0, array('treeModel', 'createBookLink'));
-        $manageLink  =  html::a(helper::createLink('tree', 'browse', "type={$type}"), $this->lang->tree->manage);
+        $backButton  =  html::a(helper::createLink('help', 'admin', "type={$type}"), $this->lang->help->backtobooks, '', "class='btn btn-default btn-sm'");
 
         $categoryBox = <<<Eof
-        <div class='row'>
-          <div class='col-md-10' id='categoryBox'>
             <div class='col-md-2'>
               <table class='table'>
                 <caption>
-                  {$this->lang->article->category} <div class='f-right'>{$manageLink}</div>
+                  {$book->name}
                 </caption>
                <tr>
-                 <td><div id='treeMenuBox'>{$treeMenu}</div></td>
+                 <td><div id='treeMenuBox'>{$treeMenu} {$backButton}</div></td>
                </tr>
              </table>
            </div>
 Eof;
         return $categoryBox;
-    }
-
-    /**
-     * Push books to ModuleMenu.
-     *
-     * @access public 
-     * @return string $moduleMenu
-     **/
-    public function createModuleMenu()
-    {
-        $books = $this->getBookList();
-
-        $moduleMenu = new stdclass();
-        $moduleMenu->managebook = $this->lang->help->menu->managebook;
-
-        foreach($books as $book)
-        {
-            $moduleMenu->{$book->key} = "$book->name|help|category|type=book_{$book->key}";
-        }
-
-        $moduleMenu->createbook = $this->lang->help->menu->createbook;
-
-        return $moduleMenu;
     }
 
     /**
@@ -151,6 +127,28 @@ Eof;
         $this->dao->insert(TABLE_CONFIG)->data($setting)->exec();
 
         return !dao::isError();
+    }
+
+    /**
+     * Get a book by code.
+     *
+     * @param string $code
+     * @access public
+     * @return array
+     */
+    public function getBookByCode($code)
+    {
+        $book = $this->dao->select('*')->from(TABLE_CONFIG)->where('`key`')->eq($code)->fetch();
+        if(!$book) return false;
+
+        $id   = $book->id;
+        $key  = $book->key;    
+        $book = json_decode($book->value);
+
+        $book->id  = $id;
+        $book->key = $key;
+
+        return $book;
     }
 
     /**

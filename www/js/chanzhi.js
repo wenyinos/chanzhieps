@@ -24,10 +24,15 @@ $.extend(
                 /* The response.result is success. */
                 if(response.result == 'success')
                 {
-                    if($.isFunction(callback)) return callback(response);
-
                     var submitButton = $(formID).find(':submit');
-                    submitButton.tooltip({title:response.message, placement:'right', delay:800}).tooltip('show').tooltip('toggle');
+                    if(response.message && response.message.length)
+                    {
+                        submitButton.popover({title:response.message, placement:'right', delay: { show: 500, hide: 500 }}).popover('show');
+                        function distroy(){submitButton.popover('hide')}
+                        setTimeout(distroy,1000);
+                    }
+
+                    if($.isFunction(callback)) return callback(response);
                     if($('#responser').length && response.message && response.message.length)
                     {
                         $('#responser').html(response.message).addClass('red f-12px').show().delay(3000).fadeOut(100);

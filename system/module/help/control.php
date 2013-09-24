@@ -26,7 +26,6 @@ class help extends control
      */
     public function admin()
     {
-        $this->lang->help->menu = $this->help->createModuleMenu();
         $this->view->books = $this->help->getBookList();
         $this->display();
     }
@@ -66,11 +65,9 @@ class help extends control
         if($_POST)
         {
             $result = $this->help->createBook();
-            if($result === true) $this->send(array('result' => 'success', 'locate' => $this->inlink('admin')));
+            if($result === true) $this->send(array('result' => 'success', 'message'=>$this->lang->help->successSaved, 'locate' => $this->inlink('admin')));
             $this->send(array('result' => 'fail', 'message' => $result));
         }
-
-        $this->lang->help->menu = $this->help->createModuleMenu();
         $this->display(); 
     }
 
@@ -86,11 +83,10 @@ class help extends control
         if($_POST)
         {
             $result = $this->help->updateBook($id);
-            if($result === true) $this->send(array('result' => 'success', 'locate' => $this->inlink('admin')));
+            if($result === true) $this->send(array('result' => 'success', 'message'=>$this->lang->help->successSaved, 'locate' => $this->inlink('admin')));
             $this->send(array('result' => 'fail', 'message' => $result));
         }
 
-        $this->lang->help->menu = $this->help->createModuleMenu();
         $this->view->id   = $id;
         $this->view->book = $this->help->getBookByID($id);
         $this->display();

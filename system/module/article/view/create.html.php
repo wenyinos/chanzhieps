@@ -14,6 +14,12 @@
 <?php js::set('type',$type);?>
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
+
+<?php if(strpos($type, 'book') !== false):?>
+<?php echo $categoryBox;?>
+<div class='col-md-10'>
+<?php endif;?>
+
 <form method='post' class='form-inline' id='ajaxForm'> 
   <table class='table table-form'>
     <caption><?php echo $lang->article->create;?></caption>
@@ -63,4 +69,8 @@
     </tr>
   </table>
 </form>
+<?php if(strpos($type, 'book') !== false):?>
+</div>
+<?php endif;?>
+
 <?php include '../../common/view/footer.admin.html.php';?>

@@ -109,7 +109,7 @@ $lang->user->login  = new stdclass();
 $lang->user->login->common  = "登录";
 $lang->user->login->welcome = '欢迎登录';
 $lang->user->login->why     = '欢迎登陆我们的系统，这样您可以使用我们为注册会员提供的各种服务。';
-$lang->user->login->openID  = '使用其他帐号进行登录：';
+$lang->user->login->openID  = '使用以下帐号进行登录';
 $lang->user->login->sina    = '新浪微博';
 $lang->user->login->keepLogin['yes'] = "保持登录";
 
