@@ -2,7 +2,8 @@
 
 .carousel {margin-bottom: 20px;}
 .carousel .container {position: relative; z-index: 9;}
-.carousel-control { width:80px; line-height:270px; font-size: 120px; text-shadow: 0 1px 1px rgba(0,0,0,.4); border: 0; z-index: 10;}
+.carousel-control {-moz-border-radius: 6px; -webkit-border-radius: 6px;border-radius:6px; width:80px; line-height:270px; font-size: 120px; text-shadow: 0 1px 1px rgba(0,0,0,.4); border: 0; z-index: 10;}
+.carousel-inner{-moz-border-radius: 6px; -webkit-border-radius: 6px;border-radius:6px;}
 .carousel .item {height: 270px;background-color: #145BCC;}
 .carousel img {position: absolute; top: 0; left: 0; min-width: 100%; height: 270px;}
 .carousel-caption {background-color: transparent; position: static; max-width: 550px; padding: 0 80px; margin-top:40px;text-align:left;}
