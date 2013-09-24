@@ -33,7 +33,12 @@ class slide extends control
     {
         if($_POST)
         {
-            if($this->slide->create())
+            if(empty($_FILES)) $this->send(array('result' => 'fail', 'message' => $this->lang->slide->noImageSelected));
+
+            $image = $this->slide->uploadImage();
+            if(!$image) $this->send(array('result' => 'fail', 'message' => $this->lang->error->fail));
+
+            if($this->slide->create($image))
             {
                 $this->send(array('result' => 'success', 'locate' => $this->inlink('admin')));
             }

@@ -59,13 +59,8 @@ class slideModel extends model
      * @access public
      * @return bool
      */
-    public function create()
+    public function create($image)
     {
-        if(empty($_FILES)) $this->send(array('result' => 'fail', 'message' => $this->lang->slide->noImageSelected));
-
-        $image = $this->uploadImage();
-        if(!$image) $this->send(array('result' => 'fail', 'message' => $this->lang->error->fail));
-
         $slide = fixer::input('post')->add('image', $image)->get();
 
         $setting = new stdclass();
