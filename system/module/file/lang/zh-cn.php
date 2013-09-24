@@ -36,4 +36,3 @@ $lang->file->publics[1] = '允许';
 
 $lang->file->edit       = '编辑';
 $lang->file->editFile   = '更改附件';
-

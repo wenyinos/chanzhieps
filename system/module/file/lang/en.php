@@ -14,6 +14,8 @@ $lang->file->upload     = 'Upload';
 $lang->file->browse     = 'Browse';
 $lang->file->download   = 'Download';
 $lang->file->edit       = 'Edit';
+$lang->file->primary    = 'Primary';
+$lang->file->setPrimary = 'Set as primary';
 $lang->file->deny       = 'Deny';
 $lang->file->allow      = 'Allow';
 $lang->file->label      = 'Label';
@@ -34,4 +36,3 @@ $lang->file->publics[1] = 'ok';
 
 $lang->file->edit       = 'Edit';
 $lang->file->editFile   = 'Change file';
-
