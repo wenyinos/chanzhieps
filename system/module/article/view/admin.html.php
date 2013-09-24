@@ -13,7 +13,7 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php if(strpos($type, 'book') !== false):?><form id='ajaxForm' method='post' action='<?php echo inlink('updateOrder', "type=$type");?>' target='hiddenwin'><?php endif;?>
 <table class='table table-bordered table-hover table-striped'>
-  <caption><?php echo $lang->article->list;?></caption>
+  <caption><?php echo $lang->article->list;?><span class='pull-right mr-10px'><?php echo html::a($this->inlink('create'), $lang->article->create);?></span></caption>
   <thead>
     <tr class='a-center'>
       <?php if(strpos($type,'book') !== false):?><th class='w-80px'><?php echo $lang->article->order;?></th><?php endif;?>

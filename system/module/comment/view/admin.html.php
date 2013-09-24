@@ -13,16 +13,7 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php js::set('currentMenu', $currentMenu);?>
 <table class='table table-bordered'>
-  <caption>
-    <ul class="nav nav-tabs" id="statusNav">
-      <li <?php if(0==$status) echo "class='active'";?>>
-        <?php echo html::a($this->inLink('admin', "status=0"), $lang->comment->statusList[0]);?>
-      </li>
-      <li <?php if(1==$status) echo "class='active'";?>>
-        <?php echo html::a($this->inLink('admin', "status=1"), $lang->comment->statusList[1]);?>
-      </li>
-    </ul>
-  </caption>
+  <caption class='pl-10px'><?php echo $lang->comment->statusList[$currentMenu] . $lang->comment->list;?></caption>
   <thead>
     <tr>
       <th class='w-60px'><?php echo $lang->comment->id;?></th>
