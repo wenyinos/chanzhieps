@@ -14,10 +14,11 @@ js::set('articleID', $article->id);
         <h1 class='a-center'><?php echo $article->title;?></h1>
         <div class='f-12px mb-10px a-center'>
           <?php
+          printf($lang->article->lblAddedDate, $article->addedDate);
           printf($lang->article->lblAuthor,    $article->author);
           if($article->original)
           {
-              echo "<strong>{$lang->article->originalList[$article->original]}</strong>";
+              echo "<strong>{$lang->article->originalList[$article->original]}</strong> &nbsp;&nbsp;";
           }
           else
           {
