@@ -265,7 +265,7 @@ font-size: 24px;
 line-height: 40px;
 }
 #header #slogan{margin: 30px 0 0 20px; font-size: 18px;}
-#header #headNav{position: absolute;right: 0;}
+#header #headNav{position: absolute;right: 0;top:5px;}
 
 /* Logo setting.*/
 #logoBox{margin:0;}
@@ -332,3 +332,7 @@ ul.breadcrumb .divider{font-size:20px;color:#3280FC}
 #contact dl{margin: 0; padding: 5px;display: table-row;}
 #contact dt,#contact dd{display: table-cell;padding: 2px 2px;}
 #contact dt{width: 50px; text-align: right;}
+
+/* Box Shadow. */
+.box-radius{border: 1px solid #ddd; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; }
+.box-shadow{-webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);}

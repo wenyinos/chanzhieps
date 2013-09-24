@@ -1,6 +1,8 @@
 /* Styles for admin login form. */
-.panel{width: 400px; margin: 5% auto; -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);}
-.panel-body{padding: 20px 10%; min-height: 230px;}
+#login .box-radius{margin: 0 -13px;padding: 30px 0;}
+#login .panel{width: 80%; margin: 5% auto;border: none;}
+#login .panel-body{padding: 20px; min-height: 230px;}
+#login .panel-heading{background-color: transparent;}
 .form-group input{min-width: 240px;}
 .form-group label a{font-weight: normal;}
 label{display: block;}
@@ -13,3 +15,5 @@ label{display: block;}
 #logo img{width: 200px; padding: 0 0 10px 0;}
 
 .input-block-level{width: 100%;}
+
+.icon-sina:before{content: "\F18A";color: #e1151a}
