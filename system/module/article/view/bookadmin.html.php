@@ -17,6 +17,7 @@ js::set('book', $book);
 js::set('type', $type);
 ?>
 <?php echo $categoryBox;?>
+  <div class='col-md-10'>
      <form id='ajaxForm' method='post' action='<?php echo inlink('updateOrder', "type=$type");?>' target='hiddenwin'>
       <table class='table table-bordered table-hover table-striped'>
         <caption>
@@ -70,7 +71,6 @@ js::set('type', $type);
         </tfoot>
       </table>
     </form>
-  </div>
 </div>
 <?php include '../../common/view/treeview.html.php';?>
 <?php include '../../common/view/footer.admin.html.php';?>
