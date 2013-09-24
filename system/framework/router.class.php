@@ -1,5 +1,5 @@
-<?php
-/**
+    <?php
+    /**
  * The router, config and lang class file of ZenTaoPHP framework.
  *
  * The author disclaims copyright to this source code.  In place of
@@ -532,7 +532,7 @@ class router
      */
     public function setSiteCode()
     {
-        return $this->siteCode = helper::getSiteCode($this->server->server_name);
+        return $this->siteCode = helper::getSiteCode($this->server->http_host);
     }
 
     /**
