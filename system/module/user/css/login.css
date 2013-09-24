@@ -5,7 +5,8 @@
 .form-group label a{font-weight: normal;}
 label{display: block;}
 
-.admin{width: 360px; margin: 0 auto 20px; padding: 19px 29px 29px; background-color: #fff; border: 1px solid #e5e5e5;}
+.admin{width: 360px; margin: 0 auto 20px; padding: 19px 29px 29px; background-color: #fff; border: 1px solid #ddd;
+-moz-box-shadow:0px 1px 15px rgba(0,0,0,0.15); -webkit-box-shadow:0px 1px 15px rgba(0,0,0,0.15); box-shadow:0px 1px 15px rgba(0,0,0,0.15);}
 .admin input{margin-bottom: 10px;}
 
 #logo{display: block; margin: 0 auto; text-align: center;}

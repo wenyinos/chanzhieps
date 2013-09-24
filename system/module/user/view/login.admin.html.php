@@ -6,7 +6,7 @@
   <?php echo html::input('account','',"class='input-block-level' placeholder='{$lang->user->inputAccountOrEmail}'");?>
   <?php echo html::password('password','',"class='input-block-level' placeholder='{$lang->user->inputPassword}'");?>
   <?php echo html::hidden('referer', $referer);?>
-  <?php echo html::submitButton($lang->user->login->common, 'btn btn-primary');?>
+  <?php echo html::submitButton($lang->user->login->common, 'btn btn-primary btn-block');?>
 </form>
 <?php
 if($config->debug) js::import($jsRoot . 'jquery/form/min.js');
