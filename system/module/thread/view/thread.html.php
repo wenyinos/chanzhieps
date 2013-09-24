@@ -1,5 +1,8 @@
 <table class='table'>
-  <caption><?php echo $thread->addedDate . " " . $thread->title;?></caption>
+  <caption>
+  <span class='f-left'><?php echo $thread->addedDate . " " . $thread->title;?></span>
+  <span class='f-right'>#1</span>
+  </caption>
   <tbody>
     <tr>
       <td class='speaker'>
@@ -13,7 +16,7 @@
   </tbody>
   <tfoot>
     <tr> 
-      <td class='a-right' colspan="2" id='manageBox'>
+      <td class='a-right' colspan='2' id='manageBox'>
         <div class='f-left'><?php $this->thread->printFiles($thread, $this->thread->canManage($board->moderators));?></div>
         <div id='manageMenu'>
           <?php 
