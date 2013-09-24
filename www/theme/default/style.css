@@ -15,7 +15,6 @@ br    {margin-bottom:5px}
 hr    {border:none; border-top:1px solid #e4e4e4}
 form  {margin:0}
 input[type="text"], input[type='file']{display:inline;}
-ul, li{list-style: none;}
 
 /*-----------------------FORM SETTING----------------------------*/
 .text-1 {width: 90%}
@@ -209,7 +208,7 @@ caption {margin:0; padding-left:10px; text-align:left; background-color: #EFEFEF
 #thread .user {width:150px; border:none; border-right:1px solid #dddddd;}
 #thread p     {margin:0}
 
-/* Treeview. */
+.tree li{list-style: none;}
 .tree .active {color:blue; font-weight:bold}
 
 /* Other items.*/
@@ -270,7 +269,7 @@ img.logo{max-height: 100px; margin-bottom: 10px;}
 /* nav ul settings.*/
 #topNav{background-color: #145BCC;}
 #topNav .navbar-inner {padding: 0;}
-#topNav ul{margin:0; line-height:1.0; padding:0}
+#topNav ul{list-style:none; margin:0; line-height:1.0; padding:0}
 #topNav ul.children{position:absolute; top:-999em; width:138px;background:#F2F2F2;}
 #topNav ul.grade2 {margin-top:5px;}
 #topNav ul.grade3 {margin:-1px 0 0 -2px;}
@@ -304,7 +303,7 @@ ul.breadcrumb .divider{font-size:20px;color:#3280FC}
 .box ul {margin:10px 20px;}
 
 /* Widget settings. */
-.widget ul li {width:100%; padding:0; margin-bottom:5px; }
+.widget ul li {width:100%; padding:0; margin-bottom:5px; list-style: none; }
 .widget ul li>a {padding-left:5px;}
 .widget ul li>i.icon-chevron-right{opacity: 0.25}
 .widget ul li:hover>i.icon-chevron-right{opacity: 1}
