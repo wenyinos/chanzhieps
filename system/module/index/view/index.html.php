@@ -33,7 +33,7 @@
       </div>
       <div class="widget-footer">
         <p>
-          <?php echo html::a(helper::createLink('product', 'view', "id={$product->id}"), $lang->viewMore, '', "class='btn btn-primary'");?>
+          <?php echo html::a(helper::createLink('product', 'view', "id={$product->id}"), $lang->more, '', "class='btn btn-primary'");?>
         </p>
       </div>
     </div>

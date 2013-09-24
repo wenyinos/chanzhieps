@@ -7,78 +7,176 @@
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     chanzhiEPS
  * @version     $Id$
- * @link        http://www.chanzhi.org
+ * @link        http://www.zentao.net
  */
-$lang->arrow        = ' » ';
-$lang->colon        = '::';
-$lang->at           = ' at ';
-$lang->downArrow    = '↓';
+/* common sign setting. */
+$lang->colon   = ' : ';
+$lang->prev    = '‹';
+$lang->next    = '›';
+$lang->laquo   = '&laquo;';
+$lang->raquo   = '&raquo;';
+$lang->minus   = ' - ';
+$lang->RMB     = '￥';
+$lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 
-$lang->chanzhiEPS    = 'chanzhiEPS';
-$lang->eayssoft     = 'QingDao Nature Easy Soft Network Technology Co,LTD';
-$lang->homePage     = 'Home';
-$lang->aboutus      = 'About us';
-$lang->hr           = 'Recruitment';
-$lang->forumPage    = 'Forum';
-$lang->currentPos   = 'Current: ';
+/* Lang items for xirang. */
+$lang->chanzhiEPS = 'chanzhiEPS';
+$lang->poweredBy = " Powered by <a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPS} %s</a>!";
 
-$lang->articleTree     = 'Category';
-$lang->articleFull     = 'Article body ';
-$lang->articleViews    = '<i>%s views</i> ';
-$lang->articleComments = '<i>%s comments</i> ';
-$lang->articleAuthor   = '<i>%s posted at %s</i>';
-
-$lang->welcome        = "Welcome, <strong>%s</strong>!";
-$lang->welcomeAdmin   = "Welcome to use chanzhiEPS";
-$lang->todayIs        = 'Today is %s，';
+/* Global lang items. */
+$lang->home           = 'Home';
+$lang->welcome        = 'Welcome, <strong>%s</strong>!';
+$lang->todayIs        = 'Today is %s, ';
+$lang->aboutUs        = 'About';
+$lang->frontHome      = 'Front';
+$lang->forumHome      = 'Forum';
+$lang->helpHome       = 'Helo';
 $lang->dashboard      = 'Dashboard';
 $lang->register       = 'Register';
 $lang->logout         = 'Logout';
 $lang->login          = 'Login';
 $lang->account        = 'Account';
 $lang->password       = 'Password';
+$lang->changePassword = 'Change password';
 $lang->forgotPassword = 'Forgot password?';
+$lang->currentPos     = 'Positon';
+$lang->categoryMenu   = 'Categories';
 
-$lang->reset        = 'Reset';
-$lang->edit         = 'Edit';
-$lang->copy         = 'Copy';
-$lang->hide         = 'Hide';
-$lang->delete       = 'Delete';
-$lang->close        = 'Close';
-$lang->save         = 'Save';
-$lang->confirm      = 'Confirm';
-$lang->preview      = 'Preview';
-$lang->goback       = 'Go back';
-$lang->search       = 'Search';
-$lang->more         = 'More';
-$lang->actions      = 'Action';
-$lang->feature      = 'Feature';
-$lang->year         = 'Year';
-$lang->submitting   = 'Save...';
+/* Global action items. */
+$lang->reset          = 'Reset';
+$lang->edit           = 'Edit';
+$lang->copy           = 'Copy';
+$lang->hide           = 'Hide';
+$lang->delete         = 'Delete';
+$lang->close          = 'Close';
+$lang->save           = 'Save';
+$lang->confirm        = 'Confirm';
+$lang->preview        = 'Preview';
+$lang->goback         = 'Back';
+$lang->search         = 'Search';
+$lang->more           = 'More';
+$lang->actions        = 'Actions';
+$lang->feature        = 'Feature';
+$lang->year           = 'Year';
+$lang->loading        = 'Loading...';
+$lang->saveSuccess    = 'Successfully saved.';
+$lang->setSuccess     = 'Successfully saved.';
+$lang->fail           = 'Fail';
+$lang->noResultsMatch = 'No matched results.';
 
-$lang->selectAll    = 'Select all';
-$lang->notFound     = 'Sorry, the object not found.';
-$lang->messages     = 'Messages(%s)';
+/* Items for javascript. */
+$lang->js = new stdclass();
+$lang->js->confirmDelete = 'Are sure to delete it?';
+$lang->js->deleteing     = 'Deleting...';
+$lang->js->doing         = 'Processing...';
 
-$lang->runInfo      = "<div class='row'><div class='u-1 a-center' id='runinfo'>Time: %s ms, Memory: %s KB, Queries: %s.  </div></div>";
+/* Contact fields*/
+$lang->company = new stdclass();
+$lang->company->contactUs = 'Contact';
+$lang->company->address   = 'Address';
+$lang->company->phone     = 'Phone';
+$lang->company->email     = 'Email';
+$lang->company->fax       = 'Fax';
+$lang->company->qq        = 'QQ';
+$lang->company->weibo     = 'Weibo';
+$lang->company->weixin    = 'Weichat';
+$lang->company->wangwang  = 'Wangwang';
 
-/* The labels show in the positon bar. */
-$lang->position['article'] = 'Article';
-$lang->position['forum']   = 'Forum';
-$lang->position['thread']  = 'Forum';
-$lang->positon['rssSite']  = 'Rss';
-$lang->positon['search']   = 'Search';
+/* The main menus. */
+$lang->menu = new stdclass();
+$lang->menu->admin   = 'Home|admin|index|';
+$lang->menu->article = 'Article|article|admin|';
+$lang->menu->blog    = 'Blog|article|admin|type=blog';
+$lang->menu->product = 'Product|product|admin|';
+$lang->menu->help    = 'Help|help|admin|';
+$lang->menu->comment = 'Comment|comment|admin|';
+$lang->menu->forum   = 'Forum|forum|admin|';
+$lang->menu->site    = 'Site|site|setbasic|';
+$lang->menu->company = 'Company|company|setbasic|';
+$lang->menu->user    = 'User|user|admin|';
 
-/* The optional features. */
-$lang->features['user']  = 'User feature';
+/* Menu of article module. */
+$lang->article = new stdclass();
+$lang->article->menu = new stdclass();
+$lang->article->menu->browse = array('link' => 'List|article|admin|', 'alias' => 'edit');
+$lang->article->menu->create = 'Create|article|create|type=article';
+$lang->article->menu->tree   = 'Categories|tree|browse|type=article';
 
-/* The error messages. */
-$lang->error->companyNotFound = "The domain %s does not exist.";
+/* Menu of blog module. */
+$lang->blog = new stdclass();
+$lang->blog->menu = new stdclass();
+$lang->blog->menu->browse = array('link' => 'List|article|admin|type=blog', 'alias' => 'edit');
+$lang->blog->menu->create = 'Create|article|create|type=blog';
+$lang->blog->menu->tree   = 'Categories|tree|browse|type=blog';
+
+/* Menu of product module. */
+$lang->product = new stdclass();
+$lang->product->menu = new stdclass();
+$lang->product->menu->browse = array('link' => 'List|product|admin|', 'alias' => 'edit');
+$lang->product->menu->create = 'Create|product|create|';
+$lang->product->menu->tree   = 'Categories|tree|browse|type=product';
+
+/* Menu of help module. */
+$lang->help = new stdclass();
+$lang->help->menu = new stdclass();
+$lang->help->menu->managebook = "Manuals|help|admin|";
+$lang->help->menu->createbook = "Create|help|createbook|";
+
+/* Menu of comment module. */
+$lang->comment = new stdclass();
+$lang->comment->menu = new stdclass();
+$lang->comment->menu->unchecked = 'Unreviewed|comment|admin|status=0';
+$lang->comment->menu->checked   = 'Reviewed|comment|admin|status=1';
+
+/* Menu of forum module. */
+$lang->forum = new stdclass();
+$lang->forum->menu = new stdclass();
+$lang->forum->menu->browse = 'Threads|forum|admin|';
+$lang->forum->menu->tree   = 'Boards|tree|browse|type=forum';
+
+/* Menu of site module. */
+$lang->site = new stdclass();
+$lang->site->menu = new stdclass();
+$lang->site->menu->basic     = 'Basic|site|setbasic|';
+$lang->site->menu->logo      = 'Logo|site|setlogo|';
+$lang->site->menu->nav       = 'Navigation|nav|admin|';
+$lang->site->menu->slide     = array('link' => 'Slide|slide|admin|', 'alias' => 'create,edit');
+$lang->site->menu->sina      = 'Weibo OAuth|site|setappkey|';
+
+/* Menu of company module. */
+$lang->company->menu = new stdclass();
+$lang->company->menu->basic   = 'Basic|company|setbasic|';
+$lang->company->menu->contact = 'Contact|company|setcontact|';
+
+/* Menu groups setting. */
+$lang->menuGroups = new stdclass();
+
+/* Menu of tree module. */
+$lang->tree = new stdclass();
+$lang->tree->menu = $lang->article->menu;
+$lang->menuGroups->tree = 'article';
+
+
+/* Menu of nav module. */
+$lang->nav = new stdclass();
+$lang->nav->menu = $lang->site->menu;
+$lang->menuGroups->nav  = 'site';
+
+/* Menu of tree module. */
+$lang->slide = new stdclass();
+$lang->slide->menu = $lang->site->menu;
+$lang->menuGroups->slide = 'site';
+
+/* Error info. */
+$lang->error = new stdclass();
 $lang->error->length          = array("『%s』length should be『%s』", "『%s』length should between『%s』and 『%s』.");
 $lang->error->reg             = "『%s』should like『%s』";
-$lang->error->unique          = "『%s』has『%s』already.";
+$lang->error->unique          = "『%s』has『%s』already. If you are sure this record has been deleted, you can restore it in admin panel, trash page.";
+$lang->error->gt              = "『%s』must greater than『%s』.";
+$lang->error->ge              = "『%s』must greater than or equal『%s』.";
 $lang->error->notempty        = "『%s』can not be empty.";
-$lang->error->equal           = "『%s』must be『%s』。";
+$lang->error->empty           = "『%s』 must be empty.";
+$lang->error->equal           = "『%s』must be『%s』.";
 $lang->error->int             = array("『%s』should be interger", "『%s』should between『%s-%s』.");
 $lang->error->float           = "『%s』should be a interger or float.";
 $lang->error->email           = "『%s』should be email.";
@@ -86,8 +184,10 @@ $lang->error->date            = "『%s』should be date";
 $lang->error->account         = "『%s』should be a valid account.";
 $lang->error->passwordsame    = "Two passwords must be the same";
 $lang->error->passwordrule    = "Password should more than six letters.";
+$lang->error->captcha         = 'Captcah wrong.';
 
 /* The pager items. */
+$lang->pager = new stdclass();
 $lang->pager->noRecord  = "No records yet.";
 $lang->pager->digest    = "<strong>%s</strong> records, <strong>%s</strong> per page, <strong>%s/%s</strong> ";
 $lang->pager->first     = "First";
@@ -96,12 +196,7 @@ $lang->pager->next      = "Next";
 $lang->pager->last      = "Last";
 $lang->pager->locate    = "GO!";
 
-$lang->icp = "";
-$lang->rmb = 'Dollar';
-
-$lang->kindeditor->code = 'Insert Code';
-
-/* The datetime settings. */
+/* Date times. */
 define('DT_DATETIME1',  'Y-m-d H:i:s');
 define('DT_DATETIME2',  'y-m-d H:i');
 define('DT_MONTHTIME1', 'n/d H:i');
@@ -109,6 +204,6 @@ define('DT_MONTHTIME2', 'F j, H:i');
 define('DT_DATE1',     'Y-m-d');
 define('DT_DATE2',     'Ymd');
 define('DT_DATE3',     'F j, Y ');
-define('DT_DATE4',     'Y-m-d');
+define('DT_DATE4',     'M j');
 define('DT_TIME1',     'H:i:s');
 define('DT_TIME2',     'H:i');
