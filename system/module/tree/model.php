@@ -302,6 +302,18 @@ class treeModel extends model
     }
 
     /**
+     * Create admin book browse link.
+     * 
+     * @param object $category
+     * @return string 
+     */
+     
+    public static function createBookLink($category)
+    {
+        return html::a(helper::createLink('article', 'admin', "type={$category->type}&categoryID={$category->id}"), $category->name, '', "class='ajax'");
+    }
+
+    /**
      * Create the manage link.
      * 
      * @param  int         $category 

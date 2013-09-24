@@ -78,15 +78,6 @@ class article extends control
         $this->lang->article->menu = $this->lang->$type->menu;
         $this->lang->menuGroups->article = $type;
 
-        if(strpos($type, 'book') !== false)
-        {
-            $this->lang->help->menu->directory     = "目录管理|tree|browse|type=" . $type ;
-            $this->lang->help->menu->articlemanage = "文章管理|article|admin|type=" . $type ;
-            $this->lang->help->menu->articlecreate = "发布文章|article|create|type=" . $type;
-
-            $this->lang->article->menu = $this->lang->help->menu;
-        }
-        
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
         
@@ -97,6 +88,8 @@ class article extends control
 
         if(strpos($type, 'book') !== false)
         {
+            $this->view->categoryBox = $this->loadModel('help')->getCategoryBox($type);
+            $this->lang->article->menu = $this->loadModel('help')->createModuleMenu();
             $i = 1;
             foreach($articles as $article)
             {
@@ -110,6 +103,13 @@ class article extends control
         $this->view->pager    = $pager;
         $this->view->category = $this->tree->getById($categoryID);
         $this->view->type     = $type;
+
+        if(strpos($type, 'book') !== false)
+        {
+            $this->display('article', 'bookadmin');
+            exit;
+        }
+
         $this->display();
     }   
 
@@ -128,10 +128,7 @@ class article extends control
 
         if(strpos($type, 'book') !== false)
         {
-            $this->lang->help->menu->directory     = "目录管理|tree|browse|type=" . $type;
-            $this->lang->help->menu->articlemanage = "文章管理|article|admin|type=" . $type;
-            $this->lang->help->menu->articlecreate = "发布文章|article|create|type=" . $type;
-
+            $this->lang->help->menu = $this->loadModel('help')->createModuleMenu();
             $this->lang->article->menu = $this->lang->help->menu;
         }
 
@@ -170,10 +167,7 @@ class article extends control
 
         if(strpos($type, 'book') !== false)
         {
-            $this->lang->help->menu->directory     = "目录管理|tree|browse|type=" . $type;
-            $this->lang->help->menu->articlemanage = array('link' => "文章管理|article|admin|type=" . $type, 'alias' => 'edit');
-            $this->lang->help->menu->articlecreate = "发布文章|article|create|type=" . $type;
-
+            $this->lang->help->menu = $this->loadModel('help')->createModuleMenu();
             $this->lang->article->menu = $this->lang->help->menu;
         }
         $article    = $this->article->getByID($articleID);

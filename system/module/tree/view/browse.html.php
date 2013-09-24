@@ -11,6 +11,8 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php include '../../common/view/kindeditor.html.php';?>
+<?php include '../../common/view/chosen.html.php';?>
 <?php 
 js::set('root', $root);
 js::set('book', $book);

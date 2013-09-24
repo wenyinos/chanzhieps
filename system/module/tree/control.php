@@ -42,11 +42,9 @@ class tree extends control
             $this->lang->menuGroups->tree = 'product';
         }
 
-        if(strpos($type, 'book') !== false)
+        if(strpos($type, 'book_') !== false)
         {
-            $this->lang->help->menu->directory     = "目录管理|tree|browse|type=" . $type;
-            $this->lang->help->menu->articlemanage = "文章管理|article|admin|type=" . $type;
-            $this->lang->help->menu->articlecreate = "发布文章|article|create|type=" . $type;
+            $this->lang->help->menu = $this->loadModel('help')->createModuleMenu();
 
             $this->lang->category         = $this->lang->directory;
             $this->lang->tree->menu       = $this->lang->help->menu;

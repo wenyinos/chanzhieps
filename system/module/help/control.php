@@ -26,7 +26,32 @@ class help extends control
      */
     public function admin()
     {
+        $this->lang->help->menu = $this->help->createModuleMenu();
         $this->view->books = $this->help->getBookList();
+        $this->display();
+    }
+
+    /**
+     * Browse the categories and print manage links.
+     * 
+     * @param  string $type 
+     * @access public
+     * @return void
+     */
+    public function category($type)
+    {
+        $this->lang->help->menu = $this->help->createModuleMenu();
+
+        $this->lang->category         = $this->lang->directory;
+        $this->lang->tree->menu       = $this->lang->help->menu;
+        $this->lang->menuGroups->tree = 'help';
+
+        $this->view->categoryBox = $this->help->getCategoryBox($type);
+        $this->view->title    = $this->lang->category->common;
+        $this->view->type     = $type;
+        $this->view->root     = $root;
+        $this->view->children = $this->loadModel('tree')->getChildren(0, $type);
+
         $this->display();
     }
 

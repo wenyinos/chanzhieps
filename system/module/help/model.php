@@ -36,6 +36,50 @@ class helpModel extends model
         return $order;
     }
 
+    public function getCategoryBox($type)
+    {
+        $treeMenu    = $this->loadModel('tree')->getTreeMenu($type, 0, array('treeModel', 'createBookLink'));
+        $manageLink  =  html::a(helper::createLink('tree', 'browse', "type={$type}"), $this->lang->tree->manage);
+
+        $categoryBox = <<<Eof
+        <div class='row'>
+          <div class='col-md-10' id='categoryBox'>
+            <div class='col-md-2'>
+              <table class='table'>
+                <caption>
+                  {$this->lang->article->category} <div class='f-right'>{$manageLink}</div>
+                </caption>
+               <tr>
+                 <td><div id='treeMenuBox'>{$treeMenu}</div></td>
+               </tr>
+             </table>
+           </div>
+Eof;
+        return $categoryBox;
+    }
+
+    /**
+     * Push books to ModuleMenu.
+     *
+     * @access public 
+     * @return string $moduleMenu
+     **/
+    public function createModuleMenu()
+    {
+        $books = $this->getBookList();
+        $moduleMenu = new stdclass();
+        foreach($books as $book)
+        {
+            $moduleMenu->{$book->key} = "$book->name|help|category|type=book_{$book->key}";
+        }
+
+        foreach($this->lang->help->menu as $item => $menu)
+        {
+            $moduleMenu->$item = $menu;
+        }
+        return $moduleMenu;
+    }
+
     /**
      * Get the prev and next ariticle.
      * 

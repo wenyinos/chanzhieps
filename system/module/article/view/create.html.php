@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php js::set('type',$type);?>
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
 <form method='post' class='form-inline' id='ajaxForm'> 

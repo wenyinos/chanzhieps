@@ -25,3 +25,7 @@ $lang->book->code          = '编码';
 $lang->book->directory     = '目录管理';
 $lang->book->articleList   = '文章管理';
 $lang->book->createArticle = '发布文章';
+
+/* Over write category translations of other module. */
+$lang->article->category = '目录';
+$lang->tree->manage      = '维护目录';
