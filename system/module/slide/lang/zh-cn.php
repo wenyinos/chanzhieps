@@ -26,4 +26,4 @@ $lang->slide->edit     = '编辑幻灯片';
 $lang->slide->successSave     = '成功保存';
 $lang->slide->successSort     = '排序成功';
 $lang->slide->noImageSelected = '没有选择图片';
-$lang->slide->suitableSize    = '最佳图片尺寸：940px X 400px(宽 X 高)';
+$lang->slide->suitableSize    = '最佳图片尺寸：1140px X 270px(宽 X 高)';

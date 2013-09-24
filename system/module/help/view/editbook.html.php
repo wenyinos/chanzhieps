@@ -12,26 +12,30 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php js::set('type', $book->key);?>
-<form id='ajaxForm' method='post' enctype='multipart/form-data'>
-  <table class='table table-bordered table-form'>
-    <caption><?php echo $lang->book->edit;?></caption>
-    <tr>
-      <th class="w-100px"><?php echo $lang->book->name;?></th>
-      <td><?php echo html::input('name', $book->name, "class='text-1'");?></td>
-    </tr>
-    <tr>
-      <th><?php echo $lang->book->summary;?></th>
-      <td><?php echo html::textarea('summary', $book->summary, "class='area-1' rows=4");?></td>
-    </tr>
-    <tr>
-      <th><?php echo $lang->book->code;?></th>
-      <td><?php echo html::input('code', $book->key, "class='text-1'");?></td>
-    </tr>
-      <td colspan='2' class='a-center'>
-        <?php echo html::hidden('id', $id);?>
-        <?php echo html::submitButton();?>
-      </td>
-    </tr>
-  </table>
-</form>
+<div class='col-md-12'>
+  <form id='ajaxForm' method='post' enctype='multipart/form-data'>
+    <table class='table table-bordered table-form'>
+      <caption><?php echo $lang->book->edit;?></caption>
+      <tr>
+        <th class="w-100px"><?php echo $lang->book->name;?></th>
+        <td><?php echo html::input('name', $book->name, "class='text-1'");?></td>
+      </tr>
+      <tr>
+        <th><?php echo $lang->book->summary;?></th>
+        <td><?php echo html::textarea('summary', $book->summary, "class='area-1' rows=4");?></td>
+      </tr>
+      <tr>
+        <th><?php echo $lang->book->code;?></th>
+        <td><?php echo html::input('code', $book->key, "class='text-1'");?></td>
+      </tr>
+      <tr>
+        <td colspan='2' class='a-center'>
+          <?php echo html::hidden('id', $id);?>
+          <?php echo html::submitButton();?>
+          <?php echo html::backButton();?>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
 <?php include '../../common/view/footer.admin.html.php';?>

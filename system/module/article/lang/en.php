@@ -1,6 +1,6 @@
 <?php
 /**
- * The article module english file of chanzhiEPS.
+ * The article category zh-cn file of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
  * @license     LGPL
@@ -11,44 +11,44 @@
  */
 $lang->article->common = 'Article';
 
-$lang->article->id           = 'ID';
-$lang->article->module       = 'Category';
-$lang->article->otherModules = 'Otheer site categories';
-$lang->article->title        = 'Title';
-$lang->article->content      = 'Content';
-$lang->article->original     = 'Copyright';
-$lang->article->copySite     = 'From site';
-$lang->article->copyURL      = 'From url';
-$lang->article->keywords     = 'Keywords';
-$lang->article->summary      = 'Summary';
-$lang->article->author       = 'Authr';
-$lang->article->editor       = 'Editor';
-$lang->article->addedDate    = 'Added date';
-$lang->article->editedDate   = 'Edited date';
-$lang->article->type         = 'Type';
-$lang->article->views        = 'Views';
-$lang->article->stick        = 'Stick';
-$lang->article->order        = 'Order';
+$lang->article->id         = 'Id';
+$lang->article->category   = 'Categories';
+$lang->article->categories = 'Categories';
+$lang->article->title      = 'Title';
+$lang->article->content    = 'Content';
+$lang->article->original   = 'Original';
+$lang->article->copySite   = 'Site';
+$lang->article->copyURL    = 'URL';
+$lang->article->keywords   = 'Keywords';
+$lang->article->summary    = 'Summary';
+$lang->article->author     = 'Author';
+$lang->article->editor     = 'Editor';
+$lang->article->addedDate  = 'Added';
+$lang->article->editedDate = 'Edited';
+$lang->article->type       = 'Type';
+$lang->article->views      = 'Views';
+$lang->article->stick      = 'Sticky';
+$lang->article->order      = 'Order';
 
 $lang->article->list       = 'List';
-$lang->article->add        = 'Add';
+$lang->article->admin      = 'Admin';
+$lang->article->create     = 'Create';
 $lang->article->edit       = 'Edit';
 $lang->article->files      = 'Files';
 
 $lang->article->originalList[1] = 'Original';
-$lang->article->originalList[0] = 'Copy';
+$lang->article->originalList[0] = 'Copied';
 
 $lang->article->confirmDelete = 'Are you sure to delete this article?';
-$lang->article->successSave   = 'Success saved';
-$lang->article->original      = 'Original';
+$lang->article->successSave   = 'Successfully saved!';
 
-$lang->article->lblAddedDate = '<strong>Added date : </strong> %s ';
-$lang->article->lblAuthor    = "<strong>Author : <span class='red'>%s</span></strong> ";
-$lang->article->lblSource    = '<strong>Source : </strong>';
-$lang->article->lblViews     = '<strong> Views : </strong>%s';
-$lang->article->lblEditor    = '<i>Last edited by %s</i>';
+$lang->article->lblAddedDate = '<strong>Added:</strong> %s &nbsp;&nbsp;';
+$lang->article->lblAuthor    = "<strong>Author:</strong> %s &nbsp;&nbsp;";
+$lang->article->lblSource    = '<strong>Source:</strong>';
+$lang->article->lblViews     = ' <strong>Views:</strong>%s';
+$lang->article->lblEditor    = '<i>Edited by %s at %s</i>';
 
-$lang->article->prev = '&laquo; ';
-$lang->article->next = '&raquo; ';
-$lang->article->none = 'None';
-$lang->article->menu = 'Menu';
+$lang->article->prev      = '&laquo; ';
+$lang->article->next      = '&raquo; ';
+$lang->article->none      = 'None';
+$lang->article->directory = 'Back';

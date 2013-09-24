@@ -55,7 +55,6 @@ $lang->preview        = '预览';
 $lang->goback         = '返回';
 $lang->search         = '搜索';
 $lang->more           = '更多';
-$lang->viewMore       = '了解更多';
 $lang->actions        = '操作';
 $lang->feature        = '未来';
 $lang->year           = '年';
@@ -116,12 +115,6 @@ $lang->product->menu = new stdclass();
 $lang->product->menu->browse = array('link' => '产品列表|product|admin|', 'alias' => 'edit');
 $lang->product->menu->create = '发布产品|product|create|';
 $lang->product->menu->tree   = '类目管理|tree|browse|type=product';
-
-/* Menu of help module. */
-$lang->help = new stdclass();
-$lang->help->menu = new stdclass();
-$lang->help->menu->managebook = "维护手册|help|admin|";
-$lang->help->menu->createbook = "添加手册|help|createbook|";
 
 /* Menu of comment module. */
 $lang->comment = new stdclass();
