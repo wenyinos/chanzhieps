@@ -1,4 +1,4 @@
-<?php $i = 1 + ($pager->pageID - 1) * $pager->recPerPage;?>
+<?php $i = 2 + ($pager->pageID - 1) * $pager->recPerPage;?>
 <?php foreach($replies as $reply):?>
 <table class='table table-form'>
   <caption>
@@ -43,7 +43,7 @@
 <?php if($this->session->user->account != 'guest'):?>
   <form method='post' enctype='multipart/form-data' id='reply' action='<?php echo $this->createLink('reply', 'post', "thread=$thread->id");?>'>
     <?php 
-    echo "<div class='w-p100'>" . html::textarea('content', '', "rows='10' class='area-1'") . "</div>";
+    echo "<div class='w-p100'>" . html::textarea('content', '', "rows='6' class='area-1'") . "</div>";
     echo "<div class='c-both'></div>";
     echo $this->fetch('file', 'buildForm');
     echo html::submitButton();
