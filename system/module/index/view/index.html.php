@@ -71,7 +71,6 @@
       <dl>
         <dt><?php echo $this->lang->company->$item . $lang->colon;?></dt>
         <dd><?php echo $value;?></dd>
-        <div class='c-both'></div>
       </dl>
       <?php endforeach;?>
       <div class='c-both'></div>
