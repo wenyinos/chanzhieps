@@ -2,7 +2,7 @@
 * The css file of chanzhiEPS.
 *
 * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
+* @license     LGPL
 * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
 * @package     chanzhiEPS
 * @version     $Id$
@@ -267,26 +267,41 @@ table tbody tr.v-middle td, table tbody tr.v-middle th{vertical-align: middle;}
 #logoBox{margin:0;}
 img.logo{max-height: 100px; margin-bottom: 10px;}
 
-/* nav ul settings.*/
-#topNav{background-color: #145BCC;}
-#topNav .navbar-inner {padding: 0;}
-#topNav ul{list-style:none; margin:0; line-height:1.0; padding:0}
-#topNav ul.children{position:absolute; top:-999em; width:138px;background:#F2F2F2;}
+/* topNav settings.*/
+#topNav .nav ul{margin: 0;padding: 0}
+#topNav .nav li{list-style: none;margin: 0;padding: 0}
+#topNav .nav {background-color: #eee;border-radius: 5px;border: 1px solid #ccc;}
+#topNav .nav a,#topNav .nav a:hover{transition: all .6s;-o-transition: all .6s;-moz-transition: all .6s;-webkit-transition: all .6s;}
+#topNav .nav > li > a{min-width:120px;position: relative;margin-bottom: 0;padding-top: 15px;padding-bottom: 15px;color: #777;font-weight: bold;text-align: center;border-bottom: 1px solid #d5d5d5;background-color: #e5e5e5; background-repeat: repeat-x; 
+background-image: -moz-linear-gradient(top, #f5f5f5 0%, #e5e5e5 100%); 
+background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5f5f5), color-stop(100%,#e5e5e5)); 
+background-image: -webkit-linear-gradient(top, #f5f5f5 0%,#e5e5e5 100%);
+background-image: -o-linear-gradient(top, #f5f5f5 0%,#e5e5e5 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f5f5', endColorstr='#e5e5e5',GradientType=0 );
+background-image: linear-gradient(top, #f5f5f5 0%,#e5e5e5 100%);}
+#topNav .nav > li > a:hover{background-color: #fff;color: #333;
+background-image: -moz-linear-gradient(top, #ffffff 0%, #f1f1f1 100%); 
+background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#f1f1f1)); 
+background-image: -webkit-linear-gradient(top, #ffffff 0%,#f1f1f1 100%);
+background-image: -o-linear-gradient(top, #ffffff 0%,#f1f1f1 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f1f1f1',GradientType=0 );
+background-image: linear-gradient(top, #ffffff 0%,#f1f1f1 100%);}
+#topNav .nav > .active > a,
+#topNav .nav > .active > a:hover,
+#topNav .nav > .active > a:focus {background-color: #ddd;background-image: none;box-shadow: inset 0 3px 7px rgba(0,0,0,.15);border-left: 0;}
+#topNav .nav > li:first-child > a {border-radius: 5px 5px 0 0;}
+#topNav .nav > li:last-child > a {border-bottom: 0;border-radius: 0 0 5px 5px;border-right: 1px solid #d5d5d5; }
+@media (min-width: 768px){
+#topNav .nav {max-height: 52px;}
+#topNav .nav > li > a {border-left: 1px solid #fff;border-right: 1px solid #d5d5d5;}
+#topNav .nav > li:first-child > a {border-left: 0;border-radius: 5px 0 0 5px;}
+#topNav .nav > li:last-child > a {border-radius: 0 5px 5px 0;border-right: 0;border-right: 0px solid #d5d5d5; }
+}
+
+/* topNav children settings.*/
+#topNav ul.children{position:absolute; top:-999em; width:138px;background:#F2F2F2;border: 1px solid #d5d5d5;}
+#topNav ul.children a{display: block;padding: 12px 15px;color: #777;font-weight: bold;text-align: center;border-bottom: 1px solid #dddddd;}
+#topNav ul.children a:hover{background-color: #fff;color: #333;text-decoration: none;}
 #topNav ul.grade2 {margin-top:5px;}
 #topNav ul.grade3 {margin:-1px 0 0 -2px;}
-
-/* nav li settings.*/
-#topNav li {position: relative; float: left; text-align: center;}
-#topNav li:hover {visibility:inherit;}
-
-/* nav a settings.*/
-#topNav a {color: #E9E9E9; position: relative; display: block; min-width:120px;height: 50px;line-height: 30px;font-weight: bold; text-decoration:none; border-right: 1px solid rgba(0, 0, 0, 0.1); transition: all .6s;}
-#topNav a:hover, #topNav li.active a {color: #fff; background: #3280fc; transition: all .6s; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;}
-#topNav ul li:first-child a {-moz-border-radius: 3px 0 0 3px; -webkit-border-radius: 3px 0 0 3px; border-radius: 3px 0 0 3px;}
-#topNav ul li:last-child  a {border-right: 0 none;}
-#topNav ul.children a {color:#F2F2F2; background: #0358DE; width:138px; padding:8px 0; display:block;}
-#topNav ul.children a:hover{color: #fff;background: #3280fc;}
-#topNav ul.children li:first-child a {border-radius: 0;}
 
 /* nav hover position settings.*/
 #topNav li:hover ul, #topNav li.sfHover ul {left:0; top:2.5em; z-index:99}

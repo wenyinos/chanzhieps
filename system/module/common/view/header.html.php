@@ -21,7 +21,7 @@ js::set('lang', $lang->js);
 
   <?php $topNavs = $this->loadModel('nav')->getNavs('top');?>
   <nav id='topNav' class='navbar' role="navigation">
-    <ul class='nav sf-menu sf-js-enabled grade1'>
+    <ul class='nav sf-menu sf-js-enabled grade1 nav-justified'>
       <?php foreach($topNavs as $nav1):?>
       <li class="cat-item <?php echo $nav1->class?>"> 
         <?php echo html::a($nav1->url, $nav1->title, $nav1->target);?>
