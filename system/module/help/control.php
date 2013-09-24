@@ -70,6 +70,7 @@ class help extends control
             $this->send(array('result' => 'fail', 'message' => $result));
         }
 
+        $this->lang->help->menu = $this->help->createModuleMenu();
         $this->display(); 
     }
 
@@ -89,6 +90,7 @@ class help extends control
             $this->send(array('result' => 'fail', 'message' => $result));
         }
 
+        $this->lang->help->menu = $this->help->createModuleMenu();
         $this->view->id   = $id;
         $this->view->book = $this->help->getBookByID($id);
         $this->display();

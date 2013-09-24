@@ -67,16 +67,17 @@ Eof;
     public function createModuleMenu()
     {
         $books = $this->getBookList();
+
         $moduleMenu = new stdclass();
+        $moduleMenu->managebook = $this->lang->help->menu->managebook;
+
         foreach($books as $book)
         {
             $moduleMenu->{$book->key} = "$book->name|help|category|type=book_{$book->key}";
         }
 
-        foreach($this->lang->help->menu as $item => $menu)
-        {
-            $moduleMenu->$item = $menu;
-        }
+        $moduleMenu->createbook = $this->lang->help->menu->createbook;
+
         return $moduleMenu;
     }
 

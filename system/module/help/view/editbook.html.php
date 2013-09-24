@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php js::set('type', $book->key);?>
 <form id='ajaxForm' method='post' enctype='multipart/form-data'>
   <table class='table table-bordered table-form'>
     <caption><?php echo $lang->book->edit;?></caption>
