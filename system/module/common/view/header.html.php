@@ -5,7 +5,7 @@ js::set('lang', $lang->js);
 ?>
 <div class='container'>
   <div id='header'>
-    <div class='nav a-right'><?php echo commonModel::printTopBar();?></div>
+    <div class='nav' id="headNav"><?php echo commonModel::printTopBar();?></div>
     <?php if(isset($config->site->logo)):?>
     <?php $logo = json_decode($config->site->logo);?>
     <div id='logoBox' class='f-left'>
