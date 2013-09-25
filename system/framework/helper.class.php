@@ -355,6 +355,7 @@ class helper
     public static function getSiteCode($domain)
     {
         global $config;
+        list($domain) = explode(':', $domain);
         $items = explode('.', $domain);
         
         $postfix = str_replace($items[0] . '.', '', $domain);
