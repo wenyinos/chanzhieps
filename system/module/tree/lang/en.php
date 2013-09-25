@@ -1,6 +1,6 @@
 <?php
 /**
- * The tree module english file of chanzhiEPS.
+ * The tree category zh-cn file of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
  * @license     LGPL
@@ -9,29 +9,47 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->tree->common      = 'Module';
 $lang->tree->add         = "Add";
 $lang->tree->edit        = "Edit";
-$lang->tree->addChild    = "Add a child";
+$lang->tree->addChild    = "Add child";
 $lang->tree->delete      = "Delete";
-$lang->tree->browse      = "Mange";
-$lang->tree->manage      = "Mange";
-$lang->tree->fix         = "Fix";
-$lang->tree->updateOrder = "Update order";
-$lang->tree->manageChild = "Manage childs";
-$lang->tree->child       = "Child";
-$lang->tree->ajaxGetOptionMenu = "API: get option menu";
+$lang->tree->browse      = "Manage";
+$lang->tree->manage      = "Manage";
+$lang->tree->fix         = "Fix data";
 
-$lang->tree->confirmDelete = "Are you surce to delete this module?";
-$lang->tree->successSave   = "Success saved";
-$lang->tree->successFixed  = "Success fixed";
+$lang->tree->noCategories  = 'No category yet, add one first.';
+$lang->tree->confirmDelete = "Are you sure to delete it?";
+$lang->tree->successSave   = "Successfully saved.";
+$lang->tree->successFixed  = "Successfully fixed.";
 
-$lang->module->name    = 'Name';
-$lang->module->parent  = 'Parent';
-$lang->module->desc    = 'Desc';
-$lang->module->keyword = 'Keyword';
-$lang->module->owners  = 'Owners';
-$lang->module->readonly= 'Read only';
+/* Lang items for article, products. */
+$lang->category = new stdclass();
+$lang->category->common   = 'Category';
+$lang->category->name     = 'Name';
+$lang->category->parent   = 'Parent';
+$lang->category->desc     = 'Description';
+$lang->category->keyword  = 'Keyword';
+$lang->category->children = "Children";
 
-$lang->tree->lists['article'] = 'Article';
-$lang->tree->lists['forum']   = 'Forum';
+/* Lang items for forum. */
+$lang->board = new stdclass();
+$lang->board->common     = 'Board';
+$lang->board->name       = 'Board';
+$lang->board->parent     = 'Parent';
+$lang->board->desc       = 'Description';
+$lang->board->keyword    = 'Keyword';
+$lang->board->children   = "Children";
+$lang->board->readonly   = 'Readonly';
+$lang->board->moderators = 'Moderators';
+
+$lang->board->readonlyList[0] = 'Pulic';
+$lang->board->readonlyList[1] = 'Readonly';
+
+/* Lang items for help. */
+$lang->directory = new stdclass();
+$lang->directory->common     = 'Catalogue';
+$lang->directory->name       = 'Category';
+$lang->directory->parent     = 'Parent';
+$lang->directory->desc       = 'Delete';
+$lang->directory->keyword    = 'Keyword';
+$lang->directory->children   = "Children";
