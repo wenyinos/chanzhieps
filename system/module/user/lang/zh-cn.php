@@ -10,6 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 $lang->user->common    = '用户';
+
 $lang->user->id        = '编号';
 $lang->user->account   = '用户名';
 $lang->user->password  = '密码';
@@ -39,7 +40,7 @@ $lang->user->allowTime = '开放时间';
 $lang->user->status    = '状态';
 $lang->user->alert     = '您的帐号已被禁用';
 
-$lang->user->userList        = '会员列表';
+$lang->user->list        = '会员列表';
 $lang->user->view            = "用户详情";
 $lang->user->create          = "添加用户";
 $lang->user->edit            = "编辑用户";
@@ -53,8 +54,8 @@ $lang->user->confirmDelete   = "您确认删除该用户吗？";
 $lang->user->confirmActivate = "您确认激活该用户吗？";
 $lang->user->perfectAccount  = "完善帐号信息";
 $lang->user->setAccount      = "设置您的帐号用户名及电子邮件";
-$lang->user->bind            = "绑定云蝉知帐号";
-$lang->user->bindOldAccount  = "如果您已注册过云蝉知帐号，请在此绑定";
+$lang->user->bind            = "绑定帐号";
+$lang->user->bindOldAccount  = "如果您已注册过帐号，请在此绑定";
 $lang->user->relogin         = "重新登录";
 $lang->user->asGuest         = "游客访问";
 $lang->user->goback          = "返回前一页";
