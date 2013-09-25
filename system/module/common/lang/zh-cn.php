@@ -150,7 +150,6 @@ $lang->tree = new stdclass();
 $lang->tree->menu = $lang->article->menu;
 $lang->menuGroups->tree = 'article';
 
-
 /* Menu of nav module. */
 $lang->nav = new stdclass();
 $lang->nav->menu = $lang->site->menu;

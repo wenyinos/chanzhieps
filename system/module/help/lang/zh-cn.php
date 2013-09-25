@@ -1,5 +1,4 @@
 <?php
-$lang->rmb                = '元';
 $lang->help->common       = '在线帮助系统';
 $lang->help->books        = '手册列表';
 $lang->help->articles     = '文档导航';
@@ -7,10 +6,6 @@ $lang->help->backtobooks  = '返回手册列表';
 $lang->help->successSaved = '保存成功';
 
 $lang->help->id           = '编号';
-$lang->help->field        = '字段名';
-$lang->help->explaination = '解释';
-$lang->help->comment      = "备注|可以填写你相应的备注信息。";
-$lang->help->labels       = "附件的名称|如果你上传的附件文件名没有含义，可以通过设置文件的标题来方便读取";
 $lang->help->namenotempty = '名称不能为空';
 $lang->help->codenotempty = '编码不能为空';
 $lang->help->codeunique   = '此编码已经存在';
