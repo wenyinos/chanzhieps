@@ -275,7 +275,7 @@ img.logo{max-height: 100px; margin-bottom: 10px;}
 #topNav ul{margin: 0;padding: 0}
 #topNav .nav li{list-style: none;margin: 0;padding: 0;}
 #topNav .nav {background-color: #eee;border-radius: 5px;border: 1px solid #ccc;}
-#topNav .nav a,#topNav .nav a:hover{transition: all .6s;-o-transition: all .6s;-moz-transition: all .6s;-webkit-transition: all .6s;}
+#topNav .nav a:hover{transition: all .6s;-o-transition: all .6s;-moz-transition: all .6s;-webkit-transition: all .6s;}
 #topNav .nav > li > a{min-width:120px;position: relative;margin-bottom: 0;padding-top: 15px;padding-bottom: 15px;color: #777;font-weight: bold;text-align: center;border-bottom: 1px solid #d5d5d5;background-color: #e5e5e5; background-repeat: repeat-x; 
 background-image: -moz-linear-gradient(top, #f5f5f5 0%, #e5e5e5 100%); 
 background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f5f5f5), color-stop(100%,#e5e5e5)); 
