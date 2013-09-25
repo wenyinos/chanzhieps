@@ -336,3 +336,11 @@ ul.breadcrumb .divider{font-size:20px;color:#3280FC}
 /* Box Shadow. */
 .box-radius{border: 1px solid #ddd; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; }
 .box-shadow{-webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15); box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);}
+
+/* Panel. */
+.panel-default>.panel-heading{position: relative;}
+.panel-default>.panel-heading>.panel-actions{position: absolute;right: 10px;top: 10px;}
+.panel-default>.panel-heading h2,.panel-default>.panel-heading h3,.panel-default>.panel-heading h4,.panel-default>.panel-heading h5{line-height: 1.75em;margin: 0;color: #333;}
+.panel-default>.panel-body .table td:first-child{padding-left: 10px;}
+.panel-default>.panel-body.no-padding{padding: 0;-moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; }
+.panel-default>.panel-body.no-padding .table{border: none;margin: 0}

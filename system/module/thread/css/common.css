@@ -7,3 +7,8 @@
 #reply #fileform {margin:10px 0}
 
 .page{margin-bottom:8px}
+.thread .panel-heading{border-bottom: none;}
+/*.thread{background-color: #f4fff6;}*/
+.thread .panel-heading{background-color: #ebf2f9}
+/*.thread.striped{background-color: #fffbef;}*/
+.thread.striped .panel-heading{background-color: #ffeedc}
