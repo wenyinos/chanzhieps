@@ -10,7 +10,7 @@
       <table class='table table-hover table-striped'>
         <thead>
           <tr class='a-center'>
-            <th class='a-left' colspan='2'>&nbsp;<?php echo $lang->forum->board;?></th>
+            <th colspan='2'>&nbsp;<?php echo $lang->forum->board;?></th>
             <th><?php echo $lang->forum->owners;?></th>
             <th><?php echo $lang->forum->threadCount;?></th>
             <th><?php echo $lang->forum->postCount;?></th>
