@@ -29,6 +29,8 @@ The official website of chanzhiEPS is <a href='http://www.chanzhi.org' target='_
 
 The version of current release is <strong class='red'>%s</strong>。
 EOT;
+
+
 $lang->install->choice     = 'You can ';
 $lang->install->checking   = 'System checking';
 $lang->install->ok         = 'OK(√)';
@@ -58,10 +60,6 @@ $lang->install->mkdir        = '<p>Should creat the directory %s。<br /> Under 
 $lang->install->chmod        = 'Should change the permission of "%s".<br />Under linux, can try<br />chmod o=rwx -R %s';
 
 $lang->install->settingDB    = 'Set database';
-$lang->install->webRoot      = 'chanzhiEPS path';
-$lang->install->requestType  = 'URL type';
-$lang->install->requestTypes['GET']       = 'GET';
-$lang->install->requestTypes['PATH_INFO'] = 'PATH_INFO';
 $lang->install->dbHost     = 'Database host';
 $lang->install->dbHostNote = 'If localhost can connect, try 127.0.0.1';
 $lang->install->dbPort     = 'Host port';
@@ -76,7 +74,6 @@ $lang->install->errorConnectDB     = 'Database connect failed.';
 $lang->install->errorCreateDB      = 'Database create failed.';
 $lang->install->errorDBExists      = 'Database alread exists, to continue install, check the clear db box.';
 $lang->install->errorCreateTable   = 'Table create failed.';
-$lang->install->errorGrantPriv     = 'Grant privilieg failed';
 
 $lang->install->setConfig  = 'Create config file';
 $lang->install->key        = 'Item';
@@ -86,13 +83,10 @@ $lang->install->save2File  = '<div class="a-center"><span class="fail">Try to sa
 $lang->install->saved2File = 'The config file has saved to "<strong>%s</strong> ".';
 $lang->install->errorNotSaveConfig = 'Not save config file.';
 
-$lang->install->getPriv  = 'Set admin';
-$lang->install->company  = 'Company name';
+$lang->install->setAdmin = 'Set admin';
 $lang->install->account  = 'Administrator';
 $lang->install->password = 'Admin password';
 $lang->install->errorEmptyPassword = "Can't be empty";
 
 $lang->install->success    = "Success installed";
-$lang->install->saveAdmin  = "Save theese two lines to config/my.php";
-$lang->install->visitFront = 'Visit front';
 $lang->install->visitAdmin = 'Visit admin';
