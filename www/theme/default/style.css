@@ -345,3 +345,6 @@ ul.breadcrumb .divider{font-size:20px;color:#3280FC}
 .panel-default>.panel-body .table td:first-child{padding-left: 10px;}
 .panel-default>.panel-body.no-padding{padding: 0;-moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; }
 .panel-default>.panel-body.no-padding .table{border: none;margin: 0}
+
+/* List group. */
+.list-group-item.list-group-title{background-color: #EFEFEF;}

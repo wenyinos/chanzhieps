@@ -109,7 +109,6 @@ if($config->features->forum)
     $lang->user->control->menus[30] = 'My threads|user|thread';
     $lang->user->control->menus[40] = 'My replies|user|reply';
 }
-$lang->user->control->menus[50]  = 'Logout|user|logout';
 
 $lang->user->resetPassword->caption    = "Reset password";
 $lang->user->resetPassword->success    = "Password change link has been sent to your mailbox";
