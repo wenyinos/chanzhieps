@@ -35,11 +35,13 @@
             <?php echo html::input('account', '', "id='useraccount'" )?>
           </div>
           <div class='form-group'>
-            <label for='password'><?php echo $lang->user->password;?></label>
-            <?php
-            echo html::input('password', '', "id='password'");
-            echo html::a($this->createLink('user', 'resetpassword'), $lang->forgotPassword, '');
-            ?>
+            <label for='password'>
+              <?php 
+              echo $lang->user->password;
+              echo html::a($this->createLink('user', 'resetpassword'), $lang->forgotPassword, '');
+              ?>
+            </label>
+            <?php echo html::input('password', '', "id='password'");?>
           </div>
           <?php 
           echo html::submitButton($lang->login, 'btn btn-success btn-wider');
