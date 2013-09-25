@@ -22,7 +22,7 @@ body {padding-bottom: 20px; padding-top: 20px; background:#F1F1F1 repeat-x url("
 .media-list>.media:hover .dater{background-color: #AAA;}
 .content-box{padding: 40px 20px 20px;position: relative;}
 .content-box .info{margin-bottom: 20px; padding: 10px 0; border-bottom: 1px solid #e5e5e5;color: #777}
-.content-box .dater{position: absolute;right: 15px; top: 0;}
+.content-box .dater{position: absolute;right: 15px; top: 10px;}
 
 /* Page style. */
 .page{padding: 10px;}

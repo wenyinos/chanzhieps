@@ -66,7 +66,7 @@ js::import($jsRoot . 'respond/min.js');
   <div class="header">
     <div class="header-top">
       <div class="nav pull-right">
-        <?php echo commonModel::printTopBar();?> | <?php echo html::a($config->webRoot, $lang->blog->siteHome);?>
+        <?php echo commonModel::printTopBar();?>
       </div>
       <?php if(isset($config->site->logo)):?>
       <?php $logo = json_decode($config->site->logo);?>
@@ -88,7 +88,10 @@ js::import($jsRoot . 'respond/min.js');
         echo "<li {$class}>" . html::a($this->inlink('index', "id={$nav->id}"), $nav->name) . '</li>';
       }
       ?>
-      <li>
+      <li class="pull-right">
+        <?php echo html::a($config->webRoot, '<i class="icon-home icon-large"></i> ' . $lang->blog->siteHome);?>
+      </li>
+      <li class="pull-right">
         <?php echo html::a(helper::createLink('rss', 'index', '', 'xml') . '?type=blog', '<i class="icon icon-rss"></i> RSS', '_blank'); ?>
       </li>
     </ul>
