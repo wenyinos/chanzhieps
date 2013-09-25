@@ -1,5 +1,4 @@
 <?php
-$lang->rmb                = '元';
 $lang->help->common       = '在綫幫助系統';
 $lang->help->books        = '手冊列表';
 $lang->help->articles     = '文檔導航';
@@ -7,10 +6,6 @@ $lang->help->backtobooks  = '返回手冊列表';
 $lang->help->successSaved = '保存成功';
 
 $lang->help->id           = '編號';
-$lang->help->field        = '欄位名';
-$lang->help->explaination = '解釋';
-$lang->help->comment      = "備註|可以填寫你相應的備註信息。";
-$lang->help->labels       = "附件的名稱|如果你上傳的附件檔案名沒有含義，可以通過設置檔案的標題來方便讀取";
 $lang->help->namenotempty = '名稱不能為空';
 $lang->help->codenotempty = '編碼不能為空';
 $lang->help->codeunique   = '此編碼已經存在';

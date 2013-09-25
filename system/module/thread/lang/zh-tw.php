@@ -27,7 +27,6 @@ $lang->thread->stick      = '置頂';
 $lang->thread->edit       = '編輯主題';
 $lang->thread->hide       = '隱藏';
 
-
 $lang->thread->sticks[0] = '不置頂';
 $lang->thread->sticks[1] = '版塊置頂';
 $lang->thread->sticks[2] = '全局置頂';

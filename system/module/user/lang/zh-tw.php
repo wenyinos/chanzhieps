@@ -76,7 +76,6 @@ $lang->user->searchUser          = '搜索';
 
 $lang->user->errorDeny     = "抱歉，您無權訪問『<b>%s</b>』模組的『<b>%s</b>』功能。請聯繫管理員獲取權限。點擊後退返回上頁。";
 $lang->user->loginFailed   = "登錄失敗，請檢查您的用戶名或密碼是否填寫正確。";
-$lang->user->lblZenTaoID   = '提示：可以用禪道社區帳號登錄';
 $lang->user->lblRegistered = '恭喜您，已經成功註冊。';
 $lang->user->forbidSuccess = '禁用成功';
 $lang->user->forbidFail    = '禁用失敗';
@@ -124,15 +123,3 @@ $lang->user->control->menus[20] = '<i class="icon-large icon-edit"></i> 編輯�
 $lang->user->control->menus[28] = '<i class="icon-large icon-comments-alt"></i> 我的消息 <i class="icon-chevron-right"></i>|user|message';
 $lang->user->control->menus[30] = '<i class="icon-large icon-share"></i> 我的主題 <i class="icon-chevron-right"></i>|user|thread';
 $lang->user->control->menus[40] = '<i class="icon-large icon-mail-reply-all"></i> 我的回帖 <i class="icon-chevron-right"></i>|user|reply';
-
-$lang->user->resetPassword = new stdclass();
-$lang->user->resetPassword->caption    = "找回密碼";
-$lang->user->resetPassword->success    = "密碼更改連結已經發送到您的郵箱中";
-$lang->user->resetPassword->failed     = "您的密保郵箱錯誤，請重新輸入";
-
-$lang->user->resetmail = new stdclass();
-$lang->user->resetmail->subject = "密碼修改";
-$lang->user->resetmail->notice  = "系統發信，請勿回覆";
-
-$lang->user->reset = new stdclass();
-$lang->user->reset->success = '密碼已修改';
