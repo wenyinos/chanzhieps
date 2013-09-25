@@ -1,9 +1,9 @@
 /* Styles for admin login form. */
-#login .box-radius{margin: 0 -13px;padding: 20px 0;}
+#login .box-radius{padding: 20px 0;}
 #login .panel{width: 80%; margin: 5% auto;border: none;}
 #login .panel-body{padding: 20px; min-height: 230px;}
 #login .panel-heading{background-color: transparent;}
-.form-group input{min-width: 240px;}
+.form-group input{min-width: 240px;}`
 .form-group label a{font-weight: normal;}
 label{display: block;}
 
