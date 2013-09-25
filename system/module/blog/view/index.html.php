@@ -25,7 +25,7 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
     <ul class="media-list">
     <?php foreach($articles as $article):?>
       <li class="media radius">
-        <p class="pull-left"><strong class='dater'><?php echo date('Y/m/d', strtotime($article->addedDate));?></strong></p>
+        <p class="pull-right"><strong class='dater'><?php echo date('Y/m/d', strtotime($article->addedDate));?></strong></p>
         <div class='media-body'>
           <h3 class='media-heading'><?php echo html::a(inlink('view', "id=$article->id"), $article->title);?></h3>
           <p>

@@ -5,20 +5,24 @@ body {padding-bottom: 20px; padding-top: 20px; background:#F1F1F1 repeat-x url("
 .header h3 {margin-top: 0; margin-bottom: 0; line-height: 40px; padding-bottom: 19px;}
 
 /* Bordered the nav of header. */
-.header>.nav{border-bottom: 1px solid #e5e5e5;	border-top: 1px solid #e5e5e5;	padding: 10px 0; font-weight: bold;}
+.header>.nav{border-bottom: 2px solid #C5C5C5;	border-top: 1px solid #e5e5e5;	padding: 0 0; font-weight: bold;}
+.header>.nav>li{float: left;}
+.header>.nav>li a{color: #666;padding: 15px 25px;}
+.header>.nav>li a,.header>.nav>li a:hover,.header>.nav>li.active a{transition: all .6s;-o-transition: all .6s;-moz-transition: all .6s;-webkit-transition: all .3s; }
+.header>.nav>li.active a{color: #0358DE; background-color: #f1f1f1;border-bottom: 2px solid #0358DE;margin-bottom: -2px;}
 
 /* Breadcrumb style. */
 .breadcrumb{background-color: transparent; padding:0 3px;}
 
 /* Customize content & media list. */
-.media-list>.media,.content-box{border-radius: 2px;	border: 1px solid #e5e5e5; background-color: #FFF; -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.025); box-shadow: 0 1px 5px rgba(0, 0, 0, 0.025); padding: 15px;}
+.media-list>.media,.content-box{-moz-border-radius: 2px; -webkit-border-radius: 2px;border-radius: 2px;border: 1px solid #e5e5e5; background-color: #FFF; -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.025); box-shadow: 0 1px 5px rgba(0, 0, 0, 0.025); padding: 15px;}
 .media-list>.media:hover,.content-box:hover{-webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.125); box-shadow: 0 1px 5px rgba(0, 0, 0, 0.125);}
 .media-list>.media h3{line-height: 2em;}
-.media-list>.media .dater,.content-box .dater{display: inline-block; position: relative; margin: 8px 5px 0 -15px;	padding: 5px 10px; background-color: #C5C5C5; color: #FFF;}
+.media-list>.media .dater,.content-box .dater{display: inline-block; position: relative; margin: 8px -15px 0 0px;	padding: 5px 10px; background-color: #C5C5C5; color: #FFF;}
 .media-list>.media:hover .dater{background-color: #AAA;}
-.content-box{padding: 20px;}
-.content-box .info{margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #e5e5e5;}
-.content-box .dater{margin-bottom: -15px;margin-left: -20px;}
+.content-box{padding: 40px 20px 20px;position: relative;}
+.content-box .info{margin-bottom: 20px; padding: 10px 0; border-bottom: 1px solid #e5e5e5;color: #777}
+.content-box .dater{position: absolute;right: 15px; top: 0;}
 
 /* Page style. */
 .page{padding: 10px;}

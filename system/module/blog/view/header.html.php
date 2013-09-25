@@ -77,7 +77,7 @@ js::import($jsRoot . 'respond/min.js');
       <h3><?php echo $this->config->site->name?></h3>
       <?php endif;?>      
     </div>
-    <ul class="nav nav-pills">
+    <ul class="nav">
       <li <?php if(empty($category)) echo "class='active'"?>>
          <?php echo html::a($this->inlink('index'), $lang->blog->home)?>
       </li>

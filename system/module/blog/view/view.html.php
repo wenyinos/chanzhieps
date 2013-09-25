@@ -21,7 +21,7 @@ include '../../common/view/treeview.html.php';
 <div class='row'>
   <div class='col-md-9'>
     <div class='content-box clearfix radius'>
-      <div class='dater'><?php echo date('Y/m/d', strtotime($article->addedDate));?></div>
+      <div class='dater pull-right'><?php echo date('Y/m/d', strtotime($article->addedDate));?></div>
       <h1 class='text-center'><?php echo $article->title;?></h1>
       <div class='text-center info'>
         <?php
