@@ -52,10 +52,6 @@ $lang->user->browse        = "Borwse";
 $lang->user->deny          = "Access denied";
 $lang->user->confirmDelete   = "Are you sure to delete this user?";
 $lang->user->confirmActivate = "Are you sure to activate this user?";
-$lang->user->perfectAccount  = "Fullfill info";
-$lang->user->setAccount      = "Please set account and email.";
-$lang->user->bind            = "Bind account";
-$lang->user->bindOldAccount  = "If you have already register an account, bind it.";
 $lang->user->relogin         = "Relogin";
 $lang->user->asGuest         = "Visits as guest";
 $lang->user->goback          = "Go back";
@@ -79,6 +75,14 @@ $lang->user->loginFailed   = "Login failed, please check you account and passwor
 $lang->user->lblRegistered = 'Congratulations, register successfully!';
 $lang->user->forbidSuccess = 'Successfully forbid.';
 $lang->user->forbidFail    = 'Failed forbid';
+$lang->user->perfectAccount = <<<EOD
+<h3>Fullfill info</h3>
+<p>Please set account and email.</p>
+EOD;
+$lang->user->bind          = <<<EOD
+<h3>Bind account</h3>
+<p>If you have already register an account, bind it.</p>
+EOD;
 
 $lang->user->forbidUser = 'Manage user';
 $lang->user->forbidDate = array();

@@ -3,8 +3,7 @@
   <div class='col-md-6'>
     <div class='panel panel-default'>
       <div class='panel-heading'>
-        <h3><?php echo $lang->user->perfectAccount;?></h3>
-        <p class='muted'><?php echo $lang->user->setAccount;?></p>
+        <?php echo $lang->user->perfectAccount;?>
       </div>
       <div class='panel-body'>
         <form method='post' id='addaccountForm' action='<?php echo $this->createLink('user', 'addAccount');?>' role='form'>
@@ -27,23 +26,20 @@
   <div class='col-md-6'>
     <div class='panel panel-default'>
       <div class='panel-heading'>
-        <h3><?php echo $lang->user->bind;?></h3>
-        <p class='muted'><?php echo $lang->user->bindOldAccount;?></p>
+        <?php echo $lang->user->bind;?>
       </div>
       <div class='panel-body'>
         <form method='post' id='bindForm' action='<?php echo $this->createLink('user', 'bind');?>' role='form'>
           <div class='form-group'>
-            <label for='useraccount'><?php echo $lang->account;?></label>
+            <label for='useraccount'><?php echo $lang->user->account;?></label>
             <?php echo html::input('account', '', "id='useraccount'" )?>
           </div>
           <div class='form-group'>
-            <label for='password'>
-              <?php 
-              echo $lang->password;
-              echo html::a($this->createLink('user', 'resetpassword'), $lang->forgotPassword, '');
-              ?>
-            </label>
-            <?php echo html::input('password', '', "id='password'")?>
+            <label for='password'><?php echo $lang->user->password;?></label>
+            <?php
+            echo html::input('password', '', "id='password'");
+            echo html::a($this->createLink('user', 'resetpassword'), $lang->forgotPassword, '');
+            ?>
           </div>
           <?php 
           echo html::submitButton($lang->login, 'btn btn-success btn-wider');

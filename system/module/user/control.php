@@ -462,7 +462,7 @@ class user extends control
         if($provider == 'sina')
         {
             $this->app->loadClass('sina', $static = true);
-            $sina = new SaeTOAuthV2($this->config->site->akey , $this->config->site->skey);
+            $sina = new SaeTOAuthV2($this->config->site->akey, $this->config->site->skey);
             $url  = $sina->getAuthorizeURL($this->config->user->openID->sina->callbackUrl);
             $this->locate($url);
         }
