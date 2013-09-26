@@ -3,7 +3,7 @@
   <div class="box-radius">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h1 class="text-center"><?php echo $lang->user->register->welcome;?></h1>
+        <h2><?php echo $lang->user->register->welcome;?></h2>
       </div>
       <div class="panel-body">
         <form method='post' id='ajaxForm' class='form-inline form-horizontal' role="form">
