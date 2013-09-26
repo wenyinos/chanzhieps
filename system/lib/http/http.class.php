@@ -61,8 +61,6 @@ class http
      */
     public function log($url, $results)
     {
-        if(!$this->config->debug) return;
-
         $logFile = $this->app->getLogRoot() . 'saas.'. date('Ymd') . '.log';
         $fh = @fopen($logFile, 'a');
         if(!$fh) return false;
