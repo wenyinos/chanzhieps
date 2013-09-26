@@ -2,6 +2,7 @@
 <section id="login">
   <div class="box-radius">
     <div class="row">
+      <?php if(!empty($this->config->site->akey) && !empty($this->config->site->skey)):?>
       <div class="col-md-6">
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -18,6 +19,9 @@
         </div>
       </div>
       <div class="col-md-6">
+      <?php else:?>
+      <div class="col-md-12">
+      <?php endif;?>
         <div class="panel panel-default">
           <div class="panel-heading">
             <h2><?php echo $lang->user->login->welcome;?></h2>

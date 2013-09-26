@@ -54,6 +54,7 @@ class upgradeModel extends model
             case '1_0': $this->execSQL($this->getUpgradeFile('1.0'));
             case '1_1': $this->execSQL($this->getUpgradeFile('1.1'));
             case '1_2': $this->execSQL($this->getUpgradeFile('1.2'));
+            case '1_2': $this->execSQL($this->getUpgradeFile('1.3'));
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -75,8 +76,9 @@ class upgradeModel extends model
             case '1_0': $confirmContent .= file_get_contents($this->getUpgradeFile('1.0'));
             case '1_1': $confirmContent .= file_get_contents($this->getUpgradeFile('1.1'));
             case '1_2': $confirmContent .= file_get_contents($this->getUpgradeFile('1.2'));
+            case '1_3': $confirmContent .= file_get_contents($this->getUpgradeFile('1.3'));
         }
-        return str_replace('xr_', $this->config->db->prefix, $confirmContent);
+        return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
 
     /**

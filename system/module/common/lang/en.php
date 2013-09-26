@@ -116,12 +116,6 @@ $lang->product->menu->browse = array('link' => 'List|product|admin|', 'alias' =>
 $lang->product->menu->create = 'Create|product|create|';
 $lang->product->menu->tree   = 'Categories|tree|browse|type=product';
 
-/* Menu of help module. */
-$lang->help = new stdclass();
-$lang->help->menu = new stdclass();
-$lang->help->menu->managebook = "Manuals|help|admin|";
-$lang->help->menu->createbook = "Create|help|createbook|";
-
 /* Menu of comment module. */
 $lang->comment = new stdclass();
 $lang->comment->menu = new stdclass();
@@ -156,7 +150,6 @@ $lang->tree = new stdclass();
 $lang->tree->menu = $lang->article->menu;
 $lang->menuGroups->tree = 'article';
 
-
 /* Menu of nav module. */
 $lang->nav = new stdclass();
 $lang->nav->menu = $lang->site->menu;
@@ -172,10 +165,7 @@ $lang->error = new stdclass();
 $lang->error->length          = array("『%s』length should be『%s』", "『%s』length should between『%s』and 『%s』.");
 $lang->error->reg             = "『%s』should like『%s』";
 $lang->error->unique          = "『%s』has『%s』already. If you are sure this record has been deleted, you can restore it in admin panel, trash page.";
-$lang->error->gt              = "『%s』must greater than『%s』.";
-$lang->error->ge              = "『%s』must greater than or equal『%s』.";
 $lang->error->notempty        = "『%s』can not be empty.";
-$lang->error->empty           = "『%s』 must be empty.";
 $lang->error->equal           = "『%s』must be『%s』.";
 $lang->error->int             = array("『%s』should be interger", "『%s』should between『%s-%s』.");
 $lang->error->float           = "『%s』should be a interger or float.";

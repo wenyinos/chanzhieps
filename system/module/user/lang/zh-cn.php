@@ -10,6 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 $lang->user->common    = '用户';
+
 $lang->user->id        = '编号';
 $lang->user->account   = '用户名';
 $lang->user->password  = '密码';
@@ -39,7 +40,7 @@ $lang->user->allowTime = '开放时间';
 $lang->user->status    = '状态';
 $lang->user->alert     = '您的帐号已被禁用';
 
-$lang->user->userList        = '会员列表';
+$lang->user->list        = '会员列表';
 $lang->user->view            = "用户详情";
 $lang->user->create          = "添加用户";
 $lang->user->edit            = "编辑用户";
@@ -51,10 +52,6 @@ $lang->user->browse          = "浏览用户";
 $lang->user->deny            = "访问受限";
 $lang->user->confirmDelete   = "您确认删除该用户吗？";
 $lang->user->confirmActivate = "您确认激活该用户吗？";
-$lang->user->perfectAccount  = "完善帐号信息";
-$lang->user->setAccount      = "设置您的帐号用户名及电子邮件";
-$lang->user->bind            = "绑定云蝉知帐号";
-$lang->user->bindOldAccount  = "如果您已注册过云蝉知帐号，请在此绑定";
 $lang->user->relogin         = "重新登录";
 $lang->user->asGuest         = "游客访问";
 $lang->user->goback          = "返回前一页";
@@ -75,10 +72,17 @@ $lang->user->searchUser          = '搜索';
 
 $lang->user->errorDeny     = "抱歉，您无权访问『<b>%s</b>』模块的『<b>%s</b>』功能。请联系管理员获取权限。点击后退返回上页。";
 $lang->user->loginFailed   = "登录失败，请检查您的用户名或密码是否填写正确。";
-$lang->user->lblZenTaoID   = '提示：可以用禅道社区帐号登录';
 $lang->user->lblRegistered = '恭喜您，已经成功注册。';
 $lang->user->forbidSuccess = '禁用成功';
 $lang->user->forbidFail    = '禁用失败';
+$lang->user->perfectAccount = <<<EOD
+<h3>完善帐号信息</h3>
+<p>设置您的帐号用户名及电子邮件</p>
+EOD;
+$lang->user->bind          = <<<EOD
+<h3>绑定帐号</h3>
+<p>如果您已注册过帐号，请在此绑定</p>
+EOD;
 
 $lang->user->forbidUser          = '禁用管理';
 $lang->user->forbidDate = array();
@@ -118,21 +122,8 @@ $lang->user->control->common      = '用户中心';
 $lang->user->control->welcome     = '欢迎您，<strong>%s</strong>';
 $lang->user->control->lblPassword = "留空，则保持不变。";
 
-$lang->user->control->menus[10] = '个人信息|user|profile';
-$lang->user->control->menus[20] = '编辑信息|user|edit';
-$lang->user->control->menus[28] = '我的消息|user|message';
-$lang->user->control->menus[30] = '我的主题|user|thread';
-$lang->user->control->menus[40] = '我的回帖|user|reply';
-$lang->user->control->menus[50] = '退出登录|user|logout';
-
-$lang->user->resetPassword = new stdclass();
-$lang->user->resetPassword->caption    = "找回密码";
-$lang->user->resetPassword->success    = "密码更改链接已经发送到您的邮箱中";
-$lang->user->resetPassword->failed     = "您的密保邮箱错误，请重新输入";
-
-$lang->user->resetmail = new stdclass();
-$lang->user->resetmail->subject = "密码修改";
-$lang->user->resetmail->notice  = "系统发信，请勿回复";
-
-$lang->user->reset = new stdclass();
-$lang->user->reset->success = '密码已修改';
+$lang->user->control->menus[10] = '<i class="icon-large icon-user"></i> 个人信息 <i class="icon-chevron-right"></i>|user|profile';
+$lang->user->control->menus[20] = '<i class="icon-large icon-edit"></i> 编辑信息 <i class="icon-chevron-right"></i>|user|edit';
+$lang->user->control->menus[28] = '<i class="icon-large icon-comments-alt"></i> 我的消息 <i class="icon-chevron-right"></i>|user|message';
+$lang->user->control->menus[30] = '<i class="icon-large icon-share"></i> 我的主题 <i class="icon-chevron-right"></i>|user|thread';
+$lang->user->control->menus[40] = '<i class="icon-large icon-mail-reply-all"></i> 我的回帖 <i class="icon-chevron-right"></i>|user|reply';
