@@ -4,7 +4,7 @@
 <?php foreach($boards as $parentBoard):?>
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3><i class="icon-comments icon-large"></i> <?php echo $parentBoard->name;?></h3>
+      <h4><i class="icon-comments icon-large"></i> <?php echo $parentBoard->name;?></h4>
     </div>
     <div class="panel-body no-padding">
       <table class='table table-hover table-striped'>
