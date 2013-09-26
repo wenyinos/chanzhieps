@@ -3,7 +3,7 @@
 #login .panel{width: 80%; margin: 5% auto;border: none;max-width: 450px;}
 #login .panel-body{padding: 20px; min-height: 230px;}
 #login .panel-heading{background-color: transparent;}
-.form-group input{min-width: 240px;}`
+.form-group input{min-width: 320px;}`
 .form-group label a{font-weight: normal;}
 label{display: block;}
 
