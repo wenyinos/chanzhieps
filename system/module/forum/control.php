@@ -75,6 +75,8 @@ class forum extends control
      */
     public function admin($boardID = 0, $orderBy = 'repliedDate_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
+        $this->app->loadLang('thread');
+
         $this->app->loadClass('pager', $static = true);
         $pager   = new pager($recTotal, $recPerPage, $pageID);
 
