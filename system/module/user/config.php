@@ -12,4 +12,5 @@ $config->user->default->method = RUN_MODE == 'front' ? 'control' : 'index';
 $config->user->openID = new stdclass();
 $config->user->openID->List['sina']   = 'sina';
 
+$config->user->openID->sina = new stdclass();
 $config->user->openID->sina->callbackUrl = 'http://' . $_SERVER['SERVER_NAME'] . '/user-callback';

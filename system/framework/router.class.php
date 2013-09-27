@@ -1378,7 +1378,7 @@ class router
         foreach($configFiles as $configFile)
         {
             if(in_array($configFile, $loadedConfigs)) continue;
-            include $configFile;
+            if(is_file($configFile)) include $configFile;
             $loadedConfigs[] = $configFile;
         }
 
