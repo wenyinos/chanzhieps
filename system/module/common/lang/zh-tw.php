@@ -105,9 +105,12 @@ $lang->article->menu->tree   = '類目管理|tree|browse|type=article';
 /* Menu of blog module. */
 $lang->blog = new stdclass();
 $lang->blog->menu = new stdclass();
-$lang->blog->menu->browse = array('link' => '文章列表|article|admin|type=blog', 'alias' => 'edit');
-$lang->blog->menu->create = '發佈文章|article|create|type=blog';
+$lang->blog->menu->browse = array('link' => '博客列表|article|admin|type=blog', 'alias' => 'edit');
+$lang->blog->menu->create = '發佈博客|article|create|type=blog';
 $lang->blog->menu->tree   = '類目管理|tree|browse|type=blog';
+
+$lang->blog->list   = '博客列表';
+$lang->blog->create = '發佈博客';
 
 /* Menu of product module. */
 $lang->product = new stdclass();

@@ -4,6 +4,7 @@
  */
 
 class control {}
+function isLocalIP(){}
 $moduleRoot = '../module/';
 
 /* Define an emtpty control class as the base class of every module. */
