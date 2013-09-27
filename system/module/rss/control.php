@@ -30,6 +30,7 @@ class rss extends control
         $latestArticle = current((array)$articles);
 
         $this->view->title    = $this->config->site->name;
+        $this->view->desc     = $this->config->site->desc;
         $this->view->siteLink = $this->inlink('browse', "type={$type}");
         $this->view->siteLink = commonModel::getSysURL();
 

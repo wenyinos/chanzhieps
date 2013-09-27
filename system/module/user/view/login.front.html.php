@@ -26,13 +26,13 @@
             <form method='post' id='ajaxForm' role='form'>
               <div class="form-group">
                 <label for="useraccount"><?php echo $lang->user->account;?></label>
-                <?php echo html::input('account','',"placeholder='{$lang->user->inputAccountOrEmail}'");?>
+                <?php echo html::input('account','',"placeholder='{$lang->user->inputAccountOrEmail}' class='input-lg'");?>
               </div>
               <div class="form-group">
                 <label for="password"><?php echo $lang->user->password;?></label>
-                <?php echo html::password('password','',"placeholder='{$lang->user->inputPassword}'");?>
+                <?php echo html::password('password','',"placeholder='{$lang->user->inputPassword}' class='input-lg'");?>
               </div>
-              <?php echo html::submitButton($lang->user->login->common, 'btn btn-primary btn-wider');?>
+              <?php echo html::submitButton($lang->user->login->common, 'btn btn-primary btn-wider btn-lg');?>
               <?php echo html::hidden('referer', $referer);?>
             </form>
           </div>
