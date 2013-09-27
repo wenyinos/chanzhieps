@@ -12,6 +12,10 @@
 ?>
 <?php
 $treeMenu = $this->tree->getTreeMenu('blog', 0, array('treeModel', 'createBlogBrowseLink'));
+if(!strpos($treeMenu, 'li'))
+{
+    $treeMenu = $this->tree->getTreeMenu('article', 0, array('treeModel', 'createBlogBrowseLink'));
+}
 ?>
 <div class='col-md-3'>
   <div class='box widget radius'> 

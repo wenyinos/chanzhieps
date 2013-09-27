@@ -16,6 +16,7 @@ $webRoot   = $config->webRoot;
 $jsRoot    = $webRoot . "js/";
 $themeRoot = $webRoot . "theme/";
 $navs = $this->tree->getChildren(0, 'blog');
+if(empty($navs)) $navs = $this->tree->getChildren(0, 'article');
 ?>
 <!DOCTYPE html>
 <html lang="en">
