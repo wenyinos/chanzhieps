@@ -109,9 +109,6 @@ $lang->blog->menu->browse = array('link' => 'List|article|admin|type=blog', 'ali
 $lang->blog->menu->create = 'Create|article|create|type=blog';
 $lang->blog->menu->tree   = 'Categories|tree|browse|type=blog';
 
-$lang->blog->list   = 'List';
-$lang->blog->create = 'Create';
-
 /* Menu of product module. */
 $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
