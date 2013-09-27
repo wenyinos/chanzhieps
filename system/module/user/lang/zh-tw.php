@@ -52,10 +52,6 @@ $lang->user->browse          = "瀏覽用戶";
 $lang->user->deny            = "訪問受限";
 $lang->user->confirmDelete   = "您確認刪除該用戶嗎？";
 $lang->user->confirmActivate = "您確認激活該用戶嗎？";
-$lang->user->perfectAccount  = "完善帳號信息";
-$lang->user->setAccount      = "設置您的帳號用戶名及電子郵件";
-$lang->user->bind            = "綁定帳號";
-$lang->user->bindOldAccount  = "如果您已註冊過帳號，請在此綁定";
 $lang->user->relogin         = "重新登錄";
 $lang->user->asGuest         = "遊客訪問";
 $lang->user->goback          = "返回前一頁";
@@ -79,6 +75,14 @@ $lang->user->loginFailed   = "登錄失敗，請檢查您的用戶名或密碼�
 $lang->user->lblRegistered = '恭喜您，已經成功註冊。';
 $lang->user->forbidSuccess = '禁用成功';
 $lang->user->forbidFail    = '禁用失敗';
+$lang->user->perfectAccount = <<<EOD
+<h3>完善帳號信息</h3>
+<p>設置您的帳號用戶名及電子郵件</p>
+EOD;
+$lang->user->bind          = <<<EOD
+<h3>綁定帳號</h3>
+<p>如果您已註冊過帳號，請在此綁定</p>
+EOD;
 
 $lang->user->forbidUser          = '禁用管理';
 $lang->user->forbidDate = array();
@@ -107,9 +111,9 @@ $lang->user->notice->password = '字母和數字組合，最少六位';
 
 $lang->user->login  = new stdclass();
 $lang->user->login->common  = "登錄";
-$lang->user->login->welcome = '歡迎登錄';
+$lang->user->login->welcome = '已有帳號';
 $lang->user->login->why     = '歡迎登陸我們的系統，這樣您可以使用我們為註冊會員提供的各種服務。';
-$lang->user->login->openID  = '使用以下帳號進行登錄';
+$lang->user->login->openID  = '第三方登錄，快捷方便';
 $lang->user->login->sina    = '新浪微博';
 $lang->user->login->keepLogin['yes'] = "保持登錄";
 
