@@ -885,7 +885,9 @@ class router
     {
         $value = @getenv($varName);
         if(isset($_SERVER[$varName])) $value = $_SERVER[$varName];
-        return trim($value, '/');
+        if(strpos($value, '?') === false) return trim($value, '/');
+        $value = parse_url($value);
+        return trim($value['path'], '/');
     }
 
     /**
