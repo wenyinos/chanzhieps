@@ -66,4 +66,25 @@ class reply extends control
 
         $this->display();
     }
+
+    /**
+     * Delete a reply.
+     * 
+     * @param  int      $replyID 
+     * @access public
+     * @return void
+     */
+    public function delete($replyID)
+    {
+        $reply = $this->reply->getByID($replyID);
+        if(!$reply) $this->send(array('result' => 'fail', 'message' => 'Not found'));
+
+        $moderators = $this->loadModel('thread')->getModerators($reply->thread);
+        if(!$this->thread->canManage($moderators)) $this->send(array('result' => 'fail'));
+
+        $locate = helper::createLink('thread', 'view', "threadID=$reply->thread");
+        if($this->reply->delete($replyID)) $this->send(array('result' => 'success', 'locate' => $locate));
+
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+    }
 }
