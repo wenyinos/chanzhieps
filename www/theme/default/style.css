@@ -299,11 +299,6 @@ background-image: linear-gradient(top, #ffffff 0%,#f1f1f1 100%);}
 #topNav>ul>li>ul a:hover{background-color: #fff;color: #333;text-decoration: none;}
 #topNav>ul>li>ul>li>ul{left: 145px;top: 0}
 
-/* nav hover position settings.*/
-#topNav li:hover ul, #topNav li.sfHover ul {left:0; top:2.5em; z-index:99}
-#topNav li:hover li ul, #topNav li.sfHover ul {top:-999em}
-#topNav ul li li:hover ul, #topNav li.sfHover ul {left:10em; top:0}
-
 /* breadcrumb setting*/
 ul.breadcrumb {background:none; margin-bottom: 20px; padding: 0 5px;}
 ul.breadcrumb .divider{font-size:20px;color:#3280FC}
