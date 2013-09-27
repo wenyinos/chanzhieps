@@ -109,9 +109,6 @@ $lang->blog->menu->browse = array('link' => '博客列表|article|admin|type=blo
 $lang->blog->menu->create = '发布博客|article|create|type=blog';
 $lang->blog->menu->tree   = '类目管理|tree|browse|type=blog';
 
-$lang->blog->list   = '博客列表';
-$lang->blog->create = '发布博客';
-
 /* Menu of product module. */
 $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
