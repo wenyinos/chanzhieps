@@ -5,7 +5,7 @@
       <?php if(!empty($this->config->site->akey) && !empty($this->config->site->skey)):?>
       <div class="col-md-6">
         <div class="panel panel-default">
-          <div class="panel-heading"><h2><?php echo $lang->user->login->openID;?></h2></div>
+          <div class="panel-heading"><h4><strong><?php echo $lang->user->login->openID;?></strong></h4></div>
           <div class="panel-body">
             <?php 
             foreach($config->user->openID->List as $provider => $name) 
@@ -21,7 +21,7 @@
       <div class="col-md-12">
       <?php endif;?>
         <div class="panel panel-default">
-          <div class="panel-heading"><h4><?php echo $lang->user->login->welcome;?></h4></div>
+          <div class="panel-heading"><h4><strong><?php echo $lang->user->login->welcome;?></strong></h4></div>
           <div class="panel-body">
             <form method='post' id='ajaxForm' role='form'>
               <div class="form-group">
