@@ -640,7 +640,7 @@ EOT;
         $jsConfig->clientLang     = $clientLang;
         $jsConfig->requiredFields = $requiredFields;
         $jsConfig->save           = $lang->save;
-        $jsConfig->router         = $app->server->PHP_SELF;
+        $jsConfig->router         = $app->server->SCRIPT_NAME;
         $jsConfig->runMode        = $runMode;
 
         $js  = self::start(false);

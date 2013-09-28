@@ -338,4 +338,5 @@ ul.breadcrumb .divider{font-size:20px;color:#3280FC}
 .list-group-item.list-group-title{background-color: #EFEFEF;}
 .list-group-item i{display: inline-block;margin-right: 1em;font-weight: normal;}
 .list-group-item i.icon-chevron-right{float: right;margin-top: 2px;margin-right: -6px;opacity: .25;}
-.list-group-item:hover i.icon-chevron-right,#leftmenu .list-group-item.active i.icon-chevron-right{opacity: .9};
+.list-group-item:hover i.icon-chevron-right,#leftmenu .list-group-item.active i.icon-chevron-right{opacity: .9;}
+.list-group-item.active,.list-group-item.active:hover,.list-group-item.active:focus{color: #3280FC;background-color: #fff;border-color: #ddd;}
