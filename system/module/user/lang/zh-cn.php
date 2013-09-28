@@ -40,7 +40,7 @@ $lang->user->allowTime = '开放时间';
 $lang->user->status    = '状态';
 $lang->user->alert     = '您的帐号已被禁用';
 
-$lang->user->list        = '会员列表';
+$lang->user->list            = '会员列表';
 $lang->user->view            = "用户详情";
 $lang->user->create          = "添加用户";
 $lang->user->edit            = "编辑用户";
