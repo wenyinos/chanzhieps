@@ -99,7 +99,7 @@ class article extends control
             }
         }
 
-        $this->view->title    = $this->lang->article->admin;
+        $this->view->title    = $type == 'blog' ? $this->lang->blog->admin : $this->lang->article->admin;
         $this->view->articles = $articles;
         $this->view->pager    = $pager;
         $this->view->category = $this->tree->getById($categoryID);

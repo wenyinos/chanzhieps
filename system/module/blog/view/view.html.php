@@ -39,7 +39,7 @@ include '../../common/view/treeview.html.php';
         ?>
       </div>
       <p><?php echo $article->content;?></p>
-      <div class='f-left'><?php $this->loadModel('file')->printFiles($article->files);?></div>
+      <div class='article-file'><?php $this->loadModel('article')->printFiles($article->files);?></div>
     </div>
     <div id='commentBox'></div>
     <?php echo html::a('', '', '', "name='comment'");?>

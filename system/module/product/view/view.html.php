@@ -70,7 +70,7 @@ js::set('productID', $product->id);
         <div class='box radius mt-20px'>
           <h4><?php echo $lang->product->content;?></h4>
           <div class='content'><?php echo $product->content;?></div>
-          <div class='f-left'><?php $this->loadModel('file')->printFiles($product->files);?></div>
+          <div class='f-left'><?php $this->product->printFiles($product->files);?></div>
           <div class='c-both'></div>
         </div>
 

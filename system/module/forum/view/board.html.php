@@ -3,13 +3,13 @@
 <?php $common->printPositionBar($board);?>
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h2><i class="icon-comments-alt icon-large"></i>&nbsp;
+    <h4><i class="icon-comments-alt icon-large"></i>&nbsp;
     <?php 
     echo $board->name; 
     if($board->moderators) printf($lang->forum->lblOwner, trim($board->moderators, ','));
     ?>
-    </h2>
-    <div class="panel-actions">
+    </h4>
+    <div class="panel-actions panel-actions-sm">
       <?php if($this->forum->canPost($board)) echo html::a($this->createLink('thread', 'post', "boardID=$board->id"), '<i class="icon-pencil icon-large"></i>&nbsp;&nbsp;' . $lang->forum->post, '', 'class="btn btn-primary btn-wider"');?>
     </div>
   </div>

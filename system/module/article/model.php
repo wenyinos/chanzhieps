@@ -253,9 +253,46 @@ class articleModel extends model
     public function createPreviewLink($articleID)
     {
         $article = $this->getByID($articleID);
-        $module = $article->type == 'article' ? 'article' : 'help';
-        $method = $article->type == 'article' ? 'view'    : 'read';
+        if(strpos($article->type , 'book_') !== false)
+        {
+            $module = 'help';
+            $method = 'read';
+        }
+        else
+        {
+            $module = $article->type;
+            $method = 'view';
+        }
 
         return commonModel::createFrontLink($module, $method, "articleID=$articleID");
+    }
+
+    /**
+     * Print files.
+     * 
+     * @param  object $files 
+     * @access public
+     * @return void
+     */
+    public function printFiles($files)
+    {
+        if(empty($files)) return false;
+
+        foreach($files as $file)
+        {
+            if($file->isImage)
+            {
+                echo html::image($file->fullURL, "class='ph-10px'");
+            }
+        }
+        echo '</br>';
+        foreach($files as $file)
+        {
+            if(!$file->isImage)
+            {
+                $file->title = $file->title . ".$file->extension";
+                echo html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, '_blank') . '&nbsp;&nbsp;&nbsp'; 
+            }
+        }
     }
 }

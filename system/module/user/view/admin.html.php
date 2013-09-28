@@ -22,7 +22,7 @@
   </form>
   <div class='c-both'></div>
   <table class='table table-hover table-striped'>
-    <caption><?php echo $lang->user->userList;?></caption>
+    <caption><?php echo $lang->user->list;?></caption>
     <thead>
       <tr class='a-center'>
         <th class='w-60px'><?php echo $lang->user->id;?></th>

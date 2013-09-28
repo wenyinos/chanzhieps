@@ -10,4 +10,9 @@ $(document).ready(function()
     $.setAjaxModal();
     $.setAjaxForm('#ajaxForm');
     $.setAjaxDeleter('.deleter');
+
+    $("#topNav li").hover(function () 
+    {
+        $(this).toggleClass('hover');
+    });
 });
