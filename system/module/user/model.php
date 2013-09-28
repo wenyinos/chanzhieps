@@ -89,6 +89,7 @@ class userModel extends model
             ->autoCheck()
             ->batchCheck($this->config->user->register->requiredFields, 'notempty')
             ->check('account', 'unique', '1=1', false)
+            ->check('email', 'unique', '1=1', false)
             ->check('account', 'account')
             ->checkIF($this->post->email != false, 'email', 'email')
             ->exec();
