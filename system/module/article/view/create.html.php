@@ -22,7 +22,11 @@
 
 <form method='post' class='form-inline' id='ajaxForm'> 
   <table class='table table-form'>
+    <?php if($type == 'blog'):?>
+    <caption><?php echo $lang->blog->create;?></caption>
+    <?php else:?>
     <caption><?php echo $lang->article->create;?></caption>
+    <?php endif;?>
     <tr>
       <th class='w-100px'><?php echo $lang->article->category;?></th>
       <?php if(strpos($type, 'book') !== false):?>

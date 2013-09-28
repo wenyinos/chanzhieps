@@ -21,7 +21,11 @@
 <?php endif;?>
 <form method='post' class='form-inline' id='ajaxForm'>
   <table class='table table-form'>
+    <?php if($type == 'blog'):?>
+    <caption><?php echo $lang->blog->edit;?></caption>
+    <?php else:?>
     <caption><?php echo $lang->article->edit;?></caption>
+    <?php endif;?>
     <tr>
       <th class='w-100px'><?php echo $lang->article->category;?></th>
       <?php if(strpos($type, 'book') !== false):?>

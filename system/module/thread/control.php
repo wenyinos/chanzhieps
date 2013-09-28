@@ -183,7 +183,7 @@ class thread extends control
         $this->dao->update(TABLE_THREAD)->set('stick')->eq($stick)->where('id')->eq($threadID)->exec();
         if(dao::isError()) $this->send(array('result' =>'fail', 'message' => dao::getError()));
 
-        $message = $stick == 1 ? $this->lang->thread->successStick : $this->lang->thread->successUnstick;
+        $message = $stick == 0 ? $this->lang->thread->successUnstick : $this->lang->thread->successStick;
         $this->send(array('message' => $message, 'target' => '#manageBox', 'source' => inlink('view', "threaID=$threadID") . ' #manageMenu'));
     }
 

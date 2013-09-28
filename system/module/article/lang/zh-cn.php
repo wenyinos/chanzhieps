@@ -36,6 +36,11 @@ $lang->article->create     = '发布文章';
 $lang->article->edit       = '编辑文章';
 $lang->article->files      = '附件';
 
+$lang->blog->admin  = '维护博客';
+$lang->blog->list   = '博客列表';
+$lang->blog->create = '发布博客';
+$lang->blog->edit   = '编辑博客';
+
 $lang->article->originalList[1] = '原创';
 $lang->article->originalList[0] = '转贴';
 

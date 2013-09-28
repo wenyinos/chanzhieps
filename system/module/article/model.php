@@ -253,8 +253,16 @@ class articleModel extends model
     public function createPreviewLink($articleID)
     {
         $article = $this->getByID($articleID);
-        $module = $article->type == 'article' ? 'article' : 'help';
-        $method = $article->type == 'article' ? 'view'    : 'read';
+        if(strpos($article->type , 'book_') !== false)
+        {
+            $module = 'help';
+            $method = 'read';
+        }
+        else
+        {
+            $module = $article->type;
+            $method = 'view';
+        }
 
         return commonModel::createFrontLink($module, $method, "articleID=$articleID");
     }
