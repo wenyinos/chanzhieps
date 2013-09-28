@@ -68,7 +68,6 @@ class fileModel extends model
         $file->fullURL   = $this->webPath . $file->pathname;
         $file->middleURL = '';
         $file->smallURL  = '';
-
         $file->isImage   = false;
         if(in_array(strtolower($file->extension), $this->config->file->imageExtensions) !== false)
         {
@@ -102,9 +101,7 @@ class fileModel extends model
     public function getByID($fileID)
     {
         $file = $this->dao->findById($fileID)->from(TABLE_FILE)->fetch('', false);
-        $file->realPath = $this->app->getDataroot() . "upload/" . $file->pathname;
-        $file->webPath  = $this->webPath . $file->pathname;
-        return $file;
+        return $this->processFile($file);
     }
 
     /**
