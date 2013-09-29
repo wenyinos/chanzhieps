@@ -101,6 +101,9 @@ class fileModel extends model
     public function getByID($fileID)
     {
         $file = $this->dao->findById($fileID)->from(TABLE_FILE)->fetch('', false);
+        $file->realPath = $this->app->getDataroot() . "upload/" . $file->pathname;
+        $file->webPath  = $this->webPath . $file->pathname;
+
         return $this->processFile($file);
     }
 
