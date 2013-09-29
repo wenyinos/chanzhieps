@@ -41,7 +41,7 @@
               echo html::a($this->createLink('user', 'resetpassword'), $lang->forgotPassword, '');
               ?>
             </label>
-            <?php echo html::input('password', '', "id='password'");?>
+            <?php echo html::password('password', '', "id='password'");?>
           </div>
           <?php 
           echo html::submitButton($lang->login, 'btn btn-success btn-wider');
