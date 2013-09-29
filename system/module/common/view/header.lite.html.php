@@ -47,5 +47,6 @@ js::import($jsRoot . 'html5shiv/min.js');
 js::import($jsRoot . 'respond/min.js');
 ?>
 <![endif]-->
+<?php js::set('lang', $lang->js);?>
 </head>
 <body>
