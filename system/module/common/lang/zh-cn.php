@@ -69,6 +69,7 @@ $lang->js = new stdclass();
 $lang->js->confirmDelete = '您确定要执行删除操作吗？';
 $lang->js->deleteing     = '删除中';
 $lang->js->doing         = '处理中';
+$lang->js->timeout       = '网络超时,请重试';
 
 /* Contact fields*/
 $lang->company = new stdclass();
