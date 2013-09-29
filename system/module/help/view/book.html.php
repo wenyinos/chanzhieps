@@ -1,6 +1,5 @@
 <?php
 include '../../common/view/header.html.php';
-$treeMenu = $this->tree->getBookTreeMenu('book_' . $code, $category->id, array('treeModel', 'createBookBrowseLink'));
 ?>
 <?php $common->printPositionBar($category);?>
 <div class='row'>
