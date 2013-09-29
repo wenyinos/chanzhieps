@@ -22,7 +22,7 @@ js::set('type', $type);
 
 <?php if(strpos($treeMenu, '<li>') !== false):?>
 <?php if(strpos($type, 'book_') !== false):?>
-<div class='col-md-2'>
+<div class='col-md-3'>
 <?php else:?>
 <div class='row'>
   <div class='col-md-4'>
@@ -35,13 +35,13 @@ js::set('type', $type);
     </table>
   </div>
   <?php if(strpos($type, 'book_') !== false):?>
-  <div class='col-md-10' id='categoryBox'></div>
+  <div class='col-md-9' id='categoryBox'></div>
   <?php else:?>
   <div class='col-md-8' id='categoryBox'></div>
 </div>
   <?php endif;?>
   <?php else:?>
-  <div id='categoryBox'></div>
+  <div class='col-md-12' id='categoryBox'></div>
 </div>
   <?php endif;?>
 <?php include '../../common/view/treeview.html.php';?>
