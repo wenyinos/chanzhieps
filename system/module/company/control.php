@@ -54,7 +54,10 @@ class company extends control
     {
         if(!empty($_POST))
         {
-            if(!validater::checkEmail($_POST['email'])) $this->send(array('result' => 'fail', 'message' => $this->lang->company->error->email)); 
+            if(!empty($_POST['email']))
+            {
+                if(!validater::checkEmail($_POST['email'])) $this->send(array('result' => 'fail', 'message' => $this->lang->company->error->email)); 
+            }
 
             $contact = array('contact' => helper::jsonEncode($_POST));
             $result  = $this->loadModel('setting')->setItems('system.common.company', $contact);
