@@ -69,6 +69,7 @@ $lang->js = new stdclass();
 $lang->js->confirmDelete = 'Are sure to delete it?';
 $lang->js->deleteing     = 'Deleting...';
 $lang->js->doing         = 'Processing...';
+$lang->js->timeout       = 'Timeout';
 
 /* Contact fields*/
 $lang->company = new stdclass();
