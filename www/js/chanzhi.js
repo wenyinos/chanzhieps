@@ -7,7 +7,7 @@ $.extend(
         var options = 
         {
             target  : null,
-            timeout : 30000,
+            timeout : 10,
             dataType:'json',
             
             success: function(response)
@@ -103,6 +103,11 @@ $.extend(
             error: function(jqXHR, textStatus, errorThrown)
             {
                 $.enableForm(formID);
+                if(textStatus == 'timeout')
+                {
+                    bootbox.alert(v.lang.timeout);
+                    return false;
+                }
                 bootbox.alert(jqXHR.responseText + textStatus + errorThrown);
             }
         };
