@@ -299,6 +299,9 @@ background-image: linear-gradient(top, #ffffff 0%,#f1f1f1 100%);}
 #topNav>ul>li>ul a:hover{background-color: #fff;color: #333;text-decoration: none;}
 #topNav>ul>li>ul>li>ul{left: 145px;top: 0}
 
+/* slide settings */
+.carousel-control:focus{outline:none;}
+
 /* breadcrumb setting*/
 ul.breadcrumb {background:none; margin-bottom: 20px; padding: 0 5px;}
 ul.breadcrumb .divider{font-size:20px;color:#3280FC}
