@@ -264,7 +264,6 @@ img.logo{max-height: 100px; margin-bottom: 10px;}
 
 /* topNav settings.*/
 #topNav ul{margin: 0;padding: 0}
-#topNav>ul{overflow: hidden;}
 #topNav>ul li{list-style: none;margin: 0;padding: 0;}
 #topNav>ul {background-color: #eee;border-radius: 5px;border: 1px solid #ccc;}
 #topNav>ul a:hover{transition: all .6s;-o-transition: all .6s;-moz-transition: all .6s;-webkit-transition: all .6s;}
