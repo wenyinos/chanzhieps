@@ -70,9 +70,7 @@ js::import($jsRoot . 'respond/min.js');
       </div>
       <?php if(isset($config->site->logo)):?>
       <?php $logo = json_decode($config->site->logo);?>
-      <h3>
-        <?php echo html::a($this->config->webRoot, html::image($logo->webPath, "id='logo' title='{$this->config->company->name}'"));?>
-      </h3>
+      <?php echo html::a($this->config->webRoot, html::image($logo->webPath, "id='logo' title='{$this->config->company->name}'"));?>
       <?php else:?>
       <h3><?php echo $this->config->site->name?></h3>
       <?php endif;?>      
