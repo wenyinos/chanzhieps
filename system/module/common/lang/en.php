@@ -23,6 +23,8 @@ $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->chanzhiEPS = 'chanzhiEPS';
 $lang->poweredBy = " Powered by <a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPS} %s</a>!";
 
+$lang->killIE6    = '<script src="//letskillie6.googlecode.com/svn/trunk/2/default.js"></script>';
+
 /* Global lang items. */
 $lang->home           = 'Home';
 $lang->welcome        = 'Welcome, <strong>%s</strong>!';

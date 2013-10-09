@@ -366,6 +366,24 @@ class helper
 
         return $siteCode = $domain;
     }
+    
+    /**
+     * substr support utf8 chinese character
+     *
+     * @param string $string
+     * @param int $length 
+     * @param string $append 
+     * @return string 
+     **/
+    function substr($string, $length, $append = '')
+    {
+        if (strlen($string) <= $Length ) $append = '';
+
+        if(function_exists('mb_substr')) return mb_substr($string, 0, $length, 'utf-8') . $append;
+
+        preg_match_all("/./su", $string, $data);
+        return join("", array_slice($data[0],  0, $length)) . $append;
+    }
 }
 
 /**

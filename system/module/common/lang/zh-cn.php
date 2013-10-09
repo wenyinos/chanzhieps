@@ -21,7 +21,9 @@ $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 
 /* Lang items for xirang. */
 $lang->chanzhiEPS = '蝉知企业门户系统';
-$lang->poweredBy = " 由 <a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPS} %s</a> 强力驱动！";
+$lang->poweredBy  = " 由 <a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPS} %s</a> 强力驱动！";
+
+$lang->killIE6    = '<script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>';
 
 /* Global lang items. */
 $lang->home           = '首页';

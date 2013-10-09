@@ -13,5 +13,8 @@ if($config->debug) js::import($jsRoot . 'jquery/form/min.js');
 if(isset($pageJS)) js::execute($pageJS);
 ?>
 </div>
+<!--[if IE 6]>
+<?php echo $lang->killIE6;?>
+<![endif]-->
 </body>
 </html>

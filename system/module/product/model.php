@@ -95,7 +95,7 @@ class productModel extends model
         }
         
         /* Assign summary to it's product. */
-        foreach($products as $product) $product->summary = empty($product->summary) ? substr(strip_tags($product->content), 0, 300) : $product->summary;
+        foreach($products as $product) $product->summary = empty($product->summary) ? helper::substr(strip_tags($product->content), 250) : $product->summary;
 
         return $products;
     }
