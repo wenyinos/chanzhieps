@@ -43,36 +43,37 @@
 <?php endif;?>
 <div class='row'>
   <div class='col-md-4'>
-    <div class="panel radius">
-      <h3><?php echo $lang->index->aboutus;?></h3>
-      <p><?php echo $this->config->company->desc;?><?php echo html::a($this->createLink('company', 'index'), $lang->more . $lang->raquo);?></p>
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3><?php echo $lang->index->aboutus;?></h3></div>
+      <div class="panel-body"><p><?php echo $this->config->company->desc;?><?php echo html::a($this->createLink('company', 'index'), $lang->more . $lang->raquo);?></p></div>
     </div>
   </div>
 
   <div class='col-md-4'>
-    <div class="panel radius">
-      <h3><?php echo $lang->index->news;?></h3>
-      <ul class='mg-zero pd-zero'>
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3><?php echo $lang->index->news;?></h3></div>
+      <div class="panel-body"><ul class='mg-zero pd-zero'>
         <?php foreach($latestArticles as $id => $article): ?>
         <li>
             <i class='icon-chevron-right'></i>
             <?php echo html::a($this->createLink('article','view', "id=$id"), $article, '', "class='latest-news' title='{$article}'");?>
         </li>
         <?php endforeach;?>
-      </ul>
+      </ul></div>
     </div>
   </div>
 
   <div class='col-md-4'>
-    <div id='contact' class="panel radius">
-      <h3><?php echo $lang->index->contact;?></h3>
-      <?php foreach($contact as $item => $value):?>
-      <dl>
-        <dt><?php echo $this->lang->company->$item . $lang->colon;?></dt>
-        <dd><?php echo $value;?></dd>
-      </dl>
-      <?php endforeach;?>
-      <div class='c-both'></div>
+    <div id='contact' class="panel panel-default">
+      <div class="panel-heading"><h3><?php echo $lang->index->contact;?></h3></div>
+      <div class="panel-body">
+        <?php foreach($contact as $item => $value):?>
+        <dl>
+          <dt><?php echo $this->lang->company->$item . $lang->colon;?></dt>
+          <dd><?php echo $value;?></dd>
+        </dl>
+        <?php endforeach;?>
+      </div>
     </div>
   </div>
 

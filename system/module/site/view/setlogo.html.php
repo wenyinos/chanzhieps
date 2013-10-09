@@ -18,7 +18,7 @@
       <th class='w-150px'>
         <?php if(isset($this->config->site->logo)) echo html::image($logo->webPath, "class='w-150px'");?>
       </th> 
-      <td>
+      <td class='v-bottom'>
         <?php echo html::file('files');?>
         <?php echo html::submitButton();?>
       </td>

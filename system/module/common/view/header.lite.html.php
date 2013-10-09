@@ -10,7 +10,7 @@ $themeRoot = $webRoot . "theme/";
   <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php
-  if(!isset($title))    $title    = ''; 
+  if(!isset($title))    $title    = '';
   if(!empty($title))    $title   .= $lang->minus;
   if(!isset($keywords)) $keywords = $config->site->keywords;
   if(!isset($desc))     $desc     = $config->site->desc;
@@ -32,10 +32,11 @@ $themeRoot = $webRoot . "theme/";
   else
   {
       css::import($themeRoot . 'default/all.css', $config->version);
-      js::import($jsRoot     . 'all.js',  $config->version);
+      js::import($jsRoot     . 'all.js', $config->version);
   }
 
   if(RUN_MODE == 'admin') css::import($themeRoot . 'default/admin.css', $config->version);
+  css::import($themeRoot . $config->theme . '/style.css', $config->version);
   if(isset($pageCSS)) css::internal($pageCSS);
 
   echo html::icon($webRoot . 'favicon.ico');

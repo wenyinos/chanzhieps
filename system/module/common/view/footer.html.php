@@ -1,13 +1,11 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
   <hr/>
   <footer>
-    <div class='a-center mb-20px'>
-      <?php 
-      echo "&copy; {$config->company->name} {$config->site->copyright}-" . date('Y') . '&nbsp;&nbsp;';
-      echo $config->site->icp;
-      printf($lang->poweredBy, $config->version, $config->version);
-      ?>
-    </div>
+    <?php 
+    echo "&copy; {$config->company->name} {$config->site->copyright}-" . date('Y') . '&nbsp;&nbsp;';
+    echo $config->site->icp;
+    printf($lang->poweredBy, $config->version, $config->version);
+    ?>
   </footer>
    
 <?php
