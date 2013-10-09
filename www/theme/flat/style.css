@@ -236,9 +236,20 @@ select.hover,textarea.hover,input.hover{
 
 /* table. */
 /*.table{-moz-border-radius:6px; -webkit-border-radius:6px; border-radius:6px;}*/
-.table.table-hover tr:last-child td,.table.table-hover,
-.thread .table tr:last-child td,.thread .table{
-  border-bottom-width: 0;
+.table{border: none;}
+.table td,.table th{
+  background: #ECF0F5;
+  border: none;
+}
+.table caption{
+  background: #BDC3C7;
+  height: 45px;
+  padding: 2px 15px;
+}
+.table.table-hover tr td:first-child{
+  padding-left: 1em;
+}
+.table tr:last-child td,.table{
   -webkit-border-bottom-left-radius:6px;
   -webkit-border-bottom-right-radius:6px;
   -moz-border-radius-bottomleft:6px;
@@ -246,19 +257,37 @@ select.hover,textarea.hover,input.hover{
   border-bottom-left-radius:6px;
   border-bottom-right-radius:6px;
 }
-.table.table-bordered,.table.table-bordered tr:last-child td,
-.table-form,.table-form tr:last-child td{
-  border-bottom-width: 1px;
+.table-form tr:last-child td{
+  padding-bottom: 20px;
+}
+.table-form tr:first-child td{
+  padding-top: 20px;
 }
 
 /*list group.*/
-.list-group-item.list-group-title{background-color: #EFEFEF;}
-.list-group-item i{display: inline-block;margin-right: 1em;font-weight: normal;}
-.list-group-item i.icon-chevron-right{float: right;margin-top: 2px;margin-right: -6px;opacity: .25;}
-.list-group-item:hover i.icon-chevron-right,#leftmenu .list-group-item.active i.icon-chevron-right{opacity: .9;}
-.list-group-item.active,.list-group-item.active:hover,.list-group-item.active:focus{color: #3280FC;background-color: #fff;border-color: #ddd;}
-
-.list-group-item,a.list-group-item{border: none;background-color: #34495E;color: #f1f1f1;padding: 14px 20px;border-bottom: 2px #2C3E50 solid;}
+.list-group-item,a.list-group-item,.leftmenu > li > a{border: none;background-color: #34495E;color: #f1f1f1;padding: 14px 20px;border-bottom: 2px #2C3E50 solid;}
 .list-group-item.list-group-title{background-color: #1ABC9C;color: #34495E;}
-a.list-group-item:hover{background-color: #16A085;color: #FFF;}
-.list-group-item.active,.list-group-item.active:hover,.list-group-item.active:focus{color:#1ABC9C;background-color: #2C3E50;border-bottom: none}
+a.list-group-item:hover,.leftmenu > li > a:hover{background-color: #16A085;color: #FFF;}
+.list-group-item.active,.list-group-item.active:hover,.list-group-item.active:focus,
+.leftmenu > li.active > a,.leftmenu > li.active > a:hover {color:#1ABC9C;background-color: #2C3E50;border-bottom: none}
+
+/* admin navbar. */
+.navbar-inverse{
+  background-color: #2C3E50;
+}
+.navbar-inverse .navbar-nav>.active>a,.navbar-inverse .navbar-nav>.active>a:hover
+{
+  background-color: #34495E;
+  color: #1ABC9C;
+}
+.navbar-inverse .navbar-nav>li>a:hover,
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus ,
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover, .navbar-inverse .navbar-nav>.open>a:focus{
+  background-color: #16A085;
+  color: #fff;
+}
+
+/* The right chevron settings. */
+.leftmenu .icon-chevron-right {float:right; margin-top:2px; margin-right:-6px; opacity:.25;}
+.leftmenu a:hover .icon-chevron-right { opacity:.5; }
+.leftmenu .active .icon-chevron-right, .leftmenu .active a:hover .icon-chevron-right { opacity:1;}
