@@ -505,7 +505,7 @@ class user extends control
 
         $sina = new SaeTClientV2($this->config->site->akey , $this->config->site->skey, $_SESSION['token']['access_token'] ); //验证
         $user = $sina->show_user_by_id($token['uid']);
-        if(!$this->checkOpenID('sina', $user['id']))
+        if(!$this->checkOpenID('sina', $user['id'], $this->referer))
         {
             $this->view->title   = $this->lang->user->login->common;
             $this->view->user    = $user;
@@ -522,7 +522,7 @@ class user extends control
      * @access public
      * @return void
      */
-    public function checkOpenID($provider, $openID)
+    public function checkOpenID($provider, $openID, $referer)
     {
         if(empty($openID)) return false;
 
@@ -535,7 +535,16 @@ class user extends control
         $user->rights = $this->user->authorize($user);
         $this->session->set('user', $user);
         $this->app->user = $this->session->user;
-        die(js::locate($this->createLink('user', 'control'), 'parent'));
+
+        /* Goto the referer or to the default module */
+        if($referer != false)
+        {
+            die(js::locate(urldecode($referer), 'parent'));
+        }
+        else
+        {
+            die(js::locate($this->createLink('user', 'control'), 'parent'));
+        }
 
     }
 
