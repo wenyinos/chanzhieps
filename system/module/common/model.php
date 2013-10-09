@@ -470,7 +470,7 @@ class commonModel extends model
         {
             echo '<li>' . html::a(inlink('browse', "moduleID=$moduleID"), $moduleName) . '</li>';
         }
-        if($product) echo '<li>' . html::a(inlink('view', "id=$product->id"), $product->name) . '</li>';
+        if($product) echo '<li>' . $product->name . '</li>';
     }
 
     /**
@@ -501,7 +501,7 @@ class commonModel extends model
         {
             echo '<li>' . html::a(inlink('browse', "moduleID=$moduleID"), $moduleName) . '</li>';
         }
-        if($article) echo '<li>' . html::a(inlink('view', "id=$article->id"), $article->title) . '</li>';
+        if($article) echo '<li>' . $article->title . '</li>';
     }
 
     /**
@@ -515,12 +515,11 @@ class commonModel extends model
     public function printBlog($module, $article)
     {
         $divider = $this->lang->divider;
-
         foreach($module->pathNames as $moduleID => $moduleName)
         {
             echo '<li>' . html::a(inlink('index', "moduleID=$moduleID"), $moduleName) . '</li>';
         }
-        if($article) echo '<li>' . html::a(inlink('view', "id=$article->id"), $article->title) . '</li>';
+        if($article) echo '<li>' . $article->title . '</li>';
     }
 
     /**
