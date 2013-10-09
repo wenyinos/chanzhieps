@@ -255,8 +255,9 @@ table tbody tr.v-middle td, table tbody tr.v-middle th{vertical-align: middle;}
 /* global settings.*/
 #header {margin-top:10px;position: relative;}
 #header h3 {font-size: 24px;line-height: 40px;}
-#header #slogan{margin: 30px 0 0 20px; font-size: 18px;}
-#header #headNav{position: absolute;right: 0;top:5px;}
+#slogan{margin: 30px 0 0 20px; font-size: 18px;}
+#headNav{position: absolute;right: 0;top:5px;}
+#headNav .divider{display: inline-block;padding: 0 6px;}
 
 /* Logo setting.*/
 #logoBox{margin:0;}

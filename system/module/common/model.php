@@ -269,7 +269,7 @@ class commonModel extends model
     public static function printTopBar()
     {
         global $app, $dao;
-        $divider = '&nbsp;|&nbsp;';
+        $divider = '<span class="divider">|</span>';
         if($app->session->user->account != 'guest')
         {
             printf($app->lang->welcome, $app->session->user->realname);
