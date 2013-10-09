@@ -31,7 +31,7 @@ footer{margin: 20px 0;text-align: left;}
 #topNav>ul>li>a{background: #2C3E50;border: none;}
 #topNav>ul>.active>a, #topNav>ul>.hover>a, #topNav>ul>.active>a:hover, #topNav>ul>.active>a:focus {box-shadow:none;background: #34495E;color: #fff;}
 #topNav>ul>.active>a{color: #1ABC9C;}
-#topNav>ul>.hover>a{background: #1abc9c}
+#topNav>ul>.hover>a{background: #1abc9c;color: #fff;}
 /* topNav children settings.*/
 #topNav>ul>li>ul,#topNav>ul>li>ul>li>ul{-moz-border-radius:6px; -webkit-border-radius:6px; border-radius:6px; padding: 5px; background: #2C3E50; border: none;}
 #topNav>ul>li>ul a{text-align: left; padding:10px 15px; border: none; color: #f1f1f1; -moz-border-radius:5px; -webkit-border-radius:5px; border-radius:5px;}
