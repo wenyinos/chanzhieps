@@ -191,6 +191,7 @@ body.index .panel>.panel-heading h3{font-size: 20px;}
 }
 
 /*form controls.*/
+.ke-container,
 select,
 textarea,
 input[type="text"],
@@ -223,6 +224,13 @@ input[type="color"]{
   -o-transition: border .25s linear, color .25s linear, background-color .25s linear;
   transition: border .25s linear, color .25s linear, background-color .25s linear;
   -webkit-backface-visibility: hidden;
+}
+.ke-container,.chosen-choices{
+  border: 2px solid #bdc3c7 !important;
+  height: auto;
+}
+.chosen-container-active .chosen-choices{
+  border-color: #1abc9c !important;
 }
 select:focus,textarea:focus,input:focus,
 select:hover,textarea:hover,input:hover,
