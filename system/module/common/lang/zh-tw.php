@@ -23,6 +23,8 @@ $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->chanzhiEPS = '蟬知企業門戶系統';
 $lang->poweredBy = " 由 <a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPS} %s</a> 強力驅動！";
 
+$lang->killIE6    = '<script src="//letskillie6.googlecode.com/svn/trunk/2/zh_TW.js"></script>';
+
 /* Global lang items. */
 $lang->home           = '首頁';
 $lang->welcome        = '歡迎您，<strong>%s</strong>！';
