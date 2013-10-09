@@ -13,6 +13,7 @@ body {padding-top:70px; padding-bottom:70px;}
 
 .table-form th {text-align:right;vertical-align:middle;}
 .table-form td {vertical-align:middle;}
+.table-form td.v-bottom {vertical-align:bottom;}
 .table-form td input{vertical-align:middle;margin:0;}
 .table-form td textarea{vertical-align:middle;margin:0;}
 
