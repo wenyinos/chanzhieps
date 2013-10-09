@@ -16,8 +16,9 @@
             <?php echo html::input('email', '', "id='email'") . '<font color="red">*</font>';?>
           </div>
           <?php 
-          echo html::hidden('openID', $user['id']);
           echo html::submitButton('', 'btn btn-success btn-wider');
+          echo html::hidden('referer', $referer);
+          echo html::hidden('openID', $user['id']);
           ?>
         </form>
       </div>
@@ -45,6 +46,7 @@
           </div>
           <?php 
           echo html::submitButton($lang->login, 'btn btn-success btn-wider');
+          echo html::hidden('referer', $referer);
           echo html::hidden('openID', $user['id']);
           ?>
         </form>

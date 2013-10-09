@@ -10,7 +10,8 @@
             <?php 
             foreach($config->user->openID->List as $provider => $name) 
             {
-                echo html::a(inlink('openIDLogin', "provider=$provider"), "<i class='icon-{$provider} icon-large'></i> " . $lang->user->login->sina, '', "class='btn btn-default btn-wider btn-lgx btn-block'");
+                $backUrl = isset($referer) ? helper::safe64Encode($referer) : '';
+                echo html::a(inlink('openIDLogin', "provider=$provider&referer=$backUrl"), "<i class='icon-{$provider} icon-large'></i> " . $lang->user->login->sina, '', "class='btn btn-default btn-wider btn-lgx btn-block'");
             }
             ?>
           </div>
