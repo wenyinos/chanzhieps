@@ -25,7 +25,7 @@ footer{margin: 20px 0;text-align: left;}
 #topNav>ul a{color: #f1f1f1; border:none; background: #2C3E50;}
 
 #topNav>ul>li{border-width: 0; display: inline-block; width: auto; color: #f1f1f1;margin: 0;}
-#topNav>ul>li>a{border-width: 0; border:none; color: #f1f1f1; }
+#topNav>ul>li>a,#topNav>ul>li:last-child>a{border-width: 0; border:none; color: #f1f1f1; }
 #topNav a:hover,#topNav>ul>li>a:hover,#topNav>ul>li>ul>li a:hover,#topNav>ul>li>ul>li.hover>a{color:#f1f1f1; background: #1abc9c;}
 
 #topNav>ul>li>a{background: #2C3E50;border: none;}
