@@ -1,5 +1,3 @@
-.col-md-4 h3{color: #373A3F; border-bottom: 1px solid #EEEEEE; margin-top: 0; padding-bottom: 5px;}
-
 .carousel {margin-bottom: 20px;}
 .carousel .container {position: relative; z-index: 9;}
 .carousel-control {-moz-border-radius: 6px; -webkit-border-radius: 6px;border-radius:6px; width:80px; line-height:270px; font-size: 120px; text-shadow: 0 1px 1px rgba(0,0,0,.4); border: 0; z-index: 10;}
@@ -16,7 +14,8 @@
 .carousel-caption .lead {padding-left:10px; font-size:14px;}
 .carousel-caption .btn {margin-top: 10px;min-width: 120px;} 
 
-.row .panel{ min-height: 100px; padding: 20px 20px 17px; overflow: hidden; font-size: 15px; color:#5A5A5A; transition: all 0.5s ease 0s; border: 1px solid #DDDDDD;}
+.row .panel{ min-height: 150px;overflow: hidden; font-size: 15px;color: #5A5A5A;}
+.row .panel .panel-heading{background-color: transparent;margin: 0 10px;border-color: #eee;padding-bottom: 5px;}
 .row .panel li{list-style: none; height: 30px; line-height: 30px; overflow: hidden;}
 .row .panel li>i.icon-chevron-right{opacity: 0.5;}
 .row .panel li:hover>i.icon-chevron-right{opacity: 0.9;}

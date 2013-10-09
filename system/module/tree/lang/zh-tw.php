@@ -19,7 +19,6 @@ $lang->tree->fix         = "修復數據";
 
 $lang->tree->noCategories  = '您還沒有添加類目，請添加類目。';
 $lang->tree->confirmDelete = "您確定刪除該類目嗎？";
-$lang->tree->successSave   = "成功保存";
 $lang->tree->successFixed  = "成功修復";
 
 /* Lang items for article, products. */

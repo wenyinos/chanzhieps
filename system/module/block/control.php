@@ -72,7 +72,7 @@ class block extends control
         {
             $this->block->setPage($page);
             if(dao::isError()) die(js::error(dao::getError()));
-            die(js::alert($this->lang->block->successSave) . js::reload('parent'));
+            die(js::alert($this->lang->successSave) . js::reload('parent'));
         }
 
         /* Get all block pairs. */

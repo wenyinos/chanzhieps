@@ -19,7 +19,6 @@ $lang->tree->fix         = "Fix data";
 
 $lang->tree->noCategories  = 'No category yet, add one first.';
 $lang->tree->confirmDelete = "Are you sure to delete it?";
-$lang->tree->successSave   = "Successfully saved.";
 $lang->tree->successFixed  = "Successfully fixed.";
 
 /* Lang items for article, products. */

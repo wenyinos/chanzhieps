@@ -3,7 +3,6 @@ $lang->help->common       = '在綫幫助系統';
 $lang->help->books        = '手冊列表';
 $lang->help->articles     = '文檔導航';
 $lang->help->backtobooks  = '返回手冊列表';
-$lang->help->successSaved = '保存成功';
 
 $lang->help->id           = '編號';
 $lang->help->namenotempty = '名稱不能為空';

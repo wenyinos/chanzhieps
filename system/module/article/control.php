@@ -216,17 +216,19 @@ class article extends control
      * View an article.
      * 
      * @param int $articleID 
+     * @param int $currentCategory 
      * @access public
      * @return void
      */
-    public function view($articleID)
+    public function view($articleID, $currentCategory = 0)
     {
         $article  = $this->article->getById($articleID);
 
-        /* fetch first category for display. */
+        /* fetch category for display. */
         $category = array_slice($article->categories, 0, 1);
-        $category = $category[0];
-        $category = $this->loadModel('tree')->getById($category->id);
+        $category = $category[0]->id;
+        if($currentCategory > 0 && isset($article->categories[$currentCategory])) $category = $currentCategory;  
+        $category = $this->loadModel('tree')->getById($category);
 
         $title    = $article->title . ' - ' . $category->name;
         $keywords = $article->keywords . ' ' . $category->keyword . ' ' . $this->config->site->keywords;

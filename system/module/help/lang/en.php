@@ -3,7 +3,6 @@ $lang->help->common       = 'Help';
 $lang->help->books        = 'Manuals';
 $lang->help->articles     = 'Articles';
 $lang->help->backtobooks  = 'Back to manuals';
-$lang->help->successSaved = 'Successfully saved.';
 
 $lang->help->id           = 'ID';
 $lang->help->namenotempty = "Name can't be empty";

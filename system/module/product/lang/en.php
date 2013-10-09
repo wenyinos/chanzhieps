@@ -44,4 +44,3 @@ $lang->product->edit       = 'Edit';
 $lang->product->files      = 'Files';
 
 $lang->product->confirmDelete = 'Are you surce to delete it?';
-$lang->product->successSave   = 'Successfully saved.';

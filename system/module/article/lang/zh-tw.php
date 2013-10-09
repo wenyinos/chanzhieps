@@ -40,7 +40,6 @@ $lang->article->originalList[1] = '原創';
 $lang->article->originalList[0] = '轉貼';
 
 $lang->article->confirmDelete = '您確定刪除該文章嗎？';
-$lang->article->successSave   = '成功保存';
 
 $lang->article->lblAddedDate = '<strong>添加時間：</strong> %s &nbsp;&nbsp;';
 $lang->article->lblAuthor    = "<strong>作者：</strong> %s &nbsp;&nbsp;";
