@@ -23,7 +23,6 @@ $lang->slide->admin    = '幻燈片設置';
 $lang->slide->create   = '添加幻燈片';
 $lang->slide->edit     = '編輯幻燈片';
 
-$lang->slide->successSave     = '成功保存';
 $lang->slide->successSort     = '排序成功保存';
 $lang->slide->noImageSelected = '沒有選擇圖片';
 $lang->slide->suitableSize    = '最佳圖片尺寸：1140px X 270px(寬 X 高)';

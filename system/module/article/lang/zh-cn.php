@@ -45,7 +45,6 @@ $lang->article->originalList[1] = '原创';
 $lang->article->originalList[0] = '转贴';
 
 $lang->article->confirmDelete = '您确定删除该文章吗？';
-$lang->article->successSave   = '成功保存';
 
 $lang->article->lblAddedDate = '<strong>添加时间：</strong> %s &nbsp;&nbsp;';
 $lang->article->lblAuthor    = "<strong>作者：</strong> %s &nbsp;&nbsp;";
