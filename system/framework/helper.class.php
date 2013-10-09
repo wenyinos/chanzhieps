@@ -349,13 +349,13 @@ class helper
 
     /**
      * Get siteCode from domain.
-     * @param string $domain
+     * @param  string $domain
      * @return string $siteCode
      **/ 
     public static function getSiteCode($domain)
     {
         global $config;
-        list($domain) = explode(':', $domain);
+        $domain = str_replace('-', '_', $domain);
         $items = explode('.', $domain);
         
         $postfix = str_replace($items[0] . '.', '', $domain);
