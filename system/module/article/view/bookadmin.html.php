@@ -28,7 +28,9 @@ js::set('type', $type);
         </caption>
         <thead>
           <tr class='a-center'>
+            <?php if(!$children):?>
             <th class='w-80px'><?php echo $lang->article->order;?></th>
+            <?php endif;?>
             <th class='w-60px'><?php echo $lang->article->id;?></th>
             <th><?php echo $lang->article->title;?></th>
             <th class='w-p20'><?php echo $lang->article->category;?></th>
@@ -40,11 +42,13 @@ js::set('type', $type);
         <tbody>
           <?php $maxOrder = 0; foreach($articles as $article):?>
           <tr class='a-center'>
+            <?php if(!$children):?>
             <td>
             <?php 
                 if($article->order > $maxOrder) $maxOrder = $article->order;
                 echo html::input("orders[$article->id]", $article->order, "class='text-1 a-center'");?>
             </td>
+            <?php endif;?>
             <td><?php echo $article->id;?></td>
             <td class='a-left'><?php echo $article->title;?></td>
             <td class='a-left'><?php foreach($article->categories as $category) echo $category->name . ' ';?></td>

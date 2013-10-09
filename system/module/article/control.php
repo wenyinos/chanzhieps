@@ -80,9 +80,17 @@ class article extends control
 
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
-        
-        $orderBy = strpos($type, 'book_') === false ? 'id_desc' : 't1.order';
 
+        $children = $this->loadModel('tree')->getChildren($categoryID, $type);
+        if($children || strpos($type, 'book_') === false)
+        {
+            $orderBy = 'id_desc';
+        }
+        else
+        {
+            $orderBy = 't1.order';
+        }
+        
         $families = $this->loadModel('tree')->getFamily($categoryID, $type);
         $articles = $families ? $this->article->getList($families, $orderBy, $pager) : array();
 
@@ -94,7 +102,14 @@ class article extends control
             $i = 1;
             foreach($articles as $article)
             {
-                $article->order = $this->post->maxOrder + $i * 10;
+                if(!$children)
+                {
+                    $article->order = $this->post->maxOrder + $i * 10;
+                }
+                else
+                {
+                    $article->order = $article->id; 
+                }
                 $i++;
             }
         }
@@ -103,6 +118,7 @@ class article extends control
         $this->view->articles = $articles;
         $this->view->pager    = $pager;
         $this->view->category = $this->tree->getById($categoryID);
+        $this->view->children = $children;
         $this->view->type     = $type;
 
         if(strpos($type, 'book') !== false)
