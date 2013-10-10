@@ -1,7 +1,8 @@
 $(document).ready(function()
 {          
     // auto ajust panel height.
-    $('.row .panel').height($('.row').height() - 20);
+    var fitPanelHeight = 0;
+    $('.row .panel').each(function(){if($(this).height()>fitPanelHeight) fitPanelHeight = $(this).height();}).height(fitPanelHeight);
 
     // add "index" class to the body element.
     $('body').addClass('index');
