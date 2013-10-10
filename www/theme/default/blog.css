@@ -10,7 +10,7 @@ body {padding-bottom: 20px; padding-top: 20px; background:#F1F1F1 repeat-x url("
 .header>.nav>li{float: left;}
 .header>.nav>li a{color: #666;padding: 15px 25px;}
 .header>.nav>li a,.header>.nav>li a:hover,.header>.nav>li.active a{transition: all .6s;-o-transition: all .6s;-moz-transition: all .6s;-webkit-transition: all .3s; }
-.header>.nav>li.active a{color: #0358DE; background-color: #f1f1f1;border-bottom: 2px solid #0358DE;margin-bottom: -2px;}
+.header>.nav>li.active a,.header>.nav>li.active a:hover{color: #0358DE; background-color: #f1f1f1;border-bottom: 2px solid #0358DE;margin-bottom: -2px;}
 
 /* Breadcrumb style. */
 .breadcrumb{background-color: transparent; padding:0 3px;}
