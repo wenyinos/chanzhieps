@@ -2,7 +2,7 @@ $(document).ready(function()
 {          
     // auto ajust panel height.
     var fitPanelHeight = 0;
-    $('.row .panel').each(function(){if($(this).height()>fitPanelHeight) fitPanelHeight = $(this).height();}).height(fitPanelHeight);
+    $('.row .panel').each(function(){fitPanelHeight=Math.max($(this).height(),fitPanelHeight);}).height(fitPanelHeight);
 
     // add "index" class to the body element.
     $('body').addClass('index');
