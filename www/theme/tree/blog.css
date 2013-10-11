@@ -4,7 +4,7 @@ a{color: #6e2e16; -webkit-transition: 0.25s; -moz-transition: 0.25s; -o-transiti
 a:hover{color: #6e2e16;}
 .footer{color: #4b624f;border-color: #968035;}
 .content-box ,.table,.media-list{color: #2e353f;}
-.media-list>.media, .content-box {background-color: rgba(245,240,204,0.5);border-color: #c4b274;}
+.media-list>.media, .content-box {background-color: #f5f0cc;border-color: #c4b274;}
 .media-list>.media .dater, .content-box .dater {background-color: #c4b274;}
 .media-list>.media:hover .dater, .content-box:hover .dater {background-color: #d0be7e;}
 
