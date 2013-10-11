@@ -81,8 +81,8 @@ select:focus,textarea:focus,input:focus, select:hover,textarea:hover,input:hover
 .list-group-item.list-group-title{background-color: #c9c9c9;color: #2e353f;}
 a.list-group-item:hover,.leftmenu > li > a:hover{background-color: #da3b26;color: #FFF;}
 .list-group-item.active,.list-group-item.active:hover,.list-group-item.active:focus, .leftmenu > li.active > a,.leftmenu > li.active > a:hover {color:#fff;background-color: #da3b26;border-bottom: none}
-.radius-top {-moz-border-radius: 2px 2px 0 0;-webkit-border-radius: 2px 2px 0 0;border-radius: 2px 2px 0 0;}
-.radius-bottom {-moz-border-radius: 0 0 2px 2px;-webkit-border-radius: 0 0 2px 2px;border-radius: 0 0 2px 2px;}
+.radius-top,.list-group-item:first-child {-moz-border-radius: 2px 2px 0 0;-webkit-border-radius: 2px 2px 0 0;border-radius: 2px 2px 0 0;}
+.radius-bottom,.list-group-item:last-child {-moz-border-radius: 0 0 2px 2px;-webkit-border-radius: 0 0 2px 2px;border-radius: 0 0 2px 2px;}
 /* admin navbar. */
 .navbar-inverse{background-color: #808080;border-bottom: 0;}
 .navbar-inverse .navbar-nav>.active>a,.navbar-inverse .navbar-nav>.active>a:hover{background-color: #c9c9c9; color: #da3b26;}
