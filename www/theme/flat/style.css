@@ -1,5 +1,5 @@
 /* global style. */
-body{background-color: #34495E; background-color: #fff; color: #34495E;}
+body{ background-color: #fff; color: #34495E;}
 
 a{color: #16A085; -webkit-transition: 0.25s; -moz-transition: 0.25s; -o-transition: 0.25s; transition: 0.25s; -webkit-backface-visibility: hidden;}
 a:hover{color: #1ABC9C;}
