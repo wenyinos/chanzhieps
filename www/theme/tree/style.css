@@ -71,7 +71,7 @@ select:focus,textarea:focus,input:focus, select:hover,textarea:hover,input:hover
 /* table. */
 .table{border: none;}
 .table td,.table th{background: #f5f0cc; border: none;}
-.table-bordered>thead>tr>th, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td{border-color: #c4b274}
+.table-bordered>thead>tr>th, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td{border-color: #e3d7a2}
 .modal-content .table td,.modal-content .table th{background-color: #fff;}
 .table caption{background: #e3d7a2;color: #4b624f; height: 45px; padding: 2px 15px;-moz-border-radius: 2px 2px 0 0;-webkit-border-radius: 2px 2px 0 0;border-radius: 2px 2px 0 0;}
 .table.table-hover tr td:first-child{padding-left: 1em;}
