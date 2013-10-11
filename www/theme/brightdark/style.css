@@ -6,7 +6,7 @@ a:hover{color: #da3b26;}
 
 body>.container>hr{display: none;}
 footer{margin: 20px 0;text-align: left;color: #c9c9c9;}
-.breadcrumb{color: #c9c9c9;}
+.breadcrumb,.container>form{color: #c9c9c9;}
 
 /* headNav. */
 #headNav{top: 15px; background-color: #808080; -moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px;}
@@ -70,6 +70,7 @@ select:focus,textarea:focus,input:focus, select:hover,textarea:hover,input:hover
 /*.table{-moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px;}*/
 .table{border: none;}
 .table td,.table th{background: #ECF0F5; border: none;}
+.modal-content .table td,.modal-content .table th{background-color: #fff;}
 .table caption{background: #c9c9c9;color: #2e353f; height: 45px; padding: 2px 15px;-moz-border-radius: 2px 2px 0 0;-webkit-border-radius: 2px 2px 0 0;border-radius: 2px 2px 0 0;}
 .table.table-hover tr td:first-child{padding-left: 1em;}
 .table tr:last-child td,.table{-webkit-border-bottom-left-radius:2px; -webkit-border-bottom-right-radius:2px; -moz-border-radius-bottomleft:2px; -moz-border-radius-bottomright:2px; border-bottom-left-radius:2px; border-bottom-right-radius:2px;}
