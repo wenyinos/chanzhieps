@@ -17,21 +17,23 @@ a:hover{color: #7a94b2;}
 
 /* buttons. */
 .btn{border: none; padding: 8px 12px; -webkit-transition: 0.25s linear; -moz-transition: 0.25s linear; -o-transition: 0.25s linear; transition: 0.25s linear; -webkit-backface-visibility: hidden; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none;}
-.btn-primary{background: #c4b274;}
-.btn-primary:hover{background: #7a94b2;}
+.btn-primary{background: #7a94b2;}
+.btn-primary:hover{background: #667b94;}
 .btn-default{color: #f1f1f1; background: #4b624f;}
 .btn-default:hover{color: #fff; background: #5f7a64;}
 
 /*form controls.*/
-.ke-container, select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"]{border: 1px solid #c4b274; color: #34495e; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 15px; padding: 6px 12px; height: 36px; -webkit-appearance: none; -moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px;-webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; -webkit-transition: border .25s linear, color .25s linear, background-color .25s linear; -moz-transition: border .25s linear, color .25s linear, background-color .25s linear; -o-transition: border .25s linear, color .25s linear, background-color .25s linear; transition: border .25s linear, color .25s linear, background-color .25s linear; -webkit-backface-visibility: hidden;}
-.ke-container,.chosen-choices{border: 1px solid #c4b274 !important; height: auto;}
+.ke-container, select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"]{border: 1px solid #7a94b2; color: #34495e; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 15px; padding: 6px 12px; height: 36px; -webkit-appearance: none; -moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px;-webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; -webkit-transition: border .25s linear, color .25s linear, background-color .25s linear; -moz-transition: border .25s linear, color .25s linear, background-color .25s linear; -o-transition: border .25s linear, color .25s linear, background-color .25s linear; transition: border .25s linear, color .25s linear, background-color .25s linear; -webkit-backface-visibility: hidden;}
+.ke-container,.chosen-choices{border: 1px solid #7a94b2 !important; height: auto;}
 .chosen-container-active .chosen-choices{border-color: #1abc9c !important;}
-select:focus,textarea:focus,input:focus, select:hover,textarea:hover,input:hover, select.hover,textarea.hover,input.hover{border-color: #7a94b2; outline: 0; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;}
+select:focus,textarea:focus,input:focus, select:hover,textarea:hover,input:hover, select.hover,textarea.hover,input.hover{border-color: #6e2e16; outline: 0; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;}
+
 /* table. */
 .table{border: none;}
 .table td,.table th{background: #f5f0cc; border: none;}
+.table-bordered>thead>tr>th, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td{border-color: #e8d0a9}
 .modal-content .table td,.modal-content .table th{background-color: #fff;}
-.table caption{background: #e3d7a2;color: #4b624f; height: 45px; padding: 2px 15px;-moz-border-radius: 2px 2px 0 0;-webkit-border-radius: 2px 2px 0 0;border-radius: 2px 2px 0 0;}
+.table caption{background: #c1dad6;color: #4b624f; height: 45px; padding: 2px 15px;-moz-border-radius: 2px 2px 0 0;-webkit-border-radius: 2px 2px 0 0;border-radius: 2px 2px 0 0;}
 .table.table-hover tr td:first-child{padding-left: 1em;}
 .table tr:last-child td,.table{-webkit-border-bottom-left-radius:2px; -webkit-border-bottom-right-radius:2px; -moz-border-radius-bottomleft:2px; -moz-border-radius-bottomright:2px; border-bottom-left-radius:2px; border-bottom-right-radius:2px;}
 .table-form tr:last-child td{padding-bottom: 20px;}
