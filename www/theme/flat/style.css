@@ -61,7 +61,6 @@ body.index .panel>.panel-heading h3{font-size: 20px;}
 select:focus,textarea:focus,input:focus, select:hover,textarea:hover,input:hover, select.hover,textarea.hover,input.hover{border-color: #1abc9c; outline: 0; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;}
 
 /* table. */
-/*.table{-moz-border-radius:6px; -webkit-border-radius:6px; border-radius:6px;}*/
 .table{border: none;}
 .table td,.table th{background: #ECF0F5; border: none;}
 .table caption{background: #BDC3C7; height: 45px; padding: 2px 15px;}
