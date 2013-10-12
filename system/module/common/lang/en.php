@@ -23,6 +23,8 @@ $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->chanzhiEPS = 'chanzhiEPS';
 $lang->poweredBy = " Powered by <a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPS} %s</a>!";
 
+$lang->killIE6    = '<script src="//letskillie6.googlecode.com/svn/trunk/2/default.js"></script>';
+
 /* Global lang items. */
 $lang->home           = 'Home';
 $lang->welcome        = 'Welcome, <strong>%s</strong>!';
@@ -69,6 +71,7 @@ $lang->js = new stdclass();
 $lang->js->confirmDelete = 'Are sure to delete it?';
 $lang->js->deleteing     = 'Deleting...';
 $lang->js->doing         = 'Processing...';
+$lang->js->timeout       = 'Timeout';
 
 /* Contact fields*/
 $lang->company = new stdclass();
@@ -135,7 +138,7 @@ $lang->site->menu->basic     = 'Basic|site|setbasic|';
 $lang->site->menu->logo      = 'Logo|site|setlogo|';
 $lang->site->menu->nav       = 'Navigation|nav|admin|';
 $lang->site->menu->slide     = array('link' => 'Slide|slide|admin|', 'alias' => 'create,edit');
-$lang->site->menu->sina      = 'Weibo OAuth|site|setappkey|';
+//$lang->site->menu->sina      = 'Weibo OAuth|site|setappkey|';
 
 /* Menu of company module. */
 $lang->company->menu = new stdclass();

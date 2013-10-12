@@ -1,4 +1,6 @@
-<?php include '../../common/view/header.html.php'; ?>
+<?php
+include '../../common/view/header.html.php';
+?>
 <?php $common->printPositionBar($category);?>
 <div class='row'>
   <div class='col-md-3' id='leftmenu'>
@@ -47,7 +49,7 @@
                           echo "<dd><dl>";
                           foreach($articles[$child->id] as $article)
                           {
-                              echo "<dt class='f-14px'>$category->i.$child->j.$k " . html::a(inlink('read', "article=$article->id"), $article->title) . "</dt>";
+                              echo "<dt class='article-title f-14px'>$category->i.$child->j.$k " . html::a(inlink('read', "article=$article->id"), $article->title) . "</dt>";
                               $k ++;
                           }
                           echo "</dl></dd>";

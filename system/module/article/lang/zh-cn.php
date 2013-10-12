@@ -36,11 +36,15 @@ $lang->article->create     = '发布文章';
 $lang->article->edit       = '编辑文章';
 $lang->article->files      = '附件';
 
+$lang->blog->admin  = '维护博客';
+$lang->blog->list   = '博客列表';
+$lang->blog->create = '发布博客';
+$lang->blog->edit   = '编辑博客';
+
 $lang->article->originalList[1] = '原创';
 $lang->article->originalList[0] = '转贴';
 
 $lang->article->confirmDelete = '您确定删除该文章吗？';
-$lang->article->successSave   = '成功保存';
 
 $lang->article->lblAddedDate = '<strong>添加时间：</strong> %s &nbsp;&nbsp;';
 $lang->article->lblAuthor    = "<strong>作者：</strong> %s &nbsp;&nbsp;";

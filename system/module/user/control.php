@@ -457,13 +457,13 @@ class user extends control
      * @access public
      * @return void
      */
-    public function openIDLogin($provider)
+    public function openIDLogin($provider, $referer)
     {
         if($provider == 'sina')
         {
             $this->app->loadClass('sina', $static = true);
             $sina = new SaeTOAuthV2($this->config->site->akey, $this->config->site->skey);
-            $url  = $sina->getAuthorizeURL($this->config->user->openID->sina->callbackUrl);
+            $url  = $sina->getAuthorizeURL($this->config->user->openID->sina->callbackUrl . "?referer=" . $referer);
             $this->locate($url);
         }
     }
@@ -476,15 +476,21 @@ class user extends control
      */
     public function callback()
     {
+        if(isset($_REQUEST['referer'])) 
+        {
+            $referer = $_REQUEST['referer'];
+            $this->setReferer($referer);
+        }
+
         $this->app->loadClass('sina', $static = true);
         $sina = new SaeTOAuthV2($this->config->site->akey , $this->config->site->skey);
 
         $token = array();
-        if(isset($_REQUEST['code'])) 
+        if(isset($_REQUEST['code']) && isset($_REQUEST['referer'])) 
         {
             $keys         = array();
             $keys['code'] = $_REQUEST['code'];
-            $keys['redirect_uri'] = $this->config->user->openID->sina->callbackUrl;
+            $keys['redirect_uri'] = $this->config->user->openID->sina->callbackUrl . "?referer=" . $_REQUEST['referer'];
             try 
             {
                 $token = $sina->getAccessToken('code', $keys);
@@ -499,9 +505,11 @@ class user extends control
 
         $sina = new SaeTClientV2($this->config->site->akey , $this->config->site->skey, $_SESSION['token']['access_token'] ); //验证
         $user = $sina->show_user_by_id($token['uid']);
-        if(!$this->checkOpenID('sina', $user['id']))
+        if(!$this->checkOpenID('sina', $user['id'], $this->referer))
         {
+            $this->view->title   = $this->lang->user->login->common;
             $this->view->user    = $user;
+            $this->view->referer = $this->referer;
             $this->display();
         }
     }
@@ -514,7 +522,7 @@ class user extends control
      * @access public
      * @return void
      */
-    public function checkOpenID($provider, $openID)
+    public function checkOpenID($provider, $openID, $referer)
     {
         if(empty($openID)) return false;
 
@@ -527,7 +535,16 @@ class user extends control
         $user->rights = $this->user->authorize($user);
         $this->session->set('user', $user);
         $this->app->user = $this->session->user;
-        die(js::locate($this->createLink('user', 'control'), 'parent'));
+
+        /* Goto the referer or to the default module */
+        if($referer != false)
+        {
+            die(js::locate(urldecode($referer), 'parent'));
+        }
+        else
+        {
+            die(js::locate($this->createLink('user', 'control'), 'parent'));
+        }
 
     }
 
@@ -561,7 +578,15 @@ class user extends control
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
             $this->bind($user->account, $this->post->openID);
-            $this->send(array('result' => 'success', 'locate' => $this->createLink('index', 'index')));
+            /* Goto the referer or to the default module */
+            if($this->post->referer != false)
+            {
+                $this->send(array('result'=>'success', 'locate'=> urldecode($_POST['referer'])));
+            }
+            else
+            {
+                $this->send(array('result'=>'success', 'locate' => $this->inlink('control')));
+            }
         }
     }
 
@@ -590,7 +615,15 @@ class user extends control
                 ->set('openID')->eq($openID)
                 ->exec(false);
 
-            $this->send(array('result' => 'success', 'locate' => $this->createLink('user', 'control')));
+           /* Goto the referer or to the default module */
+           if($this->post->referer != false)
+           {
+               $this->send(array('result'=>'success', 'locate'=> urldecode($_POST['referer'])));
+           }
+           else
+           {
+               $this->send(array('result'=>'success', 'locate' => $this->inlink('control')));
+           }
         }
         else
         {

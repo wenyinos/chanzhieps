@@ -3,7 +3,6 @@ $lang->help->common       = '在线帮助系统';
 $lang->help->books        = '手册列表';
 $lang->help->articles     = '文档导航';
 $lang->help->backtobooks  = '返回手册列表';
-$lang->help->successSaved = '保存成功';
 
 $lang->help->id           = '编号';
 $lang->help->namenotempty = '名称不能为空';

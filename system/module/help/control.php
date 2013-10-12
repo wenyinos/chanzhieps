@@ -65,7 +65,7 @@ class help extends control
         if($_POST)
         {
             $result = $this->help->createBook();
-            if($result === true) $this->send(array('result' => 'success', 'message'=>$this->lang->help->successSaved, 'locate' => $this->inlink('admin')));
+            if($result === true) $this->send(array('result' => 'success', 'message'=>$this->lang->saveSuccess, 'locate' => $this->inlink('admin')));
             $this->send(array('result' => 'fail', 'message' => $result));
         }
         $this->display(); 
@@ -83,7 +83,7 @@ class help extends control
         if($_POST)
         {
             $result = $this->help->updateBook($id);
-            if($result === true) $this->send(array('result' => 'success', 'message'=>$this->lang->help->successSaved, 'locate' => $this->inlink('admin')));
+            if($result === true) $this->send(array('result' => 'success', 'message'=>$this->lang->saveSuccess, 'locate' => $this->inlink('admin')));
             $this->send(array('result' => 'fail', 'message' => $result));
         }
 

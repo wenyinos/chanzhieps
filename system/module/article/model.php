@@ -57,45 +57,48 @@ class articleModel extends model
      */
     public function getList($categories, $orderBy, $pager = null)
     {
-        /* Get articles(use groupBy to distinct articles).  */
-        $articles = $this->dao->select('t1.*, t2.category')->from(TABLE_ARTICLE)->alias('t1')
-            ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
-            ->where('1 = 1')
-            ->beginIF($categories)->andWhere('t2.category')->in($categories)->fi()
-            ->groupBy('t2.id')
-            ->orderBy($orderBy)
-            ->page($pager)
-            ->fetchAll('id');
-        if(!$articles) return array();
-
-        /* Get categories for these articles. */
-        $categories = $this->dao->select('t2.id, t2.name, t1.id AS article')
-            ->from(TABLE_RELATION)->alias('t1')
-            ->leftJoin(TABLE_CATEGORY)->alias('t2')->on('t1.category = t2.id')
-            ->where('1 = 1')
-            ->beginIF($categories)->andWhere('t1.category')->in($categories)->fi()
-            ->fetchGroup('article', 'id');
-
-        /* Assign categories to it's article. */
-        foreach($articles as $article) $article->categories = $categories[$article->id];
-
-        /* Get images for these articles. */
-        $images = $this->loadModel('file')->getByObject('article', array_keys($articles), $isImage = true);
-
-        /* Assign images to it's article. */
-        foreach($articles as $article)
+        if($categories)
         {
-            if(empty($images[$article->id])) continue;
+            /* Get articles(use groupBy to distinct articles).  */
+            $articles = $this->dao->select('t1.*, t2.category')->from(TABLE_ARTICLE)->alias('t1')
+                ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
+                ->where('1 = 1')
+                ->andWhere('t2.category')->in($categories)
+                ->groupBy('t2.id')
+                ->orderBy($orderBy)
+                ->page($pager)
+                ->fetchAll('id');
+            if(!$articles) return array();
 
-            $article->image = new stdclass();
-            $article->image->list    = $images[$article->id];
-            $article->image->primary = $article->image->list[0];
+            /* Get categories for these articles. */
+            $categories = $this->dao->select('t2.id, t2.name, t1.id AS article')
+                ->from(TABLE_RELATION)->alias('t1')
+                ->leftJoin(TABLE_CATEGORY)->alias('t2')->on('t1.category = t2.id')
+                ->where('1 = 1')
+                ->andWhere('t1.category')->in($categories)
+                ->fetchGroup('article', 'id');
+
+            /* Assign categories to it's article. */
+            foreach($articles as $article) $article->categories = $categories[$article->id];
+
+            /* Get images for these articles. */
+            $images = $this->loadModel('file')->getByObject('article', array_keys($articles), $isImage = true);
+
+            /* Assign images to it's article. */
+            foreach($articles as $article)
+            {
+                if(empty($images[$article->id])) continue;
+
+                $article->image = new stdclass();
+                $article->image->list    = $images[$article->id];
+                $article->image->primary = $article->image->list[0];
+            }
+            
+            /* Assign summary to it's article. */
+            foreach($articles as $article) $article->summary = empty($article->summary) ? helper::substr(strip_tags($article->content), 200, '...') : $article->summary;
+
+            return $articles;
         }
-        
-        /* Assign summary to it's article. */
-        foreach($articles as $article) $article->summary = empty($article->summary) ? substr(strip_tags($article->content), 0, 300) : $article->summary;
-
-        return $articles;
     }
 
     /**
@@ -253,9 +256,46 @@ class articleModel extends model
     public function createPreviewLink($articleID)
     {
         $article = $this->getByID($articleID);
-        $module = $article->type == 'article' ? 'article' : 'help';
-        $method = $article->type == 'article' ? 'view'    : 'read';
+        if(strpos($article->type , 'book_') !== false)
+        {
+            $module = 'help';
+            $method = 'read';
+        }
+        else
+        {
+            $module = $article->type;
+            $method = 'view';
+        }
 
         return commonModel::createFrontLink($module, $method, "articleID=$articleID");
+    }
+
+    /**
+     * Print files.
+     * 
+     * @param  object $files 
+     * @access public
+     * @return void
+     */
+    public function printFiles($files)
+    {
+        if(empty($files)) return false;
+
+        foreach($files as $file)
+        {
+            if($file->isImage)
+            {
+                echo html::image($file->fullURL, "class='ph-10px'");
+            }
+        }
+        echo '</br>';
+        foreach($files as $file)
+        {
+            if(!$file->isImage)
+            {
+                $file->title = $file->title . ".$file->extension";
+                echo html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, '_blank') . '&nbsp;&nbsp;&nbsp'; 
+            }
+        }
     }
 }

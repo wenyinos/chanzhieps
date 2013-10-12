@@ -1,6 +1,6 @@
 <div class='panel panel-default thread'>
   <div class='panel-heading'>
-    <h3><i class='icon-comment-alt'></i> <?php echo $thread->title; ?></h3>
+    <h4><i class='icon-comment-alt'></i> <?php echo $thread->title; ?></h4>
     <div class='muted'><?php echo $thread->addedDate;?></div>
     <div class='panel-actions'><strong>#0</strong></div>
   </div>

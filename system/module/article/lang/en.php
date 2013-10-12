@@ -36,11 +36,15 @@ $lang->article->create     = 'Create';
 $lang->article->edit       = 'Edit';
 $lang->article->files      = 'Files';
 
+$lang->blog->admin  = 'Admin';
+$lang->blog->list   = 'List';
+$lang->blog->create = 'Create';
+$lang->blog->edit   = 'Edit';
+
 $lang->article->originalList[1] = 'Original';
 $lang->article->originalList[0] = 'Copied';
 
 $lang->article->confirmDelete = 'Are you sure to delete this article?';
-$lang->article->successSave   = 'Successfully saved!';
 
 $lang->article->lblAddedDate = '<strong>Added:</strong> %s &nbsp;&nbsp;';
 $lang->article->lblAuthor    = "<strong>Author:</strong> %s &nbsp;&nbsp;";

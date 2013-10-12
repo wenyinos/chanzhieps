@@ -79,5 +79,10 @@ $(document).ready(function(){
         });
         return false;
     });
+
+    $(".modal-backdrop").click(function()
+    {
+        $('.modal').modal('hide');
+    });
 });
 </script>

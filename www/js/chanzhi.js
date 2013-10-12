@@ -103,6 +103,11 @@ $.extend(
             error: function(jqXHR, textStatus, errorThrown)
             {
                 $.enableForm(formID);
+                if(textStatus == 'timeout')
+                {
+                    bootbox.alert(v.lang.timeout);
+                    return false;
+                }
                 bootbox.alert(jqXHR.responseText + textStatus + errorThrown);
             }
         };

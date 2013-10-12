@@ -22,7 +22,7 @@ define('RUN_MODE', 'admin');
 include 'loader.php';
 
 /* Instance the app. */
-$app = router::createApp('xirang', $systemRoot);
+$app = router::createApp('xirang', $systemRoot, '', dirname(__FILE__));
 $config = $app->config;
 
 /* Check the reqeust is getconfig or not. Check installed or not. */

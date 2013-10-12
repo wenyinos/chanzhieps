@@ -37,6 +37,7 @@ class company extends control
     {
         if(!empty($_POST))
         {
+            $_POST[setDate] = helper::now();
             $result = $this->loadModel('setting')->setItems('system.common.company', (object)$_POST);
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
@@ -54,6 +55,11 @@ class company extends control
     {
         if(!empty($_POST))
         {
+            if(!empty($_POST['email']))
+            {
+                if(!validater::checkEmail($_POST['email'])) $this->send(array('result' => 'fail', 'message' => $this->lang->company->error->email)); 
+            }
+
             $contact = array('contact' => helper::jsonEncode($_POST));
             $result  = $this->loadModel('setting')->setItems('system.common.company', $contact);
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));

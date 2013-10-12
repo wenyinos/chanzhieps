@@ -21,7 +21,9 @@ $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 
 /* Lang items for xirang. */
 $lang->chanzhiEPS = '蝉知企业门户系统';
-$lang->poweredBy = " 由 <a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPS} %s</a> 强力驱动！";
+$lang->poweredBy  = " 由 <a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPS} %s</a> 强力驱动！";
+
+$lang->killIE6    = '<script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>';
 
 /* Global lang items. */
 $lang->home           = '首页';
@@ -69,6 +71,7 @@ $lang->js = new stdclass();
 $lang->js->confirmDelete = '您确定要执行删除操作吗？';
 $lang->js->deleteing     = '删除中';
 $lang->js->doing         = '处理中';
+$lang->js->timeout       = '网络超时,请重试';
 
 /* Contact fields*/
 $lang->company = new stdclass();
@@ -105,8 +108,8 @@ $lang->article->menu->tree   = '类目管理|tree|browse|type=article';
 /* Menu of blog module. */
 $lang->blog = new stdclass();
 $lang->blog->menu = new stdclass();
-$lang->blog->menu->browse = array('link' => '文章列表|article|admin|type=blog', 'alias' => 'edit');
-$lang->blog->menu->create = '发布文章|article|create|type=blog';
+$lang->blog->menu->browse = array('link' => '博客列表|article|admin|type=blog', 'alias' => 'edit');
+$lang->blog->menu->create = '发布博客|article|create|type=blog';
 $lang->blog->menu->tree   = '类目管理|tree|browse|type=blog';
 
 /* Menu of product module. */
@@ -135,7 +138,7 @@ $lang->site->menu->basic     = '站点设置|site|setbasic|';
 $lang->site->menu->logo      = 'LOGO设置|site|setlogo|';
 $lang->site->menu->nav       = '导航设置|nav|admin|';
 $lang->site->menu->slide     = array('link' => '幻灯片设置|slide|admin|', 'alias' => 'create,edit');
-$lang->site->menu->sina      = '新浪微博登录设置|site|setappkey|';
+//$lang->site->menu->sina      = '新浪微博登录设置|site|setappkey|';
 
 /* Menu of company module. */
 $lang->company->menu = new stdclass();

@@ -286,7 +286,7 @@ class router
      * @access protected
      * @return void
      */
-    protected function __construct($appName = 'demo', $appRoot = '')
+    protected function __construct($appName = 'demo', $appRoot = '', $webRoot = '')
     {
         $this->setPathFix();
         $this->setBasePath();
@@ -299,7 +299,7 @@ class router
         $this->setLogRoot();
         $this->setConfigRoot();
         $this->setModuleRoot();
-        $this->setDataRoot();
+        $this->setDataRoot($webRoot);
 
         $this->setSuperVars();
 
@@ -339,10 +339,10 @@ class router
      * @access public
      * @return object   the app object
      */
-    public static function createApp($appName = 'demo', $appRoot = '', $className = 'router')
+    public static function createApp($appName = 'demo', $appRoot = '', $className = 'router', $webRoot)
     {
         if(empty($className)) $className = __CLASS__;
-        return new $className($appName, $appRoot);
+        return new $className($appName, $appRoot, $webRoot);
     }
 
     //-------------------- path related methods --------------------//
@@ -491,14 +491,15 @@ class router
     }
 
     /**
-     * Set the theme root.
+     * Set the data root.
      * 
+     * @param  $webRoot 
      * @access protected
      * @return void
      */
-    protected function setDataRoot()
+    protected function setDataRoot($webRoot = '')
     {
-        $this->dataRoot = $_SERVER['DOCUMENT_ROOT'] . DS . 'data' . DS;
+        $this->dataRoot = rtrim($webRoot, DS) . DS . 'data' . DS;
     }
 
     /**
@@ -885,7 +886,9 @@ class router
     {
         $value = @getenv($varName);
         if(isset($_SERVER[$varName])) $value = $_SERVER[$varName];
-        return trim($value, '/');
+        if(strpos($value, '?') === false) return trim($value, '/');
+        $value = parse_url($value);
+        return trim($value['path'], '/');
     }
 
     /**
@@ -1376,7 +1379,7 @@ class router
         foreach($configFiles as $configFile)
         {
             if(in_array($configFile, $loadedConfigs)) continue;
-            include $configFile;
+            if(is_file($configFile)) include $configFile;
             $loadedConfigs[] = $configFile;
         }
 

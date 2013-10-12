@@ -40,7 +40,7 @@ $lang->user->allowTime = '开放时间';
 $lang->user->status    = '状态';
 $lang->user->alert     = '您的帐号已被禁用';
 
-$lang->user->list        = '会员列表';
+$lang->user->list            = '会员列表';
 $lang->user->view            = "用户详情";
 $lang->user->create          = "添加用户";
 $lang->user->edit            = "编辑用户";
@@ -111,9 +111,9 @@ $lang->user->notice->password = '字母和数字组合，最少六位';
 
 $lang->user->login  = new stdclass();
 $lang->user->login->common  = "登录";
-$lang->user->login->welcome = '欢迎登录';
+$lang->user->login->welcome = '已有帐号';
 $lang->user->login->why     = '欢迎登陆我们的系统，这样您可以使用我们为注册会员提供的各种服务。';
-$lang->user->login->openID  = '使用以下帐号进行登录';
+$lang->user->login->openID  = '第三方登录，快捷方便';
 $lang->user->login->sina    = '新浪微博';
 $lang->user->login->keepLogin['yes'] = "保持登录";
 

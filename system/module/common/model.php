@@ -269,10 +269,10 @@ class commonModel extends model
     public static function printTopBar()
     {
         global $app, $dao;
-        $divider = '&nbsp;|&nbsp;';
+        $divider = '<span class="divider">|</span>';
         if($app->session->user->account != 'guest')
         {
-            printf($app->lang->welcome, $app->session->user->realname);
+            printf('<span class="login-msg">' . $app->lang->welcome . '</span>', $app->session->user->realname);
             $messages = $dao->select('COUNT(*) as count')->from(TABLE_MESSAGE)->where('`to`')->eq($app->session->user->account)->andWhere('readed')->eq(0)->fetch('count', false);
             if($messages) echo html::a(helper::createLink('user', 'message'), sprintf($app->lang->messages, $messages));
             echo html::a(helper::createLink('user', 'control'), $app->lang->dashboard);
@@ -470,7 +470,7 @@ class commonModel extends model
         {
             echo '<li>' . html::a(inlink('browse', "moduleID=$moduleID"), $moduleName) . '</li>';
         }
-        if($product) echo '<li>' . html::a(inlink('view', "id=$product->id"), $product->name) . '</li>';
+        if($product) echo '<li>' . $product->name . '</li>';
     }
 
     /**
@@ -501,7 +501,7 @@ class commonModel extends model
         {
             echo '<li>' . html::a(inlink('browse', "moduleID=$moduleID"), $moduleName) . '</li>';
         }
-        if($article) echo '<li>' . html::a(inlink('view', "id=$article->id"), $article->title) . '</li>';
+        if($article) echo '<li>' . $article->title . '</li>';
     }
 
     /**
@@ -515,12 +515,11 @@ class commonModel extends model
     public function printBlog($module, $article)
     {
         $divider = $this->lang->divider;
-
         foreach($module->pathNames as $moduleID => $moduleName)
         {
             echo '<li>' . html::a(inlink('index', "moduleID=$moduleID"), $moduleName) . '</li>';
         }
-        if($article) echo '<li>' . html::a(inlink('view', "id=$article->id"), $article->title) . '</li>';
+        if($article) echo '<li>' . $article->title . '</li>';
     }
 
     /**

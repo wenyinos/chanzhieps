@@ -1,12 +1,10 @@
-<?php
-echo '<?xml version="1.0" encoding="utf-8"?>';
-?>
+<?php echo '<?xml version="1.0" encoding="utf-8"?>'; ?>
 <rss version="2.0">
 <channel>
   <title><?php echo $title;?></title>
   <link><?php echo $siteLink;?></link>
-  <description><?php echo $app->site->mission;?></description>
-  <copyright><?php echo $config->copyright->start . '-' . date('Y');?></copyright>
+  <description><?php echo $desc;?></description>
+  <copyright><?php echo '&copy;' . $config->company->name . $config->site->copyright . '-' . date('Y');?></copyright>
   <lastBuildDate><?php echo $lastDate;?></lastBuildDate>
   
   <?php 

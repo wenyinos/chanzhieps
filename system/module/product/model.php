@@ -95,7 +95,7 @@ class productModel extends model
         }
         
         /* Assign summary to it's product. */
-        foreach($products as $product) $product->summary = empty($product->summary) ? substr(strip_tags($product->content), 0, 300) : $product->summary;
+        foreach($products as $product) $product->summary = empty($product->summary) ? helper::substr(strip_tags($product->content), 250) : $product->summary;
 
         return $products;
     }
@@ -241,5 +241,26 @@ class productModel extends model
 
            $this->dao->insert(TABLE_RELATION)->data($data)->exec();
        }
+    }
+
+    /**
+     * Print files.
+     * 
+     * @param  object $files 
+     * @access public
+     * @return void
+     */
+    public function printFiles($files)
+    {
+        if(empty($files)) return false;
+
+        foreach($files as $file)
+        {
+            if(!$file->isImage)
+            {
+                $file->title = $file->title . ".$file->extension";
+                echo html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, '_blank') . '&nbsp;&nbsp;&nbsp'; 
+            }
+        }
     }
 }

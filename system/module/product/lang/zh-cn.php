@@ -44,4 +44,3 @@ $lang->product->edit       = '编辑产品';
 $lang->product->files      = '附件';
 
 $lang->product->confirmDelete = '您确定删除该产品吗？';
-$lang->product->successSave   = '成功保存';

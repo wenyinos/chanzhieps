@@ -349,13 +349,13 @@ class helper
 
     /**
      * Get siteCode from domain.
-     * @param string $domain
+     * @param  string $domain
      * @return string $siteCode
      **/ 
     public static function getSiteCode($domain)
     {
         global $config;
-        list($domain) = explode(':', $domain);
+        $domain = str_replace('-', '_', $domain);
         $items = explode('.', $domain);
         
         $postfix = str_replace($items[0] . '.', '', $domain);
@@ -365,6 +365,24 @@ class helper
         if(strpos($config->domainPostfix, "|$postfix|") !== false) return $items[1];
 
         return $siteCode = $domain;
+    }
+    
+    /**
+     * substr support utf8 chinese character
+     *
+     * @param string $string
+     * @param int $length 
+     * @param string $append 
+     * @return string 
+     **/
+    function substr($string, $length, $append = '')
+    {
+        if (strlen($string) <= $Length ) $append = '';
+
+        if(function_exists('mb_substr')) return mb_substr($string, 0, $length, 'utf-8') . $append;
+
+        preg_match_all("/./su", $string, $data);
+        return join("", array_slice($data[0],  0, $length)) . $append;
     }
 }
 

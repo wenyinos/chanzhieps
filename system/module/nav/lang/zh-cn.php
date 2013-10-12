@@ -35,6 +35,5 @@ $lang->nav->system->blog     = '博客';
 $lang->nav->system->help     = '帮助';
 
 /* Targets setting. */
-$lang->nav->target = new stdclass();
-$lang->nav->target->_self  = '当前窗口';
-$lang->nav->target->_blank = '新窗口';
+$lang->nav->newWindow = new stdclass();
+$lang->nav->newWindow->_blank = '新窗口打开';

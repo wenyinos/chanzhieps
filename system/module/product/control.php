@@ -139,17 +139,19 @@ class product extends control
      * View a product.
      * 
      * @param int $productID 
+     * @param int $currentCategory 
      * @access public
      * @return void
      */
-    public function view($productID)
+    public function view($productID, $currentCategory = 0)
     {
         $product  = $this->product->getById($productID);
 
         /* fetch first category for display. */
         $category = array_slice($product->categories, 0, 1);
-        $category = $category[0];
-        $category = $this->loadModel('tree')->getById($category->id);
+        $category = $category[0]->id;
+        if($currentCategory > 0 && isset($product->categories[$currentCategory])) $category = $currentCategory;  
+        $category = $this->loadModel('tree')->getById($category);
 
         $title    = $product->name . ' - ' . $category->name;
         $keywords = $product->keywords . ' ' . $category->keyword . ' ' . $this->config->site->keywords;

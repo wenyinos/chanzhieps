@@ -23,7 +23,6 @@ $lang->slide->admin    = 'Admin';
 $lang->slide->create   = 'Add';
 $lang->slide->edit     = 'Edit';
 
-$lang->slide->successSave     = 'Successfully saved.';
 $lang->slide->successSort     = 'Order data saved.';
 $lang->slide->noImageSelected = 'No images selected';
 $lang->slide->suitableSize    = '1140px X 270px';

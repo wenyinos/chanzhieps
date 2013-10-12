@@ -30,7 +30,7 @@ js::set('articleID', $article->id);
           ?>
         </div>
         <p><?php echo $article->content;?></p>
-        <div class='f-left'><?php $this->loadModel('file')->printFiles($article->files);?></div>
+        <div class='article-file'><?php $this->article->printFiles($article->files);?></div>
       </div>
     </div>
     <div id='commentBox'></div>

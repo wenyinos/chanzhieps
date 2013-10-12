@@ -43,4 +43,3 @@ $lang->block->regions['footer'] = '所有頁面footer';
 $lang->block->regions['end']    = '所有頁面結束部分，不顯示';
 
 $lang->block->confirmDelete = "您確定刪除該區塊嗎？";
-$lang->block->successSave   = "成功保存";

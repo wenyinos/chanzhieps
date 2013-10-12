@@ -80,9 +80,17 @@ class article extends control
 
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
-        
-        $orderBy = strpos($type, 'book_') === false ? 'id_desc' : 't1.order';
 
+        $children = $this->loadModel('tree')->getChildren($categoryID, $type);
+        if($children || strpos($type, 'book_') === false)
+        {
+            $orderBy = 'id_desc';
+        }
+        else
+        {
+            $orderBy = 't1.order';
+        }
+        
         $families = $this->loadModel('tree')->getFamily($categoryID, $type);
         $articles = $families ? $this->article->getList($families, $orderBy, $pager) : array();
 
@@ -94,15 +102,23 @@ class article extends control
             $i = 1;
             foreach($articles as $article)
             {
-                $article->order = $this->post->maxOrder + $i * 10;
+                if(!$children)
+                {
+                    $article->order = $this->post->maxOrder + $i * 10;
+                }
+                else
+                {
+                    $article->order = $article->id; 
+                }
                 $i++;
             }
         }
 
-        $this->view->title    = $this->lang->article->admin;
+        $this->view->title    = $type == 'blog' ? $this->lang->blog->admin : $this->lang->article->admin;
         $this->view->articles = $articles;
         $this->view->pager    = $pager;
         $this->view->category = $this->tree->getById($categoryID);
+        $this->view->children = $children;
         $this->view->type     = $type;
 
         if(strpos($type, 'book') !== false)
@@ -200,17 +216,19 @@ class article extends control
      * View an article.
      * 
      * @param int $articleID 
+     * @param int $currentCategory 
      * @access public
      * @return void
      */
-    public function view($articleID)
+    public function view($articleID, $currentCategory = 0)
     {
         $article  = $this->article->getById($articleID);
 
-        /* fetch first category for display. */
+        /* fetch category for display. */
         $category = array_slice($article->categories, 0, 1);
-        $category = $category[0];
-        $category = $this->loadModel('tree')->getById($category->id);
+        $category = $category[0]->id;
+        if($currentCategory > 0 && isset($article->categories[$currentCategory])) $category = $currentCategory;  
+        $category = $this->loadModel('tree')->getById($category);
 
         $title    = $article->title . ' - ' . $category->name;
         $keywords = $article->keywords . ' ' . $category->keyword . ' ' . $this->config->site->keywords;
