@@ -124,10 +124,10 @@ class commonModel extends model
      * 
      * @param mixed $module     the module
      * @param mixed $method     the method
-     * @access private
+     * @access public
      * @return void
      */
-    private function deny($module, $method)
+    public function deny($module, $method)
     {
         $vars = "module=$module&method=$method";
         if(isset($_SERVER['HTTP_REFERER']))

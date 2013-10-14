@@ -261,6 +261,23 @@ class userModel extends model
     }
 
     /**
+     * Delete user.
+     * 
+     * @param  string    $account 
+     * @access public
+     * @return bool
+     */
+    public function delete($account)
+    {
+        $user = $this->getByAccount($account);
+        if(!$user) return false;
+
+        $this->dao->delete()->from(TABLE_USER)->where('account')->eq($account)->exec();
+
+        return !dao::isError();
+    }
+
+    /**
      * Identify email to regain the forgotten password 
      *
      * @access  public
