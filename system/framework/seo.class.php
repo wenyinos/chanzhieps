@@ -1,10 +1,23 @@
 <?php
+/**
+ * The seo and uri class file
+ *
+ * The author disclaims copyright to this source code.  In place of
+ * a legal notice, here is a blessing:
+ *
+ *  May you do good and not evil.
+ *  May you find forgiveness for yourself and forgive others.
+ *  May you share freely, never taking more than you give.
+ */
+?>
+<?php
 class seo
 {
     /**
      * parse SEO URI for setRouteByPathInfo 
      *
-     * return void
+     * @param uri
+     * return string
      */
     public static function parseURI($uri)
     {
@@ -163,8 +176,9 @@ class uri
     public static function createProductBrowse($params, $alias)
     {
         global $config;
+        a($alias);
         $link = 'product/c' . array_shift($params);
-        if($alias['categoryID']) $link = $alias['category'];
+        if($alias['category']) $link = $alias['category'];
         return $config->webRoot . $link . '.' . $config->default->view;
     }
 

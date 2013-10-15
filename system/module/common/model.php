@@ -595,16 +595,17 @@ class commonModel extends model
      * @param string       $module
      * @param string       $method
      * @param string|array $vars
+     * @param string|array $alias
      * return string 
      */
-    public static function createFrontLink($module, $method, $vars = '')
+    public static function createFrontLink($module, $method, $vars = '', $alias = '')
     {
-        if(RUN_MODE == 'front') return helper::createLink($module, $method, $vars);
+        if(RUN_MODE == 'front') return helper::createLink($module, $method, $vars, $alias);
 
         global $config;
 
         $config->requestType = $config->frontRequestType;
-        $link = helper::createLink($module, $method, $vars);
+        $link = helper::createLink($module, $method, $vars, $alias);
         $link = str_replace('admin.php', 'index.php', $link);
         $config->requestType = 'GET';
 
