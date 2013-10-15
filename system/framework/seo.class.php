@@ -110,6 +110,9 @@ class seo
         /* The first param is a category alias. */
         $params['category'] = $items[1]; 
         $method = $methodAlias[$module]['browse'];
+
+        /* help booke add -bookName to method*/
+        if($module == 'help' && $book) $method .= '-' . $book;
         return seo::convertURI($module, $method, $params, $pageID);
 
     }
@@ -176,7 +179,6 @@ class uri
     public static function createProductBrowse($params, $alias)
     {
         global $config;
-        a($alias);
         $link = 'product/c' . array_shift($params);
         if($alias['category']) $link = $alias['category'];
         return $config->webRoot . $link . '.' . $config->default->view;
