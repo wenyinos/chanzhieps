@@ -214,12 +214,10 @@ class uri
         $link = 'forum/';
         if($alias['category'])
         {
-            global $config;
             $link .= $alias['category'];
         }
         else
         {
-            global $config;
             $link .= 'c' . array_shift($params);
         }
         return $config->webRoot . $link . '.' . $config->default->view;
@@ -251,13 +249,18 @@ class uri
         $link = 'blog/';
         if($alias['category'])
         {
-            global $config;
             $link .= $alias['category'];
         }
         else
         {
-            global $config;
-            $link .= 'c' . array_shift($params);
+            if(empty($param)) 
+            {
+                $link .= 'c0';
+            }
+            else
+            {
+                $link .= 'c' . array_shift($params);
+            }
         }
         return $config->webRoot . $link . '.' . $config->default->view;
     }
@@ -290,7 +293,6 @@ class uri
         $link = 'help/' . array_shift($params);
         if(count($params) > 0)
         {
-            global $config;
             $category = array_shift($params);
             if(is_numeric($category)) $category = 'c' . $category;
             $link .= $config->webRoot . $category;
