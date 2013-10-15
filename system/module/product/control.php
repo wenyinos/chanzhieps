@@ -74,7 +74,6 @@ class product extends control
         $this->view->title    = $this->lang->product->admin;
         $this->view->products = $products;
         $this->view->pager    = $pager;
-        $this->view->category = $this->tree->getById($categoryID);
         $this->view->type     = $type;
         $this->display();
     }   
