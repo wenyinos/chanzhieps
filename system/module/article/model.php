@@ -55,50 +55,47 @@ class articleModel extends model
      * @access public
      * @return array
      */
-    public function getList($categories, $orderBy, $pager = null)
+    public function getList($type, $categories, $orderBy, $pager = null)
     {
-        if($categories)
+        /* Get articles(use groupBy to distinct articles).  */
+        $articles = $this->dao->select('t1.*, t2.category')->from(TABLE_ARTICLE)->alias('t1')
+            ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
+            ->where('t1.type')->eq($type)
+            ->beginIf($categories)->andWhere('t2.category')->in($categories)->fi()
+            ->groupBy('t2.id')
+            ->orderBy($orderBy)
+            ->page($pager)
+            ->fetchAll('id');
+        if(!$articles) return array();
+
+        /* Get categories for these articles. */
+        $categories = $this->dao->select('t2.id, t2.name, t1.id AS article')
+            ->from(TABLE_RELATION)->alias('t1')
+            ->leftJoin(TABLE_CATEGORY)->alias('t2')->on('t1.category = t2.id')
+            ->where('t1.type')->eq($type)
+            ->beginIf($categories)->andWhere('t1.category')->in($categories)->fi()
+            ->fetchGroup('article', 'id');
+
+        /* Assign categories to it's article. */
+        foreach($articles as $article) $article->categories = $categories[$article->id];
+
+        /* Get images for these articles. */
+        $images = $this->loadModel('file')->getByObject('article', array_keys($articles), $isImage = true);
+
+        /* Assign images to it's article. */
+        foreach($articles as $article)
         {
-            /* Get articles(use groupBy to distinct articles).  */
-            $articles = $this->dao->select('t1.*, t2.category')->from(TABLE_ARTICLE)->alias('t1')
-                ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
-                ->where('1 = 1')
-                ->andWhere('t2.category')->in($categories)
-                ->groupBy('t2.id')
-                ->orderBy($orderBy)
-                ->page($pager)
-                ->fetchAll('id');
-            if(!$articles) return array();
+            if(empty($images[$article->id])) continue;
 
-            /* Get categories for these articles. */
-            $categories = $this->dao->select('t2.id, t2.name, t1.id AS article')
-                ->from(TABLE_RELATION)->alias('t1')
-                ->leftJoin(TABLE_CATEGORY)->alias('t2')->on('t1.category = t2.id')
-                ->where('1 = 1')
-                ->andWhere('t1.category')->in($categories)
-                ->fetchGroup('article', 'id');
-
-            /* Assign categories to it's article. */
-            foreach($articles as $article) $article->categories = $categories[$article->id];
-
-            /* Get images for these articles. */
-            $images = $this->loadModel('file')->getByObject('article', array_keys($articles), $isImage = true);
-
-            /* Assign images to it's article. */
-            foreach($articles as $article)
-            {
-                if(empty($images[$article->id])) continue;
-
-                $article->image = new stdclass();
-                $article->image->list    = $images[$article->id];
-                $article->image->primary = $article->image->list[0];
-            }
-            
-            /* Assign summary to it's article. */
-            foreach($articles as $article) $article->summary = empty($article->summary) ? helper::substr(strip_tags($article->content), 200, '...') : $article->summary;
-
-            return $articles;
+            $article->image = new stdclass();
+            $article->image->list    = $images[$article->id];
+            $article->image->primary = $article->image->list[0];
         }
+
+        /* Assign summary to it's article. */
+        foreach($articles as $article) $article->summary = empty($article->summary) ? helper::substr(strip_tags($article->content), 200, '...') : $article->summary;
+
+        return $articles;
     }
 
     /**

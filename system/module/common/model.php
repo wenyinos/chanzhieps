@@ -557,7 +557,7 @@ class commonModel extends model
         unset($board->pathNames[key($board->pathNames)]);
         foreach($board->pathNames as $boardID => $boardName)
         {
-            echo '<li>' . html::a(helper::createLink('forum', 'board', "boardID=" . $this->loadModel('tree')->getAliasByID($boardID)), $boardName) . '</li>';
+            echo '<li>' . html::a(helper::createLink('forum', 'board', "boardID={$boardID}", "category=" . $this->loadModel('tree')->getAliasByID($boardID)), $boardName) . '</li>';
         }
     }
 
