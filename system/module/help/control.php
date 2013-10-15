@@ -27,6 +27,7 @@ class help extends control
     public function admin()
     {
         $this->view->books = $this->help->getBookList();
+        $this->view->title = $this->lang->help->common;
         $this->display();
     }
 
