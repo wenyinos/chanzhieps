@@ -23,6 +23,7 @@ class commonModel extends model
         $this->startSession();
         $this->setUser();
         $this->loadConfigFromDB();
+        $this->loadCategoryAlias();
         $this->loadModel('site')->setSite();
     }
 
@@ -608,5 +609,16 @@ class commonModel extends model
         $config->requestType = 'GET';
 
         return $link;
+    }
+    
+    /**
+     * Load category alias 
+     *
+     * return viod
+     */
+    public function loadCategoryAlias()
+    {
+        $this->config->seo->alias->category = $this->dao->select('alias, id as category, type as module')->from(TABLE_CATEGORY)->where('alias')->ne('')->fetchAll('alias');
+        $this->config->seo->alias->page     = $this->dao->select("alias, id, 'page' as module")->from(TABLE_ARTICLE)->where('type')->eq('page')->fetchAll('alias');
     }
 }

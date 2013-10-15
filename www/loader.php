@@ -28,3 +28,4 @@ include $frameworkRoot . 'router.class.php';
 include $frameworkRoot . 'control.class.php';
 include $frameworkRoot . 'model.class.php';
 include $frameworkRoot . 'helper.class.php';
+include $frameworkRoot . 'seo.class.php';

@@ -56,19 +56,30 @@ class helper
      * @param string       $moduleName     module name
      * @param string       $methodName     method name
      * @param string|array $vars           the params passed to the method, can be array('key' => 'value') or key1=value1&key2=value2) or key1=value1&key2=value2
+     * @param string|array $alias          the alias  params passed to the method, can be array('key' => 'value') or key1=value1&key2=value2) or key1=value1&key2=value2
      * @param string       $viewType       the view type
      * @static
      * @access public
      * @return string the link string.
      */
-    static public function createLink($moduleName, $methodName = 'index', $vars = '', $viewType = '')
+    static public function createLink($moduleName, $methodName = 'index', $vars = '', $alias = array(), $viewType = '')
     {
         global $app, $config;
-        $link = $config->requestType == 'PATH_INFO' ? $config->webRoot : $_SERVER['SCRIPT_NAME'];
 
-        /* Set the view type and vars. */
-        if(empty($viewType)) $viewType = $app->getViewType();
+        /* Set vars and alias. */
         if(!is_array($vars)) parse_str($vars, $vars);
+        if(!is_array($alias)) parse_str($alias, $alias);
+        
+        /* Seo modules return directly. */
+        if(method_exists('uri', 'create' . $moduleName . $methodName))
+        {
+            $link = call_user_func_array('uri::create' . $moduleName . $methodName, array('param'=> $vars, 'alias'=>$alias));
+            if($link) return $link;
+        }
+        
+        /* Set the view type. */
+        if(empty($viewType)) $viewType = $app->getViewType();
+        $link = $config->requestType == 'PATH_INFO' ? $config->webRoot : $_SERVER['SCRIPT_NAME'];
 
         /* The PATH_INFO type. */
         if($config->requestType == 'PATH_INFO')

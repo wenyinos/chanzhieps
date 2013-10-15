@@ -64,10 +64,12 @@ $config->db->prefix     = 'eps_';               // The prefix of the table name.
 /* Include my.php, domain.php and front or admin.php. */
 $configRoot   = dirname(__FILE__) . DIRECTORY_SEPARATOR;
 $myConfig     = $configRoot . 'my.php';
+$routeConfig  = $configRoot . 'route.php';
 $domainConfig = $configRoot . 'domain.php';
 $modeConfig   = $configRoot . RUN_MODE . '.php';
 
 if(file_exists($myConfig))     include $myConfig;
+if(file_exists($routeConfig))  include $routeConfig;
 if(file_exists($domainConfig)) include $domainConfig;
 if(file_exists($modeConfig))   include $modeConfig;
 
