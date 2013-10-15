@@ -572,7 +572,7 @@ class commonModel extends model
     public function printThread($board, $thread = '')
     {
         $this->printForum($board);
-        if($thread) echo '<li>' . html::a(inlink('view', "id=$thread->id"), $thread->title) . '</li>';
+        if($thread) echo '<li>' . $thread->title . '</li>';
     }
 
     /**

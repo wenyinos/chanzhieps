@@ -39,8 +39,9 @@ class threadModel extends model
      */
     public function getList($board, $orderBy, $pager = null)
     {
+        $board = $this->loadModel('tree')->getByID($board);
         $threads = $this->dao->select('*')->from(TABLE_THREAD)
-            ->where('board')->in($board)
+            ->where('board')->in($board->id)
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
