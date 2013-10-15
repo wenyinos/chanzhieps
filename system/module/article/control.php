@@ -41,7 +41,7 @@ class article extends control
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $category = $this->loadModel('tree')->getById($categoryID);
-        $articles = $this->article->getList($this->tree->getFamily($categoryID, $type), $orderBy, $pager);
+        $articles = $this->article->getList($type, $this->tree->getFamily($categoryID, $type), $orderBy, $pager);
 
         if($category)
         {
