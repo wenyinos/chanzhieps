@@ -44,7 +44,7 @@ $hotProducts   = $this->loadModel('product')->getHot(0, 8);
     <strong class='list-group-item list-group-title'><?php echo $lang->categoryMenu;?></strong>
     <?php
     foreach($topCategories as $topCategory){
-        $browseLink = $this->createLink('product', 'browse', "categoryID={$topCategory->id}");
+        $browseLink = $this->createLink('product', 'browse', "categoryID={$topCategory->id}", "category={$topCategory->alias}");
         if($category->name==$topCategory->name)
         {
             echo html::a($browseLink, "<i class='icon-folder-open-alt '></i>" . $topCategory->name, '', "id='category{$topCategory->id}' class='list-group-item active'");

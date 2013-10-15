@@ -26,14 +26,14 @@
   <?php foreach($products as $product):?>
   <div class="col-md-4">
     <div class='panel product-box'>
-      <?php echo html::a(helper::createLink('product', 'view', "id={$product->id}") , html::image($product->image->primary->smallURL), '', "class='thumbnail'");?>
+      <?php echo html::a(helper::createLink('product', 'view', "id={$product->id}", "name={$product->alias}") , html::image($product->image->primary->smallURL), '', "class='thumbnail'");?>
       <div class="caption">
         <h3><?php echo $product->name;?></h3>
         <p><?php echo $product->summary;?></p>
       </div>
       <div class="widget-footer">
         <p>
-          <?php echo html::a(helper::createLink('product', 'view', "id={$product->id}"), $lang->more, '', "class='btn btn-primary'");?>
+          <?php echo html::a(helper::createLink('product', 'view', "id={$product->id}", "name={$product->alias}"), $lang->more, '', "class='btn btn-primary'");?>
         </p>
       </div>
     </div>
@@ -53,10 +53,10 @@
     <div class="panel panel-default">
       <div class="panel-heading"><h3><?php echo $lang->index->news;?></h3></div>
       <div class="panel-body"><ul class='mg-zero pd-zero'>
-        <?php foreach($latestArticles as $id => $article): ?>
+        <?php foreach($latestArticles as $article): ?>
         <li>
             <i class='icon-chevron-right'></i>
-            <?php echo html::a($this->createLink('article','view', "id=$id"), $article, '', "class='latest-news' title='{$article}'");?>
+            <?php echo html::a($this->createLink('article','view', "id=$article->id", "name=$article->alias"), $article->title, '', "class='latest-news' title='{$article->title}'");?>
         </li>
         <?php endforeach;?>
       </ul></div>

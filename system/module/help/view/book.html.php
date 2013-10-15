@@ -33,7 +33,7 @@ include '../../common/view/header.html.php';
               {
                   foreach($articles[$category->id] as $article)
                   {
-                      echo "<dt class='article-title f-14px'>$category->i.$j " . ' ' . html::a(inlink('read', "article=$article->id"), $article->title) . "</dt>";
+                      echo "<dt class='article-title f-14px'>$category->i.$j " . ' ' . html::a(inlink('read', "article=$article->id", "name=$article->alias"), $article->title) . "</dt>";
                       $j ++;
                   }
               }
@@ -49,7 +49,7 @@ include '../../common/view/header.html.php';
                           echo "<dd><dl>";
                           foreach($articles[$child->id] as $article)
                           {
-                              echo "<dt class='article-title f-14px'>$category->i.$child->j.$k " . html::a(inlink('read', "article=$article->id"), $article->title) . "</dt>";
+                              echo "<dt class='article-title f-14px'>$category->i.$child->j.$k " . html::a(inlink('read', "article=$article->id", "name=$article->alias"), $article->title) . "</dt>";
                               $k ++;
                           }
                           echo "</dl></dd>";

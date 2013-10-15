@@ -15,6 +15,7 @@ $lang->product->id         = '编号';
 $lang->product->category   = '类目';
 $lang->product->categories = '类目';
 $lang->product->name       = '名称';
+$lang->product->alias      = '英文别名';
 $lang->product->brand      = '品牌';
 $lang->product->model      = '型号';
 $lang->product->color      = '颜色';

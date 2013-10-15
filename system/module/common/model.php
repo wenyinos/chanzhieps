@@ -469,7 +469,7 @@ class commonModel extends model
     {
         foreach($module->pathNames as $moduleID => $moduleName)
         {
-            echo '<li>' . html::a(inlink('browse', "moduleID=$moduleID"), $moduleName) . '</li>';
+            echo '<li>' . html::a(inlink('browse', "moduleID=$moduleID", "category=" . $this->loadModel('tree')->getAliasByID($moduleID)), $moduleName) . '</li>';
         }
         if($product) echo '<li>' . $product->name . '</li>';
     }
@@ -500,7 +500,7 @@ class commonModel extends model
 
         foreach($module->pathNames as $moduleID => $moduleName)
         {
-            echo '<li>' . html::a(inlink('browse', "moduleID=$moduleID"), $moduleName) . '</li>';
+            echo '<li>' . html::a(inlink('browse', "moduleID=$moduleID", "category=" . $this->loadModel('tree')->getAliasByID($moduleID)), $moduleName) . '</li>';
         }
         if($article) echo '<li>' . $article->title . '</li>';
     }
@@ -517,8 +517,8 @@ class commonModel extends model
     {
         $divider = $this->lang->divider;
         foreach($module->pathNames as $moduleID => $moduleName)
-        {
-            echo '<li>' . html::a(inlink('index', "moduleID=$moduleID"), $moduleName) . '</li>';
+        {   
+            echo '<li>' . html::a(inlink('index', "moduleID=$moduleID", "category=" . $this->loadModel('tree')->getAliasByID($moduleID)), $moduleName) . '</li>';
         }
         if($article) echo '<li>' . $article->title . '</li>';
     }
@@ -536,9 +536,9 @@ class commonModel extends model
         echo '<li>' . html::a(helper::createLink('help', 'book', "type=$category->code"), $category->book) . '</li>';
         foreach($category->pathNames as $categoryID => $categoryName)
         {
-            echo '<li>' . html::a(helper::createLink('help', 'book', "type=$category->code&categoryID=$categoryID"), $categoryName) . '</li>';
+            echo '<li>' . html::a(helper::createLink('help', 'book', "type=$category->code&categoryID=" . $this->loadMOdel('tree')->getAliasByID($categoryID) ), $categoryName) . '</li>';
         }
-        if($article) echo '<li>' . html::a(inlink('read', "id=$article->id"), $article->title) . '</li>';
+        if($article) echo '<li>' . $article->title . '</li>';
     }
 
     /**
@@ -557,7 +557,7 @@ class commonModel extends model
         unset($board->pathNames[key($board->pathNames)]);
         foreach($board->pathNames as $boardID => $boardName)
         {
-            echo '<li>' . html::a(helper::createLink('forum', 'board', "boardID=$boardID"), $boardName) . '</li>';
+            echo '<li>' . html::a(helper::createLink('forum', 'board', "boardID=" . $this->loadModel('tree')->getAliasByID($boardID)), $boardName) . '</li>';
         }
     }
 
@@ -595,9 +595,10 @@ class commonModel extends model
      * @param string       $module
      * @param string       $method
      * @param string|array $vars
+     * @param string|array $alias
      * return string 
      */
-    public static function createFrontLink($module, $method, $vars = '', $alias = array())
+    public static function createFrontLink($module, $method, $vars = '', $alias = '')
     {
         if(RUN_MODE == 'front') return helper::createLink($module, $method, $vars, $alias);
 

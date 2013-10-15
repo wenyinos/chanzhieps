@@ -36,7 +36,7 @@
       <td>
         <?php
         echo html::a($this->createLink('product', 'edit', "productID=$product->id"), $lang->edit);
-        echo html::a(commonModel::createFrontLink('product', 'view',  "productID=$product->id", $product->type), $lang->preview, '_blank');
+        echo html::a(commonModel::createFrontLink('product', 'view',  "productID=$product->id", "name=$product->alias"), $lang->preview, '_blank');
         echo html::a($this->createLink('file',    'browse', "objectType=product&objectID=$product->id"), $lang->product->files, '', "data-toggle='modal' data-width='1000'");
         echo html::a($this->createLink('product', 'delete', "productID=$product->id"), $lang->delete, '', 'class="deleter"');
         ?>
