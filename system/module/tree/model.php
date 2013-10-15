@@ -346,6 +346,7 @@ class treeModel extends model
     public function update($categoryID)
     {
         $category = fixer::input('post')->setDefault('readonly', 0)->specialChars('name')->get();
+        if($this->isAliasExists($category->alias, $categoryID)) return sprintf($this->lang->tree->aliasRepeat, $category->alias);
         $parent   = $this->getById($this->post->parent);
         $category->grade = $parent ? $parent->grade + 1 : 1;
 
@@ -405,14 +406,17 @@ class treeModel extends model
         $i = 1;
         foreach($children as $key => $categoryName)
         {
+            $alias = $this->post->alias[$key];
             if(empty($categoryName)) continue;
 
             $mode = $this->post->mode[$key];
 
             if($mode == 'new')
             {
+                if($this->isAliasExists($alias, 0)) return array('alias' => printf($this->lang->tree->aliasRepeat, $alias));
                 /* First, save the child without path field. */
                 $category->name  = $categoryName;
+                $category->alias = $alias;
                 $category->order = $this->post->maxOrder + $i * 10;
                 $this->dao->insert(TABLE_CATEGORY)->data($category)->exec();
 
@@ -430,14 +434,24 @@ class treeModel extends model
             else
             {
                 $categoryID = $key;
+                if($this->isAliasExists($alias, $categoryID)) return array('alias' => $this->lang->tree->aliasRepeat);
                 $this->dao->update(TABLE_CATEGORY)
                     ->set('name')->eq($categoryName)
+                    ->set('alias')->eq($alias)
                     ->where('id')->eq($categoryID)
                     ->exec();
             }
         }
 
         return !dao::isError();
+    }
+    
+    public function isAliasExists($alias, $category = 0)
+    {
+        if($alias == '') return true;
+        $count = $this->dao->select('count(*) as count')->from(TABLE_CATEGORY)
+            ->where('`alias`')->eq($alias)->andWhere('id')->ne($category)->andWhere('type')->in('article,product')->fetch('count');
+        return $count > 0;
     }
 
     /**
