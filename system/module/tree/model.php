@@ -16,17 +16,38 @@ class treeModel extends model
     /**
      * Get category info by id.
      * 
-     * @param  int      $categoryID 
+     * @param  int|string    $categoryID 
      * @access public
      * @return bool|object
      */
     public function getByID($categoryID)
     {
-        $category = $this->dao->findById((int)$categoryID)->from(TABLE_CATEGORY)->fetch();
+        if(is_numeric($categoryID))
+        {
+            $category = $this->dao->findById((int)$categoryID)->from(TABLE_CATEGORY)->fetch();
+        }
+        else
+        {
+            $category = $this->dao->select('*')->from(TABLE_CATEGORY)->where('alias')->eq($categoryID)->fetch();
+        }
         if(!$category) return false;
 
         $category->pathNames = $this->dao->select('id, name')->from(TABLE_CATEGORY)->where('id')->in($category->path)->orderBy('grade')->fetchPairs();
         return $category;
+    }
+
+    /**
+     * Get category alias by id.
+     * 
+     * @param  int      $categoryID 
+     * @access public
+     * @return string
+     */
+    public function getAliasByID($categoryID)
+    {
+        $category = $this->getByID($categoryID);   
+        if($category) return $category->alias;
+        return '';
     }
 
     /**
