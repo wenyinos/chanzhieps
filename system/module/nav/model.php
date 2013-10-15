@@ -94,7 +94,8 @@ class navModel extends model
         $entry .= html::hidden("nav[{$grade}][key][]", '', "class='input grade{$grade}key'"); 
 
         /* nav target select. */
-        $entry .= html::checkbox("nav[{$grade}][target]", $this->lang->nav->newWindow, $nav->target);
+        $entry .= html::checkbox("target", $this->lang->nav->newWindow, $nav->target);
+        $entry .= html::hidden("nav[{$grade}][target][]", $nav->target);
 
         /* operate buttons. */
         $entry .= html::a('javascript:;', $this->lang->nav->add, '', "class='plus{$grade}'");
