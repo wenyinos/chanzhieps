@@ -36,7 +36,7 @@ $themeRoot = $webRoot . "theme/";
   }
 
   if(RUN_MODE == 'admin') css::import($themeRoot . 'default/admin.css', $config->version);
-  if(isset($config->theme))css::import($themeRoot . $config->theme . '/style.css', $config->version);
+  css::import($themeRoot . $config->theme . '/style.css', $config->version);
   if(isset($pageCSS)) css::internal($pageCSS);
 
   echo html::icon($webRoot . 'favicon.ico');
