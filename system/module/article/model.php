@@ -131,14 +131,14 @@ class articleModel extends model
      */
     public function getLatest($categories, $count, $type = 'article')
     {
-        return $this->dao->select('t1.id, t1.title')
+        return $this->dao->select('t1.id, t1.title, t1.alias')
             ->from(TABLE_ARTICLE)->alias('t1')
             ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
             ->where('t2.type')->eq($type)
             ->beginIF($categories)->andWhere('t2.category')->in($categories)->fi()
             ->orderBy('id_desc')
             ->limit($count)
-            ->fetchPairs('id', 'title');
+            ->fetchAll('id');
     }
 
     /**
@@ -267,7 +267,7 @@ class articleModel extends model
             $method = 'view';
         }
 
-        return commonModel::createFrontLink($module, $method, "articleID=$articleID");
+        return commonModel::createFrontLink($module, $method, "articleID=$articleID", "name=$article->alias");
     }
 
     /**
