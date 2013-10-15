@@ -84,7 +84,7 @@ js::import($jsRoot . 'respond/min.js');
       foreach($navs as $nav)
       {
         $class= $nav->id == $category->id ? "class='active'" : "";
-        echo "<li {$class}>" . html::a($this->inlink('index', "id={$nav->id}"), $nav->name) . '</li>';
+        echo "<li {$class}>" . html::a($this->inlink('index', "id={$nav->id}", "category={$nav->alias}"), $nav->name) . '</li>';
       }
       ?>
       <li class="pull-right">
