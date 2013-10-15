@@ -15,6 +15,7 @@ $lang->article->id         = 'Id';
 $lang->article->category   = 'Categories';
 $lang->article->categories = 'Categories';
 $lang->article->title      = 'Title';
+$lang->article->alias      = 'English alias';
 $lang->article->content    = 'Content';
 $lang->article->original   = 'Original';
 $lang->article->copySite   = 'Site';
