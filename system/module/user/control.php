@@ -289,17 +289,10 @@ class user extends control
      * @access public
      * @return void
      */
-    public function delete($userID, $confirm = 'no')
+    public function delete($account)
     {
-        if($confirm == 'no')
-        {
-            die(js::confirm($this->lang->user->confirmDelete, $this->createLink('user', 'delete', "userID=$userID&confirm=yes")));
-        }
-        else
-        {
-            $this->user->delete(TABLE_USER, $userID);
-            die(js::locate($this->createLink('company', 'browse'), 'parent'));
-        }
+        if($this->user->delete($account)) $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
 
     /**

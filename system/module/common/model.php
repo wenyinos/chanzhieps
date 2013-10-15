@@ -67,7 +67,7 @@ class commonModel extends model
      */
     public function startSession()
     {
-        $sessionName = RUN_MODE == 'front' ? 'frontsid' : 'adminsid';
+        $sessionName = $this->config->sessionVar;
         session_name($sessionName);
         if(!isset($_SESSION)) session_start();
     }
@@ -125,10 +125,10 @@ class commonModel extends model
      * 
      * @param mixed $module     the module
      * @param mixed $method     the method
-     * @access private
+     * @access public
      * @return void
      */
-    private function deny($module, $method)
+    public function deny($module, $method)
     {
         $vars = "module=$module&method=$method";
         if(isset($_SERVER['HTTP_REFERER']))
