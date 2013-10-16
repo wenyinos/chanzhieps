@@ -66,14 +66,14 @@ class product extends control
 
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
-
-        $families = $this->loadModel('tree')->getFamily($categoryID, 'product');
+        
+        $families = '';
+        if($categoryID) $families = $this->loadModel('tree')->getFamily($categoryID, 'product');
         $products = $families ? $this->product->getList($families, $orderBy, $pager) : array();
 
         $this->view->title    = $this->lang->product->admin;
         $this->view->products = $products;
         $this->view->pager    = $pager;
-        $this->view->category = $this->tree->getById($categoryID);
         $this->view->type     = $type;
         $this->display();
     }   

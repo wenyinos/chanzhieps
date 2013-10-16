@@ -111,6 +111,15 @@ $(document).ready(function()
     
     $.setAjaxForm('#navForm',function(data){ bootbox.alert(data.message);});
 
+    /* Set target value. */
+    $(document).on('change', 'input[type=checkbox]', function()
+    { 
+        $('input[type=checkbox]').parent().next('input[type=hidden]').val('');
+        $('input:checked').parent().next('input[type=hidden]').val('_blank');
+    });
+
+    
+
 });
 
 /**

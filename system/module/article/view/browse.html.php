@@ -15,7 +15,7 @@ include '../../common/view/treeview.html.php';
       <?php foreach($articles as $article):?>
         <li class="media">
           <div class='media-body'>
-            <h3 class='media-heading'><?php echo html::a(inlink('view', "id=$article->id&currentCategory={$category->id}"), $article->title);?></h3>
+            <h3 class='media-heading'><?php echo html::a(inlink('view', "id=$article->id&currentCategory={$category->id}", "name=$article->alias"), $article->title);?></h3>
             <p>
               <?php 
               if(!empty($article->image))

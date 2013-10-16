@@ -1,5 +1,5 @@
 <?php
-$lang->help->common       = '在线帮助系统';
+$lang->help->common       = '在线帮助';
 $lang->help->books        = '手册列表';
 $lang->help->articles     = '文档导航';
 $lang->help->backtobooks  = '返回手册列表';

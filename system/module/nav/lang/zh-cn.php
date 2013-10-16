@@ -36,4 +36,4 @@ $lang->nav->system->help     = '帮助';
 
 /* Targets setting. */
 $lang->nav->newWindow = new stdclass();
-$lang->nav->newWindow->_blank = '新窗口打开';
+$lang->nav->newWindow->_blank = '新开窗口';

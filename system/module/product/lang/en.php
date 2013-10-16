@@ -15,6 +15,7 @@ $lang->product->id         = 'Id';
 $lang->product->category   = 'Category';
 $lang->product->categories = 'Categories';
 $lang->product->name       = 'Name';
+$lang->product->alias      = 'English alias';
 $lang->product->brand      = 'Brand';
 $lang->product->model      = 'Model';
 $lang->product->color      = 'Color';

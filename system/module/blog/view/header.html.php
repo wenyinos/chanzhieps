@@ -22,6 +22,7 @@ $navs = $this->tree->getChildren(0, 'blog');
 <head>
   <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <?php
   if(!isset($title))    $title    = ''; 
   if(!empty($title))    $title   .= $lang->minus;
@@ -84,7 +85,7 @@ js::import($jsRoot . 'respond/min.js');
       foreach($navs as $nav)
       {
         $class= $nav->id == $category->id ? "class='active'" : "";
-        echo "<li {$class}>" . html::a($this->inlink('index', "id={$nav->id}"), $nav->name) . '</li>';
+        echo "<li {$class}>" . html::a($this->inlink('index', "id={$nav->id}", "category={$nav->alias}"), $nav->name) . '</li>';
       }
       ?>
       <li class="pull-right">

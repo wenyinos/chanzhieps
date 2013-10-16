@@ -27,6 +27,7 @@ class help extends control
     public function admin()
     {
         $this->view->books = $this->help->getBookList();
+        $this->view->title = $this->lang->help->common;
         $this->display();
     }
 
@@ -110,7 +111,7 @@ class help extends control
             ->beginIF($categoryID != 0)->andWhere('path')->like("%,$categoryID,%")->fi()
             ->orderBy('grade, `order`')->fetchAll('id');
 
-        $articles = $this->dao->select('t1.id, title, t2.category')->from(TABLE_ARTICLE)
+        $articles = $this->dao->select('t1.id, title, alias, t2.category')->from(TABLE_ARTICLE)
             ->alias('t1')->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
             ->where('category')->in(array_keys($categories))
             ->orderBy('t1.order')

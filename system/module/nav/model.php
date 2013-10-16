@@ -94,7 +94,8 @@ class navModel extends model
         $entry .= html::hidden("nav[{$grade}][key][]", '', "class='input grade{$grade}key'"); 
 
         /* nav target select. */
-        $entry .= html::checkbox("nav[{$grade}][target]", $this->lang->nav->newWindow, $nav->target);
+        $entry .= html::checkbox("target", $this->lang->nav->newWindow, $nav->target);
+        $entry .= html::hidden("nav[{$grade}][target][]", $nav->target);
 
         /* operate buttons. */
         $entry .= html::a('javascript:;', $this->lang->nav->add, '', "class='plus{$grade}'");
@@ -170,9 +171,16 @@ class navModel extends model
         global $config;
 
         if($nav['type'] == 'system')  return $config->nav->system->$nav['system'];   
-        if($nav['type'] == 'article') return commonModel::createFrontLink('article', 'browse', "categoryID={$nav['article']}");
-        if($nav['type'] == 'product') return commonModel::createFrontLink('product', 'browse', "categoryID={$nav['product']}");
-
+        if($nav['type'] == 'article')
+        {   
+            $category = $this->loadModel('tree')->getByID($nav['article']);
+            return commonModel::createFrontLink('article', 'browse', "categoryID={$nav['article']}", "category={$category->alias}");
+        }
+        if($nav['type'] == 'product')
+        {
+            $category = $this->loadModel('tree')->getByID($nav['product']);
+            return commonModel::createFrontLink('product', 'browse', "categoryID={$nav['product']}", "category={$category->alias}");
+        }
         return $nav['url'];
     }
 }

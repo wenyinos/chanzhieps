@@ -16,17 +16,38 @@ class treeModel extends model
     /**
      * Get category info by id.
      * 
-     * @param  int      $categoryID 
+     * @param  int|string    $categoryID 
      * @access public
      * @return bool|object
      */
     public function getByID($categoryID)
     {
-        $category = $this->dao->findById((int)$categoryID)->from(TABLE_CATEGORY)->fetch();
+        if(is_numeric($categoryID))
+        {
+            $category = $this->dao->findById((int)$categoryID)->from(TABLE_CATEGORY)->fetch();
+        }
+        else
+        {
+            $category = $this->dao->select('*')->from(TABLE_CATEGORY)->where('alias')->eq($categoryID)->fetch();
+        }
         if(!$category) return false;
 
         $category->pathNames = $this->dao->select('id, name')->from(TABLE_CATEGORY)->where('id')->in($category->path)->orderBy('grade')->fetchPairs();
         return $category;
+    }
+
+    /**
+     * Get category alias by id.
+     * 
+     * @param  int      $categoryID 
+     * @access public
+     * @return string
+     */
+    public function getAliasByID($categoryID)
+    {
+        $category = $this->getByID($categoryID);   
+        if($category) return $category->alias;
+        return "c$categoryID";
     }
 
     /**
@@ -297,7 +318,7 @@ class treeModel extends model
      */
     public static function createBlogBrowseLink($category)
     {
-        $linkHtml = html::a(helper::createLink('blog', 'index', "categoryID={$category->id}"), $category->name, '', "id='category{$category->id}'");
+        $linkHtml = html::a(helper::createLink('blog', 'index', "category={$category->id}", "category={$category->alias}"), $category->name, '', "id='category{$category->id}'");
         return $linkHtml;
     }
 
@@ -346,6 +367,7 @@ class treeModel extends model
     public function update($categoryID)
     {
         $category = fixer::input('post')->setDefault('readonly', 0)->specialChars('name')->get();
+        if($this->isAliasExists($category->alias, $categoryID)) return sprintf($this->lang->tree->aliasRepeat, $category->alias);
         $parent   = $this->getById($this->post->parent);
         $category->grade = $parent ? $parent->grade + 1 : 1;
 
@@ -405,14 +427,17 @@ class treeModel extends model
         $i = 1;
         foreach($children as $key => $categoryName)
         {
+            $alias = $this->post->alias[$key];
             if(empty($categoryName)) continue;
 
             $mode = $this->post->mode[$key];
 
             if($mode == 'new')
             {
+                if($this->isAliasExists($alias, 0)) return array('alias' => printf($this->lang->tree->aliasRepeat, $alias));
                 /* First, save the child without path field. */
                 $category->name  = $categoryName;
+                $category->alias = $alias;
                 $category->order = $this->post->maxOrder + $i * 10;
                 $this->dao->insert(TABLE_CATEGORY)->data($category)->exec();
 
@@ -430,14 +455,24 @@ class treeModel extends model
             else
             {
                 $categoryID = $key;
+                if($this->isAliasExists($alias, $categoryID)) return array('alias' => $this->lang->tree->aliasRepeat);
                 $this->dao->update(TABLE_CATEGORY)
                     ->set('name')->eq($categoryName)
+                    ->set('alias')->eq($alias)
                     ->where('id')->eq($categoryID)
                     ->exec();
             }
         }
 
         return !dao::isError();
+    }
+    
+    public function isAliasExists($alias, $category = 0)
+    {
+        if($alias == '') return true;
+        $count = $this->dao->select('count(*) as count')->from(TABLE_CATEGORY)
+            ->where('`alias`')->eq($alias)->andWhere('id')->ne($category)->andWhere('type')->in('article,product')->fetch('count');
+        return $count > 0;
     }
 
     /**

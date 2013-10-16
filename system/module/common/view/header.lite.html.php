@@ -9,6 +9,7 @@ $themeRoot = $webRoot . "theme/";
 <head>
   <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <?php
   if(!isset($title))    $title    = '';
   if(!empty($title))    $title   .= $lang->minus;
@@ -36,7 +37,7 @@ $themeRoot = $webRoot . "theme/";
   }
 
   if(RUN_MODE == 'admin') css::import($themeRoot . 'default/admin.css', $config->version);
-  if(isset($config->theme))css::import($themeRoot . $config->theme . '/style.css', $config->version);
+  css::import($themeRoot . $config->theme . '/style.css', $config->version);
   if(isset($pageCSS)) css::internal($pageCSS);
 
   echo html::icon($webRoot . 'favicon.ico');

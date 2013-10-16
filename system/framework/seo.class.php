@@ -1,10 +1,23 @@
 <?php
+/**
+ * The seo and uri class file
+ *
+ * The author disclaims copyright to this source code.  In place of
+ * a legal notice, here is a blessing:
+ *
+ *  May you do good and not evil.
+ *  May you find forgiveness for yourself and forgive others.
+ *  May you share freely, never taking more than you give.
+ */
+?>
+<?php
 class seo
 {
     /**
      * parse SEO URI for setRouteByPathInfo 
      *
-     * return void
+     * @param uri
+     * return string
      */
     public static function parseURI($uri)
     {
@@ -97,6 +110,9 @@ class seo
         /* The first param is a category alias. */
         $params['category'] = $items[1]; 
         $method = $methodAlias[$module]['browse'];
+
+        /* help booke add -bookName to method*/
+        if($module == 'help' && $book) $method .= '-' . $book;
         return seo::convertURI($module, $method, $params, $pageID);
 
     }
@@ -164,7 +180,7 @@ class uri
     {
         global $config;
         $link = 'product/c' . array_shift($params);
-        if($alias['categoryID']) $link = $alias['category'];
+        if($alias['category']) $link = $alias['category'];
         return $config->webRoot . $link . '.' . $config->default->view;
     }
 
@@ -198,12 +214,10 @@ class uri
         $link = 'forum/';
         if($alias['category'])
         {
-            global $config;
             $link .= $alias['category'];
         }
         else
         {
-            global $config;
             $link .= 'c' . array_shift($params);
         }
         return $config->webRoot . $link . '.' . $config->default->view;
@@ -235,13 +249,18 @@ class uri
         $link = 'blog/';
         if($alias['category'])
         {
-            global $config;
             $link .= $alias['category'];
         }
         else
         {
-            global $config;
-            $link .= 'c' . array_shift($params);
+            if(empty($param)) 
+            {
+                $link .= 'c0';
+            }
+            else
+            {
+                $link .= 'c' . array_shift($params);
+            }
         }
         return $config->webRoot . $link . '.' . $config->default->view;
     }
@@ -274,7 +293,6 @@ class uri
         $link = 'help/' . array_shift($params);
         if(count($params) > 0)
         {
-            global $config;
             $category = array_shift($params);
             if(is_numeric($category)) $category = 'c' . $category;
             $link .= $config->webRoot . $category;

@@ -77,6 +77,7 @@ class comment extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
+        $this->view->title       = $this->lang->comment->common;
         $this->view->comments    = $this->comment->getList($status, $pager);
         $this->view->pager       = $pager;
         $this->view->status      = $status;

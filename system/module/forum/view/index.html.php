@@ -22,7 +22,7 @@
           <tr valign='middle' class='a-center'>
             <td class='w-20px'><?php echo $this->forum->isNew($childBoard) ? "<span class='new-board'><i class='icon-comment icon-large'></i></span>" : "<span class='common-board'><i class='icon-comment icon-large'></i></span>"; ?></td>
             <td class='a-left'>
-              <strong><?php echo html::a(inlink('board', "id=$childBoard->id"), $childBoard->name);?></strong><br />
+              <strong><?php echo html::a(inlink('board', "id=$childBoard->id", "category={$childBoard->alias}"), $childBoard->name);?></strong><br />
               <i><?php echo $childBoard->desc;?></i>
             </td>
             <td class='w-50px strong'><nobr><?php echo trim($childBoard->moderators, ',');?></nobr></td>

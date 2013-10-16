@@ -19,13 +19,15 @@
         foreach($children as $child)
         {
             if($child->order > $maxOrder) $maxOrder = $child->order;
-            echo '<p>' . html::input("children[$child->id]", $child->name) . '</p>';
+            echo '<p>' . html::input("children[$child->id]", $child->name);
+            echo html::input("alias[$child->id]", $child->alias) . '</p>';
             echo html::hidden("mode[$child->id]", 'update');
         }
 
         for($i = 0; $i < TREE::NEW_CHILD_COUNT ; $i ++)
         {
-            echo '<p>' . html::input("children[]") . '</p>';
+            echo '<p>' . html::input("children[]", '', "placeholder='{$this->lang->category->name}'");
+            echo html::input("alias[]", '', "placeholder='{$this->lang->category->alias}'") . '</p>';
             echo html::hidden('mode[]', 'new');
         }
 
