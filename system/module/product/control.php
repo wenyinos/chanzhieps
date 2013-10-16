@@ -32,6 +32,7 @@ class product extends control
             $title    = $category->name;
             $keywords = trim($category->keyword . ' ' . $this->config->site->keywords);
             $desc     = strip_tags($category->desc);
+            $this->session->set('productCategory', $category->id);
         }
 
         $this->view->title     = $title;
@@ -136,17 +137,18 @@ class product extends control
      * View a product.
      * 
      * @param int $productID 
-     * @param int $currentCategory 
      * @access public
      * @return void
      */
-    public function view($productID, $currentCategory = 0)
+    public function view($productID)
     {
-        $product  = $this->product->getById($productID);
+        $product = $this->product->getById($productID);
 
         /* fetch first category for display. */
         $category = array_slice($product->categories, 0, 1);
         $category = $category[0]->id;
+
+        $currentCategory = $this->session->productCategory;
         if($currentCategory > 0 && isset($product->categories[$currentCategory])) $category = $currentCategory;  
         $category = $this->loadModel('tree')->getById($category);
 
