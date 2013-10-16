@@ -291,8 +291,9 @@ class installModel extends model
             {
                 $table = str_replace('--', '', $table);
             }
-            $table = str_replace('`xr_', $this->config->db->name . '.`xr_', $table);
-            $table = str_replace('xr_', $this->config->db->prefix, $table);
+            $table = str_replace('eps_', $this->config->db->prefix, $table);
+            $table = str_replace('`' . $this->config->db->prefix, $this->config->db->name . '.`' . $this->config->db->prefix, $table);
+
             if(!$this->dbh->query($table)) return false;
         }
         return true;
