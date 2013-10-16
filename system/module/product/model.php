@@ -68,6 +68,7 @@ class productModel extends model
             ->groupBy('t2.id')
             ->orderBy($orderBy)
             ->page($pager)
+            //->printSQL();
             ->fetchAll('id');
         if(!$products) return array();
 
@@ -75,7 +76,7 @@ class productModel extends model
         $categories = $this->dao->select('t2.id, t2.name, t1.id AS product')
             ->from(TABLE_RELATION)->alias('t1')
             ->leftJoin(TABLE_CATEGORY)->alias('t2')->on('t1.category = t2.id')
-            ->where('1 = 1')
+            ->where('t2.type')->eq('product')
             ->beginIF($categories)->andWhere('t1.category')->in($categories)->fi()
             ->fetchGroup('product', 'id');
 
