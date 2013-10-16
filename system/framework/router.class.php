@@ -1189,8 +1189,6 @@ class router
      */
     public function setParamsByPathInfo($defaultParams = array())
     {
-        /* set Param of seo URI */
-        
         /* Spit the URI. */
         $items     = explode('-', $this->URI);
         $itemCount = count($items);
