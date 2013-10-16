@@ -28,20 +28,17 @@ class article extends control
      * Browse article in front.
      * 
      * @param int    $categoryID   the category id
-     * @param string $orderBy      the order by
-     * @param int    $recTotal     record total
-     * @param int    $recPerPage   record per page
      * @param int    $pageID       current page id
      * @access public
      * @return void
      */
-    public function browse($categoryID = 0, $type = '', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function browse($categoryID = 0, $pageID = 1)
     {   
+        $type = 'article';
         $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal, $recPerPage, $pageID);
-
+        $pager = new pager($recTotal = 0, $recPerPage = 4, $pageID);
         $category = $this->loadModel('tree')->getById($categoryID);
-        $articles = $this->article->getList($type, $this->tree->getFamily($categoryID, $type), $orderBy, $pager);
+        $articles = $this->article->getList($type, $this->tree->getFamily($categoryID, $type), 'id_desc', $pager);
 
         if($category)
         {
