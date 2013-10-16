@@ -73,7 +73,7 @@ class productModel extends model
         if(!$products) return array();
 
         /* Get categories for these products. */
-        $categories = $this->dao->select('t2.id, t2.name, t1.id AS product')
+        $categories = $this->dao->select('t2.id, t2.name, t2.alias, t1.id AS product')
             ->from(TABLE_RELATION)->alias('t1')
             ->leftJoin(TABLE_CATEGORY)->alias('t2')->on('t1.category = t2.id')
             ->where('t2.type')->eq('product')

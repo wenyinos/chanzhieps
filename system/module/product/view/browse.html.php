@@ -29,15 +29,15 @@ include '../../common/view/treeview.html.php';
         $title = $product->image->primary->title ? $product->image->primary->title : $product->name;
         if(empty($product->image)) 
         {
-            echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&namename=$product->alias"), html::image($themeRoot . 'default/images/main/noimage.gif', "title='{$title}' class='adaptive'"), '', "class='media-image'");
+            echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&name=$product->alias"), html::image($themeRoot . 'default/images/main/noimage.gif', "title='{$title}' class='adaptive'"), '', "class='media-image'");
         }
         else
         {
-            echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&namename=$product->alias"), html::image($product->image->primary->smallURL, "title='{$title}' class='adaptive' alt='{$product->name}'"), '', "class='media-image'");
+            echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&name=$product->alias"), html::image($product->image->primary->smallURL, "title='{$title}' class='adaptive' alt='{$product->name}'"), '', "class='media-image'");
         }
         ?>
         <div class='media-body'>
-          <h5 class='media-heading'><?php echo html::a(inlink('view', "id={$product->id}", "category={$category->alias}&namename=$product->alias"), $product->name);?></h5>
+          <h5 class='media-heading'><?php echo html::a(inlink('view', "id={$product->id}", "category={$category->alias}&name=$product->alias"), $product->name);?></h5>
           <?php if($product->promotion != 0 && $product->price != 0):?>
           <p>
             <del><?php echo $lang->RMB . $product->price;?></del>
