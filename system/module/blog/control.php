@@ -35,6 +35,7 @@ class blog extends control
             $title    = $category->name;
             $keywords = trim($category->keyword . ' ' . $this->config->site->keywords);
             $desc     = strip_tags($category->desc);
+            $this->session->set('articleCategory', $category->id);
         }
 
         $this->view->title     = $title;
@@ -64,6 +65,8 @@ class blog extends control
         /* fetch category for display. */
         $category = array_slice($article->categories, 0, 1);
         $category = $category[0]->id;
+
+        $currentCategory = $this->session->articleCategory;
         if($currentCategory > 0 && isset($article->categories[$currentCategory])) $category = $currentCategory;  
         $category = $this->loadModel('tree')->getById($category);
 

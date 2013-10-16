@@ -15,26 +15,24 @@ class product extends control
      * Browse product in front.
      * 
      * @param int    $categoryID   the category id
-     * @param string $orderBy      the order by
-     * @param int    $recTotal     record total
-     * @param int    $recPerPage   record per page
      * @param int    $pageID       current page id
      * @access public
      * @return void
      */
-    public function browse($categoryID = 0, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
-    {   
+    public function browse($categoryID = 0, $pageID = 1)
+    {  
         $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal, $recPerPage, $pageID);
+        $pager = new pager(0, 15, $pageID);
 
         $category = $this->loadModel('tree')->getById($categoryID);
-        $products = $this->product->getList($this->tree->getFamily($categoryID), $orderBy, $pager);
+        $products = $this->product->getList($this->tree->getFamily($categoryID), 'id_desc', $pager);
 
         if($category)
         {
             $title    = $category->name;
             $keywords = trim($category->keyword . ' ' . $this->config->site->keywords);
             $desc     = strip_tags($category->desc);
+            $this->session->set('productCategory', $category->id);
         }
 
         $this->view->title     = $title;
@@ -69,7 +67,7 @@ class product extends control
         
         $families = '';
         if($categoryID) $families = $this->loadModel('tree')->getFamily($categoryID, 'product');
-        $products = $families ? $this->product->getList($families, $orderBy, $pager) : array();
+        $products = $this->product->getList($families, $orderBy, $pager);
 
         $this->view->title    = $this->lang->product->admin;
         $this->view->products = $products;
@@ -139,17 +137,18 @@ class product extends control
      * View a product.
      * 
      * @param int $productID 
-     * @param int $currentCategory 
      * @access public
      * @return void
      */
-    public function view($productID, $currentCategory = 0)
+    public function view($productID)
     {
-        $product  = $this->product->getById($productID);
+        $product = $this->product->getById($productID);
 
         /* fetch first category for display. */
         $category = array_slice($product->categories, 0, 1);
         $category = $category[0]->id;
+
+        $currentCategory = $this->session->productCategory;
         if($currentCategory > 0 && isset($product->categories[$currentCategory])) $category = $currentCategory;  
         $category = $this->loadModel('tree')->getById($category);
 
