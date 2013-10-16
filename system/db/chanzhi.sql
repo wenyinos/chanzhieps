@@ -1,5 +1,5 @@
--- DROP TABLE IF EXISTS `xr_product`;
-CREATE TABLE IF NOT EXISTS `xr_product` (
+-- DROP TABLE IF EXISTS `eps_product`;
+CREATE TABLE IF NOT EXISTS `eps_product` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(150) NOT NULL,
   `brand` varchar(100) DEFAULT NULL,
@@ -27,8 +27,8 @@ CREATE TABLE IF NOT EXISTS `xr_product` (
   KEY `sticky` (`sticky`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
--- DROP TABLE IF EXISTS `xr_article`;
-CREATE TABLE IF NOT EXISTS `xr_article` (
+-- DROP TABLE IF EXISTS `eps_article`;
+CREATE TABLE IF NOT EXISTS `eps_article` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(150) NOT NULL,
   `keywords` varchar(150) NOT NULL,
@@ -52,8 +52,8 @@ CREATE TABLE IF NOT EXISTS `xr_article` (
   KEY `sticky` (`sticky`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
--- DROP TABLE IF EXISTS `xr_block`;
-CREATE TABLE IF NOT EXISTS `xr_block` (
+-- DROP TABLE IF EXISTS `eps_block`;
+CREATE TABLE IF NOT EXISTS `eps_block` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `type` varchar(10) NOT NULL,
   `title` varchar(60) NOT NULL,
@@ -61,8 +61,8 @@ CREATE TABLE IF NOT EXISTS `xr_block` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- DROP TABLE IF EXISTS `xr_category`;
-CREATE TABLE IF NOT EXISTS `xr_category` (
+-- DROP TABLE IF EXISTS `eps_category`;
+CREATE TABLE IF NOT EXISTS `eps_category` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `name` char(30) NOT NULL DEFAULT '',
   `desc` varchar(150) NOT NULL,
@@ -88,8 +88,8 @@ CREATE TABLE IF NOT EXISTS `xr_category` (
   KEY `path` (`path`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
--- DROP TABLE IF EXISTS `xr_comment`;
-CREATE TABLE IF NOT EXISTS `xr_comment` (
+-- DROP TABLE IF EXISTS `eps_comment`;
+CREATE TABLE IF NOT EXISTS `eps_comment` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `objectType` varchar(30) NOT NULL DEFAULT '',
   `objectID` mediumint(8) unsigned NOT NULL DEFAULT '0',
@@ -104,8 +104,8 @@ CREATE TABLE IF NOT EXISTS `xr_comment` (
   KEY `object` (`objectType`,`objectID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
--- DROP TABLE IF EXISTS `xr_config`;
-CREATE TABLE IF NOT EXISTS `xr_config` (
+-- DROP TABLE IF EXISTS `eps_config`;
+CREATE TABLE IF NOT EXISTS `eps_config` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `owner` char(30) NOT NULL DEFAULT '',
   `module` varchar(30) NOT NULL,
@@ -116,8 +116,8 @@ CREATE TABLE IF NOT EXISTS `xr_config` (
   UNIQUE KEY `unique` (`owner`,`module`,`section`,`key`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
--- DROP TABLE IF EXISTS `xr_down`;
-CREATE TABLE IF NOT EXISTS `xr_down` (
+-- DROP TABLE IF EXISTS `eps_down`;
+CREATE TABLE IF NOT EXISTS `eps_down` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `account` char(30) DEFAULT NULL,
   `file` mediumint(5) DEFAULT NULL,
@@ -128,8 +128,8 @@ CREATE TABLE IF NOT EXISTS `xr_down` (
   KEY `fileID` (`file`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- DROP TABLE IF EXISTS `xr_file`;
-CREATE TABLE IF NOT EXISTS `xr_file` (
+-- DROP TABLE IF EXISTS `eps_file`;
+CREATE TABLE IF NOT EXISTS `eps_file` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `pathname` char(50) NOT NULL,
   `title` char(90) NOT NULL,
@@ -147,16 +147,16 @@ CREATE TABLE IF NOT EXISTS `xr_file` (
   KEY `object` (`objectType`,`objectID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
--- DROP TABLE IF EXISTS `xr_layout`;
-CREATE TABLE IF NOT EXISTS `xr_layout` (
+-- DROP TABLE IF EXISTS `eps_layout`;
+CREATE TABLE IF NOT EXISTS `eps_layout` (
   `page` varchar(30) NOT NULL,
   `region` varchar(30) NOT NULL,
   `blocks` varchar(255) NOT NULL,
   UNIQUE KEY `layout` (`page`,`region`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- DROP TABLE IF EXISTS `xr_message`;
-CREATE TABLE IF NOT EXISTS `xr_message` (
+-- DROP TABLE IF EXISTS `eps_message`;
+CREATE TABLE IF NOT EXISTS `eps_message` (
   `id` mediumint(8) NOT NULL AUTO_INCREMENT,
   `from` char(30) NOT NULL DEFAULT 'system',
   `to` char(30) NOT NULL,
@@ -169,8 +169,8 @@ CREATE TABLE IF NOT EXISTS `xr_message` (
   KEY `to` (`to`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- DROP TABLE IF EXISTS `xr_relation`;
-CREATE TABLE IF NOT EXISTS `xr_relation` (
+-- DROP TABLE IF EXISTS `eps_relation`;
+CREATE TABLE IF NOT EXISTS `eps_relation` (
   `type` char(20) NOT NULL,
   `book` varchar(30) NOT NULL,
   `id` mediumint(9) NOT NULL,
@@ -178,8 +178,8 @@ CREATE TABLE IF NOT EXISTS `xr_relation` (
   UNIQUE KEY `relation` (`type`,`id`,`category`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- DROP TABLE IF EXISTS `xr_reply`;
-CREATE TABLE IF NOT EXISTS `xr_reply` (
+-- DROP TABLE IF EXISTS `eps_reply`;
+CREATE TABLE IF NOT EXISTS `eps_reply` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `thread` mediumint(8) unsigned NOT NULL,
   `content` text NOT NULL,
@@ -193,8 +193,8 @@ CREATE TABLE IF NOT EXISTS `xr_reply` (
   KEY `author` (`author`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
--- DROP TABLE IF EXISTS `xr_thread`;
-CREATE TABLE IF NOT EXISTS `xr_thread` (
+-- DROP TABLE IF EXISTS `eps_thread`;
+CREATE TABLE IF NOT EXISTS `eps_thread` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `board` mediumint(9) NOT NULL,
   `title` varchar(255) NOT NULL,
@@ -215,8 +215,8 @@ CREATE TABLE IF NOT EXISTS `xr_thread` (
   KEY `category` (`board`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
--- DROP TABLE IF EXISTS `xr_user`;
-CREATE TABLE IF NOT EXISTS `xr_user` (
+-- DROP TABLE IF EXISTS `eps_user`;
+CREATE TABLE IF NOT EXISTS `eps_user` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `account` char(30) NOT NULL DEFAULT '',
   `password` char(32) NOT NULL DEFAULT '',
