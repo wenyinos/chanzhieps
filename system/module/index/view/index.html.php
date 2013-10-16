@@ -24,16 +24,20 @@
 <?php if(count($products) >= 3):?>
 <div class='row'>
   <?php foreach($products as $product):?>
+  <?php 
+  $category = array_shift($product->categories);
+  $url = helper::createLink('product', 'view', "id={$product->id}", "category={$category->alias}&name={$product->alias}");
+  ?>
   <div class="col-md-4">
     <div class='panel product-box'>
-      <?php echo html::a(helper::createLink('product', 'view', "id={$product->id}", "name={$product->alias}") , html::image($product->image->primary->smallURL), '', "class='thumbnail'");?>
+      <?php echo html::a($url, html::image($product->image->primary->smallURL), '', "class='thumbnail'");?>
       <div class="caption">
-        <h3><?php echo $product->name;?></h3>
+        <h3><?php echo html::a($url, $product->name);?></h3>
         <p><?php echo $product->summary;?></p>
       </div>
       <div class="widget-footer">
         <p>
-          <?php echo html::a(helper::createLink('product', 'view', "id={$product->id}", "name={$product->alias}"), $lang->more, '', "class='btn btn-primary'");?>
+          <?php echo html::a($url, $lang->more, '', "class='btn btn-primary'");?>
         </p>
       </div>
     </div>
@@ -54,9 +58,13 @@
       <div class="panel-heading"><h3><?php echo $lang->index->news;?></h3></div>
       <div class="panel-body"><ul class='mg-zero pd-zero'>
         <?php foreach($latestArticles as $article): ?>
+        <?php 
+        $category = array_shift($article->categories);
+        $url = helper::createLink('article', 'view', "id={$article->id}", "category={$category->alias}&name={$article->alias}");
+        ?>
         <li>
             <i class='icon-chevron-right'></i>
-            <?php echo html::a($this->createLink('article','view', "id=$article->id", "name=$article->alias"), $article->title, '', "class='latest-news' title='{$article->title}'");?>
+            <?php echo html::a($url, $article->title, '', "class='latest-news' title='{$article->title}'");?>
         </li>
         <?php endforeach;?>
       </ul></div>

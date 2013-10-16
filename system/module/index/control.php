@@ -25,13 +25,10 @@ class index extends control
     /**
      * The index page of whole site.
      * 
-     * @param int $recTotal     the total number of records
-     * @param int $recPerPage   the number of records per page
-     * @param int $pageID       current page id
      * @access public
      * @return void
      */
-    public function index($recTotal = 0, $recPerPage = 0, $pageID = 1)
+    public function index()
     {
         $this->loadModel('article');
         $this->app->loadLang('user');
