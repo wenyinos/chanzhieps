@@ -35,7 +35,7 @@ $navs = $this->tree->getChildren(0, 'blog');
 
   css::import($themeRoot . 'bootstrap/css/core.min.css');
   css::import($themeRoot . 'default/blog.css');
-  css::import($themeRoot . $config->theme . '/blog.css');
+  css::import($themeRoot . $config->site->theme . '/blog.css');
 
   js::exportConfigVars();
   if($config->debug)

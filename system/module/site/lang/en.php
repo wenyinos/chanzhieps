@@ -25,5 +25,11 @@ $lang->site->setBasic     = "Baisc";
 $lang->site->setLogo      = "Log";
 $lang->site->setAppkey    = "Weibo Oauth";
 
-$lang->site->setLogoFaild     = "Set log failed.";
-$lang->error->notSelectedLogo = "No logo file selected.";
+$lang->error->noSelectedLogo = "No logo file selected.";
+
+$lang->site->themes    = array();
+$lang->site->themes['default']    = 'Default';
+$lang->site->themes['flat']       = 'Flat';
+$lang->site->themes['tree']       = 'Tree';
+$lang->site->themes['brightdark'] = 'Brightdark';
+$lang->site->themes['tartan']     = 'Tartan';

@@ -86,13 +86,11 @@ class thread extends control
      * View a thread.
      * 
      * @param  int    $threadID 
-     * @param  int    $recTotal 
-     * @param  int    $recPerPage 
      * @param  int    $pageID 
      * @access public
      * @return void
      */
-    public function view($threadID, $recTotal = 0, $recPerPage = 10, $pageID = 1)
+    public function view($threadID, $pageID = 1)
     {
         $thread = $this->thread->getByID($threadID);
         if(!$thread) die(js::locate('back'));
@@ -102,7 +100,7 @@ class thread extends control
 
         /* Get replies. */
         $this->app->loadClass('pager', $static = true);
-        $pager   = new pager($recTotal, $recPerPage, $pageID);
+        $pager   = new pager(0, 10, $pageID);
         $replies = $this->loadModel('reply')->getByThread($threadID, $pager);
 
         /* Get all speakers. */

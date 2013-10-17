@@ -4,7 +4,7 @@
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
  * @license     LGPL
- * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
+ * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     site
  * @version     $Id$
  * @link        http://www.chanzhi.org
@@ -18,7 +18,7 @@
       <th class='w-150px'>
         <?php if(isset($this->config->site->logo)) echo html::image($logo->webPath, "class='w-150px'");?>
       </th> 
-      <td class='v-bottom'>
+      <td class='v-middle'>
         <?php echo html::file('files');?>
         <?php echo html::submitButton();?>
       </td>

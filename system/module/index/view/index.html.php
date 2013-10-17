@@ -37,7 +37,7 @@
       </div>
       <div class="widget-footer">
         <p>
-          <?php echo html::a($url, $lang->more, '', "class='btn btn-primary'");?>
+          <?php echo html::a($url, $lang->more . $lang->raquo, '', "class=''");?>
         </p>
       </div>
     </div>

@@ -39,7 +39,7 @@ class site extends control
     {
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            if(empty($_FILES)) $this->send(array('result' => 'fail', 'message' => $this->lang->error->notSelectedLogo));
+            if(empty($_FILES)) $this->send(array('result' => 'fail', 'message' => $this->lang->error->noSelectedLogo));
 
             $fileModel =  $this->loadModel('file');
 
@@ -83,10 +83,28 @@ class site extends control
     }
 
     /**
+     * Set theme
+     *
+     * @param $theme
+     * @access public
+     * return void
+     **/
+     public function setTheme($theme = '')
+     {
+         if($theme and isset($this->lang->site->themes[$theme]))
+         {  
+            $result = $this->loadModel('setting')->setItems('system.common.site', array('theme' => $theme ));
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+         }
+         $this->display();
+     }
+
+    /**
      * set site basic info.
      * 
      * @access public
-     * @return void
+     * return void
      */
     public function setAppkey()
     {
