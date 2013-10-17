@@ -222,10 +222,10 @@ body.modal-open, .modal-open .navbar-fixed-top, .modal-open .navbar-fixed-bottom
 .modal{ overflow-y:auto; }
 
 /* h* size setting. */
-h1{font-size:20px; font-weight:800;}
-h2{font-size:18px; font-weight:800;}
-h3{font-size:16px; font-weight:800;}
-h4{font-size:14px; font-weight:800;}
+h1{font-size:20px; font-weight:bold;}
+h2{font-size:18px; font-weight:bold;}
+h3{font-size:16px; font-weight:bold;}
+h4{font-size:14px; font-weight:bold;}
 
 .table{margin-bottom:10px; border: 1px solid #DDD;}
 .table thead tr th{border-bottom:0;}
