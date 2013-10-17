@@ -25,5 +25,11 @@ $lang->site->setBasic     = "設置基本信息";
 $lang->site->setLogo      = "Logo設置";
 $lang->site->setAppkey    = "新浪微博接入";
 
-$lang->site->setLogoFaild     = "設置Logo失敗";
-$lang->error->notSelectedLogo = "沒有選擇Logo圖片";
+$lang->error->noSelectedLogo = "沒有選擇Logo圖片";
+
+$lang->site->themes    = array();
+$lang->site->themes['default']    = '默認風格';
+$lang->site->themes['flat']       = '清泉';
+$lang->site->themes['tree']       = '蟬之樹';
+$lang->site->themes['brightdark'] = '蟬憩';
+$lang->site->themes['tartan']     = '蟬知格';
