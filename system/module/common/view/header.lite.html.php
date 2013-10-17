@@ -5,7 +5,7 @@ $jsRoot    = $webRoot . "js/";
 $themeRoot = $webRoot . "theme/";
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,7 +37,7 @@ $themeRoot = $webRoot . "theme/";
   }
 
   if(RUN_MODE == 'admin') css::import($themeRoot . 'default/admin.css', $config->version);
-  if(RUN_MODE == 'front') css::import($themeRoot . $config->site->theme . '/style.css', $config->version);
+  if(RUN_MODE == 'front' and $config->site->theme) css::import($themeRoot . $config->site->theme . '/style.css', $config->version);
   if(isset($pageCSS)) css::internal($pageCSS);
 
   echo html::icon($webRoot . 'favicon.ico');
