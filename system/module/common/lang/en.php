@@ -165,16 +165,16 @@ $lang->menuGroups->slide = 'site';
 
 /* Error info. */
 $lang->error = new stdclass();
-$lang->error->length          = array("『%s』length should be『%s』", "『%s』length should between『%s』and 『%s』.");
-$lang->error->reg             = "『%s』should like『%s』";
-$lang->error->unique          = "『%s』has『%s』already. If you are sure this record has been deleted, you can restore it in admin panel, trash page.";
-$lang->error->notempty        = "『%s』can not be empty.";
-$lang->error->equal           = "『%s』must be『%s』.";
-$lang->error->int             = array("『%s』should be interger", "『%s』should between『%s-%s』.");
-$lang->error->float           = "『%s』should be a interger or float.";
-$lang->error->email           = "『%s』should be email.";
-$lang->error->date            = "『%s』should be date";
-$lang->error->account         = "『%s』should be a valid account.";
+$lang->error->length          = array("<strong>%s</strong>length should be<strong>%s</strong>", "<strong>%s</strong>length should between<strong>%s</strong>and <strong>%s</strong>.");
+$lang->error->reg             = "<strong>%s</strong>should like<strong>%s</strong>";
+$lang->error->unique          = "<strong>%s</strong>has<strong>%s</strong>already. If you are sure this record has been deleted, you can restore it in admin panel, trash page.";
+$lang->error->notempty        = "<strong>%s</strong>can not be empty.";
+$lang->error->equal           = "<strong>%s</strong>must be<strong>%s</strong>.";
+$lang->error->int             = array("<strong>%s</strong>should be interger", "<strong>%s</strong>should between<strong>%s-%s</strong>.");
+$lang->error->float           = "<strong>%s</strong>should be a interger or float.";
+$lang->error->email           = "<strong>%s</strong>should be email.";
+$lang->error->date            = "<strong>%s</strong>should be date";
+$lang->error->account         = "<strong>%s</strong>should be a valid account.";
 $lang->error->passwordsame    = "Two passwords must be the same";
 $lang->error->passwordrule    = "Password should more than six letters.";
 $lang->error->captcha         = 'Captcah wrong.';
