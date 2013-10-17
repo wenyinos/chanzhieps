@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `eps_openID` (
+CREATE TABLE IF NOT EXISTS `eps_oauth` (
   `account` varchar(30) character set utf8 NOT NULL,
   `provider` varchar(30) character set utf8 NOT NULL,
   `openID` varchar(60) character set utf8 NOT NULL,
