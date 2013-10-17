@@ -15,7 +15,7 @@
   <table class='table table-hover table-bordered table-striped'>
     <caption>
       <div class='f-left'><?php echo $lang->slide->admin;?></div>
-      <div class='f-right'><?php echo html::a($this->inlink('create'), $lang->slide->create, '', "class='btn btn-inverse'");?></div>
+      <div class='f-right'><?php echo html::a($this->inlink('create'), $lang->slide->create, '', "class='btn'");?></div>
     </caption>
     <thead>
       <tr class='a-center'>
