@@ -46,7 +46,7 @@ class treeModel extends model
     public function getAliasByID($categoryID)
     {
         $category = $this->getByID($categoryID);   
-        if($category) return $category->alias;
+        if($category and $category->alias != '') return $category->alias;
         return "c$categoryID";
     }
 
@@ -469,7 +469,7 @@ class treeModel extends model
     
     public function isAliasExists($alias, $category = 0)
     {
-        if($alias == '') return true;
+        if($alias == '') return false;
         $count = $this->dao->select('count(*) as count')->from(TABLE_CATEGORY)
             ->where('`alias`')->eq($alias)->andWhere('id')->ne($category)->andWhere('type')->in('article,product')->fetch('count');
         return $count > 0;
