@@ -4,7 +4,7 @@ include 'header.lite.html.php';
 js::set('lang', $lang->js);
 ?>
 <div class='container'>
-  <?php if(1 or strpos($_SERVER['HTTP_USER_AGENT'],'MSIE 6.0') !== false ) exit($lang->IE6Alert); ?>
+  <?php if(strpos($_SERVER['HTTP_USER_AGENT'],'MSIE 6.0') !== false ) exit($lang->IE6Alert); ?>
   <div id='header'>
     <?php if(isset($config->site->logo)):?>
     <?php $logo = json_decode($config->site->logo);?>
