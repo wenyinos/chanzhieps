@@ -340,7 +340,7 @@ ul.breadcrumb .divider{font-size:20px;color:#3280FC}
 .panel{border: 1px solid #ddd;}
 .panel-default>.panel-heading{position: relative;}
 .panel-default>.panel-heading>.panel-actions{position: absolute; right: 10px;top: 12px;}
-.panel-default>.panel-heading>.panel-actions.panel-actions-sm{top: 6px;}
+.panel-default>.panel-heading>.panel-actions.panel-actions-sm{top: 4px;}
 .panel-default>.panel-heading>.panel-actions.panel-actions-lg{top: 16px;right: 18px}
 .panel-default>.panel-heading h1,.panel-default>.panel-heading h2,.panel-default>.panel-heading h3,.panel-default>.panel-heading h4,.panel-default>.panel-heading h5{line-height: 1.55em;margin: 0;color: #333;}
 .panel-default>.panel-body .table td:first-child{padding-left: 10px;}
