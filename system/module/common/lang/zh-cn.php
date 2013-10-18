@@ -25,11 +25,14 @@ $lang->poweredBy  = " 由 <a href='http://www.chanzhi.org/?v=%s' target='_blank'
 
 /* IE6 alert.  */
 $lang->IE6Alert= <<<EOT
-    <div class='alert alert-danger'>
+    <div class='alert alert-danger' style='margin-top:100px;'>
       <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-      <h2>为什么我看到的网站比别人的乱?</h2>
+      <h2>请使用其他浏览器访问本站。</h2>
+      <p>珍爱上网，远离IE！</p>
       <p>我们检测到您正在使用Internet Explorer 6 ——  IE6 浏览器, IE6 于2001年8月27日推出，而现在它已十分脱节。速度慢、不安全、不能很好的展示新一代网站。<br/></p>
-      <a href='http://abetterbrowser.org' class='btn btn-primary btn-lg' target='_blank'>下载高端浏览器，提升上网体验</a>
+      <a href='https://www.google.com/intl/zh-hk/chrome/browser/' class='btn btn-primary btn-lg' target='_blank'>谷歌浏览器</a>
+      <a href='http://www.firefox.com/' class='btn btn-primary btn-lg' target='_blank'>火狐浏览器</a>
+      <a href='http://www.opera.com/download' class='btn btn-primary btn-lg' target='_blank'>Opera浏览器</a>
       <p></p>
     </div>
 EOT;
