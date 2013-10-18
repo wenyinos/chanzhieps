@@ -1,5 +1,5 @@
 <?php
-$lang->help->common       = '在綫幫助系統';
+$lang->help->common       = '在綫幫助';
 $lang->help->books        = '手冊列表';
 $lang->help->articles     = '文檔導航';
 $lang->help->backtobooks  = '返回手冊列表';

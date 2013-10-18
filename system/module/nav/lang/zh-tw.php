@@ -20,7 +20,6 @@ $lang->nav->inputTitle      = '請輸入標題';
 $lang->nav->cannotRemoveAll = '不能刪除所有導航';
 
 /* nav type   */
-$lang->nav->types = array();
 $lang->nav->types['system']  = '系統模組';
 $lang->nav->types['article'] = '文章類目';
 $lang->nav->types['product'] = '產品類目';
@@ -28,13 +27,12 @@ $lang->nav->types['custom']  = '自定義';
 
 /* common navs.*/
 $lang->nav->system = new stdclass();
-$lang->nav->system->home     = '首頁';
-$lang->nav->system->company  = '關於我們';
-$lang->nav->system->forum    = '論壇';
-$lang->nav->system->blog     = '博客';
-$lang->nav->system->help     = '幫助';
+$lang->nav->system->home    = '首頁';
+$lang->nav->system->company = '關於我們';
+$lang->nav->system->forum   = '論壇';
+$lang->nav->system->blog    = '博客';
+$lang->nav->system->help    = '幫助';
 
 /* Targets setting. */
-$lang->nav->target = new stdclass();
-$lang->nav->target->_self  = '當前窗口';
-$lang->nav->target->_blank = '新窗口';
+$lang->nav->newWindow = new stdclass();
+$lang->nav->newWindow->_blank = '新開窗口';

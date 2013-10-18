@@ -139,7 +139,6 @@ $lang->site->menu->logo      = 'LOGO设置|site|setlogo|';
 $lang->site->menu->nav       = '导航设置|nav|admin|';
 $lang->site->menu->theme     = '主题风格|site|settheme|';
 $lang->site->menu->slide     = array('link' => '幻灯片设置|slide|admin|', 'alias' => 'create,edit');
-//$lang->site->menu->sina      = '新浪微博登录设置|site|setappkey|';
 
 /* Menu of company module. */
 $lang->company->menu = new stdclass();

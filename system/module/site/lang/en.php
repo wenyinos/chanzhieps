@@ -24,8 +24,10 @@ $lang->site->copyright    = 'Copyright';
 $lang->site->setBasic     = "Baisc";
 $lang->site->setLogo      = "Log";
 $lang->site->setAppkey    = "Weibo Oauth";
+$lang->site->setTheme     = 'Set Theme';
 
-$lang->error->noSelectedLogo = "No logo file selected.";
+$lang->site->setLogoFailed  = "Set logo failed.";
+$lang->site->noSelectedLogo = "No logo file selected.";
 
 $lang->site->themes    = array();
 $lang->site->themes['default']    = 'Default';
