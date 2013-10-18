@@ -73,6 +73,7 @@ class helper
         /* Seo modules return directly. */
         if(helper::isSeoMode() and method_exists('uri', 'create' . $moduleName . $methodName))
         {
+
             $link = call_user_func_array('uri::create' . $moduleName . $methodName, array('param'=> $vars, 'alias'=>$alias));
             if($link) return $link;
         }
@@ -413,10 +414,11 @@ class helper
  *
  * @param  string        $methodName  the method name
  * @param  string|array  $vars        the params passed to the method, can be array('key' => 'value') or key1=value1&key2=value2)
+ * @param  string|array  $alias       the params passed to the method, can be array('key' => 'value') or key1=value1&key2=value2)
  * @param  string        $viewType    
  * @return string the link string.
  */
-function inLink($methodName = 'index', $vars = '', $viewType = '')
+function inLink($methodName = 'index', $vars = '', $alias = '', $viewType = '')
 {
     global $app;
     return helper::createLink($app->getModuleName(), $methodName, $vars, $viewType);
