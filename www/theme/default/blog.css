@@ -24,6 +24,7 @@ body {padding-bottom: 20px; padding-top: 20px; background:#F1F1F1 repeat-x url("
 .content-box{padding: 40px 20px 20px;position: relative;}
 .content-box .info{margin-bottom: 20px; padding: 10px 0; border-bottom: 1px solid #e5e5e5;color: #777}
 .content-box .dater{position: absolute;right: 15px; top: 10px;}
+.content-box img{max-width: 100%;}
 
 /* Page style. */
 .page{padding: 10px;}
@@ -33,7 +34,7 @@ body {padding-bottom: 20px; padding-top: 20px; background:#F1F1F1 repeat-x url("
 #commentBox .table-form,#commentList{background-color: #fff;}
 
 /* Custom page footer. */
-.footer {padding-top: 19px; color: #777; border-top: 1px solid #e5e5e5;}
+.footer {padding-top: 19px; color: #777; border-top: 1px solid #e5e5e5;text-align: center;}
 .footer .icon-rss-sign{color: #f39800}
 
 /* Responsive: Portrait tablets and up. */
