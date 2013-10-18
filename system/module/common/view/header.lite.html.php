@@ -50,5 +50,11 @@ js::import($jsRoot . 'respond/min.js');
 ?>
 <![endif]-->
 <?php js::set('lang', $lang->js);?>
+<?php
+$sina = json_decode($this->config->oauth->sina);
+$qq   = json_decode($this->config->oauth->qq);
+if($sina->verification) echo $sina->verification; 
+if($qq->verification)   echo $qq->verification;
+?>
 </head>
 <body>
