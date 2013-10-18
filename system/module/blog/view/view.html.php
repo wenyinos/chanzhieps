@@ -17,7 +17,10 @@ js::set('path',  json_encode($path));
 js::set('articleID', $article->id);
 include '../../common/view/treeview.html.php';
 ?>
-<?php $common->printPositionBar($category, $article);?>
+<?php
+$root = '<li>' . $this->lang->currentPos . $this->lang->colon .  html::a($this->inlink('index'), $lang->home) . '</li>';
+$common->printPositionBar($category, $article, '', $root);
+?>
 <div class='row'>
   <div class='col-md-9'>
     <div class='content-box clearfix radius'>
