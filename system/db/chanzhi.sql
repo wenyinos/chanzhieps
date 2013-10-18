@@ -1,36 +1,8 @@
--- DROP TABLE IF EXISTS `eps_product`;
-CREATE TABLE IF NOT EXISTS `eps_product` (
-  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(150) NOT NULL,
-  `brand` varchar(100) DEFAULT NULL,
-  `model` char(30) DEFAULT NULL,
-  `color` char(20) NOT NULL,
-  `origin` varchar(50) NOT NULL,
-  `unit` char(20) NOT NULL,
-  `price` float(8,2) NOT NULL,
-  `promotion` float(8,2) NOT NULL,
-  `amount` mediumint(8) unsigned DEFAULT NULL,
-  `keywords` varchar(150) NOT NULL,
-  `summary` text NOT NULL,
-  `content` text NOT NULL,
-  `author` varchar(60) NOT NULL,
-  `editor` varchar(60) NOT NULL,
-  `addedDate` datetime NOT NULL,
-  `editedDate` datetime NOT NULL,
-  `views` mediumint(5) unsigned NOT NULL DEFAULT '0',
-  `sticky` enum('0','1','2','3') NOT NULL DEFAULT '0',
-  `order` smallint(5) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `model` (`model`),
-  KEY `order` (`order`),
-  KEY `views` (`views`),
-  KEY `sticky` (`sticky`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
-
--- DROP TABLE IF EXISTS `eps_article`;
+--DROP TABLE IF EXISTS `eps_article`;
 CREATE TABLE IF NOT EXISTS `eps_article` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(150) NOT NULL,
+  `alias` varchar(100) NOT NULL,
   `keywords` varchar(150) NOT NULL,
   `summary` text NOT NULL,
   `content` text NOT NULL,
@@ -50,21 +22,22 @@ CREATE TABLE IF NOT EXISTS `eps_article` (
   KEY `order` (`order`),
   KEY `views` (`views`),
   KEY `sticky` (`sticky`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
 
--- DROP TABLE IF EXISTS `eps_block`;
+--DROP TABLE IF EXISTS `eps_block`;
 CREATE TABLE IF NOT EXISTS `eps_block` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `type` varchar(10) NOT NULL,
   `title` varchar(60) NOT NULL,
   `content` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
 
--- DROP TABLE IF EXISTS `eps_category`;
+--DROP TABLE IF EXISTS `eps_category`;
 CREATE TABLE IF NOT EXISTS `eps_category` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `name` char(30) NOT NULL DEFAULT '',
+  `alias` varchar(100) NOT NULL,
   `desc` varchar(150) NOT NULL,
   `keyword` varchar(150) NOT NULL,
   `parent` smallint(5) unsigned NOT NULL DEFAULT '0',
@@ -82,13 +55,13 @@ CREATE TABLE IF NOT EXISTS `eps_category` (
   `postID` mediumint(9) NOT NULL,
   `replyID` mediumint(8) unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `type` (`type`),
+  KEY `tree` (`type`),
   KEY `order` (`order`),
   KEY `parent` (`parent`),
   KEY `path` (`path`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
 
--- DROP TABLE IF EXISTS `eps_comment`;
+--DROP TABLE IF EXISTS `eps_comment`;
 CREATE TABLE IF NOT EXISTS `eps_comment` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `objectType` varchar(30) NOT NULL DEFAULT '',
@@ -102,9 +75,9 @@ CREATE TABLE IF NOT EXISTS `eps_comment` (
   PRIMARY KEY (`id`),
   KEY `status` (`status`),
   KEY `object` (`objectType`,`objectID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
 
--- DROP TABLE IF EXISTS `eps_config`;
+--DROP TABLE IF EXISTS `eps_config`;
 CREATE TABLE IF NOT EXISTS `eps_config` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `owner` char(30) NOT NULL DEFAULT '',
@@ -114,9 +87,9 @@ CREATE TABLE IF NOT EXISTS `eps_config` (
   `value` text NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique` (`owner`,`module`,`section`,`key`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
 
--- DROP TABLE IF EXISTS `eps_down`;
+--DROP TABLE IF EXISTS `eps_down`;
 CREATE TABLE IF NOT EXISTS `eps_down` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `account` char(30) DEFAULT NULL,
@@ -126,9 +99,9 @@ CREATE TABLE IF NOT EXISTS `eps_down` (
   `referer` varchar(200) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fileID` (`file`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 
--- DROP TABLE IF EXISTS `eps_file`;
+--DROP TABLE IF EXISTS `eps_file`;
 CREATE TABLE IF NOT EXISTS `eps_file` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `pathname` char(50) NOT NULL,
@@ -145,9 +118,9 @@ CREATE TABLE IF NOT EXISTS `eps_file` (
   `primary` enum('1','0') DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `object` (`objectType`,`objectID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
 
--- DROP TABLE IF EXISTS `eps_layout`;
+--DROP TABLE IF EXISTS `eps_layout`;
 CREATE TABLE IF NOT EXISTS `eps_layout` (
   `page` varchar(30) NOT NULL,
   `region` varchar(30) NOT NULL,
@@ -155,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `eps_layout` (
   UNIQUE KEY `layout` (`page`,`region`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- DROP TABLE IF EXISTS `eps_message`;
+--DROP TABLE IF EXISTS `eps_message`;
 CREATE TABLE IF NOT EXISTS `eps_message` (
   `id` mediumint(8) NOT NULL AUTO_INCREMENT,
   `from` char(30) NOT NULL DEFAULT 'system',
@@ -167,9 +140,47 @@ CREATE TABLE IF NOT EXISTS `eps_message` (
   PRIMARY KEY (`id`),
   KEY `readed` (`readed`),
   KEY `to` (`to`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
+
+--DROP TABLE IF EXISTS `eps_oauth`;
+CREATE TABLE IF NOT EXISTS `eps_oauth` (
+  `account` varchar(30) NOT NULL,
+  `provider` varchar(30) NOT NULL,
+  `openID` varchar(60) NOT NULL,
+  UNIQUE KEY `account` (`account`,`provider`,`openID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- DROP TABLE IF EXISTS `eps_relation`;
+--DROP TABLE IF EXISTS `eps_product`;
+CREATE TABLE IF NOT EXISTS `eps_product` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(150) NOT NULL,
+  `alias` varchar(100) NOT NULL,
+  `brand` varchar(100) DEFAULT NULL,
+  `model` char(30) DEFAULT NULL,
+  `color` char(20) NOT NULL,
+  `origin` varchar(50) NOT NULL,
+  `unit` char(20) NOT NULL,
+  `price` float(8,2) NOT NULL,
+  `promotion` float(8,2) NOT NULL,
+  `amount` mediumint(8) unsigned DEFAULT NULL,
+  `keywords` varchar(150) NOT NULL,
+  `summary` text NOT NULL,
+  `content` text NOT NULL,
+  `author` varchar(60) NOT NULL,
+  `editor` varchar(60) NOT NULL,
+  `addedDate` datetime NOT NULL,
+  `editedDate` datetime NOT NULL,
+  `views` mediumint(5) unsigned NOT NULL DEFAULT '0',
+  `sticky` enum('0','1','2','3') NOT NULL DEFAULT '0',
+  `order` smallint(5) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `order` (`order`),
+  KEY `views` (`views`),
+  KEY `sticky` (`sticky`),
+  KEY `model` (`model`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+
+--DROP TABLE IF EXISTS `eps_relation`;
 CREATE TABLE IF NOT EXISTS `eps_relation` (
   `type` char(20) NOT NULL,
   `book` varchar(30) NOT NULL,
@@ -178,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `eps_relation` (
   UNIQUE KEY `relation` (`type`,`id`,`category`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- DROP TABLE IF EXISTS `eps_reply`;
+--DROP TABLE IF EXISTS `eps_reply`;
 CREATE TABLE IF NOT EXISTS `eps_reply` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `thread` mediumint(8) unsigned NOT NULL,
@@ -191,9 +202,9 @@ CREATE TABLE IF NOT EXISTS `eps_reply` (
   PRIMARY KEY (`id`),
   KEY `thread` (`thread`),
   KEY `author` (`author`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
 
--- DROP TABLE IF EXISTS `eps_thread`;
+--DROP TABLE IF EXISTS `eps_thread`;
 CREATE TABLE IF NOT EXISTS `eps_thread` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `board` mediumint(9) NOT NULL,
@@ -213,9 +224,9 @@ CREATE TABLE IF NOT EXISTS `eps_thread` (
   `hidden` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `category` (`board`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
 
--- DROP TABLE IF EXISTS `eps_user`;
+--DROP TABLE IF EXISTS `eps_user`;
 CREATE TABLE IF NOT EXISTS `eps_user` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `account` char(30) NOT NULL DEFAULT '',
@@ -249,4 +260,6 @@ CREATE TABLE IF NOT EXISTS `eps_user` (
   PRIMARY KEY (`id`),
   KEY `admin` (`admin`),
   KEY `account` (`account`,`password`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+
+
