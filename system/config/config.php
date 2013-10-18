@@ -15,7 +15,7 @@ if(!function_exists('getWebRoot')){function getWebRoot(){}}
 
 /* The basic settings. */
 $config = new config();
-$config->version     = '1.4';             // The version number, don't change.
+$config->version     = '1.5';             // The version number, don't change.
 $config->encoding    = 'UTF-8';           // The encoding.
 $config->cookiePath  = '/';               // The path of cookies.
 $config->webRoot     = getWebRoot();      // The web root.
@@ -25,7 +25,7 @@ $config->multi       = false;             // The config of multi site.
 
 /* The request settins. */
 $config->requestType = 'PATH_INFO';       // PATH_INFO or GET.
-$config->seoMode     = true;              // The config of seo mode.
+$config->seoMode     = true;              // Whether turn on seo mode or not.
 $config->requestFix  = '-';               // RequestType=PATH_INFO: the divider of the params, can be - _ or /
 $config->moduleVar   = 'm';               // RequestType=GET: the name of the module var.
 $config->methodVar   = 'f';               // RequestType=GET: the name of the method var.

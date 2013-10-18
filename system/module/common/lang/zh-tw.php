@@ -21,9 +21,9 @@ $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 
 /* Lang items for xirang. */
 $lang->chanzhiEPS = '蟬知企業門戶系統';
-$lang->poweredBy = " 由 <a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPS} %s</a> 強力驅動！";
+$lang->poweredBy  = " 由 <a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPS} %s</a> 強力驅動！";
 
-$lang->killIE6    = '<script src="//letskillie6.googlecode.com/svn/trunk/2/zh_TW.js"></script>';
+$lang->killIE6    = '<script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>';
 
 /* Global lang items. */
 $lang->home           = '首頁';
@@ -71,6 +71,7 @@ $lang->js = new stdclass();
 $lang->js->confirmDelete = '您確定要執行刪除操作嗎？';
 $lang->js->deleteing     = '刪除中';
 $lang->js->doing         = '處理中';
+$lang->js->timeout       = '網絡超時,請重試';
 
 /* Contact fields*/
 $lang->company = new stdclass();
@@ -111,9 +112,6 @@ $lang->blog->menu->browse = array('link' => '博客列表|article|admin|type=blo
 $lang->blog->menu->create = '發佈博客|article|create|type=blog';
 $lang->blog->menu->tree   = '類目管理|tree|browse|type=blog';
 
-$lang->blog->list   = '博客列表';
-$lang->blog->create = '發佈博客';
-
 /* Menu of product module. */
 $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
@@ -139,8 +137,8 @@ $lang->site->menu = new stdclass();
 $lang->site->menu->basic     = '站點設置|site|setbasic|';
 $lang->site->menu->logo      = 'LOGO設置|site|setlogo|';
 $lang->site->menu->nav       = '導航設置|nav|admin|';
+$lang->site->menu->theme     = '主題風格|site|settheme|';
 $lang->site->menu->slide     = array('link' => '幻燈片設置|slide|admin|', 'alias' => 'create,edit');
-$lang->site->menu->sina      = '新浪微博登錄設置|site|setappkey|';
 
 /* Menu of company module. */
 $lang->company->menu = new stdclass();
@@ -167,16 +165,16 @@ $lang->menuGroups->slide = 'site';
 
 /* The error messages. */
 $lang->error = new stdclass();
-$lang->error->length       = array('『%s』長度錯誤，應當為『%s』', '『%s』長度應當不超過『%s』，且不小於『%s』。');
-$lang->error->reg          = '『%s』不符合格式，應當為:『%s』。';
-$lang->error->unique       = '『%s』已經有『%s』這條記錄了。';
-$lang->error->notempty     = '『%s』不能為空。';
-$lang->error->equal        = '『%s』必須為『%s』。';
-$lang->error->int          = array('『%s』應當是數字。', '『%s』最小值為%s',  '『%s』應當介於『%s-%s』之間。');
-$lang->error->float        = '『%s』應當是數字，可以是小數。';
-$lang->error->email        = '『%s』應當為合法的EMAIL。';
-$lang->error->date         = '『%s』應當為合法的日期。';
-$lang->error->account      = '『%s』應當為字母和數字的組合，至少三位';
+$lang->error->length       = array('<strong>%s</strong>長度錯誤，應當為<strong>%s</strong>', '<strong>%s</strong>長度應當不超過<strong>%s</strong>，且不小於<strong>%s</strong>。');
+$lang->error->reg          = '<strong>%s</strong>不符合格式，應當為:<strong>%s</strong>。';
+$lang->error->unique       = '<strong>%s</strong>已經有<strong>%s</strong>這條記錄了。';
+$lang->error->notempty     = '<strong>%s</strong>不能為空。';
+$lang->error->equal        = '<strong>%s</strong>必須為<strong>%s</strong>。';
+$lang->error->int          = array('<strong>%s</strong>應當是數字。', '<strong>%s</strong>最小值為%s',  '<strong>%s</strong>應當介於<strong>%s-%s</strong>之間。');
+$lang->error->float        = '<strong>%s</strong>應當是數字，可以是小數。';
+$lang->error->email        = '<strong>%s</strong>應當為合法的EMAIL。';
+$lang->error->date         = '<strong>%s</strong>應當為合法的日期。';
+$lang->error->account      = '<strong>%s</strong>應當為字母和數字的組合，至少三位';
 $lang->error->passwordsame = '兩次密碼應當相等。';
 $lang->error->passwordrule = '密碼應該符合規則，長度至少為六位。';
 $lang->error->captcha      = '請輸入正確的驗證碼。';

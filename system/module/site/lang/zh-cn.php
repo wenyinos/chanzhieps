@@ -27,8 +27,7 @@ $lang->site->setAppkey    = "新浪微博接入";
 $lang->site->setTheme     = '主题设置';
 
 $lang->site->setLogoFailed  = "设置Logo失败";
-$lang->site->noSelectedLogo  = "没有选择Logo图片";
-
+$lang->site->noSelectedLogo = "没有选择Logo图片";
 
 $lang->site->themes    = array();
 $lang->site->themes['default']    = '默认风格';

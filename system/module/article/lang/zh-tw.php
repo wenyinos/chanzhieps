@@ -15,6 +15,7 @@ $lang->article->id         = '編號';
 $lang->article->category   = '類目';
 $lang->article->categories = '類目';
 $lang->article->title      = '標題';
+$lang->article->alias      = '英文別名';
 $lang->article->content    = '內容';
 $lang->article->original   = '來源';
 $lang->article->copySite   = '來源網站';
@@ -35,6 +36,11 @@ $lang->article->admin      = '維護文章';
 $lang->article->create     = '發佈文章';
 $lang->article->edit       = '編輯文章';
 $lang->article->files      = '附件';
+
+$lang->blog->admin  = '維護博客';
+$lang->blog->list   = '博客列表';
+$lang->blog->create = '發佈博客';
+$lang->blog->edit   = '編輯博客';
 
 $lang->article->originalList[1] = '原創';
 $lang->article->originalList[0] = '轉貼';
