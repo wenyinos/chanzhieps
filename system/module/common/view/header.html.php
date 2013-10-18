@@ -4,8 +4,8 @@ include 'header.lite.html.php';
 js::set('lang', $lang->js);
 ?>
 <div class='container'>
+  <?php if(strpos($_SERVER['HTTP_USER_AGENT'],'MSIE 6.0') !== false ) exit($lang->IE6Alert); ?>
   <div id='header'>
-    <div class='nav' id="headNav"><?php echo commonModel::printTopBar();?></div>
     <?php if(isset($config->site->logo)):?>
     <?php $logo = json_decode($config->site->logo);?>
     <div id='logoBox' class='f-left'>
@@ -24,16 +24,16 @@ js::set('lang', $lang->js);
     <ul class='nav nav-justified'>
       <?php foreach($topNavs as $nav1):?>
       <li class="cat-item <?php echo $nav1->class?>"> 
-        <?php echo html::a($nav1->url, $nav1->title, $nav1->target);?>
+        <?php echo html::a($nav1->url, $nav1->title, isset($nav1->target) ? $nav1->target : '');?>
         <?php if(!empty($nav1->children)):?>
         <ul>
           <?php foreach($nav1->children as $nav2):?>
           <li class="cat-item <?php echo $nav2->class?>">
-            <?php echo html::a($nav2->url, $nav2->title, $nav2->target);?>
+            <?php echo html::a($nav2->url, $nav2->title, isset($nav2->target) ? $nav2->target : '');?>
             <?php if(!empty($nav2->children)):?>
             <ul>
               <?php foreach($nav2->children as $nav3):?>
-              <li class='cat-item'><?php echo html::a($nav3->url, $nav3->title, $nav3->target);?></li>
+              <li class='cat-item'><?php echo html::a($nav3->url, $nav3->title, isset($nav2->target) ? $nav2->target : '');?></li>
               <?php endforeach;?>
             </ul>
             <?php endif;?>

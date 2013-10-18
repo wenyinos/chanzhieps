@@ -17,7 +17,7 @@ js::set('path',  json_encode($path));
 include '../../common/view/treeview.html.php';
 ?>
 <?php
-$root = '<li>' .  html::a($this->inlink('index'), $lang->home) . '</li>';
+$root = '<li>' . $this->lang->currentPos . $this->lang->colon .  html::a($this->inlink('index'), $lang->home) . '</li>';
 if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
 ?>
 <div class='row blogBox'>

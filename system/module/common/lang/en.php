@@ -137,6 +137,7 @@ $lang->site->menu = new stdclass();
 $lang->site->menu->basic     = 'Basic|site|setbasic|';
 $lang->site->menu->logo      = 'Logo|site|setlogo|';
 $lang->site->menu->nav       = 'Navigation|nav|admin|';
+$lang->site->menu->theme     = 'Theme|site|settheme|';
 $lang->site->menu->slide     = array('link' => 'Slide|slide|admin|', 'alias' => 'create,edit');
 $lang->site->menu->oauth     = 'Open OAuth|site|setoauth|';
 

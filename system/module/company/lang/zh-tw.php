@@ -17,3 +17,6 @@ $lang->company->content = "公司介紹";
 
 $lang->company->setBasic   = "設置基本信息";
 $lang->company->setContact = "設置聯繫方式";
+
+$lang->company->error = new stdclass(); 
+$lang->company->error->email = "請填寫合法的EMAIL";

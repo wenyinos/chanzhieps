@@ -1,20 +1,26 @@
 <?php
 /**
- * The seo and uri class file
+ * The seo and uri class file. 
  *
- * The author disclaims copyright to this source code.  In place of
- * a legal notice, here is a blessing:
- *
- *  May you do good and not evil.
- *  May you find forgiveness for yourself and forgive others.
- *  May you share freely, never taking more than you give.
+ * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
+ * @license     LGPL
+ * @link        http://www.chanzhi.org
  */
 ?>
 <?php
+/**
+ * The seo class, parse seo mode uri to normal mode uri.
+ *
+ * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
+ * @license     LGPL
+ * @author      Xiying Guan <guanxiying@xirangit.com>
+ * @version     $Id$
+ * @link        http://www.chanzhi.org
+ */
 class seo
 {
     /**
-     * parse SEO URI for setRouteByPathInfo 
+     * Parse SEO URI for setRouteByPathInfo.
      *
      * @param uri
      * return string
@@ -22,7 +28,8 @@ class seo
     public static function parseURI($uri)
     {
         global $config;
-        if(!$config->seoMode) return $uri;
+        if(!helper::isSeoMode()) return $uri;
+
         $categoryAlias = $config->seo->alias->category;
         $pageAlias     = $config->seo->alias->page;
         $methodAlias   = $config->seo->alias->method;
@@ -38,7 +45,6 @@ class seo
             $pageID = str_replace('/p', '', $matches[0]);    // Get pageID thus the flowing logic can use it.
             $uri    = str_replace($matches[0], '', $uri);    // Remove the pageID part from the url.
         }
-        //parsePageID
 
         /* Split uri to items and try to get module and params from it. */
         $items  = explode('/', $uri);
@@ -112,13 +118,14 @@ class seo
         $params['category'] = $items[1]; 
         $method = $methodAlias[$module]['browse'];
 
-        /* help booke add -bookName to method*/
+        /* Add -bookName to help->book method. */
         if($module == 'help' && $book) $method .= '-' . $book;
         return seo::convertURI($module, $method, $params, $pageID);
 
     }
+
     /**
-     * Convert URI 
+     * Convert seo mode URI to normal mode.
      * 
      * @param string $module
      * @param string $method
@@ -135,13 +142,23 @@ class seo
     }
 }
 
+/**
+ * The uri class, create seo mode uri for seo modules.
+ *
+ * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
+ * @license     LGPL
+ *
+ * @author      Dtt
+ * @version     $Id$
+ * @link        http://www.chanzhi.org
+ */
 class uri
 {
     /**
-     * create article browse
+     * Create article browse
      *
-     * @params array        $params
-     * @params array        $alias  
+     * @params array    $params
+     * @params array    $alias  
      * return string
      */
     public static function createArticleBrowse($params, $alias)
@@ -153,10 +170,10 @@ class uri
     }
 
     /**
-     * create article view
+     * Create article view
      *
-     * @params array        $params
-     * @params array        $alias  
+     * @params array    $params
+     * @params array    $alias  
      * return string
      */
     public static function createArticleView($params, $alias)
@@ -170,10 +187,10 @@ class uri
     }
 
     /**
-     * create article view
+     * Create article view
      *
-     * @params array        $params
-     * @params array        $alias  
+     * @params array    $params
+     * @params array    $alias  
      * return string
      */
 
@@ -186,10 +203,10 @@ class uri
     }
 
     /**
-     * create product view
+     * Create product view
      *
-     * @params array        $params
-     * @params array        $alias  
+     * @params array    $params
+     * @params array    $alias  
      * return string
      */
     public static function createProductView($params, $alias)
@@ -203,10 +220,10 @@ class uri
     }
 
     /**
-     * create forum board
+     * Create forum board.
      *
-     * @params array        $params
-     * @params array        $alias  
+     * @params array    $params
+     * @params array    $alias  
      * return string
      */
     public static function createForumBoard($params, $alias)
@@ -225,10 +242,10 @@ class uri
     }
 
     /**
-     * create thread view
+     * Create thread view.
      *
-     * @params array        $params
-     * @params array        $alias  
+     * @params array    $params
+     * @params array    $alias  
      * return string
      */
     public static function createThreadView($params, $alias)
@@ -238,10 +255,10 @@ class uri
     }
 
     /**
-     * create blog index 
+     * Create blog index.
      *
-     * @params array        $params
-     * @params array        $alias  
+     * @params array    $params
+     * @params array    $alias  
      * return string
      */
     public static function createBlogIndex($params, $alias)
@@ -267,10 +284,10 @@ class uri
     }
 
     /**
-     * create blog view
+     * Create blog view.
      *
-     * @params array        $params
-     * @params array        $alias  
+     * @params array    $params
+     * @params array    $alias  
      * return string
      */
     public static function createBlogView($params, $alias)
@@ -282,10 +299,10 @@ class uri
     }
 
     /**
-     * create help book
+     * Create help book.
      *
-     * @params array        $params
-     * @params array        $alias  
+     * @params array    $params
+     * @params array    $alias  
      * return string
      */
     public static function createHelpBook($params, $alias)
@@ -302,16 +319,20 @@ class uri
     }
 
     /**
-     * create help read
+     * Create help read.
      *
-     * @params array        $params
-     * @params array        $alias  
+     * @params array    $params
+     * @params array    $alias  
      * return string
      */
     public static function createHelpRead($params, $alias)
     {
         global $config;
-        $link = 'help/' . array_shift($params);
+
+        $id   = array_shift($params);
+        $book = array_shift($params);
+
+        $link = 'help/'  . $book . '/' . $id;
         if($alias['name']) $link .= '@' . $alias['name'];
         return $config->webRoot . $link . '.' . $config->default->view;
     }

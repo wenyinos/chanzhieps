@@ -25,8 +25,10 @@ $lang->site->setBasic     = "Baisc";
 $lang->site->setLogo      = "Log";
 $lang->site->setSinaOauth = "Weibo Oauth";
 $lang->site->setQQOauth   = "QQ Oauth";
+$lang->site->setTheme     = 'Set Theme';
 
-$lang->error->noSelectedLogo = "No logo file selected.";
+$lang->site->setLogoFailed  = "Set logo failed.";
+$lang->site->noSelectedLogo = "No logo file selected.";
 
 $lang->site->themes    = array();
 $lang->site->themes['default']    = 'Default';

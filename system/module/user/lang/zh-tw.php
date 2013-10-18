@@ -40,7 +40,7 @@ $lang->user->allowTime = '開放時間';
 $lang->user->status    = '狀態';
 $lang->user->alert     = '您的帳號已被禁用';
 
-$lang->user->list        = '會員列表';
+$lang->user->list            = '會員列表';
 $lang->user->view            = "用戶詳情";
 $lang->user->create          = "添加用戶";
 $lang->user->edit            = "編輯用戶";
@@ -75,14 +75,6 @@ $lang->user->loginFailed   = "登錄失敗，請檢查您的用戶名或密碼�
 $lang->user->lblRegistered = '恭喜您，已經成功註冊。';
 $lang->user->forbidSuccess = '禁用成功';
 $lang->user->forbidFail    = '禁用失敗';
-$lang->user->perfectAccount = <<<EOD
-<h3>完善帳號信息</h3>
-<p>設置您的帳號用戶名及電子郵件</p>
-EOD;
-$lang->user->bind          = <<<EOD
-<h3>綁定帳號</h3>
-<p>如果您已註冊過帳號，請在此綁定</p>
-EOD;
 
 $lang->user->forbidUser          = '禁用管理';
 $lang->user->forbidDate = array();
@@ -112,10 +104,23 @@ $lang->user->notice->password = '字母和數字組合，最少六位';
 $lang->user->login  = new stdclass();
 $lang->user->login->common  = "登錄";
 $lang->user->login->welcome = '已有帳號';
-$lang->user->login->why     = '歡迎登陸我們的系統，這樣您可以使用我們為註冊會員提供的各種服務。';
-$lang->user->login->openID  = '第三方登錄，快捷方便';
-$lang->user->login->sina    = '新浪微博';
-$lang->user->login->keepLogin['yes'] = "保持登錄";
+$lang->user->login->why     = '歡迎登陸，享用會員專屬服務！';
+
+$lang->user->oauth = new stdclass();
+$lang->user->oauth->common       = '開放登錄';
+$lang->user->oauth->provider     = '服務商';
+$lang->user->oauth->clientID     = 'App Key';
+$lang->user->oauth->clientSecret = 'App Secret';
+$lang->user->oauth->verification = '網站驗證';
+$lang->user->oauth->widget       = '網頁組件';
+
+$lang->user->oauth->providers['sina'] = '新浪微博';
+$lang->user->oauth->providers['qq']   = 'QQ';
+
+$lang->user->oauth->lblWelcome    = '開放登錄，快捷方便';
+$lang->user->oauth->lblProfile    = "<h3>設置用戶名，完成註冊</h3>";
+$lang->user->oauth->lblBind       = "<h3>或綁定已有帳號</h3>";
+$lang->user->oauth->lblBindFailed = "綁定賬戶失敗！";
 
 $lang->user->control = new stdclass();
 $lang->user->control->common      = '用戶中心';

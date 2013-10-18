@@ -23,7 +23,19 @@ $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->chanzhiEPS = '蝉知企业门户系统';
 $lang->poweredBy  = " 由 <a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPS} %s</a> 强力驱动！";
 
-$lang->killIE6    = '<script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>';
+/* IE6 alert.  */
+$lang->IE6Alert= <<<EOT
+    <div class='alert alert-danger' style='margin-top:100px;'>
+      <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+      <h2>请使用其他浏览器访问本站。</h2>
+      <p>珍爱上网，远离IE！</p>
+      <p>我们检测到您正在使用Internet Explorer 6 ——  IE6 浏览器, IE6 于2001年8月27日推出，而现在它已十分脱节。速度慢、不安全、不能很好的展示新一代网站。<br/></p>
+      <a href='https://www.google.com/intl/zh-hk/chrome/browser/' class='btn btn-primary btn-lg' target='_blank'>谷歌浏览器</a>
+      <a href='http://www.firefox.com/' class='btn btn-primary btn-lg' target='_blank'>火狐浏览器</a>
+      <a href='http://www.opera.com/download' class='btn btn-primary btn-lg' target='_blank'>Opera浏览器</a>
+      <p></p>
+    </div>
+EOT;
 
 /* Global lang items. */
 $lang->home           = '首页';

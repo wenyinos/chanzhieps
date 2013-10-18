@@ -75,14 +75,6 @@ $lang->user->loginFailed   = "Login failed, please check you account and passwor
 $lang->user->lblRegistered = 'Congratulations, register successfully!';
 $lang->user->forbidSuccess = 'Successfully forbid.';
 $lang->user->forbidFail    = 'Failed forbid';
-$lang->user->perfectAccount = <<<EOD
-<h3>Fullfill info</h3>
-<p>Please set account and email.</p>
-EOD;
-$lang->user->bind          = <<<EOD
-<h3>Bind account</h3>
-<p>If you have already register an account, bind it.</p>
-EOD;
 
 $lang->user->forbidUser = 'Manage user';
 $lang->user->forbidDate = array();
@@ -113,9 +105,22 @@ $lang->user->login  = new stdclass();
 $lang->user->login->common  = "Login";
 $lang->user->login->welcome = 'Welcome';
 $lang->user->login->why     = 'Login, and use more feature.';
-$lang->user->login->openID  = 'Login with openID:';
-$lang->user->login->sina    = 'Sina weibo';
-$lang->user->login->keepLogin['yes'] = "Keep login";
+
+$lang->user->oauth = new stdclass();
+$lang->user->oauth->common       = 'OAuth';
+$lang->user->oauth->provider     = 'Provider';
+$lang->user->oauth->clientID     = 'App Key';
+$lang->user->oauth->clientSecret = 'App Secret';
+$lang->user->oauth->verification = 'Verification';
+$lang->user->oauth->widget       = 'Widget';
+
+$lang->user->oauth->providers['sina'] = 'Sina weibo';
+$lang->user->oauth->providers['qq']   = 'QQ';
+
+$lang->user->oauth->lblWelcome    = 'OAuth login';
+$lang->user->oauth->lblProfile    = "<h3>Register a new account</h3>";
+$lang->user->oauth->lblBind       = "<h3>Or bind an registered account</h3>";
+$lang->user->oauth->lblBindFailed = "Bind user failed！";
 
 $lang->user->control = new stdclass();
 $lang->user->control->common      = 'User dashboard';
