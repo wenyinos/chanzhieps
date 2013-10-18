@@ -1,6 +1,4 @@
-<?php
-include '../../common/view/header.html.php';
-?>
+<?php include '../../common/view/header.html.php'; ?>
 <?php $common->printPositionBar($category);?>
 <div class='row'>
   <div class='col-md-3' id='leftmenu'>
@@ -23,7 +21,8 @@ include '../../common/view/header.html.php';
       <?php
       foreach($categories as $category)
       {
-          if(isset($category->id))echo "<dt class='f-16px'><strong>$category->i." . ' ' . html::a(inlink('book',"type=$code&categoryID=$category->id"),$category->name) . "</strong></dt>";
+          $alias = $this->loadModel('tree')->getAliasByID($category->id);
+          if(isset($category->id))echo "<dt class='f-16px'><strong>$category->i." . ' ' . html::a(inlink('book',"type=$code&categoryID=$alias", "category={$category->alias}"), $category->name) . "</strong></dt>";
           else $category->id=null;
           if(isset($articles[$category->id]) or isset($category->children))
           {
@@ -33,7 +32,7 @@ include '../../common/view/header.html.php';
               {
                   foreach($articles[$category->id] as $article)
                   {
-                      echo "<dt class='article-title f-14px'>$category->i.$j " . ' ' . html::a(inlink('read', "article=$article->id", "name=$article->alias"), $article->title) . "</dt>";
+                      echo "<dt class='article-title f-14px'>$category->i.$j " . ' ' . html::a(inlink('read', "article=$article->id&book={$code}", "category={$category->alias}&name=$article->alias"), $article->title) . "</dt>";
                       $j ++;
                   }
               }
@@ -42,14 +41,16 @@ include '../../common/view/header.html.php';
               {
                   foreach($category->children as $child)
                   {
-                      echo "<dt class='f-14px'>$category->i.$child->j" . ' ' .  html::a(inlink('book', "type=$code&categoryID=$child->id"), $child->name) . "</dt>";
+                      $child = $this->loadModel('tree')->getByID($child->id);
+                      $alias = $this->loadModel('tree')->getAliasByID($child->id);
+                      echo "<dt class='f-14px'>$category->i.$child->j" . ' ' .  html::a(inlink('book', "type=$code&categoryID=$alias", "category={$child->alias}"), $child->name) . "</dt>";
                       if(isset($articles[$child->id]))
                       {
                           $k = 1;
                           echo "<dd><dl>";
                           foreach($articles[$child->id] as $article)
                           {
-                              echo "<dt class='article-title f-14px'>$category->i.$child->j.$k " . html::a(inlink('read', "article=$article->id", "name=$article->alias"), $article->title) . "</dt>";
+                              echo "<dt class='article-title f-14px'>$category->i.$child->j.$k " . html::a(inlink('read', "article=$article->id&book={$code}", "category={$child->alias}&name=$article->alias"), $article->title) . "</dt>";
                               $k ++;
                           }
                           echo "</dl></dd>";

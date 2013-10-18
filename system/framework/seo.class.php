@@ -328,7 +328,11 @@ class uri
     public static function createHelpRead($params, $alias)
     {
         global $config;
-        $link = 'help/' . array_shift($params);
+
+        $id   = array_shift($params);
+        $book = array_shift($params);
+
+        $link = 'help/'  . $book . '/' . $id;
         if($alias['name']) $link .= '@' . $alias['name'];
         return $config->webRoot . $link . '.' . $config->default->view;
     }

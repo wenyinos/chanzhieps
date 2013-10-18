@@ -106,7 +106,13 @@ class help extends control
         $book = $this->loadModel('setting')->getItem("owner=system&module=common&section=book&key=$code");
         $book = json_decode($book);
 
-        $categories = $this->dao->select('id,name,grade,parent')->from(TABLE_CATEGORY)
+        if(!is_numeric($categoryID))
+        {
+            $category = $this->loadModel('tree')->getByID($categoryID);
+            $categoryID = $category->id;
+        }
+
+        $categories = $this->dao->select('id,name,grade,alias,parent')->from(TABLE_CATEGORY)
             ->where('type')->eq('book_' . $code)
             ->beginIF($categoryID != 0)->andWhere('path')->like("%,$categoryID,%")->fi()
             ->orderBy('grade, `order`')->fetchAll('id');
