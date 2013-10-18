@@ -28,7 +28,7 @@ js::set('articleID', $article->id);
           printf($lang->article->lblViews, $article->views);
 
           $sina = json_decode($this->config->oauth->sina);
-          if($sina->clientID && $sina->widget) echo "<wb:share-button appkey='$sina->clientID' addition='simple' type='icon' ralateUid='$sina->widget'></wb:share-button>"; 
+          if($sina->widget) echo $sina->widget; 
           ?>
         </div>
         <p><?php echo $article->content;?></p>
