@@ -67,7 +67,7 @@ class upgrade extends control
     {
         $this->view->title       = $this->lang->upgrade->confirm;
         $this->view->confirm     = $this->upgrade->getConfirm($this->post->fromVersion);
-        if($confirm == '')
+        if($this->view->confirm == '')
         {
             $this->view->result = 'success';
             $this->display('upgrade', 'execute');
