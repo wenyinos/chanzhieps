@@ -71,7 +71,7 @@ class helper
         if(!is_array($alias)) parse_str($alias, $alias);
         
         /* Seo modules return directly. */
-        if($config->seoMode and method_exists('uri', 'create' . $moduleName . $methodName))
+        if(helper::isSeoMode() and method_exists('uri', 'create' . $moduleName . $methodName))
         {
             $link = call_user_func_array('uri::create' . $moduleName . $methodName, array('param'=> $vars, 'alias'=>$alias));
             if($link) return $link;
@@ -395,6 +395,17 @@ class helper
         preg_match_all("/./su", $string, $data);
         return join("", array_slice($data[0],  0, $length)) . $append;
     }
+
+    /**
+     * Check SEO MODE
+     *
+     * return bool
+     */
+     function isSeoMode()
+     {
+        global $config;
+        return $config->requestType == 'PATH_INFO' and $config->seoMode;
+     }
 }
 
 /**
