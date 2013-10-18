@@ -434,7 +434,7 @@ class treeModel extends model
 
             if($mode == 'new')
             {
-                if($this->isAliasExists($alias, 0)) return array('alias' => printf($this->lang->tree->aliasRepeat, $alias));
+                if($this->isAliasExists($alias, 0)) return sprintf($this->lang->tree->aliasRepeat, $alias);
                 /* First, save the child without path field. */
                 $category->name  = $categoryName;
                 $category->alias = $alias;
