@@ -36,7 +36,7 @@ class seo
         $params = array();
 
         /* Get module and params from the uri. Like article/2@alias.html, we fetch article/2.  */
-        if(strpos($uri, '@') !== false) $uri = substr($uri, 0, strpos($uri, '@'));
+        if(strpos($uri, '_') !== false) $uri = substr($uri, 0, strpos($uri, '_'));
 
         /* Is there a pageID variable in the url?  */
         $pageID = 0;
@@ -73,8 +73,8 @@ class seo
         /* Is the module an alias of a category? */
         if(isset($categoryAlias[$module]))
         {
-            $category   = $categoryAlias[$module]->category;      // Get the category.
-            $module = $categoryAlias[$module]->module;    // Get the module of the alias category.
+            $category = $categoryAlias[$module]->category;      // Get the category.
+            $module   = $categoryAlias[$module]->module;    // Get the module of the alias category.
 
             /* If the first param is number, like article/123.html, should call view method. */
             if(is_numeric($items[1])) 
@@ -121,7 +121,6 @@ class seo
         /* Add -bookName to help->book method. */
         if($module == 'help' && $book) $method .= '-' . $book;
         return seo::convertURI($module, $method, $params, $pageID);
-
     }
 
     /**
@@ -139,6 +138,18 @@ class seo
         foreach($param as $value) $uri .= "-$value";
         if($pageID > 0) $uri .= "-$pageID";
         return $uri;
+    }
+    
+    /**
+     * process alias.
+     *
+     * @param mix $alias 
+     * return mix
+     **/
+    public static function processAlias($alias)
+    {
+        $alias = str_replace(array('_', ' ', '?', '@', '&', '%', '~', '`', '+', '*', '/'), '-', $alias);
+        return preg_replace('/[\-]+/', '-', $alias);
     }
 }
 
@@ -182,7 +193,7 @@ class uri
         $link = 'article/';
         if($alias['category']) $link = $alias['category'] . $config->webRoot;
         $link .= array_shift($params);
-        if($alias['name']) $link .= '@' . $alias['name'];
+        if($alias['name']) $link .= '_' . $alias['name'];
         return $config->webRoot . $link . '.' . $config->default->view;
     }
 
@@ -215,7 +226,7 @@ class uri
         $link = 'product/';
         if($alias['category']) $link = $alias['category'] . $config->webRoot;
         $link .= array_shift($params);
-        if($alias['name']) $link .= '@' . $alias['name'];
+        if($alias['name']) $link .= '_' . $alias['name'];
         return $config->webRoot . $link . '.' . $config->default->view;
     }
 
@@ -294,7 +305,7 @@ class uri
     {
         global $config;
         $link = 'blog/' . array_shift($params);
-        if($alias['name']) $link .= '@' . $alias['name'];
+        if($alias['name']) $link .= '_' . $alias['name'];
         return $config->webRoot . $link . '.' . $config->default->view;
     }
 
@@ -333,7 +344,7 @@ class uri
         $book = array_shift($params);
 
         $link = 'help/'  . $book . '/' . $id;
-        if($alias['name']) $link .= '@' . $alias['name'];
+        if($alias['name']) $link .= '_' . $alias['name'];
         return $config->webRoot . $link . '.' . $config->default->view;
     }
 }
