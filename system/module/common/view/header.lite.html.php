@@ -5,7 +5,11 @@ $jsRoot    = $webRoot . "js/";
 $themeRoot = $webRoot . "theme/";
 ?>
 <!DOCTYPE html>
+<?php if($this->config->oauth->sina):?>
+<html xmlns:wb=“http://open.weibo.com/wb”>
+<?php else:?>
 <html>
+<?php endif;?>
 <head>
   <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
