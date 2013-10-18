@@ -23,7 +23,8 @@ $lang->site->copyright    = '创建年份';
 
 $lang->site->setBasic     = "设置基本信息";
 $lang->site->setLogo      = "Logo设置";
-$lang->site->setAppkey    = "新浪微博接入";
+$lang->site->setSinaOauth = "新浪微博接入";
+$lang->site->setQQOauth   = "QQ接入";
 
 $lang->site->setLogoFailed  = "设置Logo失败";
 $lang->site->noSelectdLogo  = "没有选择Logo图片";
