@@ -30,8 +30,8 @@
     </tr>
     <?php if($providerCode == 'sina'):?>
     <tr>
-      <th class='w-100px'><?php echo 'RalateUid';?></th> 
-      <td><?php echo html::input('relateUid', $oauth->relateUid, "class='text-3'");?></td> 
+      <th class='w-100px'><?php echo $lang->user->oauth->widget;?></th> 
+      <td><?php echo html::input('widget', $oauth->widget, "class='text-3'");?></td> 
     </tr>
     <?php endif;?>
     <tr>
