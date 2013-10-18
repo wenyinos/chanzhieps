@@ -106,11 +106,13 @@ class site extends control
      * @access public
      * return void
      */
-    public function setAppkey()
+    public function setOauth()
     {
         if(!empty($_POST))
         {
-            $result = $this->loadModel('setting')->setItems('system.common.site', $_POST);
+            $provider = $this->post->provider;
+            $oauth    = array($provider => helper::jsonEncode($_POST));
+            $result   = $this->loadModel('setting')->setItems('system.common.oauth', $oauth);
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
