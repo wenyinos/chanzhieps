@@ -2,23 +2,20 @@
 <div class='row'>
   <div class='col-md-6'>
     <div class='panel panel-default'>
-      <div class='panel-heading'>
-        <?php echo $lang->user->perfectAccount;?>
-      </div>
+      <div class='panel-heading'><?php echo $lang->user->oauth->lblProfile;?></div>
       <div class='panel-body'>
-        <form method='post' id='addaccountForm' action='<?php echo $this->createLink('user', 'addAccount');?>' role='form'>
+        <form method='post' id='registerForm' action='<?php echo $this->createLink('user', 'oauthRegister');?>' role='form'>
           <div class='form-group'>
             <label for='username'><?php echo $lang->user->account;?></label>
-            <?php echo html::input('account', '', "id='username'") . '<font color="red">*</font>' . $lang->user->register->lblAccount;?>
+            <?php echo html::input('account', '', "placeholder='{$lang->user->register->lblAccount}'") . '<font color="red">*</font>';?>
           </div>
           <div class='form-group'>
             <label for='email'><?php echo $lang->user->email;?></label>
-            <?php echo html::input('email', '', "id='email'") . '<font color="red">*</font>';?>
+            <?php echo html::input('email') . '<font color="red">*</font>';?>
           </div>
           <?php 
           echo html::submitButton('', 'btn btn-success btn-wider');
           echo html::hidden('referer', $referer);
-          echo html::hidden('openID', $user['id']);
           ?>
         </form>
       </div>
@@ -26,28 +23,20 @@
   </div>
   <div class='col-md-6'>
     <div class='panel panel-default'>
-      <div class='panel-heading'>
-        <?php echo $lang->user->bind;?>
-      </div>
+      <div class='panel-heading'><?php echo $lang->user->oauth->lblBind;?></div>
       <div class='panel-body'>
-        <form method='post' id='bindForm' action='<?php echo $this->createLink('user', 'bind');?>' role='form'>
+        <form method='post' id='bindForm' action='<?php echo $this->createLink('user', 'oauthBind');?>' role='form'>
           <div class='form-group'>
             <label for='useraccount'><?php echo $lang->user->account;?></label>
-            <?php echo html::input('account', '', "id='useraccount'" )?>
+            <?php echo html::input('account')?>
           </div>
           <div class='form-group'>
-            <label for='password'>
-              <?php 
-              echo $lang->user->password;
-              echo html::a($this->createLink('user', 'resetpassword'), $lang->forgotPassword, '');
-              ?>
-            </label>
-            <?php echo html::password('password', '', "id='password'");?>
+            <label for='password'><?php echo $lang->user->password;?></label>
+            <?php echo html::password('password');?>
           </div>
           <?php 
           echo html::submitButton($lang->login, 'btn btn-success btn-wider');
           echo html::hidden('referer', $referer);
-          echo html::hidden('openID', $user['id']);
           ?>
         </form>
       </div>

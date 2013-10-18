@@ -32,17 +32,8 @@ class user extends control
             $this->user->create();
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
-            $user = $this->user->identify($this->post->account, $this->post->password1);
-            if($user)
+            if($this->user->login($this->post->account, $this->post->password1))
             {
-                /* Authorize the user. */
-                $user->rights = $this->user->authorize($user);
-
-                /* Save to session. */
-                $this->session->set('user', $user);
-                $this->app->user = $this->session->user;
-
-                /* Go to the referer. */
                 $url = $this->post->referer ? urldecode($this->post->referer) : inlink('user', 'control');
                 $this->send( array('result' => 'success', 'locate'=>$url) );
             }
@@ -57,8 +48,8 @@ class user extends control
         {
             $referer = urlencode($_SERVER['HTTP_REFERER']);
         }
-        $this->view->referer = $referer;
 
+        $this->view->referer = $referer;
         $this->display();
     }
 
@@ -80,45 +71,25 @@ class user extends control
         /* If the user logon already, goto the pre page. */
         if($this->user->isLogon())
         {
-            if($this->referer and strpos($loginLink . $denyLink . $regLink, $this->referer) !== false)
-            {
-                $locate = $this->referer;
-            }
-            else
-            {
-                $locate = $this->createLink($this->config->default->module);
-            }
-
-            $this->locate($locate);
+            if($this->referer and strpos($loginLink . $denyLink . $regLink, $this->referer) !== false) $this->locate($this->referer);
+            $this->locate($this->createLink($this->config->default->module));
+            exit;
         }
 
         /* If the user sumbit post, check the user and then authorize him. */
         if(!empty($_POST))
         {
-            $user = $this->user->identify($this->post->account, $this->post->password);
-            if($user)
+            if(!$this->user->login($this->post->account, $this->post->password)) $this->send(array('result'=>'fail', 'message' => $this->lang->user->loginFailed));
+
+            /* Goto the referer or to the default module */
+            if($this->post->referer != false and strpos($loginLink . $denyLink . $regLink, $this->post->referer) === false)
             {
-                /* Authorize the user. */
-                $user->rights = $this->user->authorize($user);
-
-                /* Register the session. */
-                $this->session->set('user', $user);
-                $this->app->user = $this->session->user;
-
-                /* Goto the referer or to the default module */
-                if($this->post->referer != false and strpos($loginLink . $denyLink . $regLink, $this->post->referer) === false)
-                {
-                    $this->send(array('result'=>'success', 'locate'=> urldecode($_POST['referer'])));
-                }
-                else
-                {
-                    $default = $this->config->user->default;
-                    $this->send(array('result'=>'success', 'locate' => $this->createLink($default->module, $default->method)));
-                }
+                $this->send(array('result'=>'success', 'locate'=> urldecode($this->post->referer)));
             }
             else
             {
-                $this->send(array('result'=>'fail', 'message' => $this->lang->user->loginFailed));
+                $default = $this->config->user->default;
+                $this->send(array('result'=>'success', 'locate' => $this->createLink($default->module, $default->method)));
             }
         }
 
@@ -444,183 +415,120 @@ class user extends control
     }
 
     /**
-     * OpenID login 
+     * OAuth login.
      * 
-     * @param  string    $provider sina|qq|gmail|github 
+     * @param  string    $provider sina|qq
+     * @param  string    $referer  the referer before login
      * @access public
      * @return void
      */
-    public function openIDLogin($provider, $referer)
+    public function oauthLogin($provider, $referer = '')
     {
-        if($provider == 'sina')
-        {
-            $this->app->loadClass('sina', $static = true);
-            $sina = new SaeTOAuthV2($this->config->site->akey, $this->config->site->skey);
-            $url  = $sina->getAuthorizeURL($this->config->user->openID->sina->callbackUrl . "?referer=" . $referer);
-            $this->locate($url);
-        }
+        /* Save the provider to session.*/
+        $this->session->set('oauthProvider', $provider);
+
+        /* Init OAuth client. */
+        $this->app->loadClass('oauth', $static = true);
+        $client = oauth::factory($provider, $this->config->oauth->$provider, $this->user->createOAuthCallbackURL($provider));
+
+        /* Create the authorize url and locate to it. */
+        $authorizeURL  = $client->createAuthorizeAPI();
+        $authorizeURL .= $referer ? "&referer=$referer" : '';
+        $this->locate($authorizeURL);
     }
 
     /**
-     * Callback of sina.
+     * OAuth callback.
      * 
+     * @param  string    $provider
      * @access public
      * @return void
      */
-    public function callback()
+    public function oauthCallback($provider)
     {
-        if(isset($_REQUEST['referer'])) 
+        /* First check the state and provider fields. */
+        if($this->get->state != $this->session->oauthState)  die('state wrong!');
+        if($provider != $this->session->oauthProvider)       die('provider wrong.');
+
+        /* Init the OAuth client. */
+        $this->app->loadClass('oauth', $static = true);
+        $client = oauth::factory($provider, $this->config->oauth->$provider, $this->user->createOAuthCallbackURL($provider));
+
+        /* Begin OAuth authing. */
+        $token  = $client->getToken($this->get->code);    // Step1: get token by the code.
+        $openID = $client->getOpenID($token);             // Step2: get open id by the token.
+
+        /* Step3: Try to get user by the open id, if got, login him. */
+        $user = $this->user->getUserByOpenID($provider, $openID);
+        if($user and $this->user->login($user->account, $user->password))
         {
-            $referer = $_REQUEST['referer'];
-            $this->setReferer($referer);
+            $default = $this->config->user->default;    // Redefine the default module and method in dashbaord scene.
+
+            if($this->post->referer != false) $this->locate(urldecode($this->post->referer));
+            if($this->post->referer == false) $this->locate($this->createLink($default->module, $default->method));
         }
 
-        $this->app->loadClass('sina', $static = true);
-        $sina = new SaeTOAuthV2($this->config->site->akey , $this->config->site->skey);
+        $this->session->set('oauthOpenID', $openID);                     // Save the openID to session.
+        if($this->get->referer != false) $this->setReferer($referer);    // Set the referer.
 
-        $token = array();
-        if(isset($_REQUEST['code']) && isset($_REQUEST['referer'])) 
-        {
-            $keys         = array();
-            $keys['code'] = $_REQUEST['code'];
-            $keys['redirect_uri'] = $this->config->user->openID->sina->callbackUrl . "?referer=" . $_REQUEST['referer'];
-            try 
-            {
-                $token = $sina->getAccessToken('code', $keys);
-            } 
-            catch(OAuthException $e){}
-        }
-
-        if(!$token) die(js::error('授权失败'));
-
-        $_SESSION['token'] = $token;
-        setcookie( 'weibojs_'.$sina->client_id, http_build_query($token));
-
-        $sina = new SaeTClientV2($this->config->site->akey , $this->config->site->skey, $_SESSION['token']['access_token'] ); //验证
-        $user = $sina->show_user_by_id($token['uid']);
-        if(!$this->checkOpenID('sina', $user['id'], $this->referer))
-        {
-            $this->view->title   = $this->lang->user->login->common;
-            $this->view->user    = $user;
-            $this->view->referer = $this->referer;
-            $this->display();
-        }
+        $this->view->title   = $this->lang->user->login->common;
+        $this->view->referer = $this->referer;
+        $this->display();
     }
 
     /**
-     * Check openID if has been logined. 
-     * 
-     * @param  string $provider 
-     * @param  int    $openID 
-     * @access public
-     * @return void
-     */
-    public function checkOpenID($provider, $openID, $referer)
-    {
-        if(empty($openID)) return false;
-
-        $account = $this->dao->select('account')->from(TABLE_OPENID)
-            ->where('provider')->eq($provider)
-            ->andWhere('openID')->eq($openID)
-            ->fetch('account', false);
-        if(!$account) return false;
-        $user = $this->user->getByAccount($account);
-        $user->rights = $this->user->authorize($user);
-        $this->session->set('user', $user);
-        $this->app->user = $this->session->user;
-
-        /* Goto the referer or to the default module */
-        if($referer != false)
-        {
-            die(js::locate(urldecode($referer), 'parent'));
-        }
-        else
-        {
-            die(js::locate($this->createLink('user', 'control'), 'parent'));
-        }
-
-    }
-
-    /**
-     * Add account for openID.
+     * Register a user when using oauth login.
      * 
      * @access public
      * @return void
      */
-    public function addAccount()
+    public function oauthRegister()
     {
+        /* If session timeout, locate to login page. */
+        if($this->session->oauthProvider == false or $this->session->oauthOpenID == false) $this->send(array('result' => 'success', 'locate'=> inlink('login')));
+
         if($_POST)
         {
-            $user = fixer::input('post')
-                ->setDefault('join', date('Y-m-d H:i:s'))
-                ->setDefault('last', helper::now())
-                ->setDefault('visits', 1)
-                ->setIF($this->cookie->r != '', 'referer', $this->cookie->r)
-                ->setIF($this->cookie->r == '', 'referer', '')
-                ->remove('openID')
-                ->get();
-
-            $this->dao->insert(TABLE_USER)->data($user)
-                ->autoCheck()
-                ->batchCheck('account, email', 'notempty')
-                ->check('account', 'unique', '1=1', false)
-                ->check('account', 'account')
-                ->checkIF($this->post->email != false, 'email', 'email')
-                ->exec();
+            $this->user->registerOauthAccount($this->session->oauthProvider, $this->session->oauthOpenID);
 
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
-            $this->bind($user->account, $this->post->openID);
-            /* Goto the referer or to the default module */
-            if($this->post->referer != false)
+            $user = $this->user->getUserByOpenID($this->session->oauthProvider, $this->session->oauthOpenID);
+            if($this->user->login($user->account, $user->password))
             {
-                $this->send(array('result'=>'success', 'locate'=> urldecode($_POST['referer'])));
+                $default = $this->config->user->default;    // Redefine the default module and method in dashbaord scene.
+
+                if($this->post->referer != false) $this->send(array('result'=>'success', 'locate'=> urldecode($this->post->referer)));
+                if($this->post->referer == false) $this->send(array('result'=>'success', 'locate'=> $this->createLink($default->module, $default->method)));
+                exit;
             }
-            else
-            {
-                $this->send(array('result'=>'success', 'locate' => $this->inlink('control')));
-            }
+
+            $this->send(array('result' => 'fail', 'message' => 'I have registered but can\'t login, some error occers.'));
         }
     }
 
     /**
-     * Bind openID and zentao user.
+     * Bind an open id to an account of chanzhi system.
      * 
-     * @param  string $account 
-     * @param  int    $openID 
      * @access public
      * @return void
      */
-    public function bind($account = '', $openID = 0)
+    public function oauthBind()
     {
-        $user = $account ? $this->user->getByAccount($account) : $this->user->identify($this->post->account, $this->post->password);
-        if($this->post->openID) $openID = $this->post->openID;
-        if($user)
+        if($this->user->login($this->post->account, $this->post->password))
         {
-            $user->rights = $this->user->authorize($user);
-            /* Register the session. */
-            $this->session->set('user', $user);
-            $this->app->user = $this->session->user;
-
-            $this->dao->insert(TABLE_OPENID)
-                ->set('account')->eq($user->account)
-                ->set('provider')->eq('sina')
-                ->set('openID')->eq($openID)
-                ->exec(false);
-
-           /* Goto the referer or to the default module */
-           if($this->post->referer != false)
-           {
-               $this->send(array('result'=>'success', 'locate'=> urldecode($_POST['referer'])));
-           }
-           else
-           {
-               $this->send(array('result'=>'success', 'locate' => $this->inlink('control')));
-           }
+            if($this->user->bindOAuthAccount($this->post->account, $this->session->oauthProvider, $this->session->oauthOpenID))
+            {
+                $default = $this->config->user->default;
+                if($this->post->referer != false) $this->send(array('result'=>'success', 'locate'=> urldecode($this->post->referer)));
+                if($this->post->referer == false) $this->send(array('result'=>'success', 'locate'=> $this->createLink($default->module, $default->method)));
+            }
+            else
+            {
+                $this->send(array('result' => 'fail', 'message' => $this->lang->user->oauth->lblBindFailed));
+            }
         }
-        else
-        {
-            $this->send(array('result' => 'fail', 'message' => $this->lang->user->loginFailed));
-        }
+
+        $this->send(array('result' => 'fail', 'message' => $this->lang->user->loginFailed));
     }
 }

@@ -75,14 +75,6 @@ $lang->user->loginFailed   = "登录失败，请检查您的用户名或密码�
 $lang->user->lblRegistered = '恭喜您，已经成功注册。';
 $lang->user->forbidSuccess = '禁用成功';
 $lang->user->forbidFail    = '禁用失败';
-$lang->user->perfectAccount = <<<EOD
-<h3>完善帐号信息</h3>
-<p>设置您的帐号用户名及电子邮件</p>
-EOD;
-$lang->user->bind          = <<<EOD
-<h3>绑定帐号</h3>
-<p>如果您已注册过帐号，请在此绑定</p>
-EOD;
 
 $lang->user->forbidUser          = '禁用管理';
 $lang->user->forbidDate = array();
@@ -112,10 +104,23 @@ $lang->user->notice->password = '字母和数字组合，最少六位';
 $lang->user->login  = new stdclass();
 $lang->user->login->common  = "登录";
 $lang->user->login->welcome = '已有帐号';
-$lang->user->login->why     = '欢迎登陆我们的系统，这样您可以使用我们为注册会员提供的各种服务。';
-$lang->user->login->openID  = '第三方登录，快捷方便';
-$lang->user->login->sina    = '新浪微博';
-$lang->user->login->keepLogin['yes'] = "保持登录";
+$lang->user->login->why     = '欢迎登陆，享用会员专属服务！';
+
+$lang->user->oauth = new stdclass();
+$lang->user->oauth->common       = '开放登录';
+$lang->user->oauth->provider     = '服务商';
+$lang->user->oauth->clientID     = 'App Key';
+$lang->user->oauth->clientSecret = 'App Secret';
+$lang->user->oauth->verification = '网站验证';
+$lang->user->oauth->widget       = '网页组件';
+
+$lang->user->oauth->providers['sina'] = '新浪微博';
+$lang->user->oauth->providers['qq']   = 'QQ';
+
+$lang->user->oauth->lblWelcome    = '开放登录，快捷方便';
+$lang->user->oauth->lblProfile    = "<h3>设置用户名，完成注册</h3>";
+$lang->user->oauth->lblBind       = "<h3>或绑定已有帐号</h3>";
+$lang->user->oauth->lblBindFailed = "绑定账户失败！";
 
 $lang->user->control = new stdclass();
 $lang->user->control->common      = '用户中心';

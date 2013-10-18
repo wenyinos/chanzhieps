@@ -418,10 +418,11 @@ class commonModel extends model
     /**
      * Get the full url of the system.
      * 
+     * @static
      * @access public
      * @return string
      */
-    public function getSysURL()
+    public static function getSysURL()
     {
         global $config;
         $httpType = isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == 'on' ? 'https' : 'http';

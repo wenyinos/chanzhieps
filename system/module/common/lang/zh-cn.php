@@ -175,16 +175,16 @@ $lang->menuGroups->slide = 'site';
 
 /* The error messages. */
 $lang->error = new stdclass();
-$lang->error->length       = array('『%s』长度错误，应当为『%s』', '『%s』长度应当不超过『%s』，且不小于『%s』。');
-$lang->error->reg          = '『%s』不符合格式，应当为:『%s』。';
-$lang->error->unique       = '『%s』已经有『%s』这条记录了。';
-$lang->error->notempty     = '『%s』不能为空。';
-$lang->error->equal        = '『%s』必须为『%s』。';
-$lang->error->int          = array('『%s』应当是数字。', '『%s』最小值为%s',  '『%s』应当介于『%s-%s』之间。');
-$lang->error->float        = '『%s』应当是数字，可以是小数。';
-$lang->error->email        = '『%s』应当为合法的EMAIL。';
-$lang->error->date         = '『%s』应当为合法的日期。';
-$lang->error->account      = '『%s』应当为字母和数字的组合，至少三位';
+$lang->error->length       = array('<strong>%s</strong>长度错误，应当为<strong>%s</strong>', '<strong>%s</strong>长度应当不超过<strong>%s</strong>，且不小于<strong>%s</strong>。');
+$lang->error->reg          = '<strong>%s</strong>不符合格式，应当为:<strong>%s</strong>。';
+$lang->error->unique       = '<strong>%s</strong>已经有<strong>%s</strong>这条记录了。';
+$lang->error->notempty     = '<strong>%s</strong>不能为空。';
+$lang->error->equal        = '<strong>%s</strong>必须为<strong>%s</strong>。';
+$lang->error->int          = array('<strong>%s</strong>应当是数字。', '<strong>%s</strong>最小值为%s',  '<strong>%s</strong>应当介于<strong>%s-%s</strong>之间。');
+$lang->error->float        = '<strong>%s</strong>应当是数字，可以是小数。';
+$lang->error->email        = '<strong>%s</strong>应当为合法的EMAIL。';
+$lang->error->date         = '<strong>%s</strong>应当为合法的日期。';
+$lang->error->account      = '<strong>%s</strong>应当为字母和数字的组合，至少三位';
 $lang->error->passwordsame = '两次密码应当相等。';
 $lang->error->passwordrule = '密码应该符合规则，长度至少为六位。';
 $lang->error->captcha      = '请输入正确的验证码。';

@@ -88,10 +88,10 @@ class userModel extends model
             ->data($user, $skip = 'password1,password2')
             ->autoCheck()
             ->batchCheck($this->config->user->register->requiredFields, 'notempty')
-            ->check('account', 'unique', '1=1', false)
-            ->check('email', 'unique', '1=1', false)
+            ->check('account', 'unique')
             ->check('account', 'account')
-            ->checkIF($this->post->email != false, 'email', 'email')
+            ->check('email', 'email')
+            ->check('email', 'unique')
             ->exec();
     }
 
@@ -124,7 +124,8 @@ class userModel extends model
             ->data($user, $skip = 'password1,password2')
             ->autoCheck()
             ->batchCheck($this->config->user->edit->requiredFields, 'notempty')
-            ->checkIF($this->post->email != false, 'email', 'email')
+            ->check('email', 'email')
+            ->check('email', 'unique', "account!='$account'")
             ->checkIF($this->post->gtalk != false, 'gtalk', 'email')
             ->where('account')->eq($account)
             ->exec();
@@ -173,10 +174,30 @@ class userModel extends model
     }   
 
     /**
+     * Try to login with an account and password.
+     * 
+     * @param  string    $account 
+     * @param  string    $password 
+     * @access public
+     * @return bool
+     */
+    public function login($account, $password)
+    {
+        $user = $this->identify($account, $password);
+        if(!$user) return false;
+
+        $user->rights = $this->authorize($user);
+        $this->session->set('user', $user);
+        $this->app->user = $this->session->user;
+
+        return true;
+    }
+
+    /**
      * Identify a user.
      * 
      * @param   string $account     the account
-     * @param   string $password    the password
+     * @param   string $password    the password    the plain password or the md5 hash
      * @access  public
      * @return  object              if is valid user, return the user object.
      */
@@ -193,7 +214,8 @@ class userModel extends model
         /* Then check the password hash. */
         if(!$user) return false;
 
-        if($this->createPassword($password, $user->account, $user->join) != $user->password) return false;
+        /* The password can be the plain or the password after md5. */
+        if($this->createPassword($password, $user->account, $user->join) != $user->password and $user->password != $password) return false;
 
         /* Update user data. */
         $user->ip = $this->server->remote_addr;
@@ -361,5 +383,87 @@ class userModel extends model
     public function createPassword($password, $account, $join)
     {
         return md5(md5($password) . $account . $join);
+    }
+
+    /**
+     * Create the callback address for oauth.
+     * 
+     * @param  string    $provider 
+     * @access public
+     * @return string
+     */
+    public function createOAuthCallbackURL($provider)
+    {
+        return commonModel::getSysURL() . helper::createLink('user', 'oauthCallback', "provider=$provider");
+    }
+
+    /**
+     * Register an account when using OAuth.
+     * 
+     * @param  string    $provider 
+     * @param  string    $openID 
+     * @access public
+     * @return void
+     */
+    public function registerOauthAccount($provider, $openID)
+    {
+        $user = fixer::input('post')
+            ->setDefault('join', helper::now())
+            ->setDefault('last', helper::now())
+            ->setDefault('visits', 1)
+            ->setIF($this->cookie->r != '', 'referer', $this->cookie->r)
+            ->setIF($this->cookie->r == '', 'referer', '')
+            ->add('password', $this->createPassword(md5(mt_rand()), $user->account, $user->join))     // Set a random password.
+            ->get();
+
+        $this->dao->insert(TABLE_USER)->data($user)
+            ->autoCheck()
+            ->batchCheck('account, email', 'notempty')
+            ->check('account', 'unique')
+            ->check('account', 'account')
+            ->check('email', 'unique')
+            ->check('email', 'email')
+            ->exec();
+
+        if(dao::isError()) return false;
+        return $this->bindOAuthAccount($this->post->account, $provider, $openID);
+    }
+
+    /**
+     * Bind an OAuth account.
+     * 
+     * @param  string    $account    the chanzhi system account
+     * @param  string    $provider   the OAuth provider
+     * @param  string    $openID     the open id from provider
+     * @access public
+     * @return bool
+     */
+    public function bindOAuthAccount($account, $provider, $openID)
+    {
+        if(!$account or !$provider or !$openID) return false;
+
+        return $this->dao->replace(TABLE_OAUTH)
+            ->set('account')->eq($account)
+            ->set('provider')->eq($provider)
+            ->set('openID')->eq($openID)
+            ->exec();
+    }
+
+    /**
+     * Get user by an open id.
+     * 
+     * @param  string    $provider 
+     * @param  string    $openID 
+     * @access public
+     * @return object|bool
+     */
+    public function getUserByOpenID($provider, $openID)
+    {
+        $account = $this->dao->select('account')->from(TABLE_OAUTH)
+            ->where('provider')->eq($provider)
+            ->andWhere('openID')->eq($openID)
+            ->fetch('account');
+        if(!$account) return false;
+        return $this->getByAccount($account);
     }
 }

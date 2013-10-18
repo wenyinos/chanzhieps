@@ -2,16 +2,16 @@
 <section id="login">
   <div class="box-radius">
     <div class="row">
-      <?php if(!empty($this->config->site->akey) && !empty($this->config->site->skey)):?>
+      <?php if(isset($config->oauth)):?>
       <div class="col-md-6">
         <div class="panel panel-default">
-          <div class="panel-heading"><h4><strong><?php echo $lang->user->login->openID;?></strong></h4></div>
+          <div class="panel-heading"><h4><strong><?php echo $lang->user->oauth->lblWelcome;?></strong></h4></div>
           <div class="panel-body">
             <?php 
-            foreach($config->user->openID->List as $provider => $name) 
+            foreach($lang->user->oauth->providers as $providerCode => $providerName) 
             {
-                $backUrl = isset($referer) ? helper::safe64Encode($referer) : '';
-                echo html::a(inlink('openIDLogin', "provider=$provider&referer=$backUrl"), "<i class='icon-{$provider} icon-large'></i> " . $lang->user->login->sina, '', "class='btn btn-default btn-wider btn-lgx btn-block'");
+                $params = "provider=$providerCode" . ($referer ? "&referer=" . helper::safe64Encode($referer) : '');
+                echo html::a(inlink('oauthLogin', $params), "<i class='icon-{$providerCode} icon-large'></i> " . $providerName, '', "class='btn btn-default btn-wider btn-lgx btn-block'");
             }
             ?>
           </div>
@@ -25,14 +25,8 @@
           <div class="panel-heading"><h4><strong><?php echo $lang->user->login->welcome;?></strong></h4></div>
           <div class="panel-body">
             <form method='post' id='ajaxForm' role='form'>
-              <div class="form-group">
-                <label for="useraccount"><?php echo $lang->user->account;?></label>
-                <?php echo html::input('account','',"placeholder='{$lang->user->inputAccountOrEmail}' class='input-lg'");?>
-              </div>
-              <div class="form-group">
-                <label for="password"><?php echo $lang->user->password;?></label>
-                <?php echo html::password('password','',"placeholder='{$lang->user->inputPassword}' class='input-lg'");?>
-              </div>
+              <div class="form-group"><?php echo html::input('account','',"placeholder='{$lang->user->inputAccountOrEmail}' class='input-lg'");?></div>
+              <div class="form-group"><?php echo html::password('password','',"placeholder='{$lang->user->inputPassword}' class='input-lg'");?></div>
               <?php echo html::submitButton($lang->user->login->common, 'btn btn-primary btn-wider btn-lg');?>
               <?php echo html::hidden('referer', $referer);?>
             </form>
