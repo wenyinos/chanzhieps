@@ -1,5 +1,5 @@
-    <?php
-    /**
+<?php
+/**
  * The router, config and lang class file of ZenTaoPHP framework.
  *
  * The author disclaims copyright to this source code.  In place of
