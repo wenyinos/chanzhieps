@@ -57,6 +57,7 @@ js::import($jsRoot . 'respond/min.js');
 <?php
 $sina = json_decode($this->config->oauth->sina);
 $qq   = json_decode($this->config->oauth->qq);
+if($sina->widget) js::import('http://tjs.sjs.sinajs.cn/open/api/js/wb.js');
 if($sina->verification) echo $sina->verification; 
 if($qq->verification)   echo $qq->verification;
 ?>
