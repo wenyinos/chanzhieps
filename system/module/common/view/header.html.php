@@ -4,11 +4,8 @@ include 'header.lite.html.php';
 js::set('lang', $lang->js);
 ?>
 <div class='container'>
-  <!--[if IE 6]>
-  <?php echo $lang->IE6Alert;?>
-  <![endif]-->
+  <?php if(1 or strpos($_SERVER['HTTP_USER_AGENT'],'MSIE 6.0') !== false ) exit($lang->IE6Alert); ?>
   <div id='header'>
-    <div class='nav' id="headNav"><?php echo commonModel::printTopBar();?></div>
     <?php if(isset($config->site->logo)):?>
     <?php $logo = json_decode($config->site->logo);?>
     <div id='logoBox' class='f-left'>
