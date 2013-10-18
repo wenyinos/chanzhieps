@@ -18,7 +18,7 @@
     <caption><?php echo $providerName;?></caption> 
     <tr>
       <th class='w-100px'><?php echo $lang->user->oauth->clientID;?></th> 
-      <td><?php echo html::input('clientID', $oauth->clientID, "class='text-3'");?></td> 
+      <td><?php echo html::input('clientID', $oauth->clientID, "class='text-5'");?></td> 
     </tr>
     <tr>
       <th><?php echo $lang->user->oauth->clientSecret;?></th> 
@@ -31,7 +31,7 @@
     <?php if($providerCode == 'sina'):?>
     <tr>
       <th class='w-100px'><?php echo $lang->user->oauth->widget;?></th> 
-      <td><?php echo html::input('widget', $oauth->widget, "class='text-3'");?></td> 
+      <td><?php echo html::input('widget', $oauth->widget, "class='text-5'");?></td> 
     </tr>
     <?php endif;?>
     <tr>
