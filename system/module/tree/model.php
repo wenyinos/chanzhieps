@@ -367,6 +367,7 @@ class treeModel extends model
     public function update($categoryID)
     {
         $category = fixer::input('post')->setDefault('readonly', 0)->specialChars('name')->get();
+        $category->alias = seo::processAlias($category->alias);
         if($this->isAliasExists($category->alias, $categoryID)) return sprintf($this->lang->tree->aliasRepeat, $category->alias);
         $parent   = $this->getById($this->post->parent);
         $category->grade = $parent ? $parent->grade + 1 : 1;
@@ -428,6 +429,7 @@ class treeModel extends model
         foreach($children as $key => $categoryName)
         {
             $alias = $this->post->alias[$key];
+            $alias = seo::processAlias($alias);
             if(empty($categoryName)) continue;
 
             $mode = $this->post->mode[$key];

@@ -150,6 +150,8 @@ class productModel extends model
             ->add('addedDate', helper::now())
             ->get();
 
+        $product->alias = seo::processAlias($product->alias);
+
         $this->dao->insert(TABLE_PRODUCT)
             ->data($product, $skip = 'categories')
             ->autoCheck()
@@ -180,6 +182,8 @@ class productModel extends model
             ->add('editor', $this->app->user->account)
             ->add('editedDate', helper::now())
             ->get();
+
+        $product->alias = seo::processAlias($product->alias);
 
         $this->dao->update(TABLE_PRODUCT)
             ->data($product, $skip = 'categories')

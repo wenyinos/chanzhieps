@@ -147,6 +147,8 @@ class articleModel extends model
             ->add('type', $type)
             ->get();
 
+        $article->alias = seo::processAlias($article->alias);
+
         $this->dao->insert(TABLE_ARTICLE)
             ->data($article, $skip = 'categories')
             ->autoCheck()
@@ -174,6 +176,8 @@ class articleModel extends model
             ->add('editor', $this->app->user->account)
             ->add('editedDate', helper::now())
             ->get();
+
+        $article->alias = seo::processAlias($article->alias);
 
         $this->dao->update(TABLE_ARTICLE)
             ->data($article, $skip = 'categories')
