@@ -26,7 +26,9 @@ js::set('articleID', $article->id);
               $article->copyURL ? print(html::a($article->copyURL, $article->copySite, '_blank')) : print($article->copySite); 
           }
           printf($lang->article->lblViews, $article->views);
-          include './weibo.html.php'; 
+
+          $sina = json_decode($this->config->oauth->sina);
+          if($sina->clientID && $sina->widget) echo "<wb:share-button appkey='$sina->clientID' addition='simple' type='icon' ralateUid='$sina->widget'></wb:share-button>"; 
           ?>
         </div>
         <p><?php echo $article->content;?></p>
