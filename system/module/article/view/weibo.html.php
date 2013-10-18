@@ -1,6 +1,7 @@
 <?php
-js::set('appkey', $this->config->site->akey);
-js::set('ralateUid', $this->config->site->Uid);
+$sina = json_decode($this->config->oauth->sina);
+js::set('appkey', $sina->clientID);
+js::set('ralateUid', $sina->relateUid);
 ?>
 <script type="text/javascript" charset="utf-8">
 (function(){
