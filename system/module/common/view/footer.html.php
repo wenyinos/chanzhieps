@@ -24,8 +24,5 @@ $extHookFiles = glob($extHookRule);
 if($extHookFiles) foreach($extHookFiles as $extHookFile) include $extHookFile;
 ?>
 </div>
-<!--[if IE 6]>
-<?php echo $lang->killIE6;?>
-<![endif]-->
 </body>
 </html>
