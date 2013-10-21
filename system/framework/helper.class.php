@@ -421,7 +421,7 @@ class helper
 function inLink($methodName = 'index', $vars = '', $alias = '', $viewType = '')
 {
     global $app;
-    return helper::createLink($app->getModuleName(), $methodName, $vars, $viewType);
+    return helper::createLink($app->getModuleName(), $methodName, $vars, $alias, $viewType);
 }
 
 /**
