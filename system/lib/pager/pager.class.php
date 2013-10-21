@@ -374,7 +374,7 @@ class pager
     {
         if($this->pageID == $this->pageTotal) return $this->lang->pager->last . ' ';
         $this->params['pageID'] = $this->pageTotal;
-        return html::a(helper::createLink($this->moduleName, $this->methodName, $this->params), $this->lang->pager->last);
+        return $this->createLink($this->lang->pager->last);
     }    
 
     /**

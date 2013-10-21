@@ -73,7 +73,6 @@ class helper
         /* Seo modules return directly. */
         if(helper::isSeoMode() and method_exists('uri', 'create' . $moduleName . $methodName))
         {
-
             $link = call_user_func_array('uri::create' . $moduleName . $methodName, array('param'=> $vars, 'alias'=>$alias));
             if($link) return $link;
         }
@@ -421,7 +420,7 @@ class helper
 function inLink($methodName = 'index', $vars = '', $alias = '', $viewType = '')
 {
     global $app;
-    return helper::createLink($app->getModuleName(), $methodName, $vars, $viewType);
+    return helper::createLink($app->getModuleName(), $methodName, $vars, $alias, $viewType);
 }
 
 /**
