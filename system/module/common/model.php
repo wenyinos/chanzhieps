@@ -620,6 +620,7 @@ class commonModel extends model
      */
     public function loadCategoryAlias()
     {
+        if(version_compare($config->installedVersion, 1.4) <= 0) return true;
         $this->config->seo->alias->category = $this->dao->select('alias, id as category, type as module')->from(TABLE_CATEGORY)->where('alias')->ne('')->andWhere('type')->in('article,product')->fetchAll('alias');
         $this->config->seo->alias->page     = $this->dao->select("alias, id, 'page' as module")->from(TABLE_ARTICLE)->where('type')->eq('page')->fetchAll('alias');
     }
