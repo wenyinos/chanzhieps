@@ -43,12 +43,12 @@ $config->rights->guest['help']['index'] = 'index';
 $config->rights->guest['help']['book']  = 'book';
 $config->rights->guest['help']['read']  = 'read';
 
-$config->rights->guest['user']['login']       = 'login';
-$config->rights->guest['user']['openidlogin'] = 'openidlogin';
-$config->rights->guest['user']['register']    = 'register';
-$config->rights->guest['user']['callback']    = 'callback';
-$config->rights->guest['user']['bind']        = 'bind';
-$config->rights->guest['user']['addaccount']  = 'addaccount';
+$config->rights->guest['user']['login']         = 'login';
+$config->rights->guest['user']['register']      = 'register';
+$config->rights->guest['user']['oauthlogin']    = 'oauthlogin';
+$config->rights->guest['user']['oauthcallback'] = 'oauthcallback';
+$config->rights->guest['user']['oauthregister'] = 'oauthregister';
+$config->rights->guest['user']['oauthbind']     = 'oauthbind';
 
 $config->rights->guest['rss']['index']       = 'index';
 $config->rights->guest['file']['download']   = 'download';

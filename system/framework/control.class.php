@@ -575,10 +575,10 @@ class control
      * @access  public
      * @return  string the link string.
      */
-    public function createLink($moduleName, $methodName = 'index', $vars = array(), $viewType = '')
+    public function createLink($moduleName, $methodName = 'index', $vars = array(), $alias = array(), $viewType = '')
     {
         if(empty($moduleName)) $moduleName = $this->moduleName;
-        return helper::createLink($moduleName, $methodName, $vars, $viewType);
+        return helper::createLink($moduleName, $methodName, $vars, $alias, $viewType);
     }
 
     /**
@@ -590,9 +590,9 @@ class control
      * @access  public
      * @return  string  the link string.
      */
-    public function inlink($methodName = 'index', $vars = array(), $viewType = '')
+    public function inlink($methodName = 'index', $vars = array(), $alias = array(), $viewType = '')
     {
-        return helper::createLink($this->moduleName, $methodName, $vars, $viewType);
+        return helper::createLink($this->moduleName, $methodName, $vars, $alias, $viewType);
     }
 
     /**

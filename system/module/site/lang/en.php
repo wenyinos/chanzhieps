@@ -23,7 +23,17 @@ $lang->site->copyright    = 'Copyright';
 
 $lang->site->setBasic     = "Baisc";
 $lang->site->setLogo      = "Log";
-$lang->site->setAppkey    = "Weibo Oauth";
+$lang->site->setSinaOauth = "Weibo Oauth";
+$lang->site->setQQOauth   = "QQ Oauth";
+$lang->site->setTheme     = 'Set Theme';
 
-$lang->site->setLogoFaild     = "Set log failed.";
-$lang->error->notSelectedLogo = "No logo file selected.";
+$lang->site->setLogoFailed  = "Set logo failed.";
+$lang->site->noSelectedLogo = "No logo file selected.";
+$lang->site->oauthHelp      = "Help";
+
+$lang->site->themes    = array();
+$lang->site->themes['default']    = 'Default';
+$lang->site->themes['flat']       = 'Flat';
+$lang->site->themes['tree']       = 'Tree';
+$lang->site->themes['brightdark'] = 'Brightdark';
+$lang->site->themes['tartan']     = 'Tartan';

@@ -68,14 +68,15 @@ class productModel extends model
             ->groupBy('t2.id')
             ->orderBy($orderBy)
             ->page($pager)
+            //->printSQL();
             ->fetchAll('id');
         if(!$products) return array();
 
         /* Get categories for these products. */
-        $categories = $this->dao->select('t2.id, t2.name, t1.id AS product')
+        $categories = $this->dao->select('t2.id, t2.name, t2.alias, t1.id AS product')
             ->from(TABLE_RELATION)->alias('t1')
             ->leftJoin(TABLE_CATEGORY)->alias('t2')->on('t1.category = t2.id')
-            ->where('1 = 1')
+            ->where('t2.type')->eq('product')
             ->beginIF($categories)->andWhere('t1.category')->in($categories)->fi()
             ->fetchGroup('product', 'id');
 
@@ -95,7 +96,7 @@ class productModel extends model
         }
         
         /* Assign summary to it's product. */
-        foreach($products as $product) $product->summary = empty($product->summary) ? substr(strip_tags($product->content), 0, 300) : $product->summary;
+        foreach($products as $product) $product->summary = empty($product->summary) ? helper::substr(strip_tags($product->content), 250) : $product->summary;
 
         return $products;
     }
@@ -149,6 +150,8 @@ class productModel extends model
             ->add('addedDate', helper::now())
             ->get();
 
+        $product->alias = seo::processAlias($product->alias);
+
         $this->dao->insert(TABLE_PRODUCT)
             ->data($product, $skip = 'categories')
             ->autoCheck()
@@ -179,6 +182,8 @@ class productModel extends model
             ->add('editor', $this->app->user->account)
             ->add('editedDate', helper::now())
             ->get();
+
+        $product->alias = seo::processAlias($product->alias);
 
         $this->dao->update(TABLE_PRODUCT)
             ->data($product, $skip = 'categories')

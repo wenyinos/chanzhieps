@@ -13,15 +13,16 @@ include '../../common/view/treeview.html.php';
       <h4 class='title'><?php echo $category->name;?></h4>
       <ul class="media-list">
       <?php foreach($articles as $article):?>
+      <?php $url = inlink('view', "id=$article->id", "category={$category->alias}&name=$article->alias");?>
         <li class="media">
           <div class='media-body'>
-            <h3 class='media-heading'><?php echo html::a(inlink('view', "id=$article->id"), $article->title);?></h3>
+            <h3 class='media-heading'><?php echo html::a($url, $article->title);?></h3>
             <p>
               <?php 
               if(!empty($article->image))
               {
                   $title = $article->image->primary->title ? $article->image->primary->title : $article->title;
-                  echo html::image($article->image->primary->smallURL, "title='{$title}' class='media-object'");
+                  echo html::a($url, html::image($article->image->primary->smallURL, "title='{$title}' class='media-object'"));
               }
               ?>
               <?php echo $article->summary;?>

@@ -1,7 +1,15 @@
 $(document).ready(function()
 {          
     // auto ajust panel height.
-    $('.row .panel').height($('.row').height() - 59);
+    var fitPanelHeight = 0;
+    $('.row').each(function()
+    {
+      fitPanelHeight = 0;
+      $(this).find('.panel').each(function(){fitPanelHeight=Math.max($(this).height(),fitPanelHeight);}).height(fitPanelHeight);
+    });
+
+    // add "index" class to the body element.
+    $('body').addClass('index');
 
     // slide pictures start.     
     $('#slide').carousel();

@@ -18,14 +18,15 @@ $lang->tree->manage      = "Manage";
 $lang->tree->fix         = "Fix data";
 
 $lang->tree->noCategories  = 'No category yet, add one first.';
+$lang->tree->aliasRepeat   = 'Alias: %s already exists。';
 $lang->tree->confirmDelete = "Are you sure to delete it?";
-$lang->tree->successSave   = "Successfully saved.";
 $lang->tree->successFixed  = "Successfully fixed.";
 
 /* Lang items for article, products. */
 $lang->category = new stdclass();
 $lang->category->common   = 'Category';
 $lang->category->name     = 'Name';
+$lang->category->alias    = 'Alias';
 $lang->category->parent   = 'Parent';
 $lang->category->desc     = 'Description';
 $lang->category->keyword  = 'Keyword';
@@ -35,6 +36,7 @@ $lang->category->children = "Children";
 $lang->board = new stdclass();
 $lang->board->common     = 'Board';
 $lang->board->name       = 'Board';
+$lang->board->alias      = 'Alias';
 $lang->board->parent     = 'Parent';
 $lang->board->desc       = 'Description';
 $lang->board->keyword    = 'Keyword';
@@ -49,6 +51,7 @@ $lang->board->readonlyList[1] = 'Readonly';
 $lang->directory = new stdclass();
 $lang->directory->common     = 'Catalogue';
 $lang->directory->name       = 'Category';
+$lang->directory->alias      = 'Alias';
 $lang->directory->parent     = 'Parent';
 $lang->directory->desc       = 'Delete';
 $lang->directory->keyword    = 'Keyword';

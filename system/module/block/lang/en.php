@@ -43,4 +43,3 @@ $lang->block->regions['footer'] = 'Footer';
 $lang->block->regions['end']    = 'hidden';
 
 $lang->block->confirmDelete = "Are sure to delete this block?";
-$lang->block->successSave   = "Success saved";

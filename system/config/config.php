@@ -15,7 +15,7 @@ if(!function_exists('getWebRoot')){function getWebRoot(){}}
 
 /* The basic settings. */
 $config = new config();
-$config->version     = '1.4';             // The version number, don't change.
+$config->version     = '1.5';             // The version number, don't change.
 $config->encoding    = 'UTF-8';           // The encoding.
 $config->cookiePath  = '/';               // The path of cookies.
 $config->webRoot     = getWebRoot();      // The web root.
@@ -25,6 +25,7 @@ $config->multi       = false;             // The config of multi site.
 
 /* The request settins. */
 $config->requestType = 'PATH_INFO';       // PATH_INFO or GET.
+$config->seoMode     = true;              // Whether turn on seo mode or not.
 $config->requestFix  = '-';               // RequestType=PATH_INFO: the divider of the params, can be - _ or /
 $config->moduleVar   = 'm';               // RequestType=GET: the name of the module var.
 $config->methodVar   = 'f';               // RequestType=GET: the name of the method var.
@@ -64,10 +65,12 @@ $config->db->prefix     = 'eps_';               // The prefix of the table name.
 /* Include my.php, domain.php and front or admin.php. */
 $configRoot   = dirname(__FILE__) . DIRECTORY_SEPARATOR;
 $myConfig     = $configRoot . 'my.php';
+$routeConfig  = $configRoot . 'route.php';
 $domainConfig = $configRoot . 'domain.php';
 $modeConfig   = $configRoot . RUN_MODE . '.php';
 
 if(file_exists($myConfig))     include $myConfig;
+if(file_exists($routeConfig))  include $routeConfig;
 if(file_exists($domainConfig)) include $domainConfig;
 if(file_exists($modeConfig))   include $modeConfig;
 
@@ -84,7 +87,7 @@ define('TABLE_COMMENT',  $config->db->prefix . 'comment');
 define('TABLE_THREAD',   $config->db->prefix . 'thread');
 define('TABLE_REPLY',    $config->db->prefix . 'reply');
 define('TABLE_USER',     $config->db->prefix . 'user');
-define('TABLE_OPENID',   $config->db->prefix . 'openID');
+define('TABLE_OAUTH',    $config->db->prefix . 'oauth');
 define('TABLE_GROUP',    $config->db->prefix . 'group');
 define('TABLE_FILE',     $config->db->prefix . 'file');
 define('TABLE_DOWN',     $config->db->prefix . 'down');

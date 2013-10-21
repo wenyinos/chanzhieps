@@ -1,5 +1,5 @@
 $(document).ready(function()
 {
-    $.setAjaxForm('#addaccountForm');
+    $.setAjaxForm('#registerForm');
     $.setAjaxForm('#bindForm');
 });

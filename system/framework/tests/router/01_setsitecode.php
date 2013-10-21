@@ -1,44 +1,25 @@
-#!/usr/bin/php
+#!/usr/bin/env php
 <?php
-<<<TC
-title: testing the logic for site code.
-expect:|
-    xirang
-    xirang
-    xirang
-    xirang
-    xirang
-    xirang
-    192.168.1.1
-    xirang
-    xirang
-TC;
-/* Include router and helper.class.php. */
-include '../../router.class.php';
-include '../../helper.class.php';
-/* Create the router object. */
-$router = router::createApp('test', '../../../');
+include '../../../tests/init.php';    // Include the init file of testing framework.
+include '../../router.class.php';     // Include router class.
+include '../../helper.class.php';     // Include helper class.
 
-/* Set the severname as www.xirang.com. */
-echo  helper::getSiteCode('www.xirang.com') . "\n";
+title("testing the logic for site code.");
 
-/* Set the severname as xirang.com. */
-echo  helper::getSiteCode('xirang.com') . "\n";
+$router = router::createApp('test', '../../../');    
+run(helper::getSiteCode('www.xirang.com')) && expect('xirang');
+run(helper::getSiteCode('xirang.com')) && expect('xirang');
+run(helper::getSiteCode('xirang.com.cn')) && expect('xirang');
+run(helper::getSiteCode('www.xirang.cn')) && expect('xirang');
+run(helper::getSiteCode('xirang')) && expect('xirang');
+run(helper::getSiteCode('192.168.1.1')) && expect('192.168.1.1');
+run(helper::getSiteCode('www.xirang.com.cn')) && expect('xirang');
 
-/* Set the severname as xirang.com.cn */
-echo  helper::getSiteCode('xirang.com.cn') . "\n";
+run(appendChanzhiDomain());
+run(helper::getSiteCode('xirang.n1.chanzhi.net')) && expect('xirang');
 
-/* Set the severname as www.xirang.cn */
-echo  helper::getSiteCode('www.xirang.cn') . "\n";
-
-/* Set the severname as xirang */
-echo  helper::getSiteCode('xirang') . "\n";
-
-/* Set the severname as 192.168.1.1 */
-echo  helper::getSiteCode('192.168.1.1') . "\n";
-
-/* Set the severname as www.xirang.com.cn */
-echo  helper::getSiteCode('www.xirang.com.cn') . "\n";
-
-/* Set the severname as www.xirang.cn */
-echo  helper::getSiteCode('xirang.n1.chanzhi.net') . "\n";
+function appendChanzhiDomain()
+{
+    global $router;
+    $router->config->domainPostfix .= '|n1.chanzhi.net|';
+}

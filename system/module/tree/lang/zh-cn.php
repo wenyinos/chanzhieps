@@ -18,14 +18,15 @@ $lang->tree->manage      = "维护类目";
 $lang->tree->fix         = "修复数据";
 
 $lang->tree->noCategories  = '您还没有添加类目，请添加类目。';
+$lang->tree->aliasRepeat   = '别名: %s 已经存在,不能重复添加。';
 $lang->tree->confirmDelete = "您确定删除该类目吗？";
-$lang->tree->successSave   = "成功保存";
 $lang->tree->successFixed  = "成功修复";
 
 /* Lang items for article, products. */
 $lang->category = new stdclass();
 $lang->category->common   = '类目';
 $lang->category->name     = '类目名称';
+$lang->category->alias    = '英文别名';
 $lang->category->parent   = '上级类目';
 $lang->category->desc     = '描述';
 $lang->category->keyword  = '关键词';
@@ -35,6 +36,7 @@ $lang->category->children = "子类目";
 $lang->board = new stdclass();
 $lang->board->common     = '版块';
 $lang->board->name       = '版块';
+$lang->board->alias      = '英文别名';
 $lang->board->parent     = '上级版块';
 $lang->board->desc       = '描述';
 $lang->board->keyword    = '关键词';
@@ -49,6 +51,7 @@ $lang->board->readonlyList[1] = '只读';
 $lang->directory = new stdclass();
 $lang->directory->common     = '目录';
 $lang->directory->name       = '目录';
+$lang->directory->alias     = '英文别名';
 $lang->directory->parent     = '上级目录';
 $lang->directory->desc       = '描述';
 $lang->directory->keyword    = '关键词';

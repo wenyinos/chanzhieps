@@ -24,16 +24,20 @@
 <?php if(count($products) >= 3):?>
 <div class='row'>
   <?php foreach($products as $product):?>
+  <?php 
+  $category = array_shift($product->categories);
+  $url = helper::createLink('product', 'view', "id={$product->id}", "category={$category->alias}&name={$product->alias}");
+  ?>
   <div class="col-md-4">
     <div class='panel product-box'>
-      <?php echo html::a(helper::createLink('product', 'view', "id={$product->id}") , html::image($product->image->primary->smallURL), '', "class='thumbnail'");?>
+      <?php echo html::a($url, html::image($product->image->primary->smallURL), '', "class='thumbnail'");?>
       <div class="caption">
-        <h3><?php echo $product->name;?></h3>
+        <h3><?php echo html::a($url, $product->name);?></h3>
         <p><?php echo $product->summary;?></p>
       </div>
       <div class="widget-footer">
         <p>
-          <?php echo html::a(helper::createLink('product', 'view', "id={$product->id}"), $lang->more, '', "class='btn btn-primary'");?>
+          <?php echo html::a($url, $lang->more . $lang->raquo, '', "class=''");?>
         </p>
       </div>
     </div>
@@ -43,36 +47,41 @@
 <?php endif;?>
 <div class='row'>
   <div class='col-md-4'>
-    <div class="panel radius">
-      <h3><?php echo $lang->index->aboutus;?></h3>
-      <p><?php echo $this->config->company->desc;?><?php echo html::a($this->createLink('company', 'index'), $lang->more . $lang->raquo);?></p>
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3><?php echo $lang->index->aboutus;?></h3></div>
+      <div class="panel-body"><p><?php echo $this->config->company->desc;?><?php echo html::a($this->createLink('company', 'index'), $lang->more . $lang->raquo);?></p></div>
     </div>
   </div>
 
   <div class='col-md-4'>
-    <div class="panel radius">
-      <h3><?php echo $lang->index->news;?></h3>
-      <ul class='mg-zero pd-zero'>
-        <?php foreach($latestArticles as $id => $article): ?>
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3><?php echo $lang->index->news;?></h3></div>
+      <div class="panel-body"><ul class='mg-zero pd-zero'>
+        <?php foreach($latestArticles as $article): ?>
+        <?php 
+        $category = array_shift($article->categories);
+        $url = helper::createLink('article', 'view', "id={$article->id}", "category={$category->alias}&name={$article->alias}");
+        ?>
         <li>
             <i class='icon-chevron-right'></i>
-            <?php echo html::a($this->createLink('article','view', "id=$id"), $article, '', "class='latest-news' title='{$article}'");?>
+            <?php echo html::a($url, $article->title, '', "class='latest-news' title='{$article->title}'");?>
         </li>
         <?php endforeach;?>
-      </ul>
+      </ul></div>
     </div>
   </div>
 
   <div class='col-md-4'>
-    <div id='contact' class="panel radius">
-      <h3><?php echo $lang->index->contact;?></h3>
-      <?php foreach($contact as $item => $value):?>
-      <dl>
-        <dt><?php echo $this->lang->company->$item . $lang->colon;?></dt>
-        <dd><?php echo $value;?></dd>
-      </dl>
-      <?php endforeach;?>
-      <div class='c-both'></div>
+    <div id='contact' class="panel panel-default">
+      <div class="panel-heading"><h3><?php echo $lang->index->contact;?></h3></div>
+      <div class="panel-body">
+        <?php foreach($contact as $item => $value):?>
+        <dl>
+          <dt><?php echo $this->lang->company->$item . $lang->colon;?></dt>
+          <dd><?php echo $value;?></dd>
+        </dl>
+        <?php endforeach;?>
+      </div>
     </div>
   </div>
 

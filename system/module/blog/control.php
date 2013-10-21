@@ -15,26 +15,24 @@ class blog extends control
      * Browse blog in front.
      * 
      * @param int    $categoryID   the category id
-     * @param string $orderBy      the order by
-     * @param int    $recTotal     record total
-     * @param int    $recPerPage   record per page
      * @param int    $pageID       current page id
      * @access public
      * @return void
      */
-    public function index($categoryID = 0, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function index($categoryID = 0, $pageID = 1)
     {   
         $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal, $recPerPage, $pageID);
+        $pager = new pager(0, 10, $pageID);
 
         $category = $this->loadModel('tree')->getById($categoryID);
-        $articles = $this->loadMOdel('article')->getList($this->tree->getFamily($categoryID, 'blog'), $orderBy, $pager);
+        $articles = $this->loadMOdel('article')->getList('blog', $this->tree->getFamily($categoryID, 'blog'), $orderBy = 'id_desc', $pager);
 
         if($category)
         {
             $title    = $category->name;
             $keywords = trim($category->keyword . ' ' . $this->config->site->keywords);
             $desc     = strip_tags($category->desc);
+            $this->session->set('articleCategory', $category->id);
         }
 
         $this->view->title     = $title;
@@ -53,17 +51,21 @@ class blog extends control
      * View an article.
      * 
      * @param int $articleID 
+     * @param int $currentCategory 
      * @access public
      * @return void
      */
-    public function view($articleID)
+    public function view($articleID, $currentCategory = 0)
     {
         $article  = $this->loadModel('article')->getById($articleID);
 
-        /* fetch first category for display. */
+        /* fetch category for display. */
         $category = array_slice($article->categories, 0, 1);
-        $category = $category[0];
-        $category = $this->loadModel('tree')->getById($category->id);
+        $category = $category[0]->id;
+
+        $currentCategory = $this->session->articleCategory;
+        if($currentCategory > 0 && isset($article->categories[$currentCategory])) $category = $currentCategory;  
+        $category = $this->loadModel('tree')->getById($category);
 
         $title    = $article->title . ' - ' . $category->name;
         $keywords = $article->keywords . ' ' . $category->keyword . ' ' . $this->config->site->keywords;

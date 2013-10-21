@@ -28,26 +28,24 @@ class article extends control
      * Browse article in front.
      * 
      * @param int    $categoryID   the category id
-     * @param string $orderBy      the order by
-     * @param int    $recTotal     record total
-     * @param int    $recPerPage   record per page
      * @param int    $pageID       current page id
      * @access public
      * @return void
      */
-    public function browse($categoryID = 0, $type = '', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function browse($categoryID = 0, $pageID = 1)
     {   
+        $type = 'article';
         $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal, $recPerPage, $pageID);
-
+        $pager = new pager($recTotal = 0, $recPerPage = 4, $pageID);
         $category = $this->loadModel('tree')->getById($categoryID);
-        $articles = $this->article->getList($this->tree->getFamily($categoryID, $type), $orderBy, $pager);
+        $articles = $this->article->getList($type, $this->tree->getFamily($categoryID, $type), 'id_desc', $pager);
 
         if($category)
         {
             $title    = $category->name;
             $keywords = trim($category->keyword . ' ' . $this->config->site->keywords);
             $desc     = strip_tags($category->desc);
+            $this->session->set('articleCategory', $category->id);
         }
 
         $this->view->title     = $title;
@@ -80,11 +78,19 @@ class article extends control
 
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
-        
-        $orderBy = strpos($type, 'book_') === false ? 'id_desc' : 't1.order';
 
-        $families = $this->loadModel('tree')->getFamily($categoryID, $type);
-        $articles = $families ? $this->article->getList($families, $orderBy, $pager) : array();
+        $children = $this->loadModel('tree')->getChildren($categoryID, $type);
+        if($children || strpos($type, 'book_') === false)
+        {
+            $orderBy = 'id_desc';
+        }
+        else
+        {
+            $orderBy = 't1.order';
+        }
+        
+        $families = $categoryID ? $this->loadModel('tree')->getFamily($categoryID, $type) : '';
+        $articles = $this->article->getList($type, $families, $orderBy, $pager);
 
         if(strpos($type, 'book') !== false)
         {
@@ -94,7 +100,14 @@ class article extends control
             $i = 1;
             foreach($articles as $article)
             {
-                $article->order = $this->post->maxOrder + $i * 10;
+                if(!$children)
+                {
+                    $article->order = $this->post->maxOrder + $i * 10;
+                }
+                else
+                {
+                    $article->order = $article->id; 
+                }
                 $i++;
             }
         }
@@ -102,7 +115,7 @@ class article extends control
         $this->view->title    = $type == 'blog' ? $this->lang->blog->admin : $this->lang->article->admin;
         $this->view->articles = $articles;
         $this->view->pager    = $pager;
-        $this->view->category = $this->tree->getById($categoryID);
+        $this->view->children = $children;
         $this->view->type     = $type;
 
         if(strpos($type, 'book') !== false)
@@ -207,10 +220,14 @@ class article extends control
     {
         $article  = $this->article->getById($articleID);
 
-        /* fetch first category for display. */
+        /* fetch category for display. */
         $category = array_slice($article->categories, 0, 1);
-        $category = $category[0];
-        $category = $this->loadModel('tree')->getById($category->id);
+        $category = $category[0]->id;
+
+        $currentCategory = $this->session->articleCategory;
+        if($currentCategory > 0 && isset($article->categories[$currentCategory])) $category = $currentCategory;  
+
+        $category = $this->loadModel('tree')->getById($category);
 
         $title    = $article->title . ' - ' . $category->name;
         $keywords = $article->keywords . ' ' . $category->keyword . ' ' . $this->config->site->keywords;

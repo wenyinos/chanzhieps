@@ -177,7 +177,7 @@ class pager
      */
     public function setPageID($pageID)
     {
-        if($pageID > 0 and $pageID <= $this->pageTotal)
+        if($pageID > 0 and ($this->pageTotal == 0 or  $pageID <= $this->pageTotal))
         {
             $this->pageID = $pageID;
         }
@@ -246,7 +246,7 @@ class pager
         {
             if(strtolower($key) == 'rectotal')   $this->params[$key] = $this->recTotal;
             if(strtolower($key) == 'recperpage') $this->params[$key] = $this->recPerPage;
-            if(strtolower($key) == 'pageID')     $this->params[$key] = $this->pageID;
+            if(strtolower($key) == 'pageid')     $this->params[$key] = $this->pageID;
         }
     }
 
@@ -335,7 +335,7 @@ class pager
     {
         if($this->pageID == 1) return $this->lang->pager->first . ' ';
         $this->params['pageID'] = 1;
-        return html::a(helper::createLink($this->moduleName, $this->methodName, $this->params), $this->lang->pager->first);
+        return $this->createLink($this->lang->pager->first);
     }
 
     /**
@@ -348,7 +348,7 @@ class pager
     {
         if($this->pageID == 1) return $this->lang->pager->pre . ' ';
         $this->params['pageID'] = $this->pageID - 1;
-        return html::a(helper::createLink($this->moduleName, $this->methodName, $this->params), $this->lang->pager->pre);
+        return $this->createLink($this->lang->pager->pre);
     }    
 
     /**
@@ -361,7 +361,7 @@ class pager
     {
         if($this->pageID == $this->pageTotal) return $this->lang->pager->next . ' ';
         $this->params['pageID'] = $this->pageID + 1;
-        return html::a(helper::createLink($this->moduleName, $this->methodName, $this->params), $this->lang->pager->next);
+        return $this->createLink($this->lang->pager->next);
     }
 
     /**
@@ -458,4 +458,25 @@ EOT;
         $goToHtml .= "<input type='button' id='goto'       value='{$this->lang->pager->locate}' onclick='submitPage(\"changePageID\");' class='btn btn-default btn-xs' />";
         return $goToHtml;
     }    
+
+    /**
+     * Create link 
+     *
+     *
+     **/
+    private function createLink($title)
+    {
+        global $config; 
+        if(helper::isSeoMode() &&method_exists('uri', 'create' . $this->moduleName . $this->methodName)) 
+        {
+            $link  = $_SERVER['REQUEST_URI'];
+
+            if($this->params['pageID'] == 1) return html::a(preg_replace('/\/p\d+\./', '.', $link), $title);
+
+            if(preg_match('/\/p\d+/', $link)) return html::a(preg_replace('/\/p\d+\./', '/p' . $this->params['pageID'] . '.', $link), $title);
+
+            return html::a(str_replace('.', "/p{$this->params['pageID']}.", $link), $title);
+        }
+        return html::a(helper::createLink($this->moduleName, $this->methodName, $this->params), $title);
+    }
 }

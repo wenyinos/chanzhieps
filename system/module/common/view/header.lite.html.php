@@ -5,12 +5,17 @@ $jsRoot    = $webRoot . "js/";
 $themeRoot = $webRoot . "theme/";
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<?php if($this->config->oauth->sina):?>
+<html xmlns:wb=“http://open.weibo.com/wb”>
+<?php else:?>
+<html>
+<?php endif;?>
 <head>
   <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <?php
-  if(!isset($title))    $title    = ''; 
+  if(!isset($title))    $title    = '';
   if(!empty($title))    $title   .= $lang->minus;
   if(!isset($keywords)) $keywords = $config->site->keywords;
   if(!isset($desc))     $desc     = $config->site->desc;
@@ -32,10 +37,11 @@ $themeRoot = $webRoot . "theme/";
   else
   {
       css::import($themeRoot . 'default/all.css', $config->version);
-      js::import($jsRoot     . 'all.js',  $config->version);
+      js::import($jsRoot     . 'all.js', $config->version);
   }
 
   if(RUN_MODE == 'admin') css::import($themeRoot . 'default/admin.css', $config->version);
+  if(RUN_MODE == 'front' and $config->site->theme) css::import($themeRoot . $config->site->theme . '/style.css', $config->version);
   if(isset($pageCSS)) css::internal($pageCSS);
 
   echo html::icon($webRoot . 'favicon.ico');
@@ -48,5 +54,12 @@ js::import($jsRoot . 'respond/min.js');
 ?>
 <![endif]-->
 <?php js::set('lang', $lang->js);?>
+<?php
+$sina = json_decode($this->config->oauth->sina);
+$qq   = json_decode($this->config->oauth->qq);
+if($sina->widget) js::import('http://tjs.sjs.sinajs.cn/open/api/js/wb.js');
+if($sina->verification) echo $sina->verification; 
+if($qq->verification)   echo $qq->verification;
+?>
 </head>
 <body>

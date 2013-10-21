@@ -20,7 +20,6 @@ $lang->nav->inputTitle      = '请输入标题';
 $lang->nav->cannotRemoveAll = '不能删除所有导航';
 
 /* nav type   */
-$lang->nav->types = array();
 $lang->nav->types['system']  = '系统模块';
 $lang->nav->types['article'] = '文章类目';
 $lang->nav->types['product'] = '产品类目';
@@ -28,13 +27,12 @@ $lang->nav->types['custom']  = '自定义';
 
 /* common navs.*/
 $lang->nav->system = new stdclass();
-$lang->nav->system->home     = '首页';
-$lang->nav->system->company  = '关于我们';
-$lang->nav->system->forum    = '论坛';
-$lang->nav->system->blog     = '博客';
-$lang->nav->system->help     = '帮助';
+$lang->nav->system->home    = '首页';
+$lang->nav->system->company = '关于我们';
+$lang->nav->system->forum   = '论坛';
+$lang->nav->system->blog    = '博客';
+$lang->nav->system->help    = '帮助';
 
 /* Targets setting. */
-$lang->nav->target = new stdclass();
-$lang->nav->target->_self  = '当前窗口';
-$lang->nav->target->_blank = '新窗口';
+$lang->nav->newWindow = new stdclass();
+$lang->nav->newWindow->_blank = '新开窗口';

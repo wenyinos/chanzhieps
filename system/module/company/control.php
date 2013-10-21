@@ -37,6 +37,7 @@ class company extends control
     {
         if(!empty($_POST))
         {
+            $_POST[setDate] = helper::now();
             $result = $this->loadModel('setting')->setItems('system.common.company', (object)$_POST);
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));

@@ -15,6 +15,7 @@ $lang->product->id         = '編號';
 $lang->product->category   = '類目';
 $lang->product->categories = '類目';
 $lang->product->name       = '名稱';
+$lang->product->alias      = '英文別名';
 $lang->product->brand      = '品牌';
 $lang->product->model      = '型號';
 $lang->product->color      = '顏色';
@@ -44,4 +45,3 @@ $lang->product->edit       = '編輯產品';
 $lang->product->files      = '附件';
 
 $lang->product->confirmDelete = '您確定刪除該產品嗎？';
-$lang->product->successSave   = '成功保存';

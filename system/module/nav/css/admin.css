@@ -4,3 +4,5 @@
 .grade3{margin-left: 60px;}
 .grade3 li:last-child{border-bottom: none;}
 i{cursor: pointer;}
+label{font-weight:500;font-size:13px;}
+.urlInput{width:360px;}

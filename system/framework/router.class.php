@@ -1,5 +1,5 @@
-    <?php
-    /**
+<?php
+/**
  * The router, config and lang class file of ZenTaoPHP framework.
  *
  * The author disclaims copyright to this source code.  In place of
@@ -826,6 +826,7 @@ class router
         if($this->config->requestType == 'PATH_INFO')
         {
             $this->parsePathInfo();
+            $this->URI = seo::parseURI($this->URI);
             $this->setRouteByPathInfo();
         }
         elseif($this->config->requestType == 'GET')
@@ -1084,9 +1085,9 @@ class router
         if(!empty($this->URI))
         {
             /* There's the request seperator, split the URI by it. */
-            if(strpos($this->URI, $this->config->requestFix) !== false)
+            if(strpos($this->URI, '-') !== false)
             {
-                $items = explode($this->config->requestFix, $this->URI);
+                $items = explode('-', $this->URI);
                 $this->setModuleName($items[0]);
                 $this->setMethodName($items[1]);
             }    
@@ -1166,7 +1167,7 @@ class router
 
         /* Set params according PATH_INFO or GET. */
         if($this->config->requestType == 'PATH_INFO')
-        {
+        {   
             $this->setParamsByPathInfo($defaultParams);
         }
         elseif($this->config->requestType == 'GET')
@@ -1189,7 +1190,7 @@ class router
     public function setParamsByPathInfo($defaultParams = array())
     {
         /* Spit the URI. */
-        $items     = explode($this->config->requestFix, $this->URI);
+        $items     = explode('-', $this->URI);
         $itemCount = count($items);
 
         /* The first two item is moduleName and methodName. So the params should begin at 2.*/
@@ -1200,7 +1201,6 @@ class router
             $params[$key] = $items[$i];
             next($defaultParams);
         }
-
         $this->params = $this->mergeParams($defaultParams, $params);
     }
 

@@ -22,6 +22,7 @@ $navs = $this->tree->getChildren(0, 'blog');
 <head>
   <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <?php
   if(!isset($title))    $title    = ''; 
   if(!empty($title))    $title   .= $lang->minus;
@@ -34,6 +35,7 @@ $navs = $this->tree->getChildren(0, 'blog');
 
   css::import($themeRoot . 'bootstrap/css/core.min.css');
   css::import($themeRoot . 'default/blog.css');
+  css::import($themeRoot . $config->site->theme . '/blog.css');
 
   js::exportConfigVars();
   if($config->debug)
@@ -70,9 +72,7 @@ js::import($jsRoot . 'respond/min.js');
       </div>
       <?php if(isset($config->site->logo)):?>
       <?php $logo = json_decode($config->site->logo);?>
-      <h3>
-        <?php echo html::a($this->config->webRoot, html::image($logo->webPath, "id='logo' title='{$this->config->company->name}'"));?>
-      </h3>
+      <?php echo html::a($this->config->webRoot, html::image($logo->webPath, "id='logo' title='{$this->config->company->name}'"));?>
       <?php else:?>
       <h3><?php echo $this->config->site->name?></h3>
       <?php endif;?>      
@@ -85,14 +85,14 @@ js::import($jsRoot . 'respond/min.js');
       foreach($navs as $nav)
       {
         $class= $nav->id == $category->id ? "class='active'" : "";
-        echo "<li {$class}>" . html::a($this->inlink('index', "id={$nav->id}"), $nav->name) . '</li>';
+        echo "<li {$class}>" . html::a($this->inlink('index', "id={$nav->id}", "category={$nav->alias}"), $nav->name) . '</li>';
       }
       ?>
       <li class="pull-right">
         <?php echo html::a($config->webRoot, '<i class="icon-home icon-large"></i> ' . $lang->blog->siteHome);?>
       </li>
       <li class="pull-right">
-        <?php echo html::a(helper::createLink('rss', 'index', '', 'xml') . '?type=blog', '<i class="icon icon-rss"></i> RSS', '_blank'); ?>
+        <?php echo html::a(helper::createLink('rss', 'index', '', '', 'xml') . '?type=blog', '<i class="icon icon-rss"></i> RSS', '_blank'); ?>
       </li>
     </ul>
   </div>

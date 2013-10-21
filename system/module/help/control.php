@@ -27,6 +27,7 @@ class help extends control
     public function admin()
     {
         $this->view->books = $this->help->getBookList();
+        $this->view->title = $this->lang->help->common;
         $this->display();
     }
 
@@ -65,7 +66,7 @@ class help extends control
         if($_POST)
         {
             $result = $this->help->createBook();
-            if($result === true) $this->send(array('result' => 'success', 'message'=>$this->lang->help->successSaved, 'locate' => $this->inlink('admin')));
+            if($result === true) $this->send(array('result' => 'success', 'message'=>$this->lang->saveSuccess, 'locate' => $this->inlink('admin')));
             $this->send(array('result' => 'fail', 'message' => $result));
         }
         $this->display(); 
@@ -83,7 +84,7 @@ class help extends control
         if($_POST)
         {
             $result = $this->help->updateBook($id);
-            if($result === true) $this->send(array('result' => 'success', 'message'=>$this->lang->help->successSaved, 'locate' => $this->inlink('admin')));
+            if($result === true) $this->send(array('result' => 'success', 'message'=>$this->lang->saveSuccess, 'locate' => $this->inlink('admin')));
             $this->send(array('result' => 'fail', 'message' => $result));
         }
 
@@ -105,12 +106,18 @@ class help extends control
         $book = $this->loadModel('setting')->getItem("owner=system&module=common&section=book&key=$code");
         $book = json_decode($book);
 
-        $categories = $this->dao->select('id,name,grade,parent')->from(TABLE_CATEGORY)
+        if(!is_numeric($categoryID))
+        {
+            $category = $this->loadModel('tree')->getByID($categoryID);
+            $categoryID = $category->id;
+        }
+
+        $categories = $this->dao->select('id,name,grade,alias,parent')->from(TABLE_CATEGORY)
             ->where('type')->eq('book_' . $code)
             ->beginIF($categoryID != 0)->andWhere('path')->like("%,$categoryID,%")->fi()
             ->orderBy('grade, `order`')->fetchAll('id');
 
-        $articles = $this->dao->select('t1.id, title, t2.category')->from(TABLE_ARTICLE)
+        $articles = $this->dao->select('t1.id, title, alias, t2.category')->from(TABLE_ARTICLE)
             ->alias('t1')->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
             ->where('category')->in(array_keys($categories))
             ->orderBy('t1.order')

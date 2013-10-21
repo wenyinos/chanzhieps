@@ -21,7 +21,21 @@ $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 
 /* Lang items for xirang. */
 $lang->chanzhiEPS = '蝉知企业门户系统';
-$lang->poweredBy = " 由 <a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPS} %s</a> 强力驱动！";
+$lang->poweredBy  = " 由 <a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPS} %s</a> 强力驱动！";
+
+/* IE6 alert.  */
+$lang->IE6Alert= <<<EOT
+    <div class='alert alert-danger' style='margin-top:100px;'>
+      <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+      <h2>请使用其他浏览器访问本站。</h2>
+      <p>珍爱上网，远离IE！</p>
+      <p>我们检测到您正在使用Internet Explorer 6 ——  IE6 浏览器, IE6 于2001年8月27日推出，而现在它已十分脱节。速度慢、不安全、不能很好的展示新一代网站。<br/></p>
+      <a href='https://www.google.com/intl/zh-hk/chrome/browser/' class='btn btn-primary btn-lg' target='_blank'>谷歌浏览器</a>
+      <a href='http://www.firefox.com/' class='btn btn-primary btn-lg' target='_blank'>火狐浏览器</a>
+      <a href='http://www.opera.com/download' class='btn btn-primary btn-lg' target='_blank'>Opera浏览器</a>
+      <p></p>
+    </div>
+EOT;
 
 /* Global lang items. */
 $lang->home           = '首页';
@@ -135,8 +149,9 @@ $lang->site->menu = new stdclass();
 $lang->site->menu->basic     = '站点设置|site|setbasic|';
 $lang->site->menu->logo      = 'LOGO设置|site|setlogo|';
 $lang->site->menu->nav       = '导航设置|nav|admin|';
+$lang->site->menu->theme     = '主题风格|site|settheme|';
 $lang->site->menu->slide     = array('link' => '幻灯片设置|slide|admin|', 'alias' => 'create,edit');
-//$lang->site->menu->sina      = '新浪微博登录设置|site|setappkey|';
+$lang->site->menu->oauth     = '开放登录|site|setoauth|';
 
 /* Menu of company module. */
 $lang->company->menu = new stdclass();
@@ -163,16 +178,16 @@ $lang->menuGroups->slide = 'site';
 
 /* The error messages. */
 $lang->error = new stdclass();
-$lang->error->length       = array('『%s』长度错误，应当为『%s』', '『%s』长度应当不超过『%s』，且不小于『%s』。');
-$lang->error->reg          = '『%s』不符合格式，应当为:『%s』。';
-$lang->error->unique       = '『%s』已经有『%s』这条记录了。';
-$lang->error->notempty     = '『%s』不能为空。';
-$lang->error->equal        = '『%s』必须为『%s』。';
-$lang->error->int          = array('『%s』应当是数字。', '『%s』最小值为%s',  '『%s』应当介于『%s-%s』之间。');
-$lang->error->float        = '『%s』应当是数字，可以是小数。';
-$lang->error->email        = '『%s』应当为合法的EMAIL。';
-$lang->error->date         = '『%s』应当为合法的日期。';
-$lang->error->account      = '『%s』应当为字母和数字的组合，至少三位';
+$lang->error->length       = array('<strong>%s</strong>长度错误，应当为<strong>%s</strong>', '<strong>%s</strong>长度应当不超过<strong>%s</strong>，且不小于<strong>%s</strong>。');
+$lang->error->reg          = '<strong>%s</strong>不符合格式，应当为:<strong>%s</strong>。';
+$lang->error->unique       = '<strong>%s</strong>已经有<strong>%s</strong>这条记录了。';
+$lang->error->notempty     = '<strong>%s</strong>不能为空。';
+$lang->error->equal        = '<strong>%s</strong>必须为<strong>%s</strong>。';
+$lang->error->int          = array('<strong>%s</strong>应当是数字。', '<strong>%s</strong>最小值为%s',  '<strong>%s</strong>应当介于<strong>%s-%s</strong>之间。');
+$lang->error->float        = '<strong>%s</strong>应当是数字，可以是小数。';
+$lang->error->email        = '<strong>%s</strong>应当为合法的EMAIL。';
+$lang->error->date         = '<strong>%s</strong>应当为合法的日期。';
+$lang->error->account      = '<strong>%s</strong>应当为字母和数字的组合，至少三位';
 $lang->error->passwordsame = '两次密码应当相等。';
 $lang->error->passwordrule = '密码应该符合规则，长度至少为六位。';
 $lang->error->captcha      = '请输入正确的验证码。';

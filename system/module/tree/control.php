@@ -84,10 +84,10 @@ class tree extends control
 
         if(!empty($_POST))
         {
-            $this->tree->update($categoryID);
-            if(!dao::isError()) $this->send(array('result' => 'success'));
+            $result = $this->tree->update($categoryID);
+            if($result === true) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
 
-            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'fail', 'message' => dao::isError() ? dao::getError() : $result));
         }
 
         /* Get option menu and remove the families of current category from it. */
@@ -120,8 +120,8 @@ class tree extends control
         { 
             $result = $this->tree->manageChildren($type, $this->post->parent, $this->post->children);
             $locate = $this->inLink('browse', "type=$type&root={$this->post->parent}");
-            if($result) $this->send(array('result' => 'success', 'locate' => $locate));
-            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            if($result === true) $this->send(array('result' => 'success', 'locate' => $locate));
+            $this->send(array('result' => 'fail', 'message' => dao::isError() ? dao::getError() : $result));
         }
 
         $this->view->title    = $this->lang->tree->manage;

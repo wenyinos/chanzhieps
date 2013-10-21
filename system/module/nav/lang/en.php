@@ -20,7 +20,6 @@ $lang->nav->inputTitle      = 'Please input title.';
 $lang->nav->cannotRemoveAll = 'Can not remove all navigation.';
 
 /* nav type   */
-$lang->nav->types = array();
 $lang->nav->types['system']  = 'System modules';
 $lang->nav->types['article'] = 'Article categories';
 $lang->nav->types['product'] = 'Product categories';
@@ -35,6 +34,5 @@ $lang->nav->system->blog    = 'Blog';
 $lang->nav->system->help    = 'Help';
 
 /* Targets setting. */
-$lang->nav->target = new stdclass();
-$lang->nav->target->_self  = 'Self';
-$lang->nav->target->_blank = 'Blank';
+$lang->nav->newWindow = new stdclass();
+$lang->nav->newWindow->_blank = 'New window';

@@ -17,7 +17,7 @@ js::set('path',  json_encode($path));
 include '../../common/view/treeview.html.php';
 ?>
 <?php
-$root = '<li>' .  html::a($this->inlink('index'), $lang->home) . '</li>';
+$root = '<li>' . $this->lang->currentPos . $this->lang->colon .  html::a($this->inlink('index'), $lang->home) . '</li>';
 if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
 ?>
 <div class='row blogBox'>
@@ -27,7 +27,7 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
       <li class="media radius">
         <p class="pull-right"><strong class='dater'><?php echo date('Y/m/d', strtotime($article->addedDate));?></strong></p>
         <div class='media-body'>
-          <h3 class='media-heading'><?php echo html::a(inlink('view', "id=$article->id"), $article->title);?></h3>
+          <h3 class='media-heading'><?php echo html::a(inlink('view', "id=$article->id", "category={$category->alias}&name=$article->alias"), $article->title);?></h3>
           <p>
             <?php 
             if(!empty($article->image))

@@ -26,7 +26,9 @@ js::set('articleID', $article->id);
               $article->copyURL ? print(html::a($article->copyURL, $article->copySite, '_blank')) : print($article->copySite); 
           }
           printf($lang->article->lblViews, $article->views);
-          include './weibo.html.php'; 
+
+          $sina = json_decode($this->config->oauth->sina);
+          if($sina->widget) echo $sina->widget; 
           ?>
         </div>
         <p><?php echo $article->content;?></p>

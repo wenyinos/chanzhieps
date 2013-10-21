@@ -22,6 +22,16 @@
       <td><?php echo html::input('name', $category->name, "class='text-3'");?></td>
     </tr>  
     <tr>
+      <th><?php echo $lang->category->alias;?></th>
+      <td>
+        <div class="input-group text-4">
+        <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot?></span>
+        <?php echo html::input('alias', $category->alias, "class='input-xsm form-control'");?>
+        <span class="input-group-addon">.html</span>
+      </td>
+</div>
+    </tr>  
+    <tr>
       <th><?php echo $lang->category->keyword;?></th>
       <td><?php echo html::input('keyword', $category->keyword, "class='text-1'");?></td>
     </tr>  

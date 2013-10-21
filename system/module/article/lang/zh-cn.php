@@ -15,6 +15,7 @@ $lang->article->id         = '编号';
 $lang->article->category   = '类目';
 $lang->article->categories = '类目';
 $lang->article->title      = '标题';
+$lang->article->alias      = '英文别名';
 $lang->article->content    = '内容';
 $lang->article->original   = '来源';
 $lang->article->copySite   = '来源网站';
@@ -45,7 +46,6 @@ $lang->article->originalList[1] = '原创';
 $lang->article->originalList[0] = '转贴';
 
 $lang->article->confirmDelete = '您确定删除该文章吗？';
-$lang->article->successSave   = '成功保存';
 
 $lang->article->lblAddedDate = '<strong>添加时间：</strong> %s &nbsp;&nbsp;';
 $lang->article->lblAuthor    = "<strong>作者：</strong> %s &nbsp;&nbsp;";
