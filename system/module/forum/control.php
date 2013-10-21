@@ -30,25 +30,22 @@ class forum extends control
      * The board page.
      * 
      * @param int    $boardID       the board id
-     * @param string $orderBy       the order by field
-     * @param int    $recTotal      the record total
-     * @param int    $recPerPage    the record per page
      * @param int    $pageID        the current page id
      * @access public
      * @return void
      */
-    public function board($boardID = 0, $orderBy = 'repliedDate_desc', $recTotal = 0, $recPerPage = 10, $pageID = 1)
+    public function board($boardID = 0, $pageID = 1)
     {
         $board = $this->loadModel('tree')->getById($boardID);
         if(!$board) die(js::locate('back'));
-
+ 
         /* Get stick threads. */
         $sticks = $this->loadModel('thread')->getSticks($boardID);
 
         /* Get common threads. */
         $this->app->loadClass('pager', $static = true);
-        $pager   = new pager($recTotal, $recPerPage, $pageID);
-        $threads = $this->thread->getList($boardID, $orderBy, $pager);
+        $pager   = new pager(0, 10, $pageID);
+        $threads = $this->thread->getList($boardID, $orderBy = 'repliedDate_desc', $pager);
 
         $this->view->title     = $board->name;
         $this->view->keyword   = $board->keyword . '' . $this->config->site->keywords;
