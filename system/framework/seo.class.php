@@ -282,7 +282,7 @@ class uri
         }
         else
         {
-            if(empty($param)) 
+            if(empty($params)) 
             {
                 $link .= 'c0';
             }
