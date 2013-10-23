@@ -233,12 +233,14 @@ class article extends control
         $keywords = $article->keywords . ' ' . $category->keyword . ' ' . $this->config->site->keywords;
         $desc     = strip_tags($article->summary);
         
-        $this->view->title      = $title;
-        $this->view->keywords   = $keywords;
-        $this->view->desc       = $desc;
-        $this->view->article    = $article;
-        $this->view->category   = $category;
-        $this->view->contact    = $this->loadModel('company')->getContact();
+        $this->view->title       = $title;
+        $this->view->keywords    = $keywords;
+        $this->view->desc        = $desc;
+        $this->view->article     = $article;
+        $this->view->links       = $this->article->getPairs($category->id, 'id_desc');
+        $this->view->prevAndNext = $this->loadModel('help')->getPrevAndNext($this->view->links, $article->id);
+        $this->view->category    = $category;
+        $this->view->contact     = $this->loadModel('company')->getContact();
 
         $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($articleID)->exec(false);
 
