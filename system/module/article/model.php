@@ -108,13 +108,13 @@ class articleModel extends model
      */
     public function getPairs($categories, $orderBy, $pager = null)
     {
-        return $this->dao->select('t1.id, t1.title')->from(TABLE_ARTICLE)->alias('t1')
+        return $this->dao->select('t1.id, t1.title, t1.alias')->from(TABLE_ARTICLE)->alias('t1')
             ->leftJoin(TABLE_RELATION)->alias('t2')
             ->on('t1.id = t2.id')
             ->beginIF($categories)->where('t2.category')->in($categories)->fi()
             ->orderBy($orderBy)
             ->page($pager, false)
-            ->fetchPairs('id', 'title', false);
+            ->fetchAll('id');
     }
 
     /**
