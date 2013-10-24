@@ -421,9 +421,10 @@ class treeModel extends model
 
         /* Init the category object. */
         $category = new stdclass();
-        $category->parent  = $parent ? $parent->id : 0;
-        $category->grade   = $parent ? $parent->grade + 1 : 1;
-        $category->type    = $type;
+        $category->parent     = $parent ? $parent->id : 0;
+        $category->grade      = $parent ? $parent->grade + 1 : 1;
+        $category->type       = $type;
+        $category->postedDate = helper::now();
 
         $i = 1;
         foreach($children as $key => $categoryName)
