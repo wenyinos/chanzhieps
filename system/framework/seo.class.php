@@ -320,11 +320,18 @@ class uri
     {
         global $config;
         $link = 'help/' . array_shift($params);
-        if(count($params) > 0)
+        if($alias['category'])
         {
-            $category = array_shift($params);
-            if(is_numeric($category)) $category = 'c' . $category;
-            $link .= $config->webRoot . $category;
+            $link .= $config->webRoot . $alias['category'];
+        }
+        else
+        {
+            if(count($params) > 0)
+            {
+                $category = array_shift($params);
+                if(is_numeric($category)) $category = 'c' . $category;
+                $link .= $config->webRoot . $category;
+            }
         }
         return $config->webRoot . $link . '.' . $config->default->view;
     }
