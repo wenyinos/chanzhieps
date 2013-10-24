@@ -22,7 +22,7 @@
       foreach($categories as $category)
       {
           $alias = $this->loadModel('tree')->getAliasByID($category->id);
-          if(isset($category->id))echo "<dt class='f-16px'><strong>$category->i." . ' ' . html::a(inlink('book',"type=$code&categoryID=$alias", "category={$category->alias}"), $category->name) . "</strong></dt>";
+          if(isset($category->id))echo "<dt class='f-16px'><strong>$category->i." . ' ' . html::a(inlink('book',"type=$code&categoryID=$category->id", "category={$category->alias}"), $category->name) . "</strong></dt>";
           else $category->id=null;
           if(isset($articles[$category->id]) or isset($category->children))
           {
