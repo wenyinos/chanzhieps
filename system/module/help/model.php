@@ -75,8 +75,8 @@ Eof;
         $prevKey    = $currentKey - 1;
         $nextKey    = $currentKey + 1;
 
-        if(isset($keys[$prevKey])) $prev = array('id' => $keys[$prevKey], 'title' => $links[$keys[$prevKey]]);
-        if(isset($keys[$nextKey])) $next = array('id' => $keys[$nextKey], 'title' => $links[$keys[$nextKey]]);
+        if(isset($keys[$prevKey])) $prev = array('id' => $keys[$prevKey], 'title' => $links[$keys[$prevKey]]->title, 'alias' => $links[$keys[$prevKey]]->alias);
+        if(isset($keys[$nextKey])) $next = array('id' => $keys[$nextKey], 'title' => $links[$keys[$nextKey]]->title, 'alias' => $links[$keys[$nextKey]]->alias);
 
         return array('prev' => $prev, 'next' => $next);
     }
