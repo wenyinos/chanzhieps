@@ -14,7 +14,6 @@ $config->rights = new stdclass();
 
 /* For guest users. */
 $config->rights->guest['index']['index'] = 'index';
-$config->rights->guest['rss']['index'] = 'index';
 
 $config->rights->guest['article']['index']  = 'index';
 $config->rights->guest['article']['browse'] = 'browse';
@@ -51,6 +50,8 @@ $config->rights->guest['user']['oauthregister'] = 'oauthregister';
 $config->rights->guest['user']['oauthbind']     = 'oauthbind';
 
 $config->rights->guest['rss']['index']       = 'index';
+$config->rights->guest['sitemap']['index']   = 'index';
+
 $config->rights->guest['file']['download']   = 'download';
 $config->rights->guest['file']['printfiles'] = 'printfiles';
 
