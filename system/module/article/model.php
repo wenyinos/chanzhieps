@@ -133,6 +133,30 @@ class articleModel extends model
     }
 
     /**
+     * Get the prev and next ariticle.
+     * 
+     * @param  array  $links    the link articles.
+     * @param  int    $current  the current article id.
+     * @access public
+     * @return array
+     */
+    public function getPrevAndNext($links, $current)
+    {
+        $prev = array();
+        $next = array();
+        $keys = array_keys($links);
+
+        $currentKey = array_search($current, $keys);
+        $prevKey    = $currentKey - 1;
+        $nextKey    = $currentKey + 1;
+
+        if(isset($keys[$prevKey])) $prev = array('id' => $keys[$prevKey], 'title' => $links[$keys[$prevKey]]->title, 'alias' => $links[$keys[$prevKey]]->alias);
+        if(isset($keys[$nextKey])) $next = array('id' => $keys[$nextKey], 'title' => $links[$keys[$nextKey]]->title, 'alias' => $links[$keys[$nextKey]]->alias);
+
+        return array('prev' => $prev, 'next' => $next);
+    }
+
+    /**
      * Create an article.
      * 
      * @param  string $type 

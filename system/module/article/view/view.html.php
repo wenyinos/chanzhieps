@@ -36,9 +36,8 @@ js::set('articleID', $article->id);
       </div>
       <?php extract($prevAndNext);?>
       <div class='row f-12px mt-10px'>
-        <div class='col-md-4 a-left'> <?php $prev ? print($lang->article->prev . html::a(inlink('view', "id=$prev[id]", "category={$category->alias}&name={$prev['alias']}"), $prev['title'])) : print($lang->article->none);?></div>
-        <div class='col-md-4 a-center'><?php echo html::a(inlink('browse', "id={$category->id}", "category={$category->alias}"), $lang->article->directory);?></div>
-        <div class='col-md-4 a-right'><?php $next ? print(html::a(inlink('view', "id=$next[id]", "category={$category->alias}&name={$next['alias']}"), $next['title']). $lang->article->next) : print($lang->article->none);?></div>
+        <div class='col-md-6 a-left'> <?php $prev ? print($lang->article->prev . $lang->colon . html::a(inlink('view', "id=$prev[id]", "category={$category->alias}&name={$prev['alias']}"), $prev['title'])) : print($lang->article->none);?></div>
+        <div class='col-md-6 a-right'><?php $next ? print($lang->article->next . $lang->colon . html::a(inlink('view', "id=$next[id]", "category={$category->alias}&name={$next['alias']}"), $next['title'])) : print($lang->article->none);?></div>
       </div>
     </div>
     <div id='commentBox'></div>

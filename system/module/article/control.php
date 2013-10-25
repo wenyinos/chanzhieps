@@ -238,7 +238,7 @@ class article extends control
         $this->view->desc        = $desc;
         $this->view->article     = $article;
         $this->view->links       = $this->article->getPairs($category->id, 'id_desc');
-        $this->view->prevAndNext = $this->loadModel('help')->getPrevAndNext($this->view->links, $article->id);
+        $this->view->prevAndNext = $this->article->getPrevAndNext($this->view->links, $article->id);
         $this->view->category    = $category;
         $this->view->contact     = $this->loadModel('company')->getContact();
 
