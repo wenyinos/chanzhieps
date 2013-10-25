@@ -1,11 +1,11 @@
 <?php
 /**
- * The addLink view file of site module of chanzhiEPS.
+ * The setLink view file of partner module of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
  * @license     LGPL
- * @author      xiying Guang <guanxiying@xirangit.com>
- * @package     site
+ * @author      Tingting Dai <daitingting@xirangit.com>
+ * @package     partner
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
