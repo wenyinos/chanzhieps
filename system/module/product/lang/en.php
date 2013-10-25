@@ -45,3 +45,8 @@ $lang->product->edit       = 'Edit';
 $lang->product->files      = 'Files';
 
 $lang->product->confirmDelete = 'Are you surce to delete it?';
+
+$lang->article->prev      = 'Previous';
+$lang->article->next      = 'Next';
+$lang->article->none      = 'None';
+$lang->article->directory = 'Back';

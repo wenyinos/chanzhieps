@@ -45,3 +45,8 @@ $lang->product->edit       = '编辑产品';
 $lang->product->files      = '附件';
 
 $lang->product->confirmDelete = '您确定删除该产品吗？';
+
+$lang->product->prev      = '上一个';
+$lang->product->next      = '下一个';
+$lang->product->none      = '没有了';
+$lang->product->directory = '返回目录';
