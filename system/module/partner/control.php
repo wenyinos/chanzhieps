@@ -37,7 +37,7 @@ class partner extends control
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
-
+        $this->view->title = $this->lang->partner->common;
         $this->display();
     }
 }

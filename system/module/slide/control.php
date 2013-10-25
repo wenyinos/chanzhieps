@@ -19,6 +19,7 @@ class slide extends control
      */
     public function admin()
     {
+        $this->view->title  = $this->lang->slide->admin;
         $this->view->slides = $this->slide->getList();
         $this->display();
     }

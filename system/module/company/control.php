@@ -42,6 +42,8 @@ class company extends control
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
+
+        $this->view->title = $this->lang->company->setBasic;
         $this->display();
     }
 
@@ -65,6 +67,8 @@ class company extends control
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
+
+        $this->view->title   = $this->lang->company->setContact;
         $this->view->contact = json_decode($this->config->company->contact);
         $this->display();
     }

@@ -47,6 +47,7 @@ class nav extends control
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->failed));
         }
+        $this->view->title        = $this->lang->nav->setNav;
         $this->view->navs         = $this->nav->getNavs($type);
 
         $this->view->types        = $this->lang->nav->types; 
