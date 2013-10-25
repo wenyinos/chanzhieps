@@ -367,6 +367,7 @@ class helper
     {
         global $config;
         $domain = str_replace('-', '_', $domain);
+        if(strpos($domain, ':') !== false) $domain = substr($domain, 0, strpos($domain, ':'));
         $items = explode('.', $domain);
         
         $postfix = str_replace($items[0] . '.', '', $domain);
