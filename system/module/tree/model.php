@@ -305,9 +305,23 @@ class treeModel extends model
      */
     public static function createBrowseLink($category)
     {
-        $linkHtml = html::a(helper::createLink('article', 'browse', "categoryID={$category->id}"), $category->name, '', "id='category{$category->id}'");
+        $linkHtml = html::a(helper::createLink('article', 'browse', "categoryID={$category->id}", "category={$category->alias}"), $category->name, '', "id='category{$category->id}'");
         return $linkHtml;
     }
+
+    /**
+     * Create the product browse link.
+     * 
+     * @param  int      $category 
+     * @access public
+     * @return string
+     */
+    public static function createProductBrowseLink($category)
+    {
+        $linkHtml = html::a(helper::createLink('product', 'browse', "categoryID={$category->id}", "category={$category->alias}"), $category->name, '', "id='category{$category->id}'");
+        return $linkHtml;
+    }
+
 
     /**
      * Create the blog browse link.
