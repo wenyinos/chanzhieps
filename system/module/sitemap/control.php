@@ -4,7 +4,7 @@
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
  * @license     LGPL
- * @author      Xiying Guan <guanxiying@xirangit.com>
+ * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     sitemap
  * @version     $Id$
  * @link        http://www.chanzhi.org
@@ -19,6 +19,7 @@ class sitemap extends control
      */
     public function index()
     {
+        if(strcmp(substr($_SERVER["REQUEST_URI"], -(strlen('sitemap.xml'))), 'sitemap.xml')==0) header("Content-type: text/xml");
         $this->loadModel('tree');
         $this->loadModel('article');
         $this->loadModel('product');
@@ -39,8 +40,9 @@ class sitemap extends control
         $this->view->blogs          = $blogs;
         $this->view->products       = $products;
         $this->view->threads        = $threads;
-
-        header("Content-type: text/xml");
+        $this->view->articleTree    =  $this->tree->getTreeMenu('article', 0, array('treeModel', 'createBrowseLink'));
+        $this->view->productTree    =  $this->tree->getTreeMenu('product', 0, array('treeModel', 'createProductBrowseLink'));
+        $this->view->blogTree       =  $this->tree->getTreeMenu('blog', 0, array('treeModel', 'createBlogBrowseLink'));
 
         $this->display();
     }
