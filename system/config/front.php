@@ -55,6 +55,8 @@ $config->rights->guest['sitemap']['index']   = 'index';
 $config->rights->guest['file']['download']   = 'download';
 $config->rights->guest['file']['printfiles'] = 'printfiles';
 
+$config->rights->guest['error']['index'] = 'index';
+
 /* For logged member. */
 $config->rights->member['thread']['post']       = 'post';
 $config->rights->member['thread']['reply']      = 'reply';
