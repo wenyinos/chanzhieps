@@ -9,6 +9,6 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->partner->common  = '友情链接';
-$lang->partner->index   = '首页链接';
-$lang->partner->content = '所有链接';
+$lang->partner->common  = 'Links';
+$lang->partner->index   = 'Home links';
+$lang->partner->content = 'All links';
