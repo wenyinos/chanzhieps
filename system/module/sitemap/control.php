@@ -27,16 +27,16 @@ class sitemap extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager(0, $this->config->sitemap->items, 1);
 
-        $categories   = $this->dao->select('*')->from(TABLE_CATEGORY)->fetchAll('id');
         $bookArticles = $this->dao->select('*')->from(TABLE_ARTICLE)->where('type')->like("book_%")->fi()->fetchAll('id');
         $articles     = $this->article->getList('article', $this->tree->getFamily(0, 'article'), 'id_desc', $pager);
+        $blogs        = $this->article->getList('blog', $this->tree->getFamily(0, 'blog'), 'id_desc', $pager);
         $products     = $this->product->getList($this->tree->getFamily(0), 'id_desc', $pager);
         $threads      = $this->thread->getList($this->tree->getFamily(0), 'id_desc', $pager);
 
         $this->view->siteLink       = commonModel::getSysURL();
-        $this->view->categories     = $categories;
         $this->view->bookArticles   = $bookArticles;
         $this->view->articles       = $articles;
+        $this->view->blogs          = $blogs;
         $this->view->products       = $products;
         $this->view->threads        = $threads;
 
