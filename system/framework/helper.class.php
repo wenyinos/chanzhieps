@@ -71,7 +71,7 @@ class helper
         if(!is_array($alias)) parse_str($alias, $alias);
         
         /* Seo modules return directly. */
-        if(helper::isSeoMode() and method_exists('uri', 'create' . $moduleName . $methodName))
+        if(helper::inSeoMode() and method_exists('uri', 'create' . $moduleName . $methodName))
         {
             $link = call_user_func_array('uri::create' . $moduleName . $methodName, array('param'=> $vars, 'alias'=>$alias));
             if($link) return $link;
@@ -380,17 +380,16 @@ class helper
     }
     
     /**
-     * substr support utf8 chinese character
+     * Enhanced substr version: support multibyte languages like Chinese.
      *
      * @param string $string
      * @param int $length 
      * @param string $append 
      * @return string 
      **/
-    function substr($string, $length, $append = '')
+    public static function substr($string, $length, $append = '')
     {
         if (strlen($string) <= $Length ) $append = '';
-
         if(function_exists('mb_substr')) return mb_substr($string, 0, $length, 'utf-8') . $append;
 
         preg_match_all("/./su", $string, $data);
@@ -398,11 +397,11 @@ class helper
     }
 
     /**
-     * Check SEO MODE
+     * Check in seo mode or not.
      *
      * return bool
      */
-     function isSeoMode()
+     public static function inSeoMode()
      {
         global $config;
         return $config->requestType == 'PATH_INFO' and $config->seoMode;

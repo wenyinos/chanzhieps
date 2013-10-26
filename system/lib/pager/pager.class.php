@@ -467,7 +467,7 @@ EOT;
     private function createLink($title)
     {
         global $config; 
-        if(helper::isSeoMode() &&method_exists('uri', 'create' . $this->moduleName . $this->methodName)) 
+        if(helper::inSeoMode() &&method_exists('uri', 'create' . $this->moduleName . $this->methodName)) 
         {
             $link  = $_SERVER['REQUEST_URI'];
 
