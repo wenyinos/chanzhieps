@@ -5,7 +5,7 @@
 /system/tmp/model/*
 /system/tmp/cache/*
 /system/tmp/extension/*
-/www/data/upload
+www/data
 /www/js/all.js
 /www/theme/default/all.css
 ext
