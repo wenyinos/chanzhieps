@@ -156,12 +156,14 @@ class product extends control
         $keywords = $product->keywords . ' ' . $category->keyword . ' ' . $this->config->site->keywords;
         $desc     = strip_tags($product->summary);
         
-        $this->view->title    = $title;
-        $this->view->keywords = $keywords;
-        $this->view->desc     = $desc;
-        $this->view->product  = $product;
-        $this->view->category = $category;
-        $this->view->contact  = $this->loadModel('company')->getContact();
+        $this->view->title       = $title;
+        $this->view->keywords    = $keywords;
+        $this->view->desc        = $desc;
+        $this->view->product     = $product;
+        $this->view->links       = $this->product->getPairs($category->id, 'id_desc');
+        $this->view->prevAndNext = $this->product->getPrevAndNext($this->view->links, $product->id);
+        $this->view->category    = $category;
+        $this->view->contact     = $this->loadModel('company')->getContact();
 
         $this->dao->update(TABLE_PRODUCT)->set('views = views + 1')->where('id')->eq($productID)->exec(false);
 

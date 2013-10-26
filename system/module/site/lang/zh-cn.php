@@ -23,6 +23,7 @@ $lang->site->copyright    = '创建年份';
 
 $lang->site->setBasic     = "设置基本信息";
 $lang->site->setLogo      = "Logo设置";
+$lang->site->setOauth     = "开放登录设置";
 $lang->site->setSinaOauth = "新浪微博接入";
 $lang->site->setQQOauth   = "QQ接入";
 $lang->site->setTheme     = '主题设置';

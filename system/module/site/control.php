@@ -26,6 +26,7 @@ class site extends control
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
 
+        $this->view->title = $this->lang->site->setBasic;
         $this->display();
     }
 
@@ -77,6 +78,7 @@ class site extends control
             }
         }
             
+        $this->view->title = $this->lang->site->setLogo;
         $this->view->logo = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : false;
 
         $this->display();
@@ -97,6 +99,7 @@ class site extends control
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
          }
+         $this->view->title = $this->lang->site->setTheme;
          $this->display();
      }
 
@@ -116,7 +119,7 @@ class site extends control
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
-
+        $this->view->title = $this->lang->site->setOauth;
         $this->display();
     }
 }

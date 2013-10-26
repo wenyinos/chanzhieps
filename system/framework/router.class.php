@@ -1006,8 +1006,12 @@ class router
         if(is_file($this->controlFile)) return true;
 
         $this->controlFile = $modulePath . DS . 'control.php';
-        if(!is_file($this->controlFile)) header("Location: {$this->config->webRoot}");
-
+        if(!is_file($this->controlFile)) 
+        {
+            $this->setModuleName('error');
+            $this->setMethodName('index');
+            return $this->setControlFile();
+        }
         return true;
     }
 
@@ -1555,7 +1559,20 @@ class router
 
         /* If any error occers, save it. */
         $error = error_get_last();
-        if($error) $this->saveError($error['type'], $error['message'], $error['file'], $error['line']);
+        if($error)
+        {
+            $this->saveError($error['type'], $error['message'], $error['file'], $error['line']);
+            if($this->config->debug)
+            {
+                return $this->triggerError();
+            }
+            else
+            {
+                /* If fetal error show error page. */
+                $level = $error['type'];
+                if($level == E_ERROR or $level == E_PARSE or $level == E_CORE_ERROR or $level == E_COMPILE_ERROR or $level == E_USER_ERROR) $this->headError();
+            }
+        }
     }
 
     /**
@@ -1617,6 +1634,19 @@ class router
             die($htmlError);
         }
     }
+
+    /**
+     * Heade to error page.
+     * 
+     * return void
+     */
+     public function headError()
+     {
+        $this->setModuleName('error');
+        $this->setMethodName('index');
+        $this->setControlFile();
+        $this->loadModule();
+     }
 
     /**
      * Save the sql.

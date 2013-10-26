@@ -488,6 +488,18 @@ class commonModel extends model
     }
 
     /**
+     * Print the positon bar of partner module.
+     * 
+     * @param  object $module 
+     * @access public
+     * @return void
+     */
+    public function printpartner($module)
+    {
+        echo '<li>' . $this->lang->friendLink . '</li>'; 
+    }
+
+    /**
      * Print the positon bar of article module.
      * 
      * @param  object $module 

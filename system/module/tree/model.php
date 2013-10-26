@@ -305,9 +305,23 @@ class treeModel extends model
      */
     public static function createBrowseLink($category)
     {
-        $linkHtml = html::a(helper::createLink('article', 'browse', "categoryID={$category->id}"), $category->name, '', "id='category{$category->id}'");
+        $linkHtml = html::a(helper::createLink('article', 'browse', "categoryID={$category->id}", "category={$category->alias}"), $category->name, '', "id='category{$category->id}'");
         return $linkHtml;
     }
+
+    /**
+     * Create the product browse link.
+     * 
+     * @param  int      $category 
+     * @access public
+     * @return string
+     */
+    public static function createProductBrowseLink($category)
+    {
+        $linkHtml = html::a(helper::createLink('product', 'browse', "categoryID={$category->id}", "category={$category->alias}"), $category->name, '', "id='category{$category->id}'");
+        return $linkHtml;
+    }
+
 
     /**
      * Create the blog browse link.
@@ -421,9 +435,10 @@ class treeModel extends model
 
         /* Init the category object. */
         $category = new stdclass();
-        $category->parent  = $parent ? $parent->id : 0;
-        $category->grade   = $parent ? $parent->grade + 1 : 1;
-        $category->type    = $type;
+        $category->parent     = $parent ? $parent->id : 0;
+        $category->grade      = $parent ? $parent->grade + 1 : 1;
+        $category->type       = $type;
+        $category->postedDate = helper::now();
 
         $i = 1;
         foreach($children as $key => $categoryName)

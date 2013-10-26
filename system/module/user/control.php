@@ -286,6 +286,7 @@ class user extends control
         $this->view->key   = $key;
         $this->view->pager = $pager;
 
+        $this->view->title = $this->lang->user->list;
         $this->display();
     }
 

@@ -43,6 +43,11 @@ $common->printPositionBar($category, $article, '', $root);
       </div>
       <p><?php echo $article->content;?></p>
       <div class='article-file'><?php $this->loadModel('article')->printFiles($article->files);?></div>
+      <?php extract($prevAndNext);?>
+      <div class='row f-12px mt-10px'>
+        <div class='col-md-6 a-left'> <?php $prev ? print($lang->article->prev . $lang->colon . html::a(inlink('view', "id=$prev[id]", "category={$category->alias}&name={$prev['alias']}"), $prev['title'])) : print($lang->article->none);?></div>
+        <div class='col-md-6 a-right'><?php $next ? print($lang->article->next . $lang->colon . html::a(inlink('view', "id=$next[id]", "category={$category->alias}&name={$next['alias']}"), $next['title'])) : print($lang->article->none);?></div>
+      </div>
     </div>
     <div id='commentBox'></div>
     <?php echo html::a('', '', '', "name='comment'");?>

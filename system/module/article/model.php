@@ -108,13 +108,13 @@ class articleModel extends model
      */
     public function getPairs($categories, $orderBy, $pager = null)
     {
-        return $this->dao->select('t1.id, t1.title')->from(TABLE_ARTICLE)->alias('t1')
+        return $this->dao->select('t1.id, t1.title, t1.alias')->from(TABLE_ARTICLE)->alias('t1')
             ->leftJoin(TABLE_RELATION)->alias('t2')
             ->on('t1.id = t2.id')
             ->beginIF($categories)->where('t2.category')->in($categories)->fi()
             ->orderBy($orderBy)
             ->page($pager, false)
-            ->fetchPairs('id', 'title', false);
+            ->fetchAll('id');
     }
 
     /**
@@ -130,6 +130,30 @@ class articleModel extends model
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal = 0, $recPerPage = $count, $pageID = 1);
         return $this->getList($type, $categories, 'id_desc', $pager);
+    }
+
+    /**
+     * Get the prev and next ariticle.
+     * 
+     * @param  array  $links    the link articles.
+     * @param  int    $current  the current article id.
+     * @access public
+     * @return array
+     */
+    public function getPrevAndNext($links, $current)
+    {
+        $prev = array();
+        $next = array();
+        $keys = array_keys($links);
+
+        $currentKey = array_search($current, $keys);
+        $prevKey    = $currentKey - 1;
+        $nextKey    = $currentKey + 1;
+
+        if(isset($keys[$prevKey])) $prev = array('id' => $keys[$prevKey], 'title' => $links[$keys[$prevKey]]->title, 'alias' => $links[$keys[$prevKey]]->alias);
+        if(isset($keys[$nextKey])) $next = array('id' => $keys[$nextKey], 'title' => $links[$keys[$nextKey]]->title, 'alias' => $links[$keys[$nextKey]]->alias);
+
+        return array('prev' => $prev, 'next' => $next);
     }
 
     /**

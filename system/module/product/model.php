@@ -102,6 +102,26 @@ class productModel extends model
     }
 
     /**
+     * Get product pairs.
+     * 
+     * @param string $modules 
+     * @param string $orderBy 
+     * @param string $pager 
+     * @access public
+     * @return array
+     */
+    public function getPairs($categories, $orderBy, $pager = null)
+    {
+        return $this->dao->select('t1.id, t1.name, t1.alias')->from(TABLE_PRODUCT)->alias('t1')
+            ->leftJoin(TABLE_RELATION)->alias('t2')
+            ->on('t1.id = t2.id')
+            ->beginIF($categories)->where('t2.category')->in($categories)->fi()
+            ->orderBy($orderBy)
+            ->page($pager, false)
+            ->fetchAll('id');
+    }
+
+    /**
      * get latest products. 
      *
      * @param array      $categories
@@ -131,6 +151,30 @@ class productModel extends model
         $pager = new pager($recTotal = 0, $recPerPage = $count, $pageID = 1);
 
         return $this->getList($categories, 'views_desc', $pager);
+    }
+
+    /**
+     * Get the prev and next product.
+     * 
+     * @param  array  $links    the link products.
+     * @param  int    $current  the current product id.
+     * @access public
+     * @return array
+     */
+    public function getPrevAndNext($links, $current)
+    {
+        $prev = array();
+        $next = array();
+        $keys = array_keys($links);
+
+        $currentKey = array_search($current, $keys);
+        $prevKey    = $currentKey - 1;
+        $nextKey    = $currentKey + 1;
+
+        if(isset($keys[$prevKey])) $prev = array('id' => $keys[$prevKey], 'name' => $links[$keys[$prevKey]]->name, 'alias' => $links[$keys[$prevKey]]->alias);
+        if(isset($keys[$nextKey])) $next = array('id' => $keys[$nextKey], 'name' => $links[$keys[$nextKey]]->name, 'alias' => $links[$keys[$nextKey]]->alias);
+
+        return array('prev' => $prev, 'next' => $next);
     }
 
     /**

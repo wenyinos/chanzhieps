@@ -23,6 +23,7 @@ $lang->site->copyright    = 'Copyright';
 
 $lang->site->setBasic     = "Baisc";
 $lang->site->setLogo      = "Log";
+$lang->site->setOauth     = "Oauth";
 $lang->site->setSinaOauth = "Weibo Oauth";
 $lang->site->setQQOauth   = "QQ Oauth";
 $lang->site->setTheme     = 'Set Theme';
