@@ -28,7 +28,7 @@ class seo
     public static function parseURI($uri)
     {
         global $config;
-        if(!helper::isSeoMode()) return $uri;
+        if(!helper::inSeoMode()) return $uri;
 
         $categoryAlias = $config->seo->alias->category;
         $pageAlias     = $config->seo->alias->page;
