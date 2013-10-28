@@ -196,7 +196,6 @@ caption {margin:0; padding-left:10px; text-align:left; background-color: #EFEFEF
 /* The doc. */
 #docbody    {margin:0; padding:12px; background:#fff;}
 #doccontent {margin-bottom:10px; padding:10px; border:1px solid #C8E0F5; background:url(./images/default/bg.content.png) repeat-x; font-size:14px; line-height:1.5}
-#summary    {margin-bottom:10px; padding:10px 10px 10px 0px; line-height:1.5; background:#efefef; font-size:12px}
 #docend     {height:48px;  background:url('./images/default/bg.docend.png');}
 #doccontent h1  {margin:10px 0 10px 0}
 #doccontent h3  {margin:10px 0 10px 0}
