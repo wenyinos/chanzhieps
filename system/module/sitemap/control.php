@@ -20,9 +20,11 @@ class sitemap extends control
     public function index()
     {
         if(strcmp(substr($_SERVER["REQUEST_URI"], -(strlen('sitemap.xml'))), 'sitemap.xml')==0) header("Content-type: text/xml");
+
         $this->loadModel('tree');
         $this->loadModel('article');
         $this->loadModel('product');
+        $this->loadModel('forum');
         $this->loadModel('thread');
 
         $this->app->loadClass('pager', $static = true);
@@ -43,6 +45,7 @@ class sitemap extends control
         $this->view->articleTree    =  $this->tree->getTreeMenu('article', 0, array('treeModel', 'createBrowseLink'));
         $this->view->productTree    =  $this->tree->getTreeMenu('product', 0, array('treeModel', 'createProductBrowseLink'));
         $this->view->blogTree       =  $this->tree->getTreeMenu('blog', 0, array('treeModel', 'createBlogBrowseLink'));
+        $this->view->boards         =  $this->forum->getBoards();
 
         $this->display();
     }

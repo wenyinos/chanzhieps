@@ -33,6 +33,24 @@
       <?php echo $blogTree?>
     </div>
     <?php endif;?>
-  </div>
+    <?php if($boards):?>
+    <div class = 'row'>
+      <h4><?php echo $lang->sitemap->boards;?></h4>
+      <ul class='tree'>
+        <?php foreach($boards as $parentBoard):?>
+        <li>
+          <?php echo $parentBoard->name;?>
+          <?php if($parentBoard->childs):?>
+          <ul>
+            <?php foreach($parentBoard->childs as $child):?>
+            <li><?php echo html::a(helper::createLink('forum', 'board', "id=$child->id", "category={$child->alias}"), $child->name);?></li>
+            <?php endforeach;?>
+          </ul>
+          <?php endif;?>
+        </li>
+        <?php endforeach;?>
+      </ul>
+    </div>
+    <?php endif;?>
 </div>
 <?php include '../../common/view/footer.html.php';?>

@@ -13,3 +13,4 @@ $lang->sitemap->common          = 'Site map';
 $lang->sitemap->productCategory = 'Product category';
 $lang->sitemap->articleCategory = 'Article category';
 $lang->sitemap->blogCategory    = 'Blog category';
+$lang->sitemap->boards          = 'Boards';
