@@ -81,7 +81,6 @@ define('TABLE_CATEGORY', $config->db->prefix . 'category');
 define('TABLE_RELATION', $config->db->prefix . 'relation');
 define('TABLE_PRODUCT',  $config->db->prefix . 'product');
 define('TABLE_ARTICLE',  $config->db->prefix . 'article');
-define('TABLE_BLOCK',    $config->db->prefix . 'block');
 define('TABLE_LAYOUT',   $config->db->prefix . 'layout');
 define('TABLE_COMMENT',  $config->db->prefix . 'comment');
 define('TABLE_THREAD',   $config->db->prefix . 'thread');
@@ -90,6 +89,7 @@ define('TABLE_USER',     $config->db->prefix . 'user');
 define('TABLE_OAUTH',    $config->db->prefix . 'oauth');
 define('TABLE_GROUP',    $config->db->prefix . 'group');
 define('TABLE_FILE',     $config->db->prefix . 'file');
+define('TABLE_TAG',      $config->db->prefix . 'tag');
 define('TABLE_DOWN',     $config->db->prefix . 'down');
 define('TABLE_MESSAGE',  $config->db->prefix . 'message');
 

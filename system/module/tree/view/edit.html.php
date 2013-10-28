@@ -32,8 +32,8 @@
 </div>
     </tr>  
     <tr>
-      <th><?php echo $lang->category->keyword;?></th>
-      <td><?php echo html::input('keyword', $category->keyword, "class='text-1'");?></td>
+      <th><?php echo $lang->category->keywords;?></th>
+      <td><?php echo html::input('keywords', $category->keywords, "class='text-1'");?></td>
     </tr>  
     <tr>
       <th><?php echo $lang->category->desc;?></th>

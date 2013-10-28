@@ -171,13 +171,17 @@ class articleModel extends model
             ->add('type', $type)
             ->get();
 
-        $article->alias = seo::processAlias($article->alias);
+        $article->keywords = seo::processTags($article->keywords);
+        $article->alias    = seo::processAlias($article->alias);
 
         $this->dao->insert(TABLE_ARTICLE)
             ->data($article, $skip = 'categories')
             ->autoCheck()
             ->batchCheck($this->config->article->create->requiredFields, 'notempty')
             ->exec();
+
+        /* Save article keywords. */
+        $this->loadModel('tag')->save($article->keywords);
 
         if(dao::isError()) return false;
 
@@ -201,16 +205,21 @@ class articleModel extends model
             ->add('editedDate', helper::now())
             ->get();
 
-        $article->alias = seo::processAlias($article->alias);
-
+        $article->keywords = seo::processTags($article->keywords);
+        $article->alias    = seo::processAlias($article->alias);
+        
         $this->dao->update(TABLE_ARTICLE)
             ->data($article, $skip = 'categories')
             ->autoCheck()
             ->batchCheck($this->config->article->edit->requiredFields, 'notempty')
             ->where('id')->eq($articleID)
             ->exec();
+
+        /* Save article keywords. */
+        $this->loadModel('tag')->save($article->keywords);
+
         if(!dao::isError()) $this->processCategories($articleID, $type, $this->post->categories);
-        return;
+        return false;
     }
         
     /**

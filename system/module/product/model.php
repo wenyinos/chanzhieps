@@ -194,7 +194,8 @@ class productModel extends model
             ->add('addedDate', helper::now())
             ->get();
 
-        $product->alias = seo::processAlias($product->alias);
+        $product->alias    = seo::processAlias($product->alias);
+        $product->keywords = seo::processTags($product->keywords);
 
         $this->dao->insert(TABLE_PRODUCT)
             ->data($product, $skip = 'categories')
@@ -205,6 +206,8 @@ class productModel extends model
         if(dao::isError()) return false;
 
         $productID = $this->dao->lastInsertID();
+
+        $this->loadModel('tag')->save($product->keywords);
         $this->processCategories($productID, $this->post->categories);
         return $productID;
     }
@@ -227,7 +230,8 @@ class productModel extends model
             ->add('editedDate', helper::now())
             ->get();
 
-        $product->alias = seo::processAlias($product->alias);
+        $product->alias    = seo::processAlias($product->alias);
+        $product->keywords = seo::processTags($product->keywords);
 
         $this->dao->update(TABLE_PRODUCT)
             ->data($product, $skip = 'categories')
@@ -236,8 +240,11 @@ class productModel extends model
             ->where('id')->eq($productID)
             ->exec();
 
+        $this->loadModel('tag')->save($product->keywords);
         if(!dao::isError()) $this->processCategories($productID, $this->post->categories);
-        return;
+
+        if(!dao::isError()) return true;
+        return false;
     }
         
     /**

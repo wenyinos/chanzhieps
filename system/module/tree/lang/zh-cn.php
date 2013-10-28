@@ -29,7 +29,7 @@ $lang->category->name     = '类目名称';
 $lang->category->alias    = '英文别名';
 $lang->category->parent   = '上级类目';
 $lang->category->desc     = '描述';
-$lang->category->keyword  = '关键词';
+$lang->category->keywords = '关键词';
 $lang->category->children = "子类目";
 
 /* Lang items for forum. */
@@ -39,7 +39,7 @@ $lang->board->name       = '版块';
 $lang->board->alias      = '英文别名';
 $lang->board->parent     = '上级版块';
 $lang->board->desc       = '描述';
-$lang->board->keyword    = '关键词';
+$lang->board->keywords   = '关键词';
 $lang->board->children   = "子版块";
 $lang->board->readonly   = '访问权限';
 $lang->board->moderators = '版主';
@@ -49,10 +49,10 @@ $lang->board->readonlyList[1] = '只读';
 
 /* Lang items for help. */
 $lang->directory = new stdclass();
-$lang->directory->common     = '目录';
-$lang->directory->name       = '目录';
-$lang->directory->alias     = '英文别名';
-$lang->directory->parent     = '上级目录';
-$lang->directory->desc       = '描述';
-$lang->directory->keyword    = '关键词';
-$lang->directory->children   = "子目录";
+$lang->directory->common   = '目录';
+$lang->directory->name     = '目录';
+$lang->directory->alias    = '英文别名';
+$lang->directory->parent   = '上级目录';
+$lang->directory->desc     = '描述';
+$lang->directory->keywords = '关键词';
+$lang->directory->children = "子目录";
