@@ -31,13 +31,19 @@ js::set('articleID', $article->id);
           if($sina->widget) echo $sina->widget; 
           ?>
         </div>
+        <?php if($article->summary):?>
+        <div id='summary'><strong><?php echo $lang->article->summary;?></strong><?php echo $lang->colon . $article->summary;?></div>
+        <?php endif;?>
         <p><?php echo $article->content;?></p>
         <div class='article-file'><?php $this->article->printFiles($article->files);?></div>
-      </div>
-      <?php extract($prevAndNext);?>
-      <div class='row f-12px mt-10px'>
-        <div class='col-md-6 a-left'> <?php $prev ? print($lang->article->prev . $lang->colon . html::a(inlink('view', "id=$prev[id]", "category={$category->alias}&name={$prev['alias']}"), $prev['title'])) : print($lang->article->none);?></div>
-        <div class='col-md-6 a-right'><?php $next ? print($lang->article->next . $lang->colon . html::a(inlink('view', "id=$next[id]", "category={$category->alias}&name={$next['alias']}"), $next['title'])) : print($lang->article->none);?></div>
+        <?php if($article->keywords):?>
+        <div id='keywords'><strong><?php echo $lang->article->keywords;?></strong><?php echo $lang->colon . $article->keywords;?></div>
+        <?php endif;?>
+        <?php extract($prevAndNext);?>
+        <div class='row f-12px mt-20px'>
+          <div class='col-md-6 a-left'> <?php $prev ? print($lang->article->prev . $lang->colon . html::a(inlink('view', "id=$prev[id]", "category={$category->alias}&name={$prev['alias']}"), $prev['title'])) : print($lang->article->none);?></div>
+          <div class='col-md-6 a-right'><?php $next ? print($lang->article->next . $lang->colon . html::a(inlink('view', "id=$next[id]", "category={$category->alias}&name={$next['alias']}"), $next['title'])) : print($lang->article->none);?></div>
+        </div>
       </div>
     </div>
     <div id='commentBox'></div>
