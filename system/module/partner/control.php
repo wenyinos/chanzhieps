@@ -19,7 +19,7 @@ class partner extends control
      */
     public function index()
     {
-        $this->view->partner  = $this->config->partner;
+        $this->view->partner = $this->config->partner;
         $this->display();
     }
 
