@@ -47,7 +47,7 @@ class treeModel extends model
     {
         $category = $this->getByID($categoryID);   
         if($category and $category->alias != '') return $category->alias;
-        return "c$categoryID";
+        return "";
     }
 
     /**
