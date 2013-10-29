@@ -17,13 +17,14 @@ js::set('articleID', $article->id);
       ?>
       </div>
     </div>
+    <?php if($article->summary) echo "<div id='summary'><strong>{$lang->article->summary}</strong>$lang->colon$article->summary</div>";?>
     <div><?php echo $article->content;;?></div>
     <?php if($article->keywords) echo "<div id='keywords'><strong>{$lang->article->keywords}</strong>$lang->colon$article->keywords</div>";?>
     <?php extract($prevAndNext);?>
     <div class='row f-12px mt-10px'>
-      <div class='col-md-4 a-left'> <?php $prev ? print($lang->article->prev . html::a(inlink('read', "id=$prev[id]&book={$type}", "category={$category->alias}&name={$prev['alias']}"), $prev['title'])) : print($lang->article->none);?></div>
+      <div class='col-md-4 a-left'> <?php $prev ? print($lang->article->prev . $lang->colon . html::a(inlink('read', "id=$prev[id]&book={$type}", "category={$category->alias}&name={$prev['alias']}"), $prev['title'])) : print($lang->article->none);?></div>
       <div class='col-md-4 a-center'><?php echo html::a(inlink('book', "type=$type&category={$category->id}"), $lang->article->directory);?></div>
-      <div class='col-md-4 a-right'><?php $next ? print(html::a(inlink('read', "id=$next[id]&book={$type}", "category={$category->alias}&name={$next['alias']}"), $next['title']). $lang->article->next) : print($lang->article->none);?></div>
+      <div class='col-md-4 a-right'><?php $next ? print($lang->article->next . $lang->colon . html::a(inlink('read', "id=$next[id]&book={$type}", "category={$category->alias}&name={$next['alias']}"), $next['title'])) : print($lang->article->none);?></div>
     </div>
   </div>
 </div>
