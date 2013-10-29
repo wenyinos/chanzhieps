@@ -12,6 +12,32 @@
 class tagModel extends model
 {
     /**
+     * Get tag list.
+     * 
+     * @param  int    $tags 
+     * @param  int    $pager 
+     * @access public
+     * @return void
+     */
+    public function getList($tags, $pager)
+    {
+        return $this->dao->select('*')->from(TABLE_TAG)
+        ->beginIf(!empty($tags))->where('tag')->in($tags)->fi()
+        ->page($pager)->fetchAll('id');
+    }
+    
+    /**
+     * Get option menu list for select.
+     * 
+     * @access public
+     * @return void
+     */
+    public function getOptionMenu()
+    {
+        return $this->dao->select('tag')->from(TABLE_TAG)->fetchPairs('tag', 'tag');
+    }
+    
+    /**
      * Save tags.
      * 
      * @param  string    $tags 
@@ -25,7 +51,6 @@ class tagModel extends model
         foreach($tags as $tag)
         {
             if(trim($tag) == '') continue;
-
             $rank  = $this->countRank($tag);
             $count = $this->dao->select('count(*) as count')->from(TABLE_TAG)->where('tag')->eq($tag)->fetch('count');
 
