@@ -473,10 +473,7 @@ class treeModel extends model
     public function update($categoryID)
     {
         $category = fixer::input('post')->setDefault('readonly', 0)->specialChars('name')->get();
-
-        $category->keywords = seo::processTags($category->keywords);
         $category->alias = seo::processAlias($category->alias);
-
         if($this->isAliasExists($category->alias, $categoryID)) return sprintf($this->lang->tree->aliasRepeat, $category->alias);
         $parent   = $this->getById($this->post->parent);
         $category->grade = $parent ? $parent->grade + 1 : 1;
@@ -489,9 +486,6 @@ class treeModel extends model
             ->exec();
 
         $this->fixPath($category->type);
-
-        /* Save keywords to tags. */
-        $this->loadModel('tag')->save($category->keywords);
 
         return !dao::isError();
     }
@@ -513,14 +507,8 @@ class treeModel extends model
         $this->dao->delete()->from(TABLE_CATEGORY)->where('id')->eq($categoryID)->exec();                                    // Delete my self.
         $this->fixPath($category->type);
 
-        if($category->parent !== 0) 
-        {
-            $this->dao->update(TABLE_RELATION)->set('category')->eq($category->parent)->where('category')->eq($categoryID)->exec();
-        }
-        else
-        {
-            $this->dao->delete()->from(TABLE_RELATION)->where('category')->eq($categoryID)->exec();
-        }
+        if($category->type == 'article' and $category->type == 'help') $this->dao->update(TABLE_RELATION)->set('category')->eq($category->parent)->where('category')->eq($categoryID)->exec();
+
         return !dao::isError();
     }
 
