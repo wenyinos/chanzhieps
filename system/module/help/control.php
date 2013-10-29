@@ -108,40 +108,13 @@ class help extends control
 
         if(!is_numeric($categoryID))
         {
-            $category = $this->loadModel('tree')->getByID($categoryID);
+            $category   = $this->loadModel('tree')->getByID($categoryID);
             $categoryID = $category->id;
         }
-
-        $categories = $this->dao->select('id,name,grade,alias,parent')->from(TABLE_CATEGORY)
-            ->where('type')->eq('book_' . $code)
-            ->beginIF($categoryID != 0)->andWhere('path')->like("%,$categoryID,%")->fi()
-            ->orderBy('grade, `order`')->fetchAll('id');
-
-        $articles = $this->dao->select('t1.id, title, alias, t2.category')->from(TABLE_ARTICLE)
-            ->alias('t1')->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
-            ->where('category')->in(array_keys($categories))
-            ->orderBy('t1.order')
-            ->fetchGroup('category', 'id', false);
 
         $bookCategory       = $this->loadModel('tree')->getById($categoryID);
         $bookCategory->book = $book->name;
         $bookCategory->code = $code;
-        $gradeCategories    = array();
-        foreach($categories as $category)
-        {
-            if($category->grade == 1)
-            {
-                $gradeCategories[$category->id]    = $category;
-                $gradeCategories[$category->id]->i = $this->help->getOrderId($code, $category->id);
-            }
-            else
-            {
-                $j = $this->help->getOrderId($code, $category->id, $category->parent);
-                $category->j = $j;
-                $gradeCategories[$category->parent]->children[] = $category;
-                if(!isset($gradeCategories[$category->parent]->i)) $gradeCategories[$category->parent]->i = $this->help->getOrderId($code, $category->parent);
-            }
-        }
 
         $this->view->title = $book->name;
         if($bookCategory)
@@ -150,10 +123,8 @@ class help extends control
             if($bookCategory->desc) $this->view->desc = trim(preg_replace('/<[a-z\/]+.*>/Ui', '', $bookCategory->desc));
         }
         $this->view->books      = $this->help->getBookList();
-        $this->view->categories = $gradeCategories;
         $this->view->book       = $book;
         $this->view->code       = $code;
-        $this->view->articles   = $articles;
         $this->view->category   = $bookCategory;
         $this->display();
     }
