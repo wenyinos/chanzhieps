@@ -29,7 +29,7 @@ $lang->category->name     = 'Name';
 $lang->category->alias    = 'Alias';
 $lang->category->parent   = 'Parent';
 $lang->category->desc     = 'Description';
-$lang->category->keyword  = 'Keyword';
+$lang->category->keywords = 'Keyword';
 $lang->category->children = "Children";
 
 /* Lang items for forum. */
@@ -39,7 +39,7 @@ $lang->board->name       = 'Board';
 $lang->board->alias      = 'Alias';
 $lang->board->parent     = 'Parent';
 $lang->board->desc       = 'Description';
-$lang->board->keyword    = 'Keyword';
+$lang->board->keywords   = 'Keyword';
 $lang->board->children   = "Children";
 $lang->board->readonly   = 'Readonly';
 $lang->board->moderators = 'Moderators';
@@ -54,5 +54,5 @@ $lang->directory->name       = 'Category';
 $lang->directory->alias      = 'Alias';
 $lang->directory->parent     = 'Parent';
 $lang->directory->desc       = 'Delete';
-$lang->directory->keyword    = 'Keyword';
+$lang->directory->keywords   = 'Keyword';
 $lang->directory->children   = "Children";

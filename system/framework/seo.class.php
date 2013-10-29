@@ -151,6 +151,21 @@ class seo
         $alias = str_replace(array('_', ' ', '?', '@', '&', '%', '~', '`', '+', '*', '/'), '-', $alias);
         return preg_replace('/[\-]+/', '-', $alias);
     }
+
+    /**
+     * Process tags: replace other space symbol with standard ',' symbol.
+     * 
+     * @param  string    $tags 
+     * @access public
+     * @return string
+     */
+    public function processTags($tags)
+    {
+       $tags = str_replace(array('_', '、', ' ', '-', '?', '@', '&', '%', '~', '`', '+', '*', '/', '\\', '，', '.', '。'), ',', $tags);
+       return preg_replace('/[,]+/', ',', $tags);
+    }
+
+
 }
 
 /**
