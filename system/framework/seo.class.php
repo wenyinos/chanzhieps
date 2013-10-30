@@ -140,32 +140,20 @@ class seo
         return $uri;
     }
     
-    /**
-     * process alias.
-     *
-     * @param mix $alias 
-     * return mix
-     **/
-    public static function processAlias($alias)
-    {
-        $alias = str_replace(array('_', ' ', '?', '@', '&', '%', '~', '`', '+', '*', '/'), '-', $alias);
-        return preg_replace('/[\-]+/', '-', $alias);
-    }
 
     /**
-     * Process tags: replace other space symbol with standard ',' symbol.
+     * Unify string to standard space char.
      * 
-     * @param  string    $tags 
+     * @param  string    $string 
+     * @param  string    $to 
      * @access public
      * @return string
      */
-    public function processTags($tags)
+    public function unify($string, $to)
     {
-       $tags = str_replace(array('_', '、', ' ', '-', '?', '@', '&', '%', '~', '`', '+', '*', '/', '\\', '，', '.', '。'), ',', $tags);
-       return preg_replace('/[,]+/', ',', $tags);
+       $tags = str_replace(array('_', '、', ' ', '-', '?', '@', '&', '%', '~', '`', '+', '*', '/', '\\', '，', '.', '。'), $to, $string);
+       return preg_replace('/[,]+/', $to, $string);
     }
-
-
 }
 
 /**
@@ -191,7 +179,7 @@ class uri
     {
         global $config;
         $link = 'article/c' . array_shift($params);
-        if($alias['category']) $link = $alias['category'];
+        if($alias['category'] != '') $link = $alias['category'];
         return $config->webRoot . $link . '.' . $config->default->view;
     }
 
