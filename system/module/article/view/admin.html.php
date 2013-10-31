@@ -20,7 +20,7 @@
   <?php endif;?>
   <thead>
     <tr class='a-center'>
-      <?php if(strpos($type,'book') !== false):?><th class='w-80px'><?php echo $lang->article->order;?></th><?php endif;?>
+      <?php if(strpos($type, 'book_') !== false):?><th class='w-80px'><?php echo $lang->article->order;?></th><?php endif;?>
       <th class='w-60px'><?php echo $lang->article->id;?></th>
       <th><?php echo $lang->article->title;?></th>
       <th class='w-p20'><?php echo $lang->article->category;?></th>
@@ -32,7 +32,7 @@
   <tbody>
     <?php $maxOrder = 0; foreach($articles as $article):?>
     <tr class='a-center'>
-      <?php if(strpos($type, 'book') !== false):?>
+      <?php if(strpos($type, 'book_') !== false):?>
       <td>
       <?php 
           if($article->order > $maxOrder) $maxOrder = $article->order;
