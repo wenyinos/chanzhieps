@@ -589,15 +589,25 @@ class fixer
 
     /**
      * Get the data after fixing.
+     *
+     * If only one field, return it's value directly. 
+     * More fields, remove other fields not in the list and return $data.
      * 
-     * @param  string $fieldName 
+     * @param  string $fields   the fields list.
      * @access public
-     * @return object
+     * @return mix
      */
-    public function get($fieldName = '')
+    public function get($fields = '')
     {
-        if(empty($fieldName)) return $this->data;
-        return $this->data->$fieldName;
+        $fields = str_replace(' ', '', trim($fields));
+
+        if(empty($fields)) return $this->data;
+        if(strpos($fields, ',') === false) return $this->data->$fields;
+
+        $fields = array_flip(explode(',', $fields));
+        foreach($this->data as $field => $value) if(!isset($fields[$field])) unset($this->data->$field);
+
+        return $this->data;
     }
 
     /**
