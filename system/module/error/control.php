@@ -19,6 +19,8 @@ class error extends control
      */
     public function index()
     {
+        @header("http/1.1 404 not found");
+        @header("status: 404 not found");
         $this->view->articleTree =  $this->loadModel('tree')->getTreeMenu('article', 0, array('treeModel', 'createBrowseLink'));
         $this->view->productTree =  $this->loadModel('tree')->getTreeMenu('product', 0, array('treeModel', 'createProductBrowseLink'));
         $this->view->blogTree    =  $this->loadModel('tree')->getTreeMenu('blog', 0, array('treeModel', 'createBlogBrowseLink'));
