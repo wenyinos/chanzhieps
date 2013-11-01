@@ -105,7 +105,7 @@ class seo
             if($module == 'help' && $book) $method .= '-' . $book;
             return seo::convertURI($module, $method, $params, $pageID);
         }
-
+        
         /* The first param is an object id. */
         if(is_numeric($items[1]))
         {
@@ -140,7 +140,6 @@ class seo
         return $uri;
     }
     
-
     /**
      * Unify string to standard space char.
      * 
@@ -178,8 +177,10 @@ class uri
     public static function createArticleBrowse($params, $alias)
     {
         global $config;
+
         $link = 'article/c' . array_shift($params);
         if($alias['category'] != '') $link = $alias['category'];
+
         return $config->webRoot . $link . '.' . $config->default->view;
     }
 
@@ -193,10 +194,12 @@ class uri
     public static function createArticleView($params, $alias)
     {
         global $config;
+
         $link = 'article/';
-        if($alias['category']) $link = $alias['category'] . $config->webRoot;
+        if($alias['category']) $link = $alias['category'] . '/';
         $link .= array_shift($params);
         if($alias['name']) $link .= '_' . $alias['name'];
+
         return $config->webRoot . $link . '.' . $config->default->view;
     }
 
@@ -211,8 +214,10 @@ class uri
     public static function createProductBrowse($params, $alias)
     {
         global $config;
+
         $link = 'product/c' . array_shift($params);
         if($alias['category']) $link = $alias['category'];
+
         return $config->webRoot . $link . '.' . $config->default->view;
     }
 
@@ -226,10 +231,12 @@ class uri
     public static function createProductView($params, $alias)
     {
         global $config;
+
         $link = 'product/';
-        if($alias['category']) $link = $alias['category'] . $config->webRoot;
+        if($alias['category']) $link = $alias['category'] . '/';
         $link .= array_shift($params);
         if($alias['name']) $link .= '_' . $alias['name'];
+
         return $config->webRoot . $link . '.' . $config->default->view;
     }
 
@@ -243,15 +250,10 @@ class uri
     public static function createForumBoard($params, $alias)
     {
         global $config;
+
         $link = 'forum/';
-        if($alias['category'])
-        {
-            $link .= $alias['category'];
-        }
-        else
-        {
-            $link .= 'c' . array_shift($params);
-        }
+        $link .= $alias['category'] ? $alias['category'] : 'c' . array_shift($params);
+
         return $config->webRoot . $link . '.' . $config->default->view;
     }
 
@@ -278,23 +280,10 @@ class uri
     public static function createBlogIndex($params, $alias)
     {
         global $config;
-        $link = 'blog/';
-        if($alias['category'])
-        {
-            $link .= $alias['category'];
-        }
-        else
-        {
-            if(empty($params)) 
-            {
-                $link .= 'c0';
-            }
-            else
-            {
-                $link .= 'c' . array_shift($params);
-            }
-        }
-        return $config->webRoot . $link . '.' . $config->default->view;
+
+        if(trim($alias['category']) != '')  return $config->webRoot . 'blog/' . $alias['category'] . '.' . $config->default->view;
+        if(!empty($params))                 return $link .= 'c' . array_shift($params);
+        return $config->webRoot . 'blog.' . $config->default->view;
     }
 
     /**
@@ -307,8 +296,10 @@ class uri
     public static function createBlogView($params, $alias)
     {
         global $config;
+
         $link = 'blog/' . array_shift($params);
         if($alias['name']) $link .= '_' . $alias['name'];
+
         return $config->webRoot . $link . '.' . $config->default->view;
     }
 
@@ -322,18 +313,18 @@ class uri
     public static function createHelpBook($params, $alias)
     {
         global $config;
+
         $link = 'help/' . array_shift($params);
         if($alias['category'])
         {
-            $link .= $config->webRoot . $alias['category'];
+            $link .= '/' . $alias['category'];
         }
         else
-        {
             if(count($params) > 0)
             {
                 $category = array_shift($params);
                 if(is_numeric($category)) $category = 'c' . $category;
-                $link .= $config->webRoot . $category;
+                $link .= '/' . $category;
             }
         }
         return $config->webRoot . $link . '.' . $config->default->view;
