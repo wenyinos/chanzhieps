@@ -36,7 +36,9 @@ class forum extends control
      */
     public function board($boardID = 0, $pageID = 1)
     {
-        $board = $this->loadModel('tree')->getById($boardID);
+        $board = $this->loadModel('tree')->getByID($boardID);
+        if(empty($board)) $board = $this->tree->getByAlias($boardID, 'forum');
+
         if(!$board) die(js::locate('back'));
  
         /* Get stick threads. */
