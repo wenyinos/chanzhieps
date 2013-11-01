@@ -12,30 +12,134 @@
 class helpModel extends model
 {
     /**
-     * getOrderId 
+     * Show book catalogue.
+     * 
+     * @param  string    $book 
+     * @param  int       $chapter 
+     * @access public
+     * @return void
+     */
+    public function getBookCatalogue($book, $chapter = 0)
+    {
+        $code = str_replace('book_', '', $book);
+        if(!isset($this->catalogue)) $this->catalogue = '';
+        
+        $chapter = $this->loadModel('tree')->getByID($chapter);
+        if(!empty($chapter))
+        {
+            /* Add self to tree. */
+            $order = $this->getChapterNumber($chapter->path);
+            $this->lastChapter = $order;
+            $this->catalogue .= "<dt class='f-16px' ><strong>" . html::a(helper::createLink('help', 'book', "type=$code&categoryID=$chapter->id", "category={$chapter->alias}"), $order .  $chapter->name) . '</strong></dt>';
+        }
+        $children = $this->tree->getChildren(isset($chapter->id) ? $chapter->id : 0, $book);
+
+        if(!empty($children)) 
+        {
+            if($chapter) $this->catalogue .= '<dl>';
+            foreach($children as $child)
+            {
+                $this->getBookCatalogue($book, $child->id);
+            }
+            if($chapter) $this->catalogue .= '</dl>';
+        }
+        if($chapter) 
+        {
+            $articleCatalogue = $this->getArticleCatalogue($book, $chapter, $this->lastChapter);
+            if($articleCatalogue != '')  $this->catalogue .= "<dl>{$articleCatalogue}</dl>";
+        }
+        return $this->catalogue;
+    }
+
+    /**
+     * Get article catalogue. 
+     * 
+     * @param  string    $book 
+     * @param  object    $currentChapter
+     * @param  int       $preChapter 
+     * @access public
+     * @return void
+     */
+    public function getArticleCatalogue($book, $currentChapter, $preChapter)
+    {
+        if(empty($currentChapter)) return '';
+
+        $catalogue = '';
+        $book = str_replace('book_', '', $book);
+
+        $articles = $this->dao->select('t1.id, t1.order, title, t2.category')->from(TABLE_ARTICLE)
+            ->alias('t1')->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
+            ->where('category')->eq($currentChapter->id)
+            ->orderBy('t1.order')
+            ->fetchAll('id');
+
+        $i = 1;
+        if($preChapter !== $this->getChapterNumber($currentChapter->path))
+        {
+            $path = explode('.', $preChapter);
+            $i    = end($path) + 1;
+            unset($path[count($path)-1]);
+            $preChapter = join('.', $path);
+        }
+
+        foreach($articles as $article)
+        {   
+            $url  = helper::createLink('help', 'read', "article=$article->id&book={$book}", "category={$currentChapter->alias}&name=$article->alias");
+            $link = html::a($url, $preChapter . '.' . $i . $article->title); 
+            $catalogue .= "<dd class='f-14px'>" . $link . '</dd>';
+            $i++;
+        }
+        return $catalogue;
+    }
+
+    /**
+     * Get one chapter's full number.
+     * 
+     * @param  string    $path 
+     * @access public
+     * @return void
+     */
+    public function getChapterNumber($path)
+    {
+        $origins = explode(',', $path);
+        $preFix  = '';
+        foreach($origins as $origin)
+        {
+            if(!$origin) continue;
+            $category = $this->loadModel('tree')->getByID($origin);
+            $category->sort = $this->countChapterOrder(str_replace('book_', '', $category->type), $category->id, $category->parent);
+            $sort .= $category->sort . ".";
+        }
+        return trim($sort, '.');
+    }
+
+    /**
+     * Get chapter's order in its brother queue.
      * 
      * @param  string    $book 
      * @param  string    $categoryID 
-     * @param  id        $parentID 
+     * @param  int       $parentID 
      * @access public
      * @return void
-     * @todo rewrite the logic.
      */
-    public function getOrderId($code, $categoryID, $parentID = '')
+    public function countChapterOrder($code, $categoryID, $parentID = '')
     {
-        $allCategories = $this->dao->select('*')->from(TABLE_CATEGORY)
+        $categories = $this->dao->select('*')->from(TABLE_CATEGORY)
             ->where('type')->eq('book_' . $code)
             ->beginIF($parentID !='')->andWhere('parent')->eq($parentID)->fi()
-            ->orderBy('grade, `order`')->fetchAll('id');
-        $order = 1;
-        foreach($allCategories as $thisCategory)
-        {
-            if($categoryID == $thisCategory->id)break;
-            $order++;
-        }
-        return $order;
+            ->orderBy('`order`')->fetchAll('id');
+
+        $order = array_search($categoryID, array_keys($categories));
+        return $order + 1;
     }
 
+    /**
+     * Get category Box of backend.
+     * 
+     * @param  string    $type 
+     * @access public
+     * @return void
+     */
     public function getCategoryBox($type)
     {
         $book = $this->getBookByCode(str_replace('book_', '', $type));

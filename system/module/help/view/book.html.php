@@ -17,10 +17,9 @@
   <div class='col-md-9'>
     <div class='box radius'>  
       <h4 class='title'><?php echo $book->name;?></h4>
-      <?php
-      $treeMenu = $this->loadModel('tree')->getBookTreeMenu('book_' . $code, $category->id, array('treeModel', 'createHelpBookLink'));
-      echo $treeMenu;
-      ?>
+      <dl>
+      <?php echo $this->help->getBookCatalogue('book_' . $code, (int) $category->id) ?>
+      </dl>
     </div>
   </div>
 </div>

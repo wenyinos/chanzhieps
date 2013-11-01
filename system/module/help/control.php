@@ -108,11 +108,14 @@ class help extends control
 
         if(!is_numeric($categoryID))
         {
-            $category   = $this->loadModel('tree')->getByID($categoryID);
-            $categoryID = $category->id;
+            $bookCategory  = $this->loadModel('tree')->getByAlias($categoryID, 'book_' . $code);
+        }
+        else
+        {
+            $bookCategory = $this->loadModel('tree')->getById($categoryID);
         }
 
-        $bookCategory       = $this->loadModel('tree')->getById($categoryID);
+        if(empty($bookCategory)) $bookCategory = new stdclass();
         $bookCategory->book = $book->name;
         $bookCategory->code = $code;
 
@@ -120,7 +123,6 @@ class help extends control
         if($bookCategory)
         {
             $this->view->keywords = trim($bookCategory->keyword . ' ' . $this->config->site->keywords);
-            if($bookCategory->desc) $this->view->desc = trim(preg_replace('/<[a-z\/]+.*>/Ui', '', $bookCategory->desc));
         }
         $this->view->books      = $this->help->getBookList();
         $this->view->book       = $book;
