@@ -28,7 +28,7 @@
     <?php endif;?>
     <tr>
       <th class='w-100px'><?php echo $lang->article->category;?></th>
-      <?php if(strpos($type, 'book') !== false):?>
+      <?php if(strpos($type, 'book_') !== false):?>
       <td><?php echo html::select("categories[]", $categories, array_keys($article->categories), "class='select-3 form-control'");?></td>
       <?php else:?>
       <td><?php echo html::select("categories[]", $categories, array_keys($article->categories), "multiple='multiple' class='select-3 form-control chosen'");?></td>
@@ -81,7 +81,9 @@
     </tr>
   </table>
 </form>
-<?php if(strpos($type, 'book') !== false):?>
+<?php if(strpos($type, 'book_') !== false):?>
 </div>
 <?php endif;?>
+
+<?php include '../../common/view/treeview.html.php';?>
 <?php include '../../common/view/footer.admin.html.php';?>

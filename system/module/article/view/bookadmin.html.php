@@ -28,7 +28,7 @@ js::set('type', $type);
         </caption>
         <thead>
           <tr class='a-center'>
-            <?php if(!$children):?>
+            <?php if(!$articleList):?>
             <th class='w-80px'><?php echo $lang->article->order;?></th>
             <?php endif;?>
             <th class='w-60px'><?php echo $lang->article->id;?></th>
@@ -42,7 +42,7 @@ js::set('type', $type);
         <tbody>
           <?php $maxOrder = 0; foreach($articles as $article):?>
           <tr class='a-center'>
-            <?php if(!$children):?>
+            <?php if(!$articleList):?>
             <td>
             <?php 
                 if($article->order > $maxOrder) $maxOrder = $article->order;
@@ -68,7 +68,9 @@ js::set('type', $type);
         <tfoot>
           <tr>
             <td colspan='7'>
+              <?php if(!$articleList):?>
               <div class='f-left'><?php echo html::submitButton() . html::hidden('maxOrder', $maxOrder);;?></div>
+              <?php endif;?>
               <?php $pager->show();?>
             </td>
           </tr>

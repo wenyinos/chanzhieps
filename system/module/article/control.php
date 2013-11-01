@@ -80,20 +80,16 @@ class article extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $children = $this->loadModel('tree')->getChildren($categoryID, $type);
-        if($children || strpos($type, 'book_') === false)
-        {
-            $orderBy = 'id_desc';
-        }
-        else
-        {
-            $orderBy = 't1.order';
-        }
+        $subCategories = $this->dao->select('id')->from(TABLE_CATEGORY)->where('parent')->eq((int)$categoryID)->andWhere('type')->eq($type)->orderBy('`order`')->fetchPairs();
+        if($subCategories) $articleList = $this->article->getList($type, $subCategories, 'id_desc');
+
+        $orderBy = 'id_desc';
+        if(empty($articleList) || strpos($type, 'book_') !== false) $orderBy = 't1.order';
         
         $families = $categoryID ? $this->loadModel('tree')->getFamily($categoryID, $type) : '';
         $articles = $this->article->getList($type, $families, $orderBy, $pager);
 
-        if(strpos($type, 'book') !== false)
+        if(strpos($type, 'book_') !== false)
         {
             $this->view->categoryBox = $this->loadModel('help')->getCategoryBox($type);
             unset($this->lang->article->menu);
@@ -101,25 +97,19 @@ class article extends control
             $i = 1;
             foreach($articles as $article)
             {
-                if(!$children)
-                {
-                    $article->order = $this->post->maxOrder + $i * 10;
-                }
-                else
-                {
-                    $article->order = $article->id; 
-                }
+                $article->order = $article->id; 
+                if(empty($articleList)) $article->order = $this->post->maxOrder + $i * 10;
                 $i++;
             }
         }
 
-        $this->view->title    = $type == 'blog' ? $this->lang->blog->admin : $this->lang->article->admin;
-        $this->view->articles = $articles;
-        $this->view->pager    = $pager;
-        $this->view->children = $children;
-        $this->view->type     = $type;
+        $this->view->title         = $type == 'blog' ? $this->lang->blog->admin : $this->lang->article->admin;
+        $this->view->articles      = $articles;
+        $this->view->pager         = $pager;
+        $this->view->articleList   = $articleList;
+        $this->view->type          = $type;
 
-        if(strpos($type, 'book') !== false)
+        if(strpos($type, 'book_') !== false)
         {
             $this->display('article', 'bookadmin');
             exit;
@@ -141,7 +131,7 @@ class article extends control
         $this->lang->article->menu = $this->lang->$type->menu;
         $this->lang->menuGroups->article = $type;
 
-        if(strpos($type, 'book') !== false)
+        if(strpos($type, 'book_') !== false)
         {
             $this->view->categoryBox = $this->loadModel('help')->getCategoryBox($type);
             unset($this->lang->article->menu);
@@ -181,7 +171,7 @@ class article extends control
         $this->lang->article->menu = $this->lang->$type->menu;
         $this->lang->menuGroups->article = $type;
 
-        if(strpos($type, 'book') !== false)
+        if(strpos($type, 'book_') !== false)
         {
             $this->view->categoryBox = $this->loadModel('help')->getCategoryBox($type);
             unset($this->lang->article->menu);

@@ -5,7 +5,7 @@ $jsRoot    = $webRoot . "js/";
 $themeRoot = $webRoot . "theme/";
 ?>
 <!DOCTYPE html>
-<?php if($this->config->oauth->sina):?>
+<?php if($config->oauth->sina):?>
 <html xmlns:wb=“http://open.weibo.com/wb”>
 <?php else:?>
 <html>
@@ -55,8 +55,8 @@ js::import($jsRoot . 'respond/min.js');
 <![endif]-->
 <?php js::set('lang', $lang->js);?>
 <?php
-$sina = json_decode($this->config->oauth->sina);
-$qq   = json_decode($this->config->oauth->qq);
+$sina = json_decode($config->oauth->sina);
+$qq   = json_decode($config->oauth->qq);
 if($sina->widget) js::import('http://tjs.sjs.sinajs.cn/open/api/js/wb.js');
 if($sina->verification) echo $sina->verification; 
 if($qq->verification)   echo $qq->verification;

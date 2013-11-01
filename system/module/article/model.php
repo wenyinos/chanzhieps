@@ -173,6 +173,19 @@ class articleModel extends model
             ->add('type', $type)
             ->get();
 
+        $order = 0;
+        if(strpos($type, 'book_') !== false)
+        {
+            $categoryID = $this->post->categories[0];
+            $articles   = $this->dao->select('id')->from(TABLE_RELATION)->where('category')->eq($categoryID)->fetchPairs();
+            if($articles)
+            {
+                $maxOrder = $this->dao->select('`order`')->from(TABLE_ARTICLE)->where('id')->in($articles)->orderBy('`order` desc')->limit(1)->fetch();
+                $order    = $maxOrder->order + 10;
+            }
+        }
+
+        $article->order    = $order;
         $article->keywords = seo::unify($article->keywords, ',');
         $article->alias    = seo::unify($article->alias, '-');
 
@@ -201,12 +214,27 @@ class articleModel extends model
      */
     public function update($articleID, $type = 'article')
     {
+        $article  = $this->getByID($articleID);
+        $category = array_keys($article->categories);
+
+        if(strpos($type, 'book_') !== false && $category !== $this->post->categories)
+        {
+            $categoryID = $this->post->categories[0];
+            $articles   = $this->dao->select('id')->from(TABLE_RELATION)->where('category')->eq($categoryID)->fetchPairs();
+            if($articles)
+            {
+                $maxOrder = $this->dao->select('`order`')->from(TABLE_ARTICLE)->where('id')->in($articles)->orderBy('`order` desc')->limit(1)->fetch();
+                $order    = $maxOrder->order + 10;
+            }
+        }
+
         $article = fixer::input('post')
             ->join('categories', ',')
             ->add('editor', $this->app->user->account)
             ->add('editedDate', helper::now())
             ->get();
 
+        $article->order    = $order;
         $article->keywords = seo::unify($article->keywords, ',');
         $article->alias    = seo::unify($article->alias, '-');
         
@@ -274,6 +302,30 @@ class articleModel extends model
 
            $this->dao->insert(TABLE_RELATION)->data($data)->exec();
        }
+    }
+
+    /**
+     * Update order fields.
+     * 
+     * @access public
+     * @return void
+     */
+    public function updateOrder($orders, $type = 'article')
+    {
+        $orders = array_flip($orders);
+        ksort($orders);
+
+        $i = 0;
+        foreach($orders as $articleID)
+        {
+            $order = $i * 10;
+            $this->dao->update(TABLE_ARTICLE)
+                ->set('`order`')->eq($order)
+                ->where('id')->eq($articleID)
+                ->limit(1)
+                ->exec(false);
+            $i++;
+        }
     }
 
     /**
