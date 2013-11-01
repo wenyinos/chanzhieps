@@ -79,11 +79,11 @@ class article extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $childCategories = $this->dao->select('id')->from(TABLE_CATEGORY)->where('parent')->eq((int)$categoryID)->andWhere('type')->eq($type)->orderBy('`order`')->fetchPairs();
-        if($childCategories) $childArticles = $this->article->getList($type, $children, 'id_desc');
+        $subCategories = $this->dao->select('id')->from(TABLE_CATEGORY)->where('parent')->eq((int)$categoryID)->andWhere('type')->eq($type)->orderBy('`order`')->fetchPairs();
+        if($subCategories) $articleList = $this->article->getList($type, $subCategories, 'id_desc');
 
         $orderBy = 'id_desc';
-        if(empty($childArticles) || strpos($type, 'book_') !== false) $orderBy = 't1.order';
+        if(empty($articleList) || strpos($type, 'book_') !== false) $orderBy = 't1.order';
         
         $families = $categoryID ? $this->loadModel('tree')->getFamily($categoryID, $type) : '';
         $articles = $this->article->getList($type, $families, $orderBy, $pager);
@@ -97,7 +97,7 @@ class article extends control
             foreach($articles as $article)
             {
                 $article->order = $article->id; 
-                if(empty($childArticles)) $article->order = $this->post->maxOrder + $i * 10;
+                if(empty($articleList)) $article->order = $this->post->maxOrder + $i * 10;
                 $i++;
             }
         }
@@ -105,7 +105,7 @@ class article extends control
         $this->view->title         = $type == 'blog' ? $this->lang->blog->admin : $this->lang->article->admin;
         $this->view->articles      = $articles;
         $this->view->pager         = $pager;
-        $this->view->childArticles = $childArticles;
+        $this->view->articleList   = $articleList;
         $this->view->type          = $type;
 
         if(strpos($type, 'book_') !== false)
