@@ -25,7 +25,11 @@ class blog extends control
         $pager = new pager(0, 10, $pageID);
 
         $category = $this->loadModel('tree')->getByID($categoryID);
-        if(!$category) $category = $this->tree->getByAlias($categoryID, 'blog');
+        if(!$category)
+        {
+            $category   = $this->tree->getByAlias($categoryID, 'blog');
+            $categoryID = $category->id;
+        }
 
         $articles = $this->loadMOdel('article')->getList('blog', $this->tree->getFamily($categoryID, 'blog'), $orderBy = 'id_desc', $pager);
 
