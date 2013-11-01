@@ -123,11 +123,11 @@ class threadModel extends model
         $thread = fixer::input('post')
             ->specialChars('title')
             ->stripTags('content', $this->config->thread->editor->allowTags)
-            ->add('board', $board)
-            ->add('author', $this->app->user->account)
-            ->add('addedDate', $now) 
-            ->add('repliedDate', $now)
-            ->remove('files, labels')
+            ->setForce('board', $board)
+            ->setForce('author', $this->app->user->account)
+            ->setForce('addedDate', $now) 
+            ->setForce('repliedDate', $now)
+            ->remove('files, labels, views, replies, hidden, stick, readonly')
             ->get();
 
         $this->dao->insert(TABLE_THREAD)->data($thread)->autoCheck()->batchCheck('title, content', 'notempty')->exec();
@@ -174,10 +174,10 @@ class threadModel extends model
     public function update($threadID)
     {
         $thread = fixer::input('post')
-            ->add('editor', $this->session->user->account)
-            ->add('editedDate', helper::now())
+            ->setForce('editor', $this->session->user->account)
+            ->setForce('editedDate', helper::now())
             ->stripTags('content', $this->config->thread->editor->allowTags)
-            ->remove('files,labels')
+            ->remove('files,labels, views, replies, stick, hidden, readonly')
             ->get();
 
         $this->dao->update(TABLE_THREAD)

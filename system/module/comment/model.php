@@ -89,6 +89,7 @@ class commentModel extends model
             ->specialChars('content')
             ->add('date', helper::now())
             ->add('ip', $this->server->REMOTE_ADDR)
+            ->remove('status')
             ->get();
 
         $this->dao->insert(TABLE_COMMENT)

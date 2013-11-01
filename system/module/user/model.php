@@ -75,12 +75,13 @@ class userModel extends model
         $this->checkPassword();
 
         $user = fixer::input('post')
-            ->setDefault('join', date('Y-m-d H:i:s'))
-            ->setDefault('last', helper::now())
-            ->setDefault('visits', 1)
+            ->setForce('join', date('Y-m-d H:i:s'))
+            ->setForce('last', helper::now())
+            ->setForce('visits', 1)
             ->setIF($this->post->password1 == false, 'password', '')
             ->setIF($this->cookie->r != '', 'referer', $this->cookie->r)
             ->setIF($this->cookie->r == '', 'referer', '')
+            ->remove('admin, ip')
             ->get();
         $user->password = $this->createPassword($this->post->password1, $user->account, $user->join); 
 
@@ -118,6 +119,7 @@ class userModel extends model
         $user = fixer::input('post')
             ->cleanInt('imobile, qq, zipcode')
             ->specialChars('company, address, phone,')
+            ->remove('ip, account, admin, join, visits')
             ->get();
 
         return $this->dao->update(TABLE_USER)
@@ -166,7 +168,7 @@ class userModel extends model
         $join = $this->dao->select('*')->from(TABLE_USER)->where('account')->eq($account)->fetch('join');
         $user = fixer::input('post')
             ->setIF($this->post->password1 != false, 'password', $this->createPassword($this->post->password1, $account, $join))
-            ->remove('password1, password2')
+            ->remove('password1, password2, ip, account, admin, join, visits')
             ->get();
 
         $this->dao->update(TABLE_USER)->data($user)->autoCheck()->where('account')->eq($account)->exec();
@@ -407,12 +409,13 @@ class userModel extends model
     public function registerOauthAccount($provider, $openID)
     {
         $user = fixer::input('post')
-            ->setDefault('join', helper::now())
-            ->setDefault('last', helper::now())
-            ->setDefault('visits', 1)
+            ->setForce('join', helper::now())
+            ->setForce('last', helper::now())
+            ->setForce('visits', 1)
             ->setIF($this->cookie->r != '', 'referer', $this->cookie->r)
             ->setIF($this->cookie->r == '', 'referer', '')
             ->add('password', $this->createPassword(md5(mt_rand()), $user->account, $user->join))     // Set a random password.
+            ->remove('admin, ip')
             ->get();
 
         $this->dao->insert(TABLE_USER)->data($user)
