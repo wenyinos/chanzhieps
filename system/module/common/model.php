@@ -549,7 +549,8 @@ class commonModel extends model
         echo '<li>' . html::a(helper::createLink('help', 'book', "type=$category->code"), $category->book) . '</li>';
         foreach($category->pathNames as $categoryID => $categoryName)
         {
-            echo '<li>' . html::a(helper::createLink('help', 'book', "type=$category->code&categoryID=" . $this->loadMOdel('tree')->getAliasByID($categoryID) ), $categoryName) . '</li>';
+            $alias = $this->loadMOdel('tree')->getAliasByID($categoryID);
+            echo '<li>' . html::a(helper::createLink('help', 'book', "type=$category->code&categoryID=$categoryID","category=$alias"), $categoryName) . '</li>';
         }
         if($article) echo '<li>' . $article->title . '</li>';
     }
