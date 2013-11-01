@@ -1,8 +1,8 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
   <?php if($this->moduleName == 'index' && isset($this->config->partner->index)):?>
   <ul id="friends" class="nav nav-pills">
-    <?php echo html::a(helper::createLink('partner', 'index'), $lang->friendLink) . $lang->colon;?>
-    <?php echo $this->config->partner->index; ?>
+    <?php echo $lang->friendLink . $lang->colon;?>
+    <?php echo $this->config->partner->index . "&nbsp;&nbsp&nbsp" . html::a(helper::createLink('partner', 'index'), $lang->more . $lang->raquo);?>
   </ul>
   <?php endif;?>
   <hr/>
