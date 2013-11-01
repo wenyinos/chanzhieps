@@ -83,11 +83,11 @@ class replyModel extends model
     {
         $this->app->loadConfig('thread');
         $reply = fixer::input('post')
-            ->add('author', $this->app->user->account)
-            ->add('addedDate', helper::now())
-            ->add('thread', $threadID)
+            ->setForce('author', $this->app->user->account)
+            ->setForce('addedDate', helper::now())
+            ->setForce('thread', $threadID)
             ->stripTags('content', $this->config->thread->editor->allowTags)
-            ->remove('recTotal, recPerPage, pageID, files, labels')
+            ->remove('recTotal, recPerPage, pageID, files, labels, hidden')
             ->get();
 
         $this->dao->insert(TABLE_REPLY)->data($reply)->autoCheck()->check('content', 'notempty')->exec();
@@ -126,10 +126,10 @@ class replyModel extends model
     public function update($replyID)
     {
         $reply = fixer::input('post')
-            ->add('editor', $this->session->user->account)
-            ->add('editedDate', helper::now())
+            ->setForce('editor', $this->session->user->account)
+            ->setForce('editedDate', helper::now())
             ->stripTags('content', $this->config->thread->editor->allowTags)
-            ->remove('files,labels')
+            ->remove('files,labels,hidden')
             ->get();
 
         $this->dao->update(TABLE_REPLY)->data($reply)->autoCheck()->check('content', 'notempty')->where('id')->eq($replyID)->exec();
