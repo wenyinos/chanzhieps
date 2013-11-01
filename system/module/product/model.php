@@ -206,10 +206,9 @@ class productModel extends model
             ->autoCheck()
             ->batchCheck($this->config->product->create->requiredFields, 'notempty')
             ->exec();
+        $productID = $this->dao->lastInsertID();
 
         if(dao::isError()) return false;
-
-        $productID = $this->dao->lastInsertID();
 
         $this->loadModel('tag')->save($product->keywords);
         $this->processCategories($productID, $this->post->categories);

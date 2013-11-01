@@ -181,13 +181,13 @@ class articleModel extends model
             ->autoCheck()
             ->batchCheck($this->config->article->create->requiredFields, 'notempty')
             ->exec();
+        $articleID = $this->dao->lastInsertID();
 
         if(dao::isError()) return false;
 
         /* Save article keywords. */
         $this->loadModel('tag')->save($article->keywords);
 
-        $articleID = $this->dao->lastInsertID();
         $this->processCategories($articleID, $type, $this->post->categories);
         return $articleID;
     }

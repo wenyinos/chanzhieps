@@ -24,7 +24,8 @@ class product extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager(0, 15, $pageID);
 
-        $category = $this->loadModel('tree')->getById($categoryID);
+        $category = $this->loadModel('tree')->getByID($categoryID);
+        if(!$category) $category = $this->tree->getByAlias($categoryID, 'product');
         $products = $this->product->getList($this->tree->getFamily($categoryID), 'id_desc', $pager);
 
         if($category)
@@ -142,7 +143,7 @@ class product extends control
      */
     public function view($productID)
     {
-        $product = $this->product->getById($productID);
+        $product = $this->product->getByID($productID);
 
         /* fetch first category for display. */
         $category = array_slice($product->categories, 0, 1);
@@ -150,7 +151,7 @@ class product extends control
 
         $currentCategory = $this->session->productCategory;
         if($currentCategory > 0 && isset($product->categories[$currentCategory])) $category = $currentCategory;  
-        $category = $this->loadModel('tree')->getById($category);
+        $category = $this->loadModel('tree')->getByID($category);
 
         $title    = $product->name . ' - ' . $category->name;
         $keywords = $product->keywords . ' ' . $category->keyword . ' ' . $this->config->site->keywords;

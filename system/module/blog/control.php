@@ -24,7 +24,9 @@ class blog extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager(0, 10, $pageID);
 
-        $category = $this->loadModel('tree')->getById($categoryID);
+        $category = $this->loadModel('tree')->getByID($categoryID);
+        if(!$category) $category = $this->tree->getByAlias($categoryID, 'blog');
+
         $articles = $this->loadMOdel('article')->getList('blog', $this->tree->getFamily($categoryID, 'blog'), $orderBy = 'id_desc', $pager);
 
         if($category)
@@ -57,7 +59,7 @@ class blog extends control
      */
     public function view($articleID, $currentCategory = 0)
     {
-        $article  = $this->loadModel('article')->getById($articleID);
+        $article  = $this->loadModel('article')->getByID($articleID);
 
         /* fetch category for display. */
         $category = array_slice($article->categories, 0, 1);
@@ -65,7 +67,7 @@ class blog extends control
 
         $currentCategory = $this->session->articleCategory;
         if($currentCategory > 0 && isset($article->categories[$currentCategory])) $category = $currentCategory;  
-        $category = $this->loadModel('tree')->getById($category);
+        $category = $this->loadModel('tree')->getByID($category);
 
         $title    = $article->title . ' - ' . $category->name;
         $keywords = $article->keywords . ' ' . $category->keyword . ' ' . $this->config->site->keywords;

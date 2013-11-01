@@ -37,7 +37,8 @@ class article extends control
         $type = 'article';
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal = 0, $recPerPage = 6, $pageID);
-        $category = $this->loadModel('tree')->getById($categoryID);
+        $category = $this->loadModel('tree')->getByID($categoryID);
+        if(!$category) $category = $this->tree->getByAlias($categoryID, $type);
         $articles = $this->article->getList($type, $this->tree->getFamily($categoryID, $type), 'id_desc', $pager);
 
         if($category)
@@ -218,7 +219,7 @@ class article extends control
      */
     public function view($articleID)
     {
-        $article  = $this->article->getById($articleID);
+        $article  = $this->article->getByID($articleID);
 
         /* fetch category for display. */
         $category = array_slice($article->categories, 0, 1);
@@ -227,7 +228,7 @@ class article extends control
         $currentCategory = $this->session->articleCategory;
         if($currentCategory > 0 && isset($article->categories[$currentCategory])) $category = $currentCategory;  
 
-        $category = $this->loadModel('tree')->getById($category);
+        $category = $this->loadModel('tree')->getByID($category);
 
         $title    = $article->title . ' - ' . $category->name;
         $keywords = $article->keywords . ' ' . $category->keyword . ' ' . $this->config->site->keywords;

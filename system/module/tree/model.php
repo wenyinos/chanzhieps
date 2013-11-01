@@ -22,14 +22,24 @@ class treeModel extends model
      */
     public function getByID($categoryID)
     {
-        if(is_numeric($categoryID))
-        {
-            $category = $this->dao->findById((int)$categoryID)->from(TABLE_CATEGORY)->fetch();
-        }
-        else
-        {
-            $category = $this->dao->select('*')->from(TABLE_CATEGORY)->where('alias')->eq($categoryID)->fetch();
-        }
+        $category = $this->dao->findById((int)$categoryID)->from(TABLE_CATEGORY)->fetch();
+        if(!$category) return false;
+
+        $category->pathNames = $this->dao->select('id, name')->from(TABLE_CATEGORY)->where('id')->in($category->path)->orderBy('grade')->fetchPairs();
+        return $category;
+    }
+
+    /**
+     * Get category info by alias.
+     * 
+     * @param  string    $alias 
+     * @access public
+     * @return bool|object
+     */
+    public function getByAlias($alias, $type = 'article')
+    {
+        $category = $this->dao->select('*')->from(TABLE_CATEGORY)->where('alias')->eq($alias)->andWhere('type')->eq($type)->fetch();
+
         if(!$category) return false;
 
         $category->pathNames = $this->dao->select('id, name')->from(TABLE_CATEGORY)->where('id')->in($category->path)->orderBy('grade')->fetchPairs();
@@ -268,84 +278,6 @@ class treeModel extends model
         return $lastMenu; 
     }
 
-    /**
-     * Get the book tree menu in <dl> type.
-     * 
-     * @param string    $type             the tree type
-     * @param int       $startCategoryID  the start category
-     * @param string    $userFunc         which function to be called to create the link
-     * @access public
-     * @return string   the html code of the tree menu.
-     */
-    public function getBookTreeMenu($type, $startCategoryID = 0, $userFunc, $siteID = 0)
-    {
-        $treeMenu = array();
-        $stmt = $this->dbh->query($this->buildQuery($type, $startCategoryID, $siteID));
-        while($category = $stmt->fetch())
-        {
-            $origins = explode(',', $category->path);
-            $sort = '';
-            foreach($origins as $origin)
-            {
-               if($origin)
-               {
-                   $category = $this->getByID($origin);
-                   $category->sort = $this->loadModel('help')->getOrderId(str_replace('book_', '', $category->type), $category->id, $category->parent);
-                   $sort .= $category->sort . ".";
-               }
-            }
-            $linkHtml = $sort . call_user_func($userFunc, $category);
-
-            $articles = $this->dao->select('t1.id, t1.order, title, t2.category')->from(TABLE_ARTICLE)
-                ->alias('t1')->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
-                ->where('category')->eq($category->id)
-                ->orderBy('t1.order')
-                ->fetchGroup('category', 'id', false);
-
-            if(isset($treeMenu[$category->id]) && !empty($treeMenu[$category->id]) || isset($articles[$category->id]) && !empty($articles[$category->id]))
-            {
-                if(!isset($treeMenu[$category->parent])) $treeMenu[$category->parent] = '';
-                $treeMenu[$category->parent] .= "<dt class='f-16px'><strong>$linkHtml</strong></dt>";  
-                $treeMenu[$category->parent] .= "<dd><dl>";
-
-                foreach($articles[$category->id] as $article)
-                {
-                    $code = str_replace('book_', '', $category->type);
-                    $articleHtml = html::a(helper::createLink('help', 'read', "article=$article->id&book={$code}", "category={$category->alias}&name=$article->alias"), $article->title);
-
-                    $origins = explode(',', $category->path);
-                    $sort = '';
-                    foreach($origins as $origin)
-                    {
-                       if($origin)
-                       {
-                           $category = $this->getByID($origin);
-                           $category->sort = $this->loadModel('help')->getOrderId(str_replace('book_', '', $category->type), $category->id, $category->parent);
-                           $sort .= $category->sort . ".";
-                       }
-                    }
-                    $articleOrder = $article->order / 10 + 1;
-                    $treeMenu[$category->parent] .= "<dt class='article-title f-14px'>$sort$articleOrder$articleHtml</dt>";  
-                }
-
-                $treeMenu[$category->parent] .= $treeMenu[$category->id]."</dl></dd>\n";
-            }
-            else
-            {
-                if(isset($treeMenu[$category->parent]) and !empty($treeMenu[$category->parent]))
-                {
-                    $treeMenu[$category->parent] .= "<dt class='f-16px'><strong>$linkHtml\n";  
-                }
-                else
-                {
-                    $treeMenu[$category->parent] = "<dt class='f-16px'><strong>$linkHtml\n";  
-                }    
-            }
-            $treeMenu[$category->parent] .= "</strong></dt>\n"; 
-        }
-        $lastMenu = "<dl>" . @array_pop($treeMenu) . "</dl>\n";
-        return $lastMenu; 
-    }
     /**
      * Create the admin link.
      * 
