@@ -12,6 +12,13 @@
  */
 class upgrade extends control
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $return = $this->upgrade->canUpgrade();
+        if($return['result'] != 'success' && $this->app->getMethodName() != 'index') $this->locate(inlink('index'));
+    }
+    
     /**
      * The index page.
      * 

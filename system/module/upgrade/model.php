@@ -56,6 +56,9 @@ class upgradeModel extends model
             case '1_2': $this->execSQL($this->getUpgradeFile('1.2'));
             case '1_3': $this->execSQL($this->getUpgradeFile('1.3'));
             case '1_4': $this->execSQL($this->getUpgradeFile('1.4'));
+            case '1_5': 
+                $this->execSQL($this->getUpgradeFile('1.5'));
+                $this->processTag();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -79,6 +82,7 @@ class upgradeModel extends model
             case '1_2': $confirmContent .= file_get_contents($this->getUpgradeFile('1.2'));
             case '1_3': $confirmContent .= file_get_contents($this->getUpgradeFile('1.3'));
             case '1_4': $confirmContent .= file_get_contents($this->getUpgradeFile('1.4'));
+            case '1_5': $confirmContent .= file_get_contents($this->getUpgradeFile('1.5'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
@@ -93,6 +97,43 @@ class upgradeModel extends model
     {
         return true;
         $this->dao->delete()->from(TABLE_EXTENSION)->where('type')->eq('patch')->exec();
+    }
+
+    /**
+     * Process Tag
+     * unify keywords of article,product and category.
+     * count tag's rank and save.
+     *
+     * @access public
+     * @return void
+     */
+    public function processTag()
+    {
+        $tags = '';
+        $articles = $this->dao->select('*')->from(TABLE_ARTICLE)->fetchPairs('id', 'keywords');  
+        foreach($articles as $id => $keywords)
+        {
+            $keywords = seo::unify($keywords, ',');
+            $this->dao->update(TABLE_ARTICLE)->set('keywords')->eq($keywords)->where('id')->eq($id)->exec();
+            $tags = $keywords;
+        }
+
+        $products = $this->dao->select('*')->from(TABLE_PRODUCT)->fetchPairs('id', 'keywords');  
+        foreach($products as $id => $keywords)
+        {
+            $keywords = seo::unify($keywords, ',');
+            $this->dao->update(TABLE_PRODUCT)->set('keywords')->eq($keywords)->where('id')->eq($id)->exec();
+            $tags .= ',' . $keywords;
+        }
+
+        $categories = $this->dao->select('*')->from(TABLE_CATEGORY)->fetchPairs('id', 'keywords');  
+        foreach($categories as $id => $keywords)
+        {
+            $keywords = seo::unify($keywords, ',');
+            $this->dao->update(TABLE_CATEGORY)->set('keywords')->eq($keywords)->where('id')->eq($id)->exec();
+            $tags .= ',' . $keywords;
+        }
+        $this->loadModel('tag')->save($tags);
     }
 
     /**

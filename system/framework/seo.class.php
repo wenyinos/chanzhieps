@@ -152,7 +152,7 @@ class seo
     public function unify($string, $to)
     {
        $string = str_replace(array('_', '、', ' ', '-', '?', '@', '&', '%', '~', '`', '+', '*', '/', '\\', '，', '.', '。'), $to, $string);
-       return preg_replace('/[,]+/', $to, $string);
+       return preg_replace('/[,]+/', $to, trim($string, $to));
     }
 }
 
