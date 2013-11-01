@@ -5,5 +5,7 @@ CREATE TABLE IF NOT EXISTS  `eps_tag` (
   `link` varchar(100) NOT NULL,
   `rank` smallint(5) unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `tag` (`tag`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8
+  KEY `tag` (`tag`),
+  KEY `rank` (`rank`),
+  KEY `link` (`link`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
