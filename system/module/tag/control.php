@@ -12,7 +12,7 @@
 class tag extends control
 {
     /**
-     * Browse tags in admin.
+     * Admin tags.
      * 
      * @access public
      * @return void
@@ -23,16 +23,16 @@ class tag extends control
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $tags = $this->get->tags ? $this->get->tags : array();
-        $this->view->tags  = $this->tag->getList($tags, $pager);
 
         $this->view->title = $this->lang->tag->admin;
         $this->view->pager = $pager;
+        $this->view->tags  = $this->tag->getList($tags, $pager);
         $this->view->tagOptions = $this->tag->getOptionMenu();
         $this->display();
     }   
 
     /**
-     * Edit one tag.
+     * Set link for a tag.
      * 
      * @param  int    $tagID 
      * @access public
@@ -40,12 +40,13 @@ class tag extends control
      */
     public function link($tagID)
     {
-        if(!empty($_POST))
+        if($_POST)
         {
             $this->dao->update(TABLE_TAG)->set('link')->eq($this->post->link)->where('id')->eq($tagID)->exec();
             if(!dao::isError()) $this->send(array('result' => 'success'));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
+
         $this->view->tag = $this->dao->select('*')->from(TABLE_TAG)->where('id')->eq($tagID)->fetch();
         $this->display();
     }

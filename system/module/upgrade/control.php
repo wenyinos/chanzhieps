@@ -12,6 +12,12 @@
  */
 class upgrade extends control
 {
+    /**
+     * Construct, check the user can upgrade or not.
+     * 
+     * @access public
+     * @return void
+     */
     public function __construct()
     {
         parent::__construct();

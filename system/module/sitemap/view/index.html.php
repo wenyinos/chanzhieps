@@ -10,29 +10,32 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-
 <?php include '../../common/view/header.html.php';?>
 <div class='box radius'>
   <h4 class='title'><?php echo $lang->sitemap->common;?></h4>
   <div class='content'>
+
     <?php if(strpos($productTree, '<li>') !== false):?>
     <div class='row'> 
       <h4><?php echo $lang->sitemap->productCategory?></h4>
       <?php echo $productTree?>
     </div>
     <?php endif;?>
+
     <?php if(strpos($articleTree, '<li>') !== false):?>
     <div class='row'> 
       <h4><?php echo $lang->sitemap->articleCategory?></h4>
       <?php echo $articleTree?>
     </div>
     <?php endif;?>
+
     <?php if(strpos($blogTree, '<li>') !== false):?>
     <div class='row'> 
       <h4><?php echo $lang->sitemap->blogCategory?></h4>
       <?php echo $blogTree?>
     </div>
     <?php endif;?>
+
     <?php if($boards):?>
     <div class = 'row'>
       <h4><?php echo $lang->sitemap->boards;?></h4>
@@ -52,5 +55,6 @@
       </ul>
     </div>
     <?php endif;?>
+
 </div>
 <?php include '../../common/view/footer.html.php';?>

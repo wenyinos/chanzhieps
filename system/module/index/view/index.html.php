@@ -6,14 +6,8 @@
     <?php foreach($slides as $slide):?>
     <div class='item'>
       <?php 
-      if($slide->url != '' and $slide->label == '')
-      {
-          echo html::a($slide->url, html::image($slide->image));
-      }
-      else
-      {
-          echo html::image($slide->image);
-      }
+      $addLink2Image = $slide->url != '' and $slide->label == '';
+      $addLink2Image ? print(html::a($slide->url, html::image($slide->image))) : print(html::image($slide->image));
       ?>
       <div class='container'>
         <div class='carousel-caption'>

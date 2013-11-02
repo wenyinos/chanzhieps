@@ -36,16 +36,16 @@ class sitemap extends control
         $products     = $this->product->getList($this->tree->getFamily(0), 'id_desc', $pager);
         $threads      = $this->thread->getList($this->tree->getFamily(0), 'id_desc', $pager);
 
-        $this->view->siteLink       = commonModel::getSysURL();
-        $this->view->bookArticles   = $bookArticles;
-        $this->view->articles       = $articles;
-        $this->view->blogs          = $blogs;
-        $this->view->products       = $products;
-        $this->view->threads        = $threads;
-        $this->view->articleTree    =  $this->tree->getTreeMenu('article', 0, array('treeModel', 'createBrowseLink'));
-        $this->view->productTree    =  $this->tree->getTreeMenu('product', 0, array('treeModel', 'createProductBrowseLink'));
-        $this->view->blogTree       =  $this->tree->getTreeMenu('blog', 0, array('treeModel', 'createBlogBrowseLink'));
-        $this->view->boards         =  $this->forum->getBoards();
+        $this->view->siteLink     = commonModel::getSysURL();
+        $this->view->bookArticles = $bookArticles;
+        $this->view->articles     = $articles;
+        $this->view->blogs        = $blogs;
+        $this->view->products     = $products;
+        $this->view->threads      = $threads;
+        $this->view->articleTree  = $this->tree->getTreeMenu('article', 0, array('treeModel', 'createBrowseLink'));
+        $this->view->productTree  = $this->tree->getTreeMenu('product', 0, array('treeModel', 'createProductBrowseLink'));
+        $this->view->blogTree     = $this->tree->getTreeMenu('blog', 0, array('treeModel', 'createBlogBrowseLink'));
+        $this->view->boards       = $this->forum->getBoards();
 
         $this->display();
     }

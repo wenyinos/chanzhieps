@@ -4,7 +4,7 @@
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
  * @license     LGPL
- * @author      Xiying Gusn <guanxiying@xirangit.com>
+ * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     tag
  * @version     $Id$
  * @link        http://www.chanzhi.org
@@ -14,16 +14,18 @@ class tagModel extends model
     /**
      * Get tag list.
      * 
-     * @param  int    $tags 
-     * @param  int    $pager 
+     * @param  string $tags 
+     * @param  object $pager 
      * @access public
-     * @return void
+     * @return array
      */
     public function getList($tags, $pager)
     {
-        return $this->dao->select('*')->from(TABLE_TAG)
-        ->beginIf(!empty($tags))->where('tag')->in($tags)->fi()
-        ->page($pager)->fetchAll('id');
+        return $this->dao->select('*')
+            ->from(TABLE_TAG)
+            ->beginIf(!empty($tags))->where('tag')->in($tags)->fi()
+            ->page($pager)
+            ->fetchAll('id');
     }
     
     /**

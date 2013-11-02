@@ -34,12 +34,12 @@ class article extends control
      */
     public function browse($categoryID = 0, $pageID = 1)
     {   
-        $type = 'article';
         $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal = 0, $recPerPage = 6, $pageID);
+        $pager = new pager($recTotal = 0, $recPerPage = 5, $pageID);
+
         $category = $this->loadModel('tree')->getByID($categoryID);
-        if(!$category) $category = $this->tree->getByAlias($categoryID, $type);
-        $articles = $this->article->getList($type, $this->tree->getFamily($categoryID, $type), 'id_desc', $pager);
+        if(!$category) $category = $this->tree->getByAlias($categoryID, 'article');
+        $articles = $this->article->getList('article', $this->tree->getFamily($categoryID, 'article'), 'id_desc', $pager);
 
         if($category)
         {
