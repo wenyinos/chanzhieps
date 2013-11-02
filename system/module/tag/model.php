@@ -29,17 +29,6 @@ class tagModel extends model
     }
     
     /**
-     * Get option menu list for select.
-     * 
-     * @access public
-     * @return void
-     */
-    public function getOptionMenu()
-    {
-        return $this->dao->select('tag')->from(TABLE_TAG)->fetchPairs('tag', 'tag');
-    }
-    
-    /**
      * Add link on tags in string.
      * 
      * @param  string    $content 
