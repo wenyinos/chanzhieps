@@ -69,6 +69,7 @@ class articleModel extends model
             ->page($pager)
             ->fetchAll('id');
         if(!$articles) return array();
+
         /* Get categories for these articles. */
         $categories = $this->dao->select('t2.id, t2.name, t2.alias, t1.id AS article')
             ->from(TABLE_RELATION)->alias('t1')
