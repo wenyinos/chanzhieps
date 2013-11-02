@@ -55,11 +55,11 @@ js::import($jsRoot . 'respond/min.js');
 <![endif]-->
 <?php js::set('lang', $lang->js);?>
 <?php
-$sina = json_decode($config->oauth->sina);
-$qq   = json_decode($config->oauth->qq);
-if($sina->widget) js::import('http://tjs.sjs.sinajs.cn/open/api/js/wb.js');
-if($sina->verification) echo $sina->verification; 
-if($qq->verification)   echo $qq->verification;
+if(!empty($config->oauth->sina)) $sina = json_decode($config->oauth->sina);
+if(!empty($config->oauth->qq))   $qq   = json_decode($config->oauth->qq);
+if(!empty($sina->widget)) js::import('http://tjs.sjs.sinajs.cn/open/api/js/wb.js');
+if(!empty($sina->verification)) echo $sina->verification; 
+if(!empty($qq->verification))   echo $qq->verification;
 ?>
 </head>
 <body>
