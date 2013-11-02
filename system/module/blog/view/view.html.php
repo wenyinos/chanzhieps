@@ -41,10 +41,10 @@ $common->printPositionBar($category, $article, '', $root);
         printf($lang->article->lblViews, $article->views);
         ?>
       </div>
-      <?php if($article->summary) echo "<div id='summary'><strong>{$lang->article->summary}</strong>$lang->colon$article->summary</div>";?>
+      <?php if($article->summary) echo "<div class='summary'><strong>{$lang->article->summary}</strong>$lang->colon$article->summary</div>";?>
       <p><?php echo $article->content;?></p>
       <div class='article-file'><?php $this->loadModel('article')->printFiles($article->files);?></div>
-      <?php if($article->keywords) echo "<div id='keywords'><strong>{$lang->article->keywords}</strong>$lang->colon$article->keywords</div>";?>
+      <?php if($article->keywords) echo "<div class='keywords'><strong>{$lang->article->keywords}</strong>$lang->colon$article->keywords</div>";?>
       <?php extract($prevAndNext);?>
       <div class='row f-12px mt-10px'>
         <div class='col-md-6 a-left'> <?php $prev ? print($lang->article->prev . $lang->colon . html::a(inlink('view', "id=$prev[id]", "category={$category->alias}&name={$prev['alias']}"), $prev['title'])) : print($lang->article->none);?></div>

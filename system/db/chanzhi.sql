@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `eps_category` (
   `name` char(30) NOT NULL DEFAULT '',
   `alias` varchar(100) NOT NULL,
   `desc` varchar(150) NOT NULL,
-  `keyword` varchar(150) NOT NULL,
+  `keywords` varchar(150) NOT NULL,
   `parent` smallint(5) unsigned NOT NULL DEFAULT '0',
   `path` char(255) NOT NULL DEFAULT '',
   `grade` tinyint(3) unsigned NOT NULL DEFAULT '0',
@@ -262,4 +262,14 @@ CREATE TABLE IF NOT EXISTS `eps_user` (
   KEY `account` (`account`,`password`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
 
-
+-- DROP TABLE IF EXISTS `eps_tag`;
+CREATE TABLE IF NOT EXISTS  `eps_tag` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `tag` varchar(50) NOT NULL,
+  `link` varchar(100) NOT NULL,
+  `rank` smallint(5) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `tag` (`tag`),
+  KEY `rank` (`rank`),
+  KEY `link` (`link`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;

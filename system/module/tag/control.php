@@ -24,10 +24,10 @@ class tag extends control
 
         $tags = $this->get->tags ? $this->get->tags : array();
 
-        $this->view->title = $this->lang->tag->admin;
-        $this->view->pager = $pager;
-        $this->view->tags  = $this->tag->getList($tags, $pager);
-        $this->view->tagOptions = $this->tag->getOptionMenu();
+        $this->view->title      = $this->lang->tag->admin;
+        $this->view->pager      = $pager;
+        $this->view->tags       = $this->tag->getList($tags, $pager);
+        $this->view->tagOptions = $this->dao->select('tag')->from(TABLE_TAG)->fetchPairs('tag', 'tag');
         $this->display();
     }   
 

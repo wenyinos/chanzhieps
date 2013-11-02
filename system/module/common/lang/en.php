@@ -85,6 +85,10 @@ $lang->company->weibo     = 'Weibo';
 $lang->company->weixin    = 'Weichat';
 $lang->company->wangwang  = 'Wangwang';
 
+/* Sitemap settings. */
+$lang->sitemap = new stdclass();
+$lang->sitemap->common = 'Sitemap';
+
 /* The main menus. */
 $lang->menu = new stdclass();
 $lang->menu->admin   = 'Home|admin|index|';
