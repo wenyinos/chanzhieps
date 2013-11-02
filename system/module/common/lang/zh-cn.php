@@ -42,7 +42,7 @@ $lang->home           = '首页';
 $lang->welcome        = '欢迎您，<strong>%s</strong>！';
 $lang->todayIs        = '今天是%s，';
 $lang->aboutUs        = '关于我们';
-$lang->friendLink     = '友情链接';
+$lang->link           = '友情链接';
 $lang->frontHome      = '前台';
 $lang->forumHome      = '论坛';
 $lang->helpHome       = '帮助';
@@ -159,7 +159,7 @@ $lang->site->menu->theme     = '主题风格|site|settheme|';
 $lang->site->menu->slide     = array('link' => '幻灯片设置|slide|admin|', 'alias' => 'create,edit');
 $lang->site->menu->tag       = '关键词设置|tag|admin|';
 $lang->site->menu->oauth     = '开放登录|site|setoauth|';
-$lang->site->menu->link      = '友情链接|partner|setlink|';
+$lang->site->menu->link      = '友情链接|links|admin|';
 
 /* Menu of company module. */
 $lang->company->menu = new stdclass();
@@ -190,9 +190,9 @@ $lang->slide->menu = $lang->site->menu;
 $lang->menuGroups->slide = 'site';
 
 /* Menu of tree module. */
-$lang->partner = new stdclass();
-$lang->partner->menu = $lang->site->menu;
-$lang->menuGroups->partner = 'site';
+$lang->links = new stdclass();
+$lang->links->menu = $lang->site->menu;
+$lang->menuGroups->links = 'site';
 
 /* The error messages. */
 $lang->error = new stdclass();
