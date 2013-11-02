@@ -18,7 +18,7 @@
           </tr>  
         </thead>
         <tbody>
-          <?php foreach($parentBoard->childs as $childBoard):?>
+          <?php foreach($parentBoard->children as $childBoard):?>
           <tr valign='middle' class='a-center'>
             <td class='w-20px'><?php echo $this->forum->isNew($childBoard) ? "<span class='new-board'><i class='icon-comment icon-large'></i></span>" : "<span class='common-board'><i class='icon-comment icon-large'></i></span>"; ?></td>
             <td class='a-left'>

@@ -31,8 +31,8 @@ class forumModel extends model
         {
             if(isset($rawBoards[$parentBoard->id]))
             {
-                $parentBoard->childs = $rawBoards[$parentBoard->id];
-                foreach($parentBoard->childs as $childBoard) $childBoard->lastPostReplies = $this->dao->select('COUNT(id) as id')->from(TABLE_REPLY)->where('thread')->eq($childBoard->postID)->fetch('id');
+                $parentBoard->children = $rawBoards[$parentBoard->id];
+                foreach($parentBoard->children as $childBoard) $childBoard->lastPostReplies = $this->dao->select('COUNT(id) as id')->from(TABLE_REPLY)->where('thread')->eq($childBoard->postID)->fetch('id');
                 $boards[] = $parentBoard;
             }
         }
