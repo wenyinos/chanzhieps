@@ -108,9 +108,9 @@ class productModel extends model
     /**
      * Get product pairs.
      * 
-     * @param string $modules 
+     * @param string $categories 
      * @param string $orderBy 
-     * @param string $pager 
+     * @param object $pager 
      * @access public
      * @return array
      */
