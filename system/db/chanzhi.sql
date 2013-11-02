@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `eps_category` (
   `name` char(30) NOT NULL DEFAULT '',
   `alias` varchar(100) NOT NULL,
   `desc` varchar(150) NOT NULL,
-  `keyword` varchar(150) NOT NULL,
+  `keywords` varchar(150) NOT NULL,
   `parent` smallint(5) unsigned NOT NULL DEFAULT '0',
   `path` char(255) NOT NULL DEFAULT '',
   `grade` tinyint(3) unsigned NOT NULL DEFAULT '0',
