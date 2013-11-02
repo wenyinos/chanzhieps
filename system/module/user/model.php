@@ -165,9 +165,8 @@ class userModel extends model
         $this->checkPassword();
         if(dao::isError()) return false;
 
-        $join = $this->dao->select('*')->from(TABLE_USER)->where('account')->eq($account)->fetch('join');
         $user = fixer::input('post')
-            ->setIF($this->post->password1 != false, 'password', $this->createPassword($this->post->password1, $account, $join))
+            ->setIF($this->post->password1 != false, 'password', $this->createPassword($this->post->password1, $account, $this->app->user->join))
             ->remove('password1, password2, ip, account, admin, join, visits')
             ->get();
 
