@@ -1,14 +1,5 @@
 <?php
 /**
- * The seo and uri class file. 
- *
- * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
- * @link        http://www.chanzhi.org
- */
-?>
-<?php
-/**
  * The seo class, parse seo mode uri to normal mode uri.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
@@ -16,6 +7,12 @@
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @version     $Id$
  * @link        http://www.chanzhi.org
+ */
+
+/**
+ * The seo class.
+ *
+ * @package framework
  */
 class seo
 {
@@ -156,14 +153,9 @@ class seo
 }
 
 /**
- * The uri class, create seo mode uri for seo modules.
+ * The uri class.
  *
- * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
- *
- * @author      Dtt
- * @version     $Id$
- * @link        http://www.chanzhi.org
+ * @package seo
  */
 class uri
 {
@@ -179,7 +171,7 @@ class uri
         global $config;
 
         $link = 'article/c' . array_shift($params);
-        if($alias['category'] != '') $link = $alias['category'];
+        if($alias['category']) $link = $alias['category'];
 
         return $config->webRoot . $link . '.' . $config->default->view;
     }
