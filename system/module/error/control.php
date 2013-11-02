@@ -12,7 +12,7 @@
 class error extends control
 {
     /**
-     * Output the rss.
+     * Show 404 error page.
      * 
      * @access public
      * @return void
@@ -21,9 +21,13 @@ class error extends control
     {
         @header("http/1.1 404 not found");
         @header("status: 404 not found");
-        $this->view->articleTree =  $this->loadModel('tree')->getTreeMenu('article', 0, array('treeModel', 'createBrowseLink'));
-        $this->view->productTree =  $this->loadModel('tree')->getTreeMenu('product', 0, array('treeModel', 'createProductBrowseLink'));
-        $this->view->blogTree    =  $this->loadModel('tree')->getTreeMenu('blog', 0, array('treeModel', 'createBlogBrowseLink'));
+
+        $this->loadModel('tree');
+
+        $this->view->articleTree =  $this->tree->getTreeMenu('article', 0, array('treeModel', 'createBrowseLink'));
+        $this->view->productTree =  $this->tree->getTreeMenu('product', 0, array('treeModel', 'createProductBrowseLink'));
+        $this->view->blogTree    =  $this->tree->getTreeMenu('blog',    0, array('treeModel', 'createBlogBrowseLink'));
+
         $this->display();
     }
 }
