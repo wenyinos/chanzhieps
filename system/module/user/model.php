@@ -289,7 +289,7 @@ class userModel extends model
      * @access public
      * @return bool
      */
-    public function delete($account)
+    public function delete($account, $id='')
     {
         $user = $this->getByAccount($account);
         if(!$user) return false;

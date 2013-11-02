@@ -5,8 +5,7 @@
     echo "&copy; {$config->company->name} {$config->site->copyright}-" . date('Y') . '&nbsp;&nbsp;';
     echo $config->site->icp;
     printf($lang->poweredBy, $config->version, $config->version);
-    if($this->app->getModuleName() != 'sitemap') echo html::a($this->createLink('sitemap', 'index'), $lang->sitemap->common);
-    if($this->app->getModuleName() == 'sitemap') echo html::a($this->createLink('sitemap', 'index', '', '', 'xml'), $lang->sitemap->common);
+    echo html::a($this->createLink('sitemap', 'index'), $lang->sitemap->common);
     if(empty($this->config->links->index) && !empty($this->config->links->all)) echo "&nbsp;" . html::a($this->createLink('links', 'index'), $lang->link);
     ?>
   </footer>

@@ -13,3 +13,4 @@ $lang->sitemap->productCategory = '产品分类';
 $lang->sitemap->articleCategory = '文章分类';
 $lang->sitemap->blogCategory    = '博客分类';
 $lang->sitemap->boards          = '论坛版块';
+$lang->sitemap->xmlVersion      = '访问XML版';

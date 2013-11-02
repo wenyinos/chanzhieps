@@ -355,7 +355,10 @@ class router
      */
     public function sendHeader()
     {
-        header("Content-Type: text/html; Language={$this->config->encoding}");
+        $type = 'html';
+        if((strpos($_SERVER['REQUEST_URI'], '.xml') !== false) or (isset($_GET['t']) and $_GET['t'] == 'xml')) $type = 'xml'; 
+
+        header("Content-Type: text/{$type}; Language={$this->config->encoding}; charset={$this->config->encoding}");
         header("Cache-control: private");
     }
 
@@ -1559,20 +1562,7 @@ class router
 
         /* If any error occers, save it. */
         $error = error_get_last();
-        if($error)
-        {
-            $this->saveError($error['type'], $error['message'], $error['file'], $error['line']);
-            if($this->config->debug)
-            {
-                return $this->triggerError();
-            }
-            else
-            {
-                /* If fetal error show error page. */
-                $level = $error['type'];
-                if($level == E_ERROR or $level == E_PARSE or $level == E_CORE_ERROR or $level == E_COMPILE_ERROR or $level == E_USER_ERROR) $this->headError();
-            }
-        }
+        if($error) $this->saveError($error['type'], $error['message'], $error['file'], $error['line']);
     }
 
     /**
@@ -1611,12 +1601,15 @@ class router
      */
     public function saveError($level, $message, $file, $line)
     {
-        /* Don't save strict error when debug if off. */
-        if(empty($this->config->debug) and $level = E_STRICT) return true;
-
         /* Set the error info. */
         $errorLog  = "\n" . date('H:i:s') . " $message in <strong>$file</strong> on line <strong>$line</strong> ";
         $errorLog .= "when visiting <strong>" . $this->getURI() . "</strong>\n";
+
+        /* If the ip is pulic, hidden the full path of scripts. */
+        if(!defined('IN_SHELL') and !validater::checkIP($this->server->server_addr, 'private'))
+        {
+            $errorLog  = str_replace($this->getBasePath(), '', $errorLog);
+        }
 
         /* Save to log file. */
         $errorFile = $this->getLogRoot() . 'php.' . date('Ymd') . '.log';
@@ -1636,7 +1629,7 @@ class router
     }
 
     /**
-     * Heade to error page.
+     * Header to error page.
      * 
      * return void
      */

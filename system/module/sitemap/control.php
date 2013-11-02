@@ -33,7 +33,6 @@ class sitemap extends control
     {
         $this->loadModel('tree');
 
-        $this->view->systemURL   = commonModel::getSysURL();
         $this->view->articleTree = $this->tree->getTreeMenu('article', 0, array('treeModel', 'createBrowseLink'));
         $this->view->productTree = $this->tree->getTreeMenu('product', 0, array('treeModel', 'createProductBrowseLink'));
         $this->view->blogTree    = $this->tree->getTreeMenu('blog', 0, array('treeModel', 'createBlogBrowseLink'));

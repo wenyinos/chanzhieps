@@ -37,8 +37,6 @@ class rss extends control
         $this->view->articles = $articles;
         $this->view->lastDate = $latestArticle->addedDate . ' +0800';
          
-        header("Content-type: text/xml");
-
         $this->display();
     }
 }
