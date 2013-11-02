@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php include '../../common/view/header.html.php';?>
+<?php if($onlyBody !== 'yes') include '../../common/view/header.html.php';?>
 <div class='box radius'>
   <h4 class='title'><?php echo $lang->sitemap->common;?></h4>
   <div class='content'>
@@ -43,9 +43,9 @@
         <?php foreach($boards as $parentBoard):?>
         <li>
           <?php echo $parentBoard->name;?>
-          <?php if($parentBoard->childs):?>
+          <?php if($parentBoard->children):?>
           <ul>
-            <?php foreach($parentBoard->childs as $child):?>
+            <?php foreach($parentBoard->children as $child):?>
             <li><?php echo html::a(helper::createLink('forum', 'board', "id=$child->id", "category={$child->alias}"), $child->name);?></li>
             <?php endforeach;?>
           </ul>
@@ -57,4 +57,4 @@
     <?php endif;?>
 
 </div>
-<?php include '../../common/view/footer.html.php';?>
+<?php if($onlyBody !== 'yes') include '../../common/view/footer.html.php';?>
