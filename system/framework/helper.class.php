@@ -366,10 +366,11 @@ class helper
     public static function getSiteCode($domain)
     {
         global $config;
-        $domain = str_replace('-', '_', $domain);
-        if(strpos($domain, ':') !== false) $domain = substr($domain, 0, strpos($domain, ':'));
+
+        $domain = str_replace('-', '_', $domain);    // Replace '-' by '_'.
+        if(strpos($domain, ':') !== false) $domain = substr($domain, 0, strpos($domain, ':'));    // Remove port from domain.
+
         $items = explode('.', $domain);
-        
         $postfix = str_replace($items[0] . '.', '', $domain);
         if(strpos($config->domainPostfix, "|$postfix|") !== false) return $items[0];
         
