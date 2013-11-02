@@ -1,10 +1,4 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
-  <?php if($this->moduleName == 'index' && isset($this->config->partner->index)):?>
-  <ul id="friends" class="nav nav-pills">
-    <?php echo $lang->friendLink . $lang->colon;?>
-    <?php echo $this->config->partner->index . "&nbsp;&nbsp&nbsp" . html::a(helper::createLink('partner', 'index'), $lang->more . $lang->raquo);?>
-  </ul>
-  <?php endif;?>
   <hr/>
   <footer>
     <?php 
@@ -13,6 +7,7 @@
     printf($lang->poweredBy, $config->version, $config->version);
     if($this->app->getModuleName() != 'sitemap') echo html::a($this->createLink('sitemap', 'index'), $lang->sitemap->common);
     if($this->app->getModuleName() == 'sitemap') echo html::a($this->createLink('sitemap', 'index', '', '', 'xml'), $lang->sitemap->common);
+    if(empty($this->config->links->index) && !empty($this->config->links->all)) echo "&nbsp;" . html::a($this->createLink('links', 'index'), $lang->link);
     ?>
   </footer>
    
