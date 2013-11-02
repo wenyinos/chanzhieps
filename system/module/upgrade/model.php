@@ -100,9 +100,7 @@ class upgradeModel extends model
     }
 
     /**
-     * Process Tag
-     * unify keywords of article,product and category.
-     * count tag's rank and save.
+     * Unify keywords of article, product and category, count tag's rank and save.
      *
      * @access public
      * @return void
@@ -110,7 +108,8 @@ class upgradeModel extends model
     public function processTag()
     {
         $tags = '';
-        $articles = $this->dao->select('*')->from(TABLE_ARTICLE)->fetchPairs('id', 'keywords');  
+
+        $articles = $this->dao->select('id, keywords')->from(TABLE_ARTICLE)->fetchPairs('id', 'keywords');  
         foreach($articles as $id => $keywords)
         {
             $keywords = seo::unify($keywords, ',');
@@ -118,7 +117,7 @@ class upgradeModel extends model
             $tags = $keywords;
         }
 
-        $products = $this->dao->select('*')->from(TABLE_PRODUCT)->fetchPairs('id', 'keywords');  
+        $products = $this->dao->select('id, keywords')->from(TABLE_PRODUCT)->fetchPairs('id', 'keywords');  
         foreach($products as $id => $keywords)
         {
             $keywords = seo::unify($keywords, ',');
@@ -126,13 +125,14 @@ class upgradeModel extends model
             $tags .= ',' . $keywords;
         }
 
-        $categories = $this->dao->select('*')->from(TABLE_CATEGORY)->fetchPairs('id', 'keywords');  
+        $categories = $this->dao->select('id, keywords')->from(TABLE_CATEGORY)->fetchPairs('id', 'keywords');  
         foreach($categories as $id => $keywords)
         {
             $keywords = seo::unify($keywords, ',');
             $this->dao->update(TABLE_CATEGORY)->set('keywords')->eq($keywords)->where('id')->eq($id)->exec();
             $tags .= ',' . $keywords;
         }
+
         $this->loadModel('tag')->save($tags);
     }
 
