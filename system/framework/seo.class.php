@@ -105,7 +105,7 @@ class seo
             if($module == 'help' && $book) $method .= '-' . $book;
             return seo::convertURI($module, $method, $params, $pageID);
         }
-        
+
         /* The first param is an object id. */
         if(is_numeric($items[1]))
         {
@@ -139,7 +139,7 @@ class seo
         if($pageID > 0) $uri .= "-$pageID";
         return $uri;
     }
-    
+
     /**
      * Unify string to standard space char.
      * 
@@ -150,8 +150,8 @@ class seo
      */
     public function unify($string, $to)
     {
-       $string = str_replace(array('_', '、', ' ', '-', '?', '@', '&', '%', '~', '`', '+', '*', '/', '\\', '，', '.', '。'), $to, $string);
-       return preg_replace('/[,]+/', $to, trim($string, $to));
+        $string = str_replace(array('_', '、', ' ', '-', '?', '@', '&', '%', '~', '`', '+', '*', '/', '\\', '，', '.', '。'), $to, $string);
+        return preg_replace('/[,]+/', $to, trim($string, $to));
     }
 }
 
@@ -319,13 +319,11 @@ class uri
         {
             $link .= '/' . $alias['category'];
         }
-        else
-            if(count($params) > 0)
-            {
-                $category = array_shift($params);
-                if(is_numeric($category)) $category = 'c' . $category;
-                $link .= '/' . $category;
-            }
+        elseif(count($params) > 0)
+        {
+            $category = array_shift($params);
+            if(is_numeric($category)) $category = 'c' . $category;
+            $link .= '/' . $category;
         }
         return $config->webRoot . $link . '.' . $config->default->view;
     }
