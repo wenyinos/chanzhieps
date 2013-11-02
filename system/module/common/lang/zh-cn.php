@@ -56,7 +56,7 @@ $lang->changePassword = '修改密码';
 $lang->forgotPassword = '忘记密码?';
 $lang->currentPos     = '当前位置';
 $lang->categoryMenu   = '分类导航';
-
+   
 /* Global action items. */
 $lang->reset          = '重填';
 $lang->edit           = '编辑';
@@ -97,6 +97,11 @@ $lang->company->qq        = 'QQ';
 $lang->company->weibo     = '微博';
 $lang->company->weixin    = '微信';
 $lang->company->wangwang  = '旺旺';
+
+/* Sitemap settings. */
+$lang->sitemap = new stdclass();
+$lang->sitemap->common = '站点地图';
+
 
 /* The main menus. */
 $lang->menu = new stdclass();

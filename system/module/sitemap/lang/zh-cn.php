@@ -9,7 +9,6 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->sitemap->common          = '站内地图';
 $lang->sitemap->productCategory = '产品分类';
 $lang->sitemap->articleCategory = '文章分类';
 $lang->sitemap->blogCategory    = '博客分类';

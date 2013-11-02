@@ -11,6 +11,7 @@
     echo "&copy; {$config->company->name} {$config->site->copyright}-" . date('Y') . '&nbsp;&nbsp;';
     echo $config->site->icp;
     printf($lang->poweredBy, $config->version, $config->version);
+    echo html::a($this->createLink('sitemap', 'index'), $lang->sitemap->common);
     ?>
   </footer>
    

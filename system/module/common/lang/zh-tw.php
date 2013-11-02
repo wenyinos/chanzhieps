@@ -85,6 +85,10 @@ $lang->company->weibo     = '微博';
 $lang->company->weixin    = '微信';
 $lang->company->wangwang  = '旺旺';
 
+/* Sitemap settings. */
+$lang->sitemap = new stdclass();
+$lang->sitemap->common = '站點地圖';
+
 /* The main menus. */
 $lang->menu = new stdclass();
 $lang->menu->admin   = '首頁|admin|index|';
