@@ -174,7 +174,6 @@ $lang->tag = new stdclass();
 $lang->tag->menu = $lang->site->menu;
 $lang->menuGroups->tag = 'site';
 
-
 /* Menu of nav module. */
 $lang->nav = new stdclass();
 $lang->nav->menu = $lang->site->menu;
