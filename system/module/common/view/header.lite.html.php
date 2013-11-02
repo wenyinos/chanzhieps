@@ -5,8 +5,8 @@ $jsRoot    = $webRoot . "js/";
 $themeRoot = $webRoot . "theme/";
 ?>
 <!DOCTYPE html>
-<?php if($config->oauth->sina):?>
-<html xmlns:wb=“http://open.weibo.com/wb”>
+<?php if(!empty($config->oauth->sina)):?>
+<html xmlns:wb="http://open.weibo.com/wb">
 <?php else:?>
 <html>
 <?php endif;?>
