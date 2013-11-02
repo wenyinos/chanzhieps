@@ -8,7 +8,7 @@ body>.container>hr{display: none;}
 footer{margin: 20px 0;text-align: left;}
 .index footer{margin-top: 0}
 ul.breadcrumb a,footer a{color: #7a94b2;}
-#commentList{background-color: #F5F0CC;}
+#comments{background-color: #F5F0CC;}
 
 /* headNav. */
 #headNav{top: 15px; background-color:#e8d0a9; -moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px;}

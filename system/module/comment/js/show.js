@@ -21,7 +21,7 @@ $(document).ready(function()
 
     $('#pager').find('a').click(function()
     {
-        $('#commentList').parent().load($(this).attr('href'));
+        $('#comments').parent().load($(this).attr('href'));
         return false;
     });
 });
