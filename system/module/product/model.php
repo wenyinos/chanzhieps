@@ -196,6 +196,7 @@ class productModel extends model
             ->setDefault('promotion', 0)
             ->add('author', $this->app->user->account)
             ->add('addedDate', helper::now())
+            ->add('editedDate', helper::now())
             ->get();
 
         $product->alias    = seo::unify($product->alias, '-');
