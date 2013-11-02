@@ -12,7 +12,10 @@
 ?>
 <?php include '../../common/view/header.html.php';?>
 <div class='box radius'>
-  <h4 class='title'><?php echo $lang->sitemap->common;?></h4>
+  <h4 class='title'>
+  <?php echo $lang->sitemap->common;?>
+  <span ><?php echo html::a(inlink('index', '', '', 'xml'), $lang->sitemap->xmlVersion, '', "class='label label-primary'");?></span>
+  </h4>
   <div class='content'>
 
     <?php if(strpos($productTree, '<li>') !== false):?>

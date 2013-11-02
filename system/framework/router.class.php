@@ -355,7 +355,10 @@ class router
      */
     public function sendHeader()
     {
-        header("Content-Type: text/html; Language={$this->config->encoding}");
+        $type = 'html';
+        if((strpos($_SERVER['REQUEST_URI'], '.xml') !== false) or (isset($_GET['t']) and $_GET['t'] == 'xml')) $type = 'xml'; 
+
+        header("Content-Type: text/{$type}; Language={$this->config->encoding}; charset={$this->config->encoding}");
         header("Cache-control: private");
     }
 

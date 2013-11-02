@@ -19,8 +19,6 @@ class sitemap extends control
      */
     public function index()
     {
-        if(strcmp(substr($_SERVER["REQUEST_URI"], -(strlen('sitemap.xml'))), 'sitemap.xml')==0) header("Content-type: text/xml");
-
         $this->loadModel('tree');
         $this->loadModel('article');
         $this->loadModel('product');
