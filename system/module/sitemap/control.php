@@ -14,6 +14,7 @@ class sitemap extends control
     /**
      * Output the sitemap.
      * 
+     * @param string   $nolyBody   Only fetch body. 
      * @access public
      * @return void
      */
@@ -26,6 +27,7 @@ class sitemap extends control
     /**
      * Output the sitemap.html.
      * 
+     * @param string   $nolyBody   Only fetch body.  
      * @access public
      * @return void
      */
