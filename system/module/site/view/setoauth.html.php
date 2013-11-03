@@ -13,7 +13,7 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php foreach($lang->user->oauth->providers as $providerCode => $providerName):?>
 <?php $oauth = json_decode($this->config->oauth->$providerCode);?>
-<form action='' method='post' id="<?php echo $providerCode;?>AjaxForm">
+<form method='post' id="<?php echo $providerCode;?>AjaxForm">
   <table class='table table-form'>
     <caption><?php echo $providerName;?><span class='pull-right mr-10px'><?php echo html::a("http://www.chanzhi.org/help-read-23.html", $lang->site->oauthHelp, '_blank');?></span></caption> 
     <tr>
