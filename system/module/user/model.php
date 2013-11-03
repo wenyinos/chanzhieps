@@ -286,10 +286,11 @@ class userModel extends model
      * Delete user.
      * 
      * @param  string    $account 
+     * @param  null      $id          add this param to avoid the warning of php.
      * @access public
      * @return bool
      */
-    public function delete($account, $id='')
+    public function delete($account, $id = null) 
     {
         $user = $this->getByAccount($account);
         if(!$user) return false;

@@ -189,14 +189,15 @@ class productModel extends model
      */
     public function create()
     {
+        $now = helper::now();
         $product = fixer::input('post')
             ->join('categories', ',')
             ->setDefault('price', 0)
             ->setDefault('amount', 0)
             ->setDefault('promotion', 0)
             ->add('author', $this->app->user->account)
-            ->add('addedDate', helper::now())
-            ->add('editedDate', helper::now())
+            ->add('addedDate', $now)
+            ->add('editedDate', $now)
             ->get();
 
         $product->alias    = seo::unify($product->alias, '-');

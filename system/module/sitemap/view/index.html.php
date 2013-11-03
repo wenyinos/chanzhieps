@@ -10,12 +10,13 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php if($onlyBody !== 'yes') include '../../common/view/header.html.php';?>
+<?php if($onlyBody == 'no') include '../../common/view/header.html.php';?>
 <div class='box radius'>
   <h4 class='title'>
-  <?php echo $lang->sitemap->common;?>
-  <span ><?php echo html::a(inlink('index', '', '', 'xml'), $lang->sitemap->xmlVersion, '', "class='label label-primary'");?></span>
+    <?php echo $lang->sitemap->common;?>
+    <span ><?php echo html::a(inlink('index', '', '', 'xml'), $lang->sitemap->xmlVersion, '', "class='label label-primary'");?></span>
   </h4>
+
   <div class='content'>
 
     <?php if(strpos($productTree, '<li>') !== false):?>
@@ -58,6 +59,6 @@
       </ul>
     </div>
     <?php endif;?>
-
+  </div>
 </div>
-<?php if($onlyBody !== 'yes') include '../../common/view/footer.html.php';?>
+<?php if($onlyBody == 'no') include '../../common/view/footer.html.php';?>

@@ -168,10 +168,11 @@ class articleModel extends model
      */
     public function create($type)
     {
+        $now = helper::now();
         $article = fixer::input('post')
             ->join('categories', ',')
-            ->add('addedDate', helper::now())
-            ->add('editedDate', helper::now())
+            ->add('addedDate', $now)
+            ->add('editedDate', $now)
             ->add('type', $type)
             ->get();
 
