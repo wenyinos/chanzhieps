@@ -29,7 +29,7 @@ $config->rights->guest['product']['view']   = 'view';
 $config->rights->guest['company']['index']   = 'index';
 $config->rights->guest['company']['contact'] = 'contact';
 
-$config->rights->guest['partner']['index'] = 'index';
+$config->rights->guest['links']['index'] = 'index';
 
 $config->rights->guest['forum']['index'] = 'index';
 $config->rights->guest['forum']['board'] = 'board';

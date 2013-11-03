@@ -171,6 +171,7 @@ class articleModel extends model
         $article = fixer::input('post')
             ->join('categories', ',')
             ->add('addedDate', helper::now())
+            ->add('editedDate', helper::now())
             ->add('type', $type)
             ->get();
 

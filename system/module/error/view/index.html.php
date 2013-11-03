@@ -10,30 +10,10 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-
 <?php include '../../common/view/header.html.php';?>
 <div class='alert alert-danger'>
-    <h3><?php echo $lang->error->pageNotFound;?></h3>
-    <p><?php echo $this->config->company->desc;?></p>
+  <h3><?php echo $lang->error->pageNotFound;?></h3>
+  <p><?php echo $this->config->company->desc;?></p>
 </div>
-<div class='container'>
-  <?php if(strpos($articleTree, '<li>') !== false):?>
-  <div class='row'> 
-    <h4><?php echo $lang->error->productCategory?></h4>
-    <?php echo $productTree?>
-  </div>
-  <?php endif;?>
-  <?php if(strpos($articleTree, '<li>') !== false):?>
-  <div class='row'> 
-    <h4><?php echo $lang->error->articleCategory?></h4>
-    <?php echo $articleTree?>
-  </div>
-  <?php endif;?>
-  <?php if(strpos($blogTree, '<li>') !== false):?>
-  <div class='row'> 
-    <h4><?php echo $lang->error->blogCategory?></h4>
-    <?php echo $blogTree?>
-  </div>
-  <?php endif;?>
-</div>
+<?php $this->fetch('sitemap', 'index', 'onlyBody=yes')?>
 <?php include '../../common/view/footer.html.php';?>

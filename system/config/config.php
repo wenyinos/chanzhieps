@@ -81,6 +81,7 @@ define('TABLE_CATEGORY', $config->db->prefix . 'category');
 define('TABLE_RELATION', $config->db->prefix . 'relation');
 define('TABLE_PRODUCT',  $config->db->prefix . 'product');
 define('TABLE_ARTICLE',  $config->db->prefix . 'article');
+define('TABLE_BLOCK',    $config->db->prefix . 'block');
 define('TABLE_TAG',      $config->db->prefix . 'tag');
 define('TABLE_LAYOUT',   $config->db->prefix . 'layout');
 define('TABLE_COMMENT',  $config->db->prefix . 'comment');

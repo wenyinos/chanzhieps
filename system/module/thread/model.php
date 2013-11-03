@@ -126,6 +126,7 @@ class threadModel extends model
             ->setForce('board', $board)
             ->setForce('author', $this->app->user->account)
             ->setForce('addedDate', $now) 
+            ->setForce('editedDate', $now) 
             ->setForce('repliedDate', $now)
             ->remove('files, labels, views, replies, hidden, stick, readonly')
             ->get();

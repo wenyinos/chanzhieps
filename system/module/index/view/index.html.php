@@ -89,4 +89,10 @@
   </div>
 
 </div>
+<?php if(!empty($this->config->links->index)):?>
+<ul id="links" class="nav nav-pills">
+  <?php echo $lang->link . $lang->colon;?>
+  <?php echo $this->config->links->index; if(!empty($this->config->links->all))echo "&nbsp;&nbsp&nbsp" . html::a(helper::createLink('links', 'index'), $lang->more . $lang->raquo);?>
+</ul>
+<?php endif;?>
 <?php include '../../common/view/footer.html.php';?>

@@ -5,7 +5,7 @@ css::internal($pageCSS);
 ?>
 <?php
 if(isset($comments) and $comments):?>
-<div id='commentList' class='commentList radius-top'> 
+<div id='comments' class='commentList radius-top'> 
   <div class='box-title'><?php echo $lang->comment->list;?></div>
   <div class='box-content'>
     <a name='first'></a>
