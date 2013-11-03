@@ -20,7 +20,7 @@ include '../../common/view/treeview.html.php';
 $root = '<li>' . $this->lang->currentPos . $this->lang->colon .  html::a($this->inlink('index'), $lang->home) . '</li>';
 if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
 ?>
-<div class='row blogBox'>
+<div class='row' id="blogBox">
   <div class='col-md-9'>
     <ul class="media-list">
     <?php foreach($articles as $article):?>
