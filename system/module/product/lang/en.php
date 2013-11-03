@@ -46,7 +46,7 @@ $lang->product->files      = 'Files';
 
 $lang->product->confirmDelete = 'Are you surce to delete it?';
 
-$lang->article->prev      = 'Previous';
-$lang->article->next      = 'Next';
-$lang->article->none      = 'None';
-$lang->article->directory = 'Back';
+$lang->product->prev      = 'Previous';
+$lang->product->next      = 'Next';
+$lang->product->none      = 'None';
+$lang->product->directory = 'Back';

@@ -41,3 +41,5 @@ $lang->upgrade->versionNote = "務必選擇正確的版本，否則會造成數�
 $lang->upgrade->fromVersions['1_1'] = '1.1.stable';
 $lang->upgrade->fromVersions['1_2'] = '1.2.stable';
 $lang->upgrade->fromVersions['1_3'] = '1.3.stable';
+$lang->upgrade->fromVersions['1_4'] = '1.4.stable';
+$lang->upgrade->fromVersions['1_5'] = '1.5.stable';

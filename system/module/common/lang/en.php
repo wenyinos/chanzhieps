@@ -23,13 +23,26 @@ $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->chanzhiEPS = 'chanzhiEPS';
 $lang->poweredBy = " Powered by <a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPS} %s</a>!";
 
-$lang->killIE6    = '<script src="//letskillie6.googlecode.com/svn/trunk/2/default.js"></script>';
+/* IE6 alert.  */
+$lang->IE6Alert= <<<EOT
+    <div class='alert alert-danger' style='margin-top:100px;'>
+      <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+      <h2>Please use IE(>8), firefox, chrome, safari, opera to visit this site.</h2>
+      <p>Stop using IE6!</p>
+      <p>IE6 is too old, we should stop using it. <br/></p>
+      <a href='https://www.google.com/intl/zh-hk/chrome/browser/' class='btn btn-primary btn-lg' target='_blank'>Chrome</a>
+      <a href='http://www.firefox.com/' class='btn btn-primary btn-lg' target='_blank'>Firefox</a>
+      <a href='http://www.opera.com/download' class='btn btn-primary btn-lg' target='_blank'>Opera</a>
+      <p></p>
+    </div>
+EOT;
 
 /* Global lang items. */
 $lang->home           = 'Home';
 $lang->welcome        = 'Welcome, <strong>%s</strong>!';
 $lang->todayIs        = 'Today is %s, ';
 $lang->aboutUs        = 'About';
+$lang->link           = 'Links';
 $lang->frontHome      = 'Front';
 $lang->forumHome      = 'Forum';
 $lang->helpHome       = 'Helo';
@@ -143,7 +156,9 @@ $lang->site->menu->logo      = 'Logo|site|setlogo|';
 $lang->site->menu->nav       = 'Navigation|nav|admin|';
 $lang->site->menu->theme     = 'Theme|site|settheme|';
 $lang->site->menu->slide     = array('link' => 'Slide|slide|admin|', 'alias' => 'create,edit');
+$lang->site->menu->tag       = 'Tags|tag|admin|';
 $lang->site->menu->oauth     = 'Open OAuth|site|setoauth|';
+$lang->site->menu->link      = 'Links|links|admin|';
 
 /* Menu of company module. */
 $lang->company->menu = new stdclass();
@@ -158,6 +173,11 @@ $lang->tree = new stdclass();
 $lang->tree->menu = $lang->article->menu;
 $lang->menuGroups->tree = 'article';
 
+/* Menu of tag module. */
+$lang->tag = new stdclass();
+$lang->tag->menu = $lang->site->menu;
+$lang->menuGroups->tag = 'site';
+
 /* Menu of nav module. */
 $lang->nav = new stdclass();
 $lang->nav->menu = $lang->site->menu;
@@ -167,6 +187,11 @@ $lang->menuGroups->nav  = 'site';
 $lang->slide = new stdclass();
 $lang->slide->menu = $lang->site->menu;
 $lang->menuGroups->slide = 'site';
+
+/* Menu of tree module. */
+$lang->links = new stdclass();
+$lang->links->menu = $lang->site->menu;
+$lang->menuGroups->links = 'site';
 
 /* Error info. */
 $lang->error = new stdclass();

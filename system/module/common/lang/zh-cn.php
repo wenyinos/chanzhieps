@@ -102,7 +102,6 @@ $lang->company->wangwang  = '旺旺';
 $lang->sitemap = new stdclass();
 $lang->sitemap->common = '站点地图';
 
-
 /* The main menus. */
 $lang->menu = new stdclass();
 $lang->menu->admin   = '首页|admin|index|';

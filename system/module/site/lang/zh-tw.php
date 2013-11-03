@@ -23,11 +23,14 @@ $lang->site->copyright    = '創建年份';
 
 $lang->site->setBasic     = "設置基本信息";
 $lang->site->setLogo      = "Logo設置";
-$lang->site->setAppkey    = "新浪微博接入";
+$lang->site->setOauth     = "開放登錄設置";
+$lang->site->setSinaOauth = "新浪微博接入";
+$lang->site->setQQOauth   = "QQ接入";
 $lang->site->setTheme     = '主題設置';
 
 $lang->site->setLogoFailed  = "設置Logo失敗";
 $lang->site->noSelectedLogo = "沒有選擇Logo圖片";
+$lang->site->oauthHelp      = "使用幫助";
 
 $lang->site->themes    = array();
 $lang->site->themes['default']    = '預設風格';

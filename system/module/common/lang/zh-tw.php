@@ -23,13 +23,26 @@ $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->chanzhiEPS = '蟬知企業門戶系統';
 $lang->poweredBy  = " 由 <a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPS} %s</a> 強力驅動！";
 
-$lang->killIE6    = '<script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>';
+/* IE6 alert.  */
+$lang->IE6Alert= <<<EOT
+    <div class='alert alert-danger' style='margin-top:100px;'>
+      <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+      <h2>請使用其他瀏覽器訪問本站。</h2>
+      <p>珍愛上網，遠離IE！</p>
+      <p>我們檢測到您正在使用Internet Explorer 6 ——  IE6 瀏覽器, IE6 于2001年8月27日推出，而現在它已十分脫節。速度慢、不安全、不能很好的展示新一代網站。<br/></p>
+      <a href='https://www.google.com/intl/zh-hk/chrome/browser/' class='btn btn-primary btn-lg' target='_blank'>谷歌瀏覽器</a>
+      <a href='http://www.firefox.com/' class='btn btn-primary btn-lg' target='_blank'>火狐瀏覽器</a>
+      <a href='http://www.opera.com/download' class='btn btn-primary btn-lg' target='_blank'>Opera瀏覽器</a>
+      <p></p>
+    </div>
+EOT;
 
 /* Global lang items. */
 $lang->home           = '首頁';
 $lang->welcome        = '歡迎您，<strong>%s</strong>！';
 $lang->todayIs        = '今天是%s，';
 $lang->aboutUs        = '關於我們';
+$lang->link           = '友情連結';
 $lang->frontHome      = '前台';
 $lang->forumHome      = '論壇';
 $lang->helpHome       = '幫助';
@@ -43,7 +56,7 @@ $lang->changePassword = '修改密碼';
 $lang->forgotPassword = '忘記密碼?';
 $lang->currentPos     = '當前位置';
 $lang->categoryMenu   = '分類導航';
-
+   
 /* Global action items. */
 $lang->reset          = '重填';
 $lang->edit           = '編輯';
@@ -143,6 +156,9 @@ $lang->site->menu->logo      = 'LOGO設置|site|setlogo|';
 $lang->site->menu->nav       = '導航設置|nav|admin|';
 $lang->site->menu->theme     = '主題風格|site|settheme|';
 $lang->site->menu->slide     = array('link' => '幻燈片設置|slide|admin|', 'alias' => 'create,edit');
+$lang->site->menu->tag       = '關鍵詞設置|tag|admin|';
+$lang->site->menu->oauth     = '開放登錄|site|setoauth|';
+$lang->site->menu->link      = '友情連結|links|admin|';
 
 /* Menu of company module. */
 $lang->company->menu = new stdclass();
@@ -157,6 +173,11 @@ $lang->tree = new stdclass();
 $lang->tree->menu = $lang->article->menu;
 $lang->menuGroups->tree = 'article';
 
+/* Menu of tag module. */
+$lang->tag = new stdclass();
+$lang->tag->menu = $lang->site->menu;
+$lang->menuGroups->tag = 'site';
+
 /* Menu of nav module. */
 $lang->nav = new stdclass();
 $lang->nav->menu = $lang->site->menu;
@@ -166,6 +187,11 @@ $lang->menuGroups->nav  = 'site';
 $lang->slide = new stdclass();
 $lang->slide->menu = $lang->site->menu;
 $lang->menuGroups->slide = 'site';
+
+/* Menu of tree module. */
+$lang->links = new stdclass();
+$lang->links->menu = $lang->site->menu;
+$lang->menuGroups->links = 'site';
 
 /* The error messages. */
 $lang->error = new stdclass();

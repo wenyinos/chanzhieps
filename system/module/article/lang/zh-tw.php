@@ -53,7 +53,7 @@ $lang->article->lblSource    = '<strong>來源：</strong>';
 $lang->article->lblViews     = ' <strong>閲讀：</strong>%s';
 $lang->article->lblEditor    = '<i>最後編輯：%s 于 %s</i>';
 
-$lang->article->prev      = '&laquo; ';
-$lang->article->next      = '&raquo; ';
+$lang->article->prev      = '上一篇';
+$lang->article->next      = '下一篇';
 $lang->article->none      = '沒有了';
 $lang->article->directory = '返回目錄';
