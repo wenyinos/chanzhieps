@@ -83,8 +83,8 @@ class article extends control
         $subCategories = $this->dao->select('id')->from(TABLE_CATEGORY)->where('parent')->eq((int)$categoryID)->andWhere('type')->eq($type)->orderBy('`order`')->fetchPairs();
         if($subCategories) $articleList = $this->article->getList($type, $subCategories, 'id_desc');
 
-        $orderBy = 't1.order';
-        if(!empty($articleList) && strpos($type, 'book_') !== false) $orderBy = 'id_desc';
+        $orderBy = 'id_desc';
+        if(empty($articleList) && strpos($type, 'book_') !== false) $orderBy = 't1.order';
         
         $families = $categoryID ? $this->loadModel('tree')->getFamily($categoryID, $type) : '';
         $articles = $this->article->getList($type, $families, $orderBy, $pager);
