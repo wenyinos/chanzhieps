@@ -135,7 +135,8 @@ class thread extends control
         $moderators = $this->thread->getModerators($threadID);
         if(!$this->thread->canManage($moderators)) $this->send(array('result' => 'fail'));
 
-        $locate = helper::createLink('forum', 'board', "board=$thread->board");
+        $locate  = helper::createLink('forum', 'board', "board=$thread->board");
+        if(RUN_MODE == 'admin') $locate = helper::createLink('forum', 'admin');
         if($this->thread->delete($threadID)) $this->send(array('result' => 'success', 'locate' => $locate));
 
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
