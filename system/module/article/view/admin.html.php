@@ -14,7 +14,7 @@
 <?php if(strpos($type, 'book') !== false):?><form id='ajaxForm' method='post' action='<?php echo inlink('updateOrder', "type=$type");?>' target='hiddenwin'><?php endif;?>
 <table class='table table-bordered table-hover table-striped'>
   <?php if($type == 'blog'):?>
-  <caption><?php echo $lang->blog->list;?><span class='pull-right mr-10px'><?php echo html::a($this->inlink('create'), $lang->blog->create);?></span></caption>
+  <caption><?php echo $lang->blog->list;?><span class='pull-right mr-10px'><?php echo html::a($this->inlink('create', "type=$type"), $lang->blog->create);?></span></caption>
   <?php else:?>
   <caption><?php echo $lang->article->list;?><span class='pull-right mr-10px'><?php echo html::a($this->inlink('create'), $lang->article->create);?></span></caption>
   <?php endif;?>
