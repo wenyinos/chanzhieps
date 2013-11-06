@@ -1,6 +1,6 @@
 <?php $i = 1 + ($pager->pageID - 1) * $pager->recPerPage;?>
 <?php foreach($replies as $reply):?>
-<div class="panel panel-default thread reply <?php echo $i%2!=0?'striped':'';?>">
+<div id = "<?php echo $reply->id;?>" class="panel panel-default thread reply <?php echo $i%2!=0?'striped':'';?>">
   <div class="panel-heading">
     <div class="muted"><?php echo $reply->addedDate;?></div>
     <div class="panel-actions"><strong>#<?php echo $i++;?></strong></div>
