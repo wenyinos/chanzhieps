@@ -1009,7 +1009,8 @@ class router
         if(is_file($this->controlFile)) return true;
 
         $this->controlFile = $modulePath . DS . 'control.php';
-        if(!is_file($this->controlFile)) 
+
+        if(!is_file($this->controlFile) && $this->getModuleName() != 'error') 
         {
             $this->setModuleName('error');
             $this->setMethodName('index');
