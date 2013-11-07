@@ -36,7 +36,6 @@ $config->default->module = 'admin';
 $config->default->method = 'index';
 
 /* Run it. */
-$dbh    = $app->connectDB();
 $common = $app->loadCommon();
 $app->parseRequest();
 $common->checkPriv();

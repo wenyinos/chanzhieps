@@ -30,7 +30,6 @@ if(isset($_GET['mode']) and $_GET['mode'] == 'getconfig') die($app->exportConfig
 if(!isset($config->installed) or !$config->installed) die(header('location: install.php'));
 
 /* Connect to db, load module. */
-$dbh    = $app->connectDB();
 $common = $app->loadCommon();
 $app->parseRequest();
 $common->checkPriv();
