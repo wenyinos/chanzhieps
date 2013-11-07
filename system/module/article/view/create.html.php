@@ -59,9 +59,10 @@
       <th><?php echo $lang->article->alias;?></th>
       <td>
         <div class="input-group text-1">
-        <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot?>article/id@</span>
-        <?php echo html::input('alias', '', "class='text-1 form-control'");?>
-        <span class="input-group-addon">.html</span>
+          <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot?>article/id@</span>
+          <?php echo html::input('alias', '', "class='text-1 form-control'");?>
+          <span class="input-group-addon">.html</span>
+        </div>
       </td>
     </tr>
     <tr>
