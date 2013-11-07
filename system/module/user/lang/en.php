@@ -72,6 +72,7 @@ $lang->user->searchUser          = 'Search';
 
 $lang->user->errorDeny     = "Sorry, you don't have the permission to access <b>%s</b>'s<b>%s</b>. Please contact the administrator.";
 $lang->user->loginFailed   = "Login failed, please check you account and password.";
+$lang->user->locked        = "Failed too much, please login again after ten minutes";
 $lang->user->lblRegistered = 'Congratulations, register successfully!';
 $lang->user->forbidSuccess = 'Successfully forbid.';
 $lang->user->forbidFail    = 'Failed forbid';
