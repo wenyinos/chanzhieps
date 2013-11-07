@@ -8,6 +8,7 @@
     echo html::a($this->createLink('sitemap', 'index'), $lang->sitemap->common);
     if(empty($this->config->links->index) && !empty($this->config->links->all)) echo "&nbsp;" . html::a($this->createLink('links', 'index'), $lang->link);
     ?>
+    <div> <?php include 'selectlang.html.php';?></div>;
   </footer>
    
 <?php

@@ -4,7 +4,12 @@
 
 <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
   <div class="collapse navbar-collapse navbar-ex6-collapse">
-    <div class='navbar-text pull-right'><?php printf($lang->poweredBy, $config->version, $config->version);?></div>
+    <div class='navbar-text pull-right'>
+    <?php
+    printf($lang->poweredBy, $config->version, $config->version);
+    include 'selectlang.html.php';
+    ?>
+    </div>
   </div>
 </nav>
 

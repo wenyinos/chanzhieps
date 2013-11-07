@@ -410,6 +410,32 @@ function setAdminLeftMenu()
     $('ul.leftmenu').find('a').first().addClass('radius-top');
 }
 
+/**
+ * Set language.
+ * 
+ * @access public
+ * @return void
+ */
+function selectLang(lang)
+{
+    $.cookie('lang', lang, {expires:config.cookieLife, path:config.webRoot});
+    location.href = removeAnchor(location.href);
+}
+
+/**
+ * Remove anchor from the url.
+ * 
+ * @param  string $url 
+ * @access public
+ * @return string
+ */
+function removeAnchor(url)
+{
+    pos = url.indexOf('#');
+    if(pos > 0) return url.substring(0, pos);
+    return url;
+}
+
 function setPing()             
 { 
       $.get(createLink('misc', 'ping'));

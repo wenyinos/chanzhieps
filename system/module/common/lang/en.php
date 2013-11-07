@@ -102,6 +102,8 @@ $lang->company->wangwang  = 'Wangwang';
 $lang->sitemap = new stdclass();
 $lang->sitemap->common = 'Sitemap';
 
+$lang->setLang = 'Language : ';
+
 /* The main menus. */
 $lang->menu = new stdclass();
 $lang->menu->admin   = 'Home|admin|index|';
