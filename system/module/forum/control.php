@@ -42,12 +42,12 @@ class forum extends control
         if(!$board) die(js::locate('back'));
  
         /* Get stick threads. */
-        $sticks = $this->loadModel('thread')->getSticks($boardID);
+        $sticks = $this->loadModel('thread')->getSticks($board->id);
 
         /* Get common threads. */
         $this->app->loadClass('pager', $static = true);
         $pager   = new pager(0, 10, $pageID);
-        $threads = $this->thread->getList($boardID, $orderBy = 'repliedDate_desc', $pager);
+        $threads = $this->thread->getList($board->id, $orderBy = 'repliedDate_desc', $pager);
 
         $this->view->title     = $board->name;
         $this->view->keyword   = $board->keyword . '' . $this->config->site->keywords;

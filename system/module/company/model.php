@@ -30,7 +30,7 @@ class companyModel extends model
                 }
                 else if($item == 'email')
                 {
-                    $contact->email = html::a("mailto:{$value}", $value);
+                    $contact->email = html::mailto($value, $value);
                 }
                 else if($item == 'weibo')
                 {
