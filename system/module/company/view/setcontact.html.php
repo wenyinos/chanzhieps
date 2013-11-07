@@ -36,7 +36,11 @@
     </tr>
     <tr>
       <th><?php echo $lang->company->weibo;?></th> 
-      <td><?php echo html::input('weibo', isset($contact->weibo) ? $contact->weibo : '', "class='text-3'");?></td>
+      <td>
+        <div class="input-group text-3">
+        <span class="input-group-addon">http://weibo.com/</span>
+        <?php echo html::input('weibo', isset($contact->weibo) ? $contact->weibo : '', "class='form-control'");?>
+      </td>
     </tr>
      <tr>
       <th><?php echo $lang->company->wangwang;?></th> 
