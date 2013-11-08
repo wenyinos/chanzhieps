@@ -13,14 +13,14 @@
         <div class='carousel-caption'>
           <h2><?php echo $slide->title;?></h2>
           <div class='lead'><?php echo $slide->summary;?></div>
-          <?php if(trim($slide->label) != '') echo html::a($slide->url, $slide->label, '', "class='btn btn-lg btn-primary'");?>
+          <?php if(trim($slide->label) != '') echo html::a($slide->url, $slide->label, "class='btn btn-lg btn-primary'");?>
         </div>
       </div>
     </div>
     <?php endforeach;?>
   </div>
-  <?php echo html::a('#slide', $lang->prev, '', "class='left carousel-control' data-slide='prev'")?>
-  <?php echo html::a('#slide', $lang->next, '', "class='right carousel-control' data-slide='next'")?>
+  <?php echo html::a('#slide', $lang->prev, "class='left carousel-control' data-slide='prev'")?>
+  <?php echo html::a('#slide', $lang->next, "class='right carousel-control' data-slide='next'")?>
 </div>
 <?php endif;?>
 
@@ -33,14 +33,14 @@
   ?>
   <div class="col-md-4">
     <div class='panel product-box'>
-      <?php echo html::a($url, html::image($product->image->primary->smallURL), '', "class='thumbnail'");?>
+      <?php echo html::a($url, html::image($product->image->primary->smallURL), "class='thumbnail'");?>
       <div class="caption">
         <h3><?php echo html::a($url, $product->name);?></h3>
         <p><?php echo $product->summary;?></p>
       </div>
       <div class="widget-footer">
         <p>
-          <?php echo html::a($url, $lang->more . $lang->raquo, '', "class=''");?>
+          <?php echo html::a($url, $lang->more . $lang->raquo, "class=''");?>
         </p>
       </div>
     </div>
@@ -67,7 +67,7 @@
         ?>
         <li>
             <i class='icon-chevron-right'></i>
-            <?php echo html::a($url, $article->title, '', "class='latest-news' title='{$article->title}'");?>
+            <?php echo html::a($url, $article->title, "class='latest-news' title='{$article->title}'");?>
         </li>
         <?php endforeach;?>
       </ul></div>
