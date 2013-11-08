@@ -14,7 +14,7 @@
 <div class='box radius'>
   <h4 class='title'>
     <?php echo $lang->sitemap->common;?>
-    <span ><?php echo html::a(inlink('index', '', '', 'xml'), $lang->sitemap->xmlVersion, '', "class='label label-primary'");?></span>
+    <span ><?php echo html::a(inlink('index', '', '', 'xml'), $lang->sitemap->xmlVersion, "class='label label-primary'");?></span>
   </h4>
 
   <div class='content'>
