@@ -47,7 +47,7 @@ class tagModel extends model
         foreach($tags as $id => $tag)
         {
             $content = str_replace("{tag{$id}}", $tag->tag, $content);
-            $content = str_replace("{link{$id}}", html::a($tag->link, $tag->tag, '', "class='tag-link'"), $content);
+            $content = str_replace("{link{$id}}", html::a($tag->link, $tag->tag, "class='tag-link'"), $content);
         }
         return $content;
     }
