@@ -19,12 +19,12 @@
       <?php
       if($file->isImage)
       {
-          echo html::a(inlink('download', "id=$file->id"), html::image($file->smallURL, "class='image-small' title='{$file->title}'"), '_blank');
+          echo html::a(inlink('download', "id=$file->id"), html::image($file->smallURL, "class='image-small' title='{$file->title}'"), "target='_blank'");
           if($file->primary == 1) echo '<small class="label label-success">'. $lang->file->primary .'</small>';
       }
       else
       {
-          echo html::a(inlink('download', "id=$file->id"), "{$file->title}.{$file->extension}", '_blank');
+          echo html::a(inlink('download', "id=$file->id"), "{$file->title}.{$file->extension}", "target='_blank'");
       }
       ?>
     </td>
@@ -38,14 +38,14 @@
     <?php
     if($file->public)
     {
-        echo html::a(inlink('deny',  "id=$file->id"), $lang->file->deny, '', 'class="option"');
+        echo html::a(inlink('deny',  "id=$file->id"), $lang->file->deny, 'class="option"');
     }
     else
     {
-        echo html::a(inlink('allow', "id=$file->id"), $lang->file->allow, '', "class='option'");
+        echo html::a(inlink('allow', "id=$file->id"), $lang->file->allow, "class='option'");
     }
-    echo html::a(inlink('delete', "id=$file->id"), $lang->delete, '', "class='deleter'");
-    if($file->isImage) echo html::a(inlink('setPrimary', "id=$file->id"), $lang->file->setPrimary, '', "class='option'");
+    echo html::a(inlink('delete', "id=$file->id"), $lang->delete, "class='deleter'");
+    if($file->isImage) echo html::a(inlink('setPrimary', "id=$file->id"), $lang->file->setPrimary, "class='option'");
     ?>
     </td>
   </tr>
