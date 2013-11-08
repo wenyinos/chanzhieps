@@ -34,7 +34,7 @@ class companyModel extends model
                 }
                 else if($item == 'weibo')
                 {
-                    $contact->weibo = html::a("http://weibo.com/{$value}", $value, '_blank');
+                    $contact->weibo = html::a("http://weibo.com/{$value}", $value, "target='_blank'");
                 }
                 else if($item == 'wangwang')
                 {
