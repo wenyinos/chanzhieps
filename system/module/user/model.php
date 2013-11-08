@@ -215,10 +215,18 @@ class userModel extends model
         if(!$user) return false;
 
         /* Can not login before ten minutes when user is locked. */
-        if($user->locked and (time() - $user->locked) / 60 <= 10)
+        if($user->locked)
         {
-            $this->lang->user->loginFailed = $this->lang->user->locked;
-            return false;
+            if((time() - $user->locked) / 60 <= 10)
+            {
+                $this->lang->user->loginFailed = $this->lang->user->locked;
+                return false;
+            }
+            else
+            {
+                $user->fails  = 0;
+                $user->locked = '';
+            }
         }
 
         /* The password can be the plain or the password after md5. */
