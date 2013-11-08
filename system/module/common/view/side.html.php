@@ -7,11 +7,11 @@
         $browseLink = $this->createLink('article', 'browse', "categoryID={$topCategory->id}", "category={$topCategory->alias}");
         if($category->name==$topCategory->name)
         {
-            echo html::a($browseLink, "<i class='icon-folder-open-alt '></i>" . $topCategory->name, '', "id='category{$topCategory->id}' class='list-group-item active'");
+            echo html::a($browseLink, "<i class='icon-folder-open-alt '></i>" . $topCategory->name, "id='category{$topCategory->id}' class='list-group-item active'");
         }
         else
         {
-            echo html::a($browseLink, "<i class='icon-folder-close-alt '></i>" . $topCategory->name, '', "id='category{$topCategory->id}' class='list-group-item'");
+            echo html::a($browseLink, "<i class='icon-folder-close-alt '></i>" . $topCategory->name, "id='category{$topCategory->id}' class='list-group-item'");
         }
     }
     ?>
