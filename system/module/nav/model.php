@@ -98,9 +98,9 @@ class navModel extends model
         $entry .= html::hidden("nav[{$grade}][target][]", $nav->target);
 
         /* operate buttons. */
-        $entry .= html::a('javascript:;', $this->lang->nav->add, '', "class='plus{$grade}'");
-        if($childGrade < 4) $entry .= html::a('javascript:;', $this->lang->nav->addChild, '', "class='plus{$childGrade}'");
-        $entry .= html::a('javascript:;', $this->lang->delete, '', "class='remove'");
+        $entry .= html::a('javascript:;', $this->lang->nav->add, "class='plus{$grade}'");
+        if($childGrade < 4) $entry .= html::a('javascript:;', $this->lang->nav->addChild, "class='plus{$childGrade}'");
+        $entry .= html::a('javascript:;', $this->lang->delete, "class='remove'");
         $entry .= "<i class='icon-arrow-up'></i> <i class='icon-arrow-down'></i>";
 
         return $entry;
