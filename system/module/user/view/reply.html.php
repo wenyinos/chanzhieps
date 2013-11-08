@@ -13,7 +13,7 @@
       <tbody>
         <?php foreach($replies as $reply):?>
         <tr>
-          <td><?php echo html::a($this->createLink('thread', 'view', "id=$reply->thread") . "#$reply->id", $reply->title . " <i>(#$reply->id)</i>", '_blank');?></td>
+          <td><?php echo html::a($this->createLink('thread', 'view', "id=$reply->thread") . "#$reply->id", $reply->title . " <i>(#$reply->id)</i>", "target='_blank'");?></td>
           <td class='w-120px'><?php echo substr($reply->addedDate, 2, -3);?></td>
         </tr>  
         <?php endforeach;?>
