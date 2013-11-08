@@ -184,8 +184,8 @@ class replyModel extends model
         foreach($reply->files as $file)
         {
             $file->title = $file->title . ".$file->extension";
-            echo html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, '_blank'); 
-            if($canManage) echo '<sub>' . html::a(helper::createLink('thread', 'deleteFile', "threadID=$reply->thread&fileID=$file->id"), '[x]', '', "class='deleter'") . '</sub>';
+            echo html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'"); 
+            if($canManage) echo '<sub>' . html::a(helper::createLink('thread', 'deleteFile', "threadID=$reply->thread&fileID=$file->id"), '[x]', "class='deleter'") . '</sub>';
             echo ' ';
         }
     }
