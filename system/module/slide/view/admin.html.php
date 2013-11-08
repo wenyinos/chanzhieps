@@ -15,7 +15,7 @@
   <table class='table table-hover table-bordered table-striped'>
     <caption>
       <div class='f-left'><?php echo $lang->slide->admin;?></div>
-      <div class='f-right'><?php echo html::a($this->inlink('create'), $lang->slide->create, '', "class='btn'");?></div>
+      <div class='f-right'><?php echo html::a($this->inlink('create'), $lang->slide->create, "class='btn'");?></div>
     </caption>
     <thead>
       <tr class='a-center'>
@@ -35,14 +35,14 @@
           <i class='icon-arrow-down'></i>            
           <?php echo html::hidden("order[{$slide->id}]", $key);?>
         </td>
-        <td class='a-center'><?php echo html::a($slide->image, html::image($slide->image, "class='image-small'"), '_blank');?></td>
+        <td class='a-center'><?php echo html::a($slide->image, html::image($slide->image, "class='image-small'"), "target='_blank'");?></td>
         <td><?php echo $slide->title;?></td>
         <td><?php echo $slide->summary;?></td>
         <td><?php echo $slide->label;?></td>
         <td class='a-center'>
           <?php
-          echo html::a($this->createLink('slide', 'edit', "id=$slide->id"), $lang->edit, '');
-          echo html::a($this->createLink('slide', 'delete', "id=$slide->id"), $lang->delete, '', "class='deleter'");
+          echo html::a($this->createLink('slide', 'edit', "id=$slide->id"), $lang->edit);
+          echo html::a($this->createLink('slide', 'delete', "id=$slide->id"), $lang->delete, "class='deleter'");
           ?>
         </td>
       </tr>
