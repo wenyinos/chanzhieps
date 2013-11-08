@@ -29,6 +29,6 @@ js::set('articleID', $article->id);
   </div>
 </div>
 <div id='commentBox'></div>
-<?php echo html::a('', '', '', "name='comment'");?>
+<?php echo html::a('', '', "name='comment'");?>
 <?php include '../../common/view/syntaxhighlighter.html.php'; ?>
 <?php include '../../common/view/footer.html.php'; ?>

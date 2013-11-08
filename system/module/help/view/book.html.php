@@ -8,7 +8,7 @@
       foreach($books as $bookValue)
       {
           $class = 'list-group-item' . (($bookValue->name == $book->name) ? ' active' : '');
-          echo html::a(inlink('book', "type=$bookValue->key"), '<i class="icon-book icon-large"></i>' . $bookValue->name . '<i class="icon-chevron-right"></i>', '', "class='$class'");
+          echo html::a(inlink('book', "type=$bookValue->key"), '<i class="icon-book icon-large"></i>' . $bookValue->name . '<i class="icon-chevron-right"></i>', "class='$class'");
       }
       ?>
     </div>
