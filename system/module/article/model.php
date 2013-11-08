@@ -377,7 +377,7 @@ class articleModel extends model
         {
             if($file->isImage)
             {
-                echo html::image($file->fullURL, "class='ph-10px'");
+                echo html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL, "class='ph-10px'"), '_blank');
             }
         }
         echo '</br>';
