@@ -292,7 +292,7 @@ class treeModel extends model
             $categoryName = 'forum';
             $methodName   = 'boardAdmin';
             $vars         = "categoryID=$category->id";
-            $linkHtml     = html::a(helper::createLink($categoryName, $methodName, $vars), $category->name, 'mainwin', "id='category{$category->id}'");
+            $linkHtml     = html::a(helper::createLink($categoryName, $methodName, $vars), $category->name, "id='category{$category->id}' target='mainwin'");
             return $linkHtml;
         }
         else
@@ -301,7 +301,7 @@ class treeModel extends model
             $methodName   = 'browseAdmin';
             $orderBy      = $category->type == 'article' ? 'id_desc' : '`order`';
             $vars         = "type=$category->type&&categoryID=$category->id&orderBy=$orderBy";
-            $linkHtml     = html::a(helper::createLink($categoryName, $methodName, $vars), $category->name, 'mainwin', "id='category($category->id)'");
+            $linkHtml     = html::a(helper::createLink($categoryName, $methodName, $vars), $category->name, "id='category($category->id)' target='mainwin'");
             return $linkHtml;
         }
     }
@@ -315,7 +315,7 @@ class treeModel extends model
      */
     public static function createBrowseLink($category)
     {
-        $linkHtml = html::a(helper::createLink('article', 'browse', "categoryID={$category->id}", "category={$category->alias}"), $category->name, '', "id='category{$category->id}'");
+        $linkHtml = html::a(helper::createLink('article', 'browse', "categoryID={$category->id}", "category={$category->alias}"), $category->name, "id='category{$category->id}'");
         return $linkHtml;
     }
 
@@ -328,7 +328,7 @@ class treeModel extends model
      */
     public static function createProductBrowseLink($category)
     {
-        $linkHtml = html::a(helper::createLink('product', 'browse', "categoryID={$category->id}", "category={$category->alias}"), $category->name, '', "id='category{$category->id}'");
+        $linkHtml = html::a(helper::createLink('product', 'browse', "categoryID={$category->id}", "category={$category->alias}"), $category->name, "id='category{$category->id}'");
         return $linkHtml;
     }
 
@@ -342,7 +342,7 @@ class treeModel extends model
      */
     public static function createBlogBrowseLink($category)
     {
-        $linkHtml = html::a(helper::createLink('blog', 'index', "category={$category->id}", "category={$category->alias}"), $category->name, '', "id='category{$category->id}'");
+        $linkHtml = html::a(helper::createLink('blog', 'index', "category={$category->id}", "category={$category->alias}"), $category->name, "id='category{$category->id}'");
         return $linkHtml;
     }
 
@@ -356,7 +356,7 @@ class treeModel extends model
     public static function createHelpBookLink($category)
     {
         $code = str_replace('book_', '', $category->type);
-        $linkHtml = html::a(helper::createLink('help', 'book', "type=$code&categoryID=$category->id", "category={$category->alias}"), $category->name, '', "id='category{$category->id}'");
+        $linkHtml = html::a(helper::createLink('help', 'book', "type=$code&categoryID=$category->id", "category={$category->alias}"), $category->name, "id='category{$category->id}'");
         return $linkHtml;
     }
 
@@ -369,7 +369,7 @@ class treeModel extends model
      
     public static function createBookLink($category)
     {
-        return html::a(helper::createLink('article', 'admin', "type={$category->type}&categoryID={$category->id}"), $category->name, '', "class='ajax'");
+        return html::a(helper::createLink('article', 'admin', "type={$category->type}&categoryID={$category->id}"), $category->name, "class='ajax'");
     }
 
     /**
@@ -388,9 +388,9 @@ class treeModel extends model
         if($category->type == 'forum' and $category->grade == 2) $childrenLinkClass = 'hidden';
 
         $linkHtml  = $category->name;
-        $linkHtml .= ' ' . html::a(helper::createLink('tree', 'edit',     "category={$category->id}&type={$category->type}"), $lang->tree->edit, '', "class='ajax'");
-        $linkHtml .= ' ' . html::a(helper::createLink('tree', 'children', "type={$category->type}&category={$category->id}"), $lang->category->children, '', "class='$childrenLinkClass ajax'");
-        $linkHtml .= ' ' . html::a(helper::createLink('tree', 'delete',   "category={$category->id}"), $lang->delete, '', "class='deleter'");
+        $linkHtml .= ' ' . html::a(helper::createLink('tree', 'edit',     "category={$category->id}&type={$category->type}"), $lang->tree->edit, "class='ajax'");
+        $linkHtml .= ' ' . html::a(helper::createLink('tree', 'children', "type={$category->type}&category={$category->id}"), $lang->category->children, "class='$childrenLinkClass ajax'");
+        $linkHtml .= ' ' . html::a(helper::createLink('tree', 'delete',   "category={$category->id}"), $lang->delete, "class='deleter'");
 
         return $linkHtml;
     }

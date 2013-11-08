@@ -55,7 +55,7 @@ class tree extends control
             $book = $this->loadModel('help')->getBookByCode(str_replace('book_', '', $type));
             $this->view->book  = $book; 
             $this->view->title = $book->name;
-            $this->view->backButton  =  html::a(helper::createLink('help', 'admin', "type={$type}"), $this->lang->help->backtobooks, '', "class='btn btn-default btn-sm'");
+            $this->view->backButton  =  html::a(helper::createLink('help', 'admin', "type={$type}"), $this->lang->help->backtobooks, "class='btn btn-default btn-sm'");
         }
 
         $this->view->type     = $type;
