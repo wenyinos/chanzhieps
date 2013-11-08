@@ -36,7 +36,7 @@ $common->printPositionBar($category, $article, '', $root);
         else
         {
             printf($lang->article->lblSource);
-            $article->copyURL ? print(html::a($article->copyURL, $article->copySite, '_blank')) : print($article->copySite); 
+            $article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite); 
         }
         printf($lang->article->lblViews, $article->views);
         ?>
@@ -52,7 +52,7 @@ $common->printPositionBar($category, $article, '', $root);
       </div>
     </div>
     <div id='commentBox'></div>
-    <?php echo html::a('', '', '', "name='comment'");?>
+    <?php echo html::a('', '', "name='comment'");?>
   </div>
   <?php include './side.html.php';?>
 </div>
