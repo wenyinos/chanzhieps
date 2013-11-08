@@ -377,7 +377,7 @@ class articleModel extends model
         {
             if($file->isImage)
             {
-                echo html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL, "class='ph-10px'"), '_blank');
+                echo html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL, "class='ph-10px'"), "target='_blank'");
             }
         }
         echo '</br>';
@@ -386,7 +386,7 @@ class articleModel extends model
             if(!$file->isImage)
             {
                 $file->title = $file->title . ".$file->extension";
-                echo html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, '_blank') . '&nbsp;&nbsp;&nbsp'; 
+                echo html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'") . '&nbsp;&nbsp;&nbsp'; 
             }
         }
     }
