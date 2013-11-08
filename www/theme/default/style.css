@@ -266,6 +266,9 @@ table tbody tr.v-middle td, table tbody tr.v-middle th{vertical-align: middle;}
 #headNav{position: absolute;right: 0;top:5px;}
 #headNav .divider{display: inline-block;padding: 0 6px;}
 
+/* drowdown */
+.dropdown-menu { z-index: 1010 }
+
 /* Logo setting.*/
 #logoBox{margin:0;}
 img.logo{max-height: 100px; margin-bottom: 10px;}
