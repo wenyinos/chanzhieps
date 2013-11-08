@@ -321,7 +321,7 @@ class productModel extends model
             if(!$file->isImage)
             {
                 $file->title = $file->title . ".$file->extension";
-                echo html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, '_blank') . '&nbsp;&nbsp;&nbsp'; 
+                echo html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'") . '&nbsp;&nbsp;&nbsp'; 
             }
         }
     }
