@@ -273,9 +273,10 @@ class uri
     {
         global $config;
 
-        if(trim($alias['category']) != '')  return $config->webRoot . 'blog/' . $alias['category'] . '.' . $config->default->view;
-        if(!empty($params))                 return $link .= 'c' . array_shift($params);
-        return $config->webRoot . 'blog.' . $config->default->view;
+        $link = $config->webRoot . 'blog';
+        if(trim($alias['category']) != '')  return $link . '/' . $alias['category'] . '.' . $config->default->view;
+        if(!empty($params))                 return $link . '/c' . array_shift($params) . '.' . $config->default->view;
+        return $link . '.' . $config->default->view;
     }
 
     /**
