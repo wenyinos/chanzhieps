@@ -17,7 +17,7 @@
     <td>
       <?php
       if($result == 'fail') echo nl2br(join('\n', $errors));
-      if($result == 'success') echo html::a('index.php', $lang->home, '', "class='btn btn-primary'");
+      if($result == 'success') echo html::a('index.php', $lang->home, "class='btn btn-primary'");
       ?>
     </td>
   </tr>
