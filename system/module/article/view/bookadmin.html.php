@@ -23,7 +23,7 @@ js::set('type', $type);
         <caption>
           <?php echo $lang->article->list;?>
           <div class="f-right">
-          <?php echo html::a($this->inlink('create', "type={$type}"), $lang->article->create);?>
+          <?php echo html::a($this->inlink('create', "type={$type}&categoryID={$categoryID}"), $lang->article->create);?>
           </div>
         </caption>
         <thead>

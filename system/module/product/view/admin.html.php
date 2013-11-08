@@ -12,7 +12,7 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <table class='table table-bordered table-hover table-striped'>
-  <caption><?php echo $lang->product->list;?><span class='pull-right mr-10px'><?php echo html::a($this->inlink('create'), $lang->product->create);?></span></caption>
+  <caption><?php echo $lang->product->list;?><span class='pull-right mr-10px'><?php echo html::a($this->inlink('create', "category={$categoryID}"), $lang->product->create);?></span></caption>
   <thead>
     <tr class='a-center'>
       <th class='w-60px'><?php echo $lang->product->id;?></th>

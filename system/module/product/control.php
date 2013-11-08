@@ -70,10 +70,11 @@ class product extends control
         if($categoryID) $families = $this->loadModel('tree')->getFamily($categoryID, 'product');
         $products = $this->product->getList($families, $orderBy, $pager);
 
-        $this->view->title    = $this->lang->product->admin;
-        $this->view->products = $products;
-        $this->view->pager    = $pager;
-        $this->view->type     = $type;
+        $this->view->title      = $this->lang->product->admin;
+        $this->view->products   = $products;
+        $this->view->pager      = $pager;
+        $this->view->categoryID = $categoryID;
+        $this->view->type       = $type;
         $this->display();
     }   
 
@@ -83,7 +84,7 @@ class product extends control
      * @access public
      * @return void
      */
-    public function create()
+    public function create($categoryID = '')
     {
         $categories = $this->loadModel('tree')->getOptionMenu('product', 0, $removeRoot = true);
         if(empty($categories))
@@ -98,8 +99,9 @@ class product extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin')));
         }
 
-        $this->view->title      = $this->lang->product->create;
-        $this->view->categories = $categories;
+        $this->view->title           = $this->lang->product->create;
+        $this->view->currentCategory = $categoryID;
+        $this->view->categories      = $categories;
         $this->display();
     }
 
