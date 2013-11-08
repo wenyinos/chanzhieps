@@ -17,14 +17,14 @@
     <div><?php echo $lang->install->desc;?></div>
     
     <?php if(!isset($latestRelease)):?>
-    <p class='a-center'><?php echo html::a($this->createLink('install', 'step1'), $lang->install->start, '',  'class="btn btn-primary"');?></p>
+    <p class='a-center'><?php echo html::a($this->createLink('install', 'step1'), $lang->install->start, "class='btn btn-primary'");?></p>
     <?php else:?>
     <?php vprintf($lang->install->newReleased, $latestRelease);?>
     <p>
       <?php 
       echo $lang->install->choice;
-      echo html::a($latestRelease->url, $lang->install->seeLatestRelease, '_blank');
-      echo html::a($this->createLink('install', 'step1'), $lang->install->keepInstalling, 'class="btn btn-primary"');
+      echo html::a($latestRelease->url, $lang->install->seeLatestRelease, "target='_blank'");
+      echo html::a($this->createLink('install', 'step1'), $lang->install->keepInstalling, "class='btn btn-primary'");
       ?>
     </p>
     <?php endif;?>
