@@ -175,6 +175,7 @@ class threadModel extends model
     public function update($threadID)
     {
         $thread = fixer::input('post')
+            ->specialChars('title')
             ->setForce('editor', $this->session->user->account)
             ->setForce('editedDate', helper::now())
             ->stripTags('content', $this->config->thread->editor->allowTags)
