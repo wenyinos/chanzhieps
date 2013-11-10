@@ -86,7 +86,7 @@ class commentModel extends model
     public function post()
     {
         $comment = fixer::input('post')
-            ->specialChars('content')
+            ->specialChars('content, author')
             ->add('date', helper::now())
             ->add('ip', $this->server->REMOTE_ADDR)
             ->remove('status')
