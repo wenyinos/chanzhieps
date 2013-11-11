@@ -64,6 +64,11 @@ js::set('productID', $product->id);
             <tr><th><?php echo $lang->product->color  . $lang->colon;?></th> <td><?php echo $product->color;?></td></tr>
             <tr><th><?php echo $lang->product->origin . $lang->colon;?></th> <td><?php echo $product->origin;?></td></tr>
           </table>
+          <div class='mt-10px'>
+            <?php if($product->buyLink):?>
+            <?php echo html::linkButton($lang->product->buyNow, $product->buyLink, 'btn btn-primary');?>
+            <?php endif;?>
+          </div>
         </div>
         <div class='c-both'></div>
 
