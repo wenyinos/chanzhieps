@@ -40,7 +40,7 @@
       </div>
       <div class="widget-footer">
         <p>
-          <?php echo html::a($url, $lang->more . $lang->raquo, "class=''");?>
+          <?php echo html::a($url, $lang->more . $lang->raquo);?>
         </p>
       </div>
     </div>
