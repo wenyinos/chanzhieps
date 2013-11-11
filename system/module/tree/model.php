@@ -55,8 +55,7 @@ class treeModel extends model
      */
     public function getAliasByID($categoryID)
     {
-        $category = $this->getByID($categoryID);   
-        if($category and $category->alias != '') return $category->alias;
+        if(isset($this->config->categoryAlias[$categoryID])) return $this->config->categoryAlias[$categoryID];
         return "";
     }
 
