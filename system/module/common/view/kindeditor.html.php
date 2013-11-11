@@ -92,7 +92,7 @@ $(document).ready(function()
                         });
                     }
 
-                    /* Paste in firfox.*/
+                    /* Paste in firefox.*/
                     if(K.GECKO)
                     {
                         K(doc.body).bind('paste', function(ev)
