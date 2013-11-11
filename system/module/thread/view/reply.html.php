@@ -50,6 +50,7 @@
     echo "<div class='w-p100'>" . html::textarea('content', '', "rows='6' class='area-1'") . "</div>";
     echo "<div class='c-both'></div>";
     echo $this->fetch('file', 'buildForm');
+    echo $this->loadModel('captcha')->create4Reply();
     echo html::submitButton();
 
     echo html::hidden('recTotal',   $pager->recTotal);
