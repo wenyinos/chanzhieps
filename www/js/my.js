@@ -12,7 +12,7 @@ $(document).ready(function()
     $.setAjaxDeleter('.deleter');
 
     /* Ping for keep login every six minute. */
-    if(needPing) setInterval('setPing()', 1000 * 60);
+    if(needPing && config.runMode == 'admin') setInterval('setPing()', 1000 * 360);
 
     $("#topNav li").hover(function () 
     {
