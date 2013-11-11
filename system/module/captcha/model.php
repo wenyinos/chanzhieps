@@ -42,15 +42,35 @@ class captchaModel extends model
     {
         $captcha = $this->create();
         return <<<EOT
-<th>{$this->lang->captcha->common}</th>;
+<th>{$this->lang->captcha->common}</th>
 <td>
-  <div class="col-lg-6">
   <h4><span class='label label-danger'>{$captcha->first} {$captcha->operator} {$captcha->second}</span>&nbsp;&nbsp;
   {$this->lang->captcha->equal} &nbsp;&nbsp;
   <input type='text' name='captcha' id='captcha' class='w-60px a-center' placeholder='{$this->lang->captcha->placeholder}' />
   </h4>
-  </div>
-</td>;
+</td>
+EOT;
+    }
+
+    /**
+     * Create captcha for reply.
+     * 
+     * @access public
+     * @return string
+     */
+    public function create4Reply()
+    {
+        $captcha = $this->create();
+        return <<<EOT
+<div class='row'>
+<span class='col-md-1'><h4>{$this->lang->captcha->common}</h4></span>
+<span class='col-md-11'>
+  <h4 class='label label-danger'>{$captcha->first} {$captcha->operator} {$captcha->second}</h4>&nbsp;&nbsp;
+  {$this->lang->captcha->equal} &nbsp;&nbsp;
+  <input type='text' name='captcha' id='captcha' class='w-60px a-center' placeholder='{$this->lang->captcha->placeholder}'/>
+</span>
+</div>
+<div class='c-both'></div>
 EOT;
     }
 
