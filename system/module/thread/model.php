@@ -131,7 +131,12 @@ class threadModel extends model
             ->remove('files, labels, views, replies, hidden, stick, readonly')
             ->get();
 
-        $this->dao->insert(TABLE_THREAD)->data($thread)->autoCheck()->batchCheck('title, content', 'notempty')->exec();
+        $this->dao->insert(TABLE_THREAD)
+            ->data($thread, $skip = 'captcha')
+            ->autoCheck()
+            ->check('captcha', 'captcha')
+            ->batchCheck('title, content', 'notempty')
+            ->exec();
 
         if(!dao::isError())
         {
