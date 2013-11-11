@@ -50,5 +50,4 @@ class siteModel extends model
         $path  = "common.site"; 
         return $this->loadModel('setting')->setItems($path, $settings);
     }
-
 }
