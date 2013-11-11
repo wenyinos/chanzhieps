@@ -90,7 +90,12 @@ class replyModel extends model
             ->remove('recTotal, recPerPage, pageID, files, labels, hidden')
             ->get();
 
-        $this->dao->insert(TABLE_REPLY)->data($reply)->autoCheck()->check('content', 'notempty')->exec();
+        $this->dao->insert(TABLE_REPLY)
+            ->data($reply, $skip = 'captcha')
+            ->autoCheck()
+            ->check('captcha', 'captcha')
+            ->batchCheck('content', 'notempty')
+            ->exec();
 
         if(!dao::isError())
         {
