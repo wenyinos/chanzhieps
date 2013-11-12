@@ -17,16 +17,16 @@
   <table class='table table-form'>
     <caption><?php echo $providerName;?><span class='pull-right mr-10px'><?php echo html::a("http://www.chanzhi.org/help-read-23.html", $lang->site->oauthHelp, "target='_blank'");?></span></caption> 
     <tr>
+      <th class='w-100px'><?php echo $lang->user->oauth->verification;?></th> 
+      <td><?php echo html::input('verification', $oauth->verification, "class='text-5'");?></td> 
+    </tr>
+    <tr>
       <th class='w-100px'><?php echo $lang->user->oauth->clientID;?></th> 
       <td><?php echo html::input('clientID', $oauth->clientID, "class='text-5'");?></td> 
     </tr>
     <tr>
       <th><?php echo $lang->user->oauth->clientSecret;?></th> 
       <td><?php echo html::input('clientSecret', $oauth->clientSecret, "class='text-5'");?></td> 
-    </tr>
-    <tr>
-      <th class='w-100px'><?php echo $lang->user->oauth->verification;?></th> 
-      <td><?php echo html::input('verification', $oauth->verification, "class='text-5'");?></td> 
     </tr>
     <?php if($providerCode == 'sina'):?>
     <tr>
