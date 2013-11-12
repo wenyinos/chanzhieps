@@ -160,23 +160,17 @@ class productModel extends model
     /**
      * Get the prev and next product.
      * 
-     * @param  array  $links    the link products.
      * @param  int    $current  the current product id.
+     * @param  int    $category the category id.
      * @access public
      * @return array
      */
-    public function getPrevAndNext($links, $current)
+    public function getPrevAndNext($current, $category)
     {
-        $prev = array();
-        $next = array();
-        $keys = array_keys($links);
-
-        $currentKey = array_search($current, $keys);
-        $prevKey    = $currentKey - 1;
-        $nextKey    = $currentKey + 1;
-
-        if(isset($keys[$prevKey])) $prev = array('id' => $keys[$prevKey], 'name' => $links[$keys[$prevKey]]->name, 'alias' => $links[$keys[$prevKey]]->alias);
-        if(isset($keys[$nextKey])) $next = array('id' => $keys[$nextKey], 'name' => $links[$keys[$nextKey]]->name, 'alias' => $links[$keys[$nextKey]]->alias);
+        $prevId = $this->dao->select('id')->from(TABLE_RELATION)->where('category')->eq($category)->andWhere('id')->lt($current)->orderBy('id_desc')->limit(1)->fetch('id');
+        $nextId = $this->dao->select('id')->from(TABLE_RELATION)->where('category')->eq($category)->andWhere('id')->gt($current)->orderBy('id')->limit(1)->fetch('id');
+        $prev   = $this->dao->select('id, name, alias')->from(TABLE_PRODUCT)->where('id')->eq($prevId)->fetch();
+        $next   = $this->dao->select('id, name, alias')->from(TABLE_PRODUCT)->where('id')->eq($nextId)->fetch();
 
         return array('prev' => $prev, 'next' => $next);
     }

@@ -24,9 +24,9 @@ class product extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager(0, 15, $pageID);
 
-        $category = $this->loadModel('tree')->getByID($categoryID);
-        if(!$category) $category = $this->tree->getByAlias($categoryID, 'product');
-        $products = $this->product->getList($this->tree->getFamily($categoryID), 'id_desc', $pager);
+        $category   = $this->loadModel('tree')->getByID($categoryID, 'product');
+        $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
+        $products   = $this->product->getList($this->tree->getFamily($categoryID), 'id_desc', $pager);
 
         if($category)
         {
@@ -167,8 +167,7 @@ class product extends control
         $this->view->keywords    = $keywords;
         $this->view->desc        = $desc;
         $this->view->product     = $product;
-        $this->view->links       = $this->product->getPairs($category->id, 'id_desc');
-        $this->view->prevAndNext = $this->product->getPrevAndNext($this->view->links, $product->id);
+        $this->view->prevAndNext = $this->product->getPrevAndNext($product->id, $category->id);
         $this->view->category    = $category;
         $this->view->contact     = $this->loadModel('company')->getContact();
 

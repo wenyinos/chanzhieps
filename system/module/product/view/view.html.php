@@ -81,8 +81,8 @@ js::set('productID', $product->id);
       </div>
       <?php extract($prevAndNext);?>
       <div class='row f-12px mt-10px page-nav'>
-        <div class='col-md-6 a-left'> <?php $prev ? print($lang->product->prev . $lang->colon . html::a(inlink('view', "id=$prev[id]", "category={$category->alias}&name={$prev['alias']}"), $prev['name'])) : print($lang->product->none);?></div>
-        <div class='col-md-6 a-right'><?php $next ? print($lang->product->next . $lang->colon . html::a(inlink('view', "id=$next[id]", "category={$category->alias}&name={$next['alias']}"), $next['name'])) : print($lang->product->none);?></div>
+        <div class='col-md-6 a-left'> <?php $prev ? print($lang->product->prev . $lang->colon . html::a(inlink('view', "id={$prev->id}", "category={$category->alias}&name={$prev->alias}"), $prev->name)) : print($lang->product->none);?></div>
+        <div class='col-md-6 a-right'><?php $next ? print($lang->product->next . $lang->colon . html::a(inlink('view', "id={$next->id}", "category={$category->alias}&name={$next->alias}"), $next->name)) : print($lang->product->none);?></div>
       </div>      
     </div>
     <div id='commentBox'></div>
