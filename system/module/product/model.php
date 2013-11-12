@@ -200,6 +200,7 @@ class productModel extends model
         $this->dao->insert(TABLE_PRODUCT)
             ->data($product, $skip = 'categories')
             ->autoCheck()
+            ->check('buyLink', 'URL')
             ->batchCheck($this->config->product->create->requiredFields, 'notempty')
             ->exec();
         $productID = $this->dao->lastInsertID();
@@ -235,6 +236,7 @@ class productModel extends model
         $this->dao->update(TABLE_PRODUCT)
             ->data($product, $skip = 'categories')
             ->autoCheck()
+            ->check('buyLink', 'URL')
             ->batchCheck($this->config->product->edit->requiredFields, 'notempty')
             ->where('id')->eq($productID)
             ->exec();
