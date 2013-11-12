@@ -519,7 +519,7 @@ class commonModel extends model
     }
 
     /**
-     * Print the positon bar of article module.
+     * Print the positon bar of blog module.
      * 
      * @param  object $module 
      * @param  object $article 
