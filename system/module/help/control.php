@@ -106,14 +106,7 @@ class help extends control
         $book = $this->loadModel('setting')->getItem("owner=system&module=common&section=book&key=$code");
         $book = json_decode($book);
 
-        if(!is_numeric($categoryID))
-        {
-            $bookCategory  = $this->loadModel('tree')->getByAlias($categoryID, 'book_' . $code);
-        }
-        else
-        {
-            $bookCategory = $this->loadModel('tree')->getById($categoryID);
-        }
+        $bookCategory = $this->loadModel('tree')->getByID($categoryID, 'book_' . $code);
 
         if(empty($bookCategory)) $bookCategory = new stdclass();
         $bookCategory->book = $book->name;

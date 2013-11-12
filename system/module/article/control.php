@@ -37,9 +37,9 @@ class article extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal = 0, $recPerPage = 5, $pageID);
 
-        $category = $this->loadModel('tree')->getByID($categoryID);
-        if(!$category) $category = $this->tree->getByAlias($categoryID, 'article');
-        $articles = $this->article->getList('article', $this->tree->getFamily($categoryID, 'article'), 'id_desc', $pager);
+        $category   = $this->loadModel('tree')->getByID($categoryID, 'article');
+        $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
+        $articles   = $this->article->getList('article', $this->tree->getFamily($categoryID, 'article'), 'id_desc', $pager);
 
         if($category)
         {

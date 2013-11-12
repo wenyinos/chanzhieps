@@ -36,8 +36,7 @@ class forum extends control
      */
     public function board($boardID = 0, $pageID = 1)
     {
-        $board = $this->loadModel('tree')->getByID($boardID);
-        if(empty($board)) $board = $this->tree->getByAlias($boardID, 'forum');
+        $board = $this->loadModel('tree')->getByID($boardID, 'forum');
 
         if(!$board) die(js::locate('back'));
  
@@ -83,7 +82,7 @@ class forum extends control
         $threads = $boards ? $this->loadModel('thread')->getList($boards, $orderBy, $pager) : array();
 
         $this->view->title   = $this->view->board ? $this->view->board->name : $this->lang->forum->admin;
-        $this->view->board   = $this->loadModel('tree')->getById($boardID);
+        $this->view->board   = $this->loadModel('tree')->getByID($boardID, 'forum');
         $this->view->threads = $threads;
         $this->view->pager   = $pager;
 
