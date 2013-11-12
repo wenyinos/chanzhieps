@@ -27,7 +27,7 @@
             {
                 echo html::a('#reply', $lang->reply->common);
                 if($this->thread->canEdit($board, $reply->author)) echo html::a($this->createLink('reply', 'edit',   "replyID=$reply->id"), $lang->edit);
-                if($this->thread->canManage($board->moderators)) echo html::a($this->createLink('reply', 'delete', "replyID=$reply->id"), $lang->delete, '', "class='deleter'");
+                if($this->thread->canManage($board->moderators)) echo html::a($this->createLink('reply', 'delete', "replyID=$reply->id"), $lang->delete, "class='deleter'");
             }
             else
             {
@@ -50,6 +50,7 @@
     echo "<div class='w-p100'>" . html::textarea('content', '', "rows='6' class='area-1'") . "</div>";
     echo "<div class='c-both'></div>";
     echo $this->fetch('file', 'buildForm');
+    echo $this->loadModel('captcha')->create4Reply();
     echo html::submitButton();
 
     echo html::hidden('recTotal',   $pager->recTotal);

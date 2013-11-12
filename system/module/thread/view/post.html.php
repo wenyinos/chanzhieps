@@ -30,6 +30,7 @@
       <th><?php echo $lang->thread->file;?></th>
       <td><?php echo $this->fetch('file', 'buildForm');?></td>
     </tr>
+    <tr><?php echo $this->loadModel('captcha')->create4Comment();?></tr>
     <tr>
       <th></th>
       <td><?php echo html::submitButton();?></td>

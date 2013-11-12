@@ -12,7 +12,7 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <table class='table table-bordered table-hover table-striped'>
-  <caption><?php echo $lang->product->list;?><span class='pull-right mr-10px'><?php echo html::a($this->inlink('create'), $lang->product->create);?></span></caption>
+  <caption><?php echo $lang->product->list;?><span class='pull-right mr-10px'><?php echo html::a($this->inlink('create', "category={$categoryID}"), $lang->product->create);?></span></caption>
   <thead>
     <tr class='a-center'>
       <th class='w-60px'><?php echo $lang->product->id;?></th>
@@ -38,9 +38,9 @@
         $categories    = $product->categories;
         $categoryAlias = current($categories)->alias;
         echo html::a($this->createLink('product', 'edit', "productID=$product->id"), $lang->edit);
-        echo html::a(commonModel::createFrontLink('product', 'view',  "productID=$product->id", "name=$product->alias&category=$categoryAlias"), $lang->preview, '_blank');
-        echo html::a($this->createLink('file',    'browse', "objectType=product&objectID=$product->id"), $lang->product->files, '', "data-toggle='modal' data-width='1000'");
-        echo html::a($this->createLink('product', 'delete', "productID=$product->id"), $lang->delete, '', 'class="deleter"');
+        echo html::a(commonModel::createFrontLink('product', 'view',  "productID=$product->id", "name=$product->alias&category=$categoryAlias"), $lang->preview, "target='_blank'");
+        echo html::a($this->createLink('file',    'browse', "objectType=product&objectID=$product->id"), $lang->product->files, "data-toggle='modal' data-width='1000'");
+        echo html::a($this->createLink('product', 'delete', "productID=$product->id"), $lang->delete, "class='deleter'");
         ?>
       </td>
     </tr>

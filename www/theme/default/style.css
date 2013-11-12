@@ -266,6 +266,9 @@ table tbody tr.v-middle td, table tbody tr.v-middle th{vertical-align: middle;}
 #headNav{position: absolute;right: 0;top:5px;}
 #headNav .divider{display: inline-block;padding: 0 6px;}
 
+/* drowdown */
+.dropdown-menu { z-index: 1010 }
+
 /* Logo setting.*/
 #logoBox{margin:0;}
 img.logo{max-height: 100px; margin-bottom: 10px;}
@@ -318,6 +321,7 @@ ul.breadcrumb .divider{font-size:20px;color:#3280FC}
 .box {margin-bottom: 20px; padding:0; border:1px solid #ddd;}
 .box h4.title {margin:0; padding:0 0 0 10px; border-bottom:1px solid #ddd;-moz-border-radius: 5px 5px 0 0; -webkit-border-radius: 5px 5px 0 0; border-radius: 5px 5px 0 0; height:40px; line-height:40px; font-size:14px; font-weight:700; background: #EFEFEF; color:#333; }
 .box .content{padding:20px;}
+.box .content img{max-width: 99%;}
 .box ul,.box ol {margin:10px 20px;}
 .box .content .box{padding: 20px;}
 .box .page-nav{padding: 15px;padding-top: 5px;}

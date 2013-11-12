@@ -279,4 +279,18 @@ class file extends control
         if(!dao::isError()) $this->send(array('result' => 'success')); 
         $this->send(array('result' => 'fail', 'message' => dao::getError())); 
     }
+
+    /**
+     * Paste image in kindeditor at firefox and chrome. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function ajaxPasteImage()
+    {
+        if($_POST)
+        {
+            echo $this->file->pasteImage($this->post->editor);
+        }
+    }
 }

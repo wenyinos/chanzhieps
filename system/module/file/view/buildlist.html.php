@@ -14,13 +14,13 @@
   <?php foreach($files as $file):?>
   <tr class='a-center'>
     <td><?php echo $i ++;?></td>
-    <th class='a-left'><?php echo html::a($this->createLink('file', 'download', "id=$file->id"), $file->title, $file->isImage ? '_blank' : '');?></th>
+    <th class='a-left'><?php echo html::a($this->createLink('file', 'download', "id=$file->id"), $file->title, $file->isImage ? "target='_blank'" : '');?></th>
     <td><?php echo $file->extension;?></td>
     <td><?php echo $file->size;?></td>
     <td><?php echo $file->addedDate;?></td>
     <td><?php $file->public or (!$file->public and $app->user->account != 'guest') ? print($lang->file->publics[$file->public]) : print(html::a($this->createLink('user', 'login'), $lang->file->publics[$file->public]));?></td>
     <td><?php echo $file->downloads;?></td>
-    <td><?php echo html::a($this->createLink('file', 'download', "id=$file->id"), $lang->file->download, $file->isImage ? '_blank' : '', 'class="red"');?></td>
+    <td><?php echo html::a($this->createLink('file', 'download', "id=$file->id"), $lang->file->download, $file->isImage ? "target='_blank' class='red'" : "class='red'");?></td>
   </tr>
   <?php endforeach;?>
 </table>

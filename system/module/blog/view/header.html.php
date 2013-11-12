@@ -92,7 +92,7 @@ js::import($jsRoot . 'respond/min.js');
         <?php echo html::a($config->webRoot, '<i class="icon-home icon-large"></i> ' . $lang->blog->siteHome);?>
       </li>
       <li class="pull-right">
-        <?php echo html::a(helper::createLink('rss', 'index', '', '', 'xml') . '?type=blog', '<i class="icon icon-rss"></i> RSS', '_blank'); ?>
+        <?php echo html::a(helper::createLink('rss', 'index', '', '', 'xml') . '?type=blog', "<i class='icon icon-rss'></i> RSS", "target='_blank'"); ?>
       </li>
     </ul>
   </div>

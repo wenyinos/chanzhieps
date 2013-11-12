@@ -10,7 +10,7 @@
     ?>
     </h4>
     <div class="panel-actions panel-actions-sm">
-      <?php if($this->forum->canPost($board)) echo html::a($this->createLink('thread', 'post', "boardID=$board->id"), '<i class="icon-pencil icon-large"></i>&nbsp;&nbsp;' . $lang->forum->post, '', 'class="btn btn-primary btn-wider"');?>
+      <?php if($this->forum->canPost($board)) echo html::a($this->createLink('thread', 'post', "boardID=$board->id"), '<i class="icon-pencil icon-large"></i>&nbsp;&nbsp;' . $lang->forum->post, "class='btn btn-primary btn-wider'");?>
     </div>
   </div>
   <div class="panel-body no-padding">

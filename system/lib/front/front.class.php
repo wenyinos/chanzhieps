@@ -75,17 +75,14 @@ class html
      *
      * @param  string $href      the link url.
      * @param  string $title     the link title.
-     * @param  string $target    the target window
      * @param  string $misc      other params.
      * @return string
      */
-    static public function a($href = '', $title = '', $target = "_self", $misc = '')
+    static public function a($href = '', $title = '', $misc = '')
     {
         global $config;
         if(empty($title)) $title = $href;
-
-        if($target == '_self' or $target == '') return "<a href='$href' $misc>$title</a>\n";
-        return "<a href='$href' target='$target' $misc>$title</a>\n";
+        return "<a href='$href' $misc>$title</a>\n";
     }
 
     /**

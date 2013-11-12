@@ -23,7 +23,7 @@ js::set('type', $type);
         <caption>
           <?php echo $lang->article->list;?>
           <div class="f-right">
-          <?php echo html::a($this->inlink('create', "type={$type}"), $lang->article->create);?>
+          <?php echo html::a($this->inlink('create', "type={$type}&categoryID={$categoryID}"), $lang->article->create);?>
           </div>
         </caption>
         <thead>
@@ -57,9 +57,9 @@ js::set('type', $type);
             <td>
               <?php
               echo html::a($this->createLink('article', 'edit', "articleID=$article->id&type=$article->type"), $lang->edit);
-              echo html::a($this->article->createPreviewLink($article->id), $lang->preview, '_blank');
-              echo html::a($this->createLink('file',    'browse', "objectType=article&objectID=$article->id"), $lang->article->files, '', "data-toggle='modal' data-width='1000'");
-              echo html::a($this->createLink('article', 'delete', "articleID=$article->id"), $lang->delete, '', 'class="deleter"');
+              echo html::a($this->article->createPreviewLink($article->id), $lang->preview, "target='_blank'");
+              echo html::a($this->createLink('file', 'browse', "objectType=article&objectID=$article->id"), $lang->article->files, "data-toggle='modal' data-width='1000'");
+              echo html::a($this->createLink('article', 'delete', "articleID=$article->id"), $lang->delete, 'class="deleter"');
               ?>
             </td>
           </tr>

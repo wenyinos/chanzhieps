@@ -38,8 +38,9 @@
       <th><?php echo $lang->company->weibo;?></th> 
       <td>
         <div class="input-group text-3">
-        <span class="input-group-addon">http://weibo.com/</span>
-        <?php echo html::input('weibo', isset($contact->weibo) ? $contact->weibo : '', "class='form-control'");?>
+          <span class="input-group-addon">http://weibo.com/</span>
+          <?php echo html::input('weibo', isset($contact->weibo) ? $contact->weibo : '', "class='form-control'");?>
+        </div>
       </td>
     </tr>
      <tr>

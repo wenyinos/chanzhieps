@@ -23,12 +23,15 @@ js::set('articleID', $article->id);
           else
           {
               printf($lang->article->lblSource);
-              $article->copyURL ? print(html::a($article->copyURL, $article->copySite, '_blank')) : print($article->copySite); 
+              $article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite); 
           }
           printf($lang->article->lblViews, $article->views);
 
-          $sina = json_decode($this->config->oauth->sina);
-          if($sina->widget) echo $sina->widget; 
+          if(!empty($this->config->oauth->sina))
+          {
+              $sina = json_decode($this->config->oauth->sina);
+              if($sina->widget) echo $sina->widget; 
+          }
           ?>
         </div>
         <?php if($article->summary):?>
@@ -47,7 +50,7 @@ js::set('articleID', $article->id);
       </div>
     </div>
     <div id='commentBox'></div>
-    <?php echo html::a('', '', '', "name='comment'");?>
+    <?php echo html::a('', '', "name='comment'");?>
   </div>
   <?php include '../../common/view/side.html.php'; ?>
 </div>

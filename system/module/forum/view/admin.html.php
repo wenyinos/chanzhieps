@@ -21,7 +21,7 @@
         <?php
         $iconRoot = $themeRoot . 'default/images/forum/';
         echo $thread->isNew ? "<span class='new-board'>&nbsp;</span>" : "<span class='common-board'>&nbsp;</span>";
-        echo html::a(commonModel::createFrontLink('thread', 'view', "threadID=$thread->id"), $thread->title, '_blank');
+        echo html::a(commonModel::createFrontLink('thread', 'view', "threadID=$thread->id"), $thread->title, "target='_blank'");
         ?>
       </td>
       <td><?php echo $thread->author;?></td>
@@ -30,7 +30,7 @@
       <td><?php echo $thread->replies;?></td>
       <td class='a-left'><?php if($thread->replies) echo substr($thread->repliedDate, 5, -3) . ' ' . $thread->repliedBy;?></td>  
       <td>
-        <?php echo html::a($this->createLink('thread', 'delete', "threadID=$thread->id"), $lang->delete, '', "class='deleter'"); ?>
+        <?php echo html::a($this->createLink('thread', 'delete', "threadID=$thread->id"), $lang->delete, "class='deleter'"); ?>
       </td>
     </tr>  
     <?php endforeach;?>

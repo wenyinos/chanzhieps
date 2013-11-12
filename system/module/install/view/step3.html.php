@@ -28,7 +28,7 @@
         ?>
       </td>
     </tr>
-    <tr><td class='a-center'><?php echo html::a(inlink('step4'), $lang->install->next, '', 'class="btn btn-primary"');?></td></tr>
+    <tr><td class='a-center'><?php echo html::a(inlink('step4'), $lang->install->next, "class='btn btn-primary'");?></td></tr>
   </table>
   <?php endif;?>
 </div>

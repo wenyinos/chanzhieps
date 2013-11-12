@@ -34,10 +34,10 @@
                       echo $lang->thread->sticks[$thread->stick] . ' ';
                       foreach($lang->thread->sticks as $stick => $label)
                       {
-                          if($thread->stick != $stick) echo html::a(inlink('stick', "thread=$thread->id&stick=$stick"), $label, '', "class='jsoner'");
+                          if($thread->stick != $stick) echo html::a(inlink('stick', "thread=$thread->id&stick=$stick"), $label, "class='jsoner'");
                       }
-                      echo html::a(inlink('hide',   "threadID=$thread->id"), $lang->thread->hide, '', "class='jsoner'");
-                      echo html::a(inlink('delete', "threadID=$thread->id"), $lang->delete, '', "class='deleter'");
+                      echo html::a(inlink('hide',   "threadID=$thread->id"), $lang->thread->hide, "class='jsoner'");
+                      echo html::a(inlink('delete', "threadID=$thread->id"), $lang->delete, "class='deleter'");
                   }
               }    
               else

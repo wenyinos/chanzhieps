@@ -80,10 +80,11 @@ class article extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $subCategories = $this->dao->select('id')->from(TABLE_CATEGORY)->where('parent')->eq((int)$categoryID)->andWhere('type')->eq($type)->orderBy('`order`')->fetchPairs();
-        if($subCategories) $articleList = $this->article->getList($type, $subCategories, 'id_desc');
+        $children = $this->loadModel('tree')->getChildren($categoryID, $type);
+        $articleList = array();
+        if(!empty($children)) $articleList = $this->article->getList($type, $subCategories, 't2.id_desc');
 
-        $orderBy = 'id_desc';
+        $orderBy = 't2.id_desc';
         if(empty($articleList) && strpos($type, 'book_') !== false) $orderBy = 't1.order';
         
         $families = $categoryID ? $this->loadModel('tree')->getFamily($categoryID, $type) : '';
@@ -107,6 +108,7 @@ class article extends control
         $this->view->articles      = $articles;
         $this->view->pager         = $pager;
         $this->view->articleList   = $articleList;
+        $this->view->categoryID    = $categoryID;
         $this->view->type          = $type;
 
         if(strpos($type, 'book_') !== false)
@@ -119,7 +121,7 @@ class article extends control
     }   
 
     /**
-     * Create a article.
+     * Create an article.
      * 
      * @param  string $type 
      * @param  int    $categoryID

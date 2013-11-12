@@ -10,8 +10,10 @@
             <?php 
             foreach($lang->user->oauth->providers as $providerCode => $providerName) 
             {
+                $providerConfig = json_decode($config->oauth->$providerCode);
+                if(empty($providerConfig->clientID)) continue;
                 $params = "provider=$providerCode" . ($referer ? "&referer=" . helper::safe64Encode($referer) : '');
-                echo html::a(inlink('oauthLogin', $params), "<i class='icon-{$providerCode} icon-large'></i> " . $providerName, '', "class='btn btn-default btn-wider btn-lgx btn-block'");
+                echo html::a(inlink('oauthLogin', $params), "<i class='icon-{$providerCode} icon-large'></i> " . $providerName, "class='btn btn-default btn-wider btn-lgx btn-block'");
             }
             ?>
           </div>

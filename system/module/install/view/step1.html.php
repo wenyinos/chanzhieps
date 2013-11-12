@@ -77,8 +77,8 @@ js::set('wholeResult', $wholeResult);
     <tr>
       <td colspan='4' class='a-center'>
         <?php
-        if($wholeResult == 'ok')   echo html::a(inLink('step2'), $lang->install->next, '', 'class="btn btn-primary"');
-        if($wholeResult == 'fail') echo html::a(inLink('step1'), $lang->install->reload, '', 'class="btn btn-primary"');
+        if($wholeResult == 'ok')   echo html::a(inLink('step2'), $lang->install->next, "class='btn btn-primary'");
+        if($wholeResult == 'fail') echo html::a(inLink('step1'), $lang->install->reload, "class='btn btn-primary'");
         ?>
       </td>
     </tr>

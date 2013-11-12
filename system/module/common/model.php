@@ -23,7 +23,7 @@ class commonModel extends model
         $this->startSession();
         $this->setUser();
         $this->loadConfigFromDB();
-        $this->loadCategoryAlias();
+        $this->loadAlias();
         $this->loadModel('site')->setSite();
     }
 
@@ -253,9 +253,9 @@ class commonModel extends model
         global $app, $lang , $config;
 
         $string  = '<ul class="nav navbar-nav navbar-right">';
-        $string .= sprintf('<li>%s</li>', html::a($config->webRoot, '<i class="icon-home icon-large"></i> ' . $lang->frontHome, '_blank', 'class="navbar-link"'));
+        $string .= sprintf('<li>%s</li>', html::a($config->webRoot, '<i class="icon-home icon-large"></i> ' . $lang->frontHome, "target='_blank' class='navbar-link'"));
         $string .= sprintf('<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-large"></i> %s <b class="caret"></b></a>', $app->user->realname);
-        $string .= sprintf('<ul class="dropdown-menu"><li>%s</li><li>%s</li></ul>', html::a(helper::createLink('user', 'changePassword'), $lang->changePassword, '', "data-toggle='modal'"), html::a(helper::createLink('user','logout'), $lang->logout, ''));
+        $string .= sprintf('<ul class="dropdown-menu"><li>%s</li><li>%s</li></ul>', html::a(helper::createLink('user', 'changePassword'), $lang->changePassword, "data-toggle='modal'"), html::a(helper::createLink('user','logout'), $lang->logout));
         $string .= '</li></ul>';
 
         return $string;
@@ -627,14 +627,19 @@ class commonModel extends model
     }
     
     /**
-     * Load category alias 
+     * Load category and page alias. 
      *
-     * return viod
+     * @access public
+     * @return void
      */
-    public function loadCategoryAlias()
+    public function loadAlias()
     {
         if(version_compare($this->loadModel('setting')->getVersion(), 1.4) <= 0) return true;
+
         $this->config->seo->alias->category = $this->dao->select('alias, id as category, type as module')->from(TABLE_CATEGORY)->where('alias')->ne('')->andWhere('type')->in('article,product')->fetchAll('alias');
         $this->config->seo->alias->page     = $this->dao->select("alias, id, 'page' as module")->from(TABLE_ARTICLE)->where('type')->eq('page')->fetchAll('alias');
+
+        $this->config->categoryAlias = array();
+        foreach($this->config->seo->alias->category as $alias => $category) $this->config->categoryAlias[$category->category] = $alias;
     }
 }

@@ -28,10 +28,15 @@
       <th><?php echo $lang->product->alias;?></th>
       <td>
         <div class="input-group text-1">
-        <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot?>product/id@</span>
-        <?php echo html::input('alias', '', "class='text-1 form-control'");?>
-        <span class="input-group-addon">.html</span>
+          <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot?>product/id@</span>
+          <?php echo html::input('alias', '', "class='text-1 form-control'");?>
+          <span class="input-group-addon">.html</span>
+        </div>
       </td>
+    </tr>
+    <tr>
+      <th><?php echo $lang->product->buyLink;?></th>
+      <td><?php echo html::input('buyLink', '', "class='text-1'");?></td>
     </tr>
     <tr>
       <th><?php echo $lang->product->keywords;?></th>

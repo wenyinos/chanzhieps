@@ -13,8 +13,10 @@ footer{margin: 20px 0;text-align: left;}
 #headNav .divider{padding: 0; margin: 0; border-left: 1px solid #149279; border-right: 1px solid #19ab8e; text-indent: -999em;}
 #headNav .login-msg{display: inline-block; padding-left: 20px; color: #f1f1f1;}
 #headNav a{color: #f1f1f1; display: inline-block; padding: 10px 15px; background-color: #16a085; -moz-border-radius:6px; -webkit-border-radius:6px; border-radius:6px; -webkit-transition:background 0.5s; -moz-transition:background 0.5s; -o-transition:background 0.5s; transition:background 0.5s;}
-#headNav a:first-child{padding-left: 25px; -webkit-border-top-right-radius:0px; -webkit-border-bottom-right-radius:0px; -moz-border-radius-topright:0px; -moz-border-radius-bottomright:0px; border-top-right-radius:0px; border-bottom-right-radius:0px;}
-#headNav a:last-child{padding-right: 25px; -webkit-border-top-left-radius:0px; -webkit-border-bottom-left-radius:0px; -moz-border-radius-topleft:0px; -moz-border-radius-bottomleft:0px; border-top-left-radius:0px; border-bottom-left-radius:0px;}
+#headNav a:first-child{padding-left: 25px; -moz-border-radius:6px 0 0 6px; -webkit-border-radius:6px 0 0 6px; border-radius:6px 0 0 6px; }
+#headNav a:last-child,#headNav span:last-child > a {padding-right: 25px; -moz-border-radius:0 6px 6px 0; -webkit-border-radius:0 6px 6px 0; border-radius:0 6px 6px 0;}
+#headNav .caret{border-top-color: #f1f1f1; border-bottom-color: #f1f1f1;}
+#headNav .dropdown-menu a {display: block;background-color: #fff;color: #333;}
 #headNav a:hover{background-color: #1abc9c; color: #fff; text-decoration: none; -webkit-transition:background 0.5s; -moz-transition:background 0.5s; -o-transition:background 0.5s; transition:background 0.5s;}
 
 /* name style. */

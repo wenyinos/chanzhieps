@@ -22,7 +22,7 @@
     $current = $theme == $config->site->theme ? 'current' : '';
     ?>
     <td class='a-center <?php echo $current; ?>'>
-      <p><?php echo html::a(inlink('settheme', "theme={$theme}"), html::image($themeRoot . $theme . DS . 'preview.png', "class='thumbnail preview {$current}'"), '', "class='ajax'");?></p>
+      <p><?php echo html::a(inlink('settheme', "theme={$theme}"), html::image($themeRoot . $theme . DS . 'preview.png', "class='thumbnail preview {$current}'"), "class='ajax'");?></p>
       <div class='info'> <?php echo $name;?> </div>
     </td>
   <?php endforeach;?>

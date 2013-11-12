@@ -144,7 +144,7 @@ class helpModel extends model
     {
         $book = $this->getBookByCode(str_replace('book_', '', $type));
         $treeMenu    = $this->loadModel('tree')->getTreeMenu($type, 0, array('treeModel', 'createBookLink'));
-        $backButton  =  html::a(helper::createLink('help', 'admin', "type={$type}"), $this->lang->help->backtobooks, '', "class='btn btn-default btn-sm'");
+        $backButton  =  html::a(helper::createLink('help', 'admin', "type={$type}"), $this->lang->help->backtobooks, "class='btn btn-default btn-sm'");
 
         $categoryBox = <<<Eof
             <div class='col-md-2'>

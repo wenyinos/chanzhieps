@@ -27,16 +27,16 @@ js::set('productID', $product->id);
         <?php $title = $product->image->primary->title ? $product->image->primary->title : $product->name;?>
         <?php if(empty($product->images)):?>
         <div class='primary'>
-          <?php echo html::a(inlink('view', "id=$product->id"), html::image($themeRoot . 'default/images/main/noimage.gif', "title='{$title}' alt='{$product->name}'"), '', "class='big-image'");?>
+          <?php echo html::a(inlink('view', "id=$product->id"), html::image($themeRoot . 'default/images/main/noimage.gif', "title='{$title}' alt='{$product->name}'"), "class='big-image'");?>
         </div>
         <?php else:?>
         <div class='primary'>
-          <?php echo html::a(inlink('view', "id=$product->id"), html::image($product->image->primary->smallURL, "title='{$title}' alt='{$product->name}'"), '', "class='big-image'");?>
+          <?php echo html::a(inlink('view', "id=$product->id"), html::image($product->image->primary->smallURL, "title='{$title}' alt='{$product->name}'"), "class='big-image'");?>
           <ul class='list'>
             <?php foreach($product->image->list as $image):?>
             <?php $title = $image->title ? $image->title : $product->name;?>
             <li>
-              <?php echo html::a(inlink('view', "id=$product->id"), html::image($image->smallURL, "title='{$title}' alt='{$product->name}'"), '', "class='little-image'");?>
+              <?php echo html::a(inlink('view', "id=$product->id"), html::image($image->smallURL, "title='{$title}' alt='{$product->name}'"), "class='little-image'");?>
             </li>
             <?php endforeach;?>
             <div class='c-both'></div>
@@ -64,6 +64,11 @@ js::set('productID', $product->id);
             <tr><th><?php echo $lang->product->color  . $lang->colon;?></th> <td><?php echo $product->color;?></td></tr>
             <tr><th><?php echo $lang->product->origin . $lang->colon;?></th> <td><?php echo $product->origin;?></td></tr>
           </table>
+          <div class='mt-10px'>
+            <?php if($product->buyLink):?>
+            <?php echo html::linkButton($lang->product->buyNow, $product->buyLink, 'btn btn-primary');?>
+            <?php endif;?>
+          </div>
         </div>
         <div class='c-both'></div>
 
@@ -81,7 +86,7 @@ js::set('productID', $product->id);
       </div>      
     </div>
     <div id='commentBox'></div>
-    <?php echo html::a('', '', '', "name='comment'");?>
+    <?php echo html::a('', '', "name='comment'");?>
   </div>
   <?php include './side.html.php'; ?>
 </div>

@@ -70,20 +70,21 @@ class product extends control
         if($categoryID) $families = $this->loadModel('tree')->getFamily($categoryID, 'product');
         $products = $this->product->getList($families, $orderBy, $pager);
 
-        $this->view->title    = $this->lang->product->admin;
-        $this->view->products = $products;
-        $this->view->pager    = $pager;
-        $this->view->type     = $type;
+        $this->view->title      = $this->lang->product->admin;
+        $this->view->products   = $products;
+        $this->view->pager      = $pager;
+        $this->view->categoryID = $categoryID;
         $this->display();
     }   
 
     /**
      * Create a product.
      * 
+     * @param int    $categoryID  
      * @access public
      * @return void
      */
-    public function create()
+    public function create($categoryID = '')
     {
         $categories = $this->loadModel('tree')->getOptionMenu('product', 0, $removeRoot = true);
         if(empty($categories))
@@ -93,13 +94,16 @@ class product extends control
 
         if($_POST)
         {
+            if($this->post->buyLink && strpos($this->post->buyLink, 'http://') === false) $this->send(array('result' => 'fail', 'message' => $this->lang->error->link));
+
             $this->product->create();       
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin')));
         }
 
-        $this->view->title      = $this->lang->product->create;
-        $this->view->categories = $categories;
+        $this->view->title           = $this->lang->product->create;
+        $this->view->currentCategory = $categoryID;
+        $this->view->categories      = $categories;
         $this->display();
     }
 
@@ -120,6 +124,8 @@ class product extends control
 
         if($_POST)
         {
+            if($this->post->buyLink && strpos($this->post->buyLink, 'http://') === false) $this->send(array('result' => 'fail', 'message' => $this->lang->error->link));
+
             $this->product->update($productID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));

@@ -214,12 +214,35 @@ class userModel extends model
         /* Then check the password hash. */
         if(!$user) return false;
 
+        /* Can not login before ten minutes when user is locked. */
+        if($user->locked)
+        {
+            if((time() - $user->locked) / 60 <= 10)
+            {
+                $this->lang->user->loginFailed = $this->lang->user->locked;
+                return false;
+            }
+            else
+            {
+                $user->fails  = 0;
+                $user->locked = '';
+            }
+        }
+
         /* The password can be the plain or the password after md5. */
-        if($this->createPassword($password, $user->account, $user->join) != $user->password and $user->password != $password) return false;
+        if($this->createPassword($password, $user->account, $user->join) != $user->password and $user->password != $password)
+        {
+            $user->fails ++;
+            if($user->fails > 2) $user->locked = time();
+            $this->dao->update(TABLE_USER)->data($user)->where('id')->eq($user->id)->exec();
+            return false;
+        }
 
         /* Update user data. */
-        $user->ip = $this->server->remote_addr;
-        $user->last = helper::now();
+        $user->ip     = $this->server->remote_addr;
+        $user->last   = helper::now();
+        $user->fails  = 0;
+        $user->locked = '';
         $user->visits ++;
         $this->dao->update(TABLE_USER)->data($user)->where('account')->eq($account)->exec();
 

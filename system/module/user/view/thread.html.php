@@ -16,7 +16,7 @@
       <tbody>
         <?php foreach($threads as $thread):?>
         <tr class='a-center'>
-          <td class='a-left'><?php echo html::a($this->createLink('thread', 'view', "id=$thread->id"), $thread->title, '_blank');?></td>
+          <td class='a-left'><?php echo html::a($this->createLink('thread', 'view', "id=$thread->id"), $thread->title, "target='_blank'");?></td>
           <td class='w-120px'><?php echo substr($thread->addedDate, 2, -3);?></td>
           <td class='w-30px'><?php echo $thread->views;?></td>
           <td class='w-30px'><?php echo $thread->replies;?></td>

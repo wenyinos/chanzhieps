@@ -9,7 +9,7 @@
           $class = 'list-group-item';
           list($label, $module, $method) = explode('|', $menu);
           if($module == $this->app->getModuleName() && $method == $this->app->getMethodName()) $class .= ' active';
-          echo html::a($this->createLink($module, $method), $label, '', "class='$class'");
+          echo html::a($this->createLink($module, $method), $label, "class='$class'");
       }
       ?>      
   </div>

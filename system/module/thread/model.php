@@ -131,7 +131,12 @@ class threadModel extends model
             ->remove('files, labels, views, replies, hidden, stick, readonly')
             ->get();
 
-        $this->dao->insert(TABLE_THREAD)->data($thread)->autoCheck()->batchCheck('title, content', 'notempty')->exec();
+        $this->dao->insert(TABLE_THREAD)
+            ->data($thread, $skip = 'captcha')
+            ->autoCheck()
+            ->check('captcha', 'captcha')
+            ->batchCheck('title, content', 'notempty')
+            ->exec();
 
         if(!dao::isError())
         {
@@ -175,6 +180,7 @@ class threadModel extends model
     public function update($threadID)
     {
         $thread = fixer::input('post')
+            ->specialChars('title')
             ->setForce('editor', $this->session->user->account)
             ->setForce('editedDate', helper::now())
             ->stripTags('content', $this->config->thread->editor->allowTags)
@@ -239,8 +245,8 @@ class threadModel extends model
         foreach($thread->files as $file)
         {
             $file->title .= ".$file->extension";
-            echo html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, '_blank'); 
-            if($canManage) echo '<sub>' . html::a(inlink('deleteFile', "threadID=$thread->id&fileID=$file->id"), '[x]', '', "class='deleter'") . '</sub>';
+            echo html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'"); 
+            if($canManage) echo '<sub>' . html::a(inlink('deleteFile', "threadID=$thread->id&fileID=$file->id"), '[x]', "class='deleter'") . '</sub>';
             echo ' ';
         }
     }
