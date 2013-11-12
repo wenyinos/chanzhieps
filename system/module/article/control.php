@@ -228,8 +228,7 @@ class article extends control
         $this->view->keywords    = $keywords;
         $this->view->desc        = $desc;
         $this->view->article     = $article;
-        $this->view->links       = $this->article->getPairs($category->id, 'id_desc');
-        $this->view->prevAndNext = $this->article->getPrevAndNext($this->view->links, $article->id);
+        $this->view->prevAndNext = $this->article->getPrevAndNext($article->id, $category->id);
         $this->view->category    = $category;
         $this->view->contact     = $this->loadModel('company')->getContact();
 

@@ -162,8 +162,7 @@ class help extends control
 
         $this->view->type        = $type;
         $this->view->article     = $article;
-        $this->view->links       = $this->article->getPairs($category->id, 't1.order');
-        $this->view->prevAndNext = $this->loadModel('article')->getPrevAndNext($this->view->links, $article->id);
+        $this->view->prevAndNext = $this->loadModel('article')->getPrevAndNext($article->id, $category->id);
         //$this->view->layouts   = $this->loadModel('block')->getLayouts('help.read');
         $this->view->category    = $category;
 
