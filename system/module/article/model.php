@@ -138,23 +138,17 @@ class articleModel extends model
     /**
      * Get the prev and next ariticle.
      * 
-     * @param  array  $links    the link articles.
      * @param  int    $current  the current article id.
+     * @param  int    $category the category id.
      * @access public
      * @return array
      */
-    public function getPrevAndNext($links, $current)
+    public function getPrevAndNext($current, $category)
     {
-        $prev = array();
-        $next = array();
-        $keys = array_keys($links);
-
-        $currentKey = array_search($current, $keys);
-        $prevKey    = $currentKey - 1;
-        $nextKey    = $currentKey + 1;
-
-        if(isset($keys[$prevKey])) $prev = array('id' => $keys[$prevKey], 'title' => $links[$keys[$prevKey]]->title, 'alias' => $links[$keys[$prevKey]]->alias);
-        if(isset($keys[$nextKey])) $next = array('id' => $keys[$nextKey], 'title' => $links[$keys[$nextKey]]->title, 'alias' => $links[$keys[$nextKey]]->alias);
+        $prevId = $this->dao->select('id')->from(TABLE_RELATION)->where('category')->eq($category)->andWhere('id')->lt($current)->orderBy('id_desc')->limit(1)->fetch('id');
+        $nextId = $this->dao->select('id')->from(TABLE_RELATION)->where('category')->eq($category)->andWhere('id')->gt($current)->orderBy('id')->limit(1)->fetch('id');
+        $prev   = $this->dao->select('id, title, alias')->from(TABLE_ARTICLE)->where('id')->eq($prevId)->fetch();
+        $next   = $this->dao->select('id, title, alias')->from(TABLE_ARTICLE)->where('id')->eq($nextId)->fetch();
 
         return array('prev' => $prev, 'next' => $next);
     }
