@@ -39,9 +39,9 @@ class threadModel extends model
      */
     public function getList($board, $orderBy, $pager = null)
     {
-        if(!is_array($board) && !is_numeric($board))
+        if(!is_array($board))
         {
-            $board = $this->loadModel('tree')->getByAlias($board, 'forum');
+            $board = $this->loadModel('tree')->getByID($board, 'forum');
             $board = $board->id;
         }
         $threads = $this->dao->select('*')->from(TABLE_THREAD)
