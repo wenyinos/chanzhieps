@@ -16,6 +16,7 @@ class fileModel extends model
     public $savePath = '';
     public $webPath  = '';
     public $now      = 0;
+    public $error    = array();
 
     /**
      * The construct function, set the save path and web path.
@@ -73,6 +74,7 @@ class fileModel extends model
         {
             $file->middleURL = $this->webPath . str_replace('f_', 'm_', $file->pathname);
             $file->smallURL  = $this->webPath . str_replace('f_', 's_', $file->pathname);
+            $file->smallURL  = $this->webPath . str_replace('f_', 'l_', $file->pathname);
             $file->isImage   = true;
         }
 
@@ -125,6 +127,11 @@ class fileModel extends model
         foreach($files as $id => $file)
         {
             if(!move_uploaded_file($file['tmpname'], $this->savePath . $file['pathname'])) return false;
+            if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions))
+            {
+                $this->compressImage($this->savePath . $file['pathname']);
+            }
+
             $file['objectType'] = $objectType;
             $file['objectID']   = $objectID;
             $file['addedBy']    = $this->app->user->account;
@@ -277,6 +284,10 @@ class fileModel extends model
             $pathName = $filePath->pathname;
             $realPathName= $this->savePath . $pathName;
             move_uploaded_file($file['tmpname'], $realPathName);
+            if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions))
+            {
+                $this->compressImage($this->savePath . $file['pathname']);
+            }
 
             $fileInfo->addedBy   = $this->app->user->account;
             $fileInfo->addedDate = helper::now();
@@ -351,11 +362,53 @@ class fileModel extends model
             $file['title']     = basename($file['pathname']);
 
             file_put_contents($this->savePath . $file['pathname'], $imageData);
+            $this->compressImage($this->savePath . $file['pathname']);
             $this->dao->insert(TABLE_FILE)->data($file)->exec();
 
             $data = str_replace($out[1][$key], $this->webPath . $file['pathname'], $data);
         }
 
         return $data;
+    }
+
+    /**
+     * Compress image to config configured size.
+     * 
+     * @param  string    $imagePath 
+     * @access public
+     * @return void
+     */
+    public function compressImage($imagePath)
+    {
+        $this->app->loadClass('phpthumb', true);
+        $imageInfo = pathinfo($imagePath);
+        if(!is_writable($imageInfo['dirname'])) return false;
+
+        foreach($this->config->file->thumbs as $size => $configure)
+        {
+            $thumbPath = str_replace($imageInfo['basename'], $size . '_' . $imageInfo['basename'], $imagePath);
+            if(extension_loaded('gd'))
+            {
+                $thumb = PhpThumbFactory::create($imagePath);
+                $thumb->resize($configure['width'], $configure['height']);
+                $dataRoot = $this->app->getDataRoot();
+                $thumb->save($thumbPath);
+            }
+            else
+            {
+                copy($imagePath, $thumbPath);   
+            }
+        }
+    }
+
+    /**
+     * Get error messages.
+     * 
+     * @access public
+     * @return void
+     */
+    public function getError()
+    {
+        return $this->error;
     }
 }
