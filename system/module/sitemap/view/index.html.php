@@ -11,37 +11,37 @@
  */
 ?>
 <?php if($onlyBody == 'no') include '../../common/view/header.html.php';?>
-<div class='box radius'>
-  <h4 class='title'>
-    <?php echo $lang->sitemap->common;?>
-    <span ><?php echo html::a(inlink('index', '', '', 'xml'), $lang->sitemap->xmlVersion, "class='label label-primary'");?></span>
-  </h4>
-
-  <div class='content'>
-
+<div class='panel panel-default'>
+  <div class='panel-heading'>
+    <h4><i class="icon-sitemap"></i> <?php echo $lang->sitemap->common;?></h4>
+    <div class='panel-actions panel-actions-sm'>
+      <?php echo html::a(inlink('index', '', '', 'xml'), '<i class="icon-code"></i> ' . $lang->sitemap->xmlVersion, "class='btn btn-info btn-wider'");?>
+    </div>
+  </div>
+  <div class='panel-body'>
     <?php if(strpos($productTree, '<li>') !== false):?>
-    <div class='row'> 
+    <div class='clearfix'> 
       <h4><?php echo $lang->sitemap->productCategory?></h4>
       <?php echo $productTree?>
     </div>
     <?php endif;?>
 
     <?php if(strpos($articleTree, '<li>') !== false):?>
-    <div class='row'> 
+    <div class='clearfix'> 
       <h4><?php echo $lang->sitemap->articleCategory?></h4>
       <?php echo $articleTree?>
     </div>
     <?php endif;?>
 
     <?php if(strpos($blogTree, '<li>') !== false):?>
-    <div class='row'> 
+    <div class='clearfix'> 
       <h4><?php echo $lang->sitemap->blogCategory?></h4>
       <?php echo $blogTree?>
     </div>
     <?php endif;?>
 
     <?php if($boards):?>
-    <div class = 'row'>
+    <div class='clearfix'>
       <h4><?php echo $lang->sitemap->boards;?></h4>
       <ul class='tree'>
         <?php foreach($boards as $parentBoard):?>
