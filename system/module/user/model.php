@@ -225,7 +225,7 @@ class userModel extends model
             else
             {
                 $user->fails  = 0;
-                $user->locked = '';
+                $user->locked = 0;
             }
         }
 
@@ -242,7 +242,7 @@ class userModel extends model
         $user->ip     = $this->server->remote_addr;
         $user->last   = helper::now();
         $user->fails  = 0;
-        $user->locked = '';
+        $user->locked = 0;
         $user->visits ++;
         $this->dao->update(TABLE_USER)->data($user)->where('account')->eq($account)->exec();
 
