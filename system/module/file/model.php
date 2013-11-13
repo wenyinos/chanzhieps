@@ -390,7 +390,6 @@ class fileModel extends model
             {
                 $thumb = phpThumbFactory::create($imagePath);
                 $thumb->resize($configure['width'], $configure['height']);
-                $dataRoot = $this->app->getDataRoot();
                 $thumb->save($thumbPath);
             }
             else
