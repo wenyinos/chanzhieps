@@ -36,3 +36,5 @@ $lang->file->publics[1] = '允许';
 
 $lang->file->edit       = '编辑';
 $lang->file->editFile   = '更改附件';
+
+$lang->file->errorUnwritable = '上传目录不可写，无法上传附件。';

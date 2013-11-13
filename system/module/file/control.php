@@ -21,6 +21,7 @@ class file extends control
      */
     public function buildForm($fileCount = 2, $percent = 0.9)
     {
+        $this->writeable       = $this->file->checkSavePath();
         $this->view->fileCount = $fileCount;
         $this->view->percent   = $percent;
         $this->display();
@@ -51,6 +52,7 @@ class file extends control
         $file = $file[0];
         if($file)
         {
+            if(!$this->file->checkSavePath()) $this->send(array('error' => 1, 'message' => $this->lang->file->errorUnwritable));
             move_uploaded_file($file['tmpname'], $this->file->savePath . $file['pathname']);
             $url =  $this->file->webPath . $file['pathname'];
 
@@ -73,6 +75,7 @@ class file extends control
      */
     public function browse($objectType, $objectID)
     {
+        $this->writeable        = $this->file->checkSavePath();
         $this->view->objectType = $objectType;
         $this->view->objectID   = $objectID;
         $this->view->files      = $this->file->getByObject($objectType, $objectID);
@@ -92,6 +95,7 @@ class file extends control
         $file = $this->file->getById($fileID);
         if(!empty($_POST))
         {
+            if(!$this->file->checkSavePath()) $this->send(array('result' => 'fail', 'message' => $this->lang->file->errorUnwritable));
             $this->file->edit($fileID);
             if(dao::isError())die(js::error(dao::getError()));
             die(js::locate(inlink('browse',"objectType=$file->objectType&objectID=$file->objectID"),'parent'));
@@ -110,7 +114,8 @@ class file extends control
      */
     public function upload($objectType, $objectID)
     {
-        $files = $this->loadModel('file')->getUpload('files');
+        if(!$this->file->checkSavePath()) $this->send(array('result' => 'fail', 'message' => $this->lang->file->errorUnwritable));
+        $files = $this->file->getUpload('files');
         if($files) $this->file->saveUpload($objectType, $objectID);
         $this->send(array('result' => 'success'));
     }

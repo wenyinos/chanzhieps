@@ -16,7 +16,6 @@ class fileModel extends model
     public $savePath = '';
     public $webPath  = '';
     public $now      = 0;
-    public $error    = array();
 
     /**
      * The construct function, set the save path and web path.
@@ -74,7 +73,7 @@ class fileModel extends model
         {
             $file->middleURL = $this->webPath . str_replace('f_', 'm_', $file->pathname);
             $file->smallURL  = $this->webPath . str_replace('f_', 's_', $file->pathname);
-            $file->smallURL  = $this->webPath . str_replace('f_', 'l_', $file->pathname);
+            $file->lageURL   = $this->webPath . str_replace('f_', 'l_', $file->pathname);
             $file->isImage   = true;
         }
 
@@ -125,7 +124,7 @@ class fileModel extends model
         $files      = $this->getUpload();
 
         foreach($files as $id => $file)
-        {
+        {   
             if(!move_uploaded_file($file['tmpname'], $this->savePath . $file['pathname'])) return false;
             if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions))
             {
@@ -389,7 +388,7 @@ class fileModel extends model
             $thumbPath = str_replace($imageInfo['basename'], $size . '_' . $imageInfo['basename'], $imagePath);
             if(extension_loaded('gd'))
             {
-                $thumb = PhpThumbFactory::create($imagePath);
+                $thumb = phpThumbFactory::create($imagePath);
                 $thumb->resize($configure['width'], $configure['height']);
                 $dataRoot = $this->app->getDataRoot();
                 $thumb->save($thumbPath);
@@ -402,13 +401,13 @@ class fileModel extends model
     }
 
     /**
-     * Get error messages.
+     * Check save path is writeable.
      * 
      * @access public
      * @return void
      */
-    public function getError()
+    public function checkSavePath()
     {
-        return $this->error;
+        return is_writable($this->savePath);
     }
 }

@@ -1,3 +1,6 @@
+<?php if(!$writeable):?>
+<h5 class='text-danger a-left'> <?php echo $this->lang->file->errorUnwritable;?> </h5>
+<?php else:?>
 <div id='fileform'>
   <?php for($i = 0; $i < $fileCount; $i ++):?>
   <input type='file' name='files[]' id="file<?php echo $i;?>" class='w-200px'  tabindex='-1' />
@@ -5,3 +8,4 @@
   <input type='text' id='label<?php echo $i;?>' name='labels[]' class='text-5' tabindex='-1' /><br />
   <?php endfor;?>
 </div>
+<?php endif;?>

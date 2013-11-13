@@ -36,3 +36,5 @@ $lang->file->publics[1] = 'ok';
 
 $lang->file->edit       = 'Edit';
 $lang->file->editFile   = 'Change file';
+
+$lang->file->errorUnwritable = 'Upload directory is not writable.';

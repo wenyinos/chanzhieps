@@ -53,24 +53,29 @@
 </table>
 <form id="fileForm" method='post' class="form-inline" enctype='multipart/form-data' action='<?php echo inlink('upload', "objectType=$objectType&objectID=$objectID");?>'>
 <table class='table table-bordered table-form'>
+  <?php if($writeable):?>
   <tr>
     <td><?php echo $lang->file->upload;?></td>
     <td><?php echo $this->fetch('file', 'buildForm');?></td>
   </tr>
   <tr><td colspan='2' class='a-center'><?php echo html::submitButton();?></td></tr>
+  <?php else:?>
+  <tr><td colspan='2'><h5 class='text-danger'><?php echo $lang->file->errorUnwritable;?></h5></td></tr>
+  <?php endif;?>
 </table>
 </form>
 </div>
 <script>
-$(document).ready(function(){   
-    $.setAjaxForm('#fileForm', function(data) { $.reloadAjaxModal(); }); 
+$(document).ready(function()
+{   
+    $.setAjaxForm('#fileForm', function(data){$.reloadAjaxModal();}); 
     $('a.option').click(function(data)
     {
-        $.getJSON( $(this).attr('href'), function(data) 
+        $.getJSON($(this).attr('href'), function(data) 
         {
-            if(data.result=='success')
+            if(data.result == 'success')
             {
-               $.reloadAjaxModal();
+                $.reloadAjaxModal();
             }
             else
             {
