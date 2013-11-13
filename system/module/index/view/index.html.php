@@ -33,7 +33,7 @@
   ?>
   <div class="col-md-4">
     <div class='panel product-box'>
-      <?php echo html::a($url, html::image($product->image->primary->smallURL), "class='thumbnail'");?>
+      <?php echo html::a($url, html::image($product->image->primary->middleURL), "class='thumbnail'");?>
       <div class="caption">
         <h3><?php echo html::a($url, $product->name);?></h3>
         <p><?php echo $product->summary;?></p>

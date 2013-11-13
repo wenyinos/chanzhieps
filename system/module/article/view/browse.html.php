@@ -16,19 +16,23 @@ include '../../common/view/treeview.html.php';
       <?php $url = inlink('view', "id=$article->id", "category={$category->alias}&name=$article->alias");?>
         <li class="media">
           <div class='media-body'>
-            <h3 class='media-heading'><?php echo html::a($url, $article->title);?></h3>
-            <p>
+            <div class='image-box'>
               <?php 
               if(!empty($article->image))
               {
                   $title = $article->image->primary->title ? $article->image->primary->title : $article->title;
-                  echo html::a($url, html::image($article->image->primary->smallURL, "title='{$title}' class='thumbnail'"));
+                  echo html::a($url, html::image($article->image->primary->smallURL, "title='{$title}' class='thumbnail'" ));
               }
-              ?>
-              <?php echo $article->summary;?>
-            </p>
-            <p><span class='muted'><?php echo date('Y/m/d', strtotime($article->addedDate));?></span></p>
+              else
+              {
+                  echo html::a($url, html::image($themeRoot . 'default/images/main/noimage.gif', "class='thumbnail'" ));
+              }
+            ?>
+            </div>
+            <h3 class='media-heading'> <?php echo html::a($url, $article->title);?> <span class='label label-default'><?php echo substr($article->addedDate, 0, 10);?></span> </h3>
+            <p><?php echo $article->summary;?></p>
           </div>
+          <hr>
         </li>
       <?php endforeach;?>
       </ul>

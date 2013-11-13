@@ -69,11 +69,18 @@ class fileModel extends model
         $file->middleURL = '';
         $file->smallURL  = '';
         $file->isImage   = false;
+
         if(in_array(strtolower($file->extension), $this->config->file->imageExtensions) !== false)
         {
+            $uploadRoot = $this->app->getDataroot() . "upload/";
             $file->middleURL = $this->webPath . str_replace('f_', 'm_', $file->pathname);
             $file->smallURL  = $this->webPath . str_replace('f_', 's_', $file->pathname);
-            $file->lageURL   = $this->webPath . str_replace('f_', 'l_', $file->pathname);
+            $file->largeURL  = $this->webPath . str_replace('f_', 'l_', $file->pathname);
+
+            if(!file_exists(str_replace($this->webPath, $uploadRoot, $file->middleURL))) $file->middleURL = $file->fullURL;
+            if(!file_exists(str_replace($this->webPath, $uploadRoot, $file->smallURL)))  $file->smallURL  = $file->fullURL;
+            if(!file_exists(str_replace($this->webPath, $uploadRoot, $file->largeURL)))  $file->largeURL  = $file->fullURL;
+
             $file->isImage   = true;
         }
 
@@ -226,7 +233,7 @@ class fileModel extends model
         /* rand file name more */
         list($path, $file) = explode('/', $pathName);
         $file = md5(mt_rand(0, 10000) . str_shuffle(md5($file)) . mt_rand(0, 10000));
-        return $path . '/' . $file . '.' . $extension;
+        return $path . '/f_' . $file . '.' . $extension;
     }
 
     /**
@@ -385,7 +392,7 @@ class fileModel extends model
 
         foreach($this->config->file->thumbs as $size => $configure)
         {
-            $thumbPath = str_replace($imageInfo['basename'], $size . '_' . $imageInfo['basename'], $imagePath);
+            $thumbPath = str_replace('f_', $size . '_', $imagePath);
             if(extension_loaded('gd'))
             {
                 $thumb = phpThumbFactory::create($imagePath);

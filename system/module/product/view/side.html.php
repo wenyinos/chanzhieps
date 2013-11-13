@@ -21,7 +21,7 @@ $hotProducts   = $this->loadModel('product')->getHot(0, 4);
           }
           else
           {
-              echo html::a($url, html::image($product->image->primary->smallURL, "title='{$title}' class='adaptive'"), "class='media-image'");
+              echo html::a($url, html::image($product->image->primary->middleURL, "title='{$title}' class='adaptive'"), "class='media-image'");
           }
           ?>
           <div class='media-body'>

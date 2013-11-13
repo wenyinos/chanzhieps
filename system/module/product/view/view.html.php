@@ -31,7 +31,7 @@ js::set('productID', $product->id);
         </div>
         <?php else:?>
         <div class='primary'>
-          <?php echo html::a(inlink('view', "id=$product->id"), html::image($product->image->primary->smallURL, "title='{$title}' alt='{$product->name}'"), "class='big-image'");?>
+          <?php echo html::a(inlink('view', "id=$product->id"), html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"), "class='big-image'");?>
           <ul class='list'>
             <?php foreach($product->image->list as $image):?>
             <?php $title = $image->title ? $image->title : $product->name;?>

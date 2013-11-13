@@ -33,7 +33,7 @@ include '../../common/view/treeview.html.php';
         }
         else
         {
-            echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&name=$product->alias"), html::image($product->image->primary->smallURL, "title='{$title}' class='adaptive' alt='{$product->name}'"), "class='media-image'");
+            echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&name=$product->alias"), html::image($product->image->primary->middleURL, "title='{$title}' class='adaptive' alt='{$product->name}'"), "class='media-image'");
         }
         ?>
         <div class='media-body'>

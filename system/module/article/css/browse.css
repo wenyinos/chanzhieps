@@ -1,5 +1,7 @@
-.article-title{margin: 0;}
-.article-title a{color: #5A5A5A;}
-.article-title a:hover, .article-title a:active{color: #4691EF; text-decoration: none;}
+.media-heading {margin: 10px;}
+.media-heading a{color: #252525;}
+.media-heading a:hover, .article-title a:active{color: #4691EF; text-decoration: none;}
+.media-body p{color: #757575;}
 
-ul.media-list li.media img.thumbnail {margin: 10px auto;}
+h3{font-size:18px; font-weight:400;}
+.image-box {float:left; margin:10px; max-width:80px; }
