@@ -31,7 +31,7 @@ class product extends control
         if($category)
         {
             $title    = $category->name;
-            $keywords = trim($category->keyword . ' ' . $this->config->site->keywords);
+            $keywords = trim($category->keywords . ' ' . $this->config->site->keywords);
             $desc     = strip_tags($category->desc);
             $this->session->set('productCategory', $category->id);
         }
@@ -156,7 +156,7 @@ class product extends control
         $category = $this->loadModel('tree')->getByID($category);
 
         $title    = $product->name . ' - ' . $category->name;
-        $keywords = $product->keywords . ' ' . $category->keyword . ' ' . $this->config->site->keywords;
+        $keywords = $product->keywords . ' ' . $category->keywords . ' ' . $this->config->site->keywords;
         $desc     = strip_tags($product->summary);
         
         $this->view->title       = $title;
