@@ -4,9 +4,7 @@ $config->seo->alias = new stdclass();
 
 $config->seo->alias->category = array();
 $config->seo->alias->page     = array();
-
-
-$config->seo->alias->method = array();
+$config->seo->alias->method   = array();
 
 $config->seo->alias->method['article']['browse'] = 'browse';  
 $config->seo->alias->method['article']['view']   = 'view';  
