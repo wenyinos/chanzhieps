@@ -12,12 +12,16 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/kindeditor.html.php';?>
-<form method='post' id='ajaxForm'>
+<form method='post' id='ajaxForm' class='form-inline'>
   <table class='table table-form'>
     <caption><?php echo $lang->site->setBasic;?></caption> 
     <tr>
       <th class='w-100px'><?php echo $lang->site->name;?></th> 
       <td><?php echo html::input('name', $this->config->site->name, "class='text-3'");?></td> 
+    </tr>
+    <tr>
+      <th><?php echo $lang->site->module;?></th>
+      <td><?php echo html::checkbox('moduleEnabled', $lang->site->moduleAvailable, $this->config->site->moduleEnabled);?></td>
     </tr>
     <tr>
       <th><?php echo $lang->site->copyright;?></th> 

@@ -12,6 +12,7 @@
 $lang->site->common       = "站点";
 
 $lang->site->name         = '网站名称';
+$lang->site->module       = '功能模块';
 $lang->site->domain       = '网站域名';
 $lang->site->logo         = 'Logo';
 $lang->site->keywords     = '关键词';
@@ -32,7 +33,14 @@ $lang->site->setLogoFailed  = "设置Logo失败";
 $lang->site->noSelectedFile = "没有选择图片";
 $lang->site->oauthHelp      = "使用帮助";
 
-$lang->site->themes    = array();
+$lang->site->moduleAvailable = array();
+$lang->site->moduleAvailable['user']    = '会员';
+$lang->site->moduleAvailable['forum']   = '论坛';
+$lang->site->moduleAvailable['blog']    = '博客';
+$lang->site->moduleAvailable['help']    = '帮助';
+$lang->site->moduleAvailable['comment'] = '评论';
+
+$lang->site->themes = array();
 $lang->site->themes['default']    = '默认风格';
 $lang->site->themes['flat']       = '清泉';
 $lang->site->themes['tree']       = '蝉之树';

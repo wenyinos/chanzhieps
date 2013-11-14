@@ -12,6 +12,7 @@
 $lang->site->common       = "Site";
 
 $lang->site->name         = 'Name';
+$lang->site->module       = 'Modules';
 $lang->site->domain       = 'Domain';
 $lang->site->logo         = 'Logo';
 $lang->site->keywords     = 'Keywords';
@@ -31,6 +32,13 @@ $lang->site->setTheme     = 'Set Theme';
 $lang->site->setLogoFailed  = "Set logo failed.";
 $lang->site->noSelectedFile = "No file selected.";
 $lang->site->oauthHelp      = "Help";
+
+$lang->site->moduleAvailable = array();
+$lang->site->moduleAvailable['user']    = 'Member';
+$lang->site->moduleAvailable['forum']   = 'Forum';
+$lang->site->moduleAvailable['blog']    = 'Blog';
+$lang->site->moduleAvailable['help']    = 'Help';
+$lang->site->moduleAvailable['comment'] = 'Comment';
 
 $lang->site->themes    = array();
 $lang->site->themes['default']    = 'Default';

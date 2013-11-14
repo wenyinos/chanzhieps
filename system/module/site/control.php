@@ -21,7 +21,9 @@ class site extends control
     {
         if(!empty($_POST))
         {
-            $result = $this->loadModel('setting')->setItems('system.common.site', $_POST);
+            $setting = fixer::input('post')->join('moduleEnabled', ',')->get();
+            $result  = $this->loadModel('setting')->setItems('system.common.site', $setting);
+
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }

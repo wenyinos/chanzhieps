@@ -114,6 +114,15 @@ class commonModel extends model
             if($app->user->admin == 'no')    return false;
             if($app->user->admin == 'super') return true;
         }
+        
+        /* Check whether dependence modules is available. */
+        if(!empty($config->dependence->$module))
+        {
+            foreach($config->dependence->$module as $dependModule)
+            {
+                if(strpos($config->site->moduleEnabled, $dependmodule) === false) return false;
+            }
+        }
 
         $rights  = $app->user->rights;
         if(isset($rights[strtolower($module)][strtolower($method)])) return true;
