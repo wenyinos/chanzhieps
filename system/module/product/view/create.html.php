@@ -11,6 +11,8 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php js::set('type', 'product');?>
+<?php js::set('uniqid', $uniqid);?>
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
 <form method='post' class='form-inline' id='ajaxForm'> 
@@ -101,7 +103,7 @@
     </tr>
     <tr>
       <td></td>
-      <td><?php echo html::submitButton();?></td>
+      <td><?php echo html::submitButton() . html::hidden('uniqid', $uniqid);?></td>
     </tr>
   </table>
 </form>

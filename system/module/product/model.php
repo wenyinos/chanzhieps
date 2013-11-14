@@ -209,10 +209,10 @@ class productModel extends model
         $product->keywords = seo::unify($product->keywords, ',');
 
         $this->dao->insert(TABLE_PRODUCT)
-            ->data($product, $skip = 'categories')
+            ->data($product, $skip = 'categories,uniqid')
             ->autoCheck()
-            ->beginIF(!empty($product->buyLink))->check('buyLink', 'URL')->fi()
             ->batchCheck($this->config->product->create->requiredFields, 'notempty')
+            ->checkIF($product->buyLink, 'buyLink', 'URL')
             ->exec();
         $productID = $this->dao->lastInsertID();
 
@@ -245,10 +245,10 @@ class productModel extends model
         $product->keywords = seo::unify($product->keywords, ',');
 
         $this->dao->update(TABLE_PRODUCT)
-            ->data($product, $skip = 'categories')
+            ->data($product, $skip = 'categories,uniqid')
             ->autoCheck()
-            ->check('buyLink', 'URL')
             ->batchCheck($this->config->product->edit->requiredFields, 'notempty')
+            ->checkIF($product->buyLink, 'buyLink', 'URL')
             ->where('id')->eq($productID)
             ->exec();
 
