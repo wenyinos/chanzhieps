@@ -13,6 +13,7 @@ $lang->site->common       = "站点";
 
 $lang->site->name         = '网站名称';
 $lang->site->module       = '功能模块';
+$lang->site->lang         = '语言';
 $lang->site->domain       = '网站域名';
 $lang->site->logo         = 'Logo';
 $lang->site->keywords     = '关键词';

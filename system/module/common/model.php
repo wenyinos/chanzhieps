@@ -23,6 +23,13 @@ class commonModel extends model
         $this->startSession();
         $this->setUser();
         $this->loadConfigFromDB();
+
+        if(RUN_MODE == 'front' and isset($this->config->site->lang))
+        {
+            $this->app->setClientLang();
+            $this->app->loadLang('common');
+        }
+
         $this->loadAlias();
         $this->loadModel('site')->setSite();
     }

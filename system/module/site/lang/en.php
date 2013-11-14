@@ -13,6 +13,7 @@ $lang->site->common       = "Site";
 
 $lang->site->name         = 'Name';
 $lang->site->module       = 'Modules';
+$lang->site->lang         = 'Language';
 $lang->site->domain       = 'Domain';
 $lang->site->logo         = 'Logo';
 $lang->site->keywords     = 'Keywords';

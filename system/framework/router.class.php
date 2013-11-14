@@ -707,6 +707,9 @@ class router
      */
     public function setClientLang($lang = '')
     {
+        /* Set client lang use config when exist config in front. */
+        if(RUN_MODE == 'front' and isset($this->config->site->lang)) return $this->clientLang = $this->config->site->lang;
+
         if(!empty($lang))
         {
             $this->clientLang = $lang;

@@ -24,6 +24,10 @@
       <td><?php echo html::checkbox('moduleEnabled', $lang->site->moduleAvailable, $this->config->site->moduleEnabled);?></td>
     </tr>
     <tr>
+      <th><?php echo $lang->site->lang;?></th>
+      <td><?php echo html::radio('lang', $config->langs, isset($this->config->site->lang) ? $this->config->site->lang : 'zh-cn');?></td>
+    </tr>
+    <tr>
       <th><?php echo $lang->site->copyright;?></th> 
       <td><?php echo html::input('copyright', $this->config->site->copyright, "class='text-3'");?></td> 
     </tr>
