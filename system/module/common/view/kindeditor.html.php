@@ -59,7 +59,7 @@ $(document).ready(function()
                 filterMode:true, 
                 cssPath:[v.jsRoot + 'kindeditor/plugins/code/prettify.css'],
                 urlType:'absolute', 
-                uploadJson: createLink('file', 'ajaxUpload'),
+                uploadJson: createLink('file', 'ajaxUpload', 'objectType=' + v.type + '&uniqid=' + v.uniqid),
                 imageTabIndex:1,
                 allowFileManager:true,
                 langType:v.editorLang,
