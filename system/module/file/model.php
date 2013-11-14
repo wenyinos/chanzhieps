@@ -418,4 +418,24 @@ class fileModel extends model
     {
         return is_writable($this->savePath);
     }
+
+    /**
+     * Conserve image's objectID of kindeditor.
+     * 
+     * @param  string $uniqid 
+     * @param  int    $objectID 
+     * @access public
+     * @return void
+     */
+    public function conserveObjectID($uniqid, $objectID)
+    {
+        $data = new stdclass();
+        $data->objectID = $objectID;
+        if($_SESSION['album'][$uniqid])
+        {
+            $this->dao->update(TABLE_FILE)->data($data)->where('id')->in($_SESSION['album'][$uniqid])->exec();
+            if(dao::isError()) return false;
+            return !dao::isError(); 
+        }
+    }
 }
