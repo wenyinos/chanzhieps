@@ -114,7 +114,26 @@ class commonModel extends model
             if($app->user->admin == 'no')    return false;
             if($app->user->admin == 'super') return true;
         }
-        
+
+        if(!commonModel::isAvailable($module)) return false;
+
+        $rights  = $app->user->rights;
+        if(isset($rights[strtolower($module)][strtolower($method)])) return true;
+        return false;
+    }
+
+    /**
+     * Check whether module is available.
+     * 
+     * @param  string $module 
+     * @static
+     * @access public
+     * @return void
+     */
+    public static function isAvailable($module)
+    {
+        global $app, $config;
+
         /* Check whether dependence modules is available. */
         if(!empty($config->dependence->$module))
         {
@@ -124,9 +143,7 @@ class commonModel extends model
             }
         }
 
-        $rights  = $app->user->rights;
-        if(isset($rights[strtolower($module)][strtolower($method)])) return true;
-        return false;
+        return true;
     }
 
     /**
@@ -278,6 +295,8 @@ class commonModel extends model
      */
     public static function printTopBar()
     {
+        if(!commonModel::isAvailable('user')) return '';
+
         global $app, $dao;
         $divider = '<span class="divider">|</span>';
         if($app->session->user->account != 'guest')
