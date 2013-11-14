@@ -54,6 +54,15 @@ $config->file = new stdclass();
 $config->file->dangers = 'php,jsp,py,rb,asp,'; // Dangerous file types.
 $config->file->maxSize = 1024 * 1024;          // Max size allowed(Byte).
 
+/* Module dependence setting. */
+$config->dependence = new stdclass();
+$config->dependence->blog[]    = 'blog';
+$config->dependence->help[]    = 'help';
+$config->dependence->user[]    = 'user';
+$config->dependence->forum[]   = 'forum';
+$config->dependence->forum[]   = 'user';
+$config->dependence->comment[] = 'comment';
+
 /* Database settings. */
 $config->db = new stdclass();          
 $config->db->persistant = false;               // Persistant connection or not.

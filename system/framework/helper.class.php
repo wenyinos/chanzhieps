@@ -407,6 +407,17 @@ class helper
         global $config;
         return $config->requestType == 'PATH_INFO' and $config->seoMode;
      }
+
+    /**
+     * Check is ajax request 
+     * 
+     * @access public
+     * @return void
+     */
+    function isAjaxRequest()
+    {
+        return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest';
+    }
 }
 
 /**
@@ -494,4 +505,3 @@ function getWebRoot()
     }
     return substr($path, 0, (strrpos($path, '/') + 1));
 }
-

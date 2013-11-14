@@ -163,6 +163,7 @@ class commonModel extends model
      */
     public function deny($module, $method)
     {
+        if(helper::isAjaxRequest()) exit;
         $vars = "module=$module&method=$method";
         if(isset($_SERVER['HTTP_REFERER']))
         {
