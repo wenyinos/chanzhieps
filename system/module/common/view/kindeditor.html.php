@@ -15,6 +15,9 @@ $editors = $config->$module->editor->$method;
 $editors['id'] = explode(',', $editors['id']);
 js::set('editors', $editors);
 
+$this->app->loadLang('file');
+js::set('errorUnwritable', $lang->file->errorUnwritable);
+
 /* Get current lang. */
 $editorLangs = array('en' => 'en', 'zh-cn' => 'zh_CN', 'zh-tw' => 'zh_TW');
 $editorLang  = isset($editorLangs[$app->getClientLang()]) ? $editorLangs[$app->getClientLang()] : 'en';
@@ -85,7 +88,13 @@ $(document).ready(function()
                                 var contentType = arr[0].split(";")[0].split(":")[1];
 
                                 html = '<img src="' + result + '" alt="" />';
-                                $.post(createLink('file', 'ajaxPasteImage'), {editor: html}, function(data){cmd.inserthtml(data);});
+                                $.post(createLink('file', 'ajaxPasteImage'), {editor: html}, function(data)
+                                {
+                                    if(data) return cmd.inserthtml(data);
+
+                                    alert(v.errorUnwritable);
+                                    return cmd.inserthtml(html);
+                                });
                             };
 
                             reader.readAsDataURL(file);
@@ -102,7 +111,13 @@ $(document).ready(function()
                                 var html = K(doc.body).html();
                                 if(html.search(/<img src="data:.+;base64,/) > -1)
                                 {
-                                    $.post(createLink('file', 'ajaxPasteImage'), {editor: html}, function(data){K(doc.body).html(data);});
+                                    $.post(createLink('file', 'ajaxPasteImage'), {editor: html}, function(data)
+                                    {
+                                        if(data) return K(doc.body).html(data);
+
+                                        alert(v.errorUnwritable);
+                                        return K(doc.body).html(data);
+                                    });
                                 }
                             }, 80);
                         });
