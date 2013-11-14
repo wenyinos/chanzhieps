@@ -389,12 +389,14 @@ class treeModel extends model
      */
     public function update($categoryID)
     {
-        $category  = fixer::input('post')->setDefault('readonly', 0)->specialChars('name')->get();
-
+        $category = fixer::input('post')->setDefault('readonly', 0)->specialChars('name')->get();
         $category->alias    = seo::unify($category->alias, '-');
         $category->keywords = seo::unify($category->keywords, ',');
 
-        if($this->isAliasExists($category->alias, $categoryID)) return sprintf($this->lang->tree->aliasRepeat, $category->alias);
+        /* Add id to check alias. */
+        $category->id       = $categoryID; 
+        if(!$this->checkAlias($category)) return sprintf($this->lang->tree->aliasRepeat, $category);
+
         $parent   = $this->getById($this->post->parent);
         $category->grade = $parent ? $parent->grade + 1 : 1;
 
@@ -459,15 +461,19 @@ class treeModel extends model
             $alias = seo::unify($alias, '-');
             if(empty($categoryName)) continue;
 
+            /* First, save the child without path field. */
+            $category->name  = $categoryName;
+            $category->alias = $alias;
+            $category->order = $this->post->maxOrder + $i * 10;
             $mode = $this->post->mode[$key];
+
+            /* Add id to check alias. */
+            $category->id = $mode == 'new' ?  0: $category->id = $key;
+            if(!$this->checkAlias($category)) return sprintf($this->lang->tree->aliasRepeat, $alias);
 
             if($mode == 'new')
             {
-                if($this->isAliasExists($alias, 0)) return sprintf($this->lang->tree->aliasRepeat, $alias);
-                /* First, save the child without path field. */
-                $category->name  = $categoryName;
-                $category->alias = $alias;
-                $category->order = $this->post->maxOrder + $i * 10;
+                unset($category->id);
                 $this->dao->insert(TABLE_CATEGORY)->data($category)->exec();
 
                 /* After saving, update it's path. */
@@ -478,13 +484,11 @@ class treeModel extends model
                     ->set('path')->eq($categoryPath)
                     ->where('id')->eq($categoryID)
                     ->exec();
-
                 $i ++;
             }
             else
             {
                 $categoryID = $key;
-                if($this->isAliasExists($alias, $categoryID)) return array('alias' => $this->lang->tree->aliasRepeat);
                 $this->dao->update(TABLE_CATEGORY)
                     ->set('name')->eq($categoryName)
                     ->set('alias')->eq($alias)
@@ -496,12 +500,29 @@ class treeModel extends model
         return !dao::isError();
     }
     
-    public function isAliasExists($alias, $category = 0)
+    /**
+     * Check if alias available.
+     *
+     * @param  object    $category 
+     * @access public
+     * @return void
+     */
+    public function checkAlias($category)
     {
-        if($alias == '') return false;
+        if(empty($category)) return false;
+        if($category->alias == '') return true;
+        if(empty($category->id)) $category->id = 0;
+
+        $scope = array();
+        $scope['article'] = 'article,product';
+        $scope['product'] = 'article,product';
+        $scope['blog']    = 'blog';
+        $scope['forum']   = 'forum';
+
         $count = $this->dao->select('count(*) as count')->from(TABLE_CATEGORY)
-            ->where('`alias`')->eq($alias)->andWhere('id')->ne($category)->andWhere('type')->in('article,product')->fetch('count');
-        return $count > 0;
+            ->where('`alias`')->eq($category->alias)->andWhere('id')->ne($category->id)
+            ->andWhere('type')->in($scope[$category->type])->fetch('count');
+        return $count < 1;
     }
 
     /**
