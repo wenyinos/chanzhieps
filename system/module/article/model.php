@@ -145,10 +145,21 @@ class articleModel extends model
      */
     public function getPrevAndNext($current, $category)
     {
-        $prevId = $this->dao->select('id')->from(TABLE_RELATION)->where('category')->eq($category)->andWhere('id')->lt($current)->orderBy('id_desc')->limit(1)->fetch('id');
-        $nextId = $this->dao->select('id')->from(TABLE_RELATION)->where('category')->eq($category)->andWhere('id')->gt($current)->orderBy('id')->limit(1)->fetch('id');
-        $prev   = $this->dao->select('id, title, alias')->from(TABLE_ARTICLE)->where('id')->eq($prevId)->fetch();
-        $next   = $this->dao->select('id, title, alias')->from(TABLE_ARTICLE)->where('id')->eq($nextId)->fetch();
+       $prev = $this->dao->select('t1.id, title, alias')->from(TABLE_ARTICLE)->alias('t1')
+           ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
+           ->where('t2.category')->eq($category)
+           ->andWhere('t2.id')->lt($current)
+           ->orderBy('t2.id_desc')
+           ->limit(1)
+           ->fetch();
+
+       $next = $this->dao->select('t1.id, title, alias')->from(TABLE_ARTICLE)->alias('t1')
+           ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
+           ->where('t2.category')->eq($category)
+           ->andWhere('t2.id')->gt($current)
+           ->orderBy('t2.id')
+           ->limit(1)
+           ->fetch();
 
         return array('prev' => $prev, 'next' => $next);
     }
