@@ -40,7 +40,7 @@ class site extends control
     {
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            if(empty($_FILES)) $this->send(array('result' => 'fail', 'message' => $this->lang->error->noSelectedLogo));
+            if(empty($_FILES)) $this->send(array('result' => 'fail', 'message' => $this->lang->error->noSelectedFile));
 
             $fileModel =  $this->loadModel('file');
 

@@ -29,7 +29,7 @@ $lang->site->setQQOauth   = "QQ接入";
 $lang->site->setTheme     = '主题设置';
 
 $lang->site->setLogoFailed  = "设置Logo失败";
-$lang->site->noSelectedLogo = "没有选择Logo图片";
+$lang->site->noSelectedFile = "没有选择图片";
 $lang->site->oauthHelp      = "使用帮助";
 
 $lang->site->themes    = array();
