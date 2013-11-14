@@ -198,7 +198,7 @@ class articleModel extends model
         $article->alias    = seo::unify($article->alias, '-');
 
         $this->dao->insert(TABLE_ARTICLE)
-            ->data($article, $skip = 'categories')
+            ->data($article, $skip = 'categories,uniqid')
             ->autoCheck()
             ->batchCheck($this->config->article->create->requiredFields, 'notempty')
             ->exec();
@@ -247,7 +247,7 @@ class articleModel extends model
         $article->alias    = seo::unify($article->alias, '-');
         
         $this->dao->update(TABLE_ARTICLE)
-            ->data($article, $skip = 'categories')
+            ->data($article, $skip = 'categories,uniqid')
             ->autoCheck()
             ->batchCheck($this->config->article->edit->requiredFields, 'notempty')
             ->where('id')->eq($articleID)

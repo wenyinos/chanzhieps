@@ -12,6 +12,7 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php js::set('type',$type);?>
+<?php js::set('uniqid',$uniqid);?>
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
 
@@ -77,7 +78,7 @@
     </tr>
     <tr>
       <th></th>
-      <td><?php echo html::submitButton();?></td>
+      <td><?php echo html::submitButton() . html::hidden('uniqid', $uniqid);?></td>
     </tr>
   </table>
 </form>
