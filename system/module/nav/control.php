@@ -20,6 +20,11 @@ class nav extends control
      */
     public function admin($type = 'top')
     {   
+        foreach($this->lang->nav->system as $module => $name)
+        {
+            if(!commonModel::isAvailable($module)) unset($this->lang->nav->system->$module);
+        }
+
         if($_POST)
         {
             $navs = $_POST['nav'];
