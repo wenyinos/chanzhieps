@@ -13,6 +13,3 @@ $config->nav->system = new stdclass();
 
 $config->nav->system->home    = $config->webRoot;
 $config->nav->system->company = commonModel::createFrontLink('company', 'index');
-$config->nav->system->forum   = commonModel::createFrontLink('forum', 'index');
-$config->nav->system->blog    = commonModel::createFrontLink('blog', 'index');
-$config->nav->system->help    = commonModel::createFrontLink('help', 'index');
