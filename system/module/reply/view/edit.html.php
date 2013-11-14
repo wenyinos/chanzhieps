@@ -11,6 +11,8 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
+<?php js::set('type', 'reply');?>
+<?php js::set('uniqid', $uniqid);?>
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php $common->printPositionBar($board, $thread);?>
 
@@ -30,9 +32,10 @@
         ?>
       </td>
     </tr>
+    <tr><?php echo $this->loadModel('captcha')->create4Comment();?></tr>
     <tr>
       <th></th>
-      <td colspan='2'><?php echo html::submitButton() . html::backButton();?></td>
+      <td colspan='2'><?php echo html::submitButton() . html::backButton() . html::hidden('uniqid', $uniqid);?></td>
     </tr>
   </table>
 </form>

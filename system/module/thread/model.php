@@ -132,10 +132,10 @@ class threadModel extends model
             ->get();
 
         $this->dao->insert(TABLE_THREAD)
-            ->data($thread, $skip = 'captcha')
+            ->data($thread, $skip = 'captcha, uniqid')
             ->autoCheck()
-            ->check('captcha', 'captcha')
             ->batchCheck('title, content', 'notempty')
+            ->check('captcha', 'captcha')
             ->exec();
 
         if(!dao::isError())
@@ -188,9 +188,10 @@ class threadModel extends model
             ->get();
 
         $this->dao->update(TABLE_THREAD)
-            ->data($thread)
+            ->data($thread, $skip = 'captcha, uniqid')
             ->autoCheck()
             ->batchCheck('title, content', 'notempty')
+            ->check('captcha', 'captcha')
             ->where('id')->eq($threadID)
             ->exec();
 

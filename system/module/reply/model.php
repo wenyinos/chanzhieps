@@ -91,10 +91,10 @@ class replyModel extends model
             ->get();
 
         $this->dao->insert(TABLE_REPLY)
-            ->data($reply, $skip = 'captcha')
+            ->data($reply, $skip = 'captcha, uniqid')
             ->autoCheck()
-            ->check('captcha', 'captcha')
             ->batchCheck('content', 'notempty')
+            ->check('captcha', 'captcha')
             ->exec();
 
         if(!dao::isError())
@@ -137,7 +137,13 @@ class replyModel extends model
             ->remove('files,labels,hidden')
             ->get();
 
-        $this->dao->update(TABLE_REPLY)->data($reply)->autoCheck()->check('content', 'notempty')->where('id')->eq($replyID)->exec();
+        $this->dao->update(TABLE_REPLY)
+            ->data($reply, $skip = 'captcha, uniqid')
+            ->autoCheck()
+            ->check('content', 'notempty')
+            ->check('captcha', 'captcha')
+            ->where('id')->eq($replyID)
+            ->exec();
 
         if(!dao::isError())
         {

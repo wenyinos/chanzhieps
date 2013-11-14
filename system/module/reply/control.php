@@ -27,6 +27,11 @@ class reply extends control
             $replyID = $this->reply->post($threadID);
 
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            if($_SESSION['album'][$this->post->uniqid])
+            {
+                $this->loadModel('file')->conserveObjectID($this->post->uniqid, $replyID);
+                if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            }
             $this->send(array('result' => 'success', 'locate' => $this->createLink('thread', 'view', "threadID=$threadID")));
         }
     }
@@ -54,6 +59,11 @@ class reply extends control
         if($_POST)
         {
             $this->reply->update($replyID);
+            if($_SESSION['album'][$this->post->uniqid])
+            {
+                $this->loadModel('file')->conserveObjectID($this->post->uniqid, $replyID);
+                if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            }
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
             $this->send(array('result' => 'success', 'locate' => $this->createLink('thread', 'view', "threaID=$thread->id")));
@@ -63,6 +73,7 @@ class reply extends control
         $this->view->reply  = $reply;
         $this->view->thread = $thread;
         $this->view->board  = $this->loadModel('tree')->getById($thread->board);
+        $this->view->uniqid = uniqid();
 
         $this->display();
     }

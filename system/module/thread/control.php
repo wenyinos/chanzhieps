@@ -41,12 +41,19 @@ class thread extends control
             $threadID = $this->thread->post($boardID);
             if(dao::isError()) $this->send(array('result' =>'fail', 'message' => dao::getError()));
 
+            if($_SESSION['album'][$this->post->uniqid])
+            {
+                $this->loadModel('file')->conserveObjectID($this->post->uniqid, $threadID);
+                if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            }
+
             $locate = inlink('view', "threadID=$threadID");
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' =>$locate));
         }
 
-        $this->view->title = $board->name . $this->lang->minus . $this->lang->thread->post;
-        $this->view->board = $board;
+        $this->view->title  = $board->name . $this->lang->minus . $this->lang->thread->post;
+        $this->view->board  = $board;
+        $this->view->uniqid = uniqid();
         $this->display();
     }
 
@@ -72,12 +79,18 @@ class thread extends control
         {
             $this->thread->update($threadID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            if($_SESSION['album'][$this->post->uniqid])
+            {
+                $this->loadModel('file')->conserveObjectID($this->post->uniqid, $threadID);
+                if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            }
             $this->send(array('result' => 'success', 'locate' => inlink('view', "threadID=$threadID")));
         }
 
         $this->view->title  = $this->lang->thread->edit . $this->lang->minus . $thread->title;
         $this->view->thread = $thread;
         $this->view->board  = $this->loadModel('tree')->getById($thread->board);
+        $this->view->uniqid = uniqid();
 
         $this->display();
     }
@@ -115,6 +128,7 @@ class thread extends control
         $this->view->replies  = $replies;
         $this->view->pager    = $pager;
         $this->view->speakers = $this->loadModel('user')->getBasicInfo($speakers);
+        $this->view->uniqid   = uniqid();
         //$this->view->layouts= $this->loadModel('block')->getLayouts('thread.view');
 
         $this->display();

@@ -10,6 +10,8 @@
  * @link        http://www.chanzhi.org
  */
 include '../../common/view/header.html.php';
+js::set('type', 'reply');
+js::set('uniqid',$uniqid);
 include '../../common/view/kindeditor.html.php';
 
 $common->printPositionBar($board, $thread);
