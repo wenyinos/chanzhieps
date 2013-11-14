@@ -167,10 +167,21 @@ class productModel extends model
      */
     public function getPrevAndNext($current, $category)
     {
-        $prevId = $this->dao->select('id')->from(TABLE_RELATION)->where('category')->eq($category)->andWhere('id')->lt($current)->orderBy('id_desc')->limit(1)->fetch('id');
-        $nextId = $this->dao->select('id')->from(TABLE_RELATION)->where('category')->eq($category)->andWhere('id')->gt($current)->orderBy('id')->limit(1)->fetch('id');
-        $prev   = $this->dao->select('id, name, alias')->from(TABLE_PRODUCT)->where('id')->eq($prevId)->fetch();
-        $next   = $this->dao->select('id, name, alias')->from(TABLE_PRODUCT)->where('id')->eq($nextId)->fetch();
+       $prev = $this->dao->select('t1.id, name, alias')->from(TABLE_PRODUCT)->alias('t1')
+           ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
+           ->where('t2.category')->eq($category)
+           ->andWhere('t2.id')->lt($current)
+           ->orderBy('t2.id_desc')
+           ->limit(1)
+           ->fetch();
+
+       $next = $this->dao->select('t1.id, name, alias')->from(TABLE_PRODUCT)->alias('t1')
+           ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
+           ->where('t2.category')->eq($category)
+           ->andWhere('t2.id')->gt($current)
+           ->orderBy('t2.id')
+           ->limit(1)
+           ->fetch();
 
         return array('prev' => $prev, 'next' => $next);
     }
@@ -200,7 +211,7 @@ class productModel extends model
         $this->dao->insert(TABLE_PRODUCT)
             ->data($product, $skip = 'categories')
             ->autoCheck()
-            ->check('buyLink', 'URL')
+            ->beginIF(!empty($product->buyLink))->check('buyLink', 'URL')->fi()
             ->batchCheck($this->config->product->create->requiredFields, 'notempty')
             ->exec();
         $productID = $this->dao->lastInsertID();
