@@ -43,10 +43,12 @@ class file extends control
     /**
      * AJAX: the api to recive the file posted through ajax.
      * 
+     * @param  string $objectType 
+     * @param  string $uniqid 
      * @access public
      * @return array
      */
-    public function ajaxUpload()
+    public function ajaxUpload($objectType, $uniqid)
     {
         $file = $this->file->getUpload('imgFile');
         $file = $file[0];
@@ -56,10 +58,14 @@ class file extends control
             move_uploaded_file($file['tmpname'], $this->file->savePath . $file['pathname']);
             $url =  $this->file->webPath . $file['pathname'];
 
+            $file['objectType'] = $objectType;
             $file['addedBy']    = $this->app->user->account;
             $file['addedDate']  = helper::today();
+            $file['kindeditor'] = 1;
             unset($file['tmpname']);
             $this->dao->insert(TABLE_FILE)->data($file, false)->exec();
+
+            $_SESSION['album'][$uniqid][] = $this->dao->lastInsertID();
 
             die(json_encode(array('error' => 0, 'url' => $url)));
         }
