@@ -364,3 +364,7 @@ ul.breadcrumb .divider{font-size:20px;color:#3280FC}
 /*summary and keywords setting. */
 .summary     {margin-bottom:10px; padding:5px; line-height:1.5; background:#efefef; font-size:12px}
 .keywords    {margin-top:10px; padding:5px; line-height:1.5; background:#efefef; font-size:12px}
+
+
+/* footer setting. */
+#poweredBy a { color: #333; }

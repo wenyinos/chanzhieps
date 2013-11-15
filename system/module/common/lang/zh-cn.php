@@ -20,8 +20,8 @@ $lang->RMB     = '￥';
 $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 
 /* Lang items for xirang. */
-$lang->chanzhiEPS = '蝉知企业门户系统';
-$lang->poweredBy  = " 由 <a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPS} %s</a> 强力驱动！";
+$lang->chanzhiEPS = '蝉知';
+$lang->poweredBy  = " <span id='poweredBy'>Powered by <a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPS}</a></span>";
 
 /* IE6 alert.  */
 $lang->IE6Alert= <<<EOT

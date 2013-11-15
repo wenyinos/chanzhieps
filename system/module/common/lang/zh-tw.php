@@ -21,7 +21,7 @@ $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 
 /* Lang items for xirang. */
 $lang->chanzhiEPS = '蟬知企業門戶系統';
-$lang->poweredBy  = " 由 <a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPS} %s</a> 強力驅動！";
+$lang->poweredBy  = "<span id='poweredBy'>Powered by <a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPS}</a></span>";
 
 /* IE6 alert.  */
 $lang->IE6Alert= <<<EOT
