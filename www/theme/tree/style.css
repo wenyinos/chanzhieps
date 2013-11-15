@@ -8,7 +8,7 @@ body>.container>hr{display: none;}
 footer{margin: 20px 0;text-align: left;color: #e3d7a2;}
 .breadcrumb,.container>form,#header #slogan{color: #e3d7a2;}
 ul.breadcrumb,footer {background: rgba(58,84,63,0.5);-moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px;padding: 10px 20px;}
-ul.breadcrumb a,footer a{color: #c4b274;}
+ul.breadcrumb a,footer a,#poweredBy a{color: #c4b274;}
 #comments{background-color: #F5F0CC;}
 #links{color: #e3d7a2;}
 
