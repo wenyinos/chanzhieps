@@ -30,7 +30,7 @@ class helpModel extends model
             /* Add self to tree. */
             $order = $this->getChapterNumber($chapter->path);
             $this->lastChapter = $order;
-            $this->catalogue .= "<dt><strong>" . html::a(helper::createLink('help', 'book', "type=$code&categoryID=$chapter->id", "category={$chapter->alias}"), $order .  $chapter->name) . '</strong></dt>';
+            $this->catalogue .= "<dt><strong>" . $order . '&nbsp;' . html::a(helper::createLink('help', 'book', "type=$code&categoryID=$chapter->id", "category={$chapter->alias}"), $chapter->name) . '</strong></dt>';
         }
         $children = $this->tree->getChildren(isset($chapter->id) ? $chapter->id : 0, $book);
 
