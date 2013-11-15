@@ -24,11 +24,9 @@ class commonModel extends model
         $this->setUser();
         $this->loadConfigFromDB();
 
-        if(RUN_MODE == 'front' and isset($this->config->site->lang))
-        {
-            $this->app->setClientLang();
-            $this->app->loadLang('common');
-        }
+        $this->setClientLang();
+        $this->app->loadLang('common');
+        $this->setClientTheme();
 
         $this->loadAlias();
         $this->loadModel('site')->setSite();
@@ -440,6 +438,54 @@ class commonModel extends model
 
         $this->session->set('user', $user);
         $this->app->user = $this->session->user;
+    }
+
+    /**
+     * Set the language used by the client user.
+     * 
+     * Using the order of method $lang param, session, cookie, browser and last the default lang.
+     *
+     * @access  public
+     * @return  void
+     */
+    public function setClientLang()
+    {
+        /* Set client lang use config when exist config in front. */
+        if(RUN_MODE == 'front' and isset($this->config->site->lang)) return $this->app->setClientLang($this->config->site->lang);
+
+        if(isset($_COOKIE['lang']))
+        {
+            $clientLang = $_COOKIE['lang'];
+        }    
+        elseif(RUN_MODE == 'admin' and isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
+        {
+            $clientLang = strpos($_SERVER['HTTP_ACCEPT_LANGUAGE'], ',') === false ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, strpos($_SERVER['HTTP_ACCEPT_LANGUAGE'], ','));
+        }
+
+        $this->app->setClientLang($clientLang);
+    }
+
+    /**
+     * Set the them the client user usering. The logic is same as the clientLang.
+     *
+     * The css and images files of an theme should saved at www/theme/$themeName
+     *
+     * @access  public
+     * @return  void
+     */
+    public function setClientTheme()
+    {
+        $clientTheme = '';
+        if(isset($_COOKIE['theme']))
+        {
+            $clientTheme = $_COOKIE['theme'];
+        }
+        elseif(isset($this->config->client->theme))
+        {
+            $clientTheme = $this->config->client->theme;
+        }
+
+        $this->app->setClientTheme($clientTheme);
     }
 
     /**
