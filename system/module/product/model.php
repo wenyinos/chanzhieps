@@ -212,7 +212,7 @@ class productModel extends model
             ->data($product, $skip = 'categories,uniqid')
             ->autoCheck()
             ->batchCheck($this->config->product->create->requiredFields, 'notempty')
-            ->checkIF($product->buyLink, 'buyLink', 'URL')
+            ->checkIF($product->mall, 'mall', 'URL')
             ->exec();
         $productID = $this->dao->lastInsertID();
 
@@ -248,7 +248,7 @@ class productModel extends model
             ->data($product, $skip = 'categories,uniqid')
             ->autoCheck()
             ->batchCheck($this->config->product->edit->requiredFields, 'notempty')
-            ->checkIF($product->buyLink, 'buyLink', 'URL')
+            ->checkIF($product->mall, 'mall', 'URL')
             ->where('id')->eq($productID)
             ->exec();
 

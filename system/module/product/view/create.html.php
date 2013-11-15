@@ -37,8 +37,8 @@
       </td>
     </tr>
     <tr>
-      <th><?php echo $lang->product->buyLink;?></th>
-      <td><?php echo html::input('buyLink', '', "class='text-1'");?></td>
+      <th><?php echo $lang->product->mall;?></th>
+      <td><?php echo html::input('mall', '', "class='text-1'");?></td>
     </tr>
     <tr>
       <th><?php echo $lang->product->keywords;?></th>

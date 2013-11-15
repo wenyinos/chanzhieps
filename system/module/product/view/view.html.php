@@ -65,8 +65,8 @@ js::set('productID', $product->id);
             <tr><th><?php echo $lang->product->origin . $lang->colon;?></th> <td><?php echo $product->origin;?></td></tr>
           </table>
           <div class='mt-10px'>
-            <?php if($product->buyLink):?>
-            <?php echo html::linkButton($lang->product->buyNow, $product->buyLink, 'btn btn-primary');?>
+            <?php if($product->mall):?>
+            <?php echo html::linkButton($lang->product->buyNow, $product->mall, 'btn btn-primary');?>
             <?php endif;?>
           </div>
         </div>
