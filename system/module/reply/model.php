@@ -91,15 +91,21 @@ class replyModel extends model
             ->get();
 
         $this->dao->insert(TABLE_REPLY)
-            ->data($reply, $skip = 'captcha, uniqid')
+            ->data($reply, $skip = 'captcha, uid')
             ->autoCheck()
             ->batchCheck('content', 'notempty')
             ->check('captcha', 'captcha')
             ->exec();
 
+        $replyID = $this->dao->lastInsertID();                     // Get reply id.
+
+        if($_SESSION['album'][$this->post->uid])
+        {
+            $this->loadModel('file')->updateObjectID($this->post->uid, $replyID, 'reply');
+        }
+
         if(!dao::isError())
         {
-            $replyID = $this->dao->lastInsertID();                     // Get reply id.
             $this->saveCookie($replyID);                               // Save reply id to cookie.
             $this->loadModel('file')->saveUpload('reply', $replyID);   // Save file.
 
@@ -138,12 +144,17 @@ class replyModel extends model
             ->get();
 
         $this->dao->update(TABLE_REPLY)
-            ->data($reply, $skip = 'captcha, uniqid')
+            ->data($reply, $skip = 'captcha, uid')
             ->autoCheck()
             ->check('content', 'notempty')
             ->check('captcha', 'captcha')
             ->where('id')->eq($replyID)
             ->exec();
+
+        if($_SESSION['album'][$this->post->uid])
+        {
+            $this->loadModel('file')->updateObjectID($this->post->uid, $replyID, 'reply');
+        }
 
         if(!dao::isError())
         {

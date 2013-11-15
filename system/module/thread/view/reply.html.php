@@ -51,7 +51,7 @@
     echo "<div class='c-both'></div>";
     echo $this->fetch('file', 'buildForm');
     echo $this->loadModel('captcha')->create4Reply();
-    echo html::submitButton() . html::hidden('uniqid', $uniqid);
+    echo html::submitButton();
 
     echo html::hidden('recTotal',   $pager->recTotal);
     echo html::hidden('recPerPage', $pager->recPerPage);

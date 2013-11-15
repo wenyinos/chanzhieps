@@ -50,7 +50,7 @@ class settingModel extends model
      */
     public function setItem($path, $value = '')
     {
-        $level    = substr_count($path, '.');
+        $level   = substr_count($path, '.');
         $section = '';
         if($level <= 1) return false;
         if($level == 2) list($owner, $module, $key) = explode('.', $path);
@@ -62,6 +62,8 @@ class settingModel extends model
         $item->section = $section;
         $item->key     = $key;
         $item->value   = $value;
+
+        if($_SESSION['album'][$this->post->uid]) $this->loadModel('file')->updateObjectID($this->post->uid, 0, $section);
 
         $this->dao->replace(TABLE_CONFIG)->data($item)->exec();
     }

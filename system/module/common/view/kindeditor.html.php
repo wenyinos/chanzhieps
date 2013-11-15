@@ -27,6 +27,10 @@ js::set('editorLang', $editorLang);
 css::import($jsRoot . 'kindeditor/themes/default/default.css');
 js::import($jsRoot  . 'kindeditor/kindeditor-min.js');
 js::import($jsRoot  . 'kindeditor/lang/' . $editorLang . '.js');
+
+/* set uid for upload. */
+$uid = uniqid('');
+js::set('uid', $uid);
 ?>
 
 <script language='javascript'>
@@ -47,6 +51,8 @@ var fullTools =
 
 $(document).ready(function() 
 {
+    $(':input[type=submit]').after("<input type='hidden' id='uid' name='uid' value=" + v.uid + ">");
+
     $.each(v.editors.id, function(key, editorID)
     {
         editorTool = eval(v.editors.tools);
@@ -59,7 +65,7 @@ $(document).ready(function()
                 filterMode:true, 
                 cssPath:[v.jsRoot + 'kindeditor/plugins/code/prettify.css'],
                 urlType:'absolute', 
-                uploadJson: createLink('file', 'ajaxUpload', 'objectType=' + v.type + '&uniqid=' + v.uniqid),
+                uploadJson: createLink('file', 'ajaxUpload', 'uid=' + v.uid),
                 imageTabIndex:1,
                 allowFileManager:true,
                 langType:v.editorLang,

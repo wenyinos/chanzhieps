@@ -420,20 +420,22 @@ class fileModel extends model
     }
 
     /**
-     * Conserve image's objectID of kindeditor.
+     * Update objectType and objectID for file.
      * 
-     * @param  string $uniqid 
+     * @param  string $uid 
      * @param  int    $objectID 
+     * @param  string $bojectType 
      * @access public
      * @return void
      */
-    public function conserveObjectID($uniqid, $objectID)
+    public function updateObjectID($uid, $objectID, $objectType)
     {
         $data = new stdclass();
-        $data->objectID = $objectID;
-        if($_SESSION['album'][$uniqid])
+        $data->objectID   = $objectID;
+        $data->objectType = $objectType;
+        if($_SESSION['album'][$uid])
         {
-            $this->dao->update(TABLE_FILE)->data($data)->where('id')->in($_SESSION['album'][$uniqid])->exec();
+            $this->dao->update(TABLE_FILE)->data($data)->where('id')->in($_SESSION['album'][$uid])->exec();
             if(dao::isError()) return false;
             return !dao::isError(); 
         }

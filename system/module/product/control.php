@@ -96,20 +96,12 @@ class product extends control
         {
             $productID = $this->product->create();       
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror()));
-
-            if($_SESSION['album'][$this->post->uniqid])
-            {
-                $this->loadModel('file')->conserveObjectID($this->post->uniqid, $productID);
-                if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            }
-
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin')));
         }
 
         $this->view->title           = $this->lang->product->create;
         $this->view->currentCategory = $categoryID;
         $this->view->categories      = $categories;
-        $this->view->uniqid          = uniqid();
         $this->display();
     }
 
@@ -131,11 +123,6 @@ class product extends control
         if($_POST)
         {
             $this->product->update($productID);
-            if($_SESSION['album'][$this->post->uniqid])
-            {
-                $this->loadModel('file')->conserveObjectID($this->post->uniqid, $productID);
-                if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            }
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
         }
@@ -145,7 +132,6 @@ class product extends control
         $this->view->title      = $this->lang->product->edit;
         $this->view->product    = $product;
         $this->view->categories = $categories;
-        $this->view->uniqid     = uniqid();
 
         $this->display();
     }

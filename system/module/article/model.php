@@ -198,11 +198,16 @@ class articleModel extends model
         $article->alias    = seo::unify($article->alias, '-');
 
         $this->dao->insert(TABLE_ARTICLE)
-            ->data($article, $skip = 'categories,uniqid')
+            ->data($article, $skip = 'categories,uid')
             ->autoCheck()
             ->batchCheck($this->config->article->create->requiredFields, 'notempty')
             ->exec();
         $articleID = $this->dao->lastInsertID();
+
+        if($_SESSION['album'][$this->post->uid])
+        {
+            $this->loadModel('file')->updateObjectID($this->post->uid, $articleID, $type);
+        }
 
         if(dao::isError()) return false;
 
@@ -247,11 +252,17 @@ class articleModel extends model
         $article->alias    = seo::unify($article->alias, '-');
         
         $this->dao->update(TABLE_ARTICLE)
-            ->data($article, $skip = 'categories,uniqid')
+            ->data($article, $skip = 'categories,uid')
             ->autoCheck()
             ->batchCheck($this->config->article->edit->requiredFields, 'notempty')
             ->where('id')->eq($articleID)
             ->exec();
+
+        if($_SESSION['album'][$this->post->uid])
+        {
+            $this->loadModel('file')->updateObjectID($this->post->uid, $articleID, $type);
+        }
+
         if(dao::isError()) return false;
 
         $this->loadModel('tag')->save($article->keywords);

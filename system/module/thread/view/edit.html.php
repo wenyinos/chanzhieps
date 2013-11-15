@@ -11,8 +11,6 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
-<?php js::set('type', 'thread');?>
-<?php js::set('uniqid',$uniqid);?>
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php $common->printPositionBar($board, $thread);?>
 
@@ -39,7 +37,7 @@
     <tr><?php echo $this->loadModel('captcha')->create4Comment();?></tr>
     <tr>
       <th></th>
-      <td colspan='2' align='center'><?php echo html::submitButton() . html::backButton() . html::hidden('uniqid', $uniqid);?></td>
+      <td colspan='2' align='center'><?php echo html::submitButton() . html::backButton();?></td>
     </tr>
   </table>
 </form>

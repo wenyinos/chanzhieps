@@ -132,15 +132,21 @@ class threadModel extends model
             ->get();
 
         $this->dao->insert(TABLE_THREAD)
-            ->data($thread, $skip = 'captcha, uniqid')
+            ->data($thread, $skip = 'captcha, uid')
             ->autoCheck()
             ->batchCheck('title, content', 'notempty')
             ->check('captcha', 'captcha')
             ->exec();
 
+        $threadID = $this->dao->lastInsertID();
+
+        if($_SESSION['album'][$this->post->uid])
+        {
+            $this->loadModel('file')->updateObjectID($this->post->uid, $threadID, 'thread');
+        }
+
         if(!dao::isError())
         {
-            $threadID = $this->dao->lastInsertID();
             $this->saveCookie($threadID);
             $this->loadModel('file')->saveUpload('thread', $threadID);
 
@@ -188,12 +194,17 @@ class threadModel extends model
             ->get();
 
         $this->dao->update(TABLE_THREAD)
-            ->data($thread, $skip = 'captcha, uniqid')
+            ->data($thread, $skip = 'captcha, uid')
             ->autoCheck()
             ->batchCheck('title, content', 'notempty')
             ->check('captcha', 'captcha')
             ->where('id')->eq($threadID)
             ->exec();
+
+        if($_SESSION['album'][$this->post->uid])
+        {
+            $this->loadModel('file')->updateObjectID($this->post->uid, $threadID, 'thread');
+        }
 
         if(dao::isError()) return false;
 

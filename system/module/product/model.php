@@ -209,12 +209,17 @@ class productModel extends model
         $product->keywords = seo::unify($product->keywords, ',');
 
         $this->dao->insert(TABLE_PRODUCT)
-            ->data($product, $skip = 'categories,uniqid')
+            ->data($product, $skip = 'categories,uid')
             ->autoCheck()
             ->batchCheck($this->config->product->create->requiredFields, 'notempty')
             ->checkIF($product->mall, 'mall', 'URL')
             ->exec();
         $productID = $this->dao->lastInsertID();
+
+        if($_SESSION['album'][$this->post->uid])
+        {
+            $this->loadModel('file')->updateObjectID($this->post->uid, $productID, 'product');
+        }
 
         if(dao::isError()) return false;
 
@@ -245,12 +250,17 @@ class productModel extends model
         $product->keywords = seo::unify($product->keywords, ',');
 
         $this->dao->update(TABLE_PRODUCT)
-            ->data($product, $skip = 'categories,uniqid')
+            ->data($product, $skip = 'categories,uid')
             ->autoCheck()
             ->batchCheck($this->config->product->edit->requiredFields, 'notempty')
             ->checkIF($product->mall, 'mall', 'URL')
             ->where('id')->eq($productID)
             ->exec();
+
+        if($_SESSION['album'][$this->post->uid])
+        {
+            $this->loadModel('file')->updateObjectID($this->post->uid, $productID, 'product');
+        }
 
         if(dao::isError()) return false;
 

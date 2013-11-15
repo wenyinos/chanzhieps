@@ -148,20 +148,14 @@ class article extends control
 
         if($_POST)
         {
-            $articleID = $this->article->create($type);
+            $this->article->create($type);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            if($_SESSION['album'][$this->post->uniqid])
-            {
-                $this->loadModel('file')->conserveObjectID($this->post->uniqid, $articleID);
-                if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            }
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin', "type=$type")));
         }
 
         $this->view->title           = $this->lang->article->create;
         $this->view->currentCategory = $categoryID;
         $this->view->categories      = $this->loadModel('tree')->getOptionMenu($type, 0, $removeRoot = true);
-        $this->view->uniqid          = uniqid();
         $this->view->type            = $type;
 
         $this->display();
@@ -198,13 +192,6 @@ class article extends control
         if($_POST)
         {
             $this->article->update($articleID, $type);
-
-            if($_SESSION['album'][$this->post->uniqid])
-            {
-                $this->loadModel('file')->conserveObjectID($this->post->uniqid, $articleID);
-                if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            }
-
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin', "type=$type")));
         }
@@ -212,7 +199,6 @@ class article extends control
         $this->view->title      = $this->lang->article->edit;
         $this->view->article    = $article;
         $this->view->categories = $categories;
-        $this->view->uniqid     = uniqid();
         $this->view->type       = $type;
         $this->display();
     }
