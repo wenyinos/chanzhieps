@@ -214,6 +214,12 @@ class commonModel extends model
         {
             $class = $moduleName == $currentModule ? " class='active'" : '';
             list($label, $module, $method, $vars) = explode('|', $moduleMenu);
+
+            if(!commonModel::isAvailable($module)) continue;
+            
+            /* Just whether blog menu should shown. */
+            if(!commonModel::isAvailable('blog') && $vars == 'type=blog') continue;  
+
             if(commonModel::hasPriv($module, $method))
             {
                 $link  = helper::createLink($module, $method, $vars);
