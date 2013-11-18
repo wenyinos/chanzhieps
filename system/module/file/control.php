@@ -292,14 +292,15 @@ class file extends control
     /**
      * Paste image in kindeditor at firefox and chrome. 
      * 
+     * @param  string uid
      * @access public
      * @return void
      */
-    public function ajaxPasteImage()
+    public function ajaxPasteImage($uid)
     {
         if($_POST)
         {
-            echo $this->file->pasteImage($this->post->editor);
+            echo $this->file->pasteImage($this->post->editor, $uid);
         }
     }
 }

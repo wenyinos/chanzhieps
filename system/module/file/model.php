@@ -347,10 +347,11 @@ class fileModel extends model
      * Paste image in kindeditor at firefox and chrome. 
      * 
      * @param  string    $data 
+     * @param  string    $uid 
      * @access public
      * @return string
      */
-    public function pasteImage($data)
+    public function pasteImage($data, $uid)
     {
         $data = str_replace('\"', '"', $data);
 
@@ -372,6 +373,7 @@ class fileModel extends model
             file_put_contents($this->savePath . $file['pathname'], $imageData);
             $this->compressImage($this->savePath . $file['pathname']);
             $this->dao->insert(TABLE_FILE)->data($file)->exec();
+            $_SESSION['album'][$uid][] = $this->dao->lastInsertID();
 
             $data = str_replace($out[1][$key], $this->webPath . $file['pathname'], $data);
         }
