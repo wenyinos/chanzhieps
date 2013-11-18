@@ -390,7 +390,7 @@ class helper
      **/
     public static function substr($string, $length, $append = '')
     {
-        if (strlen($string) <= $Length ) $append = '';
+        if (strlen($string) <= $length ) $append = '';
         if(function_exists('mb_substr')) return mb_substr($string, 0, $length, 'utf-8') . $append;
 
         preg_match_all("/./su", $string, $data);
@@ -414,7 +414,7 @@ class helper
      * @access public
      * @return void
      */
-    function isAjaxRequest()
+    public static function isAjaxRequest()
     {
         return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest';
     }

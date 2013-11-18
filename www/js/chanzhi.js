@@ -50,7 +50,11 @@ $.extend(
                 /* The result.message is just a string. */
                 if($.type(response.message) == 'string')
                 {
-                    if($('#responser').length == 0) return bootbox.alert(response.message);
+                    if($('#responser').length == 0)
+                    {
+                        if(form.parents('#ajaxModal').size()) return alert(response.message);
+                        return bootbox.alert(response.message);
+                    }
                     return $('#responser').html(response.message).addClass('red f-12px').show().delay(5000).fadeOut(100);
                 }
 

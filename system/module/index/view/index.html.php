@@ -66,8 +66,8 @@
         $url = helper::createLink('article', 'view', "id={$article->id}", "category={$category->alias}&name={$article->alias}");
         ?>
         <li>
-            <i class='icon-chevron-right'></i>
-            <?php echo html::a($url, $article->title, "class='latest-news' title='{$article->title}'");?>
+          <i class='icon-chevron-right'></i>
+          <?php echo html::a($url, $article->title, "class='latest-news' title='{$article->title}'");?>
         </li>
         <?php endforeach;?>
       </ul></div>

@@ -113,7 +113,7 @@ class seo
 
         /* The first param is a category alias. */
         $params['category'] = $items[1]; 
-        $method = $methodAlias[$module]['browse'];
+        $method = isset($methodAlias[$module]['browse']) ? $methodAlias[$module]['browse'] : 'browse';
 
         /* Add -bookName to help->book method. */
         if($module == 'help' && $book) $method .= '-' . $book;

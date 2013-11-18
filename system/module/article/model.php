@@ -79,7 +79,7 @@ class articleModel extends model
             ->fetchGroup('article', 'id');
 
         /* Assign categories to it's article. */
-        foreach($articles as $article) $article->categories = $categories[$article->id];
+        foreach($articles as $article) $article->categories = isset($categories[$article->id]) ? $categories[$article->id] : array();
 
         /* Get images for these articles. */
         $images = $this->loadModel('file')->getByObject('article', array_keys($articles), $isImage = true);

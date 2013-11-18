@@ -85,7 +85,7 @@ class productModel extends model
             ->fetchGroup('product', 'id');
 
         /* Assign categories to it's product. */
-        foreach($products as $product) $product->categories = $categories[$product->id];
+        foreach($products as $product) $product->categories = !empty($categories[$product->id]) ? $categories[$product->id] : array();
 
         /* Get images for these products. */
         $images = $this->loadModel('file')->getByObject('product', array_keys($products), $isImage = true);
@@ -94,8 +94,8 @@ class productModel extends model
         foreach($products as $product)
         {
             if(empty($images[$product->id])) continue;
-
-            $product->image->list    = $images[$product->id];
+            $product->image = new stdclass();
+            if(isset($images[$product->id])) $product->image->list = $images[$product->id];
             $product->image->primary = $product->image->list[0];
         }
         
