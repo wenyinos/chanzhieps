@@ -101,6 +101,7 @@ $lang->user->register->lblPassword = '数字和字母组成，六位以上';
 
 $lang->user->notice = new stdclass();
 $lang->user->notice->password = '字母和数字组合，最少六位';
+$lang->user->notice->adminURL = '后台地址是默认地址，为了网站安全，建议修改后台地址!';
 
 $lang->user->login  = new stdclass();
 $lang->user->login->common  = "登录";
