@@ -15,6 +15,7 @@
 js::set('root', $root);
 js::set('book', $book);
 js::set('type', $type);
+js::set('categoryID', $categoryID);
 ?>
 <?php echo $categoryBox;?>
   <div class='col-md-10'>
