@@ -12,7 +12,9 @@ $(document).ready(function()
     {
         $.each(eval(v.path), function(index, category) 
         { 
-            $('.nav-article-' + category).addClass('active');
+            $('.nav-blog-' + category).addClass('active');
         })
     }
+
+    $('.tree #category' + v.categoryID).addClass('active');
 });
