@@ -94,7 +94,7 @@ $(document).ready(function()
                                 var contentType = arr[0].split(";")[0].split(":")[1];
 
                                 html = '<img src="' + result + '" alt="" />';
-                                $.post(createLink('file', 'ajaxPasteImage'), {editor: html}, function(data)
+                                $.post(createLink('file', 'ajaxPasteImage', 'uid=' + v.uid), {editor: html}, function(data)
                                 {
                                     if(data) return cmd.inserthtml(data);
 
@@ -117,7 +117,7 @@ $(document).ready(function()
                                 var html = K(doc.body).html();
                                 if(html.search(/<img src="data:.+;base64,/) > -1)
                                 {
-                                    $.post(createLink('file', 'ajaxPasteImage'), {editor: html}, function(data)
+                                    $.post(createLink('file', 'ajaxPasteImage', "uid=" + v.uid), {editor: html}, function(data)
                                     {
                                         if(data) return K(doc.body).html(data);
 
