@@ -38,3 +38,6 @@ select:focus,textarea:focus,input:focus, select:hover,textarea:hover,input:hover
 .table tr:last-child td,.table{-webkit-border-bottom-left-radius:2px; -webkit-border-bottom-right-radius:2px; -moz-border-radius-bottomleft:2px; -moz-border-radius-bottomright:2px; border-bottom-left-radius:2px; border-bottom-right-radius:2px;}
 .table-form tr:last-child td{padding-bottom: 20px;}
 .table-form tr:first-child td{padding-top: 20px;}
+
+/*tree active setting.*/
+.tree .active{font-weight: bold;}

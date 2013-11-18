@@ -209,7 +209,7 @@ caption {margin:0; padding-left:10px; text-align:left; background-color: #EFEFEF
 #thread p     {margin:0}
 
 .tree li{list-style: none;}
-.tree .active {color:blue; font-weight:bold}
+.tree .active {font-weight:bold}
 
 /* Other items.*/
 .page{color: #707070;}

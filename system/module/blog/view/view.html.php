@@ -14,6 +14,7 @@
 include './header.html.php';
 $path = array_keys($category->pathNames);
 js::set('path',  json_encode($path));
+js::set('categoryID', $category->id);
 js::set('articleID', $article->id);
 include '../../common/view/treeview.html.php';
 ?>
