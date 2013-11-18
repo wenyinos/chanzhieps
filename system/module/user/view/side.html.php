@@ -1,5 +1,5 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
-<div class='col-md-3' id='leftmenu'>
+<div class='col-md-2' id='leftmenu'>
   <div class="list-group">
       <strong class="list-group-item list-group-title"><?php echo $lang->user->control->common;?></strong>
       <?php

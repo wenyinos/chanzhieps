@@ -1,7 +1,7 @@
 <?php include '../../common/view/header.html.php';?>
 <div class='row'>
   <?php include('side.html.php')?>
-  <div class='col-md-9'>
+  <div class='col-md-10'>
     <table class='table table-bordered table-hover'>
       <thead>
         <caption><?php echo $lang->user->thread;?></caption>
@@ -18,8 +18,8 @@
         <tr class='a-center'>
           <td class='a-left'><?php echo html::a($this->createLink('thread', 'view', "id=$thread->id"), $thread->title, "target='_blank'");?></td>
           <td class='w-120px'><?php echo substr($thread->addedDate, 2, -3);?></td>
-          <td class='w-30px'><?php echo $thread->views;?></td>
-          <td class='w-30px'><?php echo $thread->replies;?></td>
+          <td class='w-50px'><?php echo $thread->views;?></td>
+          <td class='w-50px'><?php echo $thread->replies;?></td>
           <td class='w-200px a-left'><?php if($thread->replies) echo substr($thread->repliedDate, 2, -3) . ' ' . $thread->repliedBy;?></td>  
         </tr>  
         <?php endforeach;?>

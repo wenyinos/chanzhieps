@@ -1,7 +1,7 @@
 <?php include '../../common/view/header.html.php';?>
 <div class='row'>
   <?php include './side.html.php';?>
-  <div class='col-md-9'>
+  <div class='col-md-10'>
     <table class='table table-bordered'>
       <caption><?php printf($lang->user->control->welcome, $this->app->user->realname);?></caption>
       <tr><td></td></tr>

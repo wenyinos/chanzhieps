@@ -1,7 +1,7 @@
 <?php include '../../common/view/header.html.php';?>
 <div class='row'>
   <?php include 'side.html.php';?>
-  <div class='col-md-9'>
+  <div class='col-md-10'>
     <table class='table table-form' id='profile'>
       <caption><?php echo $lang->user->profile;?></caption>
       <tr>
