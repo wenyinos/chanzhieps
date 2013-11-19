@@ -8,3 +8,6 @@ $lang->admin->shortcuts->site          = 'Site';
 $lang->admin->shortcuts->logo          = 'Logo';
 $lang->admin->shortcuts->company       = 'Company';
 $lang->admin->shortcuts->contact       = 'Contact';
+
+$lang->admin->adminURL = 'You should modify the default admin path!';
+$lang->admin->notip    = 'Do not show me this again';

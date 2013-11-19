@@ -101,7 +101,6 @@ $lang->user->register->lblPassword= 'Please set you password, at lest six letter
 
 $lang->user->notice = new stdclass();
 $lang->user->notice->password = 'Numbers and letters, at least six';
-$lang->user->notice->adminURL = 'You should modify the default admin path!';
 
 $lang->user->login  = new stdclass();
 $lang->user->login->common  = "Login";

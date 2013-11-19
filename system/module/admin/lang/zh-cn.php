@@ -8,3 +8,6 @@ $lang->admin->shortcuts->site          = '站点设置';
 $lang->admin->shortcuts->logo          = 'LOGO设置';
 $lang->admin->shortcuts->company       = '公司信息';
 $lang->admin->shortcuts->contact       = '联系方式';
+
+$lang->admin->adminURL = '后台地址是默认地址，为了网站安全，建议修改后台地址!';
+$lang->admin->notip    = '不再提示';
