@@ -124,8 +124,11 @@ class model
         $this->dbh    = $dbh;
 
         $moduleName = $this->getModuleName();
-        $this->app->loadLang($moduleName,   $exit = false);
-        if($moduleName != 'common') $this->app->loadConfig($moduleName, $exit = false);   // the common config file load by router's construction already.
+        if($moduleName != 'common')
+        {
+            $this->app->loadLang($moduleName);                    // the common lang file load by router's construction already.
+            $this->app->loadConfig($moduleName, $exit = false);   // the common config file load by router's construction already.
+        }
      
         $this->loadDAO();
         $this->setSuperVars();

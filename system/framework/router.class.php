@@ -310,6 +310,8 @@ class router
         $this->sendHeader();
         $this->connectDB();
 
+        $this->setClientLang();
+        $this->loadLang('common');
         $this->setTimezone();
 
         $this->loadClass('front',  $static = true);
@@ -703,18 +705,32 @@ class router
      */
     public function setClientLang($lang = '')
     {
+        if(RUN_MODE == 'front') return $this->clientLang = $this->config->default->lang;
+
         if(!empty($lang))
         {
-            $lang = strtolower($lang);
-            if(!isset($this->config->langs[$lang])) $lang = $this->config->default->lang;
+            $this->clientLang = $lang;
+        }
+        elseif(isset($_COOKIE['lang']))
+        {
+            $this->clientLang = $_COOKIE['lang'];
+        }    
+        elseif(RUN_MODE == 'admin' and isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
+        {
+            $this->clientLang = strpos($_SERVER['HTTP_ACCEPT_LANGUAGE'], ',') === false ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, strpos($_SERVER['HTTP_ACCEPT_LANGUAGE'], ','));
+        }
+
+        if(!empty($this->clientLang))
+        {
+            $this->clientLang = strtolower($this->clientLang);
+            if(!isset($this->config->langs[$this->clientLang])) $this->clientLang = $this->config->default->lang;
         }
         else
         {
-            $lang = $this->config->default->lang;
+            $this->clientLang = $this->config->default->lang;
         }
 
-        if(RUN_MODE == 'admin') setcookie('lang', $lang, $this->config->cookieLife, $this->config->cookiePath);
-        $this->clientLang = $lang;
+        setcookie('lang', $lang, $this->config->cookieLife, $this->config->cookiePath);
     }
 
     /**

@@ -106,3 +106,6 @@ define('TABLE_MESSAGE',  $config->db->prefix . 'message');
 /* Include extension config files. */
 $extConfigFiles = glob($configRoot . 'ext/*.php');
 if($extConfigFiles) foreach($extConfigFiles as $extConfigFile) include $extConfigFile;
+
+$cacheConfigFile = dirname($configRoot) . '/tmp/cache/config.php';
+if(file_exists($cacheConfigFile)) include $cacheConfigFile;
