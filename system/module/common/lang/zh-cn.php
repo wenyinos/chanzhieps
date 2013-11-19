@@ -20,9 +20,9 @@ $lang->RMB     = '￥';
 $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 
 /* Lang items for xirang. */
-$lang->chanzhiEPS = '蝉知企业门户系统';
+$lang->chanzhiEPS  = '蝉知企业门户系统';
 $lang->chanzhiEPSx = '蝉知';
-$lang->poweredBy  = " <span id='poweredBy'>Powered by <a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPSx}</a></span>";
+$lang->poweredBy   = " <span id='poweredBy'>Powered by <a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPSx}</a></span>";
 
 /* IE6 alert.  */
 $lang->IE6Alert= <<<EOT
@@ -104,8 +104,6 @@ $lang->company->wangwang  = '旺旺';
 $lang->sitemap = new stdclass();
 $lang->sitemap->common = '站点地图';
 
-$lang->setLang = '语言选项：';
-
 /* The main menus. */
 $lang->menu = new stdclass();
 $lang->menu->admin   = '首页|admin|index|';
@@ -116,6 +114,7 @@ $lang->menu->help    = '帮助|help|admin|';
 $lang->menu->comment = '评论|comment|admin|';
 $lang->menu->forum   = '论坛|forum|admin|';
 $lang->menu->site    = '站点|site|setbasic|';
+$lang->menu->ui      = '界面|ui|setlogo|';
 $lang->menu->company = '公司|company|setbasic|';
 $lang->menu->user    = '会员|user|admin|';
 
@@ -140,6 +139,20 @@ $lang->product->menu->browse = array('link' => '产品列表|product|admin|', 'a
 $lang->product->menu->create = '发布产品|product|create|';
 $lang->product->menu->tree   = '类目管理|tree|browse|type=product';
 
+/* Menu of UI module. */
+$lang->ui = new stdclass();
+$lang->ui->menu = new stdclass();
+$lang->ui->menu->logo  = 'LOGO设置|ui|setlogo|';
+$lang->ui->menu->theme = '主题风格|ui|settheme|';
+$lang->ui->menu->slide = array('link' => '幻灯片设置|slide|admin|', 'alias' => 'create,edit');
+$lang->ui->menu->admin = '区块管理|block|admin|';
+$lang->ui->menu->pages = array('link' => '布局管理|block|pages|', 'alias' => 'setpage');
+
+/* Menu of block module. */
+$lang->block = new stdclass();
+$lang->menuGroups->block  = 'ui';
+$lang->block->menu = $lang->ui->menu;
+
 /* Menu of comment module. */
 $lang->comment = new stdclass();
 $lang->comment->menu = new stdclass();
@@ -156,10 +169,7 @@ $lang->forum->menu->tree   = '版块管理|tree|browse|type=forum';
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
 $lang->site->menu->basic     = '站点设置|site|setbasic|';
-$lang->site->menu->logo      = 'LOGO设置|site|setlogo|';
 $lang->site->menu->nav       = '导航设置|nav|admin|';
-$lang->site->menu->theme     = '主题风格|site|settheme|';
-$lang->site->menu->slide     = array('link' => '幻灯片设置|slide|admin|', 'alias' => 'create,edit');
 $lang->site->menu->tag       = '关键词设置|tag|admin|';
 $lang->site->menu->oauth     = '开放登录|site|setoauth|';
 $lang->site->menu->link      = '友情链接|links|admin|';
@@ -189,8 +199,8 @@ $lang->menuGroups->nav  = 'site';
 
 /* Menu of tree module. */
 $lang->slide = new stdclass();
-$lang->slide->menu = $lang->site->menu;
-$lang->menuGroups->slide = 'site';
+$lang->slide->menu = $lang->ui->menu;
+$lang->menuGroups->slide = 'ui';
 
 /* Menu of tree module. */
 $lang->links = new stdclass();

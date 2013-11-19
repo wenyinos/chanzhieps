@@ -20,8 +20,9 @@ $lang->RMB     = '￥';
 $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 
 /* Lang items for xirang. */
-$lang->chanzhiEPS = 'chanzhiEPS';
-$lang->poweredBy = " Powered by <a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPS}</a>!";
+$lang->chanzhiEPS  = 'chanzhiEPS';
+$lang->chanzhiEPSx = 'Chanzhi';
+$lang->poweredBy   = " Powered by <a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPS}</a>!";
 
 /* IE6 alert.  */
 $lang->IE6Alert= <<<EOT
@@ -103,8 +104,6 @@ $lang->company->wangwang  = 'Wangwang';
 $lang->sitemap = new stdclass();
 $lang->sitemap->common = 'Sitemap';
 
-$lang->setLang = 'Language : ';
-
 /* The main menus. */
 $lang->menu = new stdclass();
 $lang->menu->admin   = 'Home|admin|index|';
@@ -115,6 +114,7 @@ $lang->menu->help    = 'Help|help|admin|';
 $lang->menu->comment = 'Comment|comment|admin|';
 $lang->menu->forum   = 'Forum|forum|admin|';
 $lang->menu->site    = 'Site|site|setbasic|';
+$lang->menu->ui      = 'Interface|ui|setlogo|';
 $lang->menu->company = 'Company|company|setbasic|';
 $lang->menu->user    = 'User|user|admin|';
 
@@ -139,6 +139,20 @@ $lang->product->menu->browse = array('link' => 'List|product|admin|', 'alias' =>
 $lang->product->menu->create = 'Create|product|create|';
 $lang->product->menu->tree   = 'Categories|tree|browse|type=product';
 
+/* Menu of UI module. */
+$lang->ui = new stdclass();
+$lang->ui->menu = new stdclass();
+$lang->ui->menu->logo  = 'Logo|ui|setlogo|';
+$lang->ui->menu->theme = 'theme|ui|settheme|';
+$lang->ui->menu->slide = array('link' => 'slide|slide|admin|', 'alias' => 'create,edit');
+$lang->ui->menu->admin = 'Blocks|block|admin|';
+$lang->ui->menu->pages = array('link' => 'layout|block|pages|', 'alias' => 'setpage');
+
+/* Menu of block module. */
+$lang->block = new stdclass();
+$lang->menuGroups->block  = 'ui';
+$lang->block->menu = $lang->ui->menu;
+
 /* Menu of comment module. */
 $lang->comment = new stdclass();
 $lang->comment->menu = new stdclass();
@@ -155,9 +169,7 @@ $lang->forum->menu->tree   = 'Boards|tree|browse|type=forum';
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
 $lang->site->menu->basic     = 'Basic|site|setbasic|';
-$lang->site->menu->logo      = 'Logo|site|setlogo|';
 $lang->site->menu->nav       = 'Navigation|nav|admin|';
-$lang->site->menu->theme     = 'Theme|site|settheme|';
 $lang->site->menu->slide     = array('link' => 'Slide|slide|admin|', 'alias' => 'create,edit');
 $lang->site->menu->tag       = 'Tags|tag|admin|';
 $lang->site->menu->oauth     = 'Open OAuth|site|setoauth|';
