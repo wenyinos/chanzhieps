@@ -23,8 +23,9 @@ class site extends control
         {
             $setting = fixer::input('post')->join('moduleEnabled', ',')->get();
             $result  = $this->loadModel('setting')->setItems('system.common.site', $setting);
-            $this->loadModel('cache')->createConfigCache();
+            $cache   = $this->loadModel('cache')->createConfigCache();
 
+            if(!$cache) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->error->noWritable, $this->app->getTmpRoot() . 'cache/')));
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }

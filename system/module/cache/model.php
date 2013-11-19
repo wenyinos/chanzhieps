@@ -32,7 +32,11 @@ class cacheModel extends model
      */
     public function createConfigCache()
     {
-        $cacheFile   = $this->cacheRoot . 'config.php';
+        $cacheFile = $this->cacheRoot . 'config.php';
+
+        if(!is_writable($this->cacheRoot)) return false;
+        if(is_file($cacheFile) and !is_writable($cacheFile)) return false;
+
         $siteConfigs = $this->loadModel('setting')->getItems('owner=system&module=common&section=site&key=lang,theme');
         $configCache = "<?php\n";
         foreach($siteConfigs as $config)
@@ -41,6 +45,7 @@ class cacheModel extends model
         }
 
         file_put_contents($cacheFile, $configCache);
+        return true;
     }
 }
 

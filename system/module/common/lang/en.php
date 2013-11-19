@@ -224,6 +224,7 @@ $lang->error->account         = "<strong>%s</strong>should be a valid account.";
 $lang->error->passwordsame    = "Two passwords must be the same";
 $lang->error->passwordrule    = "Password should more than six letters.";
 $lang->error->captcha         = 'Captcah wrong.';
+$lang->error->noWritable      = '%s maybe not write, please modify permissions!';
 
 /* The pager items. */
 $lang->pager = new stdclass();
