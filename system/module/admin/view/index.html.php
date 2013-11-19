@@ -44,5 +44,14 @@
       </div>
     </div>      
   </div>
+
+  <?php  if(strpos($this->server->php_self, '/admin.php') !== false  && !($this->config->global->ignoreAdmin)):?>
+  <form method='post' id='ajaxForm' action='<?php echo $this->createLink('admin', 'ignoreAdmin');?>'>
+  <div class='red f-12px mt-10px text-right'>
+    <i class="icon-exclamation-sign icon-large"></i><?php echo $lang->admin->adminURL;?>
+    <?php echo html::submitButton($lang->admin->notip ,'btn btn-danger btn-sm');?>
+  </div>
+  </form>
+  <?php endif;?>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>
