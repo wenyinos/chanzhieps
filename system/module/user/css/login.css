@@ -25,7 +25,4 @@ a .icon-qq, a .icon-sina{
   margin-right: 10px;
   background: url('theme/default/images/main/socialicons.png') left top no-repeat;
 }
-a .icon-sina
-{
-  background-position: 0 -48px;
-}
+a .icon-sina{background-position: 0 -48px;}
