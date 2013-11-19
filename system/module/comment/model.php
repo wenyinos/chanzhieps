@@ -149,7 +149,7 @@ class commentModel extends model
     }
 
     /**
-     * Set the comemnt id the user posted to the cookie. Thus before approvaled, the user can view these comments.
+     * Set the comment id the user posted to the cookie. Thus before approvaled, the user can view these comments.
      * 
      * @param string $commentID
      * @access public
