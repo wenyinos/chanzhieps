@@ -79,6 +79,7 @@ $lang->saveSuccess    = '保存成功';
 $lang->setSuccess     = '设置成功';
 $lang->fail           = '失败';
 $lang->noResultsMatch = '没有匹配的选项';
+$lang->alias          = '搜索引擎优化使用，可使用英文、数字或汉字';
 
 /* Items for javascript. */
 $lang->js = new stdclass();

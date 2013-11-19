@@ -24,9 +24,9 @@
     <tr>
       <th><?php echo $lang->category->alias;?></th>
       <td>
-        <div class="input-group text-4">
+        <div class="input-group text-1">
         <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot?></span>
-        <?php echo html::input('alias', $category->alias, "class='input-xsm form-control'");?>
+        <?php echo html::input('alias', $category->alias, "class='input-xsm form-control' placeholder='{$lang->alias}'");?>
         <span class="input-group-addon">.html</span>
       </td>
 </div>

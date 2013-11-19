@@ -29,7 +29,7 @@
       <td>
         <div class="input-group text-1">
           <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot?>product/id@</span>
-          <?php echo html::input('alias', '', "class='text-1 form-control'");?>
+          <?php echo html::input('alias', '', "class='text-1 form-control' placeholder='{$lang->alias}'");?>
           <span class="input-group-addon">.html</span>
         </div>
       </td>

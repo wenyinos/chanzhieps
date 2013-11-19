@@ -78,6 +78,7 @@ $lang->saveSuccess    = 'Successfully saved.';
 $lang->setSuccess     = 'Successfully saved.';
 $lang->fail           = 'Fail';
 $lang->noResultsMatch = 'No matched results.';
+$lang->alias          = 'for seo, can use numbers, letters and words';
 
 /* Items for javascript. */
 $lang->js = new stdclass();

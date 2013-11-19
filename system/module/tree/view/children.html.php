@@ -20,7 +20,7 @@
         {
             if($child->order > $maxOrder) $maxOrder = $child->order;
             echo '<p>' . html::input("children[$child->id]", $child->name);
-            echo html::input("alias[$child->id]", $child->alias) . '</p>';
+            echo html::input("alias[$child->id]", $child->alias, "placeholder='{$this->lang->category->alias}'") . '</p>';
             echo html::hidden("mode[$child->id]", 'update');
         }
 

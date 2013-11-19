@@ -59,7 +59,7 @@
       <td>
         <div class="input-group text-1">
         <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot?>article/<?php echo $article->id;?>@</span>
-        <?php echo html::input('alias', $article->alias, "class='text-1 form-control'");?>
+        <?php echo html::input('alias', $article->alias, "class='text-1 form-control' placeholder='{$lang->alias}'");?>
         <span class="input-group-addon">.html</span>
       </td>
     </tr>
