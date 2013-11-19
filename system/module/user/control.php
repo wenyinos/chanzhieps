@@ -431,11 +431,10 @@ class user extends control
         /* Init OAuth client. */
         $this->app->loadClass('oauth', $static = true);
         $this->config->oauth->$provider = json_decode($this->config->oauth->$provider);
-        $client = oauth::factory($provider, $this->config->oauth->$provider, $this->user->createOAuthCallbackURL($provider));
+        $client = oauth::factory($provider, $this->config->oauth->$provider, $this->user->createOAuthCallbackURL($provider, $referer));
 
         /* Create the authorize url and locate to it. */
-        $authorizeURL  = $client->createAuthorizeAPI();
-        $authorizeURL .= $referer ? "&referer=$referer" : '';
+        $authorizeURL = $client->createAuthorizeAPI();
         $this->locate($authorizeURL);
     }
 
@@ -443,10 +442,11 @@ class user extends control
      * OAuth callback.
      * 
      * @param  string    $provider
+     * @param  string    $referer
      * @access public
      * @return void
      */
-    public function oauthCallback($provider)
+    public function oauthCallback($provider, $referer = '')
     {
         /* First check the state and provider fields. */
         if($this->get->state != $this->session->oauthState)  die('state wrong!');
@@ -465,18 +465,46 @@ class user extends control
         $user = $this->user->getUserByOpenID($provider, $openID);
         if($user and $this->user->login($user->account, $user->password))
         {
-            $default = $this->config->user->default;    // Redefine the default module and method in dashbaord scene.
+            if($referer) $this->locate(helper::safe64Decode($referer));
 
-            if($this->post->referer != false) $this->locate(urldecode($this->post->referer));
-            if($this->post->referer == false) $this->locate($this->createLink($default->module, $default->method));
+            /* No referer, go to the user control panel. */
+            $default = $this->config->user->default;
+            $this->locate($this->createLink($default->module, $default->method));
         }
 
-        $this->session->set('oauthOpenID', $openID);                     // Save the openID to session.
-        if($this->get->referer != false) $this->setReferer($referer);    // Set the referer.
+        /* Step4.1: if the provider is sina, display the register or bind page. */
+        if($provider == 'sina')
+        {
+            $this->session->set('oauthOpenID', $openID);                     // Save the openID to session.
+            if($this->get->referer != false) $this->setReferer($referer);    // Set the referer.
 
-        $this->view->title   = $this->lang->user->login->common;
-        $this->view->referer = $this->referer;
-        $this->display();
+            $this->view->title   = $this->lang->user->login->common;
+            $this->view->referer = $referer;
+            die($this->display());
+        }
+
+        /* Step4.2: if the provider is qq, register a user with random user. Shit! */
+        if($provider == 'qq')
+        {
+            $openUser = $client->getUserInfo($token, $openID);                    // Get open user info.
+            $this->post->set('account', uniqid('qq_'));                           // Create a uniq account.
+            $this->post->set('realname', htmlspecialchars($openUser->nickname));  // Set the realname.
+            $this->user->registerOauthAccount($provider, $openID);
+
+            $user = $this->user->getUserByOpenID($provider, $openID);
+            if($this->user->login($user->account, $user->password))
+            {
+                if($referer) $this->locate(helper::safe64Decode($referer));
+
+                /* No referer, go to the user control panel. */
+                $default = $this->config->user->default;
+                $this->locate($this->createLink($default->module, $default->method));
+            }
+            else
+            {
+                die('some error occers.');
+            }
+        }
     }
 
     /**
@@ -501,7 +529,7 @@ class user extends control
             {
                 $default = $this->config->user->default;    // Redefine the default module and method in dashbaord scene.
 
-                if($this->post->referer != false) $this->send(array('result'=>'success', 'locate'=> urldecode($this->post->referer)));
+                if($this->post->referer != false) $this->send(array('result'=>'success', 'locate'=> helper::safe64Decode($this->post->referer)));
                 if($this->post->referer == false) $this->send(array('result'=>'success', 'locate'=> $this->createLink($default->module, $default->method)));
                 exit;
             }
@@ -523,7 +551,7 @@ class user extends control
             if($this->user->bindOAuthAccount($this->post->account, $this->session->oauthProvider, $this->session->oauthOpenID))
             {
                 $default = $this->config->user->default;
-                if($this->post->referer != false) $this->send(array('result'=>'success', 'locate'=> urldecode($this->post->referer)));
+                if($this->post->referer != false) $this->send(array('result'=>'success', 'locate'=> helper::safe64Decode($this->post->referer)));
                 if($this->post->referer == false) $this->send(array('result'=>'success', 'locate'=> $this->createLink($default->module, $default->method)));
             }
             else

@@ -12,7 +12,8 @@
             {
                 $providerConfig = json_decode($config->oauth->$providerCode);
                 if(empty($providerConfig->clientID)) continue;
-                $params = "provider=$providerCode" . ($referer ? "&referer=" . helper::safe64Encode($referer) : '');
+                $params = "provider=$providerCode";
+                if($referer and !strpos($referer, 'login') and !strpos($referer, 'oauth')) $params .= "&referer=" . helper::safe64Encode($referer);
                 echo html::a(inlink('oauthLogin', $params), "<i class='icon-{$providerCode} icon-large'></i> " . $providerName, "class='btn btn-default btn-wider btn-lgx btn-block'");
             }
             ?>

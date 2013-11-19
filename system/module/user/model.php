@@ -413,12 +413,13 @@ class userModel extends model
      * Create the callback address for oauth.
      * 
      * @param  string    $provider 
+     * @param  string    $referer 
      * @access public
      * @return string
      */
-    public function createOAuthCallbackURL($provider)
+    public function createOAuthCallbackURL($provider, $referer)
     {
-        return commonModel::getSysURL() . helper::createLink('user', 'oauthCallback', "provider=$provider");
+        return commonModel::getSysURL() . helper::createLink('user', 'oauthCallback', "provider=$provider&referer=$referer");
     }
 
     /**
@@ -443,11 +444,12 @@ class userModel extends model
 
         $this->dao->insert(TABLE_USER)->data($user)
             ->autoCheck()
-            ->batchCheck('account, email', 'notempty')
+            ->check('account', 'notempty')
             ->check('account', 'unique')
             ->check('account', 'account')
-            ->check('email', 'unique')
-            ->check('email', 'email')
+            ->checkIF($provider != 'qq', 'email', 'notempty')
+            ->checkIF($provider != 'qq', 'email', 'unique')
+            ->checkIF($provider != 'qq', 'email', 'email')
             ->exec();
 
         if(dao::isError()) return false;
