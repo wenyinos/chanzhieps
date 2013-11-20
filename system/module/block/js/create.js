@@ -1,3 +1,7 @@
-$(function(){
-    $('#type').change(function(){location.href='/admin.php?m=block&f=create&type=' + $(this).val()})
+$(document).ready(function()
+{
+    $('#type').change(function()
+    {
+        location.href = createLink('block', 'create', 'type=' + $(this).val());
+    })
 })

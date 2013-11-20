@@ -6,7 +6,7 @@
  * @license     LGPL
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     block
- * @version     $Id$
+ * @version     $ID$
  * @link        http://www.chanzhi.org
  */
 class blockModel extends model
@@ -14,13 +14,15 @@ class blockModel extends model
     /**
      * Get block by id.
      * 
-     * @param string $blockId 
+     * @param string $blockID 
      * @access public
      * @return object   the block.
      */
-    public function getById($blockId)
+    public function getByID($blockID)
     {
-        return $this->dao->findById($blockId)->from(TABLE_BLOCK)->fetch();
+        $block = $this->dao->findByID($blockID)->from(TABLE_BLOCK)->fetch();
+        if($block->type != 'html') $block->content = json_decode($block->content);
+        return $block;
     }
 
     /**
@@ -29,9 +31,29 @@ class blockModel extends model
      * @access public
      * @return array    the block lists.
      */
-    public function getList()
+    public function getList($pager)
     {
-        return $this->dao->select('*')->from(TABLE_BLOCK)->orderBy('id')->fetchAll('id');
+        $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->orderBy('id_desc')->page($pager)->fetchAll('id');
+        return $blocks;
+    }
+
+    /**
+     * Get block list of one site.
+     * 
+     * @access public
+     * @return array    the block lists.
+     */
+    public function getPageBlocks($page, $region)
+    {
+        $blockIdList = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->fetch('blocks');
+        $blockIdList = explode($blocks, ',');
+
+        $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('id')->in($blocks)->fetchAll('id');
+
+        $sortedBlocks = array();
+        foreach($blocks as $id) $sortedBlocks[$id] = $blockList->$id;
+
+        return $sortedBlocks;
     }
 
     /**
@@ -46,51 +68,6 @@ class blockModel extends model
     }
 
     /**
-     * Get the layous of one page.
-     * 
-     * @param string $page          the page
-     * @param string $includeAll    include the blocks for all pages or not
-     * @access public
-     * @return array                the layouts of the page.
-     */
-    public function getLayouts($page, $includeAll = true)
-    {
-        if($includeAll) $page .= ', all';
-
-        /* Fetch all blocks first. */
-        $layouts = $this->dao->select('region, blocks')->from(TABLE_LAYOUT)->where('page')->in($page)->fetchpairs();
-
-        /* Get all block id list, then fetch their full records. */
-        $blocks = '';
-        foreach($layouts as $regionBlocks) $blocks .= ',' . $regionBlocks;
-        $blocks = $this->dao->select()->from(TABLE_BLOCK)->where('id')->in($blocks)->fetchAll('id');
-
-        /* Group them by region. */
-        foreach($layouts as $region => $regionBlocks)
-        {
-            $regionBlocks = explode(',', $regionBlocks);
-            unset($layouts[$region]);
-            foreach($regionBlocks as $block) $layouts[$region][$block] = $blocks[$block];
-        }
-
-        return $layouts;
-    }
-
-    /**
-     * Get the regin => blocks pairs of one page.
-     * 
-     * @param string $page 
-     * @param string $includeAll 
-     * @access public
-     * @return void
-     */
-    public function getLayoutPairs($page, $includeAll = true)
-    {
-        if($includeAll) $page .= ', all';
-        return $this->dao->select('region, blocks')->from(TABLE_LAYOUT)->where('page')->in($page)->fetchpairs();
-    }
-
-    /**
      * Create a block.
      * 
      * @access public
@@ -99,55 +76,54 @@ class blockModel extends model
     public function create()
     {
         $block = fixer::input('post')->get();
-        $this->dao->insert(TABLE_BLOCK)->data($block)->autoCheck()->exec();
-        return;
+
+        if(isset($block->params))
+        {
+            foreach($block->params as $field => $value)
+            {
+                if(is_array($value)) $block->params[$field] = join($value, ',');
+            }
+            $block->content = json_encode($block->params);
+        }
+
+        $this->dao->insert(TABLE_BLOCK)->data($block, 'uid')->autoCheck()->exec();
+        return true;
     }
 
     /**
      * Update  block.
      * 
-     * @param string $blockId 
+     * @param string $blockID 
      * @access public
      * @return void
      */
-    public function update($blockId)
+    public function update($blockID)
     {
         $block = fixer::input('post')->get();
-        $this->dao->update(TABLE_BLOCK)->data($block)->autoCheck()->where('id')->eq($blockId)->exec();
-        return;
+
+        if(isset($block->params))
+        {
+            foreach($block->params as $field => $value)
+            {
+                if(is_array($value)) $block->params[$field] = join($value, ',');
+            }
+            $block->content = json_encode($block->params);
+        }
+
+        $this->dao->update(TABLE_BLOCK)->data($block, 'params,uid,blockID')->autoCheck()->where('id')->eq($this->post->blockID)->exec();
+        return true;
     }
 
     /**
      * Set one page's layout.
      * 
      * @param string $page 
+     * @param string $region 
      * @access public
      * @return void
      */
-    public function setPage($page)
+    public function setPage($page, $region)
     {
-        $layouts = array();
-
-        foreach($_POST as $region => $regionBlocks)
-        {
-            $region = str_replace('region', '', $region);
-            $layout = new stdclass();
-            foreach($regionBlocks as $block)
-            {
-                if(!$block) continue;
-                $layout->page     = $page;
-                $layout->region   = $region;
-                $layout->blocks[] = $block;
-            }
-            if(isset($layout->blocks)) $layouts[] = $layout;
-        }
-
-        $this->dao->delete()->from(TABLE_LAYOUT)->where('page')->eq($page)->exec();
-        foreach($layouts as $layout)
-        {
-            $layout->blocks = join(',', $layout->blocks);
-            $this->dao->insert(TABLE_LAYOUT)->data($layout)->exec();
-        }
     }
 
     /**

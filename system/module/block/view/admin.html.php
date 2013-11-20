@@ -11,16 +11,16 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<table align='center' class='table-1'>
+<table align='center' class='table table-bordered'>
   <caption>
-    <div class='f-left'><?php echo $lang->block->list;?></div>
-    <div class='f-right'><?php echo html::a(inlink('create'), $lang->block->add);?></div>
+    <div class='f-left'><?php echo $lang->block->browseBlocks;?></div>
+    <div class='f-right'><?php echo html::a(inlink('create'), $lang->block->create);?></div>
   </caption>
-  <tr>
-    <th class='w-id'><?php echo $lang->block->id;?></th>
+  <tr class='a-center'>
+    <th class='w-100px a-center'><?php echo $lang->block->id;?></th>
     <th><?php echo $lang->block->title;?></th>
     <th><?php echo $lang->block->type;?></th>
-    <th class='w-100px'><?php echo $lang->actions;?></th>
+    <th class='w-200px'><?php echo $lang->actions;?></th>
   </tr>
   <?php foreach($blocks as $block):?>
   <tr class='a-center'>
@@ -37,12 +37,7 @@
   </tr>
   <?php endforeach;?>
   <tr>
-    <td colspan='4'>
-    <?php 
-    echo $lang->block->setPage . ' ';
-    foreach($lang->block->pages as $pageID => $pageTitle) echo html::a(inlink('setPage', "pageID=$pageID"), $pageTitle);
-    ?>
-    </td>
+    <td colspan='4'> <?php echo $pager->get(); ?> </td>
   </tr>
 </table>
 <?php include '../../common/view/footer.admin.html.php';?>
