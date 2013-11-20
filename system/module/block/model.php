@@ -86,7 +86,7 @@ class blockModel extends model
             $block->content = json_encode($block->params);
         }
 
-        $this->dao->insert(TABLE_BLOCK)->data($block, 'uid')->autoCheck()->exec();
+        $this->dao->insert(TABLE_BLOCK)->data($block, 'uid, params')->autoCheck()->exec();
         return true;
     }
 
