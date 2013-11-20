@@ -28,8 +28,9 @@ class blockModel extends model
     /**
      * Get block list of one site.
      * 
+     * @param  object    $pager 
      * @access public
-     * @return array    the block lists.
+     * @return void
      */
     public function getList($pager)
     {
@@ -38,22 +39,47 @@ class blockModel extends model
     }
 
     /**
-     * Get block list of one site.
+     * Create form entry of one block backend.
+     * 
+     * @param  object  $block 
+     * @access public
+     * @return void
+     */
+    public function createEntry($block = null )
+    {
+        $blockOptions[''] = $this->lang->block->select;
+        $blockOptions += $this->getPairs();
+        $entry = '<tr>';
+        $entry .= '<td>' . html::select('blocks[]', $blockOptions, isset($block->id) ? $block->id : '') . '</td>';
+        $entry .= '<td>';
+        $entry .= html::a('javascript:;', $this->lang->block->add, "class='plus'");
+        $entry .= html::a('javascript:;', $this->lang->delete, "class='delete'");
+        $entry .= html::a(inlink('edit', "type={$block->type}&id={$block->id}"), $this->lang->edit, "class='delete'");
+        $entry .= "<i class='icon-arrow-up'></i> <i class='icon-arrow-down'></i>";
+        $entry .= '</td></tr>';
+        return $entry;
+    }
+
+    /**
+     * Get block list of one region.
      * 
      * @access public
      * @return array    the block lists.
      */
-    public function getPageBlocks($page, $region)
+    public function getRegionBlocks($page, $region)
     {
         $blockIdList = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->fetch('blocks');
-        $blockIdList = explode($blocks, ',');
+        $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('id')->in($blockIdList)->fetchAll('id');
 
-        $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('id')->in($blocks)->fetchAll('id');
+        $blockIdList = explode(',', $blockIdList);
 
         $sortedBlocks = array();
-        foreach($blocks as $id) $sortedBlocks[$id] = $blockList->$id;
-
+        foreach($blockIdList as $id) 
+        {
+            if(isset($blocks[$id])) $sortedBlocks[$id] = $blocks[$id];
+        }
         return $sortedBlocks;
+
     }
 
     /**
@@ -64,7 +90,7 @@ class blockModel extends model
      */
     public function getPairs()
     {
-        return $this->dao->select('id, title')->from(TABLE_BLOCK)->orderBy('id')->fetchPairs();
+        return $this->dao->select('id, title')->from(TABLE_BLOCK)->fetchPairs();
     }
 
     /**
@@ -86,7 +112,7 @@ class blockModel extends model
             $block->content = json_encode($block->params);
         }
 
-        $this->dao->insert(TABLE_BLOCK)->data($block, 'uid, params')->autoCheck()->exec();
+        $this->dao->insert(TABLE_BLOCK)->data($block, 'params,uid')->autoCheck()->exec();
         return true;
     }
 
@@ -114,22 +140,41 @@ class blockModel extends model
         return true;
     }
 
-    public function delete($blockID)
+    /**
+     * Delete one block.
+     * 
+     * @param  int    $blockID 
+     * @param  null    $table 
+     * @access public
+     * @return void
+     */
+    public function delete($blockID, $table = null)
     {
         $this->dao->delete()->from(TABLE_BLOCK)->where('id')->eq($blockID)->exec();
         return !dao::isError();
     }
 
     /**
-     * Set one page's layout.
+     * Set block of one region.
      * 
      * @param string $page 
      * @param string $region 
      * @access public
      * @return void
      */
-    public function setPage($page, $region)
+    public function setRegion($page, $region)
     {
+        $layout = new stdclass();
+        $layout->page   = $page;
+        $layout->region = $region;
+        $layout->blocks = join($_POST['blocks'], ',');
+
+        $count = $this->dao->select('count(*) as count')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->fetch('count');
+
+        if($count)  $this->dao->update(TABLE_LAYOUT)->data($layout)->where('page')->eq($page)->andWhere('region')->eq($region)->exec();
+        if(!$count) $this->dao->insert(TABLE_LAYOUT)->data($layout)->exec();
+
+        return !dao::isError();
     }
 
     /**
