@@ -16,7 +16,7 @@
     <caption><?php echo $lang->block->setPage . '-'. $lang->block->pages[$page] . '-' . $lang->block->regions->{$page}[$region];?></caption>
     <thead>
       <tr class='a-center'>
-        <th class='w-250px a-center'><?php echo $lang->block->title;?></th>
+        <th class='w-p30 a-center'><?php echo $lang->block->title;?></th>
         <th><?php echo $lang->actions; ?></th>
       </tr>
     </thead>
@@ -24,12 +24,7 @@
     <?php foreach($blocks as $block) echo $this->block->createEntry($block);?>
     </tbody>
     <tfoot>
-      <tr>
-        <td colspan='2' class='a-left'>
-          <?php echo html::commonButton($lang->block->add, "btn btn-default plus"); ?> 
-          <?php echo html::submitButton();?>
-        </td>
-      </tr>
+      <tr> <td colspan='2' class='a-center'> <?php echo html::submitButton();?> </td> </tr>
     </tfoot>
   </table>
 </form>

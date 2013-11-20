@@ -1,7 +1,6 @@
 $(document).ready(function()
 {
     $(document).on('click', 'a.plus', function() { $(this).parents('tr').after($('#entry').html()); });
-    $(document).on('click', ".plus[type='button']", function() { $("#ajaxForm").find('tbody').append($('#entry').html()); });
 
     /*Delete options*/
     $(document).on('click', '.delete', function() { $(this).parents('tr').remove(); });

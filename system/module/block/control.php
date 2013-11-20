@@ -105,7 +105,9 @@ class block extends control
 
         $this->view->page         = $page;
         $this->view->region       = $region;
-        $this->view->blocks       = $this->block->getRegionBlocks($page, $region);
+        $blocks       = $this->block->getRegionBlocks($page, $region);
+        if(empty($blocks)) $blocks = array(new stdclass());
+        $this->view->blocks       = $blocks;
         $this->view->blockOptions = $this->block->getPairs();
 
         $this->display();
