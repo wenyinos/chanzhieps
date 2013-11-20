@@ -12,6 +12,15 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='container' id='shortcutBox'>
+  <?php  if(strpos($this->server->php_self, '/admin.php') !== false  && !($this->config->global->ignoreTips)):?>
+  <form method='post' id='ajaxForm' action='<?php echo $this->createLink('admin', 'ignoreTips');?>'>
+  <div class="alert alert-danger">
+    <button type="submit" class="close">&times;</button>
+    <strong><?php echo $lang->admin->warning;?></strong> <?php echo $lang->admin->adminURL;?>
+  </div>
+  </form>
+  <?php endif;?>
+
   <div class='row'>
     <div class='col-md-4 col-sm-6'> 
       <div class="shortcut article-create">
@@ -44,14 +53,5 @@
       </div>
     </div>      
   </div>
-
-  <?php  if(strpos($this->server->php_self, '/admin.php') !== false  && !($this->config->global->ignoreAdmin)):?>
-  <form method='post' id='ajaxForm' action='<?php echo $this->createLink('admin', 'ignoreAdmin');?>'>
-  <div class='red f-12px mt-10px text-right'>
-    <i class="icon-exclamation-sign icon-large"></i><?php echo $lang->admin->adminURL;?>
-    <?php echo html::submitButton($lang->admin->notip ,'btn btn-danger btn-sm');?>
-  </div>
-  </form>
-  <?php endif;?>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>

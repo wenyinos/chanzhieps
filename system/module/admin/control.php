@@ -28,9 +28,9 @@ class admin extends control
      * @access public
      * return void
      **/
-    public function ignoreAdmin()
+    public function ignoreTips()
     {
-        $result = $this->loadModel('setting')->setItems('system.common.global', array('ignoreAdmin' => true));
+        $result = $this->loadModel('setting')->setItems('system.common.global', array('ignoreTips' => true));
         if($result) $this->send(array('result' => 'success', 'locate' => inlink('index')));
         $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
     }
