@@ -95,8 +95,8 @@ class productModel extends model
         {
             if(empty($images[$product->id])) continue;
             $product->image = new stdclass();
-            if(isset($images[$product->id])) $product->image->list = $images[$product->id];
-            $product->image->primary = $product->image->list[0];
+            if(isset($images[$product->id]))  $product->image->list = $images[$product->id];
+            if(!empty($product->image->list)) $product->image->primary = $product->image->list[0];
         }
         
         /* Assign summary to it's product. */
