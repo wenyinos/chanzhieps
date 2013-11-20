@@ -11,7 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<table align='center' class='table table-bordered'>
+<table class='table table-bordered table-hover table-striped'>
   <caption>
     <div class='f-left'><?php echo $lang->block->browseBlocks;?></div>
     <div class='f-right'><?php echo html::a(inlink('create'), $lang->block->create);?></div>

@@ -11,16 +11,16 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<form method='post' id='ajaxForm' class='form-inline'>
+<form method='post' id='ajaxForm'>
 <table align='center' class='table table-form table-bordered'>
   <caption><?php echo $lang->block->create;?></caption>
   <tr>
-    <th class='w-120px'><?php echo $lang->block->type;?></th>
-    <td><?php echo html::select('type', $lang->block->typeList, $type, 'class=select-4');?></td>
+    <th class='w-100px'><?php echo $lang->block->type;?></th>
+    <td><?php echo html::select('type', $lang->block->typeList, $type, 'class=select-3');?></td>
   </tr>
   <tr>
     <th><?php echo $lang->block->title;?></th>
-    <td><?php echo html::input('title', '', $type == 'html' ? "class='text-1'" : "class='text-4'");?></td>
+    <td><?php echo html::input('title', '', 'class=text-1');?></td>
   </tr>
   <?php echo $this->fetch('block', 'blockForm', 'type=' . $type);?>
   <tbody id='blockForm'></tbody>
