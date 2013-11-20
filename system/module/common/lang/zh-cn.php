@@ -145,7 +145,7 @@ $lang->ui->menu = new stdclass();
 $lang->ui->menu->logo  = 'LOGO设置|ui|setlogo|';
 $lang->ui->menu->theme = '主题风格|ui|settheme|';
 $lang->ui->menu->slide = array('link' => '幻灯片设置|slide|admin|', 'alias' => 'create,edit');
-$lang->ui->menu->admin = '区块管理|block|admin|';
+$lang->ui->menu->admin = array('link' => '区块管理|block|admin|', 'alias' => 'create,edit');
 $lang->ui->menu->pages = array('link' => '布局管理|block|pages|', 'alias' => 'setpage');
 
 /* Menu of block module. */

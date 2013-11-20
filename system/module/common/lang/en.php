@@ -144,8 +144,8 @@ $lang->ui = new stdclass();
 $lang->ui->menu = new stdclass();
 $lang->ui->menu->logo  = 'Logo|ui|setlogo|';
 $lang->ui->menu->theme = 'theme|ui|settheme|';
-$lang->ui->menu->slide = array('link' => 'slide|slide|admin|', 'alias' => 'create,edit');
-$lang->ui->menu->admin = 'Blocks|block|admin|';
+$lang->ui->menu->slide = array('link' => 'slide|slide|admin|',  'alias' => 'create,edit');
+$lang->ui->menu->admin = array('link' => 'Blocks|block|admin|', 'alias' => 'create,edit');
 $lang->ui->menu->pages = array('link' => 'layout|block|pages|', 'alias' => 'setpage');
 
 /* Menu of block module. */
