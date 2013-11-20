@@ -20,8 +20,8 @@ class cacheModel extends model
     public function __construct()
     {
         parent::__construct();
-        $this->cacheRoot = $this->app->getTmpRoot() . 'cache/';
-        if(!is_dir($this->cacheRoot))mkdir($this->cacheRoot, 0755, true);
+        $this->cacheRoot = $this->app->getTmpRoot() . 'cache';
+        if(!is_dir($this->cacheRoot)) mkdir($this->cacheRoot, 0755, true);
     }
 
     /**
@@ -32,7 +32,7 @@ class cacheModel extends model
      */
     public function createConfigCache()
     {
-        $cacheFile = $this->cacheRoot . 'config.php';
+        $cacheFile = $this->cacheRoot  . DS . 'config.php';
 
         if(!is_writable($this->cacheRoot)) return false;
         if(is_file($cacheFile) and !is_writable($cacheFile)) return false;

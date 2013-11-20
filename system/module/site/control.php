@@ -25,7 +25,7 @@ class site extends control
             $result  = $this->loadModel('setting')->setItems('system.common.site', $setting);
             $cache   = $this->loadModel('cache')->createConfigCache();
 
-            if(!$cache) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->error->noWritable, $this->app->getTmpRoot() . 'cache/')));
+            if(!$cache) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->error->noWritable, $this->app->getTmpRoot() . 'cache')));
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
