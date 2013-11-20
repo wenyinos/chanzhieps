@@ -38,17 +38,4 @@ class siteModel extends model
         if(!isset($this->config->company->content)) $this->config->company->content = '';
         if(!isset($this->config->company->contact)) $this->config->company->contact = json_encode(array());
     }
-
-    /**
-     * Save the settings of the site.
-     * 
-     * @param object $settings
-     * @access public
-     * @return void
-     */
-    public function saveSetting($settings)
-    {
-        $path  = "common.site"; 
-        return $this->loadModel('setting')->setItems($path, $settings);
-    }
 }
