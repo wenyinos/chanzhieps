@@ -14,15 +14,15 @@
 <?php $categories = $this->loadModel('tree')->getOptionMenu('article');?>
 <tr>
   <th><?php echo $lang->block->category->type;?></th>
-  <td><?php echo html::select('params[type]', $lang->block->category->typeList, isset($block->content->type) ? $block->content->type : '', "class='select-3'");?></td>
+  <td><?php echo html::select('params[type]', $lang->block->category->typeList, isset($block->content->type) ? $block->content->type : '', "class='select-4'");?></td>
 </tr>
 <tr>
   <th><?php echo $lang->block->category->show;?></th>
-  <td><?php echo html::select('params[show]', $lang->block->category->showList, isset($block->content->show) ? $block->content->show : '', "class='select-3' onchange='show(this.value)'");?></td>
+  <td><?php echo html::select('params[show]', $lang->block->category->showList, isset($block->content->show) ? $block->content->show : '', "class='select-4' onchange='show(this.value)'");?></td>
 </tr>
 <tr id='parent'>
   <th><?php echo $lang->block->category->parent;?></th>
-  <td><?php echo html::select('params[parnet]', array('' => '') + $categories, isset($block->content->parent) ? $block->content->parent : '', "class='select-1'");?></td>
+  <td><?php echo html::select('params[parnet]', array('' => '') + $categories, isset($block->content->parent) ? $block->content->parent : '', "class='select-4'");?></td>
 </tr>
 <tr id='selected'>
   <th><?php echo $lang->block->category->content;?></th>

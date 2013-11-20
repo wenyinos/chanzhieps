@@ -16,12 +16,12 @@
   <table align='center' class='table table-form'>
     <caption><?php echo $lang->block->edit;?></caption>
     <tr>
-      <th class='w-100px'><?php echo $lang->block->type;?></th>
-      <td><?php echo html::select('type', $lang->block->typeList, $type, 'class=select-3');?></td>
+      <th class='w-120px'><?php echo $lang->block->type;?></th>
+      <td><?php echo html::select('type', $lang->block->typeList, $type, 'class=select-4');?></td>
     </tr>
     <tr>
       <th><?php echo $lang->block->title;?></th>
-      <td><?php echo html::input('title', $block->title, 'class=text-1');?></td>
+      <td><?php echo html::input('title', $block->title, $type == 'html' ? "class='text-1'" : "class='text-4'");?></td>
     </tr>
     <?php echo $this->fetch('block', 'blockForm', 'type=' . $type . '&id=' . $block->id);?>
     <tr>
