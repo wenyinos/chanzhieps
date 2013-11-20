@@ -11,7 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<form method='post' id='ajaxForm'>
+<form method='post' id='ajaxForm' class='form-inline'>
 <table align='center' class='table table-form table-bordered'>
   <caption><?php echo $lang->block->create;?></caption>
   <tr>

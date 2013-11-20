@@ -12,7 +12,7 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php js::set('id', $block->id); ?>
-<form method='post' id='ajaxForm'>
+<form method='post' id='ajaxForm' class='form-inline'>
   <table align='center' class='table table-form'>
     <caption><?php echo $lang->block->edit;?></caption>
     <tr>

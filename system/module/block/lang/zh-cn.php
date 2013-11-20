@@ -29,6 +29,29 @@ $lang->block->setPage      = '配置页面';
 $lang->block->typeList['html']          = '自定义区块';
 $lang->block->typeList['latestArticle'] = '最新文章';
 $lang->block->typeList['latestProduct'] = '最新产品';
+$lang->block->typeList['category']      = '分类导航';
+$lang->block->typeList['contact']       = '联系我们';
+$lang->block->typeList['about']         = '公司简介';
+
+$lang->block->category = new stdclass();
+$lang->block->category->type    = '展示类型';
+$lang->block->category->show    = '显示内容';
+$lang->block->category->parent  = '选择父类';
+$lang->block->category->content = '选择分类';
+
+$lang->block->category->typeList['tree']     = '树状导航';
+$lang->block->category->typeList['list']     = '列表导航';
+$lang->block->category->showList['parent']   = '显示子分类';
+$lang->block->category->showList['selected'] = '显示已选取';
+
+$lang->block->contact = new stdclass();
+$lang->block->contact->itemList[]           = '';
+$lang->block->contact->itemList['phone']    = '电话';
+$lang->block->contact->itemList['email']    = 'Email';
+$lang->block->contact->itemList['qq']       = 'QQ';
+$lang->block->contact->itemList['weibo']    = '微博';
+$lang->block->contact->itemList['wangwang'] = '旺旺';
+$lang->block->contact->itemList['addr']     = '地址';
 
 $lang->block->pages['all']            = '全部页面';
 $lang->block->pages['index_index']    = '首页';
