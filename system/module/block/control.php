@@ -32,7 +32,7 @@ class block extends control
     }
 
     /**
-     * Pages list.
+     * Pages admin list.
      * 
      * @access public
      * @return void
@@ -86,20 +86,28 @@ class block extends control
     }
 
     /**
-     * Set the layouts of one page.
+     * Set the layouts of one region.
      * 
      * @param string   $page 
      * @param string   $region 
      * @access public
      * @return void
      */
-    public function setPage($page, $region)
+    public function setRegion($page, $region)
     {
         if($_POST)
         {
-            //save blocks.
+            $result = $this->block->setRegion($page, $region);
+
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
-        $this->view->blocks = $this->block->getList($page, $region);
+
+        $this->view->page         = $page;
+        $this->view->region       = $region;
+        $this->view->blocks       = $this->block->getRegionBlocks($page, $region);
+        $this->view->blockOptions = $this->block->getPairs();
+
         $this->display();
     }
 
@@ -114,8 +122,9 @@ class block extends control
     public function delete($blockID)
     {
         $result = $this->block->delete($blockID);
-        if($result) $this->send(array('result' => 'success'));
-        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+        if($result)  $this->send(array('result' => 'success'));
+        if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
 
     /**
@@ -128,7 +137,7 @@ class block extends control
      */
     public function blockForm($type, $id = 0)
     {
-        if($id) $this->view->block = $this->block->getByID($id); 
+        if($id > 0) $this->view->block = $this->block->getByID($id); 
 
         $this->view->type = $type;
         $this->display();
