@@ -17,9 +17,11 @@ $lang->block->type       = '类型';
 $lang->block->content    = '内容';
 $lang->block->page       = '页面';
 $lang->block->area       = '区域';
+$lang->block->select     = '请选择区块';
 $lang->block->categories = '分类';
 $lang->block->showImage  = '是否显示图片';
 
+$lang->block->add          = "添加";
 $lang->block->create       = '添加区块';
 $lang->block->browseBlocks = '区块列表';
 $lang->block->browsePages  = '页面列表';
