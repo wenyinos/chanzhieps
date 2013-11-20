@@ -33,8 +33,12 @@ class navModel extends model
      */
     public function getDefault()
     {
-        $navs = array();
-        foreach($this->config->nav->system as $item => $url)
+        $systemNavs = $this->config->nav->system;
+        unset($systemNavs->block);
+        unset($systemNavs->forum);
+        unset($systemNavs->help);
+
+        foreach($systemNavs as $item => $url)
         {
             $nav = new stdclass();
             $nav->type   = 'system';
