@@ -26,7 +26,7 @@
   <tr class='a-center'>
     <td><?php echo $block->id;?></td>
     <td class='a-left'><?php echo $block->title;?></td>
-    <td><?php echo $lang->block->typeList[strtolower($block->type)];?></td>
+    <td><?php echo $lang->block->typeList[$block->type];?></td>
     <td>
       <?php 
       echo html::a(inlink('edit',   "blockID=$block->id"), $lang->edit);
