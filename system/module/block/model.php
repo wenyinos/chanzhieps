@@ -114,6 +114,12 @@ class blockModel extends model
         return true;
     }
 
+    public function delete($blockID)
+    {
+        $this->dao->delete()->from(TABLE_BLOCK)->where('id')->eq($blockID)->exec();
+        return !dao::isError();
+    }
+
     /**
      * Set one page's layout.
      * 

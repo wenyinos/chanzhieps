@@ -113,7 +113,9 @@ class block extends control
      */
     public function delete($blockID)
     {
-        
+        $result = $this->block->delete($blockID);
+        if($result) $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
 
     /**

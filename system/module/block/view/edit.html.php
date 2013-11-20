@@ -16,7 +16,7 @@
   <table align='center' class='table table-form'>
     <caption><?php echo $lang->block->edit;?></caption>
     <tr>
-      <th class='w-id'><?php echo $lang->block->type;?></th>
+      <th class='w-100px'><?php echo $lang->block->type;?></th>
       <td><?php echo html::select('type', $lang->block->typeList, $type, 'class=select-3');?></td>
     </tr>
     <tr>
