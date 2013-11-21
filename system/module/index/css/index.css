@@ -16,12 +16,6 @@
 
 .row .panel{ min-height: 150px;overflow: hidden; font-size: 15px;color: #5A5A5A;}
 .row .panel .panel-heading{background-color: transparent;margin: 0 10px;border-color: #eee;padding-bottom: 5px;}
-.row .panel li{list-style: none; height: 30px; line-height: 30px; overflow: hidden;}
-.row .panel li>i.icon-chevron-right{opacity: 0.5;}
-.row .panel li:hover>i.icon-chevron-right{opacity: 0.9;}
-
-a.latest-news{color: #5A5A5A; padding-left: 5px;}
-a.latest-news:active, a.latest-news:hover{text-decoration: none; color: #4691EF;}
 
 .row .product-box{height:420px;padding:8px;}
 a.thumbnail {border:none;}

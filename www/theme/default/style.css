@@ -368,3 +368,16 @@ ul.breadcrumb .divider{font-size:20px;color:#3280FC}
 
 /* footer setting. */
 #poweredBy a { color: #333; }
+
+/* Article list. */
+.row .panel li{list-style: none; overflow: hidden;}
+.row .panel li>i.icon-chevron-right{opacity: 0.5;}
+.row .panel li:hover>i.icon-chevron-right{opacity: 0.9;}
+
+a.latest-news{color: #5A5A5A; padding-left: 5px; height: 30px; line-height: 30px;}
+a.latest-news:active, a.latest-news:hover{text-decoration: none; color: #4691EF;}
+
+/* Media image in product file. */
+.panel-body li.media{width: 100%; margin-top: 0; padding: 0 8px; text-align:center; float:none}
+.panel-body li a.media-image{display: block; width: 96%; line-height: 180px; height: 188px; border: 1px solid #E5E5E5; padding: 3px; margin: 0 auto;}
+.panel-body li a.media-image:hover,.widget li a.media-image:active{border: 1px solid #CCC;}
