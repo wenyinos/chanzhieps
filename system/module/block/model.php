@@ -70,7 +70,6 @@ class blockModel extends model
     {
         $blockIdList = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->fetch('blocks');
         $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('id')->in($blockIdList)->fetchAll('id');
-
         $blockIdList = explode(',', $blockIdList);
 
         $sortedBlocks = array();
@@ -79,7 +78,6 @@ class blockModel extends model
             if(isset($blocks[$id])) $sortedBlocks[$id] = $blocks[$id];
         }
         return $sortedBlocks;
-
     }
 
     /**
@@ -178,61 +176,35 @@ class blockModel extends model
     }
 
     /**
-     * Print the blocks of one region.
+     * Print blocks of one region.
      * 
-     * @param string $blocks        the blocks
-     * @param string $region        the region 
-     * @param string $showBoard     where print the order or not
+     * @param  string    $page 
+     * @param  string    $region 
      * @access public
-     * @return void
+     * @return string
      */
-    public function printBlock($blocks, $region, $showBoard = true)
+    public function printRegion($page, $region)
     {
-        if(!isset($blocks[$region])) return;
-        $blocks = $blocks[$region];
-        foreach($blocks as $block)
-        {
-            if($showBoard)
-            {
-                echo "<div class='box-title'>$block->title</div>";
-                echo '<div class="box-content">';
-                $this->parseBlockContent($block);
-                echo '</div>';
-            }
-            else
-            {
-                echo "<div>" . $this->parseBlockContent($block) . "</div>";
-            }
-        }
+        $html   = '';
+        $blocks = $this->getRegionBlocks($page, $region);
+        
+        foreach($blocks as $block) $html .= $this->parseBlockContent($block);
+        echo $html;
+        return $html;
     }
 
     /**
      * Parse the content of one block.
      * 
-     * @param string $block 
+     * @param object $block 
      * @access private
-     * @return void
+     * @return string
      */
     private function parseBlockContent($block)
     {
-        if($block->type == 'html' )
-        {
-            echo $block->content;
-        }
-        elseif($block->type == 'php')
-        {
-            eval($block->content);
-        }
-        /* If the type is system, every line will be the param, first is module, second is method, last are params of the method. */
-        elseif($block->type == 'system')
-        {
-            $params = explode("\n", trim($block->content));
-            if(count($params) < 2) return;
-            $module = trim($params[0]);
-            $method = trim($params[1]);
-            unset($params[0]);
-            unset($params[1]);
-            echo $this->app->control->fetch($module, $method, $params);
-        }
+        $blockRoot = dirname(__FILE__) . '/view/block/';
+        $blockFile = $blockRoot . strtolower($block->type) . '.html.php';       
+
+        if(file_exists($blockFile)) return include $blockFile;       
     }
 }
