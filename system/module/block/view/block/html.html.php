@@ -10,9 +10,4 @@
  * @link        http://www.chanzhi.org
 */
 ?>
-<?php $config->block->editor->blockform =  array('id' => 'content', 'tools' => 'fullTools'); ?>
-<?php include '../../common/view/kindeditor.html.php';?>
-<tr>
-  <th><?php echo $lang->block->content;?></th>
-  <td><?php echo html::textarea('content', isset($block) ? $block->content : '', 'rows=20 class=area-1');?></td>
-</tr>
+<?php echo $block->content;?>
