@@ -1,5 +1,6 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
   <hr/>
+  <?php if(RUN_MODE == 'front') echo $this->loadModel('block')->printRegion('all', 'footer');?>
   <footer>
     <?php 
     echo "&copy; {$config->company->name} {$config->site->copyright}-" . date('Y') . '&nbsp;&nbsp;';
@@ -27,5 +28,6 @@ $extHookFiles = glob($extHookRule);
 if($extHookFiles) foreach($extHookFiles as $extHookFile) include $extHookFile;
 ?>
 </div>
+<?php if(RUN_MODE == 'front') echo $this->loadModel('block')->printRegion('all', 'end');?>
 </body>
 </html>
