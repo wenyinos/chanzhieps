@@ -15,7 +15,7 @@
 <table align='center' class='table table-form table-bordered'>
   <caption><?php echo $lang->block->create;?></caption>
   <tr>
-    <th class='w-100px'><?php echo $lang->block->type;?></th>
+    <th class='w-120px'><?php echo $lang->block->type;?></th>
     <td><?php echo html::select('type', $lang->block->typeList, $type, 'class=select-4');?></td>
   </tr>
   <tr>
@@ -25,7 +25,8 @@
   <?php echo $this->fetch('block', 'blockForm', 'type=' . $type);?>
   <tbody id='blockForm'></tbody>
   <tr>
-    <td colspan='2' class='a-center'><?php echo html::submitButton();?></td>
+    <th></th>
+    <td class='a-left'><?php echo html::submitButton();?></td>
   </tr>
 </table>
 </form>
