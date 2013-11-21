@@ -146,7 +146,7 @@ $lang->ui->menu->logo  = 'Logo|ui|setlogo|';
 $lang->ui->menu->theme = 'theme|ui|settheme|';
 $lang->ui->menu->slide = array('link' => 'slide|slide|admin|',  'alias' => 'create,edit');
 $lang->ui->menu->admin = array('link' => 'Blocks|block|admin|', 'alias' => 'create,edit');
-$lang->ui->menu->pages = array('link' => 'layout|block|pages|', 'alias' => 'setpage');
+$lang->ui->menu->pages = array('link' => 'layout|block|pages|', 'alias' => 'setregion');
 
 /* Menu of block module. */
 $lang->block = new stdclass();
