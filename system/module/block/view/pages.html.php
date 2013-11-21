@@ -11,18 +11,16 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<table class='table table-bordered table-hover table-striped'>
-  <caption>
-    <div class='f-left'><?php echo $lang->block->browseRegion;?></div>
-  </caption>
+<table class='table table-bordered table-hover table-striped w-p80'>
+  <caption><?php echo $lang->block->browseRegion;?></caption>
   <tr>
     <th class='w-200px'><?php echo $lang->block->page;?></th>
     <th class='a-center'><?php echo $lang->block->regionList;?></th>
   </tr>
   <?php foreach($this->lang->block->pages as $page => $name):?>
-      <?php if(empty($lang->block->regions->$page)) continue;?>
-  <tr class='a-center'>
-    <th class='a-left'><?php echo $name;?></th>
+  <?php if(empty($lang->block->regions->$page)) continue;?>
+  <tr>
+    <td class='a-left'><?php echo $name;?></td>
     <td>
     <?php
     $regions = $lang->block->regions->$page;
