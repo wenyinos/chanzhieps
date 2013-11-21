@@ -10,8 +10,11 @@
  * @link        http://www.chanzhi.org
 */
 ?>
-<?php $hotArticles = $this->loadModel('article')->getHot($block->category, $block->limit);?>
-<?php if(isset($block->image)):?>
+<?php
+$content = json_decode($block->content);
+$hotArticles = $this->loadModel('article')->getHot($content->category, $content->limit);
+?>
+<?php if(isset($content->image)):?>
   <div class='box radius'>
     <h4 class='title'><?php echo $block->title;?></h4>
     <ul class="media-list">
