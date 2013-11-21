@@ -165,7 +165,6 @@ $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
 $lang->site->menu->basic     = 'Basic|site|setbasic|';
 $lang->site->menu->nav       = 'Navigation|nav|admin|';
-$lang->site->menu->slide     = array('link' => 'Slide|slide|admin|', 'alias' => 'create,edit');
 $lang->site->menu->tag       = 'Tags|tag|admin|';
 $lang->site->menu->oauth     = 'Open OAuth|site|setoauth|';
 $lang->site->menu->link      = 'Links|links|admin|';
@@ -195,13 +194,13 @@ $lang->menuGroups->nav  = 'site';
 
 /* Menu of tree module. */
 $lang->slide = new stdclass();
-$lang->slide->menu = $lang->site->menu;
-$lang->menuGroups->slide = 'site';
+$lang->slide->menu = $lang->ui->menu;
+$lang->menuGroups->slide = 'ui';
 
 /* Menu of block module. */
 $lang->block = new stdclass();
-$lang->menuGroups->block  = 'ui';
 $lang->block->menu = $lang->ui->menu;
+$lang->menuGroups->block  = 'ui';
 
 /* Menu of tree module. */
 $lang->links = new stdclass();

@@ -199,8 +199,8 @@ $lang->menuGroups->slide = 'ui';
 
 /* Menu of block module. */
 $lang->block = new stdclass();
-$lang->menuGroups->block  = 'ui';
 $lang->block->menu = $lang->ui->menu;
+$lang->menuGroups->block  = 'ui';
 
 /* Menu of tree module. */
 $lang->links = new stdclass();
