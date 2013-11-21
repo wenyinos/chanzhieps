@@ -55,7 +55,7 @@ $hotArticles = $this->loadModel('article')->getHot($content->category, $content-
       $category = array_shift($article->categories);
       $url = helper::createLink('article', 'view', "id={$article->id}", "category={$category->alias}&name={$article->alias}");
       ?>
-      <li>
+      <li class='latest-news'>
         <i class='icon-chevron-right'></i>
         <?php echo html::a($url, $article->title, "class='latest-news' title='{$article->title}'");?>
       </li>

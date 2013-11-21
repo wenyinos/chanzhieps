@@ -370,11 +370,10 @@ ul.breadcrumb .divider{font-size:20px;color:#3280FC}
 #poweredBy a { color: #333; }
 
 /* Article list. */
-.row .panel li{list-style: none; overflow: hidden;}
+.row .panel li.latest-news{list-style: none; overflow: hidden; height: 30px; line-height: 30px;}
 .row .panel li>i.icon-chevron-right{opacity: 0.5;}
 .row .panel li:hover>i.icon-chevron-right{opacity: 0.9;}
-
-a.latest-news{color: #5A5A5A; padding-left: 5px; height: 30px; line-height: 30px;}
+a.latest-news{color: #5A5A5A; padding-left: 5px;}
 a.latest-news:active, a.latest-news:hover{text-decoration: none; color: #4691EF;}
 
 /* Media image in product file. */
