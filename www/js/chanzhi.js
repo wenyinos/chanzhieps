@@ -24,7 +24,7 @@ $.extend(
                 /* The response.result is success. */
                 if(response.result == 'success')
                 {
-                    var submitButton = $(formID).find(':submit');
+                    var submitButton = $(formID).find(':input[type=submit]');
                     if(response.message && response.message.length)
                     {
                         submitButton.popover({title:response.message, placement:'right', delay: { show: 500, hide: 500 }}).popover('show');
