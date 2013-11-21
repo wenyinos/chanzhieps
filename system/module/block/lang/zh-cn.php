@@ -87,8 +87,16 @@ $lang->block->regions->all['header'] = '头部';
 $lang->block->regions->all['footer'] = '底部';
 $lang->block->regions->all['end']    = '结束部分';
 
-$lang->block->regions->index_index['header']  = '头部';
-$lang->block->regions->index_index['middle1'] = '中部上';
-$lang->block->regions->index_index['middle2'] = '中部下';
+$lang->block->regions->index_index['header']  = '上部';
+$lang->block->regions->index_index['bottom']  = '下部';
+$lang->block->regions->index_index['footer']  = '底部';
+
+$lang->block->regions->article_browse['side'] = '侧边';
+
+$lang->block->regions->article_view['side']   = '侧边';
+
+$lang->block->regions->product_browse['side'] = '侧边';
+
+$lang->block->regions->product_view['side']   = '侧边';
 
 $lang->block->confirmDelete = "您确定删除该区块吗？";
