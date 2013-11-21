@@ -11,12 +11,10 @@
 */
 ?>
 <?php $this->loadModel('tree');?>
+<?php $block->content = json_decode($block->content);?>
 <?php if($block->content->showChildren):?>
-<?php
- include $this->app->getModuleRoot() . 'common/view/treeview.html.php';
-$treeMenu = $this->tree->getTreeMenu('article', 0, array('treeModel', 'createBlogBrowseLink'));
-?>
-<div class='box widget radius'> 
+<?php $treeMenu = $this->tree->getTreeMenu('blog', 0, array('treeModel', 'createBlogBrowseLink'));?>
+<div class='box radius'> 
   <h4 class='title'><?php echo $block->title;?></h4>
   <?php echo $treeMenu;?>
 </div>

@@ -12,6 +12,7 @@
 ?>
 <?php 
 include './header.html.php';
+include '../../common/view/treeview.html.php';
 $path = array_keys($category->pathNames);
 js::set('path',  json_encode($path));
 js::set('categoryID', $category->id );
