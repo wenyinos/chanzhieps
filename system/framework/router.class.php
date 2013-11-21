@@ -730,7 +730,7 @@ class router
             $this->clientLang = $this->config->default->lang;
         }
 
-        setcookie('lang', $lang, $this->config->cookieLife, $this->config->cookiePath);
+        setcookie('lang', $this->clientLang, $this->config->cookieLife, $this->config->cookiePath);
     }
 
     /**
