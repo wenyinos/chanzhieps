@@ -16,17 +16,15 @@ $product  = $this->loadModel('product')->getByID($content->product);
 $category = array_shift($product->categories);
 $url      = helper::createLink('product', 'view', "id={$product->id}", "category={$category->alias}&name={$product->alias}");
 ?>
-<div class="col-md-4">
-  <div class='panel product-box'>
-    <?php echo html::a($url, html::image($product->image->primary->middleURL), "class='thumbnail'");?>
-    <div class="caption">
-      <h3><?php echo html::a($url, $product->name);?></h3>
-      <p><?php echo $product->summary;?></p>
-    </div>
-    <div class="widget-footer">
-      <p>
-        <?php echo html::a($url, $this->lang->more . $this->lang->raquo);?>
-      </p>
-    </div>
+<div class='panel product-box'>
+  <?php echo html::a($url, html::image($product->image->primary->middleURL), "class='thumbnail'");?>
+  <div class="caption">
+    <h3><?php echo html::a($url, $product->name);?></h3>
+    <p><?php echo $product->summary;?></p>
+  </div>
+  <div class="widget-footer">
+    <p>
+      <?php echo html::a($url, $this->lang->more . $this->lang->raquo);?>
+    </p>
   </div>
 </div>
