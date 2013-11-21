@@ -20,6 +20,7 @@ $lang->block->area       = '区域';
 $lang->block->select     = '请选择区块';
 $lang->block->categories = '分类';
 $lang->block->showImage  = '是否显示图片';
+$lang->block->product    = '产品';
 
 $lang->block->add          = "添加";
 $lang->block->create       = '添加区块';
@@ -29,17 +30,19 @@ $lang->block->edit         = '编辑区块';
 $lang->block->view         = '查看区块';
 $lang->block->setPage      = '配置页面';
 
-$lang->block->typeList['html']          = '自定义区块';
-$lang->block->typeList['latestArticle'] = '最新文章';
-$lang->block->typeList['hotArticle']    = '热门文章';
-$lang->block->typeList['latestProduct'] = '最新产品';
-$lang->block->typeList['hotProduct']    = '热门产品';
-$lang->block->typeList['slide']         = '幻灯片';
-$lang->block->typeList['articleTree']   = '文章分类';
-$lang->block->typeList['productTree']   = '产品分类';
-$lang->block->typeList['blogTree']      = '博客分类';
-$lang->block->typeList['contact']       = '联系我们';
-$lang->block->typeList['about']         = '公司简介';
+$lang->block->typeList['html']            = '自定义区块';
+$lang->block->typeList['latestArticle']   = '最新文章';
+$lang->block->typeList['hotArticle']      = '热门文章';
+$lang->block->typeList['latestProduct']   = '最新产品';
+$lang->block->typeList['featuredProduct'] = '首页推荐产品';
+$lang->block->typeList['hotProduct']      = '热门产品';
+$lang->block->typeList['slide']           = '幻灯片';
+$lang->block->typeList['articleTree']     = '文章分类';
+$lang->block->typeList['productTree']     = '产品分类';
+$lang->block->typeList['blogTree']        = '博客分类';
+$lang->block->typeList['category']        = '分类导航';
+$lang->block->typeList['contact']         = '联系我们';
+$lang->block->typeList['about']           = '公司简介';
 
 $lang->block->image['show'] = '显示图片';
 
