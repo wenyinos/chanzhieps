@@ -22,7 +22,7 @@ $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 /* Lang items for xirang. */
 $lang->chanzhiEPS  = '蝉知企业门户系统';
 $lang->chanzhiEPSx = '蝉知';
-$lang->poweredBy   = " <span id='poweredBy'>Powered by <a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPSx}</a></span>";
+$lang->poweredBy   = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPSx}%s</a></span>";
 
 /* IE6 alert.  */
 $lang->IE6Alert= <<<EOT
@@ -146,7 +146,7 @@ $lang->ui->menu->logo  = 'LOGO设置|ui|setlogo|';
 $lang->ui->menu->theme = '主题风格|ui|settheme|';
 $lang->ui->menu->slide = array('link' => '幻灯片设置|slide|admin|', 'alias' => 'create,edit');
 $lang->ui->menu->admin = array('link' => '区块管理|block|admin|', 'alias' => 'create,edit');
-$lang->ui->menu->pages = array('link' => '布局管理|block|pages|', 'alias' => 'setregion');
+$lang->ui->menu->pages = array('link' => '布局设置|block|pages|', 'alias' => 'setregion');
 
 /* Menu of block module. */
 $lang->block = new stdclass();

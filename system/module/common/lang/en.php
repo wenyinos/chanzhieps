@@ -143,10 +143,10 @@ $lang->product->menu->tree   = 'Categories|tree|browse|type=product';
 $lang->ui = new stdclass();
 $lang->ui->menu = new stdclass();
 $lang->ui->menu->logo  = 'Logo|ui|setlogo|';
-$lang->ui->menu->theme = 'theme|ui|settheme|';
-$lang->ui->menu->slide = array('link' => 'slide|slide|admin|',  'alias' => 'create,edit');
+$lang->ui->menu->theme = 'Theme|ui|settheme|';
+$lang->ui->menu->slide = array('link' => 'Slide|slide|admin|',  'alias' => 'create,edit');
 $lang->ui->menu->admin = array('link' => 'Blocks|block|admin|', 'alias' => 'create,edit');
-$lang->ui->menu->pages = array('link' => 'layout|block|pages|', 'alias' => 'setregion');
+$lang->ui->menu->pages = array('link' => 'Layout|block|pages|', 'alias' => 'setregion');
 
 /* Menu of block module. */
 $lang->block = new stdclass();
