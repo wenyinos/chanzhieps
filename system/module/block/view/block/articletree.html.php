@@ -10,7 +10,8 @@
  * @link        http://www.chanzhi.org
 */
 ?>
-<?php if($block->showChildren):?>
+<?php $this->loadModel('tree');?>
+<?php if($block->content->showChildren):?>
 <?php
  include $this->app->getModuleRoot() . 'common/view/treeview.html.php';
 $treeMenu = $this->tree->getTreeMenu('article', 0, array('treeModel', 'createBrowseLink'));
@@ -20,12 +21,12 @@ $treeMenu = $this->tree->getTreeMenu('article', 0, array('treeModel', 'createBro
   <?php echo $treeMenu;?>
 </div>
 <?php else:?>
-<?php $topCategories = $this->loadModel('tree')->getChildren(0);?>
+<?php $topCategories = $this->tree->getChildren(0);?>
 <div class='list-group'> 
-  <strong class='list-group-item list-group-title'><?php echo $lang->categoryMenu;?></strong>
+  <strong class='list-group-item list-group-title'><?php echo $block->title;?></strong>
   <?php
   foreach($topCategories as $topCategory){
-      $browseLink = $this->createLink('article', 'browse', "categoryID={$topCategory->id}", "category={$topCategory->alias}");
+      $browseLink = helper::createLink('article', 'browse', "categoryID={$topCategory->id}", "category={$topCategory->alias}");
       if($category->name==$topCategory->name)
       {
           echo html::a($browseLink, "<i class='icon-folder-open-alt '></i>" . $topCategory->name, "id='category{$topCategory->id}' class='list-group-item active'");
