@@ -13,15 +13,16 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <table class='table table-bordered table-hover table-striped'>
   <caption>
-    <div class='f-left'><?php echo $lang->block->browsePages;?></div>
+    <div class='f-left'><?php echo $lang->block->browseRegion;?></div>
   </caption>
   <tr>
     <th class='w-200px'><?php echo $lang->block->page;?></th>
-    <th class='a-center'><?php echo $lang->block->area;?></th>
+    <th class='a-center'><?php echo $lang->block->regionList;?></th>
   </tr>
   <?php foreach($this->lang->block->pages as $page => $name):?>
+      <?php if(empty($lang->block->regions->$page)) continue;?>
   <tr class='a-center'>
-    <td class='a-left'><?php echo $name;?></td>
+    <th class='a-left'><?php echo $name;?></th>
     <td>
     <?php
     $regions = $lang->block->regions->$page;
