@@ -34,31 +34,20 @@ $lang->block->typeList['latestArticle'] = '最新文章';
 $lang->block->typeList['hotArticle']    = '热门文章';
 $lang->block->typeList['latestProduct'] = '最新产品';
 $lang->block->typeList['hotProduct']    = '热门产品';
-$lang->block->typeList['category']      = '分类导航';
+$lang->block->typeList['slide']         = '幻灯片';
+$lang->block->typeList['articleTree']   = '文章分类';
+$lang->block->typeList['productTree']   = '产品分类';
+$lang->block->typeList['blogTree']      = '博客分类';
 $lang->block->typeList['contact']       = '联系我们';
 $lang->block->typeList['about']         = '公司简介';
 
 $lang->block->image['show'] = '显示图片';
 
 $lang->block->category = new stdclass();
-$lang->block->category->type    = '展示类型';
-$lang->block->category->show    = '显示内容';
-$lang->block->category->parent  = '选择父类';
-$lang->block->category->content = '选择分类';
+$lang->block->category->showChildren = '显示子分类';
 
-$lang->block->category->typeList['tree']     = '树状导航';
-$lang->block->category->typeList['list']     = '列表导航';
-$lang->block->category->showList['parent']   = '显示子分类';
-$lang->block->category->showList['selected'] = '显示已选取';
-
-$lang->block->contact = new stdclass();
-$lang->block->contact->itemList[]           = '';
-$lang->block->contact->itemList['phone']    = '电话';
-$lang->block->contact->itemList['email']    = 'Email';
-$lang->block->contact->itemList['qq']       = 'QQ';
-$lang->block->contact->itemList['weibo']    = '微博';
-$lang->block->contact->itemList['wangwang'] = '旺旺';
-$lang->block->contact->itemList['addr']     = '地址';
+$lang->block->category->showChildrenList['yes'] = '是';
+$lang->block->category->showChildrenList['no']  = '否';
 
 $lang->block->pages['all']            = '全部页面';
 $lang->block->pages['index_index']    = '首页';
