@@ -1,6 +1,6 @@
 <?php
 /**
- * The latest article front view file of block module of chanzhiEPS.
+ * The hot article front view file of block module of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
  * @license     LGPL (http://www.gnu.org/licenses/lgpl.html)
@@ -10,13 +10,13 @@
  * @link        http://www.chanzhi.org
 */
 ?>
-<?php $latestArticles = $this->loadModel('article')->getLatest($block->category, $block->limit);?>
+<?php $hotArticles = $this->loadModel('article')->getHot($block->category, $block->limit);?>
 <?php if(isset($block->image)):?>
   <div class='box radius'>
     <h4 class='title'><?php echo $block->title;?></h4>
     <ul class="media-list">
-      <?php 
-      foreach($latestArticles as $article):
+      <?php
+      foreach($hotArticles as $article):
       $category = array_shift($article->categories);
       $url = helper::createLink('article', 'view', "id=$article->id", "category={$category->alias}&name=$article->alias");
       ?>
@@ -47,7 +47,7 @@
   <div class="panel panel-default">
     <div class="panel-heading"><h3><?php echo $block->title;?></h3></div>
     <div class="panel-body"><ul class='mg-zero pd-zero'>
-      <?php foreach($latestArticles as $article): ?>
+      <?php foreach($hotArticles as $article): ?>
       <?php 
       $category = array_shift($article->categories);
       $url = helper::createLink('article', 'view', "id={$article->id}", "category={$category->alias}&name={$article->alias}");
