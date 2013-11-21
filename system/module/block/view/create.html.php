@@ -20,7 +20,7 @@
   </tr>
   <tr>
     <th><?php echo $lang->block->title;?></th>
-    <td><?php echo html::input('title', $lang->block->typeList[$type], $type == 'html' ? "class='text-1'" : "class='text-4'");?></td>
+    <td><?php echo html::input('title', $type == 'html' ? '' : $lang->block->typeList[$type], $type == 'html' ? "class='text-1'" : "class='text-4'");?></td>
   </tr>
   <?php echo $this->fetch('block', 'blockForm', 'type=' . $type);?>
   <tbody id='blockForm'></tbody>
