@@ -180,15 +180,17 @@ class blockModel extends model
      * 
      * @param  string    $page 
      * @param  string    $region 
+     * @param  int    $containerHeader 
+     * @param  int    $containerFooter 
      * @access public
      * @return string
      */
-    public function printRegion($page, $region)
+    public function printRegion($page, $region, $containerHeader = '', $containerFooter = '')
     {
         $html   = '';
         $blocks = $this->getRegionBlocks($page, $region);
         
-        foreach($blocks as $block) $html .= $this->parseBlockContent($block);
+        foreach($blocks as $block) $html .= $this->parseBlockContent($block, $containerHeader, $containerFooter);
         echo $html;
     }
 
@@ -196,14 +198,18 @@ class blockModel extends model
      * Parse the content of one block.
      * 
      * @param object $block 
+     * @param  int    $containerHeader 
+     * @param  int    $containerFooter 
      * @access private
      * @return string
      */
-    private function parseBlockContent($block)
+    private function parseBlockContent($block, $containerHeader, $containerFooter)
     {
         $blockRoot = dirname(__FILE__) . '/view/block/';
         $blockFile = $blockRoot . strtolower($block->type) . '.html.php';       
         if(!file_exists($blockFile)) return '';
+        echo $containerHeader;
         include $blockFile;       
+        echo $containerFooter;
     }
 }

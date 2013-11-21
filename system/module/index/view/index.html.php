@@ -3,7 +3,7 @@
 
 <?php echo $this->loadModel('block')->printRegion('index_index', 'header');?>
 <div class='row'>
-  <?php echo $this->loadModel('block')->printRegion('index_index', 'bottom');?>
+  <?php echo $this->loadModel('block')->printRegion('index_index', 'bottom', "<div class='clo-md-4'>", '</div>');?>
 </div>
 <?php echo $this->loadModel('block')->printRegion('index_index', 'footer');?>
 <?php include '../../common/view/footer.html.php';?>
