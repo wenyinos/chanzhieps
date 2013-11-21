@@ -40,7 +40,6 @@ $lang->block->typeList['slide']           = '幻灯片';
 $lang->block->typeList['articleTree']     = '文章分类';
 $lang->block->typeList['productTree']     = '产品分类';
 $lang->block->typeList['blogTree']        = '博客分类';
-$lang->block->typeList['category']        = '分类导航';
 $lang->block->typeList['contact']         = '联系我们';
 $lang->block->typeList['about']           = '公司简介';
 
