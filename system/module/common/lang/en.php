@@ -148,11 +148,6 @@ $lang->ui->menu->slide = array('link' => 'Slide|slide|admin|',  'alias' => 'crea
 $lang->ui->menu->admin = array('link' => 'Blocks|block|admin|', 'alias' => 'create,edit');
 $lang->ui->menu->pages = array('link' => 'Layout|block|pages|', 'alias' => 'setregion');
 
-/* Menu of block module. */
-$lang->block = new stdclass();
-$lang->menuGroups->block  = 'ui';
-$lang->block->menu = $lang->ui->menu;
-
 /* Menu of comment module. */
 $lang->comment = new stdclass();
 $lang->comment->menu = new stdclass();
@@ -202,6 +197,11 @@ $lang->menuGroups->nav  = 'site';
 $lang->slide = new stdclass();
 $lang->slide->menu = $lang->site->menu;
 $lang->menuGroups->slide = 'site';
+
+/* Menu of block module. */
+$lang->block = new stdclass();
+$lang->menuGroups->block  = 'ui';
+$lang->block->menu = $lang->ui->menu;
 
 /* Menu of tree module. */
 $lang->links = new stdclass();

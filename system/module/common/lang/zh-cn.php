@@ -148,11 +148,6 @@ $lang->ui->menu->slide = array('link' => '幻灯片设置|slide|admin|', 'alias'
 $lang->ui->menu->admin = array('link' => '区块管理|block|admin|', 'alias' => 'create,edit');
 $lang->ui->menu->pages = array('link' => '布局设置|block|pages|', 'alias' => 'setregion');
 
-/* Menu of block module. */
-$lang->block = new stdclass();
-$lang->menuGroups->block  = 'ui';
-$lang->block->menu = $lang->ui->menu;
-
 /* Menu of comment module. */
 $lang->comment = new stdclass();
 $lang->comment->menu = new stdclass();
@@ -201,6 +196,11 @@ $lang->menuGroups->nav  = 'site';
 $lang->slide = new stdclass();
 $lang->slide->menu = $lang->ui->menu;
 $lang->menuGroups->slide = 'ui';
+
+/* Menu of block module. */
+$lang->block = new stdclass();
+$lang->menuGroups->block  = 'ui';
+$lang->block->menu = $lang->ui->menu;
 
 /* Menu of tree module. */
 $lang->links = new stdclass();
