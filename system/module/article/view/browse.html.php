@@ -40,6 +40,8 @@ include '../../common/view/treeview.html.php';
       <div class='c-both'></div>
     </div>
   </div>
-  <?php include '../../common/view/side.html.php';?>
+  <div class='col-md-3'>
+    <?php echo $this->loadModel('block')->printRegion('article_browse', 'side');?>
+  </div>
 </div>
 <?php include '../../common/view/footer.html.php';?>

@@ -52,6 +52,8 @@ js::set('articleID', $article->id);
     <div id='commentBox'></div>
     <?php echo html::a('', '', "name='comment'");?>
   </div>
-  <?php include '../../common/view/side.html.php'; ?>
+  <div class='col-md-3'>
+    <?php echo $this->loadModel('block')->printRegion('article_view', 'side');?>
+  </div>
 </div>
 <?php include '../../common/view/footer.html.php'; ?>
