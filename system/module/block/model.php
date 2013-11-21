@@ -190,7 +190,6 @@ class blockModel extends model
         
         foreach($blocks as $block) $html .= $this->parseBlockContent($block);
         echo $html;
-        return $html;
     }
 
     /**
@@ -204,7 +203,7 @@ class blockModel extends model
     {
         $blockRoot = dirname(__FILE__) . '/view/block/';
         $blockFile = $blockRoot . strtolower($block->type) . '.html.php';       
-
-        if(file_exists($blockFile)) return include $blockFile;       
+        if(!file_exists($blockFile)) return '';
+        include $blockFile;       
     }
 }
