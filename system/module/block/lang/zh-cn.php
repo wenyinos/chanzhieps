@@ -42,6 +42,7 @@ $lang->block->typeList['productTree']     = '产品分类';
 $lang->block->typeList['blogTree']        = '博客分类';
 $lang->block->typeList['contact']         = '联系我们';
 $lang->block->typeList['about']           = '公司简介';
+$lang->block->typeList['links']           = '友情链接';
 
 $lang->block->image['show'] = '显示图片';
 
