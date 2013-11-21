@@ -23,14 +23,10 @@
     <tbody>
     <?php foreach($blocks as $block) echo $this->block->createEntry($block);?>
     </tbody>
+    <tbody id='entry' class='hide'><?php echo $this->block->createEntry();?></tbody>
     <tfoot>
       <tr> <td colspan='2' class='a-center'> <?php echo html::submitButton();?> </td> </tr>
     </tfoot>
   </table>
 </form>
-
-<table class='hide'>
-  <tbody id='entry'><?php echo $this->block->createEntry();?></tbody>
-</table>
-
 <?php include '../../common/view/footer.admin.html.php';?>
