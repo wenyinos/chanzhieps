@@ -15,7 +15,7 @@
 <?php if($block->content->showChildren):?>
 <?php $treeMenu = $this->tree->getTreeMenu('blog', 0, array('treeModel', 'createBlogBrowseLink'));?>
 <div class='box radius'> 
-  <h4 class='title'><?php echo $block->title;?></h4>
+  <h4 class='list-group-item list-group-title'><?php echo $block->title;?></h4>
   <?php echo $treeMenu;?>
 </div>
 <?php else:?>
