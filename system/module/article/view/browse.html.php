@@ -41,7 +41,7 @@ include '../../common/view/treeview.html.php';
     </div>
   </div>
   <div class='col-md-3'>
-    <?php echo $this->loadModel('block')->printRegion('article_browse', 'side');?>
+    <?php if(isset($layouts['article_browse']['side'])) echo $this->block->printRegion($layouts['article_browse']['side']);?>
   </div>
 </div>
 <?php include '../../common/view/footer.html.php';?>

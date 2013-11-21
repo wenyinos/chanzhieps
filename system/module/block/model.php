@@ -39,25 +39,40 @@ class blockModel extends model
     }
 
     /**
-     * Create form entry of one block backend.
+     * Get block list of one region.
      * 
-     * @param  object  $block 
      * @access public
-     * @return void
+     * @return array    the block lists.
      */
-    public function createEntry($block = null )
+    public function getPageBlocks($module, $method)
     {
-        $blockOptions[''] = $this->lang->block->select;
-        $blockOptions += $this->getPairs();
-        $entry = "<tr class='v-middle'>";
-        $entry .= '<td>' . html::select('blocks[]', $blockOptions, isset($block->id) ? $block->id : '') . '</td>';
-        $entry .= '<td>';
-        $entry .= html::a('javascript:;', $this->lang->block->add, "class='plus'");
-        $entry .= html::a('javascript:;', $this->lang->delete, "class='delete'");
-        $entry .= html::a(inlink('edit', "type={$block->type}&id={$block->id}"), $this->lang->edit, "class='delete'");
-        $entry .= "<i class='icon-arrow-up'></i> <i class='icon-arrow-down'></i>";
-        $entry .= '</td></tr>';
-        return $entry;
+        $pages   = "all,{$module}_{$method}";
+        $rawLayouts = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->in($pages)->fetchGroup('page', 'region');
+
+        $blocks = '';
+        foreach($rawLayouts as $page => $pageBlocks)
+        {
+            foreach($pageBlocks as $regionBlocks) $blocks .= $regionBlocks->blocks;
+        }
+
+        $blocks = explode(',', $blocks);
+        $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('id')->in($blocks)->fetchAll('id');
+
+        $layouts = array();
+        foreach($rawLayouts as $page => $pageBlocks) 
+        {
+            $layouts[$page] = array();
+            foreach($pageBlocks as $region => $regionBlock)
+            {
+                $layouts[$page][$region] = array();
+                $regionBlocks =  explode(',', $regionBlock->blocks);
+                foreach($regionBlocks as $block)
+                {
+                    $layouts[$page][$region][] = $blocks[$block];
+                }
+            }
+        }
+        return $layouts;
     }
 
     /**
@@ -89,6 +104,28 @@ class blockModel extends model
     public function getPairs()
     {
         return $this->dao->select('id, title')->from(TABLE_BLOCK)->fetchPairs();
+    }
+
+    /**
+     * Create form entry of one block backend.
+     * 
+     * @param  object  $block 
+     * @access public
+     * @return void
+     */
+    public function createEntry($block = null )
+    {
+        $blockOptions[''] = $this->lang->block->select;
+        $blockOptions += $this->getPairs();
+        $entry = "<tr class='v-middle'>";
+        $entry .= '<td>' . html::select('blocks[]', $blockOptions, isset($block->id) ? $block->id : '') . '</td>';
+        $entry .= '<td>';
+        $entry .= html::a('javascript:;', $this->lang->block->add, "class='plus'");
+        $entry .= html::a('javascript:;', $this->lang->delete, "class='delete'");
+        $entry .= html::a(inlink('edit', "type={$block->type}&id={$block->id}"), $this->lang->edit, "class='delete'");
+        $entry .= "<i class='icon-arrow-up'></i> <i class='icon-arrow-down'></i>";
+        $entry .= '</td></tr>';
+        return $entry;
     }
 
     /**
@@ -180,16 +217,14 @@ class blockModel extends model
      * 
      * @param  string    $page 
      * @param  string    $region 
-     * @param  int    $containerHeader 
-     * @param  int    $containerFooter 
+     * @param  string    $containerHeader 
+     * @param  string    $containerFooter 
      * @access public
      * @return string
      */
-    public function printRegion($page, $region, $containerHeader = '', $containerFooter = '')
+    public function printRegion($blocks, $containerHeader = '', $containerFooter = '')
     {
         $html   = '';
-        $blocks = $this->getRegionBlocks($page, $region);
-        
         foreach($blocks as $block) $html .= $this->parseBlockContent($block, $containerHeader, $containerFooter);
         echo $html;
     }
@@ -198,8 +233,8 @@ class blockModel extends model
      * Parse the content of one block.
      * 
      * @param object $block 
-     * @param  int    $containerHeader 
-     * @param  int    $containerFooter 
+     * @param  string    $containerHeader 
+     * @param  string    $containerFooter 
      * @access private
      * @return string
      */

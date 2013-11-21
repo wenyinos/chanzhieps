@@ -89,7 +89,7 @@ js::set('productID', $product->id);
     <?php echo html::a('', '', "name='comment'");?>
   </div>
   <div class='col-md-3'>
-    <?php echo $this->loadModel('block')->printRegion('product_view', 'side');?>
+    <?php if(isset($layouts['product_view']['side'])) echo $this->block->printRegion($layouts['product_view']['side']);?>
   </div>
 </div>
 <?php include '../../common/view/footer.html.php'; ?>
