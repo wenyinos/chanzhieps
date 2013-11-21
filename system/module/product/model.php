@@ -126,6 +126,23 @@ class productModel extends model
     }
 
     /**
+     * Get product pair.
+     * 
+     * @param string $categories 
+     * @access public
+     * @return array
+     */
+    public function getPair($categories)
+    {
+        return $this->dao->select('t1.id, name')->from(TABLE_PRODUCT)->alias('t1')
+            ->leftJoin(TABLE_RELATION)->alias('t2')
+            ->on('t1.id = t2.id')
+            ->beginIF($categories)->where('t2.category')->in($categories)->fi()
+            ->orderBy('id_desc')
+            ->fetchPairs('id', 'name');
+    }
+
+    /**
      * get latest products. 
      *
      * @param array      $categories
