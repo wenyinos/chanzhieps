@@ -14,5 +14,8 @@
   <div class="panel-heading">
     <h4><?php echo $block->title;?></h4>
   </div>
-  <div class="panel-body"><p><?php echo $this->config->company->desc;?><?php echo html::a($this->createLink('company', 'index'), $this->lang->more . $this->lang->raquo);?></p></div>
+  <div class="panel-body">
+    <?php echo $this->config->company->desc;?>
+    <?php echo html::a(helper::createLink('company', 'index'), $this->lang->more . $this->lang->raquo);?>
+  </div>
 </div>
