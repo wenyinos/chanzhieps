@@ -121,6 +121,21 @@ class articleModel extends model
     }
 
     /**
+     * get hot articles. 
+     *
+     * @param array      $categories
+     * @param int        $count
+     * @access public
+     * @return array
+     */
+    public function getHot($categories, $count, $type = 'article')
+    {
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal = 0, $recPerPage = $count, $pageID = 1);
+        return $this->getList($type, $categories, 'views_desc', $pager);
+    }
+
+    /**
      * get latest articles. 
      *
      * @param array      $categories
