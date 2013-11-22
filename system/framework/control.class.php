@@ -170,7 +170,7 @@ class control
         $this->view->config  = $config;
         $this->view->common  = $common;
         $this->view->session = $app->session;
-        $this->view->layouts = $this->loadModel('block')->getPageBlocks($this->moduleName, $this->methodName);
+        if(RUN_MODE == 'front') $this->view->layouts = $this->loadModel('block')->getPageBlocks($this->moduleName, $this->methodName);
 
         $this->setSuperVars();
     }
