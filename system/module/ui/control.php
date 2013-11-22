@@ -25,6 +25,7 @@ class ui extends control
 
             $fileModel =  $this->loadModel('file');
 
+            if(!$this->file->checkSavePath()) $this->send(array('error' => 1, 'message' => $this->lang->file->errorUnwritable));
             /*upload new logo*/
             $logo = $fileModel->saveUpload('logo');
             if(!$logo) $this->send(array('result'=>'fail', 'message'=>$this->lang->fail, inlink('setLogo')));
