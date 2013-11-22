@@ -59,6 +59,10 @@ class upgradeModel extends model
             case '1_5': 
                 $this->execSQL($this->getUpgradeFile('1.5'));
                 $this->processTag();
+            case '1_6':
+                $this->execSQL($this->getUpgradeFile('1.6'));
+                $this->setEnabledModules();
+                $this->setFeaturedProducts();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -83,6 +87,7 @@ class upgradeModel extends model
             case '1_3': $confirmContent .= file_get_contents($this->getUpgradeFile('1.3'));
             case '1_4': $confirmContent .= file_get_contents($this->getUpgradeFile('1.4'));
             case '1_5': $confirmContent .= file_get_contents($this->getUpgradeFile('1.5'));
+            case '1_6': $confirmContent .= file_get_contents($this->getUpgradeFile('1.6'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
@@ -134,6 +139,68 @@ class upgradeModel extends model
         }
 
         $this->loadModel('tag')->save($tags);
+    }
+
+    /**
+     * Set enabled modules when upgrade V1.6
+     * 
+     * @access public
+     * @return void
+     */
+    public function setEnabledModules()
+    {
+       $modules = array(); 
+       $blog  = $this->dao->select("count(*) as count")->from(TABLE_CATEGORY)->where('type')->eq('blog')->fetch('count');
+       if($blog)  $modules[] = 'blog';
+
+       $forum = $this->dao->select("count(*) as count")->from(TABLE_CATEGORY)->where('type')->eq('forum')->fetch('count');
+       if($forum) 
+       {
+           $modules[] = 'forum';
+           $modules[] = 'user';
+       }
+
+       $books  = $this->loadModel('help')->getBookList();
+       if(!empty($books))  $modules[] = 'help';
+
+       $setting = new stdclass();
+       $setting->moduleEnabled = join($modules, ',');
+       return $this->loadModel('setting')->setItems('system.common.site', $setting);
+    }
+
+    /**
+     * Set featured products when upgrade v1.6
+     * 
+     * @access public
+     * @return void
+     */
+    public function setFeaturedProducts()
+    {
+        $products = $this->dao->select("id,name")->from(TABLE_PRODUCT)->orderBy('id_desc')->limit(3)->fetchPairs('id', 'name');
+
+        $blocks = $this->dao->select('blocks')->from(TABLE_LAYOUT)
+            ->where('page')->eq('index_index')
+            ->andWhere('region')->eq('bottom')
+            ->fetch('blocks');
+        $blocks = trim($blocks, ',');
+
+        $this->loadModel('block');
+        foreach($products as $id => $name)
+        {
+            $block = new stdclass();
+            $block->type       = 'featuredProduct';
+            $block->title      = $name;
+            $params['product'] = $id;
+            $block->content    = json_encode($params);
+            $this->dao->insert(TABLE_BLOCK)->data($block)->exec();
+
+            if(!dao::isError()) $blocks = $this->dao->lastInsertID() . ',' . $blocks;
+        }
+        $this->dao->update(TABLE_LAYOUT)->set('blocks')->eq($blocks)
+            ->where('page')->eq('index_index')
+            ->andWhere('region')->eq('bottom')
+            ->exec();
+        return false;
     }
 
     /**
