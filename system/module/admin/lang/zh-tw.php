@@ -9,5 +9,4 @@ $lang->admin->shortcuts->logo          = 'LOGO設置';
 $lang->admin->shortcuts->company       = '公司信息';
 $lang->admin->shortcuts->contact       = '聯繫方式';
 
-$lang->admin->adminURL = '後台地址是預設地址，為了網站安全，建議修改後台地址!';
-$lang->admin->warning  = '警告!';
+$lang->admin->adminEntry = '警告：您現在的管理入口還是預設的admin.php，建議將admin.php改名以增強系統安全!';
