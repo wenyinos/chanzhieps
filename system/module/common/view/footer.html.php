@@ -1,14 +1,22 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
-  <hr/>
   <?php if(RUN_MODE == 'front' and isset($layouts['all']['footer'])) echo $this->loadModel('block')->printRegion($layouts['all']['footer']);?>
-  <footer>
-    <?php 
-    echo "&copy; {$config->company->name} {$config->site->copyright}-" . date('Y') . '&nbsp;&nbsp;';
-    echo $config->site->icp;
-    echo html::a($this->createLink('sitemap', 'index'), $lang->sitemap->common);
-    if(empty($this->config->links->index) && !empty($this->config->links->all)) echo "&nbsp;" . html::a($this->createLink('links', 'index'), $lang->link);
-    printf($lang->poweredBy, $config->version, $config->version);
-    ?>
+  <footer id="footer" class="clearfix">
+    <div id="footNav">
+      <?php
+      echo html::a($this->createLink('sitemap', 'index'), '<i class="icon-sitemap"></i> ' . $lang->sitemap->common);
+
+      if(empty($this->config->links->index) && !empty($this->config->links->all)) echo "&nbsp;" . html::a($this->createLink('links', 'index'), '<i class="icon-heart"></i>' + $lang->link);
+
+      echo html::a($config->webRoot .'rss.xml', '<i class="icon-rss"></i> RSS');
+      ?>
+    </div>
+    <span id="copyright">
+    <?php echo "&copy; {$config->company->name} {$config->site->copyright}-" . date('Y') . '&nbsp;&nbsp;'; ?>
+    </span>
+    <span id="icpInfo"><?php echo $config->site->icp; ?></span>
+    <div id="powerby">
+      <?php printf($lang->poweredBy, $config->version, $config->version); ?>
+    </div>
   </footer>
    
 <?php
