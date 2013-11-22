@@ -122,7 +122,7 @@ class blockModel extends model
         $entry .= '<td>';
         $entry .= html::a('javascript:;', $this->lang->block->add, "class='plus'");
         $entry .= html::a('javascript:;', $this->lang->delete, "class='delete'");
-        $entry .= html::a(inlink('edit', "type={$block->type}&id={$block->id}"), $this->lang->edit, "class='delete'");
+        $entry .= html::a(inlink('edit', "blockID={$block->id}&type={$block->type}"), $this->lang->edit, "class='delete'");
         $entry .= "<i class='icon-arrow-up'></i> <i class='icon-arrow-down'></i>";
         $entry .= '</td></tr>';
         return $entry;
