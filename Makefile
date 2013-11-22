@@ -21,8 +21,8 @@ tgz:
 	cd chanzhieps/system/build/ && php ./minifyfront.php
 	rm -frv chanzhieps/system/build
 	# delee the unused files.
-	find chanzhieps -name .git* |xargs rm -frv
-	find chanzhieps -name .svn* |xargs rm -frv
+	find chanzhieps -name '.git*' |xargs rm -frv
+	find chanzhieps -name '.svn*' |xargs rm -frv
 	find chanzhieps -name tests |xargs rm -frv
 	# change mode.
 	chmod 777 -R chanzhieps/system/tmp/
@@ -52,8 +52,8 @@ ips:
 	rsync -av --exclude='db/' --exclude='.git/' --exclude='README.md' ips/ chanzhiips
 	cat ips/system/db/install.sql >> chanzhiips/system/db/chanzhi.sql
 	# delete the unused files.
-	find chanzhiips -name .git* |xargs rm -frv
-	find chanzhiips -name .svn* |xargs rm -frv
+	find chanzhiips -name '.git*' |xargs rm -frv
+	find chanzhiips -name '.svn*' |xargs rm -frv
 	find chanzhiips -name tests |xargs rm -frv
 	cd chanzhiips/system/module && rm -frv rss product blog forum help reply thread comment
 	# change mode.
