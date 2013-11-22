@@ -31,6 +31,7 @@ footer{margin: 20px 0;text-align: left;color: #c9c9c9;}
 
 #topNav>ul>li{border-width: 0; display: inline-block; width: auto; color: #f1f1f1;margin: 0;}
 #topNav>ul>li>a,#topNav>ul>li:last-child>a{border-width: 0; border:none; color: #f1f1f1; }
+#topNav>ul>li>a{color: #f1f1f1;}
 #topNav>ul>li:first-child>a{-moz-border-radius:2px 0 0 2px; -webkit-border-radius:2px 0 0 2px; border-radius:2px 0 0 2px;}
 #topNav>ul>li:last-child>a{-moz-border-radius:0 2px 2px 0; -webkit-border-radius:0 2px 2px 0; border-radius:0 2px 2px 0;}
 #topNav a:hover,#topNav>ul>li>a:hover,#topNav>ul>li>ul>li a:hover,#topNav>ul>li>ul>li.hover>a{color:#f1f1f1; background: #da3b26;}
