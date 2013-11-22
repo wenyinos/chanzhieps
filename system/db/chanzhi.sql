@@ -297,7 +297,7 @@ INSERT INTO `eps_layout` (`page`, `region`, `blocks`) VALUES
 ('index_index', 'header', '5,'),
 ('index_index', 'bottom', '10,1,9,'),
 ('index_index', 'footer', '11,'),
-('article_browse', 'side', '6,7,9,'),
-('article_view', 'side', '6,7,9,'),
+('article_browse', 'side', '6,9,'),
+('article_view', 'side', '6,9,'),
 ('product_browse', 'side', '4,7,9,'),
 ('product_view', 'side', '4,7,9,');
