@@ -11,6 +11,7 @@
 */
 ?>
 <?php $slides = $this->loadModel('slide')->getList();?>
+<?php if($slides):?>
 <div id='slide' class='carousel slide'>
   <div class='carousel-inner'>
     <?php foreach($slides as $slide):?>
@@ -32,3 +33,4 @@
   <?php echo html::a('#slide', $this->lang->prev, "class='left carousel-control' data-slide='prev'")?>
   <?php echo html::a('#slide', $this->lang->next, "class='right carousel-control' data-slide='next'")?>
 </div>
+<?php endif;?>

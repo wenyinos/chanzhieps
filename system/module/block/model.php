@@ -68,7 +68,7 @@ class blockModel extends model
                 $regionBlocks =  explode(',', $regionBlock->blocks);
                 foreach($regionBlocks as $block)
                 {
-                    $layouts[$page][$region][] = $blocks[$block];
+                    if(isset($blocks[$block])) $layouts[$page][$region][] = $blocks[$block];
                 }
             }
         }
