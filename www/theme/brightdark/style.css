@@ -5,10 +5,15 @@ a{color: #da3b26; -webkit-transition: 0.25s; -moz-transition: 0.25s; -o-transiti
 a:hover{color: #da3b26;}
 
 body>.container>hr{display: none;}
-footer{margin: 20px 0;text-align: left;color: #c9c9c9;}
+#footer{margin-top: 20px;border-color: #808080}
+#footNav a ,#copyright,#icpInfo { color: #999; }
+#footNav a:hover { color: #fff }
+#powerby{background-color: #414b5a;border-color: #1d232a;}
+#powerby a{color: #a4b4a6}
+#powerby:hover{background-color: #1d232a;border-color: #414b5a}
 .breadcrumb,.container>form,#header #slogan{color: #c9c9c9;}
 #comments{background-color: #ECF0F5;}
-#links,#poweredBy a{color: #ECF0F5;}
+#links{color: #ECF0F5;}
 
 /* headNav. */
 #headNav{top: 15px; background-color: #808080; -moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px;}

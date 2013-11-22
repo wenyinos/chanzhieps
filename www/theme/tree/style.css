@@ -3,12 +3,17 @@ body{ background: #5f7a64 repeat fixed url("data:image/png;base64,iVBORw0KGgoAAA
 body{background-color: #5f7a64;}
 a{color: #6e2e16; -webkit-transition: 0.25s; -moz-transition: 0.25s; -o-transition: 0.25s; transition: 0.25s; -webkit-backface-visibility: hidden;}
 a:hover{color: #6e2e16;}
-
 body>.container>hr{display: none;}
-footer{margin: 20px 0;text-align: left;color: #e3d7a2;}
 .breadcrumb,.container>form,#header #slogan{color: #e3d7a2;}
 ul.breadcrumb,footer {background-color: #4c6751; background-color: rgba(58,84,63,0.5);-moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px;padding: 10px 20px;}
-ul.breadcrumb a,footer a,#poweredBy a{color: #c4b274;}
+#footer{border: none;margin-top: 20px;}
+#footNav a { color: #c4b274; }
+#footNav a:hover { color: #fff }
+#powerby{background-color: #5d7762;border-color: #3f5643;}
+#powerby a{color: #a4b4a6}
+#powerby:hover{background-color: #3f5643}
+ul.breadcrumb a{color: #c4b274;}
+#copyright,#icpInfo { color: #e3d7a2; }
 #comments{background-color: #F5F0CC;}
 #links{color: #e3d7a2;}
 

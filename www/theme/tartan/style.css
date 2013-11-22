@@ -7,7 +7,7 @@ a:hover{color: #5e7896;}
 body>.container>hr{display: none;}
 footer{margin: 20px 0;text-align: left;}
 .index footer{margin-top: 0}
-ul.breadcrumb a,footer a,#poweredBy a{color: #7a94b2;}
+ul.breadcrumb a,footer a{color: #7a94b2;}
 #comments{background-color: #F5F0CC;}
 
 /* headNav. */
