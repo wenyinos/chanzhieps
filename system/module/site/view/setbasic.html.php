@@ -21,7 +21,7 @@
     </tr>
     <tr>
       <th><?php echo $lang->site->module;?></th>
-      <td><?php echo html::checkbox('moduleEnabled', $lang->site->moduleAvailable, $this->config->site->moduleEnabled);?></td>
+      <td><?php echo html::checkbox('moduleEnabled', $lang->site->moduleAvailable, isset($this->config->site->moduleEnabled) ? $this->config->site->moduleEnabled : '');?></td>
     </tr>
     <tr>
       <th><?php echo $lang->site->lang;?></th>
