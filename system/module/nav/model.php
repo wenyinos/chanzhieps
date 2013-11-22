@@ -34,7 +34,7 @@ class navModel extends model
     public function getDefault()
     {
         $systemNavs = $this->config->nav->system;
-        unset($systemNavs->block);
+        unset($systemNavs->blog);
         unset($systemNavs->forum);
         unset($systemNavs->help);
 
