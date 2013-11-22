@@ -18,6 +18,7 @@ $lang->file->primary    = '封面';
 $lang->file->setPrimary = '设为封面';
 $lang->file->deny       = '禁止';
 $lang->file->allow      = '允许';
+$lang->file->toggle     = '切换';
 $lang->file->label      = '标题：';
 $lang->file->lblInfo    = '<i>(类型：%s, 大小：%s, 添加于：%s，下载%s次)</i>';
 

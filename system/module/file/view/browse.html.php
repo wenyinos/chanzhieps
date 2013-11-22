@@ -8,7 +8,7 @@
     <th><?php echo $lang->file->size;?></th>
     <th><?php echo $lang->file->addedBy;?></th>
     <th><?php echo $lang->file->addedDate;?></th>
-    <th><?php echo $lang->file->public;?></th>
+    <th class='w-150px'><?php echo $lang->file->public;?></th>
     <th><?php echo $lang->file->downloads;?></th>
     <th><?php echo $lang->actions;?></th>
   </tr>
@@ -32,18 +32,15 @@
     <td><?php echo $file->size;?></td>
     <td><?php echo $file->addedBy;?></td>
     <td><?php echo $file->addedDate;?></td>
-    <td><?php echo $lang->file->publics[$file->public];?></td>
+    <td>
+    <?php
+    echo '<span>' . $lang->file->publics[$file->public] . '</span> ';
+    echo html::a(inlink($file->public ? 'deny' : 'allow',  "id=$file->id"), $lang->file->toggle, 'class="option"');
+    ?>
+    </td>
     <td><?php echo $file->downloads;?></td>
     <td>
     <?php
-    if($file->public)
-    {
-        echo html::a(inlink('deny',  "id=$file->id"), $lang->file->deny, 'class="option"');
-    }
-    else
-    {
-        echo html::a(inlink('allow', "id=$file->id"), $lang->file->allow, "class='option'");
-    }
     echo html::a(inlink('delete', "id=$file->id"), $lang->delete, "class='deleter'");
     if($file->isImage) echo html::a(inlink('setPrimary', "id=$file->id"), $lang->file->setPrimary, "class='option'");
     ?>

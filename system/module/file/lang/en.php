@@ -18,6 +18,7 @@ $lang->file->primary    = 'Primary';
 $lang->file->setPrimary = 'Set as primary';
 $lang->file->deny       = 'Deny';
 $lang->file->allow      = 'Allow';
+$lang->file->toggle     = 'Toggle';
 $lang->file->label      = 'Label';
 $lang->file->lblInfo    = '<i>(Type:%s, Size:%s, Added at: %s，Downloads: %s)</i>';
 
