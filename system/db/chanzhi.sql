@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `eps_article` (
 -- DROP TABLE IF EXISTS `eps_block`;
 CREATE TABLE IF NOT EXISTS `eps_block` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
-  `type` varchar(10) NOT NULL,
+  `type` varchar(20) NOT NULL,
   `title` varchar(60) NOT NULL,
   `content` text NOT NULL,
   PRIMARY KEY (`id`)
@@ -116,6 +116,7 @@ CREATE TABLE IF NOT EXISTS `eps_file` (
   `downloads` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `extra` varchar(255) NOT NULL,
   `primary` enum('1','0') DEFAULT '0',
+  `editor` enum('1','0') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `object` (`objectType`,`objectID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
@@ -155,6 +156,7 @@ CREATE TABLE IF NOT EXISTS `eps_product` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(150) NOT NULL,
   `alias` varchar(100) NOT NULL,
+  `mall` varchar(255) NOT NULL,
   `brand` varchar(100) DEFAULT NULL,
   `model` char(30) DEFAULT NULL,
   `color` char(20) NOT NULL,
@@ -252,6 +254,8 @@ CREATE TABLE IF NOT EXISTS `eps_user` (
   `visits` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `ip` char(15) NOT NULL DEFAULT '',
   `last` datetime NOT NULL,
+  `fails` tinyint unsigned NOT NULL DEFAULT '0',
+  `locked` int(10) unsigned NOT NULL DEFAULT '0',
   `referer` varchar(255) NOT NULL,
   `join` datetime NOT NULL,
   `resetKey` char(64) NOT NULL,
@@ -273,3 +277,27 @@ CREATE TABLE IF NOT EXISTS  `eps_tag` (
   KEY `rank` (`rank`),
   KEY `link` (`link`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- Insert data into `eps_block`;
+INSERT INTO `eps_block` (`id`, `type`, `title`, `content`) VALUES
+(1, 'latestArticle', '最新文章', '{"category":"0","limit":"7"}'),
+(2, 'hotArticle', '热门文章', '{"category":"0","limit":"7"}'),
+(3, 'latestProduct', '最新产品', '{"category":"0","limit":"3","image":"show"}'),
+(4, 'hotProduct', '热门产品', '{"category":"0","limit":"3","image":"show"}'),
+(5, 'slide', '幻灯片', ''),
+(6, 'articleTree', '文章分类', '{"showChildren":"0"}'),
+(7, 'productTree', '产品分类', '{"showChildren":"0"}'),
+(8, 'blogTree', '博客分类', '{"showChildren":"1"}'),
+(9, 'contact', '联系我们', ''),
+(10, 'about', '公司简介', ''),
+(11, 'links', '友情链接', '');
+
+-- Insert data into `eps_layout`;
+INSERT INTO `eps_layout` (`page`, `region`, `blocks`) VALUES
+('index_index', 'header', '5,'),
+('index_index', 'bottom', '10,1,9,'),
+('index_index', 'footer', '11,'),
+('article_browse', 'side', '6,7,9,'),
+('article_view', 'side', '6,7,9,'),
+('product_browse', 'side', '4,7,9,'),
+('product_view', 'side', '4,7,9,');
