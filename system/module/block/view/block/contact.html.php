@@ -18,7 +18,7 @@
   <div class="panel-body">
     <?php foreach($contact as $item => $value):?>
     <dl>
-      <dt><?php echo $this->lang->company->$item . $lang->colon;?></dt>
+      <dt><?php echo $this->lang->company->$item . $this->lang->colon;?></dt>
       <dd><?php echo $value;?></dd>
       <div class='c-both'></div>
     </dl>
