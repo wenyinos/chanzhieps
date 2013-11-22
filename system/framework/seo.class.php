@@ -274,7 +274,7 @@ class uri
         global $config;
 
         $link = $config->webRoot . 'blog';
-        if(trim($alias['category']) != '')  return $link . '/' . $alias['category'] . '.' . $config->default->view;
+        if(isset($alias['category']) and trim($alias['category']) != '')  return $link . '/' . $alias['category'] . '.' . $config->default->view;
         if(!empty($params))                 return $link . '/c' . array_shift($params) . '.' . $config->default->view;
         return $link . '.' . $config->default->view;
     }
