@@ -15,4 +15,6 @@ $(document).ready(function()
             $('.nav-article-' + category).addClass('active');
         })
     }
+
+    if(v.categoryID !== 0) $('.tree a[href*=' + v.categoryID + ']').addClass('active');
 });
