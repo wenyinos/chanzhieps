@@ -52,7 +52,7 @@ class blockModel extends model
         $blocks = '';
         foreach($rawLayouts as $page => $pageBlocks)
         {
-            foreach($pageBlocks as $regionBlocks) $blocks .= $regionBlocks->blocks;
+            foreach($pageBlocks as $regionBlocks) $blocks .= ',' . $regionBlocks->blocks;
         }
 
         $blocks = explode(',', $blocks);
@@ -202,7 +202,7 @@ class blockModel extends model
         $layout = new stdclass();
         $layout->page   = $page;
         $layout->region = $region;
-        $layout->blocks = join($_POST['blocks'], ',');
+        $layout->blocks = trim(join($_POST['blocks'], ','), ',');
 
         $count = $this->dao->select('count(*) as count')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->fetch('count');
 
