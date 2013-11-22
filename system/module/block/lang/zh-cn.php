@@ -90,5 +90,3 @@ $lang->block->regions->article_view['side']   = '侧边';
 $lang->block->regions->product_browse['side'] = '侧边';
 
 $lang->block->regions->product_view['side']   = '侧边';
-
-$lang->block->confirmDelete = "您确定删除该区块吗？";

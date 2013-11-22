@@ -31,7 +31,6 @@
       <?php 
       echo html::a(inlink('edit',   "blockID=$block->id"), $lang->edit);
       echo html::a(inlink('delete', "blockID=$block->id"), $lang->delete, "class='deleter'");
-      echo html::a(inlink('view',   "blockID=$block->id"), $lang->preview);
       ?>
     </td>
   </tr>
