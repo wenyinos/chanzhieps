@@ -12,11 +12,11 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='container' id='shortcutBox'>
-  <?php  if(strpos($this->server->php_self, '/admin.php') !== false  && !($this->config->global->ignoreTips)):?>
-  <form method='post' id='ajaxForm' action='<?php echo $this->createLink('admin', 'ignoreTips');?>'>
+  <?php  if(strpos($this->server->php_self, '/admin.php') !== false  && !($this->config->global->ignoreAdminEntry)):?>
+  <form method='post' id='ajaxForm' action='<?php echo $this->createLink('admin', 'ignore');?>'>
   <div class="alert alert-danger">
     <button type="submit" class="close">&times;</button>
-    <strong><?php echo $lang->admin->warning;?></strong> <?php echo $lang->admin->adminURL;?>
+    <strong><?php echo $lang->admin->adminEntry;?></strong>
   </div>
   </form>
   <?php endif;?>

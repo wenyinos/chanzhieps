@@ -9,5 +9,4 @@ $lang->admin->shortcuts->logo          = 'Logo';
 $lang->admin->shortcuts->company       = 'Company';
 $lang->admin->shortcuts->contact       = 'Contact';
 
-$lang->admin->adminURL = 'You should modify the default admin path!';
-$lang->admin->warning  = 'Warning!';
+$lang->admin->adminEntry = "Warning: You're using the default admin.php, please rename it for security.";

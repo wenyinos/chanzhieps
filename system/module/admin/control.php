@@ -23,14 +23,14 @@ class admin extends control
     }
 
     /**
-     * ignore admin tip
+     * Ignore the admin entry warning.
      *
      * @access public
      * return void
      **/
-    public function ignoreTips()
+    public function ignore()
     {
-        $result = $this->loadModel('setting')->setItems('system.common.global', array('ignoreTips' => true));
+        $result = $this->loadModel('setting')->setItems('system.common.global', array('ignoreAdminEntry' => true));
         if($result) $this->send(array('result' => 'success', 'locate' => inlink('index')));
         $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
     }
