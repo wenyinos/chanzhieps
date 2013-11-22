@@ -20,9 +20,9 @@ $lang->RMB     = '￥';
 $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 
 /* Lang items for xirang. */
-$lang->chanzhiEPS = '蟬知企業門戶系統';
+$lang->chanzhiEPS  = '蟬知企業門戶系統';
 $lang->chanzhiEPSx = '蟬知';
-$lang->poweredBy  = "<span id='poweredBy'>Powered by <a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPSx}</a></span>";
+$lang->poweredBy   = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPSx}%s</a></span>";
 
 /* IE6 alert.  */
 $lang->IE6Alert= <<<EOT
@@ -79,6 +79,7 @@ $lang->saveSuccess    = '保存成功';
 $lang->setSuccess     = '設置成功';
 $lang->fail           = '失敗';
 $lang->noResultsMatch = '沒有匹配的選項';
+$lang->alias          = '搜索引擎優化使用，可使用英文、數字或漢字';
 
 /* Items for javascript. */
 $lang->js = new stdclass();
@@ -113,6 +114,7 @@ $lang->menu->help    = '幫助|help|admin|';
 $lang->menu->comment = '評論|comment|admin|';
 $lang->menu->forum   = '論壇|forum|admin|';
 $lang->menu->site    = '站點|site|setbasic|';
+$lang->menu->ui      = '界面|ui|setlogo|';
 $lang->menu->company = '公司|company|setbasic|';
 $lang->menu->user    = '會員|user|admin|';
 
@@ -137,6 +139,15 @@ $lang->product->menu->browse = array('link' => '產品列表|product|admin|', 'a
 $lang->product->menu->create = '發佈產品|product|create|';
 $lang->product->menu->tree   = '類目管理|tree|browse|type=product';
 
+/* Menu of UI module. */
+$lang->ui = new stdclass();
+$lang->ui->menu = new stdclass();
+$lang->ui->menu->logo  = 'LOGO設置|ui|setlogo|';
+$lang->ui->menu->theme = '主題風格|ui|settheme|';
+$lang->ui->menu->slide = array('link' => '幻燈片設置|slide|admin|', 'alias' => 'create,edit');
+$lang->ui->menu->admin = array('link' => '區塊管理|block|admin|', 'alias' => 'create,edit');
+$lang->ui->menu->pages = array('link' => '佈局設置|block|pages|', 'alias' => 'setregion');
+
 /* Menu of comment module. */
 $lang->comment = new stdclass();
 $lang->comment->menu = new stdclass();
@@ -153,10 +164,7 @@ $lang->forum->menu->tree   = '版塊管理|tree|browse|type=forum';
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
 $lang->site->menu->basic     = '站點設置|site|setbasic|';
-$lang->site->menu->logo      = 'LOGO設置|site|setlogo|';
 $lang->site->menu->nav       = '導航設置|nav|admin|';
-$lang->site->menu->theme     = '主題風格|site|settheme|';
-$lang->site->menu->slide     = array('link' => '幻燈片設置|slide|admin|', 'alias' => 'create,edit');
 $lang->site->menu->tag       = '關鍵詞設置|tag|admin|';
 $lang->site->menu->oauth     = '開放登錄|site|setoauth|';
 $lang->site->menu->link      = '友情連結|links|admin|';
@@ -186,8 +194,13 @@ $lang->menuGroups->nav  = 'site';
 
 /* Menu of tree module. */
 $lang->slide = new stdclass();
-$lang->slide->menu = $lang->site->menu;
-$lang->menuGroups->slide = 'site';
+$lang->slide->menu = $lang->ui->menu;
+$lang->menuGroups->slide = 'ui';
+
+/* Menu of block module. */
+$lang->block = new stdclass();
+$lang->block->menu = $lang->ui->menu;
+$lang->menuGroups->block  = 'ui';
 
 /* Menu of tree module. */
 $lang->links = new stdclass();
@@ -204,11 +217,13 @@ $lang->error->equal        = '<strong>%s</strong>必須為<strong>%s</strong>。
 $lang->error->int          = array('<strong>%s</strong>應當是數字。', '<strong>%s</strong>最小值為%s',  '<strong>%s</strong>應當介於<strong>%s-%s</strong>之間。');
 $lang->error->float        = '<strong>%s</strong>應當是數字，可以是小數。';
 $lang->error->email        = '<strong>%s</strong>應當為合法的EMAIL。';
+$lang->error->URL          = '<strong>%s</strong>應當為合法的URL。';
 $lang->error->date         = '<strong>%s</strong>應當為合法的日期。';
 $lang->error->account      = '<strong>%s</strong>應當為字母和數字的組合，至少三位';
 $lang->error->passwordsame = '兩次密碼應當相等。';
 $lang->error->passwordrule = '密碼應該符合規則，長度至少為六位。';
 $lang->error->captcha      = '請輸入正確的驗證碼。';
+$lang->error->noWritable   = '%s 可能不可寫，請修改權限！';
 
 /* The pager items. */
 $lang->pager = new stdclass();

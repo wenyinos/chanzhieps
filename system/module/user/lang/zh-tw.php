@@ -70,8 +70,9 @@ $lang->user->inputAccountOrEmail = '請輸入用戶名或Email';
 $lang->user->inputPassword       = '請輸入密碼';
 $lang->user->searchUser          = '搜索';
 
-$lang->user->errorDeny     = "抱歉，您無權訪問『<b>%s</b>』模組的『<b>%s</b>』功能。請聯繫管理員獲取權限。點擊後退返回上頁。";
+$lang->user->errorDeny     = "抱歉，您無權訪問『<b>%s</b>』模組的『<b>%s</b>』功能。請聯繫管理員獲取權限。點擊後退返回上頁。<br/> 5秒鐘後將自動返迴首頁...";
 $lang->user->loginFailed   = "登錄失敗，請檢查您的用戶名或密碼是否填寫正確。";
+$lang->user->locked        = "登錄失敗超過次數限制，請十分鐘以後再重新嘗試登錄";
 $lang->user->lblRegistered = '恭喜您，已經成功註冊。';
 $lang->user->forbidSuccess = '禁用成功';
 $lang->user->forbidFail    = '禁用失敗';

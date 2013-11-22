@@ -18,6 +18,7 @@ $lang->file->primary    = '封面';
 $lang->file->setPrimary = '設為封面';
 $lang->file->deny       = '禁止';
 $lang->file->allow      = '允許';
+$lang->file->toggle     = '切換';
 $lang->file->label      = '標題：';
 $lang->file->lblInfo    = '<i>(類型：%s, 大小：%s, 添加于：%s，下載%s次)</i>';
 
@@ -36,3 +37,5 @@ $lang->file->publics[1] = '允許';
 
 $lang->file->edit       = '編輯';
 $lang->file->editFile   = '更改附件';
+
+$lang->file->errorUnwritable = '上傳目錄不可寫，無法上傳附件。';

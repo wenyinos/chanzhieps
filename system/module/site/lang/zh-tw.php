@@ -12,6 +12,8 @@
 $lang->site->common       = "站點";
 
 $lang->site->name         = '網站名稱';
+$lang->site->module       = '功能模組';
+$lang->site->lang         = '語言';
 $lang->site->domain       = '網站域名';
 $lang->site->logo         = 'Logo';
 $lang->site->keywords     = '關鍵詞';
@@ -29,10 +31,17 @@ $lang->site->setQQOauth   = "QQ接入";
 $lang->site->setTheme     = '主題設置';
 
 $lang->site->setLogoFailed  = "設置Logo失敗";
-$lang->site->noSelectedLogo = "沒有選擇Logo圖片";
+$lang->site->noSelectedFile = "沒有選擇圖片";
 $lang->site->oauthHelp      = "使用幫助";
 
-$lang->site->themes    = array();
+$lang->site->moduleAvailable = array();
+$lang->site->moduleAvailable['user']    = '會員';
+$lang->site->moduleAvailable['forum']   = '論壇';
+$lang->site->moduleAvailable['blog']    = '博客';
+$lang->site->moduleAvailable['help']    = '幫助';
+$lang->site->moduleAvailable['comment'] = '評論';
+
+$lang->site->themes = array();
 $lang->site->themes['default']    = '預設風格';
 $lang->site->themes['flat']       = '清泉';
 $lang->site->themes['tree']       = '蟬之樹';

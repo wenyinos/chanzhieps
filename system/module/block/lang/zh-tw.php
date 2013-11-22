@@ -4,42 +4,89 @@
  *
  * @copyright   Copyright 2013-2013 青島息壤網絡信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
  * @license     LGPL
- * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
+ * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     block
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->block->common  = '區塊維護';
-$lang->block->id      = '編號';
-$lang->block->title   = '名稱';
-$lang->block->type    = '類型';
-$lang->block->content = '內容';
+$lang->block->common     = '區塊維護';
+$lang->block->id         = '編號';
+$lang->block->title      = '名稱';
+$lang->block->limit      = '數量';
+$lang->block->type       = '類型';
+$lang->block->content    = '內容';
+$lang->block->page       = '頁面';
+$lang->block->regionList = '區域列表';
+$lang->block->select     = '請選擇區塊';
+$lang->block->categories = '分類';
+$lang->block->showImage  = '是否顯示圖片';
+$lang->block->product    = '產品';
 
-$lang->block->add     = '添加區塊';
-$lang->block->list    = '區塊列表';
-$lang->block->edit    = '編輯區塊';
-$lang->block->view    = '查看區塊';
-$lang->block->setPage = '配置頁面';
+$lang->block->add          = "添加";
+$lang->block->create       = '添加區塊';
+$lang->block->browseBlocks = '區塊列表';
+$lang->block->browseRegion = '佈局設置';
+$lang->block->edit         = '編輯區塊';
+$lang->block->view         = '查看區塊';
+$lang->block->setPage      = '配置頁面';
 
-$lang->block->typeList['html']   = '網頁區塊';
-$lang->block->typeList['php']    = 'PHP代碼';
-$lang->block->typeList['system'] = '系統區塊';
+$lang->block->typeList['html']            = '自定義區塊';
+$lang->block->typeList['latestArticle']   = '最新文章';
+$lang->block->typeList['hotArticle']      = '熱門文章';
+$lang->block->typeList['latestProduct']   = '最新產品';
+$lang->block->typeList['featuredProduct'] = '首頁推薦產品';
+$lang->block->typeList['hotProduct']      = '熱門產品';
+$lang->block->typeList['slide']           = '幻燈片';
+$lang->block->typeList['articleTree']     = '文章分類';
+$lang->block->typeList['productTree']     = '產品分類';
+$lang->block->typeList['blogTree']        = '博客分類';
+$lang->block->typeList['contact']         = '聯繫我們';
+$lang->block->typeList['about']           = '公司簡介';
+$lang->block->typeList['links']           = '友情連結';
 
-$lang->block->pages['all']          = '全部頁面';
-$lang->block->pages['index.index']  = '首頁';
-$lang->block->pages['article.list'] = '文章列表頁面';
-$lang->block->pages['article.view'] = '文章詳情頁面';
-$lang->block->pages['forum.index']  = '論壇首頁';
-$lang->block->pages['forum.board']  = '帖子列表頁面';
-$lang->block->pages['forum.view']   = '帖子察看頁面';
-$lang->block->pages['search.list']  = '搜索結果頁';
+$lang->block->image['show'] = '顯示圖片';
+
+$lang->block->category = new stdclass();
+$lang->block->category->showChildren = '顯示子分類';
+
+$lang->block->category->showChildrenList[1] = '是';
+$lang->block->category->showChildrenList[0] = '否';
+
+$lang->block->pages['all']            = '全部頁面';
+$lang->block->pages['index_index']    = '首頁';
+
+$lang->block->pages['article_browse'] = '文章列表頁面';
+$lang->block->pages['article_view']   = '文章詳情頁面';
+
+$lang->block->pages['product_browse'] = '產品列表頁面';
+$lang->block->pages['product_view']   = '產品詳情頁面';
+
+$lang->block->pages['blog_index']     = '博客列表頁面';
+$lang->block->pages['blog_view']      = '博客詳情頁面';
+
+$lang->block->pages['forum_index']    = '論壇首頁';
+$lang->block->pages['forum_board']    = '帖子列表頁面';
+$lang->block->pages['thread_view']    = '帖子察看頁面';
+$lang->block->pages['search_list']    = '搜索結果頁';
+
+$lang->block->pages['help_index']     = '幫助中心';
+$lang->block->pages['help_book']      = '手冊首頁';
+$lang->block->pages['help_read']      = '手冊章節';
 
 /* page layout list. */
-$lang->block->regions['header'] = '所有頁面header';
-$lang->block->regions['left']   = '所有頁面左側';
-$lang->block->regions['right']  = '所有頁面右側';
-$lang->block->regions['middle'] = '所有頁面中部';
-$lang->block->regions['footer'] = '所有頁面footer';
-$lang->block->regions['end']    = '所有頁面結束部分，不顯示';
+$lang->block->regions = new stdclass();
+$lang->block->regions->all['header'] = '頭部';
+$lang->block->regions->all['footer'] = '底部';
+$lang->block->regions->all['end']    = '結束部分';
 
-$lang->block->confirmDelete = "您確定刪除該區塊嗎？";
+$lang->block->regions->index_index['header']  = '上部';
+$lang->block->regions->index_index['bottom']  = '下部';
+$lang->block->regions->index_index['footer']  = '底部';
+
+$lang->block->regions->article_browse['side'] = '側邊';
+
+$lang->block->regions->article_view['side']   = '側邊';
+
+$lang->block->regions->product_browse['side'] = '側邊';
+
+$lang->block->regions->product_view['side']   = '側邊';
