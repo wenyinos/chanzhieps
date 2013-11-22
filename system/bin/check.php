@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 /**
  * This file is used to check the language items and actions.
@@ -6,6 +7,7 @@
 class control {}
 function isLocalIP(){}
 $moduleRoot = '../module/';
+define('DS', DIRECTORY_SEPARATOR);
 
 /* Define an emtpty control class as the base class of every module. */
 if( 1 == 0)
