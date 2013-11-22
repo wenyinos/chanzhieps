@@ -14,7 +14,7 @@
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
 <form method='post' class='form-inline' id='ajaxForm'> 
-  <table class='table  table-hover table-form'>
+  <table class='table table-bordered table-form'>
     <caption><?php echo $lang->product->edit;?></caption>
     <tr>
       <th class='w-100px'><?php echo $lang->product->category;?></th>
