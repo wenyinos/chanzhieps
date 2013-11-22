@@ -6,8 +6,6 @@
       echo html::a($this->createLink('sitemap', 'index'), '<i class="icon-sitemap"></i> ' . $lang->sitemap->common);
 
       if(empty($this->config->links->index) && !empty($this->config->links->all)) echo "&nbsp;" . html::a($this->createLink('links', 'index'), '<i class="icon-heart"></i>' + $lang->link);
-
-      echo html::a($config->webRoot .'rss.xml', '<i class="icon-rss"></i> RSS');
       ?>
     </div>
     <span id="copyright">
