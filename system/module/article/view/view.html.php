@@ -38,7 +38,7 @@ js::set('articleID', $article->id);
         <div class='summary'><strong><?php echo $lang->article->summary;?></strong><?php echo $lang->colon . $article->summary;?></div>
         <?php endif;?>
         <p><?php echo $article->content;?></p>
-        <div class='article-file'><?php $this->article->printFiles($article->files);?></div>
+        <div class='article-file mt-10px'><?php $this->article->printFiles($article->files);?></div>
         <?php if($article->keywords):?>
         <div class='keywords'><strong><?php echo $lang->article->keywords;?></strong><?php echo $lang->colon . $article->keywords;?></div>
         <?php endif;?>
