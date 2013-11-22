@@ -24,7 +24,7 @@ class rss extends control
         $this->loadModel('article');
 
         $this->app->loadClass('pager', $static = true);
-        $pager = new pager(0, $this->config->rss->items, 1);
+        $pager = new pager(0, isset($this->config->rss->items) ? $this->config->rss->items : 10, 1);
 
         $articles = $this->article->getList($type, $this->tree->getFamily(0, $type), 'id_desc', $pager);
         $latestArticle = current((array)$articles);
@@ -35,7 +35,7 @@ class rss extends control
         $this->view->siteLink = commonModel::getSysURL();
 
         $this->view->articles = $articles;
-        $this->view->lastDate = $latestArticle->addedDate . ' +0800';
+        $this->view->lastDate = $latestArticle ? $latestArticle->addedDate : date('Y-m-d H:i:s') . ' +0800';
          
         $this->display();
     }
