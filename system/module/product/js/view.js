@@ -2,7 +2,7 @@ $(document).ready(function()
 {
    	$('a.little-image').click(function()
     {
-        $('a.big-image').html($(this).html());
+        $('a.big-image').html($(this).html().replace('s_', 'm_'));
         $('a.big-image img').resizeImage(280, 280);
         return false;
    	});
