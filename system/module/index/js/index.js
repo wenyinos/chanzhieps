@@ -1,12 +1,19 @@
 $(document).ready(function()
 {          
-    // auto ajust panel height.
-    var fitPanelHeight = 0;
-    $('.row').each(function()
+    /* Set rows label of bottom blocks. */
+    $('.panel').each(function(index)
     {
-      fitPanelHeight = 0;
-      $(this).find('.panel').each(function(){fitPanelHeight=Math.max($(this).height(),fitPanelHeight);}).height(fitPanelHeight);
+        row = parseInt(parseInt(index) / 3);
+        $(this).addClass('row-' + row);
     });
+    rows = row;
+
+    // auto ajust panel height.
+    for(i=0; i<=rows; i++)
+    {
+        fitPanelHeight = 0;
+        $(".row-" + i ).each(function(){fitPanelHeight=Math.max($(this).height(),fitPanelHeight);}).height(fitPanelHeight);
+    }
 
     // add "index" class to the body element.
     $('body').addClass('index');
