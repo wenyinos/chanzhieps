@@ -40,7 +40,7 @@ $articles = $this->loadModel('article')->$method($content->category, $content->l
           }
         ?>
         </div>
-        <h3 class='media-heading'> <?php echo html::a($url, $article->title);?> <span class='label label-default'><?php echo substr($article->addedDate, 0, 10);?></span> </h3>
+        <h4 class='media-heading'> <?php echo html::a($url, $article->title);?> <span class='label label-default'><?php echo substr($article->addedDate, 0, 10);?></span> </h4>
         <p><?php echo $article->summary;?></p>
       </div>
       <hr>
@@ -50,7 +50,7 @@ $articles = $this->loadModel('article')->$method($content->category, $content->l
 </div>
 <?php else:?>
 <div class="panel panel-default">
-  <div class="panel-heading"><h3><?php echo $block->title;?></h3></div>
+  <div class="panel-heading"><h4><?php echo $block->title;?></h4></div>
   <div class="panel-body"><ul class='mg-zero pd-zero'>
     <?php foreach($articles as $article): ?>
     <?php 
