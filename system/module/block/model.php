@@ -46,7 +46,7 @@ class blockModel extends model
      */
     public function getPageBlocks($module, $method)
     {
-        $pages   = "all,{$module}_{$method}";
+        $pages      = "all,{$module}_{$method}";
         $rawLayouts = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->in($pages)->fetchGroup('page', 'region');
 
         $blocks = '';
@@ -84,7 +84,7 @@ class blockModel extends model
     public function getRegionBlocks($page, $region)
     {
         $blockIdList = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->fetch('blocks');
-        $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('id')->in($blockIdList)->fetchAll('id');
+        $blocks      = $this->dao->select('*')->from(TABLE_BLOCK)->where('id')->in($blockIdList)->fetchAll('id');
         $blockIdList = explode(',', $blockIdList);
 
         $sortedBlocks = array();
@@ -224,7 +224,7 @@ class blockModel extends model
      */
     public function printRegion($blocks, $containerHeader = '', $containerFooter = '')
     {
-        $html   = '';
+        $html = '';
         foreach($blocks as $block) $html .= $this->parseBlockContent($block, $containerHeader, $containerFooter);
         echo $html;
     }
