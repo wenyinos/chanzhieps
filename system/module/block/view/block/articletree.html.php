@@ -27,16 +27,10 @@ $browseLink     = $type == 'article' ? 'createBrowseLink' : 'create' . ucfirst($
 <div class='list-group'> 
   <strong class='list-group-item list-group-title'><?php echo $block->title;?></strong>
   <?php
-  foreach($topCategories as $topCategory){
+  foreach($topCategories as $topCategory)
+  {
       $browseLink = helper::createLink($type, 'browse', "categoryID={$topCategory->id}", "category={$topCategory->alias}");
-      if($category->name==$topCategory->name)
-      {
-          echo html::a($browseLink, "<i class='icon-folder-open-alt '></i>" . $topCategory->name, "id='category{$topCategory->id}' class='list-group-item active'");
-      }
-      else
-      {
-          echo html::a($browseLink, "<i class='icon-folder-close-alt '></i>" . $topCategory->name, "id='category{$topCategory->id}' class='list-group-item'");
-      }
+      echo html::a($browseLink, "<i class='icon-folder-close-alt '></i>" . $topCategory->name, "id='category{$topCategory->id}' class='list-group-item'");
   }
   ?>
 </div>
