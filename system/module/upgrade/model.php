@@ -176,6 +176,9 @@ class upgradeModel extends model
      */
     public function setFeaturedProducts()
     {
+        $this->loadModel('block');
+        $homeBlocks = $this->block->getRegionBlocks('index_index', 'bottom');
+        if(count($homeBlocks) > 3)  return false;
         $products = $this->dao->select("id,name")->from(TABLE_PRODUCT)->orderBy('id_desc')->limit(3)->fetchPairs('id', 'name');
 
         $blocks = $this->dao->select('blocks')->from(TABLE_LAYOUT)
@@ -184,7 +187,6 @@ class upgradeModel extends model
             ->fetch('blocks');
         $blocks = trim($blocks, ',');
 
-        $this->loadModel('block');
         foreach($products as $id => $name)
         {
             $block = new stdclass();
@@ -200,7 +202,7 @@ class upgradeModel extends model
             ->where('page')->eq('index_index')
             ->andWhere('region')->eq('bottom')
             ->exec();
-        return false;
+        return true;
     }
 
     /**
