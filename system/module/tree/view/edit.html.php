@@ -10,6 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 ?>
+<?php include '../../common/view/chosen.html.php';?>
 <form method='post' id='editForm' action="<?php echo inlink('edit', 'categoryID='.$category->id);?>" class='form-inline'>
   <table class='table table-form'> 
     <caption><?php echo $lang->tree->edit;?></caption>
@@ -42,7 +43,7 @@
     <?php if($category->type == 'forum'):?>
     <tr>
       <th><?php echo $lang->category->moderators;?></th>
-      <td><?php echo html::input('moderators', $category->moderators, "class='text-1'");?></td>
+      <td><?php echo html::select('moderators[]', $users, $category->moderators, "multiple='multiple' class='select-3 form-control chosen'");?></td>
     </tr>  
     <tr>
       <th><?php echo $lang->category->readonly;?></th>

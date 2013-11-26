@@ -99,6 +99,8 @@ class tree extends control
         $this->view->category   = $category;
         $this->view->optionMenu = $optionMenu;
 
+        if($category->type == 'forum') $this->view->users = $this->loadModel('user')->getPairs('admin');
+
         $this->display();
     }
 

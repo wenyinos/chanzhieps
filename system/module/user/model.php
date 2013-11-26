@@ -31,6 +31,26 @@ class userModel extends model
     }
 
     /**
+     * Get the account=>relaname pairs.
+     * 
+     * @param  string $params 
+     * @access public
+     * @return array
+     */
+    public function getPairs($params = '')
+    {
+        $users = $this->dao->select('account, realname')->from(TABLE_USER) 
+            ->beginIF(strpos($params, 'admin') !== false)->where('admin')->ne('no')->fi()
+            ->orderBy('id_asc')
+            ->fetchPairs();
+
+        /* Append empty users. */
+        if(strpos($params, 'noempty') === false) $users = array('' => '') + $users;
+
+        return $users;
+    }
+
+    /**
      * Get the basic info of some user.
      * 
      * @param mixed $users 

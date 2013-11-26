@@ -389,9 +389,12 @@ class treeModel extends model
      */
     public function update($categoryID)
     {
-        $category = fixer::input('post')->setDefault('readonly', 0)->specialChars('name')->get();
+        $category = fixer::input('post')->join('moderators', ',')->setDefault('readonly', 0)->specialChars('name')->get();
         $category->alias    = seo::unify($category->alias, '-');
         $category->keywords = seo::unify($category->keywords, ',');
+
+        /* If no moderator, set it empty. */
+        if(!isset($category->moderators)) $category->moderators = '';
 
         /* Add id to check alias. */
         $category->id       = $categoryID; 
