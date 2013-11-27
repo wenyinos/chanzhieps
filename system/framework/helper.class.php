@@ -165,9 +165,11 @@ class helper
         if(empty($extFiles)) return $mainModelFile;
 
         /* Else, judge whether needed update or not .*/
-        $mergedModelFile = $app->getTmpRoot() . 'model' . DS . $app->siteCode . '.' . $moduleName . '.php';
+        $mergedModelDir  = $app->getTmpRoot() . 'model' . DS . $app->siteCode{0} . DS . $app->siteCode . DS;
+        $mergedModelFile = $mergedModelDir . $app->siteCode . '.' . $moduleName . '.php';
         $needUpdate      = false;
         $lastTime        = file_exists($mergedModelFile) ? filemtime($mergedModelFile) : 0;
+        if(!is_dir($mergedModelDir)) mkdir($mergedModelDir, 0755, true);
         foreach($extFiles as $extFile)
         {
             if(filemtime($extFile) > $lastTime)
@@ -186,11 +188,9 @@ class helper
         {
             $modelClass    = $moduleName . 'Model';
             $extModelClass = 'ext' . $modelClass;
-            $modelLines    = trim(file_get_contents($mainModelFile));
-
-            /* To make sure the last end tag is removed. */
-            $modelLines    = rtrim($modelLines, '?>');
-            $modelLines   .= "class $extModelClass extends $modelClass {\n";
+            $modelLines    = "<?php\n";
+            $modelLines   .= "helper::import('$mainModelFile');\n";
+            $modelLines   .= "class $extModelClass extends $modelClass \n{\n";
 
             /* Cycle all the extension files. */
             foreach($extFiles as $extFile)
