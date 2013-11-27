@@ -138,13 +138,21 @@ class tree extends control
     /**
      * Delete a category.
      * 
-     * @param  int    $category 
+     * @param  int    $categoryID 
      * @access public
      * @return void
      */
-    public function delete($category)
+    public function delete($categoryID)
     {
-        if($this->tree->delete($category)) $this->send(array('result' => 'success'));
+        /* If type is 'forum' and has children, warning. */
+        $category = $this->tree->getByID($categoryID);
+        if($category->type == 'forum')
+        {
+            $children = $this->tree->getChildren($categoryID, 'forum'); 
+            if($children) $this->send(array('result' => 'fail', 'message' => $this->lang->tree->hasChildren));
+        }
+
+        if($this->tree->delete($categoryID)) $this->send(array('result' => 'success'));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
 }
