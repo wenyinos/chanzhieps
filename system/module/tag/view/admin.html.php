@@ -21,13 +21,14 @@
       <?php echo html::hidden('f', 'admin'); ?>
     </div>
   </form>
-  <table class='table table-hover table-bordered table-striped'>
+  <table class='table table-hover table-bordered table-striped tablesorter'>
     <caption><?php echo $lang->tag->admin;?></caption>
     <thead>
       <tr class='a-center'>
-        <th class='w-p20'> <?php echo $lang->tag->common;?></th>
-        <th class='w-80px'>  <?php echo $lang->tag->rank;?></th>
-        <th><?php echo $lang->tag->link;?></th>
+        <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
+        <th class='w-p20'> <?php commonModel::printOrderLink('tag',  $orderBy, $vars, $lang->tag->common);?></th>
+        <th class='w-80px'><?php commonModel::printOrderLink('rank', $orderBy, $vars, $lang->tag->rank);?></th>
+        <th>               <?php commonModel::printOrderLink('link', $orderBy, $vars, $lang->tag->link);?></th>
         <th class='w-120px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>

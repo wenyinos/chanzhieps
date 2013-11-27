@@ -391,3 +391,14 @@ a.latest-news:active, a.latest-news:hover{text-decoration: none; color: #4691EF;
 .panel-body li.media{width: 100%; margin-top: 0; padding: 0 8px; text-align:center; float:none}
 .panel-body li a.media-image{display: block; width: 96%; line-height: 180px; height: 188px; border: 1px solid #E5E5E5; padding: 3px; margin: 0 auto;}
 .panel-body li a.media-image:hover,.widget li a.media-image:active{border: 1px solid #CCC;}
+
+/* Set css for tablesorter. */
+table.tablesorter thead tr div{padding:0; margin:0}
+table.tablesorter thead tr .header{cursor:pointer;}
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {color:red;}
+table.tablesorter thead tr .headerSortDown a, table.tablesorter thead tr .headerSortUp a {color:red}
+table.tablesorter thead tr .header a,table.tablesorter thead tr .headerSortUp a,table.tablesorter thead tr .headerSortDown a{display: inline-block; text-decoration:none}
+table.tablesorter thead tr .header a{color:#707070;}
+table.tablesorter thead tr .header:after {font-family: FontAwesome; font-weight: normal;content: " \f0dc";font-size: 14px;}
+table.tablesorter thead tr .headerSortUp:after {font-family: FontAwesome; font-weight: normal;content: " \f0d8";font-size: 14px;color:red;}
+table.tablesorter thead tr .headerSortDown:after{font-family: FontAwesome; font-weight: normal;content: " \f0d7";font-size: 14px;color:red;}

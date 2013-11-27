@@ -14,10 +14,14 @@ class tag extends control
     /**
      * Admin tags.
      * 
+     * @param  string $orderBy 
+     * @param  int    $recTotal 
+     * @param  int    $recPerPage 
+     * @param  int    $pageID 
      * @access public
      * @return void
      */
-    public function admin($recTotal = 0, $recPerPage = 10, $pageID = 1)
+    public function admin($orderBy = 'rank_asc', $recTotal = 0, $recPerPage = 10, $pageID = 1)
     {   
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
@@ -26,8 +30,9 @@ class tag extends control
 
         $this->view->title      = $this->lang->tag->admin;
         $this->view->pager      = $pager;
-        $this->view->tags       = $this->tag->getList($tags, $pager);
+        $this->view->tags       = $this->tag->getList($tags, $orderBy, $pager);
         $this->view->tagOptions = $this->dao->select('tag')->from(TABLE_TAG)->fetchPairs('tag', 'tag');
+        $this->view->orderBy    = $orderBy;
         $this->display();
     }   
 

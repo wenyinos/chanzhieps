@@ -15,15 +15,17 @@ class tagModel extends model
      * Get tag list.
      * 
      * @param  string $tags 
+     * @param  string $orderBy 
      * @param  object $pager 
      * @access public
      * @return array
      */
-    public function getList($tags, $pager)
+    public function getList($tags, $orderBy, $pager)
     {
         return $this->dao->select('*')
             ->from(TABLE_TAG)
             ->beginIf(!empty($tags))->where('tag')->in($tags)->fi()
+            ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
     }
