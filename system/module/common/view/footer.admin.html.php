@@ -18,7 +18,7 @@ $extHookRule  = $extPath . 'footer.admin.*.hook.php';
 $extHookFiles = glob($extHookRule);
 if($extHookFiles) foreach($extHookFiles as $extHookFile) include $extHookFile;
 /* Load hook file for site.*/
-$siteExtPath  = dirname(dirname(dirname(__FILE__))) . "/common/ext/_{$config->siteCode}/view/";
+$siteExtPath  = dirname(dirname(dirname(__FILE__))) . "/common/ext/_{$config->site->code}/view/";
 $extHookRule  = $siteExtPath . 'footer.admin.*.hook.php';
 $extHookFiles = glob($extHookRule);
 if($extHookFiles) foreach($extHookFiles as $extHookFile) include $extHookFile;

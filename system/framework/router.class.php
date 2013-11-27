@@ -1370,7 +1370,8 @@ class router
         {
             $this->config = $config;
             $this->setSiteCode();
-            $config->siteCode = $this->siteCode;
+            if(!isset($config->site)) $config->site = new stdclass();
+            $config->site->code = $this->siteCode;
 
             if($config->multi)
             {
