@@ -289,7 +289,7 @@ class control
      */
     public function getExtViewFile($viewFile)
     {
-        $extPath     = dirname(dirname(realpath($viewFile))) . "/ext/_{$this->app->siteCode}/view/";
+        $extPath     = dirname(dirname(realpath($viewFile))) . "/ext/_{$this->config->site->code}/view/";
         $extViewFile = $extPath . basename($viewFile);
 
         if(file_exists($extViewFile))
