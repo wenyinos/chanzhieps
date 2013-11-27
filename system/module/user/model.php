@@ -33,7 +33,7 @@ class userModel extends model
     /**
      * Get the account=>relaname pairs.
      * 
-     * @param  string $params 
+     * @param  string $params  admin|noempty
      * @access public
      * @return array
      */
