@@ -20,7 +20,12 @@
     <caption><?php echo $board->name;?></caption>
     <tr>
       <th class='w-100px'><?php echo $lang->thread->title;?></th>
-      <td><?php echo html::input('title', '', "class='text-1'");?></td>
+      <td>
+        <?php 
+        echo html::input('title', '', "class='text-1'");
+        if($canManage) echo "<input type='checkbox' name='readonly' value='1'/><span>{$lang->thread->readonly}</span>" ;
+        ?>
+      </td>
     </tr>
     <tr>
       <th><?php echo $lang->thread->content;?></th>

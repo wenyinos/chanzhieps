@@ -15,6 +15,6 @@ include '../../common/view/kindeditor.html.php';
 $common->printPositionBar($board, $thread);
 
 if($pager->pageID == 1) include './thread.html.php';
-include './reply.html.php';
+if(!$thread->readonly)  include './reply.html.php';
 
 include '../../common/view/footer.html.php';

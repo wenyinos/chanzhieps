@@ -40,6 +40,7 @@ $lang->thread->confirmDeleteFile   = "Are you sure to delete this file?";
 $lang->thread->lblSpeaker     = '<strong>%s</strong><br />Views: %s<br />Register: %s<br />Last visits: %s<br />Score: %s';
 $lang->thread->lblEdited      = '<i>%s Last edited, %s</i> ';
 $lang->thread->message        = '%s reply at #%s in forum, the thread is: %s, the content is: %s';
+$lang->thread->readonly       = 'Read only';
 $lang->thread->successStick   = 'Successfully sticky.';
 $lang->thread->successUnstick = 'Successfully unsticky.';
 

@@ -40,6 +40,7 @@ $lang->thread->confirmDeleteFile   = "您确定删除该附件吗？";
 $lang->thread->lblSpeaker     = '<strong>%s</strong><br />访问次数：%s<br />注册日期：%s<br />上次访问：%s<br />';
 $lang->thread->lblEdited      = '<i>%s 最后编辑, %s</i> ';
 $lang->thread->message        = '%s在论坛#%s回复了主题：%s，内容为：%s';
+$lang->thread->readonly       = '只读';
 $lang->thread->successStick   = '成功置顶';
 $lang->thread->successUnstick = '成功取消置顶';
 

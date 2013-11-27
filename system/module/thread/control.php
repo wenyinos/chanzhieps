@@ -45,8 +45,10 @@ class thread extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' =>$locate));
         }
 
-        $this->view->title  = $board->name . $this->lang->minus . $this->lang->thread->post;
-        $this->view->board  = $board;
+        $this->view->title     = $board->name . $this->lang->minus . $this->lang->thread->post;
+        $this->view->board     = $board;
+        $this->view->canManage = $this->thread->canManage($board->moderators);
+
         $this->display();
     }
 
@@ -75,9 +77,10 @@ class thread extends control
             $this->send(array('result' => 'success', 'locate' => inlink('view', "threadID=$threadID")));
         }
 
-        $this->view->title  = $this->lang->thread->edit . $this->lang->minus . $thread->title;
-        $this->view->thread = $thread;
-        $this->view->board  = $this->loadModel('tree')->getById($thread->board);
+        $this->view->title     = $this->lang->thread->edit . $this->lang->minus . $thread->title;
+        $this->view->thread    = $thread;
+        $this->view->board     = $this->loadModel('tree')->getById($thread->board);
+        $this->view->canManage = $this->thread->canManage($board->moderators);
 
         $this->display();
     }

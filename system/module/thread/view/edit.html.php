@@ -19,7 +19,13 @@
     <caption><?php echo $lang->thread->edit . $lang->colon . $thread->title;?></caption>
     <tr>
       <th class='w-100px'><?php echo $lang->thread->title;?></th>
-      <td><?php echo html::input('title', $thread->title, 'style="width:90%"');?></td>
+      <td>
+        <?php 
+        echo html::input('title', $thread->title, 'style="width:90%"');
+        $readonly = $thread->readonly ? 'checked' : '';
+        if($canManage) echo "<input type='checkbox' name='readonly' value='1' $readonly /><span>{$lang->thread->readonly}</span>" ;
+        ?>
+      </td>
     </tr>
     <tr>
       <th><?php echo $lang->thread->content;?></th>
