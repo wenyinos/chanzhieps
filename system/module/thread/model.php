@@ -120,11 +120,11 @@ class threadModel extends model
     public function post($board)
     {
         $now = helper::now();
-        $isAdmin = $this->app->user->admin == 'super';
+        $allowedTags = $this->app->user->admin == 'super' ? $this->config->allowedTags->admin : $this->config->allowTags->front;
 
         $thread = fixer::input('post')
             ->specialChars('title')
-            ->setIF(!$isAdmin, 'content', strip_tags($_POST['content'], $this->config->thread->editor->allowTags))
+            ->stripTags('content', $allowTags)
             ->setForce('board', $board)
             ->setForce('author', $this->app->user->account)
             ->setForce('addedDate', $now) 
@@ -187,13 +187,13 @@ class threadModel extends model
      */
     public function update($threadID)
     {
-        $isAdmin = $this->app->user->admin == 'super';
+        $allowedTags = $this->app->user->admin == 'super' ? $this->config->allowedTags->admin : $this->config->allowTags->front;
 
         $thread = fixer::input('post')
             ->specialChars('title')
+            ->stripTags('content', $allowTags)
             ->setForce('editor', $this->session->user->account)
             ->setForce('editedDate', helper::now())
-            ->setIF(!$isAdmin, 'content', strip_tags($_POST['content'], $this->config->thread->editor->allowTags))
             ->remove('files,labels, views, replies, stick, hidden, readonly')
             ->get();
 

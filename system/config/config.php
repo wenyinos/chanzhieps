@@ -32,6 +32,11 @@ $config->methodVar   = 'f';               // RequestType=GET: the name of the me
 $config->viewVar     = 't';               // RequestType=GET: the name of the view var.
 $config->sessionVar  = RUN_MODE . 'sid';  // The session var name.
 
+$config->allowedTags = new stdclass();
+$config->allowedTags->front = '<p><span><h1><h2><h3><h4><h5><em><u><strong><br><ol><ul><li><img><a><b><font><hr>';
+$config->allowedTags->admin = $config->allowedTags->front . '<table><td><th><tr><tbody>';
+$config->allowedTags->super = $config->allowedTags->front . '<script><style>';
+
 /* Views and themes. */
 $config->views       = ',html,json,xml,'; // Supported view types.
 $config->themes      = 'default,blue';    // Supported themes.
