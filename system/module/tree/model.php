@@ -393,8 +393,16 @@ class treeModel extends model
         $category->alias    = seo::unify($category->alias, '-');
         $category->keywords = seo::unify($category->keywords, ',');
 
-        /* If no moderator, set it empty. */
-        if(!isset($category->moderators)) $category->moderators = '';
+        /* Set moderators. */
+        if(!isset($category->moderators))
+        {
+            $category->moderators = '';
+        }
+        else
+        {
+            $category->moderators = trim($category->moderators, ',');
+            $category->moderators = empty($category->moderators) ? '' : ',' . $category->moderators . ',';
+        }
 
         /* Add id to check alias. */
         $category->id       = $categoryID; 
