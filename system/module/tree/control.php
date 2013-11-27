@@ -144,14 +144,6 @@ class tree extends control
      */
     public function delete($categoryID)
     {
-        /* If type is 'forum' and has children, warning. */
-        $category = $this->tree->getByID($categoryID);
-        if($category->type == 'forum')
-        {
-            $children = $this->tree->getChildren($categoryID, 'forum'); 
-            if($children) $this->send(array('result' => 'fail', 'message' => $this->lang->tree->hasChildren));
-        }
-
         if($this->tree->delete($categoryID)) $this->send(array('result' => 'success'));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }

@@ -546,8 +546,7 @@ class treeModel extends model
     public function fixPath($type)
     {
         /* Get all categories grouped by parent. */
-        $groupCategories = $this->dao
-            ->select('id, parent')->from(TABLE_CATEGORY)
+        $groupCategories = $this->dao->select('id, parent')->from(TABLE_CATEGORY)
             ->where('type')->eq($type)
             ->fetchGroup('parent', 'id');
         $categories = array();
