@@ -14,7 +14,7 @@
 <div class="col-md-12">
   <form method='post' class='form-inline mb-10px form-search pull-right'>
     <div class="input-group w-200px">
-      <?php echo html::input('key', $key, "class='form-control text-2 search-query' placeholder='{$lang->user->inputUserName}'"); ?>
+      <?php echo html::input('key', $search, "class='form-control text-2 search-query' placeholder='{$lang->user->inputUserName}'"); ?>
       <span class="input-group-btn">
         <?php echo html::submitButton($lang->user->searchUser,"btn btn-primary"); ?>
       </span>
