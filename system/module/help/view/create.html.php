@@ -26,7 +26,7 @@
       <table class='table table-form'>
         <?php if($type !== 'book'):?>
         <tr>
-          <th class='w-100px'><?php echo $lang->article->category;?></th>
+          <th class='w-100px'><?php echo $lang->book->parent;?></th>
           <td><?php echo html::select("parent", $parents, $currentParent, "class='select-3 form-control'");?></td>
         </tr>
         <?php endif;?>
