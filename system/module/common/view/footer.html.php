@@ -9,11 +9,11 @@
       ?>
     </div>
     <span id="copyright">
-    <?php echo "&copy; {$config->company->name} {$config->site->copyright}-" . date('Y') . '&nbsp;&nbsp;'; ?>
+    <?php echo "&copy; {$config->company->name} {$config->site->copyright}-" . date('Y') . '&nbsp;&nbsp;';?>
     </span>
     <span id="icpInfo"><?php echo $config->site->icp; ?></span>
     <div id="powerby">
-      <?php printf($lang->poweredBy, $config->version, $config->version); ?>
+      <?php printf($lang->poweredBy, $config->version, $config->version);?>
     </div>
   </footer>
    
