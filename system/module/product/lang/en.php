@@ -33,6 +33,7 @@ $lang->product->author     = 'Author';
 $lang->product->editor     = 'Editor';
 $lang->product->addedDate  = 'Added date';
 $lang->product->editedDate = 'Edited date';
+$lang->product->status     = 'Status';
 $lang->product->views      = 'Views';
 $lang->product->stick      = 'Sticky';
 $lang->product->order      = 'Order';
@@ -52,3 +53,6 @@ $lang->product->prev      = 'Previous';
 $lang->product->next      = 'Next';
 $lang->product->none      = 'None';
 $lang->product->directory = 'Back';
+
+$lang->product->statusList[0] = 'Drops';
+$lang->product->statusList[1] = 'Putaway';

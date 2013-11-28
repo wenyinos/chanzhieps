@@ -74,6 +74,7 @@ class product extends control
         $this->view->products   = $products;
         $this->view->pager      = $pager;
         $this->view->categoryID = $categoryID;
+        $this->view->orderBy    = $orderBy;
         $this->display();
     }   
 
@@ -134,6 +135,22 @@ class product extends control
         $this->view->categories = $categories;
 
         $this->display();
+    }
+
+    /**
+     * Change status 
+     * 
+     * @param  int    $productID 
+     * @param  string $status 
+     * @access public
+     * @return void
+     */
+    public function changeStatus($productID, $status)
+    {
+        $this->dao->update(TABLE_PRODUCT)->set('status')->eq($status)->where('id')->eq($productID)->exec();
+
+        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->send(array('result' => 'success', 'locate' => $this->server->http_referer));
     }
 
     /**

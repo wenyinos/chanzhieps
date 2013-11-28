@@ -69,6 +69,7 @@ class productModel extends model
             ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
             ->where('1 = 1')
             ->beginIF($categories)->andWhere('t2.category')->in($categories)->fi()
+            ->beginIF(RUN_MODE == 'front')->andWhere('t1.status')->eq(1)->fi()
             ->groupBy('t2.id')
             ->orderBy($orderBy)
             ->page($pager)
