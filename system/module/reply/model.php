@@ -120,7 +120,7 @@ class replyModel extends model
             /* Update board stats. */
             $reply->threadID = $threadID;
             $reply->replyID  = $replyID;
-            $this->loadModel('forum')->updateBoardStats($thread->board, 'reply', $reply);
+            $this->loadModel('forum')->updateBoardStats($thread->board, $reply);
 
             return $replyID;
         }

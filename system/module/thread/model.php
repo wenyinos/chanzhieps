@@ -158,7 +158,7 @@ class threadModel extends model
             /* Update board stats. */
             $thread->threadID = $threadID;
             $thread->replyID  = 0;
-            $this->loadModel('forum')->updateBoardStats($board, 'thread', $thread);
+            $this->loadModel('forum')->updateBoardStats($board, $thread);
 
             return $threadID;
         }

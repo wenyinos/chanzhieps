@@ -50,36 +50,24 @@ class forumModel extends model
      * Update status of boards.
      * 
      * @param  int    $boardID 
-     * @param  string $mode 
      * @param  object $post 
      * @access public
      * @return void
      */
-    public function updateBoardStats($boardID, $mode = 'thread', $post)
+    public function updateBoardStats($boardID, $post)
     {
-        if($mode == 'thread')
-        {
-            $this->dao->update(TABLE_CATEGORY)
-                ->set('threads = threads + 1')
-                ->set('posts = posts + 1')
-                ->set('postedBy')->eq($post->author)
-                ->set('postedDate')->eq($post->addedDate)
-                ->set('postID')->eq($post->threadID)
-                ->set('replyID')->eq(0)
-                ->where('id')->eq($boardID)
-                ->exec();
-        }
-        elseif($mode == 'reply')
-        {
-            $this->dao->update(TABLE_CATEGORY)
-                ->set('posts = posts + 1')
-                ->set('postedBy')->eq($post->author)
-                ->set('postedDate')->eq($post->addedDate)
-                ->set('postID')->eq($post->threadID)
-                ->set('replyID')->eq($post->replyID)
-                ->where('id')->eq($boardID)
-                ->exec();
-        }
+        /* If replyID eq 0, the post is 'thread', threads ++. */
+        $threads = $post->replyID ? 'threads' : 'threads + 1';
+
+        $this->dao->update(TABLE_CATEGORY)
+            ->set('threads = ' . $threads)
+            ->set('posts = posts + 1')
+            ->set('postedBy')->eq($post->author)
+            ->set('postedDate')->eq($post->addedDate)
+            ->set('postID')->eq($post->threadID)
+            ->set('replyID')->eq($post->replyID)
+            ->where('id')->eq($boardID)
+            ->exec();
     }
 
     /**
