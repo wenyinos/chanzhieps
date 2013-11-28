@@ -80,8 +80,7 @@ class block extends control
         }
 
         $this->view->block = $this->block->getByID($blockID);
-        $this->view->type  = $this->view->block->type;
-        if($this->get->type) $this->view->type  = $this->get->type;
+        $this->view->type  = $this->get->type ? $this->get->type : $this->view->block->type;
         $this->display();
     }
 

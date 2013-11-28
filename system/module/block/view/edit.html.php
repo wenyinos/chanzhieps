@@ -17,7 +17,7 @@
     <caption><?php echo $lang->block->edit;?></caption>
     <tr>
       <th class='w-120px'><?php echo $lang->block->type;?></th>
-      <td><?php echo html::select('type', $lang->block->typeList, $type, 'class=select-4');?></td>
+      <td><?php echo $this->block->createTypeSelector($type, $block->id);?></td>
     </tr>
     <tr>
       <th><?php echo $lang->block->title;?></th>

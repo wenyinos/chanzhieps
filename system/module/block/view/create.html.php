@@ -16,11 +16,11 @@
   <caption><?php echo $lang->block->create;?></caption>
   <tr>
     <th class='w-120px'><?php echo $lang->block->type;?></th>
-    <td><?php echo html::select('type', $lang->block->typeList, $type, 'class=select-4');?></td>
+    <td><?php echo $this->block->createTypeSelector($type);?></td>
   </tr>
   <tr>
     <th><?php echo $lang->block->title;?></th>
-    <td><?php echo html::input('title', $type == 'html' ? '' : $lang->block->typeList[$type], $type == 'html' ? "class='text-1'" : "class='text-4'");?></td>
+    <td><?php echo html::input('title', $lang->block->typeList[$type], "class='text-1'");?></td>
   </tr>
   <?php echo $this->fetch('block', 'blockForm', 'type=' . $type);?>
   <tbody id='blockForm'></tbody>

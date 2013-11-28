@@ -14,6 +14,7 @@ $lang->block->id         = '编号';
 $lang->block->title      = '名称';
 $lang->block->limit      = '数量';
 $lang->block->type       = '类型';
+$lang->block->code       = '代码';
 $lang->block->content    = '内容';
 $lang->block->page       = '页面';
 $lang->block->regionList = '区域列表';
@@ -30,21 +31,46 @@ $lang->block->edit         = '编辑区块';
 $lang->block->view         = '查看区块';
 $lang->block->setPage      = '配置页面';
 
-$lang->block->typeList['html']            = '自定义区块';
+$lang->block->typeList['html']     = '自定义区块';
+$lang->block->typeList['code']     = '源代码';
+
 $lang->block->typeList['latestArticle']   = '最新文章';
 $lang->block->typeList['hotArticle']      = '热门文章';
+
 $lang->block->typeList['latestProduct']   = '最新产品';
 $lang->block->typeList['featuredProduct'] = '首页推荐产品';
 $lang->block->typeList['hotProduct']      = '热门产品';
-$lang->block->typeList['slide']           = '幻灯片';
+
 $lang->block->typeList['articleTree']     = '文章分类';
 $lang->block->typeList['productTree']     = '产品分类';
 $lang->block->typeList['blogTree']        = '博客分类';
+
 $lang->block->typeList['contact']         = '联系我们';
 $lang->block->typeList['about']           = '公司简介';
 $lang->block->typeList['links']           = '友情链接';
+$lang->block->typeList['slide']           = '幻灯片';
 
-$lang->block->image['show'] = '显示图片';
+$lang->block->typeGroups = array();
+$lang->block->typeGroups['html'] = 'input';
+$lang->block->typeGroups['code'] = 'input';
+
+$lang->block->typeGroups['latestArticle'] = 'article';
+$lang->block->typeGroups['hotArticle']    = 'article';
+
+$lang->block->typeGroups['latestProduct']   = 'product';
+$lang->block->typeGroups['featuredProduct'] = 'product';
+$lang->block->typeGroups['hotProduct']      = 'product';
+
+$lang->block->typeGroups['articleTree'] = 'category';
+$lang->block->typeGroups['productTree'] = 'category';
+$lang->block->typeGroups['blogTree']    = 'category';
+
+$lang->block->typeGroups['contact'] = 'system';
+$lang->block->typeGroups['about']   = 'system';
+$lang->block->typeGroups['links']   = 'system';
+$lang->block->typeGroups['slide']   = 'system';
+
+
 
 $lang->block->category = new stdclass();
 $lang->block->category->showChildren = '显示子分类';

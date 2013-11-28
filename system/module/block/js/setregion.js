@@ -2,6 +2,12 @@ $(document).ready(function()
 {
     $(document).on('click', 'a.plus', function(){$(this).parents('tr').after($('#entry').html());});
 
+    /* Fix edit link. */
+    $(document).on('change', 'select', function()
+    {
+        $(this).parents('td').next().find('.edit').attr('href', createLink('block', 'edit', 'id=' + $(this).val()));
+    });
+
     /* Delete options. */
     $(document).on('click', '.delete', function(){$(this).parents('tr').remove();});
 

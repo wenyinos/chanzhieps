@@ -21,7 +21,7 @@ class blockModel extends model
     public function getByID($blockID)
     {
         $block = $this->dao->findByID($blockID)->from(TABLE_BLOCK)->fetch();
-        if($block->type != 'html') $block->content = json_decode($block->content);
+        if(strpos('html,code', $block->type) === false) $block->content = json_decode($block->content);
         return $block;
     }
 
@@ -30,7 +30,7 @@ class blockModel extends model
      * 
      * @param  object    $pager 
      * @access public
-     * @return void
+     * @return array
      */
     public function getList($pager)
     {
@@ -41,8 +41,10 @@ class blockModel extends model
     /**
      * Get block list of one region.
      * 
+     * @param  string    $module 
+     * @param  string    $method 
      * @access public
-     * @return array    the block lists.
+     * @return array
      */
     public function getPageBlocks($module, $method)
     {
@@ -78,8 +80,10 @@ class blockModel extends model
     /**
      * Get block list of one region.
      * 
+     * @param  string    $page 
+     * @param  string    $region 
      * @access public
-     * @return array    the block lists.
+     * @return array
      */
     public function getRegionBlocks($page, $region)
     {
@@ -99,11 +103,35 @@ class blockModel extends model
      * Get block id => title pairs.
      * 
      * @access public
-     * @return void
+     * @return array
      */
     public function getPairs()
     {
         return $this->dao->select('id, title')->from(TABLE_BLOCK)->fetchPairs();
+    }
+    
+    /**
+     * Create type  select area.
+     * 
+     * @param  string    $type 
+     * @param  int       $blockID 
+     * @access public
+     * @return string
+     */
+    public function createTypeSelector($type, $blockID = 0)
+    {
+        $select = "<div class='btn-group'><button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown'>";
+        $select .= $this->lang->block->typeList[$type] . "<span class='caret'></span></button>";
+        $select .= "<ul class='dropdown-menu' role='menu'>";
+        foreach($this->lang->block->typeGroups as $block => $group)
+        {
+            if(isset($lastGroup) and $group !== $lastGroup) $select .= "<li class='divider'></li>";
+            $lastGroup = $group;
+            $class = ($block == $currentType) ? "class='active'" : '';
+            $select .= "<li {$class}>" . html::a(helper::createLink('block', $this->app->getMethodName(), "blockID={$blockID}&type={$block}"), $this->lang->block->typeList[$block]) . "</li>";
+        }
+        $select .= "</ul></div>" .  html::hidden('type', $type);
+        return $select;
     }
 
     /**
@@ -122,7 +150,7 @@ class blockModel extends model
         $entry .= '<td>';
         $entry .= html::a('javascript:;', $this->lang->block->add, "class='plus'");
         $entry .= html::a('javascript:;', $this->lang->delete, "class='delete'");
-        $entry .= html::a(inlink('edit', "blockID={$block->id}&type={$block->type}"), $this->lang->edit, "class='delete'");
+        $entry .= html::a(inlink('edit', "blockID={$block->id}&type={$block->type}"), $this->lang->edit, "class='edit'");
         $entry .= "<i class='icon-arrow-up'></i> <i class='icon-arrow-down'></i>";
         $entry .= '</td></tr>';
         return $entry;
@@ -136,7 +164,7 @@ class blockModel extends model
      */
     public function create()
     {
-        $block = fixer::input('post')->get();
+        $block = fixer::input('post')->stripTags('content', $this->config->allowedTags->super)->get();
 
         if(isset($block->params))
         {
@@ -160,7 +188,7 @@ class blockModel extends model
      */
     public function update($blockID)
     {
-        $block = fixer::input('post')->get();
+        $block = fixer::input('post')->stripTags('content', $this->config->allowedTags->super)->get();
 
         if(isset($block->params))
         {
