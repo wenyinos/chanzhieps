@@ -55,6 +55,8 @@ $(document).ready(function()
 
     $.each(v.editors.id, function(key, editorID)
     {
+        console.log(v.editors)
+        if(typeof(v.editors.filterMode) == 'undefined') v.editors.filterMode = true;
         editorTool = eval(v.editors.tools);
 
         KindEditor.ready(function(K)
@@ -67,6 +69,7 @@ $(document).ready(function()
                 urlType:'absolute', 
                 uploadJson: createLink('file', 'ajaxUpload', 'uid=' + v.uid),
                 imageTabIndex:1,
+                filterMode:v.editors.filterMode,
                 allowFileManager:true,
                 langType:v.editorLang,
                 afterBlur: function(){this.sync(); },
