@@ -288,6 +288,7 @@ class fixer
      */
     private $data;
 
+    private $stripedFields;
     /**
      * The construction function, according the scope, convert it to object.
      * 
@@ -422,7 +423,10 @@ class fixer
     public function specialChars($fieldName)
     {
         $fields = $this->processFields($fieldName);
-        foreach($fields as $fieldName) $this->data->$fieldName = htmlspecialchars($this->data->$fieldName);
+        foreach($fields as $fieldName)
+        {
+           if(!in_array($fieldName, $this->stripedFields)) $this->data->$fieldName = htmlspecialchars($this->data->$fieldName);
+        }
         return $this;
     }
 
@@ -436,6 +440,7 @@ class fixer
      */
     public function stripTags($fieldName, $allowableTags)
     {
+        $this->stripedFields[] = $fieldName;
         $fields = $this->processFields($fieldName);
         foreach($fields as $fieldName) $this->data->$fieldName = strip_tags($this->data->$fieldName, $allowableTags);
         return $this;
@@ -600,12 +605,17 @@ class fixer
     public function get($fields = '')
     {
         $fields = str_replace(' ', '', trim($fields));
+        foreach($this->data as $field => $value)  $this->specialChars($field);
 
         if(empty($fields)) return $this->data;
         if(strpos($fields, ',') === false) return $this->data->$fields;
 
         $fields = array_flip(explode(',', $fields));
-        foreach($this->data as $field => $value) if(!isset($fields[$field])) unset($this->data->$field);
+        foreach($this->data as $field => $value)
+        {
+            if(!isset($fields[$field])) unset($this->data->$field);
+            if(!in_array($field, $this->tripedFields)) $this->data->$field = $this->specialChars($this->data->field);
+        }
 
         return $this->data;
     }
