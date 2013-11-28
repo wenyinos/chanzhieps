@@ -445,3 +445,4 @@ function setPing()
       $.get(createLink('misc', 'ping'));
 }
 needPing = true;
+if(config.runMode != 'admin') needPing = false;

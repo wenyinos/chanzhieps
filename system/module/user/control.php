@@ -95,6 +95,7 @@ class user extends control
 
         $this->view->title   = $this->lang->user->login->common;
         $this->view->referer = $this->referer;
+        $this->view->private = $this->session->user->private;
 
         $this->display();
     }

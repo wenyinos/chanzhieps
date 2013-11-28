@@ -103,7 +103,7 @@ class userModel extends model
             ->setIF($this->cookie->r == '', 'referer', '')
             ->remove('admin, ip')
             ->get();
-        $user->password = $this->createPassword($this->post->password1, $user->account, $user->join); 
+        $user->password = $this->createPassword($this->post->password1, $user->account); 
 
         $this->dao->insert(TABLE_USER)
             ->data($user, $skip = 'password1,password2')
@@ -132,7 +132,7 @@ class userModel extends model
             if(dao::isError()) return false;
 
             $join = $this->dao->select('`join`')->from(TABLE_USER)->where('account')->eq($account)->fetch('join');
-            $password  = $this->createPassword($this->post->password1, $account, $join);
+            $password  = $this->createPassword($this->post->password1, $account);
             $this->post->set('password', $password);
         }
 
@@ -186,7 +186,7 @@ class userModel extends model
         if(dao::isError()) return false;
 
         $user = fixer::input('post')
-            ->setIF($this->post->password1 != false, 'password', $this->createPassword($this->post->password1, $account, $this->app->user->join))
+            ->setIF($this->post->password1 != false, 'password', $this->createPassword($this->post->password1, $account))
             ->remove('password1, password2, ip, account, admin, join, visits')
             ->get();
 
@@ -250,7 +250,8 @@ class userModel extends model
         }
 
         /* The password can be the plain or the password after md5. */
-        if($this->createPassword($password, $user->account, $user->join) != $user->password and $user->password != $password)
+        $oldPassword = $this->createPasswordWithJoin($password, $user->account, $user->join);
+        if($oldPassword != $user->password and !$this->compareHashPassword($password, $user))
         {
             $user->fails ++;
             if($user->fails > 2) $user->locked = time();
@@ -264,11 +265,14 @@ class userModel extends model
         $user->fails  = 0;
         $user->locked = 0;
         $user->visits ++;
+        /* Update password when create password by oldCreatePassword function. */
+        if($oldPassword == $user->password) $user->password = $this->createPassword($password, $user->account);
         $this->dao->update(TABLE_USER)->data($user)->where('account')->eq($account)->exec();
 
         $user->realname  = empty($user->realname) ? $account : $user->realname;
         $user->shortLast = substr($user->last, 5, -3);
         $user->shortJoin = substr($user->join, 5, -3);
+        unset($_SESSION['user']->private);
 
         /* Return him.*/
         return $user;
@@ -408,7 +412,7 @@ class userModel extends model
                 ->fetch();
         
         $this->dao->update(TABLE_USER)
-            ->set('password')->eq(md5($password))
+            ->set('password')->eq($this->createPassword($password, $user->account))
             ->set('resetKey')->eq('')
             ->set('resetedTime')->eq('')
             ->where('resetKey')->eq($resetKey)
@@ -420,13 +424,40 @@ class userModel extends model
      * 
      * @param  string    $password 
      * @param  string    $account 
-     * @param  string    $join 
      * @access public
      * @return string
      */
-    public function createPassword($password, $account, $join)
+    public function createPassword($password, $account)
+    {
+        return md5($account . $password);
+    }
+
+    /**
+     * Create password width join 
+     * 
+     * @param  string    $password 
+     * @param  string    $account 
+     * @param  string    $join 
+     * @access public
+     * @return void
+     */
+    public function createPasswordWithJoin($password, $account, $join)
     {
         return md5(md5($password) . $account . $join);
+    }
+
+    /**
+     * Compare hash password use private
+     * 
+     * @param  string    $password 
+     * @param  object    $user 
+     * @access public
+     * @return void
+     */
+    public function compareHashPassword($password, $user)
+    {
+        $private = $this->app->user->private;
+        return md5($this->createPassword($password, $user->account) . $private) == md5($user->password . $private);
     }
 
     /**
@@ -458,7 +489,7 @@ class userModel extends model
             ->setForce('visits', 1)
             ->setIF($this->cookie->r != '', 'referer', $this->cookie->r)
             ->setIF($this->cookie->r == '', 'referer', '')
-            ->add('password', $this->createPassword(md5(mt_rand()), $user->account, $user->join))     // Set a random password.
+            ->add('password', $this->createPassword(md5(mt_rand()), $user->account))     // Set a random password.
             ->remove('admin, ip')
             ->get();
 

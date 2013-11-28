@@ -1,6 +1,7 @@
 <?php include '../../common/view/header.lite.html.php';?>
 <?php js::set('scriptName', $_SERVER['SCRIPT_NAME']);?>
 <?php js::set('adminURL', $lang->user->notice->adminURL);?>
+<?php js::set('private', $private);?>
 <?php css::internal('body{background-color:#f6f5f5}');?> 
 <form method="post" id='ajaxForm' class='radius shadow admin'>
   <div id='logo'><?php echo html::image("$themeRoot/default/images/main/logo.login.png");?></div>

@@ -1,4 +1,5 @@
 <?php include '../../common/view/header.html.php';?>
+<?php js::set('private', $private);?>
 <section id="login">
   <div class="box-radius">
     <div class="row">
