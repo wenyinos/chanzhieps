@@ -27,15 +27,22 @@ class forumModel extends model
             ->fetchGroup('parent');
         if(!isset($rawBoards[0])) return $boards;
 
+        /* Get lastReplies of all thread, for jump lastReply. */
+        $lastReplies = $this->dao->select('thread, COUNT(id) as id')->from(TABLE_REPLY)->fetchPairs('thread');
+
         foreach($rawBoards[0] as $parentBoard)
         {
             if(isset($rawBoards[$parentBoard->id]))
             {
                 $parentBoard->children = $rawBoards[$parentBoard->id];
-                foreach($parentBoard->children as $childBoard) $childBoard->lastPostReplies = $this->dao->select('COUNT(id) as id')->from(TABLE_REPLY)->where('thread')->eq($childBoard->postID)->fetch('id');
+                foreach($parentBoard->children as $childBoard) 
+                {
+                    $childBoard->lastPostReplies = isset($replies[$childBoard->postID]) ? $replies[$childBoard->postID] : 0;
+                }
                 $boards[] = $parentBoard;
             }
         }
+
         return $boards;
     }
 
