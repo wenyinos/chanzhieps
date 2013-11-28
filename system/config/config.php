@@ -97,6 +97,7 @@ define('TABLE_PRODUCT',  $config->db->prefix . 'product');
 define('TABLE_ARTICLE',  $config->db->prefix . 'article');
 define('TABLE_BLOCK',    $config->db->prefix . 'block');
 define('TABLE_TAG',      $config->db->prefix . 'tag');
+define('TABLE_HELP',     $config->db->prefix . 'help');
 define('TABLE_LAYOUT',   $config->db->prefix . 'layout');
 define('TABLE_COMMENT',  $config->db->prefix . 'comment');
 define('TABLE_THREAD',   $config->db->prefix . 'thread');
