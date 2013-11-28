@@ -56,16 +56,23 @@ class forumModel extends model
      */
     public function updateBoardStats($boardID, $post)
     {
-        /* If replyID eq 0, the post is 'thread', threads ++. */
-        $threads = $post->replyID ? 'threads' : 'threads + 1';
+        $board = $this->dao->select('*')->from(TABLE_CATEGORY)->where('id')->eq($boardID)->fetch();
+        if($post->replyID)
+        {
+            $board->replyID = $post->replyID;
+        }
+        else
+        {
+            $board->threads ++;
+        }
 
         $this->dao->update(TABLE_CATEGORY)
-            ->set('threads = ' . $threads)
+            ->set('threads = ' . $board->threads)
             ->set('posts = posts + 1')
             ->set('postedBy')->eq($post->author)
             ->set('postedDate')->eq($post->addedDate)
             ->set('postID')->eq($post->threadID)
-            ->set('replyID')->eq($post->replyID)
+            ->set('replyID')->eq($board->replyID)
             ->where('id')->eq($boardID)
             ->exec();
     }
