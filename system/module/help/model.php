@@ -14,82 +14,54 @@ class helpModel extends model
     /**
      * Show book catalogue.
      * 
-     * @param  string    $book 
-     * @param  int       $chapter 
+     * @param  int    $bookID 
      * @access public
      * @return void
      */
-    public function getBookCatalogue($book, $chapter = 0)
+    public function getBookCatalogue($bookID = 0)
     {
-        $code = str_replace('book_', '', $book);
         if(!isset($this->catalogue)) $this->catalogue = '';
+        $inAdmin = RUN_MODE == 'admin';
         
-        $chapter = $this->loadModel('tree')->getByID($chapter);
-        if(!empty($chapter))
+        $book = $this->getByID($bookID);
+        if(!empty($book))
         {
             /* Add self to tree. */
-            $order = $this->getChapterNumber($chapter->path);
+            $order = $this->getChapterNumber($book->path);
             $this->lastChapter = $order;
-            $this->catalogue .= "<dt><strong>" . $order . '&nbsp;' . html::a(helper::createLink('help', 'book', "type=$code&categoryID=$chapter->id", "category={$chapter->alias}"), $chapter->name) . '</strong></dt>';
+
+            $linkOnTitle   = $inAdmin ? helper::createLink('help', 'admin', "bookID=$book->id") : helper::createLink('help', 'book', "bookID=$book->id", "book=$book->alias");
+            $editButton    = $inAdmin ? html::a(helper::createLink('help', 'edit',   "bookID=$book->id"), $this->lang->edit, "data-toggle='modal' data-width='1000px'") : '';
+            $deleteButton  = $inAdmin ? html::a(helper::createLink('help', 'delete', "bookID=$book->id"), $this->lang->delete, "class='deleter'") : '';
+            $createChapter = $inAdmin ? html::a(helper::createLink('help', 'create', "type=chapter&bookID=$book->id"), $this->lang->book->createChapter, "data-toggle='modal' data-width='1000px'") : '';
+            $createArticle = $inAdmin ? html::a(helper::createLink('help', 'create', "type=article&bookID=$book->id"), $this->lang->book->createArticle, "data-toggle='modal' data-width='1000px'") : '';
+
+            if($book->type == 'book')
+            {
+                $this->catalogue .= "<dt class='book'><strong>" . $order . '&nbsp;' . html::a($linkOnTitle, $book->title) . "</strong>" . $editButton . $deleteButton . $createChapter . $createArticle . "</dt>";
+            }
+            elseif($book->type == 'chapter')
+            {
+                $this->catalogue .= "<dd><strong>" . $order . '&nbsp;' . html::a($linkOnTitle, $book->title) . "</strong>" . $editButton . $deleteButton . $createChapter . $createArticle . "</dd>";
+            }
+            else
+            {
+                $this->catalogue .= "<dd><strong>" . $order . '</strong>&nbsp;' . html::a($linkOnTitle, $book->title) . $editButton . $deleteButton . '</dd>';
+            }
         }
-        $children = $this->tree->getChildren(isset($chapter->id) ? $chapter->id : 0, $book);
+
+        $children = $this->getChildren(isset($book->id) ? $book->id : 0);
 
         if(!empty($children)) 
         {
-            if($chapter) $this->catalogue .= '<dl>';
+            if($book) $this->catalogue .= '<dl>';
             foreach($children as $child)
             {
-                $this->getBookCatalogue($book, $child->id);
+                $this->getBookCatalogue($child->id);
             }
-            if($chapter) $this->catalogue .= '</dl>';
-        }
-        if($chapter) 
-        {
-            $articleCatalogue = $this->getArticleCatalogue($book, $chapter, $this->lastChapter);
-            if($articleCatalogue != '')  $this->catalogue .= "<dl>{$articleCatalogue}</dl>";
+            if($book) $this->catalogue .= '</dl>';
         }
         return $this->catalogue;
-    }
-
-    /**
-     * Get article catalogue. 
-     * 
-     * @param  string    $book 
-     * @param  object    $currentChapter
-     * @param  int       $preChapter 
-     * @access public
-     * @return void
-     */
-    public function getArticleCatalogue($book, $currentChapter, $preChapter)
-    {
-        if(empty($currentChapter)) return '';
-
-        $catalogue = '';
-        $book = str_replace('book_', '', $book);
-
-        $articles = $this->dao->select('t1.id, t1.order, title, t2.category')->from(TABLE_ARTICLE)
-            ->alias('t1')->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
-            ->where('category')->eq($currentChapter->id)
-            ->orderBy('t1.order')
-            ->fetchAll('id');
-
-        $i = 1;
-        if($preChapter !== $this->getChapterNumber($currentChapter->path))
-        {
-            $path = explode('.', $preChapter);
-            $i    = end($path) + 1;
-            unset($path[count($path)-1]);
-            $preChapter = join('.', $path);
-        }
-
-        foreach($articles as $article)
-        {   
-            $url  = helper::createLink('help', 'read', "article=$article->id&book={$book}", "category={$currentChapter->alias}&name=$article->alias");
-            $link = html::a($url, $preChapter . '.' . $i . $article->title); 
-            $catalogue .= "<dd class='f-14px'>" . $link . '</dd>';
-            $i++;
-        }
-        return $catalogue;
     }
 
     /**
@@ -102,12 +74,14 @@ class helpModel extends model
     public function getChapterNumber($path)
     {
         $origins = explode(',', $path);
+        unset($origins[1]);//remove book number from chapter number.
+
         $preFix  = '';
         foreach($origins as $origin)
         {
             if(!$origin) continue;
-            $category = $this->loadModel('tree')->getByID($origin);
-            $category->sort = $this->countChapterOrder(str_replace('book_', '', $category->type), $category->id, $category->parent);
+            $category = $this->getByID($origin);
+            $category->sort = $this->countChapterOrder($category->id, $category->parent);
             $sort .= $category->sort . ".";
         }
         return trim($sort, '.');
@@ -116,17 +90,15 @@ class helpModel extends model
     /**
      * Get chapter's order in its brother queue.
      * 
-     * @param  string    $book 
      * @param  string    $categoryID 
      * @param  int       $parentID 
      * @access public
      * @return void
      */
-    public function countChapterOrder($code, $categoryID, $parentID = '')
+    public function countChapterOrder($categoryID, $parentID = '')
     {
-        $categories = $this->dao->select('*')->from(TABLE_CATEGORY)
-            ->where('type')->eq('book_' . $code)
-            ->beginIF($parentID !='')->andWhere('parent')->eq($parentID)->fi()
+        $categories = $this->dao->select('*')->from(TABLE_HELP)
+            ->beginIF($parentID !='')->where('parent')->eq($parentID)->fi()
             ->orderBy('`order`')->fetchAll('id');
 
         $order = array_search($categoryID, array_keys($categories));
@@ -134,123 +106,170 @@ class helpModel extends model
     }
 
     /**
-     * Get category Box of backend.
-     * 
-     * @param  string    $type 
-     * @access public
-     * @return void
-     */
-    public function getCategoryBox($type)
-    {
-        $book = $this->getBookByCode(str_replace('book_', '', $type));
-        $treeMenu    = $this->loadModel('tree')->getTreeMenu($type, 0, array('treeModel', 'createBookLink'));
-        $backButton  =  html::a(helper::createLink('help', 'admin', "type={$type}"), $this->lang->help->backtobooks, "class='btn btn-default btn-sm'");
-
-        $categoryBox = <<<Eof
-            <div class='col-md-2'>
-              <table class='table'>
-                <caption>
-                  {$book->name}
-                </caption>
-               <tr>
-                 <td><div id='treeMenuBox'>{$treeMenu} {$backButton}</div></td>
-               </tr>
-             </table>
-           </div>
-Eof;
-        return $categoryBox;
-    }
-
-    /**
-     * Create a book.
+     * Create a book, a chapter or an article.
      *
+     * @param  string    $type 
      * @access public
      * @return bool
      */
-    public function createBook()
+    public function create($type)
     {
-        $book = fixer::input('post')->get();
+        /* Init the catalog object. */
+        $now  = helper::now();
+        $book = fixer::input('post')
+            ->add('addedDate',  $now)
+            ->add('editedDate', $now)
+            ->get();
 
-        $setting = new stdclass();
-        $setting->owner   = 'system';
-        $setting->module  = 'common';
-        $setting->section = 'book';
-        $setting->key     = $book->code;
-        unset($book->code);
-        $setting->value   = helper::jsonEncode($book);
-        
-        $books = $this->dao->select('*')->from(TABLE_CONFIG)
-            ->where('owner')->eq('system')
-            ->andWhere('module')->eq('common')
-            ->andWhere('section')->eq('book')
-            ->andWhere('`key`')->eq($setting->key)
-            ->fetchAll();
+        $parent = 0;
+        if($book->parent) $parent = $this->getByID($book->parent);
 
-        $errors = array();
+        $book->type     = $type;
+        $book->parent   = $parent ? $parent->id : 0;
+        $book->grade    = $parent ? $parent->grade + 1 : 1;
+        $book->keywords = seo::unify($book->keywords, ',');
+        $book->alias    = seo::unify($book->alias, '-');
 
-        if(count($books) > 1)
-        {
-            $errors['code'] = $this->lang->help->codeunique;
-        }
-        elseif(count($books) == 1)
-        {
-            $errors['code'] = $this->lang->help->codeunique;
-        }
-        
-        if(!ctype_alnum($setting->key)) $errors['code'] = $this->lang->help->codealnum;
+        $this->dao->insert(TABLE_HELP)
+            ->data($book)
+            ->autoCheck()
+            ->batchCheck($this->config->help->create->requiredFields, 'notempty')
+            ->exec();
 
-        if(!$book->name) $errors['name'] = $this->lang->help->namenotempty;
-        if(!$setting->key) $errors['code'] = $this->lang->help->codenotempty;
+        /* After saving, update it's path. */
+        $bookID   = $this->dao->lastInsertID();
+        $bookPath = ",$bookID,";
+        $bookPath = $parent ? $parent->path . $bookPath : $bookPath;
+        $this->dao->update(TABLE_HELP)->set('path')->eq($bookPath)->where('id')->eq($bookID)->exec();
 
-        if(!empty($errors)) return $errors;
-
-        $this->dao->insert(TABLE_CONFIG)->data($setting)->exec();
-
-        return !dao::isError();
+        return $bookID;
     }
 
     /**
-     * Get a book by code.
+     * Get a book by id or alias.
      *
-     * @param string $code
+     * @param  string $id
      * @access public
      * @return array
      */
-    public function getBookByCode($code)
+    public function getByID($id)
     {
-        $book = $this->dao->select('*')->from(TABLE_CONFIG)->where('`key`')->eq($code)->fetch();
-        if(!$book) return false;
-
-        $id   = $book->id;
-        $key  = $book->key;    
-        $book = json_decode($book->value);
-
-        $book->id  = $id;
-        $book->key = $key;
-
+        $book = $this->dao->select('*')->from(TABLE_HELP)->where('alias')->eq($id)->fetch();
+        if(!$book) $book = $this->dao->select('*')->from(TABLE_HELP)->where('id')->eq($id)->fetch();
+        $book->pathNames = $this->dao->select('id, title')->from(TABLE_HELP)->where('id')->in($book->path)->orderBy('grade')->fetchPairs();
         return $book;
     }
 
     /**
-     * Get a book by id.
-     *
-     * @param int $id
+     * Build the sql to execute.
+     * 
+     * @param  int    $startParent   the start parent id
+     * @access public
+     * @return string
+     */
+    public function buildQuery($startParent = 0)
+    {
+        /* Get the start parent path according the $startParent. */
+        $startPath = '';
+        if($startParent > 0)
+        {
+            $startParent = $this->getById($startParent);
+            if($startParent) $startPath = $startParent->path . '%';
+        }
+
+        return $this->dao->select('*')->from(TABLE_HELP)
+            ->where('type')->ne('article')
+            ->beginIF($startPath)->andWhere('path')->like($startPath)->fi()
+            ->orderBy('grade desc, `order`')
+            ->get();
+    }
+
+    /**
+     * Get children categories of one category.
+     * 
+     * @param  int    $bookID 
      * @access public
      * @return array
      */
-    public function getBookByID($id)
+    public function getChildren($bookID)
     {
-        $book = $this->dao->select('*')->from(TABLE_CONFIG)->where('id')->eq($id)->fetch();
-        if(!$book) return false;
+        return $this->dao->select('*')->from(TABLE_HELP)
+            ->where('parent')->eq((int)$bookID)
+            ->andWhere('type')->ne('book')
+            ->orderBy('`order`')
+            ->fetchAll('id');
+    }
 
-        $id   = $book->id;
-        $key  = $book->key;    
-        $book = json_decode($book->value);
+    /**
+     * Create a tree menu in <select> tag.
+     * 
+     * @param  int    $startParent 
+     * @param  bool   $removeRoot 
+     * @access public
+     * @return string
+     */
+    public function getOptionMenu($startParent = 0, $removeRoot = false)
+    {
+        /* First, get all books. */
+        $treeMenu   = array();
+        $stmt       = $this->dbh->query($this->buildQuery($startParent));
+        $books      = array();
+        while($book = $stmt->fetch()) $books[$book->id] = $book;
 
-        $book->id  = $id;
-        $book->key = $key;
+        /* Cycle them, build the select control.  */
+        foreach($books as $book)
+        {
+            $origins = explode(',', $book->path);
+            $bookTitle = '/';
+            foreach($origins as $origin)
+            {
+                if(empty($origin)) continue;
+                $bookTitle .= $books[$origin]->title . '/';
+            }
+            $bookTitle = rtrim($bookTitle, '/');
+            $bookTitle .= "|$book->id\n";
 
-        return $book;
+            if(isset($treeMenu[$book->id]) and !empty($treeMenu[$book->id]))
+            {
+                if(isset($treeMenu[$book->parent]))
+                {
+                    $treeMenu[$book->parent] .= $bookTitle;
+                }
+                else
+                {
+                    $treeMenu[$book->parent] = $bookTitle;;
+                }
+                $treeMenu[$book->parent] .= $treeMenu[$book->id];
+            }
+            else
+            {
+                if(isset($treeMenu[$book->parent]) and !empty($treeMenu[$book->parent]))
+                {
+                    $treeMenu[$book->parent] .= $bookTitle;
+                }
+                else
+                {
+                    $treeMenu[$book->parent] = $bookTitle;
+                }    
+            }
+        }
+
+        $topMenu = @array_pop($treeMenu);
+        $topMenu = explode("\n", trim($topMenu));
+        if(!$removeRoot) $lastMenu[] = '/';
+
+        foreach($topMenu as $menu)
+        {
+            if(!strpos($menu, '|')) continue;
+
+            $menu   = explode('|', $menu);
+            $label  = array_shift($menu);
+            $bookID = array_pop($menu);
+           
+            $lastMenu[$bookID] = $label;
+        }
+
+        return $lastMenu;
     }
 
     /**
@@ -261,23 +280,8 @@ Eof;
      */
     public function getFirstBook()
     {
-        $book = $this->dao->select('*')->from(TABLE_CONFIG)
-            ->where('owner')->eq('system')
-            ->andWhere('module')->eq('common')
-            ->andWhere('section')->eq('book')
-            ->orderBy('id_desc')
-            ->limit(1)
-            ->fetch();
-
+        $book = $this->dao->select('*')->from(TABLE_HELP)->where('type')->eq('book')->orderBy('id_desc')->limit(1)->fetch();
         if(!$book) return false;
-
-        $id   = $book->id;
-        $key  = $book->key;    
-        $book = json_decode($book->value);
-
-        $book->id  = $id;
-        $book->key = $key;
-
         return $book;
     }
 
@@ -287,24 +291,9 @@ Eof;
      * @access public
      * @return array
      */
-    public function getBookList($pager = null)
+    public function getBookList()
     {
-        $books = $this->dao->select('*')->from(TABLE_CONFIG)
-            ->where('owner')->eq('system')
-            ->andWhere('module')->eq('common')
-            ->andWhere('section')->eq('book')
-            ->orderBy('id_desc')
-            ->page($pager)
-            ->fetchAll('id');
-
-        foreach($books as $bookID => $book)
-        {
-            $id  = $book->id;
-            $key = $book->key;
-            $books[$bookID]      = json_decode($book->value);
-            $books[$bookID]->key = $key;
-            $books[$bookID]->id  = $id; 
-        }
+        $books = $this->dao->select('*')->from(TABLE_HELP)->where('type')->eq('book')->orderBy('id_desc')->fetchAll('id');
 
         return $books;
     }
@@ -312,43 +301,30 @@ Eof;
     /**
      * Update a book.
      *
-     * @param int $id
+     * @param int $bookID
      * @access public
      * @return bool
      */
-    public function updateBook($id)
+    public function update($bookID)
     {
-        $book = fixer::input('post')->get();
-        $setting->key  = $book->code;
-        unset($book->code);
-        $setting->value = helper::jsonEncode($book);
+        $book = fixer::input('post')
+            ->add('editor', $this->app->user->account)
+            ->add('editedDate', helper::now())
+            ->get();
+
+        $book->keywords = seo::unify($book->keywords, ',');
+        $book->alias    = seo::unify($book->alias, '-');
         
-        $books = $this->dao->select('*')->from(TABLE_CONFIG)
-            ->where('owner')->eq('system')
-            ->andWhere('module')->eq('common')
-            ->andWhere('section')->eq('book')
-            ->andWhere('`key`')->eq($setting->key)
-            ->fetchAll();
+        $this->dao->update(TABLE_HELP)
+            ->data($book, $skip = 'uid')
+            ->autoCheck()
+            ->batchCheck($this->config->help->edit->requiredFields, 'notempty')
+            ->where('id')->eq($bookID)
+            ->exec();
 
-        $errors = array();
+        if(dao::isError()) return false;
 
-        if(count($books) > 1)
-        {
-            $errors['code'] = $this->lang->help->codeunique;
-        }
-        elseif(count($books) == 1 && $books[0]->id != $id)
-        {
-            $errors['code'] = $this->lang->help->codeunique;
-        }
-
-        if(!ctype_alnum($setting->key)) $errors['code'] = $this->lang->help->codealnum;
-
-        if(!$book->name) $errors['name'] = $this->lang->help->namenotempty;
-        if(!$setting->key) $errors['code'] = $this->lang->help->codenotempty;
-        
-        if(!empty($errors)) return $errors;
-
-        $this->dao->update(TABLE_CONFIG)->data($setting)->where('id')->eq($id)->exec();
+        $this->loadModel('tag')->save($book->keywords);
 
         return !dao::isError();
     }
@@ -359,15 +335,12 @@ Eof;
      * @param int $id
      * @return bool
      */
-    public function deleteBook($id)
+    public function delete($id)
     {
-        $book = $this->getBookByID($id);
+        $book = $this->getByID($id);
         if(!$book) return false;
-        
-        $this->dao->delete()->from(TABLE_CONFIG)->where('id')->eq($id)->exec();
-        $this->dao->delete()->from(TABLE_CATEGORY)->where('type')->eq($book->key)->exec();
-        $this->dao->delete()->from(TABLE_RELATION)->where('type')->eq($book->key)->exec();
 
+        $this->dao->delete()->from(TABLE_HELP)->where('id')->eq($id)->exec();
         return !dao::isError();
     }
 }

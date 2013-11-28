@@ -14,20 +14,39 @@ class help extends control
     public function index()
     {
         $book = $this->help->getFirstBook();
-        if($book) $this->locate(inlink('book', "type=$book->key"));
+        if($book) $this->locate(inlink('book', "type=$book->alias&book=$book->id"));
         $this->locate($this->createLink('index'));
     }
 
     /**
      * Browse books in admin.
      * 
+     * @params int    $bookID
      * @access public
      * @return void
      */
-    public function admin()
+    public function admin($bookID = '')
     {
-        $this->view->books = $this->help->getBookList();
+        $books = $this->help->getBookList();
+
+        $this->lang->help->menu = new stdclass();
+        $i = 1;
+        foreach($books as $book)
+        {
+            $this->lang->help->menu->$i = $book->title . '|help|admin|book=' . $book->id;
+            $i++;
+        }
+
+        $createBook = html::a(helper::createLink('help', 'create', "type=book"), $this->lang->book->create, "data-toggle='modal' data-width='1000px'");
+        $this->lang->help->menu->$i   = $createBook; 
+        $this->lang->menuGroups->tree = 'help';
+
+        $book = $this->help->getFirstBook();
+        if($bookID) $book = $this->help->getByID($bookID);
+
         $this->view->title = $this->lang->help->common;
+        $this->view->books = $books;
+        $this->view->book  = $book;
         $this->display();
     }
 
@@ -58,68 +77,72 @@ class help extends control
     /**
      * Create a book.
      *
+     * @params string $type
+     * @params int    $parent
      * @access public 
      * @return void
      */
-    public function createBook()
+    public function create($type, $parent = 0)
     {
         if($_POST)
         {
-            $result = $this->help->createBook();
-            if($result === true) $this->send(array('result' => 'success', 'message'=>$this->lang->saveSuccess, 'locate' => $this->inlink('admin')));
-            $this->send(array('result' => 'fail', 'message' => $result));
+            $this->help->create($type);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message'=>$this->lang->saveSuccess, 'locate' => $this->inlink('admin')));
         }
+
+        $this->view->parents       = $this->help->getOptionMenu(0, $removeRoot = false);
+        $this->view->currentParent = $parent;
+        $this->view->type          = $type;
         $this->display(); 
     }
 
     /**
-     * Edit a book.
+     * Edit a book, a chapter or an article.
      *
-     * @param int $id
+     * @param int $bookID
      * @access public
      * @return void
      */
-    public function editBook($id)
+    public function edit($bookID)
     {
+        $book = $this->help->getByID($bookID);
+
+        $parent = $this->help->getByID($book->parent);
+
         if($_POST)
         {
-            $result = $this->help->updateBook($id);
-            if($result === true) $this->send(array('result' => 'success', 'message'=>$this->lang->saveSuccess, 'locate' => $this->inlink('admin')));
-            $this->send(array('result' => 'fail', 'message' => $result));
+            $this->help->update($bookID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin', "bookID=$bookID")));
         }
 
-        $this->view->id   = $id;
-        $this->view->book = $this->help->getBookByID($id);
+        $this->view->title   = $this->lang->help->edit;
+        $this->view->parents = $this->help->getOptionMenu(0, $removeRoot = false);
+        $this->view->book    = $book;
+        $this->view->parent  = $parent;
         $this->display();
     }
 
     /**
      * Read a book.
      * 
-     * @param  string $code 
-     * @param  int    $categoryID 
+     * @param  int    $bookID 
      * @access public
      * @return void
      */
-    public function book($code, $categoryID = 0)
+    public function book($bookID)
     {
-        $book = $this->loadModel('setting')->getItem("owner=system&module=common&section=book&key=$code");
-        $book = json_decode($book);
+        $book         = $this->help->getByID($bookID);
+        $bookCategory = $this->help->getChildren($bookID);
 
-        $bookCategory = $this->loadModel('tree')->getByID($categoryID, 'book_' . $code);
-
-        if(empty($bookCategory)) $bookCategory = new stdclass();
-        $bookCategory->book = $book->name;
-        $bookCategory->code = $code;
-
-        $this->view->title = $book->name;
+        $this->view->title = $book->title;
         if($bookCategory)
         {
             $this->view->keywords = trim($bookCategory->keyword . ' ' . $this->config->site->keywords);
         }
         $this->view->books      = $this->help->getBookList();
         $this->view->book       = $book;
-        $this->view->code       = $code;
         $this->view->category   = $bookCategory;
         $this->display();
     }
@@ -170,12 +193,11 @@ class help extends control
      * @param int $id
      * @retturn void
      */
-    public function deleteBook($id)
+    public function delete($id)
     {
-        if($this->help->deleteBook($id)) $this->send(array('result' => 'success'));
+        if($this->help->delete($id)) $this->send(array('result' => 'success'));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
-
 
     /**
      * Create content navigation according the content. 
