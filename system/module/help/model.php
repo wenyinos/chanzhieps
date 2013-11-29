@@ -33,16 +33,15 @@ class helpModel extends model
             $linkOnTitle   = $inAdmin ? helper::createLink('help', 'admin', "bookID=$book->id") : helper::createLink('help', 'book', "bookID=$book->id", "book=$book->alias");
             $editButton    = $inAdmin ? html::a(helper::createLink('help', 'edit',   "bookID=$book->id"), $this->lang->edit, "data-toggle='modal' data-width='1000px'") : '';
             $deleteButton  = $inAdmin ? html::a(helper::createLink('help', 'delete', "bookID=$book->id"), $this->lang->delete, "class='deleter'") : '';
-            $createChapter = $inAdmin ? html::a(helper::createLink('help', 'create', "type=chapter&bookID=$book->id"), $this->lang->book->createChapter, "data-toggle='modal' data-width='1000px'") : '';
-            $createArticle = $inAdmin ? html::a(helper::createLink('help', 'create', "type=article&bookID=$book->id"), $this->lang->book->createArticle, "data-toggle='modal' data-width='1000px'") : '';
+            $create        = $inAdmin ? html::a(helper::createLink('help', 'create', "bookID=$book->id"), $this->lang->book->create) : '';
 
             if($book->type == 'book')
             {
-                $this->catalogue .= "<dt class='book'><strong>" . $order . '&nbsp;' . html::a($linkOnTitle, $book->title) . "</strong>" . $editButton . $deleteButton . $createChapter . $createArticle . "</dt>";
+                $this->catalogue .= "<dt class='book'><strong>" . $order . '&nbsp;' . html::a($linkOnTitle, $book->title) . "</strong>" . $editButton . $deleteButton . $create . "</dt>";
             }
             elseif($book->type == 'chapter')
             {
-                $this->catalogue .= "<dd><strong>" . $order . '&nbsp;' . html::a($linkOnTitle, $book->title) . "</strong>" . $editButton . $deleteButton . $createChapter . $createArticle . "</dd>";
+                $this->catalogue .= "<dd><strong>" . $order . '&nbsp;' . html::a($linkOnTitle, $book->title) . "</strong>" . $editButton . $deleteButton . $create . "</dd>";
             }
             else
             {
@@ -80,29 +79,12 @@ class helpModel extends model
         foreach($origins as $origin)
         {
             if(!$origin) continue;
-            $category = $this->getByID($origin);
-            $category->sort = $this->countChapterOrder($category->id, $category->parent);
-            $sort .= $category->sort . ".";
+            $book       = $this->getByID($origin);
+            $children   = $this->getChildren($book->parent);
+            $book->sort = array_search($book->id, array_keys($children)) + 1;
+            $sort      .= $book->sort . ".";
         }
         return trim($sort, '.');
-    }
-
-    /**
-     * Get chapter's order in its brother queue.
-     * 
-     * @param  string    $categoryID 
-     * @param  int       $parentID 
-     * @access public
-     * @return void
-     */
-    public function countChapterOrder($categoryID, $parentID = '')
-    {
-        $categories = $this->dao->select('*')->from(TABLE_HELP)
-            ->beginIF($parentID !='')->where('parent')->eq($parentID)->fi()
-            ->orderBy('`order`')->fetchAll('id');
-
-        $order = array_search($categoryID, array_keys($categories));
-        return $order + 1;
     }
 
     /**
@@ -112,37 +94,58 @@ class helpModel extends model
      * @access public
      * @return bool
      */
-    public function create($type)
+    public function create($parent, $catalogues)
     {
-        /* Init the catalog object. */
-        $now  = helper::now();
-        $book = fixer::input('post')
-            ->add('addedDate',  $now)
-            ->add('editedDate', $now)
-            ->get();
+        $parent = $this->getByID($parent);
 
-        $parent = 0;
-        if($book->parent) $parent = $this->getByID($book->parent);
+        /* Init the catalogue object. */
 
-        $book->type     = $type;
-        $book->parent   = $parent ? $parent->id : 0;
-        $book->grade    = $parent ? $parent->grade + 1 : 1;
-        $book->keywords = seo::unify($book->keywords, ',');
-        $book->alias    = seo::unify($book->alias, '-');
+        $catalogue = new stdclass();
 
-        $this->dao->insert(TABLE_HELP)
-            ->data($book)
-            ->autoCheck()
-            ->batchCheck($this->config->help->create->requiredFields, 'notempty')
-            ->exec();
+        $catalogue->parent   = $parent ? $parent->id : 0;
+        $catalogue->grade    = $parent ? $parent->grade + 1 : 1;
 
-        /* After saving, update it's path. */
-        $bookID   = $this->dao->lastInsertID();
-        $bookPath = ",$bookID,";
-        $bookPath = $parent ? $parent->path . $bookPath : $bookPath;
-        $this->dao->update(TABLE_HELP)->set('path')->eq($bookPath)->where('id')->eq($bookID)->exec();
+        $i = 1;
+        foreach($catalogues as $key => $catalogueTitle)
+        {
+            if(empty($catalogueTitle)) continue;
 
-        return $bookID;
+            /* First, save the child without path field. */
+            $catalogue->title = $catalogueTitle;
+            $catalogue->type  = $this->post->type[$key];
+            $catalogue->order = $this->post->maxOrder + $i * 10;
+            $mode = $this->post->mode[$key];
+
+            /* Add id to check alias. */
+            $catalogue->id = $mode == 'new' ?  0: $catalogue->id = $key;
+
+            if($mode == 'new')
+            {
+                unset($category->id);
+                $this->dao->insert(TABLE_HELP)->data($catalogue)->exec();
+
+                /* After saving, update it's path. */
+                $catalogueID   = $this->dao->lastInsertID();
+                $cataloguePath = ",$catalogueID,";
+                $cataloguePath = $parent ? $parent->path . $cataloguePath : $cataloguePath;
+                $this->dao->update(TABLE_HELP)
+                    ->set('path')->eq($cataloguePath)
+                    ->where('id')->eq($catalogueID)
+                    ->exec();
+                $i ++;
+            }
+            else
+            {
+                $catalogueID = $key;
+                $this->dao->update(TABLE_HELP)
+                    ->set('title')->eq($catalogueTitle)
+                    ->set('type')->eq($this->post->type[$key])
+                    ->where('id')->eq($catalogueID)
+                    ->exec();
+            }
+        }
+
+        return !dao::isError();
     }
 
     /**
@@ -335,7 +338,7 @@ class helpModel extends model
      * @param int $id
      * @return bool
      */
-    public function delete($id)
+    public function delete($id, $null = null)
     {
         $book = $this->getByID($id);
         if(!$book) return false;
