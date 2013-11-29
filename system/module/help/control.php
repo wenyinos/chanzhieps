@@ -11,6 +11,8 @@
  */
 class help extends control
 {
+    const NEW_CATALOGUE_COUNT = 5;
+
     public function index()
     {
         $book = $this->help->getFirstBook();
@@ -30,19 +32,23 @@ class help extends control
         $books = $this->help->getBookList();
 
         $this->lang->help->menu = new stdclass();
-        $i = 1;
         foreach($books as $book)
         {
-            $this->lang->help->menu->$i = $book->title . '|help|admin|book=' . $book->id;
-            $i++;
+            $id = $book->id;
+            $this->lang->help->menu->$id = $book->title . '|help|admin|book=' . $id;
         }
 
-        $createBook = html::a(helper::createLink('help', 'create', "type=book"), $this->lang->book->create, "data-toggle='modal' data-width='1000px'");
-        $this->lang->help->menu->$i   = $createBook; 
+        $this->lang->help->menu->createBook = $this->lang->book->createBook . '|help|create|type=book'; 
         $this->lang->menuGroups->tree = 'help';
 
-        $book = $this->help->getFirstBook();
-        if($bookID) $book = $this->help->getByID($bookID);
+        if($bookID)
+        {
+            $book = $this->help->getByID($bookID);
+        }
+        else
+        {
+            $book = $this->help->getByID(array_shift($books)->id);
+        } 
 
         $this->view->title = $this->lang->help->common;
         $this->view->books = $books;
@@ -77,23 +83,33 @@ class help extends control
     /**
      * Create a book.
      *
-     * @params string $type
      * @params int    $parent
      * @access public 
      * @return void
      */
-    public function create($type, $parent = 0)
+    public function create($parent = 0)
     {
-        if($_POST)
+        $books = $this->help->getBookList();
+
+        $this->lang->help->menu = new stdclass();
+        foreach($books as $book)
         {
-            $this->help->create($type);
-            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message'=>$this->lang->saveSuccess, 'locate' => $this->inlink('admin')));
+            $id = $book->id;
+            $this->lang->help->menu->$id = $book->title . '|help|admin|book=' . $id;
         }
 
-        $this->view->parents       = $this->help->getOptionMenu(0, $removeRoot = false);
-        $this->view->currentParent = $parent;
-        $this->view->type          = $type;
+        $this->lang->help->menu->createBook = $this->lang->book->createBook . '|help|create|type=book'; 
+        $this->lang->menuGroups->tree = 'help';
+
+        if($_POST)
+        {
+            $this->help->create($parent, $this->post->title);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message'=>$this->lang->saveSuccess, 'locate' => $this->inlink('admin', "bookID=$parent")));
+        }
+
+        $this->view->books      = $books;
+        $this->view->catalogues = $this->help->getChildren($parent);
         $this->display(); 
     }
 
