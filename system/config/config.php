@@ -32,14 +32,14 @@ $config->methodVar   = 'f';               // RequestType=GET: the name of the me
 $config->viewVar     = 't';               // RequestType=GET: the name of the view var.
 $config->sessionVar  = RUN_MODE . 'sid';  // The session var name.
 
+/* Set the allowed tags.  */
 $config->allowedTags = new stdclass();
-$config->allowedTags->front = '<p><span><h1><h2><h3><h4><h5><em><u><strong><br><ol><ul><li><img><a><b><font><hr>';
-$config->allowedTags->admin = $config->allowedTags->front . '<table><td><th><tr><tbody>';
-$config->allowedTags->super = $config->allowedTags->front . '<script><style>';
+$config->allowedTags->front = '<p><span><h1><h2><h3><h4><h5><em><u><strong><br><ol><ul><li><img><a><b><font><hr>';    // For front mode.
+$config->allowedTags->admin = $config->allowedTags->front . '<table><td><th><tr><tbody>';                             // For admin users.
 
 /* Views and themes. */
-$config->views       = ',html,json,xml,'; // Supported view types.
-$config->themes      = 'default,blue';    // Supported themes.
+$config->views  = ',html,json,xml,'; // Supported view types.
+$config->themes = 'default,blue';    // Supported themes.
 
 /* Suported languags. */
 $config->langs['zh-cn'] = '简体';
@@ -74,10 +74,10 @@ $config->db->persistant = false;               // Persistant connection or not.
 $config->db->driver     = 'mysql';             // The driver of pdo, only mysql yet.
 $config->db->encoding   = 'UTF8';              // The encoding of the database.
 $config->db->strictMode = false;               // Turn off the strict mode.
-$config->db->prefix     = 'eps_';               // The prefix of the table name.
+$config->db->prefix     = 'eps_';              // The prefix of the table name.
 
 /* Include my.php, domain.php and front or admin.php. */
-$configRoot   = dirname(__FILE__) . DIRECTORY_SEPARATOR;
+$configRoot   = dirname(__FILE__) . DS;
 $myConfig     = $configRoot . 'my.php';
 $routeConfig  = $configRoot . 'route.php';
 $domainConfig = $configRoot . 'domain.php';
@@ -113,5 +113,6 @@ define('TABLE_MESSAGE',  $config->db->prefix . 'message');
 $extConfigFiles = glob($configRoot . 'ext' . DS . '*.php');
 if($extConfigFiles) foreach($extConfigFiles as $extConfigFile) include $extConfigFile;
 
+/* Include the cache file. */
 $cacheConfigFile = dirname($configRoot) . DS . 'tmp' . DS . 'cache' . DS . 'config.php';
 if(file_exists($cacheConfigFile)) include $cacheConfigFile;
