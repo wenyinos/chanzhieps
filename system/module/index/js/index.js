@@ -22,4 +22,7 @@ $(document).ready(function()
     $('#slide').carousel();
     $('#slide .item').first().addClass('active');
     $('.nav-system-home').addClass('active');
-})                     
+
+    // fix links style
+    $("#links").closest('div').removeClass('col-md-4');
+})
