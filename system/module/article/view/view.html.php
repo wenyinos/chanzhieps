@@ -10,7 +10,7 @@ js::set('articleID', $article->id);
 <div class='row'>
   <div class='col-md-9'>
     <div class='box radius'>
-      <div class='content'>
+      <div class='content' id="articleContent">
         <h1 class='a-center'><?php echo $article->title;?></h1>
         <div class='f-12px mb-10px a-center'>
           <?php
@@ -44,8 +44,9 @@ js::set('articleID', $article->id);
         <?php endif;?>
         <?php extract($prevAndNext);?>
         <div class='row f-12px mt-20px'>
-          <div class='col-md-6 a-left'> <?php $prev ? print($lang->article->prev . $lang->colon . html::a(inlink('view', "id=$prev->id", "category={$category->alias}&name={$prev->alias}"), $prev->title)) : print($lang->article->none);?></div>
-          <div class='col-md-6 a-right'><?php $next ? print($lang->article->next . $lang->colon . html::a(inlink('view', "id=$next->id", "category={$category->alias}&name={$next->alias}"), $next->title)) : print($lang->article->none);?></div>
+          <div class='col-sm-5 a-left'> <?php $prev ? print($lang->article->prev . $lang->colon . html::a(inlink('view', "id=$prev->id", "category={$category->alias}&name={$prev->alias}"), $prev->title)) : print($lang->article->none);?></div>
+          <div class="col-sm-2 text-center"><a href="#articleContent"><i class="icon-arrow-up"></i> <?php echo $lang->article->back2Top; ?></a></div>
+          <div class='col-sm-5 a-right'><?php $next ? print($lang->article->next . $lang->colon . html::a(inlink('view', "id=$next->id", "category={$category->alias}&name={$next->alias}"), $next->title)) : print($lang->article->none);?></div>
         </div>
       </div>
     </div>
