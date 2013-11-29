@@ -22,7 +22,7 @@
     <?php endif;?>
   </div>
   <div class="modal-body">
-    <form id="editForm" method='post' class="form-inline" enctype='multipart/form-data' action='<?php echo helper::createLink('help', 'edit', "bookID=$book->id")?>'>
+    <form id="editForm" method='post' class="form-inline" action='<?php echo inlink('edit', "bookID=$book->id")?>'>
       <table class='table table-form'>
         <?php if($book->type !== 'book'):?>
         <tr>
