@@ -61,7 +61,7 @@ class slideModel extends model
      */
     public function create($image)
     {
-        $slide = fixer::input('post')->add('image', $image)->get();
+        $slide = fixer::input('post')->stripTags('summary', $this->config->allowableTags->front)->add('image', $image)->get();
 
         $setting = new stdclass();
         $setting->owner   = 'system';
@@ -88,7 +88,7 @@ class slideModel extends model
     {
         $image = $this->uploadImage();
 
-        $slide = fixer::input('post')->setIf(!empty($image), 'image', $image)->get();
+        $slide = fixer::input('post')->stripTags('summary', $this->config->allowedTags->front)->setIf(!empty($image), 'image', $image)->get();
 
         $this->dao->update(TABLE_CONFIG)
             ->set('value')->eq(helper::jsonEncode($slide))
