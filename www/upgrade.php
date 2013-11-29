@@ -20,7 +20,7 @@ define('RUN_MODE', 'upgrade');
 include 'loader.php';
 
 /* Instance the app and run it. */
-$app = router::createApp('xirang', $systemRoot, '', dirname(__FILE__));
+$app = router::createApp('chanzhi', $systemRoot);
 $common = $app->loadCommon();
 $config = $app->config;
 

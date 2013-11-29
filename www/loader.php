@@ -10,20 +10,14 @@
  * @link        http://www.chanzhi.org
  */
 
-/* User used to set system root. */
-#$systemRoot = '/opt/lamp/xirangsystem/';
-
-/* Use  ../system as default system root. */
-if(!isset($systemRoot)) $systemRoot = dirname(dirname(__FILE__)) . '/system/';
-
-/* If outer system path is not available use ./system as system root. */
-if(!is_dir($systemRoot)) $systemRoot = dirname(__FILE__) . '/system/';
-
-if(!is_dir($systemRoot)) die('System Lost! PLS check xirang system is available. ');
+/* Set systemRoot */
+//$systemRoot = '';                                                                 // Use can define the systemRoot manually.
+if(!isset($systemRoot))  $systemRoot = dirname(dirname(__FILE__)) . '/system/';     // Not set, use  ../system as default.
+if(!is_dir($systemRoot)) $systemRoot = dirname(__FILE__) . '/system/';              // Last, try www/system.
+if(!is_dir($systemRoot)) die('system not found! Please check it.');                 // Die.
 
 /* Load the framework. */
 $frameworkRoot = $systemRoot . 'framework/';
-
 include $frameworkRoot . 'router.class.php';
 include $frameworkRoot . 'control.class.php';
 include $frameworkRoot . 'model.class.php';

@@ -286,7 +286,7 @@ class router
      * @access protected
      * @return void
      */
-    protected function __construct($appName = 'demo', $appRoot = '', $webRoot = '')
+    protected function __construct($appName = 'demo', $appRoot = '')
     {
         $this->setPathFix();
         $this->setBasePath();
@@ -299,7 +299,7 @@ class router
         $this->setLogRoot();
         $this->setConfigRoot();
         $this->setModuleRoot();
-        $this->setDataRoot($webRoot);
+        $this->setDataRoot();
 
         $this->setSuperVars();
 
@@ -338,10 +338,10 @@ class router
      * @access public
      * @return object   the app object
      */
-    public static function createApp($appName = 'demo', $appRoot = '', $className = 'router', $webRoot)
+    public static function createApp($appName = 'demo', $appRoot = '', $className = 'router')
     {
         if(empty($className)) $className = __CLASS__;
-        return new $className($appName, $appRoot, $webRoot);
+        return new $className($appName, $appRoot, $wwwRoot);
     }
 
     //-------------------- path related methods --------------------//
@@ -495,13 +495,14 @@ class router
     /**
      * Set the data root.
      * 
-     * @param  $webRoot 
+     * @param  $wwwRoot 
      * @access protected
      * @return void
      */
-    protected function setDataRoot($webRoot = '')
+    protected function setDataRoot()
     {
-        $this->dataRoot = rtrim($webRoot, DS) . DS . 'data' . DS;
+        $this->wwwRoot = dirname($_SERVER['SCRIPT_FILENAME']);
+        $this->dataRoot = rtrim($this->wwwRoot, DS) . DS . 'data' . DS;
     }
 
     /**

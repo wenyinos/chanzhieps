@@ -22,7 +22,7 @@ define('RUN_MODE', 'install');
 include 'loader.php';
 
 /* Instance the app and run it. */
-$app = router::createApp('xirang', $systemRoot, '', dirname(__FILE__));
+$app = router::createApp('chanzhi', $systemRoot);
 $config = $app->config;
 
 /* Check installed or not. */
