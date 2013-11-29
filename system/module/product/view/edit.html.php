@@ -21,6 +21,10 @@
       <td><?php echo html::select("categories[]", $categories, array_keys($product->categories), "multiple='multiple' class='select-3 chosen'");?></td>
     </tr>
     <tr>
+      <th><?php echo $lang->product->status;?></th>
+      <td><?php echo html::select("status", $lang->product->statusList, $product->status, "class='select-3'");?></td>
+    </tr>
+    <tr>
       <th><?php echo $lang->product->name;?></th>
       <td><?php echo html::input('name', $product->name, "class='text-1'");?></td>
     </tr>

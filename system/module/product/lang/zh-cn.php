@@ -54,5 +54,5 @@ $lang->product->next      = '下一个';
 $lang->product->none      = '没有了';
 $lang->product->directory = '返回目录';
 
-$lang->product->statusList[0] = '下架';
-$lang->product->statusList[1] = '上架';
+$lang->product->statusList['normal']  = '上架';
+$lang->product->statusList['offline'] = '下架';

@@ -54,5 +54,5 @@ $lang->product->next      = 'Next';
 $lang->product->none      = 'None';
 $lang->product->directory = 'Back';
 
-$lang->product->statusList[0] = 'Drops';
-$lang->product->statusList[1] = 'Putaway';
+$lang->product->statusList['normal']  = 'Online';
+$lang->product->statusList['offline'] = 'Offline';
