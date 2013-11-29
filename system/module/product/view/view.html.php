@@ -48,7 +48,7 @@ js::set('productID', $product->id);
           <h1>
             <?php
             echo $product->name;
-            if($product->status == 0) echo "<span class='red'> （{$lang->product->statusList[$product->status]}） </span>";
+            if($product->status != 'normal') echo "<span class='red'> （{$lang->product->statusList[$product->status]}） </span>";
             ?>
           </h1>
           <table class='w-p100'>
