@@ -425,6 +425,7 @@ class fixer
         $fields = $this->processFields($fieldName);
         foreach($fields as $fieldName)
         {
+           if(is_array($this->data->$fieldName)) continue; 
            if(!in_array($fieldName, $this->stripedFields)) $this->data->$fieldName = htmlspecialchars($this->data->$fieldName);
         }
         return $this;
