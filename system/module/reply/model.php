@@ -179,7 +179,18 @@ class replyModel extends model
      */
     public function delete($replyID, $null = null)
     {
+        $thread = $this->dao->select('t2.id, t2.board')->from(TABLE_REPLY)->alias('t1')
+            ->leftJoin(TABLE_THREAD)->alias('t2')
+            ->on('t1.thread = t2.id')
+            ->where('t1.id')->eq($replyID)
+            ->fetch();
+
         $this->dao->delete()->from(TABLE_REPLY)->where('id')->eq($replyID)->exec(false);
+        if(dao::isError()) return false;
+
+        /* Update thread and board stats. */
+        $this->loadModel('thread')->updateStats($thread->id);
+        $this->loadModel('forum')->updateBoardStats($thread->board);
         return !dao::isError();
     }
 

@@ -234,8 +234,13 @@ class threadModel extends model
      */
     public function delete($threadID , $null = null)
     {
+        $thread = $this->getByID($threadID);
         $this->dao->delete()->from(TABLE_THREAD)->where('id')->eq($threadID)->exec(false);
         $this->dao->delete()->from(TABLE_REPLY)->where('thread')->eq($threadID)->exec(false);
+        if(dao::isError()) return false;
+
+        /* Update board stats. */
+        $this->loadModel('forum')->updateBoardStats($thread->board);
         return !dao::isError();
     }
 
