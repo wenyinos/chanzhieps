@@ -72,14 +72,13 @@ class fileModel extends model
 
         if(in_array(strtolower($file->extension), $this->config->file->imageExtensions) !== false)
         {
-            $uploadRoot = $this->app->getDataroot() . "upload/";
             $file->middleURL = $this->webPath . str_replace('f_', 'm_', $file->pathname);
             $file->smallURL  = $this->webPath . str_replace('f_', 's_', $file->pathname);
             $file->largeURL  = $this->webPath . str_replace('f_', 'l_', $file->pathname);
 
-            if(!file_exists(str_replace($this->webPath, $uploadRoot, $file->middleURL))) $file->middleURL = $file->fullURL;
-            if(!file_exists(str_replace($this->webPath, $uploadRoot, $file->smallURL)))  $file->smallURL  = $file->fullURL;
-            if(!file_exists(str_replace($this->webPath, $uploadRoot, $file->largeURL)))  $file->largeURL  = $file->fullURL;
+            if(!file_exists(str_replace($this->webPath, $this->savePath, $file->middleURL))) $file->middleURL = $file->fullURL;
+            if(!file_exists(str_replace($this->webPath, $this->savePath, $file->smallURL)))  $file->smallURL  = $file->fullURL;
+            if(!file_exists(str_replace($this->webPath, $this->savePath, $file->largeURL)))  $file->largeURL  = $file->fullURL;
 
             $file->isImage   = true;
         }
@@ -108,8 +107,8 @@ class fileModel extends model
      */
     public function getByID($fileID)
     {
-        $file = $this->dao->findById($fileID)->from(TABLE_FILE)->fetch('', false);
-        $file->realPath = $this->app->getDataroot() . "upload/" . $file->pathname;
+        $file = $this->dao->findById($fileID)->from(TABLE_FILE)->fetch();
+        $file->realPath = $this->savePath . $file->pathname;
         $file->webPath  = $this->webPath . $file->pathname;
 
         return $this->processFile($file);
@@ -144,7 +143,7 @@ class fileModel extends model
             $file['addedDate']  = $now;
             $file['extra']      = $extra;
             unset($file['tmpname']);
-            $this->dao->insert(TABLE_FILE)->data($file, false)->exec();
+            $this->dao->insert(TABLE_FILE)->data($file)->exec();
             $fileTitles[$this->dao->lastInsertId()] = $file['title'];
         }
         return $fileTitles;
@@ -271,8 +270,8 @@ class fileModel extends model
     {
         $this->replaceFile($fileID);
         
-        $fileInfo = fixer::input('post')->remove('pathname')->get();
-        $this->dao->update(TABLE_FILE)->data($fileInfo, false)->autoCheck()->batchCheck('title', 'notempty')->where('id')->eq($fileID)->exec(false);
+        $fileInfo = fixer::input('post')->remove('upFile')->get();
+        $this->dao->update(TABLE_FILE)->data($fileInfo)->autoCheck()->batchCheck('title', 'notempty')->where('id')->eq($fileID)->exec();
     }
     
     /**
@@ -285,20 +284,35 @@ class fileModel extends model
     {
         if($files = $this->getUpload($postName))
         {
-            $file = $files[0];
-            $filePath = $this->dao->select('pathname')->from(TABLE_FILE)->where('id')->eq($fileID)->fetch('', false);
-            $pathName = $filePath->pathname;
-            $realPathName= $this->savePath . $pathName;
+            $file      = $files[0];
+            $fileInfo  = $this->dao->select('pathname, extension')->from(TABLE_FILE)->where('id')->eq($fileID)->fetch();
+            $extension = strtolower($file['extension']);
+
+            if($extension != $fileInfo->extension)
+            {
+                /* Remove old file. */
+                if(file_exists($this->savePath . $fileInfo->pathname)) unlink($this->savePath . $fileInfo->pathname);
+                foreach($this->config->file->thumbs as $size => $configure)
+                {
+                    $thumbPath = $this->savePath . str_replace('f_', $size . '_', $fileInfo->pathname);
+                    if(file_exists($thumbPath)) unlink($thumbPath);
+                }
+
+                $fileInfo->pathname  = str_replace(".{$fileInfo->extension}", ".$extension", $fileInfo->pathname);
+                $fileInfo->extension = $extension;
+            }
+
+            $realPathName = $this->savePath . $fileInfo->pathname;
             move_uploaded_file($file['tmpname'], $realPathName);
             if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions))
             {
-                $this->compressImage($this->savePath . $file['pathname']);
+                $this->compressImage($realPathName);
             }
 
             $fileInfo->addedBy   = $this->app->user->account;
             $fileInfo->addedDate = helper::now();
             $fileInfo->size      = $file['size'];
-            $this->dao->update(TABLE_FILE)->data($fileInfo, false)->where('id')->eq($fileID)->exec(false);
+            $this->dao->update(TABLE_FILE)->data($fileInfo)->where('id')->eq($fileID)->exec();
             return true;
         }
         else
@@ -323,7 +337,7 @@ class fileModel extends model
         $log->time    = helper::now();
 
         $this->dao->insert(TABLE_DOWN)->data($log)->exec();
-        $this->dao->update(TABLE_FILE)->set('downloads = downloads + 1')->where('id')->eq($file)->exec(false);
+        $this->dao->update(TABLE_FILE)->set('downloads = downloads + 1')->where('id')->eq($file)->exec();
 
         return !dao::isError();
     }
@@ -339,6 +353,14 @@ class fileModel extends model
     {
         $file = $this->getByID($fileID);
         if(file_exists($file->realPath)) unlink($file->realPath);
+        if(in_array($file->extension, $this->config->file->imageExtensions))
+        {
+            foreach($this->config->file->thumbs as $size => $configure)
+            {
+                $thumbPath = $this->savePath . str_replace('f_', $size . '_', $file->pathname);
+                if(file_exists($thumbPath)) unlink($thumbPath);
+            }
+        }
         $this->dao->delete()->from(TABLE_FILE)->where('id')->eq($file->id)->exec();
         return !dao::isError();
     }

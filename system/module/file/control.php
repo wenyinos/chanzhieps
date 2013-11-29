@@ -101,8 +101,8 @@ class file extends control
         {
             if(!$this->file->checkSavePath()) $this->send(array('result' => 'fail', 'message' => $this->lang->file->errorUnwritable));
             $this->file->edit($fileID);
-            if(dao::isError())die(js::error(dao::getError()));
-            die(js::locate(inlink('browse',"objectType=$file->objectType&objectID=$file->objectID"),'parent'));
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success'));
         }
         $this->view->file = $file;
         $this->display();
@@ -284,7 +284,7 @@ class file extends control
      */
     public function delete($fileID)
     {
-        $this->dao->delete()->from(TABLE_FILE)->where('id')->eq($fileID)->exec();
+        $this->file->delete($fileID);
         if(!dao::isError()) $this->send(array('result' => 'success')); 
         $this->send(array('result' => 'fail', 'message' => dao::getError())); 
     }

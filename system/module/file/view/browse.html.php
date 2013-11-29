@@ -41,6 +41,7 @@
     <td><?php echo $file->downloads;?></td>
     <td>
     <?php
+    echo html::a(inlink('edit',   "id=$file->id"), $lang->edit, "class='edit'");
     echo html::a(inlink('delete', "id=$file->id"), $lang->delete, "class='deleter'");
     if($file->isImage) echo html::a(inlink('setPrimary', "id=$file->id"), $lang->file->setPrimary, "class='option'");
     ?>
@@ -66,6 +67,7 @@
 $(document).ready(function()
 {   
     $.setAjaxForm('#fileForm', function(data){$.reloadAjaxModal();}); 
+    $.setAjaxLoader('.edit', '#ajaxModal');
     $('a.option').click(function(data)
     {
         $.getJSON($(this).attr('href'), function(data) 
