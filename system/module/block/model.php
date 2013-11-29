@@ -127,7 +127,7 @@ class blockModel extends model
         {
             if(isset($lastGroup) and $group !== $lastGroup) $select .= "<li class='divider'></li>";
             $lastGroup = $group;
-            $class = ($block == $currentType) ? "class='active'" : '';
+            $class = ($block == $type) ? "class='active'" : '';
             $select .= "<li {$class}>" . html::a(helper::createLink('block', $this->app->getMethodName(), "blockID={$blockID}&type={$block}"), $this->lang->block->typeList[$block]) . "</li>";
         }
         $select .= "</ul></div>" .  html::hidden('type', $type);
