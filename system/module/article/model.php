@@ -194,19 +194,10 @@ class articleModel extends model
             ->add('addedDate', $now)
             ->add('editedDate', $now)
             ->add('type', $type)
+            ->stripTags('content', $this->config->allowedTags->admin)
             ->get();
 
         $order = 0;
-        if(strpos($type, 'book_') !== false)
-        {
-            $categoryID = $this->post->categories[0];
-            $articles   = $this->dao->select('id')->from(TABLE_RELATION)->where('category')->eq($categoryID)->fetchPairs();
-            if($articles)
-            {
-                $maxOrder = $this->dao->select('`order`')->from(TABLE_ARTICLE)->where('id')->in($articles)->orderBy('`order` desc')->limit(1)->fetch();
-                $order    = $maxOrder->order + 10;
-            }
-        }
 
         $article->order    = $order;
         $article->keywords = seo::unify($article->keywords, ',');
@@ -245,18 +236,8 @@ class articleModel extends model
         $article  = $this->getByID($articleID);
         $category = array_keys($article->categories);
 
-        if(strpos($type, 'book_') !== false && $category !== $this->post->categories)
-        {
-            $categoryID = $this->post->categories[0];
-            $articles   = $this->dao->select('id')->from(TABLE_RELATION)->where('category')->eq($categoryID)->fetchPairs();
-            if($articles)
-            {
-                $maxOrder = $this->dao->select('`order`')->from(TABLE_ARTICLE)->where('id')->in($articles)->orderBy('`order` desc')->limit(1)->fetch();
-                $order    = $maxOrder->order + 10;
-            }
-        }
-
         $article = fixer::input('post')
+            ->stripTags('content', $this->config->allowedTags->admin)
             ->join('categories', ',')
             ->add('editor', $this->app->user->account)
             ->add('editedDate', helper::now())
@@ -333,7 +314,6 @@ class articleModel extends model
            $data->type     = $type; 
            $data->id       = $articleID;
            $data->category = $category;
-
            $this->dao->insert(TABLE_RELATION)->data($data)->exec();
        }
     }
@@ -374,23 +354,11 @@ class articleModel extends model
         $article       = $this->getByID($articleID);
         $categories    = $article->categories;
         $categoryAlias = current($categories)->alias;
-        if(strpos($article->type , 'book_') !== false)
-        {
-            $module = 'help';
-            $method = 'read';
-            $book   = str_replace('book_', '', $article->type);
-            $param  = "articleID=$articleID&book=$book";
-            $alias  = "name=$article->alias";
-        }
-        else
-        {
-            $module = $article->type;
-            $method = 'view';
-            $param  = "articleID=$articleID&book=$book";
-            $alias  = "category=$categoryAlias&name=$article->alias";
-        }
+        $module = $article->type;
+        $param  = "articleID=$articleID";
+        $alias  = "category=$categoryAlias&name=$article->alias";
 
-        return commonModel::createFrontLink($module, $method, $param, $alias);
+        return commonModel::createFrontLink($module, 'view', $param, $alias);
     }
 
     /**
