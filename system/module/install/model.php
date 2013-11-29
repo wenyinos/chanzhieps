@@ -354,7 +354,7 @@ EOT;
         $admin = new stdclass();
         $admin->account  = $this->post->account;
         $admin->realname = $this->post->account;
-        $admin->password = $this->loadModel('user')->createPassword($this->post->password, $admin->account, $join);
+        $admin->password = $this->loadModel('user')->createPassword($this->post->password, $admin->account);
         $admin->admin    = 'super';
         $admin->join     = $join;
         $this->dao->insert(TABLE_USER)->data($admin)->autoCheck()->check('account', 'notempty')->exec();
