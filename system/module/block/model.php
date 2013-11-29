@@ -153,8 +153,8 @@ class blockModel extends model
         $blockOptions[''] = $this->lang->block->select;
         $blockOptions += $this->getPairs();
         $entry = "<tr class='v-middle'>";
-        $entry .= '<td>' . html::select('blocks[]', $blockOptions, isset($block->id) ? $block->id : '') . '</td>';
-        $entry .= '<td>';
+        $entry .= '<td>' . html::select('blocks[]', $blockOptions, isset($block->id) ? $block->id : '', 'class="form-control"') . '</td>';
+        $entry .= '<td class="text-middle">';
         $entry .= html::a('javascript:;', $this->lang->block->add, "class='plus'");
         $entry .= html::a('javascript:;', $this->lang->delete, "class='delete'");
         $entry .= html::a(inlink('edit', "blockID={$block->id}&type={$block->type}"), $this->lang->edit, "class='edit'");
