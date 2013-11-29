@@ -1,7 +1,15 @@
 $(document).ready(function()
 {
-    $.setAjaxForm('#createForm', function(response)
+   /* Sort up. */
+    $(document).on('click', '.icon-arrow-up', function()
     {
-        if('success' == response.result) window.location.reload();
+        $(this).parents('tr').prev().before($(this).parents('tr')); 
+    });
+
+    /* Sort down. */
+    $(document).on('click', '.icon-arrow-down', function()
+    { 
+        var hasNext = $(this).parents('tr').next().find('.icon-arrow-down').size() > 0;
+        if(hasNext) $(this).parents('tr').next().after($(this).parents('tr')); 
     });
 });
