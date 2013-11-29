@@ -8,7 +8,7 @@
       if(empty($this->config->links->index) && !empty($this->config->links->all)) echo "&nbsp;" . html::a($this->createLink('links', 'index'), '<i class="icon-heart"></i>' . $this->lang->link);
       ?>
     </div>
-    <span id="copyright">
+    <span id="copyrightInfo">
     <?php echo "&copy; {$config->company->name} {$config->site->copyright}-" . date('Y') . '&nbsp;&nbsp;';?>
     </span>
     <span id="icpInfo"><?php echo $config->site->icp; ?></span>

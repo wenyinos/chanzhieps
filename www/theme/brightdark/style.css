@@ -6,7 +6,7 @@ a:hover{color: #da3b26;}
 
 body>.container>hr{display: none;}
 #footer{margin-top: 20px;border-color: #808080}
-#footNav a ,#copyright,#icpInfo { color: #999; }
+#footNav a ,#copyrightInfo,#icpInfo { color: #999; }
 #footNav a:hover { color: #fff }
 #powerby{background-color: #414b5a;border-color: #1d232a;}
 #powerby a{color: #a4b4a6}

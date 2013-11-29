@@ -371,7 +371,7 @@ ul.breadcrumb .divider{font-size:20px;color:#3280FC}
 #footNav { position: absolute; left: 15px; top: 20px; }
 #footNav a { display: inline-block; margin-right: 10px; color: #777; }
 #footNav a:hover { color: #0344AC }
-#copyright,#icpInfo { color: #666; }
+#copyrightInfo,#icpInfo { color: #666; }
 #powerby { position: absolute; right: 15px; top: 15px; background-color: #ccc; border: #bbb 1px solid; border-radius: 2px; padding: 5px 10px; overflow: hidden; font-size: 12px; transition: all .5s cubic-bezier(0.175,0.885,0.32,1); text-shadow:-1px -1px 0px rgba(0,0,0,0.2); -moz-box-shadow:inset 0px 1px 0 rgba(255,255,255,0.4); -webkit-box-shadow:inset 0px 1px 0 rgba(255,255,255,0.4); box-shadow:inset 0px 1px 0 rgba(255,255,255,0.4); }
 #powerby, #powerby a { color: #fff; }
 #powerby:hover { background-color: #aaa; -moz-box-shadow:0px 1px 2px rgba(0,0,0,0.5); -webkit-box-shadow:0px 1px 2px rgba(0,0,0,0.5); box-shadow:0px 1px 2px rgba(0,0,0,0.5); }
