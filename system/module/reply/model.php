@@ -109,18 +109,11 @@ class replyModel extends model
             $this->saveCookie($replyID);                               // Save reply id to cookie.
             $this->loadModel('file')->saveUpload('reply', $replyID);   // Save file.
 
-            /* Update the thread info. */
-            $thread = $this->dao->findById($threadID)->from(TABLE_THREAD)->fields('replies, board')->fetch();
-            $thread->replies += 1;
-            $thread->repliedDate = helper::now();
-            $thread->repliedBy   = $this->app->user->account;
-            $thread->replyID     = $replyID;
-            $this->dao->update(TABLE_THREAD)->data($thread)->where('id')->eq($threadID)->exec();
+            /* Update thread stats. */
+            $this->loadModel('thread')->updateStats($threadID);
 
             /* Update board stats. */
-            $reply->threadID = $threadID;
-            $reply->replyID  = $replyID;
-            $this->loadModel('forum')->updateBoardStats($thread->board, $reply);
+            $this->loadModel('forum')->updateBoardStats($thread->board);
 
             return $replyID;
         }

@@ -12,6 +12,18 @@
 class forumModel extends model
 {
     /**
+     * Get board.
+     * 
+     * @param  int    $boardID 
+     * @access public
+     * @return object | false
+     */
+    public function getBoardByID($boardID)
+    {
+        return $this->dao->select('*')->from(TABLE_CATEGORY)->where('id')->eq($boardID)->fetch();
+    }
+
+    /**
      * Get boards.
      * 
      * @access public
@@ -50,31 +62,31 @@ class forumModel extends model
      * Update status of boards.
      * 
      * @param  int    $boardID 
-     * @param  object $post 
      * @access public
      * @return void
      */
-    public function updateBoardStats($boardID, $post)
+    public function updateBoardStats($boardID)
     {
-        $board = $this->dao->select('*')->from(TABLE_CATEGORY)->where('id')->eq($boardID)->fetch();
-        if($post->replyID)
-        {
-            $board->replyID = $post->replyID;
-        }
-        else
-        {
-            $board->threads ++;
-        }
+        /* Get threads and replies. */
+        $stats = $this->dao->select('COUNT(id) as threads, SUM(replies) as replies')->from(TABLE_THREAD)
+            ->where('board')->eq($boardID)
+            ->andWhere('hidden')->eq('0')
+            ->fetch();
 
-        $this->dao->update(TABLE_CATEGORY)
-            ->set('threads = ' . $board->threads)
-            ->set('posts = posts + 1')
-            ->set('postedBy')->eq($post->author)
-            ->set('postedDate')->eq($post->addedDate)
-            ->set('postID')->eq($post->threadID)
-            ->set('replyID')->eq($board->replyID)
-            ->where('id')->eq($boardID)
-            ->exec();
+        /* Get postID and replyID. */
+        $post = $this->dao->select('id as postID, replyID')->from(TABLE_THREAD)
+            ->where('hidden')->eq('0')
+            ->orderBy('repliedDate desc')
+            ->limit(1)
+            ->fetch();
+
+        $data = new stdclass();
+        $data->threads = $stats->threads;
+        $data->posts   = $stats->threads + $stats->replies;
+        $data->postID  = $post->postID;
+        $data->replyID = $post->replyID;
+
+        $this->dao->update(TABLE_CATEGORY)->data($data)->where('id')->eq($boardID)->exec();
     }
 
     /**

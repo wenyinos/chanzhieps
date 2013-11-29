@@ -117,9 +117,10 @@ class threadModel extends model
      * @access public
      * @return void
      */
-    public function post($board)
+    public function post($boardID)
     {
-        $now = helper::now();
+        $board = $this->loadModel('forum')->getBoardByID($boardID);
+        $now   = helper::now();
         $isAdmin     = $this->app->user->admin == 'super';
         $canManage   = $this->canManage($board->moderators);
         $allowedTags = $this->app->user->admin == 'super' ? $this->config->allowedTags->admin : $this->config->allowTags->front;
@@ -128,7 +129,7 @@ class threadModel extends model
             ->specialChars('title')
             ->stripTags('content', $allowTags)
             ->setIF(!$canManage, 'readonly', 0)
-            ->setForce('board', $board)
+            ->setForce('board', $boardID)
             ->setForce('author', $this->app->user->account)
             ->setForce('addedDate', $now) 
             ->setForce('editedDate', $now) 
@@ -156,9 +157,7 @@ class threadModel extends model
             $this->loadModel('file')->saveUpload('thread', $threadID);
 
             /* Update board stats. */
-            $thread->threadID = $threadID;
-            $thread->replyID  = 0;
-            $this->loadModel('forum')->updateBoardStats($board, $thread);
+            $this->forum->updateBoardStats($boardID);
 
             return $threadID;
         }
@@ -285,6 +284,37 @@ class threadModel extends model
     public function plusCounter($thread)
     {
         $this->dao->update(TABLE_THREAD)->set('views = views + 1')->where('id')->eq($thread)->exec();
+    }
+
+    /**
+     * Update thread stats. 
+     * 
+     * @param  int    $threadID 
+     * @access public
+     * @return void
+     */
+    public function updateStats($threadID)
+    {
+        /* Get replies. */
+        $replies = $this->dao->select('COUNT(id) as replies')->from(TABLE_REPLY)
+            ->where('thread')->eq($threadID)
+            ->andWhere('hidden')->eq('0')
+            ->fetch('replies');
+
+        /* Get replyID and repliedBy. */
+        $reply = $this->dao->select('*')->from(TABLE_REPLY)
+            ->where('hidden')->eq('0')
+            ->orderBy('addedDate desc')
+            ->limit(1)
+            ->fetch();
+
+        $data = new stdclass();
+        $data->replies     = $replies;
+        $data->repliedBy   = $reply->author;
+        $data->repliedDate = $reply->addedDate;
+        $data->replyID     = $reply->id;
+
+        $this->dao->update(TABLE_THREAD)->data($data)->where('id')->eq($threadID)->exec();
     }
 
     /**
