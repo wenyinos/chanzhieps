@@ -250,11 +250,11 @@ class userModel extends model
         }
 
         /* The password can be the plain or the password after md5. */
-        $oldPassword = $this->createPasswordWithJoin($password, $user->account, $user->join);
+        $oldPassword = $this->createPassword($password, $user->account, $user->join);
         if($oldPassword != $user->password and !$this->compareHashPassword($password, $user))
         {
             $user->fails ++;
-            if($user->fails > 2) $user->locked = time();
+            if($user->fails > 2 * 2) $user->locked = time();
             $this->dao->update(TABLE_USER)->data($user)->where('id')->eq($user->id)->exec();
             return false;
         }
@@ -272,7 +272,7 @@ class userModel extends model
         $user->realname  = empty($user->realname) ? $account : $user->realname;
         $user->shortLast = substr($user->last, 5, -3);
         $user->shortJoin = substr($user->join, 5, -3);
-        unset($_SESSION['user']->private);
+        unset($_SESSION['random']);
 
         /* Return him.*/
         return $user;
@@ -421,33 +421,20 @@ class userModel extends model
 
     /**
      * Create a strong password hash with md5.
-     * 
+     *
      * @param  string    $password 
      * @param  string    $account 
-     * @access public
-     * @return string
-     */
-    public function createPassword($password, $account)
-    {
-        return md5($account . $password);
-    }
-
-    /**
-     * Create password width join 
-     * 
-     * @param  string    $password 
-     * @param  string    $account 
-     * @param  string    $join 
+     * @param  string    $join   new password is not with join 
      * @access public
      * @return void
      */
-    public function createPasswordWithJoin($password, $account, $join)
+    public function createPassword($password, $account, $join = '')
     {
         return md5(md5($password) . $account . $join);
     }
 
     /**
-     * Compare hash password use private
+     * Compare hash password use random
      * 
      * @param  string    $password 
      * @param  object    $user 
@@ -456,8 +443,7 @@ class userModel extends model
      */
     public function compareHashPassword($password, $user)
     {
-        $private = $this->app->user->private;
-        return md5($this->createPassword($password, $user->account) . $private) == md5($user->password . $private);
+        return $password == md5($user->password . $this->session->random);
     }
 
     /**

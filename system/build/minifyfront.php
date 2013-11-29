@@ -15,7 +15,6 @@ $jqueryRoot = $jsRoot . 'jquery/';
 $jsFiles[] = $jsRoot . 'jquery/min.js';
 $jsFiles[] = $jsRoot . 'jquery/form/min.js';
 $jsFiles[] = $jsRoot . 'bootstrap/min.js';
-$jsFiles[] = $jsRoot . 'md5.js';
 $jsFiles[] = $jsRoot . 'chanzhi.js';
 $jsFiles[] = $jsRoot . 'my.js';
 

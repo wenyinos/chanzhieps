@@ -1,7 +1,8 @@
+/* Keep session random valid. */
 needPing = true;
 $('#submit').click(function()
 {
-    var password = md5(md5($('#account').val() + $('#password').val()) + v.private);
+    var password = md5(md5(md5($('#password').val()) + $('#account').val()) + v.random);
 
     loginURL = createLink('user', 'login');
     $.ajax(
@@ -12,7 +13,7 @@ $('#submit').click(function()
         dataType:'json',
         success:function(data)
         {
-            if(data.result == 'success') location.href=data.locate;
+            if(data.result == 'success') return location.href=data.locate;
             $.ajax(
             {
                 type: "POST",

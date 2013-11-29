@@ -1,5 +1,8 @@
-<?php include '../../common/view/header.html.php';?>
-<?php js::set('private', $private);?>
+<?php
+include '../../common/view/header.html.php';
+js::import($jsRoot . 'my.js');
+js::set('random', $this->session->random);
+?>
 <section id="login">
   <div class="box-radius">
     <div class="row">

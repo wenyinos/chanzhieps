@@ -93,9 +93,10 @@ class user extends control
             }
         }
 
+        if(!$this->session->random) $this->session->set('random', md5(time() . mt_rand()));
+
         $this->view->title   = $this->lang->user->login->common;
         $this->view->referer = $this->referer;
-        $this->view->private = $this->session->user->private;
 
         $this->display();
     }
@@ -464,7 +465,8 @@ class user extends control
 
         /* Step3: Try to get user by the open id, if got, login him. */
         $user = $this->user->getUserByOpenID($provider, $openID);
-        if($user and $this->user->login($user->account, $user->password))
+        $this->session->set('random', md5(time() . mt_rand()));
+        if($user and $this->user->login($user->account, md5($user->password . $this->session->random)))
         {
             if($referer) $this->locate(helper::safe64Decode($referer));
 

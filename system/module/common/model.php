@@ -421,11 +421,7 @@ class commonModel extends model
      */
     public function setUser()
     {
-        if($this->session->user)
-        {
-            if($_SESSION['user']->id == 0 and empty($_SESSION['user']->private)) $_SESSION['user']->private = md5(time() . mt_rand());
-            return $this->app->user = $this->session->user;
-        }
+        if($this->session->user) return $this->app->user = $this->session->user;
 
         /* Create a guest account. */
         $user           = new stdclass();
@@ -434,7 +430,6 @@ class commonModel extends model
         $user->realname = 'guest';
         $user->admin    = RUN_MODE == 'cli' ? 'super' : 'no';
         $user->rights   = $this->config->rights->guest;
-        $user->private  = md5(time() . mt_rand());
 
         $this->session->set('user', $user);
         $this->app->user = $this->session->user;
