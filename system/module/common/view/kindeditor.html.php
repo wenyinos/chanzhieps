@@ -55,7 +55,6 @@ $(document).ready(function()
 
     $.each(v.editors.id, function(key, editorID)
     {
-        console.log(v.editors)
         if(typeof(v.editors.filterMode) == 'undefined') v.editors.filterMode = true;
         editorTool = eval(v.editors.tools);
 
