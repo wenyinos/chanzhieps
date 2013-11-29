@@ -10,66 +10,47 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<div class="modal-content">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <?php if($type == 'book'):?>
-    <h4 class="modal-title"><?php echo $lang->book->create;?></h4>
-    <?php elseif($type == 'chapter'):?>
-    <h4 class="modal-title"><?php echo $lang->book->createChapter;?></h4>
-    <?php else:?>
-    <h4 class="modal-title"><?php echo $lang->book->createArticle;?></h4>
-    <?php endif;?>
-  </div>
-  <div class="modal-body">
-    <form id="createForm" method='post' class="form-inline" enctype='multipart/form-data' action='<?php echo helper::createLink('help', 'create', "type=$type&bookID=$book->id")?>'>
-      <table class='table table-form'>
-        <?php if($type !== 'book'):?>
-        <tr>
-          <th class='w-100px'><?php echo $lang->book->parent;?></th>
-          <td><?php echo html::select("parent", $parents, $currentParent, "class='select-3 form-control'");?></td>
-        </tr>
-        <?php endif;?>
-        <tr>
-          <th><?php echo $lang->book->author;?></th>
-          <td><?php echo html::input('author', $app->user->realname, "class='text-3 form-control'");?></td>
-        </tr>
-        <tr>
-          <th class="w-100px"><?php echo $lang->book->title;?></th>
-          <td><?php echo html::input('title', '', 'class=text-1');?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->book->alias;?></th>
-          <td>
-            <div class="input-group text-1">
-              <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot?>book/id@</span>
-              <?php echo html::input('alias', '', "class='text-1 form-control' placeholder='{$lang->alias}'");?>
-              <span class="input-group-addon">.html</span>
-            </div>
-          </td>
-        </tr>
-        <?php if($type !== 'book'):?>
-        <tr>
-          <th><?php echo $lang->book->keywords;?></th>
-          <td><?php echo html::input('keywords', '', "class='text-1 form-control'");?></td>
-        </tr>
-        <?php endif;?>
-        <tr>
-          <th><?php echo $lang->book->summary;?></th>
-          <td><?php echo html::textarea('summary', '', "class='area-1' rows='3'");?></td>
-        </tr>
-        <?php if($type == 'article'):?>
-        <tr>
-          <th><?php echo $lang->book->content;?></th>
-          <td valign='middle'><?php echo html::textarea('content', '', "rows='6' class='area-1 form-control'");?></td>
-        </tr>
-        <?php endif;?>
-        <tr>
-          <th></th>
-          <td><?php echo html::submitButton();?></td>
-        </tr>
-      </table>
-    </form>
-  </div>
-</div>
-<?php if(isset($pageJS)) js::execute($pageJS);?>
+<?php include '../../common/view/header.admin.html.php'; ?>
+<form id='ajaxForm' method='post'>
+  <table class='table table-hover table-striped'>
+    <caption><?php echo $lang->book->create;?></caption>
+    <thead>
+      <tr>
+        <th class='w-p15 a-center'><?php echo $lang->book->type;?></th>
+        <th class='a-center'><?php echo $lang->book->title;?></th>
+        <th class='w-p15'><?php echo $lang->actions; ?></th>
+      </tr>
+    </thead>
+    <tbody id='entry'>
+      <?php
+      $maxOrder = 0;
+      foreach($catalogues as $catalogue):
+      ?>
+      <tr class='v-middle'>
+      <?php
+        if($book->order > $maxOrder) $maxOrder = $catalogue->order;
+        echo '<td>' . html::select("type[$catalogue->id]", $lang->book->typeList, $catalogue->type, "class='select-2'") . '</td>';
+        echo '<td>' . html::input("title[$catalogue->id]", $catalogue->title, "class='text-1'") . '</td>';
+        echo "<td><i class='icon-arrow-up'></i><i class='icon-arrow-down'></i></td>";
+        echo '<td>' . html::hidden("mode[$catalogue->id]", 'update') . '</td>';
+      ?>
+      </tr>
+      <?php endforeach;?>
+      <?php
+      for($i = 0; $i < HELP::NEW_CATALOGUE_COUNT ; $i ++)
+      {
+         echo '<tr>';
+                echo '<td>' . html::select("type[]", $lang->book->typeList, '', "class='select-2'") . '</td>';
+                echo '<td>' . html::input("title[]", '', "class='text-1'") . '</td>';
+                echo "<td><i class='icon-arrow-up'></i> &nbsp;<i class='icon-arrow-down'></i></td>";
+                echo '<td>' . html::hidden("mode[]", 'new') . '</td>';
+         echo '</tr>';
+      }
+      ?>
+    </tbody>
+    <tfoot>
+      <tr><td colspan='2' class='a-center'><?php echo html::submitButton() . html::hidden('parent', $parent) . html::hidden('maxOrder', $maxOrder);?></td></tr>
+    </tfoot>
+  </table>
+</form>
+<?php include '../../common/view/footer.admin.html.php';?>
