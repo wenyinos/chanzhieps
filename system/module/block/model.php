@@ -164,7 +164,7 @@ class blockModel extends model
      */
     public function create()
     {
-        $block = fixer::input('post')->stripTags('content', $this->config->allowedTags->super)->get();
+        $block = fixer::input('post')->stripTags('content', $this->config->block->allowedTags)->get();
 
         if(isset($block->params))
         {
@@ -188,7 +188,7 @@ class blockModel extends model
      */
     public function update($blockID)
     {
-        $block = fixer::input('post')->stripTags('content', $this->config->allowedTags->super)->get();
+        $block = fixer::input('post')->stripTags('content', $this->config->block->allowedTags)->get();
 
         if(isset($block->params))
         {
