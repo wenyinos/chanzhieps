@@ -121,7 +121,7 @@ class blockModel extends model
     public function createTypeSelector($type, $blockID = 0)
     {
         $select = "<div class='btn-group'><button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown'>";
-        $select .= $this->lang->block->typeList[$type] . "<span class='caret'></span></button>";
+        $select .= $this->lang->block->typeList[$type] . " <span class='caret'></span></button>";
         $select .= "<ul class='dropdown-menu' role='menu'>";
         foreach($this->lang->block->typeGroups as $block => $group)
         {
