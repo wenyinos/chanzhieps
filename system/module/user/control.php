@@ -283,9 +283,9 @@ class user extends control
 
         $key = $this->post->key ? $this->post->key : '';
 
-        $this->view->users  = $this->user->getList($pager, $key);
-        $this->view->search = $key;
-        $this->view->pager  = $pager;
+        $this->view->users = $this->user->getList($pager, $key);
+        $this->view->query = $key;
+        $this->view->pager = $pager;
 
         $this->view->title = $this->lang->user->list;
         $this->display();
