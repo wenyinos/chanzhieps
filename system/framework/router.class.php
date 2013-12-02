@@ -1182,7 +1182,7 @@ class router
         for($i = 2; $i < $itemCount; $i ++)
         {
             $key = key($defaultParams);     // Get key from the $defaultParams.
-            $params[$key] = $items[$i];
+            $params[$key] = str_replace('.', '-', $items[$i]);
             next($defaultParams);
         }
         $this->params = $this->mergeParams($defaultParams, $params);

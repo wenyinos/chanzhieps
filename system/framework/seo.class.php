@@ -132,7 +132,7 @@ class seo
     public static function convertURI($module, $method, $param = array(), $pageID = 0)
     {
         $uri = "$module-$method";
-        foreach($param as $value) $uri .= "-$value";
+        foreach($param as $value) $uri .= '-' . str_replace('-', '.', $value);
         if($pageID > 0) $uri .= "-$pageID";
         return $uri;
     }
