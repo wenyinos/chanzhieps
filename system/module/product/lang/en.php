@@ -54,5 +54,5 @@ $lang->product->next      = 'Next';
 $lang->product->none      = 'None';
 $lang->product->directory = 'Back';
 
-$lang->product->statusList['normal']  = 'Online';
+$lang->product->statusList['normal']  = 'On sale';
 $lang->product->statusList['offline'] = 'Offline';
