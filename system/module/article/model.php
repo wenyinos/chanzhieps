@@ -348,21 +348,22 @@ class articleModel extends model
     {
         if(empty($files)) return false;
 
+        echo '<ul class="article-files clearfix">';
         foreach($files as $file)
         {
             if($file->isImage)
             {
-                echo html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL, "class='ph-10px'"), "target='_blank'");
+                echo '<li class="file-image file-' . $file->extension . '">' . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank'") . '</li>';
             }
         }
-        echo '</br>';
         foreach($files as $file)
         {
             if(!$file->isImage)
             {
                 $file->title = $file->title . ".$file->extension";
-                echo html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'") . '&nbsp;&nbsp;&nbsp'; 
+                echo '<li class="file file-' . '$file->extension' . '">' . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'") . '</li>'; 
             }
         }
+        echo '</ul>';
     }
 }
