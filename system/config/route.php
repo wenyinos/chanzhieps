@@ -18,5 +18,5 @@ $config->seo->alias->method['thread']['view']    = 'view';
 $config->seo->alias->method['blog']['browse']    = 'index';  
 $config->seo->alias->method['blog']['view']      = 'view';  
 
-$config->seo->alias->method['help']['browse']    = 'book';  
-$config->seo->alias->method['help']['view']      = 'read';  
+$config->seo->alias->method['book']['browse']    = 'browse';  
+$config->seo->alias->method['book']['view']      = 'read';  

@@ -62,7 +62,7 @@ $config->file->maxSize = 1024 * 1024;          // Max size allowed(Byte).
 /* Module dependence setting. */
 $config->dependence = new stdclass();
 $config->dependence->blog[]    = 'blog';
-$config->dependence->help[]    = 'help';
+$config->dependence->book[]    = 'book';
 $config->dependence->user[]    = 'user';
 $config->dependence->forum[]   = 'forum';
 $config->dependence->forum[]   = 'user';
@@ -97,7 +97,7 @@ define('TABLE_PRODUCT',  $config->db->prefix . 'product');
 define('TABLE_ARTICLE',  $config->db->prefix . 'article');
 define('TABLE_BLOCK',    $config->db->prefix . 'block');
 define('TABLE_TAG',      $config->db->prefix . 'tag');
-define('TABLE_HELP',     $config->db->prefix . 'help');
+define('TABLE_BOOK',     $config->db->prefix . 'book');
 define('TABLE_LAYOUT',   $config->db->prefix . 'layout');
 define('TABLE_COMMENT',  $config->db->prefix . 'comment');
 define('TABLE_THREAD',   $config->db->prefix . 'thread');
