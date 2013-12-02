@@ -47,7 +47,7 @@ $navs = $this->tree->getChildren(0, 'blog');
   }
   else
   {
-      js::import($jsRoot . 'all.js',  $config->version);
+      js::import($jsRoot . 'all.js');
   }
 
   if(isset($pageCSS)) css::internal($pageCSS);

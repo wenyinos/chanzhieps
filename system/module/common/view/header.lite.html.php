@@ -40,12 +40,12 @@ $themeRoot = $webRoot . "theme/";
   }
   else
   {
-      css::import($themeRoot . 'default/all.css', $config->version);
-      js::import($jsRoot     . 'all.js', $config->version);
+      css::import($themeRoot . 'default/all.css');
+      js::import($jsRoot     . 'all.js');
   }
 
-  if(RUN_MODE == 'admin') css::import($themeRoot . 'default/admin.css', $config->version);
-  if(RUN_MODE == 'front' and $config->site->theme) css::import($themeRoot . $config->site->theme . '/style.css', $config->version);
+  if(RUN_MODE == 'admin') css::import($themeRoot . 'default/admin.css');
+  if(RUN_MODE == 'front' and $config->site->theme) css::import($themeRoot . $config->site->theme . '/style.css');
   if(isset($pageCSS)) css::internal($pageCSS);
 
   echo html::icon($webRoot . 'favicon.ico');

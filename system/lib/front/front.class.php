@@ -398,9 +398,10 @@ class js
      * @access public
      * @return string
      */
-    public static function import($url, $version = '')
+    public static function import($url)
     {
-        echo "<script src='$url?v=$version' type='text/javascript'></script>\n";
+        global $config;
+        echo "<script src='$url?v={$config->version}' type='text/javascript'></script>\n";
     }
 
     /**
@@ -720,9 +721,10 @@ class css
      * @access public
      * @return vod
      */
-    public static function import($url, $version = '')
+    public static function import($url)
     {
-        echo "<link rel='stylesheet' href='$url?v=$version' type='text/css' media='screen' />\n";
+        global $config;
+        echo "<link rel='stylesheet' href='$url?v={$config->version}' type='text/css' media='screen' />\n";
     }
 
     /**
