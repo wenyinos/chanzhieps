@@ -391,6 +391,7 @@ class fileModel extends model
             $file['addedBy']   = $this->app->user->account;
             $file['addedDate'] = helper::today();
             $file['title']     = basename($file['pathname']);
+            $file['editor']    = 1;
 
             file_put_contents($this->savePath . $file['pathname'], $imageData);
             $this->compressImage($this->savePath . $file['pathname']);
