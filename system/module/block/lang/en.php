@@ -69,9 +69,9 @@ $lang->block->pages['forum_board']    = 'Forum board';
 $lang->block->pages['thread_view']    = 'View thread';
 $lang->block->pages['search_list']    = 'Search';
 
-$lang->block->pages['help_index']     = 'Help';
-$lang->block->pages['help_book']      = 'Book catalogue';
-$lang->block->pages['help_read']      = 'Book content';
+$lang->block->pages['book_index']     = 'Help';
+$lang->block->pages['book_browse']    = 'Book catalogue';
+$lang->block->pages['book_read']      = 'Book content';
 
 /* page layout list. */
 $lang->block->regions = new stdclass();

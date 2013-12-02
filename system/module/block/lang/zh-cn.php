@@ -95,9 +95,9 @@ $lang->block->pages['forum_board']    = '帖子列表页面';
 $lang->block->pages['thread_view']    = '帖子察看页面';
 $lang->block->pages['search_list']    = '搜索结果页';
 
-$lang->block->pages['help_index']     = '帮助中心';
-$lang->block->pages['help_book']      = '手册首页';
-$lang->block->pages['help_read']      = '手册章节';
+$lang->block->pages['book_index']     = '手册中心';
+$lang->block->pages['book_browse']    = '手册首页';
+$lang->block->pages['book_read']      = '手册章节';
 
 /* page layout list. */
 $lang->block->regions = new stdclass();

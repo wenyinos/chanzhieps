@@ -69,9 +69,9 @@ $lang->block->pages['forum_board']    = '帖子列表頁面';
 $lang->block->pages['thread_view']    = '帖子察看頁面';
 $lang->block->pages['search_list']    = '搜索結果頁';
 
-$lang->block->pages['help_index']     = '幫助中心';
-$lang->block->pages['help_book']      = '手冊首頁';
-$lang->block->pages['help_read']      = '手冊章節';
+$lang->block->pages['book_index']     = '幫助中心';
+$lang->block->pages['book_browse']    = '手冊首頁';
+$lang->block->pages['book_read']      = '手冊章節';
 
 /* page layout list. */
 $lang->block->regions = new stdclass();
