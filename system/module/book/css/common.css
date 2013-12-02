@@ -1,0 +1,4 @@
+.box dl{margin: 10px;}
+dt{line-height: 2em;}
+.icon-arrow-up, .icon-arrow-down{cursor: pointer;}
+.modal-dialog{width: 800px; padding-top: 10px;}
