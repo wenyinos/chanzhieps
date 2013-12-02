@@ -42,7 +42,7 @@
   <?php
   foreach($menus as $menu):
   $code = str_replace('book_', '', $menu->type);
-  $url  = $systemURL . helper::createLink('help', 'read', "article=$menu->id&book={$code}", "name=$menu->alias");
+  $url  = $systemURL . helper::createLink('book', 'read', "article=$menu->id&book={$code}", "name=$menu->alias");
   ?>
   <url>
     <loc><?php echo $url;?></loc>
