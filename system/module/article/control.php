@@ -80,29 +80,9 @@ class article extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $children = $this->loadModel('tree')->getChildren($categoryID, $type);
-        $articleList = array();
-        if(!empty($children)) $articleList = $this->article->getList($type, $subCategories, 't2.id_desc');
-
-        $orderBy = 't2.id_desc';
-        if(empty($articleList) && strpos($type, 'book_') !== false) $orderBy = 't1.order';
-        
+        $orderBy  = 't2.id_desc';
         $families = $categoryID ? $this->loadModel('tree')->getFamily($categoryID, $type) : '';
         $articles = $this->article->getList($type, $families, $orderBy, $pager);
-
-        if(strpos($type, 'book_') !== false)
-        {
-            $this->view->categoryBox = $this->loadModel('help')->getCategoryBox($type);
-            unset($this->lang->article->menu);
-            $this->lang->menuGroups->article = 'help';
-            $i = 1;
-            foreach($articles as $article)
-            {
-                $article->order = $article->id; 
-                if(empty($articleList)) $article->order = $this->post->maxOrder + $i * 10;
-                $i++;
-            }
-        }
 
         $this->view->title         = $type == 'blog' ? $this->lang->blog->admin : $this->lang->article->admin;
         $this->view->articles      = $articles;
@@ -110,12 +90,6 @@ class article extends control
         $this->view->articleList   = $articleList;
         $this->view->categoryID    = $categoryID;
         $this->view->type          = $type;
-
-        if(strpos($type, 'book_') !== false)
-        {
-            $this->display('article', 'bookadmin');
-            exit;
-        }
 
         $this->display();
     }   
@@ -132,13 +106,6 @@ class article extends control
     {
         $this->lang->article->menu = $this->lang->$type->menu;
         $this->lang->menuGroups->article = $type;
-
-        if(strpos($type, 'book_') !== false)
-        {
-            $this->view->categoryBox = $this->loadModel('help')->getCategoryBox($type);
-            unset($this->lang->article->menu);
-            $this->lang->menuGroups->article = 'help';
-        }
 
         $categories = $this->loadModel('tree')->getOptionMenu($type, 0, $removeRoot = true);
         if(empty($categories))
@@ -174,15 +141,7 @@ class article extends control
         $this->lang->article->menu = $this->lang->$type->menu;
         $this->lang->menuGroups->article = $type;
 
-        if(strpos($type, 'book_') !== false)
-        {
-            $this->view->categoryBox = $this->loadModel('help')->getCategoryBox($type);
-            unset($this->lang->article->menu);
-            $this->lang->menuGroups->article = 'help';
-        }
-
         $article    = $this->article->getByID($articleID, $replaceTag = false);
-
         $categories = $this->loadModel('tree')->getOptionMenu($type, 0, $removeRoot = true);
         if(empty($categories))
         {
@@ -238,36 +197,6 @@ class article extends control
         $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($articleID)->exec(false);
 
         $this->display();
-    }
-
-    /**
-     * Update order fields.
-     * 
-     * @access public
-     * @return void
-     */
-    public function updateOrder($type = 'article')
-    {
-        if($this->post->orders)
-        {
-            $orders = array_flip($this->post->orders);
-            ksort($orders);
-
-            $i = 0;
-            foreach($orders as $articleID)
-            {
-                $order = $i * 10;
-                $this->dao->update(TABLE_ARTICLE)
-                    ->set('`order`')->eq($order)
-                    ->where('id')->eq($articleID)
-                    ->limit(1)
-                    ->exec(false);
-                $i++;
-            }
-
-            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin', "type=$type")));
-        }
     }
 
     /**

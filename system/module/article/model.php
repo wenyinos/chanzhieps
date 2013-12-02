@@ -319,30 +319,6 @@ class articleModel extends model
     }
 
     /**
-     * Update order fields.
-     * 
-     * @access public
-     * @return void
-     */
-    public function updateOrder($orders, $type = 'article')
-    {
-        $orders = array_flip($orders);
-        ksort($orders);
-
-        $i = 0;
-        foreach($orders as $articleID)
-        {
-            $order = $i * 10;
-            $this->dao->update(TABLE_ARTICLE)
-                ->set('`order`')->eq($order)
-                ->where('id')->eq($articleID)
-                ->limit(1)
-                ->exec(false);
-            $i++;
-        }
-    }
-
-    /**
      * Create preview link. 
      * 
      * @param  int    $articleID 
