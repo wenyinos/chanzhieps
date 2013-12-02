@@ -86,8 +86,8 @@ class seo
 
         //------------- The module is an system module-------------- */
 
-        /* Remove the book param from the items if the module is help. */
-        if($module == 'help' && count($items) > 2)
+        /* Remove the book param from the items if the module is book. */
+        if($module == 'book' && count($items) > 2)
         {
             $book     = $items[1];
             $uri      = str_replace('/' . $items[1], '', $uri );
@@ -99,7 +99,7 @@ class seo
         {
             $params['category'] = str_replace('c', '', $items[1]);
             $method = $methodAlias[$module]['browse'];
-            if($module == 'help' && $book) $method .= '-' . $book;
+            if($module == 'book' && $book) $method .= '-' . $book;
             return seo::convertURI($module, $method, $params, $pageID);
         }
 
@@ -115,8 +115,8 @@ class seo
         $params['category'] = $items[1]; 
         $method = isset($methodAlias[$module]['browse']) ? $methodAlias[$module]['browse'] : 'browse';
 
-        /* Add -bookName to help->book method. */
-        if($module == 'help' && $book) $method .= '-' . $book;
+        /* Add -bookName to book->book method. */
+        if($module == 'book' && $book) $method .= '-' . $book;
         return seo::convertURI($module, $method, $params, $pageID);
     }
 
@@ -297,7 +297,7 @@ class uri
     }
 
     /**
-     * Create help book.
+     * Create book book.
      *
      * @params array    $params
      * @params array    $alias  
@@ -307,7 +307,7 @@ class uri
     {
         global $config;
 
-        $link = 'help/' . array_shift($params);
+        $link = 'book/' . array_shift($params);
         if($alias['category'])
         {
             $link .= '/' . $alias['category'];
@@ -322,7 +322,7 @@ class uri
     }
 
     /**
-     * Create help read.
+     * Create book read.
      *
      * @params array    $params
      * @params array    $alias  
@@ -335,7 +335,7 @@ class uri
         $id   = array_shift($params);
         $book = array_shift($params);
 
-        $link = 'help/'  . $book . '/' . $id;
+        $link = 'book/'  . $book . '/' . $id;
         if($alias['name']) $link .= '_' . $alias['name'];
         return $config->webRoot . $link . '.' . $config->default->view;
     }
