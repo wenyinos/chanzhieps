@@ -220,34 +220,4 @@ class book extends control
             $content = $nav . $content;
         }
     }
-
-    /**
-     * Update order fields.
-     *      
-     * @access public
-     * @return void
-     */     
-    public function updateOrder()
-    {       
-        if($this->post->orders)
-        {
-            $orders = array_flip($this->post->orders);
-            ksort($orders);
-    
-            $i = 0;
-            foreach($orders as $articleID)
-            {
-                $order = $i * 10;
-                $this->dao->update(TABLE_ARTICLE)
-                    ->set('`order`')->eq($order)
-                    ->where('id')->eq($articleID)
-                    ->limit(1)
-                    ->exec(false);
-                $i++;
-            }
-    
-            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin', "type=$type")));
-        }
-    }       
 }
