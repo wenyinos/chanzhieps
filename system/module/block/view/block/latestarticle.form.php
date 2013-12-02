@@ -22,5 +22,5 @@
 </tr>
 <tr>
   <th><?php echo $lang->block->showImage;?></th>
-  <td><?php echo html::checkbox('params[image]', $lang->block->image, isset($block) ? $block->content->image : '');?></td>
+  <td><input type='checkbox' name='params[image]' value='1' /></td>
 </tr>

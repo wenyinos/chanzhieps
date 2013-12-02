@@ -20,7 +20,7 @@ $lang->block->page       = '页面';
 $lang->block->regionList = '区域列表';
 $lang->block->select     = '请选择区块';
 $lang->block->categories = '分类';
-$lang->block->showImage  = '是否显示图片';
+$lang->block->showImage  = '显示图片';
 $lang->block->product    = '产品';
 
 $lang->block->add          = "添加";
