@@ -1,7 +1,7 @@
 ALTER TABLE `eps_thread` CHANGE `readonly` `readonly` tinyint(1) NOT NULL DEFAULT '0' AFTER `editedDate`;
 ALTER TABLE `eps_product` ADD `status` varchar(20) COLLATE 'utf8_general_ci' NOT NULL DEFAULT 'normal' AFTER `editedDate`;
 
-CREATE TABLE IF NOT EXISTS `eps_help` (
+CREATE TABLE IF NOT EXISTS `eps_book` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(150) NOT NULL,
   `alias` varchar(100) NOT NULL,
@@ -22,4 +22,4 @@ CREATE TABLE IF NOT EXISTS `eps_help` (
   KEY `order` (`order`),
   KEY `parent` (`parent`),
   KEY `path` (`path`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=33;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
