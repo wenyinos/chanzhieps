@@ -36,7 +36,7 @@ class navModel extends model
         $systemNavs = $this->config->nav->system;
         unset($systemNavs->blog);
         unset($systemNavs->forum);
-        unset($systemNavs->help);
+        unset($systemNavs->book);
 
         foreach($systemNavs as $item => $url)
         {

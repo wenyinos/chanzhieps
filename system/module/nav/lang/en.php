@@ -31,7 +31,7 @@ $lang->nav->system->home    = 'Home';
 $lang->nav->system->company = 'About';
 $lang->nav->system->forum   = 'Forum';
 $lang->nav->system->blog    = 'Blog';
-$lang->nav->system->help    = 'Help';
+$lang->nav->system->book    = 'Book';
 
 /* Targets setting. */
 $lang->nav->newWindow = new stdclass();

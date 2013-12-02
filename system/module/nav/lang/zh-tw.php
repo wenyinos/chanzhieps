@@ -31,7 +31,7 @@ $lang->nav->system->home    = '首頁';
 $lang->nav->system->company = '關於我們';
 $lang->nav->system->forum   = '論壇';
 $lang->nav->system->blog    = '博客';
-$lang->nav->system->help    = '幫助';
+$lang->nav->system->book    = '手冊';
 
 /* Targets setting. */
 $lang->nav->newWindow = new stdclass();
