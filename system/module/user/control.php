@@ -282,10 +282,10 @@ class user extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $key = $this->post->key ? $this->post->key : '';
+        $query = $this->post->query ? $this->post->query : '';
 
-        $this->view->users = $this->user->getList($pager, $key);
-        $this->view->query = $key;
+        $this->view->users = $this->user->getList($pager, $query);
+        $this->view->query = $query;
         $this->view->pager = $pager;
 
         $this->view->title = $this->lang->user->list;
