@@ -109,6 +109,9 @@ class commonModel extends model
     {
         global $app, $config;
 
+        /* Check the user's IP exclude guest. */
+        if($app->user->account != 'guest' and $app->user->ip != $_SERVER['REMOTE_ADDR']) return false;
+
         if(RUN_MODE == 'admin')
         {
             if($app->user->admin == 'no')    return false;
