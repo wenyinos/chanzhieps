@@ -113,13 +113,6 @@ class router
      */
     private $clientLang;
 
-    /**
-     * The theme of the client user.
-     * 
-     * @var string
-     * @access private
-     */
-    private $clientTheme;
 
     /**
      * The control object of current module.
@@ -743,42 +736,6 @@ class router
     public function getClientLang()
     {
         return $this->clientLang;
-    }
-
-    /**
-     * Set the them the client user usering. The logic is same as the clientLang.
-     *
-     * The css and images files of an theme should saved at www/theme/$themeName
-     *
-     * @param   string $theme   
-     * @access  public
-     * @return  void
-     */
-    public function setClientTheme($theme = '')
-    {
-        if(!empty($theme))
-        {
-            $theme = strtolower($this->clientTheme);
-            if(strpos($this->config->themes, $theme) === false) $theme = $this->config->default->theme;
-        }    
-        else
-        {
-            $theme = $this->config->default->theme;
-        }
-
-        setcookie('theme', $theme, $this->config->cookieLife, $this->config->cookiePath);
-        $this->clientTheme = $theme;
-    }
-
-    /**
-     * Get the $clientTheme var. 
-     *
-     * @access public
-     * @return string
-     */
-    public function getClientTheme()
-    {
-        return $this->config->webRoot . 'theme/' . $this->clientTheme . '/';
     }
 
     /**
