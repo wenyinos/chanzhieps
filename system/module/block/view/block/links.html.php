@@ -11,8 +11,8 @@
 */
 ?>
 <?php if(!empty($this->config->links->index)):?>
-<ul id="links" class="nav nav-pills">
+<div id="links" class="nav nav-pills">
   <?php echo $this->lang->link . $this->lang->colon;?>
   <?php echo $this->config->links->index; if(!empty($this->config->links->all))echo "&nbsp;&nbsp&nbsp" . html::a(helper::createLink('links', 'index'), $this->lang->more . $this->lang->raquo);?>
-</ul>
+</div>
 <?php endif;?>
