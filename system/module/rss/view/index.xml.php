@@ -10,6 +10,8 @@
   <?php 
   foreach($articles as $article):
     $category = current($article->categories);
+    $article->content = str_replace('src="/data/upload/', 'src="' . getWebRoot(true) . 'data/upload/', $article->content);
+    $article->content = str_replace("src='/data/upload/", "src='" . getWebRoot(true) . 'data/upload/', $article->content);
   ?>
   <item>
     <title><?php echo $article->title?></title>

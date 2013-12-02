@@ -491,10 +491,11 @@ function isLocalIP()
 /**
  * Get web root. 
  * 
+ * @param  bool     $full 
  * @access public
- * @return string 
+ * @return void
  */
-function getWebRoot()
+function getWebRoot($full = false)
 {
     $path = $_SERVER['SCRIPT_NAME'];
     if(defined('IN_SHELL'))
@@ -502,6 +503,11 @@ function getWebRoot()
         $url  = parse_url($_SERVER['argv'][1]);
         $path = empty($url['path']) ? '/' : rtrim($url['path'], '/');
         $path = empty($path) ? '/' : $path;
+    }
+    if($full)
+    {
+        $http = (isset($_SERVER['HTTPS']) and $_SERVER['HTTPS']) ? 'https://' : 'http://';
+        return $http . $_SERVER['HTTP_HOST'] . substr($path, 0, (strrpos($path, '/') + 1));
     }
     return substr($path, 0, (strrpos($path, '/') + 1));
 }
