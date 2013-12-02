@@ -28,11 +28,11 @@ class cacheModel extends model
      * Create config cache.
      * 
      * @access public
-     * @return void
+     * @return bool
      */
     public function createConfigCache()
     {
-        $cacheFile = $this->cacheRoot  . DS . 'config.php';
+        $cacheFile = $this->setConfigCacheFile();
 
         if(!is_writable($this->cacheRoot)) return false;
         if(is_file($cacheFile) and !is_writable($cacheFile)) return false;
@@ -47,5 +47,15 @@ class cacheModel extends model
         file_put_contents($cacheFile, $configCache);
         return true;
     }
-}
 
+    /**
+     * Set configCache file.
+     * 
+     * @access public
+     * @return string
+     */
+    public function setConfigCacheFile()
+    {
+        return $this->cacheRoot  . DS . 'config.php';
+    }
+}
