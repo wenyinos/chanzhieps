@@ -349,21 +349,20 @@ class articleModel extends model
         if(empty($files)) return false;
 
         echo '<ul class="article-files clearfix">';
+        $images = '';
+        $files = '';
         foreach($files as $file)
         {
+            $file->title = $file->title . ".$file->extension";
             if($file->isImage)
             {
-                echo '<li class="file-image file-' . $file->extension . '">' . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank'") . '</li>';
+                $images .= '<li class="file-image file-' . $file->extension . '">' . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank'") . '</li>';
             }
-        }
-        foreach($files as $file)
-        {
-            if(!$file->isImage)
+            else
             {
-                $file->title = $file->title . ".$file->extension";
-                echo '<li class="file file-' . '$file->extension' . '">' . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'") . '</li>'; 
+                $files .= '<li class="file file-' . '$file->extension' . '">' . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'") . '</li>';
             }
         }
-        echo '</ul>';
+        echo $images . $files . '</ul>';
     }
 }

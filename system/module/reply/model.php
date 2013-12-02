@@ -206,14 +206,28 @@ class replyModel extends model
     {
         if(empty($reply->files)) return false;
 
-        echo $this->lang->reply->files; 
+        echo '<ul class="article-files clearfix">';
+        echo '<li class="article-files-heading">' . $this->lang->reply->files . '</li>'; 
+        $images = '';
+        $files = '';
+
         foreach($reply->files as $file)
         {
             $file->title = $file->title . ".$file->extension";
-            echo html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'"); 
-            if($canManage) echo '<sub>' . html::a(helper::createLink('thread', 'deleteFile', "threadID=$reply->thread&fileID=$file->id"), '[x]', "class='deleter'") . '</sub>';
-            echo ' ';
+            if($file->isImage)
+            {
+                $images .= '<li class="file-image file-' . $file->extension . '">' . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank'");
+                if($canManage) $images .= '<span class="file-actions">' . html::a(helper::createLink('thread', 'deleteFile', "threadID=$reply->thread&fileID=$file->id"), 'x', "class='deleter'") . '</span>';
+                $images .= '</li>';
+            }
+            else
+            {
+                $files .= '<li class="file file-' . '$file->extension' . '">' . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'");
+                if($canManage) $files .= '<span class="file-actions">' . html::a(helper::createLink('thread', 'deleteFile', "threadID=$reply->thread&fileID=$file->id"), 'x', "class='deleter'") . '</span>';
+                $files .= '</li>';
+            }
         }
+        echo $images . $files . '</ul>';
     }
 
     /**
