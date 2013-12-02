@@ -271,26 +271,26 @@ class threadModel extends model
 
         echo '<ul class="article-files clearfix">';
         echo '<li class="article-files-heading">' . $this->lang->thread->files . '</li>'; 
-        $images = '';
-        $files = '';
+        $imagesHtml = '';
+        $filesHtml = '';
 
         foreach($reply->files as $file)
         {
             $file->title = $file->title . ".$file->extension";
             if($file->isImage)
             {
-                $images .= '<li class="file-image file-' . $file->extension . '">' . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank'");
-                if($canManage) $images .= '<span class="file-actions">' . html::a(helper::createLink('thread', 'deleteFile', "threadID=$reply->thread&fileID=$file->id"), 'x', "class='deleter'") . '</span>';
-                $images .= '</li>';
+                $imagesHtml .= '<li class="file-image file-' . $file->extension . '">' . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank'");
+                if($canManage) $imagesHtml .= '<span class="file-actions">' . html::a(helper::createLink('thread', 'deleteFile', "threadID=$reply->thread&fileID=$file->id"), 'x', "class='deleter'") . '</span>';
+                $imagesHtml .= '</li>';
             }
             else
             {
-                $files .= '<li class="file file-' . '$file->extension' . '">' . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'");
-                if($canManage) $files .= '<span class="file-actions">' . html::a(helper::createLink('thread', 'deleteFile', "threadID=$reply->thread&fileID=$file->id"), 'x', "class='deleter'") . '</span>';
-                $files .= '</li>';
+                $filesHtml .= '<li class="file file-' . '$file->extension' . '">' . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'");
+                if($canManage) $filesHtml .= '<span class="file-actions">' . html::a(helper::createLink('thread', 'deleteFile', "threadID=$reply->thread&fileID=$file->id"), 'x', "class='deleter'") . '</span>';
+                $filesHtml .= '</li>';
             }
         }
-        echo $images . $files . '</ul>';
+        echo $images . $filesHtml . '</ul>';
     }
 
     /**
