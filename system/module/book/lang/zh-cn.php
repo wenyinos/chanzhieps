@@ -1,10 +1,9 @@
 <?php
-$lang->help->common       = '在线帮助';
-$lang->help->books        = '手册列表';
-$lang->help->articles     = '文档导航';
-$lang->help->backtobooks  = '返回手册列表';
+$lang->book->common       = '在线手册';
+$lang->book->list         = '手册列表';
+$lang->book->articles     = '文档导航';
+$lang->book->backtolist   = '返回手册列表';
 
-$lang->book = new stdclass();
 $lang->book->createBook      = '添加手册';
 $lang->book->createCatalogue = '添加目录';
 $lang->book->editBook        = '编辑手册';
@@ -20,10 +19,8 @@ $lang->book->keywords        = '关键词';
 $lang->book->summary         = '简介';
 $lang->book->content         = '内容';
 $lang->book->alias           = '别名';
-$lang->book->chapter         = '目录管理';
+$lang->book->chapterList     = '目录管理';
 $lang->book->articleList     = '文章管理';
-$lang->book->createChapter   = '添加目录';
-$lang->book->createArticle   = '发布文章';
 
 $lang->book->typeList['chapter'] = '章节';
 $lang->book->typeList['article'] = '文章';
