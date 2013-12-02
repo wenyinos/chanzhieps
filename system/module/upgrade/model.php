@@ -160,8 +160,8 @@ class upgradeModel extends model
            $modules[] = 'user';
        }
 
-       $books  = $this->loadModel('help')->getBookList();
-       if(!empty($books))  $modules[] = 'help';
+       $books = $this->loadModel('book')->getBookList();
+       if(!empty($books))  $modules[] = 'book';
 
        $setting = new stdclass();
        $setting->moduleEnabled = join($modules, ',');
