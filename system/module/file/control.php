@@ -284,7 +284,7 @@ class file extends control
      */
     public function delete($fileID)
     {
-        $this->file->delete($fileID);
+        $this->dao->delete()->from(TABLE_FILE)->where('id')->eq($fileID)->exec();
         if(!dao::isError()) $this->send(array('result' => 'success')); 
         $this->send(array('result' => 'fail', 'message' => dao::getError())); 
     }
