@@ -46,13 +46,3 @@ $lang->board->moderators = 'Moderators';
 
 $lang->board->readonlyList[0] = 'Pulic';
 $lang->board->readonlyList[1] = 'Readonly';
-
-/* Lang items for help. */
-$lang->directory = new stdclass();
-$lang->directory->common     = 'Catalogue';
-$lang->directory->name       = 'Category';
-$lang->directory->alias      = 'Alias';
-$lang->directory->parent     = 'Parent';
-$lang->directory->desc       = 'Delete';
-$lang->directory->keywords   = 'Keyword';
-$lang->directory->children   = "Children";

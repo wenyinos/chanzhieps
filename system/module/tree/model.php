@@ -332,32 +332,6 @@ class treeModel extends model
     }
 
     /**
-     * Create the help book link.
-     * 
-     * @param  int      $category 
-     * @access public
-     * @return string
-     */
-    public static function createHelpBookLink($category)
-    {
-        $code = str_replace('book_', '', $category->type);
-        $linkHtml = html::a(helper::createLink('help', 'book', "type=$code&categoryID=$category->id", "category={$category->alias}"), $category->name, "id='category{$category->id}'");
-        return $linkHtml;
-    }
-
-    /**
-     * Create admin book browse link.
-     * 
-     * @param object $category
-     * @return string 
-     */
-     
-    public static function createBookLink($category)
-    {
-        return html::a(helper::createLink('article', 'admin', "type={$category->type}&categoryID={$category->id}"), $category->name, "class='ajax'");
-    }
-
-    /**
      * Create the manage link.
      * 
      * @param  int         $category 
@@ -439,8 +413,6 @@ class treeModel extends model
         $this->dao->update(TABLE_CATEGORY)->set('parent')->eq($category->parent)->where('parent')->eq($categoryID)->exec();  // Update children's parent to their grandpa.
         $this->dao->delete()->from(TABLE_CATEGORY)->where('id')->eq($categoryID)->exec();                                    // Delete my self.
         $this->fixPath($category->type);
-
-        if($category->type == 'article' and $category->type == 'help') $this->dao->update(TABLE_RELATION)->set('category')->eq($category->parent)->where('category')->eq($categoryID)->exec();
 
         return !dao::isError();
     }

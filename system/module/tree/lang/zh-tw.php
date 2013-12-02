@@ -46,13 +46,3 @@ $lang->board->moderators = '版主';
 
 $lang->board->readonlyList[0] = '開放';
 $lang->board->readonlyList[1] = '只讀';
-
-/* Lang items for help. */
-$lang->directory = new stdclass();
-$lang->directory->common   = '目錄';
-$lang->directory->name     = '目錄';
-$lang->directory->alias    = '別名';
-$lang->directory->parent   = '上級目錄';
-$lang->directory->desc     = '描述';
-$lang->directory->keywords = '關鍵詞';
-$lang->directory->children = "子目錄";

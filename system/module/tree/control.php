@@ -42,22 +42,7 @@ class tree extends control
             $this->lang->menuGroups->tree = 'product';
         }
 
-        if(strpos($type, 'book_') !== false)
-        {
-            $this->lang->category         = $this->lang->directory;
-            $this->lang->tree->menu       = $this->lang->help->menu;
-            $this->lang->menuGroups->tree = 'help';
-        }
-
         $this->view->title    = $this->lang->category->common;
-        if(strpos($type, 'book_') !== false)
-        {
-            $book = $this->loadModel('help')->getBookByCode(str_replace('book_', '', $type));
-            $this->view->book  = $book; 
-            $this->view->title = $book->name;
-            $this->view->backButton  =  html::a(helper::createLink('help', 'admin', "type={$type}"), $this->lang->help->backtobooks, "class='btn btn-default btn-sm'");
-        }
-
         $this->view->type     = $type;
         $this->view->root     = $root;
         $this->view->treeMenu = $this->tree->getTreeMenu($type, 0, array('treeModel', 'createManageLink'));
@@ -80,7 +65,6 @@ class tree extends control
 
         /* If type is forum, assign board to category. */
         if($category->type == 'forum') $this->lang->category = $this->lang->board;
-        if(strpos($category->type , 'book') !== false)  $this->lang->category = $this->lang->directory;
 
         if(!empty($_POST))
         {
@@ -116,7 +100,6 @@ class tree extends control
     {
         /* If type is forum, assign board to category. */
         if($type == 'forum') $this->lang->category = $this->lang->board;
-        if(strpos($type, 'book') !== false)  $this->lang->category = $this->lang->directory;
 
         if(!empty($_POST))
         { 
