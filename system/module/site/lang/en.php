@@ -38,7 +38,7 @@ $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = 'Member';
 $lang->site->moduleAvailable['forum']   = 'Forum';
 $lang->site->moduleAvailable['blog']    = 'Blog';
-$lang->site->moduleAvailable['help']    = 'Help';
+$lang->site->moduleAvailable['book']    = 'Book';
 $lang->site->moduleAvailable['comment'] = 'Comment';
 
 $lang->site->themes    = array();

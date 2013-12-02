@@ -38,7 +38,7 @@ $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = '会员';
 $lang->site->moduleAvailable['forum']   = '论坛';
 $lang->site->moduleAvailable['blog']    = '博客';
-$lang->site->moduleAvailable['help']    = '帮助';
+$lang->site->moduleAvailable['book']    = '手册';
 $lang->site->moduleAvailable['comment'] = '评论';
 
 $lang->site->themes = array();
