@@ -72,7 +72,7 @@ class article extends control
      * @access public
      * @return void
      */
-    public function admin($type = 'article', $categoryID = 0, $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function admin($type = 'article', $categoryID = 0, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {   
         $this->lang->article->menu = $this->lang->$type->menu;
         $this->lang->menuGroups->article = $type;
@@ -80,7 +80,6 @@ class article extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $orderBy  = 't2.id_desc';
         $families = $categoryID ? $this->loadModel('tree')->getFamily($categoryID, $type) : '';
         $articles = $this->article->getList($type, $families, $orderBy, $pager);
 
@@ -90,6 +89,7 @@ class article extends control
         $this->view->articleList   = $articleList;
         $this->view->categoryID    = $categoryID;
         $this->view->type          = $type;
+        $this->view->orderBy       = $orderBy;
 
         $this->display();
     }   

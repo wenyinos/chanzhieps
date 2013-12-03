@@ -9,7 +9,8 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->article->common = 'Article';
+$lang->article->common      = 'Article';
+$lang->article->createDraft = 'Create draft';
 
 $lang->article->id         = 'Id';
 $lang->article->category   = 'Categories';
@@ -26,6 +27,7 @@ $lang->article->author     = 'Author';
 $lang->article->editor     = 'Editor';
 $lang->article->addedDate  = 'Added';
 $lang->article->editedDate = 'Edited';
+$lang->article->status     = 'Status';
 $lang->article->type       = 'Type';
 $lang->article->views      = 'Views';
 $lang->article->stick      = 'Sticky';
@@ -44,6 +46,9 @@ $lang->blog->edit   = 'Edit';
 
 $lang->article->originalList[1] = 'Original';
 $lang->article->originalList[0] = 'Copied';
+
+$lang->article->statusList['draft']  = 'Draft';
+$lang->article->statusList['normal'] = 'Normal';
 
 $lang->article->confirmDelete = 'Are you sure to delete this article?';
 

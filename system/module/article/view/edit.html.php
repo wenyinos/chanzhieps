@@ -85,6 +85,10 @@
       </td>
     </tr>
     <tr>
+      <th><?php echo $lang->article->status;?></th>
+      <td><?php echo html::select('status', $lang->article->statusList, $article->status, "class='select-3 form-control'");?></td>
+    </tr>
+    <tr>
       <th></th>
       <td><?php echo html::submitButton();?></td>
     </tr>

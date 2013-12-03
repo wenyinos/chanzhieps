@@ -89,7 +89,7 @@
     </tr>
     <tr>
       <td></td>
-      <td><?php echo html::submitButton() . html::hidden('type', $type);?></td>
+      <td><?php echo html::submitButton() . html::commonButton($lang->article->createDraft, "btn draft") . html::hidden('type', $type);?></td>
     </tr>
   </table>
 </form>
