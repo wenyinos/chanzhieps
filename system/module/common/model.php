@@ -575,22 +575,20 @@ class commonModel extends model
     }
 
     /**
-     * Print the position bar of help module.
+     * Print the position bar of book module.
      * 
      * @param   object $book 
      * @access  public
      * @return  void
      */
-    public function printHelp($category = '', $article = '')
+    public function printBook($book)
     {
-        echo '<li>' . html::a(helper::createLink('help', 'index'), $this->lang->helpHome) . '</li>';
-        echo '<li>' . html::a(helper::createLink('help', 'book', "type=$category->code"), $category->book) . '</li>';
-        foreach($category->pathNames as $categoryID => $categoryName)
+        echo '<li>' . html::a(helper::createLink('book', 'index'), $this->lang->bookHome) . '</li>';
+        foreach($book->pathNames as $bookID => $bookTitle)
         {
-            $alias = $this->loadModel('tree')->getAliasByID($categoryID);
-            echo '<li>' . html::a(helper::createLink('help', 'book', "type=$category->code&categoryID=$categoryID","category=$alias"), $categoryName) . '</li>';
+            $book = $this->loadModel('book')->getByID($bookID);
+            echo '<li>' . html::a(helper::createLink('book', 'browse', "bookID=$bookID","book=$book->alias"), $bookTitle) . '</li>';
         }
-        if($article) echo '<li>' . $article->title . '</li>';
     }
 
     /**
