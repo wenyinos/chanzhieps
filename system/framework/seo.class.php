@@ -86,20 +86,11 @@ class seo
 
         //------------- The module is an system module-------------- */
 
-        /* Remove the book param from the items if the module is book. */
-        if($module == 'book' && count($items) > 2)
-        {
-            $book     = $items[1];
-            $uri      = str_replace('/' . $items[1], '', $uri );
-            $items[1] = $items[2];
-        }
-
         /*  If the first param is a category id, like news/c123.html. */
         if(preg_match('/^c\d+$/', $items[1]))
         {
             $params['category'] = str_replace('c', '', $items[1]);
             $method = $methodAlias[$module]['browse'];
-            if($module == 'book' && $book) $method .= '-' . $book;
             return seo::convertURI($module, $method, $params, $pageID);
         }
 
@@ -115,8 +106,6 @@ class seo
         $params['category'] = $items[1]; 
         $method = isset($methodAlias[$module]['browse']) ? $methodAlias[$module]['browse'] : 'browse';
 
-        /* Add -bookName to book->book method. */
-        if($module == 'book' && $book) $method .= '-' . $book;
         return seo::convertURI($module, $method, $params, $pageID);
     }
 
@@ -274,8 +263,8 @@ class uri
         global $config;
 
         $link = $config->webRoot . 'blog';
-        if(isset($alias['category']) and trim($alias['category']) != '')  return $link . '/' . $alias['category'] . '.' . $config->default->view;
-        if(!empty($params))                 return $link . '/c' . array_shift($params) . '.' . $config->default->view;
+        if(isset($alias['category']) and trim($alias['category']) != '') return $link . '/' . $alias['category'] . '.' . $config->default->view;
+        if(!empty($params)) return $link . '/c' . array_shift($params) . '.' . $config->default->view;
         return $link . '.' . $config->default->view;
     }
 
@@ -303,21 +292,13 @@ class uri
      * @params array    $alias  
      * return string
      */
-    public static function createHelpBook($params, $alias)
+    public static function createBookBrowse($params, $alias)
     {
         global $config;
 
-        $link = 'book/' . array_shift($params);
-        if($alias['category'])
-        {
-            $link .= '/' . $alias['category'];
-        }
-        elseif(count($params) > 0)
-        {
-            $category = array_shift($params);
-            if(is_numeric($category)) $category = 'c' . $category;
-            $link .= '/' . $category;
-        }
+        $link = 'book/c' . array_shift($params);
+        if($alias['book']) $link = 'book/' . $alias['book'];
+
         return $config->webRoot . $link . '.' . $config->default->view;
     }
 
@@ -328,15 +309,14 @@ class uri
      * @params array    $alias  
      * return string
      */
-    public static function createHelpRead($params, $alias)
+    public static function createBookRead($params, $alias)
     {
         global $config;
 
-        $id   = array_shift($params);
-        $book = array_shift($params);
+        $link = 'book/';
+        $link .= array_shift($params);
+        if($alias['article']) $link .= '_' . $alias['article'];
 
-        $link = 'book/'  . $book . '/' . $id;
-        if($alias['name']) $link .= '_' . $alias['name'];
         return $config->webRoot . $link . '.' . $config->default->view;
     }
 }
