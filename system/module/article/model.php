@@ -348,21 +348,20 @@ class articleModel extends model
     {
         if(empty($files)) return false;
 
-        echo '<ul class="article-files clearfix">';
         $imagesHtml = '';
-        $filesHtml = '';
+        $filesHtml  = '';
         foreach($files as $file)
         {
             $file->title = $file->title . ".$file->extension";
             if($file->isImage)
             {
-                $imagesHtml .= '<li class="file-image file-' . $file->extension . '">' . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank'") . '</li>';
+                $imagesHtml .= "<li class='file-image file-" . $file->extension . "'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank'") . '</li>';
             }
             else
             {
-                $filesHtml .= '<li class="file file-' . '$file->extension' . '">' . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'") . '</li>';
+                $filesHtml .= "<li class='file file-" . $file->extension . "'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'") . '</li>';
             }
         }
-        echo $imagesHtml . $filesHtml . '</ul>';
+        echo "<ul class='article-files clearfix'>" . $imagesHtml . $filesHtml . '</ul>';
     }
 }
