@@ -334,7 +334,7 @@ class router
     public static function createApp($appName = 'demo', $appRoot = '', $className = 'router')
     {
         if(empty($className)) $className = __CLASS__;
-        return new $className($appName, $appRoot, $wwwRoot);
+        return new $className($appName, $appRoot);
     }
 
     //-------------------- path related methods --------------------//

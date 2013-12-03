@@ -21,6 +21,7 @@ $lang->file->allow      = '允许';
 $lang->file->toggle     = '切换';
 $lang->file->label      = '标题：';
 $lang->file->lblInfo    = '<i>(类型：%s, 大小：%s, 添加于：%s，下载%s次)</i>';
+$lang->file->limit      = "(<span class='text-danger'>2M以内</span>)";
 
 $lang->file->id        = '编号';
 $lang->file->title     = '名称';

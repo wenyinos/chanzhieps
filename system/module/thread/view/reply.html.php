@@ -19,15 +19,15 @@
       <tr> 
         <td class='speaker'></td>
         <td class='a-right'>
-          <div class='f-left'><?php $this->reply->printFiles($reply, $this->thread->canManage($board->moderators));?></div>
+          <div class='f-left'><?php $this->reply->printFiles($reply, $this->thread->canManage($board->id));?></div>
           <div class='f-right'>
             <?php 
             if($reply->editor) printf($lang->thread->lblEdited, $reply->editor, $reply->editedDate);
             if($this->app->user->account != 'guest')
             {
                 echo html::a('#reply', $lang->reply->common);
-                if($this->thread->canEdit($board, $reply->author)) echo html::a($this->createLink('reply', 'edit',   "replyID=$reply->id"), $lang->edit);
-                if($this->thread->canManage($board->moderators)) echo html::a($this->createLink('reply', 'delete', "replyID=$reply->id"), $lang->delete, "class='deleter'");
+                if($this->thread->canManage($board->id, $reply->author)) echo html::a($this->createLink('reply', 'edit',   "replyID=$reply->id"), $lang->edit);
+                if($this->thread->canManage($board->id)) echo html::a($this->createLink('reply', 'delete', "replyID=$reply->id"), $lang->delete, "class='deleter'");
             }
             else
             {

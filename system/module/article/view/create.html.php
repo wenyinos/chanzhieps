@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php include '../../common/view/datepicker.html.php';?>
 <?php js::set('type',$type);?>
 <?php js::set('categoryID',$currentCategory);?>
 <?php include '../../common/view/kindeditor.html.php';?>
@@ -79,8 +80,16 @@
       <td valign='middle'><?php echo html::textarea('content', '', "rows='10' class='area-1 form-control'");?></td>
     </tr>
     <tr>
+      <th><?php echo $lang->article->addedDate;?></th>
+      <td class='input-append date'>
+        <?php echo html::input('addedDate', date('Y-m-d H:i'), "class='text-3 form-control'");?>
+        <span class="add-on"><i class="icon-th"></i></span>
+        <span class='help-inline pl-10px'><?php echo $lang->article->note->addedDate;?></span>
+      </td>
+    </tr>
+    <tr>
       <td></td>
-      <td><?php echo html::submitButton() . html::hidden('type', $type);?></td>
+      <td><?php echo html::submitButton() . html::commonButton($lang->article->createDraft, "btn draft") . html::hidden('type', $type);?></td>
     </tr>
   </table>
 </form>

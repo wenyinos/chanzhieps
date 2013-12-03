@@ -49,7 +49,7 @@ class forum extends control
         $threads = $this->thread->getList($board->id, $orderBy = 'repliedDate_desc', $pager);
 
         $this->view->title     = $board->name;
-        $this->view->keyword   = $board->keyword . '' . $this->config->site->keywords;
+        $this->view->keywords  = $board->keywords . '' . $this->config->site->keywords;
         $this->view->desc      = strip_tags($board->desc);
         $this->view->board     = $board;
         $this->view->sticks    = $sticks;

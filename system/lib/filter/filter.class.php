@@ -425,10 +425,25 @@ class fixer
         $fields = $this->processFields($fieldName);
         foreach($fields as $fieldName)
         {
-           if(is_array($this->data->$fieldName)) continue; 
-           if(!in_array($fieldName, $this->stripedFields)) $this->data->$fieldName = htmlspecialchars($this->data->$fieldName);
+            if(!in_array($fieldName, $this->stripedFields))$this->data->$fieldName = $this->specialArray($this->data->$fieldName);
         }
         return $this;
+    }
+
+    /**
+     * Special array 
+     * 
+     * @param  mix      $data 
+     * @access public
+     * @return mix
+     */
+    public function specialArray($data)
+    {
+        if(!is_array($data)) return htmlspecialchars($data);
+
+        foreach($data as &$value) $value = $this->specialArray($value);
+
+        return $data;
     }
 
     /**

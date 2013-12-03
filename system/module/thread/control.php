@@ -33,7 +33,7 @@ class thread extends control
         }
 
         /* Set editor for current user. */
-        $this->thread->setEditor($board->moderators, 'post');
+        $this->thread->setEditor($board->id, 'post');
 
         /* User posted a thread, try to save it to database. */
         if($_POST)
@@ -47,7 +47,7 @@ class thread extends control
 
         $this->view->title     = $board->name . $this->lang->minus . $this->lang->thread->post;
         $this->view->board     = $board;
-        $this->view->canManage = $this->thread->canManage($board->moderators);
+        $this->view->canManage = $this->thread->canManage($boardID);
 
         $this->display();
     }
@@ -67,8 +67,7 @@ class thread extends control
         if(!$thread) die(js::locate('back'));
 
         /* Judge current user has priviledge to edit the thread or not. */
-        $moderators = $this->thread->getModerators($threadID);
-        if(!$this->thread->canEdit($moderators, $thread->author)) die(js::locate('back'));
+        if(!$this->thread->canManage($thread->board, $thread->author)) die(js::locate('back'));
 
         if($_POST)
         {
@@ -80,7 +79,7 @@ class thread extends control
         $this->view->title     = $this->lang->thread->edit . $this->lang->minus . $thread->title;
         $this->view->thread    = $thread;
         $this->view->board     = $this->loadModel('tree')->getById($thread->board);
-        $this->view->canManage = $this->thread->canManage($board->moderators);
+        $this->view->canManage = $this->thread->canManage($board->id);
 
         $this->display();
     }
@@ -124,6 +123,21 @@ class thread extends control
     }
 
     /**
+     * Locate to the thread and reply.
+     * 
+     * @param  int    $threadID 
+     * @param  int    $replyID 
+     * @access public
+     * @return void
+     */
+    public function locate($threadID, $replyID = 0)
+    {
+        $position = $replyID ? $this->loadModel('reply')->getPosition($replyID) : ''; 
+        $location = $this->createLink('thread', 'view', "threadID=$threadID", $position);
+        header("location:$location");
+    }
+
+    /**
      * Delete a thread.
      * 
      * @param  int      $threadID 
@@ -135,8 +149,7 @@ class thread extends control
         $thread = $this->thread->getByID($threadID);
         if(!$thread) $this->send(array('result' => 'fail', 'message' => 'Not found'));
 
-        $moderators = $this->thread->getModerators($threadID);
-        if(!$this->thread->canManage($moderators)) $this->send(array('result' => 'fail'));
+        if(!$this->thread->canManage($thread->board)) $this->send(array('result' => 'fail'));
 
         $locate  = helper::createLink('forum', 'board', "board=$thread->board");
         if(RUN_MODE == 'admin') $locate = helper::createLink('forum', 'admin');
@@ -157,8 +170,7 @@ class thread extends control
         $thread = $this->thread->getByID($threadID);
         if(!$thread) $this->send(array('result' => 'fail', 'message' => 'Not found'));
 
-        $moderators = $this->thread->getModerators($threadID);
-        if(!$this->thread->canManage($moderators)) $this->send(array('result' => 'fail'));
+        if(!$this->thread->canManage($thread->board)) $this->send(array('result' => 'fail'));
 
         if($this->thread->hide($threadID))
         {
@@ -179,8 +191,8 @@ class thread extends control
      */
     public function stick($threadID, $stick)
     {
-        $moderators = $this->thread->getModerators($threadID);
-        if(!$this->thread->canManage($moderators)) die();
+        $thread = $this->thread->getByID($threadID);
+        if(!$this->thread->canManage($thread->board)) exit;
 
         $this->dao->update(TABLE_THREAD)->set('stick')->eq($stick)->where('id')->eq($threadID)->exec();
         if(dao::isError()) $this->send(array('result' =>'fail', 'message' => dao::getError()));
@@ -205,8 +217,7 @@ class thread extends control
         if(!$thread) die(js::locate('back'));
 
         /* Judge current user has priviledge to edit the thread or not. */
-        $moderators = $this->thread->getModerators($threadID);
-        if(!$this->thread->canEdit($moderators, $thread->author)) die(js::locate('back'));
+        if(!$this->thread->canManage($thread->board, $thread->author)) die(js::locate('back'));
 
         if($this->loadModel('file')->delete($fileID)) $this->send(array('result'=>'success'));
         $this->send(array('result'=>'fail', 'message'=> dao::getError()));

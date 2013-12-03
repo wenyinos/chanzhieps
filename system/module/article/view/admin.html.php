@@ -11,7 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<table class='table table-bordered table-hover table-striped'>
+<table class='table table-bordered table-hover table-striped tablesorter'>
   <?php if($type == 'blog'):?>
   <caption><?php echo $lang->blog->list;?><span class='pull-right mr-10px'><?php echo html::a($this->inlink('create', "type={$type}&category={$categoryID}"), $lang->blog->create);?></span></caption>
   <?php else:?>
@@ -19,11 +19,13 @@
   <?php endif;?>
   <thead>
     <tr class='a-center'>
-      <th class='w-60px'><?php echo $lang->article->id;?></th>
-      <th><?php echo $lang->article->title;?></th>
-      <th class='w-p20'><?php echo $lang->article->category;?></th>
-      <th class='w-160px'><?php echo $lang->article->addedDate;?></th>
-      <th class='w-60px'><?php echo $lang->article->views;?></th>
+      <?php $vars = "type=$type&categoryID=$categoryID&corderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
+      <th class='w-60px'> <?php commonModel::printOrderLink('id',        $orderBy, $vars, $lang->article->id);?></th>
+      <th>                <?php commonModel::printOrderLink('title',     $orderBy, $vars, $lang->article->title);?></th>
+      <th class='w-p20'>  <?php commonModel::printOrderLink('category',  $orderBy, $vars, $lang->article->category);?></th>
+      <th class='w-80px'> <?php commonModel::printOrderLink('status',    $orderBy, $vars, $lang->article->status);?></th>
+      <th class='w-160px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->article->addedDate);?></th>
+      <th class='w-60px'> <?php commonModel::printOrderLink('views',     $orderBy, $vars, $lang->article->views);?></th>
       <th class='w-150px'><?php echo $lang->actions;?></th>
     </tr>
   </thead>
@@ -33,6 +35,7 @@
       <td><?php echo $article->id;?></td>
       <td class='a-left'><?php echo $article->title;?></td>
       <td class='a-left'><?php foreach($article->categories as $category) echo $category->name . ' ';?></td>
+      <td><?php echo $lang->article->statusList[$article->status];?></td>
       <td><?php echo $article->addedDate;?></td>
       <td><?php echo $article->views;?></td>
       <td>
@@ -46,6 +49,6 @@
     </tr>
     <?php endforeach;?>
   </tbody>
-  <tfoot><tr><td colspan='6'><?php $pager->show();?></td></tr></tfoot>
+  <tfoot><tr><td colspan='7'><?php $pager->show();?></td></tr></tfoot>
 </table>
 <?php include '../../common/view/footer.admin.html.php';?>

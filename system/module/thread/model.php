@@ -119,10 +119,9 @@ class threadModel extends model
      */
     public function post($boardID)
     {
-        $board = $this->loadModel('tree')->getByID($boardID, 'forum');
         $now   = helper::now();
         $isAdmin     = $this->app->user->admin == 'super';
-        $canManage   = $this->canManage($board->moderators);
+        $canManage   = $this->canManage($boardID);
         $allowedTags = $this->app->user->admin == 'super' ? $this->config->allowedTags->admin : $this->config->allowTags->front;
 
         $thread = fixer::input('post')
@@ -189,8 +188,9 @@ class threadModel extends model
      */
     public function update($threadID)
     {
+        $thread      = $this->getByID($threadID);
         $isAdmin     = $this->app->user->admin == 'super';
-        $canManage   = $this->canManage($board->moderators);
+        $canManage   = $this->canManage($thread->board);
         $allowedTags = $this->app->user->admin == 'super' ? $this->config->allowedTags->admin : $this->config->allowTags->front;
 
         $thread = fixer::input('post')
@@ -269,28 +269,26 @@ class threadModel extends model
     {
         if(empty($thread->files)) return false;
 
-        echo '<ul class="article-files clearfix">';
-        echo '<li class="article-files-heading">' . $this->lang->thread->file . '</li>'; 
         $imagesHtml = '';
-        $filesHtml = '';
+        $filesHtml  = '';
 
         foreach($thread->files as $file)
         {
             if($file->isImage)
             {
-                $imagesHtml .= '<li class="file-image file-' . $file->extension . '">' . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank'");
-                if($canManage) $imagesHtml .= '<span class="file-actions">' . html::a(helper::createLink('thread', 'deleteFile', "threadID=$reply->thread&fileID=$file->id"), '<i class="icon-trash"></i>', "class='deleter'") . '</span>';
+                $imagesHtml .= "<li class='file-image file-" . $file->extension . "'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank'");
+                if($canManage) $imagesHtml .= "<span class='file-actions'>" . html::a(helper::createLink('thread', 'deleteFile', "threadID=$reply->thread&fileID=$file->id"), "<i class='icon-trash'></i>", "class='deleter'") . '</span>';
                 $imagesHtml .= '</li>';
             }
             else
             {
                 $file->title = $file->title . ".$file->extension";
-                $filesHtml .= '<li class="file file-' . '$file->extension' . '">' . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'");
-                if($canManage) $filesHtml .= '<span class="file-actions">' . html::a(helper::createLink('thread', 'deleteFile', "threadID=$reply->thread&fileID=$file->id"), '<i class="icon-trash"></i>', "class='deleter'") . '</span>';
+                $filesHtml .= "<li class='file file-" . $file->extension . "'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'");
+                if($canManage) $filesHtml .= "<span class='file-actions'>" . html::a(helper::createLink('thread', 'deleteFile', "threadID=$reply->thread&fileID=$file->id"), "<i class='icon-trash'></i>", "class='deleter'") . '</span>';
                 $filesHtml .= '</li>';
             }
         }
-        echo $imagesHtml . $filesHtml . '</ul>';
+        echo "<ul class='article-files clearfix'><li class='article-files-heading'>". $this->lang->thread->file . '</li>' . $imagesHtml . $filesHtml . '</ul>';
     }
 
     /**
@@ -355,43 +353,24 @@ class threadModel extends model
     }
 
     /**
-     * Can the user edit a thread or not.
+     * Judge the user can manage current board nor not.
      * 
-     * @param boject $board    the board.
-     * @param string $author   the author of the thread
-     * @access public
-     * @return void
-     */
-    public function canEdit($board, $author)
-    {
-        /* If the board is readonly, only managers can edit it. */
-        if(isset($board->readonly) && $board->readonly) return $this->canManage($board);
-
-        /* If the board is an open one, the author or managers can edit it. */
-        $user = $this->app->user->account;
-        if($user == $author) return true;
-
-        if(isset($board->moderators) && $this->canManage($board->moderators)) return true;
-
-        return $this->canManage($board);
-    }
-
-    /**
-     * Judge the user can manage current thread nor not.
-     * 
-     * @param  string $moderators 
+     * @param  int    $boardID 
+     * @param  string $users 
      * @access public
      * @return array
      */
-    public function canManage($moderators)
+    public function canManage($boardID, $users = '')
     {
         /* First check the user is admin or not. */
         if($this->app->user->admin == 'super') return true; 
 
         /* Then check the user is a moderator or not. */
         $user = ",{$this->app->user->account},";
-        $moderators = ',' . str_replace(' ', '', $moderators) . ',';
-        if(strpos($moderators, $user) !== false) return true;
+        $board = $this->loadModel('tree')->getByID($boardID);
+        $moderators = ',' . str_replace(' ', '', $board->moderators) . ',';
+        $users = $moderators . str_replace(' ', '', $users) . ',';
+        if(strpos($users, $user) !== false) return true;
 
         return false;
     }
@@ -399,13 +378,14 @@ class threadModel extends model
     /**
      * Set editor tools for current user. 
      * 
-     * @param  string    $moderators 
+     * @param  int    $boardID 
+     * @param  string $page 
      * @access public
      * @return void
      */
-    public function setEditor($moderators, $page)
+    public function setEditor($boardID, $page)
     {
-        if($this->canManage($moderators))
+        if($this->canManage($boardID))
         {
             $this->config->thread->editor->{$page}['tools'] = 'fullTools';
         }

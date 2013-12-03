@@ -20,16 +20,16 @@
       <tfoot>
         <tr> 
           <td class='a-right' colspan="2" id='manageBox'>
-            <div class='f-left'><?php $this->thread->printFiles($thread, $this->thread->canManage($board->moderators));?></div>
+            <div class='f-left'><?php $this->thread->printFiles($thread, $this->thread->canManage($board->id));?></div>
             <div id='manageMenu'>
               <?php 
               if($thread->editor) printf($lang->thread->lblEdited, $thread->editor, $thread->editedDate);
               if($this->app->user->account != 'guest')
               {
                   echo html::a('#reply', $lang->reply->common);
-                  if($this->thread->canEdit($board->moderators, $thread->author)) echo html::a(inlink('edit', "threadID=$thread->id"), $lang->edit);
+                  if($this->thread->canManage($board->id, $thread->author)) echo html::a(inlink('edit', "threadID=$thread->id"), $lang->edit);
 
-                  if($this->thread->canManage($board->moderators))
+                  if($this->thread->canManage($board->id))
                   {
                       echo $lang->thread->sticks[$thread->stick] . ' ';
                       foreach($lang->thread->sticks as $stick => $label)

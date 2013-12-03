@@ -70,8 +70,6 @@ $lang->block->typeGroups['about']   = 'system';
 $lang->block->typeGroups['links']   = 'system';
 $lang->block->typeGroups['slide']   = 'system';
 
-
-
 $lang->block->category = new stdclass();
 $lang->block->category->showChildren = '显示子分类';
 
@@ -99,6 +97,8 @@ $lang->block->pages['book_index']     = '手册中心';
 $lang->block->pages['book_browse']    = '手册首页';
 $lang->block->pages['book_read']      = '手册章节';
 
+$lang->block->pages['message_index']  = '留言';
+
 /* page layout list. */
 $lang->block->regions = new stdclass();
 $lang->block->regions->all['header'] = '头部';
@@ -116,3 +116,5 @@ $lang->block->regions->article_view['side']   = '侧边';
 $lang->block->regions->product_browse['side'] = '侧边';
 
 $lang->block->regions->product_view['side']   = '侧边';
+
+$lang->block->regions->message_index['side']  = '侧边';

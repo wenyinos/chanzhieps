@@ -28,6 +28,30 @@ class replyModel extends model
     }
 
     /**
+     * Get position of reply.
+     * 
+     * @param  int    $replyID 
+     * @access public
+     * @return string
+     */
+    public function getPosition($replyID)
+    {
+        $reply = $this->getByID($replyID);
+        if(!$reply) return '';
+
+        $replies = $this->dao->select('COUNT(id) as id')->from(TABLE_REPLY)
+            ->where('thread')->eq($reply->thread)
+            ->andWhere('id')->lt($replyID)
+            ->andWhere('hidden')->eq('0')
+            ->fetch('id');
+
+        $pageID   = (int)($replies / 10);
+        $position = $pageID ? "pageID=" . ($pageID + 1) . "&replyID=$replyID": "replyID=$replyID";
+
+        return $position;
+    }
+
+    /**
      * Get replies of a thread.
      * 
      * @param  int    $thread 
@@ -81,7 +105,7 @@ class replyModel extends model
      */
     public function post($threadID)
     {
-        $this->app->loadConfig('thread');
+        $thread = $this->loadModel('thread')->getByID($threadID);
         $reply = fixer::input('post')
             ->setForce('author', $this->app->user->account)
             ->setForce('addedDate', helper::now())
@@ -110,7 +134,7 @@ class replyModel extends model
             $this->loadModel('file')->saveUpload('reply', $replyID);   // Save file.
 
             /* Update thread stats. */
-            $this->loadModel('thread')->updateStats($threadID);
+            $this->thread->updateStats($threadID);
 
             /* Update board stats. */
             $this->loadModel('forum')->updateBoardStats($thread->board);
@@ -206,29 +230,27 @@ class replyModel extends model
     {
         if(empty($reply->files)) return false;
 
-        echo '<ul class="article-files clearfix">';
-        echo '<li class="article-files-heading">' . $this->lang->reply->files . '</li>'; 
         $imagesHtml = '';
-        $filesHtml = '';
+        $filesHtml  = '';
 
         foreach($reply->files as $file)
         {
             $file->title = $file->title . ".$file->extension";
             if($file->isImage)
             {
-                $imagesHtml .= '<li class="file-image file-' . $file->extension . '">' . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank'");
-                if($canManage) $imagesHtml .= '<span class="file-actions">' . html::a(helper::createLink('thread', 'deleteFile', "threadID=$reply->thread&fileID=$file->id"), '<i class="icon-trash"></i>', "class='deleter'") . '</span>';
+                $imagesHtml .= "<li class='file-image file-" . $file->extension . "'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank'");
+                if($canManage) $imagesHtml .= "<span class='file-actions'>" . html::a(helper::createLink('thread', 'deleteFile', "threadID=$reply->thread&fileID=$file->id"), "<i class='icon-trash'></i>", "class='deleter'") . '</span>';
                 $imagesHtml .= '</li>';
             }
             else
             {
                 $file->title = $file->title . ".$file->extension";
-                $filesHtml .= '<li class="file file-' . '$file->extension' . '">' . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'");
-                if($canManage) $filesHtml .= '<span class="file-actions">' . html::a(helper::createLink('thread', 'deleteFile', "threadID=$reply->thread&fileID=$file->id"), '<i class="icon-trash"></i>', "class='deleter'") . '</span>';
+                $filesHtml .= "<li class='file file-" . $file->extension . "'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'");
+                if($canManage) $filesHtml .= "<span class='file-actions'>" . html::a(helper::createLink('thread', 'deleteFile', "threadID=$reply->thread&fileID=$file->id"), "<i class='icon-trash'></i>", "class='deleter'") . '</span>';
                 $filesHtml .= '</li>';
             }
         }
-        echo $imagesHtml . $filesHtml . '</ul>';
+        echo "<ul class='article-files clearfix'><li class='article-files-heading'>". $this->lang->reply->file . '</li>' . $imagesHtml . $filesHtml . '</ul>';
     }
 
     /**

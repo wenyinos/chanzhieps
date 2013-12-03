@@ -63,6 +63,10 @@ class articleModel extends model
         $articles = $this->dao->select('t1.*, t2.category')->from(TABLE_ARTICLE)->alias('t1')
             ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
             ->where('t1.type')->eq($type)
+            ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')
+            ->andWhere('t1.addedDate')->le(helper::now())
+            ->andWhere('t1.status')->eq('normal')
+            ->fi()
             ->beginIf($categories)->andWhere('t2.category')->in($categories)->fi()
             ->groupBy('t2.id')
             ->orderBy($orderBy)
@@ -112,9 +116,13 @@ class articleModel extends model
     public function getPairs($categories, $orderBy, $pager = null)
     {
         return $this->dao->select('t1.id, t1.title, t1.alias')->from(TABLE_ARTICLE)->alias('t1')
-            ->leftJoin(TABLE_RELATION)->alias('t2')
-            ->on('t1.id = t2.id')
-            ->beginIF($categories)->where('t2.category')->in($categories)->fi()
+            ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
+            ->where('1=1')
+            ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')
+            ->andWhere('t1.addedDate')->le(helper::now())
+            ->andWhere('t1.status')->eq('normal')
+            ->fi()
+            ->beginIF($categories)->andWhere('t2.category')->in($categories)->fi()
             ->orderBy($orderBy)
             ->page($pager, false)
             ->fetchAll('id');
@@ -163,6 +171,7 @@ class articleModel extends model
        $prev = $this->dao->select('t1.id, title, alias')->from(TABLE_ARTICLE)->alias('t1')
            ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
            ->where('t2.category')->eq($category)
+           ->andWhere('t1.status')->eq('normal')
            ->andWhere('t2.id')->lt($current)
            ->orderBy('t2.id_desc')
            ->limit(1)
@@ -171,6 +180,8 @@ class articleModel extends model
        $next = $this->dao->select('t1.id, title, alias')->from(TABLE_ARTICLE)->alias('t1')
            ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
            ->where('t2.category')->eq($category)
+           ->andWhere('t1.addedDate')->le(helper::now())
+           ->andWhere('t1.status')->eq('normal')
            ->andWhere('t2.id')->gt($current)
            ->orderBy('t2.id')
            ->limit(1)
@@ -191,7 +202,6 @@ class articleModel extends model
         $now = helper::now();
         $article = fixer::input('post')
             ->join('categories', ',')
-            ->add('addedDate', $now)
             ->add('editedDate', $now)
             ->add('type', $type)
             ->stripTags('content', $this->config->allowedTags->admin)
@@ -348,21 +358,20 @@ class articleModel extends model
     {
         if(empty($files)) return false;
 
-        echo '<ul class="article-files clearfix">';
         $imagesHtml = '';
-        $filesHtml = '';
+        $filesHtml  = '';
         foreach($files as $file)
         {
             $file->title = $file->title . ".$file->extension";
             if($file->isImage)
             {
-                $imagesHtml .= '<li class="file-image file-' . $file->extension . '">' . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank'") . '</li>';
+                $imagesHtml .= "<li class='file-image file-" . $file->extension . "'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank'") . '</li>';
             }
             else
             {
-                $filesHtml .= '<li class="file file-' . '$file->extension' . '">' . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'") . '</li>';
+                $filesHtml .= "<li class='file file-" . $file->extension . "'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'") . '</li>';
             }
         }
-        echo $imagesHtml . $filesHtml . '</ul>';
+        echo "<ul class='article-files clearfix'>" . $imagesHtml . $filesHtml . '</ul>';
     }
 }

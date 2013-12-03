@@ -121,7 +121,7 @@ class file extends control
         if(!$this->file->checkSavePath()) $this->send(array('result' => 'fail', 'message' => $this->lang->file->errorUnwritable));
         $files = $this->file->getUpload('files');
         if($files) $this->file->saveUpload($objectType, $objectID);
-        $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
     }
 
     /**

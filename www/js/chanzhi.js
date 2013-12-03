@@ -27,7 +27,7 @@ $.extend(
                     var submitButton = $(formID).find(':input[type=submit]');
                     if(response.message && response.message.length)
                     {
-                        submitButton.popover({title:response.message, placement:'right', delay: { show: 500, hide: 500 }}).popover('show');
+                        submitButton.popover({title:response.message, placement:'right', delay: { show: 600, hide: 600 }}).popover('show');
                         function distroy(){submitButton.popover('hide')}
                         setTimeout(distroy,1000);
                     }
@@ -249,7 +249,7 @@ $.extend(
                 {
                     if(data.result == 'success')
                     {
-                        if(deleter.parents('#ajaxModal').size()) return $.reloadAjaxModal();
+                        if(deleter.parents('#ajaxModal').size()) return $.reloadAjaxModal(1500);
                         if(data.locate) return location.href = data.locate;
                         return location.reload();
                     }
@@ -304,12 +304,14 @@ $.extend(
     /**
      * Reload ajax modal.
      *
+     * @param int duration 
      * @access public
      * @return void
      */
-    reloadAjaxModal: function()
+    reloadAjaxModal: function(duration)
     {
-        $('#ajaxModal').load($('#ajaxModal').attr('rel'));
+       if(typeof(duration) == 'undefined') duration = 1000;
+       setTimeout(function(){$('#ajaxModal').load($('#ajaxModal').attr('rel'))}, duration);
     }
 });
 
