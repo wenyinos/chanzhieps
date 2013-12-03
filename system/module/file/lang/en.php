@@ -21,6 +21,7 @@ $lang->file->allow      = 'Allow';
 $lang->file->toggle     = 'Toggle';
 $lang->file->label      = 'Label';
 $lang->file->lblInfo    = '<i>(Type:%s, Size:%s, Added at: %s，Downloads: %s)</i>';
+$lang->file->limit      = "(<span class='text-danger'>Less than 2M</span>)";
 
 $lang->file->id        = 'ID';
 $lang->file->title     = 'Title';
