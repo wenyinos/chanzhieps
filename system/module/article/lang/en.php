@@ -57,4 +57,4 @@ $lang->article->prev      = 'Previous';
 $lang->article->next      = 'Next';
 $lang->article->none      = 'None';
 $lang->article->directory = 'Back';
-$lang->article->back2Top = 'Back to top';
+$lang->article->back2Top  = 'Back to top';
