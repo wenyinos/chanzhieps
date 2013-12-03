@@ -36,7 +36,9 @@ class replyModel extends model
      */
     public function getPosition($replyID)
     {
-        $reply   = $this->getByID($replyID);
+        $reply = $this->getByID($replyID);
+        if(!$reply) return '';
+
         $replies = $this->dao->select('COUNT(id) as id')->from(TABLE_REPLY)
             ->where('thread')->eq($reply->thread)
             ->andWhere('id')->lt($replyID)

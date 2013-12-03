@@ -30,12 +30,8 @@
             <td class='w-70px'><?php echo $childBoard->posts;?></td>
             <td class='w-150px a-left'>
               <?php
-              $recTotal   = $childBoard->lastPostReplies;
-              $recPerPage = 20;
-              $pageID     = (int)($recTotal / $recPerPage) + 1;
-              $threadLink = $this->createLink('thread', 'view', "threadID=$childBoard->postID&recTotal=$recTotal&recPerPage=$recPerPage&pageID=$pageID") . "#$childBoard->replyID";
-
-              echo substr($childBoard->postedDate, 5, -3) . ' ' . $childBoard->postedBy;
+              echo substr($childBoard->postedDate, 5, -3) . ' '; 
+              echo html::a($this->createLink('thread', 'locate', "threadID={$childBoard->postID}&replyID={$childBoard->replyID}"), $childBoard->postedBy);;
               ?>
             </td>
           </tr>  

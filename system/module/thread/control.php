@@ -123,6 +123,21 @@ class thread extends control
     }
 
     /**
+     * Locate to the thread and reply.
+     * 
+     * @param  int    $threadID 
+     * @param  int    $replyID 
+     * @access public
+     * @return void
+     */
+    public function locate($threadID, $replyID = 0)
+    {
+        $position = $replyID ? $this->loadModel('reply')->getPosition($replyID) : ''; 
+        $location = $this->createLink('thread', 'view', "threadID=$threadID", $position);
+        header("location:$location");
+    }
+
+    /**
      * Delete a thread.
      * 
      * @param  int      $threadID 

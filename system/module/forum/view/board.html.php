@@ -37,8 +37,16 @@
           <td><?php echo substr($thread->addedDate, 5, -3);?></td>
           <td><?php echo $thread->views;?></td>
           <td><?php echo $thread->replies;?></td>
-          <td class='a-left'><?php if($thread->replies) echo substr($thread->repliedDate, 5, -3) . ' ' . $thread->repliedBy;?></td>  
-        </tr>  
+          <td class='a-left'>
+            <?php 
+            if($thread->replies)
+            {
+                echo substr($thread->repliedDate, 5, -3) . ' ';
+                echo html::a($this->createLink('thread', 'locate', "threadID={$thread->id}&replyID={$thread->replyID}"), $thread->repliedBy);;
+            }
+            ?>
+          </td>  
+        </tr>
         <?php unset($threads[$thread->id]);?>
         <?php endforeach;?>
 
@@ -50,7 +58,15 @@
           <td class='w-100px'><?php echo substr($thread->addedDate, 5, -3);?></td>
           <td class='w-30px'><?php echo $thread->views;?></td>
           <td class='w-30px'><?php echo $thread->replies;?></td>
-          <td class='a-left w-150px'><?php if($thread->replies) echo substr($thread->repliedDate, 5, -3) . ' ' . $thread->repliedBy;?></td>  
+          <td class='a-left w-150px'>
+            <?php 
+            if($thread->replies)
+            {
+                echo substr($thread->repliedDate, 5, -3) . ' ';
+                echo html::a($this->createLink('thread', 'locate', "threadID={$thread->id}&replyID={$thread->replyID}"), $thread->repliedBy);;
+            }
+            ?>
+          </td>  
         </tr>  
         <?php endforeach;?>
       </tbody>
