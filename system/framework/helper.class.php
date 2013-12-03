@@ -493,7 +493,7 @@ function isLocalIP()
  * 
  * @param  bool     $full 
  * @access public
- * @return void
+ * @return string
  */
 function getWebRoot($full = false)
 {
