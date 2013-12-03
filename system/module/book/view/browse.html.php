@@ -1,5 +1,5 @@
 <?php include '../../common/view/header.html.php'; ?>
-<?php $common->printPositionBar($category);?>
+<?php $common->printPositionBar($book);?>
 <div class='row'>
   <div class='col-md-3' id='leftmenu'>
     <div class="list-group">
@@ -8,7 +8,7 @@
       foreach($books as $bookValue)
       {
           $class = 'list-group-item' . (($bookValue->title == $book->title) ? ' active' : '');
-          echo html::a(inlink('browse', "bookID=$bookValue->id"), '<i class="icon-book icon-large"></i>' . $bookValue->title . '<i class="icon-chevron-right"></i>', "class='$class'");
+          echo html::a(inlink('browse', "bookID=$bookValue->id", "book=$bookValue->alias"), '<i class="icon-book icon-large"></i>' . $bookValue->title . '<i class="icon-chevron-right"></i>', "class='$class'");
       }
       ?>
     </div>
@@ -18,7 +18,7 @@
     <div class='box radius'>  
       <h4 class='title'><?php echo $book->title;?></h4>
       <dl>
-      <?php echo $this->book->getBookCatalogue($book->id) ?>
+      <?php echo $catalogue;?>
       </dl>
     </div>
   </div>
