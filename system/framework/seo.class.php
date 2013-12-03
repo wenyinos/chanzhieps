@@ -261,9 +261,9 @@ class uri
         global $config;
 
         $link = '/thread/' . array_shift($params);
-        if($alias['page']) $link .= '/p' . $alias['page'];
+        if(isset($alias['pageID'])) $link .= '/p' . $alias['pageID'];
 
-        return  $link . '.' . $config->default->view;
+        return $link . '.' . $config->default->view;
     }
 
     /**
