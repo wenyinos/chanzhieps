@@ -119,7 +119,7 @@ class threadModel extends model
      */
     public function post($boardID)
     {
-        $board = $this->loadModel('forum')->getBoardByID($boardID);
+        $board = $this->loadModel('tree')->getByID($boardID, 'forum');
         $now   = helper::now();
         $isAdmin     = $this->app->user->admin == 'super';
         $canManage   = $this->canManage($board->moderators);
@@ -157,7 +157,7 @@ class threadModel extends model
             $this->loadModel('file')->saveUpload('thread', $threadID);
 
             /* Update board stats. */
-            $this->forum->updateBoardStats($boardID);
+            $this->loadModel('forum')->updateBoardStats($boardID);
 
             return $threadID;
         }

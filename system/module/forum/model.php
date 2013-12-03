@@ -12,18 +12,6 @@
 class forumModel extends model
 {
     /**
-     * Get board.
-     * 
-     * @param  int    $boardID 
-     * @access public
-     * @return object | false
-     */
-    public function getBoardByID($boardID)
-    {
-        return $this->dao->select('*')->from(TABLE_CATEGORY)->where('id')->eq($boardID)->fetch();
-    }
-
-    /**
      * Get boards.
      * 
      * @access public
@@ -74,17 +62,18 @@ class forumModel extends model
             ->fetch();
 
         /* Get postID and replyID. */
-        $post = $this->dao->select('id as postID, replyID')->from(TABLE_THREAD)
+        $post = $this->dao->select('id as postID, replyID, repliedDate as postedDate')->from(TABLE_THREAD)
             ->where('hidden')->eq('0')
             ->orderBy('repliedDate desc')
             ->limit(1)
             ->fetch();
 
         $data = new stdclass();
-        $data->threads = $stats->threads;
-        $data->posts   = $stats->threads + $stats->replies;
-        $data->postID  = $post->postID;
-        $data->replyID = $post->replyID;
+        $data->threads    = $stats->threads;
+        $data->posts      = $stats->threads + $stats->replies;
+        $data->postID     = $post->postID;
+        $data->replyID    = $post->replyID;
+        $data->postedDate = $post->postedDate;
 
         $this->dao->update(TABLE_CATEGORY)->data($data)->where('id')->eq($boardID)->exec();
     }

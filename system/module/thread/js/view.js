@@ -1,6 +1,6 @@
 $(document).ready(function()
 {
-    $.setAjaxForm('#reply');   
+    $.setAjaxForm('#reply');
     $.setAjaxJSONER('.jsoner')
     $('.nav-system-forum').addClass('active');
 });
