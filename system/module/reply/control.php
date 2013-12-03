@@ -24,13 +24,11 @@ class reply extends control
 
         if($_POST)
         {
-            $replyID = $this->reply->post($threadID);
-            $thread  = $this->loadModel('thread')->getByID($threadID);
-            $pageID  = (int)(($thread->replies - 1) / 10);
-            $page    = $pageID ? "pageID=" . ($pageID + 1) : '';
+            $replyID  = $this->reply->post($threadID);
+            $position = $this->reply->getPosition($replyID);
 
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'locate' => $this->createLink('thread', 'view', "threadID=$threadID", $page)));
+            $this->send(array('result' => 'success', 'locate' => $this->createLink('thread', 'view', "threadID=$threadID", $position)));
         }
     }
 

@@ -28,6 +28,28 @@ class replyModel extends model
     }
 
     /**
+     * Get position of reply.
+     * 
+     * @param  int    $replyID 
+     * @access public
+     * @return string
+     */
+    public function getPosition($replyID)
+    {
+        $reply   = $this->getByID($replyID);
+        $replies = $this->dao->select('COUNT(id) as id')->from(TABLE_REPLY)
+            ->where('thread')->eq($reply->thread)
+            ->andWhere('id')->lt($replyID)
+            ->andWhere('hidden')->eq('0')
+            ->fetch('id');
+
+        $pageID   = (int)($replies / 10);
+        $position = $pageID ? "pageID=" . ($pageID + 1) . "&replyID=$replyID": "replyID=$replyID";
+
+        return $position;
+    }
+
+    /**
      * Get replies of a thread.
      * 
      * @param  int    $thread 
@@ -81,7 +103,7 @@ class replyModel extends model
      */
     public function post($threadID)
     {
-        $this->app->loadConfig('thread');
+        $thread = $this->loadModel('thread')->getByID($threadID);
         $reply = fixer::input('post')
             ->setForce('author', $this->app->user->account)
             ->setForce('addedDate', helper::now())
@@ -110,7 +132,7 @@ class replyModel extends model
             $this->loadModel('file')->saveUpload('reply', $replyID);   // Save file.
 
             /* Update thread stats. */
-            $this->loadModel('thread')->updateStats($threadID);
+            $this->thread->updateStats($threadID);
 
             /* Update board stats. */
             $this->loadModel('forum')->updateBoardStats($thread->board);
