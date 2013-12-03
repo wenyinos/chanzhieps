@@ -46,10 +46,8 @@ class reply extends control
         $reply = $this->reply->getByID($replyID);
         if(!$reply) die(js::locate('back'));
 
-        $moderators = $this->loadModel('thread')->getModerators($reply->thread);
-        if(!$this->thread->canEdit($moderators, $reply->author)) die(js::locate('back'));
-
         $thread = $this->thread->getByID($reply->thread);
+        if(!$this->thread->canManage($thread->board, $reply->author)) die(js::locate('back'));
         
         if($_POST)
         {
@@ -79,8 +77,8 @@ class reply extends control
         $reply = $this->reply->getByID($replyID);
         if(!$reply) $this->send(array('result' => 'fail', 'message' => 'Not found'));
 
-        $moderators = $this->loadModel('thread')->getModerators($reply->thread);
-        if(!$this->thread->canManage($moderators)) $this->send(array('result' => 'fail'));
+        $thread = $this->thread->getByID($reply->thread);
+        if(!$this->thread->canManage($thread->board)) $this->send(array('result' => 'fail'));
 
         $locate = helper::createLink('thread', 'view', "threadID=$reply->thread");
         if($this->reply->delete($replyID)) $this->send(array('result' => 'success', 'locate' => $locate));
