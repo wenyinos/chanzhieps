@@ -69,7 +69,15 @@ class commonModel extends model
     {
         $sessionName = $this->config->sessionVar;
         session_name($sessionName);
-        if(!isset($_SESSION)) session_start();
+        session_start();
+
+        /* Check the user's IP exclude guest. */
+        if(isset($_SESSION['user']) and $this->session->user->account != 'guest' and $this->session->user->ip != $this->server->remote_addr)
+        {
+            session_destroy();
+            $referer  = helper::safe64Encode($this->app->getURI(true));
+            die(js::locate(helper::createLink('user', 'login', "referer=$referer")));
+        }
     }
 
     /**
@@ -108,9 +116,6 @@ class commonModel extends model
     public static function hasPriv($module, $method)
     {
         global $app, $config;
-
-        /* Check the user's IP exclude guest. */
-        if($app->user->account != 'guest' and $app->user->ip != $_SERVER['REMOTE_ADDR']) return false;
 
         if(RUN_MODE == 'admin')
         {
