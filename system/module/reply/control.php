@@ -25,9 +25,11 @@ class reply extends control
         if($_POST)
         {
             $replyID = $this->reply->post($threadID);
+            $thread  = $this->loadModel('thread')->getByID($threadID);
+            $pageID  = (int)(($thread->replies - 1) / 10) + 1;
 
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'locate' => $this->createLink('thread', 'view', "threadID=$threadID")));
+            $this->send(array('result' => 'success', 'locate' => $this->createLink('thread', 'view', "threadID=$threadID", "page=$pageID")));
         }
     }
 
@@ -77,7 +79,7 @@ class reply extends control
         $reply = $this->reply->getByID($replyID);
         if(!$reply) $this->send(array('result' => 'fail', 'message' => 'Not found'));
 
-        $thread = $this->thread->getByID($reply->thread);
+        $thread = $this->loadModel('thread')->getByID($reply->thread);
         if(!$this->thread->canManage($thread->board)) $this->send(array('result' => 'fail'));
 
         $locate = helper::createLink('thread', 'view', "threadID=$reply->thread");

@@ -259,7 +259,11 @@ class uri
     public static function createThreadView($params, $alias)
     {
         global $config;
-        return $link = '/thread/' . array_shift($params) . '.' . $config->default->view;
+
+        $link = '/thread/' . array_shift($params);
+        if($alias['page']) $link .= '/p' . $alias['page'];
+
+        return  $link . '.' . $config->default->view;
     }
 
     /**
