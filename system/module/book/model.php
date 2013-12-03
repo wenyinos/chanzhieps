@@ -53,7 +53,7 @@ class bookModel extends model
     }
 
     /**
-     * Get children categories of one category.
+     * Get children catalogues of one catalogue.
      * 
      * @param  int    $bookID 
      * @access public
@@ -87,7 +87,7 @@ class bookModel extends model
         /* Cycle them, build the select control.  */
         foreach($books as $book)
         {
-            $origins = explode(',', $book->path);
+            $origins   = explode(',', $book->path);
             $bookTitle = '/';
             foreach($origins as $origin)
             {
@@ -141,18 +141,18 @@ class bookModel extends model
     }
 
     /**
-     * Show book catalogue.
+     * Show book catalogue in browse.
      * 
      * @param  int    $bookID 
      * @access public
      * @return void
      */
-    public function getBookCatalogue($bookID = 0)
+    public function getFrontCatalogue($bookID = 0)
     {
         if(!isset($this->catalogue)) $this->catalogue = '';
-        $inAdmin = RUN_MODE == 'admin';
         
-        $book = $this->getByID($bookID);
+        $book     = $this->getByID($bookID);
+        $parent   = $this->getByID($book->parent);
         $children = $this->getChildren(isset($book->id) ? $book->id : 0);
         if(!empty($book))
         {
@@ -160,17 +160,9 @@ class bookModel extends model
             $order = $this->getChapterNumber($book->path);
             $this->lastChapter = $order;
 
-            $linkOnTitle  = $inAdmin ? helper::createLink('book', 'admin', "bookID=$book->id") : helper::createLink('book', 'browse', "bookID=$book->id", "book=$book->alias");
-            $editButton   = $inAdmin ? html::a(helper::createLink('book', 'edit',   "bookID=$book->id"), $this->lang->edit, "data-toggle='modal' data-width='1000px'") : '';
-            $deleteButton = ($inAdmin && empty($children)) ? html::a(helper::createLink('book', 'delete', "bookID=$book->id"), $this->lang->delete, "class='deleter'") : '';
-            $create       = $inAdmin ? html::a(helper::createLink('book', 'create', "bookID=$book->id"), $this->lang->book->createCatalogue) : '';
-            $sort         = $inAdmin ? "<i class='icon-arrow-up'></i><i class='icon-arrow-down'></i>" : '';
+            $linkOnTitle = $book->type == 'chapter' ? helper::createLink('book', 'browse', "bookID=$book->id", "book=$book->alias") : helper::createLink('book', 'read', "articleID=$book->id", "article=$book->alias");
 
-            if($book->type == 'book' && $inAdmin)
-            {
-                $this->catalogue .= "<dt class='book'><strong>" . html::a($linkOnTitle, $book->title) . "</strong>" . $editButton . $deleteButton . $create . "</dt>";
-            }
-            elseif($book->type == 'chapter')
+            if($book->type == 'chapter')
             {
                 $this->catalogue .= "<dd class='catalogue chapter'><strong>" . $order . '&nbsp;' . html::a($linkOnTitle, $book->title) . "</strong>" . $editButton . $deleteButton . $create . $sort . '</dd>';
             }
@@ -185,7 +177,59 @@ class bookModel extends model
             if($book) $this->catalogue .= '<dl>';
             foreach($children as $child)
             {
-                $this->getBookCatalogue($child->id);
+                $this->getFrontCatalogue($child->id);
+            }
+            if($book) $this->catalogue .= '</dl>';
+        }
+        return $this->catalogue;
+    }
+
+    /**
+     * Show book catalogue in admin.
+     * 
+     * @param  int    $bookID 
+     * @access public
+     * @return void
+     */
+    public function getAdminCatalogue($bookID = 0)
+    {
+        if(!isset($this->catalogue)) $this->catalogue = '';
+        
+        $book = $this->getByID($bookID);
+        $children = $this->getChildren(isset($book->id) ? $book->id : 0);
+        if(!empty($book))
+        {
+            /* Add self to tree. */
+            $order = $this->getChapterNumber($book->path);
+            $this->lastChapter = $order;
+
+            $title        = html::a(helper::createLink('book', 'admin', "bookID=$book->id"), $book->title);
+            $editButton   = html::a(helper::createLink('book', 'edit', "bookID=$book->id"), $this->lang->edit, "data-toggle='modal' data-width='1000px'");
+            $deleteButton = empty($children) ? html::a(helper::createLink('book', 'delete', "bookID=$book->id"), $this->lang->delete, "class='deleter'") : '';
+            $create       = html::a(helper::createLink('book', 'create', "bookID=$book->id"), $this->lang->book->create);
+            $sortup       = html::a(helper::createLink('book', 'up', "bookID=$book->id"), "<i class='icon-arrow-up'></i>", "class='sort'");
+            $sortdown     = html::a(helper::createLink('book', 'down', "bookID=$book->id"), "<i class='icon-arrow-down'></i>", "class='sort'");
+
+            if($book->type == 'book')
+            {
+                $this->catalogue .= "<dt class='book'><strong>" . $title . '</strong>' . $editButton . $deleteButton . $create . '</dt>';
+            }
+            elseif($book->type == 'chapter')
+            {
+                $this->catalogue .= "<dd class='catalogue chapter'><strong>" . $order . '&nbsp;' . $title . '</strong>' . $editButton . $deleteButton . $create . $sortup . $sortdown . '</dd>';
+            }
+            elseif($book->type == 'article')
+            {
+                $this->catalogue .= "<dd class='catalogue article'><strong>" . $order . '</strong>&nbsp;' . $title . $editButton . $deleteButton . $sortup . $sortdown . '</dd>';
+            }
+        }
+
+        if(!empty($children)) 
+        {
+            if($book) $this->catalogue .= '<dl>';
+            foreach($children as $child)
+            {
+                $this->getAdminCatalogue($child->id);
             }
             if($book) $this->catalogue .= '</dl>';
         }
@@ -256,8 +300,10 @@ class bookModel extends model
 
             /* Init the catalogue object. */
             $catalogue = new stdclass();
-            $catalogue->parent   = $parent ? $parent->id : 0;
-            $catalogue->grade    = $parent ? $parent->grade + 1 : 1;
+            $catalogue->parent     = $parent ? $parent->id : 0;
+            $catalogue->grade      = $parent ? $parent->grade + 1 : 1;
+            $catalogue->addedDate  = $now;
+            $catalogue->editedDate = $now;
 
             $catalogues = $this->post->title;
             $i = 1;
@@ -266,17 +312,19 @@ class bookModel extends model
                 if(empty($catalogueTitle)) continue;
 
                 /* First, save the child without path field. */
-                $catalogue->title = $catalogueTitle;
-                $catalogue->type  = $this->post->type[$key];
-                $catalogue->order = $this->post->order[$key];
+                $now = helper::now();
+                $catalogue->title      = $catalogueTitle;
+                $catalogue->type       = $this->post->type[$key];
+                $catalogue->alias      = $this->post->alias[$key];
+                $catalogue->keywords   = $this->post->keywords[$key];
+                $catalogue->order      = $this->post->order[$key];
                 $mode = $this->post->mode[$key];
 
-                /* Add id to check alias. */
-                $catalogue->id = $mode == 'new' ?  0: $catalogue->id = $key;
+                $catalogue->alias    = seo::unify($book->alias, '-');
+                $catalogue->keywords = seo::unify($book->keywords, ',');
 
                 if($mode == 'new')
                 {
-                    unset($category->id);
                     $this->dao->insert(TABLE_BOOK)->data($catalogue)->exec();
 
                     /* After saving, update it's path. */
@@ -291,15 +339,19 @@ class bookModel extends model
                 }
                 else
                 {
+                    unset($catalogue->addedDate);
                     $catalogueID = $key;
+
                     $this->dao->update(TABLE_BOOK)
-                        ->set('title')->eq($catalogueTitle)
-                        ->set('type')->eq($this->post->type[$key])
-                        ->set('order')->eq($this->post->order[$key])
+                        ->data($catalogue)
+                        ->autoCheck()
                         ->where('id')->eq($catalogueID)
                         ->exec();
                 }
             }
+
+            /* Save keywords. */
+            $this->loadModel('tag')->save($book->keywords);
 
             return $catalogueID;
         }
@@ -373,5 +425,35 @@ class bookModel extends model
 
         $this->dao->delete()->from(TABLE_BOOK)->where('id')->eq($id)->exec();
         return !dao::isError();
+    }
+
+    /**
+     * Get the prev and next ariticle.
+     * 
+     * @param  int    $current  the current article id.
+     * @param  int    $parent   the parent id.
+     * @access public
+     * @return array
+     */
+    public function getPrevAndNext($current, $parent)
+    {
+       $book = $this->getByID($current);
+       $prev = $this->dao->select('id, title, alias')->from(TABLE_BOOK)
+           ->where('parent')->eq($parent)
+           ->andWhere('type')->eq('article')
+           ->andWhere('`order`')->lt($book->order)
+           ->orderBy('`order` desc')
+           ->limit(1)
+           ->fetch();
+
+       $next = $this->dao->select('id, title, alias')->from(TABLE_BOOK)
+           ->where('parent')->eq($parent)
+           ->andWhere('type')->eq('article')
+           ->andWhere('`order`')->gt($book->order)
+           ->orderBy('`order`')
+           ->limit(1)
+           ->fetch();
+
+        return array('prev' => $prev, 'next' => $next);
     }
 }
