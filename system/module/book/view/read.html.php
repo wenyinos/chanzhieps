@@ -1,30 +1,25 @@
-<?php
-include '../../common/view/header.html.php';
-include '../../common/view/treeview.html.php';
-
-js::set('articleID', $article->id);
-?>
-<?php $common->printPositionBar($category, $article);?>
+<?php include '../../common/view/header.html.php';?>
+<?php $common->printPositionBar($article);?>
 <div class='box radius'>
   <div class='content'>
     <h1 class='a-center'><?php echo $article->title;?></h1>
     <div class='a-center mb-10px'>
       <div class='f-12px'>
       <?php
-      printf($lang->article->lblAddedDate, $article->addedDate);
-      printf($lang->article->lblAuthor,    $article->author);
-      printf($lang->article->lblViews,     $article->views);
+      printf($lang->book->lblAddedDate, $article->addedDate);
+      printf($lang->book->lblAuthor,    $article->author);
+      printf($lang->book->lblViews,     $article->views);
       ?>
       </div>
     </div>
-    <?php if($article->summary) echo "<div class='summary'><strong>{$lang->article->summary}</strong>$lang->colon$article->summary</div>";?>
+    <?php if($article->summary) echo "<div class='summary'><strong>{$lang->book->summary}</strong>$lang->colon$article->summary</div>";?>
     <div><?php echo $article->content;;?></div>
-    <?php if($article->keywords) echo "<div class='keywords'><strong>{$lang->article->keywords}</strong>$lang->colon$article->keywords</div>";?>
+    <?php if($article->keywords) echo "<div class='keywords'><strong>{$lang->book->keywords}</strong>$lang->colon$article->keywords</div>";?>
     <?php extract($prevAndNext);?>
     <div class='row f-12px mt-10px'>
-      <div class='col-md-4 a-left'> <?php $prev ? print($lang->article->prev . $lang->colon . html::a(inlink('read', "id=$prev->id&book={$type}", "category={$category->alias}&name={$prev->alias}"), $prev->title)) : print($lang->article->none);?></div>
-      <div class='col-md-4 a-center'><?php echo html::a(inlink('book', "type=$type&category={$category->id}"), $lang->article->directory);?></div>
-      <div class='col-md-4 a-right'><?php $next ? print($lang->article->next . $lang->colon . html::a(inlink('read', "id=$next->id&book={$type}", "category={$category->alias}&name={$next->alias}"), $next->title)) : print($lang->article->none);?></div>
+      <div class='col-md-4 a-left'> <?php $prev ? print($lang->book->prev . $lang->colon . html::a(inlink('read', "id=$prev->id", "category={$category->alias}&name={$prev->alias}"), $prev->title)) : print($lang->book->none);?></div>
+      <div class='col-md-4 a-center'><?php echo html::a(inlink('browse', "bookID={$parent->id}"), $lang->book->directory);?></div>
+      <div class='col-md-4 a-right'><?php $next ? print($lang->book->next . $lang->colon . html::a(inlink('read', "id=$next->id", "category={$category->alias}&name={$next->alias}"), $next->title)) : print($lang->book->none);?></div>
     </div>
   </div>
 </div>
