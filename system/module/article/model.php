@@ -63,6 +63,7 @@ class articleModel extends model
         $articles = $this->dao->select('t1.*, t2.category')->from(TABLE_ARTICLE)->alias('t1')
             ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
             ->where('t1.type')->eq($type)
+            ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')->andWhere('t1.addedDate')->le(helper::now())->fi()
             ->beginIf($categories)->andWhere('t2.category')->in($categories)->fi()
             ->groupBy('t2.id')
             ->orderBy($orderBy)
@@ -112,9 +113,10 @@ class articleModel extends model
     public function getPairs($categories, $orderBy, $pager = null)
     {
         return $this->dao->select('t1.id, t1.title, t1.alias')->from(TABLE_ARTICLE)->alias('t1')
-            ->leftJoin(TABLE_RELATION)->alias('t2')
-            ->on('t1.id = t2.id')
-            ->beginIF($categories)->where('t2.category')->in($categories)->fi()
+            ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
+            ->where('1=1')
+            ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')->andWhere('t1.addedDate')->le(helper::now())->fi()
+            ->beginIF($categories)->andWhere('t2.category')->in($categories)->fi()
             ->orderBy($orderBy)
             ->page($pager, false)
             ->fetchAll('id');
@@ -171,6 +173,7 @@ class articleModel extends model
        $next = $this->dao->select('t1.id, title, alias')->from(TABLE_ARTICLE)->alias('t1')
            ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
            ->where('t2.category')->eq($category)
+           ->andWhere('t1.addedDate')->le(helper::now())
            ->andWhere('t2.id')->gt($current)
            ->orderBy('t2.id')
            ->limit(1)
@@ -191,7 +194,6 @@ class articleModel extends model
         $now = helper::now();
         $article = fixer::input('post')
             ->join('categories', ',')
-            ->add('addedDate', $now)
             ->add('editedDate', $now)
             ->add('type', $type)
             ->stripTags('content', $this->config->allowedTags->admin)

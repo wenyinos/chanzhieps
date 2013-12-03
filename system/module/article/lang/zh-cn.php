@@ -58,3 +58,6 @@ $lang->article->next      = '下一篇';
 $lang->article->none      = '没有了';
 $lang->article->directory = '返回目录';
 $lang->article->back2Top = '返回顶部';
+
+$lang->article->note = new stdclass();
+$lang->article->note->addedDate = '可以延迟到选定的时间发布。';

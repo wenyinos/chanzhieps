@@ -58,3 +58,6 @@ $lang->article->next      = 'Next';
 $lang->article->none      = 'None';
 $lang->article->directory = 'Back';
 $lang->article->back2Top = 'Back to top';
+
+$lang->article->note = new stdclass();
+$lang->article->note->addedDate = 'Can be delayed until the selected time publish.';
