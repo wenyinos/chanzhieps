@@ -56,6 +56,6 @@ class cacheModel extends model
      */
     public function setConfigCacheFile()
     {
-        return $this->cacheRoot  . DS . 'config.php';
+        return $this->cacheRoot . DS . 'config.php';
     }
 }
