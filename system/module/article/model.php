@@ -171,6 +171,7 @@ class articleModel extends model
        $prev = $this->dao->select('t1.id, title, alias')->from(TABLE_ARTICLE)->alias('t1')
            ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
            ->where('t2.category')->eq($category)
+           ->andWhere('t1.status')->eq('normal')
            ->andWhere('t2.id')->lt($current)
            ->orderBy('t2.id_desc')
            ->limit(1)
