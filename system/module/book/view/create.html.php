@@ -45,43 +45,42 @@
   <?php else:?>
   <form id='ajaxForm' method='post'>
     <table class='table table-hover table-striped'>
-      <caption><?php echo $lang->book->createCatalogue;?></caption>
+      <caption><?php echo $lang->book->create;?></caption>
       <thead>
-        <tr>
-          <th class='w-p15 a-center'><?php echo $lang->book->type;?></th>
-          <th class='a-center'><?php echo $lang->book->title;?></th>
-          <th class='w-p15'><?php echo $lang->actions; ?></th>
+        <tr class='a-center'>
+          <th class='w-p15'><?php echo $lang->book->type;?></th>
+          <th class='w-p40'><?php echo $lang->book->title;?></th>
+          <th><?php echo $lang->book->alias;?></th>
+          <th><?php echo $lang->book->keywords;?></th>
+          <th class='w-p10'><?php echo $lang->actions; ?></th>
         </tr>
       </thead>
-      <tbody id='entry'>
-        <?php
-        foreach($catalogues as $catalogue):
-        ?>
-        <tr class='v-middle'>
-        <?php
-          echo '<td>' . html::select("type[$catalogue->id]", $lang->book->typeList, $catalogue->type, "class='select-2'") . '</td>';
-          echo '<td>' . html::input("title[$catalogue->id]", $catalogue->title, "class='text-1'") . '</td>';
-          echo "<td><i class='icon-arrow-up'></i><i class='icon-arrow-down'></i></td>";
-          echo '<td>' . html::hidden("order[$catalogue->id]", $catalogue->order, "class='order'") . '</td>';
-          echo '<td>' . html::hidden("mode[$catalogue->id]", 'update') . '</td>';
-        ?>
+      <tbody>
+        <?php foreach($catalogues as $catalogue):?>
+        <tr class='v-middle a-center'>
+          <td><?php echo html::select("type[$catalogue->id]", $lang->book->typeList, $catalogue->type, "class='select-2'");?></td>
+          <td><?php echo html::input("title[$catalogue->id]", $catalogue->title, "class='text-1'");?></td>
+          <td><?php echo html::input("alias[$catalogue->id]", $catalogue->alias, "class='text-1'");?></td>
+          <td><?php echo html::input("keywords[$catalogue->id]", $catalogue->keywords, "class='text-1'");?></td>
+          <td><i class='icon-arrow-up'></i> <i class='icon-arrow-down'></i></td>
+          <td><?php echo html::hidden("order[$catalogue->id]", $catalogue->order, "class='order'");?></td>
+          <td><?php echo html::hidden("mode[$catalogue->id]", 'update');?></td>
         </tr>
         <?php endforeach;?>
-        <?php
-        for($i = 0; $i < BOOK::NEW_CATALOGUE_COUNT ; $i ++)
-        {
-           echo '<tr>';
-           echo '<td>' . html::select("type[]", $lang->book->typeList, '', "class='select-2'") . '</td>';
-           echo '<td>' . html::input("title[]", '', "class='text-1'") . '</td>';
-           echo "<td><i class='icon-arrow-up'></i> &nbsp;<i class='icon-arrow-down'></i></td>";
-           echo '<td>' . html::hidden("order[]", '', "class='order'") . '</td>';
-           echo '<td>' . html::hidden("mode[]", 'new') . '</td>';
-           echo '</tr>';
-        }
-        ?>
+        <?php for($i = 0; $i < BOOK::NEW_CATALOGUE_COUNT ; $i ++):?>
+        <tr class='v-middle a-center'>
+          <td><?php echo html::select("type[]", $lang->book->typeList, '', "class='select-2'");?></td>
+          <td><?php echo html::input("title[]", '', "class='text-1'");?></td>
+          <td><?php echo html::input("alias[]", '', "class='text-1'");?></td>
+          <td><?php echo html::input("keywords[]", '', "class='text-1'");?></td>
+          <td><i class='icon-arrow-up'></i> <i class='icon-arrow-down'></i></td>
+          <td><?php echo html::hidden("order[]", '', "class='order'");?></td>
+          <td><?php echo html::hidden("mode[]", 'new');?></td>
+        </tr>
+        <?php endfor;?>
       </tbody>
       <tfoot>
-        <tr><td colspan='2' class='a-center'><?php echo html::submitButton() . html::hidden('parent', $parent);?></td></tr>
+        <tr><td colspan='5' class='a-center'><?php echo html::submitButton() . html::hidden('parent', $parent);?></td></tr>
       </tfoot>
     </table>
   </form>
