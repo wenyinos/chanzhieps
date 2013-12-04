@@ -26,6 +26,7 @@ $lang->thread->browse     = 'Threads';
 $lang->thread->stick      = 'Sticky';
 $lang->thread->edit       = 'Edit';
 $lang->thread->hide       = 'Hide';
+$lang->thread->show       = 'Show';
 
 $lang->thread->sticks[0] = 'Don\'t stick';
 $lang->thread->sticks[1] = 'Stick on board';

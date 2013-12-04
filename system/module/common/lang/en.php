@@ -216,6 +216,7 @@ $lang->error->reg             = "<strong>%s</strong>should like<strong>%s</stron
 $lang->error->unique          = "<strong>%s</strong>has<strong>%s</strong>already. If you are sure this record has been deleted, you can restore it in admin panel, trash page.";
 $lang->error->notempty        = "<strong>%s</strong>can not be empty.";
 $lang->error->equal           = "<strong>%s</strong>must be<strong>%s</strong>.";
+$lang->error->in              = '<strong>%s</strong>must in<strong>%s</strong>。';
 $lang->error->int             = array("<strong>%s</strong>should be interger", "<strong>%s</strong>should between<strong>%s-%s</strong>.");
 $lang->error->float           = "<strong>%s</strong>should be a interger or float.";
 $lang->error->email           = "<strong>%s</strong>should be email.";

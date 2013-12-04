@@ -258,6 +258,19 @@ class threadModel extends model
     }
 
     /**
+     * Show thread.
+     * 
+     * @param  int    $threadID 
+     * @access public
+     * @return void
+     */
+    public function show($threadID)
+    {
+        $this->dao->update(TABLE_THREAD)->set('hidden')->eq(0)->where('id')->eq($threadID)->exec();
+        return !dao::isError();
+    }
+
+    /**
      * Print files of for a thread.
      * 
      * @param  object $thread 

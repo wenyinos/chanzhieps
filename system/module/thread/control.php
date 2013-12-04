@@ -180,7 +180,44 @@ class thread extends control
 
         if($this->thread->hide($threadID))
         {
-            $locate = helper::createLink('forum', 'board', "board=$thread->board");
+            if(RUN_MODE == 'admin')
+            {
+                $locate = helper::createLink('forum', 'admin');
+            }
+            else
+            {
+                $locate = helper::createLink('forum', 'board', "board=$thread->board");
+            }
+            $this->send(array('result' => 'success', 'locate' => $locate));
+        }
+
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+    }
+
+    /**
+     * Show thread.
+     * 
+     * @param  int    $threadID 
+     * @access public
+     * @return void
+     */
+    public function show($threadID)
+    {
+        $thread = $this->thread->getByID($threadID);
+        if(!$thread) $this->send(array('result' => 'fail', 'message' => 'Not found'));
+
+        if(!$this->thread->canManage($thread->board)) $this->send(array('result' => 'fail'));
+
+        if($this->thread->show($threadID))
+        {
+            if(RUN_MODE == 'admin')
+            {
+                $locate = helper::createLink('forum', 'admin');
+            }
+            else
+            {
+                $locate = helper::createLink('forum', 'board', "board=$thread->board");
+            }
             $this->send(array('result' => 'success', 'locate' => $locate));
         }
 

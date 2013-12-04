@@ -38,8 +38,8 @@ $config->rights->guest['thread']['view']   = 'view';
 $config->rights->guest['thread']['post']   = 'post';
 $config->rights->guest['thread']['locate'] = 'locate';
 
-$config->rights->guest['comment']['show'] = 'show';
-$config->rights->guest['comment']['post'] = 'post';
+$config->rights->guest['message']['comment'] = 'show';
+$config->rights->guest['message']['post']    = 'post';
 
 $config->rights->guest['book']['index']  = 'index';
 $config->rights->guest['book']['browse'] = 'browse';
