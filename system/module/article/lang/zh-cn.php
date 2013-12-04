@@ -44,6 +44,11 @@ $lang->blog->list   = '博客列表';
 $lang->blog->create = '发布博客';
 $lang->blog->edit   = '编辑博客';
 
+$lang->page->admin  = '维护页面';
+$lang->page->list   = '页面列表';
+$lang->page->create = '添加页面';
+$lang->page->edit   = '编辑页面';
+
 $lang->article->originalList[1] = '原创';
 $lang->article->originalList[0] = '转贴';
 
