@@ -18,8 +18,12 @@ $lang->forum->lastPost    = '最后发表';
 $lang->forum->readonly    = '只读版块。';
 $lang->forum->lblOwner    = " [版主：%s]";
 
-$lang->forum->post  = '发贴';
-$lang->forum->admin = '论坛维护';
+$lang->forum->post   = '发贴';
+$lang->forum->admin  = '论坛维护';
+$lang->forum->update = '更新数据';
+
+$lang->forum->updateDesc    = '更新论坛主题数和回复数的统计数据';
+$lang->forum->successUpdate = '更新数据成功';
 
 /* Adjust the pager. */
 $lang->pager->noRecord      = '';

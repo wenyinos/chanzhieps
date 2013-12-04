@@ -18,8 +18,12 @@ $lang->forum->lastPost    = 'Last post';
 $lang->forum->readonly    = 'Readonly';
 $lang->forum->lblOwner    = " [Moderator: %s]";
 
-$lang->forum->post  = 'Post';
-$lang->forum->admin = 'Admin';
+$lang->forum->post   = 'Post';
+$lang->forum->admin  = 'Admin';
+$lang->forum->update = 'Update';
+
+$lang->forum->updateDesc    = 'Update the count of threads and replies';
+$lang->forum->successUpdate = 'Update sucessfully';
 
 /* Adjust the pager. */
 $lang->pager->noRecord      = '';

@@ -30,7 +30,17 @@
       <td><?php echo $thread->replies;?></td>
       <td class='a-left'><?php if($thread->replies) echo substr($thread->repliedDate, 5, -3) . ' ' . $thread->repliedBy;?></td>  
       <td>
-        <?php echo html::a($this->createLink('thread', 'delete', "threadID=$thread->id"), $lang->delete, "class='reloadDeleter'"); ?>
+        <?php echo html::a($this->createLink('thread', 'delete', "threadID=$thread->id"), $lang->delete, "class='reload'"); ?>
+        <?php 
+        if($thread->hidden)
+        {
+            echo html::a($this->createLink('thread', 'show', "threadID=$thread->id"), $lang->thread->show, "class='reload'"); 
+        }
+        else
+        {
+            echo html::a($this->createLink('thread', 'hide', "threadID=$thread->id"), $lang->thread->hide, "class='reload'"); 
+        }
+        ?>
       </td>
     </tr>  
     <?php endforeach;?>

@@ -115,7 +115,6 @@ class book extends control
     public function create($parent = 0)
     {
         $books  = $this->book->getBookList();
-        $parent = $this->book->getByID($parent);
 
         $this->lang->book->menu = new stdclass();
         foreach($books as $book)
@@ -130,6 +129,7 @@ class book extends control
         if($_POST)
         {
             $bookID = $this->book->create($parent);
+            $parent = $this->book->getByID($parent);
             $origin = $this->book->getRoot($book->path);
             $locate = $this->inlink('admin', "bookID=$origin");
             if($parent == 0) $locate = $this->inlink('admin', "bookID=$bookID");

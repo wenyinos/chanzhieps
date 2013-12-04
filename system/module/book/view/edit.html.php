@@ -10,6 +10,11 @@
  * @link        http://www.chanzhi.org
  */
 ?>
+<?php
+  $webRoot   = $config->webRoot;
+  $jsRoot    = $webRoot . "js/";
+?>
+<?php include '../../common/view/kindeditor.html.php';?>
 <div class='modal-dialog'>
   <div class='modal-content'>
     <div class='modal-header'>
@@ -75,3 +80,9 @@
   </div>
 </div>
 <?php if(isset($pageJS)) js::execute($pageJS);?>
+<script>
+  function afterInitKindeditor()
+  {
+      $('.ke-container').css('width','90%');
+  }
+</script>
