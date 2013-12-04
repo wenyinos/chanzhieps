@@ -11,6 +11,8 @@
  */
 $lang->reply = new stdclass();
 $lang->reply->common    = '回贴';
+$lang->reply->id        = '编号';
+$lang->reply->list      = '回帖列表';
 $lang->reply->content   = '内容';
 $lang->reply->author    = '作者';
 $lang->reply->files     = '附件：';

@@ -11,6 +11,8 @@
  */
 $lang->reply = new stdclass();
 $lang->reply->common    = 'Reply';
+$lang->reply->id        = 'Id';
+$lang->reply->list      = 'Replies';
 $lang->reply->content   = 'Content';
 $lang->reply->author    = 'Author';
 $lang->reply->files     = 'Files:';

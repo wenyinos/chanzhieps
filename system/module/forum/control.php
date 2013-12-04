@@ -73,8 +73,6 @@ class forum extends control
      */
     public function admin($boardID = 0, $orderBy = 'repliedDate_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
-        $this->app->loadLang('thread');
-
         $this->app->loadClass('pager', $static = true);
         $pager   = new pager($recTotal, $recPerPage, $pageID);
 
@@ -95,64 +93,8 @@ class forum extends control
      * @access public
      * @return void
      */
-    public function updateStats()
+    public function update()
     {
-        $threads = $this->dao->select('id, id')->from(TABLE_THREAD)->fetchPairs('id', 'id', false);
-        foreach($threads as $threadID)
-        {
-            $lastReply = $this->dao->select('*')->from(TABLE_REPLY)->where('thread')->eq($threadID)->orderBy('id desc')->limit(1)->fetch('', false);
-            if($lastReply)
-            {
-                $replies = $this->dao->select('count(*) as count')->from(TABLE_REPLY)->where('thread')->eq($threadID)->fetch('count', false);
-                $data->replies     = $replies;
-                $data->repliedBy   = $lastReply->author;
-                $data->repliedDate = $lastReply->addedDate;
-                $data->replyID     = $lastReply->id;
-                $this->dao->update(TABLE_THREAD)->data($data, false)->where('id')->eq($threadID)->exec(false);
-            }
-        }
-        unset($data);
-
-        $boards = $this->dao->select('id, name')->from(TABLE_CATEGORY)->where('type')->eq('forum')->andWhere('grade')->eq(2)->fetchPairs('id', 'name', false);
-        foreach($boards as $boardID => $boardName)
-        {
-            $newestPost = $this->dao->select('t1.id as threadID, t1.author, t1.addedDate, t2.id as replyID')
-                ->from(TABLE_THREAD)->alias('t1')
-                ->leftJoin(TABLE_REPLY)->alias('t2')->on('t1.id = t2.thread')
-                ->where('t1.category')->eq($boardID)
-                ->orderBy('t1.id desc, t2.id desc')
-                ->limit(1)
-                ->fetch();
-
-            $newestReply = $this->dao->select('t2.thread as threadID, t2.author, t2.addedDate, t2.id as replyID')
-                ->from(TABLE_THREAD)->alias('t1')
-                ->leftJoin(TABLE_REPLY)->alias('t2')->on('t1.id = t2.thread')
-                ->where('t1.category')->eq($boardID)
-                ->orderBy('t2.id desc')
-                ->limit(1)
-                ->fetch();
-
-            $threadsAndReplies = $this->dao->select('COUNT(id) as threads, SUM(replies) as replies')
-                ->from(TABLE_THREAD)
-                ->where('category')->eq($boardID)
-                ->fetch();
-
-            $this->dao->update(TABLE_CATEGORY)
-                ->set('threads')->eq($threadsAndReplies->threads)
-                ->set('posts')->eq($threadsAndReplies->threads + $threadsAndReplies->replies)
-                ->where('id')->eq($boardID)
-                ->exec(false);
-
-            if($newestPost)
-            {
-                $lastThread = ($newestPost->addedDate > $newestReply->addedDate) ? $newestPost : $newestReply;
-                $data->postedBy   = $lastThread->author;
-                $data->postedDate = $lastThread->addedDate;
-                $data->postID     = $lastThread->threadID;
-                $data->replyID    = $lastThread->replyID;
-                $this->dao->update(TABLE_CATEGORY)->data($data, false)->where('id')->eq($boardID)->exec(false);
-            }
-        }
-        echo 'success';
+        $this->display();
     }
 }

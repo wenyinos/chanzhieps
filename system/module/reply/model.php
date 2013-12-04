@@ -78,6 +78,21 @@ class replyModel extends model
     }
 
     /**
+     * Get replies. 
+     * 
+     * @param  object $pager 
+     * @access public
+     * @return object | false
+     */
+    public function getList($orderBy = 'addedDate_desc', $pager = null)
+    {
+        return $this->dao->select('*')->from(TABLE_REPLY)
+            ->orderBy($orderBy)
+            ->page($pager)
+            ->fetchAll('id');
+    }
+
+    /**
      * Get replies of a user.
      * 
      * @param string $account       the account
