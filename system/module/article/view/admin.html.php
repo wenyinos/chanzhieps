@@ -14,6 +14,8 @@
 <table class='table table-bordered table-hover table-striped tablesorter'>
   <?php if($type == 'blog'):?>
   <caption><?php echo $lang->blog->list;?><span class='pull-right mr-10px'><?php echo html::a($this->inlink('create', "type={$type}&category={$categoryID}"), $lang->blog->create);?></span></caption>
+  <?php elseif($type == 'page'):?>
+  <caption><?php echo $lang->page->list;?><span class='pull-right mr-10px'><?php echo html::a($this->inlink('create', "type={$type}&category={$categoryID}"), $lang->page->create);?></span></caption>
   <?php else:?>
   <caption><?php echo $lang->article->list;?><span class='pull-right mr-10px'><?php echo html::a($this->inlink('create', "type={$type}&category={$categoryID}"), $lang->article->create);?></span></caption>
   <?php endif;?>
