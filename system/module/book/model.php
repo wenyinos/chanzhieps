@@ -411,6 +411,7 @@ class bookModel extends model
         $book = fixer::input('post')
             ->add('editor', $this->app->user->account)
             ->add('editedDate', helper::now())
+            ->stripTags('content', $this->config->allowedTags->admin)
             ->get();
 
         $book->keywords = seo::unify($book->keywords, ',');
