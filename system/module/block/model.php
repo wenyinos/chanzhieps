@@ -275,7 +275,7 @@ class blockModel extends model
      */
     private function parseBlockContent($block, $containerHeader, $containerFooter)
     {
-        $blockRoot = dirname(__FILE__) . 'ext/view/block/';
+        $blockRoot = dirname(__FILE__) . '/ext/view/block/';
         $blockFile = $blockRoot . strtolower($block->type) . '.html.php';
         if(!file_exists($blockFile))
         {
