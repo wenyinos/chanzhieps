@@ -259,6 +259,21 @@ class validater
     }
 
     /**
+     * Must in value list.
+     * 
+     * @param  mixed  $var 
+     * @param  mixed $value 
+     * @static
+     * @access public
+     * @return bool
+     */
+    public static function checkIn($var, $value)
+    {
+        if(!is_array($value)) $value = explode(',', $value);
+        return in_array($var, $value);
+    }
+
+    /**
      * Call a function to check it.
      * 
      * @param  mixed  $var 
