@@ -7,7 +7,7 @@ $(document).ready(function()
     {
         $.each(eval(v.path), function(index, bookID) 
         { 
-            $('.leftmenu a[href*=' + bookID + ']').parent().addClass('active');
+            $(".leftmenu a[href$='book=" + bookID + "']").parent().addClass('active');
         })
     }
 
@@ -28,4 +28,3 @@ $(document).ready(function()
         return false;
     });
 });
-
