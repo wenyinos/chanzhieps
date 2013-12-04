@@ -14,12 +14,14 @@
           printf($lang->thread->lblSpeaker, $speaker->account, $speaker->visits, $speaker->shortJoin, $speaker->shortLast);
           ?>
         </td>
-        <td id='<?php echo $reply->id;?>'><?php echo $reply->content;?></td>
+        <td id='<?php echo $reply->id;?>'>
+          <?php echo $reply->content;?>
+          <div><?php $this->reply->printFiles($reply, $this->thread->canManage($board->id));?></div>
+        </td>
       </tr>
       <tr> 
         <td class='speaker'></td>
         <td class='a-right'>
-          <div class='f-left'><?php $this->reply->printFiles($reply, $this->thread->canManage($board->id));?></div>
           <div class='f-right'>
             <?php 
             if($reply->editor) printf($lang->thread->lblEdited, $reply->editor, $reply->editedDate);

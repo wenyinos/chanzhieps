@@ -10,6 +10,7 @@ $(document).ready(function()
     $.setAjaxModal();
     $.setAjaxForm('#ajaxForm');
     $.setAjaxDeleter('.deleter');
+    $.setReloadDeleter('.reloadDeleter');
 
     /* Ping for keep login every six minute. */
     if(needPing) setInterval('setPing()', 1000 * 360);
