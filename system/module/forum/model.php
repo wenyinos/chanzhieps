@@ -47,6 +47,24 @@ class forumModel extends model
     }
 
     /**
+     * Update stats of forum.
+     * 
+     * @access public
+     * @return void
+     */
+    public function updateStats()
+    {
+        $boards = $this->dao->select('id')->from(TABLE_CATEGORY)
+            ->where('grade')->eq(2)
+            ->andWhere('type')->eq('forum')
+            ->fetchAll();
+        foreach($boards as $board)
+        {
+            $this->updateBoardStats($board->id);
+        }
+    }
+
+    /**
      * Update status of boards.
      * 
      * @param  int    $boardID 
