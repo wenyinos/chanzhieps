@@ -214,6 +214,7 @@ $lang->error->reg          = '<strong>%s</strong>不符合格式，应当为:<st
 $lang->error->unique       = '<strong>%s</strong>已经有<strong>%s</strong>这条记录了。';
 $lang->error->notempty     = '<strong>%s</strong>不能为空。';
 $lang->error->equal        = '<strong>%s</strong>必须为<strong>%s</strong>。';
+$lang->error->in           = '<strong>%s</strong>必须为<strong>%s</strong>。';
 $lang->error->int          = array('<strong>%s</strong>应当是数字。', '<strong>%s</strong>最小值为%s',  '<strong>%s</strong>应当介于<strong>%s-%s</strong>之间。');
 $lang->error->float        = '<strong>%s</strong>应当是数字，可以是小数。';
 $lang->error->email        = '<strong>%s</strong>应当为合法的EMAIL。';
