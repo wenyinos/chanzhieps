@@ -8,5 +8,4 @@ $config->book->edit = new stdclass();
 $config->book->edit->requiredFields = 'title';
 
 $config->book->editor = new stdclass();
-$config->book->editor->create = array('id' => 'content', 'tools' => 'simpleTools');
 $config->book->editor->edit   = array('id' => 'content', 'tools' => 'simpleTools');
