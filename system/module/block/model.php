@@ -275,11 +275,17 @@ class blockModel extends model
      */
     private function parseBlockContent($block, $containerHeader, $containerFooter)
     {
-        $blockRoot = dirname(__FILE__) . '/view/block/';
-        $blockFile = $blockRoot . strtolower($block->type) . '.html.php';       
+        $blockRoot = dirname(__FILE__) . '/ext/view/block/';
+        $blockFile = $blockRoot . strtolower($block->type) . '.html.php';
+        if(!file_exists($blockFile))
+        {
+            $blockRoot = dirname(__FILE__) . '/view/block/';
+            $blockFile = $blockRoot . strtolower($block->type) . '.html.php';
+        }
         if(!file_exists($blockFile)) return '';
+
         echo $containerHeader;
-        include $blockFile;       
+        include $blockFile;
         echo $containerFooter;
     }
 }

@@ -67,15 +67,11 @@ class book extends control
     public function browse($bookID)
     {
         $book     = $this->book->getByID($bookID);
-        $parent   = $this->book->getByID($book->parent);
 
-        $this->view->title = $book->title;
-        if($parent)
-        {
-            $this->view->keywords = trim($parent->keywords . ' ' . $this->config->site->keywords);
-        }
-        $this->view->books     = $this->book->getBookList();
+        $this->view->title     = $book->title;
+        $this->view->keywords  = trim($book->keywords . ' ' . $this->config->site->keywords);
         $this->view->book      = $book;
+        $this->view->books     = $this->book->getBookList();
         $this->view->catalogue = $this->book->getFrontCatalogue($book->id);
         $this->display();
     }
@@ -118,7 +114,8 @@ class book extends control
      */
     public function create($parent = 0)
     {
-        $books = $this->book->getBookList();
+        $books  = $this->book->getBookList();
+        $parent = $this->book->getByID($parent);
 
         $this->lang->book->menu = new stdclass();
         foreach($books as $book)
@@ -132,11 +129,9 @@ class book extends control
 
         if($_POST)
         {
-            $bookID  = $this->book->create($parent);
-            $parent  = $this->book->getByID($parent);
-            $origins = explode(',', $parent->path);
-            $origin  = $origins[1];
-            $locate  = $this->inlink('admin', "bookID=$origin");
+            $bookID = $this->book->create($parent);
+            $origin = $this->book->getRoot($book->path);
+            $locate = $this->inlink('admin', "bookID=$origin");
             if($parent == 0) $locate = $this->inlink('admin', "bookID=$bookID");
             if($bookID) $this->send(array('result' => 'success', 'message'=>$this->lang->saveSuccess, 'locate' => $locate));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
@@ -157,10 +152,9 @@ class book extends control
      */
     public function edit($bookID)
     {
-        $book    = $this->book->getByID($bookID);
-        $parent  = $this->book->getByID($book->parent);
-        $origins = explode(',', $book->path);
-        $origin  = $origins[1];
+        $book   = $this->book->getByID($bookID);
+        $parent = $this->book->getByID($book->parent);
+        $origin = $this->book->getRoot($book->path);
 
         if($_POST)
         {

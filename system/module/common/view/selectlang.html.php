@@ -4,6 +4,6 @@
   <?php
   $langs = $config->langs;
   unset($langs[$clientLang]);
-  foreach($langs as $key => $currentLang) echo "<li><a rel='nofollow' href='javascript:selectLang(\"$key\")'>$currentLang</a></li>";
+  foreach($langs as $langKey => $currentLang) echo "<li><a rel='nofollow' href='javascript:selectLang(\"$langKey\")'>$currentLang</a></li>";
   ?>
 </ul>

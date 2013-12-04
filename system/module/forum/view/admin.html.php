@@ -1,5 +1,5 @@
 <?php include '../../common/view/header.admin.html.php'; ?>
-<table class='table table-hover table-bordered table-striped'>
+<table class='table table-hover table-bordered table-striped' id='threadList'>
   <caption><?php echo $lang->forum->threadList;?></caption>
   <thead>
     <tr class='a-center'>
@@ -30,7 +30,7 @@
       <td><?php echo $thread->replies;?></td>
       <td class='a-left'><?php if($thread->replies) echo substr($thread->repliedDate, 5, -3) . ' ' . $thread->repliedBy;?></td>  
       <td>
-        <?php echo html::a($this->createLink('thread', 'delete', "threadID=$thread->id"), $lang->delete, "class='deleter'"); ?>
+        <?php echo html::a($this->createLink('thread', 'delete', "threadID=$thread->id"), $lang->delete, "class='reloadDeleter'"); ?>
       </td>
     </tr>  
     <?php endforeach;?>

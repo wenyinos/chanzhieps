@@ -49,7 +49,8 @@ var fullTools =
 'table', 'code', '|', 'pagebreak', 'anchor', '|', 
 'fullscreen', 'source', 'preview', 'about'];
 
-$(document).ready(function() 
+$(document).ready(initKindeditor);
+function initKindeditor() 
 {
     $(':input[type=submit]').after("<input type='hidden' id='uid' name='uid' value=" + v.uid + ">");
 
@@ -135,5 +136,5 @@ $(document).ready(function()
             });
         });
     });
-})
+}
 </script>

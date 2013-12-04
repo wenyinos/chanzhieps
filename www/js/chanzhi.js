@@ -264,6 +264,54 @@ $.extend(
     },
 
     /**
+     * Set reload deleter.
+     * 
+     * @param  string $selector 
+     * @access public
+     * @return void
+     */
+    setReloadDeleter: function (selector)
+    {
+        $(document).on('click', selector, function()
+        {
+            if(confirm(v.lang.confirmDelete))
+            {
+                var deleter = $(this);
+                deleter.text(v.lang.deleteing);
+
+                $.getJSON(deleter.attr('href'), function(data) 
+                {
+                    if(data.result == 'success')
+                    {
+                        var table     = $(deleter).closest('table');
+                        var replaceID = table.attr('id');
+
+                        table.wrap("<div id='tmpDiv'></div>");
+                        $('#tmpDiv').load(document.location.href + ' #' + replaceID, function()
+                        {   
+                            $('#tmpDiv').replaceWith($('#tmpDiv').html());
+                            if(typeof sortTable == 'function')
+                            {   
+                                sortTable(); 
+                            }   
+                            else
+                            {   
+                                $('.colored').colorize();
+                                $('tfoot td').css('background', 'white').unbind('click').unbind('hover');
+                            }   
+                        });
+                    }
+                    else
+                    {
+                        alert(data.message);
+                    }
+                });
+            }
+            return false;
+        });
+    },
+
+    /**
      * Add ajaxModal container if there's an <a> tag with data-toggle=modal.
      * 
      * @access public

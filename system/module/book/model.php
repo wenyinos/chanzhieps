@@ -53,6 +53,21 @@ class bookModel extends model
     }
 
     /**
+     * Get root of one catalogue.
+     * 
+     * @param  int    $path 
+     * @access public
+     * @return array
+     */
+    public function getRoot($path)
+    {
+        $origins = explode(',', $path);
+        $rootID  = $origins[1];
+
+        return $rootID;
+    }
+
+    /**
      * Get children catalogues of one catalogue.
      * 
      * @param  int    $bookID 
@@ -156,7 +171,9 @@ class bookModel extends model
         $children = $this->getChildren(isset($book->id) ? $book->id : 0);
         if(!empty($book))
         {
-            /* Add self to tree. */
+            $rootID = $this->getRoot($book->path);
+            $root   = $this->dao->select('id, title, alias')->from(TABLE_BOOK)->where('id')->eq($rootID)->andWhere('type')->eq('book')->fetch();
+
             $order = $this->getChapterNumber($book->path);
             $this->lastChapter = $order;
 
@@ -299,6 +316,7 @@ class bookModel extends model
             $parent = $this->getByID($parent);
 
             /* Init the catalogue object. */
+            $now = helper::now();
             $catalogue = new stdclass();
             $catalogue->parent     = $parent ? $parent->id : 0;
             $catalogue->grade      = $parent ? $parent->grade + 1 : 1;
@@ -320,8 +338,8 @@ class bookModel extends model
                 $catalogue->order      = $this->post->order[$key];
                 $mode = $this->post->mode[$key];
 
-                $catalogue->alias    = seo::unify($book->alias, '-');
-                $catalogue->keywords = seo::unify($book->keywords, ',');
+                $catalogue->alias    = seo::unify($catalogue->alias, '-');
+                $catalogue->keywords = seo::unify($catalogue->keywords, ',');
 
                 if($mode == 'new')
                 {

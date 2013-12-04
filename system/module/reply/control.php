@@ -33,6 +33,25 @@ class reply extends control
     }
 
     /**
+     * Manage replies.
+     * 
+     * @access public
+     * @return void
+     */
+    public function admin($orderBy = 'addedDate_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    {
+        $this->app->loadClass('pager', $static = true);
+        $pager   = new pager($recTotal, $recPerPage, $pageID);
+        $replies = $this->reply->getList($orderBy, $pager);
+
+        $this->lang->reply->menu = $this->lang->forum->menu;
+
+        $this->view->replies = $replies;
+        $this->view->pager   = $pager;
+        $this->display(); 
+    }
+
+    /**
      * Edit a reply.
      * 
      * @param string $replyID 
@@ -81,7 +100,14 @@ class reply extends control
         $thread = $this->loadModel('thread')->getByID($reply->thread);
         if(!$this->thread->canManage($thread->board)) $this->send(array('result' => 'fail'));
 
-        $locate = helper::createLink('thread', 'view', "threadID=$reply->thread");
+        if(RUN_MODE == 'admin')
+        {
+            $locate = helper::createLink('reply', 'admin');
+        }
+        else
+        {
+            $locate = helper::createLink('thread', 'view', "threadID=$reply->thread");
+        }
         if($this->reply->delete($replyID)) $this->send(array('result' => 'success', 'locate' => $locate));
 
         $this->send(array('result' => 'fail', 'message' => dao::getError()));

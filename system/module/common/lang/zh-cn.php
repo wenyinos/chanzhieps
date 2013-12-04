@@ -158,7 +158,9 @@ $lang->comment->menu->checked   = '已审核|comment|admin|status=1';
 $lang->forum = new stdclass();
 $lang->forum->menu = new stdclass();
 $lang->forum->menu->browse = '主题列表|forum|admin|';
+$lang->forum->menu->reply  = '回帖列表|reply|admin|';
 $lang->forum->menu->tree   = '版块管理|tree|browse|type=forum';
+$lang->forum->menu->update = '更新数据|forum|update|';
 
 /* Menu of site module. */
 $lang->site = new stdclass();
