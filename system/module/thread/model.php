@@ -254,6 +254,10 @@ class threadModel extends model
     public function hide($threadID)
     {
         $this->dao->update(TABLE_THREAD)->set('hidden')->eq(1)->where('id')->eq($threadID)->exec();
+        if(dao::isError()) return false;
+
+        /* Update board stats. */
+        $this->loadModel('forum')->updateBoardStats($thread->board);
         return !dao::isError();
     }
 
