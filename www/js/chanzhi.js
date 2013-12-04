@@ -312,6 +312,49 @@ $.extend(
     },
 
     /**
+     * Set reload.
+     * 
+     * @param  string $selector 
+     * @access public
+     * @return void
+     */
+    setReload: function (selector)
+    {
+        $(document).on('click', selector, function()
+        {
+            var reload = $(this);
+            $.getJSON(reload.attr('href'), function(data) 
+            {
+                if(data.result == 'success')
+                {
+                    var table     = $(reload).closest('table');
+                    var replaceID = table.attr('id');
+
+                    table.wrap("<div id='tmpDiv'></div>");
+                    $('#tmpDiv').load(document.location.href + ' #' + replaceID, function()
+                    {   
+                        $('#tmpDiv').replaceWith($('#tmpDiv').html());
+                        if(typeof sortTable == 'function')
+                        {   
+                            sortTable(); 
+                        }   
+                        else
+                        {   
+                            $('.colored').colorize();
+                            $('tfoot td').css('background', 'white').unbind('click').unbind('hover');
+                        }   
+                    });
+                }
+                else
+                {
+                    alert(data.message);
+                }
+            });
+            return false;
+        });
+    },
+
+    /**
      * Add ajaxModal container if there's an <a> tag with data-toggle=modal.
      * 
      * @access public
