@@ -134,5 +134,7 @@ function initKindeditor()
             }
         });
     });
+
+    if(afterInitKindeditor) afterInitKindeditor();
 }
 </script>

@@ -80,3 +80,9 @@
   </div>
 </div>
 <?php if(isset($pageJS)) js::execute($pageJS);?>
+<script>
+  function afterInitKindeditor()
+  {
+      $('.ke-container').css('width','90%');
+  }
+</script>
