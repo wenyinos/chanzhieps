@@ -24,3 +24,4 @@ CREATE TABLE IF NOT EXISTS `eps_book` (
   KEY `path` (`path`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 ALTER TABLE `eps_article` ADD `status` varchar(20) COLLATE 'utf8_general_ci' NOT NULL DEFAULT 'normal' AFTER `editedDate`;
+ALTER TABLE `eps_relation` DROP `book`;
