@@ -1,5 +1,5 @@
 <?php include '../../common/view/header.admin.html.php'; ?>
-<table class='table table-hover table-bordered table-striped'>
+<table class='table table-hover table-bordered table-striped' id="replyList">
   <caption><?php echo $lang->reply->list;?></caption>
   <thead>
     <tr class='a-center'>
@@ -22,7 +22,7 @@
       <td><?php echo $reply->author;?></td>
       <td><?php echo substr($reply->addedDate, 5, -3);?></td>
       <td>
-        <?php echo html::a($this->createLink('reply', 'delete', "replyID=$reply->id"), $lang->delete, "class='deleter'"); ?>
+        <?php echo html::a($this->createLink('reply', 'delete', "replyID=$reply->id"), $lang->delete, "class='reloadDeleter'"); ?>
       </td>
     </tr>  
     <?php endforeach;?>
