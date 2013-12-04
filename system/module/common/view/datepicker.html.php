@@ -3,7 +3,7 @@
 $clientLang = $this->app->getClientLang();
 css::import($jsRoot . 'bootstrap/datetimepicker/css/min.css');
 js::import($jsRoot  . 'bootstrap/datetimepicker/js/min.js'); 
-if($clientLang != 'en') js::import($jsRoot  . 'bootstrap/datetimepicker/js/locales/' . $clientLang . '.js'); 
+if($clientLang != 'en') js::import($jsRoot . 'bootstrap/datetimepicker/js/locales/' . $clientLang . '.js'); 
 ?>
 <script language='javascript'>
 $(function() {
