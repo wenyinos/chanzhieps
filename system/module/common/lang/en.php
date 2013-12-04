@@ -110,7 +110,8 @@ $lang->menu->admin   = 'Home|admin|index|';
 $lang->menu->article = 'Article|article|admin|';
 $lang->menu->blog    = 'Blog|article|admin|type=blog';
 $lang->menu->product = 'Product|product|admin|';
-$lang->menu->book    = 'Help|book|admin|';
+$lang->menu->book    = 'Book|book|admin|';
+$lang->menu->page    = 'Article|article|admin|type=page';
 $lang->menu->comment = 'Comment|comment|admin|';
 $lang->menu->forum   = 'Forum|forum|admin|';
 $lang->menu->site    = 'Site|site|setbasic|';
@@ -131,6 +132,12 @@ $lang->blog->menu = new stdclass();
 $lang->blog->menu->browse = array('link' => 'List|article|admin|type=blog', 'alias' => 'edit');
 $lang->blog->menu->create = 'Create|article|create|type=blog';
 $lang->blog->menu->tree   = 'Categories|tree|browse|type=blog';
+
+/* Menu of page module. */
+$lang->page = new stdclass();
+$lang->page->menu = new stdclass();
+$lang->page->menu->browse = array('link' => 'List|article|admin|type=page', 'alias' => 'edit');
+$lang->page->menu->create = 'Create|article|create|type=page';
 
 /* Menu of product module. */
 $lang->product = new stdclass();
