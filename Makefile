@@ -55,7 +55,7 @@ ips:
 	find chanzhiips -name '.git*' |xargs rm -frv
 	find chanzhiips -name '.svn*' |xargs rm -frv
 	find chanzhiips -name tests |xargs rm -frv
-	cd chanzhiips/system/module && rm -frv rss product blog forum help reply thread comment
+	cd chanzhiips/system/module && rm -frv rss product blog forum reply thread comment book
 	# change mode.
 	chmod 777 -R chanzhiips/system/tmp/
 	chmod 777 -R chanzhiips/www/data
