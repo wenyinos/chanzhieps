@@ -55,7 +55,7 @@ ips:
 	find chanzhiips -name '.git*' |xargs rm -frv
 	find chanzhiips -name '.svn*' |xargs rm -frv
 	find chanzhiips -name tests |xargs rm -frv
-	cd chanzhiips/system/module && rm -frv rss product blog forum reply thread comment book
+	cd chanzhiips/system/module && rm -frv rss product blog forum reply thread message book
 	# change mode.
 	chmod 777 -R chanzhiips/system/tmp/
 	chmod 777 -R chanzhiips/www/data
@@ -63,6 +63,6 @@ ips:
 	chmod 777 chanzhiips/system/module
 	chmod a+rx chanzhiips/system/bin/*
 	# zip it.
-	zip -r -9 chanzhiIPS.$(VERSION).zip chanzhiips
+	zip -r -9 chanzhiIPS.`cat chanzhiips/VERSION`.zip chanzhiips
 	rm -fr chanzhiips
 	rm -fr ips
