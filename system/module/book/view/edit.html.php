@@ -11,8 +11,8 @@
  */
 ?>
 <?php
-  $webRoot   = $config->webRoot;
-  $jsRoot    = $webRoot . "js/";
+$webRoot   = $config->webRoot;
+$jsRoot    = $webRoot . "js/";
 ?>
 <?php include '../../common/view/kindeditor.html.php';?>
 <div class='modal-dialog'>

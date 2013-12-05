@@ -112,6 +112,7 @@ $lang->menu->blog    = '博客|article|admin|type=blog';
 $lang->menu->product = '产品|product|admin|';
 $lang->menu->book    = '手册|book|admin|';
 $lang->menu->message = '评论留言|message|admin|';
+$lang->menu->page    = '页面|article|admin|type=page';
 $lang->menu->forum   = '论坛|forum|admin|';
 $lang->menu->site    = '站点|site|setbasic|';
 $lang->menu->ui      = '界面|ui|setlogo|';
@@ -131,6 +132,12 @@ $lang->blog->menu = new stdclass();
 $lang->blog->menu->browse = array('link' => '博客列表|article|admin|type=blog', 'alias' => 'edit');
 $lang->blog->menu->create = '发布博客|article|create|type=blog';
 $lang->blog->menu->tree   = '类目管理|tree|browse|type=blog';
+
+/* Menu of page module. */
+$lang->page = new stdclass();
+$lang->page->menu = new stdclass();
+$lang->page->menu->browse = array('link' => '页面列表|article|admin|type=page', 'alias' => 'edit');
+$lang->page->menu->create = '添加页面|article|create|type=page';
 
 /* Menu of product module. */
 $lang->product = new stdclass();

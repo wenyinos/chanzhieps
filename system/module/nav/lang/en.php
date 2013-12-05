@@ -23,6 +23,7 @@ $lang->nav->cannotRemoveAll = 'Can not remove all navigation.';
 $lang->nav->types['system']  = 'System modules';
 $lang->nav->types['article'] = 'Article categories';
 $lang->nav->types['product'] = 'Product categories';
+$lang->nav->types['page']    = 'Pages';
 $lang->nav->types['custom']  = 'Custom';
 
 /* common navs.*/

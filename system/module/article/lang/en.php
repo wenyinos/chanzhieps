@@ -44,6 +44,11 @@ $lang->blog->list   = 'List';
 $lang->blog->create = 'Create';
 $lang->blog->edit   = 'Edit';
 
+$lang->page->admin  = 'Admin';
+$lang->page->list   = 'List';
+$lang->page->create = 'Create';
+$lang->page->edit   = 'Edit';
+
 $lang->article->originalList[1] = 'Original';
 $lang->article->originalList[0] = 'Copied';
 

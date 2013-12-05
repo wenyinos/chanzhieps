@@ -12,31 +12,26 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
-<?php js::set('type',$type);?>
-<?php js::set('categoryID',$currentCategory);?>
+<?php js::set('type', $type);?>
+<?php js::set('categoryID', $currentCategory);?>
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
-
-<?php if(strpos($type, 'book') !== false):?>
-<?php echo $categoryBox;?>
-<div class='col-md-10'>
-<?php endif;?>
 
 <form method='post' class='form-inline' id='ajaxForm'> 
   <table class='table table-form'>
     <?php if($type == 'blog'):?>
     <caption><?php echo $lang->blog->create;?></caption>
+    <?php elseif($type == 'page'):?>
+    <caption><?php echo $lang->page->create;?></caption>
     <?php else:?>
     <caption><?php echo $lang->article->create;?></caption>
     <?php endif;?>
+    <?php if($type != 'page'):?>
     <tr>
       <th class='w-100px'><?php echo $lang->article->category;?></th>
-      <?php if(strpos($type, 'book') !== false):?>
-      <td><?php echo html::select("categories[]", $categories, $currentCategory, "class='select-3 form-control'");?></td>
-      <?php else:?>
       <td><?php echo html::select("categories[]", $categories, $currentCategory, "multiple='multiple' class='select-3 form-control chosen'");?></td>
-      <?php endif;?>
     </tr>
+    <?php endif;?>
     <tr>
       <th><?php echo $lang->article->author;?></th>
       <td><?php echo html::input('author', $app->user->realname, "class='text-3 form-control'");?></td>
@@ -93,9 +88,4 @@
     </tr>
   </table>
 </form>
-<?php if(strpos($type, 'book') !== false):?>
-</div>
-<?php endif;?>
-
-<?php include '../../common/view/treeview.html.php';?>
 <?php include '../../common/view/footer.admin.html.php';?>
