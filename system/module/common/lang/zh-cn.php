@@ -111,7 +111,7 @@ $lang->menu->article = '文章|article|admin|';
 $lang->menu->blog    = '博客|article|admin|type=blog';
 $lang->menu->product = '产品|product|admin|';
 $lang->menu->book    = '手册|book|admin|';
-$lang->menu->comment = '评论|comment|admin|';
+$lang->menu->message = '评论留言|message|admin|';
 $lang->menu->forum   = '论坛|forum|admin|';
 $lang->menu->site    = '站点|site|setbasic|';
 $lang->menu->ui      = '界面|ui|setlogo|';
@@ -149,10 +149,10 @@ $lang->ui->menu->admin = array('link' => '区块管理|block|admin|', 'alias' =>
 $lang->ui->menu->pages = array('link' => '布局设置|block|pages|', 'alias' => 'setregion');
 
 /* Menu of comment module. */
-$lang->comment = new stdclass();
-$lang->comment->menu = new stdclass();
-$lang->comment->menu->unchecked = '未审核|comment|admin|status=0';
-$lang->comment->menu->checked   = '已审核|comment|admin|status=1';
+$lang->message = new stdclass();
+$lang->message->menu = new stdclass();
+$lang->message->menu->unchecked = '留言|message|admin|type=message';
+$lang->message->menu->checked   = '评论|message|admin|type=comment';
 
 /* Menu of forum module. */
 $lang->forum = new stdclass();
