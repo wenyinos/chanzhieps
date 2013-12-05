@@ -25,3 +25,17 @@ CREATE TABLE IF NOT EXISTS `eps_book` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 ALTER TABLE `eps_article` ADD `status` varchar(20) COLLATE 'utf8_general_ci' NOT NULL DEFAULT 'normal' AFTER `editedDate`;
 ALTER TABLE `eps_relation` DROP `book`;
+
+DROP  TABLE `eps_message`;
+
+ALTER TABLE `eps_comment` ADD type char(20) NOT NULL AFTER id;
+ALTER TABLE `eps_comment` CHANGE `author` `from` char(30) NOT NULL;
+ALTER TABLE `eps_comment` ADD `to` char(30) NOT NULL AFTER `from`;
+ALTER TABLE `eps_comment` ADD `phone` char(30) NOT NULL AFTER `to`;
+ALTER TABLE `eps_comment` ADD  qq char(30) NOT NULL AFTER email;
+ALTER TABLE `eps_comment` ADD  link varchar(100) NOT NULL AFTER content;
+ALTER TABLE `eps_comment` CHANGE `status` `status` char(20) NOT NULL;
+ALTER TABLE `eps_comment` ADD `public` enum('0', '1') NOT NULL default 1 AFTER `status`;
+ALTER TABLE `eps_comment` ADD `readed` enum('0', '1') NOT NULL AFTER `public`;
+
+RENAME TABLE `eps_comment` TO `eps_message`;
