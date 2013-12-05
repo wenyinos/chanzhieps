@@ -1,6 +1,9 @@
 <?php
 $config->book->imgMaxWidth = 950;
 
+$config->book->createBook = new stdclass();
+$config->book->createBook->requiredFields = 'title, alias';
+
 $config->book->create = new stdclass();
 $config->book->create->requiredFields = 'title';
 
