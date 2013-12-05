@@ -27,9 +27,10 @@ $.extend(
                     var submitButton = $(formID).find(':input[type=submit]');
                     if(response.message && response.message.length)
                     {
-                        submitButton.popover({title:response.message, placement:'right', delay: { show: 600, hide: 600 }}).popover('show');
+                        submitButton.popover({trigger:'manual', content:response.message, placement:'right'}).popover('show');
+                        submitButton.next('.popover').addClass('popover-success');
                         function distroy(){submitButton.popover('hide')}
-                        setTimeout(distroy,1000);
+                        setTimeout(distroy,2000);
                     }
 
                     if($.isFunction(callback)) return callback(response);
