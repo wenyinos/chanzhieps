@@ -592,7 +592,15 @@ class commonModel extends model
         foreach($book->pathNames as $bookID => $bookTitle)
         {
             $book = $this->loadModel('book')->getByID($bookID);
-            echo '<li>' . html::a(helper::createLink('book', 'browse', "bookID=$bookID","book=$book->alias"), $bookTitle) . '</li>';
+            if($book->parent)
+            {
+                $root = $this->book->getRoot($book->path);
+                echo '<li>' . html::a(helper::createLink('book', 'browse', "bookID=$bookID", "book=$root->alias&title=$book->alias"), $bookTitle) . '</li>';
+            }
+            else
+            {
+                echo '<li>' . html::a(helper::createLink('book', 'browse', "bookID=$bookID", "book=$book->alias"), $bookTitle) . '</li>';
+            }
         }
     }
 
