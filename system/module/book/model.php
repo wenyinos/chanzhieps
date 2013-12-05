@@ -183,8 +183,7 @@ class bookModel extends model
         $children = $this->getChildren(isset($book->id) ? $book->id : 0);
         if(!empty($book))
         {
-            $root   = $this->getRoot($rootID);
-
+            $root  = $this->getRoot($book->path);
             $order = $this->getChapterNumber($book->path);
             $this->lastChapter = $order;
 
