@@ -105,6 +105,25 @@ class articleModel extends model
     }
 
     /**
+     * Get page pairs.
+     * 
+     * @param string $pager 
+     * @access public
+     * @return array
+     */
+    public function getPagePairs($pager = null)
+    {
+        return $this->dao->select('id, title')->from(TABLE_ARTICLE)
+            ->where('1=1')
+            ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')
+            ->andWhere('t1.addedDate')->le(helper::now())
+            ->andWhere('t1.status')->eq('normal')
+            ->fi()
+            ->orderBy('id_desc')
+            ->page($pager, false)
+            ->fetchPairs();
+    }
+    /**
      * Get article pairs.
      * 
      * @param string $modules 
