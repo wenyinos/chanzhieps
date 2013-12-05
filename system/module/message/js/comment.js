@@ -6,7 +6,7 @@ $(document).ready(function()
         {
             bootbox.alert(response.message, function()
             {
-                var link = createLink('comment', 'show', 'objecType=' + v.objectType + '&objectID=' + v.objectID);
+                var link = createLink('message', 'comment', 'objecType=' + v.objectType + '&objectID=' + v.objectID);
                 $('#commentForm').parent().parent().load(link, location.href="#first");
             });   
         }
@@ -21,7 +21,7 @@ $(document).ready(function()
 
     $('#pager').find('a').click(function()
     {
-        $('#comments').parent().load($(this).attr('href'));
+        $('#commentList').parent().load($(this).attr('href'));
         return false;
     });
 });
