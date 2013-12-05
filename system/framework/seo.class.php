@@ -333,4 +333,22 @@ class uri
 
         return $config->webRoot . $link . '.' . $config->default->view;
     }
+
+    /**
+     * Create page view
+     *
+     * @params array    $params
+     * @params array    $alias  
+     * return string
+     */
+    public static function createPageView($params, $alias)
+    {
+        global $config;
+
+        $link = 'page/';
+        $link .= array_shift($params);
+        if($alias['name']) $link .= '_' . $alias['name'];
+
+        return $config->webRoot . $link . '.' . $config->default->view;
+    }
 }
