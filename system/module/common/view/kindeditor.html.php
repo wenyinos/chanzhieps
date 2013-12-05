@@ -25,6 +25,8 @@ js::set('editorLang', $editorLang);
 
 /* Import css and js for kindeditor. */
 css::import($jsRoot . 'kindeditor/themes/default/default.css');
+js::import($jsRoot . 'kindeditor/kindeditor-min.js');
+js::import($jsRoot  . 'kindeditor/lang/' . $editorLang . '.js');
 
 /* set uid for upload. */
 $uid = uniqid('');
@@ -47,11 +49,8 @@ var fullTools =
 'table', 'code', '|', 'pagebreak', 'anchor', '|', 
 'fullscreen', 'source', 'preview', 'about'];
 
-$.getScript("<?php echo $jsRoot . 'kindeditor/kindeditor-min.js'; ?>",function()
-{
-    $.getScript("<?php echo $jsRoot  . 'kindeditor/lang/' . $editorLang . '.js'; ?>",initKindeditor);
-});
-function initKindeditor()
+$(document).ready(initKindeditor);
+function initKindeditor(afterInit)
 {
     $(':input[type=submit]').after("<input type='hidden' id='uid' name='uid' value=" + v.uid + ">");
 
@@ -135,6 +134,6 @@ function initKindeditor()
         });
     });
 
-    if(afterInitKindeditor) afterInitKindeditor();
+    if($.isFunction(afterInit)) afterInit();
 }
 </script>
