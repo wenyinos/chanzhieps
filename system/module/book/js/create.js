@@ -1,5 +1,15 @@
 $(document).ready(function()
 {
+    /* Set current active moduleMenu. */
+    if(v.path && v.path.length)
+    {
+        $.each(eval(v.path), function(index, bookID)
+        {
+            var current = $(".leftmenu a[href$='book=" + bookID + "']").parent();
+            current.addClass('active').siblings().removeClass('active');
+        })
+    }
+
    /* Sort up. */
     $(document).on('click', '.icon-arrow-up', function()
     {

@@ -11,7 +11,12 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php'; ?>
-<?php if($parent == 0):?>
+<?php 
+$path = 0;
+if($parent) $path = array_keys($parent->pathNames);
+js::set('path', json_encode($path));
+?>
+<?php if(!$parent):?>
 <form id='ajaxForm' method='post' class='form-inline'>
   <table class='table table-form'>
     <caption><?php echo $lang->book->createBook;?></caption>
@@ -80,7 +85,7 @@
     <?php endfor;?>
     </tbody>
     <tfoot>
-      <tr><td colspan='5' class='a-center'><?php echo html::submitButton() . html::hidden('parent', $parent);?></td></tr>
+      <tr><td colspan='5' class='a-center'><?php echo html::submitButton();?></td></tr>
     </tfoot>
   </table>
 </form>
