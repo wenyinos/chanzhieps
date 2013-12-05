@@ -38,6 +38,7 @@ $config->rights->guest['thread']['view']   = 'view';
 $config->rights->guest['thread']['post']   = 'post';
 $config->rights->guest['thread']['locate'] = 'locate';
 
+$config->rights->guest['message']['index']   = 'index';
 $config->rights->guest['message']['comment'] = 'show';
 $config->rights->guest['message']['post']    = 'post';
 
