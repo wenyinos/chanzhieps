@@ -8,7 +8,7 @@ $('#submit').click(function()
     $.ajax(
     {
         type: "POST",
-        data:"account=" + $('#account').val() + '&password=' + password,
+        data:"account=" + $('#account').val() + '&password=' + password + '&referer=' + encodeURIComponent($('#referer').val()),
         url:loginURL,
         dataType:'json',
         success:function(data)
@@ -17,7 +17,7 @@ $('#submit').click(function()
             $.ajax(
             {
                 type: "POST",
-                data:"account=" + $('#account').val() + '&password=' + $('#password').val(),
+                data:"account=" + $('#account').val() + '&password=' + $('#password').val() + '&referer=' + encodeURIComponent($('#referer').val()),
                 url:loginURL,
                 dataType:'json',
                 success:function(data)
