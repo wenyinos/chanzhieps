@@ -1,18 +1,27 @@
 <?php include '../../common/view/header.html.php';?>
-<form method="post">
-<table align='center' class='table-1'>
-  <caption><?php echo $lang->user->modifyPassword;?></caption>
-  <tr>
-  <th class='rowhead'><?echo $lang->user->password ?></th>
-    <td><?php echo html::password('password1', '', "class='text-3'") . $lang->user->notice->password;?></td>
-  </tr>
-  <tr>
-  <th class='rowhead'><?echo $lang->user->password2?></th>
-    <td><?php echo html::password('password2', '', "class='text-3'");?></td>
-  </tr>
-  <tr>
-  <td colspan="2" align="center"><?php echo html::submitButton($lang->user->submit). html::hidden('resetKey',"$resetKey")?></td>
-  </tr>
-</table>
-</form>
+<section id="check">
+  <div class="box-radius">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4><strong><?php echo $lang->user->changePassword;?></strong></h4></div>
+      <div class="panel-body">
+        <form method='post' id='ajaxForm'>
+          <table> 
+            <tr>
+              <th class='w-100px'><?php echo $lang->user->password;?></th>
+              <td><?php echo html::password('password1', '', "class='text-box'");?></td>
+            </tr>  
+            <tr>
+              <th><?php echo $lang->user->password2;?></th>
+              <td><?php echo html::password('password2', '', "class='text-box'");?></td>
+            </tr>
+            <tr>
+              <th></th>
+              <td><?php echo html::submitButton($lang->user->submit,'btn btn-primary btn-block') . html::hidden('resetKey', $resetKey);?></td>
+            </tr>
+          </table>
+        </form>
+      </div>
+    </div>  
+  </div>
+</section>
 <?php include '../../common/view/footer.html.php';?>
