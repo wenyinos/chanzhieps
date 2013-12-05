@@ -112,7 +112,7 @@ $lang->menu->blog    = 'Blog|article|admin|type=blog';
 $lang->menu->product = 'Product|product|admin|';
 $lang->menu->book    = 'Book|book|admin|';
 $lang->menu->page    = 'Article|article|admin|type=page';
-$lang->menu->comment = 'Comment|comment|admin|';
+$lang->menu->message = 'Message|message|admin|';
 $lang->menu->forum   = 'Forum|forum|admin|';
 $lang->menu->site    = 'Site|site|setbasic|';
 $lang->menu->ui      = 'Interface|ui|setlogo|';
@@ -156,10 +156,10 @@ $lang->ui->menu->admin = array('link' => 'Blocks|block|admin|', 'alias' => 'crea
 $lang->ui->menu->pages = array('link' => 'Layout|block|pages|', 'alias' => 'setregion');
 
 /* Menu of comment module. */
-$lang->comment = new stdclass();
-$lang->comment->menu = new stdclass();
-$lang->comment->menu->unchecked = 'Unreviewed|comment|admin|status=0';
-$lang->comment->menu->checked   = 'Reviewed|comment|admin|status=1';
+$lang->message = new stdclass();
+$lang->message->menu = new stdclass();
+$lang->message->menu->message = 'Message|message|admin|type=message';
+$lang->message->menu->comment = 'comment|message|admin|type=comment';
 
 /* Menu of forum module. */
 $lang->forum = new stdclass();
