@@ -216,7 +216,8 @@ class articleModel extends model
         $this->dao->insert(TABLE_ARTICLE)
             ->data($article, $skip = 'categories,uid')
             ->autoCheck()
-            ->batchCheck($this->config->article->create->requiredFields, 'notempty')
+            ->batchCheckIF($type != 'page', $this->config->article->create->requiredFields, 'notempty')
+            ->batchCheckIF($type == 'page', $this->config->article->create->page->requiredFields, 'notempty')
             ->exec();
         $articleID = $this->dao->lastInsertID();
 

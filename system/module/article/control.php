@@ -108,7 +108,7 @@ class article extends control
         $this->lang->menuGroups->article = $type;
 
         $categories = $this->loadModel('tree')->getOptionMenu($type, 0, $removeRoot = true);
-        if(empty($categories))
+        if(empty($categories) && $type != 'page')
         {
             die(js::alert($this->lang->tree->noCategories) . js::locate($this->createLink('tree', 'browse', "type=$type")));
         }
