@@ -77,6 +77,7 @@ $lang->year           = 'Year';
 $lang->loading        = 'Loading...';
 $lang->saveSuccess    = 'Successfully saved.';
 $lang->setSuccess     = 'Successfully saved.';
+$lang->sendSuccess    = 'Successfully sended.';
 $lang->fail           = 'Fail';
 $lang->noResultsMatch = 'No matched results.';
 $lang->alias          = 'for seo, can use numbers, letters and words';
