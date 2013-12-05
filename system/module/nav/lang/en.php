@@ -33,6 +33,7 @@ $lang->nav->system->company = 'About';
 $lang->nav->system->forum   = 'Forum';
 $lang->nav->system->blog    = 'Blog';
 $lang->nav->system->book    = 'Book';
+$lang->nav->system->message = 'Inquire';
 
 /* Targets setting. */
 $lang->nav->newWindow = new stdclass();

@@ -33,6 +33,7 @@ $lang->nav->system->company = '关于我们';
 $lang->nav->system->forum   = '论坛';
 $lang->nav->system->blog    = '博客';
 $lang->nav->system->book    = '手册';
+$lang->nav->system->message = '留言';
 
 /* Targets setting. */
 $lang->nav->newWindow = new stdclass();
