@@ -366,7 +366,7 @@ class articleModel extends model
             $file->title = $file->title . ".$file->extension";
             if($file->isImage)
             {
-                $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank'") . '</li>';
+                $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank' data-toggle='lightbox'") . '</li>';
             }
             else
             {

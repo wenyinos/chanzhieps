@@ -20,4 +20,7 @@ $(document).ready(function()
     {
         $(this).toggleClass('hover');
     });
+
+    // active lightbox
+    $("[data-toggle=lightbox]").lightbox();
 });
