@@ -331,7 +331,7 @@ class html
     public static function resetButton()
     {
         global $lang;
-        return " <input type='reset' id='reset' value='{$lang->reset}' class='btn' /> ";
+        return " <input type='reset' id='reset' value='{$lang->reset}' class='btn btn-default' /> ";
     }
 
     /**
@@ -344,7 +344,7 @@ class html
      * @access public
      * @return string the common button tag.
      */
-    public static function commonButton($label = '', $class = 'btn', $misc = '')
+    public static function commonButton($label = '', $class = 'btn btn-default', $misc = '')
     {
         return " <input type='button' value='$label' class='$class' $misc /> ";
     }
@@ -360,7 +360,7 @@ class html
      * @access public
      * @return string
      */
-    public static function linkButton($label = '', $link = '', $class='btn', $misc = '', $target = 'self')
+    public static function linkButton($label = '', $link = '', $class='btn btn-default', $misc = '', $target = 'self')
     {
         return " <input type='button' value='$label' class='$class' $misc onclick='$target.location.href=\"$link\"' /> ";
     }
