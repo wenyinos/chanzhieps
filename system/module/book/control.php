@@ -66,11 +66,12 @@ class book extends control
      */
     public function browse($bookID)
     {
-        $book     = $this->book->getByID($bookID);
+        $book = $this->book->getByID($bookID);
 
         $this->view->title     = $book->title;
         $this->view->keywords  = trim($book->keywords . ' ' . $this->config->site->keywords);
         $this->view->book      = $book;
+        $this->view->root      = $this->book->getRoot($book->path);
         $this->view->books     = $this->book->getBookList();
         $this->view->catalogue = $this->book->getFrontCatalogue($book->id);
         $this->display();
@@ -87,6 +88,7 @@ class book extends control
     { 
         $article = $this->book->getByID($articleID);
         $parent  = $this->book->getByID($article->parent);
+        $root    = $this->book->getRoot($article->path);
         
         $this->createContentNav($article->content);
 
@@ -98,6 +100,7 @@ class book extends control
         $this->view->prevAndNext = $this->book->getPrevAndNext($article->id, $parent->id);
         //$this->view->layouts   = $this->loadModel('block')->getLayouts('book.read');
         $this->view->parent      = $parent;
+        $this->view->root        = $root;
 
         $this->dao->update(TABLE_BOOK)->set('views = views + 1')->where('id')->eq($articleID)->exec(false);
 
@@ -129,17 +132,22 @@ class book extends control
         if($_POST)
         {
             $bookID = $this->book->create($parent);
-            $parent = $this->book->getByID($parent);
-            $origin = $this->book->getRoot($book->path);
-            $locate = $this->inlink('admin', "bookID=$origin");
-            if($parent == 0) $locate = $this->inlink('admin', "bookID=$bookID");
+
+            $locate = $this->inlink('admin', "bookID=$bookID");
+            if($parent)
+            {
+                $parent = $this->book->getByID($parent);
+                $origin = $this->book->getRootID($parent->path);
+                $locate = $this->inlink('admin', "bookID=$origin");
+            }
             if($bookID) $this->send(array('result' => 'success', 'message'=>$this->lang->saveSuccess, 'locate' => $locate));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
         $this->view->books      = $books;
-        $this->view->parent     = $parent;
         $this->view->catalogues = $this->book->getChildren($parent);
+        $this->view->parent     = $parent;
+        if($parent) $this->view->parent = $this->book->getByID($parent);
         $this->display(); 
     }
 
@@ -154,7 +162,7 @@ class book extends control
     {
         $book   = $this->book->getByID($bookID);
         $parent = $this->book->getByID($book->parent);
-        $origin = $this->book->getRoot($book->path);
+        $origin = $this->book->getRootID($book->path);
 
         if($_POST)
         {

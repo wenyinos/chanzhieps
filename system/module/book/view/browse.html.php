@@ -7,7 +7,7 @@
       <?php
       foreach($books as $bookValue)
       {
-          $class = 'list-group-item' . (($bookValue->title == $book->title) ? ' active' : '');
+          $class = 'list-group-item' . (($bookValue->title == $root->title) ? ' active' : '');
           echo html::a(inlink('browse', "bookID=$bookValue->id", "book=$bookValue->alias"), '<i class="icon-book icon-large"></i>' . $bookValue->title . '<i class="icon-chevron-right"></i>', "class='$class'");
       }
       ?>
@@ -16,7 +16,7 @@
 
   <div class='col-md-9'>
     <div class='box radius'>  
-      <h4 class='title'><?php echo $book->title;?></h4>
+      <h4 class='title'><?php echo $root->title;?></h4>
       <dl>
       <?php echo $catalogue;?>
       </dl>

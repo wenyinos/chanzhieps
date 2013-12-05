@@ -53,6 +53,19 @@ class bookModel extends model
     }
 
     /**
+     * Get rootID of one catalogue.
+     * 
+     * @param  int    $path 
+     * @access public
+     * @return array
+     */
+    public function getRootID($path)
+    {
+        $origins = explode(',', $path);
+        return $origins[1];
+    }
+
+    /**
      * Get root of one catalogue.
      * 
      * @param  int    $path 
@@ -61,10 +74,9 @@ class bookModel extends model
      */
     public function getRoot($path)
     {
-        $origins = explode(',', $path);
-        $rootID  = $origins[1];
-
-        return $rootID;
+       $origins = explode(',', $path);
+       $origin  = $origins[1];
+       return $this->dao->select('id, title, alias')->from(TABLE_BOOK)->where('id')->eq($origin)->andWhere('type')->eq('book')->fetch();
     }
 
     /**
@@ -171,13 +183,12 @@ class bookModel extends model
         $children = $this->getChildren(isset($book->id) ? $book->id : 0);
         if(!empty($book))
         {
-            $rootID = $this->getRoot($book->path);
-            $root   = $this->dao->select('id, title, alias')->from(TABLE_BOOK)->where('id')->eq($rootID)->andWhere('type')->eq('book')->fetch();
+            $root   = $this->getRoot($rootID);
 
             $order = $this->getChapterNumber($book->path);
             $this->lastChapter = $order;
 
-            $linkOnTitle = $book->type == 'chapter' ? helper::createLink('book', 'browse', "bookID=$book->id", "book=$book->alias") : helper::createLink('book', 'read', "articleID=$book->id", "article=$book->alias");
+            $linkOnTitle = $book->type == 'chapter' ? helper::createLink('book', 'browse', "bookID=$book->id", "book=$root->alias&title=$book->alias") : helper::createLink('book', 'read', "articleID=$book->id", "book=$root->alias&article=$book->alias");
 
             if($book->type == 'chapter')
             {
@@ -286,7 +297,7 @@ class bookModel extends model
      */
     public function create($parent)
     {
-        if($parent == 0)
+        if(!$parent)
         {
             $now = helper::now();
             $book = fixer::input('post')
@@ -302,7 +313,7 @@ class bookModel extends model
             $this->dao->insert(TABLE_BOOK)
                 ->data($book)
                 ->autoCheck()
-                ->batchCheck($this->config->book->create->requiredFields, 'notempty')
+                ->batchCheck($this->config->book->createBook->requiredFields, 'notempty')
                 ->exec();
 
             /* After saving, update it's path. */
