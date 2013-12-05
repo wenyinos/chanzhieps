@@ -12,6 +12,23 @@
 class message extends control
 {
     /**
+     * The index page of message front.
+     * 
+     * @access public
+     * @return void
+     */
+    public function index($pageID = 1)
+    {
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal = 0, $recPerPage = 10, $pageID);
+
+        $this->view->messages = $this->message->getByObject($type = 'message', $objectType = 'message', $objectID = 0, $pager);
+        $this->view->replies  = $this->message->getReplies(array_keys($this->view->messages));
+        $this->view->pager    = $pager;
+        $this->display();
+    }
+
+    /**
      * Show the comment of one object, and print the comment form.
      * 
      * @param string $objectType 
@@ -28,39 +45,8 @@ class message extends control
         $this->view->objectID   = $objectID;
         $this->view->comments   = $this->message->getByObject($type = 'comment', $objectType, $objectID, $pager);
         $this->view->pager      = $pager;
+        $this->lang->message    = $this->lang->comment.
         $this->display();
-    }
-
-    /**
-     * Post a message.
-     * 
-     * @param  string  $type
-     * @access public
-     * @return void
-     */
-    public function post($type)
-    {
-        if($_POST)
-        {
-            /* If no captcha but is garbage, return the error info. */
-            if($this->post->captcha == false and $this->loadModel('captcha')->isEvil($_POST['content']))
-            {
-                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->captcha->create4Comment()));
-            }
-
-            /* Try to save to database. */
-            $messageID = $this->message->post($type);
-
-            /* If save fail, return the error info. */
-            if(!$messageID)
-            {
-                $this->send(array('result' => 'fail', 'reason' => 'error', 'message' => dao::getError()));
-            }
-
-            /* If save successfully, save the cookie and send success info. */
-            $this->message->setCookie($messageID);
-            $this->send(array('result' => 'success', 'message' => $this->lang->message->thanks->$type));
-        }
     }
 
     /**
@@ -80,10 +66,63 @@ class message extends control
 
         $this->view->title       = $this->lang->message->common;
         $this->view->messages    = $this->message->getList($type, $status, $pager);
+        $this->view->replies     = $this->message->getReplies(array_keys($this->view->messages));
         $this->view->pager       = $pager;
         $this->view->type        = $type;
         $this->view->status      = $status;
-        $this->view->currentMenu = $status == 0 ? 0 : 1;
+        $this->display();
+    }
+
+    /**
+     * Post a message.
+     * 
+     * @param  string  $type
+     * @access public
+     * @return void
+     */
+    public function post($type)
+    {
+        $this->lang->message = $this->lang->$type;
+        if($_POST)
+        {
+            /* If no captcha but is garbage, return the error info. */
+            if($this->post->captcha == false and $this->loadModel('captcha')->isEvil($_POST['content']))
+            {
+                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->captcha->create4Comment()));
+            }
+
+            /* Try to save to database. */
+            $messageID = $this->message->post($type);
+
+            /* If save fail, return the error info. */
+            if(!$messageID)
+            {
+                $this->send(array('result' => 'fail', 'reason' => 'error', 'message' => dao::getError()));
+            }
+
+            /* If save successfully, save the cookie and send success info. */
+            $this->message->setCookie($messageID);
+            $this->send(array('result' => 'success', 'message' => $this->lang->message->thanks));
+        }
+    }
+
+    /**
+     * Reply a message.
+     * 
+     * @param  int    $messageID 
+     * @access public
+     * @return void
+     */
+    public function reply($messageID)
+    {
+        if($_POST)
+        {
+            $result = $this->message->reply($messageID);
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->sendSuccess));
+            $this->send(array('result' => 'fail', 'reason' => 'error', 'message' => dao::getError()));
+        }
+
+        $this->view->message = $this->message->getByID($messageID);
         $this->display();
     }
 

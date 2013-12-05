@@ -23,11 +23,11 @@
     <tr>
       <th class='w-60px'><?php echo $lang->message->id;?></th>
       <th><?php echo $lang->message->content;?></th>
-      <th class='w-140px a-center'><?php echo $lang->actions;?></th>
+      <th class='w-160px a-center'><?php echo $lang->actions;?></th>
     </tr>
   </thead>
   <tbody>
-    <?php foreach($messages as $message):?>
+    <?php foreach($messages as $messageID => $message):?>
     <tr>
       <td rowspan='2' class='a-center'><strong><?php echo $message->id;?></strong></td>
       <td>
@@ -53,6 +53,7 @@ EOT;
       </td>
       <td rowspan='2' class='a-center v-middle'>
         <?php 
+        echo html::a(inlink('reply', "messageID=$message->id"), $lang->message->reply, "data-toggle='modal'");
         echo html::a(inlink('delete', "messageID=$message->id&type=single&status=$status"), $lang->message->delete, "class='deleter'");
         if($status == 0) echo html::a(inlink('pass', "messageID=$message->id&type=single"), $lang->message->pass, "class='pass'");
         echo html::a($message->objectViewURL . '#message', $lang->message->reply, "target='_blank'");
@@ -63,7 +64,20 @@ EOT;
       </td>
     </tr>
     <tr>
-      <td class='content-box'><?php echo html::textarea('', $message->content, "rows='2' class='area-1' spellcheck='false'");?></td>
+      <td class='content-box'>
+        <?php echo html::textarea('', $message->content, "rows='2' class='area-1' spellcheck='false'");?>
+        <?php 
+        if(!empty($replies[$messageID]))
+        {
+            echo "<dl class='alert alert-info'>";
+            foreach($replies[$messageID] as $reply)
+            {
+                printf($lang->message->replyItem, $reply->from, $reply->date, $reply->content);
+            }
+            echo '</dl>';
+        }
+        ?>
+      </td>
     </tr>
     <?php endforeach;?>
   </tbody>

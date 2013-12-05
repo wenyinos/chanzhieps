@@ -3,9 +3,8 @@ js::set('objectType', $objectType);
 js::set('objectID',   $objectID);
 css::internal($pageCSS);
 ?>
-<?php
-if(isset($comments) and $comments):?>
-<div id='comments' class='commentList radius-top'> 
+<?php if(isset($comments) and $comments):?>
+<div id='commentList' class='commentList radius-top'> 
   <div class='box-title'><?php echo $lang->message->list;?></div>
   <div class='box-content'>
     <a name='first'></a>
@@ -28,11 +27,11 @@ if(isset($comments) and $comments):?>
         <tr>
           <th class='w-80px v-middle'><?php echo $lang->message->from;?></th>
           <td> 
-            <?php 
-            $from = $this->session->user->account == 'guest' ? '' : $this->session->user->account;
-            $email  = $this->session->user->account == 'guest' ? '' : $this->session->user->email;
-            echo html::input('from', $from, "class='text-1'");
-            ?>
+          <?php 
+          $from = $this->session->user->account == 'guest' ? '' : $this->session->user->account;
+          $email  = $this->session->user->account == 'guest' ? '' : $this->session->user->email;
+          echo html::input('from', $from, "class='text-1'");
+          ?>
           </td>
         </tr>
         <tr>
@@ -42,14 +41,14 @@ if(isset($comments) and $comments):?>
         <tr>
           <th class='v-middle'><?php echo $lang->message->content;?></th>
           <td>
-            <?php 
-            echo html::textarea('content', '', "class='area-1' rows='3'");
-            echo html::hidden('objectType', $objectType);
-            echo html::hidden('objectID', $objectID);
-            ?>
+          <?php 
+          echo html::textarea('content', '', "class='area-1' rows='3'");
+          echo html::hidden('objectType', $objectType);
+          echo html::hidden('objectID', $objectID);
+          ?>
           </td>
         </tr>
-        <tr id='captchaBox' style="display:none;"></tr>  
+        <tr id='captchaBox' style="display:none;"><td colspan='2'></td></tr>  
         <tr><td></td><td><div class=''><?php echo html::submitButton();?></div></td></tr>
       </tbody>
     </table>

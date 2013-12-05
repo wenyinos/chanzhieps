@@ -12,6 +12,18 @@
 class messageModel extends model
 {
     /**
+     * Get message by ID. 
+     * 
+     * @param  int    $messageID 
+     * @access public
+     * @return object
+     */
+    public function getByID($messageID)
+    {
+        return $this->dao->select('*')->from(TABLE_MESSAGE)->findByID($messageID)->fetch();
+    }
+    
+    /**
      * Get messages of one object.
      * 
      * @param  string $type          the message type
@@ -23,16 +35,30 @@ class messageModel extends model
     public function getByObject($type, $objectType, $objectID, $pager = null)
     {
         $userMessages = $this->cookie->cmts;
-        $messages = $this->dao->select('*')->from(TABLE_MESSAGE)
+        return  $this->dao->select('*')->from(TABLE_MESSAGE)
             ->where('type')->eq($type)
+            ->beginIf(RUN_MODE == 'front')->andWhere('public')->eq(1)->fi()
             ->andWhere('objectType')->eq($objectType)
             ->andWhere('objectID')->eq($objectID)
             ->andWhere("(INSTR('$userMessages', CONCAT('_',id,'_')) != 0 or status != '0' or `from` = '{$this->app->user->account}')")
             ->orderBy('id_desc')
             ->page($pager)
             ->fetchAll('id');
-        if(!$messages) return array();
-        return array_values($messages);
+    }
+
+    /**
+     * Get replies of message list. 
+     * 
+     * @param  mix    $messages 
+     * @access public
+     * @return array
+     */
+    public function getReplies($messages)
+    {
+        return $this->dao->select('*')->from(TABLE_MESSAGE)
+            ->where('type')->eq('reply')
+            ->andWhere('objectID')->in($messages)
+            ->fetchGroup('objectID');
     }
 
     /**
@@ -49,6 +75,7 @@ class messageModel extends model
         $messages = $this->dao->select('*')->from(TABLE_MESSAGE)
             ->where('type')->eq($type)
             ->andWhere('status')->eq($status)
+            ->beginIf(RUN_MODE == 'front')->andWhere('public')->eq(1)->fi()
             ->orderBy('id_desc')
             ->page($pager)
             ->fetchAll('id');
@@ -92,6 +119,9 @@ class messageModel extends model
             ->specialChars('content, from')
             ->add('date', helper::now())
             ->add('type', $type)
+            ->add('public', $_POST['public'][0])
+            ->setDefault('public', '0')
+            ->setIF($type == 'message', 'to', 'admin')
             ->add('ip', $this->server->REMOTE_ADDR)
             ->remove('status')
             ->get();
@@ -105,8 +135,43 @@ class messageModel extends model
             ->batchCheck('from, type, content', 'notempty')
             ->exec();
 
-        $messageID = $this->dao->lastInsertId();
-        return $messageID;
+        if(dao::isError()) return false;
+        return $this->dao->lastInsertId();
+    }
+
+    /**
+     * Reply a message.
+     * 
+     * @param  int    $messageID 
+     * @access public
+     * @return void
+     */
+    public function reply($messageID)
+    {
+        $message = $this->getByID($messageID);
+
+        $reply   = fixer::input('post')
+            ->add('objectType', $message->type)
+            ->add('objectID', $message->id)
+            ->add('to', $message->to)
+            ->add('type', 'reply')
+            ->add('date', helper::now())
+            ->add('public', 1)
+            ->add('ip', $this->server->REMOTE_ADDR)
+            ->remove('status')
+            ->get();
+
+        $this->dao->insert(TABLE_MESSAGE)
+            ->data($reply, $skip = 'captcha')
+            ->autoCheck()
+            ->check('captcha', 'captcha')
+            ->check('type', 'in', $this->config->message->types)
+            ->checkIF($reply->email, 'email', 'email')
+            ->batchCheck('from, type, content', 'notempty')
+            ->exec();
+
+        if(dao::isError()) return false;
+        return $this->dao->lastInsertId();
     }
 
     /**
