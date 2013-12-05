@@ -86,6 +86,12 @@ class seo
 
         //------------- The module is an system module-------------- */
 
+        if($module == 'book' && count($items) > 2)
+        {
+            $uri      = str_replace('/' . $items[1], '', $uri );
+            $items[1] = $items[2];
+        }
+
         /*  If the first param is a category id, like news/c123.html. */
         if(preg_match('/^c\d+$/', $items[1]))
         {
@@ -303,10 +309,11 @@ class uri
     {
         global $config;
 
-        $link = 'book/c' . array_shift($params);
-        if($alias['book']) $link = 'book/' . $alias['book'];
+        $link = 'book/' . $alias['book'];
+        if(!isset($alias['title'])) return $config->webRoot . $link . '.' . $config->default->view;
+        if(isset($alias['title']) && empty($alias['title'])) return $config->webRoot . $link . '/c' . array_shift($params). '.' . $config->default->view;
+        if($alias['title']) return $config->webRoot . $link . '/' . $alias['title'] . '.' . $config->default->view;
 
-        return $config->webRoot . $link . '.' . $config->default->view;
     }
 
     /**
@@ -320,7 +327,7 @@ class uri
     {
         global $config;
 
-        $link = 'book/';
+        $link = 'book/' . $alias['book'] . '/';
         $link .= array_shift($params);
         if($alias['article']) $link .= '_' . $alias['article'];
 
