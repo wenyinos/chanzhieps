@@ -66,7 +66,7 @@ $config->dependence->book[]    = 'book';
 $config->dependence->user[]    = 'user';
 $config->dependence->forum[]   = 'forum';
 $config->dependence->forum[]   = 'user';
-$config->dependence->comment[] = 'comment';
+$config->dependence->message[] = 'message';
 
 /* Database settings. */
 $config->db = new stdclass();          

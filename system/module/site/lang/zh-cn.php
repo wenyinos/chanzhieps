@@ -39,7 +39,7 @@ $lang->site->moduleAvailable['user']    = '会员';
 $lang->site->moduleAvailable['forum']   = '论坛';
 $lang->site->moduleAvailable['blog']    = '博客';
 $lang->site->moduleAvailable['book']    = '手册';
-$lang->site->moduleAvailable['comment'] = '评论';
+$lang->site->moduleAvailable['message'] = '评论留言';
 
 $lang->site->themes = array();
 $lang->site->themes['default']    = '默认风格';
