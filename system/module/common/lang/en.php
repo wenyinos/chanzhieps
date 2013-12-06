@@ -41,6 +41,7 @@ EOT;
 /* Global lang items. */
 $lang->home           = 'Home';
 $lang->welcome        = 'Welcome, <strong>%s</strong>!';
+$lang->messages       = "<span><i class='icon-comment'></i> %s</span>";
 $lang->todayIs        = 'Today is %s, ';
 $lang->aboutUs        = 'About';
 $lang->link           = 'Links';

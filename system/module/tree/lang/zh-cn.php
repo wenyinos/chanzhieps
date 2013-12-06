@@ -19,6 +19,7 @@ $lang->tree->fix         = "修复数据";
 
 $lang->tree->noCategories  = '您还没有添加类目，请添加类目。';
 $lang->tree->aliasRepeat   = '别名: %s 已经存在,不能重复添加。';
+$lang->tree->hasChildren   = '该板块存在子版块，不能删除。';
 $lang->tree->confirmDelete = "您确定删除该类目吗？";
 $lang->tree->successFixed  = "成功修复";
 
