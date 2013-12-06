@@ -345,9 +345,8 @@ class uri
     {
         global $config;
 
-        $link = 'page/';
-        $link .= array_shift($params);
-        if($alias['name']) $link .= '_' . $alias['name'];
+        $link = 'page/' . array_shift($params);
+        if($alias['name']) $link = 'page/' . $alias['name'];
 
         return $config->webRoot . $link . '.' . $config->default->view;
     }
