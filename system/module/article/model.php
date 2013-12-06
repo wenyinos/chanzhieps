@@ -251,7 +251,7 @@ class articleModel extends model
         /* Save article keywords. */
         $this->loadModel('tag')->save($article->keywords);
 
-        $this->processCategories($articleID, $type, $this->post->categories);
+        if($type != 'page') $this->processCategories($articleID, $type, $this->post->categories);
         return $articleID;
     }
 
@@ -281,7 +281,8 @@ class articleModel extends model
         $this->dao->update(TABLE_ARTICLE)
             ->data($article, $skip = 'categories,uid')
             ->autoCheck()
-            ->batchCheck($this->config->article->edit->requiredFields, 'notempty')
+            ->batchCheckIF($type != 'page', $this->config->article->edit->requiredFields, 'notempty')
+            ->batchCheckIF($type == 'page', $this->config->article->page->requiredFields, 'notempty')
             ->where('id')->eq($articleID)
             ->exec();
 
@@ -293,7 +294,7 @@ class articleModel extends model
         if(dao::isError()) return false;
 
         $this->loadModel('tag')->save($article->keywords);
-        $this->processCategories($articleID, $type, $this->post->categories);
+        if($type != 'page') $this->processCategories($articleID, $type, $this->post->categories);
 
         return !dao::isError();
     }
