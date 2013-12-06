@@ -27,7 +27,7 @@
             if($reply->editor) printf($lang->thread->lblEdited, $reply->editor, $reply->editedDate);
             if($this->app->user->account != 'guest')
             {
-                echo html::a('#reply', $lang->reply->common);
+                echo html::a('#reply', $lang->reply->common, "class='replyTO'");
                 if($this->thread->canManage($board->id, $reply->author)) echo html::a($this->createLink('reply', 'edit', "replyID=$reply->id"), $lang->edit);
                 if($this->thread->canManage($board->id)) echo html::a($this->createLink('reply', 'delete', "replyID=$reply->id"), $lang->delete, "class='deleter'");
             }
