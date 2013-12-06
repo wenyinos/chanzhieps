@@ -159,8 +159,8 @@ $lang->ui->menu->pages = array('link' => '布局设置|block|pages|', 'alias' =>
 /* Menu of comment module. */
 $lang->message = new stdclass();
 $lang->message->menu = new stdclass();
-$lang->message->menu->unchecked = '留言|message|admin|type=message';
-$lang->message->menu->checked   = '评论|message|admin|type=comment';
+$lang->message->menu->message = '留言|message|admin|type=message';
+$lang->message->menu->comment = '评论|message|admin|type=comment';
 
 /* Menu of forum module. */
 $lang->forum = new stdclass();
