@@ -386,7 +386,7 @@ class userModel extends model
     /**
      * update the resetKey.
      * 
-     * @param  string   $resetKey 
+     * @param  string   $account
      * @param  time     $resetTime 
      * @access public
      * @return void
