@@ -64,16 +64,17 @@ class book extends control
      * @access public
      * @return void
      */
-    public function browse($bookID)
+    public function browse($catalogueID)
     {
-        $book = $this->book->getByID($bookID);
+        $catalogue = $this->book->getByID($catalogueID);
+        $book = $this->book->getBook($catalogue->path);
 
-        $this->view->title     = $book->title;
-        $this->view->keywords  = trim($book->keywords . ' ' . $this->config->site->keywords);
-        $this->view->book      = $book;
-        $this->view->root      = $this->book->getRoot($book->path);
-        $this->view->books     = $this->book->getBookList();
-        $this->view->catalogue = $this->book->getFrontCatalogue($book->id);
+        $this->view->title      = $book->title;
+        $this->view->keywords   = trim($catalogue->keywords . ' ' . $this->config->site->keywords);
+        $this->view->catalogue  = $catalogue;
+        $this->view->book       = $book;
+        $this->view->books      = $this->book->getBookList();
+        $this->view->catalogues = $this->book->getFrontCatalogue($book->id);
         $this->display();
     }
 
@@ -88,7 +89,7 @@ class book extends control
     { 
         $article = $this->book->getByID($articleID);
         $parent  = $this->book->getByID($article->parent);
-        $root    = $this->book->getRoot($article->path);
+        $book    = $this->book->getBook($article->path);
         
         $this->createContentNav($article->content);
 
@@ -100,13 +101,12 @@ class book extends control
         $this->view->prevAndNext = $this->book->getPrevAndNext($article->id, $parent->id);
         //$this->view->layouts   = $this->loadModel('block')->getLayouts('book.read');
         $this->view->parent      = $parent;
-        $this->view->root        = $root;
+        $this->view->book        = $book;
 
         $this->dao->update(TABLE_BOOK)->set('views = views + 1')->where('id')->eq($articleID)->exec(false);
 
         $this->display();
     }
-
 
     /**
      * Create a book.
@@ -131,17 +131,27 @@ class book extends control
 
         if($_POST)
         {
-            $bookID = $this->book->create($parent);
+            $result = $this->book->create($parent);
 
-            $locate = $this->inlink('admin', "bookID=$bookID");
             if($parent)
             {
                 $parent = $this->book->getByID($parent);
-                $origin = $this->book->getRootID($parent->path);
+                $origin = $this->book->getBookID($parent->path);
                 $locate = $this->inlink('admin', "bookID=$origin");
             }
-            if($bookID) $this->send(array('result' => 'success', 'message'=>$this->lang->saveSuccess, 'locate' => $locate));
-            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
+            if(is_numeric($result))
+            {
+                $this->send(array('result' => 'success', 'message'=>$this->lang->saveSuccess, 'locate' => inlink('admin', "bookID=$result")));
+            }
+            elseif($result === true)
+            {
+                $this->send(array('result' => 'success', 'message'=>$this->lang->saveSuccess, 'locate' => $locate));
+            }
+            else
+            {
+                $this->send(array('result' => 'fail', 'message' => dao::getError() ? dao::getError() : $result));
+            }
         }
 
         $this->view->books      = $books;
@@ -162,13 +172,13 @@ class book extends control
     {
         $book   = $this->book->getByID($bookID);
         $parent = $this->book->getByID($book->parent);
-        $origin = $this->book->getRootID($book->path);
+        $origin = $this->book->getBookID($book->path);
 
         if($_POST)
         {
-            $this->book->update($bookID);
-            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin', "bookID=$bookID")));
+            $result = $this->book->update($bookID);
+            if($result === true) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin', "bookID=$bookID")));
+            $this->send(array('result' => 'fail', 'message' => dao::getError() ? dao::getError() : $result));
         }
 
         $this->view->title   = $this->lang->book->edit;
@@ -225,11 +235,11 @@ class book extends control
      */
     public function up($id)
     {
-        $book = $this->book->getByID($id);
+        $catalogue = $this->book->getByID($id);
         $prev = $this->dao->select('id, `order`')
             ->from(TABLE_BOOK)
-            ->where('parent')->eq($book->parent)
-            ->andWhere('`order`')->lt($book->order)
+            ->where('parent')->eq($catalogue->parent)
+            ->andWhere('`order`')->lt($catalogue->order)
             ->orderBy('`order` desc')
             ->limit(1)
             ->fetch();
@@ -237,8 +247,8 @@ class book extends control
 
         $order = $prev->order;
 
-        $this->dao->update(TABLE_BOOK)->set('`order`')->eq($book->order)->where('id')->eq($prev->id)->exec();
-        $this->dao->update(TABLE_BOOK)->set('`order`')->eq($order)->where('id')->eq($book->id)->exec();
+        $this->dao->update(TABLE_BOOK)->set('`order`')->eq($catalogue->order)->where('id')->eq($prev->id)->exec();
+        $this->dao->update(TABLE_BOOK)->set('`order`')->eq($order)->where('id')->eq($catalogue->id)->exec();
 
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success'));
@@ -253,11 +263,11 @@ class book extends control
      */
     public function down($id)
     {
-        $book = $this->book->getByID($id);
+        $catalogue = $this->book->getByID($id);
         $next = $this->dao->select('id, `order`')
             ->from(TABLE_BOOK)
-            ->where('parent')->eq($book->parent)
-            ->andWhere('`order`')->gt($book->order)
+            ->where('parent')->eq($catalogue->parent)
+            ->andWhere('`order`')->gt($catalogue->order)
             ->orderBy('`order`')
             ->limit(1)
             ->fetch();
@@ -265,8 +275,8 @@ class book extends control
 
         $order = $next->order;
 
-        $this->dao->update(TABLE_BOOK)->set('`order`')->eq($book->order)->where('id')->eq($next->id)->exec();
-        $this->dao->update(TABLE_BOOK)->set('`order`')->eq($order)->where('id')->eq($book->id)->exec();
+        $this->dao->update(TABLE_BOOK)->set('`order`')->eq($catalogue->order)->where('id')->eq($next->id)->exec();
+        $this->dao->update(TABLE_BOOK)->set('`order`')->eq($order)->where('id')->eq($catalogue->id)->exec();
 
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success'));
