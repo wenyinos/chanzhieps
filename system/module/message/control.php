@@ -14,6 +14,7 @@ class message extends control
     /**
      * The index page of message front.
      * 
+     * @param  int    $pageID 
      * @access public
      * @return void
      */
@@ -52,10 +53,11 @@ class message extends control
     /**
      * Get the latest approvaled messages.
      * 
-     * @param int    $status 
-     * @param int    $recTotal 
-     * @param int    $recPerPage 
-     * @param int    $pageID 
+     * @param  string $type 
+     * @param  string $status 
+     * @param  int    $recTotal 
+     * @param  int    $recPerPage 
+     * @param  int    $pageID 
      * @access public
      * @return void
      */
@@ -64,12 +66,12 @@ class message extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $this->view->title       = $this->lang->message->common;
-        $this->view->messages    = $this->message->getList($type, $status, $pager);
-        $this->view->replies     = $this->message->getReplies(array_keys($this->view->messages));
-        $this->view->pager       = $pager;
-        $this->view->type        = $type;
-        $this->view->status      = $status;
+        $this->view->title    = $this->lang->message->common;
+        $this->view->messages = $this->message->getList($type, $status, $pager);
+        $this->view->replies  = $this->message->getReplies(array_keys($this->view->messages));
+        $this->view->pager    = $pager;
+        $this->view->type     = $type;
+        $this->view->status   = $status;
         $this->display();
     }
 

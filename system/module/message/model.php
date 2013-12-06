@@ -150,7 +150,7 @@ class messageModel extends model
     {
         $message = $this->getByID($messageID);
 
-        $reply   = fixer::input('post')
+        $reply = fixer::input('post')
             ->add('objectType', $message->type)
             ->add('objectID', $message->id)
             ->add('to', $message->to)
