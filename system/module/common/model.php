@@ -653,6 +653,19 @@ class commonModel extends model
     }
 
     /**
+     * Print the positon bar of page module.
+     * 
+     * @param  object $page 
+     * @access public
+     * @return void
+     */
+    public function printPage($page)
+    {
+        $divider = $this->lang->divider;
+        echo '<li>' . $page->title . '</li>';
+    }
+
+    /**
      * Create front link for admin MODEL.
      *
      * @param string       $module
