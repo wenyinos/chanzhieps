@@ -116,8 +116,8 @@ class articleModel extends model
         return $this->dao->select('id, title')->from(TABLE_ARTICLE)
             ->where('1=1')
             ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')
-            ->andWhere('t1.addedDate')->le(helper::now())
-            ->andWhere('t1.status')->eq('normal')
+            ->andWhere('addedDate')->le(helper::now())
+            ->andWhere('status')->eq('normal')
             ->fi()
             ->orderBy('id_desc')
             ->page($pager, false)
@@ -236,7 +236,7 @@ class articleModel extends model
             ->data($article, $skip = 'categories,uid')
             ->autoCheck()
             ->batchCheckIF($type != 'page', $this->config->article->create->requiredFields, 'notempty')
-            ->batchCheckIF($type == 'page', $this->config->article->create->page->requiredFields, 'notempty')
+            ->batchCheckIF($type == 'page', $this->config->article->page->requiredFields, 'notempty')
             ->exec();
         $articleID = $this->dao->lastInsertID();
 
