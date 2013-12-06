@@ -114,7 +114,7 @@ class articleModel extends model
     public function getPagePairs($pager = null)
     {
         return $this->dao->select('id, title')->from(TABLE_ARTICLE)
-            ->where('1=1')
+            ->where('type')->eq('page')
             ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')
             ->andWhere('addedDate')->le(helper::now())
             ->andWhere('status')->eq('normal')
@@ -123,6 +123,7 @@ class articleModel extends model
             ->page($pager, false)
             ->fetchPairs();
     }
+
     /**
      * Get article pairs.
      * 
