@@ -32,7 +32,7 @@ js::set('path', json_encode($path));
       <th><?php echo $lang->book->alias;?></th>
       <td>
         <div class="input-group text-1">
-          <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot?>book/id@</span>
+          <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot?>book/</span>
           <?php echo html::input('alias', '', "class='text-1 form-control' placeholder='{$lang->alias}'");?>
           <span class="input-group-addon">.html</span>
         </div>
@@ -76,7 +76,7 @@ js::set('path', json_encode($path));
     <tr class='v-middle a-center'>
       <td><?php echo html::select("type[]", $lang->book->typeList, '', "class='select-2'");?></td>
       <td><?php echo html::input("title[]", '', "class='text-1'");?></td>
-      <td><?php echo html::input("alias[]", '', "class='text-1'");?></td>
+      <td><?php echo html::input("alias[]", '', "class='text-1' placeholder='{$lang->alias}'");?></td>
       <td><?php echo html::input("keywords[]", '', "class='text-1'");?></td>
       <td><i class='icon-arrow-up'></i> <i class='icon-arrow-down'></i></td>
       <td><?php echo html::hidden("order[]", '', "class='order'");?></td>
