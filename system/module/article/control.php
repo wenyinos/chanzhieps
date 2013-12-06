@@ -83,7 +83,7 @@ class article extends control
         $families = $categoryID ? $this->loadModel('tree')->getFamily($categoryID, $type) : '';
         $articles = $this->article->getList($type, $families, $orderBy, $pager);
 
-        $this->view->title         = $type == 'blog' ? $this->lang->blog->admin : $this->lang->article->admin;
+        $this->view->title         = $this->lang->$type->admin;
         $this->view->articles      = $articles;
         $this->view->pager         = $pager;
         $this->view->articleList   = $articleList;
@@ -120,7 +120,7 @@ class article extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin', "type=$type")));
         }
 
-        $this->view->title           = $this->lang->article->create;
+        $this->view->title           = $this->lang->$type->create;
         $this->view->currentCategory = $categoryID;
         $this->view->categories      = $this->loadModel('tree')->getOptionMenu($type, 0, $removeRoot = true);
         $this->view->type            = $type;
@@ -143,7 +143,7 @@ class article extends control
 
         $article    = $this->article->getByID($articleID, $replaceTag = false);
         $categories = $this->loadModel('tree')->getOptionMenu($type, 0, $removeRoot = true);
-        if(empty($categories))
+        if(empty($categories) && $type != 'page')
         {
             die(js::alert($this->lang->tree->noCategories) . js::locate($this->createLink('tree', 'browse', "type=$type")));
         }
