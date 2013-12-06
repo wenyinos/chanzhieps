@@ -18,11 +18,14 @@ class bookModel extends model
      * @access public
      * @return array
      */
-    public function getByID($id)
+    public function getByID($id, $replaceTag = true)
     {
         $book = $this->dao->select('*')->from(TABLE_BOOK)->where('alias')->eq($id)->fetch();
         if(!$book) $book = $this->dao->select('*')->from(TABLE_BOOK)->where('id')->eq($id)->fetch();
         $book->pathNames = $this->dao->select('id, title')->from(TABLE_BOOK)->where('id')->in($book->path)->orderBy('grade')->fetchPairs();
+
+        /* Add link to content if necessary. */
+        if($replaceTag && !empty($book->content)) $book->content = $this->loadModel('tag')->addLink($book->content);
         return $book;
     }
 
@@ -321,9 +324,6 @@ class bookModel extends model
             $bookPath = ",$bookID,";
             $this->dao->update(TABLE_BOOK)->set('path')->eq($bookPath)->where('id')->eq($bookID)->exec();
 
-            /* Save keywords. */
-            $this->loadModel('tag')->save($book->keywords);
-
             return $bookID;
         }
         else
@@ -449,6 +449,7 @@ class bookModel extends model
             ->where('id')->eq($bookID)
             ->exec();
 
+        $this->loadModel('file')->updateObjectID($this->post->uid, $bookID, 'book');
         if(dao::isError()) return false;
 
         $this->loadModel('tag')->save($book->keywords);

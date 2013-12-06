@@ -170,7 +170,7 @@ class book extends control
      */
     public function edit($bookID)
     {
-        $book   = $this->book->getByID($bookID);
+        $book   = $this->book->getByID($bookID, $replaceTag = false);
         $parent = $this->book->getByID($book->parent);
         $origin = $this->book->getBookID($book->path);
 
