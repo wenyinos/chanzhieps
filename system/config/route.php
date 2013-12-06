@@ -20,3 +20,5 @@ $config->seo->alias->method['blog']['view']      = 'view';
 
 $config->seo->alias->method['book']['browse']    = 'browse';  
 $config->seo->alias->method['book']['view']      = 'read';  
+
+$config->seo->alias->method['page']['view']      = 'view';  
