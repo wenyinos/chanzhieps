@@ -194,11 +194,11 @@ class bookModel extends model
 
             if($catalogue->type == 'chapter')
             {
-                $this->catalogue .= "<dd class='catalogue chapter'><strong>" . $order . '&nbsp;' . html::a($linkOnTitle, $catalogue->title) . "</strong>" . $editButton . $deleteButton . $create . $sort . '</dd>';
+                $this->catalogue .= "<dd class='catalogue chapter'><strong><span class='order'>" . $order . '</span>&nbsp;' . html::a($linkOnTitle, $catalogue->title) . "</strong>" . $editButton . $deleteButton . $create . $sort . '</dd>';
             }
             elseif($catalogue->type == 'article')
             {
-                $this->catalogue .= "<dd class='catalogue article'><strong>" . $order . '</strong>&nbsp;' . html::a($linkOnTitle, $catalogue->title) . $editButton . $deleteButton . $sort . '</dd>';
+                $this->catalogue .= "<dd class='catalogue article'><strong><span class='order'>" . $order . '</span></strong>&nbsp;' . html::a($linkOnTitle, $catalogue->title) . $editButton . $deleteButton . $sort . '</dd>';
             }
         }
 
@@ -242,15 +242,15 @@ class bookModel extends model
 
             if($catalogue->type == 'book')
             {
-                $this->catalogue .= "<dt class='book'><strong>" . $title . '</strong>' . $editButton . $deleteButton . $create . '</dt>';
+                $this->catalogue .= "<dt class='book'><strong>" . $title . '</strong><span class="actions">' . $editButton . $deleteButton . $create . '</span></dt>';
             }
             elseif($catalogue->type == 'chapter')
             {
-                $this->catalogue .= "<dd class='catalogue chapter'><strong>" . $order . '&nbsp;' . $title . '</strong>' . $editButton . $deleteButton . $create . $sortup . $sortdown . '</dd>';
+                $this->catalogue .= "<dd class='catalogue chapter'><strong><span class='order'>" . $order . '</span>&nbsp;' . $title . '</strong><span class="actions">' . $editButton . $deleteButton . $create . $sortup . $sortdown . '</span></dd>';
             }
             elseif($catalogue->type == 'article')
             {
-                $this->catalogue .= "<dd class='catalogue article'><strong>" . $order . '</strong>&nbsp;' . $catalogue->title . $editButton . $deleteButton . $sortup . $sortdown . '</dd>';
+                $this->catalogue .= "<dd class='catalogue article'><strong><span class='order'>" . $order . '</span>&nbsp;' . $catalogue->title . '</strong><span class="actions">' . $editButton . $deleteButton . $sortup . $sortdown . '</span></dd>';
             }
         }
 

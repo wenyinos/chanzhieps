@@ -17,6 +17,6 @@ js::set('path', json_encode($path));
 ?>
 <div class='box radius'>  
   <h4 class='title'><?php echo $book->title;?></h4>
-  <dl><?php echo $catalogue;?></dl>
+  <dl class="books"><?php echo $catalogue;?></dl>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>

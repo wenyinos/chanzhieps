@@ -16,8 +16,8 @@
 
   <div class='col-md-9'>
     <div class='box radius'>  
-      <h4 class='title'><?php echo $book->title;?></h4>
-      <dl>
+      <h4 class='title'><i class="icon-book"></i> <?php echo $book->title;?></h4>
+      <dl  class="books">
       <?php echo $catalogues;?>
       </dl>
     </div>
