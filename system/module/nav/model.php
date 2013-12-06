@@ -69,12 +69,14 @@ class navModel extends model
             $nav->url    = '';
         }
 
-        $childGrade    = $grade + 1;
-        $articleTree   = $this->loadModel('tree')->getOptionMenu('article');
-        $productTree   = $this->loadModel('tree')->getOptionMenu('product');
+        $childGrade  = $grade + 1;
+        $articleTree = $this->loadModel('tree')->getOptionMenu('article');
+        $productTree = $this->loadModel('tree')->getOptionMenu('product');
+        $pages       = $this->loadModel('article')->getPagePairs();
 
         $articleHidden = ($nav->type == 'article') ? '' : 'hide'; 
         $productHidden = ($nav->type == 'product') ? '' : 'hide'; 
+        $pageHidden    = ($nav->type == 'page') ? '' : 'hide'; 
         $system        = ($nav->type == 'system')  ? '' : 'hide'; 
         $urlHidden     = ($nav->type == 'custom')  ? '' : 'hide'; 
 
@@ -86,6 +88,7 @@ class navModel extends model
         /* artcle and system select tag. */
         $entry .= html::select("nav[{$grade}][article][]", $articleTree, $nav->article, "class='navSelector {$articleHidden}'");
         $entry .= html::select("nav[{$grade}][product][]", $productTree, $nav->product, "class='navSelector {$productHidden}'");
+        $entry .= html::select("nav[{$grade}][page][]", $pages, $nav->page, "class='navSelector {$pageHidden}'");
         $entry .= html::select("nav[{$grade}][system][]", $this->lang->nav->system, $nav->system, "class='navSelector {$system}'");
 
         $entry .= html::input("nav[{$grade}][title][]", $nav->title, "placeholder='{$this->lang->nav->inputTitle}' class='input-default  titleInput'");
@@ -184,6 +187,11 @@ class navModel extends model
         {
             $category = $this->loadModel('tree')->getByID($nav['product']);
             return commonModel::createFrontLink('product', 'browse', "categoryID={$nav['product']}", "category={$category->alias}");
+        }
+        if($nav['type'] == 'page')
+        {
+            $page = $this->loadModel('article')->getByID($nav['page']);
+            return commonModel::createFrontLink('page', 'view', "pageID={$nav['page']}", "name={$page->alias}");
         }
         return $nav['url'];
     }

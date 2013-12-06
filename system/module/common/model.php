@@ -594,8 +594,8 @@ class commonModel extends model
             $book = $this->loadModel('book')->getByID($bookID);
             if($book->parent)
             {
-                $root = $this->book->getRoot($book->path);
-                echo '<li>' . html::a(helper::createLink('book', 'browse', "bookID=$bookID", "book=$root->alias&title=$book->alias"), $bookTitle) . '</li>';
+                $book = $this->book->getBook($book->path);
+                echo '<li>' . html::a(helper::createLink('book', 'browse', "bookID=$bookID", "book=$book->alias&title=$book->alias"), $bookTitle) . '</li>';
             }
             else
             {

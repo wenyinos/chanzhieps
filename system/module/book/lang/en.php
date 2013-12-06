@@ -25,8 +25,10 @@ $lang->book->articleList = 'Articles';
 $lang->book->typeList['chapter'] = 'Chapter';
 $lang->book->typeList['article'] = 'Article';
 
-$lang->book->prev      = 'Previous';
-$lang->book->next      = 'Next';
-$lang->book->none      = 'None';
-$lang->book->directory = 'Back';
-$lang->book->back2Top  = 'Back to top';
+$lang->book->prev     = 'Previous';
+$lang->book->next     = 'Next';
+$lang->book->none     = 'None';
+$lang->book->chapter  = 'Back';
+$lang->book->back2Top = 'Back to top';
+
+$lang->book->aliasRepeat = 'Alias: %s already exists。';

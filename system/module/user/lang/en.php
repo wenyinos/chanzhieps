@@ -40,16 +40,17 @@ $lang->user->allowTime = 'Allow time';
 $lang->user->status    = 'Status';
 $lang->user->alert     = 'Your account has been forbidden';
 
-$lang->user->list          = 'User list';
-$lang->user->view          = "User info";
-$lang->user->create        = "Add a user";
-$lang->user->edit          = "Edit user";
-$lang->user->changePassword= "Change password";
-$lang->user->newPassword   = "New password";
-$lang->user->update        = "Edit user";
-$lang->user->delete        = "Delete user";
-$lang->user->browse        = "Borwse";
-$lang->user->deny          = "Access denied";
+$lang->user->list            = 'User list';
+$lang->user->view            = "User info";
+$lang->user->create          = "Add a user";
+$lang->user->edit            = "Edit user";
+$lang->user->changePassword  = "Change password";
+$lang->user->recoverPassword = "recover password";
+$lang->user->newPassword     = "New password";
+$lang->user->update          = "Edit user";
+$lang->user->delete          = "Delete user";
+$lang->user->browse          = "Borwse";
+$lang->user->deny            = "Access denied";
 $lang->user->confirmDelete   = "Are you sure to delete this user?";
 $lang->user->confirmActivate = "Are you sure to activate this user?";
 $lang->user->relogin         = "Relogin";
@@ -107,6 +108,14 @@ $lang->user->login->common  = "Login";
 $lang->user->login->welcome = 'Welcome';
 $lang->user->login->why     = 'Login, and use more feature.';
 
+$lang->user->resetPassword = new stdclass();
+$lang->user->resetPassword->success    = "Password change link has been sent to your mailbox";
+$lang->user->resetPassword->failed     = "Please input your correct mail";
+
+$lang->user->resetmail = new stdclass();
+$lang->user->resetmail->subject = "Modify password";
+$lang->user->resetmail->notice  = "System letter, please do not reply";
+
 $lang->user->oauth = new stdclass();
 $lang->user->oauth->common       = 'OAuth';
 $lang->user->oauth->provider     = 'Provider';
@@ -133,3 +142,37 @@ $lang->user->control->menus[20] = '<i class="icon-large icon-edit"></i> Edit <i 
 $lang->user->control->menus[28] = '<i class="icon-large icon-comments-alt"></i> Messages <i class="icon-chevron-right"></i>|user|message';
 $lang->user->control->menus[30] = '<i class="icon-large icon-share"></i> Threads <i class="icon-chevron-right"></i>|user|thread';
 $lang->user->control->menus[40] = '<i class="icon-large icon-mail-reply-all"></i> Replies <i class="icon-chevron-right"></i>|user|reply';
+
+$lang->user->mailContent = <<<EOT
+<html>
+<head>
+<style type='text/css'>
+body{
+margin:0;
+padding:0;
+}
+div{
+    padding-left:30px;
+}
+</style>
+</head>
+<body>
+<div style='padding-top:20px;height:60px;background:#fafafa;border-bottom:1px solid #ddd;font-size:18px;font-weight:bold'> 密码修改 </div>
+<div style='margin-top:20px;'>
+<p>
+Hello, %s 
+<br>
+Please click the link to change your password:
+<br>
+<a href='%s' target='_blank'>%s</a>
+</p>
+<p>Reset Key: %s</p>
+</div>
+<div style='height:20px;border-bottom:1px solid #ddd;'></div>
+<div style='margin:20px 0 0 0 ;'>
+System letter, please do not reply
+</div>
+</body>
+</html>
+
+EOT;

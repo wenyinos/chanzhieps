@@ -17,9 +17,9 @@
     <?php if($article->keywords) echo "<div class='keywords'><strong>{$lang->book->keywords}</strong>$lang->colon$article->keywords</div>";?>
     <?php extract($prevAndNext);?>
     <div class='row f-12px mt-10px'>
-      <div class='col-md-4 a-left'> <?php $prev ? print($lang->book->prev . $lang->colon . html::a(inlink('read', "id=$prev->id", "book={$root->alias}&article={$prev->alias}"), $prev->title)) : print($lang->book->none);?></div>
-      <div class='col-md-4 a-center'><?php echo html::a(inlink('browse', "bookID={$parent->id}", "book={$root->alias}&title={$parent->alias}"), $lang->book->directory);?></div>
-      <div class='col-md-4 a-right'><?php $next ? print($lang->book->next . $lang->colon . html::a(inlink('read', "id=$next->id", "book={$root->alias}&article={$next->alias}"), $next->title)) : print($lang->book->none);?></div>
+      <div class='col-md-4 a-left'> <?php $prev ? print($lang->book->prev . $lang->colon . html::a(inlink('read', "id=$prev->id", "book={$book->alias}&article={$prev->alias}"), $prev->title)) : print($lang->book->none);?></div>
+      <div class='col-md-4 a-center'><?php echo html::a(inlink('browse', "bookID={$parent->id}", "book={$book->alias}&title={$parent->alias}"), $lang->book->chapter);?></div>
+      <div class='col-md-4 a-right'><?php $next ? print($lang->book->next . $lang->colon . html::a(inlink('read', "id=$next->id", "book={$book->alias}&article={$next->alias}"), $next->title)) : print($lang->book->none);?></div>
     </div>
   </div>
 </div>

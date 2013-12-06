@@ -24,7 +24,9 @@
       <?php $vars = "type=$type&categoryID=$categoryID&corderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
       <th class='w-60px'> <?php commonModel::printOrderLink('id',        $orderBy, $vars, $lang->article->id);?></th>
       <th>                <?php commonModel::printOrderLink('title',     $orderBy, $vars, $lang->article->title);?></th>
+      <?php if($type != 'page'):?>
       <th class='w-p20'>  <?php commonModel::printOrderLink('category',  $orderBy, $vars, $lang->article->category);?></th>
+      <?php endif;?>
       <th class='w-80px'> <?php commonModel::printOrderLink('status',    $orderBy, $vars, $lang->article->status);?></th>
       <th class='w-160px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->article->addedDate);?></th>
       <th class='w-60px'> <?php commonModel::printOrderLink('views',     $orderBy, $vars, $lang->article->views);?></th>
@@ -36,7 +38,9 @@
     <tr class='a-center'>
       <td><?php echo $article->id;?></td>
       <td class='a-left'><?php echo $article->title;?></td>
+      <?php if($type != 'page'):?>
       <td class='a-left'><?php foreach($article->categories as $category) echo $category->name . ' ';?></td>
+      <?php endif;?>
       <td><?php echo $lang->article->statusList[$article->status];?></td>
       <td><?php echo $article->addedDate;?></td>
       <td><?php echo $article->views;?></td>

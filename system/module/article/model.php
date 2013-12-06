@@ -105,6 +105,25 @@ class articleModel extends model
     }
 
     /**
+     * Get page pairs.
+     * 
+     * @param string $pager 
+     * @access public
+     * @return array
+     */
+    public function getPagePairs($pager = null)
+    {
+        return $this->dao->select('id, title')->from(TABLE_ARTICLE)
+            ->where('1=1')
+            ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')
+            ->andWhere('addedDate')->le(helper::now())
+            ->andWhere('status')->eq('normal')
+            ->fi()
+            ->orderBy('id_desc')
+            ->page($pager, false)
+            ->fetchPairs();
+    }
+    /**
      * Get article pairs.
      * 
      * @param string $modules 
@@ -217,7 +236,7 @@ class articleModel extends model
             ->data($article, $skip = 'categories,uid')
             ->autoCheck()
             ->batchCheckIF($type != 'page', $this->config->article->create->requiredFields, 'notempty')
-            ->batchCheckIF($type == 'page', $this->config->article->create->page->requiredFields, 'notempty')
+            ->batchCheckIF($type == 'page', $this->config->article->page->requiredFields, 'notempty')
             ->exec();
         $articleID = $this->dao->lastInsertID();
 
@@ -366,7 +385,7 @@ class articleModel extends model
             $file->title = $file->title . ".$file->extension";
             if($file->isImage)
             {
-                $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank'") . '</li>';
+                $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank' data-toggle='lightbox'") . '</li>';
             }
             else
             {

@@ -368,25 +368,23 @@ class user extends control
             if($user)
             {
                 $account   = $this->post->account;
-                $safeMail  = $user->email;
                 $resetKey  = md5(str_shuffle(md5($account . mt_rand(0, 99999999) . microtime())) . microtime());
                 $resetURL  = "http://". $_SERVER['HTTP_HOST'] . $this->inlink('checkresetkey', "key=$resetKey");
-                $notice    = $this->lang->user->resetmail->notice;
+                $content   = sprintf($this->lang->user->mailContent, $account, $resetURL, $resetURL, $resetKey);
                 $this->user->resetKey($account, $resetKey);
-                include('resetPassMail.php');
-                $this->loadModel('mail')->send($account, $this->lang->user->resetmail->subject, $mailContent); 
+                $this->loadModel('mail')->send($account, $this->lang->user->resetmail->subject, $content); 
                 if($this->mail->isError()) 
                 {
-                    echo js::error($this->mail->getError());
+                    $this->send(array('result' => 'fail', 'message' => $this->mail->getError()));
                 }
                 else
                 {
-                    die(js::confirm($this->lang->user->resetPassword->success, $this->createLink('index', 'index'),'','parent'));
+                    $this->send(array('result' => 'success', 'message' => $this->lang->user->resetPassword->success));
                 }
             }
             else
             {
-                echo die(js::error($this->lang->user->resetPassword->failed));
+                $this->send(array('result' => 'fail', 'message' => $this->lang->user->resetPassword->failed));
             }
         }
         $this->display();         
@@ -402,13 +400,16 @@ class user extends control
     {
         if(!empty($_POST))
         {
+            $this->user->checkPassword();
+            if(dao::isError()) $this->send(array( 'result' => 'fail', 'message' => dao::getError() ) );
+
             $this->user->resetPassword($this->post->resetKey, $this->post->password1); 
-            echo js::alert($this->lang->user->reset->success); 
-            die(js::locate('index.html'));
+            $this->send(array('result' => 'success', 'locate' => inlink('login')));
         }
+
         if(!$this->user->checkResetKey($resetKey))
         {
-            die(js::error("error")); 
+            header('location:index.html'); 
         }
         else
         {

@@ -2,8 +2,8 @@
 $config->article->create = new stdclass();
 $config->article->create->requiredFields = 'categories, title, content';
 
-$config->article->create->page = new stdclass();
-$config->article->create->page->requiredFields = 'title, content';
+$config->article->page = new stdclass();
+$config->article->page->requiredFields = 'title, content';
 
 $config->article->edit = new stdclass();
 $config->article->edit->requiredFields = 'categories, title, content';

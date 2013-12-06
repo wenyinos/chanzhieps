@@ -85,6 +85,21 @@ class userModel extends model
     }
 
     /**
+     * Get user list with email and real name.
+     * 
+     * @param  string|array $users 
+     * @access public          
+     * @return array           
+     */
+    public function getRealNameAndEmails($users)
+    {
+        $users = $this->dao->select('account, email, realname')->from(TABLE_USER)->where('account')->in($users)->fetchAll('account');
+        if(!$users) return array();     
+        foreach($users as $account => $user) if($user->realname == '') $user->realname = $account; 
+        return $users;         
+    }
+
+    /**
      * Create a user.
      * 
      * @access public
@@ -371,21 +386,21 @@ class userModel extends model
     /**
      * update the resetKey.
      * 
-     * @param  string   $resetKey 
-     * @param  time     $resetedTime 
+     * @param  string   $account
+     * @param  time     $resetTime 
      * @access public
      * @return void
      */
     public function resetKey($account, $resetKey)
     {
-        $this->dao->update(TABLE_USER)->set('resetKey')->eq($resetKey)->set('resetedTime')->eq(helper::now())->where('account')->eq($account)->exec(false);
+        $this->dao->update(TABLE_USER)->set('resetKey')->eq($resetKey)->set('resetTime')->eq(helper::now())->where('account')->eq($account)->exec(false);
     }
 
     /**
      * Check the resetKey.
      * 
      * @param  string   $resetKey 
-     * @param  time     $resetedTime 
+     * @param  time     $resetTime 
      * @access public
      * @return void
      */
@@ -401,7 +416,7 @@ class userModel extends model
      * Reset the forgotten password.
      * 
      * @param  string   $resetKey 
-     * @param  time     $resetedTime 
+     * @param  time     $resetTime 
      * @access public
      * @return void
      */
@@ -414,7 +429,7 @@ class userModel extends model
         $this->dao->update(TABLE_USER)
             ->set('password')->eq($this->createPassword($password, $user->account))
             ->set('resetKey')->eq('')
-            ->set('resetedTime')->eq('')
+            ->set('resetTime')->eq('')
             ->where('resetKey')->eq($resetKey)
             ->exec();
     }
