@@ -16,24 +16,19 @@
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
 
-<?php if(strpos($type, 'book') !== false):?>
-<?php echo $categoryBox;?>
-<div class='col-md-10'>
-<?php endif;?>
 <form method='post' class='form-inline' id='ajaxForm'>
   <table class='table table-form'>
     <?php if($type == 'blog'):?>
     <caption><?php echo $lang->blog->edit;?></caption>
+    <?php elseif($type == 'page'):?>
+    <caption><?php echo $lang->page->edit;?></caption>
     <?php else:?>
     <caption><?php echo $lang->article->edit;?></caption>
     <?php endif;?>
+    <?php if($type != 'page'):?>
     <tr>
       <th class='w-100px'><?php echo $lang->article->category;?></th>
-      <?php if(strpos($type, 'book_') !== false):?>
-      <td><?php echo html::select("categories[]", $categories, array_keys($article->categories), "class='select-3 form-control'");?></td>
-      <?php else:?>
       <td><?php echo html::select("categories[]", $categories, array_keys($article->categories), "multiple='multiple' class='select-3 form-control chosen'");?></td>
-      <?php endif;?>
     </tr> 
     <tr>
       <th><?php echo $lang->article->author;?></th>
@@ -51,15 +46,20 @@
         </span>
       </td>
     </tr>
+    <?php endif;?>
     <tr>
-      <th><?php echo $lang->article->title;?></th>
+      <th class='w-100px'><?php echo $lang->article->title;?></th>
       <td><?php echo html::input('title', $article->title, "class='text-1'");?></td>
     </tr>
     <tr>
       <th><?php echo $lang->article->alias;?></th>
       <td>
         <div class="input-group text-1">
+        <?php if($type == 'page'):?>
+        <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot?>page/</span>
+        <?php else:?>
         <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot?>article/<?php echo $article->id;?>@</span>
+        <?php endif;?>
         <?php echo html::input('alias', $article->alias, "class='text-1 form-control' placeholder='{$lang->alias}'");?>
         <span class="input-group-addon">.html</span>
       </td>

@@ -31,7 +31,6 @@
       <th class='w-100px'><?php echo $lang->article->category;?></th>
       <td><?php echo html::select("categories[]", $categories, $currentCategory, "multiple='multiple' class='select-3 form-control chosen'");?></td>
     </tr>
-    <?php endif;?>
     <tr>
       <th><?php echo $lang->article->author;?></th>
       <td><?php echo html::input('author', $app->user->realname, "class='text-3 form-control'");?></td>
@@ -48,15 +47,20 @@
         </span>
       </td>
     </tr>
+    <?php endif;?>
     <tr>
-      <th><?php echo $lang->article->title;?></th>
+      <th class='w-100px'><?php echo $lang->article->title;?></th>
       <td><?php echo html::input('title', '', "class='text-1 form-control'");?></td>
     </tr>
     <tr>
       <th><?php echo $lang->article->alias;?></th>
       <td>
         <div class="input-group text-1">
+          <?php if($type == 'page'):?>
+          <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot?>page/</span>
+          <?php else:?>
           <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot?>article/id@</span>
+          <?php endif;?>
           <?php echo html::input('alias', '', "class='text-1 form-control' placeholder='{$lang->alias}'");?>
           <span class="input-group-addon">.html</span>
         </div>
