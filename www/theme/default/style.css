@@ -437,3 +437,6 @@ table.tablesorter thead tr .headerSortDown:after{font-family: FontAwesome; font-
 #lightboxModal.with-caption .caption { position: relative; text-align: center; margin-top: -30px; font-size: 12px; white-space: nowrap; z-index: 10010; color: #666; font-weight: bold; -webkit-transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1); transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1); }
 #lightboxModal.with-caption #lightboxImg:hover { border-bottom-width: 40px; }
 
+/* css animate */
+@-webkit-keyframes twinkling { 0% { opacity:1; }25% { opacity:0; }50% { opacity:1; }75% { opacity:0; }100% { opacity:1; } }
+.twinkling { -webkit-animation: twinkling 1s 1 ease-in-out; }

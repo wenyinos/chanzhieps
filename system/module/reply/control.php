@@ -30,11 +30,10 @@ class reply extends control
                 $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->captcha->create4Reply()));
             }
 
-            $replyID  = $this->reply->post($threadID);
-            $position = $this->reply->getPosition($replyID);
+            $replyID = $this->reply->post($threadID);
 
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('thread', 'view', "threadID=$threadID", $position)));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => '#' . $replyID));
         }
     }
 

@@ -38,10 +38,12 @@ $.extend(
                     {
                         $('#responser').html(response.message).addClass('red f-12px').show().delay(3000).fadeOut(100);
                     }
-
                     if(response.locate) 
                     {
-                        return setTimeout(function(){ location.href = response.locate;}, 1200);
+                        return setTimeout(function()
+                        {
+                            location.href = response.locate.indexOf('#') == 0 ? $.setUrlParam(location.href, 'go2anchor', response.locate.substring(1)) : response.locate;
+                        }, 1200);
                     }
 
                     return true;
@@ -436,6 +438,52 @@ $.extend(
     };
 })(jQuery);
 
+
+
+(function($)
+{
+    /**
+     * Get url param.
+     *
+     * @return string or null
+     */
+    jQuery.getUrlParam = function(name)
+    {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+    }
+
+    /**
+     * set url param.
+     *
+     * @return string or null
+     */
+    jQuery.setUrlParam = function(url,name,value)
+    {
+        var queIndex = url.indexOf('?');
+        if(queIndex < 0) return url + '?' + name + '=' +value;
+
+        var query = url.substring(queIndex + 1);
+        var search = '?';
+        var p = new RegExp("(^|&"+param+")=[^&]*");
+        if(p.test(query))
+        {
+            query = query.replace(p,"$1="+value);
+            search = query;
+        }
+        else
+        {
+            if(query == '')
+                search = param + '=' + value;
+            else
+                search = query + '&' + param + '=' + value;
+        }
+        return url.substring(0,queIndex) + search;
+    }
+})(jQuery);
+
+
 /**
  * Lightbox
  *
@@ -535,6 +583,22 @@ function setRequiredFields()
     for(i = 0; i < requiredFields.length; i++)
     {
         $('#' + requiredFields[i]).after('<span class="star">&nbsp;*&nbsp;</span>');
+    }
+}
+
+/**
+ * go to anchor
+ *
+ * @access public
+ * @return void
+ */
+function goToAnchor()
+{
+    var anchor = $.getUrlParam('go2anchor');
+    if(anchor && anchor.length > 0)
+    {
+        if($('#' + anchor).length > 0)
+            $("html,body").animate({scrollTop: $('#' + anchor).offset().top}, 1000, function(){ $('#' + anchor).addClass('twinkling') });
     }
 }
 

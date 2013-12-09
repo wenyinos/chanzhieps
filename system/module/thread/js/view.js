@@ -4,7 +4,13 @@ $(document).ready(function()
     {
         if(response.result == 'success')
         {
-            setTimeout(function(){ location.href = response.locate;}, 1200);
+            if(response.locate) 
+            {
+                return setTimeout(function()
+                {
+                    location.href = response.locate.indexOf('#') == 0 ? $.setUrlParam(location.href, 'go2anchor', response.locate.substring(1)) : response.locate;
+                }, 1200);
+            }
         }
         else
         {
