@@ -156,7 +156,6 @@ class userModel extends model
 
         $user = fixer::input('post')
             ->cleanInt('imobile, qq, zipcode')
-            ->specialChars('company, address, phone,')
             ->remove('ip, account, admin, join, visits')
             ->get();
 

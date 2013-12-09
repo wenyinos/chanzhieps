@@ -10,7 +10,9 @@
  * @link        http://www.chanzhi.org
  */
 ?>
+<?php include '../../common/view/header.admin.lite.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
+<?php include '../../common/view/kindeditor.html.php';?>
 <form method='post' id='editForm' action="<?php echo inlink('edit', 'categoryID='.$category->id);?>" class='form-inline'>
   <table class='table table-form'> 
     <caption><?php echo $lang->tree->edit;?></caption>
@@ -26,7 +28,7 @@
       <th><?php echo $lang->category->alias;?></th>
       <td>
         <div class="input-group text-1">
-        <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot?></span>
+        <span class="input-group-addon"><?php echo $aliasAddon?></span>
         <?php echo html::input('alias', $category->alias, "class='input-xsm form-control' placeholder='{$lang->alias}'");?>
         <span class="input-group-addon">.html</span>
       </td>

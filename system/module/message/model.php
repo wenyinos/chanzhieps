@@ -51,7 +51,7 @@ class messageModel extends model
             ->beginIf(RUN_MODE == 'front' and $type == 'message')->andWhere('public')->eq(1)->fi()
             ->andWhere('objectType')->eq($objectType)
             ->andWhere('objectID')->eq($objectID)
-            ->andWhere("(id in ({$userMessages}) or (status = 1))")
+            ->andWhere("(id in ({$userMessages}) or (status = '1'))")
             ->orderBy('id_desc')
             ->page($pager)
             ->fetchAll('id');

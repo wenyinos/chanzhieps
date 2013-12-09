@@ -90,7 +90,7 @@ js::set('productID', $product->id);
         <div class='col-md-6 a-right'><?php $next ? print($lang->product->next . $lang->colon . html::a(inlink('view', "id={$next->id}", "category={$category->alias}&name={$next->alias}"), $next->name)) : print($lang->product->none);?></div>
       </div>      
     </div>
-    <div id='commentBox'></div>
+    <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=product&objectID={$product->id}");?></div>
     <?php echo html::a('', '', "name='comment'");?>
   </div>
   <div class='col-md-3'><?php $this->block->printRegion($layouts, 'product_view', 'side');?></div>

@@ -363,7 +363,7 @@ class treeModel extends model
      */
     public function update($categoryID)
     {
-        $category = fixer::input('post')->join('moderators', ',')->setDefault('readonly', 0)->specialChars('name')->get();
+        $category = fixer::input('post')->join('moderators', ',')->setDefault('readonly', 0)->get();
         $category->alias    = seo::unify($category->alias, '-');
         $category->keywords = seo::unify($category->keywords, ',');
 

@@ -4,7 +4,7 @@ $(document).ready(function()
     {
         if(response.result == 'success')
         {
-            bootbox.alert(response.message, function(){location.reload();});   
+            setTimeout(function(){location.reload();}, 2000);   
         }
         else
         {

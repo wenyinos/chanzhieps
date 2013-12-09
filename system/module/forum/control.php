@@ -21,7 +21,6 @@ class forum extends control
     {
         $this->view->title     = $this->lang->forumHome;
         $this->view->boards    = $this->forum->getBoards();
-        //$this->view->layouts = $this->loadModel('block')->getLayouts('forum.index');
 
         $this->display();
     }
@@ -55,7 +54,6 @@ class forum extends control
         $this->view->sticks    = $sticks;
         $this->view->threads   = $threads;
         $this->view->pager     = $pager;
-        //$this->view->layouts = $this->loadModel('block')->getLayouts('forum.board');
 
         $this->display();
     }
