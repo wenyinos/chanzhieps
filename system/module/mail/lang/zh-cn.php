@@ -1,5 +1,5 @@
 <?php
-$lang->mail->common = '发信配置';
+$lang->mail->common = '发信设置';
 $lang->mail->index  = '首页';
 $lang->mail->detect = '检测';
 $lang->mail->edit   = '编辑配置';

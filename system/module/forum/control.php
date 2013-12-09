@@ -100,6 +100,7 @@ class forum extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->forum->successUpdate));
         }
 
+        $this->view->title = $this->lang->forum->update;
         $this->display();
     }
 }

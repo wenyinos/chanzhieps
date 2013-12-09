@@ -47,6 +47,7 @@ class reply extends control
         $this->lang->reply->menu = $this->lang->forum->menu;
         $this->lang->menuGroups->reply = 'forum';
 
+        $this->view->title   = $this->lang->reply->admin;
         $this->view->replies = $replies;
         $this->view->pager   = $pager;
         $this->display(); 
