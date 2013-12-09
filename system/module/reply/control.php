@@ -45,6 +45,7 @@ class reply extends control
         $replies = $this->reply->getList($orderBy, $pager);
 
         $this->lang->reply->menu = $this->lang->forum->menu;
+        $this->lang->menuGroups->reply = 'forum';
 
         $this->view->replies = $replies;
         $this->view->pager   = $pager;
