@@ -414,10 +414,10 @@ table.tablesorter thead tr .headerSortDown:after{font-family: FontAwesome; font-
 .article-files > li {position: relative; display: block;float: left;padding: 0 5px;margin: 10px 0;position: relative;}
 .article-files > li > a { color: #666; display: block;height: 70px;line-height: 60px;padding: 5px; max-width: 500px;overflow: hidden; text-align: center;background-color: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4); transition: all .4s cubic-bezier(0.175,0.885,0.32,1); opacity: 0.9;}
 .article-files > li > a:hover {opacity: 1; box-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);color: #506EAF;text-decoration: none;}
-.article-files > li > a > img { max-width: 100%; max-height: 100%; }
+.article-files > li > a > img { max-width: 240px; max-height: 100%; }
 .article-files:empty { display: none; }
 
-.article-files > li.file > a { line-height: 25px; padding: 40px 15px 5px 15px; }
+.article-files > li.file > a { line-height: 25px; padding: 40px 15px 5px 15px; max-width: 180px;white-space:nowrap; text-overflow:ellipsis; -o-text-overflow:ellipsis; overflow:hidden;}
 .article-files > li.file > a:before { display: block; width: 100%; font-size: 30px; position: absolute; top: 10px; text-align: center; left: 0; content: '\f0f6'; font-family: FontAwesome; }
 
 .article-files > li.article-files-heading { float: none; display: block; color: #999;font-weight: bold;}
