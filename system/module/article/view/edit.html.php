@@ -58,7 +58,7 @@
         <?php if($type == 'page'):?>
         <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot?>page/</span>
         <?php else:?>
-        <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot?>article/<?php echo $article->id;?>@</span>
+        <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot . $type;?>/<?php echo $article->id;?>@</span>
         <?php endif;?>
         <?php echo html::input('alias', $article->alias, "class='text-1 form-control' placeholder='{$lang->alias}'");?>
         <span class="input-group-addon">.html</span>
