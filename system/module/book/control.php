@@ -99,7 +99,6 @@ class book extends control
 
         $this->view->article     = $article;
         $this->view->prevAndNext = $this->book->getPrevAndNext($article->id, $parent->id);
-        //$this->view->layouts   = $this->loadModel('block')->getLayouts('book.read');
         $this->view->parent      = $parent;
         $this->view->book        = $book;
 

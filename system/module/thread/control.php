@@ -117,7 +117,6 @@ class thread extends control
         $this->view->replies  = $replies;
         $this->view->pager    = $pager;
         $this->view->speakers = $this->loadModel('user')->getBasicInfo($speakers);
-        //$this->view->layouts= $this->loadModel('block')->getLayouts('thread.view');
 
         $this->display();
     }

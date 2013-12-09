@@ -56,7 +56,6 @@ class article extends control
         $this->view->articles  = $articles;
         $this->view->pager     = $pager;
         $this->view->contact   = $this->loadModel('company')->getContact();
-        //$this->view->layouts = $this->loadModel('block')->getLayouts('article.list');
 
         $this->display();
     }
