@@ -65,7 +65,7 @@ else
 $systemRoot = dirname(dirname(__FILE__)); 
 
 /* Instance the app and run it. */
-$app = router::createApp('xirang', $systemRoot, '', dirname(dirname(__FILE__)) . '/www/');
+$app = router::createApp('xirang', $systemRoot);
 
 $common = $app->loadCommon();
 $app->parseRequest();
