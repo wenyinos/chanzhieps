@@ -4,19 +4,21 @@
   <thead>
     <tr class='a-center'>
       <th class='w-60px'><?php echo $lang->thread->id;?></th>
+      <th class='w-60px'><?php echo $lang->thread->status;?></th>
       <th><?php echo $lang->thread->title;?></th>
       <th class='w-50px'><?php echo $lang->thread->author;?></th>
       <th class='w-100px'><?php echo $lang->thread->postedDate;?></th>
       <th class='w-60px'><?php echo $lang->thread->views;?></th>
       <th class='w-60px'><?php echo $lang->thread->replies;?></th>
       <th class='w-150px'><?php echo $lang->thread->lastReply;?></th>
-      <th class='w-80px a-center'><?php echo $lang->actions;?></th>
+      <th class='w-100px a-center'><?php echo $lang->actions;?></th>
     </tr>  
   </thead>
   <tbody>
     <?php foreach($threads as $thread):?>
     <tr class='a-center'>
       <td><?php echo $thread->id;?></td>
+      <td><?php echo $thread->hidden ? $lang->thread->statusList['hidden'] : $lang->thread->statusList['normal'];?></td>
       <td class='a-left'>
         <?php
         $iconRoot = $themeRoot . 'default/images/forum/';

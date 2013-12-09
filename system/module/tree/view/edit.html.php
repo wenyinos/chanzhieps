@@ -31,24 +31,24 @@
         <span class="input-group-addon">.html</span>
       </td>
 </div>
-    </tr>  
+    </tr>
     <tr>
       <th><?php echo $lang->category->keywords;?></th>
       <td><?php echo html::input('keywords', $category->keywords, "class='text-1'");?></td>
-    </tr>  
+    </tr>
     <tr>
       <th><?php echo $lang->category->desc;?></th>
       <td><?php echo html::textarea('desc', $category->desc, "class='area-1' rows=3'");?></td>
-    </tr>  
+    </tr>
     <?php if($category->type == 'forum'):?>
     <tr>
       <th><?php echo $lang->category->moderators;?></th>
-      <td><?php echo html::select('moderators[]', $users, $category->moderators, "multiple='multiple' class='select-3 form-control chosen'");?></td>
-    </tr>  
+      <td><?php echo html::select('moderators[]', $users, $category->moderators, "multiple='multiple' class='select-1 form-control chosen'");?></td>
+    </tr>
     <tr>
       <th><?php echo $lang->category->readonly;?></th>
       <td><?php echo html::radio('readonly', $lang->category->readonlyList, $category->readonly);?></td>
-    </tr>  
+    </tr>
     <?php endif;?>
     <tr><td></td><td><?php echo html::submitButton() . html::hidden('type', $category->type);?></td></tr>
   </table>
