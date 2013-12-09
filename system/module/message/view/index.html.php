@@ -85,8 +85,6 @@
       </form>
     </div>
   </div>
-  <div class='col-md-3'>
-  <?php if(isset($layouts['message_index']['side'])) echo $this->block->printRegion($layouts['message_index']['side']);?>
-  </div>
+  <div class='col-md-3'><?php $this->block->printRegion($layouts, 'message_index', 'side');?></div>
 </div>
 <?php include '../../common/view/footer.html.php';?>

@@ -23,42 +23,40 @@ include '../../common/view/treeview.html.php';
     <div class='box radius'>
       <h4 class='title'><?php echo $category->name;?></h4>
       <ul class="media-list">
-      <?php foreach($products as $product):?>
-      <li class='media f-left'>
-        <?php 
-        $title = $product->image->primary->title ? $product->image->primary->title : $product->name;
-        if(empty($product->image)) 
-        {
-            echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&name=$product->alias"), html::image($themeRoot . 'default/images/main/noimage.gif', "title='{$title}' class='adaptive'"), "class='media-image'");
-        }
-        else
-        {
-            echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&name=$product->alias"), html::image($product->image->primary->middleURL, "title='{$title}' class='adaptive' alt='{$product->name}'"), "class='media-image'");
-        }
-        ?>
-        <div class='media-body'>
-          <h5 class='media-heading'><?php echo html::a(inlink('view', "id={$product->id}", "category={$category->alias}&name=$product->alias"), $product->name);?></h5>
-          <?php if($product->promotion != 0 && $product->price != 0):?>
-          <p>
-            <del><?php echo $lang->RMB . $product->price;?></del>
-            <em><?php echo $lang->RMB . $product->promotion;?></em>
-          </p>
-          <?php elseif($product->promotion == 0 && $product->price != 0):?>
-          <p><em><?php echo $lang->product->price . $lang->RMB . $product->price;?></em></p>
-          <?php elseif($product->promotion != 0 && $product->price == 0):?>
-          <p><em><?php echo $lang->product->promotion . $lang->RMB . $product->promotion;?></em></p>
-          <?php endif;?>
-        </div>
-      </li>
-      <?php endforeach;?>
-      <div class='c-both'></div>
+        <?php foreach($products as $product):?>
+        <li class='media f-left'>
+          <?php 
+          $title = $product->image->primary->title ? $product->image->primary->title : $product->name;
+          if(empty($product->image)) 
+          {
+              echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&name=$product->alias"), html::image($themeRoot . 'default/images/main/noimage.gif', "title='{$title}' class='adaptive'"), "class='media-image'");
+          }
+          else
+          {
+              echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&name=$product->alias"), html::image($product->image->primary->middleURL, "title='{$title}' class='adaptive' alt='{$product->name}'"), "class='media-image'");
+          }
+          ?>
+          <div class='media-body'>
+            <h5 class='media-heading'><?php echo html::a(inlink('view', "id={$product->id}", "category={$category->alias}&name=$product->alias"), $product->name);?></h5>
+            <?php if($product->promotion != 0 && $product->price != 0):?>
+            <p>
+              <del><?php echo $lang->RMB . $product->price;?></del>
+              <em><?php echo $lang->RMB . $product->promotion;?></em>
+            </p>
+            <?php elseif($product->promotion == 0 && $product->price != 0):?>
+            <p><em><?php echo $lang->product->price . $lang->RMB . $product->price;?></em></p>
+            <?php elseif($product->promotion != 0 && $product->price == 0):?>
+            <p><em><?php echo $lang->product->promotion . $lang->RMB . $product->promotion;?></em></p>
+            <?php endif;?>
+          </div>
+        </li>
+        <?php endforeach;?>
+        <div class='c-both'></div>
       </ul>
       <div class='w-p95 pd-10px clearfix'><?php $pager->show('right', 'short');?></div>
       <div class='c-both'></div>
     </div>
   </div>
-  <div class='col-md-3'>
-    <?php if(isset($layouts['product_browse']['side'])) echo $this->block->printRegion($layouts['product_browse']['side']);?>
-  </div>
+  <div class='col-md-3'><?php $this->block->printRegion($layouts, 'product_browse', 'side');?></div>
 </div>
 <?php include '../../common/view/footer.html.php';?>

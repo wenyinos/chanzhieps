@@ -250,16 +250,19 @@ class blockModel extends model
     /**
      * Print blocks of one region.
      * 
-     * @param  string    $page 
-     * @param  string    $region 
-     * @param  string    $containerHeader 
-     * @param  string    $containerFooter 
+     * @param  array    $blocks 
+     * @param  string   $method 
+     * @param  string   $region 
+     * @param  string   $containerHeader 
+     * @param  string   $containerFooter 
      * @access public
-     * @return string
+     * @return void
      */
-    public function printRegion($blocks, $containerHeader = '', $containerFooter = '')
+    public function printRegion($blocks, $method = '', $region = '', $containerHeader = '', $containerFooter = '')
     {
-        $html = '';
+        if(!isset($blocks[$method][$region])) return '';
+        $blocks = $blocks[$method][$region];
+        $html   = '';
         foreach($blocks as $block) $html .= $this->parseBlockContent($block, $containerHeader, $containerFooter);
         echo $html;
     }

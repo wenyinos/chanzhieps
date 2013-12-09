@@ -40,8 +40,6 @@ include '../../common/view/treeview.html.php';
       <div class='c-both'></div>
     </div>
   </div>
-  <div class='col-md-3'>
-    <?php if(isset($layouts['article_browse']['side'])) echo $this->block->printRegion($layouts['article_browse']['side']);?>
-  </div>
+  <div class='col-md-3'><?php $this->block->printRegion($layouts, 'article_browse', 'side');?></div>
 </div>
 <?php include '../../common/view/footer.html.php';?>
