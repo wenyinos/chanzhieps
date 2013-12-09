@@ -54,14 +54,8 @@ class forumModel extends model
      */
     public function updateStats()
     {
-        $boards = $this->dao->select('id')->from(TABLE_CATEGORY)
-            ->where('grade')->eq(2)
-            ->andWhere('type')->eq('forum')
-            ->fetchAll();
-        foreach($boards as $board)
-        {
-            $this->updateBoardStats($board->id);
-        }
+        $boards = $this->dao->select('id')->from(TABLE_CATEGORY)->where('grade')->eq(2)->andWhere('type')->eq('forum')->fetchAll();
+        foreach($boards as $board) $this->updateBoardStats($board->id);
     }
 
     /**
@@ -106,7 +100,7 @@ class forumModel extends model
      */
     public function isNew($board)
     {
-         return (time() - strtotime($board->postedDate)) < 24 * 60 * 60 * $this->config->forum->newDays;
+        return (time() - strtotime($board->postedDate)) < 24 * 60 * 60 * $this->config->forum->newDays;
     }
 
     /**
