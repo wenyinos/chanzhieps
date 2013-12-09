@@ -24,13 +24,12 @@ class page extends control
 
         $title    = $page->title;
         $keywords = $page->keywords . ' ' . $this->config->site->keywords;
-        $desc     = strip_tags($page->summary);
+        $desc     = $page->summary;
         
-        $this->view->title       = $title;
-        $this->view->keywords    = $keywords;
-        $this->view->desc        = $desc;
-        $this->view->page        = $page;
-        $this->view->contact     = $this->loadModel('company')->getContact();
+        $this->view->title    = $title;
+        $this->view->keywords = $keywords;
+        $this->view->desc     = $desc;
+        $this->view->page     = $page;
 
         $this->display();
     }
