@@ -39,3 +39,6 @@ ALTER TABLE `eps_comment` ADD `public` enum('0', '1') NOT NULL default 1 AFTER `
 ALTER TABLE `eps_comment` ADD `readed` enum('0', '1') NOT NULL AFTER `public`;
 
 RENAME TABLE `eps_comment` TO `eps_message`;
+ALTER TABLE `eps_user` change gendar gender enum('f','m','u') NOT NULL DEFAULT 'u';
+ALTER TABLE `eps_user` DROP locked;
+ALTER TABLE `eps_user` CHANGE allowTime locked DATETIME NOT NULL;

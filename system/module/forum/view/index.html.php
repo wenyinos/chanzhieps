@@ -30,8 +30,11 @@
             <td class='w-70px'><?php echo $childBoard->posts;?></td>
             <td class='w-150px a-left'>
               <?php
-              echo substr($childBoard->postedDate, 5, -3) . ' '; 
-              echo html::a($this->createLink('thread', 'locate', "threadID={$childBoard->postID}&replyID={$childBoard->replyID}"), $childBoard->postedBy);;
+              if($childBoard->postedBy)
+              {
+                  echo substr($childBoard->postedDate, 5, -3) . ' '; 
+                  echo html::a($this->createLink('thread', 'locate', "threadID={$childBoard->postID}&replyID={$childBoard->replyID}"), $childBoard->postedBy);;
+              }
               ?>
             </td>
           </tr>  

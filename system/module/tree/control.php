@@ -91,6 +91,10 @@ class tree extends control
             $this->lang->menuGroups->tree = 'forum';
             $this->view->users = $this->loadModel('user')->getPairs('admin');
         }
+        else if($category->type == 'blog')
+        {
+            $this->lang->menuGroups->tree = 'blog';
+        }
 
         /* remove left menu. */
         unset($this->lang->tree->menu);

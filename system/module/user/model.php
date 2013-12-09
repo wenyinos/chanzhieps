@@ -149,7 +149,6 @@ class userModel extends model
             $this->checkPassword();
             if(dao::isError()) return false;
 
-            $join = $this->dao->select('`join`')->from(TABLE_USER)->where('account')->eq($account)->fetch('join');
             $password  = $this->createPassword($this->post->password1, $account);
             $this->post->set('password', $password);
         }
@@ -246,6 +245,7 @@ class userModel extends model
         $user = $this->dao->select('*')->from(TABLE_USER)
             ->beginIF(validater::checkEmail($account))->where('email')->eq($account)->fi()
             ->beginIF(!validater::checkEmail($account))->where('account')->eq($account)->fi()
+            ->andWhere('locked')->lt(helper::now())
             ->fetch();
 
         /* Then check the password hash. */
@@ -341,7 +341,7 @@ class userModel extends model
         $format = 'Y-m-d H:i:s';
 
         $date = date($format,$intdate);
-        $this->dao->update(TABLE_USER)->set('allowTime')->eq($date)->where('id')->eq($userID)->exec();
+        $this->dao->update(TABLE_USER)->set('locked')->eq($date)->where('id')->eq($userID)->exec();
 
         return !dao::isError();
     }
