@@ -364,10 +364,10 @@ class user extends control
     {
         if(!empty($_POST))
         {
-            $user = $this->user->checkEmail($this->post->account, $this->post->email);
+            $user = $this->user->getByAccount(trim($this->post->account));
             if($user)
             {
-                $account   = $this->post->account;
+                $account   = $user->account;
                 $resetKey  = md5(str_shuffle(md5($account . mt_rand(0, 99999999) . microtime())) . microtime());
                 $resetURL  = "http://". $_SERVER['HTTP_HOST'] . $this->inlink('checkresetkey', "key=$resetKey");
                 $content   = sprintf($this->lang->user->mailContent, $account, $resetURL, $resetURL, $resetKey);

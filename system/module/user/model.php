@@ -75,13 +75,16 @@ class userModel extends model
     /**
      * Get user by his account.
      * 
-     * @param mixed $account   
+     * @param mixed $account
      * @access public
      * @return object           the user.
      */
     public function getByAccount($account)
     {
-        return $this->dao->select('*')->from(TABLE_USER)->where('account')->eq($account)->fetch('', false);
+        return $this->dao->select('*')->from(TABLE_USER)
+            ->beginIF(validater::checkEmail($account))->where('email')->eq($account)->fi()
+            ->beginIF(!validater::checkEmail($account))->where('account')->eq($account)->fi()
+            ->fetch('', false);
     }
 
     /**
@@ -361,27 +364,6 @@ class userModel extends model
 
         return !dao::isError();
     }
-
-    /**
-     * Identify email to regain the forgotten password 
-     *
-     * @access  public
-     * @param   string account
-     * @param   string email
-     * @return  object              if is valid user, return the user object.
-     */
-    public function checkEmail($account, $email)
-    {
-        if(!$account or !$email) return false;
-
-        if(RUN_MODE == 'admin' and strpos($this->config->admin->users, ",$account,") === false) return false;
-
-        $user = $this->dao->select('*')->from(TABLE_USER)
-            ->where('account')->eq($account)
-            ->andWhere('email')->eq($email)
-            ->fetch('', false);
-        return $user;
-    } 
 
     /**
      * update the resetKey.
