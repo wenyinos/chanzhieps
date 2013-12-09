@@ -76,7 +76,7 @@
             </tr>
             <tr>
               <th><?php echo $lang->message->public;?></th>
-              <td><?php echo html::checkbox('public', array(1 => ''), 1) . $lang->message->contactHidden;?></td>
+              <td><input type='checkbox' name='public' value='1' checked='checked'  /></td>
             </tr>
             <tr id='captchaBox' style="display:none;"></tr>  
             <tr><td></td><td><div class=''><?php echo html::submitButton();?></div></td></tr>

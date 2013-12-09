@@ -27,6 +27,7 @@ $lang->message->thanks      = 'Thanks for your comment!';
 
 $lang->message->pass          = 'Pass';
 $lang->message->reply         = 'Reply';
+$lang->message->view          = 'View';
 $lang->message->manage        = 'Manage';
 $lang->message->delete        = 'Delete';
 $lang->message->passPre       = 'Pass previous';
@@ -42,6 +43,9 @@ $lang->message->confirmPassPre      = 'Are you sure to pass comment previous?';
 
 $lang->message->statusList[0] = 'Unreviewed';
 $lang->message->statusList[1] = 'Reviewed';
+
+$lang->message->readedStatus[0] = 'New';
+$lang->message->readedStatus[1] = 'Readed';
 
 $lang->comment->common      = 'Comment';
 $lang->comment->id          = 'ID';

@@ -23,6 +23,15 @@ class messageModel extends model
         return $this->dao->select('*')->from(TABLE_MESSAGE)->findByID($messageID)->fetch();
     }
     
+    public function getByAccount($account, $pager)
+    {
+         return $this->dao->select('*')->from(TABLE_MESSAGE)
+            ->where('`to`')->eq($account)
+            ->orderBy('id_desc')
+            ->page($pager)
+            ->fetchAll('id');
+    }   
+
     /**
      * Get messages of one object.
      * 
@@ -35,12 +44,14 @@ class messageModel extends model
     public function getByObject($type, $objectType, $objectID, $pager = null)
     {
         $userMessages = $this->cookie->cmts;
+        $userMessages = trim($userMessages, ',');
+        if(empty($userMessages)) $userMessages = '0';
         return  $this->dao->select('*')->from(TABLE_MESSAGE)
             ->where('type')->eq($type)
-            ->beginIf(RUN_MODE == 'front')->andWhere('public')->eq(1)->fi()
+            ->beginIf(RUN_MODE == 'front' and $type == 'message')->andWhere('public')->eq(1)->fi()
             ->andWhere('objectType')->eq($objectType)
             ->andWhere('objectID')->eq($objectID)
-            ->andWhere("(INSTR('$userMessages', CONCAT('_',id,'_')) != 0 or status != '0' or `from` = '{$this->app->user->account}')")
+            ->andWhere("(id in ({$userMessages}) or (status = 1))")
             ->orderBy('id_desc')
             ->page($pager)
             ->fetchAll('id');
@@ -116,10 +127,8 @@ class messageModel extends model
     public function post($type)
     {
         $message = fixer::input('post')
-            ->specialChars('content, from')
             ->add('date', helper::now())
             ->add('type', $type)
-            ->add('public', $_POST['public'][0])
             ->setDefault('public', '0')
             ->setIF($type == 'message', 'to', 'admin')
             ->add('ip', $this->server->REMOTE_ADDR)
@@ -178,11 +187,11 @@ class messageModel extends model
      * Delete a message.
      * 
      * @param string $messageID 
-     * @param string $type 
+     * @param string $mode 
      * @access public
      * @return void
      */
-    public function delete($messageID, $type)
+    public function delete($messageID, $mode)
     {
         $message = $this->dao->select('status')->from(TABLE_MESSAGE)->where('id')->eq($messageID)->fetch('', false);
         if($message->status == 0)
@@ -190,8 +199,8 @@ class messageModel extends model
             $this->dao->delete()
                 ->from(TABLE_MESSAGE)
                 ->where('status')->eq(0)
-                ->beginIF($type == 'single')->andWhere('id')->eq($messageID)->fi()
-                ->beginIF($type == 'pre')->andWhere('id')->ge($messageID)->fi()
+                ->beginIF($mode == 'single')->andWhere('id')->eq($messageID)->fi()
+                ->beginIF($mode == 'pre')->andWhere('id')->ge($messageID)->fi()
                 ->exec(false);
         }
         else
@@ -227,7 +236,6 @@ class messageModel extends model
      */
     public function setCookie($messageID)
     {
-        $messageID = '_' . $messageID . '_';
         $messages = $this->cookie->cmts;
         if(!$messages)
         {
@@ -237,7 +245,7 @@ class messageModel extends model
         {
             if(strpos($messages, $messageID) === false)
             {
-                $messages .= $messageID;
+                $messages .= ',' . $messageID;
             }
         }
         setcookie('cmts', $messages);
