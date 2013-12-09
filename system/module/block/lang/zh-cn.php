@@ -99,6 +99,8 @@ $lang->block->pages['book_read']      = '手册章节';
 
 $lang->block->pages['message_index']  = '留言';
 
+$lang->block->pages['page_view']      = '页面';
+
 /* page layout list. */
 $lang->block->regions = new stdclass();
 $lang->block->regions->all['header'] = '头部';
@@ -118,3 +120,5 @@ $lang->block->regions->product_browse['side'] = '侧边';
 $lang->block->regions->product_view['side']   = '侧边';
 
 $lang->block->regions->message_index['side']  = '侧边';
+
+$lang->block->regions->page_view['side']      = '侧边';
