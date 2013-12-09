@@ -58,9 +58,9 @@ class book extends control
     }
 
     /**
-     * Browse a book.
+     * Browse a catalogue.
      * 
-     * @param  int    $bookID 
+     * @param  int    $catalogueID 
      * @access public
      * @return void
      */
@@ -140,7 +140,7 @@ class book extends control
                 $locate = $this->inlink('admin', "bookID=$origin");
             }
 
-            if(is_numeric($result))
+            if(is_numeric($result) && $result)
             {
                 $this->send(array('result' => 'success', 'message'=>$this->lang->saveSuccess, 'locate' => inlink('admin', "bookID=$result")));
             }
@@ -150,7 +150,8 @@ class book extends control
             }
             else
             {
-                $this->send(array('result' => 'fail', 'message' => dao::getError() ? dao::getError() : $result));
+                $error = dao::getError();
+                $this->send(array('result' => 'fail', 'message' => $error ? $error : $result));
             }
         }
 

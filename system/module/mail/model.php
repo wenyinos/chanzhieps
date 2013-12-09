@@ -226,56 +226,22 @@ class mailModel extends model
         $this->mta->Password   = $this->config->mail->gmail->password;
     }
 
-    public function sendTest($to, $subject, $body = '')
-    {
-        if(!$this->config->mail->turnon) return;
-
-        ob_start();
-
-        $this->clear();
-
-        try
-        {
-            $this->mta->setFrom($this->config->mail->fromAddress, $this->config->mail->fromName);
-            $this->mta->Subject = stripslashes($subject);
-            $this->mta->addAddress($to, 'test');
-            $this->mta->msgHtml("$body");
-            $this->setErrorLang();
-            $this->mta->send();
-        }
-        catch (phpmailerException $e) 
-        {
-            $this->errors[] = trim(strip_tags($e->errorMessage()));
-        } 
-        catch (Exception $e) 
-        {
-            $this->errors[] = trim(strip_tags($e->getMessage()));
-        }
-
-        $message = ob_get_contents();
-        ob_clean();
-
-        return $message;
-    }
-
     /**
      * Send email
      * 
      * @param  array   $toList 
      * @param  string  $subject 
      * @param  string  $body 
-     * @param  array   $ccList 
      * @param  bool    $includeMe 
      * @access public
      * @return void
      */
-    public function send($toList, $subject, $body = '', $ccList = '', $includeMe = false)
+    public function send($toList, $subject, $body = '', $includeMe = false)
     {
         if(!$this->config->mail->turnon) return;
 
         ob_start();
         $toList  = $toList ? explode(',', str_replace(' ', '', $toList)) : array();
-        $ccList  = $ccList ? explode(',', str_replace(' ', '', $ccList)) : array();
 
         /* Process toList and ccList, remove current user from them. If toList is empty, use the first cc as to. */
         if($includeMe == false)
@@ -283,22 +249,20 @@ class mailModel extends model
             $account = isset($this->app->user->account) ? $this->app->user->account : '';
 
             foreach($toList as $key => $to) if(trim($to) == $account or !trim($to)) unset($toList[$key]);
-            foreach($ccList as $key => $cc) if(trim($cc) == $account or !trim($cc)) unset($ccList[$key]);
         }
 
         /* Remove deleted users. */
         $users = $this->loadModel('user')->getPairs('nodeleted');
-        foreach($toList as $key => $to) if(!isset($users[trim($to)])) unset($toList[$key]);
-        foreach($ccList as $key => $cc) if(!isset($users[trim($cc)])) unset($ccList[$key]);
+        foreach($toList as $key => $to)
+        {
+            if(!isset($users[trim($to)]) and strpos($to, '@') === false) unset($toList[$key]);
+        }
 
-        if(!$toList and !$ccList) return;
-        if(!$toList and $ccList) $toList = array(array_shift($ccList));
         $toList = join(',', $toList);
-        $ccList = join(',', $ccList);
 
         /* Get realname and email of users. */
         $this->loadModel('user');
-        $emails = $this->user->getRealNameAndEmails(str_replace(' ', '', $toList . ',' . $ccList));
+        $emails = $this->user->getRealNameAndEmails(str_replace(' ', '', $toList));
         
         $this->clear();
 
@@ -307,7 +271,6 @@ class mailModel extends model
             $this->mta->setFrom($this->config->mail->fromAddress, $this->config->mail->fromName);
             $this->setSubject($subject);
             $this->setTO($toList, $emails);
-            $this->setCC($ccList, $emails);
             $this->setBody($body);
             $this->setErrorLang();
             $this->mta->send();
@@ -338,30 +301,20 @@ class mailModel extends model
     public function setTO($toList, $emails)
     {
         $toList = explode(',', str_replace(' ', '', $toList));
-        foreach($toList as $account)
+        foreach($toList as $key => $account)
         {
-            if(!isset($emails[$account]) or isset($emails[$account]->sended) or strpos($emails[$account]->email, '@') == false) continue;
+            if(strpos($account, '@') !== false)
+            {
+                $realname = substr($account, 0, strpos($account, '@'));
+                $emails[$account] = new stdClass();
+                $emails[$account]->email    = $account;
+                $emails[$account]->realname = $realname;
+            }
+            else if(!isset($emails[$account]) or isset($emails[$account]->sended) or strpos($emails[$account]->email, '@') == false)
+            {
+                continue;
+            }
             $this->mta->addAddress($emails[$account]->email, $emails[$account]->realname);
-            $emails[$account]->sended = true;
-        }
-    }
-
-    /**
-     * Set cc.
-     * 
-     * @param  array    $ccList 
-     * @param  array    $emails 
-     * @access public
-     * @return void
-     */
-    public function setCC($ccList, $emails)
-    {
-        $ccList = explode(',', str_replace(' ', '', $ccList));
-        if(!is_array($ccList)) return;
-        foreach($ccList as $account)
-        {
-            if(!isset($emails[$account]) or isset($emails[$account]->sended) or strpos($emails[$account]->email, '@') == false) continue;
-            $this->mta->addCC($emails[$account]->email, $emails[$account]->realname);
             $emails[$account]->sended = true;
         }
     }

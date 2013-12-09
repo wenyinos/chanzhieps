@@ -20,7 +20,7 @@
         <li><a name='first'></a></li>
         <?php foreach($messages as $number => $message):?>
         <li id='<?php echo $message->id?>' class='media'>
-          <strong>#<?php echo ($number + 1)?><?php echo $message->from;?></strong> at <?php echo $message->date;?><br />
+          <strong>#<?php echo ($number + 1)?> <?php echo $message->from;?></strong> at <?php echo $message->date;?><br />
           <?php echo nl2br($message->content);?>
           <?php if(!empty($replies[$message->id])):?>
           <dl class='alert alert-info'>
@@ -31,8 +31,7 @@
         </li>
         <?php endforeach;?>
       </ul>
-      <div id='pager'><?php $pager->show('right', 'short');?></div>
-      <div class='c-right'></div>
+      <div class='w-p95 pd-10px clearfix'><div id='pager'><?php $pager->show('right', 'short');?></div></div>
     </div>  
     <?php endif;?>
     <div class='cont'>

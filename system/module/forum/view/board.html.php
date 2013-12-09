@@ -6,7 +6,7 @@
     <h4><i class="icon-comments-alt icon-large"></i>&nbsp;
     <?php 
     echo $board->name; 
-    if($board->moderators) printf($lang->forum->lblOwner, trim($board->moderators, ','));
+    if($board->moderators) printf(" &nbsp;<span class='moderators'>" . $lang->forum->lblOwner . '</span>', trim($board->moderators, ','));
     ?>
     </h4>
     <div class="panel-actions panel-actions-sm">
