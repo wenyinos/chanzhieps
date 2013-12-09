@@ -7,15 +7,9 @@
         <form method='post' id='ajaxForm'>
           <table> 
             <tr>
-              <th class='w-100px'><?php echo $lang->user->account;?></th>
-              <td><?php echo html::input('account', '', "class='text-box'");?></td>
-            </tr>  
-            <tr>
-              <th><?php echo $lang->user->email;?></th>
-              <td><?php echo html::input('email', '', "class='text-box'");?></td>
+              <td><?php echo html::input('account', '', "class='text-box' placeholder='{$lang->user->inputAccountOrEmail}'");?></td>
             </tr>
             <tr>
-              <th></th>
               <td><?php echo html::submitButton($lang->user->submit,'btn btn-primary btn-block');?></td>
             </tr>
           </table>

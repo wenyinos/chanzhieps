@@ -53,14 +53,6 @@ class seo
             /* Not an alias, return directly. */
             if(!isset($categoryAlias[$uri]) && !isset($pageAlias[$uri])) return $uri;
 
-            /* The module is an alias of a page. */
-            if(isset($pageAlias[$uri]) && $module == 'page')
-            {
-                $module       = $pageAlias[$uri]->module;
-                $params['id'] = $pageAlias[$uri]->id;
-                return seo::convertURI($module, 'view' , $params, $pageID);
-            }
-
             /* The module is an alias of a category. */
             $module = $categoryAlias[$uri]->module;
             $params['category'] = $categoryAlias[$uri]->category;
@@ -85,6 +77,13 @@ class seo
         }
 
         //------------- The module is an system module-------------- */
+
+        /* Is the module an alias of a page. */
+        if($module == 'page' && isset($pageAlias[$items[1]]))
+        {
+            $params['page'] = $items[1];
+            return seo::convertURI($module, 'view', $params, $pageID);
+        }
 
         if($module == 'book' && count($items) > 2)
         {

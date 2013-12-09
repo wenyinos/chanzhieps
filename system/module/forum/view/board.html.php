@@ -30,7 +30,7 @@
         <tr class='a-center'>
           <td class='w-10px red'><span class='sticky-thread'><i class="icon-comment-alt icon-large"></i></span></td>
           <td class='a-left'>
-            <strong><?php echo html::a($this->createLink('thread', 'view', "id=$thread->id"), $thread->title);?></strong>
+            <?php echo html::a($this->createLink('thread', 'view', "id=$thread->id"), $thread->title);?>
             <?php echo "<span class='label label-danger'>{$lang->thread->stick}</span> "?>
           </td>
           <td class='a-left'><?php echo $thread->author;?></td>
@@ -53,7 +53,7 @@
         <?php foreach($threads as $thread):?>
         <tr class='a-center'>
           <td class='w-10px'><?php echo $thread->isNew ? "<span class='new-board'><i class='icon-comment-alt icon-large'></i></span>" : "<span class='common-board'><i class='icon-comment-alt icon-large'></i></span>";?></td>
-          <td class='a-left'><strong><?php echo html::a($this->createLink('thread', 'view', "id=$thread->id"), $thread->title);?></strong></td>
+          <td class='a-left'><?php echo html::a($this->createLink('thread', 'view', "id=$thread->id"), $thread->title);?></td>
           <td class='a-left w-50px'><?php echo $thread->author;?></td>
           <td class='w-100px'><?php echo substr($thread->addedDate, 5, -3);?></td>
           <td class='w-30px'><?php echo $thread->views;?></td>
