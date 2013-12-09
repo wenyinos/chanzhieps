@@ -24,7 +24,7 @@ $.extend(
                 /* The response.result is success. */
                 if(response.result == 'success')
                 {
-                    var submitButton = $(formID).find(':input[type=submit]');
+                    var submitButton = $(formID).find(':input[type=submit], .submit');
                     if(response.message && response.message.length)
                     {
                         submitButton.popover({trigger:'manual', content:response.message, placement:'right'}).popover('show');
@@ -39,7 +39,10 @@ $.extend(
                         $('#responser').html(response.message).addClass('red f-12px').show().delay(3000).fadeOut(100);
                     }
 
-                    if(response.locate) return location.href = response.locate;
+                    if(response.locate) 
+                    {
+                        return setTimeout(function(){ location.href = response.locate;}, 1200);
+                    }
 
                     return true;
                 }
@@ -250,7 +253,7 @@ $.extend(
                 {
                     if(data.result == 'success')
                     {
-                        if(deleter.parents('#ajaxModal').size()) return $.reloadAjaxModal(1500);
+                        if(deleter.parents('#ajaxModal').size()) return $.reloadAjaxModal(1200);
                         if(data.locate) return location.href = data.locate;
                         return location.reload();
                     }

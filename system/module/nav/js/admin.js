@@ -109,7 +109,7 @@ $(document).ready(function()
         $(this).parent().children('.titleInput').val( categories[categories.length-1] );
     });
     
-    $.setAjaxForm('#navForm',function(data){ bootbox.alert(data.message);});
+    $.setAjaxForm('#navForm');
 
     /* Set target value. */
     $(document).on('change', 'input[type=checkbox]', function()

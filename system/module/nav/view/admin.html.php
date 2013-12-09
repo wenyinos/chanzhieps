@@ -47,7 +47,7 @@
               echo '</li>';
           }
           ?>
-          <li><?php echo html::a('javascript:;', $lang->save, "class='btn btn-primary' onclick='return submitForm()'")?></li>
+          <li><?php echo html::a('javascript:;', $lang->save, "class='btn btn-primary submit' onclick='return submitForm()'")?></li>
         </ul>
       </td>
     </tr>
