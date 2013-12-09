@@ -92,6 +92,9 @@ class tree extends control
             $this->view->users = $this->loadModel('user')->getPairs('admin');
         }
 
+        /* remove left menu. */
+        unset($this->lang->tree->menu);
+
         $this->display();
     }
 
