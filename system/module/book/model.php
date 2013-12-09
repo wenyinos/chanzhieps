@@ -15,6 +15,7 @@ class bookModel extends model
      * Get a book or a catalogue by id or alias.
      *
      * @param  string $id
+     * @param  bool   $replaceTag
      * @access public
      * @return array
      */
@@ -117,7 +118,7 @@ class bookModel extends model
         /* Cycle them, build the select control.  */
         foreach($catalogues as $catalogue)
         {
-            $origins   = explode(',', $catalogue->path);
+            $origins = explode(',', $catalogue->path);
             $catalogueTitle = '/';
             foreach($origins as $origin)
             {
@@ -137,17 +138,18 @@ class bookModel extends model
                 {
                     $treeMenu[$catalogue->parent] = $catalogueTitle;;
                 }
+
                 $treeMenu[$catalogue->parent] .= $treeMenu[$catalogue->id];
             }
             else
             {
                 if(isset($treeMenu[$catalogue->parent]) and !empty($treeMenu[$catalogue->parent]))
                 {
-                    $treeMenu[$catalogue->parent] .= $catalogue;
+                    $treeMenu[$catalogue->parent] .= $catalogueTitle;
                 }
                 else
                 {
-                    $treeMenu[$catalogue->parent] = $catalogue;
+                    $treeMenu[$catalogue->parent] = $catalogueTitle;
                 }    
             }
         }
@@ -233,7 +235,7 @@ class bookModel extends model
             $order = $this->getChapterNumber($catalogue->path);
             $this->lastChapter = $order;
 
-            $title        = html::a(helper::createLink('book', 'admin', "bookID=$catalogue->id"), $catalogue->title);
+            $title        = $catalogue->type == 'book' ? $catalogue->title : html::a(helper::createLink('book', 'admin', "bookID=$catalogue->id"), $catalogue->title);
             $editButton   = html::a(helper::createLink('book', 'edit', "bookID=$catalogue->id"), $this->lang->edit, "data-toggle='modal' data-width='1000px'");
             $deleteButton = empty($children) ? html::a(helper::createLink('book', 'delete', "bookID=$catalogue->id"), $this->lang->delete, "class='deleter'") : '';
             $create       = html::a(helper::createLink('book', 'create', "bookID=$catalogue->id"), $this->lang->book->create);
