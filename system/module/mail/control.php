@@ -143,7 +143,7 @@ class mail extends control
 
         if($_POST)
         {
-            $this->mail->sendTest($this->post->to, $this->lang->mail->subject, $this->lang->mail->content, "", true);
+            $this->mail->send($this->post->to, $this->lang->mail->subject, $this->lang->mail->content, true);
             if($this->mail->isError())
             {
                 $this->view->error = $this->mail->getError();
