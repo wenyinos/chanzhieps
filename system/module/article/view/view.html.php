@@ -50,7 +50,7 @@ js::set('articleID', $article->id);
         </div>
       </div>
     </div>
-    <div id='commentBox'></div>
+    <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=article&objectID={$article->id}");?></div>
     <?php echo html::a('', '', "name='comment'");?>
   </div>
   <div class='col-md-3'><?php $this->block->printRegion($layouts, 'article_view', 'side');?></div>
