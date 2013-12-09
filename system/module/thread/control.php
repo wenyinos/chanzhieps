@@ -38,11 +38,17 @@ class thread extends control
         /* User posted a thread, try to save it to database. */
         if($_POST)
         {
+            /* If no captcha but is garbage, return the error info. */
+            if($this->post->captcha == false and $this->loadModel('captcha')->isEvil($_POST['content']))
+            {
+                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->captcha->create4Comment()));
+            }
+
             $threadID = $this->thread->post($boardID);
             if(dao::isError()) $this->send(array('result' =>'fail', 'message' => dao::getError()));
 
             $locate = inlink('view', "threadID=$threadID");
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' =>$locate));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $locate));
         }
 
         $this->view->title     = $board->name . $this->lang->minus . $this->lang->thread->post;
@@ -71,6 +77,12 @@ class thread extends control
 
         if($_POST)
         {
+            /* If no captcha but is garbage, return the error info. */
+            if($this->post->captcha == false and $this->loadModel('captcha')->isEvil($_POST['content']))
+            {
+                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->captcha->create4Comment()));
+            }
+
             $this->thread->update($threadID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'locate' => inlink('view', "threadID=$threadID")));

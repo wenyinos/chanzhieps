@@ -15,7 +15,7 @@
 
 <?php $common->printPositionBar($board);?>
 
-<form method='post' id="ajaxForm" enctype='multipart/form-data'>
+<form method='post' id="threadForm" enctype='multipart/form-data'>
   <table class='table table-bordered table-form'>
     <caption><?php echo $board->name;?></caption>
     <tr>
@@ -35,7 +35,7 @@
       <th><?php echo $lang->thread->file;?></th>
       <td><?php echo $this->fetch('file', 'buildForm');?></td>
     </tr>
-    <tr><?php echo $this->loadModel('captcha')->create4Comment();?></tr>
+    <tr id='captchaBox' style="display:none;"><td colspan='2'></td></tr>  
     <tr>
       <th></th>
       <td><?php echo html::submitButton();?></td>

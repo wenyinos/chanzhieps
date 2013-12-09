@@ -24,11 +24,17 @@ class reply extends control
 
         if($_POST)
         {
+            /* If no captcha but is garbage, return the error info. */
+            if($this->post->captcha == false and $this->loadModel('captcha')->isEvil($_POST['content']))
+            {
+                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->captcha->create4Reply()));
+            }
+
             $replyID  = $this->reply->post($threadID);
             $position = $this->reply->getPosition($replyID);
 
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'locate' => $this->createLink('thread', 'view', "threadID=$threadID", $position)));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('thread', 'view', "threadID=$threadID", $position)));
         }
     }
 
@@ -67,11 +73,17 @@ class reply extends control
         $reply = $this->reply->getByID($replyID);
         if(!$reply) die(js::locate('back'));
 
-        $thread = $this->thread->getByID($reply->thread);
+        $thread = $this->loadModel('thread')->getByID($reply->thread);
         if(!$this->thread->canManage($thread->board, $reply->author)) die(js::locate('back'));
         
         if($_POST)
         {
+            /* If no captcha but is garbage, return the error info. */
+            if($this->post->captcha == false and $this->loadModel('captcha')->isEvil($_POST['content']))
+            {
+                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->captcha->create4Comment()));
+            }
+
             $this->reply->update($replyID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 

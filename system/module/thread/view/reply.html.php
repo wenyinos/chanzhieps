@@ -47,12 +47,12 @@
 <?php $pager->show('right', 'short');?>
 
 <?php if($this->session->user->account != 'guest'):?>
-  <form method='post' enctype='multipart/form-data' id='reply' action='<?php echo $this->createLink('reply', 'post', "thread=$thread->id");?>'>
+  <form method='post' enctype='multipart/form-data' id='replyForm' action='<?php echo $this->createLink('reply', 'post', "thread=$thread->id");?>'>
     <?php 
     echo "<div class='w-p100'>" . html::textarea('content', '', "rows='6' class='area-1'") . "</div>";
     echo "<div class='c-both'></div>";
     echo $this->fetch('file', 'buildForm');
-    echo $this->loadModel('captcha')->create4Reply();
+    echo "<div id='captchaBox' style='display:none;'></div>";
     echo html::submitButton();
 
     echo html::hidden('recTotal',   $pager->recTotal);

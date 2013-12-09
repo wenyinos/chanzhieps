@@ -14,7 +14,7 @@
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php $common->printPositionBar($board, $thread);?>
 
-<form method='post' id='ajaxForm' enctype='multipart/form-data'>
+<form method='post' id='editForm' enctype='multipart/form-data'>
   <table class='table table-form'>
     <caption><?php echo $lang->reply->edit;?></caption>
     <tr>
@@ -30,7 +30,7 @@
         ?>
       </td>
     </tr>
-    <tr><?php echo $this->loadModel('captcha')->create4Comment();?></tr>
+    <tr id='captchaBox' style="display:none;"><td colspan='2'></td></tr>  
     <tr>
       <th></th>
       <td colspan='2'><?php echo html::submitButton() . html::backButton();?></td>

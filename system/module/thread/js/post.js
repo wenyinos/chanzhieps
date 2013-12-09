@@ -1,6 +1,6 @@
 $(document).ready(function()
 {
-    $.setAjaxForm('#replyForm', function(response)
+    $.setAjaxForm('#threadForm', function(response)
     {
         if(response.result == 'success')
         {
@@ -14,6 +14,4 @@ $(document).ready(function()
             }
         }
     });
-    $.setAjaxJSONER('.jsoner');
-    $('.nav-system-forum').addClass('active');
 });
