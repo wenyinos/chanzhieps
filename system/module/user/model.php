@@ -149,7 +149,6 @@ class userModel extends model
             $this->checkPassword();
             if(dao::isError()) return false;
 
-            $join = $this->dao->select('`join`')->from(TABLE_USER)->where('account')->eq($account)->fetch('join');
             $password  = $this->createPassword($this->post->password1, $account);
             $this->post->set('password', $password);
         }

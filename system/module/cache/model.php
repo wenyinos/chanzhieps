@@ -37,7 +37,7 @@ class cacheModel extends model
         if(!is_writable($this->cacheRoot)) return false;
         if(is_file($cacheFile) and !is_writable($cacheFile)) return false;
 
-        $siteConfigs = $this->loadModel('setting')->getItems('owner=system&module=common&section=site&key=lang,theme');
+        $siteConfigs = $this->loadModel('setting')->getItems('owner=system&module=common&section=site&key=lang');
         $configCache = "<?php\n";
         foreach($siteConfigs as $config)
         {

@@ -86,7 +86,18 @@ class tree extends control
 
         if(strpos('forum,blog', $category->type) !== false) $this->view->aliasAddon .=  $category->type . '/';
 
-        if($category->type == 'forum') $this->view->users = $this->loadModel('user')->getPairs('admin');
+        if($category->type == 'forum') 
+        {
+            $this->lang->menuGroups->tree = 'forum';
+            $this->view->users = $this->loadModel('user')->getPairs('admin');
+        }
+        else if($category->type == 'blog')
+        {
+            $this->lang->menuGroups->tree = 'blog';
+        }
+
+        /* remove left menu. */
+        unset($this->lang->tree->menu);
 
         $this->display();
     }

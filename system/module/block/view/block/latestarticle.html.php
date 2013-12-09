@@ -11,14 +11,17 @@
 */
 ?>
 <?php 
-$content  = json_decode($block->content);
-$type     = str_replace('article', '', strtolower($block->type));
-$method   = 'get' . ucfirst($type);
-$articles = $this->loadModel('article')->$method($content->category, $content->limit);
+$content         = json_decode($block->content);
+$type            = str_replace('article', '', strtolower($block->type));
+$method          = 'get' . ucfirst($type);
+$articles        = $this->loadModel('article')->$method($content->category, $content->limit);
+$categories      = explode(',', $content->category);
+$firstCategoryID = $categories[0];
+$firstCategory   = $this->loadModel('tree')->getByID($firstCategoryID);
 ?>
 <?php if(isset($content->image)):?>
 <div class='box radius'>
-  <h4 class='title'><?php echo $block->title;?></h4>
+  <h4 class='title'><?php echo $block->title;?><?php echo html::a(helper::createLink('article', 'browse', "categoryID=$firstCategory->id", "category=$firstCategory->alias"), $this->lang->more, "class='f-right'");?></h4>
   <ul class="media-list">
     <?php 
     foreach($articles as $article):
@@ -50,7 +53,7 @@ $articles = $this->loadModel('article')->$method($content->category, $content->l
 </div>
 <?php else:?>
 <div class="panel panel-default">
-  <div class="panel-heading"><h4><?php echo $block->title;?></h4></div>
+  <div class="panel-heading"><h4><?php echo $block->title;?><?php echo html::a(helper::createLink('article', 'browse', "categoryID=$firstCategory->id", "category=$firstCategory->alias"), $this->lang->more, "class='f-right'");?></h4></div>
   <div class="panel-body"><ul class='mg-zero pd-zero'>
     <?php foreach($articles as $article): ?>
     <?php 

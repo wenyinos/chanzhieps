@@ -8,9 +8,6 @@ include '../../common/view/treeview.html.php';
     <div class='box radius'>
       <h4 class='title'><?php echo $page->title;?></h4>
       <div class='content'>
-        <?php if($page->summary):?>
-        <div class='summary'><strong><?php echo $lang->page->summary;?></strong><?php echo $lang->colon . $page->summary;?></div>
-        <?php endif;?>
         <p><?php echo $page->content;?></p>
         <div class='article-file mt-10px'><?php $this->loadModel('article')->printFiles($page->files);?></div>
         <?php if($page->keywords):?>
@@ -18,8 +15,6 @@ include '../../common/view/treeview.html.php';
         <?php endif;?>
       </div>
     </div>
-    <div id='commentBox'></div>
-    <?php echo html::a('', '', "name='comment'");?>
   </div>
   <div class='col-md-3'><?php $this->block->printRegion($layouts, 'page_view', 'side');?></div>
 </div>
