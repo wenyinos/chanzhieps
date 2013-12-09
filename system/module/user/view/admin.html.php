@@ -34,7 +34,7 @@
         <th class='w-150px'><?php echo $lang->user->join;?></th>
         <th class='w-80px'><?php echo $lang->user->visits;?></th>
         <th class='w-150px'><?php echo $lang->user->last;?></th>
-        <th><?php echo $lang->user->forbid;?></th>
+        <th><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
@@ -50,12 +50,15 @@
       <td><?php echo $user->visits;?></td>
       <td><?php echo $user->last;?></td>
       <td class='operate'>
-        <?php 
-        foreach($lang->user->forbidDate as $date => $title)
-        {
-            echo html::a($this->createLink('user', 'forbid', "userID=$user->id&date=$date"), $title, "class='forbider'");
-        }
-        ?>
+        <?php echo html::a($this->createLink('user', 'edit', "account=$user->account"), $lang->edit);?>
+        <div class="btn-group">
+          <a  class="dropdown-toggle" data-toggle="dropdown"><?php echo $lang->user->forbid?> <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+          <?php foreach($lang->user->forbidDate as $date => $title):?>
+            <li><?php echo html::a($this->createLink('user', 'forbid', "userID={$user->id}&date=$date"), $title, "class='forbider'");?></li>
+          <?php endforeach;?>
+          </ul>
+        </div>
       </td>
     </tr>
     <?php endforeach;?>

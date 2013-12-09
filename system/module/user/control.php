@@ -236,22 +236,32 @@ class user extends control
     /**
      * Edit a user. 
      * 
+     * @param  string    $account 
      * @access public
      * @return void
      */
-    public function edit()
+    public function edit($account = '')
     {
+        if(!$account or RUN_MODE == 'front') $account = $this->app->user->account;
         if($this->app->user->account == 'guest') $this->locate(inlink('login'));
 
         if(!empty($_POST))
         {
-            $this->user->update($this->app->user->account);
-            if(dao::isError()) $this->send( array( 'result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'locate' => inlink('profile')));
+            $this->user->update($account);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $locate = RUN_MODE == 'front' ? inlink('profile') : inlink('admin');
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess , 'locate' => $locate));
         }
 
-        $this->view->user = $this->user->getByAccount($this->app->user->account);
-        $this->display();
+        $this->view->user = $this->user->getByAccount($account);
+        if(RUN_MODE == 'admin') 
+        { 
+            $this->display('user', 'edit.admin');
+        }
+        else
+        {
+            $this->display();
+        }
     }
 
     /**
