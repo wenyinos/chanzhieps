@@ -25,12 +25,16 @@ $lang->thread->post       = '发贴';
 $lang->thread->browse     = '主题列表';
 $lang->thread->stick      = '置顶';
 $lang->thread->edit       = '编辑主题';
+$lang->thread->status     = '状态';
 $lang->thread->hide       = '隐藏';
 $lang->thread->show       = '显示';
 
 $lang->thread->sticks[0] = '不置顶';
 $lang->thread->sticks[1] = '版块置顶';
 $lang->thread->sticks[2] = '全局置顶';
+
+$lang->thread->statusList['hidden'] = '已隐藏';
+$lang->thread->statusList['normal'] = '正常';
 
 $lang->thread->confirmDeleteThread = "您确定删除该主题吗？";
 $lang->thread->confirmHideReply    = "您确定隐藏回帖吗？";

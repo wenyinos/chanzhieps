@@ -25,12 +25,16 @@ $lang->thread->post       = 'Post';
 $lang->thread->browse     = 'Threads';
 $lang->thread->stick      = 'Sticky';
 $lang->thread->edit       = 'Edit';
+$lang->thread->status     = 'Status';
 $lang->thread->hide       = 'Hide';
 $lang->thread->show       = 'Show';
 
 $lang->thread->sticks[0] = 'Don\'t stick';
 $lang->thread->sticks[1] = 'Stick on board';
 $lang->thread->sticks[2] = 'Global stick';
+
+$lang->thread->statusList['hidden'] = 'hidden';
+$lang->thread->statusList['normal'] = 'normal';
 
 $lang->thread->confirmDeleteThread = "Are you sure to delete this thread?";
 $lang->thread->confirmHideReply    = "Are you sure to hide this reply?";
