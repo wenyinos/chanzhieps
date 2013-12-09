@@ -1,5 +1,5 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
-  <?php if(RUN_MODE == 'front' and isset($layouts['all']['footer'])) echo $this->loadModel('block')->printRegion($layouts['all']['footer']);?>
+  <?php if(RUN_MODE == 'front') $this->loadModel('block')->printRegion($layouts, 'all', 'footer');?>
   <footer id="footer" class="clearfix">
     <div id="footNav">
       <?php
@@ -34,6 +34,6 @@ $extHookFiles = glob($extHookRule);
 if($extHookFiles) foreach($extHookFiles as $extHookFile) include $extHookFile;
 ?>
 </div>
-<?php if(RUN_MODE == 'front' and isset($layouts['all']['end'])) echo $this->loadModel('block')->printRegion($layouts['all']['end']);?>
+<?php if(RUN_MODE == 'front') $this->loadModel('block')->printRegion($layouts, 'all', 'end');?>
 </body>
 </html>

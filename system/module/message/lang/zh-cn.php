@@ -27,6 +27,7 @@ $lang->message->thanks      = '感谢您的留言！';
 
 $lang->message->pass          = '通过';
 $lang->message->reply         = '回复';
+$lang->message->view          = '查看';
 $lang->message->manage        = '留言管理';
 $lang->message->delete        = '删除';
 $lang->message->passPre       = '通过之前';
@@ -42,6 +43,9 @@ $lang->message->confirmPassPre      = '您确定要通过之前的留言吗？';
 
 $lang->message->statusList[0] = '未审核';
 $lang->message->statusList[1] = '已审核';
+
+$lang->message->readedStatus[0] = '未读';
+$lang->message->readedStatus[1] = '已读';
 
 $lang->comment->common      = '评论';
 $lang->comment->id          = '编号';

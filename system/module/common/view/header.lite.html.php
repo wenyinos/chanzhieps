@@ -65,6 +65,6 @@ if(!empty($sina->verification)) echo $sina->verification;
 if(!empty($qq->verification))   echo $qq->verification;
 if(empty($sina->verification) && !empty($sina->widget)) js::import('http://tjs.sjs.sinajs.cn/open/api/js/wb.js');
 ?>
-<?php if(RUN_MODE == 'front' and isset($layouts['all']['header'])) echo $this->block->printRegion($layouts['all']['header']);?>
+<?php if(RUN_MODE == 'front') $this->block->printRegion($layouts, 'all', 'header');?>
 </head>
 <body>

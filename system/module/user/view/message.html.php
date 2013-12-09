@@ -1,6 +1,7 @@
 <?php include '../../common/view/header.html.php';?>
 <div class='row'>
-  <?php include './side.html.php';?>
+  <?php
+include './side.html.php';?>
   <div class='col-md-10'>
     <table class='table table-bordered  table-hover' id='messages'>
     <caption><?php echo $lang->user->message;?></caption>
@@ -19,7 +20,7 @@
         <td><?php echo $message->from;?></td>
         <td><?php echo substr($message->time, 5);?></td>
         <td class='a-left'><?php echo $message->content;?></td>
-        <td><?php echo $lang->message->statusList[$message->readed];?></td>
+        <td><?php echo $lang->message->readedStatus[$message->readed];?></td>
         <td><?php echo html::a($this->createLink('message', 'view', "message=$message->id"), $lang->message->view);?></td>
       </tr>
       <?php endforeach;?>

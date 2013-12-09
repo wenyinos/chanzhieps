@@ -21,8 +21,6 @@ include '../../common/view/treeview.html.php';
     <div id='commentBox'></div>
     <?php echo html::a('', '', "name='comment'");?>
   </div>
-  <div class='col-md-3'>
-    <?php if(isset($layouts['page_view']['side'])) echo $this->block->printRegion($layouts['page_view']['side']);?>
-  </div>
+  <div class='col-md-3'><?php $this->block->printRegion($layouts, 'page_view', 'side');?></div>
 </div>
 <?php include '../../common/view/footer.html.php'; ?>

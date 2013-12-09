@@ -37,10 +37,10 @@ class message extends control
      * @access public
      * @return void
      */
-    public function comment($objectType, $objectID, $recTotal = 0, $recPerPage = 10, $pageID = 1)
+    public function comment($objectType, $objectID, $pageID = 1)
     {
         $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal, $recPerPage, $pageID);
+        $pager = new pager($recTotal = 0 , $recPerPage = 10, $pageID);
 
         $this->view->objectType = $objectType;
         $this->view->objectID   = $objectID;
@@ -48,6 +48,21 @@ class message extends control
         $this->view->pager      = $pager;
         $this->lang->message    = $this->lang->comment.
         $this->display();
+    }
+
+    /**
+     * View a message 
+     * 
+     * @param  int    $messageID 
+     * @access public
+     * @return void
+     */
+    public function view($messageID)
+    {
+        $message = $this->message->getByID($messageID);
+        if($message->to != $this->app->user->account) die();
+        $this->message->markReaded($message->id);
+        $this->locate($message->link);
     }
 
     /**

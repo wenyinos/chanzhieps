@@ -53,8 +53,6 @@ js::set('articleID', $article->id);
     <div id='commentBox'></div>
     <?php echo html::a('', '', "name='comment'");?>
   </div>
-  <div class='col-md-3'>
-    <?php if(isset($layouts['article_view']['side'])) echo $this->block->printRegion($layouts['article_view']['side']);?>
-  </div>
+  <div class='col-md-3'><?php $this->block->printRegion($layouts, 'article_view', 'side');?></div>
 </div>
 <?php include '../../common/view/footer.html.php'; ?>
