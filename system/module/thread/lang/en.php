@@ -48,6 +48,7 @@ $lang->thread->message        = '%s reply at #%s in forum, the thread is: %s, th
 $lang->thread->readonly       = 'Read only';
 $lang->thread->successStick   = 'Successfully sticky.';
 $lang->thread->successUnstick = 'Successfully unsticky.';
+$lang->thread->readonlyMessage = 'The thread has been setted <strong>READONLY</strong>，you can not post new reply。';
 
 /* Adjust the pager. */
 if(!isset($lang->pager->settedInForum))

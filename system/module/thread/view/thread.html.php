@@ -2,7 +2,7 @@
   <div class='panel-heading'>
     <h4><i class='icon-comment-alt'></i> <?php echo $thread->title; ?></h4>
     <div class='muted'><?php echo $thread->addedDate;?></div>
-    <div class='panel-actions'><strong>#0</strong></div>
+    <div class='panel-actions'><?php if($thread->readonly) echo "<span class='label label-info'><i class='icon-lock'></i> " . $lang->thread->readonly . "</span> &nbsp;"; ?><strong>#0</strong></div>
   </div>
   <div class='panel-body no-padding'>
     <table class='table'>
