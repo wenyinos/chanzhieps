@@ -20,7 +20,7 @@ $lang->user->nickname  = 'Nick';
 $lang->user->avatar    = 'Avatar';
 $lang->user->birthyear = 'Birthyear';
 $lang->user->birthday  = 'Birthday';
-$lang->user->gendar    = 'Gendar';
+$lang->user->gender    = 'Gendar';
 $lang->user->email     = 'Email';
 $lang->user->msn       = 'MSN';
 $lang->user->qq        = 'QQ';
@@ -88,10 +88,10 @@ $lang->user->forbidDate['30']    = '30d';
 $lang->user->forbidDate['10000'] = 'ever';
 $lang->user->operate             = 'Operate';
 
-$lang->user->gendarList = new stdclass();
-$lang->user->gendarList->m = 'Male';
-$lang->user->gendarList->f = 'Female';
-$lang->user->gendarList->u = '';
+$lang->user->genderList = new stdclass();
+$lang->user->genderList->m = 'Male';
+$lang->user->genderList->f = 'Female';
+$lang->user->genderList->u = '';
 
 $lang->user->register  = new stdclass();
 $lang->user->register->welcome    = 'Welcome to register as a member.';
