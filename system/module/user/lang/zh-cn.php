@@ -73,7 +73,8 @@ $lang->user->searchUser          = '搜索';
 
 $lang->user->errorDeny     = "抱歉，您无权访问『<b>%s</b>』模块的『<b>%s</b>』功能。请联系管理员获取权限。点击后退返回上页。<br/> 5秒钟后将自动返回首页...";
 $lang->user->loginFailed   = "登录失败，请检查您的用户名或密码是否填写正确。";
-$lang->user->locked        = "登录失败超过次数限制，请十分钟以后再重新尝试登录";
+$lang->user->locked        = "用户已经被锁定，请%s后再重新尝试登录";
+$lang->user->lockedForEver = "用户已经被永久禁用。";
 $lang->user->lblRegistered = '恭喜您，已经成功注册。';
 $lang->user->forbidSuccess = '禁用成功';
 $lang->user->forbidFail    = '禁用失败';
