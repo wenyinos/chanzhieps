@@ -132,7 +132,7 @@ class messageModel extends model
             ->setDefault('public', '0')
             ->setIF($type == 'message', 'to', 'admin')
             ->add('ip', $this->server->REMOTE_ADDR)
-            ->remove('status')
+            ->add('status', '0')
             ->get();
 
         $this->dao->insert(TABLE_MESSAGE)
