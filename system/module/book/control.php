@@ -149,8 +149,7 @@ class book extends control
             }
             else
             {
-                $error = dao::getError();
-                $this->send(array('result' => 'fail', 'message' => $error ? $error : $result));
+                $this->send(array('result' => 'fail', 'message' => dao::isError() ? dao::getError() : $result));
             }
         }
 
@@ -178,7 +177,7 @@ class book extends control
         {
             $result = $this->book->update($bookID);
             if($result === true) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin', "bookID=$bookID")));
-            $this->send(array('result' => 'fail', 'message' => dao::getError() ? dao::getError() : $result));
+            $this->send(array('result' => 'fail', 'message' => dao::isError() ? dao::getError() : $result));
         }
 
         $this->view->title   = $this->lang->book->edit;
