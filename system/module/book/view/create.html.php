@@ -53,34 +53,33 @@ js::set('path', json_encode($path));
     <caption><?php echo $lang->book->create;?></caption>
     <thead>
       <tr class='a-center'>
-        <th class='w-p15'><?php echo $lang->book->type;?></th>
-        <th class='w-p40'><?php echo $lang->book->title;?></th>
-        <th><?php echo $lang->book->alias;?></th>
-        <th><?php echo $lang->book->keywords;?></th>
-        <th class='w-p10'><?php echo $lang->actions; ?></th>
+        <th class='w-p10'><?php echo $lang->book->type;?></th>
+        <th class='w-p10'><?php echo $lang->book->author;?></th>
+        <th><?php echo $lang->book->title;?></th>
+        <th class='w-p30'><?php echo $lang->book->alias;?></th>
+        <th class='w-p10'><?php echo $lang->book->keywords;?></th>
+        <th class='w-80px'><?php echo $lang->actions; ?></th>
       </tr>
     </thead>
     <tbody>
     <?php foreach($catalogues as $catalogue):?>
     <tr class='v-middle a-center'>
-      <td><?php echo html::select("type[$catalogue->id]", $lang->book->typeList, $catalogue->type, "class='select-2'");?></td>
+      <td><?php echo html::select("type[$catalogue->id]", $lang->book->typeList, $catalogue->type, "class='select-1'");?></td>
+      <td><?php echo html::input("author[$catalogue->id]", $catalogue->author, "class='text-1'");?></td>
       <td><?php echo html::input("title[$catalogue->id]", $catalogue->title, "class='text-1'");?></td>
       <td><?php echo html::input("alias[$catalogue->id]", $catalogue->alias, "class='text-1'");?></td>
       <td><?php echo html::input("keywords[$catalogue->id]", $catalogue->keywords, "class='text-1'");?></td>
-      <td><i class='icon-arrow-up'></i> <i class='icon-arrow-down'></i></td>
-      <td><?php echo html::hidden("order[$catalogue->id]", $catalogue->order, "class='order'");?></td>
-      <td><?php echo html::hidden("mode[$catalogue->id]", 'update');?></td>
+      <td><i class='icon-arrow-up'></i> <i class='icon-arrow-down'></i><?php echo html::hidden("order[$catalogue->id]", $catalogue->order, "class='order'");?><?php echo html::hidden("mode[$catalogue->id]", 'update');?></td>
     </tr>
     <?php endforeach;?>
     <?php for($i = 0; $i < BOOK::NEW_CATALOGUE_COUNT ; $i ++):?>
     <tr class='v-middle a-center'>
-      <td><?php echo html::select("type[]", $lang->book->typeList, '', "class='select-2'");?></td>
+      <td><?php echo html::select("type[]", $lang->book->typeList, '', "class='select-1'");?></td>
+      <td><?php echo html::input("author[]", $app->user->realname, "class='text-1'");?></td>
       <td><?php echo html::input("title[]", '', "class='text-1'");?></td>
       <td><?php echo html::input("alias[]", '', "class='text-1' placeholder='{$lang->alias}'");?></td>
       <td><?php echo html::input("keywords[]", '', "class='text-1'");?></td>
-      <td><i class='icon-arrow-up'></i> <i class='icon-arrow-down'></i></td>
-      <td><?php echo html::hidden("order[]", '', "class='order'");?></td>
-      <td><?php echo html::hidden("mode[]", 'new');?></td>
+      <td><i class='icon-arrow-up'></i> <i class='icon-arrow-down'></i><?php echo html::hidden("order[]", '', "class='order'");?><?php echo html::hidden("mode[]", 'new');?></td>
     </tr>
     <?php endfor;?>
     </tbody>
