@@ -586,20 +586,20 @@ class commonModel extends model
      * @access  public
      * @return  void
      */
-    public function printBook($book)
+    public function printBook($catalogue)
     {
         echo '<li>' . html::a(helper::createLink('book', 'index'), $this->lang->bookHome) . '</li>';
-        foreach($book->pathNames as $bookID => $bookTitle)
+        foreach($catalogue->pathNames as $catalogueID => $catalogueTitle)
         {
-            $book = $this->loadModel('book')->getByID($bookID);
-            if($book->parent)
+            $catalogue = $this->loadModel('book')->getByID($catalogueID);
+            if($catalogue->parent)
             {
-                $book = $this->book->getBook($book->path);
-                echo '<li>' . html::a(helper::createLink('book', 'browse', "bookID=$bookID", "book=$book->alias&title=$book->alias"), $bookTitle) . '</li>';
+                $book = $this->book->getBook($catalogue->path);
+                echo '<li>' . html::a(helper::createLink('book', 'browse', "catalogueID=$catalogueID", "book=$book->alias&title=$catalogue->alias"), $catalogueTitle) . '</li>';
             }
             else
             {
-                echo '<li>' . html::a(helper::createLink('book', 'browse', "bookID=$bookID", "book=$book->alias"), $bookTitle) . '</li>';
+                echo '<li>' . html::a(helper::createLink('book', 'browse', "bookID=$catalogueID", "book=$catalogue->alias"), $catalogueTitle) . '</li>';
             }
         }
     }
