@@ -33,7 +33,7 @@ class reply extends control
             $replyID = $this->reply->post($threadID);
 
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => '#' . $replyID));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('thread', 'locate', "threadID=$threadID&replyID=$replyID")));
         }
     }
 
