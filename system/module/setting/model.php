@@ -63,7 +63,7 @@ class settingModel extends model
         $item->key     = $key;
         $item->value   = $value;
 
-        if($_SESSION['album'][$this->post->uid]) $this->loadModel('file')->updateObjectID($this->post->uid, 0, $section);
+        $this->loadModel('file')->updateObjectID($this->post->uid, 0, $section);
 
         $this->dao->replace(TABLE_CONFIG)->data($item)->exec();
     }

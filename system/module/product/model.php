@@ -234,10 +234,7 @@ class productModel extends model
             ->exec();
         $productID = $this->dao->lastInsertID();
 
-        if($_SESSION['album'][$this->post->uid])
-        {
-            $this->loadModel('file')->updateObjectID($this->post->uid, $productID, 'product');
-        }
+        $this->loadModel('file')->updateObjectID($this->post->uid, $productID, 'product');
 
         if(dao::isError()) return false;
 
@@ -276,10 +273,7 @@ class productModel extends model
             ->where('id')->eq($productID)
             ->exec();
 
-        if($_SESSION['album'][$this->post->uid])
-        {
-            $this->loadModel('file')->updateObjectID($this->post->uid, $productID, 'product');
-        }
+        $this->loadModel('file')->updateObjectID($this->post->uid, $productID, 'product');
 
         if(dao::isError()) return false;
 

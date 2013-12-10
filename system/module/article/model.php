@@ -242,10 +242,7 @@ class articleModel extends model
             ->exec();
         $articleID = $this->dao->lastInsertID();
 
-        if($_SESSION['album'][$this->post->uid])
-        {
-            $this->loadModel('file')->updateObjectID($this->post->uid, $articleID, $type);
-        }
+        $this->loadModel('file')->updateObjectID($this->post->uid, $articleID, $type);
 
         if(dao::isError()) return false;
 
@@ -287,10 +284,7 @@ class articleModel extends model
             ->where('id')->eq($articleID)
             ->exec();
 
-        if($_SESSION['album'][$this->post->uid])
-        {
-            $this->loadModel('file')->updateObjectID($this->post->uid, $articleID, $type);
-        }
+        $this->loadModel('file')->updateObjectID($this->post->uid, $articleID, $type);
 
         if(dao::isError()) return false;
 

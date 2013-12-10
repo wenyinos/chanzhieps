@@ -138,10 +138,7 @@ class replyModel extends model
 
         $replyID = $this->dao->lastInsertID();                     // Get reply id.
 
-        if($_SESSION['album'][$this->post->uid])
-        {
-            $this->loadModel('file')->updateObjectID($this->post->uid, $replyID, 'reply');
-        }
+        $this->loadModel('file')->updateObjectID($this->post->uid, $replyID, 'reply');
 
         if(!dao::isError())
         {
@@ -183,10 +180,7 @@ class replyModel extends model
             ->where('id')->eq($replyID)
             ->exec();
 
-        if($_SESSION['album'][$this->post->uid])
-        {
-            $this->loadModel('file')->updateObjectID($this->post->uid, $replyID, 'reply');
-        }
+        $this->loadModel('file')->updateObjectID($this->post->uid, $replyID, 'reply');
 
         if(!dao::isError())
         {

@@ -144,10 +144,7 @@ class threadModel extends model
 
         $threadID = $this->dao->lastInsertID();
 
-        if($_SESSION['album'][$this->post->uid])
-        {
-            $this->loadModel('file')->updateObjectID($this->post->uid, $threadID, 'thread');
-        }
+        $this->loadModel('file')->updateObjectID($this->post->uid, $threadID, 'thread');
 
         if(!dao::isError())
         {
@@ -210,10 +207,7 @@ class threadModel extends model
             ->where('id')->eq($threadID)
             ->exec();
 
-        if($_SESSION['album'][$this->post->uid])
-        {
-            $this->loadModel('file')->updateObjectID($this->post->uid, $threadID, 'thread');
-        }
+        $this->loadModel('file')->updateObjectID($this->post->uid, $threadID, 'thread');
 
         if(dao::isError()) return false;
 
