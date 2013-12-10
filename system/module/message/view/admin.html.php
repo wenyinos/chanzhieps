@@ -30,6 +30,7 @@
     <?php foreach($messages as $messageID => $message):?>
     <tr>
       <td rowspan='2' class='a-center'><strong><?php echo $message->id;?></strong></td>
+      <?php if($message->type == 'comment'):?>
       <td>
         <?php 
         $config->requestType = $config->frontRequestType;
@@ -45,12 +46,21 @@
 
         $config->requestType = 'GET';
         echo <<<EOT
-        <strong>$message->author</strong><i class='blue'>$message->email</i> 
+        <strong>$message->from</strong><i class='blue'>$message->email</i> 
         <strong>$message->date</strong>{$lang->message->messageTo}
         $objectViewLink
 EOT;
         ?>
       </td>
+      <?php else:?>
+      <td>
+        <?php echo "<strong>{$message->from}：</strong>";?>
+        <?php echo "<strong>$message->date</strong>{$lang->message->messageTo}<br/>";?>
+        <?php if(!empty($message->phone)) echo "<i class='icon-phone'></i> {$message->phone}";?>
+        <?php if(!empty($message->email)) echo "<i class='icon-folder-close'></i> {$message->email}";?>
+        <?php if(!empty($message->qq))    echo "<i class='icon-linux'></i> {$message->qq}";?>
+      </td>
+      <?php endif;?>
       <td rowspan='2' class='a-center v-middle'>
         <?php 
         echo html::a(inlink('reply', "messageID=$message->id"), $lang->message->reply, "data-toggle='modal'");

@@ -23,6 +23,14 @@ class messageModel extends model
         return $this->dao->select('*')->from(TABLE_MESSAGE)->findByID($messageID)->fetch();
     }
     
+    /**
+     * Get message list By Account 
+     * 
+     * @param  string    $account 
+     * @param  object    $pager 
+     * @access public
+     * @return array
+     */
     public function getByAccount($account, $pager)
     {
          return $this->dao->select('*')->from(TABLE_MESSAGE)
@@ -132,7 +140,7 @@ class messageModel extends model
             ->setDefault('public', '0')
             ->setIF($type == 'message', 'to', 'admin')
             ->add('ip', $this->server->REMOTE_ADDR)
-            ->remove('status')
+            ->add('status', '0')
             ->get();
 
         $this->dao->insert(TABLE_MESSAGE)

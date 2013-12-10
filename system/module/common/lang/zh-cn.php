@@ -179,6 +179,7 @@ $lang->site->menu->nav       = '导航设置|nav|admin|';
 $lang->site->menu->tag       = '关键词设置|tag|admin|';
 $lang->site->menu->oauth     = '开放登录|site|setoauth|';
 $lang->site->menu->link      = '友情链接|links|admin|';
+$lang->site->menu->favicon   = '网站图标|site|favicon';
 $lang->site->menu->mail      = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
 
 /* Menu of company module. */
