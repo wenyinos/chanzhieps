@@ -36,6 +36,7 @@ js::set('path', json_encode($path));
           <?php echo html::input('alias', '', "class='text-1 form-control' placeholder='{$lang->alias}'");?>
           <span class="input-group-addon">.html</span>
         </div>
+        <span class='star'>*</span>
       </td>
     </tr>
     <tr>
