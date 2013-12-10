@@ -153,10 +153,9 @@ class userModel extends model
             $this->post->set('password', $password);
         }
 
-        $user = fixer::input('post')
-            ->cleanInt('imobile, qq, zipcode')
-            ->remove('ip, account, admin, join, visits')
-            ->get();
+        $user = fixer::input('post')->cleanInt('imobile, qq, zipcode')->remove('ip, account, join, visits');
+        if(RUN_MODE != 'admin') $user = $user->remove('admin');
+        $user = $user->get();
 
         return $this->dao->update(TABLE_USER)
             ->data($user, $skip = 'password1,password2')
@@ -245,24 +244,32 @@ class userModel extends model
         $user = $this->dao->select('*')->from(TABLE_USER)
             ->beginIF(validater::checkEmail($account))->where('email')->eq($account)->fi()
             ->beginIF(!validater::checkEmail($account))->where('account')->eq($account)->fi()
-            ->andWhere('locked')->lt(helper::now())
             ->fetch();
 
         /* Then check the password hash. */
         if(!$user) return false;
 
         /* Can not login before ten minutes when user is locked. */
-        if($user->locked)
+        if($user->locked != '0000-00-00 00:00:00')
         {
-            if((time() - $user->locked) / 60 <= 10)
+            $dateDiff = (strtotime($user->locked) - time()) / 60;
+
+            /* Check the type of lock and show it. */
+            if($dateDiff > 0 && $dateDiff <= 10)
             {
-                $this->lang->user->loginFailed = $this->lang->user->locked;
+                $this->lang->user->loginFailed = sprintf($this->lang->user->locked, '10' . $this->lang->date->minute);
+                return false;
+            }
+            elseif($dateDiff > 10)
+            {
+                $dateDiff = ceil($dateDiff / 60 / 24);
+                $this->lang->user->loginFailed = $dateDiff <= 30 ? sprintf($this->lang->user->locked, $dateDiff . $this->lang->date->day) : $this->lang->user->lockedForEver;
                 return false;
             }
             else
             {
                 $user->fails  = 0;
-                $user->locked = 0;
+                $user->locked = '0000-00-00 00:00:00';
             }
         }
 
@@ -271,7 +278,7 @@ class userModel extends model
         if($oldPassword != $user->password and !$this->compareHashPassword($password, $user))
         {
             $user->fails ++;
-            if($user->fails > 2 * 2) $user->locked = time();
+            if($user->fails > 2 * 2) $user->locked = date('Y-m-d H:i:s', time() + 10 * 60);
             $this->dao->update(TABLE_USER)->data($user)->where('id')->eq($user->id)->exec();
             return false;
         }
@@ -280,7 +287,6 @@ class userModel extends model
         $user->ip     = $this->server->remote_addr;
         $user->last   = helper::now();
         $user->fails  = 0;
-        $user->locked = 0;
         $user->visits ++;
         /* Update password when create password by oldCreatePassword function. */
         if($oldPassword == $user->password) $user->password = $this->createPassword($password, $user->account);

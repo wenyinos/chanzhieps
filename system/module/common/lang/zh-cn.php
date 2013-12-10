@@ -254,6 +254,9 @@ $lang->pager->next      = '下页';
 $lang->pager->last      = '末页';
 $lang->pager->locate    = 'Go!';
 
+$lang->date->minute = '分钟';
+$lang->date->day    = '天';
+
 /* The datetime settings. */
 define('DT_DATETIME1',  'Y-m-d H:i:s');
 define('DT_DATETIME2',  'y-m-d H:i');

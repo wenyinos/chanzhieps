@@ -23,7 +23,4 @@ $(document).ready(function()
 
     // active lightbox
     $("[data-toggle=lightbox]").lightbox();
-
-    // go to anchor
-    goToAnchor();
 });

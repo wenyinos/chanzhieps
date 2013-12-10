@@ -254,6 +254,9 @@ $lang->pager->next      = "Next";
 $lang->pager->last      = "Last";
 $lang->pager->locate    = "GO!";
 
+$lang->date->minute = 'minute';
+$lang->date->day    = 'day';
+
 /* Date times. */
 define('DT_DATETIME1',  'Y-m-d H:i:s');
 define('DT_DATETIME2',  'y-m-d H:i');
