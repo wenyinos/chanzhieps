@@ -205,6 +205,70 @@ class upgradeModel extends model
         return true;
     }
 
+    public function moveBooks()
+    {
+        $books = $this->dao->select('*')->from(TABLE_CONFIG)
+            ->where('owner')->eq('system')
+            ->andWhere('module')->eq('common')
+            ->andWhere('section')->eq('book')
+            ->fetchAll('key');
+        foreach($books as $code => $book)
+        {
+            $book = json_decode($book->value);
+            $this->dao->insert(TABLE_BOOK)
+                ->set('alias')->eq($code)
+                ->set('title')->eq($book->name)
+                ->set('summary')->eq($book->summary)
+                ->exec();
+            $bookID = $this->dao->lastInsertID();
+
+            $catalogues = $this->dao->select(*)->from(TABLE_CATEGORY)
+                ->where('type')->eq('book_' . $code)
+                ->fetchAll('id');
+
+            foreach($catalogues as $catalogue)
+            {
+                $chapter = new stdclass();
+                $chapter->title      = $catalogue->name;
+                $chapter->alias      = $catalogue->alias;
+                $chapter->keywords   = $catalogue->keywords;
+                $chapter->summary    = $catalogue->desc;
+                $chapter->type       = 'chapter';
+                $chapter->parent     = $catalogue->parent == 0 ? $book->id : $catalogue->parent;
+                $chapter->path       = ",{$bookID}" . $catalogue->path;
+                $chapter->grade      = $catalogue->grade + 1;
+                $chapter->addedDate  = $catalogue->addedDate;
+                $chapter->editedDate = $catalogue->editedDate;
+                $chapter->order      = $catalogue->order;
+                $this->dao->insert(TABLE_BOOK)->data($chapter)->exec();
+            }
+            
+            $articles = $this->dao->select('*')->from(TABLE_ARTICLE)
+                ->where('type')->eq('book_' . $code)
+                ->fetchAll('id');
+            foreach($articles as $origin)
+            {
+                $article = new stdclass();
+                $article->title      = $origin->name;
+                $article->alias      = $origin->alias;
+                $article->keywords   = $origin->keywords;
+                $article->summary    = $origin->desc;
+                $article->type       = 'article';
+                $article->parent     = $origin->parent == 0 ? $book->id : $origin->parent;
+                $article->path       = ",{$bookID}" . $origin->path;
+                $article->grade      = $catalogues[$origin->]->grade + 1;
+                $article->addedDate  = $origin->addedDate;
+                $article->editedDate = $origin->editedDate;
+                $article->order      = $origin->order;
+                $this->dao->insert(TABLE_BOOK)->data($chapter)->exec();
+ 
+            }
+
+
+        }
+
+    }
+
     /**
      * Get the upgrade sql file.
      * 

@@ -26,15 +26,15 @@
     <thead>
       <tr class='a-center'>
         <th class='w-60px'><?php echo $lang->user->id;?></th>
-        <th class='w-80px'><?php echo $lang->user->realname;?></th>
-        <th class='w-80px'><?php echo $lang->user->nickname;?></th>
+        <th class='w-100px'><?php echo $lang->user->realname;?></th>
+        <th class='w-100px'><?php echo $lang->user->nickname;?></th>
         <th class='w-80px'><?php echo $lang->user->account;?></th>
-        <th class='w-60px'><?php echo $lang->user->gendar;?></th>
+        <th class='w-60px'><?php echo $lang->user->gender;?></th>
         <th class='a-left'><?php echo $lang->user->company;?></th>
         <th class='w-150px'><?php echo $lang->user->join;?></th>
         <th class='w-80px'><?php echo $lang->user->visits;?></th>
         <th class='w-150px'><?php echo $lang->user->last;?></th>
-        <th><?php echo $lang->actions;?></th>
+        <th class='w-100px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
@@ -44,7 +44,7 @@
       <td><?php echo $user->realname;?></td>
       <td><?php echo $user->nickname;?></td>
       <td><?php echo $user->account;?></td>
-      <td><?php $gendar = $user->gendar; echo $lang->user->gendarList->$gendar;?></td>
+      <td><?php $gender = $user->gender; echo $lang->user->genderList->$gender;?></td>
       <td class='a-left'><?php echo $user->company;?></td>
       <td><?php echo $user->join;?></td>
       <td><?php echo $user->visits;?></td>

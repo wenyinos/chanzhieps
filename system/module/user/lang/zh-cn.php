@@ -20,7 +20,7 @@ $lang->user->nickname  = '昵称';
 $lang->user->avatar    = '头像';
 $lang->user->birthyear = '出生年';
 $lang->user->birthday  = '出生月日';
-$lang->user->gendar    = '性别';
+$lang->user->gender    = '性别';
 $lang->user->email     = '邮箱';
 $lang->user->msn       = 'MSN';
 $lang->user->qq        = 'QQ';
@@ -88,10 +88,10 @@ $lang->user->forbidDate['30']    = '一个月';
 $lang->user->forbidDate['10000'] = '永久';
 $lang->user->operate             = '操作';
 
-$lang->user->gendarList = new stdclass();
-$lang->user->gendarList->m = '男';
-$lang->user->gendarList->f = '女';
-$lang->user->gendarList->u = '';
+$lang->user->genderList = new stdclass();
+$lang->user->genderList->m = '男';
+$lang->user->genderList->f = '女';
+$lang->user->genderList->u = '';
 
 $lang->user->register  = new stdclass();
 $lang->user->register->welcome     = '欢迎注册成为会员';
