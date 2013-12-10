@@ -19,6 +19,7 @@ $lang->book->keywords    = '关键词';
 $lang->book->summary     = '简介';
 $lang->book->content     = '内容';
 $lang->book->alias       = '别名';
+$lang->book->files       = '附件';
 $lang->book->chapterList = '目录管理';
 $lang->book->articleList = '文章管理';
 
