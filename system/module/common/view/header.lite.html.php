@@ -10,7 +10,7 @@ $themeRoot = $webRoot . "theme/";
 <?php else:?>
 <html>
 <?php endif;?>
-<head>
+<head profile="http://www.w3.org/2005/10/profile">
   <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php if($this->app->getModuleName() == 'user' and $this->app->getMethodName() == 'deny'):?>
@@ -48,7 +48,7 @@ $themeRoot = $webRoot . "theme/";
   if(RUN_MODE == 'front' and $config->site->theme) css::import($themeRoot . $config->site->theme . '/style.css');
   if(isset($pageCSS)) css::internal($pageCSS);
 
-  echo html::icon($webRoot . 'favicon.ico');
+  echo isset($this->config->site->favicon) ? html::icon(json_decode($this->config->site->favicon)->webPath) : html::icon($webRoot . 'favicon.ico');
   echo html::rss($config->webRoot .'rss.xml', $config->site->name);
 ?>
 <!--[if lt IE 9]>
