@@ -34,7 +34,7 @@
         <th class='w-150px'><?php echo $lang->user->join;?></th>
         <th class='w-80px'><?php echo $lang->user->visits;?></th>
         <th class='w-150px'><?php echo $lang->user->last;?></th>
-        <th class='w-100px'><?php echo $lang->actions;?></th>
+        <th class='w-250px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
