@@ -8,7 +8,7 @@ $(document).ready(function()
             {
                 return setTimeout(function()
                 {
-                    location.href = response.locate.indexOf('#') == 0 ? $.setUrlParam(location.href, 'go2anchor', response.locate.substring(1)) : response.locate;
+                    location.href = response.locate;
                 }, 1200);
             }
         }
