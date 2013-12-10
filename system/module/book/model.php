@@ -347,9 +347,9 @@ class bookModel extends model
                 if(empty($catalogueTitle)) continue;
 
                 /* First, save the child without path field. */
-                $now = helper::now();
                 $catalogue->title      = $catalogueTitle;
                 $catalogue->type       = $this->post->type[$key];
+                $catalogue->author     = $this->post->author[$key];
                 $catalogue->alias      = $this->post->alias[$key];
                 $catalogue->keywords   = $this->post->keywords[$key];
                 $catalogue->order      = $this->post->order[$key];
