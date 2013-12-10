@@ -13,6 +13,7 @@ $lang->user->common    = '用户';
 
 $lang->user->id        = '编号';
 $lang->user->account   = '用户名';
+$lang->user->admin     = '管理员';
 $lang->user->password  = '密码';
 $lang->user->password2 = '请重复密码';
 $lang->user->realname  = '真实姓名';
