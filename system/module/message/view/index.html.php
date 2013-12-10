@@ -15,19 +15,20 @@
   <div class='col-md-9'>
     <?php if(!empty($messages)):?>
     <div class='box radius'> 
-      <h4 class='title'><?php echo $lang->message->list;?></h4>
+      <h4 class='title'><i class="icon-comments-alt"></i> <?php echo $lang->message->list;?></h4>
       <ul class="media-list">
         <li><a name='first'></a></li>
         <?php foreach($messages as $number => $message):?>
         <li id='<?php echo $message->id?>' class='media'>
-          <strong>#<?php echo ($number + 1)?> <?php echo $message->from;?></strong> at <?php echo $message->date;?><br />
-          <?php echo nl2br($message->content);?>
+          <div class="icon"><i class="icon-comment"></i></div>
+          <div class="pull-right"><span class="text-muted"><?php echo $message->date;?></span> &nbsp;<strong>#<?php echo ($number + 1)?></strong></div>
+          <div><strong><?php echo $message->from;?></strong></div>
+          <div class="content"><?php echo nl2br($message->content);?></div>
           <?php if(!empty($replies[$message->id])):?>
           <dl class='alert alert-info'>
           <?php foreach($replies[$message->id] as $reply)printf($lang->message->replyItem, $reply->from, $reply->date, $reply->content); ?>
           </dl>
           <?php endif;?>
-          <hr>
         </li>
         <?php endforeach;?>
       </ul>
