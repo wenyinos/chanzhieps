@@ -431,6 +431,8 @@ class bookModel extends model
      */
     public function update($bookID)
     {
+        $type = $this->dao->select('type')->from(TABLE_BOOK)->where('id')->eq($bookID)->fetch('type');
+
         $book = fixer::input('post')
             ->add('editor', $this->app->user->account)
             ->add('editedDate', helper::now())
@@ -447,6 +449,7 @@ class bookModel extends model
         $this->dao->update(TABLE_BOOK)
             ->data($book, $skip = 'uid')
             ->autoCheck()
+            ->batchCheckIF($type == 'book', $this->config->book->editBook->requiredFields, 'notempty')
             ->batchCheck($this->config->book->edit->requiredFields, 'notempty')
             ->where('id')->eq($bookID)
             ->exec();
