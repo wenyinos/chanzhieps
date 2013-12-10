@@ -34,6 +34,11 @@ $lang->site->setLogoFailed  = "设置Logo失败";
 $lang->site->noSelectedFile = "没有选择图片";
 $lang->site->oauthHelp      = "使用帮助";
 
+$lang->site->favicon = new stdclass();
+$lang->site->favicon->common = "设置Favicon";
+$lang->site->favicon->reset  = "重置";
+$lang->site->favicon->notice = "请上传ico格式图片";
+
 $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = '会员';
 $lang->site->moduleAvailable['forum']   = '论坛';

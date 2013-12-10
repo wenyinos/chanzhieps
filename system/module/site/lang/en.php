@@ -34,6 +34,11 @@ $lang->site->setLogoFailed  = "Set logo failed.";
 $lang->site->noSelectedFile = "No file selected.";
 $lang->site->oauthHelp      = "Help";
 
+$lang->site->favicon = new stdclass();
+$lang->site->favicon->common = "Set favicon";
+$lang->site->favicon->reset  = "Reset";
+$lang->site->favicon->notice = "Please upload ico format picture";
+
 $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = 'Member';
 $lang->site->moduleAvailable['forum']   = 'Forum';
