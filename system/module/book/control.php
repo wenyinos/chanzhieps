@@ -74,7 +74,7 @@ class book extends control
         $this->view->catalogue  = $catalogue;
         $this->view->book       = $book;
         $this->view->books      = $this->book->getBookList();
-        $this->view->catalogues = $this->book->getFrontCatalogue($book->id);
+        $this->view->catalogues = $this->book->getFrontCatalogue($catalogue->id);
         $this->display();
     }
 
