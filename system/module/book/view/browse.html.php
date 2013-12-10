@@ -1,5 +1,5 @@
 <?php include '../../common/view/header.html.php'; ?>
-<?php $common->printPositionBar($catalogue);?>
+<?php $common->printPositionBar($chapter);?>
 <div class='row'>
   <div class='col-md-3' id='leftmenu'>
     <div class="list-group">

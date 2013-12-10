@@ -15,8 +15,6 @@ class book extends control
 
     public function index()
     {
-        $book = $this->book->getFirstBook();
-        if($book) $this->locate(inlink('browse', "bookID=$book->id", "book=$book->alias"));
         $this->locate(inlink('browse'));
     }
 
@@ -60,21 +58,27 @@ class book extends control
     /**
      * Browse a catalogue.
      * 
-     * @param  int    $catalogueID 
+     * @param  int    $chapterID 
      * @access public
      * @return void
      */
-    public function browse($catalogueID)
+    public function browse($chapterID)
     {
-        $catalogue = $this->book->getByID($catalogueID);
-        $book = $this->book->getBook($catalogue->path);
-
+        if(!$chapterID)
+        {
+            $book = $chapter = $this->book->getFirstBook();
+        }
+        else
+        {
+            $chapter = $this->book->getByID($chapterID);
+            $book    = $this->book->getBook($chapter->path);
+        }
         $this->view->title      = $book->title;
-        $this->view->keywords   = trim($catalogue->keywords . ' ' . $this->config->site->keywords);
-        $this->view->catalogue  = $catalogue;
+        $this->view->keywords   = trim($chapter->keywords . ' ' . $this->config->site->keywords);
+        $this->view->chapter    = $chapter;
         $this->view->book       = $book;
         $this->view->books      = $this->book->getBookList();
-        $this->view->catalogues = $this->book->getFrontCatalogue($catalogue->id);
+        $this->view->catalogues = $this->book->getFrontCatalogue($chapter->id);
         $this->display();
     }
 
