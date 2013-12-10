@@ -13,7 +13,10 @@
       </div>
     </div>
     <?php if($article->summary) echo "<div class='summary'><strong>{$lang->book->summary}</strong>$lang->colon$article->summary</div>";?>
-    <div><?php echo $article->content;;?></div>
+    <div>
+      <?php echo $article->content;;?>
+      <div class='article-file mt-10px'><?php $this->book->printFiles($article->files);?></div>
+    </div>
     <?php if($article->keywords) echo "<div class='keywords'><strong>{$lang->book->keywords}</strong>$lang->colon$article->keywords</div>";?>
     <?php extract($prevAndNext);?>
     <div class='row f-12px mt-10px'>

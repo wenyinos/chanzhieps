@@ -25,6 +25,9 @@ class bookModel extends model
         if(!$book) $book = $this->dao->select('*')->from(TABLE_BOOK)->where('id')->eq($id)->fetch();
         $book->pathNames = $this->dao->select('id, title')->from(TABLE_BOOK)->where('id')->in($book->path)->orderBy('grade')->fetchPairs();
 
+        /* Get it's files. */
+        $book->files = $this->loadModel('file')->getByObject('book', $id);
+
         /* Add link to content if necessary. */
         if($replaceTag && !empty($book->content)) $book->content = $this->loadModel('tag')->addLink($book->content);
         return $book;
@@ -238,6 +241,7 @@ class bookModel extends model
             $title        = $catalogue->type == 'book' ? $catalogue->title : html::a(helper::createLink('book', 'admin', "bookID=$catalogue->id"), $catalogue->title);
             $editButton   = html::a(helper::createLink('book', 'edit', "bookID=$catalogue->id"), $this->lang->edit, "data-toggle='modal' data-width='1000px'");
             $deleteButton = empty($children) ? html::a(helper::createLink('book', 'delete', "bookID=$catalogue->id"), $this->lang->delete, "class='deleter'") : '';
+            $files        = html::a(helper::createLink('file', 'browse', "objectType=book&objectID=$catalogue->id"), $this->lang->book->files, "data-toggle='modal' data-width='1000'");
             $create       = html::a(helper::createLink('book', 'create', "bookID=$catalogue->id"), $this->lang->book->create);
             $sortup       = html::a(helper::createLink('book', 'up', "bookID=$catalogue->id"), "<i class='icon-arrow-up'></i>", "class='sort'");
             $sortdown     = html::a(helper::createLink('book', 'down', "bookID=$catalogue->id"), "<i class='icon-arrow-down'></i>", "class='sort'");
@@ -252,7 +256,7 @@ class bookModel extends model
             }
             elseif($catalogue->type == 'article')
             {
-                $this->catalogue .= "<dd class='catalogue article'><strong><span class='order'>" . $order . '</span>&nbsp;' . $catalogue->title . '</strong><span class="actions">' . $editButton . $deleteButton . $sortup . $sortdown . '</span></dd>';
+                $this->catalogue .= "<dd class='catalogue article'><strong><span class='order'>" . $order . '</span>&nbsp;' . $catalogue->title . '</strong><span class="actions">' . $editButton . $deleteButton . $files . $sortup . $sortdown . '</span></dd>';
             }
         }
 
@@ -527,5 +531,33 @@ class bookModel extends model
             ->andWhere('type')->eq($book->type)
             ->fetch('count');
         return $count < 1;
+    }
+
+    /**
+     * Print files.
+     * 
+     * @param  object $files 
+     * @access public
+     * @return void
+     */
+    public function printFiles($files)
+    {
+        if(empty($files)) return false;
+
+        $imagesHtml = '';
+        $filesHtml  = '';
+        foreach($files as $file)
+        {
+            $file->title = $file->title . ".$file->extension";
+            if($file->isImage)
+            {
+                $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank' data-toggle='lightbox'") . '</li>';
+            }
+            else
+            {
+                $filesHtml .= "<li class='file file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'") . '</li>';
+            }
+        }
+        echo "<ul class='article-files clearfix'>" . $imagesHtml . $filesHtml . '</ul>';
     }
 }
