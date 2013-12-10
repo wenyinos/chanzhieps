@@ -61,7 +61,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
     <h4 class='title'><?php echo $block->title?></h4>
   </div>
   <div class="panel-body">
-    <ul>
+    <ul class="mg-zero pd-zero">
       <?php foreach($products as $product):?>
       <li>
         <?php 
