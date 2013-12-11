@@ -54,11 +54,11 @@ EOT;
       </td>
       <?php else:?>
       <td>
-        <?php echo "<strong>{$message->from}：</strong>";?>
-        <?php echo "<strong>$message->date</strong>{$lang->message->messageTo}<br/>";?>
-        <?php if(!empty($message->phone)) echo "<i class='icon-phone'></i> {$message->phone}";?>
-        <?php if(!empty($message->email)) echo "<i class='icon-folder-close'></i> {$message->email}";?>
-        <?php if(!empty($message->qq))    echo "<i class='icon-linux'></i> {$message->qq}";?>
+        <?php echo "<i class='icon-user'></i> <strong>{$message->from}</strong> &nbsp;";?>
+        <?php echo "<span class='gray'>$message->date</span>{$lang->message->messageTo}<br/>";?>
+        <?php if(!empty($message->phone)) echo "<i class='icon-phone blue icon'></i> {$message->phone} &nbsp; ";?>
+        <?php if(!empty($message->email)) echo "<i class='icon-envelope green icon'></i> {$message->email} &nbsp; ";?>
+        <?php if(!empty($message->qq))    echo "<i class='icon-qq gray icon'></i> {$message->qq} &nbsp; ";?>
       </td>
       <?php endif;?>
       <td rowspan='2' class='a-center v-middle'>
