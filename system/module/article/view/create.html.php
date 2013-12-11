@@ -80,9 +80,12 @@
     </tr>
     <tr>
       <th><?php echo $lang->article->addedDate;?></th>
-      <td class='input-append date'>
-        <?php echo html::input('addedDate', date('Y-m-d H:i'), "class='text-3 form-control'");?>
-        <span class="add-on"><i class="icon-th"></i></span>
+      <td>
+        <span class="input-append date">
+          <?php echo html::input('addedDate', date('Y-m-d H:i'), "class='text-3 form-control'");?>
+          <span class='add-on'><button class="btn btn-default btn-group" type="button"><i class="icon-calendar"></i></button></span>
+        </span>
+        
         <span class='help-inline pl-10px'><?php echo $lang->article->note->addedDate;?></span>
       </td>
     </tr>

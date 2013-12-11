@@ -46,8 +46,8 @@
 
         $config->requestType = 'GET';
         echo <<<EOT
-        <strong>$message->from</strong><i class='blue'>$message->email</i> 
-        <strong>$message->date</strong>{$lang->message->messageTo}
+        <i class='icon-user'></i> <strong>$message->from</strong> &nbsp; <i class='icon-envelope green icon'></i> $message->email &nbsp; 
+        <span class='gray'>$message->date</span> &nbsp; {$lang->message->messageTo}
         $objectViewLink
 EOT;
         ?>
