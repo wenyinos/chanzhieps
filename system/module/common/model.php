@@ -582,26 +582,20 @@ class commonModel extends model
     /**
      * Print the position bar of book module.
      * 
-     * @param   object $book 
+     * @param   array   $families
      * @access  public
      * @return  void
      */
-    public function printBook($catalogue)
+    public function printBook($families)
     {
-        echo '<li>' . html::a(helper::createLink('book', 'index'), $this->lang->bookHome) . '</li>';
-        foreach($catalogue->pathNames as $catalogueID => $catalogueTitle)
+        $link = '<li>' . html::a(helper::createLink('book', 'index'), $this->lang->bookHome) . '</li>';
+        $book = current($families);
+        foreach($families as $node)
         {
-            $catalogue = $this->loadModel('book')->getByID($catalogueID);
-            if($catalogue->parent)
-            {
-                $book = $this->book->getBook($catalogue->path);
-                echo '<li>' . html::a(helper::createLink('book', 'browse', "catalogueID=$catalogueID", "book=$book->alias&title=$catalogue->alias"), $catalogueTitle) . '</li>';
-            }
-            else
-            {
-                echo '<li>' . html::a(helper::createLink('book', 'browse', "bookID=$catalogueID", "book=$catalogue->alias"), $catalogueTitle) . '</li>';
-            }
+            if($node->type == 'book') $link .= '<li>' . html::a(helper::createLink('book', 'browse', "bookID=$node->id", "book=$book->alias"), $node->title) . '</li>';
+            if($node->type != 'book') $link .= '<li>' . html::a(helper::createLink('book', 'browse', "nodeID=$node->id", "book=$book->alias&node=$node->alias"), $node->title) . '</li>';
         }
+        echo $link;
     }
 
     /**
