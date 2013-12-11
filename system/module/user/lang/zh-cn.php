@@ -87,7 +87,7 @@ $lang->user->forbidDate['2']     = '两天';
 $lang->user->forbidDate['3']     = '三天';
 $lang->user->forbidDate['7']     = '一周';
 $lang->user->forbidDate['30']    = '一个月';
-$lang->user->forbidDate['3000'] = '永久';
+$lang->user->forbidDate['3000']  = '永久';
 $lang->user->operate             = '操作';
 
 $lang->user->genderList = new stdclass();

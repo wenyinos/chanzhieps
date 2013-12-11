@@ -87,7 +87,7 @@ $lang->user->forbidDate['2']     = '2d';
 $lang->user->forbidDate['3']     = '3d';
 $lang->user->forbidDate['7']     = '7d';
 $lang->user->forbidDate['30']    = '30d';
-$lang->user->forbidDate['3000'] = 'ever';
+$lang->user->forbidDate['3000']  = 'ever';
 $lang->user->operate             = 'Operate';
 
 $lang->user->genderList = new stdclass();
