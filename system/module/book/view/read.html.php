@@ -1,5 +1,5 @@
 <?php include '../../common/view/header.html.php';?>
-<?php $common->printPositionBar($article);?>
+<?php $common->printPositionBar($article->families);?>
 <div class='box radius'>
   <div class='content'>
     <h1 class='a-center'><?php echo $article->title;?></h1>
