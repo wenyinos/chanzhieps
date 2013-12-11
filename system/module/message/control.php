@@ -26,6 +26,7 @@ class message extends control
         $this->view->messages = $this->message->getByObject($type = 'message', $objectType = 'message', $objectID = 0, $pager);
         $this->view->replies  = $this->message->getReplies(array_keys($this->view->messages));
         $this->view->pager    = $pager;
+        $this->view->title    = $this->lang->message->list;
         $this->display();
     }
 
@@ -46,7 +47,7 @@ class message extends control
         $this->view->objectID   = $objectID;
         $this->view->comments   = $this->message->getByObject($type = 'comment', $objectType, $objectID, $pager);
         $this->view->pager      = $pager;
-        $this->lang->message    = $this->lang->comment.
+        $this->lang->message    = $this->lang->comment;
         $this->display();
     }
 
