@@ -63,6 +63,11 @@ class upgradeModel extends model
                 $this->execSQL($this->getUpgradeFile('1.6'));
                 $this->setEnabledModules();
                 $this->setFeaturedProducts();
+            case '1_7':
+                $this->execSQL($this->getUpgradeFile('1.7'));
+                $this->moveBooks();
+                $this->setPageBlocks();
+                $this->setMessageBlocks();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -88,6 +93,7 @@ class upgradeModel extends model
             case '1_4': $confirmContent .= file_get_contents($this->getUpgradeFile('1.4'));
             case '1_5': $confirmContent .= file_get_contents($this->getUpgradeFile('1.5'));
             case '1_6': $confirmContent .= file_get_contents($this->getUpgradeFile('1.6'));
+            case '1_7': $confirmContent .= file_get_contents($this->getUpgradeFile('1.7'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
@@ -198,13 +204,21 @@ class upgradeModel extends model
 
             if(!dao::isError()) $blocks = $this->dao->lastInsertID() . ',' . $blocks;
         }
+
         $this->dao->update(TABLE_LAYOUT)->set('blocks')->eq($blocks)
             ->where('page')->eq('index_index')
             ->andWhere('region')->eq('bottom')
             ->exec();
+
         return true;
     }
 
+    /**
+     * Move books data.
+     * 
+     * @access public
+     * @return void
+     */
     public function moveBooks()
     {
         $books = $this->dao->select('*')->from(TABLE_CONFIG)
@@ -212,61 +226,96 @@ class upgradeModel extends model
             ->andWhere('module')->eq('common')
             ->andWhere('section')->eq('book')
             ->fetchAll('key');
+
         foreach($books as $code => $book)
         {
             $book = json_decode($book->value);
             $this->dao->insert(TABLE_BOOK)
                 ->set('alias')->eq($code)
                 ->set('title')->eq($book->name)
+                ->set('grade')->eq(1)
                 ->set('summary')->eq($book->summary)
                 ->exec();
-            $bookID = $this->dao->lastInsertID();
-
-            $catalogues = $this->dao->select(*)->from(TABLE_CATEGORY)
-                ->where('type')->eq('book_' . $code)
-                ->fetchAll('id');
+            
+            $bookID     = $this->dao->lastInsertID();
+            $catalogues = $this->dao->select('*')->from(TABLE_CATEGORY)->where('type')->eq('book_' . $code)->fetchAll('id');
+            $chapters   = array();
 
             foreach($catalogues as $catalogue)
             {
                 $chapter = new stdclass();
+                $chapter->id         = $catalogue->id;
                 $chapter->title      = $catalogue->name;
                 $chapter->alias      = $catalogue->alias;
                 $chapter->keywords   = $catalogue->keywords;
                 $chapter->summary    = $catalogue->desc;
                 $chapter->type       = 'chapter';
-                $chapter->parent     = $catalogue->parent == 0 ? $book->id : $catalogue->parent;
-                $chapter->path       = ",{$bookID}" . $catalogue->path;
+                $chapter->parent     = $catalogue->parent == 0 ? $bookID : $catalogue->parent;
                 $chapter->grade      = $catalogue->grade + 1;
                 $chapter->addedDate  = $catalogue->addedDate;
                 $chapter->editedDate = $catalogue->editedDate;
                 $chapter->order      = $catalogue->order;
+
+                $paths = explode(',', $catalogue->path);
+                foreach($paths as $key => $value) 
+                {
+                    if(empty($value)) unset($paths[$key]);
+                }
+                $chapter->path = ",{$bookID}," . join($paths, ',') . ',';
+
                 $this->dao->insert(TABLE_BOOK)->data($chapter)->exec();
+                $chapter->id = $this->dao->lastInsertID();
+
+                $chapters[$catalogue->id] = $chapter;
             }
-            
+
             $articles = $this->dao->select('*')->from(TABLE_ARTICLE)
                 ->where('type')->eq('book_' . $code)
                 ->fetchAll('id');
+
             foreach($articles as $origin)
             {
                 $article = new stdclass();
-                $article->title      = $origin->name;
+                $article->title      = $origin->title;
                 $article->alias      = $origin->alias;
+                $article->author     = $origin->author;
                 $article->keywords   = $origin->keywords;
-                $article->summary    = $origin->desc;
+                $article->summary    = $origin->summary;
+                $article->content    = $origin->content;
                 $article->type       = 'article';
                 $article->parent     = $origin->parent == 0 ? $book->id : $origin->parent;
-                $article->path       = ",{$bookID}" . $origin->path;
-                $article->grade      = $catalogues[$origin->]->grade + 1;
                 $article->addedDate  = $origin->addedDate;
                 $article->editedDate = $origin->editedDate;
                 $article->order      = $origin->order;
-                $this->dao->insert(TABLE_BOOK)->data($chapter)->exec();
- 
+                $article->views      = $origin->views;
+                
+                $category = $this->dao->select('*')->from(TABLE_RELATION)->where('type')->eq("book_{$code}")->andWhere('id')->eq($origin->id)->fetch('category');
+
+                $article->parent = $chapters[$category]->id;
+                $article->grade  = $chapters[$category]->grade + 1;
+                $path = $chapters[$category]->path;
+                $paths = explode(',', $path);
+                foreach($paths as $key => $value)
+                {
+                    if(empty($value)) unset($paths[$key]);
+                }
+
+                $article->path   = ',' . join($paths, ',') . ',';
+
+                $this->dao->insert(TABLE_BOOK)->data($article)->exec();
+                $articleID = $this->dao->lastInsertID();
+                $this->dao->update(TABLE_FILE)
+                    ->set('objectType')->eq('book')
+                    ->set('objectID')->eq($articleID)
+                    ->where('objectType')->like('book_%')
+                    ->andWhere('objectID')->eq($origin->id)
+                    ->exec();
             }
-
-
         }
 
+        $this->dao->update(TABLE_BOOK)->set("path=concat(',', id, ',')")->where('type')->eq('book')->exec();
+        $this->dao->update(TABLE_BOOK)->set("path=concat(path, id, ',')")->where('type')->eq('article')->exec();
+        return true;
     }
 
     /**
@@ -324,7 +373,33 @@ class upgradeModel extends model
             }
         }
     }
+        
+    /**
+     * Set blocks of page.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function setPageBlocks()
+    {
+        $block = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq('article_view')->andWhere('region')->eq('side')->fetch('block');
+        $this->dao->insert(TABLE_LAYOUT)->set('page')->eq('page_index')->set('region')->eq('side')->set('block')->eq($block)->exec();
+        return !dao::isError();
+    }
 
+    /**
+     * Set blocks of message page.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function setMessageBlocks()
+    {
+        $id = $this->dao->select('id')->from(TABLE_BLOCK)->where('type')->eq('contact')->fetch('id');
+        $this->dao->insert(TABLE_LAYOUT)->set('page')->eq('message_index')->set('region')->eq('side')->set('block')->eq($block)->exec();
+        return !dao::isError();
+    }
+    
     /**
      * Judge any error occers.
      * 
