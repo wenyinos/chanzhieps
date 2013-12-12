@@ -47,9 +47,15 @@ class seo
         $items  = explode('/', $uri);
         $module = $items[0];
 
+        /* Use book instead of help. */
+        if($module == 'help') $module = $items[0] = 'book';
+
         /* There's no '/' in uri. */
         if(strpos($uri, '/') === false)
         {
+            /* Use book instead of help. */
+            if($uri == 'help') $uri = 'book';
+
             /* Not an alias, return directly. */
             if(!isset($categoryAlias[$uri]) && !isset($pageAlias[$uri])) return $uri;
 
