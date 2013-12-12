@@ -1,5 +1,5 @@
 <?php include '../../common/view/header.html.php'; ?>
-<?php $common->printPositionBar($node->families);?>
+<?php $common->printPositionBar($node->origins);?>
 <div class='row'>
 
   <div class='col-md-3' id='leftmenu'>
