@@ -13,7 +13,7 @@
 .books .article > strong { font-weight: normal; }
 .books .actions { display: inline-block; margin-left: 20px;}
 .books .actions a { color: #999; font-weight: normal; }
-.book:hover,.chapter:hover,.books .article:hover { padding: 6px; background-color: #f6f6f6; }
+.book:hover,.chapter:hover,.books .article:hover {background-color: #efefef; }
 .book:hover .actions a,.chapter:hover .actions a,.books .article:hover .actions a { color: #506EAF; }
 .chapter, .books .article { line-height: 20px; }
 .chapter .order,.books .article .order { display: inline-block; font-weight: bold; margin-right: 4px; font-size: 12px; height: 20px; line-height: 20px; padding: 0 6px; color: #666; text-align: center; border: 1px solid #e1e1e1; border-radius: 5px; }

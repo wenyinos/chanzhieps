@@ -586,11 +586,11 @@ class commonModel extends model
      * @access  public
      * @return  void
      */
-    public function printBook($families)
+    public function printBook($origins)
     {
         $link = '<li>' . html::a(helper::createLink('book', 'index'), $this->lang->bookHome) . '</li>';
-        $book = current($families);
-        foreach($families as $node)
+        $book = current($origins);
+        foreach($origins as $node)
         {
             if($node->type == 'book') $link .= '<li>' . html::a(helper::createLink('book', 'browse', "bookID=$node->id", "book=$book->alias"), $node->title) . '</li>';
             if($node->type != 'book') $link .= '<li>' . html::a(helper::createLink('book', 'browse', "nodeID=$node->id", "book=$book->alias&node=$node->alias"), $node->title) . '</li>';

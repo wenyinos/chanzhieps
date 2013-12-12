@@ -11,74 +11,41 @@
  */
 class book extends control
 {
-    const NEW_CATALOGUE_COUNT = 5;
+    /**
+     * The default catalog counts when create. 
+     */
+    const NEW_CATALOG_COUNT = 5;
 
+    /**
+     * Index page, locate to browse default.
+     * 
+     * @access public
+     * @return void
+     */
     public function index()
     {
-        $this->locate(inlink('browse'));
+        $book = $this->book->getFirstBook();
+        $this->locate(inlink('browse', "nodeID=$book->id", "book=$book->alias"));
     }
 
     /**
-     * Browse books in admin.
+     * Browse a node of a book.
      * 
-     * @params int    $bookID
+     * @param  int    $nodeID 
      * @access public
      * @return void
      */
-    public function admin($bookID = '')
+    public function browse($nodeID)
     {
-        $books = $this->book->getBookList();
+        $node = $this->book->getNodeByID($nodeID);
+        $book = $this->book->getBookByNode($node);
 
-        $this->lang->book->menu = new stdclass();
-        foreach($books as $book)
-        {
-            $id = $book->id;
-            $this->lang->book->menu->$id = $book->title . '|book|admin|book=' . $id;
-        }
-
-        $this->lang->book->menu->createBook = $this->lang->book->createBook . '|book|create|'; 
-        $this->lang->menuGroups->tree = 'book';
-
-        if($bookID)
-        {
-            $book = $this->book->getByID($bookID);
-        }
-        else
-        {
-            $book = $this->book->getByID(array_shift($books)->id);
-        } 
-
-        $this->view->title     = $this->lang->book->common;
-        $this->view->books     = $books;
-        $this->view->book      = $book;
-        $this->view->catalogue = $this->book->getAdminCatalogue($book->id);
-        $this->display();
-    }
-
-    /**
-     * Browse a catalogue.
-     * 
-     * @param  int    $chapterID 
-     * @access public
-     * @return void
-     */
-    public function browse($chapterID)
-    {
-        if(!$chapterID)
-        {
-            $book = $chapter = $this->book->getFirstBook();
-        }
-        else
-        {
-            $chapter = $this->book->getByID($chapterID);
-            $book    = $this->book->getBook($chapter->path);
-        }
-        $this->view->title      = $book->title;
-        $this->view->keywords   = trim($chapter->keywords . ' ' . $this->config->site->keywords);
-        $this->view->chapter    = $chapter;
-        $this->view->book       = $book;
-        $this->view->books      = $this->book->getBookList();
-        $this->view->catalogues = $this->book->getFrontCatalogue($chapter->id);
+        $this->view->title    = $book->title;
+        $this->view->keywords = trim($node->keywords . ' ' . $this->config->site->keywords);
+        $this->view->node     = $node;
+        $this->view->book     = $book;
+        $this->view->books    = $this->book->getBookList();
+        $this->view->catalog  = $this->book->getFrontCatalog($node->id, $this->book->computeSN($book->id));
         $this->display();
     }
 
@@ -91,20 +58,20 @@ class book extends control
      */
     public function read($articleID)
     { 
-        $article = $this->book->getByID($articleID);
-        $parent  = $this->book->getByID($article->parent);
-        $book    = $this->book->getBook($article->path);
-        
-        $this->createContentNav($article->content);
+        $article = $this->book->getNodeByID($articleID);
+        $parent  = $article->origins[$article->parent];
+        $book    = $article->book;
+        $content = $this->book->addMenu($article->content);
 
-        $this->view->title    = $article->title;
-        $this->view->keywords = trim($article->keywords . ' ' . $parent->keyword . ' ' . $this->config->site->keywords);
-        $this->view->desc     = trim($article->summary . ' ' . preg_replace('/<[a-z\/]+.*>/Ui', '', $parent->desc));
+        $this->view->title    = $article->title . ' - ' . $book->title;;
+        $this->view->keywords = trim($article->keywords);
+        $this->view->desc     = trim($article->summary);
+        $this->view->article  = $article;
+        $this->view->content  = $content;
 
-        $this->view->article     = $article;
-        $this->view->prevAndNext = $this->book->getPrevAndNext($article->id, $parent->id);
         $this->view->parent      = $parent;
         $this->view->book        = $book;
+        $this->view->prevAndNext = $this->book->getPrevAndNext($article);
 
         $this->dao->update(TABLE_BOOK)->set('views = views + 1')->where('id')->eq($articleID)->exec(false);
 
@@ -112,121 +79,126 @@ class book extends control
     }
 
     /**
+     * Admin a book or a chapter.
+     * 
+     * @params int    $nodeID
+     * @access public
+     * @return void
+     */
+    public function admin($nodeID = '')
+    {
+        $this->book->setMenu();
+
+        if($nodeID)  ($node = $this->book->getNodeByID($nodeID))   && $book   = $node->book;
+        if(!$nodeID) ($node = $book = $this->book->getFirstBook()) && $nodeID = $node->id;
+        if(!$node)   ($node = $book = $this->book->getFirstBook()) && $nodeID = $node->id;
+        if(!$node)   $this->locate(inlink('create'));
+
+        $this->view->title   = $this->lang->book->common;
+        $this->view->book    = $book;
+        $this->view->node    = $node;
+        $this->view->catalog = $this->book->getAdminCatalog($nodeID, $this->book->computeSN($book->id));
+
+        $this->display();
+    }
+
+    /**
      * Create a book.
      *
-     * @params int    $parent
      * @access public 
      * @return void
      */
-    public function create($parent = 0)
+    public function create()
     {
-        $books  = $this->book->getBookList();
-
-        $this->lang->book->menu = new stdclass();
-        foreach($books as $book)
-        {
-            $id = $book->id;
-            $this->lang->book->menu->$id = $book->title . '|book|admin|book=' . $id;
-        }
-
-        $this->lang->book->menu->createBook = $this->lang->book->createBook . '|book|create|'; 
-        $this->lang->menuGroups->tree = 'book';
+        $this->book->setMenu();
 
         if($_POST)
         {
-            $result = $this->book->create($parent);
-
-            if($parent)
-            {
-                $parent = $this->book->getByID($parent);
-                $origin = $this->book->getBookID($parent->path);
-                $locate = $this->inlink('admin', "bookID=$origin");
-            }
-
-            if(is_numeric($result) && $result)
-            {
-                $this->send(array('result' => 'success', 'message'=>$this->lang->saveSuccess, 'locate' => inlink('admin', "bookID=$result")));
-            }
-            elseif($result === true)
-            {
-                $this->send(array('result' => 'success', 'message'=>$this->lang->saveSuccess, 'locate' => $locate));
-            }
-            else
-            {
-                $this->send(array('result' => 'fail', 'message' => dao::isError() ? dao::getError() : $result));
-            }
+            $bookID = $this->book->createBook();
+            if($bookID)  $this->send(array('result' => 'success', 'message'=>$this->lang->saveSuccess, 'locate' => inlink('admin', "bookID=$bookID")));
+            if(!$bookID) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
-        $this->view->books      = $books;
-        $this->view->catalogues = $this->book->getChildren($parent);
-        $this->view->parent     = $parent;
-        if($parent) $this->view->parent = $this->book->getByID($parent);
+        $this->display(); 
+    }
+
+    /**
+     * Manage catalog of a book or a chapter.
+     *
+     * @param  int    $node   the node to manage.
+     * @access public
+     * @return void
+     */
+    public function catalog($node)
+    {
+        if($_POST)
+        {
+            /* First I need to check alias. */
+            $return = $this->book->checkAlias();
+            if(!$return['result']) 
+            {
+                $message =  sprintf($this->lang->book->aliasRepeat, join(',', array_unique($return['alias'])));
+                $this->send(array('result' => 'fail', 'message' => $message));
+            }
+
+            /* No error, save to database. */
+            $result = $this->book->manageCatalog($node);
+            if($result) $this->send(array('result' => 'success', 'message'=>$this->lang->saveSuccess, 'locate' => $this->post->referer));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+
+        $this->book->setMenu();
+        unset($this->lang->book->typeList['book']);
+
+        $this->view->title    = $this->lang->book->catalog;
+        $this->view->node     = $this->book->getNodeByID($node);
+        $this->view->children = $this->book->getChildren($node);
+
         $this->display(); 
     }
 
     /**
      * Edit a book, a chapter or an article.
      *
-     * @param int $bookID
+     * @param int $nodeID
      * @access public
      * @return void
      */
-    public function edit($bookID)
+    public function edit($nodeID)
     {
-        $book   = $this->book->getByID($bookID, $replaceTag = false);
-        $parent = $this->book->getByID($book->parent);
-        $origin = $this->book->getBookID($book->path);
+        $this->book->setMenu();
+        $node = $this->book->getNodeByID($nodeID);
+        $book = $node->book;
 
         if($_POST)
         {
-            $result = $this->book->update($bookID);
-            if($result === true) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin', "bookID=$bookID")));
-            $this->send(array('result' => 'fail', 'message' => dao::isError() ? dao::getError() : $result));
+            $result = $this->book->update($nodeID);
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->post->referer));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
-        $this->view->title   = $this->lang->book->edit;
-        $this->view->parents = $this->book->getOptionMenu($origin, $removeRoot = true);
-        $this->view->book    = $book;
-        $this->view->parent  = $parent;
+        /* Get option menu without this node's family nodes. */
+        $optionMenu = $this->book->getOptionMenu($book->id, $removeRoot = true);
+        $families   = $this->book->getFamilies($node);
+        foreach($families as $member) unset($optionMenu[$member->id]);
+
+        $this->view->title      = $this->lang->book->edit;
+        $this->view->node       = $node;
+        $this->view->optionMenu = $optionMenu;
+
         $this->display();
     }
 
     /**
-     * Delete a book.
+     * Delete a node.
      *
-     * @param int $id
+     * @param int $nodeID
      * @retturn void
      */
-    public function delete($id)
+    public function delete($nodeID)
     {
-        if($this->book->delete($id)) $this->send(array('result' => 'success'));
+        if($this->book->delete($nodeID)) $this->send(array('result' => 'success'));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
-    }
-
-    /**
-     * Create content navigation according the content. 
-     * 
-     * @param  int    $content 
-     * @access public
-     * @return string;
-     */
-    public function createContentNav($content)
-    {
-        $nav = "<div id='contentNav'>";
-        $content = str_replace('<h3', '<h4', $content);
-        $content = str_replace('h3>', 'h4>', $content);
-        preg_match_all('|<h4.*>(.*)</h4>|isU', $content, $result);
-        if(count($result[0]) >= 2)
-        {
-            foreach($result[0] as $id => $item)
-            {
-                $nav .= "<div><a href='#$id'>" . strip_tags($item) . "</a></div>";
-                $replace = str_replace('<h4', "<h4 id=$id", $item);
-                $content = str_replace($item, $replace, $content);
-            }
-            $nav .= "</div>";
-            $content = $nav . $content;
-        }
     }
 
     /**
@@ -238,20 +210,18 @@ class book extends control
      */
     public function up($id)
     {
-        $catalogue = $this->book->getByID($id);
+        $node = $this->book->getNodeByID($id);
         $prev = $this->dao->select('id, `order`')
             ->from(TABLE_BOOK)
-            ->where('parent')->eq($catalogue->parent)
-            ->andWhere('`order`')->lt($catalogue->order)
+            ->where('parent')->eq($node->parent)
+            ->andWhere('`order`')->lt($node->order)
             ->orderBy('`order` desc')
             ->limit(1)
             ->fetch();
         if(!$prev) return false;
 
-        $order = $prev->order;
-
-        $this->dao->update(TABLE_BOOK)->set('`order`')->eq($catalogue->order)->where('id')->eq($prev->id)->exec();
-        $this->dao->update(TABLE_BOOK)->set('`order`')->eq($order)->where('id')->eq($catalogue->id)->exec();
+        $this->dao->update(TABLE_BOOK)->set('`order`')->eq($node->order)->where('id')->eq($prev->id)->exec();
+        $this->dao->update(TABLE_BOOK)->set('`order`')->eq($prev->order)->where('id')->eq($node->id)->exec();
 
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success'));
@@ -266,20 +236,18 @@ class book extends control
      */
     public function down($id)
     {
-        $catalogue = $this->book->getByID($id);
+        $node = $this->book->getNodeByID($id);
         $next = $this->dao->select('id, `order`')
             ->from(TABLE_BOOK)
-            ->where('parent')->eq($catalogue->parent)
-            ->andWhere('`order`')->gt($catalogue->order)
+            ->where('parent')->eq($node->parent)
+            ->andWhere('`order`')->gt($node->order)
             ->orderBy('`order`')
             ->limit(1)
             ->fetch();
         if(!$next) return false;
 
-        $order = $next->order;
-
-        $this->dao->update(TABLE_BOOK)->set('`order`')->eq($catalogue->order)->where('id')->eq($next->id)->exec();
-        $this->dao->update(TABLE_BOOK)->set('`order`')->eq($order)->where('id')->eq($catalogue->id)->exec();
+        $this->dao->update(TABLE_BOOK)->set('`order`')->eq($node->order)->where('id')->eq($next->id)->exec();
+        $this->dao->update(TABLE_BOOK)->set('`order`')->eq($next->order)->where('id')->eq($node->id)->exec();
 
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success'));

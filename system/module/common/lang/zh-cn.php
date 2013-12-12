@@ -254,6 +254,7 @@ $lang->pager->next      = '下页';
 $lang->pager->last      = '末页';
 $lang->pager->locate    = 'Go!';
 
+$lang->date = new stdclass();
 $lang->date->minute = '分钟';
 $lang->date->day    = '天';
 
