@@ -32,7 +32,6 @@ include '../../common/view/treeview.html.php';
             <h3 class='media-heading'><small class='pull-right gray'><i class="icon-time"></i> <?php echo substr($article->addedDate, 0, 10);?></small><?php echo html::a($url, $article->title);?></h3>
             <p><?php echo helper::substr($article->summary, 120, '...');?></p>
           </div>
-          <hr>
         </li>
       <?php endforeach;?>
       </ul>
