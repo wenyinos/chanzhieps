@@ -315,10 +315,9 @@ class uri
         global $config;
 
         $link = 'book/' . $alias['book'];
-        if(!isset($alias['title'])) return $config->webRoot . $link . '.' . $config->default->view;
-        if(isset($alias['title']) && empty($alias['title'])) return $config->webRoot . $link . '/c' . array_shift($params). '.' . $config->default->view;
-        if($alias['title']) return $config->webRoot . $link . '/' . $alias['title'] . '.' . $config->default->view;
-
+        if(!isset($alias['node'])) return $config->webRoot . $link . '.' . $config->default->view;
+        if($alias['node'])  return $config->webRoot . $link . '/' . $alias['node'] . '.' . $config->default->view;
+        if(!$alias['node']) return $config->webRoot . $link . '/c' . array_shift($params). '.' . $config->default->view;
     }
 
     /**

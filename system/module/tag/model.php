@@ -129,6 +129,7 @@ class tagModel extends model
         $rank = $this->dao->select('count(*) as count')->from(TABLE_ARTICLE)->where("concat(',', keywords, ',')")->like("%,{$tag},%")->fetch('count');
         $rank += $this->dao->select('count(*) as count')->from(TABLE_PRODUCT)->where("concat(',', keywords, ',')")->like("%,{$tag},%")->fetch('count');
         $rank += $this->dao->select('count(*) as count')->from(TABLE_CATEGORY)->where("concat(',', keywords, ',')")->like("%,{$tag},%")->fetch('count');
+        $rank += $this->dao->select('count(*) as count')->from(TABLE_BOOK)->where("concat(',', keywords, ',')")->like("%,{$tag},%")->fetch('count');
         return $rank;
     }
 }
