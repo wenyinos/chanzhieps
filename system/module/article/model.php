@@ -60,19 +60,30 @@ class articleModel extends model
      */
     public function getList($type, $categories, $orderBy, $pager = null)
     {
-        /* Get articles(use groupBy to distinct articles).  */
-        $articles = $this->dao->select('t1.*, t2.category')->from(TABLE_ARTICLE)->alias('t1')
-            ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
-            ->where('t1.type')->eq($type)
-            ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')
-            ->andWhere('t1.addedDate')->le(helper::now())
-            ->andWhere('t1.status')->eq('normal')
-            ->fi()
-            ->beginIf($categories)->andWhere('t2.category')->in($categories)->fi()
-            ->groupBy('t2.id')
-            ->orderBy($orderBy)
-            ->page($pager)
-            ->fetchAll('id');
+        if($type == 'page')
+        {
+            $articles = $this->dao->select('*')->from(TABLE_ARTICLE)
+                ->where('type')->eq('page')
+                ->orderBy($orderBy)
+                ->page($pager)
+                ->fetchAll('id');
+        }
+        else
+        {
+            /* Get articles(use groupBy to distinct articles).  */
+            $articles = $this->dao->select('t1.*, t2.category')->from(TABLE_ARTICLE)->alias('t1')
+                ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
+                ->where('t1.type')->eq($type)
+                ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')
+                ->andWhere('t1.addedDate')->le(helper::now())
+                ->andWhere('t1.status')->eq('normal')
+                ->fi()
+                ->beginIf($categories)->andWhere('t2.category')->in($categories)->fi()
+                ->groupBy('t2.id')
+                ->orderBy($orderBy)
+                ->page($pager)
+                ->fetchAll('id');
+        }
         if(!$articles) return array();
 
         /* Get categories for these articles. */
