@@ -58,7 +58,7 @@ EOT;
         <?php echo "<span class='gray'>$message->date</span>{$lang->message->messageTo}<br/>";?>
         <?php if(!empty($message->phone)) echo "<i class='icon-phone blue icon'></i> {$message->phone} &nbsp; ";?>
         <?php if(!empty($message->email)) echo "<i class='icon-envelope green icon'></i> {$message->email} &nbsp; ";?>
-        <?php if(!empty($message->qq))    echo "<i class='icon-qq gray icon'></i> {$message->qq} &nbsp; ";?>
+        <?php if(!empty($message->qq))    echo "<strong class='text-danger'>QQ</strong> {$message->qq} &nbsp; ";?>
       </td>
       <?php endif;?>
       <td rowspan='2' class='a-center v-middle'>
