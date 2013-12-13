@@ -45,4 +45,5 @@ ALTER TABLE `eps_user` DROP locked;
 ALTER TABLE `eps_user` CHANGE allowTime locked DATETIME NOT NULL;
 
 UPDATE eps_config SET `value`=replace(value, 'help', 'book') WHERE owner='system' AND module='common' AND section='site' AND  `key` = 'moduleEnabled';
+UPDATE eps_config SET `value`=replace(value, 'comment', 'message') WHERE owner='system' AND module='common' AND section='site' AND  `key` = 'moduleEnabled';
 UPDATE eps_category SET `path`=replace(path, ',,', ',');
