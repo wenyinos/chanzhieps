@@ -386,7 +386,9 @@ ul.breadcrumb .divider{font-size:20px;color:#3280FC}
 .row .panel-body li a{color: #5A5A5A; padding-left: 5px;}
 .row .panel-body li a:active, .row .panel-body li a:hover{text-decoration: none; color: #4691EF;}
 
+/* Image settings .*/
 .image-box {float:left; margin:10px; max-width:80px; }
+.image-middle { margin:0 auto; height:300px;}
 
 /* Media image in product file. */
 .panel-body li.media{width: 100%; margin-top: 0; padding: 0 8px; text-align:center; float:none;height: auto;}
