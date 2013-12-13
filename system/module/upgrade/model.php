@@ -382,8 +382,8 @@ class upgradeModel extends model
      */
     public function setPageBlocks()
     {
-        $block = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq('article_view')->andWhere('region')->eq('side')->fetch('block');
-        $this->dao->insert(TABLE_LAYOUT)->set('page')->eq('page_index')->set('region')->eq('side')->set('block')->eq($block)->exec();
+        $block = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq('article_view')->andWhere('region')->eq('side')->fetch('blocks');
+        $this->dao->insert(TABLE_LAYOUT)->set('page')->eq('page_index')->set('region')->eq('side')->set('blocks')->eq($block)->exec();
         return !dao::isError();
     }
 
@@ -396,7 +396,7 @@ class upgradeModel extends model
     public function setMessageBlocks()
     {
         $id = $this->dao->select('id')->from(TABLE_BLOCK)->where('type')->eq('contact')->fetch('id');
-        $this->dao->insert(TABLE_LAYOUT)->set('page')->eq('message_index')->set('region')->eq('side')->set('block')->eq($block)->exec();
+        $this->dao->insert(TABLE_LAYOUT)->set('page')->eq('message_index')->set('region')->eq('side')->set('blocks')->eq($block)->exec();
         return !dao::isError();
     }
     
