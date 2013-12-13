@@ -28,11 +28,11 @@
       <th><?php echo $lang->category->alias;?></th>
       <td>
         <div class="input-group text-1">
-        <span class="input-group-addon"><?php echo $aliasAddon?></span>
-        <?php echo html::input('alias', $category->alias, "class='input-xsm form-control' placeholder='{$lang->alias}'");?>
-        <span class="input-group-addon">.html</span>
+          <span class="input-group-addon"><?php echo $aliasAddon?></span>
+          <?php echo html::input('alias', $category->alias, "class='input-xsm form-control' placeholder='{$lang->alias}'");?>
+          <span class="input-group-addon">.html</span>
+        </div>
       </td>
-</div>
     </tr>
     <tr>
       <th><?php echo $lang->category->keywords;?></th>
