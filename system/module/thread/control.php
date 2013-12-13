@@ -161,16 +161,10 @@ class thread extends control
 
         if(!$this->thread->canManage($thread->board)) $this->send(array('result' => 'fail'));
 
-        if(RUN_MODE == 'admin')
-        {
-            $locate = helper::createLink('forum', 'admin');
-        }
-        else
-        {
-            $locate  = helper::createLink('forum', 'board', "board=$thread->board");
-        }
-        if($this->thread->delete($threadID)) $this->send(array('result' => 'success', 'locate' => $locate));
+        if(RUN_MODE == 'admin') $locate = helper::createLink('forum', 'admin');
+        if(RUN_MODE == 'front') $locate = helper::createLink('forum', 'board', "board=$thread->board"); 
 
+        if($this->thread->delete($threadID)) $this->send(array('result' => 'success', 'locate' => $locate));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
    
@@ -264,15 +258,16 @@ class thread extends control
      */
     public function deleteFile($threadID, $fileID)
     {
-        if($this->app->user->account == 'guest') die(js::locate($this->createLink('user', 'login')));
+        if($this->app->user->account == 'guest') $this->send(array('result'=>'fail', 'message'=> 'guest'));
 
         $thread = $this->thread->getByID($threadID);
-        if(!$thread) die(js::locate('back'));
+        if(!$thread) $this->send(array('result'=>'fail', 'message'=> 'data error'));
 
         /* Judge current user has priviledge to edit the thread or not. */
-        if(!$this->thread->canManage($thread->board, $thread->author)) die(js::locate('back'));
-
-        if($this->loadModel('file')->delete($fileID)) $this->send(array('result'=>'success'));
-        $this->send(array('result'=>'fail', 'message'=> dao::getError()));
+        if($this->thread->canManage($thread->board, $thread->author))
+        {
+            if($this->loadModel('file')->delete($fileID)) $this->send(array('result'=>'success'));
+        }
+        $this->send(array('result'=>'fail', 'message'=> 'error'));
     }
 }

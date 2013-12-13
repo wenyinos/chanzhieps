@@ -125,4 +125,30 @@ class reply extends control
 
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
+
+    /**
+     * Delete a file.
+     * 
+     * @param  int    $replyID 
+     * @param  int    $fileID 
+     * @access public
+     * @return void
+     */
+    public function deleteFile($replyID, $fileID)
+    {
+        if($this->app->user->account == 'guest') $this->send(array('result'=>'fail', 'message'=> 'guest'));
+
+        $reply = $this->reply->getByID($replyID);
+        if(!$reply) $this->send(array('result'=>'fail', 'message'=> 'data error'));
+
+        $thread = $this->loadModel('thread')->getByID($reply->thread);
+        if(!$thread) $this->send(array('result'=>'fail', 'message'=> 'data error'));
+
+        /* Judge current user has priviledge to edit the reply or not. */
+        if($this->thread->canManage($thread->board, $reply->author))
+        {
+            if($this->loadModel('file')->delete($fileID)) $this->send(array('result'=>'success'));
+        }
+        $this->send(array('result'=>'fail', 'message'=> 'error'));
+    }
 }
