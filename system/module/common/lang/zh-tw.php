@@ -41,6 +41,7 @@ EOT;
 /* Global lang items. */
 $lang->home           = '首頁';
 $lang->welcome        = '歡迎您，<strong>%s</strong>！';
+$lang->messages       = "<span><i class='icon-comment'></i> %s</span>";
 $lang->todayIs        = '今天是%s，';
 $lang->aboutUs        = '關於我們';
 $lang->link           = '友情連結';
@@ -77,9 +78,10 @@ $lang->year           = '年';
 $lang->loading        = '稍候...';
 $lang->saveSuccess    = '保存成功';
 $lang->setSuccess     = '設置成功';
+$lang->sendSuccess    = '發送成功';
 $lang->fail           = '失敗';
 $lang->noResultsMatch = '沒有匹配的選項';
-$lang->alias          = '搜索引擎優化使用，可使用英文、數字或漢字';
+$lang->alias          = '搜索引擎優化使用，可使用英文、數字';
 
 /* Items for javascript. */
 $lang->js = new stdclass();
@@ -111,7 +113,8 @@ $lang->menu->article = '文章|article|admin|';
 $lang->menu->blog    = '博客|article|admin|type=blog';
 $lang->menu->product = '產品|product|admin|';
 $lang->menu->book    = '手冊|book|admin|';
-$lang->menu->comment = '評論|comment|admin|';
+$lang->menu->message = '評論留言|message|admin|';
+$lang->menu->page    = '頁面|article|admin|type=page';
 $lang->menu->forum   = '論壇|forum|admin|';
 $lang->menu->site    = '站點|site|setbasic|';
 $lang->menu->ui      = '界面|ui|setlogo|';
@@ -132,6 +135,12 @@ $lang->blog->menu->browse = array('link' => '博客列表|article|admin|type=blo
 $lang->blog->menu->create = '發佈博客|article|create|type=blog';
 $lang->blog->menu->tree   = '類目管理|tree|browse|type=blog';
 
+/* Menu of page module. */
+$lang->page = new stdclass();
+$lang->page->menu = new stdclass();
+$lang->page->menu->browse = array('link' => '頁面列表|article|admin|type=page', 'alias' => 'edit');
+$lang->page->menu->create = '添加頁面|article|create|type=page';
+
 /* Menu of product module. */
 $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
@@ -149,16 +158,18 @@ $lang->ui->menu->admin = array('link' => '區塊管理|block|admin|', 'alias' =>
 $lang->ui->menu->pages = array('link' => '佈局設置|block|pages|', 'alias' => 'setregion');
 
 /* Menu of comment module. */
-$lang->comment = new stdclass();
-$lang->comment->menu = new stdclass();
-$lang->comment->menu->unchecked = '未審核|comment|admin|status=0';
-$lang->comment->menu->checked   = '已審核|comment|admin|status=1';
+$lang->message = new stdclass();
+$lang->message->menu = new stdclass();
+$lang->message->menu->message = '留言|message|admin|type=message';
+$lang->message->menu->comment = '評論|message|admin|type=comment';
 
 /* Menu of forum module. */
 $lang->forum = new stdclass();
 $lang->forum->menu = new stdclass();
 $lang->forum->menu->browse = '主題列表|forum|admin|';
+$lang->forum->menu->reply  = '回帖列表|reply|admin|';
 $lang->forum->menu->tree   = '版塊管理|tree|browse|type=forum';
+$lang->forum->menu->update = '更新數據|forum|update|';
 
 /* Menu of site module. */
 $lang->site = new stdclass();
@@ -168,6 +179,8 @@ $lang->site->menu->nav       = '導航設置|nav|admin|';
 $lang->site->menu->tag       = '關鍵詞設置|tag|admin|';
 $lang->site->menu->oauth     = '開放登錄|site|setoauth|';
 $lang->site->menu->link      = '友情連結|links|admin|';
+$lang->site->menu->favicon   = '網站表徵圖|site|favicon';
+$lang->site->menu->mail      = array('link' => '發信設置|mail|admin|', 'alias' => 'detect,edit,save,test');
 
 /* Menu of company module. */
 $lang->company->menu = new stdclass();
@@ -186,6 +199,11 @@ $lang->menuGroups->tree = 'article';
 $lang->tag = new stdclass();
 $lang->tag->menu = $lang->site->menu;
 $lang->menuGroups->tag = 'site';
+
+/* Menu of mail module. */
+$lang->mail = new stdclass();
+$lang->mail->menu = $lang->site->menu;
+$lang->menuGroups->mail = 'site';
 
 /* Menu of nav module. */
 $lang->nav = new stdclass();
@@ -214,6 +232,7 @@ $lang->error->reg          = '<strong>%s</strong>不符合格式，應當為:<st
 $lang->error->unique       = '<strong>%s</strong>已經有<strong>%s</strong>這條記錄了。';
 $lang->error->notempty     = '<strong>%s</strong>不能為空。';
 $lang->error->equal        = '<strong>%s</strong>必須為<strong>%s</strong>。';
+$lang->error->in           = '<strong>%s</strong>必須為<strong>%s</strong>。';
 $lang->error->int          = array('<strong>%s</strong>應當是數字。', '<strong>%s</strong>最小值為%s',  '<strong>%s</strong>應當介於<strong>%s-%s</strong>之間。');
 $lang->error->float        = '<strong>%s</strong>應當是數字，可以是小數。';
 $lang->error->email        = '<strong>%s</strong>應當為合法的EMAIL。';
@@ -234,6 +253,10 @@ $lang->pager->pre       = '上頁';
 $lang->pager->next      = '下頁';
 $lang->pager->last      = '末頁';
 $lang->pager->locate    = 'Go!';
+
+$lang->date = new stdclass();
+$lang->date->minute = '分鐘';
+$lang->date->day    = '天';
 
 /* The datetime settings. */
 define('DT_DATETIME1',  'Y-m-d H:i:s');

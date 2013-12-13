@@ -41,7 +41,7 @@ EOT;
 /* Global lang items. */
 $lang->home           = '首页';
 $lang->welcome        = '欢迎您，<strong>%s</strong>！';
-$lang->messages       = "<span><i class='icon-comment'></i> %s</span>";
+$lang->messages       = "<strong><i class='icon-comment-alt'></i> %s</strong>";
 $lang->todayIs        = '今天是%s，';
 $lang->aboutUs        = '关于我们';
 $lang->link           = '友情链接';

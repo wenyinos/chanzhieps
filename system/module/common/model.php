@@ -319,7 +319,7 @@ class commonModel extends model
             printf('<span class="login-msg">' . $app->lang->welcome . '</span>', $app->session->user->realname);
             echo html::a(helper::createLink('user', 'control'), $app->lang->dashboard);
             $messages = $dao->select('COUNT(*) as count')->from(TABLE_MESSAGE)->where('`to`')->eq($app->session->user->account)->andWhere('readed')->eq(0)->fetch('count', false);
-            if($messages) echo ' - ' . html::a(helper::createLink('user', 'message'), sprintf($app->lang->messages, $messages), " class='label label-info'");
+            if($messages) echo ' - ' . html::a(helper::createLink('user', 'message'), sprintf($app->lang->messages, $messages));
             echo $divider;
             echo html::a(helper::createLink('user', 'logout'),  $app->lang->logout);
         }    

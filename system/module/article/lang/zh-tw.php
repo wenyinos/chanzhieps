@@ -9,7 +9,8 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->article->common = '文章維護';
+$lang->article->common      = '文章維護';
+$lang->article->createDraft = '保存草稿';
 
 $lang->article->id         = '編號';
 $lang->article->category   = '類目';
@@ -26,6 +27,7 @@ $lang->article->author     = '作者';
 $lang->article->editor     = '編輯';
 $lang->article->addedDate  = '添加時間';
 $lang->article->editedDate = '編輯時間';
+$lang->article->status     = '狀態';
 $lang->article->type       = '類型';
 $lang->article->views      = '閲讀';
 $lang->article->stick      = '置頂級別';
@@ -42,8 +44,16 @@ $lang->blog->list   = '博客列表';
 $lang->blog->create = '發佈博客';
 $lang->blog->edit   = '編輯博客';
 
+$lang->page->admin  = '維護頁面';
+$lang->page->list   = '頁面列表';
+$lang->page->create = '添加頁面';
+$lang->page->edit   = '編輯頁面';
+
 $lang->article->originalList[1] = '原創';
 $lang->article->originalList[0] = '轉貼';
+
+$lang->article->statusList['draft']  = '草稿';
+$lang->article->statusList['normal'] = '正常';
 
 $lang->article->confirmDelete = '您確定刪除該文章嗎？';
 
@@ -57,3 +67,7 @@ $lang->article->prev      = '上一篇';
 $lang->article->next      = '下一篇';
 $lang->article->none      = '沒有了';
 $lang->article->directory = '返回目錄';
+$lang->article->back2Top  = '返回頂部';
+
+$lang->article->note = new stdclass();
+$lang->article->note->addedDate = '可以延遲到選定的時間發佈。';

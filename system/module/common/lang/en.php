@@ -41,7 +41,7 @@ EOT;
 /* Global lang items. */
 $lang->home           = 'Home';
 $lang->welcome        = 'Welcome, <strong>%s</strong>!';
-$lang->messages       = "<span><i class='icon-comment'></i> %s</span>";
+$lang->messages       = "<strong><i class='icon-comment-alt'></i> %s</strong>";
 $lang->todayIs        = 'Today is %s, ';
 $lang->aboutUs        = 'About';
 $lang->link           = 'Links';
@@ -113,11 +113,11 @@ $lang->menu->article = 'Article|article|admin|';
 $lang->menu->blog    = 'Blog|article|admin|type=blog';
 $lang->menu->product = 'Product|product|admin|';
 $lang->menu->book    = 'Book|book|admin|';
-$lang->menu->page    = 'Article|article|admin|type=page';
 $lang->menu->message = 'Message|message|admin|';
+$lang->menu->page    = 'Page|article|admin|type=page';
 $lang->menu->forum   = 'Forum|forum|admin|';
 $lang->menu->site    = 'Site|site|setbasic|';
-$lang->menu->ui      = 'Interface|ui|setlogo|';
+$lang->menu->ui      = 'UI|ui|setlogo|';
 $lang->menu->company = 'Company|company|setbasic|';
 $lang->menu->user    = 'User|user|admin|';
 
@@ -254,6 +254,7 @@ $lang->pager->next      = "Next";
 $lang->pager->last      = "Last";
 $lang->pager->locate    = "GO!";
 
+$lang->date = new stdclass();
 $lang->date->minute = 'minute';
 $lang->date->day    = 'day';
 

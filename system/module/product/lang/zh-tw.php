@@ -33,6 +33,7 @@ $lang->product->author     = '作者';
 $lang->product->editor     = '編輯';
 $lang->product->addedDate  = '添加時間';
 $lang->product->editedDate = '編輯時間';
+$lang->product->status     = '狀態';
 $lang->product->views      = '瀏覽';
 $lang->product->stick      = '置頂級別';
 $lang->product->order      = '排序';
@@ -52,3 +53,6 @@ $lang->product->prev      = '上一個';
 $lang->product->next      = '下一個';
 $lang->product->none      = '沒有了';
 $lang->product->directory = '返回目錄';
+
+$lang->product->statusList['normal']  = '上架';
+$lang->product->statusList['offline'] = '下架';

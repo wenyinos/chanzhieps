@@ -5,7 +5,6 @@ include '../../common/view/header.html.php';
 <div class='box radius'>
   <div class='content'>
     <p><?php echo $company->content;?></p>
-    <br/>
     <div id='contact'>
       <?php foreach($contact as $item => $value):?>
       <dl>

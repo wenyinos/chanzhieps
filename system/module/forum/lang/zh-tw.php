@@ -16,10 +16,14 @@ $lang->forum->threadCount = '主題數';
 $lang->forum->postCount   = '帖子數';
 $lang->forum->lastPost    = '最後發表';
 $lang->forum->readonly    = '只讀版塊。';
-$lang->forum->lblOwner    = " [版主：%s]";
+$lang->forum->lblOwner    = " [ 版主：%s ]";
 
-$lang->forum->post  = '發貼';
-$lang->forum->admin = '論壇維護';
+$lang->forum->post   = '發貼';
+$lang->forum->admin  = '論壇維護';
+$lang->forum->update = '更新數據';
+
+$lang->forum->updateDesc    = '更新論壇主題數和回覆數的統計數據';
+$lang->forum->successUpdate = '更新數據成功';
 
 /* Adjust the pager. */
 $lang->pager->noRecord      = '';
