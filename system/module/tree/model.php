@@ -386,7 +386,7 @@ class treeModel extends model
         $category->grade = $parent ? $parent->grade + 1 : 1;
 
         $this->dao->update(TABLE_CATEGORY)
-            ->data($category)
+            ->data($category, $skip = 'uid')
             ->autoCheck()
             ->check('name', 'notempty')
             ->where('id')->eq($categoryID)
