@@ -20,8 +20,8 @@ $themeRoot = $webRoot . "theme/";
   <?php
   if(!isset($title))    $title    = '';
   if(!empty($title))    $title   .= $lang->minus;
-  if(!isset($keywords)) $keywords = $config->site->keywords;
-  if(!isset($desc))     $desc     = $config->site->desc;
+  if(empty($keywords)) $keywords  = $config->site->keywords;
+  if(empty($desc))      $desc     = $config->site->desc;
 
   echo html::title($title . $config->site->name);
   echo html::meta('keywords',    strip_tags($keywords));
