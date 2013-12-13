@@ -27,9 +27,6 @@ class forumModel extends model
             ->fetchGroup('parent');
         if(!isset($rawBoards[0])) return $boards;
 
-        /* Get lastReplies of all thread, for jump lastReply. */
-        $lastReplies = $this->dao->select('thread, COUNT(id) as id')->from(TABLE_REPLY)->fetchPairs('thread');
-
         foreach($rawBoards[0] as $parentBoard)
         {
             if(isset($rawBoards[$parentBoard->id]))
