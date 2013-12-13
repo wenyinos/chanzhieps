@@ -213,18 +213,11 @@ class userModel extends model
      * 
      * @param  string    $account 
      * @param  string    $password 
-     * @param  bool      $hashed      //mark password is md5 hashed with random.
      * @access public
      * @return bool
      */
-    public function login($account, $password, $hashed = true)
+    public function login($account, $password)
     {
-        if(!$hashed)
-        {
-            $this->session->set('random', md5(time() . mt_rand()));
-            $password = md5($this->createPassword($password, $account) . $this->session->random);
-        }
-
         $user = $this->identify($account, $password);
         if(!$user) return false;
 
@@ -295,6 +288,7 @@ class userModel extends model
         $user->last   = helper::now();
         $user->fails  = 0;
         $user->visits ++;
+
         /* Update password when create password by oldCreatePassword function. */
         if($oldPassword == $user->password) $user->password = $this->createPassword($password, $user->account);
         $this->dao->update(TABLE_USER)->data($user)->where('account')->eq($account)->exec();
