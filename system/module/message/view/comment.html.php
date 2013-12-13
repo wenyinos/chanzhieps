@@ -10,7 +10,7 @@ css::internal($pageCSS);
     <a name='first'></a>
     <?php foreach($comments as $number => $comment):?>
       <div id='<?php echo $comment->id?>' class='comment'>
-        <div class='comment-head'><strong>#<?php echo ($number + 1)?> &nbsp;<?php echo $comment->from;?></strong> &nbsp; <span class='gray'><?php echo $comment->date;?></span></div>
+        <div class='comment-head'><strong>#<?php echo ($startNumber + $number + 1)?> &nbsp;<?php echo $comment->from;?></strong> &nbsp; <span class='gray'><?php echo $comment->date;?></span></div>
         <?php echo nl2br($comment->content);?>
       </div>
     <?php endforeach;?>

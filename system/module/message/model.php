@@ -62,7 +62,7 @@ class messageModel extends model
             ->andWhere("(id in ({$userMessages}) or (status = '1'))")
             ->orderBy('id_desc')
             ->page($pager)
-            ->fetchAll('id');
+            ->fetchAll();
     }
 
     /**
