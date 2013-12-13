@@ -99,6 +99,8 @@ $lang->block->pages['book_read']      = 'Book content';
 
 $lang->block->pages['message_index']  = 'Inquire';
 
+$lang->block->pages['page_view']      = 'Page';
+
 /* page layout list. */
 $lang->block->regions = new stdclass();
 $lang->block->regions->all['header'] = 'Header';
@@ -108,13 +110,9 @@ $lang->block->regions->all['end']    = 'End';
 $lang->block->regions->index_index['header']  = 'Header';
 $lang->block->regions->index_index['bottom']  = 'Bottom';
 $lang->block->regions->index_index['footer']  = 'Footer';
-
 $lang->block->regions->article_browse['side'] = 'Side';
-
 $lang->block->regions->article_view['side']   = 'Side';
-
 $lang->block->regions->product_browse['side'] = 'Side';
-
 $lang->block->regions->product_view['side']   = 'Side';
-
 $lang->block->regions->message_index['side']  = 'Side';
+$lang->block->regions->page_view['side']      = 'Side';

@@ -14,12 +14,13 @@ $lang->block->id         = '編號';
 $lang->block->title      = '名稱';
 $lang->block->limit      = '數量';
 $lang->block->type       = '類型';
+$lang->block->code       = '代碼';
 $lang->block->content    = '內容';
 $lang->block->page       = '頁面';
 $lang->block->regionList = '區域列表';
 $lang->block->select     = '請選擇區塊';
 $lang->block->categories = '分類';
-$lang->block->showImage  = '是否顯示圖片';
+$lang->block->showImage  = '顯示圖片';
 $lang->block->product    = '產品';
 
 $lang->block->add          = "添加";
@@ -30,21 +31,44 @@ $lang->block->edit         = '編輯區塊';
 $lang->block->view         = '查看區塊';
 $lang->block->setPage      = '配置頁面';
 
-$lang->block->typeList['html']            = '自定義區塊';
+$lang->block->typeList['html']     = '自定義區塊';
+$lang->block->typeList['code']     = '原始碼';
+
 $lang->block->typeList['latestArticle']   = '最新文章';
 $lang->block->typeList['hotArticle']      = '熱門文章';
+
 $lang->block->typeList['latestProduct']   = '最新產品';
 $lang->block->typeList['featuredProduct'] = '首頁推薦產品';
 $lang->block->typeList['hotProduct']      = '熱門產品';
-$lang->block->typeList['slide']           = '幻燈片';
+
 $lang->block->typeList['articleTree']     = '文章分類';
 $lang->block->typeList['productTree']     = '產品分類';
 $lang->block->typeList['blogTree']        = '博客分類';
+
 $lang->block->typeList['contact']         = '聯繫我們';
 $lang->block->typeList['about']           = '公司簡介';
 $lang->block->typeList['links']           = '友情連結';
+$lang->block->typeList['slide']           = '幻燈片';
 
-$lang->block->image['show'] = '顯示圖片';
+$lang->block->typeGroups = array();
+$lang->block->typeGroups['html'] = 'input';
+$lang->block->typeGroups['code'] = 'input';
+
+$lang->block->typeGroups['latestArticle'] = 'article';
+$lang->block->typeGroups['hotArticle']    = 'article';
+
+$lang->block->typeGroups['latestProduct']   = 'product';
+$lang->block->typeGroups['featuredProduct'] = 'product';
+$lang->block->typeGroups['hotProduct']      = 'product';
+
+$lang->block->typeGroups['articleTree'] = 'category';
+$lang->block->typeGroups['productTree'] = 'category';
+$lang->block->typeGroups['blogTree']    = 'category';
+
+$lang->block->typeGroups['contact'] = 'system';
+$lang->block->typeGroups['about']   = 'system';
+$lang->block->typeGroups['links']   = 'system';
+$lang->block->typeGroups['slide']   = 'system';
 
 $lang->block->category = new stdclass();
 $lang->block->category->showChildren = '顯示子分類';
@@ -69,9 +93,13 @@ $lang->block->pages['forum_board']    = '帖子列表頁面';
 $lang->block->pages['thread_view']    = '帖子察看頁面';
 $lang->block->pages['search_list']    = '搜索結果頁';
 
-$lang->block->pages['book_index']     = '幫助中心';
+$lang->block->pages['book_index']     = '手冊中心';
 $lang->block->pages['book_browse']    = '手冊首頁';
 $lang->block->pages['book_read']      = '手冊章節';
+
+$lang->block->pages['message_index']  = '留言';
+
+$lang->block->pages['page_view']      = '頁面';
 
 /* page layout list. */
 $lang->block->regions = new stdclass();
@@ -82,11 +110,9 @@ $lang->block->regions->all['end']    = '結束部分';
 $lang->block->regions->index_index['header']  = '上部';
 $lang->block->regions->index_index['bottom']  = '下部';
 $lang->block->regions->index_index['footer']  = '底部';
-
 $lang->block->regions->article_browse['side'] = '側邊';
-
 $lang->block->regions->article_view['side']   = '側邊';
-
 $lang->block->regions->product_browse['side'] = '側邊';
-
 $lang->block->regions->product_view['side']   = '側邊';
+$lang->block->regions->message_index['side']  = '側邊';
+$lang->block->regions->page_view['side']      = '側邊';

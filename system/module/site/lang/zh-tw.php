@@ -34,12 +34,17 @@ $lang->site->setLogoFailed  = "設置Logo失敗";
 $lang->site->noSelectedFile = "沒有選擇圖片";
 $lang->site->oauthHelp      = "使用幫助";
 
+$lang->site->favicon = new stdclass();
+$lang->site->favicon->common = "設置Favicon";
+$lang->site->favicon->reset  = "重置";
+$lang->site->favicon->notice = "請上傳ico格式圖片";
+
 $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = '會員';
 $lang->site->moduleAvailable['forum']   = '論壇';
 $lang->site->moduleAvailable['blog']    = '博客';
 $lang->site->moduleAvailable['book']    = '手冊';
-$lang->site->moduleAvailable['comment'] = '評論';
+$lang->site->moduleAvailable['message'] = '評論留言';
 
 $lang->site->themes = array();
 $lang->site->themes['default']    = '預設風格';
