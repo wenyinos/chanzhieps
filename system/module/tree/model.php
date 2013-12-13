@@ -379,10 +379,10 @@ class treeModel extends model
         }
 
         /* Add id to check alias. */
-        $category->id       = $categoryID; 
+        $category->id = $categoryID; 
         if(!$this->checkAlias($category)) return sprintf($this->lang->tree->aliasRepeat, $category);
 
-        $parent   = $this->getById($this->post->parent);
+        $parent = $this->getById($this->post->parent);
         $category->grade = $parent ? $parent->grade + 1 : 1;
 
         $this->dao->update(TABLE_CATEGORY)
@@ -495,7 +495,7 @@ class treeModel extends model
         if(empty($category)) return false;
         if($category->alias == '') return true;
         if(empty($category->id)) $category->id = 0;
-        if(in_array($category->type, array('article', 'product')) and strpos($this->config->systemModules, ",{$category->alias},") !== false)
+        if(in_array($category->type, array('article', 'product')) and strpos($this->config->tree->systemModules, ",{$category->alias},") !== false)
         {
             $this->lang->tree->aliasRepeat = $this->lang->tree->aliasConflict;
             return false;
