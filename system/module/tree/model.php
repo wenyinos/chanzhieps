@@ -495,6 +495,11 @@ class treeModel extends model
         if(empty($category)) return false;
         if($category->alias == '') return true;
         if(empty($category->id)) $category->id = 0;
+        if(in_array($category->type, array('article', 'product')) and strpos($this->config->systemModules, ",{$category->alias},") !== false)
+        {
+            $this->lang->tree->aliasRepeat = $this->lang->tree->aliasConflict;
+            return false;
+        }
 
         $scope = array();
         $scope['article'] = 'article,product';
