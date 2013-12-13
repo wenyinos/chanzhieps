@@ -213,11 +213,18 @@ class userModel extends model
      * 
      * @param  string    $account 
      * @param  string    $password 
+     * @param  bool      $hashed      //mark password is md5 hashed with random.
      * @access public
      * @return bool
      */
-    public function login($account, $password)
+    public function login($account, $password, $hashed = true)
     {
+        if(!$hashed)
+        {
+            $this->session->set('random', md5(time() . mt_rand()));
+            $password = md5($this->createPassword($password, $account) . $this->session->random);
+        }
+
         $user = $this->identify($account, $password);
         if(!$user) return false;
 
