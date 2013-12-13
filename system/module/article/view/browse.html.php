@@ -30,7 +30,7 @@ include '../../common/view/treeview.html.php';
             ?>
             </div>
             <h3 class='media-heading'> <?php echo html::a($url, $article->title);?> <span class='label label-default'><?php echo substr($article->addedDate, 0, 10);?></span> </h3>
-            <p><?php echo $article->summary;?></p>
+            <p><?php echo helper::substr($article->summary, 120, '...');?></p>
           </div>
           <hr>
         </li>
