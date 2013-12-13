@@ -20,8 +20,8 @@
         <li><a name='first'></a></li>
         <?php foreach($messages as $number => $message):?>
         <li id='<?php echo $message->id?>' class='media'>
-          <div class="icon"><i class="icon-comment"></i></div>
-          <div class="pull-right"><span class="text-muted"><?php echo $message->date;?></span> &nbsp;<strong>#<?php echo ($startNumber + $number + 1)?></strong></div>
+          <div class="icon-stack icon"><i class="icon-comment icon-stack-base"></i><strong class="icon-content">#<?php echo ($startNumber + $number + 1)?></strong></div>
+          <div class="pull-right"><span class="text-muted"><?php echo $message->date;?></span></div>
           <div><strong><?php echo $message->from;?></strong></div>
           <div class="content"><?php echo nl2br($message->content);?></div>
           <?php if(!empty($replies[$message->id])):?>
