@@ -17,14 +17,9 @@ $category = array_shift($product->categories);
 $url      = helper::createLink('product', 'view', "id={$product->id}", "category={$category->alias}&name={$product->alias}");
 ?>
 <div class='panel product-box'>
-  <?php echo html::a($url, html::image($product->image->primary->middleURL), "class='thumbnail'");?>
+  <div><?php echo html::a($url, html::image($product->image->primary->middleURL, "class='thumbnail image-middle'"));?></div>
   <div class="caption">
-    <h3><?php echo html::a($url, $product->name);?></h3>
-    <p><?php echo $product->summary;?></p>
-  </div>
-  <div class="widget-footer">
-    <p>
-      <?php echo html::a($url, $this->lang->more . $this->lang->raquo);?>
-    </p>
+    <h3 class='a-center'><?php echo html::a($url, $product->name);?></h3>
+    <p><?php echo helper::substr($product->summary, 80);?></p>
   </div>
 </div>
