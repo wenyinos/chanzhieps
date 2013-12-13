@@ -388,7 +388,7 @@ ul.breadcrumb .divider{font-size:20px;color:#3280FC}
 
 /* Image settings .*/
 .image-box {float:left; margin:10px; max-width:80px; }
-.image-middle { margin:0 auto; height:300px;}
+.image-middle { margin:0 auto; height:300px;max-width: 100%}
 
 /* Media image in product file. */
 .panel-body li.media{width: 100%; margin-top: 0; padding: 0 8px; text-align:center; float:none;height: auto;}
