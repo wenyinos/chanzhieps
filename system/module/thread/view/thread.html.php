@@ -28,7 +28,7 @@
               if($thread->editor) printf($lang->thread->lblEdited, $thread->editor, $thread->editedDate);
               if($this->app->user->account != 'guest')
               {
-                  echo html::a('#reply', $lang->reply->common);
+                  if(!$thread->readonly) echo html::a('#reply', $lang->reply->common);
                   if($this->thread->canManage($board->id, $thread->author)) echo html::a(inlink('edit', "threadID=$thread->id"), $lang->edit);
 
                   if($this->thread->canManage($board->id))
