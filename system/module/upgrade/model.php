@@ -66,7 +66,6 @@ class upgradeModel extends model
             case '1_7':
                 $this->execSQL($this->getUpgradeFile('1.7'));
                 $this->moveBooks();
-                $this->setPageBlocks();
                 $this->setMessageBlocks();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -373,20 +372,7 @@ class upgradeModel extends model
             }
         }
     }
-        
-    /**
-     * Set blocks of page.
-     * 
-     * @access public
-     * @return bool
-     */
-    public function setPageBlocks()
-    {
-        $block = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq('article_view')->andWhere('region')->eq('side')->fetch('blocks');
-        $this->dao->insert(TABLE_LAYOUT)->set('page')->eq('page_index')->set('region')->eq('side')->set('blocks')->eq($block)->exec();
-        return !dao::isError();
-    }
-
+       
     /**
      * Set blocks of message page.
      * 

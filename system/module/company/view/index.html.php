@@ -4,7 +4,7 @@ include '../../common/view/header.html.php';
 <?php $common->printPositionBar($this->app->getModuleName());?>
 <div class='box radius'>
   <div class='content'>
-    <p><?php echo $company->content;?></p>
+    <?php echo $company->content;?>
     <div id='contact'>
       <?php foreach($contact as $item => $value):?>
       <dl>
