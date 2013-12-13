@@ -264,15 +264,16 @@ class thread extends control
      */
     public function deleteFile($threadID, $fileID)
     {
-        if($this->app->user->account == 'guest') die(js::locate($this->createLink('user', 'login')));
+        if($this->app->user->account == 'guest') $this->send(array('result'=>'fail', 'message'=> 'guest'));
 
         $thread = $this->thread->getByID($threadID);
-        if(!$thread) die(js::locate('back'));
+        if(!$thread) $this->send(array('result'=>'fail', 'message'=> 'data error'));
 
         /* Judge current user has priviledge to edit the thread or not. */
-        if(!$this->thread->canManage($thread->board, $thread->author)) die(js::locate('back'));
-
-        if($this->loadModel('file')->delete($fileID)) $this->send(array('result'=>'success'));
-        $this->send(array('result'=>'fail', 'message'=> dao::getError()));
+        if($this->thread->canManage($thread->board, $thread->author))
+        {
+            if($this->loadModel('file')->delete($fileID)) $this->send(array('result'=>'success'));
+        }
+        $this->send(array('result'=>'fail', 'message'=> 'error'));
     }
 }
