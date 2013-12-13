@@ -19,8 +19,8 @@ class forum extends control
      */
     public function index()
     {
-        $this->view->title     = $this->lang->forumHome;
-        $this->view->boards    = $this->forum->getBoards();
+        $this->view->title  = $this->lang->forumHome;
+        $this->view->boards = $this->forum->getBoards();
 
         $this->display();
     }
@@ -36,24 +36,20 @@ class forum extends control
     public function board($boardID = 0, $pageID = 1)
     {
         $board = $this->loadModel('tree')->getByID($boardID, 'forum');
-
         if(!$board) die(js::locate('back'));
  
-        /* Get stick threads. */
-        $sticks = $this->loadModel('thread')->getSticks($board->id);
-
         /* Get common threads. */
         $this->app->loadClass('pager', $static = true);
         $pager   = new pager(0, 10, $pageID);
-        $threads = $this->thread->getList($board->id, $orderBy = 'repliedDate_desc', $pager);
+        $threads = $this->loadModel('thread')->getList($board->id, $orderBy = 'repliedDate_desc', $pager);
 
-        $this->view->title     = $board->name;
-        $this->view->keywords  = $board->keywords . '' . $this->config->site->keywords;
-        $this->view->desc      = strip_tags($board->desc);
-        $this->view->board     = $board;
-        $this->view->sticks    = $sticks;
-        $this->view->threads   = $threads;
-        $this->view->pager     = $pager;
+        $this->view->title    = $board->name;
+        $this->view->keywords = $board->keywords . '' . $this->config->site->keywords;
+        $this->view->desc     = strip_tags($board->desc);
+        $this->view->board    = $board;
+        $this->view->sticks   = $this->thread->getSticks($board->id);
+        $this->view->threads  = $threads;
+        $this->view->pager    = $pager;
 
         $this->display();
     }
@@ -72,13 +68,13 @@ class forum extends control
     public function admin($boardID = 0, $orderBy = 'repliedDate_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
         $this->app->loadClass('pager', $static = true);
-        $pager   = new pager($recTotal, $recPerPage, $pageID);
+        $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $boards  = $this->loadModel('tree')->getFamily($boardID, 'forum');
         $threads = $boards ? $this->loadModel('thread')->getList($boards, $orderBy, $pager) : array();
 
         $this->view->title   = $this->view->board ? $this->view->board->name : $this->lang->forum->admin;
-        $this->view->board   = $this->loadModel('tree')->getByID($boardID, 'forum');
+        $this->view->board   = $this->tree->getByID($boardID, 'forum');
         $this->view->threads = $threads;
         $this->view->pager   = $pager;
 
