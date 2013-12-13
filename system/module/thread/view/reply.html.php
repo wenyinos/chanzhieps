@@ -16,7 +16,7 @@
         </td>
         <td id='<?php echo $reply->id;?>'>
           <?php echo $reply->content;?>
-          <div><?php $this->reply->printFiles($reply, $this->thread->canManage($board->id));?></div>
+          <div><?php $this->reply->printFiles($reply, $this->thread->canManage($board->id, $reply->author));?></div>
         </td>
       </tr>
       <tr> 

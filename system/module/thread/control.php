@@ -28,7 +28,6 @@ class thread extends control
         /* Checking current user can post to the board or not. */
         if(!$this->loadModel('forum')->canPost($board))
         {
-            $this->app->loadLang('forum');
             die(js::error($this->lang->forum->readonly) . js::locate('back'));
         }
 

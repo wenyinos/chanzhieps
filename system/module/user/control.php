@@ -32,7 +32,7 @@ class user extends control
             $this->user->create();
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
-            if($this->user->login($this->post->account, $this->post->password1))
+            if($this->user->login($this->post->account, $this->post->password1, $hashed = false))
             {
                 $url = $this->post->referer ? urldecode($this->post->referer) : inlink('user', 'control');
                 $this->send( array('result' => 'success', 'locate'=>$url) );
@@ -506,7 +506,8 @@ class user extends control
             $this->user->registerOauthAccount($provider, $openID);
 
             $user = $this->user->getUserByOpenID($provider, $openID);
-            if($this->user->login($user->account, $user->password))
+            $this->session->set('random', md5(time() . mt_rand()));
+            if($user and $this->user->login($user->account, md5($user->password . $this->session->random)))
             {
                 if($referer) $this->locate(helper::safe64Decode($referer));
 
@@ -539,7 +540,8 @@ class user extends control
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
             $user = $this->user->getUserByOpenID($this->session->oauthProvider, $this->session->oauthOpenID);
-            if($this->user->login($user->account, $user->password))
+            $this->session->set('random', md5(time() . mt_rand()));
+            if($user and $this->user->login($user->account, md5($user->password . $this->session->random)))
             {
                 $default = $this->config->user->default;    // Redefine the default module and method in dashbaord scene.
 
@@ -560,7 +562,7 @@ class user extends control
      */
     public function oauthBind()
     {
-        if($this->user->login($this->post->account, $this->post->password))
+        if($this->user->login($this->post->account, $this->post->password, $hashed = false))
         {
             if($this->user->bindOAuthAccount($this->post->account, $this->session->oauthProvider, $this->session->oauthOpenID))
             {
