@@ -12,7 +12,7 @@
 .chapter > strong,.books .article > strong { font-size: 14px; }
 .books .article > strong { font-weight: normal; }
 .books .actions { display: inline-block; margin-left: 20px;}
-.books .actions a { color: #999; font-weight: normal; }
+.books .actions a { color: #888; font-weight: normal; }
 .book:hover,.chapter:hover,.books .article:hover {background-color: #efefef; }
 .book:hover .actions a,.chapter:hover .actions a,.books .article:hover .actions a { color: #506EAF; }
 .chapter, .books .article { line-height: 20px; }
