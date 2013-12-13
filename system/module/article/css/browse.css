@@ -3,4 +3,4 @@
 .media-heading a:hover, .article-title a:active{color: #4691EF; text-decoration: none;}
 .media-body p{color: #757575;}
 
-h3{font-size:18px; font-weight:400;}
+h3.media-heading{font-size:18px;font-weight: normal;}
