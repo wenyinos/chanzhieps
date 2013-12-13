@@ -48,7 +48,7 @@ ips:
 	cd chanzhiips/system/build/ && php ./minifyfront.php
 	rm -frv chanzhiips/system/build
 	# merge chanzhiips
-	git clone git@github.com:xirang/chanzhiips.git ips
+	svn export https://github.com/xirang/chanzhiips/trunk ips
 	rsync -av --exclude='db/' --exclude='.git/' --exclude='README.md' ips/ chanzhiips
 	cat ips/system/db/install.sql >> chanzhiips/system/db/chanzhi.sql
 	# delete the unused files.
