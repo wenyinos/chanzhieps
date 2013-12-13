@@ -7,6 +7,7 @@ $(document).ready(function()
         return false;
    	});
 
+    $('#commentBox').load( createLink('message', 'comment', 'objectType=article&objectID=' + v.articleID) );  
     $('a.big-image img').resizeImage(280, 280);
     $('a.little-image img').resizeImage(66, 66);
 })
