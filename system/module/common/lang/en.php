@@ -22,7 +22,7 @@ $lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
 /* Lang items for xirang. */
 $lang->chanzhiEPS  = 'chanzhiEPS';
 $lang->chanzhiEPSx = 'Chanzhi';
-$lang->poweredBy   = " Powered by <a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPS}</a>!";
+$lang->poweredBy   = "<a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPS} %s</a>";
 
 /* IE6 alert.  */
 $lang->IE6Alert= <<<EOT
