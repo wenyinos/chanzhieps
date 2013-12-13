@@ -10,6 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 $lang->product->common = 'Product';
+$lang->product->home   = 'Product';
 
 $lang->product->id         = 'Id';
 $lang->product->category   = 'Category';

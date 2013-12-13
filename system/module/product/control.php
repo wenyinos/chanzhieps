@@ -11,6 +11,19 @@
  */
 class product extends control
 {
+
+    /**
+     * Index page of product module.
+     * 
+     * @access public
+     * @return void
+     */
+    public function index()
+    {
+        /* Display browse page. */
+        exit($this->fetch('product', 'browse'));
+    }
+
     /** 
      * Browse product in front.
      * 
@@ -28,13 +41,18 @@ class product extends control
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
         $products   = $this->product->getList($this->tree->getFamily($categoryID), 'id_desc', $pager);
 
-        if($category)
+        if($categoryID == 0)
         {
-            $title    = $category->name;
-            $keywords = trim($category->keywords . ' ' . $this->config->site->keywords);
-            $desc     = strip_tags($category->desc);
-            $this->session->set('productCategory', $category->id);
+            $category = new stdclass();
+            $category->name     = $this->lang->product->home;
+            $category->keywords = '';
+            $category->desc     = '';
         }
+
+        $title    = $category->name;
+        $keywords = trim($category->keywords . ' ' . $this->config->site->keywords);
+        $desc     = strip_tags($category->desc) . ' ';
+        $this->session->set('productCategory', $category->id);
 
         $this->view->title     = $title;
         $this->view->keywords  = $keywords;
