@@ -13,8 +13,8 @@ CREATE TABLE IF NOT EXISTS `eps_article` (
   `editor` varchar(60) NOT NULL,
   `addedDate` datetime NOT NULL,
   `editedDate` datetime NOT NULL,
+  `status` varchar(20) NOT NULL DEFAULT 'normal',
   `type` varchar(30) NOT NULL,
-  `book` varchar(30) NOT NULL,
   `views` mediumint(5) unsigned NOT NULL DEFAULT '0',
   `sticky` enum('0','1','2','3') NOT NULL DEFAULT '0',
   `order` smallint(5) unsigned NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `eps_article` (
   KEY `order` (`order`),
   KEY `views` (`views`),
   KEY `sticky` (`sticky`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_block`;
 CREATE TABLE IF NOT EXISTS `eps_block` (
@@ -31,7 +31,31 @@ CREATE TABLE IF NOT EXISTS `eps_block` (
   `title` varchar(60) NOT NULL,
   `content` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- DROP TABLE IF EXISTS `eps_book`;
+CREATE TABLE IF NOT EXISTS `eps_book` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(150) NOT NULL,
+  `alias` varchar(100) NOT NULL,
+  `keywords` varchar(150) NOT NULL,
+  `summary` text NOT NULL,
+  `content` text NOT NULL,
+  `type` enum('book','chapter','article') NOT NULL,
+  `parent` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `path` char(255) NOT NULL DEFAULT '',
+  `grade` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `author` varchar(60) NOT NULL,
+  `editor` varchar(60) NOT NULL,
+  `addedDate` datetime NOT NULL,
+  `editedDate` datetime NOT NULL,
+  `views` mediumint(5) unsigned NOT NULL DEFAULT '0',
+  `order` smallint(5) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `order` (`order`),
+  KEY `parent` (`parent`),
+  KEY `path` (`path`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_category`;
 CREATE TABLE IF NOT EXISTS `eps_category` (
@@ -46,7 +70,6 @@ CREATE TABLE IF NOT EXISTS `eps_category` (
   `order` smallint(5) unsigned NOT NULL DEFAULT '0',
   `type` char(30) NOT NULL,
   `readonly` enum('0','1') NOT NULL DEFAULT '0',
-  `book` varchar(30) NOT NULL,
   `moderators` varchar(255) NOT NULL,
   `threads` smallint(5) NOT NULL,
   `posts` smallint(5) NOT NULL,
@@ -59,23 +82,7 @@ CREATE TABLE IF NOT EXISTS `eps_category` (
   KEY `order` (`order`),
   KEY `parent` (`parent`),
   KEY `path` (`path`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
-
--- DROP TABLE IF EXISTS `eps_comment`;
-CREATE TABLE IF NOT EXISTS `eps_comment` (
-  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `objectType` varchar(30) NOT NULL DEFAULT '',
-  `objectID` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `author` varchar(30) NOT NULL,
-  `email` varchar(90) NOT NULL,
-  `date` datetime NOT NULL,
-  `content` text NOT NULL,
-  `ip` varchar(15) NOT NULL,
-  `status` enum('0','1') NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `status` (`status`),
-  KEY `object` (`objectType`,`objectID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_config`;
 CREATE TABLE IF NOT EXISTS `eps_config` (
@@ -87,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `eps_config` (
   `value` text NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique` (`owner`,`module`,`section`,`key`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_down`;
 CREATE TABLE IF NOT EXISTS `eps_down` (
@@ -99,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `eps_down` (
   `referer` varchar(200) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fileID` (`file`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_file`;
 CREATE TABLE IF NOT EXISTS `eps_file` (
@@ -119,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `eps_file` (
   `editor` enum('1','0') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `object` (`objectType`,`objectID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_layout`;
 CREATE TABLE IF NOT EXISTS `eps_layout` (
@@ -131,17 +138,26 @@ CREATE TABLE IF NOT EXISTS `eps_layout` (
 
 -- DROP TABLE IF EXISTS `eps_message`;
 CREATE TABLE IF NOT EXISTS `eps_message` (
-  `id` mediumint(8) NOT NULL AUTO_INCREMENT,
-  `from` char(30) NOT NULL DEFAULT 'system',
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `type` char(20) NOT NULL,
+  `objectType` varchar(30) NOT NULL DEFAULT '',
+  `objectID` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `from` char(30) NOT NULL,
   `to` char(30) NOT NULL,
-  `content` varchar(255) NOT NULL,
+  `phone` char(30) NOT NULL,
+  `email` varchar(90) NOT NULL,
+  `qq` char(30) NOT NULL,
+  `date` datetime NOT NULL,
+  `content` text NOT NULL,
   `link` varchar(100) NOT NULL,
-  `time` datetime NOT NULL,
-  `readed` enum('0','1') NOT NULL DEFAULT '0',
+  `ip` varchar(15) NOT NULL,
+  `status` char(20) NOT NULL,
+  `public` enum('0','1') NOT NULL DEFAULT '1',
+  `readed` enum('0','1') NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `readed` (`readed`),
-  KEY `to` (`to`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
+  KEY `status` (`status`),
+  KEY `object` (`objectType`,`objectID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_oauth`;
 CREATE TABLE IF NOT EXISTS `eps_oauth` (
@@ -172,6 +188,7 @@ CREATE TABLE IF NOT EXISTS `eps_product` (
   `editor` varchar(60) NOT NULL,
   `addedDate` datetime NOT NULL,
   `editedDate` datetime NOT NULL,
+  `status` varchar(20) NOT NULL DEFAULT 'normal',
   `views` mediumint(5) unsigned NOT NULL DEFAULT '0',
   `sticky` enum('0','1','2','3') NOT NULL DEFAULT '0',
   `order` smallint(5) unsigned NOT NULL,
@@ -180,12 +197,11 @@ CREATE TABLE IF NOT EXISTS `eps_product` (
   KEY `views` (`views`),
   KEY `sticky` (`sticky`),
   KEY `model` (`model`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_relation`;
 CREATE TABLE IF NOT EXISTS `eps_relation` (
   `type` char(20) NOT NULL,
-  `book` varchar(30) NOT NULL,
   `id` mediumint(9) NOT NULL,
   `category` smallint(5) NOT NULL,
   UNIQUE KEY `relation` (`type`,`id`,`category`)
@@ -204,7 +220,19 @@ CREATE TABLE IF NOT EXISTS `eps_reply` (
   PRIMARY KEY (`id`),
   KEY `thread` (`thread`),
   KEY `author` (`author`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- DROP TABLE IF EXISTS `eps_tag`;
+CREATE TABLE IF NOT EXISTS `eps_tag` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `tag` varchar(50) NOT NULL,
+  `link` varchar(100) NOT NULL,
+  `rank` smallint(5) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `tag` (`tag`),
+  KEY `rank` (`rank`),
+  KEY `link` (`link`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_thread`;
 CREATE TABLE IF NOT EXISTS `eps_thread` (
@@ -216,7 +244,7 @@ CREATE TABLE IF NOT EXISTS `eps_thread` (
   `editor` varchar(60) NOT NULL,
   `addedDate` datetime NOT NULL,
   `editedDate` datetime NOT NULL,
-  `readonly` tinyint(1) NOT NULL,
+  `readonly` tinyint(1) NOT NULL DEFAULT '0',
   `views` smallint(5) unsigned NOT NULL DEFAULT '0',
   `stick` enum('0','1','2','3') NOT NULL DEFAULT '0',
   `replies` smallint(6) NOT NULL,
@@ -226,7 +254,7 @@ CREATE TABLE IF NOT EXISTS `eps_thread` (
   `hidden` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `category` (`board`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_user`;
 CREATE TABLE IF NOT EXISTS `eps_user` (
@@ -238,7 +266,7 @@ CREATE TABLE IF NOT EXISTS `eps_user` (
   `admin` enum('no','common','super') NOT NULL DEFAULT 'no',
   `avatar` char(30) NOT NULL DEFAULT '',
   `birthday` date NOT NULL,
-  `gendar` enum('f','m','u') NOT NULL DEFAULT 'u',
+  `gender` enum('f','m','u') NOT NULL DEFAULT 'u',
   `email` char(90) NOT NULL DEFAULT '',
   `skype` char(90) NOT NULL,
   `qq` char(20) NOT NULL DEFAULT '',
@@ -254,29 +282,16 @@ CREATE TABLE IF NOT EXISTS `eps_user` (
   `visits` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `ip` char(15) NOT NULL DEFAULT '',
   `last` datetime NOT NULL,
-  `fails` tinyint unsigned NOT NULL DEFAULT '0',
-  `locked` int(10) unsigned NOT NULL DEFAULT '0',
+  `fails` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `referer` varchar(255) NOT NULL,
   `join` datetime NOT NULL,
   `resetKey` char(64) NOT NULL,
   `resetTime` datetime NOT NULL,
-  `allowTime` datetime NOT NULL,
+  `locked` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `admin` (`admin`),
   KEY `account` (`account`,`password`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
-
--- DROP TABLE IF EXISTS `eps_tag`;
-CREATE TABLE IF NOT EXISTS  `eps_tag` (
-  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
-  `tag` varchar(50) NOT NULL,
-  `link` varchar(100) NOT NULL,
-  `rank` smallint(5) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `tag` (`tag`),
-  KEY `rank` (`rank`),
-  KEY `link` (`link`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- Insert data into `eps_block`;
 INSERT INTO `eps_block` (`id`, `type`, `title`, `content`) VALUES
@@ -300,4 +315,5 @@ INSERT INTO `eps_layout` (`page`, `region`, `blocks`) VALUES
 ('article_browse', 'side', '6,9,'),
 ('article_view', 'side', '6,9,'),
 ('product_browse', 'side', '4,7,9,'),
-('product_view', 'side', '4,7,9,');
+('product_view', 'side', '4,7,9,'),
+('message_index', 'side', '9,');
