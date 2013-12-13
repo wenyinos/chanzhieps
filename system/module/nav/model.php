@@ -37,6 +37,7 @@ class navModel extends model
         unset($systemNavs->blog);
         unset($systemNavs->forum);
         unset($systemNavs->book);
+        unset($systemNavs->message);
 
         foreach($systemNavs as $item => $url)
         {
