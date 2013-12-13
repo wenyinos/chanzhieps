@@ -20,16 +20,16 @@ $lang->install->keepInstalling   = 'Keep install this version';
 $lang->install->seeLatestRelease = 'See the latest release.';
 $lang->install->welcome          = 'Welcome to use chanzhiEPS.';
 $lang->install->desc             = <<<EOT
-chanzhiEPS is an content management software.
-
-chanzhiEPS is developped by PHP and mysql under the zentaoPHP framework developped by the same team. Through the framework, chanzhiEPS can be customed and extended very easily.
-
-chanzhiEPS is developped by <strong class='red'><a href='http://www.xirangit.com' target='_blank'>QingDao XiRang Network Infomation Co,LTD, China</a></strong>。
-The official website of chanzhiEPS is <a href='http://www.chanzhi.org' target='_blank'>http://www.chanzhi.org</a>
-
-The version of current release is <strong class='red'>%s</strong>。
+<p>Using chanzhiEPS, you can do</p>
+<blockquote>
+  <ul>
+    <li><strong>Branding</strong>：Build a professional website to advertise your brand.</li>
+    <li><strong>Marketing</strong>：Many ways to promot product and service.</li>
+    <li><strong>E-commerce</strong>：Show products and get order online.</li>
+    <li><strong>Service</strong>：Support service to customers online.</li>
+  </ul>
+</blockquote>
 EOT;
-
 
 $lang->install->choice     = 'You can ';
 $lang->install->checking   = 'System checking';
@@ -83,9 +83,9 @@ $lang->install->save2File  = '<div class="a-center"><span class="fail">Try to sa
 $lang->install->saved2File = 'The config file has saved to "<strong>%s</strong> ".';
 $lang->install->errorNotSaveConfig = 'Not save config file.';
 
-$lang->install->setAdmin = 'Set admin';
-$lang->install->account  = 'Administrator';
-$lang->install->password = 'Admin password';
+$lang->install->setAdmin = 'Create an administrator';
+$lang->install->account  = 'Account';
+$lang->install->password = 'Password';
 $lang->install->errorEmptyPassword = "Can't be empty";
 
 $lang->install->success    = "Success installed";
