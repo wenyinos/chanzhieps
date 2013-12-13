@@ -122,10 +122,10 @@ class threadModel extends model
         $now   = helper::now();
         $isAdmin     = $this->app->user->admin == 'super';
         $canManage   = $this->canManage($boardID);
-        $allowedTags = $this->app->user->admin == 'super' ? $this->config->allowedTags->admin : $this->config->allowTags->front;
+        $allowedTags = $this->app->user->admin == 'super' ? $this->config->allowedTags->admin : $this->config->allowedTags->front;
 
         $thread = fixer::input('post')
-            ->stripTags('content', $allowTags)
+            ->stripTags('content', $allowedTags)
             ->setIF(!$canManage, 'readonly', 0)
             ->setForce('board', $boardID)
             ->setForce('author', $this->app->user->account)
@@ -187,15 +187,15 @@ class threadModel extends model
         $thread      = $this->getByID($threadID);
         $isAdmin     = $this->app->user->admin == 'super';
         $canManage   = $this->canManage($thread->board);
-        $allowedTags = $this->app->user->admin == 'super' ? $this->config->allowedTags->admin : $this->config->allowTags->front;
+        $allowedTags = $this->app->user->admin == 'super' ? $this->config->allowedTags->admin : $this->config->allowedTags->front;
 
         $thread = fixer::input('post')
             ->setIF(!$canManage, 'readonly', 0)
-            ->stripTags('content', $allowTags)
+            ->stripTags('content', $allowedTags)
             ->setForce('editor', $this->session->user->account)
             ->setForce('editedDate', helper::now())
             ->setDefault('readonly', 0)
-            ->setIF(!$isAdmin, 'content', strip_tags($_POST['content'], $this->config->thread->editor->allowTags))
+            ->setIF(!$isAdmin, 'content', strip_tags($_POST['content'], $this->config->thread->editor->allowedTags))
             ->remove('files,labels, views, replies, stick, hidden')
             ->get();
 

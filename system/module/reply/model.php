@@ -125,7 +125,7 @@ class replyModel extends model
             ->setForce('author', $this->app->user->account)
             ->setForce('addedDate', helper::now())
             ->setForce('thread', $threadID)
-            ->stripTags('content', $this->config->thread->editor->allowTags)
+            ->stripTags('content', $this->config->thread->editor->allowedTags)
             ->remove('recTotal, recPerPage, pageID, files, labels, hidden')
             ->get();
 
@@ -168,7 +168,7 @@ class replyModel extends model
         $reply = fixer::input('post')
             ->setForce('editor', $this->session->user->account)
             ->setForce('editedDate', helper::now())
-            ->stripTags('content', $this->config->thread->editor->allowTags)
+            ->stripTags('content', $this->config->thread->editor->allowedTags)
             ->remove('files,labels,hidden')
             ->get();
 
