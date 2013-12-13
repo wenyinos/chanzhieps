@@ -119,7 +119,7 @@ class tree extends control
         { 
             $result = $this->tree->manageChildren($type, $this->post->parent, $this->post->children);
             $locate = $this->inLink('browse', "type=$type&root={$this->post->parent}");
-            if($result === true) $this->send(array('result' => 'success', 'locate' => $locate));
+            if($result === true) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $locate));
             $this->send(array('result' => 'fail', 'message' => dao::isError() ? dao::getError() : $result));
         }
 
