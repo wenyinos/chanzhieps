@@ -36,7 +36,7 @@ js::set('productID', $product->id);
             <?php foreach($product->image->list as $image):?>
             <?php $title = $image->title ? $image->title : $product->name;?>
             <li>
-              <?php echo html::a(inlink('view', "id=$product->id"), html::image($image->smallURL, "title='{$title}' alt='{$product->name}'"), "class='little-image'");?>
+              <?php echo html::a(inlink('view', "id=$product->id"), html::image($image->smallURL, "title='{$title}' alt='{$product->name}'"), "class='little-image' target='_blank'");?>
             </li>
             <?php endforeach;?>
             <div class='c-both'></div>
