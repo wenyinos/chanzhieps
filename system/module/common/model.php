@@ -318,8 +318,12 @@ class commonModel extends model
         {
             printf('<span class="login-msg">' . $app->lang->welcome . '</span>', $app->session->user->realname);
             echo html::a(helper::createLink('user', 'control'), $app->lang->dashboard);
+
+            /* Hide messages icon 1.8.*/
+            /*
             $messages = $dao->select('COUNT(*) as count')->from(TABLE_MESSAGE)->where('`to`')->eq($app->session->user->account)->andWhere('readed')->eq(0)->fetch('count', false);
             if($messages) echo ' - ' . html::a(helper::createLink('user', 'message'), sprintf($app->lang->messages, $messages));
+            */
             echo $divider;
             echo html::a(helper::createLink('user', 'logout'),  $app->lang->logout);
         }    
