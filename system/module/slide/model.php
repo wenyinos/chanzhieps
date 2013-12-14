@@ -61,7 +61,7 @@ class slideModel extends model
      */
     public function create($image)
     {
-        $slide = fixer::input('post')->stripTags('summary', $this->config->allowableTags->front)->add('image', $image)->get();
+        $slide = fixer::input('post')->stripTags('summary', $this->config->allowedTags->front)->add('image', $image)->get();
 
         $setting = new stdclass();
         $setting->owner   = 'system';
@@ -115,7 +115,8 @@ class slideModel extends model
         /* Reset key to zero to make sure key wouldnot overflow. */
         if($maxKey > 1000) $maxKey = 0;
 
-        foreach($_POST['order'] as $id => $order)
+        $orders = isset($_POST['order']) ? $_POST['order'] : array();
+        foreach($orders as $id => $order)
         {
             /* Add maxKey to key ensure unique.*/
             $key = $maxKey + $order;
