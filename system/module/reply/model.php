@@ -244,7 +244,6 @@ class replyModel extends model
 
         foreach($reply->files as $file)
         {
-            $file->title = $file->title . ".$file->extension";
             if($file->isImage)
             {
                 $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank' data-toggle='lightbox'");
@@ -259,7 +258,7 @@ class replyModel extends model
                 $filesHtml .= '</li>';
             }
         }
-        echo "<ul class='article-files clearfix'><li class='article-files-heading'>". $this->lang->reply->file . '</li>' . $imagesHtml . $filesHtml . '</ul>';
+        echo "<ul class='article-files clearfix'><li class='article-files-heading'>". $this->lang->reply->files . '</li>' . $imagesHtml . $filesHtml . '</ul>';
     }
 
     /**
