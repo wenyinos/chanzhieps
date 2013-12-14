@@ -13,12 +13,10 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
 <div class="col-md-12">
-  <form method='get' class='form-inline mb-10px form-search '>
+  <form method='post' class='form-inline mb-10px form-search'>
     <div class='input-group w-p40'>
-      <?php echo html::select('tags[]', $tagOptions, $this->get->tags, "multiple='multiple' class='form-control chosen  search-query' placeholder='{$lang->tag->inputTag}'"); ?>
+      <?php echo html::select('tags[]', $tagOptions, $this->post->tags, "multiple='multiple' class='form-control chosen  search-query' placeholder='{$lang->tag->inputTag}'"); ?>
       <span class="input-group-btn"> <?php echo html::submitButton($lang->search, 'btn btn-primary'); ?> </span>
-      <?php echo html::hidden('m', 'tag'); ?>
-      <?php echo html::hidden('f', 'admin'); ?>
     </div>
   </form>
   <table class='table table-hover table-bordered table-striped tablesorter'>

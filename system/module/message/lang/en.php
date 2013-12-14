@@ -47,6 +47,7 @@ $lang->message->statusList[1] = 'Reviewed';
 $lang->message->readedStatus[0] = 'New';
 $lang->message->readedStatus[1] = 'Readed';
 
+$lang->comment = new stdclass();
 $lang->comment->common      = 'Comment';
 $lang->comment->id          = 'ID';
 $lang->comment->type        = 'Type';

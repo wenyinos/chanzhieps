@@ -76,6 +76,7 @@
       <th><?php echo $lang->article->content;?></th>
       <td><?php echo html::textarea('content', htmlspecialchars($article->content), "rows='10' class='area-1'");?></td>
     </tr>
+    <?php if($type != 'page'):?>
     <tr>
       <th><?php echo $lang->article->addedDate;?></th>
       <td class='input-append date'>
@@ -88,6 +89,7 @@
       <th><?php echo $lang->article->status;?></th>
       <td><?php echo html::select('status', $lang->article->statusList, $article->status, "class='select-3 form-control'");?></td>
     </tr>
+    <?php endif;?>
     <tr>
       <th></th>
       <td><?php echo html::submitButton();?></td>

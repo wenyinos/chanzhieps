@@ -101,7 +101,7 @@ class threadModel extends model
         foreach($threads as $thread)
         {
             /* Hide the thread or not. */
-            if($thread->hidden and strpos($this->cookie->t, ",$thread->id,") === false) unset($threads[$thread->id]);
+            if(RUN_MODE == 'front' and $thread->hidden and strpos($this->cookie->t, ",$thread->id,") === false) unset($threads[$thread->id]);
 
             /* Judge the thread is new or not.*/
             $thread->isNew = (time() - strtotime($thread->repliedDate)) < 24 * 60 * 60 * $this->config->thread->newDays;
@@ -249,6 +249,7 @@ class threadModel extends model
         if(dao::isError()) return false;
 
         /* Update board stats. */
+        $thread = $this->getByID($threadID);
         $this->loadModel('forum')->updateBoardStats($thread->board);
         return !dao::isError();
     }
@@ -263,6 +264,11 @@ class threadModel extends model
     public function show($threadID)
     {
         $this->dao->update(TABLE_THREAD)->set('hidden')->eq(0)->where('id')->eq($threadID)->exec();
+        if(dao::isError()) return false;
+
+        /* Update board stats. */
+        $thread = $this->getByID($threadID);
+        $this->loadModel('forum')->updateBoardStats($thread->board);
         return !dao::isError();
     }
 

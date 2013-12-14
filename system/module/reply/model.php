@@ -121,11 +121,13 @@ class replyModel extends model
     public function post($threadID)
     {
         $thread = $this->loadModel('thread')->getByID($threadID);
+        $allowedTags = $this->app->user->admin == 'super' ? $this->config->allowedTags->admin : $this->config->allowedTags->front;
+
         $reply = fixer::input('post')
             ->setForce('author', $this->app->user->account)
             ->setForce('addedDate', helper::now())
             ->setForce('thread', $threadID)
-            ->stripTags('content', $this->config->thread->editor->allowedTags)
+            ->stripTags('content', $allowedTags)
             ->remove('recTotal, recPerPage, pageID, files, labels, hidden')
             ->get();
 

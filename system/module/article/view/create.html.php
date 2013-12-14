@@ -78,6 +78,7 @@
       <th><?php echo $lang->article->content;?></th>
       <td valign='middle'><?php echo html::textarea('content', '', "rows='10' class='area-1 form-control'");?></td>
     </tr>
+    <?php if($type != 'page'):?>
     <tr>
       <th><?php echo $lang->article->addedDate;?></th>
       <td>
@@ -89,9 +90,16 @@
         <span class='help-inline pl-10px'><?php echo $lang->article->note->addedDate;?></span>
       </td>
     </tr>
+    <?php endif;?>
     <tr>
       <td></td>
-      <td><?php echo html::submitButton() . html::commonButton($lang->article->createDraft, "btn btn-default draft") . html::hidden('type', $type);?></td>
+      <td>
+      <?php
+      echo html::submitButton();
+      if($type != 'page') echo html::commonButton($lang->article->createDraft, "btn btn-default draft");
+      echo html::hidden('type', $type);
+      ?>
+</td>
     </tr>
   </table>
 </form>

@@ -234,6 +234,7 @@ class articleModel extends model
         $now = helper::now();
         $article = fixer::input('post')
             ->join('categories', ',')
+            ->setDefault('addedDate', $now)
             ->add('editedDate', $now)
             ->add('type', $type)
             ->stripTags('content', $this->config->allowedTags->admin)
@@ -283,7 +284,6 @@ class articleModel extends model
             ->add('editedDate', helper::now())
             ->get();
 
-        $article->order    = $order;
         $article->keywords = seo::unify($article->keywords, ',');
         $article->alias    = seo::unify($article->alias, '-');
         

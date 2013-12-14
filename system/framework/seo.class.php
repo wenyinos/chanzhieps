@@ -57,7 +57,7 @@ class seo
             if($uri == 'help') $uri = 'book';
 
             /* Not an alias, return directly. */
-            if(!isset($categoryAlias[$uri]) && !isset($pageAlias[$uri])) return $uri;
+            if(empty($categoryAlias[$uri])) return $uri;
 
             /* The module is an alias of a category. */
             $module = $categoryAlias[$uri]->module;
@@ -138,14 +138,15 @@ class seo
     }
 
     /**
-     * Unify string to standard space char.
+     * Unify string to standard chars.
      * 
      * @param  string    $string 
      * @param  string    $to 
+     * @static
      * @access public
      * @return string
      */
-    public function unify($string, $to)
+    public static function unify($string, $to)
     {
         $string = str_replace(array('_', '、', ' ', '-', '?', '@', '&', '%', '~', '`', '+', '*', '/', '\\', '，', '.', '。'), $to, $string);
         return preg_replace('/[,]+/', $to, trim($string, $to));

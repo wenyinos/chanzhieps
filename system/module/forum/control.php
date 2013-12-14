@@ -73,8 +73,8 @@ class forum extends control
         $boards  = $this->loadModel('tree')->getFamily($boardID, 'forum');
         $threads = $boards ? $this->loadModel('thread')->getList($boards, $orderBy, $pager) : array();
 
-        $this->view->title   = $this->view->board ? $this->view->board->name : $this->lang->forum->admin;
         $this->view->board   = $this->tree->getByID($boardID, 'forum');
+        $this->view->title   = $this->view->board ? $this->view->board->name : $this->lang->forum->admin;
         $this->view->threads = $threads;
         $this->view->pager   = $pager;
 
