@@ -1160,7 +1160,7 @@ class sql
      * @access public
      * @return object the sql object.
      */
-    public function replace($table)
+    public static function replace($table)
     {
         $sqlobj = self::factory();
         $sqlobj->sql = "REPLACE $table SET ";
@@ -1173,7 +1173,7 @@ class sql
      * @access public
      * @return object the sql object.
      */
-    public function delete()
+    public static function delete()
     {
         $sqlobj = self::factory();
         $sqlobj->sql = "DELETE ";
