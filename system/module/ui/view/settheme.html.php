@@ -12,10 +12,10 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <table class='table'>
-  <caption><?php echo $lang->site->setTheme?></caption>
+  <caption><?php echo $lang->ui->setTheme?></caption>
   <tr>
   <?php $i = 0;?>
-  <?php foreach($lang->site->themes as $theme => $name):?>
+  <?php foreach($lang->ui->themes as $theme => $name):?>
     <?php
     if($i%2 == 0) echo '</tr><tr>';
     $i++;

@@ -11,17 +11,17 @@
  */
 $lang->ui->common       = "Site";
 
-$lang->ui->logo         = 'Logo';
-$lang->ui->setLogo      = "Logo";
-$lang->ui->setTheme     = 'Set Theme';
+$lang->ui->logo       = 'Logo';
+$lang->ui->setLogo    = "Set Logo";
+$lang->ui->setTheme   = 'Set Theme';
+$lang->ui->setFavicon = "Set favicon";
 
 $lang->ui->setLogoFailed     = "Set logo failed.";
 $lang->ui->noSelectedFile    = "No file selected.";
 $lang->ui->notAlloweFileType = "Please select %s files.";
 
 $lang->ui->favicon = new stdclass();
-$lang->ui->favicon->common = "Set favicon";
-$lang->ui->favicon->reset  = "Reset";
+$lang->ui->favicon->reset = "Reset";
 
 $lang->ui->themes = array();
 $lang->ui->themes['default']    = 'Default';

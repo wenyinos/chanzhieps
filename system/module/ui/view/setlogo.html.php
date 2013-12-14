@@ -13,7 +13,7 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <form method='post' id='ajaxForm' enctype='multipart/form-data'>
   <table class='table table-form'>
-    <caption><?php echo $lang->site->setLogo;?></caption> 
+    <caption><?php echo $lang->ui->setLogo;?></caption> 
     <tr>
       <th class='w-150px'>
         <?php if(isset($this->config->site->logo)) echo html::image($logo->webPath, "class='w-150px'");?>

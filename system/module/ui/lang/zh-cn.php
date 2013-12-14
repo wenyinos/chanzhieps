@@ -11,17 +11,17 @@
  */
 $lang->ui->common       = "站点";
 
-$lang->ui->logo         = 'Logo';
-$lang->ui->setLogo      = "Logo设置";
-$lang->ui->setTheme     = '主题设置';
+$lang->ui->logo       = 'Logo';
+$lang->ui->setLogo    = "Logo设置";
+$lang->ui->setTheme   = '主题设置';
+$lang->ui->setFavicon = "Favicon设置";
 
 $lang->ui->setLogoFailed     = "设置Logo失败";
 $lang->ui->noSelectedFile    = "没有选择图片";
 $lang->ui->notAlloweFileType = "请选择正确的%s文件.";
 
 $lang->ui->favicon = new stdclass();
-$lang->ui->favicon->common = "设置Favicon";
-$lang->ui->favicon->reset  = "重置";
+$lang->ui->favicon->reset = "重置";
 
 $lang->ui->themes = array();
 $lang->ui->themes['default']    = '默认风格';

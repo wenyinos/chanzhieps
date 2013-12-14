@@ -70,7 +70,7 @@ class ui extends control
             if(!$return['result']) $this->send(array('result' => 'fail', 'message' => $return['message']));
          }
 
-        $this->view->title   = $this->lang->ui->favicon->common;
+        $this->view->title   = $this->lang->ui->setFavicon;
         $this->view->favicon = isset($this->config->site->favicon) ? json_decode($this->config->site->favicon) : false;
 
         $this->display();

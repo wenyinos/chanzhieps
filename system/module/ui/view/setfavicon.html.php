@@ -13,7 +13,7 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <form method='post' id='ajaxForm' enctype='multipart/form-data'>
   <table class='table table-form'>
-    <caption><?php echo $lang->site->favicon->common;?></caption> 
+    <caption><?php echo $lang->ui->setFavicon;?></caption> 
     <tr>
       <th class='w-150px'>     
         <?php if(isset($this->config->site->favicon)) echo html::image($favicon->webPath);?>
@@ -21,7 +21,7 @@
       <td class='v-middle'>    
         <?php echo html::file('files');?>
         <?php echo html::submitButton();?>
-        <?php if($favicon) echo html::a(inlink('deleteFavicon'), $lang->site->favicon->reset, "class='ml-10px'");?>
+        <?php if($favicon) echo html::a(inlink('deleteFavicon'), $lang->ui->favicon->reset, "class='ml-10px'");?>
       </td>
     </tr>
   </table>
