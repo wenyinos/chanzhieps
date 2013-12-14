@@ -258,7 +258,7 @@ class replyModel extends model
                 $filesHtml .= '</li>';
             }
         }
-        echo "<ul class='article-files clearfix'><li class='article-files-heading'>". $this->lang->reply->file . '</li>' . $imagesHtml . $filesHtml . '</ul>';
+        echo "<ul class='article-files clearfix'><li class='article-files-heading'>". $this->lang->reply->files . '</li>' . $imagesHtml . $filesHtml . '</ul>';
     }
 
     /**
