@@ -57,7 +57,7 @@ class seo
             if($uri == 'help') $uri = 'book';
 
             /* Not an alias, return directly. */
-            if(!isset($categoryAlias[$uri]) && !isset($pageAlias[$uri])) return $uri;
+            if(empty($categoryAlias[$uri])) return $uri;
 
             /* The module is an alias of a category. */
             $module = $categoryAlias[$uri]->module;
