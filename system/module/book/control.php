@@ -118,6 +118,7 @@ class book extends control
             if($bookID)  $this->send(array('result' => 'success', 'message'=>$this->lang->saveSuccess, 'locate' => inlink('admin', "bookID=$bookID")));
             if(!$bookID) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
+        $this->view->title = $this->lang->book->createBook;
 
         $this->display(); 
     }
@@ -182,7 +183,7 @@ class book extends control
         $families   = $this->book->getFamilies($node);
         foreach($families as $member) unset($optionMenu[$member->id]);
 
-        $this->view->title      = $this->lang->book->edit;
+        $this->view->title      = $this->lang->edit . $this->lang->book->typeList[$node->type];
         $this->view->node       = $node;
         $this->view->optionMenu = $optionMenu;
 

@@ -1,5 +1,5 @@
 <?php
-$lang->book->common       = '在线手册';
+$lang->book->common       = '手册';
 $lang->book->list         = '手册列表';
 $lang->book->articles     = '文档导航';
 $lang->book->backtolist   = '返回手册列表';
