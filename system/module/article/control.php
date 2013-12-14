@@ -82,13 +82,12 @@ class article extends control
         $families = $categoryID ? $this->loadModel('tree')->getFamily($categoryID, $type) : '';
         $articles = $this->article->getList($type, $families, $orderBy, $pager);
 
-        $this->view->title         = $this->lang->$type->admin;
-        $this->view->articles      = $articles;
-        $this->view->pager         = $pager;
-        $this->view->articleList   = $articleList;
-        $this->view->categoryID    = $categoryID;
-        $this->view->type          = $type;
-        $this->view->orderBy       = $orderBy;
+        $this->view->title      = $this->lang->$type->admin;
+        $this->view->type       = $type;
+        $this->view->categoryID = $categoryID;
+        $this->view->articles   = $articles;
+        $this->view->pager      = $pager;
+        $this->view->orderBy    = $orderBy;
 
         $this->display();
     }   
