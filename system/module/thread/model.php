@@ -101,7 +101,7 @@ class threadModel extends model
         foreach($threads as $thread)
         {
             /* Hide the thread or not. */
-            if($thread->hidden and strpos($this->cookie->t, ",$thread->id,") === false) unset($threads[$thread->id]);
+            if(RUN_MODE == 'front' and $thread->hidden and strpos($this->cookie->t, ",$thread->id,") === false) unset($threads[$thread->id]);
 
             /* Judge the thread is new or not.*/
             $thread->isNew = (time() - strtotime($thread->repliedDate)) < 24 * 60 * 60 * $this->config->thread->newDays;
