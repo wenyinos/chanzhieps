@@ -284,7 +284,6 @@ class articleModel extends model
             ->add('editedDate', helper::now())
             ->get();
 
-        $article->order    = $order;
         $article->keywords = seo::unify($article->keywords, ',');
         $article->alias    = seo::unify($article->alias, '-');
         
