@@ -26,7 +26,7 @@ class uiModel extends model
         if(empty($_FILES)) return array('result' => false, 'message' => $this->lang->ui->noSelectedFile);
 
         $fileType = substr($_FILES['files']['name'], strrpos($_FILES['files']['name'], '.') + 1); 
-        if(strpos($allowedFileType, $fileType) == false) return array('result' => false, 'message' => sprintf($this->lang->ui->notAlloweFileType, $allowedFileType));
+        if(strpos($allowedFileType, $fileType) === false) return array('result' => false, 'message' => sprintf($this->lang->ui->notAlloweFileType, $allowedFileType));
 
         $fileModel = $this->loadModel('file');
 
