@@ -1,6 +1,6 @@
 <?php
 include '../../common/view/header.lite.html.php';
-js::import($jsRoot . 'my.js');
+js::import($jsRoot . 'md5.js');
 js::set('scriptName', $_SERVER['SCRIPT_NAME']);
 js::set('adminURL', $lang->user->notice->adminURL);
 js::set('random', $this->session->random);

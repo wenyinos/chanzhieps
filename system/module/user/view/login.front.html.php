@@ -1,6 +1,6 @@
 <?php
 include '../../common/view/header.html.php';
-js::import($jsRoot . 'my.js');
+js::import($jsRoot . 'md5.js');
 js::set('random', $this->session->random);
 ?>
 <section id="login">
