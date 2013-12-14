@@ -2,7 +2,6 @@
 include '../../common/view/header.lite.html.php';
 js::import($jsRoot . 'md5.js');
 js::set('scriptName', $_SERVER['SCRIPT_NAME']);
-js::set('adminURL', $lang->user->notice->adminURL);
 js::set('random', $this->session->random);
 css::internal('body{background-color:#f6f5f5}');
 ?> 

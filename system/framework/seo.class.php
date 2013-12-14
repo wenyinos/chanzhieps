@@ -226,9 +226,9 @@ class uri
         global $config;
 
         $link = 'product/';
-        if($alias['category']) $link = $alias['category'] . '/';
+        if(!empty($alias['category'])) $link = $alias['category'] . '/';
         $link .= array_shift($params);
-        if($alias['name']) $link .= '_' . $alias['name'];
+        if(!empty($alias['name'])) $link .= '_' . $alias['name'];
 
         return $config->webRoot . $link . '.' . $config->default->view;
     }
