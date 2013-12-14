@@ -114,7 +114,7 @@ $lang->menu->blog    = '博客|article|admin|type=blog';
 $lang->menu->product = '产品|product|admin|';
 $lang->menu->book    = '手册|book|admin|';
 $lang->menu->message = '评论留言|message|admin|';
-$lang->menu->page    = '页面|article|admin|type=page';
+$lang->menu->page    = '单页|article|admin|type=page';
 $lang->menu->forum   = '论坛|forum|admin|';
 $lang->menu->site    = '站点|site|setbasic|';
 $lang->menu->ui      = '界面|ui|setlogo|';
@@ -138,8 +138,8 @@ $lang->blog->menu->tree   = '类目管理|tree|browse|type=blog';
 /* Menu of page module. */
 $lang->page = new stdclass();
 $lang->page->menu = new stdclass();
-$lang->page->menu->browse = array('link' => '页面列表|article|admin|type=page', 'alias' => 'edit');
-$lang->page->menu->create = '添加页面|article|create|type=page';
+$lang->page->menu->browse = array('link' => '单页列表|article|admin|type=page', 'alias' => 'edit');
+$lang->page->menu->create = '添加单页|article|create|type=page';
 
 /* Menu of product module. */
 $lang->product = new stdclass();
@@ -151,11 +151,12 @@ $lang->product->menu->tree   = '类目管理|tree|browse|type=product';
 /* Menu of UI module. */
 $lang->ui = new stdclass();
 $lang->ui->menu = new stdclass();
-$lang->ui->menu->logo  = 'LOGO设置|ui|setlogo|';
-$lang->ui->menu->theme = '主题风格|ui|settheme|';
-$lang->ui->menu->slide = array('link' => '幻灯片设置|slide|admin|', 'alias' => 'create,edit');
-$lang->ui->menu->admin = array('link' => '区块管理|block|admin|', 'alias' => 'create,edit');
-$lang->ui->menu->pages = array('link' => '布局设置|block|pages|', 'alias' => 'setregion');
+$lang->ui->menu->logo    = 'LOGO设置|ui|setlogo|';
+$lang->ui->menu->favicon = '网站图标|ui|favicon';
+$lang->ui->menu->theme   = '主题风格|ui|settheme|';
+$lang->ui->menu->slide   = array('link' => '幻灯片设置|slide|admin|', 'alias' => 'create,edit');
+$lang->ui->menu->admin   = array('link' => '区块管理|block|admin|', 'alias' => 'create,edit');
+$lang->ui->menu->pages   = array('link' => '布局设置|block|pages|', 'alias' => 'setregion');
 
 /* Menu of comment module. */
 $lang->message = new stdclass();
@@ -179,7 +180,6 @@ $lang->site->menu->nav       = '导航设置|nav|admin|';
 $lang->site->menu->tag       = '关键词设置|tag|admin|';
 $lang->site->menu->oauth     = '开放登录|site|setoauth|';
 $lang->site->menu->link      = '友情链接|links|admin|';
-$lang->site->menu->favicon   = '网站图标|site|favicon';
 $lang->site->menu->mail      = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
 
 /* Menu of company module. */
