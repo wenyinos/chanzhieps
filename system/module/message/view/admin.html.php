@@ -66,7 +66,6 @@ EOT;
         echo html::a(inlink('reply', "messageID=$message->id"), $lang->message->reply, "data-toggle='modal'");
         echo html::a(inlink('delete', "messageID=$message->id&type=single&status=$status"), $lang->message->delete, "class='deleter'");
         if($status == 0) echo html::a(inlink('pass', "messageID=$message->id&type=single"), $lang->message->pass, "class='pass'");
-        echo html::a($message->objectViewURL . '#message', $lang->message->reply, "target='_blank'");
         echo '<br />';
         if($status == 0) echo html::a(inlink('delete', "messageID=$message->id&type=pre&status=$status"), $lang->message->deletePre, "class='pre' data-confirm='{$lang->message->confirmDeletePre}'");
         if($status == 0) echo html::a(inlink('pass',   "messageID=$message->id&type=pre"), $lang->message->passPre, "class='pre' data-confirm='{$lang->message->confirmPassPre}'");

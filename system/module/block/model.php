@@ -193,11 +193,10 @@ class blockModel extends model
     /**
      * Update  block.
      * 
-     * @param string $blockID 
      * @access public
      * @return void
      */
-    public function update($blockID)
+    public function update()
     {
         $block = fixer::input('post')->stripTags('content', $this->config->block->allowedTags)->get();
 
@@ -212,7 +211,7 @@ class blockModel extends model
 
         $this->dao->update(TABLE_BLOCK)->data($block, 'params,uid,blockID')->autoCheck()->where('id')->eq($this->post->blockID)->exec();
 
-        $this->loadModel('file')->updateObjectID($this->post->uid, $blockID, 'block');
+        $this->loadModel('file')->updateObjectID($this->post->uid, $this->post->blockID, 'block');
         return true;
     }
 
