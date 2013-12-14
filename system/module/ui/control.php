@@ -89,6 +89,6 @@ class ui extends control
         $this->loadModel('setting')->deleteItems("owner=system&module=common&section=site&key=favicon");
         if($favicon) $this->loadModel('file')->delete($favicon->fileID);
 
-        $this->locate(inlink('favicon'));
+        $this->locate(inlink('setFavicon'));
     }
 }
