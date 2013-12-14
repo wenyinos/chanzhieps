@@ -35,25 +35,26 @@ class fileModel extends model
      * Get files of an object list.
      * 
      * @param   string  $objectType 
-     * @param   mixed   $object 
+     * @param   mixed   $objectID 
      * @param   bool    $isImage 
      * @access public
      * @return array
      */
-    public function getByObject($objectType, $object, $isImage = false)
+    public function getByObject($objectType, $objectID, $isImage = false)
     {
+        /* Get files group by objectID. */
         $files = $this->dao->select('*')
             ->from(TABLE_FILE)
             ->where('objectType')->eq($objectType)
-            ->andWhere('objectID')->in($object)
+            ->andWhere('objectID')->in($objectID)
             ->beginIf($isImage)->andWhere('extension')->in($this->config->file->imageExtensions)->orderBy('`primary`')->fi() 
             ->fetchGroup('objectID');
 
-        foreach($files as &$fileList) $fileList = $this->batchProcessFile($fileList);
+        /* Process these files. */
+        foreach($files as $objectFiles) $this->batchProcessFile($objectFiles);
 
-        /* if object is an objectID return without group. */
-        if(is_numeric($object)) $files = $files[$object];
-
+        /* If object is only an objectID, return it's files, else return all. */
+        if(is_numeric($objectID) and !empty($files[$objectID])) return $files[$objectID];
         return $files;
     }
 
