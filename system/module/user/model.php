@@ -117,8 +117,8 @@ class userModel extends model
             ->setForce('last', helper::now())
             ->setForce('visits', 1)
             ->setIF($this->post->password1 == false, 'password', '')
-            ->setIF($this->cookie->r != '', 'referer', $this->cookie->r)
-            ->setIF($this->cookie->r == '', 'referer', '')
+            ->setIF($this->cookie->referer != '', 'referer', $this->cookie->referer)
+            ->setIF($this->cookie->referer == '', 'referer', '')
             ->remove('admin, ip')
             ->get();
         $user->password = $this->createPassword($this->post->password1, $user->account); 
@@ -476,8 +476,8 @@ class userModel extends model
             ->setForce('join', helper::now())
             ->setForce('last', helper::now())
             ->setForce('visits', 1)
-            ->setIF($this->cookie->r != '', 'referer', $this->cookie->r)
-            ->setIF($this->cookie->r == '', 'referer', '')
+            ->setIF($this->cookie->referer != '', 'referer', $this->cookie->referer)
+            ->setIF($this->cookie->referer == '', 'referer', '')
             ->add('password', $this->createPassword(md5(mt_rand()), $user->account))     // Set a random password.
             ->remove('admin, ip')
             ->get();
