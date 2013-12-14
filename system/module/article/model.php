@@ -234,6 +234,7 @@ class articleModel extends model
         $now = helper::now();
         $article = fixer::input('post')
             ->join('categories', ',')
+            ->setDefault('addedDate', $now)
             ->add('editedDate', $now)
             ->add('type', $type)
             ->stripTags('content', $this->config->allowedTags->admin)
