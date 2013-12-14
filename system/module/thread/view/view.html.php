@@ -16,6 +16,6 @@ $common->printPositionBar($board, $thread);
 
 if($pager->pageID == 1) include './thread.html.php';
 if(!$thread->readonly)  include './reply.html.php';
-else echo "<div class='alert alert-info'>该帖已设置为只读，无法进行回复。</div>";
+else echo "<div class='alert alert-info'>{$lang->thread->readonlyMessage}</div>";
 
 include '../../common/view/footer.html.php';
