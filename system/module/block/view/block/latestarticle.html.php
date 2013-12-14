@@ -11,17 +11,27 @@
 */
 ?>
 <?php 
-$content         = json_decode($block->content);
-$type            = str_replace('article', '', strtolower($block->type));
-$method          = 'get' . ucfirst($type);
-$articles        = $this->loadModel('article')->$method($content->category, $content->limit);
-$categories      = explode(',', $content->category);
-$firstCategoryID = $categories[0];
-$firstCategory   = $this->loadModel('tree')->getByID($firstCategoryID);
+/* Set $themRoot. */
+$themeRoot = $this->config->webRoot . 'theme/';
+
+/* Decode the content and get articles. */
+$content  = json_decode($block->content);
+$method   = 'get' . ucfirst(str_replace('article', '', strtolower($block->type)));
+$articles = $this->loadModel('article')->$method(empty($content->category) ? 0 : $content->category, $content->limit);
+
+/* Compute the more link. */
+$moreLink = '';
+if($articles)
+{
+    reset($articles);
+    $firstArticle  = current($articles);
+    $firstCategory = $this->loadModel('tree')->getByID($firstArticle->category);
+    if($firstCategory) $moreLink = html::a(helper::createLink('article', 'browse', "category=$firstCategory->id", "category=$firstCategory->alias"), $this->lang->more, "class='f-right'");
+}
 ?>
 <?php if(isset($content->image)):?>
 <div class='box radius'>
-  <h4 class='title'><?php echo $block->title;?><?php echo html::a(helper::createLink('article', 'browse', "categoryID=$firstCategory->id", "category=$firstCategory->alias"), $this->lang->more, "class='f-right'");?></h4>
+  <h4 class='title'><?php echo $block->title . $moreLink;?></h4>
   <ul class="media-list">
     <?php 
     foreach($articles as $article):
@@ -53,18 +63,20 @@ $firstCategory   = $this->loadModel('tree')->getByID($firstCategoryID);
 </div>
 <?php else:?>
 <div class="panel panel-default">
-  <div class="panel-heading"><h4><?php echo $block->title;?><?php echo html::a(helper::createLink('article', 'browse', "categoryID=$firstCategory->id", "category=$firstCategory->alias"), $this->lang->more, "class='f-right'");?></h4></div>
-  <div class="panel-body"><ul class='mg-zero pd-zero'>
-    <?php foreach($articles as $article): ?>
-    <?php 
-    $category = array_shift($article->categories);
-    $url = helper::createLink('article', 'view', "id={$article->id}", "category={$category->alias}&name={$article->alias}");
-    ?>
-    <li class='latest-news'>
-      <i class='icon-chevron-right'></i>
-      <?php echo html::a($url, $article->title, "class='latest-news' title='{$article->title}'");?>
-    </li>
-    <?php endforeach;?>
-  </ul></div>
+  <div class="panel-heading"><h4><?php echo $block->title . $moreLink;?></h4></div>
+  <div class="panel-body">
+    <ul class='mg-zero pd-zero'>
+      <?php foreach($articles as $article): ?>
+      <?php 
+      $category = array_shift($article->categories);
+      $url = helper::createLink('article', 'view', "id={$article->id}", "category={$category->alias}&name={$article->alias}");
+      ?>
+      <li class='latest-news'>
+        <i class='icon-chevron-right'></i>
+        <?php echo html::a($url, $article->title, "class='latest-news' title='{$article->title}'");?>
+      </li>
+      <?php endforeach;?>
+    </ul>
+  </div>
 </div>
 <?php endif;?>
