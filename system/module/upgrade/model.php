@@ -314,6 +314,11 @@ class upgradeModel extends model
 
         $this->dao->update(TABLE_BOOK)->set("path=concat(',', id, ',')")->where('type')->eq('book')->exec();
         $this->dao->update(TABLE_BOOK)->set("path=concat(path, id, ',')")->where('type')->eq('article')->exec();
+
+        $this->dao->delete()->from(TABLE_CONFIG)->where('owner')->eq('system')->andWhere('module')->eq('common')->andWhere('section')->eq('book')->exec();
+        $this->dao->delete()->from(TABLE_ARTICLE)->where('type')->like('book_%')->exec();
+        $this->dao->delete()->from(TABLE_CATEGORY)->where('type')->like('book_%')->exec();
+
         return true;
     }
 
