@@ -15,7 +15,6 @@ $lang->site->name         = '网站名称';
 $lang->site->module       = '功能模块';
 $lang->site->lang         = '语言';
 $lang->site->domain       = '网站域名';
-$lang->site->logo         = 'Logo';
 $lang->site->keywords     = '关键词';
 $lang->site->desc         = '站点描述';
 $lang->site->icp          = '备案编号';
@@ -24,20 +23,10 @@ $lang->site->mission      = '站点使命';
 $lang->site->copyright    = '创建年份';
 
 $lang->site->setBasic     = "设置基本信息";
-$lang->site->setLogo      = "Logo设置";
 $lang->site->setOauth     = "开放登录设置";
 $lang->site->setSinaOauth = "新浪微博接入";
 $lang->site->setQQOauth   = "QQ接入";
-$lang->site->setTheme     = '主题设置';
-
-$lang->site->setLogoFailed  = "设置Logo失败";
-$lang->site->noSelectedFile = "没有选择图片";
-$lang->site->oauthHelp      = "使用帮助";
-
-$lang->site->favicon = new stdclass();
-$lang->site->favicon->common = "设置Favicon";
-$lang->site->favicon->reset  = "重置";
-$lang->site->favicon->notice = "请上传ico格式图片";
+$lang->site->oauthHelp    = "使用帮助";
 
 $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = '会员';
@@ -45,10 +34,3 @@ $lang->site->moduleAvailable['forum']   = '论坛';
 $lang->site->moduleAvailable['blog']    = '博客';
 $lang->site->moduleAvailable['book']    = '手册';
 $lang->site->moduleAvailable['message'] = '评论留言';
-
-$lang->site->themes = array();
-$lang->site->themes['default']    = '默认风格';
-$lang->site->themes['flat']       = '清泉';
-$lang->site->themes['tree']       = '蝉之树';
-$lang->site->themes['brightdark'] = '蝉憩';
-$lang->site->themes['tartan']     = '蝉之格';

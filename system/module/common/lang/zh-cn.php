@@ -152,7 +152,7 @@ $lang->product->menu->tree   = '类目管理|tree|browse|type=product';
 $lang->ui = new stdclass();
 $lang->ui->menu = new stdclass();
 $lang->ui->menu->logo    = 'LOGO设置|ui|setlogo|';
-$lang->ui->menu->favicon = '网站图标|ui|favicon|';
+$lang->ui->menu->favicon = '网站图标|ui|setfavicon|';
 $lang->ui->menu->theme   = '主题风格|ui|settheme|';
 $lang->ui->menu->slide   = array('link' => '幻灯片设置|slide|admin|', 'alias' => 'create,edit');
 $lang->ui->menu->admin   = array('link' => '区块管理|block|admin|', 'alias' => 'create,edit');

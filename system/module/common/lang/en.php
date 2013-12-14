@@ -152,7 +152,7 @@ $lang->product->menu->tree   = 'Categories|tree|browse|type=product';
 $lang->ui = new stdclass();
 $lang->ui->menu = new stdclass();
 $lang->ui->menu->logo    = 'Logo|ui|setlogo|';
-$lang->ui->menu->favicon = 'Favicon|ui|favicon|';
+$lang->ui->menu->favicon = 'Favicon|ui|setfavicon|';
 $lang->ui->menu->theme   = 'Theme|ui|settheme|';
 $lang->ui->menu->slide   = array('link' => 'Slide|slide|admin|',  'alias' => 'create,edit');
 $lang->ui->menu->admin   = array('link' => 'Blocks|block|admin|', 'alias' => 'create,edit');

@@ -15,7 +15,6 @@ $lang->site->name         = 'Name';
 $lang->site->module       = 'Modules';
 $lang->site->lang         = 'Language';
 $lang->site->domain       = 'Domain';
-$lang->site->logo         = 'Logo';
 $lang->site->keywords     = 'Keywords';
 $lang->site->desc         = 'Description';
 $lang->site->icp          = 'ICP';
@@ -24,20 +23,10 @@ $lang->site->mission      = 'Mission';
 $lang->site->copyright    = 'Copyright';
 
 $lang->site->setBasic     = "Baisc";
-$lang->site->setLogo      = "Log";
 $lang->site->setOauth     = "Oauth";
 $lang->site->setSinaOauth = "Weibo Oauth";
 $lang->site->setQQOauth   = "QQ Oauth";
-$lang->site->setTheme     = 'Set Theme';
-
-$lang->site->setLogoFailed  = "Set logo failed.";
-$lang->site->noSelectedFile = "No file selected.";
-$lang->site->oauthHelp      = "Help";
-
-$lang->site->favicon = new stdclass();
-$lang->site->favicon->common = "Set favicon";
-$lang->site->favicon->reset  = "Reset";
-$lang->site->favicon->notice = "Please upload ico format picture";
+$lang->site->oauthHelp    = "Help";
 
 $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = 'Member';
@@ -45,10 +34,3 @@ $lang->site->moduleAvailable['forum']   = 'Forum';
 $lang->site->moduleAvailable['blog']    = 'Blog';
 $lang->site->moduleAvailable['book']    = 'Book';
 $lang->site->moduleAvailable['message'] = 'Message';
-
-$lang->site->themes    = array();
-$lang->site->themes['default']    = 'Default';
-$lang->site->themes['flat']       = 'Flat';
-$lang->site->themes['tree']       = 'Tree';
-$lang->site->themes['brightdark'] = 'Brightdark';
-$lang->site->themes['tartan']     = 'Tartan';
