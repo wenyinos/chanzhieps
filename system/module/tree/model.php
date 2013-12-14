@@ -163,6 +163,7 @@ class treeModel extends model
     {
         /* First, get all categories. */
         $treeMenu   = array();
+        $lastMenu   = array();
         $stmt       = $this->dbh->query($this->buildQuery($type, $startCategory));
         $categories = array();
         while($category = $stmt->fetch()) $categories[$category->id] = $category;

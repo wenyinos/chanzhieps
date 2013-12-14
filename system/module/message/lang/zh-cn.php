@@ -47,6 +47,7 @@ $lang->message->statusList[1] = '已审核';
 $lang->message->readedStatus[0] = '未读';
 $lang->message->readedStatus[1] = '已读';
 
+$lang->comment = new stdclass();
 $lang->comment->common      = '评论';
 $lang->comment->id          = '编号';
 $lang->comment->type        = '类型';
