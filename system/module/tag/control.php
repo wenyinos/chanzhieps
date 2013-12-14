@@ -26,7 +26,7 @@ class tag extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $tags = $this->get->tags ? $this->get->tags : array();
+        $tags = $this->post->tags ? $this->post->tags : array();
 
         $this->view->title      = $this->lang->tag->admin;
         $this->view->pager      = $pager;
