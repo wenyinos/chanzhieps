@@ -30,7 +30,7 @@ js::set('type', $type);
     <table class='table'>
       <caption><?php echo $title;?></caption>
       <tr>
-        <td><div id='treeMenuBox'><?php echo $treeMenu . $backButton;?></div></td>
+        <td><div id='treeMenuBox'><?php echo $treeMenu . html::backButton();?></div></td>
       </tr>
     </table>
   </div>
