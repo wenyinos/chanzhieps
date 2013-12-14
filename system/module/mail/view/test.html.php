@@ -1,11 +1,3 @@
-<?php
-if(isset($error))
-{
-    include '../../common/view/header.admin.lite.html.php';
-    die("<br />" . str_replace('\n', "<br />", join('', $error)));
-}
-?>
-
 <?php include '../../common/view/header.admin.html.php';?>
 <form method='post' id='ajaxForm'>
 <table class='table' align='center'>

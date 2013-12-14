@@ -146,8 +146,8 @@ class mail extends control
             $this->mail->send($this->post->to, $this->lang->mail->subject, $this->lang->mail->content, true);
             if($this->mail->isError())
             {
-                $this->view->error = $this->mail->getError();
-                $this->send(array('result' => 'fail', 'message' => $this->mail->getError()));
+                $error = str_replace('\n', "<br />", join('', $this->mail->getError()));
+                $this->send(array('result' => 'fail', 'message' => $error));
             }
             $this->send(array('result' => 'success', 'message' => $this->lang->mail->successSended));
         }
