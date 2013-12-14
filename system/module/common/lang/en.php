@@ -151,11 +151,12 @@ $lang->product->menu->tree   = 'Categories|tree|browse|type=product';
 /* Menu of UI module. */
 $lang->ui = new stdclass();
 $lang->ui->menu = new stdclass();
-$lang->ui->menu->logo  = 'Logo|ui|setlogo|';
-$lang->ui->menu->theme = 'Theme|ui|settheme|';
-$lang->ui->menu->slide = array('link' => 'Slide|slide|admin|',  'alias' => 'create,edit');
-$lang->ui->menu->admin = array('link' => 'Blocks|block|admin|', 'alias' => 'create,edit');
-$lang->ui->menu->pages = array('link' => 'Layout|block|pages|', 'alias' => 'setregion');
+$lang->ui->menu->logo    = 'Logo|ui|setlogo|';
+$lang->ui->menu->favicon = 'Favicon|ui|favicon|';
+$lang->ui->menu->theme   = 'Theme|ui|settheme|';
+$lang->ui->menu->slide   = array('link' => 'Slide|slide|admin|',  'alias' => 'create,edit');
+$lang->ui->menu->admin   = array('link' => 'Blocks|block|admin|', 'alias' => 'create,edit');
+$lang->ui->menu->pages   = array('link' => 'Layout|block|pages|', 'alias' => 'setregion');
 
 /* Menu of comment module. */
 $lang->message = new stdclass();
@@ -179,7 +180,6 @@ $lang->site->menu->nav       = 'Navigation|nav|admin|';
 $lang->site->menu->tag       = 'Tags|tag|admin|';
 $lang->site->menu->oauth     = 'Open OAuth|site|setoauth|';
 $lang->site->menu->link      = 'Links|links|admin|';
-$lang->site->menu->favicon   = 'Favicon|site|favicon';
 $lang->site->menu->mail      = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
 
 /* Menu of company module. */
