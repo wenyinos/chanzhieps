@@ -13,8 +13,12 @@
 <?php 
 $content  = json_decode($block->content);
 $product  = $this->loadModel('product')->getByID($content->product);
+?>
+<?php if(!empty($product)):?>
+<?php
 $category = array_shift($product->categories);
-$url      = helper::createLink('product', 'view', "id={$product->id}", "category={$category->alias}&name={$product->alias}");
+$alias    = !empty($category) ? $category->alias : '';
+$url      = helper::createLink('product', 'view', "id={$product->id}", "category={$alias}&name={$product->alias}");
 ?>
 <div class='panel product-box'>
   <div class='text-center'><?php echo html::a($url, html::image($product->image->primary->middleURL, "class='image-middle'"));?></div>
@@ -23,3 +27,4 @@ $url      = helper::createLink('product', 'view', "id={$product->id}", "category
     <p><?php echo helper::substr($product->summary, 80);?></p>
   </div>
 </div>
+<?php endif;?>
