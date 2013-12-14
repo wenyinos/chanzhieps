@@ -303,7 +303,7 @@ class fixer
      */
     private $data;
 
-    private $stripedFields;
+    private $stripedFields = array();
     /**
      * The construction function, according the scope, convert it to object.
      * 
@@ -440,7 +440,7 @@ class fixer
         $fields = $this->processFields($fieldName);
         foreach($fields as $fieldName)
         {
-            if(!in_array($fieldName, $this->stripedFields))$this->data->$fieldName = $this->specialArray($this->data->$fieldName);
+            if(empty($this->stripedFields) or !in_array($fieldName, $this->stripedFields)) $this->data->$fieldName = $this->specialArray($this->data->$fieldName);
         }
         return $this;
     }
