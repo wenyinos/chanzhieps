@@ -6,7 +6,8 @@ a:hover{color: #1ABC9C;}
 
 body>.container>hr{display: none;}
 footer{margin: 20px 0;text-align: left;}
-#comments{background-color: #ECF0F5}
+#commentList{background-color: #ECF0F5}
+.comment-head{background-color: #BDC3C7 !important}
 
 /* headNav. */
 #headNav{top: 15px; background-color: #16a085; -moz-border-radius:6px; -webkit-border-radius:6px; border-radius:6px;}

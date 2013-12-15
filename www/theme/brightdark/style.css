@@ -12,7 +12,7 @@ body>.container>hr{display: none;}
 #powerby a{color: #a4b4a6}
 #powerby:hover{background-color: #1d232a;border-color: #414b5a}
 .breadcrumb,.container>form,#header #slogan{color: #c9c9c9;}
-#comments{background-color: #ECF0F5;}
+#commentList{background-color: #ECF0F5;}
 #links{color: #ECF0F5;}
 
 /* headNav. */
