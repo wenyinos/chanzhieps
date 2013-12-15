@@ -18,15 +18,9 @@ js::set('root', $root);
 js::set('book', $book);
 js::set('type', $type);
 ?>
-
-
 <?php if(strpos($treeMenu, '<li>') !== false):?>
-<?php if(strpos($type, 'book_') !== false):?>
-<div class='col-md-3'>
-<?php else:?>
 <div class='row'>
   <div class='col-md-4'>
-<?php endif;?>
     <table class='table'>
       <caption><?php echo $title;?></caption>
       <tr>
@@ -34,15 +28,10 @@ js::set('type', $type);
       </tr>
     </table>
   </div>
-  <?php if(strpos($type, 'book_') !== false):?>
-  <div class='col-md-9' id='categoryBox'></div>
-  <?php else:?>
   <div class='col-md-8' id='categoryBox'></div>
 </div>
-  <?php endif;?>
-  <?php else:?>
-  <div class='col-md-12' id='categoryBox'></div>
-</div>
-  <?php endif;?>
+<?php else:?>
+<div class='col-md-12' id='categoryBox'></div>
+<?php endif;?>
 <?php include '../../common/view/treeview.html.php';?>
 <?php include '../../common/view/footer.admin.html.php';?>

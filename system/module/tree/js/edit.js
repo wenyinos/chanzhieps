@@ -10,4 +10,6 @@ $(document).ready(function()
             $(".tree").treeview({collapsed: false, unique: false});    
         });
     });
+
+    $('.ke-container').css('width','90%');
 });
