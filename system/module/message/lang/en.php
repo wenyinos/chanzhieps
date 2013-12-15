@@ -81,3 +81,4 @@ $lang->comment->statusList[0] = 'Unreviewed';
 $lang->comment->statusList[1] = 'Reviewed';
 
 $lang->message->replyItem = "<dd><strong>%s</strong> reply at <em>%s</em>：%s</dd>";
+$lang->comment->replyItem = "<dd><strong>%s</strong> reply at <em>%s</em>：%s</dd>";

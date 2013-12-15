@@ -26,7 +26,7 @@
           <div class="content"><?php echo nl2br($message->content);?></div>
           <?php if(!empty($replies[$message->id])):?>
           <dl class='alert alert-info'>
-          <?php foreach($replies[$message->id] as $reply)printf($lang->message->replyItem, $reply->from, $reply->date, $reply->content); ?>
+          <?php foreach($replies[$message->id] as $reply) printf($lang->message->replyItem, $reply->from, $reply->date, $reply->content);?>
           </dl>
           <?php endif;?>
         </li>

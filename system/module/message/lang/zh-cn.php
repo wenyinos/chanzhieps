@@ -81,3 +81,4 @@ $lang->comment->statusList[0] = '未审核';
 $lang->comment->statusList[1] = '已审核';
 
 $lang->message->replyItem = "<dd><strong>%s</strong> 于 <em>%s</em> 回复：%s</dd>";
+$lang->comment->replyItem = "<dd><strong>%s</strong> 于 <em>%s</em> 回复：%s</dd>";

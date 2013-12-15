@@ -74,9 +74,10 @@ class messageModel extends model
      */
     public function getReplies($messages)
     {
+        foreach($messages as $message) $objectList[] = $message->id;
         return $this->dao->select('*')->from(TABLE_MESSAGE)
             ->where('type')->eq('reply')
-            ->andWhere('objectID')->in($messages)
+            ->andWhere('objectID')->in($objectList)
             ->fetchGroup('objectID');
     }
 

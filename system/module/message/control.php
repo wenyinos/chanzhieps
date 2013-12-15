@@ -24,7 +24,7 @@ class message extends control
         $pager = new pager($recTotal = 0, $recPerPage = 10, $pageID);
 
         $this->view->messages    = $this->message->getByObject($type = 'message', $objectType = 'message', $objectID = 0, $pager);
-        $this->view->replies     = $this->message->getReplies(array_keys($this->view->messages));
+        $this->view->replies     = $this->message->getReplies($this->view->messages);
         $this->view->pager       = $pager;
         $this->view->title       = $this->lang->message->list;
         $this->view->startNumber = ($pageID - 1) * 10;
@@ -47,6 +47,8 @@ class message extends control
         $this->view->objectType  = $objectType;
         $this->view->objectID    = $objectID;
         $this->view->comments    = $this->message->getByObject($type = 'comment', $objectType, $objectID, $pager);
+        $this->view->replies     = $this->message->getReplies($this->view->comments);
+        $this->view->pager       = $pager;
         $this->view->startNumber = ($pageID - 1) * 10;
         $this->view->pager       = $pager;
         $this->lang->message     = $this->lang->comment;

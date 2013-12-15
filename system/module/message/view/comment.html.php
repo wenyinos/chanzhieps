@@ -12,6 +12,12 @@ css::internal($pageCSS);
       <div id='<?php echo $comment->id?>' class='comment'>
         <div class='comment-head'><strong>#<?php echo ($startNumber + $number + 1)?> &nbsp;<?php echo $comment->from;?></strong> &nbsp; <span class='gray'><?php echo $comment->date;?></span></div>
         <?php echo nl2br($comment->content);?>
+          <?php if(!empty($replies[$comment->id])):?>
+          <dl class='alert alert-info'>
+          <?php foreach($replies[$comment->id] as $reply) printf($lang->message->replyItem, $reply->from, $reply->date, $reply->content);?>
+          </dl>
+          <?php endif;?>
+
       </div>
     <?php endforeach;?>
     <div id='pager'><?php $pager->show('right', 'shortest');?></div>
