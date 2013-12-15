@@ -23,7 +23,7 @@ js::set('path', json_encode($path));
       <th><?php echo $lang->book->author;?></th>
       <td><?php echo html::input('author', $node->author, "class='text-3 form-control'");?></td>
     </tr>
-    <?php if($book->type !== 'book'):?>
+    <?php if($node->type != 'book'):?>
     <tr>
       <th class='w-100px'><?php echo $lang->book->parent;?></th>
       <td><?php echo html::select("parent", $optionMenu, $node->parent, "class='select-3 form-control'");?></td>
