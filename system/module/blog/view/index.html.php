@@ -14,8 +14,8 @@
 include './header.html.php';
 include '../../common/view/treeview.html.php';
 $path = array_keys($category->pathNames);
-js::set('path',  json_encode($path));
-js::set('categoryID', $category->id );
+if(!empty($path))         js::set('path',  $path);
+if(!empty($category->id)) js::set('categoryID', $category->id );
 ?>
 <?php
 $root = '<li>' . $this->lang->currentPos . $this->lang->colon .  html::a($this->inlink('index'), $lang->home) . '</li>';

@@ -1,12 +1,5 @@
 $(document).ready(function()
 {
-    /* Set the orginal and copySite, copyURL fields. */
-    $('#original').change(function()
-    {
-        $('#copyBox').hide().find(':input').attr('disabled', true);
-        if($(this).val() == 0) $('#copyBox').show().find(':input').attr('disabled', false);
-    });
-    
     /* Set current active topNav. */
     if(v.path && v.path.length)
     {
@@ -16,5 +9,5 @@ $(document).ready(function()
         })
     }
 
-    $('.tree #category' + v.categoryID).addClass('active');
+   if(typeof(v.categoryID) != 'undefined') $('.tree #category' + v.categoryID).addClass('active');
 });
