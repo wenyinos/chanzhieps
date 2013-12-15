@@ -462,8 +462,7 @@ class treeModel extends model
 
                 /* After saving, update it's path. */
                 $categoryID   = $this->dao->lastInsertID();
-                $categoryPath = ",$categoryID,";
-                $categoryPath = $parent ? $parent->path . $categoryPath : $categoryPath;
+                $categoryPath = $parent ? $parent->path . $categoryID . ',' : ",$categoryPath,";
                 $this->dao->update(TABLE_CATEGORY)
                     ->set('path')->eq($categoryPath)
                     ->where('id')->eq($categoryID)
