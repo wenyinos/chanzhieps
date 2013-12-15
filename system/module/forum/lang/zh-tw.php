@@ -22,7 +22,7 @@ $lang->forum->post   = '發貼';
 $lang->forum->admin  = '論壇維護';
 $lang->forum->update = '更新數據';
 
-$lang->forum->updateDesc    = '更新論壇主題數和回覆數的統計數據';
+$lang->forum->updateDesc    = '該更新操作會重新計算每個版塊的發貼數據。';
 $lang->forum->successUpdate = '更新數據成功';
 
 /* Adjust the pager. */

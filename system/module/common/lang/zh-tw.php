@@ -41,7 +41,7 @@ EOT;
 /* Global lang items. */
 $lang->home           = '首頁';
 $lang->welcome        = '歡迎您，<strong>%s</strong>！';
-$lang->messages       = "<span><i class='icon-comment'></i> %s</span>";
+$lang->messages       = "<strong><i class='icon-comment-alt'></i> %s</strong>";
 $lang->todayIs        = '今天是%s，';
 $lang->aboutUs        = '關於我們';
 $lang->link           = '友情連結';
@@ -114,7 +114,7 @@ $lang->menu->blog    = '博客|article|admin|type=blog';
 $lang->menu->product = '產品|product|admin|';
 $lang->menu->book    = '手冊|book|admin|';
 $lang->menu->message = '評論留言|message|admin|';
-$lang->menu->page    = '頁面|article|admin|type=page';
+$lang->menu->page    = '單頁|article|admin|type=page';
 $lang->menu->forum   = '論壇|forum|admin|';
 $lang->menu->site    = '站點|site|setbasic|';
 $lang->menu->ui      = '界面|ui|setlogo|';
@@ -138,8 +138,8 @@ $lang->blog->menu->tree   = '類目管理|tree|browse|type=blog';
 /* Menu of page module. */
 $lang->page = new stdclass();
 $lang->page->menu = new stdclass();
-$lang->page->menu->browse = array('link' => '頁面列表|article|admin|type=page', 'alias' => 'edit');
-$lang->page->menu->create = '添加頁面|article|create|type=page';
+$lang->page->menu->browse = array('link' => '單頁列表|article|admin|type=page', 'alias' => 'edit');
+$lang->page->menu->create = '添加單頁|article|create|type=page';
 
 /* Menu of product module. */
 $lang->product = new stdclass();
@@ -151,11 +151,12 @@ $lang->product->menu->tree   = '類目管理|tree|browse|type=product';
 /* Menu of UI module. */
 $lang->ui = new stdclass();
 $lang->ui->menu = new stdclass();
-$lang->ui->menu->logo  = 'LOGO設置|ui|setlogo|';
-$lang->ui->menu->theme = '主題風格|ui|settheme|';
-$lang->ui->menu->slide = array('link' => '幻燈片設置|slide|admin|', 'alias' => 'create,edit');
-$lang->ui->menu->admin = array('link' => '區塊管理|block|admin|', 'alias' => 'create,edit');
-$lang->ui->menu->pages = array('link' => '佈局設置|block|pages|', 'alias' => 'setregion');
+$lang->ui->menu->logo    = 'LOGO設置|ui|setlogo|';
+$lang->ui->menu->favicon = '網站表徵圖|ui|setfavicon|';
+$lang->ui->menu->theme   = '主題風格|ui|settheme|';
+$lang->ui->menu->slide   = array('link' => '幻燈片設置|slide|admin|', 'alias' => 'create,edit');
+$lang->ui->menu->admin   = array('link' => '區塊管理|block|admin|', 'alias' => 'create,edit');
+$lang->ui->menu->pages   = array('link' => '佈局設置|block|pages|', 'alias' => 'setregion');
 
 /* Menu of comment module. */
 $lang->message = new stdclass();
@@ -179,7 +180,6 @@ $lang->site->menu->nav       = '導航設置|nav|admin|';
 $lang->site->menu->tag       = '關鍵詞設置|tag|admin|';
 $lang->site->menu->oauth     = '開放登錄|site|setoauth|';
 $lang->site->menu->link      = '友情連結|links|admin|';
-$lang->site->menu->favicon   = '網站表徵圖|site|favicon';
 $lang->site->menu->mail      = array('link' => '發信設置|mail|admin|', 'alias' => 'detect,edit,save,test');
 
 /* Menu of company module. */

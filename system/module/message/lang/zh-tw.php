@@ -47,6 +47,7 @@ $lang->message->statusList[1] = '已審核';
 $lang->message->readedStatus[0] = '未讀';
 $lang->message->readedStatus[1] = '已讀';
 
+$lang->comment = new stdclass();
 $lang->comment->common      = '評論';
 $lang->comment->id          = '編號';
 $lang->comment->type        = '類型';
@@ -80,3 +81,4 @@ $lang->comment->statusList[0] = '未審核';
 $lang->comment->statusList[1] = '已審核';
 
 $lang->message->replyItem = "<dd><strong>%s</strong> 于 <em>%s</em> 回覆：%s</dd>";
+$lang->comment->replyItem = "<dd><strong>%s</strong> 于 <em>%s</em> 回覆：%s</dd>";

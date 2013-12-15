@@ -10,6 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 $lang->product->common = '產品維護';
+$lang->product->home   = '產品中心';
 
 $lang->product->id         = '編號';
 $lang->product->category   = '類目';
