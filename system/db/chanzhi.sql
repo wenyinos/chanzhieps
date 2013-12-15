@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `eps_down` (
   `referer` varchar(200) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fileID` (`file`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_file`;
 CREATE TABLE IF NOT EXISTS `eps_file` (
