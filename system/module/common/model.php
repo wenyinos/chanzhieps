@@ -680,7 +680,7 @@ class commonModel extends model
 
         $config->requestType = $config->frontRequestType;
         $link = helper::createLink($module, $method, $vars, $alias);
-        $link = str_replace('admin.php', 'index.php', $link);
+        $link = str_replace($_SERVER['SCRIPT_NAME'], '/index.php', $link);
         $config->requestType = 'GET';
 
         return $link;

@@ -22,7 +22,9 @@ class navModel extends model
         global $config;
 
         if(!isset($config->nav->$type)) return $this->getDefault();
-        return json_decode($config->nav->$type);
+        $navs = json_decode($config->nav->$type);
+        foreach($navs as $nav) $nav->url = $this->getUrl($nav);   
+        return $navs;
     }
     
     /**
@@ -160,11 +162,8 @@ class navModel extends model
      */
     public function buildNav($nav)
     {
-        $nav['url'] = $this->getUrl($nav);
-
         /* Add class attribue to highlight current menu. */
         $nav['class']  = 'nav-' . $nav['type'] . '-' . $nav[$nav['type']]; 
-
         return $nav;
     }
 
@@ -178,22 +177,26 @@ class navModel extends model
     {
         global $config;
 
-        if($nav['type'] == 'system')  return $config->nav->system->$nav['system'];   
-        if($nav['type'] == 'article')
+        if($nav->type == 'system')  return $config->nav->system->{$nav->system};   
+
+        if($nav->type == 'article')
         {   
-            $category = $this->loadModel('tree')->getByID($nav['article']);
-            return commonModel::createFrontLink('article', 'browse', "categoryID={$nav['article']}", "category={$category->alias}");
+            $category = $this->loadModel('tree')->getByID($nav->article);
+            return commonModel::createFrontLink('article', 'browse', "categoryID={$nav->article}", "category={$category->alias}");
         }
-        if($nav['type'] == 'product')
+
+        if($nav->type == 'product')
         {
-            $category = $this->loadModel('tree')->getByID($nav['product']);
-            return commonModel::createFrontLink('product', 'browse', "categoryID={$nav['product']}", "category={$category->alias}");
+            $category = $this->loadModel('tree')->getByID($nav->product);
+            return commonModel::createFrontLink('product', 'browse', "categoryID={$nav->product}", "category={$category->alias}");
         }
-        if($nav['type'] == 'page')
+
+        if($nav->type == 'page')
         {
-            $page = $this->loadModel('article')->getByID($nav['page']);
-            return commonModel::createFrontLink('page', 'view', "pageID={$nav['page']}", "name={$page->alias}");
+            $page = $this->loadModel('article')->getByID($nav->page);
+            return commonModel::createFrontLink('page', 'view', "pageID={$nav->page}", "name={$page->alias}");
         }
-        return $nav['url'];
+
+        return $nav->url;
     }
 }
