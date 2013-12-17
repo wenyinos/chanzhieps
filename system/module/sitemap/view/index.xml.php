@@ -7,7 +7,7 @@
   $url        = $systemURL . helper::createLink('product', 'view', "id=$product->id", "category={$category->alias}&name=$product->alias");
   ?>
   <url>
-    <loc><?php echo urlencode($url);?></loc>
+    <loc><![CDATA[<?php echo $url;?>]]></loc>
     <lastmod><?php echo substr($product->editedDate, 0, 10);?></lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
@@ -20,7 +20,7 @@
   $url        = $systemURL . helper::createLink('article', 'view', "id=$article->id", "category={$category->alias}&name=$article->alias");
   ?>
   <url>
-    <loc><?php echo urlencode($url);?></loc>
+    <loc><![CDATA[<?php echo $url;?>]]></loc>
     <lastmod><?php echo substr($article->editedDate, 0, 10);?></lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
@@ -33,7 +33,7 @@
   $url        = $systemURL . helper::createLink('blog', 'view', "id=$blog->id", "category={$category->alias}&name=$blog->alias");
   ?>
   <url>
-    <loc><?php echo urlencode($url);?></loc>
+    <loc><![CDATA[<?php echo $url;?>]]></loc>
     <lastmod><?php echo substr($blog->editedDate, 0, 10);?></lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
@@ -45,7 +45,7 @@
   $url  = $systemURL . helper::createLink('book', 'read', "article=$menu->id&book={$code}", "name=$menu->alias");
   ?>
   <url>
-    <loc><?php echo urlencode($url);?></loc>
+    <loc><![CDATA[<?php echo $url;?>]]></loc>
     <lastmod><?php echo substr($menu->editedDate, 0, 10);?></lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
@@ -56,7 +56,7 @@
   $url = $systemURL . helper::createLink('thread', 'view', "id=$id");
   ?>
   <url>
-    <loc><?php echo urlencode($url);?></loc>
+    <loc><![CDATA[<?php echo $url;?>]]></loc>
     <lastmod><?php echo substr($editedDate, 0, 10);?></lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
