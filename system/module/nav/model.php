@@ -23,7 +23,19 @@ class navModel extends model
 
         if(!isset($config->nav->$type)) return $this->getDefault();
         $navs = json_decode($config->nav->$type);
-        foreach($navs as $nav) $nav->url = $this->getUrl($nav);   
+
+        foreach($navs as $nav)
+        {
+            $nav->url = $this->getUrl($nav);   
+            foreach($nav->children as $grade2Nav)
+            {
+                $grade2Nav->url = $this->getUrl($grade2Nav);   
+                foreach($grade2Nav->children as $grade3Nav)
+                {
+                    $grade3Nav->url = $this->getUrl($grade3Nav);   
+                }
+            }
+        }
         return $navs;
     }
     
