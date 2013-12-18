@@ -134,6 +134,11 @@ $lang->user->oauth->lblProfile    = "<h3>Register a new account</h3>";
 $lang->user->oauth->lblBind       = "<h3>Or bind an registered account</h3>";
 $lang->user->oauth->lblBindFailed = "Bind user failed！";
 
+$lang->user->statusList = new stdclass();
+$lang->user->statusList->locked    = "<label class='label label-danger'>Locked</label>";
+$lang->user->statusList->forbidden = "<label class='label label-danger'>Forbidden</label>";
+$lang->user->statusList->normal    = "<label class='label label-success'>Normal</label>";
+
 $lang->user->control = new stdclass();
 $lang->user->control->common      = 'User dashboard';
 $lang->user->control->welcome     = 'Welcome, <strong>%s</strong>';

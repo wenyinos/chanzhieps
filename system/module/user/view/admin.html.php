@@ -26,6 +26,7 @@
     <thead>
       <tr class='a-center'>
         <th class='w-60px'><?php echo $lang->user->id;?></th>
+        <th class='w-60px'><?php echo $lang->user->status;?></th>
         <th class='w-100px'><?php echo $lang->user->realname;?></th>
         <th class='w-100px'><?php echo $lang->user->nickname;?></th>
         <th class='w-80px'><?php echo $lang->user->account;?></th>
@@ -34,6 +35,7 @@
         <th class='w-150px'><?php echo $lang->user->join;?></th>
         <th class='w-80px'><?php echo $lang->user->visits;?></th>
         <th class='w-150px'><?php echo $lang->user->last;?></th>
+        <th class='w-150px'><?php echo $lang->user->ip;?></th>
         <th class='w-250px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
@@ -41,6 +43,11 @@
     <?php foreach($users as $user):?>
     <tr class='a-center'>
       <td><?php echo $user->id;?></td>
+      <td>
+      <?php if($user->fails > 4 and $user->locked > helper::now()) echo $lang->user->statusList->locked;?>
+      <?php if($user->fails <= 4 and $user->locked > helper::now()) echo $lang->user->statusList->forbidden;?>
+      <?php if($user->locked <= helper::now()) echo $lang->user->statusList->normal;?>
+      </td>
       <td><?php echo $user->realname;?></td>
       <td><?php echo $user->nickname;?></td>
       <td><?php echo $user->account;?></td>
@@ -49,6 +56,7 @@
       <td><?php echo $user->join;?></td>
       <td><?php echo $user->visits;?></td>
       <td><?php echo $user->last;?></td>
+      <td><?php echo $user->ip;?></td>
       <td class='operate'>
         <?php echo html::a($this->createLink('user', 'edit', "account=$user->account"), $lang->edit);?>
         <div class="btn-group">

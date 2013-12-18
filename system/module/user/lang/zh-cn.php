@@ -134,6 +134,11 @@ $lang->user->oauth->lblProfile    = "<h3>设置用户名，完成注册</h3>";
 $lang->user->oauth->lblBind       = "<h3>或绑定已有帐号</h3>";
 $lang->user->oauth->lblBindFailed = "绑定账户失败！";
 
+$lang->user->statusList = new stdclass();
+$lang->user->statusList->locked   = "<label class='label label-danger'>锁定</label>";
+$lang->user->statusList->forbided = "<label class='label label-danger'>禁用</label>";
+$lang->user->statusList->normal   = "<label class='label label-success'>正常</label>";
+
 $lang->user->control = new stdclass();
 $lang->user->control->common      = '用户中心';
 $lang->user->control->welcome     = '欢迎您，<strong>%s</strong>';
