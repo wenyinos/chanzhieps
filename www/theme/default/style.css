@@ -157,6 +157,7 @@
 /* style of text */
 .text-latin { font-family: Arial; }
 .text-lg { font-size: 24px; }
+tr.text-center > td { text-align: center; }
 
 /* form */
 .form-control[type='file'] { box-shadow: none; background-color: #fafafa; }
@@ -166,6 +167,10 @@
 .borderless.form-control{border-color: transparent;box-shadow: none; }
 .borderless.form-control:hover,.borderless.form-control:active,.borderless.form-control:focus {border-color: #506EAF; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
 form .star{display: none; }/* hide star */
+
+/* datepicker */
+.input-append{position: relative;}
+.input-append .add-on{display: block;position: absolute;right: 0;top: 0}
 
 /* nav */
 .nav li .icon-chevron-right { float: right; margin-top: 2px; margin-right: -6px; opacity: .25; }
@@ -184,13 +189,13 @@ form .star{display: none; }/* hide star */
 .form-group .file-form .form-group:last-child { margin-bottom: 0; }
 
 /* --- article --- */
-.page-wrapper .article { border: 1px solid #e5e5e5; border-radius: 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); margin-bottom: 20px; }
+.page-wrapper .article { border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); margin-bottom: 20px; }
 .page-wrapper .article > header > dl { margin: 0 0 10px; background: #fff; border: 0;padding: 5px 2px 0 2px;}
 .page-wrapper .article > header > .abstract {margin: 0 0 10px;padding: 10px 15px;}
 .page-wrapper .article > footer .pager { margin-bottom: 0; }
 
 /* --- list --- */
-.page-wrapper .list {border: 1px solid #e5e5e5; border-radius: 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);}
+.page-wrapper .list {border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);}
 .page-wrapper .list > header { padding: 10px 15px;background-color: #f1f1f1;color: #666}
 .page-wrapper .list > header h2 {font-size: 14px;font-weight: bold;margin: 0;padding: 0}
 
@@ -260,5 +265,5 @@ form .star{display: none; }/* hide star */
 #focus .panel-block:hover .panel-heading { background-color: #f6f6f6; }
 
 /* --- links --- */
-#links { border: 1px solid #e5e5e5; border-radius: 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); margin-bottom: 20px; }
+#links { border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); margin-bottom: 20px; }
 #links:hover{ box-shadow: 0 1px 5px rgba(0, 0, 0, 0.175); }
