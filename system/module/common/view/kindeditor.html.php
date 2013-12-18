@@ -8,6 +8,7 @@ if(!isset($config->$module->editor->$method)) return;
 
 /* Export $jsRoot var. */
 js::set('jsRoot', $jsRoot);
+js::set('themeRoot', $themeRoot);
 
 /* Get editor settings for current page. */
 $editors = $config->$module->editor->$method;
@@ -61,9 +62,11 @@ function initKindeditor(afterInit)
         var K = KindEditor;
         keEditor = K.create('#' + editorID,
         {
+            width:'100%',
             items:editorTool,
             filterMode:true, 
-            cssPath:[v.jsRoot + 'kindeditor/plugins/code/prettify.css'],
+            cssPath:[v.themeRoot + 'zui/css/zui.css'],
+            bodyClass:'article-content',
             urlType:'absolute', 
             uploadJson: createLink('file', 'ajaxUpload', 'uid=' + v.uid),
             imageTabIndex:1,
