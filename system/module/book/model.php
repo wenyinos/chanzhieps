@@ -152,7 +152,7 @@ class bookModel extends model
         $upLink      = html::a(helper::createLink('book', 'up', "nodeID=$node->id"), "<i class='icon-arrow-up'></i>", "class='sort'");
         $downLink    = html::a(helper::createLink('book', 'down', "nodeID=$node->id"), "<i class='icon-arrow-down'></i>", "class='sort'");
 
-        if($node->type == 'book')    $catalog .= "<dt class='book'><strong>" . $titleLink . '</strong><span class="actions">' . $editLink . $delLink . $catalogLink . '</span></dt>';
+        if($node->type == 'book')    $catalog .= "<dt class='book'><strong>" . $titleLink . '</strong><span class="actions">' . $editLink . $catalogLink . $delLink . '</span></dt>';
         if($node->type == 'chapter') $catalog .= "<dd class='catalog chapter'><strong><span class='order'>" . $serial . '</span>&nbsp;' . $titleLink . '</strong><span class="actions">' . $editLink . $catalogLink . $delLink . $upLink . $downLink . '</span></dd>';
         if($node->type == 'article') $catalog .= "<dd class='catalog article'><strong><span class='order'>" . $serial . '</span>&nbsp;' . $node->title . '</strong><span class="actions">' . $editLink . $filesLink . $delLink . $upLink . $downLink . '</span></dd>';
 
