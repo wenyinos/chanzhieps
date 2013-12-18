@@ -111,8 +111,6 @@
 .panel-heading > h1,.panel-heading > h2,.panel-heading > h3,.panel-heading > h4,.panel-heading > h5,.panel-heading > h6 {margin: 0}
 
 /* panel-block */
-.panel-block { }
-.panel-block .panel-heading { }
 .panel-block .panel-heading h4 { font-size: 14px; font-weight: bold; }
 .panel-block .panel-heading h4 [class^="icon-"] { display: inline-block;margin-right: 4px; }
 .panel-block .panel-body { padding: 10px 15px; }
@@ -238,7 +236,6 @@ form .star{display: none; }/* hide star */
 
 
 /* --- Navbar --- */
-#navbar { }
 #navbar .nav > li > a { font-weight: bold; padding: 15px 20px; }
 #navbar .nav > li > ul, #navbar .nav > li > ul > li > ul{padding: 0}
 #navbar .nav > li > ul > li > a, #navbar .nav > li > ul > li > ul > li > a { padding: 10px 20px; }
@@ -259,8 +256,6 @@ form .star{display: none; }/* hide star */
 #powerby:hover:before { left: 120%; }
 
 /* --- Focus of index --- */
-#focus {}
-#focus .panel-block {}
 #focus .panel-block { z-index: 1; position: relative; transition: all 0.4s; }
 #focus .panel-block .panel-heading { background-color: #f1f1f1; transition: all 0.4s; }
 #focus .panel-block:hover { box-shadow: 0 1px 5px rgba(0, 0, 0, 0.175); z-index: 10; background-color: #fff; }
