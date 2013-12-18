@@ -13,6 +13,7 @@ $.extend(
             success: function(response)
             {
                 $.enableForm(formID);
+                var submitButton = $(formID).find(':input[type=submit], .submit');
 
                 /* The response is not an object, some error occers, bootbox.alert it. */
                 if($.type(response) != 'object')
@@ -24,23 +25,24 @@ $.extend(
                 /* The response.result is success. */
                 if(response.result == 'success')
                 {
-                    var submitButton = $(formID).find(':input[type=submit], .submit');
                     if(response.message && response.message.length)
                     {
                         submitButton.popover({trigger:'manual', content:response.message, placement:'right'}).popover('show');
                         submitButton.next('.popover').addClass('popover-success');
-                        function distroy(){submitButton.popover('hide')}
+                        function distroy(){submitButton.popover('destroy')}
                         setTimeout(distroy,2000);
                     }
 
                     if($.isFunction(callback)) return callback(response);
+
                     if($('#responser').length && response.message && response.message.length)
                     {
                         $('#responser').html(response.message).addClass('red f-12px').show().delay(3000).fadeOut(100);
                     }
+
                     if(response.locate) 
                     {
-                        return setTimeout(function() { location.href = response.locate; }, 1200);
+                        return setTimeout(function(){location.href = response.locate;}, 1200);
                     }
 
                     return true;
@@ -55,10 +57,12 @@ $.extend(
                 {
                     if($('#responser').length == 0)
                     {
-                        if(form.parents('#ajaxModal').size()) return alert(response.message);
-                        return bootbox.alert(response.message);
+                        submitButton.popover({trigger:'manual', content:response.message, placement:'right'}).popover('show');
+                        submitButton.next('.popover').addClass('popover-danger');
+                        function distroy(){submitButton.popover('destroy')}
+                        setTimeout(distroy,2000);
                     }
-                    return $('#responser').html(response.message).addClass('red f-12px').show().delay(5000).fadeOut(100);
+                    $('#responser').html(response.message).addClass('red f-12px').show().delay(5000).fadeOut(100);
                 }
 
                 /* The result.message is just a object. */

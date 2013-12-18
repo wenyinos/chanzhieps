@@ -225,6 +225,8 @@ form .star{display: none; }/* hide star */
 .popover-success.right .arrow,.popover-success.right .arrow:after { border-right-color: #47A447; }
 .popover-success .popover-content:before { content: '\f058'; font-family: ZenIcon; display: inline-block; margin-right: 6px; }
 
+.popover-danger { background-color: #F8E3E6; border-color: #F8E3E6; color: #D2322D; }
+
 /* --- Header --- */
 #header { margin: 0 -15px; padding: 10px 15px; background: #fff; min-height: 100px; vertical-align: middle; position: relative; }
 #headTitle { display: table; min-height: 75px; }
