@@ -375,7 +375,7 @@ class commonModel extends model
         $moduleName = $this->app->getModuleName();
         $moduleName = $moduleName == 'reply' ? 'thread' : $moduleName;
         $funcName = "print$moduleName";
-        echo $this->$funcName($module, $object, $misc);
+        if(method_exists('commonModel', $funcName)) echo $this->$funcName($module, $object, $misc);
         echo '</ul>';
     }
     
@@ -661,6 +661,17 @@ class commonModel extends model
     {
         $divider = $this->lang->divider;
         echo '<li>' . $page->title . '</li>';
+    }
+
+    /**
+     * Print the position bar of message module.
+     * 
+     * @access public
+     * @return void
+     */
+    public function printMessage()
+    {
+        echo '<li>' . $this->lang->message->common . '</li>';
     }
 
     /**

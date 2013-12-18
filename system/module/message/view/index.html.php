@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.html.php';?>
+<?php $common->printPositionBar();?>
 <div class='row'>
   <div class='col-md-9'>
     <?php if(!empty($messages)):?>
@@ -76,7 +77,10 @@
             </tr>
             <tr>
               <th><?php echo $lang->message->public;?></th>
-              <td><input type='checkbox' name='public' value='1' checked='checked'  /></td>
+              <td>
+                <input type='checkbox' name='public' value='1' checked='checked'  />
+                <?php echo $this->lang->message->contactHidden;?>
+              </td>
             </tr>
             <tr id='captchaBox' style="display:none;"></tr>  
             <tr><td></td><td><div class=''><?php echo html::submitButton();?></div></td></tr>
