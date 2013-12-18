@@ -11,12 +11,12 @@ $themeRoot = $webRoot . "theme/";
 <html>
 <?php endif;?>
 <head profile="http://www.w3.org/2005/10/profile">
-  <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php if($this->app->getModuleName() == 'user' and $this->app->getMethodName() == 'deny'):?>
   <meta http-equiv='refresh' content="5;url='<?php echo helper::createLink('index');?>'">
   <?php endif;?>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <?php
   if(!isset($title))    $title    = '';
   if(!empty($title))    $title   .= $lang->minus;
@@ -31,10 +31,10 @@ $themeRoot = $webRoot . "theme/";
   if($config->debug)
   {
       js::import($jsRoot . 'jquery/min.js');
-      js::import($jsRoot . 'bootstrap/min.js');
+      js::import($jsRoot . 'zui/min.js');
       js::import($jsRoot . 'chanzhi.js');
       js::import($jsRoot . 'my.js');
-      css::import($themeRoot . 'bootstrap/css/core.min.css');
+      css::import($themeRoot . 'zui/css/min.css');
       css::import($themeRoot . 'default/style.css');
   }
   else
@@ -44,7 +44,8 @@ $themeRoot = $webRoot . "theme/";
   }
 
   if(RUN_MODE == 'admin') css::import($themeRoot . 'default/admin.css');
-  if(RUN_MODE == 'front' and $config->site->theme) css::import($themeRoot . $config->site->theme . '/style.css');
+  // the old themes do not support zui framework
+  // if(RUN_MODE == 'front' and $config->site->theme) css::import($themeRoot . $config->site->theme . '/style.css');
   if(isset($pageCSS)) css::internal($pageCSS);
 
   echo isset($this->config->site->favicon) ? html::icon(json_decode($this->config->site->favicon)->webPath) : html::icon($webRoot . 'favicon.ico');

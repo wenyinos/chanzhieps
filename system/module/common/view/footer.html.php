@@ -1,18 +1,18 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
   <?php if(RUN_MODE == 'front') $this->loadModel('block')->printRegion($layouts, 'all', 'footer');?>
-  <footer id="footer" class="clearfix">
-    <div id="footNav">
+  <footer id='footer' class='clearfix'>
+    <div id='footNav'>
       <?php
-      echo html::a($this->createLink('sitemap', 'index'), '<i class="icon-sitemap"></i> ' . $lang->sitemap->common);
+      echo html::a($this->createLink('sitemap', 'index'), "<i class='icon-sitemap'></i> " . $lang->sitemap->common);
 
-      if(empty($this->config->links->index) && !empty($this->config->links->all)) echo "&nbsp;" . html::a($this->createLink('links', 'index'), '<i class="icon-heart"></i>' . $this->lang->link);
+      if(empty($this->config->links->index) && !empty($this->config->links->all)) echo '&nbsp;' . html::a($this->createLink('links', 'index'), "<i class='icon-heart'></i>" . $this->lang->link);
       ?>
     </div>
-    <span id="copyrightInfo">
+    <span id='copyright'>
     <?php echo "&copy; {$config->company->name} {$config->site->copyright}-" . date('Y') . '&nbsp;&nbsp;';?>
     </span>
-    <span id="icpInfo"><?php echo $config->site->icp; ?></span>
-    <div id="powerby">
+    <span id='icpInfo'><?php echo $config->site->icp; ?></span>
+    <div id='powerby'>
       <?php printf($lang->poweredBy, $config->version, $config->version);?>
     </div>
   </footer>
@@ -33,7 +33,7 @@ $extHookRule  = $siteExtPath . 'footer.front.*.hook.php';
 $extHookFiles = glob($extHookRule);
 if($extHookFiles) foreach($extHookFiles as $extHookFile) include $extHookFile;
 ?>
-</div>
+</div><?php /* end "div.page-container" in "header.html.php" */ ?>
 <?php if(RUN_MODE == 'front') $this->loadModel('block')->printRegion($layouts, 'all', 'end');?>
 </body>
 </html>
