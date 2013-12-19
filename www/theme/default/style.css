@@ -102,6 +102,9 @@
 .panel-pure { box-shadow: none; border: 0; border-radius: 0; }
 .panel-pure .panel-heading { background-color: transparent; }
 
+.panel-actions{float: right;margin-top: -10px;margin-right: -5px;}
+.panel-actions .btn{margin-top: 3px;}
+
 .panel-heading-actions { float: right; margin-right: -15px; margin-top: -10px; transition: all .3s; }
 .panel:hover .panel-heading-actions { background-color: #d9e8f5; }
 .panel-heading-actions a { display: inline-block; padding: 10px 12px; color: #384D7A; transition: all .3s; }

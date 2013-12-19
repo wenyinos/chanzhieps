@@ -27,8 +27,8 @@ body {padding-top:70px; padding-bottom:70px;background: #fff; }
 .table-form td textarea{vertical-align:middle;margin:0;}
 .table-form .checkbox,.table-form input[type="radio"] + label{margin-right: 10px;}
 form .star{display: none; }/* hide star */
-form .required{position: relative;}
-form .required:after{top: -4px;}
+.table-form .required{position: relative;}
+.table-form .required:after{top: -4px;}
 td #aliasLabel{display: table-row;}
 
 /* left menu. */
