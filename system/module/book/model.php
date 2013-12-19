@@ -696,7 +696,7 @@ class bookModel extends model
      */
     public function addMenu($content)
     {
-        $nav = "<div id='contentNav'>";
+        $nav = "<ul class='nav nav-content'>";
         $content = str_replace('<h3', '<h4', $content);
         $content = str_replace('h3>', 'h4>', $content);
         preg_match_all('|<h4.*>(.*)</h4>|isU', $content, $result);
@@ -704,12 +704,12 @@ class bookModel extends model
         {
             foreach($result[0] as $id => $item)
             {
-                $nav .= "<div><a href='#$id'>" . strip_tags($item) . "</a></div>";
+                $nav .= "<li><a href='#$id'>" . strip_tags($item) . "</a></li>";
                 $replace = str_replace('<h4', "<h4 id=$id", $item);
                 $content = str_replace($item, $replace, $content);
             }
-            $nav .= "</div>";
-            $content = $nav . $content;
+            $nav .= "</ul>";
+            $content = $nav . "<div class='content'>" . $content . '</div>';
         }
 
         return $content;
