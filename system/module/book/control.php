@@ -64,8 +64,8 @@ class book extends control
         $content = $this->book->addMenu($article->content);
 
         $this->view->title    = $article->title . ' - ' . $book->title;;
-        $this->view->keywords = trim($article->keywords);
-        $this->view->desc     = trim($article->summary);
+        $this->view->keywords = $article->keywords;
+        $this->view->desc     = $article->summary;
         $this->view->article  = $article;
         $this->view->content  = $content;
 
@@ -90,9 +90,8 @@ class book extends control
         $this->book->setMenu();
 
         if($nodeID)  ($node = $this->book->getNodeByID($nodeID))   && $book   = $node->book;
-        if(!$nodeID) ($node = $book = $this->book->getFirstBook()) && $nodeID = $node->id;
-        if(!$node)   ($node = $book = $this->book->getFirstBook()) && $nodeID = $node->id;
-        if(!$node)   $this->locate(inlink('create'));
+        if(!$nodeID or !$node)   ($node = $book = $this->book->getFirstBook()) && $nodeID = $node->id;
+        if(!$node)  $this->locate(inlink('create'));
 
         $this->view->title   = $this->lang->book->common;
         $this->view->book    = $book;

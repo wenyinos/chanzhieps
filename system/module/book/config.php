@@ -1,6 +1,4 @@
 <?php
-$config->book->imgMaxWidth = 950;
-
 $config->book->require = new stdclass();
 $config->book->require->book = 'title, alias';
 $config->book->require->node = 'title';
