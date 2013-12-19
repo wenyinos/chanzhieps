@@ -1,4 +1,5 @@
 <?php include '../../common/view/header.html.php';?>
+<?php js::set('articleID', $article->id)?>
 <?php $common->printPositionBar($article->origins);?>
 <div class='box radius'>
   <div class='content'>

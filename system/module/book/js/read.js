@@ -1,4 +1,4 @@
 $(document).ready(function()
 {
-    $('#commentBox').load( createLink('message', 'index', 'objectType=article&objectID=' + v.articleID) );  
+    $('#commentBox').load( createLink('message', 'comment', 'objectType=book&objectID=' + v.articleID) );  
 });
