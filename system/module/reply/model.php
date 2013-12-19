@@ -124,7 +124,7 @@ class replyModel extends model
         $allowedTags = $this->app->user->admin == 'super' ? $this->config->allowedTags->admin : $this->config->allowedTags->front;
 
         $reply = fixer::input('post')
-            ->setForce('author', $this->app->user->account)
+            ->setForce('author', $this->app->user->realname)
             ->setForce('addedDate', helper::now())
             ->setForce('thread', $threadID)
             ->stripTags('content', $allowedTags)
