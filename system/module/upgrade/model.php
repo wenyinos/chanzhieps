@@ -387,7 +387,7 @@ class upgradeModel extends model
     public function setMessageBlocks()
     {
         $id = $this->dao->select('id')->from(TABLE_BLOCK)->where('type')->eq('contact')->fetch('id');
-        $this->dao->insert(TABLE_LAYOUT)->set('page')->eq('message_index')->set('region')->eq('side')->set('blocks')->eq($block)->exec();
+        $this->dao->insert(TABLE_LAYOUT)->set('page')->eq('message_index')->set('region')->eq('side')->set('blocks')->eq($id)->exec();
         return !dao::isError();
     }
     
