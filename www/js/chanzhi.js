@@ -585,9 +585,15 @@ function removeAnchor(url)
     return url;
 }
 
-function setPing()             
-{ 
-      $.get(createLink('misc', 'ping'));
+/**
+ * Ping to keep login 
+ * 
+ * @access public
+ * @return void
+ */
+function ping()
+{
+    $.get(createLink('misc', 'ping'));
 }
 needPing = true;
 if(config.runMode != 'admin') needPing = false;
