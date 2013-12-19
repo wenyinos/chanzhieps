@@ -18,45 +18,65 @@ js::set('path',  json_encode($path));
 include '../../common/view/treeview.html.php';
 ?>
 <?php echo $common->printPositionBar($category, $product);?>
-<div class='row'>
-  <div class='col-md-9'>
-    <div class='box radius'>
-      <h4 class='title'><?php echo $category->name;?></h4>
-      <ul class="media-list">
-        <?php foreach($products as $product):?>
-        <li class='media f-left'>
-          <?php 
-          $title = $product->image->primary->title ? $product->image->primary->title : $product->name;
-          if(empty($product->image)) 
-          {
-              echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&name=$product->alias"), html::image($themeRoot . 'default/images/main/noimage.gif', "title='{$title}' class='adaptive'"), "class='media-image'");
-          }
-          else
-          {
-              echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&name=$product->alias"), html::image($product->image->primary->middleURL, "title='{$title}' class='adaptive' alt='{$product->name}'"), "class='media-image'");
-          }
-          ?>
-          <div class='media-body'>
-            <h5 class='media-heading'><?php echo html::a(inlink('view', "id={$product->id}", "category={$category->alias}&name=$product->alias"), $product->name);?></h5>
-            <?php if($product->promotion != 0 && $product->price != 0):?>
-            <p>
-              <del><?php echo $lang->RMB . $product->price;?></del>
-              <em><?php echo $lang->RMB . $product->promotion;?></em>
-            </p>
-            <?php elseif($product->promotion == 0 && $product->price != 0):?>
-            <p><em><?php echo $lang->product->price . $lang->RMB . $product->price;?></em></p>
-            <?php elseif($product->promotion != 0 && $product->price == 0):?>
-            <p><em><?php echo $lang->product->promotion . $lang->RMB . $product->promotion;?></em></p>
-            <?php endif;?>
+<div class='page-wrapper'>
+  <div class='row'>
+    <div class='col-md-9'>
+      <div class='list list-condensed'>
+        <header><h2><i class='icon-th'></i> <?php echo $category->name;?></h2></header>
+        <section class='cards cards-products cards-borderless'>
+          <?php foreach($products as $product):?>
+          <div class='col-sm-4 col-xs-6'>
+            <div class='card'>
+            <?php 
+            $title = $product->image->primary->title ? $product->image->primary->title : $product->name;
+            if(empty($product->image)) 
+            {
+                echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&name=$product->alias"), '<div class="media-placeholder" style="background-color: hsl(' . rand(0,359) . ',34%,89%)">' . $product->name . '</div>', "class='media-wrapper'");
+            }
+            else
+            {
+                echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&name=$product->alias"), html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"), "class='media-wrapper'");
+            }
+            ?>
+            <?php echo html::a(inlink('view', "id={$product->id}", "category={$category->alias}&name=$product->alias"), '<strong>' . $product->name . '</strong>', "class='card-heading'");?>
+              <div class="card-content">
+              <?php
+              if($product->promotion != 0)
+              {
+                  echo "<strong class='text-muted'>" . $lang->RMB .'</strong>';
+                  echo "<strong class='text-danger text-lg'>" . $product->promotion . '</strong>&nbsp;&nbsp;';
+                  if($product->price != 0)
+                  {
+
+                      echo "<del class='text-muted'>" . $lang->RMB . $product->price .'</del>';
+                  }
+              }
+              else
+              {
+                  if($product->price != 0)
+                  {
+                      echo "<strong class='text-muted'>" . $lang->RMB .'</strong>';
+                      echo "<strong class='text-important text-lg'>" . $product->price . '</strong>&nbsp;&nbsp;';
+                  }
+                  else
+                  {
+                      echo "<span class='text-lg'>&nbsp;</span>";
+                  }
+              }
+              ?>
+              </div>
+            </div>
           </div>
-        </li>
-        <?php endforeach;?>
-        <div class='c-both'></div>
-      </ul>
-      <div class='w-p95 pd-10px clearfix'><?php $pager->show('right', 'short');?></div>
-      <div class='c-both'></div>
+          <?php endforeach;?>
+        </section>
+        <footer class='clearfix'>
+          <?php $pager->show('right', 'short');?>
+        </footer>
+      </div>
+    </div>
+    <div class='col-md-3'>
+      <side class='page-side'><?php $this->block->printRegion($layouts, 'product_browse', 'side');?></side>
     </div>
   </div>
-  <div class='col-md-3'><?php $this->block->printRegion($layouts, 'product_browse', 'side');?></div>
 </div>
 <?php include '../../common/view/footer.html.php';?>

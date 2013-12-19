@@ -111,8 +111,6 @@
 .panel-heading > h1,.panel-heading > h2,.panel-heading > h3,.panel-heading > h4,.panel-heading > h5,.panel-heading > h6 {margin: 0}
 
 /* panel-block */
-.panel-block { }
-.panel-block .panel-heading { }
 .panel-block .panel-heading h4 { font-size: 14px; font-weight: bold; }
 .panel-block .panel-heading h4 [class^="icon-"] { display: inline-block;margin-right: 4px; }
 .panel-block .panel-body { padding: 10px 15px; }
@@ -157,7 +155,8 @@
 /* style of text */
 .text-latin { font-family: Arial; }
 .text-lg { font-size: 24px; }
-tr.text-center > td { text-align: center; }
+tr.text-center > td, tr.text-center > th { text-align: center; }
+tr.text-center > td.text-left, tr.text-center > th.text-left { text-align: left; }
 
 /* form */
 .form-control[type='file'] { box-shadow: none; background-color: #fafafa; }
@@ -238,8 +237,8 @@ form .star{display: none; }/* hide star */
 
 
 /* --- Navbar --- */
-#navbar { }
-#navbar .nav > li > a { font-weight: bold; padding: 15px 20px; }
+#navbar { border-color: #ddd; }
+#navbar .nav > li > a { font-weight: bold; padding: 15px 20px; color: #555; }
 #navbar .nav > li > ul, #navbar .nav > li > ul > li > ul{padding: 0}
 #navbar .nav > li > ul > li > a, #navbar .nav > li > ul > li > ul > li > a { padding: 10px 20px; }
 @media (min-width: 992px){ .navbar-collapse .navbar-nav:first-child { margin-left: -15px; } }
@@ -247,7 +246,7 @@ form .star{display: none; }/* hide star */
 @media (max-width: 500px){ .navbar-collapse .navbar-nav > li {display: block;float: left;width: 50%; }}
 
 /* --- Footer --- */
-#footer { background-color: #f7f7f7; padding: 20px 15px; border: 1px solid #e5e5e5; border-radius: 4px; text-align: center; position: relative; }
+#footer { background-color: #f7f7f7; padding: 20px 15px; border: 1px solid #ddd; border-radius: 4px; text-align: center; position: relative; }
 #footNav { position: absolute; left: 15px; top: 20px; }
 #footNav a { display: inline-block; margin-right: 10px; color: #777; }
 #footNav a:hover { color: #506EAF }
@@ -259,8 +258,6 @@ form .star{display: none; }/* hide star */
 #powerby:hover:before { left: 120%; }
 
 /* --- Focus of index --- */
-#focus {}
-#focus .panel-block {}
 #focus .panel-block { z-index: 1; position: relative; transition: all 0.4s; }
 #focus .panel-block .panel-heading { background-color: #f1f1f1; transition: all 0.4s; }
 #focus .panel-block:hover { box-shadow: 0 1px 5px rgba(0, 0, 0, 0.175); z-index: 10; background-color: #fff; }

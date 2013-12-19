@@ -1,11 +1,13 @@
-.primary{float: left; width: 42%;}
-.primary a.big-image{display: block; text-align: center; width: 288px; line-height: 288px; border: 1px solid #E5E5E5; padding: 3px;}
-
-ul.list{margin: 5px 0 0 0; padding: 0; width: 288px;}
-ul.list li{width: 72px; height: 72px; float: left; list-style: none;}
-ul.list a.little-image{display: block; text-align: center; width: 70px; line-height: 70px; border: 1px solid #E5E5E5; padding: 1px;}
-
-.property{float: left; width: 54%; margin-left: 20px;}
-.property h1{font-size: 18px; font-weight: bold; margin: 0 0 20px 0;}
-.property table tr{height: 30px; border-bottom: 1px dotted #ddd;}
-.property em{color: #CC0000;}
+.product-image { background-color: #F1F1F1; text-align: center; max-height: 320px; overflow: hidden; }
+.product-image > img { width: 100%; }
+.product-image-menu { margin: 3px 0 0 0; }
+.product-image-menu > div { padding: 0; }
+.product-image-menu .product-image { background-color: #eee; height: 80px; line-height: 80px; overflow: hidden; border: 3px solid #fff; transition: all .2s cubic-bezier(0.175,0.885,0.32,1);
+ }
+.product-image-menu .product-image:hover { border: 1px solid #ccc; text-shadow: 0 0 3px rgba(0,0,0,0.2); opacity: 0.9; }
+.product-property .meta-name { width: 70px; padding-right: 15px; }
+.btn-buy .btn { min-width: 120px; }
+.product-property h1,.btn-buy { padding-left: 15px; padding-right: 15px; }
+@media (min-width: 992px){ .product-property h1,.btn-buy {   padding-left: 0;   padding-right: 0; } .product-property.product-lack-img h1,.product-lack-img .btn-buy { padding-left: 15px;   padding-right: 15px; } }
+.article-content { padding:0; }
+.header-dividing {margin-top: 20px;}

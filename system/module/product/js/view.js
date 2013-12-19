@@ -1,13 +1,10 @@
 $(document).ready(function()
 {
-   	$('a.little-image').click(function()
+   	$('.little-image img').click(function()
     {
-        $('a.big-image').html($(this).html().replace('s_', 'm_'));
-        $('a.big-image img').resizeImage(280, 280);
+        $('.product-image.media-wrapper img').attr('src', $(this).attr('src').replace('s_', 'm_'));
         return false;
-   	});
+    });
 
     $('#commentBox').load( createLink('message', 'comment', 'objectType=article&objectID=' + v.productID) );  
-    $('a.big-image img').resizeImage(280, 280);
-    $('a.little-image img').resizeImage(66, 66);
 })
