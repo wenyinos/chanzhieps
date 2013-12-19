@@ -11,7 +11,7 @@
         <td class='speaker'>
           <?php
           $speaker = $speakers[$reply->author];
-          printf($lang->thread->lblSpeaker, $speaker->account, $speaker->visits, $speaker->shortJoin, $speaker->shortLast);
+          printf($lang->thread->lblSpeaker, $speaker->realname, $speaker->visits, $speaker->shortJoin, $speaker->shortLast);
           ?>
         </td>
         <td id='<?php echo $reply->id;?>'>

@@ -128,7 +128,7 @@ class threadModel extends model
             ->stripTags('content', $allowedTags)
             ->setIF(!$canManage, 'readonly', 0)
             ->setForce('board', $boardID)
-            ->setForce('author', $this->app->user->realname)
+            ->setForce('author', $this->app->user->account)
             ->setForce('addedDate', $now) 
             ->setForce('editedDate', $now) 
             ->setForce('repliedDate', $now)
