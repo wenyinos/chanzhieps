@@ -1,9 +1,7 @@
 <?php
-$config->product->create = new stdclass();
-$config->product->create->requiredFields = 'categories, name, content';
-
-$config->product->edit = new stdclass();
-$config->product->edit->requiredFields = 'categories, name, content';
+$config->product->require = new stdclass();
+$config->product->require->create = 'categories, name, content';
+$config->product->require->edit   = 'categories, name, content';
 
 $config->product->editor = new stdclass();
 $config->product->editor->create = array('id' => 'content', 'tools' => 'full');

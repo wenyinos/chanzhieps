@@ -389,7 +389,7 @@ class treeModel extends model
         $this->dao->update(TABLE_CATEGORY)
             ->data($category, $skip = 'uid')
             ->autoCheck()
-            ->check('name', 'notempty')
+            ->check($this->config->tree->require->edit, 'notempty')
             ->where('id')->eq($categoryID)
             ->exec();
 

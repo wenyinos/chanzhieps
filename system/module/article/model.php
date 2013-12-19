@@ -249,8 +249,8 @@ class articleModel extends model
         $this->dao->insert(TABLE_ARTICLE)
             ->data($article, $skip = 'categories,uid')
             ->autoCheck()
-            ->batchCheckIF($type != 'page', $this->config->article->create->requiredFields, 'notempty')
-            ->batchCheckIF($type == 'page', $this->config->article->page->requiredFields, 'notempty')
+            ->batchCheckIF($type != 'page', $this->config->article->require->create, 'notempty')
+            ->batchCheckIF($type == 'page', $this->config->article->require->page, 'notempty')
             ->exec();
         $articleID = $this->dao->lastInsertID();
 
@@ -290,8 +290,8 @@ class articleModel extends model
         $this->dao->update(TABLE_ARTICLE)
             ->data($article, $skip = 'categories,uid')
             ->autoCheck()
-            ->batchCheckIF($type != 'page', $this->config->article->edit->requiredFields, 'notempty')
-            ->batchCheckIF($type == 'page', $this->config->article->page->requiredFields, 'notempty')
+            ->batchCheckIF($type != 'page', $this->config->article->require->edit, 'notempty')
+            ->batchCheckIF($type == 'page', $this->config->article->require->page, 'notempty')
             ->where('id')->eq($articleID)
             ->exec();
 
