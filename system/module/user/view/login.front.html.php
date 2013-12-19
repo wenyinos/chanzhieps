@@ -35,6 +35,7 @@ js::set('random', $this->session->random);
               <div class="form-group"><?php echo html::input('account','',"placeholder='{$lang->user->inputAccountOrEmail}' class='input-lg'");?></div>
               <div class="form-group"><?php echo html::password('password','',"placeholder='{$lang->user->inputPassword}' class='input-lg'");?></div>
               <?php echo html::submitButton($lang->user->login->common, 'btn btn-primary btn-wider btn-lg');?>
+              <?php echo html::a(inlink('register'), $lang->user->register->common);?>
               <?php if($config->mail->turnon) echo html::a(inlink('resetpassword'), $lang->user->recoverPassword);?>
               <?php echo html::hidden('referer', $referer);?>
             </form>

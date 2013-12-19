@@ -96,6 +96,7 @@ $lang->user->genderList->f = 'Female';
 $lang->user->genderList->u = '';
 
 $lang->user->register  = new stdclass();
+$lang->user->register->common     = 'Register';
 $lang->user->register->welcome    = 'Welcome to register as a member.';
 $lang->user->register->why        = 'After register, you can achieve mor features and services.';
 $lang->user->register->lblUserInfo= 'User info';

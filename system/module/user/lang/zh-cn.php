@@ -98,6 +98,7 @@ $lang->user->genderList->f = '女';
 $lang->user->genderList->u = '';
 
 $lang->user->register  = new stdclass();
+$lang->user->register->common      = '注册';
 $lang->user->register->welcome     = '欢迎注册成为会员';
 $lang->user->register->why         = '欢迎注册成为我们的会员，您可以享受更多的服务。';
 $lang->user->register->lblUserInfo = '用户信息';
