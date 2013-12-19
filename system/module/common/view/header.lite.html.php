@@ -5,7 +5,7 @@ $jsRoot    = $webRoot . "js/";
 $themeRoot = $webRoot . "theme/";
 ?>
 <!DOCTYPE html>
-<?php if(!empty($config->oauth->sina)):?>
+<?php if(RUN_MODE == 'front' and !empty($config->oauth->sina)):?>
 <html xmlns:wb="http://open.weibo.com/wb">
 <?php else:?>
 <html>
@@ -59,11 +59,11 @@ js::import($jsRoot . 'respond/min.js');
 <![endif]-->
 <?php js::set('lang', $lang->js);?>
 <?php
-if(!empty($config->oauth->sina)) $sina = json_decode($config->oauth->sina);
-if(!empty($config->oauth->qq))   $qq   = json_decode($config->oauth->qq);
-if(!empty($sina->verification)) echo $sina->verification; 
-if(!empty($qq->verification))   echo $qq->verification;
-if(empty($sina->verification) && !empty($sina->widget)) js::import('http://tjs.sjs.sinajs.cn/open/api/js/wb.js');
+if(RUN_MODE == 'front' and !empty($config->oauth->sina)) $sina = json_decode($config->oauth->sina);
+if(RUN_MODE == 'front' and !empty($config->oauth->qq))   $qq   = json_decode($config->oauth->qq);
+if(RUN_MODE == 'front' and !empty($sina->verification)) echo $sina->verification; 
+if(RUN_MODE == 'front' and !empty($qq->verification))   echo $qq->verification;
+if(RUN_MODE == 'front' and empty($sina->verification) && !empty($sina->widget)) js::import('http://tjs.sjs.sinajs.cn/open/api/js/wb.js');
 ?>
 <?php if(RUN_MODE == 'front') $this->block->printRegion($layouts, 'all', 'header');?>
 </head>
