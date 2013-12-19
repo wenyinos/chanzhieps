@@ -34,8 +34,7 @@
         <label class='col-sm-2 control-label required'><?php echo $lang->article->category;?></label>
         <div class='col-sm-4'>
         <?php 
-        $misc = strpos($type, 'book') !== false ? "class='form-control'" : "multiple='multiple' class='form-control chosen'";
-        echo html::select("categories[]", $categories, $currentCategory, $misc);
+        echo html::select("categories[]", $categories, $currentCategory, "multiple='multiple' class='form-control chosen'");
         ?>
         </div>
       </div>
@@ -62,7 +61,11 @@
         <label class='col-sm-2 control-label'><?php echo $lang->article->alias;?></label>
         <div class='col-sm-10'>
           <div class="input-group">
-            <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot?>article/id@</span>
+            <?php if($type == 'page'):?>
+            <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot?>page/</span>
+            <?php else:?>
+            <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot . $type?>/id_</span>
+            <?php endif;?>
             <?php echo html::input('alias', '', "class='form-control' placeholder='{$lang->alias}'");?>
             <span class="input-group-addon">.html</span>
           </div>
