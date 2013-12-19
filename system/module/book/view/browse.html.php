@@ -6,10 +6,10 @@
     <div class="list-group">
       <strong class="list-group-item list-group-title"><?php echo $lang->book->list;?></strong>
       <?php
-      foreach($books as $bookValue)
+      foreach($books as $menu)
       {
-          $class = 'list-group-item' . (($bookValue->title == $book->title) ? ' active' : '');
-          echo html::a(inlink('browse', "bookID=$bookValue->id", "book=$bookValue->alias"), '<i class="icon-book icon-large"></i>' . $bookValue->title . '<i class="icon-chevron-right"></i>', "class='$class'");
+          $class = 'list-group-item' . (($menu->id == $book->id) ? ' active' : '');
+          echo html::a(inlink('browse', "bookID=$menu->id", "book=$menu->alias"), '<i class="icon-book icon-large"></i>' . $menu->title . '<i class="icon-chevron-right"></i>', "class='$class'");
       }
       ?>
     </div>
