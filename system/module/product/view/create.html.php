@@ -30,7 +30,7 @@
         <label class='col-sm-2 control-label'><?php echo $lang->product->alias;?></label>
         <div class='col-sm-10'>
           <div class="input-group">
-            <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot?>product/id@</span>
+            <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot?>product/id_</span>
             <?php echo html::input('alias', '', "class='form-control' placeholder='{$lang->alias}'");?>
             <span class="input-group-addon">.html</span>
           </div>
