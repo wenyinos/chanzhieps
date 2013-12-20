@@ -4,7 +4,7 @@ include '../../common/view/treeview.html.php';
 ?>
 <?php $common->printPositionBar($page);?>
 <div class='row'>
-  <div class='col-md-12'>
+  <div class='col-md-9'>
     <div class='box radius'>
       <h4 class='title'><?php echo $page->title;?></h4>
       <div class='content'>
@@ -16,5 +16,6 @@ include '../../common/view/treeview.html.php';
       </div>
     </div>
   </div>
+  <div class='col-md-3'><?php $this->block->printRegion($layouts, 'page_view', 'side');?></div>
 </div>
 <?php include '../../common/view/footer.html.php'; ?>
