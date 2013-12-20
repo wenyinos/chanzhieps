@@ -11,7 +11,6 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<?php include './navcode.html.php';?>
 <?php js::set('cannotRemoveAll', $lang->nav->cannotRemoveAll); ?>
 <form class='form-inline' id='navForm' method='post'>
   <table class='table table-inline'>
