@@ -22,7 +22,7 @@ $lang->thread->views      = 'Views';
 $lang->thread->lastReply  = 'Last reply';
 
 $lang->thread->post       = 'Post';
-$lang->thread->postTo       = 'Post to';
+$lang->thread->postTo     = 'Post to';
 $lang->thread->browse     = 'Threads';
 $lang->thread->stick      = 'Sticky';
 $lang->thread->edit       = 'Edit';
