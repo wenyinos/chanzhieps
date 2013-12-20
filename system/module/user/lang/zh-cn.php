@@ -66,6 +66,7 @@ $lang->user->editProfile = '编辑信息';
 $lang->user->thread      = '我的主题';
 $lang->user->reply       = '我的回贴';
 
+$lang->user->message = new stdclass();
 $lang->user->message->mine = '我的消息';
 $lang->user->message->from = '来自';
 
