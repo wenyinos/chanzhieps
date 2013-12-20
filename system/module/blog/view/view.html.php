@@ -55,6 +55,6 @@ $common->printPositionBar($category, $article, '', $root);
     <div id='commentBox'></div>
     <?php echo html::a('', '', "name='comment'");?>
   </div>
-  <?php include './side.html.php';?>
+  <div class='col-md-3'><?php $this->block->printRegion($layouts, 'blog_view', 'side');?></div>
 </div>
 <?php include './footer.html.php';?>

@@ -1,5 +1,6 @@
 <?php include '../../common/view/header.html.php'; ?>
 <?php include '../../common/view/treeview.html.php'; ?>
+<?php $this->block->printRegion($layouts, 'forum_board', 'header');?>
 <?php $common->printPositionBar($board);?>
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -75,4 +76,5 @@
     </table>    
   </div>
 </div>
+<?php $this->block->printRegion($layouts, 'forum_board', 'footer');?>
 <?php include '../../common/view/footer.html.php'; ?>
