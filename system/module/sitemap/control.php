@@ -39,6 +39,7 @@ class sitemap extends control
         $this->view->productTree = $this->tree->getTreeMenu('product', 0, array('treeModel', 'createProductBrowseLink'));
         $this->view->blogTree    = $this->tree->getTreeMenu('blog', 0, array('treeModel', 'createBlogBrowseLink'));
         $this->view->boards      = $this->loadModel('forum')->getBoards();
+        $this->view->books       = $this->dao->select('id, title, alias')->from(TABLE_BOOK)->where('type')->eq('book')->fetchAll();
         $this->view->onlyBody    = $onlyBody;
 
         $this->display();
@@ -58,7 +59,15 @@ class sitemap extends control
         $this->loadModel('forum');
         $this->loadModel('thread');
 
-        $menus    = $this->dao->select('id, type, alias, editedDate, addedDate')->from(TABLE_ARTICLE)->where('type')->like("book_%")->fetchAll('id');
+        $bookAlias = $this->dao->select('id, alias')->from(TABLE_BOOK)->where('type')->eq('book')->fetchPairs('id', 'alias');
+        $nodes     = $this->dao->select('id, title, type, path, alias, editedDate, addedDate')->from(TABLE_BOOK)->fetchAll();
+        $this->loadModel('book');
+        foreach($nodes as $node)
+        {
+            $bookID     = $this->book->extractBookID($node->path); 
+            $node->book = $bookAlias[$bookID];
+        }
+
         $articles = $this->article->getList('article', $this->tree->getFamily(0, 'article'), 'id_desc');
         $blogs    = $this->article->getList('blog', $this->tree->getFamily(0, 'blog'), 'id_desc');
         $products = $this->product->getList($this->tree->getFamily(0), 'id_desc');
@@ -66,7 +75,7 @@ class sitemap extends control
         $threads  = $this->dao->select('id, editedDate')->from(TABLE_THREAD)->beginIf($board)->where('board')->in($board)->orderBy('id desc')->fetchPairs();
 
         $this->view->systemURL = commonModel::getSysURL();
-        $this->view->menus     = $menus;
+        $this->view->books     = $nodes;
         $this->view->articles  = $articles;
         $this->view->blogs     = $blogs;
         $this->view->products  = $products;
