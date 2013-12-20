@@ -14,6 +14,7 @@
           ?>
         </ul>
       </nav>
+      <?php $this->block->printRegion($layouts, 'book_browse', 'side');?>
     </div>
 
     <div class='col-md-9'>

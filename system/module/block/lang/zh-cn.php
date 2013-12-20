@@ -122,5 +122,6 @@ $lang->block->regions->thread_view['header']  = '上部';
 $lang->block->regions->forum_index['footer']  = '下部';
 $lang->block->regions->forum_board['footer']  = '下部';
 $lang->block->regions->thread_view['footer']  = '下部';
+$lang->block->regions->book_browse['side']    = '侧边';
 $lang->block->regions->message_index['side']  = '侧边';
 $lang->block->regions->page_view['side']      = '侧边';

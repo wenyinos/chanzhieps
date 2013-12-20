@@ -122,5 +122,6 @@ $lang->block->regions->thread_view['header']  = 'Header';
 $lang->block->regions->forum_index['footer']  = 'Footer';
 $lang->block->regions->forum_board['footer']  = 'Footer';
 $lang->block->regions->thread_view['footer']  = 'Footer';
+$lang->block->regions->book_browse['side']    = 'Side';
 $lang->block->regions->message_index['side']  = 'Side';
 $lang->block->regions->page_view['side']      = 'Side';
