@@ -114,5 +114,7 @@ $lang->block->regions->article_browse['side'] = 'Side';
 $lang->block->regions->article_view['side']   = 'Side';
 $lang->block->regions->product_browse['side'] = 'Side';
 $lang->block->regions->product_view['side']   = 'Side';
+$lang->block->regions->blog_index['side']     = 'Side';
+$lang->block->regions->blog_view['side']      = 'Side';
 $lang->block->regions->message_index['side']  = 'Side';
 $lang->block->regions->page_view['side']      = 'Side';

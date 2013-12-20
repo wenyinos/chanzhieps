@@ -46,6 +46,6 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
     <div class='w-p95 pd-10px clearfix'><?php $pager->show('right', 'short');?></div>
     <div class='c-both'></div>
   </div>
-  <?php include './side.html.php';?>
+  <div class='col-md-3'><?php $this->block->printRegion($layouts, 'blog_index', 'side');?></div>
 </div>
 <?php include './footer.html.php';?>

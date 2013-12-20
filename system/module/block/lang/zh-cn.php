@@ -114,5 +114,7 @@ $lang->block->regions->article_browse['side'] = '侧边';
 $lang->block->regions->article_view['side']   = '侧边';
 $lang->block->regions->product_browse['side'] = '侧边';
 $lang->block->regions->product_view['side']   = '侧边';
+$lang->block->regions->blog_index['side']     = '侧边';
+$lang->block->regions->blog_view['side']      = '侧边';
 $lang->block->regions->message_index['side']  = '侧边';
 $lang->block->regions->page_view['side']      = '侧边';
