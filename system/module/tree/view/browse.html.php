@@ -15,7 +15,6 @@
 <?php include '../../common/view/chosen.html.php';?>
 <?php 
 js::set('root', $root);
-js::set('book', $book);
 js::set('type', $type);
 ?>
 <?php if(strpos($treeMenu, '<li>') !== false):?>
