@@ -22,14 +22,19 @@ $('#submit').click(function()
                 dataType:'json',
                 success:function(data)
                 {
-                    if(data.result == 'fail') bootbox.alert(data.message);
+                    if(data.result == 'fail') showFormError(data.message);
                     if(data.result == 'success') location.href=data.locate;
-                    if(typeof(data) != 'object') bootbox.alert(data);
+                    if(typeof(data) != 'object') showFormError(data);
                 },
-                error:function(data){bootbox.alert(data.responseText)}
+                error:function(data){showFormError(data.responseText);}
             })
         },
-        error:function(data){bootbox.alert(data.responseText)}
+        error:function(data){showFormError(data.responseText);}
     })
     return false;
-})
+});
+
+function showFormError(text)
+{
+    $('#formError').text(text).show();
+}
