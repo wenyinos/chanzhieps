@@ -4,7 +4,7 @@
   <div class='col-md-10'>
     <form method='post' id='ajaxForm' action="<?php echo $this->createLink('message', 'batchDelete');?>">
       <table class='table table-bordered  table-hover' id='messages'>
-        <caption><?php echo $lang->user->message;?></caption>
+        <caption><?php echo $lang->user->message->mine;?></caption>
         <tr>
           <th class='w-10px'><input type='checkbox' id='selectAll'></th>
           <th class='w-50px'><?php echo $lang->user->message->from;?></th>
