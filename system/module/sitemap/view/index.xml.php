@@ -39,10 +39,10 @@
     <priority>0.8</priority>
   </url>
   <?php endforeach;?>
+  <?php foreach($books as $nodeID => $node):?>
   <?php
-  foreach($menus as $menu):
-  $code = str_replace('book_', '', $menu->type);
-  $url  = $systemURL . helper::createLink('book', 'read', "article=$menu->id&book={$code}", "name=$menu->alias");
+  if($book->type != 'article') $url  = $systemURL . helper::createLink('book', 'browse', "nodeID=$node->id", "book={$node->book}&node={$node->alias}");
+  if($book->type == 'article') $url  = $systemURL . helper::createLink('book', 'read', "nodeID=$node->id", "book={$node->book}&node={$node->alias}");
   ?>
   <url>
     <loc><![CDATA[<?php echo $url;?>]]></loc>

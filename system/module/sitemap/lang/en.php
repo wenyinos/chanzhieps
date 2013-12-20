@@ -13,4 +13,5 @@ $lang->sitemap->productCategory = 'Product category';
 $lang->sitemap->articleCategory = 'Article category';
 $lang->sitemap->blogCategory    = 'Blog category';
 $lang->sitemap->boards          = 'Boards';
+$lang->sitemap->books           = 'Manual';
 $lang->sitemap->xmlVersion      = 'XML';

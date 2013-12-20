@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php if($onlyBody == 'no') include '../../common/view/header.html.php';?>
+<?php if($onlyBody == 'no') include '../../common/view/header.html.php'; ?>
 <div class='panel panel-default'>
   <div class='panel-heading'>
     <h4><i class="icon-sitemap"></i> <?php echo $lang->sitemap->common;?></h4>
@@ -55,6 +55,16 @@
           </ul>
           <?php endif;?>
         </li>
+        <?php endforeach;?>
+      </ul>
+    </div>
+    <?php endif;?>
+    <?php if(!empty($books)):?>
+    <div class='clearfix'>
+      <h4><?php echo $lang->sitemap->books;?></h4>
+      <ul class='tree'>
+        <?php foreach($books as $book):?>
+        <li><?php echo html::a(helper::createLink('book', 'browse', "nodeID=$book->id", "book={$book->alias}"), $book->title);?></li>
         <?php endforeach;?>
       </ul>
     </div>

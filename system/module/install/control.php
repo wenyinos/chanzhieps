@@ -121,7 +121,7 @@ class install extends control
             $this->install->createAdmin();
             if(dao::isError()) die(js::error(dao::getError()));
             $this->loadModel('setting')->updateVersion($this->config->version);
-            die(js::locate(inlink('step5', "admin={$this->post->account}"), 'parent'));
+            die(js::locate(inlink('step5')));
         }
 
         if(!isset($this->config->installed) or !$this->config->installed)
@@ -140,11 +140,10 @@ class install extends control
     /**
      * Step5: save the admin user to the config.
      * 
-     * @param  string    $admin 
      * @access public
      * @return void
      */
-    public function step5($admin)
+    public function step5()
     {
         session_destroy();
         $this->view->title = $this->lang->install->success;
