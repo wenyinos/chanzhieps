@@ -93,7 +93,7 @@ $lang->block->pages['forum_board']    = 'Forum board';
 $lang->block->pages['thread_view']    = 'View thread';
 $lang->block->pages['search_list']    = 'Search';
 
-$lang->block->pages['book_index']     = 'Help';
+$lang->block->pages['book_index']     = 'Book';
 $lang->block->pages['book_browse']    = 'Book catalogue';
 $lang->block->pages['book_read']      = 'Book content';
 
