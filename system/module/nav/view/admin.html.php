@@ -12,47 +12,50 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php js::set('cannotRemoveAll', $lang->nav->cannotRemoveAll); ?>
-<form class='form-inline' id='navForm' method='post'>
-  <table class='table table-inline'>
-    <caption><?php echo $lang->nav->setNav;?></caption>
-    <tr>
-      <td>  
-        <ul class='navList ulGrade1'>
-          <?php 
-          foreach($navs as $nav)
-          {
-              echo "<li class='liGrade1'>";
-              echo $this->nav->createEntry(1, $nav);
-              if(isset($nav->children))
+<div class='panel'>
+  <div class='panel-heading'><strong><i class='icon-location-arrow'></i> <?php echo $lang->nav->setNav;?></strong></div>
+  <div class='panel-body'>
+    <form class='form-inline' id='navForm' method='post'>
+      <table class='table table-inline'>
+        <tr>
+          <td>  
+            <ul class='navList ulGrade1'>
+              <?php 
+              foreach($navs as $nav)
               {
-                  echo "<ul class='ulGrade2'>";
-                  foreach($nav->children as $nav2)
+                  echo "<li class='liGrade1'>";
+                  echo $this->nav->createEntry(1, $nav);
+                  if(isset($nav->children))
                   {
-                      echo "<li class='liGrade2'>";
-                      echo $this->nav->createEntry(2, $nav2);
-                      if(isset($nav2->children))
+                      echo "<ul class='ulGrade2'>";
+                      foreach($nav->children as $nav2)
                       {
-                          echo "<ul class='ulGrade3'>";
-                          foreach($nav2->children as $nav3)
+                          echo "<li class='liGrade2'>";
+                          echo $this->nav->createEntry(2, $nav2);
+                          if(isset($nav2->children))
                           {
-                              echo  "<li class='liGrade3'>". $this->nav->createEntry(3, $nav3) .'</li>';
+                              echo "<ul class='ulGrade3'>";
+                              foreach($nav2->children as $nav3)
+                              {
+                                  echo  "<li class='liGrade3'>". $this->nav->createEntry(3, $nav3) .'</li>';
+                              }
+                              echo '</ul>';
                           }
-                          echo '</ul>';
+                          echo '</li>';
                       }
-                      echo '</li>';
+                      echo '</ul>';
                   }
-                  echo '</ul>';
+                  echo '</li>';
               }
-              echo '</li>';
-          }
-          ?>
-          <li><?php echo html::a('javascript:;', $lang->save, "class='btn btn-primary submit' onclick='return submitForm()'")?></li>
-        </ul>
-      </td>
-    </tr>
-  </table>
-</form>
-
+              ?>
+              <li><?php echo html::a('javascript:;', $lang->save, "class='btn btn-primary submit' onclick='return submitForm()'")?></li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</div>
 <?php /* hidden navSource start .*/ ?>
 <div id='grade1NavSource' class='hide'>
   <li class='liGrade1'>

@@ -12,23 +12,29 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/kindeditor.html.php';?>
-<form method='post' id='ajaxForm'>
-  <table class='table table-form'>
-    <caption><?php echo $lang->links->common;?></caption> 
-    <tr>
-      <th><?php echo $lang->links->index;?></th> 
-      <td><?php echo html::textarea('index', $this->config->links->index, "class='area-1' rows='10'");?></td> 
-    </tr>
-    <tr>
-      <th><?php echo $lang->links->all;?></th> 
-      <td><?php echo html::textarea('all', $this->config->links->all, "class='area-1' rows='10'");?></td> 
-    </tr>
-    <tr>
-      <th></th>
-      <td>
-        <?php echo html::submitButton($lang->submit);?>
-      </td>
-    </tr>
-  </table>
-</form>
+<div class='panel'>
+  <div class='panel-heading'>
+    <strong><i class='icon-link'></i> <?php echo $lang->links->common;?></strong>
+  </div>
+  <div class='panel-body'>
+    <form method='post' id='ajaxForm'>
+      <table class='table table-form'>
+        <tr>
+          <th><?php echo $lang->links->index;?></th> 
+          <td><?php echo html::textarea('index', $this->config->links->index, "class='area-1' rows='10'");?></td> 
+        </tr>
+        <tr>
+          <th><?php echo $lang->links->all;?></th> 
+          <td><?php echo html::textarea('all', $this->config->links->all, "class='area-1' rows='10'");?></td> 
+        </tr>
+        <tr>
+          <th></th>
+          <td>
+            <?php echo html::submitButton($lang->submit);?>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</div>
 <?php include '../../common/view/footer.admin.html.php';?>

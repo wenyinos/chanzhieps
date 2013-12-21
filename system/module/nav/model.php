@@ -98,18 +98,18 @@ class navModel extends model
         $entry = '<i class="icon-folder-open shut"></i>';
 
         /* nav type select tag. */
-        $entry .= html::select("nav[{$grade}][type][]", $this->lang->nav->types, $nav->type, "class='navType' grade='{$grade}'");
+        $entry .= html::select("nav[{$grade}][type][]", $this->lang->nav->types, $nav->type, "class='navType form-control' grade='{$grade}'");
 
         /* artcle and system select tag. */
-        $entry .= html::select("nav[{$grade}][article][]", $articleTree, $nav->article, "class='navSelector {$articleHidden}'");
-        $entry .= html::select("nav[{$grade}][product][]", $productTree, $nav->product, "class='navSelector {$productHidden}'");
-        $entry .= html::select("nav[{$grade}][page][]", $pages, $nav->page, "class='navSelector {$pageHidden}'");
-        $entry .= html::select("nav[{$grade}][system][]", $this->lang->nav->system, $nav->system, "class='navSelector {$system}'");
+        $entry .= html::select("nav[{$grade}][article][]", $articleTree, $nav->article, "class='navSelector form-control {$articleHidden}'");
+        $entry .= html::select("nav[{$grade}][product][]", $productTree, $nav->product, "class='navSelector form-control {$productHidden}'");
+        $entry .= html::select("nav[{$grade}][page][]", $pages, $nav->page, "class='navSelector form-control {$pageHidden}'");
+        $entry .= html::select("nav[{$grade}][system][]", $this->lang->nav->system, $nav->system, "class='navSelector form-control {$system}'");
 
-        $entry .= html::input("nav[{$grade}][title][]", $nav->title, "placeholder='{$this->lang->nav->inputTitle}' class='input-default  titleInput'");
+        $entry .= html::input("nav[{$grade}][title][]", $nav->title, "placeholder='{$this->lang->nav->inputTitle}' class='input-default form-control titleInput'");
 
         /* url input tag. */
-        $entry .= html::input("nav[{$grade}][url][]", $nav->url, "placeholder='{$this->lang->nav->inputUrl}' class='urlInput {$urlHidden}'");
+        $entry .= html::input("nav[{$grade}][url][]", $nav->url, "placeholder='{$this->lang->nav->inputUrl}' class='urlInput form-control {$urlHidden}'");
 
         /* hidden tags. */
         if($grade >1 ) $entry .= html::hidden("nav[{$grade}][parent][]", '', "class='grade{$grade}parent'");
