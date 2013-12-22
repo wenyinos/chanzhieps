@@ -11,46 +11,50 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<form id='sortForm' action='<?php echo inLink('sort')?>' method='post'>
-  <table class='table table-hover table-bordered table-striped'>
-    <caption>
-      <div class='f-left'><?php echo $lang->slide->admin;?></div>
-      <div class='f-right'><?php echo html::a($this->inlink('create'), $lang->slide->create, "class='btn'");?></div>
-    </caption>
-    <thead>
-      <tr class='a-center'>
-        <th class='w-60px'><?php echo $lang->slide->sort;?></th>
-        <th class='w-100px'><?php echo $lang->slide->image;?></th>
-        <th class='w-p20'><?php echo $lang->slide->title;?></th>
-        <th><?php echo $lang->slide->summary;?></th>
-        <th class='w-100px'><?php echo $lang->slide->label;?></th>
-        <th class='w-150px'><?php echo $lang->actions;?></th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php foreach($slides as  $key => $slide):?>
-      <tr class='a-left v-middle'>
-        <td class='a-center'>
-          <i class='icon-arrow-up'></i>
-          <i class='icon-arrow-down'></i>            
-          <?php echo html::hidden("order[{$slide->id}]", $key);?>
-        </td>
-        <td class='a-center'><?php echo html::a($slide->image, html::image($slide->image, "class='image-small'"), "target='_blank'");?></td>
-        <td><?php echo $slide->title;?></td>
-        <td><?php echo $slide->summary;?></td>
-        <td><?php echo $slide->label;?></td>
-        <td class='a-center'>
-          <?php
-          echo html::a($this->createLink('slide', 'edit', "id=$slide->id"), $lang->edit);
-          echo html::a($this->createLink('slide', 'delete', "id=$slide->id"), $lang->delete, "class='deleter'");
-          ?>
-        </td>
-      </tr>
-      <?php endforeach;?>
-    </tbody>
-    <tfoot>
-    <tr><td colspan='6'><?php echo html::submitButton($this->lang->slide->saveSort);?></td></tr> 
-    </tfoot>
-  </table>
-</form>
+<div class='panel'>
+  <div class='panel-heading'>
+    <strong><i class='icon-picture'></i> <?php echo $lang->slide->admin;?></strong>
+    <div class='panel-heading-actions'>
+      <?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->slide->create, "class='action-primary'");?>
+    </div>
+  </div>
+  <form id='sortForm' action='<?php echo inLink('sort')?>' method='post'>
+    <table class='table table-hover table-bordered'>
+      <thead>
+        <tr class='text-center'>
+          <th><?php echo $lang->slide->sort;?></th>
+          <th><?php echo $lang->slide->image;?></th>
+          <th><?php echo $lang->slide->title;?></th>
+          <th><?php echo $lang->slide->summary;?></th>
+          <th><?php echo $lang->slide->label;?></th>
+          <th><?php echo $lang->actions;?></th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach($slides as  $key => $slide):?>
+        <tr class='text-middle'>
+          <td class='text-center'>
+            <i class='icon-arrow-up'></i>
+            <i class='icon-arrow-down'></i>            
+            <?php echo html::hidden("order[{$slide->id}]", $key);?>
+          </td>
+          <td class='text-center'><?php echo html::a($slide->image, html::image($slide->image, "class='image-small'"), "target='_blank'");?></td>
+          <td><?php echo $slide->title;?></td>
+          <td><?php echo $slide->summary;?></td>
+          <td><?php echo $slide->label;?></td>
+          <td class='text-center'>
+            <?php
+            echo html::a($this->createLink('slide', 'edit', "id=$slide->id"), $lang->edit);
+            echo html::a($this->createLink('slide', 'delete', "id=$slide->id"), $lang->delete, "class='deleter'");
+            ?>
+          </td>
+        </tr>
+        <?php endforeach;?>
+      </tbody>
+      <tfoot>
+      <tr><td colspan='6'>&nbsp;<?php echo html::submitButton($this->lang->slide->saveSort);?></td></tr> 
+      </tfoot>
+    </table>
+  </form>
+</div>
 <?php include '../../common/view/footer.admin.html.php';?>

@@ -1,0 +1,10 @@
+#logoPreview { margin: 0; padding: 10px 15px; background: #fff; min-height: 100px; vertical-align: middle; position: relative; }
+#navPreview{background: #F7F7F7;margin: 0;padding: 0;border-bottom:2px solid #999;border-top: 1px solid #e5e5e5; margin: 0;}
+#navPreview li { display: block; float: left; padding: 15px; color: #707070; }
+#navPreview li:hover { background-color: #e5e5e5; color: #000; }
+#navPreview li span { display: inline-block; height: 20px; line-height: 20px; }
+#setContainer { position: relative; }
+#setLogo { padding: 35px 20px 20px 30px; background-color: #f1f1f1; position: absolute; left: 35%; top: 10px; border: 1px solid #CCC; border: 1px solid rgba(0, 0, 0, 0.15); border-radius: 4px; transition:all 0.4s; opacity: 0; }
+.panel:hover #setLogo { -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175); box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175); opacity: 1; }
+#headNav,#siteSlogan,#navPreview,#siteName,#siteLogo { transition:all 0.4s; }
+.panel:hover #headNav,.panel:hover #siteSlogan,.panel:hover #navPreview { opacity: 0.3; }

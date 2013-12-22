@@ -29,3 +29,4 @@ $lang->ui->themes['flat']       = 'Flat';
 $lang->ui->themes['tree']       = 'Tree';
 $lang->ui->themes['brightdark'] = 'Brightdark';
 $lang->ui->themes['tartan']     = 'Tartan';
+$lang->ui->changetheme = 'Click to apply this theme';
