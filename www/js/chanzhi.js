@@ -372,31 +372,27 @@ $.extend(
         if($('a[data-toggle=modal]').size() == 0) return false;
 
         /* Addpend modal div. */
-        $('<div id="ajaxModal" class="modal fade modal-dialog"></div>').appendTo('body');
+        $('<div id="ajaxModal" class="modal fade"></div>').appendTo('body');
 
         /* Set the data target for modal. */
         $('a[data-toggle=modal]').attr('data-target', '#ajaxModal');
 
         $('a[data-toggle=modal]').click(function()
         {
-            $('#ajaxModal').load($(this).attr('href'));
+            var $e = $(this);
+            $('#ajaxModal').load($e.attr('href'),function()
+            {
+                /* Set the width of modal dialog. */
+                if($e.data('width'))
+                {
+                    var modalWidth = parseInt($e.data('width'));
+                    $(this).data('width', modalWidth).find('.modal-dialog').css('width', modalWidth);
+                }
+            });
+
             /* Save the href to rel attribute thus we can save it. */
             $('#ajaxModal').attr('rel', $(this).attr('href'));
-
-            /* Set the width and margin of modal. */
-            modalWidth      = 580;
-            modalMarginLeft = 280;
-            
-            /* User can customize the width by data-width=600. */
-            if($(this).data('width'))
-            {
-                modalWidth  = parseInt($(this).data('width')); 
-                modalMarginLeft = (modalWidth - 580) / 2 + 280;
-            }
-            /* Set the width and margin-left styles. */
-            $('#ajaxModal').css('width', modalWidth);
-            $('#ajaxModal').css('margin-left', '-' + modalMarginLeft + 'px')
-        });  
+        });
     },
 
     /**
@@ -409,7 +405,7 @@ $.extend(
     reloadAjaxModal: function(duration)
     {
        if(typeof(duration) == 'undefined') duration = 1000;
-       setTimeout(function(){$('#ajaxModal').load($('#ajaxModal').attr('rel'))}, duration);
+       setTimeout(function(){$('#ajaxModal').load($('#ajaxModal').attr('rel'), function(){$(this).find('.modal-dialog').css('width', $(this).data('width'))})}, duration);
     }
 });
 
