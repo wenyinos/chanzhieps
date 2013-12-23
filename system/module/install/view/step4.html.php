@@ -27,11 +27,11 @@
         <form method='post' class='form-horizontal'>
         <div class='form-group'>
           <label for='account' class='col-xs-2 control-label'><?php echo $lang->install->account;?></label>
-          <div class='col-xs-8'><?php echo html::input('account', '', 'class='form-control'');?></div>
+          <div class='col-xs-8'><?php echo html::input('account', '', "class='form-control'");?></div>
         </div>
         <div class='form-group'>
           <label for='password' class='col-xs-2 control-label'><?php echo $lang->install->password;?></label>
-          <div class='col-xs-8'><?php echo html::input('password', '', 'class='form-control'');?></div>
+          <div class='col-xs-8'><?php echo html::input('password', '', "class='form-control'");?></div>
         </div>
         <div class='form-group'>
           <div class='col-xs-2'></div>

@@ -11,9 +11,9 @@
 ?>
 <?php include '../../common/view/header.lite.html.php';?>
 <div class='container'>
-  <div class="cetner-focus">
-    <div class='jumbotron text-center'>
-      <h4><?php echo $lang->install->success;?></h4>
+  <div class="center-focus">
+    <div class='jumbotron'>
+      <div class="alert alert-success text-center"><h4><?php echo $lang->install->success;?></h4></div>
     </div>
     <div class='actions text-center'>
       <?php echo html::linkButton($lang->install->visitAdmin, 'admin.php', 'btn btn-primary');?>
