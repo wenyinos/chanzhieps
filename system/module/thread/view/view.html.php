@@ -16,11 +16,9 @@ $this->block->printRegion($layouts, 'thread_view', 'header');
 
 $common->printPositionBar($board, $thread);
 
-echo "<div class='page-wrapper'>";
 if($pager->pageID == 1) include './thread.html.php';
 if(!$thread->readonly)  include './reply.html.php';
 else echo "<div class='alert alert-info'>{$lang->thread->readonlyMessage}</div>";
-echo '</div>';
 
 $this->block->printRegion($layouts, 'thread_view', 'footer');
 
