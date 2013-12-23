@@ -14,8 +14,8 @@
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class='icon-th'></i> <?php echo $lang->block->browseBlocks;?></strong>
-    <div class='panel-heading-actions'>
-      <?php echo html::a(inlink('create'), '<i class="icon-plus"></i> ' . $lang->block->create, 'class="action-primary"');?>
+    <div class='panel-actions'>
+      <?php echo html::a(inlink('create'), '<i class="icon-plus"></i> ' . $lang->block->create, 'class="btn btn-info"');?>
     </div>
   </div>
   <table class='table table-bordered table-hover table-striped'>
