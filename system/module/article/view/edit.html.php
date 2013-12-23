@@ -85,7 +85,7 @@
     </div>
     <div class='form-group'>
       <label class='col-sm-2 control-label'><?php echo $lang->article->status;?></label>
-      <div class='col-sm-4'><?php echo html::select('original', $lang->article->statusList, $article->status, "class='form-control chosen'");?></div>
+      <div class='col-sm-4'><?php echo html::select('status', $lang->article->statusList, $article->status, "class='form-control chosen'");?></div>
     </div>
     <div class='form-group'>
       <div class="col-sm-2"></div><div class='col-sm-10'><?php echo html::submitButton();?></div>
