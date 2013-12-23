@@ -380,11 +380,14 @@ $.extend(
         $('a[data-toggle=modal]').click(function()
         {
             var $e = $(this);
-            $('#ajaxModal').load($e.attr('href'),function ()
+            $('#ajaxModal').load($e.attr('href'),function()
             {
                 /* Set the width of modal dialog. */
-                var modalWidth = $e.data('width') ? parseInt($e.data('width')) : 580;
-                $(this).data('width', modalWidth).find('.modal-dialog').css('width', modalWidth);
+                if($e.data('width'))
+                {
+                    var modalWidth = parseInt($e.data('width'));
+                    $(this).data('width', modalWidth).find('.modal-dialog').css('width', modalWidth);
+                }
             });
 
             /* Save the href to rel attribute thus we can save it. */
