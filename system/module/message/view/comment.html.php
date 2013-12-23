@@ -66,7 +66,6 @@ css::internal($pageCSS);
             <i class='icon-user text-muted'></i> <strong><?php echo $this->session->user->account ;?></strong>
             <?php if($this->session->user->email != ''): ?>
             <span class='text-muted'>&nbsp;(<?php echo $this->session->user->email;?>)</span>
-            <span class='text-danger'> &nbsp; <i class='icon-info'></i> 此处放置切换用户登录及注册链接</span>
             <?php 
             echo html::hidden('from', $this->session->user->account);
             echo html::hidden('email', $this->session->user->email);

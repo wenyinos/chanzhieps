@@ -18,8 +18,8 @@ js::set('path', json_encode($path));
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class='icon-book'></i> <?php echo $book->title;?></strong>
-    <div class='panel-heading-actions'>
-      <?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->book->createBook, "class='action-primary'");?>
+    <div class='panel-actions'>
+      <?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->book->createBook, "class='btn btn-info'");?>
     </div>
   </div>
   <div class='panel-body'><div class='books'><?php echo $catalog;?></div></div>
