@@ -43,7 +43,11 @@ $themeRoot = $webRoot . "theme/";
       js::import($jsRoot     . 'all.js');
   }
 
-  if(RUN_MODE == 'admin') css::import($themeRoot . 'default/admin.css');
+  if(RUN_MODE == 'admin')
+  {
+      css::import($themeRoot . 'default/admin.css');
+      js::import($jsRoot . 'my.admin.js');
+  }
   // the old themes do not support zui framework
   // if(RUN_MODE == 'front' and $config->site->theme) css::import($themeRoot . $config->site->theme . '/style.css');
   if(isset($pageCSS)) css::internal($pageCSS);
