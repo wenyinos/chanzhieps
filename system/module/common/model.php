@@ -658,7 +658,8 @@ class commonModel extends model
     public function printPage($page)
     {
         $divider = $this->lang->divider;
-        echo '<li>' . $page->title . '</li>';
+        if(!$page) echo '<li>' . $this->lang->page->list . '</li>';
+        if($page) echo '<li>' . $page->title . '</li>';
     }
 
     /**

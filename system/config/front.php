@@ -61,7 +61,8 @@ $config->rights->guest['file']['printfiles'] = 'printfiles';
 
 $config->rights->guest['error']['index'] = 'index';
 
-$config->rights->guest['page']['view'] = 'view';
+$config->rights->guest['page']['index'] = 'index';
+$config->rights->guest['page']['view']  = 'view';
 
 /* For logged member. */
 $config->rights->member['thread']['post']       = 'post';

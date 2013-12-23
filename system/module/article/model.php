@@ -64,7 +64,7 @@ class articleModel extends model
         {
             $articles = $this->dao->select('*')->from(TABLE_ARTICLE)
                 ->where('type')->eq('page')
-                ->orderBy($orderBy)
+                ->orderBy('id_desc')
                 ->page($pager)
                 ->fetchAll('id');
         }

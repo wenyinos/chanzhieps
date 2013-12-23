@@ -12,6 +12,23 @@
 class page extends control
 {
     /**
+     * The index page.
+     * 
+     * @access public
+     * @return void
+     */
+    public function index()
+    {
+        $pages = $this->loadModel('article')->getList('page');
+        $title = $this->lang->page->list;
+        
+        $this->view->title = $title;
+        $this->view->pages = $pages;
+
+        $this->display();
+    }
+
+    /**
      * View an page.
      * 
      * @param int $articleID 
