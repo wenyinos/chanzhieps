@@ -31,13 +31,13 @@ class page extends control
     /**
      * View an page.
      * 
-     * @param int $articleID 
+     * @param  int      $pageID 
      * @access public
      * @return void
      */
     public function view($pageID)
     {
-        $page = $this->loadModel('article')->getByID($pageID);
+        $page = $this->loadModel('article')->getPageByID($pageID);
 
         $title    = $page->title;
         $keywords = $page->keywords . ' ' . $this->config->site->keywords;

@@ -49,6 +49,30 @@ class articleModel extends model
         return $article;
     }   
 
+    /**
+     * Get page by ID.
+     * 
+     * @param  int    $pageID 
+     * @access public
+     * @return void
+     */
+    public function getPageByID($pageID)
+    {
+        /* Get article self. */
+        $page = $this->dao->select('*')->from(TABLE_ARTICLE)->where('alias')->eq($pageID)->andWhere('type')->eq('page')->fetch();
+        if(!$page) $page = $this->dao->select('*')->from(TABLE_ARTICLE)->where('id')->eq($pageID)->fetch();
+
+        if(!$page) return false;
+        
+        /* Add link to content if necessary. */
+        $page->content = $this->loadModel('tag')->addLink($page->content);
+        
+        /* Get it's files. */
+        $page->files = $this->loadModel('file')->getByObject('article', $pageID);
+
+        return $page;
+    }
+
     /** 
      * Get article list.
      * 
@@ -251,6 +275,7 @@ class articleModel extends model
             ->autoCheck()
             ->batchCheckIF($type != 'page', $this->config->article->require->create, 'notempty')
             ->batchCheckIF($type == 'page', $this->config->article->require->page, 'notempty')
+            ->checkIF($type == 'page', 'alias', 'unique', "type='page'")
             ->exec();
         $articleID = $this->dao->lastInsertID();
 
@@ -292,6 +317,7 @@ class articleModel extends model
             ->autoCheck()
             ->batchCheckIF($type != 'page', $this->config->article->require->edit, 'notempty')
             ->batchCheckIF($type == 'page', $this->config->article->require->page, 'notempty')
+            ->checkIF($type == 'page', 'alias', 'unique', "type='page'")
             ->where('id')->eq($articleID)
             ->exec();
 
