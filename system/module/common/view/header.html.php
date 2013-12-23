@@ -62,3 +62,4 @@ js::set('lang', $lang->js);
     </div>
   </nav>
 
+  <div class='page-wrapper'>

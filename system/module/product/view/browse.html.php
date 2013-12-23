@@ -18,65 +18,63 @@ js::set('path',  json_encode($path));
 include '../../common/view/treeview.html.php';
 ?>
 <?php echo $common->printPositionBar($category, $product);?>
-<div class='page-wrapper'>
-  <div class='row'>
-    <div class='col-md-9'>
-      <div class='list list-condensed'>
-        <header><h2><i class='icon-th'></i> <?php echo $category->name;?></h2></header>
-        <section class='cards cards-products cards-borderless'>
-          <?php foreach($products as $product):?>
-          <div class='col-sm-4 col-xs-6'>
-            <div class='card'>
-            <?php 
-            $title = $product->image->primary->title ? $product->image->primary->title : $product->name;
-            if(empty($product->image)) 
+<div class='row'>
+  <div class='col-md-9'>
+    <div class='list list-condensed'>
+      <header><h2><i class='icon-th'></i> <?php echo $category->name;?></h2></header>
+      <section class='cards cards-products cards-borderless'>
+        <?php foreach($products as $product):?>
+        <div class='col-sm-4 col-xs-6'>
+          <div class='card'>
+          <?php 
+          $title = $product->image->primary->title ? $product->image->primary->title : $product->name;
+          if(empty($product->image)) 
+          {
+              echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&name=$product->alias"), '<div class="media-placeholder" style="background-color: hsl(' . rand(0,359) . ',34%,89%)">' . $product->name . '</div>', "class='media-wrapper'");
+          }
+          else
+          {
+              echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&name=$product->alias"), html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"), "class='media-wrapper'");
+          }
+          ?>
+          <?php echo html::a(inlink('view', "id={$product->id}", "category={$category->alias}&name=$product->alias"), '<strong>' . $product->name . '</strong>', "class='card-heading'");?>
+            <div class="card-content">
+            <?php
+            if($product->promotion != 0)
             {
-                echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&name=$product->alias"), '<div class="media-placeholder" style="background-color: hsl(' . rand(0,359) . ',34%,89%)">' . $product->name . '</div>', "class='media-wrapper'");
+                echo "<strong class='text-muted'>" . $lang->RMB .'</strong>';
+                echo "<strong class='text-danger text-lg'>" . $product->promotion . '</strong>&nbsp;&nbsp;';
+                if($product->price != 0)
+                {
+
+                    echo "<del class='text-muted'>" . $lang->RMB . $product->price .'</del>';
+                }
             }
             else
             {
-                echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&name=$product->alias"), html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"), "class='media-wrapper'");
+                if($product->price != 0)
+                {
+                    echo "<strong class='text-muted'>" . $lang->RMB .'</strong>';
+                    echo "<strong class='text-important text-lg'>" . $product->price . '</strong>&nbsp;&nbsp;';
+                }
+                else
+                {
+                    echo "<span class='text-lg'>&nbsp;</span>";
+                }
             }
             ?>
-            <?php echo html::a(inlink('view', "id={$product->id}", "category={$category->alias}&name=$product->alias"), '<strong>' . $product->name . '</strong>', "class='card-heading'");?>
-              <div class="card-content">
-              <?php
-              if($product->promotion != 0)
-              {
-                  echo "<strong class='text-muted'>" . $lang->RMB .'</strong>';
-                  echo "<strong class='text-danger text-lg'>" . $product->promotion . '</strong>&nbsp;&nbsp;';
-                  if($product->price != 0)
-                  {
-
-                      echo "<del class='text-muted'>" . $lang->RMB . $product->price .'</del>';
-                  }
-              }
-              else
-              {
-                  if($product->price != 0)
-                  {
-                      echo "<strong class='text-muted'>" . $lang->RMB .'</strong>';
-                      echo "<strong class='text-important text-lg'>" . $product->price . '</strong>&nbsp;&nbsp;';
-                  }
-                  else
-                  {
-                      echo "<span class='text-lg'>&nbsp;</span>";
-                  }
-              }
-              ?>
-              </div>
             </div>
           </div>
-          <?php endforeach;?>
-        </section>
-        <footer class='clearfix'>
-          <?php $pager->show('right', 'short');?>
-        </footer>
-      </div>
+        </div>
+        <?php endforeach;?>
+      </section>
+      <footer class='clearfix'>
+        <?php $pager->show('right', 'short');?>
+      </footer>
     </div>
-    <div class='col-md-3'>
-      <side class='page-side'><?php $this->block->printRegion($layouts, 'product_browse', 'side');?></side>
-    </div>
+  </div>
+  <div class='col-md-3'>
+    <side class='page-side'><?php $this->block->printRegion($layouts, 'product_browse', 'side');?></side>
   </div>
 </div>
 <?php include '../../common/view/footer.html.php';?>

@@ -1,5 +1,5 @@
 <?php include '../../common/view/header.html.php';?>
-<div class='page-wrapper page-user-control'>
+<div class='page-user-control'>
   <div class='row'>
     <?php include './side.html.php';?>
     <div class='col-md-10'>

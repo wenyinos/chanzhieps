@@ -20,92 +20,89 @@ js::set('productID', $product->id);
 ?>
 <?php $common->printPositionBar($category, $product);?>
 <?php $title = $product->image->primary->title ? $product->image->primary->title : $product->name;?>
-
-<div class='page-wrapper'>
-  <div class='row'>
-    <div class='col-md-9'>
-      <div class='panel panel-body'>
-        <div class='row'>
-          <?php if(!empty($product->images)):?>
-          <div class='col-md-6'>
-            <div class='product-image media-wrapper'>
-              <?php echo html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'");?>
-            </div>
-            <div class='product-image-menu row'>
-              <?php foreach($product->image->list as $image):?>
-              <?php $title = $image->title ? $image->title : $product->name;?>
-              <div class='col-md-3 col-sm-2 col-xs-2'>
-                <div class='product-image little-image'>
-                  <?php echo html::image($image->smallURL, "title='{$title}' alt='{$product->name}'");?>
-                </div>
-              </div>
-              <?php endforeach;?>
-            </div>
+<div class='row'>
+  <div class='col-md-9'>
+    <div class='panel panel-body'>
+      <div class='row'>
+        <?php if(!empty($product->images)):?>
+        <div class='col-md-6'>
+          <div class='product-image media-wrapper'>
+            <?php echo html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'");?>
           </div>
-          <div class='col-md-6'>
-          <?php else:?>
-          <div class='col-md-12'>
-          <?php endif;?>
-            <div class='product-property<?php echo empty($product->images)?' product-lack-img':'';?>'>
-              <h1 class='header-dividing'><?php echo $product->name;?></h1>
-              <ul class='list-unstyled meta-list'>
-                <?php
-                if($product->promotion != 0)
-                {
-                    if($product->price != 0)
-                    {
-                        echo "<li><span class='meta-name'>" . $lang->product->price . "</span>";
-                        echo "<span class='meta-value'><span class='text-muted text-latin'>" . $lang->RMB . "</span> <del><strong class='text-latin'>" . $product->price . "</del></strong></span></li>";
-                    }
-                    echo "<li><span class='meta-name'>" . $lang->product->promotion . "</span>";
-                    echo "<span class='meta-value'><span class='text-muted text-latin'>" . $lang->RMB . "</span> <strong class='text-danger text-latin text-lg'>" . $product->promotion . "</strong></span></li>";
-                }
-                else if($product->price != 0)
-                {
-                    echo "<li><span class='meta-name'>" . $lang->product->price . "</span>";
-                    echo "<span class='meta-value'><span class='text-muted text-latin'>" . $lang->RMB . "</span> <strong class='text-important text-latin text-lg'>" . $product->price . "</strong></span></li>";
-                }
-                echo "<li><span class='meta-name'>" . $lang->product->amount . "</span>";
-                echo "<span class='meta-value'>" . $product->amount . " <small>" . $product->unit . "</small></span></li>";
-                echo "<li><span class='meta-name'>" . $lang->product->brand . "</span>";
-                echo "<span class='meta-value'>" . $product->brand . " <small>" . $product->model . "</small></span></li>";
-                if($product->color)
-                {
-                  echo "<li><span class='meta-name'>" . $lang->product->color . "</span>";
-                  echo "<span class='meta-value'>" . $product->color . "</span></li>";
-                }
-                if($product->origin)
-                {
-                  echo "<li><span class='meta-name'>" . $lang->product->origin . "</span>";
-                  echo "<span class='meta-value'>" . $product->origin . "</span></li>";
-                }
-                ?>
-              </ul>
-              <?php if($product->mall):?>
-              <hr>
-              <div class='btn-buy'>
-              <?php echo html::linkButton($lang->product->buyNow, $product->mall, 'btn btn-lg btn-primary');?>
+          <div class='product-image-menu row'>
+            <?php foreach($product->image->list as $image):?>
+            <?php $title = $image->title ? $image->title : $product->name;?>
+            <div class='col-md-3 col-sm-2 col-xs-2'>
+              <div class='product-image little-image'>
+                <?php echo html::image($image->smallURL, "title='{$title}' alt='{$product->name}'");?>
               </div>
-              <?php endif;?>
             </div>
+            <?php endforeach;?>
           </div>
         </div>
-        <h5 class='header-dividing'><i class='icon-file-text-alt text-muted'></i> <?php echo $lang->product->content;?></h5>
-        <div class='article-content'>
-          <?php echo $product->content;?>
-          <div class='files-list'>
-            <?php $this->product->printFiles($product->files);?>
+        <div class='col-md-6'>
+        <?php else:?>
+        <div class='col-md-12'>
+        <?php endif;?>
+          <div class='product-property<?php echo empty($product->images)?' product-lack-img':'';?>'>
+            <h1 class='header-dividing'><?php echo $product->name;?></h1>
+            <ul class='list-unstyled meta-list'>
+              <?php
+              if($product->promotion != 0)
+              {
+                  if($product->price != 0)
+                  {
+                      echo "<li><span class='meta-name'>" . $lang->product->price . "</span>";
+                      echo "<span class='meta-value'><span class='text-muted text-latin'>" . $lang->RMB . "</span> <del><strong class='text-latin'>" . $product->price . "</del></strong></span></li>";
+                  }
+                  echo "<li><span class='meta-name'>" . $lang->product->promotion . "</span>";
+                  echo "<span class='meta-value'><span class='text-muted text-latin'>" . $lang->RMB . "</span> <strong class='text-danger text-latin text-lg'>" . $product->promotion . "</strong></span></li>";
+              }
+              else if($product->price != 0)
+              {
+                  echo "<li><span class='meta-name'>" . $lang->product->price . "</span>";
+                  echo "<span class='meta-value'><span class='text-muted text-latin'>" . $lang->RMB . "</span> <strong class='text-important text-latin text-lg'>" . $product->price . "</strong></span></li>";
+              }
+              echo "<li><span class='meta-name'>" . $lang->product->amount . "</span>";
+              echo "<span class='meta-value'>" . $product->amount . " <small>" . $product->unit . "</small></span></li>";
+              echo "<li><span class='meta-name'>" . $lang->product->brand . "</span>";
+              echo "<span class='meta-value'>" . $product->brand . " <small>" . $product->model . "</small></span></li>";
+              if($product->color)
+              {
+                echo "<li><span class='meta-name'>" . $lang->product->color . "</span>";
+                echo "<span class='meta-value'>" . $product->color . "</span></li>";
+              }
+              if($product->origin)
+              {
+                echo "<li><span class='meta-name'>" . $lang->product->origin . "</span>";
+                echo "<span class='meta-value'>" . $product->origin . "</span></li>";
+              }
+              ?>
+            </ul>
+            <?php if($product->mall):?>
+            <hr>
+            <div class='btn-buy'>
+            <?php echo html::linkButton($lang->product->buyNow, $product->mall, 'btn btn-lg btn-primary');?>
+            </div>
+            <?php endif;?>
           </div>
         </div>
       </div>
-      <div id='comments'>
-        <div id='commentBox'></div>
-        <?php echo html::a('', '', "name='comment'");?>
+      <h5 class='header-dividing'><i class='icon-file-text-alt text-muted'></i> <?php echo $lang->product->content;?></h5>
+      <div class='article-content'>
+        <?php echo $product->content;?>
+        <div class='files-list'>
+          <?php $this->product->printFiles($product->files);?>
+        </div>
       </div>
     </div>
-    <div class='col-md-3'>
-      <side class='page-side'><?php $this->block->printRegion($layouts, 'product_view', 'side');?></side>
+    <div id='comments'>
+      <div id='commentBox'></div>
+      <?php echo html::a('', '', "name='comment'");?>
     </div>
+  </div>
+  <div class='col-md-3'>
+    <side class='page-side'><?php $this->block->printRegion($layouts, 'product_view', 'side');?></side>
   </div>
 </div>
 <?php include '../../common/view/footer.html.php'; ?>
