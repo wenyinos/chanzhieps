@@ -15,11 +15,10 @@
     <ul class='nav navbar-nav' id='navbarSwitcher'>
       <li><a href='###'><i class='icon-chevron-sign-right icon-large'></i></a></li>
     </ul>
-
-    <?php echo commonModel::createManagerMenu();?>
     <ul class='nav navbar-nav navbar-right'>
       <li class='dropdown'><?php include 'selectlang.html.php';?></li>
     </ul>
+    <?php echo commonModel::createManagerMenu();?>
   </div>
 </nav>
 
