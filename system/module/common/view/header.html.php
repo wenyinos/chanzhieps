@@ -28,10 +28,9 @@ js::set('lang', $lang->js);
         <span class='icon-bar'></span>
         <span class='icon-bar'></span>
       </button>
-      <a class='navbar-brand hidden-md hidden-lg' href='/'><i class='icon-home'></i></a>
+      <a class='navbar-brand' href='/'><i class='icon-home'></i></a>
     </div>
     <div class='collapse navbar-collapse' id='navbarCollapse'>
-      <!-- add css class '.nav-justified' to make the navbar fill the navbar. -->
       <ul class='nav navbar-nav'>
         <?php foreach($topNavs as $nav1):?>
           <?php if(empty($nav1->children)):?>

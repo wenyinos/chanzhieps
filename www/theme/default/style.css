@@ -221,6 +221,7 @@ label.checkbox,input[type='radio']+label{font-weight: normal;}
 #navbar .nav > li > ul, #navbar .nav > li > ul > li > ul{padding: 0}
 #navbar .nav > li > ul > li > a, #navbar .nav > li > ul > li > ul > li > a { padding: 10px 20px; }
 @media (min-width: 768px){
+#navbar .navbar-brand{display: none;}
 #navbar .navbar-collapse {padding: 0}
 #navbar .navbar-collapse .navbar-nav:first-child { margin: 0; }
 #navbar .nav{width: 100%}
