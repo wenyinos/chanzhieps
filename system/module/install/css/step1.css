@@ -1,3 +1,4 @@
-body{background-color: #F6F5F5;}
-.container{max-width:800px}
-.table{ background-color: #FFF; border: 1px solid #DDD; -moz-box-shadow: 0px 1px 15px rgba(0,0,0,0.15); -webkit-box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.15); box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.15);}
+.status-ok .hide-on-ok{display: none;}
+code {padding: 2px 4px;font-size: 90%;color: #C7254E;background-color: #F9F2F4;white-space: nowrap;border-radius: 4px;}
+.ok{color: green;}
+.fail{color: red;}
