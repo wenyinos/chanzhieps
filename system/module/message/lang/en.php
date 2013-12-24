@@ -84,3 +84,5 @@ $lang->comment->statusList[1] = 'Reviewed';
 
 $lang->message->replyItem = "<dd><strong>%s</strong> reply at <em>%s</em>：%s</dd>";
 $lang->comment->replyItem = "<dd><strong>%s</strong> reply at <em>%s</em>：%s</dd>";
+
+$lang->message->replySubject = 'Reply from administrator of %s';

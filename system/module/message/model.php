@@ -189,6 +189,17 @@ class messageModel extends model
             ->exec();
 
         if(dao::isError()) return false;
+
+        if(validater::checkEmail($message->email))
+        {
+            $mail = new stdclass();
+            $mail->to      = $message->email;
+            $mail->subject = sprintf($this->lang->message->replySubject, $this->config->site->name);
+            $mail->body    = $reply->content;
+
+            $this->loadModel('mail')->send($mail->to, $mail->subject, $mail->body);
+        }
+
         return $this->dao->lastInsertId();
     }
 
