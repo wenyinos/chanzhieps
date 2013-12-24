@@ -208,6 +208,9 @@ label.checkbox,input[type='radio']+label{font-weight: normal;}
 
 .popover-danger {background-color: #F8E3E6; border-color: #F8E3E6; color: #D2322D;}
 
+/* fix page in table footer */
+.table td .page,.table td .pager {padding: 0;margin: 0;}
+
 /* --- HEADER --- */
 #header {margin: 0 -15px; padding: 10px 15px; background: #fff; min-height: 100px; vertical-align: middle; position: relative;}
 #headTitle {display: table; min-height: 75px;}
