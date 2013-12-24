@@ -12,22 +12,26 @@
 ?>
 <?php include '../../common/view/header.lite.html.php';?>
 <div class='container'>
-  <div class='center-focus'>
-    <div class='jumbotron'>
-      <h3><?php echo $lang->install->welcome;?></h3>
-      <div><?php echo $lang->install->desc;?></div>
-    </div>
-    <div class='actions text-center'>
-      <?php if(!isset($latestRelease)):?>
-      <?php echo html::a($this->createLink('install', 'step1'), $lang->install->start, "class='btn btn-primary'");?>
-      <?php else:?>
-      <?php vprintf($lang->install->newReleased, $latestRelease);?>
-        <?php 
-        echo $lang->install->choice;
-        echo html::a($latestRelease->url, $lang->install->seeLatestRelease, "target='_blank'");
-        echo html::a($this->createLink('install', 'step1'), $lang->install->keepInstalling, "class='btn btn-primary'");
+  <div class='modal-dialog'>
+    <div class='modal-content'>
+      <div class='modal-body'>
+        <h3><?php echo $lang->install->welcome;?></h3>
+        <div><?php echo $lang->install->desc;?></div>
+      </div>
+      <div class='modal-footer'>
+        <?php
+        if(!isset($latestRelease))
+        {
+            echo html::a($this->createLink('install', 'step1'), $lang->install->start, "class='btn btn-primary'");
+        }
+        else
+        {
+            echo $lang->install->choice;
+            echo html::a($latestRelease->url, $lang->install->seeLatestRelease, "target='_blank'");
+            echo ' &nbsp; ' . html::a($this->createLink('install', 'step1'), $lang->install->keepInstalling, "class='btn btn-primary'");
+        }
         ?>
-      <?php endif;?>
+      </div>
     </div>
   </div>
 </div>
