@@ -128,6 +128,8 @@ $lang->block->regions->forum_board['footer']  = 'Footer';
 $lang->block->regions->thread_view['footer']  = 'Footer';
 
 $lang->block->regions->book_browse['side']    = 'Side';
+$lang->block->regions->book_read['header']  = 'Header';
+$lang->block->regions->book_read['footer']  = 'Footer';
 
 $lang->block->regions->message_index['side']  = 'Side';
 
