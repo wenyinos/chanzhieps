@@ -21,6 +21,9 @@ define('RUN_MODE', 'admin');
 /* Load the framework.*/
 include 'loader.php';
 
+/* Check admin entry. */
+checkAdminEntry();
+
 /* Instance the app. */
 $app = router::createApp('chanzhi', $systemRoot);
 $config = $app->config;

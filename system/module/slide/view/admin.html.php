@@ -15,7 +15,7 @@
   <div class='panel-heading'>
     <strong><i class='icon-picture'></i> <?php echo $lang->slide->admin;?></strong>
     <div class='panel-actions'>
-      <?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->slide->create, "class='btn btn-info'");?>
+      <?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->slide->create, "class='btn btn-primary'");?>
     </div>
   </div>
   <form id='sortForm' action='<?php echo inLink('sort')?>' method='post'>

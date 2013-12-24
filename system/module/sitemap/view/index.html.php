@@ -15,7 +15,7 @@
   <div class='panel-heading'>
     <h4><i class="icon-sitemap"></i> <?php echo $lang->sitemap->common;?></h4>
     <div class='panel-actions panel-actions-sm'>
-      <?php echo html::a(inlink('index', '', '', 'xml'), '<i class="icon-code"></i> ' . $lang->sitemap->xmlVersion, "class='btn btn-info btn-wider'");?>
+      <?php echo html::a(inlink('index', '', '', 'xml'), '<i class="icon-code"></i> ' . $lang->sitemap->xmlVersion, "class='btn btn-primary btn-wider'");?>
     </div>
   </div>
   <div class='panel-body'>

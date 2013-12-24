@@ -14,7 +14,7 @@
 <div class='panel'>
   <div class='panel-heading'>
   <strong><i class="icon-list-ul"></i> <?php echo $lang->product->list;?></strong>
-  <div class='panel-actions'><?php echo html::a($this->inlink('create', "category={$categoryID}"), '<i class="icon-plus"></i> ' . $lang->product->create, 'class="btn btn-info"');?></div>
+  <div class='panel-actions'><?php echo html::a($this->inlink('create', "category={$categoryID}"), '<i class="icon-plus"></i> ' . $lang->product->create, 'class="btn btn-primary"');?></div>
   </div>
   <table class='table table-hover table-striped tablesorter'>
     <thead>
