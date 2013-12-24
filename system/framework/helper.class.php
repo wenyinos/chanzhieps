@@ -511,3 +511,29 @@ function getWebRoot($full = false)
     }
     return substr($path, 0, (strrpos($path, '/') + 1));
 }
+
+/**
+ * Check admin entry. 
+ * 
+ * @access public
+ * @return string
+ */
+function checkAdminEntry()
+{
+    if(strpos($_SERVER['PHP_SELF'], 'admin.php') == false) return true; 
+
+    $path  = dirname($_SERVER['SCRIPT_FILENAME']);
+    $files = scandir($path);
+    $defaultFiles = array('admin.php', 'index.php', 'install.php', 'loader.php', 'upgrade.php');
+    foreach($files as $file)
+    {
+       if(strpos($file, '.php') != false and !in_array($file, $defaultFiles))
+       {
+         $contents      = file_get_contents($path . '/' . $file);
+         $hasAdmin      = strpos($contents, "admin");
+         $hasLoadModule = strpos($contents, "$app->loadModule()");
+
+         if($hasAdmin && $hasLoadModule && strpos($_SERVER['PHP_SELF'], '/admin.php') !== false) die(header('location: index.php'));
+       }
+    }
+}
