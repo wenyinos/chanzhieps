@@ -94,6 +94,7 @@
 .panel-actions{float: right;margin-top: -10px;margin-right: -10px;}
 .panel-actions .btn{margin-top: 3px;}
 .panel-heading > h1,.panel-heading > h2,.panel-heading > h3,.panel-heading > h4,.panel-heading > h5,.panel-heading > h6 {margin: 0}
+.panel-actions .btn.btn-link:hover{background: transparent;box-shadow: none;}
 
 /* panel-block */
 .panel-block .panel-heading h4 {font-size: 14px; font-weight: bold;}
@@ -143,7 +144,6 @@ tr.text-center > td, tr.text-center > th {text-align: center;}
 tr.text-center > td.text-left, tr.text-center > th.text-left {text-align: left;}
 
 /* form */
-.form-horizontal [class*="col-"]{padding-right: 20px;}
 .form-horizontal .control-label{padding-right: 0;}
 
 .form-control[type='file'] {box-shadow: none; background-color: #fafafa;}
@@ -174,7 +174,7 @@ td #aliasLabel {display: table-row;}
 form .star {display: none;}/* hide star */
 .required:after{font-family: arial;font-size: 24px}
 td.required,[class*="col-"].required {position: relative;}
-td.required:after,[class*="col-"].required:after {position: absolute; top: 6px; right: 5px}
+td.required:after,[class*="col-"].required:after {position: absolute; top: 6px; right: 2px}
 .control-label.required:after{right: -10px}
 td.required:after{right: -5px;top: 12px}
 
