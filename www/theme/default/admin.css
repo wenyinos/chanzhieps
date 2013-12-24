@@ -16,21 +16,6 @@ body {padding-top:70px; padding-bottom:70px;background: #fff;}
 #body-content {margin: 0;}
 #body-content > div {transition: all .8s cubic-bezier(0.175,0.885,0.32,1);}
 
-/* table form */
-.table-form>tbody>tr>th {text-align:right;vertical-align:middle; border-bottom:none}
-.table-form>tbody>tr>td {vertical-align:middle; border-bottom:none}
-.table-form>tfoot>tr>th {border-bottom:none}
-.table-form>tfoot>tr>td {border-bottom:none}
-.table>thead>tr>th.text-middle, .table>tbody>tr>th.text-middle, .table>tfoot>tr>th.text-middle, .table>thead>tr>td.text-middle, .table>tbody>tr>td.text-middle, .table>tfoot>tr>td.text-middle,.text-middle {vertical-align: middle;}
-.table-form td.v-bottom {vertical-align:bottom;}
-.table-form td input {vertical-align:middle;margin:0;}
-.table-form td textarea {vertical-align:middle;margin:0;}
-.table-form .checkbox,.table-form input[type="radio"] + label {margin-right: 10px;}
-form .star {display: none;}/* hide star */
-.table-form .required {position: relative;}
-.table-form .required:after {top: -4px;}
-td #aliasLabel {display: table-row;}
-
 /* left menu. */
 .leftmenu {box-shadow:0px 2px 1px rgba(0,0,0,0.15);width: 15%;border-radius: 4px}
 .leftmenu.affix {top:70px;}
@@ -38,7 +23,6 @@ td #aliasLabel {display: table-row;}
 
 /* panel */
 .panel {box-shadow:0px 2px 1px rgba(0,0,0,0.1);}
-.panel-body > form {max-width: 1000px;}
 .panel .table-bordered {border:none; margin-bottom: 0;}
 .panel .table-bordered > thead > tr:first-child th,.panel .table-bordered > tbody > tr:first-child th,.panel .table-bordered > tr:first-child th {border-top: 0;}
 .panel .table-bordered tr > td:first-child,.panel .table-bordered tr > th:first-child {border-left: 0;}

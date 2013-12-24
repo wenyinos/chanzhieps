@@ -31,8 +31,8 @@
     <form method='post' class='form-horizontal' role='form' id='ajaxForm'>
       <?php if($type != 'page'):?>
       <div class='form-group'>
-        <label class='col-sm-2 control-label required'><?php echo $lang->article->category;?></label>
-        <div class='col-sm-4'>
+        <label class='col-sm-2 control-label'><?php echo $lang->article->category;?></label>
+        <div class='col-sm-4 required'>
         <?php 
         echo html::select("categories[]", $categories, $currentCategory, "multiple='multiple' class='form-control chosen'");
         ?>
@@ -54,8 +54,8 @@
       </div>
       <?php endif; ?>
       <div class='form-group'>
-        <label class='col-sm-2 control-label required'><?php echo $lang->article->title;?></label>
-        <div class='col-sm-10'><?php echo html::input('title', '', "class='form-control'");?></div>
+        <label class='col-sm-2 control-label'><?php echo $lang->article->title;?></label>
+        <div class='col-sm-10 required'><?php echo html::input('title', '', "class='form-control'");?></div>
       </div>
       <div class='form-group'>
         <label class='col-sm-2 control-label'><?php echo $lang->article->alias;?></label>
