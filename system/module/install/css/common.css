@@ -1,11 +1,13 @@
 body{background-color: #f1f1f1}
-.center-focus { padding: 20px;margin: 10% auto; background-color: #FFF; border: 1px solid #DDD; -moz-box-shadow: 0px 1px 15px rgba(0,0,0,0.15); -webkit-box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.15); box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.15);border-radius: 5px; max-width: 700px; }
-.jumbotron { padding: 20px 50px; }
-.jumbotron blockquote { border-left: 0; padding: 0; }
-.jumbotron blockquote ul{ padding-left: 20px; }
+.jumbotron {padding: 20px 50px;}
+.jumbotron blockquote {border-left: 0; padding: 0;}
+.jumbotron blockquote ul{padding-left: 20px;}
+
+.center-focus {padding: 20px;margin: 10% auto; background-color: #FFF; border: 1px solid #DDD; -moz-box-shadow: 0px 1px 15px rgba(0,0,0,0.15); -webkit-box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.15); box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.15);border-radius: 5px; max-width: 700px;}
 .center-focus > .panel{margin-bottom: 0;}
 
-@media (max-width: 700px){ 
-  .center-focus{margin: 2% auto;padding: 15px;}
-  .jumbotron{padding: 20px;}
+@media (max-width: 700px)
+{
+    .center-focus{margin: 2% auto;padding: 15px;}
+    .jumbotron{padding: 20px;}
 }
