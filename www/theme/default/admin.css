@@ -54,13 +54,13 @@ td #aliasLabel{display: table-row;}
 /* Set css for tablesorter. */
 table.tablesorter thead tr div{padding:0; margin:0}
 table.tablesorter thead tr .header{cursor:pointer;}
-table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {color:#39B3D7;}
-table.tablesorter thead tr .headerSortDown a, table.tablesorter thead tr .headerSortUp a {color:#39B3D7}
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {color:#2973EA;}
+table.tablesorter thead tr .headerSortDown a, table.tablesorter thead tr .headerSortUp a {color:#2973EA}
 table.tablesorter thead tr .header a,table.tablesorter thead tr .headerSortUp a,table.tablesorter thead tr .headerSortDown a{display: inline-block; text-decoration:none}
 table.tablesorter thead tr .header a{color:#707070;}
 table.tablesorter thead tr .header:after {font-family: ZenIcon; font-weight: normal;content: " \f0dc";font-size: 14px;}
-table.tablesorter thead tr .headerSortUp:after {font-family: ZenIcon; font-weight: normal;content: " \f0d8";font-size: 14px;color:#39B3D7;}
-table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weight: normal;content: " \f0d7";font-size: 14px;color:#39B3D7;}
+table.tablesorter thead tr .headerSortUp:after {font-family: ZenIcon; font-weight: normal;content: " \f0d8";font-size: 14px;color:#2973EA;}
+table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weight: normal;content: " \f0d7";font-size: 14px;color:#2973EA;}
 
 /* Responsive. */
 @media(max-width:998px) { .affix{ position: inherit; } .leftmenu.affix{ top: 0; width: 100%; margin-bottom: 20px; } }
