@@ -11,31 +11,21 @@
 ?>
 <?php include '../../common/view/header.lite.html.php';?>
 <div class='container'>
-  <div class="center-focus">
+  <div class='modal-dialog'>
+    <div class='modal-content'>
     <?php if(isset($error)):?>
-    <div class="panel panel-pure">
-      <div class="panel-heading"><strong><?php echo $lang->install->error;?></strong></div>
-      <div class="panel-body">
-        <div class="alert alert-danger"><?php echo $error;?></div>
-        <div class="text-center"><?php echo html::backButton($lang->install->pre, 'btn btn-primary');?></div>
-      </div>
+    <div class='modal-header'><strong><?php echo $lang->install->error;?></strong></div>
+    <div class='modal-body'><div class='alert alert-danger'><?php echo $error;?></div></div>
+    <div class='modal-footer'><?php echo html::backButton($lang->install->pre, 'btn btn-primary');?></div>
+    <?php else: ?>
+    <div class='modal-header'><strong><?php echo $lang->install->saveConfig;?></strong></div>
+    <div class='modal-body'>
+      <div class='form-group'><?php echo html::textArea('config', $result->content, "rows='10' class='form-control small'");?></div>
+      <div class='alert alert-warning'><?php printf($lang->install->save2File, $result->myPHP);?></div>
     </div>
-    <?php else:?>
-    <div class="panel panel-pure">
-      <div class="panel-heading"><strong><?php echo $lang->install->saveConfig;?></strong></div>
-      <table class='table table-bordered'>
-        <tr>
-          <td>
-            <?php 
-            echo html::textArea('config', $result->content, "rows='10' class='area-1 f-12px'");
-            printf($lang->install->save2File, $result->myPHP);
-            ?>
-          </td>
-        </tr>
-        <tr><td class='text-center'><?php echo html::a(inlink('step4'), $lang->install->next, "class='btn btn-primary'");?></td></tr>
-      </table>
-    </div>
+    <div class='modal-footer'><?php echo html::a(inlink('step4'), $lang->install->next, "class='btn btn-primary'");?></div>
     <?php endif;?>
+    </div>
   </div>
 </div>
 <?php include './footer.html.php';?>

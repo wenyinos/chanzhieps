@@ -1,13 +1,11 @@
 body{background-color: #f1f1f1}
-.jumbotron {padding: 20px 50px;}
-.jumbotron blockquote {border-left: 0; padding: 0;}
-.jumbotron blockquote ul{padding-left: 20px;}
+.container{padding: 0}
+.modal-dialog{padding-top: 7%;width: 800px}
+.modal-footer{text-align: center;margin-top: 0;}
 
-.center-focus {padding: 20px;margin: 10% auto; background-color: #FFF; border: 1px solid #DDD; -moz-box-shadow: 0px 1px 15px rgba(0,0,0,0.15); -webkit-box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.15); box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.15);border-radius: 5px; max-width: 700px;}
-.center-focus > .panel{margin-bottom: 0;}
+.table,.alert{margin: 0;}
+.table+.alert{margin-top: 20px;}
+.table.table-form>thead>tr>th, .table.table-form>tbody>tr>th, .table.table-form>tfoot>tr>th{color: #666}
+.table.table-form>thead>tr>th, .table.table-form>tbody>tr>th, .table.table-form>tfoot>tr>th, .table.table-form>thead>tr>td, .table.table-form>tbody>tr>td, .table.table-form>tfoot>tr>td{vertical-align: middle;}
 
-@media (max-width: 700px)
-{
-    .center-focus{margin: 2% auto;padding: 15px;}
-    .jumbotron{padding: 20px;}
-}
+@media (max-width: 700px){.modal-dialog{padding: 0;} .modal-content{box-shadow: none;border-width: 1px 0;border-radius: 0}}
