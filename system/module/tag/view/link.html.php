@@ -13,7 +13,7 @@
 <div class='modal-dialog' style='width:600px;'>
   <div class='modal-content'>
     <div class='modal-header'>
-      <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
+      <?php echo html::closeButton();?>
       <h4 class='modal-title'><i class='icon-edit'></i> <?php echo $lang->tag->editLink;?></h4>
     </div>
     <div class='modal-body'>

@@ -1,7 +1,7 @@
 <div class="modal-dialog" style='width:1000px'>
   <div class="modal-content">
     <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <?php echo html::closeButton();?>
       <h4 class="modal-title" id="ajaxModalTitle"><i class="icon-paper-clip"></i> <?php echo $lang->file->browse;?></h4>
     </div>
     <div class="modal-body">

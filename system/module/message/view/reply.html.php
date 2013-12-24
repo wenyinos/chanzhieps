@@ -1,7 +1,7 @@
 <div class='modal-dialog' style='width: 580px'>
   <div class='modal-content'>
     <div class='modal-header'>
-      <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
+      <?php echo html::closeButton();?>
       <h4 class='modal-title' id='myModalLabel'><i class='icon-mail-reply'></i> <?php echo $lang->message->reply . ':' . $message->from;?></h4>
     </div>
     <div class='modal-body'>

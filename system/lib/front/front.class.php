@@ -381,6 +381,17 @@ class html
         }
         return " <input type='button' value='$label' class='$class'  $misc onclick='history.back(-1);' /> ";
     }
+
+    /**
+     create a button to close.
+     *
+     * @access public
+     * @return string
+     */
+    public static function closeButton()
+    {
+        return "<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>";
+    }
 }
 
 /**
