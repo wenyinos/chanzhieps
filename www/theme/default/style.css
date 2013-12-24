@@ -273,7 +273,7 @@ td.required:after{right: -5px;top: 12px}
 #footer {background-color: #f7f7f7; padding: 20px 15px; border: 1px solid #ddd; border-radius: 4px; text-align: center; position: relative;}
 #footNav {position: absolute; left: 15px; top: 20px;}
 #footNav a {display: inline-block; margin-right: 10px; color: #777;}
-#footNav a:hover {color: #506EAF}
+#footNav a:hover {color: #145BCC}
 #copyrightInfo,#icpInfo {color: #999; font-size: 12px;}
 #powerby {position: absolute; right: 15px; top: 15px; background-color: #ccc; border: #bbb 1px solid; border-radius: 2px; padding: 5px 10px; overflow: hidden; font-size: 12px; transition: all .5s cubic-bezier(0.175,0.885,0.32,1); text-shadow:-1px -1px 0px rgba(0,0,0,0.2); -moz-box-shadow:inset 0px 1px 0 rgba(255,255,255,0.4); -webkit-box-shadow:inset 0px 1px 0 rgba(255,255,255,0.4); box-shadow:inset 0px 1px 0 rgba(255,255,255,0.4);}
 #powerby, #powerby a {color: #fff;}

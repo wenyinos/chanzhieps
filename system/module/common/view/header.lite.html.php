@@ -48,8 +48,8 @@ $themeRoot = $webRoot . "theme/";
       css::import($themeRoot . 'default/admin.css');
       js::import($jsRoot . 'my.admin.js');
   }
-  // the old themes do not support zui framework
-  // if(RUN_MODE == 'front' and $config->site->theme) css::import($themeRoot . $config->site->theme . '/style.css');
+
+  if(RUN_MODE == 'front' and $config->site->theme) css::import($themeRoot . $config->site->theme . '/style.css');
   if(isset($pageCSS)) css::internal($pageCSS);
 
   echo isset($this->config->site->favicon) ? html::icon(json_decode($this->config->site->favicon)->webPath) : html::icon($webRoot . 'favicon.ico');
