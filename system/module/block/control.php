@@ -72,6 +72,8 @@ class block extends control
      */
     public function edit($blockID, $type = '')
     {
+        if(!$blockID) $this->locate($this->inlink('admin'));
+
         if($_POST)
         {
             $this->block->update();
