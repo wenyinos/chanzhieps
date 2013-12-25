@@ -107,7 +107,7 @@ class bookModel extends model
         if(!$node) return $catalog;
 
         $book   = $this->getBookByNode($node);
-        $serial = $serials[$node->id];
+        if($node->type != 'book') $serial = $serials[$node->id];
 
         if($node->type == 'chapter') $link = helper::createLink('book', 'browse', "nodeID=$node->id", "book=$book->alias&node=$node->alias");
         if($node->type == 'article') $link = helper::createLink('book', 'read', "articleID=$node->id", "book=$book->alias&node=$node->alias");
@@ -142,7 +142,7 @@ class bookModel extends model
         if(!$node) return $catalog;
 
         $children = $this->getChildren($nodeID);
-        $serial   = $serials[$nodeID];
+        if($node->type != 'book') $serial = $serials[$nodeID];
 
         $titleLink   = $node->type == 'book' ? $node->title : html::a(helper::createLink('book', 'admin', "bookID=$node->id"), $node->title);
         $editLink    = html::a(helper::createLink('book', 'edit', "nodeID=$node->id"), $this->lang->edit);

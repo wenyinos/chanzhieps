@@ -15,7 +15,8 @@
 <?php include '../../common/view/chosen.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
-    <strong><i class="icon-plus"></i> <?php echo $lang->product->create;?></strong></div>
+    <strong><i class="icon-plus"></i> <?php echo $lang->product->create;?></strong>
+  </div>
   <div class='panel-body'>
     <form method='post' id='ajaxForm'>
       <table class='table table-form'>

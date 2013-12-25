@@ -18,11 +18,13 @@
   </div>
   <div class='panel-body'>
     <form method='post' id='ajaxForm' enctype='multipart/form-data'>
-      <div class='form-group'>
-          <?php if(isset($this->config->site->favicon)) echo "<div class='col-sm-2'>" . html::image($favicon->webPath) . '</div>';?>
-          <div class='col-sm-4'><input type='file' name='files' id='files' class='form-control'></div>
-          <div class='col-sm-4'><?php echo html::submitButton();?><?php if($favicon) echo html::a(inlink('deleteFavicon'), $lang->site->favicon->reset, "class='btn'");?></div>
-      </div>
+      <table class='table table-form'>
+        <tr>
+          <?php if(isset($this->config->site->favicon)) echo '<td>' . html::image($favicon->webPath) . '</td>';?>
+          <td><input type='file' name='files' id='files' class='form-control'></td>
+          <td><?php echo html::submitButton();?><?php if($favicon) echo html::a(inlink('deleteFavicon'), $lang->site->favicon->reset, "class='btn'");?></td>
+        </tr>
+      </table>
     </form>
   </div>
 </div>
