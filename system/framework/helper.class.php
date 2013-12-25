@@ -520,7 +520,7 @@ function getWebRoot($full = false)
  */
 function checkAdminEntry()
 {
-    if(strpos($_SERVER['PHP_SELF'], 'admin.php') == false) return true; 
+    if(strpos($_SERVER['PHP_SELF'], '/admin.php') == false) return true; 
 
     $path  = dirname($_SERVER['SCRIPT_FILENAME']);
     $files = scandir($path);
