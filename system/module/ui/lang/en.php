@@ -13,7 +13,6 @@ $lang->ui->common       = "Site";
 
 $lang->ui->logo       = 'Logo';
 $lang->ui->setLogo    = "Set Logo";
-$lang->ui->changeLogo = "Change Logo";
 $lang->ui->setTheme   = 'Set Theme';
 $lang->ui->setFavicon = "Set favicon";
 

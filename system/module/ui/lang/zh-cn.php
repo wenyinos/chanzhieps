@@ -13,7 +13,6 @@ $lang->ui->common       = "站点";
 
 $lang->ui->logo       = 'Logo';
 $lang->ui->setLogo    = "Logo设置";
-$lang->ui->changeLogo = "修改Logo";
 $lang->ui->setTheme   = '主题设置';
 $lang->ui->setFavicon = "Favicon设置";
 
