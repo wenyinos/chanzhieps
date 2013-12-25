@@ -24,35 +24,37 @@
     </div>
     <div class='panel-body'>
       <form method='post' id='<?php echo $providerCode;?>AjaxForm' class='form-horizontal'>
-        <div class='form-group'>
-          <label for='verification' class='col-md-3 control-label'><?php echo $lang->user->oauth->verification;?></label>
-          <div class='col-lg-8 col-md-9'>
-            <?php echo html::input('verification', $oauth->verification, "class='form-control'");?>
-          </div>
-        </div>
-        <div class='form-group'>
-          <label for='clientID' class='col-md-3 control-label'><?php echo $lang->user->oauth->clientID;?></label>
-          <div class='col-lg-8 col-md-9'>
-            <?php echo html::input('clientID', $oauth->clientID, "class='form-control'");?>
-          </div>
-        </div>
-        <div class='form-group'>
-          <label for='clientSecret' class='col-md-3 control-label'><?php echo $lang->user->oauth->clientSecret;?></label>
-          <div class='col-lg-8 col-md-9'>
-            <?php echo html::input('clientSecret', $oauth->clientSecret, "class='form-control'");?>
-          </div>
-        </div>
-        <?php if($providerCode == 'sina'):?>
-        <div class='form-group'>
-          <label for='widget' class='col-md-3 control-label'><?php echo $lang->user->oauth->widget;?></label>
-          <div class='col-lg-8 col-md-9'>
-            <?php echo html::input('widget', $oauth->widget, "class='form-control'");?>
-          </div>
-        </div>
-        <?php endif;?>
-        <div class='form-group'>
-          <div class='col-md-offset-3 col-md-9'><?php echo html::submitButton() . html::hidden('provider', $providerCode);?></div>
-        </div>
+        <table class="table table-form">
+          <tr>
+            <th style='width:100px'><?php echo $lang->user->oauth->verification;?></th>
+            <td style='width:60%'>
+              <?php echo html::input('verification', $oauth->verification, "class='form-control'");?>
+            </td><td></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->user->oauth->clientID;?></th>
+            <td>
+              <?php echo html::input('clientID', $oauth->clientID, "class='form-control'");?>
+            </td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->user->oauth->clientSecret;?></th>
+            <td>
+              <?php echo html::input('clientSecret', $oauth->clientSecret, "class='form-control'");?>
+            </td>
+          </tr>
+          <?php if($providerCode == 'sina'):?>
+          <tr>
+            <th><?php echo $lang->user->oauth->widget;?></th>
+            <td>
+              <?php echo html::input('widget', $oauth->widget, "class='form-control'");?>
+            </td>
+          </tr>
+          <?php endif;?>
+          <tr>
+           <th></th> <td><?php echo html::submitButton() . html::hidden('provider', $providerCode);?></td>
+          <tr>
+        </table>
       </form>
     </div>
   </div>
