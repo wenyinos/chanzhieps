@@ -23,7 +23,7 @@
         <div class='col-sm-5'><?php echo html::select("categories[]", $categories, $currentCategory, "multiple='multiple' class='form-control chosen'");?></div>
       </div>
       <div class='form-group'>
-        <label class='col-sm-2 control-label required'><?php echo $lang->product->name;?></label>
+        <label class='col-sm-2 control-label'><?php echo $lang->product->name;?></label>
         <div class='col-sm-10'><?php echo html::input('name', '', "class='form-control'");?></div>
       </div>
       <div class='form-group'>
@@ -49,7 +49,7 @@
         <div class='col-sm-10'><?php echo html::textarea('summary', '', "rows='2' class='form-control'");?></div>
       </div>
       <div class='form-group'>
-        <label class='col-sm-2 control-label required'><?php echo $lang->product->content;?></label>
+        <label class='col-sm-2 control-label'><?php echo $lang->product->content;?></label>
         <div valign='middle' class='col-sm-10'><?php echo html::textarea('content', '', "rows='10' class='form-control'");?></div>
       </div>
       <div class='form-group'>

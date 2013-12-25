@@ -21,7 +21,7 @@
   <form method='post' class='form-horizontal' id='ajaxForm'>
     <?php if($type != 'page'):?>
     <div class='form-group'>
-      <label class='col-sm-2 control-label required'><?php echo $lang->article->category;?></label>
+      <label class='col-sm-2 control-label'><?php echo $lang->article->category;?></label>
       <div class='col-sm-4'>
       <?php 
       echo html::select("categories[]", $categories, array_keys($article->categories), "multiple='multiple' class='form-control chosen'");
@@ -44,7 +44,7 @@
     </div>
     <?php endif; ?>
     <div class='form-group'>
-      <label class='col-sm-2 control-label required'><?php echo $lang->article->title;?></label>
+      <label class='col-sm-2 control-label'><?php echo $lang->article->title;?></label>
       <div class='col-sm-10'><?php echo html::input('title', $article->title, "class='form-control'");?></div>
     </div>
     <div class='form-group'>
@@ -70,7 +70,7 @@
       <div class='col-sm-10'><?php echo html::textarea('summary', $article->summary, "rows='2' class='form-control'");?></div>
     </div>
     <div class='form-group'>
-      <label class='col-sm-2 control-label required'><?php echo $lang->article->content;?></label>
+      <label class='col-sm-2 control-label'><?php echo $lang->article->content;?></label>
       <div class='col-sm-10'><?php echo html::textarea('content', htmlspecialchars($article->content), "rows='10' class='form-control'");?></div>
     </div>
     <div class="form-group">
