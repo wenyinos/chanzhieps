@@ -241,7 +241,7 @@ td.required:after{right: -5px;top: 12px}
 .table td .page,.table td .pager {padding: 0;margin: 0;}
 
 /* --- HEADER --- */
-#header {margin: 0 -15px; padding: 10px 15px; background: #fff; min-height: 100px; vertical-align: middle; position: relative;}
+#header {margin: 0 -15px; padding: 10px 15px; min-height: 100px; vertical-align: middle; position: relative;}
 #headTitle {display: table; min-height: 75px;}
 #siteName,#siteLogo,#siteSlogan {display: table-cell; vertical-align: bottom;}
 #headNav {position: absolute; right: 15px; top: 40%;}
