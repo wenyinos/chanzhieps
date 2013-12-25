@@ -6,12 +6,14 @@ js::import($jsRoot  . 'bootstrap/datetimepicker/js/min.js');
 if($clientLang != 'en') js::import($jsRoot . 'bootstrap/datetimepicker/js/locales/' . $clientLang . '.js'); 
 ?>
 <script language='javascript'>
-$(function() {
-    startDate = new Date(1970, 1, 1);
-    $(".date").datetimepicker({
+$(function()
+{
+    startDate = new Date(2000, 1, 1);
+    $(".date").datetimepicker
+    ({
         format: 'yyyy-mm-dd hh:ii',
         startDate:startDate,
-        pickerPosition: "top-left",
+        pickerPosition: 'top-left',
         todayBtn: true,
         autoclose: true,
         keyboardNavigation:false,
