@@ -32,7 +32,7 @@
       <?php if($type != 'page'):?>
       <div class='form-group'>
         <label class='col-sm-2 control-label'><?php echo $lang->article->category;?></label>
-        <div class='col-sm-4 required'>
+        <div class='col-sm-4'>
         <?php 
         echo html::select("categories[]", $categories, $currentCategory, "multiple='multiple' class='form-control chosen'");
         ?>
@@ -55,7 +55,7 @@
       <?php endif; ?>
       <div class='form-group'>
         <label class='col-sm-2 control-label'><?php echo $lang->article->title;?></label>
-        <div class='col-sm-10 required'><?php echo html::input('title', '', "class='form-control'");?></div>
+        <div class='col-sm-10'><?php echo html::input('title', '', "class='form-control'");?></div>
       </div>
       <div class='form-group'>
         <label class='col-sm-2 control-label'><?php echo $lang->article->alias;?></label>
@@ -80,7 +80,7 @@
         <div class='col-sm-10'><?php echo html::textarea('summary', '', "rows='2' class='form-control'");?></div>
       </div>
       <div class='form-group'>
-        <label class='col-sm-2 control-label required'><?php echo $lang->article->content;?></label>
+        <label class='col-sm-2 control-label'><?php echo $lang->article->content;?></label>
         <div class='col-sm-10'><?php echo html::textarea('content', '', "rows='10' class='form-control'");?></div>
       </div>
       <div class="form-group">
