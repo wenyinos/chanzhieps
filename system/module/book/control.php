@@ -167,7 +167,7 @@ class book extends control
     public function edit($nodeID)
     {
         $this->book->setMenu();
-        $node = $this->book->getNodeByID($nodeID);
+        $node = $this->book->getNodeByID($nodeID, false);
         $book = $node->book;
 
         if($_POST)
