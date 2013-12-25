@@ -334,7 +334,7 @@ class uri
 
         $link = 'book/' . $alias['book'] . '/';
         $link .= array_shift($params);
-        if($alias['article']) $link .= '_' . $alias['article'];
+        if($alias['node']) $link .= '_' . $alias['node'];
 
         return $config->webRoot . $link . '.' . $config->default->view;
     }
