@@ -22,6 +22,7 @@ $lang->ui->noSelectedFile    = "没有选择图片";
 $lang->ui->notAlloweFileType = "请选择正确的%s文件.";
 
 $lang->ui->favicon = new stdclass();
+$lang->ui->favicon->help  = "帮助";
 $lang->ui->favicon->reset = "重置";
 
 $lang->ui->themes = array();
