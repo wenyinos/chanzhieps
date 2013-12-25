@@ -539,23 +539,6 @@ function setRequiredFields()
 }
 
 /**
- * Set the leftmenu for admin.
- * 
- * @access public
- * @return void
- */
-function setAdminLeftMenu()
-{
-    if($('ul.leftmenu').find('a').size()==1)
-    {
-        $('ul.leftmenu').find('a').addClass('radius');
-        return ;
-    }
-    $('ul.leftmenu').find('a').last().addClass('radius-bottom');
-    $('ul.leftmenu').find('a').first().addClass('radius-top');
-}
-
-/**
  * Set language.
  * 
  * @access public

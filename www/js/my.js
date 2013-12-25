@@ -1,7 +1,6 @@
 $(document).ready(function() 
 {
     setRequiredFields();
-    setAdminLeftMenu();
 
     $('img.adaptive').each(function()
     {
