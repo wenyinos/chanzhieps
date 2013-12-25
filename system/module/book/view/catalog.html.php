@@ -29,7 +29,7 @@
 
     <tbody>
       <?php foreach($children as $child):?>
-      <tr class='v-middle a-center'>
+      <tr class='text-center text-middle'>
         <td><?php echo html::select("type[$child->id]",    $lang->book->typeList, $child->type, "class='form-control'");?></td>
         <td><?php echo html::input("author[$child->id]",   $child->author,   "class='form-control'");?></td>
         <td><?php echo html::input("title[$child->id]",    $child->title,    "class='form-control'");?></td>
@@ -38,19 +38,19 @@
         <td>
           <?php echo html::hidden("order[$child->id]", $child->order, "class='order'");?>
           <?php echo html::hidden("mode[$child->id]", 'update');?>
-          <i class='icon-arrow-up'></i><i class='icon-arrow-down'></i>
+          <i class='icon-arrow-up'></i> <i class='icon-arrow-down'></i>
         </td>
       </tr>
       <?php endforeach;?>
 
       <?php for($i = 0; $i < BOOK::NEW_CATALOG_COUNT ; $i ++):?>
-      <tr class='text-center'>
+      <tr class='text-center text-middle'>
         <td><?php echo html::select("type[]", $lang->book->typeList, '', "class='form-control'");?></td>
         <td><?php echo html::input("author[]", $app->user->realname, "class='form-control'");?></td>
         <td><?php echo html::input("title[]", '', "class='form-control'");?></td>
         <td><?php echo html::input("alias[]", '', "class='form-control' placeholder='{$lang->alias}'");?></td>
         <td><?php echo html::input("keywords[]", '', "class='form-control'");?></td>
-        <td class='text-middle'>
+        <td>
           <?php echo html::hidden("order[]", '', "class='order'");?>
           <?php echo html::hidden("mode[]", 'new');?>
           <i class='icon-arrow-up'></i> <i class='icon-arrow-down'></i>
