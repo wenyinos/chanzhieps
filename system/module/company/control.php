@@ -37,7 +37,6 @@ class company extends control
     {
         if(!empty($_POST))
         {
-            $_POST[setDate] = helper::now();
             $now = helper::now();
             $company = fixer::input('post')
             ->add('setDate', $now)

@@ -2,10 +2,6 @@ $(document).ready(function()
 {
     setRequiredFields();
 
-    $('img.adaptive').each(function()
-    {
-      $(this).resizeImage()
-    });
     $.setAjaxModal();
     $.setAjaxForm('#ajaxForm');
     $.setAjaxDeleter('.deleter');
@@ -20,6 +16,9 @@ $(document).ready(function()
         $(this).toggleClass('hover');
     });
 
-    // active lightbox
+    /* Enable lightbox. */
     $("[data-toggle=lightbox]").lightbox();
+    
+    /* Load message notify. */
+    $('#headNav #msgBox').load(createLink('message', 'notify'));
 });

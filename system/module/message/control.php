@@ -72,6 +72,18 @@ class message extends control
     }
 
     /**
+     * show notify in msgBox.
+     * 
+     * @access public
+     * @return string
+     */
+    public function notify()
+    {
+        $messages = $this->dao->select('COUNT(*) as count')->from(TABLE_MESSAGE)->where('`to`')->eq($this->app->user->account)->andWhere('readed')->eq(0)->fetch('count');
+        if($messages) echo  html::a(helper::createLink('user', 'message'), sprintf($this->lang->user->message->mine, $messages));
+    }
+
+    /**
      * Get the latest approvaled messages.
      * 
      * @param  string $type 
