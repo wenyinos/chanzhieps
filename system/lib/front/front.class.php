@@ -366,7 +366,7 @@ class html
     }
 
     /**
-     create a button to goback.
+     * Create a button to goback.
      *
      * @static
      * @access public
@@ -383,7 +383,7 @@ class html
     }
 
     /**
-     create a button to close.
+     * Create a button to close.
      *
      * @access public
      * @return string
