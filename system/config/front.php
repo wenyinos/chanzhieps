@@ -40,6 +40,7 @@ $config->rights->guest['thread']['locate'] = 'locate';
 
 $config->rights->guest['message']['index']   = 'index';
 $config->rights->guest['message']['comment'] = 'show';
+$config->rights->guest['message']['notify']  = 'notify';
 $config->rights->guest['message']['post']    = 'post';
 
 $config->rights->guest['book']['index']  = 'index';
@@ -52,6 +53,7 @@ $config->rights->guest['user']['oauthlogin']    = 'oauthlogin';
 $config->rights->guest['user']['oauthcallback'] = 'oauthcallback';
 $config->rights->guest['user']['oauthregister'] = 'oauthregister';
 $config->rights->guest['user']['oauthbind']     = 'oauthbind';
+$config->rights->guest['user']['message']       = 'message';
 
 $config->rights->guest['rss']['index']       = 'index';
 $config->rights->guest['sitemap']['index']   = 'index';
