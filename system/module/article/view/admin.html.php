@@ -14,8 +14,8 @@
 <div class='panel'>
   <div class='panel-heading'>
   <?php if($type == 'blog'):?>
-    <strong><i class="icon-th-large"></i> <?php echo $lang->blog->list;?></strong>
-    <div class='panel-actions'><?php echo html::a($this->inlink('create', "type={$type}&category={$categoryID}"), '<i class="icon-plus"></i> ' . $lang->blog->create, 'class="btn btn-primary"');?></div>
+  <strong><i class="icon-th-large"></i> <?php echo $lang->blog->list;?></strong>
+  <div class='panel-actions'><?php echo html::a($this->inlink('create', "type={$type}&category={$categoryID}"), '<i class="icon-plus"></i> ' . $lang->blog->create, 'class="btn btn-primary"');?></div>
   <?php elseif($type == 'page'):?>
   <strong><i class="icon-list-ul"></i> <?php echo $lang->page->list;?></strong>
   <div class='panel-actions'><?php echo html::a($this->inlink('create', "type={$type}&category={$categoryID}"), '<i class="icon-plus"></i> ' . $lang->page->create, 'class="btn btn-primary"');?></div>
