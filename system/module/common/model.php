@@ -312,23 +312,17 @@ class commonModel extends model
     {
         if(!commonModel::isAvailable('user')) return '';
 
-        global $app, $dao;
-        $divider = '<span class="divider">|</span>';
+        global $app;
         if($app->session->user->account != 'guest')
         {
             printf('<span class="login-msg">' . $app->lang->welcome . '</span>', $app->session->user->realname);
             echo html::a(helper::createLink('user', 'control'), $app->lang->dashboard);
-
-            $messages = $dao->select('COUNT(*) as count')->from(TABLE_MESSAGE)->where('`to`')->eq($app->session->user->account)->andWhere('readed')->eq(0)->fetch('count');
-            if($messages > 0) echo ' - ' . html::a(helper::createLink('user', 'message'), sprintf($app->lang->user->message->mine, $messages));
-
-            echo $divider;
+            echo "<span id='msgBox'></span>";
             echo html::a(helper::createLink('user', 'logout'),  $app->lang->logout);
         }    
         else
         {
             echo html::a(helper::createLink('user', 'login'), $app->lang->login);
-            echo $divider;
             echo html::a(helper::createLink('user', 'register'), $app->lang->register);
         }    
     }
