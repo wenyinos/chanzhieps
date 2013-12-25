@@ -37,6 +37,9 @@ a:hover,a:active{color: #da3b26;}
 #navbar .dropdown-menu{background-color: #808080;color: #f1f1f1;margin-top: -2px;border-radius: 2px;}
 #navbar .dropdown-submenu:hover>a:after {border-left-color: #fff;}
 
+/* carousel. */
+.carousel-inner,.carousel .item,.carousel img,.carousel-control{-moz-border-radius: 2px !important;-webkit-border-radius: 2px !important;border-radius: 2px !important;}
+
 /* Panel. */
 .panel,.list,.page-wrapper .list,#focus .panel-block,#focus .panel-block:hover,#footer,#links,.page-wrapper .article {border-radius: 2px;background: #ECF0F5;border:none;}
 .panel > .panel-heading, .nav-stacked.nav-primary>li.nav-heading, .list > header,.page-wrapper .list > header ,.panel-block > .panel-heading,#focus .panel-block .panel-heading,#focus .panel-block:hover .panel-heading{background: #c9c9c9;color: #555;border: none;-moz-border-radius:2px 6px 0 0; -webkit-border-radius:2px 6px 0 0; border-radius:2px 6px 0 0;}
