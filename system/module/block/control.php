@@ -102,10 +102,11 @@ class block extends control
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
+        $blocks = $this->block->getRegionBlocks($page, $region);
+        if(empty($blocks)) $blocks = array(new stdclass());
+
         $this->view->page         = $page;
         $this->view->region       = $region;
-        $blocks       = $this->block->getRegionBlocks($page, $region);
-        if(empty($blocks)) $blocks = array(new stdclass());
         $this->view->blocks       = $blocks;
         $this->view->blockOptions = $this->block->getPairs();
 
