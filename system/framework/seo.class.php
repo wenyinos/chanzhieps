@@ -189,9 +189,9 @@ class uri
         global $config;
 
         $link = 'article/';
-        if($alias['category']) $link = $alias['category'] . '/';
+        if(isset($alias['category'])) $link = $alias['category'] . '/';
         $link .= array_shift($params);
-        if($alias['name']) $link .= '_' . $alias['name'];
+        if(isset($alias['name'])) $link .= '_' . $alias['name'];
 
         return $config->webRoot . $link . '.' . $config->default->view;
     }
