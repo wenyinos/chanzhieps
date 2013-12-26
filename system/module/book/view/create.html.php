@@ -22,11 +22,11 @@
         </tr>
         <tr>
           <th><span><?php echo $lang->book->title;?></span></th>
-          <td class='required'><?php echo html::input('title', '', 'class=form-control');?></td>
+          <td><?php echo html::input('title', '', 'class=form-control');?></td>
         </tr>
         <tr>
           <th><span><?php echo $lang->book->alias;?></span></th>
-          <td class='required'>
+          <td>
             <div class='input-group'>
               <span class='input-group-addon'>http://<?php echo $this->server->http_host . $config->webRoot?>book/</span>
               <?php echo html::input('alias', '', "class='form-control' placeholder='{$lang->alias}'");?>
