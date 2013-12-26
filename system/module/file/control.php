@@ -160,7 +160,7 @@ class file extends control
             }
             else
             {
-                $this->app->error("The file you visit $fileID not found.", __FILE__, __LINE__, true);
+                $this->app->triggerError("The file you visit $fileID not found.", __FILE__, __LINE__, true);
             }
         }
     }
