@@ -488,7 +488,6 @@ class router
     /**
      * Set the data root.
      * 
-     * @param  $wwwRoot 
      * @access protected
      * @return void
      */
