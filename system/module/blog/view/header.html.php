@@ -33,15 +33,16 @@ $navs = $this->tree->getChildren(0, 'blog');
   echo html::meta('keywords',    strip_tags($keywords));
   echo html::meta('description', strip_tags($desc));
 
-  css::import($themeRoot . 'bootstrap/css/core.min.css');
-  css::import($themeRoot . 'default/blog.css');
+  css::import($themeRoot . 'zui/css/min.css');
+  css::import($themeRoot . 'default/style.css');
+  if($config->site->theme and $config->site->theme != 'default') css::import($themeRoot . $config->site->theme . '/style.css');
   css::import($themeRoot . $config->site->theme . '/blog.css');
 
   js::exportConfigVars();
   if($config->debug)
   {
       js::import($jsRoot . 'jquery/min.js');
-      js::import($jsRoot . 'bootstrap/min.js');
+      js::import($jsRoot . 'zui/min.js');
       js::import($jsRoot . 'chanzhi.js');
       js::import($jsRoot . 'my.js');
   }
@@ -64,35 +65,36 @@ js::import($jsRoot . 'respond/min.js');
 <![endif]-->
 </head>
 <body>
-<div class='container'>
-  <div class="header">
-    <div class="header-top">
-      <div class="nav pull-right">
-        <?php echo commonModel::printTopBar();?>
-      </div>
+<div class='page-container'>
+  <header id='header' class='clearfix'>
+    <div id='headNav'><?php echo commonModel::printTopBar();?></div>
+    <div id='headTitle'>
       <?php if(isset($config->site->logo)):?>
       <?php $logo = json_decode($config->site->logo);?>
-      <?php echo html::a($this->config->webRoot, html::image($logo->webPath, "id='logo' title='{$this->config->company->name}'"));?>
-      <?php else:?>
-      <h3><?php echo $this->config->site->name?></h3>
-      <?php endif;?>      
+      <div id='siteLogo'>
+        <?php echo html::a($this->config->webRoot, html::image($logo->webPath, "class='logo' title='{$this->config->company->name}'"));?>
+      </div>
+      <?php else: ?>
+      <div id='siteName'><h2><?php echo $config->site->name;?></h2></div>
+      <?php endif;?>
     </div>
-    <ul class="nav">
-      <li <?php if(empty($category)) echo "class='active'"?>>
-         <?php echo html::a($this->inlink('index'), $lang->blog->home)?>
-      </li>
-      <?php 
-      foreach($navs as $nav)
-      {
-        $class= $nav->id == $category->id ? "class='nav-blog-$nav->id active'" : "class='nav-blog-$nav->id'";
-        echo "<li {$class}>" . html::a($this->inlink('index', "id={$nav->id}", "category={$nav->alias}"), $nav->name) . '</li>';
-      }
-      ?>
-      <li class="pull-right">
-        <?php echo html::a($config->webRoot, '<i class="icon-home icon-large"></i> ' . $lang->blog->siteHome);?>
-      </li>
-      <li class="pull-right">
-        <?php echo html::a(helper::createLink('rss', 'index', '', '', 'xml') . '?type=blog', "<i class='icon icon-rss'></i> RSS", "target='_blank'"); ?>
-      </li>
-    </ul>
-  </div>
+  </header>
+  <ul class='nav' id='blogNav'>
+    <li <?php if(empty($category)) echo "class='active'"?>>
+       <?php echo html::a($this->inlink('index'), $lang->blog->home)?>
+    </li>
+    <?php 
+    foreach($navs as $nav)
+    {
+      $class= $nav->id == $category->id ? "class='nav-blog-$nav->id active'" : "class='nav-blog-$nav->id'";
+      echo "<li {$class}>" . html::a($this->inlink('index', "id={$nav->id}", "category={$nav->alias}"), $nav->name) . '</li>';
+    }
+    ?>
+    <li class='pull-right'>
+      <?php echo html::a($config->webRoot, '<i class="icon-home icon-large"></i> ' . $lang->blog->siteHome);?>
+    </li>
+    <li class='pull-right'>
+      <?php echo html::a(helper::createLink('rss', 'index', '', '', 'xml') . '?type=blog', "<i class='icon icon-rss'></i> RSS", "target='_blank'"); ?>
+    </li>
+  </ul>
+  <div class='page-wrapper'>
