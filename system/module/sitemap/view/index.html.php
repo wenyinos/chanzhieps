@@ -11,37 +11,37 @@
  */
 ?>
 <?php if($onlyBody == 'no') include '../../common/view/header.html.php'; ?>
-<div class='panel panel-default'>
+<div class='panel'>
   <div class='panel-heading'>
-    <h4><i class="icon-sitemap"></i> <?php echo $lang->sitemap->common;?></h4>
-    <div class='panel-actions panel-actions-sm'>
-      <?php echo html::a(inlink('index', '', '', 'xml'), '<i class="icon-code"></i> ' . $lang->sitemap->xmlVersion, "class='btn btn-primary btn-wider'");?>
+    <strong><i class='icon-sitemap'></i> <?php echo $lang->sitemap->common;?></strong>
+    <div class='panel-actions'>
+      <?php echo html::a(inlink('index', '', '', 'xml'), '<i class="icon-code"></i> ' . $lang->sitemap->xmlVersion, "class='btn btn-primary'");?>
     </div>
   </div>
   <div class='panel-body'>
     <?php if(strpos($productTree, '<li>') !== false):?>
-    <div class='clearfix'> 
+    <div class='clearfix sitemap-tree'> 
       <h4><?php echo $lang->sitemap->productCategory?></h4>
       <?php echo $productTree?>
     </div>
     <?php endif;?>
 
     <?php if(strpos($articleTree, '<li>') !== false):?>
-    <div class='clearfix'> 
+    <div class='clearfix sitemap-tree'> 
       <h4><?php echo $lang->sitemap->articleCategory?></h4>
       <?php echo $articleTree?>
     </div>
     <?php endif;?>
 
     <?php if(strpos($blogTree, '<li>') !== false):?>
-    <div class='clearfix'> 
+    <div class='clearfix sitemap-tree'> 
       <h4><?php echo $lang->sitemap->blogCategory?></h4>
       <?php echo $blogTree?>
     </div>
     <?php endif;?>
 
     <?php if($boards):?>
-    <div class='clearfix'>
+    <div class='clearfix sitemap-tree'>
       <h4><?php echo $lang->sitemap->boards;?></h4>
       <ul class='tree'>
         <?php foreach($boards as $parentBoard):?>
@@ -60,7 +60,7 @@
     </div>
     <?php endif;?>
     <?php if(!empty($books)):?>
-    <div class='clearfix'>
+    <div class='clearfix sitemap-tree'>
       <h4><?php echo $lang->sitemap->books;?></h4>
       <ul class='tree'>
         <?php foreach($books as $book):?>

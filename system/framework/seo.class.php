@@ -146,7 +146,7 @@ class seo
      * @access public
      * @return string
      */
-    public static function unify($string, $to)
+    public static function unify($string, $to, $skip = '')
     {
         $string = str_replace(array('_', '、', ' ', '-', '?', '@', '&', '%', '~', '`', '+', '*', '/', '\\', '，', '.', '。'), $to, $string);
         return preg_replace('/[,]+/', $to, trim($string, $to));
@@ -172,7 +172,7 @@ class uri
         global $config;
 
         $link = 'article/c' . array_shift($params);
-        if($alias['category']) $link = $alias['category'];
+        if(!empty($alias['category'])) $link = $alias['category'];
 
         return $config->webRoot . $link . '.' . $config->default->view;
     }
@@ -189,9 +189,9 @@ class uri
         global $config;
 
         $link = 'article/';
-        if($alias['category']) $link = $alias['category'] . '/';
+        if(!empty($alias['category'])) $link = $alias['category'] . '/';
         $link .= array_shift($params);
-        if($alias['name']) $link .= '_' . $alias['name'];
+        if(!empty($alias['name'])) $link .= '_' . $alias['name'];
 
         return $config->webRoot . $link . '.' . $config->default->view;
     }
@@ -209,7 +209,7 @@ class uri
         global $config;
 
         $link = 'product/c' . array_shift($params);
-        if($alias['category']) $link = $alias['category'];
+        if(!empty($alias['category'])) $link = $alias['category'];
 
         return $config->webRoot . $link . '.' . $config->default->view;
     }

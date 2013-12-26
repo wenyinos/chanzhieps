@@ -68,11 +68,10 @@ if($articles)
       <?php foreach($articles as $article): ?>
       <?php 
       $category = array_shift($article->categories);
-      $url = helper::createLink('article', 'view', "id={$article->id}", "category={$category->alias}&name={$article->alias}");
+      $alias    = empty($category) ? "name={$article->alias}" : "category={$category->alias}&name={$article->alias}";
+      $url      = helper::createLink('article', 'view', "id={$article->id}", $alias);
       ?>
-      <li>
-        <?php echo html::a($url, $article->title, "title='{$article->title}'");?>
-      </li>
+      <li><?php echo html::a($url, $article->title, "title='{$article->title}'");?></li>
       <?php endforeach;?>
     </ul>
   </div>
