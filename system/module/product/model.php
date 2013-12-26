@@ -29,12 +29,12 @@ class productModel extends model
         if($replaceTag) $product->content = $this->loadModel('tag')->addLink($product->content);
 
         /* Get it's categories. */
-        $product->categories = $this->dao->select('t2.*')
-            ->from(TABLE_RELATION)->alias('t1')
-            ->leftJoin(TABLE_CATEGORY)->alias('t2')->on('t1.category = t2.id')
-            ->where('t1.type')->eq('product')
-            ->andWhere('t1.id')->eq($productID)
-            ->fetchAll('id');
+        $product->categories = $this->dao->select('t1.*')
+            ->from(TABLE_CATEGORY)->alias('t1')
+            ->leftJoin(TABLE_RELATION)->alias('t2')->on('t2.category = t1.id')
+            ->where('t2.type')->eq('product')
+            ->andWhere('t2.id')->eq($productID)
+            ->fetchAll();
 
         /* Get product path to highlight main nav. */
         $path = '';
@@ -335,26 +335,5 @@ class productModel extends model
 
            $this->dao->insert(TABLE_RELATION)->data($data)->exec();
        }
-    }
-
-    /**
-     * Print files.
-     * 
-     * @param  object $files 
-     * @access public
-     * @return void
-     */
-    public function printFiles($files)
-    {
-        if(empty($files)) return false;
-
-        foreach($files as $file)
-        {
-            if(!$file->isImage)
-            {
-                $file->title = $file->title . ".$file->extension";
-                echo html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank' data-toggle='lightbox'") . '&nbsp;&nbsp;&nbsp'; 
-            }
-        }
     }
 }

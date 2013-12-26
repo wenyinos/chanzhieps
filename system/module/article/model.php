@@ -407,32 +407,4 @@ class articleModel extends model
 
         return commonModel::createFrontLink($module, 'view', $param, $alias);
     }
-
-    /**
-     * Print files.
-     * 
-     * @param  object $files 
-     * @access public
-     * @return void
-     */
-    public function printFiles($files)
-    {
-        if(empty($files)) return false;
-
-        $imagesHtml = '';
-        $filesHtml  = '';
-        foreach($files as $file)
-        {
-            $file->title = $file->title . ".$file->extension";
-            if($file->isImage)
-            {
-                $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank' data-toggle='lightbox'") . '</li>';
-            }
-            else
-            {
-                $filesHtml .= "<li class='file file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'") . '</li>';
-            }
-        }
-        echo "<ul class='article-files clearfix'>" . $imagesHtml . $filesHtml . '</ul>';
-    }
 }

@@ -35,7 +35,7 @@ js::set('articleID', $article->id);
         <?php echo $article->content;?>
       </section>
       <section>
-        <?php $this->article->printFiles($article->files);?>
+        <?php $this->loadModel('file')->printFiles($article->files);?>
       </section>
       <footer>
         <?php if($article->keywords):?>

@@ -17,9 +17,7 @@
   <section class='article-content'>
     <?php echo $content;;?>
   </section>
-  <section>
-    <?php $this->book->printFiles($article->files);?>
-  </section>
+  <section><?php $this->loadModel('file')->printFiles($article->files);?></section>
   <footer>
     <?php if($article->keywords):?>
     <p class='small'><strong class='text-muted'><?php echo $lang->book->keywords;?></strong><span class='article-keywords'><?php echo $lang->colon . $article->keywords;?></span></p>
