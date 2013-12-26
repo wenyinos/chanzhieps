@@ -101,7 +101,7 @@ class message extends control
 
         $this->view->title    = $this->lang->message->common;
         $this->view->messages = $this->message->getList($type, $status, $pager);
-        $this->view->replies  = $this->message->getReplies(array_keys($this->view->messages));
+        $this->view->replies  = $this->message->getReplies($this->view->messages);
         $this->view->pager    = $pager;
         $this->view->type     = $type;
         $this->view->status   = $status;
