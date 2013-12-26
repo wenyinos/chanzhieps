@@ -46,9 +46,12 @@ class productModel extends model
 
         $product->images = $this->file->getByObject('product', $productID, $isImage = true );
 
-        $product->image = new stdclass();
-        $product->image->list    = $product->images;
-        $product->image->primary = $product->image->list[0];
+        if(!empty($product->images))
+        {
+            $product->image = new stdclass();
+            $product->image->list    = $product->images;
+            $product->image->primary = $product->image->list[0];
+        }
 
         return $product;
     }   
