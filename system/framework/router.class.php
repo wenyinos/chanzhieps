@@ -488,7 +488,6 @@ class router
     /**
      * Set the data root.
      * 
-     * @param  $wwwRoot 
      * @access protected
      * @return void
      */
@@ -1555,7 +1554,7 @@ class router
         /* If the debug > 1, show warning, notice error. */
         if($level == E_NOTICE or $level == E_WARNING or $level == E_STRICT or $level == E_DEPRECATED)
         {
-            if(!empty($this->config->debug) and $this->config->debug > 1) echo "<pre class='code alert alert-danger clearfix'>$errorLog</pre>";
+            if(!empty($this->config->debug) and $this->config->debug > 1) echo "<pre class='code alert alert-danger'>$errorLog</pre>";
         }
 
         /* If error level is serious, die.  */
