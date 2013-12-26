@@ -534,7 +534,8 @@ function setRequiredFields()
     requiredFields = config.requiredFields.split(',');
     for(i = 0; i < requiredFields.length; i++)
     {
-        $('#' + requiredFields[i]).parent().addClass('required');
+        $('#' + requiredFields[i]).closest('td,th').prepend("<div class='required required-wrapper'></div>");
+        $('#' + requiredFields[i]).closest('[class*="col-"]').addClass('required');
     }
 }
 
