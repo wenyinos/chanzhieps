@@ -67,7 +67,7 @@ $lang->user->thread      = 'My threads';
 $lang->user->reply       = 'My replies';
 
 $lang->user->message = new stdclass();
-$lang->user->message       = 'My message %s';
+$lang->user->message       = "My message <span class='label label-badge text-latin'>%s</span>";
 $lang->user->message->from = 'From';
 
 $lang->user->inputUserName       = 'Please input your username';

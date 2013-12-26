@@ -67,7 +67,7 @@ $lang->user->thread      = '我的主题';
 $lang->user->reply       = '我的回贴';
 
 $lang->user->message = new stdclass();
-$lang->user->message->mine = '我的消息%s';
+$lang->user->message->mine = "我的消息 <span class='label label-badge text-latin'>%s</span>";
 $lang->user->message->from = '来自';
 
 $lang->user->inputUserName       = '请输入用户名';

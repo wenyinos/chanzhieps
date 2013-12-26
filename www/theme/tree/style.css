@@ -4,17 +4,17 @@ a,a.card:hover, .card:hover a,.items>.item:hover a, .items>.item:hover>.item-hea
 a:hover,a:active{color: #6e2e16;}
 
 /* headNav. */
-#header{background-color: transparent;}
 #headNav{top: 30%; background-color: #e3d7a2;background-color:rgba(227,215,162,0.75); -moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px;color: #f1f1f1;}
-#headNav .divider{display: none;}
-#headNav .login-msg{display: inline-block; padding-left: 20px; color: #4b624f;}
-#headNav a{color: #4b624f; display: inline-block; padding: 10px 15px; margin: 0;-moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px; -webkit-transition:background 0.5s; -moz-transition:background 0.5s; -o-transition:background 0.5s; transition:background 0.5s;}
-#headNav a:first-child{padding-left: 25px; -moz-border-radius:2px 0 0 6px; -webkit-border-radius:2px 0 0 6px; border-radius:2px 0 0 6px; }
-#headNav a:last-child,#headNav span:last-child > a {padding-right: 25px; -moz-border-radius:0 6px 6px 0; -webkit-border-radius:0 6px 6px 0; border-radius:0 6px 6px 0;}
+#headNav .login-msg{display: inline-block; padding-left: 15px; color: #4b624f;}
+#headNav > a, #msgBox{color: #4b624f; display: inline-block; padding: 10px 15px; margin: 0; -moz-border-radius:6px; -webkit-border-radius:6px; border-radius:6px; -webkit-transition:background 0.5s; -moz-transition:background 0.5s; -o-transition:background 0.5s; transition:background 0.5s;border-radius: 0}
+#headNav > a:first-child{padding-left: 25px; -moz-border-radius:2px 0 0 2px; -webkit-border-radius:2px 0 0 2px; border-radius:2px 0 0 2px; }
+#headNav > a:last-child{padding-right: 25px; -moz-border-radius:0 2px 2px 0; -webkit-border-radius:0 2px 2px 0; border-radius:0 2px 2px 0;}
+#headNav .login-msg:after, #headNav > a:after, #msgBox:after{display: none;}
 #headNav .caret{border-top-color: #4b624f; border-bottom-color: #4b624f;}
 #headNav .dropdown-menu a {display: block;background-color: #fff;color: #333;}
-#headNav a:hover{background-color: #6E2E16; color: #fff; text-decoration: none; -webkit-transition:background 0.5s; -moz-transition:background 0.5s; -o-transition:background 0.5s; transition:background 0.5s;}
+#headNav > a:hover, #msgBox:hover,#msgBox:hover a{background-color: #6E2E16; color: #fff; text-decoration: none; -webkit-transition:background 0.5s; -moz-transition:background 0.5s; -o-transition:background 0.5s; transition:background 0.5s;}
 
+#siteSlogan{color: #E3D7A2}
 
 /* navbar settings.*/
 #navbar{background: #c4b274;border-radius: 2px;border: none;}
@@ -28,7 +28,8 @@ a:hover,a:active{color: #6e2e16;}
   #navbar .navbar-toggle:hover .icon-bar,#navbar .navbar-toggle:focus .icon-bar,#navbar .navbar-toggle.collapsed .icon-bar{background-color: #fff}
 }
 #navbar .nav > li > a,#navbar .nav > li > ul > li > a,#navbar .nav > li > ul > li > ul > li > a{color: #495e4d; border:none; background: #c4b274;}
-#navbar .nav > li > a:hover,#navbar .nav >li.active>a,#navbar .nav >li.active>a:hover,#navbar .nav >li.active>a:focus,#navbar .nav > li > ul > li > a:hover,#navbar .nav > li > ul > li > ul > li > a:hover{background: #6e2e16;color: #fff;box-shadow: none;}
+#navbar .nav > li > a:hover,#navbar .nav > li > ul > li > a:hover,#navbar .nav > li > ul > li > ul > li > a:hover{background: #6e2e16;color: #fff;box-shadow: none;}
+#navbar .nav >li.active>a,#navbar .nav >li.active>a:hover,#navbar .nav >li.active>a:focus{background: #E3D7A2; color: #6E2E16; box-shadow: none;}
 #navbar .caret{border-top-color: #495e4d; border-bottom-color: #495e4d;}
 #navbar .nav li  a:hover .caret{border-top-color: #fff; border-bottom-color: #fff;}
 #navbar .nav > li:last-child > a {border-radius: 0}
@@ -46,6 +47,8 @@ a:hover,a:active{color: #6e2e16;}
 .panel > .panel-heading, .nav-stacked.nav-primary>li.nav-heading, .list > header,.page-wrapper .list > header ,.panel-block > .panel-heading,#focus .panel-block .panel-heading,#focus .panel-block:hover .panel-heading{background: #e3d7a2;color: #555;border: none;-moz-border-radius:2px 6px 0 0; -webkit-border-radius:2px 6px 0 0; border-radius:2px 6px 0 0;}
 .panel > .panel-heading .text-muted{color: #95A5A6}
 #login .panel-heading,#reg .panel-heading{background-color: transparent; color: #666;border-bottom: 1px solid #e3d7a2}
+.panel .treeview .hitarea{background-color: #f5f0cc!important}
+.panel .tree > li > ul li:last-child:after{border-left-color: #f5f0cc!important}
 
 /* buttons. */
 .btn{border: none; padding: 8px 12px; -webkit-transition: 0.25s linear; -moz-transition: 0.25s linear; -o-transition: 0.25s linear; transition: 0.25s linear; -webkit-backface-visibility: hidden; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none;font-weight: bold;}

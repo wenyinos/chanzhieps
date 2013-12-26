@@ -5,16 +5,17 @@ a,a.card:hover, .card:hover a,.items>.item:hover a, .items>.item:hover>.item-hea
 a:hover,a:active{color: #da3b26;}
 
 /* headNav. */
-#header{background-color: transparent;}
 #headNav{top: 30%; background-color: #808080; -moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px;color: #f1f1f1;}
-#headNav .divider{display: none;}
-#headNav .login-msg{display: inline-block; padding-left: 20px; color: #f1f1f1;}
-#headNav a{color: #f1f1f1; display: inline-block; padding: 10px 15px; margin: 0; background-color: #808080; -moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px; -webkit-transition:background 0.5s; -moz-transition:background 0.5s; -o-transition:background 0.5s; transition:background 0.5s;}
-#headNav a:first-child{padding-left: 25px; -moz-border-radius:2px 0 0 6px; -webkit-border-radius:2px 0 0 6px; border-radius:2px 0 0 6px; }
-#headNav a:last-child,#headNav span:last-child > a {padding-right: 25px; -moz-border-radius:0 6px 6px 0; -webkit-border-radius:0 6px 6px 0; border-radius:0 6px 6px 0;}
+#headNav .login-msg{display: inline-block; padding-left: 15px; color: #f1f1f1;}
+#headNav > a, #msgBox{color: #f1f1f1; display: inline-block; padding: 10px 15px; margin: 0; background-color: #808080; -moz-border-radius:6px; -webkit-border-radius:6px; border-radius:6px; -webkit-transition:background 0.5s; -moz-transition:background 0.5s; -o-transition:background 0.5s; transition:background 0.5s;border-radius: 0}
+#headNav > a:first-child{padding-left: 20px; -moz-border-radius:2px 0 0 2px; -webkit-border-radius:2px 0 0 2px; border-radius:2px 0 0 2px; }
+#headNav > a:last-child,#headNav span:last-child > a {padding-right: 20px; -moz-border-radius:0 2px 2px 0; -webkit-border-radius:0 2px 2px 0; border-radius:0 2px 2px 0;}
+#headNav .login-msg:after, #headNav > a:after, #msgBox:after{display: none;}
+#msgBox a {color: #f1f1f1}
 #headNav .caret{border-top-color: #f1f1f1; border-bottom-color: #f1f1f1;}
 #headNav .dropdown-menu a {display: block;background-color: #fff;color: #333;}
 #headNav a:hover{background-color: #da3b26; color: #fff; text-decoration: none; -webkit-transition:background 0.5s; -moz-transition:background 0.5s; -o-transition:background 0.5s; transition:background 0.5s;}
+#headNav > a:hover, #msgBox:hover,#msgBox:hover a{background-color: #DA3B26; color: #fff; text-decoration: none; -webkit-transition:background 0.5s; -moz-transition:background 0.5s; -o-transition:background 0.5s; transition:background 0.5s;}
 
 /* navbar */
 #navbar{background: #808080;border-radius: 2px;border: none;}
@@ -28,7 +29,8 @@ a:hover,a:active{color: #da3b26;}
   #navbar .navbar-toggle:hover .icon-bar,#navbar .navbar-toggle:focus .icon-bar,#navbar .navbar-toggle.collapsed .icon-bar{background-color: #fff}
 }
 #navbar .nav > li > a,#navbar .nav > li > ul > li > a,#navbar .nav > li > ul > li > ul > li > a{color: #f1f1f1; border:none; background: #808080;}
-#navbar .nav > li > a:hover,#navbar .nav >li.active>a,#navbar .nav >li.active>a:hover,#navbar .nav >li.active>a:focus,#navbar .nav > li > ul > li > a:hover,#navbar .nav > li > ul > li > ul > li > a:hover{background: #da3b26;color: #fff;box-shadow: none;}
+#navbar .nav > li > a:hover,#navbar .nav > li > ul > li > a:hover,#navbar .nav > li > ul > li > ul > li > a:hover{background: #da3b26;color: #fff;box-shadow: none;}
+#navbar .nav >li.active>a,#navbar .nav >li.active>a:hover,#navbar .nav >li.active>a:focus{background: #C9C9C9;color: #da3b26}
 #navbar .caret{border-top-color: #f1f1f1; border-bottom-color: #f1f1f1;}
 #navbar .nav > li:last-child > a {border-radius: 0}
 #navbar .nav > li:first-child > a {border-left-color:transparent;-webkit-border-top-left-radius:2px; -webkit-border-bottom-left-radius:2px; -moz-border-radius-topleft:6px; -moz-border-radius-bottomleft:6px; border-top-left-radius:2px; border-bottom-left-radius:2px;}
@@ -45,6 +47,8 @@ a:hover,a:active{color: #da3b26;}
 .panel > .panel-heading, .nav-stacked.nav-primary>li.nav-heading, .list > header,.page-wrapper .list > header ,.panel-block > .panel-heading,#focus .panel-block .panel-heading,#focus .panel-block:hover .panel-heading{background: #c9c9c9;color: #555;border: none;-moz-border-radius:2px 6px 0 0; -webkit-border-radius:2px 6px 0 0; border-radius:2px 6px 0 0;}
 .panel > .panel-heading .text-muted{color: #95A5A6}
 #login .panel-heading,#reg .panel-heading{background-color: transparent; color: #666;border-bottom: 1px solid #c9c9c9}
+.panel .treeview .hitarea{background-color: #ECF0F5!important}
+.panel .tree > li > ul li:last-child:after{border-left-color: #ECF0F5!important}
 
 /* text */
 .text-muted{color: #666}
