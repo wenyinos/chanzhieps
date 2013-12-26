@@ -73,7 +73,8 @@ function initKindeditor(afterInit)
             filterMode:v.editors.filterMode,
             allowFileManager:true,
             langType:v.editorLang,
-            afterBlur: function(){this.sync(); },
+            afterBlur: function(){this.sync();$('#' + editorID).prev('.ke-container').removeClass('focus');},
+            afterFocus: function(){$('#' + editorID).prev('.ke-container').addClass('focus');},
             afterChange: function(){$('#' + editorID ).change().hide();},
             afterCreate : function()
             {
