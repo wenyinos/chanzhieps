@@ -49,7 +49,7 @@ class ui extends control
         }
 
         $this->view->title = $this->lang->ui->setLogo;
-        $this->view->logo = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : false;
+        $this->view->logo  = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : false;
 
         $this->display();
     }
