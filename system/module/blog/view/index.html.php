@@ -41,7 +41,6 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
         <div class="card-actions"><span class='text-muted'><i class="icon-time"></i> <?php echo date('Y/m/d', strtotime($article->addedDate));?></span></div>
       </div>
     <?php endforeach;?>
-
     <div class='clearfix pager'><?php $pager->show('right', 'short');?></div>
   </div>
   <div class='col-md-3'><side class='page-side'><?php $this->block->printRegion($layouts, 'blog_index', 'side');?></side></div>

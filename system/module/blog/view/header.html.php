@@ -79,22 +79,26 @@ js::import($jsRoot . 'respond/min.js');
       <?php endif;?>
     </div>
   </header>
+  <nav id="blogNav" class="navbar navbar-default" role="navigation">
+    <ul class="nav navbar-nav">
+      <li <?php if(empty($category)) echo "class='active'"?>>
+         <?php echo html::a($this->inlink('index'), $lang->blog->home)?>
+      </li>
+      <?php 
+      foreach($navs as $nav)
+      {
+        $class= $nav->id == $category->id ? "class='nav-blog-$nav->id active'" : "class='nav-blog-$nav->id'";
+        echo "<li {$class}>" . html::a($this->inlink('index', "id={$nav->id}", "category={$nav->alias}"), $nav->name) . '</li>';
+      }
+      ?>
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><?php echo html::a(helper::createLink('rss', 'index', '', '', 'xml') . '?type=blog', "<i class='icon icon-rss'></i> RSS", "target='_blank'"); ?></li>
+      <li><?php echo html::a($config->webRoot, '<i class="icon-home icon-large"></i> ' . $lang->blog->siteHome);?></li>
+    </ul>
+  </nav>
   <ul class='nav' id='blogNav'>
-    <li <?php if(empty($category)) echo "class='active'"?>>
-       <?php echo html::a($this->inlink('index'), $lang->blog->home)?>
-    </li>
-    <?php 
-    foreach($navs as $nav)
-    {
-      $class= $nav->id == $category->id ? "class='nav-blog-$nav->id active'" : "class='nav-blog-$nav->id'";
-      echo "<li {$class}>" . html::a($this->inlink('index', "id={$nav->id}", "category={$nav->alias}"), $nav->name) . '</li>';
-    }
-    ?>
-    <li class='pull-right'>
-      <?php echo html::a($config->webRoot, '<i class="icon-home icon-large"></i> ' . $lang->blog->siteHome);?>
-    </li>
-    <li class='pull-right'>
-      <?php echo html::a(helper::createLink('rss', 'index', '', '', 'xml') . '?type=blog', "<i class='icon icon-rss'></i> RSS", "target='_blank'"); ?>
-    </li>
+
   </ul>
   <div class='page-wrapper'>
