@@ -26,7 +26,7 @@ class blog extends control
 
         $category   = $this->loadModel('tree')->getByID($categoryID, 'blog');
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
-        $articles   = $this->loadMOdel('article')->getList('blog', $this->tree->getFamily($categoryID, 'blog'), $orderBy = 'id_desc', $pager);
+        $articles   = $this->loadModel('article')->getList('blog', $this->tree->getFamily($categoryID, 'blog'), $orderBy = 'id_desc', $pager);
 
         if($category)
         {
