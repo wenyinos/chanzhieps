@@ -122,7 +122,7 @@ class messageModel extends model
 
         foreach($messages as $message)
         {
-            $message->objectViewURL = $this->getObjectLink($message);
+            if($message->type != 'message') $message->objectViewURL = $this->getObjectLink($message);
         }
 
         return $messages;
