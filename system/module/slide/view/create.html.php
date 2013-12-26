@@ -19,11 +19,11 @@
       <table class='table table-form'>
         <tr>
           <th class='col-md-1 col-xs-2'><?php echo $lang->slide->title;?></th>
-          <td class='col-md-5 col-xs-7'><?php echo html::input('title', $slide->title, 'class="form-control"');?></td><td></td>
+          <td class='col-md-5 col-xs-7'><?php echo html::input('title', '', "class='form-control'");?></td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->slide->url;?></th>
-          <td><?php echo html::input('url', $slide->url, 'class="form-control"');?></td><td></td>
+          <td><?php echo html::input('url', '', "class='form-control'");?></td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->slide->image;?></th>
@@ -32,11 +32,11 @@
         </tr>
         <tr>
           <th><?php echo $lang->slide->label;?></th>
-          <td><?php echo html::input('label', $slide->label, 'class="form-control"');?></td><td></td>
+          <td><?php echo html::input('label', '', "class='form-control'");?></td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->slide->summary;?></th>
-          <td colspan="2"><?php echo html::textarea('summary', $slide->summary, 'class="form-control" rows="6"');?></td>
+          <td colspan="2"><?php echo html::textarea('summary', '', "class='form-control' rows='6'");?></td>
         </tr>
         <tr>
           <td></td>

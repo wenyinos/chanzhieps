@@ -19,7 +19,7 @@
     <form method='post' id='ajaxForm' enctype='multipart/form-data'>
       <table class='table table-form'>
         <tr>
-          <td><?php echo html::image($logo->webPath, "class='logo' title='{$this->config->company->name}'"); ?></td>
+          <td><?php echo html::image(isset($logo->webPath) ? $logo->webPath : '', "class='logo' title='{$this->config->company->name}'"); ?></td>
           <td><?php echo html::file('files', "class='form-control'");?></td>
           <td><?php echo html::submitButton();?></td>
         </tr>
