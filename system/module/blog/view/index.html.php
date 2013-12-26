@@ -26,8 +26,8 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
     <?php foreach($articles as $article):?>
       <?php $url = inlink('view', "id=$article->id", "category={$category->alias}&name=$article->alias"); ?>
       <div class="card">
-        <?php echo html::a($url, $article->title, "class='card-heading'");?>
-        <div class="card-content text-muted">
+        <h4 class='card-heading'><?php echo html::a($url, $article->title);?></h4>
+        <div class='card-content text-muted'>
           <?php if(!empty($article->image)):?>
             <div class='media pull-right'>
               <?php

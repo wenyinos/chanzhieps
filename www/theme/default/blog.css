@@ -18,7 +18,7 @@ h5{font-size: 14px;}
 
 /* articles */
 #articles .card{background-color: #fff;padding: 5px 5px 0}
-#articles .card-heading{font-weight: bold; color: #145BCC}
+#articles .card-heading a{font-weight: bold; color: #145BCC}
 
 .article{background-color: #fff}
 
