@@ -391,12 +391,19 @@ class articleModel extends model
      */
     public function createPreviewLink($articleID)
     {
-        $article       = $this->getByID($articleID);
-        $categories    = $article->categories;
-        $categoryAlias = current($categories)->alias;
-        $module = $article->type;
-        $param  = "articleID=$articleID";
-        $alias  = "category=$categoryAlias&name=$article->alias";
+        $article = $this->getByID($articleID);
+        $module  = $article->type;
+        $param   = "articleID=$articleID";
+        if($article->type != 'page')
+        {
+            $categories    = $article->categories;
+            $categoryAlias = current($categories)->alias;
+            $alias         = "category=$categoryAlias&name=$article->alias";
+        }
+        else
+        {
+            $alias = "name=$article->alias";
+        }
 
         return commonModel::createFrontLink($module, 'view', $param, $alias);
     }
