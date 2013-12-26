@@ -34,7 +34,7 @@ class productModel extends model
             ->leftJoin(TABLE_RELATION)->alias('t2')->on('t2.category = t1.id')
             ->where('t2.type')->eq('product')
             ->andWhere('t2.id')->eq($productID)
-            ->fetchAll();
+            ->fetchAll('id');
 
         /* Get product path to highlight main nav. */
         $path = '';
@@ -46,12 +46,9 @@ class productModel extends model
 
         $product->images = $this->file->getByObject('product', $productID, $isImage = true );
 
-        if(!empty($product->images))
-        {
-            $product->image = new stdclass();
-            $product->image->list    = $product->images;
-            $product->image->primary = $product->image->list[0];
-        }
+        $product->image = new stdclass();
+        $product->image->list    = $product->images;
+        $product->image->primary = !empty($product->image->list) ? $product->image->list[0] : '';
 
         return $product;
     }   
