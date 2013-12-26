@@ -32,14 +32,17 @@ class nav extends control
             {
                 $navs[$key] = $this->nav->organizeNav($nav);
             }
-            //a($navs);exit;
-            if(isset($navs['2'])) $navs['2'] = $this->nav->group($navs['2']);
-            if(isset($navs['3'])) $navs['3'] = $this->nav->group($navs['3']);
-            
-            foreach($navs[2] as &$navList)
+
+            if(isset($navs[2]))
             {
-                foreach($navList as &$nav)
-                $nav['children'] = isset($navs[3][$nav['key']]) ?  $navs[3][$nav['key']] : array();
+                $navs[2] = $this->nav->group($navs[2]);
+                if(isset($navs[3])) $navs[3] = $this->nav->group($navs[3]);
+
+                foreach($navs[2] as &$navList)
+                {
+                    foreach($navList as &$nav)
+                    $nav['children'] = isset($navs[3][$nav['key']]) ?  $navs[3][$nav['key']] : array();
+                }
             }
 
             foreach($navs[1] as &$nav)
