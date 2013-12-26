@@ -31,16 +31,10 @@ $browseLink     = $type == 'article' ? 'createBrowseLink' : 'create' . ucfirst($
   <div class='panel-body'>
     <ul class='nav nav-secondary nav-stacked'>
       <?php
-      foreach($topCategories as $topCategory){
+      foreach($topCategories as $topCategory)
+      {
           $browseLink = helper::createLink($type, 'browse', "categoryID={$topCategory->id}", "category={$topCategory->alias}");
-          if($category->name==$topCategory->name)
-          {
-              echo "<li class='active'>" . html::a($browseLink, "<i class='icon-folder-open-alt '></i> &nbsp;" . $topCategory->name, "id='category{$topCategory->id}'") . '</li>';
-          }
-          else
-          {
-              echo '<li>' . html::a($browseLink, "<i class='icon-folder-close-alt '></i> &nbsp;" . $topCategory->name, "id='category{$topCategory->id}'") . '</li>';
-          }
+          echo '<li>' . html::a($browseLink, "<i class='icon-folder-close-alt '></i> &nbsp;" . $topCategory->name, "id='category{$topCategory->id}'") . '</li>';
       }
       ?>
     </ul>
