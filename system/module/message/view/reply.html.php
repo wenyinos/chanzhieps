@@ -9,11 +9,11 @@
         <table class='table table-form'>
           <tr>
             <th style='width: 80px'><?php echo $lang->message->from;?></th>
-            <td><?php echo html::input('from', $this->app->user->realname, "class='form-control'");?></td>
+            <td><?php echo html::input('from', $app->user->realname, "class='form-control'");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->message->content;?></th>
-            <td><?php echo html::textarea('content', $this->app->user->realName, "class='form-control' rows='5'");?></td>
+            <td><?php echo html::textarea('content', '', "class='form-control' rows='5'");?></td>
           </tr>
           <tr><td></td><td><?php echo html::submitButton();?></td></tr>
         </table>
