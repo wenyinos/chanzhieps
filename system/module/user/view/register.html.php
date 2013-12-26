@@ -5,19 +5,19 @@
     <div class='panel-body'>
       <form method='post' id='ajaxForm' class='form-horizontal' role='form'>
         <div class='form-group'>
-          <label class='col-xs-3 control-label required'><?php echo $lang->user->account;?></label>
+          <label class='col-xs-3 control-label'><?php echo $lang->user->account;?></label>
           <div class='col-xs-9'><?php echo html::input('account', '', "class='form-control form-control' autocomplete='off' placeholder='" . $lang->user->register->lblAccount . "'");?></div>
         </div>
         <div class='form-group'>
-          <label class="col-xs-3 control-label required"><?php echo $lang->user->realname;?></label>
+          <label class="col-xs-3 control-label"><?php echo $lang->user->realname;?></label>
           <div class='col-xs-9'><?php echo html::input('realname', '', "class='form-control'");?></div>
         </div>
         <div class='form-group'>
-          <label class="col-xs-3 control-label required"><?php echo $lang->user->email;?></label>
+          <label class="col-xs-3 control-label"><?php echo $lang->user->email;?></label>
           <div class='col-xs-9'><?php echo html::input('email', '', "class='form-control' autocomplete='off'") . '';?></div>
         </div>
         <div class='form-group'>
-          <label class="col-xs-3 control-label required"><?php echo $lang->user->password;?></label>
+          <label class="col-xs-3 control-label"><?php echo $lang->user->password;?></label>
           <div class='col-xs-9'><?php echo html::password('password1', '', "class='form-control' autocomplate='off' placeholder='" . $lang->user->register->lblPassword . "'");?></div>
         </div>
         <div class='form-group'>
