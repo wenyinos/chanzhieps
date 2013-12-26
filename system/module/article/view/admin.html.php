@@ -14,8 +14,8 @@
 <div class='panel'>
   <div class='panel-heading'>
   <?php if($type == 'blog'):?>
-    <strong><i class="icon-th-large"></i> <?php echo $lang->blog->list;?></strong>
-    <div class='panel-actions'><?php echo html::a($this->inlink('create', "type={$type}&category={$categoryID}"), '<i class="icon-plus"></i> ' . $lang->blog->create, 'class="btn btn-primary"');?></div>
+  <strong><i class="icon-th-large"></i> <?php echo $lang->blog->list;?></strong>
+  <div class='panel-actions'><?php echo html::a($this->inlink('create', "type={$type}&category={$categoryID}"), '<i class="icon-plus"></i> ' . $lang->blog->create, 'class="btn btn-primary"');?></div>
   <?php elseif($type == 'page'):?>
   <strong><i class="icon-list-ul"></i> <?php echo $lang->page->list;?></strong>
   <div class='panel-actions'><?php echo html::a($this->inlink('create', "type={$type}&category={$categoryID}"), '<i class="icon-plus"></i> ' . $lang->page->create, 'class="btn btn-primary"');?></div>
@@ -29,7 +29,6 @@
       <tr>
         <?php $vars = "type=$type&categoryID=$categoryID&corderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
         <th style='width: 60px' class='text-center'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->article->id);?></th>
-        <th style='width: 80px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->article->status);?></th>
         <th class='text-center'><?php commonModel::printOrderLink('title',     $orderBy, $vars, $lang->article->title);?></th>
         <th style='width: 100px' class='text-center'><?php commonModel::printOrderLink('category', $orderBy, $vars, $lang->article->category);?></th>
         <th style='width: 160px' class='text-center'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->article->addedDate);?></th>
@@ -41,8 +40,10 @@
       <?php $maxOrder = 0; foreach($articles as $article):?>
       <tr>
         <td class='text-center'><?php echo $article->id;?></td>
-        <td><?php echo $article->status == 'draft' ? '<span class="text-info"><i class="icon-pencil"></i> ' . $lang->article->statusList[$article->status] .'</span>' : '<span class="text-success"><i class="icon-ok-sign"></i> ' . $lang->article->statusList[$article->status] . '</span>';?></td>
-        <td><?php echo $article->title;?></td>
+        <td>
+          <?php echo $article->title;?>
+          <?php if($article->status == 'draft') echo '<span class="label label-xsm label-warning">' . $lang->article->statusList[$article->status] .'</span>';?>
+        </td>
         <td class='text-center'><?php foreach($article->categories as $category) echo $category->name . ' ';?></td>
         <td class='text-center'><?php echo $article->addedDate;?></td>
         <td class='text-center'><?php echo $article->views;?></td>

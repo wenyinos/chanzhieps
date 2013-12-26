@@ -488,7 +488,6 @@ class router
     /**
      * Set the data root.
      * 
-     * @param  $wwwRoot 
      * @access protected
      * @return void
      */
@@ -1544,12 +1543,25 @@ class router
         if(!defined('IN_SHELL') and !($this->server->server_addr == '127.0.0.1' or filter_var($this->server->server_addr, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE) === false))
         {
             $errorLog  = str_replace($this->getBasePath(), '', $errorLog);
+            $errorLog  = str_replace($this->wwwRoot, '', $errorLog);
         }
 
         /* Save to log file. */
         $errorFile = $this->getLogRoot() . 'php.' . date('Ymd') . '.log';
         $fh = @fopen($errorFile, 'a');
         if($fh) fwrite($fh, strip_tags($errorLog)) && fclose($fh);
+
+        /* If the debug > 1, show warning, notice error. */
+        if($level == E_NOTICE or $level == E_WARNING or $level == E_STRICT or $level == E_DEPRECATED)
+        {
+            if(!empty($this->config->debug) and $this->config->debug > 1)
+            {
+                $cmd  = "vim +$line $file";
+                $size = strlen($cmd);
+                echo "<pre class='alert alert-danger'>$message: ";
+                echo "<input type='text' value='$cmd' size='$size' style='border:none; background:none;' onclick='this.select();' /></pre>";
+            }
+        }
 
         /* If error level is serious, die.  */
         if($level == E_ERROR or $level == E_PARSE or $level == E_CORE_ERROR or $level == E_COMPILE_ERROR or $level == E_USER_ERROR)

@@ -21,6 +21,7 @@ $lang->ui->noSelectedFile    = "No file selected.";
 $lang->ui->notAlloweFileType = "Please select %s files.";
 
 $lang->ui->favicon = new stdclass();
+$lang->ui->favicon->help  = "Help";
 $lang->ui->favicon->reset = "Reset";
 
 $lang->ui->themes = array();

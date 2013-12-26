@@ -15,7 +15,7 @@ a:hover,a:active{color: #1ABC9C;}
 #headNav .dropdown-menu a {display: block;background-color: #fff;color: #333;}
 #headNav a:hover{background-color: #1abc9c; color: #fff; text-decoration: none; -webkit-transition:background 0.5s; -moz-transition:background 0.5s; -o-transition:background 0.5s; transition:background 0.5s;}
 
-/* topNav settings.*/
+/* navbar settings.*/
 #navbar{background: #2C3E50;border-radius: 6px;}
 @media (min-width: 768px){#navbar .nav > li {display: block;float: left;width: auto;}}
 @media (max-width: 767px)
@@ -71,7 +71,7 @@ textarea{height: auto;}
 .thread-wrapper .article-files{background-color: transparent;}
 
 /* .nav */
-.nav-primary > li > a{color: #34495E; background:#EDEFF1;border-color: ##BDC3C7;border-left: 0;border-right:0;}
+.nav-primary > li > a{color: #34495E; background:#EDEFF1;border-color: #BDC3C7;border-left: 0;border-right:0;}
 .nav-primary > li:hover > a{color: #fff;background-color: #1ABC9C;border-color: #1ABC9C;box-shadow: none;}
 .nav-stacked.nav-primary>li.active>a, .nav-stacked.nav-primary>li.active>a:hover, .nav-stacked.nav-primary>li.active>a:focus{color: #f1f1f1;background-color: #16A085;border-color: #16A085;box-shadow: none;}
 

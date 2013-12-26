@@ -74,6 +74,7 @@ class messageModel extends model
      */
     public function getReplies($messages)
     {
+        if(empty($messages)) return false;
         foreach($messages as $message) $objectList[] = $message->id;
         return $this->dao->select('*')->from(TABLE_MESSAGE)
             ->where('type')->eq('reply')
@@ -121,7 +122,7 @@ class messageModel extends model
 
         foreach($messages as $message)
         {
-            $message->objectViewURL = $this->getObjectLink($message);
+            if($message->type != 'message') $message->objectViewURL = $this->getObjectLink($message);
         }
 
         return $messages;
