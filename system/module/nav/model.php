@@ -101,9 +101,9 @@ class navModel extends model
         $entry .= html::select("nav[{$grade}][type][]", $this->lang->nav->types, $nav->type, "class='navType form-control' grade='{$grade}'");
 
         /* artcle and system select tag. */
-        $entry .= html::select("nav[{$grade}][article][]", $articleTree, $nav->article, "class='navSelector form-control {$articleHidden}'");
-        $entry .= html::select("nav[{$grade}][product][]", $productTree, $nav->product, "class='navSelector form-control {$productHidden}'");
-        $entry .= html::select("nav[{$grade}][page][]", $pages, $nav->page, "class='navSelector form-control {$pageHidden}'");
+        $entry .= html::select("nav[{$grade}][article][]", $articleTree, isset($nav->article) ? $nav->article : '', "class='navSelector form-control {$articleHidden}'");
+        $entry .= html::select("nav[{$grade}][product][]", $productTree, isset($nav->product) ? $nav->product : '', "class='navSelector form-control {$productHidden}'");
+        $entry .= html::select("nav[{$grade}][page][]", $pages, isset($nav->page) ? $nav->page : '', "class='navSelector form-control {$pageHidden}'");
         $entry .= html::select("nav[{$grade}][system][]", $this->lang->nav->system, $nav->system, "class='navSelector form-control {$system}'");
 
         $entry .= html::input("nav[{$grade}][title][]", $nav->title, "placeholder='{$this->lang->nav->inputTitle}' class='input-default form-control titleInput'");
@@ -116,8 +116,8 @@ class navModel extends model
         $entry .= html::hidden("nav[{$grade}][key][]", '', "class='input grade{$grade}key'"); 
 
         /* nav target select. */
-        $entry .= html::checkbox("target", $this->lang->nav->newWindow, $nav->target);
-        $entry .= html::hidden("nav[{$grade}][target][]", $nav->target);
+        $entry .= html::checkbox("target", $this->lang->nav->newWindow, isset($nav->target) ? $nav->target : '');
+        $entry .= html::hidden("nav[{$grade}][target][]", isset($nav->target) ? $nav->target : '');
 
         /* operate buttons. */
         $entry .= html::a('javascript:;', $this->lang->nav->add, "class='plus{$grade}'");
