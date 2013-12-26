@@ -78,12 +78,15 @@ class forumModel extends model
             ->fetch();
 
         $data = new stdclass();
-        $data->threads    = $stats->threads;
-        $data->posts      = $stats->threads + $stats->replies;
-        $data->postID     = $post->postID;
-        $data->replyID    = $post->replyID;
-        $data->postedDate = $post->postedDate;
-        $data->postedBy   = $post->repliedBy ? $post->repliedBy : $post->author;
+        $data->threads = $stats->threads;
+        $data->posts   = $stats->threads + $stats->replies;
+        if($post)
+        {
+            $data->postID     = $post->postID;
+            $data->replyID    = $post->replyID;
+            $data->postedDate = $post->postedDate;
+            $data->postedBy   = $post->repliedBy ? $post->repliedBy : $post->author;
+        }
 
         $this->dao->update(TABLE_CATEGORY)->data($data)->where('id')->eq($boardID)->exec();
     }
