@@ -74,6 +74,7 @@ class messageModel extends model
      */
     public function getReplies($messages)
     {
+        if(empty($messages)) return false;
         foreach($messages as $message) $objectList[] = $message->id;
         return $this->dao->select('*')->from(TABLE_MESSAGE)
             ->where('type')->eq('reply')
