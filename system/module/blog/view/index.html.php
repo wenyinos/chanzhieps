@@ -21,31 +21,29 @@ if(!empty($category->id)) js::set('categoryID', $category->id );
 $root = '<li>' . $this->lang->currentPos . $this->lang->colon .  html::a($this->inlink('index'), $lang->home) . '</li>';
 if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
 ?>
-<div class='row' id="blogBox">
-  <div class='col-md-9'>
-    <ul class="media-list">
+<div class='row'>
+  <div class='col-md-9' id='articles'>
     <?php foreach($articles as $article):?>
-      <li class="media radius">
-        <p class="pull-right"><strong class='dater'><?php echo date('Y/m/d', strtotime($article->addedDate));?></strong></p>
-        <div class='media-body'>
-          <h3 class='media-heading'><?php echo html::a(inlink('view', "id=$article->id", "category={$category->alias}&name=$article->alias"), $article->title);?></h3>
-          <p>
-            <?php 
-            if(!empty($article->image))
-            {
-                $title = $article->image->primary->title ? $article->image->primary->title : $article->title;
-                echo html::image($article->image->primary->smallURL, "title='{$title}' class='thumbnail'");
-            }
-            ?>
-            <?php echo $article->summary;?>
-          </p>
+      <?php $url = inlink('view', "id=$article->id", "category={$category->alias}&name=$article->alias"); ?>
+      <div class="card">
+        <?php echo html::a($url, $article->title, "class='card-heading'");?>
+        <div class="card-content text-muted">
+          <?php if(!empty($article->image)):?>
+            <div class='media pull-right'>
+              <?php
+              $title = $article->image->primary->title ? $article->image->primary->title : $article->title;
+              echo html::a($url, html::image($article->image->primary->smallURL, "title='{$title}' class='thumbnail'" ));
+              ?>
+            </div>
+          <?php endif;?>
+          <?php echo $article->summary;?>
         </div>
-      </li>
+        <div class="card-actions"><span class='text-muted'><i class="icon-time"></i> <?php echo date('Y/m/d', strtotime($article->addedDate));?></span></div>
+      </div>
     <?php endforeach;?>
-    </ul>
-    <div class='w-p95 pd-10px clearfix'><?php $pager->show('right', 'short');?></div>
-    <div class='c-both'></div>
+
+    <div class='clearfix pager'><?php $pager->show('right', 'short');?></div>
   </div>
-  <div class='col-md-3'><?php $this->block->printRegion($layouts, 'blog_index', 'side');?></div>
+  <div class='col-md-3'><side class='page-side'><?php $this->block->printRegion($layouts, 'blog_index', 'side');?></side></div>
 </div>
 <?php include './footer.html.php';?>

@@ -47,8 +47,8 @@ css::internal($pageCSS);
     <form method='post' class='form-horizontal' id='commentForm' action="<?php echo $this->createLink('message', 'post', 'type=comment');?>">
       <?php if($this->session->user->account == 'guest'): ?>
       <div class='form-group'>
-        <label for='from' class='col-sm-1 control-label required'><?php echo $lang->message->from; ?></label>
-        <div class='col-sm-5'>
+        <label for='from' class='col-sm-1 control-label'><?php echo $lang->message->from; ?></label>
+        <div class='col-sm-5 required'>
           <?php echo html::input('from', '', "class='form-control'"); ?>
         </div>
       </div>
@@ -76,8 +76,8 @@ css::internal($pageCSS);
       </div>
       <?php endif; ?>
       <div class='form-group'>
-        <label for='content' class='col-sm-1 control-label required'><?php echo $lang->message->content; ?></label>
-        <div class='col-sm-11'>
+        <label for='content' class='col-sm-1 control-label'><?php echo $lang->message->content; ?></label>
+        <div class='col-sm-11 required'>
           <?php
           echo html::textarea('content', '', "class='form-control'");
           echo html::hidden('objectType', $objectType);
