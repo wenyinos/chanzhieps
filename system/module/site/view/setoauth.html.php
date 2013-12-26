@@ -13,7 +13,7 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='row'>
 <?php foreach($lang->user->oauth->providers as $providerCode => $providerName):?>
-<?php $oauth = json_decode($this->config->oauth->$providerCode);?>
+<?php isset($this->config->oauth->$providerCode) ? $oauth = json_decode($this->config->oauth->$providerCode) : $oauth = '';?>
 <div class='col-sm-6'>
   <div class='panel'>
     <div class='panel-heading'>
@@ -28,19 +28,19 @@
           <tr>
             <th style='width:100px'><?php echo $lang->user->oauth->verification;?></th>
             <td style='width:60%'>
-              <?php echo html::input('verification', $oauth->verification, "class='form-control'");?>
+              <?php echo html::input('verification', isset($oauth->verification) ? $oauth->verification : '', "class='form-control'");?>
             </td><td></td>
           </tr>
           <tr>
             <th><?php echo $lang->user->oauth->clientID;?></th>
             <td>
-              <?php echo html::input('clientID', $oauth->clientID, "class='form-control'");?>
+              <?php echo html::input('clientID', isset($oauth->clientID) ? $oauth->clientID : '', "class='form-control'");?>
             </td>
           </tr>
           <tr>
             <th><?php echo $lang->user->oauth->clientSecret;?></th>
             <td>
-              <?php echo html::input('clientSecret', $oauth->clientSecret, "class='form-control'");?>
+              <?php echo html::input('clientSecret', isset($oauth->clientSecret) ? $oauth->clientSecret : '', "class='form-control'");?>
             </td>
           </tr>
           <?php if($providerCode == 'sina'):?>
