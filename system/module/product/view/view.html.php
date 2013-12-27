@@ -19,7 +19,6 @@ js::set('path',  json_encode($product->path));
 js::set('productID', $product->id);
 ?>
 <?php $common->printPositionBar($category, $product);?>
-<?php $title = $product->image->primary->title ? $product->image->primary->title : $product->name;?>
 <div class='row'>
   <div class='col-md-9'>
     <div class='panel panel-body'>
@@ -27,6 +26,7 @@ js::set('productID', $product->id);
         <?php if(!empty($product->images)):?>
         <div class='col-md-6'>
           <div class='product-image media-wrapper'>
+            <?php $title = $product->image->primary->title ? $product->image->primary->title : $product->name;?>
             <?php echo html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'");?>
           </div>
           <div class='product-image-menu row'>
@@ -95,6 +95,7 @@ js::set('productID', $product->id);
           <?php $this->file->printFiles($product->files);?>
         </div>
       </div>
+      <a href='#' class='back2top'><i class='icon-circle-arrow-up'></i> <?php echo $lang->article->back2Top; ?></a>
     </div>
     <div id='comments'>
       <div id='commentBox'></div>

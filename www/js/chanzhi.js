@@ -490,7 +490,8 @@ function setRequiredFields()
     for(i = 0; i < requiredFields.length; i++)
     {
         $('#' + requiredFields[i]).closest('td,th').prepend("<div class='required required-wrapper'></div>");
-        $('#' + requiredFields[i]).closest('[class*="col-"]').addClass('required');
+        var colEle = $('#' + requiredFields[i]).closest('[class*="col-"]');
+        if(colEle.parent().hasClass('form-group')) colEle.addClass('required');
     }
 }
 
