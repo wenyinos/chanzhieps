@@ -17,6 +17,12 @@
       <div class='modal-body'>
         <h3><?php echo $lang->install->welcome;?></h3>
         <div><?php echo $lang->install->desc;?></div>
+        <div>
+        <ul>
+          <li class='dropdown'><?php include '../../common/view/selectlang.html.php';?></li>
+        </ul>
+        </div>
+
       </div>
       <div class='modal-footer'>
         <?php
