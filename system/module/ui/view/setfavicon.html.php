@@ -22,7 +22,7 @@
         <tr>
           <?php if(isset($this->config->site->favicon)) echo '<td>' . html::image($favicon->webPath) . '</td>';?>
           <td><input type='file' name='files' id='files' class='form-control'></td>
-          <td><?php echo html::submitButton();?><?php if($favicon) echo html::a(inlink('deleteFavicon'), $lang->site->favicon->reset, "class='btn'");?></td>
+          <td><?php echo html::submitButton();?><?php if($favicon) echo html::a(inlink('deleteFavicon'), $lang->ui->favicon->reset, "class='btn'");?></td>
         </tr>
       </table>
     </form>
