@@ -28,21 +28,19 @@ class blog extends control
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
         $articles   = $this->loadModel('article')->getList('blog', $this->tree->getFamily($categoryID, 'blog'), $orderBy = 'id_desc', $pager);
 
+        $this->view->title      = $this->lang->blog->common;
+        $this->view->categoryID = $categoryID;
+        $this->view->articles   = $articles;
+        $this->view->pager      = $pager;
+ 
         if($category)
         {
-            $title    = $category->name;
-            $keywords = trim($category->keyword . ' ' . $this->config->site->keywords);
-            $desc     = strip_tags($category->desc);
+            $this->view->category = $category;
+            $this->view->title    = $category->name;
+            $this->view->keywords = trim($category->keywords . ' ' . $this->config->site->keywords);
+            $this->view->desc     = strip_tags($category->desc);
             $this->session->set('articleCategory', $category->id);
         }
-
-        $this->view->title     = $title;
-        $this->view->keywords  = $keywords;
-        $this->view->desc      = $desc;
-        $this->view->category  = $category;
-        $this->view->articles  = $articles;
-        $this->view->pager     = $pager;
-        $this->view->contact   = $this->loadModel('company')->getContact();
 
         $this->display();
     }
@@ -68,7 +66,7 @@ class blog extends control
         $category = $this->loadModel('tree')->getByID($category);
 
         $title    = $article->title . ' - ' . $category->name;
-        $keywords = $article->keywords . ' ' . $category->keyword . ' ' . $this->config->site->keywords;
+        $keywords = $article->keywords . ' ' . $category->keywords . ' ' . $this->config->site->keywords;
         $desc     = strip_tags($article->summary);
         
         $this->view->title       = $title;

@@ -1,9 +1,6 @@
 $(document).ready(function()
 {
-    $.setAjaxForm('#sortForm', function(response)
-    {
-        bootbox.alert(response.message);
-    });
+    $.setAjaxForm('#sortForm');
 
     $('.icon-arrow-up').click(function()
     {
