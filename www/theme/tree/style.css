@@ -51,7 +51,7 @@ a:hover,a:active{color: #6e2e16;}
 .panel .tree > li > ul li:last-child:after{border-left-color: #f5f0cc!important}
 
 /* buttons. */
-.btn{border: none; padding: 8px 12px; -webkit-transition: 0.25s linear; -moz-transition: 0.25s linear; -o-transition: 0.25s linear; transition: 0.25s linear; -webkit-backface-visibility: hidden; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none;font-weight: bold;}
+.btn{border: none; padding: 7px 12px; -webkit-transition: 0.25s linear; -moz-transition: 0.25s linear; -o-transition: 0.25s linear; transition: 0.25s linear; -webkit-backface-visibility: hidden; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none;font-weight: bold;}
 .btn-primary{background: #6E2E16;}
 .btn-primary:hover{background: #83381c;}
 .btn-default{color: #f1f1f1; background: #4b624f;}
@@ -86,14 +86,15 @@ textarea{height: auto;}
 .pager.pager-justify > li > a {border-radius: 16px}
 .pager > li > a:hover{background-color: #6E2E16;color: #fff}
 .pager > li:last-child > a{margin: 0;}
+.page-wrapper > .pager > .page {color: #fff}
 
 /* article */
 .page-wrapper .article > header > dl{background-color: transparent;}
 .article>header>.abstract, .article>header>dl{border-radius: 2px}
-.page-wrapper .article > header > .abstract{background-color:background-color: #e3d7a2;background-color:rgba(227,215,162,0.75);padding: 10px 15px;}
+.page-wrapper .article > header > .abstract,.page-wrapper .article .article-files{background-color: #e3d7a2;background-color:rgba(227,215,162,0.75);padding: 10px 15px;}
 .page-wrapper .article .article-content{background-color: #fff;border-radius: 2px;padding:15px;}
 .page-wrapper .article > footer >p {padding-left: 0}
-.page-wrapper .article .article-files{padding: 0;}
+.page-wrapper .article .article-files{margin-top: 10px;}
 
 /* .nav-content */
 .nav-content{background-color: background-color: #e3d7a2!important;background-color:rgba(227,215,162,0.75)!important;border:none!important;}
