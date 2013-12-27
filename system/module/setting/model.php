@@ -127,12 +127,9 @@ class settingModel extends model
         parse_str($paramString, $params); 
 
         /* Init fields not set in the param string. */
-        $fields = 'company,owner,module,section,key';
+        $fields = 'owner,module,section,key';
         $fields = explode(',', $fields);
         foreach($fields as $field) if(!isset($params[$field])) $params[$field] = '';
-
-        /* If not set company, set as current company. */
-        if($params['company'] == '') $params['company'] = $this->app->company->id;
 
         return $params;
     }
@@ -148,7 +145,6 @@ class settingModel extends model
     public function createDAO($params, $method = 'select')
     {
         return $this->dao->$method('*')->from(TABLE_CONFIG)->where('1 = 1')
-            ->beginIF($params['company'])->andWhere('company')->in($params['company'])->fi()
             ->beginIF($params['owner'])->andWhere('owner')->in($params['owner'])->fi()
             ->beginIF($params['module'])->andWhere('module')->in($params['module'])->fi()
             ->beginIF($params['section'])->andWhere('section')->in($params['section'])->fi()
