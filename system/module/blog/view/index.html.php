@@ -13,7 +13,7 @@
 <?php 
 include './header.html.php';
 include '../../common/view/treeview.html.php';
-$path = array_keys($category->pathNames);
+if(isset($category)) $path = array_keys($category->pathNames);
 if(!empty($path))         js::set('path',  $path);
 if(!empty($category->id)) js::set('categoryID', $category->id );
 ?>
@@ -24,6 +24,7 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
 <div class='row'>
   <div class='col-md-9' id='articles'>
     <?php foreach($articles as $article):?>
+    <?php if(!isset($category)) $category = array_shift($article->categories);?>
       <?php $url = inlink('view', "id=$article->id", "category={$category->alias}&name=$article->alias"); ?>
       <div class="card">
         <h4 class='card-heading'><?php echo html::a($url, $article->title);?></h4>
