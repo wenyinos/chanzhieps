@@ -509,8 +509,12 @@ class control
         /* Set the pathes and files to included. */
         $modulePath        = $this->app->getModulePath($moduleName);
         $moduleControlFile = $modulePath . 'control.php';
-        $actionExtFile     = $this->app->getModuleExtPath($moduleName, 'control') . strtolower($methodName) . '.php';
-        $file2Included     = file_exists($actionExtFile) ? $actionExtFile : $moduleControlFile;
+        $actionExtPath     = $this->app->getModuleExtPath($moduleName, 'control');
+
+        $commonActionExtFile = $actionExtPath['common'] . strtolower($methodName) . '.php';
+        $siteActionExtFile   = $actionExtPath['site'] . strtolower($methodName) . '.php';
+        $file2Included = file_exists($commonActionExtFile) ? $commonActionExtFile : $moduleControlFile;
+        $file2Included = file_exists($siteActionExtFile) ? $siteActionExtFile : $file2Included;
 
         /* Load the control file. */
         if(!is_file($file2Included)) $this->app->triggerError("The control file $file2Included not found", __FILE__, __LINE__, $exit = true);
