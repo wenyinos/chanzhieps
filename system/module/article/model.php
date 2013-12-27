@@ -267,7 +267,7 @@ class articleModel extends model
         $order = 0;
 
         $article->order    = $order;
-        $article->keywords = seo::unify($article->keywords, ',');
+        $article->keywords = seo::unify($article->keywords, ',',  '.');
         $article->alias    = seo::unify($article->alias, '-');
 
         $this->dao->insert(TABLE_ARTICLE)
@@ -309,7 +309,7 @@ class articleModel extends model
             ->add('editedDate', helper::now())
             ->get();
 
-        $article->keywords = seo::unify($article->keywords, ',');
+        $article->keywords = seo::unify($article->keywords, ',', '.');
         $article->alias    = seo::unify($article->alias, '-');
         
         $this->dao->update(TABLE_ARTICLE)
@@ -317,7 +317,7 @@ class articleModel extends model
             ->autoCheck()
             ->batchCheckIF($type != 'page', $this->config->article->require->edit, 'notempty')
             ->batchCheckIF($type == 'page', $this->config->article->require->page, 'notempty')
-            ->checkIF($type == 'page', 'alias', 'unique', "type='page'")
+            ->checkIF($type == 'page', 'alias', 'unique', "type='page' and id<>{$articleID}")
             ->where('id')->eq($articleID)
             ->exec();
 
