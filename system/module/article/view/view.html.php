@@ -54,6 +54,7 @@ js::set('articleID', $article->id);
           <li class='next disabled'><a href='###'> <?php print($lang->article->none); ?><i class='icon-arrow-right'></i></a></li>
           <?php endif; ?>
         </ul>
+        <a href='#' class='back2top'><i class='icon-circle-arrow-up'></i> <?php echo $lang->article->back2Top; ?></a>
       </footer>
     </div>
     <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=article&objectID={$article->id}");?></div>

@@ -95,6 +95,7 @@ js::set('productID', $product->id);
           <?php $this->file->printFiles($product->files);?>
         </div>
       </div>
+      <a href='#' class='back2top'><i class='icon-circle-arrow-up'></i> <?php echo $lang->article->back2Top; ?></a>
     </div>
     <div id='comments'>
       <div id='commentBox'></div>
