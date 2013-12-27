@@ -1,6 +1,6 @@
 .thread .panel-heading > i {display: inline-block;font-size: 30px;margin-right: 10px;}
 .thread .panel-actions{margin-top: 10px;}
-.thread.reply .panel-actions{margin-top: 0;}
+.thread.reply .panel-actions{margin-top: 0;margin-right: 0;}
 .thread .panel-actions .label{font-size: 14px;}
 
 .speaker { width: 180px; border-right:1px solid #ddd; padding: 10px 15px !important;}
@@ -20,3 +20,8 @@
 .pager{display: block; margin: -15px 0 5px;}
 
 #replyForm .file-form .form-group { margin-left: -15px; margin-right: -15px; }
+
+.thread.panel{border-color:#bed0e3; box-shadow:0 1px 1px #bed0e3}
+.thread .panel-heading{background-color: #EBF2F9;color: #31708F;background-image: -moz-linear-gradient(#f1f8ff, #e1f0ff); background-image: -webkit-linear-gradient(#f1f8ff, #e1f0ff); background-image: linear-gradient(#f1f8ff, #e1f0ff); background-repeat: repeat-x;border-color:#bed0e3;}
+.thread.panel.striped{border-color:#d7c9ad; box-shadow:0 1px 1px #d7c9ad}
+.thread.striped .panel-heading{background-color:#FCF8E3;color: #8A6D3B;background-image: -moz-linear-gradient(#fdfaeb, #f5f0d3); background-image: -webkit-linear-gradient(#fdfaeb, #f5f0d3); background-image: linear-gradient(#fdfaeb, #f5f0d3); background-repeat: repeat-x;border-color:#d7c9ad;}

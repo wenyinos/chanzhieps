@@ -96,3 +96,7 @@ textarea{height: auto;}
 .nav-content{background-color: #34495E!important;color: #f1f1f1!important;border:none!important;}
 .nav-content > li > a{text-shadow: none!important;color: #f1f1f1!important;}
 .nav-content > li > a:hover{background-color: #1ABC9C;color: #fff;}
+
+/* forum */
+.thread.panel{border-color:#2C3E50!important; box-shadow: none!important;}
+.thread .panel-heading{background: #2C3E50!important;color: #fff!important;}
