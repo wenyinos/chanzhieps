@@ -82,7 +82,7 @@ class tree extends control
         /* Assign. */
         $this->view->category   = $category;
         $this->view->optionMenu = $optionMenu;
-        $this->view->aliasAddon = trim("http://" . $this->server->http_host . $config->webRoot, '/' ). '/';
+        $this->view->aliasAddon = trim("http://" . $this->server->http_host . $this->config->webRoot, '/' ). '/';
 
         if(strpos('forum,blog', $category->type) !== false) $this->view->aliasAddon .=  $category->type . '/';
 
