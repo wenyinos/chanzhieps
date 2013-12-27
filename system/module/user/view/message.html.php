@@ -10,7 +10,7 @@
             <tr class='text-center'>
               <th style='width: 10px'><input type='checkbox' id='selectAll'></th>
               <th style='width: 50px'><?php echo $lang->message->from;?></th>
-              <th style='width: 100px'><?php echo $lang->message->date;?></th>
+              <th style='width: 150px'><?php echo $lang->message->date;?></th>
               <th><?php echo $lang->message->content;?></th>
               <th style='width: 60px'><?php echo $lang->message->readed;?></th>
               <th style='width: 80px'><?php echo $lang->actions;?></th>
