@@ -35,11 +35,17 @@ js::set('path', json_encode($path));
         <?php endif; ?>
         <tr>
           <th><?php echo $lang->book->title;?></th>
-          <td><?php echo html::input('title', $node->title, 'class="form-control"');?></td>
+          <td>
+            <div class='required required-wrapper'></div>
+            <?php echo html::input('title', $node->title, 'class="form-control"');?>
+          </td>
         </tr>
         <tr>
           <th><?php echo $lang->book->alias;?></th>
           <td>
+            <?php if($node->type == 'book'):?>
+            <div class='required required-wrapper'></div>
+            <?php endif;?>
             <div class='input-group text-1'>
               <span class='input-group-addon'>http://<?php echo $this->server->http_host . $config->webRoot?>book/id@</span>
               <?php echo html::input('alias', $node->alias, "class='form-control' placeholder='{$lang->alias}'");?>
