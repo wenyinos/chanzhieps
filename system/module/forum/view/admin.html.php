@@ -6,7 +6,7 @@
       <tr class='text-center'>
         <?php $vars = "boardID=$boardID&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
         <th style='width: 60px' class='text-center'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->thread->id);?></th>
-        <th style='width: 80px'><?php echo $lang->thread->status;?></th>
+        <th style='width: 80px'><?php commonModel::printOrderLink('hidden', $orderBy, $vars, $lang->thread->status);?></th>
         <th><?php echo $lang->thread->title;?></th>
         <th style='width: 70px'><?php commonModel::printOrderLink('author', $orderBy, $vars, $lang->thread->author);?></th>
         <th style='width: 100px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->thread->postedDate);?></th>
