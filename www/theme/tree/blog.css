@@ -21,5 +21,5 @@ h5{font-size: 14px;}
 #articles .card-heading a{font-weight: bold; color: #6E2E16}
 
 /* pager */
-.pager{margin-bottom: 20px;display: block;}
+.pager{margin-bottom: 20px;display: block;background-color: #f5f0cc;padding: 10px 15px}
 .pager .page{padding: 0}

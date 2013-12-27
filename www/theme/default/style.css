@@ -101,7 +101,7 @@
 .panel-block .panel-heading h4 [class^="icon-"] {display: inline-block;margin-right: 4px;}
 .panel-block .panel-body {padding: 10px 15px;}
 .panel-block .panel-body > .dl-horizontal {margin: 0;}
-.panel-block .panel-body > .dl-horizontal dt {width: 20%; padding: 3px;}
+.panel-block .panel-body > .dl-horizontal dt {width: 20%; padding: 3px; font-size: 12px}
 .panel-block .panel-body > .dl-horizontal dd {margin-left: 20%; padding-left: 6px; padding: 3px;}
 .panel-block .panel-body > .nav {margin: -10px -15px;}
 .panel-block .panel-body > .ul-list {margin: -10px -15px;}
