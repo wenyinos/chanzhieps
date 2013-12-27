@@ -204,7 +204,10 @@ form .star {display: none;}/* hide star */
 .page-wrapper .article > header h1,.page-wrapper .article > header h2,.page-wrapper .article > header h3{font-size: 24px}
 .page-wrapper .article > header > dl {margin: 0 0 10px; background: #fff; border: 0;padding: 5px 2px 0 2px;}
 .page-wrapper .article > header > .abstract {margin: 0 0 10px;padding: 10px 15px;}
+.page-wrapper .article > footer {position: relative;}
 .page-wrapper .article > footer .pager {margin-bottom: 0;}
+.page-wrapper .article > footer .back2top {background-color: #fff; position: absolute; bottom: -21px; right: -50px; display: block; width: 30px; padding: 5px 8px; border:1px solid #ddd; border-radius: 0 4px 4px 0}
+.page-wrapper .article > footer .back2top:hover {text-decoration: none; background-color: #E5E5E5}
 
 /* list */
 .page-wrapper .list {border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);}
