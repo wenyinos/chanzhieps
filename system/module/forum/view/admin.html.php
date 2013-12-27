@@ -1,17 +1,18 @@
 <?php include '../../common/view/header.admin.html.php'; ?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class="icon-comments-alt"></i> <?php echo $lang->forum->threadList;?></strong></div>
-  <table class='table table-hover table-striped'>
+  <table class='table table-hover table-striped tablesorter'>
     <thead>
       <tr class='text-center'>
-        <th style='width: 70px'><?php echo $lang->thread->id;?></th>
+        <?php $vars = "boardID=$boardID&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
+        <th style='width: 60px' class='text-center'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->thread->id);?></th>
         <th style='width: 80px'><?php echo $lang->thread->status;?></th>
         <th><?php echo $lang->thread->title;?></th>
-        <th style='width: 50px'><?php echo $lang->thread->author;?></th>
-        <th style='width: 100px'><?php echo $lang->thread->postedDate;?></th>
-        <th style='width: 60px'><?php echo $lang->thread->views;?></th>
-        <th style='width: 60px'><?php echo $lang->thread->replies;?></th>
-        <th style='width: 150px'><?php echo $lang->thread->lastReply;?></th>
+        <th style='width: 70px'><?php commonModel::printOrderLink('author', $orderBy, $vars, $lang->thread->author);?></th>
+        <th style='width: 100px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->thread->postedDate);?></th>
+        <th style='width: 60px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->thread->views);?></th>
+        <th style='width: 60px'><?php commonModel::printOrderLink('replies', $orderBy, $vars, $lang->thread->replies);?></th>
+        <th style='width: 150px'><?php commonModel::printOrderLink('repliedDate', $orderBy, $vars, $lang->thread->lastReply);?></th>
         <th style='width: 100px'><?php echo $lang->actions;?></th>
       </tr>  
     </thead>
