@@ -1,22 +1,27 @@
-<div class='bg-white radius'>
-<form method='post' enctype='multipart/form-data' id='fileForm' action='<?php echo $this->createLink('file', 'edit', "fileID=$file->id")?>'>
-<table class='table table-form'>
-  <caption><?php echo $lang->file->edit;?></caption>
-  <tr>
-    <th class='w-200px'><?php echo $lang->file->title;?></th> 
-    <td><?php echo html::input('title',$file->title, "class='text-1'");?></td>
-  </tr>
-  <tr>
-    <th><?php echo $lang->file->editFile;?></th>
-    <td><?php echo html::file('upFile');?></td>
-  </tr>
-  <tr>
-    <th></th>
-    <td><?php echo html::submitButton() . html::commonButton($lang->goback, 'btn btn-default goback')?></td>
-  </tr>
-
-</table>
-</form>
+<div class='modal-dialog' style='width: 500px'>
+  <div class='modal-content'>
+    <div class='modal-header'>
+      <h4 class='modal-title'><i class='icon-edit'></i> <?php echo $lang->file->edit;?></h4>
+    </div>
+    <div class='modal-body'>
+      <form method='post' enctype='multipart/form-data' id='fileForm' action='<?php echo $this->createLink('file', 'edit', "fileID=$file->id")?>'>
+        <table class='table table-form'>
+          <tr>
+            <th style='width: 80px'><?php echo $lang->file->title;?></th> 
+            <td><?php echo html::input('title',$file->title, "class='form-control'");?></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->file->editFile;?></th>
+            <td><?php echo html::file('upFile', "class='form-control'");?></td>
+          </tr>
+          <tr>
+            <th></th>
+            <td><?php echo html::submitButton() . html::commonButton($lang->goback, 'btn btn-default goback')?></td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </div>
 </div>
 <script>
 $(function()
