@@ -103,3 +103,7 @@ textarea{height: auto;}
 
 /* text-muted */
 .text-muted{color: #777}
+
+/* forum */
+.thread.panel{border-color:#7A94B2!important; box-shadow: none!important;}
+.thread .panel-heading{background: #7A94B2!important;color: #fff!important;}

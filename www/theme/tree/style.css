@@ -104,3 +104,7 @@ textarea{height: auto;}
 /* breadcrumb */
 .breadcrumb{background-color: background-color: #e3d7a2;background-color:rgba(227,215,162,0.75);color: #4B624F;padding: 10px 15px;border-radius: 2px}
 .breadcrumb>li+li:before,.breadcrumb:after{color: #4B624F}
+
+/* forum */
+.thread.panel{border-color:#E3D7A2!important; box-shadow: none!important;}
+.thread .panel-heading{background: #E3D7A2!important;color: #555!important;}
