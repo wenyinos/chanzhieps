@@ -394,14 +394,14 @@ class commonModel extends model
         if(empty($method)) $method = $app->getMethodName();
         $className = 'header';
 
-        if(strpos($orderBy, $fieldName) !== false)
+        if(strpos($orderBy, $fieldName . '_') !== false)
         {
-            if(stripos($orderBy, 'desc') !== false)
+            if(stripos($orderBy, $fieldName . '_desc') !== false)
             {
                 $orderBy   = str_ireplace('desc', 'asc', $orderBy);
                 $className = 'headerSortUp';
             }
-            elseif(stripos($orderBy, 'asc')  !== false)
+            elseif(stripos($orderBy, $fieldName . '_asc')  !== false)
             {
                 $orderBy = str_ireplace('asc', 'desc', $orderBy);
                 $className = 'headerSortDown';
