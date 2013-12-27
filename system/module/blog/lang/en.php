@@ -9,5 +9,6 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
+$lang->blog->common   = 'Blog';
 $lang->blog->home     = 'Home';
 $lang->blog->siteHome = 'Site';

@@ -68,7 +68,7 @@ $lang->user->messages    = 'My Messages';
 $lang->user->reply       = 'My replies';
 
 $lang->user->message = new stdclass();
-$lang->user->message       = "My message <span class='label label-badge text-latin'>%s</span>";
+$lang->user->message->mine = "My message <span class='label label-badge text-latin'>%s</span>";
 $lang->user->message->from = 'From';
 
 $lang->user->inputUserName       = 'Please input your username';

@@ -221,7 +221,7 @@ class userModel extends model
         $user = $this->identify($account, $password);
         if(!$user) return false;
 
-        $user->rights = $this->authorize($user);
+        if(RUN_MODE == 'front') $user->rights = $this->authorize($user);
         $this->session->set('user', $user);
         $this->app->user = $this->session->user;
 
