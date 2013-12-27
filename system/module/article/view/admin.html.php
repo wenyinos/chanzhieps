@@ -27,7 +27,7 @@
   <table class='table table-hover table-striped tablesorter'>
     <thead>
       <tr>
-        <?php $vars = "type=$type&categoryID=$categoryID&corderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
+        <?php $vars = "type=$type&categoryID=$categoryID&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
         <th style='width: 60px' class='text-center'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->article->id);?></th>
         <th class='text-center'><?php commonModel::printOrderLink('title',     $orderBy, $vars, $lang->article->title);?></th>
         <th style='width: 100px' class='text-center'><?php commonModel::printOrderLink('category', $orderBy, $vars, $lang->article->category);?></th>

@@ -19,7 +19,7 @@
   <table class='table table-hover table-striped tablesorter'>
     <thead>
       <tr class='text-center'>
-        <?php $vars = "categoryID=$categoryID&corderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
+        <?php $vars = "categoryID=$categoryID&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
         <th style='width: 60px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->product->id);?></th>
         <th><?php commonModel::printOrderLink('name', $orderBy, $vars, $lang->product->name);?></th>
         <th style='width: 15%'><?php commonModel::printOrderLink('category', $orderBy, $vars, $lang->product->category);?></th>
