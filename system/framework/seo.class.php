@@ -142,13 +142,17 @@ class seo
      * 
      * @param  string    $string 
      * @param  string    $to 
+     * @param  string $skip 
      * @static
      * @access public
      * @return string
      */
-    public static function unify($string, $to, $skip = '')
+    public static function unify($string, $to, $skip='')
     {
-        $string = str_replace(array('_', '、', ' ', '-', '?', '@', '&', '%', '~', '`', '+', '*', '/', '\\', '，', '.', '。'), $to, $string);
+        if(!is_array($skip)) $skip = explode(',', $skip);
+        $labels = array('_', '、', ' ', '-', '?', '@', '&', '%', '~', '`', '+', '*', '/', '\\', '，', '.', '。');
+        $labels = array_diff($labels, $skip);
+        $string = str_replace($labels, $to, $string);
         return preg_replace('/[,]+/', $to, trim($string, $to));
     }
 }

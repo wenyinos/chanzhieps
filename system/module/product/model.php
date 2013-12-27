@@ -226,7 +226,7 @@ class productModel extends model
             ->get();
 
         $product->alias    = seo::unify($product->alias, '-');
-        $product->keywords = seo::unify($product->keywords, ',');
+        $product->keywords = seo::unify($product->keywords, ',', '.');
 
         $this->dao->insert(TABLE_PRODUCT)
             ->data($product, $skip = 'categories,uid')
@@ -265,7 +265,7 @@ class productModel extends model
             ->get();
 
         $product->alias    = seo::unify($product->alias, '-');
-        $product->keywords = seo::unify($product->keywords, ',');
+        $product->keywords = seo::unify($product->keywords, ',', '.');
 
         $this->dao->update(TABLE_PRODUCT)
             ->data($product, $skip = 'categories,uid')

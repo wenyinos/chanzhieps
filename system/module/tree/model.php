@@ -366,7 +366,7 @@ class treeModel extends model
     {
         $category = fixer::input('post')->join('moderators', ',')->setDefault('readonly', 0)->get();
         $category->alias    = seo::unify($category->alias, '-');
-        $category->keywords = seo::unify($category->keywords, ',');
+        $category->keywords = seo::unify($category->keywords, ',', '.');
 
         /* Set moderators. */
         if(!isset($category->moderators))
