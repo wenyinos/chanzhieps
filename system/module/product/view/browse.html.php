@@ -17,7 +17,7 @@ js::set('path',  json_encode($path));
 
 include '../../common/view/treeview.html.php';
 ?>
-<?php echo $common->printPositionBar($category, $product);?>
+<?php echo $common->printPositionBar($category, isset($product) ? $product : '');?>
 <div class='row'>
   <div class='col-md-9'>
     <div class='list list-condensed'>
@@ -27,13 +27,13 @@ include '../../common/view/treeview.html.php';
         <div class='col-sm-4 col-xs-6'>
           <div class='card'>
           <?php 
-          $title = $product->image->primary->title ? $product->image->primary->title : $product->name;
           if(empty($product->image)) 
           {
               echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&name=$product->alias"), '<div class="media-placeholder" style="background-color: hsl(' . rand(0,359) . ',34%,89%)">' . $product->name . '</div>', "class='media-wrapper'");
           }
           else
           {
+              $title = $product->image->primary->title ? $product->image->primary->title : $product->name;
               echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&name=$product->alias"), html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"), "class='media-wrapper'");
           }
           ?>
