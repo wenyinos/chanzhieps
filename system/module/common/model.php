@@ -433,7 +433,7 @@ class commonModel extends model
         $user->account  = 'guest';
         $user->realname = 'guest';
         $user->admin    = RUN_MODE == 'cli' ? 'super' : 'no';
-        $user->rights   = $this->config->rights->guest;
+        if(RUN_MODE == 'front') $user->rights = $this->config->rights->guest;
 
         $this->session->set('user', $user);
         $this->app->user = $this->session->user;
