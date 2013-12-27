@@ -7,7 +7,7 @@ $(document).ready(function()
             setTimeout(function()
             {
                 var link = createLink('message', 'comment', 'objecType=' + v.objectType + '&objectID=' + v.objectID);
-                 $('#commentForm').parent().parent().load(link, location.href="#first");
+                 $('#commentForm').closest('#commentBox').load(link, location.href="#first");
             },  
             1000);   
         }
