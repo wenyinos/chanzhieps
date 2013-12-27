@@ -64,6 +64,7 @@ $lang->user->forbid          = '禁用';
 $lang->user->profile     = '个人信息';
 $lang->user->editProfile = '编辑信息';
 $lang->user->thread      = '我的主题';
+$lang->user->messages    = '我的消息';
 $lang->user->reply       = '我的回贴';
 
 $lang->user->message = new stdclass();

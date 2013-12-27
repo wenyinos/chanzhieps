@@ -64,6 +64,7 @@ $lang->user->forbid          = 'Forbid';
 $lang->user->profile     = 'Profile';
 $lang->user->editProfile = 'Edit profile';
 $lang->user->thread      = 'My threads';
+$lang->user->messages    = 'My Messages';
 $lang->user->reply       = 'My replies';
 
 $lang->user->message = new stdclass();

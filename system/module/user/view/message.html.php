@@ -4,7 +4,7 @@
   <div class='col-md-10'>
     <form method='post' target='hiddenwin' action="<?php echo $this->createLink('message', 'batchDelete');?>">
       <div class='panel'>
-        <div class='panel-heading'><strong><i class='icon-comments-alt'></i> <?php echo $lang->user->message->mine;?></strong></div>
+        <div class='panel-heading'><strong><i class='icon-comments-alt'></i> <?php echo $lang->user->messages;?></strong></div>
         <table class='table table-bordered table-hover' id='messages'>
           <thead>
             <tr class='text-center'>
