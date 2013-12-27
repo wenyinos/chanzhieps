@@ -42,6 +42,7 @@ class company extends control
             ->add('setDate', $now)
             ->stripTags('desc', $this->config->allowedTags->admin)
             ->stripTags('content', $this->config->allowedTags->admin)
+            ->remove('uid')
             ->get();
 
             $result = $this->loadModel('setting')->setItems('system.common.company', $company);
