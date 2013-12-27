@@ -26,11 +26,11 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
       <?php 
       $productCategory = array_shift($product->categories);
       $url = helper::createLink('product', 'view', "id=$product->id", "category={$productCategory->alias}&name=$product->alias");
-      $title = $product->image->primary->title ? $product->image->primary->title : $product->name;
       ?>
       <?php if(!empty($product->image)): ?>
       <div class='col-md-12 col-sm-4 col-xs-6'>
         <a class='card' href="<?php echo $url;?>">
+          <?php $title = $product->image->primary->title ? $product->image->primary->title : $product->name;?>
           <div class='media'><?php echo html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"); ?></div>
           <strong class='card-heading'>
             <span class='pull-right text-latin'>
@@ -54,7 +54,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
             }
             ?>
             </span>
-            <?php echo $product->name; ?>
+            <?php echo $product->name;?>
           </strong>
         </a>
       </div>
@@ -72,7 +72,6 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
       <?php 
       $category = array_shift($product->categories);
       $url = helper::createLink('product', 'view', "id=$product->id", "category={$productCategory->alias}&name=$product->alias");
-        $title = $product->image->primary->title ? $product->image->primary->title : $product->name;
       ?>
       <li>
         <span class='text-latin pull-right'>
