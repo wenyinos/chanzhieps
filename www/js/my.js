@@ -11,11 +11,6 @@ $(document).ready(function()
     /* Ping for keep login every six minute. */
     if(needPing) setInterval('ping()', 1000 * 360);
 
-    $("#topNav li").hover(function () 
-    {
-        $(this).toggleClass('hover');
-    });
-
     /* Enable lightbox. */
     $("[data-toggle=lightbox]").lightbox();
     
