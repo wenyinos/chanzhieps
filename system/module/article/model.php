@@ -68,7 +68,7 @@ class articleModel extends model
         $page->content = $this->loadModel('tag')->addLink($page->content);
         
         /* Get it's files. */
-        $page->files = $this->loadModel('file')->getByObject('article', $pageID);
+        $page->files = $this->loadModel('file')->getByObject('article', $page->id);
 
         return $page;
     }
