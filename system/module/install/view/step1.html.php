@@ -19,12 +19,14 @@ js::set('wholeResult', $wholeResult);
     <div class='modal-header'><strong><?php echo $lang->install->checking;?></strong></div>
     <div class='modal-body'>
       <table class='table table-bordered'>
-        <tr>
-          <th style='width: 20%'><?php echo $lang->install->checkItem;?></th>
-          <th style='width: 20%'><?php echo $lang->install->current?></th>
-          <th style='width: 10%'><?php echo $lang->install->result?></th>
-          <th class='hide-on-ok'><?php echo $lang->install->action?></th>
-        </tr>
+        <thead>
+          <tr>
+            <th style='width: 20%'><?php echo $lang->install->checkItem;?></th>
+            <th style='width: 20%'><?php echo $lang->install->current?></th>
+            <th><?php echo $lang->install->result?></th>
+            <th class='hide-on-ok'><?php echo $lang->install->action?></th>
+          </tr>
+        </thead>
         <tr>
           <th><?php echo $lang->install->phpVersion;?></th>
           <td><?php echo $phpVersion;?></td>
