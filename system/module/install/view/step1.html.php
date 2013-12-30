@@ -16,77 +16,75 @@ js::set('wholeResult', $wholeResult);
 ?>
 <div class='container'>
   <div class='modal-dialog'>
-    <div class='modal-content'>
-      <div class='modal-header'><strong><?php echo $lang->install->checking;?></strong></div>
-      <div class='modal-body'>
-        <table class='table table-bordered'>
-          <tr>
-            <th style='width: 20%'><?php echo $lang->install->checkItem;?></th>
-            <th style='width: 20%'><?php echo $lang->install->current?></th>
-            <th style='width: 10%'><?php echo $lang->install->result?></th>
-            <th class='hide-on-ok'><?php echo $lang->install->action?></th>
-          </tr>
-          <tr>
-            <th><?php echo $lang->install->phpVersion;?></th>
-            <td><?php echo $phpVersion;?></td>
-            <td class='<?php echo $phpResult;?>'><?php echo $lang->install->$phpResult;?></td>
-            <td class='small hide-on-ok'><?php if($phpResult == 'fail') echo $lang->install->phpFail;?></td>
-          </tr>
-          <tr>
-            <th><?php echo $lang->install->pdo;?></th>
-            <td><?php $pdoResult == 'ok' ? printf($lang->install->loaded) : printf($lang->install->unloaded);?></td>
-            <td class='<?php echo $pdoResult;?>'><?php echo $lang->install->$pdoResult;?></td>
-            <td class='small hide-on-ok'><?php if($pdoResult == 'fail') echo $lang->install->pdoFail;?></td>
-          </tr>
-          <tr>
-            <th><?php echo $lang->install->pdoMySQL;?></th>
-            <td><?php $pdoMySQLResult == 'ok' ? printf($lang->install->loaded) : printf($lang->install->unloaded);?></td>
-            <td class='<?php echo $pdoMySQLResult;?>'><?php echo $lang->install->$pdoMySQLResult;?></td>
-            <td class='small hide-on-ok'><?php if($pdoMySQLResult == 'fail') echo $lang->install->pdoMySQLFail;?></td>
-          </tr>
-          <tr>
-            <th><?php echo $lang->install->tmpRoot;?></th>
-            <td>
-              <?php
-              $tmpRootInfo['exists']   ? print($lang->install->exists)   : print($lang->install->notExists);
-              $tmpRootInfo['writable'] ? print($lang->install->writable) : print($lang->install->notWritable);
-              ?>
-            </td>
-            <td class='<?php echo $tmpRootResult;?>'><?php echo $lang->install->$tmpRootResult;?></td>
-            <td class='small hide-on-ok'>
-              <?php 
-              if(!$tmpRootInfo['exists'])   printf($lang->install->mkdir, $tmpRootInfo['path'], $tmpRootInfo['path']);
-              if(!$tmpRootInfo['writable']) printf($lang->install->chmod, $tmpRootInfo['path'], $tmpRootInfo['path']);
-              ?>
-            </td>
-          </tr>
-          <tr>
-            <th><?php echo $lang->install->dataRoot;?></th>
-            <td>
-              <?php
-              $dataRootInfo['exists']   ? print($lang->install->exists)   : print($lang->install->notExists);
-              $dataRootInfo['writable'] ? print($lang->install->writable) : print($lang->install->notWritable);
-              ?>
-            </td>
-            <td class='<?php echo $dataRootResult;?>'><?php echo $lang->install->$dataRootResult;?></td>
-            <td class='small hide-on-ok'>
-              <?php 
-              if(!$dataRootInfo['exists'])   printf($lang->install->mkdir, $dataRootInfo['path'], $dataRootInfo['path']);
-              if(!$dataRootInfo['writable']) printf($lang->install->chmod, $dataRootInfo['path'], $dataRootInfo['path']);
-              ?>
-            </td>
-          </tr>
-        </table>
-        <?php if($pdoResult == 'fail' or $pdoMySQLResult == 'fail'):?>
-        <div class='alert'><?php echo "<p class='small text-left'>" . '<strong>' . $lang->install->phpINI . '</strong><br />' . nl2br($this->install->getIniInfo()) . '</p>';?></div>
-        <?php endif;?>
-      </div>
-      <div class='modal-footer'>
-      <?php
-      if($wholeResult == 'ok')   echo html::a(inLink('step2'), $lang->install->next, "class='btn btn-primary'");
-      if($wholeResult == 'fail') echo html::a(inLink('step1'), $lang->install->reload, "class='btn btn-primary'");
-      ?>
-      </div>
+    <div class='modal-header'><strong><?php echo $lang->install->checking;?></strong></div>
+    <div class='modal-body'>
+      <table class='table table-bordered'>
+        <tr>
+          <th style='width: 20%'><?php echo $lang->install->checkItem;?></th>
+          <th style='width: 20%'><?php echo $lang->install->current?></th>
+          <th style='width: 10%'><?php echo $lang->install->result?></th>
+          <th class='hide-on-ok'><?php echo $lang->install->action?></th>
+        </tr>
+        <tr>
+          <th><?php echo $lang->install->phpVersion;?></th>
+          <td><?php echo $phpVersion;?></td>
+          <td class='<?php echo $phpResult;?>'><?php echo $lang->install->$phpResult;?></td>
+          <td class='small hide-on-ok'><?php if($phpResult == 'fail') echo $lang->install->phpFail;?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->install->pdo;?></th>
+          <td><?php $pdoResult == 'ok' ? printf($lang->install->loaded) : printf($lang->install->unloaded);?></td>
+          <td class='<?php echo $pdoResult;?>'><?php echo $lang->install->$pdoResult;?></td>
+          <td class='small hide-on-ok'><?php if($pdoResult == 'fail') echo $lang->install->pdoFail;?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->install->pdoMySQL;?></th>
+          <td><?php $pdoMySQLResult == 'ok' ? printf($lang->install->loaded) : printf($lang->install->unloaded);?></td>
+          <td class='<?php echo $pdoMySQLResult;?>'><?php echo $lang->install->$pdoMySQLResult;?></td>
+          <td class='small hide-on-ok'><?php if($pdoMySQLResult == 'fail') echo $lang->install->pdoMySQLFail;?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->install->tmpRoot;?></th>
+          <td>
+            <?php
+            $tmpRootInfo['exists']   ? print($lang->install->exists)   : print($lang->install->notExists);
+            $tmpRootInfo['writable'] ? print($lang->install->writable) : print($lang->install->notWritable);
+            ?>
+          </td>
+          <td class='<?php echo $tmpRootResult;?>'><?php echo $lang->install->$tmpRootResult;?></td>
+          <td class='small hide-on-ok'>
+            <?php 
+            if(!$tmpRootInfo['exists'])   printf($lang->install->mkdir, $tmpRootInfo['path'], $tmpRootInfo['path']);
+            if(!$tmpRootInfo['writable']) printf($lang->install->chmod, $tmpRootInfo['path'], $tmpRootInfo['path']);
+            ?>
+          </td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->install->dataRoot;?></th>
+          <td>
+            <?php
+            $dataRootInfo['exists']   ? print($lang->install->exists)   : print($lang->install->notExists);
+            $dataRootInfo['writable'] ? print($lang->install->writable) : print($lang->install->notWritable);
+            ?>
+          </td>
+          <td class='<?php echo $dataRootResult;?>'><?php echo $lang->install->$dataRootResult;?></td>
+          <td class='small hide-on-ok'>
+            <?php 
+            if(!$dataRootInfo['exists'])   printf($lang->install->mkdir, $dataRootInfo['path'], $dataRootInfo['path']);
+            if(!$dataRootInfo['writable']) printf($lang->install->chmod, $dataRootInfo['path'], $dataRootInfo['path']);
+            ?>
+          </td>
+        </tr>
+      </table>
+      <?php if($pdoResult == 'fail' or $pdoMySQLResult == 'fail'):?>
+      <div class='alert'><?php echo "<p class='small text-left'>" . '<strong>' . $lang->install->phpINI . '</strong><br />' . nl2br($this->install->getIniInfo()) . '</p>';?></div>
+      <?php endif;?>
+    </div>
+    <div class='modal-footer'>
+    <?php
+    if($wholeResult == 'ok')   echo html::a(inLink('step2'), $lang->install->next, "class='btn btn-primary'");
+    if($wholeResult == 'fail') echo html::a(inLink('step1'), $lang->install->reload, "class='btn btn-primary'");
+    ?>
     </div>
   </div>
 </div>

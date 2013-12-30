@@ -13,31 +13,25 @@
 <?php include '../../common/view/header.lite.html.php';?>
 <div class='container'>
   <div class='modal-dialog'>
-    <div class='modal-content'>
-      <div class='modal-body'>
-        <h3><?php echo $lang->install->welcome;?></h3>
-        <div><?php echo $lang->install->desc;?></div>
-        <div>
-        <ul>
-          <li class='dropdown'><?php include '../../common/view/selectlang.html.php';?></li>
-        </ul>
-        </div>
-
-      </div>
-      <div class='modal-footer'>
-        <?php
-        if(!isset($latestRelease))
-        {
-            echo html::a($this->createLink('install', 'step1'), $lang->install->start, "class='btn btn-primary'");
-        }
-        else
-        {
-            echo $lang->install->choice;
-            echo html::a($latestRelease->url, $lang->install->seeLatestRelease, "target='_blank'");
-            echo ' &nbsp; ' . html::a($this->createLink('install', 'step1'), $lang->install->keepInstalling, "class='btn btn-primary'");
-        }
-        ?>
-      </div>
+    <div class="modal-header text-right"><button class='btn dropdown'><?php include '../../common/view/selectlang.html.php';?></button></div>
+    <div class='modal-body'>
+      <h3><?php echo $lang->install->welcome;?></h3>
+      <div><?php echo $lang->install->desc;?></div>
+    </div>
+    <div class='modal-footer'>
+      
+      <?php
+      if(!isset($latestRelease))
+      {
+          echo html::a($this->createLink('install', 'step1'), $lang->install->start, "class='btn btn-primary'");
+      }
+      else
+      {
+          echo $lang->install->choice;
+          echo html::a($latestRelease->url, $lang->install->seeLatestRelease, "target='_blank'");
+          echo ' &nbsp; ' . html::a($this->createLink('install', 'step1'), $lang->install->keepInstalling, "class='btn btn-primary'");
+      }
+      ?>
     </div>
   </div>
 </div>
