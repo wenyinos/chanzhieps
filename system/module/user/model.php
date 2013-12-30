@@ -275,7 +275,7 @@ class userModel extends model
 
         /* The password can be the plain or the password after md5. */
         $oldPassword = $this->createPassword($password, $user->account, $user->join);
-        if($oldPassword != $user->password and !$this->compareHashPassword($password, $user))
+        if($oldPassword != $user->password and !$this->compareHashPassword($password, $user) and $user->password != $this->createPassword($password, $user->account))
         {
             $user->fails ++;
             if($user->fails > 2 * 2) $user->locked = date('Y-m-d H:i:s', time() + 10 * 60);
