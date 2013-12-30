@@ -302,6 +302,6 @@ INSERT INTO `eps_layout` (`page`, `region`, `blocks`) VALUES
 ('article_view', 'side', '6,9,'),
 ('product_browse', 'side', '4,7,9,'),
 ('product_view', 'side', '4,7,9,'),
-('message_index', 'side', '9,');
-('blog_index', 'side', '8,');
+('message_index', 'side', '9,'),
+('blog_index', 'side', '8,'),
 ('blog_view', 'side', '8,');
