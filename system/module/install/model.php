@@ -299,11 +299,10 @@ class installModel extends model
         $clientLang = $this->app->getClientLang();
 
         $dbFile = $this->app->getAppRoot() . 'db' . DS . 'chanzhi.sql';
-        if($clientLang == 'zh-cn') $defaultDataFile = $this->app->getAppRoot() . 'db' . DS . 'local.zh-cn.sql';
-        if($clientLang == 'zh-tw') $defaultDataFile = $this->app->getAppRoot() . 'db' . DS . 'local.zh-tw.sql';
-        if($clientLang == 'en')    $defaultDataFile = $this->app->getAppRoot() . 'db' . DS . 'local.en.sql';
+        $defaultDataFile = $this->app->getAppRoot() . 'db' . DS . 'local.' . $clientLang . '.sql';
 
-        $tables = array_merge(explode(';', file_get_contents($dbFile)), explode(';', file_get_contents($defaultDataFile)));
+        $dbContents = file_get_contents($dbFile) . file_get_contents($defaultDataFile);
+        $tables = array_merge(explode(';', $dbContents));
 
         foreach($tables as $table)
         {
