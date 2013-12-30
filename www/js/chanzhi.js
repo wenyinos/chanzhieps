@@ -542,6 +542,8 @@ if(config.runMode != 'admin') needPing = false;
  */
 function setBack2Top()
 {
+    if($('.back2top').length == 0) return;
+
     $(window).scroll(function()
     {
         var btn          = $('.back2top');
