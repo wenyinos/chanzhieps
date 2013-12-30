@@ -1,5 +1,7 @@
 $(document).ready(function()
 {
+    $('.nav-system-book').addClass('active');
+
     /* Set current active moduleMenu. */
     if(typeof(v.path) != 'undefined')
     {
