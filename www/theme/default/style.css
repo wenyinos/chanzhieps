@@ -200,19 +200,20 @@ form .star {display: none;}/* hide star */
 .form-group .file-form .form-group:last-child {margin-bottom: 0;}
 
 /* article */
-.page-wrapper .article {border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); margin-bottom: 20px;}
-.page-wrapper .article > header h1,.page-wrapper .article > header h2,.page-wrapper .article > header h3{font-size: 24px}
-.page-wrapper .article > header > dl {margin: 0 0 10px; background: #fff; border: 0;padding: 5px 2px 0 2px;}
-.page-wrapper .article > header > .abstract {margin: 0 0 10px;padding: 10px 15px;}
-.page-wrapper .article > footer {position: relative;}
-.page-wrapper .article > footer .pager {margin-bottom: 0;}
-.page-wrapper .article > footer .back2top {background-color: #fff; position: absolute; bottom: -21px; right: -50px; display: block; width: 30px; padding: 5px 8px; border:1px solid #ddd; border-radius: 0 4px 4px 0}
-.page-wrapper .article > footer .back2top:hover {text-decoration: none; background-color: #E5E5E5}
+.article {border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); margin-bottom: 20px;}
+.article > header h1,.article > header h2,.article > header h3{font-size: 24px}
+.article > header > dl {margin: 0 0 10px; background: #fff; border: 0;padding: 5px 2px 0 2px;}
+.article > footer > p {padding: 10px 0;} 
+.article > header > .abstract {margin: 0 0 10px; padding: 10px;}
+.article > footer {position: relative;}
+.article > footer .pager {margin-bottom: 0;}
+.article > footer .back2top {background-color: #fff; position: absolute; bottom: -21px; right: -50px; display: block; width: 30px; padding: 5px 8px; border:1px solid #ddd; border-radius: 0 4px 4px 0}
+.article > footer .back2top:hover {text-decoration: none; background-color: #E5E5E5}
 
 /* list */
-.page-wrapper .list {border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);}
-.page-wrapper .list > header {padding: 10px 15px;background-color: #f1f1f1;color: #666}
-.page-wrapper .list > header h2 {font-size: 14px;font-weight: bold;margin: 0;padding: 0}
+.list {border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);}
+.list > header {padding: 10px 15px;background-color: #f1f1f1;color: #666}
+.list > header h2 {font-size: 14px;font-weight: bold;margin: 0;padding: 0}
 
 /* colors */
 .red {color: #d2322d}
@@ -247,7 +248,7 @@ form .star {display: none;}/* hide star */
 #siteSlogan {font-size: 16px; padding-left: 20px; color: #777; padding-bottom: 13px;}
 
 /* --- NAVBAR --- */
-#navbar {border-color: #ddd; border-radius: 5px;border-bottom-color: #ccc}
+#navbar {border-color: #ddd; border-radius: 5px; border-bottom-color: #ccc}
 #navbar .nav > li > a {font-weight: bold; padding: 15px 20px; color: #555;}
 #navbar .nav > li > ul, #navbar .nav > li > ul > li > ul{padding: 0}
 #navbar .nav > li > ul > li > a, #navbar .nav > li > ul > li > ul > li > a {padding: 10px 20px;}
