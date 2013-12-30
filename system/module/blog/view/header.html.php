@@ -63,6 +63,11 @@ js::import($jsRoot . 'html5shiv/min.js');
 js::import($jsRoot . 'respond/min.js');
 ?>
 <![endif]-->
+<!--[if lt IE 10]>
+<?php
+js::import($jsRoot . 'jquery/placeholder/min.js');
+?>
+<![endif]-->
 </head>
 <body>
 <div class='page-container'>
@@ -92,14 +97,10 @@ js::import($jsRoot . 'respond/min.js');
         echo "<li {$class}>" . html::a($this->inlink('index', "id={$nav->id}", "category={$nav->alias}"), $nav->name) . '</li>';
       }
       ?>
-
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><?php echo html::a(helper::createLink('rss', 'index', '', '', 'xml') . '?type=blog', "<i class='icon icon-rss'></i> RSS", "target='_blank'"); ?></li>
       <li><?php echo html::a($config->webRoot, '<i class="icon-home icon-large"></i> ' . $lang->blog->siteHome);?></li>
     </ul>
   </nav>
-  <ul class='nav' id='blogNav'>
-
-  </ul>
   <div class='page-wrapper'>

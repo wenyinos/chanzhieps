@@ -17,7 +17,7 @@
     <div class="panel-actions">
       <form method='post' class='form-inline form-search'>
         <div class="input-group">
-          <?php echo html::input('key', $query, "class='form-control search-query' placeholder='{$lang->user->inputUserName}'"); ?>
+          <?php echo html::input('query', $query, "class='form-control search-query' placeholder='{$lang->user->inputUserName}'"); ?>
           <span class="input-group-btn">
             <?php echo html::submitButton($lang->user->searchUser,"btn btn-primary"); ?>
           </span>

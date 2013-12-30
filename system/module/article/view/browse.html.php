@@ -16,6 +16,10 @@ include '../../common/view/treeview.html.php';
         <?php $url = inlink('view', "id=$article->id", "category={$category->alias}&name=$article->alias");?>
         <div class='item'>
           <div class='item-heading'>
+            <div class="text-muted pull-right">
+              <span><i class='icon-eye-open'></i> <?php echo $article->views;?></span> &nbsp; 
+              <span><i class='icon-time'></i> <?php echo substr($article->addedDate, 0, 10);?></span>
+            </div>
             <h4><?php echo html::a($url, $article->title);?></h4>
           </div>
           <div class='item-content'>
@@ -28,10 +32,6 @@ include '../../common/view/treeview.html.php';
             </div>
             <?php endif;?>
             <div class='text text-muted'><?php echo helper::substr($article->summary, 120, '...');?></div>
-          </div>
-          <div class='item-footer text-muted'>
-            <span><i class='icon-eye-open'></i> <?php echo $article->views;?></span> &nbsp; 
-            <span><i class='icon-time'></i> <?php echo substr($article->addedDate, 0, 10);?></span>
           </div>
         </div>
         <?php endforeach;?>
