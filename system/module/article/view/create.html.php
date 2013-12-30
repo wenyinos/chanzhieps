@@ -92,8 +92,12 @@
         <td><span class="help-inline"><?php echo $lang->article->note->addedDate;?></span></td>
       </tr>
       <tr>
+        <th><?php echo $lang->article->status;?></th>
+        <td><?php echo html::radio('status', $lang->article->statusList, 'normal');?></td>
+      </tr>
+      <tr>
         <td></td>
-        <td colspan='2'><?php echo html::submitButton() . html::commonButton($lang->article->createDraft, "btn btn-default draft") . html::hidden('type', $type);?></td>
+        <td colspan='2'><?php echo html::submitButton();?></td>
       </div>
     </form>
   </div>

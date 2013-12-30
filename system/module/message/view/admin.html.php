@@ -13,7 +13,14 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php js::set('type', $type);?>
 <div class="panel">
-  <div class="panel-heading"><strong><?php echo $type == 'message' ? ('<i class="icon-comment-alt"></i> ' . $lang->message->common) : ('<i class="icon-comments-alt"></i> ' . $lang->comment->common) ?></strong> &nbsp;&nbsp;&nbsp; <?php echo html::a(inlink('admin', "type={$type}&status=0"), "<i class='icon-remove-circle'></i>" . $lang->message->statusList[0], $status == 0 ? "class='active'" : ''); echo html::a(inlink('admin', "type={$type}&status=1"), "<i class='icon-ok-circle'></i>" . $lang->message->statusList[1], $status == 1 ? "class='active'" : '');?></div>
+  <div class="panel-heading">
+    <strong><?php echo $type == 'message' ? ('<i class="icon-comment-alt"></i> ' . $lang->message->common) : ('<i class="icon-comments-alt"></i> ' . $lang->comment->common) ?></strong>
+    <?php
+    echo '&nbsp; &nbsp; &nbsp;';
+    echo html::a(inlink('admin', "type={$type}&status=0"), $lang->message->statusList[0], $status == 0 ? "class='active'" : '');
+    echo html::a(inlink('admin', "type={$type}&status=1"), $lang->message->statusList[1], $status == 1 ? "class='active'" : '');
+    ?>
+  </div>
 <table class='table table-bordered'>
   <thead>
     <tr>
