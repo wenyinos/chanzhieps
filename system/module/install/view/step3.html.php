@@ -12,7 +12,6 @@
 <?php include '../../common/view/header.lite.html.php';?>
 <div class='container'>
   <div class='modal-dialog'>
-    <div class='modal-content'>
     <?php if(isset($error)):?>
     <div class='modal-header'><strong><?php echo $lang->install->error;?></strong></div>
     <div class='modal-body'><div class='alert alert-danger'><?php echo $error;?></div></div>
@@ -25,7 +24,6 @@
     </div>
     <div class='modal-footer'><?php echo html::a(inlink('step4'), $lang->install->next, "class='btn btn-primary'");?></div>
     <?php endif;?>
-    </div>
   </div>
 </div>
 <?php include './footer.html.php';?>

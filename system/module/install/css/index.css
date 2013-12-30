@@ -2,3 +2,7 @@ h3{font-size:16px;margin-bottom: 20px;}
 blockquote{padding: 0;border-left: 0;}
 li{line-height: 2em}
 .modal-body{padding: 20px 60px;}
+
+.dropdown a:hover,button a:active,.dropdown a:focus{text-decoration: none;}
+.dropdown .dropdown-menu li{text-align: left}
+.dropdown .caret{margin-left: 8px;}
