@@ -53,60 +53,51 @@
     <div class='panel'>
       <div class='panel-heading'><strong><i class='icon-comment-alt'></i> <?php echo $lang->message->post;?></strong></div>
       <div class='panel-body'>
-        <form method='post' class='form-horizontal' id='commentForm' action="<?php echo $this->createLink('message', 'post', 'type=message');?>">
+        <form method='post' id='commentForm' action="<?php echo $this->createLink('message', 'post', 'type=message');?>">
           <?php
           $from  = $this->session->user->account == 'guest' ? '' : $this->session->user->account;
           $phone = $this->session->user->account == 'guest' ? '' : $this->session->user->phone;
           $qq    = $this->session->user->account == 'guest' ? '' : $this->session->user->qq;
           $email = $this->session->user->account == 'guest' ? '' : $this->session->user->email; 
           ?>
-          <div class='form-group'>
-            <label for='from' class='col-sm-2 control-label required'><?php echo $lang->message->from;?></label>
-            <div class='col-xs-10 col-sm-6 col-md-4'>
-              <?php echo html::input('from', $from, "class='form-control'"); ?>
-            </div>
-          </div>
-          <div class='form-group'>
-            <label for='phone' class='col-sm-2 control-label'><?php echo $lang->message->phone;?></label>
-            <div class='col-xs-10 col-sm-6 col-md-4'>
-              <?php echo html::input('phone', $phone, "class='form-control'"); ?>
-            </div>
-            <span class='text text-danger'><?php echo $lang->message->contactHidden;?></span>
-          </div>
-          <div class='form-group'>
-            <label for='qq' class='col-sm-2 control-label'><?php echo $lang->message->qq;?></label>
-            <div class='col-xs-10 col-sm-6 col-md-4'>
-              <?php echo html::input('qq', $qq, "class='form-control'"); ?>
-            </div>
-          </div>
-          <div class='form-group'>
-            <label for='email' class='col-sm-2 control-label'><?php echo $lang->message->email;?></label>
-            <div class='col-xs-10 col-sm-6 col-md-4'>
-              <?php echo html::input('email', $email, "class='form-control'"); ?>
-            </div>
-          </div>
-          <div class='form-group'>
-            <label for='content' class='col-sm-2 control-label required'><?php echo $lang->message->content;?></label>
-            <div class='col-xs-10'>
-              <?php 
-              echo html::textarea('content', '', "class='form-control' rows='3'");
-              echo html::hidden('objectType', 'message');
-              echo html::hidden('objectID', 0);
-              ?>
-            </div>
-          </div>
-          <div class='form-group'>
-            <label class='col-sm-2 control-label'></label>
-            <div class='col-xs-10 col-sm-6'>
-            <div class='checkbox'><label><input type='checkbox' name='public' value='1' checked='checked' /><?php echo $lang->message->secrete;?></label></div>
-            </div>
-          </div>
-          <div class='form-group' id='captchaBox' style='display:none'></div>
-          <div class='form-group'>
-            <div class='col-sm-offset-2 col-sm-10'>
-              <?php echo html::submitButton();?>
-            </div>
-          </div>
+          <table class='table table-form'>
+            <tr>
+              <th style='width: 90px'><?php echo $lang->message->from;?></th>
+              <td style='width: 40%'><?php echo html::input('from', $from, "class='form-control'"); ?></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->message->phone;?></th>
+              <td><?php echo html::input('phone', $phone, "class='form-control'"); ?></td>
+              <td><small class='text-info'><?php echo $lang->message->contactHidden;?></small></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->message->qq;?></th>
+              <td><?php echo html::input('qq', $qq, "class='form-control'"); ?></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->message->email;?></th>
+              <td><?php echo html::input('email', $email, "class='form-control'"); ?></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->message->content;?></th>
+              <td colspan='2'>
+                <?php 
+                echo html::textarea('content', '', "class='form-control' rows='3'");
+                echo html::hidden('objectType', 'message');
+                echo html::hidden('objectID', 0);
+                ?>
+              </td>
+            </tr>
+            <tr>
+              <th></th>
+              <td><label class='checkbox'><input type='checkbox' name='public' value='1' checked='checked' /><?php echo $lang->message->secrete;?></label></div></td>
+            </tr>
+            <tr>
+              <th></th>
+              <td><?php echo html::submitButton();?></td>
+            </tr>
+          </table>
         </form>
       </div>
     </div>

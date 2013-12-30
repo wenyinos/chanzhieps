@@ -38,7 +38,7 @@ $lang->message->passPre        = '通过之前';
 $lang->message->deletePre      = '删除之前';
 $lang->message->commentTo      = '发表于';
 $lang->message->deletedObject  = '已删除项目';
-$lang->message->contactHidden  = "<i class='text-muted'>以下电话、邮箱、qq联系方式只有网站管理员可见，不会暴露。</i>";
+$lang->message->contactHidden  = "以下电话、邮箱、qq联系方式只有网站管理员可见，不会暴露。";
 
 $lang->message->confirmDeleteSingle = '您确定要删除该留言吗？';
 $lang->message->confirmDeletePre    = '您确定要删除之前的留言吗？';

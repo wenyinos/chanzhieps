@@ -36,7 +36,7 @@ $lang->message->passPre        = 'Pass previous';
 $lang->message->deletePre      = 'Delete previous';
 $lang->message->commentTo      = 'Comment';
 $lang->message->deletedObject  = 'Deleted';
-$lang->message->contactHidden  = "<i class='text-muted'>Your phone,email,qq  will send to administrator confidentially.</i>";
+$lang->message->contactHidden  = "Your phone,email,qq  will send to administrator confidentially.";
 
 $lang->message->confirmDeleteSingle = 'Are you sure to delete this comment?';
 $lang->message->confirmDeletePre    = 'Are you sure to delete comments previous?';
