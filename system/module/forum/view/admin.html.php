@@ -1,7 +1,7 @@
 <?php include '../../common/view/header.admin.html.php'; ?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class="icon-comments-alt"></i> <?php echo $lang->forum->threadList;?></strong></div>
-  <table class='table table-hover table-striped tablesorter'>
+  <table class='table table-hover table-striped tablesorter' id='threadList'>
     <thead>
       <tr class='text-center'>
         <?php $vars = "boardID=$boardID&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
