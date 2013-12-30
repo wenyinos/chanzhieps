@@ -19,7 +19,7 @@
     <div class='panel-heading'>
       <strong><i class="icon-<?php echo $providerCode; ?>"></i> <?php echo $providerName;?></strong>
       <div class='panel-actions'>
-        <?php echo html::a("http://www.chanzhi.org/help-read-23.html", '<i class="icon-question-sign"></i> ' . $lang->site->oauthHelp, "target='_blank' class='btn btn-link'");?>
+        <?php echo html::a($config->site->help[$providerCode], '<i class="icon-question-sign"></i> ' . $lang->site->oauthHelp, "target='_blank' class='btn btn-link'");?>
       </div>
     </div>
     <div class='panel-body'>
@@ -46,9 +46,7 @@
           <?php if($providerCode == 'sina'):?>
           <tr>
             <th><?php echo $lang->user->oauth->widget;?></th>
-            <td>
-              <?php echo html::input('widget', $oauth->widget, "class='form-control'");?>
-            </td>
+            <td><?php echo html::input('widget', isset($oauth->widget) ? $oauth->widget : '', "class='form-control'");?></td>
           </tr>
           <?php endif;?>
           <tr>
