@@ -533,3 +533,24 @@ function ping()
 }
 needPing = true;
 if(config.runMode != 'admin') needPing = false;
+
+/**
+ * Set 'back to top' button
+ * 
+ * @access public
+ * @return void
+ */
+function setBack2Top()
+{
+    $(window).scroll(function()
+    {
+        var btn          = $('.back2top');
+        var parent       = btn.closest('.article,.panel');
+        var parentY      = parent.offset().top;
+        var sTop         = $('body').scrollTop();
+
+        if(sTop < parentY) btn.hide(); else btn.show();
+
+        btn.css('margin-bottom', Math.max(0, parentY + parent.height() - $(window).height() - sTop + 42));
+    }).scroll();
+ }
