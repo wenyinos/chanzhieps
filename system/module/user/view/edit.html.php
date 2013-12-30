@@ -22,13 +22,13 @@
             <div class='form-group'>
               <label for='password' class='col-md-2 col-sm-3 control-label'><?php echo $lang->user->password;?></label>
               <div class='col-md-4 col-sm-6'>
-                <?php echo html::password('password', $user->password, "class='form-control'");?>
+                <?php echo html::password('password1', '', "class='form-control'");?>
               </div>
             </div>
             <div class='form-group'>
               <label for='password2' class='col-md-2 col-sm-3 control-label'><?php echo $lang->user->password2;?></label>
               <div class='col-md-4 col-sm-6'>
-                <?php echo html::password('password2', $user->password2, "class='form-control'");?>
+                <?php echo html::password('password2', '', "class='form-control'");?>
               </div>
             </div>
             <div class='form-group'>

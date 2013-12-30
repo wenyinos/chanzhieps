@@ -8,3 +8,6 @@
 .icon-stack { position: relative; display: inline-block;}
 .icon .icon-stack-base{font-size: 42px;color: #ddd;z-index: 100;width: 42px;height: 42px;}
 .icon .icon-content{position: absolute;line-height: 42px;width: 42px;text-align: center; font-size: 12px;display: block;z-index: 1000;color: #666;left: 0;top: 0}
+
+label.checkbox{margin: 0; line-height: 20px}
+label.checkbox input{margin-top: 5px;}
