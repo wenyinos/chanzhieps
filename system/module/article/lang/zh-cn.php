@@ -25,7 +25,7 @@ $lang->article->keywords   = '关键字';
 $lang->article->summary    = '摘要';
 $lang->article->author     = '作者';
 $lang->article->editor     = '编辑';
-$lang->article->addedDate  = '添加时间';
+$lang->article->addedDate  = '发布时间';
 $lang->article->editedDate = '编辑时间';
 $lang->article->status     = '状态';
 $lang->article->type       = '类型';
@@ -52,8 +52,8 @@ $lang->page->edit   = '编辑单页';
 $lang->article->originalList[1] = '原创';
 $lang->article->originalList[0] = '转贴';
 
-$lang->article->statusList['draft']  = '草稿';
 $lang->article->statusList['normal'] = '正常';
+$lang->article->statusList['draft']  = '草稿';
 
 $lang->article->confirmDelete = '您确定删除该文章吗？';
 

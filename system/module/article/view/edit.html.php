@@ -86,7 +86,7 @@
       </tr>
       <tr>
         <th><?php echo $lang->article->status;?></th>
-        <td><?php echo html::select('status', $lang->article->statusList, $article->status, "class='form-control chosen'");?></td>
+        <td><?php echo html::radio('status', $lang->article->statusList, $article->status);?></td>
       </tr>
       <tr>
         <th></th><td colspan='2'><?php echo html::submitButton();?></td>

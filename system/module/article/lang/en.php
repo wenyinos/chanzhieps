@@ -52,8 +52,8 @@ $lang->page->edit   = 'Edit';
 $lang->article->originalList[1] = 'Original';
 $lang->article->originalList[0] = 'Copied';
 
-$lang->article->statusList['draft']  = 'Draft';
 $lang->article->statusList['normal'] = 'Normal';
+$lang->article->statusList['draft']  = 'Draft';
 
 $lang->article->confirmDelete = 'Are you sure to delete this article?';
 
