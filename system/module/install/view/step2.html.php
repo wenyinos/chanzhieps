@@ -12,15 +12,17 @@
 <?php include '../../common/view/header.lite.html.php';?>
 <div class='container'>
   <div class='modal-dialog'>
-    <div class='modal-content'>
-      <form method='post' action='<?php echo $this->createLink('install', 'step3');?>' class='form-inline' id='form1'>
-        <div class='modal-header'><strong><?php echo $lang->install->setConfig;?></strong></div>
-        <div class='modal-body'>
-          <table class='table table-bordered table-form'>
-            <tr>
+    <form method='post' action='<?php echo $this->createLink('install', 'step3');?>' class='form-inline' id='form1'>
+      <div class='modal-header'><strong><?php echo $lang->install->setConfig;?></strong></div>
+      <div class='modal-body'>
+        <table class='table table-bordered table-form'>
+          <thead>
+            <tr class='text-center'>
               <th style='width:20%'><?php echo $lang->install->key;?></th>
               <th colspan='2'><?php echo $lang->install->value?></th>
             </tr>
+          </thead>
+          <tbody>
             <tr>
               <th><?php echo $lang->install->dbHost;?></th>
               <td><?php echo html::input('dbHost', '127.0.0.1', "class='form-control'");?></td>
@@ -51,14 +53,14 @@
               <td><?php echo html::input('dbPrefix', 'eps_', "class='form-control'");?></td>
               <td><?php echo html::checkBox('clearDB', $lang->install->clearDB);?></td>
             </tr>
-          </table>
-        </div>
-        <div class='modal-footer'>
-          <?php echo html::hidden('requestType','GET');?>
-          <?php echo html::submitButton();?>
-        </div>
-      </form>
-    </div>
+          </tbody>
+        </table>
+      </div>
+      <div class='modal-footer'>
+        <?php echo html::hidden('requestType','GET');?>
+        <?php echo html::submitButton();?>
+      </div>
+    </form>
   </div>
 </div>
 <?php include './footer.html.php';?>
