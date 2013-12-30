@@ -140,6 +140,8 @@ tr.text-center > td, tr.text-center > th {text-align: center;}
 tr.text-center > td.text-left, tr.text-center > th.text-left {text-align: left;}
 
 /* form */
+.placeholder {color: #aaa;}
+
 .form-horizontal .control-label{padding-right: 0;}
 
 .form-control[type='file'] {box-shadow: none; background-color: #fafafa;}

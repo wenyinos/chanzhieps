@@ -743,7 +743,7 @@ class dao
         global $lang, $config, $app;
         $table      = strtolower(str_replace($config->db->prefix, '', $this->table));
         $fieldLabel = isset($lang->$table->$fieldName) ? $lang->$table->$fieldName : $fieldName;
-        $value = $this->sqlobj->data->$fieldName;
+        $value = isset($this->sqlobj->data->$fieldName) ? $this->sqlobj->data->$fieldName : null;
         
         /* Check unique. */
         if($funcName == 'unique')
