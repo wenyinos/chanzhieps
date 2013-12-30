@@ -13,12 +13,13 @@
 <?php include '../../common/view/header.lite.html.php';?>
 <div class='container'>
   <div class='modal-dialog'>
+    <div class="modal-header text-right"><button class='btn dropdown'><?php include '../../common/view/selectlang.html.php';?></button></div>
     <div class='modal-body'>
       <h3><?php echo $lang->install->welcome;?></h3>
       <div><?php echo $lang->install->desc;?></div>
     </div>
     <div class='modal-footer'>
-      <button class='btn dropdown'><?php include '../../common/view/selectlang.html.php';?></button>
+      
       <?php
       if(!isset($latestRelease))
       {
