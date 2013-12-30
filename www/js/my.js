@@ -16,4 +16,7 @@ $(document).ready(function()
     
     /* Load message notify. */
     $('#headNav #msgBox').load(createLink('message', 'notify'));
+
+    /* Set 'back to top' button. */
+    setBack2Top();
 });

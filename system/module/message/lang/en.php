@@ -17,7 +17,7 @@ $lang->message->content           = 'Content';
 $lang->message->phone             = 'Phone';
 $lang->message->qq                = 'QQ';
 $lang->message->email             = 'Email';
-$lang->message->public            = 'Public';
+$lang->message->secrete           = 'Send to administrators confidentially.';
 $lang->message->captcha           = 'Captcha';
 $lang->message->list              = 'List';
 $lang->message->post              = 'Add a comment';
@@ -36,7 +36,7 @@ $lang->message->passPre        = 'Pass previous';
 $lang->message->deletePre      = 'Delete previous';
 $lang->message->commentTo      = 'Comment';
 $lang->message->deletedObject  = 'Deleted';
-$lang->message->contactHidden  = "<i class='text-muted'>Contact will be hidden.</i>";
+$lang->message->contactHidden  = "<i class='text-muted'>Your phone,email,qq  will send to administrator confidentially.</i>";
 
 $lang->message->confirmDeleteSingle = 'Are you sure to delete this comment?';
 $lang->message->confirmDeletePre    = 'Are you sure to delete comments previous?';
