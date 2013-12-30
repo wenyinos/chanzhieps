@@ -87,7 +87,8 @@ js::import($jsRoot . 'respond/min.js');
       <?php 
       foreach($navs as $nav)
       {
-        $class = $nav->id == isset($category->id) ? "class='nav-blog-$nav->id active'" : "class='nav-blog-$nav->id'";
+        isset($category->id) ? $categoryID = $category->id : $categoryID = 0;
+        $class = $nav->id == $categoryID ? "class='nav-blog-$nav->id active'" : "class='nav-blog-$nav->id'";
         echo "<li {$class}>" . html::a($this->inlink('index', "id={$nav->id}", "category={$nav->alias}"), $nav->name) . '</li>';
       }
       ?>
