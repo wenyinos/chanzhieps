@@ -16,40 +16,44 @@
       <div class='modal-header'><strong><?php echo $lang->install->setConfig;?></strong></div>
       <div class='modal-body'>
         <table class='table table-bordered table-form'>
-          <tr>
-            <th style='width:20%'><?php echo $lang->install->key;?></th>
-            <th colspan='2'><?php echo $lang->install->value?></th>
-          </tr>
-          <tr>
-            <th><?php echo $lang->install->dbHost;?></th>
-            <td><?php echo html::input('dbHost', '127.0.0.1', "class='form-control'");?></td>
-            <td><?php echo $lang->install->dbHostNote;?></td>
-          </tr>
-          <tr>
-            <th><?php echo $lang->install->dbPort;?></th>
-            <td><?php echo html::input('dbPort', '3306', "class='form-control'");?></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th><?php echo $lang->install->dbUser;?></th>
-            <td><?php echo html::input('dbUser', 'root', "class='form-control'");?></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th><?php echo $lang->install->dbPassword;?></th>
-            <td><?php echo html::input('dbPassword', '', "class='form-control'");?></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th><?php echo $lang->install->dbName;?></th>
-            <td><?php echo html::input('dbName', 'chanzhi', "class='form-control'");?></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th><?php echo $lang->install->dbPrefix;?></th>
-            <td><?php echo html::input('dbPrefix', 'eps_', "class='form-control'");?></td>
-            <td><?php echo html::checkBox('clearDB', $lang->install->clearDB);?></td>
-          </tr>
+          <thead>
+            <tr class='text-center'>
+              <th style='width:20%'><?php echo $lang->install->key;?></th>
+              <th colspan='2'><?php echo $lang->install->value?></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th><?php echo $lang->install->dbHost;?></th>
+              <td><?php echo html::input('dbHost', '127.0.0.1', "class='form-control'");?></td>
+              <td><?php echo $lang->install->dbHostNote;?></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->install->dbPort;?></th>
+              <td><?php echo html::input('dbPort', '3306', "class='form-control'");?></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->install->dbUser;?></th>
+              <td><?php echo html::input('dbUser', 'root', "class='form-control'");?></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->install->dbPassword;?></th>
+              <td><?php echo html::input('dbPassword', '', "class='form-control'");?></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->install->dbName;?></th>
+              <td><?php echo html::input('dbName', 'chanzhi', "class='form-control'");?></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->install->dbPrefix;?></th>
+              <td><?php echo html::input('dbPrefix', 'eps_', "class='form-control'");?></td>
+              <td><?php echo html::checkBox('clearDB', $lang->install->clearDB);?></td>
+            </tr>
+          </tbody>
         </table>
       </div>
       <div class='modal-footer'>
