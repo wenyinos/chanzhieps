@@ -87,9 +87,11 @@ class thread extends control
             $this->send(array('result' => 'success', 'locate' => inlink('view', "threadID=$threadID")));
         }
 
+        $board = $this->loadModel('tree')->getById($thread->board);
+        
         $this->view->title     = $this->lang->thread->edit . $this->lang->minus . $thread->title;
         $this->view->thread    = $thread;
-        $this->view->board     = $this->loadModel('tree')->getById($thread->board);
+        $this->view->board     = $board;
         $this->view->canManage = $this->thread->canManage($board->id);
 
         $this->display();
