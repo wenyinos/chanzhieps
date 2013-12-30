@@ -71,6 +71,7 @@
             <div class='col-xs-10 col-sm-6 col-md-4'>
               <?php echo html::input('phone', $phone, "class='form-control'"); ?>
             </div>
+            <span class='text text-danger'><?php echo $lang->message->contactHidden;?></span>
           </div>
           <div class='form-group'>
             <label for='qq' class='col-sm-2 control-label'><?php echo $lang->message->qq;?></label>
@@ -95,9 +96,9 @@
             </div>
           </div>
           <div class='form-group'>
-            <label class='col-sm-2 control-label'><?php echo $lang->message->public;?></label>
+            <label class='col-sm-2 control-label'></label>
             <div class='col-xs-10 col-sm-6'>
-              <div class='checkbox'><label><input type='checkbox' name='public' value='1' checked='checked' /> <?php echo $lang->message->contactHidden;?></label></div>
+            <div class='checkbox'><label><input type='checkbox' name='public' value='1' checked='checked' /><?php echo $lang->message->secrete;?></label></div>
             </div>
           </div>
           <div class='form-group' id='captchaBox' style='display:none'></div>

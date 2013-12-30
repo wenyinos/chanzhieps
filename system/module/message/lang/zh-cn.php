@@ -18,7 +18,7 @@ $lang->message->phone             = '电话';
 $lang->message->qq                = 'QQ';
 $lang->message->email             = '邮箱';
 $lang->message->date              = '时间';
-$lang->message->public            = '公开';
+$lang->message->secrete           = '仅管理员可见';
 $lang->message->readed            = '已读';
 $lang->message->captcha           = '验证码';
 $lang->message->list              = '留言列表';
@@ -38,7 +38,7 @@ $lang->message->passPre        = '通过之前';
 $lang->message->deletePre      = '删除之前';
 $lang->message->commentTo      = '发表于';
 $lang->message->deletedObject  = '已删除项目';
-$lang->message->contactHidden  = "<i class='text-muted'>联系方式不会公开</i>";
+$lang->message->contactHidden  = "<i class='text-muted'>以下电话、邮箱、qq联系方式只有网站管理员可见，不会暴露。</i>";
 
 $lang->message->confirmDeleteSingle = '您确定要删除该留言吗？';
 $lang->message->confirmDeletePre    = '您确定要删除之前的留言吗？';
