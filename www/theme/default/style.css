@@ -47,7 +47,7 @@
 .breadcrumb:after {color: #aaa; margin-left: 6px; display: inline-block; content: "\F041"; font-family: ZenIcon;}
 
 /* page */
-.page {width: 100%; padding: 8px 0; color: #999; text-align: right;}
+.page {padding: 8px 0; color: #999; text-align: right;}
 .page a {color: #666;}
 .page:hover a {color: #506EAF;}
 
