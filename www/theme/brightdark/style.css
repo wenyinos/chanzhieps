@@ -28,15 +28,16 @@ a:hover,a:active{color: #da3b26;}
   #navbar .navbar-toggle:hover{background-color: #da3b26;border-color: #da3b26;color: #fff}
   #navbar .navbar-toggle:hover .icon-bar,#navbar .navbar-toggle:focus .icon-bar,#navbar .navbar-toggle.collapsed .icon-bar{background-color: #fff}
 }
-#navbar .nav > li > a,#navbar .nav > li > ul > li > a,#navbar .nav > li > ul > li > ul > li > a{color: #f1f1f1; border:none; background: #808080;}
-#navbar .nav > li > a:hover,#navbar .nav > li > ul > li > a:hover,#navbar .nav > li > ul > li > ul > li > a:hover{background: #da3b26;color: #fff;box-shadow: none;}
-#navbar .nav >li.active>a,#navbar .nav >li.active>a:hover,#navbar .nav >li.active>a:focus{background: #C9C9C9;color: #da3b26}
+#navbar ul.nav > li > a,#navbar ul.nav > li > ul > li > a,#navbar ul.nav > li > ul > li > ul > li > a{color: #f1f1f1; border:none; background: #808080;}
+#navbar ul.nav > li > a{padding-left: 5px\0;padding-right: 5px\0;}
+#navbar ul.nav > li > a:hover,#navbar ul.nav > li > ul > li > a:hover,#navbar ul.nav > li > ul > li > ul > li > a:hover{background: #da3b26;color: #fff;box-shadow: none;}
+#navbar ul.nav >li.active>a,#navbar ul.nav >li.active>a:hover,#navbar ul.nav >li.active>a:focus{background: #C9C9C9;color: #da3b26}
 #navbar .caret{border-top-color: #f1f1f1; border-bottom-color: #f1f1f1;}
 #navbar .nav > li:last-child > a {border-radius: 0}
 #navbar .nav > li:first-child > a {border-left-color:transparent;-webkit-border-top-left-radius:2px; -webkit-border-bottom-left-radius:2px; -moz-border-radius-topleft:6px; -moz-border-radius-bottomleft:6px; border-top-left-radius:2px; border-bottom-left-radius:2px;}
 #navbar .nav > li > ul, #navbar .nav > li > ul > li > ul{padding: 5px;}
 #navbar .nav > li > ul > li > a, #navbar .nav > li > ul > li > ul > li > a{border-radius: 2px}
-#navbar .dropdown-menu{background-color: #808080;color: #f1f1f1;margin-top: -2px;border-radius: 2px;}
+#navbar .dropdown-menu{background-color: #808080;color: #f1f1f1;margin-top: -2px;border-radius: 2px;border-color: #808080}
 #navbar .dropdown-submenu:hover>a:after {border-left-color: #fff;}
 
 /* carousel. */
