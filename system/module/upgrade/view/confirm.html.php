@@ -12,14 +12,17 @@
 ?>
 <?php include '../../common/view/header.lite.html.php';?>
 <form method='post' action='<?php echo inlink('execute');?>'>
-  <table align='center' class='table table-bordered table-5'>
-    <caption><?php echo $lang->upgrade->confirm;?></caption>
-    <tr>
-      <td>
-        <pre><?php echo $confirm;?></pre>
-        <?php echo html::submitButton($lang->upgrade->execute) . html::hidden('fromVersion', $fromVersion);?>
-      </td>
-    </tr>
-  </table>
-</form>
-<?php include '../../common/view/footer.lite.html.php';?>
+<div class='container'>
+  <div class='modal-dialog'>
+    <div class='modal-header'>
+      <h3><?php echo $lang->upgrade->confirm;?></h3>
+    </div>
+    <div class='modal-body'>
+      <div class='mg-10px'><?php echo html::textarea('', $confirm, "style='width:100%; height:400px;border:none;'");?></div>
+    </div>
+    <div class='modal-footer'>
+      <?php echo html::submitButton($lang->upgrade->execute) . html::hidden('fromVersion', $fromVersion);?>
+    </div>
+  </div>
+</div>
+<?php include '../../install/view/footer.html.php';?>

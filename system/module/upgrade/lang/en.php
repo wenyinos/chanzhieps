@@ -20,11 +20,13 @@ $lang->upgrade->index         = 'Upgrad chanzhiEPS.';
 $lang->upgrade->backup        = 'Backup';
 $lang->upgrade->selectVersion = 'Select version to upgrade from';
 $lang->upgrade->confirm       = 'Confirm the SQL to excute.';
-$lang->upgrade->execute       = 'Execute the SQL.';
+$lang->upgrade->next          = 'Next';
 
 $lang->upgrade->setOkFile = <<<EOT
+<div class='alert alert-danger'>
 <h5>For security reason, please do these steps. </h5>
-<p><code class='f-14px'>Create "<strong>%s</strong>" file. If this file exists already, reopen it and save again.</code></p>
+<p>Create "<code>%s</code>" file. If this file exists already, reopen it and save again.</p>
+</div>
 <a href="upgrade.php" class='btn btn-primary'>Ready, go!</a>
 EOT;
 
@@ -33,7 +35,6 @@ $lang->upgrade->backupData = <<<EOT
 <strong>Using phpMyAdmin or mysqldump to backup database.</strong>
 <code class='red'>$ mysqldump -u %s</span> -p%s %s > chanzhi.sql</code>
 </pre>
-<a href="%s" class='btn btn-primary'>Next</a>
 EOT;
 
 $lang->upgrade->versionNote = "Please the version to upgrade.";
@@ -45,3 +46,4 @@ $lang->upgrade->fromVersions['1_4'] = '1.4.stable';
 $lang->upgrade->fromVersions['1_5'] = '1.5.stable';
 $lang->upgrade->fromVersions['1_6'] = '1.6.stable';
 $lang->upgrade->fromVersions['1_7'] = '1.7.stable';
+$lang->upgrade->fromVersions['1_8'] = '1.8.stable';

@@ -11,12 +11,17 @@
  */
 ?>
 <?php include '../../common/view/header.lite.html.php';?>
-<table align='center' class='table table-bordered table-5'>
-  <caption><?php echo $lang->upgrade->backup;?></caption>
-  <tr>
-    <td>
+<div class='container'>
+  <div class='modal-dialog'>
+    <div class='modal-header'>
+      <h3><?php echo $lang->upgrade->backup;?></h3>
+    </div>
+    <div class='modal-body'>
       <?php printf($lang->upgrade->backupData, $db->user, $db->password, $db->name, inlink('selectVersion'));?>
-    </td>
-  </tr>
-</table>
-<?php include '../../common/view/footer.lite.html.php';?>
+    </div>
+    <div class='modal-footer'>
+      <?php echo html::a(inlink('selectVersion'), $lang->upgrade->next, "class='btn btn-primary'");?>
+    </div>
+  </div>
+</div>
+<?php include '../../install/view/footer.html.php';?>

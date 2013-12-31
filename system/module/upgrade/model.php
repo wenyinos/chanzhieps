@@ -67,6 +67,9 @@ class upgradeModel extends model
                 $this->execSQL($this->getUpgradeFile('1.7'));
                 $this->moveBooks();
                 $this->setMessageBlocks();
+            case '1.8':
+                $this->setPageBlocks();
+                $this->setBlogBlocks();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -390,7 +393,42 @@ class upgradeModel extends model
         $this->dao->insert(TABLE_LAYOUT)->set('page')->eq('message_index')->set('region')->eq('side')->set('blocks')->eq($id)->exec();
         return !dao::isError();
     }
-    
+
+    /**
+     * Set blog blocks.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setBlogBlocks()
+    {
+        $blocks = array();
+        $blocks['en']    = array('type' => 'blogTree', 'title' => 'Blog Category', 'content' => '{"showChildren":"1"}');
+        $blocks['zh-cn'] = array('type' => 'blogTree', 'title' => '博客分类',      'content' => '{"showChildren":"1"}');
+        $blocks['zh-tw'] = array('type' => 'blogTree', 'title' => '博客分類',      'content' => '{"showChildren":"1"}');
+        $block = $blocks[$this->config->site->lang];
+        $this->dao->insert(TABLE_BLOCK)->data($block)->exec();
+        $blockID = $this->dao->lastInsertID();
+
+        $this->dao->insert(TABLE_LAYOUT)->set('page')->eq('blog_index')->set('region')->eq('side')->set('blocks')->eq($blockID . ',')->exec();
+        $this->dao->insert(TABLE_LAYOUT)->set('page')->eq('blog_view')->set('region')->eq('side')->set('blocks')->eq($blockID . ',')->exec();
+        return !dao::isError();
+    }   
+
+    /**
+     * Set page blocks.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setPageBlocks()
+    {
+        $this->dao->insert(TABLE_LAYOUT)->set('page')->eq('page_index')->set('region')->eq('side')->set('blocks')->eq('2,9,')->exec();
+        $this->dao->insert(TABLE_LAYOUT)->set('page')->eq('page_view')->set('region')->eq('side')->set('blocks')->eq('2,9,')->exec();
+        return !dao::isError();
+    }   
+
+
     /**
      * Judge any error occers.
      * 
