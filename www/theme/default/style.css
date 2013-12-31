@@ -232,8 +232,8 @@ form .star {display: none;}/* hide star */
 .table td .page,.table td .pager {padding: 0;margin: 0;}
 
 /* --- HEADER --- */
-#header {margin: 0 -15px; padding: 10px 15px; min-height: 100px; vertical-align: middle; position: relative;}
-#headTitle {display: table; min-height: 75px;}
+#header {margin: 0 -15px; padding: 10px 15px; min-height: 90px; vertical-align: middle; position: relative;}
+#headTitle {display: table; min-height: 65px;}
 #siteName,#siteLogo,#siteSlogan {display: table-cell; vertical-align: bottom;}
 
 #headNav {position: absolute; right: 15px; top: 40%;}
@@ -243,7 +243,7 @@ form .star {display: none;}/* hide star */
 
 #msgBox .label.label-badge {font-weight: bold; background-color: #fff;border: 1px solid #ccc; color: #666;padding: 3px}
 
-#siteName {padding-top: 15px;}
+#siteName h1, #siteName h2{margin-top: 10px;}
 #siteSlogan {font-size: 16px; padding-left: 20px; color: #777; padding-bottom: 13px;}
 
 /* --- NAVBAR --- */
