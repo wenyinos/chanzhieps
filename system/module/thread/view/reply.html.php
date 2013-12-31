@@ -51,6 +51,7 @@
           <?php echo $this->fetch('file', 'buildForm'); ?>
         </div>
       </div>
+      <div class='form-group clearfix' id='captchaBox' style='display:none;'></div>
       <div class='form-group'><?php echo html::submitButton(); ?></div>
       <?php 
       echo html::hidden('recTotal',   $pager->recTotal);

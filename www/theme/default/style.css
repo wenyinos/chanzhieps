@@ -47,7 +47,7 @@
 .breadcrumb:after {color: #aaa; margin-left: 6px; display: inline-block; content: "\F041"; font-family: ZenIcon;}
 
 /* page */
-.page {width: 100%; padding: 8px 0; color: #999; text-align: right;}
+.page {padding: 8px 0; color: #999; text-align: right;}
 .page a {color: #666;}
 .page:hover a {color: #506EAF;}
 
@@ -82,7 +82,6 @@
 /* items */
 .item .media {text-align: center; overflow: hidden; background-color: #f1f1f1; max-height: 100px; transition:all 0.3s;}
 .item .media img {max-height: 100%; max-width: 100%;}
-.items .item a {color: #145BCC}
 .items .item .text-muted {color: #757575}
 
 /* media-palaceholder */
@@ -106,11 +105,9 @@
 .panel-block .panel-body > .dl-horizontal dt {width: 20%; padding: 3px; font-size: 12px}
 .panel-block .panel-body > .dl-horizontal dd {margin-left: 20%; padding-left: 6px; padding: 3px;}
 .panel-block .panel-body > .nav {margin: -10px -15px;}
-.panel-block .panel-body > .ul-list {margin: -10px -15px;}
-.panel-block .panel-body > .ul-list > li {padding: 8px 15px 8px 30px;}
+.panel-block .panel-body > .ul-list {margin: -2px -15px;}
+.panel-block .panel-body > .ul-list > li {padding: 5px 15px 5px 30px;}
 .panel-block .panel-body > .ul-list > li:before {left: 14px;}
-.panel-block .panel-body > .ul-list > li:hover {background-color: #f1f1f1;}
-.panel-block .panel-body > .ul-list > li a:hover {text-decoration: none;}
 .panel-block .panel-body > .items {margin: -10px -15px;}
 .panel-block .panel-body > .items .item {padding: 10px 15px; border-bottom: 1px #e5e5e5 dashed;}
 .panel-block .panel-body > .items .item:hover {background-color: #f1f1f1;}
@@ -140,6 +137,8 @@
 .text-middle,.text-middle td {vertical-align: middle !important;}
 tr.text-center > td, tr.text-center > th {text-align: center;}
 tr.text-center > td.text-left, tr.text-center > th.text-left {text-align: left;}
+
+.label{font-size: 12px;}
 
 /* form */
 .placeholder {color: #aaa;}
@@ -203,9 +202,9 @@ form .star {display: none;}/* hide star */
 .article {border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); margin-bottom: 20px;}
 .article > header h1,.article > header h2,.article > header h3{font-size: 24px}
 .article > header > dl {margin: 0 0 10px; background: #fff; border: 0;padding: 5px 2px 0 2px;}
-.article > footer > p {padding: 10px 0;} 
+.article > footer > p {padding: 0 0 10px;} 
 .article > header > .abstract {margin: 0 0 10px; padding: 10px;}
-.article > footer {position: relative;}
+.article > footer {position: relative;padding-top: 15px;}
 .article > footer .pager {margin-bottom: 0;}
 .article > footer .back2top {background-color: #fff; position: absolute; bottom: -21px; right: -50px; display: block; width: 30px; padding: 5px 8px; border:1px solid #ddd; border-radius: 0 4px 4px 0}
 .article > footer .back2top:hover {text-decoration: none; background-color: #E5E5E5}
@@ -233,8 +232,8 @@ form .star {display: none;}/* hide star */
 .table td .page,.table td .pager {padding: 0;margin: 0;}
 
 /* --- HEADER --- */
-#header {margin: 0 -15px; padding: 10px 15px; min-height: 100px; vertical-align: middle; position: relative;}
-#headTitle {display: table; min-height: 75px;}
+#header {margin: 0 -15px; padding: 10px 15px; min-height: 90px; vertical-align: middle; position: relative;}
+#headTitle {display: table; min-height: 65px;}
 #siteName,#siteLogo,#siteSlogan {display: table-cell; vertical-align: bottom;}
 
 #headNav {position: absolute; right: 15px; top: 40%;}
@@ -242,9 +241,10 @@ form .star {display: none;}/* hide star */
 #headNav .login-msg:after, #headNav > a:after, #msgBox:after{content: '|'; display: inline-block; margin-left: 6px; line-height: 20px; color: #ccc}
 #headNav > a:last-child:after{display: none;}
 
-#msgBox .label.label-badge {font-weight: bold; background-color: #fff;border: 1px solid #ccc; color: #666;padding: 3px}
+#msgBox .label.label-badge {font-weight: bold; background-color: #fff;border: 1px solid #ccc; color: #666;padding: 3px;min-width: 20px}
+#msgBox{display: none;}
 
-#siteName {padding-top: 15px;}
+#siteName h1, #siteName h2{margin-top: 10px;}
 #siteSlogan {font-size: 16px; padding-left: 20px; color: #777; padding-bottom: 13px;}
 
 /* --- NAVBAR --- */

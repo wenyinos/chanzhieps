@@ -43,31 +43,30 @@ class captchaModel extends model
         $captcha = $this->create();
         return <<<EOT
 <th>{$this->lang->captcha->common}</th>
-<td>
+<td colspan='2'>
   <h4><span class='label label-danger'>{$captcha->first} {$captcha->operator} {$captcha->second}</span>&nbsp;&nbsp;
   {$this->lang->captcha->equal} &nbsp;&nbsp;
-  <input type='text' name='captcha' id='captcha' class='w-60px a-center' placeholder='{$this->lang->captcha->placeholder}' />
+  <input type='text' name='captcha' id='captcha' class='text-center' placeholder='{$this->lang->captcha->placeholder}' />
   </h4>
 </td>
 EOT;
     }
 
     /**
-     * Create captcha for reply.
+     * Create captcha for thread.
      * 
      * @access public
      * @return string
      */
-    public function create4Reply()
+    public function create4Thread()
     {
         $captcha = $this->create();
         return <<<EOT
-<div class='row'>
-<span class='col-md-1'><h4>{$this->lang->captcha->common}</h4></span>
-<span class='col-md-11'>
-  <h4 class='label label-danger'>{$captcha->first} {$captcha->operator} {$captcha->second}</h4>&nbsp;&nbsp;
+<label class='col-md-1 col-sm-2 control-label'>{$this->lang->captcha->common}</label>
+<div class='col-md-11 col-xs-10'>
+  <h5 class='label label-danger'>{$captcha->first} {$captcha->operator} {$captcha->second}</h5>&nbsp;&nbsp;
   {$this->lang->captcha->equal} &nbsp;&nbsp;
-  <input type='text' name='captcha' id='captcha' class='w-60px a-center' placeholder='{$this->lang->captcha->placeholder}'/>
+  <input type='text' name='captcha' id='captcha' class='text-center' placeholder='{$this->lang->captcha->placeholder}'/>
 </span>
 </div>
 <div class='c-both'></div>

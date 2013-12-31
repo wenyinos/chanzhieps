@@ -23,6 +23,10 @@
           <td style='width: 40%'><?php echo html::select("categories[]", $categories, array_keys($product->categories), "multiple='multiple' class='form-control chosen'");?></td><td></td>
         </tr>
         <tr>
+          <th><?php echo $lang->product->status;?></th>
+          <td><?php echo html::select("status", $lang->product->statusList, $product->status, "class='form-control'");?></td>
+        </tr>
+        <tr>
           <th><?php echo $lang->product->name;?></th>
           <td colspan='2'><?php echo html::input('name', $product->name, "class='form-control'");?></td>
         </tr>

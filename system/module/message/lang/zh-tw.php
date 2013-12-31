@@ -9,32 +9,36 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->message->common      = '留言';
-$lang->message->id          = '編號';
-$lang->message->type        = '類型';
-$lang->message->from        = '稱呼';
-$lang->message->content     = '留言';
-$lang->message->phone       = '電話';
-$lang->message->qq          = 'QQ';
-$lang->message->email       = '郵箱';
-$lang->message->public      = '公開';
-$lang->message->captcha     = '驗證碼';
-$lang->message->list        = '留言列表';
-$lang->message->post        = '發表留言';
-$lang->message->viewArticle = '正文';
-$lang->message->viewComment = '留言';
-$lang->message->thanks      = '感謝您的留言！';
+$lang->message->common            = '留言';
+$lang->message->id                = '編號';
+$lang->message->type              = '類型';
+$lang->message->from              = '稱呼';
+$lang->message->content           = '留言';
+$lang->message->phone             = '電話';
+$lang->message->qq                = 'QQ';
+$lang->message->email             = '郵箱';
+$lang->message->date              = '時間';
+$lang->message->secrete           = '僅管理員可見';
+$lang->message->readed            = '已讀';
+$lang->message->captcha           = '驗證碼';
+$lang->message->list              = '留言列表';
+$lang->message->post              = '發表留言';
+$lang->message->viewArticle       = '正文';
+$lang->message->viewComment       = '留言';
+$lang->message->thanks            = '感謝您的留言！';
+$lang->message->noSelectedMessage = '您沒有選擇任何留言。';
 
-$lang->message->pass          = '通過';
-$lang->message->reply         = '回覆';
-$lang->message->view          = '查看';
-$lang->message->manage        = '留言管理';
-$lang->message->delete        = '刪除';
-$lang->message->passPre       = '通過之前';
-$lang->message->deletePre     = '刪除之前';
-$lang->message->commentTo     = '發表於';
-$lang->message->deletedObject = '已刪除項目';
-$lang->message->contactHidden = "<i class='text-muted'>聯繫方式不會公開</i>";
+$lang->message->pass           = '通過';
+$lang->message->reply          = '回覆';
+$lang->message->view           = '查看';
+$lang->message->manage         = '留言管理';
+$lang->message->delete         = '刪除';
+$lang->message->deleteSelected = '刪除選中項';
+$lang->message->passPre        = '通過之前';
+$lang->message->deletePre      = '刪除之前';
+$lang->message->commentTo      = '發表於';
+$lang->message->deletedObject  = '已刪除項目';
+$lang->message->contactHidden  = "以下電話、郵箱、qq聯繫方式只有網站管理員可見，不會暴露。";
 
 $lang->message->confirmDeleteSingle = '您確定要刪除該留言嗎？';
 $lang->message->confirmDeletePre    = '您確定要刪除之前的留言嗎？';
@@ -82,3 +86,5 @@ $lang->comment->statusList[1] = '已審核';
 
 $lang->message->replyItem = "<dd><strong>%s</strong> 于 <em>%s</em> 回覆：%s</dd>";
 $lang->comment->replyItem = "<dd><strong>%s</strong> 于 <em>%s</em> 回覆：%s</dd>";
+
+$lang->message->replySubject = '%s管理員的回覆';

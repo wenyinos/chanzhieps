@@ -33,10 +33,10 @@ $lang->user->phone     = '電話';
 $lang->user->company   = '公司/組織';
 $lang->user->address   = '通訊地址';
 $lang->user->zipcode   = '郵編';
-$lang->user->join      = '加入日期';
+$lang->user->join      = '註冊日期';
 $lang->user->visits    = '訪問次數';
 $lang->user->ip        = '最後IP';
-$lang->user->last      = '最後登錄時間';
+$lang->user->last      = '上次登錄';
 $lang->user->allowTime = '開放時間';
 $lang->user->status    = '狀態';
 $lang->user->alert     = '您的帳號已被禁用';
@@ -64,8 +64,12 @@ $lang->user->forbid          = '禁用';
 $lang->user->profile     = '個人信息';
 $lang->user->editProfile = '編輯信息';
 $lang->user->thread      = '我的主題';
+$lang->user->messages    = '我的消息';
 $lang->user->reply       = '我的回貼';
-$lang->user->message     = '我的消息';
+
+$lang->user->message = new stdclass();
+$lang->user->message->mine = "我的消息 <span class='label label-badge text-latin'>%s</span>";
+$lang->user->message->from = '來自';
 
 $lang->user->inputUserName       = '請輸入用戶名';
 $lang->user->inputAccountOrEmail = '請輸入用戶名或Email';
@@ -96,6 +100,7 @@ $lang->user->genderList->f = '女';
 $lang->user->genderList->u = '';
 
 $lang->user->register  = new stdclass();
+$lang->user->register->common      = '註冊';
 $lang->user->register->welcome     = '歡迎註冊成為會員';
 $lang->user->register->why         = '歡迎註冊成為我們的會員，您可以享受更多的服務。';
 $lang->user->register->lblUserInfo = '用戶信息';
@@ -134,6 +139,11 @@ $lang->user->oauth->lblProfile    = "<h3>設置用戶名，完成註冊</h3>";
 $lang->user->oauth->lblBind       = "<h3>或綁定已有帳號</h3>";
 $lang->user->oauth->lblBindFailed = "綁定賬戶失敗！";
 
+$lang->user->statusList = new stdclass();
+$lang->user->statusList->locked    = "<label class='label label-danger'>鎖定</label>";
+$lang->user->statusList->forbidden = "<label class='label label-danger'>禁用</label>";
+$lang->user->statusList->normal    = "<label class='label label-success'>正常</label>";
+
 $lang->user->control = new stdclass();
 $lang->user->control->common      = '用戶中心';
 $lang->user->control->welcome     = '歡迎您，<strong>%s</strong>';
@@ -141,9 +151,9 @@ $lang->user->control->lblPassword = "留空，則保持不變。";
 
 $lang->user->control->menus[10] = '<i class="icon-large icon-user"></i> 個人信息 <i class="icon-chevron-right"></i>|user|profile';
 $lang->user->control->menus[20] = '<i class="icon-large icon-edit"></i> 編輯信息 <i class="icon-chevron-right"></i>|user|edit';
-//$lang->user->control->menus[28] = '<i class="icon-large icon-comments-alt"></i> 我的消息 <i class="icon-chevron-right"></i>|user|message';
+$lang->user->control->menus[28] = '<i class="icon-large icon-comments-alt"></i> 我的消息 <i class="icon-chevron-right"></i>|user|message';
 $lang->user->control->menus[30] = '<i class="icon-large icon-share"></i> 我的主題 <i class="icon-chevron-right"></i>|user|thread';
-$lang->user->control->menus[40] = '<i class="icon-large icon-mail-reply-all"></i> 我的回帖 <i class="icon-chevron-right"></i>|user|reply';
+$lang->user->control->menus[40] = '<i class="icon-large icon-mail-reply"></i> 我的回帖 <i class="icon-chevron-right"></i>|user|reply';
 
 $lang->user->mailContent = <<<EOT
 <html>

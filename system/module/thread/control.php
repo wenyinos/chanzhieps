@@ -40,7 +40,7 @@ class thread extends control
             /* If no captcha but is garbage, return the error info. */
             if($this->post->captcha == false and $this->loadModel('captcha')->isEvil($_POST['content']))
             {
-                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->captcha->create4Comment()));
+                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->captcha->create4Thread()));
             }
 
             $threadID = $this->thread->post($boardID);
@@ -79,7 +79,7 @@ class thread extends control
             /* If no captcha but is garbage, return the error info. */
             if($this->post->captcha == false and $this->loadModel('captcha')->isEvil($_POST['content']))
             {
-                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->captcha->create4Comment()));
+                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->captcha->create4Thread()));
             }
 
             $this->thread->update($threadID);

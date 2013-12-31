@@ -22,6 +22,7 @@ $lang->thread->views      = '閲讀';
 $lang->thread->lastReply  = '最後回帖';
 
 $lang->thread->post       = '發貼';
+$lang->thread->postTo     = '發佈貼子到';
 $lang->thread->browse     = '主題列表';
 $lang->thread->stick      = '置頂';
 $lang->thread->edit       = '編輯主題';
@@ -42,8 +43,7 @@ $lang->thread->confirmHideThread   = "您確定隱藏該主題嗎？";
 $lang->thread->confirmDeleteReply  = "您確定刪除該回帖嗎？";
 $lang->thread->confirmDeleteFile   = "您確定刪除該附件嗎？";
 
-$lang->thread->lblSpeaker     = '<strong>%s</strong><br />訪問次數：%s<br />註冊日期：%s<br />上次訪問：%s<br />';
-$lang->thread->lblEdited      = '<i>%s 最後編輯, %s</i> ';
+$lang->thread->lblEdited      = '%s 最後編輯, %s';
 $lang->thread->message        = '%s在論壇#%s回覆了主題：%s，內容為：%s';
 $lang->thread->readonly       = '只讀';
 $lang->thread->successStick   = '成功置頂';

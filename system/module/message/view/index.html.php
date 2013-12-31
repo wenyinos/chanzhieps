@@ -93,6 +93,7 @@
               <th></th>
               <td><label class='checkbox'><input type='checkbox' name='public' value='1' checked='checked' /><?php echo $lang->message->secrete;?></label></div></td>
             </tr>
+            <tr id='captchaBox' style='display:none'></tr>
             <tr>
               <th></th>
               <td><?php echo html::submitButton();?></td>

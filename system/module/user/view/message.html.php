@@ -2,7 +2,7 @@
 <div class='row'>
   <?php include './side.html.php';?>
   <div class='col-md-10'>
-    <form method='post' target='hiddenwin' action="<?php echo $this->createLink('message', 'batchDelete');?>">
+    <form id='ajaxForm' method='post' target='hiddenwin' action="<?php echo $this->createLink('message', 'batchDelete');?>">
       <div class='panel'>
         <div class='panel-heading'><strong><i class='icon-comments-alt'></i> <?php echo $lang->user->messages;?></strong></div>
         <table class='table table-bordered table-hover' id='messages'>
