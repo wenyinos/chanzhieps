@@ -104,20 +104,24 @@ class messageModel extends model
         /* Get object titles and id. */
         $articles = array();
         $products = array();
+        $books    = array();
 
         foreach($messages as $message)
         {
             if('article' == $message->objectType) $articles[] = $message->objectID;
             if('product' == $message->objectType) $products[] = $message->objectID;
+            if('book'    == $message->objectType) $books[]    = $message->objectID;
         }
 
         $articleTitles = $this->dao->select('id, title')->from(TABLE_ARTICLE)->where('id')->in($articles)->fetchPairs('id', 'title');
         $productTitles = $this->dao->select('id, name')->from(TABLE_PRODUCT)->where('id')->in($products)->fetchPairs('id', 'name');
+        $bookTitles    = $this->dao->select('id, title')->from(TABLE_BOOK)->where('id')->in($books)->fetchPairs('id', 'title');
 
         foreach($messages as $message)
         {
             if($message->objectType == 'article') $message->objectTitle = isset($articleTitles[$message->objectID]) ? $articleTitles[$message->objectID] : '';
             if($message->objectType == 'product') $message->objectTitle = isset($productTitles[$message->objectID]) ? $productTitles[$message->objectID] : '';
+            if($message->objectType == 'book')    $message->objectTitle = isset($bookTitles[$message->objectID]) ? $bookTitles[$message->objectID] : '';
         }
 
         foreach($messages as $message)
@@ -300,6 +304,11 @@ class messageModel extends model
         elseif($message->objectType == 'product')
         {
             $link = commonModel::createFrontLink('product', 'view', "prodcutID=$message->objectID");
+        }
+        elseif($message->objectType == 'book')
+        {
+            $node = $this->loadModel('book')->getNodeByID($message->objectID);
+            $link = commonModel::createFrontLink('book', 'read', "articleID=$message->objectID", "book={$node->book->alias}&node={$node->alias}");
         }
 
         return $link;
