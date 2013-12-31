@@ -33,11 +33,7 @@ class install extends control
     public function index()
     {
         if(!isset($this->config->installed) or !$this->config->installed) $this->session->set('installing', true);
-        $latestRelease = $this->install->getLatestRelease();
-        if($latestRelease)
-        {
-            $this->view->latestRelease = $latestRelease;
-        }
+
         $this->view->title = $this->lang->install->welcome;
         $this->display();
     }
