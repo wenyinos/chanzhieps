@@ -91,7 +91,7 @@
             </tr>
             <tr>
               <th></th>
-              <td><label class='checkbox'><input type='checkbox' name='public' value='1' checked='checked' /><?php echo $lang->message->secrete;?></label></div></td>
+              <td><label class='checkbox'><input type='checkbox' name='public' value='1' checked='checked' /><?php echo $lang->message->secret;?></label></div></td>
             </tr>
             <tr id='captchaBox' style='display:none'></tr>
             <tr>
