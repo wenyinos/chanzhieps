@@ -2,7 +2,7 @@
 /**
  * The html block form view file of block module of chanzhiEPS.
  *
- * @copyright   Copyright 2013-2013 ÇàµºÏ¢ÈÀÍøÂçÐÅÏ¢ÓÐÏÞ¹«Ë¾ (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
+ * @copyright   Copyright 2013-2013 ?àµºÏ¢????????Ï¢???Þ¹?Ë¾ (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
  * @license     LGPL (http://www.gnu.org/licenses/lgpl.html)
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     block
@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
 */
 ?>
-<?php $config->block->editor->blockform =  array('id' => 'content', 'tools' => 'fullTools', 'filterMode' => false); ?>
+<?php $config->block->editor->blockform =  array('id' => 'content', 'tools' => 'full', 'filterMode' => false); ?>
 <?php include '../../common/view/kindeditor.html.php';?>
 <tr>
   <th><?php echo $lang->block->content;?></th>
