@@ -64,12 +64,10 @@ css::internal($pageCSS);
         <div class='col-sm-11'>
           <div class='signed-user-info'>
             <i class='icon-user text-muted'></i> <strong><?php echo $this->session->user->account ;?></strong>
+            <?php echo html::hidden('from', $this->session->user->account);?>
             <?php if($this->session->user->email != ''): ?>
             <span class='text-muted'>&nbsp;(<?php echo $this->session->user->email;?>)</span>
-            <?php 
-            echo html::hidden('from', $this->session->user->account);
-            echo html::hidden('email', $this->session->user->email);
-            ?>
+            <?php echo html::hidden('email', $this->session->user->email); ?>
             <?php endif; ?>
           </div>
         </div>

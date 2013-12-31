@@ -150,7 +150,7 @@ class messageModel extends model
             ->autoCheck()
             ->check('captcha', 'captcha')
             ->check('type', 'in', $this->config->message->types)
-            ->checkIF($message->email, 'email', 'email')
+            ->checkIF(isset($message->email), 'email', 'email')
             ->batchCheck('from, type, content', 'notempty')
             ->exec();
 
