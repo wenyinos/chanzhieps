@@ -50,7 +50,6 @@ class message extends control
         $this->view->replies     = $this->message->getReplies($this->view->comments);
         $this->view->pager       = $pager;
         $this->view->startNumber = ($pageID - 1) * 10;
-        $this->view->pager       = $pager;
         $this->lang->message     = $this->lang->comment;
         $this->display();
     }
