@@ -22,7 +22,7 @@ $(document).ready(function()
 
     $('#pager').find('a').click(function()
     {
-        $('#commentList').parent().load($(this).attr('href'));
+        $('#commentBox').load($(this).attr('href'));
         return false;
     });
 });
