@@ -48,6 +48,8 @@ class page extends control
         $this->view->desc     = $desc;
         $this->view->page     = $page;
 
+        $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($page->id)->exec(false);
+
         $this->display();
     }
 }
