@@ -24,7 +24,6 @@ js::set('articleID', $article->id);
             <span class='label label-success'><?php echo $lang->article->originalList[$article->original]; ?></span>
             <?php endif;?>
             <span class='label label-warning' data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblViews, $article->views);?>'><i class='icon-eye-open'></i> <?php echo $article->views; ?></span>
-            <a href='#commentBox' class='label label-info'><i class='icon-comment'></i> 0</a>
           </dd>
         </dl>
         <?php if($article->summary):?>
