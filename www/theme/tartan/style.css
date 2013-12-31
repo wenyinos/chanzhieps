@@ -127,3 +127,7 @@ textarea{height: auto;}
 .sitemap-tree > h4 {background-color: #E8D0A9!important}
 .treeview .hitarea:before {color: #C4B274!important}
 .treeview li:hover .hitarea:before {color: #6E2E16!important}
+
+/* ul-list */
+.ul-list > li:before {color: #E8D0A9}
+.ul-list > li:hover:before {color: #6E2E16}
