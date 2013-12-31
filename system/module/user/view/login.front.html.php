@@ -6,7 +6,7 @@ js::set('random', $this->session->random);
 <div class='panel panel-body' id='login'>
   <div class='row'>
     <?php 
-    foreach($lang->user->oauth->providers as $providerCode => $providerName) $providerConfig[$providerCode] = json_decode($config->oauth->$providerCode);
+    if(isset($config->oauth)) foreach($lang->user->oauth->providers as $providerCode => $providerName) $providerConfig[$providerCode] = json_decode($config->oauth->$providerCode);
     if(!empty($providerConfig['sina']->clientID) or !empty($providerConfig['qq']->clientID)):
     ?>
     <div class='col-md-6'>
