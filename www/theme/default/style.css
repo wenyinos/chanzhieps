@@ -106,11 +106,9 @@
 .panel-block .panel-body > .dl-horizontal dt {width: 20%; padding: 3px; font-size: 12px}
 .panel-block .panel-body > .dl-horizontal dd {margin-left: 20%; padding-left: 6px; padding: 3px;}
 .panel-block .panel-body > .nav {margin: -10px -15px;}
-.panel-block .panel-body > .ul-list {margin: -10px -15px;}
-.panel-block .panel-body > .ul-list > li {padding: 8px 15px 8px 30px;}
+.panel-block .panel-body > .ul-list {margin: -2px -15px;}
+.panel-block .panel-body > .ul-list > li {padding: 5px 15px 5px 30px;}
 .panel-block .panel-body > .ul-list > li:before {left: 14px;}
-.panel-block .panel-body > .ul-list > li:hover {background-color: #f1f1f1;}
-.panel-block .panel-body > .ul-list > li a:hover {text-decoration: none;}
 .panel-block .panel-body > .items {margin: -10px -15px;}
 .panel-block .panel-body > .items .item {padding: 10px 15px; border-bottom: 1px #e5e5e5 dashed;}
 .panel-block .panel-body > .items .item:hover {background-color: #f1f1f1;}
