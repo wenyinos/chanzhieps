@@ -501,7 +501,7 @@ class js
      */
     static public function resetForm()
     {
-        return self::start() . 'if(window.parent) window.parent.document.body.click();' . self::end();
+        return self::start() . 'if(window.parent && window.parent.document.body) window.parent.document.body.click();' . self::end();
     }
 
     /**
