@@ -151,7 +151,7 @@ $lang->user->control->lblPassword = "Keep empty, will not change it.";
 
 $lang->user->control->menus[10] = '<i class="icon-large icon-user"></i> Profile <i class="icon-chevron-right"></i>|user|profile';
 $lang->user->control->menus[20] = '<i class="icon-large icon-edit"></i> Edit <i class="icon-chevron-right"></i>|user|edit';
-//$lang->user->control->menus[28] = '<i class="icon-large icon-comments-alt"></i> Messages <i class="icon-chevron-right"></i>|user|message';
+$lang->user->control->menus[28] = '<i class="icon-large icon-comments-alt"></i> Messages <i class="icon-chevron-right"></i>|user|message';
 $lang->user->control->menus[30] = '<i class="icon-large icon-share"></i> Threads <i class="icon-chevron-right"></i>|user|thread';
 $lang->user->control->menus[40] = '<i class="icon-large icon-mail-reply"></i> Replies <i class="icon-chevron-right"></i>|user|reply';
 
