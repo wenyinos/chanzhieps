@@ -208,7 +208,7 @@ class navModel extends model
         if($nav->type == 'page')
         {
             $page = $this->loadModel('article')->getByID($nav->page);
-            if(empty($category)) return '';
+            if(empty($page)) return '';
             return commonModel::createFrontLink('page', 'view', "pageID={$nav->page}", "name={$page->alias}");
         }
 
