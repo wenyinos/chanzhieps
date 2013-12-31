@@ -194,6 +194,7 @@ form .star {display: none;}/* hide star */
 .captcha {width: 100%; background-color: #fafafa; padding: 8px 10px; border: 1px solid #CCC; border-radius: 2px;}
 .captcha label {padding-top: 8px; margin-top: 0; margin-bottom: 0; line-height: 20px;}
 .captcha input[name='captcha'] {margin-left: -2px;}
+.captcha .label {font-size: 20px;}
 
 /* file Form */
 .form-group .file-form .form-group:last-child {margin-bottom: 0;}

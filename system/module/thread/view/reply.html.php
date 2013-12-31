@@ -49,9 +49,10 @@
       <div class='row'>
         <div class='col-md-8 col-sm-12'>
           <?php echo $this->fetch('file', 'buildForm'); ?>
+          <div class='form-group clearfix' id='captchaBox' style='display:none;'></div>
         </div>
       </div>
-      <div class='form-group clearfix' id='captchaBox' style='display:none;'></div>
+      
       <div class='form-group'><?php echo html::submitButton(); ?></div>
       <?php 
       echo html::hidden('recTotal',   $pager->recTotal);

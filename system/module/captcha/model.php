@@ -40,15 +40,45 @@ class captchaModel extends model
      */
     public function create4Comment()
     {
-        $captcha = $this->create();
+        $captcha = $this->create();     
         return <<<EOT
-<th>{$this->lang->captcha->common}</th>
-<td colspan='2'>
-  <h4><span class='label label-danger'>{$captcha->first} {$captcha->operator} {$captcha->second}</span>&nbsp;&nbsp;
-  {$this->lang->captcha->equal} &nbsp;&nbsp;
-  <input type='text' name='captcha' id='captcha' class='text-center' placeholder='{$this->lang->captcha->placeholder}' />
-  </h4>
-</td>
+<label for='captcha' class='col-sm-1 control-label'>{$this->lang->captcha->common}</label>
+<div class='col-sm-11 required'>
+  <div class='captcha'>
+      <div class='row'>
+        <div class='col-sm-3 col-xs-6 text-right'>
+          <span class='text-lg'><span class='label label-danger'>{$captcha->first} {$captcha->operator} {$captcha->second}</span> &nbsp; {$this->lang->captcha->equal} </span>
+        </div>
+        <div class='col-sm-4 col-xs-6'>
+          <input type='text' name='captcha' id='captcha' class='form-control text-center' placeholder='{$this->lang->captcha->placeholder}'/>
+        </div>
+      </div>
+  </div>
+</div>
+EOT;
+    }
+
+        /**
+     * Create captcha for comment.
+     * 
+     * @access public
+     * @return string
+     */
+    public function create4Reply()
+    {
+        $captcha = $this->create();     
+        return <<<EOT
+<div class='captcha'>
+  <div class='row'>
+    <div class='col-sm-2 col-xs-3'><label for='captcha'>{$this->lang->captcha->common}</label></div>
+    <div class='col-sm-3 col-xs-5 text-right'>
+      <span class='text-lg'><span class='label label-danger'>{$captcha->first} {$captcha->operator} {$captcha->second}</span> &nbsp; {$this->lang->captcha->equal} </span>
+    </div>
+    <div class='col-sm-4 col-xs-4'>
+      <input type='text' name='captcha' id='captcha' class='form-control text-center' placeholder='{$this->lang->captcha->placeholder}'/>
+    </div>
+  </div>
+</div>
 EOT;
     }
 
@@ -62,14 +92,19 @@ EOT;
     {
         $captcha = $this->create();
         return <<<EOT
-<label class='col-md-1 col-sm-2 control-label'>{$this->lang->captcha->common}</label>
-<div class='col-md-11 col-xs-10'>
-  <h5 class='label label-danger'>{$captcha->first} {$captcha->operator} {$captcha->second}</h5>&nbsp;&nbsp;
-  {$this->lang->captcha->equal} &nbsp;&nbsp;
-  <input type='text' name='captcha' id='captcha' class='text-center' placeholder='{$this->lang->captcha->placeholder}'/>
-</span>
+<label for='captcha' class='col-md-1 col-sm-2 control-label'>{$this->lang->captcha->common}</label>
+<div class='col-md-7 col-sm-8 col-xs-11 required'>
+  <div class='captcha'>
+      <div class='row'>
+        <div class='col-sm-5 col-xs-6 text-right'>
+          <span class='text-lg'><span class='label label-danger'>{$captcha->first} {$captcha->operator} {$captcha->second}</span> &nbsp; {$this->lang->captcha->equal} </span>
+        </div>
+        <div class='col-sm-5 col-xs-6'>
+          <input type='text' name='captcha' id='captcha' class='form-control text-center' placeholder='{$this->lang->captcha->placeholder}'/>
+        </div>
+      </div>
+  </div>
 </div>
-<div class='c-both'></div>
 EOT;
     }
 
