@@ -282,7 +282,9 @@ form .star {display: none;}/* hide star */
 #powerby:hover:before {left: 120%;}
 
 /* --- LINKS --- */
-#links {border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); margin-bottom: 20px;}
+#links {padding: 10px 15px; border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); margin-bottom: 20px;}
+#links .heading {display: inline-block; margin-right: 10px; color: #666}
+#links > a {display: inline-block; margin-right: 10px;}
 #links:hover {box-shadow: 0 1px 5px rgba(0, 0, 0, 0.175);}
 
 /* responsive for mobile devices */
