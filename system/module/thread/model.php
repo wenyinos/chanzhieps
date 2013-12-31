@@ -195,7 +195,6 @@ class threadModel extends model
             ->setForce('editor', $this->session->user->account)
             ->setForce('editedDate', helper::now())
             ->setDefault('readonly', 0)
-            ->setIF(!$isAdmin, 'content', strip_tags($_POST['content'], $this->config->thread->editor->allowedTags))
             ->remove('files,labels, views, replies, stick, hidden')
             ->get();
 
