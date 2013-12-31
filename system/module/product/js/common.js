@@ -5,6 +5,7 @@ $(document).ready(function()
     {
         $.each(eval(v.path), function(index, category)
         {
+            if($('.nav-product-' + category).length == 0) category = 0;
             $('.nav-product-' + category).addClass('active');
         })
     }
