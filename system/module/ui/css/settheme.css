@@ -3,7 +3,7 @@
 #themes .card img { height: 100px; margin: 0 auto; width: auto; }
 #themes .name{margin-bottom: 20px; font-weight: bold; text-align: center;}
 
-#themes .card .icon-ok { display: block; position: absolute; bottom: 0; right: 0; color: transparent; padding: 7px 15px; font-size: 20px; transition:all 0.3s; z-index: 10; border-top-left-radius:100px;}
+#themes .card .icon-ok { display: none; position: absolute; bottom: 0; right: 0; color: transparent; padding: 7px 15px; font-size: 20px; transition:all 0.3s; z-index: 10; border-top-left-radius:100px;}
 #themes .card.current {border-color: #47A447; -moz-box-shadow:0px 0px 12px #47A447; -webkit-box-shadow:0px 0px 12px #47A447; box-shadow:0px 0px 12px #47A447;}
-#themes .card.current .icon-ok { background-color: #47A447; color: #fff; }
+#themes .card.current .icon-ok { display: block; background-color: #47A447; color: #fff; }
 #themes .card .msg { position: absolute; width: 100%; background-color: #47A447; color: #fff; bottom: 0; left: 0; right: 57px; height: 40px; padding: 0 15px; z-index: 5; line-height: 40px; display: none; }
