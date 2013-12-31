@@ -169,8 +169,9 @@ $.extend(
      *
      * @param string selector
      * @param string target
+     * @param funtion callback
      */
-    setAjaxLoader: function(selector, target)
+    setAjaxLoader: function(selector, target, callback)
     {
         var target = $(target);
         if(!target.size()) return false;
@@ -181,7 +182,7 @@ $.extend(
             if(!url) url = $(this).data('rel');
             if(!url) return false;
 
-            target.load(url);
+            target.load(url, callback);
 
             return false;
         });
