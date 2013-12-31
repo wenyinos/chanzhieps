@@ -38,12 +38,12 @@
         <td class='text-left'><?php foreach($product->categories as $category) echo $category->name . ' ';?></td>
         <td><?php echo $product->amount;?></td>
         <td><?php echo $product->addedDate;?></td>
-        <td><?php echo $lang->product->statusList[$product->status];?></td>
+        <td><?php echo isset($lang->product->statusList[$product->status]) ? $lang->product->statusList[$product->status] : '';?></td>
         <td><?php echo $product->views;?></td>
         <td>
           <?php
           $categories    = $product->categories;
-          $categoryAlias = current($categories)->alias;
+          $categoryAlias = !empty($categories) ? current($categories)->alias : '';
           echo html::a($this->createLink('product', 'edit', "productID=$product->id"), $lang->edit);
           echo html::a($this->createLink('file',    'browse', "objectType=product&objectID=$product->id"), $lang->product->files, "data-toggle='modal' data-width='1000'");
           echo html::a($this->createLink('product', 'delete', "productID=$product->id"), $lang->delete, "class='deleter'");
