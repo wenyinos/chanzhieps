@@ -23,7 +23,7 @@ $lang->upgrade->confirm       = 'Confirm the SQL to excute.';
 $lang->upgrade->next          = 'Next';
 
 $lang->upgrade->setOkFile = <<<EOT
-<div class='alert alert-danger'>
+<div class='alert'>
 <h5>For security reason, please do these steps. </h5>
 <p>Create "<code>%s</code>" file. If this file exists already, reopen it and save again.</p>
 </div>
