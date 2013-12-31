@@ -407,7 +407,7 @@ EOT;
     {
         if($this->canManage($boardID))
         {
-            $this->config->thread->editor->{$page}['tools'] = 'fullTools';
+            $this->config->thread->editor->{$page}['tools'] = 'full';
         }
     }
 
