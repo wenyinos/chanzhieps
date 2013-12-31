@@ -53,9 +53,9 @@ a:hover,a:active{color: #6e2e16;}
 
 /* buttons. */
 .btn{border: none; padding: 7px 12px; -webkit-transition: 0.25s linear; -moz-transition: 0.25s linear; -o-transition: 0.25s linear; transition: 0.25s linear; -webkit-backface-visibility: hidden; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none;font-weight: bold;}
-.btn-primary{background: #6E2E16;}
+.btn-primary,.btn-primary:active{background: #6E2E16;}
 .btn-primary:hover{background: #83381c;}
-.btn-default{color: #f1f1f1; background: #4b624f;}
+.btn-default,.btn-default:active{color: #f1f1f1; background: #4b624f;}
 .btn-default:hover{color: #fff; background: #5f7a64;}
 
 /*form controls.*/
@@ -112,3 +112,9 @@ textarea{height: auto;}
 
 /* text */
 .text-muted{color: #666}
+
+/* poweredby */
+#powerby {background-color: #495e4d; border: #344b38 1px solid;}
+#powerby, #powerby a {color: #8aa590;}
+#powerby:hover {background-color: #344b38}
+#powerby:hover a{color: #c0d1c3}
