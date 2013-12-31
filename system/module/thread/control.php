@@ -74,6 +74,9 @@ class thread extends control
         /* Judge current user has priviledge to edit the thread or not. */
         if(!$this->thread->canManage($thread->board, $thread->author)) die(js::locate('back'));
 
+        /* Set editor for current user. */
+        $this->thread->setEditor($thread->board, 'edit');
+
         if($_POST)
         {
             /* If no captcha but is garbage, return the error info. */
