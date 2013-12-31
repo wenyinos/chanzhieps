@@ -175,7 +175,7 @@ class navModel extends model
     public function buildNav($nav)
     {
         /* Add class attribue to highlight current menu. */
-        $nav['class']  = 'nav-' . $nav['type'] . '-' . $nav[$nav['type']]; 
+        $nav['class'] = $nav['type'] != 'custom' ? 'nav-' . $nav['type'] . '-' . $nav[$nav['type']] : '';
         return $nav;
     }
 

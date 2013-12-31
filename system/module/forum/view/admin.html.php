@@ -7,7 +7,6 @@
       <tr class='text-center'>
         <?php $vars = "boardID=$boardID&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
         <th style='width: 60px' class='text-center'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->thread->id);?></th>
-        <th style='width: 80px'><?php commonModel::printOrderLink('hidden', $orderBy, $vars, $lang->thread->status);?></th>
         <th><?php echo $lang->thread->title;?></th>
         <th style='width: 70px'><?php commonModel::printOrderLink('author', $orderBy, $vars, $lang->thread->author);?></th>
         <th style='width: 100px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->thread->postedDate);?></th>
@@ -15,6 +14,7 @@
         <th style='width: 60px'><?php commonModel::printOrderLink('replies', $orderBy, $vars, $lang->thread->replies);?></th>
         <th style='width: 150px'><?php commonModel::printOrderLink('repliedDate', $orderBy, $vars, $lang->thread->lastReply);?></th>
         <th style='width: 100px'><?php echo $lang->actions;?></th>
+        <th style='width: 80px'><?php commonModel::printOrderLink('hidden', $orderBy, $vars, $lang->thread->status);?></th>
       </tr>  
     </thead>
     <?php endif;?>
@@ -22,7 +22,6 @@
       <?php foreach($threads as $thread):?>
       <tr class='text-center'>
         <td><?php echo $thread->id;?></td>
-        <td class='text-left'><?php echo $thread->hidden ? '<span class="text-warning"><i class="icon-eye-close"></i> ' . $lang->thread->statusList['hidden'] .'</span>' : '<span class="text-success"><i class="icon-ok-sign"></i> ' . $lang->thread->statusList['normal'] . '</span>';?></td>
         <td class='text-left'>
           <?php
           $iconRoot = $themeRoot . 'default/images/forum/';
@@ -47,7 +46,8 @@
             echo html::a($this->createLink('thread', 'switchStatus', "threadID=$thread->id"), $lang->thread->hide, "class='reload'"); 
         }
         ?>
-      </td>
+        </td>
+        <td class='text-left'><?php echo $thread->hidden ? '<span class="text-warning"><i class="icon-eye-close"></i> ' . $lang->thread->statusList['hidden'] .'</span>' : '<span class="text-success"><i class="icon-ok-sign"></i> ' . $lang->thread->statusList['normal'] . '</span>';?></td>
       </tr>  
       <?php endforeach;?>
     </tbody>
