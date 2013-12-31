@@ -194,7 +194,7 @@ class navModel extends model
         if($nav->type == 'article')
         {   
             $category = $this->loadModel('tree')->getByID($nav->article);
-            if(empty($category)) return '';
+            if(empty($category)) return commonModel::createFrontLink('article', 'index');
             return commonModel::createFrontLink('article', 'browse', "categoryID={$nav->article}", "category={$category->alias}");
         }
 

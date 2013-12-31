@@ -166,10 +166,12 @@ class replyModel extends model
      */
     public function update($replyID)
     {
+        $allowedTags = $this->app->user->admin == 'super' ? $this->config->allowedTags->admin : $this->config->allowedTags->front;
+
         $reply = fixer::input('post')
             ->setForce('editor', $this->session->user->account)
             ->setForce('editedDate', helper::now())
-            ->stripTags('content', $this->config->thread->editor->allowedTags)
+            ->stripTags('content', $allowedTags)
             ->remove('files,labels,hidden')
             ->get();
 

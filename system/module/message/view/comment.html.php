@@ -36,7 +36,7 @@ css::internal($pageCSS);
       </div>
       <?php endforeach;?>
     </div>
-    <div class='pager clearfix'><?php $pager->show('right', 'shortest');?></div>
+    <div class='pager clearfix' id='pager'><?php $pager->show('right', 'shortest');?></div>
   </div>
 </div>
 <?php endif;?>

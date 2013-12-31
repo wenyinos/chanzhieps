@@ -27,7 +27,7 @@ class reply extends control
             /* If no captcha but is garbage, return the error info. */
             if($this->post->captcha == false and $this->loadModel('captcha')->isEvil($_POST['content']))
             {
-                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->captcha->create4Thread()));
+                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->captcha->create4Reply()));
             }
 
             $replyID = $this->reply->post($threadID);

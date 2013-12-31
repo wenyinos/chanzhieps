@@ -12,11 +12,8 @@
 ?>
 <?php 
 include '../../common/view/header.html.php';
-if(isset($category->pathNames))
-{
-    $path = array_keys($category->pathNames);
-    js::set('path',  json_encode($path));
-}
+$path = isset($category->pathNames) ? array_keys($category->pathNames) : array(0);
+js::set('path',  json_encode($path));
 
 include '../../common/view/treeview.html.php';
 ?>

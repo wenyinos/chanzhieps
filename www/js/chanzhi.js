@@ -547,10 +547,10 @@ function setBack2Top()
 
     $(window).scroll(function()
     {
-        var btn          = $('.back2top');
-        var parent       = btn.closest('.article,.panel');
-        var parentY      = parent.offset().top;
-        var sTop         = $('body').scrollTop();
+        var btn     = $('.back2top');
+        var parent  = btn.closest('.article,.panel');
+        var parentY = parent.offset().top;
+        var sTop    = $(window).scrollTop();
 
         if(sTop < parentY) btn.hide(); else btn.show();
 
