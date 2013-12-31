@@ -79,9 +79,10 @@ $lang->loading        = '稍候...';
 $lang->saveSuccess    = '保存成功';
 $lang->setSuccess     = '設置成功';
 $lang->sendSuccess    = '發送成功';
+$lang->deleteSuccess  = '刪除成功';
 $lang->fail           = '失敗';
 $lang->noResultsMatch = '沒有匹配的選項';
-$lang->alias          = '搜索引擎優化使用，可使用英文、數字';
+$lang->alias          = '搜索引擎優化使用，可使用英文或數字';
 
 /* Items for javascript. */
 $lang->js = new stdclass();

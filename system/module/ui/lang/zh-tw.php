@@ -21,6 +21,7 @@ $lang->ui->noSelectedFile    = "沒有選擇圖片";
 $lang->ui->notAlloweFileType = "請選擇正確的%s檔案.";
 
 $lang->ui->favicon = new stdclass();
+$lang->ui->favicon->help  = "幫助";
 $lang->ui->favicon->reset = "重置";
 
 $lang->ui->themes = array();
@@ -29,3 +30,4 @@ $lang->ui->themes['flat']       = '清泉';
 $lang->ui->themes['tree']       = '蟬之樹';
 $lang->ui->themes['brightdark'] = '蟬憩';
 $lang->ui->themes['tartan']     = '蟬之格';
+$lang->ui->changetheme = '點擊來使用此主題';

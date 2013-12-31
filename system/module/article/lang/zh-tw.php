@@ -25,7 +25,7 @@ $lang->article->keywords   = '關鍵字';
 $lang->article->summary    = '摘要';
 $lang->article->author     = '作者';
 $lang->article->editor     = '編輯';
-$lang->article->addedDate  = '添加時間';
+$lang->article->addedDate  = '發佈時間';
 $lang->article->editedDate = '編輯時間';
 $lang->article->status     = '狀態';
 $lang->article->type       = '類型';
@@ -52,8 +52,8 @@ $lang->page->edit   = '編輯單頁';
 $lang->article->originalList[1] = '原創';
 $lang->article->originalList[0] = '轉貼';
 
-$lang->article->statusList['draft']  = '草稿';
 $lang->article->statusList['normal'] = '正常';
+$lang->article->statusList['draft']  = '草稿';
 
 $lang->article->confirmDelete = '您確定刪除該文章嗎？';
 
