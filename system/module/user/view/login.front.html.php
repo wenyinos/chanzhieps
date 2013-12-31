@@ -5,7 +5,10 @@ js::set('random', $this->session->random);
 ?>
 <div class='panel panel-body' id='login'>
   <div class='row'>
-    <?php if(isset($config->oauth)):?>
+    <?php 
+    foreach($lang->user->oauth->providers as $providerCode => $providerName) $providerConfig[$providerCode] = json_decode($config->oauth->$providerCode);
+    if(!empty($providerConfig['sina']->clientID) or !empty($providerConfig['qq']->clientID)):
+    ?>
     <div class='col-md-6'>
       <div class='panel panel-pure'>
         <div class='panel-heading'><strong><?php echo $lang->user->oauth->lblWelcome;?></strong></div>
