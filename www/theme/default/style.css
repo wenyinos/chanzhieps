@@ -82,7 +82,6 @@
 /* items */
 .item .media {text-align: center; overflow: hidden; background-color: #f1f1f1; max-height: 100px; transition:all 0.3s;}
 .item .media img {max-height: 100%; max-width: 100%;}
-.items .item a {color: #145BCC}
 .items .item .text-muted {color: #757575}
 
 /* media-palaceholder */
@@ -138,6 +137,8 @@
 .text-middle,.text-middle td {vertical-align: middle !important;}
 tr.text-center > td, tr.text-center > th {text-align: center;}
 tr.text-center > td.text-left, tr.text-center > th.text-left {text-align: left;}
+
+.label{font-size: 12px;}
 
 /* form */
 .placeholder {color: #aaa;}
