@@ -12,7 +12,7 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='container' id='shortcutBox'>
-  <?php if(strpos($this->server->php_self, '/admin.php') !== false  && empty($this->config->global->ignoreAdminEntry)):?>
+  <?php if(strpos($this->server->php_self, '/admin.php') !== false && empty($this->config->global->ignoreAdminEntry)):?>
   <form method='post' id='ajaxForm' action='<?php echo $this->createLink('admin', 'ignore');?>'>
   <div class="alert alert-danger">
     <button type="submit" class="close">&times;</button>
