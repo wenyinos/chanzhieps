@@ -44,7 +44,9 @@ class product extends control
         if($categoryID == 0)
         {
             $category = new stdclass();
+            $category->id       = 0;
             $category->name     = $this->lang->product->home;
+            $category->alias    = '';
             $category->keywords = '';
             $category->desc     = '';
         }
