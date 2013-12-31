@@ -7,7 +7,10 @@ $(document).ready(function()
         $('#treeMenuBox').parent().load(source, function()
         {
             /* Rebuild the tree menu after treeMenuBox refreshed. */
-            $(".tree").treeview({collapsed: false, unique: false});    
+            $(".tree").treeview({collapsed: false, unique: false});
+
+            /* enable palceholder for ie8 */
+            if($.fn.placeholder) $('[placeholder]').placeholder();
         });
     });
 

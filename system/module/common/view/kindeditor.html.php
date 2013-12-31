@@ -42,12 +42,11 @@ var simple =
 
 var full = 
 [ 'formatblock', 'fontsize', 'lineheight', '|', 'forecolor', 'hilitecolor', '|', 'bold', 'italic','underline', 'strikethrough', '|',
-'justifyleft', 'justifycenter', 'justifyright', 'justifyfull', '|',
-'insertorderedlist', 'insertunorderedlist', '|',
-'emoticons', 'image', 'insertfile', 'hr', '|', 'link', 'unlink', '/',
-'undo', 'redo', '|', 'cut', 'copy', 'paste', '|', 'plainpaste', 'wordpaste', '|', 'removeformat', 'clearhtml','quickformat', '|',
-'indent', 'outdent', 'subscript', 'superscript', '|',
-'table', 'code', '|', 'pagebreak', 'anchor', '|', 
+'justifyleft', 'justifycenter', 'justifyright', '|',
+'emoticons', 'image', 'hr', '|', 'link', 'unlink', 'anchor', 'flash', 'media', 'baidumap', '/',
+'undo', 'redo', '|', 'cut', 'copy', '|', 'plainpaste', 'wordpaste', '|', 'removeformat', 'clearhtml','quickformat', '|',
+'indent', 'outdent', 'subscript', 'superscript', 'insertorderedlist', 'insertunorderedlist', '|',
+'table', 'code', 'pagebreak', '|',
 'fullscreen', 'source', 'about'];
 
 $(document).ready(initKindeditor);

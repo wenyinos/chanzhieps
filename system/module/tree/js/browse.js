@@ -8,5 +8,5 @@ $(document).ready(function()
         $(this).children('.deleter').remove();
     });
 
-    $.setAjaxLoader('#treeMenuBox .ajax', '#categoryBox');
+    $.setAjaxLoader('#treeMenuBox .ajax', '#categoryBox', function(){if($.fn.placeholder) $('[placeholder]').placeholder();});
 })

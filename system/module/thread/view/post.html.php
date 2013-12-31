@@ -21,9 +21,9 @@
     <form method='post' class='form-horizontal' id='threadForm' enctype='multipart/form-data'>
       <div class='form-group'>
         <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->thread->title;?></label>
-        <div class='col-md-9 col-sm-8'><?php echo html::input('title', '', "class='form-control'");?></div>
+        <div class='<?php echo $canManage ? "col-md-10" : "col-md-11";?> col-sm-8'><?php echo html::input('title', '', "class='form-control'");?></div>
         <?php if($canManage): ?>
-        <div class='col-md-2 col-sm-2'>
+        <div class='col-md-1 col-sm-2'>
           <div class='checkbox'>
               <label>
                 <?php echo "<input type='checkbox' name='readonly' value='1'/><span>{$lang->thread->readonly}</span>" ?>
