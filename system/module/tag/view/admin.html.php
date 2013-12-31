@@ -12,7 +12,7 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
-<div class='panel'>
+<div class='panel panel-pure'>
   <form method='post' class='form-inline form-search '>
     <div class='input-group'>
       <?php echo html::select('tags[]', $tagOptions, $this->post->tags, "multiple='multiple' class='form-control chosen  search-query' placeholder='{$lang->tag->inputTag}'"); ?>

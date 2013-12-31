@@ -90,8 +90,8 @@
 /* panels */
 .panel > .table > thead > tr > th,.panel > form > .table > thead > tr > th {background-color: transparent;}
 .panel > .panel-heading,.nav-stacked.nav-primary>li.nav-heading,.list > header, #navbar {background-color: #f1f1f1; background-image: -moz-linear-gradient(#fafafa, #f1f1f1); background-image: -webkit-linear-gradient(#FAFAFA, #f1f1f1); background-image: linear-gradient(#FAFAFA, #f1f1f1); background-repeat: repeat-x;}
-.panel-pure {box-shadow: none; border: 0; border-radius: 0;}
-.panel-pure .panel-heading {background: transparent;}
+.panel.panel-pure {box-shadow: none; border: 0; border-radius: 0;}
+.panel.panel-pure .panel-heading {background: transparent;}
 .panel-actions{float: right;margin-top: -10px;margin-right: -10px;}
 .panel-actions .btn{margin-top: 3px;}
 .panel-heading > h1,.panel-heading > h2,.panel-heading > h3,.panel-heading > h4,.panel-heading > h5,.panel-heading > h6 {margin: 0}
