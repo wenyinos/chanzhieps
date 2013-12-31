@@ -15,7 +15,10 @@ $(document).ready(function()
     $("[data-toggle=lightbox]").lightbox();
     
     /* Load message notify. */
-    $('#headNav #msgBox').load(createLink('message', 'notify'));
+    $('#headNav #msgBox').load(createLink('message', 'notify'), function()
+    {
+        $('#headNav #msgBox').find('a label') && $('#msgBox').removeClass('hide').show();
+    });
 
     /* Set 'back to top' button. */
     setBack2Top();
