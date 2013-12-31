@@ -17,7 +17,7 @@ h5{font-size: 14px;}
 #footNav .icon-rss-sign:hover{text-decoration: none; color: #254952}
 
 /* articles */
-#articles .card{background-color: #F5F0CC;padding: 5px 5px 0;border: none;box-shadow: none;}
+#articles .card{background-color: #F5F0CC;padding: 5px 5px 0;border: none;box-shadow: none;border-radius: 2px}
 #articles .card-heading a{font-weight: bold; color: #254952}
 
 /* pager */
