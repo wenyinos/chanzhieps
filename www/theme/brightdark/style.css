@@ -66,12 +66,13 @@ a:hover,a:active{color: #da3b26;}
 textarea{height: auto;}
 .ke-container,.chosen-choices{border: 1px solid #bdc3c7 !important; height: auto;}
 .chosen-container-active .chosen-choices{border-color: #da3b26 !important;}
-.form-control:focus,.form-control:hover,.form-control:active{border-color: #da3b26; outline: 0; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;}
+.form-control:focus,.form-control:hover,.form-control:active,.ke-container.focus{border-color: #da3b26!important; outline: 0; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none!important;}
 
 /* table. */
 .table{border: none;-moz-box-shadow:0px 1px 1px rgba(0,0,0,0.2); -webkit-box-shadow:0px 1px 1px rgba(0,0,0,0.2); box-shadow:0px 1px 1px rgba(0,0,0,0.2);}
 .table td,.table th{background: #ECF0F5; border: none;}
 .table caption{background: #BDC3C7; height: 45px; padding: 2px 15px;}
+.table-hover>tbody>tr:hover>td, .table-hover>tbody>tr:hover>th{background-color: #f4f8fc}
 .table.table-hover tr td:first-child{padding-left: 1em;}
 .table tr:last-child td,.table{-webkit-border-bottom-left-radius:2px; -webkit-border-bottom-right-radius:2px; -moz-border-radius-bottomleft:2px; -moz-border-radius-bottomright:2px; border-bottom-left-radius:2px; border-bottom-right-radius:2px;}
 .table-form tr:last-child td{padding-bottom: 20px;}
@@ -80,6 +81,7 @@ textarea{height: auto;}
 .thread-wrapper .article-files{background-color: transparent;}
 
 /* .nav */
+.nav>li>a:hover, .nav>li>a:focus{background-color: #f4f8fc}
 .nav-primary {border-radius: 2px;overflow: hidden;}
 .nav-primary > li > a{color: #da3b26; background:#EDEFF1;border-color: ##BDC3C7;border-left: 0;border-right:0;border-radius: 2px}
 .nav-primary > li:hover > a{color: #fff;background-color: #808080;border-color: #808080;box-shadow: none;}
@@ -110,3 +112,9 @@ textarea{height: auto;}
 
 /* poweredby */
 #powerby:hover {background-color: #808080;border-color: #777}
+
+/* tree */
+.tree li:before {color: #C9C9C9;}
+.sitemap-tree > h4 {background-color: #C9C9C9!important}
+.treeview .hitarea:before {color: #aaa!important}
+.treeview li:hover .hitarea:before {color: #DA3B26!important}
