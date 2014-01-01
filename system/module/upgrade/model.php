@@ -67,7 +67,7 @@ class upgradeModel extends model
                 $this->execSQL($this->getUpgradeFile('1.7'));
                 $this->moveBooks();
                 $this->setMessageBlocks();
-            case '1.8':
+            case '1_8':
                 $this->setPageBlocks();
                 $this->setBlogBlocks();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
