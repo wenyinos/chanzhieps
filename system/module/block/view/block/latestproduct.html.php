@@ -69,6 +69,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
   <div class='panel-body'>
     <ul class='ul-list'>
       <?php foreach($products as $product):?>
+      <?php $productCategory = array_shift($product->categories);?>
       <?php 
       $category = array_shift($product->categories);
       $url = helper::createLink('product', 'view', "id=$product->id", "category={$productCategory->alias}&name=$product->alias");
