@@ -12,6 +12,7 @@ $(document).ready(function()
     {
         $.each(eval(v.path), function(index, category) 
         { 
+            if($('.nav-article-' + category).length == 0) category = 0;
             $('.nav-article-' + category).addClass('active');
         })
     }
