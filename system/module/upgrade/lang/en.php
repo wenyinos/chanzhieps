@@ -20,6 +20,7 @@ $lang->upgrade->index         = 'Upgrad chanzhiEPS.';
 $lang->upgrade->backup        = 'Backup';
 $lang->upgrade->selectVersion = 'Select version to upgrade from';
 $lang->upgrade->confirm       = 'Confirm the SQL to excute.';
+$lang->upgrade->execute       = 'Execute';
 $lang->upgrade->next          = 'Next';
 
 $lang->upgrade->setOkFile = <<<EOT
@@ -27,7 +28,6 @@ $lang->upgrade->setOkFile = <<<EOT
 <h5>For security reason, please do these steps. </h5>
 <p>Create "<code>%s</code>" file. If this file exists already, reopen it and save again.</p>
 </div>
-<a href="upgrade.php" class='btn btn-primary'>Ready, go!</a>
 EOT;
 
 $lang->upgrade->backupData = <<<EOT

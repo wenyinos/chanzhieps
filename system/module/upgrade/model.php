@@ -254,8 +254,8 @@ class upgradeModel extends model
                 $chapter->type       = 'chapter';
                 $chapter->parent     = $catalogue->parent == 0 ? $bookID : $catalogue->parent;
                 $chapter->grade      = $catalogue->grade + 1;
-                $chapter->addedDate  = $catalogue->addedDate;
-                $chapter->editedDate = $catalogue->editedDate;
+                $chapter->addedDate  = $catalogue->postedDate;
+                $chapter->editedDate = $catalogue->postedDate;
                 $chapter->order      = $catalogue->order;
 
                 $paths = explode(',', $catalogue->path);
