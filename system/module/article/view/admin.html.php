@@ -18,7 +18,7 @@
   <div class='panel-actions'><?php echo html::a($this->inlink('create', "type={$type}&category={$categoryID}"), '<i class="icon-plus"></i> ' . $lang->blog->create, 'class="btn btn-primary"');?></div>
   <?php elseif($type == 'page'):?>
   <strong><i class="icon-list-ul"></i> <?php echo $lang->page->list;?></strong>
-  <div class='panel-actions'><?php echo html::a($this->inlink('create', "type={$type}&category={$categoryID}"), '<i class="icon-plus"></i> ' . $lang->page->create, 'class="btn btn-primary"');?></div>
+  <div class='panel-actions'><?php echo html::a($this->inlink('create', "type={$type}"), '<i class="icon-plus"></i> ' . $lang->page->create, 'class="btn btn-primary"');?></div>
   <?php else:?>
   <strong><i class="icon-list-ul"></i> <?php echo $lang->article->list;?></strong>
   <div class='panel-actions'><?php echo html::a($this->inlink('create', "type={$type}&category={$categoryID}"), '<i class="icon-plus"></i> ' . $lang->article->create, 'class="btn btn-primary"');?></div>
@@ -29,8 +29,10 @@
       <tr>
         <?php $vars = "type=$type&categoryID=$categoryID&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
         <th style='width: 60px' class='text-center'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->article->id);?></th>
-        <th class='text-center'><?php commonModel::printOrderLink('title',     $orderBy, $vars, $lang->article->title);?></th>
+        <th class='text-center'><?php commonModel::printOrderLink('title', $orderBy, $vars, $lang->article->title);?></th>
+        <?php if($type != 'page'):?>
         <th style='width: 100px' class='text-center'><?php commonModel::printOrderLink('category', $orderBy, $vars, $lang->article->category);?></th>
+        <?php endif;?>
         <th style='width: 160px' class='text-center'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->article->addedDate);?></th>
         <th style='width: 60px' class='text-center'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->article->views);?></th>
         <th style='width: 150px' class='text-center'><?php echo $lang->actions;?></th>
@@ -44,7 +46,9 @@
           <?php echo $article->title;?>
           <?php if($article->status == 'draft') echo '<span class="label label-xsm label-warning">' . $lang->article->statusList[$article->status] .'</span>';?>
         </td>
+        <?php if($type != 'page'):?>
         <td class='text-center'><?php foreach($article->categories as $category) echo $category->name . ' ';?></td>
+        <?php endif;?>
         <td class='text-center'><?php echo $article->addedDate;?></td>
         <td class='text-center'><?php echo $article->views;?></td>
         <td class='text-center'>
