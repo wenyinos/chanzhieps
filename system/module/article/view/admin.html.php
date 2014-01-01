@@ -50,7 +50,7 @@
         <td class='text-center'>
           <?php
           echo html::a($this->createLink('article', 'edit', "articleID=$article->id&type=$article->type"), $lang->edit);
-          echo html::a($this->createLink('file', 'browse', "objectType=article&objectID=$article->id"), $lang->article->files, "data-toggle='modal'");
+          echo html::a($this->createLink('file', 'browse', "objectType=$article->type&objectID=$article->id"), $lang->article->files, "data-toggle='modal'");
           echo html::a($this->createLink('article', 'delete', "articleID=$article->id"), $lang->delete, 'class="deleter"');
           echo html::a($this->article->createPreviewLink($article->id), $lang->preview, "target='_blank'");
           ?>

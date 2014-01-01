@@ -44,7 +44,7 @@ class articleModel extends model
         $article->path = explode(',', trim($path, ','));
 
         /* Get it's files. */
-        $article->files = $this->loadModel('file')->getByObject('article', $articleID);
+        $article->files = $this->loadModel('file')->getByObject($article->type, $articleID);
 
         return $article;
     }   
@@ -68,7 +68,7 @@ class articleModel extends model
         $page->content = $this->loadModel('tag')->addLink($page->content);
         
         /* Get it's files. */
-        $page->files = $this->loadModel('file')->getByObject('article', $page->id);
+        $page->files = $this->loadModel('file')->getByObject('page', $page->id);
 
         return $page;
     }
@@ -122,7 +122,7 @@ class articleModel extends model
         foreach($articles as $article) $article->categories = isset($categories[$article->id]) ? $categories[$article->id] : array();
 
         /* Get images for these articles. */
-        $images = $this->loadModel('file')->getByObject('article', array_keys($articles), $isImage = true);
+        $images = $this->loadModel('file')->getByObject($type, array_keys($articles), $isImage = true);
 
         /* Assign images to it's article. */
         foreach($articles as $article)
