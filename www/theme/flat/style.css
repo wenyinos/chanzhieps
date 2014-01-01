@@ -84,6 +84,7 @@ textarea{height: auto;}
 
 /* pager */
 .pager > li > a{background-color: #34495E;color: #f1f1f1;border:none;margin-right: 10px;}
+.pager > li.next > a{margin-right: 0;}
 .pager.pager-justify > li > a {border-radius: 16px}
 .pager > li > a:hover{background-color: #16A085;color: #fff}
 .pager > li:last-child > a{margin: 0;}
