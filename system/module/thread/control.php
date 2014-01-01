@@ -20,7 +20,7 @@ class thread extends control
      */
     public function post($boardID = 0)
     {
-        if($this->app->user->account == 'guest') die(js::locate($this->createLink('user', 'login')));
+        if($this->app->user->account == 'guest') die(js::locate($this->createLink('user', 'login', "referer=" . helper::safe64Encode($this->app->getURI()))));
 
         /* Get the board. */
         $board = $this->loadModel('tree')->getById($boardID);
