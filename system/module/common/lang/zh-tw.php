@@ -10,14 +10,15 @@
  * @link        http://www.zentao.net
  */
 /* common sign setting. */
-$lang->colon   = ' : ';
-$lang->prev    = '‹';
-$lang->next    = '›';
-$lang->laquo   = '&laquo;';
-$lang->raquo   = '&raquo;';
-$lang->minus   = ' - ';
-$lang->RMB     = '￥';
-$lang->divider = "<span class='divider'>{$lang->raquo}</span> ";
+$lang->colon    = ' : ';
+$lang->prev     = '‹';
+$lang->next     = '›';
+$lang->laquo    = '&laquo;';
+$lang->raquo    = '&raquo;';
+$lang->minus    = ' - ';
+$lang->RMB      = '￥';
+$lang->divider  = "<span class='divider'>{$lang->raquo}</span> ";
+$lang->back2Top = '返回頂部';
 
 /* Lang items for xirang. */
 $lang->chanzhiEPS  = '蟬知企業門戶系統';
