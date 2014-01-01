@@ -20,6 +20,6 @@ $(document).ready(function()
         if($('#headNav #msgBox').find('.label').length > 0) $('#msgBox').removeClass('hide').show();
     });
 
-    /* Set 'back to top' button. */
-    setBack2Top();
+    /* Set 'go to top' button. */
+    setGo2Top();
 });

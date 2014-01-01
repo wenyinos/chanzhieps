@@ -536,24 +536,28 @@ needPing = true;
 if(config.runMode != 'admin') needPing = false;
 
 /**
- * Set 'back to top' button
+ * Set 'go to top' button
  * 
  * @access public
  * @return void
  */
-function setBack2Top()
+function setGo2Top()
 {
-    if($('.back2top').length == 0) return;
-
+    if(('#go2top').length == 0) return;
     $(window).scroll(function()
     {
-        var btn     = $('.back2top');
-        var parent  = btn.closest('.article,.panel');
-        var parentY = parent.offset().top;
+        var btn     = $('#go2top');
+        var parent  = btn.closest('.page-container');
+        var parentTop = parent.offset().top;
+        var parentHeight = parent.height();
+        var wHeight = $(window).height();
         var sTop    = $(window).scrollTop();
 
-        if(sTop < parentY) btn.hide(); else btn.show();
+        if(sTop < 100) btn.hide(); else btn.show();
 
-        btn.css('margin-bottom', Math.max(0, parentY + parent.height() - $(window).height() - sTop + 42));
+        btn.css('bottom', Math.max(60, parentTop + parentHeight - sTop - wHeight + 60));
     }).scroll();
+
+    $('#go2top').tooltip({container: 'body', placement: 'left'})
+        .click(function(){$('body,html').animate({scrollTop:0},400); return false;});
  }
