@@ -143,18 +143,19 @@ class messageModel extends model
         $message = fixer::input('post')
             ->add('date', helper::now())
             ->add('type', $type)
-            ->setDefault('public', '0')
+            ->setDefault('public', '1')
+            ->setIF(isset($_POST['secret']) and $_POST['secret'] == 1, 'public', '0')
             ->setIF($type == 'message', 'to', 'admin')
             ->add('ip', $this->server->REMOTE_ADDR)
             ->add('status', '0')
             ->get();
 
         $this->dao->insert(TABLE_MESSAGE)
-            ->data($message, $skip = 'captcha')
+            ->data($message, $skip = 'captcha, secret')
             ->autoCheck()
             ->check('captcha', 'captcha')
             ->check('type', 'in', $this->config->message->types)
-            ->checkIF(isset($message->email), 'email', 'email')
+            ->checkIF(!empty($message->email), 'email', 'email')
             ->batchCheck('from, type, content', 'notempty')
             ->exec();
 
