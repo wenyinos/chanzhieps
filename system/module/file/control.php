@@ -55,6 +55,7 @@ class file extends control
         {
             if(!$this->file->checkSavePath()) $this->send(array('error' => 1, 'message' => $this->lang->file->errorUnwritable));
             move_uploaded_file($file['tmpname'], $this->file->savePath . $file['pathname']);
+            $this->file->compressImage($this->file->savePath . $file['pathname']);
             $url =  $this->file->webPath . $file['pathname'];
 
             $file['addedBy']   = $this->app->user->account;
