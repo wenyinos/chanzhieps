@@ -548,14 +548,11 @@ function setGo2Top()
     {
         var btn     = $('#go2top');
         var parent  = btn.closest('.page-container');
-        var parentTop = parent.offset().top;
-        var parentHeight = parent.height();
-        var wHeight = $(window).height();
         var sTop    = $(window).scrollTop();
 
         if(sTop < 100) btn.hide(); else btn.show();
 
-        btn.css('bottom', Math.max(60, parentTop + parentHeight - sTop - wHeight + 60));
+        btn.css('bottom', Math.max(60, parent.offset().top + parent.height() - sTop - $(window).height() + 60));
     }).scroll();
 
     $('#go2top').tooltip({container: 'body', placement: 'left'})
