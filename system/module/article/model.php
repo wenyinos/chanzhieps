@@ -151,10 +151,8 @@ class articleModel extends model
     {
         return $this->dao->select('id, title')->from(TABLE_ARTICLE)
             ->where('type')->eq('page')
-            ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')
             ->andWhere('addedDate')->le(helper::now())
             ->andWhere('status')->eq('normal')
-            ->fi()
             ->orderBy('id_desc')
             ->page($pager, false)
             ->fetchPairs();
