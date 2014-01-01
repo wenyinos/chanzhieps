@@ -38,8 +38,8 @@
         <th><?php echo $lang->user->visits;?></th>
         <th><?php echo $lang->user->last;?></th>
         <th><?php echo $lang->user->ip;?></th>
-        <th><?php echo $lang->actions;?></th>
         <th><?php echo $lang->user->status;?></th>
+        <th><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
@@ -55,6 +55,11 @@
       <td><?php echo $user->visits;?></td>
       <td><?php echo $user->last;?></td>
       <td><?php echo $user->ip;?></td>
+      <td>
+      <?php if($user->fails > 4 and $user->locked > helper::now()) echo $lang->user->statusList->locked;?>
+      <?php if($user->fails <= 4 and $user->locked > helper::now()) echo $lang->user->statusList->forbidden;?>
+      <?php if($user->locked <= helper::now()) echo $lang->user->statusList->normal;?>
+      </td>
       <td class='operate'>
         <?php echo html::a($this->createLink('user', 'edit', "account=$user->account"), $lang->edit); ?>
         <div class="btn-group">
@@ -65,11 +70,6 @@
           <?php endforeach;?>
           </ul>
         </div>
-      </td>
-      <td>
-      <?php if($user->fails > 4 and $user->locked > helper::now()) echo $lang->user->statusList->locked;?>
-      <?php if($user->fails <= 4 and $user->locked > helper::now()) echo $lang->user->statusList->forbidden;?>
-      <?php if($user->locked <= helper::now()) echo $lang->user->statusList->normal;?>
       </td>
     </tr>
     <?php endforeach;?>

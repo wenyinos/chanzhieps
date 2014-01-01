@@ -13,8 +13,8 @@
         <th style='width: 60px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->thread->views);?></th>
         <th style='width: 60px'><?php commonModel::printOrderLink('replies', $orderBy, $vars, $lang->thread->replies);?></th>
         <th style='width: 150px'><?php commonModel::printOrderLink('repliedDate', $orderBy, $vars, $lang->thread->lastReply);?></th>
-        <th style='width: 100px'><?php echo $lang->actions;?></th>
         <th style='width: 80px'><?php commonModel::printOrderLink('hidden', $orderBy, $vars, $lang->thread->status);?></th>
+        <th style='width: 100px'><?php echo $lang->actions;?></th>
       </tr>  
     </thead>
     <?php endif;?>
@@ -34,6 +34,7 @@
         <td><?php echo $thread->views;?></td>
         <td><?php echo $thread->replies;?></td>
         <td class='text-left'><?php if($thread->replies) echo substr($thread->repliedDate, 5, -3) . ' ' . $thread->repliedBy;?></td>  
+        <td class='text-left'><?php echo $thread->hidden ? '<span class="text-warning"><i class="icon-eye-close"></i> ' . $lang->thread->statusList['hidden'] .'</span>' : '<span class="text-success"><i class="icon-ok-sign"></i> ' . $lang->thread->statusList['normal'] . '</span>';?></td>
         <td>
         <?php echo html::a($this->createLink('thread', 'delete', "threadID=$thread->id"), $lang->delete, "class='reload'"); ?>
         <?php 
@@ -47,7 +48,6 @@
         }
         ?>
         </td>
-        <td class='text-left'><?php echo $thread->hidden ? '<span class="text-warning"><i class="icon-eye-close"></i> ' . $lang->thread->statusList['hidden'] .'</span>' : '<span class="text-success"><i class="icon-ok-sign"></i> ' . $lang->thread->statusList['normal'] . '</span>';?></td>
       </tr>  
       <?php endforeach;?>
     </tbody>
