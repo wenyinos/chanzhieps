@@ -8,14 +8,14 @@
       <table class='table table-bordered'>
         <thead>
           <tr>
-            <th><?php echo $lang->file->id;?></th>
-            <th><?php echo $lang->file->common;?></th>
-            <th><?php echo $lang->file->extension;?></th>
-            <th><?php echo $lang->file->size;?></th>
-            <th><?php echo $lang->file->addedBy;?></th>
-            <th><?php echo $lang->file->addedDate;?></th>
-            <th><?php echo $lang->file->downloads;?></th>
-            <th><?php echo $lang->actions;?></th>
+            <th class='text-center'><?php echo $lang->file->id;?></th>
+            <th class='text-center'><?php echo $lang->file->common;?></th>
+            <th class='text-center'><?php echo $lang->file->extension;?></th>
+            <th class='text-center'><?php echo $lang->file->size;?></th>
+            <th class='text-center'><?php echo $lang->file->addedBy;?></th>
+            <th class='text-center'><?php echo $lang->file->addedDate;?></th>
+            <th class='text-center'><?php echo $lang->file->downloads;?></th>
+            <th class='text-center'><?php echo $lang->actions;?></th>
           </tr>          
         </thead>
         <tbody>
