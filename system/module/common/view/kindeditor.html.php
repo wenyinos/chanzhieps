@@ -43,10 +43,10 @@ var simple =
 var full = 
 [ 'formatblock', 'fontsize', 'lineheight', '|', 'forecolor', 'hilitecolor', '|', 'bold', 'italic','underline', 'strikethrough', '|',
 'justifyleft', 'justifycenter', 'justifyright', '|',
-'emoticons', 'image', 'hr', '|', 'link', 'unlink', 'anchor', 'flash', 'media', 'baidumap', '/',
+'emoticons', 'image', '|', 'link', 'unlink', 'anchor', 'flash', 'media', 'baidumap', '/',
 'undo', 'redo', '|', 'cut', 'copy', '|', 'plainpaste', 'wordpaste', '|', 'removeformat', 'clearhtml','quickformat', '|',
 'indent', 'outdent', 'subscript', 'superscript', 'insertorderedlist', 'insertunorderedlist', '|',
-'table', 'code', 'pagebreak', '|',
+'table', 'code', 'hr', '|',
 'fullscreen', 'source', 'about'];
 
 $(document).ready(initKindeditor);
