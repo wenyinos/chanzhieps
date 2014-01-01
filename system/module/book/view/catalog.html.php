@@ -11,7 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php'; ?>
-<?php js::set('path', json_encode($node ? explode(',', $node->path) : 0));?>
+<?php js::set('path', $node ? explode(',', $node->path) : array(0));?>
 <form id='ajaxForm' method='post'>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-list-ul'></i> <?php echo $node->title . " <i class='icon-angle-right'></i> " . $lang->book->catalog;?></strong></div>

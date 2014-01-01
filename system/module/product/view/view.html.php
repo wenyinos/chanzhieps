@@ -15,7 +15,7 @@ include '../../common/view/header.html.php';
 include '../../common/view/treeview.html.php'; 
 
 /* set categoryPath for topNav highlight. */
-js::set('path',  json_encode($product->path));
+js::set('path',  $product->path);
 js::set('productID', $product->id);
 ?>
 <?php $common->printPositionBar($category, $product);?>

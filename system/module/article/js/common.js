@@ -10,11 +10,16 @@ $(document).ready(function()
     /* Set current active topNav. */
     if(v.path && v.path.length)
     {
-        $.each(eval(v.path), function(index, category) 
+        var hasActive = false;
+        $.each(v.path, function(index, category) 
         { 
-            if($('.nav-article-' + category).length == 0) category = 0;
-            $('.nav-article-' + category).addClass('active');
-        })
+            if(!hasActive)
+            {
+                if($('.nav-article-' + category).length >= 1) hasActive = true;
+                $('.nav-article-' + category).addClass('active');
+            }
+        });
+        if(!hasActive) $('.nav-article-0').addClass('active');
     }
 
     if(v.categoryID !== 0) $('.tree a[href*=' + v.categoryID + ']').addClass('active');
