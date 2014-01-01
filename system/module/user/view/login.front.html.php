@@ -6,7 +6,7 @@ js::set('random', $this->session->random);
 <div class='panel panel-body' id='login'>
   <div class='row'>
     <?php 
-    if(isset($config->oauth)) foreach($lang->user->oauth->providers as $providerCode => $providerName) $providerConfig[$providerCode] = json_decode($config->oauth->$providerCode);
+    foreach($lang->user->oauth->providers as $providerCode => $providerName) $providerConfig[$providerCode] = isset($config->oauth->$providerCode) ? json_decode($config->oauth->$providerCode) : '';
     if(!empty($providerConfig['sina']->clientID) or !empty($providerConfig['qq']->clientID)):
     ?>
     <div class='col-md-6'>
@@ -16,7 +16,7 @@ js::set('random', $this->session->random);
         <?php 
         foreach($lang->user->oauth->providers as $providerCode => $providerName) 
         {
-            $providerConfig = json_decode($config->oauth->$providerCode);
+            $providerConfig = isset($config->oauth->$providerCode) ? json_decode($config->oauth->$providerCode) : '';
             if(empty($providerConfig->clientID)) continue;
             $params = "provider=$providerCode";
             if($referer and !strpos($referer, 'login') and !strpos($referer, 'oauth')) $params .= "&referer=" . helper::safe64Encode($referer);
