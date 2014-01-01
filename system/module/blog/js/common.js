@@ -3,7 +3,7 @@ $(document).ready(function()
     /* Set current active topNav. */
     if(v.path && v.path.length)
     {
-        $.each(eval(v.path), function(index, category) 
+        $.each(v.path, function(index, category) 
         { 
             $('.nav-blog-' + category).addClass('active');
         })

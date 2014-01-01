@@ -13,7 +13,7 @@
 <?php 
 include '../../common/view/header.html.php';
 $path = isset($category->pathNames) ? array_keys($category->pathNames) : array(0);
-js::set('path',  json_encode($path));
+js::set('path', $path);
 
 include '../../common/view/treeview.html.php';
 ?>

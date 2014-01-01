@@ -14,7 +14,7 @@
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php 
 $path = explode(',', $node->path);
-js::set('path', json_encode($path));
+js::set('path', $path);
 ?>
 <div class="panel">
   <div class="panel-heading">
