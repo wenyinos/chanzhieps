@@ -21,7 +21,7 @@
     <?php $current = $theme == $config->site->theme ? 'current' : ''; ?>
       <div class='col-lg-4 col-md-6 col-sm-6'>
         <a class='card ajax-theme <?php echo $current; ?>' href='<?php echo inlink('settheme', "theme={$theme}"); ?>' title='<?php echo $lang->ui->changetheme; ?>'>
-          <?php echo html::image($themeRoot . $theme . DS . 'preview.png'); ?>
+          <?php echo html::image($themeRoot . $theme . '/preview.png'); ?>
           <i class='icon-large icon-ok pull-right'></i>
           <div class='msg'></div>
         </a>
