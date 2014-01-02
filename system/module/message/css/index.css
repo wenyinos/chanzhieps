@@ -1,7 +1,8 @@
 .panel-body > .comments-list { margin: -15px -15px 0;}
+.panel-body > .comments-list > .comment > .comments-list{padding-left: 80px;margin-right: -15px;}
 .comment{padding-left: 15px;padding-right: 15px;}
 .pager { margin: 0; display: block; }
-.pager > .page { margin-bottom: -15px; font-size: 12px; text-align: right; color: #999;}
+.pager > .page { margin-bottom: -15px; font-size: 12px; text-align: right; color: #ddd;}
 .signed-user-info{padding: 6px 2px}
 .comment>.avatar {margin-top: 0;}
 .comment>.avatar+.content{padding-left: 60px;}
