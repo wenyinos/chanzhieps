@@ -543,7 +543,8 @@ if(config.runMode != 'admin') needPing = false;
  */
 function setGo2Top()
 {
-    if(('#go2top').length == 0) return;
+    if(!$('#go2top').length) return;
+
     $(window).scroll(function()
     {
         var btn     = $('#go2top');
