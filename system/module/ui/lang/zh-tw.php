@@ -30,4 +30,5 @@ $lang->ui->themes['flat']       = '清泉';
 $lang->ui->themes['tree']       = '蟬之樹';
 $lang->ui->themes['brightdark'] = '蟬憩';
 $lang->ui->themes['tartan']     = '蟬之格';
+$lang->ui->themes['blue']       = '藍';
 $lang->ui->changetheme = '點擊來使用此主題';

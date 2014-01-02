@@ -22,7 +22,7 @@
       ?>
       <div class='carousel-caption'>
         <h2><?php echo $slide->title;?></h2>
-        <div class='lead'><?php echo $slide->summary;?></div>
+        <div><?php echo $slide->summary;?></div>
         <?php if(trim($slide->label) != '') echo html::a($slide->url, $slide->label, "class='btn btn-lg btn-primary'");?>
       </div>
     </div>

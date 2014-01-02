@@ -49,7 +49,7 @@ a:hover,a:active{color: #35636e;}
 .panel,.list,.page-wrapper .list,#focus .panel-block,#focus .panel-block:hover,#footer,#links,.page-wrapper .article {border-radius: 2px;background: #f5f0cc;border:none;}
 .panel > .panel-heading, .nav-stacked.nav-primary>li.nav-heading, .list > header,.page-wrapper .list > header ,.panel-block > .panel-heading,#focus .panel-block .panel-heading,#focus .panel-block:hover .panel-heading{background: #7A94B2;color: #fff;border: none;-moz-border-radius:2px 2px 0 0; -webkit-border-radius:2px 2px 0 0; border-radius:2px 2px 0 0;}
 .panel > .panel-heading .text-muted{color: #ccc}
-#login .panel-heading,#reg .panel-heading{background-color: transparent; color: #666;border-bottom: 1px solid #7A94B2}
+.panel.panel-pure .panel-heading{background-color: transparent; color: #666;border-bottom: 1px solid #7A94B2}
 .panel .treeview .hitarea{background-color: #f5f0cc!important}
 .panel .tree > li > ul li:last-child:after{border-left-color: #f5f0cc!important}
 .panel-heading > .pull-right > a{color: #f1f1f1}
@@ -132,3 +132,7 @@ textarea{height: auto;}
 /* ul-list */
 .ul-list > li:before {color: #E8D0A9}
 .ul-list > li:hover:before {color: #6E2E16}
+
+/* dropdown */
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus{color: #254952;}
+.dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus{color: #254952;-webkit-box-shadow: inset 3px 0 0 #254952;box-shadow: inset 3px 0 0 #254952;}
