@@ -44,7 +44,7 @@ a:hover,a:active{color: #1ABC9C;}
 .panel,.list,.page-wrapper .list,#focus .panel-block,#focus .panel-block:hover,#footer,#links,.page-wrapper .article {border-radius: 6px;background: #EDEFF1;border:none;}
 .panel > .panel-heading, .nav-stacked.nav-primary>li.nav-heading, .list > header,.page-wrapper .list > header ,.panel-block > .panel-heading,#focus .panel-block .panel-heading,#focus .panel-block:hover .panel-heading{background: #34495E;color: #f1f1f1;border: none;-moz-border-radius:6px 6px 0 0; -webkit-border-radius:6px 6px 0 0; border-radius:6px 6px 0 0;}
 .panel > .panel-heading .text-muted{color: #95A5A6}
-#login .panel-heading,#reg .panel-heading{background-color: transparent; color: #666;border-bottom: 2px solid #BDC3C7}
+.panel.panel-pure .panel-heading{background-color: transparent; color: #666;border-bottom: 2px solid #BDC3C7}
 .panel .treeview .hitarea{background-color: #EDEFF1!important}
 .panel .tree > li > ul li:last-child:after{border-left-color: #EDEFF1!important}
 .panel-heading > .pull-right > a{color: #BDC3C7}
