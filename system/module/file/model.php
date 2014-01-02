@@ -51,7 +51,7 @@ class fileModel extends model
             if($file->isImage)
             {
                 $size = getimagesize($this->app->wwwRoot . $file->fullURL);
-                $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank' data-toggle='lightbox' data-width='{$size[0]}' data-height='{$size[1]}'") . '</li>';
+                $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->smallURL), "target='_blank' data-toggle='lightbox' data-width='{$size[0]}' data-height='{$size[1]}'") . '</li>';
             }
             else
             {
