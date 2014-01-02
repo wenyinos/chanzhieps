@@ -82,6 +82,8 @@
 /* items */
 .item .media {text-align: center; overflow: hidden; background-color: #f1f1f1; max-height: 100px; transition:all 0.3s;}
 .item .media img {max-height: 100%; max-width: 100%;}
+@-moz-document url-prefix(){.item .media img {max-width: 200px}}
+.item .media img {max-width: 200px\0}
 .items .item .text-muted {color: #757575}
 
 /* media-palaceholder */
