@@ -72,7 +72,6 @@ textarea{height: auto;}
 .form-control:focus,.form-control:hover,.form-control:active,.ke-container.focus{border-color: #da3b26!important; outline: 0; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none!important;}
 
 /* table. */
-.table{border: none;-moz-box-shadow:0px 1px 1px rgba(0,0,0,0.2); -webkit-box-shadow:0px 1px 1px rgba(0,0,0,0.2); box-shadow:0px 1px 1px rgba(0,0,0,0.2);}
 .table td,.table th{background: #ECF0F5; border: none;}
 .table caption{background: #BDC3C7; height: 45px; padding: 2px 15px;}
 .table-hover>tbody>tr:hover>td, .table-hover>tbody>tr:hover>th{background-color: #f4f8fc}
