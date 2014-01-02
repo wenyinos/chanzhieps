@@ -121,3 +121,7 @@ textarea{height: auto;}
 .sitemap-tree > h4 {background-color: #C9C9C9!important}
 .treeview .hitarea:before {color: #aaa!important}
 .treeview li:hover .hitarea:before {color: #DA3B26!important}
+
+/* dropdown */
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus{color: #DA3B26;}
+.dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus{color: #DA3B26;-webkit-box-shadow: inset 3px 0 0 #DA3B26;box-shadow: inset 3px 0 0 #DA3B26;}
