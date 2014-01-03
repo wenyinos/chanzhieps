@@ -182,7 +182,6 @@ class product extends control
      */
     public function view($productID)
     {
-        $this->loadModel('file');
         $product = $this->product->getByID($productID);
 
         /* fetch first category for display. */

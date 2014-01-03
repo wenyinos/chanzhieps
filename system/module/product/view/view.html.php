@@ -92,7 +92,7 @@ js::set('productID', $product->id);
       <div class='article-content'>
         <?php echo $product->content;?>
         <div class='files-list'>
-          <?php $this->file->printFiles($product->files);?>
+          <?php $this->loadModel('file')->printFiles($product->files);?>
         </div>
       </div>
     </div>
