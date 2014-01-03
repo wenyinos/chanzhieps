@@ -53,7 +53,7 @@ $themeRoot = $webRoot . "theme/";
   if(isset($pageCSS)) css::internal($pageCSS);
 
   echo isset($this->config->site->favicon) ? html::icon(json_decode($this->config->site->favicon)->webPath) : html::icon($webRoot . 'favicon.ico');
-  echo html::rss($config->webRoot .'rss.xml', $config->site->name);
+  echo html::rss($this->createLink('rss', 'index', '', '', 'xml'), $config->site->name);
 ?>
 <!--[if lt IE 9]>
 <?php
