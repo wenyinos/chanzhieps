@@ -22,4 +22,8 @@ $(document).ready(function()
 
     /* Set 'go to top' button. */
     setGo2Top();
+
+    // slide pictures start.     
+    $('#slide').carousel();
+    $('#slide .item').first().addClass('active');
 });

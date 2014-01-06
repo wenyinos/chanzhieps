@@ -18,8 +18,5 @@ $(document).ready(function()
     // add "index" class to the body element.
     $('body').addClass('index');
 
-    // slide pictures start.     
-    $('#slide').carousel();
-    $('#slide .item').first().addClass('active');
     $('.nav-system-home').addClass('active');
 })
