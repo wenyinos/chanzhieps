@@ -13,6 +13,14 @@ h5{font-size: 14px;}
 #blogNav .nav > li > a:hover{background: #6e2e16; color: #fff}
 #blogNav .nav >li.active>a,#blogNav .nav >li.active>a:hover,#blogNav .nav >li.active>a:focus{background: #E3D7A2;color: #6E2E16}
 
+@media (max-width: 767px)
+{
+  #blogNav .nav{margin: 0}
+  #blogNav .nav + .nav{border-top: 1px solid #6c8871;}
+  #blogNav .nav > li{display: block; float: left; width: 33.333333333%}
+  #blogNav .nav > li > a{text-align: center; padding: 5px; margin: 5px; border-radius: 3px}
+}
+
 /* style of footer */
 #footNav .icon-rss-sign{color: #495e4d}
 #footNav .icon-rss-sign:hover{text-decoration: none; color: #6E2E16}
