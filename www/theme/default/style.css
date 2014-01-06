@@ -104,6 +104,8 @@
 .panel-block .panel-body > .dl-horizontal {margin: 0;}
 .panel-block .panel-body > .dl-horizontal dt {width: 20%; padding: 3px; font-size: 12px}
 .panel-block .panel-body > .dl-horizontal dd {margin-left: 20%; padding-left: 6px; padding: 3px;}
+@media screen and (min-width:992px) and (max-width:1199px) {.col-md-3 .panel-block .panel-body > .dl-horizontal dt{width: 100%; text-align: left;} .col-md-3 .panel-block .panel-body > .dl-horizontal dd{width: 100%; margin:0; float: none;}}
+@media (max-width: 768px) {.col-md-4 .panel-block .panel-body > .dl-horizontal dt {float: left; text-align: right;}}
 .panel-block .panel-body > .nav {margin: -10px -15px;}
 .panel-block .panel-body > .ul-list {margin: -2px -15px;}
 .panel-block .panel-body > .ul-list > li {padding: 5px 15px 5px 30px;}
@@ -113,6 +115,8 @@
 .panel-block .panel-body > .items .item:hover {background-color: #f1f1f1;}
 .panel-block .panel-body > .items .item:hover .media {margin: 6px -15px; background-color: #ccc;}
 .panel-block .panel-body > .cards {margin: -10px -15px; padding: 0;}
+.panel-block .panel-body > .cards [class*='col-']:last-child .card {border-bottom: none;}
+.panel-block .panel-body > .cards [class*='col-']:last-child .card-heading {padding-bottom: 0;}
 .panel-block .panel-body .card {margin: 0 -15px; padding: 10px 15px 0 15px; border-bottom: 1px #e5e5e5 dashed; transition:all 0.3s; padding: 10px 10px 0 10px;}
 .panel-block .panel-body .card > .media {text-align: center; overflow: hidden; background-color: #f1f1f1; max-height: 300px;}
 .panel-block .panel-body .card > .media img {max-width: 100%;}
