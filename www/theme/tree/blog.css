@@ -20,6 +20,8 @@ h5{font-size: 14px;}
 /* articles */
 #articles .card{background-color: #f5f0cc;padding: 5px 5px 0;border: none;box-shadow: none;border-radius: 2px}
 #articles .card-heading a{font-weight: bold; color: #6E2E16}
+#articles .card .media{max-width: 200px; max-height: 100px}
+#articles .card .media img{max-height: 100%}
 
 /* pager */
 .pager{display: block;}
