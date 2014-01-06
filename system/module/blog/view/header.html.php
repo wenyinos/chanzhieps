@@ -18,7 +18,11 @@ $themeRoot = $webRoot . "theme/";
 $navs = $this->tree->getChildren(0, 'blog');
 ?>
 <!DOCTYPE html>
+<?php if(!empty($config->oauth->sina)):?>
+<html xmlns:wb="http://open.weibo.com/wb">
+<?php else:?>
 <html lang="en">
+<?php endif;?>
 <head>
   <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -56,6 +60,13 @@ $navs = $this->tree->getChildren(0, 'blog');
   echo html::icon($webRoot . 'favicon.ico');
   echo html::rss($config->webRoot .'rss.xml', $config->site->name);
   js::set('lang', $lang->js);
+?>
+<?php
+if(!empty($config->oauth->sina)) $sina = json_decode($config->oauth->sina);
+if(!empty($config->oauth->qq))   $qq   = json_decode($config->oauth->qq);
+if(!empty($sina->verification)) echo $sina->verification; 
+if(!empty($qq->verification))   echo $qq->verification;
+if(empty($sina->verification) && !empty($sina->widget)) js::import('http://tjs.sjs.sinajs.cn/open/api/js/wb.js');
 ?>
 <!--[if lt IE 9]>
 <?php
