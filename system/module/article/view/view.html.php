@@ -24,6 +24,13 @@ js::set('articleID', $article->id);
             <span class='label label-success'><?php echo $lang->article->originalList[$article->original]; ?></span>
             <?php endif;?>
             <span class='label label-warning' data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblViews, $article->views);?>'><i class='icon-eye-open'></i> <?php echo $article->views; ?></span>
+            <?php
+            if(!empty($this->config->oauth->sina))
+            {
+                $sina = json_decode($this->config->oauth->sina);
+                if($sina->widget) echo $sina->widget;
+            }
+            ?>
           </dd>
         </dl>
         <?php if($article->summary):?>
