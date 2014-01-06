@@ -118,7 +118,7 @@
 .panel-block .panel-body .card > .media img {max-width: 100%;}
 .panel-block .panel-body .card:hover {background-color: #fafafa;}
 .panel-block .panel-body > .card {margin: -10px -15px;border: 0;box-shadow: none;}
-.panel-block .panel-body > .card > .media {height: 300px;line-height: 300px;}
+
 .panel-block .panel-body > .card > .media > img {width: 100%;max-width: 100%;}
 .panel-block .panel-body > .card > .card-content {height: 90px;overflow: hidden; text-overflow: ellipsis;}
 
