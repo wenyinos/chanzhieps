@@ -12,7 +12,7 @@
 ?>
 <?php $slides = $this->loadModel('slide')->getList();?>
 <?php if($slides):?>
-<div id='slide' class='carousel slide' data-ride='carousel'>
+<div id='slide' class='carousel' data-ride='carousel'>
   <div class='carousel-inner'>
     <?php foreach($slides as $slide):?>
     <div class='item'>
