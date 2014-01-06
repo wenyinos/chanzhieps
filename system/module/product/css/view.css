@@ -10,7 +10,7 @@
 .product-image-menu .product-image:hover {box-shadow: 0 0 4px rgba(0,0,0,0.25); opacity: 0.9; border-color: #c5c5c5;}
 .product-property .meta-name {width: 70px; padding-right: 15px;}
 .btn-buy .btn {min-width: 120px;}
-.product-property h1{font-size: 24px;}
+.product-property h1{font-size: 22px;}
 .product-property h1,.btn-buy {padding-left: 15px; padding-right: 15px;}
 @media (min-width: 992px){.product-property h1,.btn-buy {  padding-left: 0;   padding-right: 0;} .product-property.product-lack-img h1,.product-lack-img .btn-buy {padding-left: 15px;   padding-right: 15px;}}
 .article-content {padding:0;}
