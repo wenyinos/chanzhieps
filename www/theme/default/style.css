@@ -11,7 +11,7 @@
 
 /* --- LAYOUT SETTING --- */
 /* containers. */
-.page-container {padding: 0 15px; margin: 0 auto 20px auto;position: relative;}
+.page-container {padding: 0 15px; margin: 0 auto 20px auto;position: relative; max-width: 1170px\0;}
 .page-container:before,.page-container:after {content: " "; display: table;}
 .page-container:after {clear: both;}
 .page-container:before,.page-container:after {content: " "; display: table;}
