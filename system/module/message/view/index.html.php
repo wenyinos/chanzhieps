@@ -53,52 +53,55 @@
     <div class='panel'>
       <div class='panel-heading'><strong><i class='icon-comment-alt'></i> <?php echo $lang->message->post;?></strong></div>
       <div class='panel-body'>
-        <form method='post' id='commentForm' action="<?php echo $this->createLink('message', 'post', 'type=message');?>">
+        <form method='post' class='form-horizontal' id='commentForm' action="<?php echo $this->createLink('message', 'post', 'type=message');?>">
           <?php
           $from  = $this->session->user->account == 'guest' ? '' : $this->session->user->account;
           $phone = $this->session->user->account == 'guest' ? '' : $this->session->user->phone;
           $qq    = $this->session->user->account == 'guest' ? '' : $this->session->user->qq;
           $email = $this->session->user->account == 'guest' ? '' : $this->session->user->email; 
           ?>
-          <table class='table table-form'>
-            <tr>
-              <th style='width: 90px'><?php echo $lang->message->from;?></th>
-              <td style='width: 40%'><?php echo html::input('from', $from, "class='form-control'"); ?></td>
-              <td></td>
-            </tr>
-            <tr>
-              <th><?php echo $lang->message->phone;?></th>
-              <td><?php echo html::input('phone', $phone, "class='form-control'"); ?></td>
-              <td><small class='text-info'><?php echo $lang->message->contactHidden;?></small></td>
-            </tr>
-            <tr>
-              <th><?php echo $lang->message->qq;?></th>
-              <td><?php echo html::input('qq', $qq, "class='form-control'"); ?></td>
-            </tr>
-            <tr>
-              <th><?php echo $lang->message->email;?></th>
-              <td><?php echo html::input('email', $email, "class='form-control'"); ?></td>
-            </tr>
-            <tr>
-              <th><?php echo $lang->message->content;?></th>
-              <td colspan='2'>
-                <?php 
+          <div class='form-group'>
+            <label for='from' class='col-sm-1 control-label'><?php echo $lang->message->from; ?></label>
+            <div class='col-sm-5 required'>
+              <?php echo html::input('from', $from, "class='form-control'"); ?>
+            </div>
+          </div>
+          <div class='form-group'>
+            <label for='phone' class='col-sm-1 control-label'><?php echo $lang->message->phone; ?></label>
+            <div class='col-sm-5'>
+              <?php echo html::input('phone', $phone, "class='form-control'"); ?>
+            </div>
+            <div class='col-sm-6'><div class='help-block'><small class='text-info'><?php echo $lang->message->contactHidden;?></small></div></div>
+          </div>
+          <div class='form-group'>
+            <label for='qq' class='col-sm-1 control-label'><?php echo $lang->message->qq;?></label>
+             <div class='col-sm-5'>
+              <?php echo html::input('qq', $qq, "class='form-control'"); ?>
+            </div>
+          </div>
+          <div class='form-group'>
+            <label for='email' class='col-sm-1 control-label'><?php echo $lang->message->email;?></label>
+            <div class='col-sm-5'><?php echo html::input('email', $email, "class='form-control'"); ?></div>
+          </div>
+          <div class='form-group'>
+            <label for='content' class='col-sm-1 control-label'><?php echo $lang->message->content;?></label>
+            <div class='col-sm-11'>
+              <?php 
                 echo html::textarea('content', '', "class='form-control' rows='3'");
                 echo html::hidden('objectType', 'message');
                 echo html::hidden('objectID', 0);
-                ?>
-              </td>
-            </tr>
-            <tr>
-              <th></th>
-              <td><label class='checkbox'><input type='checkbox' name='secret' value='1' /><?php echo $lang->message->secret;?></label></div></td>
-            </tr>
-            <tr id='captchaBox' style='display:none'></tr>
-            <tr>
-              <th></th>
-              <td><?php echo html::submitButton();?></td>
-            </tr>
-          </table>
+              ?>
+            </div>
+          </div>
+          <div class='form-group' id='captchaBox' style='display:none'></div>
+          <div class='form-group'>
+            <div class='col-sm-1'></div>
+            <div class='col-sm-11'><label class='checkbox'><input type='checkbox' name='secret' value='1' /><?php echo $lang->message->secret;?></label></div>
+          </div>
+          <div class='form-group'>
+            <div class='col-sm-1'></div>
+            <div class='col-sm-11'><?php echo html::submitButton();?></div>
+          </div>
         </form>
       </div>
     </div>
