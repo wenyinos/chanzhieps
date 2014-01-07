@@ -135,4 +135,4 @@ textarea{height: auto;}
 
 /* dropdown */
 .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus{color: #254952;}
-.dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus{color: #254952;-webkit-box-shadow: inset 3px 0 0 #254952;box-shadow: inset 3px 0 0 #254952;}
+.dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus{color: #254952;box-shadow: none;}
