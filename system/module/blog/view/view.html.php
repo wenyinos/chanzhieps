@@ -39,6 +39,13 @@ $common->printPositionBar($category, $article, '', $root);
             <span class='label label-success'><?php echo $lang->article->originalList[$article->original]; ?></span>
             <?php endif;?>
             <span class='label label-warning' data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblViews, $article->views);?>'><i class='icon-eye-open'></i> <?php echo $article->views; ?></span>
+            <?php
+            if(!empty($this->config->oauth->sina))
+            {
+                $sina = json_decode($this->config->oauth->sina);
+                if($sina->widget) echo $sina->widget;
+            }
+            ?>
           </dd>
         </dl>
         <?php if($article->summary):?>
@@ -71,7 +78,6 @@ $common->printPositionBar($category, $article, '', $root);
       </footer>
     </div>
     <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=article&objectID={$article->id}");?></div>
-    <?php echo html::a('', '', "name='comment'");?>
   </div>
   <div class='col-md-3'><side class='page-side'><?php $this->block->printRegion($layouts, 'blog_view', 'side');?></side></div>
 </div>

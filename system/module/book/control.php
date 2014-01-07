@@ -38,14 +38,17 @@ class book extends control
     public function browse($nodeID)
     {
         $node = $this->book->getNodeByID($nodeID);
-        $book = $this->book->getBookByNode($node);
+        if($node)
+        {
+            $book = $this->book->getBookByNode($node);
 
-        $this->view->title    = $book->title;
-        $this->view->keywords = trim($node->keywords . ' ' . $this->config->site->keywords);
-        $this->view->node     = $node;
-        $this->view->book     = $book;
-        $this->view->books    = $this->book->getBookList();
-        $this->view->catalog  = $this->book->getFrontCatalog($node->id, $this->book->computeSN($book->id));
+            $this->view->title    = $book->title;
+            $this->view->keywords = trim($node->keywords . ' ' . $this->config->site->keywords);
+            $this->view->node     = $node;
+            $this->view->book     = $book;
+            $this->view->books    = $this->book->getBookList();
+            $this->view->catalog  = $this->book->getFrontCatalog($node->id, $this->book->computeSN($book->id));
+        }
         $this->display();
     }
 
