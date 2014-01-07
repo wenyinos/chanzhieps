@@ -95,6 +95,7 @@ $lang->js->timeout       = 'Timeout';
 /* Contact fields*/
 $lang->company = new stdclass();
 $lang->company->contactUs = 'Contact';
+$lang->company->contacts  = 'Contacts';
 $lang->company->address   = 'Address';
 $lang->company->phone     = 'Phone';
 $lang->company->email     = 'Email';
