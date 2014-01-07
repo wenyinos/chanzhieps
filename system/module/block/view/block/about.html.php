@@ -15,7 +15,7 @@
     <h4><i class='icon-group'></i> <?php echo $block->title;?></h4>
   </div>
   <div class='panel-body'>
-    <?php echo $this->config->company->desc;?>
+    <div class='article-content'><?php echo $this->config->company->desc;?></div>
     <?php echo html::a(helper::createLink('company', 'index'), $this->lang->more . $this->lang->raquo);?>
   </div>
 </div>
