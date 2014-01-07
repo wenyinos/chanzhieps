@@ -127,8 +127,7 @@
 .panel-block .panel-body > .card > .media > img {width: 100%;max-width: 100%;}
 .panel-block .panel-body > .card > .card-content {height: 90px;overflow: hidden; text-overflow: ellipsis;}
 
-/* block panel in page side */
-.page-side > .panel-block {margin-bottom: 20px;}
+.panel-block .panel-body .article-content {padding: 0}
 
 /* meta-list */
 .meta-list {display: table; width: 100%;}
