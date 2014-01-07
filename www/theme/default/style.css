@@ -214,7 +214,7 @@ form .star {display: none;}/* hide star */
 .article-content img {box-shadow: none}
 
 /* list */
-.list {border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);}
+.list {border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); margin-bottom: 20px;}
 .list > header {padding: 10px 15px;background-color: #f1f1f1;color: #666}
 .list > header h2 {font-size: 14px;font-weight: bold;margin: 0;padding: 0}
 
