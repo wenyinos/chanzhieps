@@ -14,7 +14,8 @@
 .product-property h1,.btn-buy {padding-left: 15px; padding-right: 15px;}
 @media (min-width: 992px){.product-property h1,.btn-buy {  padding-left: 0;   padding-right: 0;} .product-property.product-lack-img h1,.product-lack-img .btn-buy {padding-left: 15px;   padding-right: 15px;}}
 .article-content {padding:0;}
-.header-dividing {margin-top: 20px;}
+.product-property.product-lack-img h1{margin-top: 20px; padding-left: 0; padding-right: 0;}
+
 .panel-body {position: relative;}
 .panel-body .back2top {position: absolute; bottom: 0; right: -30px; display: block; width: 30px; padding: 5px 8px; border:1px solid #ddd; border-radius: 0 4px 4px 0}
 .panel-body .back2top:hover {text-decoration: none; background-color: #E5E5E5}
