@@ -21,7 +21,7 @@
 
   <div class='col-md-9'>
     <div class='panel panel-block'>
-      <?php if(!empty($book->title)):?>
+      <?php if(!empty($book) && $book->title): ?>
       <div class='panel-heading'>
         <h4 class='title'><?php echo $book->title;?></h4>
       </div>
