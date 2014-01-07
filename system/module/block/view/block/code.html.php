@@ -10,11 +10,4 @@
  * @link        http://www.chanzhi.org
 */
 ?>
-<div id='code' class='panel panel-block'>
-  <div class='panel-heading'>
-    <h4><i class='icon-group'></i> <?php echo $block->title;?></h4>
-  </div>
-  <div class='panel-body'>
-    <?php echo $block->content;?>
-  </div>
-</div>
+<?php echo $block->content;?>
