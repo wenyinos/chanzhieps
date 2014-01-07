@@ -64,7 +64,7 @@ js::set('path', $path);
         <?php if($node->type == 'article'):?>
         <tr>
           <th><?php echo $lang->book->content;?></th>
-          <td valign='middle'><?php echo html::textarea('content', $node->content, "rows='6' class='form-control'");?></td>
+          <td valign='middle'><?php echo html::textarea('content', $node->content, "rows='15' class='form-control'");?></td>
         </tr>
         <?php endif;?>
         <tr>
