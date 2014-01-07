@@ -99,7 +99,7 @@ $lang->block->pages['book_read']      = '手册章节';
 
 $lang->block->pages['message_index']  = '留言';
 
-$lang->block->pages['page_view']      = '页面';
+$lang->block->pages['page_view']      = '单页';
 
 /* page layout list. */
 $lang->block->regions = new stdclass();

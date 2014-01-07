@@ -31,7 +31,7 @@
         <th style='width: 60px' class='text-center'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->article->id);?></th>
         <th class='text-center'><?php commonModel::printOrderLink('title', $orderBy, $vars, $lang->article->title);?></th>
         <?php if($type != 'page'):?>
-        <th style='width: 100px' class='text-center'><?php commonModel::printOrderLink('category', $orderBy, $vars, $lang->article->category);?></th>
+        <th style='width: 200px' class='text-center'><?php commonModel::printOrderLink('category', $orderBy, $vars, $lang->article->category);?></th>
         <?php endif;?>
         <th style='width: 160px' class='text-center'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->article->addedDate);?></th>
         <th style='width: 60px' class='text-center'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->article->views);?></th>

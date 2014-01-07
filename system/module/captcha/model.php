@@ -42,8 +42,8 @@ class captchaModel extends model
     {
         $captcha = $this->create();     
         return <<<EOT
-<th>{$this->lang->captcha->common}</th>
-<td colspan='2'>
+<label for='captcha' class='col-sm-1 control-label'>{$this->lang->captcha->common}</label>
+<div class='col-sm-11'>
   <div class='captcha'>
       <div class='row'>
         <div class='col-sm-3 col-xs-6 text-right'>
@@ -54,7 +54,7 @@ class captchaModel extends model
         </div>
       </div>
   </div>
-</td>
+</div>
 EOT;
     }
 
