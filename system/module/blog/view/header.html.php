@@ -58,7 +58,7 @@ $navs = $this->tree->getChildren(0, 'blog');
   if(isset($pageCSS)) css::internal($pageCSS);
 
   echo html::icon($webRoot . 'favicon.ico');
-  echo html::rss($config->webRoot .'rss.xml', $config->site->name);
+  echo html::rss($this->createLink('rss', 'index', '', '', 'xml'), $config->site->name);
   js::set('lang', $lang->js);
 ?>
 <?php
@@ -110,7 +110,6 @@ js::import($jsRoot . 'jquery/placeholder/min.js');
       ?>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><?php echo html::a(helper::createLink('rss', 'index', '', '', 'xml') . '?type=blog', "<i class='icon icon-rss'></i> RSS", "target='_blank'"); ?></li>
       <li><?php echo html::a($config->webRoot, '<i class="icon-home icon-large"></i> ' . $lang->blog->siteHome);?></li>
     </ul>
   </nav>

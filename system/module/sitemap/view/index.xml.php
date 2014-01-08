@@ -4,10 +4,10 @@
   foreach($products as $product):
   $categories = $product->categories;
   $category   = current($categories);
-  $url        = $systemURL . helper::createLink('product', 'view', "id=$product->id", "category={$category->alias}&name=$product->alias");
+  $url        = str_replace('&', '&amp;', $systemURL . helper::createLink('product', 'view', "id=$product->id", "category={$category->alias}&name=$product->alias"));
   ?>
   <url>
-    <loc><![CDATA[<?php echo $url;?>]]></loc>
+    <loc><?php echo $url;?></loc>
     <lastmod><?php echo substr($product->editedDate, 0, 10);?></lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
@@ -17,10 +17,10 @@
   foreach($articles as $article):
   $categories = $article->categories;
   $category   = current($categories);
-  $url        = $systemURL . helper::createLink('article', 'view', "id=$article->id", "category={$category->alias}&name=$article->alias");
+  $url        = str_replace('&', '&amp;', $systemURL . helper::createLink('article', 'view', "id=$article->id", "category={$category->alias}&name=$article->alias"));
   ?>
   <url>
-    <loc><![CDATA[<?php echo $url;?>]]></loc>
+    <loc><?php echo $url;?></loc>
     <lastmod><?php echo substr($article->editedDate, 0, 10);?></lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
@@ -30,10 +30,10 @@
   foreach($blogs as $blog):
   $categories = $blog->categories;
   $category   = current($categories);
-  $url        = $systemURL . helper::createLink('blog', 'view', "id=$blog->id", "category={$category->alias}&name=$blog->alias");
+  $url        = str_replace('&', '&amp;', $systemURL . helper::createLink('blog', 'view', "id=$blog->id", "category={$category->alias}&name=$blog->alias"));
   ?>
   <url>
-    <loc><![CDATA[<?php echo $url;?>]]></loc>
+    <loc><?php echo $url;?></loc>
     <lastmod><?php echo substr($blog->editedDate, 0, 10);?></lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
@@ -41,11 +41,11 @@
   <?php endforeach;?>
   <?php foreach($books as $nodeID => $node):?>
   <?php
-  if($book->type != 'article') $url  = $systemURL . helper::createLink('book', 'browse', "nodeID=$node->id", "book={$node->book}&node={$node->alias}");
-  if($book->type == 'article') $url  = $systemURL . helper::createLink('book', 'read', "nodeID=$node->id", "book={$node->book}&node={$node->alias}");
+  if($book->type != 'article') $url  = str_replace('&', '&amp;', $systemURL . helper::createLink('book', 'browse', "nodeID=$node->id", "book={$node->book}&node={$node->alias}"));
+  if($book->type == 'article') $url  = str_replace('&', '&amp;', $systemURL . helper::createLink('book', 'read', "nodeID=$node->id", "book={$node->book}&node={$node->alias}"));
   ?>
   <url>
-    <loc><![CDATA[<?php echo $url;?>]]></loc>
+    <loc><?php echo $url;?></loc>
     <lastmod><?php echo substr($menu->editedDate, 0, 10);?></lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
@@ -53,10 +53,10 @@
   <?php endforeach;?>
   <?php
   foreach($threads as $id => $editedDate):
-  $url = $systemURL . helper::createLink('thread', 'view', "id=$id");
+  $url = str_replace('&', '&amp;', $systemURL . helper::createLink('thread', 'view', "id=$id"));
   ?>
   <url>
-    <loc><![CDATA[<?php echo $url;?>]]></loc>
+    <loc><?php echo $url;?></loc>
     <lastmod><?php echo substr($editedDate, 0, 10);?></lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
