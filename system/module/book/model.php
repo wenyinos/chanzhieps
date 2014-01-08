@@ -399,7 +399,7 @@ class bookModel extends model
             ->add('addedDate', $now)
             ->add('editedDate', $now)
             ->setForce('alias',    seo::unify($this->post->alias, '-'))
-            ->setForce('keywords', seo::unify($this->post->keywords, ',', '.'))
+            ->setForce('keywords', seo::unify($this->post->keywords, ','))
             ->get();
 
         $this->dao->insert(TABLE_BOOK)
@@ -457,7 +457,7 @@ class bookModel extends model
             $node->keywords = $this->post->keywords[$key];
             $node->order    = $this->post->order[$key];
             $node->alias    = seo::unify($node->alias, '-');
-            $node->keywords = seo::unify($node->keywords, ',', '.');
+            $node->keywords = seo::unify($node->keywords, ',');
 
            if($mode == 'new')
             {
@@ -543,7 +543,7 @@ class bookModel extends model
             ->add('id',            $nodeID)
             ->add('editor',        $this->app->user->account)
             ->add('editedDate',    helper::now())
-            ->setForce('keywords', seo::unify($this->post->keywords, ',', '.'))
+            ->setForce('keywords', seo::unify($this->post->keywords, ','))
             ->setForce('alias',    seo::unify($this->post->alias, '-'))
             ->setForce('type',     $oldNode->type)
             ->stripTags('content', $this->config->allowedTags->admin)

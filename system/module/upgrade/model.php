@@ -127,7 +127,7 @@ class upgradeModel extends model
         $articles = $this->dao->select('id, keywords')->from(TABLE_ARTICLE)->fetchPairs('id', 'keywords');  
         foreach($articles as $id => $keywords)
         {
-            $keywords = seo::unify($keywords, ',', '.');
+            $keywords = seo::unify($keywords, ',');
             $this->dao->update(TABLE_ARTICLE)->set('keywords')->eq($keywords)->where('id')->eq($id)->exec();
             $tags = $keywords;
         }
@@ -135,7 +135,7 @@ class upgradeModel extends model
         $products = $this->dao->select('id, keywords')->from(TABLE_PRODUCT)->fetchPairs('id', 'keywords');  
         foreach($products as $id => $keywords)
         {
-            $keywords = seo::unify($keywords, ',', '.');
+            $keywords = seo::unify($keywords, ',');
             $this->dao->update(TABLE_PRODUCT)->set('keywords')->eq($keywords)->where('id')->eq($id)->exec();
             $tags .= ',' . $keywords;
         }
@@ -143,7 +143,7 @@ class upgradeModel extends model
         $categories = $this->dao->select('id, keywords')->from(TABLE_CATEGORY)->fetchPairs('id', 'keywords');  
         foreach($categories as $id => $keywords)
         {
-            $keywords = seo::unify($keywords, ',', '.');
+            $keywords = seo::unify($keywords, ',');
             $this->dao->update(TABLE_CATEGORY)->set('keywords')->eq($keywords)->where('id')->eq($id)->exec();
             $tags .= ',' . $keywords;
         }

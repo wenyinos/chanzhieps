@@ -265,7 +265,7 @@ class articleModel extends model
         $order = 0;
 
         $article->order    = $order;
-        $article->keywords = seo::unify($article->keywords, ',',  '.');
+        $article->keywords = seo::unify($article->keywords, ',');
         $article->alias    = seo::unify($article->alias, '-');
 
         $this->dao->insert(TABLE_ARTICLE)
@@ -307,7 +307,7 @@ class articleModel extends model
             ->add('editedDate', helper::now())
             ->get();
 
-        $article->keywords = seo::unify($article->keywords, ',', '.');
+        $article->keywords = seo::unify($article->keywords, ',');
         $article->alias    = seo::unify($article->alias, '-');
         
         $this->dao->update(TABLE_ARTICLE)
