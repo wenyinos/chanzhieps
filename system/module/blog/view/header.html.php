@@ -110,7 +110,6 @@ js::import($jsRoot . 'jquery/placeholder/min.js');
       ?>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><?php echo html::a(helper::createLink('rss', 'index', '?type=blog', '', 'xml'), "<i class='icon icon-rss'></i> RSS", "target='_blank'"); ?></li>
       <li><?php echo html::a($config->webRoot, '<i class="icon-home icon-large"></i> ' . $lang->blog->siteHome);?></li>
     </ul>
   </nav>

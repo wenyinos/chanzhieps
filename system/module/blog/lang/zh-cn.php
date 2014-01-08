@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->blog->common   = '博客';
-$lang->blog->home     = '博客首页';
-$lang->blog->siteHome = '网站首页';
+$lang->blog->common    = '博客';
+$lang->blog->home      = '博客首页';
+$lang->blog->siteHome  = '网站首页';
+$lang->blog->subscribe = '订阅博客';

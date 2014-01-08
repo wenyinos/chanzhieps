@@ -79,6 +79,6 @@ $common->printPositionBar($category, $article, '', $root);
     </div>
     <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=article&objectID={$article->id}");?></div>
   </div>
-  <div class='col-md-3'><side class='page-side'><?php $this->block->printRegion($layouts, 'blog_view', 'side');?></side></div>
+  <div class='col-md-3'><side class='page-side'><div class='panel-pure panel'><?php echo html::a(helper::createLink('rss', 'index', '', '', 'xml') . '?type=blog', "<i class='icon-rss text-warning'></i> " . $lang->blog->subscribe, "target='_blank' class='btn btn-lg btn-block'"); ?></div><?php $this->block->printRegion($layouts, 'blog_view', 'side');?></side></div>
 </div>
 <?php include './footer.html.php';?>
