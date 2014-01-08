@@ -11,9 +11,9 @@
  */
 
 /* Set systemRoot */
-//$systemRoot = '';                                                                 // Use can define the systemRoot manually.
-if(!isset($systemRoot))  $systemRoot = dirname(dirname(__FILE__)) . '/system/';     // Not set, use  ../system as default.
-if(!is_dir($systemRoot)) $systemRoot = dirname(__FILE__) . '/system/';              // Last, try www/system.
+//$systemRoot = '';                                                                 // User can define the systemRoot manually.
+if(!isset($systemRoot))  $systemRoot = dirname(__FILE__) . '/system/';              // Not set, use  www/system as default.
+if(!is_dir($systemRoot)) $systemRoot = dirname(dirname(__FILE__)) . '/system/';     // Last, try ../system.
 if(!is_dir($systemRoot)) die('system not found! Please check it.');                 // Die.
 
 /* Load the framework. */
