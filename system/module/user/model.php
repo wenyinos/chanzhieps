@@ -394,6 +394,8 @@ class userModel extends model
      */
     public function checkResetKey($resetKey)
     {
+        $resetTime = substr($resetKey, -10);
+        if((time() - $resetTime) > $this->config->user->resetExpired) return false;
         $user = $this->dao->select('*')->from(TABLE_USER)
             ->where('resetKey')->eq($resetKey)
             ->fetch('');

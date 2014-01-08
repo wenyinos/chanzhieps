@@ -382,7 +382,7 @@ class user extends control
             if($user)
             {
                 $account   = $user->account;
-                $resetKey  = md5(str_shuffle(md5($account . mt_rand(0, 99999999) . microtime())) . microtime());
+                $resetKey  = md5(str_shuffle(md5($account . mt_rand(0, 99999999) . microtime())) . microtime()) . time();
                 $resetURL  = "http://". $_SERVER['HTTP_HOST'] . $this->inlink('checkresetkey', "key=$resetKey");
                 $content   = sprintf($this->lang->user->mailContent, $account, $resetURL, $resetURL, $resetKey);
                 $this->user->resetKey($account, $resetKey);
@@ -401,7 +401,7 @@ class user extends control
                 $this->send(array('result' => 'fail', 'message' => $this->lang->user->resetPassword->failed));
             }
         }
-        $this->display();         
+        $this->display();
     }
 
     /**
