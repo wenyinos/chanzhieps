@@ -70,6 +70,8 @@ class upgradeModel extends model
             case '1_8':
                 $this->setPageBlocks();
                 $this->setBlogBlocks();
+            case '2_0':
+                $this->processSiteDesc();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -428,6 +430,23 @@ class upgradeModel extends model
         return !dao::isError();
     }   
 
+    /**
+     * Process site desc data.
+     * 
+     * @access public
+     * @return void
+     */
+    public function processSiteDesc()
+    {
+        $item = new stdclass();
+        $item->owner   = 'system';
+        $item->module  = 'common';
+        $item->section = 'site';
+        $item->key     = 'desc';
+        $item->value   = strip_tags(htmlspecialchars_decode($this->config->site->desc));
+        $this->dao->replace(TABLE_CONFIG)->data($item)->exec();
+        return !dao::isError();
+    }   
 
     /**
      * Judge any error occers.
