@@ -438,13 +438,8 @@ class upgradeModel extends model
      */
     public function processSiteDesc()
     {
-        $item = new stdclass();
-        $item->owner   = 'system';
-        $item->module  = 'common';
-        $item->section = 'site';
-        $item->key     = 'desc';
-        $item->value   = strip_tags(htmlspecialchars_decode($this->config->site->desc));
-        $this->dao->replace(TABLE_CONFIG)->data($item)->exec();
+        $value = strip_tags(htmlspecialchars_decode($this->config->site->desc));
+        $this->dao->update(TABLE_CONFIG)->set('value')->eq($value)->where('`key`')->eq('desc')->andWhere('section')->eq('site')->exec();
         return !dao::isError();
     }   
 
