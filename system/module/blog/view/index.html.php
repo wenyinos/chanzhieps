@@ -39,7 +39,12 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
           <?php endif;?>
           <?php echo $article->summary;?>
         </div>
-        <div class="card-actions"><span class='text-muted'><i class="icon-time"></i> <?php echo date('Y/m/d', strtotime($article->addedDate));?></span></div>
+        <div class="card-actions">
+          <span class='text-muted'><i class="icon-time"></i> <?php echo date('Y/m/d', strtotime($article->addedDate));?></span>
+          <span class='text-muted'><i class="icon-user"></i> <?php echo $article->author;?></span>
+          <span class='text-muted'><i class="icon-eye-open"></i> <?php echo $article->views;?></span>
+          <span class='text-muted'><i class="icon-comments-alt"></i> <?php echo $article->comments;?></span>
+        </div>
       </div>
     <?php endforeach;?>
     <div class='clearfix pager'><?php $pager->show('right', 'short');?></div>
