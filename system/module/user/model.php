@@ -419,7 +419,6 @@ class userModel extends model
         $this->dao->update(TABLE_USER)
             ->set('password')->eq($this->createPassword($password, $user->account))
             ->set('resetKey')->eq('')
-            ->set('resetTime')->eq('')
             ->where('resetKey')->eq($resetKey)
             ->exec();
     }
