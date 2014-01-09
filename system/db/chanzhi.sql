@@ -286,7 +286,6 @@ CREATE TABLE IF NOT EXISTS `eps_user` (
   `referer` varchar(255) NOT NULL,
   `join` datetime NOT NULL,
   `resetKey` char(64) NOT NULL,
-  `resetTime` datetime NOT NULL,
   `locked` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `admin` (`admin`),
