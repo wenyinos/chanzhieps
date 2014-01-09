@@ -169,7 +169,7 @@ div{
 </style>
 </head>
 <body>
-<div style='padding-top:20px;height:60px;background:#fafafa;border-bottom:1px solid #ddd;font-size:18px;font-weight:bold'> 密码修改 </div>
+<div style='padding-top:20px;height:60px;background:#fafafa;border-bottom:1px solid #ddd;font-size:18px;font-weight:bold'> Modify password </div>
 <div style='margin-top:20px;'>
 <p>
 Hello, %s 
