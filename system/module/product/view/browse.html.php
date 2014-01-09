@@ -38,7 +38,7 @@ include '../../common/view/treeview.html.php';
           }
           ?>
           <?php echo html::a(inlink('view', "id={$product->id}", "category={$category->alias}&name=$product->alias"), '<strong>' . $product->name . '</strong>', "class='card-heading'");?>
-            <div class="card-content">
+            <div class='card-content text-latin'>
             <?php
             if($product->promotion != 0)
             {
