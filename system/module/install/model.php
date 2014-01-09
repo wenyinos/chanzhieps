@@ -317,6 +317,9 @@ class installModel extends model
             {
                 $table = str_replace('--', '', $table);
             }
+            
+            if(substr(trim($table), 0, 2) == '--') continue; 
+
             $table = str_replace('eps_', $this->config->db->prefix, $table);
             $table = str_replace('`' . $this->config->db->prefix, $this->config->db->name . '.`' . $this->config->db->prefix, $table);
 
