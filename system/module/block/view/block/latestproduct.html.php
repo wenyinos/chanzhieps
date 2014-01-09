@@ -34,16 +34,16 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
           <div class='media' style='background-image: url(<?php echo $product->image->primary->middleURL; ?>); background-iamge:none\0;'><?php echo html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"); ?></div>
           <strong class='card-heading'>
             <?php echo $product->name;?>
-            <span class='pull-right text-latin'>
+            <div class='text-latin'>
             <?php
             if($product->promotion != 0)
             {
+                echo "<span class='text-muted'><i class='icon-yen'></i></span> ";
+                echo "<strong class='text-danger'>" . $product->promotion . '</strong>';
                 if($product->price != 0)
                 {
-                    echo "<del class='text-muted'><i class='icon-yen'></i> " . $product->price .'</del>';
+                    echo "&nbsp;&nbsp;<del class='text-muted'><i class='icon-yen'></i> " . $product->price .'</del>';
                 }
-                echo "&nbsp;&nbsp;<span class='text-muted'><i class='icon-yen'></i></span> ";
-                echo "<strong class='text-danger'>" . $product->promotion . '</strong>';
             }
             else
             {
@@ -54,7 +54,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
                 }
             }
             ?>
-            </span>
+            </div>
           </strong>
         </a>
       </div>
