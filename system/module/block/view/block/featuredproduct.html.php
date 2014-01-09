@@ -25,16 +25,17 @@ $url      = helper::createLink('product', 'view', "id={$product->id}", "category
     <a class='card' href="<?php echo $url;?>">
       <div class='media' style='background-image: url(<?php echo $product->image->primary->middleURL; ?>); background-iamge:none\0;'><?php echo html::image($product->image->primary->middleURL, "title='{$product->name}' alt='{$product->name}'"); ?></div>
       <div class='card-heading'>
-        <span class='pull-right text-latin'>
+        <strong><?php echo $product->name; ?></strong>
+        <div class='text-latin'>
         <?php
         if($product->promotion != 0)
         {
+            echo "<span class='text-muted'><i class='icon-yen'></i></span> ";
+            echo "<strong class='text-danger'>" . $product->promotion . '</strong>';
             if($product->price != 0)
             {
-                echo "<del class='text-muted'><i class='icon-yen'></i> " . $product->price .'</del>';
+                echo "&nbsp;&nbsp;<del class='text-muted'><i class='icon-yen'></i> " . $product->price .'</del>';
             }
-            echo "&nbsp;&nbsp;<span class='text-muted'><i class='icon-yen'></i></span> ";
-            echo "<strong class='text-danger'>" . $product->promotion . '</strong>';
         }
         else
         {
@@ -45,8 +46,7 @@ $url      = helper::createLink('product', 'view', "id={$product->id}", "category
             }
         }
         ?>
-        </span>
-        <strong><?php echo $product->name; ?></strong>
+        </div>
       </div>
       <div class='card-content text-muted'><?php echo helper::substr($product->summary, 80);?></div>
     </a>
