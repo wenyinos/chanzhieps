@@ -23,9 +23,12 @@ $(document).ready(function()
     /* Set 'go to top' button. */
     setGo2Top();
 
-    /* slide pictures start. */
-    $('#slide').carousel();
-    $('#slide .item').first().addClass('active');
+    /* Slide pictures start.   */
+    if($('#slide').length)
+    {
+        $('#slide').carousel();
+        $('#slide .item').first().addClass('active');
+    }
 
     /* fixed submenu position for browser which doesn't suppport relative postion in a table cell, like firefox. */
     if(navigator.userAgent.indexOf('Firefox') != -1)

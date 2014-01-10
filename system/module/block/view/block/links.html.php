@@ -14,6 +14,6 @@
 <div id='links'>
   <strong class='heading'><i class='icon-link'></i> <?php echo $this->lang->link; ?></strong>
   <?php echo $this->config->links->index;?>
-  <?php echo html::a(helper::createLink('links', 'index'), $this->lang->more . "<i class='icon-double-angle-right'></i>"); ?>
+  <?php if(trim(strip_tags($this->config->links->all, '<a>'))) echo html::a(helper::createLink('links', 'index'), $this->lang->more . "<i class='icon-double-angle-right'></i>"); ?>
 </div>
 <?php endif;?>
