@@ -103,6 +103,22 @@ class userModel extends model
     }
 
     /**
+     * Get user list with real name.
+     * 
+     * @param  string|array $users 
+     * @access public          
+     * @return array           
+     */
+    public function getRealName($users)
+    {
+        $users = $this->dao->select('account, realname')->from(TABLE_USER)->where('account')->in($users)->fetchPairs('account');
+        if(!$users) return array();     
+        foreach($users as $account => $realname) if($realname == '') $users[$account] = $account; 
+        return $users;         
+    }
+
+
+    /**
      * Create a user.
      * 
      * @access public
