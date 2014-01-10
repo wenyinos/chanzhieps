@@ -22,6 +22,7 @@
           <td><?php if(isset($logo->webPath))  echo html::image(isset($logo->webPath) ? $logo->webPath : '', "class='logo' title='{$this->config->company->name}'"); ?></td>
           <td><?php echo html::file('files', "class='form-control'");?></td>
           <td><?php echo html::submitButton();?></td>
+          <td><strong class='text-info'><?php echo $lang->ui->suitableLogoSize; ?></strong></td>
         </tr>
       </table>
       <div class='form-group'>
