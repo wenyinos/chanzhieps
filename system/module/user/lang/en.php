@@ -159,13 +159,8 @@ $lang->user->mailContent = <<<EOT
 <html>
 <head>
 <style type='text/css'>
-body{
-margin:0;
-padding:0;
-}
-div{
-    padding-left:30px;
-}
+body{ margin:0; padding:0; }
+div{ padding-left:30px; }
 </style>
 </head>
 <body>
@@ -181,10 +176,7 @@ Please click the link to change your password:
 <p>Reset Key: %s</p>
 </div>
 <div style='height:20px;border-bottom:1px solid #ddd;'></div>
-<div style='margin:20px 0 0 0 ;'>
-System letter, please do not reply
-</div>
+<div style='margin:20px 0 0 0 ;'> System letter, please do not reply </div>
 </body>
 </html>
-
 EOT;
