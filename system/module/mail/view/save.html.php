@@ -6,7 +6,7 @@
       <i class='icon-ok-sign'></i>
       <div class='content'><?php echo $lang->mail->successSaved; ?></div>
     </div>
-    <div><?php if($this->post->turnon and $mailExist) echo html::linkButton($lang->mail->test, inlink('test')); ?></div>
+    <div><?php if($this->post->turnon) echo html::linkButton($lang->mail->test, inlink('test')); ?></div>
   </div>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>
