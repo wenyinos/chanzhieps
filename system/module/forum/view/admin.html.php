@@ -8,11 +8,11 @@
         <?php $vars = "boardID=$boardID&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
         <th style='width: 60px' class='text-center'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->thread->id);?></th>
         <th><?php echo $lang->thread->title;?></th>
-        <th style='width: 70px'><?php commonModel::printOrderLink('author', $orderBy, $vars, $lang->thread->author);?></th>
+        <th style='width: 120px'><?php commonModel::printOrderLink('author', $orderBy, $vars, $lang->thread->author);?></th>
         <th style='width: 100px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->thread->postedDate);?></th>
         <th style='width: 60px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->thread->views);?></th>
         <th style='width: 60px'><?php commonModel::printOrderLink('replies', $orderBy, $vars, $lang->thread->replies);?></th>
-        <th style='width: 150px'><?php commonModel::printOrderLink('repliedDate', $orderBy, $vars, $lang->thread->lastReply);?></th>
+        <th style='width: 200px'><?php commonModel::printOrderLink('repliedDate', $orderBy, $vars, $lang->thread->lastReply);?></th>
         <th style='width: 80px'><?php commonModel::printOrderLink('hidden', $orderBy, $vars, $lang->thread->status);?></th>
         <th style='width: 100px'><?php echo $lang->actions;?></th>
       </tr>  
@@ -29,11 +29,11 @@
           echo html::a(commonModel::createFrontLink('thread', 'view', "threadID=$thread->id"), $thread->title, "target='_blank'");
           ?>
         </td>
-        <td><?php echo $thread->author;?></td>
+        <td><?php echo $speakers[$thread->author];?></td>
         <td><?php echo substr($thread->addedDate, 5, -3);?></td>
         <td><?php echo $thread->views;?></td>
         <td><?php echo $thread->replies;?></td>
-        <td class='text-left'><?php if($thread->replies) echo substr($thread->repliedDate, 5, -3) . ' ' . $thread->repliedBy;?></td>  
+        <td class='text-left'><?php if($thread->replies) echo substr($thread->repliedDate, 5, -3) . ' ' . $speakers[$thread->repliedBy];?></td>  
         <td class='text-left'><?php echo $thread->hidden ? '<span class="text-warning"><i class="icon-eye-close"></i> ' . $lang->thread->statusList['hidden'] .'</span>' : '<span class="text-success"><i class="icon-ok-sign"></i> ' . $lang->thread->statusList['normal'] . '</span>';?></td>
         <td>
         <?php echo html::a($this->createLink('thread', 'delete', "threadID=$thread->id"), $lang->delete, "class='reload'"); ?>

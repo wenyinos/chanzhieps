@@ -1,4 +1,4 @@
 $(document).ready(function()
 {
-    $('.nav-system-company').addClass('active');
+    $('.nav-system-company:first').addClass('active');
 });
