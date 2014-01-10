@@ -122,7 +122,7 @@ class mail extends control
             $this->view->position[] = html::a(inlink('index'), $this->lang->mail->common);
             $this->view->position[] = $this->lang->mail->save;
 
-            $this->view->mailExist   = $this->mail->mailExist();
+            $this->view->mailExist  = $this->mail->mailExist();
             $this->display();
         }
     }
