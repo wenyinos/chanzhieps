@@ -19,6 +19,7 @@ $lang->ui->setFavicon = "Set favicon";
 $lang->ui->setLogoFailed     = "Set logo failed.";
 $lang->ui->noSelectedFile    = "No file selected.";
 $lang->ui->notAlloweFileType = "Please select %s files.";
+$lang->ui->suitableLogoSize  = 'Suitable height: 50px~80p, width: 80px~240px';
 
 $lang->ui->favicon = new stdclass();
 $lang->ui->favicon->help  = "Help";
