@@ -19,8 +19,19 @@ class forum extends control
      */
     public function index()
     {
-        $this->view->title  = $this->lang->forumHome;
-        $this->view->boards = $this->forum->getBoards();
+        $boards = $this->forum->getBoards();
+        $speakers = array();
+        foreach($boards as $parentBoard)
+        {
+            foreach($parentBoard->children as $childBoard)
+            {
+                $speakers[$childBoard->postedBy] = $childBoard->postedBy;
+            }
+        }
+
+        $this->view->title    = $this->lang->forumHome;
+        $this->view->boards   = $boards;
+        $this->view->speakers = $this->loadModel('user')->getRealName($speakers);
 
         $this->display();
     }
