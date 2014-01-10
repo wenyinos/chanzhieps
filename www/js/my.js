@@ -24,6 +24,9 @@ $(document).ready(function()
     setGo2Top();
 
     // slide pictures start.     
-    $('#slide').carousel();
-    $('#slide .item').first().addClass('active');
+    if($('#slide').length)
+    {
+        $('#slide').carousel();
+        $('#slide .item').first().addClass('active');
+    }
 });
