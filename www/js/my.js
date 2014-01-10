@@ -30,6 +30,6 @@ $(document).ready(function()
     /* fixed submenu position for browser which doesn't suppport relative postion in a table cell, like firefox. */
     if(navigator.userAgent.indexOf('Firefox') != -1)
     {
-        $('#navbar .dropdown-menu').each(function(){$(this).css('left', $(this).closest('.dropdown').position().left - 2);});
+        $('#navbar .dropdown > .dropdown-menu').each(function(){$(this).css('left', $(this).closest('.dropdown').position().left - 2);});
     }
 });
