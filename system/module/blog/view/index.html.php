@@ -39,11 +39,11 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
           <?php endif;?>
           <?php echo $article->summary;?>
         </div>
-        <div class="card-actions">
-          <span class='text-muted' title="<?php echo $lang->article->addedDate;?>"><i class="icon-time"></i> <?php echo date('Y/m/d', strtotime($article->addedDate));?></span>
-          <span class='text-muted' title="<?php echo $lang->article->author;?>"><i class="icon-user"></i> <?php echo $article->author;?></span>
-          <span class='text-muted' title="<?php echo $lang->article->views;?>"><i class="icon-eye-open"></i> <?php echo $article->views;?></span>
-          <span class='text-muted' title="<?php echo $lang->article->comments?>"><i class="icon-comments-alt"></i> <?php echo $article->comments;?></span>
+        <div class="card-actions text-muted">
+          <span data-toggle='tooltip' title='<?php printf($lang->article->lblAddedDate, $article->addedDate);?>'><i class="icon-time"></i> <?php echo date('Y/m/d', strtotime($article->addedDate));?></span>
+          &nbsp; <span data-toggle='tooltip' title='<?php printf($lang->article->lblAuthor, $article->author);?>'><i class="icon-user"></i> <?php echo $article->author;?></span>
+          &nbsp; <span data-toggle='tooltip' title='<?php printf($lang->article->lblViews, $article->views);?>'><i class="icon-eye-open"></i> <?php echo $article->views;?></span>
+          &nbsp; <span data-toggle='tooltip' title='<?php printf($lang->article->lblComments, $article->comments);?>'><i class="icon-comments-alt"></i> <?php echo $article->comments;?></span>
         </div>
       </div>
     <?php endforeach;?>
