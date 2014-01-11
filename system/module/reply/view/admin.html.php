@@ -6,7 +6,7 @@
       <tr class='text-center'>
         <th style='width: 60px'><?php echo $lang->reply->id;?></th>
         <th><?php echo $lang->reply->content;?></th>
-        <th style='width: 70px'><?php echo $lang->reply->author;?></th>
+        <th style='width: 120px'><?php echo $lang->reply->author;?></th>
         <th style='width: 100px'><?php echo $lang->reply->addedDate;?></th>
         <th style='width: 80px'><?php echo $lang->actions;?></th>
       </tr>
@@ -20,7 +20,7 @@
           echo html::a(commonModel::createFrontLink('thread', 'locate', "threadID={$reply->thread}&replyID={$reply->id}"), $reply->content);;
           ?>
         </td>
-        <td><?php echo $reply->author;?></td>
+        <td><?php echo $reply->authorRealname;?></td>
         <td><?php echo substr($reply->addedDate, 5, -3);?></td>
         <td>
           <?php echo html::a($this->createLink('reply', 'delete', "replyID=$reply->id"), $lang->delete, "class='reloadDeleter'"); ?>

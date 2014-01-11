@@ -29,11 +29,11 @@
           echo html::a(commonModel::createFrontLink('thread', 'view', "threadID=$thread->id"), $thread->title, "target='_blank'");
           ?>
         </td>
-        <td><?php echo $speakers[$thread->author];?></td>
+        <td><?php echo $thread->authorRealname;?></td>
         <td><?php echo substr($thread->addedDate, 5, -3);?></td>
         <td><?php echo $thread->views;?></td>
         <td><?php echo $thread->replies;?></td>
-        <td class='text-left'><?php if($thread->replies) echo substr($thread->repliedDate, 5, -3) . ' ' . $speakers[$thread->repliedBy];?></td>  
+        <td class='text-left'><?php if($thread->replies) echo substr($thread->repliedDate, 5, -3) . ' ' . $thread->repliedByRealname;?></td>  
         <td class='text-left'><?php echo $thread->hidden ? '<span class="text-warning"><i class="icon-eye-close"></i> ' . $lang->thread->statusList['hidden'] .'</span>' : '<span class="text-success"><i class="icon-ok-sign"></i> ' . $lang->thread->statusList['normal'] . '</span>';?></td>
         <td>
         <?php echo html::a($this->createLink('thread', 'delete', "threadID=$thread->id"), $lang->delete, "class='reload'"); ?>

@@ -33,7 +33,7 @@
             if($childBoard->postedBy)
             {
                 echo substr($childBoard->postedDate, 5, -3) . '<br/>'; 
-                echo html::a($this->createLink('thread', 'locate', "threadID={$childBoard->postID}&replyID={$childBoard->replyID}"), $speakers[$childBoard->postedBy]);
+                echo html::a($this->createLink('thread', 'locate', "threadID={$childBoard->postID}&replyID={$childBoard->replyID}"), $childBoard->postedByRealname);
             }
             ?>
           </td>
