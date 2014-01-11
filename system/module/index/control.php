@@ -30,6 +30,7 @@ class index extends control
      */
     public function index()
     {
+        $this->view->title = $this->config->site->keywords;
         $this->display();
     }
 }
