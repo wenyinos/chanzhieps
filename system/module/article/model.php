@@ -195,31 +195,41 @@ class articleModel extends model
     /**
      * get hot articles. 
      *
-     * @param int        $categoryID
-     * @param int        $count
+     * @param string|array    $categories
+     * @param int             $count
+     * @param string          $type
      * @access public
      * @return array
      */
-    public function getHot($categoryID, $count, $type = 'article')
+    public function getHot($categories, $count, $type = 'article')
     {
-        $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal = 0, $recPerPage = $count, $pageID = 1);
-        return $this->getList($type, $this->loadModel('tree')->getFamily($categoryID, $type), 'views_desc', $pager);
+        $family = array();
+        $this->loadModel('tree');
+
+        if(!is_array($categories)) $categories = explode(',', $categories);
+        foreach($categories as $category) $family = array_merge($family, $this->tree->getFamily($category));
+
+        return $this->getList($type, $family, 'views_desc');
     }
 
     /**
      * get latest articles. 
      *
-     * @param int        $categoryID
-     * @param int        $count
+     * @param string|array     $categories
+     * @param int              $count
+     * @param string           $type
      * @access public
      * @return array
      */
-    public function getLatest($categoryID, $count, $type = 'article')
+    public function getLatest($categories, $count, $type = 'article')
     {
-        $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal = 0, $recPerPage = $count, $pageID = 1);
-        return $this->getList($type, $this->loadModel('tree')->getFamily($categoryID, $type), 'id_desc', $pager);
+        $family = array();
+        $this->loadModel('tree');
+
+        if(!is_array($categories)) $categories = explode(',', $categories);
+        foreach($categories as $category) $family = array_merge($family, $this->tree->getFamily($category));
+
+        return $this->getList($type, $family, 'id_desc');
     }
 
     /**
