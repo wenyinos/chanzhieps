@@ -20,7 +20,7 @@ $category = array_shift($product->categories);
 $alias    = !empty($category) ? $category->alias : '';
 $url      = helper::createLink('product', 'view', "id={$product->id}", "category={$alias}&name={$product->alias}");
 ?>
-<div id="product<?php echo $block->id;?>" class='panel panel-block'>
+<div id="block<?php echo $block->id;?>" class='panel panel-block'>
   <div class='panel-body'>
     <a class='card' href="<?php echo $url;?>">
       <div class='media' style='background-image: url(<?php echo $product->image->primary->middleURL; ?>); background-iamge:none\0;'><?php echo html::image($product->image->primary->middleURL, "title='{$product->name}' alt='{$product->name}'"); ?></div>

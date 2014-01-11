@@ -18,13 +18,13 @@ $browseLink     = $type == 'article' ? 'createBrowseLink' : 'create' . ucfirst($
 ?>
 <?php if($block->content->showChildren):?>
 <?php $treeMenu = $this->tree->getTreeMenu($type, 0, array('treeModel', $browseLink));?>
-<div id="tree<?php echo $block->id;?>" class='panel panel-block'>
+<div id="block<?php echo $block->id;?>" class='panel panel-block'>
   <div class='panel-heading'><h4><i class='icon-sitemap'></i> <?php echo $block->title;?></h4></div>
   <div class='panel-body'><?php echo $treeMenu;?></div>
 </div>
 <?php else:?>
 <?php $topCategories = $this->tree->getChildren(0, $type);?>
-<div id="tree<?php echo $block->id?>" class='panel panel-block'>
+<div id="block<?php echo $block->id?>" class='panel panel-block'>
   <div class='panel-heading'>
     <h4><i class='icon-folder-close'></i> <?php echo $block->title;?></h4>
   </div>
