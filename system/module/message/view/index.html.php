@@ -86,7 +86,7 @@
           </div>
           <div class='form-group'>
             <label for='content' class='col-sm-1 control-label'><?php echo $lang->message->content;?></label>
-            <div class='col-sm-11'>
+            <div class='col-sm-11 required'>
               <?php 
                 echo html::textarea('content', '', "class='form-control' rows='3'");
                 echo html::hidden('objectType', 'message');
