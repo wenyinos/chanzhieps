@@ -78,7 +78,7 @@
         <th><?php echo $lang->article->addedDate;?></th>
         <td>
           <div class='input-append date'>
-            <?php echo html::input('addedDate', date('Y-m-d H:i'), "class='form-control'");?>
+            <?php echo html::input('addedDate', $article->addedDate, "class='form-control'");?>
             <span class='add-on'><button class="btn btn-default" type="button"><i class="icon-calendar"></i></button></span>
           </div>
         </td>
