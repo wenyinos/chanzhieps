@@ -86,10 +86,17 @@ class replyModel extends model
      */
     public function getList($orderBy = 'addedDate_desc', $pager = null)
     {
-        return $this->dao->select('*')->from(TABLE_REPLY)
+        $replies = $this->dao->select('*')->from(TABLE_REPLY)
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
+
+        $speakers = array();
+        foreach($replies as $reply) $speakers[$reply->author] = $reply->author;
+        $speakers = $this->loadModel('user')->getRealName($speakers);
+        foreach($replies as $reply) $reply->authorRealname = !empty($reply->author) ? $speakers[$reply->author] : '';
+
+        return $replies;
     }
 
     /**
