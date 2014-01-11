@@ -19,6 +19,7 @@ $lang->ui->setFavicon = "Favicon設置";
 $lang->ui->setLogoFailed     = "設置Logo失敗";
 $lang->ui->noSelectedFile    = "沒有選擇圖片";
 $lang->ui->notAlloweFileType = "請選擇正確的%s檔案.";
+$lang->ui->suitableLogoSize  = '最佳高度範圍：50px~80px，最佳寬度範圍：80px~240px';
 
 $lang->ui->favicon = new stdclass();
 $lang->ui->favicon->help  = "幫助";

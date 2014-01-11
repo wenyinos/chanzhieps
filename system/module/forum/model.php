@@ -40,6 +40,17 @@ class forumModel extends model
             }
         }
 
+        $speakers = array();
+        foreach($boards as $parentBoard)
+        {
+            foreach($parentBoard->children as $childBoard) $speakers[$childBoard->postedBy] = $childBoard->postedBy;
+        }
+        $speakers = $this->loadModel('user')->getRealName($speakers);
+        foreach($boards as $parentBoard)
+        {
+            foreach($parentBoard->children as $childBoard) $childBoard->postedByRealname = !empty($childBoard->postedBy) ? $speakers[$childBoard->postedBy] : '';
+        }
+
         return $boards;
     }
 

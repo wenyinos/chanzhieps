@@ -47,3 +47,4 @@ $lang->upgrade->fromVersions['1_5'] = '1.5.stable';
 $lang->upgrade->fromVersions['1_6'] = '1.6.stable';
 $lang->upgrade->fromVersions['1_7'] = '1.7.stable';
 $lang->upgrade->fromVersions['1_8'] = '1.8.stable';
+$lang->upgrade->fromVersions['2_0'] = '2.0.stable';

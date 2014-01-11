@@ -50,6 +50,21 @@ class threadModel extends model
             ->page($pager)
             ->fetchAll('id');
 
+        $speakers = array();
+        foreach($threads as $thread)
+        {
+            $speakers[$thread->author]    = $thread->author;
+            $speakers[$thread->repliedBy] = $thread->repliedBy;
+        }
+
+        $speakers = $this->loadModel('user')->getRealName($speakers);
+
+        foreach($threads as $thread) 
+        {
+           $thread->authorRealname    = !empty($thread->author) ? $speakers[$thread->author] : '';
+           $thread->repliedByRealname = !empty($thread->repliedBy) ? $speakers[$thread->repliedBy] : '';
+        }
+
         if(!$threads) return array();
 
         return $this->process($threads);
