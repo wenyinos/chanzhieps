@@ -25,4 +25,4 @@ $lang->slide->edit     = 'Edit';
 
 $lang->slide->successSort     = 'Order data saved.';
 $lang->slide->noImageSelected = 'No images selected';
-$lang->slide->suitableSize    = '1140px X 270px';
+$lang->slide->suitableSize    = 'Make sure that all the pictures are the same size，recommended size 1140px X 270px';
