@@ -16,7 +16,7 @@ $type     = str_replace('product', '', strtolower($block->type));
 $method   = 'get' . $type;
 $products = $this->loadModel('product')->$method($content->category, $content->limit);?>
 <?php if(isset($content->image)):?>
-<div class='panel panel-block'>
+<div id="product<?php echo $block->id;?>" class='panel panel-block'>
   <div class='panel-heading'>
     <h4><i class='icon-th'></i> <?php echo $block->title?></h4>
   </div>
@@ -64,7 +64,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
   </div>
 </div>
 <?php else:?>
-<div class='panel panel-block'>
+<div id="product<?php echo $block->id;?>" class='panel panel-block'>
   <div class='panel-heading'><h4><i class='icon-list-ul'></i> <?php echo $block->title;?></h4></div>
   <div class='panel-body'>
     <ul class='ul-list'>

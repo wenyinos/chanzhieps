@@ -30,7 +30,7 @@ if($articles)
 }
 ?>
 <?php if(isset($content->image)):?>
-<div class='panel panel-block'>
+<div id="article<?php echo $block->id;?>" class='panel panel-block'>
   <div class='panel-heading'>
     <h4><i class='icon-th'></i> <?php echo $block->title;?></h4>
   </div>
@@ -61,7 +61,7 @@ if($articles)
   </div>
 </div>
 <?php else:?>
-<div class='panel panel-block'>
+<div id="article<?php echo $block->id;?>" class='panel panel-block'>
   <div class='panel-heading'><div class='pull-right'><?php echo $moreLink; ?></div> <h4><i class='icon-list-ul'></i> <?php echo $block->title;?></h4></div>
   <div class='panel-body'>
     <ul class='ul-list'>
