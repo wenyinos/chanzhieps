@@ -10,4 +10,11 @@ $(document).ready(function()
     }
 
    if(typeof(v.categoryID) != 'undefined') $('.tree #category' + v.categoryID).addClass('active');
+
+   $('body').tooltip(
+    {
+        html: true,
+        selector: "[data-toggle=tooltip]",
+        container: "body"
+    });
 });
