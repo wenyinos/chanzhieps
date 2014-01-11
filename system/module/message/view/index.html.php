@@ -32,6 +32,7 @@
               <div class='comments-list'>
                 <?php foreach($replies[$message->id] as $reply):?>
                 <div class='comment'>
+                  <div class='avatar'><i class='icon-mail-reply'></i></div>
                   <div class='content'>
                     <div class='pull-right'><span class='text-muted'><?php echo $reply->date;?></span>
                     </div>
