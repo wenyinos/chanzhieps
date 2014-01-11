@@ -30,14 +30,6 @@ class index extends control
      */
     public function index()
     {
-        $this->app->loadLang('user');
-        
-        $this->view->products = $this->loadModel('product')->getLatest(0, 3);
-
-        $this->view->slides         = $this->loadModel('slide')->getList();
-        $this->view->latestArticles = $this->loadModel('article')->getLatest(0, 8);
-        $this->view->latestBlogs    = $this->loadModel('article')->getLatest(0, 8, 'blog');
-        $this->view->contact        = $this->loadModel('company')->getContact();
         $this->display();
     }
 }

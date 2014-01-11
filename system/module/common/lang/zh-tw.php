@@ -95,6 +95,7 @@ $lang->js->timeout       = '網絡超時,請重試';
 /* Contact fields*/
 $lang->company = new stdclass();
 $lang->company->contactUs = '聯繫我們';
+$lang->company->contacts  = '聯繫人';
 $lang->company->address   = '地址';
 $lang->company->phone     = '電話';
 $lang->company->email     = 'Email';

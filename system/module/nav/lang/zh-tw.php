@@ -23,7 +23,7 @@ $lang->nav->cannotRemoveAll = '不能刪除所有導航';
 $lang->nav->types['system']  = '系統模組';
 $lang->nav->types['article'] = '文章類目';
 $lang->nav->types['product'] = '產品類目';
-$lang->nav->types['page']    = '頁面';
+$lang->nav->types['page']    = '單頁';
 $lang->nav->types['custom']  = '自定義';
 
 /* common navs.*/

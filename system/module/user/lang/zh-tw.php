@@ -159,13 +159,8 @@ $lang->user->mailContent = <<<EOT
 <html>
 <head>
 <style type='text/css'>
-body{
-margin:0;
-padding:0;
-}
-div{
-    padding-left:30px;
-}
+body{margin:0; padding:0;}
+div{padding-left:30px;} 
 </style>
 </head>
 <body>
@@ -181,9 +176,7 @@ div{
 <p>重置碼：%s</p>
 </div>
 <div style='height:20px;border-bottom:1px solid #ddd;'></div>
-<div style='margin:20px 0 0 0 ;'>
- 系統發信，請勿回覆
-</div>
+<div style='margin:20px 0 0 0 ;'> 系統發信，請勿回覆 </div>
 </body>
 </html>
 EOT;

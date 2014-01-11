@@ -152,10 +152,13 @@ class productModel extends model
      */
     public function getLatest($categories, $count)
     {
-        $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal = 0, $recPerPage = $count, $pageID = 1);
+        $family = array();
+        $this->loadModel('tree');
 
-        return $this->getList($categories, 'id_desc', $pager);
+        if(!is_array($categories)) $categories = explode(',', $categories);
+        foreach($categories as $category) $family = array_merge($family, $this->tree->getFamily($category));
+
+        return $this->getList($family, 'id_desc');
     }
 
     /**
@@ -168,10 +171,13 @@ class productModel extends model
      */
     public function getHot($categories, $count)
     {
-        $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal = 0, $recPerPage = $count, $pageID = 1);
+        $family = array();
+        $this->loadModel('tree');
 
-        return $this->getList($categories, 'views_desc', $pager);
+        if(!is_array($categories)) $categories = explode(',', $categories);
+        foreach($categories as $category) $family = array_merge($family, $this->tree->getFamily($category));
+
+        return $this->getList($family, 'views_desc');
     }
 
     /**
