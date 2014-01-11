@@ -5,10 +5,10 @@ $(document).ready(function()
 
     $('.nav-system-home:first').addClass('active');
 
-    if($('.panel').size())
+    if($('#focus .panel').size())
     {
         /* Set rows label of bottom blocks. */
-        $('.panel').each(function(index)
+        $('#focus .panel').each(function(index)
         {
             row = parseInt(parseInt(index) / 3);
             $(this).addClass('row-' + row);
