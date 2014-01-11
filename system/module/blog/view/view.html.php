@@ -35,17 +35,17 @@ $common->printPositionBar($category, $article, '', $root);
           <dd><?php $article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite); ?></dd>
           <?php endif; ?>
           <dd class='pull-right'>
-            <?php if($article->original):?>
-            <span class='label label-success'><?php echo $lang->article->originalList[$article->original]; ?></span>
-            <?php endif;?>
-            <span class='label label-warning' data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblViews, $article->views);?>'><i class='icon-eye-open'></i> <?php echo $article->views; ?></span>
             <?php
             if(!empty($this->config->oauth->sina))
             {
                 $sina = json_decode($this->config->oauth->sina);
-                if($sina->widget) echo $sina->widget;
+                if($sina->widget) echo "<div class='sina-widget'>" . $sina->widget . '</div>';
             }
             ?>
+            <?php if($article->original):?>
+            <span class='label label-success'><?php echo $lang->article->originalList[$article->original]; ?></span>
+            <?php endif;?>
+            <span class='label label-warning' data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblViews, $article->views);?>'><i class='icon-eye-open'></i> <?php echo $article->views; ?></span>
           </dd>
         </dl>
         <?php if($article->summary):?>
