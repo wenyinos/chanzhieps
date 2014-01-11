@@ -30,6 +30,7 @@ $lang->article->editedDate = '編輯時間';
 $lang->article->status     = '狀態';
 $lang->article->type       = '類型';
 $lang->article->views      = '閲讀';
+$lang->article->comments   = '評論';
 $lang->article->stick      = '置頂級別';
 $lang->article->order      = '排序';
 
@@ -62,6 +63,7 @@ $lang->article->lblAuthor    = "<strong>作者：</strong> %s &nbsp;&nbsp;";
 $lang->article->lblSource    = '<strong>來源：</strong>';
 $lang->article->lblViews     = ' <strong>閲讀：</strong>%s';
 $lang->article->lblEditor    = '<i>最後編輯：%s 于 %s</i>';
+$lang->article->lblComments  = '<strong>評論：</strong> %s';
 
 $lang->article->prev      = '上一篇';
 $lang->article->next      = '下一篇';

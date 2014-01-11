@@ -25,4 +25,4 @@ $lang->slide->edit     = '編輯幻燈片';
 
 $lang->slide->successSort     = '排序成功保存';
 $lang->slide->noImageSelected = '沒有選擇圖片';
-$lang->slide->suitableSize    = '最佳圖片尺寸：1140px X 270px(寬 X 高)';
+$lang->slide->suitableSize    = '同一幻燈片中的所有圖片尺寸應該保持一致，最佳圖片尺寸：1140px X 270px(寬 X 高)';
