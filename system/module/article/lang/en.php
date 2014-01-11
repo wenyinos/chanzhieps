@@ -30,6 +30,7 @@ $lang->article->editedDate = 'Edited';
 $lang->article->status     = 'Status';
 $lang->article->type       = 'Type';
 $lang->article->views      = 'Views';
+$lang->article->comments   = 'Comments';
 $lang->article->stick      = 'Sticky';
 $lang->article->order      = 'Order';
 

@@ -137,16 +137,15 @@ class articleModel extends model
         /* Assign summary to it's article. */
         foreach($articles as $article) $article->summary = empty($article->summary) ? helper::substr(strip_tags($article->content), 200, '...') : $article->summary;
 
-        /* Assign comments to it's article. */
-        foreach($articles as $article)
-        {
-            $article->comments = $this->dao->select('COUNT(id) as comments')->from(TABLE_MESSAGE)
-                ->where('type')->eq('comment')
-                ->andWhere('objectType')->eq('article')
-                ->andWhere('objectID')->eq($article->id)
-                ->fetch('comments');
-        }
-
+        $articleIdList = array_keys($articles);
+        $comments = $this->dao->select("objectID, count(*) as count")->from(TABLE_MESSAGE)
+            ->where('type')->eq('comment')
+            ->andWhere('objectType')->eq('article')
+            ->andWhere('objectID')->in($articleIdList)
+            ->groupBy('objectID')
+            ->fetchPairs('objectID', 'count');
+        foreach($articles as $article) $article->comments = isset($comments[$article->id]) ? $comments[$article->id] : 0;
+ 
         return $articles;
     }
 

@@ -30,6 +30,7 @@ $lang->article->editedDate = '编辑时间';
 $lang->article->status     = '状态';
 $lang->article->type       = '类型';
 $lang->article->views      = '阅读';
+$lang->article->comments   = '评论';
 $lang->article->stick      = '置顶级别';
 $lang->article->order      = '排序';
 
