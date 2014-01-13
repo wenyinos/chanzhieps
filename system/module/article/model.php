@@ -209,7 +209,8 @@ class articleModel extends model
         if(!is_array($categories)) $categories = explode(',', $categories);
         foreach($categories as $category) $family = array_merge($family, $this->tree->getFamily($category));
 
-        return $this->getList($type, $family, 'views_desc');
+        $pager = new pager($recTotal = 0, $recPerPage = $count, 1);
+        return $this->getList($type, $family, 'views_desc', $pager);
     }
 
     /**
@@ -229,7 +230,8 @@ class articleModel extends model
         if(!is_array($categories)) $categories = explode(',', $categories);
         foreach($categories as $category) $family = array_merge($family, $this->tree->getFamily($category));
 
-        return $this->getList($type, $family, 'id_desc');
+        $pager = new pager($recTotal = 0, $recPerPage = $count, 1);
+        return $this->getList($type, $family, 'id_desc', $pager);
     }
 
     /**
