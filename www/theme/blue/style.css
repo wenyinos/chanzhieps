@@ -10,6 +10,7 @@
 
 #navbar .caret{border-top-color: #f1f1f1; border-bottom-color: #f1f1f1;}
 #navbar ul.nav > li > a:hover,#navbar ul.nav > li > ul > li > a:hover,#navbar ul.nav > li > ul > li > ul > li > a:hover{background-color: #3280fc; color: #fff}
+#navbar .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus,.dropdown-submenu:hover>a, .dropdown-submenu:focus>a {background-color: #f1f1f1; color: #333;}
 
 @media (max-width: 767px)
 {

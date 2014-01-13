@@ -264,7 +264,6 @@ a.tag-link {color: inherit;}
 #navbar .nav > li > a {font-weight: bold; padding: 15px 20px; color: #555;}
 #navbar .nav > li > ul, #navbar .nav > li > ul > li > ul{padding: 0}
 #navbar .nav > li > ul > li > a, #navbar .nav > li > ul > li > ul > li > a {padding: 10px 20px;}
-/*#navbar .dropdown {position: inherit;}*/
 #navbar .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus,.dropdown-submenu:hover>a, .dropdown-submenu:focus>a {background-color: #f1f1f1; color: inherit;}
 .dropdown-submenu:hover>a:after {border-left-color: #333}
 @media (min-width: 768px)
