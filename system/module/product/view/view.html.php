@@ -48,35 +48,45 @@ js::set('productID', $product->id);
             <h1 class='header-dividing'><?php echo $product->name;?></h1>
             <ul class='list-unstyled meta-list'>
               <?php
+              $attributeHtml = '';
               if($product->promotion != 0)
               {
                   if($product->price != 0)
                   {
-                      echo "<li><span class='meta-name'>" . $lang->product->price . "</span>";
-                      echo "<span class='meta-value'><span class='text-muted text-latin'>" . $lang->RMB . "</span> <del><strong class='text-latin'>" . $product->price . "</del></strong></span></li>";
+                      $attributeHtml .= "<li><span class='meta-name'>" . $lang->product->price . "</span>";
+                      $attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . $lang->RMB . "</span> <del><strong class='text-latin'>" . $product->price . "</del></strong></span></li>";
                   }
-                  echo "<li><span class='meta-name'>" . $lang->product->promotion . "</span>";
-                  echo "<span class='meta-value'><span class='text-muted text-latin'>" . $lang->RMB . "</span> <strong class='text-danger text-latin text-lg'>" . $product->promotion . "</strong></span></li>";
+                  $attributeHtml .= "<li><span class='meta-name'>" . $lang->product->promotion . "</span>";
+                  $attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . $lang->RMB . "</span> <strong class='text-danger text-latin text-lg'>" . $product->promotion . "</strong></span></li>";
               }
               else if($product->price != 0)
               {
-                  echo "<li><span class='meta-name'>" . $lang->product->price . "</span>";
-                  echo "<span class='meta-value'><span class='text-muted text-latin'>" . $lang->RMB . "</span> <strong class='text-important text-latin text-lg'>" . $product->price . "</strong></span></li>";
+                  $attributeHtml .= "<li><span class='meta-name'>" . $lang->product->price . "</span>";
+                  $attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . $lang->RMB . "</span> <strong class='text-important text-latin text-lg'>" . $product->price . "</strong></span></li>";
               }
-              echo "<li><span class='meta-name'>" . $lang->product->amount . "</span>";
-              echo "<span class='meta-value'>" . $product->amount . " <small>" . $product->unit . "</small></span></li>";
-              echo "<li><span class='meta-name'>" . $lang->product->brand . "</span>";
-              echo "<span class='meta-value'>" . $product->brand . " <small>" . $product->model . "</small></span></li>";
+              if($product->amount)
+              {
+                  $attributeHtml .= "<li><span class='meta-name'>" . $lang->product->amount . "</span>";
+                  $attributeHtml .= "<span class='meta-value'>" . $product->amount . " <small>" . $product->unit . "</small></span></li>";
+              }
+              if($product->brand)
+              {
+                  $attributeHtml .= "<li><span class='meta-name'>" . $lang->product->brand . "</span>";
+                  $attributeHtml .= "<span class='meta-value'>" . $product->brand . " <small>" . $product->model . "</small></span></li>";
+              }
               if($product->color)
               {
-                echo "<li><span class='meta-name'>" . $lang->product->color . "</span>";
-                echo "<span class='meta-value'>" . $product->color . "</span></li>";
+                $attributeHtml .= "<li><span class='meta-name'>" . $lang->product->color . "</span>";
+                $attributeHtml .= "<span class='meta-value'>" . $product->color . "</span></li>";
               }
               if($product->origin)
               {
-                echo "<li><span class='meta-name'>" . $lang->product->origin . "</span>";
-                echo "<span class='meta-value'>" . $product->origin . "</span></li>";
+                $attributeHtml .= "<li><span class='meta-name'>" . $lang->product->origin . "</span>";
+                $attributeHtml .= "<span class='meta-value'>" . $product->origin . "</span></li>";
               }
+                
+              if(!$attributeHtml) $attributeHtml = "<li>$product->summary</li>";
+              echo $attributeHtml;
               ?>
             </ul>
             <?php if($product->mall):?>
