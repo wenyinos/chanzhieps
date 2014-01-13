@@ -158,6 +158,7 @@ class productModel extends model
         if(!is_array($categories)) $categories = explode(',', $categories);
         foreach($categories as $category) $family = array_merge($family, $this->tree->getFamily($category));
 
+        $this->app->loadClass('pager', true);
         $pager = new pager($recTotal = 0, $recPerPage = $count, 1);
         return $this->getList($family, 'id_desc', $pager);
     }
@@ -178,6 +179,7 @@ class productModel extends model
         if(!is_array($categories)) $categories = explode(',', $categories);
         foreach($categories as $category) $family = array_merge($family, $this->tree->getFamily($category));
 
+        $this->app->loadClass('pager', true);
         $pager = new pager($recTotal = 0, $recPerPage = $count, 1);
         return $this->getList($family, 'views_desc', $pager);
     }
