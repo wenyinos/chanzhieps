@@ -71,6 +71,7 @@ class upgradeModel extends model
                 $this->setPageBlocks();
                 $this->setBlogBlocks();
             case '2_0':
+                $this->execSQL($this->getUpgradeFile('2.0'));
                 $this->processSiteDesc();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -98,6 +99,7 @@ class upgradeModel extends model
             case '1_5': $confirmContent .= file_get_contents($this->getUpgradeFile('1.5'));
             case '1_6': $confirmContent .= file_get_contents($this->getUpgradeFile('1.6'));
             case '1_7': $confirmContent .= file_get_contents($this->getUpgradeFile('1.7'));
+            case '2_0': $confirmContent .= file_get_contents($this->getUpgradeFile('2.0'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
