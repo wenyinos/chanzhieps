@@ -246,7 +246,7 @@ class uri
         global $config;
 
         $link = 'forum/';
-        $link .= $alias['category'] ? $alias['category'] : 'c' . array_shift($params);
+        $link .= !empty($alias['category']) ? $alias['category'] : 'c' . array_shift($params);
 
         return $config->webRoot . $link . '.' . $config->default->view;
     }
