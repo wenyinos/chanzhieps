@@ -44,7 +44,6 @@ class settingModel extends model
      * 
      * @param  string      $path     system.common.global.sn or system.common.sn 
      * @param  string      $value 
-     * @param  string|int  $company 
      * @access public
      * @return void
      */
@@ -117,7 +116,7 @@ class settingModel extends model
     /**
      * Parse the param string for select or delete items.
      * 
-     * @param  string    $paramString     owner=xxx&company=1,2&key=sn and so on.
+     * @param  string    $paramString     owner=xxx&key=sn and so on.
      * @access public
      * @return array
      */
