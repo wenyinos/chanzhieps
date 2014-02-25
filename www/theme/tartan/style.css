@@ -18,7 +18,7 @@ a:hover,a:active{color: #35636e;}
 
 /* navbar settings.*/
 #navbar{background: #7a94b2;border-radius: 2px;}
-@media (min-width: 768px){#navbar .nav > li {display: block;float: left;width: auto;}}
+@media (min-width: 768px){#navbar .nav > li {display: block;float: left;width: auto;}@-moz-document url-prefix(){#navbar .nav > li{position: inherit;}}}
 @media (max-width: 767px)
 {
   #navbar .nav > li > a { border-radius: 2px !important}
