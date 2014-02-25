@@ -65,12 +65,12 @@ $common->printPositionBar($category, $article, '', $root);
         <?php extract($prevAndNext);?>
         <ul class='pager pager-justify'>
           <?php if($prev): ?>
-          <li class='previous'><?php echo html::a(inlink('view', "id=$prev->id", "category={$category->alias}&name={$prev->alias}"), '<i class="icon-arrow-left"></i> ' . $lang->article->prev . $lang->colon . $prev->title); ?></li>
+          <li class='previous'><?php echo html::a(inlink('view', "id=$prev->id", "category={$category->alias}&name={$prev->alias}"), '<i class="icon-arrow-left"></i> ' . $prev->title); ?></li>
           <?php else: ?>
           <li class='preious disabled'><a href='###'><i class='icon-arrow-left'></i> <?php print($lang->article->none); ?></a></li>
           <?php endif; ?>
           <?php if($next):?>
-          <li class='next'><?php echo html::a(inlink('view', "id=$next->id", "category={$category->alias}&name={$next->alias}"), $lang->article->next . $lang->colon . $next->title . ' <i class="icon-arrow-right"></i>'); ?></li>
+          <li class='next'><?php echo html::a(inlink('view', "id=$next->id", "category={$category->alias}&name={$next->alias}"), $next->title . ' <i class="icon-arrow-right"></i>'); ?></li>
           <?php else:?>
           <li class='next disabled'><a href='###'> <?php print($lang->article->none); ?><i class='icon-arrow-right'></i></a></li>
           <?php endif; ?>
