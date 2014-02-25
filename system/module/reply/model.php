@@ -69,6 +69,22 @@ class replyModel extends model
 
         if(!$replies) return array();
 
+        $speakers = array();
+        foreach($replies as $reply)
+        {
+            $speakers[$reply->author] = $reply->author;
+            $speakers[$reply->editor] = $reply->editor;
+        }
+
+        $speakers = $this->loadModel('user')->getRealNamePairs($speakers);
+
+        foreach($replies as $reply)
+        {
+            $reply->authorRealname = !empty($reply->author) ? $speakers[$reply->author] : '';
+            $reply->editorRealname = !empty($reply->editor) ? $speakers[$reply->editor] : '';
+        }
+
+
         /* Get files for these replies. */
         $files = $this->loadModel('file')->getByObject('reply', array_keys($replies));
         
@@ -93,7 +109,7 @@ class replyModel extends model
 
         $speakers = array();
         foreach($replies as $reply) $speakers[$reply->author] = $reply->author;
-        $speakers = $this->loadModel('user')->getRealName($speakers);
+        $speakers = $this->loadModel('user')->getRealNamePairs($speakers);
         foreach($replies as $reply) $reply->authorRealname = !empty($reply->author) ? $speakers[$reply->author] : '';
 
         return $replies;

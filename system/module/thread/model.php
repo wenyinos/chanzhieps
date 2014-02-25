@@ -24,6 +24,11 @@ class threadModel extends model
         $thread = $this->dao->findById($threadID)->from(TABLE_THREAD)->fetch();
         if(!$thread) return false;
 
+        $speaker = array();
+        $speaker[$thread->editor] = $thread->editor;
+        $speaker = $this->loadModel('user')->getRealNamePairs($speaker);
+        $thread->editorRealname = !empty($thread->editor) ? $speaker[$thread->editor] : '';
+
         $thread->files = $this->loadModel('file')->getByObject('thread', $thread->id);
         return $thread;
     }
@@ -57,7 +62,7 @@ class threadModel extends model
             $speakers[$thread->repliedBy] = $thread->repliedBy;
         }
 
-        $speakers = $this->loadModel('user')->getRealName($speakers);
+        $speakers = $this->loadModel('user')->getRealNamePairs($speakers);
 
         foreach($threads as $thread) 
         {
