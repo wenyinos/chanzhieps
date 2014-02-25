@@ -16,11 +16,15 @@
     <h4><i class='icon-phone'></i> <?php echo $block->title;?></h4>
   </div>
   <div class='panel-body'>
+    <table class='table table-data'>
+      <?php foreach($contact as $item => $value):?>
+      <tr>
+        <th><?php echo $this->lang->company->$item . $this->lang->colon;?></th>
+        <td><?php echo $value;?></td>
+      </tr>
+      <?php endforeach;?>
+    </table>
     <dl class='dl-horizontal'>
-    <?php foreach($contact as $item => $value):?>
-      <dt><?php echo $this->lang->company->$item . $this->lang->colon;?></dt>
-      <dd><?php echo $value;?></dd>
-    <?php endforeach;?>
     </dl>
   </div>
 </div>
