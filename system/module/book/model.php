@@ -441,8 +441,6 @@ class bookModel extends model
         $node = new stdclass();
         $node->parent     = $parentNode ? $parentNode->id : 0;
         $node->grade      = $parentNode ? $parentNode->grade + 1 : 1;
-        $node->addedDate  = $now;
-        $node->editedDate = $now;
 
         foreach($this->post->title as $key => $nodeTitle)
         {
@@ -460,20 +458,23 @@ class bookModel extends model
             $node->keywords = seo::unify($node->keywords, ',');
 
            if($mode == 'new')
-            {
-                $this->dao->insert(TABLE_BOOK)->data($node)->exec();
+           {
+               $node->addedDate  = $now;
+               $node->editedDate = $now;
+               $this->dao->insert(TABLE_BOOK)->data($node)->exec();
 
-                /* After saving, update it's path. */
-                $nodeID   = $this->dao->lastInsertID();
-                $nodePath = $parentNode->path . "$nodeID,";
-                $this->dao->update(TABLE_BOOK)->set('path')->eq($nodePath)->where('id')->eq($nodeID)->exec();
-            }
-            else
-            {
-                $nodeID = $key;
-                unset($node->addedDate);
-                $this->dao->update(TABLE_BOOK)->data($node)->autoCheck()->where('id')->eq($nodeID)->exec();
-            }
+               /* After saving, update it's path. */
+               $nodeID   = $this->dao->lastInsertID();
+               $nodePath = $parentNode->path . "$nodeID,";
+               $this->dao->update(TABLE_BOOK)->set('path')->eq($nodePath)->where('id')->eq($nodeID)->exec();
+           }
+           else
+           {
+               $nodeID = $key;
+               $node->editedDate = $now;
+               $node->editor     = $this->app->user->account;
+               $this->dao->update(TABLE_BOOK)->data($node)->autoCheck()->where('id')->eq($nodeID)->exec();
+           }
 
             /* Save keywords. */
             $this->loadModel('tag')->save($node->keywords);
