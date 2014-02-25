@@ -11,7 +11,7 @@
 ?>
 <?php include '../../common/view/header.lite.html.php';?>
 <div class='container'>
-  <div class='modal-dialog' style='width: 450px'>
+  <div class='modal-dialog w-450px'>
     <form method='post' class='form-horizontal'>
       <?php if(isset($error)):?>
       <div class='modal-header'><strong><?php echo $lang->install->error;?></strong></div>

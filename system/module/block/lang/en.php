@@ -108,7 +108,7 @@ $lang->block->regions->all['footer'] = 'Footer';
 $lang->block->regions->all['end']    = 'End';
 
 $lang->block->regions->index_index['header']  = 'Header';
-$lang->block->regions->index_index['bottom']  = 'Bottom';
+$lang->block->regions->index_index['middle']  = 'Middle';
 $lang->block->regions->index_index['footer']  = 'Footer';
 
 $lang->block->regions->article_browse['side'] = 'Side';

@@ -111,7 +111,7 @@ $lang->block->regions->all['footer'] = '底部';
 $lang->block->regions->all['end']    = '结束部分';
 
 $lang->block->regions->index_index['header']  = '上部';
-$lang->block->regions->index_index['bottom']  = '下部';
+$lang->block->regions->index_index['middle']  = '中部';
 $lang->block->regions->index_index['footer']  = '底部';
 
 $lang->block->regions->article_browse['side'] = '侧边';

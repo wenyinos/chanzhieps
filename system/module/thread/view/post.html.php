@@ -21,17 +21,20 @@
     <form method='post' class='form-horizontal' id='threadForm' enctype='multipart/form-data'>
       <div class='form-group'>
         <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->thread->title;?></label>
-        <div class='<?php echo $canManage ? "col-md-10" : "col-md-11";?> col-sm-8'><?php echo html::input('title', '', "class='form-control'");?></div>
-        <?php if($canManage): ?>
-        <div class='col-md-1 col-sm-2'>
-          <div class='checkbox'>
-              <label>
-                <?php echo "<input type='checkbox' name='readonly' value='1'/><span>{$lang->thread->readonly}</span>" ?>
+        <div class='col-md-11 col-sm-10'>
+        <?php if($canManage):?>
+          <div class='input-group'>
+            <?php echo html::input('title', '', "class='form-control'");?>
+            <span class='input-group-addon'>
+              <label class='checkbox'>
+                  <?php echo "<input type='checkbox' name='readonly' value='1'/><span>{$lang->thread->readonly}</span>" ?>
               </label>
+            </span>
           </div>
-          <?php  ?>
+        <?php else:?>
+          <?php echo html::input('title', '', "class='form-control'");?>
+        <?php endif;?>
         </div>
-        <?php endif; ?>
       </div>
       <div class='form-group'>
         <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->thread->content;?></label>
@@ -41,7 +44,7 @@
         <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->thread->file;?></label>
         <div class='col-md-7 col-sm-8 col-xs-11'><?php echo $this->fetch('file', 'buildForm');?></div>
       </div>
-      <div class='form-group' id='captchaBox' style='display:none'></div>
+      <div class='form-group hide' id='captchaBox'></div>
       <div class='form-group'>
         <label class='col-md-1 col-sm-2'></label>
         <div class='col-md-11 col-sm-10'><?php echo html::submitButton();?></div>
@@ -50,6 +53,4 @@
   </div>
 </div>
 
-
-</form>
 <?php include '../../common/view/footer.html.php';?>

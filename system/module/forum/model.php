@@ -45,7 +45,7 @@ class forumModel extends model
         {
             foreach($parentBoard->children as $childBoard) $speakers[$childBoard->postedBy] = $childBoard->postedBy;
         }
-        $speakers = $this->loadModel('user')->getRealName($speakers);
+        $speakers = $this->loadModel('user')->getRealNamePairs($speakers);
         foreach($boards as $parentBoard)
         {
             foreach($parentBoard->children as $childBoard) $childBoard->postedByRealname = !empty($childBoard->postedBy) ? $speakers[$childBoard->postedBy] : '';

@@ -18,12 +18,12 @@
   <table class='table'>
     <thead>
       <tr class='text-center'>
-        <th style='width: 10%'><?php echo $lang->book->type;?></th>
-        <th style='width: 10%'><?php echo $lang->book->author;?></th>
+        <th class='w-p10'><?php echo $lang->book->type;?></th>
+        <th class='w-p10'><?php echo $lang->book->author;?></th>
         <th><?php echo $lang->book->title;?></th>
-        <th style='width: 30%'><?php echo $lang->book->alias;?></th>
-        <th style='width: 10%'><?php echo $lang->book->keywords;?></th>
-        <th style='width: 80px'><?php echo $lang->actions; ?></th>
+        <th class='w-p30'><?php echo $lang->book->alias;?></th>
+        <th class='w-p10'><?php echo $lang->book->keywords;?></th>
+        <th class='w-80px'><?php echo $lang->actions; ?></th>
       </tr>
     </thead>
 

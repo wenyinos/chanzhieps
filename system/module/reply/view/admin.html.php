@@ -4,11 +4,11 @@
   <table class='table table-hover table-bordered table-striped' id='replyList'>
     <thead>
       <tr class='text-center'>
-        <th style='width: 60px'><?php echo $lang->reply->id;?></th>
+        <th class='w-60px'><?php echo $lang->reply->id;?></th>
         <th><?php echo $lang->reply->content;?></th>
-        <th style='width: 120px'><?php echo $lang->reply->author;?></th>
-        <th style='width: 100px'><?php echo $lang->reply->addedDate;?></th>
-        <th style='width: 80px'><?php echo $lang->actions;?></th>
+        <th class='w-120px'><?php echo $lang->reply->author;?></th>
+        <th class='w-100px'><?php echo $lang->reply->addedDate;?></th>
+        <th class='w-80px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>

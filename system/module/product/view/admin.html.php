@@ -20,14 +20,14 @@
     <thead>
       <tr class='text-center'>
         <?php $vars = "categoryID=$categoryID&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
-        <th style='width: 60px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->product->id);?></th>
+        <th class='w-60px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->product->id);?></th>
         <th><?php commonModel::printOrderLink('name', $orderBy, $vars, $lang->product->name);?></th>
-        <th style='width: 15%'><?php commonModel::printOrderLink('category', $orderBy, $vars, $lang->product->category);?></th>
-        <th style='width: 10%'><?php commonModel::printOrderLink('amount', $orderBy, $vars, $lang->product->amount);?></th>
-        <th style='width: 160px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->product->addedDate);?></th>
-        <th style='width: 60px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->product->status);?></th>
-        <th style='width: 60px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->product->views);?></th>
-        <th style='width: 200px'><?php echo $lang->actions;?></th>
+        <th class='w-p15'><?php commonModel::printOrderLink('category', $orderBy, $vars, $lang->product->category);?></th>
+        <th class='w-p10'><?php commonModel::printOrderLink('amount', $orderBy, $vars, $lang->product->amount);?></th>
+        <th class='w-160px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->product->addedDate);?></th>
+        <th class='w-60px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->product->status);?></th>
+        <th class='w-60px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->product->views);?></th>
+        <th class='w-200px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>

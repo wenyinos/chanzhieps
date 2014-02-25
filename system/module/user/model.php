@@ -109,7 +109,7 @@ class userModel extends model
      * @access public          
      * @return array           
      */
-    public function getRealName($users)
+    public function getRealNamePairs($users)
     {
         $users = $this->dao->select('account, realname')->from(TABLE_USER)->where('account')->in($users)->fetchPairs('account');
         if(!$users) return array();     

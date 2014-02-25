@@ -18,7 +18,7 @@
     <form method='post' id='ajaxForm'>
       <table align='center' class='table table-form'>
         <tr>
-          <th style='width:120px'><?php echo $lang->block->type;?></th>
+          <th class='w-120px'><?php echo $lang->block->type;?></th>
           <td><?php echo $this->block->createTypeSelector($type, $block->id);?></td>
         </tr>
         <tr>

@@ -17,8 +17,8 @@
     <form method='post' id='ajaxForm'>
       <table class='table table-form'>
         <tr>
-          <th style='width:100px'><?php echo $lang->company->contacts;?></th> 
-          <td style='width:40%'><?php echo html::input('contacts', isset($contact->contacts) ? $contact->contacts : '', "class='form-control'");?></td><td></td>
+          <th class='w-100px'><?php echo $lang->company->contacts;?></th> 
+          <td class='w-p40'><?php echo html::input('contacts', isset($contact->contacts) ? $contact->contacts : '', "class='form-control'");?></td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->company->phone;?></th> 

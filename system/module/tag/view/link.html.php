@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<div class='modal-dialog' style='width:600px;'>
+<div class='modal-dialog w-600px'>
   <div class='modal-content'>
     <div class='modal-header'>
       <?php echo html::closeButton();?>

@@ -24,6 +24,11 @@ class threadModel extends model
         $thread = $this->dao->findById($threadID)->from(TABLE_THREAD)->fetch();
         if(!$thread) return false;
 
+        $speaker = array();
+        $speaker[$thread->editor] = $thread->editor;
+        $speaker = $this->loadModel('user')->getRealNamePairs($speaker);
+        $thread->editorRealname = !empty($thread->editor) ? $speaker[$thread->editor] : '';
+
         $thread->files = $this->loadModel('file')->getByObject('thread', $thread->id);
         return $thread;
     }
@@ -50,22 +55,9 @@ class threadModel extends model
             ->page($pager)
             ->fetchAll('id');
 
-        $speakers = array();
-        foreach($threads as $thread)
-        {
-            $speakers[$thread->author]    = $thread->author;
-            $speakers[$thread->repliedBy] = $thread->repliedBy;
-        }
-
-        $speakers = $this->loadModel('user')->getRealName($speakers);
-
-        foreach($threads as $thread) 
-        {
-           $thread->authorRealname    = !empty($thread->author) ? $speakers[$thread->author] : '';
-           $thread->repliedByRealname = !empty($thread->repliedBy) ? $speakers[$thread->repliedBy] : '';
-        }
-
         if(!$threads) return array();
+
+        $this->setRealNames($threads);
 
         return $this->process($threads);
     }
@@ -81,8 +73,11 @@ class threadModel extends model
     {
         $globalSticks = $this->dao->select('*')->from(TABLE_THREAD)->where('stick')->eq(2)->orderBy('id desc')->fetchAll();
         $boardSticks  = $this->dao->select('*')->from(TABLE_THREAD)->where('stick')->eq(1)->andWhere('board')->eq($board)->orderBy('id desc')->fetchAll();
+        $sticks       = array_merge($globalSticks, $boardSticks);
 
-        return array_merge($globalSticks, $boardSticks);
+        $this->setRealNames($sticks);
+
+        return $sticks;
     }
 
     /**
@@ -373,14 +368,12 @@ class threadModel extends model
      */
     public function printSpeaker($speaker)
     {
-        $speaker->joinShort = str_replace(date('Y-'), '', substr($speaker->join, 0, 10));
-        $speaker->lastShort = str_replace(date('Y-'), '', substr($speaker->last, 0, 10));
         echo  <<<EOT
         <strong class='thread-author'><i class='icon-user'></i> {$speaker->realname}</strong>
         <ul class='list-unstyled'>
           <li><small>{$this->lang->user->visits}: </small><span>{$speaker->visits}</span></li>
-          <li><small>{$this->lang->user->join}: </small><span>{$speaker->joinShort}</span></li>
-          <li><small>{$this->lang->user->last}: </small><span>{$speaker->lastShort}</span></li>
+          <li><small>{$this->lang->user->join}: </small><span>{$speaker->join}</span></li>
+          <li><small>{$this->lang->user->last}: </small><span>{$speaker->last}</span></li>
         </ul>
 EOT;
 
@@ -439,5 +432,32 @@ EOT;
             ->leftJoin(TABLE_THREAD)->alias('t2')->on('t1.id = t2.board')
             ->where('t2.id')->eq($thread)
             ->fetch('moderators');
+    }
+
+    /**
+     * Set real name for author and editor of threads.
+     * 
+     * @param  array     $threads 
+     * @access public
+     * @return void
+     */
+    public function setRealNames($threads)
+    {
+        $speakers = array();
+        foreach($threads as $thread)
+        {
+            $speakers[$thread->author]    = $thread->author;
+            $speakers[$thread->editor]    = $thread->editor;
+            $speakers[$thread->repliedBy] = $thread->repliedBy;
+        }
+
+        $speakers = $this->loadModel('user')->getRealNamePairs($speakers);
+
+        foreach($threads as $thread) 
+        {
+           $thread->authorRealname    = !empty($thread->author) ? $speakers[$thread->author] : '';
+           $thread->editorRealname    = !empty($thread->editor) ? $speakers[$thread->editor] : '';
+           $thread->repliedByRealname = !empty($thread->repliedBy) ? $speakers[$thread->repliedBy] : '';
+        }
     }
 }

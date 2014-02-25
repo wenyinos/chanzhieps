@@ -18,7 +18,7 @@
         <table class='table table-bordered table-form'>
           <thead>
             <tr class='text-center'>
-              <th style='width:20%'><?php echo $lang->install->key;?></th>
+              <th class='w-p20'><?php echo $lang->install->key;?></th>
               <th colspan='2'><?php echo $lang->install->value?></th>
             </tr>
           </thead>

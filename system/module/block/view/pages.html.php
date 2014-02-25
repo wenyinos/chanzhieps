@@ -15,7 +15,7 @@
   <div class='panel-heading'><strong><i class='icon-columns'></i> <?php echo $lang->block->browseRegion;?></strong></div>
   <table class='table table-bordered table-hover table-striped'>
     <tr>
-      <th style='width: 200px'><?php echo $lang->block->page;?></th>
+      <th class='w-200px'><?php echo $lang->block->page;?></th>
       <th class='text-center'><?php echo $lang->block->regionList;?></th>
     </tr>
     <?php foreach($this->lang->block->pages as $page => $name):?>

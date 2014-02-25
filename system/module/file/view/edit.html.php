@@ -1,4 +1,4 @@
-<div class='modal-dialog' style='width: 500px'>
+<div class='modal-dialog w-500px'>
   <div class='modal-content'>
     <div class='modal-header'>
       <h4 class='modal-title'><i class='icon-edit'></i> <?php echo $lang->file->edit;?></h4>
@@ -7,7 +7,7 @@
       <form method='post' enctype='multipart/form-data' id='fileForm' action='<?php echo $this->createLink('file', 'edit', "fileID=$file->id")?>'>
         <table class='table table-form'>
           <tr>
-            <th style='width: 80px'><?php echo $lang->file->title;?></th> 
+            <th class='w-80px'><?php echo $lang->file->title;?></th> 
             <td><?php echo html::input('title',$file->title, "class='form-control'");?></td>
           </tr>
           <tr>

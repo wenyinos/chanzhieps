@@ -32,8 +32,8 @@
       <table class='table table-form'>
         <?php if($type != 'page'):?>
         <tr>
-          <th style='width: 100px'><?php echo $lang->article->category;?></th>
-          <td style="width: 40%"><?php echo html::select("categories[]", $categories, $currentCategory, "multiple='multiple' class='form-control chosen'");
+          <th class='w-100px'><?php echo $lang->article->category;?></th>
+          <td class='w-p40'><?php echo html::select("categories[]", $categories, $currentCategory, "multiple='multiple' class='form-control chosen'");
         ?></td><td></td>
         </tr>
         <tr>
@@ -73,32 +73,33 @@
           <th><?php echo $lang->article->keywords;?></th>
           <td colspan='2'><?php echo html::input('keywords', '', "class='form-control'");?></td>
         </tr>
-      <tr>
-        <th><?php echo $lang->article->summary;?></th>
-        <td colspan='2'><?php echo html::textarea('summary', '', "rows='2' class='form-control'");?></td>
-      </tr>
-      <tr>
-        <th><?php echo $lang->article->content;?></th>
-        <td colspan='2'><?php echo html::textarea('content', '', "rows='10' class='form-control'");?></td>
-      </tr>
-      <tr>
-        <th><?php echo $lang->article->addedDate;?></th>
-        <td>
-          <div class="input-append date">
-            <?php echo html::input('addedDate', date('Y-m-d H:i'), "class='form-control'");?>
-            <span class='add-on'><button class="btn btn-default" type="button"><i class="icon-calendar"></i></button></span>
-          </div>
-        </td>
-        <td><span class="help-inline"><?php echo $lang->article->note->addedDate;?></span></td>
-      </tr>
-      <tr>
-        <th><?php echo $lang->article->status;?></th>
-        <td><?php echo html::radio('status', $lang->article->statusList, 'normal');?></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td colspan='2'><?php echo html::submitButton();?></td>
-      </div>
+        <tr>
+          <th><?php echo $lang->article->summary;?></th>
+          <td colspan='2'><?php echo html::textarea('summary', '', "rows='2' class='form-control'");?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->article->content;?></th>
+          <td colspan='2'><?php echo html::textarea('content', '', "rows='10' class='form-control'");?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->article->addedDate;?></th>
+          <td>
+            <div class="input-append date">
+              <?php echo html::input('addedDate', date('Y-m-d H:i'), "class='form-control'");?>
+              <span class='add-on'><button class="btn btn-default" type="button"><i class="icon-calendar"></i></button></span>
+            </div>
+          </td>
+          <td><span class="help-inline"><?php echo $lang->article->note->addedDate;?></span></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->article->status;?></th>
+          <td><?php echo html::radio('status', $lang->article->statusList, 'normal');?></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td colspan='2'><?php echo html::submitButton();?></td>
+        </tr>
+      </table>
     </form>
   </div>
 </div>

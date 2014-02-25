@@ -21,8 +21,8 @@ js::set('wholeResult', $wholeResult);
       <table class='table table-bordered'>
         <thead>
           <tr>
-            <th style='width: 20%'><?php echo $lang->install->checkItem;?></th>
-            <th style='width: 20%'><?php echo $lang->install->current?></th>
+            <th class='w-p20'><?php echo $lang->install->checkItem;?></th>
+            <th class='w-p20'><?php echo $lang->install->current?></th>
             <th><?php echo $lang->install->result?></th>
             <th class='hide-on-ok'><?php echo $lang->install->action?></th>
           </tr>

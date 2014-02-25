@@ -24,9 +24,9 @@
 <table class='table table-bordered'>
   <thead>
     <tr>
-      <th style='width:60px'><?php echo $lang->message->id;?></th>
+      <th class='w-60px'><?php echo $lang->message->id;?></th>
       <th><?php echo $lang->message->content;?></th>
-      <th class='text-center' style='width:180px'><?php echo $lang->actions;?></th>
+      <th class='text-center w-180px'><?php echo $lang->actions;?></th>
     </tr>
   </thead>
   <tbody>

@@ -18,8 +18,8 @@
     <form method='post' id='ajaxForm'>
       <table class='table table-form'>
         <tr>
-          <th style='width:100px'><?php echo $lang->company->name;?></th>
-          <td style='width:50%'><?php echo html::input('name', isset($this->config->company->name) ? $this->config->company->name : '', "class='form-control'");?></td><td></td>
+          <th class='w-100px'><?php echo $lang->company->name;?></th>
+          <td class='w-p50'><?php echo html::input('name', isset($this->config->company->name) ? $this->config->company->name : '', "class='form-control'");?></td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->company->desc;?></th> 
