@@ -214,6 +214,8 @@ tr.text-center > td.text-left, tr.text-center > th.text-left {text-align: left;}
 .label{font-size: 12px;}
 
 /* form */
+.input-group-addon .checkbox {padding-top: 4px;}
+
 .placeholder {color: #aaa;}
 
 .form-horizontal .control-label{padding-right: 0;}
