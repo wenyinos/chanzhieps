@@ -87,8 +87,8 @@
           <div class="input-append date">
             <?php echo html::input('addedDate', date('Y-m-d H:i'), "class='form-control'");?>
             <span class='add-on'><button class="btn btn-default" type="button"><i class="icon-calendar"></i></button></span>
-          </td>
-        </div>
+          </div>
+        </td>
         <td><span class="help-inline"><?php echo $lang->article->note->addedDate;?></span></td>
       </tr>
       <tr>
