@@ -22,6 +22,9 @@ $lang->block->select     = '请选择区块';
 $lang->block->categories = '分类';
 $lang->block->showImage  = '显示图片';
 $lang->block->product    = '产品';
+$lang->block->showTitle  = '显示标题';
+$lang->block->showBorder = '显示边框';
+$lang->block->product    = '产品';
 
 $lang->block->add          = "添加";
 $lang->block->create       = '添加区块';
