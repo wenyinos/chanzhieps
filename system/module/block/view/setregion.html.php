@@ -13,23 +13,22 @@
 <?php include '../../common/view/header.admin.html.php'; ?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-cog'></i> <?php echo $lang->block->setPage . ' - '. $lang->block->pages[$page] . ' - ' . $lang->block->regions->{$page}[$region];?></strong></div>
-    <form id='ajaxForm' method='post'>
+    <form id='ajaxForm' class='table-form' method='post'>
       <table class='table table-hover table-striped table-bordered'>
-        <caption></caption>
         <thead>
           <tr>
-            <th class='text-center col-xs-4'><?php echo $lang->block->title;?></th>
-            <th><?php echo $lang->actions; ?></th>
+            <th class='text-center col-xs-8'><?php echo $lang->block->title;?></th>
+            <th class='w-150px'><?php echo $lang->actions;?></th>
           </tr>
         </thead>
         <tbody>
         <?php foreach($blocks as $block) echo $this->block->createEntry($block);?>
         </tbody>
-        <tbody id='entry' class='hide'><?php echo $this->block->createEntry();?></tbody>
         <tfoot>
-          <tr> <td colspan='2' class='a-center'> <?php echo html::submitButton();?> </td> </tr>
+          <tr><td colspan='2' class='a-center'> <?php echo html::submitButton();?></td></tr>
         </tfoot>
       </table>
     </form>
-</div>
+    <table class='hide'><tbody id='entry'><?php echo $this->block->createEntry();?></tbody></table>
+  </div>
 <?php include '../../common/view/footer.admin.html.php';?>

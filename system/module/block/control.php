@@ -96,7 +96,7 @@ class block extends control
      */
     public function setRegion($page, $region)
     {
-        if($_POST)
+        if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             $result = $this->block->setRegion($page, $region);
 

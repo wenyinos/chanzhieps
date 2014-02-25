@@ -2,6 +2,15 @@ $(document).ready(function()
 {
     $(document).on('click', 'a.plus', function(){$(this).parents('tr').after($('#entry').html());});
 
+    /* Set border and title show. */
+    $(document).on('change', 'input[type=checkbox]', function()
+    { 
+        $('input[type=checkbox]').next('input[type=hidden]').val('0');
+        $('input:checked').next('input[type=hidden]').val('1');
+    });
+    
+    $('input[type=checkbox]').change();
+
     /* Fix edit link. */
     $(document).on('change', 'select', function()
     {

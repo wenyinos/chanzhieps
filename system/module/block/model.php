@@ -51,13 +51,16 @@ class blockModel extends model
         $pages      = "all,{$module}_{$method}";
         $rawLayouts = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->in($pages)->fetchGroup('page', 'region');
 
-        $blocks = '';
+        $blocks = array();
         foreach($rawLayouts as $page => $pageBlocks)
         {
-            foreach($pageBlocks as $regionBlocks) $blocks .= ',' . $regionBlocks->blocks;
+            foreach($pageBlocks as $regionBlocks) 
+            {
+                $regionBlocks = json_decode($regionBlocks->blocks);
+                foreach($regionBlocks as $block) $blocks[] = $block->id;
+            }
         }
 
-        $blocks = explode(',', $blocks);
         $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('id')->in($blocks)->fetchAll('id');
 
         $layouts = array();
@@ -67,10 +70,16 @@ class blockModel extends model
             foreach($pageBlocks as $region => $regionBlock)
             {
                 $layouts[$page][$region] = array();
-                $regionBlocks =  explode(',', $regionBlock->blocks);
+                $regionBlocks =  json_decode($regionBlock->blocks);
                 foreach($regionBlocks as $block)
                 {
-                    if(isset($blocks[$block])) $layouts[$page][$region][] = $blocks[$block];
+                    if(isset($blocks[$block->id])) 
+                    {
+                        $mergedBlock = $blocks[$block->id];
+                        $mergedBlock->showTitle  = $block->showTitle;
+                        $mergedBlock->showBorder = $block->showBorder;
+                        $layouts[$page][$region][] = $mergedBlock;
+                    }
                 }
             }
         }
@@ -87,14 +96,24 @@ class blockModel extends model
      */
     public function getRegionBlocks($page, $region)
     {
-        $blockIdList = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->fetch('blocks');
-        $blocks      = $this->dao->select('*')->from(TABLE_BLOCK)->where('id')->in($blockIdList)->fetchAll('id');
-        $blockIdList = explode(',', $blockIdList);
+        $regionBlocks = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->fetch('blocks');
+        $regionBlocks = json_decode($regionBlocks);
+        if(empty($regionBlocks)) return array();
+
+        $blockIdList = array();
+        foreach($regionBlocks as $block) $blockIdList[] = $block->id;
+
+        $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('id')->in($blockIdList)->fetchAll('id');
 
         $sortedBlocks = array();
-        foreach($blockIdList as $id) 
+        foreach($regionBlocks as $block) 
         {
-            if(isset($blocks[$id])) $sortedBlocks[$id] = $blocks[$id];
+            
+            if(!isset($blocks[$block->id])) continue;
+
+            $sortedBlocks[$block->id] = $blocks[$block->id];
+            $sortedBlocks[$block->id]->showTitle  = $block->showTitle;
+            $sortedBlocks[$block->id]->showBorder = $block->showBorder;
         }
         return $sortedBlocks;
     }
@@ -156,7 +175,27 @@ class blockModel extends model
         $type    = isset($block->type) ? $block->type : '';
 
         $entry = "<tr class='v-middle'>";
-        $entry .= '<td>' . html::select('blocks[]', $blockOptions, $blockID, "class='form-control'") . '</td>';
+        $entry .= "<td><div class='input-group'>" . html::select('blocks[]', $blockOptions, $blockID, "class='form-control'");
+
+        $showTitleChecked = isset($block->showTitle) && $block->showTitle ? 'checked' : '';
+        $showBorderChecked = isset($block->showBorder) && $block->showBorder ? 'checked' : '';
+        $entry .= "
+            <span class='input-group-btn'></span>
+            <div class='input-group-btn'>
+                     <div class='checkbox'>
+                       <label>
+                         <input type='checkbox' {$showTitleChecked} value='1'><input type='hidden' name='showTitle[]' /><span>{$this->lang->block->showTitle}</span>
+                       </label>
+                     </div>
+                   </div>
+                   <div class='input-group-btn'>
+                     <div class='checkbox'>
+                       <label>
+                         <input type='checkbox' {$showBorderChecked} value='1'><input type='hidden' name='showBorder[]' /><span>{$this->lang->block->showBorder}</span>
+                       </label>
+                     </div>
+                   </div>
+                 </div></td>";
         $entry .= '<td class="text-middle">';
         $entry .= html::a('javascript:;', $this->lang->block->add, "class='plus'");
         $entry .= html::a('javascript:;', $this->lang->delete, "class='delete'");
@@ -245,7 +284,21 @@ class blockModel extends model
         $layout = new stdclass();
         $layout->page   = $page;
         $layout->region = $region;
-        $layout->blocks = trim(join($_POST['blocks'], ','), ',');
+
+        if(!$this->post->blocks)
+        {
+            $this->dao->delete()->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->exec();
+            if(!dao::isError()) return true;
+        }
+
+        $blocks = array();
+        foreach($this->post->blocks as $key => $block)
+        {
+            $blocks[$key]['id']      = $block;
+            $blocks[$key]['showTitle']  = $this->post->showTitle[$key];
+            $blocks[$key]['showBorder'] = $this->post->showBorder[$key];
+        }
+        $layout->blocks = json_encode($blocks);
 
         $count = $this->dao->select('count(*) as count')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->fetch('count');
 

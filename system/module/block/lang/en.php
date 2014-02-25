@@ -22,6 +22,8 @@ $lang->block->select     = 'Please select a block';
 $lang->block->categories = 'Categories';
 $lang->block->showImage  = 'Show image';
 $lang->block->product    = 'Product';
+$lang->block->showTitle  = 'Show Title';
+$lang->block->showBorder = 'Show Border';
 
 $lang->block->add          = "Add";
 $lang->block->create       = 'Create Block';

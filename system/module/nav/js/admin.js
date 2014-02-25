@@ -118,8 +118,6 @@ $(document).ready(function()
         $('input:checked').parent().next('input[type=hidden]').val('_blank');
     });
 
-    
-
 });
 
 /**
