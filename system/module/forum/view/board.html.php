@@ -20,7 +20,7 @@
         <th class='w-100px'><?php echo $lang->thread->postedDate;?></th>
         <th class='w-50px'><?php echo $lang->thread->views;?></th>
         <th class='w-50px'><?php echo $lang->thread->replies;?></th>
-        <th class='w-200px'><?php echo $lang->thread->lastReply;?></th>
+        <th class='w-250px'><?php echo $lang->thread->lastReply;?></th>
       </tr>  
     </thead>
     <tbody>
@@ -52,11 +52,11 @@
       <tr class='text-center'>
         <td class='w-10px'><?php echo $thread->isNew ? "<span class='text-success'><i class='icon-comment-alt icon-large'></i></span>" : "<span class='text-muted'><i class='icon-comment-alt icon-large'></i></span>";?></td>
         <td class='text-left'><?php echo html::a($this->createLink('thread', 'view', "id=$thread->id"), $thread->title);?></td>
-        <td class='w-120px' class='text-left'><strong><?php echo $thread->authorRealname;?></strong></td>
-        <td class='w-100px'><?php echo substr($thread->addedDate, 5, -3);?></td>
-        <td class='w-30px'><?php echo $thread->views;?></td>
-        <td class='w-30px'><?php echo $thread->replies;?></td>
-        <td class='w-150px' class='text-left'>
+        <td class='text-left'><strong><?php echo $thread->authorRealname;?></strong></td>
+        <td><?php echo substr($thread->addedDate, 5, -3);?></td>
+        <td><?php echo $thread->views;?></td>
+        <td><?php echo $thread->replies;?></td>
+        <td class='text-left'>
           <?php 
           if($thread->replies)
           {
