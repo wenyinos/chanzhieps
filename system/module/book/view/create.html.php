@@ -17,7 +17,7 @@
     <form id='ajaxForm' method='post' class='form-inline'>
       <table class='table table-form'>
         <tr>
-          <th style='width: 100px'><?php echo $lang->book->author;?></th>
+          <th class='w-100px'><?php echo $lang->book->author;?></th>
           <td><?php echo html::input('author', $app->user->realname, "class='form-control'");?></td>
         </tr>
         <tr>

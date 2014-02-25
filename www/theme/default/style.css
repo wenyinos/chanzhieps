@@ -9,7 +9,7 @@
 * @link        http://www.chanzhi.org
 */
 
-/*-----------------------WIDTH SETTING--------------------------*/
+/*--- WIDTH SETTING ---*/
 .w-p5  {width: 5%}
 .w-p10 {width: 10%}
 .w-p15 {width: 15%}
@@ -50,12 +50,15 @@
 .w-140px {width:140px}
 .w-150px {width:150px}
 .w-160px {width:160px}
+.w-180px {width:180px}
 .w-200px {width:200px}
 .w-300px {width:300px}
 .w-400px {width:400px}
+.w-450px {width:450px}
 .w-500px {width:500px}
 .w-600px {width:600px}
 .w-700px {width:700px}
+.w-1000px {width:1000px}
 
 .w-id        {width:55px;}
 .w-pri       {width:30px;}
@@ -66,6 +69,9 @@
 .w-status    {width:50px;}
 .w-type      {width:80px;}
 .w-resolution{width:60px;}
+
+/* --- CSS HELPERS --- */
+.borderless {border: none}
 
 /* --- LAYOUT SETTING --- */
 /* containers. */

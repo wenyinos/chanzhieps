@@ -1,10 +1,10 @@
-<div class="modal-dialog" style='width:1000px'>
-  <div class="modal-content">
-    <div class="modal-header">
+<div class='modal-dialog w-1000px'>
+  <div class='modal-content'>
+    <div class='modal-header'>
       <?php echo html::closeButton();?>
-      <h4 class="modal-title" id="ajaxModalTitle"><i class="icon-paper-clip"></i> <?php echo $lang->file->browse;?></h4>
+      <h4 class='modal-title' id='ajaxModalTitle'><i class='icon-paper-clip'></i> <?php echo $lang->file->browse;?></h4>
     </div>
-    <div class="modal-body">
+    <div class='modal-body'>
       <table class='table table-bordered'>
         <thead>
           <tr>

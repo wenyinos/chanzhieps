@@ -20,15 +20,15 @@
       <tbody>
         <?php foreach($parentBoard->children as $childBoard):?>
         <tr class='text-center text-middle'>
-          <td style='width: 20px'><?php echo $this->forum->isNew($childBoard) ? "<span class='text-success'><i class='icon-comment icon-large'></i></span>" : "<span class='text-muted'><i class='icon-comment icon-large'></i></span>"; ?></td>
+          <td class='w-20px'><?php echo $this->forum->isNew($childBoard) ? "<span class='text-success'><i class='icon-comment icon-large'></i></span>" : "<span class='text-muted'><i class='icon-comment icon-large'></i></span>"; ?></td>
           <td class='text-left'>
             <strong><?php echo html::a(inlink('board', "id=$childBoard->id", "category={$childBoard->alias}"), $childBoard->name);?></strong><br />
             <small class='text-muted'><?php echo $childBoard->desc;?></small>
           </td>
-          <td style='width: 50px'><strong><nobr><?php echo trim($childBoard->moderators, ',');?></nobr></strong></td>
-          <td style='width: 70px'><?php echo $childBoard->threads;?></td>
-          <td style='width: 70px'><?php echo $childBoard->posts;?></td>
-          <td style='width: 150px' class='text-left'>
+          <td class='w-50px'><strong><nobr><?php echo trim($childBoard->moderators, ',');?></nobr></strong></td>
+          <td class='w-70px'><?php echo $childBoard->threads;?></td>
+          <td class='w-70px'><?php echo $childBoard->posts;?></td>
+          <td class='w-150px' class='text-left'>
             <?php
             if($childBoard->postedBy)
             {

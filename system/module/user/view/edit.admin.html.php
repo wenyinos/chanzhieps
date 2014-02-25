@@ -7,8 +7,8 @@
         <form method='post' id='ajaxForm' class='form form-inline'>
           <table class='table table-form'>
             <tr>
-              <th style='width: 100px'><?php echo $lang->user->realname;?></th>
-              <td style='wdith: 40%'><?php echo html::input('realname', $user->realname, "class='form-control'");?></td><td></td>
+              <th class='w-100px'><?php echo $lang->user->realname;?></th>
+              <td class='w-p40'><?php echo html::input('realname', $user->realname, "class='form-control'");?></td><td></td>
             </tr>
             <tr>
               <th><?php echo $lang->user->admin;?></th>

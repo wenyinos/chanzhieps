@@ -9,7 +9,7 @@
     <tr>
       <td class='speaker'><?php $this->thread->printSpeaker($speakers[$thread->author]);?></td>
       <td id='<?php echo $thread->id;?>' class='thread-wrapper'>
-        <div class='thread-content'><?php echo $thread->content;?></div>
+        <div class='thread-content ariticle-content'><?php echo $thread->content;?></div>
         <?php $this->thread->printFiles($thread, $this->thread->canManage($board->id, $thread->author));?>
       </td>
     </tr>

@@ -6,15 +6,15 @@
     <thead>
       <tr class='text-center'>
         <?php $vars = "boardID=$boardID&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
-        <th style='width: 60px' class='text-center'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->thread->id);?></th>
+        <th class='text-center w-60px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->thread->id);?></th>
         <th><?php echo $lang->thread->title;?></th>
-        <th style='width: 120px'><?php commonModel::printOrderLink('author', $orderBy, $vars, $lang->thread->author);?></th>
-        <th style='width: 100px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->thread->postedDate);?></th>
-        <th style='width: 60px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->thread->views);?></th>
-        <th style='width: 60px'><?php commonModel::printOrderLink('replies', $orderBy, $vars, $lang->thread->replies);?></th>
-        <th style='width: 200px'><?php commonModel::printOrderLink('repliedDate', $orderBy, $vars, $lang->thread->lastReply);?></th>
-        <th style='width: 80px'><?php commonModel::printOrderLink('hidden', $orderBy, $vars, $lang->thread->status);?></th>
-        <th style='width: 100px'><?php echo $lang->actions;?></th>
+        <th class='w-120px'><?php commonModel::printOrderLink('author', $orderBy, $vars, $lang->thread->author);?></th>
+        <th class='w-100px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->thread->postedDate);?></th>
+        <th class='w-60px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->thread->views);?></th>
+        <th class='w-60px'><?php commonModel::printOrderLink('replies', $orderBy, $vars, $lang->thread->replies);?></th>
+        <th class='w-200px'><?php commonModel::printOrderLink('repliedDate', $orderBy, $vars, $lang->thread->lastReply);?></th>
+        <th class='w-80px'><?php commonModel::printOrderLink('hidden', $orderBy, $vars, $lang->thread->status);?></th>
+        <th class='w-100px'><?php echo $lang->actions;?></th>
       </tr>  
     </thead>
     <?php endif;?>

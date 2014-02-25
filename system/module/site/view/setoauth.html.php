@@ -26,8 +26,8 @@
       <form method='post' id='<?php echo $providerCode;?>AjaxForm' class='form-horizontal'>
         <table class="table table-form">
           <tr>
-            <th style='width:100px'><?php echo $lang->user->oauth->verification;?></th>
-            <td style='width:60%'>
+            <th class='w-100px'><?php echo $lang->user->oauth->verification;?></th>
+            <td class='w-p60'>
               <?php echo html::input('verification', isset($oauth->verification) ? $oauth->verification : '', "class='form-control'");?>
             </td><td></td>
           </tr>
@@ -51,7 +51,7 @@
           <?php endif;?>
           <tr>
            <th></th> <td><?php echo html::submitButton() . html::hidden('provider', $providerCode);?></td>
-          <tr>
+          </tr>
         </table>
       </form>
     </div>

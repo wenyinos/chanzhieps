@@ -22,8 +22,8 @@
     <table class='table table-form'>
       <?php if($type != 'page'):?>
       <tr>
-        <th style='width: 100px'><?php echo $lang->article->category;?></th>
-        <td style='width: 40%'>
+        <th class='w-100px'><?php echo $lang->article->category;?></th>
+        <td class='w-p40'>
         <?php 
         echo html::select("categories[]", $categories, array_keys($article->categories), "multiple='multiple' class='form-control chosen'");
         ?>

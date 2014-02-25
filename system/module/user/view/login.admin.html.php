@@ -9,7 +9,7 @@ css::internal('body{background-color:#f6f5f5}');
   <div id='adminLogin'>
     <form method='post' id='ajaxForm'>
       <div id='logo' class='text-center'><?php echo html::image("$themeRoot/default/images/main/logo.login.png");?></div>
-      <div id="formError" class="alert alert-danger" style="display:none"></div>
+      <div id='formError' class='alert alert-danger hide'></div>
       <?php echo html::input('account','',"class='form-control' placeholder='{$lang->user->inputAccountOrEmail}'");?>
       <?php echo html::password('password','',"class='form-control' placeholder='{$lang->user->inputPassword}'");?>
       <?php echo html::hidden('referer', $referer);?>

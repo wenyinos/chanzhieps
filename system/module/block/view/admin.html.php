@@ -20,10 +20,10 @@
   </div>
   <table class='table table-bordered table-hover table-striped'>
     <tr class='text-center'>
-      <th style='width: 100px' class='text-center'><?php echo $lang->block->id;?></th>
+      <th class='text-center w-100px'><?php echo $lang->block->id;?></th>
       <th><?php echo $lang->block->title;?></th>
       <th><?php echo $lang->block->type;?></th>
-      <th style='width: 200px'><?php echo $lang->actions;?></th>
+      <th class='w-200px'><?php echo $lang->actions;?></th>
     </tr>
     <?php foreach($blocks as $block):?>
     <tr class='text-center'>

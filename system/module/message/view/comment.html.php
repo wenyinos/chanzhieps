@@ -83,7 +83,7 @@ css::internal($pageCSS);
           ?>
         </div>
       </div>
-      <div class='form-group' id='captchaBox' style='display:none'></div>
+      <div class='form-group hide' id='captchaBox'></div>
       <div class='form-group'>
         <div class='col-sm-11 col-sm-offset-1'><?php echo html::submitButton();?></div>
       </div>

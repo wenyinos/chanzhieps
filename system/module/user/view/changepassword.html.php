@@ -1,12 +1,12 @@
-<div class="modal-dialog" style="width:500px;">
-  <div class="modal-content">
-    <div class="modal-header">
+<div class='modal-dialog w-500px'>
+  <div class='modal-content'>
+    <div class='modal-header'>
       <?php echo html::closeButton();?>
-      <h4 class="modal-title"><i class="icon-key"></i> <?php echo $lang->user->changePassword;?></h4>
+      <h4 class='modal-title'><i class='icon-key'></i> <?php echo $lang->user->changePassword;?></h4>
     </div>
-    <div class="modal-body">
+    <div class='modal-body'>
       <form method='post' action='<?php echo inlink('changepassword');?>' id='passwordForm' class='form'>
-        <table class='table table-form' style="border:none;">
+        <table class='table table-form borderless'>
           <tr>
             <th class="col-xs-4"><?php echo $lang->user->account;?></th>
             <td class="col-xs-6"><?php echo $this->app->user->account;?></td><td></td>

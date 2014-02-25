@@ -34,7 +34,7 @@ js::set('random', $this->session->random);
         <div class='panel-heading'><strong><?php echo $lang->user->login->welcome;?></strong></div>
         <div class='panel-body'>
           <form method='post' id='ajaxForm' role='form'>
-            <div class='form-group'><div id='formError' class='alert alert-danger' style='display:none'></div></div>
+            <div class='form-group hide'><div id='formError' class='alert alert-danger'></div></div>
             <div class='form-group'><?php echo html::input('account','',"placeholder='{$lang->user->inputAccountOrEmail}' class='form-control input-lg'");?></div>
             <div class='form-group'><?php echo html::password('password','',"placeholder='{$lang->user->inputPassword}' class='form-control input-lg'");?></div>
             <?php echo html::submitButton($lang->user->login->common, 'btn btn-primary btn-wider btn-lg');?> &nbsp; &nbsp; 

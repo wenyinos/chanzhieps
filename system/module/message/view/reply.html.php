@@ -1,4 +1,4 @@
-<div class='modal-dialog' style='width: 580px'>
+<div class='modal-dialog w-600px'>
   <div class='modal-content'>
     <div class='modal-header'>
       <?php echo html::closeButton();?>
@@ -8,7 +8,7 @@
       <form id='replyForm' method='post' action="<?php echo inlink('reply', "messageID={$message->id}");?>">
         <table class='table table-form'>
           <tr>
-            <th style='width: 80px'><?php echo $lang->message->from;?></th>
+            <th class='w-80px'><?php echo $lang->message->from;?></th>
             <td>
               <div class='required required-wrapper'></div>
               <?php echo html::input('from', $app->user->realname, "class='form-control'");?>
