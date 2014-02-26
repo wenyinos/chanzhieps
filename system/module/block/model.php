@@ -76,8 +76,8 @@ class blockModel extends model
                     if(isset($blocks[$block->id])) 
                     {
                         $mergedBlock = $blocks[$block->id];
-                        $mergedBlock->showTitle  = $block->showTitle;
-                        $mergedBlock->showBorder = $block->showBorder;
+                        $mergedBlock->titleless  = $block->titleless;
+                        $mergedBlock->borderless = $block->borderless;
                         $layouts[$page][$region][] = $mergedBlock;
                     }
                 }
@@ -112,8 +112,8 @@ class blockModel extends model
             if(!isset($blocks[$block->id])) continue;
 
             $sortedBlocks[$block->id] = $blocks[$block->id];
-            $sortedBlocks[$block->id]->showTitle  = $block->showTitle;
-            $sortedBlocks[$block->id]->showBorder = $block->showBorder;
+            $sortedBlocks[$block->id]->titleless  = $block->titleless;
+            $sortedBlocks[$block->id]->borderless = $block->borderless;
         }
         return $sortedBlocks;
     }
@@ -175,23 +175,25 @@ class blockModel extends model
         $type    = isset($block->type) ? $block->type : '';
 
         $entry = "<tr class='v-middle'>";
-        $entry .= "<td><div class='input-group'>" . html::select('blocks[]', $blockOptions, $blockID, "class='form-control'");
+        $entry .= "<td><div class='input-group'>";
+        $entry .= html::select('icon[]', $this->lang->block->iconList, $block->icon, "class='form-control'") . "<span class='input-group-btn'></span>";
+        $entry .= html::select('blocks[]', $blockOptions, $blockID, "class='form-control'");
 
-        $showTitleChecked = isset($block->showTitle) && $block->showTitle ? 'checked' : '';
-        $showBorderChecked = isset($block->showBorder) && $block->showBorder ? 'checked' : '';
+        $titlelessChecked = isset($block->titleless) && $block->titleless ? 'checked' : '';
+        $borderlessChecked = isset($block->borderless) && $block->borderless ? 'checked' : '';
         $entry .= "
             <span class='input-group-btn'></span>
             <div class='input-group-btn'>
                      <div class='checkbox'>
                        <label>
-                         <input type='checkbox' {$showTitleChecked} value='1'><input type='hidden' name='showTitle[]' /><span>{$this->lang->block->showTitle}</span>
+                         <input type='checkbox' {$titlelessChecked} value='1'><input type='hidden' name='titleless[]' /><span>{$this->lang->block->titleless}</span>
                        </label>
                      </div>
                    </div>
                    <div class='input-group-btn'>
                      <div class='checkbox'>
                        <label>
-                         <input type='checkbox' {$showBorderChecked} value='1'><input type='hidden' name='showBorder[]' /><span>{$this->lang->block->showBorder}</span>
+                         <input type='checkbox' {$borderlessChecked} value='1'><input type='hidden' name='borderless[]' /><span>{$this->lang->block->borderless}</span>
                        </label>
                      </div>
                    </div>
@@ -295,8 +297,8 @@ class blockModel extends model
         foreach($this->post->blocks as $key => $block)
         {
             $blocks[$key]['id']      = $block;
-            $blocks[$key]['showTitle']  = $this->post->showTitle[$key];
-            $blocks[$key]['showBorder'] = $this->post->showBorder[$key];
+            $blocks[$key]['titleless']  = $this->post->titleless[$key];
+            $blocks[$key]['borderless'] = $this->post->borderless[$key];
         }
         $layout->blocks = json_encode($blocks);
 

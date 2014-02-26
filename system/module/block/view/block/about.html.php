@@ -10,9 +10,14 @@
  * @link        http://www.chanzhi.org
 */
 ?>
-<div id="block<?php echo $block->id;?>" class='panel panel-block'>
+<?php
+$blockClass = '';
+if($block->borderless) $blockClass .= 'panel-borderless';
+if($block->titleless) $blockClass  .= 'panel-titleless';
+?>
+<div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
   <div class='panel-heading'>
-    <h4><i class='icon-group'></i> <?php echo $block->title;?></h4>
+    <h4><i class="<?php echo isset($block->icon) ? $block->icon : 'icon-group';?>"></i> <?php echo $block->title;?></h4>
   </div>
   <div class='panel-body'>
     <div class='article-content'><?php echo $this->config->company->desc;?></div>

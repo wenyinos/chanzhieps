@@ -446,6 +446,16 @@ class upgradeModel extends model
     }   
 
     /**
+     * Upgrade layouts when upgrade when 2.0.1.
+     * 
+     * @access public
+     * @return void
+     */
+    public function upgradeLayouts()
+    {
+    }
+
+    /**
      * Judge any error occers.
      * 
      * @access public

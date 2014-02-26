@@ -459,7 +459,6 @@ class bookModel extends model
 
            if($mode == 'new')
            {
-               $node->addedDate  = $now;
                $node->editedDate = $now;
                $this->dao->insert(TABLE_BOOK)->data($node)->exec();
 

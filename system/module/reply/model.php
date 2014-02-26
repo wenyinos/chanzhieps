@@ -297,8 +297,8 @@ class replyModel extends model
         $speakers = array();
         foreach($replies as $reply)
         {
-            $speakers[$reply->author] = $reply->author;
-            $speakers[$reply->editor] = $reply->editor;
+            $speakers[] = $reply->author;
+            $speakers[] = $reply->editor;
         }
 
         $speakers = $this->loadModel('user')->getRealNamePairs($speakers);
