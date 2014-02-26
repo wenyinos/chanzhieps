@@ -75,19 +75,27 @@ $.extend(
                         var errorLabel =  key + 'Label';
 
                         /* Create the error message. */
-                        var errorMSG = '<span id="'  + errorLabel + '" for="' + key  + '"  class="red">';
+                        var errorMSG = '<span id="'  + errorLabel + '" for="' + key  + '"  class="text-error red">';
                         errorMSG += $.type(value) == 'string' ? value : value.join(';');
                         errorMSG += '</span>';
 
                         /* Append error message, set style and set the focus events. */
                         $('#' + errorLabel).remove(); 
-                        $(errorOBJ).parent().append(errorMSG);
-                        $(errorOBJ).css('margin-bottom', 0);
-                        $(errorOBJ).css('border-color','#953B39')
-                        $(errorOBJ).change(function()
+                        var $errorOBJ = $(errorOBJ);
+                        if($errorOBJ.closest('.input-group').length > 0)
                         {
-                            $(errorOBJ).css('margin-bottom', 0);
-                            $(errorOBJ).css('border-color','')
+                            $errorOBJ.closest('.input-group').after(errorMSG)
+                        }
+                        else
+                        {
+                            $errorOBJ.parent().append(errorMSG);
+                        }
+                        $errorOBJ.css('margin-bottom', 0);
+                        $errorOBJ.css('border-color','#953B39')
+                        $errorOBJ.change(function()
+                        {
+                            $errorOBJ.css('margin-bottom', 0);
+                            $errorOBJ.css('border-color','')
                             $('#' + errorLabel).remove(); 
                         });
                     })
