@@ -48,3 +48,6 @@ $lang->board->moderators = '版主';
 
 $lang->board->readonlyList[0] = '开放';
 $lang->board->readonlyList[1] = '只读';
+
+$lang->board->placeholder = new stdclass();
+$lang->board->placeholder->moderators = '会员用户名, 多个用户名之间用逗号隔开';
