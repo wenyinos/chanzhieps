@@ -56,6 +56,12 @@ class seo
             /* Use book instead of help. */
             if($uri == 'help') $uri = 'book';
 
+            if($pageID and $module == 'blog' and count($items) == 1) 
+            {
+                $params['category'] = 0;
+                return seo::convertURI($module, 'index', $params, $pageID);
+            }
+
             /* Not an alias, return directly. */
             if(empty($categoryAlias[$uri])) return $uri;
 
