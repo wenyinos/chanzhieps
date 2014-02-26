@@ -56,13 +56,16 @@ class file extends control
             if(!$this->file->checkSavePath()) $this->send(array('error' => 1, 'message' => $this->lang->file->errorUnwritable));
             move_uploaded_file($file['tmpname'], $this->file->savePath . $file['pathname']);
             $this->file->compressImage($this->file->savePath . $file['pathname']);
-            $url =  $this->file->webPath . $file['pathname'];
+            $imageSize = $this->file->getImageSize($this->file->savePath . $file['pathname']);
+            $url       =  $this->file->webPath . $file['pathname'];
 
             $file['addedBy']   = $this->app->user->account;
             $file['addedDate'] = helper::now();
             $file['editor']    = 1;
+            $file['width']     = $imageSize['width'];
+            $file['height']    = $imageSize['height'];
             unset($file['tmpname']);
-            $this->dao->insert(TABLE_FILE)->data($file, false)->exec();
+            $this->dao->insert(TABLE_FILE)->data($file)->exec();
 
             $_SESSION['album'][$uid][] = $this->dao->lastInsertID();
 

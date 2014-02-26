@@ -330,6 +330,33 @@ class upgradeModel extends model
     }
 
     /**
+     * Set image size.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function setImageSize()
+    {
+        $this->loadModel('file');
+
+        $files = $this->dao->select('*')->from(TABLE_FILE)->fetchAll();
+
+        foreach($files as $file)
+        {
+            if(in_array($file->extension, $this->config->file->imageExtensions))
+            {
+                $imageSize    = $this->file->getImageSize($this->file->savePath . $file->pathname);
+                $file->width  = $imageSize['width'];
+                $file->height = $imageSize['height'];
+
+                $this->dao->update(TABLE_FILE)->data($file)->where('id')->eq($file->id)->exec();
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Get the upgrade sql file.
      * 
      * @param  string $version 
