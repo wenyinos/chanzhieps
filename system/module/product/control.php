@@ -15,13 +15,14 @@ class product extends control
     /**
      * Index page of product module.
      * 
+     * @param  int    $pageID 
      * @access public
      * @return void
      */
-    public function index()
+    public function index($pageID = 1)
     {
         /* Display browse page. */
-        exit($this->fetch('product', 'browse'));
+        exit($this->fetch('product', 'browse', "categoryID=0&pageID={$pageID}"));
     }
 
     /** 
@@ -35,7 +36,7 @@ class product extends control
     public function browse($categoryID = 0, $pageID = 1)
     {  
         $this->app->loadClass('pager', $static = true);
-        $pager = new pager(0, 15, $pageID);
+        $pager = new pager(0, 4, $pageID);
 
         $category   = $this->loadModel('tree')->getByID($categoryID, 'product');
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
