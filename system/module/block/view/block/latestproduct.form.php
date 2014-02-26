@@ -13,6 +13,10 @@
 <?php include '../../common/view/chosen.html.php';?>
 <?php $categories = $this->loadModel('tree')->getOptionMenu('product');?>
 <tr>
+  <th><?php echo $lang->block->icon;?></th>
+  <td><?php echo html::select('params[icon]', '', 'icon-th-large', 'class="chosen-icons" data-value="icon-th-large"');?></td>
+</tr>
+<tr>
   <th><?php echo $lang->block->categories;?></th>
   <td><?php echo html::select('params[category][]', $categories, isset($block) ? $block->content->category : '', "class='text-4 form-control chosen' multiple='multiple'");?></td>
 </tr>

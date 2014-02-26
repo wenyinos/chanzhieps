@@ -6,5 +6,6 @@
 $(document).ready(function()
 {
     $(".chosen").chosen({no_results_text: '<?php echo $lang->noResultsMatch;?>', placeholder_text:' ', disable_search_threshold: 10, width: '100%'});
+    $('select.chosen-icons').chosenIcons();
 });
 </script>

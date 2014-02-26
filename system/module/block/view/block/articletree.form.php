@@ -11,6 +11,10 @@
 */
 ?>
 <tr>
+  <th><?php echo $lang->block->icon;?></th>
+  <td><?php echo html::select('params[icon]', '', '', 'class="chosen-icons" data-value="icon-folder-close-alt"');?></td>
+</tr>
+<tr>
   <th><?php echo $lang->block->category->showChildren;?></th>
   <td><?php echo html::radio('params[showChildren]', $lang->block->category->showChildrenList, isset($block->content->showChildren) ? $block->content->showChildren : 'no');?></td>
 </tr>

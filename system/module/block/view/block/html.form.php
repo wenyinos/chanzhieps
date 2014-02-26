@@ -13,6 +13,10 @@
 <?php $config->block->editor->blockform =  array('id' => 'content', 'tools' => 'full', 'filterMode' => false); ?>
 <?php include '../../common/view/kindeditor.html.php';?>
 <tr>
+  <th><?php echo $lang->block->icon;?></th>
+  <td><?php echo html::select('params[icon]', '', '', 'class="chosen-icons" data-value="icon-file-alt"');?></td>
+</tr>
+<tr>
   <th><?php echo $lang->block->content;?></th>
   <td><?php echo html::textarea('content', isset($block) ? $block->content : '', 'rows=20 class=form-control');?></td>
 </tr>

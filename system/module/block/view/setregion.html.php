@@ -14,7 +14,7 @@
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-cog'></i> <?php echo $lang->block->setPage . ' - '. $lang->block->pages[$page] . ' - ' . $lang->block->regions->{$page}[$region];?></strong></div>
     <form id='ajaxForm' class='table-form' method='post'>
-      <table class='table table-hover table-striped table-bordered'>
+      <table class='table table-striped table-bordered'>
         <thead>
           <tr>
             <th class='text-center col-xs-8'><?php echo $lang->block->title;?></th>
