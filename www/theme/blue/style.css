@@ -21,7 +21,7 @@
   .navbar-default .navbar-collapse {border-top: 1px solid #7198d4}
 }
 /* Panel. */
-.panel > .panel-heading,.nav-stacked.nav-primary>li.nav-heading,.list > header, #navbar {background-color: #145bcc; background-repeat: repeat-x;background-image: -moz-linear-gradient(top, #2c6cd1 0%, #1252b7 100%);background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#2c6cd1), color-stop(100%,#1252b7));background-image: -webkit-linear-gradient(top, #2c6cd1 0%,#1252b7 100%);background-image: -o-linear-gradient(top, #2c6cd1 0%,#1252b7 100%);background-image: linear-gradient(top, #2c6cd1 0%,#1252b7 100%);color: #fff;border-color:#145bcc;}
+.panel > .panel-heading,.nav-stacked.nav-primary>li.nav-heading,.list > header, #navbar {background-color: #145bcc; background-repeat: repeat-x;background-image: -ms-linear-gradient(top, #2c6cd1,#1252b7); background-image: -moz-linear-gradient(top, #2c6cd1 0%, #1252b7 100%);background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#2c6cd1), color-stop(100%,#1252b7));background-image: -webkit-linear-gradient(top, #2c6cd1 0%,#1252b7 100%);background-image: -o-linear-gradient(top, #2c6cd1 0%,#1252b7 100%);background-image: linear-gradient(top, #2c6cd1 0%,#1252b7 100%);color: #fff;border-color:#145bcc;}
 .panel > .panel-heading a{color: #f1f1f1}
 .panel.panel-pure > .panel-heading a{color: #145BCC}
 .panel.panel-pure .panel-heading{color: #666;border-color: #ddd}
