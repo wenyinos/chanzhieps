@@ -24,7 +24,7 @@ class settingModel extends model
      */
     public function getItem($paramString)
     {
-        return $this->createDAO($this->parseItemParam($paramString), 'select')->fetch('value', $autoCompany = false);
+        return $this->createDAO($this->parseItemParam($paramString), 'select')->fetch('value');
     }
 
     /**
@@ -36,7 +36,7 @@ class settingModel extends model
      */
     public function getItems($paramString)
     {
-        return $this->createDAO($this->parseItemParam($paramString), 'select')->fetchAll('id', $autoCompany = false);
+        return $this->createDAO($this->parseItemParam($paramString), 'select')->fetchAll('id');
     }
 
     /**
@@ -61,8 +61,6 @@ class settingModel extends model
         $item->section = $section;
         $item->key     = $key;
         $item->value   = $value;
-
-        $this->loadModel('file')->updateObjectID($this->post->uid, 0, $section);
 
         $this->dao->replace(TABLE_CONFIG)->data($item)->exec();
     }
@@ -163,7 +161,7 @@ class settingModel extends model
         $records = $this->dao->select('*')->from(TABLE_CONFIG)
             ->where('owner')->in($owner)
             ->orderBy('id')
-            ->fetchAll('id', false);
+            ->fetchAll('id');
         if(!$records) return array();
 
         /* Group records by owner and module. */
