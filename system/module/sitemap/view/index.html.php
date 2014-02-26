@@ -69,6 +69,16 @@
       </ul>
     </div>
     <?php endif;?>
+    <?php if(!empty($pages)):?>
+    <div class='clearfix sitemap-tree'>
+      <h4><?php echo $lang->sitemap->pages;?></h4>
+      <ul class='tree'>
+        <?php foreach($pages as $page):?>
+        <li><?php echo html::a(helper::createLink('page', 'view', "pageID={$page->id}", "name={$page->alias}"), $page->title);?></li>
+        <?php endforeach;?>
+      </ul>
+    </div>
+    <?php endif;?>
   </div>
 </div>
 <?php if($onlyBody == 'no') include '../../common/view/footer.html.php';?>

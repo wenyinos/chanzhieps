@@ -62,4 +62,15 @@
     <priority>0.8</priority>
   </url>
   <?php endforeach;?>
+  <?php
+  foreach($pages as $page):
+  $url = str_replace('&', '&amp;', $systemURL . helper::createLink('page', 'view', "id=$page->id", "name=$page->alias"));
+  ?>
+  <url>
+    <loc><?php echo $url;?></loc>
+    <lastmod><?php echo substr($page->editedDate, 0, 10);?></lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <?php endforeach;?>
 </urlset>
