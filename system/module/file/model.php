@@ -50,11 +50,7 @@ class fileModel extends model
             $file->title = $file->title . ".$file->extension";
             if($file->isImage)
             {
-                $filePath = $this->app->wwwRoot . substr($file->fullURL, strpos($file->fullURL, '/data/'));
-                if(file_exists($filePath)) $size = getimagesize($filePath);
-                $width  = isset($size[0]) ? $size[0] : '';
-                $height = isset($size[1]) ? $size[1] : '';
-                $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->smallURL), "target='_blank' data-toggle='lightbox' data-width='{$width}' data-height='{$height}'") . '</li>';
+                $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->smallURL), "target='_blank' data-toggle='lightbox' data-width='{$file->width}' data-height='{$file->height}'") . '</li>';
             }
             else
             {
@@ -165,10 +161,13 @@ class fileModel extends model
 
         foreach($files as $id => $file)
         {   
+            $imageSize = array('width' => 0, 'height' => 0);
+
             if(!move_uploaded_file($file['tmpname'], $this->savePath . $file['pathname'])) return false;
             if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions))
             {
                 $this->compressImage($this->savePath . $file['pathname']);
+                $imageSize = $this->getImageSize($this->savePath . $file['pathname']);
             }
 
             $file['objectType'] = $objectType;
@@ -176,6 +175,8 @@ class fileModel extends model
             $file['addedBy']    = $this->app->user->account;
             $file['addedDate']  = $now;
             $file['extra']      = $extra;
+            $file['width']      = $imageSize['width'];
+            $file['height']     = $imageSize['height'];
             unset($file['tmpname']);
             $this->dao->insert(TABLE_FILE)->data($file)->exec();
             $fileTitles[$this->dao->lastInsertId()] = $file['title'];
@@ -247,6 +248,21 @@ class fileModel extends model
         if(empty($extension)) return 'txt';
         if(strpos($this->config->file->dangers, $extension) !== false) return 'txt';
         return $extension;
+    }
+
+    /**
+     * Get image width and height.
+     * 
+     * @param  string    $imagePath 
+     * @access public
+     * @return array
+     */
+    public function getImageSize($imagePath)
+    {
+        if(!file_exists($imagePath)) return array('width' => 0, 'height' => 0);
+
+        list($width, $height) = getimagesize($imagePath);
+        return array('width' => $width, 'height' => $height);
     }
 
     /**
@@ -337,15 +353,19 @@ class fileModel extends model
             }
 
             $realPathName = $this->savePath . $fileInfo->pathname;
+            $imageSize    = array('width' => 0, 'height' => 0);
             move_uploaded_file($file['tmpname'], $realPathName);
             if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions))
             {
                 $this->compressImage($realPathName);
+                $imageSize = $this->getImageSize($realPathName);
             }
 
             $fileInfo->addedBy   = $this->app->user->account;
             $fileInfo->addedDate = helper::now();
             $fileInfo->size      = $file['size'];
+            $fileInfo->width     = $imageSize['width'];
+            $fileInfo->height    = $imageSize['height'];
             $this->dao->update(TABLE_FILE)->data($fileInfo)->where('id')->eq($fileID)->exec();
             return true;
         }
@@ -418,6 +438,7 @@ class fileModel extends model
         foreach($out[3] as $key => $base64Image)
         {
             $imageData = base64_decode($base64Image);
+            $imageSize = array('width' => 0, 'height' => 0);
 
             $file['extension'] = $out[2][$key];
             $file['pathname']  = $this->setPathName($key, $file['extension']);
@@ -429,6 +450,11 @@ class fileModel extends model
 
             file_put_contents($this->savePath . $file['pathname'], $imageData);
             $this->compressImage($this->savePath . $file['pathname']);
+
+            $imageSize      = $this->getImageSize($this->savePath . $file['pathname']);
+            $file['width']  = $imageSize['width'];
+            $file['height'] = $imageSize['height'];
+
             $this->dao->insert(TABLE_FILE)->data($file)->exec();
             $_SESSION['album'][$uid][] = $this->dao->lastInsertID();
 
