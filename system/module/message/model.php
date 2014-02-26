@@ -140,12 +140,14 @@ class messageModel extends model
      */
     public function post($type)
     {
+        $account = $this->app->user->account;
         $message = fixer::input('post')
             ->add('date', helper::now())
             ->add('type', $type)
             ->setDefault('public', '1')
             ->setIF(isset($_POST['secret']) and $_POST['secret'] == 1, 'public', '0')
             ->setIF($type == 'message', 'to', 'admin')
+            ->setIF($account != 'guest', 'account', $account)
             ->add('ip', $this->server->REMOTE_ADDR)
             ->add('status', '0')
             ->get();
@@ -181,6 +183,7 @@ class messageModel extends model
             ->add('type', 'reply')
             ->add('date', helper::now())
             ->add('public', 1)
+            ->add('account', $this->app->user->account)
             ->add('ip', $this->server->REMOTE_ADDR)
             ->remove('status')
             ->get();
