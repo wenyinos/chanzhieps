@@ -21,6 +21,7 @@ $lang->block->regionList = 'Regions List';
 $lang->block->select     = 'Please select a block';
 $lang->block->categories = 'Categories';
 $lang->block->showImage  = 'Show image';
+$lang->block->showTime   = 'Show time';
 $lang->block->product    = 'Product';
 $lang->block->titleless  = 'Hide Title';
 $lang->block->borderless = 'Hide Border';
