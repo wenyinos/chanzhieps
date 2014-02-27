@@ -9,4 +9,21 @@ $(document).ready(function()
     });
 
     $.setAjaxLoader('#treeMenuBox .ajax', '#categoryBox', function(){if($.fn.placeholder) $('[placeholder]').placeholder();});
+
+    setTimeout(function()
+    {
+        if(v.type == 'forum')
+        {
+            $('.treeview > li').each(function()
+            {
+                var li   = $(this);
+                var href = li.find('a[href*="children"]').attr('href');
+                if(li.find('ul').length || href == $('#childForm').attr('action')) return;
+
+                li.append("<div class='alert alert-warning hiding'><span><i class='icon-info-sign'></i> </span>" + v.lang['forumCategoryTip'] + " &nbsp; <a class='ajax alert-link' href='" + href + "'>" + v.lang['setChildren'] + " <i class='icon-double-angle-right'></i></a></div>");
+
+                li.find('.alert').slideDown('fast').find('a').click(function(){$(this).closest('.alert').slideUp('fast')});
+            });
+        }
+    }, 1000);
 })

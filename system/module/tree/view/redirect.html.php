@@ -12,12 +12,12 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 
-<div class='alert alert-warning'>
+<div class='alert alert-info'>
   <i class='icon-info-sign'></i>
   <div class='content'>
     <h4><?php echo $message; ?></h4>
     <p><?php echo $lang->tree->timeCountDown; ?></p>
-    <?php echo html::a($this->createLink('tree', 'browse', "type=$type"), $lang->tree->redirect, "class='btn btn-warning' id='countDownBtn'"); ?>
+    <?php echo html::a($this->createLink('tree', 'browse', "type=$type"), $lang->tree->redirect, "class='btn btn-primary' id='countDownBtn'"); ?>
   </div>
 </div>
 
