@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php'; ?>
+<?php include '../../common/view/chosen.html.php'; ?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-cog'></i> <?php echo $lang->block->setPage . ' - '. $lang->block->pages[$page] . ' - ' . $lang->block->regions->{$page}[$region];?></strong></div>
     <form id='ajaxForm' class='table-form' method='post'>
@@ -18,6 +19,7 @@
         <thead>
           <tr>
             <th class='text-center col-xs-8'><?php echo $lang->block->title;?></th>
+            <th class='w-60px'><?php echo $lang->block->grid;?></th>
             <th class='w-150px'><?php echo $lang->actions;?></th>
           </tr>
         </thead>

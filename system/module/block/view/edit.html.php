@@ -26,6 +26,13 @@
           <th><?php echo $lang->block->title;?></th>
           <td><?php echo html::input('title', $block->title, "class='form-control'");?></td>
         </tr>
+        <?php if(isset($config->block->defaultIcons[$type])):?>
+        <?php if(!isset($block->content->icon)) $block->content->icon = $config->block->defaultIcons[$type];?>
+        <tr>
+          <th><?php echo $lang->block->icon;?></th>
+          <td><?php echo html::select('params[icon]', '', '', "class='chosen-icons' data-value='{$block->content->icon}'");?></td>
+        </tr>
+        <?php endif;?>
         <?php echo $this->fetch('block', 'blockForm', 'type=' . $type . '&id=' . $block->id);?>
         <tr>
           <td></td>

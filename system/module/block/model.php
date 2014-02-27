@@ -84,6 +84,7 @@ class blockModel extends model
                     if(isset($blocks[$block->id])) 
                     {
                         $mergedBlock = $blocks[$block->id];
+                        if(isset($block->grid))       $mergedBlock->grid       = $block->grid;
                         if(isset($block->titleless))  $mergedBlock->titleless  = $block->titleless;
                         if(isset($block->borderless)) $mergedBlock->borderless = $block->borderless;
                         $layouts[$page][$region][] = $mergedBlock;
@@ -120,6 +121,7 @@ class blockModel extends model
             if(!isset($blocks[$block->id])) continue;
 
             $sortedBlocks[$block->id] = $blocks[$block->id];
+            $sortedBlocks[$block->id]->grid       = $block->grid;
             $sortedBlocks[$block->id]->titleless  = $block->titleless;
             $sortedBlocks[$block->id]->borderless = $block->borderless;
         }
@@ -181,10 +183,10 @@ class blockModel extends model
         $blockOptions += $this->getPairs();
         $blockID = isset($block->id) ? $block->id : '';
         $type    = isset($block->type) ? $block->type : '';
+        $grid    = isset($block->grid) ? $block->grid : '';
 
         $entry = "<tr class='v-middle'>";
         $entry .= "<td><div class='input-group'>";
-        $entry .= html::select('icon[]', $this->lang->block->iconList, $block->icon, "class='form-control'") . "<span class='input-group-btn'></span>";
         $entry .= html::select('blocks[]', $blockOptions, $blockID, "class='form-control'");
 
         $titlelessChecked = isset($block->titleless) && $block->titleless ? 'checked' : '';
@@ -192,20 +194,24 @@ class blockModel extends model
         $entry .= "
             <span class='input-group-btn'></span>
             <div class='input-group-btn'>
-                     <div class='checkbox'>
-                       <label>
-                         <input type='checkbox' {$titlelessChecked} value='1'><input type='hidden' name='titleless[]' /><span>{$this->lang->block->titleless}</span>
-                       </label>
-                     </div>
-                   </div>
-                   <div class='input-group-btn'>
-                     <div class='checkbox'>
-                       <label>
-                         <input type='checkbox' {$borderlessChecked} value='1'><input type='hidden' name='borderless[]' /><span>{$this->lang->block->borderless}</span>
-                       </label>
-                     </div>
-                   </div>
-                 </div></td>";
+              <div class='checkbox'>
+                 <label>
+                   <input type='checkbox' {$titlelessChecked} value='1'><input type='hidden' name='titleless[]' /><span>{$this->lang->block->titleless}</span>
+                 </label>
+              </div>
+            </div>
+            <div class='input-group-btn'>
+              <div class='checkbox'>
+                <label>
+                  <input type='checkbox' {$borderlessChecked} value='1'><input type='hidden' name='borderless[]' /><span>{$this->lang->block->borderless}</span>
+                </label>
+              </div>
+            </div></div></td>";
+
+        $entry .= "<td class='text-middle'>";
+        $entry .= html::select('grid[]', $this->lang->block->gridOptions, $grid, "class='form-control'");
+        $entry .= '</td>';
+
         $entry .= '<td class="text-middle">';
         $entry .= html::a('javascript:;', $this->lang->block->add, "class='plus'");
         $entry .= html::a('javascript:;', $this->lang->delete, "class='delete'");
@@ -304,7 +310,8 @@ class blockModel extends model
         $blocks = array();
         foreach($this->post->blocks as $key => $block)
         {
-            $blocks[$key]['id']      = $block;
+            $blocks[$key]['id']         = $block;
+            $blocks[$key]['grid']       = $this->post->grid[$key];
             $blocks[$key]['titleless']  = $this->post->titleless[$key];
             $blocks[$key]['borderless'] = $this->post->borderless[$key];
         }
@@ -349,6 +356,7 @@ class blockModel extends model
      */
     private function parseBlockContent($block, $containerHeader, $containerFooter)
     {
+        if(isset($block->grid) and $block->grid > 0) echo "<div class='col-md-{$block->grid}'>";
         $blockRoot = dirname(__FILE__) . '/ext/view/block/';
         $blockFile = $blockRoot . strtolower($block->type) . '.html.php';
         if(!file_exists($blockFile))
@@ -361,5 +369,6 @@ class blockModel extends model
         echo $containerHeader;
         include $blockFile;
         echo $containerFooter;
+        if(isset($block->grid) and $block->grid > 0) echo '</div>';
     }
 }

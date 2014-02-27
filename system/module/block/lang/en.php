@@ -24,6 +24,7 @@ $lang->block->showImage  = 'Show image';
 $lang->block->product    = 'Product';
 $lang->block->titleless  = 'Hide Title';
 $lang->block->borderless = 'Hide Border';
+$lang->block->grid       = '宽度';
 
 $lang->block->add          = "Add";
 $lang->block->create       = 'Create Block';
@@ -32,6 +33,9 @@ $lang->block->browseRegion = 'Browse Regions';
 $lang->block->edit         = 'Edit';
 $lang->block->view         = 'view';
 $lang->block->setPage      = 'Set page blocks';
+
+$lang->block->gridOptions = array('0' => 'Auto');
+for($i = 1; $i < 13; $i ++ ) $lang->block->gridOptions[$i] = "{$i}/12";
 
 $lang->block->typeList['html'] = 'Html block';
 $lang->block->typeList['code'] = 'Codes';

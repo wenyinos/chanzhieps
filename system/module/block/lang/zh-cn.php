@@ -25,6 +25,7 @@ $lang->block->product    = '产品';
 $lang->block->titleless  = '隐藏标题';
 $lang->block->borderless = '隐藏边框';
 $lang->block->icon       = '图标';
+$lang->block->grid       = '宽度';
 
 $lang->block->add          = "添加";
 $lang->block->create       = '添加区块';
@@ -33,6 +34,9 @@ $lang->block->browseRegion = '布局设置';
 $lang->block->edit         = '编辑区块';
 $lang->block->view         = '查看区块';
 $lang->block->setPage      = '配置页面';
+
+$lang->block->gridOptions = array('0' => '自动');
+for($i = 1; $i < 13; $i ++ ) $lang->block->gridOptions[$i] = "{$i}/12";
 
 $lang->block->typeList['html']     = '自定义区块';
 $lang->block->typeList['code']     = '源代码';
