@@ -35,6 +35,7 @@ class forumModel extends model
                 foreach($parentBoard->children as $childBoard) 
                 {
                     $childBoard->lastPostReplies = isset($replies[$childBoard->postID]) ? $replies[$childBoard->postID] : 0;
+                    $childBoard->moderators      = explode(',', trim($childBoard->moderators, ','));
                 }
                 $boards[] = $parentBoard;
             }
@@ -43,12 +44,20 @@ class forumModel extends model
         $speakers = array();
         foreach($boards as $parentBoard)
         {
-            foreach($parentBoard->children as $childBoard) $speakers[$childBoard->postedBy] = $childBoard->postedBy;
+            foreach($parentBoard->children as $childBoard)
+            {
+                foreach($childBoard->moderators as $moderators) $speakers[] = $moderators;
+                $speakers[] = $childBoard->postedBy;
+            }
         }
         $speakers = $this->loadModel('user')->getRealNamePairs($speakers);
         foreach($boards as $parentBoard)
         {
-            foreach($parentBoard->children as $childBoard) $childBoard->postedByRealname = !empty($childBoard->postedBy) ? $speakers[$childBoard->postedBy] : '';
+            foreach($parentBoard->children as $childBoard) 
+            {
+                foreach($childBoard->moderators as $key => $moderators) $childBoard->moderators[$key] = $speakers[$moderators];
+                $childBoard->postedByRealname = !empty($childBoard->postedBy) ? $speakers[$childBoard->postedBy] : '';
+            }
         }
 
         return $boards;

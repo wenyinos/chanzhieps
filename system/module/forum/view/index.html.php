@@ -25,7 +25,7 @@
             <strong><?php echo html::a(inlink('board', "id=$childBoard->id", "category={$childBoard->alias}"), $childBoard->name);?></strong><br />
             <small class='text-muted'><?php echo $childBoard->desc;?></small>
           </td>
-          <td class='w-50px'><strong><nobr><?php echo trim($childBoard->moderators, ',');?></nobr></strong></td>
+          <td class='w-50px'><strong><nobr><?php foreach($childBoard->moderators as $moderators) echo $moderators . ' ';?></nobr></strong></td>
           <td class='w-70px'><?php echo $childBoard->threads;?></td>
           <td class='w-70px'><?php echo $childBoard->posts;?></td>
           <td class='w-150px' class='text-left'>
