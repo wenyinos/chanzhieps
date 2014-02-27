@@ -221,7 +221,13 @@ class bookModel extends model
      */
     public function getNodeByID($nodeID, $replaceTag = true)
     {
-        $node = $this->dao->select('*')->from(TABLE_BOOK)->where('id')->eq($nodeID)->fetch();
+        $node = $this->dao->select('*')->from(TABLE_BOOK)
+            ->where('id')->eq($nodeID)
+            ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')
+            ->andWhere('addedDate')->le(helper::now())
+            ->fi()
+            ->fetch();
+
         if(!$node) $node = $this->dao->select('*')->from(TABLE_BOOK)->where('alias')->eq($nodeID)->fetch();
         if(!$node) return false;
 
@@ -448,14 +454,15 @@ class bookModel extends model
             $mode = $this->post->mode[$key];
 
             /* First, save the child without path field. */
-            $node->title    = $nodeTitle;
-            $node->type     = $this->post->type[$key];
-            $node->author   = $this->post->author[$key];
-            $node->alias    = $this->post->alias[$key];
-            $node->keywords = $this->post->keywords[$key];
-            $node->order    = $this->post->order[$key];
-            $node->alias    = seo::unify($node->alias, '-');
-            $node->keywords = seo::unify($node->keywords, ',');
+            $node->title     = $nodeTitle;
+            $node->type      = $this->post->type[$key];
+            $node->author    = $this->post->author[$key];
+            $node->alias     = $this->post->alias[$key];
+            $node->keywords  = $this->post->keywords[$key];
+            $node->addedDate = $this->post->addedDate[$key];
+            $node->order     = $this->post->order[$key];
+            $node->alias     = seo::unify($node->alias, '-');
+            $node->keywords  = seo::unify($node->keywords, ',');
 
            if($mode == 'new')
            {

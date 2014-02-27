@@ -12,6 +12,8 @@ $lang->book->type        = '类型';
 $lang->book->parent      = '类目';
 $lang->book->author      = '作者';
 $lang->book->editor      = '编辑者';
+$lang->book->addedDate   = '发布时间';
+$lang->book->editedDate  = '编辑时间';
 $lang->book->title       = '标题';
 $lang->book->keywords    = '关键词';
 $lang->book->summary     = '简介';
@@ -37,3 +39,6 @@ $lang->book->chapter  = '返回目录';
 $lang->book->back2Top = '返回顶部';
 
 $lang->book->aliasRepeat = '别名:<strong> %s </strong>不能重复添加。';
+
+$lang->book->note = new stdclass();
+$lang->book->note->addedDate = '可以延迟到选定的时间发布。';

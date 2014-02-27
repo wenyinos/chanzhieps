@@ -38,7 +38,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->article->author;?></th>
-          <td><?php echo html::input('author', $app->user->realname, "class='form-control'");?>
+          <td><?php echo html::input('author', $app->user->realname, "class='form-control'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->article->original;?></th>

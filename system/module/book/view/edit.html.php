@@ -12,6 +12,7 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/kindeditor.html.php';?>
+<?php include '../../common/view/datepicker.html.php';?>
 <?php 
 $path = explode(',', $node->path);
 js::set('path', $path);
@@ -25,7 +26,8 @@ js::set('path', $path);
       <table class='table table-form'>
         <tr>
           <th class='col-xs-1'><?php echo $lang->book->author;?></th>
-          <td><?php echo html::input('author', $node->author, "class='form-control'");?></td>
+          <td class='w-p40'><?php echo html::input('author', $node->author, "class='form-control'");?></td>
+          <td></td>
         </tr>
         <?php if($node->type != 'book'):?>
         <tr>
@@ -35,14 +37,14 @@ js::set('path', $path);
         <?php endif; ?>
         <tr>
           <th><?php echo $lang->book->title;?></th>
-          <td>
+          <td colspan='2'>
             <div class='required required-wrapper'></div>
             <?php echo html::input('title', $node->title, 'class="form-control"');?>
           </td>
         </tr>
         <tr>
           <th><?php echo $lang->book->alias;?></th>
-          <td>
+          <td colspan='2'>
             <?php if($node->type == 'book'):?>
             <div class='required required-wrapper'></div>
             <?php endif;?>
@@ -55,16 +57,26 @@ js::set('path', $path);
         </tr>
         <tr>
           <th><?php echo $lang->book->keywords;?></th>
-          <td><?php echo html::input('keywords', $node->keywords, "class='form-control'");?></td>
+          <td colspan='2'><?php echo html::input('keywords', $node->keywords, "class='form-control'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->book->summary;?></th>
-          <td><?php echo html::textarea('summary', $node->summary, "class='form-control' rows='2'");?></td>
+          <td colspan='2'><?php echo html::textarea('summary', $node->summary, "class='form-control' rows='2'");?></td>
         </tr>
         <?php if($node->type == 'article'):?>
         <tr>
           <th><?php echo $lang->book->content;?></th>
-          <td valign='middle'><?php echo html::textarea('content', $node->content, "rows='15' class='form-control'");?></td>
+          <td colspan='2' valign='middle'><?php echo html::textarea('content', $node->content, "rows='15' class='form-control'");?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->book->addedDate;?></th>
+          <td>
+            <div class="input-append date">
+              <?php echo html::input('addedDate', date('Y-m-d H:i'), "class='form-control'");?>
+              <span class='add-on'><button class="btn btn-default" type="button"><i class="icon-calendar"></i></button></span>
+            </div>
+          </td>
+          <td><span class="help-inline"><?php echo $lang->book->note->addedDate;?></span></td>
         </tr>
         <?php endif;?>
         <tr>

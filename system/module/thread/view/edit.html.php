@@ -20,17 +20,20 @@
     <form method='post' class='form-horizontal' id='editForm' enctype='multipart/form-data'>
       <div class='form-group'>
         <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->thread->title;?></label>
-        <div class='col-md-9 col-sm-8'><?php echo html::input('title', $thread->title, "class='form-control'");?></div>
-        <?php $readonly = $thread->readonly ? 'checked' : ''; if($canManage): ?>
-        <div class='col-md-2 col-sm-2'>
-          <div class='checkbox'>
-            <label>
-              <?php echo "<input type='checkbox' name='readonly' value='1' $readonly/><span>{$lang->thread->readonly}</span>" ?>
-            </label>
+        <div class='col-md-11 col-sm-10'>
+        <?php $readonly = $thread->readonly ? 'checked' : ''; if($canManage):?>
+          <div class='input-group'>
+            <?php echo html::input('title', '', "class='form-control'");?>
+            <span class='input-group-addon'>
+              <label class='checkbox'>
+                  <?php echo "<input type='checkbox' name='readonly' value='1'  $readonly/><span>{$lang->thread->readonly}</span>" ?>
+              </label>
+            </span>
           </div>
-          <?php  ?>
+        <?php else:?>
+          <?php echo html::input('title', $thread->title, "class='form-control'");?>
+        <?php endif;?>
         </div>
-        <?php endif; ?>
       </div>
       <div class='form-group'>
         <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->thread->content;?></label>

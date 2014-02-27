@@ -384,9 +384,9 @@ class user extends control
                 $account   = $user->account;
                 $resetKey  = md5(str_shuffle(md5($account . mt_rand(0, 99999999) . microtime())) . microtime()) . time();
                 $resetURL  = "http://". $_SERVER['HTTP_HOST'] . $this->inlink('checkresetkey', "key=$resetKey");
-                $content   = sprintf($this->lang->user->mailContent, $account, $resetURL, $resetURL, $resetKey);
                 $this->user->resetKey($account, $resetKey);
-                $this->loadModel('mail')->send($account, $this->lang->user->resetmail->subject, $content); 
+                include('view/resetpassmail.html.php');
+                $this->loadModel('mail')->send($account, $this->lang->user->resetmail->subject, $mailContent); 
                 if($this->mail->isError()) 
                 {
                     $this->send(array('result' => 'fail', 'message' => $this->mail->getError()));
