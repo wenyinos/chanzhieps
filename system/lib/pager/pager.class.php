@@ -462,9 +462,9 @@ EOT;
     /**
      * Create link.
      * 
-     * @param  int    $title 
+     * @param  string    $title 
      * @access private
-     * @return void
+     * @return string
      */
     private function createLink($title)
     {
