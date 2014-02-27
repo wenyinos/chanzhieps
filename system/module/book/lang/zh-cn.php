@@ -33,8 +33,6 @@ $lang->book->lblAuthor    = '作者：<strong>%s</strong> ';
 $lang->book->lblViews     = '阅读：<strong>%s</strong> ';
 $lang->book->lblEditor    = '<i>最后编辑：%s 于 %s</i> ';
 
-$lang->book->prev     = '上一篇';
-$lang->book->next     = '下一篇';
 $lang->book->none     = '没有了';
 $lang->book->chapter  = '返回目录';
 $lang->book->back2Top = '返回顶部';
