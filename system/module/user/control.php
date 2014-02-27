@@ -472,7 +472,7 @@ class user extends control
         /* Init the OAuth client. */
         $this->app->loadClass('oauth', $static = true);
         $this->config->oauth->$provider = json_decode($this->config->oauth->$provider);
-        $client = oauth::factory($provider, $this->config->oauth->$provider, $this->user->createOAuthCallbackURL($provider));
+        $client = oauth::factory($provider, $this->config->oauth->$provider, $this->user->createOAuthCallbackURL($provider, $referer));
 
         /* Begin OAuth authing. */
         $token  = $client->getToken($this->get->code);    // Step1: get token by the code.

@@ -48,6 +48,10 @@ class article extends control
             $desc     = strip_tags($category->desc);
             $this->session->set('articleCategory', $category->id);
         }
+        else
+        {
+            die($this->fetch('error', 'index'));
+        }
 
         $this->view->title     = $title;
         $this->view->keywords  = $keywords;
@@ -170,6 +174,7 @@ class article extends control
     public function view($articleID)
     {
         $article  = $this->article->getByID($articleID);
+        if(!$article) die($this->fetch('error', 'index'));
 
         /* fetch category for display. */
         $category = array_slice($article->categories, 0, 1);

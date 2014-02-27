@@ -11,7 +11,7 @@
  * @link        http://www.chanzhi.org
  */
 error_reporting(E_ALL ^ E_NOTICE ^ E_STRICT);
-define('IN_SHELL', true);
+define('RUN_MODE', 'shell');
 date_default_timezone_set('Asia/Shanghai');
 
 /* Judge the args. */

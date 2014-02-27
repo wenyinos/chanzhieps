@@ -42,6 +42,8 @@ class product extends control
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
         $products   = $this->product->getList($this->tree->getFamily($categoryID), 'id_desc', $pager);
 
+        if(!$category and $categoryID != 0) die($this->fetch('error', 'index'));
+
         if($categoryID == 0)
         {
             $category = new stdclass();
@@ -184,6 +186,7 @@ class product extends control
     public function view($productID)
     {
         $product = $this->product->getByID($productID);
+        if(!$product) die($this->fetch('error', 'index'));
 
         /* fetch first category for display. */
         $category = array_slice($product->categories, 0, 1);

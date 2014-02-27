@@ -5,3 +5,5 @@ $config->file->thumbs['m'] = array('width' => '300', 'height' => '300');
 $config->file->thumbs['l'] = array('width' => '800', 'height' => '600');
 
 $config->file->imageExtensions = array('jpeg', 'jpg', 'gif', 'png');
+
+$config->file->mimes['default'] = 'application/octet-stream';

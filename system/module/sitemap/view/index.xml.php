@@ -41,12 +41,12 @@
   <?php endforeach;?>
   <?php foreach($books as $nodeID => $node):?>
   <?php
-  if($book->type != 'article') $url  = str_replace('&', '&amp;', $systemURL . helper::createLink('book', 'browse', "nodeID=$node->id", "book={$node->book}&node={$node->alias}"));
-  if($book->type == 'article') $url  = str_replace('&', '&amp;', $systemURL . helper::createLink('book', 'read', "nodeID=$node->id", "book={$node->book}&node={$node->alias}"));
+  if($node->type != 'article') $url  = str_replace('&', '&amp;', $systemURL . helper::createLink('book', 'browse', "nodeID=$node->id", "book={$node->book}&node={$node->alias}"));
+  if($node->type == 'article') $url  = str_replace('&', '&amp;', $systemURL . helper::createLink('book', 'read', "nodeID=$node->id", "book={$node->book}&node={$node->alias}"));
   ?>
   <url>
     <loc><?php echo $url;?></loc>
-    <lastmod><?php echo substr($menu->editedDate, 0, 10);?></lastmod>
+    <lastmod><?php echo substr($node->editedDate, 0, 10);?></lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>

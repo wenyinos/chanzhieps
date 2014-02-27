@@ -140,7 +140,6 @@ class fileModel extends model
         $file = $this->dao->findById($fileID)->from(TABLE_FILE)->fetch();
         $file->realPath = $this->savePath . $file->pathname;
         $file->webPath  = $this->webPath . $file->pathname;
-
         return $this->processFile($file);
     }
 

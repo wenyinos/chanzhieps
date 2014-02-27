@@ -69,7 +69,7 @@ class commonModel extends model
     {
         $sessionName = $this->config->sessionVar;
         session_name($sessionName);
-        session_start();
+        if(!isset($_SESSION)) session_start();
 
         /* Check the user's IP exclude guest. */
         if(isset($_SESSION['user']) and $this->session->user->account != 'guest' and $this->session->user->ip != $this->server->remote_addr)
