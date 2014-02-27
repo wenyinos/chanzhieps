@@ -35,6 +35,12 @@ js::set('path', $path);
           <td><?php echo html::select('parent', $optionMenu, $node->parent, "class='chosen form-control'");?></td>
         </tr>
         <?php endif; ?>
+        <?php if($node->type == 'book'):?>
+        <tr>
+          <th><?php echo $lang->book->order;?></th>
+          <td><?php echo html::input('order', $node->order, 'class="form-control"');?></td>
+        </tr>
+        <?php endif;?>
         <tr>
           <th><?php echo $lang->book->title;?></th>
           <td colspan='2'>
