@@ -17,6 +17,7 @@ $lang->book->keywords    = 'Keywords';
 $lang->book->summary     = 'Summary';
 $lang->book->content     = 'Content';
 $lang->book->alias       = 'Alias';
+$lang->book->order       = 'Order';
 $lang->book->files       = 'Files';
 $lang->book->chapterList = 'Chapters';
 $lang->book->articleList = 'Articles';

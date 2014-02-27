@@ -89,7 +89,7 @@ class bookModel extends model
      */
     public function getBookList()
     {
-        return $this->dao->select('*')->from(TABLE_BOOK)->where('type')->eq('book')->orderBy('id_desc')->fetchAll('id');
+        return $this->dao->select('*')->from(TABLE_BOOK)->where('type')->eq('book')->orderBy('`order`')->fetchAll('id');
     }
 
     /**

@@ -44,7 +44,7 @@
         <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->thread->file;?></label>
         <div class='col-md-7 col-sm-8 col-xs-11'><?php echo $this->fetch('file', 'buildForm');?></div>
       </div>
-      <div class='form-group hide' id='captchaBox'></div>
+      <div class='form-group hiding' id='captchaBox'></div>
       <div class='form-group'>
         <label class='col-md-1 col-sm-2'></label>
         <div class='col-md-11 col-sm-10'><?php echo html::submitButton();?></div>
