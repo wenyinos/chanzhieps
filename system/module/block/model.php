@@ -57,6 +57,7 @@ class blockModel extends model
             foreach($pageBlocks as $regionBlocks) 
             {
                 $regionBlocks = json_decode($regionBlocks->blocks);
+                if(empty($regionBlocks)) continue;
                 foreach($regionBlocks as $block) $blocks[] = $block->id;
             }
         }
@@ -70,14 +71,21 @@ class blockModel extends model
             foreach($pageBlocks as $region => $regionBlock)
             {
                 $layouts[$page][$region] = array();
+
                 $regionBlocks =  json_decode($regionBlock->blocks);
+                if(!is_array($regionBlocks))
+                {
+                    $layouts[$page][$region][] = $blocks[$block->id];
+                    continue;
+                }
+
                 foreach($regionBlocks as $block)
                 {
                     if(isset($blocks[$block->id])) 
                     {
                         $mergedBlock = $blocks[$block->id];
-                        $mergedBlock->titleless  = $block->titleless;
-                        $mergedBlock->borderless = $block->borderless;
+                        if(isset($block->titleless))  $mergedBlock->titleless  = $block->titleless;
+                        if(isset($block->borderless)) $mergedBlock->borderless = $block->borderless;
                         $layouts[$page][$region][] = $mergedBlock;
                     }
                 }
