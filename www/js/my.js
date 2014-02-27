@@ -35,4 +35,8 @@ $(document).ready(function()
     {
         $('#navbar .dropdown > .dropdown-menu').each(function(){$(this).css('left', $(this).closest('.dropdown').position().left - 2);});
     }
+
+    /* Handle touch event for mobile devices */
+    handleTouch();
 });
+

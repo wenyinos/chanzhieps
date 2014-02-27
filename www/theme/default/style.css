@@ -109,9 +109,8 @@
 .breadcrumb:after {color: #aaa; margin-left: 6px; display: inline-block; content: "\F041"; font-family: ZenIcon;}
 
 /* page */
-.page {padding: 8px 0; color: #999; text-align: right;}
-.page a {color: #666;}
-.page:hover a {color: #506EAF;}
+.page {padding: 8px 0; color: #bbb; text-align: right;}
+.page > a {display: inline-block; margin-left: 3px;}
 
 /* tree */
 .tree {padding: 0; margin: 0;}
@@ -202,6 +201,10 @@
 .panel-block.links {padding: 10px 15px;}
 .panel-block.links .heading {display: inline-block; margin-right: 10px; color: #666}
 .panel-block.links > a {display: inline-block; margin-right: 10px;}
+
+.panel-block.panel-borderless {border: none; box-shadow:  none;}
+.panel-block.panel-borderless .panel-heading {background: none}
+.panel-block.panel-titleless .panel-heading {display: none;}
 
 
 /* meta-list */
@@ -381,6 +384,19 @@ a.tag-link {color: inherit;}
 
   /* headNav */
   #headNav {top: 10px}
+}
+@media (max-width: 767px)
+{
+  .page-container {padding: 0 10px;}
+  #siteSlogan, #footNav, #icpInfo {display: none;}
+  #footer {text-align: left; padding-right: 100px;}
+  #header {padding-top: 30px; min-height: inherit; padding-top: 0;}
+  #headNav {position: static; font-size: 12px; line-height: 30px; background-color: #e5e5e5; margin-right: -10px; margin-left: -10px; text-align: right; padding: 0 10px;}
+  #headTitle {position: absolute; z-index: 10010; bottom: -49px; left: 25px; min-height: inherit; height: 45px;}
+  #headTitle img {height: 45px; max-width: inherit; min-width: 50px; width: auto;}
+  .navbar-brand {display: none}
+
+  .carousel-inner > .item > a > img {min-height: 250px;}
 }
 
 /* go2top */

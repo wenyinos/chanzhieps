@@ -565,3 +565,43 @@ function setGo2Top()
     $('#go2top').tooltip({container: 'body', placement: 'left'})
         .click(function(){$('body,html').animate({scrollTop:0},400); return false;});
  }
+
+/**
+ * Handle touch event for mobile devices
+ * 
+ * @access public
+ * @return void
+ */
+function handleTouch()
+{
+    document.addEventListener('touchstart',touch, false);
+    document.addEventListener('touchmove',touch, false);
+    document.addEventListener('touchend',touch, false);
+    var touchStart;
+    
+    /* listen the touch event */
+    function touch(event)
+    {
+        var event = event || window.event;
+        switch(event.type)
+        {
+            case "touchstart":
+                touchStart = event.touches[0];
+                break;
+            case "touchend":
+                handleCarousel(event.changedTouches[0].clientX - touchStart.clientX);
+                break;
+            /* write 'tochmove' event here if need */
+        }
+    }
+
+    function handleCarousel(distance)
+    {
+        var carousel = $('.carousel');
+        if(carousel.length < 1) return;
+
+        if(distance > 10) carousel.find('.left.carousel-control').click();
+
+        if(distance < -10) carousel.find('.right.carousel-control').click();
+    }
+}

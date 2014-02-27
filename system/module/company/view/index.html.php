@@ -3,7 +3,7 @@ include '../../common/view/header.html.php';
 ?>
 <?php $common->printPositionBar($this->app->getModuleName());?>
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-9">
     <div class='panel'>
       <div class='panel-heading'><strong><i class='icon-group'></i> <?php echo $lang->aboutUs; ?></strong></div>
       <div class='panel-body'>
@@ -11,7 +11,7 @@ include '../../common/view/header.html.php';
       </div>
     </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-3">
     <div class="panel">
       <div class="panel-heading"><strong><i class="icon-phone"></i> <?php echo $lang->company->contact;?></strong></div>
       <div class="panel-body">
