@@ -285,21 +285,33 @@ class user extends control
     /**
      *  Admin users list.
      *
+     * @param  string $query
      * @param  int    $recTotal
      * @param  int    $recPerPage
      * @param  int    $pagerID
      * @access public
      * @return void
      */
-    public function admin($recTotal = 0, $recPerPage = 10, $pageID = 1)
+    public function admin($query = '', $recTotal = 0, $recPerPage = 10, $pageID = 1)
     {
+        $userName = $this->post->query ? $this->post->query : $query;
+
+        /* Keep query when change page. */
+        if($userName != $query)
+        {
+            $this->get->set('query', $userName);
+            $this->config->strictParams = true;
+            $this->app->setParamsByGET($this->app->getParams());
+
+            $recTotal = 0;
+            $pageID   = 1;
+        }
+
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $query = $this->post->query ? $this->post->query : '';
-
-        $this->view->users = $this->user->getList($pager, $query);
-        $this->view->query = $query;
+        $this->view->users = $this->user->getList($userName, $pager);
+        $this->view->query = $userName;
         $this->view->pager = $pager;
 
         $this->view->title = $this->lang->user->list;

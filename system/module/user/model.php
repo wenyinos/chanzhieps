@@ -16,12 +16,12 @@ class userModel extends model
     /**
      * Get users List.
      *
-     * @param object  $pager
      * @param string  $userName
+     * @param object  $pager
      * @access public
      * @return object 
      */
-    public function getList($pager, $userName = '')
+    public function getList($userName = '', $pager = null)
     {
         return $this->dao->select('*')->from(TABLE_USER)
             ->beginIF($userName != '')->where('account')->like("%$userName%")->fi()
