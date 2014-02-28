@@ -113,6 +113,9 @@ class thread extends control
         $thread = $this->thread->getByID($threadID);
         if(!$thread) die(js::locate('back'));
 
+        /* Set editor for current user. */
+        $this->thread->setEditor($thread->board, 'view');
+
         /* Get thread board. */
         $board = $this->loadModel('tree')->getById($thread->board);
 

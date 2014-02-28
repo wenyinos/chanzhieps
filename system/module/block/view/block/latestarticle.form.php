@@ -24,3 +24,7 @@
   <th><?php echo $lang->block->showImage;?></th>
   <td><input type='checkbox' name='params[image]' <?php if(isset($block->content->image) && $block->content->image) echo 'checked';?> value='1' /></td>
 </tr>
+<tr>
+  <th><?php echo $lang->block->showTime;?></th>
+  <td><input type='checkbox' name='params[time]' <?php if(isset($block->content->time) && $block->content->time) echo 'checked';?> value='1' /></td>
+</tr>

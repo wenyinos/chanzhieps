@@ -498,7 +498,7 @@ function isLocalIP()
 function getWebRoot($full = false)
 {
     $path = $_SERVER['SCRIPT_NAME'];
-    if(defined('IN_SHELL'))
+    if(RUN_MODE == 'shell')
     {
         $url  = parse_url($_SERVER['argv'][1]);
         $path = empty($url['path']) ? '/' : rtrim($url['path'], '/');

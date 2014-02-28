@@ -55,7 +55,7 @@ class forumModel extends model
         {
             foreach($parentBoard->children as $childBoard) 
             {
-                foreach($childBoard->moderators as $key => $moderators) $childBoard->moderators[$key] = $speakers[$moderators];
+                foreach($childBoard->moderators as $key => $moderators) $childBoard->moderators[$key] = isset($speakers[$moderators]) ? $speakers[$moderators] : '';
                 $childBoard->postedByRealname = !empty($childBoard->postedBy) ? $speakers[$childBoard->postedBy] : '';
             }
         }

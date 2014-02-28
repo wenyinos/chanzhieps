@@ -55,7 +55,8 @@ class blog extends control
      */
     public function view($articleID, $currentCategory = 0)
     {
-        $article  = $this->loadModel('article')->getByID($articleID);
+        $article = $this->loadModel('article')->getByID($articleID);
+        if(!$article) die($this->fetch('error', 'index'));
 
         /* fetch category for display. */
         $category = array_slice($article->categories, 0, 1);

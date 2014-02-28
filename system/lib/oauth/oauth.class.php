@@ -151,10 +151,11 @@ class OAuth
     /**
      * Create the api of openID.
      * 
+     * @param  string    $token 
      * @access public
      * @return string
      */
-    public function createOpenIDAPI()
+    public function createOpenIDAPI($token = '')
     {
     }
 

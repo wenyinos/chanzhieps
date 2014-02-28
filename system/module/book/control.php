@@ -62,6 +62,8 @@ class book extends control
     public function read($articleID)
     { 
         $article = $this->book->getNodeByID($articleID);
+        if(!$article) die($this->fetch('error', 'index'));
+
         $parent  = $article->origins[$article->parent];
         $book    = $article->book;
         $content = $this->book->addMenu($article->content);

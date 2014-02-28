@@ -69,7 +69,7 @@ class commonModel extends model
     {
         $sessionName = $this->config->sessionVar;
         session_name($sessionName);
-        session_start();
+        if(!isset($_SESSION)) session_start();
 
         /* Check the user's IP exclude guest. */
         if(isset($_SESSION['user']) and $this->session->user->account != 'guest' and $this->session->user->ip != $this->server->remote_addr)
@@ -706,5 +706,28 @@ class commonModel extends model
 
         $this->config->categoryAlias = array();
         foreach($this->config->seo->alias->category as $alias => $category) $this->config->categoryAlias[$category->category] = $alias;
+    }
+
+    /**
+     * Get title for the link of powerby from one of keywords.
+     * 
+     * @static
+     * @access public
+     * @return string
+     */
+    public static function getSoftTitle()
+    {
+        global $config, $lang;
+
+        $siteCode = $config->site->code;
+        $codeLen  = strlen($siteCode);
+        $keywords = explode(',', $lang->softKeywords);
+        $count    = count($keywords);
+
+        $sum = 0;
+        for($i = 0; $i < $codeLen; $i++) $sum += ord($siteCode{$i});
+
+        $key = $sum % $count;
+        return $keywords[$key];
     }
 }

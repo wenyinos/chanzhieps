@@ -21,6 +21,7 @@ $lang->block->regionList = '区域列表';
 $lang->block->select     = '请选择区块';
 $lang->block->categories = '分类';
 $lang->block->showImage  = '显示图片';
+$lang->block->showTime   = '显示时间';
 $lang->block->product    = '产品';
 $lang->block->titleless  = '隐藏标题';
 $lang->block->borderless = '隐藏边框';

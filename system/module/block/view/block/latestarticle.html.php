@@ -68,7 +68,15 @@ if($articles)
       $alias    = empty($category) ? "name={$article->alias}" : "category={$category->alias}&name={$article->alias}";
       $url      = helper::createLink('article', 'view', "id={$article->id}", $alias);
       ?>
+      <?php if(isset($content->time)):?>
+      <li>
+        <?php echo html::a($url, $article->title, "title='{$article->title}'");?>
+        <span class='pull-right'><?php echo substr($article->addedDate, 0, 10);?></span>
+      </li>
+      <?php else:?>
       <li><?php echo html::a($url, $article->title, "title='{$article->title}'");?></li>
+      <?php endif;?>
+      
       <?php endforeach;?>
     </ul>
   </div>
