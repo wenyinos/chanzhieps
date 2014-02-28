@@ -7,6 +7,7 @@ $config->block->editor->edit   = array('id' => 'content', 'tools' => 'full');
 
 $config->block->defaultIcons = array();
 $config->block->defaultIcons['about']         = 'icon-group';
+$config->block->defaultIcons['html']          = '';
 $config->block->defaultIcons['contact']       = 'icon-phone';
 $config->block->defaultIcons['links']         = 'icon-link';
 

@@ -12,7 +12,7 @@
 ?>
 <div id="block<?php echo $block->id;?>" class='panel panel-block'>
   <div class='panel-heading'>
-    <h4><i class='icon-group'></i> <?php echo $block->title;?></h4>
+    <h4><?php echo $icon . $block->title;?></h4>
   </div>
   <div class='panel-body'>
     <?php echo $block->content;?>

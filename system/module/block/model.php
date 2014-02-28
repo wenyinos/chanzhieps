@@ -366,6 +366,13 @@ class blockModel extends model
         }
         if(!file_exists($blockFile)) return '';
 
+        $blockClass = '';
+        if(isset($block->borderless) and $block->borderless) $blockClass .= 'panel-borderless';
+        if(isset($block->titleless) and $block->titleless) $blockClass  .= ' panel-titleless';
+        $defaultIcon = isset($this->config->block->defaultIcons[$block->type]) ? $this->config->block->defaultIcons[$block->type] : '';
+        $iconClass   = isset($block->icon) ? $block->icon : $defaultIcon;
+        if($iconClass) $icon = "<i class='{$iconClass}'></i> ";
+
         echo $containerHeader;
         include $blockFile;
         echo $containerFooter;

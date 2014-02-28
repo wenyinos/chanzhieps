@@ -480,6 +480,20 @@ class upgradeModel extends model
      */
     public function upgradeLayouts()
     {
+        $layoutlist = $this->dao->select('*')->from(TABLE_LAYOUT)->where()->fetchAll();
+        foreach($layoutlist as $layout)
+        {
+            $blockIdList = explode(',', $layout->blocks);
+            $blocks = array();
+            foreach($blockIdList as $blockID)
+            {
+                $block = array();
+                $block['id'] = $blockID;
+                if($layout->page == 'index_index') $block['grid']  = 4;
+                $blocks[] = $block;
+            }
+            $this->dao->update(TABLE_LAYOUT)->set('blocks')->eq(json_encode($blocks))->exec();
+        }
     }
 
     /**
