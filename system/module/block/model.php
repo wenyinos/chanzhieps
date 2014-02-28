@@ -117,7 +117,6 @@ class blockModel extends model
         $sortedBlocks = array();
         foreach($regionBlocks as $block) 
         {
-            
             if(!isset($blocks[$block->id])) continue;
 
             $sortedBlocks[$block->id] = $blocks[$block->id];

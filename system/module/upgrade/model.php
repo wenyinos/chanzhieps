@@ -494,8 +494,13 @@ class upgradeModel extends model
             foreach($blockIdList as $blockID)
             {
                 if(!$blockID) continue;
+
                 $block = array();
-                $block['id'] = $blockID;
+                $block['id']         = $blockID;
+                $block['grid']       = '';
+                $block['titleless']  = 0;
+                $block['borderless'] = 0;
+
                 if($layout->page == 'index_index' and $layout->region == 'middle') $block['grid']  = 4;
                 $blocks[] = $block;
             }
