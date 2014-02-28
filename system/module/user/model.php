@@ -111,10 +111,15 @@ class userModel extends model
      */
     public function getRealNamePairs($users)
     {
-        $users = $this->dao->select('account, realname')->from(TABLE_USER)->where('account')->in($users)->fetchPairs('account');
-        if(!$users) return array();     
-        foreach($users as $account => $realname) if($realname == '') $users[$account] = $account; 
-        return $users;         
+        $userPairs = $this->dao->select('account, realname')->from(TABLE_USER)->where('account')->in($users)->fetchPairs('account');
+
+        foreach($users as $account) if(!isset($userPairs[$account])) $userPairs[$account] = $account;
+
+        if(!$userPairs) return array();     
+
+        foreach($userPairs as $account => $realname) if($realname == '') $userPairs[$account] = $account; 
+
+        return $userPairs;         
     }
 
 
@@ -391,20 +396,18 @@ class userModel extends model
      * update the resetKey.
      * 
      * @param  string   $account
-     * @param  time     $resetTime 
      * @access public
      * @return void
      */
     public function resetKey($account, $resetKey)
     {
-        $this->dao->update(TABLE_USER)->set('resetKey')->eq($resetKey)->set('resetTime')->eq(helper::now())->where('account')->eq($account)->exec(false);
+        $this->dao->update(TABLE_USER)->set('resetKey')->eq($resetKey)->where('account')->eq($account)->exec();
     }
 
     /**
      * Check the resetKey.
      * 
      * @param  string   $resetKey 
-     * @param  time     $resetTime 
      * @access public
      * @return void
      */
@@ -422,7 +425,7 @@ class userModel extends model
      * Reset the forgotten password.
      * 
      * @param  string   $resetKey 
-     * @param  time     $resetTime 
+     * @param  string   $password 
      * @access public
      * @return void
      */
