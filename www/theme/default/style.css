@@ -397,6 +397,8 @@ a.tag-link {color: inherit;}
   .navbar-brand {display: none}
 
   .carousel-inner > .item > a > img {min-height: 250px;}
+
+  .ke-toolbar {display: none !important;}
 }
 
 /* go2top */

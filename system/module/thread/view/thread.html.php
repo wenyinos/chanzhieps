@@ -45,7 +45,7 @@
           echo html::a(inlink('delete', "threadID=$thread->id"), '<i class="icon-trash"></i> ' . $lang->delete, "class='deleter'");
           ?>
         </span>
-        <i class='icon-ellipsis-horizontal icon-more-actions'></i>&nbsp;
+        <i class='icon-ellipsis-horizontal icon-more-actions'>&nbsp;</i>
         <?php endif; ?>
       <?php if($this->thread->canManage($board->id, $thread->author)) echo html::a(inlink('edit', "threadID=$thread->id"), '<i class="icon-pencil"></i> ' . $lang->edit); ?>
       <a href='#reply' class='thread-reply-btn'><i class='icon-reply'></i> <?php echo $lang->reply->common; ?></a>

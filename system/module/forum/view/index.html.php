@@ -9,12 +9,12 @@
     </div>
     <table class='table table-hover table-striped'>
       <thead>
-        <tr class='text-center'>
+        <tr class='text-center hidden-xxxs'>
           <th colspan='2'>&nbsp;<?php echo $lang->forum->board;?></th>
-          <th><?php echo $lang->forum->owners;?></th>
+          <th class='hidden-xs'><?php echo $lang->forum->owners;?></th>
           <th><?php echo $lang->forum->threadCount;?></th>
-          <th><?php echo $lang->forum->postCount;?></th>
-          <th><?php echo $lang->forum->lastPost;?></th>
+          <th class='hidden-xxs'><?php echo $lang->forum->postCount;?></th>
+          <th class='hidden-xs'><?php echo $lang->forum->lastPost;?></th>
         </tr>  
       </thead>
       <tbody>
@@ -25,10 +25,10 @@
             <strong><?php echo html::a(inlink('board', "id=$childBoard->id", "category={$childBoard->alias}"), $childBoard->name);?></strong><br />
             <small class='text-muted'><?php echo $childBoard->desc;?></small>
           </td>
-          <td class='w-50px'><strong><nobr><?php foreach($childBoard->moderators as $moderators) echo $moderators . ' ';?></nobr></strong></td>
-          <td class='w-70px'><?php echo $childBoard->threads;?></td>
-          <td class='w-70px'><?php echo $childBoard->posts;?></td>
-          <td class='w-150px' class='text-left'>
+          <td class='w-120px hidden-xs'><strong><nobr><?php foreach($childBoard->moderators as $moderators) echo $moderators . ' ';?></nobr></strong></td>
+          <td class='w-70px hidden-xxxs'><?php echo $childBoard->threads;?></td>
+          <td class='w-70px hidden-xxs'><?php echo $childBoard->posts;?></td>
+          <td class='w-150px hidden-xs'>
             <?php
             if($childBoard->postedBy)
             {

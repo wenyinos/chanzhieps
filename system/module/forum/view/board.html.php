@@ -14,13 +14,13 @@
   </div>
   <table class='table table-hover table-striped'>
     <thead>
-      <tr class='text-center'>
+      <tr class='text-center hidden-xxxs'>
         <th colspan='2'><?php echo $lang->thread->title;?></th>
-        <th class='w-150px'><?php echo $lang->thread->author;?></th>
-        <th class='w-100px'><?php echo $lang->thread->postedDate;?></th>
-        <th class='w-50px'><?php echo $lang->thread->views;?></th>
+        <th class='w-150px hidden-xxs'><?php echo $lang->thread->author;?></th>
+        <th class='w-100px hidden-xs'><?php echo $lang->thread->postedDate;?></th>
+        <th class='w-50px hidden-xs'><?php echo $lang->thread->views;?></th>
         <th class='w-50px'><?php echo $lang->thread->replies;?></th>
-        <th class='w-200px'><?php echo $lang->thread->lastReply;?></th>
+        <th class='w-200px hidden-sm hidden-xs'><?php echo $lang->thread->lastReply;?></th>
       </tr>  
     </thead>
     <tbody>
@@ -31,11 +31,11 @@
           <?php echo html::a($this->createLink('thread', 'view', "id=$thread->id"), $thread->title);?>
           <?php echo "<span class='label label-danger'>{$lang->thread->stick}</span> "?>
         </td>
-        <td><strong><?php echo $thread->authorRealname;?></strong></td>
-        <td><?php echo substr($thread->addedDate, 5, -3);?></td>
-        <td><?php echo $thread->views;?></td>
-        <td><?php echo $thread->replies;?></td>
-        <td>
+        <td class='hidden-xxs'><strong><?php echo $thread->authorRealname;?></strong></td>
+        <td class='hidden-xs'><?php echo substr($thread->addedDate, 5, -3);?></td>
+        <td class='hidden-xs'><?php echo $thread->views;?></td>
+        <td class='hidden-xxxs'><?php echo $thread->replies;?></td>
+        <td class='hidden-sm hidden-xs'>
           <?php 
           if($thread->replies)
           {
@@ -52,11 +52,11 @@
       <tr class='text-center'>
         <td class='w-10px'><?php echo $thread->isNew ? "<span class='text-success'><i class='icon-comment-alt icon-large'></i></span>" : "<span class='text-muted'><i class='icon-comment-alt icon-large'></i></span>";?></td>
         <td class='text-left'><?php echo html::a($this->createLink('thread', 'view', "id=$thread->id"), $thread->title);?></td>
-        <td><strong><?php echo $thread->authorRealname;?></strong></td>
-        <td><?php echo substr($thread->addedDate, 5, -3);?></td>
-        <td><?php echo $thread->views;?></td>
-        <td><?php echo $thread->replies;?></td>
-        <td>
+        <td class='hidden-xxs'><strong><?php echo $thread->authorRealname;?></strong></td>
+        <td class='hidden-xs'><?php echo substr($thread->addedDate, 5, -3);?></td>
+        <td class='hidden-xs'><?php echo $thread->views;?></td>
+        <td class='hidden-xxxs'><?php echo $thread->replies;?></td>
+        <td class='hidden-sm hidden-xs'>
           <?php 
           if($thread->replies)
           {
