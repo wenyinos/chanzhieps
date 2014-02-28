@@ -707,4 +707,27 @@ class commonModel extends model
         $this->config->categoryAlias = array();
         foreach($this->config->seo->alias->category as $alias => $category) $this->config->categoryAlias[$category->category] = $alias;
     }
+
+    /**
+     * Get title for the link of powerby from one of keywords.
+     * 
+     * @static
+     * @access public
+     * @return string
+     */
+    public static function getSoftTitle()
+    {
+        global $config, $lang;
+
+        $siteCode = $config->site->code;
+        $codeLen  = strlen($siteCode);
+        $keywords = explode(',', $lang->softKeywords);
+        $count    = count($keywords);
+
+        $sum = 0;
+        for($i = 0; $i < $codeLen; $i++) $sum += ord($siteCode{$i});
+
+        $key = $sum % $count;
+        return $keywords[$key];
+    }
 }
