@@ -11,7 +11,7 @@
 */
 ?>
 <?php if(!empty($this->config->links->index)):?>
-<div id="block<?php echo $block->id;?>" class='panel panel-block links'>
+<div id="block<?php echo $block->id;?>" class='panel panel-block links <?php echo $blockClass;?>'>
   <strong class='heading'><i class='icon-link'></i> <?php echo $this->lang->link; ?></strong>
   <?php echo $this->config->links->index;?>
   <?php if(trim(strip_tags($this->config->links->all, '<a>'))) echo html::a(helper::createLink('links', 'index'), $this->lang->more . "<i class='icon-double-angle-right'></i>"); ?>

@@ -30,9 +30,9 @@ if($articles)
 }
 ?>
 <?php if(isset($content->image)):?>
-<div id="block<?php echo $block->id;?>" class='panel panel-block'>
+<div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
   <div class='panel-heading'>
-    <h4><i class='icon-th'></i> <?php echo $block->title;?></h4>
+    <h4><i class="<?php echo isset($block->icon) ? $block->icon : 'icon-list-ul';?>"></i> <?php echo $block->title;?></h4>
   </div>
   <div class='panel-body'>
     <div class='items'>

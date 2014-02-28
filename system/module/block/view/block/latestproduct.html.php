@@ -14,11 +14,16 @@
 $content  = json_decode($block->content);
 $type     = str_replace('product', '', strtolower($block->type));
 $method   = 'get' . $type;
-$products = $this->loadModel('product')->$method($content->category, $content->limit);?>
+$products = $this->loadModel('product')->$method($content->category, $content->limit);
+
+$blockClass = '';
+if($block->borderless) $blockClass .= 'panel-borderless';
+if($block->titleless) $blockClass  .= ' panel-titleless';
+?>
 <?php if(isset($content->image)):?>
-<div id="block<?php echo $block->id;?>" class='panel panel-block'>
+<div id="block<?php echo $block->id;?>" class="panel panel-block <?php echo $blockClass;?>">
   <div class='panel-heading'>
-    <h4><i class='icon-th'></i> <?php echo $block->title?></h4>
+    <h4><i class="<?php echo isset($block->icon) ? $block->icon : 'icon-th';?>"></i> <?php echo $block->title;?></h4>
   </div>
   <div class='panel-body'>
     <div class='cards cards-borderless'>
@@ -32,7 +37,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
         <a class='card' href="<?php echo $url;?>">
           <?php $title = $product->image->primary->title ? $product->image->primary->title : $product->name;?>
           <div class='media' style='background-image: url(<?php echo $product->image->primary->middleURL; ?>); background-iamge:none\0;'><?php echo html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"); ?></div>
-          <strong class='card-heading'>
+            <strong class='card-heading'>
             <?php echo $product->name;?>
             <div class='text-latin'>
             <?php

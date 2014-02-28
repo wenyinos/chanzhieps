@@ -16,17 +16,20 @@ $block->content = json_decode($block->content);
 $type           = str_replace('tree', '', strtolower($block->type));
 $browseLink     = $type == 'article' ? 'createBrowseLink' : 'create' . ucfirst($type) . 'BrowseLink';
 ?>
+
 <?php if($block->content->showChildren):?>
 <?php $treeMenu = $this->tree->getTreeMenu($type, 0, array('treeModel', $browseLink));?>
-<div id="block<?php echo $block->id;?>" class='panel panel-block'>
-  <div class='panel-heading'><h4><i class='icon-sitemap'></i> <?php echo $block->title;?></h4></div>
+<div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
+  <div class='panel-heading'>
+    <h4><i class="<?php echo isset($block->icon) ? $block->icon : 'icon-sitemap';?>"></i> <?php echo $block->title;?></h4>
+  </div>
   <div class='panel-body'><?php echo $treeMenu;?></div>
 </div>
 <?php else:?>
 <?php $topCategories = $this->tree->getChildren(0, $type);?>
-<div id="block<?php echo $block->id?>" class='panel panel-block'>
+<div id="block<?php echo $block->id?>" class='panel panel-block <?php echo $blockClass;?>'>
   <div class='panel-heading'>
-    <h4><i class='icon-folder-close'></i> <?php echo $block->title;?></h4>
+    <h4><i class="<?php echo isset($block->icon) ? $block->icon : 'icon-folder-close';?>"></i> <?php echo $block->title;?></h4>
   </div>
   <div class='panel-body'>
     <ul class='nav nav-secondary nav-stacked'>

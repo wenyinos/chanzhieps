@@ -13,7 +13,7 @@
 <?php
 $blockClass = '';
 if($block->borderless) $blockClass .= 'panel-borderless';
-if($block->titleless) $blockClass  .= 'panel-titleless';
+if($block->titleless) $blockClass  .= ' panel-titleless';
 ?>
 <div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
   <div class='panel-heading'>
