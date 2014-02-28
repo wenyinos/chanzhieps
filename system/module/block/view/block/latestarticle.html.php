@@ -29,11 +29,11 @@ if($articles)
     if($firstCategory) $moreLink = html::a(helper::createLink('article', 'browse', "category=$firstCategory->id", "category=$firstCategory->alias"), $this->lang->more, "class='text-link'");
 }
 ?>
-<?php if(isset($content->image)):?>
 <div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
   <div class='panel-heading'>
-    <h4><i class="<?php echo isset($block->icon) ? $block->icon : 'icon-list-ul';?>"></i> <?php echo $block->title;?></h4>
+    <h4><?php echo $icon . $block->title;?></h4>
   </div>
+  <?php if(isset($content->image)):?>
   <div class='panel-body'>
     <div class='items'>
     <?php
@@ -59,10 +59,7 @@ if($articles)
       <?php endforeach;?>
     </div>
   </div>
-</div>
-<?php else:?>
-<div id="block<?php echo $block->id;?>" class='panel panel-block'>
-  <div class='panel-heading'><div class='pull-right'><?php echo $moreLink; ?></div> <h4><i class='icon-list-ul'></i> <?php echo $block->title;?></h4></div>
+  <?php else:?>
   <div class='panel-body'>
     <ul class='ul-list'>
       <?php foreach($articles as $article): ?>
@@ -75,5 +72,5 @@ if($articles)
       <?php endforeach;?>
     </ul>
   </div>
+  <?php endif;?>
 </div>
-<?php endif;?>

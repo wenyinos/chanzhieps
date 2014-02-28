@@ -15,16 +15,12 @@ $content  = json_decode($block->content);
 $type     = str_replace('product', '', strtolower($block->type));
 $method   = 'get' . $type;
 $products = $this->loadModel('product')->$method($content->category, $content->limit);
-
-$blockClass = '';
-if($block->borderless) $blockClass .= 'panel-borderless';
-if($block->titleless) $blockClass  .= ' panel-titleless';
 ?>
-<?php if(isset($content->image)):?>
 <div id="block<?php echo $block->id;?>" class="panel panel-block <?php echo $blockClass;?>">
   <div class='panel-heading'>
-    <h4><i class="<?php echo isset($block->icon) ? $block->icon : 'icon-th';?>"></i> <?php echo $block->title;?></h4>
+    <h4><?php echo $icon;?> <?php echo $block->title;?></h4>
   </div>
+  <?php if(isset($content->image)):?>
   <div class='panel-body'>
     <div class='cards cards-borderless'>
       <?php foreach($products as $product):?>
@@ -67,10 +63,7 @@ if($block->titleless) $blockClass  .= ' panel-titleless';
       <?php endforeach;?>
     </div>
   </div>
-</div>
-<?php else:?>
-<div id="block<?php echo $block->id;?>" class='panel panel-block'>
-  <div class='panel-heading'><h4><i class='icon-list-ul'></i> <?php echo $block->title;?></h4></div>
+  <?php else:?>
   <div class='panel-body'>
     <ul class='ul-list'>
       <?php foreach($products as $product):?>
@@ -104,5 +97,5 @@ if($block->titleless) $blockClass  .= ' panel-titleless';
       <?php endforeach;?>
     </ul>
   </div>
+  <?php endif;?>
 </div>
-<?php endif;?>
