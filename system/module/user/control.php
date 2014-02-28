@@ -294,24 +294,13 @@ class user extends control
      */
     public function admin($query = '', $recTotal = 0, $recPerPage = 10, $pageID = 1)
     {
-        $userName = $this->post->query ? $this->post->query : $query;
-
-        /* Keep query when change page. */
-        if($userName != $query)
-        {
-            $this->get->set('query', $userName);
-            $this->config->strictParams = true;
-            $this->app->setParamsByGET($this->app->getParams());
-
-            $recTotal = 0;
-            $pageID   = 1;
-        }
+        if($this->post->query) die($this->locate(inlink('admin', "query={$this->post->query}&recTotal=0&recPerPage=$recPerPage&pageID=1")));
 
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $this->view->users = $this->user->getList($userName, $pager);
-        $this->view->query = $userName;
+        $this->view->users = $this->user->getList($query, $pager);
+        $this->view->query = $query;
         $this->view->pager = $pager;
 
         $this->view->title = $this->lang->user->list;
