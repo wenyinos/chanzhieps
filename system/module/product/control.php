@@ -113,7 +113,7 @@ class product extends control
         $categories = $this->loadModel('tree')->getOptionMenu('product', 0, $removeRoot = true);
         if(empty($categories))
         {
-            die(js::locate($this->createLink('tree', 'redirect')));
+            die(js::locate($this->createLink('tree', 'redirect', 'type=product')));
         }
 
         if($_POST)
