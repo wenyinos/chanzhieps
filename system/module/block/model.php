@@ -359,7 +359,7 @@ class blockModel extends model
         if($withGrid)
         {
             if($block->grid == 0) echo "<div class='col-md-4 col-auto'>";
-            else echo "<div class='col-md-{$block->grid}'>";
+            else echo "<div class='col-md-{$block->grid}' data-grid='{$block->grid}'>";
         }
 
         $blockRoot = dirname(__FILE__) . '/ext/view/block/';
@@ -381,7 +381,7 @@ class blockModel extends model
         echo $containerHeader;
         include $blockFile;
         echo $containerFooter;
-        
+
         if($withGrid) echo '</div>';
     }
 }

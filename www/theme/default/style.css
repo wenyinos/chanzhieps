@@ -83,7 +83,7 @@
 @media (min-width: 992px) {.page-container {max-width: 970px;}}
 @media (min-width: 1200px) {.page-container {max-width: 1170px;}}
 
-.col-md-12, .col-xs-12, .col-sm-12, .col-lg-12 {float: left;}
+.col-md-12, .col-xs-12, .col-sm-12, .col-lg-12 {float: left; width: 100%}
 
 /* page-header */
 .page-header {border-bottom: 1px solid #E5E5E5;padding: 0 15px;}
@@ -170,6 +170,7 @@
 .panel-actions .btn.btn-link:hover{background: transparent;box-shadow: none;}
 
 /* panel-block */
+.panel-block {transition: height 0.3s;}
 .panel-block .panel-heading h4 {font-size: 14px; font-weight: bold;}
 .panel-block .panel-heading h4 [class^="icon-"] {display: inline-block;margin-right: 4px;}
 .panel-block .panel-body {padding: 10px 15px;}
@@ -184,8 +185,9 @@
 .panel-block .panel-body > .ul-list > li:before {left: 14px;}
 .panel-block .panel-body > .items {margin: -10px -15px;}
 .panel-block .panel-body > .items .item {padding: 10px 15px; border-bottom: 1px #e5e5e5 dashed;}
+.panel-block .panel-body > .items .item .media {max-width: inherit; overflow: hidden; max-height: 300px; margin-right: 5px;}
 .panel-block .panel-body > .items .item:hover {background-color: #f1f1f1;}
-.panel-block .panel-body > .items .item:hover .media {margin: 6px -15px; background-color: #ccc;}
+.panel-block .panel-body > .items .item-content {margin-top: 5px;}
 .panel-block .panel-body > .cards {margin: -10px -15px; padding: 0;}
 .panel-block .panel-body > .cards [class*='col-']:last-child .card {border-bottom: none;}
 .panel-block .panel-body > .cards [class*='col-']:last-child .card-heading {padding-bottom: 0;}

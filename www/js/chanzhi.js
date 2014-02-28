@@ -568,7 +568,7 @@ function setGo2Top()
 
 function autoBlockGrid()
 {
-    $('.col-auto').each(function()
+    $('.block-list > .row > .col-auto').each(function()
     {
         var col = $(this);
         if(col.data('handled')) return;
@@ -583,18 +583,29 @@ function autoBlockGrid()
         {
             if(count <= 3)
             {
-                cols.attr('class', 'col-auto col-md-' + (12/count));
+                cols.attr('class', 'col-auto col-md-' + (12/count)).data('grid', 12/count);
             }
             else
             {
-                cols.attr('class', 'col-auto col-md-' + dGrid);
+                cols.attr('class', 'col-auto col-md-' + dGrid).data('grid', dGrid);
             }
             cols.data('handled', true);
         }
         else
         {
-            col.attr('class', 'col-auto col-md-' + dGrid).data('handled', true);
+            col.attr('class', 'col-auto col-md-' + dGrid).data('grid', dGrid).data('handled', true);
         }
+    });
+
+    $('.block-list .panel-block .cards').each(function()
+    {
+        var $this = $(this);
+        var grid = $this.closest('[class*="col-"]').data('grid');
+        var cards = $this.find('[class*="col-"]');
+
+        if(grid >= 9) cards.attr('class', 'col-md-4 col-sm-6');
+        else if(grid >= 5) cards.attr('class', 'col-md-6');
+        else cards.attr('class', 'col-md-12');
     });
 
     /* ajust block height */
@@ -611,16 +622,19 @@ function autoBlockGrid()
         {
             $('.block-list .row').each(function()
             {
-                var i = 0, j = 0;
+                var i = 0, j = 0, k;
                 $(this).children("[class*='col-']").each(function()
                 {
-                    var col = $(this).attr('data-row', i);
-                    j += parseInt(col.attr('class').replace('col-md-|col-auto|', ''));
-                    if(j > 12)
+                    var col = $(this);
+                    j += col.data('grid');
+                    k = i;
+                    if(j >= 12)
                     {
-                        j = 0;
                         i++;
+                        if(j > 12) k++;
+                        j = 0;
                     }
+                    col.attr('data-row', k);
                 });
             });
 
@@ -641,7 +655,8 @@ function autoBlockGrid()
     }
 
     $(window).resize(ajustBlockHeight);
-    ajustBlockHeight();
+
+    setTimeout(ajustBlockHeight, 500);
 }
 
 /**
