@@ -22,4 +22,7 @@ $(document).ready(function()
     });
     $.setAjaxJSONER('.jsoner');
     $('.nav-system-forum').addClass('active');
+
+    /* remove empty element */
+    $('.speaker > ul > li > span:empty').closest('li').remove();
 });

@@ -14,5 +14,5 @@ a .icon-sina{background-position: 0 -48px;}
 #responser { line-height: 30px; font-size: 12px }
 #adminLogin .form-control,#logo { margin-bottom: 10px; }
 
-@media (max-width: 700px){ #adminLogin{border: none;margin: 0 auto;box-shadow: none;padding: 20px 15px;background-color: #f6f5f5}}
+@media (max-width: 700px){ #adminLogin{border: none;margin: 0 auto;box-shadow: none;padding: 20px 15px;background-color: #f6f5f5; margin-top: -50px;}}
 @media (max-width: 767px) {#login .panel {margin: 20px auto; width: 100%;} #login .panel-heading {padding: 0 0 10px 0;} #login .panel-body {padding: 10px 0; min-height: inherit;} .btn-oauth {padding-left: 80px;} .btn-oauth .icon {left: 20px;}}

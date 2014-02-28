@@ -16,7 +16,7 @@
   </table>
   <div class='thread-foot'>
     <?php if($reply->editor): ?>
-    <span class='text-muted'><?php printf($lang->thread->lblEdited, $reply->editorRealname, $reply->editedDate); ?></span>
+    <small class='text-muted'><?php printf($lang->thread->lblEdited, $reply->editorRealname, $reply->editedDate); ?></small>
     <?php endif; ?>
     <div class="pull-right reply-actions thread-actions">
     <?php if($this->app->user->account != 'guest'):?>

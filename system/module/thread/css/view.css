@@ -29,3 +29,8 @@
 .thread.striped .panel-heading{background-color:#FCF8E3;color: #8A6D3B;background-image: -moz-linear-gradient(#fdfaeb, #f5f0d3); background-image: -webkit-linear-gradient(#fdfaeb, #f5f0d3); background-image: linear-gradient(#fdfaeb, #f5f0d3); background-repeat: repeat-x;border-color:#d7c9ad;}
 
 #replyForm .control-label{margin-bottom: 0; margin-top: 0; padding-top: 7px; padding-right: 0;}
+
+@media (max-width: 991px) {.thread-more-actions, .thread:hover .thread-more-actions, .icon-more-actions {display: none;}}
+@media (max-width: 767px) {.speaker,.thread-wrapper {display: block; width: 100%} .table > tbody > tr > td.thread-wrapper {padding-bottom: 47px;} td.speaker {border-bottom: 1px dashed #ddd; position: relative; padding: 8px 15px; border-right: 0} .speaker > ul {display: block; position: absolute; right: 15px; top: 10px;} .speaker .thread-author {border: none; margin-bottom: 0; padding: 0;} .speaker > ul > li {display: inline-block; margin-left: 5px; font-size: 12px; color: #666} .speaker > ul > li:nth-child(2) {display: none} .speaker > ul > li > small {color: #808080; font-weight: bold;} .thread-foot {left: 0}}
+@media (max-width: 480px) {.speaker > ul > li:nth-child(1) {display: none}}
+@media (max-width: 400px) {.speaker > ul {display: none}}
