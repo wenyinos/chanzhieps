@@ -56,7 +56,7 @@
       <div class='panel-body'>
         <form method='post' class='form-horizontal' id='commentForm' action="<?php echo $this->createLink('message', 'post', 'type=message');?>">
           <?php
-          $from  = $this->session->user->account == 'guest' ? '' : $this->session->user->account;
+          $from  = $this->session->user->account == 'guest' ? '' : $this->session->user->realname;
           $phone = $this->session->user->account == 'guest' ? '' : $this->session->user->phone;
           $qq    = $this->session->user->account == 'guest' ? '' : $this->session->user->qq;
           $email = $this->session->user->account == 'guest' ? '' : $this->session->user->email; 
