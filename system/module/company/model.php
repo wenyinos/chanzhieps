@@ -40,6 +40,10 @@ class companyModel extends model
                 {
                     $contact->wangwang = html::a("http://www.taobao.com/webww/ww.php?ver=3&touid={$value}&siteid=cntaobao&status=2&charset=utf-8", $value, "target='_blank'");
                 }
+                else if($item == 'phone')
+                {
+                    $contact->phone = html::a("tel:$value", $value);
+                }
             }
             else
             {
