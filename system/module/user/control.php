@@ -416,7 +416,7 @@ class user extends control
         if(!empty($_POST))
         {
             $this->user->checkPassword();
-            if(dao::isError()) $this->send(array( 'result' => 'fail', 'message' => dao::getError() ) );
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
             $this->user->resetPassword($this->post->resetKey, $this->post->password1); 
             $this->send(array('result' => 'success', 'locate' => inlink('login')));
