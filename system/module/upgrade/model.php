@@ -73,6 +73,9 @@ class upgradeModel extends model
             case '2_0':
                 $this->execSQL($this->getUpgradeFile('2.0'));
                 $this->processSiteDesc();
+            case '2_0_1':
+                $this->execSQL($this->getUpgradeFile('2.0.1'));
+                $this->upgradeLayouts();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -100,6 +103,7 @@ class upgradeModel extends model
             case '1_6': $confirmContent .= file_get_contents($this->getUpgradeFile('1.6'));
             case '1_7': $confirmContent .= file_get_contents($this->getUpgradeFile('1.7'));
             case '2_0': $confirmContent .= file_get_contents($this->getUpgradeFile('2.0'));
+            case '2_0_1': $confirmContent .= file_get_contents($this->getUpgradeFile('2.0.1'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
@@ -481,21 +485,29 @@ class upgradeModel extends model
     public function upgradeLayouts()
     {
         $this->dao->update(TABLE_LAYOUT)->set('region')->eq('middle')->where('region')->eq('bottom')->exec();
+        $layoutlist = $this->dao->select('*')->from(TABLE_LAYOUT)->fetchAll();
 
-        $layoutlist = $this->dao->select('*')->from(TABLE_LAYOUT)->where()->fetchAll();
         foreach($layoutlist as $layout)
         {
             $blockIdList = explode(',', $layout->blocks);
             $blocks = array();
             foreach($blockIdList as $blockID)
             {
+                if(!$blockID) continue;
                 $block = array();
                 $block['id'] = $blockID;
-                if($layout->page == 'index_index') $block['grid']  = 4;
+                if($layout->page == 'index_index' and $layout->region == 'middle') $block['grid']  = 4;
                 $blocks[] = $block;
             }
-            $this->dao->update(TABLE_LAYOUT)->set('blocks')->eq(json_encode($blocks))->exec();
+
+            $this->dao->update(TABLE_LAYOUT)
+                ->set('blocks')->eq(json_encode($blocks))
+                ->where('page')->eq($layout->page)
+                ->andWhere('region')->eq($layout->region)
+                ->exec();
         }
+
+        return !dao::isError();
     }
 
     /**
