@@ -15,29 +15,25 @@
 <div class='row'>
   <div class='col-md-9'>
     <div class='panel'>
-      <div class='panel-heading'><div class='panel-actions'><a href='#commentForm' class='btn btn-primary'><i class='icon-comment-alt'></i> <?php echo $lang->message->post; ?></a></div><strong><i class='icon-comments-alt'></i> <?php echo $lang->message->list;?></strong></div>
+      <div class='panel-heading'><div class='panel-actions'><a href='#commentForm' class='btn btn-primary'><i class='icon-comment-alt'></i> <?php echo $lang->message->post; ?></a></div><strong><i class='icon-comments-alt'></i> <?php echo $lang->message->list;?> (<?php echo count($messages);?>)</strong></div>
       <div class='panel-body'>
         <?php if(!empty($messages)):?>
         <div class='comments-list'>
         <?php foreach($messages as $number => $message):?>
           <div class='comment' id="comment<?php echo $message->id?>">
-            <div class='avatar'><div class='icon-stack icon'><i class='icon-comment icon-stack-base'></i><strong class='icon-content'>#<?php echo ($startNumber + $number + 1)?></strong></div></div>
+            <div class='avatar'><div class='avatar-empty icon-user'></div></div>
             <div class='content'>
-              <div class='pull-right'><span class='text-muted'><?php echo $message->date;?></span>
-              </div>
-              <span class='author'><strong><i class='icon-user text-muted'></i> <?php echo $message->from;?></strong></span>
-              <div class='text'><?php echo nl2br($message->content);?></div>
+              <div class='text'><strong><?php echo $message->from . $lang->colon;?></strong> &nbsp;<?php echo nl2br($message->content);?></div>
+              <div class='author small'><span class='text-muted'><?php echo $lang->comment->commentTo . $message->date;?></span></div>
             </div>
             <?php if(!empty($replies[$message->id])):?>
               <div class='comments-list'>
                 <?php foreach($replies[$message->id] as $reply):?>
                 <div class='comment'>
-                  <div class='avatar'><i class='icon-mail-reply'></i></div>
+                  <div class='avatar'><div class='avatar-empty icon-user'></div></div>
                   <div class='content'>
-                    <div class='pull-right'><span class='text-muted'><?php echo $reply->date;?></span>
-                    </div>
-                    <span class='author'><strong><i class='icon-user text-muted'></i> <?php echo $reply->from;?></strong> <small class='text-muted'><?php echo $lang->message->reply; ?></small></span>
-                    <div class='text'><?php echo nl2br($reply->content);?></div>
+                    <div class='text'><strong><?php echo $reply->from . $lang->colon;?></strong> &nbsp;<?php echo nl2br($reply->content);?></div>
+                    <div class='author small'><span class='text-muted'><?php echo $lang->comment->replyTo . $reply->date;?></span></div>
                   </div>
                 </div>
                 <?php endforeach; ?>
