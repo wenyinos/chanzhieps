@@ -185,6 +185,7 @@
 .panel-block .panel-body > .ul-list > li:before {left: 14px;}
 .panel-block .panel-body > .items {margin: -10px -15px;}
 .panel-block .panel-body > .items .item {padding: 10px 15px; border-bottom: 1px #e5e5e5 dashed;}
+.panel-block .panel-body > .items .item:last-child {border: none}
 .panel-block .panel-body > .items .item .media {max-width: inherit; overflow: hidden; max-height: 300px; margin-right: 5px;}
 .panel-block .panel-body > .items .item:hover {background-color: #f1f1f1;}
 .panel-block .panel-body > .items .item-content {margin-top: 5px;}
