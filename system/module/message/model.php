@@ -141,15 +141,17 @@ class messageModel extends model
     public function post($type)
     {
         $account = $this->app->user->account;
+        $admin   = $this->app->user->admin;
         $message = fixer::input('post')
             ->add('date', helper::now())
             ->add('type', $type)
+            ->add('status', '0')
             ->setDefault('public', '1')
             ->setIF(isset($_POST['secret']) and $_POST['secret'] == 1, 'public', '0')
             ->setIF($type == 'message', 'to', 'admin')
             ->setIF($account != 'guest', 'account', $account)
+            ->setIF($admin == 'super', 'status', '1')
             ->add('ip', $this->server->REMOTE_ADDR)
-            ->add('status', '0')
             ->get();
 
         $this->dao->insert(TABLE_MESSAGE)
@@ -196,19 +198,25 @@ class messageModel extends model
             ->batchCheck('from, type, content', 'notempty')
             ->exec();
 
-        if(dao::isError()) return false;
-
-        if(validater::checkEmail($message->email))
+        if(!dao::isError()) 
         {
-            $mail = new stdclass();
-            $mail->to      = $message->email;
-            $mail->subject = sprintf($this->lang->message->replySubject, $this->config->site->name);
-            $mail->body    = $reply->content;
+            $this->dao->update(TABLE_MESSAGE)->set('status')->eq(1)->where('status')->eq(0)->andWhere('id')->eq($messageID)->exec();
+            if(dao::isError()) return false;
 
-            $this->loadModel('mail')->send($mail->to, $mail->subject, $mail->body);
+            if(validater::checkEmail($message->email))
+            {
+                $mail = new stdclass();
+                $mail->to      = $message->email;
+                $mail->subject = sprintf($this->lang->message->replySubject, $this->config->site->name);
+                $mail->body    = $reply->content;
+
+                $this->loadModel('mail')->send($mail->to, $mail->subject, $mail->body);
+            }
+
+            return true;
         }
 
-        return $this->dao->lastInsertId();
+        return false;
     }
 
     /**
