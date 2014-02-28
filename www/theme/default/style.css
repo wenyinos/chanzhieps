@@ -193,6 +193,7 @@
 .panel-block .panel-body > .cards [class*='col-']:last-child .card {border-bottom: none;}
 .panel-block .panel-body > .cards [class*='col-']:last-child .card-heading {padding-bottom: 0;}
 .panel-block .panel-body .card {margin: 0 -15px; padding: 10px 15px 0 15px; border-bottom: 1px #e5e5e5 dashed; transition:all 0.3s; padding: 10px 10px 0 10px;}
+@media (max-width: 991px){.panel-block .panel-body .card:last-child {padding-bottom: 10px;}}
 .panel-block .panel-body .card > .media {text-align: center; overflow: hidden; background-color: #f1f1f1; height: 200px; line-height: 200px; background-repeat: no-repeat; background-position: center; background-size: cover;}
 .panel-block .panel-body .card > .media img {width: 100%; max-height: 100%; display: none; display: inline-block\0;}
 .panel-block .panel-body .card:hover {background-color: #fafafa;}
@@ -212,7 +213,7 @@
 .panel-block.panel-titleless .panel-heading {display: none;}
 
 .panel-block .nav-secondary > li > a {border-bottom: 1px dashed #ddd;}
-.panel-block .nav-secondary > li:last-child > a {border-bottom: none;}
+.panel-block .nav-secondary > li:last-child > a {margin-bottom: -1px;}
 .panel-block .nav-stacked > li + li {margin-top: 0;}
 
 /* meta-list */

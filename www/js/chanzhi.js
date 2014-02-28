@@ -566,6 +566,13 @@ function setGo2Top()
         .click(function(){$('body,html').animate({scrollTop:0},400); return false;});
  }
 
+
+/**
+ * Auto ajust block grid and size.
+ * 
+ * @access public
+ * @return void
+ */
 function autoBlockGrid()
 {
     $('.block-list > .row > .col-auto').each(function()
@@ -620,6 +627,8 @@ function autoBlockGrid()
         }
         else
         {
+            blocks.data('height', 0);
+
             $('.block-list .row').each(function()
             {
                 var i = 0, j = 0, k;
