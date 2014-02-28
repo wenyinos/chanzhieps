@@ -112,7 +112,7 @@ class article extends control
         $categories = $this->loadModel('tree')->getOptionMenu($type, 0, $removeRoot = true);
         if(empty($categories) && $type != 'page')
         {
-            die(js::locate($this->createLink('tree', 'redirect')));
+            die(js::locate($this->createLink('tree', 'redirect', 'type=$type')));
         }
 
         if($_POST)
