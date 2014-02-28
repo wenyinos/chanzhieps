@@ -376,7 +376,6 @@ class threadModel extends model
           <li><small>{$this->lang->user->last}: </small><span>{$speaker->last}</span></li>
         </ul>
 EOT;
-
     }
 
     /**
