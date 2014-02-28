@@ -480,6 +480,8 @@ class upgradeModel extends model
      */
     public function upgradeLayouts()
     {
+        $this->dao->update(TABLE_LAYOUT)->set('region')->eq('middle')->where('region')->eq('bottom')->exec();
+
         $layoutlist = $this->dao->select('*')->from(TABLE_LAYOUT)->where()->fetchAll();
         foreach($layoutlist as $layout)
         {
