@@ -566,6 +566,84 @@ function setGo2Top()
         .click(function(){$('body,html').animate({scrollTop:0},400); return false;});
  }
 
+function autoBlockGrid()
+{
+    $('.col-auto').each(function()
+    {
+        var col = $(this);
+        if(col.data('handled')) return;
+
+        var row      = col.closest('.row');
+        var cols     = row.children("[class*='col-']");
+        var autoCols = row.children('.col-auto');
+        var dGrid    = row.attr('data-default-grid') || 4;
+        var count    = cols.length;
+
+        if(count == autoCols.length)
+        {
+            if(count <= 3)
+            {
+                cols.attr('class', 'col-auto col-md-' + (12/count));
+            }
+            else
+            {
+                cols.attr('class', 'col-auto col-md-' + dGrid);
+            }
+            cols.data('handled', true);
+        }
+        else
+        {
+            col.attr('class', 'col-auto col-md-' + dGrid).data('handled', true);
+        }
+    });
+
+    /* ajust block height */
+    function ajustBlockHeight()
+    {
+        var blocks = $('.block-list .row .panel-block');
+        if(!blocks.length) return;
+
+        if($('body').width() < 992)
+        {
+            blocks.css('height', 'auto');
+        }
+        else
+        {
+            $('.block-list .row').each(function()
+            {
+                var i = 0, j = 0;
+                $(this).children("[class*='col-']").each(function()
+                {
+                    var col = $(this).attr('data-row', i);
+                    j += parseInt(col.attr('class').replace('col-md-|col-auto|', ''));
+                    if(j > 12)
+                    {
+                        j = 0;
+                        i++;
+                    }
+                });
+            });
+
+            blocks.each(function()
+            {
+                var block = $(this);
+                if(block.data('height')) return;
+
+                var row    = block.closest('.row');
+                var rowNo  = block.parent().data('row');
+                var height = 0;
+                row.find("[data-row='" + rowNo + "']")
+                   .each(function(){height = Math.max($(this).find('.panel-block').height(),height);})
+                   .find('.panel-block')
+                   .css('height', height).data('height', height);
+            });
+        }
+    }
+
+    $(window).resize(ajustBlockHeight);
+    ajustBlockHeight();
+}
+
 /**
  * Handle touch event for mobile devices
  * 

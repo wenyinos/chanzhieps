@@ -335,12 +335,12 @@ class blockModel extends model
      * @access public
      * @return void
      */
-    public function printRegion($blocks, $method = '', $region = '', $containerHeader = '', $containerFooter = '')
+    public function printRegion($blocks, $method = '', $region = '', $withGrid = false, $containerHeader = '', $containerFooter = '')
     {
         if(!isset($blocks[$method][$region])) return '';
         $blocks = $blocks[$method][$region];
         $html   = '';
-        foreach($blocks as $block) $html .= $this->parseBlockContent($block, $containerHeader, $containerFooter);
+        foreach($blocks as $block) $html .= $this->parseBlockContent($block, $withGrid, $containerHeader, $containerFooter);
         echo $html;
     }
 
@@ -353,9 +353,15 @@ class blockModel extends model
      * @access private
      * @return string
      */
-    private function parseBlockContent($block, $containerHeader, $containerFooter)
+    private function parseBlockContent($block, $withGrid = false, $containerHeader, $containerFooter)
     {
-        if(isset($block->grid) and $block->grid > 0) echo "<div class='col-md-{$block->grid}'>";
+        $withGrid = $withGrid and isset($block->grid) and $block->grid > 0;
+        if($withGrid)
+        {
+            if($block->grid == 0) echo "<div class='col-md-4 col-auto'>";
+            else echo "<div class='col-md-{$block->grid}'>";
+        }
+
         $blockRoot = dirname(__FILE__) . '/ext/view/block/';
         $blockFile = $blockRoot . strtolower($block->type) . '.html.php';
         if(!file_exists($blockFile))
@@ -375,6 +381,7 @@ class blockModel extends model
         echo $containerHeader;
         include $blockFile;
         echo $containerFooter;
-        if(isset($block->grid) and $block->grid > 0) echo '</div>';
+        
+        if($withGrid) echo '</div>';
     }
 }

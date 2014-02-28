@@ -83,6 +83,8 @@
 @media (min-width: 992px) {.page-container {max-width: 970px;}}
 @media (min-width: 1200px) {.page-container {max-width: 1170px;}}
 
+.col-md-12, .col-xs-12, .col-sm-12, .col-lg-12 {float: left;}
+
 /* page-header */
 .page-header {border-bottom: 1px solid #E5E5E5;padding: 0 15px;}
 
@@ -206,6 +208,9 @@
 .panel-block.panel-borderless .panel-heading {background: none}
 .panel-block.panel-titleless .panel-heading {display: none;}
 
+.panel-block .nav-secondary > li > a {border-bottom: 1px dashed #ddd;}
+.panel-block .nav-secondary > li:last-child > a {border-bottom: none;}
+.panel-block .nav-stacked > li + li {margin-top: 0;}
 
 /* meta-list */
 .meta-list {display: table; width: 100%;}
