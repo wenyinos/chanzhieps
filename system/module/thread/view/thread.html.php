@@ -7,7 +7,18 @@
   </div>
   <table class='table'>
     <tr>
-      <td class='speaker'><?php $this->thread->printSpeaker($speakers[$thread->author]);?></td>
+      <td class='speaker'>
+       <?php
+       if(isset($speakers[$thread->author]))
+       {
+           $this->thread->printSpeaker($speakers[$thread->author]);
+       }
+       else
+       {
+       echo $thread->author;
+       }
+       ?>
+      </td>
       <td id='<?php echo $thread->id;?>' class='thread-wrapper'>
         <div class='thread-content ariticle-content'><?php echo $thread->content;?></div>
         <?php $this->thread->printFiles($thread, $this->thread->canManage($board->id, $thread->author));?>
