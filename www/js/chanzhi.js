@@ -634,7 +634,7 @@ function autoBlockGrid()
                 $(this).children("[class*='col-']").each(function()
                 {
                     var col = $(this);
-                    j += col.data('grid');
+                    j += parseInt(col.data('grid'));
                     k = i;
                     if(j >= 12)
                     {
