@@ -14,6 +14,7 @@ $lang->company->common  = "公司";
 $lang->company->name    = "公司名稱";
 $lang->company->desc    = "公司簡介";
 $lang->company->content = "公司介紹";
+$lang->company->contact = "聯繫我們";
 
 $lang->company->setBasic   = "設置基本信息";
 $lang->company->setContact = "設置聯繫方式";

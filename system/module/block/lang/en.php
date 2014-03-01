@@ -25,7 +25,8 @@ $lang->block->showTime   = 'Show time';
 $lang->block->product    = 'Product';
 $lang->block->titleless  = 'Hide Title';
 $lang->block->borderless = 'Hide Border';
-$lang->block->grid       = '宽度';
+$lang->block->icon       = 'Icon';
+$lang->block->grid       = 'Width';
 
 $lang->block->add          = "Add";
 $lang->block->create       = 'Create Block';
