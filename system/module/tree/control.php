@@ -159,6 +159,7 @@ class tree extends control
      */
     public function redirect($type = 'article', $message = '')
     {
+        unset($this->lang->tree->menu);
         $this->view->message = ($message && $message != '') ? $message : $this->lang->tree->noCategories;
         $this->view->type    = $type;
 

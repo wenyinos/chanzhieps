@@ -52,7 +52,5 @@ $lang->board->readonlyList[0] = '开放';
 $lang->board->readonlyList[1] = '只读';
 
 $lang->board->placeholder = new stdclass();
-$lang->board->placeholder->moderators = '会员用户名, 多个用户名之间用逗号隔开';
-
-$lang->js->forumCategoryTip = '该板块需要设置子版块才能使用。';
-$lang->js->setChildren      = '设置子版块';
+$lang->board->placeholder->moderators  = '会员用户名, 多个用户名之间用逗号隔开';
+$lang->board->placeholder->setChildren = '论坛功能需要设置二级版块才能使用。';

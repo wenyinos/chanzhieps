@@ -32,7 +32,12 @@
           echo html::hidden('mode[]', 'new');
       }
 
+      if(empty($children) and $type == 'forum')
+      {
+          echo "<div class='form-group'><div class='col-xs-8 col-md-offset-2'><div class='alert alert-warning'>{$this->lang->board->placeholder->setChildren}</div></div></div>";
+      }
       echo "<div class='form-group'><div class='col-xs-8 col-md-offset-2'>" . html::submitButton() . "</div></div>";
+
       echo html::hidden('parent',   $parent);
       echo html::hidden('maxOrder', $maxOrder);
       ?>      

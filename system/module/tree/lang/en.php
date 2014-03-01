@@ -18,7 +18,9 @@ $lang->tree->manage      = "Manage";
 $lang->tree->fix         = "Fix data";
 
 $lang->tree->noCategories  = 'No category yet, add one first.';
-$lang->tree->aliasRepeat   = 'Alias: %s already exists。';
+$lang->tree->timeCountDown = "Locate to category manage page in <strong id='countDown'>3</strong> seconds.";
+$lang->tree->redirect      = 'Add now';
+$lang->tree->aliasRepeat   = 'Alias: %s already exists.';
 $lang->tree->aliasConflict = 'Alias: %s  conflicts with system modules';
 $lang->tree->hasChildren   = "The board has children, can't be deleted.";
 $lang->tree->confirmDelete = "Are you sure to delete it?";
@@ -48,3 +50,7 @@ $lang->board->moderators = 'Moderators';
 
 $lang->board->readonlyList[0] = 'Pulic';
 $lang->board->readonlyList[1] = 'Readonly';
+
+$lang->board->placeholder = new stdclass();
+$lang->board->placeholder->moderators  = "Moderators'account, Separated with" . '","';
+$lang->board->placeholder->setChildren = 'Forum needs tow levels boards.';
