@@ -66,7 +66,7 @@ $lang->article->lblEditor    = '<i>Edited by %s at %s</i>';
 $lang->article->lblComments  = '<strong>Comments:</strong> %s';
 
 $lang->article->none      = 'None';
-$lang->article->directory = 'Back';
+$lang->article->directory = 'List';
 
 $lang->article->note = new stdclass();
-$lang->article->note->addedDate = 'Can be delayed until the selected time publish.';
+$lang->article->note->addedDate = 'Publish the article after this time';

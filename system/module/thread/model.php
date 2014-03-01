@@ -327,7 +327,8 @@ class threadModel extends model
 
         /* Get replyID and repliedBy. */
         $reply = $this->dao->select('*')->from(TABLE_REPLY)
-            ->where('hidden')->eq('0')
+            ->where('thread')->eq($threadID)
+            ->andWhere('hidden')->eq('0')
             ->orderBy('addedDate desc')
             ->limit(1)
             ->fetch();

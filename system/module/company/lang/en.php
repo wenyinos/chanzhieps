@@ -14,6 +14,7 @@ $lang->company->common  = "Company";
 $lang->company->name    = "Name";
 $lang->company->desc    = "Intro";
 $lang->company->content = "More";
+$lang->company->contact = "Contact";
 
 $lang->company->setBasic   = "Basic";
 $lang->company->setContact = "Contact";
