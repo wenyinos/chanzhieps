@@ -23,7 +23,7 @@
         <div class='col-md-11 col-sm-10'>
         <?php $readonly = $thread->readonly ? 'checked' : ''; if($canManage):?>
           <div class='input-group'>
-            <?php echo html::input('title', '', "class='form-control'");?>
+            <?php echo html::input('title', $thread->title, "class='form-control'");?>
             <span class='input-group-addon'>
               <label class='checkbox'>
                   <?php echo "<input type='checkbox' name='readonly' value='1'  $readonly/><span>{$lang->thread->readonly}</span>" ?>
@@ -41,7 +41,7 @@
       </div>
       <div class='form-group'>
         <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->thread->file;?></label>
-        <div class='col-md-7 col-sm-10 col-xs-12'>
+        <div class='col-md-11 col-sm-10'>
           <?php
           $this->thread->printFiles($thread, $canManage = true);
           echo $this->fetch('file', 'buildForm');
