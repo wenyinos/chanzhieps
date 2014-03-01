@@ -18,7 +18,7 @@ function responsiveNavbar()
       var i = 0;
       lis.each(function()
       {
-          if(i++>8) $(this).addClass('simple-mode-b'); else $(this).addClass('simple-mode-a');
+          if(i++>10) $(this).addClass('simple-mode-b'); else $(this).addClass('simple-mode-a');
       });
     }
 
