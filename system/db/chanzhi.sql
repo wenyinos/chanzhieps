@@ -115,6 +115,8 @@ CREATE TABLE IF NOT EXISTS `eps_file` (
   `title` char(90) NOT NULL,
   `extension` char(30) NOT NULL,
   `size` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `width` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `height` smallint(5) unsigned NOT NULL DEFAULT '0',
   `objectType` char(20) NOT NULL,
   `objectID` mediumint(9) NOT NULL,
   `addedBy` char(30) NOT NULL DEFAULT '',
@@ -132,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `eps_file` (
 CREATE TABLE IF NOT EXISTS `eps_layout` (
   `page` varchar(30) NOT NULL,
   `region` varchar(30) NOT NULL,
-  `blocks` varchar(255) NOT NULL,
+  `blocks` text NOT NULL,
   UNIQUE KEY `layout` (`page`,`region`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -142,6 +144,7 @@ CREATE TABLE IF NOT EXISTS `eps_message` (
   `type` char(20) NOT NULL,
   `objectType` varchar(30) NOT NULL DEFAULT '',
   `objectID` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `account` char(30) DEFAULT NULL,
   `from` char(30) NOT NULL,
   `to` char(30) NOT NULL,
   `phone` char(30) NOT NULL,
@@ -294,15 +297,15 @@ CREATE TABLE IF NOT EXISTS `eps_user` (
 
 -- Insert data into `eps_layout`;
 INSERT INTO `eps_layout` (`page`, `region`, `blocks`) VALUES
-('index_index', 'header', '5,'),
-('index_index', 'bottom', '10,1,9,'),
-('index_index', 'footer', '11,'),
-('article_browse', 'side', '6,9,'),
-('article_view', 'side', '6,9,'),
-('product_browse', 'side', '4,7,9,'),
-('product_view', 'side', '4,7,9,'),
-('message_index', 'side', '9,'),
-('blog_index', 'side', '8,'),
-('blog_view', 'side', '8,'),
-('page_index', 'side', '2,9,'),
-('page_view', 'side', '2,9,');
+('index_index', 'header', '[{"id":"5","grid":"","titleless":0,"borderless":0}]'),
+('index_index', 'bottom', '[{"id":"10","grid":4,"titleless":0,"borderless":0},{"id":"1","grid":4,"titleless":0,"borderless":0},{"id":"9","grid":4,"titleless":0,"borderless":0}]'),
+('index_index', 'footer', '[{"id":"11","grid":"","titleless":0,"borderless":0}]'),
+('article_browse', 'side', '[{"id":"6","grid":"","titleless":0,"borderless":0},{"id":"9","grid":"","titleless":0,"borderless":0}]'),
+('article_view', 'side', '[{"id":"6","grid":"","titleless":0,"borderless":0},{"id":"9","grid":"","titleless":0,"borderless":0}]'),
+('product_browse', 'side', '[{"id":"4","grid":"","titleless":0,"borderless":0},{"id":"7","grid":"","titleless":0,"borderless":0},{"id":"9","grid":"","titleless":0,"borderless":0}]'),
+('product_view', 'side', '[{"id":"4","grid":"","titleless":0,"borderless":0},{"id":"7","grid":"","titleless":0,"borderless":0},{"id":"9","grid":"","titleless":0,"borderless":0}]'),
+('message_index', 'side', '[{"id":"9","grid":"","titleless":0,"borderless":0}]'),
+('blog_index', 'side', '[{"id":"8","grid":"","titleless":0,"borderless":0}]'),
+('blog_view', 'side', '[{"id":"8","grid":"","titleless":0,"borderless":0}]'),
+('page_index', 'side', '[{"id":"2","grid":"","titleless":0,"borderless":0},{"id":"9","grid":"","titleless":0,"borderless":0}]'),
+('page_view', 'side', '[{"id":"2","grid":"","titleless":0,"borderless":0},{"id":"9","grid":"","titleless":0,"borderless":0}]');
