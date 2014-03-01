@@ -1,6 +1,9 @@
 $(document).ready(function()
 {
-    $(document).on('click', 'a.plus', function(){$(this).parents('tr').after($('#entry').html());});
+    $(document).on('click', 'a.plus', function()
+    {
+        $(this).parents('tr').after($('#entry').html());
+    });
 
     /* Set border and title show. */
     $(document).on('change', 'input[type=checkbox]', function()
