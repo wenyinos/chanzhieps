@@ -33,10 +33,11 @@ $lang->book->lblAuthor    = 'Author: <strong>%s</strong> ';
 $lang->book->lblViews     = 'Read: <strong>%s</strong>  ';
 $lang->book->lblEditor    = '<i>Edited by %s at %s</i>';
 
-$lang->book->prev     = 'Previous';
-$lang->book->next     = 'Next';
 $lang->book->none     = 'None';
-$lang->book->chapter  = 'Back';
-$lang->book->back2Top = 'Back to top';
+$lang->book->chapter  = 'List';
+$lang->book->back2Top = 'Top';
 
 $lang->book->aliasRepeat = 'Alias:<strong> %s </strong> can not be repeated' ;
+
+$lang->book->note = new stdclass();
+$lang->book->note->addedDate = 'Publish this article after this time.';

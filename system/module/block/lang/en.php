@@ -36,7 +36,7 @@ $lang->block->edit         = 'Edit';
 $lang->block->view         = 'view';
 $lang->block->setPage      = 'Set page blocks';
 
-$lang->block->gridOptions = array('0' => 'Auto');
+$lang->block->gridOptions[0]  = 'Auto';
 $lang->block->gridOptions[6]  = '1/2';
 $lang->block->gridOptions[4]  = '1/3';
 $lang->block->gridOptions[8]  = '2/3';

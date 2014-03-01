@@ -44,8 +44,8 @@ $lang->block->gridOptions[3]  = '1/4';
 $lang->block->gridOptions[9]  = '3/4';
 $lang->block->gridOptions[12] = '100%';
 
-$lang->block->typeList['html']     = '自定义区块';
-$lang->block->typeList['code']     = '源代码';
+$lang->block->typeList['html'] = '自定义区块';
+$lang->block->typeList['code'] = '源代码';
 
 $lang->block->typeList['latestArticle']   = '最新文章';
 $lang->block->typeList['hotArticle']      = '热门文章';

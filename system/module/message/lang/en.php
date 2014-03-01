@@ -69,6 +69,7 @@ $lang->comment->thanks      = 'Thanks for your comment!';
 
 $lang->comment->pass          = 'Pass';
 $lang->comment->reply         = 'Reply';
+$lang->comment->replyTo       = 'Reply to';
 $lang->comment->manage        = 'Manage';
 $lang->comment->delete        = 'Delete';
 $lang->comment->passPre       = 'Pass previous';

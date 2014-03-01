@@ -18,6 +18,8 @@ $lang->tree->manage      = "Manage";
 $lang->tree->fix         = "Fix data";
 
 $lang->tree->noCategories  = 'No category yet, add one first.';
+$lang->tree->timeCountDown = "After <strong id='countDown'>3</strong> seconds will redirect the category manage page.";
+$lang->tree->redirect      = 'Manage category now';
 $lang->tree->aliasRepeat   = 'Alias: %s already exists。';
 $lang->tree->aliasConflict = 'Alias: %s  conflicts with system modules';
 $lang->tree->hasChildren   = "The board has children, can't be deleted.";
