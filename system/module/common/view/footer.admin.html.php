@@ -4,7 +4,7 @@
 
 <nav class="navbar navbar-default navbar-fixed-bottom hidden-sm hidden-xs" role="navigation">
   <div class="collapse navbar-collapse navbar-ex6-collapse">
-    <div class='navbar-text pull-right'><?php printf($lang->poweredBy, $config->version, commonModel::getSoftTitle(), $config->version);?></div>
+    <div class='navbar-text pull-right'><?php printf($lang->poweredBy, $config->version, k(), $config->version);?></div>
   </div>
 </nav>
 

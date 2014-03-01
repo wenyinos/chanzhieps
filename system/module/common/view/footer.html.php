@@ -17,7 +17,7 @@
     </span>
     <span id='icpInfo'><?php echo $config->site->icp; ?></span>
     <div id='powerby'>
-      <?php printf($lang->poweredBy, $config->version, commonModel::getSoftTitle(), $config->version); ?>
+      <?php printf($lang->poweredBy, $config->version, k(), $config->version); ?>
     </div>
   </footer>
    

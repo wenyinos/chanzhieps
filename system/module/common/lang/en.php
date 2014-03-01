@@ -272,3 +272,10 @@ define('DT_DATE3',     'F j, Y ');
 define('DT_DATE4',     'M j');
 define('DT_TIME1',     'H:i:s');
 define('DT_TIME2',     'H:i');
+
+/* Keywords for chanzhi. */
+$lang->k  = '蝉知，开源免费的企业建站系统!;';
+$lang->k .= '蝉知，开源免费的cms!;';
+$lang->k .= '蝉知，免费建站首先！;';
+$lang->k .= '蝉知，企业网站建设专家！;';
+$lang->k .= '蝉知，开源php企业建站系统！;';

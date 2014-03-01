@@ -487,6 +487,27 @@ function isLocalIP()
     if($serverIP == '127.0.0.1') return true;
     return !filter_var($serverIP, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE);
 }
+/**
+ * Key for chanzhi.
+ * 
+ * @access public
+ * @return string
+ */
+function k()
+{
+    global $config, $lang;
+
+    $siteCode = $config->site->code;
+    $codeLen  = strlen($siteCode);
+    $keywords = explode(';', $lang->k);
+    $count    = count($keywords);
+
+    $sum = 0;
+    for($i = 0; $i < $codeLen; $i++) $sum += ord($siteCode{$i});
+
+    $key = $sum % $count;
+    return $keywords[$key];
+}
 
 /**
  * Get web root. 
