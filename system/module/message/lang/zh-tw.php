@@ -69,6 +69,7 @@ $lang->comment->thanks      = '感謝您的評論！';
 
 $lang->comment->pass          = '通過';
 $lang->comment->reply         = '回覆';
+$lang->comment->replyTo       = '回覆于';
 $lang->comment->manage        = '評論管理';
 $lang->comment->delete        = '刪除';
 $lang->comment->passPre       = '通過之前';

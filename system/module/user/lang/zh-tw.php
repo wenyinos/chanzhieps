@@ -120,8 +120,11 @@ $lang->user->resetPassword->success    = "密碼更改連結已經發送到您�
 $lang->user->resetPassword->failed     = "您的密保郵箱錯誤，請重新輸入";
 
 $lang->user->resetmail = new stdclass();
-$lang->user->resetmail->subject = "密碼修改";
-$lang->user->resetmail->notice  = "系統發信，請勿回覆";
+$lang->user->resetmail->subject  = '密碼修改';
+$lang->user->resetmail->notice   = '系統發信，請勿回覆';
+$lang->user->resetmail->account  = '尊敬的用戶'; 
+$lang->user->resetmail->resetUrl = '請點擊下面的連結，進行密碼修改：'; 
+$lang->user->resetmail->resetKey = '重置碼：'; 
 
 $lang->user->oauth = new stdclass();
 $lang->user->oauth->common       = '開放登錄';
@@ -154,29 +157,3 @@ $lang->user->control->menus[20] = '<i class="icon-large icon-edit"></i> 編輯�
 $lang->user->control->menus[28] = '<i class="icon-large icon-comments-alt"></i> 我的消息 <i class="icon-chevron-right"></i>|user|message';
 $lang->user->control->menus[30] = '<i class="icon-large icon-share"></i> 我的主題 <i class="icon-chevron-right"></i>|user|thread';
 $lang->user->control->menus[40] = '<i class="icon-large icon-mail-reply"></i> 我的回帖 <i class="icon-chevron-right"></i>|user|reply';
-
-$lang->user->mailContent = <<<EOT
-<html>
-<head>
-<style type='text/css'>
-body{margin:0; padding:0;}
-div{padding-left:30px;} 
-</style>
-</head>
-<body>
-<div style='padding-top:20px;height:60px;background:#fafafa;border-bottom:1px solid #ddd;font-size:18px;font-weight:bold'> 密碼修改 </div>
-<div style='margin-top:20px;'>
-<p>
-尊敬的用戶 %s 
-<br>
-請點擊下面的連結，進行密碼修改:
-<br>
-<a href='%s' target='_blank'>%s</a>
-</p>
-<p>重置碼：%s</p>
-</div>
-<div style='height:20px;border-bottom:1px solid #ddd;'></div>
-<div style='margin:20px 0 0 0 ;'> 系統發信，請勿回覆 </div>
-</body>
-</html>
-EOT;

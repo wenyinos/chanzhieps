@@ -23,7 +23,10 @@ $lang->back2Top = '返回頂部';
 /* Lang items for xirang. */
 $lang->chanzhiEPS  = '蟬知企業門戶系統';
 $lang->chanzhiEPSx = '蟬知';
-$lang->poweredBy   = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPSx}%s</a></span>";
+$lang->poweredBy   = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>{$lang->chanzhiEPSx}%s</a></span>";
+
+/* Soft keyword, for show it in powerby. */
+$lang->softKeywords = "禪知,建站,雲禪知";
 
 /* IE6 alert.  */
 $lang->IE6Alert= <<<EOT

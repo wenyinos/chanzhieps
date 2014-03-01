@@ -21,7 +21,12 @@ $lang->block->regionList = '區域列表';
 $lang->block->select     = '請選擇區塊';
 $lang->block->categories = '分類';
 $lang->block->showImage  = '顯示圖片';
+$lang->block->showTime   = '顯示時間';
 $lang->block->product    = '產品';
+$lang->block->titleless  = '隱藏標題';
+$lang->block->borderless = '隱藏邊框';
+$lang->block->icon       = '表徵圖';
+$lang->block->grid       = '寬度';
 
 $lang->block->add          = "添加";
 $lang->block->create       = '添加區塊';
@@ -30,6 +35,20 @@ $lang->block->browseRegion = '佈局設置';
 $lang->block->edit         = '編輯區塊';
 $lang->block->view         = '查看區塊';
 $lang->block->setPage      = '配置頁面';
+
+$lang->block->gridOptions[0]  = '自動';
+$lang->block->gridOptions[1]  = '1/12';
+$lang->block->gridOptions[2]  = '2/12 (1/6)';
+$lang->block->gridOptions[3]  = '3/12 (1/4)';
+$lang->block->gridOptions[4]  = '4/12 (1/3)';
+$lang->block->gridOptions[5]  = '5/12';
+$lang->block->gridOptions[6]  = '6/12 (50%)';
+$lang->block->gridOptions[7]  = '7/12';
+$lang->block->gridOptions[8]  = '8/12 (2/3)';
+$lang->block->gridOptions[9]  = '9/12 (3/4)';
+$lang->block->gridOptions[10] = '10/12 (5/6)';
+$lang->block->gridOptions[11] = '11/12';
+$lang->block->gridOptions[12] = '12/12 (100%)';
 
 $lang->block->typeList['html']     = '自定義區塊';
 $lang->block->typeList['code']     = '原始碼';
@@ -108,7 +127,7 @@ $lang->block->regions->all['footer'] = '底部';
 $lang->block->regions->all['end']    = '結束部分';
 
 $lang->block->regions->index_index['header']  = '上部';
-$lang->block->regions->index_index['bottom']  = '下部';
+$lang->block->regions->index_index['middle']  = '中部';
 $lang->block->regions->index_index['footer']  = '底部';
 
 $lang->block->regions->article_browse['side'] = '側邊';
