@@ -32,4 +32,5 @@ $(document).ready(function()
         var hasNext = $(this).parents('tr').next().find('.plus').size() > 0;
         if(hasNext) $(this).parents('tr').next().after($(this).parents('tr')); 
     });
+
 })

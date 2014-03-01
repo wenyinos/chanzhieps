@@ -100,7 +100,7 @@ class block extends control
         {
             $result = $this->block->setRegion($page, $region);
 
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('pages')));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 

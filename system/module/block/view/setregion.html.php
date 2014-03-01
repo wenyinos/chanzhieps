@@ -10,27 +10,35 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php include '../../common/view/header.admin.html.php'; ?>
-<?php include '../../common/view/chosen.html.php'; ?>
-<div class='panel'>
-  <div class='panel-heading'><strong><i class='icon-cog'></i> <?php echo $lang->block->setPage . ' - '. $lang->block->pages[$page] . ' - ' . $lang->block->regions->{$page}[$region];?></strong></div>
-    <form id='ajaxForm' class='table-form' method='post'>
-      <table class='table table-striped table-bordered'>
-        <thead>
-          <tr>
-            <th class='text-center col-xs-8'><?php echo $lang->block->title;?></th>
-            <th class='w-60px'><?php echo $lang->block->grid;?></th>
-            <th class='w-150px'><?php echo $lang->actions;?></th>
-          </tr>
-        </thead>
-        <tbody>
-        <?php foreach($blocks as $block) echo $this->block->createEntry($block);?>
-        </tbody>
-        <tfoot>
-          <tr><td colspan='2' class='a-center'> <?php echo html::submitButton();?></td></tr>
-        </tfoot>
-      </table>
-    </form>
+<div class='modal-dialog'>
+  <div class='modal-content'>
+    <div class='modal-header'>
+      <?php echo html::closeButton();?>
+      <h4 class='modal-title' id='myModalLabel'>
+        <i class='icon-cog'></i> <?php echo $lang->block->setPage . ' - '. $lang->block->pages[$page] . ' - ' . $lang->block->regions->{$page}[$region];?>
+      </h4>
+    </div>
+    <div class='modal-body'>
+    <form id='ajaxForm' action="<?php echo inlink('setregion', "page={$page}&region={$region}");?>" method='post'>
+        <table class='table table-striped table-form'>
+          <thead>
+            <tr>
+              <th class='text-center col-xs-6'><?php echo $lang->block->title;?></th>
+              <th class='text-center col-xs-2'><?php echo $lang->block->grid;?></th>
+              <th class='text-center col-xs-2'><?php echo $lang->actions;?></th>
+            </tr>
+          </thead>
+          <tbody>
+          <?php foreach($blocks as $block) echo $this->block->createEntry($block);?>
+          </tbody>
+          <tfoot>
+            <tr><td colspan='3' class='a-center'> <?php echo html::submitButton();?></td></tr>
+          </tfoot>
+        </table>
+      </form>
+    </div>
     <table class='hide'><tbody id='entry'><?php echo $this->block->createEntry();?></tbody></table>
+    <div class='modal-footer'></div>
   </div>
-<?php include '../../common/view/footer.admin.html.php';?>
+</div>
+<?php if(isset($pageJS)) js::execute($pageJS);?>

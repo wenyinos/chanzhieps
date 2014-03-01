@@ -37,18 +37,12 @@ $lang->block->view         = '查看区块';
 $lang->block->setPage      = '配置页面';
 
 $lang->block->gridOptions[0]  = '自动';
-$lang->block->gridOptions[1]  = '1/12';
-$lang->block->gridOptions[2]  = '2/12 (1/6)';
-$lang->block->gridOptions[3]  = '3/12 (1/4)';
-$lang->block->gridOptions[4]  = '4/12 (1/3)';
-$lang->block->gridOptions[5]  = '5/12';
-$lang->block->gridOptions[6]  = '6/12 (50%)';
-$lang->block->gridOptions[7]  = '7/12';
-$lang->block->gridOptions[8]  = '8/12 (2/3)';
-$lang->block->gridOptions[9]  = '9/12 (3/4)';
-$lang->block->gridOptions[10] = '10/12 (5/6)';
-$lang->block->gridOptions[11] = '11/12';
-$lang->block->gridOptions[12] = '12/12 (100%)';
+$lang->block->gridOptions[6]  = '1/2';
+$lang->block->gridOptions[4]  = '1/3';
+$lang->block->gridOptions[8]  = '2/3';
+$lang->block->gridOptions[3]  = '1/4';
+$lang->block->gridOptions[9]  = '3/4';
+$lang->block->gridOptions[12] = '100%';
 
 $lang->block->typeList['html']     = '自定义区块';
 $lang->block->typeList['code']     = '源代码';

@@ -36,7 +36,12 @@ $lang->block->view         = 'view';
 $lang->block->setPage      = 'Set page blocks';
 
 $lang->block->gridOptions = array('0' => 'Auto');
-for($i = 1; $i < 13; $i ++ ) $lang->block->gridOptions[$i] = "{$i}/12";
+$lang->block->gridOptions[6]  = '1/2';
+$lang->block->gridOptions[4]  = '1/3';
+$lang->block->gridOptions[8]  = '2/3';
+$lang->block->gridOptions[3]  = '1/4';
+$lang->block->gridOptions[9]  = '3/4';
+$lang->block->gridOptions[12] = '100%';
 
 $lang->block->typeList['html'] = 'Html block';
 $lang->block->typeList['code'] = 'Codes';

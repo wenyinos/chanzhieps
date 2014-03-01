@@ -211,7 +211,7 @@ class blockModel extends model
         $entry .= html::select('grid[]', $this->lang->block->gridOptions, $grid, "class='form-control'");
         $entry .= '</td>';
 
-        $entry .= '<td class="text-middle">';
+        $entry .= '<td class="text-center text-middle">';
         $entry .= html::a('javascript:;', $this->lang->block->add, "class='plus'");
         $entry .= html::a('javascript:;', $this->lang->delete, "class='delete'");
         $entry .= html::a(inlink('edit', "blockID={$blockID}&type={$type}"), $this->lang->edit, "class='edit'");
@@ -374,9 +374,14 @@ class blockModel extends model
         $blockClass = '';
         if(isset($block->borderless) and $block->borderless) $blockClass .= 'panel-borderless';
         if(isset($block->titleless) and $block->titleless) $blockClass  .= ' panel-titleless';
-        $defaultIcon = isset($this->config->block->defaultIcons[$block->type]) ? $this->config->block->defaultIcons[$block->type] : '';
-        $iconClass   = isset($block->icon) ? $block->icon : $defaultIcon;
-        if($iconClass) $icon = "<i class='{$iconClass}'></i> ";
+
+        if(isset($this->config->block->defaultIcons[$block->type])) 
+        {
+            $defaultIcon =  $this->config->block->defaultIcons[$block->type];
+            $content     = json_decode($block->content);
+            $iconClass   = isset($content->icon) ? $content->icon : $defaultIcon;
+            if($iconClass) $icon = "<i class='{$iconClass}'></i> ";
+        }
 
         echo $containerHeader;
         include $blockFile;
