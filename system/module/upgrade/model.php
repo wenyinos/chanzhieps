@@ -75,6 +75,7 @@ class upgradeModel extends model
                 $this->processSiteDesc();
             case '2_0_1':
                 $this->execSQL($this->getUpgradeFile('2.0.1'));
+                $this->upgradeHtmlBlocks();
                 $this->upgradeLayouts();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -510,6 +511,25 @@ class upgradeModel extends model
                 ->where('page')->eq($layout->page)
                 ->andWhere('region')->eq($layout->region)
                 ->exec();
+        }
+
+        return !dao::isError();
+    }
+
+    /**
+     * Upgrade html blocks when upgrade from 2.0.1 .
+     * 
+     * @access public
+     * @return void
+     */
+    public function upgradeHtmlBlocks()
+    {
+        $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('type')->eq('html')->fetchAll();
+
+        foreach($blocks as $block)
+        {
+            $block->content = json_encode(array('content' => $block->content, 'icon' => ''));
+            $this->dao->update(TABLE_BLOCK)->data($block)->where('id')->eq($block->id)->exec();
         }
 
         return !dao::isError();

@@ -21,7 +21,7 @@ class blockModel extends model
     public function getByID($blockID)
     {
         $block = $this->dao->findByID($blockID)->from(TABLE_BLOCK)->fetch();
-        if(strpos('html,code', $block->type) === false) $block->content = json_decode($block->content);
+        if(strpos('code', $block->type) === false) $block->content = json_decode($block->content);
         return $block;
     }
 
@@ -236,6 +236,7 @@ class blockModel extends model
             {
                 if(is_array($value)) $block->params[$field] = join($value, ',');
             }
+            if($this->post->content) $block->params['content'] = $this->post->content;
             $block->content = json_encode($block->params);
         }
 
@@ -263,6 +264,7 @@ class blockModel extends model
             {
                 if(is_array($value)) $block->params[$field] = join($value, ',');
             }
+            if($this->post->content) $block->params['content'] = $this->post->content;
             $block->content = json_encode($block->params);
         }
 
@@ -380,7 +382,7 @@ class blockModel extends model
             $defaultIcon =  $this->config->block->defaultIcons[$block->type];
             $content     = json_decode($block->content);
             $iconClass   = isset($content->icon) ? $content->icon : $defaultIcon;
-            if($iconClass) $icon = "<i class='{$iconClass}'></i> ";
+            $icon        = $iconClass ? "<i class='{$iconClass}'></i> " : "" ;
         }
 
         echo $containerHeader;
