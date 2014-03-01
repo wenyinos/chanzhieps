@@ -44,7 +44,9 @@ if($articles)
       <div class='item'>
         <div class='item-heading'><strong><?php echo html::a($url, $article->title);?></strong></div>
         <div class='item-content'>
-          <div class='media'>
+          
+          <div class='text small text-muted'>
+            <div class='media pull-left'>
             <?php 
             if(!empty($article->image))
             {
@@ -52,8 +54,9 @@ if($articles)
                 echo html::a($url, html::image($article->image->primary->smallURL, "title='{$title}' class='thumbnail'" ));
             }
             ?>
+            </div>
+            <strong class='text-important'><i class='icon-time'></i> <?php echo substr($article->addedDate, 0, 10);?></strong> &nbsp;<?php echo $article->summary;?>
           </div>
-          <div class='text small text-muted'><strong class='text-important'><i class='icon-time'></i> <?php echo substr($article->addedDate, 0, 10);?></strong> &nbsp;<?php echo $article->summary;?></div>
         </div>
       </div>
       <?php endforeach;?>

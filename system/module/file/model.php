@@ -261,7 +261,7 @@ class fileModel extends model
         if(!file_exists($imagePath)) return array('width' => 0, 'height' => 0);
 
         list($width, $height) = getimagesize($imagePath);
-        return array('width' => $width, 'height' => $height);
+        return array('width' => (int)$width, 'height' => (int)$height);
     }
 
     /**
