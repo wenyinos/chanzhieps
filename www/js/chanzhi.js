@@ -131,13 +131,13 @@ $.extend(
             }
         };
 
-        /* Call ajaxSubmit to sumit the form. */
+       /* Call ajaxSubmit to sumit the form. */
        $(document).on('submit', formID, function()
-        { 
+       { 
             $.disableForm(formID);
             $(this).ajaxSubmit(options);
             return false;    // Prevent the submitting event of the browser.
-        });
+       });
     },
 
     /* Switch the label and disabled attribute for the submit button in a form. */
@@ -676,9 +676,9 @@ function autoBlockGrid()
  */
 function handleTouch()
 {
-    document.addEventListener('touchstart',touch, false);
-    document.addEventListener('touchmove',touch, false);
-    document.addEventListener('touchend',touch, false);
+    document.addEventListener('touchstart', touch, false);
+    document.addEventListener('touchmove',  touch, false);
+    document.addEventListener('touchend',   touch, false);
     var touchStart;
     
     /* listen the touch event */
