@@ -582,11 +582,10 @@ function autoBlockGrid()
 
         var row      = col.closest('.row');
         var cols     = row.children("[class*='col-']");
-        var autoCols = row.children('.col-auto');
         var dGrid    = row.attr('data-default-grid') || 4;
         var count    = cols.length;
 
-        if(count == autoCols.length)
+        if(count == row.children('.col-auto').length)
         {
             if(count <= 3)
             {
