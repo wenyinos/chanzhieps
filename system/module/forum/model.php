@@ -92,7 +92,8 @@ class forumModel extends model
 
         /* Get postID and replyID. */
         $post = $this->dao->select('id as postID, replyID, repliedDate as postedDate, repliedBy, author')->from(TABLE_THREAD)
-            ->where('hidden')->eq('0')
+            ->where('board')->eq($boardID)
+            ->andWhere('hidden')->eq('0')
             ->orderBy('repliedDate desc')
             ->limit(1)
             ->fetch();
@@ -107,6 +108,12 @@ class forumModel extends model
             $data->postedDate = $post->postedDate;
             $data->postedBy   = $post->repliedBy ? $post->repliedBy : $post->author;
         }
+        else
+        {
+            $data->postID   = 0;
+            $data->replyID  = 0;
+            $data->postedBy = '';
+        } 
 
         $this->dao->update(TABLE_CATEGORY)->data($data)->where('id')->eq($boardID)->exec();
     }
