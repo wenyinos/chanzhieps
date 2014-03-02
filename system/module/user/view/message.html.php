@@ -7,26 +7,26 @@
         <div class='panel-heading'><strong><i class='icon-comments-alt'></i> <?php echo $lang->user->messages;?></strong></div>
         <table class='table table-bordered table-hover' id='messages'>
           <thead>
-            <tr class='text-center'>
+            <tr class='text-center hidden-xxxs'>
               <th class='w-10px'><input type='checkbox' id='selectAll'></th>
-              <th class='w-50px'><?php echo $lang->message->from;?></th>
-              <th class='w-150px'><?php echo $lang->message->date;?></th>
+              <th class='w-50px hidden-xxxs'><?php echo $lang->message->from;?></th>
+              <th class='w-150px hidden-xxs'><?php echo $lang->message->date;?></th>
               <th><?php echo $lang->message->content;?></th>
-              <th class='w-60px'><?php echo $lang->message->readed;?></th>
-              <th class='w-80px'><?php echo $lang->actions;?></th>
+              <th class='w-60px hidden-xs'><?php echo $lang->message->readed;?></th>
+              <th class='w-80px hidden-xxs'><?php echo $lang->actions;?></th>
             </tr>
           </thead>
           <?php foreach($messages as $message):?>
           <tr class='text-center'>
             <td><input type='checkbox' name='messages[]' value="<?php echo $message->id?>" /></td>
-            <td><?php echo $message->from;?></td>
-            <td><?php echo substr($message->date, 5);?></td>
+            <td class='hidden-xxxs'><?php echo $message->from;?></td>
+            <td class='hidden-xxs'><?php echo substr($message->date, 5);?></td>
             <td class='text-left'><?php echo $message->content;?></td>
-            <td><?php echo $lang->message->readedStatus[$message->readed];?></td>
+            <td class='hidden-xs'><?php echo $lang->message->readedStatus[$message->readed];?></td>
             <?php if(!$message->readed):?>
-            <td><?php echo html::a($this->createLink('message', 'view', "message=$message->id"), $message->link ? $lang->message->view : $lang->message->readed);?></td>
+            <td class='hidden-xxs'><?php echo html::a($this->createLink('message', 'view', "message=$message->id"), $message->link ? $lang->message->view : $lang->message->readed);?></td>
             <?php else:?>
-            <td><?php echo $lang->message->readed;?></td>
+            <td class='hidden-xxs'><?php echo $lang->message->readed;?></td>
             <?php endif;?>
           </tr>
           <?php endforeach;?>
