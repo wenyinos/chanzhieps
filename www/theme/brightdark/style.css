@@ -125,3 +125,10 @@ textarea{height: auto;}
 /* dropdown */
 .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus{color: #DA3B26;}
 .dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus{color: #DA3B26; box-shadow: none;}
+
+/* responsive for mobile devices */
+@media (max-width: 767px)
+{
+  #headNav {border-radius: 0}
+  #headNav > a, #msgBox {padding: 2px 5px; border-radius: 0}
+}

@@ -25,3 +25,9 @@
 .panel > .panel-heading a{color: #f1f1f1}
 .panel.panel-pure > .panel-heading a{color: #145BCC}
 .panel.panel-pure .panel-heading{color: #666;border-color: #ddd}
+
+/* responsive for mobile devices */
+@media (max-width: 767px)
+{
+  #siteName {color: #fff;}
+}
