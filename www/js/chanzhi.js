@@ -2,7 +2,9 @@ $.extend(
 {
     setAjaxForm: function(formID, callback)
     {
-        form = $(formID); 
+        if($(document).data('setAjaxForm:' + formID)) return;
+
+        form = $(formID);
 
         var options = 
         {
@@ -131,13 +133,13 @@ $.extend(
             }
         };
 
-       /* Call ajaxSubmit to sumit the form. */
-       $(document).on('submit', formID, function()
-       { 
+        /* Call ajaxSubmit to sumit the form. */
+        $(document).on('submit', formID, function()
+        { 
             $.disableForm(formID);
             $(this).ajaxSubmit(options);
             return false;    // Prevent the submitting event of the browser.
-       });
+        }).data('setAjaxForm:' + formID, true);
     },
 
     /* Switch the label and disabled attribute for the submit button in a form. */
