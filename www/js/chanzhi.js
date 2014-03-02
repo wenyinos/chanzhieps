@@ -677,32 +677,31 @@ function autoBlockGrid()
  */
 function handleTouch()
 {
-    document.addEventListener('touchstart', touch, false);
-    document.addEventListener('touchmove',  touch, false);
-    document.addEventListener('touchend',   touch, false);
+    $('.carousel').on('touchstart touchmove touchend',   touch);
+
     var touchStart;
     
     /* listen the touch event */
     function touch(event)
     {
+        var carousel = $(this);
         var event = event || window.event;
+        if(event.originalEvent) event = event.originalEvent;
+
         switch(event.type)
         {
             case "touchstart":
                 touchStart = event.touches[0];
                 break;
             case "touchend":
-                handleCarousel(event.changedTouches[0].clientX - touchStart.clientX);
+                handleCarousel(carousel, event.changedTouches[0].pageX - touchStart.pageX);
                 break;
-            /* write 'tochmove' event here if need */
         }
+        event.preventDefault();
     }
 
-    function handleCarousel(distance)
+    function handleCarousel(carousel, distance)
     {
-        var carousel = $('.carousel');
-        if(carousel.length < 1) return;
-
         if(distance > 10) carousel.find('.left.carousel-control').click();
 
         if(distance < -10) carousel.find('.right.carousel-control').click();
