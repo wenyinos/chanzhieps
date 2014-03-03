@@ -124,7 +124,7 @@ $lang->user->resetmail->subject  = 'Modify password';
 $lang->user->resetmail->notice   = 'System letter, please do not reply';
 $lang->user->resetmail->account  = 'Hello,'; 
 $lang->user->resetmail->resetUrl = 'Please click the link to change your password:';
-$lang->user->resetmail->resetKey = 'Reset Key:'; 
+$lang->user->resetmail->reset    = 'Reset Key:'; 
 
 $lang->user->oauth = new stdclass();
 $lang->user->oauth->common       = 'OAuth';

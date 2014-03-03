@@ -16,7 +16,7 @@
             </tr>
             <tr>
               <th></th>
-              <td><?php echo html::submitButton($lang->user->submit,'btn btn-primary btn-block') . html::hidden('resetKey', $resetKey);?></td>
+              <td><?php echo html::submitButton($lang->user->submit,'btn btn-primary btn-block') . html::hidden('reset', $reset);?></td>
             </tr>
           </table>
         </form>

@@ -382,10 +382,10 @@ class user extends control
             $user = $this->user->getByAccount(trim($this->post->account));
             if($user)
             {
-                $account   = $user->account;
-                $resetKey  = md5(str_shuffle(md5($account . mt_rand(0, 99999999) . microtime())) . microtime()) . time();
-                $resetURL  = "http://". $_SERVER['HTTP_HOST'] . $this->inlink('checkresetkey', "key=$resetKey");
-                $this->user->resetKey($account, $resetKey);
+                $account  = $user->account;
+                $reset    = md5(str_shuffle(md5($account . mt_rand(0, 99999999) . microtime())) . microtime()) . time();
+                $resetURL = "http://". $_SERVER['HTTP_HOST'] . $this->inlink('checkreset', "key=$reset");
+                $this->user->reset($account, $reset);
                 include('view/resetpassmail.html.php');
                 $this->loadModel('mail')->send($account, $this->lang->user->resetmail->subject, $mailContent); 
                 if($this->mail->isError()) 
@@ -406,29 +406,29 @@ class user extends control
     }
 
     /**
-     * check the resetKey and reset password 
+     * check the reset and reset password. 
      *
      * @access public
      * @return void
      */
-    public function checkResetKey($resetKey)
+    public function checkReset($reset)
     {
         if(!empty($_POST))
         {
             $this->user->checkPassword();
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
-            $this->user->resetPassword($this->post->resetKey, $this->post->password1); 
+            $this->user->resetPassword($this->post->reset, $this->post->password1); 
             $this->send(array('result' => 'success', 'locate' => inlink('login')));
         }
 
-        if(!$this->user->checkResetKey($resetKey))
+        if(!$this->user->checkReset($reset))
         {
             header('location:index.html'); 
         }
         else
         {
-            $this->view->resetKey = $resetKey;
+            $this->view->reset = $reset;
             $this->display();
         }
     }

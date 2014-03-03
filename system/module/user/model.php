@@ -393,30 +393,30 @@ class userModel extends model
     }
 
     /**
-     * update the resetKey.
+     * update the reset.
      * 
      * @param  string   $account
      * @access public
      * @return void
      */
-    public function resetKey($account, $resetKey)
+    public function reset($account, $reset)
     {
-        $this->dao->update(TABLE_USER)->set('resetKey')->eq($resetKey)->where('account')->eq($account)->exec();
+        $this->dao->update(TABLE_USER)->set('reset')->eq($reset)->where('account')->eq($account)->exec();
     }
 
     /**
-     * Check the resetKey.
+     * Check the reset.
      * 
-     * @param  string   $resetKey 
+     * @param  string   $reset
      * @access public
      * @return void
      */
-    public function checkResetKey($resetKey)
+    public function checkReset($reset)
     {
-        $resetTime = substr($resetKey, -10);
+        $resetTime = substr($reset, -10);
         if((time() - $resetTime) > $this->config->user->resetExpired) return false;
         $user = $this->dao->select('*')->from(TABLE_USER)
-            ->where('resetKey')->eq($resetKey)
+            ->where('reset')->eq($reset)
             ->fetch('');
         return $user;
     }
@@ -424,21 +424,21 @@ class userModel extends model
     /**
      * Reset the forgotten password.
      * 
-     * @param  string   $resetKey 
+     * @param  string   $reset
      * @param  string   $password 
      * @access public
      * @return void
      */
-    public function resetPassword($resetKey, $password)
+    public function resetPassword($reset, $password)
     {
         $user = $this->dao->select('*')->from(TABLE_USER)
-                ->where('resetKey')->eq($resetKey)
+                ->where('reset')->eq($reset)
                 ->fetch();
         
         $this->dao->update(TABLE_USER)
             ->set('password')->eq($this->createPassword($password, $user->account))
-            ->set('resetKey')->eq('')
-            ->where('resetKey')->eq($resetKey)
+            ->set('reset')->eq('')
+            ->where('reset')->eq($reset)
             ->exec();
     }
 

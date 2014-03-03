@@ -124,7 +124,7 @@ $lang->user->resetmail->subject  = '密碼修改';
 $lang->user->resetmail->notice   = '系統發信，請勿回覆';
 $lang->user->resetmail->account  = '尊敬的用戶'; 
 $lang->user->resetmail->resetUrl = '請點擊下面的連結，進行密碼修改：'; 
-$lang->user->resetmail->resetKey = '重置碼：'; 
+$lang->user->resetmail->reset    = '重置碼：'; 
 
 $lang->user->oauth = new stdclass();
 $lang->user->oauth->common       = '開放登錄';

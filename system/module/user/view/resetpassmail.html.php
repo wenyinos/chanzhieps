@@ -29,7 +29,7 @@ div{padding-left:30px;}
 <br>
 <a href='{$resetURL}' target='_blank'>{$resetURL}</a>
 </p>
-<p>{$this->lang->user->resetmail->resetKey} {$resetKey}</p>
+<p>{$this->lang->user->resetmail->reset} {$reset}</p>
 </div>
 <div style='height:20px;border-bottom:1px solid #ddd;'></div>
 <div style='margin:20px 0 0 0 ;'>{$this->lang->user->resetmail->notice}</div>
