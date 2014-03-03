@@ -19,7 +19,12 @@ h5{font-size: 14px;}
   #blogNav .nav + .nav{border-top: 1px solid #6c8871;}
   #blogNav .nav > li{display: block; float: left; width: 33.333333333%}
   #blogNav .nav > li > a{text-align: center; padding: 5px; margin: 5px; border-radius: 3px}
+  #headTitle {position: static; margin-top: 15px;}
+  .card {margin-bottom: 10px;}
+  #blogNav .nav > li {width: 20%}
 }
+@media (max-width: 480px){#blogNav .nav > li{width: 33.333333333333%;}}
+@media (max-width: 480px) {#blogNav .nav > li{width: 50%;}}
 
 /* style of footer */
 #footNav .icon-rss-sign{color: #495e4d}
