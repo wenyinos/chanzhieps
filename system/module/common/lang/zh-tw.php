@@ -25,9 +25,6 @@ $lang->chanzhiEPS  = '蟬知企業門戶系統';
 $lang->chanzhiEPSx = '蟬知';
 $lang->poweredBy   = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>{$lang->chanzhiEPSx}%s</a></span>";
 
-/* Soft keyword, for show it in powerby. */
-$lang->softKeywords = "禪知,建站,雲禪知";
-
 /* IE6 alert.  */
 $lang->IE6Alert= <<<EOT
     <div class='alert alert-danger' style='margin-top:100px;'>
@@ -275,3 +272,10 @@ define('DT_DATE3',     'Y年m月d日');
 define('DT_DATE4',     'Y-m-d');
 define('DT_TIME1',     'H:i:s');
 define('DT_TIME2',     'H:i');
+
+/* Keywords for chanzhi. */
+$lang->k  = '蟬知，開源免費的企業建站系統!;';
+$lang->k .= '蟬知，開源免費的cms!;';
+$lang->k .= '蟬知，免費建站首先！;';
+$lang->k .= '蟬知，企業網站建設專家！;';
+$lang->k .= '蟬知，開源php企業建站系統！;';
