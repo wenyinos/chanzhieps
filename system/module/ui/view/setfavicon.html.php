@@ -14,7 +14,7 @@
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class='icon-globe'></i> <?php echo $lang->ui->setFavicon;?></strong>
-    <?php echo html::a('http://www.chanzhi.org/book/chanzhieps/69.html', "<i class='icon-question-sign'></i>{$lang->ui->favicon->help}", "class='pull-right' target='_blank'");?>
+    <?php echo html::a('http://www.chanzhi.org/book/chanzhieps/69.html', "<i class='icon-question-sign'></i> {$lang->ui->favicon->help}", "class='pull-right' target='_blank'");?>
   </div>
   <div class='panel-body'>
     <form method='post' id='ajaxForm' enctype='multipart/form-data'>
