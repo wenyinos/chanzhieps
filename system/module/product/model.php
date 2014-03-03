@@ -49,6 +49,8 @@ class productModel extends model
         $product->image = new stdclass();
         $product->image->list    = $product->images;
         $product->image->primary = !empty($product->image->list) ? $product->image->list[0] : '';
+         
+        $product->summary = empty($product->summary) ? helper::substr(strip_tags($product->content), 250) : $product->summary;
 
         return $product;
     }   
