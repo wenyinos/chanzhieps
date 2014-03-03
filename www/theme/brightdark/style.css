@@ -129,6 +129,6 @@ textarea{height: auto;}
 /* responsive for mobile devices */
 @media (max-width: 767px)
 {
-  #headNav {border-radius: 0}
+  #headNav {border-radius: 0; background-color: #808080}
   #headNav > a, #msgBox {padding: 2px 5px; border-radius: 0}
 }

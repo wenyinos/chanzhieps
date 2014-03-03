@@ -127,6 +127,6 @@ textarea{height: auto;}
 {
   #siteName {color: #fff;}
   
-  #headNav {border-radius: 0}
+  #headNav {border-radius: 0; background-color: #16a085}
   #headNav > a, #msgBox {padding: 2px 5px; border-radius: 0}
 }

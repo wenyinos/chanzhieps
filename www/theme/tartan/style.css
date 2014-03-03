@@ -144,5 +144,6 @@ textarea{height: auto;}
 
   body>.page-container {margin-top: 0;}
   
+  #headNav {background-color: #e8d0a9}
   #headNav > a, #msgBox {padding: 2px 5px; border-radius: 0}
 }
