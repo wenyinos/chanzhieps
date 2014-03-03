@@ -487,6 +487,7 @@ function isLocalIP()
     if($serverIP == '127.0.0.1') return true;
     return !filter_var($serverIP, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE);
 }
+
 /**
  * Key for chanzhi.
  * 
