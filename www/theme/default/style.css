@@ -411,6 +411,12 @@ a.tag-link {color: inherit;}
   .carousel-inner>.item>img, .carousel-inner>.item>a>img {max-width: inherit; max-height: 240px;}
 
   .ke-toolbar {display: none !important;}
+
+  .page {color :transparent; white-space:nowrap; overflow:hidden;}
+}
+@media (max-width: 480px)
+{
+  .page {color :transparent; white-space:nowrap; overflow:hidden;}
 }
 
 /* go2top */
