@@ -696,10 +696,10 @@ function handleTouch()
         switch(event.type)
         {
             case "touchstart":
-                touchStart = event.touches[0];
+                touchStart = event.touches[0].pageX;
                 break;
             case "touchend":
-                handleCarousel(carousel, event.changedTouches[0].pageX - touchStart.pageX);
+                handleCarousel(carousel, event.changedTouches[0].pageX - touchStart);
                 break;
         }
         event.preventDefault();
