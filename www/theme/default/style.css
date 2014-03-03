@@ -394,6 +394,8 @@ a.tag-link {color: inherit;}
 
   /* headNav */
   #headNav {top: 10px}
+
+  .col-md-12, .col-xs-12, .col-sm-12, .col-lg-12 {float: none;}
 }
 @media (max-width: 767px)
 {
