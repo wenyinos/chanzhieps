@@ -75,6 +75,7 @@ class upgradeModel extends model
                 $this->processSiteDesc();
             case '2_0_1':
                 $this->execSQL($this->getUpgradeFile('2.0.1'));
+                $this->setImageSize();
                 $this->upgradeHtmlBlocks();
                 $this->upgradeLayouts();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
