@@ -9,7 +9,7 @@
           <thead>
             <tr class='text-center hidden-xxxs'>
               <th class='w-10px'><input type='checkbox' id='selectAll'></th>
-              <th class='w-50px hidden-xxxs'><?php echo $lang->message->from;?></th>
+              <th class='w-80px hidden-xxxs'><?php echo $lang->message->from;?></th>
               <th class='w-150px hidden-xxs'><?php echo $lang->message->date;?></th>
               <th><?php echo $lang->message->content;?></th>
               <th class='w-60px hidden-xs'><?php echo $lang->message->readed;?></th>
