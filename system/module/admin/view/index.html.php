@@ -34,7 +34,7 @@
     </div>
     <div class='col-md-4 col-sm-6'>
       <div class="shortcut category">
-        <?php echo html::a($this->createLink('comment', 'admin'), '<h3>' . $lang->admin->shortcuts->comment . '</h3>')?>  
+        <?php echo html::a($this->createLink('message', 'admin'), '<h3>' . $lang->admin->shortcuts->comment . '</h3>')?>  
       </div>
     </div>
     <div class='col-md-4 col-sm-6'>
