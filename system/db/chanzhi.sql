@@ -288,7 +288,7 @@ CREATE TABLE IF NOT EXISTS `eps_user` (
   `fails` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `referer` varchar(255) NOT NULL,
   `join` datetime NOT NULL,
-  `resetKey` char(64) NOT NULL,
+  `reset` char(64) NOT NULL,
   `locked` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `admin` (`admin`),
