@@ -662,7 +662,7 @@ function autoBlockGrid()
                 var rowNo  = block.parent().data('row');
                 var height = 0;
                 row.find("[data-row='" + rowNo + "']")
-                   .each(function(){height = Math.max($(this).find('.panel-block').height(),height);})
+                   .each(function(){height = Math.max($(this).find('.panel-block').outerHeight(), height);})
                    .find('.panel-block')
                    .css('height', height).data('height', height);
             });
