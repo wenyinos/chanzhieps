@@ -617,12 +617,17 @@ function autoBlockGrid()
     });
 
     /* ajust block height */
+    var lastWidth = 0;
     function ajustBlockHeight()
     {
+        var width = $('body').width();
+        if(width == lastWidth) return;
+        lastWidth = width;
+
         var blocks = $('.block-list .row .panel-block');
         if(!blocks.length) return;
 
-        if($('body').width() < 992)
+        if(width < 992)
         {
             blocks.css('height', 'auto');
         }
