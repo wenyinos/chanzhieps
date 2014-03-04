@@ -282,6 +282,7 @@ form .star {display: none;}/* hide star */
 .input-append .add-on {display: block;position: absolute;right: 0;top: 0;}
 
 /* nav */
+.nav-primary > li > a {background: #fff;}
 .nav li .icon-chevron-right {float: right; margin-top: 2px; margin-right: -6px; opacity: .25;}
 .nav li.active i.icon-chevron-right,.nav li:hover i.icon-chevron-right{opacity: .9;}
 

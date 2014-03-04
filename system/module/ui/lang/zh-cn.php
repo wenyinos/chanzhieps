@@ -32,4 +32,5 @@ $lang->ui->themes['tree']       = '蝉之树';
 $lang->ui->themes['brightdark'] = '蝉憩';
 $lang->ui->themes['tartan']     = '蝉之格';
 $lang->ui->themes['blue']       = '蓝';
+$lang->ui->themes['custom']     = '自定义...';
 $lang->ui->changetheme = '点击来使用此主题';

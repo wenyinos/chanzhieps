@@ -12,5 +12,4 @@
 .book:hover .actions a,.chapter:hover .actions a,.books .article:hover .actions a { color: #506EAF; }
 .chapter, .books .article { line-height: 20px; }
 .chapter .order,.books .article .order { display: inline-block; font-weight: bold; margin-right: 4px; font-size: 12px; height: 20px; line-height: 20px; padding: 0 6px; color: #666; text-align: center; border: 1px solid #e1e1e1; border-radius: 5px; transition: all 0.3s;  }
-.booksNav { background-color: #fafafa; }
 .books dd:hover .order,.book:hover:before{border-color: #999}
