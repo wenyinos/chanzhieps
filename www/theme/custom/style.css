@@ -118,6 +118,13 @@ body
 #navbar .dropdown-submenu:hover > a:after {border-left-color: #fff;}
 #navbar .dropdown-menu > li > a:hover, #navbar .dropdown-menu > li > a:focus, #navbar .dropdown-submenu:hover > a, #navbar .dropdown-submenu:focus > a {background: #ac0303; color: #fff}
 
+@media (max-width: 767px)
+{ 
+    #navbar .nav > li:last-child > a, #navbar .nav > li:first-child > a {-webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0;}
+    #navbar .navbar-collapse {border-color: transparent;}
+    #navbar .navbar-toggle:hover, #navbar .navbar-toggle:focus {background-color: #cc0f16}
+}
+
 /* List */
 .list {background-color: #fff; -moz-border-radius: 15px; -webkit-border-radius: 15px; border-radius: 15px;}
 .list > header
