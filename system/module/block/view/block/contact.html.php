@@ -11,7 +11,7 @@
 */
 ?>
 <?php $contact = $this->loadModel('company')->getContact();?>
-<div id="block<?php echo $block->id;?>" class='panel panel-block'>
+<div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
   <div class='panel-heading'>
     <h4><?php echo $icon . $block->title;?></h4>
   </div>
