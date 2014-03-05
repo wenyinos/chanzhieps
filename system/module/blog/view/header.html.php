@@ -81,7 +81,7 @@ js::import($jsRoot . 'jquery/placeholder/min.js');
 <![endif]-->
 </head>
 <body>
-<div class='page-container'>
+<div class='page-container page-blog'>
   <header id='header' class='clearfix'>
     <div id='headNav'><?php echo commonModel::printTopBar();?></div>
     <div id='headTitle'>
