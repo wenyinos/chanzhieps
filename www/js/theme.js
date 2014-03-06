@@ -1,12 +1,11 @@
 /* theme */
 +function($, window, document, Math)
 {
+    "use strict";
+
     // hex color reg
     var hexReg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
-
     var templates = {};
-
-    "use strict";
 
     /* theme */
     var theme = function(options)
@@ -86,7 +85,7 @@
         var colorSecondary;
         if(this.options.colorSecondary == undefined)
         {
-            colorSecondary = colorPrimary.clone().darken(15).desaturate(15);
+            colorSecondary = colorPrimary.clone().darken(10).desaturate(15);
 
             this.options.colorSecondary = colorSecondary.hexStr();
         }
@@ -112,7 +111,7 @@
             var value = this.options[name];
             if(value != undefined)
             {
-                reg = new RegExp("(@" + name + ",)", "g");
+                var reg = new RegExp("(@" + name + ",)", "g");
                 css = css.replace(reg, value + ',');
                 reg = new RegExp("(@" + name + ";)", "g");
                 css = css.replace(reg, value + ';');
@@ -383,6 +382,11 @@
         }
     }
 
+    function isHexColor(hex)
+    {
+        return hex && hexReg.test($.trim(hex.toLowerCase()));
+    }
+
     function hslToRgb(hsl)
     {
         var h = hsl.h, s = hsl.s, l = hsl.l, a = hsl.a;
@@ -437,4 +441,6 @@
     }
 
     window.theme = theme;
+    window.isHexColor = isHexColor;
+    window.color = color;
 }(jQuery,window,document,Math);

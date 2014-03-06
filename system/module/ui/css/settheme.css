@@ -7,3 +7,14 @@
 #themes .card.current {border-color: #47A447; -moz-box-shadow:0px 0px 12px #47A447; -webkit-box-shadow:0px 0px 12px #47A447; box-shadow:0px 0px 12px #47A447;}
 #themes .card.current .icon-ok { display: block; background-color: #47A447; color: #fff; }
 #themes .card .msg { position: absolute; width: 100%; background-color: #47A447; color: #fff; bottom: 0; left: 0; right: 57px; height: 40px; padding: 0 15px; z-index: 5; line-height: 40px; display: none; }
+#themes .card .actions {display: none; position: absolute; top: 28px; left: 0; right: 0; z-index: 999; text-align: center; width: 100%;}
+#themes .card.current .actions {display: block; filter:alpha(opacity=0); -moz-opacity:0; opacity:0;}
+#themes .card.current:hover .actions {filter:alpha(opacity=100); -moz-opacity:1; opacity:1;}
+
+.color-tile {display: block; float: left; width: 34px; height: 34px; border-radius: 4px; border: 1px solid #ccc; margin: 2px 4px 2px 0; cursor: pointer; transition: all 0.4s; text-align: center; line-height: 32px;}
+.color-tile:hover, .color-tile.active {border-color: #333; box-shadow: 0 1px 4px rgba(0,0,0,0.5)}
+.input-group.color {width: 148px; float: left; margin: 2px 4px 2px 0;}
+.color .icon-ok, .color .icon-question {display: none}
+.color.active .icon-ok, .color.error .icon-question {display: inline;}
+.color.active.error .icon-ok {display: none}
+.color .input-group-addon {min-width: 40px; text-align: center;}

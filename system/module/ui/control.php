@@ -33,6 +33,29 @@ class ui extends control
      }
 
     /**
+     * custom theme
+     *
+     * @param $theme
+     * @access public
+     * return void
+     **/
+     public function customTheme($theme = '')
+     {
+        if($theme and isset($this->lang->ui->themes[$theme]) and $this->lang->ui->themes[$theme]['custom'])
+        {
+            if($_SERVER['REQUEST_METHOD'] == 'POST')
+            {
+                $path = $_SERVER['DOCUMENT_ROOT'] . '/theme/' . $theme . '/style.css';
+                file_put_contents($path, $this->post->css);
+                $this->send(array('result' => 'success', 'message' => $this->lang->ui->themeSaved));
+            }
+        }
+
+        $this->view->theme = $theme;
+        $this->display();
+     }
+
+    /**
      * set logo.
      * 
      * @access public
