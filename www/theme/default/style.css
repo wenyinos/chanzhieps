@@ -74,6 +74,7 @@
 
 /* --- CSS HELPERS --- */
 .borderless {border: none}
+.hiding {display: none}
 
 /* --- LAYOUT SETTING --- */
 /* containers. */

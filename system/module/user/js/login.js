@@ -38,5 +38,8 @@ $('#submit').click(function()
 
 function showFormError(text)
 {
-    $('#formError').text(text).show();
+    var error = $('#formError').text(text);
+    var parent = error.closest('.form-group');
+    if(parent.length) parent.show();
+    else error.show();
 }
