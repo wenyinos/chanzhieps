@@ -56,8 +56,6 @@
         this.getTemplate();
 
         this.caculateColor();
-
-        console.log(this.options);
     }
 
     theme.prototype.getTemplate = function()
@@ -68,8 +66,8 @@
         if(this.template == undefined)
         {
             var t = this;
-            $.ajax({ url: url, async: false })
-             .success(function(data) { t.template = data; templates[url] = t.template; console.log(data); })
+            $.ajax({url: url, async: false})
+             .success(function(data) { t.template = data; templates[url] = t.template;})
              .error(function() { throw new Error("Can't get theme template!"); });
         }
     }
@@ -83,12 +81,13 @@
         this.options.colorPrimaryB = colorPrimary.b;
         this.options.colorPrimaryRgb = colorPrimary.r + ', ' + colorPrimary.g + ', ' + colorPrimary.b;
         this.options.colorPrimaryInverse = colorPrimaryInverse.hexStr();
-        this.options.colorPrimaryInverseDim = colorPrimaryInverse.darken().hexStr();
+        this.options.colorPrimaryInverseDim = colorPrimaryInverse.darken(10).hexStr();
 
         var colorSecondary;
         if(this.options.colorSecondary == undefined)
         {
             colorSecondary = colorPrimary.clone().darken(15).desaturate(15);
+
             this.options.colorSecondary = colorSecondary.hexStr();
         }
         else
@@ -99,8 +98,8 @@
         this.options.colorSecondaryG = colorSecondary.g;
         this.options.colorSecondaryB = colorSecondary.b;
         this.options.colorSecondaryRgb = colorSecondary.r + ', ' + colorSecondary.g + ', ' + colorSecondary.b;
-        this.options.colorSecondaryDark = colorSecondary.darken(15).hexStr();
-        this.options.colorSecondaryLight = colorSecondary.lighten(15).hexStr();
+        this.options.colorSecondaryDark = colorSecondary.darken(5).hexStr();
+        this.options.colorSecondaryLight = colorSecondary.lighten(5).hexStr();
 
         this.options.colorPale = new color({h: colorPrimary.hue(), s: 0.54, l: 0.95}).spin(-7).hexStr();
     }
@@ -113,12 +112,14 @@
             var value = this.options[name];
             if(value != undefined)
             {
-                reg = new RegExp("(@" + name + " )", "g");
-                css = css.replace(reg, value + ' ');
+                reg = new RegExp("(@" + name + ",)", "g");
+                css = css.replace(reg, value + ',');
                 reg = new RegExp("(@" + name + ";)", "g");
-                css = css.replace(reg, value + ' ');
+                css = css.replace(reg, value + ';');
                 reg = new RegExp("(@" + name + "})", "g");
                 css = css.replace(reg, value + '}');
+                reg = new RegExp("(@" + name + " )", "g");
+                css = css.replace(reg, value + ' ');
             }
         }
 
@@ -128,55 +129,74 @@
     /* color */
     var color = function(r, g, b, a)
     {
-        console.log('COLOR: r='+r+', g='+g+', b='+b+', a='+a);
+        // this.rgba 替换为 this.r,this.g,this.b
 
-        var rgba = {r: 0, g: 0, b: 0, a: 1};
-        if(a != undefined) rgba.a = clamp(number(a), 1);
+        this.r = 0;
+        this.g = 0;
+        this.b = 0;
+        this.a = 1;
+
+        if(a != undefined) this.a = clamp(number(a), 1);
 
         if(r != undefined && g!=undefined && b != undefined)
         {
-            console.log('oooo');
-            console.log(clamp(number(r), 255));
-            rgba.r = clamp(number(r), 255);
-            rgba.g = clamp(number(g), 255);
-            rgba.b = clamp(number(b), 255);
-            console.log(rgba.r);
+            this.r = parseInt(clamp(number(r), 255));
+            this.g = parseInt(clamp(number(g), 255));
+            this.b = parseInt(clamp(number(b), 255));
         }
         else if(r != undefined)
         {
             var type = typeof(r);
             if(type == 'string')
             {
-                rgba = hexToRgb(r);
+                this.rgb(hexToRgb(r));
             }
-            else if(type == 'number')
+            else if(type == 'number' && g == undefined)
             {
-                rgba.r = clamp(number(r), 255);
-                if(g != undefined) rgba.g = clamp(number(g), 255);
+                this.r = parseInt(clamp(r, 255));
+                this.g = this.r;
+                this.b = this.r;
             }
-            else if(r.hasOwnProperty('r'))
+            else if(type == 'object' && r.hasOwnProperty('r'))
             {
-                rgba.r = clamp(number(r.r), 255);
-                if(r.hasOwnProperty('g')) rgba.g = clamp(number(r.g), 255);
-                if(r.hasOwnProperty('b')) rgba.b = clamp(number(r.b), 255);
-                if(r.hasOwnProperty('a')) rgba.a = clamp(number(r.a), 1);
+                this.r = parseInt(clamp(number(r.r), 255));
+                if(r.hasOwnProperty('g')) this.g = parseInt(clamp(number(r.g), 255));
+                if(r.hasOwnProperty('b')) this.b = parseInt(clamp(number(r.b), 255));
+                if(r.hasOwnProperty('a')) this.a = clamp(number(r.a), 1);
             }
-            else if(r.hasOwnProperty('h'))
+            else if(type == 'object' && r.hasOwnProperty('h'))
             {
                 var hsl = {h: clamp(number(r.h), 360), s: 1, l: 1, a: 1};
                 if(r.hasOwnProperty('s')) hsl.g = clamp(number(r.s), 255);
                 if(r.hasOwnProperty('l')) hsl.b = clamp(number(r.l), 255);
                 if(r.hasOwnProperty('a')) hsl.a = clamp(number(r.a), 1);
 
-                rgba = hslToRgb(hsl);
+                this.rgb(hslToRgb(hsl));
             }
         }
+    }
 
-        this.rgba = rgba;
-        console.log('-----')
-        console.log(rgba);
-        console.log(this.rgba);
-        console.log(this);
+    color.prototype.rgb = function(rgb)
+    {
+        if(rgb != undefined)
+        {
+            if(typeof(rgb) == 'object')
+            {
+                if(rgb.hasOwnProperty('r')) this.r = parseInt(clamp(number(rgb.r), 255));
+                if(rgb.hasOwnProperty('g')) this.g = parseInt(clamp(number(rgb.g), 255));
+                if(rgb.hasOwnProperty('b')) this.b = parseInt(clamp(number(rgb.b), 255));
+                if(rgb.hasOwnProperty('a')) this.a = clamp(number(rgb.a), 1);
+            }
+            else
+            {
+                var v = parseInt(number(rgb));
+                this.r = v;
+                this.g = v;
+                this.b = v;
+            }
+            return this;
+        }
+        else return {r: this.r, g: this.g, b: this.b, a: this.a};
     }
 
     color.prototype.hue = function(hue)
@@ -187,7 +207,7 @@
         else
         {
             hsl.h = clamp(number(hue), 360);
-            this.rgba = hslToRgb(hsl);
+            this.rgb(hslToRgb(hsl));
 
             return this;
         }
@@ -198,16 +218,15 @@
         var hsl = this.toHsl();
 
         hsl.l -= amount / 100;
-        hsl.l = clamp(hsl.l);
+        hsl.l = clamp(hsl.l, 1);
 
-        this.rgba = hslToRgb(hsl);
-
+        this.rgb(hslToRgb(hsl));
         return this;
     }
 
     color.prototype.clone = function()
     {
-        return new color(this.rgba);
+        return new color(this.r, this.g, this.b, this.a);
     }
 
     color.prototype.lighten = function(amount)
@@ -217,7 +236,7 @@
 
     color.prototype.fade = function(amount)
     {
-        this.rgba.a = clamp(amount/100, 1);
+        this.a = clamp(amount/100, 1);
 
         return this;
     }
@@ -228,17 +247,17 @@
         var hue = (hsl.h + amount) % 360;
 
         hsl.h = hue < 0 ? 360 + hue : hue;
-        this.rgba = hslToRgb(hsl);
+        this.rgb(hslToRgb(hsl));
 
         return this;
     }
 
     color.prototype.toHsl = function()
     {
-        var r = this.rgba.r/ 255,
-        g = this.rgba.g / 255,
-        b = this.rgba.b / 255,
-        a = this.rgba.a;
+        var r = this.r/ 255,
+        g = this.g / 255,
+        b = this.b / 255,
+        a = this.a;
 
         var max = Math.max(r, g, b), min = Math.min(r, g, b);
         var h, s, l = (max + min) / 2, d = max - min;
@@ -264,9 +283,9 @@
 
     color.prototype.luma = function()
     {
-        var r = this.rgba.r / 255,
-            g = this.rgba.g / 255,
-            b = this.rgba.b / 255;
+        var r = this.r / 255,
+            g = this.g / 255,
+            b = this.b / 255;
 
         r = (r <= 0.03928) ? r / 12.92 : Math.pow(((r + 0.055) / 1.055), 2.4);
         g = (g <= 0.03928) ? g / 12.92 : Math.pow(((g + 0.055) / 1.055), 2.4);
@@ -279,10 +298,10 @@
     {
         var hsl = this.toHsl();
 
-        hsl.s += amount.value / 100;
+        hsl.s += amount / 100;
         hsl.s = clamp(hsl.s);
 
-        this.rgba = hslToRgb(hsl);
+        this.rgb(hslToRgb(hsl));
 
         return this;
     }
@@ -321,9 +340,11 @@
 
     color.prototype.hexStr = function()
     {
-        var r = this.rgba.r.toString(16),
-            g = this.rgba.g.toString(16),
-            b = this.rgba.b.toString(16);
+        // return 'rgb('+this.r+','+this.g+','+this.b+')';
+
+        var r = this.r.toString(16),
+            g = this.g.toString(16),
+            b = this.b.toString(16);
         if(r.length == 1) r = '0' + r;
         if(g.length == 1) g = '0' + g;
         if(b.length == 1) b = '0' + b;
@@ -409,6 +430,9 @@
 
     function number(n)
     {
+        if(typeof(n) == 'number') return n;
+        logSubTitle('number');
+        log(n+ ' is not a number.');
         return parseFloat(n);
     }
 
