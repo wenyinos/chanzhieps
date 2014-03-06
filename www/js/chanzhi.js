@@ -380,18 +380,19 @@ $.extend(
      */
     setAjaxModal: function()
     {
-        if($('a[data-toggle=modal]').size() == 0) return false;
+        if($('[data-toggle=modal]').size() == 0) return false;
 
         /* Addpend modal div. */
         $('<div id="ajaxModal" class="modal fade"></div>').appendTo('body');
 
         /* Set the data target for modal. */
-        $('a[data-toggle=modal]').attr('data-target', '#ajaxModal');
+        $('[data-toggle=modal]').attr('data-target', '#ajaxModal');
 
-        $('a[data-toggle=modal]').click(function()
+        $('[data-toggle=modal]').click(function()
         {
             var $e = $(this);
-            $('#ajaxModal').load($e.attr('href'),function()
+            var url = $e.attr('href') || $e.data('url');
+            $('#ajaxModal').load(url, function()
             {
                 /* Set the width of modal dialog. */
                 if($e.data('width'))
@@ -399,10 +400,13 @@ $.extend(
                     var modalWidth = parseInt($e.data('width'));
                     $(this).data('width', modalWidth).find('.modal-dialog').css('width', modalWidth);
                 }
+
+                /* show the modal dialog. */
+                $('#ajaxModal').modal('show');
             });
 
             /* Save the href to rel attribute thus we can save it. */
-            $('#ajaxModal').attr('rel', $(this).attr('href'));
+            $('#ajaxModal').attr('rel', url);
         });
     },
 
