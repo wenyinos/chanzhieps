@@ -59,6 +59,7 @@
 .w-500px {width:500px}
 .w-600px {width:600px}
 .w-700px {width:700px}
+.w-800px {width:800px}
 .w-1000px {width:1000px}
 
 .w-id        {width:55px;}
@@ -232,6 +233,7 @@ tr.text-center > td, tr.text-center > th {text-align: center;}
 tr.text-center > td.text-left, tr.text-center > th.text-left {text-align: left;}
 
 .label{font-size: 12px;}
+.btn-link {background-color: transparent;}
 
 /* form */
 .input-group-addon .checkbox {padding-top: 4px;}
