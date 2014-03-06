@@ -1,32 +1,34 @@
 /*
-   Chanzhi custom theme template
+   Chanzhi custom theme
 
+   The file build by system automatically.
    Options:
+   ( '*' mark the key option)
 
-   * colorBackgroud:           #ffffff;
-   * colorFore:                #333;
-   * colorBorder:              #e5e5e5;
-   * backgroundImage:          none;
-   * fontSize:                 14px;
-   * colorPrimary:             #cc0f16;
-     colorPrimaryR:            204;
-     colorPrimaryG:            15;
-     colorPrimaryB:            22;
-     colorPrimaryRgb:          204,15,22;
-     colorPrimaryInverseDim:   @e3e3e3;
-     colorPrimaryInverse:      #fff;
-   * colorSecondary:           #990000;
-     colorSecondaryR:          153;
-     colorSecondaryG:          0;
-     colorSecondaryB:          0;
-     colorSecondaryRgb:        153,0,0;
-     colorSecondaryDark:       #820808;
-     colorSecondaryLight:      #ac0303;
-     colorPale:                #ffeaeb;
-   * borderRadius:             4px;
-   * avatarBorderRadius:       20px;
-   * borderWidth:              1px;
-   * borderStyle:              solid;
+   * colorBackgroud:           @colorBackgroud;
+   * colorFore:                @colorFore;
+   * colorBorder:              @colorBorder;
+   * backgroundImage:          @backgroundImage;
+   * fontSize:                 @fontSize;
+   * colorPrimary:             @colorPrimary;
+     colorPrimaryR:            @colorPrimaryR;
+     colorPrimaryG:            @colorPrimaryG;
+     colorPrimaryB:            @colorPrimaryB;
+     colorPrimaryRgb:          @colorPrimaryRgb;
+     colorPrimaryInverseDim:   @colorPrimaryInverseDim;
+     colorPrimaryInverse:      @colorPrimaryInverse;
+   * colorSecondary:           @colorSecondary;
+     colorSecondaryR:          @colorSecondaryR;
+     colorSecondaryG:          @colorSecondaryG;
+     colorSecondaryB:          @colorSecondaryB;
+     colorSecondaryRgb:        @colorSecondaryRgb;
+     colorSecondaryDark:       @colorSecondaryDark;
+     colorSecondaryLight:      @colorSecondaryLight;
+     colorPale:                @colorPale;
+   * borderRadius:             @borderRadius;
+   * avatarBorderRadius:       @avatarBorderRadius;
+   * borderWidth:              @borderWidth;
+   * borderStyle:              @borderStyle;
 */
 
 /* ZUI theme */
@@ -35,7 +37,7 @@ a:hover, a:focus {color: @colorSecondary;}
 
 .btn-primary {color: @colorPrimaryInverseDim; background-color: @colorPrimary; border-color: @colorSecondary;}
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {color: @colorPrimaryInverse; background-color: @colorSecondary; border-color: @colorSecondary;}
-.btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {backgroundImage: none;}
+.btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {background-image: none;}
 .btn-link {color: @colorPrimary;}
 .btn-link:hover, .btn-link:focus {color: @colorSecondary;}
 
@@ -76,32 +78,32 @@ a.card:hover, .card:hover a {color: @colorPrimary;}
 
 .comment:hover > .content > .actions > a {color: @colorPrimary;}
 
-.btn, .form-control {-moz-borderRadius: @borderRadius; -webkit-borderRadius: @borderRadius; borderRadius: @borderRadius;}
-.ke-container {-moz-borderRadius: @borderRadius !important; -webkit-borderRadius: @borderRadius !important; borderRadius: @borderRadius !important;}
+.btn, .form-control {-moz-border-radius: @borderRadius; -webkit-border-radius: @borderRadius; border-radius: @borderRadius;}
+.ke-container {-moz-border-radius: @borderRadius !important; -webkit-border-radius: @borderRadius !important; border-radius: @borderRadius !important;}
 
 /* Background */
-body {color:@colorFore; background-color: @colorBackgroud; backgroundImage: @backgroundImage; fontSize: @fontSize; background-attachment: fixed;}
+body {color:@colorFore; background-color: @colorBackgroud; background-image: @backgroundImage; fontSize: @fontSize; background-attachment: fixed;}
 
 /* Navbar */
 #navbar
 {
     border-color: @colorSecondaryDark;
     background: @colorSecondary;
-    -webkit-borderRadius: @borderRadius;
-    -moz-borderRadius: @borderRadius;
-    borderRadius: @borderRadius;
+    -webkit-border-radius: @borderRadius;
+    -moz-border-radius: @borderRadius;
+    border-radius: @borderRadius;
 }
 #navbar .nav > li:first-child > a
 {
-    -webkit-borderRadius: @borderRadius 0 0 @borderRadius;
-    -moz-borderRadius: @borderRadius 0 0 @borderRadius;
-    borderRadius: @borderRadius 0 0 @borderRadius;
+    -webkit-border-radius: @borderRadius 0 0 @borderRadius;
+    -moz-border-radius: @borderRadius 0 0 @borderRadius;
+    border-radius: @borderRadius 0 0 @borderRadius;
 }
 #navbar .nav > li:last-child > a
 {
-    -webkit-borderRadius: 0 @borderRadius @borderRadius 0;
-    -moz-borderRadius: 0 @borderRadius @borderRadius 0;
-    borderRadius: 0 @borderRadius @borderRadius 0;
+    -webkit-border-radius: 0 @borderRadius @borderRadius 0;
+    -moz-border-radius: 0 @borderRadius @borderRadius 0;
+    border-radius: 0 @borderRadius @borderRadius 0;
 }
 #navbar .nav > li > a
 {
@@ -119,78 +121,79 @@ body {color:@colorFore; background-color: @colorBackgroud; backgroundImage: @bac
 }
 
 #navbar .caret {border-top-color: @colorPrimaryInverseDim; border-bottom-color: @colorPrimaryInverseDim;}
-#navbar .dropdown-menu, #navbar .dropdown-menu > li:last-child > a {-webkit-borderRadius: 0 0 @borderRadius @borderRadius; -moz-borderRadius: 0 0 @borderRadius @borderRadius; borderRadius: 0 0 @borderRadius @borderRadius;}
-#navbar .dropdown-menu .dropdown-menu {-webkit-borderRadius: @borderRadius; -moz-borderRadius: @borderRadius; borderRadius: @borderRadius;}
-#navbar .dropdown-menu .dropdown-menu > li:first-child > a {-webkit-borderRadius: @borderRadius @borderRadius 0 0; -moz-borderRadius: @borderRadius @borderRadius 0 0; borderRadius: @borderRadius @borderRadius 0 0;}
+#navbar .dropdown-menu, #navbar .dropdown-menu > li:last-child > a {-webkit-border-radius: 0 0 @borderRadius @borderRadius; -moz-border-radius: 0 0 @borderRadius @borderRadius; border-radius: 0 0 @borderRadius @borderRadius;}
+#navbar .dropdown-menu .dropdown-menu {-webkit-border-radius: @borderRadius; -moz-border-radius: @borderRadius; border-radius: @borderRadius;}
+#navbar .dropdown-menu .dropdown-menu > li:first-child > a {-webkit-border-radius: @borderRadius @borderRadius 0 0; -moz-border-radius: @borderRadius @borderRadius 0 0; border-radius: @borderRadius @borderRadius 0 0;}
 #navbar .dropdown-submenu:hover > a:after {border-left-color: @colorPrimaryInverseDim;}
 #navbar .dropdown-menu > li > a:hover, #navbar .dropdown-menu > li > a:focus, #navbar .dropdown-submenu:hover > a, #navbar .dropdown-submenu:focus > a {background: @colorSecondaryLight; color: @colorPrimaryInverse}
 
 @media (max-width: 767px)
 { 
-    #navbar .nav > li:last-child > a, #navbar .nav > li:first-child > a {-webkit-borderRadius: 0; -moz-borderRadius: 0; borderRadius: 0;}
+    #navbar .nav > li:last-child > a, #navbar .nav > li:first-child > a {-webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0;}
     #navbar .navbar-collapse {border-color: transparent;}
     #navbar .navbar-toggle:hover, #navbar .navbar-toggle:focus {background-color: @colorPrimary}
 }
 
 /* List */
-.list {background-color: @colorBackgroud; -moz-borderRadius: @borderRadius; -webkit-borderRadius: @borderRadius; borderRadius: @borderRadius;}
+.list {background-color: @colorBackgroud; -moz-border-radius: @borderRadius; -webkit-border-radius: @borderRadius; border-radius: @borderRadius;}
 .list > header
 { 
     background: @colorSecondary;
     color: @colorPrimaryInverseDim;
-    -webkit-borderRadius: @borderRadius @borderRadius 0 0;
-    -moz-borderRadius: @borderRadius @borderRadius 0 0;
-    borderRadius: @borderRadius @borderRadius 0 0;
+    -webkit-border-radius: @borderRadius @borderRadius 0 0;
+    -moz-border-radius: @borderRadius @borderRadius 0 0;
+    border-radius: @borderRadius @borderRadius 0 0;
 }
 
 /* Carousel */
-.carousel {-moz-borderRadius: @borderRadius; -webkit-borderRadius: @borderRadius; borderRadius: @borderRadius;}
-.right.carousel-control {-webkit-borderRadius: 0 @borderRadius @borderRadius 0; -moz-borderRadius: 0 @borderRadius @borderRadius 0; borderRadius: 0 @borderRadius @borderRadius 0;}
-.left.carousel-control {-webkit-borderRadius: @borderRadius 0 0 @borderRadius; -moz-borderRadius: @borderRadius 0 0 @borderRadius; borderRadius: @borderRadius 0 0 @borderRadius;}
+.carousel {-moz-border-radius: @borderRadius; -webkit-border-radius: @borderRadius; border-radius: @borderRadius;}
+.right.carousel-control {-webkit-border-radius: 0 @borderRadius @borderRadius 0; -moz-border-radius: 0 @borderRadius @borderRadius 0; border-radius: 0 @borderRadius @borderRadius 0;}
+.left.carousel-control {-webkit-border-radius: @borderRadius 0 0 @borderRadius; -moz-border-radius: @borderRadius 0 0 @borderRadius; border-radius: @borderRadius 0 0 @borderRadius;}
 
 /* Panel */
-.panel {overflow: hidden; -moz-borderRadius: @borderRadius; -webkit-borderRadius: @borderRadius; borderRadius: @borderRadius;}
+.panel {overflow: hidden; -moz-border-radius: @borderRadius; -webkit-border-radius: @borderRadius; border-radius: @borderRadius;}
 .panel > .panel-heading
 {
     background: @colorSecondary;
     color: @colorPrimaryInverseDim;
-    -webkit-borderRadius: @borderRadius @borderRadius 0 0;
-    -moz-borderRadius: @borderRadius @borderRadius 0 0;
-    borderRadius: @borderRadius @borderRadius 0 0;
+    -webkit-border-radius: @borderRadius @borderRadius 0 0;
+    -moz-border-radius: @borderRadius @borderRadius 0 0;
+    border-radius: @borderRadius @borderRadius 0 0;
 }
 .panel-block.panel-borderless .panel-heading {color: @colorFore;}
 
 /* Footer */
-#footer, #powerby {-moz-borderRadius: @borderRadius; -webkit-borderRadius: @borderRadius; borderRadius: @borderRadius;}
+#footer, #powerby {-moz-border-radius: @borderRadius; -webkit-border-radius: @borderRadius; border-radius: @borderRadius;}
 
 /* Go2top */
-#go2top {-moz-borderRadius: @borderRadius; -webkit-borderRadius: @borderRadius; borderRadius: @borderRadius;}
+#go2top {-moz-border-radius: @borderRadius; -webkit-border-radius: @borderRadius; border-radius: @borderRadius;}
 
 /* Avatar */
-.avatar, .avatar-empty {-moz-borderRadius: @avatarBorderRadius; -webkit-borderRadius: @avatarBorderRadius; borderRadius: @avatarBorderRadius;}
+.avatar, .avatar-empty {-moz-border-radius: @avatarBorderRadius; -webkit-border-radius: @avatarBorderRadius; border-radius: @avatarBorderRadius;}
 
 /* Article */
-.article {background-color: @colorBackgroud; -moz-borderRadius: @borderRadius; -webkit-borderRadius: @borderRadius; borderRadius: @borderRadius;}
+.article {background-color: @colorBackgroud; -moz-border-radius: @borderRadius; -webkit-border-radius: @borderRadius; border-radius: @borderRadius;}
 .article-files > li:hover .file-actions > a, .article-files > li .file-actions > a:hover {background-color: @colorPrimary}
 /* Thread */
 .thread .panel-heading {backgroundImage: none !important}
 
 /* Blog */
 /* style of blogNav */
-#blogNav{background: @colorSecondary; -moz-borderRadius: @borderRadius; -webkit-borderRadius: @borderRadius; borderRadius: @borderRadius;}
+#blogNav{background: @colorSecondary; -moz-border-radius: @borderRadius; -webkit-border-radius: @borderRadius; border-radius: @borderRadius;}
 #blogNav .nav > li > a {font-weight: bold; color: @colorPrimaryInverseDim}
-#blogNav .navbar-nav > li:first-child > a {-moz-borderRadius: @borderRadius 0 0 @borderRadius; -webkit-borderRadius: @borderRadius 0 0 @borderRadius; borderRadius: @borderRadius 0 0 @borderRadius;}
-#blogNav .navbar-nav > li:last-child > a {-moz-borderRadius: 0; -webkit-borderRadius: 0; borderRadius: 0;}
-#blogNav .navbar-nav.navbar-right > li:first-child > a {-moz-borderRadius: 0; -webkit-borderRadius: 0; borderRadius: 0;}
-#blogNav .navbar-nav.navbar-right > li:last-child > a {-moz-borderRadius: 0 @borderRadius @borderRadius 0; -webkit-borderRadius: 0 @borderRadius @borderRadius 0; borderRadius: 0 @borderRadius @borderRadius 0;}
+#blogNav .navbar-nav > li:first-child > a {-moz-border-radius: @borderRadius 0 0 @borderRadius; -webkit-border-radius: @borderRadius 0 0 @borderRadius; border-radius: @borderRadius 0 0 @borderRadius;}
+#blogNav .navbar-nav > li:last-child > a {-moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0;}
+#blogNav .navbar-nav.navbar-right > li:first-child > a {-moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0;}
+#blogNav .navbar-nav.navbar-right > li:last-child > a {-moz-border-radius: 0 @borderRadius @borderRadius 0; -webkit-border-radius: 0 @borderRadius @borderRadius 0; border-radius: 0 @borderRadius @borderRadius 0;}
 #blogNav .nav > li > a:hover {background: @colorPrimary; color: @colorPrimaryInverse}
 #blogNav .nav > li.active > a, #blogNav .nav > li.active > a:hover, #blogNav .nav > li.active > a:focus {background: @colorPrimary; @colorPrimaryInverse}
 
+/* responsive */
 @media (max-width: 767px)
 {
     #blogNav .nav {margin: 0}
     #blogNav .navbar-nav > li{display: block; float: left; width: 33.333333333%}
-    #blogNav .navbar-nav > li > a, #blogNav .navbar-nav > li:first-child > a, #blogNav .navbar-nav > li:last-child > a, #blogNav .navbar-nav.navbar-right > li:first-child > a, #blogNav .navbar-nav.navbar-right > li:last-child > a{text-align: center; padding: 5px; margin: 5px;-moz-borderRadius: @borderRadius; -webkit-borderRadius: @borderRadius; borderRadius: @borderRadius;}
+    #blogNav .navbar-nav > li > a, #blogNav .navbar-nav > li:first-child > a, #blogNav .navbar-nav > li:last-child > a, #blogNav .navbar-nav.navbar-right > li:first-child > a, #blogNav .navbar-nav.navbar-right > li:last-child > a{text-align: center; padding: 5px; margin: 5px;-moz-border-radius: @borderRadius; -webkit-border-radius: @borderRadius; border-radius: @borderRadius;}
     #headTitle {position: static; margin-top: @borderRadius;}
     .card {margin-bottom: 10;}
     #blogNav .navbar-nav > li {width: 20%}
@@ -203,7 +206,7 @@ body {color:@colorFore; background-color: @colorBackgroud; backgroundImage: @bac
 #footNav .icon-rss-sign:hover{text-decoration: none; color: @colorSecondary}
 
 /* articles */
-#articles .card{background: @colorBackgroud; padding: 5px 5px 0;border: 1px solid @colorBorder;box-shadow: none; -moz-borderRadius: @borderRadius; -webkit-borderRadius: @borderRadius; borderRadius: @borderRadius;}
+#articles .card{background: @colorBackgroud; padding: 5px 5px 0;border: 1px solid @colorBorder;box-shadow: none; -moz-border-radius: @borderRadius; -webkit-border-radius: @borderRadius; border-radius: @borderRadius;}
 #articles .card-heading a{font-weight: bold; color: @colorPrimary}
 #articles .card .media{max-width: 200; max-height: 100}
 #articles .card .media img{max-height: 100%}
