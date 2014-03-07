@@ -39,7 +39,6 @@
             <button data-toggle='modal' class='btn btn-lg btn-success btn-custom' data-url='<?php echo inlink('customtheme', "theme={$theme}");?>'><i class='icon-cog'></i> <?php echo $lang->ui->custom;?></button>
             <?php endif;?>
           </div>
-
         </a>
         <div class='name'><?php echo $name;?></div>
       </div>
