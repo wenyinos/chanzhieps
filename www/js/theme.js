@@ -16,7 +16,7 @@
 
     theme.DEFAULTS = 
     {
-        templateUrl:        '/theme/custom/template.less',
+        templateUrl:                '/theme/custom/template.less',
 
         colorBackgroud:             '#ffffff',
         colorFore:                  '#333',
@@ -30,7 +30,7 @@
             colorPrimaryRgb:        '204,15,22',
             colorPrimaryInverseDim: '#e3e3e3',
             colorPrimaryInverse:    '#fff',
-          // colorSecondary:             '#990000',
+            colorSecondary:         '#990000',
             colorSecondaryR:        '153',
             colorSecondaryG:        '0',
             colorSecondaryB:        '0',
@@ -128,8 +128,6 @@
     /* color */
     var color = function(r, g, b, a)
     {
-        // this.rgba 替换为 this.r,this.g,this.b
-
         this.r = 0;
         this.g = 0;
         this.b = 0;
@@ -443,4 +441,4 @@
     window.theme = theme;
     window.isHexColor = isHexColor;
     window.color = color;
-}(jQuery,window,document,Math);
+}(jQuery, window, document, Math);
