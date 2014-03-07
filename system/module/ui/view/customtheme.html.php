@@ -50,7 +50,7 @@
               <?php echo html::select('borderRadius', $lang->ui->theme->borderRadiusList, '4px', "class='form-control w-200px'");?>
             </td>
           </tr>
-          <tr><td></td><td><?php echo html::hidden('css') . html::submitButton();?></td></tr>
+          <tr><td></td><td><?php echo html::hidden('theme', $theme) . html::hidden('css') . html::submitButton();?></td></tr>
         </table>
       </form>
     </div>

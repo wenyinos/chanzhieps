@@ -42,6 +42,7 @@ $(function()
     {
         var options = 
         {
+            templateUrl: config['webRoot'] + 'theme/' + $('#theme').val() + '/template.less',
             colorPrimary: $('#primaryColor').val(),
             colorBackgroud: $('#backColor').val(),
             fontSize: $('#fontSize').val(),
