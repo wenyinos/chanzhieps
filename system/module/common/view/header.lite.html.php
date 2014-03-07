@@ -50,6 +50,14 @@ $themeRoot = $webRoot . "theme/";
   }
 
   if(RUN_MODE == 'front' and $config->site->theme and $config->site->theme != 'default') css::import($themeRoot . $config->site->theme . '/style.css');
+
+  /* Import custom css. */
+  if(RUN_MODE == 'front' and $config->site->theme and $config->site->theme == 'colorful')
+  {
+      $customCss = str_replace($this->app->getDataRoot(), $this->app->getWebRoot() . 'data/' , $config->site->ui->customCssFile);
+      css::import($customCss);
+  }
+
   if(isset($pageCSS)) css::internal($pageCSS);
 
   echo isset($this->config->site->favicon) ? html::icon(json_decode($this->config->site->favicon)->webPath) : html::icon($webRoot . 'favicon.ico');
@@ -62,9 +70,7 @@ js::import($jsRoot . 'respond/min.js');
 ?>
 <![endif]-->
 <!--[if lt IE 10]>
-<?php
-js::import($jsRoot . 'jquery/placeholder/min.js');
-?>
+<?php js::import($jsRoot . 'jquery/placeholder/min.js'); ?>
 <![endif]-->
 <?php js::set('lang', $lang->js);?>
 <?php

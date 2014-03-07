@@ -43,13 +43,21 @@ class ui extends control
      {
         if($theme and isset($this->lang->ui->themes[$theme]) and $this->lang->ui->themes[$theme]['custom'])
         {
-            if($_SERVER['REQUEST_METHOD'] == 'POST')
+            if($_POST)
             {
-                $path = $_SERVER['DOCUMENT_ROOT'] . '/theme/' . $theme . '/style.css';
-                file_put_contents($path, $this->post->css);
+                $customCssFile  = $this->config->site->ui->customCssFile;
+                $savePath       = dirname($customCssFile);
+                if(!is_dir($savePath)) mkdir($savePath, 0755, true);
+                file_put_contents($customCssFile, $this->post->css);
+
+                $setting = fixer::input('post')->remove('css,theme')->get();
+                $result  = $this->loadModel('setting')->setItems('system.common.site', array('themeSetting' =>json_encode($setting)));
+
                 $this->send(array('result' => 'success', 'message' => $this->lang->ui->themeSaved));
             }
         }
+
+        if($this->config->site->themeSetting) $this->config->themeSetting = json_decode($this->config->site->themeSetting);
 
         $this->view->theme = $theme;
         $this->display();

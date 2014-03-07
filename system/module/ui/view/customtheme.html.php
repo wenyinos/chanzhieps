@@ -17,13 +17,13 @@
           <tr>
             <th><?php echo $lang->ui->theme->fontSize; ?></th>
             <td>
-              <?php echo html::select('fontSize', $lang->ui->theme->fontSizeList, '14px', "class='form-control w-200px'");?>
+              <?php echo html::select('fontSize', $lang->ui->theme->fontSizeList, $config->themeSetting->fontSize, "class='form-control w-200px'");?>
             </td>
           </tr>
           <tr>
             <th><?php echo $lang->ui->theme->borderRadius; ?></th>
             <td>
-              <?php echo html::select('borderRadius', $lang->ui->theme->borderRadiusList, '4px', "class='form-control w-200px'");?>
+              <?php echo html::select('borderRadius', $lang->ui->theme->borderRadiusList, $config->themeSetting->borderRadius, "class='form-control w-200px'");?>
             </td>
           </tr>
           <tr>
@@ -32,7 +32,7 @@
               <div class='colorplate clearfix'>
                 <div class='input-group color active' data='#cc0f16'>
                   <span class='input-group-addon'> <i class='icon icon-question'></i><i class='icon-ok'></i> </span>
-                  <?php echo html::input('primaryColor', '#cc0f16' , "class='form-control input-color text-latin' placeholder='" . $lang->ui->custom . "'");?>
+                  <?php echo html::input('primaryColor', $config->themeSetting->primaryColor, "class='form-control input-color text-latin' placeholder='" . $lang->ui->custom . "'");?>
                 </div>
                 <?php echo $colorPlates; ?>
               </div>
@@ -44,7 +44,7 @@
               <div class='colorplate clearfix'>
                 <div class='input-group color active' data='#fff'>
                   <span class='input-group-addon'> <i class='icon icon-question'></i><i class='icon-ok'></i> </span>
-                  <?php echo html::input('backColor', '#ffffff' , "class='form-control input-color text-latin' placeholder='" . $lang->ui->custom . "'");?>
+                  <?php echo html::input('backColor', $config->themeSetting->backColor, "class='form-control input-color text-latin' placeholder='" . $lang->ui->custom . "'");?>
                 </div>
                 <?php echo $colorPlates; ?>
               </div>
