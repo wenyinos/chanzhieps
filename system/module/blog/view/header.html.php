@@ -39,14 +39,21 @@ $navs = $this->tree->getChildren(0, 'blog');
 
   css::import($themeRoot . 'zui/css/min.css');
   css::import($themeRoot . 'default/style.css');
-  if($config->site->theme and $config->site->theme != 'default') css::import($themeRoot . $config->site->theme . '/style.css');
-  css::import($themeRoot . $config->site->theme . '/blog.css');
 
-  /* Import custom css. */
-  if(RUN_MODE == 'front' and $config->site->theme and $config->site->theme == 'colorful')
+  if($config->site->theme)
   {
-      $customCss = str_replace($this->app->getDataRoot(), $this->app->getWebRoot() . 'data/' , $config->site->ui->customCssFile);
-      css::import($customCss . "?v={$config->site->customVesion}");
+      /* Import custom css. */
+      if($config->site->theme == 'colorful')
+      {
+          $customCss = str_replace($this->app->getDataRoot(), $this->app->getWebRoot() . 'data/' , $config->site->ui->customCssFile);
+          if(!isset($config->site->customVesion)) $customCss = $themeRoot . $config->site->theme . '/style.css';
+          css::import($customCss . "?v={$config->site->customVesion}");
+      }
+      else
+      {
+          if($config->site->theme != 'default') css::import($themeRoot . $config->site->theme . '/style.css');
+          css::import($themeRoot . $config->site->theme . '/blog.css');
+      }
   }
 
   js::exportConfigVars();

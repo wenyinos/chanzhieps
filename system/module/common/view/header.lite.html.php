@@ -49,14 +49,18 @@ $themeRoot = $webRoot . "theme/";
       js::import($jsRoot . 'my.admin.js');
   }
 
-  if(RUN_MODE == 'front' and $config->site->theme and $config->site->theme != 'default')
+  if(RUN_MODE == 'front' and $config->site->theme)
   {
-      if($config->site->theme == 'colorful')/* Import custom css. */
+      /* Import custom css. */
+      if($config->site->theme == 'colorful' and isset($config->site->customVesion))
       {
           $customCss = str_replace($this->app->getDataRoot(), $this->app->getWebRoot() . 'data/' , $config->site->ui->customCssFile);
           css::import($customCss . "?v={$config->site->customVesion}");
       }
-      else css::import($themeRoot . $config->site->theme . '/style.css');
+      else
+      {
+         if($config->site->theme != 'default') css::import($themeRoot . $config->site->theme . '/style.css');
+      }
   }
 
   if(isset($pageCSS)) css::internal($pageCSS);
