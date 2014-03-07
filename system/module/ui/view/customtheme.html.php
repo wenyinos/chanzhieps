@@ -30,7 +30,7 @@
             <th class='w-100px'><?php echo $lang->ui->theme->primaryColor; ?></th>
             <td>
               <div class='colorplate clearfix'>
-                <div class='input-group color active' data='#cc0f16'>
+                <div class='input-group color active' data='<?php echo $config->themeSetting->primaryColor;?>'>
                   <span class='input-group-addon'> <i class='icon icon-question'></i><i class='icon-ok'></i> </span>
                   <?php echo html::input('primaryColor', $config->themeSetting->primaryColor, "class='form-control input-color text-latin' placeholder='" . $lang->ui->custom . "'");?>
                 </div>
@@ -42,7 +42,7 @@
             <th><?php echo $lang->ui->theme->backColor; ?></th>
             <td>
               <div class='colorplate clearfix'>
-                <div class='input-group color active' data='#fff'>
+                <div class='input-group color active' data='<?php echo $config->themeSetting->backColor;?>'>
                   <span class='input-group-addon'> <i class='icon icon-question'></i><i class='icon-ok'></i> </span>
                   <?php echo html::input('backColor', $config->themeSetting->backColor, "class='form-control input-color text-latin' placeholder='" . $lang->ui->custom . "'");?>
                 </div>
