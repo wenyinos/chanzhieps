@@ -32,7 +32,7 @@ $lang->ui->themes['tree']       = '蝉之树';
 $lang->ui->themes['brightdark'] = '蝉憩';
 $lang->ui->themes['tartan']     = '蝉之格';
 $lang->ui->themes['blue']       = '蓝';
-$lang->ui->themes['colorful']   = array('name' => "缤纷 <span class='small text-warning'>支持自定义</span>", 'custom' => true, 'primaryColor'=> '#D1270A', 'backColor'=> '#FFFFFF', 'fontSize'=> '14px', 'borderRadius'=> '4px');
+$lang->ui->themes['colorful']   = array('name' => "缤纷 <span class='small text-warning'>支持自定义</span>", 'custom' => true, 'primaryColor' => '#D1270A', 'backColor' => '#FFFFFF', 'fontSize' => '14px', 'borderRadius' => '4px');
 
 $lang->ui->changetheme                     = '点击来使用此主题';
 $lang->ui->customtheme                     = '自定义主题';
@@ -43,7 +43,7 @@ $lang->ui->theme->primaryColor             = '基色';
 $lang->ui->theme->backColor                = '背景';
 $lang->ui->theme->fontSize                 = '字体';
 $lang->ui->theme->borderRadius             = '圆角';
-$lang->ui->theme->colorPlates              = '333333|000000|CA1407|45872B|148D00|F2B80E|F25D03|2286D2|D92958|A63268|04BFAD|D95959|D1270A|FF9400|299182|63731A|3D4DBE|7382D9|754FB9|F2E205|B1C502|364245|C05036|8A342A|E0DDA2|B3D465|EEEEEE|FFD0E5|D0FFFD|FFFF84|F4E6AE|E5E5E5|F1F1F1|FFFFFF';
+$lang->ui->theme->colorPlates              = '333333|000000|CA1407|45872B|148D00|F25D03|2286D2|D92958|A63268|04BFAD|D1270A|FF9400|299182|63731A|3D4DBE|7382D9|754FB9|F2E205|B1C502|364245|C05036|8A342A|E0DDA2|B3D465|EEEEEE|FFD0E5|D0FFFD|FFFF84|F4E6AE|E5E5E5|F1F1F1|FFFFFF';
 $lang->ui->theme->fontSizeList['12px']     = '12px';
 $lang->ui->theme->fontSizeList['13px']     = '13px';
 $lang->ui->theme->fontSizeList['14px']     = '14px (默认)';

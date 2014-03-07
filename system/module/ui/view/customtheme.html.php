@@ -15,7 +15,19 @@
         ?>
         <table class='table table-form borderless'>
           <tr>
-            <th class='w-120px'><?php echo $lang->ui->theme->primaryColor; ?></th>
+            <th><?php echo $lang->ui->theme->fontSize; ?></th>
+            <td>
+              <?php echo html::select('fontSize', $lang->ui->theme->fontSizeList, '14px', "class='form-control w-200px'");?>
+            </td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->ui->theme->borderRadius; ?></th>
+            <td>
+              <?php echo html::select('borderRadius', $lang->ui->theme->borderRadiusList, '4px', "class='form-control w-200px'");?>
+            </td>
+          </tr>
+          <tr>
+            <th class='w-100px'><?php echo $lang->ui->theme->primaryColor; ?></th>
             <td>
               <div class='colorplate clearfix'>
                 <div class='input-group color active' data='#cc0f16'>
@@ -36,18 +48,6 @@
                 </div>
                 <?php echo $colorPlates; ?>
               </div>
-            </td>
-          </tr>
-          <tr>
-            <th><?php echo $lang->ui->theme->fontSize; ?></th>
-            <td>
-              <?php echo html::select('fontSize', $lang->ui->theme->fontSizeList, '14px', "class='form-control w-200px'");?>
-            </td>
-          </tr>
-          <tr>
-            <th><?php echo $lang->ui->theme->borderRadius; ?></th>
-            <td>
-              <?php echo html::select('borderRadius', $lang->ui->theme->borderRadiusList, '4px', "class='form-control w-200px'");?>
             </td>
           </tr>
           <tr><td></td><td><?php echo html::hidden('theme', $theme) . html::hidden('css') . html::submitButton();?></td></tr>
