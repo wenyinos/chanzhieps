@@ -46,7 +46,7 @@ $navs = $this->tree->getChildren(0, 'blog');
   if(RUN_MODE == 'front' and $config->site->theme and $config->site->theme == 'colorful')
   {
       $customCss = str_replace($this->app->getDataRoot(), $this->app->getWebRoot() . 'data/' , $config->site->ui->customCssFile);
-      css::import($customCss);
+      css::import($customCss . "?v={$config->site->customVesion}");
   }
 
   js::exportConfigVars();
