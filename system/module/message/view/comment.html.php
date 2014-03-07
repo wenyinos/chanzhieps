@@ -13,21 +13,22 @@ css::internal($pageCSS);
     <div class='comments-list'>
       <?php foreach($comments as $number => $comment):?>
       <div class='comment' id="comment<?php echo $comment->id?>">
+        <div class='avatar'><div class='avatar-empty icon-user'></div></div>
         <div class='content'>
-          <div class='pull-right'><span class='text-muted'><?php echo $comment->date;?></span> &nbsp;<strong>#<?php echo ($number + 1); ?></strong>
+          <div class='text'><span class='author'><strong><?php echo $comment->from . $lang->colon;?></strong></span> &nbsp;<?php echo nl2br($comment->content);?></div>
+          <div class='actions text-muted small'>
+            <div class='pull-right'></div>
+            <strong>#<?php echo ($number + 1); ?></strong> • <?php echo $lang->comment->replyTo . ' ' . $comment->date;?>
           </div>
-          <span class='author'><strong><i class='icon-user text-muted'></i> <?php echo $comment->from;?></strong></span>
-          <div class='text'><?php echo nl2br($comment->content);?></div>
         </div>
         <?php if(!empty($replies[$comment->id])):?>
           <div class='comments-list'>
             <?php foreach($replies[$comment->id] as $reply):?>
             <div class='comment'>
+              <div class='avatar'><div class='avatar-empty icon-user'></div></div>
               <div class='content'>
-                <div class='pull-right'><span class='text-muted'><?php echo $reply->date;?></span>
-                </div>
-                <span class='author'><strong><i class='icon-user text-muted'></i> <?php echo $reply->from;?></strong> <small class='text-muted'><?php echo $lang->message->reply; ?></small></span>
-                <div class='text'><?php echo nl2br($reply->content);?></div>
+                <div class='text'><span class='author'><strong><?php echo $reply->from . $lang->colon;?></strong></span> &nbsp;<?php echo nl2br($reply->content);?></div>
+                <div class='actions text-muted small'><?php echo $lang->comment->replyTo . ' ' . $reply->date;?></div>
               </div>
             </div>
             <?php endforeach; ?>

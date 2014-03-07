@@ -23,8 +23,8 @@
           <div class='comment' id="comment<?php echo $message->id?>">
             <div class='avatar'><div class='avatar-empty icon-user'></div></div>
             <div class='content'>
-              <div class='text'><strong><?php echo $message->from . $lang->colon;?></strong> &nbsp;<?php echo nl2br($message->content);?></div>
-              <div class='author small'><span class='text-muted'><?php echo $lang->comment->commentTo . $message->date;?></span></div>
+              <div class='text'><span class='author'><strong><?php echo $message->from . $lang->colon;?></strong></span> &nbsp;<?php echo nl2br($message->content);?></div>
+              <div class='actions text-muted small'><?php echo $lang->comment->replyTo . ' ' . $message->date;?></div>
             </div>
             <?php if(!empty($replies[$message->id])):?>
               <div class='comments-list'>
@@ -32,8 +32,8 @@
                 <div class='comment'>
                   <div class='avatar'><div class='avatar-empty icon-user'></div></div>
                   <div class='content'>
-                    <div class='text'><strong><?php echo $reply->from . $lang->colon;?></strong> &nbsp;<?php echo nl2br($reply->content);?></div>
-                    <div class='author small'><span class='text-muted'><?php echo $lang->comment->replyTo . $reply->date;?></span></div>
+                    <div class='text'><span class='author'><strong><?php echo $reply->from . $lang->colon;?></strong></span> &nbsp;<?php echo nl2br($reply->content);?></div>
+                    <div class='actions text-muted small'><?php echo $lang->comment->replyTo . ' ' . $reply->date;?></div>
                   </div>
                 </div>
                 <?php endforeach; ?>
