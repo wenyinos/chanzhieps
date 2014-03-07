@@ -30,7 +30,6 @@
             colorPrimaryRgb:        '204,15,22',
             colorPrimaryInverseDim: '#e3e3e3',
             colorPrimaryInverse:    '#fff',
-            colorSecondary:         '#990000',
             colorSecondaryR:        '153',
             colorSecondaryG:        '0',
             colorSecondaryB:        '0',
