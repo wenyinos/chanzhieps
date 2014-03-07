@@ -433,8 +433,6 @@
     function number(n)
     {
         if(typeof(n) == 'number') return n;
-        logSubTitle('number');
-        log(n+ ' is not a number.');
         return parseFloat(n);
     }
 
