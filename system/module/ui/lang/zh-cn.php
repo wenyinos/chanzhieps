@@ -39,6 +39,7 @@ $lang->ui->customtheme                     = '自定义主题';
 $lang->ui->custom                          = '自定义…';
 $lang->ui->themeSaved                      = '主题配置已保存';
 $lang->ui->preview                         = '前台预览';
+$lang->ui->theme = new stdclass();
 $lang->ui->theme->primaryColor             = '基色';
 $lang->ui->theme->backColor                = '背景';
 $lang->ui->theme->fontSize                 = '字体';
