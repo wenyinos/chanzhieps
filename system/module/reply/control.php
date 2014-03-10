@@ -52,6 +52,12 @@ class reply extends control
         $this->lang->reply->menu = $this->lang->forum->menu;
         $this->lang->menuGroups->reply = 'forum';
 
+        if($this->get->tab == 'feedback')
+        {
+            $this->lang->menuGroups->forum = 'feedback';
+            $this->lang->forum->menu       = $this->lang->feedback->menu;
+        }
+
         $this->view->title   = $this->lang->reply->admin;
         $this->view->replies = $replies;
         $this->view->pager   = $pager;
