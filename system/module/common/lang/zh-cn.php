@@ -179,6 +179,7 @@ $lang->feedback->menu->message = '留言|message|admin|type=message';
 $lang->feedback->menu->comment = '评论|message|admin|type=comment';
 $lang->feedback->menu->weichat = '微信|weichat|message';
 
+$lang->message = new stdclass();
 $lang->message->menu = $lang->feedback->menu;
 
 /* Menu of forum module. */
