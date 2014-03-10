@@ -19,5 +19,7 @@ class weichat extends control
      */
     public function api()
     {
+        $this->app->loadClass('weichatapi', true);
+        $weichat = new weichatapi($this->config->weichat->token, $this->config->weichat->appID, $this->config->weichat->secret );
     }
 }
