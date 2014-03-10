@@ -111,18 +111,29 @@ $lang->sitemap->common = 'Sitemap';
 
 /* The main menus. */
 $lang->menu = new stdclass();
-$lang->menu->admin   = 'Home|admin|index|';
-$lang->menu->article = 'Article|article|admin|';
-$lang->menu->blog    = 'Blog|article|admin|type=blog';
-$lang->menu->product = 'Product|product|admin|';
-$lang->menu->book    = 'Book|book|admin|';
-$lang->menu->message = 'Message|message|admin|';
-$lang->menu->page    = 'Page|article|admin|type=page';
-$lang->menu->forum   = 'Forum|forum|admin|';
-$lang->menu->site    = 'Site|site|setbasic|';
-$lang->menu->ui      = 'UI|ui|setlogo|';
-$lang->menu->company = 'Company|company|setbasic|';
-$lang->menu->user    = 'User|user|admin|';
+$lang->menu->admin    = 'Home|admin|index|';
+$lang->menu->article  = 'Article|article|admin|';
+$lang->menu->blog     = 'Blog|article|admin|type=blog';
+$lang->menu->product  = 'Product|product|admin|';
+$lang->menu->book     = 'Book|book|admin|';
+$lang->menu->page     = 'Page|article|admin|type=page';
+$lang->menu->forum    = 'Forum|forum|admin|';
+$lang->menu->site     = 'Site|site|setbasic|';
+$lang->menu->ui       = 'UI|ui|setlogo|';
+$lang->menu->company  = 'Company|company|setbasic|';
+$lang->menu->user     = 'User|user|admin|';
+$lang->menu->feedback = 'Feedback|message|admin|';
+
+/* Menu groups setting. */
+$lang->menuGroups = new stdclass();
+$lang->menuGroups->tag     = 'site';
+$lang->menuGroups->mail    = 'site';
+$lang->menuGroups->nav     = 'site';
+$lang->menuGroups->links   = 'site';
+$lang->menuGroups->block   = 'ui';
+$lang->menuGroups->slide   = 'ui';
+$lang->menuGroups->tree    = 'article';
+$lang->menuGroups->message = 'feedback';
 
 /* Menu of article module. */
 $lang->article = new stdclass();
@@ -162,10 +173,13 @@ $lang->ui->menu->admin   = array('link' => 'Blocks|block|admin|', 'alias' => 'cr
 $lang->ui->menu->pages   = array('link' => 'Layout|block|pages|', 'alias' => 'setregion');
 
 /* Menu of comment module. */
-$lang->message = new stdclass();
-$lang->message->menu = new stdclass();
-$lang->message->menu->message = 'Message|message|admin|type=message';
-$lang->message->menu->comment = 'comment|message|admin|type=comment';
+$lang->feedback = new stdclass();
+$lang->feedback->menu = new stdclass();
+$lang->feedback->menu->message = 'Message|message|admin|type=message';
+$lang->feedback->menu->comment = 'Comment|message|admin|type=comment';
+$lang->feedback->menu->weichat = 'Weichat|weichat|message';
+
+$lang->message->menu = $lang->feedback->menu;
 
 /* Menu of forum module. */
 $lang->forum = new stdclass();
@@ -190,43 +204,33 @@ $lang->company->menu = new stdclass();
 $lang->company->menu->basic   = 'Basic|company|setbasic|';
 $lang->company->menu->contact = 'Contact|company|setcontact|';
 
-/* Menu groups setting. */
-$lang->menuGroups = new stdclass();
-
 /* Menu of tree module. */
 $lang->tree = new stdclass();
 $lang->tree->menu = $lang->article->menu;
-$lang->menuGroups->tree = 'article';
 
 /* Menu of tag module. */
 $lang->tag = new stdclass();
 $lang->tag->menu = $lang->site->menu;
-$lang->menuGroups->tag = 'site';
 
 /* Menu of mail module. */
 $lang->mail = new stdclass();
 $lang->mail->menu = $lang->site->menu;
-$lang->menuGroups->mail = 'site';
 
 /* Menu of nav module. */
 $lang->nav = new stdclass();
 $lang->nav->menu = $lang->site->menu;
-$lang->menuGroups->nav  = 'site';
 
 /* Menu of tree module. */
 $lang->slide = new stdclass();
 $lang->slide->menu = $lang->ui->menu;
-$lang->menuGroups->slide = 'ui';
 
 /* Menu of block module. */
 $lang->block = new stdclass();
 $lang->block->menu = $lang->ui->menu;
-$lang->menuGroups->block  = 'ui';
 
 /* Menu of tree module. */
 $lang->links = new stdclass();
 $lang->links->menu = $lang->site->menu;
-$lang->menuGroups->links = 'site';
 
 /* Error info. */
 $lang->error = new stdclass();
