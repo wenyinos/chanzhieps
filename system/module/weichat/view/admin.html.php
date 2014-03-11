@@ -11,45 +11,51 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<div class='panel'>
-  <div class='panel-heading'>
-  <strong><i class="icon-list-ul"></i> <?php echo $lang->weichat->list;?></strong>
-  <div class='panel-actions'><?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ' . $lang->weichat->create, 'class="btn btn-primary"');?></div>
+<div class='actions'>
+  <?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i> ', "class='btn btn-primary' title='{$lang->weichat->create}'");?>
+  <?php echo html::a($this->createLink('user', 'admin'), '<i class="icon-user"></i> ', "class='btn btn-primary' title='{$lang->weichat->users}'");?>
+</div>
+<div class='row'>
+  <?php foreach($publics as $public):?>
+  <div class='col-sm-6 col-md-6'>
+    <div class='panel'>
+      <div class='panel-heading'>
+        <?php echo $public->name;?>
+      </div>
+      <div class='panel-body'>
+        <table class='table'>
+          <tr>
+            <th><?php echo $lang->weichat->type;?></th>
+            <td><?php echo $lang->weichat->typeList[$public->type];?></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->weichat->account;?></th>
+            <td><?php echo $public->account;?></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->weichat->appID;?></th>
+            <td><?php echo $public->appID;?></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->weichat->appSecret;?></th>
+            <td><?php echo $public->appSecret;?></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->weichat->url;?></th>
+            <td><?php echo $public->url;?></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->weichat->token;?></th>
+            <td><?php echo $public->token;?></td>
+          </tr>
+        </table>
+        <div class='panel-actions'>
+          <?php echo html::a($this->inlink('setMenu', "id={$public->id}"), $lang->weichat->setMenu, 'class="btn btn-primary"');?>
+          <?php echo html::a($this->inlink('setResponse', "id={$public->id}"), $lang->weichat->setResponse, 'class="btn btn-primary"');?>
+        </div>
+      </div>
+    </div>
   </div>
-  <table class='table table-hover table-striped tablesorter'>
-    <thead>
-      <tr class='text-center'>
-        <th class='w-60px'> <?php echo $lang->weichat->id;?></th>
-        <th class='w-60px'> <?php echo $lang->weichat->type;?></th>
-        <th>                <?php echo $lang->weichat->name;?></th>
-        <th class='w-100px'>  <?php echo $lang->weichat->account;?></th>
-        <th class='w-100px'>  <?php echo $lang->weichat->appID;?></th>
-        <th class='w-150px'><?php echo $lang->weichat->appSecret;?></th>
-        <th class='w-60px'> <?php echo $lang->weichat->token;?></th>
-        <th class='w-150px'> <?php echo $lang->weichat->url;?></th>
-        <th class='w-100px'><?php echo $lang->actions;?></th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php foreach($publics as $public):?>
-      <tr class='text-center'>
-        <td><?php echo $public->id;?></td>
-        <td><?php echo $public->type;?></td>
-        <td><?php echo $public->name;?></td>
-        <td><?php echo $public->account;?></td>
-        <td><?php echo $public->appID;?></td>
-        <td><?php echo $public->appSecret;?></td>
-        <td><?php echo $public->token;?></td>
-        <td><?php echo $public->url;?></td>
-        <td>
-          <?php
-          echo html::a($this->createLink('weichat', 'edit', "publicID=$public->id"), $lang->edit);
-          echo html::a($this->createLink('weichat', 'delete', "publicID=$public->id"), $lang->delete, "class='deleter'");
-          ?>
-        </td>
-      </tr>
-      <?php endforeach;?>
-    </tbody>
-  </table>
+  <?php endforeach;?>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>

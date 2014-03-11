@@ -17,10 +17,12 @@ $lang->weichat->appID     = 'appID';
 $lang->weichat->appSecret = 'appSecret';
 $lang->weichat->token     = 'Token';
 $lang->weichat->url       = 'URL';
+$lang->weichat->users     = 'Users';
 
-$lang->weichat->create    = 'Create';
-$lang->weichat->admin     = 'Admin';
-$lang->weichat->list      = 'List';
+$lang->weichat->create      = 'Create';
+$lang->weichat->admin       = 'Admin';
+$lang->weichat->setMenu     = 'Set Menu';
+$lang->weichat->setResponse = 'Set Response';
 
 $lang->weichat->typeList['subscribe'] = 'Subscribe';
 $lang->weichat->typeList['service']   = 'Service';

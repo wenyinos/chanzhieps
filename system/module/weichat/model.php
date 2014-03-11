@@ -31,7 +31,10 @@ class weichatModel extends model
      */
     public function getList()
     {
-        return $this->dao->select('*')->from(TABLE_WX_PUBLIC)->orderBy('addedDate_desc')->fetchAll('id');
+        $publics = $this->dao->select('*')->from(TABLE_WX_PUBLIC)->orderBy('addedDate_desc')->fetchAll('id');
+        if(!$publics) return array();
+        foreach($publics as $public) $public->url = $this->config->site->code . commonModel::createFrontLink('weichat', 'api', "id=$public->id&type=$public->type");
+        return $publics;
     }
 
     /**
