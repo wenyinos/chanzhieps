@@ -41,5 +41,9 @@ $(document).ready(function()
 
     /* Handle touch event for mobile devices */
     handleTouch();
+
+    /* Mark empty headNav */
+    var headNav = $('#headNav');
+    if(!headNav.find('nav a').length) headNav.addClass('hide');
 });
 

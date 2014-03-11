@@ -27,6 +27,7 @@ $lang->ui->favicon->reset = "重置";
 
 $lang->ui->themes = array();
 $lang->ui->themes['default']    = '默认风格';
+$lang->ui->themes['wide']       = '宽屏';
 $lang->ui->themes['flat']       = '清泉';
 $lang->ui->themes['tree']       = '蝉之树';
 $lang->ui->themes['brightdark'] = '蝉憩';
