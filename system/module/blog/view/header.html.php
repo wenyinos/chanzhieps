@@ -97,34 +97,38 @@ js::import($jsRoot . 'jquery/placeholder/min.js');
 <body>
 <div class='page-container page-blog'>
   <header id='header' class='clearfix'>
-    <div id='headNav'><?php echo commonModel::printTopBar();?></div>
+    <div id='headNav'><div class='wrapper'><?php echo commonModel::printTopBar();?></div></div>
     <div id='headTitle'>
-      <?php if(isset($config->site->logo)):?>
-      <?php $logo = json_decode($config->site->logo);?>
-      <div id='siteLogo'>
-        <?php echo html::a($this->config->webRoot, html::image($logo->webPath, "class='logo' title='{$this->config->company->name}'"));?>
+      <div class="wrapper">
+        <?php if(isset($config->site->logo)):?>
+        <?php $logo = json_decode($config->site->logo);?>
+        <div id='siteLogo'>
+          <?php echo html::a($this->config->webRoot, html::image($logo->webPath, "class='logo' title='{$this->config->company->name}'"));?>
+        </div>
+        <?php else: ?>
+        <div id='siteName'><h2><?php echo $config->site->name;?></h2></div>
+        <?php endif;?>
       </div>
-      <?php else: ?>
-      <div id='siteName'><h2><?php echo $config->site->name;?></h2></div>
-      <?php endif;?>
     </div>
   </header>
   <nav id="blogNav" class="navbar navbar-default" role="navigation">
-    <ul class="nav navbar-nav">
-      <li <?php if(empty($category)) echo "class='active'"?>>
-         <?php echo html::a($this->inlink('index'), $lang->blog->home)?>
-      </li>
-      <?php 
-      foreach($navs as $nav)
-      {
-        isset($category->id) ? $categoryID = $category->id : $categoryID = 0;
-        $class = $nav->id == $categoryID ? "class='nav-blog-$nav->id active'" : "class='nav-blog-$nav->id'";
-        echo "<li {$class}>" . html::a($this->inlink('index', "id={$nav->id}", "category={$nav->alias}"), $nav->name) . '</li>';
-      }
-      ?>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><?php echo html::a($config->webRoot, '<i class="icon-home icon-large"></i> ' . $lang->blog->siteHome);?></li>
-    </ul>
+    <div class='collapse navbar-collapse'>
+      <ul class="nav navbar-nav">
+        <li <?php if(empty($category)) echo "class='active'"?>>
+           <?php echo html::a($this->inlink('index'), $lang->blog->home)?>
+        </li>
+        <?php 
+        foreach($navs as $nav)
+        {
+          isset($category->id) ? $categoryID = $category->id : $categoryID = 0;
+          $class = $nav->id == $categoryID ? "class='nav-blog-$nav->id active'" : "class='nav-blog-$nav->id'";
+          echo "<li {$class}>" . html::a($this->inlink('index', "id={$nav->id}", "category={$nav->alias}"), $nav->name) . '</li>';
+        }
+        ?>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><?php echo html::a($config->webRoot, '<i class="icon-home icon-large"></i> ' . $lang->blog->siteHome);?></li>
+      </ul>
+    </div>
   </nav>
   <div class='page-wrapper'>
