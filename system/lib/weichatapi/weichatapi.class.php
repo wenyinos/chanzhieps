@@ -36,6 +36,14 @@ class weichatapi
     public $secret;
 
     /**
+     * The signature computed.
+     * 
+     * @var int   
+     * @access public
+     */
+    public $signature;
+
+    /**
      * The raw data posted by weichat server.
      * 
      * @var string   
@@ -52,20 +60,50 @@ class weichatapi
     public $message;
 
     /**
+     * Debug or not.
+     * 
+     * @var bool   
+     * @access public
+     */
+    public $debug;
+
+    /**
+     * The log file.
+     * 
+     * @var string   
+     * @access public
+     */
+    public $logFile;
+
+    /**
      * The construct function.
      * 
      * @param  string    $token 
      * @param  string    $appID 
      * @param  string    $secret 
+     * @param  bool      $debug 
      * @access public
      * @return void
      */
-    public function __construct($token, $appID, $secret)
+    public function __construct($token, $appID, $secret, $debug = false)
     {
         $this->setToken($token);
         $this->setAppID($appID);
         $this->setSecret($secret);
+        $this->setDebug($debug);
         $this->checkSign();
+    }
+
+    /**
+     * Set debug.
+     * 
+     * @param  bool    $debug 
+     * @access public
+     * @return void
+     */
+    public function setDebug($debug)
+    {
+        $this->debug = $debug;
     }
 
     /**
@@ -118,7 +156,8 @@ class weichatapi
         $time = $_GET['timestamp'];
         $rand = $_GET['nonce'];    
 
-        if($sign != $this->computeSign($time, $rand)) die('signature error');
+        $this->computeSign($time, $rand);
+        if($sign != $this->signature) die('signature error');
         if(isset($_GET['echostr'])) die($_GET['echostr']);
     }
 
@@ -133,8 +172,8 @@ class weichatapi
     public function computeSign($time, $rand)
     {
         $sign = array($this->token, $time, $rand);
-        sort($sign);
-        return sha1(join($sign));
+        sort($sign, SORT_STRING);
+        $this->signature = sha1(join($sign));
     }
 
     /**
@@ -150,7 +189,12 @@ class weichatapi
         if(isset($GLOBALS["HTTP_RAW_POST_DATA"]))
         {
             $this->rawData = $GLOBALS["HTTP_RAW_POST_DATA"];
-            $this->message = new simpleXMLElement($this->rawData);
+            $message = new simpleXMLElement($this->rawData);
+            foreach($message as $key => $value)
+            {
+                $key = lcfirst($key);
+                $this->message->$key = (string)$value;
+            }
         }
     }
 
@@ -160,8 +204,32 @@ class weichatapi
      * @access public
      * @return void
      */
-    public function response()
+    public function response($response)
     {
+        $response->toUserName   = $this->message->fromUserName;
+        $response->fromUserName = $this->message->toUserName;
+        $response->createTime   = time();
+        $this->response = $this->convertObject2XML($response);
+        die($this->response);
+    }
+
+    /**
+     * Convert a object to a xml message.
+     * 
+     * @param  object    $object 
+     * @access public
+     * @return string
+     */
+    public function convertObject2XML($object)
+    {
+        $xml = "<xml>\n";
+        foreach($object as $key => $value)
+        {
+            $key = ucfirst($key);
+            $xml .= "<$key><![CDATA[$value]]></$key>\n";
+        }
+        $xml .= "</xml>";
+        return $xml;
     }
 
     /**
@@ -195,4 +263,27 @@ class weichatapi
         curl_close($curl);
         return $response;
     }   
+
+    /**
+     * The destruct function, save log.
+     * 
+     * @access public
+     * @return void
+     */
+    public function __destruct()
+    {
+        if(!$this->debug) return;
+
+        $logFile = dirname(dirname(dirname(__FILE__))) . '/tmp/log/weichat.' . date('Ymd') . '.log';
+        if(!is_writable(dirname($logFile))) return false;
+
+        $log  = date('H:i:s: ') . $_SERVER['REQUEST_URI'] . "\n\n";
+        $log .= "[Signature]\n" . $_GET['signature'] . " got\n" . $this->signature . " computed\n\n";
+        $log .= "[Message]\n" . $this->rawData . "\n";
+        $log .= print_r($this->message, true) . "\n";
+        $log .= "[Response]\n" . print_r($this->response, true) . "\n";
+
+        $fh = fopen($logFile, 'a+');
+        fwrite($fh, $log);
+    }
 }
