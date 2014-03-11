@@ -11,6 +11,18 @@
  */
 class weichatModel extends model
 {
+    /**
+     * Get a public account by id.
+     * 
+     * @param  int    $id 
+     * @access public
+     * @return object
+     */
+    public function getByID($id)
+    {
+        return $this->dao->findByID($id)->from(TABLE_WX_PUBLIC)->fetch();
+    }
+
     /** 
      * Get public list.
      * 
@@ -31,9 +43,7 @@ class weichatModel extends model
     public function create()
     {
         $public = fixer::input('post')->add('addedDate', helper::now())->get();
-
         $this->dao->insert(TABLE_WX_PUBLIC)->data($public)->autoCheck()->exec();
-
         return !dao::isError();
     }
 }
