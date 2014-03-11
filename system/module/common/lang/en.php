@@ -200,7 +200,7 @@ $lang->site->menu->tag       = 'Tags|tag|admin|';
 $lang->site->menu->oauth     = 'Open OAuth|site|setoauth|';
 $lang->site->menu->link      = 'Links|links|admin|';
 $lang->site->menu->mail      = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->site->menu->weichat   = 'Weichat|weichat|admin|';
+$lang->site->menu->weichat   = array('link' => 'Weichat|weichat|admin|', 'alias' => 'create,edit');
 
 /* Menu of company module. */
 $lang->company->menu = new stdclass();
@@ -218,6 +218,10 @@ $lang->tag->menu = $lang->site->menu;
 /* Menu of mail module. */
 $lang->mail = new stdclass();
 $lang->mail->menu = $lang->site->menu;
+
+/* Menu of weichat module. */
+$lang->weichat = new stdclass();
+$lang->weichat->menu = $lang->site->menu;
 
 /* Menu of nav module. */
 $lang->nav = new stdclass();
