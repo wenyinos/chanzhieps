@@ -299,11 +299,11 @@ CREATE TABLE IF NOT EXISTS `eps_user` (
 CREATE TABLE IF NOT EXISTS `eps_wx_public` (
   `id`        smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `account`   varchar(20) NOT NULL,
+  `name`      varchar(60) NOT NULL,
   `appID`     char(30) NOT NULL,
   `appSecret` char(32) NOT NULL,
   `url`       varchar(100) NOT NULL,
   `token`     varchar(100) NOT NULL,
-  `desc`      varchar(255) NOT NULL,
   `type`      enum('subscribe', 'service') NOT NULL,
   `addedDate` datetime NOT NULL,
   PRIMARY KEY (`id`)
