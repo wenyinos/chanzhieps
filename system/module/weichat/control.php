@@ -14,12 +14,14 @@ class weichat extends control
     /**
      * The weichat api interface.
      * 
+     * @param  int    $id 
      * @access public
      * @return void
      */
-    public function api()
+    public function api($id)
     {
+        $public = $this->weichat->getByID($id);
         $this->app->loadClass('weichatapi', true);
-        $weichat = new weichatapi($this->config->weichat->token, $this->config->weichat->appID, $this->config->weichat->secret );
+        $weichat = new weichatapi($public->token, $public->appID, $public->appSecret);
     }
 }
