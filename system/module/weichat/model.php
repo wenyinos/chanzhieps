@@ -46,4 +46,19 @@ class weichatModel extends model
         $this->dao->insert(TABLE_WX_PUBLIC)->data($public)->autoCheck()->exec();
         return !dao::isError();
     }
+
+    /**
+     * Get response for a message.
+     * 
+     * @param  object    $message 
+     * @access public
+     * @return void
+     */
+    public function getResponse($message)
+    {
+        $response = new stdclass();
+        $response->msgType = 'text';
+        $response->content = '你好';
+        return $response;
+    }
 }
