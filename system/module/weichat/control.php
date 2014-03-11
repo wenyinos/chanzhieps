@@ -24,4 +24,39 @@ class weichat extends control
         $this->app->loadClass('weichatapi', true);
         $weichat = new weichatapi($public->token, $public->appID, $public->appSecret);
     }
+
+    /**
+     * Browse public in admin.
+     * 
+     * @access public
+     * @return void
+     */
+    public function admin()
+    {
+        $publics = $this->weichat->getList();
+        if(empty($publics)) $this->locate(inlink('create'));
+
+        $this->view->title   = $this->lang->weichat->admin;
+        $this->view->publics = $publics;
+        $this->display();
+    }
+
+    /**
+     * Create a public.
+     * 
+     * @access public
+     * @return void
+     */
+    public function create()
+    {
+        if($_POST) 
+        {
+            $this->weichat->create();       
+            if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin')));
+        }
+
+        $this->view->title = $this->lang->weichat->create;
+        $this->display();
+    }
 }
