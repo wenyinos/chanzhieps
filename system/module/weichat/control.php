@@ -21,12 +21,30 @@ class weichat extends control
     public function api($id)
     {
         $public = $this->weichat->getByID($id);
-
         $this->app->loadClass('weichatapi', true);
         $api = new weichatapi($public->token, $public->appID, $public->appSecret, $this->config->debug);
+
         $message  = $api->getMessage();
         $response = $this->weichat->getResponse($message);
         $api->response($response);
+    }
+
+    /**
+     * Get the qrcode from weixin server.
+     * 
+     * @param  int    $id 
+     * @access public
+     * @return void
+     */
+    public function qrcode($id)
+    {
+        $public = $this->weichat->getByID($id);
+        $this->app->loadClass('weichatapi', true);
+        $api = new weichatapi($public->token, $public->appID, $public->appSecret, $this->config->debug);
+
+        $qrcodeFile = $this->app->getDataRoot() . 'weichat' . DS . $public->appID . '.jpg';
+        if(!is_dir(dirname($qrcodeFile))) @mkdir(dirname($qrcodeFile));
+        $data = $api->getQRCode($qrcodeFile); 
     }
 
     /**
