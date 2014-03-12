@@ -304,7 +304,10 @@ CREATE TABLE IF NOT EXISTS `eps_wx_public` (
   `appSecret` char(32) NOT NULL,
   `url`       varchar(100) NOT NULL,
   `token`     varchar(100) NOT NULL,
+  `qrcode`    varchar(100) NOT NULL,
+  `primary`   tinyint(3) NOT NULL DEFAULT 0,
   `type`      enum('subscribe', 'service') NOT NULL,
+  `status`    enum('wait', 'normal') NOT NULL,
   `addedDate` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

@@ -265,20 +265,20 @@ class weichatapi
      */
     public function getAccessToken()
     {
+        /* First try to use the token in session. */
         if(isset($_SESSION['wxToken'][$this->appID]))
         {
             if(time() < $_SESSION['wxToken'][$this->appID]->expires) return $_SESSION['wxToken'][$this->appID]->token;
         }
 
-        $time = time();
-
         /* Set params. */
+        $time = time();
+        $param['appid']      = $this->appID;
+        $param['secret']     = $this->secret;
         $param['grant_type'] = 'client_credential';
-        $param['appid'] = $this->appID;
-        $param['secret'] = $this->secret;
 
         /* Get the token. */
-        $api = 'https://api.weixin.qq.com/cgi-bin/token?' . http_build_query($param);
+        $api  = 'https://api.weixin.qq.com/cgi-bin/token?' . http_build_query($param);
         $data = $this->get($api);
         $data = json_decode($data);
         if(!$data) return false;
@@ -314,6 +314,14 @@ class weichatapi
         return $response;
     }   
 
+    /**
+     * Make a http post request.
+     * 
+     * @param  string    $url 
+     * @param  string    $data 
+     * @access public
+     * @return void
+     */
     public function post($url, $data)
     {   
         if(!function_exists('curl_init')) die('I can\'t do post action without curl extension.');
