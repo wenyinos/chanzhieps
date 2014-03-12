@@ -241,13 +241,37 @@ class weichatapi
      */
     public function convertResponse2XML($response)
     {
+        /* Split the articles if the message is news. */
+        $msgType = ucfirst($response->msgType);
+        if($msgType == 'News') 
+        {
+            $articles = $response->articles;
+            unset($response->articles);
+        }
+
+        /* Join other fields. */
         $xml = "<xml>\n";
         foreach($response as $key => $value)
         {
             $key = ucfirst($key);
-            $xml .= "<$key><![CDATA[$value]]></$key>\n";
+            if($key == 'MediaId') $xml .= "<$msgType><$key><![CDATA[$value]]></$key></$msgType>";
+            if($key != 'MediaId') $xml .= "<$key><![CDATA[$value]]></$key>\n";
         }
-        $xml .= "</xml>";
+        if(!isset($articles)) return $xml . '</xml>';
+
+        /* Join articles. */
+        $xml .= '<ArticleCount>' . count($articles) . "</ArticleCount>\n<Articles>\n";
+        foreach($articles as $article)
+        {
+            $xml .= "<item>\n";
+            foreach($article as $key => $value)
+            {
+                $key = ucfirst($key);
+                $xml .= "<$key><![CDATA[$value]]></$key>\n";
+            }
+            $xml .= "</item>\n";
+        }
+        $xml .= "</Articles>\n</xml>";
         return $xml;
     }
 
@@ -309,8 +333,9 @@ class weichatapi
         $menu   = $this->convertMenu2JSON($menu);
         $result = $this->post($url, $menu);
         $result = json_decode($result);
+        print_r($result);
 
-        if(isset($result->errcode) and $result->errorcode == 0) return true;
+        if(isset($result->errcode) and $result->errcode == 0) return true;
         return false;
     }
 
