@@ -33,7 +33,7 @@ class weichatModel extends model
     {
         $publics = $this->dao->select('*')->from(TABLE_WX_PUBLIC)->orderBy('addedDate_desc')->fetchAll('id');
         if(!$publics) return array();
-        foreach($publics as $public) $public->url = $this->config->site->code . commonModel::createFrontLink('weichat', 'api', "id=$public->id&type=$public->type");
+        foreach($publics as $public) $public->url = 'http://' . $this->config->site->code . commonModel::createFrontLink('weichat', 'setapi', "id=$public->id");
         return $publics;
     }
 
