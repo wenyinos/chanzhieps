@@ -368,8 +368,6 @@ a.tag-link {color: inherit;}
   #headTitle img {height: 45px; max-width: inherit; min-width: 50px; width: auto;}
   .navbar-brand {display: none}
 
-  .carousel-inner>.item>img, .carousel-inner>.item>a>img {max-width: inherit; max-height: 240px;}
-
   .ke-toolbar {display: none !important;}
 
   .page {color :transparent; white-space:nowrap; overflow:hidden;}
