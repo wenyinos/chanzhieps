@@ -61,7 +61,7 @@ class weichatModel extends model
     {
         $response = new stdclass();
         $response->msgType = 'text';
-        $response->content = '你好';
+        $response->content = '你好' . $message->event . $message->eventKey;
         return $response;
     }
 }

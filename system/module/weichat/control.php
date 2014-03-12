@@ -73,6 +73,74 @@ class weichat extends control
     }
 
     /**
+     * Add menu.
+     * 
+     * @param  int    $public 
+     * @access public
+     * @return void
+     */
+    public function addMenu($public)
+    {
+        $this->setAPI($public);
+
+        $button = new stdclass();
+        $button->type = 'click';
+        $button->name = '关于我们';
+        $button->key = 'menu_1';
+        $menu['button'][] = $button;
+
+        $button = new stdclass();
+        $button->type = 'view';
+        $button->name = '官方网站';
+        $button->url  = 'http://www.chanzhi.org';
+        $menu['button'][] = $button;
+
+        $button = new stdclass();
+        $button->name = '功能介绍';
+
+        $subButton = new stdclass();
+        $subButton->type = 'view';
+        $subButton->name = '论坛';
+        $subButton->url  = 'http://www.chanzhi.org/forum/';
+        $button->sub_button[] = $subButton;
+        $subButton = new stdclass();
+        $subButton->type = 'view';
+        $subButton->name = '博客';
+        $subButton->url  = 'http://www.chanzhi.org/blog/';
+
+        $button->sub_button[] = $subButton;
+        $menu['button'][] = $button;
+        $this->api->addMenu($menu);
+    }
+
+    /**
+     * Delete menu of a public.
+     * 
+     * @param  int    $public 
+     * @access public
+     * @return void
+     */
+    public function deleteMenu($public)
+    {
+        $this->setAPI($public);
+        $this->api->deleteMenu();
+    }
+
+    /**
+     * Upload a media file.
+     * 
+     * @param  int    $public 
+     * @access public
+     * @return void
+     */
+    public function uploadMedia($public)
+    {
+        $this->setAPI($public);
+        $media = $this->api->uploadMedia('image', '/home/wwccss/chanzhi/www/data/test.jpg');
+        echo $this->api->getMedia($media);
+    }
+
+    /**
      * Get the qrcode from weixin server.
      * 
      * @param  int    $public 
