@@ -53,6 +53,33 @@ class weichat extends control
         $this->setAPI($public);
         $message  = $this->api->getMessage();
         $response = $this->weichat->getResponse($message);
+
+        if(isset($message->eventKey) and $message->eventKey == 'menu_image')
+        {
+            $response = new stdclass();
+            $response->msgType = 'image';
+            $response->mediaId = $this->api->uploadMedia('image', '/home/wwccss/chanzhi/www/data/test.jpg');
+        }
+
+        if(isset($message->eventKey) and $message->eventKey == 'menu_news')
+        {
+            $response = new stdclass();
+            $response->msgType = 'news';
+            $article = new stdclass();
+            $article->title = '禅道';
+            $article->description = '禅道项目管理软件';
+            $article->picUrl = 'http://www.zentao.net/data/site/18/Logo.png';
+            $article->url    = 'http://www.zentao.net';
+            $response->articles[] = $article;
+
+            $article = new stdclass();
+            $article->title = '蝉知';
+            $article->description = '蝉知企业门户';
+            $article->picUrl = 'http://www.chanzhi.org/data/upload/201309/fdfb6e9cb6103298f5497760962ebbf7.png';
+            $article->url    = 'http://www.chanzhi.org';
+            $response->articles[] = $article;
+        }
+
         $this->api->response($response);
     }
 
@@ -85,14 +112,14 @@ class weichat extends control
 
         $button = new stdclass();
         $button->type = 'click';
-        $button->name = '关于我们';
-        $button->key = 'menu_1';
+        $button->name = '图片';
+        $button->key  = 'menu_image';
         $menu['button'][] = $button;
 
         $button = new stdclass();
-        $button->type = 'view';
-        $button->name = '官方网站';
-        $button->url  = 'http://www.chanzhi.org';
+        $button->type = 'click';
+        $button->name = '图文';
+        $button->key  = 'menu_news';
         $menu['button'][] = $button;
 
         $button = new stdclass();
