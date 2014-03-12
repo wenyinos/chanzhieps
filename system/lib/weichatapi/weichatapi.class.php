@@ -60,6 +60,14 @@ class weichatapi
     public $message;
 
     /**
+     * The response object.
+     * 
+     * @var object   
+     * @access public
+     */
+    public $response;
+
+    /**
      * Debug or not.
      * 
      * @var bool   
@@ -201,6 +209,7 @@ class weichatapi
     /**
      * Response a message.
      * 
+     * @param  object    $response 
      * @access public
      * @return void
      */
@@ -230,6 +239,49 @@ class weichatapi
         }
         $xml .= "</xml>";
         return $xml;
+    }
+
+    /**
+     * Reply a message.
+     * 
+     * @param  string    $to 
+     * @param  string    $type 
+     * @param  object    $message 
+     * @access public
+     * @return void
+     */
+    public function reply($to, $type, $message)
+    {
+        $reply = new stdclass();
+        $reply->touser  = $to;
+        $reply->msgtype = $type;
+        $reply->$type = $message;
+
+        $token = $this->getAccessToken();
+        $url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=$token";
+        $this->post($url, $reply);
+    }
+
+    /**
+     * Convert an object to json.
+     * 
+     * @param  object    $object 
+     * @access public
+     * @return json
+     */
+    public function convertObject2JSON($object)
+    {
+        if(isset($object->content)) $object->content = urlencode($object->content);
+        if(isset($object->articles))
+        {
+            foreach($object->articles as $article)
+            {
+                if(isset($article->title)) $article->title = urlencode($article->title);
+                if(isset($article->description)) $article->description = urlencode($article->description);
+            }
+        }
+
+        return urldecode(json_encode($object));
     }
 
     /**
