@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-  </div><?php /* end .page-wrapper in header.html.php */ ?>
+  </div></div><?php /* end .page-content then .page-wrapper in header.html.php */ ?>
   <footer id='footer'>
     <div class='wrapper'>
       <div id='footNav'>

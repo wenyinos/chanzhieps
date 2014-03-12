@@ -348,7 +348,6 @@
         return '#' + r + g + b;
     }
 
-
     /* helpers */
     function hexToRgb(hex)
     {

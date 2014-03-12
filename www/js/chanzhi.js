@@ -712,7 +712,6 @@ function handleTouch()
     function handleCarousel(carousel, distance)
     {
         if(distance > 10) carousel.find('.left.carousel-control').click();
-
         if(distance < -10) carousel.find('.right.carousel-control').click();
     }
 }

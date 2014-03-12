@@ -30,7 +30,7 @@ $(document).ready(function()
         $('#slide .item').first().addClass('active');
     }
 
-    /* fixed submenu position for browser which doesn't suppport relative postion in a table cell, like firefox. */
+    /* Fixed submenu position for browser which doesn't suppport relative postion in a table cell, like firefox. */
     if(navigator.userAgent.indexOf('Firefox') != -1)
     {
         $('#navbar .dropdown > .dropdown-menu').each(function(){$(this).css('left', $(this).closest('.dropdown').position().left - 2);});
@@ -42,8 +42,11 @@ $(document).ready(function()
     /* Handle touch event for mobile devices */
     handleTouch();
 
-    /* Mark empty headNav */
+    /* Remove empty headNav */
     var headNav = $('#headNav');
     if(!headNav.find('nav a').length) headNav.addClass('hide');
+
+    /* Mark the module and method with css class */
+    $('body').addClass('m-' + config['currentModule'] + '-' + config['currentMethod']);
 });
 

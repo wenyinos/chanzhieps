@@ -132,3 +132,4 @@ js::import($jsRoot . 'jquery/placeholder/min.js');
     </div>
   </nav>
   <div class='page-wrapper'>
+    <div class='page-content'>
