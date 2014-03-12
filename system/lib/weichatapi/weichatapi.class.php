@@ -212,6 +212,8 @@ class weichatapi
                 $this->message->$key = (string)$value;
             }
         }
+
+        return $this->message;
     }
 
     /**
@@ -291,6 +293,103 @@ class weichatapi
         }
 
         return urldecode(json_encode($reply));
+    }
+
+    /**
+     * Add menu to weichat server.
+     * 
+     * @param  array    $menu 
+     * @access public
+     * @return bool
+     */
+    public function addMenu($menu)
+    {
+        $token  = $this->getAccessToken();
+        $url    = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=$token";
+        $menu   = $this->convertMenu2JSON($menu);
+        $result = $this->post($url, $menu);
+        $result = json_decode($result);
+
+        if(isset($result->errcode) and $result->errorcode == 0) return true;
+        return false;
+    }
+
+    /**
+     * Delete menu.
+     * 
+     * @access public
+     * @return void
+     */
+    public function deleteMenu()
+    {
+        $token  = $this->getAccessToken();
+        $url    = "https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=$token";
+        $result = $this->get($url);
+
+        if(isset($result->errcode) and $result->errorcode == 0) return true;
+        return false;
+    }
+
+    /**
+     * Convert menu array into json format.
+     * 
+     * @param  array    $menu 
+     * @access public
+     * @return void
+     */
+    public function convertMenu2JSON($menu)
+    {
+        foreach($menu['button'] as $button)
+        {
+            if(isset($button->name)) $button->name = urlencode($button->name);
+            if(isset($button->sub_button)) 
+            {
+                foreach($button->sub_button as $subButton)
+                {
+                    if(isset($subButton->name)) $subButton->name = urlencode($subButton->name);
+                }
+            }
+        }
+
+        return urldecode(json_encode($menu));
+    }
+
+    /**
+     * Upload a media file.
+     * 
+     * @param  string $type 
+     * @param  string $file 
+     * @access public
+     * @return string
+     */
+    public function uploadMedia($type, $file)
+    {
+        $fields['media'] = "@$file";
+        $token = $this->getAccessToken();
+        $url   = "http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=$token&type=$type";
+
+        $result = $this->post($url, $fields);
+        $result = json_decode($result);
+
+        if(isset($result->media_id)) return $result->media_id;
+        return false;
+    }
+
+    /**
+     * Get a media file.
+     * 
+     * @param  string    $id 
+     * @access public
+     * @return binary
+     */
+    public function getMedia($id)
+    {
+        $token  = $this->getAccessToken();
+        $url    = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=$token&media_id=$id";
+        $result = $this->get($url);
+
+        if(json_decode($result)) return false;
+        return $result;
     }
 
     /**
