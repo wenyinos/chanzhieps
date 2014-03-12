@@ -28,7 +28,7 @@
     }
     ?>
     <?php $current = $theme == $config->site->theme ? ' current' : ''; ?>
-      <div class='col-lg-4 col-md-6 col-sm-6'>
+      <div class='card-wrapper'>
         <a class='card ajax-theme<?php echo $current . ($custom ? ' custom' : ''); ?>' href='<?php echo inlink('settheme', "theme={$theme}"); ?>' title='<?php echo $lang->ui->changetheme; ?>'>
           <?php echo html::image($themeRoot . $theme . '/preview.png'); ?>
           <i class='icon-large icon-ok pull-right'></i>
@@ -40,6 +40,7 @@
             <?php endif;?>
           </div>
         </a>
+        <div class='pull-right text-muted'><a data-width='825' data-height='220' href='<?php echo $themeRoot . $theme . '/preview.png';?>' data-toggle='lightbox'><i class='icon-picture'></i></a></div>
         <div class='name'><?php echo $name;?></div>
       </div>
     <?php endforeach;?>
