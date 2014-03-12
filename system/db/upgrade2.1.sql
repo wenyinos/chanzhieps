@@ -1,12 +1,15 @@
 CREATE TABLE IF NOT EXISTS `eps_wx_public` (
-  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
-  `account` varchar(20) NOT NULL,
-  `name` varchar(60) NOT NULL,
-  `appID` char(30) NOT NULL,
+  `id`        smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `account`   varchar(20) NOT NULL,
+  `name`      varchar(60) NOT NULL,
+  `appID`     char(30) NOT NULL,
   `appSecret` char(32) NOT NULL,
-  `url` varchar(100) NOT NULL,
-  `token` varchar(100) NOT NULL,
-  `type` enum('subscribe', 'service') NOT NULL,
+  `url`       varchar(100) NOT NULL,
+  `token`     varchar(100) NOT NULL,
+  `qrcode`    varchar(100) NOT NULL,
+  `primary`   tinyint(3) NOT NULL DEFAULT 0,
+  `type`      enum('subscribe', 'service') NOT NULL,
+  `status`    enum('wait', 'normal') NOT NULL,
   `addedDate` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
