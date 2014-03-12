@@ -69,7 +69,7 @@ class weichat extends control
         $this->setAPI($public);
         $message = new stdclass();
         $message->content = '你好';
-        $api->reply('o-nXYt1LrugCK0oqZcrxyMidiJSg', 'text', $message);
+        $this->api->reply('o-nXYt1LrugCK0oqZcrxyMidiJSg', 'text', $message);
     }
 
     /**

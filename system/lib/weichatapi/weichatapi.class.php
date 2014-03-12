@@ -68,6 +68,14 @@ class weichatapi
     public $response;
 
     /**
+     * The reply object.
+     * 
+     * @var object   
+     * @access public
+     */
+    public $reply;
+
+    /**
      * Debug or not.
      * 
      * @var bool   
@@ -218,21 +226,21 @@ class weichatapi
         $response->toUserName   = $this->message->fromUserName;
         $response->fromUserName = $this->message->toUserName;
         $response->createTime   = time();
-        $this->response = $this->convertObject2XML($response);
+        $this->response = $this->convertResponse2XML($response);
         die($this->response);
     }
 
     /**
-     * Convert a object to a xml message.
+     * Convert a response object to a xml message.
      * 
-     * @param  object    $object 
+     * @param  object    $response 
      * @access public
      * @return string
      */
-    public function convertObject2XML($object)
+    public function convertResponse2XML($response)
     {
         $xml = "<xml>\n";
-        foreach($object as $key => $value)
+        foreach($response as $key => $value)
         {
             $key = ucfirst($key);
             $xml .= "<$key><![CDATA[$value]]></$key>\n";
@@ -256,32 +264,33 @@ class weichatapi
         $reply->touser  = $to;
         $reply->msgtype = $type;
         $reply->$type = $message;
-
+        $this->reply = $reply;
+        
         $token = $this->getAccessToken();
         $url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=$token";
-        $this->post($url, $reply);
+        $this->post($url, $this->convertReply2JSON($this->reply));
     }
 
     /**
-     * Convert an object to json.
+     * Convert an reply object to json.
      * 
-     * @param  object    $object 
+     * @param   object    $reply 
      * @access public
      * @return json
      */
-    public function convertObject2JSON($object)
+    public function convertReply2JSON($reply)
     {
-        if(isset($object->content)) $object->content = urlencode($object->content);
-        if(isset($object->articles))
+        if(isset($reply->text->content)) $reply->text->content = urlencode($reply->text->content);
+        if(isset($reply->articles))
         {
-            foreach($object->articles as $article)
+            foreach($reply->articles as $article)
             {
                 if(isset($article->title)) $article->title = urlencode($article->title);
                 if(isset($article->description)) $article->description = urlencode($article->description);
             }
         }
 
-        return urldecode(json_encode($object));
+        return urldecode(json_encode($reply));
     }
 
     /**
@@ -399,16 +408,20 @@ class weichatapi
     public function __destruct()
     {
         if(!$this->debug) return;
-        if(!isset($_GET['signature'])) return false;
 
+        /* Set log file. */
         $logFile = dirname(dirname(dirname(__FILE__))) . '/tmp/log/weichat.' . date('Ymd') . '.log';
         if(!is_writable(dirname($logFile))) return false;
+
+        /* Init the signature. */
+        if(!isset($_GET['signature'])) $_GET['signature'] = '';
 
         $log  = date('H:i:s: ') . $_SERVER['REQUEST_URI'] . "\n\n";
         $log .= "[Signature]\n" . $_GET['signature'] . " got\n" . $this->signature . " computed\n\n";
         $log .= "[Message]\n" . $this->rawData . "\n";
         $log .= print_r($this->message, true) . "\n";
         $log .= "[Response]\n" . print_r($this->response, true) . "\n";
+        $log .= "[Reply]\n" . print_r($this->reply, true) . "\n";
 
         $fh = fopen($logFile, 'a+');
         fwrite($fh, $log);
