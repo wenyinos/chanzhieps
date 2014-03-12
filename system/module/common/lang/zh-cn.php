@@ -130,6 +130,7 @@ $lang->menuGroups->tag     = 'site';
 $lang->menuGroups->mail    = 'site';
 $lang->menuGroups->nav     = 'site';
 $lang->menuGroups->links   = 'site';
+$lang->menuGroups->weichat = 'site';
 $lang->menuGroups->block   = 'ui';
 $lang->menuGroups->slide   = 'ui';
 $lang->menuGroups->tree    = 'article';
