@@ -178,7 +178,7 @@ $lang->feedback->menu = new stdclass();
 $lang->feedback->menu->message = '留言|message|admin|type=message';
 $lang->feedback->menu->comment = '评论|message|admin|type=comment';
 $lang->feedback->menu->thread  = '主题|forum|admin|tab=feedback';
-$lang->feedback->menu->reply   = '回复|reply|admin|tab=feedback';
+$lang->feedback->menu->reply   = '回复|reply|admin|order=id_desc&tab=feedback';
 $lang->feedback->menu->weichat = '微信|weichat|message';
 
 $lang->message = new stdclass();
