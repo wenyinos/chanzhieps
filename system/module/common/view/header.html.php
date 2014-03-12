@@ -1,8 +1,5 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
-<?php 
-include 'header.lite.html.php';
-js::set('lang', $lang->js);
-?>
+<?php include 'header.lite.html.php';?>
 <div class='page-container'>
   <?php if(strpos($_SERVER['HTTP_USER_AGENT'],'MSIE 6.0') !== false ) exit($lang->IE6Alert); ?>
   <header id='header' class='clearfix'>
