@@ -21,8 +21,18 @@ $lang->weichat->users     = '微信会员';
 
 $lang->weichat->create      = '添加公众号';
 $lang->weichat->admin       = '维护公众号';
+$lang->weichat->list        = '公众号列表';
 $lang->weichat->setMenu     = '菜单设置';
 $lang->weichat->setResponse = '回复设置';
+$lang->weichat->access      = '接入';
 
 $lang->weichat->typeList['subscribe'] = '订阅号';
 $lang->weichat->typeList['service']   = '服务号';
+
+$lang->weichat->accessInfo = <<<EOT
+<ul style="padding-left: 10px">
+  <li><strong>AppSecret</strong>： %s </li>
+  <li><strong>接入地址</strong>： %s </li>
+  <li><strong>Token</strong>： %s </li>
+</ul>
+EOT;

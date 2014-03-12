@@ -21,8 +21,18 @@ $lang->weichat->users     = 'Users';
 
 $lang->weichat->create      = 'Create';
 $lang->weichat->admin       = 'Admin';
+$lang->weichat->list        = 'List';
 $lang->weichat->setMenu     = 'Set Menu';
 $lang->weichat->setResponse = 'Set Response';
+$lang->weichat->access      = 'Access';
 
 $lang->weichat->typeList['subscribe'] = 'Subscribe';
 $lang->weichat->typeList['service']   = 'Service';
+
+$lang->weichat->accessInfo = <<<EOT
+<ul style="padding-left: 10px">
+  <li><strong>AppSecret</strong>： %s </li>
+  <li><strong>URL</strong>： %s </li>
+  <li><strong>Token</strong>： %s </li>
+</ul>
+EOT;
