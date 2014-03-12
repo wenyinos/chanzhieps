@@ -112,7 +112,7 @@ js::import($jsRoot . 'jquery/placeholder/min.js');
     </div>
   </header>
   <nav id="blogNav" class="navbar navbar-default" role="navigation">
-    <div class='collapse navbar-collapse'>
+    <div class='wrapper'>
       <ul class="nav navbar-nav">
         <li <?php if(empty($category)) echo "class='active'"?>>
            <?php echo html::a($this->inlink('index'), $lang->blog->home)?>
