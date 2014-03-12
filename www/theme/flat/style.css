@@ -7,15 +7,15 @@ a:hover,a:active{color: #1ABC9C;}
 /* headNav. */
 #headNav{top: 30%; background-color: #16a085; -moz-border-radius:6px; -webkit-border-radius:6px; border-radius:6px;color: #f1f1f1;}
 #headNav .login-msg{display: inline-block; padding-left: 15px; color: #f1f1f1;}
-#headNav > a, #msgBox{color: #f1f1f1; display: inline-block; padding: 10px 15px; margin: 0; background-color: #16a085; -moz-border-radius:6px; -webkit-border-radius:6px; border-radius:6px; -webkit-transition:background 0.5s; -moz-transition:background 0.5s; -o-transition:background 0.5s; transition:background 0.5s;border-radius: 0}
-#headNav > a:first-child{padding-left: 20px; -moz-border-radius:6px 0 0 6px; -webkit-border-radius:6px 0 0 6px; border-radius:6px 0 0 6px; }
-#headNav > a:last-child,#headNav span:last-child > a {padding-right: 25px; -moz-border-radius:0 6px 6px 0; -webkit-border-radius:0 6px 6px 0; border-radius:0 6px 6px 0;}
-#headNav .login-msg:after, #headNav > a:after, #msgBox:after{display: none;}
+#headNav nav > a, #msgBox{color: #f1f1f1; display: inline-block; padding: 10px 15px; margin: 0; background-color: #16a085; -moz-border-radius:6px; -webkit-border-radius:6px; border-radius:6px; -webkit-transition:background 0.5s; -moz-transition:background 0.5s; -o-transition:background 0.5s; transition:background 0.5s;border-radius: 0}
+#headNav nav > a:first-child{padding-left: 20px; -moz-border-radius:6px 0 0 6px; -webkit-border-radius:6px 0 0 6px; border-radius:6px 0 0 6px; }
+#headNav nav > a:last-child,#headNav span:last-child > a {padding-right: 25px; -moz-border-radius:0 6px 6px 0; -webkit-border-radius:0 6px 6px 0; border-radius:0 6px 6px 0;}
+#headNav .login-msg:after, #headNav nav > a:after, #msgBox:after{display: none;}
 #msgBox a {color: #f1f1f1}
 #msgBox .label.label-badge{border: none;}
 #headNav .caret{border-top-color: #f1f1f1; border-bottom-color: #f1f1f1;}
 #headNav .dropdown-menu a {display: block;background-color: #fff;color: #333;}
-#headNav > a:hover, #msgBox:hover{background-color: #1abc9c; color: #fff; text-decoration: none; -webkit-transition:background 0.5s; -moz-transition:background 0.5s; -o-transition:background 0.5s; transition:background 0.5s;}
+#headNav nav > a:hover, #msgBox:hover{background-color: #1abc9c; color: #fff; text-decoration: none; -webkit-transition:background 0.5s; -moz-transition:background 0.5s; -o-transition:background 0.5s; transition:background 0.5s;}
 
 /* navbar settings.*/
 #navbar{background: #2C3E50;border-radius: 6px;}
@@ -128,5 +128,5 @@ textarea{height: auto;}
   #siteName {color: #fff;}
   
   #headNav {border-radius: 0; background-color: #16a085}
-  #headNav > a, #msgBox {padding: 2px 5px; border-radius: 0}
+  #headNav nav > a, #msgBox {padding: 2px 5px; border-radius: 0}
 }

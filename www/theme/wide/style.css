@@ -69,11 +69,12 @@ body {background: #232323;}
 #headNav {width: 100%; position: static; border-bottom: 1px solid #e5e5e5; height: 42px; text-align: right;}
 #headNav nav {float: right;}
 #headNav nav > a, #headNav nav > span {float: left; display: block; height: 42px;line-height: 42px; border-right: 1px solid #e5e5e5; padding: 0 15px;}
-#headNav nav > span:after, #headNav .login-msg:after, #msgBox:after {display: none}
+#headNav nav > span:after, #headNav .login-msg:after, #msgBox:after, #headNav nav > a:after {display: none}
 #msgBox {margin: 0}
 #headNav nav > a:first-child {border-left: 1px solid #e5e5e5;}
 #headNav nav > a:hover, #headNav nav > span:hover {background: #f1f1f1; text-decoration: none;}
-#headTitle {position: static; display: block; min-height: 70px;}
+#headTitle {position: relative; display: block; min-height: 70px;}
+#siteSlogan {position: absolute; top: -32px; padding-left: 0; font-size: 14px; font-weight: normal; color: #808080}
 #siteLogo {padding: 5px 0}
 #siteLogo img {height: 60px;}
 
@@ -144,6 +145,7 @@ body {background: #232323;}
 /* Article */
 .article {background-color: #FFFFFF; -moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0}
 .article-files > li:hover .file-actions > a, .article-files > li .file-actions > a:hover {background-color: #F25D03}
+
 /* Thread */
 .thread .panel-heading {backgroundImage: none !important}
 
