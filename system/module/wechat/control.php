@@ -51,6 +51,8 @@ class wechat extends control
     public function response($public)
     {
         $this->setAPI($public);
+        $this->api->checkSign();
+
         $message  = $this->api->getMessage();
         $response = $this->wechat->getResponse($message);
 
