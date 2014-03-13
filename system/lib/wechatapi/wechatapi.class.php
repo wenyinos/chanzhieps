@@ -417,6 +417,36 @@ class wechatapi
     }
 
     /**
+     * Get fans.
+     * 
+     * @param  string $next 
+     * @access public
+     * @return object
+     */
+    public function getFans($next = '')
+    {
+        $token = $this->getAccessToken();
+        $url   = "https://api.weixin.qq.com/cgi-bin/user/get?access_token=$token&next_openid=$next";
+        $result = $this->get($url);
+        return json_decode($result);
+    }
+
+    /**
+     * Get user info.
+     * 
+     * @param  string $openID 
+     * @param  string $lang 
+     * @access public
+     * @return object
+     */
+    public function getUserInfo($openID, $lang = 'zh_CN')
+    {
+        $token = $this->getAccessToken();
+        $url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=$token&openid=$openID&lang=$lang";
+        return json_decode($this->get($url));
+    }
+
+    /**
      * Get qrcode for a public account.
      * 
      * @param  string    $file 

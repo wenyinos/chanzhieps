@@ -185,6 +185,34 @@ class wechat extends control
     }
 
     /**
+     * Get fans.
+     * 
+     * @param  int    $public 
+     * @param  string $next 
+     * @access public
+     * @return void
+     */
+    public function getFans($public, $next = '')
+    {
+        $this->setAPI($public);
+        $this->api->getFans($next);
+    }
+
+    /**
+     * Get user info.
+     * 
+     * @param  int    $public 
+     * @param  string $lang 
+     * @access public
+     * @return void
+     */
+    public function getUserInfo($public, $lang = 'zh_CN')
+    {
+        $this->setAPI($public);
+        print_r($this->api->getUserInfo('o-nXYt1LrugCK0oqZcrxyMidiJSg', $lang));
+    }
+
+    /**
      * Browse public in admin.
      * 
      * @access public
