@@ -40,10 +40,10 @@
         <td><?php echo $public->appID;?></td>
         <td>
           <?php
-          echo html::a($this->createLink('weichat', 'setMenu', "publicID=$public->id"), $lang->weichat->setMenu);
-          echo html::a($this->createLink('weichat', 'setResponse', "publicID=$public->id&type=default"),   $lang->weichat->defaultResponse);
-          echo html::a($this->createLink('weichat', 'setResponse', "publicID=$public->id&type=subscribe"), $lang->weichat->subscribeResponse);
-          echo html::a($this->createLink('weichat', 'setResponse', "publicID=$public->id&type=menu"),      $lang->weichat->menuResponse);
+          echo html::a($this->createLink('tree', 'browse', "type=wx_$public->id"), $lang->weichat->setMenu);
+          echo html::a($this->createLink('weichat', 'setResponse', "publicID=$public->id"), $lang->weichat->setResponse);
+          echo html::a($this->createLink('weichat', 'setResponse', "publicID=$public->id&group=default"), $lang->weichat->defaultResponse);
+          echo html::a($this->createLink('weichat', 'setResponse', "publicID=$public->id&group=subscribe"), $lang->weichat->subscribeResponse);
           ?>
           <a href='###' class='access' data-container='body' data-toggle='popover' data-placement='left' data-content='<?php printf($lang->weichat->accessInfo, $public->appSecret, $public->url, $public->token);?>'>
             <?php echo $lang->weichat->access;?>

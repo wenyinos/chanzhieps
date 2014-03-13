@@ -216,26 +216,41 @@ class weichat extends control
         $this->view->title = $this->lang->weichat->create;
         $this->display();
     }
+    
+    /**
+     * Set weichat menu.
+     * 
+     * @param  string    $public 
+     * @access public
+     * @return void
+     */
+    public function menuResponse($key, $type = 'view')
+    {
+        $this->view->key  = $key;
+        $this->view->type = $type;
+        $this->display();
+    }
 
     /**
      * Set response for a public.
      * 
      * @param  int     $publicID 
-     * @param  string  $type 
+     * @param  string  $group 
      * @access public
      * @return void
      */
-    public function setResponse($publicID, $type)
+    public function setResponse($publicID, $group = '')
     {
         if($_POST) 
         {
-            $this->weichat->setResponse($publicID, $type);
+            $this->weichat->setResponse($publicID, $group);
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin')));
         }
 
         $this->view->title = $this->lang->weichat->setResponse;
-        $this->view->type  = $type;
+        $this->view->group = $group;
         $this->display();
     }
+
 }

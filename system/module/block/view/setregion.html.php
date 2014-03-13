@@ -19,7 +19,7 @@
       </h4>
     </div>
     <div class='modal-body'>
-    <form id='ajaxForm' action="<?php echo inlink('setregion', "page={$page}&region={$region}");?>" method='post'>
+      <form id='ajaxForm' action="<?php echo inlink('setregion', "page={$page}&region={$region}");?>" method='post'>
         <table class='table table-striped table-form'>
           <thead>
             <tr>

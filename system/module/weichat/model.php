@@ -33,7 +33,7 @@ class weichatModel extends model
     {
         $publics = $this->dao->select('*')->from(TABLE_WX_PUBLIC)->orderBy('addedDate_desc')->fetchAll('id');
         if(!$publics) return array();
-        foreach($publics as $public) $public->url = 'http://' . $this->config->site->code . commonModel::createFrontLink('weichat', 'setapi', "id=$public->id");
+        foreach($publics as $public) $public->url = getWebRoot(true) . commonModel::createFrontLink('weichat', 'response', "id=$public->id");
         return $publics;
     }
 
@@ -69,15 +69,14 @@ class weichatModel extends model
      * Set response for a public.
      * 
      * @param  int     $publicID
-     * @param  string  $type
      * @access public
      * @return void
      */
-    public function setResponse($publicID, $type)
+    public function setResponse($publicID)
     {
         $response = fixer::input('post')
             ->add('public', $publicID)
-            ->setIF($type == 'subscribe', 'key', 'subscribe')
+            ->setIF($this->post->group == 'subscribe', 'key', 'subscribe')
             ->get();
 
         $this->dao->insert(TABLE_WX_RESPONSE)->data($response)->autoCheck()->exec();
