@@ -107,7 +107,6 @@ class wechatapi
         $this->setAppID($appID);
         $this->setSecret($secret);
         $this->setDebug($debug);
-        $this->checkSign();
     }
 
     /**
@@ -166,7 +165,7 @@ class wechatapi
      */
     public function checkSign()
     {
-        if(empty($_GET['signature']) or empty($_GET['timestamp']) or empty($_GET['nonce'])) return false;
+        if(empty($_GET['signature']) or empty($_GET['timestamp']) or empty($_GET['nonce'])) die('evil');
 
         $sign = $_GET['signature'];
         $time = $_GET['timestamp'];
