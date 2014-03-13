@@ -1,15 +1,15 @@
 <?php
 /**
- * The model file of weichat module of chanzhiEPS.
+ * The model file of wechat module of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
  * @license     LGPL
  * @author      Tingting Dai <daitingting@cxirangit.com>
- * @package     weichat
+ * @package     wechat
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-class weichatModel extends model
+class wechatModel extends model
 {
     /**
      * Get a public account by id.
@@ -33,7 +33,7 @@ class weichatModel extends model
     {
         $publics = $this->dao->select('*')->from(TABLE_WX_PUBLIC)->orderBy('addedDate_desc')->fetchAll('id');
         if(!$publics) return array();
-        foreach($publics as $public) $public->url = getWebRoot(true) . commonModel::createFrontLink('weichat', 'response', "id=$public->id");
+        foreach($publics as $public) $public->url = getWebRoot(true) . commonModel::createFrontLink('wechat', 'response', "id=$public->id");
         return $publics;
     }
 
