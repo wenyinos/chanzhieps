@@ -54,3 +54,12 @@ $lang->board->readonlyList[1] = '只读';
 $lang->board->placeholder = new stdclass();
 $lang->board->placeholder->moderators  = '会员用户名, 多个用户名之间用逗号隔开';
 $lang->board->placeholder->setChildren = '论坛功能需要设置二级版块才能使用。';
+
+/* Lang items for weichat menu. */
+$lang->weichatMenu = new stdclass();
+$lang->weichatMenu->common     = '公众号菜单';
+$lang->weichatMenu->name       = '标题';
+$lang->weichatMenu->parent     = '上级菜单';
+$lang->weichatMenu->children   = "子菜单";
+
+$lang->weichatMenu->setResponse = '响应设置';

@@ -11,7 +11,9 @@
  */
 class tree extends control
 {
-    const NEW_CHILD_COUNT = 5;
+    const NEW_CHILD_COUNT        = 5;
+    const WEICHAT_MAINMENU_COUNT = 3;
+    const WEICHAT_SUBMENU_COUNT  = 5;
 
     /**
      * Browse the categories and print manage links.
@@ -42,7 +44,14 @@ class tree extends control
             $this->lang->menuGroups->tree = 'product';
         }
 
-        $this->view->title    = $this->lang->category->common;
+        if(substr($type, 0, 3) == 'wx_')
+        {
+            $this->lang->tree = $this->lang->weichatMenu;
+            $this->lang->tree->menu = $this->lang->weichat->menu;
+            $this->lang->menuGroups->tree = 'weichat';
+        }
+
+        $this->view->title    = $this->lang->tree->common;
         $this->view->type     = $type;
         $this->view->root     = $root;
         $this->view->treeMenu = $this->tree->getTreeMenu($type, 0, array('treeModel', 'createManageLink'));
@@ -115,6 +124,9 @@ class tree extends control
         /* If type is forum, assign board to category. */
         if($type == 'forum') $this->lang->category = $this->lang->board;
 
+        $isWeichatMenu = substr($type, 0, 3) == 'wx_';
+        if($isWeichatMenu) $this->lang->category = $this->lang->weichatMenu;
+
         if(!empty($_POST))
         { 
             $result = $this->tree->manageChildren($type, $this->post->parent, $this->post->children);
@@ -122,12 +134,13 @@ class tree extends control
             if($result === true) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $locate));
             $this->send(array('result' => 'fail', 'message' => dao::isError() ? dao::getError() : $result));
         }
-
-        $this->view->title    = $this->lang->tree->manage;
-        $this->view->type     = $type;
-        $this->view->children = $this->tree->getChildren($category, $type);
-        $this->view->origins  = $this->tree->getOrigin($category);
-        $this->view->parent   = $category;
+            
+        $this->view->isWeichatMenu = $isWeichatMenu;
+        $this->view->title         = $this->lang->tree->manage;
+        $this->view->type          = $type;
+        $this->view->children      = $this->tree->getChildren($category, $type);
+        $this->view->origins       = $this->tree->getOrigin($category);
+        $this->view->parent        = $category;
 
         $this->display();
     }
