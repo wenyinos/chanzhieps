@@ -1,6 +1,6 @@
 <?php
 /**
- * The control file of weichat module of chanzhiEPS.
+ * The control file of wechat module of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
  * @license     LGPL
@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-class weichat extends control
+class wechat extends control
 {
     /**
      * The public account.
@@ -20,7 +20,7 @@ class weichat extends control
     public $public;
 
     /**
-     * The weichat api object.
+     * The wechat api object.
      * 
      * @var object   
      * @access public
@@ -28,7 +28,7 @@ class weichat extends control
     public $api;
 
     /**
-     * Set the weichat api.
+     * Set the wechat api.
      * 
      * @param  int    $public 
      * @access public
@@ -36,13 +36,13 @@ class weichat extends control
      */
     public function setAPI($public)
     {
-        $this->public = $this->weichat->getByID($public);
-        $this->app->loadClass('weichatapi', true);
-        $this->api = new weichatapi($this->public->token, $this->public->appID, $this->public->appSecret, $this->config->debug);
+        $this->public = $this->wechat->getByID($public);
+        $this->app->loadClass('wechatapi', true);
+        $this->api = new wechatapi($this->public->token, $this->public->appID, $this->public->appSecret, $this->config->debug);
     }
 
     /**
-     * The weichat auto response api.
+     * The wechat auto response api.
      * 
      * @param  int    $public 
      * @access public
@@ -52,7 +52,7 @@ class weichat extends control
     {
         $this->setAPI($public);
         $message  = $this->api->getMessage();
-        $response = $this->weichat->getResponse($message);
+        $response = $this->wechat->getResponse($message);
 
         if(isset($message->eventKey) and $message->eventKey == 'menu_image')
         {
@@ -177,7 +177,7 @@ class weichat extends control
     public function qrcode($public)
     {
         $this->setAPI($public);
-        $qrcodeFile = $this->app->getDataRoot() . 'weichat' . DS . $public->appID . '.jpg';
+        $qrcodeFile = $this->app->getDataRoot() . 'wechat' . DS . $public->appID . '.jpg';
         if(!is_dir(dirname($qrcodeFile))) @mkdir(dirname($qrcodeFile));
         $data = $this->api->getQRCode($qrcodeFile); 
     }
@@ -190,10 +190,10 @@ class weichat extends control
      */
     public function admin()
     {
-        $publics = $this->weichat->getList();
+        $publics = $this->wechat->getList();
         if(empty($publics)) $this->locate(inlink('create'));
 
-        $this->view->title   = $this->lang->weichat->admin;
+        $this->view->title   = $this->lang->wechat->admin;
         $this->view->publics = $publics;
         $this->display();
     }
@@ -208,17 +208,17 @@ class weichat extends control
     {
         if($_POST) 
         {
-            $this->weichat->create();       
+            $this->wechat->create();       
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin')));
         }
 
-        $this->view->title = $this->lang->weichat->create;
+        $this->view->title = $this->lang->wechat->create;
         $this->display();
     }
     
     /**
-     * Set weichat menu.
+     * Set wechat menu.
      * 
      * @param  string    $public 
      * @access public
@@ -243,12 +243,12 @@ class weichat extends control
     {
         if($_POST) 
         {
-            $this->weichat->setResponse($publicID, $group);
+            $this->wechat->setResponse($publicID, $group);
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin')));
         }
 
-        $this->view->title = $this->lang->weichat->setResponse;
+        $this->view->title = $this->lang->wechat->setResponse;
         $this->view->group = $group;
         $this->display();
     }
