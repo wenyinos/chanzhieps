@@ -1,6 +1,6 @@
 <?php
 /**
- * The weichat class file of chanzhiEPS.
+ * The wechat class file of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2014 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
  * @license     LGPL
@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-class weichatapi
+class wechatapi
 {
     /**
      * The token.
@@ -44,7 +44,7 @@ class weichatapi
     public $signature;
 
     /**
-     * The raw data posted by weichat server.
+     * The raw data posted by wechat server.
      * 
      * @var string   
      * @access public
@@ -193,7 +193,7 @@ class weichatapi
     }
 
     /**
-     * Get a message from weichat server.
+     * Get a message from wechat server.
      * 
      * @access public
      * @return void
@@ -320,7 +320,7 @@ class weichatapi
     }
 
     /**
-     * Add menu to weichat server.
+     * Add menu to wechat server.
      * 
      * @param  array    $menu 
      * @access public
@@ -534,7 +534,7 @@ class weichatapi
         if(!$this->debug) return;
 
         /* Set log file. */
-        $logFile = dirname(dirname(dirname(__FILE__))) . '/tmp/log/weichat.' . date('Ymd') . '.log';
+        $logFile = dirname(dirname(dirname(__FILE__))) . '/tmp/log/wechat.' . date('Ymd') . '.log';
         if(!is_writable(dirname($logFile))) return false;
 
         /* Init the signature. */
