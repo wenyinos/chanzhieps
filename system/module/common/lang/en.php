@@ -130,6 +130,7 @@ $lang->menuGroups->tag     = 'site';
 $lang->menuGroups->mail    = 'site';
 $lang->menuGroups->nav     = 'site';
 $lang->menuGroups->links   = 'site';
+$lang->menuGroups->weichat = 'site';
 $lang->menuGroups->block   = 'ui';
 $lang->menuGroups->slide   = 'ui';
 $lang->menuGroups->tree    = 'article';
@@ -201,7 +202,7 @@ $lang->site->menu->tag       = 'Tags|tag|admin|';
 $lang->site->menu->oauth     = 'Open OAuth|site|setoauth|';
 $lang->site->menu->link      = 'Links|links|admin|';
 $lang->site->menu->mail      = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->site->menu->weichat   = array('link' => 'Weichat|weichat|admin|', 'alias' => 'create,edit');
+$lang->site->menu->weichat   = array('link' => 'Weichat|weichat|admin|', 'alias' => 'create,setresponse');
 
 /* Menu of company module. */
 $lang->company->menu = new stdclass();
