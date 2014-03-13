@@ -27,7 +27,7 @@
         <th class='w-100px'><?php echo $lang->weichat->type;?></th>
         <th class='w-160px'><?php echo $lang->weichat->account;?></th>
         <th class='w-160px'><?php echo $lang->weichat->appID;?></th>
-        <th class='w-200px'><?php echo $lang->actions;?></th>
+        <th class='w-300px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
@@ -40,8 +40,10 @@
         <td><?php echo $public->appID;?></td>
         <td>
           <?php
-          echo html::a($this->createLink('public', 'setMenu', "publicID=$public->id"), $lang->weichat->setMenu);
-          echo html::a($this->createLink('public', 'setResponse', "publicID=$public->id"), $lang->weichat->setResponse);
+          echo html::a($this->createLink('weichat', 'setMenu', "publicID=$public->id"), $lang->weichat->setMenu);
+          echo html::a($this->createLink('weichat', 'setResponse', "publicID=$public->id&type=default"),   $lang->weichat->defaultResponse);
+          echo html::a($this->createLink('weichat', 'setResponse', "publicID=$public->id&type=subscribe"), $lang->weichat->subscribeResponse);
+          echo html::a($this->createLink('weichat', 'setResponse', "publicID=$public->id&type=menu"),      $lang->weichat->menuResponse);
           ?>
           <a href='###' class='access' data-container='body' data-toggle='popover' data-placement='left' data-content='<?php printf($lang->weichat->accessInfo, $public->appSecret, $public->url, $public->token);?>'>
             <?php echo $lang->weichat->access;?>

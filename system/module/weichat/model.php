@@ -64,4 +64,23 @@ class weichatModel extends model
         $response->content = '你好' . $message->event . $message->eventKey;
         return $response;
     }
+
+    /**
+     * Set response for a public.
+     * 
+     * @param  int     $publicID
+     * @param  string  $type
+     * @access public
+     * @return void
+     */
+    public function setResponse($publicID, $type)
+    {
+        $response = fixer::input('post')
+            ->add('public', $publicID)
+            ->setIF($type == 'subscribe', 'key', 'subscribe')
+            ->get();
+
+        $this->dao->insert(TABLE_WX_RESPONSE)->data($response)->autoCheck()->exec();
+        return !dao::isError();
+    }
 }
