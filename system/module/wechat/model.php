@@ -87,10 +87,11 @@ class wechatModel extends model
      */
     public function getResponseByKey($public, $key)
     {
-        return $this->dao->select('*')->from(TABLE_WX_RESPONSE)
+        $response =  $this->dao->select('*')->from(TABLE_WX_RESPONSE)
             ->where('public')->eq($public)
             ->andWhere('`key`')->eq($key)
             ->fetch();
+        return $this->processResponse($response);
     }
 
     /**
@@ -103,7 +104,7 @@ class wechatModel extends model
     public function processResponse($response)
     {
         if(empty($response)) return $response;
-        if($response->type == 'rich' and $response->source == 'system')
+        if($response->type == 'news')
         {
             $response->content = json_decode($response->content);
         }
@@ -120,17 +121,12 @@ class wechatModel extends model
     public function setResponse($publicID)
     {
         $response = fixer::input('post')->add('public', $publicID)->get();
+        if($response->type == 'news') $response->source = 'system';
+        $response->source = $response->source == 'manual' ? 'manual' : 'system';
 
-        if($response->type == 'link')
+        if($response->type == 'link' or $response->type == 'text')
         { 
-            $response->source = $response->linkModule == 'manual' ? 'manual' : 'system';
-            if($response->linkModule != 'manual') $response->content = $response->linkModule;
-        }
-
-        if($response->type == 'text')
-        { 
-            $response->source = $response->textBlock == 'manual' ? 'manual' : 'system';
-            if($response->textBlock != 'manual') $response->content = $response->textBlock;
+            if($response->source == 'system') $response->content = $response->source;
         }
 
         if($response->type == 'news')

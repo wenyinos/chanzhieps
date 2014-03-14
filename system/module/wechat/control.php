@@ -279,22 +279,22 @@ class wechat extends control
     /**
      * Set response for a public.
      * 
-     * @param  int     $publicID 
+     * @param  int     $public 
      * @param  string  $group 
      * @param  string  $key
      * @access public
      * @return void
      */
-    public function setResponse($publicID, $group = '', $key = '')
+    public function setResponse($public, $group = '', $key = '')
     {
         if($_POST) 
         {
-            $this->wechat->setResponse($publicID);
+            $this->wechat->setResponse($public);
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin')));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('adminresponse', "publicID={$public}")));
         }
 
-        if($key) $this->view->reponse = $this->wechat->getResponseByKey($public, $key);
+        if($key) $this->view->response = $this->wechat->getResponseByKey($public, $key);
 
         $this->view->articleTree = $this->loadModel('tree')->getOptionMenu('article', 0, $removeRoot = true);
         $this->view->productTree = $this->tree->getOptionMenu('product', 0, $removeRoot = true);

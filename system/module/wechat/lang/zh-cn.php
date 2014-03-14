@@ -25,6 +25,7 @@ $lang->wechat->admin             = '维护公众号';
 $lang->wechat->list              = '公众号列表';
 $lang->wechat->setMenu           = '菜单';
 $lang->wechat->adminResponse     = '响应';
+$lang->wechat->setResponse       = '响应设置';
 $lang->wechat->defaultResponse   = '默认响应';
 $lang->wechat->subscribeResponse = '订阅响应';
 $lang->wechat->access            = '接入';

@@ -11,7 +11,9 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<?php include '../../common/view/chosen.html.php';?>
+<?php include '../../common/view/chosen.html.php';
+a($response);
+?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-plus"></i> <?php echo $lang->wechat->setResponse;?></strong>
@@ -19,10 +21,10 @@
   <div class='panel-body'>
     <form method='post' id='ajaxForm'>
       <table class='table table-form'>
-        <?php if(!$group):?>
+        <?php if($group != 'menu'):?>
         <tr>
           <th class='w-100px'><?php echo $lang->wechat->response->key;?></th>
-          <td class='w-220px'><?php echo html::input('key', isset($response) ? $response->key : '', "class='form-control'");?></td>
+          <td class='w-220px'><?php echo html::input('key', isset($response->key) ? $response->key : '', "class='form-control'");?></td>
           <td></td>
         </tr>
         <?php endif;?>
@@ -48,8 +50,8 @@
           <th><?php echo $lang->wechat->response->block;?></th>
           <td colspan='2'>
             <div class='form-group'>
-              <div class='col-sm-3'><?php echo html::select('source', $this->lang->wechat->response->textBlockList, isset($response->source) and $response->type != 'manual' ? $response->content : 'manual', "class='form-control'");?></div>
-              <div class='col-sm-10 manual'><?php echo html::input('content', isset($response->sourece) and $response->sourece == 'manual' ? $response->content : '', "class='form-control'");?></div>
+              <div class='col-sm-3'><?php echo html::select('source', $this->lang->wechat->response->textBlockList, (isset($response->source) and $response->source == 'manual') ? 'manual' : $response->content , "class='form-control'");?></div>
+              <div class='col-sm-10 manual'><?php echo html::textarea('content', (isset($response->source) and $response->source == 'manual') ? $response->content : '', "class='form-control'");?></div>
             </div>
           </td>
         </tr>
@@ -57,15 +59,15 @@
         <tr class='news'>
           <th><?php echo $lang->wechat->response->block;?></th>
           <td>
-          <?php echo html::select('block', $this->lang->wechat->response->newsBlockList, isset($response->type) and $response->type == 'news' ? $response->content->block ? '', "class='form-control newsBlock'");?>
+          <?php echo html::select('block', $this->lang->wechat->response->newsBlockList, isset($response->type) and $response->type == 'news' ? $response->content->block : '', "class='form-control newsBlock'");?>
           </td>
           <td>
             <div class='form-group'>
               <div class='col-sm-7'>
-                <span class='articleTree'><?php echo html::select('category', $articleTree, isset($response->type) and $response->type == 'news' ? $response->content->category ? '', "class='form-control chosen' multiple='multiple' data-placeholder='{$lang->wechat->placeholder->category}'");?></span>
-                <span class='productTree'><?php echo html::select('category', $productTree, isset($response->type) and $response->type == 'news' ? $response->content->category ? '', "class='form-control chosen' multiple='multiple' data-placeholder='{$lang->wechat->placeholder->category}'");?></span>
+                <span class='articleTree'><?php echo html::select('category[]', $articleTree, (isset($response->type) and $response->type == 'news') ? $response->content->category : '', "class='form-control chosen' multiple='multiple' data-placeholder='{$lang->wechat->placeholder->category}'");?></span>
+                <span class='productTree'><?php echo html::select('category[]', $productTree, (isset($response->type) and $response->type == 'news') ? $response->content->category : '', "class='form-control chosen' multiple='multiple' data-placeholder='{$lang->wechat->placeholder->category}'");?></span>
               </div>
-              <div class='col-sm-4'><?php echo html::input('limit',  isset($response->type) and $response->type == 'news' ? $response->content->category ? '', "class='form-control' placeholder='{$lang->wechat->placeholder->limit}'");?></div>
+              <div class='col-sm-4'><?php echo html::input('limit', (isset($response->type) and $response->type == 'news') ? $response->content->limit : '', "class='form-control' placeholder='{$lang->wechat->placeholder->limit}'");?></div>
             </div>
           </td>
         </tr>

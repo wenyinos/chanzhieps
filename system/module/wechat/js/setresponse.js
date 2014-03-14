@@ -8,13 +8,14 @@ $(document).ready(function()
 
     $('#type').change();
 
-    $('select[name*=Block], #linkModule').change(function()
+    $('select[name=source]').change(function()
     {
         $(this).parent().next('.manual').toggle($(this).val() == 'manual').find(':input').focus();   
     });
-    $('select[name*=Block], #linkModule').change();
 
-    $('#newsBlock').change(function()
+    $('select[name=source]').change();
+
+    $('#block').change(function()
     {
          $('.articleTree, .productTree').hide().find('select').attr('disabled', true);
 
@@ -30,5 +31,5 @@ $(document).ready(function()
 
          $('#limit').toggle(!(/.*Tree.*/i).test(block));
     });
-    $('#newsBlock').change();
+    $('#block').change();
 });

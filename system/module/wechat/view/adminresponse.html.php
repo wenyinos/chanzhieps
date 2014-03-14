@@ -41,7 +41,7 @@
         <td><?php echo $response->content;?></td>
         <td>
           <?php
-          echo html::a($this->createLink('wechat', 'editResponse', "responseID=$response->id"), $lang->edit);
+          echo html::a($this->createLink('wechat', 'setResponse', "public={$response->public}&group={$response->group}&key=$response->key"), $lang->edit);
           echo html::a($this->createLink('wechat', 'deleteResponse', "responseID=$response->id"), $lang->delete);
           ?>
         </td>
