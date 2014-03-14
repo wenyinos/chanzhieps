@@ -303,21 +303,5 @@ class wechat extends control
         $this->view->key         = $key;
         $this->display();
     }
-<<<<<<< HEAD
-=======
-    
-    /**
-     * Editt a response.
-     * 
-     * @param  int    $public
-     * @param  string $key 
-     * @param  string $group 
-     * @access public
-     * @return void
-     */
-    public function edittResponse($public, $group = '', $key = '' )
-    {
-        $reponse = $this->dao->select('*')->from(TABLE_WX_RESPONSE)->where('public')->eq($public)->andWhere('`group`')->eq($group)->andWhere('`key`')->eq($key)->fetch();
-    }
->>>>>>> 855e38c9f480ecd2017bf86cee0b6ce485a363c8
+   
 }
