@@ -42,6 +42,9 @@ $lang->wechat->response->block  = '内容';
 $lang->wechat->response->link   = '链接';
 $lang->wechat->response->limit  = '数量';
 
+$lang->wechat->response->create = '添加响应';
+$lang->wechat->response->list   = '响应列表';
+
 $lang->wechat->response->typeList['link'] = '链接';
 $lang->wechat->response->typeList['text'] = '文本消息';
 $lang->wechat->response->typeList['news'] = '图文消息';

@@ -33,8 +33,20 @@ class wechatModel extends model
     {
         $publics = $this->dao->select('*')->from(TABLE_WX_PUBLIC)->orderBy('addedDate_desc')->fetchAll('id');
         if(!$publics) return array();
-        foreach($publics as $public) $public->url = getWebRoot(true) . commonModel::createFrontLink('wechat', 'response', "id=$public->id");
+        foreach($publics as $public) $public->url = rtrim(getWebRoot(true), '/') . commonModel::createFrontLink('wechat', 'response', "id=$public->id");
         return $publics;
+    }
+
+    /** 
+     * Get response list.
+     * 
+     * @param  int    $publicID 
+     * @access public
+     * @return array
+     */
+    public function getResponseList($publicID)
+    {
+        return $this->dao->select('*')->from(TABLE_WX_RESPONSE)->where('public')->eq($publicID)->fetchAll('id');
     }
 
     /**
