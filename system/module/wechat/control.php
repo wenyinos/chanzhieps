@@ -285,19 +285,39 @@ class wechat extends control
      * @access public
      * @return void
      */
-    public function createResponse($publicID, $group = '', $key = '')
+    public function setResponse($publicID, $group = '', $key = '')
     {
         if($_POST) 
         {
-            $this->wechat->createResponse($publicID);
+            $this->wechat->setResponse($publicID);
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin')));
         }
+
+        if($key) $this->view->reponse = $this->wechat->getResponseByKey($public, $key);
 
         $this->view->articleTree = $this->loadModel('tree')->getOptionMenu('article', 0, $removeRoot = true);
         $this->view->productTree = $this->tree->getOptionMenu('product', 0, $removeRoot = true);
         $this->view->title       = $this->lang->wechat->setResponse;
         $this->view->group       = $group;
+        $this->view->key         = $key;
         $this->display();
     }
+<<<<<<< HEAD
+=======
+    
+    /**
+     * Editt a response.
+     * 
+     * @param  int    $public
+     * @param  string $key 
+     * @param  string $group 
+     * @access public
+     * @return void
+     */
+    public function edittResponse($public, $group = '', $key = '' )
+    {
+        $reponse = $this->dao->select('*')->from(TABLE_WX_RESPONSE)->where('public')->eq($public)->andWhere('`group`')->eq($group)->andWhere('`key`')->eq($key)->fetch();
+    }
+>>>>>>> 855e38c9f480ecd2017bf86cee0b6ce485a363c8
 }

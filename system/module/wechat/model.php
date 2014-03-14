@@ -63,17 +63,50 @@ class wechatModel extends model
     }
 
     /**
-     * Get response for a message.
+     * Compute response for a message.
      * 
      * @param  object    $message 
      * @access public
      * @return void
      */
-    public function getResponse($message)
+    public function computeResponse($message)
     {
         $response = new stdclass();
         $response->msgType = 'text';
         $response->content = '你好' . $message->event . $message->eventKey;
+        return $response;
+    }
+
+    /**
+     * Get response by key.
+     * 
+     * @param  int    $public 
+     * @param  int    $key 
+     * @access public
+     * @return void
+     */
+    public function getResponseByKey($public, $key)
+    {
+        return $this->dao->select('*')->from(TABLE_WX_RESPONSE)
+            ->where('public')->eq($public)
+            ->andWhere('`key`')->eq($key)
+            ->fetch();
+    }
+
+    /**
+     * Process a response. 
+     * 
+     * @param  object    $response 
+     * @access public
+     * @return void
+     */
+    public function processResponse($response)
+    {
+        if(empty($response)) return $response;
+        if($response->type == 'rich' and $response->source == 'system')
+        {
+            $response->content = json_decode($response->content);
+        }
         return $response;
     }
 
@@ -84,7 +117,7 @@ class wechatModel extends model
      * @access public
      * @return void
      */
-    public function createResponse($publicID)
+    public function setResponse($publicID)
     {
         $response = fixer::input('post')->add('public', $publicID)->get();
 
@@ -104,16 +137,15 @@ class wechatModel extends model
         { 
             $response->source = 'system';
             $content = array();
-            $content['block']    = $response->newsBlock;
+            $content['block']    = $response->block;
             $content['category'] = $response->category;
             if(isset($response->limit)) $content['limit'] = $response->limit;
             $response->content = json_encode($content);
         }
 
-        $this->dao->insert(TABLE_WX_RESPONSE)
-            ->data($response, $skip = 'linkModule, textBlock, newsBlock, category, limit')
+        $this->dao->replace(TABLE_WX_RESPONSE)
+            ->data($response, $skip = 'linkModule, textBlock, block, category, limit')
             ->autoCheck()
-            ->check('unique', '`key`, `group`')
             ->exec();
 
         return !dao::isError();
