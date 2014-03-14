@@ -349,11 +349,11 @@ class treeModel extends model
 
         $linkHtml  = $category->name;
 
-        $isWeichatMenu = substr($category->type, 0, 3) == 'wx_';
-        if($isWeichatMenu)
+        $isWechatMenu = substr($category->type, 0, 3) == 'wx_';
+        if($isWechatMenu)
         {
-            $linkHtml .= ' ' . html::a(helper::createLink('tree', 'children', "type={$category->type}&category={$category->id}"), $lang->weichatMenu->children, "class='$childrenLinkClass ajax'");
-            $linkHtml .= ' ' . html::a(helper::createLink('weichat', 'menuResponse', "key=m_{$category->id}"), $lang->tree->setResponse, "class='ajax'");
+            $linkHtml .= ' ' . html::a(helper::createLink('tree', 'children', "type={$category->type}&category={$category->id}"), $lang->wechatMenu->children, "class='$childrenLinkClass ajax'");
+            $linkHtml .= ' ' . html::a(helper::createLink('wechat', 'menuResponse', "key=m_{$category->id}"), $lang->tree->setResponse, "class='ajax'");
         }
         else
         {

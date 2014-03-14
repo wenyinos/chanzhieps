@@ -107,7 +107,6 @@ class wechatapi
         $this->setAppID($appID);
         $this->setSecret($secret);
         $this->setDebug($debug);
-        $this->checkSign();
     }
 
     /**
@@ -166,7 +165,7 @@ class wechatapi
      */
     public function checkSign()
     {
-        if(empty($_GET['signature']) or empty($_GET['timestamp']) or empty($_GET['nonce'])) return false;
+        if(empty($_GET['signature']) or empty($_GET['timestamp']) or empty($_GET['nonce'])) die('evil');
 
         $sign = $_GET['signature'];
         $time = $_GET['timestamp'];
@@ -415,6 +414,36 @@ class wechatapi
 
         if(json_decode($result)) return false;
         return $result;
+    }
+
+    /**
+     * Get fans.
+     * 
+     * @param  string $next 
+     * @access public
+     * @return object
+     */
+    public function getFans($next = '')
+    {
+        $token = $this->getAccessToken();
+        $url   = "https://api.weixin.qq.com/cgi-bin/user/get?access_token=$token&next_openid=$next";
+        $result = $this->get($url);
+        return json_decode($result);
+    }
+
+    /**
+     * Get user info.
+     * 
+     * @param  string $openID 
+     * @param  string $lang 
+     * @access public
+     * @return object
+     */
+    public function getUserInfo($openID, $lang = 'zh_CN')
+    {
+        $token = $this->getAccessToken();
+        $url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=$token&openid=$openID&lang=$lang";
+        return json_decode($this->get($url));
     }
 
     /**

@@ -46,9 +46,9 @@ class tree extends control
 
         if(substr($type, 0, 3) == 'wx_')
         {
-            $this->lang->tree = $this->lang->weichatMenu;
-            $this->lang->tree->menu = $this->lang->weichat->menu;
-            $this->lang->menuGroups->tree = 'weichat';
+            $this->lang->tree = $this->lang->wechatMenu;
+            $this->lang->tree->menu = $this->lang->wechat->menu;
+            $this->lang->menuGroups->tree = 'wechat';
         }
 
         $this->view->title    = $this->lang->tree->common;
@@ -124,8 +124,8 @@ class tree extends control
         /* If type is forum, assign board to category. */
         if($type == 'forum') $this->lang->category = $this->lang->board;
 
-        $isWeichatMenu = substr($type, 0, 3) == 'wx_';
-        if($isWeichatMenu) $this->lang->category = $this->lang->weichatMenu;
+        $isWechatMenu = substr($type, 0, 3) == 'wx_';
+        if($isWechatMenu) $this->lang->category = $this->lang->wechatMenu;
 
         if(!empty($_POST))
         { 
@@ -135,7 +135,7 @@ class tree extends control
             $this->send(array('result' => 'fail', 'message' => dao::isError() ? dao::getError() : $result));
         }
             
-        $this->view->isWeichatMenu = $isWeichatMenu;
+        $this->view->isWechatMenu = $isWechatMenu;
         $this->view->title         = $this->lang->tree->manage;
         $this->view->type          = $type;
         $this->view->children      = $this->tree->getChildren($category, $type);

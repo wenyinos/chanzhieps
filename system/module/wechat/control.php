@@ -51,6 +51,8 @@ class wechat extends control
     public function response($public)
     {
         $this->setAPI($public);
+        $this->api->checkSign();
+
         $message  = $this->api->getMessage();
         $response = $this->wechat->getResponse($message);
 
@@ -183,6 +185,34 @@ class wechat extends control
     }
 
     /**
+     * Get fans.
+     * 
+     * @param  int    $public 
+     * @param  string $next 
+     * @access public
+     * @return void
+     */
+    public function getFans($public, $next = '')
+    {
+        $this->setAPI($public);
+        $this->api->getFans($next);
+    }
+
+    /**
+     * Get user info.
+     * 
+     * @param  int    $public 
+     * @param  string $lang 
+     * @access public
+     * @return void
+     */
+    public function getUserInfo($public, $lang = 'zh_CN')
+    {
+        $this->setAPI($public);
+        print_r($this->api->getUserInfo('o-nXYt1LrugCK0oqZcrxyMidiJSg', $lang));
+    }
+
+    /**
      * Browse public in admin.
      * 
      * @access public
@@ -268,7 +298,6 @@ class wechat extends control
         $this->view->productTree = $this->tree->getOptionMenu('product', 0, $removeRoot = true);
         $this->view->title       = $this->lang->wechat->setResponse;
         $this->view->group       = $group;
-
         $this->display();
     }
 

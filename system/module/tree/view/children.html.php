@@ -18,13 +18,13 @@
           if($child->order > $maxOrder) $maxOrder = $child->order;
           echo "<div class='form-group'>";
           echo "<div class='col-xs-6 col-md-4 col-md-offset-2'>" . html::input("children[$child->id]", $child->name, "class='form-control'") . "</div>";
-          if(!$isWeichatMenu) echo "<div class='col-xs-6 col-md-4'>" . html::input("alias[$child->id]", $child->alias, "class='form-control' placeholder='{$this->lang->category->alias}'") . '</div>';
+          if(!$isWechatMenu) echo "<div class='col-xs-6 col-md-4'>" . html::input("alias[$child->id]", $child->alias, "class='form-control' placeholder='{$this->lang->category->alias}'") . '</div>';
           echo "</div>";
           echo html::hidden("mode[$child->id]", 'update');
       }
 
       $newChildrenCount = tree::NEW_CHILD_COUNT;
-      if($isWeichatMenu)
+      if($isWechatMenu)
       {
             $allowedChildren = $parent ?  tree::WEICHAT_SUBMENU_COUNT : tree::WEICHAT_MAINMENU_COUNT;
             $newChildrenCount = $allowedChildren - count($children);
@@ -34,7 +34,7 @@
       {
           echo "<div class='form-group'>";
           echo "<div class='col-xs-6 col-md-4 col-md-offset-2'>" . html::input("children[]", '', "class='form-control' placeholder='{$this->lang->category->name}'") . "</div>";
-          if(!$isWeichatMenu) echo "<div class='col-xs-6 col-md-4'>" . html::input("alias[]", '', "class='form-control' placeholder='{$this->lang->category->alias}'") . '</div>';
+          if(!$isWechatMenu) echo "<div class='col-xs-6 col-md-4'>" . html::input("alias[]", '', "class='form-control' placeholder='{$this->lang->category->alias}'") . '</div>';
           echo "</div>";
           echo html::hidden('mode[]', 'new');
       }

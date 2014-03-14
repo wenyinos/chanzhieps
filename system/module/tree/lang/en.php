@@ -17,6 +17,7 @@ $lang->tree->browse      = "Manage";
 $lang->tree->manage      = "Manage";
 $lang->tree->fix         = "Fix data";
 
+$lang->tree->common        = 'Category';
 $lang->tree->noCategories  = 'No category yet, add one first.';
 $lang->tree->timeCountDown = "Locate to category manage page in <strong id='countDown'>3</strong> seconds.";
 $lang->tree->redirect      = 'Manage now';

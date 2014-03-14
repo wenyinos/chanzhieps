@@ -1,44 +1,58 @@
 <?php
 /**
- * The weichat module zh-cn file of chanzhiEPS.
+ * The wechat module zh-cn file of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
  * @license     LGPL
  * @author      Tingting Dai <daitingting@xirangit.com>
- * @package     weichat
+ * @package     wechat
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->weichat->id        = 'ID';
-$lang->weichat->type      = 'Type';
-$lang->weichat->name      = 'Name';
-$lang->weichat->account   = 'Account';
-$lang->weichat->appID     = 'AppID';
-$lang->weichat->appSecret = 'AppSecret';
-$lang->weichat->token     = 'Token';
-$lang->weichat->url       = 'URL';
-$lang->weichat->users     = 'Users';
-$lang->weichat->msgType   = 'Message Type';
-$lang->weichat->content   = 'Content';
+$lang->wechat->id        = 'ID';
+$lang->wechat->type      = 'Type';
+$lang->wechat->name      = 'Name';
+$lang->wechat->account   = 'Account';
+$lang->wechat->appID     = 'AppID';
+$lang->wechat->appSecret = 'AppSecret';
+$lang->wechat->token     = 'Token';
+$lang->wechat->url       = 'URL';
+$lang->wechat->users     = 'Users';
+$lang->wechat->content   = 'Content';
 
-$lang->weichat->create            = 'Create';
-$lang->weichat->admin             = 'Admin';
-$lang->weichat->list              = 'List';
-$lang->weichat->setMenu           = 'Set Menu';
-$lang->weichat->setResponse       = 'Set Response';
-$lang->weichat->defaultResponse   = 'Default Response';
-$lang->weichat->subscribeResponse = 'Subscribe Response';
-$lang->weichat->menuResponse      = 'Menu Response';
-$lang->weichat->access            = 'Access';
+$lang->wechat->create            = 'Create';
+$lang->wechat->admin             = 'Admin';
+$lang->wechat->list              = 'List';
+$lang->wechat->setMenu           = 'Set Menu';
+$lang->wechat->setResponse       = 'Set Response';
+$lang->wechat->defaultResponse   = 'Default Response';
+$lang->wechat->subscribeResponse = 'Subscribe Response';
+$lang->wechat->access            = 'Access';
 
-$lang->weichat->typeList['subscribe'] = 'Subscribe';
-$lang->weichat->typeList['service']   = 'Service';
+$lang->wechat->typeList['subscribe'] = 'Subscribe';
+$lang->wechat->typeList['service']   = 'Service';
 
-$lang->weichat->msgTypeList['text'] = 'Text';
-$lang->weichat->msgTypeList['rich'] = 'Rich';
-$lang->weichat->msgTypeList['link'] = 'Link';
+$lang->wechat->response = new stdclass();
 
-$lang->weichat->accessInfo = <<<EOT
+$lang->wechat->response->type   = 'Type';
+$lang->wechat->response->source = 'Source';
+$lang->wechat->response->module = 'Module';
+$lang->wechat->response->block  = 'Block';
+$lang->wechat->response->link   = 'Link';
+
+$lang->wechat->response->typeList['link'] = 'Link';
+$lang->wechat->response->typeList['text'] = 'Text';
+$lang->wechat->response->typeList['rich'] = 'Html';
+
+$lang->wechat->response->sourceList['system'] = 'System';
+$lang->wechat->response->sourceList['manual'] = 'Manual';
+
+$lang->wechat->response->moduleList['home']  = 'Home';
+$lang->wechat->response->moduleList['about'] = 'About Us';
+$lang->wechat->response->moduleList['blog']  = 'Blog';
+$lang->wechat->response->moduleList['forum'] = 'Forum';
+
+$lang->wechat->accessInfo = <<<EOT
 <ul style="padding-left: 10px">
   <li><strong>AppSecret</strong>： %s </li>
   <li><strong>URL</strong>： %s </li>
