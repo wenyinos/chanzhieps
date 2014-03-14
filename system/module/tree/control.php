@@ -44,7 +44,7 @@ class tree extends control
             $this->lang->menuGroups->tree = 'product';
         }
 
-        if(substr($type, 0, 3) == 'wx_')
+        if(substr($type, 0, 7) == 'wechat_')
         {
             $this->lang->tree = $this->lang->wechatMenu;
             $this->lang->tree->menu = $this->lang->wechat->menu;
@@ -124,7 +124,7 @@ class tree extends control
         /* If type is forum, assign board to category. */
         if($type == 'forum') $this->lang->category = $this->lang->board;
 
-        $isWechatMenu = substr($type, 0, 3) == 'wx_';
+        $isWechatMenu = substr($type, 0, 7) == 'wechat_';
         if($isWechatMenu) $this->lang->category = $this->lang->wechatMenu;
 
         if(!empty($_POST))

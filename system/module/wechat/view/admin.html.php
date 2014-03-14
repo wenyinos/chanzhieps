@@ -40,7 +40,7 @@
         <td><?php echo $public->appID;?></td>
         <td>
           <?php
-          echo html::a($this->createLink('tree', 'browse', "type=wx_$public->id"), $lang->wechat->setMenu);
+          echo html::a($this->createLink('tree', 'browse', "type=wechat_$public->id"), $lang->wechat->setMenu);
           echo html::a($this->createLink('wechat', 'adminResponse', "publicID=$public->id"), $lang->wechat->adminResponse);
           echo html::a($this->createLink('wechat', 'editResponse', "publicID=$public->id&group=default"), $lang->wechat->defaultResponse);
           echo html::a($this->createLink('wechat', 'editResponse', "publicID=$public->id&group=subscribe"), $lang->wechat->subscribeResponse);
