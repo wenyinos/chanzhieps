@@ -262,17 +262,17 @@ class wechat extends control
     }
 
     /**
-     * Create response for a public.
+     * Admin response for a public.
      * 
+     * @param  int    $publicID 
      * @access public
      * @return void
      */
-    public function adminResponse()
+    public function adminResponse($publicID)
     {
-        $this->view->articleTree = $this->loadModel('tree')->getOptionMenu('article', 0, $removeRoot = true);
-        $this->view->productTree = $this->tree->getOptionMenu('product', 0, $removeRoot = true);
-        $this->view->title = $this->lang->wechat->setResponse;
-        $this->view->group = $group;
+        $this->view->title        = $this->lang->wechat->adminResponse;
+        $this->view->publicID     = $publicID;
+        $this->view->responseList = $this->wechat->getResponseList($publicID);
         $this->display();
     }
 
@@ -300,5 +300,4 @@ class wechat extends control
         $this->view->group       = $group;
         $this->display();
     }
-
 }
