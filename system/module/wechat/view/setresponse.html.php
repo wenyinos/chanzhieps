@@ -29,7 +29,7 @@
         <?php endif;?>
         <tr>
           <th class='w-100px'><?php echo $lang->wechat->response->type;?></th>
-          <td class='w-220px'><?php echo html::select('type', $lang->wechat->response->typeList,  isset($response) ? $response->type : '', "class='form-control'");?></td>
+          <td class='w-220px'><?php echo html::select('type', $lang->wechat->response->typeList,  isset($response->type) ? $response->type : '', "class='form-control'");?></td>
           <td></td>
         </tr>
 
