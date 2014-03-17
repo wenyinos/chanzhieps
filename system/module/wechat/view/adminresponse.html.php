@@ -38,7 +38,12 @@
           <?php if($response->key == 'default')  echo $lang->wechat->defaultResponse;?>
           <?php if($response->key != 'subscribe' && $response->key != 'default') echo $response->key;?>
         </td>
-        <td><?php echo $response->content;?></td>
+        <td>
+          <?php if($response->type == 'text' && $response->source != 'manual') echo $lang->wechat->response->textBlockList[$response->content];?>
+          <?php if($response->type == 'news') echo $lang->wechat->response->newsBlockList[$response->content->block];?>
+          <?php if($response->type == 'link' && $response->source != 'manual') echo $lang->wechat->response->moduleList[$response->content];?>
+          <?php if($response->source == 'manual') echo $response->content;?>
+        </td>
         <td>
           <?php
           echo html::a($this->createLink('wechat', 'setResponse', "public={$response->public}&group={$response->group}&key=$response->key"), $lang->edit);
