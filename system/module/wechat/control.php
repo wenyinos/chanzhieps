@@ -337,4 +337,17 @@ class wechat extends control
         $this->view->key         = $key;
         $this->display();
     }
+
+    /**
+     * Delete a response.
+     * 
+     * @param  int    $response 
+     * @access public
+     * @return void
+     */
+    public function deleteResponse($response)
+    {
+        if($this->wechat->deleteResponse($response)) $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+    }
 }

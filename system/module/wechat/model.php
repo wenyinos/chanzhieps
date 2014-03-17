@@ -92,7 +92,6 @@ class wechatModel extends model
         $this->dao->delete()->from(TABLE_WX_PUBLIC)->where('id')->eq($publicID)->exec();
         return !dao::isError();
     }
-
         
     /**
      * Compute response for a message.
@@ -176,6 +175,19 @@ class wechatModel extends model
             ->autoCheck()
             ->exec();
 
+        return !dao::isError();
+    }
+
+    /**
+     * Delete a response.
+     * 
+     * @param  int     $response 
+     * @access public
+     * @return void
+     */
+    public function deleteResponse($response, $null = null)
+    {
+        $this->dao->delete()->from(TABLE_WX_RESPONSE)->where('id')->eq($response)->exec();
         return !dao::isError();
     }
 }
