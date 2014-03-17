@@ -247,6 +247,40 @@ class wechat extends control
         $this->view->title = $this->lang->wechat->create;
         $this->display();
     }
+
+    /**
+     * Edit a public.
+     * 
+     * @param  int    $publicID
+     * @access public
+     * @return void
+     */
+    public function edit($publicID)
+    {
+        if($_POST) 
+        {
+            $this->wechat->update($publicID);       
+            if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin')));
+        }
+
+        $this->view->title  = $this->lang->wechat->edit;
+        $this->view->public = $this->wechat->getByID($publicID);
+        $this->display();
+    }
+
+    /**
+     * Delete a public.
+     * 
+     * @param  int      $publicID 
+     * @access public
+     * @return void
+     */
+    public function delete($publicID)
+    {
+        if($this->wechat->delete($publicID)) $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+    }
     
     /**
      * Set wechat menu.
@@ -325,6 +359,18 @@ class wechat extends control
         $this->setApi($public);
         $menu = $this->wechat->getMenu($public);
         $result = $this->api->addMenu($menu);
+    }
 
+    /**
+     * Delete a response.
+     * 
+     * @param  int    $response 
+     * @access public
+     * @return void
+     */
+    public function deleteResponse($response)
+    {
+        if($this->wechat->deleteResponse($response)) $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
 }

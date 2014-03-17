@@ -21,6 +21,7 @@ $lang->wechat->users     = '微信会员';
 $lang->wechat->content   = '内容';
 
 $lang->wechat->create            = '添加公众号';
+$lang->wechat->edit              = '编辑公众号';
 $lang->wechat->admin             = '维护公众号';
 $lang->wechat->list              = '公众号列表';
 $lang->wechat->setMenu           = '菜单';

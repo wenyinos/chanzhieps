@@ -46,7 +46,11 @@ class wechatModel extends model
      */
     public function getResponseList($publicID)
     {
-        return $this->dao->select('*')->from(TABLE_WX_RESPONSE)->where('public')->eq($publicID)->fetchAll('id');
+        $responses = $this->dao->select('*')->from(TABLE_WX_RESPONSE)->where('public')->eq($publicID)->fetchAll('id');
+
+        foreach($responses as $response) $this->processResponse($response);
+
+        return $responses;
     }
 
     /**
@@ -62,6 +66,33 @@ class wechatModel extends model
         return !dao::isError();
     }
 
+    /**
+     * Update a public.
+     * 
+     * @param  int $publicID 
+     * @access public
+     * @return void
+     */
+    public function update($publicID)
+    {
+        $public = fixer::input('post')->get();
+        $this->dao->update(TABLE_WX_PUBLIC)->data($public)->autoCheck()->exec();
+        return !dao::isError();
+    }
+
+    /**
+     * Delete a public.
+     * 
+     * @param  int      $publicID 
+     * @access public
+     * @return void
+     */
+    public function delete($publicID, $null = null)
+    {
+        $this->dao->delete()->from(TABLE_WX_PUBLIC)->where('id')->eq($publicID)->exec();
+        return !dao::isError();
+    }
+        
     /**
      * Compute response for a message.
      * 
@@ -149,6 +180,7 @@ class wechatModel extends model
     }
 
     /**
+<<<<<<< HEAD
      * Get menu to commit.
      * 
      * @param  int    $public 
@@ -208,5 +240,18 @@ class wechatModel extends model
             $result->key  = $response->content;
         }
         return $result;
+    }
+
+    /**
+     * Delete a response.
+     * 
+     * @param  int     $response 
+     * @access public
+     * @return void
+     */
+    public function deleteResponse($response, $null = null)
+    {
+        $this->dao->delete()->from(TABLE_WX_RESPONSE)->where('id')->eq($response)->exec();
+        return !dao::isError();
     }
 }

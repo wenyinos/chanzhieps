@@ -15,7 +15,7 @@
   <div class='panel-heading'>
     <strong><i class="icon-list-ul"></i> <?php echo $lang->wechat->response->list;?></strong>
     <div class='panel-actions'>
-      <?php echo html::a($this->inlink('setResponse', "publicID=$publicID&group="), $lang->wechat->response->create, "class='btn btn-primary', title='{$lang->wechat->response->create}'");?>
+      <?php echo html::a($this->inlink('setResponse', "publicID=$publicID"), $lang->wechat->setResponse, "class='btn btn-primary'");?>
     </div>
   </div>
   <table class='table table-hover table-striped tablesorter'>
@@ -38,11 +38,16 @@
           <?php if($response->key == 'default')  echo $lang->wechat->defaultResponse;?>
           <?php if($response->key != 'subscribe' && $response->key != 'default') echo $response->key;?>
         </td>
-        <td><?php echo $response->content;?></td>
+        <td>
+          <?php if($response->type == 'text' && $response->source != 'manual') echo $lang->wechat->response->textBlockList[$response->content];?>
+          <?php if($response->type == 'news') echo $lang->wechat->response->newsBlockList[$response->content->block];?>
+          <?php if($response->type == 'link' && $response->source != 'manual') echo $lang->wechat->response->moduleList[$response->content];?>
+          <?php if($response->source == 'manual') echo $response->content;?>
+        </td>
         <td>
           <?php
           echo html::a($this->createLink('wechat', 'setResponse', "public={$response->public}&group={$response->group}&key=$response->key"), $lang->edit);
-          echo html::a($this->createLink('wechat', 'deleteResponse', "responseID=$response->id"), $lang->delete);
+          echo html::a($this->createLink('wechat', 'deleteResponse', "responseID=$response->id"), $lang->delete, "class='deleter'");
           ?>
         </td>
       </tr>

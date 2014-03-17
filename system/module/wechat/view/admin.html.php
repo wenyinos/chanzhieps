@@ -44,6 +44,7 @@
           echo html::a($this->createLink('wechat', 'adminResponse', "publicID=$public->id"), $lang->wechat->adminResponse);
           echo html::a($this->createLink('wechat', 'setResponse', "publicID=$public->id&group=default&key=default"), $lang->wechat->defaultResponse);
           echo html::a($this->createLink('wechat', 'setResponse', "publicID=$public->id&group=subscribe&key=subscribe"), $lang->wechat->subscribeResponse);
+          echo html::a($this->createLink('wechat', 'delete', "publicID=$public->id"), $lang->delete, "class='deleter'");
           ?>
           <a href='###' class='access' data-container='body' data-toggle='popover' data-placement='left' data-content='<?php printf($lang->wechat->accessInfo, $public->appSecret, $public->url, $public->token);?>'>
             <?php echo $lang->wechat->access;?>
