@@ -12,7 +12,6 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/chosen.html.php';
-a($response);
 ?>
 <div class='panel'>
   <div class='panel-heading'>

@@ -15,7 +15,7 @@
   <div class='panel-heading'>
     <strong><i class="icon-list-ul"></i> <?php echo $lang->wechat->response->list;?></strong>
     <div class='panel-actions'>
-      <?php echo html::a($this->inlink('createResponse', "publicID=$publicID"), $lang->wechat->response->create, "class='btn btn-primary', title='{$lang->wechat->response->create}'");?>
+      <?php echo html::a($this->inlink('setResponse', "publicID=$publicID"), $lang->wechat->setResponse, "class='btn btn-primary'");?>
     </div>
   </div>
   <table class='table table-hover table-striped tablesorter'>

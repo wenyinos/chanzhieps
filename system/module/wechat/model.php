@@ -63,6 +63,34 @@ class wechatModel extends model
     }
 
     /**
+     * Update a public.
+     * 
+     * @param  int $publicID 
+     * @access public
+     * @return void
+     */
+    public function update($publicID)
+    {
+        $public = fixer::input('post')->get();
+        $this->dao->update(TABLE_WX_PUBLIC)->data($public)->autoCheck()->exec();
+        return !dao::isError();
+    }
+
+    /**
+     * Delete a public.
+     * 
+     * @param  int      $publicID 
+     * @access public
+     * @return void
+     */
+    public function delete($publicID, $null = null)
+    {
+        $this->dao->delete()->from(TABLE_WX_PUBLIC)->where('id')->eq($publicID)->exec();
+        return !dao::isError();
+    }
+
+        
+    /**
      * Compute response for a message.
      * 
      * @param  object    $message 
