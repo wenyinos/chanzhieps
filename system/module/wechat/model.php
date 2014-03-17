@@ -122,16 +122,16 @@ class wechatModel extends model
     {
         $response = fixer::input('post')->add('public', $publicID)->get();
         if($response->type == 'news') $response->source = 'system';
-        $response->source = $response->source == 'manual' ? 'manual' : 'system';
+        $source = $response->source == 'manual' ? 'manual' : 'system';
 
         if($response->type == 'link' or $response->type == 'text')
         { 
-            if($response->source == 'system') $response->content = $response->source;
+            if($response->source != 'manual') $response->content = $response->source;
         }
 
         if($response->type == 'news')
         { 
-            $response->source = 'system';
+            $source = 'system';
             $content = array();
             $content['block']    = $response->block;
             $content['category'] = $response->category;
@@ -139,11 +139,74 @@ class wechatModel extends model
             $response->content = json_encode($content);
         }
 
+        $response->source = $source;
         $this->dao->replace(TABLE_WX_RESPONSE)
             ->data($response, $skip = 'linkModule, textBlock, block, category, limit')
             ->autoCheck()
             ->exec();
 
         return !dao::isError();
+    }
+
+    /**
+     * Get menu to commit.
+     * 
+     * @param  int    $public 
+     * @access public
+     * @return void
+     */
+    public function getMenu($public)
+    {
+        $menus = $this->dao->select('*')->from(TABLE_CATEGORY)->where('type')->like('wechat_%')->orderBy('`order`')->fetchGroup('parent');
+        $responseList = $this->dao->select('*')->from(TABLE_WX_RESPONSE)->where('public')->eq($public)->andWhere('`group`')->eq('menu')->fetchAll('key');
+
+        $buttons = array();
+        foreach($menus[0] as $menu)
+        {
+            if(!empty($menus[$menu->id]))
+            {
+                $submenus = new stdclass();
+                $submenus->name = $menu->name;
+                foreach($menus[$menu->id] as $submenu)
+                {
+                    if(!isset($responseList['m_' . $submenu->id])) continue;
+                    $response = $this->convertResponse($responseList['m_' . $submenu->id]);
+                    $response->name = $submenu->name;
+                    $submenus->sub_button[] = $response;
+                }
+                $buttons[] = $submenus;
+            }
+            else
+            {
+                if(!isset($responseList['m_' . $menu->id])) continue;
+                $response = $this->convertResponse($responseList['m_' . $menu->id]);
+                $response->name = $menu->name;
+                $buttons[] = $response;
+            }
+        }
+        return array('button' => $buttons);
+    }
+
+    /**
+     * Convert response.
+     * 
+     * @param  int    $response 
+     * @access public
+     * @return void
+     */
+    public function convertResponse($response)
+    {
+        $result = new stdclass();
+        if($response->type == 'link')
+        {
+            $result->type = 'view';
+            $result->url  = $response->content;
+        }
+        else
+        {
+            $result->type = 'click';
+            $result->key  = $response->content;
+        }
+        return $result;
     }
 }

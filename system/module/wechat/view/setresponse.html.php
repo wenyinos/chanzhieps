@@ -12,7 +12,6 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/chosen.html.php';
-a($response);
 ?>
 <div class='panel'>
   <div class='panel-heading'>
@@ -21,7 +20,7 @@ a($response);
   <div class='panel-body'>
     <form method='post' id='ajaxForm'>
       <table class='table table-form'>
-        <?php if($group != 'menu'):?>
+        <?php if($group == ''):?>
         <tr>
           <th class='w-100px'><?php echo $lang->wechat->response->key;?></th>
           <td class='w-220px'><?php echo html::input('key', isset($response->key) ? $response->key : '', "class='form-control'");?></td>
@@ -30,7 +29,7 @@ a($response);
         <?php endif;?>
         <tr>
           <th class='w-100px'><?php echo $lang->wechat->response->type;?></th>
-          <td class='w-220px'><?php echo html::select('type', $lang->wechat->response->typeList,  isset($response) ? $response->type : '', "class='form-control'");?></td>
+          <td class='w-220px'><?php echo html::select('type', $lang->wechat->response->typeList,  isset($response->type) ? $response->type : '', "class='form-control'");?></td>
           <td></td>
         </tr>
 

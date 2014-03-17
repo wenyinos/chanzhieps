@@ -42,8 +42,8 @@
           <?php
           echo html::a($this->createLink('tree', 'browse', "type=wechat_$public->id"), $lang->wechat->setMenu);
           echo html::a($this->createLink('wechat', 'adminResponse', "publicID=$public->id"), $lang->wechat->adminResponse);
-          echo html::a($this->createLink('wechat', 'editResponse', "publicID=$public->id&group=default"), $lang->wechat->defaultResponse);
-          echo html::a($this->createLink('wechat', 'editResponse', "publicID=$public->id&group=subscribe"), $lang->wechat->subscribeResponse);
+          echo html::a($this->createLink('wechat', 'setResponse', "publicID=$public->id&group=default&key=default"), $lang->wechat->defaultResponse);
+          echo html::a($this->createLink('wechat', 'setResponse', "publicID=$public->id&group=subscribe&key=subscribe"), $lang->wechat->subscribeResponse);
           ?>
           <a href='###' class='access' data-container='body' data-toggle='popover' data-placement='left' data-content='<?php printf($lang->wechat->accessInfo, $public->appSecret, $public->url, $public->token);?>'>
             <?php echo $lang->wechat->access;?>

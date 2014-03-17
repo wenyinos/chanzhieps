@@ -139,6 +139,7 @@ class wechat extends control
 
         $button->sub_button[] = $subButton;
         $menu['button'][] = $button;
+        a($menu);exit;
         $this->api->addMenu($menu);
     }
 
@@ -294,7 +295,15 @@ class wechat extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('adminresponse', "publicID={$public}")));
         }
 
-        if($key) $this->view->response = $this->wechat->getResponseByKey($public, $key);
+        if($key)
+        {
+            $response = $this->wechat->getResponseByKey($public, $key);
+            if(!empty($response) and $response->source == 'system' and $response->type != 'news')
+            {
+                $response->source = $response->content;
+            }
+            $this->view->response = $response;
+        }
 
         $this->view->articleTree = $this->loadModel('tree')->getOptionMenu('article', 0, $removeRoot = true);
         $this->view->productTree = $this->tree->getOptionMenu('product', 0, $removeRoot = true);
@@ -303,5 +312,19 @@ class wechat extends control
         $this->view->key         = $key;
         $this->display();
     }
-   
+
+    /**
+     * Commit menu. 
+     * 
+     * @param  int    $public 
+     * @access public
+     * @return void
+     */
+    public function commitMenu($public)
+    {
+        $this->setApi($public);
+        $menu = $this->wechat->getMenu($public);
+        $result = $this->api->addMenu($menu);
+
+    }
 }
