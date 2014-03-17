@@ -9,5 +9,6 @@ $(document).ready(function()
     });
 
     $.setAjaxLoader('#treeMenuBox .ajax', '#categoryBox', function(){if($.fn.placeholder) $('[placeholder]').placeholder();});
+    $.setAjaxLoader('#commitBtn', '#categoryBox', function(){if($.fn.placeholder) $('[placeholder]').placeholder();});
 
 })

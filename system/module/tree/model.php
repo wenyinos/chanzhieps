@@ -239,6 +239,10 @@ class treeModel extends model
         $stmt = $this->dbh->query($this->buildQuery($type, $startCategoryID, $siteID));
         while($category = $stmt->fetch())
         {
+            if(treeModel::isWechatMenu($type))
+            {
+                $category->children = $this->dao->select('id')->from(TABLE_CATEGORY)->where('parent')->eq($category->id)->fetchAll();
+            }
             $linkHtml = call_user_func($userFunc, $category);
 
             if(isset($treeMenu[$category->id]) and !empty($treeMenu[$category->id]))
@@ -348,20 +352,29 @@ class treeModel extends model
         if($category->type == 'forum' and $category->grade == 2) $childrenLinkClass = 'hidden';
 
         $linkHtml  = $category->name;
+        $linkHtml .= ' ' . html::a(helper::createLink('tree', 'edit',     "category={$category->id}&type={$category->type}"), $lang->tree->edit, "class='ajax'");
+        $linkHtml .= ' ' . html::a(helper::createLink('tree', 'children', "type={$category->type}&category={$category->id}"), $lang->category->children, "class='$childrenLinkClass ajax'");
+        $linkHtml .= ' ' . html::a(helper::createLink('tree', 'delete',   "category={$category->id}"), $lang->delete, "class='deleter'");
 
-        $isWechatMenu = substr($category->type, 0, 7) == 'wechat_';
-        if($isWechatMenu)
-        {
-            $public = str_replace('wechat_', '', $category->type);
-            if($category->parent == 0) $linkHtml .= ' ' . html::a(helper::createLink('tree', 'children', "type={$category->type}&category={$category->id}"), $lang->wechatMenu->children, "class='$childrenLinkClass ajax'");
-            $linkHtml .= ' ' . html::a(helper::createLink('wechat', 'setResponse', "public={$public}&group=menu&key=m_{$category->id}"), $lang->tree->setResponse);
-        }
-        else
-        {
-            $linkHtml .= ' ' . html::a(helper::createLink('tree', 'edit',     "category={$category->id}&type={$category->type}"), $lang->tree->edit, "class='ajax'");
-            $linkHtml .= ' ' . html::a(helper::createLink('tree', 'children', "type={$category->type}&category={$category->id}"), $lang->category->children, "class='$childrenLinkClass ajax'");
-            $linkHtml .= ' ' . html::a(helper::createLink('tree', 'delete',   "category={$category->id}"), $lang->delete, "class='deleter'");
-        }
+        return $linkHtml;
+    }
+
+    /**
+     * Create the manage link for wechat menu.
+     * 
+     * @param  int         $category 
+     * @access public
+     * @return string
+     */
+    public static function createWechatMenuLink($category)
+    {
+        global $lang;
+
+        $public = str_replace('wechat_', '', $category->type);
+
+        $linkHtml  = $category->name;
+        if($category->parent == 0)     $linkHtml .= ' ' . html::a(helper::createLink('tree', 'children', "type={$category->type}&category={$category->id}"), $lang->wechatMenu->children, "class='ajax'");
+        if(empty($category->children)) $linkHtml .= ' ' . html::a(helper::createLink('wechat', 'setResponse', "public={$public}&group=menu&key=m_{$category->id}"), $lang->tree->setResponse);
 
         return $linkHtml;
     }
@@ -592,5 +605,18 @@ class treeModel extends model
                 ->where('id')->eq($category->id)
                 ->exec();
         }
+    }
+
+    /**
+     * Check if a category is wechatMenu by type.
+     * 
+     * @param  string    $type 
+     * @static
+     * @access public
+     * @return bool
+     */
+    public static function isWechatMenu($type)
+    {
+        return substr($type, 0, 7) == 'wechat_';
     }
 }

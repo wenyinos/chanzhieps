@@ -44,17 +44,22 @@ class tree extends control
             $this->lang->menuGroups->tree = 'product';
         }
 
-        if(substr($type, 0, 7) == 'wechat_')
+        $isWechatMenu = treeModel::isWechatMenu($type);
+        $this->view->isWechatMenu = $isWechatMenu;
+
+        if($isWechatMenu)
         {
             $this->lang->tree = $this->lang->wechatMenu;
             $this->lang->tree->menu = $this->lang->wechat->menu;
             $this->lang->menuGroups->tree = 'wechat';
         }
+        
+        $userFunc = $isWechatMenu ? array('treeModel', 'createWechatMenuLink') : array('treeModel', 'createManageLink');
+        $this->view->treeMenu = $this->tree->getTreeMenu($type, 0, $userFunc);
 
         $this->view->title    = $this->lang->tree->common;
         $this->view->type     = $type;
         $this->view->root     = $root;
-        $this->view->treeMenu = $this->tree->getTreeMenu($type, 0, array('treeModel', 'createManageLink'));
         $this->view->children = $this->tree->getChildren($root, $type);
 
         $this->display();
@@ -124,7 +129,7 @@ class tree extends control
         /* If type is forum, assign board to category. */
         if($type == 'forum') $this->lang->category = $this->lang->board;
 
-        $isWechatMenu = substr($type, 0, 7) == 'wechat_';
+        $isWechatMenu = treeModel::isWechatMenu($type);
         if($isWechatMenu) $this->lang->category = $this->lang->wechatMenu;
 
         if(!empty($_POST))

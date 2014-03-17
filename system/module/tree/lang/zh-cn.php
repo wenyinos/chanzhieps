@@ -62,5 +62,6 @@ $lang->wechatMenu->common     = '公众号菜单';
 $lang->wechatMenu->name       = '标题';
 $lang->wechatMenu->parent     = '上级菜单';
 $lang->wechatMenu->children   = "子菜单";
+$lang->wechatMenu->commit     = "同步到微信";
 
 $lang->wechatMenu->setResponse = '响应设置';

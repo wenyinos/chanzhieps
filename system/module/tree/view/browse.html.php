@@ -23,7 +23,12 @@ js::set('lang', $lang->js);
   <div class='col-md-4'>
     <div class='panel'>
       <div class='panel-heading'><strong><i class="icon-sitemap"></i> <?php echo $title;?></strong></div>
-      <div class='panel-body'><div id='treeMenuBox'><?php echo $treeMenu;?></div></div>
+      <div class='panel-body'>
+        <div id='treeMenuBox'><?php echo $treeMenu;?></div>
+        <?php if($isWechatMenu):?>
+        <div class='panel-body pull-right'><?php echo html::a($this->createLink('wechat', 'commitMenu', "public=" . str_replace('wechat_', '', $type)), $lang->wechatMenu->commit, "class='btn btn-primary ajax' id='commitBtn'");?></div>
+        <?php endif;?>
+      </div>
     </div>
   </div>
   <div class='col-md-8' id='categoryBox'></div>
