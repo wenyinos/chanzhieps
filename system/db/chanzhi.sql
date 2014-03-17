@@ -318,7 +318,7 @@ CREATE TABLE IF NOT EXISTS `eps_wx_response` (
   `public` smallint(3) NOT NULL,
   `key` varchar(100) NOT NULL,
   `group` varchar(100) NOT NULL,
-  `type` enum('text', 'rich', 'link') NOT NULL, 
+  `type` enum('text', 'news', 'link') NOT NULL, 
   `source` enum('system', 'manual') NOT NULL,
   `content` text NOT NULL,
   PRIMARY KEY (`id`)
