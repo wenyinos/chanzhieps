@@ -37,22 +37,6 @@ class wechatModel extends model
         return $publics;
     }
 
-    /** 
-     * Get response list.
-     * 
-     * @param  int    $publicID 
-     * @access public
-     * @return array
-     */
-    public function getResponseList($publicID)
-    {
-        $responses = $this->dao->select('*')->from(TABLE_WX_RESPONSE)->where('public')->eq($publicID)->fetchAll('id');
-
-        foreach($responses as $response) $this->processResponse($response);
-
-        return $responses;
-    }
-
     /**
      * Create a public.
      * 
@@ -92,20 +76,52 @@ class wechatModel extends model
         $this->dao->delete()->from(TABLE_WX_PUBLIC)->where('id')->eq($publicID)->exec();
         return !dao::isError();
     }
-        
-    /**
-     * Compute response for a message.
+
+    /** 
+     * Get response list.
      * 
+     * @param  int    $publicID 
+     * @access public
+     * @return array
+     */
+    public function getResponseList($publicID)
+    {
+        $responses = $this->dao->select('*')->from(TABLE_WX_RESPONSE)->where('public')->eq($publicID)->fetchAll('id');
+
+        foreach($responses as $response) $this->processResponse($response);
+
+        return $responses;
+    }
+
+    /**
+     * Get response for a message.
+     * 
+     * @param  int       $public 
      * @param  object    $message 
      * @access public
-     * @return void
+     * @return object
      */
-    public function computeResponse($message)
+    public function getResponseForMessage($public, $message)
     {
-        $response = new stdclass();
-        $response->msgType = 'text';
-        $response->content = '你好' . $message->event . $message->eventKey;
-        return $response;
+        if($message->msgType == 'text')
+        {
+            $response = $this->getResponseByKey($public, $message->content);    
+            if(empty($response)) $response = $this->getResponseByKey($public, 'default');    
+            if(!empty($response))
+            {
+                if($response->type == 'text' || $response->type == 'link')
+                {
+                    $reply = new stdclass();
+                    $reply->msgType = 'text';
+                    $reply->content = $response->content;
+                    return $reply;
+                } 
+                elseif($response->type == 'news')
+                {
+                   return $response->content;
+                }
+            }
+        }
     }
 
     /**
@@ -114,11 +130,11 @@ class wechatModel extends model
      * @param  int    $public 
      * @param  int    $key 
      * @access public
-     * @return void
+     * @return object
      */
     public function getResponseByKey($public, $key)
     {
-        $response =  $this->dao->select('*')->from(TABLE_WX_RESPONSE)
+        $response = $this->dao->select('*')->from(TABLE_WX_RESPONSE)
             ->where('public')->eq($public)
             ->andWhere('`key`')->eq($key)
             ->fetch();
@@ -135,10 +151,30 @@ class wechatModel extends model
     public function processResponse($response)
     {
         if(empty($response)) return $response;
+        
+        if($response->type == 'text')
+        {
+            if($response->source != 'manual')
+            {
+                $response->content = $this->parseResponseContent($response->source);
+            }
+        }
+
         if($response->type == 'news')
         {
-            $response->content = json_decode($response->content);
+            $response->params  = json_decode($response->content);
+            $response->content = $this->parseResponseContent($response->params);
         }
+
+        if($response->type == 'link')
+        {
+            if($response->source != 'manual')
+            {
+                if($response->source == 'home') $response->content = rtrim(getWebRoot(true), '/');
+                if($response->source != 'home') $response->content = rtrim(getWebRoot(true), '/') . commonModel::createFrontLink($response->source, 'index');
+            }
+        }
+
         return $response;
     }
 
@@ -152,17 +188,10 @@ class wechatModel extends model
     public function setResponse($publicID)
     {
         $response = fixer::input('post')->add('public', $publicID)->get();
-        if($response->type == 'news') $response->source = 'system';
-        $source = $response->source == 'manual' ? 'manual' : 'system';
-
-        if($response->type == 'link' or $response->type == 'text')
-        { 
-            if($response->source != 'manual') $response->content = $response->source;
-        }
 
         if($response->type == 'news')
         { 
-            $source = 'system';
+            $response->source = 'system';
             $content = array();
             $content['block']    = $response->block;
             $content['category'] = $response->category;
@@ -170,7 +199,6 @@ class wechatModel extends model
             $response->content = json_encode($content);
         }
 
-        $response->source = $source;
         $this->dao->replace(TABLE_WX_RESPONSE)
             ->data($response, $skip = 'linkModule, textBlock, block, category, limit')
             ->autoCheck()
@@ -180,7 +208,6 @@ class wechatModel extends model
     }
 
     /**
-<<<<<<< HEAD
      * Get menu to commit.
      * 
      * @param  int    $public 
@@ -253,5 +280,203 @@ class wechatModel extends model
     {
         $this->dao->delete()->from(TABLE_WX_RESPONSE)->where('id')->eq($response)->exec();
         return !dao::isError();
+    }
+
+    /**
+     * Parse response content. 
+     * 
+     * @param  string|object    $content 
+     * @access public
+     * @return void
+     */
+    public function parseResponseContent($content)
+    {
+        if(!is_object($content))
+        {
+            if($content == 'company') return strip_tags($this->config->company->desc);
+            if($content == 'contact')
+            {
+                $contact = json_decode($this->config->company->contact);
+                $text = '';
+                foreach($contact as $item => $value)
+                {
+                    if(empty($value)) continue;
+                    $text .= $this->lang->company->{$item} . $this->lang->colon . $value . "\n";
+                }
+                return $text;
+            }
+            return $content;
+        } 
+        else
+        {
+            $userFunc = array('wechatModel', 'parse' . ucfirst($content->block));
+            return call_user_func($userFunc, $content);
+        }
+    }
+
+    /**
+     * Parse article tree. 
+     * 
+     * @param  object    $content 
+     * @access public
+     * @return object
+     */
+    public function parseArticleTree($content)
+    {
+        return $this->parseTree($content, 'article');
+    }
+
+    /**
+     * Parse product tree. 
+     * 
+     * @param  object    $content 
+     * @access public
+     * @return object
+     */
+    public function parseProductTree($content)
+    {
+        return $this->parseTree($content, 'product');
+    }
+
+    /**
+     * Parse tree. 
+     * 
+     * @param  object    $content 
+     * @param  string    $type 
+     * @access public
+     * @return object
+     */
+    public function parseTree($content, $type)
+    {
+        $categories = $this->dao->select('*')->from(TABLE_CATEGORY)->where('id')->in($content->category)->fetchAll('id');
+
+        $response = new stdclass();
+        $response->msgType = 'news';
+
+        foreach($content->category as $categoryID)
+        {
+            if(empty($categories[$categoryID])) continue;
+            $category = $categories[$categoryID];
+
+            $article = new stdclass();
+            $article->title       = $category->name;
+            $article->url         = rtrim(getWebRoot(true), '/') . commonModel::createFrontLink($type, 'browse', "categoryID={$category->id}", "category={$category->alias}");
+            $article->description =  $category->desc;
+            $response->articles[] = $article;
+        }
+        return $response;
+    }
+
+    /**
+     * Parse latest article. 
+     * 
+     * @param  object    $content 
+     * @access public
+     * @return object
+     */
+    public function parseLatestArticle($content)
+    {
+        return $this->parseArticles($content);
+    }
+
+    /**
+     * Parse hot article. 
+     * 
+     * @param  object    $content 
+     * @access public
+     * @return object
+     */
+    public function parseHotArticle($content)
+    {
+        return $this->parseArticles($content);
+    }
+
+    /**
+     * Parse articles. 
+     * 
+     * @param  object    $content 
+     * @access public
+     * @return object
+     */
+    public function parseArticles($content)
+    {
+        $orderByList = array('latestArticle' => 'id_desc', 'hotArticle' => 'views_desc');
+
+        $this->app->loadClass('pager', true);
+        $pager = new pager($recTotal = 0, $recPerPage = $content->limit, 1);
+
+        $articles = $this->loadModel('article')->getList('article', $content->category, $orderByList[$content->block], $pager);
+
+        $response = new stdclass();
+        $response->msgType = 'news';
+
+        foreach($articles as $article)
+        {
+            $item = new stdclass();
+            $item->title       = $article->title;
+            $item->url         = rtrim(getWebRoot(true), '/') . $this->article->createPreviewLink($article->id);
+            $item->description = $article->summary;
+            if(!empty($article->image)) $item->picUrl = rtrim(getWebRoot(true), '/') . $article->image->primary->smallURL;
+            $response->articles[] = $item;
+        }
+        return $response;
+    }
+
+    /**
+     * Parse latest product. 
+     * 
+     * @param  object    $content 
+     * @access public
+     * @return object
+     */
+    public function parseLatestProduct($content)
+    {
+        return $this->parseProducts($content);
+    }
+
+    /**
+     * Parse hot product. 
+     * 
+     * @param  object    $content 
+     * @access public
+     * @return object
+     */
+    public function parseHotProduct($content)
+    {
+        return $this->parseProducts($content);
+    }
+
+    /**
+     * Parse products. 
+     * 
+     * @param  object    $content 
+     * @access public
+     * @return object
+     */
+    public function parseProducts($content)
+    {
+        $orderByList = array('latestProduct' => 'id_desc', 'hotProduct' => 'views_desc');
+
+        $this->app->loadClass('pager', true);
+        $pager = new pager($recTotal = 0, $recPerPage = $content->limit, 1);
+
+        $products = $this->loadModel('product')->getList($content->category, $orderByList[$content->block], $pager);
+
+        $response = new stdclass();
+        $response->msgType = 'news';
+
+        foreach($products as $product)
+        {
+            $categories    = $product->categories;
+            $categoryAlias = current($categories)->alias;
+
+            $article = new stdclass();
+            $article->title       = $product->name;
+            $article->url         = rtrim(getWebRoot(true), '/') . commonModel::createFrontLink('product', 'view',  "productID=$product->id", "name=$product->alias&category=$categoryAlias");
+            $article->description = $product->summary;
+            if(!empty($product->image)) $article->picUrl = rtrim(getWebRoot(true), '/') . $product->image->primary->smallURL;
+            $response->articles[] = $article;
+        }
+        return $response;
     }
 }

@@ -32,17 +32,20 @@
       <?php foreach($responseList as $response):?>
       <tr class='text-center'>
         <td><?php echo $lang->wechat->response->typeList[$response->type];?></td>
-        <td><?php echo $lang->wechat->response->sourceList[$response->source];?></td>
+        <?php if($response->type == 'news'):?>
+        <td><?php echo $lang->wechat->response->newsBlockList[$response->params->block];?></td>
+        <?php elseif($response->type == 'link'):?>
+        <td><?php echo $lang->wechat->response->moduleList[$response->source];?></td>
+        <?php elseif($response->type == 'text'):?>
+        <td><?php echo $lang->wechat->response->textBlockList[$response->source];?></td>
+        <?php endif;?>
         <td>
           <?php if($response->key == 'subscribe') echo $lang->wechat->subscribeResponse;?>
           <?php if($response->key == 'default')  echo $lang->wechat->defaultResponse;?>
           <?php if($response->key != 'subscribe' && $response->key != 'default') echo $response->key;?>
         </td>
         <td>
-          <?php if($response->type == 'text' && $response->source != 'manual') echo $lang->wechat->response->textBlockList[$response->content];?>
-          <?php if($response->type == 'news') echo $lang->wechat->response->newsBlockList[$response->content->block];?>
-          <?php if($response->type == 'link' && $response->source != 'manual') echo $lang->wechat->response->moduleList[$response->content];?>
-          <?php if($response->source == 'manual') echo $response->content;?>
+          <?php echo $response->content;?>
         </td>
         <td>
           <?php

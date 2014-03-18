@@ -54,34 +54,7 @@ class wechat extends control
         $this->api->checkSign();
 
         $message  = $this->api->getMessage();
-        $response = $this->wechat->getResponse($message);
-
-        if(isset($message->eventKey) and $message->eventKey == 'menu_image')
-        {
-            $response = new stdclass();
-            $response->msgType = 'image';
-            $response->mediaId = $this->api->uploadMedia('image', '/home/wwccss/chanzhi/www/data/test.jpg');
-        }
-
-        if(isset($message->eventKey) and $message->eventKey == 'menu_news')
-        {
-            $response = new stdclass();
-            $response->msgType = 'news';
-            $article = new stdclass();
-            $article->title = '禅道';
-            $article->description = '禅道项目管理软件';
-            $article->picUrl = 'http://www.zentao.net/data/site/18/Logo.png';
-            $article->url    = 'http://www.zentao.net';
-            $response->articles[] = $article;
-
-            $article = new stdclass();
-            $article->title = '蝉知';
-            $article->description = '蝉知企业门户';
-            $article->picUrl = 'http://www.chanzhi.org/data/upload/201309/fdfb6e9cb6103298f5497760962ebbf7.png';
-            $article->url    = 'http://www.chanzhi.org';
-            $response->articles[] = $article;
-        }
-
+        $response = $this->wechat->getResponseForMessage($public, $message);
         $this->api->response($response);
     }
 
@@ -99,48 +72,6 @@ class wechat extends control
         $message = new stdclass();
         $message->content = '你好';
         $this->api->reply('o-nXYt1LrugCK0oqZcrxyMidiJSg', 'text', $message);
-    }
-
-    /**
-     * Add menu.
-     * 
-     * @param  int    $public 
-     * @access public
-     * @return void
-     */
-    public function addMenu($public)
-    {
-        $this->setAPI($public);
-
-        $button = new stdclass();
-        $button->type = 'click';
-        $button->name = '图片';
-        $button->key  = 'menu_image';
-        $menu['button'][] = $button;
-
-        $button = new stdclass();
-        $button->type = 'click';
-        $button->name = '图文';
-        $button->key  = 'menu_news';
-        $menu['button'][] = $button;
-
-        $button = new stdclass();
-        $button->name = '功能介绍';
-
-        $subButton = new stdclass();
-        $subButton->type = 'view';
-        $subButton->name = '论坛';
-        $subButton->url  = 'http://www.chanzhi.org/forum/';
-        $button->sub_button[] = $subButton;
-        $subButton = new stdclass();
-        $subButton->type = 'view';
-        $subButton->name = '博客';
-        $subButton->url  = 'http://www.chanzhi.org/blog/';
-
-        $button->sub_button[] = $subButton;
-        $menu['button'][] = $button;
-        a($menu);exit;
-        $this->api->addMenu($menu);
     }
 
     /**

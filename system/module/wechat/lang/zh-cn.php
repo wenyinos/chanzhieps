@@ -54,11 +54,12 @@ $lang->wechat->response->typeList['news'] = '图文消息';
 $lang->wechat->response->sourceList['system'] = '系统';
 $lang->wechat->response->sourceList['manual'] = '输入';
 
-$lang->wechat->response->moduleList['home']   = '首页';
-$lang->wechat->response->moduleList['about']  = '关于我们';
-$lang->wechat->response->moduleList['blog']   = '博客';
-$lang->wechat->response->moduleList['forum']  = '论坛';
-$lang->wechat->response->moduleList['manual'] = '自定义';
+$lang->wechat->response->moduleList['home']    = '首页';
+$lang->wechat->response->moduleList['company'] = '关于我们';
+$lang->wechat->response->moduleList['blog']    = '博客';
+$lang->wechat->response->moduleList['forum']   = '论坛';
+$lang->wechat->response->moduleList['book']    = '手册';
+$lang->wechat->response->moduleList['manual']  = '自定义';
 
 $lang->wechat->response->textBlockList['company'] = '公司简介';
 $lang->wechat->response->textBlockList['contact'] = '联系我们';
