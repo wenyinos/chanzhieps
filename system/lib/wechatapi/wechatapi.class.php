@@ -288,8 +288,8 @@ class wechatapi
         $reply = new stdclass();
         $reply->touser  = $to;
         $reply->msgtype = $type;
-        $reply->$type = $message;
-        $this->reply = $reply;
+        $reply->$type   = $message;
+        $this->reply    = $reply;
         
         $token = $this->getAccessToken();
         $url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=$token";
