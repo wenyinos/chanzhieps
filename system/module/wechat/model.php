@@ -109,18 +109,18 @@ class wechatModel extends model
             if(empty($response)) $response = $this->getResponseByKey($public, 'default');    
             if(!empty($response))
             {
-                if($response->type == 'text' || $response->type == 'link')
+                if($response->type == 'text' or $response->type == 'link')
                 {
                     $reply = new stdclass();
                     $reply->msgType = 'text';
                     $reply->content = $response->content;
-                    return $reply;
                 } 
                 elseif($response->type == 'news')
                 {
                    return $response->content;
                 }
             }
+            return $reply;
         }
     }
 
