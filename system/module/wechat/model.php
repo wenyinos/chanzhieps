@@ -86,7 +86,7 @@ class wechatModel extends model
      */
     public function getResponseList($publicID)
     {
-        $responses = $this->dao->select('*')->from(TABLE_WX_RESPONSE)->where('public')->eq($publicID)->fetchAll('id');
+        $responses = $this->dao->select('*')->from(TABLE_WX_RESPONSE)->where('public')->eq($publicID)->andWhere('`group`')->ne('menu')->fetchAll('id');
 
         foreach($responses as $response) $this->processResponse($response);
 
@@ -106,12 +106,14 @@ class wechatModel extends model
         if($message->msgType == 'text')
         {
             $response = $this->getResponseByKey($public, $message->content);    
-            if(empty($response)) $response = $this->getResponseByKey($public, 'default');    
         }
-        else
+        elseif($message->msgType == 'event')
         {
-            $response = $this->getResponseByKey($public, 'default');    
+            if($message->event == 'subscribe') $message->eventKey = 'subscribe';
+            $response = $this->getResponseByKey($public, $message->eventKey);    
         }
+
+        if(empty($response)) $response = $this->getResponseByKey($public, 'default');    
 
         if(!empty($response))
         {
