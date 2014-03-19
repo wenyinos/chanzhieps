@@ -332,7 +332,6 @@ class wechatapi
         $menu   = $this->convertMenu2JSON($menu);
         $result = $this->post($url, $menu);
         $result = json_decode($result);
-        print_r($result);
 
         if(isset($result->errcode) and $result->errcode == 0) return true;
         return false;

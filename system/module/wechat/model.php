@@ -107,21 +107,27 @@ class wechatModel extends model
         {
             $response = $this->getResponseByKey($public, $message->content);    
             if(empty($response)) $response = $this->getResponseByKey($public, 'default');    
-            if(!empty($response))
-            {
-                if($response->type == 'text' or $response->type == 'link')
-                {
-                    $reply = new stdclass();
-                    $reply->msgType = 'text';
-                    $reply->content = $response->content;
-                } 
-                elseif($response->type == 'news')
-                {
-                   return $response->content;
-                }
-            }
-            return $reply;
         }
+        else
+        {
+            $response = $this->getResponseByKey($public, 'default');    
+        }
+
+        if(!empty($response))
+        {
+            if($response->type == 'text' or $response->type == 'link')
+            {
+                $reply = new stdclass();
+                $reply->msgType = 'text';
+                $reply->content = $response->content;
+            } 
+            elseif($response->type == 'news')
+            {
+                return $response->content;
+            }
+        }
+        return $reply;
+
     }
 
     /**
@@ -170,8 +176,7 @@ class wechatModel extends model
         {
             if($response->source != 'manual')
             {
-                if($response->source == 'home') $response->content = rtrim(getWebRoot(true), '/');
-                if($response->source != 'home') $response->content = rtrim(getWebRoot(true), '/') . commonModel::createFrontLink($response->source, 'index');
+               $response->content = $response->source;
             }
         }
 
@@ -218,6 +223,7 @@ class wechatModel extends model
     {
         $menus = $this->dao->select('*')->from(TABLE_CATEGORY)->where('type')->like('wechat_%')->orderBy('`order`')->fetchGroup('parent');
         $responseList = $this->dao->select('*')->from(TABLE_WX_RESPONSE)->where('public')->eq($public)->andWhere('`group`')->eq('menu')->fetchAll('key');
+        foreach($responseList as $response) $response = $this->processResponse($response);
 
         $buttons = array();
         foreach($menus[0] as $menu)
@@ -229,7 +235,7 @@ class wechatModel extends model
                 foreach($menus[$menu->id] as $submenu)
                 {
                     if(!isset($responseList['m_' . $submenu->id])) continue;
-                    $response = $this->convertResponse($responseList['m_' . $submenu->id]);
+                    $response = $this->convertResponse2Menu($responseList['m_' . $submenu->id]);
                     $response->name = $submenu->name;
                     $submenus->sub_button[] = $response;
                 }
@@ -238,7 +244,7 @@ class wechatModel extends model
             else
             {
                 if(!isset($responseList['m_' . $menu->id])) continue;
-                $response = $this->convertResponse($responseList['m_' . $menu->id]);
+                $response = $this->convertResponse2Menu($responseList['m_' . $menu->id]);
                 $response->name = $menu->name;
                 $buttons[] = $response;
             }
@@ -253,18 +259,18 @@ class wechatModel extends model
      * @access public
      * @return void
      */
-    public function convertResponse($response)
+    public function convertResponse2Menu($response)
     {
         $result = new stdclass();
         if($response->type == 'link')
         {
             $result->type = 'view';
-            $result->url  = $response->content;
+            $result->url  = $response->source == 'manual' ? $response->content : $response->source;
         }
         else
         {
             $result->type = 'click';
-            $result->key  = $response->content;
+            $result->key  = $response->key;
         }
         return $result;
     }

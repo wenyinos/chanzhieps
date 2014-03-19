@@ -1,9 +1,10 @@
 $(document).ready(function()
 {
+    $.setAjaxForm('#responseForm');
     $('#type').change(function()
     {
-        $('#ajaxForm').find('.link, .text, .news').hide().find(':input, select').attr('disabled', true);
-        $('#ajaxForm').find('.' + $(this).val()).show().find(':input, select').attr('disabled', false);;
+        $('#responseForm').find('.link, .text, .news').hide().find(':input, select').attr('disabled', true);
+        $('#responseForm').find('.' + $(this).val()).show().find(':input, select').attr('disabled', false);;
     });
 
     $('#type').change();

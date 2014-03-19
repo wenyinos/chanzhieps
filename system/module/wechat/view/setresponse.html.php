@@ -10,15 +10,26 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php include '../../common/view/header.admin.html.php';?>
-<?php include '../../common/view/chosen.html.php';
+<?php 
+if($group != 'menu')
+{
+    include '../../common/view/header.admin.html.php';
+}
+else
+{
+    $webRoot   = $config->webRoot;
+    $jsRoot    = $webRoot . "js/";
+    if(isset($pageCSS)) css::internal($pageCSS);
+}
+include '../../common/view/chosen.html.php';
 ?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-plus"></i> <?php echo $lang->wechat->setResponse;?></strong>
   </div>
   <div class='panel-body'>
-    <form method='post' id='ajaxForm'>
+  <?php $action = $group == 'menu' ? "action='" . inlink('setresponse', "public={$public}&group={$group}&key={$key}") . "'" : '';  ?>
+  <form method='post' <?php echo $action;?> id='responseForm'>
       <table class='table table-form'>
         <?php if($group == ''):?>
         <tr>
@@ -87,4 +98,8 @@
     </form>
   </div>
 </div>
+<?php if($group == 'menu'):?>
+<?php if(isset($pageJS)) js::execute($pageJS);?>
+<?php else:?>
 <?php include '../../common/view/footer.admin.html.php';?>
+<?php endif;?>

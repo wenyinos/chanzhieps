@@ -214,20 +214,6 @@ class wechat extends control
     }
     
     /**
-     * Set wechat menu.
-     * 
-     * @param  string    $public 
-     * @access public
-     * @return void
-     */
-    public function menuResponse($key, $type = 'view')
-    {
-        $this->view->key  = $key;
-        $this->view->type = $type;
-        $this->display();
-    }
-
-    /**
      * Admin response for a public.
      * 
      * @param  int    $publicID 
@@ -236,9 +222,11 @@ class wechat extends control
      */
     public function adminResponse($publicID)
     {
-        $this->view->title        = $this->lang->wechat->adminResponse;
-        $this->view->publicID     = $publicID;
-        $this->view->responseList = $this->wechat->getResponseList($publicID);
+        $this->view->title           = $this->lang->wechat->adminResponse;
+        $this->view->publicID        = $publicID;
+        $this->view->responseList    = $this->wechat->getResponseList($publicID);
+        $this->view->articleCategory = $this->loadModel('tree')->getPairs(0, 'article');
+        $this->view->productCategory = $this->tree->getPairs(0, 'product');
         $this->display();
     }
 
@@ -257,7 +245,11 @@ class wechat extends control
         {
             $this->wechat->setResponse($public);
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('adminresponse', "publicID={$public}")));
+
+            $response['result'] = 'success';
+            $response['message'] = $this->lang->saveSuccess;
+            if($group != 'menu') $response['locate']  = inlink('adminresponse', "publicID={$public}");
+            $this->send($response);
         }
 
         if($key)
@@ -270,9 +262,12 @@ class wechat extends control
             $this->view->response = $response;
         }
 
+        if($group == 'menu') unset($this->lang->wechat->menu);
+
         $this->view->articleTree = $this->loadModel('tree')->getOptionMenu('article', 0, $removeRoot = true);
         $this->view->productTree = $this->tree->getOptionMenu('product', 0, $removeRoot = true);
         $this->view->title       = $this->lang->wechat->setResponse;
+        $this->view->public      = $public;
         $this->view->group       = $group;
         $this->view->key         = $key;
         $this->display();

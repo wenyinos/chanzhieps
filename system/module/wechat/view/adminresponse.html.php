@@ -45,7 +45,25 @@
           <?php if($response->key != 'subscribe' && $response->key != 'default') echo $response->key;?>
         </td>
         <td>
-          <?php echo $response->content;?>
+          <?php 
+          if($response->type == 'news')
+          {
+              if(strpos(strtolower($response->params->block), 'article') !== false)
+              {
+                  foreach($response->params->category as $category) echo $articleCategory[$category] . ' ';
+                  if($response->params->limit) echo '<br /><strong>' . $lang->wechat->response->limit . '</strong>' . $lang->colon . $response->params->limit;
+              }
+              else
+              {
+                  foreach($response->params->category as $category) echo $productCategory[$category] . ' ';
+                  if($response->params->limit) echo '<br /><strong>' . $lang->wechat->response->limit . '</strong>' . $lang->colon . $response->params->limit;
+              }
+          } 
+          else
+          {
+              echo $response->content;
+          }
+          ?>
         </td>
         <td>
           <?php
