@@ -313,31 +313,32 @@ CREATE TABLE IF NOT EXISTS `eps_wx_public` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_wx_response`;
-CREATE TABLE IF NOT EXISTS `eps_wx_response` (
+CREATE TABLE `eps_wx_response` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `public` smallint(3) NOT NULL,
   `key` varchar(100) NOT NULL,
   `group` varchar(100) NOT NULL,
-  `type` enum('text', 'news', 'link') NOT NULL, 
-  `source` enum('system', 'manual') NOT NULL,
+  `type` enum('text','news','link') NOT NULL DEFAULT 'text',
+  `source` varchar(100) NOT NULL,
   `content` text NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `key` (`public`,`key`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_wx_message`;
-CREATE TABLE IF NOT EXISTS `eps_wx_message` (
+CREATE TABLE `eps_wx_message` (
   `id` mediumint(10) unsigned NOT NULL AUTO_INCREMENT,
   `public` smallint(3) NOT NULL,
-  `wid`      char(64) NOT NULL, 
-  `rid`      char(64) NOT NULL, 
-  `replyer`  varchar(30) NOT NULL,
-  `to`       varchar(50) NOT NULL,
-  `from`     varchar(50) NOT NULL,
-  `response` smallint(5) NOT NULL,
-  `content`  text NOT NULL,
-  `type`     char(30) NOT NULL,
-  `status`   enum('wait', 'replied'),
-  `time`     datetime NOT NULL,
+  `wid` char(64) NOT NULL,
+  `to` varchar(50) NOT NULL,
+  `from` varchar(50) NOT NULL,
+  `response` varchar(100) NOT NULL,
+  `content` text NOT NULL,
+  `type` char(30) NOT NULL,
+  `event` char(30) NOT NULL,
+  `eventKey` varchar(100) NOT NULL,
+  `status` enum('wait','replied') DEFAULT NULL,
+  `time` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
