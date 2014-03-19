@@ -25,10 +25,6 @@ $lang->wechat->edit              = '编辑公众号';
 $lang->wechat->admin             = '维护公众号';
 $lang->wechat->list              = '公众号列表';
 $lang->wechat->setMenu           = '菜单';
-$lang->wechat->adminResponse     = '响应';
-$lang->wechat->setResponse       = '响应设置';
-$lang->wechat->defaultResponse   = '默认响应';
-$lang->wechat->subscribeResponse = '订阅响应';
 $lang->wechat->access            = '接入';
 
 $lang->wechat->typeList['subscribe'] = '订阅号';
@@ -36,15 +32,20 @@ $lang->wechat->typeList['service']   = '服务号';
 
 $lang->wechat->response = new stdclass();
 
-$lang->wechat->response->key    = 'Key';
-$lang->wechat->response->type   = '类型';
-$lang->wechat->response->source = '来源';
-$lang->wechat->response->module = '模块';
-$lang->wechat->response->block  = '内容';
-$lang->wechat->response->link   = '链接';
-$lang->wechat->response->limit  = '数量';
+$lang->wechat->response->keywords  = '关键字';
+$lang->wechat->response->set       = '响应设置';
+$lang->wechat->response->create    = '添加关键字';
+$lang->wechat->response->default   = '默认响应';
+$lang->wechat->response->subscribe = '订阅响应';
 
-$lang->wechat->response->create = '添加响应';
+$lang->wechat->response->type     = '类型';
+$lang->wechat->response->source   = '来源';
+$lang->wechat->response->module   = '模块';
+$lang->wechat->response->block    = '内容';
+$lang->wechat->response->link     = '链接';
+$lang->wechat->response->category = '类目';
+$lang->wechat->response->limit    = '数量';
+
 $lang->wechat->response->list   = '响应列表';
 
 $lang->wechat->response->typeList['link'] = '链接';

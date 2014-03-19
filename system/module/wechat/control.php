@@ -84,7 +84,8 @@ class wechat extends control
     public function deleteMenu($public)
     {
         $this->setAPI($public);
-        $this->api->deleteMenu();
+        if($this->api->deleteMenu()) $this->send(array('result' => 'success', 'message' => $this->lang->deleteSuccess));
+        $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
     }
 
     /**
@@ -222,7 +223,7 @@ class wechat extends control
      */
     public function adminResponse($publicID)
     {
-        $this->view->title           = $this->lang->wechat->adminResponse;
+        $this->view->title           = $this->lang->wechat->response->keywords;
         $this->view->publicID        = $publicID;
         $this->view->responseList    = $this->wechat->getResponseList($publicID);
         $this->view->articleCategory = $this->loadModel('tree')->getPairs(0, 'article');
@@ -266,7 +267,7 @@ class wechat extends control
 
         $this->view->articleTree = $this->loadModel('tree')->getOptionMenu('article', 0, $removeRoot = true);
         $this->view->productTree = $this->tree->getOptionMenu('product', 0, $removeRoot = true);
-        $this->view->title       = $this->lang->wechat->setResponse;
+        $this->view->title       = $this->lang->wechat->response->set;
         $this->view->public      = $public;
         $this->view->group       = $group;
         $this->view->key         = $key;
@@ -284,7 +285,9 @@ class wechat extends control
     {
         $this->setApi($public);
         $menu = $this->wechat->getMenu($public);
-        $result = $this->api->addMenu($menu);
+        $result = $this->api->commitMenu($menu);
+        if($result['result'] == 'success') $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        $this->send($result);
     }
 
     /**

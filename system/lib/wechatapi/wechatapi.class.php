@@ -319,13 +319,13 @@ class wechatapi
     }
 
     /**
-     * Add menu to wechat server.
+     * Commit menu to wechat server.
      * 
      * @param  array    $menu 
      * @access public
      * @return bool
      */
-    public function addMenu($menu)
+    public function commitMenu($menu)
     {
         $token  = $this->getAccessToken();
         $url    = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=$token";
@@ -333,8 +333,12 @@ class wechatapi
         $result = $this->post($url, $menu);
         $result = json_decode($result);
 
-        if(isset($result->errcode) and $result->errcode == 0) return true;
-        return false;
+        if(isset($result->errcode) and $result->errcode == 0) 
+        {
+            return array('result' => 'success');
+        }
+
+        return array('result' => 'fail' , 'message' => $result->errcode . ':' . $result->errmsg);
     }
 
     /**
@@ -347,9 +351,9 @@ class wechatapi
     {
         $token  = $this->getAccessToken();
         $url    = "https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=$token";
-        $result = $this->get($url);
+        $result = json_decode($this->get($url));
 
-        if(isset($result->errcode) and $result->errorcode == 0) return true;
+        if(isset($result->errcode) and $result->errcode == 0) return true;
         return false;
     }
 

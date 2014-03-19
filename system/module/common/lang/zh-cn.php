@@ -130,7 +130,7 @@ $lang->menuGroups->tag     = 'site';
 $lang->menuGroups->mail    = 'site';
 $lang->menuGroups->nav     = 'site';
 $lang->menuGroups->links   = 'site';
-$lang->menuGroups->wechat = 'site';
+$lang->menuGroups->wechat  = 'site';
 $lang->menuGroups->block   = 'ui';
 $lang->menuGroups->slide   = 'ui';
 $lang->menuGroups->tree    = 'article';
@@ -180,7 +180,7 @@ $lang->feedback->menu->message = '留言|message|admin|type=message';
 $lang->feedback->menu->comment = '评论|message|admin|type=comment';
 $lang->feedback->menu->thread  = '主题|forum|admin|tab=feedback';
 $lang->feedback->menu->reply   = '回帖|reply|admin|order=id_desc&tab=feedback';
-$lang->feedback->menu->wechat = '微信|wechat|message|';
+$lang->feedback->menu->wechat  = '微信|wechat|message|';
 
 $lang->message = new stdclass();
 $lang->message->menu = $lang->feedback->menu;
@@ -202,7 +202,7 @@ $lang->site->menu->tag       = '关键词设置|tag|admin|';
 $lang->site->menu->oauth     = '开放登录|site|setoauth|';
 $lang->site->menu->link      = '友情链接|links|admin|';
 $lang->site->menu->mail      = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->site->menu->wechat   = array('link' => '微信设置|wechat|admin|', 'alias' => 'create,setresponse');
+$lang->site->menu->wechat    = array('link' => '微信设置|wechat|admin|', 'alias' => 'adminresponse');
 
 /* Menu of company module. */
 $lang->company->menu = new stdclass();

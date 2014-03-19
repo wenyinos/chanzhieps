@@ -25,7 +25,7 @@ include '../../common/view/chosen.html.php';
 ?>
 <div class='panel'>
   <div class='panel-heading'>
-    <strong><i class="icon-plus"></i> <?php echo $lang->wechat->setResponse;?></strong>
+    <strong><i class="icon-plus"></i> <?php echo $lang->wechat->response->set;?></strong>
   </div>
   <div class='panel-body'>
   <?php $action = $group == 'menu' ? "action='" . inlink('setresponse', "public={$public}&group={$group}&key={$key}") . "'" : '';  ?>
@@ -33,7 +33,7 @@ include '../../common/view/chosen.html.php';
       <table class='table table-form'>
         <?php if($group == ''):?>
         <tr>
-          <th class='w-100px'><?php echo $lang->wechat->response->key;?></th>
+          <th class='w-100px'><?php echo $lang->wechat->response->keywords;?></th>
           <td class='w-220px'><?php echo html::input('key', isset($response->key) ? $response->key : '', "class='form-control'");?></td>
           <td></td>
         </tr>

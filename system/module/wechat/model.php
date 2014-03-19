@@ -86,7 +86,7 @@ class wechatModel extends model
      */
     public function getResponseList($publicID)
     {
-        $responses = $this->dao->select('*')->from(TABLE_WX_RESPONSE)->where('public')->eq($publicID)->andWhere('`group`')->ne('menu')->fetchAll('id');
+        $responses = $this->dao->select('*')->from(TABLE_WX_RESPONSE)->where('public')->eq($publicID)->andWhere('`group`')->eq('')->fetchAll('id');
 
         foreach($responses as $response) $this->processResponse($response);
 

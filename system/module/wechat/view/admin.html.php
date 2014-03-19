@@ -22,28 +22,27 @@
   <table class='table table-hover table-striped tablesorter'>
     <thead>
       <tr class='text-center'>
-        <th class='w-60px'> <?php echo $lang->wechat->id;?></th>
-        <th>                <?php echo $lang->wechat->name;?></th>
+        <th class='w-200px'><?php echo $lang->wechat->name;?></th>
         <th class='w-100px'><?php echo $lang->wechat->type;?></th>
         <th class='w-160px'><?php echo $lang->wechat->account;?></th>
         <th class='w-160px'><?php echo $lang->wechat->appID;?></th>
-        <th class='w-300px'><?php echo $lang->actions;?></th>
+        <th><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
       <?php foreach($publics as $public):?>
       <tr class='text-center'>
-        <td><?php echo $public->id;?></td>
         <td><?php echo $public->name;?></td>
         <td><?php echo $lang->wechat->typeList[$public->type];?></td>
         <td><?php echo $public->account;?></td>
         <td><?php echo $public->appID;?></td>
         <td>
           <?php
+          echo html::a($this->createLink('wechat', 'edit', "publicID=$public->id"), $lang->edit);
           echo html::a($this->createLink('tree', 'browse', "type=wechat_$public->id"), $lang->wechat->setMenu);
-          echo html::a($this->createLink('wechat', 'adminResponse', "publicID=$public->id"), $lang->wechat->adminResponse);
-          echo html::a($this->createLink('wechat', 'setResponse', "publicID=$public->id&group=default&key=default"), $lang->wechat->defaultResponse);
-          echo html::a($this->createLink('wechat', 'setResponse', "publicID=$public->id&group=subscribe&key=subscribe"), $lang->wechat->subscribeResponse);
+          echo html::a($this->createLink('wechat', 'adminResponse', "publicID=$public->id"), $lang->wechat->response->keywords);
+          echo html::a($this->createLink('wechat', 'setResponse', "publicID=$public->id&group=default&key=default"), $lang->wechat->response->default);
+          echo html::a($this->createLink('wechat', 'setResponse', "publicID=$public->id&group=subscribe&key=subscribe"), $lang->wechat->response->subscribe);
           echo html::a($this->createLink('wechat', 'delete', "publicID=$public->id"), $lang->delete, "class='deleter'");
           ?>
           <a href='###' class='access' data-container='body' data-toggle='popover' data-placement='left' data-content='<?php printf($lang->wechat->accessInfo, $public->appSecret, $public->url, $public->token);?>'>
