@@ -31,4 +31,5 @@ $(document).ready(function()
         return false;
     });
 
+    if(v.isWechatMenu) $(".leftmenu a[href*='wechat']").parent().addClass('active');
 })
