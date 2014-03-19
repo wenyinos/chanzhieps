@@ -113,10 +113,16 @@ class wechatModel extends model
             $response = $this->getResponseByKey($public, $message->eventKey);    
         }
 
-        if(empty($response)) $response = $this->getResponseByKey($public, 'default');    
+        if(empty($response))
+        {
+            $response = $this->getResponseByKey($public, 'default');    
+        }
 
         if(!empty($response))
         {
+            $message->status   = $response->key == 'default' ? 'wait' : 'replied';
+            $message->response = $response->key;
+
             if($response->type == 'text' or $response->type == 'link')
             {
                 $reply = new stdclass();
@@ -125,11 +131,12 @@ class wechatModel extends model
             } 
             elseif($response->type == 'news')
             {
-                return $response->content;
+                $reply = $response->content;
             }
         }
-        return $reply;
+        $this->saveMessage($public, $message);
 
+        return $reply;
     }
 
     /**
@@ -486,5 +493,32 @@ class wechatModel extends model
             $response->articles[] = $article;
         }
         return $response;
+    }
+
+    /**
+     * Save message. 
+     * 
+     * @param  int      $public 
+     * @param  object   $data 
+     * @access public
+     * @return void
+     */
+    public function saveMessage($public, $data)
+    {
+        $message = new stdclass();
+        $message->public   = $public;
+        $message->wid      = isset($data->msgId) ? $data->msgId : '';
+        $message->from     = $data->fromUserName;
+        $message->to       = $data->toUserName;
+        $message->response = $data->response;
+        $message->type     = $data->msgType;
+        $message->content  = isset($data->content) ? $data->content : '';
+        $message->event    = isset($data->event) ? $data->event : '';
+        $message->eventKey = isset($data->eventKey) ? $data->eventKey : '';
+        $message->status   = isset($data->status) ? $data->status : 'wait';
+        $message->time     = helper::now();
+
+        $this->dao->insert(TABLE_WX_MESSAGE)->data($message)->autoCheck()->exec();
+        return !dao::isError();
     }
 }
