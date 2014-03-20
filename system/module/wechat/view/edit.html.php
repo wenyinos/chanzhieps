@@ -43,6 +43,10 @@
           <td><?php echo html::input('token', $public->token, "class='form-control'");?></td>
         </tr>
         <tr>
+          <th><?php echo $lang->wechat->certified;?></th>
+          <td><?php echo html::radio('certified', $lang->wechat->certifiedList, $public->certified);?></td>
+        </tr>
+        <tr>
           <th></th>
           <td><?php echo html::submitButton();?></td>
         </tr>

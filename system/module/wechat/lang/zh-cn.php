@@ -17,6 +17,7 @@ $lang->wechat->appID     = 'AppID';
 $lang->wechat->appSecret = 'AppSecret';
 $lang->wechat->token     = 'Token';
 $lang->wechat->url       = '接入地址';
+$lang->wechat->certified = '认证';
 $lang->wechat->users     = '微信会员';
 $lang->wechat->content   = '内容';
 
@@ -29,6 +30,9 @@ $lang->wechat->access    = '接入';
 
 $lang->wechat->typeList['subscribe'] = '订阅号';
 $lang->wechat->typeList['service']   = '服务号';
+
+$lang->wechat->certifiedList[1] = '是';
+$lang->wechat->certifiedList[0] = '否';
 
 $lang->wechat->response = new stdclass();
 
@@ -80,6 +84,27 @@ $lang->wechat->response->newsBlockList['hotArticle']    = '热门文章';
 $lang->wechat->response->newsBlockList['productTree']   = '产品分类';
 $lang->wechat->response->newsBlockList['latestProduct'] = '最新产品';
 $lang->wechat->response->newsBlockList['hotProduct']    = '热门产品';
+
+$lang->wechat->message = new stdclass();
+$lang->wechat->message->from     = '称呼';
+$lang->wechat->message->type     = '类型';
+$lang->wechat->message->status   = '状态';
+$lang->wechat->message->content  = '消息内容';
+$lang->wechat->message->response = '响应';
+$lang->wechat->message->menu     = '菜单';
+$lang->wechat->message->time     = '时间';
+
+$lang->wechat->message->list = '消息列表';
+
+$lang->wechat->message->typeList['text']     = '文本消息';
+$lang->wechat->message->typeList['image']    = '图片消息';
+$lang->wechat->message->typeList['voice']    = '语音消息';
+$lang->wechat->message->typeList['location'] = '地理位置消息';
+$lang->wechat->message->typeList['link']     = '链接消息';
+$lang->wechat->message->typeList['event']    = '事件消息';
+
+$lang->wechat->message->statusList['wait']    = '未回复';
+$lang->wechat->message->statusList['replied'] = '已回复';
 
 $lang->wechat->placeholder = new stdclass();
 $lang->wechat->placeholder->limit    = '请输条数，最多10条';
