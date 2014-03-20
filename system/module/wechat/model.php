@@ -31,7 +31,7 @@ class wechatModel extends model
      */
     public function getList()
     {
-        $publics = $this->dao->select('*')->from(TABLE_WX_PUBLIC)->orderBy('addedDate_desc')->fetchAll('id');
+        $publics = $this->dao->select('*')->from(TABLE_WX_PUBLIC)->orderBy('addedDate')->fetchAll('id');
         if(!$publics) return array();
         foreach($publics as $public) $public->url = rtrim(getWebRoot(true), '/') . commonModel::createFrontLink('wechat', 'response', "id=$public->id");
         return $publics;
@@ -520,5 +520,23 @@ class wechatModel extends model
 
         $this->dao->insert(TABLE_WX_MESSAGE)->data($message)->autoCheck()->exec();
         return !dao::isError();
+    }
+
+    /**
+     * Get message. 
+     * 
+     * @param  int      $public 
+     * @param  string   $orderBy 
+     * @param  object   $pager 
+     * @access public
+     * @return array 
+     */
+    public function getMessage($public, $orderBy, $pager = null)
+    {
+        return $this->dao->select('*')->from(TABLE_WX_MESSAGE)
+            ->where('public')->eq($public)
+            ->orderBy($orderBy)
+            ->page($pager)
+            ->fetchAll('id');
     }
 }

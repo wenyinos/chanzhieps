@@ -247,7 +247,7 @@ class wechat extends control
             $this->wechat->setResponse($public);
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
-            $response['result'] = 'success';
+            $response['result']  = 'success';
             $response['message'] = $this->lang->saveSuccess;
             if($group != 'menu') $response['locate']  = inlink('adminresponse', "publicID={$public}");
             $this->send($response);
@@ -301,5 +301,46 @@ class wechat extends control
     {
         if($this->wechat->deleteResponse($response)) $this->send(array('result' => 'success'));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
+    }
+
+    /**
+     * Browse message in admin.
+     * 
+     * @param int    $public
+     * @param string $orderBy
+     * @param int    $recTotal 
+     * @param int    $recPerPage 
+     * @param int    $pageID 
+     * @access public
+     * @return void
+     */
+    public function message($public = '', $orderBy = 'time_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    {
+        $this->lang->menuGroups->wechat = 'feedback';
+        $this->lang->wechat->menu       = $this->lang->feedback->menu;
+
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal, $recPerPage, $pageID);
+
+        if(!$public) $public = $this->dao->select('id')->from(TABLE_WX_PUBLIC)->orderBy('id')->limit(1)->fetch('id');
+        $messageList = $this->wechat->getMessage($public, $orderBy, $pager);
+
+        $menus = $this->dao->select('*')->from(TABLE_CATEGORY)->where('type')->like('wechat%')->fetchAll('id');
+        foreach($messageList as $message)
+        {
+            $response = $this->wechat->getResponseByKey($message->public, $message->response);
+
+            $menuId = str_replace('m_', '', $message->response);
+
+            if($response->group == 'menu') $message->content = $menus[$menuId]->name;
+        }
+
+        $this->view->messageList   = $messageList;
+        $this->view->publicList    = $this->wechat->getList();
+        $this->view->currentPublic = $public;
+        $this->view->menus         = $menus;
+        $this->view->pager         = $pager;
+        $this->view->orderBy       = $orderBy;
+        $this->display();
     }
 }
