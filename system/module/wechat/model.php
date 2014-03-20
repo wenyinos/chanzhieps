@@ -539,4 +539,73 @@ class wechatModel extends model
             ->page($pager)
             ->fetchAll('id');
     }
+
+    /**
+     * Pull fans.
+     * 
+     * @access public
+     * @return void
+     */
+    public function pullFans()
+    {
+        $publicList = $this->dao->select('*')->from(TABLE_WX_PUBLIC)->fetchAll();
+        foreach($publicList as $public)
+        {
+            $this->app->loadClass('wechatapi', true);
+            $api  = new wechatapi($public->token, $public->appID, $public->appSecret, $this->config->debug);
+            $fans = $api->getFans();
+            foreach($fans->data->openid as $openID)
+            {
+                $pulledFan = $this->dao->select("count(*) as count")->from(TABLE_OAUTH)
+                    ->where('provider')->eq('wechat_' . $public->id)
+                    ->andWhere('openID')->eq($openID)
+                    ->fetch('count');
+
+                if($pulledFan) continue;
+
+                $user = array();
+                $user['openID']   = $openID;
+                $user['provider'] = 'wechat_' . $public->id;
+                $user['account']  = uniqid('wx_');
+                $user['join']     = helper::now();
+
+                $this->dao->insert(TABLE_OAUTH)->data($user, $skip = 'join')->exec();
+                $this->dao->insert(TABLE_USER)->data($user, $skip = 'openID,provider')->exec();
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Get fans info. 
+     * 
+     * @param  array    $users 
+     * @access public
+     * @return void
+     */
+    public function getFansInfo($users)
+    {
+        foreach($users as $user)
+        {
+            if(!$user->provider) continue;
+            $public = $this->getByID(str_replace('wechat_', '', $user->provider));
+            $this->app->loadClass('wechatapi', true);
+            $api = new wechatapi($public->token, $public->appID, $public->appSecret, $this->config->debug);
+            $fan = $api->getUserInfo($user->openID);
+
+            if($fan->subscribe != 1) continue;
+
+            $user->nickname = $fan->nickname;
+            $user->realname = $fan->nickname;
+            $user->address  = $fan->country . ' ' . $fan->province . ' ' . $fan->city;
+            $user->join     = date('Y-m-d H:i:s', $fan->subscribe_time);
+
+            if($fan->sex == 0) $user->gender = 'u';
+            if($fan->sex == 1) $user->gender = 'm';
+            if($fan->sex == 2) $user->gender = 'f';
+
+            $this->dao->update(TABLE_USER)->data($user, $skip = 'openID,provider')->where('id')->eq($user->id)->exec();
+        }
+        return true;
+    }
 }

@@ -333,11 +333,7 @@ class wechatapi
         $result = $this->post($url, $menu);
         $result = json_decode($result);
 
-        if(isset($result->errcode) and $result->errcode == 0) 
-        {
-            return array('result' => 'success');
-        }
-
+        if(isset($result->errcode) and $result->errcode == 0) return array('result' => 'success');
         return array('result' => 'fail' , 'message' => $result->errcode . ':' . $result->errmsg);
     }
 

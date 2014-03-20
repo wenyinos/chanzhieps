@@ -15,9 +15,12 @@
   <div class="panel-heading">
     <strong><i class="icon-group"></i> <?php echo $lang->user->list;?></strong>
     <div class="panel-actions">
-      <form method='post' class='form-inline form-search'>
+    <form method='get' class='form-inline form-search'>
         <div class="input-group">
-          <?php echo html::input('query', $query, "class='form-control search-query' placeholder='{$lang->user->inputUserName}'"); ?>
+          <?php
+          echo html::hidden('m','user') . html::hidden('f','admin');
+          echo html::input('user', $this->get->user, "class='form-control search-query' placeholder='{$lang->user->inputUserName}'"); 
+          ?>
           <span class="input-group-btn">
             <?php echo html::submitButton($lang->user->searchUser,"btn btn-primary"); ?>
           </span>
