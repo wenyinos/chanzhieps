@@ -249,7 +249,8 @@ class wechat extends control
 
             $response['result']  = 'success';
             $response['message'] = $this->lang->saveSuccess;
-            if($group != 'menu') $response['locate']  = inlink('adminresponse', "publicID={$public}");
+            if($group == '') $response['locate'] = inlink('adminresponse', "publicID={$public}");
+            if($group == 'default' or $group == 'subscribe') $response['locate'] = inlink('admin');
             $this->send($response);
         }
 
