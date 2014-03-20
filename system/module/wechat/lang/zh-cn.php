@@ -17,6 +17,7 @@ $lang->wechat->appID     = 'AppID';
 $lang->wechat->appSecret = 'AppSecret';
 $lang->wechat->token     = 'Token';
 $lang->wechat->url       = '接入地址';
+$lang->wechat->certified = '认证';
 $lang->wechat->users     = '微信会员';
 $lang->wechat->content   = '内容';
 
@@ -29,6 +30,9 @@ $lang->wechat->access            = '接入';
 
 $lang->wechat->typeList['subscribe'] = '订阅号';
 $lang->wechat->typeList['service']   = '服务号';
+
+$lang->wechat->certifiedList[1] = '是';
+$lang->wechat->certifiedList[0] = '否';
 
 $lang->wechat->response = new stdclass();
 

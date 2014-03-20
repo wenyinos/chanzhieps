@@ -308,6 +308,7 @@ CREATE TABLE IF NOT EXISTS `eps_wx_public` (
   `primary`   tinyint(3) NOT NULL DEFAULT 0,
   `type`      enum('subscribe', 'service') NOT NULL,
   `status`    enum('wait', 'normal') NOT NULL,
+  `certified` enum('1', '0') NOT NULL DEFAULT '0',
   `addedDate` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
