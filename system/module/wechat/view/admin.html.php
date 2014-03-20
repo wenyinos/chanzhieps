@@ -16,7 +16,7 @@
     <strong><i class="icon-list-ul"></i> <?php echo $lang->wechat->list;?></strong>
     <div class='panel-actions'>
       <?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i>', "class='btn btn-primary', title='{$lang->wechat->create}'");?>
-      <?php echo html::a($this->createLink('user', 'admin'), '<i class="icon-user"></i> ', "class='btn btn-primary' title='{$lang->wechat->users}'");?>
+      <?php echo html::a($this->createLink('user', 'admin', "provider=wechat"), '<i class="icon-user"></i> ', "class='btn btn-primary' title='{$lang->wechat->users}'");?>
     </div>
   </div>
   <table class='table table-hover table-striped tablesorter'>

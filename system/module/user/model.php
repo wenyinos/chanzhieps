@@ -16,15 +16,16 @@ class userModel extends model
     /**
      * Get users List.
      *
-     * @param string  $userName
      * @param object  $pager
      * @access public
      * @return object 
      */
-    public function getList($userName = '', $pager = null)
+    public function getList($pager = null)
     {
-        return $this->dao->select('*')->from(TABLE_USER)
-            ->beginIF($userName != '')->where('account')->like("%$userName%")->fi()
+        return $this->dao->select('*')->from(TABLE_USER)->alias('u')
+            ->leftJoin(TABLE_OAUTH)->alias('o')->on('u.account = o.account')->where('1')
+            ->beginIF($this->get->user)->andWhere('u.account')->like("%{$this->get->user}%")->fi()
+            ->beginIF($this->get->provider)->andWhere('o.provider')->like("%{$this->get->provider}%")->fi()
             ->orderBy('id_asc')
             ->page($pager)
             ->fetchAll();

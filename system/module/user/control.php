@@ -285,22 +285,26 @@ class user extends control
     /**
      *  Admin users list.
      *
-     * @param  string $query
-     * @param  int    $recTotal
-     * @param  int    $recPerPage
-     * @param  int    $pagerID
      * @access public
      * @return void
      */
-    public function admin($query = '', $recTotal = 0, $recPerPage = 10, $pageID = 1)
+    public function admin()
     {
-        if($this->post->query) die($this->locate(inlink('admin', "query={$this->post->query}&recTotal=0&recPerPage=$recPerPage&pageID=1")));
+         /* Pull wechat follower */
+        $this->loadModel('wechat')->pullFans();    
 
         $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal, $recPerPage, $pageID);
+        $get = fixer::input('get')
+            ->setDefault('recTotal', 0)
+            ->setDefault('recPerPage', 10)
+            ->setDefault('pageID', 1)
+            ->get();
+        $pager = new pager($get->recTotal, $get->recPerPage, $get->pageID);
 
-        $this->view->users = $this->user->getList($query, $pager);
-        $this->view->query = $query;
+        $users = $this->user->getList($pager);
+        $this->wechat->getFansInfo($users);
+
+        $this->view->users = $users;
         $this->view->pager = $pager;
 
         $this->view->title = $this->lang->user->list;
