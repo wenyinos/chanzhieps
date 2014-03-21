@@ -327,13 +327,17 @@ class wechat extends control
         $messageList = $this->wechat->getMessage($public, $orderBy, $pager);
 
         $menus = $this->dao->select('*')->from(TABLE_CATEGORY)->where('type')->like('wechat%')->fetchAll('id');
+        $users = $this->loadModel('user')->getList();
+
         foreach($messageList as $message)
         {
-            $response = $this->wechat->getResponseByKey($message->public, $message->response);
-
-            $menuId = str_replace('m_', '', $message->response);
-
-            if($response->group == 'menu') $message->content = $menus[$menuId]->name;
+            if(strpos($message->response, 'm_') !== false)
+            {
+                $menuId = str_replace('m_', '', $message->response);
+                $message->content = $menus[$menuId]->name;
+            }
+            
+            foreach($users as $user) if(!empty($user->openID) && $user->openID == $message->from) $message->from = $user->realname;
         }
 
         $this->view->messageList   = $messageList;
