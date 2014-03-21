@@ -64,7 +64,7 @@
         </td>
         <td>
           <?php
-          echo html::a($this->createLink('wechat', 'setResponse', "public={$response->public}&group={$response->group}&key=$response->key"), $lang->edit);
+          echo html::a($this->createLink('wechat', 'setResponse', "public={$response->public}&group={$response->group}&key=$response->key"), $lang->edit, "data-toggle='modal'");
           echo html::a($this->createLink('wechat', 'deleteResponse', "responseID=$response->id"), $lang->delete, "class='deleter'");
           ?>
         </td>
