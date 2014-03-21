@@ -110,6 +110,7 @@ $lang->wechat->placeholder = new stdclass();
 $lang->wechat->placeholder->limit    = '请输条数，最多10条';
 $lang->wechat->placeholder->category = '请选择类目，最多10个';
 
+$lang->wechat->needCertified  = "此功能需要公众号认证后使用。";
 $lang->wechat->accessInfo = <<<EOT
 <ul style="padding-left: 10px">
   <li><strong>AppSecret</strong>： %s </li>
