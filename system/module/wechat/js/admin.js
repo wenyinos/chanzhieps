@@ -7,6 +7,8 @@ $(document).ready(function()
         $(".access:not('.showThis')").popover('hide');
     });
 
+    $('.text-muted').popover('hide').removeClass('showThis');
+
     $(document).click(function()
     {
         $('.access').popover('hide').removeClass('showThis');
