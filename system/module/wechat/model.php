@@ -525,16 +525,16 @@ class wechatModel extends model
     /**
      * Get message. 
      * 
-     * @param  int      $public 
+     * @param  string   $status 
      * @param  string   $orderBy 
      * @param  object   $pager 
      * @access public
      * @return array 
      */
-    public function getMessage($public, $orderBy, $pager = null)
+    public function getMessage($status, $orderBy, $pager = null)
     {
         return $this->dao->select('*')->from(TABLE_WX_MESSAGE)
-            ->where('public')->eq($public)
+            ->where('status')->eq($status)
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');

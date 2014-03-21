@@ -307,15 +307,15 @@ class wechat extends control
     /**
      * Browse message in admin.
      * 
-     * @param int    $public
-     * @param string $orderBy
-     * @param int    $recTotal 
-     * @param int    $recPerPage 
-     * @param int    $pageID 
+     * @param string  $status
+     * @param string  $orderBy
+     * @param int     $recTotal 
+     * @param int     $recPerPage 
+     * @param int     $pageID 
      * @access public
      * @return void
      */
-    public function message($public = '', $orderBy = 'time_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function message($status = 'wait', $orderBy = 'time_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
         $this->lang->menuGroups->wechat = 'feedback';
         $this->lang->wechat->menu       = $this->lang->feedback->menu;
@@ -323,8 +323,7 @@ class wechat extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        if(!$public) $public = $this->dao->select('id')->from(TABLE_WX_PUBLIC)->orderBy('id')->limit(1)->fetch('id');
-        $messageList = $this->wechat->getMessage($public, $orderBy, $pager);
+        $messageList = $this->wechat->getMessage($status, $orderBy, $pager);
 
         $menus = $this->dao->select('*')->from(TABLE_CATEGORY)->where('type')->like('wechat%')->fetchAll('id');
         $users = $this->loadModel('user')->getList();
@@ -340,12 +339,9 @@ class wechat extends control
             foreach($users as $user) if(!empty($user->openID) && $user->openID == $message->from) $message->from = $user->realname;
         }
 
-        $this->view->messageList   = $messageList;
-        $this->view->publicList    = $this->wechat->getList();
-        $this->view->currentPublic = $public;
-        $this->view->menus         = $menus;
-        $this->view->pager         = $pager;
-        $this->view->orderBy       = $orderBy;
+        $this->view->messageList = $messageList;
+        $this->view->status      = $status;
+        $this->view->pager       = $pager;
         $this->display();
     }
 }

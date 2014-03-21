@@ -16,20 +16,18 @@
     <strong><?php echo '<i class="icon-comment-alt"></i> ' . $lang->wechat->message->list;?></strong>
     <?php
     echo '&nbsp; &nbsp; &nbsp;';
-    foreach($publicList as $public):
-    echo html::a(inlink('message', "public=$public->id"), $public->name, $currentPublic == $public->id ? "class='active'" : '');
-    endforeach;
+    echo html::a(inlink('message', "status=wait"), $lang->wechat->message->statusList['wait'], $status == 'wait' ? "class='active'" : '');
+    echo html::a(inlink('message', "status=replied"), $lang->wechat->message->statusList['replied'], $status == 'replied' ? "class='active'" : '');
     ?>
   </div>
   <table class='table table-hover table-striped tablesorter'>
     <thead>
       <tr class='text-center'>
-        <?php $vars = "public=$currentPublic&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
         <th class='w-100px'><?php echo $lang->wechat->message->from;?></th>
         <th><?php echo $lang->wechat->message->content;?></th>
         <th class='w-160px'><?php echo $lang->wechat->message->response;?></th>
         <th class='w-100px'><?php echo $lang->wechat->message->type;?></th>
-        <th class='w-100px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->wechat->message->status);?></th>
+        <th class='w-100px'><?php echo $lang->wechat->message->status;?></th>
         <th class='w-160px'><?php echo $lang->wechat->message->time;?></th>
       </tr>
     </thead>
