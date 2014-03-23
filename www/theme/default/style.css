@@ -84,7 +84,6 @@
 .carousel-inner>.item, .carousel-inner>.item>a {text-align: center;}
 .carousel-inner>.item>img, .carousel-inner>.item>a>img {min-width: 100%; height: auto; max-height: 600px; max-width: 100%;}
 .carousel-caption {max-width: 550px; top:10%; left: 12%; bottom: 20px; text-align:left; text-shadow: 0 1px 1px rgba(0,0,0,.4);}
-.carousel-caption{left: 12%\0 !important}
 .carousel-caption ul{margin: 0; padding: 10px 0 10px 20px; line-height: 1.5em;}
 .carousel-caption h2,.carousel-caption .lead {margin-top: 10px;}
 .carousel-caption .btn {margin-top: 10px; min-width: 120px;}
@@ -336,6 +335,7 @@ a.tag-link {color: inherit;}
 #powerby:hover:before {left: 120%;}
 
 /* responsive for mobile devices */
+@media (min-width: 992px) {.carousel-caption{left: 12%\0!important}}
 @media (max-width: 991px)
 {
   .nav-primary.nav-stacked {border: 1px solid #ddd; border-radius: 4px}
@@ -372,13 +372,7 @@ a.tag-link {color: inherit;}
   .carousel-caption h2 {font-size: 18px;}
   .carousel-caption .btn {font-size: 14px; padding: 8px 15px;}
 }
-@media (max-width: 620px)
-{
-  .carousel-caption {top: 10px; padding-top: 0;}
-  .carousel-caption h2 {font-size: 16px;}
-  .carousel-caption ul {font-size: 12px; line-height: 1.2em; padding: 0 0 0 20px}
-  .carousel-caption .btn {font-size: 14px; padding: 6px 15px;}
-}
+@media (max-width: 620px) {.carousel-caption {top: 10px; padding-top: 0;} .carousel-caption h2 {font-size: 16px;} .carousel-caption ul {font-size: 12px; line-height: 1.2em; padding: 0 0 0 20px} .carousel-caption .btn {font-size: 14px; padding: 6px 15px;}}
 @media (max-width: 480px) {.page {color :transparent; white-space:nowrap; overflow:hidden;} .carousel-caption ul {display: none}}
 
 /* go2top */
@@ -395,7 +389,7 @@ a.tag-link {color: inherit;}
  .table-borderless td {border-left: 1px solid #ddd}
  .table-borderless td:first-child {border-left: none}
 .popover {max-width: 900px}
-.docker-right .icon-mobile-phone, .docker-right .icon-weixin {font-size: 42px; color: #fff; background: #145CCD; display: inline-block; width: 50px; line-height: 50px; border-radius: 25px; vertical-align: middle; margin-right: 10px;}
+.docker-right .icon-mobile-phone, .docker-right .icon-weixin {font-size: 42px; color: #fff; background: #145CCD; display: inline-block; width: 50px; line-height: 50px; height: 50px; border-radius: 25px; vertical-align: middle; margin-right: 10px;}
 .docker-right .icon-weixin {background: #64ab23 url(images/main/weixin.png) no-repeat center}
 .docker-right  {vertical-align: middle;}
 .docker-right img {width: 240px; height: 240px; margin-top: 10px;}
