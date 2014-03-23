@@ -94,6 +94,7 @@ $lang->wechat->message->response = '响应';
 $lang->wechat->message->menu     = '菜单';
 $lang->wechat->message->time     = '时间';
 $lang->wechat->message->reply    = '回复';
+$lang->wechat->message->record   = '消息记录';
 
 $lang->wechat->message->list = '消息列表';
 
@@ -102,10 +103,26 @@ $lang->wechat->message->typeList['image']    = '图片消息';
 $lang->wechat->message->typeList['voice']    = '语音消息';
 $lang->wechat->message->typeList['location'] = '地理位置消息';
 $lang->wechat->message->typeList['link']     = '链接消息';
-$lang->wechat->message->typeList['event']    = '事件消息';
+$lang->wechat->message->typeList['subscribe']   = '订阅';
+$lang->wechat->message->typeList['unsubscribe'] = '取消订阅';
+$lang->wechat->message->typeList['SCAN']        = '扫描带参数二维码';
+$lang->wechat->message->typeList['LOCATION']    = '上报地理位置';
+$lang->wechat->message->typeList['CLICK']       = '点击菜单';
+$lang->wechat->message->typeList['VIEW']        = '访问菜单';
 
-$lang->wechat->message->statusList['wait']    = '未回复';
-$lang->wechat->message->statusList['replied'] = '已回复';
+
+$lang->wechat->message->eventList['subscribe']   = '订阅';
+$lang->wechat->message->eventList['unsubscribe'] = '取消订阅';
+$lang->wechat->message->eventList['SCAN']        = '扫描带参数二维码';
+$lang->wechat->message->eventList['LOCATION']    = '上报地理位置';
+$lang->wechat->message->eventList['CLICK']       = '点击菜单';
+$lang->wechat->message->eventList['VIEW']        = '访问菜单';
+
+$lang->wechat->message->tabList[] = 'replied=0|未回复';
+$lang->wechat->message->tabList[] = 'type=text|留言信息';
+$lang->wechat->message->tabList[] = 'type=subscribe|新订阅';
+$lang->wechat->message->tabList[] = 'type=unsubscribe|取消订阅';
+$lang->wechat->message->tabList[] = 'replied=1|已回复';
 
 $lang->wechat->placeholder = new stdclass();
 $lang->wechat->placeholder->limit    = '请输条数，最多10条';

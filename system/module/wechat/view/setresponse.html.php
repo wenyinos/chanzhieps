@@ -63,7 +63,7 @@ include '../../common/view/chosen.html.php';
             <td colspan='2'>
               <div class='form-group'>
                 <div class='col-sm-3'><?php echo html::select('source', $this->lang->wechat->response->textBlockList, (isset($response->source) and $response->source != 'manual') ? $response->source : 'manual', "class='form-control'");?></div>
-                <div class='col-sm-10 manual'><?php echo html::textarea('content', (isset($response->source) and $response->source == 'manual') ? $response->content : '', "class='form-control'");?></div>
+                <div class='col-sm-10 manual'><?php echo html::textarea('content', (isset($response->source) and $response->source == 'manual') ? $response->content : '', "class='form-control' rows='5'");?></div>
               </div>
             </td>
           </tr>
