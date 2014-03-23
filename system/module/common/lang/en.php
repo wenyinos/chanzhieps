@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.zentao.net
  */
-/* common sign setting. */
+/* Common sign setting. */
 $lang->colon    = ' : ';
 $lang->prev     = '‹';
 $lang->next     = '›';
@@ -295,8 +295,11 @@ define('DT_TIME1',     'H:i:s');
 define('DT_TIME2',     'H:i');
 
 /* Keywords for chanzhi. */
-$lang->k  = '蝉知，开源免费的企业建站系统!;';
-$lang->k .= '蝉知，开源免费的cms!;';
-$lang->k .= '蝉知，免费建站首选！;';
-$lang->k .= '蝉知，企业网站建设专家！;';
-$lang->k .= '蝉知，开源php企业建站系统！';
+$lang->k  = '蝉知门户，开源免费的企业建站系统!;';
+$lang->k .= '蝉知门户，开源免费的cms!;';
+$lang->k .= '蝉知门户，免费建站首选！;';
+$lang->k .= '蝉知门户，企业网站建设专家！;';
+$lang->k .= '蝉知门户，开源php企业建站系统！';
+$lang->k .= '蝉知门户，微网站专家！';
+$lang->k .= '蝉知门户，微网站首选！';
+$lang->k .= '蝉知门户，微信营销首选！';
