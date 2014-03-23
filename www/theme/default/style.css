@@ -367,8 +367,19 @@ a.tag-link {color: inherit;}
   .ke-toolbar {display: none !important;}
 
   .page {color :transparent; white-space:nowrap; overflow:hidden;}
+
+  .carousel-caption {top: 10px; padding-top: 5px;}
+  .carousel-caption h2 {font-size: 18px;}
+  .carousel-caption .btn {font-size: 14px; padding: 8px 15px;}
 }
-@media (max-width: 480px) {.page {color :transparent; white-space:nowrap; overflow:hidden;}}
+@media (max-width: 620px)
+{
+  .carousel-caption {top: 10px; padding-top: 0;}
+  .carousel-caption h2 {font-size: 16px;}
+  .carousel-caption ul {font-size: 12px; line-height: 1.2em; padding: 0 0 0 20px}
+  .carousel-caption .btn {font-size: 14px; padding: 6px 15px;}
+}
+@media (max-width: 480px) {.page {color :transparent; white-space:nowrap; overflow:hidden;} .carousel-caption ul {display: none}}
 
 /* go2top */
 #go2top {position: fixed;font-size: 20px; color: #999; bottom: 80px; right: -40px; width: 40px; line-height: 40px; text-align: center; background-color: #eee; border-radius: 4px; border: 1px solid #ccc; box-shadow: inset 0 1px 1px rgba(255,255,255,0.5),inset 0 -1px 1px rgba(0,0,0,0.1); text-shadow:1px 1px 0px #fff; display: none;}
@@ -387,7 +398,7 @@ a.tag-link {color: inherit;}
 .docker-right .icon-mobile-phone, .docker-right .icon-weixin {font-size: 42px; color: #fff; background: #145CCD; display: inline-block; width: 50px; line-height: 50px; border-radius: 25px; vertical-align: middle; margin-right: 10px;}
 .docker-right .icon-weixin {background: #64ab23 url(images/main/weixin.png) no-repeat center}
 .docker-right  {vertical-align: middle;}
-.docker-right img {width: 240px; height: 240px;}
+.docker-right img {width: 240px; height: 240px; margin-top: 10px;}
 
 /* bootbox */
 .bootbox-alert .modal-dialog {width: 400px; margin-top: 10%;}
