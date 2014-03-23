@@ -369,6 +369,9 @@ class threadModel extends model
      */
     public function printSpeaker($speaker)
     {
+        if(isset($speaker->join)) $speaker->join = substr($speaker->join, 0, 10);
+        if(isset($speaker->last)) $speaker->last = substr($speaker->last, 0, 10);
+
         echo  <<<EOT
         <strong class='thread-author'><i class='icon-user'></i> {$speaker->realname}</strong>
         <ul class='list-unstyled'>

@@ -375,6 +375,7 @@ class treeModel extends model
         $linkHtml  = $category->name;
         if($category->parent == 0)     $linkHtml .= ' ' . html::a(helper::createLink('tree', 'children', "type={$category->type}&category={$category->id}"), $lang->wechatMenu->children, "class='ajax'");
         if(empty($category->children)) $linkHtml .= ' ' . html::a(helper::createLink('wechat', 'setResponse', "public={$public}&group=menu&key=m_{$category->id}"), $lang->tree->setResponse, "class='ajax'");
+        $linkHtml .= ' ' . html::a(helper::createLink('tree', 'delete',   "category={$category->id}"), $lang->delete, "class='deleter'");
 
         return $linkHtml;
     }

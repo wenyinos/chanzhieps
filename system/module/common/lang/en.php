@@ -23,7 +23,7 @@ $lang->back2Top = 'T<br/>O<br/>P';
 /* Lang items for xirang. */
 $lang->chanzhiEPS  = 'chanzhiEPS';
 $lang->chanzhiEPSx = 'Chanzhi';
-$lang->poweredBy   = "<a href='http://www.chanzhi.org/?v=%s' target='_blank'>{$lang->chanzhiEPS} %s</a>";
+$lang->poweredBy   = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>{$lang->chanzhiEPSx} %s</a></span>";
 
 /* IE6 alert.  */
 $lang->IE6Alert= <<<EOT
@@ -59,6 +59,8 @@ $lang->changePassword = 'Change password';
 $lang->forgotPassword = 'Forgot password?';
 $lang->currentPos     = 'Positon';
 $lang->categoryMenu   = 'Categories';
+$lang->wechatTip      = 'Wechat';
+$lang->qrcodeTip      = 'Mobile';
 
 /* Global action items. */
 $lang->reset          = 'Reset';

@@ -290,6 +290,9 @@ class user extends control
      */
     public function admin()
     {
+        if(empty($this->config->oauth->sina->clientID)) unset($this->lang->user->menu->weibo);
+        if(empty($this->config->oauth->qq->clientID))   unset($this->lang->user->menu->qq);
+
          /* Pull wechat follower */
         $this->loadModel('wechat')->pullFans();    
 

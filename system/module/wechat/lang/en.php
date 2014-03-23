@@ -17,6 +17,7 @@ $lang->wechat->appID     = 'AppID';
 $lang->wechat->appSecret = 'AppSecret';
 $lang->wechat->token     = 'Token';
 $lang->wechat->url       = 'URL';
+$lang->wechat->certified = 'Certified';
 $lang->wechat->users     = 'Users';
 $lang->wechat->content   = 'Content';
 
@@ -24,28 +25,27 @@ $lang->wechat->create            = 'Create';
 $lang->wechat->edit              = 'Edit';
 $lang->wechat->admin             = 'Admin';
 $lang->wechat->list              = 'List';
-$lang->wechat->setMenu           = 'Set Menu';
-$lang->wechat->adminResponse     = 'Admin Response';
-$lang->wechat->setResponse       = 'Set Response';
-$lang->wechat->defaultResponse   = 'Default Response';
-$lang->wechat->subscribeResponse = 'Subscribe Response';
-$lang->wechat->access            = 'Access';
+$lang->wechat->setMenu           = 'Menu';
+$lang->wechat->access            = 'Integrate';
 
 $lang->wechat->typeList['subscribe'] = 'Subscribe';
 $lang->wechat->typeList['service']   = 'Service';
 
+$lang->wechat->certifiedList[1] = 'Yes';
+$lang->wechat->certifiedList[0] = 'No';
+
 $lang->wechat->response = new stdclass();
 
-$lang->wechat->response->keywords  = 'Keywords';
-$lang->wechat->response->set       = 'Set Response';
-$lang->wechat->response->create    = 'Create Keyword';
-$lang->wechat->response->default   = 'Default Response';
-$lang->wechat->response->subscribe = 'Subscribe Response';
+$lang->wechat->response->keywords  = 'Key';
+$lang->wechat->response->set       = 'Response';
+$lang->wechat->response->create    = 'Add';
+$lang->wechat->response->default   = 'Default';
+$lang->wechat->response->subscribe = 'Subscribe';
 
 $lang->wechat->response->type     = 'Type';
 $lang->wechat->response->source   = 'Source';
 $lang->wechat->response->module   = 'Module';
-$lang->wechat->response->block    = 'Block';
+$lang->wechat->response->block    = 'Content';
 $lang->wechat->response->link     = 'Link';
 $lang->wechat->response->category = 'Category';
 $lang->wechat->response->limit    = 'Limit';
@@ -78,10 +78,10 @@ $lang->wechat->response->textBlockList['company'] = 'Company';
 $lang->wechat->response->textBlockList['contact'] = 'Contact';
 $lang->wechat->response->textBlockList['manual']  = 'Manual';
 
-$lang->wechat->response->newsBlockList['articleTree']   = 'Article Tree';
+$lang->wechat->response->newsBlockList['articleTree']   = 'Article catories';
 $lang->wechat->response->newsBlockList['latestArticle'] = 'Latest Article';
 $lang->wechat->response->newsBlockList['hotArticle']    = 'Hot Article';
-$lang->wechat->response->newsBlockList['productTree']   = 'Product Tree';
+$lang->wechat->response->newsBlockList['productTree']   = 'Product catories';
 $lang->wechat->response->newsBlockList['latestProduct'] = 'Latest Product';
 $lang->wechat->response->newsBlockList['hotProduct']    = 'Hot Product';
 
@@ -93,23 +93,32 @@ $lang->wechat->message->content  = 'Content';
 $lang->wechat->message->response = 'Response';
 $lang->wechat->message->menu     = 'Menu';
 $lang->wechat->message->time     = 'Time';
+$lang->wechat->message->reply    = 'Reply';
+$lang->wechat->message->record   = 'Records';
+$lang->wechat->message->list     = 'List';
 
-$lang->wechat->message->list = 'List';
+$lang->wechat->message->typeList['text']        = 'Text';
+$lang->wechat->message->typeList['image']       = 'Image';
+$lang->wechat->message->typeList['voice']       = 'Voice';
+$lang->wechat->message->typeList['location']    = 'Location';
+$lang->wechat->message->typeList['link']        = 'Link';
+$lang->wechat->message->typeList['subscribe']   = 'Subscribe';
+$lang->wechat->message->typeList['unsubscribe'] = 'Unsubscribe';
+$lang->wechat->message->typeList['scan']        = 'Scan';
+$lang->wechat->message->typeList['click']       = 'Click';
+$lang->wechat->message->typeList['view']        = 'View';
 
-$lang->wechat->message->typeList['text']     = 'Text';
-$lang->wechat->message->typeList['image']    = 'Image';
-$lang->wechat->message->typeList['voice']    = 'Voice';
-$lang->wechat->message->typeList['location'] = 'Location';
-$lang->wechat->message->typeList['link']     = 'Link';
-$lang->wechat->message->typeList['event']    = 'Event';
-
-$lang->wechat->message->statusList['wait']    = 'Wait';
-$lang->wechat->message->statusList['replied'] = 'Replied';
+$lang->wechat->message->tabList[] = 'replied=0|Unreplied';
+$lang->wechat->message->tabList[] = 'type=text|Message';
+$lang->wechat->message->tabList[] = 'type=subscribe|Subscribe';
+$lang->wechat->message->tabList[] = 'type=unsubscribe|Unsubscribe';
+$lang->wechat->message->tabList[] = 'replied=1|Replied';
 
 $lang->wechat->placeholder = new stdclass();
-$lang->wechat->placeholder->limit    = 'Please input the number, no more than 10';
-$lang->wechat->placeholder->category = 'Please select the category ,no more than 10';
+$lang->wechat->placeholder->limit    = '<=10';
+$lang->wechat->placeholder->category = 'Max 10 categories';
 
+$lang->wechat->needCertified  = "This feature needs the account to be certified.";
 $lang->wechat->accessInfo = <<<EOT
 <ul style="padding-left: 10px">
   <li><strong>AppSecret</strong>： %s </li>

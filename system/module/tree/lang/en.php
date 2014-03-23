@@ -55,3 +55,14 @@ $lang->board->readonlyList[1] = 'Readonly';
 $lang->board->placeholder = new stdclass();
 $lang->board->placeholder->moderators  = "Moderators'account, Separated with" . '","';
 $lang->board->placeholder->setChildren = 'Forum needs tow levels boards.';
+
+/* Lang items for wechat menu. */
+$lang->wechatMenu = new stdclass();
+$lang->wechatMenu->common     = 'Menu for public account';
+$lang->wechatMenu->name       = 'Title';
+$lang->wechatMenu->parent     = 'Parent';
+$lang->wechatMenu->children   = "Children";
+$lang->wechatMenu->delete     = "Delete";
+$lang->wechatMenu->commit     = "Sync";
+
+$lang->wechatMenu->setResponse = 'Response';
