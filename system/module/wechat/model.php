@@ -669,7 +669,7 @@ class wechatModel extends model
             ->set('wid')->eq($message->wid)
             ->set('`from`')->eq($this->app->user->account)
             ->set('to')->eq($message->from)
-            ->set('content')->eq($reply->content)
+            ->set('content')->eq($this->post->content)
             ->set('type')->eq('reply')
             ->set('time')->eq(helper::now())
             ->autoCheck()
@@ -689,10 +689,11 @@ class wechatModel extends model
     public function getRecords($message)
     {
         $records = $this->dao->select('*')->from(TABLE_WX_MESSAGE)->where('public')->eq($message->public)->andWhere('`from`')->eq($message->from)->fetchAll();
-        $replies = $this->dao->select('*')->from(TABLE_WX_MESSAGE)->where('public')->eq($message->public)->andWhere('`to`')->eq($message->from)->andWhere('type')->eq('reply')->fetchAll('wid');
+        $replies = $this->dao->select('*')->from(TABLE_WX_MESSAGE)->where('public')->eq($message->public)->andWhere('`to`')->eq($message->from)->andWhere('type')->eq('reply')->fetchGroup('wid');
+
         foreach($records as $record)
         {
-             if(isset($replies[$record->wid])) $record->reply = $replies[$record->wid];
+             if(isset($replies[$record->wid])) $record->replies = $replies[$record->wid];
         }
         return $records;
     }

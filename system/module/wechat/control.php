@@ -71,6 +71,13 @@ class wechat extends control
         if(empty($message)) die();
         $this->setAPI($message->public);
 
+        $this->view->user = $this->dao->select('*')
+            ->from(TABLE_OAUTH)->alias('o')
+            ->leftJoin(TABLE_USER)->alias('u')
+            ->on('o.account=u.account')
+            ->where('o.openID')->eq($message->from)
+            ->fetch();
+
         if($_POST) $this->send($this->wechat->reply($this->api, $message));
 
         $this->view->records = $this->wechat->getRecords($message);
