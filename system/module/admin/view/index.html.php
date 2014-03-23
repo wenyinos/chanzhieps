@@ -12,6 +12,7 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='container' id='shortcutBox'>
+
   <?php if(strpos($this->server->php_self, '/admin.php') !== false && empty($this->config->global->ignoreAdminEntry)):?>
   <form method='post' id='ajaxForm' action='<?php echo $this->createLink('admin', 'ignore');?>'>
   <div class="alert alert-danger">
@@ -23,32 +24,32 @@
 
   <div class='row'>
     <div class='col-md-4 col-sm-6'> 
-      <div class="shortcut article-create">
-        <?php echo html::a($this->createLink('article', 'create'), '<h3>' . $lang->admin->shortcuts->createArticle . '</h3>')?>
-      </div>
-    </div>
-    <div class='col-md-4 col-sm-6'>
       <div class="shortcut article-admin">
-        <?php echo html::a($this->createLink('product', 'create'), '<h3>' . $lang->admin->shortcuts->createProduct . '</h3>')?>
+        <?php echo html::a($this->createLink('article', 'create'), '<h3>' . $lang->admin->shortcuts->article . '</h3>')?>
       </div>
     </div>
     <div class='col-md-4 col-sm-6'>
-      <div class="shortcut category">
-        <?php echo html::a($this->createLink('message', 'admin'), '<h3>' . $lang->admin->shortcuts->comment . '</h3>')?>  
+      <div class="shortcut product-admin">
+        <?php echo html::a($this->createLink('product', 'create'), '<h3>' . $lang->admin->shortcuts->product . '</h3>')?>
       </div>
     </div>
     <div class='col-md-4 col-sm-6'>
-      <div class="shortcut site">
+      <div class="shortcut feedback-admin">
+        <?php echo html::a($this->createLink('message', 'admin'), '<h3>' . $lang->admin->shortcuts->feedback . '</h3>')?>  
+      </div>
+    </div>
+    <div class='col-md-4 col-sm-6'>
+      <div class="shortcut site-admin">
         <?php echo html::a($this->createLink('site', 'setBasic'), '<h3>' . $lang->admin->shortcuts->site . '</h3>')?>
       </div>
     </div>
     <div class='col-md-4 col-sm-6'>
-      <div class="shortcut company">
+      <div class="shortcut company-admin">
         <?php echo html::a($this->createLink('company', 'setBasic'), '<h3>' . $lang->admin->shortcuts->company . '</h3>')?>
       </div>
     </div>
     <div class='col-md-4 col-sm-6'>
-      <div class="shortcut contact">
+      <div class="shortcut contact-admin">
         <?php echo html::a($this->createLink('company', 'setcontact'), '<h3>' . $lang->admin->shortcuts->contact . '</h3>')?>  
       </div>
     </div>      
