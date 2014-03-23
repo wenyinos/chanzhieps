@@ -59,6 +59,8 @@ $lang->changePassword = '修改密码';
 $lang->forgotPassword = '忘记密码?';
 $lang->currentPos     = '当前位置';
 $lang->categoryMenu   = '分类导航';
+$lang->wechatTip      = '微信订阅';
+$lang->qrcodeTip      = '移动访问';
    
 /* Global action items. */
 $lang->reset          = '重填';

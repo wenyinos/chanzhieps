@@ -36,7 +36,6 @@ js::set('provider', $this->get->provider);
       <tr class='text-center'>
         <th><?php echo $lang->user->id;?></th>
         <th><?php echo $lang->user->realname;?></th>
-        <th><?php echo $lang->user->nickname;?></th>
         <th><?php echo $lang->user->account;?></th>
         <th><?php echo $lang->user->gender;?></th>
         <th class='text-left'><?php echo $lang->user->company;?></th>
@@ -53,11 +52,10 @@ js::set('provider', $this->get->provider);
     <tr class='text-center'>
       <td><?php echo $user->id;?></td>
       <td><?php echo $user->realname;?></td>
-      <td><?php echo $user->nickname;?></td>
       <td><?php echo $user->account;?></td>
       <td><?php $gender = $user->gender; echo $lang->user->genderList->$gender;?></td>
       <td><?php echo $user->company;?></td>
-      <td><?php echo $user->join;?></td>
+      <td><?php echo substr($user->join, 0, 10);?></td>
       <td><?php echo $user->visits;?></td>
       <td><?php echo $user->last;?></td>
       <td><?php echo $user->ip;?></td>

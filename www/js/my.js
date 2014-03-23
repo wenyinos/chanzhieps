@@ -48,5 +48,14 @@ $(document).ready(function()
 
     /* Mark the module and method with css class */
     $('body').addClass('m-' + config['currentModule'] + '-' + config['currentMethod']);
+
+    /* set right docker */
+    $('#rightDockerBtn').popover({container: 'body', html:true, trigger:'manual'}).mouseover(function()
+    {
+        $('#rightDockerBtn').removeClass('showed');
+        $(this).addClass('showed').popover('show');
+        $("#rightDockerBtn:not('.showed')").popover('hide');
+    });
+    $(document).click(function(){$('#rightDockerBtn').popover('hide').removeClass('showed');}).on('click', '.popover', function(event){event.stopPropagation();});
 });
 
