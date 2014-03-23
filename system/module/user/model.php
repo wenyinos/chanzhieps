@@ -175,9 +175,12 @@ class userModel extends model
             $this->post->set('password', $password);
         }
 
-        $user = fixer::input('post')->cleanInt('imobile, qq, zipcode')->remove('ip, account, join, visits');
-        if(RUN_MODE != 'admin') $user = $user->remove('admin');
-        $user = $user->get();
+        $user = fixer::input('post')
+            ->cleanInt('imobile, qq, zipcode')
+            ->setDefault('admin', 'no')
+            ->remove('ip, account, join, visits')
+            ->removeIF(RUN_MODE != 'admin', 'admin')
+            ->get();
 
         return $this->dao->update(TABLE_USER)
             ->data($user, $skip = 'password1,password2')
