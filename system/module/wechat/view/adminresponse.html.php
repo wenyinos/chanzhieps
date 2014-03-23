@@ -46,13 +46,13 @@
           {
               if(strpos(strtolower($response->params->block), 'article') !== false)
               {
-                  foreach($response->params->category as $category) echo $articleCategory[$category] . ' ';
+                  foreach($response->params->category as $category) if(isset($articleCategory[$category])) echo $articleCategory[$category] . ' ';
                   if($response->params->limit) echo '<br /><strong>' . $lang->wechat->response->limit . '</strong>' . $lang->colon . $response->params->limit;
               }
               else
               {
                   echo "<strong>{$lang->wechat->response->category}{$lang->colon}</strong>";
-                  foreach($response->params->category as $category) echo $productCategory[$category] . ' ';
+                  foreach($response->params->category as $category) if(isset($productCategory[$category])) echo $productCategory[$category] . ' ';
                   if($response->params->limit) echo '<strong>' . $lang->wechat->response->limit . '</strong>' . $lang->colon . $response->params->limit;
               }
           } 
