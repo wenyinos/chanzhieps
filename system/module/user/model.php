@@ -22,7 +22,7 @@ class userModel extends model
      */
     public function getList($pager = null)
     {
-        return $this->dao->select('*')->from(TABLE_USER)->alias('u')
+        return $this->dao->select('u.*, o.provider as provider, openID as openID')->from(TABLE_USER)->alias('u')
             ->leftJoin(TABLE_OAUTH)->alias('o')->on('u.account = o.account')->where('1')
             ->beginIF($this->get->user)->andWhere('u.account')->like("%{$this->get->user}%")->fi()
             ->beginIF($this->get->provider)->andWhere('o.provider')->like("%{$this->get->provider}%")->fi()
@@ -175,9 +175,12 @@ class userModel extends model
             $this->post->set('password', $password);
         }
 
-        $user = fixer::input('post')->cleanInt('imobile, qq, zipcode')->remove('ip, account, join, visits');
-        if(RUN_MODE != 'admin') $user = $user->remove('admin');
-        $user = $user->get();
+        $user = fixer::input('post')
+            ->cleanInt('imobile, qq, zipcode')
+            ->setDefault('admin', 'no')
+            ->remove('ip, account, join, visits')
+            ->removeIF(RUN_MODE != 'admin', 'admin')
+            ->get();
 
         return $this->dao->update(TABLE_USER)
             ->data($user, $skip = 'password1,password2')

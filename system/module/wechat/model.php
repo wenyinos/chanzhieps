@@ -103,25 +103,25 @@ class wechatModel extends model
      */
     public function getResponseForMessage($public, $message)
     {
-        if($message->msgType == 'text')
+        if(in_array($message->event, array('unsubscribe', 'LOCATION')))
         {
-            $response = $this->getResponseByKey($public, $message->content);    
-        }
-        elseif($message->msgType == 'event')
-        {
-            if($message->event == 'subscribe') $message->eventKey = 'subscribe';
-            $response = $this->getResponseByKey($public, $message->eventKey);    
+            $this->saveMessage($public, $message);
+            return false;
         }
 
-        if(empty($response))
-        {
-            $response = $this->getResponseByKey($public, 'default');    
-        }
+        if($message->msgType == 'text') $response = $this->getResponseByKey($public, $message->content);    
+        if($message->msgType == 'event') $response = $this->getResponseByKey($public, $message->eventKey);    
+        if($message->event   == 'subscribe') $response = $this->getResponseByKey($public, 'subscribe');    
+
+        if(empty($response)) $response = $this->getResponseByKey($public, 'default');    
 
         if(!empty($response))
         {
-            $message->status   = $response->key == 'default' ? 'wait' : 'replied';
-            $message->response = $response->key;
+            $message->response = $response->id;
+            if($message->event == 'VIEW') 
+            {
+                 $message->response = $this->dao->select('id')->from(TABLE_WX_RESPONSE)->where('`key`')->like('m_%')->andWhere('concat(content, source)')->eq($message->eventKey)->fetch('id');
+            }
 
             if($response->type == 'text' or $response->type == 'link')
             {
@@ -134,6 +134,7 @@ class wechatModel extends model
                 $reply = $response->content;
             }
         }
+
         $this->saveMessage($public, $message);
 
         return $reply;
@@ -149,11 +150,17 @@ class wechatModel extends model
      */
     public function getResponseByKey($public, $key)
     {
+        if($key == 'SCAN') $key = 'subscribe';
         $response = $this->dao->select('*')->from(TABLE_WX_RESPONSE)
             ->where('public')->eq($public)
             ->andWhere('`key`')->eq($key)
             ->fetch();
         return $this->processResponse($response);
+    }
+
+    public function getReponseByID($id)
+    {
+        return $this->processResponse($this->dao->findById($id)->from(TABLE_WX_RESPONSE)->fetch());
     }
 
     /**
@@ -512,10 +519,20 @@ class wechatModel extends model
         $message->to       = $data->toUserName;
         $message->response = $data->response;
         $message->type     = $data->msgType;
-        $message->content  = isset($data->content) ? $data->content : '';
-        $message->event    = isset($data->event) ? $data->event : '';
-        $message->eventKey = isset($data->eventKey) ? $data->eventKey : '';
-        $message->status   = isset($data->status) ? $data->status : 'wait';
+        $message->content  = isset($data->content) ? $data->content : json_encode($data);
+
+        if($data->msgType == 'event')
+        {
+            $message->type    = $data->event;
+            $message->content = $data->eventKey;
+        }
+
+        if(in_array($data->event, array('subscribe', 'unsubscribe', 'SCAN')))
+        {
+            $message->content = isset($data->eventKey) ? $data->eventKey : $data->event;
+        }
+
+        $message->replied   = isset($data->replied) ? $data->replied : 0;
         $message->time     = helper::now();
 
         $this->dao->insert(TABLE_WX_MESSAGE)->data($message)->autoCheck()->exec();
@@ -525,46 +542,37 @@ class wechatModel extends model
     /**
      * Get message. 
      * 
-     * @param  string   $status 
      * @param  string   $orderBy 
      * @param  object   $pager 
      * @access public
      * @return array 
      */
-    public function getMessage($status, $orderBy, $pager = null)
+    public function getMessage($orderBy, $pager = null)
     {
         $messages = $this->dao->select('*')->from(TABLE_WX_MESSAGE)
-            ->where('status')->eq($status)
+            ->where('1')
+            ->beginIf($this->get->type)->andWhere('type')->eq($this->get->type)->fi()
+            ->beginIf($this->get->replied !== false)->andWhere('replied')->eq($this->get->replied)->fi()
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
 
-        $menus = $this->dao->select('*')->from(TABLE_CATEGORY)->where('type')->like('wechat%')->fetchAll('id');
+        $menus = $this->dao->select('r.id as rid, c.*')->from(TABLE_CATEGORY)->alias('c')
+            ->leftJoin(TABLE_WX_RESPONSE)->alias('r')->on("concat('m_', c.id) = r.key")
+            ->where('c.type')->like('wechat%')->fetchAll('rid');
 
         foreach($messages as $message)
         {
-            if(strpos($message->response, 'm_') !== false)
-            {
-                $menuId = str_replace('m_', '', $message->response);
-                $message->content = $menus[$menuId]->name;
-                $message->content = $this->lang->wechat->message->menu . $this->lang->colon . $message->content;
-            }
+            $content = json_decode($message->content);
+            if(is_object($content)) $message->content = $content;
 
-            if($message->response == 'default')
+            /* Deal with event message. */
+            if(isset($this->lang->wechat->message->eventList[$message->type]))
             {
-                $message->response = $this->lang->wechat->response->default;
-            }
-            elseif($message->response == 'subscribe')
-            {
-                $message->response = $this->lang->wechat->response->subscribe;
-            }
-            elseif(strpos($message->response, 'm_') !== false)
-            {
-                $message->response = $message->content;
-            }
-            else
-            {
-                $message->response = $this->lang->wechat->response->keywords . $this->lang->colon . $message->response;
+                if(in_array($message->type, array('VIEW', 'CLICK'))) $menu = $menus[$message->response];
+                $message->content = $this->lang->wechat->message->eventList[$message->type];
+                if(!empty($menu)) $message->content .= $this->lang->colon . $menu->name;
+                continue;
             }
         }
         return $messages;
@@ -637,5 +645,56 @@ class wechatModel extends model
             $this->dao->update(TABLE_USER)->data($user, $skip = 'openID,provider')->where('id')->eq($user->id)->exec();
         }
         return true;
+    }
+
+    /**
+     * reply 
+     * 
+     * @param  object    $api 
+     * @param  object    $message 
+     * @access public
+     * @return void
+     */
+    public function reply($api, $message)
+    {
+        $reply = new stdclass();
+        $reply->content = $this->post->content;
+        $result = $api->reply($message->from, 'text', $reply);
+
+        if($result['result'] != 'success') return $result;
+
+        $this->dao->update(TABLE_WX_MESSAGE)->set('replied')->eq('1')->where('id')->eq($message->id)->exec();
+
+        $this->dao->insert(TABLE_WX_MESSAGE)
+            ->set('public')->eq($message->public)
+            ->set('wid')->eq($message->wid)
+            ->set('`from`')->eq($this->app->user->account)
+            ->set('to')->eq($message->from)
+            ->set('content')->eq($reply->content)
+            ->set('type')->eq('reply')
+            ->set('time')->eq(helper::now())
+            ->autoCheck()
+            ->exec();
+
+        if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
+        return array('result' => 'success', 'message' => $this->lang->sendSuccess, 'locate' => $this->post->referer);
+    }
+
+    /**
+     * getRecords 
+     * 
+     * @param  object    $message 
+     * @access public
+     * @return void
+     */
+    public function getRecords($message)
+    {
+        $records = $this->dao->select('*')->from(TABLE_WX_MESSAGE)->where('public')->eq($message->public)->andWhere('`from`')->eq($message->from)->fetchAll();
+        $replies = $this->dao->select('*')->from(TABLE_WX_MESSAGE)->where('public')->eq($message->public)->andWhere('`to`')->eq($message->from)->andWhere('type')->eq('reply')->fetchAll('wid');
+        foreach($records as $record)
+        {
+             if(isset($replies[$record->wid])) $record->reply = $replies[$record->wid];
+        }
+        return $records;
     }
 }

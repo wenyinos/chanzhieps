@@ -55,7 +55,7 @@ class wechat extends control
 
         $message  = $this->api->getMessage();
         $response = $this->wechat->getResponseForMessage($public, $message);
-        $this->api->response($response);
+        if($response) $this->api->response($response);
     }
 
     /**
@@ -71,15 +71,9 @@ class wechat extends control
         if(empty($message)) die();
         $this->setAPI($message->public);
 
-        if($_POST)
-        {
-            $reply = new stdclass();
-            $reply->content = $this->post->content;
-            $result = $this->api->reply($message->from, 'text', $reply);
-            if($result['result'] == 'success') $this->send(array('result' => 'success', 'message' => $this->lang->sendSuccess, 'locate' => inlink('message')));
-            $this->send($result);
-        }
+        if($_POST) $this->send($this->wechat->reply($this->api, $message));
 
+        $this->view->records = $this->wechat->getRecords($message);
         $this->view->message = $message;
         $this->display();
     }
@@ -317,23 +311,24 @@ class wechat extends control
     /**
      * Browse message in admin.
      * 
-     * @param string  $status
-     * @param string  $orderBy
-     * @param int     $recTotal 
-     * @param int     $recPerPage 
-     * @param int     $pageID 
      * @access public
      * @return void
      */
-    public function message($status = 'wait', $orderBy = 'time_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function message()
     {
         $this->lang->menuGroups->wechat = 'feedback';
         $this->lang->wechat->menu       = $this->lang->feedback->menu;
 
         $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal, $recPerPage, $pageID);
+        $get = fixer::input('get')
+            ->setDefault('recTotal', 0)
+            ->setDefault('recPerPage', 10)
+            ->setDefault('pageID', 1)
+            ->setDefault('orderBy', 'time_desc')
+            ->get();
+        $pager = new pager($get->recTotal, $get->recPerPage, $get->pageID);
 
-        $messageList = $this->wechat->getMessage($status, $orderBy, $pager);
+        $messageList = $this->wechat->getMessage($get->orderBy, $pager);
 
         $users = $this->loadModel('user')->getList();
         $wechatUsers = array();
@@ -350,7 +345,6 @@ class wechat extends control
 
         $this->view->publicList  = $this->wechat->getList(); 
         $this->view->messageList = $messageList;
-        $this->view->status      = $status;
         $this->view->pager       = $pager;
         $this->display();
     }
