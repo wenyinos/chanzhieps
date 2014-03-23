@@ -9,22 +9,25 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
+//a($this->server->query_string);
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel'>
   <div class="panel-heading">
     <strong><?php echo '<i class="icon-comment-alt"></i> ' . $lang->wechat->message->list;?></strong>
     <?php
-    echo '&nbsp; &nbsp; &nbsp;';
-    echo html::a(inlink('message', "status=wait"), $lang->wechat->message->statusList['wait'], $status == 'wait' ? "class='active'" : '');
-    echo html::a(inlink('message', "status=replied"), $lang->wechat->message->statusList['replied'], $status == 'replied' ? "class='active'" : '');
+    foreach($lang->wechat->message->tabList as $tab)
+    {
+        list($query, $text) = explode('|', $tab);
+        $active = strpos($this->server->query_string, $query) == false ? '' : "class='active'";
+        echo  html::a(inlink('message', $query), $text, $active);
+    }
     ?>
   </div>
   <table class='table table-hover table-striped tablesorter'>
     <thead>
       <tr class='text-center'>
         <th colspan='2'><?php echo $lang->wechat->message->content;?></th>
-        <th><?php echo $lang->wechat->message->response;?></th>
         <th class='w-100px'><?php echo $lang->wechat->message->type;?></th>
         <th class='w-200px'><?php echo $lang->wechat->message->time;?></th>
         <th class='w-100px'><?php echo $lang->wechat->message->reply;?></th>
@@ -35,10 +38,10 @@
       <tr class='text-center'>
         <td class='w-100px text-right'><?php echo $message->from . $lang->colon;?></td>
         <td class='text-left'><?php echo $message->content;?></td>
-        <td><?php echo $message->response;?></td>
         <td><?php echo $lang->wechat->message->typeList[$message->type];?></td>
         <td><?php echo $message->time;?></td>
-        <td class='text-center'><?php echo html::a(inlink('reply', "message={$message->id}"), $lang->wechat->message->reply, "data-toggle=modal");?>
+        <td class='text-center'>
+          <?php if($message->type != 'unsubscribe') echo html::a(inlink('reply', "message={$message->id}"), $lang->wechat->message->reply, "data-toggle=modal");?>
         </td>
       </tr>
       <?php endforeach;?>

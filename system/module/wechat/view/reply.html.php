@@ -20,7 +20,7 @@
       <form method='post' action="<?php echo inlink('reply', "messge={$message->id}");?>" id='ajaxForm'>
         <table class='table table-form'>
           <tr><td><?php echo html::textarea('content', '', "class='form-control' rows=5");?></td></tr>
-          <tr><td><?php echo html::submitButton($lang->wechat->message->reply);?></td></tr>
+          <tr><td><?php echo html::submitButton($lang->wechat->message->reply) . html::hidden('referer', $this->server->http_referer);?></td></tr>
         </table>
       </form>
   </div>
