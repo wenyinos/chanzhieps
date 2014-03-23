@@ -587,27 +587,26 @@ class wechatModel extends model
     public function pullFans()
     {
         $publicList = $this->dao->select('*')->from(TABLE_WX_PUBLIC)->fetchAll();
+        $pulledFans = $this->dao->select("*")->from(TABLE_OAUTH)->where('provider')->eq('wechat')->fetch('openID');
         foreach($publicList as $public)
         {
             $this->app->loadClass('wechatapi', true);
             $api  = new wechatapi($public->token, $public->appID, $public->appSecret, $this->config->debug);
             $fans = $api->getFans();
+
             foreach($fans->data->openid as $openID)
             {
-                $pulledFan = $this->dao->select("count(*) as count")->from(TABLE_OAUTH)
-                    ->where('provider')->eq('wechat')
-                    ->andWhere('openID')->eq($openID)
-                    ->fetch('count');
-
-                if($pulledFan) continue;
+                if(isset($pulledFans[$openID])) continue;
 
                 $user = array();
                 $user['openID']   = $openID;
-                $user['provider'] = 'wechat_' . $public->id;
+                $user['provider'] = 'wechat';
+                $user['public']   = $public->id;
+                $user['account']  = uniqid('wx_');
                 $user['account']  = uniqid('wx_');
                 $user['join']     = helper::now();
 
-                $this->dao->insert(TABLE_OAUTH)->data($user, $skip = 'join')->exec();
+                $this->dao->insert(TABLE_OAUTH)->data($user, $skip = 'public,join')->exec();
                 $this->dao->insert(TABLE_USER)->data($user, $skip = 'openID,provider')->exec();
             }
         }
@@ -625,8 +624,8 @@ class wechatModel extends model
     {
         foreach($users as $user)
         {
-            if(!$user->provider) continue;
-            $public = $this->getByID(str_replace('wechat_', '', $user->provider));
+            if(!$user->provider or $user->nickname != '') continue;
+            $public = $this->getByID($user->public);
             $this->app->loadClass('wechatapi', true);
             $api = new wechatapi($public->token, $public->appID, $public->appSecret, $this->config->debug);
             $fan = $api->getUserInfo($user->openID);
