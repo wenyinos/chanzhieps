@@ -173,6 +173,14 @@ $lang->ui->menu->slide   = array('link' => '幻灯片设置|slide|admin|', 'alia
 $lang->ui->menu->admin   = array('link' => '区块管理|block|admin|', 'alias' => 'create,edit');
 $lang->ui->menu->pages   = array('link' => '布局设置|block|pages|', 'alias' => 'setregion');
 
+/* Menu of user module. */
+$lang->user = new stdclass();
+$lang->user->menu = new stdclass();
+$lang->user->menu->all    = '全部会员|user|admin|';
+$lang->user->menu->weibo  = '微博会员|user|admin|provider=weibo';
+$lang->user->menu->wechat = '微信会员|user|admin|provider=wechat';
+$lang->user->menu->qq     = 'QQ会员|user|admin|provider=qq';
+
 /* Menu of comment module. */
 $lang->feedback = new stdclass();
 $lang->feedback->menu = new stdclass();

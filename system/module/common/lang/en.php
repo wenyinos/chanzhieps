@@ -173,6 +173,14 @@ $lang->ui->menu->slide   = array('link' => 'Slide|slide|admin|',  'alias' => 'cr
 $lang->ui->menu->admin   = array('link' => 'Blocks|block|admin|', 'alias' => 'create,edit');
 $lang->ui->menu->pages   = array('link' => 'Layout|block|pages|', 'alias' => 'setregion');
 
+/* Menu of user module. */
+$lang->user = new stdclass();
+$lang->user->menu = new stdclass();
+$lang->user->menu->all    = 'All Users|user|admin|';
+$lang->user->menu->weibo  = 'Weibo Users|user|admin|provider=weibo';
+$lang->user->menu->wechat = 'Wechat Users|user|admin|provider=wechat';
+$lang->user->menu->qq     = 'QQ Users|user|admin|provider=qq';
+
 /* Menu of comment module. */
 $lang->feedback = new stdclass();
 $lang->feedback->menu = new stdclass();
