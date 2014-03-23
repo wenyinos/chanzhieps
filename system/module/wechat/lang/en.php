@@ -97,17 +97,16 @@ $lang->wechat->message->reply    = 'Reply';
 $lang->wechat->message->record   = 'Records';
 $lang->wechat->message->list     = 'List';
 
-$lang->wechat->message->typeList['text']     = 'Text';
-$lang->wechat->message->typeList['image']    = 'Image';
-$lang->wechat->message->typeList['voice']    = 'Voice';
-$lang->wechat->message->typeList['location'] = 'Location';
-$lang->wechat->message->typeList['link']     = 'Link';
+$lang->wechat->message->typeList['text']        = 'Text';
+$lang->wechat->message->typeList['image']       = 'Image';
+$lang->wechat->message->typeList['voice']       = 'Voice';
+$lang->wechat->message->typeList['location']    = 'Location';
+$lang->wechat->message->typeList['link']        = 'Link';
 $lang->wechat->message->typeList['subscribe']   = 'Subscribe';
 $lang->wechat->message->typeList['unsubscribe'] = 'Unsubscribe';
-$lang->wechat->message->typeList['SCAN']        = 'Scan';
-$lang->wechat->message->typeList['LOCATION']    = 'Location';
-$lang->wechat->message->typeList['CLICK']       = 'Click';
-$lang->wechat->message->typeList['VIEW']        = 'View';
+$lang->wechat->message->typeList['scan']        = 'Scan';
+$lang->wechat->message->typeList['click']       = 'Click';
+$lang->wechat->message->typeList['view']        = 'View';
 
 $lang->wechat->message->tabList[] = 'replied=0|Unreplied';
 $lang->wechat->message->tabList[] = 'type=text|Message';

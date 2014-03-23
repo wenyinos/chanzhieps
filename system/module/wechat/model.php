@@ -103,7 +103,7 @@ class wechatModel extends model
      */
     public function getResponseForMessage($public, $message)
     {
-        if(in_array($message->event, array('unsubscribe', 'LOCATION')))
+        if(in_array($message->event, array('unsubscribe', 'location')))
         {
             $this->saveMessage($public, $message);
             return false;

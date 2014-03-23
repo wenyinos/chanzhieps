@@ -97,17 +97,16 @@ $lang->wechat->message->reply    = '回复';
 $lang->wechat->message->record   = '消息记录';
 $lang->wechat->message->list     = '消息列表';
 
-$lang->wechat->message->typeList['text']     = '文本消息';
-$lang->wechat->message->typeList['image']    = '图片消息';
-$lang->wechat->message->typeList['voice']    = '语音消息';
-$lang->wechat->message->typeList['location'] = '地理位置消息';
-$lang->wechat->message->typeList['link']     = '链接消息';
+$lang->wechat->message->typeList['text']        = '文本';
+$lang->wechat->message->typeList['image']       = '图片';
+$lang->wechat->message->typeList['voice']       = '语音';
+$lang->wechat->message->typeList['location']    = '位置';
+$lang->wechat->message->typeList['link']        = '链接';
 $lang->wechat->message->typeList['subscribe']   = '订阅';
 $lang->wechat->message->typeList['unsubscribe'] = '取消订阅';
-$lang->wechat->message->typeList['SCAN']        = '扫描带参数二维码';
-$lang->wechat->message->typeList['LOCATION']    = '上报地理位置';
-$lang->wechat->message->typeList['CLICK']       = '点击菜单';
-$lang->wechat->message->typeList['VIEW']        = '访问菜单';
+$lang->wechat->message->typeList['scan']        = '扫描';
+$lang->wechat->message->typeList['click']       = '点击';
+$lang->wechat->message->typeList['view']        = '链接';
 
 $lang->wechat->message->tabList[] = 'replied=0|未回复';
 $lang->wechat->message->tabList[] = 'type=text|留言';
