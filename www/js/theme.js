@@ -17,7 +17,6 @@
     theme.DEFAULTS = 
     {
         templateUrl:                '/theme/custom/template.less',
-
         colorBackgroud:             '#ffffff',
         colorFore:                  '#333',
         colorBorder:                '#e5e5e5',
