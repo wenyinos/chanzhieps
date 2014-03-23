@@ -208,6 +208,7 @@ class wechatapi
             foreach($message as $key => $value)
             {
                 $key = lcfirst($key);
+                $value = $key == 'event' ? strtolower($value) : $value;
                 $this->message->$key = (string)$value;
             }
         }
