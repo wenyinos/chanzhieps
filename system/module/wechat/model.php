@@ -550,7 +550,7 @@ class wechatModel extends model
     public function getMessage($orderBy, $pager = null)
     {
         $messages = $this->dao->select('*')->from(TABLE_WX_MESSAGE)
-            ->where('1')
+            ->where('type')->ne('reply')
             ->beginIf($this->get->type)->andWhere('type')->eq($this->get->type)->fi()
             ->beginIf($this->get->replied !== false)->andWhere('replied')->eq($this->get->replied)->fi()
             ->orderBy($orderBy)

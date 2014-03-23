@@ -110,7 +110,6 @@ $lang->wechat->message->typeList['LOCATION']    = '上报地理位置';
 $lang->wechat->message->typeList['CLICK']       = '点击菜单';
 $lang->wechat->message->typeList['VIEW']        = '访问菜单';
 
-
 $lang->wechat->message->eventList['subscribe']   = '订阅';
 $lang->wechat->message->eventList['unsubscribe'] = '取消订阅';
 $lang->wechat->message->eventList['SCAN']        = '扫描带参数二维码';
