@@ -10,7 +10,10 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php include '../../common/view/header.admin.html.php';?>
+<?php
+include '../../common/view/header.admin.html.php';
+js::set('provider', $this->get->provider);
+?>
 <div class="panel">
   <div class="panel-heading">
     <strong><i class="icon-group"></i> <?php echo $lang->user->list;?></strong>

@@ -19,4 +19,9 @@ $(document).ready(function()
             return false;
         }
     });
+
+    /* Set active menu. */
+    $('.leftmenu li.active').removeClass('active');
+    $(".leftmenu a[href*='provider=" + v.provider  + "']").parent().addClass('active');
+    if($('.leftmenu li.active').size() == 0) $('.leftmenu li:first').addClass('active');
 });
