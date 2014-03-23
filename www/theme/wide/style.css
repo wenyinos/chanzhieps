@@ -82,6 +82,7 @@ body {background: #232323;}
 #navbar {position: relative; background: none; border: none; min-height: 0; background: #fff}
 #navbar .collapse {position: absolute; right: 0; top: -72px;}
 #navbar .nav > li {display: block; float: left; width: auto;}
+@media (min-width: 768px){#navbar .nav > li {display: block;float: left;width: auto;}@-moz-document url-prefix(){#navbar .nav > li{position: inherit;}}}
 #navbar .nav > li > a {background: none; border-width: 0; font-weight: normal; padding: 26px 20px;}
 #navbar .nav > li > a, #navbar .nav > li:last-child > a, #navbar .nav > li:first-child > a {-webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0}
 #navbar .dropdown-menu {margin-top: -1px; margin-left: -1px;}
@@ -119,15 +120,15 @@ body {background: #232323;}
 .m-index-index .page-wrapper {padding-top: 0;}
 
 /* Carousel */
-.carousel {position: relative;}
-.carousel-control {position: absolute; line-height: 1em; width: 60px; height: 60px; -webkit-border-radius: 40px; -moz-border-radius: 40px; border-radius: 40px; background: #666; top: 50%; text-align: center; margin-top: -30px;}
+.carousel {position: relative; -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0;}
+.carousel-control, .carousel-control.left, .carousel-control.right {position: absolute; line-height: 1em; width: 60px; height: 60px; -webkit-border-radius: 40px; -moz-border-radius: 40px; border-radius: 40px; background: #666; top: 50%; text-align: center; margin-top: -30px; background: none\0; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#00000000', GradientType=0)}
 .carousel-control.left {left: -80px;}
 .carousel-control.right {right: -80px;}
 .carousel:hover .carousel-control.left {left: 3%;}
 .carousel:hover .carousel-control.right {right: 3%;}
-.carousel-control:hover {background: #e91b23; text-align: center;}
+.carousel-control:hover {background: #e91b23; text-align: center; background: none\0;}
 .carousel-control .icon-prev, .carousel-control .icon-next {display: block; text-align: center; font-size: 60px; height: 60px; width: 60px; left: 5px; top: -3px; margin: 0; line-height: 60px;}
-.carousel {-webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0;}
+.carousel-caption {left: 19%}
 
 /* List */
 .list {background-color: #FFFFFF; -moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0}
@@ -154,16 +155,18 @@ body {background: #232323;}
 .m-company-index .breadcrumb, .breadcrumb:after {color: #aaa; color: rgba(255,255,255,0.8); text-shadow: 0 1px 2px rgba(0,0,0,0.3);}
 .m-company-index .breadcrumb a {color:#fff; color: rgba(255,255,255,1);}
 .m-company-index .row > .col-md-9 > .panel {background: none; text-shadow: 0 1px 2px rgba(0,0,0,0.5); border: none; box-shadow: none; max-width: 800px; color: #eee}
-.m-company-index .row > .col-md-9 > .panel > .panel-heading {border-bottom: 4px solid #fff; border-bottom: 4px solid rgba(255,255,255,0.5); padding-left: 70px; font-size: 24px; color: #fff; position: relative; line-height: 50px;}
-.m-company-index .row > .col-md-9 > .panel > .panel-heading i {display: block; position: absolute; top: 10px; left: 0; background: #e91b23; color: #fff; text-align: center; width: 50px; height: 50px; border-radius: 25px; line-height: 50px; font-size: 28px; margin-right: 10px; text-shadow: 1px 1px 0 #b61016, 2px 2px 0 #b61016, 3px 3px 0 #b61016, 4px 4px 0 #b61016, 5px 5px 0 #b61016, 6px 6px 0 #b61016, 7px 7px 0 #b61016, 8px 8px 0 #b61016, 9px 9px 0 #b61016, 10px 10px 0 #b61016, 11px 11px 0 #b61016, 12px 12px 0 #b61016, 13px 13px 0 #b61016, 14px 14px 0 #b61016; overflow: hidden;}
+.m-company-index .row > .col-md-9 > .panel > .panel-heading {border-bottom: 4px solid #ccc; border-bottom: 4px solid rgba(255,255,255,0.5); border-bottom: 4px solid rgba(255,255,255,0.5); padding-left: 70px; font-size: 24px; color: #fff; position: relative; line-height: 50px;}
+.m-company-index .row > .col-md-9 > .panel > .panel-heading i {display: block; position: absolute; top: 10px; left: 0; background: #e91b23; color: #fff; text-align: center; width: 50px; height: 50px; border-radius: 25px; line-height: 50px; font-size: 28px; margin-right: 10px;}
 .m-company-index .row > .col-md-9 > .panel > .panel-body {padding-left: 0;}
 .m-company-index .row > .col-md-3 > .panel {box-shadow: 0 1px 3px rgba(0,0,0,.15); -moz-box-shadow: 0 1px 3px rgba(0,0,0,.15); -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.15); border: none; background: rgba(255,255,255,0.6);}
 .m-company-index .row > .col-md-3 > .panel > .panel-heading {border:none; background: #f1f1f1; background: rgba(255,255,255,0.5);}
 
 /* responsive for mobile devices */
+@media (min-width: 992px) {.carousel-caption{left: 19%\0!important}}
 @media (max-width: 991px)
 {
   #navbar .nav > li > a {padding: 26px 10px;}
+  .carousel-caption {left: 12%}
 }
 @media (max-width: 767px)
 {
@@ -176,6 +179,8 @@ body {background: #232323;}
   #navbar .navbar-nav {margin: 0}
   #navbar .nav > li {width: 25%}
   #navbar .nav > li > a {padding: 20px 20px;}
+
+  .carousel-caption {left: 8%}
 
   .page-content {padding-left: 10px; padding-right: 10px;}
   #footer {padding-left: 10px;}

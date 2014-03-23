@@ -48,6 +48,7 @@ a:hover,a:active{color: #1ABC9C;}
 .panel .treeview .hitarea{background-color: #EDEFF1!important}
 .panel .tree > li > ul li:last-child:after{border-left-color: #EDEFF1!important}
 .panel-heading > .pull-right > a{color: #BDC3C7}
+.panel-block .panel-body > .ul-list > li > .pull-right {background: #EDEFF1}
 
 /* text */
 .text-muted{color: #666}
