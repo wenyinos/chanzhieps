@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.zentao.net
  */
-/* common sign setting. */
+/* Common sign setting. */
 $lang->colon    = ' : ';
 $lang->prev     = '‹';
 $lang->next     = '›';
@@ -23,7 +23,7 @@ $lang->back2Top = '返回顶部';
 /* Lang items for xirang. */
 $lang->chanzhiEPS  = '蝉知企业门户系统';
 $lang->chanzhiEPSx = '蝉知';
-$lang->poweredBy   = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>{$lang->chanzhiEPSx}%s</a></span>";
+$lang->poweredBy   = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>{$lang->chanzhiEPSx} %s</a></span>";
 
 /* IE6 alert.  */
 $lang->IE6Alert= <<<EOT
@@ -297,8 +297,11 @@ define('DT_TIME1',     'H:i:s');
 define('DT_TIME2',     'H:i');
 
 /* Keywords for chanzhi. */
-$lang->k  = '蝉知，开源免费的企业建站系统!;';
-$lang->k .= '蝉知，开源免费的cms!;';
-$lang->k .= '蝉知，免费建站首选！;';
-$lang->k .= '蝉知，企业网站建设专家！;';
-$lang->k .= '蝉知，开源php企业建站系统！';
+$lang->k  = '蝉知门户，开源免费的企业建站系统!;';
+$lang->k .= '蝉知门户，开源免费的cms!;';
+$lang->k .= '蝉知门户，免费建站首选！;';
+$lang->k .= '蝉知门户，企业网站建设专家！;';
+$lang->k .= '蝉知门户，开源php企业建站系统！';
+$lang->k .= '蝉知门户，微网站专家！';
+$lang->k .= '蝉知门户，微网站首选！';
+$lang->k .= '蝉知门户，微信营销首选！';
