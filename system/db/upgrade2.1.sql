@@ -33,12 +33,10 @@ CREATE TABLE `eps_wx_message` (
   `wid` char(64) NOT NULL,
   `to` varchar(50) NOT NULL,
   `from` varchar(50) NOT NULL,
-  `response` varchar(100) NOT NULL,
+  `response` mediumint(8) unsigned NOT NULL,
   `content` text NOT NULL,
   `type` char(30) NOT NULL,
-  `event` char(30) NOT NULL,
-  `eventKey` varchar(100) NOT NULL,
-  `status` enum('wait','replied') DEFAULT NULL,
+  `replied` tinyint(3) NOT NULL DEFAULT '0',
   `time` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
