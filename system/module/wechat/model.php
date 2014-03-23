@@ -595,7 +595,7 @@ class wechatModel extends model
             foreach($fans->data->openid as $openID)
             {
                 $pulledFan = $this->dao->select("count(*) as count")->from(TABLE_OAUTH)
-                    ->where('provider')->eq('wechat_' . $public->id)
+                    ->where('provider')->eq('wechat')
                     ->andWhere('openID')->eq($openID)
                     ->fetch('count');
 
