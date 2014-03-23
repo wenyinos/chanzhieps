@@ -36,9 +36,7 @@ class wechat extends control
      */
     public function setAPI($public)
     {
-        $this->public = $this->wechat->getByID($public);
-        $this->app->loadClass('wechatapi', true);
-        $this->api = new wechatapi($this->public->token, $this->public->appID, $this->public->appSecret, $this->config->debug);
+        $this->api = $this->wechat->loadApi($public);
     }
 
     /**
@@ -113,20 +111,6 @@ class wechat extends control
         echo $this->api->getMedia($media);
     }
 
-    /**
-     * Get the qrcode from weixin server.
-     * 
-     * @param  int    $public 
-     * @access public
-     * @return void
-     */
-    public function qrcode($public)
-    {
-        $this->setAPI($public);
-        $qrcodeFile = $this->app->getDataRoot() . 'wechat' . DS . $public->appID . '.jpg';
-        if(!is_dir(dirname($qrcodeFile))) @mkdir(dirname($qrcodeFile));
-        $data = $this->api->getQRCode($qrcodeFile); 
-    }
 
     /**
      * Get fans.

@@ -12,6 +12,20 @@
 class wechatModel extends model
 {
     /**
+     * Load api.
+     * 
+     * @param  int    $public 
+     * @access public
+     * @return void
+     */
+    public function loadApi($public)
+    {
+        $public = $this->getByID($public);
+        $this->app->loadClass('wechatapi', true);
+        return new wechatapi($public->token, $public->appID, $public->appSecret, $this->config->debug);
+    }
+
+    /**
      * Get a public account by id.
      * 
      * @param  int    $id 
@@ -33,8 +47,29 @@ class wechatModel extends model
     {
         $publics = $this->dao->select('*')->from(TABLE_WX_PUBLIC)->orderBy('addedDate')->fetchAll('id');
         if(!$publics) return array();
-        foreach($publics as $public) $public->url = rtrim(getWebRoot(true), '/') . commonModel::createFrontLink('wechat', 'response', "id=$public->id");
+        foreach($publics as $public)
+        {
+            $public->url    = rtrim(getWebRoot(true), '/') . commonModel::createFrontLink('wechat', 'response', "id=$public->id");
+            $public->qrcode = $this->getQRCode($public->id);
+        }
         return $publics;
+    }
+
+    /**
+     * Get qrcode of a public.
+     * 
+     * @param  int    $public 
+     * @access public
+     * @return void
+     */
+    public function getQRCode($public)
+    {
+        $api = $this->loadApi($public);
+        $public = $this->getByID($public);
+        $qrcodeFile = $this->app->getDataRoot() . 'wechat' . DS . $public->appID . '.jpg';
+        if(!is_dir(dirname($qrcodeFile))) @mkdir(dirname($qrcodeFile));
+        $data = $api->getQRCode($qrcodeFile); 
+        return $this->app->getWebRoot() . 'data/wechat/' . $public->appID . '.jpg';
     }
 
     /**

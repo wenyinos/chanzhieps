@@ -472,7 +472,7 @@ class wechatapi
         /* Get qrcode. */
         $url  = 'https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=' . urlencode($data->ticket);
         $data = $this->get($url);
-        file_put_contents($file, $data);
+        return file_put_contents($file, $data);
     }
 
     /**

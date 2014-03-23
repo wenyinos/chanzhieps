@@ -38,6 +38,7 @@ $siteExtPath  = dirname(dirname(dirname(__FILE__))) . "/common/ext/_{$config->si
 $extHookRule  = $siteExtPath . 'footer.front.*.hook.php';
 $extHookFiles = glob($extHookRule);
 if($extHookFiles) foreach($extHookFiles as $extHookFile) include $extHookFile;
+$publicList = $this->loadModel('wechat')->getList();
 ?>
 <a href='#' id='go2top' class='icon-arrow-up' data-toggle='tooltip' title='<?php echo $lang->back2Top; ?>'></a>
 </div><?php /* end "div.page-container" in "header.html.php" */ ?>
@@ -48,10 +49,12 @@ if($extHookFiles) foreach($extHookFiles as $extHookFile) include $extHookFile;
     <div class='popover-content docker-right'>
       <table class='table table-borderless'>
         <tr>
+          <?php foreach($publicList as $public):?>
           <td>
             <div class='heading'><i class='icon-weixin'>&nbsp;</i> <?php echo $lang->wechatTip;?></div>
-            <img src='' alt=''>
+            <?php echo html::image($public->qrcode);?>
           </td>
+          <?php endforeach;?>
           <td>
             <div class='heading'><i class='icon-mobile-phone'></i> <?php echo $lang->qrcodeTip;?></div>
             <img src='' alt=''>
