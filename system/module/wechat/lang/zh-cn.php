@@ -17,7 +17,7 @@ $lang->wechat->appID     = 'AppID';
 $lang->wechat->appSecret = 'AppSecret';
 $lang->wechat->token     = 'Token';
 $lang->wechat->url       = '接入地址';
-$lang->wechat->certified = '认证';
+$lang->wechat->certified = '是否认证';
 $lang->wechat->users     = '微信会员';
 $lang->wechat->content   = '内容';
 
@@ -95,8 +95,7 @@ $lang->wechat->message->menu     = '菜单';
 $lang->wechat->message->time     = '时间';
 $lang->wechat->message->reply    = '回复';
 $lang->wechat->message->record   = '消息记录';
-
-$lang->wechat->message->list = '消息列表';
+$lang->wechat->message->list     = '消息列表';
 
 $lang->wechat->message->typeList['text']     = '文本消息';
 $lang->wechat->message->typeList['image']    = '图片消息';
@@ -110,15 +109,8 @@ $lang->wechat->message->typeList['LOCATION']    = '上报地理位置';
 $lang->wechat->message->typeList['CLICK']       = '点击菜单';
 $lang->wechat->message->typeList['VIEW']        = '访问菜单';
 
-$lang->wechat->message->eventList['subscribe']   = '订阅';
-$lang->wechat->message->eventList['unsubscribe'] = '取消订阅';
-$lang->wechat->message->eventList['SCAN']        = '扫描带参数二维码';
-$lang->wechat->message->eventList['LOCATION']    = '上报地理位置';
-$lang->wechat->message->eventList['CLICK']       = '点击菜单';
-$lang->wechat->message->eventList['VIEW']        = '访问菜单';
-
 $lang->wechat->message->tabList[] = 'replied=0|未回复';
-$lang->wechat->message->tabList[] = 'type=text|留言信息';
+$lang->wechat->message->tabList[] = 'type=text|留言';
 $lang->wechat->message->tabList[] = 'type=subscribe|新订阅';
 $lang->wechat->message->tabList[] = 'type=unsubscribe|取消订阅';
 $lang->wechat->message->tabList[] = 'replied=1|已回复';

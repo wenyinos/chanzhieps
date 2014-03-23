@@ -27,6 +27,7 @@ $lang->ui->favicon->reset = "Reset";
 
 $lang->ui->themes = array();
 $lang->ui->themes['default']    = 'Default';
+$lang->ui->themes['wide']       = 'Wide';
 $lang->ui->themes['flat']       = 'Flat';
 $lang->ui->themes['tree']       = 'Tree';
 $lang->ui->themes['brightdark'] = 'Brightdark';
@@ -39,6 +40,7 @@ $lang->ui->customtheme                     = 'Custom theme';
 $lang->ui->custom                          = 'Custom...';
 $lang->ui->themeSaved                      = 'Theme settings saved.';
 $lang->ui->preview                         = 'Preview';
+$lang->ui->theme = new stdclass();
 $lang->ui->theme->primaryColor             = 'Color';
 $lang->ui->theme->backColor                = 'Background';
 $lang->ui->theme->fontSize                 = 'Size';

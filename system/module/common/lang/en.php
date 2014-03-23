@@ -59,6 +59,8 @@ $lang->changePassword = 'Change password';
 $lang->forgotPassword = 'Forgot password?';
 $lang->currentPos     = 'Positon';
 $lang->categoryMenu   = 'Categories';
+$lang->wechatTip      = 'Wechat';
+$lang->qrcodeTip      = 'Mobile';
 
 /* Global action items. */
 $lang->reset          = 'Reset';
