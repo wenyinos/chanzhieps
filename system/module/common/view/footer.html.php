@@ -41,6 +41,26 @@ if($extHookFiles) foreach($extHookFiles as $extHookFile) include $extHookFile;
 ?>
 <a href='#' id='go2top' class='icon-arrow-up' data-toggle='tooltip' title='<?php echo $lang->back2Top; ?>'></a>
 </div><?php /* end "div.page-container" in "header.html.php" */ ?>
+<div id='rightDocker' class='hidden-xs'>
+  <button id='rightDockerBtn' class='btn' data-toggle="popover" data-placement="left" data-target='$next'><i class='icon-qrcode'></i></button>
+  <div class='popover fade'>
+    <div class='arrow'></div>
+    <div class='popover-content docker-right'>
+      <table class='table table-borderless'>
+        <tr>
+          <td>
+            <div class='heading'><i class='icon-weixin'>&nbsp;</i> <?php echo $lang->wechatTip;?></div>
+            <img src='' alt=''>
+          </td>
+          <td>
+            <div class='heading'><i class='icon-mobile-phone'></i> <?php echo $lang->qrcodeTip;?></div>
+            <img src='' alt=''>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
 <?php if(RUN_MODE == 'front') $this->loadModel('block')->printRegion($layouts, 'all', 'end');?>
 </body>
 </html>

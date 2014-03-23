@@ -375,6 +375,21 @@ a.tag-link {color: inherit;}
 #go2top {position: fixed;font-size: 20px; color: #999; bottom: 80px; right: -40px; width: 40px; line-height: 40px; text-align: center; background-color: #eee; border-radius: 4px; border: 1px solid #ccc; box-shadow: inset 0 1px 1px rgba(255,255,255,0.5),inset 0 -1px 1px rgba(0,0,0,0.1); text-shadow:1px 1px 0px #fff; display: none;}
 #go2top:hover { background-color: #fafafa; color: #333; border-color: #aaa; text-decoration: none;}
 
+/* Right docker */
+#rightDocker {position: fixed; top: 50%; margin-top: -40px; right: 0}
+#rightDockerBtn {border-radius: 4px 0 0 4px}
+#rightDockerBtn i {font-size: 28px; margin-top: 2px; display: block}
+.docker-right {padding: 20px 0;}
+.docker-right .table {margin-bottom: 0;}
+.docker-right .table-borderless td {text-align: center; vertical-align: middle; padding: 0 15px 15px}
+ .table-borderless td {border-left: 1px solid #ddd}
+ .table-borderless td:first-child {border-left: none}
+.popover {max-width: 900px}
+.docker-right .icon-mobile-phone, .docker-right .icon-weixin {font-size: 42px; color: #fff; background: #145CCD; display: inline-block; width: 50px; line-height: 50px; border-radius: 25px; vertical-align: middle; margin-right: 10px;}
+.docker-right .icon-weixin {background: #64ab23 url(images/main/weixin.png) no-repeat center}
+.docker-right  {vertical-align: middle;}
+.docker-right img {width: 240px; height: 240px;}
+
 /* bootbox */
 .bootbox-alert .modal-dialog {width: 400px; margin-top: 10%;}
 
