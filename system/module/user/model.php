@@ -22,7 +22,7 @@ class userModel extends model
      */
     public function getList($pager = null)
     {
-        return $this->dao->select('*')->from(TABLE_USER)->alias('u')
+        return $this->dao->select('u.*, o.provider as provider, openID as openID')->from(TABLE_USER)->alias('u')
             ->leftJoin(TABLE_OAUTH)->alias('o')->on('u.account = o.account')->where('1')
             ->beginIF($this->get->user)->andWhere('u.account')->like("%{$this->get->user}%")->fi()
             ->beginIF($this->get->provider)->andWhere('o.provider')->like("%{$this->get->provider}%")->fi()
