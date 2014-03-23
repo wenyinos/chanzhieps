@@ -248,6 +248,15 @@ class pager
             if(strtolower($key) == 'recperpage') $this->params[$key] = $this->recPerPage;
             if(strtolower($key) == 'pageid')     $this->params[$key] = $this->pageID;
         }
+
+        parse_str($_SERVER['QUERY_STRING'], $query);
+
+        unset($query['m']);
+        unset($query['f']);
+        unset($query['t']);
+
+        $this->params = array_merge($this->params, $query);
+
     }
 
     /**
