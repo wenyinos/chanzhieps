@@ -1,7 +1,9 @@
 <div class='panel thread'>
   <div class='panel-heading'>
     <i class='icon-comment-alt pull-left'></i>
-    <div class='panel-actions'><?php if($thread->readonly) echo "<span class='label'><i class='icon-lock'></i> " . $lang->thread->readonly . "</span> &nbsp;"; ?></div>
+    <div class='panel-actions'>
+      <?php if($thread->readonly) echo "<span class='label'><i class='icon-lock'></i> " . $lang->thread->readonly . "</span> &nbsp;"; ?>
+    </div>
     <strong><?php echo $thread->title; ?></strong>
     <div class='text-muted'><?php echo $thread->addedDate;?></div>
   </div>
@@ -15,7 +17,7 @@
        }
        else
        {
-       echo $thread->author;
+           echo $thread->author;
        }
        ?>
       </td>
