@@ -95,7 +95,7 @@ class wechatModel extends model
     public function update($publicID)
     {
         $public = fixer::input('post')->get();
-        $this->dao->update(TABLE_WX_PUBLIC)->data($public)->autoCheck()->exec();
+        $this->dao->update(TABLE_WX_PUBLIC)->data($public)->autoCheck()->where('id')->eq($publicID)->exec();
         return !dao::isError();
     }
 

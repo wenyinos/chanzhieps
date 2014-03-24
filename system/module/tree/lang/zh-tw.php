@@ -17,6 +17,7 @@ $lang->tree->browse      = "類目維護";
 $lang->tree->manage      = "維護類目";
 $lang->tree->fix         = "修復數據";
 
+$lang->tree->common        = '類目';
 $lang->tree->noCategories  = '您還沒有添加類目，請添加類目。';
 $lang->tree->timeCountDown = "<strong id='countDown'>3</strong> 秒後轉向類目管理頁面。";
 $lang->tree->redirect      = '立即轉向';
@@ -54,3 +55,14 @@ $lang->board->readonlyList[1] = '只讀';
 $lang->board->placeholder = new stdclass();
 $lang->board->placeholder->moderators  = '會員用戶名, 多個用戶名之間用逗號隔開';
 $lang->board->placeholder->setChildren = '論壇功能需要設置二級版塊才能使用。';
+
+/* Lang items for wechat menu. */
+$lang->wechatMenu = new stdclass();
+$lang->wechatMenu->common     = '公眾號菜單';
+$lang->wechatMenu->name       = '標題';
+$lang->wechatMenu->parent     = '上級菜單';
+$lang->wechatMenu->children   = "子菜單";
+$lang->wechatMenu->delete     = "清空微信菜單";
+$lang->wechatMenu->commit     = "同步到微信";
+
+$lang->wechatMenu->setResponse = '響應設置';
