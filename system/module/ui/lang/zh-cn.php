@@ -33,7 +33,7 @@ $lang->ui->themes['tree']       = '蝉之树';
 $lang->ui->themes['brightdark'] = '蝉憩';
 $lang->ui->themes['tartan']     = '蝉之格';
 $lang->ui->themes['blue']       = '蓝';
-$lang->ui->themes['colorful']   = array('name' => "缤纷 <span class='small text-warning'>支持自定义</span>", 'custom' => true, 'primaryColor' => '#D1270A', 'backColor' => '#FFFFFF', 'fontSize' => '14px', 'borderRadius' => '4px');
+//$lang->ui->themes['colorful']   = array('name' => "缤纷 <span class='small text-warning'>支持自定义</span>", 'custom' => true, 'primaryColor' => '#D1270A', 'backColor' => '#FFFFFF', 'fontSize' => '14px', 'borderRadius' => '4px');
 
 $lang->ui->changetheme                     = '点击来使用此主题';
 $lang->ui->customtheme                     = '自定义主题';

@@ -33,7 +33,7 @@ $lang->ui->themes['tree']       = 'Tree';
 $lang->ui->themes['brightdark'] = 'Brightdark';
 $lang->ui->themes['tartan']     = 'Tartan';
 $lang->ui->themes['blue']       = 'Blue';
-$lang->ui->themes['colorful']   = array('name' => 'Colorful', 'custom' => true, 'primaryColor' => '#D1270A', 'backColor' => '#FFFFFF', 'fontSize' => '14px', 'borderRadius' => '4px');
+//$lang->ui->themes['colorful']   = array('name' => 'Colorful', 'custom' => true, 'primaryColor' => '#D1270A', 'backColor' => '#FFFFFF', 'fontSize' => '14px', 'borderRadius' => '4px');
 
 $lang->ui->changetheme                     = 'Click to apply this theme';
 $lang->ui->customtheme                     = 'Custom theme';
