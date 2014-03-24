@@ -166,7 +166,13 @@ body {background: #232323;}
 .m-company-index .row > .col-md-3 > .panel > .panel-heading {border:none; background: #f1f1f1; background: rgba(255,255,255,0.5);}
 
 /* responsive for mobile devices */
-@media (min-width: 992px) {.carousel-caption{left: 19%\0!important}}
+@media (min-width: 992px)
+{
+  .m-index-index #header .wrapper {padding: 0 15px}
+  .m-index-index #navbarCollapse {right: 15px}
+
+  .carousel-caption{left: 19%\0!important}
+}
 @media (max-width: 991px)
 {
   #navbar .nav > li > a {padding: 26px 10px;}

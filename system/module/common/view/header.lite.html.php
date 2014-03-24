@@ -13,6 +13,7 @@ $themeRoot = $webRoot . "theme/";
 <head profile="http://www.w3.org/2005/10/profile">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Cache-Control"  content="no-transform">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php if($this->app->getModuleName() == 'user' and $this->app->getMethodName() == 'deny'):?>
   <meta http-equiv='refresh' content="5;url='<?php echo helper::createLink('index');?>'">

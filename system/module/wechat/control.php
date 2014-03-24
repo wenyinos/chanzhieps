@@ -84,63 +84,6 @@ class wechat extends control
     }
 
     /**
-     * Delete menu of a public.
-     * 
-     * @param  int    $public 
-     * @access public
-     * @return void
-     */
-    public function deleteMenu($public)
-    {
-        $this->setAPI($public);
-        if($this->api->deleteMenu()) $this->send(array('result' => 'success', 'message' => $this->lang->deleteSuccess));
-        $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
-    }
-
-    /**
-     * Upload a media file.
-     * 
-     * @param  int    $public 
-     * @access public
-     * @return void
-     */
-    public function uploadMedia($public)
-    {
-        $this->setAPI($public);
-        $media = $this->api->uploadMedia('image', '/home/wwccss/chanzhi/www/data/test.jpg');
-        echo $this->api->getMedia($media);
-    }
-
-
-    /**
-     * Get fans.
-     * 
-     * @param  int    $public 
-     * @param  string $next 
-     * @access public
-     * @return void
-     */
-    public function getFans($public, $next = '')
-    {
-        $this->setAPI($public);
-        $this->api->getFans($next);
-    }
-
-    /**
-     * Get user info.
-     * 
-     * @param  int    $public 
-     * @param  string $lang 
-     * @access public
-     * @return void
-     */
-    public function getUserInfo($public, $lang = 'zh_CN')
-    {
-        $this->setAPI($public);
-        print_r($this->api->getUserInfo('o-nXYt1LrugCK0oqZcrxyMidiJSg', $lang));
-    }
-
-    /**
      * Browse public in admin.
      * 
      * @access public
@@ -274,6 +217,19 @@ class wechat extends control
     }
 
     /**
+     * Delete a response.
+     * 
+     * @param  int    $response 
+     * @access public
+     * @return void
+     */
+    public function deleteResponse($response)
+    {
+        if($this->wechat->deleteResponse($response)) $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+    }
+
+    /**
      * Commit menu. 
      * 
      * @param  int    $public 
@@ -290,16 +246,17 @@ class wechat extends control
     }
 
     /**
-     * Delete a response.
+     * Delete menu of a public.
      * 
-     * @param  int    $response 
+     * @param  int    $public 
      * @access public
      * @return void
      */
-    public function deleteResponse($response)
+    public function deleteMenu($public)
     {
-        if($this->wechat->deleteResponse($response)) $this->send(array('result' => 'success'));
-        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->setAPI($public);
+        if($this->api->deleteMenu()) $this->send(array('result' => 'success', 'message' => $this->lang->deleteSuccess));
+        $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
     }
 
     /**
