@@ -733,4 +733,21 @@ class wechatModel extends model
         }
         return $records;
     }
+
+    /**
+     * Get modeulList.
+     * 
+     * @access public
+     * @return void
+     */
+    public function getModeulList()
+    {
+        $webRoot = rtrim(getWebRoot(true), '/');
+        foreach($this->lang->wechat->response->moduleList as $module => $title)
+        {
+            $moduleList[$webRoot . $this->loadModel('common')->createFrontLink($module, 'index')] = $title;
+        }
+        return $moduleList;
+    }
+
 }

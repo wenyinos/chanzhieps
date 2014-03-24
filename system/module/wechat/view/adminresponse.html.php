@@ -36,7 +36,7 @@
         <?php if($response->type == 'news'):?>
         <td><?php echo $lang->wechat->response->newsBlockList[$response->params->block];?></td>
         <?php elseif($response->type == 'link'):?>
-        <td><?php echo $lang->wechat->response->moduleList[$response->source];?></td>
+        <td><?php echo $moduleList[$response->source];?></td>
         <?php elseif($response->type == 'text'):?>
         <td><?php echo $lang->wechat->response->textBlockList[$response->source];?></td>
         <?php endif;?>
