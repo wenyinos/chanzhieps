@@ -742,14 +742,14 @@ class wechatModel extends model
      * @access public
      * @return void
      */
-    public function getModeulList()
+    public function getModuleList()
     {
         $webRoot = rtrim(getWebRoot(true), '/');
         foreach($this->lang->wechat->response->moduleList as $module => $title)
         {
-            $moduleList[$webRoot . $this->loadModel('common')->createFrontLink($module, 'index')] = $title;
+            if($module != 'manual') $moduleList[$webRoot . $this->loadModel('common')->createFrontLink($module, 'index')] = $title;
+            if($module == 'manual') $moduleList[$module] = $title;
         }
         return $moduleList;
     }
-
 }
