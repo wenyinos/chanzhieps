@@ -49,8 +49,9 @@ class tree extends control
 
         if($isWechatMenu)
         {
-            $this->lang->tree = $this->lang->wechatMenu;
-            $this->lang->tree->menu = $this->lang->wechat->menu;
+            $this->lang->tree             = $this->lang->wechatMenu;
+            $this->lang->category         = $this->lang->wechatMenu;
+            $this->lang->tree->menu       = $this->lang->wechat->menu;
             $this->lang->menuGroups->tree = 'wechat';
         }
         

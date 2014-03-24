@@ -499,7 +499,7 @@ class wechatapi
         $api  = 'https://api.weixin.qq.com/cgi-bin/token?' . http_build_query($param);
         $data = $this->get($api);
         $data = json_decode($data);
-        if(!$data) return false;
+        if(isset($data->errcode) or !$data) return false;
 
         /* Save it to session. */
         $token = new stdclass();
