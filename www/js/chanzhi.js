@@ -709,7 +709,7 @@ function handleTouch()
                 else pD = false;
                 break;
         }
-        if(pd) event.preventDefault();
+        if(pD) event.preventDefault();
     }
 
     function handleCarousel(carousel, distance)
