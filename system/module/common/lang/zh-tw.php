@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.zentao.net
  */
-/* common sign setting. */
+/* Common sign setting. */
 $lang->colon    = ' : ';
 $lang->prev     = '‹';
 $lang->next     = '›';
@@ -23,7 +23,7 @@ $lang->back2Top = '返回頂部';
 /* Lang items for xirang. */
 $lang->chanzhiEPS  = '蟬知企業門戶系統';
 $lang->chanzhiEPSx = '蟬知';
-$lang->poweredBy   = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>{$lang->chanzhiEPSx}%s</a></span>";
+$lang->poweredBy   = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>{$lang->chanzhiEPSx} %s</a></span>";
 
 /* IE6 alert.  */
 $lang->IE6Alert= <<<EOT
@@ -59,6 +59,8 @@ $lang->changePassword = '修改密碼';
 $lang->forgotPassword = '忘記密碼?';
 $lang->currentPos     = '當前位置';
 $lang->categoryMenu   = '分類導航';
+$lang->wechatTip      = '微信訂閲';
+$lang->qrcodeTip      = '移動訪問';
    
 /* Global action items. */
 $lang->reset          = '重填';
@@ -111,18 +113,30 @@ $lang->sitemap->common = '站點地圖';
 
 /* The main menus. */
 $lang->menu = new stdclass();
-$lang->menu->admin   = '首頁|admin|index|';
-$lang->menu->article = '文章|article|admin|';
-$lang->menu->blog    = '博客|article|admin|type=blog';
-$lang->menu->product = '產品|product|admin|';
-$lang->menu->book    = '手冊|book|admin|';
-$lang->menu->message = '評論留言|message|admin|';
-$lang->menu->page    = '單頁|article|admin|type=page';
-$lang->menu->forum   = '論壇|forum|admin|';
-$lang->menu->site    = '站點|site|setbasic|';
-$lang->menu->ui      = '界面|ui|setlogo|';
-$lang->menu->company = '公司|company|setbasic|';
-$lang->menu->user    = '會員|user|admin|';
+$lang->menu->admin    = '首頁|admin|index|';
+$lang->menu->article  = '文章|article|admin|';
+$lang->menu->blog     = '博客|article|admin|type=blog';
+$lang->menu->product  = '產品|product|admin|';
+$lang->menu->book     = '手冊|book|admin|';
+$lang->menu->page     = '單頁|article|admin|type=page';
+$lang->menu->forum    = '論壇|forum|admin|';
+$lang->menu->site     = '站點|site|setbasic|';
+$lang->menu->ui       = '界面|ui|setlogo|';
+$lang->menu->company  = '公司|company|setbasic|';
+$lang->menu->user     = '會員|user|admin|';
+$lang->menu->feedback = '反饋|message|admin|';
+
+/* Menu groups setting. */
+$lang->menuGroups = new stdclass();
+$lang->menuGroups->tag     = 'site';
+$lang->menuGroups->mail    = 'site';
+$lang->menuGroups->nav     = 'site';
+$lang->menuGroups->links   = 'site';
+$lang->menuGroups->wechat  = 'site';
+$lang->menuGroups->block   = 'ui';
+$lang->menuGroups->slide   = 'ui';
+$lang->menuGroups->tree    = 'article';
+$lang->menuGroups->message = 'feedback';
 
 /* Menu of article module. */
 $lang->article = new stdclass();
@@ -161,11 +175,25 @@ $lang->ui->menu->slide   = array('link' => '幻燈片設置|slide|admin|', 'alia
 $lang->ui->menu->admin   = array('link' => '區塊管理|block|admin|', 'alias' => 'create,edit');
 $lang->ui->menu->pages   = array('link' => '佈局設置|block|pages|', 'alias' => 'setregion');
 
+/* Menu of user module. */
+$lang->user = new stdclass();
+$lang->user->menu = new stdclass();
+$lang->user->menu->all    = '全部會員|user|admin|';
+$lang->user->menu->weibo  = '微博會員|user|admin|provider=weibo';
+$lang->user->menu->wechat = '微信會員|user|admin|provider=wechat';
+$lang->user->menu->qq     = 'QQ會員|user|admin|provider=qq';
+
 /* Menu of comment module. */
+$lang->feedback = new stdclass();
+$lang->feedback->menu = new stdclass();
+$lang->feedback->menu->message = '留言|message|admin|type=message';
+$lang->feedback->menu->comment = '評論|message|admin|type=comment';
+$lang->feedback->menu->thread  = '主題|forum|admin|tab=feedback';
+$lang->feedback->menu->reply   = '回帖|reply|admin|order=id_desc&tab=feedback';
+$lang->feedback->menu->wechat  = '微信|wechat|message|';
+
 $lang->message = new stdclass();
-$lang->message->menu = new stdclass();
-$lang->message->menu->message = '留言|message|admin|type=message';
-$lang->message->menu->comment = '評論|message|admin|type=comment';
+$lang->message->menu = $lang->feedback->menu;
 
 /* Menu of forum module. */
 $lang->forum = new stdclass();
@@ -184,49 +212,44 @@ $lang->site->menu->tag       = '關鍵詞設置|tag|admin|';
 $lang->site->menu->oauth     = '開放登錄|site|setoauth|';
 $lang->site->menu->link      = '友情連結|links|admin|';
 $lang->site->menu->mail      = array('link' => '發信設置|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->site->menu->wechat    = array('link' => '微信設置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
 
 /* Menu of company module. */
 $lang->company->menu = new stdclass();
 $lang->company->menu->basic   = '公司信息|company|setbasic|';
 $lang->company->menu->contact = '聯繫方式|company|setcontact|';
 
-/* Menu groups setting. */
-$lang->menuGroups = new stdclass();
-
 /* Menu of tree module. */
 $lang->tree = new stdclass();
 $lang->tree->menu = $lang->article->menu;
-$lang->menuGroups->tree = 'article';
 
 /* Menu of tag module. */
 $lang->tag = new stdclass();
 $lang->tag->menu = $lang->site->menu;
-$lang->menuGroups->tag = 'site';
 
 /* Menu of mail module. */
 $lang->mail = new stdclass();
 $lang->mail->menu = $lang->site->menu;
-$lang->menuGroups->mail = 'site';
+
+/* Menu of wechat module. */
+$lang->wechat = new stdclass();
+$lang->wechat->menu = $lang->site->menu;
 
 /* Menu of nav module. */
 $lang->nav = new stdclass();
 $lang->nav->menu = $lang->site->menu;
-$lang->menuGroups->nav  = 'site';
 
 /* Menu of tree module. */
 $lang->slide = new stdclass();
 $lang->slide->menu = $lang->ui->menu;
-$lang->menuGroups->slide = 'ui';
 
 /* Menu of block module. */
 $lang->block = new stdclass();
 $lang->block->menu = $lang->ui->menu;
-$lang->menuGroups->block  = 'ui';
 
 /* Menu of tree module. */
 $lang->links = new stdclass();
 $lang->links->menu = $lang->site->menu;
-$lang->menuGroups->links = 'site';
 
 /* The error messages. */
 $lang->error = new stdclass();
@@ -274,8 +297,11 @@ define('DT_TIME1',     'H:i:s');
 define('DT_TIME2',     'H:i');
 
 /* Keywords for chanzhi. */
-$lang->k  = '蟬知，開源免費的企業建站系統!;';
-$lang->k .= '蟬知，開源免費的cms!;';
-$lang->k .= '蟬知，免費建站首先！;';
-$lang->k .= '蟬知，企業網站建設專家！;';
-$lang->k .= '蟬知，開源php企業建站系統！';
+$lang->k  = '蟬知門戶，開源免費的企業建站系統!;';
+$lang->k .= '蟬知門戶，開源免費的cms!;';
+$lang->k .= '蟬知門戶，免費建站首選！;';
+$lang->k .= '蟬知門戶，企業網站建設專家！;';
+$lang->k .= '蟬知門戶，開源php企業建站系統！';
+$lang->k .= '蟬知門戶，微網站專家！';
+$lang->k .= '蟬知門戶，微網站首選！';
+$lang->k .= '蟬知門戶，微信營銷首選！';
