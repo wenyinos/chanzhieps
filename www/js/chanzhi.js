@@ -688,24 +688,22 @@ function handleTouch()
 {
     $('.carousel').on('touchstart touchmove touchend',   touch);
 
-    var touchStart, direction;
+    var touchStart;
     
     /* listen the touch event */
     function touch(event)
     {
         var carousel = $(this);
-        var event    = event || window.event;
-        var $w       = $(window);
+        var event = event || window.event;
         if(event.originalEvent) event = event.originalEvent;
 
         switch(event.type)
         {
             case "touchstart":
-                direction  = ($w.width() > $w.height()) ? 'pageY' : 'pageX';
-                touchStart = event.touches[0][direction];
+                touchStart = event.touches[0].pageX;
                 break;
             case "touchend":
-                handleCarousel(carousel, event.changedTouches[0][direction] - touchStart);
+                handleCarousel(carousel, event.changedTouches[0].pageX - touchStart);
                 break;
         }
         event.preventDefault();
