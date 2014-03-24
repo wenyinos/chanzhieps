@@ -624,7 +624,7 @@ class wechatModel extends model
     public function pullFans()
     {
         $publicList = $this->dao->select('*')->from(TABLE_WX_PUBLIC)->fetchAll();
-        $pulledFans = $this->dao->select("*")->from(TABLE_OAUTH)->where('provider')->eq('wechat')->fetch('openID');
+        $pulledFans = $this->dao->select('*')->from(TABLE_OAUTH)->where('provider')->eq('wechat')->fetchAll('openID');
         foreach($publicList as $public)
         {
             $this->app->loadClass('wechatapi', true);
@@ -641,7 +641,6 @@ class wechatModel extends model
                 $user['openID']   = $openID;
                 $user['provider'] = 'wechat';
                 $user['public']   = $public->id;
-                $user['account']  = uniqid('wx_');
                 $user['account']  = uniqid('wx_');
                 $user['join']     = helper::now();
 
