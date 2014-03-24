@@ -686,7 +686,7 @@ function autoBlockGrid()
  */
 function handleTouch()
 {
-    $('.carousel').on('touchstart touchmove touchend',   touch);
+    $('.carousel').on('touchstart touchmove touchend',  touch);
 
     var touchStart, pD;
     
@@ -695,7 +695,7 @@ function handleTouch()
     {
         var event = event || window.event;
         if(event.originalEvent) event = event.originalEvent;
-        pD = true;
+        var carousel = $(this);
 
         switch(event.type)
         {
@@ -705,14 +705,9 @@ function handleTouch()
             case "touchend":
                 var distance = event.changedTouches[0].pageX - touchStart.pageX;
                 if(Math.abs(distance) > Math.abs(event.changedTouches[0].pageY - touchStart.pageY))
-                {
-                    pD = true;
-                    handleCarousel($(this), distance);
-                }
-                else pD = false;
+                    handleCarousel(carousel, distance);
                 break;
         }
-        if(pD) event.preventDefault();
     }
 
     function handleCarousel(carousel, distance)
