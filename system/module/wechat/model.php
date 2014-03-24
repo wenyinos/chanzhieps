@@ -630,6 +630,8 @@ class wechatModel extends model
             $api  = new wechatapi($public->token, $public->appID, $public->appSecret, $this->config->debug);
             $fans = $api->getFans();
 
+            if(empty($fans->data))continue;
+
             foreach($fans->data->openid as $openID)
             {
                 if(isset($pulledFans[$openID])) continue;
