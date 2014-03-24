@@ -77,6 +77,7 @@ body {background: #232323;}
 #siteSlogan {position: absolute; top: -32px; padding-left: 0; font-size: 14px; font-weight: normal; color: #808080}
 #siteLogo {padding: 5px 0}
 #siteLogo img {height: 60px;}
+#siteName h2{line-height: 50px;}
 
 /* Navbar */
 #navbar {position: relative; background: none; border: none; min-height: 0; background: #fff}
