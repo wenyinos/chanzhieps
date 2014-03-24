@@ -372,6 +372,8 @@ a.tag-link {color: inherit;}
   .carousel-caption {top: 10px; padding-top: 5px;}
   .carousel-caption h2 {font-size: 18px;}
   .carousel-caption .btn {font-size: 14px; padding: 8px 15px;}
+
+  .m-article-view .breadcrumb > li:last-child {display: none}
 }
 @media (max-width: 620px) {.carousel-caption {top: 10px; padding-top: 0;} .carousel-caption h2 {font-size: 16px;} .carousel-caption ul {font-size: 12px; line-height: 1.2em; padding: 0 0 0 20px} .carousel-caption .btn {font-size: 14px; padding: 6px 15px;}}
 @media (max-width: 480px) {.page {color :transparent; white-space:nowrap; overflow:hidden;} .carousel-caption ul {display: none}}
