@@ -39,18 +39,18 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
             <?php
             if($product->promotion != 0)
             {
-                echo "<span class='text-muted'><i class='icon-yen'></i></span> ";
+                echo "<span class='text-muted'>{$this->lang->product->currencyIcon}</span> ";
                 echo "<strong class='text-danger'>" . $product->promotion . '</strong>';
                 if($product->price != 0)
                 {
-                    echo "&nbsp;&nbsp;<del class='text-muted'><i class='icon-yen'></i> " . $product->price .'</del>';
+                    echo "&nbsp;&nbsp;<del class='text-muted'>{$this->lang->product->currencyIcon} " . $product->price .'</del>';
                 }
             }
             else
             {
                 if($product->price != 0)
                 {
-                    echo "<span class='text-muted'><i class='icon-yen'></i></span> ";
+                    echo "<span class='text-muted'>{$this->lang->product->currencyIcon}</span> ";
                     echo "<strong class='text-important'>" . $product->price . '</strong>&nbsp;&nbsp;';
                 }
             }
@@ -79,15 +79,15 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
         {
             if($product->price != 0)
             {
-                echo "<small class='text-muted'><i class='icon-yen'></i></small> ";
+                echo "<small class='text-muted'>{$this->lang->product->currencyIcon}</small> ";
                 echo "<del><small class='text-muted'>" . $product->price . "</small></del>";
             }
-            echo "&nbsp; <small class='text-muted'><i class='icon-yen'></i></small> ";
+            echo "&nbsp; <small class='text-muted'>{$this->lang->product->currencyIcon}</small> ";
             echo "<strong class='text-danger'>" . $product->promotion . "</strong>";
         }
         else if($product->price != 0)
         {
-            echo "&nbsp; <small class='text-muted'><i class='icon-yen'></i></small> ";
+            echo "&nbsp; <small class='text-muted'>{$this->lang->product->currencyIcon}</small> ";
             echo "<strong class='text-important'>" . $product->price . "</strong>";
         }
         ?>
