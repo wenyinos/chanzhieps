@@ -138,22 +138,22 @@ class wechatModel extends model
      */
     public function getResponseForMessage($public, $message)
     {
-        if(in_array($message->event, array('unsubscribe', 'location')))
+        if(isset($message->event) && in_array($message->event, array('unsubscribe', 'location')))
         {
             $this->saveMessage($public, $message);
             return false;
         }
 
-        if($message->msgType == 'text') $response = $this->getResponseByKey($public, $message->content);    
+        if($message->msgType == 'text')  $response = $this->getResponseByKey($public, $message->content);    
         if($message->msgType == 'event') $response = $this->getResponseByKey($public, $message->eventKey);    
-        if($message->event   == 'subscribe') $response = $this->getResponseByKey($public, 'subscribe');    
+        if(isset($message->event) && $message->event   == 'subscribe') $response = $this->getResponseByKey($public, 'subscribe');    
 
         if(empty($response)) $response = $this->getResponseByKey($public, 'default');    
 
         if(!empty($response))
         {
             $message->response = $response->id;
-            if($message->event == 'VIEW') 
+            if(isset($message->event) && $message->event == 'VIEW') 
             {
                  $message->response = $this->dao->select('id')->from(TABLE_WX_RESPONSE)->where('`key`')->like('m_%')->andWhere('concat(content, source)')->eq($message->eventKey)->fetch('id');
             }
@@ -562,7 +562,7 @@ class wechatModel extends model
             $message->content = $data->eventKey;
         }
 
-        if(in_array($data->event, array('subscribe', 'unsubscribe', 'SCAN')))
+        if(isset($data->event) && in_array($data->event, array('subscribe', 'unsubscribe', 'SCAN')))
         {
             $message->content = isset($data->eventKey) ? $data->eventKey : $data->event;
         }
@@ -733,4 +733,21 @@ class wechatModel extends model
         }
         return $records;
     }
+
+    /**
+     * Get modeulList.
+     * 
+     * @access public
+     * @return void
+     */
+    public function getModeulList()
+    {
+        $webRoot = rtrim(getWebRoot(true), '/');
+        foreach($this->lang->wechat->response->moduleList as $module => $title)
+        {
+            $moduleList[$webRoot . $this->loadModel('common')->createFrontLink($module, 'index')] = $title;
+        }
+        return $moduleList;
+    }
+
 }

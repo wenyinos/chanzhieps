@@ -59,20 +59,12 @@ $lang->wechat->response->typeList['news'] = 'News';
 $lang->wechat->response->sourceList['system'] = 'System';
 $lang->wechat->response->sourceList['manual'] = 'Manual';
 
-global $app;
-$webRoot = rtrim(getWebRoot(true), '/');
-$home    = $webRoot . commonModel::createFrontLink('index', 'index'); 
-$company = $webRoot . commonModel::createFrontLink('company', 'index'); 
-$blog    = $webRoot . commonModel::createFrontLink('blog', 'index'); 
-$forum   = $webRoot . commonModel::createFrontLink('forum', 'index'); 
-$book    = $webRoot . commonModel::createFrontLink('book', 'index'); 
-
-$lang->wechat->response->moduleList[$home]    = 'Home';
-$lang->wechat->response->moduleList[$company] = 'About Us';
-$lang->wechat->response->moduleList[$blog]    = 'Blog';
-$lang->wechat->response->moduleList[$forum]   = 'Forum';
-$lang->wechat->response->moduleList[$book]    = 'Book';
-$lang->wechat->response->moduleList['manual'] = 'Manual';
+$lang->wechat->response->moduleList['index']   = 'Home';
+$lang->wechat->response->moduleList['company'] = 'About Us';
+$lang->wechat->response->moduleList['blog']    = 'Blog';
+$lang->wechat->response->moduleList['forum']   = 'Forum';
+$lang->wechat->response->moduleList['book']    = 'Book';
+$lang->wechat->response->moduleList['manual']  = 'Manual';
 
 $lang->wechat->response->textBlockList['company'] = 'Company';
 $lang->wechat->response->textBlockList['contact'] = 'Contact';
