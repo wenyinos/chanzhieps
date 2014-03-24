@@ -40,7 +40,7 @@
         <td class='text-left'><?php echo $message->content;?></td>
         <td><?php echo $lang->wechat->message->typeList[$message->type];?></td>
         <td><?php echo $message->time;?></td>
-        <td class='text-center'>
+        <td>
           <?php if($message->type != 'unsubscribe') echo html::a(inlink('reply', "message={$message->id}"), $lang->wechat->message->reply, "data-toggle=modal");?>
         </td>
       </tr>
