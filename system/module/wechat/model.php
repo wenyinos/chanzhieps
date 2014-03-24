@@ -69,6 +69,7 @@ class wechatModel extends model
         $qrcodeFile = $this->app->getDataRoot() . 'wechat' . DS . $public->appID . '.jpg';
         if(!is_dir(dirname($qrcodeFile))) @mkdir(dirname($qrcodeFile));
         $data = $api->getQRCode($qrcodeFile); 
+        if(!$data) return false;
         return $this->app->getWebRoot() . 'data/wechat/' . $public->appID . '.jpg';
     }
 

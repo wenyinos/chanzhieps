@@ -9,6 +9,7 @@
       <table class='table table-borderless'>
         <tr>
           <?php foreach($publicList as $public):?>
+          <?php if(!$public->qrcode) continue;?>
           <td>
             <div class='heading'><i class='icon-weixin'>&nbsp;</i> <?php echo $public->name;?></div>
             <?php echo html::image($public->qrcode);?>

@@ -467,7 +467,7 @@ class wechatapi
         $token = $this->getAccessToken();
         $url = "https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=$token";
         $data = json_decode($this->post($url, json_encode($params)));
-        if(!isset($data->ticket)) return false;
+        if(!isset($data->ticket) or (isset($data->errcode) and $data->errcode)) return false;
 
         /* Get qrcode. */
         $url  = 'https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=' . urlencode($data->ticket);
