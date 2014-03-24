@@ -13,22 +13,18 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
-    <strong><i class='icon-certificate'></i> <?php echo $lang->ui->setLogo;?></strong>
+    <strong><i class='icon-certificate'></i><?php echo $lang->ui->setLogo;?></strong>
   </div>
   <div class='panel-body'>
     <form method='post' id='ajaxForm' enctype='multipart/form-data'>
       <table class='table table-form'>
         <tr>
-          <td><?php if(isset($logo->webPath))  echo html::image(isset($logo->webPath) ? $logo->webPath : '', "class='logo' title='{$this->config->company->name}'"); ?></td>
           <td><?php echo html::file('files', "class='form-control'");?></td>
           <td><?php echo html::submitButton();?></td>
           <td><strong class='text-info'><?php echo $lang->ui->suitableLogoSize; ?></strong></td>
         </tr>
+        <tr><td colspan='3'><?php if(isset($logo->webPath)) echo html::image($logo->webPath, "class='logo'");?></td></tr>
       </table>
-      <div class='form-group'>
-        <div class='col-sm-8'></div>
-        <div class='col-sm-4'></div>
-      </div>
     </form>
   </div>
 </div>

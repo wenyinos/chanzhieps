@@ -51,7 +51,7 @@ include '../../common/view/chosen.html.php';
             <td colspan='2'>
               <div class='form-group'>
                 <div class='col-sm-3'>
-                  <?php echo html::select('source', $this->lang->wechat->response->moduleList, isset($response->source) ? $response->source : '', "class='form-control'");?>
+                  <?php echo html::select('source', $moduleList, isset($response->source) ? $response->source : '', "class='form-control'");?>
                 </div>
                 <div class='col-sm-9 manual'><?php echo html::input('content', (isset($response->source) and $response->source == 'manual') ? $response->content : '', "class='form-control'");?></div>
               </div>

@@ -384,16 +384,14 @@ a.tag-link {color: inherit;}
 #rightDocker {position: fixed; top: 50%; margin-top: -40px; right: 0}
 #rightDockerBtn {border-radius: 4px 0 0 4px}
 #rightDockerBtn i {font-size: 28px; margin-top: 2px; display: block}
-.docker-right {padding: 20px 0;}
+.docker-right {padding: 20px 10px; background: #e5e5e5;}
 .docker-right .table {margin-bottom: 0;}
 .docker-right .table-borderless td {text-align: center; vertical-align: middle; padding: 0 15px 15px}
- .table-borderless td {border-left: 1px solid #ddd}
- .table-borderless td:first-child {border-left: none}
 .popover {max-width: 900px}
 .docker-right .icon-mobile-phone, .docker-right .icon-weixin {font-size: 42px; color: #fff; background: #145CCD; display: inline-block; width: 50px; line-height: 50px; height: 50px; border-radius: 25px; vertical-align: middle; margin-right: 10px;}
 .docker-right .icon-weixin {background: #64ab23 url(images/main/weixin.png) no-repeat center}
 .docker-right  {vertical-align: middle;}
-.docker-right img {width: 240px; height: 240px; margin-top: 10px;}
+.docker-right img {width: 240px; width:auto\0; height: 240px; margin-top: 10px; border: 1px solid #ccc}
 
 /* bootbox */
 .bootbox-alert .modal-dialog {width: 400px; margin-top: 10%;}

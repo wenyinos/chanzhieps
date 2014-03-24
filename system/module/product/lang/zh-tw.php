@@ -41,6 +41,8 @@ $lang->product->order      = '排序';
 $lang->product->attribute  = '產品屬性';
 $lang->product->sales      = '產品定價';
 
+$lang->product->currencyIcon = 'icon-yen';
+
 $lang->product->list       = '產品列表';
 $lang->product->hot        = '熱門產品';
 $lang->product->admin      = '維護產品';

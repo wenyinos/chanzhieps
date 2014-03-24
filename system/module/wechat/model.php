@@ -95,7 +95,7 @@ class wechatModel extends model
     public function update($publicID)
     {
         $public = fixer::input('post')->get();
-        $this->dao->update(TABLE_WX_PUBLIC)->data($public)->autoCheck()->exec();
+        $this->dao->update(TABLE_WX_PUBLIC)->data($public)->autoCheck()->where('id')->eq($publicID)->exec();
         return !dao::isError();
     }
 
@@ -733,4 +733,21 @@ class wechatModel extends model
         }
         return $records;
     }
+
+    /**
+     * Get modeulList.
+     * 
+     * @access public
+     * @return void
+     */
+    public function getModeulList()
+    {
+        $webRoot = rtrim(getWebRoot(true), '/');
+        foreach($this->lang->wechat->response->moduleList as $module => $title)
+        {
+            $moduleList[$webRoot . $this->loadModel('common')->createFrontLink($module, 'index')] = $title;
+        }
+        return $moduleList;
+    }
+
 }

@@ -152,8 +152,8 @@ $lang->user->control->common      = '用戶中心';
 $lang->user->control->welcome     = '歡迎您，<strong>%s</strong>';
 $lang->user->control->lblPassword = "留空，則保持不變。";
 
-$lang->user->control->menus[10] = '<i class="icon-large icon-user"></i> 個人信息 <i class="icon-chevron-right"></i>|user|profile';
-$lang->user->control->menus[20] = '<i class="icon-large icon-edit"></i> 編輯信息 <i class="icon-chevron-right"></i>|user|edit';
-$lang->user->control->menus[28] = '<i class="icon-large icon-comments-alt"></i> 我的消息 <i class="icon-chevron-right"></i>|user|message';
-$lang->user->control->menus[30] = '<i class="icon-large icon-share"></i> 我的主題 <i class="icon-chevron-right"></i>|user|thread';
-$lang->user->control->menus[40] = '<i class="icon-large icon-mail-reply"></i> 我的回帖 <i class="icon-chevron-right"></i>|user|reply';
+$lang->user->control->menus[10] = '<i class="icon-user"></i> 個人信息 <i class="icon-chevron-right"></i>|user|profile';
+$lang->user->control->menus[20] = '<i class="icon-edit"></i> 編輯信息 <i class="icon-chevron-right"></i>|user|edit';
+$lang->user->control->menus[28] = '<i class="icon-comments-alt"></i> 我的消息 <i class="icon-chevron-right"></i>|user|message';
+$lang->user->control->menus[30] = '<i class="icon-share"></i> 我的主題 <i class="icon-chevron-right"></i>|user|thread';
+$lang->user->control->menus[40] = '<i class="icon-mail-reply"></i> 我的回帖 <i class="icon-chevron-right"></i>|user|reply';
