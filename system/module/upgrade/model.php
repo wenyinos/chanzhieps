@@ -78,6 +78,7 @@ class upgradeModel extends model
                 $this->setImageSize();
                 $this->upgradeHtmlBlocks();
                 $this->upgradeLayouts();
+            case '2_1': $this->execSQL($this->getUpgradeFile('2.1'));
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -96,16 +97,17 @@ class upgradeModel extends model
         $confirmContent = '';
         switch($fromVersion)
         {
-            case '1_0': $confirmContent .= file_get_contents($this->getUpgradeFile('1.0'));
-            case '1_1': $confirmContent .= file_get_contents($this->getUpgradeFile('1.1'));
-            case '1_2': $confirmContent .= file_get_contents($this->getUpgradeFile('1.2'));
-            case '1_3': $confirmContent .= file_get_contents($this->getUpgradeFile('1.3'));
-            case '1_4': $confirmContent .= file_get_contents($this->getUpgradeFile('1.4'));
-            case '1_5': $confirmContent .= file_get_contents($this->getUpgradeFile('1.5'));
-            case '1_6': $confirmContent .= file_get_contents($this->getUpgradeFile('1.6'));
-            case '1_7': $confirmContent .= file_get_contents($this->getUpgradeFile('1.7'));
-            case '2_0': $confirmContent .= file_get_contents($this->getUpgradeFile('2.0'));
+            case '1_0'  : $confirmContent .= file_get_contents($this->getUpgradeFile('1.0'));
+            case '1_1'  : $confirmContent .= file_get_contents($this->getUpgradeFile('1.1'));
+            case '1_2'  : $confirmContent .= file_get_contents($this->getUpgradeFile('1.2'));
+            case '1_3'  : $confirmContent .= file_get_contents($this->getUpgradeFile('1.3'));
+            case '1_4'  : $confirmContent .= file_get_contents($this->getUpgradeFile('1.4'));
+            case '1_5'  : $confirmContent .= file_get_contents($this->getUpgradeFile('1.5'));
+            case '1_6'  : $confirmContent .= file_get_contents($this->getUpgradeFile('1.6'));
+            case '1_7'  : $confirmContent .= file_get_contents($this->getUpgradeFile('1.7'));
+            case '2_0'  : $confirmContent .= file_get_contents($this->getUpgradeFile('2.0'));
             case '2_0_1': $confirmContent .= file_get_contents($this->getUpgradeFile('2.0.1'));
+            case '2_1'  : $confirmContent .= file_get_contents($this->getUpgradeFile('2.1'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
