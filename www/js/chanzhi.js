@@ -700,10 +700,12 @@ function handleTouch()
         switch(event.type)
         {
             case "touchstart":
-                touchStart = event.touches[0].pageX;
+                touchStart = event.touches[0];
                 break;
             case "touchend":
-                handleCarousel(carousel, event.changedTouches[0].pageX - touchStart);
+                var distance = event.changedTouches[0].pageX - touchStart.pageX;
+                if(Math.abs(distance) > Math.abs(event.changedTouches[0].pageY - touchStart.pageY))
+                    handleCarousel(carousel, distance);
                 break;
         }
         event.preventDefault();
