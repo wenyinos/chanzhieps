@@ -688,7 +688,7 @@ function handleTouch()
 {
     $('.carousel').on('touchstart touchmove touchend',  touch);
 
-    var touchStartX, touchStartY, pd;
+    var touchStartX, touchStartY;
     
     /* listen the touch event */
     function touch(event)
@@ -696,7 +696,6 @@ function handleTouch()
         var event = event || window.event;
         if(event.originalEvent) event = event.originalEvent;
         var carousel = $(this);
-        pd = true;
 
         switch(event.type)
         {
@@ -708,10 +707,8 @@ function handleTouch()
                 var distance = event.changedTouches[0].pageX - touchStartX;
                 if(Math.abs(distance) > Math.abs(event.changedTouches[0].pageY - touchStartY))
                     handleCarousel(carousel, distance);
-                else pd = false;
                 break;
         }
-        if(pd) event.preventDefault();
     }
 
     function handleCarousel(carousel, distance)
