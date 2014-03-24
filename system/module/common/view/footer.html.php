@@ -54,13 +54,15 @@ $publicList = $this->loadModel('wechat')->getList();
           <?php foreach($publicList as $public):?>
           <td>
             <div class='heading'><i class='icon-weixin'>&nbsp;</i> <?php echo $public->name;?></div>
-            <?php echo html::image($public->qrcode);?>
+            <!-- <?php echo html::image($public->qrcode);?> -->
+            <img src="http://gxy.wx.chanzhi.org/data/wechat/wxc29319d6316cb801.jpg">
           </td>
           <?php endforeach;?>
           <?php if(extension_loaded('gd')):?>
           <td>
             <div class='heading'><i class='icon-mobile-phone'></i> <?php echo $lang->qrcodeTip;?></div>
-            <?php echo html::image($this->createLink('misc', 'qrcode'));?>
+            <!-- <?php echo html::image($this->createLink('misc', 'qrcode'));?> -->
+            <img src="http://gxy.wx.chanzhi.org/misc-qrcode.html">
           </td>
           <?php endif;?>
         </tr>
