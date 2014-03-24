@@ -151,6 +151,10 @@ body {background: #232323;}
 /* Thread */
 .thread .panel-heading {backgroundImage: none !important}
 
+/* Right docker */
+.docker-right .icon-mobile-phone {background: #e91b23}
+#rightDockerBtn {border-radius: 0}
+
 /* pages */
 .m-index-index .focus-top {margin-bottom: 20px;}
 .m-index-index #slide {margin-bottom: 0;}
