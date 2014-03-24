@@ -17,35 +17,36 @@
       <h4 class='modal-title'><i class="icon-mail-reply"></i> <?php echo $lang->wechat->message->reply;?></h4>
     </div>
     <div class='modal-body'>
-      <div id='recordsBox'>
-        <table class='table table-border-none'>
-          <?php foreach($records as $record):?>
-          <tr>
-            <td>
-              <?php echo $user->nickname . $record->time;?><br>
-              <span><?php echo $lang->wechat->message->typeList[$record->type] . $lang->colon . $record->content;?></span>
-            </td>
-          </tr>
-          <?php if(isset($record->replies)):?>
-          <?php foreach($record->replies as $reply):?>
-          <tr class='reply'>
-            <td>
-              <label><?php echo $reply->from . $reply->time;?></label><br/>
-              <span><?php echo $reply->content;?></span>
-            </td>
-          </tr>
-          <?php endforeach;?>
+      <div id='recordsBox' class='comments-list'>
+        <?php foreach($records as $record):?>
+          <div class='comment' id="record<?php echo $record->id?>">
+            <div class='avatar'><div class='avatar-empty icon-comments-alt'></div></div>
+            <div class='content'>
+              <div class='text'><span class='author'><strong><?php echo $user->nickname . $lang->colon;?></strong></span> &nbsp;<?php echo nl2br($record->content);?></div>
+              <div class='actions text-muted small'><span class='text-important'><?php echo $lang->wechat->message->typeList[$record->type] ?></span> &nbsp; <?php echo $lang->wechat->message->time . $lang->colon . $record->time;?></div>
+            </div>
+            <?php if(isset($record->replies)):?>
+            <div class='comments-list'>
+              <?php foreach($record->replies as $reply):?>
+                <div class='comment'>
+                  <div class='avatar'><div class='avatar-empty icon-reply'></div></div>
+                  <div class='content'>
+                    <div class='text'><span class='author'><strong><?php echo $reply->from . $lang->colon;?></strong></span> &nbsp;<?php echo nl2br($reply->content);?></div>
+                    <div class='actions text-muted small'><?php echo $lang->wechat->message->time . ' ' . $reply->time;?></div>
+                  </div>
+                </div>
+              <?php endforeach;?>
+            </div>
           <?php endif;?>
-          <?php endforeach;?>
-        </table>
+          </div>
+        <?php endforeach;?>
       </div>
       <form method='post' action="<?php echo inlink('reply', "messge={$message->id}");?>" id='ajaxForm'>
-        <table class='table table-form'>
-          <tr>
-            <td><?php echo html::textarea('content', '', "class='form-control' rows=2");?></td>
-            <td class='w-50px'><?php echo html::submitButton($lang->wechat->message->reply) . html::hidden('referer', $this->server->http_referer);?></td>
-          </tr>
-        </table>
+        <?php echo html::hidden('referer', $this->server->http_referer); ?>
+        <div id='replyBox'>
+          <?php echo html::textarea('content', '', "class='form-control' rows=2");?>
+          <?php echo html::submitButton($lang->wechat->message->reply);?>
+        </div>
       </form>
     </div>
   </div>

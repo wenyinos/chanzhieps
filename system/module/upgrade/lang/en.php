@@ -49,3 +49,4 @@ $lang->upgrade->fromVersions['1_7']   = '1.7.stable';
 $lang->upgrade->fromVersions['1_8']   = '1.8.stable';
 $lang->upgrade->fromVersions['2_0']   = '2.0.stable';
 $lang->upgrade->fromVersions['2_0_1'] = '2.0.1.stable';
+$lang->upgrade->fromVersions['2_1']   = '2.1.stable';
