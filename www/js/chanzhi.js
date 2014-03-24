@@ -711,7 +711,7 @@ function handleTouch()
                 else
                 {
                     var $w = $(window);
-                    $('body,html').animate({scrollTop:$w.scrollTop() + distanceY},400)
+                    $('body,html').animate({scrollTop:$w.scrollTop() - distanceY},400)
                 }
                 break;
         }
