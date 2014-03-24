@@ -704,11 +704,18 @@ function handleTouch()
                 touchStartY = event.touches[0].pageY;
                 break;
             case "touchend":
-                var distance = event.changedTouches[0].pageX - touchStartX;
-                if(Math.abs(distance) > Math.abs(event.changedTouches[0].pageY - touchStartY))
-                    handleCarousel(carousel, distance);
+                var distanceX = event.changedTouches[0].pageX - touchStartX;
+                var distanceY = event.changedTouches[0].pageY - touchStartY;
+                if(Math.abs(distanceX) > Math.abs(distanceY))
+                    handleCarousel(carousel, distanceX);
+                else
+                {
+                    var $w = $(window);
+                    $('body,html').animate({scrollTop:$w.scrollTop() + distanceY},400)
+                }
                 break;
         }
+        event.preventDefault();
     }
 
     function handleCarousel(carousel, distance)
