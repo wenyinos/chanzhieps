@@ -161,7 +161,6 @@ class wechat extends control
      */
     public function adminResponse($publicID)
     {
-
         $this->view->title           = $this->lang->wechat->response->keywords;
         $this->view->publicID        = $publicID;
         $this->view->responseList    = $this->wechat->getResponseList($publicID);
