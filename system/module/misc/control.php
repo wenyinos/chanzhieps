@@ -31,7 +31,7 @@ class misc extends control
         }   
 
         $this->app->loadClass('qrcode');
-        QRcode::png($this->server->http_referer, false, 4, 4); 
+        QRcode::png($this->server->http_referer, false, 4, 6); 
     }   
 }
 
