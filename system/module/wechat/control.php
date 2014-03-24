@@ -167,7 +167,7 @@ class wechat extends control
         $this->view->responseList    = $this->wechat->getResponseList($publicID);
         $this->view->articleCategory = $this->loadModel('tree')->getPairs(0, 'article');
         $this->view->productCategory = $this->tree->getPairs(0, 'product');
-        $this->view->moduleList      = $this->wechat->getModeulList();
+        $this->view->moduleList      = $this->wechat->getModuleList();
         $this->display();
     }
 
@@ -209,7 +209,7 @@ class wechat extends control
         $this->view->articleTree = $this->loadModel('tree')->getOptionMenu('article', 0, $removeRoot = true);
         $this->view->productTree = $this->tree->getOptionMenu('product', 0, $removeRoot = true);
         $this->view->title       = $this->lang->wechat->response->set;
-        $this->view->moduleList  = $this->wechat->getModeulList();
+        $this->view->moduleList  = $this->wechat->getModuleList();
         $this->view->public      = $public;
         $this->view->group       = $group;
         $this->view->key         = $key;
