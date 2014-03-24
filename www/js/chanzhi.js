@@ -688,14 +688,14 @@ function handleTouch()
 {
     $('.carousel').on('touchstart touchmove touchend',   touch);
 
-    var touchStart;
+    var touchStart, pD;
     
     /* listen the touch event */
     function touch(event)
     {
         var event = event || window.event;
         if(event.originalEvent) event = event.originalEvent;
-        var pD = true;
+        pD = true;
 
         switch(event.type)
         {
@@ -705,7 +705,10 @@ function handleTouch()
             case "touchend":
                 var distance = event.changedTouches[0].pageX - touchStart.pageX;
                 if(Math.abs(distance) > Math.abs(event.changedTouches[0].pageY - touchStart.pageY))
+                {
+                    pD = true;
                     handleCarousel($(this), distance);
+                }
                 else pD = false;
                 break;
         }
