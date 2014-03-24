@@ -43,7 +43,9 @@ $publicList = $this->loadModel('wechat')->getList();
 <a href='#' id='go2top' class='icon-arrow-up' data-toggle='tooltip' title='<?php echo $lang->back2Top; ?>'></a>
 </div><?php /* end "div.page-container" in "header.html.php" */ ?>
 <div id='rightDocker' class='hidden-xs'>
+  <?php if(!empty($public) or extension_loaded('gd')):?>
   <button id='rightDockerBtn' class='btn' data-toggle="popover" data-placement="left" data-target='$next'><i class='icon-qrcode'></i></button>
+  <?php endif;?>
   <div class='popover fade'>
     <div class='arrow'></div>
     <div class='popover-content docker-right'>
@@ -51,14 +53,16 @@ $publicList = $this->loadModel('wechat')->getList();
         <tr>
           <?php foreach($publicList as $public):?>
           <td>
-            <div class='heading'><i class='icon-weixin'>&nbsp;</i> <?php echo $lang->wechatTip;?></div>
+            <div class='heading'><i class='icon-weixin'>&nbsp;</i> <?php echo $public->name;?></div>
             <?php echo html::image($public->qrcode);?>
           </td>
           <?php endforeach;?>
+          <?php if(extension_loaded('gd')):?>
           <td>
             <div class='heading'><i class='icon-mobile-phone'></i> <?php echo $lang->qrcodeTip;?></div>
-            <img src='' alt=''>
+            <?php echo html::image($this->createLink('misc', 'qrcode'));?>
           </td>
+          <?php endif;?>
         </tr>
       </table>
     </div>

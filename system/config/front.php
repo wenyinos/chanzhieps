@@ -66,6 +66,8 @@ $config->rights->guest['error']['index'] = 'index';
 $config->rights->guest['page']['index'] = 'index';
 $config->rights->guest['page']['view']  = 'view';
 
+$config->rights->guest['misc']['qrcode'] = 'qrcode';
+
 /* For logged member. */
 $config->rights->member['thread']['post']       = 'post';
 $config->rights->member['thread']['reply']      = 'reply';
