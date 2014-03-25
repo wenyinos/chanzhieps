@@ -10,7 +10,7 @@
         {
             foreach($books as $menu)
             {
-                echo '<li' . (($menu->title == $book->title) ? " class='active'" : '') . '>' . html::a(inlink('browse', "bookID=$menu->id", "book=$menu->alias"), '<i class="icon-book"></i> &nbsp;' . $menu->title) . '</li>';
+                echo '<li' . (($menu->title == $book->title) ? " class='active'" : '') . '>' . html::a(inlink('browse', "bookID=$menu->id", "book=$menu->alias"), '<i class="icon-book"></i> &nbsp;' . $menu->title . '<i class="icon-chevron-right"></i>') . '</li>';
             }
         }
         ?>
