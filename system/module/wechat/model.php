@@ -425,11 +425,11 @@ class wechatModel extends model
             $article->url         = rtrim(getWebRoot(true), '/') . commonModel::createFrontLink($type, 'browse', "categoryID={$category->id}", "category={$category->alias}");
             $article->description =  $category->desc;
 
-            if($isFirst) $article->picUrl = getWebRoot(true) . "www/theme/default/images/main/wechat{$type}.png";
+            if($isFirst) $article->picUrl = getWebRoot(true) . "theme/default/images/main/wechat{$type}.png";
 
+            $isFirst = false;
             $response->articles[] = $article;
         }
-        $isFirst = false;
         return $response;
     }
 
