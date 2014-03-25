@@ -12,7 +12,7 @@
 $lang->wechat->id        = '编号';
 $lang->wechat->type      = '类型';
 $lang->wechat->name      = '微信名';
-$lang->wechat->account   = '微信号';
+$lang->wechat->account   = '原始ID';
 $lang->wechat->appID     = 'AppID';
 $lang->wechat->appSecret = 'AppSecret';
 $lang->wechat->token     = 'Token';
@@ -26,7 +26,7 @@ $lang->wechat->edit      = '编辑公众号';
 $lang->wechat->admin     = '维护公众号';
 $lang->wechat->list      = '公众号列表';
 $lang->wechat->setMenu   = '菜单';
-$lang->wechat->access    = '接入';
+$lang->wechat->integrate = '接入';
 
 $lang->wechat->typeList['subscribe'] = '订阅号';
 $lang->wechat->typeList['service']   = '服务号';
@@ -109,12 +109,15 @@ $lang->wechat->message->tabList[] = 'replied=1|已回复';
 $lang->wechat->placeholder = new stdclass();
 $lang->wechat->placeholder->limit    = '请输条数，最多10条';
 $lang->wechat->placeholder->category = '请选择类目，最多10个';
+$lang->wechat->placeholder->name     = '公众号名称';
+$lang->wechat->placeholder->account  = 'gh_xxx 格式';
+$lang->wechat->placeholder->token    = '必须为英文或数字，长度为3-32字符';
 
 $lang->wechat->needCertified  = "此功能需要公众号认证后使用。";
-$lang->wechat->accessInfo = <<<EOT
+$lang->wechat->integrateInfo = <<<EOT
 <ul style="padding-left: 10px">
-  <li><strong>AppSecret</strong>： %s </li>
   <li><strong>接入地址</strong>： %s </li>
   <li><strong>Token</strong>： %s </li>
+  <li><strong>AppSecret</strong>： %s </li>
 </ul>
 EOT;

@@ -34,7 +34,9 @@ class wechatModel extends model
      */
     public function getByID($id)
     {
-        return $this->dao->findByID($id)->from(TABLE_WX_PUBLIC)->fetch();
+        $public = $this->dao->findByID($id)->from(TABLE_WX_PUBLIC)->fetch();
+        $public->url = rtrim(getWebRoot(true), '/') . commonModel::createFrontLink('wechat', 'response', "id=$public->id");
+        return $public;
     }
 
     /** 
@@ -84,9 +86,17 @@ class wechatModel extends model
      */
     public function create()
     {
+        if(!validater::checkReg($this->post->token, '|^[a-zA-Z0-9]{1}[a-zA-Z0-9]{1,30}[a-zA-Z0-9]{1}$|')) dao::$errors['token'][] = $this->lang->error->token;
+
         $public = fixer::input('post')->add('addedDate', helper::now())->get();
-        $this->dao->insert(TABLE_WX_PUBLIC)->data($public)->autoCheck()->exec();
-        return !dao::isError();
+        $this->dao->insert(TABLE_WX_PUBLIC)
+            ->data($public)
+            ->autoCheck()
+            ->batchCheck($this->config->wechat->require->create, 'notempty')
+            ->exec();
+
+        $publicID = $this->dao->lastInsertID();
+        return $publicID;
     }
 
     /**
@@ -98,8 +108,15 @@ class wechatModel extends model
      */
     public function update($publicID)
     {
+        if(!validater::checkReg($this->post->token, '|^[a-zA-Z0-9]{1}[a-zA-Z0-9]{1,30}[a-zA-Z0-9]{1}$|')) dao::$errors['token'][] = $this->lang->error->token;
+
         $public = fixer::input('post')->get();
-        $this->dao->update(TABLE_WX_PUBLIC)->data($public)->autoCheck()->where('id')->eq($publicID)->exec();
+        $this->dao->update(TABLE_WX_PUBLIC)
+            ->data($public)
+            ->autoCheck()
+            ->batchCheck($this->config->wechat->require->edit, 'notempty')
+            ->where('id')->eq($publicID)
+            ->exec();
         return !dao::isError();
     }
 
