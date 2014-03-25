@@ -18,7 +18,7 @@ js::set('provider', $this->get->provider);
   <div class="panel-heading">
     <strong><i class="icon-group"></i> <?php echo $lang->user->list;?></strong>
     <div class="panel-actions">
-    <form method='get' class='form-inline form-search'>
+      <form method='get' class='form-inline form-search'>
         <div class="input-group">
           <?php
           echo html::hidden('m','user') . html::hidden('f','admin');
