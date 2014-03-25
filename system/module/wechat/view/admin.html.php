@@ -39,8 +39,14 @@
         <td>
           <?php
           echo html::a($this->createLink('wechat', 'edit', "publicID=$public->id"), $lang->edit);
-          if(!$public->certified) echo html::a('javascript:;', $lang->wechat->setMenu, "class='text-muted' data-container='body' data-toggle='popover' data-placement='right' data-content='{$lang->wechat->needCertified}'");
-          if($public->certified)  echo html::a($this->createLink('tree', 'browse', "type=wechat_$public->id"), $lang->wechat->setMenu);
+          if(!$public->certified and $public->type == 'subscribe')
+          {
+             echo html::a('javascript:;', $lang->wechat->setMenu, "class='text-muted' data-container='body' data-toggle='popover' data-placement='right' data-content='{$lang->wechat->needCertified}'");
+          }
+          else
+          {
+              echo html::a($this->createLink('tree', 'browse', "type=wechat_$public->id"), $lang->wechat->setMenu);
+          }
           echo html::a($this->createLink('wechat', 'adminResponse', "publicID=$public->id"), $lang->wechat->response->keywords);
           echo html::a($this->createLink('wechat', 'setResponse', "publicID=$public->id&group=default&key=default"), $lang->wechat->response->default, "data-toggle='modal'");
           echo html::a($this->createLink('wechat', 'setResponse', "publicID=$public->id&group=subscribe&key=subscribe"), $lang->wechat->response->subscribe, "data-toggle='modal'");
