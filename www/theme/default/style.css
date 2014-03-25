@@ -239,6 +239,7 @@ form .star {display: none;}/* hide star */
 .nav-primary > li > a {background: #fff;}
 .nav li .icon-chevron-right {float: right; margin-top: 2px; margin-right: -6px; opacity: .25;}
 .nav li.active i.icon-chevron-right,.nav li:hover i.icon-chevron-right{opacity: .9;}
+.nav-primary > li.active > a, .nav-primary > li.active > a:hover, .nav-primary > li.active > a:focus {background: #fff; color: #333; border-color: #ddd;}
 
 /* captcha */
 .captcha {width: 100%; background-color: #fafafa; padding: 8px 10px; border: 1px solid #CCC; border-radius: 2px;}

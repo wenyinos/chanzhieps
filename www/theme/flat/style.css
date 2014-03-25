@@ -80,7 +80,7 @@ textarea{height: auto;}
 .nav>li>a:hover, .nav>li>a:focus{background-color: #f3f7fa}
 .nav-primary > li > a{color: #34495E; background:#EDEFF1;border-color: #BDC3C7;border-left: 0;border-right:0;}
 .nav-primary > li:hover > a{color: #fff;background-color: #1ABC9C;border-color: #1ABC9C;box-shadow: none;}
-.nav-stacked.nav-primary>li.active>a, .nav-stacked.nav-primary>li.active>a:hover, .nav-stacked.nav-primary>li.active>a:focus{color: #f1f1f1;background-color: #16A085;border-color: #16A085;box-shadow: none;}
+.nav-stacked.nav-primary>li.active>a, .nav-stacked.nav-primary>li.active>a:hover, .nav-stacked.nav-primary>li.active>a:focus{color: #16A085;background-color: #EDEFF1; box-shadow: none;}
 
 /* pager */
 .pager > li > a{background-color: #34495E;color: #f1f1f1;border:none;margin-right: 10px;}
