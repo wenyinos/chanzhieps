@@ -414,6 +414,7 @@ class wechatModel extends model
         $response = new stdclass();
         $response->msgType = 'news';
 
+        $isFirst = true;
         foreach($content->category as $categoryID)
         {
             if(empty($categories[$categoryID])) continue;
@@ -423,8 +424,12 @@ class wechatModel extends model
             $article->title       = $category->name;
             $article->url         = rtrim(getWebRoot(true), '/') . commonModel::createFrontLink($type, 'browse', "categoryID={$category->id}", "category={$category->alias}");
             $article->description =  $category->desc;
+
+            if($isFirst) $article->picUrl = getWebRoot(true) . "www/theme/default/images/main/wechat{$type}.png";
+
             $response->articles[] = $article;
         }
+        $isFirst = false;
         return $response;
     }
 
@@ -471,14 +476,20 @@ class wechatModel extends model
         $response = new stdclass();
         $response->msgType = 'news';
 
+        $isFirst = true;
         foreach($articles as $article)
         {
             $item = new stdclass();
             $item->title       = $article->title;
             $item->url         = rtrim(getWebRoot(true), '/') . $this->article->createPreviewLink($article->id);
             $item->description = $article->summary;
-            if(!empty($article->image)) $item->picUrl = rtrim(getWebRoot(true), '/') . $article->image->primary->smallURL;
+            if(!empty($article->image))
+            {
+                $image = $isFirst ?  $article->image->primary->middleURL : $article->image->primary->smallURL;
+                $item->picUrl = rtrim(getWebRoot(true), '/') . $image;
+            }
             $response->articles[] = $item;
+            $isFirst = false;
         }
         return $response;
     }
