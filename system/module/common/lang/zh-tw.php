@@ -190,7 +190,7 @@ $lang->feedback->menu->message = '留言|message|admin|type=message';
 $lang->feedback->menu->comment = '評論|message|admin|type=comment';
 $lang->feedback->menu->thread  = '主題|forum|admin|tab=feedback';
 $lang->feedback->menu->reply   = '回帖|reply|admin|order=id_desc&tab=feedback';
-$lang->feedback->menu->wechat  = '微信|wechat|message|';
+$lang->feedback->menu->wechat  = '微信|wechat|message|replied=0';
 
 $lang->message = new stdclass();
 $lang->message->menu = $lang->feedback->menu;
@@ -269,6 +269,7 @@ $lang->error->passwordsame = '兩次密碼應當相等。';
 $lang->error->passwordrule = '密碼應該符合規則，長度至少為六位。';
 $lang->error->captcha      = '請輸入正確的驗證碼。';
 $lang->error->noWritable   = '%s 可能不可寫，請修改權限！';
+$lang->error->token        = '必須為英文或數字，長度為3-32字元！';
 
 /* The pager items. */
 $lang->pager = new stdclass();
