@@ -49,52 +49,74 @@ class wechatModel extends model
     {
         $publics = $this->dao->select('*')->from(TABLE_WX_PUBLIC)->orderBy('addedDate')->fetchAll('id');
         if(!$publics) return array();
+
         foreach($publics as $public)
         {
             $public->url    = rtrim(getWebRoot(true), '/') . commonModel::createFrontLink('wechat', 'response', "id=$public->id");
-            $public->qrcode = $this->getQRCode($public->id);
+            $public->qrcode = $this->computeQRCodeURL($public);
         }
+
         return $publics;
     }
 
     /**
-     * Get qrcode of a public.
+     * Download the qrcode file for a public account.
      * 
-     * @param  int    $public 
+     * @param  object    $public 
      * @access public
-     * @return void
+     * @return bool
      */
-    public function getQRCode($public)
+    public function downloadQRCode($public)
     {
-        $api = $this->loadApi($public);
-        $public = $this->getByID($public);
-        $qrcodeFile = $this->app->getDataRoot() . 'wechat' . DS . $public->appID . '.jpg';
-
-        if(file_exists($qrcodeFile)) return $this->app->getWebRoot() . 'data/wechat/' . $public->appID . '.jpg';
-
-        if(!is_dir(dirname($qrcodeFile))) @mkdir(dirname($qrcodeFile));
-        $data = $api->getQRCode($qrcodeFile); 
-        if(!$data) return false;
-        return $this->app->getWebRoot() . 'data/wechat/' . $public->appID . '.jpg';
+        $api = $this->loadApi($public->id);
+        $qrcodeFile = $this->computeQRCodeFile($public);
+        return $api->getQRCode($qrcodeFile); 
     }
 
     /**
-     * Set qrcode of a public.
+     * Upload the qrcode file for a public.
      * 
      * @param  object  $public 
      * @access public
-     * @return void
+     * @return array
      */
-    public function setQRcode($public)
+    public function uploadQRCode($public)
     {
         if(empty($_FILES)) return array('result' => false, 'message' => $this->lang->wechat->noSelectedFile);
 
-        if(!$public->appID) return array('result' => false, 'message' => $this->lang->wechat->noAppID);
-        $qrcodeFile = $this->app->getDataRoot() . 'wechat' . DS . $public->appID . '.jpg';
+        $qrcodeFile = $this->computeQRCodeFile($public);
+        $result = move_uploaded_file($_FILES['file']['tmp_name'], $qrcodeFile);
+
+        if($result) return array('result' => true);
+        if(!$result) return array('result' => false, 'message' => $this->lang->fail);
+    }
+
+    /**
+     * Compute the qrcode file.
+     * 
+     * @param  object    $public 
+     * @access public
+     * @return string
+     */
+    public function computeQRCodeFile($public)
+    {
+        $qrcodeFile = $this->app->getDataRoot() . 'wechat' . DS . $public->account . '.jpg';
         if(!is_dir(dirname($qrcodeFile))) @mkdir(dirname($qrcodeFile));
-    
-        if(!move_uploaded_file($_FILES['file']['tmp_name'], $qrcodeFile)) return array('result' => false, 'message' => $this->lang->fail);
-        return array('result' => true);
+        return $qrcodeFile;
+    }
+
+    /**
+     * Compute the qrcode url.
+     * 
+     * @param  object    $public 
+     * @access public
+     * @return string|bool
+     */
+    public function computeQRCodeURL($public)
+    {
+        $qrcodeFile = $this->computeQRCodeFile($public);
+        if(!is_file($qrcodeFile)) return false;
+        return $this->app->getWebRoot() . 'data/wechat/' . $public->account . '.jpg';
     }
 
     /**
