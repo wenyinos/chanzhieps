@@ -79,6 +79,25 @@ class wechatModel extends model
     }
 
     /**
+     * Set qrcode of a public.
+     * 
+     * @param  object  $public 
+     * @access public
+     * @return void
+     */
+    public function setQRcode($public)
+    {
+        if(empty($_FILES)) return array('result' => false, 'message' => $this->lang->wechat->noSelectedFile);
+
+        if(!$public->appID) return array('result' => false, 'message' => $this->lang->wechat->noAppID);
+        $qrcodeFile = $this->app->getDataRoot() . 'wechat' . DS . $public->appID . '.jpg';
+        if(!is_dir(dirname($qrcodeFile))) @mkdir(dirname($qrcodeFile));
+    
+        if(!move_uploaded_file($_FILES['file']['tmp_name'], $qrcodeFile)) return array('result' => false, 'message' => $this->lang->fail);
+        return array('result' => true);
+    }
+
+    /**
      * Create a public.
      * 
      * @access public
