@@ -113,11 +113,7 @@ $lang->wechat->placeholder->name     = '公众号名称';
 $lang->wechat->placeholder->account  = 'gh_xxx 格式';
 $lang->wechat->placeholder->token    = '必须为英文或数字，长度为3-32字符';
 
-$lang->wechat->needCertified  = "此功能需要公众号认证后使用。";
-$lang->wechat->integrateInfo = <<<EOT
-<ul style="padding-left: 10px">
-  <li><strong>接入地址</strong>： %s </li>
-  <li><strong>Token</strong>： %s </li>
-  <li><strong>AppSecret</strong>： %s </li>
-</ul>
-EOT;
+$lang->wechat->needCertified = "此功能需要公众号认证后使用。";
+$lang->wechat->integrateInfo = "请到微信的公众平台完成接入，以获取appID和appSecret信息。
+                                <a href='http://www.chanzhi.org/book/weixin/90_integrate-weixin.html' target='_blank'>帮助</a>";
+$lang->wechat->integrateDone = "已完成接入";
