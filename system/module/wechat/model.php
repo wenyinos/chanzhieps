@@ -662,7 +662,7 @@ class wechatModel extends model
     {
         foreach($users as $user)
         {
-            if(!$user->provider or $user->nickname != '') continue;
+            if(!$user->public) continue;
             $public = $this->getByID($user->public);
             $this->app->loadClass('wechatapi', true);
             $api = new wechatapi($public->token, $public->appID, $public->appSecret, $this->config->debug);
