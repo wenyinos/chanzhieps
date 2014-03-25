@@ -20,6 +20,7 @@ $lang->wechat->url       = 'URL';
 $lang->wechat->certified = 'Certified';
 $lang->wechat->users     = 'Users';
 $lang->wechat->content   = 'Content';
+$lang->wechat->qrcode    = 'QRcode';
 
 $lang->wechat->create            = 'Create';
 $lang->wechat->edit              = 'Edit';
@@ -105,6 +106,10 @@ $lang->wechat->message->tabList[] = 'type=text|Message';
 $lang->wechat->message->tabList[] = 'type=subscribe|Subscribe';
 $lang->wechat->message->tabList[] = 'type=unsubscribe|Unsubscribe';
 $lang->wechat->message->tabList[] = 'replied=1|Replied';
+
+$lang->wechat->noSelectedFile  = "Do not select file";
+$lang->wechat->noAppID         = "Do not set AppID";
+$lang->wechat->qrcodeType      = "Please upload JPG file";
 
 $lang->wechat->placeholder = new stdclass();
 $lang->wechat->placeholder->limit    = '<=10';

@@ -311,4 +311,30 @@ class wechat extends control
         $this->view->pager       = $pager;
         $this->display();
     }
+
+    /**
+     * Upload the qrcode for a public.
+     * 
+     * @param  int    $publicID 
+     * @access public
+     * @return void
+     */
+    public function qrcode($publicID)
+    {
+        $public = $this->wechat->getByID($publicID);
+        $qrcodeURL = $this->wechat->computeQRCodeURL($public);
+        if(!$qrcodeURL) $this->wechat->downloadQRCode($public);
+        $qrcodeURL = $this->wechat->computeQRCodeURL($public);
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST')
+        {
+            $return = $this->wechat->uploadQRCode($public);
+            if($return['result']) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+            $this->send(array('result' => 'fail', 'message' => $return['message']));
+        }
+
+        $this->view->qrcodeURL = $qrcodeURL;
+        $this->view->public    = $public;
+        $this->display();
+    }
 }

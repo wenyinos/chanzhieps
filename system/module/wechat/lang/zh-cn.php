@@ -20,6 +20,7 @@ $lang->wechat->url       = '接入地址';
 $lang->wechat->certified = '是否认证';
 $lang->wechat->users     = '微信会员';
 $lang->wechat->content   = '内容';
+$lang->wechat->qrcode    = '二维码';
 
 $lang->wechat->create    = '添加公众号';
 $lang->wechat->edit      = '编辑公众号';
@@ -105,6 +106,10 @@ $lang->wechat->message->tabList[] = 'type=text|留言';
 $lang->wechat->message->tabList[] = 'type=subscribe|新订阅';
 $lang->wechat->message->tabList[] = 'type=unsubscribe|取消订阅';
 $lang->wechat->message->tabList[] = 'replied=1|已回复';
+
+$lang->wechat->noSelectedFile  = "没有选择图片";
+$lang->wechat->noAppID         = "没有设置AppID";
+$lang->wechat->qrcodeType      = "请上传JPG格式二维码图片";
 
 $lang->wechat->placeholder = new stdclass();
 $lang->wechat->placeholder->limit    = '请输条数，最多10条';
