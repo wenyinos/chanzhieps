@@ -324,8 +324,11 @@ class wechat extends control
     {
         $public = $this->wechat->getByID($publicID);
         $qrcodeURL = $this->wechat->computeQRCodeURL($public);
-        if(!$qrcodeURL) $this->wechat->downloadQRCode($public);
-        $qrcodeURL = $this->wechat->computeQRCodeURL($public);
+        if(!$qrcodeURL and $public->certified and $public->type != 'subscribe')
+        {
+            $this->wechat->downloadQRCode($public);
+            $qrcodeURL = $this->wechat->computeQRCodeURL($public);
+        }
 
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
