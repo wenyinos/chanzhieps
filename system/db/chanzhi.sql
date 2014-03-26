@@ -290,7 +290,7 @@ CREATE TABLE IF NOT EXISTS `eps_user` (
   `join` datetime NOT NULL,
   `reset` char(64) NOT NULL,
   `locked` datetime NOT NULL,
-  `public` varchar(30) unsigned NOT NULL DEFAULT '0',
+  `public` varchar(30) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `admin` (`admin`),
   KEY `account` (`account`,`password`)

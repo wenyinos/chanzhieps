@@ -101,11 +101,11 @@ $lang->wechat->message->typeList['scan']        = '掃瞄';
 $lang->wechat->message->typeList['click']       = '點擊';
 $lang->wechat->message->typeList['view']        = '連結';
 
-$lang->wechat->message->tabList[] = 'replied=0|未回覆';
-$lang->wechat->message->tabList[] = 'type=text|留言';
-$lang->wechat->message->tabList[] = 'type=subscribe|新訂閲';
-$lang->wechat->message->tabList[] = 'type=unsubscribe|取消訂閲';
-$lang->wechat->message->tabList[] = 'replied=1|已回覆';
+$lang->wechat->message->tabList[] = 'mode=replied&replied=0|未回覆';
+$lang->wechat->message->tabList[] = 'mode=type&type=text|留言';
+$lang->wechat->message->tabList[] = 'mode=type&type=subscribe|新訂閲';
+$lang->wechat->message->tabList[] = 'mode=type&type=unsubscribe|取消訂閲';
+$lang->wechat->message->tabList[] = 'mode=replied&replied=1|已回覆';
 
 $lang->wechat->noSelectedFile  = "沒有選擇圖片";
 $lang->wechat->noAppID         = "沒有設置AppID";
@@ -115,7 +115,7 @@ $lang->wechat->placeholder = new stdclass();
 $lang->wechat->placeholder->limit    = '請輸條數，最多10條';
 $lang->wechat->placeholder->category = '請選擇類目，最多10個';
 $lang->wechat->placeholder->name     = '公眾號名稱';
-$lang->wechat->placeholder->account  = 'gh_xxx 格式';
+$lang->wechat->placeholder->account  = '請輸入gh_xxx 格式的原始ID';
 $lang->wechat->placeholder->token    = '必須為英文或數字，長度為3-32字元';
 
 $lang->wechat->needCertified = "此功能需要公眾號認證後使用。";

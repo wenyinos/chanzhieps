@@ -115,7 +115,7 @@ $lang->wechat->placeholder = new stdclass();
 $lang->wechat->placeholder->limit    = '请输条数，最多10条';
 $lang->wechat->placeholder->category = '请选择类目，最多10个';
 $lang->wechat->placeholder->name     = '公众号名称';
-$lang->wechat->placeholder->account  = 'gh_xxx 格式';
+$lang->wechat->placeholder->account  = '请输入gh_xxx 格式的原始ID';
 $lang->wechat->placeholder->token    = '必须为英文或数字，长度为3-32字符';
 
 $lang->wechat->needCertified = "此功能需要公众号认证后使用。";

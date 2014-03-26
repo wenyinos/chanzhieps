@@ -41,4 +41,4 @@ CREATE TABLE `eps_wx_message` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-ALTER TABLE `eps_user` ADD `public` smallint(30) unsigned NOT NULL DEFAULT '0';
+ALTER TABLE `eps_user` ADD `public` smallint(30) NOT NULL DEFAULT '0';
