@@ -51,10 +51,9 @@
           echo html::a($this->createLink('wechat', 'setResponse', "publicID=$public->id&group=default&key=default"), $lang->wechat->response->default, "data-toggle='modal'");
           echo html::a($this->createLink('wechat', 'setResponse', "publicID=$public->id&group=subscribe&key=subscribe"), $lang->wechat->response->subscribe, "data-toggle='modal'");
           echo html::a($this->createLink('wechat', 'delete', "publicID=$public->id"), $lang->delete, "class='deleter'");
+          echo html::a($this->createLink('wechat', 'integrate', "publicID=$public->id"), $lang->wechat->integrate);
+          echo html::a($this->createLink('wechat', 'qrcode', "publicID=$public->id"), $lang->wechat->qrcode, "data-toggle=modal");
           ?>
-          <a href='###' class='access' data-container='body' data-toggle='popover' data-placement='left' data-content='<?php printf($lang->wechat->accessInfo, $public->appSecret, $public->url, $public->token);?>'>
-            <?php echo $lang->wechat->access;?>
-          </a>
         </td>
       </tr>
       <?php endforeach;?>

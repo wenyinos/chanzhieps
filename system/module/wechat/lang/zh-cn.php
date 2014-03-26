@@ -12,7 +12,7 @@
 $lang->wechat->id        = '编号';
 $lang->wechat->type      = '类型';
 $lang->wechat->name      = '微信名';
-$lang->wechat->account   = '微信号';
+$lang->wechat->account   = '原始ID';
 $lang->wechat->appID     = 'AppID';
 $lang->wechat->appSecret = 'AppSecret';
 $lang->wechat->token     = 'Token';
@@ -20,13 +20,14 @@ $lang->wechat->url       = '接入地址';
 $lang->wechat->certified = '是否认证';
 $lang->wechat->users     = '微信会员';
 $lang->wechat->content   = '内容';
+$lang->wechat->qrcode    = '二维码';
 
 $lang->wechat->create    = '添加公众号';
 $lang->wechat->edit      = '编辑公众号';
 $lang->wechat->admin     = '维护公众号';
 $lang->wechat->list      = '公众号列表';
 $lang->wechat->setMenu   = '菜单';
-$lang->wechat->access    = '接入';
+$lang->wechat->integrate = '接入';
 
 $lang->wechat->typeList['subscribe'] = '订阅号';
 $lang->wechat->typeList['service']   = '服务号';
@@ -106,15 +107,18 @@ $lang->wechat->message->tabList[] = 'mode=type&type=subscribe|新订阅';
 $lang->wechat->message->tabList[] = 'mode=type&type=unsubscribe|取消订阅';
 $lang->wechat->message->tabList[] = 'mode=replied&replied=1|已回复';
 
+$lang->wechat->noSelectedFile  = "没有选择图片";
+$lang->wechat->noAppID         = "没有设置AppID";
+$lang->wechat->qrcodeType      = "请上传JPG格式二维码图片";
+
 $lang->wechat->placeholder = new stdclass();
 $lang->wechat->placeholder->limit    = '请输条数，最多10条';
 $lang->wechat->placeholder->category = '请选择类目，最多10个';
+$lang->wechat->placeholder->name     = '公众号名称';
+$lang->wechat->placeholder->account  = 'gh_xxx 格式';
+$lang->wechat->placeholder->token    = '必须为英文或数字，长度为3-32字符';
 
-$lang->wechat->needCertified  = "此功能需要公众号认证后使用。";
-$lang->wechat->accessInfo = <<<EOT
-<ul style="padding-left: 10px">
-  <li><strong>AppSecret</strong>： %s </li>
-  <li><strong>接入地址</strong>： %s </li>
-  <li><strong>Token</strong>： %s </li>
-</ul>
-EOT;
+$lang->wechat->needCertified = "此功能需要公众号认证后使用。";
+$lang->wechat->integrateInfo = "请到微信的公众平台完成接入，以获取appID和appSecret信息。
+                                <a href='http://www.chanzhi.org/book/weixin/90_integrate-weixin.html' target='_blank'>帮助</a>";
+$lang->wechat->integrateDone = "已完成接入";

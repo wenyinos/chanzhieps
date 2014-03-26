@@ -24,23 +24,15 @@
         </tr>
         <tr>
           <th><?php echo $lang->wechat->name;?></th>
-          <td><?php echo html::input('name', '', "class='form-control'");?></td>
+          <td><?php echo html::input('name', '', "class='form-control' placeholder='{$lang->wechat->placeholder->name}'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->wechat->account;?></th>
-          <td><?php echo html::input('account', '', "class='form-control'");?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->wechat->appID;?></th>
-          <td><?php echo html::input('appID', '', "class='form-control'");?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->wechat->appSecret;?></th>
-          <td><?php echo html::input('appSecret', '', "class='form-control'");?></td>
+          <td><?php echo html::input('account', '', "class='form-control' placeholder='{$lang->wechat->placeholder->account}'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->wechat->token;?></th>
-          <td><?php echo html::input('token', '', "class='form-control'");?></td>
+          <td><?php echo html::input('token', '', "class='form-control' placeholder='{$lang->wechat->placeholder->token}'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->wechat->certified;?></th>

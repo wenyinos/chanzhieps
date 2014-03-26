@@ -33,7 +33,7 @@ $lang->ui->themes['tree']       = '蟬之樹';
 $lang->ui->themes['brightdark'] = '蟬憩';
 $lang->ui->themes['tartan']     = '蟬之格';
 $lang->ui->themes['blue']       = '藍';
-$lang->ui->themes['colorful']   = array('name' => "繽紛 <span class='small text-warning'>支持自定義</span>", 'custom' => true, 'primaryColor' => '#D1270A', 'backColor' => '#FFFFFF', 'fontSize' => '14px', 'borderRadius' => '4px');
+//$lang->ui->themes['colorful']   = array('name' => "繽紛 <span class='small text-warning'>支持自定義</span>", 'custom' => true, 'primaryColor' => '#D1270A', 'backColor' => '#FFFFFF', 'fontSize' => '14px', 'borderRadius' => '4px');
 
 $lang->ui->changetheme                     = '點擊來使用此主題';
 $lang->ui->customtheme                     = '自定義主題';

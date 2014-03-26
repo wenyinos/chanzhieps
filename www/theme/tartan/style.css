@@ -86,7 +86,7 @@ textarea{height: auto;}
 .nav-primary {border-radius: 2px;overflow: hidden;}
 .nav-primary > li > a{color: #6E2E16; background:#f5f0cc;border-color: ##BDC3C7;border-left: 0;border-right:0;border-radius: 2px}
 .nav-primary > li:hover > a{color: #fff;background-color: #b7afa3;border-color: #b7afa3;box-shadow: none;}
-.nav-stacked.nav-primary>li.active>a, .nav-stacked.nav-primary>li.active>a:hover, .nav-stacked.nav-primary>li.active>a:focus{color: #f1f1f1;background-color: #b7afa3;border-color: #b7afa3;box-shadow: none;}
+.booksNav .nav-primary > li.active > a, .booksNav .nav-primary > li.active > a:hover, .booksNav .nav-primary > li.active > a:focus {color: #7A94B2; background: #F5F0CC}
 
 /* pager */
 .pager > li > a{background-color: #e8d0a9;border:none;margin-right: 10px;}

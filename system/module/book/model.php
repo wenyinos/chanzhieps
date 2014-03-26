@@ -78,7 +78,7 @@ class bookModel extends model
      */
     public function getFirstBook()
     {
-        return $this->dao->select('*')->from(TABLE_BOOK)->where('type')->eq('book')->orderBy('id_desc')->limit(1)->fetch();
+        return $this->dao->select('*')->from(TABLE_BOOK)->where('type')->eq('book')->orderBy('`order`')->limit(1)->fetch();
     }
 
     /**
@@ -417,10 +417,14 @@ class bookModel extends model
 
         if(dao::isError()) return false;
 
-        /* Update the path field. */
+        /* Update the path and order field. */
         $bookID   = $this->dao->lastInsertID();
         $bookPath = ",$bookID,";
-        $this->dao->update(TABLE_BOOK)->set('path')->eq($bookPath)->where('id')->eq($bookID)->exec();
+        $this->dao->update(TABLE_BOOK)
+            ->set('path')->eq($bookPath)
+            ->set('`order`')->eq($bookID)
+            ->where('id')->eq($bookID)
+            ->exec();
 
         if(dao::isError()) return false;
 

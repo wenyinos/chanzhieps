@@ -26,6 +26,7 @@ a.list-group-item:hover, a.list-group-item:focus {background-color: #ae2127; col
 .nav-primary > li.active > a,
 .nav-primary > li.active > a:hover,
 .nav-primary > li.active > a:focus {background-color: #e91b23; border-color: #ae2127}
+.booksNav .nav-primary > li.active > a, .booksNav .nav-primary > li.active > a:hover, .booksNav .nav-primary > li.active > a:focus {background: #fff; color: #E91B23; border-color: #ddd; font-weight: normal;}
 
 .pager > .active > a, .pager > .active > span, .pager > .active > a:hover, .pager > .active > span:hover, .pager > .active > a:focus, .pager > .active > span:focus {background-color: #e91b23}
 

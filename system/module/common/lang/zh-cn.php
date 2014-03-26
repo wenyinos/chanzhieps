@@ -269,6 +269,7 @@ $lang->error->passwordsame = '两次密码应当相等。';
 $lang->error->passwordrule = '密码应该符合规则，长度至少为六位。';
 $lang->error->captcha      = '请输入正确的验证码。';
 $lang->error->noWritable   = '%s 可能不可写，请修改权限！';
+$lang->error->token        = '必须为英文或数字，长度为3-32字符！';
 
 /* The pager items. */
 $lang->pager = new stdclass();

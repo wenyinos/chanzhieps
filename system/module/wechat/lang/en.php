@@ -12,7 +12,7 @@
 $lang->wechat->id        = 'ID';
 $lang->wechat->type      = 'Type';
 $lang->wechat->name      = 'Name';
-$lang->wechat->account   = 'Account';
+$lang->wechat->account   = 'Original ID';
 $lang->wechat->appID     = 'AppID';
 $lang->wechat->appSecret = 'AppSecret';
 $lang->wechat->token     = 'Token';
@@ -20,13 +20,14 @@ $lang->wechat->url       = 'URL';
 $lang->wechat->certified = 'Certified';
 $lang->wechat->users     = 'Users';
 $lang->wechat->content   = 'Content';
+$lang->wechat->qrcode    = 'QRcode';
 
 $lang->wechat->create            = 'Create';
 $lang->wechat->edit              = 'Edit';
 $lang->wechat->admin             = 'Admin';
 $lang->wechat->list              = 'List';
 $lang->wechat->setMenu           = 'Menu';
-$lang->wechat->access            = 'Integrate';
+$lang->wechat->integrate         = 'Integrate';
 
 $lang->wechat->typeList['subscribe'] = 'Subscribe';
 $lang->wechat->typeList['service']   = 'Service';
@@ -106,15 +107,18 @@ $lang->wechat->message->tabList[] = 'type=subscribe|Subscribe';
 $lang->wechat->message->tabList[] = 'type=unsubscribe|Unsubscribe';
 $lang->wechat->message->tabList[] = 'replied=1|Replied';
 
+$lang->wechat->noSelectedFile  = "Do not select file";
+$lang->wechat->noAppID         = "Do not set AppID";
+$lang->wechat->qrcodeType      = "Please upload JPG file";
+
 $lang->wechat->placeholder = new stdclass();
 $lang->wechat->placeholder->limit    = '<=10';
 $lang->wechat->placeholder->category = 'Max 10 categories';
+$lang->wechat->placeholder->name     = 'Name of public';
+$lang->wechat->placeholder->account  = 'gh_xxx format';
+$lang->wechat->placeholder->token    = 'Token should English or numbers, length of 3-32 characters.';
 
 $lang->wechat->needCertified  = "This feature needs the account to be certified.";
-$lang->wechat->accessInfo = <<<EOT
-<ul style="padding-left: 10px">
-  <li><strong>AppSecret</strong>： %s </li>
-  <li><strong>URL</strong>： %s </li>
-  <li><strong>Token</strong>： %s </li>
-</ul>
-EOT;
+$lang->wechat->integrateInfo = "Please interate in the wechat control panel。
+                                <a href='http://www.chanzhi.org/book/weixin/90_integrate-weixin.html' target='_blank'>Help</a>";
+$lang->wechat->integrateDone = "I have interated with wechat server";

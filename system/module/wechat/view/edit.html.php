@@ -13,7 +13,7 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
-    <strong><i class="icon-plus"></i> <?php echo $lang->wechat->edit;?></strong>
+    <strong><i class="icon-edit"></i> <?php echo $lang->wechat->edit;?></strong>
   </div>
   <div class='panel-body'>
     <form method='post' id='ajaxForm'>

@@ -112,14 +112,27 @@ class wechat extends control
     {
         if($_POST) 
         {
-            $this->wechat->create();       
+            $publicID = $this->wechat->create();
             if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin')));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('integrate', "public={$publicID}")));
         }
 
         $this->view->title = $this->lang->wechat->create;
         $this->display();
     }
+
+    /**
+     * Display interface configuration information.
+     * 
+     * @param  int    $publicID 
+     * @access public
+     * @return void
+     */
+    public function integrate($publicID)
+    {
+        $this->view->public = $this->wechat->getByID($publicID);
+        $this->display();
+    } 
 
     /**
      * Edit a public.
@@ -298,6 +311,32 @@ class wechat extends control
         $this->view->publicList  = $this->wechat->getList(); 
         $this->view->messageList = $messageList;
         $this->view->pager       = $pager;
+        $this->display();
+    }
+
+    /**
+     * Upload the qrcode for a public.
+     * 
+     * @param  int    $publicID 
+     * @access public
+     * @return void
+     */
+    public function qrcode($publicID)
+    {
+        $public = $this->wechat->getByID($publicID);
+        $qrcodeURL = $this->wechat->computeQRCodeURL($public);
+        if(!$qrcodeURL) $this->wechat->downloadQRCode($public);
+        $qrcodeURL = $this->wechat->computeQRCodeURL($public);
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST')
+        {
+            $return = $this->wechat->uploadQRCode($public);
+            if($return['result']) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+            $this->send(array('result' => 'fail', 'message' => $return['message']));
+        }
+
+        $this->view->qrcodeURL = $qrcodeURL;
+        $this->view->public    = $public;
         $this->display();
     }
 }
