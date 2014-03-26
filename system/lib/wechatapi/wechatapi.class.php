@@ -333,7 +333,7 @@ class wechatapi
      */
     public function commitMenu($menu)
     {
-        $token  = $this->getAccessToken();
+        $token  = $this->getAccessToken(true);
         $url    = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=$token";
         $menu   = $this->convertMenu2JSON($menu);
         $result = $this->post($url, $menu);
@@ -470,7 +470,7 @@ class wechatapi
         $params['action_info']['scene']['scene_id'] = 1;
 
         /* Get the ticket. */
-        $token = $this->getAccessToken();
+        $token = $this->getAccessToken(true);
         $url = "https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=$token";
         $data = json_decode($this->post($url, json_encode($params)));
         if(!isset($data->ticket) or (isset($data->errcode) and $data->errcode)) return false;
@@ -531,6 +531,7 @@ class wechatapi
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
         $response = curl_exec($curl);
