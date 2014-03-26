@@ -88,7 +88,7 @@ class commonModel extends model
         /* If no $app->user yet, go to the login pae. */
         if(RUN_MODE == 'admin' and $this->app->user->account == 'guest')
         {
-            $referer  = helper::safe64Encode($this->app->getURI(true));
+            $referer = helper::safe64Encode($this->app->getURI(true));
             die(js::locate(helper::createLink('user', 'login', "referer=$referer")));
         }
 
