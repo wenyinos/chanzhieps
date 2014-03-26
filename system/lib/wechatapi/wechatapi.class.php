@@ -229,7 +229,7 @@ class wechatapi
         $response->fromUserName = $this->message->toUserName;
         $response->createTime   = time();
         $this->response = $this->convertResponse2XML($response);
-        die($this->response);
+        echo $this->response;
     }
 
     /**

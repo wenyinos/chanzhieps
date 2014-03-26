@@ -32,6 +32,23 @@ class userModel extends model
     }
 
     /**
+     * Get user by openID.
+     * 
+     * @param  int    $openID 
+     * @param  int    $provider 
+     * @access public
+     * @return void
+     */
+    public function getByOpenID($openID, $provider)
+    {
+        return $this->dao->select('u.*, o.provider as provider, openID as openID')->from(TABLE_USER)->alias('u')
+            ->leftJoin(TABLE_OAUTH)->alias('o')->on('u.account = o.account')
+            ->where('o.provider')->eq($provider)
+            ->andWhere('o.openID')->eq($openID)
+            ->fetch();
+    }
+
+    /**
      * Get the account=>relaname pairs.
      * 
      * @param  string $params  admin|noempty
@@ -154,6 +171,60 @@ class userModel extends model
             ->check('email', 'email')
             ->check('email', 'unique')
             ->exec();
+    }
+
+    /**
+     * create wechat user.
+     * 
+     * @param  object    $fan 
+     * @param  string    $public 
+     * @access public
+     * @return object
+     */
+    public function createWechatUser($fan, $public)
+    {
+        if(!isset($fan->subscribe) or $fan->subscribe != 1) return false;
+        $fan->openID   = $fan->openid;
+
+        $user = new stdclass();
+        $user->public   = $public;
+        $user->nickname = $fan->nickname;
+        $user->realname = $fan->nickname;
+        $user->address  = $fan->country . ' ' . $fan->province . ' ' . $fan->city;
+        $user->join     = date('Y-m-d H:i:s', $fan->subscribe_time);
+
+        if($fan->sex == 0) $user->gender = 'u';
+        if($fan->sex == 1) $user->gender = 'm';
+        if($fan->sex == 2) $user->gender = 'f';
+
+        $pulledFan = $this->dao->select('*')->from(TABLE_OAUTH)->where('provider')->eq('wechat')->andWhere('openID')->eq($fan->openID)->fetch();
+
+        if(empty($pulledFan))
+        {
+            $oauth = new stdclass();
+            $oauth->openID   = $fan->openID;
+            $oauth->provider = 'wechat';
+            $oauth->account  = uniqid('wx_');
+            $this->dao->insert(TABLE_OAUTH)->data($oauth)->exec();
+
+            $user->account = $oauth->account;
+            $this->dao->insert(TABLE_USER)->data($user, $skip = 'openID,provider')->exec();
+        }
+        else
+        {
+            $userInfo = $this->dao->select('*')->from(TABLE_USER)->where('account')->eq($pulledFan->account)->fetch();
+            $user->account = $pulledFan->account;
+            if(empty($userInfo))
+            {
+                $this->dao->insert(TABLE_USER)->data($user, $skip = 'openID,provider')->exec();
+            }
+            elseif(!$userInfo->nickname) 
+            {
+                $this->dao->update(TABLE_USER)->data($user, $skip = 'openID,provider')->where('account')->eq($pulledFan->account)->exec();
+            }
+        }
+
+        return $user;
     }
 
     /**
