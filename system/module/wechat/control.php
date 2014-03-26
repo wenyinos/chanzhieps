@@ -54,6 +54,8 @@ class wechat extends control
         $message  = $this->api->getMessage();
         $response = $this->wechat->getResponseForMessage($public, $message);
         if($response) $this->api->response($response);
+        if($message->event == 'subscribe') $this->wechat->createUser($public, $message);
+        exit;
     }
 
     /**
@@ -69,15 +71,12 @@ class wechat extends control
         if(empty($message)) die();
         $this->setAPI($message->public);
 
-        $this->view->user = $this->dao->select('*')
-            ->from(TABLE_OAUTH)->alias('o')
-            ->leftJoin(TABLE_USER)->alias('u')
-            ->on('o.account=u.account')
-            ->where('o.openID')->eq($message->from)
-            ->fetch();
+        $user = $this->wechat->getFanInfoByOpenID($message->public, $message->from);
+        $this->view->user = $user;
 
         if($_POST) $this->send($this->wechat->reply($this->api, $message));
 
+        $this->view->public  = $this->wechat->getByID($message->public);
         $this->view->records = $this->wechat->getRecords($message);
         $this->view->message = $message;
         $this->display();
@@ -91,6 +90,10 @@ class wechat extends control
      */
     public function admin()
     {
+        $message = new stdclass();
+        $message->fromUserName = 'oCFY_t4z_d8bHvs6AR4zYD3c_M0A';
+        $this->wechat->createUser(1, $message);exit;
+
         $publics = $this->wechat->getList();
         if(empty($publics)) $this->locate(inlink('create'));
 
@@ -259,38 +262,37 @@ class wechat extends control
     }
 
     /**
-     * Browse message in admin.
+     * message 
      * 
+     * @param  string    $model   type|from|replied
+     * @param  string    $query 
+     * @param  string    $orderBy 
+     * @param  int       $pageID 
      * @access public
      * @return void
      */
-    public function message()
+    public function message($mode = '', $query = '', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 10, $pageID = 1)
     {
         $this->lang->menuGroups->wechat = 'feedback';
         $this->lang->wechat->menu       = $this->lang->feedback->menu;
 
         $this->app->loadClass('pager', $static = true);
-        $get = fixer::input('get')
-            ->setDefault('recTotal', 0)
-            ->setDefault('recPerPage', 10)
-            ->setDefault('pageID', 1)
-            ->setDefault('orderBy', 'time_desc')
-            ->get();
-        $pager = new pager($get->recTotal, $get->recPerPage, $get->pageID);
+        $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $messageList = $this->wechat->getMessage($get->orderBy, $pager);
+        $messageList = $this->wechat->getMessage($mode, $query, $orderBy, $pager);
 
         $users = $this->loadModel('user')->getList();
+
         $wechatUsers = array();
         foreach($users as $user)
         {
-            if(empty($user->openID)) continue;
+            if(!$user->openID) continue;
             $wechatUsers[$user->openID] = $user->realname;
         }
 
         foreach($messageList as $message)
         {
-            if(isset($wechatUsers[$message->from])) $message->from = $wechatUsers[$message->from];
+            if(isset($wechatUsers[$message->from])) $message->fromUserName = $wechatUsers[$message->from];
         }
 
         $this->view->publicList  = $this->wechat->getList(); 

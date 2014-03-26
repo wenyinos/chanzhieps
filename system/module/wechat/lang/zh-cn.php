@@ -100,11 +100,11 @@ $lang->wechat->message->typeList['scan']        = '扫描';
 $lang->wechat->message->typeList['click']       = '点击';
 $lang->wechat->message->typeList['view']        = '链接';
 
-$lang->wechat->message->tabList[] = 'replied=0|未回复';
-$lang->wechat->message->tabList[] = 'type=text|留言';
-$lang->wechat->message->tabList[] = 'type=subscribe|新订阅';
-$lang->wechat->message->tabList[] = 'type=unsubscribe|取消订阅';
-$lang->wechat->message->tabList[] = 'replied=1|已回复';
+$lang->wechat->message->tabList[] = 'mode=replied&replied=0|未回复';
+$lang->wechat->message->tabList[] = 'mode=type&type=text|留言';
+$lang->wechat->message->tabList[] = 'mode=type&type=subscribe|新订阅';
+$lang->wechat->message->tabList[] = 'mode=type&type=unsubscribe|取消订阅';
+$lang->wechat->message->tabList[] = 'mode=replied&replied=1|已回复';
 
 $lang->wechat->placeholder = new stdclass();
 $lang->wechat->placeholder->limit    = '请输条数，最多10条';
