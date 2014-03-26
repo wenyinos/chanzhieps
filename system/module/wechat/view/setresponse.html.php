@@ -19,7 +19,7 @@ include '../../common/view/chosen.html.php';
 <?php if($group == 'menu'):?>
 <div class='panel'>
   <div class='panel-heading'>
-    <strong><i class="icon-plus"></i> <?php echo $lang->wechat->create;?></strong>
+    <strong><i class="icon-plus"></i> <?php echo $lang->wechat->response->set;?></strong>
   </div>
   <div class='panel-body'>
 <?php else:?>
@@ -27,7 +27,7 @@ include '../../common/view/chosen.html.php';
   <div class='modal-content'>
     <div class='modal-header'>
       <?php echo html::closeButton();?>
-      <h4 class='modal-title'><i class="icon-plus"></i> <?php echo $lang->wechat->response->set;?></h4>
+      <h4 class='modal-title'><i class="icon-plus"></i> <?php echo $group ? $lang->wechat->response->set : $lang->wechat->response->keywords;?></h4>
     </div>
     <div class='modal-body'>
 <?php endif;?>
