@@ -41,6 +41,7 @@
           </div>
         <?php endforeach;?>
       </div>
+      <?php if($public->certified):?>
       <form method='post' action="<?php echo inlink('reply', "messge={$message->id}");?>" id='ajaxForm'>
         <?php echo html::hidden('referer', $this->server->http_referer); ?>
         <div id='replyBox'>
@@ -48,6 +49,7 @@
           <?php echo html::submitButton($lang->wechat->message->reply);?>
         </div>
       </form>
+      <?php endif;?>
     </div>
   </div>
 </div>
