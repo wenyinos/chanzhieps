@@ -92,7 +92,6 @@ class wechat extends control
     {
         $message = new stdclass();
         $message->fromUserName = 'oCFY_t4z_d8bHvs6AR4zYD3c_M0A';
-        $this->wechat->createUser(1, $message);exit;
 
         $publics = $this->wechat->getList();
         if(empty($publics)) $this->locate(inlink('create'));
