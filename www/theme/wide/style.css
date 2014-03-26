@@ -70,6 +70,7 @@ body {background: #232323;}
 #headNav {width: 100%; position: static; border-bottom: 1px solid #e5e5e5; height: 42px; text-align: right;}
 #headNav nav {float: right;}
 #headNav nav > a, #headNav nav > span {float: left; display: block; height: 42px;line-height: 42px; border-right: 1px solid #e5e5e5; padding: 0 15px;}
+#headNav nav > a, #headNav nav > span.hiding {display: none}
 #headNav nav > span:after, #headNav .login-msg:after, #msgBox:after, #headNav nav > a:after {display: none}
 #msgBox {margin: 0}
 #headNav nav > a:first-child {border-left: 1px solid #e5e5e5;}
