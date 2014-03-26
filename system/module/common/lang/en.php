@@ -191,7 +191,7 @@ $lang->feedback->menu->message = 'Message|message|admin|type=message';
 $lang->feedback->menu->comment = 'Comment|message|admin|type=comment';
 $lang->feedback->menu->thread  = 'Threads|forum|admin|tab=feedback';
 $lang->feedback->menu->reply   = 'Replies|reply|admin|order=id_desc&tab=feedback';
-$lang->feedback->menu->wechat = 'Wechat|wechat|message|replied=0';
+$lang->feedback->menu->wechat  = 'Wechat|wechat|message|mode=replied&replied=0';
 
 $lang->message = new stdclass();
 $lang->message->menu = $lang->feedback->menu;
@@ -213,7 +213,7 @@ $lang->site->menu->tag       = 'Tags|tag|admin|';
 $lang->site->menu->oauth     = 'Open OAuth|site|setoauth|';
 $lang->site->menu->link      = 'Links|links|admin|';
 $lang->site->menu->mail      = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->site->menu->wechat   = array('link' => 'Wechat|wechat|admin|', 'alias' => 'create,setresponse');
+$lang->site->menu->wechat    = array('link' => 'Wechat|wechat|admin|', 'alias' => 'create,setresponse');
 
 /* Menu of company module. */
 $lang->company->menu = new stdclass();
