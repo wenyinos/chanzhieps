@@ -60,6 +60,7 @@ $lang->user->goback          = "返回前一页";
 $lang->user->allUsers        = '全部用户';
 $lang->user->submit          = "提交";
 $lang->user->forbid          = '禁用';
+$lang->user->pullWechatFans  = '更新微信会员数据';
 
 $lang->user->profile     = '个人信息';
 $lang->user->editProfile = '编辑信息';
@@ -83,6 +84,7 @@ $lang->user->lockedForEver = "用户已经被永久禁用。";
 $lang->user->lblRegistered = '恭喜您，已经成功注册。';
 $lang->user->forbidSuccess = '禁用成功';
 $lang->user->forbidFail    = '禁用失败';
+$lang->user->pullSuccess   = '获取微信会员成功';
 
 $lang->user->forbidUser          = '禁用管理';
 $lang->user->forbidDate = array();

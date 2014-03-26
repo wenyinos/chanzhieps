@@ -83,6 +83,7 @@ $lang->user->lockedForEver = "User has been forbidden for ever.";
 $lang->user->lblRegistered = 'Congratulations, register successfully!';
 $lang->user->forbidSuccess = 'Successfully forbid.';
 $lang->user->forbidFail    = 'Failed forbid';
+$lang->user->pullSuccess   = 'Get wechat users successfully';
 
 $lang->user->forbidUser = 'Manage user';
 $lang->user->forbidDate = array();

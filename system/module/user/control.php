@@ -293,25 +293,39 @@ class user extends control
         if(empty($this->config->oauth->sina->clientID)) unset($this->lang->user->menu->weibo);
         if(empty($this->config->oauth->qq->clientID))   unset($this->lang->user->menu->qq);
 
-         /* Pull wechat follower */
-        $this->loadModel('wechat')->pullFans();    
-
-        $this->app->loadClass('pager', $static = true);
         $get = fixer::input('get')
             ->setDefault('recTotal', 0)
             ->setDefault('recPerPage', 10)
             ->setDefault('pageID', 1)
             ->get();
+        $this->app->loadClass('pager', $static = true);
         $pager = new pager($get->recTotal, $get->recPerPage, $get->pageID);
 
         $users = $this->user->getList($pager);
-        $this->wechat->getFansInfo($users);
-
+        
         $this->view->users = $users;
         $this->view->pager = $pager;
 
         $this->view->title = $this->lang->user->list;
         $this->display();
+    }
+        
+    /**
+     * Pull wechat fans. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function pullWechatFans()
+    {
+        $this->loadModel('wechat')->pullFans();
+
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal = 0, $recPerPage =99999, $pageID = 1);
+        $users = $this->user->getList($pager);
+
+        $this->wechat->batchPullFanInfo($users);
+        $this->send(array('result' => 'success', $message = $this->lang->user->pullSuccess));
     }
 
     /**

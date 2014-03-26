@@ -20,25 +20,21 @@
       <div id='recordsBox' class='comments-list'>
         <?php foreach($records as $record):?>
           <div class='comment' id="record<?php echo $record->id?>">
-            <div class='avatar'><div class='avatar-empty icon-comments-alt'></div></div>
             <div class='content'>
-              <div class='text'><span class='author'><strong><?php echo $user->nickname . $lang->colon;?></strong></span> &nbsp;<?php echo nl2br($record->content);?></div>
-              <div class='actions text-muted small'><span class='text-important'><?php echo $lang->wechat->message->typeList[$record->type] ?></span> &nbsp; <?php echo $lang->wechat->message->time . $lang->colon . $record->time;?></div>
+              <div class='author text-primary'><span><?php echo $user->nickname;?></span> <small>[<?php echo $record->time;?>]</small></div>
+              <div class='text'><span class='text-important'><?php echo $lang->wechat->message->typeList[$record->type] ?></span> &nbsp; <?php echo nl2br($record->content);?></div>
             </div>
-            <?php if(isset($record->replies)):?>
-            <div class='comments-list'>
-              <?php foreach($record->replies as $reply):?>
-                <div class='comment'>
-                  <div class='avatar'><div class='avatar-empty icon-reply'></div></div>
-                  <div class='content'>
-                    <div class='text'><span class='author'><strong><?php echo $reply->from . $lang->colon;?></strong></span> &nbsp;<?php echo nl2br($reply->content);?></div>
-                    <div class='actions text-muted small'><?php echo $lang->wechat->message->time . ' ' . $reply->time;?></div>
-                  </div>
-                </div>
-              <?php endforeach;?>
-            </div>
-          <?php endif;?>
           </div>
+          <?php if(isset($record->replies)):?>
+          <?php foreach($record->replies as $reply):?>
+            <div class='comment comment-reply'>
+              <div class='content'>
+                <div class='author text-success'><span><?php echo $reply->from;?></span> <small>[<?php echo $reply->time;?>]</small></div>
+                <div class='text'><?php echo nl2br($reply->content);?></div>
+              </div>
+            </div>
+          <?php endforeach;?>
+          <?php endif;?>
         <?php endforeach;?>
       </div>
       <?php if($public->certified):?>

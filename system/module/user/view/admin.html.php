@@ -79,7 +79,14 @@ js::set('provider', $this->get->provider);
     </tr>
     <?php endforeach;?>
     </tbody>
-    <tfoot><tr><td colspan='12'><?php $pager->show();?></td></tr></tfoot>
+    <tfoot>
+      <tr>
+        <td colspan='12'>
+        <?php if($this->get->provider == 'wechat') echo html::a(inlink('pullWechatFans'), "<i class='icon-refresh '> {$lang->user->pullWechatFans} </i>", "class='btn btn-primary' id='pullBtn'")?>
+        <?php $pager->show();?>
+        </td>
+      </tr>
+    </tfoot>
   </table>
 </div>
 
