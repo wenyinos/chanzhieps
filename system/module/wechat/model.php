@@ -220,7 +220,7 @@ class wechatModel extends model
 
         if($message->msgType == 'text')  $response = $this->getResponseByKey($public, $message->content);    
         if($message->msgType == 'event') $response = $this->getResponseByKey($public, $message->eventKey);    
-        if(isset($message->event) && $message->event   == 'subscribe') $response = $this->getResponseByKey($public, 'subscribe');    
+        if(isset($message->event) && $message->event == 'subscribe') $response = $this->getResponseByKey($public, 'subscribe');
 
         if(empty($response)) $response = $this->getResponseByKey($public, 'default');    
 
@@ -286,11 +286,6 @@ class wechatModel extends model
             ->andWhere('`key`')->eq($key)
             ->fetch();
         return $this->processResponse($response);
-    }
-
-    public function getReponseByID($id)
-    {
-        return $this->processResponse($this->dao->findById($id)->from(TABLE_WX_RESPONSE)->fetch());
     }
 
     /**
