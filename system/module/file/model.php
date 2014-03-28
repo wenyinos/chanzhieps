@@ -245,7 +245,7 @@ class fileModel extends model
     {
         $extension = pathinfo($filename, PATHINFO_EXTENSION);
         if(empty($extension)) return 'txt';
-        if(strpos($this->config->file->dangers, $extension) !== false) return 'txt';
+        if(strpos($this->config->file->dangers, lower($extension)) !== false) return 'txt';
         return $extension;
     }
 
