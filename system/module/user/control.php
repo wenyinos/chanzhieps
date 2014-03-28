@@ -325,7 +325,7 @@ class user extends control
         $users = $this->user->getList($pager);
 
         $this->wechat->batchPullFanInfo($users);
-        $this->send(array('result' => 'success', $message = $this->lang->user->pullSuccess));
+        $this->send(array('result' => 'success', 'message' => $this->lang->user->pullSuccess));
     }
 
     /**

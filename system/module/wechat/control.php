@@ -90,9 +90,6 @@ class wechat extends control
      */
     public function admin()
     {
-        $message = new stdclass();
-        $message->fromUserName = 'oCFY_t4z_d8bHvs6AR4zYD3c_M0A';
-
         $publics = $this->wechat->getList();
         if(empty($publics)) $this->locate(inlink('create'));
 
@@ -274,9 +271,9 @@ class wechat extends control
     }
 
     /**
-     * message 
+     * Browse messages. 
      * 
-     * @param  string    $model   type|from|replied
+     * @param  string    $mode   type|from|replied
      * @param  string    $query 
      * @param  string    $orderBy 
      * @param  int       $pageID 
