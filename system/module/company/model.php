@@ -26,7 +26,7 @@ class companyModel extends model
             {
                 if($item == 'qq') 
                 {
-                    $contact->qq = html::a("tencent://message/?uin={$value}&amp;Site={$this->config->company->name}&amp;Menu=yes", $value);
+                    $contact->qq = html::a("http://wpa.qq.com/msgrd?v=3&uin={$value}&site={$this->config->company->name}&menu=yes", $value);
                 }
                 else if($item == 'email')
                 {
