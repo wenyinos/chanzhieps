@@ -55,6 +55,10 @@ a:hover,a:active{color: #35636e;}
 .panel-heading > .pull-right > a{color: #f1f1f1}
 .panel-block .panel-body > .ul-list > li > .pull-right {background: #F5F0CC}
 
+.wechat-block {background: #F5F0CC;}
+
+.popover-content {background: #F5F0CC}
+
 /* buttons. */
 .btn{border: none; padding: 8px 12px; -webkit-transition: 0.25s linear; -moz-transition: 0.25s linear; -o-transition: 0.25s linear; transition: 0.25s linear; -webkit-backface-visibility: hidden; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none;}
 .btn-primary{background: #7a94b2;}
