@@ -184,7 +184,7 @@ class userModel extends model
     public function createWechatUser($fan, $public)
     {
         if(!isset($fan->subscribe) or $fan->subscribe != 1) return false;
-        $fan->openID   = $fan->openid;
+        $fan->openID = $fan->openid;
 
         $user = new stdclass();
         $user->public   = $public;
@@ -351,12 +351,12 @@ class userModel extends model
             $dateDiff = (strtotime($user->locked) - time()) / 60;
 
             /* Check the type of lock and show it. */
-            if($dateDiff > 0 && $dateDiff <= 10)
+            if($dateDiff > 0 && $dateDiff <= 3)
             {
-                $this->lang->user->loginFailed = sprintf($this->lang->user->locked, '10' . $this->lang->date->minute);
+                $this->lang->user->loginFailed = sprintf($this->lang->user->locked, '3' . $this->lang->date->minute);
                 return false;
             }
-            elseif($dateDiff > 10)
+            elseif($dateDiff > 3)
             {
                 $dateDiff = ceil($dateDiff / 60 / 24);
                 $this->lang->user->loginFailed = $dateDiff <= 30 ? sprintf($this->lang->user->locked, $dateDiff . $this->lang->date->day) : $this->lang->user->lockedForEver;
@@ -374,7 +374,7 @@ class userModel extends model
         if($oldPassword != $user->password and !$this->compareHashPassword($password, $user) and $user->password != $this->createPassword($password, $user->account))
         {
             $user->fails ++;
-            if($user->fails > 2 * 2) $user->locked = date('Y-m-d H:i:s', time() + 10 * 60);
+            if($user->fails > 2 * 4) $user->locked = date('Y-m-d H:i:s', time() + 3 * 60);
             $this->dao->update(TABLE_USER)->data($user)->where('id')->eq($user->id)->exec();
             return false;
         }
