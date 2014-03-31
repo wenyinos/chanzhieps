@@ -259,7 +259,7 @@ class helper
      */
     static public function jsonEncode($data)
     {
-        return get_magic_quotes_gpc() ? addslashes(json_encode($data)) : json_encode($data);
+        return (version_compare(phpversion(), '5.4', '<') and get_magic_quotes_gpc()) ? addslashes(json_encode($data)) : json_encode($data);
     }
 
     /**

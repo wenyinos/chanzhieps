@@ -342,7 +342,7 @@ class wechatModel extends model
             $content['block']    = $response->block;
             $content['category'] = $response->category;
             if(isset($response->limit)) $content['limit'] = $response->limit;
-            $response->content = json_encode($content);
+            $response->content = helper::jsonEncode($content);
         }
 
         $this->dao->replace(TABLE_WX_RESPONSE)
@@ -655,7 +655,7 @@ class wechatModel extends model
         $message->to       = $data->toUserName;
         $message->response = $data->response;
         $message->type     = $data->msgType;
-        $message->content  = isset($data->content) ? $data->content : json_encode($data);
+        $message->content  = isset($data->content) ? $data->content : helper::jsonEncode($data);
 
         if($data->msgType == 'event')
         {
