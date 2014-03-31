@@ -10,7 +10,10 @@
  * @link        http://www.chanzhi.org
 */
 ?>
-<?php $contact = $this->loadModel('company')->getContact();?>
+<?php
+$contact = $this->loadModel('company')->getContact();
+$publicList = $this->loadModel('wechat')->getList();
+?>
 <div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
   <div class='panel-heading'>
     <h4><?php echo $icon . $block->title;?></h4>
@@ -22,6 +25,15 @@
         <th><?php echo $this->lang->company->$item . $this->lang->colon;?></th>
         <td><?php echo $value;?></td>
       </tr>
+      <?php endforeach;?>
+      <?php foreach($publicList as $public):?>
+      <?php if(!$public->qrcode) continue;?>
+      <tr class='text-center'>
+        <th colspan='2'><?php echo $public->name;?></th>
+      </tr>
+      <tr class='text-center'>
+        <td colspan='2'><?php echo html::image($public->qrcode, "class='w-180px'");?></td>
+      </tr>  
       <?php endforeach;?>
     </table>
     <dl class='dl-horizontal'>
