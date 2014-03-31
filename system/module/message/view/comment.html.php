@@ -18,7 +18,7 @@ css::internal($pageCSS);
           <div class='text'><span class='author'><strong><?php echo $comment->from . $lang->colon;?></strong></span> &nbsp;<?php echo nl2br($comment->content);?></div>
           <div class='actions text-muted small'>
             <div class='pull-right'></div>
-            <strong>#<?php echo ($number + 1); ?></strong> • <?php echo $lang->comment->replyTo . ' ' . $comment->date;?>
+            <?php echo $lang->comment->commentAt . ' ' . $comment->date;?>
           </div>
         </div>
         <?php if(!empty($replies[$comment->id])):?>
@@ -28,7 +28,7 @@ css::internal($pageCSS);
               <div class='avatar'><div class='avatar-empty icon-user'></div></div>
               <div class='content'>
                 <div class='text'><span class='author'><strong><?php echo $reply->from . $lang->colon;?></strong></span> &nbsp;<?php echo nl2br($reply->content);?></div>
-                <div class='actions text-muted small'><?php echo $lang->comment->replyTo . ' ' . $reply->date;?></div>
+                <div class='actions text-muted small'><?php echo $lang->comment->replyAt . ' ' . $reply->date;?></div>
               </div>
             </div>
             <?php endforeach; ?>
