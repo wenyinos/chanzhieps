@@ -155,6 +155,7 @@
 .panel-block .panel-body > .card > .media > img {width: 100%;max-width: 100%;}
 .panel-block .panel-body > .card > .card-heading {padding-bottom: 6px;}
 .panel-block .panel-body > .card > .card-content {height: 80px;overflow: hidden; text-overflow: ellipsis; }
+.panel-block .panel-body > .table-data {margin-bottom: 0;}
 
 .panel-block .panel-body .article-content {padding: 0}
 
@@ -169,6 +170,12 @@
 .panel-block .nav-secondary > li > a {border-bottom: 1px dashed #ddd;}
 .panel-block .nav-secondary > li:last-child > a {border-bottom: none;}
 .panel-block .nav-stacked > li + li {margin-top: 0;}
+
+/* wechat qrcode in block */
+.wechat-block {text-align: center; vertical-align: middle; background: #e5e5e5; padding: 10px 0}
+.wechat-block .qrcode {text-align: center;}
+.wechat-block .qrcode img {width: 120px; border: 1px solid #ddd;}
+.wechat-block .name {font-size: 12px; margin-top: 6px;}
 
 /* meta-list */
 .meta-list {display: table; width: 100%;}

@@ -26,17 +26,19 @@ $publicList = $this->loadModel('wechat')->getList();
         <td><?php echo $value;?></td>
       </tr>
       <?php endforeach;?>
+    </table>
+  </div>
+  <div class='hidden-sm hidden-xs'>
+    <table class='w-p100'>
+      <tr>
       <?php foreach($publicList as $public):?>
       <?php if(!$public->qrcode) continue;?>
-      <tr class='text-center'>
-        <th colspan='2'><?php echo $public->name;?></th>
-      </tr>
-      <tr class='text-center'>
-        <td colspan='2'><?php echo html::image($public->qrcode, "class='w-180px'");?></td>
-      </tr>  
+        <td class='wechat-block'>
+          <div class='qrcode'><?php echo html::image($public->qrcode, "class='w-180px'");?></div>
+          <div class='name'><?php echo $public->name;?></div>
+        </td>
       <?php endforeach;?>
+      </tr>
     </table>
-    <dl class='dl-horizontal'>
-    </dl>
   </div>
 </div>
