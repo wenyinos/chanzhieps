@@ -53,7 +53,7 @@ a.card:hover, .card:hover a {color: #e91b23}
 body {background: #232323;}
 
 /* Containers */
-.page-container {margin: 0;}
+.page-container {margin: 0; overflow: hidden;}
 .page-content, #header .wrapper, #navbar, #focus, .focus-middle, .focus-bottom, #footer > .wrapper {margin: 0 auto; max-width: 1170px;}
 @media (min-width: 768px) {.page-content, #header .wrapper, #navbar, .focus-middle, .focus-bottom, #footer > .wrapper {max-width: 750px;}}
 @media (min-width: 992px) {.page-content, #header .wrapper, #navbar, .focus-middle, .focus-bottom, #footer > .wrapper {max-width: 970px;}}
