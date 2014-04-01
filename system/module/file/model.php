@@ -50,7 +50,7 @@ class fileModel extends model
             $file->title = $file->title . ".$file->extension";
             if($file->isImage)
             {
-                $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->smallURL), "target='_blank' data-toggle='lightbox' data-width='{$file->width}' data-height='{$file->height}'") . '</li>';
+                $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), html::image($file->smallURL), "target='_blank' data-toggle='lightbox' data-width='{$file->width}' data-height='{$file->height}'") . '</li>';
             }
             else
             {
@@ -110,7 +110,7 @@ class fileModel extends model
             if(!file_exists(str_replace($this->webPath, $this->savePath, $file->smallURL)))  $file->smallURL  = $file->fullURL;
             if(!file_exists(str_replace($this->webPath, $this->savePath, $file->largeURL)))  $file->largeURL  = $file->fullURL;
 
-            $file->isImage   = true;
+            $file->isImage = true;
         }
 
         return $file;
@@ -309,7 +309,7 @@ class fileModel extends model
     }
 
     /**
-     * Edit rile
+     * Edit file.
      * 
      * @param  int    $fileID 
      * @access public
