@@ -25,6 +25,7 @@ include '../../common/view/header.html.php';
         </table>
       </div>
     </div>
+    <?php if(!empty($publicList)):?>
     <div class='panel hidden-sm hidden-xs'>
       <div class='panel-heading'><strong><i class='icon-weixin'></i> <?php echo $lang->company->qrcode;?></strong></div>
         <table class='w-p100'>
@@ -39,6 +40,7 @@ include '../../common/view/header.html.php';
           <?php endforeach;?>
         </table>
     </div>
+    <?php endif;?>
   </div>
 </div>
 
