@@ -36,7 +36,7 @@ $lang->message->delete         = '删除';
 $lang->message->deleteSelected = '删除选中项';
 $lang->message->passPre        = '通过之前';
 $lang->message->deletePre      = '删除之前';
-$lang->message->commentAT      = '发表于';
+$lang->message->commentAt      = '发表于 ';
 $lang->message->deletedObject  = '已删除项目';
 $lang->message->contactHidden  = "以下电话、邮箱、qq联系方式只有网站管理员可见，不会暴露。";
 
