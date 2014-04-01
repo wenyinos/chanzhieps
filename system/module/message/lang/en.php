@@ -36,8 +36,7 @@ $lang->message->delete         = 'Delete';
 $lang->message->deleteSelected = 'Delete selected';
 $lang->message->passPre        = 'Pass previous';
 $lang->message->deletePre      = 'Delete previous';
-$lang->message->commentTo      = 'Comment';
-$lang->message->commentAt      = 'Comment at %s';
+$lang->message->commentAt      = 'Comment at ';
 $lang->message->deletedObject  = 'Deleted';
 $lang->message->contactHidden  = "Your phone,email,qq  will send to administrator confidentially.";
 
