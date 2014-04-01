@@ -79,6 +79,7 @@ class upgradeModel extends model
                 $this->upgradeHtmlBlocks();
                 $this->upgradeLayouts();
             case '2_1': $this->execSQL($this->getUpgradeFile('2.1'));
+            case '2_2': $this->execSQL($this->getUpgradeFile('2.2'));
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -108,6 +109,7 @@ class upgradeModel extends model
             case '2_0'  : $confirmContent .= file_get_contents($this->getUpgradeFile('2.0'));
             case '2_0_1': $confirmContent .= file_get_contents($this->getUpgradeFile('2.0.1'));
             case '2_1'  : $confirmContent .= file_get_contents($this->getUpgradeFile('2.1'));
+            case '2_2'  : $confirmContent .= file_get_contents($this->getUpgradeFile('2.2'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
