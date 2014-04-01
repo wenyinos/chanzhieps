@@ -36,7 +36,7 @@ $lang->message->delete         = '删除';
 $lang->message->deleteSelected = '删除选中项';
 $lang->message->passPre        = '通过之前';
 $lang->message->deletePre      = '删除之前';
-$lang->message->commentTo      = '发表于';
+$lang->message->commentAT      = '发表于';
 $lang->message->deletedObject  = '已删除项目';
 $lang->message->contactHidden  = "以下电话、邮箱、qq联系方式只有网站管理员可见，不会暴露。";
 
@@ -69,12 +69,13 @@ $lang->comment->thanks      = '感谢您的评论！';
 
 $lang->comment->pass          = '通过';
 $lang->comment->reply         = '回复';
-$lang->comment->replyTo       = '回复于';
+$lang->comment->replyAt       = '回复于';
 $lang->comment->manage        = '评论管理';
 $lang->comment->delete        = '删除';
 $lang->comment->passPre       = '通过之前';
 $lang->comment->deletePre     = '删除之前';
 $lang->comment->commentTo     = '发表于';
+$lang->comment->commentAt     = '发表于';
 $lang->comment->deletedObject = '已删除项目';
 
 $lang->comment->confirmDeleteSingle = '您确定要删除该评论吗？';
