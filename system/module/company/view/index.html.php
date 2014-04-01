@@ -27,19 +27,17 @@ include '../../common/view/header.html.php';
     </div>
     <div class='panel hidden-sm hidden-xs'>
       <div class='panel-heading'><strong><i class='icon-weixin'></i> <?php echo $lang->company->qrcode;?></strong></div>
-      <div class='panel-body'>
         <table class='w-p100'>
           <?php foreach($publicList as $public):?>
           <?php if(!$public->qrcode) continue;?>
           <tr class='text-center'>
             <td class='wechat-block'>
               <div class='name'><i class='icon-weixin'>&nbsp;</i><?php echo $public->name;?></div>
-              <div class='qrcode'><?php echo html::image($public->qrcode, "class='w-180px'");?></div>
+              <div class='qrcode'><?php echo html::image($public->qrcode, "class='w-220px'");?></div>
             </td>
           </tr>
           <?php endforeach;?>
         </table>
-      </div>
     </div>
   </div>
 </div>

@@ -172,10 +172,10 @@
 .panel-block .nav-stacked > li + li {margin-top: 0;}
 
 /* wechat qrcode in block */
-.wechat-block {text-align: center; vertical-align: middle; background: #e5e5e5; padding: 10px 0}
+.wechat-block {text-align: center; vertical-align: middle; background: #f1f1f1; padding: 10px 0}
 .wechat-block .qrcode {text-align: center;}
-.wechat-block .qrcode img {width: 120px; border: 1px solid #ddd;}
-.wechat-block .name {font-size: 12px; margin-top: 6px;}
+.wechat-block .qrcode img {width: 160px; border: 1px solid #ddd;}
+.wechat-block .name {font-size: 12px; margin-bottom: 6px; font-weight: bold;}
 
 /* meta-list */
 .meta-list {display: table; width: 100%;}
