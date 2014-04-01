@@ -19,10 +19,11 @@ class company extends control
      */
     public function index()
     {
-        $this->view->title    = $this->config->company->name;
-        $this->view->keywords = $this->config->company->name;
-        $this->view->company  = $this->config->company;
-        $this->view->contact  = $this->company->getContact();
+        $this->view->title      = $this->config->company->name;
+        $this->view->keywords   = $this->config->company->name;
+        $this->view->company    = $this->config->company;
+        $this->view->contact    = $this->company->getContact();
+        $this->view->publicList = $this->loadModel('wechat')->getList();
 
         $this->display();
     }

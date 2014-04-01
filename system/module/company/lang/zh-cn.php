@@ -15,6 +15,7 @@ $lang->company->name    = "公司名称";
 $lang->company->desc    = "公司简介";
 $lang->company->content = "公司介绍";
 $lang->company->contact = "联系我们";
+$lang->company->qrcode  = "微信二维码";
 
 $lang->company->setBasic   = "设置基本信息";
 $lang->company->setContact = "设置联系方式";
