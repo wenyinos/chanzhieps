@@ -41,7 +41,7 @@ $lang->product->order      = 'Order';
 $lang->product->attribute  = 'Attribute';
 $lang->product->sales      = 'Price';
 
-$lang->product->currencyIcon = 'icon-usd';
+$lang->product->currencyIcon = "<i class='icon-usd'> </i>";
 
 $lang->product->list       = 'List';
 $lang->product->hot        = 'Hot';

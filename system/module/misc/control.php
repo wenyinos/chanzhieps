@@ -34,4 +34,3 @@ class misc extends control
         QRcode::png($this->server->http_referer, false, 4, 6); 
     }   
 }
-

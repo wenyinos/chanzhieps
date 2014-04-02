@@ -292,8 +292,9 @@ class wechatapi
         $reply->$type   = $message;
         $this->reply    = $reply;
         
-        $token = $this->getAccessToken();
-        $url = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=$token";
+        $token = $this->getAccessToken(true);
+        $url   = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=$token";
+
         $result = $this->post($url, $this->convertReply2JSON($this->reply));
         $result = json_decode($result);
 
@@ -332,7 +333,7 @@ class wechatapi
      */
     public function commitMenu($menu)
     {
-        $token  = $this->getAccessToken();
+        $token  = $this->getAccessToken(true);
         $url    = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=$token";
         $menu   = $this->convertMenu2JSON($menu);
         $result = $this->post($url, $menu);
@@ -350,7 +351,7 @@ class wechatapi
      */
     public function deleteMenu()
     {
-        $token  = $this->getAccessToken();
+        $token  = $this->getAccessToken(true);
         $url    = "https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=$token";
         $result = json_decode($this->get($url));
 
@@ -393,7 +394,7 @@ class wechatapi
     public function uploadMedia($type, $file)
     {
         $fields['media'] = "@$file";
-        $token = $this->getAccessToken();
+        $token = $this->getAccessToken(true);
         $url   = "http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=$token&type=$type";
 
         $result = $this->post($url, $fields);
@@ -412,7 +413,7 @@ class wechatapi
      */
     public function getMedia($id)
     {
-        $token  = $this->getAccessToken();
+        $token  = $this->getAccessToken(true);
         $url    = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=$token&media_id=$id";
         $result = $this->get($url);
 
@@ -429,7 +430,7 @@ class wechatapi
      */
     public function getFans($next = '')
     {
-        $token = $this->getAccessToken();
+        $token = $this->getAccessToken(true);
         $url   = "https://api.weixin.qq.com/cgi-bin/user/get?access_token=$token&next_openid=$next";
         $result = $this->get($url);
         return json_decode($result);
@@ -446,7 +447,12 @@ class wechatapi
     public function getUserInfo($openID, $lang = 'zh_CN')
     {
         $token = $this->getAccessToken();
-        $url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=$token&openid=$openID&lang=$lang";
+        $url   = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=$token&openid=$openID&lang=$lang";
+        $data  = json_decode($this->get($url));
+        if($data and !isset($data->errorcode)) return $data;
+
+        $token = $this->getAccessToken(true);
+        $url   = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=$token&openid=$openID&lang=$lang";
         return json_decode($this->get($url));
     }
 
@@ -464,7 +470,7 @@ class wechatapi
         $params['action_info']['scene']['scene_id'] = 1;
 
         /* Get the ticket. */
-        $token = $this->getAccessToken();
+        $token = $this->getAccessToken(true);
         $url = "https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=$token";
         $data = json_decode($this->post($url, json_encode($params)));
         if(!isset($data->ticket) or (isset($data->errcode) and $data->errcode)) return false;
@@ -477,14 +483,15 @@ class wechatapi
 
     /**
      * Get access token.
-     * 
+     *
+     * @param  bool    $refresh 
      * @access public
-     * @return string
+     * @return void
      */
-    public function getAccessToken()
+    public function getAccessToken($refresh = false)
     {
         /* First try to use the token in session. */
-        if(isset($_SESSION['wxToken'][$this->appID]))
+        if(isset($_SESSION['wxToken'][$this->appID]) and $refresh == false)
         {
             if(time() < $_SESSION['wxToken'][$this->appID]->expires) return $_SESSION['wxToken'][$this->appID]->token;
         }
@@ -504,7 +511,7 @@ class wechatapi
         /* Save it to session. */
         $token = new stdclass();
         $token->token   = $data->access_token;
-        $token->expires = $time + $data->expires_in;
+        $token->expires = $time + ($data->expires_in / 2);
         $_SESSION['wxToken'][$this->appID] = $token;
 
         return $token->token;
@@ -519,12 +526,12 @@ class wechatapi
      */
     public function get($url)
     {   
-        if(ini_get('allow_url_fopen') == '1') return file_get_contents($url);
         if(!function_exists('curl_init')) die('I can\'t fetch anything, please set allow_url_fopen to ture or install curl extension');
 
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
         $response = curl_exec($curl);

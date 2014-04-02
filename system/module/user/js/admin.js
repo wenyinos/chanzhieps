@@ -24,4 +24,22 @@ $(document).ready(function()
     $('.leftmenu li.active').removeClass('active');
     $(".leftmenu a[href*='provider=" + v.provider  + "']").parent().addClass('active');
     if($('.leftmenu li.active').size() == 0) $('.leftmenu li:first').addClass('active');
+
+    $('#pullBtn').click(function()
+    {
+        url = $(this).attr('href');
+        $(this).text(v.lang.loading);
+        $.getJSON(url, function(response)
+        {
+            if(response.result == 'success')
+            {
+                window.location.reload();
+            }
+            else
+            {
+                bootbox.alert(response.message);
+            }
+        });
+        return false;
+    });
 });

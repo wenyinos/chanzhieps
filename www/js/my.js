@@ -50,9 +50,9 @@ $(document).ready(function()
     $('body').addClass('m-' + config['currentModule'] + '-' + config['currentMethod']);
 
     /* set right docker */
-    $('#rightDockerBtn').popover({container: 'body', html:true, trigger:'manual'}).mouseover(function()
+    $('#rightDockerBtn').popover({container: 'body', html:true, trigger:'manual'}).mouseenter(function()
     {
-        $('#rightDockerBtn').removeClass('showed');
+        if($('#rightDockerBtn').hasClass('showed')) return;
         $(this).addClass('showed').popover('show');
         $("#rightDockerBtn:not('.showed')").popover('hide');
     });

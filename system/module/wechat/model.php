@@ -28,6 +28,18 @@ class wechatModel extends model
     /**
      * Get a public account by id.
      * 
+     * @param  string    $account 
+     * @access public
+     * @return object
+     */
+    public function getByAccount($account)
+    {
+        return $this->dao->select('*')->from(TABLE_WX_PUBLIC)->where('account')->eq($account)->fetch();
+    }
+
+    /**
+     * Get a public account by id.
+     * 
      * @param  int    $id 
      * @access public
      * @return object
@@ -208,7 +220,7 @@ class wechatModel extends model
 
         if($message->msgType == 'text')  $response = $this->getResponseByKey($public, $message->content);    
         if($message->msgType == 'event') $response = $this->getResponseByKey($public, $message->eventKey);    
-        if(isset($message->event) && $message->event   == 'subscribe') $response = $this->getResponseByKey($public, 'subscribe');    
+        if(isset($message->event) && $message->event == 'subscribe') $response = $this->getResponseByKey($public, 'subscribe');
 
         if(empty($response)) $response = $this->getResponseByKey($public, 'default');    
 
@@ -258,15 +270,6 @@ class wechatModel extends model
         return $this->loadModel('user')->createWechatUser($fan, $public->account);
     }
 
-    public function test($publicID)
-    {
-        $public = $this->getByID($publicID);
-        $openID = 'oCFY_t4z_d8bHvs6AR4zYD3c_M0A';
-        $api  = $this->loadApi($publicID);
-        $fan  = $api->getUserInfo($openID);
-        return $this->loadModel('user')->createWechatUser($fan, $public->account);
-    }
-
     /**
      * Get response by key.
      * 
@@ -283,11 +286,6 @@ class wechatModel extends model
             ->andWhere('`key`')->eq($key)
             ->fetch();
         return $this->processResponse($response);
-    }
-
-    public function getReponseByID($id)
-    {
-        return $this->processResponse($this->dao->findById($id)->from(TABLE_WX_RESPONSE)->fetch());
     }
 
     /**
@@ -344,7 +342,7 @@ class wechatModel extends model
             $content['block']    = $response->block;
             $content['category'] = $response->category;
             if(isset($response->limit)) $content['limit'] = $response->limit;
-            $response->content = json_encode($content);
+            $response->content = helper::jsonEncode($content);
         }
 
         $this->dao->replace(TABLE_WX_RESPONSE)
@@ -657,7 +655,7 @@ class wechatModel extends model
         $message->to       = $data->toUserName;
         $message->response = $data->response;
         $message->type     = $data->msgType;
-        $message->content  = isset($data->content) ? $data->content : json_encode($data);
+        $message->content  = isset($data->content) ? $data->content : helper::jsonEncode($data);
 
         if($data->msgType == 'event')
         {
@@ -719,43 +717,6 @@ class wechatModel extends model
     }
 
     /**
-     * Pull fans.
-     * 
-     * @access public
-     * @return void
-     */
-    public function pullFans()
-    {
-        $publicList = $this->dao->select('*')->from(TABLE_WX_PUBLIC)->fetchAll();
-        $pulledFans = $this->dao->select('*')->from(TABLE_OAUTH)->where('provider')->eq('wechat')->fetchAll('openID');
-        foreach($publicList as $public)
-        {
-            if(!$public->certified) continue;
-            $this->app->loadClass('wechatapi', true);
-            $api  = new wechatapi($public->token, $public->appID, $public->appSecret, $this->config->debug);
-            $fans = $api->getFans();
-
-            if(empty($fans->data))continue;
-
-            foreach($fans->data->openid as $openID)
-            {
-                if(isset($pulledFans[$openID])) continue;
-
-                $user = array();
-                $user['openID']   = $openID;
-                $user['provider'] = 'wechat';
-                $user['public']   = $public->id;
-                $user['account']  = uniqid('wx_');
-                $user['join']     = helper::now();
-
-                $this->dao->insert(TABLE_OAUTH)->data($user, $skip = 'public,join')->exec();
-                $this->dao->insert(TABLE_USER)->data($user, $skip = 'openID,provider')->exec();
-            }
-        }
-        return true;
-    }
-
-    /**
      * Get fan info By OpenID. 
      * 
      * @param  int    $public 
@@ -788,6 +749,43 @@ class wechatModel extends model
     }
 
     /**
+     * Pull fans.
+     * 
+     * @access public
+     * @return void
+     */
+    public function pullFans()
+    {
+        $publicList = $this->dao->select('*')->from(TABLE_WX_PUBLIC)->fetchAll();
+        $pulledFans = $this->dao->select('*')->from(TABLE_OAUTH)->where('provider')->eq('wechat')->fetchAll('openID');
+        foreach($publicList as $public)
+        {
+            if(!$public->certified) continue;
+            $this->app->loadClass('wechatapi', true);
+            $api  = new wechatapi($public->token, $public->appID, $public->appSecret, $this->config->debug);
+            $fans = $api->getFans();
+
+            if(empty($fans->data))continue;
+
+            foreach($fans->data->openid as $openID)
+            {
+                if(isset($pulledFans[$openID])) continue;
+
+                $user = array();
+                $user['openID']   = $openID;
+                $user['provider'] = 'wechat';
+                $user['public']   = $public->account;
+                $user['account']  = uniqid('wx_');
+                $user['join']     = helper::now();
+
+                $this->dao->insert(TABLE_OAUTH)->data($user, $skip = 'public,join')->exec();
+                $this->dao->insert(TABLE_USER)->data($user, $skip = 'openID,provider')->exec();
+            }
+        }
+        return true;
+    }
+
+    /**
      * Pull fan info.
      * 
      * @param  object    $user 
@@ -797,12 +795,12 @@ class wechatModel extends model
     public function pullFanInfo($user)
     {
         if(!$user->public) return false;
-        $public = $this->getByID($user->public);
-        if(!$public->certified) return false;
+        $public = $this->getByAccount($user->public);
+        if(empty($public) or !$public->certified) return false;
 
-        $api  = $this->loadApi($user->public);
+        $api  = $this->loadApi($public->id);
         $fan  = $api->getUserInfo($user->openID);
-        $user = $this->loadModel('user')->createWechatUser($fan, $public);
+        $user = $this->loadModel('user')->createWechatUser($fan, $public->account);
     }
 
     /**
@@ -812,13 +810,13 @@ class wechatModel extends model
      * @access public
      * @return void
      */
-    public function getFansInfo($users)
+    public function batchPullFanInfo($users)
     {
         foreach($users as $user)
         {
             if(!$user->nickname and $user->public) $user = $this->pullFanInfo($user);
         }
-        return true;
+        return $users;
     }
 
     /**

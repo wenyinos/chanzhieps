@@ -30,11 +30,11 @@ $url      = helper::createLink('product', 'view', "id={$product->id}", "category
         <?php
         if($product->promotion != 0)
         {
-            echo "<span class='text-muted'><i class='{$this->lang->product->currencyIcon}'></i></span> ";
+            echo "<span class='text-muted'>" . $this->lang->product->currencyIcon . "</span> ";
             echo "<strong class='text-danger'>" . $product->promotion . '</strong>';
             if($product->price != 0)
             {
-                echo "&nbsp;&nbsp;<del class='text-muted'><i class='{$this->lang->product->currencyIcon}'></i> " . $product->price .'</del>';
+                echo "&nbsp;&nbsp;<del class='text-muted'>" . $this->lang->product->currencyIcon . $product->price .'</del>';
             }
         }
         else

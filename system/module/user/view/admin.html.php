@@ -65,7 +65,7 @@ js::set('provider', $this->get->provider);
       <?php if($user->locked <= helper::now()) echo $lang->user->statusList->normal;?>
       </td>
       <td class='operate'>
-        <?php if($this->get->provider == 'wechat') echo html::a($this->createLink('wechat', 'message', "from={$user->openID}"), $lang->user->messages);?>
+        <?php //if($user->provider == 'wechat') echo html::a($this->createLink('wechat', 'message', "from={$user->openID}"), $lang->user->messages);?>
         <?php echo html::a($this->createLink('user', 'edit', "account=$user->account"), $lang->edit); ?>
         <div class="btn-group">
           <a href='###' class="dropdown-toggle" data-toggle="dropdown"><?php echo $lang->user->forbid?> <span class="caret"></span></a>
@@ -79,7 +79,14 @@ js::set('provider', $this->get->provider);
     </tr>
     <?php endforeach;?>
     </tbody>
-    <tfoot><tr><td colspan='12'><?php $pager->show();?></td></tr></tfoot>
+    <tfoot>
+      <tr>
+        <td colspan='12'>
+        <?php if($this->get->provider == 'wechat') echo html::a(inlink('pullWechatFans'), "<i class='icon-refresh '> {$lang->user->pullWechatFans} </i>", "class='btn btn-primary' id='pullBtn'")?>
+        <?php $pager->show();?>
+        </td>
+      </tr>
+    </tfoot>
   </table>
 </div>
 

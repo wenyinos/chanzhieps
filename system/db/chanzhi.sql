@@ -290,7 +290,7 @@ CREATE TABLE IF NOT EXISTS `eps_user` (
   `join` datetime NOT NULL,
   `reset` char(64) NOT NULL,
   `locked` datetime NOT NULL,
-  `public` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `public` varchar(30) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `admin` (`admin`),
   KEY `account` (`account`,`password`)
@@ -299,7 +299,7 @@ CREATE TABLE IF NOT EXISTS `eps_user` (
 -- DROP TABLE IF EXISTS `eps_wx_public`;
 CREATE TABLE IF NOT EXISTS `eps_wx_public` (
   `id`        smallint(5) unsigned NOT NULL AUTO_INCREMENT,
-  `account`   varchar(20) NOT NULL,
+  `account`   varchar(30) NOT NULL,
   `name`      varchar(60) NOT NULL,
   `appID`     char(30) NOT NULL,
   `appSecret` char(32) NOT NULL,

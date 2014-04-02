@@ -92,6 +92,7 @@ $lang->js = new stdclass();
 $lang->js->confirmDelete = '您確定要執行刪除操作嗎？';
 $lang->js->deleteing     = '刪除中';
 $lang->js->doing         = '處理中';
+$lang->js->loading       = '加載中';
 $lang->js->timeout       = '網絡超時,請重試';
 
 /* Contact fields*/
@@ -190,7 +191,7 @@ $lang->feedback->menu->message = '留言|message|admin|type=message';
 $lang->feedback->menu->comment = '評論|message|admin|type=comment';
 $lang->feedback->menu->thread  = '主題|forum|admin|tab=feedback';
 $lang->feedback->menu->reply   = '回帖|reply|admin|order=id_desc&tab=feedback';
-$lang->feedback->menu->wechat  = '微信|wechat|message|replied=0';
+$lang->feedback->menu->wechat  = '微信|wechat|message|mode=replied&replied=0';
 
 $lang->message = new stdclass();
 $lang->message->menu = $lang->feedback->menu;

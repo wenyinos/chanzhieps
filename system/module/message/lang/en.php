@@ -36,7 +36,7 @@ $lang->message->delete         = 'Delete';
 $lang->message->deleteSelected = 'Delete selected';
 $lang->message->passPre        = 'Pass previous';
 $lang->message->deletePre      = 'Delete previous';
-$lang->message->commentTo      = 'Comment';
+$lang->message->commentAt      = 'Comment at ';
 $lang->message->deletedObject  = 'Deleted';
 $lang->message->contactHidden  = "Your phone,email,qq  will send to administrator confidentially.";
 
@@ -69,12 +69,13 @@ $lang->comment->thanks      = 'Thanks for your comment!';
 
 $lang->comment->pass          = 'Pass';
 $lang->comment->reply         = 'Reply';
-$lang->comment->replyTo       = 'Reply to';
+$lang->comment->replyAt       = 'Reply at';
 $lang->comment->manage        = 'Manage';
 $lang->comment->delete        = 'Delete';
 $lang->comment->passPre       = 'Pass previous';
 $lang->comment->deletePre     = 'Delete previous';
-$lang->comment->commentTo     = 'Comment';
+$lang->comment->commentTo     = 'Comment on';
+$lang->comment->commentAt     = 'Commented at';
 $lang->comment->deletedObject = 'Deleted';
 
 $lang->comment->confirmDeleteSingle = 'Are you sure to delete this comment?';

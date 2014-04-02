@@ -237,7 +237,7 @@ class blockModel extends model
                 if(is_array($value)) $block->params[$field] = join($value, ',');
             }
             if($this->post->content) $block->params['content'] = $this->post->content;
-            $block->content = json_encode($block->params);
+            $block->content = helper::jsonEncode($block->params);
         }
 
         $this->dao->insert(TABLE_BLOCK)->data($block, 'params,uid')->autoCheck()->exec();
@@ -265,7 +265,7 @@ class blockModel extends model
                 if(is_array($value)) $block->params[$field] = join($value, ',');
             }
             if($this->post->content) $block->params['content'] = $this->post->content;
-            $block->content = json_encode($block->params);
+            $block->content = helper::jsonEncode($block->params);
         }
 
         $this->dao->update(TABLE_BLOCK)->data($block, 'params,uid,blockID')->autoCheck()->where('id')->eq($this->post->blockID)->exec();
@@ -316,7 +316,7 @@ class blockModel extends model
             $blocks[$key]['titleless']  = $this->post->titleless[$key];
             $blocks[$key]['borderless'] = $this->post->borderless[$key];
         }
-        $layout->blocks = json_encode($blocks);
+        $layout->blocks = helper::jsonEncode($blocks);
 
         $count = $this->dao->select('count(*) as count')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->fetch('count');
 

@@ -24,7 +24,5 @@
       </tr>
       <?php endforeach;?>
     </table>
-    <dl class='dl-horizontal'>
-    </dl>
   </div>
 </div>

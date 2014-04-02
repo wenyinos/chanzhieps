@@ -60,6 +60,7 @@ $lang->user->goback          = "Go back";
 $lang->user->allUsers        = 'All users';
 $lang->user->submit          = "Submit";
 $lang->user->forbid          = 'Forbid';
+$lang->user->pullWechatFans  = 'Pull wechat uses';
 
 $lang->user->profile     = 'Profile';
 $lang->user->editProfile = 'Edit profile';
@@ -83,6 +84,7 @@ $lang->user->lockedForEver = "User has been forbidden for ever.";
 $lang->user->lblRegistered = 'Congratulations, register successfully!';
 $lang->user->forbidSuccess = 'Successfully forbid.';
 $lang->user->forbidFail    = 'Failed forbid';
+$lang->user->pullSuccess   = 'Get wechat users successfully';
 
 $lang->user->forbidUser = 'Manage user';
 $lang->user->forbidDate = array();
