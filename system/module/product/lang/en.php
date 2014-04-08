@@ -50,7 +50,7 @@ $lang->product->create     = 'Create';
 $lang->product->edit       = 'Edit';
 $lang->product->files      = 'Files';
 
-$lang->product->confirmDelete = 'Are you surce to delete it?';
+$lang->product->confirmDelete = 'Are you sure to delete it?';
 
 $lang->product->prev      = 'Previous';
 $lang->product->next      = 'Next';

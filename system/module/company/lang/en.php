@@ -21,4 +21,4 @@ $lang->company->setBasic   = "Basic";
 $lang->company->setContact = "Contact";
 
 $lang->company->error = new stdclass(); 
-$lang->company->error->email = "email wrong.";
+$lang->company->error->email = "email was wrong.";

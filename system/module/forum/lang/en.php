@@ -22,7 +22,7 @@ $lang->forum->post   = 'Post';
 $lang->forum->admin  = 'Admin';
 $lang->forum->update = 'Update';
 
-$lang->forum->updateDesc    = 'This action will re compute the stats(threads, replies) of every board.';
+$lang->forum->updateDesc    = 'This action will re-compute the stats(threads, replies) of every board again.';
 $lang->forum->successUpdate = 'Update sucessfully';
 
 /* Adjust the pager. */

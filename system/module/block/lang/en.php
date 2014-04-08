@@ -51,7 +51,7 @@ $lang->block->typeList['latestArticle'] = 'Latest Articles';
 $lang->block->typeList['hotArticle']    = 'Hot Articles';
 
 $lang->block->typeList['latestProduct']   = 'Latest Products';
-$lang->block->typeList['featuredProduct'] = 'Featured Product';
+$lang->block->typeList['featuredProduct'] = 'Featured Products';
 $lang->block->typeList['hotProduct']      = 'Hot Products';
 
 $lang->block->typeList['articleTree'] = 'Article Categories';
