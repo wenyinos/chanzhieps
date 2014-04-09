@@ -99,8 +99,8 @@
         </tr>
         <tr>
           <th></th>
-          <td colspan='2'><?php echo html::submitButton();?></div>
-        </div>
+          <td colspan='2'><?php echo html::submitButton();?></td>
+        </tr>
       </table>
     </form>
   </div>
