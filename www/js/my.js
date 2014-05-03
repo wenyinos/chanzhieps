@@ -39,9 +39,6 @@ $(document).ready(function()
     /* Auto ajust block grid width */
     autoBlockGrid();
 
-    /* Handle touch event for mobile devices */
-    handleTouch();
-
     /* Remove empty headNav */
     var headNav = $('#headNav');
     if(!headNav.find('nav a').length) headNav.addClass('hide');
