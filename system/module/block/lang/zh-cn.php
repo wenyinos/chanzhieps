@@ -103,7 +103,7 @@ $lang->block->pages['blog_view']      = '博客详情页面';
 
 $lang->block->pages['forum_index']    = '论坛首页';
 $lang->block->pages['forum_board']    = '帖子列表页面';
-$lang->block->pages['thread_view']    = '帖子察看页面';
+$lang->block->pages['thread_view']    = '帖子查看页面';
 $lang->block->pages['search_list']    = '搜索结果页';
 
 $lang->block->pages['book_index']     = '手册中心';
