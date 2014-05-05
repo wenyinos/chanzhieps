@@ -79,14 +79,14 @@ $lang->install->setConfig  = 'Create config file';
 $lang->install->key        = 'Item';
 $lang->install->value      = 'Value';
 $lang->install->saveConfig = 'Save config';
-$lang->install->save2File  = '<div class="a-center"><span class="fail">Try to save the config auto, but failed.</span></div>Copy the text of the textareaand save to "<strong> %s </strong>".';
+$lang->install->save2File  = '<div class="a-center"><span class="fail">Failed to save the config file automaticly.</span></div>Copy the text of the textareaand save to "<strong> %s </strong>".';
 $lang->install->saved2File = 'The config file has saved to "<strong>%s</strong> ".';
-$lang->install->errorNotSaveConfig = 'Not save config file.';
+$lang->install->errorNotSaveConfig = 'Config file was not saved.';
 
-$lang->install->setAdmin = 'Create an administrator';
+$lang->install->setAdmin = 'Create an Administrator';
 $lang->install->account  = 'Account';
 $lang->install->password = 'Password';
 $lang->install->errorEmptyPassword = "Can't be empty";
 
 $lang->install->success    = "Success installed";
-$lang->install->visitAdmin = 'Visit admin';
+$lang->install->visitAdmin = 'Go Administrator Dashboard';

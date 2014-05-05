@@ -431,7 +431,6 @@ $.extend(
  * @param   int   maxHeight
  * @return void
  */
- 
 (function($) 
 {
     jQuery.fn.resizeImage = function(maxWidth, maxHeight)
@@ -676,51 +675,4 @@ function autoBlockGrid()
     $(window).resize(ajustBlockHeight);
 
     setTimeout(ajustBlockHeight, 500);
-}
-
-/**
- * Handle touch event for mobile devices
- * 
- * @access public
- * @return void
- */
-function handleTouch()
-{
-    $('.carousel').on('touchstart touchmove touchend',  touch);
-
-    var touchStartX, touchStartY;
-    
-    /* listen the touch event */
-    function touch(event)
-    {
-        var event = event || window.event;
-        if(event.originalEvent) event = event.originalEvent;
-        var carousel = $(this);
-
-        switch(event.type)
-        {
-            case "touchstart":
-                touchStartX = event.touches[0].pageX;
-                touchStartY = event.touches[0].pageY;
-                break;
-            case "touchend":
-                var distanceX = event.changedTouches[0].pageX - touchStartX;
-                var distanceY = event.changedTouches[0].pageY - touchStartY;
-                if(Math.abs(distanceX) > Math.abs(distanceY))
-                    handleCarousel(carousel, distanceX);
-                else
-                {
-                    var $w = $(window);
-                    $('body,html').animate({scrollTop:$w.scrollTop() - distanceY},400)
-                }
-                break;
-        }
-        event.preventDefault();
-    }
-
-    function handleCarousel(carousel, distance)
-    {
-        if(distance > 10) carousel.find('.left.carousel-control').click();
-        if(distance < -10) carousel.find('.right.carousel-control').click();
-    }
 }

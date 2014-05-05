@@ -9,4 +9,4 @@ $lang->admin->shortcuts->logo     = 'Logo';
 $lang->admin->shortcuts->company  = 'Company';
 $lang->admin->shortcuts->contact  = 'Contact';
 
-$lang->admin->adminEntry = "Warning: You're using the default admin.php, please rename it for security.";
+$lang->admin->adminEntry = "Warning: You're using the default admin.php, please rename it for security reason.";

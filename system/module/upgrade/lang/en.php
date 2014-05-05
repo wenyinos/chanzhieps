@@ -12,14 +12,14 @@
 $lang->upgrade->common  = 'Upgrade';
 
 $lang->upgrade->result  = 'Result';
-$lang->upgrade->fail    = 'Fail';
+$lang->upgrade->fail    = 'Failed';
 $lang->upgrade->success = 'Success';
 $lang->upgrade->tohome  = 'Go to index';
 
 $lang->upgrade->index         = 'Upgrad chanzhiEPS.';
 $lang->upgrade->backup        = 'Backup';
 $lang->upgrade->selectVersion = 'Select version to upgrade from';
-$lang->upgrade->confirm       = 'Confirm the SQL to excute.';
+$lang->upgrade->confirm       = 'Confirm the SQL to be excuted.';
 $lang->upgrade->execute       = 'Execute';
 $lang->upgrade->next          = 'Next';
 
@@ -37,7 +37,7 @@ $lang->upgrade->backupData = <<<EOT
 </pre>
 EOT;
 
-$lang->upgrade->versionNote = "Please the version to upgrade.";
+$lang->upgrade->versionNote = "Please choose the version to upgrade.";
 
 $lang->upgrade->fromVersions['1_1']   = '1.1.stable';
 $lang->upgrade->fromVersions['1_2']   = '1.2.stable';

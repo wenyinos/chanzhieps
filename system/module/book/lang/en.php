@@ -40,4 +40,4 @@ $lang->book->back2Top = 'Top';
 $lang->book->aliasRepeat = 'Alias:<strong> %s </strong> can not be repeated' ;
 
 $lang->book->note = new stdclass();
-$lang->book->note->addedDate = 'Publish this article after this time.';
+$lang->book->note->addedDate = 'Schedule to publish this Article after this time.';

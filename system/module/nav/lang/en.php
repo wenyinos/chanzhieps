@@ -11,7 +11,7 @@
  */
 
 $lang->nav->setNav   = 'Navigation';
-$lang->nav->add      = 'Brother';
+$lang->nav->add      = 'Add';
 $lang->nav->addChild = 'Child';
 $lang->nav->delete   = 'Delete';
 

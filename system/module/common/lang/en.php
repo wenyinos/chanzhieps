@@ -83,9 +83,9 @@ $lang->saveSuccess    = 'Successfully saved.';
 $lang->setSuccess     = 'Successfully saved.';
 $lang->sendSuccess    = 'Successfully sended.';
 $lang->deleteSuccess  = 'Successfully deleted.';
-$lang->fail           = 'Fail';
+$lang->fail           = 'Failed';
 $lang->noResultsMatch = 'No matched results.';
-$lang->alias          = 'For seo, can use numbers, letters or words';
+$lang->alias          = 'For SEO, could be numbers, letters or words';
 
 /* Items for javascript. */
 $lang->js = new stdclass();
@@ -97,7 +97,7 @@ $lang->js->timeout       = 'Timeout';
 
 /* Contact fields*/
 $lang->company = new stdclass();
-$lang->company->contactUs = 'Contact';
+$lang->company->contactUs = 'Contact US';
 $lang->company->contacts  = 'Contacts';
 $lang->company->address   = 'Address';
 $lang->company->phone     = 'Phone';

@@ -69,4 +69,4 @@ $lang->article->none      = 'None';
 $lang->article->directory = 'List';
 
 $lang->article->note = new stdclass();
-$lang->article->note->addedDate = 'Publish the article after this time';
+$lang->article->note->addedDate = 'Schedule to Publish the article after this time';

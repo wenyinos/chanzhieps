@@ -13,5 +13,5 @@ $lang->index->common  = 'Home';
 $lang->index->index   = 'Home';
 $lang->index->aboutus = 'About';
 $lang->index->news    = 'News';
-$lang->index->blog    = 'Blos';
+$lang->index->blog    = 'Blogs';
 $lang->index->contact = 'Contact';
