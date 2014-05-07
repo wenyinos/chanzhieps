@@ -283,12 +283,10 @@ class articleModel extends model
             ->setDefault('addedDate', $now)
             ->add('editedDate', $now)
             ->add('type', $type)
+            ->add('order', 0)
             ->stripTags('content', $this->config->allowedTags->admin)
             ->get();
 
-        $order = 0;
-
-        $article->order    = $order;
         $article->keywords = seo::unify($article->keywords, ',');
         $article->alias    = seo::unify($article->alias, '-');
 
