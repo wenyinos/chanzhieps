@@ -28,9 +28,9 @@ class index extends control
      * @access public
      * @return void
      */
-    public function index()
+    public function index($categoryID = 0, $pageID = 1)
     {
-        if($this->config->site->type == 'blog') exit($this->fetch('blog', 'index'));
+        if($this->config->site->type == 'blog') exit($this->fetch('blog', 'index', "categoryID={$categoryID}&pageID={$pageID}"));
         $this->view->title = $this->config->site->keywords;
         $this->display();
     }
