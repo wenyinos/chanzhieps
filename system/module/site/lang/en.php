@@ -11,6 +11,7 @@
  */
 $lang->site->common       = "Site";
 
+$lang->site->type         = 'Type';
 $lang->site->name         = 'Name';
 $lang->site->module       = 'Modules';
 $lang->site->lang         = 'Language';
@@ -27,6 +28,10 @@ $lang->site->setOauth     = "Oauth";
 $lang->site->setSinaOauth = "Weibo Oauth";
 $lang->site->setQQOauth   = "QQ Oauth";
 $lang->site->oauthHelp    = "Help";
+
+$lang->site->typeList = new stdclass();
+$lang->site->typeList->company = 'Enterprise Portal';
+$lang->site->typeList->blog    = 'Personal Blog';
 
 $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = 'Member';

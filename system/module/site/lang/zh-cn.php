@@ -11,6 +11,7 @@
  */
 $lang->site->common       = "站点";
 
+$lang->site->type         = '站点类型';
 $lang->site->name         = '网站名称';
 $lang->site->module       = '功能模块';
 $lang->site->lang         = '语言';
@@ -27,6 +28,10 @@ $lang->site->setOauth     = "开放登录设置";
 $lang->site->setSinaOauth = "新浪微博接入";
 $lang->site->setQQOauth   = "QQ接入";
 $lang->site->oauthHelp    = "使用帮助";
+
+$lang->site->typeList = new stdclass();
+$lang->site->typeList->compnay = '企业门户';
+$lang->site->typeList->blog    = '个人网站';
 
 $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = '会员';

@@ -30,6 +30,7 @@ class index extends control
      */
     public function index()
     {
+        if($this->config->site->type == 'blog') exit($this->fetch('blog', 'index'));
         $this->view->title = $this->config->site->keywords;
         $this->display();
     }

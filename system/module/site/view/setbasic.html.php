@@ -17,7 +17,10 @@
   <div class='panel-body'>
     <form method='post' id='ajaxForm' class='form-inline'>
       <table class='table table-form'>
-        <caption></caption> 
+        <tr>
+          <th class='col-xs-2'><?php echo $lang->site->type;?></th> 
+          <td class='col-xs-5'><?php echo html::radio('type', $lang->site->typeList, $this->config->site->type, "class='checkbox'");?></td><td></td>
+        </tr>
         <tr>
           <th class='col-xs-2'><?php echo $lang->site->name;?></th> 
           <td class='col-xs-5'><?php echo html::input('name', $this->config->site->name, "class='form-control'");?></td><td></td>
