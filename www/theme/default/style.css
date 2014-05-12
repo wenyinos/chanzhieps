@@ -52,7 +52,7 @@
 .article-files > li > a > img, .article-files > li > a > img:hover{max-width: 200px; max-height: 100%; box-shadow: none; margin: 0}
 .article-files:empty {display: none;}
 .article-files > li.file > a {line-height: 25px; padding: 40px 15px 5px 15px;max-width: 180px;white-space:nowrap; text-overflow:ellipsis; -o-text-overflow:ellipsis; overflow:hidden;}
-.article-files > li.file > a:before {display: block; width: 100%; font-size: 30px; position: absolute; top: 10px; text-align: center; left: 0; content: '\f0f6'; font-family: ZenIcon;}
+.article-files > li.file > a:before {display: block; width: 100%; font-size: 30px; position: absolute; top: 10px; text-align: center; left: 0; content: '\e6d4'; font-family: ZenIcon;}
 .article-files > li.article-files-heading {float: none; display: block; color: #999;font-weight: bold;}
 .article-files > li .file-actions {display: block; position: absolute; right: 0; top: 0;} 
 .article-files > li .file-actions > a {opacity: 0; display: inline-block; background-color: #D9E8F5; color: #666; padding: 3px 7px;}
@@ -60,7 +60,7 @@
 
 /* breadcrumb */
 .breadcrumb {color: #999; padding: 0 5px;}
-.breadcrumb:after {color: #aaa; margin-left: 6px; display: inline-block; content: "\F041"; font-family: ZenIcon;}
+.breadcrumb:after {color: #aaa; margin-left: 6px; display: inline-block; content: "\e63d"; font-family: ZenIcon;}
 
 /* page */
 .page {padding: 8px 0; color: #bbb; text-align: right;}
@@ -71,10 +71,10 @@
 .tree li,.tree ul {margin: 0; padding: 0; display: block; position: relative;}
 .tree > li {margin-right: 20px; font-weight: 400; padding-bottom: 10px;}
 .tree > li > ul li {padding: 10px 15px 0; margin: 0;}
-.tree li:before {display: inline-block; margin-right: 6px; content: '\f111'; font-family: ZenIcon; color: #ddd;}
+.tree li:before {display: inline-block; margin-right: 6px; content: '\e6ec'; font-family: ZenIcon; color: #ddd;}
 .tree > li ul {border-left: 1px dashed #ccc; margin-left: 7px; font-weight: normal;}
-.tree > li ul > li:before {content: '\f10c';}
-.tree > li ul > li:hover:before {content: '\f111';}
+.tree > li ul > li:before {content: '\e6e8';}
+.tree > li ul > li:hover:before {content: '\e6ec';}
 .tree > li ul > li:after {position: absolute; display: block; content: ""; width: 15px; left: -1px; top: 20px; height: 20px; border-top: 1px dashed #ccc;}
 .tree > li > ul li:last-child:after {border-left: 1px solid #fff;}
 
@@ -116,14 +116,14 @@
 .panel > .panel-heading,.nav-stacked.nav-primary>li.nav-heading,.list > header, #navbar {background-color: #f1f1f1; background-image: -moz-linear-gradient(#fafafa, #f1f1f1); background-image: -webkit-linear-gradient(#FAFAFA, #f1f1f1); background-image: linear-gradient(#FAFAFA, #f1f1f1); background-repeat: repeat-x;}
 .panel.panel-pure {box-shadow: none; border: 0; border-radius: 0;}
 .panel.panel-pure .panel-heading {background: transparent;}
-.panel-actions{float: right;margin-top: -10px;margin-right: -10px;}
+.panel-actions{float: right;margin-top: -9px;margin-right: -12px;}
 .panel-actions .btn{margin-top: 3px;}
 .panel-heading > h1,.panel-heading > h2,.panel-heading > h3,.panel-heading > h4,.panel-heading > h5,.panel-heading > h6 {margin: 0}
 .panel-actions .btn.btn-link:hover{background: transparent;box-shadow: none;}
 
 /* panel-block */
 .panel-block {transition: height 0.3s;}
-.panel-block .panel-heading h4 {font-size: 14px; font-weight: bold;}
+.panel-block .panel-heading h4 {font-size: 13px; font-weight: bold;}
 .panel-block .panel-heading h4 [class^="icon-"] {display: inline-block;margin-right: 4px;}
 .panel-block .panel-body {padding: 10px 15px;}
 .panel-block .panel-body > .dl-horizontal {margin: 0;}
@@ -285,7 +285,7 @@ a.tag-link {color: inherit;}
 /* popovers */
 .popover-success {background-color: #47A447; border-color: #47A447; color: #fff;}
 .popover-success.right .arrow,.popover-success.right .arrow:after {border-right-color: #47A447;}
-.popover-success .popover-content:before {content: '\f058'; font-family: ZenIcon; display: inline-block; margin-right: 6px;}
+.popover-success .popover-content:before {content: '\e653'; font-family: ZenIcon; display: inline-block; margin-right: 6px;}
 
 .popover-danger {background-color: #F8E3E6; border-color: #F8E3E6; color: #D2322D;}
 .popover-danger.right .arrow,.popover-danger.right .arrow:after {border-right-color: #F8E3E6;}
