@@ -227,6 +227,26 @@ class threadModel extends model
     }
 
     /**
+     * transfer thread from one board to another.
+     * 
+     * @param  int    $threadID 
+     * @param  int    $oldBoard 
+     * @param  int    $tagetBoard 
+     * @access public
+     * @return void
+     */
+    public function transfer($threadID, $oldBoard, $targetBoard)
+    {
+        $this->dao->update(TABLE_THREAD)->set('board')->eq($targetBoard)->where('id')->eq($threadID)->exec();
+
+        if(dao::isError()) return false;
+
+        $this->loadModel('forum')->updateBoardStats($oldBoard);
+        $this->loadModel('forum')->updateBoardStats($targetBoard);
+        return true;
+    }
+
+    /**
      * Delete a thread.
      * 
      * @param string $threadID 
