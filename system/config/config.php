@@ -54,6 +54,10 @@ $config->default->theme  = 'default';          // Default theme.
 $config->default->module = 'index';            // Default module.
 $config->default->method = 'index';            // Default metho.d
 
+/* Set the recPerPage of article. */
+$config->article = new stdclass();
+$config->article->recPerPage = 5;
+
 /* Upload settings. */
 $config->file = new stdclass();          
 $config->file->dangers = 'php,jsp,py,rb,asp,'; // Dangerous file types.

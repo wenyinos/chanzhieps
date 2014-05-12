@@ -1,0 +1,20 @@
+$(document).ready(function()
+{
+    $(document).on('click', 'a.plus', function()
+    {
+        $(this).parents('tr').after($('#button').html());
+    });
+
+    /* Delete options. */
+    $(document).on('click', '.delete', function()
+    {
+        if($(this).parents('table').find('a.delete').size() == 1)
+        {
+            $(this).parents('tr').find('input').val('');
+        }
+        else
+        {
+            $(this).parents('tr').remove();
+        }
+    });
+})
