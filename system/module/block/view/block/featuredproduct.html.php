@@ -41,7 +41,7 @@ $url      = helper::createLink('product', 'view', "id={$product->id}", "category
         {
             if($product->price != 0)
             {
-                echo "<span class='text-muted'><i class='icon-yen'></i></span> ";
+                echo "<span class='text-muted'> {$this->lang->product->currencyIcon}</span> ";
                 echo "<strong class='text-important'>" . $product->price . '</strong>&nbsp;&nbsp;';
             }
         }
