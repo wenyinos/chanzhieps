@@ -22,7 +22,7 @@
               <td class='w-120px hidden-xxs'><?php echo substr($thread->addedDate, 2, -3);?></td>
               <td class='w-50px hidden-xs'><?php echo $thread->views;?></td>
               <td class='w-50px hidden-xxxs'><?php echo $thread->replies;?></td>
-              <td class='w-200px text-left hidden-xxs'><?php if($thread->replies) echo substr($thread->repliedDate, 2, -3) . ' ' . $thread->repliedBy;?></td>  
+              <td class='w-200px text-left hidden-xxs'><?php if($thread->replies) echo substr($thread->repliedDate, 2, -3) . ' ' . $thread->repliedByRealname;?></td>  
             </tr>  
             <?php endforeach;?>
           </tbody>

@@ -19,7 +19,6 @@
       <div><?php echo $lang->install->desc;?></div>
     </div>
     <div class='modal-footer'>
-      
       <?php
       if(!isset($latestRelease))
       {

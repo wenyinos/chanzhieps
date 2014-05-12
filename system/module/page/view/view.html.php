@@ -5,7 +5,11 @@ js::set('pageID', $page->id);
 ?>
 <?php $common->printPositionBar($page);?>
 <div class='row'>
+  <?php if(!empty($layouts)):?>
   <div class='col-md-9'>
+  <?php else:?>
+  <div class='col-md-12'>
+  <?php endif;?>
     <div class='article'>
       <header>
         <h1><?php echo $page->title;?></h1>
@@ -23,6 +27,8 @@ js::set('pageID', $page->id);
       </footer>
     </div>
   </div>
+  <?php if(!empty($layouts)):?>
   <div class='col-md-3'><?php $this->block->printRegion($layouts, 'page_view', 'side');?></div>
+  <?php endif;?>
 </div>
 <?php include '../../common/view/footer.html.php'; ?>

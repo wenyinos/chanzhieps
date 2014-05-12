@@ -35,7 +35,7 @@ class article extends control
     public function browse($categoryID = 0, $pageID = 1)
     {   
         $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal = 0, $recPerPage = 5, $pageID);
+        $pager = new pager($recTotal = 0, $this->config->article->recPerPage, $pageID);
 
         $category   = $this->loadModel('tree')->getByID($categoryID, 'article');
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;

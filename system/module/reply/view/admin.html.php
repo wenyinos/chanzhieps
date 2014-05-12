@@ -17,7 +17,7 @@
         <td><?php echo $reply->id;?></td>
         <td class='text-left'>
           <?php 
-          echo html::a(commonModel::createFrontLink('thread', 'locate', "threadID={$reply->thread}&replyID={$reply->id}"), $reply->content);;
+          echo html::a(commonModel::createFrontLink('thread', 'locate', "threadID={$reply->thread}&replyID={$reply->id}"), $reply->content, "target=_blank");
           ?>
         </td>
         <td><?php echo $reply->authorRealname;?></td>

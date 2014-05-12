@@ -180,7 +180,7 @@ $lang->ui->menu->pages   = array('link' => '布局设置|block|pages|', 'alias' 
 $lang->user = new stdclass();
 $lang->user->menu = new stdclass();
 $lang->user->menu->all    = '全部会员|user|admin|';
-$lang->user->menu->weibo  = '微博会员|user|admin|provider=weibo';
+$lang->user->menu->sina   = '微博会员|user|admin|provider=sina';
 $lang->user->menu->wechat = '微信会员|user|admin|provider=wechat';
 $lang->user->menu->qq     = 'QQ会员|user|admin|provider=qq';
 
