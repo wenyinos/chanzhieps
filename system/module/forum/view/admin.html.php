@@ -14,7 +14,7 @@
         <th class='w-60px'><?php commonModel::printOrderLink('replies', $orderBy, $vars, $lang->thread->replies);?></th>
         <th class='w-200px'><?php commonModel::printOrderLink('repliedDate', $orderBy, $vars, $lang->thread->lastReply);?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('hidden', $orderBy, $vars, $lang->thread->status);?></th>
-        <th class='w-100px'><?php echo $lang->actions;?></th>
+        <th class='w-120px'><?php echo $lang->actions;?></th>
       </tr>  
     </thead>
     <?php endif;?>
@@ -47,6 +47,7 @@
             echo html::a($this->createLink('thread', 'switchStatus', "threadID=$thread->id"), $lang->thread->hide, "class='reload'"); 
         }
         ?>
+        <?php echo html::a($this->createLink('thread', 'transfer', "threadID=$thread->id"), $lang->thread->transfer, "data-toggle='modal'"); ?>
         </td>
       </tr>  
       <?php endforeach;?>

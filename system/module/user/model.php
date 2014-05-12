@@ -28,7 +28,7 @@ class userModel extends model
             ->beginIF($this->get->provider)->andWhere('o.provider')->like("%{$this->get->provider}%")->fi()
             ->orderBy('id_asc')
             ->page($pager)
-            ->fetchAll();
+            ->fetchAll('id');
     }
 
     /**

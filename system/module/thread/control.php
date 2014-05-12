@@ -141,6 +141,29 @@ class thread extends control
     }
 
     /**
+     * transfer a thread.
+     * 
+     * @param  int    $threadID 
+     * @access public
+     * @return void
+     */
+    public function transfer($threadID)
+    {
+        $thread = $this->thread->getByID($threadID);
+        if(!$thread) exit;
+        if($_POST)
+        {
+            if($this->thread->transfer($threadID, $thread->board, $this->post->targetBoard))
+                $this->send(array('result' =>'success', 'message' => $this->lang->thread->successTransfer, 'locate' => $this->server->http_referer));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+
+        $this->view->thread = $thread;
+        $this->view->boards = $this->loadModel('tree')->getOptionMenu('forum', 0, $removeRoot = true);
+        $this->display();
+    }
+
+    /**
      * Locate to the thread and reply.
      * 
      * @param  int    $threadID 
