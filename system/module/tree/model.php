@@ -28,6 +28,16 @@ class treeModel extends model
 
         if(!$category) return false;
 
+        if($type == 'forum') 
+        {
+            $speakers = array();
+            $category->moderators = explode(',', trim($category->moderators, ','));
+            foreach($category->moderators as $moderators) $speakers[] = $moderators;
+            $speakers = $this->loadModel('user')->getRealNamePairs($speakers);
+            foreach($category->moderators as $key => $moderators) $category->moderators[$key] = isset($speakers[$moderators]) ? $speakers[$moderators] : '';
+            $category->moderators = implode(',', $category->moderators);
+        }
+
         $category->pathNames = $this->dao->select('id, name')->from(TABLE_CATEGORY)->where('id')->in($category->path)->orderBy('grade')->fetchPairs();
         return $category;
     }
