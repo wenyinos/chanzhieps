@@ -215,6 +215,7 @@ label.checkbox,input[type='radio']+label{font-weight: normal;}
 .panel-body > form{padding-right: 10px; max-width: 1000px}
 
 /* table form */
+.table.table-form th, .table.table-form td {padding: 6px}
 .table-form>tbody>tr>th {text-align:right;vertical-align:middle; border-bottom:none}
 .table-form>tbody>tr>td {vertical-align:middle; border-bottom:none}
 .table-form>tfoot>tr>th,.table-form>tfoot>tr>td {border-bottom:none}
@@ -273,7 +274,7 @@ a.tag-link {color: inherit;}
 
 /* list */
 .list {border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); margin-bottom: 20px;}
-.list > header {padding: 10px 15px;background-color: #f1f1f1;color: #666}
+.list > header {padding: 8px 15px;background-color: #f1f1f1;color: #666}
 .list > header h2 {font-size: 14px;font-weight: bold;margin: 0;padding: 0}
 
 /* colors */
