@@ -41,7 +41,7 @@
           <td class='text-center'><?php echo html::a($slide->image, html::image($slide->image, "class='image-small'"), "target='_blank'");?></td>
           <td><?php echo $slide->title;?></td>
           <td><?php echo $slide->summary;?></td>
-          <td><?php echo $slide->label;?></td>
+          <td><?php foreach($slide->label as $label) echo $label . ' ';?></td>
           <td class='text-center'>
             <?php
             echo html::a($this->createLink('slide', 'edit', "id=$slide->id"), $lang->edit);

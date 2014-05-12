@@ -479,6 +479,10 @@ class treeModel extends model
             /* Add id to check alias. */
             $category->id = $mode == 'new' ?  0: $category->id = $key;
             if(!$this->checkAlias($category)) return sprintf($this->lang->tree->aliasRepeat, $alias);
+            if($category->type == 'forum' or $category->type == 'blog')
+            {
+                if(is_numeric($category->alias)) return $this->lang->tree->aliasNumber;
+            }
 
             if($mode == 'new')
             {
