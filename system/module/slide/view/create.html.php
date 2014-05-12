@@ -12,6 +12,13 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/kindeditor.html.php';?>
+<?php
+$colorPlates = '';
+foreach (explode('|', $lang->slide->colorPlates) as $value)
+{
+    $colorPlates .= "<div class='color color-tile' data='#" . $value . "'><i class='icon-ok'></i></div>";
+}
+?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-plus'></i> <?php echo $lang->slide->create;?></strong></div>
   <div class='panel-body'>
@@ -23,16 +30,41 @@
         </tr>
         <tr>
           <th><?php echo $lang->slide->url;?></th>
-          <td><?php echo html::input('url', '', "class='form-control'");?></td><td></td>
+          <td><?php echo html::input('url', '', "class='form-control'");?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->slide->image;?></th>
+          <th><?php echo $lang->slide->background;?></th>
+          <td><?php echo html::radio('bg', $lang->slide->bg, 'image', "class='radio'");?></td>
+        </tr>
+        <tr class='bg-section' data-id='color'>
+          <th><?php echo $lang->slide->bg->color;?></th>
+          <td colspan='2'>
+            <div class='colorplate clearfix'>
+              <div class='input-group color active' data='<?php echo $config->themeSetting->primaryColor;?>'>
+                <span class='input-group-addon'> <i class='icon icon-question'></i><i class='icon-ok'></i> </span>
+                <?php echo html::input('color', $config->themeSetting->primaryColor, "class='form-control input-color text-latin' placeholder='" . $lang->slide->colorTip . "'");?>
+              </div>
+              <?php echo $colorPlates; ?>
+            </div>
+          </td>
+        </tr>
+        <tr class='bg-section' data-id='color'>
+          <th><?php echo $lang->slide->height;?></th>
+          <td>
+            <div class='input-group'>
+              <?php echo html::input('height', '', "class='form-control'");?>
+              <span class='input-group-addon'>px</span>
+            </div>
+          </td>
+        </tr>
+        <tr class='bg-section' data-id='image'>
+          <th><?php echo $lang->slide->bg->image;?></th>
           <td><?php echo html::file('files[]', "tabindex='-1' class='form-control'");?></td>
           <td><label class='text-info'><?php echo $lang->slide->suitableSize;?></label></td>
         </tr>
         <tr>
           <th><?php echo $lang->slide->label;?></th>
-          <td><?php echo html::input('label', '', "class='form-control'");?></td><td></td>
+          <td><?php echo html::input('label', '', "class='form-control'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->slide->summary;?></th>
