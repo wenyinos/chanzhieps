@@ -24,7 +24,7 @@ class siteModel extends model
         if(!isset($this->config->site))                $this->config->site                = new stdclass();
         if(!isset($this->config->site->name))          $this->config->site->name          = $this->lang->chanzhiEPS;
         if(!isset($this->config->site->keywords))      $this->config->site->keywords      = '';
-        if(!isset($this->config->site->indexkeywords)) $this->config->site->indexKeywords = '';
+        if(!isset($this->config->site->indexKeywords)) $this->config->site->indexKeywords = '';
         if(!isset($this->config->site->slogan))        $this->config->site->slogan        = '';
         if(!isset($this->config->site->copyright))     $this->config->site->copyright     = '';
         if(!isset($this->config->site->icp))           $this->config->site->icp           = '';

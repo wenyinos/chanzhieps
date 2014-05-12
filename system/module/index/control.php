@@ -31,7 +31,7 @@ class index extends control
     public function index($categoryID = 0, $pageID = 1)
     {
         if(isset($this->config->site->type) and $this->config->site->type == 'blog') exit($this->fetch('blog', 'index', "categoryID={$categoryID}&pageID={$pageID}"));
-        $this->view->title = $this->config->site->keywords;
+        $this->view->title = $this->config->site->indexKeywords;
         $this->display();
     }
 }
