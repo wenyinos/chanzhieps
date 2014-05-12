@@ -10,6 +10,7 @@ $(function()
     }).click(function()
     {
         var $this = $(this);
+        if($this.hasClass('input-group')) return;
         var $plate = $this.closest('.colorplate');
         $plate.find('.color.active').removeClass('active');
         if($this.hasClass('color-tile')) $plate.find('.input-color').val($this.attr('data')).change();
@@ -20,6 +21,7 @@ $(function()
     {
         var $this = $(this);
         var val = $this.val();
+        $this.closest('.colorplate').find('.color.active').removeClass('active');
 
         if(tempColor.isHexColor(val))
         {
