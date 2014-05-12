@@ -196,6 +196,7 @@ tr.text-center > td.text-right, tr.text-center > th.text-right {text-align: righ
 
 /* form */
 .input-group-addon .checkbox {padding-top: 4px;}
+.form-inline .form-control.hide {display: none}
 
 .placeholder {color: #aaa;}
 
