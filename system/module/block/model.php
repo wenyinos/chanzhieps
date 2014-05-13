@@ -244,6 +244,7 @@ class blockModel extends model
 
         $blockID = $this->dao->lastInsertID();
         $this->loadModel('file')->updateObjectID($this->post->uid, $blockID, 'block');
+        $this->file->fileManager($this->post->content, $blockID, 'block');
 
         return true;
     }
@@ -271,6 +272,7 @@ class blockModel extends model
         $this->dao->update(TABLE_BLOCK)->data($block, 'params,uid,blockID')->autoCheck()->where('id')->eq($this->post->blockID)->exec();
 
         $this->loadModel('file')->updateObjectID($this->post->uid, $this->post->blockID, 'block');
+        $this->file->fileManager($this->post->content, $this->post->blockID, 'block');
         return true;
     }
 

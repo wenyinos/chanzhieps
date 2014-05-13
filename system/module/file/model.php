@@ -524,4 +524,36 @@ class fileModel extends model
             return !dao::isError(); 
         }
     }
+
+    /**
+     * Add file from file directory.
+     * 
+     * @param  string $content 
+     * @param  int    $objectID 
+     * @param  string $bojectType 
+     * @access public
+     * @return void
+     */
+    public function fileManager($content, $objectID, $objectType)
+    {
+        preg_match_all('/<img src="(\/data\/upload\/(\S+)\?fromSpace=y)" .+ \/>/U', $content, $out);
+
+        if(empty($out)) return false;
+
+        foreach($out[2] as $key => $pathname)
+        {
+            $data = $this->dao->select('*')->from(TABLE_FILE)->where('pathname')->eq($pathname)->fetch();
+            if(!$data) $data = new stdclass();
+
+            $data->pathname = $pathname;
+            $data->objectID   = $objectID;
+            $data->objectType = $objectType;
+            $data->addedBy    = $this->app->user->account;
+            $data->addedDate  = helper::now();
+
+            $this->dao->insert(TABLE_FILE)->data($data)->exec();
+        }
+
+        return !dao::isError(); 
+    }
 }
