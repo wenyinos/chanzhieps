@@ -11,13 +11,29 @@
  */
 $lang->slide->common = '幻灯片';
 
-$lang->slide->title     = '标题';
-$lang->slide->image     = '图片';
-$lang->slide->imageUrl  = '图片链接';
-$lang->slide->summary   = '摘要';
-$lang->slide->button    = '按钮';
-$lang->slide->label     = '按钮文字';
-$lang->slide->buttonUrl = '按钮链接';
+$lang->slide->title      = '标题';
+$lang->slide->image      = '图片';
+$lang->slide->imageUrl   = '图片链接';
+$lang->slide->summary    = '摘要';
+$lang->slide->label      = '按钮文字';
+$lang->slide->button     = '按钮';
+$lang->slide->background = '背景';
+$lang->slide->bg         = new stdclass();
+$lang->slide->bg->image  = '图片';
+$lang->slide->bg->color  = '纯色';
+$lang->slide->height     = '高度';
+$lang->slide->url        = '链接';
+$lang->slide->colorTip   = '十六进制颜色值';
+$lang->slide->colorPlates= '333333|000000|CA1407|45872B|148D00|F25D03|2286D2|D92958|A63268|04BFAD|D1270A|FF9400|299182|63731A|3D4DBE|7382D9|754FB9|F2E205|B1C502|364245|C05036|8A342A|E0DDA2|B3D465|EEEEEE|FFD0E5|D0FFFD|FFFF84|F4E6AE|E5E5E5|F1F1F1|FFFFFF';
+$lang->slide->buttonUrl  = '按钮链接';
+
+$lang->slide->btn->type    = '按钮类型';
+$lang->slide->btn->default = '默认';
+$lang->slide->btn->primary = '主要';
+$lang->slide->btn->info    = '信息';
+$lang->slide->btn->success = '成功';
+$lang->slide->btn->warning = '警告';
+$lang->slide->btn->danger  = '错误';
 
 $lang->slide->sort     = '排序';
 $lang->slide->saveSort = '保存排序';

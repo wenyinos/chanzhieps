@@ -7,3 +7,5 @@ i.icon-arrow-up, i.icon-arrow-down{cursor:pointer;}
 .color.active .icon-ok, .color.error .icon-question {display: inline;}
 .color.active.error .icon-ok {display: none}
 .color .input-group-addon {min-width: 40px; text-align: center;}
+
+.dropdown-menu.buttons {padding: 5px}

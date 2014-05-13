@@ -39,4 +39,20 @@ $(function()
         $('.bg-section').removeClass('hide').not('[data-id="' + $(this).val() + '"]').addClass('hide');
     });
     $('.bg-section:not([data-id="' + $('input:radio[name="bg"]:checked').val() + '"])').addClass('hide');
+
+    $('.dropdown-menu.buttons .btn').click(function()
+    {
+        var $this = $(this);
+        var group = $this.closest('.input-group-btn');
+        group.find('.dropdown-toggle').html($this.text() + " <span class='caret'></span>").removeClass().addClass('btn dropdown-toggle btn-' + $this.data('id'));
+        group.find('input[name="button\\[\\]"]').val($this.data('id'));
+    });
+
+    $('input[name="button\\[\\]"]').each(function()
+    {
+        var $this = $(this);
+        var group = $this.closest('.input-group-btn');
+        var btn = group.find('.dropdown-menu.buttons .btn[data-id="' + $this.val() + '"]');
+        group.find('.dropdown-toggle').html(btn.text() + " <span class='caret'></span>").removeClass().addClass('btn dropdown-toggle btn-' + btn.data('id'));
+    });
 });
