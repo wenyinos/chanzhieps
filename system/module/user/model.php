@@ -450,6 +450,19 @@ class userModel extends model
     }
 
     /**
+     * Allow the user.
+     *
+     * @param  int    $userID
+     * @access public
+     * @return bool
+     */
+    public function allow($userID)
+    {
+        $this->dao->update(TABLE_USER)->set('locked')->eq('')->where('id')->eq($userID)->exec();
+        return !dao::isError();
+    }
+
+    /**
      * Delete user.
      * 
      * @param  string    $account 

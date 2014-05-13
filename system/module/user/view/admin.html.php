@@ -75,6 +75,7 @@ js::set('provider', $this->get->provider);
           <?php endforeach;?>
           </ul>
         </div>
+        <?php if($user->locked > helper::now()) echo html::a(inlink('allow', "id=$user->id"), $lang->user->allow, "class='forbider'");?>
       </td>
     </tr>
     <?php endforeach;?>

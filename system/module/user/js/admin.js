@@ -5,7 +5,8 @@ $(document).ready(function()
     {
         $.getJSON($(this).attr('href'),function(data)
         {
-            bootbox.alert(data.message + '');
+            alert(data.message);
+            return location.reload();
         });
         return false;
     });
