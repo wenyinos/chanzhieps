@@ -196,6 +196,7 @@ tr.text-center > td.text-right, tr.text-center > th.text-right {text-align: righ
 
 /* form */
 .input-group-addon .checkbox {padding-top: 4px;}
+.form-inline .form-control.hide {display: none}
 
 .placeholder {color: #aaa;}
 
@@ -215,6 +216,7 @@ label.checkbox,input[type='radio']+label{font-weight: normal;}
 .panel-body > form{padding-right: 10px; max-width: 1000px}
 
 /* table form */
+.table.table-form th, .table.table-form td {padding: 6px}
 .table-form>tbody>tr>th {text-align:right;vertical-align:middle; border-bottom:none}
 .table-form>tbody>tr>td {vertical-align:middle; border-bottom:none}
 .table-form>tfoot>tr>th,.table-form>tfoot>tr>td {border-bottom:none}
@@ -273,7 +275,7 @@ a.tag-link {color: inherit;}
 
 /* list */
 .list {border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); margin-bottom: 20px;}
-.list > header {padding: 10px 15px;background-color: #f1f1f1;color: #666}
+.list > header {padding: 8px 15px;background-color: #f1f1f1;color: #666}
 .list > header h2 {font-size: 14px;font-weight: bold;margin: 0;padding: 0}
 
 /* colors */
@@ -402,13 +404,13 @@ a.tag-link {color: inherit;}
 #rightDockerBtn {border-radius: 4px 0 0 4px}
 #rightDockerBtn i {font-size: 28px; margin-top: 2px; display: block}
 .docker-right {padding: 20px 10px; background: #e5e5e5;}
-.docker-right .table {margin-bottom: 0;}
+.docker-right .table {margin-bottom: 0; font-size: 14px}
 .docker-right .table-borderless td {text-align: center; vertical-align: middle; padding: 0 15px 15px}
 .popover {max-width: 900px}
-.docker-right .icon-mobile-phone, .docker-right .icon-weixin {font-size: 42px; color: #fff; background: #145CCD; display: inline-block; width: 50px; line-height: 50px; height: 50px; border-radius: 25px; vertical-align: middle; margin-right: 10px;}
+.docker-right .icon-mobile-phone, .docker-right .icon-weixin {font-size: 28px; color: #fff; background: #145CCD; display: inline-block; width: 36px; line-height: 36px; height: 36px; border-radius: 25px; vertical-align: middle; margin-right: 10px;}
 .docker-right .icon-weixin {background: #64ab23 url(images/main/weixin.png) no-repeat center}
 .docker-right  {vertical-align: middle;}
-.docker-right img {width: 240px; width:auto\0; height: 240px; margin-top: 10px; border: 1px solid #ccc}
+.docker-right img {width: 200px; width:auto\0; height: 200px; margin-top: 10px; border: 1px solid #ccc}
 
 /* bootbox */
 .bootbox-alert .modal-dialog {width: 400px; margin-top: 10%;}

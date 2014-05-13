@@ -50,8 +50,9 @@ $lang->page->list   = 'List';
 $lang->page->create = 'Create';
 $lang->page->edit   = 'Edit';
 
-$lang->article->originalList[1] = 'Original';
-$lang->article->originalList[0] = 'Copied';
+$lang->article->originalList[0] = 'Original';
+$lang->article->originalList[1] = 'Copied';
+$lang->article->originalList[2] = 'Translational';
 
 $lang->article->statusList['normal'] = 'Normal';
 $lang->article->statusList['draft']  = 'Draft';

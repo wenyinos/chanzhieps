@@ -20,13 +20,20 @@ class thread extends control
      */
     public function post($boardID = 0)
     {
+        $this->loadModel('forum');
         if($this->app->user->account == 'guest') die(js::locate($this->createLink('user', 'login', "referer=" . helper::safe64Encode($this->app->getURI()))));
 
         /* Get the board. */
         $board = $this->loadModel('tree')->getById($boardID);
 
+        /* Checking the board exist or not. */
+        if(!$board)
+        {
+            die(js::error($this->lang->forum->notExist) . js::locate('back'));
+        }
+
         /* Checking current user can post to the board or not. */
-        if(!$this->loadModel('forum')->canPost($board))
+        if(!$this->forum->canPost($board))
         {
             die(js::error($this->lang->forum->readonly) . js::locate('back'));
         }

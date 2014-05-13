@@ -50,8 +50,9 @@ $lang->page->list   = '单页列表';
 $lang->page->create = '添加单页';
 $lang->page->edit   = '编辑单页';
 
-$lang->article->originalList[1] = '原创';
-$lang->article->originalList[0] = '转贴';
+$lang->article->originalList[0] = '原创';
+$lang->article->originalList[1] = '转贴';
+$lang->article->originalList[2] = '翻译';
 
 $lang->article->statusList['normal'] = '正常';
 $lang->article->statusList['draft']  = '草稿';

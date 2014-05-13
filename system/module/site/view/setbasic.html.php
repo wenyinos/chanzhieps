@@ -42,6 +42,10 @@
           <td colspan='2'><?php echo html::input('keywords', $this->config->site->keywords, "class='form-control'");?></td>
         </tr>
         <tr>
+          <th><?php echo $lang->site->indexKeywords;?></th> 
+          <td colspan='2'><?php echo html::input('indexKeywords', $this->config->site->indexKeywords, "class='form-control'");?></td>
+        </tr>
+        <tr>
           <th><?php echo $lang->site->slogan;?></th> 
           <td colspan='2'><?php echo html::input('slogan', $this->config->site->slogan, "class='form-control'");?></td>
         </tr>

@@ -4,7 +4,7 @@ $(document).ready(function()
     $('#original').change(function()
     {
         $('#copyBox').hide().find(':input').attr('disabled', true);
-        if($(this).val() == 0) $('#copyBox').show().find(':input').attr('disabled', false);
+        if($(this).val() != 0) $('#copyBox').show().find(':input').attr('disabled', false);
     });
     
     /* Set current active topNav. */

@@ -11,11 +11,13 @@
  */
 $lang->slide->common = 'Slides';
 
-$lang->slide->title    = 'Title';
-$lang->slide->image    = 'Image';
-$lang->slide->url      = 'URL';
-$lang->slide->summary  = 'Summary';
-$lang->slide->label    = 'Label';
+$lang->slide->title     = 'Title';
+$lang->slide->image     = 'Image';
+$lang->slide->imageUrl  = 'Image Url';
+$lang->slide->summary   = 'Summary';
+$lang->slide->button    = 'Button';
+$lang->slide->label     = 'Label';
+$lang->slide->buttonUrl = 'Button Url';
 
 $lang->slide->sort     = 'Order';
 $lang->slide->saveSort = 'Save';

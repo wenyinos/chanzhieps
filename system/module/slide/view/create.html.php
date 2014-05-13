@@ -18,35 +18,47 @@
     <form id='ajaxForm' method='post' enctype='multipart/form-data'>
       <table class='table table-form'>
         <tr>
-          <th class='col-md-1 col-xs-2'><?php echo $lang->slide->title;?></th>
-          <td class='col-md-5 col-xs-7'><?php echo html::input('title', '', "class='form-control'");?></td><td></td>
+          <th class='w-100px'><?php echo $lang->slide->title;?></th>
+          <td class='w-p40'><?php echo html::input('title', '', "class='form-control'");?></td><td class='w-p40'></td><td></td>
         </tr>
         <tr>
-          <th><?php echo $lang->slide->url;?></th>
-          <td><?php echo html::input('url', '', "class='form-control'");?></td><td></td>
+          <th><?php echo $lang->slide->imageUrl;?></th>
+          <td><?php echo html::input('imageUrl', '', "class='form-control'");?></td><td colspan='2'></td>
         </tr>
         <tr>
           <th><?php echo $lang->slide->image;?></th>
           <td><?php echo html::file('files[]', "tabindex='-1' class='form-control'");?></td>
-          <td><label class='text-info'><?php echo $lang->slide->suitableSize;?></label></td>
+          <td colspan='2'><label class='text-info'><?php echo $lang->slide->suitableSize;?></label></td>
         </tr>
         <tr>
-          <th><?php echo $lang->slide->label;?></th>
-          <td><?php echo html::input('label', '', "class='form-control'");?></td><td></td>
+          <th><?php echo $lang->slide->button;?></th>
+          <td><?php echo html::input('label[]', '', "class='form-control' placeholder='{$lang->slide->label}'");?></td>
+          <td><?php echo html::input('buttonUrl[]', '', "class='form-control' placeholder='{$lang->slide->buttonUrl}'");?></td>
+          <td><?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus'") . html::a('javascript:;', "<i class='icon-minus'></i>", "class='delete'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->slide->summary;?></th>
-          <td colspan="2"><?php echo html::textarea('summary', '', "class='form-control' rows='6'");?></td>
+          <td colspan='2'><?php echo html::textarea('summary', '', "class='form-control' rows='6'");?></td>
+          <td><label class='text-info'><?php echo $lang->slide->suitableDesc;?></label></td>
         </tr>
         <tr>
           <td></td>
-          <td colspan='2'>
+          <td colspan='3'>
             <?php echo html::submitButton();?>
           </td>
         </tr>
       </table>
     </form>
   </div>
-
+  <table class='hide'>
+    <tbody id='button'>
+      <tr>
+        <th><?php echo $lang->slide->button;?></th>
+        <td><?php echo html::input('label[]', '', "class='form-control' placeholder='{$lang->slide->label}'");?></td>
+        <td><?php echo html::input('buttonUrl[]', '', "class='form-control' placeholder='{$lang->slide->buttonUrl}'");?></td>
+        <td><?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus'") . html::a('javascript:;', "<i class='icon-minus'></i>", "class='delete'");?></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>
