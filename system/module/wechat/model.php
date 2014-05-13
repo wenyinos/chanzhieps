@@ -47,7 +47,7 @@ class wechatModel extends model
     public function getByID($id)
     {
         $public = $this->dao->findByID($id)->from(TABLE_WX_PUBLIC)->fetch();
-        $public->url = 'htttp://' . $this->server->http_host . commonModel::createFrontLink('wechat', 'response', "id=$public->id");
+        $public->url = 'http://' . $this->server->http_host . commonModel::createFrontLink('wechat', 'response', "id=$public->id");
         return $public;
     }
 
