@@ -300,6 +300,7 @@ class articleModel extends model
         $articleID = $this->dao->lastInsertID();
 
         $this->loadModel('file')->updateObjectID($this->post->uid, $articleID, $type);
+        $this->file->fileManager($this->post->content, $articleID, $type);
 
         if(dao::isError()) return false;
 
@@ -342,6 +343,7 @@ class articleModel extends model
             ->exec();
 
         $this->loadModel('file')->updateObjectID($this->post->uid, $articleID, $type);
+        $this->file->fileManger($this->post->content, $articleID, $type);
 
         if(dao::isError()) return false;
 
