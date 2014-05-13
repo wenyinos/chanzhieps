@@ -13,6 +13,7 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php
+js::set('key', count($slide->label));
 $colorPlates = '';
 foreach (explode('|', $lang->slide->colorPlates) as $value)
 {
@@ -46,15 +47,15 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
           <td><?php echo html::input('imageUrl', $slide->imageUrl, "class='form-control'");?></td><td colspan='2'></td>
         </tr>
         <tr>
-          <th><?php echo $lang->slide->background;?></th>
-          <td><?php echo html::radio('bg', $lang->slide->bg, $slide->background, "class='radio'");?></td>
+          <th><?php echo $lang->slide->background->type;?></th>
+          <td><?php echo html::radio('backgroundType', $lang->slide->background->typeList, $slide->backgroundType, "class='radio'");?></td>
         </tr>
         <tr class='bg-section' data-id='color'>
-          <th><?php echo $lang->slide->bg->color;?></th>
+          <th><?php echo $lang->slide->background->color;?></th>
           <td colspan='2'>
             <div class='colorplate clearfix'>
               <div class='input-group color active' data='<?php echo $config->themeSetting->primaryColor;?>'>
-                <?php echo html::input('color', $slide->color, "class='form-control input-color text-latin' placeholder='" . $lang->slide->colorTip . "'");?>
+                <?php echo html::input('backgroundColor', $slide->backgroundColor, "class='form-control input-color text-latin' placeholder='" . $lang->slide->colorTip . "'");?>
                 <span class='input-group-btn'>
                   <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'> <i class='icon icon-question'></i> <span class='caret'></span></button>
                   <div class='dropdown-menu colors'>
@@ -87,10 +88,10 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
           <th><?php echo $lang->slide->button;?></th>
           <td>
             <div class='input-group'>
-              <?php echo html::input('label[]', $label, "class='form-control' placeholder='{$lang->slide->label}'");?>
+              <?php echo html::input("label[{$key}]", $label, "class='form-control' placeholder='{$lang->slide->label}'");?>
               <div class='input-group-btn'>
                 <button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown'><?php echo $lang->slide->buttonColor;?> <span class='caret'></span></button>
-                <?php echo html::hidden('button[]', $slide->buttonType[$key]);?>
+                <?php echo html::hidden("buttonClass[{$key}]", $slide->buttonClass[$key]);?>
                 <div class='dropdown-menu buttons'>
                   <li><button type='button' data-id='default' class='btn btn-block'><?php echo $lang->slide->label;?></button></li>
                   <li><button type='button' data-id='primary' class='btn btn-block btn-primary'><?php echo $lang->slide->label;?></button></li>
@@ -102,7 +103,7 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
               </div>
             </div>
           </td>
-          <td><?php echo html::input('buttonUrl[]', $slide->buttonUrl[$key], "class='form-control' placeholder='{$lang->slide->buttonUrl}'");?></td>
+          <td><?php echo html::input("buttonUrl[{$key}]", $slide->buttonUrl[$key], "class='form-control' placeholder='{$lang->slide->buttonUrl}'");?></td>
           <td><?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus btn btn-mini'") . html::a('javascript:;', "<i class='icon-remove'></i>", "class='delete btn-mini btn'");?></td>
         </tr>
         <?php endforeach;?>
@@ -129,10 +130,10 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
         <th><?php echo $lang->slide->button;?></th>
         <td>
           <div class='input-group'>
-            <?php echo html::input('label[]', '', "class='form-control' placeholder='{$lang->slide->label}'");?>
+            <?php echo html::input('label[key]', '', "class='form-control' placeholder='{$lang->slide->label}'");?>
             <div class='input-group-btn'>
               <button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown'><?php echo $lang->slide->buttonColor;?> <span class='caret'></span></button>
-              <?php echo html::hidden('button[]');?>
+              <?php echo html::hidden('buttonClass[key]');?>
               <div class='dropdown-menu buttons'>
                   <li><button type='button' data-id='default' class='btn btn-block'><?php echo $lang->slide->label;?></button></li>
                   <li><button type='button' data-id='primary' class='btn btn-block btn-primary'><?php echo $lang->slide->label;?></button></li>
@@ -144,7 +145,7 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
             </div>
           </div>
         </td>
-        <td><?php echo html::input('buttonUrl[]', '', "class='form-control' placeholder='{$lang->slide->buttonUrl}'");?></td>
+        <td><?php echo html::input('buttonUrl[key]', '', "class='form-control' placeholder='{$lang->slide->buttonUrl}'");?></td>
         <td><?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus btn btn-mini'") . html::a('javascript:;', "<i class='icon-remove'></i>", "class='delete btn-mini btn'");?></td>
       </tr>
     </tbody>

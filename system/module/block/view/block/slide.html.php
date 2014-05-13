@@ -11,11 +11,13 @@
 */
 ?>
 <?php $slides = $this->loadModel('slide')->getList();?>
-<?php if($slides):?>
+<?php 
+a($slides);
+if($slides):?>
 <div id='slide' class='carousel slide' data-ride='carousel'>
   <div class='carousel-inner'>
     <?php foreach($slides as $slide):?>
-    <div class='item'>
+    <div class='item' style="background:<?php echo $slide->backgroundColor?>">
       <?php 
       !empty($slide->imageUrl) ? print(html::a($slide->imageUrl, html::image($slide->image))) : print(html::image($slide->image));
       ?>

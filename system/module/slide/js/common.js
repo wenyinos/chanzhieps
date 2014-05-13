@@ -36,9 +36,11 @@ $(function()
         }
     });
 
-    $('input:radio[name="bg"]').change(function()
+    $('input:radio[name="backgroundType"]').change(function()
     {
-        $('.bg-section').removeClass('hide').not('[data-id="' + $(this).val() + '"]').addClass('hide');
+        $('.bg-section').hide();
+        var type = $('input:radio[name="backgroundType"]:checked').val();
+        $('[data-id="' + type + '"]').show();
     });
     $('.bg-section:not([data-id="' + $('input:radio[name="bg"]:checked').val() + '"])').addClass('hide');
 
@@ -57,4 +59,6 @@ $(function()
         var btn = group.find('.dropdown-menu.buttons .btn[data-id="' + ($this.val() || 'default') + '"]');
         group.find('.dropdown-toggle').removeClass().addClass('btn dropdown-toggle btn-' + btn.data('id'));
     });
+
+    $('input:radio[name="backgroundType"]').change();
 });

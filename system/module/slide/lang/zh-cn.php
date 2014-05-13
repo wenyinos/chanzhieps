@@ -17,10 +17,16 @@ $lang->slide->imageUrl   = '图片链接';
 $lang->slide->summary    = '摘要';
 $lang->slide->label      = '按钮文字';
 $lang->slide->button     = '按钮';
-$lang->slide->background = '背景';
-$lang->slide->bg         = new stdclass();
-$lang->slide->bg->image  = '图片';
-$lang->slide->bg->color  = '纯色';
+
+$lang->slide->background = new stdclass();
+
+$lang->slide->background->type = '背景';
+$lang->slide->background->image = '背景图片';
+$lang->slide->background->color = '背景颜色';
+
+$lang->slide->background->typeList = new stdclass();
+$lang->slide->background->typeList->image = '图片';
+$lang->slide->background->typeList->color = '纯色';
 $lang->slide->height     = '高度';
 $lang->slide->url        = '链接';
 $lang->slide->colorTip   = '十六进制颜色值';

@@ -1,8 +1,10 @@
 $(document).ready(function()
 {
+    var key = v.key;
     $(document).on('click', 'a.plus', function()
     {
-        $(this).parents('tr').after($('#button').html());
+        $(this).parents('tr').after($('#button').html().replace(/key/g, key));
+        key ++;
     });
 
     /* Delete options. */
