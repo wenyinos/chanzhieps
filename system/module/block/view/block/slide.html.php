@@ -17,8 +17,7 @@
     <?php foreach($slides as $slide):?>
     <div class='item'>
       <?php 
-      $addLink2Image = (($slide->imageUrl != '') and (empty(array_filter($slide->label))) and (empty(array_filter($slide->buttonUrl))));
-      $addLink2Image ? print(html::a($slide->imageUrl, html::image($slide->image))) : print(html::image($slide->image));
+      !empty($slide->imageUrl) ? print(html::a($slide->imageUrl, html::image($slide->image))) : print(html::image($slide->image));
       ?>
       <div class='carousel-caption'>
         <h2><?php echo $slide->title;?></h2>
