@@ -67,7 +67,9 @@ function initKindeditor(afterInit)
             bodyClass:'article-content',
             urlType:'absolute', 
             uploadJson: createLink('file', 'ajaxUpload', 'uid=' + v.uid),
+            <?php if(RUN_MODE == 'admin'):?>
             fileManagerJson : createLink('file', 'fileManager'),
+            <?php endif;?>
             imageTabIndex:1,
             filterMode:v.editors.filterMode,
             allowFileManager:true,

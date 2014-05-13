@@ -526,7 +526,7 @@ class fileModel extends model
     }
 
     /**
-     * Add file from file directory.
+     * Copy file in content from file space.
      * 
      * @param  string $content 
      * @param  int    $objectID 
@@ -534,24 +534,30 @@ class fileModel extends model
      * @access public
      * @return void
      */
-    public function fileManager($content, $objectID, $objectType)
+    public function copyFromContent($content, $objectID, $objectType)
     {
-        preg_match_all('/<img src="(\/data\/upload\/(\S+)\?fromSpace=y)" .+ \/>/U', $content, $out);
+        preg_match_all('/<img src="(\/data\/upload\/(\S+)\?fromSpace=y)" .+ \/>/U', $content, $images);
 
-        if(empty($out)) return false;
-
-        foreach($out[2] as $key => $pathname)
+        if(empty($images)) return false;
+        foreach($images[2] as $key => $pathname)
         {
             $data = $this->dao->select('*')->from(TABLE_FILE)->where('pathname')->eq($pathname)->fetch();
             if(!$data) $data = new stdclass();
 
-            $data->pathname = $pathname;
+            $data->pathname   = $pathname;
+            $data->extension  = $this->getExtension($pathname);
             $data->objectID   = $objectID;
             $data->objectType = $objectType;
             $data->addedBy    = $this->app->user->account;
             $data->addedDate  = helper::now();
 
-            $this->dao->insert(TABLE_FILE)->data($data)->exec();
+            $fileExists = $this->dao->select('count(*) as count')->from(TABLE_FILE)
+                ->where('objectType')->eq($objectType)
+                ->andWhere('objectID')->eq($objectID)
+                ->andWhere('pathname')->eq($pathname)
+                ->fetch('count');
+
+            if($fileExists == 0) $this->dao->insert(TABLE_FILE)->data($data, $skip = 'id')->exec();
         }
 
         return !dao::isError(); 

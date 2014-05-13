@@ -158,7 +158,6 @@ class threadModel extends model
         $threadID = $this->dao->lastInsertID();
 
         $this->loadModel('file')->updateObjectID($this->post->uid, $threadID, 'thread');
-        $this->file->fileManager($this->post->content, $threadID, 'thread');
 
         if(!dao::isError())
         {
@@ -221,7 +220,6 @@ class threadModel extends model
             ->exec();
 
         $this->loadModel('file')->updateObjectID($this->post->uid, $threadID, 'thread');
-        $this->file->fileManager($this->post->content, $threadID, 'thread');
 
         if(dao::isError()) return false;
 

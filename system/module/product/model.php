@@ -247,7 +247,7 @@ class productModel extends model
         $productID = $this->dao->lastInsertID();
 
         $this->loadModel('file')->updateObjectID($this->post->uid, $productID, 'product');
-        $this->file->fileManager($this->post->content, $productID, 'product');
+        $this->file->copyFromContent($this->post->content, $productID, 'product');
 
         if(dao::isError()) return false;
 
@@ -287,7 +287,7 @@ class productModel extends model
             ->exec();
 
         $this->loadModel('file')->updateObjectID($this->post->uid, $productID, 'product');
-        $this->file->fileManager($this->post->content, $productID, 'product');
+        $this->file->copyFromContent($this->post->content, $productID, 'product');
 
         if(dao::isError()) return false;
 
