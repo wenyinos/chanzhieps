@@ -40,7 +40,7 @@ $(function()
     });
     $('.bg-section:not([data-id="' + $('input:radio[name="bg"]:checked').val() + '"])').addClass('hide');
 
-    $('.dropdown-menu.buttons .btn').click(function()
+    $(document).on('click', '.dropdown-menu.buttons .btn', function()
     {
         var $this = $(this);
         var group = $this.closest('.input-group-btn');
@@ -52,7 +52,7 @@ $(function()
     {
         var $this = $(this);
         var group = $this.closest('.input-group-btn');
-        var btn = group.find('.dropdown-menu.buttons .btn[data-id="' + $this.val() + '"]');
+        var btn = group.find('.dropdown-menu.buttons .btn[data-id="' + ($this.val() || 'default') + '"]');
         group.find('.dropdown-toggle').html(btn.text() + " <span class='caret'></span>").removeClass().addClass('btn dropdown-toggle btn-' + btn.data('id'));
     });
 });
