@@ -40,7 +40,7 @@ $(function()
     });
     $('.bg-section:not([data-id="' + $('input:radio[name="bg"]:checked').val() + '"])').addClass('hide');
 
-    $('.dropdown-menu.buttons .btn').click(function()
+    $(document).on('click', '.dropdown-menu.buttons .btn', function()
     {
         var $this = $(this);
         var group = $this.closest('.input-group-btn');
