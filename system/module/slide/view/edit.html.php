@@ -31,7 +31,7 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
             <div class='colorplate clearfix'>
               <div class='input-group color active' data='#fff'>
                 <span class='input-group-addon'> <i class='icon icon-question'></i><i class='icon-ok'></i> </span>
-                <?php echo html::input('titleColor', '#fff', "class='form-control input-color text-latin' placeholder='" . $lang->slide->colorTip . "'");?>
+                <?php echo html::input('titleColor', $slide->titleColor, "class='form-control input-color text-latin' placeholder='" . $lang->slide->colorTip . "'");?>
               </div>
             </div>
           </td>
