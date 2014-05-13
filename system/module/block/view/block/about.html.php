@@ -11,9 +11,11 @@
 */
 ?>
 <div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
-  <div class='panel-heading'><h4><?php echo $icon . $block->title;?></h4></div>
+  <div class='panel-heading'>
+    <div class='pull-right'><?php echo html::a(helper::createLink('company', 'index'), $this->lang->more);?></div>
+    <strong><?php echo $icon . $block->title;?></strong>
+  </div>
   <div class='panel-body'>
     <div class='article-content'><?php echo $this->config->company->desc;?></div>
-    <?php echo html::a(helper::createLink('company', 'index'), $this->lang->more . $this->lang->raquo);?>
   </div>
 </div>

@@ -22,6 +22,7 @@ $lang->tree->noCategories  = 'No category yet, add one first.';
 $lang->tree->timeCountDown = "Locate to category manage page in <strong id='countDown'>3</strong> seconds.";
 $lang->tree->redirect      = 'Manage now';
 $lang->tree->aliasRepeat   = 'Alias: %s already exists.';
+$lang->tree->aliasNumber   = 'Alias must not be digital.';
 $lang->tree->aliasConflict = 'Alias: %s  conflicts with system modules';
 $lang->tree->hasChildren   = "The board has children, can't be deleted.";
 $lang->tree->confirmDelete = "Are you sure to delete it?";

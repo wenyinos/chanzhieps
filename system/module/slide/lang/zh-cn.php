@@ -11,17 +11,13 @@
  */
 $lang->slide->common = '幻灯片';
 
-$lang->slide->title      = '标题';
-$lang->slide->background = '背景';
-$lang->slide->bg         = new stdclass();
-$lang->slide->bg->image  = '图片';
-$lang->slide->bg->color  = '纯色';
-$lang->slide->height     = '高度';
-$lang->slide->url        = '链接';
-$lang->slide->summary    = '摘要';
-$lang->slide->label      = '按钮文字';
-$lang->slide->colorTip   = '十六进制颜色值';
-$lang->slide->colorPlates= '333333|000000|CA1407|45872B|148D00|F25D03|2286D2|D92958|A63268|04BFAD|D1270A|FF9400|299182|63731A|3D4DBE|7382D9|754FB9|F2E205|B1C502|364245|C05036|8A342A|E0DDA2|B3D465|EEEEEE|FFD0E5|D0FFFD|FFFF84|F4E6AE|E5E5E5|F1F1F1|FFFFFF';
+$lang->slide->title     = '标题';
+$lang->slide->image     = '图片';
+$lang->slide->imageUrl  = '图片链接';
+$lang->slide->summary   = '摘要';
+$lang->slide->button    = '按钮';
+$lang->slide->label     = '按钮文字';
+$lang->slide->buttonUrl = '按钮链接';
 
 $lang->slide->sort     = '排序';
 $lang->slide->saveSort = '保存排序';
@@ -31,4 +27,5 @@ $lang->slide->edit     = '编辑幻灯片';
 
 $lang->slide->successSort     = '排序成功保存';
 $lang->slide->noImageSelected = '没有选择图片';
-$lang->slide->suitableSize    = '同一幻灯片中的所有图片尺寸应该保持一致，最佳图片尺寸：1140px X 270px(宽 X 高)';
+$lang->slide->suitableSize    = '所有图片尺寸保持一致，最佳尺寸：1140px X 270px(宽 X 高)';
+$lang->slide->suitableDesc    = '同时设置了标题和按钮，摘要最多输入4行';

@@ -80,6 +80,9 @@ class upgradeModel extends model
                 $this->upgradeLayouts();
             case '2_1': $this->execSQL($this->getUpgradeFile('2.1'));
             case '2_2': $this->execSQL($this->getUpgradeFile('2.2'));
+            case '2_2_1':
+                $this->execSQL($this->getUpgradeFile('2.2.1'));
+                $this->upgradeSlide();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -110,6 +113,7 @@ class upgradeModel extends model
             case '2_0_1': $confirmContent .= file_get_contents($this->getUpgradeFile('2.0.1'));
             case '2_1'  : $confirmContent .= file_get_contents($this->getUpgradeFile('2.1'));
             case '2_2'  : $confirmContent .= file_get_contents($this->getUpgradeFile('2.2'));
+            case '2_2'  : $confirmContent .= file_get_contents($this->getUpgradeFile('2.2.1'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
@@ -520,6 +524,36 @@ class upgradeModel extends model
 
         return !dao::isError();
     }
+
+    /**
+     * Upgrade slide when upgrade when 2.2.1.
+     * 
+     * @access public
+     * @return void
+     */
+    public function upgradeSlide()
+    {
+        $slides = $this->dao->select('*')->from(TABLE_CONFIG)
+            ->where('owner')->eq('system')
+            ->andWhere('module')->eq('common')
+            ->andWhere('section')->eq('slides')
+            ->fetchAll('key');
+
+        foreach($slides as $key => $slide)
+        {
+            $slides[$key] = json_decode($slide->value);
+            $slides[$key]->label     = array($slides[$key]->label);
+            $slides[$key]->buttonUrl = array($slides[$key]->url);
+            $slides[$key]->imageUrl  = $slides[$key]->label ? '' : $slides[$key]->url;
+
+            $this->dao->update(TABLE_CONFIG)
+                ->set('value')->eq(helper::jsonEncode($slides[$key]))
+                ->where('`key`')->eq($key)
+                ->exec();
+        }
+
+        return !dao::isError();
+    } 
 
     /**
      * Upgrade html blocks when upgrade from 2.0.1 .

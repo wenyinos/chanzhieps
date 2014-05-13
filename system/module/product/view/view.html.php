@@ -92,7 +92,7 @@ js::set('productID', $product->id);
             <?php if($product->mall):?>
             <hr>
             <div class='btn-buy'>
-            <?php echo html::linkButton($lang->product->buyNow, $product->mall, 'btn btn-lg btn-primary');?>
+            <?php echo html::a($product->mall, $lang->product->buyNow, "class='btn btn-lg btn-primary' target='_blank'");?>
             </div>
             <?php endif;?>
           </div>

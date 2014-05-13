@@ -28,6 +28,16 @@ class treeModel extends model
 
         if(!$category) return false;
 
+        if($type == 'forum') 
+        {
+            $speakers = array();
+            $category->moderators = explode(',', trim($category->moderators, ','));
+            foreach($category->moderators as $moderators) $speakers[] = $moderators;
+            $speakers = $this->loadModel('user')->getRealNamePairs($speakers);
+            foreach($category->moderators as $key => $moderators) $category->moderators[$key] = isset($speakers[$moderators]) ? $speakers[$moderators] : '';
+            $category->moderators = implode(',', $category->moderators);
+        }
+
         $category->pathNames = $this->dao->select('id, name')->from(TABLE_CATEGORY)->where('id')->in($category->path)->orderBy('grade')->fetchPairs();
         return $category;
     }
@@ -479,6 +489,10 @@ class treeModel extends model
             /* Add id to check alias. */
             $category->id = $mode == 'new' ?  0: $category->id = $key;
             if(!$this->checkAlias($category)) return sprintf($this->lang->tree->aliasRepeat, $alias);
+            if($category->type == 'forum' or $category->type == 'blog')
+            {
+                if(is_numeric($category->alias)) return $this->lang->tree->aliasNumber;
+            }
 
             if($mode == 'new')
             {

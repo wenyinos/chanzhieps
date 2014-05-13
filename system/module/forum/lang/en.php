@@ -16,6 +16,7 @@ $lang->forum->threadCount = 'Threads';
 $lang->forum->postCount   = 'Posts';
 $lang->forum->lastPost    = 'Last post';
 $lang->forum->readonly    = 'Readonly';
+$lang->forum->notExist    = 'The board does not exist.';
 $lang->forum->lblOwner    = " [ Moderator: %s ]";
 
 $lang->forum->post   = 'Post';

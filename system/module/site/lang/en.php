@@ -9,25 +9,26 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->site->common       = "Site";
+$lang->site->common        = "Site";
 
-$lang->site->type         = 'Type';
-$lang->site->name         = 'Name';
-$lang->site->module       = 'Modules';
-$lang->site->lang         = 'Language';
-$lang->site->domain       = 'Domain';
-$lang->site->keywords     = 'Keywords';
-$lang->site->desc         = 'Description';
-$lang->site->icp          = 'ICP';
-$lang->site->slogan       = 'Slogan';
-$lang->site->mission      = 'Mission';
-$lang->site->copyright    = 'Copyright';
+$lang->site->type          = 'Type';
+$lang->site->name          = 'Name';
+$lang->site->module        = 'Modules';
+$lang->site->lang          = 'Language';
+$lang->site->domain        = 'Domain';
+$lang->site->keywords      = 'Keywords';
+$lang->site->indexKeywords = 'Home Keywords';
+$lang->site->desc          = 'Description';
+$lang->site->icp           = 'ICP';
+$lang->site->slogan        = 'Slogan';
+$lang->site->mission       = 'Mission';
+$lang->site->copyright     = 'Copyright';
 
-$lang->site->setBasic     = "Baisc";
-$lang->site->setOauth     = "Oauth";
-$lang->site->setSinaOauth = "Weibo Oauth";
-$lang->site->setQQOauth   = "QQ Oauth";
-$lang->site->oauthHelp    = "Help";
+$lang->site->setBasic      = "Baisc";
+$lang->site->setOauth      = "Oauth";
+$lang->site->setSinaOauth  = "Weibo Oauth";
+$lang->site->setQQOauth    = "QQ Oauth";
+$lang->site->oauthHelp     = "Help";
 
 $lang->site->typeList = new stdclass();
 $lang->site->typeList->company = 'Enterprise Portal';

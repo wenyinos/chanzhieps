@@ -96,6 +96,9 @@ class threadModel extends model
             ->orderBy('repliedDate desc')
             ->page($pager)
             ->fetchAll('id');
+
+        $this->setRealNames($threads);
+
         return $this->process($threads);
     }
 

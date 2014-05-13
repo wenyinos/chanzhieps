@@ -42,7 +42,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->article->original;?></th>
-          <td><?php echo html::select('original', $lang->article->originalList, 1, "class='form-control chosen'");?></td>
+          <td><?php echo html::select('original', $lang->article->originalList, 0, "class='form-control chosen'");?></td>
           <td>
             <div class='row' id='copyBox'>
               <div class='col-md-4'><?php echo html::input('copySite', '', "class='form-control' placeholder='{$lang->article->copySite}'"); ?> </div>

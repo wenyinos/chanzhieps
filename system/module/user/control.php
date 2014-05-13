@@ -351,6 +351,22 @@ class user extends control
     }
 
     /**
+     * Allow a user.
+     *
+     * @param  int  $userID
+     * @access public
+     * @return viod
+     */
+    public function allow($userID)
+    {
+        if(!$userID) $this->send(array('result'=>'fail', 'message' => $this->lang->user->allowFail));       
+
+        $this->user->allow($userID);
+        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->send(array('result'=>'success', 'message' => $this->lang->user->allowSuccess));
+    }
+
+    /**
      * set the referer 
      * 
      * @param  string $referer 

@@ -17,13 +17,17 @@
     <?php foreach($slides as $slide):?>
     <div class='item'>
       <?php 
-      $addLink2Image = $slide->url != '' and $slide->label == '';
-      $addLink2Image ? print(html::a($slide->url, html::image($slide->image))) : print(html::image($slide->image));
+      $addLink2Image = (($slide->imageUrl != '') and (empty(array_filter($slide->label))) and (empty(array_filter($slide->buttonUrl))));
+      $addLink2Image ? print(html::a($slide->imageUrl, html::image($slide->image))) : print(html::image($slide->image));
       ?>
       <div class='carousel-caption'>
         <h2><?php echo $slide->title;?></h2>
         <div><?php echo $slide->summary;?></div>
-        <?php if(trim($slide->label) != '') echo html::a($slide->url, $slide->label, "class='btn btn-lg btn-primary'");?>
+        <?php
+        foreach($slide->label as $key => $label):
+        if(trim($label) != '') echo html::a($slide->buttonUrl[$key], $label, "class='btn btn-lg btn-primary'");
+        endforeach;
+        ?>
       </div>
     </div>
     <?php endforeach;?>
