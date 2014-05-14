@@ -17,12 +17,15 @@
     <div class='modal-body'>
       <h3><?php echo $lang->install->welcome;?></h3>
       <div><?php echo $lang->install->desc;?></div>
+      <div class='text-left'>
+        <label class='checkbox'><input type='checkbox' id='agree' checked /><?php echo $lang->agreement;?></label>
+      </div>
     </div>
     <div class='modal-footer'>
       <?php
       if(!isset($latestRelease))
       {
-          echo html::a($this->createLink('install', 'step1'), $lang->install->start, "class='btn btn-primary'");
+          echo html::a($this->createLink('install', 'step1'), $lang->install->start, "class='btn btn-primary' id='install'");
       }
       else
       {
