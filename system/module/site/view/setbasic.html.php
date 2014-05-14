@@ -19,7 +19,7 @@
       <table class='table table-form'>
         <tr>
           <th class='col-xs-2'><?php echo $lang->site->type;?></th> 
-          <td class='col-xs-5'><?php echo html::radio('type', $lang->site->typeList, $this->config->site->type, "class='checkbox'");?></td><td></td>
+          <td class='col-xs-5'><?php echo html::radio('type', $lang->site->typeList, isset($this->config->site->type) ? $this->config->site->type : 'compnay', "class='checkbox'");?></td><td></td>
         </tr>
         <tr>
           <th class='col-xs-2'><?php echo $lang->site->name;?></th> 
