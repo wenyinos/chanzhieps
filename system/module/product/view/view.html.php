@@ -88,6 +88,12 @@ js::set('productID', $product->id);
               if(!$attributeHtml) $attributeHtml = "<li>$product->summary</li>";
               echo $attributeHtml;
               ?>
+              <?php foreach($product->attributes as $attribute):?>
+              <li>
+                <span class='meta-name'><?php echo $attribute->label;?></span>
+                <span class='meta-value'><?php echo $attribute->value;?></span>
+              </li>
+              <?php endforeach;?>
             </ul>
             <?php if($product->mall):?>
             <hr>
