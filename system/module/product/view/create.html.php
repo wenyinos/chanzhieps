@@ -59,11 +59,11 @@
           <th><?php echo $lang->product->attribute?></th>
           <td colspan='2'>
             <div class='row form-group'>
-              <div class="col-xs-3"> <?php echo html::input('label[0]', '', "class='form-control' placeholder=''" )?></div>
-              <div class="col-xs-8"> <?php echo html::input('value[0]', '', "class='form-control' placeholder=''" )?></div>
+              <div class="col-xs-3"> <?php echo html::input('label[0]', '', "class='form-control' placeholder='{$lang->product->placeholder->label}'" )?></div>
+              <div class="col-xs-8"> <?php echo html::input('value[0]', '', "class='form-control' placeholder='{$lang->product->placeholder->value}'" )?></div>
               <div class="col-xs-1">
-                 <?php echo html::a('javascript:;', "<i class='icon-plus'></i>");?>
-                 <?php echo html::a('javascript:;', "<i class='icon-minus'></i>");?>
+                <?php echo html::a('javascript:;', "<i class='icon-plus'></i>");?>
+                <?php echo html::a('javascript:;', "<i class='icon-minus'></i>");?>
               </div>
             </div>
           </td>
@@ -77,8 +77,8 @@
 
     <div class='hide row-custom'>
       <div class='row form-group'>
-        <div class="col-xs-3"> <?php echo html::input('label[key]', '', "class='form-control' placeholder=''" )?></div>
-        <div class="col-xs-8"> <?php echo html::input('value[key]', '', "class='form-control' placeholder=''" )?></div>
+        <div class="col-xs-3"> <?php echo html::input('label[key]', '', "class='form-control' placeholder='{$lang->product->placeholder->label}'" )?></div>
+        <div class="col-xs-8"> <?php echo html::input('value[key]', '', "class='form-control' placeholder='{$lang->product->placeholder->value}'" )?></div>
         <div class="col-xs-1">
           <?php echo html::a('javascript:;', "<i class='icon-plus'></i>");?>
           <?php echo html::a('javascript:;', "<i class='icon-minus'></i>");?>
