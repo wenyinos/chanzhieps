@@ -29,6 +29,7 @@ $lang->slide->buttonUrl  = 'Button Url';
 $lang->slide->buttonColor= 'Button Color';
 
 $lang->slide->sort     = 'Order';
+$lang->slide->sortTip  = 'Order chaned. Save changes by click the "save order" button.';
 $lang->slide->saveSort = 'Save';
 $lang->slide->admin    = 'Admin';
 $lang->slide->create   = 'Add';

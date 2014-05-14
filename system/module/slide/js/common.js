@@ -53,7 +53,7 @@ $(function()
         group.find('input[name^="buttonClass"]').val($this.data('id'));
     });
 
-    $('input[name="button\\[\\]"]').each(function()
+    $('input[name^="buttonClass"]').each(function()
     {
         var $this = $(this);
         var group = $this.closest('.input-group-btn');

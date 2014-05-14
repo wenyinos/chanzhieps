@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php js::set('sortTip', $lang->slide->sortTip) ?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class='icon-picture'></i> <?php echo $lang->slide->admin;?></strong>
@@ -20,21 +21,9 @@
   </div>
   <form id='sortForm' action='<?php echo inLink('sort')?>' method='post'>
     <table class='table table-hover table-bordered'>
-      <thead>
-        <tr class='text-center'>
-          <th class='w-80px'><?php echo $lang->slide->sort;?></th>
-          <th><?php echo $lang->slide->background->type;?></th>
-          <th class='w-80px'><?php echo $lang->actions;?></th>
-        </tr>
-      </thead>
       <tbody>
         <?php foreach($slides as  $key => $slide):?>
         <tr class='text-middle'>
-          <td class='text-center'>
-            <i class='icon-arrow-up'></i>
-            <i class='icon-arrow-down'></i>            
-            <?php echo html::hidden("order[{$slide->id}]", $key);?>
-          </td>
           <td>
             <div class='carousel slide mg-0'>
               <div class='carousel-inner'>
@@ -44,6 +33,25 @@
                 <?php else: ?>
                 <div class='item active' style='<?php echo 'background-color: ' . $slide->backgroundColor . '; height: ' . $slide->height . 'px';?>'>
                 <?php endif ?>
+                  <div class='actions clearfix'>
+                    <div class='pull-left'>
+                      <button type='button' class='btn btn-pure icon-arrow-up'></button>
+                      <button type='button' class='btn btn-pure icon-arrow-down'></button>
+                    </div>
+                    <div class='pull-right'>
+                      <?php if ($slide->height): ?>
+                      <span class='label'><?php echo $lang->slide->height . ': ' . $slide->height;?>px</span> &nbsp; &nbsp; 
+                      <?php endif ?>
+                      <button type='button' class='btn btn-pure btn-resize'><i class='icon-resize-full'></i></button>
+                      <?php if ($slide->imageUrl): ?>
+                        <?php echo html::a($slide->imageUrl, "<i class='icon-external-link'></i>", "class='btn btn-pure' title='{$lang->slide->imageUrl}' target='_blank'") ?>
+                      <?php endif ?>
+                      <?php
+                      echo html::a($this->createLink('slide', 'edit', "id=$slide->id"), "<i class='icon-pencil'></i>", "class='btn btn-pure' title='{$lang->edit}'");
+                      echo html::a($this->createLink('slide', 'delete', "id=$slide->id"), "<i class='icon-remove'></i>", "class='deleter btn btn-pure' title='{$lang->delete}'");
+                      ?>
+                    </div>
+                  </div>
                   <div class='carousel-caption'>
                     <h2 style='color:<?php echo $slide->titleColor;?>'><?php echo $slide->title;?></h2>
                     <div><?php echo $slide->summary;?></div>
@@ -56,17 +64,6 @@
                 </div>
               </div>
             </div>
-          </td>
-
-          <td class='text-center'><?php echo html::a($slide->image, html::image($slide->image, "class='image-small'"), "target='_blank'");?></td>
-          <td><?php echo $slide->title;?></td>
-          <td><?php echo $slide->summary;?></td>
-          <td><?php foreach($slide->label as $label) echo $label . ' ';?></td> -->
-          <td class='text-center'>
-            <?php
-            echo html::a($this->createLink('slide', 'edit', "id=$slide->id"), $lang->edit);
-            echo html::a($this->createLink('slide', 'delete', "id=$slide->id"), $lang->delete, "class='deleter'");
-            ?>
           </td>
         </tr>
         <?php endforeach;?>
