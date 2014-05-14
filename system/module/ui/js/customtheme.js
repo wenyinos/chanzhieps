@@ -33,7 +33,6 @@ $(function()
 
     $.setAjaxForm('#customThemeForm', function(response)
     {
-        console.log(response);
         $('.modal-theme .close[data-dismiss="modal"]').click();
         messager.success(response.message);
     });

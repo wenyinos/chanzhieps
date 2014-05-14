@@ -50,7 +50,7 @@ $(function()
         var $this = $(this);
         var group = $this.closest('.input-group-btn');
         group.find('.dropdown-toggle').removeClass().addClass('btn dropdown-toggle btn-' + $this.data('id'));
-        group.find('input[name="button\\[\\]"]').val($this.data('id'));
+        group.find('input[name^="buttonClass"]').val($this.data('id'));
     });
 
     $('input[name="button\\[\\]"]').each(function()

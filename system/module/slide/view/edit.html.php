@@ -83,6 +83,32 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
           <td><?php echo html::file('files[]', "tabindex='-1' class='form-control'");?></td>
           <td colspan='2'><label class='text-info'><?php echo $lang->slide->suitableSize;?></label></td>
         </tr>
+        <?php if (empty($slide->label)):?>
+        <tr>
+          <th><?php echo $lang->slide->button;?></th>
+          <td>
+            <div class='input-group'>
+              <?php echo html::input('label[0]', '', "class='form-control' placeholder='{$lang->slide->label}'");?>
+              <div class='input-group-btn'>
+                <button type='button' class='btn btn-primary dropdown-toggle' data-toggle='dropdown'>
+                  <?php echo $lang->slide->buttonColor;?> <span class='caret'></span>
+                </button>
+                <?php echo html::hidden('buttonClass[0]', 'primary');?>
+                <div class='dropdown-menu buttons'>
+                  <li><button type='button' data-id='default' class='btn btn-block'><?php echo $lang->slide->label;?></button></li>
+                  <li><button type='button' data-id='primary' class='btn btn-block btn-primary'><?php echo $lang->slide->label;?></button></li>
+                  <li><button type='button' data-id='warning' class='btn btn-block btn-warning'><?php echo $lang->slide->label;?></button></li>
+                  <li><button type='button' data-id='danger' class='btn btn-block btn-danger'><?php echo $lang->slide->label;?></button></li>
+                  <li><button type='button' data-id='success' class='btn btn-block btn-success'><?php echo $lang->slide->label;?></button></li>
+                  <li><button type='button' data-id='info' class='btn btn-block btn-info'><?php echo $lang->slide->label;?></button></li>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td><?php echo html::input('buttonUrl[0]', '', "class='form-control' placeholder='{$lang->slide->buttonUrl}'");?></td>
+          <td><?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus btn btn-mini'") . html::a('javascript:;', "<i class='icon-remove'></i>", "class='delete btn-mini btn'");?></td>
+        </tr>
+        <?php else: ?>
         <?php foreach($slide->label as $key => $label):?>
         <tr>
           <th><?php echo $lang->slide->button;?></th>
@@ -107,6 +133,7 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
           <td><?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus btn btn-mini'") . html::a('javascript:;', "<i class='icon-remove'></i>", "class='delete btn-mini btn'");?></td>
         </tr>
         <?php endforeach;?>
+        <?php endif ?>
         <tr>
           <th><?php echo $lang->slide->summary;?></th>
           <td colspan='2'><?php echo html::textarea('summary', $slide->summary, 'class="form-control"');?></td>

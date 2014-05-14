@@ -88,10 +88,10 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
             <div class='input-group'>
               <?php echo html::input('label[0]', '', "class='form-control' placeholder='{$lang->slide->label}'");?>
               <div class='input-group-btn'>
-                <button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown'>
+                <button type='button' class='btn btn-primary dropdown-toggle' data-toggle='dropdown'>
                   <?php echo $lang->slide->buttonColor;?> <span class='caret'></span>
                 </button>
-                <?php echo html::hidden('buttonClass[0]');?>
+                <?php echo html::hidden('buttonClass[0]', 'primary');?>
                 <div class='dropdown-menu buttons'>
                   <li><button type='button' data-id='default' class='btn btn-block'><?php echo $lang->slide->label;?></button></li>
                   <li><button type='button' data-id='primary' class='btn btn-block btn-primary'><?php echo $lang->slide->label;?></button></li>
@@ -126,11 +126,11 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
           <div class='input-group'>
             <?php echo html::input('label[key]', '', "class='form-control' placeholder='{$lang->slide->label}'");?>
             <div class='input-group-btn'>
-              <button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown'>
+              <button type='button' class='btn btn-primary dropdown-toggle' data-toggle='dropdown'>
                 <?php echo $lang->slide->buttonColor;?> 
                 <span class='caret'></span>
               </button>
-              <?php echo html::hidden('buttonClass[key]');?>
+              <?php echo html::hidden('buttonClass[key]', 'primary');?>
               <div class='dropdown-menu buttons'>
                   <li><button type='button' data-id='default' class='btn btn-block'><?php echo $lang->slide->label;?></button></li>
                   <li><button type='button' data-id='primary' class='btn btn-block btn-primary'><?php echo $lang->slide->label;?></button></li>

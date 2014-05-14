@@ -26,8 +26,12 @@
 .w-type      {width:80px;}
 .w-resolution{width:60px;}
 
+/* border settings */
 .borderless {border: none}
 .hiding {display: none}
+
+/* margin and padding settings */
+.mg-0 {margin: 0!important}
 
 /* --- LAYOUT SETTING --- */
 /* containers. */

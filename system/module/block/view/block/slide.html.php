@@ -15,20 +15,22 @@
 if($slides):?>
 <div id='slide' class='carousel slide' data-ride='carousel'>
   <div class='carousel-inner'>
+    <?php $height = 0;?>
     <?php foreach($slides as $slide):?>
       <?php $url = empty($slide->imageUrl) ? '' : " data-url='" . $slide->imageUrl . "'";?>
+      <?php if($height == 0 and $slide->height) $height = $slide->height;?>
       <?php if ($slide->backgroundType == 'image'): ?>
       <div class='item'<?php echo $url;?>>
         <?php print(html::image($slide->image));?>
       <?php else: ?>
-      <div class='item'<?php echo $url;?> style='<?php echo 'background-color: ' . $slide->backgroundColor . '; height: ' . $slide->height . 'px';?>'>
+      <div class='item'<?php echo $url;?> style='<?php echo 'background-color: ' . $slide->backgroundColor . '; height: ' . $height . 'px';?>'>
       <?php endif ?>
       <div class='carousel-caption'>
         <h2 style='color:<?php echo $slide->titleColor;?>'><?php echo $slide->title;?></h2>
         <div><?php echo $slide->summary;?></div>
         <?php
         foreach($slide->label as $key => $label):
-        if(trim($label) != '') echo html::a($slide->buttonUrl[$key], $label, "class='btn btn-lg btn-primary'");
+        if(trim($label) != '') echo html::a($slide->buttonUrl[$key], $label, "class='btn btn-lg btn-{$slide->buttonClass[$key]}'");
         endforeach;
         ?>
       </div>

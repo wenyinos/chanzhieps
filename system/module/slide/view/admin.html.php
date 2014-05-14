@@ -22,12 +22,9 @@
     <table class='table table-hover table-bordered'>
       <thead>
         <tr class='text-center'>
-          <th><?php echo $lang->slide->sort;?></th>
+          <th class='w-80px'><?php echo $lang->slide->sort;?></th>
           <th><?php echo $lang->slide->background->type;?></th>
-          <th><?php echo $lang->slide->title;?></th>
-          <th><?php echo $lang->slide->summary;?></th>
-          <th><?php echo $lang->slide->label;?></th>
-          <th><?php echo $lang->actions;?></th>
+          <th class='w-80px'><?php echo $lang->actions;?></th>
         </tr>
       </thead>
       <tbody>
@@ -38,10 +35,33 @@
             <i class='icon-arrow-down'></i>            
             <?php echo html::hidden("order[{$slide->id}]", $key);?>
           </td>
-          <td class='text-center'><?php echo html::a($slide->image, html::image($slide->image, "class='image-small'"), "target='_blank'");?></td>
+          <td>
+            <div class='carousel slide mg-0'>
+              <div class='carousel-inner'>
+                <?php if ($slide->backgroundType == 'image'): ?>
+                <div class='item active'<?php echo $url;?>>
+                  <?php print(html::image($slide->image));?>
+                <?php else: ?>
+                <div class='item active'<?php echo $url;?> style='<?php echo 'background-color: ' . $slide->backgroundColor . '; height: ' . $slide->height . 'px';?>'>
+                <?php endif ?>
+                  <div class='carousel-caption'>
+                    <h2 style='color:<?php echo $slide->titleColor;?>'><?php echo $slide->title;?></h2>
+                    <div><?php echo $slide->summary;?></div>
+                    <?php
+                    foreach($slide->label as $key => $label):
+                    if(trim($label) != '') echo html::a($slide->buttonUrl[$key], $label, "class='btn btn-lg btn-" . $slide->buttonClass[$key] . "'");
+                    endforeach;
+                    ?>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+
+<!--           <td class='text-center'><?php echo html::a($slide->image, html::image($slide->image, "class='image-small'"), "target='_blank'");?></td>
           <td><?php echo $slide->title;?></td>
           <td><?php echo $slide->summary;?></td>
-          <td><?php foreach($slide->label as $label) echo $label . ' ';?></td>
+          <td><?php foreach($slide->label as $label) echo $label . ' ';?></td> -->
           <td class='text-center'>
             <?php
             echo html::a($this->createLink('slide', 'edit', "id=$slide->id"), $lang->edit);
