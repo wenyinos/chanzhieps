@@ -1,7 +1,25 @@
 $(document).ready(function()
 {
+    $('#buttonBox').hide();
+    $('#choseVersion').hide();
+    $.getJSON(createLink('install', 'getLatestRelease'),function(response)
+    {
+        if(response.result)
+        {
+            $('#checkRelease').hide();
+            $('#version').html(response.version);
+            $('.link-version').attr('href', response.url);
+            $('#choseVersion').show();
+        }
+        else
+        {
+            $('#buttonBox').show();
+            $('#checkRelease').remove();
+        }
+    });
+
     $('#agree').change(function()
     {
-        $('#install').attr('disabled', !$(this).prop('checked'));
+        $('.btn-install').attr('disabled', !$(this).prop('checked'));
     });
 });

@@ -17,23 +17,22 @@
     <div class='modal-body'>
       <h3><?php echo $lang->install->welcome;?></h3>
       <div><?php echo $lang->install->desc;?></div>
-      <div class='text-left'>
-        <label class='checkbox'><input type='checkbox' id='agree' checked /><?php echo $lang->agreement;?></label>
-      </div>
     </div>
     <div class='modal-footer'>
-      <?php
-      if(!isset($latestRelease))
-      {
-          echo html::a($this->createLink('install', 'step1'), $lang->install->start, "class='btn btn-primary' id='install'");
-      }
-      else
-      {
-          echo $lang->install->choice;
-          echo html::a($latestRelease->url, $lang->install->seeLatestRelease, "target='_blank'");
-          echo ' &nbsp; ' . html::a($this->createLink('install', 'step1'), $lang->install->keepInstalling, "class='btn btn-primary'");
-      }
-      ?>
+      <div class='text-center'>
+        <label class='checkbox-inline'><input type='checkbox' id='agree' checked /><?php echo $lang->agreement;?></label>
+      </div>
+      <div class='input-group' id='buttonBox'>
+      <?php echo html::a($this->createLink('install', 'step1'), $lang->install->start, "class='btn btn-primary btn-install'");?>
+      </div>
+      <div id='choseVersion'>
+       <div class='lead'><?php echo $lang->install->newVersion;?></div>
+       <?php echo html::a($latestRelease->url, $lang->install->seeLatestRelease, "target='_blank' class='btn btn-primary link-version'");?>
+       <?php echo html::a($this->createLink('install', 'step1'), $lang->install->keepInstalling, "class='btn btn-info btn-install'");?>
+      </div>
+      <div id='checkRelease'>
+      <div class='text-muted btn btn-default disabled'><i class='icon-spin icon-spinner'> </i><?php echo $lang->install->gettingVersion?></div>
+      </div>
     </div>
   </div>
 </div>
