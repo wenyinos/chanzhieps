@@ -21,4 +21,17 @@ $(document).ready(function()
         $(this).parents('.row').after($('.row-custom').html().replace(/key/g, key));
         key ++;
     })
+
+    $(document).on('click', 'i.icon-minus', function()
+    {
+        if($(this).parents('td').find('.row').size() > 1)
+        {
+            $(this).parents('.row').remove();
+        }
+        else
+        {
+            $(this).parents('.row').find('input').val('');
+        }
+        key ++;
+    })
 })
