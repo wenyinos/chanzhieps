@@ -39,10 +39,10 @@
             <div class='carousel slide mg-0'>
               <div class='carousel-inner'>
                 <?php if ($slide->backgroundType == 'image'): ?>
-                <div class='item active'<?php echo $url;?>>
+                <div class='item active'>
                   <?php print(html::image($slide->image));?>
                 <?php else: ?>
-                <div class='item active'<?php echo $url;?> style='<?php echo 'background-color: ' . $slide->backgroundColor . '; height: ' . $slide->height . 'px';?>'>
+                <div class='item active' style='<?php echo 'background-color: ' . $slide->backgroundColor . '; height: ' . $slide->height . 'px';?>'>
                 <?php endif ?>
                   <div class='carousel-caption'>
                     <h2 style='color:<?php echo $slide->titleColor;?>'><?php echo $slide->title;?></h2>
@@ -58,7 +58,7 @@
             </div>
           </td>
 
-<!--           <td class='text-center'><?php echo html::a($slide->image, html::image($slide->image, "class='image-small'"), "target='_blank'");?></td>
+          <td class='text-center'><?php echo html::a($slide->image, html::image($slide->image, "class='image-small'"), "target='_blank'");?></td>
           <td><?php echo $slide->title;?></td>
           <td><?php echo $slide->summary;?></td>
           <td><?php foreach($slide->label as $label) echo $label . ' ';?></td> -->

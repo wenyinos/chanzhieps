@@ -14,4 +14,11 @@ $(document).ready(function()
         });
         if(!hasActive) $('.nav-product-0').addClass('active');
     }
+    
+    key = v.key;
+    $(document).on('click', 'i.icon-plus', function()
+    {
+        $(this).parents('.row').after($('.row-custom').html().replace(/key/g, key));
+        key ++;
+    })
 })

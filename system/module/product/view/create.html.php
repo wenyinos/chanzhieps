@@ -13,6 +13,7 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
+<?php js::set('key', 1);?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-plus"></i> <?php echo $lang->product->create;?></strong>
@@ -55,43 +56,15 @@
           <td colspan='2'><?php echo html::textarea('content', '', "rows='10' class='form-control'");?></td>
         </tr>
         <tr>
-          <th rowspan='4'><?php echo $lang->product->attribute?></th>
+          <th><?php echo $lang->product->attribute?></th>
           <td colspan='2'>
-            <div class="row">
-              <div class='col-sm-2 col-md-1'><?php echo $lang->product->brand;?></div>
-              <div class='col-sm-4 col-md-5'> <?php echo html::input('brand', '', "class='form-control'");?></div>
-              <div class='col-sm-2 col-md-1'><?php echo $lang->product->model;?></div>
-              <div class='col-sm-4 col-md-5'><?php echo html::input('model', '', "class='form-control'");?></div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td colspan='2'>
-            <div class="row">
-              <div class='col-sm-2 col-md-1'><?php echo $lang->product->color;?></div>
-              <div class='col-sm-4 col-md-5'><?php echo html::input('color', '', "class='form-control'");?></div>
-              <div class='col-sm-2 col-md-1'><?php echo $lang->product->amount;?> </div>
-              <div class='col-sm-4 col-md-5'><?php echo html::input('amount', '', "class='form-control'");?></div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td colspan='2'>
-            <div class="row">
-              <div class='col-sm-2 col-md-1'><?php echo $lang->product->origin;?></div>
-              <div class='col-sm-4 col-md-5'><?php echo html::input('origin', '', "class='form-control'");?></div>
-              <div class='col-sm-2 col-md-1'><?php echo $lang->product->unit;?></div>
-              <div class='col-sm-4 col-md-5'><?php echo html::input('unit', '', "class='form-control'");?></div>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td colspan='2'>
-            <div class="row">
-              <div class='col-sm-2 col-md-1'><?php echo $lang->product->price;?></div>
-              <div class='col-sm-4 col-md-5'><?php echo html::input('price', '', "class='form-control'");?></div>
-              <div class='col-sm-2 col-md-1'><?php echo $lang->product->promotion;?></div>
-              <div class='col-sm-4 col-md-5'><?php echo html::input('promotion', '', "class='form-control'");?></div>
+            <div class='row form-group'>
+              <div class="col-xs-3"> <?php echo html::input('label[0]', '', "class='form-control' placeholder=''" )?></div>
+              <div class="col-xs-8"> <?php echo html::input('value[0]', '', "class='form-control' placeholder=''" )?></div>
+              <div class="col-xs-1">
+                 <?php echo html::a('javascript:;', "<i class='icon-plus'></i>");?>
+                 <?php echo html::a('javascript:;', "<i class='icon-minus'></i>");?>
+              </div>
             </div>
           </td>
         </tr>
@@ -101,6 +74,18 @@
         </tr>
       </table>
     </form>
+
+    <div class='hide row-custom'>
+      <div class='row form-group'>
+        <div class="col-xs-3"> <?php echo html::input('label[key]', '', "class='form-control' placeholder=''" )?></div>
+        <div class="col-xs-8"> <?php echo html::input('value[key]', '', "class='form-control' placeholder=''" )?></div>
+        <div class="col-xs-1">
+          <?php echo html::a('javascript:;', "<i class='icon-plus'></i>");?>
+          <?php echo html::a('javascript:;', "<i class='icon-minus'></i>");?>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>
