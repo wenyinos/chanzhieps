@@ -13,10 +13,18 @@ $(document).ready(function()
         $(this).parents('tr').next().after($(this).parents('tr'));
         sort();
     });
+
+    $('.carousel-inner .item .btn-resize').click(function()
+    {
+        var $this = $(this);
+        $this.find('i').toggleClass('icon-resize-full').toggleClass('icon-resize-small');
+        $this.closest('.item').toggleClass('show');
+    });
     
 });
 
 function sort()
 {
     $('input[name*=order]').each(function(index, obj) { $(this).val(index + 1); });
+    messager.warning(v.sortTip);
 }
