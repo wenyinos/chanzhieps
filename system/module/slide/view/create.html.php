@@ -29,8 +29,8 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
           <td class='w-p40'><?php echo html::input('title', '', "class='form-control'");?></td>
           <td>
             <div class='colorplate clearfix'>
-              <div class='input-group color active' data='<?php echo $config->themeSetting->primaryColor;?>'>
-                <?php echo html::input('titleColor', $config->themeSetting->primaryColor, "class='form-control input-color text-latin' placeholder='" . $lang->slide->colorTip . "'");?>
+              <div class='input-group color active' data='#FFF'>
+                <?php echo html::input('titleColor', '#FFF', "class='form-control input-color text-latin' placeholder='" . $lang->slide->colorTip . "'");?>
                 <span class='input-group-btn'>
                   <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'> <i class='icon icon-question'></i> <span class='caret'></span></button>
                   <div class='dropdown-menu colors'>
@@ -53,8 +53,8 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
           <th><?php echo $lang->slide->background->color;?></th>
           <td colspan='2'>
             <div class='colorplate clearfix'>
-              <div class='input-group color active' data='<?php echo $config->themeSetting->primaryColor;?>'>
-                <?php echo html::input('backgroundColor', $config->themeSetting->primaryColor, "class='form-control input-color text-latin' placeholder='" . $lang->slide->colorTip . "'");?>
+              <div class='input-group color active' data='#114DAD'>
+                <?php echo html::input('backgroundColor', '#114DAD', "class='form-control input-color text-latin' placeholder='" . $lang->slide->colorTip . "'");?>
                 <span class='input-group-btn'>
                   <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
                     <i class='icon icon-question'></i> 

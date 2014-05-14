@@ -12,17 +12,19 @@
 ?>
 <?php $slides = $this->loadModel('slide')->getList();?>
 <?php 
-a($slides);
 if($slides):?>
 <div id='slide' class='carousel slide' data-ride='carousel'>
   <div class='carousel-inner'>
     <?php foreach($slides as $slide):?>
-    <div class='item' style="background:<?php echo $slide->backgroundColor?>">
-      <?php 
-      !empty($slide->imageUrl) ? print(html::a($slide->imageUrl, html::image($slide->image))) : print(html::image($slide->image));
-      ?>
+      <?php $url = empty($slide->imageUrl) ? '' : " data-url='" . $slide->imageUrl . "'";?>
+      <?php if ($slide->backgroundType == 'image'): ?>
+      <div class='item'<?php echo $url;?>>
+        <?php print(html::image($slide->image));?>
+      <?php else: ?>
+      <div class='item'<?php echo $url;?> style='<?php echo 'background-color: ' . $slide->backgroundColor . '; height: ' . $slide->height . 'px';?>'>
+      <?php endif ?>
       <div class='carousel-caption'>
-        <h2><?php echo $slide->title;?></h2>
+        <h2 style='color:<?php echo $slide->titleColor;?>'><?php echo $slide->title;?></h2>
         <div><?php echo $slide->summary;?></div>
         <?php
         foreach($slide->label as $key => $label):

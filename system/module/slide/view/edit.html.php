@@ -30,7 +30,7 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
           <td class='w-p40'><?php echo html::input('title', $slide->title, 'class="form-control"');?></td>
           <td>
             <div class='colorplate clearfix'>
-              <div class='input-group color active' data='<?php echo $config->themeSetting->primaryColor;?>'>
+              <div class='input-group color active' data='<?php echo $slide->titleColor;?>'>
                 <?php echo html::input('titleColor', $slide->titleColor, "class='form-control input-color text-latin' placeholder='" . $lang->slide->colorTip . "'");?>
                 <span class='input-group-btn'>
                   <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'> <i class='icon icon-question'></i> <span class='caret'></span></button>
@@ -54,7 +54,7 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
           <th><?php echo $lang->slide->background->color;?></th>
           <td colspan='2'>
             <div class='colorplate clearfix'>
-              <div class='input-group color active' data='<?php echo $config->themeSetting->primaryColor;?>'>
+              <div class='input-group color active' data='<?php echo $slide->backgroundColor;?>'>
                 <?php echo html::input('backgroundColor', $slide->backgroundColor, "class='form-control input-color text-latin' placeholder='" . $lang->slide->colorTip . "'");?>
                 <span class='input-group-btn'>
                   <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'> <i class='icon icon-question'></i> <span class='caret'></span></button>

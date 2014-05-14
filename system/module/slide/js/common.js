@@ -5,6 +5,7 @@ $(function()
     {
         var $this = $(this);
         var c = $this.attr('data');
+        if(!c) return;
         var cc = new color(c).contrast().hexStr();
 
         ($this.hasClass('input-group') ? $this.find('.input-group-btn .dropdown-toggle') : $this).css({'background': c, 'color': cc}).find('.caret').css('border-top-color', cc);

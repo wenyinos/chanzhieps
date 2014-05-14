@@ -81,6 +81,7 @@
 /* carousel */
 .carousel {border-radius: 4px;overflow: hidden;margin-bottom: 20px;}
 .carousel .item {background-color: transparent;}
+.carousel .item[data-url] {cursor: pointer;}
 .carousel-inner>.item, .carousel-inner>.item>a {text-align: center;}
 .carousel-inner>.item>img, .carousel-inner>.item>a>img {min-width: 100%; height: auto; max-height: 600px; max-width: 100%;}
 .carousel-caption {max-width: 550px; top:10%; left: 12%; bottom: 20px; text-align:left; text-shadow: 0 1px 1px rgba(0,0,0,.4);}

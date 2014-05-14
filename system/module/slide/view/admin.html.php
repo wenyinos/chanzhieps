@@ -23,7 +23,7 @@
       <thead>
         <tr class='text-center'>
           <th><?php echo $lang->slide->sort;?></th>
-          <th><?php echo $lang->slide->image;?></th>
+          <th><?php echo $lang->slide->background->type;?></th>
           <th><?php echo $lang->slide->title;?></th>
           <th><?php echo $lang->slide->summary;?></th>
           <th><?php echo $lang->slide->label;?></th>

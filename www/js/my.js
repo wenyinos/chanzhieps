@@ -28,6 +28,7 @@ $(document).ready(function()
     {
         $('#slide').carousel();
         $('#slide .item').first().addClass('active');
+        $('#slide .item[data-url]').click(function(){var url = $(this).data('url'); if(url && url.length) window.location.href = url;});
     }
 
     /* Fixed submenu position for browser which doesn't suppport relative postion in a table cell, like firefox. */
