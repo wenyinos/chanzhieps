@@ -544,7 +544,7 @@ class upgradeModel extends model
         {
             $slides[$key] = json_decode($slide->value);
             $slides[$key]->titleColor      = '#FFF';
-            $slides[$key]->imageUrl        = $slides[$key]->label ? '' : $slides[$key]->url;
+            $slides[$key]->mainLink        = $slides[$key]->label ? '' : $slides[$key]->url;
             $slides[$key]->backgroundType  = 'image';
             $slides[$key]->backgroundColor = '#114DAD';
             $slides[$key]->height          = '';

@@ -13,7 +13,7 @@ $lang->slide->common = '幻灯片';
 
 $lang->slide->title      = '标题';
 $lang->slide->image      = '图片';
-$lang->slide->imageUrl   = '链接';
+$lang->slide->mainLink   = '链接';
 $lang->slide->summary    = '摘要';
 $lang->slide->label      = '按钮文字';
 $lang->slide->button     = '按钮';

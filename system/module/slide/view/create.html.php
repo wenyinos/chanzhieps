@@ -42,8 +42,8 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
           </td>
         </tr>
         <tr>
-          <th><?php echo $lang->slide->imageUrl;?></th>
-          <td><?php echo html::input('imageUrl', '', "class='form-control'");?></td><td colspan='2'></td>
+          <th><?php echo $lang->slide->mainLink;?></th>
+          <td><?php echo html::input('mainLink', '', "class='form-control'");?></td><td colspan='2'></td>
         </tr>
         <tr>
           <th><?php echo $lang->slide->background->type;?></th>

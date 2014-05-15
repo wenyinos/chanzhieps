@@ -43,8 +43,8 @@
                       <span class='label'><?php echo $lang->slide->height . ': ' . $slide->height;?>px</span> &nbsp; &nbsp; 
                       <?php endif ?>
                       <button type='button' class='btn btn-pure btn-resize'><i class='icon-resize-full'></i></button>
-                      <?php if ($slide->imageUrl): ?>
-                        <?php echo html::a($slide->imageUrl, "<i class='icon-external-link'></i>", "class='btn btn-pure' title='{$lang->slide->imageUrl}' target='_blank'") ?>
+                      <?php if ($slide->mainLink): ?>
+                        <?php echo html::a($slide->mainLink, "<i class='icon-external-link'></i>", "class='btn btn-pure' title='{$lang->slide->mainLink}' target='_blank'") ?>
                       <?php endif ?>
                       <?php
                       echo html::a($this->createLink('slide', 'edit', "id=$slide->id"), "<i class='icon-pencil'></i>", "class='btn btn-pure' title='{$lang->edit}'");

@@ -17,7 +17,7 @@ if($slides):?>
   <div class='carousel-inner'>
     <?php $height = 0;?>
     <?php foreach($slides as $slide):?>
-      <?php $url = empty($slide->imageUrl) ? '' : " data-url='" . $slide->imageUrl . "'";?>
+      <?php $url = empty($slide->mainLink) ? '' : " data-url='" . $slide->mainLink . "'";?>
       <?php if($height == 0 and $slide->height) $height = $slide->height;?>
       <?php if ($slide->backgroundType == 'image'): ?>
       <div class='item'<?php echo $url;?>>

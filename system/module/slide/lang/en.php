@@ -13,7 +13,7 @@ $lang->slide->common = 'Slides';
 
 $lang->slide->title      = 'Title';
 $lang->slide->image      = 'Image';
-$lang->slide->imageUrl   = 'Url';
+$lang->slide->mainLink   = 'Url';
 $lang->slide->summary    = 'Summary';
 $lang->slide->label      = 'Label';
 $lang->slide->button     = 'Button';
