@@ -39,6 +39,7 @@ $lang->product->views      = '浏览';
 $lang->product->stick      = '置顶级别';
 $lang->product->order      = '排序';
 $lang->product->attribute  = '产品属性';
+$lang->product->custom     = '自定义属性';
 $lang->product->sales      = '产品定价';
 
 $lang->product->currencyIcon = "<i class='icon-yen'> </i>";
@@ -59,3 +60,7 @@ $lang->product->directory = '返回目录';
 
 $lang->product->statusList['normal']  = '上架';
 $lang->product->statusList['offline'] = '下架';
+
+$lang->product->placeholder = new stdclass();
+$lang->product->placeholder->label = "属性名称：如颜色、价格等";
+$lang->product->placeholder->value = "属性值：如红色、￥1000等";

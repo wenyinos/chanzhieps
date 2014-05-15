@@ -61,7 +61,11 @@ class slideModel extends model
      */
     public function create($image)
     {
-        $slide = fixer::input('post')->stripTags('summary', $this->config->allowedTags->front)->add('image', $image)->get();
+        $slide = fixer::input('post')
+            ->stripTags('summary', $this->config->allowedTags->front)
+            ->add('image', $image)
+            ->remove('files')
+            ->get();
 
         $setting = new stdclass();
         $setting->owner   = 'system';

@@ -77,7 +77,7 @@ class userModel extends model
      */
     public function getBasicInfo($users)
     {
-        $users = $this->dao->select('account, realname, `join`, last, visits')->from(TABLE_USER)->where('account')->in($users)->fetchAll('account', false);
+        $users = $this->dao->select('account, admin, realname, `join`, last, visits')->from(TABLE_USER)->where('account')->in($users)->fetchAll('account', false);
         if(!$users) return array();
 
         foreach($users as $account => $user)

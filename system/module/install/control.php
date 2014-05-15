@@ -37,6 +37,20 @@ class install extends control
         $this->view->title = $this->lang->install->welcome;
         $this->display();
     }
+        
+    /**
+     * Get latest release.
+     * 
+     * @access public
+     * @return void
+     */
+    public function getLatestRelease()
+    {
+        $latestRelease = $this->install->getLatestRelease();
+        if($latestRelease) $this->send($latestRelease);
+
+        $this->send(array('result' => false));
+    }
 
     /**
      * Checking the system.

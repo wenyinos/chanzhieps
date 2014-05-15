@@ -146,7 +146,6 @@ class replyModel extends model
         $replyID = $this->dao->lastInsertID();                     // Get reply id.
 
         $this->loadModel('file')->updateObjectID($this->post->uid, $replyID, 'reply');
-        $this->file->fileManager($this->post->content, $replyID, 'reply');
 
         if(!dao::isError())
         {
@@ -191,7 +190,6 @@ class replyModel extends model
             ->exec();
 
         $this->loadModel('file')->updateObjectID($this->post->uid, $replyID, 'reply');
-        $this->file->fileManager($this->post->content, $replyID, 'reply');
 
         if(!dao::isError())
         {

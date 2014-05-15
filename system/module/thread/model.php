@@ -158,7 +158,6 @@ class threadModel extends model
         $threadID = $this->dao->lastInsertID();
 
         $this->loadModel('file')->updateObjectID($this->post->uid, $threadID, 'thread');
-        $this->file->fileManager($this->post->content, $threadID, 'thread');
 
         if(!dao::isError())
         {
@@ -221,7 +220,6 @@ class threadModel extends model
             ->exec();
 
         $this->loadModel('file')->updateObjectID($this->post->uid, $threadID, 'thread');
-        $this->file->fileManager($this->post->content, $threadID, 'thread');
 
         if(dao::isError()) return false;
 
@@ -394,11 +392,14 @@ class threadModel extends model
      */
     public function printSpeaker($speaker)
     {
+        $this->app->loadLang('forum');
         if(isset($speaker->join)) $speaker->join = substr($speaker->join, 0, 10);
         if(isset($speaker->last)) $speaker->last = substr($speaker->last, 0, 10);
+        $moderatorClass = ($speaker->admin == 'super' or $speaker->isModerator) ? "text-danger" : '';
+        $moderatorTitle = ($speaker->admin == 'super' or $speaker->isModerator) ? "title='{$this->lang->forum->owners}'" : '';
 
         echo  <<<EOT
-        <strong class='thread-author'><i class='icon-user'></i> {$speaker->realname}</strong>
+        <strong class='thread-author {$moderatorClass}' {$moderatorTitle}><i class='icon-user'></i> {$speaker->realname}</strong>
         <ul class='list-unstyled'>
           <li><small>{$this->lang->user->visits}: </small><span>{$speaker->visits}</span></li>
           <li><small>{$this->lang->user->join}: </small><span>{$speaker->join}</span></li>

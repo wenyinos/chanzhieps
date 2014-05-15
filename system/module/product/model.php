@@ -41,6 +41,9 @@ class productModel extends model
         foreach($product->categories as $category) $path .= $category->path;
         $product->path = explode(',', trim($path, ','));
 
+        /* Get product attributes. */
+        $product->attributes = $this->getAttributesByID($productID);
+
         /* Get it's files. */
         $product->files = $this->loadModel('file')->getByObject('product', $productID);
 
@@ -52,6 +55,21 @@ class productModel extends model
          
         return $product;
     }   
+
+    /**
+     * Get attributes by product id. 
+     * 
+     * @param  int    $productID 
+     * @access public
+     * @return void
+     */
+    public function getAttributesByID($productID)
+    {
+        return $this->dao->select('*')->from(TABLE_PRODUCT_CUSTOM)
+            ->where('product')->eq($productID)
+            ->orderBy('`order`')
+            ->fetchAll('order');
+    }
 
     /** 
      * Get product list.
@@ -239,15 +257,17 @@ class productModel extends model
         $product->keywords = seo::unify($product->keywords, ',');
 
         $this->dao->insert(TABLE_PRODUCT)
-            ->data($product, $skip = 'categories,uid')
+            ->data($product, $skip = 'categories,uid,label,value')
             ->autoCheck()
             ->batchCheck($this->config->product->require->create, 'notempty')
             ->checkIF($product->mall, 'mall', 'URL')
             ->exec();
         $productID = $this->dao->lastInsertID();
 
+        if(!$this->saveAttributes($productID)) return false;
+
         $this->loadModel('file')->updateObjectID($this->post->uid, $productID, 'product');
-        $this->file->fileManager($this->post->content, $productID, 'product');
+        $this->file->copyFromContent($this->post->content, $productID, 'product');
 
         if(dao::isError()) return false;
 
@@ -279,21 +299,48 @@ class productModel extends model
         $product->keywords = seo::unify($product->keywords, ',');
 
         $this->dao->update(TABLE_PRODUCT)
-            ->data($product, $skip = 'categories,uid')
+            ->data($product, $skip = 'categories,uid,label,value')
             ->autoCheck()
             ->batchCheck($this->config->product->require->edit, 'notempty')
             ->checkIF($product->mall, 'mall', 'URL')
             ->where('id')->eq($productID)
             ->exec();
 
+        if(!$this->saveAttributes($productID)) return false;
+
         $this->loadModel('file')->updateObjectID($this->post->uid, $productID, 'product');
-        $this->file->fileManager($this->post->content, $productID, 'product');
+        $this->file->copyFromContent($this->post->content, $productID, 'product');
 
         if(dao::isError()) return false;
 
         $this->loadModel('tag')->save($product->keywords);
         $this->processCategories($productID, $this->post->categories);
 
+        return !dao::isError();
+    }
+
+    /**
+     * Save one product's attributes.
+     * 
+     * @param  int    $productID 
+     * @access public
+     * @return void
+     */
+    public function saveAttributes($productID)
+    {
+        $lables = $this->post->label;
+        $values = $this->post->value;
+
+        $data = new stdclass();
+        $data->product = $productID;
+
+        foreach($lables as $key => $label)
+        {
+            $data->label = $label;
+            $data->order = $key;
+            $data->value = isset($values[$key]) ? $values[$key] : '';
+            $this->dao->replace(TABLE_PRODUCT_CUSTOM)->data($data)->exec();
+        }
         return !dao::isError();
     }
         
@@ -311,6 +358,7 @@ class productModel extends model
 
         $this->dao->delete()->from(TABLE_RELATION)->where('id')->eq($productID)->andWhere('type')->eq('product')->exec();
         $this->dao->delete()->from(TABLE_PRODUCT)->where('id')->eq($productID)->exec();
+        $this->dao->delete()->from(TABLE_PRODUCT_CUSTOM)->where('product')->eq($productID)->exec();
 
         return !dao::isError();
     }

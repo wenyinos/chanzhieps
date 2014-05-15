@@ -15,7 +15,7 @@ if(!function_exists('getWebRoot')){function getWebRoot(){}}
 
 /* The basic settings. */
 $config = new config();
-$config->version     = '2.2.1';             // The version number, don't change.
+$config->version     = '2.3';             // The version number, don't change.
 $config->encoding    = 'UTF-8';           // The encoding.
 $config->cookiePath  = '/';               // The path of cookies.
 $config->webRoot     = getWebRoot();      // The web root.
@@ -93,28 +93,29 @@ if(file_exists($domainConfig)) include $domainConfig;
 if(file_exists($modeConfig))   include $modeConfig;
 
 /* The tables. */
-define('TABLE_SITE',        $config->db->prefix . 'site');
-define('TABLE_CONFIG',      $config->db->prefix . 'config');
-define('TABLE_CATEGORY',    $config->db->prefix . 'category');
-define('TABLE_RELATION',    $config->db->prefix . 'relation');
-define('TABLE_PRODUCT',     $config->db->prefix . 'product');
-define('TABLE_ARTICLE',     $config->db->prefix . 'article');
-define('TABLE_BLOCK',       $config->db->prefix . 'block');
-define('TABLE_TAG',         $config->db->prefix . 'tag');
-define('TABLE_BOOK',        $config->db->prefix . 'book');
-define('TABLE_LAYOUT',      $config->db->prefix . 'layout');
-define('TABLE_COMMENT',     $config->db->prefix . 'comment');
-define('TABLE_THREAD',      $config->db->prefix . 'thread');
-define('TABLE_REPLY',       $config->db->prefix . 'reply');
-define('TABLE_USER',        $config->db->prefix . 'user');
-define('TABLE_OAUTH',       $config->db->prefix . 'oauth');
-define('TABLE_GROUP',       $config->db->prefix . 'group');
-define('TABLE_FILE',        $config->db->prefix . 'file');
-define('TABLE_DOWN',        $config->db->prefix . 'down');
-define('TABLE_MESSAGE',     $config->db->prefix . 'message');
-define('TABLE_WX_PUBLIC',   $config->db->prefix . 'wx_public');
-define('TABLE_WX_MESSAGE',  $config->db->prefix . 'wx_message');
-define('TABLE_WX_RESPONSE', $config->db->prefix . 'wx_response');
+define('TABLE_SITE',           $config->db->prefix . 'site');
+define('TABLE_CONFIG',         $config->db->prefix . 'config');
+define('TABLE_CATEGORY',       $config->db->prefix . 'category');
+define('TABLE_RELATION',       $config->db->prefix . 'relation');
+define('TABLE_PRODUCT',        $config->db->prefix . 'product');
+define('TABLE_PRODUCT_CUSTOM', $config->db->prefix . 'product_custom');
+define('TABLE_ARTICLE',        $config->db->prefix . 'article');
+define('TABLE_BLOCK',          $config->db->prefix . 'block');
+define('TABLE_TAG',            $config->db->prefix . 'tag');
+define('TABLE_BOOK',           $config->db->prefix . 'book');
+define('TABLE_LAYOUT',         $config->db->prefix . 'layout');
+define('TABLE_COMMENT',        $config->db->prefix . 'comment');
+define('TABLE_THREAD',         $config->db->prefix . 'thread');
+define('TABLE_REPLY',          $config->db->prefix . 'reply');
+define('TABLE_USER',           $config->db->prefix . 'user');
+define('TABLE_OAUTH',          $config->db->prefix . 'oauth');
+define('TABLE_GROUP',          $config->db->prefix . 'group');
+define('TABLE_FILE',           $config->db->prefix . 'file');
+define('TABLE_DOWN',           $config->db->prefix . 'down');
+define('TABLE_MESSAGE',        $config->db->prefix . 'message');
+define('TABLE_WX_PUBLIC',      $config->db->prefix . 'wx_public');
+define('TABLE_WX_MESSAGE',     $config->db->prefix . 'wx_message');
+define('TABLE_WX_RESPONSE',    $config->db->prefix . 'wx_response');
 
 /* Include extension config files. */
 $extConfigFiles = glob($configRoot . 'ext' . DS . '*.php');

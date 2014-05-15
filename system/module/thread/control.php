@@ -133,6 +133,11 @@ class thread extends control
 
         /* Get all speakers. */
         $speakers = $this->thread->getSpeakers($thread, $replies);
+        $speakers = $this->loadModel('user')->getBasicInfo($speakers);
+        foreach($speakers as $account => $speaker)
+        {
+            $speaker->isModerator = strpos(",{$board->moderators},", ",{$account},") !== false;       
+        }
 
         /* Set the views counter + 1; */
         $this->thread->plusCounter($threadID);
@@ -142,7 +147,7 @@ class thread extends control
         $this->view->thread   = $thread;
         $this->view->replies  = $replies;
         $this->view->pager    = $pager;
-        $this->view->speakers = $this->loadModel('user')->getBasicInfo($speakers);
+        $this->view->speakers = $speakers;
 
         $this->display();
     }

@@ -14,4 +14,24 @@ $(document).ready(function()
         });
         if(!hasActive) $('.nav-product-0').addClass('active');
     }
+    
+    key = v.key;
+    $(document).on('click', 'i.icon-plus', function()
+    {
+        $(this).parents('.row').after($('.row-custom').html().replace(/key/g, key));
+        key ++;
+    })
+
+    $(document).on('click', 'i.icon-minus', function()
+    {
+        if($(this).parents('td').find('.row').size() > 1)
+        {
+            $(this).parents('.row').remove();
+        }
+        else
+        {
+            $(this).parents('.row').find('input').val('');
+        }
+        key ++;
+    })
 })

@@ -13,6 +13,7 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
+<?php js::set('key', count($product->attributes));?>
 <div class='panel'>
   <div class='panel-heading'><?php echo $lang->product->edit;?></div>
   <div class='panel-body'>
@@ -89,7 +90,7 @@
         </tr>
         <tr>
           <td colspan='2'>
-            <div class='row'>
+            <div class='row form-group'>
               <div class='col-sm-2 col-md-1'><?php echo $lang->product->price;?></div>
               <div class='col-sm-4 col-md-5'><?php echo html::input('price', $product->price, "class='form-control'");?></div>
               <div class='col-sm-2 col-md-1'><?php echo $lang->product->promotion;?></div>
@@ -98,11 +99,41 @@
           </td>
         </tr>
         <tr>
+          <th><?php echo $lang->product->custom;?></th>
+          <td colspan='2'>
+            <?php
+            $key = 0;
+            foreach($product->attributes as $attribute):
+            ?>
+            <div class='row form-group'>
+              <div class="col-xs-3"> <?php echo html::input("label[{$key}]", $attribute->label, "class='form-control' placeholder='{$lang->product->placeholder->label}'" )?></div>
+              <div class="col-xs-8"> <?php echo html::input("value[{$key}]", $attribute->value, "class='form-control' placeholder='{$lang->product->placeholder->value}'" )?></div>
+              <div class="col-xs-1">
+                <?php echo html::a('javascript:;', "<i class='icon-plus'></i>");?>
+                <?php echo html::a('javascript:;', "<i class='icon-minus'></i>");?>
+              </div>
+            </div>
+            <?php $key ++; endforeach;?>
+          </td>
+        </tr>
+        <tr>
           <th></th>
           <td colspan='2'><?php echo html::submitButton();?></td>
         </tr>
       </table>
     </form>
+
+    <div class='hide row-custom'>
+      <div class='row form-group'>
+        <div class="col-xs-3"> <?php echo html::input('label[key]', '', "class='form-control' placeholder='{$lang->product->placeholder->label}'" )?></div>
+        <div class="col-xs-8"> <?php echo html::input('value[key]', '', "class='form-control' placeholder='{$lang->product->placeholder->value}'" )?></div>
+        <div class="col-xs-1">
+          <?php echo html::a('javascript:;', "<i class='icon-plus'></i>");?>
+          <?php echo html::a('javascript:;', "<i class='icon-minus'></i>");?>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>

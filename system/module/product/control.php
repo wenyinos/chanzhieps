@@ -153,6 +153,16 @@ class product extends control
 
         $product = $this->product->getByID($productID);
 
+        if(empty($product->attributes))
+        {
+            $attribute = new stdclass();
+            $attribute->order = 0;
+            $attribute->label = '';
+            $attribute->value = '';
+
+            $product->attributes = array($attribute);
+        }
+
         $this->view->title      = $this->lang->product->edit;
         $this->view->product    = $product;
         $this->view->categories = $categories;

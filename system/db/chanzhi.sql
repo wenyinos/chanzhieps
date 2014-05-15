@@ -225,6 +225,17 @@ CREATE TABLE IF NOT EXISTS `eps_reply` (
   KEY `author` (`author`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `eps_product_custom` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `product` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `label` varchar(100) NOT NULL,
+  `value` varchar(200) NOT NULL,
+  `order` smallint(5) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `label` (`product`,`label`),
+  KEY `product` (`product`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 -- DROP TABLE IF EXISTS `eps_tag`;
 CREATE TABLE IF NOT EXISTS `eps_tag` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
@@ -345,7 +356,7 @@ CREATE TABLE `eps_wx_message` (
 -- Insert data into `eps_layout`;
 INSERT INTO `eps_layout` (`page`, `region`, `blocks`) VALUES
 ('index_index', 'header', '[{"id":"5","grid":"","titleless":0,"borderless":0}]'),
-('index_index', 'middle', '[{"id":"10","grid":4,"titleless":0,"borderless":0},{"id":"1","grid":4,"titleless":0,"borderless":0},{"id":"9","grid":4,"titleless":0,"borderless":0}]'),
+('index_index', 'middle', '[{"id":3,"grid":12,"titleless":0,"borderless":0},{"id":"10","grid":4,"titleless":0,"borderless":0},{"id":"1","grid":4,"titleless":0,"borderless":0},{"id":"9","grid":4,"titleless":0,"borderless":0}]'),
 ('index_index', 'footer', '[{"id":"11","grid":"","titleless":0,"borderless":0}]'),
 ('article_browse', 'side', '[{"id":"6","grid":"","titleless":0,"borderless":0},{"id":"9","grid":"","titleless":0,"borderless":0}]'),
 ('article_view', 'side', '[{"id":"6","grid":"","titleless":0,"borderless":0},{"id":"9","grid":"","titleless":0,"borderless":0}]'),
