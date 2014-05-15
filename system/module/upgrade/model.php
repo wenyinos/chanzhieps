@@ -546,9 +546,12 @@ class upgradeModel extends model
             $slides[$key]->titleColor     = '#FFF';
             $slides[$key]->imageUrl       = $slides[$key]->label ? '' : $slides[$key]->url;
             $slides[$key]->backgroundType = 'image';
+            $slides[$key]->height         = '';
             $slides[$key]->label          = array($slides[$key]->label);
             $slides[$key]->buttonUrl      = array($slides[$key]->url);
-            $slides[$key]->buttonClass    = array('0' => primary);
+            $slides[$key]->buttonClass    = array('0' => 'primary');
+
+            unset($slides[$key]->url);
 
             $this->dao->update(TABLE_CONFIG)
                 ->set('value')->eq(helper::jsonEncode($slides[$key]))
@@ -568,6 +571,27 @@ class upgradeModel extends model
     public function upgradeStartLayouts()
     {
         $this->dao->update(TABLE_LAYOUT)->set('region')->eq('start')->where('page')->eq('all')->andWhere('region')->eq('header')->exec();
+
+        $blocks = array();
+        $blocks['en']    = array('type' => 'header', 'title' => 'Header',   'content' => '');
+        $blocks['zh-cn'] = array('type' => 'header', 'title' => '网站头部', 'content' => '');
+        $blocks['zh-tw'] = array('type' => 'header', 'title' => '網站頭部', 'content' => '');
+
+        $block = $blocks[$this->config->site->lang];
+
+        $this->dao->insert(TABLE_BLOCK)->data($block)->exec();
+
+        $blockID = $this->dao->lastInsertID();
+
+        $headerBlock = array();
+        $headerBlock['id']         = $blockID;
+        $headerBlock['grid']       = '';
+        $headerBlock['titleless']  = 0;
+        $headerBlock['borderless'] = 0;
+        $headerBlocks[] = $headerBlock;
+
+        $this->dao->insert(TABLE_LAYOUT)->set('page')->eq('all')->set('region')->eq('header')->set('blocks')->eq(json_encode($headerBlocks))->exec();
+
         return !dao::isError();
     }
 
