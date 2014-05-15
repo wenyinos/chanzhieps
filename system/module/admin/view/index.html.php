@@ -11,7 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<?php if(!$ignoreUpgrade) js::import('http://www.eps.com/api/latestversion.php?version=' . $this->config->version);?>
+<?php if(!$ignoreUpgrade) js::import('http://api.chanzhi.org/latestversion.php?version=' . $this->config->version);?>
 <div class='container' id='shortcutBox'>
 
   <?php if(strpos($this->server->php_self, '/admin.php') !== false && empty($this->config->global->ignoreAdminEntry)):?>
