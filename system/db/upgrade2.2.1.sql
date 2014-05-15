@@ -8,3 +8,5 @@ CREATE TABLE IF NOT EXISTS `eps_product_custom` (
   UNIQUE KEY `label` (`product`,`label`),
   KEY `product` (`product`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+ALTER TABLE `eps_article` CHANGE `original` `original` enum('0','1','2') NOT NULL;

@@ -62,6 +62,7 @@ $lang->block->typeList['contact']         = '联系我们';
 $lang->block->typeList['about']           = '公司简介';
 $lang->block->typeList['links']           = '友情链接';
 $lang->block->typeList['slide']           = '幻灯片';
+$lang->block->typeList['header']          = '网站头部';
 
 $lang->block->typeGroups = array();
 $lang->block->typeGroups['html'] = 'input';
@@ -82,6 +83,7 @@ $lang->block->typeGroups['contact'] = 'system';
 $lang->block->typeGroups['about']   = 'system';
 $lang->block->typeGroups['links']   = 'system';
 $lang->block->typeGroups['slide']   = 'system';
+$lang->block->typeGroups['header']  = 'system';
 
 $lang->block->category = new stdclass();
 $lang->block->category->showChildren = '显示子分类';
@@ -116,6 +118,7 @@ $lang->block->pages['page_view']      = '单页';
 
 /* page layout list. */
 $lang->block->regions = new stdclass();
+$lang->block->regions->all['start']  = '开始部分';
 $lang->block->regions->all['header'] = '头部';
 $lang->block->regions->all['footer'] = '底部';
 $lang->block->regions->all['end']    = '结束部分';

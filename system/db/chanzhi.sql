@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS `eps_article` (
   `keywords` varchar(150) NOT NULL,
   `summary` text NOT NULL,
   `content` text NOT NULL,
-  `original` enum('1','0') NOT NULL,
+  `original` enum('0','1','2') NOT NULL,
   `copySite` varchar(60) NOT NULL,
   `copyURL` varchar(255) NOT NULL,
   `author` varchar(60) NOT NULL,
@@ -355,6 +355,7 @@ CREATE TABLE `eps_wx_message` (
 
 -- Insert data into `eps_layout`;
 INSERT INTO `eps_layout` (`page`, `region`, `blocks`) VALUES
+('all', 'header', '[{"id":"12","grid":"","titleless":0,"borderless":0}]'),
 ('index_index', 'header', '[{"id":"5","grid":"","titleless":0,"borderless":0}]'),
 ('index_index', 'middle', '[{"id":3,"grid":12,"titleless":0,"borderless":0},{"id":"10","grid":4,"titleless":0,"borderless":0},{"id":"1","grid":4,"titleless":0,"borderless":0},{"id":"9","grid":4,"titleless":0,"borderless":0}]'),
 ('index_index', 'footer', '[{"id":"11","grid":"","titleless":0,"borderless":0}]'),
