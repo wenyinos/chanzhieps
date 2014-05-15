@@ -141,6 +141,7 @@ class install extends control
      */
     public function step5()
     {
+        $this->loadModel('setting')->setItems('system.common.site', array('lang' => $_COOKIE['lang']));
         session_destroy();
         $this->view->title = $this->lang->install->success;
         $this->display();
