@@ -543,13 +543,14 @@ class upgradeModel extends model
         foreach($slides as $key => $slide)
         {
             $slides[$key] = json_decode($slide->value);
-            $slides[$key]->titleColor     = '#FFF';
-            $slides[$key]->imageUrl       = $slides[$key]->label ? '' : $slides[$key]->url;
-            $slides[$key]->backgroundType = 'image';
-            $slides[$key]->height         = '';
-            $slides[$key]->label          = array($slides[$key]->label);
-            $slides[$key]->buttonUrl      = array($slides[$key]->url);
-            $slides[$key]->buttonClass    = array('0' => 'primary');
+            $slides[$key]->titleColor      = '#FFF';
+            $slides[$key]->imageUrl        = $slides[$key]->label ? '' : $slides[$key]->url;
+            $slides[$key]->backgroundType  = 'image';
+            $slides[$key]->backgroundColor = '#114DAD';
+            $slides[$key]->height          = '';
+            $slides[$key]->label           = array($slides[$key]->label);
+            $slides[$key]->buttonClass     = array('0' => 'primary');
+            $slides[$key]->buttonUrl       = array($slides[$key]->url);
 
             unset($slides[$key]->url);
 
