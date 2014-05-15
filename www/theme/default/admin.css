@@ -10,7 +10,7 @@
  */
 
 /* global settings. */
-body {padding-top:70px; padding-bottom:70px;background: #fff;}
+body {padding-top:60px; padding-bottom:60px;background: #fff;}
 
 /* body-content */
 #body-content {margin: 0;}
@@ -18,7 +18,7 @@ body {padding-top:70px; padding-bottom:70px;background: #fff;}
 
 /* left menu. */
 .leftmenu {box-shadow:0px 2px 1px rgba(0,0,0,0.15);width: 15%;border-radius: 4px}
-.leftmenu.affix {top:70px;}
+.leftmenu.affix {top:60px;}
 .leftmenu.affix-bottom {position:absolute; top:auto; bottom:270px;}
 
 /* panel */
@@ -57,23 +57,23 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
 /* navbar */
 #mainNavbar .navbar-collapse .navbar-nav.navbar-right:last-child {margin-right: 0;}
 @media (max-width: 767px) {
-  #mainNavbar .navbar-collapse .navbar-nav > li > a {padding: 15px 20px;}
+  #mainNavbar .navbar-collapse .navbar-nav > li > a {padding-left: 15px; padding-right: 15px;}
 }
 #navbarSwitcher {display: none;}
 @media screen and (min-width:768px) and (max-width:1210px)
 {
-  #mainNavbar .navbar-collapse .navbar-nav > li > a {padding: 15px 12px;transition:all 0.5s;}
-  #mainNavbar .mainNavbarNav {height: 50px;overflow:hidden;}
+  #mainNavbar .navbar-collapse .navbar-nav > li > a {padding-left: 12px; padding-right: 12px; transition:all 0.5s;}
+  #mainNavbar .mainNavbarNav {height: 40px;overflow:hidden;}
   #navbarSwitcher {display: block;}
   #mainNavbar .navbar-collapse .navbar-nav > li.simple-mode-b > a {width: 0;padding: 0;opacity: 0}
-  #mainNavbar .navbar-collapse .navbar-nav > li.simple-mode-a > a {width: inherit;padding: 15px 12px;opacity: 1}
+  #mainNavbar .navbar-collapse .navbar-nav > li.simple-mode-a > a {width: inherit; padding-left: 12px; padding-right: 12px; opacity: 1}
   #mainNavbar.navbar-simple .navbar-collapse .navbar-nav > li.simple-mode-a > a {width: 0;padding: 0;opacity: 0}
   #mainNavbar.navbar-simple .navbar-collapse .navbar-nav > li.simple-mode-b > a {width: inherit;padding: 15px 12px;opacity: 1}
   #mainNavbar.navbar-simple #navbarSwitcher .icon-chevron-sign-right:before {content: '\f137'}
 }
 @media screen and (min-width:768px) and (max-width:991px)
 {
-  #mainNavbar.navbar-simple .navbar-collapse .navbar-nav > li.simple-mode-b > a,#mainNavbar .navbar-collapse .navbar-nav > li.simple-mode-a > a {padding: 15px 8px;}
-  #mainNavbar .navbar-nav.navbar-right > li > a {padding: 15px 4px;font-size: 12px;}
-  #navbarSwitcher a {padding: 15px 5px;}
+  #mainNavbar.navbar-simple .navbar-collapse .navbar-nav > li.simple-mode-b > a,#mainNavbar .navbar-collapse .navbar-nav > li.simple-mode-a > a {padding-left: 8px; padding-right: 8px;}
+  #mainNavbar .navbar-nav.navbar-right > li > a {padding-left: 4px; padding-right: 4px; font-size: 12px;}
+  #navbarSwitcher a {padding: 12px 5px;}
 }
