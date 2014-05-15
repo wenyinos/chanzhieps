@@ -14,26 +14,6 @@
 class installModel extends model
 {
     /**
-     * Get latest version.
-     * 
-     * @access public
-     * @return void
-     */
-    public function getLatestRelease()
-    {
-        $latestRelease = file_get_contents($this->config->install->latestReleaseApi);
-        if($latestRelease !== false)
-        {
-            $latestRelease = json_decode($latestRelease);
-            if(version_compare($this->config->version, $latestRelease->version) >= 0) return false;
-            $latestRelease->result = true;
-            return $latestRelease;
-        }
-
-        return false;
-    }
-
-    /**
      * Get the php version.
      * 
      * @access public

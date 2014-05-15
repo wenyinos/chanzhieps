@@ -26,8 +26,8 @@
       <?php echo html::a($this->createLink('install', 'step1'), $lang->install->start, "class='btn btn-primary btn-install'");?>
       </div>
       <div id='choseVersion'>
-       <div class='lead'><?php echo $lang->install->newVersion;?></div>
-       <?php echo html::a($latestRelease->url, $lang->install->seeLatestRelease, "target='_blank' class='btn btn-primary link-version'");?>
+       <div class='lead'><?php echo $lang->newVersion;?></div>
+       <?php echo html::a('', $lang->seeLatestRelease, "target='_blank' class='btn btn-primary link-version'");?>
        <?php echo html::a($this->createLink('install', 'step1'), $lang->install->keepInstalling, "class='btn btn-info btn-install'");?>
       </div>
       <div id='checkRelease'>

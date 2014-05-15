@@ -23,6 +23,19 @@ class admin extends control
     }
 
     /**
+     * Ignore the upgrade notice.
+     *
+     * @access public
+     * return void
+     **/
+    public function ignoreUpgrade()
+    {
+        $result = $this->loadModel('setting')->setItems('system.common.global', array('ignoreUpgrade' => true));
+        if($result) $this->send(array('result' => 'success', 'locate' => inlink('index')));
+        $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+    }
+
+    /**
      * Ignore the admin entry warning.
      *
      * @access public

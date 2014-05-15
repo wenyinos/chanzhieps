@@ -2,7 +2,7 @@ $(document).ready(function()
 {
     $('#buttonBox').hide();
     $('#choseVersion').hide();
-    $.getJSON(createLink('install', 'getLatestRelease'),function(response)
+    $.getJSON(createLink('misc', 'getLatestRelease'),function(response)
     {
         if(response.result)
         {
