@@ -14,6 +14,7 @@ $lang->thread->common    = 'Thread';
 $lang->thread->id         = 'Id';
 $lang->thread->title      = 'Title';
 $lang->thread->author     = 'Autuor';
+$lang->thread->board      = 'Board';
 $lang->thread->content    = 'Content ';
 $lang->thread->file       = 'File ';
 $lang->thread->postedDate = 'Posted date';
@@ -29,6 +30,7 @@ $lang->thread->edit       = 'Edit';
 $lang->thread->status     = 'Status';
 $lang->thread->hide       = 'Hide';
 $lang->thread->show       = 'Show';
+$lang->thread->transfer   = 'Transfer';
 
 $lang->thread->sticks[0] = 'Don\'t stick';
 $lang->thread->sticks[1] = 'Stick on board';
