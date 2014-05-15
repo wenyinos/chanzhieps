@@ -23,9 +23,9 @@ $lang->back2Top = 'T<br/>O<br/>P';
 /* Lang items for xirang. */
 $lang->chanzhiEPS       = 'chanzhiEPS';
 $lang->chanzhiEPSx      = 'Chanzhi';
-$lang->agreement        = "Agree to the <a href='http://api.chanzhi.org/goto.php?item=licence' target='_blank'>《ChanzhiEPS Service Areement》</a>";
+$lang->agreement        = "Agree to the <a href='http://api.chanzhi.org/goto.php?item=licence' target='_blank'>《ChanzhiEPS Service Agreement》</a>";
 $lang->poweredBy        = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>{$lang->chanzhiEPSx} %s</a></span>";
-$lang->newVersion       = "New vesions:<a class='link-version' href='' target='_blank'>ChanzhiEPS<span id='version'></span></strong></a> available.";
+$lang->newVersion       = "New version:<a class='link-version' href='' target='_blank'>ChanzhiEPS<span id='version'></span></strong></a> available.";
 $lang->seeLatestRelease = 'See the latest release.';
 
 /* IE6 alert.  */
