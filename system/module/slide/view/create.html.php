@@ -108,8 +108,7 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
         </tr>
         <tr>
           <th><?php echo $lang->slide->summary;?></th>
-          <td colspan='2'><?php echo html::textarea('summary', '', "class='form-control' rows='6'");?></td>
-          <td><label class='text-info'><?php echo $lang->slide->suitableDesc;?></label></td>
+          <td colspan='3'><?php echo html::textarea('summary', '', "class='form-control' rows='6'");?></td>
         </tr>
         <tr>
           <td></td>

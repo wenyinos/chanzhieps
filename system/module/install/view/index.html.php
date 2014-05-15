@@ -19,7 +19,7 @@
       <div><?php echo $lang->install->desc;?></div>
     </div>
     <div class='modal-footer'>
-      <div class='text-center'>
+      <div class='text-center mgb-10'>
         <label class='checkbox-inline'><input type='checkbox' id='agree' checked /><?php echo $lang->agreement;?></label>
       </div>
       <div class='input-group'>

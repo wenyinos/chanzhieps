@@ -136,8 +136,7 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
         <?php endif ?>
         <tr>
           <th><?php echo $lang->slide->summary;?></th>
-          <td colspan='2'><?php echo html::textarea('summary', $slide->summary, 'class="form-control"');?></td>
-          <td><label class='text-info'><?php echo $lang->slide->suitableDesc;?></label></td>
+          <td colspan='3'><?php echo html::textarea('summary', $slide->summary, 'class="form-control"');?></td>
         </tr>
         <tr>
           <td></td>
