@@ -181,7 +181,7 @@ $lang->ui->menu->pages   = array('link' => 'Layout|block|pages|', 'alias' => 'se
 $lang->user = new stdclass();
 $lang->user->menu = new stdclass();
 $lang->user->menu->all    = 'All Users|user|admin|';
-$lang->user->menu->sins   = 'Weibo Users|user|admin|provider=sina';
+$lang->user->menu->sina   = 'Weibo Users|user|admin|provider=sina';
 $lang->user->menu->wechat = 'Wechat Users|user|admin|provider=wechat';
 $lang->user->menu->qq     = 'QQ Users|user|admin|provider=qq';
 
