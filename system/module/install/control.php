@@ -37,7 +37,7 @@ class install extends control
         $this->view->title = $this->lang->install->welcome;
         $this->display();
     }
-        
+
     /**
      * Checking the system.
      * 

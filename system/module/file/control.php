@@ -321,9 +321,9 @@ class file extends control
     public function fileManager()
     {
         $fileTypes = array('gif', 'jpg', 'jpeg', 'png', 'bmp');
-        $order = empty($_GET['order']) ? 'name' : strtolower($_GET['order']);
+        $order = $this->get->order ? strtolower($this->get->order) : 'name';
 
-        if (empty($_GET['path']))
+        if (empty($this->get->path))
         {
             $currentPath    = $this->file->savePath;
             $currentUrl     = $this->file->webPath;
@@ -332,9 +332,9 @@ class file extends control
         }
         else
         {
-            $currentPath    = $this->file->savePath . '/' . $_GET['path'];
-            $currentUrl     = $this->file->webPath . $_GET['path'];
-            $currentDirPath = $_GET['path'];
+            $currentPath    = $this->file->savePath . '/' . $this->get->path;
+            $currentUrl     = $this->file->webPath . $this->get->path;
+            $currentDirPath = $this->get->path;
             $moveupDirPath  = preg_replace('/(.*?)[^\/]+\/$/', '$1', $currentDirPath);
         }
 

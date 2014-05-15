@@ -532,7 +532,7 @@ class fileModel extends model
      * @param  int    $objectID 
      * @param  string $bojectType 
      * @access public
-     * @return void
+     * @return bool
      */
     public function copyFromContent($content, $objectID, $objectType)
     {
