@@ -27,7 +27,7 @@ js::set('pageID', $page->id);
       </footer>
     </div>
   </div>
-  <?php if(!empty($layouts)):?>
+  <?php if(!empty($layouts['page_view'])):?>
   <div class='col-md-3'><?php $this->block->printRegion($layouts, 'page_view', 'side');?></div>
   <?php endif;?>
 </div>

@@ -166,8 +166,13 @@ class thread extends control
         if($_POST)
         {
             if($this->thread->transfer($threadID, $thread->board, $this->post->targetBoard))
-            $this->send(array('result' =>'success', 'message' => $this->lang->thread->successTransfer, 'locate' => $this->server->http_referer));
-            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            {
+                $this->send(array('result' =>'success', 'message' => $this->lang->thread->successTransfer, 'locate' => $this->server->http_referer));
+            }
+            else
+            {
+                $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            }
         }
 
         $this->view->thread = $thread;

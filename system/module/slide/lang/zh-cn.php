@@ -29,15 +29,15 @@ $lang->slide->background->typeList = new stdclass();
 $lang->slide->background->typeList->image = '图片';
 $lang->slide->background->typeList->color = '纯色';
 
-$lang->slide->height     = '高度';
-$lang->slide->url        = '链接';
-$lang->slide->colorTip   = '十六进制颜色值';
-$lang->slide->colorPlates= '333333|000000|CA1407|45872B|148D00|F25D03|2286D2|D92958|A63268|04BFAD|D1270A|FF9400|299182|63731A|3D4DBE|7382D9|754FB9|F2E205|B1C502|364245|C05036|8A342A|E0DDA2|B3D465|EEEEEE|FFD0E5|D0FFFD|FFFF84|F4E6AE|E5E5E5|F1F1F1|FFFFFF';
-$lang->slide->buttonUrl  = '按钮链接';
-$lang->slide->buttonColor= '颜色';
+$lang->slide->height      = '高度';
+$lang->slide->url         = '链接';
+$lang->slide->colorTip    = '十六进制颜色值';
+$lang->slide->colorPlates = '333333|000000|CA1407|45872B|148D00|F25D03|2286D2|D92958|A63268|04BFAD|D1270A|FF9400|299182|63731A|3D4DBE|7382D9|754FB9|F2E205|B1C502|364245|C05036|8A342A|E0DDA2|B3D465|EEEEEE|FFD0E5|D0FFFD|FFFF84|F4E6AE|E5E5E5|F1F1F1|FFFFFF';
+$lang->slide->buttonUrl   = '按钮链接';
+$lang->slide->buttonColor = '颜色';
 
 $lang->slide->sort     = '排序';
-$lang->slide->sortTip  = '排序已更改。请点击 “保存排序” 按钮来应用更改。';
+$lang->slide->sortTip  = '移动幻灯片后，请点击 “保存排序” 按保存。';
 $lang->slide->saveSort = '保存排序';
 $lang->slide->admin    = '幻灯片设置';
 $lang->slide->create   = '添加幻灯片';

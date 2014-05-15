@@ -29,15 +29,15 @@ $lang->slide->background->typeList = new stdclass();
 $lang->slide->background->typeList->image = 'Image';
 $lang->slide->background->typeList->color = 'Color';
 
-$lang->slide->height     = 'Height';
-$lang->slide->url        = 'URL';
-$lang->slide->colorTip   = 'HEX color';
-$lang->slide->colorPlates= '333333|000000|CA1407|45872B|148D00|F25D03|2286D2|D92958|A63268|04BFAD|D1270A|FF9400|299182|63731A|3D4DBE|7382D9|754FB9|F2E205|B1C502|364245|C05036|8A342A|E0DDA2|B3D465|EEEEEE|FFD0E5|D0FFFD|FFFF84|F4E6AE|E5E5E5|F1F1F1|FFFFFF';
-$lang->slide->buttonUrl  = 'Button Url';
-$lang->slide->buttonColor= 'Button Color';
+$lang->slide->height      = 'Height';
+$lang->slide->url         = 'URL';
+$lang->slide->colorTip    = 'HEX color';
+$lang->slide->colorPlates = '333333|000000|CA1407|45872B|148D00|F25D03|2286D2|D92958|A63268|04BFAD|D1270A|FF9400|299182|63731A|3D4DBE|7382D9|754FB9|F2E205|B1C502|364245|C05036|8A342A|E0DDA2|B3D465|EEEEEE|FFD0E5|D0FFFD|FFFF84|F4E6AE|E5E5E5|F1F1F1|FFFFFF';
+$lang->slide->buttonUrl   = 'Button Url';
+$lang->slide->buttonColor = 'Button Color';
 
 $lang->slide->sort     = 'Order';
-$lang->slide->sortTip  = 'Order chaned. Save changes by click the "save order" button.';
+$lang->slide->sortTip  = 'Save changes by click the "save order" button.';
 $lang->slide->saveSort = 'Save';
 $lang->slide->admin    = 'Admin';
 $lang->slide->create   = 'Add';
