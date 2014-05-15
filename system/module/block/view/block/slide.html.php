@@ -17,14 +17,14 @@ if($slides):?>
   <div class='carousel-inner'>
     <?php $height = 0;?>
     <?php foreach($slides as $slide):?>
-      <?php $url = empty($slide->mainLink) ? '' : " data-url='" . $slide->mainLink . "'";?>
-      <?php if($height == 0 and $slide->height) $height = $slide->height;?>
-      <?php if ($slide->backgroundType == 'image'): ?>
-      <div class='item'<?php echo $url;?>>
-        <?php print(html::image($slide->image));?>
-      <?php else: ?>
-      <div class='item'<?php echo $url;?> style='<?php echo 'background-color: ' . $slide->backgroundColor . '; height: ' . $height . 'px';?>'>
-      <?php endif ?>
+    <?php $url = empty($slide->mainLink) ? '' : " data-url='" . $slide->mainLink . "'";?>
+    <?php if($height == 0 and $slide->height) $height = $slide->height;?>
+    <?php if ($slide->backgroundType == 'image'): ?>
+    <div class='item'<?php echo $url;?>>
+    <?php print(html::image($slide->image));?>
+    <?php else: ?>
+    <div class='item'<?php echo $url;?> style='<?php echo 'background-color: ' . $slide->backgroundColor . '; height: ' . $height . 'px';?>'>
+    <?php endif ?>
       <div class='carousel-caption'>
         <h2 style='color:<?php echo $slide->titleColor;?>'><?php echo $slide->title;?></h2>
         <div><?php echo $slide->summary;?></div>
