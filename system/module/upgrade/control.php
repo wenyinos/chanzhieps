@@ -99,6 +99,7 @@ class upgrade extends control
 
         if(!$this->upgrade->isError())
         {
+            $this->loadModel('setting')->setItems('system.common.global', array('ignoreUpgrade' => 0));
             $this->view->result = 'success';
         }
         else
