@@ -20,13 +20,15 @@ $lang->slide->button     = '按钮';
 
 $lang->slide->background = new stdclass();
 
-$lang->slide->background->type = '背景';
+$lang->slide->background->type  = '背景';
 $lang->slide->background->image = '背景图片';
 $lang->slide->background->color = '背景颜色';
 
 $lang->slide->background->typeList = new stdclass();
+
 $lang->slide->background->typeList->image = '图片';
 $lang->slide->background->typeList->color = '纯色';
+
 $lang->slide->height     = '高度';
 $lang->slide->url        = '链接';
 $lang->slide->colorTip   = '十六进制颜色值';
@@ -44,4 +46,3 @@ $lang->slide->edit     = '编辑幻灯片';
 $lang->slide->successSort     = '排序成功保存';
 $lang->slide->noImageSelected = '没有选择图片';
 $lang->slide->suitableSize    = '所有图片尺寸保持一致，最佳尺寸：1140px X 270px(宽 X 高)';
-$lang->slide->suitableDesc    = '同时设置了标题和按钮，摘要最多输入4行';

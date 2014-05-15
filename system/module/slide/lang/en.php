@@ -17,10 +17,18 @@ $lang->slide->imageUrl   = 'Url';
 $lang->slide->summary    = 'Summary';
 $lang->slide->label      = 'Label';
 $lang->slide->button     = 'Button';
-$lang->slide->background = 'Background';
-$lang->slide->bg         = new stdclass();
-$lang->slide->bg->image  = 'Image';
-$lang->slide->bg->color  = 'Color';
+
+$lang->slide->background = new stdclass();
+
+$lang->slide->background->type  = 'Background';
+$lang->slide->background->image = 'Image';
+$lang->slide->background->color = 'Color';
+
+$lang->slide->background->typeList = new stdclass();
+
+$lang->slide->background->typeList->image = 'Image';
+$lang->slide->background->typeList->color = 'Color';
+
 $lang->slide->height     = 'Height';
 $lang->slide->url        = 'URL';
 $lang->slide->colorTip   = 'HEX color';
@@ -37,4 +45,4 @@ $lang->slide->edit     = 'Edit';
 
 $lang->slide->successSort     = 'Order data saved.';
 $lang->slide->noImageSelected = 'No images selected';
-$lang->slide->suitableSize    = 'Be sure all the pictures are in the same size，recommended size 1140px X 270px';
+$lang->slide->suitableSize    = "You'd better use pictures of same size，<i class='text-muted'>1140px X 270px</i> recommended.";

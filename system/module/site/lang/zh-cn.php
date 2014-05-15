@@ -31,7 +31,7 @@ $lang->site->setQQOauth    = "QQ接入";
 $lang->site->oauthHelp     = "使用帮助";
 
 $lang->site->typeList = new stdclass();
-$lang->site->typeList->compnay = '企业门户';
+$lang->site->typeList->company = '企业门户';
 $lang->site->typeList->blog    = '个人网站';
 
 $lang->site->moduleAvailable = array();

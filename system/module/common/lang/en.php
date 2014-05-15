@@ -21,10 +21,12 @@ $lang->divider  = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->back2Top = 'T<br/>O<br/>P';
 
 /* Lang items for xirang. */
-$lang->chanzhiEPS  = 'chanzhiEPS';
-$lang->chanzhiEPSx = 'Chanzhi';
-$lang->agreement   = "Agree to the <a href='http://www.chanzhi.org' target='_blank'>《ChanzhiEPS Service Areement》</a>";
-$lang->poweredBy   = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>{$lang->chanzhiEPSx} %s</a></span>";
+$lang->chanzhiEPS       = 'chanzhiEPS';
+$lang->chanzhiEPSx      = 'Chanzhi';
+$lang->agreement        = "Agree to the <a href='http://www.chanzhi.org' target='_blank'>《ChanzhiEPS Service Areement》</a>";
+$lang->poweredBy        = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>{$lang->chanzhiEPSx} %s</a></span>";
+$lang->newVersion       = "New vesions:<a class='link-version' href='' target='_blank'>ChanzhiEPS<span id='version'></span></strong></a> available.";
+$lang->seeLatestRelease = 'See the latest release.';
 
 /* IE6 alert.  */
 $lang->IE6Alert= <<<EOT
@@ -181,7 +183,7 @@ $lang->ui->menu->pages   = array('link' => 'Layout|block|pages|', 'alias' => 'se
 $lang->user = new stdclass();
 $lang->user->menu = new stdclass();
 $lang->user->menu->all    = 'All Users|user|admin|';
-$lang->user->menu->sins   = 'Weibo Users|user|admin|provider=sina';
+$lang->user->menu->sina   = 'Weibo Users|user|admin|provider=sina';
 $lang->user->menu->wechat = 'Wechat Users|user|admin|provider=wechat';
 $lang->user->menu->qq     = 'QQ Users|user|admin|provider=qq';
 
