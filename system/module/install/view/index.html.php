@@ -22,16 +22,8 @@
       <div class='text-center'>
         <label class='checkbox-inline'><input type='checkbox' id='agree' checked /><?php echo $lang->agreement;?></label>
       </div>
-      <div class='input-group' id='buttonBox'>
+      <div class='input-group'>
       <?php echo html::a($this->createLink('install', 'step1'), $lang->install->start, "class='btn btn-primary btn-install'");?>
-      </div>
-      <div id='choseVersion'>
-       <div class='lead'><?php echo $lang->newVersion;?></div>
-       <?php echo html::a('', $lang->seeLatestRelease, "target='_blank' class='btn btn-primary link-version'");?>
-       <?php echo html::a($this->createLink('install', 'step1'), $lang->install->keepInstalling, "class='btn btn-info btn-install'");?>
-      </div>
-      <div id='checkRelease'>
-      <div class='text-muted btn btn-default disabled'><i class='icon-spin icon-spinner'> </i><?php echo $lang->install->gettingVersion?></div>
       </div>
     </div>
   </div>
