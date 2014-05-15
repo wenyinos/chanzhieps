@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php if(!$ignoreUpgrade) js::import('http://www.eps.com/api/latestversion.php?version=' . $this->config->version);?>
 <div class='container' id='shortcutBox'>
 
   <?php if(strpos($this->server->php_self, '/admin.php') !== false && empty($this->config->global->ignoreAdminEntry)):?>
@@ -21,7 +22,8 @@
     </div>
   </form>
   <?php endif;?>
-  <?php if(1 or !isset($this->config->global->ignoreUpgrade) or !$this->config->global->ignoreUpgrade):?>
+
+  <?php if(!$ignoreUpgrade):?>
   <div class='alert alert-danger' id='upgradeNotice'>
     <div>
       <?php echo $lang->newVersion;?>
@@ -30,6 +32,7 @@
     </div>
   </div>
   <?php endif;?>
+
   <div class='row'>
     <div class='col-md-4 col-sm-6'> 
       <div class="shortcut article-admin">

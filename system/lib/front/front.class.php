@@ -412,7 +412,11 @@ class js
     public static function import($url)
     {
         global $config;
-        echo "<script src='$url?v={$config->version}' type='text/javascript'></script>\n";
+
+        $pathInfo = parse_url($url);
+        $mark  = !empty($pathInfo['query']) ? '&' : '?';
+
+        echo "<script src='$url{$mark}v={$config->version}' type='text/javascript'></script>\n";
     }
 
     /**
