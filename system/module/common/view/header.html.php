@@ -2,27 +2,7 @@
 <?php include 'header.lite.html.php';?>
 <div class='page-container'>
   <?php if(strpos($_SERVER['HTTP_USER_AGENT'],'MSIE 6.0') !== false ) exit($lang->IE6Alert); ?>
-  <header id='header' class='clearfix'>
-    <div id='headNav'>
-      <div class='wrapper'>
-        <nav><?php echo commonModel::printTopBar();?></nav>
-      </div>
-    </div>
-    <div id='headTitle'>
-      <div class="wrapper">
-        <?php if(isset($config->site->logo)):?>
-        <?php $logo = json_decode($config->site->logo);?>
-        <div id='siteLogo'>
-          <?php echo html::a($this->config->webRoot, html::image($logo->webPath, "class='logo' title='{$this->config->company->name}'"));?>
-        </div>
-        <?php else: ?>
-        <div id='siteName'><h2><?php echo $config->site->name;?></h2></div>
-        <?php endif;?>
-        <div id='siteSlogan'><span><?php echo $this->config->site->slogan;?></span></div>
-      </div>
-    </div>
-  </header>
-
+  <?php $this->block->printRegion($layouts, 'all', 'header');?>
   <?php $topNavs = $this->loadModel('nav')->getNavs('top');?>
   <nav id='navbar' class='navbar navbar-default' role='navigation'>
     <div class='navbar-header'>

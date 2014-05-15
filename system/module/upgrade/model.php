@@ -83,6 +83,7 @@ class upgradeModel extends model
             case '2_2_1':
                 $this->execSQL($this->getUpgradeFile('2.2.1'));
                 $this->upgradeSlide();
+                $this->upgradeStartLayouts();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -113,7 +114,7 @@ class upgradeModel extends model
             case '2_0_1': $confirmContent .= file_get_contents($this->getUpgradeFile('2.0.1'));
             case '2_1'  : $confirmContent .= file_get_contents($this->getUpgradeFile('2.1'));
             case '2_2'  : $confirmContent .= file_get_contents($this->getUpgradeFile('2.2'));
-            case '2_2'  : $confirmContent .= file_get_contents($this->getUpgradeFile('2.2.1'));
+            case '2_2_1': $confirmContent .= file_get_contents($this->getUpgradeFile('2.2.1'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
@@ -542,9 +543,12 @@ class upgradeModel extends model
         foreach($slides as $key => $slide)
         {
             $slides[$key] = json_decode($slide->value);
-            $slides[$key]->label     = array($slides[$key]->label);
-            $slides[$key]->buttonUrl = array($slides[$key]->url);
-            $slides[$key]->imageUrl  = $slides[$key]->label ? '' : $slides[$key]->url;
+            $slides[$key]->titleColor     = '#FFF';
+            $slides[$key]->imageUrl       = $slides[$key]->label ? '' : $slides[$key]->url;
+            $slides[$key]->backgroundType = 'image';
+            $slides[$key]->label          = array($slides[$key]->label);
+            $slides[$key]->buttonUrl      = array($slides[$key]->url);
+            $slides[$key]->buttonClass    = array('0' => primary);
 
             $this->dao->update(TABLE_CONFIG)
                 ->set('value')->eq(helper::jsonEncode($slides[$key]))
@@ -554,6 +558,18 @@ class upgradeModel extends model
 
         return !dao::isError();
     } 
+
+    /**
+     * Upgrade start layout of all page when upgrade from 2.2.1 .
+     * 
+     * @access public
+     * @return bool 
+     */
+    public function upgradeStartLayouts()
+    {
+        $this->dao->update(TABLE_LAYOUT)->set('region')->eq('start')->where('page')->eq('all')->andWhere('region')->eq('header')->exec();
+        return !dao::isError();
+    }
 
     /**
      * Upgrade html blocks when upgrade from 2.0.1 .

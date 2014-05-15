@@ -62,6 +62,7 @@ $lang->block->typeList['contact'] = 'Contact Us';
 $lang->block->typeList['about']   = 'About Us';
 $lang->block->typeList['links']   = 'Links';
 $lang->block->typeList['slide']   = 'Slide';
+$lang->block->typeList['header']  = 'Header';
 
 $lang->block->typeGroups = array();
 $lang->block->typeGroups['html'] = 'input';
@@ -82,6 +83,7 @@ $lang->block->typeGroups['contact'] = 'system';
 $lang->block->typeGroups['about']   = 'system';
 $lang->block->typeGroups['links']   = 'system';
 $lang->block->typeGroups['slide']   = 'system';
+$lang->block->typeGroups['header']  = 'system';
 
 $lang->block->category = new stdclass();
 $lang->block->category->showChildren = 'Show Children';
@@ -116,6 +118,7 @@ $lang->block->pages['page_view']      = 'Page';
 
 /* page layout list. */
 $lang->block->regions = new stdclass();
+$lang->block->regions->all['start']  = 'Start';
 $lang->block->regions->all['header'] = 'Header';
 $lang->block->regions->all['footer'] = 'Footer';
 $lang->block->regions->all['end']    = 'End';
