@@ -10,5 +10,5 @@ INSERT INTO `eps_block` (`id`, `type`, `title`, `content`) VALUES
 (8, 'blogTree', 'Blog Category', '{"showChildren":"1"}'),
 (9, 'contact', 'Contact Us', ''),
 (10, 'about', 'About Us', ''),
-(11, 'links', 'Link', '');
+(11, 'links', 'Link', ''),
 (12, 'header', 'Header', '');
