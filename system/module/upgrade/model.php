@@ -83,7 +83,7 @@ class upgradeModel extends model
             case '2_2_1':
                 $this->execSQL($this->getUpgradeFile('2.2.1'));
                 $this->upgradeSlide();
-                $this->upgradeStartLayouts();
+                $this->upgradeHeaderLayouts();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -563,12 +563,12 @@ class upgradeModel extends model
     } 
 
     /**
-     * Upgrade start layout of all page when upgrade from 2.2.1 .
+     * Upgrade header layout of all page when upgrade from 2.2.1 .
      * 
      * @access public
      * @return bool 
      */
-    public function upgradeStartLayouts()
+    public function upgradeHeaderLayouts()
     {
         $this->dao->update(TABLE_LAYOUT)->set('region')->eq('start')->where('page')->eq('all')->andWhere('region')->eq('header')->exec();
 

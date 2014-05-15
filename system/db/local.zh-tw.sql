@@ -11,3 +11,4 @@ INSERT INTO `eps_block` (`id`, `type`, `title`, `content`) VALUES
 (9, 'contact', '聯系我們', ''),
 (10, 'about', '公司簡介', ''),
 (11, 'links', '友情鏈接', '');
+(12, 'header', '網站頭部', '');
