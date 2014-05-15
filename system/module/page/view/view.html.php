@@ -5,7 +5,7 @@ js::set('pageID', $page->id);
 ?>
 <?php $common->printPositionBar($page);?>
 <div class='row'>
-  <?php if(!empty($layouts)):?>
+  <?php if(!empty($layouts['page_view'])):?>
   <div class='col-md-9'>
   <?php else:?>
   <div class='col-md-12'>
