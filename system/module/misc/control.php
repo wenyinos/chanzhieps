@@ -33,4 +33,17 @@ class misc extends control
         $this->app->loadClass('qrcode');
         QRcode::png($this->server->http_referer, false, 4, 6); 
     }   
+
+    /**
+     * Get latest release.
+     * 
+     * @access public
+     * @return void
+     */
+    public function getLatestRelease()
+    {
+        $latestRelease = $this->loadModel('common')->getLatestRelease();
+        if($latestRelease) $this->send($latestRelease);
+        $this->send(array('result' => false));
+    }
 }

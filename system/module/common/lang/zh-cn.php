@@ -21,10 +21,12 @@ $lang->divider  = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->back2Top = '返回顶部';
 
 /* Lang items for xirang. */
-$lang->chanzhiEPS  = '蝉知企业门户系统';
-$lang->chanzhiEPSx = '蝉知';
-$lang->agreement   = "已阅读并同意<a href='http://www.chanzhi.org' target='_blank'>《蝉知企业门户系统使用协议》</a>";
-$lang->poweredBy   = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>{$lang->chanzhiEPSx} %s</a></span>";
+$lang->chanzhiEPS       = '蝉知企业门户系统';
+$lang->chanzhiEPSx      = '蝉知';
+$lang->agreement        = "已阅读并同意<a href='http://www.chanzhi.org' target='_blank'>《蝉知企业门户系统使用协议》</a>";
+$lang->poweredBy        = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>{$lang->chanzhiEPSx} %s</a></span>";
+$lang->newVersion       = "有新的版本：<a class='link-version' href='' target='_blank'>蝉知<span id='version'></span></strong></a> 可用。";
+$lang->seeLatestRelease = '看看最新的版本';
 
 /* IE6 alert.  */
 $lang->IE6Alert= <<<EOT

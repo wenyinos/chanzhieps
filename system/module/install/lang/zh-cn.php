@@ -17,9 +17,7 @@ $lang->install->error   = '错误 ';
 
 $lang->install->start            = '开始安装';
 $lang->install->keepInstalling   = '继续安装当前版本';
-$lang->install->seeLatestRelease = '看看最新的版本';
 $lang->install->gettingVersion   = ' 正在检查是否有新版本, 请稍候 ...';
-$lang->install->newVersion       = "有新的版本：<a class='link-version' href='' target='_blank'>蝉知<span id='version'></span></strong></a> 可用。";
 $lang->install->welcome          = '您睿智地选择了蝉知企业门户系统!';
 $lang->install->desc             = <<<EOT
 <p>使用蝉知，您可以：</p>
