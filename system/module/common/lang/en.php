@@ -25,8 +25,7 @@ $lang->chanzhiEPS       = 'chanzhiEPS';
 $lang->chanzhiEPSx      = 'Chanzhi';
 $lang->agreement        = "Agree to the <a href='http://api.chanzhi.org/goto.php?item=licence' target='_blank'>《ChanzhiEPS Service Agreement》</a>";
 $lang->poweredBy        = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>{$lang->chanzhiEPSx} %s</a></span>";
-$lang->newVersion       = "New version:<a class='link-version' href='' target='_blank'>ChanzhiEPS<span id='version'></span></strong></a> available.";
-$lang->seeLatestRelease = 'See the latest release.';
+$lang->newVersion       = "Notice: ChanzhiEPS has been upgraded to version: <span id='version'></span> at <span id='releaseDate'></span>. <a href='' target='_blank' id='upgradeLink'>DownLoad Now</a>";
 
 /* IE6 alert.  */
 $lang->IE6Alert= <<<EOT
