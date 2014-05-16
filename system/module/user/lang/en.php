@@ -3,7 +3,7 @@
  * The user module english file of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
+ * @license     http://api.chanzhi.org/goto.php?item=license
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     user
  * @version     $Id$
@@ -60,7 +60,7 @@ $lang->user->goback          = "Go back";
 $lang->user->allUsers        = 'All users';
 $lang->user->submit          = "Submit";
 $lang->user->forbid          = 'Forbid';
-$lang->user->allow           = 'Allow';
+$lang->user->activate        = 'Activate';
 $lang->user->pullWechatFans  = 'Pull wechat uses';
 
 $lang->user->profile     = 'Profile';
@@ -78,16 +78,16 @@ $lang->user->inputAccountOrEmail = 'Please input account or Email';
 $lang->user->inputPassword       = 'Please input password';
 $lang->user->searchUser          = 'Search';
 
-$lang->user->errorDeny     = "Sorry, you don't have the permission to access <b>%s</b>'s<b>%s</b>. Please contact the administrator.<br/> This page will jump to homepage after 5 seconds";
-$lang->user->loginFailed   = "Login failed, please check you account and password.";
-$lang->user->locked        = "Failed too much, please login again after ten minutes";
-$lang->user->lockedForEver = "User has been forbidden for ever.";
-$lang->user->lblRegistered = 'Congratulations, register successfully!';
-$lang->user->forbidSuccess = 'Successfully forbid.';
-$lang->user->forbidFail    = 'Failed forbid';
-$lang->user->allowSuccess  = 'Successfully allow.';
-$lang->user->allowFail     = 'Failed allow.';
-$lang->user->pullSuccess   = 'Get wechat users successfully';
+$lang->user->errorDeny       = "Sorry, you don't have the permission to access <b>%s</b>'s<b>%s</b>. Please contact the administrator.<br/> This page will jump to homepage after 5 seconds";
+$lang->user->loginFailed     = "Login failed, please check you account and password.";
+$lang->user->locked          = "Failed too much, please login again after ten minutes";
+$lang->user->lockedForEver   = "User has been forbidden for ever.";
+$lang->user->lblRegistered   = 'Congratulations, register successfully!';
+$lang->user->forbidSuccess   = 'Successfully forbid.';
+$lang->user->forbidFail      = 'Failed forbid';
+$lang->user->activateSuccess = 'Successfully activate.';
+$lang->user->activateFail    = 'Failed activate.';
+$lang->user->pullSuccess     = 'Get wechat users successfully';
 
 $lang->user->forbidUser = 'Manage user';
 $lang->user->forbidDate = array();

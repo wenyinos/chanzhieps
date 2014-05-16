@@ -3,7 +3,7 @@
  * The control file of file module of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
+ * @license     http://api.chanzhi.org/goto.php?item=license
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     file
  * @version     $Id: control.php 1042 2010-08-19 09:02:39Z yuren_@126.com $
@@ -321,9 +321,9 @@ class file extends control
     public function fileManager()
     {
         $fileTypes = array('gif', 'jpg', 'jpeg', 'png', 'bmp');
-        $order = empty($_GET['order']) ? 'name' : strtolower($_GET['order']);
+        $order = $this->get->order ? strtolower($this->get->order) : 'name';
 
-        if (empty($_GET['path']))
+        if(empty($_GET['path']))
         {
             $currentPath    = $this->file->savePath;
             $currentUrl     = $this->file->webPath;
@@ -332,15 +332,15 @@ class file extends control
         }
         else
         {
-            $currentPath    = $this->file->savePath . '/' . $_GET['path'];
-            $currentUrl     = $this->file->webPath . $_GET['path'];
-            $currentDirPath = $_GET['path'];
+            $currentPath    = $this->file->savePath . '/' . $this->get->path;
+            $currentUrl     = $this->file->webPath . $this->get->path;
+            $currentDirPath = $this->get->path;
             $moveupDirPath  = preg_replace('/(.*?)[^\/]+\/$/', '$1', $currentDirPath);
         }
 
-        if(preg_match('/\.\./', $currentPath)) die('Access is not allowed.');   //Do not use .. to move up to the upper directory.
-        if(!preg_match('/\/$/', $currentPath)) die('Parameter is not valid.'); //The last charact is not '/'.
-        if(!file_exists($currentPath) || !is_dir($currentPath)) die('Directory does not exist.'); //Directory does not exist or it is not a directory.
+        if(preg_match('/\.\./', $currentPath)) die($this->lang->file->noAccess);
+        if(!preg_match('/\/$/', $currentPath)) die($this->lang->file->invalidParameter);
+        if(!file_exists($currentPath) || !is_dir($currentPath)) die($this->lang->file->unWritable);
 
         $fileList = array();
         if($fileDir = opendir($currentPath))

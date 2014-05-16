@@ -3,8 +3,8 @@
  * The model file of upgrade module of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
- * @license     LGPL (http://www.gnu.org/licenses/lgpl.html)
+ * @license     http://api.chanzhi.org/goto.php?item=license
+ * @license     http://api.chanzhi.org/goto.php?item=license 
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     upgrade
  * @version     $Id: model.php 5019 2013-07-05 02:02:31Z wyd621@gmail.com $
@@ -543,13 +543,14 @@ class upgradeModel extends model
         foreach($slides as $key => $slide)
         {
             $slides[$key] = json_decode($slide->value);
-            $slides[$key]->titleColor     = '#FFF';
-            $slides[$key]->imageUrl       = $slides[$key]->label ? '' : $slides[$key]->url;
-            $slides[$key]->backgroundType = 'image';
-            $slides[$key]->height         = '';
-            $slides[$key]->label          = array($slides[$key]->label);
-            $slides[$key]->buttonUrl      = array($slides[$key]->url);
-            $slides[$key]->buttonClass    = array('0' => 'primary');
+            $slides[$key]->titleColor      = '#FFF';
+            $slides[$key]->mainLink        = $slides[$key]->label ? '' : $slides[$key]->url;
+            $slides[$key]->backgroundType  = 'image';
+            $slides[$key]->backgroundColor = '#114DAD';
+            $slides[$key]->height          = '';
+            $slides[$key]->label           = array($slides[$key]->label);
+            $slides[$key]->buttonClass     = array('0' => 'primary');
+            $slides[$key]->buttonUrl       = array($slides[$key]->url);
 
             unset($slides[$key]->url);
 

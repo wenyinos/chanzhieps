@@ -3,7 +3,7 @@
  * The model file of user module of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
+ * @license     http://api.chanzhi.org/goto.php?item=license
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     user
  * @version     $Id$
@@ -450,13 +450,13 @@ class userModel extends model
     }
 
     /**
-     * Allow the user.
+     * Activate the user.
      *
      * @param  int    $userID
      * @access public
      * @return bool
      */
-    public function allow($userID)
+    public function activate($userID)
     {
         $this->dao->update(TABLE_USER)->set('locked')->eq('')->where('id')->eq($userID)->exec();
         return !dao::isError();

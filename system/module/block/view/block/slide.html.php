@@ -3,7 +3,7 @@
  * The about front view file of block module of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL (http://www.gnu.org/licenses/lgpl.html)
+ * @license     http://api.chanzhi.org/goto.php?item=license 
  * @author      Yidong wang <yidong@cnezsoft.com>
  * @package     block
  * @version     $Id$
@@ -17,14 +17,14 @@ if($slides):?>
   <div class='carousel-inner'>
     <?php $height = 0;?>
     <?php foreach($slides as $slide):?>
-      <?php $url = empty($slide->imageUrl) ? '' : " data-url='" . $slide->imageUrl . "'";?>
-      <?php if($height == 0 and $slide->height) $height = $slide->height;?>
-      <?php if ($slide->backgroundType == 'image'): ?>
-      <div class='item'<?php echo $url;?>>
-        <?php print(html::image($slide->image));?>
-      <?php else: ?>
-      <div class='item'<?php echo $url;?> style='<?php echo 'background-color: ' . $slide->backgroundColor . '; height: ' . $height . 'px';?>'>
-      <?php endif ?>
+    <?php $url = empty($slide->mainLink) ? '' : " data-url='" . $slide->mainLink . "'";?>
+    <?php if($height == 0 and $slide->height) $height = $slide->height;?>
+    <?php if ($slide->backgroundType == 'image'): ?>
+    <div class='item'<?php echo $url;?>>
+    <?php print(html::image($slide->image));?>
+    <?php else: ?>
+    <div class='item'<?php echo $url;?> style='<?php echo 'background-color: ' . $slide->backgroundColor . '; height: ' . $height . 'px';?>'>
+    <?php endif ?>
       <div class='carousel-caption'>
         <h2 style='color:<?php echo $slide->titleColor;?>'><?php echo $slide->title;?></h2>
         <div><?php echo $slide->summary;?></div>

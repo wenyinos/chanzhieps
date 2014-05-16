@@ -3,7 +3,7 @@
  * The install module English file of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
+ * @license     http://api.chanzhi.org/goto.php?item=license
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     install
  * @version     $Id$
@@ -17,7 +17,6 @@ $lang->install->error   = 'Error ';
 
 $lang->install->start            = 'Start install';
 $lang->install->keepInstalling   = 'Keep install this version';
-$lang->install->seeLatestRelease = 'See the latest release.';
 $lang->install->welcome          = 'Welcome to use chanzhiEPS.';
 $lang->install->desc             = <<<EOT
 <p>Using chanzhiEPS, you can do</p>

@@ -3,7 +3,7 @@
  * The file module zh-cn file of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
+ * @license     http://api.chanzhi.org/goto.php?item=license
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     file
  * @version     $Id$
@@ -39,4 +39,7 @@ $lang->file->publics[1] = '允许';
 $lang->file->edit       = '编辑';
 $lang->file->editFile   = '更改附件';
 
-$lang->file->errorUnwritable = '上传目录不可写，无法上传附件。';
+$lang->file->errorUnwritable  = '上传目录不可写，无法上传附件。';
+$lang->file->noAccess         = '不允许访问。';
+$lang->file->invalidParameter = '参数无效。';
+$lang->file->unWritable       = '目录不可写或不存在。';

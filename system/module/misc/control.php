@@ -3,7 +3,7 @@
  * The control file of misc of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL (http://www.gnu.org/licenses/lgpl.html)
+ * @license     http://api.chanzhi.org/goto.php?item=license
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     misc
  * @version     $Id$
@@ -33,17 +33,4 @@ class misc extends control
         $this->app->loadClass('qrcode');
         QRcode::png($this->server->http_referer, false, 4, 6); 
     }   
-
-    /**
-     * Get latest release.
-     * 
-     * @access public
-     * @return void
-     */
-    public function getLatestRelease()
-    {
-        $latestRelease = $this->loadModel('common')->getLatestRelease();
-        if($latestRelease) $this->send($latestRelease);
-        $this->send(array('result' => false));
-    }
 }

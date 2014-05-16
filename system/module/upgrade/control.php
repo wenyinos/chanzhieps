@@ -3,8 +3,8 @@
  * The control file of upgrade module of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
- * @license     LGPL (http://www.gnu.org/licenses/lgpl.html)
+ * @license     http://api.chanzhi.org/goto.php?item=license
+ * @license     http://api.chanzhi.org/goto.php?item=license 
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     upgrade
  * @version     $Id$

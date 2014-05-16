@@ -3,7 +3,7 @@
  * The admin view file of user module of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
+ * @license     http://api.chanzhi.org/goto.php?item=license
  * @author      Yangyang Shi <shiyangyangwork@yahoo.cn>
  * @package     User
  * @version     $Id$
@@ -67,6 +67,7 @@ js::set('provider', $this->get->provider);
       <td class='operate'>
         <?php //if($user->provider == 'wechat') echo html::a($this->createLink('wechat', 'message', "from={$user->openID}"), $lang->user->messages);?>
         <?php echo html::a($this->createLink('user', 'edit', "account=$user->account"), $lang->edit); ?>
+        <?php if($user->locked < helper::now() or $user->locked == helper::now()):?>
         <div class="btn-group">
           <a href='###' class="dropdown-toggle" data-toggle="dropdown"><?php echo $lang->user->forbid?> <span class="caret"></span></a>
           <ul class="dropdown-menu pull-right text-left" role="menu">
@@ -75,7 +76,8 @@ js::set('provider', $this->get->provider);
           <?php endforeach;?>
           </ul>
         </div>
-        <?php if($user->locked > helper::now()) echo html::a(inlink('allow', "id=$user->id"), $lang->user->allow, "class='forbider'");?>
+        <?php endif;?>
+        <?php if($user->locked > helper::now()) echo html::a(inlink('activate', "id=$user->id"), $lang->user->activate, "class='forbider'");?>
       </td>
     </tr>
     <?php endforeach;?>

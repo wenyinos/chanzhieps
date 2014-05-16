@@ -3,7 +3,7 @@
  * The user module zh-tw file of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青島息壤網絡信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
+ * @license     http://api.chanzhi.org/goto.php?item=license
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     user
  * @version     $Id: zh-tw.php 824 2010-05-02 15:32:06Z wwccss $
@@ -60,6 +60,7 @@ $lang->user->goback          = "返回前一頁";
 $lang->user->allUsers        = '全部用戶';
 $lang->user->submit          = "提交";
 $lang->user->forbid          = '禁用';
+$lang->user->activate        = '解除禁用';
 $lang->user->pullWechatFans  = '更新微信會員數據';
 
 $lang->user->profile     = '個人信息';
@@ -77,14 +78,16 @@ $lang->user->inputAccountOrEmail = '請輸入用戶名或Email';
 $lang->user->inputPassword       = '請輸入密碼';
 $lang->user->searchUser          = '搜索';
 
-$lang->user->errorDeny     = "抱歉，您無權訪問『<b>%s</b>』模組的『<b>%s</b>』功能。請聯繫管理員獲取權限。點擊後退返回上頁。<br/> 5秒鐘後將自動返迴首頁...";
-$lang->user->loginFailed   = "登錄失敗，請檢查您的用戶名或密碼是否填寫正確。";
-$lang->user->locked        = "用戶已經被鎖定，請%s後再重新嘗試登錄";
-$lang->user->lockedForEver = "用戶已經被永久禁用。";
-$lang->user->lblRegistered = '恭喜您，已經成功註冊。';
-$lang->user->forbidSuccess = '禁用成功';
-$lang->user->forbidFail    = '禁用失敗';
-$lang->user->pullSuccess   = '獲取微信會員成功';
+$lang->user->errorDeny       = "抱歉，您無權訪問『<b>%s</b>』模組的『<b>%s</b>』功能。請聯繫管理員獲取權限。點擊後退返回上頁。<br/> 5秒鐘後將自動返迴首頁...";
+$lang->user->loginFailed     = "登錄失敗，請檢查您的用戶名或密碼是否填寫正確。";
+$lang->user->locked          = "用戶已經被鎖定，請%s後再重新嘗試登錄";
+$lang->user->lockedForEver   = "用戶已經被永久禁用。";
+$lang->user->lblRegistered   = '恭喜您，已經成功註冊。';
+$lang->user->forbidSuccess   = '禁用成功';
+$lang->user->forbidFail      = '禁用失敗';
+$lang->user->activateSuccess = '解除禁用成功';
+$lang->user->activateFail    = '解除禁用失敗';
+$lang->user->pullSuccess     = '獲取微信會員成功';
 
 $lang->user->forbidUser          = '禁用管理';
 $lang->user->forbidDate = array();

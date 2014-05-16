@@ -3,7 +3,7 @@
  * The upgrade module English file of ZenTaoPMS.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL (http://www.gnu.org/licenses/lgpl.html)
+ * @license     http://api.chanzhi.org/goto.php?item=license 
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     upgrade
  * @version     $Id: en.php 5119 2013-07-12 08:06:42Z wyd621@gmail.com $

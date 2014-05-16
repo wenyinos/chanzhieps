@@ -3,7 +3,7 @@
  * The block module zh-tw file of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青島息壤網絡信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
+ * @license     http://api.chanzhi.org/goto.php?item=license
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     block
  * @version     $Id$
@@ -62,6 +62,7 @@ $lang->block->typeList['contact']         = '聯繫我們';
 $lang->block->typeList['about']           = '公司簡介';
 $lang->block->typeList['links']           = '友情連結';
 $lang->block->typeList['slide']           = '幻燈片';
+$lang->block->typeList['header']          = '網站頭部';
 
 $lang->block->typeGroups = array();
 $lang->block->typeGroups['html'] = 'input';
@@ -82,6 +83,7 @@ $lang->block->typeGroups['contact'] = 'system';
 $lang->block->typeGroups['about']   = 'system';
 $lang->block->typeGroups['links']   = 'system';
 $lang->block->typeGroups['slide']   = 'system';
+$lang->block->typeGroups['header']  = 'system';
 
 $lang->block->category = new stdclass();
 $lang->block->category->showChildren = '顯示子分類';
@@ -103,7 +105,7 @@ $lang->block->pages['blog_view']      = '博客詳情頁面';
 
 $lang->block->pages['forum_index']    = '論壇首頁';
 $lang->block->pages['forum_board']    = '帖子列表頁面';
-$lang->block->pages['thread_view']    = '帖子察看頁面';
+$lang->block->pages['thread_view']    = '帖子查看頁面';
 $lang->block->pages['search_list']    = '搜索結果頁';
 
 $lang->block->pages['book_index']     = '手冊中心';
@@ -116,6 +118,7 @@ $lang->block->pages['page_view']      = '單頁';
 
 /* page layout list. */
 $lang->block->regions = new stdclass();
+$lang->block->regions->all['start']  = '開始部分';
 $lang->block->regions->all['header'] = '頭部';
 $lang->block->regions->all['footer'] = '底部';
 $lang->block->regions->all['end']    = '結束部分';

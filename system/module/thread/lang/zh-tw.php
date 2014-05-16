@@ -3,7 +3,7 @@
  * The thread module zh-tw file of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青島息壤網絡信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
+ * @license     http://api.chanzhi.org/goto.php?item=license
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     thread
  * @version     $Id$
@@ -13,6 +13,7 @@ $lang->thread->common    = '主題';
 
 $lang->thread->id         = '編號';
 $lang->thread->title      = '標題';
+$lang->thread->board      = '板塊';
 $lang->thread->author     = '作者';
 $lang->thread->content    = '內容';
 $lang->thread->file       = '附件: ';
@@ -29,6 +30,7 @@ $lang->thread->edit       = '編輯主題';
 $lang->thread->status     = '狀態';
 $lang->thread->hide       = '隱藏';
 $lang->thread->show       = '顯示';
+$lang->thread->transfer   = '轉移';
 
 $lang->thread->sticks[0] = '不置頂';
 $lang->thread->sticks[1] = '版塊置頂';
@@ -49,6 +51,7 @@ $lang->thread->readonly        = '只讀';
 $lang->thread->successStick    = '成功置頂';
 $lang->thread->successUnstick  = '成功取消置頂';
 $lang->thread->readonlyMessage = '該帖已被設置為 <strong>只讀</strong>，您暫時無法發表新的回覆。';
+$lang->thread->successTransfer = '轉移成功';
 
 /* Adjust the pager. */
 if(!isset($lang->pager->settedInForum))

@@ -3,7 +3,7 @@
  * The product category zh-cn file of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
+ * @license     http://api.chanzhi.org/goto.php?item=license
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     product
  * @version     $Id$
@@ -39,6 +39,7 @@ $lang->product->views      = 'Views';
 $lang->product->stick      = 'Sticky';
 $lang->product->order      = 'Order';
 $lang->product->attribute  = 'Attribute';
+$lang->product->custom     = 'Custom';
 $lang->product->sales      = 'Price';
 
 $lang->product->currencyIcon = "<i class='icon-usd'> </i>";
@@ -59,3 +60,7 @@ $lang->product->directory = 'Back';
 
 $lang->product->statusList['normal']  = 'On sale';
 $lang->product->statusList['offline'] = 'Offline';
+
+$lang->product->placeholder = new stdclass();
+$lang->product->placeholder->label = "Attribute name: price, color etc";
+$lang->product->placeholder->value = "Attribute value: $1000, red etc";

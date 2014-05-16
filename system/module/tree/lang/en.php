@@ -3,7 +3,7 @@
  * The tree category zh-cn file of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
+ * @license     http://api.chanzhi.org/goto.php?item=license
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     tree
  * @version     $Id$
@@ -22,8 +22,8 @@ $lang->tree->noCategories  = 'No category yet, add one first.';
 $lang->tree->timeCountDown = "Locate to category manage page in <strong id='countDown'>3</strong> seconds.";
 $lang->tree->redirect      = 'Manage now';
 $lang->tree->aliasRepeat   = 'Alias: %s already exists.';
-$lang->tree->aliasNumber   = 'Alias must not be digital.';
 $lang->tree->aliasConflict = 'Alias: %s  conflicts with system modules';
+$lang->tree->aliasNumber   = 'Alias must not be digital.';
 $lang->tree->hasChildren   = "The board has children, can't be deleted.";
 $lang->tree->confirmDelete = "Are you sure to delete it?";
 $lang->tree->successFixed  = "Successfully fixed.";

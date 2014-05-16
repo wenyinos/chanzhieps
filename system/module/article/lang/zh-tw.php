@@ -3,7 +3,7 @@
  * The article category zh-tw file of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青島息壤網絡信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
+ * @license     http://api.chanzhi.org/goto.php?item=license
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     article
  * @version     $Id$
@@ -50,8 +50,9 @@ $lang->page->list   = '單頁列表';
 $lang->page->create = '添加單頁';
 $lang->page->edit   = '編輯單頁';
 
-$lang->article->originalList[1] = '原創';
-$lang->article->originalList[0] = '轉貼';
+$lang->article->originalList[0] = '原創';
+$lang->article->originalList[1] = '轉貼';
+$lang->article->originalList[2] = '翻譯';
 
 $lang->article->statusList['normal'] = '正常';
 $lang->article->statusList['draft']  = '草稿';

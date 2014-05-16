@@ -3,7 +3,7 @@
  * The product category zh-tw file of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青島息壤網絡信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
+ * @license     http://api.chanzhi.org/goto.php?item=license
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     product
  * @version     $Id$
@@ -39,6 +39,7 @@ $lang->product->views      = '瀏覽';
 $lang->product->stick      = '置頂級別';
 $lang->product->order      = '排序';
 $lang->product->attribute  = '產品屬性';
+$lang->product->custom     = '自定義屬性';
 $lang->product->sales      = '產品定價';
 
 $lang->product->currencyIcon = "<i class='icon-yen'> </i>";
@@ -59,3 +60,7 @@ $lang->product->directory = '返回目錄';
 
 $lang->product->statusList['normal']  = '上架';
 $lang->product->statusList['offline'] = '下架';
+
+$lang->product->placeholder = new stdclass();
+$lang->product->placeholder->label = "屬性名稱：如顏色、價格等";
+$lang->product->placeholder->value = "屬性值：如紅色、￥1000等";

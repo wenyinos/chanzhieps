@@ -3,7 +3,7 @@
  * The control file of thread module of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
+ * @license     http://api.chanzhi.org/goto.php?item=license
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     thread
  * @version     $Id$
@@ -166,8 +166,13 @@ class thread extends control
         if($_POST)
         {
             if($this->thread->transfer($threadID, $thread->board, $this->post->targetBoard))
+            {
                 $this->send(array('result' =>'success', 'message' => $this->lang->thread->successTransfer, 'locate' => $this->server->http_referer));
-            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            }
+            else
+            {
+                $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            }
         }
 
         $this->view->thread = $thread;

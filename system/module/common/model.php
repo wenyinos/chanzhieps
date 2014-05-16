@@ -3,7 +3,7 @@
  * The model file of common module of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
+ * @license     http://api.chanzhi.org/goto.php?item=license
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     common
  * @version     $Id$
@@ -698,25 +698,5 @@ class commonModel extends model
 
         $this->config->categoryAlias = array();
         foreach($this->config->seo->alias->category as $alias => $category) $this->config->categoryAlias[$category->category] = $alias;
-    }
-
-    /**
-     * Get latest version.
-     * 
-     * @access public
-     * @return void
-     */
-    public function getLatestRelease()
-    {
-        $latestRelease = file_get_contents($this->config->latestReleaseApi . $this->config->version);
-        if($latestRelease !== false)
-        {
-            $latestRelease = json_decode($latestRelease);
-            if(version_compare($this->config->version, $latestRelease->version) >= 0) return false;
-            $latestRelease->result = true;
-            return $latestRelease;
-        }
-
-        return false;
     }
 }

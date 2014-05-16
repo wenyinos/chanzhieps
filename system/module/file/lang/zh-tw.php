@@ -3,7 +3,7 @@
  * The file module zh-tw file of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青島息壤網絡信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
+ * @license     http://api.chanzhi.org/goto.php?item=license
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     file
  * @version     $Id$
@@ -39,4 +39,7 @@ $lang->file->publics[1] = '允許';
 $lang->file->edit       = '編輯';
 $lang->file->editFile   = '更改附件';
 
-$lang->file->errorUnwritable = '上傳目錄不可寫，無法上傳附件。';
+$lang->file->errorUnwritable  = '上傳目錄不可寫，無法上傳附件。';
+$lang->file->noAccess         = '不允許訪問。';
+$lang->file->invalidParameter = '參數無效。';
+$lang->file->unWritable       = '目錄不可寫或不存在。';

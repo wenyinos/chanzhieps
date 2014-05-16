@@ -3,7 +3,7 @@
  * The edit view file of slide of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
+ * @license     http://api.chanzhi.org/goto.php?item=license
  * @author      Xiying Guan<guanxiying@xirangit.com>
  * @package     slide
  * @version     $Id$
@@ -43,8 +43,8 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
           </td>
         </tr>
         <tr>
-          <th><?php echo $lang->slide->imageUrl;?></th>
-          <td><?php echo html::input('imageUrl', $slide->imageUrl, "class='form-control'");?></td><td colspan='2'></td>
+          <th><?php echo $lang->slide->mainLink;?></th>
+          <td><?php echo html::input('mainLink', $slide->mainLink, "class='form-control'");?></td><td colspan='2'></td>
         </tr>
         <tr>
           <th><?php echo $lang->slide->background->type;?></th>
@@ -136,8 +136,7 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
         <?php endif ?>
         <tr>
           <th><?php echo $lang->slide->summary;?></th>
-          <td colspan='2'><?php echo html::textarea('summary', $slide->summary, 'class="form-control"');?></td>
-          <td><label class='text-info'><?php echo $lang->slide->suitableDesc;?></label></td>
+          <td colspan='3'><?php echo html::textarea('summary', $slide->summary, 'class="form-control"');?></td>
         </tr>
         <tr>
           <td></td>

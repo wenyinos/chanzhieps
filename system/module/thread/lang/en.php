@@ -3,7 +3,7 @@
  * The thread module english file of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
+ * @license     http://api.chanzhi.org/goto.php?item=license
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     thread
  * @version     $Id$
@@ -13,8 +13,8 @@ $lang->thread->common    = 'Thread';
 
 $lang->thread->id         = 'Id';
 $lang->thread->title      = 'Title';
-$lang->thread->author     = 'Autuor';
 $lang->thread->board      = 'Board';
+$lang->thread->author     = 'Autuor';
 $lang->thread->content    = 'Content ';
 $lang->thread->file       = 'File ';
 $lang->thread->postedDate = 'Posted date';
@@ -45,12 +45,13 @@ $lang->thread->confirmHideThread   = "Are you sure to hide this thread?";
 $lang->thread->confirmDeleteReply  = "Are you sure to delete this reply?";
 $lang->thread->confirmDeleteFile   = "Are you sure to delete this file?";
 
-$lang->thread->lblEdited      = '%s Last edited, %s';
-$lang->thread->message        = '%s reply at #%s in forum, the thread is: %s, the content is: %s';
-$lang->thread->readonly       = 'Read only';
-$lang->thread->successStick   = 'Successfully sticky.';
-$lang->thread->successUnstick = 'Successfully unsticky.';
+$lang->thread->lblEdited       = '%s Last edited, %s';
+$lang->thread->message         = '%s reply at #%s in forum, the thread is: %s, the content is: %s';
+$lang->thread->readonly        = 'Read only';
+$lang->thread->successStick    = 'Successfully sticky.';
+$lang->thread->successUnstick  = 'Successfully unsticky.';
 $lang->thread->readonlyMessage = 'The thread has been set <strong>READONLY</strong>，you can not post new reply。';
+$lang->thread->successTransfer = 'Successfully Transfered';
 
 /* Adjust the pager. */
 if(!isset($lang->pager->settedInForum))

@@ -3,7 +3,7 @@
  * The common simplified chinese file of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
+ * @license     http://api.chanzhi.org/goto.php?item=license
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     chanzhiEPS
  * @version     $Id$
@@ -23,10 +23,9 @@ $lang->back2Top = '返回顶部';
 /* Lang items for xirang. */
 $lang->chanzhiEPS       = '蝉知企业门户系统';
 $lang->chanzhiEPSx      = '蝉知';
-$lang->agreement        = "已阅读并同意<a href='http://www.chanzhi.org' target='_blank'>《蝉知企业门户系统使用协议》</a>";
+$lang->agreement        = "已阅读并同意<a href='http://api.chanzhi.org/goto.php?item=license' target='_blank'>《蝉知企业门户系统使用协议》</a>";
 $lang->poweredBy        = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>{$lang->chanzhiEPSx} %s</a></span>";
-$lang->newVersion       = "有新的版本：<a class='link-version' href='' target='_blank'>蝉知<span id='version'></span></strong></a> 可用。";
-$lang->seeLatestRelease = '看看最新的版本';
+$lang->newVersion       = "提示：蝉知系统已于 <span id='releaseDate'></span> 发布 <span id='version'></span>版本。<a href='' target='_blank' id='upgradeLink'>马上下载</a>";
 
 /* IE6 alert.  */
 $lang->IE6Alert= <<<EOT

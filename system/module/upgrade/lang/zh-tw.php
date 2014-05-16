@@ -3,7 +3,7 @@
  * The upgrade module zh-tw file of ZenTaoPMS.
  *
  * @copyright   Copyright 2013-2013 青島息壤網絡信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL (http://www.gnu.org/licenses/lgpl.html)
+ * @license     http://api.chanzhi.org/goto.php?item=license 
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     upgrade
  * @version     $$
@@ -51,3 +51,4 @@ $lang->upgrade->fromVersions['2_0']   = '2.0.stable';
 $lang->upgrade->fromVersions['2_0_1'] = '2.0.1.stable';
 $lang->upgrade->fromVersions['2_1']   = '2.1.stable';
 $lang->upgrade->fromVersions['2_2']   = '2.2.stable';
+$lang->upgrade->fromVersions['2_2_1'] = '2.2.1.stable';

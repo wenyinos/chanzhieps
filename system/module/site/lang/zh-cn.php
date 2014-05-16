@@ -3,7 +3,7 @@
  * The site module zh-cn file of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
+ * @license     http://api.chanzhi.org/goto.php?item=license
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     site
  * @version     $Id$
@@ -31,7 +31,7 @@ $lang->site->setQQOauth    = "QQ接入";
 $lang->site->oauthHelp     = "使用帮助";
 
 $lang->site->typeList = new stdclass();
-$lang->site->typeList->compnay = '企业门户';
+$lang->site->typeList->company = '企业门户';
 $lang->site->typeList->blog    = '个人网站';
 
 $lang->site->moduleAvailable = array();

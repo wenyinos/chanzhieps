@@ -3,10 +3,11 @@ $(document).ready(function()
     $('#upgradeNotice').hide();
     if($('#upgradeNotice').size())
     {
-        if(latestversion.new)
+        if(typeof(latest) != 'undefined' && latest.isNew)
         {
-            $('#version').html(latestversion.version);
-            $('.link-version').attr('href', latestversion.url);
+            $('#version').html(latest.version);
+            $('#releaseDate').html(latest.releaseDate);
+            $('#upgradeLink').attr('href', latest.url);
             $('#upgradeNotice').show();
             return true;
         }

@@ -3,7 +3,7 @@
  * The zh-tw language file of install module of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青島息壤網絡信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
+ * @license     http://api.chanzhi.org/goto.php?item=license
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     install
  * @version     $Id$
@@ -17,7 +17,6 @@ $lang->install->error   = '錯誤 ';
 
 $lang->install->start            = '開始安裝';
 $lang->install->keepInstalling   = '繼續安裝當前版本';
-$lang->install->seeLatestRelease = '看看最新的版本';
 $lang->install->welcome          = '您睿智地選擇了蟬知企業門戶系統!';
 $lang->install->desc             = <<<EOT
 <p>使用蟬知，您可以：</p>
