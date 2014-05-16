@@ -351,19 +351,19 @@ class user extends control
     }
 
     /**
-     * Allow a user.
+     * Activate a user.
      *
      * @param  int  $userID
      * @access public
      * @return viod
      */
-    public function allow($userID)
+    public function activate($userID)
     {
-        if(!$userID) $this->send(array('result'=>'fail', 'message' => $this->lang->user->allowFail));       
+        if(!$userID) $this->send(array('result'=>'fail', 'message' => $this->lang->user->activateFail));       
 
-        $this->user->allow($userID);
+        $this->user->activate($userID);
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        $this->send(array('result'=>'success', 'message' => $this->lang->user->allowSuccess));
+        $this->send(array('result'=>'success', 'message' => $this->lang->user->activateSuccess));
     }
 
     /**
