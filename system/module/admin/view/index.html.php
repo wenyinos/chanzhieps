@@ -11,7 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<?php if(!$ignoreUpgrade) js::import('http://api.chanzhi.org/latestversion.php?version=' . $this->config->version);?>
+<?php if(!$ignoreUpgrade) js::import('http://api.chanzhi.org/latest.php?version=' . $this->config->version);?>
 <div class='container' id='shortcutBox'>
 
   <?php if(strpos($this->server->php_self, '/admin.php') !== false && empty($this->config->global->ignoreAdminEntry)):?>
@@ -24,10 +24,9 @@
   <?php endif;?>
 
   <?php if(!$ignoreUpgrade):?>
-  <div class='alert alert-danger' id='upgradeNotice'>
+  <div class='alert alert-success' id='upgradeNotice'>
     <div>
       <?php echo $lang->newVersion;?>
-      <?php echo html::a('', $lang->seeLatestRelease, "target='_blank' class='link-version'");?>
       <button class="close"><?php echo html::a(inlink('ignoreUpgrade'), '&times;', "class='reload'");?></button>
     </div>
   </div>
