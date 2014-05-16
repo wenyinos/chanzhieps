@@ -450,13 +450,13 @@ class userModel extends model
     }
 
     /**
-     * Allow the user.
+     * Activate the user.
      *
      * @param  int    $userID
      * @access public
      * @return bool
      */
-    public function allow($userID)
+    public function activate($userID)
     {
         $this->dao->update(TABLE_USER)->set('locked')->eq('')->where('id')->eq($userID)->exec();
         return !dao::isError();
