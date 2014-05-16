@@ -323,7 +323,7 @@ class file extends control
         $fileTypes = array('gif', 'jpg', 'jpeg', 'png', 'bmp');
         $order = $this->get->order ? strtolower($this->get->order) : 'name';
 
-        if (empty($this->get->path))
+        if(empty($_GET['path']))
         {
             $currentPath    = $this->file->savePath;
             $currentUrl     = $this->file->webPath;
@@ -338,9 +338,9 @@ class file extends control
             $moveupDirPath  = preg_replace('/(.*?)[^\/]+\/$/', '$1', $currentDirPath);
         }
 
-        if(preg_match('/\.\./', $currentPath)) die('Access is not allowed.');   //Do not use .. to move up to the upper directory.
-        if(!preg_match('/\/$/', $currentPath)) die('Parameter is not valid.'); //The last charact is not '/'.
-        if(!file_exists($currentPath) || !is_dir($currentPath)) die('Directory does not exist.'); //Directory does not exist or it is not a directory.
+        if(preg_match('/\.\./', $currentPath)) die($this->lang->file->noAccess);
+        if(!preg_match('/\/$/', $currentPath)) die($this->lang->file->invalidParameter);
+        if(!file_exists($currentPath) || !is_dir($currentPath)) die($this->lang->file->unWritable);
 
         $fileList = array();
         if($fileDir = opendir($currentPath))
