@@ -3,7 +3,7 @@
  * The common simplified chinese file of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
+ * @license     http://api.chanzhi.org/goto.php?item=license
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     chanzhiEPS
  * @version     $Id$
@@ -23,7 +23,7 @@ $lang->back2Top = 'T<br/>O<br/>P';
 /* Lang items for xirang. */
 $lang->chanzhiEPS       = 'chanzhiEPS';
 $lang->chanzhiEPSx      = 'Chanzhi';
-$lang->agreement        = "Agree to the <a href='http://api.chanzhi.org/goto.php?item=licence' target='_blank'>《ChanzhiEPS Service Agreement》</a>";
+$lang->agreement        = "Agree to the <a href='http://api.chanzhi.org/goto.php?item=license' target='_blank'>《ChanzhiEPS Service Agreement》</a>";
 $lang->poweredBy        = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>{$lang->chanzhiEPSx} %s</a></span>";
 $lang->newVersion       = "Notice: ChanzhiEPS has been upgraded to version: <span id='version'></span> at <span id='releaseDate'></span>. <a href='' target='_blank' id='upgradeLink'>DownLoad Now</a>";
 
