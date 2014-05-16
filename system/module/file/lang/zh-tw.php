@@ -39,4 +39,7 @@ $lang->file->publics[1] = '允許';
 $lang->file->edit       = '編輯';
 $lang->file->editFile   = '更改附件';
 
-$lang->file->errorUnwritable = '上傳目錄不可寫，無法上傳附件。';
+$lang->file->errorUnwritable  = '上傳目錄不可寫，無法上傳附件。';
+$lang->file->noAccess         = '不允許訪問。';
+$lang->file->invalidParameter = '參數無效。';
+$lang->file->unWritable       = '目錄不可寫或不存在。';

@@ -17,7 +17,6 @@ $lang->install->error   = '錯誤 ';
 
 $lang->install->start            = '開始安裝';
 $lang->install->keepInstalling   = '繼續安裝當前版本';
-$lang->install->seeLatestRelease = '看看最新的版本';
 $lang->install->welcome          = '您睿智地選擇了蟬知企業門戶系統!';
 $lang->install->desc             = <<<EOT
 <p>使用蟬知，您可以：</p>

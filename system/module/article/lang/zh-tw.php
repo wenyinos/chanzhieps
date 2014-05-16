@@ -50,8 +50,9 @@ $lang->page->list   = '單頁列表';
 $lang->page->create = '添加單頁';
 $lang->page->edit   = '編輯單頁';
 
-$lang->article->originalList[1] = '原創';
-$lang->article->originalList[0] = '轉貼';
+$lang->article->originalList[0] = '原創';
+$lang->article->originalList[1] = '轉貼';
+$lang->article->originalList[2] = '翻譯';
 
 $lang->article->statusList['normal'] = '正常';
 $lang->article->statusList['draft']  = '草稿';

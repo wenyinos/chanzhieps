@@ -21,9 +21,11 @@ $lang->divider  = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->back2Top = '返回頂部';
 
 /* Lang items for xirang. */
-$lang->chanzhiEPS  = '蟬知企業門戶系統';
-$lang->chanzhiEPSx = '蟬知';
-$lang->poweredBy   = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>{$lang->chanzhiEPSx} %s</a></span>";
+$lang->chanzhiEPS       = '蟬知企業門戶系統';
+$lang->chanzhiEPSx      = '蟬知';
+$lang->agreement        = "已閲讀並同意<a href='http://api.chanzhi.org/goto.php?item=license' target='_blank'>《蟬知企業門戶系統使用協議》</a>";
+$lang->poweredBy        = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>{$lang->chanzhiEPSx} %s</a></span>";
+$lang->newVersion       = "提示：蟬知系統已于 <span id='releaseDate'></span> 發佈 <span id='version'></span>版本。<a href='' target='_blank' id='upgradeLink'>馬上下載</a>";
 
 /* IE6 alert.  */
 $lang->IE6Alert= <<<EOT
@@ -180,7 +182,7 @@ $lang->ui->menu->pages   = array('link' => '佈局設置|block|pages|', 'alias' 
 $lang->user = new stdclass();
 $lang->user->menu = new stdclass();
 $lang->user->menu->all    = '全部會員|user|admin|';
-$lang->user->menu->weibo  = '微博會員|user|admin|provider=weibo';
+$lang->user->menu->sina   = '微博會員|user|admin|provider=sina';
 $lang->user->menu->wechat = '微信會員|user|admin|provider=wechat';
 $lang->user->menu->qq     = 'QQ會員|user|admin|provider=qq';
 
@@ -303,7 +305,7 @@ $lang->k  = '蟬知門戶，開源免費的企業建站系統!;';
 $lang->k .= '蟬知門戶，開源免費的cms!;';
 $lang->k .= '蟬知門戶，免費建站首選！;';
 $lang->k .= '蟬知門戶，企業網站建設專家！;';
-$lang->k .= '蟬知門戶，開源php企業建站系統！';
-$lang->k .= '蟬知門戶，微網站專家！';
-$lang->k .= '蟬知門戶，微網站首選！';
+$lang->k .= '蟬知門戶，開源php企業建站系統！;';
+$lang->k .= '蟬知門戶，微網站專家！;';
+$lang->k .= '蟬知門戶，微網站首選！;';
 $lang->k .= '蟬知門戶，微信營銷首選！';

@@ -16,6 +16,7 @@ $lang->forum->threadCount = '主題數';
 $lang->forum->postCount   = '帖子數';
 $lang->forum->lastPost    = '最後發表';
 $lang->forum->readonly    = '只讀版塊。';
+$lang->forum->notExist    = '版塊不存在。';
 $lang->forum->lblOwner    = " [ 版主：%s ]";
 
 $lang->forum->post   = '發貼';

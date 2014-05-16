@@ -23,6 +23,7 @@ $lang->tree->timeCountDown = "<strong id='countDown'>3</strong> 秒後轉向類�
 $lang->tree->redirect      = '立即轉向';
 $lang->tree->aliasRepeat   = '別名: %s 已經存在,不能重複添加。';
 $lang->tree->aliasConflict = '別名: %s 與系統模組衝突，不能添加。';
+$lang->tree->aliasNumber   = '別名不能為數字。';
 $lang->tree->hasChildren   = '該板塊存在子版塊，不能刪除。';
 $lang->tree->confirmDelete = "您確定刪除該類目嗎？";
 $lang->tree->successFixed  = "成功修復";
