@@ -25,6 +25,7 @@
         <?php foreach($slides as  $key => $slide):?>
         <tr class='text-middle'>
           <td>
+            <?php echo html::hidden("order[{$slide->id}]", $key);?> 
             <div class='carousel slide mg-0'>
               <div class='carousel-inner'>
                 <?php if ($slide->backgroundType == 'image'): ?>
