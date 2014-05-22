@@ -551,7 +551,7 @@ class upgradeModel extends model
             $slides[$key]->height          = '';
             $slides[$key]->label           = array($slides[$key]->label);
             $slides[$key]->buttonClass     = array('0' => 'primary');
-            $slides[$key]->buttonUrl       = array($slides[$key]->url);
+            $slides[$key]->buttonUrl       = isset($slides[$key]->url) ? array($slides[$key]->url) : '';
 
             unset($slides[$key]->url);
 

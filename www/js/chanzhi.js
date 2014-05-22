@@ -402,7 +402,7 @@ $.extend(
                 }
 
                 /* show the modal dialog. */
-                $('#ajaxModal').modal('show');
+                $('#ajaxModal').modal({show:true,backdrop:$e.data('backdrop'),keyboard:$e.data('keyboard')});
             });
 
             /* Save the href to rel attribute thus we can save it. */
