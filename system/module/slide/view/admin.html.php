@@ -23,6 +23,7 @@
     <table class='table table-hover table-bordered'>
       <tbody>
         <?php foreach($slides as  $key => $slide):?>
+        <?php if($slide->backgroundType == 'color') $slide->height = $slide->height ? $slide->height : 180; ?>
         <tr class='text-middle'>
           <td>
             <?php echo html::hidden("order[{$slide->id}]", $key);?> 
