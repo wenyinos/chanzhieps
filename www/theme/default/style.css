@@ -385,6 +385,8 @@ a.tag-link {color: inherit;}
   #headTitle {position: absolute; z-index: 10010; bottom: -49px; left: 25px; min-height: inherit; height: 45px;}
   #headTitle img {height: 45px; max-width: inherit; min-width: 50px; width: auto;}
   .navbar-brand {display: none}
+  .navbar-header {min-height: 50px}
+  .navbar-toggle {margin-top: 8px}
 
   .ke-toolbar {display: none !important;}
 
