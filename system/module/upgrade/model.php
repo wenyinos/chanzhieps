@@ -83,6 +83,7 @@ class upgradeModel extends model
             case '2_2_1':
                 $this->execSQL($this->getUpgradeFile('2.2.1'));
                 $this->upgradeSlide();
+                $this->upgradeIndexKeyword();
                 $this->upgradeHeaderLayouts();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -550,7 +551,7 @@ class upgradeModel extends model
             $slides[$key]->height          = '';
             $slides[$key]->label           = array($slides[$key]->label);
             $slides[$key]->buttonClass     = array('0' => 'primary');
-            $slides[$key]->buttonUrl       = array($slides[$key]->url);
+            $slides[$key]->buttonUrl       = isset($slides[$key]->url) ? array($slides[$key]->url) : '';
 
             unset($slides[$key]->url);
 
@@ -613,6 +614,18 @@ class upgradeModel extends model
         }
 
         return !dao::isError();
+    }
+
+    /**
+     * Upgrade indexKeyword from 2.2.1 
+     * 
+     * @access public
+     * @return void
+     */
+    public function upgradeIndexKeyword()
+    {
+        $setting = array('indexKeywords' => $this->config->site->keywords);
+        return $this->loadModel('setting')->setItems('system.common.site', $setting);
     }
 
     /**

@@ -334,6 +334,8 @@ class productModel extends model
         $data = new stdclass();
         $data->product = $productID;
 
+        $this->dao->delete()->from(TABLE_PRODUCT_CUSTOM)->where('product')->eq($productID)->exec();
+
         foreach($lables as $key => $label)
         {
             $data->label = $label;
