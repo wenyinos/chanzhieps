@@ -20,6 +20,7 @@ if($argc != 2) die('Usage: ' . basename(__FILE__) . " <request>\n");
 /* Parse the request into params. */
 $request = parse_url(trim($argv[1]));
 $_SERVER['HTTP_HOST'] = $request['host'];
+$_SERVER['SERVER_ADDR'] = getenv('SERVER_ADDR');
 
 /* Load the framework. */
 chdir(dirname(dirname(__FILE__)));
