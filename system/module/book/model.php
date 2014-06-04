@@ -580,7 +580,7 @@ class bookModel extends model
         if($node->type == 'article')
         {
             $this->loadModel('file')->updateObjectID($this->post->uid, $nodeID, 'book');
-            $this->file->fileManager($this->post->content, $nodeID, 'book');
+            $this->file->copyFromContent($this->post->content, $nodeID, 'book');
             if(dao::isError()) return false;
         }
 
