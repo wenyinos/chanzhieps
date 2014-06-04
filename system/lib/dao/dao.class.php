@@ -1096,7 +1096,7 @@ class sql
     {
         global $dbh;
         $this->dbh        = $dbh;
-        $this->magicQuote = get_magic_quotes_gpc();
+        $this->magicQuote = version_compare(phpversion(), '5.4', '<') and get_magic_quotes_gpc();
     }
 
     /**
