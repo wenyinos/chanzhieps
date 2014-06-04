@@ -3,7 +3,7 @@
  * The model file of block module of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     http://api.chanzhi.org/goto.php?item=license
+ * @license     LGPL
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     block
  * @version     $ID$
@@ -229,6 +229,7 @@ class blockModel extends model
     public function create()
     {
         $block = fixer::input('post')->stripTags('content', $this->config->block->allowedTags)->get();
+        $gpcOn = version_compare(phpversion(), '5.4', '<') and get_magic_quotes_gpc();
 
         if(isset($block->params))
         {
@@ -236,7 +237,7 @@ class blockModel extends model
             {
                 if(is_array($value)) $block->params[$field] = join($value, ',');
             }
-            if($this->post->content) $block->params['content'] = $this->post->content;
+            if($this->post->content) $block->params['content'] = $gpcOn ? stripslashes($block->content) : $block->content;
             $block->content = helper::jsonEncode($block->params);
         }
 
@@ -257,6 +258,7 @@ class blockModel extends model
     public function update()
     {
         $block = fixer::input('post')->stripTags('content', $this->config->block->allowedTags)->get();
+        $gpcOn = version_compare(phpversion(), '5.4', '<') and get_magic_quotes_gpc();
 
         if(isset($block->params))
         {
@@ -264,7 +266,7 @@ class blockModel extends model
             {
                 if(is_array($value)) $block->params[$field] = join($value, ',');
             }
-            if($this->post->content) $block->params['content'] = $this->post->content;
+            if($this->post->content) $block->params['content'] = $gpcOn ? stripslashes($block->content) : $block->content;
             $block->content = helper::jsonEncode($block->params);
         }
 
