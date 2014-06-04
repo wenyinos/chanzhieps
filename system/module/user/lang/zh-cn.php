@@ -60,7 +60,7 @@ $lang->user->goback          = "返回前一页";
 $lang->user->allUsers        = '全部用户';
 $lang->user->submit          = "提交";
 $lang->user->forbid          = '禁用';
-$lang->user->activate        = '解除禁用';
+$lang->user->activate        = '解禁';
 $lang->user->pullWechatFans  = '更新微信会员数据';
 
 $lang->user->profile     = '个人信息';
