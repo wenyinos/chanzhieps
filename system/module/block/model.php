@@ -351,7 +351,8 @@ class blockModel extends model
     /**
      * Parse the content of one block.
      * 
-     * @param object $block 
+     * @param  object    $block 
+     * @param  bool      $withGrid          
      * @param  string    $containerHeader 
      * @param  string    $containerFooter 
      * @access private
@@ -366,14 +367,24 @@ class blockModel extends model
             else echo "<div class='col-md-{$block->grid}' data-grid='{$block->grid}'>";
         }
 
-        $blockRoot = dirname(__FILE__) . '/ext/view/block/';
-        $blockFile = $blockRoot . strtolower($block->type) . '.html.php';
+        /* First try block/ext/sitecode/view/block/ */
+        $extBlockRoot = dirname(__FILE__) . "/ext/_{$this->config->site->code}/view/block/";
+        $blockFile    = $extBlockRoot . strtolower($block->type) . '.html.php';
+
+        /* Then try block/ext/view/block/ */
         if(!file_exists($blockFile))
         {
-            $blockRoot = dirname(__FILE__) . '/view/block/';
-            $blockFile = $blockRoot . strtolower($block->type) . '.html.php';
+            $extBlockRoot = dirname(__FILE__) . "/ext/view/block/";
+            $blockFile    = $extBlockRoot . strtolower($block->type) . '.html.php';
+
+            /* No ext file, use the block/view/block/. */
+            if(!file_exists($blockFile))
+            {
+                $blockRoot = dirname(__FILE__) . '/view/block/';
+                $blockFile = $blockRoot . strtolower($block->type) . '.html.php';
+                if(!file_exists($blockFile)) return '';
+            }
         }
-        if(!file_exists($blockFile)) return '';
 
         $blockClass = '';
         if(isset($block->borderless) and $block->borderless) $blockClass .= 'panel-borderless';

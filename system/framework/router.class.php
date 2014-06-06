@@ -1332,8 +1332,8 @@ class router
 
             if($config->multi)
             {
-                $mulitConfigFile = $this->configRoot . "multi.php";
-                if(is_file($mulitConfigFile)) include $mulitConfigFile;
+                $multiConfigFile = $this->configRoot . "multi.php";
+                if(is_file($multiConfigFile)) include $multiConfigFile;
             }
 
             $siteConfigFile = $this->configRoot . "sites/{$this->siteCode}.php";
