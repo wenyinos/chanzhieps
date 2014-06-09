@@ -56,8 +56,10 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
 
 /* navbar */
 #mainNavbar .navbar-collapse .navbar-nav.navbar-right:last-child {margin-right: 0;}
+#mainNavbar .navbar-brand {top: 2px; position: relative;}
 @media (max-width: 767px) {
   #mainNavbar .navbar-collapse .navbar-nav > li > a {padding-left: 15px; padding-right: 15px;}
+  #mainNavbar .navbar-brand {display: block; top: 7px}
 }
 #navbarSwitcher {display: none;}
 @media screen and (min-width:768px) and (max-width:1210px)
