@@ -234,6 +234,10 @@ $lang->tag->menu = $lang->site->menu;
 $lang->mail = new stdclass();
 $lang->mail->menu = $lang->site->menu;
 
+/* Menu of reply module. */
+$lang->reply = new stdclass();
+$lang->reply->menu = $lang->forum->menu;
+
 /* Menu of wechat module. */
 $lang->wechat = new stdclass();
 $lang->wechat->menu = $lang->site->menu;
