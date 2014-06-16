@@ -22,7 +22,7 @@
   </div>
 </nav>
 
-<div class="clearfix">
+<div class="clearfix row-main">
   <?php 
   $moduleMenu = commonModel::createModuleMenu($this->moduleName);
   if($moduleMenu) echo "<div class='col-md-2'>$moduleMenu</div>\n<div class='col-md-10'>\n";
