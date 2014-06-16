@@ -563,7 +563,7 @@ class commonModel extends model
         $divider = $this->lang->divider;
         foreach($module->pathNames as $moduleID => $moduleName)
         {   
-            echo '<li>' . html::a(inlink('index', "moduleID=$moduleID", "category=" . $this->loadModel('tree')->getAliasByID($moduleID)), $moduleName) . '</li>';
+            echo '<li>' . html::a(inlink('index', "moduleID=$moduleID", "category=" . $this->config->seo->alias->blog[$moduleID]), $moduleName) . '</li>';
         }
         if($article) echo '<li>' . $article->title . '</li>';
     }
@@ -603,7 +603,7 @@ class commonModel extends model
         unset($board->pathNames[key($board->pathNames)]);
         foreach($board->pathNames as $boardID => $boardName)
         {
-            echo '<li>' . html::a(helper::createLink('forum', 'board', "boardID={$boardID}", "category=" . $this->loadModel('tree')->getAliasByID($boardID)), $boardName) . '</li>';
+            echo '<li>' . html::a(helper::createLink('forum', 'board', "boardID={$boardID}", "category=" . $this->config->seo->alias->forum[$boardID]), $boardName) . '</li>';
         }
     }
 
@@ -695,6 +695,8 @@ class commonModel extends model
 
         $this->config->seo->alias->category = $this->dao->select('alias, id as category, type as module')->from(TABLE_CATEGORY)->where('alias')->ne('')->andWhere('type')->in('article,product')->fetchAll('alias');
         $this->config->seo->alias->page     = $this->dao->select("alias, id, 'page' as module")->from(TABLE_ARTICLE)->where('type')->eq('page')->fetchAll('alias');
+        $this->config->seo->alias->forum    = $this->dao->select("id, alias")->from(TABLE_CATEGORY)->where('type')->eq('forum')->fetchPairs('id');
+        $this->config->seo->alias->blog     = $this->dao->select("id, alias")->from(TABLE_CATEGORY)->where('type')->eq('blog')->fetchPairs('id');
 
         $this->config->categoryAlias = array();
         foreach($this->config->seo->alias->category as $alias => $category) $this->config->categoryAlias[$category->category] = $alias;
