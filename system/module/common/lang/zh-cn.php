@@ -65,7 +65,7 @@ $lang->wechatTip      = '微信订阅';
 $lang->qrcodeTip      = '移动访问';
    
 /* Global action items. */
-$lang->reset          = '重填';
+$lang->reset          = '重置';
 $lang->edit           = '编辑';
 $lang->copy           = '复制';
 $lang->hide           = '隐藏';
