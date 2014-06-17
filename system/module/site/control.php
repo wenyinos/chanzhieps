@@ -21,7 +21,7 @@ class site extends control
     {
         if(!empty($_POST))
         {
-            $setting = fixer::input('post')->join('moduleEnabled', ',')->get();
+            $setting = fixer::input('post')->join('moduleEnabled', ',')->setDefault('moduleEnabled', '')->get();
             $result  = $this->loadModel('setting')->setItems('system.common.site', $setting);
             $cache   = $this->loadModel('cache')->createConfigCache();
 

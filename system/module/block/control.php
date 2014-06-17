@@ -22,6 +22,7 @@ class block extends control
      */
     public function admin($recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
+        $this->session->set('blockList', $this->app->getURI());
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
@@ -77,7 +78,7 @@ class block extends control
         if($_POST)
         {
             $this->block->update();
-            if(!dao::isError()) $this->send(array('result' => 'success', 'locate' => $this->inlink('admin')));
+            if(!dao::isError()) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 

@@ -37,7 +37,10 @@
         <tbody id='blockForm'></tbody>
         <tr>
           <th></th>
-          <td colspan='2'><?php echo html::submitButton();?></td>
+          <td colspan='2'>
+            <?php echo html::submitButton();?>
+            <?php echo html::a($this->session->blockList, $this->lang->goback, "class='btn btn-default'");?>
+          </td>
         </tr>
       </table>
     </form>

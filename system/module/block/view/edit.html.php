@@ -36,7 +36,10 @@
         <?php echo $this->fetch('block', 'blockForm', 'type=' . $type . '&id=' . $block->id);?>
         <tr>
           <td></td>
-          <td><?php echo html::submitButton() . html::hidden('blockID', $block->id);?></td>
+          <td>
+            <?php echo html::submitButton() . html::hidden('blockID', $block->id);?>
+            <?php echo html::a($this->session->blockList, $this->lang->goback, "class='btn btn-default'");?>
+          </td>
         </tr>
       </table>
     </form>
