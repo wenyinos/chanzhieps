@@ -122,4 +122,20 @@ class ui extends control
 
         $this->locate(inlink('setFavicon'));
     }
+
+    /**
+     * Delete logo. 
+     * 
+     * @access public          
+     * @return void            
+     */ 
+    public function deleteLogo() 
+    {
+        $logo = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : false;
+
+        $this->loadModel('setting')->deleteItems("owner=system&module=common&section=site&key=logo");
+        if($logo) $this->loadModel('file')->delete($logo->fileID);
+
+        $this->locate(inlink('setLogo'));
+    }
 }
