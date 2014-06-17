@@ -49,6 +49,9 @@ class reply extends control
         $pager   = new pager($recTotal, $recPerPage, $pageID);
         $replies = $this->reply->getList($orderBy, $pager);
 
+        $this->lang->reply->menu       = $this->lang->forum->menu;
+        $this->lang->menuGroups->reply = 'forum';
+
         if($this->get->tab == 'feedback')
         {
             $this->lang->reply->menu = $this->lang->feedback->menu;
