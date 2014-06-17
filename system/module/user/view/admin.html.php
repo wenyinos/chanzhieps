@@ -19,9 +19,9 @@ js::set('provider', $this->get->provider);
     <strong><i class="icon-group"></i> <?php echo $lang->user->list;?></strong>
     <div class="panel-actions">
       <form method='get' class='form-inline form-search'>
+        <?php echo html::hidden('m','user') . html::hidden('f','admin');?>
         <div class="input-group">
           <?php
-          echo html::hidden('m','user') . html::hidden('f','admin');
           echo html::input('user', $this->get->user, "class='form-control search-query' placeholder='{$lang->user->inputUserName}'"); 
           ?>
           <span class="input-group-btn">
@@ -68,14 +68,14 @@ js::set('provider', $this->get->provider);
         <?php //if($user->provider == 'wechat') echo html::a($this->createLink('wechat', 'message', "from={$user->openID}"), $lang->user->messages);?>
         <?php echo html::a($this->createLink('user', 'edit', "account=$user->account"), $lang->edit); ?>
         <?php if($user->locked < helper::now() or $user->locked == helper::now()):?>
-        <div class="btn-group">
+        <span class="dropdown">
           <a href='###' class="dropdown-toggle" data-toggle="dropdown"><?php echo $lang->user->forbid?> <span class="caret"></span></a>
           <ul class="dropdown-menu pull-right text-left" role="menu">
           <?php foreach($lang->user->forbidDate as $date => $title):?>
             <li><?php echo html::a($this->createLink('user', 'forbid', "userID={$user->id}&date=$date"), $title, "class='forbider'");?></li>
           <?php endforeach;?>
           </ul>
-        </div>
+        </span>
         <?php endif;?>
         <?php if($user->locked > helper::now()) echo html::a(inlink('activate', "id=$user->id"), $lang->user->activate, "class='forbider'");?>
       </td>
