@@ -165,8 +165,9 @@
 .panel-block .panel-body .article-content {padding: 0}
 
 .panel-block.links {padding: 10px 15px;}
-.panel-block.links .heading {display: inline-block; margin-right: 10px; color: #666}
-.panel-block.links > a {display: inline-block; margin-right: 10px;}
+.panel-block.links .heading {display: inline-block; color: #666; width: 75px; float: left;}
+.panel-block.links .body {display: inline-block; width: 90%; float: left;}
+.panel-block.links .body > a {display: inline-block; margin-right: 5px;}
 
 .panel-block.panel-borderless {border: none; box-shadow:  none;}
 .panel-block.panel-borderless .panel-heading {background: none}
