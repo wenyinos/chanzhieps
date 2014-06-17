@@ -32,13 +32,13 @@
             </td><td></td>
           </tr>
           <tr>
-            <th><?php echo $lang->user->oauth->clientID;?></th>
+            <th><?php echo $lang->user->oauth->{$providerCode}->clientID;?></th>
             <td>
               <?php echo html::input('clientID', isset($oauth->clientID) ? $oauth->clientID : '', "class='form-control'");?>
             </td>
           </tr>
           <tr>
-            <th><?php echo $lang->user->oauth->clientSecret;?></th>
+            <th><?php echo $lang->user->oauth->{$providerCode}->clientSecret;?></th>
             <td>
               <?php echo html::input('clientSecret', isset($oauth->clientSecret) ? $oauth->clientSecret : '', "class='form-control'");?>
             </td>

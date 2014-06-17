@@ -134,10 +134,16 @@ $lang->user->resetmail->reset    = '重置码：';
 $lang->user->oauth = new stdclass();
 $lang->user->oauth->common       = '开放登录';
 $lang->user->oauth->provider     = '服务商';
-$lang->user->oauth->clientID     = 'App Key';
-$lang->user->oauth->clientSecret = 'App Secret';
 $lang->user->oauth->verification = '网站验证';
 $lang->user->oauth->widget       = '网页组件';
+
+$lang->user->oauth->sina = new stdclass();
+$lang->user->oauth->sina->clientID     = 'App Key';
+$lang->user->oauth->sina->clientSecret = 'App Secret';
+
+$lang->user->oauth->qq = new stdclass();
+$lang->user->oauth->qq->clientID     = 'APP ID';
+$lang->user->oauth->qq->clientSecret = 'APP KEY';
 
 $lang->user->oauth->providers['sina'] = '新浪微博';
 $lang->user->oauth->providers['qq']   = 'QQ';
