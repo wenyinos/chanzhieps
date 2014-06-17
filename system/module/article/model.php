@@ -246,12 +246,13 @@ class articleModel extends model
      */
     public function getPrevAndNext($current, $category)
     {
-       $prev = $this->dao->select('t1.id, title, alias')->from(TABLE_ARTICLE)->alias('t1')
+        $current = $this->getByID($current);
+        $prev = $this->dao->select('t1.id, title, alias')->from(TABLE_ARTICLE)->alias('t1')
            ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
            ->where('t2.category')->eq($category)
            ->andWhere('t1.status')->eq('normal')
-           ->andWhere('t2.id')->lt($current)
-           ->orderBy('t2.id_desc')
+           ->andWhere('t1.addedDate')->lt($current->addedDate)
+           ->orderBy('t1.addedDate_desc')
            ->limit(1)
            ->fetch();
 
@@ -260,8 +261,8 @@ class articleModel extends model
            ->where('t2.category')->eq($category)
            ->andWhere('t1.addedDate')->le(helper::now())
            ->andWhere('t1.status')->eq('normal')
-           ->andWhere('t2.id')->gt($current)
-           ->orderBy('t2.id')
+           ->andWhere('t1.addedDate')->gt($current->addedDate)
+           ->orderBy('t1.addedDate')
            ->limit(1)
            ->fetch();
 
