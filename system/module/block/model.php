@@ -173,10 +173,11 @@ class blockModel extends model
      * Create form entry of one block backend.
      * 
      * @param  object  $block 
+     * @param  int     $key 
      * @access public
      * @return void
      */
-    public function createEntry($block = null )
+    public function createEntry($block = null, $key)
     {
         $blockOptions[''] = $this->lang->block->select;
         $blockOptions += $this->getPairs();
@@ -186,7 +187,7 @@ class blockModel extends model
 
         $entry = "<tr class='v-middle'>";
         $entry .= "<td><div class='input-group'>";
-        $entry .= html::select('blocks[]', $blockOptions, $blockID, "class='form-control'");
+        $entry .= html::select("blocks[{$key}]", $blockOptions, $blockID, "class='form-control'");
 
         $titlelessChecked = isset($block->titleless) && $block->titleless ? 'checked' : '';
         $borderlessChecked = isset($block->borderless) && $block->borderless ? 'checked' : '';
@@ -195,20 +196,20 @@ class blockModel extends model
             <div class='input-group-btn'>
               <div class='checkbox'>
                  <label>
-                   <input type='checkbox' {$titlelessChecked} value='1'><input type='hidden' name='titleless[]' /><span>{$this->lang->block->titleless}</span>
+                   <input type='checkbox' {$titlelessChecked} value='1'><input type='hidden' name='titleless[{$key}]' /><span>{$this->lang->block->titleless}</span>
                  </label>
               </div>
             </div>
             <div class='input-group-btn'>
               <div class='checkbox'>
                 <label>
-                  <input type='checkbox' {$borderlessChecked} value='1'><input type='hidden' name='borderless[]' /><span>{$this->lang->block->borderless}</span>
+                  <input type='checkbox' {$borderlessChecked} value='1'><input type='hidden' name='borderless[{$key}]' /><span>{$this->lang->block->borderless}</span>
                 </label>
               </div>
             </div></div></td>";
 
         $entry .= "<td class='text-middle'>";
-        $entry .= html::select('grid[]', $this->lang->block->gridOptions, $grid, "class='form-control'");
+        $entry .= html::select("grid[{$key}]", $this->lang->block->gridOptions, $grid, "class='form-control'");
         $entry .= '</td>';
 
         $entry .= '<td class="text-center text-middle">';
