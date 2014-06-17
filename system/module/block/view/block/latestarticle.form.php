@@ -14,7 +14,7 @@
 <?php $categories = $this->loadModel('tree')->getOptionMenu('article');?>
 <tr>
   <th><?php echo $lang->block->categories;?></th>
-  <td><?php echo html::select('params[category][]', $categories, isset($block) ? $block->content->category : '', "class='text-4 form-control chosen' multiple='multiple'");?></td>
+  <td><?php echo html::select('params[category][]', $categories, isset($block->content->category) ? $block->content->category : '', "class='text-4 form-control chosen' multiple='multiple'");?></td>
 </tr>
 <tr>
   <th><?php echo $lang->block->limit;?></th>
