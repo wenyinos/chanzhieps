@@ -134,10 +134,16 @@ $lang->user->resetmail->reset    = 'Reset Key:';
 $lang->user->oauth = new stdclass();
 $lang->user->oauth->common       = 'OAuth';
 $lang->user->oauth->provider     = 'Provider';
-$lang->user->oauth->clientID     = 'App Key';
-$lang->user->oauth->clientSecret = 'App Secret';
 $lang->user->oauth->verification = 'Verification';
 $lang->user->oauth->widget       = 'Widget';
+
+$lang->user->oauth->sina = new stdclass();
+$lang->user->oauth->sina->clientID     = 'App Key';
+$lang->user->oauth->sina->clientSecret = 'App Secret';
+
+$lang->user->oauth->qq = new stdclass();
+$lang->user->oauth->qq->clientID     = 'APP ID';
+$lang->user->oauth->qq->clientSecret = 'APP KEY';
 
 $lang->user->oauth->providers['sina'] = 'Sina weibo';
 $lang->user->oauth->providers['qq']   = 'QQ';

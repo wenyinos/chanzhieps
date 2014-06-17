@@ -229,20 +229,15 @@ class messageModel extends model
      */
     public function delete($messageID, $mode)
     {
-        $message = $this->dao->select('status')->from(TABLE_MESSAGE)->where('id')->eq($messageID)->fetch('', false);
-        if($message->status == 0)
-        {
-            $this->dao->delete()
-                ->from(TABLE_MESSAGE)
-                ->where('status')->eq(0)
-                ->beginIF($mode == 'single')->andWhere('id')->eq($messageID)->fi()
-                ->beginIF($mode == 'pre')->andWhere('id')->ge($messageID)->fi()
-                ->exec(false);
-        }
-        else
-        {
-            $this->dao->delete()->from(TABLE_MESSAGE)->where('id')->eq($messageID)->exec(false);
-        }
+        $message = $this->getByID($messageID);
+        $this->dao->delete()
+            ->from(TABLE_MESSAGE)
+            ->where('status')->eq(0)
+            ->andWhere('type')->eq($message->type)
+            ->beginIF($mode == 'single')->andWhere('id')->eq($messageID)->fi()
+            ->beginIF($mode == 'pre')->andWhere('id')->ge($messageID)->fi()
+            ->exec(false);
+        return !dao::isError();
     }
 
     /**
@@ -255,12 +250,15 @@ class messageModel extends model
      */
     public function pass($messageID, $type)
     {
+        $message = $this->getByID($messageID);
         $this->dao->update(TABLE_MESSAGE)
             ->set('status')->eq(1)
             ->where('status')->eq(0)
+            ->andWhere('type')->eq($message->type)
             ->beginIF($type == 'single')->andWhere('id')->eq($messageID)->fi()
             ->beginIF($type == 'pre')->andWhere('id')->ge($messageID)->fi()
             ->exec(false);
+        return !dao::isError();
     }
 
     /**

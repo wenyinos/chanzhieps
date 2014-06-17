@@ -76,6 +76,7 @@ $config->rights->member['thread']['edit']       = 'edit';
 $config->rights->member['thread']['hide']       = 'hide';
 $config->rights->member['thread']['stick']      = 'stick';
 $config->rights->member['thread']['delete']     = 'delete';
+$config->rights->member['thread']['transfer']   = 'transfer';
 $config->rights->member['thread']['deletefile'] = 'deletefile';
 
 $config->rights->member['reply']['post']       = 'post';

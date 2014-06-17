@@ -10,6 +10,7 @@
  * @link        http://www.zentao.net
  */
 ?>
+<?php js::set('parents', $parents);?>
 <div class='modal-dialog w-600px'>
   <div class='modal-content'>
     <div class='modal-header'>
