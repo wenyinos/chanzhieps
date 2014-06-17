@@ -14,6 +14,7 @@ $jqueryRoot = $jsRoot . 'jquery/';
 /* Set js files to combined. */
 $jsFiles[] = $jsRoot . 'jquery/min.js';
 $jsFiles[] = $jsRoot . 'jquery/form/min.js';
+$jsFiles[] = $jsRoot . 'jquery/treeview/min.js';
 $jsFiles[] = $jsRoot . 'zui/min.js';
 $jsFiles[] = $jsRoot . 'chanzhi.js';
 $jsFiles[] = $jsRoot . 'my.js';
@@ -39,6 +40,7 @@ $themeRoot  = $baseDir . '/www/theme/';
 /* Common css files. */
 $cssCode  = str_replace('../fonts', '../zui/fonts', file_get_contents($themeRoot . 'zui/css/min.css'));
 $cssCode .= file_get_contents($themeRoot . 'default/style.css');
+$cssCode .= file_get_contents($jsRoot . 'jquery/treeview/min.css');
 
 /* Combine them. */
 $cssFile = $themeRoot . "default/all.css";
@@ -47,7 +49,6 @@ if($result)
 {
     echo "压缩CSS成功！\n";
 }
-
 
 /* Compress it. */
 `java -jar ~/bin/yuicompressor/build/yuicompressor.jar --type css $cssFile -o $cssFile`;
