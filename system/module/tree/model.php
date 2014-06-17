@@ -212,7 +212,7 @@ class treeModel extends model
                 else
                 {
                     $treeMenu[$category->parent] = $categoryName;
-                }    
+                }
             }
         }
 
