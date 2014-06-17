@@ -34,8 +34,8 @@
         <td><?php echo html::input('author', $article->author, "class='form-control'");?></td>
       </tr>
       <tr>
-        <th><?php echo $lang->article->original;?></th>
-        <td><?php echo html::select('original', $lang->article->originalList, $article->original, "class='form-control chosen'");?></td>
+        <th><?php echo $lang->article->source;?></th>
+        <td><?php echo html::select('source', $lang->article->sourceList, $article->source, "class='form-control chosen'");?></td>
         <td>
           <div id='copyBox' class='row'>
             <div class='col-sm-4'><?php echo html::input('copySite', $article->copySite, "class='form-control' placeholder='{$lang->article->copySite}'"); ?> </div>

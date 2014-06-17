@@ -18,7 +18,7 @@ $lang->article->categories = '类目';
 $lang->article->title      = '标题';
 $lang->article->alias      = '别名';
 $lang->article->content    = '内容';
-$lang->article->original   = '来源';
+$lang->article->source     = '来源';
 $lang->article->copySite   = '来源网站';
 $lang->article->copyURL    = '来源URL';
 $lang->article->keywords   = '关键字';
@@ -50,9 +50,9 @@ $lang->page->list   = '单页列表';
 $lang->page->create = '添加单页';
 $lang->page->edit   = '编辑单页';
 
-$lang->article->originalList[0] = '原创';
-$lang->article->originalList[1] = '转贴';
-$lang->article->originalList[2] = '翻译';
+$lang->article->sourceList['original']      = '原创';
+$lang->article->sourceList['copied']        = '转贴';
+$lang->article->sourceList['translational'] = '翻译';
 
 $lang->article->statusList['normal'] = '正常';
 $lang->article->statusList['draft']  = '草稿';

@@ -205,7 +205,8 @@ tr.text-center > td.text-right, tr.text-center > th.text-right {text-align: righ
 .btn-link {background-color: transparent;}
 
 /* form */
-.input-group-addon .checkbox {padding-top: 4px;}
+.input-group-addon .checkbox {padding-top: 3px; margin: 0}
+.input-group-addon .checkbox:last-child {margin-right: 0!important;}
 .form-inline .form-control.hide {display: none}
 
 .placeholder {color: #aaa;}
@@ -427,7 +428,7 @@ a.tag-link {color: inherit;}
 .docker-right img {width: 200px; width:auto\0; height: 200px; margin-top: 10px; border: 1px solid #ccc}
 
 /* bootbox */
-.bootbox-alert .modal-dialog {width: 400px; margin-top: 10%;}
+.bootbox .modal-dialog {width: 400px; margin-top: 10%;}
 
 /* avatar */
 .avatar-empty {display: block; overflow: hidden; font-size: 36px; color: #fff; background-color: #60d7fb; border: 1px solid #60d7fb; width: 36px; height: 36px; line-height: 42px; text-align: center; border-radius: 6px;}

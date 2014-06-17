@@ -10,6 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 ?>
+<?php js::set('key', count($blocks));?>
 <div class='modal-dialog'>
   <div class='modal-content'>
     <div class='modal-header'>
@@ -29,7 +30,7 @@
             </tr>
           </thead>
           <tbody>
-          <?php foreach($blocks as $block) echo $this->block->createEntry($block);?>
+          <?php $key = 0; foreach($blocks as $block){ echo $this->block->createEntry($block, $key); $key ++;  }?>
           </tbody>
           <tfoot>
             <tr><td colspan='3' class='a-center'> <?php echo html::submitButton();?></td></tr>
@@ -37,7 +38,7 @@
         </table>
       </form>
     </div>
-    <table class='hide'><tbody id='entry'><?php echo $this->block->createEntry();?></tbody></table>
+    <table class='hide'><tbody id='entry'><?php echo $this->block->createEntry(null, 'key');?></tbody></table>
     <div class='modal-footer'></div>
   </div>
 </div>

@@ -1,10 +1,10 @@
 $(document).ready(function()
 {
     /* Set the orginal and copySite, copyURL fields. */
-    $('#original').change(function()
+    $('#source').change(function()
     {
         $('#copyBox').hide().find(':input').attr('disabled', true);
-        if($(this).val() != 0) $('#copyBox').show().find(':input').attr('disabled', false);
+        if($(this).val() != 'original') $('#copyBox').show().find(':input').attr('disabled', false);
     });
     
     /* Set current active topNav. */
