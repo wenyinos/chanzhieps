@@ -175,8 +175,11 @@ class thread extends control
             }
         }
 
-        $this->view->thread = $thread;
-        $this->view->boards = $this->loadModel('tree')->getOptionMenu('forum', 0, $removeRoot = true);
+        $parents = $this->dao->select('*')->from(TABLE_CATEGORY)->where('parent')->eq(0)->andWhere('type')->eq('forum')->fetchAll('id');
+
+        $this->view->parents = array_keys($parents);
+        $this->view->thread  = $thread;
+        $this->view->boards  = $this->loadModel('tree')->getOptionMenu('forum', 0, $removeRoot = true);
         $this->display();
     }
 

@@ -56,6 +56,7 @@
           <?php
           echo html::a(inlink('hide',   "threadID=$thread->id"), '<i class="icon-eye-close"></i> ' . $lang->thread->hide, "class='jsoner'");
           echo html::a(inlink('delete', "threadID=$thread->id"), '<i class="icon-trash"></i> ' . $lang->delete, "class='deleter'");
+          echo html::a(inlink('transfer',   "threadID=$thread->id"), '<i class="icon-location-arrow"></i> ' . $lang->thread->transfer, "data-toggle='modal'");
           ?>
         </span>
         <i class='icon-ellipsis-horizontal icon-more-actions'>&nbsp;</i>
