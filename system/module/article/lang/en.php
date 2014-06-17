@@ -18,7 +18,7 @@ $lang->article->categories = 'Categories';
 $lang->article->title      = 'Title';
 $lang->article->alias      = 'English alias';
 $lang->article->content    = 'Content';
-$lang->article->original   = 'Original';
+$lang->article->source     = 'Source';
 $lang->article->copySite   = 'Site';
 $lang->article->copyURL    = 'URL';
 $lang->article->keywords   = 'Keywords';
@@ -50,9 +50,9 @@ $lang->page->list   = 'List';
 $lang->page->create = 'Create';
 $lang->page->edit   = 'Edit';
 
-$lang->article->originalList[0] = 'Original';
-$lang->article->originalList[1] = 'Copied';
-$lang->article->originalList[2] = 'Translational';
+$lang->article->sourceList['original']      = 'Original';
+$lang->article->sourceList['copied']        = 'Copied';
+$lang->article->sourceList['translational'] = 'Translational';
 
 $lang->article->statusList['normal'] = 'Normal';
 $lang->article->statusList['draft']  = 'Draft';

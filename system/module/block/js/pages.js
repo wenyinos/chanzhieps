@@ -2,7 +2,8 @@ $(document).ready(function()
 {
     $(document).on('click', 'a.plus', function()
     {
-        $(this).parents('tr').after($('#entry').html());
+        v.key ++;
+        $(this).parents('tr').after($('#entry').html().replace(/key/g, v.key));
     });
 
     /* Set border and title show. */
