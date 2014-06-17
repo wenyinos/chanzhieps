@@ -27,7 +27,7 @@
                   echo $this->nav->createEntry(1, $nav);
                   if(isset($nav->children))
                   {
-                      echo "<ul class='ulGrade2'>";
+                      echo "<ul class='ulGrade2 hide'>";
                       foreach($nav->children as $nav2)
                       {
                           echo "<li class='liGrade2'>";
