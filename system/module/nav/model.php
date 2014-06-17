@@ -91,11 +91,12 @@ class navModel extends model
 
         $articleHidden = ($nav->type == 'article') ? '' : 'hide'; 
         $productHidden = ($nav->type == 'product') ? '' : 'hide'; 
-        $pageHidden    = ($nav->type == 'page') ? '' : 'hide'; 
+        $pageHidden    = ($nav->type == 'page')    ? '' : 'hide'; 
         $system        = ($nav->type == 'system')  ? '' : 'hide'; 
         $urlHidden     = ($nav->type == 'custom')  ? '' : 'hide'; 
 
         $entry = '<i class="icon-folder-open shut"></i>';
+        if(isset($nav->children) && !empty($nav->children)) $entry = '<i class="icon-folder-close shut"></i>';
 
         /* nav type select tag. */
         $entry .= html::select("nav[{$grade}][type][]", $this->lang->nav->types, $nav->type, "class='navType form-control' grade='{$grade}'");

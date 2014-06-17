@@ -52,3 +52,4 @@ $lang->upgrade->fromVersions['2_0_1'] = '2.0.1.stable';
 $lang->upgrade->fromVersions['2_1']   = '2.1.stable';
 $lang->upgrade->fromVersions['2_2']   = '2.2.stable';
 $lang->upgrade->fromVersions['2_2_1'] = '2.2.1.stable';
+$lang->upgrade->fromVersions['2_3']   = '2.3.stable';

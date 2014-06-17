@@ -47,6 +47,7 @@ class fileModel extends model
         $filesHtml  = '';
         foreach($files as $file)
         {
+            if($file->editor) continue;
             $file->title = $file->title . ".$file->extension";
             if($file->isImage)
             {

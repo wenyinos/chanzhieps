@@ -5,7 +5,7 @@
 .product-image-menu {margin: 5px -5px 0 0;}
 .product-image-menu [col*='col-']{background-color: #e5e5e5}
 .product-image-menu > div {padding: 0;}
-.product-image-menu .product-image {height: 80px; border: 1px solid #ddd; line-height: 80px; overflow: hidden; margin:0 5px 5px 0; transition: all .2s cubic-bezier(0.175,0.885,0.32,1);
+.product-image-menu .product-image {height: 60px; border: 1px solid #ddd; line-height: 60px; overflow: hidden; margin:0 5px 5px 0; transition: all .2s cubic-bezier(0.175,0.885,0.32,1);
 }
 .product-image-menu .product-image:hover {box-shadow: 0 0 4px rgba(0,0,0,0.25); opacity: 0.9; border-color: #c5c5c5;}
 .product-property .meta-name {width: 70px; padding-right: 15px;}

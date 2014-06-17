@@ -85,6 +85,9 @@ class upgradeModel extends model
                 $this->upgradeSlide();
                 $this->upgradeIndexKeyword();
                 $this->upgradeHeaderLayouts();
+            case '2_3':
+                $this->execSQL($this->getUpgradeFile('2.3'));
+                $this->upgradeArticleSource();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -116,6 +119,7 @@ class upgradeModel extends model
             case '2_1'  : $confirmContent .= file_get_contents($this->getUpgradeFile('2.1'));
             case '2_2'  : $confirmContent .= file_get_contents($this->getUpgradeFile('2.2'));
             case '2_2_1': $confirmContent .= file_get_contents($this->getUpgradeFile('2.2.1'));
+            case '2_3'  : $confirmContent .= file_get_contents($this->getUpgradeFile('2.3'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
@@ -626,6 +630,25 @@ class upgradeModel extends model
     {
         $setting = array('indexKeywords' => $this->config->site->keywords);
         return $this->loadModel('setting')->setItems('system.common.site', $setting);
+    }
+
+    /**
+     * Upgrade source of article when upgrade from 2.3.
+     * 
+     * @access public
+     * @return bool 
+     */
+    public function upgradeArticleSource()
+    {
+        $articles = $this->dao->select('*')->from(TABLE_ARTICLE)->fetchAll();
+        foreach($articles as $article)
+        {
+            if($article->source == 'copied')  $article->source = 'translational';
+            if($article->source == 'original') $article->source = 'copied';
+            if($article->source == '')         $article->source = 'original';
+
+            $this->dao->update(TABLE_ARTICLE)->data($article)->where('id')->eq($article->id)->exec();
+        }
     }
 
     /**
