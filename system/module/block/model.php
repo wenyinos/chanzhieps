@@ -192,16 +192,13 @@ class blockModel extends model
         $titlelessChecked = isset($block->titleless) && $block->titleless ? 'checked' : '';
         $borderlessChecked = isset($block->borderless) && $block->borderless ? 'checked' : '';
         $entry .= "
-            <span class='input-group-btn'></span>
-            <div class='input-group-btn'>
-              <div class='checkbox'>
+            <div class='input-group-addon'>
+              <div class='checkbox checkbox-inline'>
                  <label>
                    <input type='checkbox' {$titlelessChecked} value='1'><input type='hidden' name='titleless[{$key}]' /><span>{$this->lang->block->titleless}</span>
                  </label>
               </div>
-            </div>
-            <div class='input-group-btn'>
-              <div class='checkbox'>
+              <div class='checkbox checkbox-inline'>
                 <label>
                   <input type='checkbox' {$borderlessChecked} value='1'><input type='hidden' name='borderless[{$key}]' /><span>{$this->lang->block->borderless}</span>
                 </label>

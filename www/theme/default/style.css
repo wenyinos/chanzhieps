@@ -205,7 +205,8 @@ tr.text-center > td.text-right, tr.text-center > th.text-right {text-align: righ
 .btn-link {background-color: transparent;}
 
 /* form */
-.input-group-addon .checkbox {padding-top: 4px;}
+.input-group-addon .checkbox {padding-top: 3px; margin: 0}
+.input-group-addon .checkbox:last-child {margin-right: 0!important;}
 .form-inline .form-control.hide {display: none}
 
 .placeholder {color: #aaa;}
