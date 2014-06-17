@@ -24,7 +24,7 @@ js::set('productID', $product->id);
     <div class='panel panel-body'>
       <div class='row'>
         <?php if(!empty($product->images)):?>
-        <div class='col-md-6'>
+        <div class='col-md-5'>
           <div class='product-image media-wrapper'>
             <?php $title = $product->image->primary->title ? $product->image->primary->title : $product->name;?>
             <?php echo html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'");?>
@@ -40,7 +40,7 @@ js::set('productID', $product->id);
             <?php endforeach;?>
           </div>
         </div>
-        <div class='col-md-6'>
+        <div class='col-md-7'>
         <?php else:?>
         <div class='col-md-12'>
         <?php endif;?>
