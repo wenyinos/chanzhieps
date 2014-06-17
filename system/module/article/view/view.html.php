@@ -15,7 +15,7 @@ js::set('articleID', $article->id);
         <dl class='dl-inline'>
           <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAddedDate, formatTime($article->addedDate));?>'><i class='icon-time icon-large'></i> <?php echo formatTime($article->addedDate); ?></dd>
           <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAuthor, $article->author);?>'><i class='icon-user icon-large'></i> <?php echo $article->author; ?></dd>
-          <?php if($article->original):?>
+          <?php if($article->source != 'original'):?>
           <dt><?php echo $lang->article->lblSource; ?></dt>
           <dd><?php $article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite); ?></dd>
           <?php endif; ?>
@@ -27,9 +27,7 @@ js::set('articleID', $article->id);
                 if($sina->widget) echo "<div class='sina-widget'>" . $sina->widget . '</div>';
             }
             ?>
-            <?php if($article->original):?>
-            <span class='label label-success'><?php echo $lang->article->originalList[$article->original]; ?></span>
-            <?php endif;?>
+            <span class='label label-success'><?php echo $lang->article->sourceList[$article->source]; ?></span>
             <span class='label label-warning' data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblViews, $article->views);?>'><i class='icon-eye-open'></i> <?php echo $article->views; ?></span>
           </dd>
         </dl>

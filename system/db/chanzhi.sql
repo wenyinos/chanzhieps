@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS `eps_article` (
   `keywords` varchar(150) NOT NULL,
   `summary` text NOT NULL,
   `content` text NOT NULL,
-  `original` enum('0','1','2') NOT NULL,
+  `source` enum('original','copied','translational') NOT NULL,
   `copySite` varchar(60) NOT NULL,
   `copyURL` varchar(255) NOT NULL,
   `author` varchar(60) NOT NULL,
