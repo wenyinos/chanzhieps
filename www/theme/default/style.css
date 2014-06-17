@@ -431,4 +431,4 @@ a.tag-link {color: inherit;}
 .bootbox .modal-dialog {width: 400px; margin-top: 10%;}
 
 /* avatar */
-.avatar-empty {display: block; overflow: hidden; font-size: 36px; color: #fff; background-color: #60d7fb; border: 1px solid #60d7fb; width: 36px; height: 36px; line-height: 42px; text-align: center; border-radius: 6px;}
+.avatar-empty {display: block; overflow: hidden; font-size: 28px; color: #fff; background-color: #60d7fb; border: 1px solid #60d7fb; width: 36px; height: 36px; line-height: 35px; text-align: center; border-radius: 6px;}
