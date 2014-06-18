@@ -25,7 +25,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->block->title;?></th>
-          <td><?php echo html::input('title', $lang->block->typeList[$type], "class='form-control'");?></td>
+          <td><?php echo html::input('title', strpos(',html,code,featuredProduct,', $type) == false ?  $lang->block->typeList[$type] : '', "class='form-control'");?></td>
         </tr>
         <?php if(isset($config->block->defaultIcons[$type])):?>
         <tr>
@@ -34,6 +34,17 @@
         </tr>
         <?php endif;?>
         <?php echo $this->fetch('block', 'blockForm', 'type=' . $type);?>
+        <?php if(isset($config->block->defaultMoreUrl[$type])):?>
+        <tr>
+          <th><?php echo $lang->block->moreLink;?></th>
+          <td>
+            <div class='input-group'>
+              <?php echo html::input('moreText', $lang->more, "class='form-control'  placeholder='{$lang->block->placeholder->moreText}'");?>
+              <span class="input-group-addon fix-border"><i class="icon icon-link"></i></span>
+              <?php echo html::input('moreUrl', $config->block->defaultMoreUrl[$type], "class='form-control' placeholder='{$lang->block->placeholder->moreUrl}'");?>
+          </td>
+        </tr>
+        <?php endif;?>
         <tbody id='blockForm'></tbody>
         <tr>
           <th></th>

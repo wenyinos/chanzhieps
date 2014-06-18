@@ -9,11 +9,15 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
 */
+$block->content = json_decode($block->content);
 ?>
 <?php $contact = $this->loadModel('company')->getContact();?>
 <div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
   <div class='panel-heading'>
-    <h4><?php echo $icon . $block->title;?></h4>
+    <strong><?php echo $icon . $block->title;?></strong>
+    <?php if(isset($block->content->moreText) and $block->content->moreText):?>
+    <div class='pull-right'><?php echo html::a($block->content->moreUrl, $block->content->moreText);?></div>
+    <?php endif;?>
   </div>
   <div class='panel-body'>
     <table class='table table-data'>

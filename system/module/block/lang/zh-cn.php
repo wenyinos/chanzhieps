@@ -16,6 +16,7 @@ $lang->block->limit      = '数量';
 $lang->block->type       = '类型';
 $lang->block->code       = '代码';
 $lang->block->content    = '内容';
+$lang->block->moreLink   = '更多链接';
 $lang->block->page       = '页面';
 $lang->block->regionList = '区域列表';
 $lang->block->select     = '请选择区块';
@@ -35,6 +36,10 @@ $lang->block->browseRegion = '布局设置';
 $lang->block->edit         = '编辑区块';
 $lang->block->view         = '查看区块';
 $lang->block->setPage      = '配置页面';
+
+$lang->block->placeholder = new stdclass();
+$lang->block->placeholder->moreText = '区块右上角文字';
+$lang->block->placeholder->moreUrl  = '区块右上角链接地址';
 
 $lang->block->gridOptions[0]  = '自动';
 $lang->block->gridOptions[6]  = '1/2';

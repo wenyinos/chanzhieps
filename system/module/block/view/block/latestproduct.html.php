@@ -18,7 +18,10 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
 ?>
 <div id="block<?php echo $block->id;?>" class="panel panel-block <?php echo $blockClass;?>">
   <div class='panel-heading'>
-    <h4><?php echo $icon;?> <?php echo $block->title;?></h4>
+    <strong><?php echo $icon;?> <?php echo $block->title;?></strong>
+    <?php if(isset($content->moreText) and $content->moreText):?>
+    <div class='pull-right'><?php echo html::a($content->moreUrl, $content->moreText);?></div>
+    <?php endif;?>
   </div>
   <?php if(isset($content->image)):?>
   <div class='panel-body'>

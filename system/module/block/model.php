@@ -239,7 +239,7 @@ class blockModel extends model
             $block->content = helper::jsonEncode($block->params);
         }
 
-        $this->dao->insert(TABLE_BLOCK)->data($block, 'params,uid')->autoCheck()->exec();
+        $this->dao->insert(TABLE_BLOCK)->data($block, 'params,uid')->batchCheck($this->config->block->require->create, 'notempty')->autoCheck()->exec();
 
         $blockID = $this->dao->lastInsertID();
         $this->loadModel('file')->updateObjectID($this->post->uid, $blockID, 'block');
@@ -268,7 +268,11 @@ class blockModel extends model
             $block->content = helper::jsonEncode($block->params);
         }
 
-        $this->dao->update(TABLE_BLOCK)->data($block, 'params,uid,blockID')->autoCheck()->where('id')->eq($this->post->blockID)->exec();
+        $this->dao->update(TABLE_BLOCK)->data($block, 'params,uid,blockID')
+            ->batchCheck($this->config->block->require->edit, 'notempty')
+            ->autoCheck()
+            ->where('id')->eq($this->post->blockID)
+            ->exec();
 
         $this->loadModel('file')->updateObjectID($this->post->uid, $this->post->blockID, 'block');
         return true;
