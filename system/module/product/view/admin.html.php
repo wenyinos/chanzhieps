@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php js::set('categoryID', $categoryID);?>
 <div class='panel'>
   <div class='panel-heading'>
   <strong><i class="icon-list-ul"></i> <?php echo $lang->product->list;?></strong>

@@ -93,11 +93,12 @@ class product extends control
         if($categoryID) $families = $this->loadModel('tree')->getFamily($categoryID, 'product');
         $products = $this->product->getList($families, $orderBy, $pager);
 
-        $this->view->title      = $this->lang->product->admin;
-        $this->view->products   = $products;
-        $this->view->pager      = $pager;
-        $this->view->categoryID = $categoryID;
-        $this->view->orderBy    = $orderBy;
+        $this->view->title          = $this->lang->product->admin;
+        $this->view->products       = $products;
+        $this->view->pager          = $pager;
+        $this->view->categoryID     = $categoryID;
+        $this->view->orderBy        = $orderBy;
+        $this->view->treeModuleMenu = $this->loadModel('tree')->getTreeMenu('product', 0, array('treeModel', 'createAdminLink'));
         $this->display();
     }   
 

@@ -86,6 +86,8 @@ class article extends control
         $families = $categoryID ? $this->loadModel('tree')->getFamily($categoryID, $type) : '';
         $articles = $this->article->getList($type, $families, $orderBy, $pager);
 
+        if($type != 'page') $this->view->treeModuleMenu = $this->loadModel('tree')->getTreeMenu($type, 0, array('treeModel', 'createAdminLink'));
+
         $this->view->title      = $this->lang->$type->admin;
         $this->view->type       = $type;
         $this->view->categoryID = $categoryID;
