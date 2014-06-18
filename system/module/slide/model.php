@@ -67,6 +67,10 @@ class slideModel extends model
             ->remove('files')
             ->get();
 
+        $slide->label       = array_values($slide->label);
+        $slide->buttonClass = array_values($slide->buttonClass);
+        $slide->buttonUrl   = array_values($slide->buttonUrl);
+
         $setting = new stdclass();
         $setting->owner   = 'system';
         $setting->module  = 'common';
@@ -93,6 +97,10 @@ class slideModel extends model
         $image = $this->uploadImage();
 
         $slide = fixer::input('post')->stripTags('summary', $this->config->allowedTags->front)->setIf(!empty($image), 'image', $image)->get();
+
+        $slide->label       = array_values($slide->label);
+        $slide->buttonClass = array_values($slide->buttonClass);
+        $slide->buttonUrl   = array_values($slide->buttonUrl);
 
         $this->dao->update(TABLE_CONFIG)
             ->set('value')->eq(helper::jsonEncode($slide))

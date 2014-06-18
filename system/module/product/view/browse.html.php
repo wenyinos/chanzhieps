@@ -26,18 +26,24 @@ include '../../common/view/treeview.html.php';
         <?php foreach($products as $product):?>
         <div class='col-sm-4 col-xs-6'>
           <div class='card'>
-          <?php 
-          if(empty($product->image)) 
-          {
-              echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&name=$product->alias"), '<div class="media-placeholder" style="background-color: hsl(' . rand(0,359) . ',34%,89%)">' . $product->name . '</div>', "class='media-wrapper'");
-          }
-          else
-          {
-              $title = $product->image->primary->title ? $product->image->primary->title : $product->name;
-              echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&name=$product->alias"), html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"), "class='media-wrapper'");
-          }
-          ?>
-          <?php echo html::a(inlink('view', "id={$product->id}", "category={$category->alias}&name=$product->alias"), '<strong>' . $product->name . '</strong>', "class='card-heading'");?>
+            <?php 
+            if(empty($product->image)) 
+            {
+                echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&name=$product->alias"), '<div class="media-placeholder" style="background-color: hsl(' . rand(0,359) . ',34%,89%)">' . $product->name . '</div>', "class='media-wrapper'");
+            }
+            else
+            {
+                $title = $product->image->primary->title ? $product->image->primary->title : $product->name;
+                echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&name=$product->alias"), html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"), "class='media-wrapper'");
+            }
+            ?>
+            <div class='card-heading'>
+              <?php echo html::a(inlink('view', "id={$product->id}", "category={$category->alias}&name=$product->alias"), '<strong>' . $product->name . '</strong>');?>
+              <div class="text-muted pull-right">
+                <span title="<?php echo $lang->product->views;?>"><i class='icon-eye-open'></i> <?php echo $product->views;?></span> &nbsp; 
+                <span title="<?php echo $lang->product->addedDate;?>"><i class='icon-time'></i> <?php echo substr($product->addedDate, 0, 10);?></span>
+              </div>
+            </div>
             <div class='card-content text-latin'>
             <?php
             if($product->promotion != 0)

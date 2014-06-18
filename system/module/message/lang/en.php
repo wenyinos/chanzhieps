@@ -25,8 +25,9 @@ $lang->message->list              = 'List';
 $lang->message->post              = 'Post a comment';
 $lang->message->viewArticle       = 'View article';
 $lang->message->viewComment       = 'View comment';
-$lang->message->thanks            = 'Thanks for your comment!';
+$lang->message->thanks            = 'Thanks for your message, message needs to be checked!';
 $lang->message->noSelectedMessage = 'No message selected.';
+$lang->message->needCheck         = 'Message needs to be checked.';
 
 $lang->message->pass           = 'Pass';
 $lang->message->reply          = 'Reply';
@@ -65,7 +66,8 @@ $lang->comment->list        = 'List';
 $lang->comment->post        = 'Post a comment';
 $lang->comment->viewArticle = 'View article';
 $lang->comment->viewComment = 'View comment';
-$lang->comment->thanks      = 'Thanks for your comment!';
+$lang->comment->thanks      = 'Thanks for your comment, comment need to be checked!';
+$lang->comment->needCheck   = 'Comment needs to be checked.';
 
 $lang->comment->pass          = 'Pass';
 $lang->comment->reply         = 'Reply';

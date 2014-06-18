@@ -127,8 +127,9 @@ class thread extends control
         $board = $this->loadModel('tree')->getById($thread->board);
 
         /* Get replies. */
+        $this->app->loadConfig('reply');
         $this->app->loadClass('pager', $static = true);
-        $pager   = new pager(0, 10, $pageID);
+        $pager   = new pager(0, $this->config->reply->recPerPage, $pageID);
         $replies = $this->loadModel('reply')->getByThread($threadID, $pager);
 
         /* Get all speakers. */
