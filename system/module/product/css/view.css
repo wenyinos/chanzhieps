@@ -1,7 +1,7 @@
 .product-image {background-color: #F1F1F1; text-align: center; max-height: 320px; overflow: hidden;}
 .product-image.media-wrapper {height: 300px; line-height: 300px; border: 1px solid #ddd;}
 .product-image.media-wrapper img {transition: all .2s cubic-bezier(0.175,0.885,0.32,1);}
-.product-image > img {width: 100%;}
+.product-image > img {width: 100%;cursor:pointer;}
 .product-image-menu {margin: 5px -5px 0 0;}
 .product-image-menu [col*='col-']{background-color: #e5e5e5}
 .product-image-menu > div {padding: 0;}
