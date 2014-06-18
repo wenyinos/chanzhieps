@@ -41,8 +41,7 @@ class company extends control
             $now = helper::now();
             $company = fixer::input('post')
             ->add('setDate', $now)
-            ->stripTags('desc', $this->config->allowedTags->admin)
-            ->stripTags('content', $this->config->allowedTags->admin)
+            ->stripTags('desc,content', $this->config->allowedTags->admin)
             ->remove('uid')
             ->get();
 
