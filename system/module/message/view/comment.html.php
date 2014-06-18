@@ -86,7 +86,10 @@ css::internal($pageCSS);
       </div>
       <div class='form-group hiding' id='captchaBox'></div>
       <div class='form-group'>
-        <div class='col-sm-11 col-sm-offset-1'><?php echo html::submitButton();?></div>
+        <div class='col-sm-11 col-sm-offset-1'>
+          <span><?php echo html::submitButton();?></span>
+          <span><small class="text-info"><?php echo $lang->comment->needCheck;?></small></span>
+        </div>
       </div>
     </form>
   </div>

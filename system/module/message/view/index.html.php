@@ -97,7 +97,10 @@
           </div>
           <div class='form-group'>
             <div class='col-sm-1'></div>
-            <div class='col-sm-11'><?php echo html::submitButton();?></div>
+            <div class='col-sm-11 col-sm-offset-1'>
+              <span><?php echo html::submitButton();?></span>
+              <span><small class="text-info"><?php echo $lang->message->needCheck;?></small></span>
+            </div>
           </div>
         </form>
       </div>
