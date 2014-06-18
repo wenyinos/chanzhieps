@@ -11,7 +11,6 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<?php js::set('sortTip', $lang->slide->sortTip) ?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class='icon-picture'></i> <?php echo $lang->slide->admin;?></strong>
@@ -70,9 +69,6 @@
         </tr>
         <?php endforeach;?>
       </tbody>
-      <tfoot>
-      <tr><td colspan='6'>&nbsp;<?php echo html::submitButton($this->lang->slide->saveSort);?></td></tr> 
-      </tfoot>
     </table>
   </form>
 </div>

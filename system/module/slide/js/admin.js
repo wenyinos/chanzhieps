@@ -1,6 +1,16 @@
 $(document).ready(function()
 {
-    $.setAjaxForm('#sortForm');
+    $.setAjaxForm('#sortForm', function(data)
+    {
+       if(data.result == 'success')
+       {
+            messager.success(data.message);
+       }
+       else
+       {
+            messager.danger(data.message);
+       }
+    });
 
     $('.icon-arrow-up').click(function()
     {
@@ -26,5 +36,5 @@ $(document).ready(function()
 function sort()
 {
     $('input[name*=order]').each(function(index, obj) { $(this).val(index + 1); });
-    messager.warning(v.sortTip);
+    $('#sortForm').submit();
 }
