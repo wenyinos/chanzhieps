@@ -1607,6 +1607,6 @@ class sql
     public function quote($value)
     {
         if($this->magicQuote) $value = stripslashes($value);
-        return $this->dbh->quote($value);
+        return $this->dbh->quote((string)$value);
     }
 }
