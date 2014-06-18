@@ -36,7 +36,7 @@ class product extends control
     public function browse($categoryID = 0, $pageID = 1)
     {  
         $this->app->loadClass('pager', $static = true);
-        $pager = new pager(0, 15, $pageID);
+        $pager = new pager(0, $this->config->product->recPerPage, $pageID);
 
         $category   = $this->loadModel('tree')->getByID($categoryID, 'product');
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;

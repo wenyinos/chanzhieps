@@ -21,7 +21,7 @@ class message extends control
     public function index($pageID = 1)
     {
         $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal = 0, $recPerPage = 10, $pageID);
+        $pager = new pager($recTotal = 0, $this->config->message->recPerPage, $pageID);
 
         $this->view->messages    = $this->message->getByObject($type = 'message', $objectType = 'message', $objectID = 0, $pager);
         $this->view->replies     = $this->message->getReplies($this->view->messages);
@@ -42,7 +42,7 @@ class message extends control
     public function comment($objectType, $objectID, $pageID = 1)
     {
         $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal = 0 , $recPerPage = 10, $pageID);
+        $pager = new pager($recTotal = 0 , $this->config->message->recPerPage, $pageID);
 
         $this->view->objectType  = $objectType;
         $this->view->objectID    = $objectID;
