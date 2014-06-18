@@ -471,9 +471,12 @@ class fixer
      */
     public function stripTags($fieldName, $allowableTags)
     {
-        $this->stripedFields[] = $fieldName;
         $fields = $this->processFields($fieldName);
-        foreach($fields as $fieldName) $this->data->$fieldName = strip_tags($this->data->$fieldName, $allowableTags);
+        foreach($fields as $fieldName) 
+        {
+            if(!in_array($fieldName, $this->stripedFields)) $this->data->$fieldName = strip_tags($this->data->$fieldName, $allowableTags);
+            $this->stripedFields[] = $fieldName;
+        }
         return $this;
     }
 

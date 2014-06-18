@@ -316,7 +316,10 @@ class blockModel extends model
             $blocks[$key]['titleless']  = $this->post->titleless[$key];
             $blocks[$key]['borderless'] = $this->post->borderless[$key];
         }
-        $layout->blocks = helper::jsonEncode($blocks);
+
+        /* Resort blocks. */
+        foreach($blocks as $block) $sortedBlocks[] = $block;
+        $layout->blocks = helper::jsonEncode($sortedBlocks);
 
         $count = $this->dao->select('count(*) as count')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->fetch('count');
 
