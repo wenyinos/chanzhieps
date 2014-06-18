@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `eps_category` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `name` char(30) NOT NULL DEFAULT '',
   `alias` varchar(100) NOT NULL,
-  `desc` varchar(150) NOT NULL,
+  `desc` text NOT NULL,
   `keywords` varchar(150) NOT NULL,
   `parent` smallint(5) unsigned NOT NULL DEFAULT '0',
   `path` char(255) NOT NULL DEFAULT '',
