@@ -36,7 +36,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
         <a class='card' href="<?php echo $url;?>">
           <?php $title = $product->image->primary->title ? $product->image->primary->title : $product->name;?>
           <div class='media' style='background-image: url(<?php echo $product->image->primary->middleURL; ?>); background-iamge:none\0;'><?php echo html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"); ?></div>
-            <strong class='card-heading'>
+          <div class='card-heading'>
             <?php echo $product->name;?>
             <div class='text-latin'>
             <?php
@@ -59,7 +59,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
             }
             ?>
             </div>
-          </strong>
+          </div>
         </a>
       </div>
       <?php endif;?>
