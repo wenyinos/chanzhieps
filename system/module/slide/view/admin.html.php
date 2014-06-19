@@ -19,7 +19,7 @@
     </div>
   </div>
   <form id='sortForm' action='<?php echo inLink('sort')?>' method='post'>
-    <table class='table table-hover table-bordered'>
+    <table class='table table-bordered'>
       <tbody>
         <?php foreach($slides as  $key => $slide):?>
         <?php if($slide->backgroundType == 'color') $slide->height = $slide->height ? $slide->height : 180; ?>
@@ -34,25 +34,6 @@
                 <?php else: ?>
                 <div class='item active' style='<?php echo 'background-color: ' . $slide->backgroundColor . '; height: ' . $slide->height . 'px';?>'>
                 <?php endif ?>
-                  <div class='actions clearfix'>
-                    <div class='pull-left'>
-                      <button type='button' class='btn btn-pure icon-arrow-up'></button>
-                      <button type='button' class='btn btn-pure icon-arrow-down'></button>
-                    </div>
-                    <div class='pull-right'>
-                      <?php if ($slide->height): ?>
-                      <span class='label'><?php echo $lang->slide->height . ': ' . $slide->height;?>px</span> &nbsp; &nbsp; 
-                      <?php endif ?>
-                      <button type='button' class='btn btn-pure btn-resize'><i class='icon-resize-full'></i></button>
-                      <?php if ($slide->mainLink): ?>
-                        <?php echo html::a($slide->mainLink, "<i class='icon-external-link'></i>", "class='btn btn-pure' title='{$lang->slide->mainLink}' target='_blank'") ?>
-                      <?php endif ?>
-                      <?php
-                      echo html::a($this->createLink('slide', 'edit', "id=$slide->id"), "<i class='icon-pencil'></i>", "class='btn btn-pure' title='{$lang->edit}'");
-                      echo html::a($this->createLink('slide', 'delete', "id=$slide->id"), "<i class='icon-remove'></i>", "class='deleter btn btn-pure' title='{$lang->delete}'");
-                      ?>
-                    </div>
-                  </div>
                   <div class='carousel-caption'>
                     <h2 style='color:<?php echo $slide->titleColor;?>'><?php echo $slide->title;?></h2>
                     <div><?php echo $slide->summary;?></div>
@@ -64,6 +45,16 @@
                   </div>
                 </div>
               </div>
+            </div>
+          </td>
+          <td class='w-100px'>
+            <div style='margin-bottom: 5px'>
+              <a href='javascript:;' class='btn btn-move-up'><i class='icon-arrow-up'></i></a>
+              <?php echo html::a($this->createLink('slide', 'edit', "id=$slide->id"), "<i class='icon-pencil'></i>", "class='btn' title='{$lang->edit}'");?>
+            </div>
+            <div>
+              <a href='javascript:;' class='btn btn-move-down'><i class='icon-arrow-down'></i></a>
+              <?php echo html::a($this->createLink('slide', 'delete', "id=$slide->id"), "<i class='icon-remove'></i>", "class='deleter btn' title='{$lang->delete}'");?>
             </div>
           </td>
         </tr>
