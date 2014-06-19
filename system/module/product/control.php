@@ -127,6 +127,7 @@ class product extends control
         $this->view->title           = $this->lang->product->create;
         $this->view->currentCategory = $categoryID;
         $this->view->categories      = $categories;
+        $this->view->treeModuleMenu  = $this->loadModel('tree')->getTreeMenu('product', 0, array('treeModel', 'createAdminLink'));
         $this->display();
     }
 
@@ -164,9 +165,10 @@ class product extends control
             $product->attributes = array($attribute);
         }
 
-        $this->view->title      = $this->lang->product->edit;
-        $this->view->product    = $product;
-        $this->view->categories = $categories;
+        $this->view->title          = $this->lang->product->edit;
+        $this->view->product        = $product;
+        $this->view->categories     = $categories;
+        $this->view->treeModuleMenu = $this->loadModel('tree')->getTreeMenu('product', 0, array('treeModel', 'createAdminLink'));
 
         $this->display();
     }
