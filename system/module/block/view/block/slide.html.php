@@ -30,7 +30,11 @@ if($slides):?>
         <div><?php echo $slide->summary;?></div>
         <?php
         foreach($slide->label as $key => $label):
-        if(trim($label) != '') echo html::a($slide->buttonUrl[$key], $label, "class='btn btn-lg btn-{$slide->buttonClass[$key]}'");
+        if(trim($label) != '')
+        {
+            if($slide->buttonUrl[$key])  echo html::a($slide->buttonUrl[$key], $label, "class='btn btn-lg btn-{$slide->buttonClass[$key]}'");
+            if(!$slide->buttonUrl[$key]) echo html::commonButton($label, "btn btn-lg btn-{$slide->buttonClass[$key]}");
+        }
         endforeach;
         ?>
       </div>
