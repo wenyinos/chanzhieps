@@ -12,7 +12,7 @@
 ?>
 <?php if(!empty($this->config->links->index)):?>
 <div id="block<?php echo $block->id;?>" class='panel panel-block clearfix links <?php echo $blockClass;?>'>
-  <div class='heading'><strong><span class='icon'><?php echo $icon;?></span><span class='title'><?php echo $this->lang->link;?></span></strong></div>
+  <div class='heading'><strong><span class='icon'><?php echo $icon;?></span><span class='title'><?php echo $block->title;?></span></strong></div>
   <div class='body'>
     <?php echo $this->config->links->index;?>
     <?php if(trim(strip_tags($this->config->links->all, '<a>'))) echo html::a(helper::createLink('links', 'index'), $this->lang->more . "<i class='icon-double-angle-right'></i>"); ?>
