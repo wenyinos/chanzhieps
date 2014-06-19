@@ -11,6 +11,11 @@
 */
 ?>
 <header id='header' class='clearfix'>
+  <div id='headNav'>
+    <div class='wrapper'>
+      <nav><?php echo commonModel::printTopBar();?></nav>
+    </div>
+  </div>
   <div id='headTitle'>
     <div class="wrapper">
       <?php if(isset($this->config->site->logo)):?>
@@ -22,11 +27,6 @@
       <div id='siteName'><h2><?php echo $this->config->site->name;?></h2></div>
       <?php endif;?>
       <div id='siteSlogan'><span><?php echo $this->config->site->slogan;?></span></div>
-    </div>
-  </div>
-  <div id='headNav'>
-    <div class='wrapper'>
-      <nav><?php echo commonModel::printTopBar();?></nav>
     </div>
   </div>
 </header>
