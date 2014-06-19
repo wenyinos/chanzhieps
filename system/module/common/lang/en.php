@@ -144,13 +144,13 @@ $lang->menuGroups->message = 'feedback';
 /* Menu of article module. */
 $lang->article = new stdclass();
 $lang->article->menu = new stdclass();
-$lang->article->menu->browse = array('link' => 'List|article|admin|', 'alias' => 'edit');
+$lang->article->menu->browse = array('link' => 'List|article|admin|', 'alias' => 'create, edit');
 $lang->article->menu->tree   = 'Categories|tree|browse|type=article';
 
 /* Menu of blog module. */
 $lang->blog = new stdclass();
 $lang->blog->menu = new stdclass();
-$lang->blog->menu->browse = array('link' => 'List|article|admin|type=blog', 'alias' => 'edit');
+$lang->blog->menu->browse = array('link' => 'List|article|admin|type=blog', 'alias' => 'create, edit');
 $lang->blog->menu->tree   = 'Categories|tree|browse|type=blog';
 
 /* Menu of page module. */
@@ -162,7 +162,7 @@ $lang->page->menu->create = 'Create|article|create|type=page';
 /* Menu of product module. */
 $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
-$lang->product->menu->browse = array('link' => 'List|product|admin|', 'alias' => 'edit');
+$lang->product->menu->browse = array('link' => 'List|product|admin|', 'alias' => 'creaet, edit');
 $lang->product->menu->tree   = 'Categories|tree|browse|type=product';
 
 /* Menu of UI module. */
