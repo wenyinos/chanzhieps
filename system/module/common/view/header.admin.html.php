@@ -24,7 +24,7 @@
 
 <div class="clearfix row-main">
   <?php $moduleMenu = commonModel::createModuleMenu($this->moduleName);?>
-  <?php if($moduleMenu or $treeModuleMenu):?>
+  <?php if($moduleMenu or !empty($treeModuleMenu)):?>
   <div class='col-md-2'>
     <?php if($moduleMenu) echo $moduleMenu;?>
     <?php if(!empty($treeModuleMenu)):?>
