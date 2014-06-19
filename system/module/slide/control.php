@@ -69,7 +69,7 @@ class slide extends control
         if($_POST)
         {
             if($this->slide->update($id))
-            $this->send(array('result' => 'success', 'message' => $lang->saveSuccess, 'locate'=>$this->inLink('admin')) );
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>$this->inLink('admin')) );
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
