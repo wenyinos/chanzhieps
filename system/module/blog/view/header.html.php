@@ -40,6 +40,7 @@ $navs = $this->tree->getChildren(0, 'blog');
 
   css::import($themeRoot . 'zui/css/min.css');
   css::import($themeRoot . 'default/style.css');
+  css::import($jsRoot    . 'jquery/treeview/min.css');
 
   if($config->site->theme)
   {
@@ -63,6 +64,7 @@ $navs = $this->tree->getChildren(0, 'blog');
       js::import($jsRoot . 'jquery/min.js');
       js::import($jsRoot . 'zui/min.js');
       js::import($jsRoot . 'chanzhi.js');
+      js::import($jsRoot . 'jquery/treeview/min.js');
       js::import($jsRoot . 'my.js');
   }
   else
@@ -85,8 +87,15 @@ if(empty($sina->verification) && !empty($sina->widget)) js::import('http://tjs.s
 ?>
 <!--[if lt IE 9]>
 <?php
-js::import($jsRoot . 'html5shiv/min.js');
-js::import($jsRoot . 'respond/min.js');
+if($config->debug)
+{
+    js::import($jsRoot . 'html5shiv/min.js');
+    js::import($jsRoot . 'respond/min.js');
+}
+else
+{
+    js::import($jsRoot . 'all.ie8.js');
+}
 ?>
 <![endif]-->
 <!--[if lt IE 10]>
