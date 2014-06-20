@@ -39,9 +39,9 @@
           <th><?php echo $lang->block->moreLink;?></th>
           <td>
             <div class='input-group'>
-              <?php echo html::input('moreText', $lang->more, "class='form-control'  placeholder='{$lang->block->placeholder->moreText}'");?>
+              <?php echo html::input('params[moreText]', $lang->more, "class='form-control'  placeholder='{$lang->block->placeholder->moreText}'");?>
               <span class="input-group-addon fix-border"><i class="icon icon-link"></i></span>
-              <?php echo html::input('moreUrl', $config->block->defaultMoreUrl[$type], "class='form-control' placeholder='{$lang->block->placeholder->moreUrl}'");?>
+              <?php echo html::input('params[moreUrl]', $config->block->defaultMoreUrl[$type], "class='form-control' placeholder='{$lang->block->placeholder->moreUrl}'");?>
           </td>
         </tr>
         <?php endif;?>

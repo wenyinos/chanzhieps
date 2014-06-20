@@ -22,6 +22,7 @@ class blockModel extends model
     {
         $block = $this->dao->findByID($blockID)->from(TABLE_BLOCK)->fetch();
         if(strpos('code', $block->type) === false) $block->content = json_decode($block->content);
+        if(empty($block->content)) $block->content = new stdclass();
         return $block;
     }
 
