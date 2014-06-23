@@ -39,10 +39,6 @@ include '../../common/view/treeview.html.php';
             ?>
             <div class='card-heading'>
               <?php echo html::a(inlink('view', "id={$product->id}", "category={$category->alias}&name=$product->alias"), '<strong>' . $product->name . '</strong>');?>
-              <div class="text-muted pull-right">
-                <span title="<?php echo $lang->product->views;?>"><i class='icon-eye-open'></i> <?php echo $product->views;?></span> &nbsp; 
-                <span title="<?php echo $lang->product->addedDate;?>"><i class='icon-time'></i> <?php echo substr($product->addedDate, 0, 10);?></span>
-              </div>
             </div>
             <div class='card-content text-latin'>
             <?php
@@ -70,6 +66,7 @@ include '../../common/view/treeview.html.php';
             }
             ?>
             </div>
+            <div class='label label-badge label-danger'><?php echo $lang->product->views . $lang->colon . $product->views;?></div>
           </div>
         </div>
         <?php endforeach;?>

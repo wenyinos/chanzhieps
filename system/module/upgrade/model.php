@@ -87,6 +87,7 @@ class upgradeModel extends model
                 $this->upgradeHeaderLayouts();
             case '2_3':
                 $this->execSQL($this->getUpgradeFile('2.3'));
+                $this->upgradeRegions();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -629,6 +630,36 @@ class upgradeModel extends model
     {
         $setting = array('indexKeywords' => $this->config->site->keywords);
         return $this->loadModel('setting')->setItems('system.common.site', $setting);
+    }
+
+    /**
+     * Upgrade regions from 2.3. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function upgradeRegions()
+    {
+        $layout = new stdclass();
+        $layout->page   = 'all';
+        $layout->region = 'bottom';
+        $blocks = array();
+
+        $bottomRegions = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq('all')->andWhere('region')->in('footer, end')->fetchAll();
+        foreach($bottomRegions as $region)
+        {
+            $blocks = array_merge($blocks, json_decode($region->blocks, true));
+        }
+        $layout->blocks = helper::jsonEncode($blocks);
+
+        $this->dao->insert(TABLE_LAYOUT)->data($layout)->exec();
+        $this->dao->delete()->from(TABLE_LAYOUT)->where('page')->eq('all')->andWhere('region')->in('footer, end')->exec();
+
+        $this->dao->update(TABLE_LAYOUT)->set('region')->eq('top')->where('region')->eq('header')->exec();
+        $this->dao->update(TABLE_LAYOUT)->set('region')->eq('bottom')->where('region')->eq('footer')->exec();
+        $this->dao->update(TABLE_LAYOUT)->set('region')->eq('header')->where('region')->eq('start')->exec();
+
+        return !dao::isError();
     }
 
     /**

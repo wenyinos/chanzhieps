@@ -27,7 +27,7 @@
       $regions = $lang->block->regions->$page;
       foreach($regions as $region => $regionName)
       {
-          echo html::a($this->inlink('setregion', "page={$page}&region={$region}"), $regionName, "data-toggle='modal'");
+          echo html::a($this->inlink('setregion', "page={$page}&region={$region}"), $regionName, "class='btn btn-xs' data-toggle='modal'");
       }
       ?>
       </td>

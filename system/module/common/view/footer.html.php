@@ -1,5 +1,5 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
-  <?php if(RUN_MODE == 'front') $this->loadModel('block')->printRegion($layouts, 'all', 'footer');?>
+  <?php if(RUN_MODE == 'front') $this->loadModel('block')->printRegion($layouts, 'all', 'bottom');?>
   </div></div><?php /* end div.page-content then div.page-wrapper in header.html.php */?>
   <footer id='footer' class='clearfix'>
     <div class='wrapper'>
@@ -42,6 +42,6 @@ if($extHookFiles) foreach($extHookFiles as $extHookFile) include $extHookFile;
 <a href='#' id='go2top' class='icon-arrow-up' data-toggle='tooltip' title='<?php echo $lang->back2Top; ?>'></a>
 </div><?php /* end "div.page-container" in "header.html.php" */ ?>
 <?php include dirname(__FILE__) . '/qrcode.html.php';?>
-<?php if(RUN_MODE == 'front') $this->loadModel('block')->printRegion($layouts, 'all', 'end');?>
+<?php if(RUN_MODE == 'front') $this->loadModel('block')->printRegion($layouts, 'all', 'footer');?>
 </body>
 </html>

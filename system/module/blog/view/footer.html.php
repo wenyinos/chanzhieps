@@ -11,7 +11,7 @@
  */
 ?>
   </div></div><?php /* end .page-content then .page-wrapper in header.html.php */ ?>
-  <?php if(RUN_MODE == 'front') $this->loadModel('block')->printRegion($layouts, 'all', 'footer');?>
+  <?php if(RUN_MODE == 'front') $this->loadModel('block')->printRegion($layouts, 'all', 'bottom');?>
   <footer id='footer'>
     <div class='wrapper'>
       <div id='footNav'>
@@ -35,6 +35,6 @@
 if($config->debug) js::import($jsRoot . 'jquery/form/min.js');
 if(isset($pageJS)) js::execute($pageJS);
 ?>
-<?php if(RUN_MODE == 'front') $this->loadModel('block')->printRegion($layouts, 'all', 'end');?>
+<?php if(RUN_MODE == 'front') $this->loadModel('block')->printRegion($layouts, 'all', 'footer');?>
 </body>
 </html>
