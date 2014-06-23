@@ -26,18 +26,21 @@ include '../../common/view/treeview.html.php';
         <?php foreach($products as $product):?>
         <div class='col-sm-4 col-xs-6'>
           <div class='card'>
-          <?php 
-          if(empty($product->image)) 
-          {
-              echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&name=$product->alias"), '<div class="media-placeholder" style="background-color: hsl(' . rand(0,359) . ',34%,89%)">' . $product->name . '</div>', "class='media-wrapper'");
-          }
-          else
-          {
-              $title = $product->image->primary->title ? $product->image->primary->title : $product->name;
-              echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&name=$product->alias"), html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"), "class='media-wrapper'");
-          }
-          ?>
-          <?php echo html::a(inlink('view', "id={$product->id}", "category={$category->alias}&name=$product->alias"), '<strong>' . $product->name . '</strong>', "class='card-heading'");?>
+            <?php 
+            if(empty($product->image)) 
+            {
+                echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&name=$product->alias"), '<div class="media-placeholder" style="background-color: hsl(' . rand(0,359) . ',34%,89%)">' . $product->name . '</div>', "class='media-wrapper'");
+            }
+            else
+            {
+                $title = $product->image->primary->title ? $product->image->primary->title : $product->name;
+                echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&name=$product->alias"), html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"), "class='media-wrapper'");
+            }
+            ?>
+            <div class='card-info'><span class="label label-badge" title='<?php echo $lang->product->views;?>'><i class="icon-eye-open"></i> <?php echo $product->views;?></span></div>
+            <div class='card-heading'>
+              <?php echo html::a(inlink('view', "id={$product->id}", "category={$category->alias}&name=$product->alias"), '<strong>' . $product->name . '</strong>');?>
+            </div>
             <div class='card-content text-latin'>
             <?php
             if($product->promotion != 0)
@@ -46,7 +49,6 @@ include '../../common/view/treeview.html.php';
                 echo "<strong class='text-danger text-lg'>" . $product->promotion . '</strong>&nbsp;&nbsp;';
                 if($product->price != 0)
                 {
-
                     echo "<del class='text-muted'>" . $lang->RMB . $product->price .'</del>';
                 }
             }

@@ -144,15 +144,13 @@ $lang->menuGroups->message = 'feedback';
 /* Menu of article module. */
 $lang->article = new stdclass();
 $lang->article->menu = new stdclass();
-$lang->article->menu->browse = array('link' => '文章列表|article|admin|', 'alias' => 'edit');
-$lang->article->menu->create = '发布文章|article|create|type=article';
+$lang->article->menu->browse = array('link' => '文章列表|article|admin|', 'alias' => 'create, edit');
 $lang->article->menu->tree   = '类目管理|tree|browse|type=article';
 
 /* Menu of blog module. */
 $lang->blog = new stdclass();
 $lang->blog->menu = new stdclass();
-$lang->blog->menu->browse = array('link' => '博客列表|article|admin|type=blog', 'alias' => 'edit');
-$lang->blog->menu->create = '发布博客|article|create|type=blog';
+$lang->blog->menu->browse = array('link' => '博客列表|article|admin|type=blog', 'alias' => 'create, edit');
 $lang->blog->menu->tree   = '类目管理|tree|browse|type=blog';
 
 /* Menu of page module. */
@@ -164,8 +162,7 @@ $lang->page->menu->create = '添加单页|article|create|type=page';
 /* Menu of product module. */
 $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
-$lang->product->menu->browse = array('link' => '产品列表|product|admin|', 'alias' => 'edit');
-$lang->product->menu->create = '发布产品|product|create|';
+$lang->product->menu->browse = array('link' => '产品列表|product|admin|', 'alias' => 'create, edit');
 $lang->product->menu->tree   = '类目管理|tree|browse|type=product';
 
 /* Menu of UI module. */
@@ -265,6 +262,10 @@ $lang->error->reg          = '<strong>%s</strong>不符合格式，应当为:<st
 $lang->error->unique       = '<strong>%s</strong>已经有<strong>%s</strong>这条记录了。';
 $lang->error->notempty     = '<strong>%s</strong>不能为空。';
 $lang->error->equal        = '<strong>%s</strong>必须为<strong>%s</strong>。';
+$lang->error->gt           = "<strong>%s</strong>应当大于<strong>%s</strong>。";
+$lang->error->ge           = "<strong>%s</strong>应当不小于<strong>%s</strong>。";
+$lang->error->lt           = "<strong>%s</strong>应当小于<strong>%s</strong>。";
+$lang->error->le           = "<strong>%s</strong>应当不大于<strong>%s</strong>。";
 $lang->error->in           = '<strong>%s</strong>必须为<strong>%s</strong>。';
 $lang->error->int          = array('<strong>%s</strong>应当是数字。', '<strong>%s</strong>最小值为%s',  '<strong>%s</strong>应当介于<strong>%s-%s</strong>之间。');
 $lang->error->float        = '<strong>%s</strong>应当是数字，可以是小数。';

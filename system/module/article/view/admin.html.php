@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php js::set('categoryID', $categoryID);?>
 <div class='panel'>
   <div class='panel-heading'>
   <?php if($type == 'blog'):?>

@@ -51,7 +51,7 @@ class slide extends control
                 $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->inlink('admin')));
             }
 
-            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
         $this->display(); 
@@ -69,8 +69,8 @@ class slide extends control
         if($_POST)
         {
             if($this->slide->update($id))
-            $this->send(array('result' => 'success', 'locate'=>$this->inLink('admin')) );
-            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>$this->inLink('admin')) );
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
         $this->view->id    = $id;

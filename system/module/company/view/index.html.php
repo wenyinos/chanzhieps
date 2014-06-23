@@ -6,8 +6,10 @@ include '../../common/view/header.html.php';
   <div class="col-md-9">
     <div class='panel'>
       <div class='panel-heading'><strong><i class='icon-group'></i> <?php echo $lang->aboutUs; ?></strong></div>
-      <div class='panel-body'>
-        <?php echo $company->content;?>
+      <div class="panel-body">
+        <div class='article-content'>
+          <?php echo $company->content;?>
+        </div>
       </div>
     </div>
   </div>

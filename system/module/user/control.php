@@ -175,13 +175,13 @@ class user extends control
      * @access public
      * @return void
      */
-    public function thread($recTotal = 0, $recPerPage = 10, $pageID = 1)
+    public function thread($pageID = 1)
     {
         if($this->app->user->account == 'guest') $this->locate(inlink('login'));
 
         /* Load the pager. */
         $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal, $recPerPage, $pageID);
+        $pager = new pager(0, $this->config->user->recPerPage->thread, $pageID);
 
         /* Load the forum lang to change the pager lang items. */
         $this->app->loadLang('forum');
@@ -198,13 +198,13 @@ class user extends control
      * @access public
      * @return void
      */
-    public function reply($recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function reply($pageID = 1)
     {
         if($this->app->user->account == 'guest') $this->locate(inlink('login'));
 
         /* Load pager. */
         $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal, $recPerPage, $pageID);
+        $pager = new pager(0, $this->config->user->recPerPage->reply, $pageID);
 
         /* Load the thread lang thus to rewrite the page lang items. */
         $this->app->loadLang('thread');    

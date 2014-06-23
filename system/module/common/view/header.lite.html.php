@@ -74,8 +74,15 @@ $themeRoot = $webRoot . "theme/";
 ?>
 <!--[if lt IE 9]>
 <?php
-js::import($jsRoot . 'html5shiv/min.js');
-js::import($jsRoot . 'respond/min.js');
+if($config->debug)
+{
+    js::import($jsRoot . 'html5shiv/min.js');
+    js::import($jsRoot . 'respond/min.js');
+}
+else
+{
+    js::import($jsRoot . 'all.ie8.js');
+}
 ?>
 <![endif]-->
 <!--[if lt IE 10]>
@@ -92,6 +99,6 @@ if(RUN_MODE == 'front')
     if(!empty($sina->widget)) js::import('http://tjs.sjs.sinajs.cn/open/api/js/wb.js');
 }
 ?>
-<?php if(RUN_MODE == 'front') $this->block->printRegion($layouts, 'all', 'start');?>
+<?php if(RUN_MODE == 'front') $this->block->printRegion($layouts, 'all', 'header');?>
 </head>
 <body>

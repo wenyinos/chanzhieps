@@ -34,6 +34,17 @@
         </tr>
         <?php endif;?>
         <?php echo $this->fetch('block', 'blockForm', 'type=' . $type . '&id=' . $block->id);?>
+        <?php if(isset($config->block->defaultMoreUrl[$block->type])):?>
+        <tr>
+          <th><?php echo $lang->block->moreLink;?></th>
+          <td>
+            <div class='input-group'>
+              <?php echo html::input('params[moreText]', $block->content->moreText, "class='form-control'  placeholder='{$lang->block->placeholder->moreText}'");?>
+              <span class="input-group-addon fix-border"><i class="icon icon-link"></i></span>
+              <?php echo html::input('params[moreUrl]', $block->content->moreUrl, "class='form-control' placeholder='{$lang->block->placeholder->moreUrl}'");?>
+          </td>
+        </tr>
+        <?php endif;?>
         <tr>
           <td></td>
           <td>

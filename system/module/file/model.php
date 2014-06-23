@@ -47,6 +47,7 @@ class fileModel extends model
         $filesHtml  = '';
         foreach($files as $file)
         {
+            if($file->editor) continue;
             $file->title = $file->title . ".$file->extension";
             if($file->isImage)
             {
@@ -550,6 +551,7 @@ class fileModel extends model
             $data->objectType = $objectType;
             $data->addedBy    = $this->app->user->account;
             $data->addedDate  = helper::now();
+            $data->editor     = 1;
 
             $fileExists = $this->dao->select('count(*) as count')->from(TABLE_FILE)
                 ->where('objectType')->eq($objectType)

@@ -24,10 +24,13 @@ $allJSFile  = $jsRoot . 'all.js';
 $jsCode = '';
 foreach($jsFiles as $jsFile) $jsCode .= "\n". file_get_contents($jsFile);
 $result = file_put_contents($allJSFile, $jsCode);
-if($result)
-{
-    echo "压缩js成功！\n";
-}
+if($result) echo "create all.js success\n";
+
+$ie8Code = file_get_contents($jsRoot . 'html5shiv/min.js');
+$ie8Code .= file_get_contents($jsRoot . 'respond/min.js');
+
+$result = file_put_contents($jsRoot . 'all.ie8.js', $ie8Code);
+if($result) echo "create all.ie8.js success\n";
 
 /* Compress it. */
 `java -jar ~/bin/yuicompressor/build/yuicompressor.jar --type js $allJSFile -o $allJSFile`;

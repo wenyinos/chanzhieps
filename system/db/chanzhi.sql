@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `eps_category` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `name` char(30) NOT NULL DEFAULT '',
   `alias` varchar(100) NOT NULL,
-  `desc` varchar(150) NOT NULL,
+  `desc` text NOT NULL,
   `keywords` varchar(150) NOT NULL,
   `parent` smallint(5) unsigned NOT NULL DEFAULT '0',
   `path` char(255) NOT NULL DEFAULT '',
@@ -355,10 +355,10 @@ CREATE TABLE `eps_wx_message` (
 
 -- Insert data into `eps_layout`;
 INSERT INTO `eps_layout` (`page`, `region`, `blocks`) VALUES
-('all', 'header', '[{"id":"12","grid":"","titleless":0,"borderless":0}]'),
-('index_index', 'header', '[{"id":"5","grid":"","titleless":0,"borderless":0}]'),
+('all', 'top', '[{"id":"12","grid":"","titleless":0,"borderless":0}]'),
+('index_index', 'top', '[{"id":"5","grid":"","titleless":0,"borderless":0}]'),
 ('index_index', 'middle', '[{"id":3,"grid":12,"titleless":0,"borderless":0},{"id":"10","grid":4,"titleless":0,"borderless":0},{"id":"1","grid":4,"titleless":0,"borderless":0},{"id":"9","grid":4,"titleless":0,"borderless":0}]'),
-('index_index', 'footer', '[{"id":"11","grid":"","titleless":0,"borderless":0}]'),
+('index_index', 'bottom', '[{"id":"11","grid":"","titleless":0,"borderless":0}]'),
 ('article_browse', 'side', '[{"id":"6","grid":"","titleless":0,"borderless":0},{"id":"9","grid":"","titleless":0,"borderless":0}]'),
 ('article_view', 'side', '[{"id":"6","grid":"","titleless":0,"borderless":0},{"id":"9","grid":"","titleless":0,"borderless":0}]'),
 ('product_browse', 'side', '[{"id":"4","grid":"","titleless":0,"borderless":0},{"id":"7","grid":"","titleless":0,"borderless":0},{"id":"9","grid":"","titleless":0,"borderless":0}]'),

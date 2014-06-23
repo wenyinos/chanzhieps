@@ -23,7 +23,16 @@
 </nav>
 
 <div class="clearfix row-main">
-  <?php 
-  $moduleMenu = commonModel::createModuleMenu($this->moduleName);
-  if($moduleMenu) echo "<div class='col-md-2'>$moduleMenu</div>\n<div class='col-md-10'>\n";
-  ?>
+  <?php $moduleMenu = commonModel::createModuleMenu($this->moduleName);?>
+  <?php if($moduleMenu or !empty($treeModuleMenu)):?>
+  <div class='col-md-2'>
+    <?php if($moduleMenu) echo $moduleMenu;?>
+    <?php if(!empty($treeModuleMenu)):?>
+    <div class='panel w-p15 affix' style="margin-top: 90px">
+    <div class='panel-heading'><strong><?php echo $lang->tree->browseByCategory;?></strong></div>
+       <div class='panel-body'><?php echo $treeModuleMenu;?></div>
+    </div>
+    <?php endif;?>
+  </div>
+  <div class='col-md-10'>
+  <?php endif;?>

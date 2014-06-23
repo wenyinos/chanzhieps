@@ -144,15 +144,13 @@ $lang->menuGroups->message = 'feedback';
 /* Menu of article module. */
 $lang->article = new stdclass();
 $lang->article->menu = new stdclass();
-$lang->article->menu->browse = array('link' => 'List|article|admin|', 'alias' => 'edit');
-$lang->article->menu->create = 'Create|article|create|type=article';
+$lang->article->menu->browse = array('link' => 'List|article|admin|', 'alias' => 'create, edit');
 $lang->article->menu->tree   = 'Categories|tree|browse|type=article';
 
 /* Menu of blog module. */
 $lang->blog = new stdclass();
 $lang->blog->menu = new stdclass();
-$lang->blog->menu->browse = array('link' => 'List|article|admin|type=blog', 'alias' => 'edit');
-$lang->blog->menu->create = 'Create|article|create|type=blog';
+$lang->blog->menu->browse = array('link' => 'List|article|admin|type=blog', 'alias' => 'create, edit');
 $lang->blog->menu->tree   = 'Categories|tree|browse|type=blog';
 
 /* Menu of page module. */
@@ -164,8 +162,7 @@ $lang->page->menu->create = 'Create|article|create|type=page';
 /* Menu of product module. */
 $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
-$lang->product->menu->browse = array('link' => 'List|product|admin|', 'alias' => 'edit');
-$lang->product->menu->create = 'Create|product|create|';
+$lang->product->menu->browse = array('link' => 'List|product|admin|', 'alias' => 'creaet, edit');
 $lang->product->menu->tree   = 'Categories|tree|browse|type=product';
 
 /* Menu of UI module. */
@@ -265,6 +262,10 @@ $lang->error->reg             = "<strong>%s</strong>should like<strong>%s</stron
 $lang->error->unique          = "<strong>%s</strong>has<strong>%s</strong>already. If you are sure this record has been deleted, you can restore it in admin panel, trash page.";
 $lang->error->notempty        = "<strong>%s</strong>can not be empty.";
 $lang->error->equal           = "<strong>%s</strong>must be<strong>%s</strong>.";
+$lang->error->gt              = "<strong>%s</strong> should be geater than <strong>%s</strong>.";
+$lang->error->ge              = "<strong>%s</strong> should be not less than <strong>%s</strong>.";
+$lang->error->lt              = "<strong>%s</strong> should be less than <strong>%s</strong>";
+$lang->error->le              = "<strong>%s</strong> should be no greater than <strong>%s</strong>.";
 $lang->error->in              = '<strong>%s</strong>must in<strong>%s</strong>。';
 $lang->error->int             = array("<strong>%s</strong>should be interger", "<strong>%s</strong>should between<strong>%s-%s</strong>.");
 $lang->error->float           = "<strong>%s</strong>should be a interger or float.";

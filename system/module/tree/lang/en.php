@@ -17,16 +17,17 @@ $lang->tree->browse      = "Manage";
 $lang->tree->manage      = "Manage";
 $lang->tree->fix         = "Fix data";
 
-$lang->tree->common        = 'Category';
-$lang->tree->noCategories  = 'No category yet, add one first.';
-$lang->tree->timeCountDown = "Locate to category manage page in <strong id='countDown'>3</strong> seconds.";
-$lang->tree->redirect      = 'Manage now';
-$lang->tree->aliasRepeat   = 'Alias: %s already exists.';
-$lang->tree->aliasConflict = 'Alias: %s  conflicts with system modules';
-$lang->tree->aliasNumber   = 'Alias must not be digital.';
-$lang->tree->hasChildren   = "The board has children, can't be deleted.";
-$lang->tree->confirmDelete = "Are you sure to delete it?";
-$lang->tree->successFixed  = "Successfully fixed.";
+$lang->tree->common           = 'Category';
+$lang->tree->noCategories     = 'No category yet, add one first.';
+$lang->tree->timeCountDown    = "Locate to category manage page in <strong id='countDown'>3</strong> seconds.";
+$lang->tree->redirect         = 'Manage now';
+$lang->tree->aliasRepeat      = 'Alias: %s already exists.';
+$lang->tree->aliasConflict    = 'Alias: %s  conflicts with system modules';
+$lang->tree->aliasNumber      = 'Alias must not be digital.';
+$lang->tree->hasChildren      = "The board has children, can't be deleted.";
+$lang->tree->confirmDelete    = "Are you sure to delete it?";
+$lang->tree->successFixed     = "Successfully fixed.";
+$lang->tree->browseByCategory = 'Browse By Category';
 
 /* Lang items for article, products. */
 $lang->category = new stdclass();

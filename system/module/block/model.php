@@ -3,7 +3,7 @@
  * The model file of block module of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
+ * @license     http://api.chanzhi.org/goto.php?item=license
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     block
  * @version     $ID$
@@ -22,6 +22,7 @@ class blockModel extends model
     {
         $block = $this->dao->findByID($blockID)->from(TABLE_BLOCK)->fetch();
         if(strpos('code', $block->type) === false) $block->content = json_decode($block->content);
+        if(empty($block->content)) $block->content = new stdclass();
         return $block;
     }
 
@@ -173,7 +174,7 @@ class blockModel extends model
      * Create form entry of one block backend.
      * 
      * @param  object  $block 
-     * @param  int     $key 
+     * @param  mix     $key 
      * @access public
      * @return void
      */
@@ -239,7 +240,7 @@ class blockModel extends model
             $block->content = helper::jsonEncode($block->params);
         }
 
-        $this->dao->insert(TABLE_BLOCK)->data($block, 'params,uid')->autoCheck()->exec();
+        $this->dao->insert(TABLE_BLOCK)->data($block, 'params,uid')->batchCheck($this->config->block->require->create, 'notempty')->autoCheck()->exec();
 
         $blockID = $this->dao->lastInsertID();
         $this->loadModel('file')->updateObjectID($this->post->uid, $blockID, 'block');
@@ -268,7 +269,11 @@ class blockModel extends model
             $block->content = helper::jsonEncode($block->params);
         }
 
-        $this->dao->update(TABLE_BLOCK)->data($block, 'params,uid,blockID')->autoCheck()->where('id')->eq($this->post->blockID)->exec();
+        $this->dao->update(TABLE_BLOCK)->data($block, 'params,uid,blockID')
+            ->batchCheck($this->config->block->require->edit, 'notempty')
+            ->autoCheck()
+            ->where('id')->eq($this->post->blockID)
+            ->exec();
 
         $this->loadModel('file')->updateObjectID($this->post->uid, $this->post->blockID, 'block');
         return true;
@@ -316,7 +321,10 @@ class blockModel extends model
             $blocks[$key]['titleless']  = $this->post->titleless[$key];
             $blocks[$key]['borderless'] = $this->post->borderless[$key];
         }
-        $layout->blocks = helper::jsonEncode($blocks);
+
+        /* Resort blocks. */
+        foreach($blocks as $block) $sortedBlocks[] = $block;
+        $layout->blocks = helper::jsonEncode($sortedBlocks);
 
         $count = $this->dao->select('count(*) as count')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->fetch('count');
 

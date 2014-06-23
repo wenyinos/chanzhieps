@@ -821,6 +821,7 @@ class router
     private function getPathInfo($varName)
     {
         $value = @getenv($varName);
+        if(strpos($value, $_SERVER['SCRIPT_NAME']) !== false) $value = str_replace($_SERVER['SCRIPT_NAME'], '', $value);
         if(isset($_SERVER[$varName])) $value = $_SERVER[$varName];
         if(strpos($value, '?') === false) return trim($value, '/');
         $value = parse_url($value);
@@ -1563,7 +1564,7 @@ class router
                 $cmd  = "vim +$line $file";
                 $size = strlen($cmd);
                 echo "<pre class='alert alert-danger'>$message: ";
-                echo "<input type='text' value='$cmd' size='$size' style='border:none; background:none;' onclick='this.select();' /></pre>";
+                echo "<input type='text' value='$cmd' size='$size' style='border:none; background:none;' onmouseover='this.select();' /></pre>";
             }
         }
 

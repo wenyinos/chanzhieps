@@ -14,6 +14,7 @@
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
 <?php js::set('key', 1);?>
+<?php js::set('categoryID', $currentCategory);?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-plus"></i> <?php echo $lang->product->create;?></strong>
@@ -103,8 +104,8 @@
               <div class="col-xs-3"> <?php echo html::input('label[0]', '', "class='form-control' placeholder='{$lang->product->placeholder->label}'" )?></div>
               <div class="col-xs-8"> <?php echo html::input('value[0]', '', "class='form-control' placeholder='{$lang->product->placeholder->value}'" )?></div>
               <div class="col-xs-1">
-                <?php echo html::a('javascript:;', "<i class='icon-plus'></i>");?>
-                <?php echo html::a('javascript:;', "<i class='icon-minus'></i>");?>
+                <?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='btn btn-link pull-left btn-mini btn-add'");?>
+                <?php echo html::a('javascript:;', "<i class='icon-remove'></i>", "class='btn btn-link pull-left btn-mini btn-remove'");?>
               </div>
             </div>
           </td>
@@ -121,8 +122,8 @@
         <div class="col-xs-3"> <?php echo html::input('label[key]', '', "class='form-control' placeholder='{$lang->product->placeholder->label}'" )?></div>
         <div class="col-xs-8"> <?php echo html::input('value[key]', '', "class='form-control' placeholder='{$lang->product->placeholder->value}'" )?></div>
         <div class="col-xs-1">
-          <?php echo html::a('javascript:;', "<i class='icon-plus'></i>");?>
-          <?php echo html::a('javascript:;', "<i class='icon-minus'></i>");?>
+          <?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='btn btn-link pull-left btn-mini btn-add'");?>
+          <?php echo html::a('javascript:;', "<i class='icon-remove'></i>", "class='btn btn-link pull-left btn-mini btn-remove'");?>
         </div>
       </div>
     </div>

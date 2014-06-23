@@ -1,1 +1,4 @@
-$(function(){ $.setAjaxJSONER('.changeStatus'); })
+$(function()
+{
+    $.setAjaxJSONER('.changeStatus');
+})

@@ -67,6 +67,15 @@ class slideModel extends model
             ->remove('files')
             ->get();
 
+        $slide->label       = array_values($slide->label);
+        $slide->buttonClass = array_values($slide->buttonClass);
+        $slide->buttonUrl   = array_values($slide->buttonUrl);
+        if($slide->backgroundType == 'color')
+        {
+            $this->dao->insert('slide')->data($slide, 'label,buttonClass,buttonUrl')->batchCheck('backgroundColor,height', 'notempty')->check('height', 'ge', 100);
+            if(dao::isError()) return false;
+        }
+
         $setting = new stdclass();
         $setting->owner   = 'system';
         $setting->module  = 'common';
@@ -93,6 +102,16 @@ class slideModel extends model
         $image = $this->uploadImage();
 
         $slide = fixer::input('post')->stripTags('summary', $this->config->allowedTags->front)->setIf(!empty($image), 'image', $image)->get();
+
+        if($slide->backgroundType == 'color')
+        {
+            $this->dao->insert('slide')->data($slide, 'label,buttonClass,buttonUrl')->batchCheck('backgroundColor,height', 'notempty')->check('height', 'ge', 100);
+            if(dao::isError()) return false;
+        }
+
+        $slide->label       = array_values($slide->label);
+        $slide->buttonClass = array_values($slide->buttonClass);
+        $slide->buttonUrl   = array_values($slide->buttonUrl);
 
         $this->dao->update(TABLE_CONFIG)
             ->set('value')->eq(helper::jsonEncode($slide))

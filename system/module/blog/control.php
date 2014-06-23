@@ -22,7 +22,7 @@ class blog extends control
     public function index($categoryID = 0, $pageID = 1)
     {   
         $this->app->loadClass('pager', $static = true);
-        $pager = new pager(0, 10, $pageID);
+        $pager = new pager(0, $this->config->blog->recPerPage, $pageID);
 
         $category   = $this->loadModel('tree')->getByID($categoryID, 'blog');
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;

@@ -41,7 +41,7 @@ class forum extends control
  
         /* Get common threads. */
         $this->app->loadClass('pager', $static = true);
-        $pager   = new pager(0, 10, $pageID);
+        $pager   = new pager(0, $this->config->forum->recPerPage, $pageID);
         $threads = $this->loadModel('thread')->getList($board->id, $orderBy = 'repliedDate_desc', $pager);
 
         $this->view->title    = $board->name;

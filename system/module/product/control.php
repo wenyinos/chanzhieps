@@ -36,7 +36,7 @@ class product extends control
     public function browse($categoryID = 0, $pageID = 1)
     {  
         $this->app->loadClass('pager', $static = true);
-        $pager = new pager(0, 15, $pageID);
+        $pager = new pager(0, $this->config->product->recPerPage, $pageID);
 
         $category   = $this->loadModel('tree')->getByID($categoryID, 'product');
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
@@ -93,11 +93,12 @@ class product extends control
         if($categoryID) $families = $this->loadModel('tree')->getFamily($categoryID, 'product');
         $products = $this->product->getList($families, $orderBy, $pager);
 
-        $this->view->title      = $this->lang->product->admin;
-        $this->view->products   = $products;
-        $this->view->pager      = $pager;
-        $this->view->categoryID = $categoryID;
-        $this->view->orderBy    = $orderBy;
+        $this->view->title          = $this->lang->product->admin;
+        $this->view->products       = $products;
+        $this->view->pager          = $pager;
+        $this->view->categoryID     = $categoryID;
+        $this->view->orderBy        = $orderBy;
+        $this->view->treeModuleMenu = $this->loadModel('tree')->getTreeMenu('product', 0, array('treeModel', 'createAdminLink'));
         $this->display();
     }   
 
@@ -126,6 +127,7 @@ class product extends control
         $this->view->title           = $this->lang->product->create;
         $this->view->currentCategory = $categoryID;
         $this->view->categories      = $categories;
+        $this->view->treeModuleMenu  = $this->loadModel('tree')->getTreeMenu('product', 0, array('treeModel', 'createAdminLink'));
         $this->display();
     }
 
@@ -163,9 +165,10 @@ class product extends control
             $product->attributes = array($attribute);
         }
 
-        $this->view->title      = $this->lang->product->edit;
-        $this->view->product    = $product;
-        $this->view->categories = $categories;
+        $this->view->title          = $this->lang->product->edit;
+        $this->view->product        = $product;
+        $this->view->categories     = $categories;
+        $this->view->treeModuleMenu = $this->loadModel('tree')->getTreeMenu('product', 0, array('treeModel', 'createAdminLink'));
 
         $this->display();
     }

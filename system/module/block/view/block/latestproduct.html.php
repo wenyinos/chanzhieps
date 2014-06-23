@@ -18,7 +18,10 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
 ?>
 <div id="block<?php echo $block->id;?>" class="panel panel-block <?php echo $blockClass;?>">
   <div class='panel-heading'>
-    <h4><?php echo $icon;?> <?php echo $block->title;?></h4>
+    <strong><?php echo $icon;?> <?php echo $block->title;?></strong>
+    <?php if(isset($content->moreText) and $content->moreText):?>
+    <div class='pull-right'><?php echo html::a($content->moreUrl, $content->moreText);?></div>
+    <?php endif;?>
   </div>
   <?php if(isset($content->image)):?>
   <div class='panel-body'>
@@ -33,7 +36,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
         <a class='card' href="<?php echo $url;?>">
           <?php $title = $product->image->primary->title ? $product->image->primary->title : $product->name;?>
           <div class='media' style='background-image: url(<?php echo $product->image->primary->middleURL; ?>); background-iamge:none\0;'><?php echo html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"); ?></div>
-            <strong class='card-heading'>
+          <div class='card-heading'>
             <?php echo $product->name;?>
             <div class='text-latin'>
             <?php
@@ -56,7 +59,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
             }
             ?>
             </div>
-          </strong>
+          </div>
         </a>
       </div>
       <?php endif;?>

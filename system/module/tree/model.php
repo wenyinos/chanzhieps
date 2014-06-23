@@ -287,23 +287,21 @@ class treeModel extends model
      */
     public static function createAdminLink($category)
     {
-        if($category->type == 'forum')
+        if($category->type == 'forum' or $category->type == 'product')
         {
-            $categoryName = 'forum';
-            $methodName   = 'boardAdmin';
+            $categoryName = $category->type;
             $vars         = "categoryID=$category->id";
-            $linkHtml     = html::a(helper::createLink($categoryName, $methodName, $vars), $category->name, "id='category{$category->id}' target='mainwin'");
-            return $linkHtml;
         }
         else
         {
             $categoryName = 'article';
-            $methodName   = 'browseAdmin';
-            $orderBy      = $category->type == 'article' ? 'id_desc' : '`order`';
-            $vars         = "type=$category->type&&categoryID=$category->id&orderBy=$orderBy";
-            $linkHtml     = html::a(helper::createLink($categoryName, $methodName, $vars), $category->name, "id='category($category->id)' target='mainwin'");
-            return $linkHtml;
+            $vars         = "type=$category->type&categoryID=$category->id";
         }
+
+        $methodName = 'admin';
+        $linkHtml   = html::a(helper::createLink($categoryName, $methodName, $vars), $category->name, "id='category{$category->id}'");
+
+        return $linkHtml;
     }
 
     /**
@@ -331,7 +329,6 @@ class treeModel extends model
         $linkHtml = html::a(helper::createLink('product', 'browse', "categoryID={$category->id}", "category={$category->alias}"), $category->name, "id='category{$category->id}'");
         return $linkHtml;
     }
-
 
     /**
      * Create the blog browse link.

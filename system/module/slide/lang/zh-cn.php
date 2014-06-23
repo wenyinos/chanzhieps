@@ -37,8 +37,6 @@ $lang->slide->buttonUrl   = '按钮链接';
 $lang->slide->buttonColor = '颜色';
 
 $lang->slide->sort     = '排序';
-$lang->slide->sortTip  = '移动幻灯片后，请点击 “保存排序” 按保存。';
-$lang->slide->saveSort = '保存排序';
 $lang->slide->admin    = '幻灯片设置';
 $lang->slide->create   = '添加幻灯片';
 $lang->slide->edit     = '编辑幻灯片';
