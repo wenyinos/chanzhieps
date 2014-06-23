@@ -18,7 +18,7 @@
     </div>
     <div class='modal-body'>
       <?php printf($lang->upgrade->backupData, $db->user, $db->password, $db->name, inlink('selectVersion'));?>
-      <?php if(version_compare($this->loadModel('setting')->getVersion(), 2.3) <= 0):?>
+      <?php if(version_compare($this->loadModel('setting')->getVersion(), 2.3) < 0):?>
       <div class='text-left'>
         <label class='checkbox'><input type='checkbox' id='agree' checked /><?php echo $lang->agreement;?></label>
       </div>

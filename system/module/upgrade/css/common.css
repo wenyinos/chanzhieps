@@ -4,5 +4,5 @@ body{background:white; margin-top:50px}
 .text-danger.help-block{color: #D2322D}
 
 .form-control.single-input{width: 200px;display: inline-block;}
-
+.autoSelect{overflow:hidden; resize:none;}
 .borderless {border: none}

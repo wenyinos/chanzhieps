@@ -31,8 +31,8 @@ $lang->site->setQQOauth    = "QQ Oauth";
 $lang->site->oauthHelp     = "Help";
 
 $lang->site->typeList = new stdclass();
-$lang->site->typeList->company = 'Enterprise Portal';
-$lang->site->typeList->blog    = 'Personal Blog';
+$lang->site->typeList->portal = 'Enterprise Portal';
+$lang->site->typeList->blog   = 'Personal Blog';
 
 $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = 'Member';

@@ -88,8 +88,11 @@ class upgradeModel extends model
             case '2_3':
                 $this->execSQL($this->getUpgradeFile('2.3'));
                 $this->upgradeRegions();
+                $this->fixTopRegion();
                 $this->fixMoreLink();
                 $this->fixSlideHeight();
+                $this->setDefaultSiteType();
+
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -580,15 +583,9 @@ class upgradeModel extends model
     {
         $this->dao->update(TABLE_LAYOUT)->set('region')->eq('start')->where('page')->eq('all')->andWhere('region')->eq('header')->exec();
 
-        $blocks = array();
-        $blocks['en']    = array('type' => 'header', 'title' => 'Header',   'content' => '');
-        $blocks['zh-cn'] = array('type' => 'header', 'title' => '网站头部', 'content' => '');
-        $blocks['zh-tw'] = array('type' => 'header', 'title' => '網站頭部', 'content' => '');
-
-        $block = $blocks[$this->config->site->lang];
-
+        $this->app->loadLang('block');
+        $block = array('type' => 'header', 'title' => $this->lang->block->typeList['header'], 'content' => '');
         $this->dao->insert(TABLE_BLOCK)->data($block)->exec();
-
         $blockID = $this->dao->lastInsertID();
 
         $headerBlock = array();
@@ -602,6 +599,42 @@ class upgradeModel extends model
 
         return !dao::isError();
     }
+
+    /**
+     * Fix top region (which is empty)
+     * 
+     * @access public
+     * @return void
+     */
+    public function fixTopRegion()
+    {
+        $topRegion = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq('all')->andWhere('region')->eq('top')->fetch();
+
+        if(empty($topRegion))
+        {
+            $this->app->loadLang('block');
+            $block = array('type' => 'header', 'title' => $this->lang->block->typeList['header'], 'content' => '');
+            $this->dao->insert(TABLE_BLOCK)->data($block)->exec();
+            if(dao::isError()) return false;
+            $blockID = $this->dao->lastInsertID();
+
+            $topBlock = array();
+            $topBlock['id']         = $blockID;
+            $topBlock['grid']       = '';
+            $topBlock['titleless']  = 0;
+            $topBlock['borderless'] = 0;
+            $topBlocks[] = $topBlock;
+
+            $this->dao->insert(TABLE_LAYOUT)
+                ->set('page')->eq('all')
+                ->set('region')->eq('top')
+                ->set('blocks')->eq(json_encode($topBlocks))
+                ->exec();
+            return dao::isError();
+        }
+
+        return true;
+    }    
 
     /**
      * Upgrade html blocks when upgrade from 2.0.1 .
@@ -715,6 +748,18 @@ class upgradeModel extends model
             $this->dao->update(TABLE_CONFIG)->set('`value`')->eq(json_encode($value))->where('id')->eq($id)->exec();
         }
         return !dao::isError();
+    }
+
+    /**
+     * Set default site type.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setDefaultSiteType()
+    {
+        if(isset($this->config->site->type) and $this->config->site->type == 'blog') return true;
+        return $this->loadModel('setting')->setItems('system.common.site', array('type' => 'portal'));
     }
 
     /**
