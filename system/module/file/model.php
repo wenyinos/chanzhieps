@@ -542,6 +542,9 @@ class fileModel extends model
         if(empty($images)) return false;
         foreach($images[2] as $key => $pathname)
         {
+            $pathname = str_replace($this->webPath, '', $pathname);
+            $pathname = str_replace('\?fromSpace=y', '', $pathname);
+
             $data = $this->dao->select('*')->from(TABLE_FILE)->where('pathname')->eq($pathname)->fetch();
             if(!$data) $data = new stdclass();
 
