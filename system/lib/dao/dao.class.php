@@ -1598,7 +1598,7 @@ class sql
     }
 
     /**
-     * Uuote a var.
+     * Quote a var.
      * 
      * @param  mixed  $value 
      * @access public

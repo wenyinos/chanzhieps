@@ -101,7 +101,7 @@ class slideModel extends model
     {
         $image = $this->uploadImage();
 
-        $slide = fixer::input('post')->stripTags('summary', $this->config->allowedTags->front)->setIf(!empty($image), 'image', $image)->get();
+        $slide = fixer::input('post')->stripTags('summary', $this->config->allowedTags->front)->setIf(!empty($image), 'image', $image)->remove('files')->get();
 
         if($slide->backgroundType == 'color')
         {
