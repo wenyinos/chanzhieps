@@ -713,6 +713,7 @@ class upgradeModel extends model
             if(empty($this->config->block->defaultMoreUrl[$block->type])) continue;
 
             $content           = json_decode($block->content);
+            if(empty($content)) continue;
             $content->moreText = $this->lang->more;
             $content->moreUrl  = $this->config->block->defaultMoreUrl[$block->type];
             $block->content    = json_encode($content);

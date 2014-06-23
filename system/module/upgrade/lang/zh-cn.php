@@ -26,14 +26,14 @@ $lang->upgrade->next          = '下一步';
 $lang->upgrade->setOkFile = <<<EOT
 <div class='alert'>
 <h5>请按照下面的步骤操作以确认您的管理员身份。</h5>
-<p>创建 <input value='%s' readonly class='autoSelect'/> 文件。如果存在该文件，使用编辑软件打开，重新保存一遍。</p>
+<p>创建 <input value='%s' readonly class='autoSelect red'/> 文件。如果存在该文件，使用编辑软件打开，重新保存一遍。</p>
 </div>
 EOT;
 
 $lang->upgrade->backupData = <<<EOT
 <pre>
 <strong>使用phpMyAdmin或者mysqldump命令备份数据库。</strong>
-<textarea class='autoSelect w-300px red' readonly rows='1' > mysqldump -u %s -p%s %s > chanzhi.sql </textarea>
+<textarea class='autoSelect w-400px red' readonly rows='1' > mysqldump -u %s -p%s %s > chanzhi.sql </textarea>
 </pre>
 EOT;
 
