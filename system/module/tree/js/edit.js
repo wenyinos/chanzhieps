@@ -14,5 +14,4 @@ $(document).ready(function()
         });
     });
 
-    $('.ke-container').css('width','90%');
 });
