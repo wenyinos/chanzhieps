@@ -371,11 +371,13 @@ class wechatapi
         foreach($menu['button'] as $button)
         {
             if(isset($button->name)) $button->name = urlencode($button->name);
+            if(isset($button->url))  $button->url  = urlencode($button->url);
             if(isset($button->sub_button)) 
             {
                 foreach($button->sub_button as $subButton)
                 {
                     if(isset($subButton->name)) $subButton->name = urlencode($subButton->name);
+                    if(isset($subButton->url))  $subButton->url  = urlencode($subButton->url);
                 }
             }
         }

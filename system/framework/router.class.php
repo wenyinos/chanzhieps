@@ -821,6 +821,7 @@ class router
     private function getPathInfo($varName)
     {
         $value = @getenv($varName);
+        if(strpos($value, $_SERVER['SCRIPT_NAME']) !== false) $value = str_replace($_SERVER['SCRIPT_NAME'], '', $value);
         if(isset($_SERVER[$varName])) $value = $_SERVER[$varName];
         if(strpos($value, '?') === false) return trim($value, '/');
         $value = parse_url($value);

@@ -88,6 +88,8 @@ class upgradeModel extends model
             case '2_3':
                 $this->execSQL($this->getUpgradeFile('2.3'));
                 $this->upgradeRegions();
+                $this->fixMoreLink();
+                $this->fixSlideHeight();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -659,6 +661,59 @@ class upgradeModel extends model
         $this->dao->update(TABLE_LAYOUT)->set('region')->eq('bottom')->where('region')->eq('footer')->exec();
         $this->dao->update(TABLE_LAYOUT)->set('region')->eq('header')->where('region')->eq('start')->exec();
 
+        return !dao::isError();
+    }
+
+    /**
+     * Fix MoreLink of old blocks. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function fixMoreLink()
+    {
+        $this->loadModel('block');
+        $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->fetchAll();
+
+        foreach($blocks as $block)
+        {
+            if(empty($this->config->block->defaultMoreUrl[$block->type])) continue;
+
+            $content           = json_decode($block->content);
+            $content->moreText = $this->lang->more;
+            $content->moreUrl  = $this->config->block->defaultMoreUrl[$block->type];
+            $block->content    = json_encode($content);
+
+            $this->dao->update(TABLE_BLOCK)->data($block)->where('id')->eq($block->id)->exec();
+        }
+
+        return !dao::isError();
+    }
+
+    /**
+     * fix slide height.
+     * 
+     * @access public
+     * @return void
+     */
+    public function fixSlideHeight()
+    {
+        $slides = $this->dao->select('*')->from(TABLE_CONFIG)
+            ->where('owner')->eq('system')
+            ->andWhere('module')->eq('common')
+            ->andWhere('section')->eq('slides')
+            ->fetchAll('id');
+
+        foreach($slides as $id => $slide)
+        {
+            $value = json_decode($slide->value);
+
+            if($value->backgroundType == 'image') continue;
+            if(isset($value->height) and $value->height) continue;
+
+            $value->height = 100;
+            $this->dao->update(TABLE_CONFIG)->set('`value`')->eq(json_encode($value))->where('id')->eq($id)->exec();
+        }
         return !dao::isError();
     }
 
