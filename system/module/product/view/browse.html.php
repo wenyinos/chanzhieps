@@ -37,6 +37,7 @@ include '../../common/view/treeview.html.php';
                 echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&name=$product->alias"), html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"), "class='media-wrapper'");
             }
             ?>
+            <div class='card-info'><span class="label label-badge" title='<?php echo $lang->product->views;?>'><i class="icon-eye-open"></i> <?php echo $product->views;?></span></div>
             <div class='card-heading'>
               <?php echo html::a(inlink('view', "id={$product->id}", "category={$category->alias}&name=$product->alias"), '<strong>' . $product->name . '</strong>');?>
             </div>
@@ -48,7 +49,6 @@ include '../../common/view/treeview.html.php';
                 echo "<strong class='text-danger text-lg'>" . $product->promotion . '</strong>&nbsp;&nbsp;';
                 if($product->price != 0)
                 {
-
                     echo "<del class='text-muted'>" . $lang->RMB . $product->price .'</del>';
                 }
             }
@@ -66,7 +66,6 @@ include '../../common/view/treeview.html.php';
             }
             ?>
             </div>
-            <div class='label label-badge label-danger'><?php echo $lang->product->views . $lang->colon . $product->views;?></div>
           </div>
         </div>
         <?php endforeach;?>
