@@ -26,14 +26,14 @@ $lang->upgrade->next          = 'Next';
 $lang->upgrade->setOkFile = <<<EOT
 <div class='alert'>
 <h5>For security reason, please do these steps. </h5>
-<p>Create "<code>%s</code>" file. If this file exists already, reopen it and save again.</p>
+<p>Create "<input value='%s' class='autoSelect' readoly />" file. If this file exists already, reopen it and save again.</p>
 </div>
 EOT;
 
 $lang->upgrade->backupData = <<<EOT
 <pre>
 <strong>Using phpMyAdmin or mysqldump to backup database.</strong>
-<code class='red'>$ mysqldump -u %s</span> -p%s %s > chanzhi.sql</code>
+<textarea class='autoSelect w-300px red' readonly rows='1' > mysqldump -u %s -p%s %s > chanzhi.sql </textarea>
 </pre>
 EOT;
 
