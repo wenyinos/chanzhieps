@@ -1,6 +1,6 @@
 <?php include '../../common/view/header.html.php';?>
 <?php js::set('articleID', $article->id)?>
-<?php $this->block->printRegion($layouts, 'book_read', 'header');?>
+<?php $this->block->printRegion($layouts, 'book_read', 'top');?>
 <?php $common->printPositionBar($article->origins);?>
 <div class='article'>
   <header>
@@ -39,5 +39,5 @@
   </footer>
 </div>
 <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=book&objectID=$article->id");?></div>
-<?php $this->block->printRegion($layouts, 'book_read', 'footer');?>
+<?php $this->block->printRegion($layouts, 'book_read', 'bottom');?>
 <?php include '../../common/view/footer.html.php'; ?>

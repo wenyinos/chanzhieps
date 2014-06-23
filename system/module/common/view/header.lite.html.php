@@ -99,6 +99,6 @@ if(RUN_MODE == 'front')
     if(!empty($sina->widget)) js::import('http://tjs.sjs.sinajs.cn/open/api/js/wb.js');
 }
 ?>
-<?php if(RUN_MODE == 'front') $this->block->printRegion($layouts, 'all', 'start');?>
+<?php if(RUN_MODE == 'front') $this->block->printRegion($layouts, 'all', 'header');?>
 </head>
 <body>

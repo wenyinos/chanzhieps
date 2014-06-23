@@ -2,7 +2,7 @@
 <?php include 'header.lite.html.php';?>
 <div class='page-container'>
   <?php if(strpos($_SERVER['HTTP_USER_AGENT'],'MSIE 6.0') !== false ) exit($lang->IE6Alert); ?>
-  <?php $this->block->printRegion($layouts, 'all', 'header');?>
+  <?php $this->block->printRegion($layouts, 'all', 'top');?>
   <?php $topNavs = $this->loadModel('nav')->getNavs('top');?>
   <nav id='navbar' class='navbar navbar-default' role='navigation'>
     <div class='navbar-header'>

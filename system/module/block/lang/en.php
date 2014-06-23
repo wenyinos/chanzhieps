@@ -118,14 +118,14 @@ $lang->block->pages['page_view']      = 'Page';
 
 /* page layout list. */
 $lang->block->regions = new stdclass();
-$lang->block->regions->all['start']  = 'Start';
-$lang->block->regions->all['header'] = 'Header';
-$lang->block->regions->all['footer'] = 'Footer';
-$lang->block->regions->all['end']    = 'End';
+$lang->block->regions->all['header'] = 'Header(invisible)';
+$lang->block->regions->all['top']    = 'Top';
+$lang->block->regions->all['bottom'] = 'Bottom';
+$lang->block->regions->all['footer'] = 'Footer(invisible)';
 
-$lang->block->regions->index_index['header']  = 'Header';
+$lang->block->regions->index_index['top']     = 'Top';
 $lang->block->regions->index_index['middle']  = 'Middle';
-$lang->block->regions->index_index['footer']  = 'Footer';
+$lang->block->regions->index_index['Bottom']  = 'Bottom';
 
 $lang->block->regions->article_browse['side'] = 'Side';
 $lang->block->regions->article_view['side']   = 'Side';
@@ -136,16 +136,16 @@ $lang->block->regions->product_view['side']   = 'Side';
 $lang->block->regions->blog_index['side']     = 'Side';
 $lang->block->regions->blog_view['side']      = 'Side';
 
-$lang->block->regions->forum_index['header']  = 'Header';
-$lang->block->regions->forum_board['header']  = 'Header';
-$lang->block->regions->thread_view['header']  = 'Header';
-$lang->block->regions->forum_index['footer']  = 'Footer';
-$lang->block->regions->forum_board['footer']  = 'Footer';
-$lang->block->regions->thread_view['footer']  = 'Footer';
+$lang->block->regions->forum_index['top']     = 'Top';
+$lang->block->regions->forum_index['bottom']  = 'Bottom';
+$lang->block->regions->forum_board['top']     = 'Top';
+$lang->block->regions->forum_board['bottom']  = 'Bottom';
+$lang->block->regions->thread_view['top']     = 'Top';
+$lang->block->regions->thread_view['bottom']  = 'Bottom';
 
 $lang->block->regions->book_browse['side']    = 'Side';
-$lang->block->regions->book_read['header']    = 'Header';
-$lang->block->regions->book_read['footer']    = 'Footer';
+$lang->block->regions->book_read['top']       = 'Top';
+$lang->block->regions->book_read['bottom']    = 'Bottom';
 
 $lang->block->regions->message_index['side']  = 'Side';
 

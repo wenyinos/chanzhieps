@@ -37,12 +37,9 @@ include '../../common/view/treeview.html.php';
                 echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&name=$product->alias"), html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"), "class='media-wrapper'");
             }
             ?>
+            <div class='card-info'><span class="label label-badge" title='<?php echo $lang->product->views;?>'><i class="icon-eye-open"></i> <?php echo $product->views;?></span></div>
             <div class='card-heading'>
               <?php echo html::a(inlink('view', "id={$product->id}", "category={$category->alias}&name=$product->alias"), '<strong>' . $product->name . '</strong>');?>
-              <div class="text-muted pull-right">
-                <span title="<?php echo $lang->product->views;?>"><i class='icon-eye-open'></i> <?php echo $product->views;?></span> &nbsp; 
-                <span title="<?php echo $lang->product->addedDate;?>"><i class='icon-time'></i> <?php echo substr($product->addedDate, 0, 10);?></span>
-              </div>
             </div>
             <div class='card-content text-latin'>
             <?php
@@ -52,7 +49,6 @@ include '../../common/view/treeview.html.php';
                 echo "<strong class='text-danger text-lg'>" . $product->promotion . '</strong>&nbsp;&nbsp;';
                 if($product->price != 0)
                 {
-
                     echo "<del class='text-muted'>" . $lang->RMB . $product->price .'</del>';
                 }
             }

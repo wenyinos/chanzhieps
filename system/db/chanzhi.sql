@@ -355,10 +355,10 @@ CREATE TABLE `eps_wx_message` (
 
 -- Insert data into `eps_layout`;
 INSERT INTO `eps_layout` (`page`, `region`, `blocks`) VALUES
-('all', 'header', '[{"id":"12","grid":"","titleless":0,"borderless":0}]'),
-('index_index', 'header', '[{"id":"5","grid":"","titleless":0,"borderless":0}]'),
+('all', 'top', '[{"id":"12","grid":"","titleless":0,"borderless":0}]'),
+('index_index', 'top', '[{"id":"5","grid":"","titleless":0,"borderless":0}]'),
 ('index_index', 'middle', '[{"id":3,"grid":12,"titleless":0,"borderless":0},{"id":"10","grid":4,"titleless":0,"borderless":0},{"id":"1","grid":4,"titleless":0,"borderless":0},{"id":"9","grid":4,"titleless":0,"borderless":0}]'),
-('index_index', 'footer', '[{"id":"11","grid":"","titleless":0,"borderless":0}]'),
+('index_index', 'bottom', '[{"id":"11","grid":"","titleless":0,"borderless":0}]'),
 ('article_browse', 'side', '[{"id":"6","grid":"","titleless":0,"borderless":0},{"id":"9","grid":"","titleless":0,"borderless":0}]'),
 ('article_view', 'side', '[{"id":"6","grid":"","titleless":0,"borderless":0},{"id":"9","grid":"","titleless":0,"borderless":0}]'),
 ('product_browse', 'side', '[{"id":"4","grid":"","titleless":0,"borderless":0},{"id":"7","grid":"","titleless":0,"borderless":0},{"id":"9","grid":"","titleless":0,"borderless":0}]'),
