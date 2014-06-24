@@ -14,6 +14,7 @@
 $content  = json_decode($block->content);
 $type     = str_replace('product', '', strtolower($block->type));
 $method   = 'get' . $type;
+if(empty($content->category)) $content->category = 0;
 $products = $this->loadModel('product')->$method($content->category, $content->limit);
 ?>
 <div id="block<?php echo $block->id;?>" class="panel panel-block <?php echo $blockClass;?>">
