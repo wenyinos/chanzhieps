@@ -56,10 +56,10 @@ $themeRoot = $webRoot . "theme/";
   if(RUN_MODE == 'front' and $config->site->theme)
   {
       /* Import custom css. */
-      if($config->site->theme == 'colorful' and isset($config->site->customVesion))
+      if($config->site->theme == 'colorful' and isset($config->site->customVersion))
       {
           $customCss = str_replace($this->app->getDataRoot(), $this->app->getWebRoot() . 'data/' , $config->site->ui->customCssFile);
-          css::import($customCss . "?v={$config->site->customVesion}");
+          css::import($customCss . "?v={$config->site->customVersion}");
       }
       else
       {
