@@ -21,23 +21,28 @@
         <div class='comments-list'>
         <?php foreach($messages as $number => $message):?>
           <div class='comment' id="comment<?php echo $message->id?>">
-            <div class='avatar'><div class='avatar-empty icon-user'></div></div>
-            <div class='content'>
-              <div class='text'><span class='author'><strong><?php echo $message->from . $lang->colon;?></strong></span> &nbsp;<?php echo nl2br($message->content);?></div>
-              <div class='actions text-muted small'><?php echo $lang->comment->commentAt . ' ' . $message->date;?></div>
+            <div class='content clearfix'>
+              <div class='text'>
+                <span class='author'>
+                  <strong><i class='icon-user text-muted'></i> <?php echo $message->from;?></strong>
+                </span> 
+                <small>(<?php echo formatTime($message->date, 'Y-m-d H:i');?>)<?php echo $lang->colon;?></small>&nbsp;
+                <p><?php echo nl2br($message->content);?></p>
+              </div>
             </div>
             <?php if(!empty($replies[$message->id])):?>
-              <div class='comments-list'>
-                <?php foreach($replies[$message->id] as $reply):?>
-                <div class='comment'>
-                  <div class='avatar'><div class='avatar-empty icon-user'></div></div>
-                  <div class='content'>
-                    <div class='text'><span class='author'><strong><?php echo $reply->from . $lang->colon;?></strong></span> &nbsp;<?php echo nl2br($reply->content);?></div>
-                    <div class='actions text-muted small'><?php echo $lang->comment->replyAt . ' ' . $reply->date;?></div>
-                  </div>
+            <div class='comment'>
+              <?php foreach($replies[$message->id] as $reply):?>
+              <div class='content clearfix'>
+                <div class='reply-box radius'>
+                  <span class='author'>
+                    <strong><i class='icon-user'></i> <?php echo $reply->from;?></strong> <small>(<?php echo formatTime($reply->date, 'Y-m-d H:i');?>)</small><?php echo $lang->colon?>
+                  </span> 
+                  &nbsp;<?php echo nl2br($reply->content);?>
                 </div>
-                <?php endforeach; ?>
               </div>
+              <?php endforeach; ?>
+            </div>
             <?php endif;?>
           </div>
         <?php endforeach; ?>
