@@ -296,7 +296,7 @@ class articleModel extends model
             ->autoCheck()
             ->batchCheckIF($type != 'page', $this->config->article->require->create, 'notempty')
             ->batchCheckIF($type == 'page', $this->config->article->require->page, 'notempty')
-            ->checkIF($type == 'page', 'alias', 'unique', "type='page'")
+            ->checkIF(($type == 'page') and $this->post->alias, 'alias', 'unique', "type='page'")
             ->exec();
         $articleID = $this->dao->lastInsertID();
 
@@ -339,7 +339,7 @@ class articleModel extends model
             ->autoCheck()
             ->batchCheckIF($type != 'page', $this->config->article->require->edit, 'notempty')
             ->batchCheckIF($type == 'page', $this->config->article->require->page, 'notempty')
-            ->checkIF($type == 'page', 'alias', 'unique', "type='page' and id<>{$articleID}")
+            ->checkIF(($type == 'page') and $this->post->alias, 'alias', 'unique', "type='page'")
             ->where('id')->eq($articleID)
             ->exec();
 

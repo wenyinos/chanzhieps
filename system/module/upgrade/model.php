@@ -687,7 +687,7 @@ class upgradeModel extends model
         }
         $layout->blocks = helper::jsonEncode($blocks);
 
-        $this->dao->insert(TABLE_LAYOUT)->data($layout)->exec();
+        $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
         $this->dao->delete()->from(TABLE_LAYOUT)->where('page')->eq('all')->andWhere('region')->in('footer, end')->exec();
 
         $this->dao->update(TABLE_LAYOUT)->set('region')->eq('top')->where('region')->eq('header')->exec();

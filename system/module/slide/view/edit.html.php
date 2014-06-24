@@ -19,6 +19,7 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
 {
     $colorPlates .= "<div class='color color-tile' data='#" . $value . "'><i class='icon-ok'></i></div>";
 }
+a($slide);
 ?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-edit'></i> <?php echo $lang->slide->edit;?></strong></div>
@@ -129,7 +130,7 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
               </div>
             </div>
           </td>
-          <td><?php echo html::input("buttonUrl[{$key}]", $slide->buttonUrl[$key], "class='form-control' placeholder='{$lang->slide->buttonUrl}'");?></td>
+          <td><?php echo html::input("buttonUrl[{$key}]", isset($slide->buttonUrl[$key]) ? $slide->buttonUrl[$key] : '', "class='form-control' placeholder='{$lang->slide->buttonUrl}'");?></td>
           <td><?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus btn btn-mini'") . html::a('javascript:;', "<i class='icon-remove'></i>", "class='delete btn-mini btn'");?></td>
         </tr>
         <?php endforeach;?>
