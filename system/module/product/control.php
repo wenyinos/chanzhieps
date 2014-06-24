@@ -120,7 +120,7 @@ class product extends control
         if($_POST)
         {
             $productID = $this->product->create();       
-            if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::geterror()));
+            if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin')));
         }
 
