@@ -15,7 +15,7 @@
   <div class='panel-heading'>
     <h4><?php echo $icon . $block->title;?></h4>
   </div>
-  <div class='panel-body'>
+  <div class='panel-body article-content'>
     <?php echo $block->content->content;?>
   </div>
 </div>
