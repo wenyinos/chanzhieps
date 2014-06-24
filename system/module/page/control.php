@@ -19,7 +19,7 @@ class page extends control
      */
     public function index()
     {
-        $pages = $this->loadModel('article')->getList('page');
+        $pages = $this->loadModel('article')->getList('page', 0, $orderBy = null);
         $title = $this->lang->page->list;
         
         $this->view->title = $title;
