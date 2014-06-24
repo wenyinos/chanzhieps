@@ -49,7 +49,9 @@
 
 <div class='clearfix pager'><?php $pager->show('right', 'short');?></div>
 
-<?php if($this->session->user->account != 'guest'):?>
+<?php if($thread->readonly):?>
+<div class='alert alert-info'><?php echo $lang->thread->readonlyMessage;?></div>
+<?php elseif($this->session->user->account != 'guest'):?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-edit'></i> <?php echo $lang->thread->replies; ?></strong></div>
   <div class='panel-body'>
