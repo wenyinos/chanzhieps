@@ -89,7 +89,6 @@ class upgradeModel extends model
                 $this->execSQL($this->getUpgradeFile('2.3'));
                 $this->upgradeRegions();
                 $this->fixTopRegion();
-                $this->fixMoreLink();
                 $this->fixSlideHeight();
                 $this->setDefaultSiteType();
 
@@ -698,34 +697,7 @@ class upgradeModel extends model
     }
 
     /**
-     * Fix MoreLink of old blocks. 
-     * 
-     * @access public
-     * @return void
-     */
-    public function fixMoreLink()
-    {
-        $this->loadModel('block');
-        $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->fetchAll();
-
-        foreach($blocks as $block)
-        {
-            if(empty($this->config->block->defaultMoreUrl[$block->type])) continue;
-
-            $content           = json_decode($block->content);
-            if(empty($content)) continue;
-            $content->moreText = $this->lang->more;
-            $content->moreUrl  = $this->config->block->defaultMoreUrl[$block->type];
-            $block->content    = json_encode($content);
-
-            $this->dao->update(TABLE_BLOCK)->data($block)->where('id')->eq($block->id)->exec();
-        }
-
-        return !dao::isError();
-    }
-
-    /**
-     * fix slide height.
+     * Fix slide height.
      * 
      * @access public
      * @return void
