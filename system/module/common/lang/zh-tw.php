@@ -16,7 +16,7 @@ $lang->next     = '›';
 $lang->laquo    = '&laquo;';
 $lang->raquo    = '&raquo;';
 $lang->minus    = ' - ';
-$lang->RMB      = '￥';
+$lang->dollarSign      = '￥';
 $lang->divider  = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->back2Top = '返回頂部';
 
