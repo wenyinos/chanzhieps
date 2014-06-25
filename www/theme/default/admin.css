@@ -47,7 +47,11 @@ table.tablesorter thead tr .header:after {font-family: ZenIcon; font-weight: nor
 table.tablesorter thead tr .headerSortUp:after {font-family: ZenIcon; font-weight: normal;content: " \e6b9";font-size: 14px;color:#2973EA;}
 table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weight: normal;content: " \e6b8";font-size: 14px;color:#2973EA;}
 
-.tree a.active{font-weight: bold;}
+.tree-menu{margin-top: 90px;}
+.tree-menu .tree li ul li{padding: 5px 10px 0;}
+.tree-menu .tree a.active{font-weight: bold;}
+.tree-menu .treeview .hitarea{left: 10px; top: 5px;}
+.tree-menu .treeview > li > .hitarea{left: 0; top: 0;}
 
 /* responsive. */
 @media(max-width:998px) {.affix{position: inherit;} .leftmenu.affix{top: 0; width: 100%; margin-bottom: 20px;}}
