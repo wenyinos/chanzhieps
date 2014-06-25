@@ -18,21 +18,11 @@ $themeRoot = $this->config->webRoot . 'theme/';
 $content  = json_decode($block->content);
 $method   = 'get' . ucfirst(str_replace('article', '', strtolower($block->type)));
 $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 : $content->category, $content->limit);
-
-/* Compute the more link. */
-$moreLink = '';
-if($articles)
-{
-    reset($articles);
-    $firstArticle  = current($articles);
-    $firstCategory = $this->loadModel('tree')->getByID($firstArticle->category);
-    if($firstCategory) $moreLink = html::a(helper::createLink('article', 'browse', "category=$firstCategory->id", "category=$firstCategory->alias"), $this->lang->more, "class='text-link'");
-}
 ?>
 <div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
   <div class='panel-heading'>
     <strong><?php echo $icon . $block->title;?></strong>
-    <?php if(isset($content->moreText) and $content->moreText):?>
+    <?php if(!empty($content->moreText) and !empty($content->moreUrl)):?>
     <div class='pull-right'><?php echo html::a($content->moreUrl, $content->moreText);?></div>
     <?php endif;?>
   </div>

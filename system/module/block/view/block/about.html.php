@@ -14,7 +14,7 @@ $block->content = json_decode($block->content);
 <div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
   <div class='panel-heading'>
     <strong><?php echo $icon . $block->title;?></strong>
-    <?php if(isset($block->content->moreText) and $block->content->moreText):?>
+    <?php if(!empty($block->content->moreText) and !empty($block->content->moreUrl)):?>
     <div class='pull-right'><?php echo html::a($block->content->moreUrl, $block->content->moreText);?></div>
     <?php endif;?>
   </div>
