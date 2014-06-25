@@ -73,7 +73,7 @@
             <div class='col-sm-5'>
               <?php echo html::input('phone', $phone, "class='form-control'"); ?>
             </div>
-            <div class='col-sm-6'><div class='help-block'><small class='text-info'><?php echo $lang->message->contactHidden;?></small></div></div>
+            <div class='col-sm-6'><div class='help-block'><small class='text-important'><?php echo $lang->message->contactHidden;?></small></div></div>
           </div>
           <div class='form-group'>
             <label for='qq' class='col-sm-1 control-label'><?php echo $lang->message->qq;?></label>
@@ -104,7 +104,7 @@
             <div class='col-sm-1'></div>
             <div class='col-sm-11 col-sm-offset-1'>
               <span><?php echo html::submitButton();?></span>
-              <span><small class="text-info"><?php echo $lang->message->needCheck;?></small></span>
+              <span><small class="text-important"><?php echo $lang->message->needCheck;?></small></span>
             </div>
           </div>
         </form>

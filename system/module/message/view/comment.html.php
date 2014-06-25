@@ -90,7 +90,7 @@ css::internal($pageCSS);
       <div class='form-group'>
         <div class='col-sm-11 col-sm-offset-1'>
           <span><?php echo html::submitButton();?></span>
-          <span><small class="text-info"><?php echo $lang->comment->needCheck;?></small></span>
+          <span><small class="text-important"><?php echo $lang->comment->needCheck;?></small></span>
         </div>
       </div>
     </form>
