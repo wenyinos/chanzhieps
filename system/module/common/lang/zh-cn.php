@@ -10,7 +10,7 @@
  * @link        http://www.zentao.net
  */
 /* Common sign setting. */
-$lang->colon      = ' : ';
+$lang->colon      = '：';
 $lang->prev       = '‹';
 $lang->next       = '›';
 $lang->laquo      = '&laquo;';
