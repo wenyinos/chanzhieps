@@ -393,8 +393,8 @@ class blockModel extends model
 
         if(isset($this->config->block->defaultIcons[$block->type])) 
         {
-            $defaultIcon =  $this->config->block->defaultIcons[$block->type];
-            $content     = json_decode($block->content);
+            $defaultIcon = $this->config->block->defaultIcons[$block->type];
+            $content     = is_object($block->content) ? $block->content : json_decode($block->content);
             $iconClass   = isset($content->icon) ? $content->icon : $defaultIcon;
             $icon        = $iconClass ? "<i class='{$iconClass}'></i> " : "" ;
         }
