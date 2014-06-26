@@ -586,7 +586,7 @@ class userModel extends model
             ->setForce('visits', 1)
             ->setIF($this->cookie->referer != '', 'referer', $this->cookie->referer)
             ->setIF($this->cookie->referer == '', 'referer', '')
-            ->add('password', $this->createPassword(md5(mt_rand()), $user->account))     // Set a random password.
+            ->add('password', $this->createPassword(md5(mt_rand()), $openID))     // Set a random password.
             ->remove('admin, ip')
             ->get();
 

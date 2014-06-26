@@ -14,12 +14,13 @@
 $content  = json_decode($block->content);
 $type     = str_replace('product', '', strtolower($block->type));
 $method   = 'get' . $type;
+if(empty($content->category)) $content->category = 0;
 $products = $this->loadModel('product')->$method($content->category, $content->limit);
 ?>
 <div id="block<?php echo $block->id;?>" class="panel panel-block <?php echo $blockClass;?>">
   <div class='panel-heading'>
     <strong><?php echo $icon;?> <?php echo $block->title;?></strong>
-    <?php if(isset($content->moreText) and $content->moreText):?>
+    <?php if(!empty($content->moreText) and !empty($content->moreUrl)):?>
     <div class='pull-right'><?php echo html::a($content->moreUrl, $content->moreText);?></div>
     <?php endif;?>
   </div>

@@ -48,8 +48,11 @@ $navs = $this->tree->getChildren(0, 'blog');
       if($config->site->theme == 'colorful')
       {
           $customCss = str_replace($this->app->getDataRoot(), $this->app->getWebRoot() . 'data/' , $config->site->ui->customCssFile);
-          if(!isset($config->site->customVesion)) $customCss = $themeRoot . $config->site->theme . '/style.css';
-          css::import($customCss . "?v={$config->site->customVesion}");
+          if(!empty($config->site->customVersion)) $customCss .= "?v={$config->site->customVersion}";
+
+          if(!isset($config->site->customVersion)) $customCss = $themeRoot . $config->site->theme . '/style.css';
+
+          css::import($customCss);
       }
       else
       {

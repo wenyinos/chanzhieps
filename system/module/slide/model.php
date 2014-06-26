@@ -129,7 +129,7 @@ class slideModel extends model
     public function sort()
     {
         /* Count maxKey to avoid  duplicate entry system-common-slides-key. */
-        $maxKey = $this->dao->select('max(`key`) as maxKey')->from(TABLE_CONFIG)
+        $maxKey = $this->dao->select('max(cast(`key` as signed)) as maxKey')->from(TABLE_CONFIG)
             ->where('owner')->eq('system')
             ->andWhere('module')->eq('common')
             ->andWhere('section')->eq('slides')

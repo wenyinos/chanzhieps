@@ -19,7 +19,7 @@
     </div>
   </div>
   <form id='sortForm' action='<?php echo inLink('sort')?>' method='post'>
-    <table class='table table-bordered'>
+    <table class='table'>
       <tbody>
         <?php foreach($slides as  $key => $slide):?>
         <?php if($slide->backgroundType == 'color') $slide->height = $slide->height ? $slide->height : 180; ?>
@@ -47,15 +47,11 @@
               </div>
             </div>
           </td>
-          <td class='w-100px'>
-            <div style='margin-bottom: 5px'>
-              <a href='javascript:;' class='btn btn-move-up'><i class='icon-arrow-up'></i></a>
-              <?php echo html::a($this->createLink('slide', 'edit', "id=$slide->id"), "<i class='icon-pencil'></i>", "class='btn' title='{$lang->edit}'");?>
-            </div>
-            <div>
-              <a href='javascript:;' class='btn btn-move-down'><i class='icon-arrow-down'></i></a>
-              <?php echo html::a($this->createLink('slide', 'delete', "id=$slide->id"), "<i class='icon-remove'></i>", "class='deleter btn' title='{$lang->delete}'");?>
-            </div>
+          <td class='w-50px text-center'>
+            <a href='javascript:;' class='btn btn-move-up btn-sm'><i class='icon-arrow-up'></i></a>
+            <a href='javascript:;' class='btn btn-move-down btn-sm'><i class='icon-arrow-down'></i></a>
+            <?php echo html::a($this->createLink('slide', 'edit', "id=$slide->id"), "<i class='icon-pencil'></i>", "class='btn btn-sm' title='{$lang->edit}'");?>
+            <?php echo html::a($this->createLink('slide', 'delete', "id=$slide->id"), "<i class='icon-remove'></i>", "class='deleter btn btn-sm' title='{$lang->delete}'");?>
           </td>
         </tr>
         <?php endforeach;?>

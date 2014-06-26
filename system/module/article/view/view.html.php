@@ -16,9 +16,11 @@ js::set('articleID', $article->id);
           <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAddedDate, formatTime($article->addedDate));?>'><i class='icon-time icon-large'></i> <?php echo formatTime($article->addedDate); ?></dd>
           <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAuthor, $article->author);?>'><i class='icon-user icon-large'></i> <?php echo $article->author; ?></dd>
           <?php if($article->source != 'original'):?>
-          <dt><?php echo $lang->article->lblSource; ?></dt>
+          <dt><?php echo $lang->article->sourceList[$article->source] . $lang->colon;?></dt>
           <dd><?php $article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite); ?></dd>
-          <?php endif; ?>
+          <?php else: ?>
+          <span class='label label-success'><?php echo $lang->article->sourceList[$article->source]; ?></span>
+          <?php endif;?>
           <dd class='pull-right'>
             <?php
             if(!empty($this->config->oauth->sina))
@@ -27,7 +29,6 @@ js::set('articleID', $article->id);
                 if($sina->widget) echo "<div class='sina-widget'>" . $sina->widget . '</div>';
             }
             ?>
-            <span class='label label-success'><?php echo $lang->article->sourceList[$article->source]; ?></span>
             <span class='label label-warning' data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblViews, $article->views);?>'><i class='icon-eye-open'></i> <?php echo $article->views; ?></span>
           </dd>
         </dl>

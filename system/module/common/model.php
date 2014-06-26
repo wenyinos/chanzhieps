@@ -541,8 +541,9 @@ class commonModel extends model
      */
     public function printArticle($module, $article)
     {
-        $divider = $this->lang->divider;
+        if(empty($module->pathNames)) return '';
 
+        $divider = $this->lang->divider;
         foreach($module->pathNames as $moduleID => $moduleName)
         {
             echo '<li>' . html::a(inlink('browse', "moduleID=$moduleID", "category=" . $this->loadModel('tree')->getAliasByID($moduleID)), $moduleName) . '</li>';
@@ -560,6 +561,8 @@ class commonModel extends model
      */
     public function printBlog($module, $article)
     {
+        if(empty($module->pathNames)) return '';
+
         $divider = $this->lang->divider;
         foreach($module->pathNames as $moduleID => $moduleName)
         {   
@@ -596,6 +599,8 @@ class commonModel extends model
      */
     public function printForum($board = '')
     {
+        if(empty($board->pathNames)) return '';
+
         $divider = $this->lang->divider;
         echo '<li>' . html::a(helper::createLink('forum', 'index'), $this->lang->forumHome) . '</li>';
         if(!$board) return false;

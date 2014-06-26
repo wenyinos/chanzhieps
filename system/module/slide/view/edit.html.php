@@ -19,7 +19,6 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
 {
     $colorPlates .= "<div class='color color-tile' data='#" . $value . "'><i class='icon-ok'></i></div>";
 }
-a($slide);
 ?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-edit'></i> <?php echo $lang->slide->edit;?></strong></div>

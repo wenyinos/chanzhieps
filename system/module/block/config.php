@@ -26,9 +26,9 @@ $config->block->defaultIcons['productTree']   = 'icon-folder-close';
 $config->block->defaultIcons['blogTree']      = 'icon-folder-close';
 
 $config->block->defaultMoreUrl['html']          = '';
-$config->block->defaultMoreUrl['latestArticle'] = commonModel::createFrontLink('article', 'index');
-$config->block->defaultMoreUrl['hotArticle']    = commonModel::createFrontLink('article', 'index');
-$config->block->defaultMoreUrl['latestProduct'] = commonModel::createFrontLink('product', 'index');
-$config->block->defaultMoreUrl['hotProduct']    = commonModel::createFrontLink('product', 'index');
+$config->block->defaultMoreUrl['latestArticle'] = '';
+$config->block->defaultMoreUrl['hotArticle']    = '';
+$config->block->defaultMoreUrl['latestProduct'] = '';
+$config->block->defaultMoreUrl['hotProduct']    = '';
 $config->block->defaultMoreUrl['about']         = commonModel::createFrontLink('company', 'index');
 $config->block->defaultMoreUrl['contact']       = commonModel::createFrontLink('company', 'index');

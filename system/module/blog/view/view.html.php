@@ -12,7 +12,7 @@
 ?>
 <?php 
 include './header.html.php';
-$path = array_keys($category->pathNames);
+$path = !empty($category->pathNames) ? array_keys($category->pathNames) : array();
 js::set('path', $path);
 js::set('categoryID', $category->id);
 js::set('articleID', $article->id);

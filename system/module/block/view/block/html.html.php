@@ -10,12 +10,12 @@
  * @link        http://www.chanzhi.org
 */
 ?>
-<?php $block->content = json_decode($block->content);?>
+<?php if(!is_object($block->content)) $block->content = json_decode($block->content);?>
 <div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
   <div class='panel-heading'>
     <h4><?php echo $icon . $block->title;?></h4>
   </div>
-  <div class='panel-body'>
+  <div class='panel-body article-content'>
     <?php echo $block->content->content;?>
   </div>
 </div>

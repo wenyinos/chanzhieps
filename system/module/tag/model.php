@@ -114,7 +114,7 @@ class tagModel extends model
         }
 
         if(!dao::isError()) return true;
-        return dao::geterror();
+        return dao::getError();
     }
 
     /**

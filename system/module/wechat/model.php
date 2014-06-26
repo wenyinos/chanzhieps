@@ -218,8 +218,8 @@ class wechatModel extends model
             return false;
         }
 
-        if($message->msgType == 'text')  $response = $this->getResponseByKey($public, $message->content);    
-        if($message->msgType == 'event') $response = $this->getResponseByKey($public, $message->eventKey);    
+        if($message->msgType == 'text')  $response = $this->getResponseByKey($public, $message->content);
+        if($message->msgType == 'event') $response = $this->getResponseByKey($public, isset($message->eventKey) ? $message->eventKey : '');
         if(isset($message->event) && $message->event == 'subscribe') $response = $this->getResponseByKey($public, 'subscribe');
 
         if(empty($response)) $response = $this->getResponseByKey($public, 'default');    
@@ -244,6 +244,7 @@ class wechatModel extends model
             }
         }
         $this->saveMessage($public, $message);
+        if(!isset($reply)) $reply = false;
         return $reply;
     }
 
@@ -653,14 +654,16 @@ class wechatModel extends model
         $message->wid      = isset($data->msgId) ? $data->msgId : '';
         $message->from     = $data->fromUserName;
         $message->to       = $data->toUserName;
-        $message->response = $data->response;
+
+        if(isset($data->response)) $message->response = $data->response;
+
         $message->type     = $data->msgType;
         $message->content  = isset($data->content) ? $data->content : helper::jsonEncode($data);
 
         if($data->msgType == 'event')
         {
             $message->type    = $data->event;
-            $message->content = $data->eventKey;
+            $message->content = isset($data->eventKey) ? $data->eventKey : '';
         }
 
         if(isset($data->event) && in_array($data->event, array('subscribe', 'unsubscribe', 'SCAN')))

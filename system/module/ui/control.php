@@ -52,7 +52,7 @@ class ui extends control
 
                 $setting = fixer::input('post')->remove('css,theme')->get();
                 $result  = $this->loadModel('setting')->setItems('system.common.site', array('themeSetting' =>json_encode($setting)));
-                $this->loadModel('setting')->setItems('system.common.site', array('customVesion' => time()));
+                $this->loadModel('setting')->setItems('system.common.site', array('customVersion' => time()));
                 $this->send(array('result' => 'success', 'message' => $this->lang->ui->themeSaved));
             }
         }

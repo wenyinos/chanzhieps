@@ -54,7 +54,7 @@ class wechat extends control
         $message  = $this->api->getMessage();
         $response = $this->wechat->getResponseForMessage($public, $message);
         if($response) $this->api->response($response);
-        if($message->event == 'subscribe') $this->wechat->createUser($public, $message);
+        if(isset($message->event) and $message->event == 'subscribe') $this->wechat->createUser($public, $message);
         exit;
     }
 
