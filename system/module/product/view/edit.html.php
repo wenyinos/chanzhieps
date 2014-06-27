@@ -109,8 +109,8 @@
               <div class="col-xs-3"> <?php echo html::input("label[{$key}]", $attribute->label, "class='form-control' placeholder='{$lang->product->placeholder->label}'" )?></div>
               <div class="col-xs-8"> <?php echo html::input("value[{$key}]", $attribute->value, "class='form-control' placeholder='{$lang->product->placeholder->value}'" )?></div>
               <div class="col-xs-1">
-                <?php echo html::a('javascript:;', "<i class='icon-plus'></i>");?>
-                <?php echo html::a('javascript:;', "<i class='icon-minus'></i>");?>
+                <?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='btn btn-link pull-left btn-mini btn-add'");?>
+                <?php echo html::a('javascript:;', "<i class='icon-remove'></i>", "class='btn btn-link pull-left btn-mini btn-remove'");?>
               </div>
             </div>
             <?php $key ++; endforeach;?>
@@ -128,8 +128,8 @@
         <div class="col-xs-3"> <?php echo html::input('label[key]', '', "class='form-control' placeholder='{$lang->product->placeholder->label}'" )?></div>
         <div class="col-xs-8"> <?php echo html::input('value[key]', '', "class='form-control' placeholder='{$lang->product->placeholder->value}'" )?></div>
         <div class="col-xs-1">
-          <?php echo html::a('javascript:;', "<i class='icon-plus'></i>");?>
-          <?php echo html::a('javascript:;', "<i class='icon-minus'></i>");?>
+          <?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='btn btn-link pull-left btn-mini btn-add'");?>
+          <?php echo html::a('javascript:;', "<i class='icon-remove'></i>", "class='btn btn-link pull-left btn-mini btn-remove'");?>
         </div>
       </div>
     </div>
