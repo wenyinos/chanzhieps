@@ -181,6 +181,7 @@ class fileModel extends model
             $this->dao->insert(TABLE_FILE)->data($file)->exec();
             $fileTitles[$this->dao->lastInsertId()] = $file['title'];
         }
+        $this->loadModel('setting')->setItems('system.common.site', array('lastUpload' => time()));
         return $fileTitles;
     }
 
@@ -367,6 +368,7 @@ class fileModel extends model
             $fileInfo->width     = $imageSize['width'];
             $fileInfo->height    = $imageSize['height'];
             $this->dao->update(TABLE_FILE)->data($fileInfo)->where('id')->eq($fileID)->exec();
+            $this->loadModel('setting')->setItems('system.common.site', array('lastUpload' => time()));
             return true;
         }
         else
