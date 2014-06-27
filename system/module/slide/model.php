@@ -70,6 +70,7 @@ class slideModel extends model
         $slide->label       = array_values($slide->label);
         $slide->buttonClass = array_values($slide->buttonClass);
         $slide->buttonUrl   = array_values($slide->buttonUrl);
+        $slide->createdDate = time();
         if($slide->backgroundType == 'color')
         {
             $this->dao->insert('slide')->data($slide, 'label,buttonClass,buttonUrl')->batchCheck('backgroundColor,height', 'notempty')->check('height', 'ge', 100);
@@ -112,6 +113,7 @@ class slideModel extends model
         $slide->label       = array_values($slide->label);
         $slide->buttonClass = array_values($slide->buttonClass);
         $slide->buttonUrl   = array_values($slide->buttonUrl);
+        $slide->createdDate = time();
 
         $this->dao->update(TABLE_CONFIG)
             ->set('value')->eq(helper::jsonEncode($slide))

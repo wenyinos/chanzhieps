@@ -16,7 +16,7 @@
   <item>
     <title><?php echo $article->title?></title>
     <description><![CDATA[  <?php echo $article->content;?>]]></description>
-    <link><?php echo str_replace('&', '&amp;', $siteLink . $this->createLink('blog', 'view', "id=$article->id", "category={$category->alias}&name=$article->alias"), 'html'));?></link>
+    <link><?php echo str_replace('&', '&amp;', $siteLink . $this->createLink('blog', 'view', "id=$article->id", "category={$category->alias}&name=$article->alias", 'html'));?></link>
     <category><?php echo $category->name; ?></category>
     <pubDate><?php echo $article->addedDate . ' +0800';?></pubDate>
   </item>
