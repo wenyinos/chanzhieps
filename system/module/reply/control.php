@@ -81,6 +81,7 @@ class reply extends control
 
         $thread = $this->loadModel('thread')->getByID($reply->thread);
         if(!$this->thread->canManage($thread->board, $reply->author)) die(js::locate('back'));
+        if($this->thread->canManage($thread->board)) $this->config->reply->editor->edit['tools'] = 'full';
         
         if($_POST)
         {
