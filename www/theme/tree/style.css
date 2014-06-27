@@ -36,6 +36,17 @@ a:hover,a:active{color: #6e2e16;}
 #navbar .nav > li > a,#navbar .nav > li > ul > li > a,#navbar .nav > li > ul > li > ul > li > a{color: #495e4d; border:none!important; background: #c4b274;}
 #navbar .nav > li > a:hover,#navbar .nav > li > ul > li > a:hover,#navbar .nav > li > ul > li > ul > li > a:hover{background: #6e2e16!important;color: #fff!important;box-shadow: none;}
 #navbar .nav >li.active>a,#navbar .nav >li.active>a:hover,#navbar .nav >li.active>a:focus{background: #E3D7A2!important; color: #6E2E16!important; box-shadow: none;}
+
+/* for ie8 start */
+@media (min-width: 768px)
+{
+  #navbar .nav > li > a{padding-left: 0\0; padding-right: 0\0;}
+  #navbar .nav > li > a,#navbar .nav > li > ul > li > a,#navbar .nav > li > ul > li > ul > li > a{color: #495e4d; border:none!important; background: #c4b274;}
+  #navbar .nav > li > a:hover,#navbar .nav > li > ul > li > a:hover,#navbar .nav > li > ul > li > ul > li > a:hover{background: #6e2e16!important;color: #fff!important;box-shadow: none;}
+  #navbar .nav >li.active>a,#navbar .nav >li.active>a:hover,#navbar .nav >li.active>a:focus{background: #E3D7A2!important; color: #6E2E16!important; box-shadow: none;}
+}
+/* for ie8 end */
+
 #navbar .caret{border-top-color: #495e4d; border-bottom-color: #495e4d;}
 #navbar .nav li  a:hover .caret{border-top-color: #fff; border-bottom-color: #fff;}
 #navbar .nav > li:last-child > a {border-radius: 0}
