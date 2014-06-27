@@ -339,7 +339,7 @@ class articleModel extends model
             ->autoCheck()
             ->batchCheckIF($type != 'page', $this->config->article->require->edit, 'notempty')
             ->batchCheckIF($type == 'page', $this->config->article->require->page, 'notempty')
-            ->checkIF(($type == 'page') and $this->post->alias, 'alias', 'unique', "type='page'")
+            ->checkIF(($type == 'page') and $this->post->alias, 'alias', 'unique', "type='page' and id<>{$articleID}")
             ->where('id')->eq($articleID)
             ->exec();
 
