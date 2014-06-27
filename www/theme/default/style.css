@@ -76,8 +76,8 @@
 /* tree */
 .tree {padding: 0; margin: 0;}
 .tree li,.tree ul {margin: 0; padding: 0; display: block; position: relative;}
-.tree > li {margin-right: 20px; font-weight: 400; padding-bottom: 10px;}
-.tree > li > ul li {padding: 10px 15px 0; margin: 0;}
+.tree > li {margin-right: 20px; font-weight: 400; padding-bottom: 8px;}
+.tree > li > ul li {padding: 3px 15px 0; margin: 0;}
 .tree li:before {display: inline-block; margin-right: 6px; content: '\e6ec'; font-family: ZenIcon; color: #ddd;}
 .tree > li ul {border-left: 1px dashed #ccc; margin-left: 7px; font-weight: normal;}
 .tree > li ul > li:before {content: '\e6e8';}
