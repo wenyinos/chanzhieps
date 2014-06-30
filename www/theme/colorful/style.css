@@ -203,7 +203,7 @@ body {color:#333; background-color: #FFFFFF; background-image: none; font-size: 
 /* articles */
 #articles .card{background: #FFFFFF; padding: 5px 5px 0;border: 1px solid #e5e5e5;box-shadow: none; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px}
 #articles .card-heading a{font-weight: bold; color: #F25D03}
-#articles .card .media{max-width: 200; max-height: 100}
+#articles .card .media{max-width: 200px; max-height: 100px}
 #articles .card .media img{max-height: 100%}
 
 /* pager */
