@@ -110,6 +110,29 @@ body {background: #232323;}
 #navbar .dropdown-menu .dropdown-menu > li:first-child > a,
 #navbar .dropdown-menu > li:last-child > a {-webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0}
 
+/* for ie8 start */
+@media (min-width: 768px)
+{
+    #navbar .nav > li > a {background: none; border-width: 0; font-weight: normal; padding: 26px 20px;}
+    #navbar .dropdown-menu > li > a:hover,
+    #navbar .dropdown-menu > li > a:focus,
+    #navbar .dropdown-submenu:hover > a,
+    #navbar .dropdown-submenu:focus > a,
+    #navbar .nav > li > a:hover,
+    #navbar .nav > li > a:focus,
+    #navbar .nav > li.active > a,
+    #navbar .nav > li.active > a:hover {color: #ffffff; background: #e91b23;}
+    #navbar .dropdown-menu > li > a:hover:after,
+    #navbar .dropdown-menu > li > a:focus:after,
+    #navbar .dropdown-submenu:hover > a:after,
+    #navbar .dropdown-submenu:focus > a:after {border-left-color: #fff}
+    #navbar .nav > li > a:hover > .caret,
+    #navbar .nav > li > a:focus > .caret,
+    #navbar .nav > li.active > a > .caret,
+    #navbar .nav > li.active > a:hover > .caret {border-top-color: #fff; border-bottom-color: #fff}
+}
+/* for ie8 end */
+
 #footer {border: none; border-radius: 0; padding: 0; background: #232323; color: #aaa}
 #footer > .wrapper {position: relative; padding: 30px 0}
 #footer a:hover {color: #fff}
