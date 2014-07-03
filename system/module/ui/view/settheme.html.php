@@ -36,7 +36,7 @@
           <div class='actions'>
             <button class='btn btn-lg btn-preview' data-url='<?php echo $config->webRoot;?>'><i class='icon-eye-open'></i> <?php echo $lang->ui->preview;?></button>
             <?php if($custom):?>
-            <button data-toggle='modal' class='btn btn-lg btn-success btn-custom' data-url='<?php echo inlink('customtheme', "theme={$theme}");?>'><i class='icon-cog'></i> <?php echo $lang->ui->custom;?></button>
+            <button data-toggle='modal' data-type='ajax' class='btn btn-lg btn-success btn-custom' data-url='<?php echo inlink('customtheme', "theme={$theme}");?>'><i class='icon-cog'></i> <?php echo $lang->ui->custom;?></button>
             <?php endif;?>
           </div>
         </a>

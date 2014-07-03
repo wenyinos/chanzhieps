@@ -2,7 +2,7 @@ $(document).ready(function()
 {
     setRequiredFields();
 
-    $.setAjaxModal();
+    // $.setAjaxModal();
     $.setAjaxForm('#ajaxForm');
     $.setAjaxDeleter('.deleter');
     $.setReloadDeleter('.reloadDeleter');
