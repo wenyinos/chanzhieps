@@ -76,6 +76,7 @@ class articleModel extends model
     /** 
      * Get article list.
      * 
+     * @param  string  $type 
      * @param  array   $categories 
      * @param  string  $orderBy 
      * @param  object  $pager 
