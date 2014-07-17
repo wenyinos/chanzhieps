@@ -244,7 +244,7 @@ class productModel extends model
         $now = helper::now();
         $product = fixer::input('post')
             ->join('categories', ',')
-            ->stripTags('content', $this->config->allowedTags->admin)
+            ->stripTags('content,summary', $this->config->allowedTags->admin)
             ->setDefault('price', 0)
             ->setDefault('amount', 0)
             ->setDefault('promotion', 0)
@@ -287,7 +287,7 @@ class productModel extends model
     {
         $product = fixer::input('post')
             ->join('categories', ',')
-            ->stripTags('content', $this->config->allowedTags->admin)
+            ->stripTags('content,summary', $this->config->allowedTags->admin)
             ->setDefault('price', 0)
             ->setDefault('amount', 0)
             ->setDefault('promotion', 0)
