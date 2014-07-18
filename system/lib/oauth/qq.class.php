@@ -129,7 +129,7 @@ class qq extends OAuth
      * @access public
      * @return string
      */
-    public function createOpenIDAPI($token)
+    public function createOpenIDAPI($token = '')
     {
         return $this->openIdAPI . "access_token=$token";
     }
