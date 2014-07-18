@@ -373,44 +373,6 @@ $.extend(
     },
 
     /**
-     * Add ajaxModal container if there's an <a> tag with data-toggle=modal.
-     * 
-     * @access public
-     * @return void
-     */
-    setAjaxModal: function()
-    {
-        if($('[data-toggle=modal]').size() == 0) return false;
-
-        /* Addpend modal div. */
-        $('<div id="ajaxModal" class="modal fade"></div>').appendTo('body');
-
-        /* Set the data target for modal. */
-        $('[data-toggle=modal]').attr('data-target', '#ajaxModal');
-
-        $('[data-toggle=modal]').click(function()
-        {
-            var $e = $(this);
-            var url = $e.attr('href') || $e.data('url');
-            $('#ajaxModal').load(url, function()
-            {
-                /* Set the width of modal dialog. */
-                if($e.data('width'))
-                {
-                    var modalWidth = parseInt($e.data('width'));
-                    $(this).data('width', modalWidth).find('.modal-dialog').css('width', modalWidth);
-                }
-
-                /* show the modal dialog. */
-                $('#ajaxModal').modal({show:true,backdrop:$e.data('backdrop'),keyboard:$e.data('keyboard')});
-            });
-
-            /* Save the href to rel attribute thus we can save it. */
-            $('#ajaxModal').attr('rel', url);
-        });
-    },
-
-    /**
      * Reload ajax modal.
      *
      * @param int duration 
