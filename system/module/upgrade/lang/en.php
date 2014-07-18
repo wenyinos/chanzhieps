@@ -16,19 +16,11 @@ $lang->upgrade->fail    = 'Failed';
 $lang->upgrade->success = 'Success';
 $lang->upgrade->tohome  = 'Go to index';
 
-$lang->upgrade->index         = 'Upgrad chanzhiEPS.';
 $lang->upgrade->backup        = 'Backup';
 $lang->upgrade->selectVersion = 'Select version to upgrade from';
 $lang->upgrade->confirm       = 'Confirm the SQL to be excuted.';
 $lang->upgrade->execute       = 'Execute';
 $lang->upgrade->next          = 'Next';
-
-$lang->upgrade->setOkFile = <<<EOT
-<div class='alert'>
-<h5>For security reason, please do these steps. </h5>
-<p>Create "<input value='%s' class='autoSelect' readoly />" file. If this file exists already, reopen it and save again.</p>
-</div>
-EOT;
 
 $lang->upgrade->backupData = <<<EOT
 <pre>
