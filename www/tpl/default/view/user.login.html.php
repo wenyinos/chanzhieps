@@ -1,1 +1,1 @@
-<?php RUN_MODE == 'front' ? include './login.front.html.php' : include './login.admin.html.php';?>
+<?php RUN_MODE == 'front' ? include './user.login.front.html.php' : include './login.admin.html.php';?>
