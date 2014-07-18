@@ -29,16 +29,17 @@ $lang->newVersion       = "Notice: ChanzhiEPS has been upgraded to version: <spa
 
 /* IE6 alert.  */
 $lang->IE6Alert= <<<EOT
-    <div class='alert alert-danger' style='margin-top:100px;'>
+<div class='container'>
+    <div class='alert alert-danger' style='margin:100px 0;'>
       <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
       <h2>Please use IE(>8), firefox, chrome, safari, opera to visit this site.</h2>
-      <p>Stop using IE6!</p>
-      <p>IE6 is too old, we should stop using it. <br/></p>
-      <a href='https://www.google.com/intl/zh-hk/chrome/browser/' class='btn btn-primary btn-lg' target='_blank'>Chrome</a>
-      <a href='http://www.firefox.com/' class='btn btn-primary btn-lg' target='_blank'>Firefox</a>
-      <a href='http://www.opera.com/download' class='btn btn-primary btn-lg' target='_blank'>Opera</a>
-      <p></p>
+      <a href='http://windows.microsoft.com/ie' class='btn btn-danger' target='_blank'><i class='icon-ie'></i> Get latest IE</a>
+      <a href='http://www.google.com/chrome' class='btn' target='_blank'><i class='icon-chrome'></i> Chrome</a>
+      <a href='http://www.firefox.com/' class='btn' target='_blank'><i class='icon-firefox'></i> Firefox</a>
+      <a href='http://www.opera.com/' class='btn' target='_blank'><i class='icon-opera'></i> Opera</a>
+      <a href='http://browsehappy.com/' target='_blank' class='btn btn-link alert-link'>Learn more...</a>
     </div>
+</div>
 EOT;
 
 /* Global lang items. */

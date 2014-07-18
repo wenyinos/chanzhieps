@@ -102,3 +102,4 @@ if(RUN_MODE == 'front')
 <?php if(RUN_MODE == 'front') $this->block->printRegion($layouts, 'all', 'header');?>
 </head>
 <body>
+<!--[if lt IE 10]><?php echo $lang->IE6Alert;?><![endif]-->
