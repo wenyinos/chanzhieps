@@ -18,7 +18,10 @@
         echo "&copy; {$copyright}" . date('Y') . ' ' . $company . '&nbsp;&nbsp;';
         ?>
       </span>
-      <span id='icpInfo'><?php echo $config->site->icp; ?></span>
+      <span id='icpInfo'>
+        <?php if(!empty($config->site->icpLink)) echo html::a(strpos('http://', $config->site->icpLink) !== false ? $config->site->icpLink : 'http://' . $config->site->icpLink, $config->site->icp, "target='_blank'");?>
+        <?php if(empty($config->site->icpLink))  echo $config->site->icp;?>
+      </span>
       <div id='powerby'>
         <?php printf($lang->poweredBy, $config->version, k(), $config->version); ?>
       </div>

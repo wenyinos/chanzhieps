@@ -53,9 +53,19 @@
           <th><?php echo $lang->site->desc;?></th> 
           <td colspan='2'><?php echo html::textarea('desc', $this->config->site->desc, "class='form-control' rows='10'");?></td> 
         </tr>
-       <tr>
+       <tr class='icp'>
           <th><?php echo $lang->site->icp;?></th> 
-          <td colspan='2'><?php echo html::input('icp', $this->config->site->icp, "class='form-control'");?></td> 
+          <td colspan='2'>
+            <div class='row'>
+              <div class='col-sm-3'><?php echo html::input('icp', $this->config->site->icp, "class='form-control col-xs-2'");?></div>
+              <div class='col-sm-9'>
+                <div class='input-group'>
+                  <span class="input-group-addon"><?php echo $lang->site->icpLink;?></span>
+                  <?php echo html::input('icpLink', isset($this->config->site->icpLink) ? $this->config->site->icpLink : 'http://www.miitbeian.gov.cn', "class='form-control'")?>
+                </div>
+              </div>
+            </div>
+          </td>
         </tr>
         <tr>
           <th></th>

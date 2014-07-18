@@ -20,6 +20,7 @@ $lang->site->keywords      = '关键词';
 $lang->site->indexKeywords = '首页关键词';
 $lang->site->desc          = '站点描述';
 $lang->site->icp           = '备案编号';
+$lang->site->icpLink       = '备案编号链接';
 $lang->site->slogan        = '站点口号';
 $lang->site->mission       = '站点使命';
 $lang->site->copyright     = '创建年份';

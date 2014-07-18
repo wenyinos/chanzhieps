@@ -20,6 +20,7 @@ $lang->site->keywords      = 'Keywords';
 $lang->site->indexKeywords = 'Home Keywords';
 $lang->site->desc          = 'Description';
 $lang->site->icp           = 'ICP';
+$lang->site->icpLink       = 'ICP Link';
 $lang->site->slogan        = 'Slogan';
 $lang->site->mission       = 'Mission';
 $lang->site->copyright     = 'Copyright';
