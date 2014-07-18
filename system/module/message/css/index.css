@@ -5,7 +5,7 @@
 .comment>.comment {padding:0 8px;border-bottom:none;}
 .comment:hover {background-color: #fafafa;}
 .comment>.comments-list>.comment:hover {background-color: #fff}
-.comment .reply-box{margin-bottom:5px;margin-top:5px;border: 1px solid #DDDDDD;padding:10px;border-radius:3px;background:#F8F8F8;}
+.comment .reply-box{margin-bottom:5px;margin-top:5px;border: 1px solid #ccc;padding:10px;border-radius:3px;background:#F8F8F8;}
 .pager {margin: 0; display: block;}
 .pager>.page {margin-bottom: -15px; text-align: right;}
 

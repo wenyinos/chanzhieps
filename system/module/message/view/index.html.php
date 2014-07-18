@@ -35,10 +35,7 @@
               <?php foreach($replies[$message->id] as $reply):?>
               <div class='content clearfix'>
                 <div class='reply-box radius'>
-                  <span class='author'>
-                    <strong><i class='icon-user'></i> <?php echo $reply->from;?></strong> <small>(<?php echo formatTime($reply->date, 'Y-m-d H:i');?>)</small><?php echo $lang->colon?>
-                  </span> 
-                  &nbsp;<?php echo nl2br($reply->content);?>
+                  <span class='author'><strong><i class='icon-user text-muted'></i> <?php echo $reply->from;?></strong> <small>(<?php echo formatTime($reply->date, 'Y-m-d H:i');?>)</small><?php echo $lang->colon?></span><?php echo nl2br($reply->content);?>
                 </div>
               </div>
               <?php endforeach; ?>
