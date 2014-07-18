@@ -232,8 +232,7 @@ class messageModel extends model
         $message = $this->getByID($messageID);
         $this->dao->delete()
             ->from(TABLE_MESSAGE)
-            ->where('status')->eq(0)
-            ->andWhere('type')->eq($message->type)
+            ->where('type')->eq($message->type)
             ->beginIF($mode == 'single')->andWhere('id')->eq($messageID)->fi()
             ->beginIF($mode == 'pre')->andWhere('id')->ge($messageID)->fi()
             ->exec(false);

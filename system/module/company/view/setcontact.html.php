@@ -49,9 +49,18 @@
             </div>
           </td><td></td>
         </tr>
-         <tr>
+        <tr>
           <th><?php echo $lang->company->wangwang;?></th> 
           <td><?php echo html::input('wangwang', isset($contact->wangwang) ? $contact->wangwang : '', "class='form-control'");?></td><td></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->company->site;?></th> 
+          <td>
+            <div class="input-group">
+              <span class="input-group-addon">http://</span>
+              <?php echo html::input('site', isset($contact->site) ? $contact->site : '', "class='form-control'");?>
+            </div>
+          </td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->company->address?></th> 
