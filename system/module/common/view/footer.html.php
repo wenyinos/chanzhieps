@@ -13,7 +13,9 @@
       <span id='copyright'>
         <?php
         $copyright = empty($config->site->copyright) ? '' : $config->site->copyright . '-';
-        echo "&copy; {$copyright}" . date('Y') . ' ' . $config->company->name . '&nbsp;&nbsp;';
+        $contact   = json_decode($config->company->contact); 
+        $company   = (empty($contact->site) or $contact->site == $this->server->http_host) ? $config->company->name : html::a('http://' . $contact->site, $config->company->name, "target='_blank'");
+        echo "&copy; {$copyright}" . date('Y') . ' ' . $company . '&nbsp;&nbsp;';
         ?>
       </span>
       <span id='icpInfo'><?php echo $config->site->icp; ?></span>

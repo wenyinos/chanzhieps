@@ -16,19 +16,11 @@ $lang->upgrade->fail    = '升级失败';
 $lang->upgrade->success = '升级成功';
 $lang->upgrade->tohome  = '返回首页';
 
-$lang->upgrade->index         = '检查是否可以执行升级程序';
 $lang->upgrade->backup        = '备份数据';
 $lang->upgrade->selectVersion = '确认升级之前的版本';
 $lang->upgrade->confirm       = '确认要执行的SQL语句';
 $lang->upgrade->execute       = '确认执行';
 $lang->upgrade->next          = '下一步';
-
-$lang->upgrade->setOkFile = <<<EOT
-<div class='alert'>
-<h5>请按照下面的步骤操作以确认您的管理员身份。</h5>
-<p>创建 <input value='%s' readonly class='autoSelect red'/> 文件。如果存在该文件，使用编辑软件打开，重新保存一遍。</p>
-</div>
-EOT;
 
 $lang->upgrade->backupData = <<<EOT
 <pre>
