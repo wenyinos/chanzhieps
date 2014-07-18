@@ -11,7 +11,7 @@
  */
 ?>
 <?php 
-include '././header.html.php';
+include './blog.header.html.php';
 $path = !empty($category->pathNames) ? array_keys($category->pathNames) : array();
 js::set('path', $path);
 js::set('categoryID', $category->id);
@@ -79,4 +79,4 @@ $common->printPositionBar($category, $article, '', $root);
   </div>
   <div class='col-md-3'><side class='page-side'><div class='panel-pure panel'><?php echo html::a(helper::createLink('rss', 'index', '?type=blog', '', 'xml'), "<i class='icon-rss text-warning'></i> " . $lang->blog->subscribe, "target='_blank' class='btn btn-lg btn-block'"); ?></div><?php $this->block->printRegion($layouts, 'blog_view', 'side');?></side></div>
 </div>
-<?php include '././footer.html.php';?>
+<?php include './blog.footer.html.php';?>
