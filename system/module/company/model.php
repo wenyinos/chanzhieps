@@ -36,6 +36,11 @@ class companyModel extends model
                 {
                     $contact->weibo = html::a("http://weibo.com/{$value}", $value, "target='_blank'");
                 }
+                else if($item == 'site')
+                {
+                    if($_SERVER['HTTP_HOST'] != $value) $contact->site = html::a("http://{$value}", $value, "target='_blank'");
+                    if($_SERVER['HTTP_HOST'] == $value) unset($contact->$item);
+                }
                 else if($item == 'wangwang')
                 {
                     $contact->wangwang = html::a("http://www.taobao.com/webww/ww.php?ver=3&touid={$value}&siteid=cntaobao&status=2&charset=utf-8", $value, "target='_blank'");
