@@ -65,9 +65,9 @@ body {background: #232323;}
 @media (min-width: 1200px) {.page-container, .m-index-index .page-content, .m-index-index #links, #focus {max-width: inherit;}}
 
 /* Header */
-#header {padding: 0; border-bottom: 1px solid #e5e5e5; min-height: 70px; background: #fff}
+#header {padding: 0; border-bottom: 1px solid #e5e5e5; min-height: 112px; background: #fff}
 #headNav:empty {display: none}
-#headNav {width: 100%; position: static; border-bottom: 1px solid #e5e5e5; height: 42px; text-align: right;}
+#headNav {width: 100%; position: absolute; top: 0; right: 0; border-bottom: 1px solid #e5e5e5; height: 42px; text-align: right;}
 #headNav nav {float: right;}
 #headNav nav > a, #headNav nav > span {float: left; display: block; height: 42px;line-height: 42px; border-right: 1px solid #e5e5e5; padding: 0 15px;}
 #headNav nav > span.hiding {display: none}
@@ -75,7 +75,7 @@ body {background: #232323;}
 #msgBox {margin: 0}
 #headNav nav > a:first-child {border-left: 1px solid #e5e5e5;}
 #headNav nav > a:hover, #headNav nav > span:hover {background: #f1f1f1; text-decoration: none;}
-#headTitle {position: relative; display: block; min-height: 70px;}
+#headTitle {position: absolute; display: block; min-height: 70px; top : 42px; width: 100%;}
 #siteSlogan {position: absolute; top: -32px; padding-left: 0; font-size: 14px; font-weight: normal; color: #808080}
 #siteLogo {padding: 5px 0}
 #siteLogo img {height: 60px;}
