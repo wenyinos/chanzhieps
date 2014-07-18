@@ -258,26 +258,50 @@ $.extend(
     {
         $(document).on('click', selector, function()
         {
-            if(confirm(v.lang.confirmDelete))
+            var deleter = $(this);
+            bootbox.confirm(v.lang.confirmDelete, function(result)
             {
-                var deleter = $(this);
-                deleter.text(v.lang.deleteing);
-
-                $.getJSON(deleter.attr('href'), function(data) 
+                if(result)
                 {
-                    if(data.result == 'success')
+                    deleter.text(v.lang.deleteing);
+
+                    $.getJSON(deleter.attr('href'), function(data) 
                     {
-                        if(deleter.parents('#ajaxModal').size()) return $.reloadAjaxModal(1200);
-                        if(data.locate) return location.href = data.locate;
-                        return location.reload();
-                    }
-                    else
-                    {
-                        alert(data.message);
-                    }
-                });
-            }
-            return false;
+                        if(data.result == 'success')
+                        {
+                            if(deleter.parents('#ajaxModal').size())
+                            {
+                                if(typeof(data.locate) != 'undefined' && data.locate)
+                                {
+                                    $('#ajaxModal').load(data.locate);
+                                }
+                                else
+                                {
+                                    $.reloadAjaxModal(1200);
+                                }
+                            }
+                            else
+                            {
+                                if(typeof(data.locate) != 'undefined' && data.locate)
+                                {
+                                    location.href = data.locate;
+                                }
+                                else
+                                {
+                                    location.reload();
+                                }
+                            }
+                            return true;
+                        }
+                        else
+                        {
+                            alert(data.message);
+                        }
+                    });
+                }
+                return true;
+           });
+           return false;
         });
     },
 

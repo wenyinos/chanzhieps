@@ -245,8 +245,8 @@ class control
     }
 
     //-------------------- View related methods --------------------//
-    
-    /**
+   
+     /**
      * Set the view file, thus can use fetch other module's page.
      * 
      * @param  string   $moduleName    module name
@@ -256,6 +256,8 @@ class control
      */
     private function setViewFile($moduleName, $methodName)
     {
+        if(RUN_MODE == 'front') return $this->setFrontViewFile($moduleName, $methodName);
+
         $moduleName = strtolower(trim($moduleName));
         $methodName = strtolower(trim($methodName));
 
@@ -278,6 +280,44 @@ class control
         if(!empty($extHookFiles)) return array('viewFile' => $viewFile, 'hookFiles' => $extHookFiles);
 
         return $viewFile;
+
+    }
+
+    /**
+     * Set the front view file, thus can use fetch other module's page.
+     * 
+     * @param  string    $moduleName 
+     * @param  string    $methodName 
+     * @access private
+     * @return void
+     */
+    private function setFrontViewFile($moduleName, $methodName)
+    {
+        $moduleName = strtolower(trim($moduleName));
+        $methodName = strtolower(trim($methodName));
+
+        $tplPath = $this->app->getTplRoot() . DS . $this->config->template . DS . 'view';
+        $fileName =  $moduleName . '.' . $methodName . '.' . $this->viewType . '.php';
+
+        /* The main view file, extension view file and hook file. */
+        $mainViewFile = $tplPath . DS . $fileName;
+
+        /* Extension view file. */
+        $commonExtViewFile = $tplPath . DS . 'ext' . DS . $fileName;
+        $siteExtViewFile   = $tplPath . DS . 'ext' . DS . $this->app->siteCode . DS . $fileName;
+ 
+        $viewFile = file_exists($commonExtViewFile) ? $commonExtViewFile : $mainViewFile;
+        $viewFile = file_exists($siteExtViewFile) ? $siteExtViewFile : $viewFile;
+        
+        if(!is_file($viewFile)) $this->app->triggerError("the view file $viewFile not found", __FILE__, __LINE__, $exit = true);
+
+        /* Extension hook file. */
+        $commonExtHookFiles = glob($tplPath . DS . 'ext' . DS . $moduleName . '.' . $methodName . ".*.{$this->viewType}.hook.php");
+        $siteExtHookFiles   = glob($tplPath . DS . 'ext' . DS . $this->app->siteCode . $moduleName . '.' . $methodName . ".*.{$this->viewType}.hook.php");
+        $extHookFiles       = array_merge($commonExtHookFiles, $siteExtHookFiles);
+        if(!empty($extHookFiles)) return array('viewFile' => $viewFile, 'hookFiles' => $extHookFiles);
+
+        return $viewFile;
     }
 
     /**
@@ -289,7 +329,7 @@ class control
      */
     public function getExtViewFile($viewFile)
     {
-        $extPath     = dirname(dirname(realpath($viewFile))) . "/ext/_{$this->config->site->code}/view/";
+        $extPath     = dirname(realpath($viewFile)) . "/ext/_{$this->config->site->code}/";
         $extViewFile = $extPath . basename($viewFile);
 
         if(file_exists($extViewFile))
@@ -297,7 +337,7 @@ class control
             helper::cd($extPath);
             return $extViewFile;
         }
-        $extPath     = dirname(dirname(realpath($viewFile))) . "/ext/view/";
+        $extPath     = dirname(realpath($viewFile)) . "/ext/";
         $extViewFile = $extPath . basename($viewFile);
 
         if(file_exists($extViewFile))
