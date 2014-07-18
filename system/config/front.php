@@ -60,7 +60,6 @@ $config->rights->guest['sitemap']['index']   = 'index';
 
 $config->rights->guest['file']['download']    = 'download';
 $config->rights->guest['file']['printfiles']  = 'printfiles';
-$config->rights->guest['file']['filemanager'] = 'filemanager';
 
 $config->rights->guest['error']['index'] = 'index';
 

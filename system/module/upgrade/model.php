@@ -24,23 +24,6 @@ class upgradeModel extends model
     static $errors = array();
 
     /**
-     * Security: can execute upgrade or not.
-     * 
-     * @access public
-     * @return array  array('result' => success|fail, 'okFile');
-     */
-    public function canUpgrade()
-    {
-        $okFile = dirname($this->app->getDataRoot()) . DS . 'ok';
-        if(!file_exists($okFile) or time() - filemtime($okFile) > 600)
-        {
-            return array('result' => 'fail', 'okFile' => $okFile);
-        }
-
-        return array('result' => 'success');
-    }
-
-    /**
      * The execute method. According to the $fromVersion call related methods.
      * 
      * @param  string $fromVersion 

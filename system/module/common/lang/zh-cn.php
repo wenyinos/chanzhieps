@@ -109,6 +109,7 @@ $lang->company->qq        = 'QQ';
 $lang->company->weibo     = '微博';
 $lang->company->weixin    = '微信';
 $lang->company->wangwang  = '旺旺';
+$lang->company->site      = '网址';
 
 /* Sitemap settings. */
 $lang->sitemap = new stdclass();
