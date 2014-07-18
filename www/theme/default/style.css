@@ -230,8 +230,8 @@ label.checkbox,input[type='radio']+label{font-weight: normal;}
 .table-form td input {vertical-align:middle;margin:0;}
 .table-form td textarea {vertical-align:middle;margin:0;}
 .table-form .checkbox,.table-form input[type="radio"] + label {margin-right: 10px;}
-.table-form td > .row{margin-right: 0;}
-.table-form td > .row > [class*="col-"]{padding-right: 0;line-height: 34px}
+.table-form td > .row {margin-right: 0;}
+.table-form td > .row > [class*="col-"] {padding-right: 0;line-height: 34px}
 
 td #aliasLabel {display: table-row;}
 

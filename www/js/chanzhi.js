@@ -397,44 +397,6 @@ $.extend(
     },
 
     /**
-     * Add ajaxModal container if there's an <a> tag with data-toggle=modal.
-     * 
-     * @access public
-     * @return void
-     */
-    setAjaxModal: function()
-    {
-        if($('[data-toggle=modal]').size() == 0) return false;
-
-        /* Addpend modal div. */
-        $('<div id="ajaxModal" class="modal fade"></div>').appendTo('body');
-
-        /* Set the data target for modal. */
-        $('[data-toggle=modal]').attr('data-target', '#ajaxModal');
-
-        $('[data-toggle=modal]').click(function()
-        {
-            var $e = $(this);
-            var url = $e.attr('href') || $e.data('url');
-            $('#ajaxModal').load(url, function()
-            {
-                /* Set the width of modal dialog. */
-                if($e.data('width'))
-                {
-                    var modalWidth = parseInt($e.data('width'));
-                    $(this).data('width', modalWidth).find('.modal-dialog').css('width', modalWidth);
-                }
-
-                /* show the modal dialog. */
-                $('#ajaxModal').modal({show:true,backdrop:$e.data('backdrop'),keyboard:$e.data('keyboard')});
-            });
-
-            /* Save the href to rel attribute thus we can save it. */
-            $('#ajaxModal').attr('rel', url);
-        });
-    },
-
-    /**
      * Reload ajax modal.
      *
      * @param int duration 
@@ -635,12 +597,18 @@ function autoBlockGrid()
     $('.block-list .panel-block .cards').each(function()
     {
         var $this = $(this);
-        var grid = $this.closest('[class*="col-"]').data('grid');
-        var cards = $this.find('[class*="col-"]');
+        var grid = $this.closest('[class*="col-"]').data('grid'),
+            cards = $this.find('[class*="col-"]'),
+            layout = $this.data('layout');
 
-        if(grid >= 9) cards.attr('class', 'col-md-4 col-sm-6');
-        else if(grid >= 5) cards.attr('class', 'col-md-6');
-        else cards.attr('class', 'col-md-12');
+        if(layout == 'horizontal') cards.attr('class', 'col-md-3 col-sm-4 col-xs-6');
+        else if(layout == 'vertical') cards.attr('class', 'col-lg-12');
+        else
+        {
+            if(grid >= 9) cards.attr('class', 'col-md-4 col-sm-6');
+            else if(grid >= 5) cards.attr('class', 'col-md-6');
+            else cards.attr('class', 'col-md-12');
+        }
     });
 
     /* ajust block height */
