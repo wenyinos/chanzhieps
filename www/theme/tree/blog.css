@@ -22,6 +22,7 @@ h5{font-size: 14px;}
   #headTitle {position: static; margin-top: 15px;}
   .card {margin-bottom: 10px;}
   #blogNav .nav > li {width: 20%}
+  #siteName {color: #333;}
 }
 @media (max-width: 480px){#blogNav .nav > li{width: 33.333333333333%;}}
 @media (max-width: 480px) {#blogNav .nav > li{width: 50%;}}
