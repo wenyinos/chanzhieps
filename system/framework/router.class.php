@@ -106,6 +106,14 @@ class router
     private $dataRoot;
 
     /**
+     * The root directory of template.
+     * 
+     * @var string
+     * @access private
+     */
+    private $tplRoot;
+
+    /**
      * The lang of the client user.
      * 
      * @var string
@@ -293,6 +301,7 @@ class router
         $this->setConfigRoot();
         $this->setModuleRoot();
         $this->setDataRoot();
+        $this->setTplRoot();
 
         $this->setSuperVars();
 
@@ -498,6 +507,18 @@ class router
     }
 
     /**
+     * Set the data root.
+     * 
+     * @access protected
+     * @return void
+     */
+    protected function setTplRoot()
+    {
+        $this->wwwRoot = dirname($_SERVER['SCRIPT_FILENAME']);
+        $this->tplRoot = rtrim($this->wwwRoot, DS) . DS . 'tpl' . DS;
+    }
+
+    /**
      * Set the super vars.
      * 
      * @access protected
@@ -684,6 +705,17 @@ class router
     public function getDataRoot()
     {
         return $this->dataRoot;
+    }
+
+    /**
+     * Get the $dataroot var
+     * 
+     * @access public
+     * @return string
+     */
+    public function getTplRoot()
+    {
+        return $this->tplRoot;
     }
 
     //-------------------- Client environment related functions --------------------//
@@ -1431,7 +1463,7 @@ class router
         $this->lang = $lang;
         return $lang;
     }
-
+    
     /**
      * Connect to database.
      * 

@@ -38,8 +38,9 @@ $config->allowedTags->front = '<p><span><h1><h2><h3><h4><h5><em><u><strong><br><
 $config->allowedTags->admin = $config->allowedTags->front . '<div><table><td><th><tr><tbody><iframe><embed><style><header><nav>'; // For admin users.
 
 /* Views and themes. */
-$config->views  = ',html,json,xml,'; // Supported view types.
-$config->themes = 'default,blue';    // Supported themes.
+$config->views    = ',html,json,xml,'; // Supported view types.
+$config->template = 'default';    // Supported themes.
+$config->themes   = 'default,blue';    // Supported themes.
 
 /* Suported languags. */
 $config->langs['zh-cn'] = '简体';
