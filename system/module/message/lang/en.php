@@ -68,6 +68,7 @@ $lang->comment->viewArticle = 'View article';
 $lang->comment->viewComment = 'View comment';
 $lang->comment->thanks      = 'Thanks for your comment, it will display after approved!';
 $lang->comment->needCheck   = 'Comment will display after approved.';
+$lang->comment->receiveEmail= 'Receive email alerts.';
 
 $lang->comment->pass          = 'Pass';
 $lang->comment->reply         = 'Reply';

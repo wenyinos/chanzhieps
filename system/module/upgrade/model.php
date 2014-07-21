@@ -719,6 +719,76 @@ class upgradeModel extends model
     }
 
     /**
+     * Upgrade slide when upgrade when 2.4.
+     * 
+     * @access public
+     * @return void
+     */
+    public function upgradeSlideOpenWay()
+    {
+        $slides = $this->dao->select('*')->from(TABLE_CONFIG)
+            ->where('owner')->eq('system')
+            ->andWhere('module')->eq('common')
+            ->andWhere('section')->eq('slides')
+            ->fetchAll('key');
+
+        foreach($slides as $key => $slide)
+        {
+            $slides[$key] = json_decode($slide->value);
+            $slides[$key]->openWay = '_self';
+
+            $slides[$key]->buttonOpenWay = array();
+            foreach($slides[$key]->buttonUrl as $button => $url)
+            {
+                $slides[$key]->buttonOpenWay[$button] = '_self';
+            }
+
+            $this->dao->update(TABLE_CONFIG)
+                ->set('value')->eq(helper::jsonEncode($slides[$key]))
+                ->where('`key`')->eq($key)
+                ->exec();
+        }
+
+        return !dao::isError();
+    }
+
+    /**
+     * scan directory and create empty file.
+     * 
+     * @param  string    $path 
+     * @access public
+     * @return void
+     */
+    public function scanDirectory($path)
+    {
+        $scanDir   = dir($path);
+        $indexFile = $path . DS . "index.php";
+        $fd        = fopen($indexFile, "a+");
+        fclose($fd);
+        chmod($indexFile,0755);
+        while($file = $scanDir->read())
+        {
+            $nextDir = $path . DS . $file;
+            if((is_dir($nextDir)) AND ($file!=".") AND ($file!=".."))
+            {
+                $this->scanDirectory($nextDir);
+            }
+        }
+    }
+
+    /**
+     * Auto create empty file in system directory. When upgrade 2.4
+     * 
+     * @access public
+     * @return void
+     */
+    public function createEmptyFile()
+    {
+        $this->scanDirectory($this->app->getDataRoot() . "upload/");
+        $this->scanDirectory($this->app->getBasePath());
+    }
+
+    /**
      * Judge any error occers.
      * 
      * @access public
