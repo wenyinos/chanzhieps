@@ -398,21 +398,26 @@ class control
     {
         $moduleName = strtolower(trim($moduleName));
         $methodName = strtolower(trim($methodName));
-        $modulePath = $this->app->getModulePath($moduleName);
-        $cssExtPath = $this->app->getModuleExtPath($moduleName, 'css') ;
+
+        $cssPath        = $this->app->getTplRoot() . $this->config->template . DS . 'theme' . DS . $this->config->theme . DS . 'css' . DS;
+
+        $cssMainExtPath = $cssPath . 'ext' . DS;
+        $cssSiteExtPath = $cssPath . 'ext' . DS . $this->app->siteCode . DS;
 
         $css = '';
-        $mainCssFile   = $modulePath . 'css' . DS . 'common.css';
-        $methodCssFile = $modulePath . 'css' . DS . $methodName . '.css';
-        if(file_exists($mainCssFile))   $css .= file_get_contents($mainCssFile);
-        if(is_file($methodCssFile))     $css .= file_get_contents($methodCssFile);
+        $mainJsFile   = $cssPath . $moduleName . '.common.css';
+        $methodJsFile = $cssPath . $moduleName . DS . $methodName . '.css';
+        if(file_exists($mainJsFile))   $css .= file_get_contents($mainJsFile);
+        if(is_file($methodJsFile))     $css .= file_get_contents($methodJsFile);
 
-        foreach(glob($cssExtPath['common'] . $methodName . DS . '*.css') as $cssFile)
+        $commonExtFiles = glob($cssMainExtPath . $moduleName . DS . $methodName . DS . '*.css');
+        foreach($commonExtFiles as $cssFile)
         {
             $css .= file_get_contents($cssFile);
         }
 
-        foreach(glob($cssExtPath['site'] . $methodName . DS . '*.css') as $cssFile)
+        $siteExtFiles = glob($cssSiteExtPath . $moduleName . DS . $methodName . DS  . '*.css');
+        foreach($siteExtFiles as $cssFile)
         {
             $css .= file_get_contents($cssFile);
         }
@@ -471,25 +476,21 @@ class control
         $moduleName = strtolower(trim($moduleName));
         $methodName = strtolower(trim($methodName));
 
-        $jsPath        = $this->app->getTplRoot() . DS . 'theme' . DS . 'js' . DS;
+        $jsPath        = $this->app->getTplRoot() . DS . $this->config->template . DS . 'theme' . DS . $this->config->theme . DS . 'js' . DS;
         $jsMainExtPath = $jsPath . 'ext' . DS;
         $jsSiteExtPath = $jsPath . 'ext' . DS . $this->app->siteCode . DS;
 
         $js = '';
-        $mainJsFile   = $jsPath . $moduleName . '.common.js';
-        $methodJsFile = $jsPath . $moduleName . '.' . $methodName . '.js';
+        $mainJsFile   = $jsPath . $moduleName . DS . 'common.js';
+        $methodJsFile = $jsPath . $moduleName . DS . $methodName . '.js';
         if(file_exists($mainJsFile))   $js .= file_get_contents($mainJsFile);
         if(is_file($methodJsFile))     $js .= file_get_contents($methodJsFile);
-        
-        foreach(glob($jsMainExtPath . $moduleName . DS . $methodName . DS . '*.js') as $jsFile)
-        {
-            $js .= file_get_contents($jsFile);
-        }
 
-        foreach(glob($jsSiteExtPath . $moduleName . DS . $methodName . DS  . '*.js') as $jsFile)
-        {
-            $js .= file_get_contents($jsFile);
-        }
+        $commonExtFiles = glob($jsMainExtPath . $moduleName . DS . $methodName . DS . '*.js');
+        foreach($commonExtFiles as $jsFile) $js .= file_get_contents($jsFile);
+
+        $siteExtFiles = glob($jsSiteExtPath . $moduleName . DS . $methodName . DS  . '*.js');
+        foreach($siteExtFiles as $jsFile) $js .= file_get_contents($jsFile);
 
         return $js;
     }
