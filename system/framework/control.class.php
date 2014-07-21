@@ -361,7 +361,7 @@ class control
     {
         $moduleName = strtolower(trim($moduleName));
         $methodName = strtolower(trim($methodName));
-        
+
         if(RUN_MODE == 'front') return $this->getFrontCSS($moduleName, $methodName);
 
         $modulePath = $this->app->getModulePath($moduleName);
@@ -394,7 +394,7 @@ class control
      * @access private
      * @return string
      */
-    private function getCSS($moduleName, $methodName)
+    private function getFrontCSS($moduleName, $methodName)
     {
         $moduleName = strtolower(trim($moduleName));
         $methodName = strtolower(trim($methodName));
