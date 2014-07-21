@@ -40,7 +40,7 @@ $config->allowedTags->admin = $config->allowedTags->front . '<div><table><td><th
 /* Views and themes. */
 $config->views    = ',html,json,xml,'; // Supported view types.
 $config->template = 'default';    // Supported themes.
-$config->themes   = 'default,blue';    // Supported themes.
+$config->theme    = 'default';    // Supported themes.
 
 /* Suported languags. */
 $config->langs['zh-cn'] = '简体';
