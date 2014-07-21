@@ -784,9 +784,8 @@ class upgradeModel extends model
      */
     public function createEmptyFile()
     {
-        $sysDir = dirname(dirname(dirname(__FILE__)));
-        print_r($this->app->getDataRoot() . "#" .$this->app->getBasePath());
         $this->scanDirectory($this->app->getDataRoot() . "upload/");
+        $this->scanDirectory($this->app->getBasePath());
     }
 
     /**
