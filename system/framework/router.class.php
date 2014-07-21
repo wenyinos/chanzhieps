@@ -515,7 +515,7 @@ class router
     protected function setTplRoot()
     {
         $this->wwwRoot = dirname($_SERVER['SCRIPT_FILENAME']);
-        $this->tplRoot = rtrim($this->wwwRoot, DS) . DS . 'tpl' . DS;
+        $this->tplRoot = rtrim($this->wwwRoot, DS) . DS . 'template' . DS;
     }
 
     /**

@@ -361,6 +361,43 @@ class control
     {
         $moduleName = strtolower(trim($moduleName));
         $methodName = strtolower(trim($methodName));
+        
+        if(RUN_MODE == 'front') return $this->getFrontCSS($moduleName, $methodName);
+
+        $modulePath = $this->app->getModulePath($moduleName);
+        $cssExtPath = $this->app->getModuleExtPath($moduleName, 'css') ;
+
+        $css = '';
+        $mainCssFile   = $modulePath . 'css' . DS . 'common.css';
+        $methodCssFile = $modulePath . 'css' . DS . $methodName . '.css';
+        if(file_exists($mainCssFile)) $css .= file_get_contents($mainCssFile);
+        if(is_file($methodCssFile))   $css .= file_get_contents($methodCssFile);
+
+        foreach(glob($cssExtPath['common'] . $methodName . DS . '*.css') as $cssFile)
+        {
+            $css .= file_get_contents($cssFile);
+        }
+
+        foreach(glob($cssExtPath['site'] . $methodName . DS . '*.css') as $cssFile)
+        {
+            $css .= file_get_contents($cssFile);
+        }
+
+        return $css;
+    }
+
+    /**
+     * Get css code for a front method. 
+     * 
+     * @param  string    $moduleName 
+     * @param  string    $methodName 
+     * @access private
+     * @return string
+     */
+    private function getCSS($moduleName, $methodName)
+    {
+        $moduleName = strtolower(trim($moduleName));
+        $methodName = strtolower(trim($methodName));
         $modulePath = $this->app->getModulePath($moduleName);
         $cssExtPath = $this->app->getModuleExtPath($moduleName, 'css') ;
 
@@ -383,6 +420,7 @@ class control
         return $css;
     }
 
+
     /**
      * Get js code for a method. 
      * 
@@ -395,6 +433,9 @@ class control
     {
         $moduleName = strtolower(trim($moduleName));
         $methodName = strtolower(trim($methodName));
+        
+        if(RUN_MODE == 'front') return $this->getFrontJS($moduleName, $methodName);
+
         $modulePath = $this->app->getModulePath($moduleName);
         $jsExtPath  = $this->app->getModuleExtPath($moduleName, 'js');
 
@@ -410,6 +451,42 @@ class control
         }
 
         foreach(glob($jsExtPath['site'] . $methodName . DS  . '*.js') as $jsFile)
+        {
+            $js .= file_get_contents($jsFile);
+        }
+
+        return $js;
+    }
+
+    /**
+     * Get js code for a method in front mode. 
+     * 
+     * @param  string    $moduleName 
+     * @param  string    $methodName 
+     * @access private
+     * @return string
+     */
+    private function getFrontJS($moduleName, $methodName)
+    {
+        $moduleName = strtolower(trim($moduleName));
+        $methodName = strtolower(trim($methodName));
+
+        $jsPath        = $this->app->getTplRoot() . DS . 'theme' . DS . 'js' . DS;
+        $jsMainExtPath = $jsPath . 'ext' . DS;
+        $jsSiteExtPath = $jsPath . 'ext' . DS . $this->app->siteCode . DS;
+
+        $js = '';
+        $mainJsFile   = $jsPath . $moduleName . '.common.js';
+        $methodJsFile = $jsPath . $moduleName . '.' . $methodName . '.js';
+        if(file_exists($mainJsFile))   $js .= file_get_contents($mainJsFile);
+        if(is_file($methodJsFile))     $js .= file_get_contents($methodJsFile);
+        
+        foreach(glob($jsMainExtPath . $moduleName . DS . $methodName . DS . '*.js') as $jsFile)
+        {
+            $js .= file_get_contents($jsFile);
+        }
+
+        foreach(glob($jsSiteExtPath . $moduleName . DS . $methodName . DS  . '*.js') as $jsFile)
         {
             $js .= file_get_contents($jsFile);
         }
