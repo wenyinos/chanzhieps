@@ -175,6 +175,7 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
           </div>
         </td>
         <td><?php echo html::input('buttonUrl[key]', '', "class='form-control' placeholder='{$lang->slide->buttonUrl}'");?></td>
+          <td><?php echo html::select('buttonOpenWay[0]', $lang->slide->openWayList, '', "class='form-control'");?></td>
         <td><?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus btn btn-mini'") . html::a('javascript:;', "<i class='icon-remove'></i>", "class='delete btn-mini btn'");?></td>
       </tr>
     </tbody>
