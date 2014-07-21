@@ -110,7 +110,7 @@ js::import($jsRoot . 'jquery/placeholder/min.js');
 <body>
 <div class='page-container page-blog'>
   <header id='header' class='clearfix'>
-    <div id='headNav'><div class='wrapper'><?php echo common/odel::printTopBar();?></div></div>
+    <div id='headNav'><div class='wrapper'><?php echo commonModel::printTopBar();?></div></div>
     <div id='headTitle'>
       <div class="wrapper">
         <?php if(isset($config->site->logo)):?>
