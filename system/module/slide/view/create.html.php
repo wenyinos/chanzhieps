@@ -43,7 +43,8 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
         </tr>
         <tr>
           <th><?php echo $lang->slide->mainLink;?></th>
-          <td><?php echo html::input('mainLink', '', "class='form-control'");?></td><td colspan='2'></td>
+          <td><?php echo html::input('mainLink', '', "class='form-control'");?></td>
+          <td><div class='w-200px'><?php echo html::select('openWay', $lang->slide->openWayList, '', "class='form-control'");?></div></td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->slide->background->type;?></th>
@@ -51,7 +52,7 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
         </tr>
         <tr class='bg-section' data-id='color'>
           <th><?php echo $lang->slide->background->color;?></th>
-          <td colspan='2'>
+          <td colspan='3'>
             <div class='colorplate clearfix'>
               <div class='input-group color active' data='#114DAD'>
                 <?php echo html::input('backgroundColor', '#114DAD', "class='form-control input-color text-latin' placeholder='" . $lang->slide->colorTip . "'");?>
@@ -80,7 +81,7 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
         <tr class='bg-section' data-id='image'>
           <th><?php echo $lang->slide->background->image;?></th>
           <td><?php echo html::file('files[]', "tabindex='-1' class='form-control'");?></td>
-          <td colspan='2'><label class='text-info'><?php echo $lang->slide->suitableSize;?></label></td>
+          <td colspan='3'><label class='text-info'><?php echo $lang->slide->suitableSize;?></label></td>
         </tr>
         <tr>
           <th><?php echo $lang->slide->button;?></th>
@@ -104,15 +105,16 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
             </div>
           </td>
           <td><?php echo html::input('buttonUrl[0]', '', "class='form-control' placeholder='{$lang->slide->buttonUrl}'");?></td>
+          <td><?php echo html::select('buttonOpenWay[0]', $lang->slide->openWayList, '', "class='form-control'");?></td>
           <td><?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus btn btn-mini'") . html::a('javascript:;', "<i class='icon-remove'></i>", "class='delete btn-mini btn'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->slide->summary;?></th>
-          <td colspan='3'><?php echo html::textarea('summary', '', "class='form-control' rows='6'");?></td>
+          <td colspan='4'><?php echo html::textarea('summary', '', "class='form-control' rows='6'");?></td>
         </tr>
         <tr>
           <td></td>
-          <td colspan='3'><?php echo html::submitButton();?></td>
+          <td colspan='4'><?php echo html::submitButton();?></td>
         </tr>
       </table>
     </form>

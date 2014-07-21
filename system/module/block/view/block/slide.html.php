@@ -17,13 +17,14 @@ if($slides):?>
   <div class='carousel-inner'>
     <?php $height = 0;?>
     <?php foreach($slides as $slide):?>
-    <?php $url = empty($slide->mainLink) ? '' : " data-url='" . $slide->mainLink . "'";?>
+    <?php $url    = empty($slide->mainLink) ? '' : " data-url='" . $slide->mainLink . "'";?>
+    <?php $target = " data-target='" . $slide->openWay . "'";?>
     <?php if($height == 0 and $slide->height) $height = $slide->height;?>
     <?php if ($slide->backgroundType == 'image'): ?>
-    <div class='item'<?php echo $url;?>>
+    <div class='item'<?php echo $url . ' ' . $target;?>>
     <?php print(html::image($slide->image));?>
     <?php else: ?>
-    <div class='item'<?php echo $url;?> style='<?php echo 'background-color: ' . $slide->backgroundColor . '; height: ' . $height . 'px';?>'>
+    <div class='item'<?php echo $url . ' ' . $target;?> style='<?php echo 'background-color: ' . $slide->backgroundColor . '; height: ' . $height . 'px';?>'>
     <?php endif ?>
       <div class='carousel-caption'>
         <h2 style='color:<?php echo $slide->titleColor;?>'><?php echo $slide->title;?></h2>
@@ -32,7 +33,7 @@ if($slides):?>
         foreach($slide->label as $key => $label):
         if(trim($label) != '')
         {
-            if($slide->buttonUrl[$key])  echo html::a($slide->buttonUrl[$key], $label, "class='btn btn-lg btn-{$slide->buttonClass[$key]}'");
+            if($slide->buttonUrl[$key])  echo html::a($slide->buttonUrl[$key], $label, "class='btn btn-lg btn-{$slide->buttonClass[$key]}' target='{$slide->buttonOpenWay[$key]}'");
             if(!$slide->buttonUrl[$key]) echo html::commonButton($label, "btn btn-lg btn-{$slide->buttonClass[$key]}");
         }
         endforeach;
