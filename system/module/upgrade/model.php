@@ -750,7 +750,44 @@ class upgradeModel extends model
         }
 
         return !dao::isError();
-    } 
+    }
+
+    /**
+     * scan directory and create empty file.
+     * 
+     * @param  string    $path 
+     * @access public
+     * @return void
+     */
+    public function scanDirectory($path)
+    {
+        $scanDir   = dir($path);
+        $indexFile = $path . DS . "index.php";
+        $fd        = fopen($indexFile, "a+");
+        fclose($fd);
+        chmod($indexFile,0755);
+        while($file = $scanDir->read())
+        {
+            $nextDir = $path . DS . $file;
+            if((is_dir($nextDir)) AND ($file!=".") AND ($file!=".."))
+            {
+                $this->scanDirectory($nextDir);
+            }
+        }
+    }
+
+    /**
+     * Auto create empty file in system directory. When upgrade 2.4
+     * 
+     * @access public
+     * @return void
+     */
+    public function createEmptyFile()
+    {
+        $sysDir = dirname(dirname(dirname(__FILE__)));
+        print_r($this->app->getDataRoot() . "#" .$this->app->getBasePath());
+        $this->scanDirectory($this->app->getDataRoot() . "upload/");
+    }
 
     /**
      * Judge any error occers.
