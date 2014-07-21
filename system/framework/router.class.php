@@ -1448,6 +1448,14 @@ class router
             $langFiles = array_merge(array($mainLangFile), $extLangFiles);
         }
 
+        if(RUN_MODE == 'front') 
+        {
+            $langPath     = $this->getTplRoot() . $this->config->template . DS . 'lang' . DS . $moduleName . DS; 
+            $templateLangFile = $langPath . $this->clientLang . '.php';
+
+            if(file_exists($templateLangFile)) $langFiles[] = $templateLangFile;
+        }
+
         global $lang;
         if(!is_object($lang)) $lang = new language();
         if(!isset($lang->$moduleName)) $lang->$moduleName = new stdclass();
