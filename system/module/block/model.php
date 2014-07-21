@@ -368,21 +368,22 @@ class blockModel extends model
             else echo "<div class='col-md-{$block->grid}' data-grid='{$block->grid}'>";
         }
 
+        $tplPath = $this->app->getTplRoot() . $this->config->template . DS . 'view' . DS . 'block' . DS;
+
         /* First try block/ext/sitecode/view/block/ */
-        $extBlockRoot = dirname(__FILE__) . "/ext/_{$this->config->site->code}/view/block/";
+        $extBlockRoot = $tplPath . "/ext/_{$this->config->site->code}/";
         $blockFile    = $extBlockRoot . strtolower($block->type) . '.html.php';
 
         /* Then try block/ext/view/block/ */
         if(!file_exists($blockFile))
         {
-            $extBlockRoot = dirname(__FILE__) . "/ext/view/block/";
+            $extBlockRoot = $tplPath . 'ext' . DS;
             $blockFile    = $extBlockRoot . strtolower($block->type) . '.html.php';
 
             /* No ext file, use the block/view/block/. */
             if(!file_exists($blockFile))
             {
-                $blockRoot = dirname(__FILE__) . '/view/block/';
-                $blockFile = $blockRoot . strtolower($block->type) . '.html.php';
+                $blockFile = $tplPath . strtolower($block->type) . '.html.php';
                 if(!file_exists($blockFile)) return '';
             }
         }
