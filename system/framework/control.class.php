@@ -296,8 +296,8 @@ class control
         $moduleName = strtolower(trim($moduleName));
         $methodName = strtolower(trim($methodName));
 
-        $tplPath = $this->app->getTplRoot() . DS . $this->config->template . DS . 'view';
-        $fileName =  $moduleName . '.' . $methodName . '.' . $this->viewType . '.php';
+        $tplPath = $this->app->getTplRoot() . DS . $this->config->template . DS . 'view' . DS . $moduleName . DS;
+        $fileName =  $methodName . '.' . $this->viewType . '.php';
 
         /* The main view file, extension view file and hook file. */
         $mainViewFile = $tplPath . DS . $fileName;
