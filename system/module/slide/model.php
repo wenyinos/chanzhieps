@@ -67,13 +67,14 @@ class slideModel extends model
             ->remove('files')
             ->get();
 
-        $slide->label       = array_values($slide->label);
-        $slide->buttonClass = array_values($slide->buttonClass);
-        $slide->buttonUrl   = array_values($slide->buttonUrl);
-        $slide->createdDate = time();
+        $slide->label         = array_values($slide->label);
+        $slide->buttonClass   = array_values($slide->buttonClass);
+        $slide->buttonUrl     = array_values($slide->buttonUrl);
+        $slide->buttonOpenWay = array_values($slide->buttonOpenWay);
+        $slide->createdDate   = time();
         if($slide->backgroundType == 'color')
         {
-            $this->dao->insert('slide')->data($slide, 'label,buttonClass,buttonUrl')->batchCheck('backgroundColor,height', 'notempty')->check('height', 'ge', 100);
+            $this->dao->insert('slide')->data($slide, 'label,buttonClass,buttonUrl,buttonOpenWay')->batchCheck('backgroundColor,height', 'notempty')->check('height', 'ge', 100);
             if(dao::isError()) return false;
         }
 
@@ -106,14 +107,15 @@ class slideModel extends model
 
         if($slide->backgroundType == 'color')
         {
-            $this->dao->insert('slide')->data($slide, 'label,buttonClass,buttonUrl')->batchCheck('backgroundColor,height', 'notempty')->check('height', 'ge', 100);
+            $this->dao->insert('slide')->data($slide, 'label,buttonClass,buttonUrl,buttonOpenWay')->batchCheck('backgroundColor,height', 'notempty')->check('height', 'ge', 100);
             if(dao::isError()) return false;
         }
 
-        $slide->label       = array_values($slide->label);
-        $slide->buttonClass = array_values($slide->buttonClass);
-        $slide->buttonUrl   = array_values($slide->buttonUrl);
-        $slide->createdDate = time();
+        $slide->label         = array_values($slide->label);
+        $slide->buttonClass   = array_values($slide->buttonClass);
+        $slide->buttonUrl     = array_values($slide->buttonUrl);
+        $slide->buttonOpenWay = array_values($slide->buttonOpenWay);
+        $slide->createdDate   = time();
 
         $this->dao->update(TABLE_CONFIG)
             ->set('value')->eq(helper::jsonEncode($slide))

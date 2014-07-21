@@ -24,7 +24,12 @@ $(document).ready(function()
     {
         $('#slide').carousel();
         $('#slide .item').first().addClass('active');
-        $('#slide .item[data-url]').click(function(){var url = $(this).data('url'); if(url && url.length) window.location.href = url;});
+        $('#slide .item[data-url]').click(function()
+        {
+            var url    = $(this).data('url');
+            var target = $(this).data('target');
+            if(url && url.length) window.open(url, target);
+        });
     }
 
     /* Fixed submenu position for browser which doesn't suppport relative postion in a table cell, like firefox 29. */
