@@ -41,8 +41,8 @@ $lang->slide->admin    = '幻灯片设置';
 $lang->slide->create   = '添加幻灯片';
 $lang->slide->edit     = '编辑幻灯片';
 
-$lang->slide->openWayList['_self']  = '当前窗口';
-$lang->slide->openWayList['_blank'] = '新开窗口';
+$lang->slide->targetList['_self']  = '当前窗口';
+$lang->slide->targetList['_blank'] = '新开窗口';
 
 $lang->slide->successSort     = '排序成功保存';
 $lang->slide->noImageSelected = '没有选择图片';

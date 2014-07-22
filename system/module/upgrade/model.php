@@ -724,7 +724,7 @@ class upgradeModel extends model
      * @access public
      * @return void
      */
-    public function upgradeSlideOpenWay()
+    public function upgradeSlideTarget()
     {
         $slides = $this->dao->select('*')->from(TABLE_CONFIG)
             ->where('owner')->eq('system')
@@ -735,12 +735,12 @@ class upgradeModel extends model
         foreach($slides as $key => $slide)
         {
             $slides[$key] = json_decode($slide->value);
-            $slides[$key]->openWay = '_self';
+            $slides[$key]->target = '_self';
 
-            $slides[$key]->buttonOpenWay = array();
+            $slides[$key]->buttonTarget = array();
             foreach($slides[$key]->buttonUrl as $button => $url)
             {
-                $slides[$key]->buttonOpenWay[$button] = '_self';
+                $slides[$key]->buttonTarget[$button] = '_self';
             }
 
             $this->dao->update(TABLE_CONFIG)
