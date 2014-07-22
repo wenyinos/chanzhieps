@@ -3,6 +3,7 @@
 $webRoot   = $config->webRoot;
 $jsRoot    = $webRoot . "js/";
 $themeRoot = $webRoot . "theme/";
+$templateRoot = $webRoot . '/template/' . $config->site->template;
 ?>
 <!DOCTYPE html>
 <?php if(RUN_MODE == 'front' and !empty($config->oauth->sina)):?>

@@ -14,6 +14,25 @@
 class uiModel extends model
 {
     /**
+     * Get templates available.
+     * 
+     * @access public
+     * @return void
+     */
+    public function getTemplates()
+    {
+        $this->app->loadClass('Spyc', true);
+        $folders = glob($this->app->getTplRoot() . '*');
+        foreach($folders as $folder)
+        {
+            $templateName = str_replace($this->app->getTplRoot(), '', $folder);
+            $config = Spyc::YAMLLoadString(file_get_contents($folder . DS . 'doc' . DS . $this->app->getClientLang() . '.yaml'));
+            $templates[$templateName] = $config;
+        }
+        return $templates;
+    }
+
+    /**
      * Set UI option with file. 
      * 
      * @param  int    $type 
