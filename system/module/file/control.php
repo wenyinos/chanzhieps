@@ -85,12 +85,12 @@ class file extends control
      * @access public
      * @return void
      */
-    public function browse($objectType, $objectID)
+    public function browse($objectType, $objectID, $isImage = '')
     {
         $this->view->writeable  = $this->file->checkSavePath();
         $this->view->objectType = $objectType;
         $this->view->objectID   = $objectID;
-        $this->view->files      = $this->file->getByObject($objectType, $objectID);
+        $this->view->files      = $this->file->getByObject($objectType, $objectID, $isImage);
         $this->display();
     }
   

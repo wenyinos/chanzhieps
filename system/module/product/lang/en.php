@@ -50,6 +50,7 @@ $lang->product->admin      = 'Admin';
 $lang->product->create     = 'Create';
 $lang->product->edit       = 'Edit';
 $lang->product->files      = 'Files';
+$lang->product->images     = 'Images';
 
 $lang->product->confirmDelete = 'Are you sure to delete it?';
 

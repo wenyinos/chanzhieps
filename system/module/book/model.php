@@ -147,14 +147,15 @@ class bookModel extends model
         $titleLink   = $node->type == 'book' ? $node->title : html::a(helper::createLink('book', 'admin', "bookID=$node->id"), $node->title);
         $editLink    = html::a(helper::createLink('book', 'edit', "nodeID=$node->id"), $this->lang->edit);
         $delLink     = empty($children) ? html::a(helper::createLink('book', 'delete', "bookID=$node->id"), $this->lang->delete, "class='deleter'") : '';
-        $filesLink   = html::a(helper::createLink('file', 'browse', "objectType=book&objectID=$node->id"), $this->lang->book->files, "data-toggle='modal' data-width='1000'");
+        $filesLink   = html::a(helper::createLink('file', 'browse', "objectType=book&objectID=$node->id&isImage=false"), $this->lang->book->files, "data-toggle='modal' data-width='1000'");
+        $imagesLink  = html::a(helper::createLink('file', 'browse', "objectType=book&objectID=$node->id&isImage=true"), $this->lang->book->images, "data-toggle='modal' data-width='1000'");
         $catalogLink = html::a(helper::createLink('book', 'catalog', "nodeID=$node->id"), $this->lang->book->catalog);
         $upLink      = html::a(helper::createLink('book', 'up', "nodeID=$node->id"), "<i class='icon-arrow-up'></i>", "class='sort'");
         $downLink    = html::a(helper::createLink('book', 'down', "nodeID=$node->id"), "<i class='icon-arrow-down'></i>", "class='sort'");
 
         if($node->type == 'book')    $catalog .= "<dt class='book'><strong>" . $titleLink . '</strong><span class="actions">' . $editLink . $catalogLink . $delLink . '</span></dt>';
         if($node->type == 'chapter') $catalog .= "<dd class='catalog chapter'><strong><span class='order'>" . $serial . '</span>&nbsp;' . $titleLink . '</strong><span class="actions">' . $editLink . $catalogLink . $delLink . $upLink . $downLink . '</span></dd>';
-        if($node->type == 'article') $catalog .= "<dd class='catalog article'><strong><span class='order'>" . $serial . '</span>&nbsp;' . $node->title . '</strong><span class="actions">' . $editLink . $filesLink . $delLink . $upLink . $downLink . '</span></dd>';
+        if($node->type == 'article') $catalog .= "<dd class='catalog article'><strong><span class='order'>" . $serial . '</span>&nbsp;' . $node->title . '</strong><span class="actions">' . $editLink . $filesLink . $imagesLink . $delLink . $upLink . $downLink . '</span></dd>';
 
         if($children) 
         {

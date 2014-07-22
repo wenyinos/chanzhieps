@@ -21,6 +21,7 @@ $lang->book->content     = '内容';
 $lang->book->alias       = '别名';
 $lang->book->order       = '排序';
 $lang->book->files       = '附件';
+$lang->book->images      = '图片';
 $lang->book->chapterList = '目录管理';
 $lang->book->articleList = '文章管理';
 

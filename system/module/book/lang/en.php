@@ -21,6 +21,7 @@ $lang->book->content     = 'Content';
 $lang->book->alias       = 'Alias';
 $lang->book->order       = 'Order';
 $lang->book->files       = 'Files';
+$lang->book->images      = 'Images';
 $lang->book->chapterList = 'Chapters';
 $lang->book->articleList = 'Articles';
 
