@@ -41,6 +41,9 @@ $lang->slide->admin    = 'Admin';
 $lang->slide->create   = 'Add';
 $lang->slide->edit     = 'Edit';
 
+$lang->slide->openWayList['_self']  = 'Active window';
+$lang->slide->openWayList['_blank'] = 'New window';
+
 $lang->slide->successSort     = 'Order data saved.';
 $lang->slide->noImageSelected = 'No images selected';
 $lang->slide->suitableSize    = "You'd better use pictures of same size，<i class='text-muted'>1140px X 270px</i> recommended.";

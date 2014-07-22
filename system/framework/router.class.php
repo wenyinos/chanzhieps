@@ -515,7 +515,7 @@ class router
     protected function setTplRoot()
     {
         $this->wwwRoot = dirname($_SERVER['SCRIPT_FILENAME']);
-        $this->tplRoot = rtrim($this->wwwRoot, DS) . DS . 'tpl' . DS;
+        $this->tplRoot = rtrim($this->wwwRoot, DS) . DS . 'template' . DS;
     }
 
     /**
@@ -1446,6 +1446,14 @@ class router
         else
         {
             $langFiles = array_merge(array($mainLangFile), $extLangFiles);
+        }
+
+        if(RUN_MODE == 'front') 
+        {
+            $langPath     = $this->getTplRoot() . $this->config->template . DS . 'lang' . DS . $moduleName . DS; 
+            $templateLangFile = $langPath . $this->clientLang . '.php';
+
+            if(file_exists($templateLangFile)) $langFiles[] = $templateLangFile;
         }
 
         global $lang;
