@@ -210,7 +210,11 @@ class messageModel extends model
                 $mail->subject = sprintf($this->lang->message->replySubject, $this->config->site->name);
                 $mail->body    = $reply->content;
 
-                $this->loadModel('mail')->send($mail->to, $mail->subject, $mail->body);
+                /* if message type is comment , check is user want to receive email reminder  */
+                if($message->type != 'comment' || $message->receiveEmail == '1')
+                {
+                    $this->loadModel('mail')->send($mail->to, $mail->subject, $mail->body);
+                }
             }
 
             return true;
