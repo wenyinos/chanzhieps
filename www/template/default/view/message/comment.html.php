@@ -1,7 +1,7 @@
 <?php
 js::set('objectType', $objectType);
 js::set('objectID',   $objectID);
-css::internal($pageCSS);
+if(isset($pageCSS)) css::internal($pageCSS);
 ?>
 <?php if(isset($comments) and $comments):?>
 <div class='panel'>
@@ -99,4 +99,4 @@ css::internal($pageCSS);
     </form>
   </div>
 </div>
-<?php js::execute($pageJS);?>
+<?php if(isset($pageJS)) js::execute($pageJS);?>

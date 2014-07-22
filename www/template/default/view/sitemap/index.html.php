@@ -13,7 +13,7 @@
 <?php if($onlyBody == 'no') include '../common//header.html.php'; ?>
 <div class='panel'>
   <div class='panel-heading'>
-    <strong><i class='icon-sitemap'></i> <?php echo $lang->sitemap->common/?></strong>
+    <strong><i class='icon-sitemap'></i> <?php echo $lang->sitemap->common;?></strong>
     <div class='panel-actions'>
       <?php echo html::a($this->createLink('sitemap', 'index', '', '', 'xml'), '<i class="icon-code"></i> ' . $lang->sitemap->xmlVersion, "class='btn btn-primary'");?>
     </div>
@@ -41,7 +41,7 @@
     </div>
     <?php endif;?>
 
-    <?php if(strpos($blogTree, '<li>') !== false):?>
+    <?php if(strpos($this->config->site->moduleEnabled,'blog') && strpos($blogTree, '<li>') !== false):?>
     <div class='clearfix sitemap-tree'> 
       <h4><?php echo $lang->sitemap->blogCategory?></h4>
       <?php echo $blogTree?>

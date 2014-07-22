@@ -26,6 +26,7 @@
     <priority>0.8</priority>
   </url>
   <?php endforeach;?>
+  <?php if(strpos($this->config->site->moduleEnabled,'blog')):?>
   <?php
   foreach($blogs as $blog):
   $categories = $blog->categories;
@@ -39,6 +40,7 @@
     <priority>0.8</priority>
   </url>
   <?php endforeach;?>
+  <?php endif;?>
   <?php foreach($books as $nodeID => $node):?>
   <?php
   if($node->type != 'article') $url  = str_replace('&', '&amp;', $systemURL . helper::createLink('book', 'browse', "nodeID=$node->id", "book={$node->book}&node={$node->alias}"));
