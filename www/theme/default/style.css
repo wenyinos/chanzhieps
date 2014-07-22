@@ -266,6 +266,12 @@ table.captcha td label {padding: 0;}
 
 /* file Form */
 .form-group .file-form .form-group:last-child {margin-bottom: 0;}
+.file-form .fileBox {margin-bottom: 10px; width: 100%}
+.file-form table.fileBox td {padding: 0!important}
+.file-form .fileBox .input-control > input[type='file'] {width: 100%; height: 100%; height: 26px; line-height: 26px; border: none; position: relative;}
+.file-form .fileBox td .btn {border-radius: 0; border-left: none}
+.file-form .fileBox td input, .file-form .fileBox td .form-control {border-radius: 0;}
+.file-form .file-wrapper.form-control {border-right: 0}
 
 /* article */
 .article {border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); margin-bottom: 20px;}
