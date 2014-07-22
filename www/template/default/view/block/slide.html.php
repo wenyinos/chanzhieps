@@ -18,7 +18,7 @@ if($slides):?>
     <?php $height = 0;?>
     <?php foreach($slides as $slide):?>
     <?php $url    = empty($slide->mainLink) ? '' : " data-url='" . $slide->mainLink . "'";?>
-    <?php $target = " data-target='" . $slide->openWay . "'";?>
+    <?php $target = " data-target='" . $slide->target . "'";?>
     <?php if($height == 0 and $slide->height) $height = $slide->height;?>
     <?php if ($slide->backgroundType == 'image'): ?>
     <div class='item'<?php echo $url . ' ' . $target;?>>
@@ -33,7 +33,7 @@ if($slides):?>
         foreach($slide->label as $key => $label):
         if(trim($label) != '')
         {
-            if($slide->buttonUrl[$key])  echo html::a($slide->buttonUrl[$key], $label, "class='btn btn-lg btn-{$slide->buttonClass[$key]}' target='{$slide->buttonOpenWay[$key]}'");
+            if($slide->buttonUrl[$key])  echo html::a($slide->buttonUrl[$key], $label, "class='btn btn-lg btn-{$slide->buttonClass[$key]}' target='{$slide->buttonTarget[$key]}'");
             if(!$slide->buttonUrl[$key]) echo html::commonButton($label, "btn btn-lg btn-{$slide->buttonClass[$key]}");
         }
         endforeach;

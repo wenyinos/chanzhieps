@@ -41,8 +41,8 @@ $lang->slide->admin    = 'Admin';
 $lang->slide->create   = 'Add';
 $lang->slide->edit     = 'Edit';
 
-$lang->slide->openWayList['_self']  = 'Active window';
-$lang->slide->openWayList['_blank'] = 'New window';
+$lang->slide->targetList['_self']  = 'Active window';
+$lang->slide->targetList['_blank'] = 'New window';
 
 $lang->slide->successSort     = 'Order data saved.';
 $lang->slide->noImageSelected = 'No images selected';
