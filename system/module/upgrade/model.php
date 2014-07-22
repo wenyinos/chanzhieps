@@ -753,7 +753,7 @@ class upgradeModel extends model
     }
 
     /**
-     * scan directory and create empty index file. when upgrade 2.4
+     * scan directory and create empty index file. when upgrade from 2.4
      * 
      * @param  string    $path 
      * @access public
@@ -776,6 +776,27 @@ class upgradeModel extends model
             if((is_dir($nextDir)) AND ($file!=".") AND ($file!=".."))
             {
                 $this->createIndexFile($nextDir);
+            }
+        }
+    }
+
+    /**
+     * Delete log file when upgrade from 2.4 
+     * delete all file in logRoot directory but index.php and .gitkeep.
+     *
+     * @access public
+     * @return void
+     */
+    public function deleteLogFile()
+    {
+        $logRoot = $this->app->getLogRoot();
+        $scanDir = dir($logRoot);
+
+        while($file = $scanDir->read())
+        {
+            if(is_file($logRoot . $file) && $file != 'index.php' && $file != '.gitkeep')
+            {
+                unlink($logRoot . $file);
             }
         }
     }
