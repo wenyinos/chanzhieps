@@ -77,7 +77,7 @@ $navs = $this->tree->getChildren(0, 'blog');
 
   if(isset($pageCSS)) css::internal($pageCSS);
 
-  echo html::icon($webRoot . 'favicon.ico');
+  echo isset($this->config->site->favicon) ? html::icon(json_decode($this->config->site->favicon)->webPath) : html::icon($webRoot . 'favicon.ico');
   echo html::rss($this->createLink('rss', 'index', '', '', 'xml'), $config->site->name);
   js::set('lang', $lang->js);
 ?>
