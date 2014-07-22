@@ -39,6 +39,7 @@ $lang->article->admin      = 'Admin';
 $lang->article->create     = 'Create';
 $lang->article->edit       = 'Edit';
 $lang->article->files      = 'Files';
+$lang->article->images     = 'Images';
 
 $lang->blog->admin  = 'Admin';
 $lang->blog->list   = 'List';

@@ -38,9 +38,9 @@
       <?php if($this->thread->canManage($board->id, $reply->author)) echo html::a($this->createLink('reply', 'edit',   "replyID=$reply->id"), '<i class="icon-pencil"></i> ' . $lang->edit); ?>
     </span>
     <i class="icon-ellipsis-horizontal icon-more-actions"></i>&nbsp;
-    <a href="#reply" class="thread-reply-btn"><i class="icon-reply"></i> <?php echo $lang->reply->common/ ?></a>
+    <a href="#reply" class="thread-reply-btn"><i class="icon-reply"></i> <?php echo $lang->reply->common;?></a>
     <?php else: ?>
-    <a href="<?php echo $this->createLink('user', 'login', 'referer=' . helper::safe64Encode($this->app->getURI(true))); ?>#reply" class="thread-reply-btn"><i class="icon-reply"></i> <?php echo $lang->reply->common/ ?></a>
+    <a href="<?php echo $this->createLink('user', 'login', 'referer=' . helper::safe64Encode($this->app->getURI(true))); ?>#reply" class="thread-reply-btn"><i class="icon-reply"></i> <?php echo $lang->reply->common;?></a>
     <?php endif; ?>
     </div>
   </div>

@@ -70,14 +70,16 @@ class fileModel extends model
      * @access public
      * @return array
      */
-    public function getByObject($objectType, $objectID, $isImage = false)
+    public function getByObject($objectType, $objectID, $isImage = '')
     {
         /* Get files group by objectID. */
         $files = $this->dao->select('*')
             ->from(TABLE_FILE)
             ->where('objectType')->eq($objectType)
             ->andWhere('objectID')->in($objectID)
-            ->beginIf($isImage)->andWhere('extension')->in($this->config->file->imageExtensions)->orderBy('`primary`')->fi() 
+            ->beginIf(!empty($isImage) and $isImage == 'true')->andWhere('extension')->in($this->config->file->imageExtensions)->fi() 
+            ->beginIf(!empty($isImage) and $isImage == 'false')->andWhere('extension')->notin($this->config->file->imageExtensions)->fi()
+            ->orderBy('`primary`') 
             ->fetchGroup('objectID');
 
         /* Process these files. */

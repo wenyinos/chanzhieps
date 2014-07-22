@@ -39,6 +39,7 @@ $lang->article->admin      = '维护文章';
 $lang->article->create     = '发布文章';
 $lang->article->edit       = '编辑文章';
 $lang->article->files      = '附件';
+$lang->article->images     = '图片';
 
 $lang->blog->admin  = '维护博客';
 $lang->blog->list   = '博客列表';

@@ -60,6 +60,9 @@ css::internal($pageCSS);
         <div class='col-sm-5'>
           <?php echo html::input('email', '', "class='form-control'"); ?>
         </div>
+        <div class='col-sm-5'>
+          <label class='checkbox'><input type='checkbox' name='receiveEmail' value='1' /> <?php echo $lang->comment->receiveEmail; ?></label>
+        </div>
       </div>
       <?php else: ?>
       <div class='form-group'>
