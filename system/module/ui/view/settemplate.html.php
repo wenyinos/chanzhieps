@@ -32,15 +32,15 @@
             <tr>
               <th class='w-80px text-center'><?php echo $lang->ui->template->theme;?></th>
               <td>
-                <?php foreach($template['themes'] as $theme):?>
+                <?php foreach($template['themes'] as $theme => $name):?>
                 <?php
-                 $url = inlink('settheme', "template={$template['code']}&theme={$theme['code']}");
-                 $previewImage = html::image($templateRoot . 'theme/' . $theme['code'] . '/preview.png');
-                 $currentClass = ($config->site->theme == $theme['code']) ? 'btn-success' : '';
-                 echo html::a($url, $previewImage, "class='theme-preview btn btn-lg {$currentClass}' title='{$theme['name']}'") 
-                 ?>
-                 <?php endforeach;?>
-               </td>
+                $url = inlink('settheme', "template={$template['code']}&theme={$theme}");
+                $previewImage = html::image($templateRoot . 'theme/' . $theme . '/preview.png');
+                $currentClass = ($config->site->theme == $theme) ? 'btn-success' : '';
+                echo html::a($url, $previewImage, "class='theme-preview btn btn-lg {$currentClass}' title='{$name}'") 
+                ?>
+                <?php endforeach;?>
+              </td>
             </tr>
           </table>
         </td>

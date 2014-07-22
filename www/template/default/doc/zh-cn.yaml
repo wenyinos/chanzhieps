@@ -7,9 +7,10 @@ chanzhiVersion:2.5
 charge:free
 license:http://www.chanzhi.org/book/chanzhieps/58_license.html
 themes:
-   default:
-      code:default
-      name:默认模板
-   blue:
-      code:blue
-      name:蓝色
+   default:默认模板
+   blue:蓝色
+   brightdark:蝉憩
+   flat:清泉
+   tartan:蝉之格
+   tree:蝉之树
+   wide:宽屏

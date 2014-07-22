@@ -3,7 +3,7 @@
 $webRoot   = $config->webRoot;
 $jsRoot    = $webRoot . "js/";
 $themeRoot = $webRoot . "theme/";
-$templateRoot = $webRoot . '/template/' . $config->site->template;
+$templateRoot = $webRoot . 'template/' . $config->site->template . '/';
 ?>
 <!DOCTYPE html>
 <?php if(RUN_MODE == 'front' and !empty($config->oauth->sina)):?>
@@ -54,19 +54,7 @@ $templateRoot = $webRoot . '/template/' . $config->site->template;
       js::import($jsRoot . 'my.admin.js');
   }
 
-  if(RUN_MODE == 'front' and $config->site->theme)
-  {
-      /* Import custom css. */
-      if($config->site->theme == 'colorful' and isset($config->site->customVersion))
-      {
-          $customCss = str_replace($this->app->getDataRoot(), $this->app->getWebRoot() . 'data/' , $config->site->ui->customCssFile);
-          css::import($customCss . "?v={$config->site->customVersion}");
-      }
-      else
-      {
-         if($config->site->theme != 'default') css::import($themeRoot . $config->site->theme . '/style.css');
-      }
-  }
+  css::import($templateRoot . 'theme/' . $config->site->theme . '/style.css');
 
   if(isset($pageCSS)) css::internal($pageCSS);
 
