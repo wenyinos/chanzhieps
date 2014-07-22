@@ -724,7 +724,7 @@ class upgradeModel extends model
      * @access public
      * @return void
      */
-    public function upgradeSlideOpenWay()
+    public function upgradeSlideTarget()
     {
         $slides = $this->dao->select('*')->from(TABLE_CONFIG)
             ->where('owner')->eq('system')
@@ -735,12 +735,12 @@ class upgradeModel extends model
         foreach($slides as $key => $slide)
         {
             $slides[$key] = json_decode($slide->value);
-            $slides[$key]->openWay = '_self';
+            $slides[$key]->target = '_self';
 
-            $slides[$key]->buttonOpenWay = array();
+            $slides[$key]->buttonTarget = array();
             foreach($slides[$key]->buttonUrl as $button => $url)
             {
-                $slides[$key]->buttonOpenWay[$button] = '_self';
+                $slides[$key]->buttonTarget[$button] = '_self';
             }
 
             $this->dao->update(TABLE_CONFIG)
@@ -753,39 +753,31 @@ class upgradeModel extends model
     }
 
     /**
-     * scan directory and create empty file.
+     * scan directory and create empty index file. when upgrade 2.4
      * 
      * @param  string    $path 
      * @access public
      * @return void
      */
-    public function scanDirectory($path)
+    public function createIndexFile($path)
     {
         $scanDir   = dir($path);
         $indexFile = $path . DS . "index.php";
-        $fd        = fopen($indexFile, "a+");
-        fclose($fd);
-        chmod($indexFile,0755);
+        if(is_writable($path) && !file_exists($indexFile))
+        {
+            $fd = fopen($indexFile, "a+");
+            fclose($fd);
+            chmod($indexFile,0755);
+        }
+        
         while($file = $scanDir->read())
         {
             $nextDir = $path . DS . $file;
             if((is_dir($nextDir)) AND ($file!=".") AND ($file!=".."))
             {
-                $this->scanDirectory($nextDir);
+                $this->createIndexFile($nextDir);
             }
         }
-    }
-
-    /**
-     * Auto create empty file in system directory. When upgrade 2.4
-     * 
-     * @access public
-     * @return void
-     */
-    public function createEmptyFile()
-    {
-        $this->scanDirectory($this->app->getDataRoot() . "upload/");
-        $this->scanDirectory($this->app->getBasePath());
     }
 
     /**
