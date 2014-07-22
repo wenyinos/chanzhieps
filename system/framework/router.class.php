@@ -1450,7 +1450,7 @@ class router
 
         if(RUN_MODE == 'front') 
         {
-            $langPath     = $this->getTplRoot() . $this->config->template . DS . 'lang' . DS . $moduleName . DS; 
+            $langPath     = $this->getTplRoot() . $this->config->site->template . DS . 'lang' . DS . $moduleName . DS; 
             $templateLangFile = $langPath . $this->clientLang . '.php';
 
             if(file_exists($templateLangFile)) $langFiles[] = $templateLangFile;

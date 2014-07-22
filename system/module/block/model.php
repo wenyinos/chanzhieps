@@ -368,7 +368,7 @@ class blockModel extends model
             else echo "<div class='col-md-{$block->grid}' data-grid='{$block->grid}'>";
         }
 
-        $tplPath = $this->app->getTplRoot() . $this->config->template . DS . 'view' . DS . 'block' . DS;
+        $tplPath = $this->app->getTplRoot() . $this->config->site->template . DS . 'view' . DS . 'block' . DS;
 
         /* First try block/ext/sitecode/view/block/ */
         $extBlockRoot = $tplPath . "/ext/_{$this->config->site->code}/";

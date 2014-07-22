@@ -296,7 +296,7 @@ class control
         $moduleName = strtolower(trim($moduleName));
         $methodName = strtolower(trim($methodName));
 
-        $tplPath = $this->app->getTplRoot() . DS . $this->config->template . DS . 'view' . DS . $moduleName . DS;
+        $tplPath = $this->app->getTplRoot() . DS . $this->config->site->template . DS . 'view' . DS . $moduleName . DS;
         $fileName =  $methodName . '.' . $this->viewType . '.php';
 
         /* The main view file, extension view file and hook file. */
@@ -399,7 +399,7 @@ class control
         $moduleName = strtolower(trim($moduleName));
         $methodName = strtolower(trim($methodName));
 
-        $cssPath        = $this->app->getTplRoot() . $this->config->template . DS . 'theme' . DS . $this->config->theme . DS . 'css' . DS;
+        $cssPath        = $this->app->getTplRoot() . $this->config->site->template . DS . 'theme' . DS . $this->config->site->theme . DS . 'css' . DS;
 
         $cssMainExtPath = $cssPath . 'ext' . DS;
         $cssSiteExtPath = $cssPath . 'ext' . DS . $this->app->siteCode . DS;
@@ -476,7 +476,7 @@ class control
         $moduleName = strtolower(trim($moduleName));
         $methodName = strtolower(trim($methodName));
 
-        $jsPath        = $this->app->getTplRoot() . DS . $this->config->template . DS . 'theme' . DS . $this->config->theme . DS . 'js' . DS;
+        $jsPath        = $this->app->getTplRoot() . DS . $this->config->site->template . DS . 'theme' . DS . $this->config->site->theme . DS . 'js' . DS;
         $jsMainExtPath = $jsPath . 'ext' . DS;
         $jsSiteExtPath = $jsPath . 'ext' . DS . $this->app->siteCode . DS;
 
