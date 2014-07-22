@@ -42,11 +42,7 @@ if($slides):?>
     </div>
     <?php endforeach;?>
   </div>
-  <a class='left carousel-control' href='#slide' data-slide='prev'>
-    <i class='icon-prev'></i>
-  </a>
-  <a class='right carousel-control' href='#slide' data-slide='next'>
-    <i class='icon-next'></i>
-  </a>
+  <a class='left carousel-control' href='#slide' data-slide='prev'> <i class='icon-prev'></i> </a>
+  <a class='right carousel-control' href='#slide' data-slide='next'> <i class='icon-next'></i> </a>
 </div>
 <?php endif;?>

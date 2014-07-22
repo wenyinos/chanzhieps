@@ -11,6 +11,27 @@
  */
 class ui extends control
 {
+    /**
+     * Set template.
+     *
+     * @param $theme
+     * @access public
+     * return void
+     **/
+    public function setTemplate($template = '')
+    {
+        $templates = $this->ui->getTemplates();
+        if($template and isset($templates[$template]))
+        {  
+            $result = $this->loadModel('setting')->setItems('system.common.site', array('template' => $template ));
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+        }
+
+        $this->view->title     = $this->lang->ui->setTemplate;
+        $this->view->templates = $templates;
+        $this->display();
+    }
 
     /**
      * Set theme
@@ -19,9 +40,10 @@ class ui extends control
      * @access public
      * return void
      **/
-     public function setTheme($theme = '')
+     public function setTheme($template = '', $theme = '')
      {
-         if($theme and isset($this->lang->ui->themes[$theme]))
+         $templates = $this->ui->getTemplates();
+         if($theme and isset($templates[$template]['themes'][$theme]))
          {  
             $result = $this->loadModel('setting')->setItems('system.common.site', array('theme' => $theme ));
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
