@@ -31,6 +31,11 @@ $(document).ready(function()
         return false;
     });
 
+    $(document).on('click', '.btn-plus', function()
+    {
+        $(this).parents('.form-group').after($('.child').html());
+    })
+
     if(v.isWechatMenu) $(".leftmenu a[href*='wechat']").parent().addClass('active');
 
     if(v.type == 'product' && (!$('#setCurrency').length))

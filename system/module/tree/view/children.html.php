@@ -35,6 +35,7 @@
           echo "<div class='form-group'>";
           echo "<div class='col-xs-6 col-md-4 col-md-offset-2'>" . html::input("children[]", '', "class='form-control' placeholder='{$this->lang->category->name}'") . "</div>";
           if(!$isWechatMenu) echo "<div class='col-xs-6 col-md-4'>" . html::input("alias[]", '', "class='form-control' placeholder='{$this->lang->category->alias}'") . '</div>';
+          if(!$isWechatMenu) echo "<div class='col-xs-6 col-md-2'>" . html::a('javascript:;', "<i class='icon-plus'></i>", "class='btn btn-link pull-left btn-mini btn-plus'") . '</div>';
           echo "</div>";
           echo html::hidden('mode[]', 'new');
       }
@@ -51,4 +52,12 @@
     </div>
   </div>
 </form>
+<div class='child hide'>
+  <div class='form-group'>
+    <div class='col-xs-6 col-md-4 col-md-offset-2'><?php echo  html::input("children[]", '', "class='form-control' placeholder='{$this->lang->category->name}'");?></div>
+    <div class='col-xs-6 col-md-4'><?php echo html::input("alias[]", '', "class='form-control' placeholder='{$this->lang->category->alias}'");?></div>
+    <div class='col-xs-6 col-md-2'><?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='btn btn-link pull-left btn-mini btn-plus'");?></div>
+  </div>
+  <?php echo html::hidden('mode[]', 'new');?>
+</div>
 <?php if(isset($pageJS)) js::execute($pageJS);?>
