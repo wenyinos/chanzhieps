@@ -56,8 +56,8 @@
         <td class='text-center'>
           <?php
           echo html::a($this->createLink('article', 'edit', "articleID=$article->id&type=$article->type"), $lang->edit);
-          echo html::a($this->createLink('file', 'browse', "objectType=$article->type&objectID=$article->id&isimage=false"), $lang->article->files, "data-toggle='modal'");
-          echo html::a($this->createLink('file', 'browse', "objectType=$article->type&objectID=$article->id&isimage=true"), $lang->article->images, "data-toggle='modal'");
+          echo html::a($this->createLink('file', 'browse', "objectType=$article->type&objectID=$article->id&isImage=0"), $lang->article->files, "data-toggle='modal'");
+          echo html::a($this->createLink('file', 'browse', "objectType=$article->type&objectID=$article->id&isImage=1"), $lang->article->images, "data-toggle='modal'");
           echo html::a($this->createLink('article', 'delete', "articleID=$article->id"), $lang->delete, 'class="deleter"');
           echo html::a($this->article->createPreviewLink($article->id), $lang->preview, "target='_blank'");
           ?>

@@ -82,10 +82,11 @@ class file extends control
      * 
      * @param  string $objectType 
      * @param  int    $objectID 
+     * @param  bool   $isImage 
      * @access public
      * @return void
      */
-    public function browse($objectType, $objectID, $isImage = '')
+    public function browse($objectType, $objectID, $isImage = null)
     {
         $this->view->writeable  = $this->file->checkSavePath();
         $this->view->objectType = $objectType;
