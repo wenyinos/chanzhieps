@@ -362,7 +362,12 @@ class control
         $moduleName = strtolower(trim($moduleName));
         $methodName = strtolower(trim($methodName));
 
-        if(RUN_MODE == 'front') return $this->getFrontCSS($moduleName, $methodName);
+        if(RUN_MODE == 'front')
+        {
+            $commonCSS = $this->getFrontCSS($moduleName, $methodName, 'common');
+            $themeCSS  = $this->getFrontCSS($moduleName, $methodName, $this->config->site->theme);
+            return empty($themeCSS) ? $commonCSS : $themeCSS;
+        }
 
         $modulePath = $this->app->getModulePath($moduleName);
         $cssExtPath = $this->app->getModuleExtPath($moduleName, 'css') ;
@@ -390,16 +395,17 @@ class control
      * Get css code for a front method. 
      * 
      * @param  string    $moduleName 
-     * @param  string    $methodName 
+     * @param  string    $moduleName 
+     * @param  string    $theme 
      * @access private
      * @return string
      */
-    private function getFrontCSS($moduleName, $methodName)
+    private function getFrontCSS($moduleName, $methodName, $theme = '')
     {
         $moduleName = strtolower(trim($moduleName));
         $methodName = strtolower(trim($methodName));
 
-        $cssPath        = $this->app->getTplRoot() . $this->config->site->template . DS . 'theme' . DS . $this->config->site->theme . DS . 'css' . DS;
+        $cssPath        = $this->app->getTplRoot() . $this->config->site->template . DS . 'theme' . DS . $theme . DS . 'css' . DS;
 
         $cssMainExtPath = $cssPath . 'ext' . DS;
         $cssSiteExtPath = $cssPath . 'ext' . DS . $this->app->siteCode . DS;
@@ -439,7 +445,12 @@ class control
         $moduleName = strtolower(trim($moduleName));
         $methodName = strtolower(trim($methodName));
         
-        if(RUN_MODE == 'front') return $this->getFrontJS($moduleName, $methodName);
+        if(RUN_MODE == 'front')
+        {
+            $commonJS = $this->getFrontJS($moduleName, $methodName, 'common');
+            $themeJS  = $this->getFrontJS($moduleName, $methodName, $this->config->site->theme);
+            return empty($themeJS) ? $commonJS : $themeJS;
+        }
 
         $modulePath = $this->app->getModulePath($moduleName);
         $jsExtPath  = $this->app->getModuleExtPath($moduleName, 'js');
@@ -468,15 +479,16 @@ class control
      * 
      * @param  string    $moduleName 
      * @param  string    $methodName 
+     * @param  string    $theme 
      * @access private
      * @return string
      */
-    private function getFrontJS($moduleName, $methodName)
+    private function getFrontJS($moduleName, $methodName, $theme = '')
     {
         $moduleName = strtolower(trim($moduleName));
         $methodName = strtolower(trim($methodName));
 
-        $jsPath        = $this->app->getTplRoot() . DS . $this->config->site->template . DS . 'theme' . DS . $this->config->site->theme . DS . 'js' . DS;
+        $jsPath        = $this->app->getTplRoot() . $this->config->site->template . DS . 'theme' . DS . $theme . DS . 'js' . DS;
         $jsMainExtPath = $jsPath . 'ext' . DS;
         $jsSiteExtPath = $jsPath . 'ext' . DS . $this->app->siteCode . DS;
 
