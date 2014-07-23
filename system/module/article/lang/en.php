@@ -64,7 +64,7 @@ $lang->article->lblAddedDate = '<strong>Added:</strong> %s &nbsp;&nbsp;';
 $lang->article->lblAuthor    = "<strong>Author:</strong> %s &nbsp;&nbsp;";
 $lang->article->lblSource    = '<strong>Source:</strong>';
 $lang->article->lblViews     = ' <strong>Views:</strong>%s';
-$lang->article->lblEditor    = '<i>Edited by %s at %s</i>';
+$lang->article->lblEditor    = 'Edited by %s at %s';
 $lang->article->lblComments  = '<strong>Comments:</strong> %s';
 
 $lang->article->none      = 'None';

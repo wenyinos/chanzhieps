@@ -64,7 +64,7 @@ $lang->article->lblAddedDate = '<strong>添加时间：</strong> %s &nbsp;&nbsp;
 $lang->article->lblAuthor    = "<strong>作者：</strong> %s &nbsp;&nbsp;";
 $lang->article->lblSource    = '<strong>来源：</strong>';
 $lang->article->lblViews     = ' <strong>阅读：</strong>%s';
-$lang->article->lblEditor    = '<i>最后编辑：%s 于 %s</i>';
+$lang->article->lblEditor    = '最后编辑：%s 于 %s';
 $lang->article->lblComments  = '<strong>评论：</strong> %s';
 
 $lang->article->none      = '没有了';

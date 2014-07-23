@@ -15,6 +15,9 @@ js::set('articleID', $article->id);
         <dl class='dl-inline'>
           <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAddedDate, formatTime($article->addedDate));?>'><i class='icon-time icon-large'></i> <?php echo formatTime($article->addedDate); ?></dd>
           <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAuthor, $article->author);?>'><i class='icon-user icon-large'></i> <?php echo $article->author; ?></dd>
+          <?php if($article->editor):?> 
+          <dd data-toggle='tooltip' data-placement='top' ><i class='icon-edit icon-large'></i><?php printf($lang->article->lblEditor, $this->loadModel('user')->getByAccount($article->editor)->realname, formatTime($article->editedDate));?></dd>
+          <?php endif;?>
           <?php if($article->source != 'original'):?>
           <dt><?php echo $lang->article->sourceList[$article->source] . $lang->colon;?></dt>
           <dd><?php $article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite); ?></dd>
