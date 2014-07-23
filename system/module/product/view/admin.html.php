@@ -13,6 +13,7 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/treeview.html.php';?>
 <?php js::set('categoryID', $categoryID);?>
+<?php js::set('currency', $lang->product->currency);?>
 <div class='panel'>
   <div class='panel-heading'>
   <strong><i class="icon-list-ul"></i> <?php echo $lang->product->list;?></strong>

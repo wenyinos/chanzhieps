@@ -18,6 +18,7 @@ js::set('root', $root);
 js::set('type', $type);
 js::set('isWechatMenu', $isWechatMenu);
 js::set('lang', $lang->js);
+js::set('currency', $lang->product->currency);
 ?>
 <?php if(strpos($treeMenu, '<li>') !== false):?>
 <div class='row'>

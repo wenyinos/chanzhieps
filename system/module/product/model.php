@@ -345,6 +345,26 @@ class productModel extends model
         }
         return !dao::isError();
     }
+
+    /**
+     * Set currency. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function currency()
+    {
+        $currency = new stdclass();
+        $currency->owner   = 'system';
+        $currency->module  = 'common';
+        $currency->section = 'product';
+        $currency->key     = 'currency';
+        $currency->value   = $this->post->currency;
+
+        $this->dao->replace(TABLE_CONFIG)->data($currency)->exec();
+
+        return !dao::isError();
+    }
         
     /**
      * Delete a product.

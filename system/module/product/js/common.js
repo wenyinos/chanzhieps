@@ -36,4 +36,11 @@ $(document).ready(function()
     })
 
     if(v.categoryID !== 0) $('.tree #category' + v.categoryID).addClass('active');
+
+    var currencyLink = createLink('product', 'currency');
+    var currencyMenu = '<li><a href="' + currencyLink + '" data-toggle="modal" data-type="iframe">';
+    currencyMenu += v.currency + '<i class="icon-chevron-right"></i>';
+    currencyMenu += '</a></li>';
+
+    $('.leftmenu').append(currencyMenu);
 })

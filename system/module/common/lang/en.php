@@ -166,6 +166,7 @@ $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
 $lang->product->menu->browse = array('link' => 'List|product|admin|', 'alias' => 'creaet, edit');
 $lang->product->menu->tree   = 'Categories|tree|browse|type=product';
+$lang->product->currency     = 'Currency';
 
 /* Menu of UI module. */
 $lang->ui = new stdclass();

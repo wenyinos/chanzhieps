@@ -167,6 +167,7 @@ $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
 $lang->product->menu->browse = array('link' => '产品列表|product|admin|', 'alias' => 'create, edit');
 $lang->product->menu->tree   = '类目管理|tree|browse|type=product';
+$lang->product->currency     = '货币设置';
 
 /* Menu of UI module. */
 $lang->ui = new stdclass();
