@@ -45,18 +45,18 @@ include '../common//treeview.html.php';
             <?php
             if($product->promotion != 0)
             {
-                echo "<strong class='text-muted'>" . $lang->dollarSign .'</strong>';
+                echo "<strong class='text-muted'>" . $this->config->product->currency .'</strong>';
                 echo "<strong class='text-danger text-lg'>" . $product->promotion . '</strong>&nbsp;&nbsp;';
                 if($product->price != 0)
                 {
-                    echo "<del class='text-muted'>" . $lang->dollarSign . $product->price .'</del>';
+                    echo "<del class='text-muted'>" . $this->config->product->currency . $product->price .'</del>';
                 }
             }
             else
             {
                 if($product->price != 0)
                 {
-                    echo "<strong class='text-muted'>" . $lang->dollarSign .'</strong>';
+                    echo "<strong class='text-muted'>" . $this->config->product->currency .'</strong>';
                     echo "<strong class='text-important text-lg'>" . $product->price . '</strong>&nbsp;&nbsp;';
                 }
                 else

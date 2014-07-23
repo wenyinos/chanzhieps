@@ -36,7 +36,7 @@ $(document).ready(function()
     if(v.type == 'product' && (!$('#setCurrency').length))
     {
         var currencyLink = createLink('product', 'currency');
-        var currencyMenu = '<li><a id="setCurrency" href="' + currencyLink + '" data-toggle="modal">';
+        var currencyMenu = '<li><a id="setCurrency" href="' + currencyLink + '">';
         currencyMenu += v.currency + '<i class="icon-chevron-right"></i>';
         currencyMenu += '</li>';
 

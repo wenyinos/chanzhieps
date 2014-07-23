@@ -40,7 +40,7 @@ $(document).ready(function()
     if(!$('#setCurrency').length)
     {
         var currencyLink = createLink('product', 'currency');
-        var currencyMenu = '<li><a id="setCurrency" href="' + currencyLink + '" data-toggle="modal" data-type="ajax">';
+        var currencyMenu = '<li><a id="setCurrency" href="' + currencyLink + '">';
         currencyMenu += v.currency + '<i class="icon-chevron-right"></i>';
         currencyMenu += '</a></li>';
         $('.leftmenu').append(currencyMenu);
