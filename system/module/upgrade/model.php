@@ -782,7 +782,8 @@ class upgradeModel extends model
 
     /**
      * Delete log file when upgrade from 2.4 
-     * delete all file in logRoot directory but index.php and .gitkeep.
+     * delete all file in logRoot directory but index.php .
+     * if delete fail set system.common.upgrade deleteLogFile=0  
      *
      * @access public
      * @return void
@@ -790,13 +791,19 @@ class upgradeModel extends model
     public function deleteLogFile()
     {
         $logRoot = $this->app->getLogRoot();
-        $scanDir = dir($logRoot);
-
-        while($file = $scanDir->read())
+        if(!is_writable($logRoot))
         {
-            if(is_file($logRoot . $file) && $file != 'index.php' && $file != '.gitkeep')
+            return $this->loadModel('setting')->setItems('system.common.upgrade', array('deleteLogFile' => '0'));
+        }
+        else
+        {
+            $scanDir = dir($logRoot);
+            while($file = $scanDir->read())
             {
-                unlink($logRoot . $file);
+                if(is_file($logRoot . $file) && $file != 'index.php' && $file != '.gitkeep')
+                {
+                    unlink($logRoot . $file);
+                }
             }
         }
     }
