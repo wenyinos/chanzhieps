@@ -19,7 +19,7 @@
         ?>
       </span>
       <span id='icpInfo'>
-        <?php if(!empty($config->site->icpLink)) echo html::a(strpos('http://', $config->site->icpLink) !== false ? $config->site->icpLink : 'http://' . $config->site->icpLink, $config->site->icp, "target='_blank'");?>
+        <?php if(!empty($config->site->icpLink)) echo html::a(strpos($config->site->icpLink, 'http://') !== false ? $config->site->icpLink : 'http://' . $config->site->icpLink, $config->site->icp, "target='_blank'");?>
         <?php if(empty($config->site->icpLink))  echo $config->site->icp;?>
       </span>
       <div id='powerby'>

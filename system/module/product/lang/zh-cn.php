@@ -63,5 +63,6 @@ $lang->product->statusList['normal']  = '上架';
 $lang->product->statusList['offline'] = '下架';
 
 $lang->product->placeholder = new stdclass();
-$lang->product->placeholder->label = "属性名称：如颜色、价格等";
-$lang->product->placeholder->value = "属性值：如红色、￥1000等";
+$lang->product->placeholder->label    = "属性名称：如颜色、价格等";
+$lang->product->placeholder->value    = "属性值：如红色、￥1000等";
+$lang->product->placeholder->currency = "如￥";

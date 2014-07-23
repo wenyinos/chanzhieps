@@ -147,8 +147,8 @@ class bookModel extends model
         $titleLink   = $node->type == 'book' ? $node->title : html::a(helper::createLink('book', 'admin', "bookID=$node->id"), $node->title);
         $editLink    = html::a(helper::createLink('book', 'edit', "nodeID=$node->id"), $this->lang->edit);
         $delLink     = empty($children) ? html::a(helper::createLink('book', 'delete', "bookID=$node->id"), $this->lang->delete, "class='deleter'") : '';
-        $filesLink   = html::a(helper::createLink('file', 'browse', "objectType=book&objectID=$node->id&isImage=false"), $this->lang->book->files, "data-toggle='modal' data-width='1000'");
-        $imagesLink  = html::a(helper::createLink('file', 'browse', "objectType=book&objectID=$node->id&isImage=true"), $this->lang->book->images, "data-toggle='modal' data-width='1000'");
+        $filesLink   = html::a(helper::createLink('file', 'browse', "objectType=book&objectID=$node->id&isImage=0"), $this->lang->book->files, "data-toggle='modal' data-width='1000'");
+        $imagesLink  = html::a(helper::createLink('file', 'browse', "objectType=book&objectID=$node->id&isImage=1"), $this->lang->book->images, "data-toggle='modal' data-width='1000'");
         $catalogLink = html::a(helper::createLink('book', 'catalog', "nodeID=$node->id"), $this->lang->book->catalog);
         $upLink      = html::a(helper::createLink('book', 'up', "nodeID=$node->id"), "<i class='icon-arrow-up'></i>", "class='sort'");
         $downLink    = html::a(helper::createLink('book', 'down', "nodeID=$node->id"), "<i class='icon-arrow-down'></i>", "class='sort'");
