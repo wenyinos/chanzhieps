@@ -61,7 +61,7 @@ if(isset($pageCSS)) css::internal($pageCSS);
           <?php echo html::input('email', '', "class='form-control'"); ?>
         </div>
         <div class='col-sm-5'>
-          <label class='checkbox'><input type='checkbox' name='receiveEmail' value='1' /> <?php echo $lang->comment->receiveEmail; ?></label>
+          <label class='checkbox'><input type='checkbox' name='receiveEmail' value='1' checked /> <?php echo $lang->comment->receiveEmail; ?></label>
         </div>
       </div>
       <?php else: ?>

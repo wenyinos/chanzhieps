@@ -26,7 +26,7 @@
     <priority>0.8</priority>
   </url>
   <?php endforeach;?>
-  <?php if(strpos($this->config->site->moduleEnabled,'blog')):?>
+  <?php if(commonModel::isAvailable('blog')):?>
   <?php
   foreach($blogs as $blog):
   $categories = $blog->categories;
@@ -41,6 +41,7 @@
   </url>
   <?php endforeach;?>
   <?php endif;?>
+  <?php if(commonModel::isAvailable('book')):?>
   <?php foreach($books as $nodeID => $node):?>
   <?php
   if($node->type != 'article') $url  = str_replace('&', '&amp;', $systemURL . helper::createLink('book', 'browse', "nodeID=$node->id", "book={$node->book}&node={$node->alias}"));
@@ -53,6 +54,8 @@
     <priority>0.8</priority>
   </url>
   <?php endforeach;?>
+  <?php endif;?>
+  <?php if(commonModel::isAvailable('forum')):?>
   <?php
   foreach($threads as $id => $editedDate):
   $url = str_replace('&', '&amp;', $systemURL . helper::createLink('thread', 'view', "id=$id"));
@@ -64,6 +67,7 @@
     <priority>0.8</priority>
   </url>
   <?php endforeach;?>
+  <?php endif;?>
   <?php
   foreach($pages as $page):
   $url = str_replace('&', '&amp;', $systemURL . helper::createLink('page', 'view', "id=$page->id", "name=$page->alias"));

@@ -40,15 +40,14 @@
       <?php echo $articleTree?>
     </div>
     <?php endif;?>
-
-    <?php if(strpos($this->config->site->moduleEnabled,'blog') && strpos($blogTree, '<li>') !== false):?>
+    <?php if(commonModel::isAvailable('blog') && strpos($blogTree, '<li>') !== false):?>
     <div class='clearfix sitemap-tree'> 
       <h4><?php echo $lang->sitemap->blogCategory?></h4>
       <?php echo $blogTree?>
     </div>
     <?php endif;?>
 
-    <?php if($boards):?>
+    <?php if(commonModel::isAvailable('forum') && $boards):?>
     <div class='clearfix sitemap-tree'>
       <h4><?php echo $lang->sitemap->boards;?></h4>
       <ul class='tree'>
@@ -67,7 +66,7 @@
       </ul>
     </div>
     <?php endif;?>
-    <?php if(!empty($books)):?>
+    <?php if(commonModel::isAvailable('book') && !empty($books)):?>
     <div class='clearfix sitemap-tree'>
       <h4><?php echo $lang->sitemap->books;?></h4>
       <ul class='tree'>

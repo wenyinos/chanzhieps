@@ -203,18 +203,15 @@ class messageModel extends model
             $this->dao->update(TABLE_MESSAGE)->set('status')->eq(1)->where('status')->eq(0)->andWhere('id')->eq($messageID)->exec();
             if(dao::isError()) return false;
 
-            if(validater::checkEmail($message->email))
+            /* if message type is comment , check is user want to receive email reminder  */
+            if(validater::checkEmail($message->email) && ($message->type != 'comment' || $message->receiveEmail == '1'))
             {
                 $mail = new stdclass();
                 $mail->to      = $message->email;
                 $mail->subject = sprintf($this->lang->message->replySubject, $this->config->site->name);
                 $mail->body    = $reply->content;
 
-                /* if message type is comment , check is user want to receive email reminder  */
-                if($message->type != 'comment' || $message->receiveEmail == '1')
-                {
-                    $this->loadModel('mail')->send($mail->to, $mail->subject, $mail->body);
-                }
+                $this->loadModel('mail')->send($mail->to, $mail->subject, $mail->body);
             }
 
             return true;
