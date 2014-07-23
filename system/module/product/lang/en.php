@@ -63,5 +63,6 @@ $lang->product->statusList['normal']  = 'On sale';
 $lang->product->statusList['offline'] = 'Offline';
 
 $lang->product->placeholder = new stdclass();
-$lang->product->placeholder->label = "Attribute name: price, color etc";
-$lang->product->placeholder->value = "Attribute value: $1000, red etc";
+$lang->product->placeholder->label    = "Attribute name: price, color etc";
+$lang->product->placeholder->value    = "Attribute value: $1000, red etc";
+$lang->product->placeholder->currency = "Such as $";
