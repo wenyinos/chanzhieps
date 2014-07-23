@@ -67,12 +67,9 @@ function initKindeditor(afterInit)
             bodyClass:'article-content',
             urlType:'absolute', 
             uploadJson: createLink('file', 'ajaxUpload', 'uid=' + v.uid),
-            <?php if(RUN_MODE == 'admin'):?>
-            fileManagerJson : createLink('file', 'fileManager'),
-            <?php endif;?>
             imageTabIndex:1,
             filterMode:v.editors.filterMode,
-            allowFileManager:true,
+            allowFileManager:false,
             langType:v.editorLang,
             afterBlur: function(){this.sync();$('#' + editorID).prev('.ke-container').removeClass('focus');},
             afterFocus: function(){$('#' + editorID).prev('.ke-container').addClass('focus');},
