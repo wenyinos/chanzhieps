@@ -54,6 +54,11 @@ $(document).ready(function()
     $('#rightDockerBtn').popover({container: 'body', html:true, trigger:'manual'}).mouseenter(function()
     {
         if($('#rightDockerBtn').hasClass('showed')) return;
+        $('#rightDocker img[data-src]').each(function()
+        {
+            var $this = $(this);
+            $this.attr('src', $this.data('src')).removeAttr('data-src');
+        });
         $(this).addClass('showed').popover('show');
         $("#rightDockerBtn:not('.showed')").popover('hide');
     });

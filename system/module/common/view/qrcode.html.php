@@ -12,13 +12,13 @@
           <?php if(!$public->qrcode) continue;?>
           <td>
             <div class='heading'><i class='icon-weixin'>&nbsp;</i> <?php echo $public->name;?></div>
-            <?php echo html::image($public->qrcode);?>
+            <?php echo html::image('#', "data-src='" . $public->qrcode . "'");?>
           </td>
           <?php endforeach;?>
           <?php if(extension_loaded('gd')):?>
           <td>
             <div class='heading'><i class='icon-mobile-phone'></i> <?php echo $lang->qrcodeTip;?></div>
-            <?php echo html::image($this->createLink('misc', 'qrcode'));?>
+            <?php echo html::image('#', "data-src='" . $this->createLink('misc', 'qrcode') . "'");?>
           </td>
           <?php endif;?>
         </tr>
