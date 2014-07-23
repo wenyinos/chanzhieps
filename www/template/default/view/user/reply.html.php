@@ -8,7 +8,7 @@
         <table class='table table-hover'>
           <thead>
             <tr class='text-center'>
-              <th><?php echo $lang->thread->common/?></th>
+              <th><?php echo $lang->thread->common;?></th>
               <th><?php echo $lang->reply->addedDate;?></th>
             </tr>  
           </thead>
