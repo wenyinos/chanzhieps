@@ -49,11 +49,6 @@ var full =
 'table', 'code', 'hr', '|',
 'fullscreen', 'source', 'about'];
 
-<?php if(RUN_MODE == 'front'):?>
-simple.splice(14, 1);
-full.splice(17, 1);
-<?php endif;?>
-
 $(document).ready(initKindeditor);
 function initKindeditor(afterInit)
 {
