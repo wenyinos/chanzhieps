@@ -111,9 +111,11 @@ class file extends control
             if(!$this->file->checkSavePath()) $this->send(array('result' => 'fail', 'message' => $this->lang->file->errorUnwritable));
             $this->file->edit($fileID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success'));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         }
-        $this->view->file = $file;
+        $this->view->title      = $this->lang->file->edit;
+        $this->view->modalWidth = 500;
+        $this->view->file       = $file;
         $this->display();
     }
 
