@@ -52,7 +52,8 @@ class tag extends control
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
-        $this->view->tag = $this->dao->select('*')->from(TABLE_TAG)->where('id')->eq($tagID)->fetch();
+        $this->view->title = "<i class='icon-edit'></i> " . $this->lang->tag->editLink;
+        $this->view->tag   = $this->dao->select('*')->from(TABLE_TAG)->where('id')->eq($tagID)->fetch();
         $this->display();
     }
 }

@@ -5,7 +5,7 @@ $jsRoot    = $webRoot . "js/";
 $themeRoot = $webRoot . "theme/";
 if(isset($pageCSS)) css::internal($pageCSS);
 ?>
-<div class="modal-dialog" style="width:<?php echo empty($modalWidth) ? 700 : $modalWidth;?>px;">
+<div class="modal-dialog" style="width:<?php echo empty($modalWidth) ? 600 : $modalWidth;?>px;">
   <div class="modal-content">
     <div class="modal-header">
       <?php echo html::closeButton();?>

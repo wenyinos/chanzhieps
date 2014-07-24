@@ -10,28 +10,19 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<div class='modal-dialog w-600px'>
-  <div class='modal-content'>
-    <div class='modal-header'>
-      <?php echo html::closeButton();?>
-      <h4 class='modal-title'><i class='icon-edit'></i> <?php echo $lang->tag->editLink;?></h4>
-    </div>
-    <div class='modal-body'>
-      <form id='ajaxForm' class='form-horizontal' action='<?php echo inlink('link', "tageID={$tag->id}")?>'  method='post'>
-        <div class='form-group'>
-          <label for='link' class='col-xs-3 control-label'><?php echo $tag->tag;?></label>
-          <div class='col-xs-8'>
-            <?php echo html::input('link', $tag->link, "class='form-control' placeholder='{$lang->tag->inputLink}'");?>
-          </div>
-        </div>
-        <div class='form-group'>
-          <div class='col-xs-3'></div>
-          <div class='col-xs-8'>
-            <?php echo html::submitButton();?>
-          </div>
-        </div>
-      </form>
+<?php include '../../common/view/header.modal.html.php';?>
+<form id='ajaxForm' class='form-horizontal' action='<?php echo inlink('link', "tageID={$tag->id}")?>'  method='post'>
+  <div class='form-group'>
+    <label for='link' class='col-xs-3 control-label'><?php echo $tag->tag;?></label>
+    <div class='col-xs-8'>
+      <?php echo html::input('link', $tag->link, "class='form-control' placeholder='{$lang->tag->inputLink}'");?>
     </div>
   </div>
-</div>
-<?php if(isset($pageJS)) js::execute($pageJS);?>
+  <div class='form-group'>
+    <div class='col-xs-3'></div>
+    <div class='col-xs-8'>
+      <?php echo html::submitButton();?>
+    </div>
+  </div>
+</form>
+<?php include '../../common/view/footer.modal.html.php';?>
