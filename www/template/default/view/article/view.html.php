@@ -1,6 +1,6 @@
 <?php 
-include '../common//header.html.php'; 
-include '../common//treeview.html.php'; 
+include '../common/header.html.php'; 
+include '../common/treeview.html.php'; 
 
 /* set categoryPath for topNav highlight. */
 js::set('path', $article->path);
@@ -68,4 +68,4 @@ js::set('articleID', $article->id);
   </div>
   <div class='col-md-3'><?php $this->block->printRegion($layouts, 'article_view', 'side');?></div>
 </div>
-<?php include '../common//footer.html.php'; ?>
+<?php include '../common/footer.html.php'; ?>
