@@ -1,3 +1,18 @@
+.cards {padding: 0; margin: 0 -10px;}
+.cards .col-card {width: 352px; float: left; margin: 0 10px;}
+.cards-themes .col-card {width: 212px;}
+.card {position: relative; margin-bottom: 50px; overflow: visible; cursor: pointer;}
+.card.card-theme {margin-bottom: 20px;}
+.teamplate-choosed, .theme-choosed  {display: none}
+.card.current .teamplate-choosed, .card.current .theme-choosed {display: block; position: absolute; font-size: 28px; color: #fff; background: #229F24; width: 50px; height: 50px; right: 0; top: 0; text-align: center; padding-left: 10px; line-height: 35px; border-bottom-left-radius: 50px;}
+.card-foot {position: absolute; bottom: -30px;}
+.card > img {height: 300px;}
+.card.card-theme > img {height: 180px;}
+.card-caption {position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(0,0,0,0.5); color: #fff;}
+.template-desc {padding: 12px 0; color: #ccc}
+.themes-actions {padding: 12px 0;}
+.themes-actions + .template-desc {padding-top: 2px;}
+.themes-tip {display: inline-block; border-radius: 16px; background: rgba(0,0,0,0.5); padding: 6px 12px;}
+.btn.btn-change-theme {border-radius: 16px;}
 .table-templateinfo tr th {border:none;}
 .table-templateinfo  tr td {border:none;}
-a.theme-preview {max-width:100px;max-height:100px;}

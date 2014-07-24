@@ -10,29 +10,20 @@
  * @link        http://www.zentao.net
  */
 ?>
+<?php include '../common/header.modal.html.php';?>
 <?php js::set('parents', $parents);?>
-<div class='modal-dialog w-600px'>
-  <div class='modal-content'>
-    <div class='modal-header'>
-      <?php echo html::closeButton();?>
-      <h4 class='modal-title'><i class='icon-edit'></i> <?php echo $lang->thread->transfer;?></h4>
-    </div>
-    <div class='modal-body'>
-      <form id='ajaxForm' class='form-horizontal' action='<?php echo inlink('transfer', "threadID={$thread->id}")?>'  method='post'>
-        <div class='form-group'>
-          <label for='link' class='col-xs-3 control-label'><?php echo $lang->thread->board;?></label>
-          <div class='col-xs-8'>
-            <?php echo html::select('targetBoard', $boards, $thread->board, "class='form-control chosen'");?>
-          </div>
-        </div>
-        <div class='form-group'>
-          <div class='col-xs-3'></div>
-          <div class='col-xs-8'>
-            <?php echo html::submitButton();?>
-          </div>
-        </div>
-      </form>
+<form id='ajaxForm' class='form-horizontal' action='<?php echo inlink('transfer', "threadID={$thread->id}")?>'  method='post'>
+  <div class='form-group'>
+    <label for='link' class='col-xs-2 control-label'><?php echo $lang->thread->board;?></label>
+    <div class='col-xs-8'>
+      <?php echo html::select('targetBoard', $boards, $thread->board, "class='form-control chosen'");?>
     </div>
   </div>
-</div>
-<?php if(isset($pageJS)) js::execute($pageJS);?>
+  <div class='form-group'>
+    <div class='col-xs-2'></div>
+    <div class='col-xs-8'>
+      <?php echo html::submitButton();?>
+    </div>
+  </div>
+</form>
+<?php include '../common/footer.modal.html.php';?>

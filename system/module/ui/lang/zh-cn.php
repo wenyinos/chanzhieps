@@ -26,13 +26,16 @@ $lang->ui->favicon = new stdclass();
 $lang->ui->favicon->help  = "帮助";
 
 $lang->ui->template = new stdclass();
-$lang->ui->template->name           = '名称';
-$lang->ui->template->version        = '版本';
-$lang->ui->template->author         = '作者';
-$lang->ui->template->charge         = '费用';
-$lang->ui->template->chanzhiVersion = '兼容版本';
-$lang->ui->template->desc           = '简介';
-$lang->ui->template->theme          = '主题';
-$lang->ui->template->license        = '版权';
+$lang->ui->template->name            = '名称';
+$lang->ui->template->version         = '版本';
+$lang->ui->template->author          = '作者';
+$lang->ui->template->charge          = '费用';
+$lang->ui->template->chanzhiVersion  = '兼容版本';
+$lang->ui->template->desc            = '简介';
+$lang->ui->template->theme           = '主题';
+$lang->ui->template->license         = '版权';
+$lang->ui->template->availableThemes = '<strong>%s</strong> 款可用主题';
+$lang->ui->template->currentTheme    = '正在使用 <strong>%s</strong>';
+$lang->ui->template->changeTheme     = '切换主题';
 
 $lang->ui->template->enable = '启用';

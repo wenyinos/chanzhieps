@@ -178,6 +178,7 @@ class thread extends control
 
         $parents = $this->dao->select('*')->from(TABLE_CATEGORY)->where('parent')->eq(0)->andWhere('type')->eq('forum')->fetchAll('id');
 
+        $this->view->title   = "<i class='icon-edit'></i> " . $this->lang->thread->transfer;
         $this->view->parents = array_keys($parents);
         $this->view->thread  = $thread;
         $this->view->boards  = $this->loadModel('tree')->getOptionMenu('forum', 0, $removeRoot = true);
