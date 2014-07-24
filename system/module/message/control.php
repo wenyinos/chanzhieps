@@ -156,7 +156,11 @@ class message extends control
             $this->send(array('result' => 'fail', 'reason' => 'error', 'message' => dao::getError()));
         }
 
-        $this->view->message = $this->message->getByID($messageID);
+        $message = $this->message->getByID($messageID);
+
+        $this->view->title      = "<i class='icon-mail-reply'></i> " . $this->lang->message->reply . ':' . $message->from;
+        $this->view->modalWidth = 600;
+        $this->view->message    = $message;
         $this->display();
     }
 
