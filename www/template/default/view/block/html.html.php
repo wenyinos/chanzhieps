@@ -13,7 +13,10 @@
 <?php if(!is_object($block->content)) $block->content = json_decode($block->content);?>
 <div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
   <div class='panel-heading'>
-    <h4><?php echo $icon . $block->title;?></h4>
+    <strong><?php echo $icon . $block->title;?></strong>
+    <?php if(!empty($block->content->moreText) and !empty($block->content->moreUrl)):?>
+    <div class='pull-right'><?php echo html::a($block->content->moreUrl, $block->content->moreText);?></div>
+    <?php endif;?>
   </div>
   <div class='panel-body'>
     <div class='article-content'><?php echo $block->content->content;?></div>
