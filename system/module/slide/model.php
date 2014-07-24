@@ -74,7 +74,7 @@ class slideModel extends model
         $slide->createdDate   = time();
         if($slide->backgroundType == 'color')
         {
-            $this->dao->insert('slide')->data($slide, 'label,buttonClass,buttonUrl,buttonTarget')->batchCheck('backgroundColor,height', 'notempty')->check('height', 'ge', 100);
+            $this->dao->insert('slide')->data($slide, 'label,buttonClass,buttonUrl,buttonTarget')->batchCheck($this->config->slide->require->create, 'notempty')->check('height', 'ge', 100);
             if(dao::isError()) return false;
         }
 
@@ -107,7 +107,7 @@ class slideModel extends model
 
         if($slide->backgroundType == 'color')
         {
-            $this->dao->insert('slide')->data($slide, 'label,buttonClass,buttonUrl,buttonTarget')->batchCheck('backgroundColor,height', 'notempty')->check('height', 'ge', 100);
+            $this->dao->insert('slide')->data($slide, 'label,buttonClass,buttonUrl,buttonTarget')->batchCheck($this->config->slide->require->edit, 'notempty')->check('height', 'ge', 100);
             if(dao::isError()) return false;
         }
 
