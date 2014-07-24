@@ -88,6 +88,8 @@ class file extends control
      */
     public function browse($objectType, $objectID, $isImage = null)
     {
+        $this->view->title      = "<i class='icon-paper-clip'></i>" . $this->lang->file->browse;
+        $this->view->modalWidth = 1000;
         $this->view->writeable  = $this->file->checkSavePath();
         $this->view->objectType = $objectType;
         $this->view->objectID   = $objectID;
