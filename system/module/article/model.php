@@ -291,6 +291,7 @@ class articleModel extends model
 
         $article->keywords = seo::unify($article->keywords, ',');
         $article->alias    = seo::unify($article->alias, '-');
+        $article->content  = $this->deleteHtmlEmptyLine($article->content);
 
         $this->dao->insert(TABLE_ARTICLE)
             ->data($article, $skip = 'categories,uid')
@@ -334,7 +335,8 @@ class articleModel extends model
 
         $article->keywords = seo::unify($article->keywords, ',');
         $article->alias    = seo::unify($article->alias, '-');
-        
+        $article->content  = $this->deleteHtmlEmptyLine($article->content);
+
         $this->dao->update(TABLE_ARTICLE)
             ->data($article, $skip = 'categories,uid')
             ->autoCheck()
@@ -430,5 +432,24 @@ class articleModel extends model
         }
 
         return commonModel::createFrontLink($module, 'view', $param, $alias);
+    }
+    /**
+     * Delete '<p><br /></p>' if it at string's last. 
+     * 
+     * @param  string    $content 
+     * @access public
+     * @return string
+     */
+    public function deleteHtmlEmptyLine($content)
+    {
+        /* Delete empty line such as '<p><br /></p>' if article content has it at last */
+        $res   = '';
+        $match = '/(\s+?<p><br \/>\s+?<\/p>)+$/';
+        preg_match($match, $content, $res);
+        if(isset($res[0]))
+        {
+            $content = substr($content, 0, strlen($content) - strlen($res[0]));
+        }
+        return $content;
     }
 }
