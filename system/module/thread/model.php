@@ -151,7 +151,7 @@ class threadModel extends model
         $this->dao->insert(TABLE_THREAD)
             ->data($thread, $skip = 'captcha, uid')
             ->autoCheck()
-            ->batchCheck('title, content', 'notempty')
+            ->batchCheck($this->config->thread->require->post, 'notempty')
             ->check('captcha', 'captcha')
             ->exec();
 
@@ -214,7 +214,7 @@ class threadModel extends model
         $this->dao->update(TABLE_THREAD)
             ->data($thread, $skip = 'captcha, uid')
             ->autoCheck()
-            ->batchCheck('title, content', 'notempty')
+            ->batchCheck($this->config->thread->require->edit, 'notempty')
             ->check('captcha', 'captcha')
             ->where('id')->eq($threadID)
             ->exec();

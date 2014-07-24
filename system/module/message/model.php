@@ -160,7 +160,7 @@ class messageModel extends model
             ->check('captcha', 'captcha')
             ->check('type', 'in', $this->config->message->types)
             ->checkIF(!empty($message->email), 'email', 'email')
-            ->batchCheck('from, type, content', 'notempty')
+            ->batchCheck($this->config->message->require->post, 'notempty')
             ->exec();
 
         if(dao::isError()) return false;
@@ -195,7 +195,7 @@ class messageModel extends model
             ->autoCheck()
             ->check('captcha', 'captcha')
             ->check('type', 'in', $this->config->message->types)
-            ->batchCheck('from, type, content', 'notempty')
+            ->batchCheck($this->config->message->require->reply, 'notempty')
             ->exec();
 
         if(!dao::isError()) 
