@@ -108,6 +108,7 @@ class block extends control
         $blocks = $this->block->getRegionBlocks($page, $region);
         if(empty($blocks)) $blocks = array(new stdclass());
 
+        $this->view->title        = "<i class='icon-cog'></i>" . $this->lang->block->setPage . ' - '. $this->lang->block->pages[$page] . ' - ' . $this->lang->block->regions->{$page}[$region];
         $this->view->page         = $page;
         $this->view->region       = $region;
         $this->view->blocks       = $blocks;
