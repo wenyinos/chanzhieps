@@ -1,6 +1,7 @@
 <?php
 $config->tree->require = new stdclass();
 $config->tree->require->edit = 'name';
+$config->tree->require->link = 'name, link';
 
 $config->tree->editor = new stdclass();
 $config->tree->editor->edit = array('id' => 'desc', 'tools' => 'simple');

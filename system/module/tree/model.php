@@ -427,7 +427,8 @@ class treeModel extends model
         $this->dao->update(TABLE_CATEGORY)
             ->data($category, $skip = 'uid,isLink')
             ->autoCheck()
-            ->check($this->config->tree->require->edit, 'notempty')
+            ->checkIF(!$this->post->isLink, $this->config->tree->require->edit, 'notempty')
+            ->batchCheckIF($this->post->isLink, $this->config->tree->require->link, 'notempty')
             ->where('id')->eq($categoryID)
             ->exec();
 
