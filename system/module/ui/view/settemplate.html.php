@@ -15,12 +15,12 @@
 <div class='panel'>
   <div class='panel-heading'><strong><?php echo $lang->ui->setTemplate;?></strong></div>
   <div class='panel-body'>
-    <div class='cards cards-templates'>
+    <div class='cards cards-templates' data-template='<?php echo $this->config->site->template?>' data-theme='<?php echo $this->config->site->theme?>'>
       <?php foreach($templates as $template):?>
       <?php
       $desc  = $template['desc'];
       $count = count($template['themes']);
-      $isCurrent = $config->site->template == $template['code'];
+      $isCurrent = $this->config->site->template == $template['code'];
       $themeName = $isCurrent ? $this->config->site->theme : 'default';
       ?>
       <div class='col-card'>
@@ -29,7 +29,7 @@
           <?php echo html::image($templateRoot . 'theme/' . $themeName . '/preview.png');?>
           <div class='card-caption'>
             <?php if($count > 1):?>
-              <div class='themes-actions text-center'><span class='themes-tip'><?php printf($lang->ui->template->availableThemes, $count);?> &nbsp; <span class='theme-name'><?php if($isCurrent) printf($lang->ui->template->currentTheme, $template['themes'][$this->config->site->theme]) ?></span></span> &nbsp; <button type='button' data-toggle='modal' data-target='#chooseThemes' class='btn btn-success btn-change-theme'><?php echo $lang->ui->template->changeTheme;?></button></div>
+            <div class='themes-actions text-center'><span class='themes-tip'><?php printf($lang->ui->template->availableThemes, $count);?> &nbsp; <span class='theme-name'><?php if($isCurrent) printf($lang->ui->template->currentTheme, $template['themes'][$this->config->site->theme]) ?></span></span> &nbsp; <button type='button' data-toggle='modal' data-target='#chooseThemes' class='btn btn-success btn-change-theme'><?php echo $lang->ui->template->changeTheme;?></button></div>
             <?php endif;?>
             <?php if(!empty($desc)):?>
             <div class="template-desc text-center"><?php echo $desc;?></div>

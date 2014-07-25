@@ -1,7 +1,8 @@
 $(document).ready(function()
 {
-    var template = 'default';
-    var theme = 'default';
+    var cardsT = $('.cards-templates');
+    var template = cardsT.data('template');
+    var theme = cardsT.data('theme');
     var modal = $('#chooseThemes');
 
     $('.card-template').click(function()
