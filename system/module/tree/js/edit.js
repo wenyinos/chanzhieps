@@ -25,7 +25,6 @@ $(document).ready(function()
         {   
             $('.categoryInfo').removeClass('hidden');
             $('.link').addClass('hidden');
-            $('.link input').val('');
         }   
     }); 
 

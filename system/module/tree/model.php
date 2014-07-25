@@ -402,7 +402,10 @@ class treeModel extends model
         $category = fixer::input('post')
             ->join('moderators', ',')
             ->stripTags('desc', $this->config->allowedTags->admin)
-            ->setDefault('readonly', 0)->get();
+            ->setDefault('readonly', 0)
+            ->setIF(!$this->post->isLink, 'link', '')
+            ->get();
+
         $category->alias    = seo::unify($category->alias, '-');
         $category->keywords = seo::unify($category->keywords, ',');
 
