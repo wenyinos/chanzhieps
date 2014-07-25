@@ -84,17 +84,20 @@ js::set('productID', $product->id);
                 $attributeHtml .= "<li><span class='meta-name'>" . $lang->product->origin . "</span>";
                 $attributeHtml .= "<span class='meta-value'>" . $product->origin . "</span></li>";
               }
-                
-              if(!$attributeHtml) $attributeHtml = "<li>$product->summary</li>";
-              echo $attributeHtml;
+              foreach($product->attributes as $attribute)
+              {
+                  if(empty($attribute->label) and empty($attribute->value)) continue;
+                  $attributeHtml .= "<li><span class='meta-name'>" . $attribute->label . "</span>";
+                  $attributeHtml .= "<span class='meta-value'>" . $attribute->value . "</span></li>";
+              }
               ?>
-              <?php foreach($product->attributes as $attribute):?>
-              <li>
-                <span class='meta-name'><?php echo $attribute->label;?></span>
-                <span class='meta-value'><?php echo $attribute->value;?></span>
-              </li>
-              <?php endforeach;?>
             </ul>
+            <?php
+            if(empty($attributeHtml))
+            {
+                echo '<p class="product-summary">' . $product->summary . '</p>';
+            }
+            ?>
             <?php if($product->mall):?>
             <hr>
             <div class='btn-buy'>

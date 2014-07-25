@@ -28,7 +28,7 @@
   <div class='col-md-2'>
     <?php if($moduleMenu) echo $moduleMenu;?>
     <?php if(!empty($treeModuleMenu)):?>
-    <div class='panel category-nav affix'>
+    <div class='panel category-nav affix hiddden-xs hidden-sm'>
     <div class='panel-heading'><strong><?php echo $lang->tree->browseByCategory;?></strong></div>
        <div class='panel-body'><?php echo $treeModuleMenu;?></div>
     </div>
