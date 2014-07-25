@@ -4,11 +4,12 @@
 .card {position: relative; margin-bottom: 50px; overflow: visible; cursor: pointer;}
 .card.card-theme {margin-bottom: 20px;}
 .teamplate-choosed, .theme-choosed  {display: none}
-.card.current .teamplate-choosed, .card.current .theme-choosed {display: block; position: absolute; font-size: 28px; color: #fff; background: #229F24; width: 50px; height: 50px; right: 0; top: 0; text-align: center; padding-left: 10px; line-height: 35px; border-bottom-left-radius: 50px;}
+.card.current .teamplate-choosed, .card.current .theme-choosed {display: block; position: absolute; font-size: 28px; color: #fff; background: #229F24; width: 50px; height: 50px; right: 0; top: 0; text-align: center; padding-left: 10px; line-height: 35px; border-bottom-left-radius: 50px; z-index: 99}
 .card-foot {position: absolute; bottom: -30px;}
-.card > img {height: 300px;}
+.card > img {height: 300px; opacity: 0.8}
+.card:hover>img {opacity: 1}
 .card.card-theme > img {height: 180px;}
-.card-caption {position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(0,0,0,0.5); color: #fff;}
+.card-caption {position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(0,0,0,0.7); color: #fff;}
 .template-desc {padding: 12px 0; color: #ccc}
 .themes-actions {padding: 12px 0;}
 .themes-actions + .template-desc {padding-top: 2px;}
