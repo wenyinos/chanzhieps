@@ -13,6 +13,5 @@ if(isset($pageCSS)) css::internal($pageCSS);
     </div>
     <div class="modal-body">
 <?php else:?>
-<?php if(RUN_MODE == 'front') include 'header.html.php';?>
-<?php if(RUN_MODE == 'admin') include 'header.admin.html.php';?>
+<?php include 'header.html.php';?>
 <?php endif;?>

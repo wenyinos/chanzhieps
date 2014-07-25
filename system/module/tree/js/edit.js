@@ -14,4 +14,20 @@ $(document).ready(function()
         });
     });
 
+    $('#isLink').change(function()
+    {   
+        if($(this).prop('checked'))
+        {   
+            $('.categoryInfo').addClass('hidden');
+            $('.link').removeClass('hidden');
+        }   
+        else
+        {   
+            $('.categoryInfo').removeClass('hidden');
+            $('.link').addClass('hidden');
+            $('.link input').val('');
+        }   
+    }); 
+
+    $('#isLink').change();
 });

@@ -211,6 +211,7 @@ $lang->forum->menu->update = '更新数据|forum|update|';
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
 $lang->site->menu->basic     = '站点设置|site|setbasic|';
+$lang->site->menu->extension = '扩展设置|extension|browse|';
 $lang->site->menu->nav       = '导航设置|nav|admin|';
 $lang->site->menu->tag       = '关键词设置|tag|admin|';
 $lang->site->menu->oauth     = '开放登录|site|setoauth|';
@@ -258,6 +259,14 @@ $lang->block->menu = $lang->ui->menu;
 /* Menu of tree module. */
 $lang->links = new stdclass();
 $lang->links->menu = $lang->site->menu;
+
+/* Menu of extension module. */
+$lang->extension = new stdclass();
+$lang->extension->menu = new stdclass();
+
+$lang->extension->menu->browse = '扩展列表|extension|browse|';
+$lang->extension->menu->obtain = '获得插件|extension|obtain|';
+$lang->extension->menu->upload = '本地安装|extension|upload|';
 
 /* The error messages. */
 $lang->error = new stdclass();

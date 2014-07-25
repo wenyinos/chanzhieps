@@ -402,7 +402,9 @@ class user extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         }
 
-        $this->view->user = $this->user->getByAccount($this->app->user->account);
+        $this->view->title      = "<i class='icon-key'></i> " . $this->lang->user->changePassword;
+        $this->view->modalWidth = 500; 
+        $this->view->user       = $this->user->getByAccount($this->app->user->account);
         $this->display();
     }
 

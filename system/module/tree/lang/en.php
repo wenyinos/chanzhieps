@@ -38,6 +38,8 @@ $lang->category->parent   = 'Parent';
 $lang->category->desc     = 'Description';
 $lang->category->keywords = 'Keyword';
 $lang->category->children = "Children";
+$lang->category->isLink   = 'Locate';
+$lang->category->link     = 'Link';
 
 /* Lang items for forum. */
 $lang->board = new stdclass();
@@ -50,6 +52,8 @@ $lang->board->keywords   = 'Keyword';
 $lang->board->children   = "Children";
 $lang->board->readonly   = 'Readonly';
 $lang->board->moderators = 'Moderators';
+$lang->board->isLink     = 'Locate';
+$lang->board->link       = 'Link';
 
 $lang->board->readonlyList[0] = 'Pulic';
 $lang->board->readonlyList[1] = 'Readonly';

@@ -204,7 +204,7 @@ class product extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
         }
 
-        $this->view->title = $this->lang->product->currency;
+        $this->view->title = "<i class='icon-cog'></i> " . $this->lang->product->currency;
         $this->display();
     }
 

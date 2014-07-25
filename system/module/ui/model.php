@@ -32,6 +32,11 @@ class uiModel extends model
         return $templates;
     }
 
+    public function getTemplateOptions()
+    {
+        
+    }
+
     /**
      * Set UI option with file. 
      * 

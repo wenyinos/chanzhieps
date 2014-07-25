@@ -76,9 +76,11 @@ class wechat extends control
 
         if($_POST) $this->send($this->wechat->reply($this->api, $message));
 
-        $this->view->public  = $this->wechat->getByID($message->public);
-        $this->view->records = $this->wechat->getRecords($message);
-        $this->view->message = $message;
+        $this->view->title      = "<i class='icon-mail-reply'></i> " . $lang->wechat->message->reply;
+        $this->view->modalWidth = 700;
+        $this->view->public     = $this->wechat->getByID($message->public);
+        $this->view->records    = $this->wechat->getRecords($message);
+        $this->view->message    = $message;
         $this->display();
     }
 
@@ -334,8 +336,10 @@ class wechat extends control
             $this->send(array('result' => 'fail', 'message' => $return['message']));
         }
 
-        $this->view->qrcodeURL = $qrcodeURL;
-        $this->view->public    = $public;
+        $this->view->title      = "<i class='icon-paper-clip'></i> " . $this->lang->wechat->qrcode;
+        $this->view->modalWidth = 1000;
+        $this->view->qrcodeURL  = $qrcodeURL;
+        $this->view->public     = $public;
         $this->display();
     }
 }

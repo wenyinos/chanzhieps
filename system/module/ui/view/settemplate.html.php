@@ -15,39 +15,56 @@
 <div class='panel'>
   <div class='panel-heading'><strong><?php echo $lang->ui->setTemplate;?></strong></div>
   <div class='panel-body'>
-    <table class='table table-bordered table-hover'>
+    <div class='cards cards-templates'>
       <?php foreach($templates as $template):?>
-      <tr>
-        <td>
-          <table class='table table-templateinfo'>
-            <tr>
-              <th class='w-60px text-center'><?php echo $lang->ui->template->name;?></th>
-              <td>
-                <?php echo $template['name']?>
-                <?php if($config->site->template != $template['code']) echo html::a(inlink('setTemplate', "template={$template['code']}"), $lang->ui->template->enable, "class='btn btn-primary pull-right'");?>
-              </td>
-            </tr>
-            <tr><th class='text-center'><?php echo $lang->ui->template->author;?></th><td><?php echo $template['author']?></td></tr>
-            <tr><th class='text-center'><?php echo $lang->ui->template->desc;?></th><td><?php echo $template['desc']?></td></tr>
-            <tr>
-              <th class='w-80px text-center'><?php echo $lang->ui->template->theme;?></th>
-              <td>
-                <?php foreach($template['themes'] as $theme => $name):?>
-                <?php
+      <?php
+      $desc  = $template['desc'];
+      $count = count($template['themes']);
+      $isCurrent = $config->site->template == $template['code'];
+      $themeName = $isCurrent ? $this->config->site->theme : 'default';
+      ?>
+      <div class='col-card'>
+        <div class="card-template card<?php if($isCurrent) echo ' current';?>" data-template='<?php echo $template['code']?>' data-url='<?php echo inlink('settheme', "template={$template['code']}&theme={$themeName}") ?>' data-theme='<?php echo $themeName;?>'>
+          <i class='icon-ok teamplate-choosed'></i>
+          <?php echo html::image($templateRoot . 'theme/' . $themeName . '/preview.png');?>
+          <div class='card-caption'>
+            <?php if($count > 1):?>
+              <div class='themes-actions text-center'><span class='themes-tip'><?php printf($lang->ui->template->availableThemes, $count);?> &nbsp; <span class='theme-name'><?php if($isCurrent) printf($lang->ui->template->currentTheme, $template['themes'][$this->config->site->theme]) ?></span></span> &nbsp; <button type='button' data-toggle='modal' data-target='#chooseThemes' class='btn btn-success btn-change-theme'><?php echo $lang->ui->template->changeTheme;?></button></div>
+            <?php endif;?>
+            <?php if(!empty($desc)):?>
+            <div class="template-desc text-center"><?php echo $desc;?></div>
+            <?php endif;?>
+          </div>
+          <?php if($count > 1):?>
+          <ul class='themes-list hide'>
+            <?php foreach($template['themes'] as $theme => $name):?>
+              <li>
+              <?php
                 $url = inlink('settheme', "template={$template['code']}&theme={$theme}");
                 $previewImage = html::image($templateRoot . 'theme/' . $theme . '/preview.png');
                 $currentClass = ($config->site->theme == $theme) ? 'btn-success' : '';
-                echo html::a($url, $previewImage, "class='theme-preview btn btn-lg {$currentClass}' title='{$name}'") 
-                ?>
-                <?php endforeach;?>
-              </td>
-            </tr>
-          </table>
-        </td>
-        <td class='w-p30 text-center'> <?php echo html::image($templateRoot . 'theme/' . $this->config->site->theme . '/preview.png', "class='w-p100'");?> </td>
-      </tr>
+                echo html::a($url, $previewImage, "class='theme-preview btn btn-lg {$currentClass}' title='{$name}' data-theme='{$theme}'");
+              ?>
+              </li>
+            <?php endforeach;?>
+          </ul>
+          <?php endif;?>
+          <div class="card-foot"><strong><?php echo $template['name']?></strong> &nbsp; <span class='text-muted'><?php echo $lang->ui->template->author . $lang->colon . $template['author'];?></span></div>
+        </div>
+      </div>
       <?php endforeach;?>
-    </table>
+    </div>
+  </div>
+</div>
+<div class='modal fade' id='chooseThemes'>
+  <div class='modal-dialog' style='width: 950px;'>
+    <div class='modal-content'>
+      <div class='modal-header'><i class='icon-cog'></i> <strong><?php echo $lang->ui->template->changeTheme;?></strong></div>
+      <div class='modal-body'>
+        <div class='cards cards-themes'>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>

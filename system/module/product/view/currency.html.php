@@ -10,25 +10,14 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<div class='modal-dialog w-500px'>
-  <div class='modal-content'>
-    <div class='modal-header'>
-      <?php echo html::closeButton();?>
-      <h4 class='modal-title' id='myModalLabel'>
-        <i class='icon-cog'></i> <?php echo $lang->product->currency;?>
-      </h4>
-    </div>
-    <div class='modal-body'>
-      <form id='ajaxForm' action="<?php echo inlink('currency');?>" method='post'>
-        <table class="table table-form">
-          <tr>
-            <th class='w-70px'><?php echo $lang->product->currency;?></th>
-            <td><?php echo html::input('currency', $config->product->currency, "class='form-control' placeholder='{$lang->product->placeholder->currency}'");?></td>
-            <td class='w-160px'><?php echo html::submitButton();?></td>
-          </tr>
-        </table>
-      </form>
-    </div>
-  </div>
-</div>
-<?php if(isset($pageJS)) js::execute($pageJS);?>
+<?php include '../../common/view/header.modal.html.php';?>
+<form id='ajaxForm' action="<?php echo inlink('currency');?>" method='post'>
+  <table class="table table-form">
+    <tr>
+      <th class='w-70px'><?php echo $lang->product->currency;?></th>
+      <td><?php echo html::input('currency', $config->product->currency, "class='form-control' placeholder='{$lang->product->placeholder->currency}'");?></td>
+      <td class='w-160px'><?php echo html::submitButton();?></td>
+    </tr>
+  </table>
+</form>
+<?php include '../../common/view/footer.modal.html.php';?>

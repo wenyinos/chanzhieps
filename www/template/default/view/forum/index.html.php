@@ -22,8 +22,12 @@
         <tr class='text-center text-middle'>
           <td class='w-20px'><?php echo $this->forum->isNew($childBoard) ? "<span class='text-success'><i class='icon-comment icon-large'></i></span>" : "<span class='text-muted'><i class='icon-comment icon-large'></i></span>"; ?></td>
           <td class='text-left'>
+            <?php if($childBoard->link):?>
+            <strong><?php echo html::a($childBoard->link, $childBoard->name);?></strong><br />
+            <?php else:?>
             <strong><?php echo html::a(inlink('board', "id=$childBoard->id", "category={$childBoard->alias}"), $childBoard->name);?></strong><br />
             <small class='text-muted'><?php echo $childBoard->desc;?></small>
+            <?php endif;?>
           </td>
           <td class='w-120px hidden-xs'><strong><nobr><?php foreach($childBoard->moderators as $moderators) echo $moderators . ' ';?></nobr></strong></td>
           <td class='w-70px hidden-xxxs'><?php echo $childBoard->threads;?></td>
