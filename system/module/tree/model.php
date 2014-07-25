@@ -313,8 +313,7 @@ class treeModel extends model
      */
     public static function createBrowseLink($category)
     {
-        if($category->link)  $linkHtml = html::a($category->link, $category->name, "id='category{$category->id}'");
-        if(!$category->link) $linkHtml = html::a(helper::createLink('article', 'browse', "categoryID={$category->id}", "category={$category->alias}"), $category->name, "id='category{$category->id}'");
+        $linkHtml = html::a(helper::createLink('article', 'browse', "categoryID={$category->id}", "category={$category->alias}"), $category->name, "id='category{$category->id}'");
         return $linkHtml;
     }
 
@@ -327,8 +326,7 @@ class treeModel extends model
      */
     public static function createProductBrowseLink($category)
     {
-        if($category->link)  $linkHtml = html::a($category->link, $category->name, "id='category{$category->id}'");
-        if(!$category->link) $linkHtml = html::a(helper::createLink('product', 'browse', "categoryID={$category->id}", "category={$category->alias}"), $category->name, "id='category{$category->id}'");
+        $linkHtml = html::a(helper::createLink('product', 'browse', "categoryID={$category->id}", "category={$category->alias}"), $category->name, "id='category{$category->id}'");
         return $linkHtml;
     }
 
@@ -341,8 +339,7 @@ class treeModel extends model
      */
     public static function createBlogBrowseLink($category)
     {
-        if($category->link)  $linkHtml = html::a($category->link, $category->name, "id='category{$category->id}'");
-        if(!$category->link) $linkHtml = html::a(helper::createLink('blog', 'index', "category={$category->id}", "category={$category->alias}"), $category->name, "id='category{$category->id}'");
+        $linkHtml = html::a(helper::createLink('blog', 'index', "category={$category->id}", "category={$category->alias}"), $category->name, "id='category{$category->id}'");
         return $linkHtml;
     }
 

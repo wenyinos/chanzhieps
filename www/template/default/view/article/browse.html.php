@@ -14,7 +14,6 @@ include '../common/treeview.html.php';
       <section class='items items-hover'>
         <?php foreach($articles as $article):?>
         <?php $url = inlink('view', "id=$article->id", "category={$category->alias}&name=$article->alias");?>
-        <?php if($article->link) $url = $article->link;?>
         <div class='item'>
           <div class='item-heading'>
             <div class="text-muted pull-right">

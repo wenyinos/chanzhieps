@@ -34,10 +34,17 @@ class article extends control
      */
     public function browse($categoryID = 0, $pageID = 1)
     {   
+        $category = $this->loadModel('tree')->getByID($categoryID, 'article');
+
+        if($category->link)
+        {
+             header('HTTP/1.1 301 Moved Permanently');
+             die(header('Location:' . $category->link));
+        }
+
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal = 0, $this->config->article->recPerPage, $pageID);
 
-        $category   = $this->loadModel('tree')->getByID($categoryID, 'article');
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
         $articles   = $this->article->getList('article', $this->tree->getFamily($categoryID, 'article'), 'addedDate_desc', $pager);
 
@@ -181,6 +188,12 @@ class article extends control
     {
         $article  = $this->article->getByID($articleID);
         if(!$article) die($this->fetch('error', 'index'));
+
+        if($article->link)
+        {
+            header('HTTP/1.1 301 Moved Permanently');
+            die(header('Location:' . $article->link));
+        }
 
         /* fetch category for display. */
         $category = array_slice($article->categories, 0, 1);

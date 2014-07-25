@@ -21,10 +21,11 @@ class blog extends control
      */
     public function index($categoryID = 0, $pageID = 1)
     {   
+        $category = $this->loadModel('tree')->getByID($categoryID, 'blog');
+
         $this->app->loadClass('pager', $static = true);
         $pager = new pager(0, $this->config->blog->recPerPage, $pageID);
 
-        $category   = $this->loadModel('tree')->getByID($categoryID, 'blog');
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
         $articles   = $this->loadModel('article')->getList('blog', $this->tree->getFamily($categoryID, 'blog'), $orderBy = 'addedDate_desc', $pager);
 
@@ -35,6 +36,12 @@ class blog extends control
  
         if($category)
         {
+            if($category->link)
+            {
+                 header('HTTP/1.1 301 Moved Permanently');
+                 die(header('Location:' . $category->link));
+            }
+
             $this->view->category = $category;
             $this->view->title    = $category->name;
             $this->view->keywords = trim($category->keywords . ' ' . $this->config->site->keywords);

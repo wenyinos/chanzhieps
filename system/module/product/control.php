@@ -35,10 +35,17 @@ class product extends control
      */
     public function browse($categoryID = 0, $pageID = 1)
     {  
+        $category = $this->loadModel('tree')->getByID($categoryID, 'product');
+
+        if($category->link)
+        {
+             header('HTTP/1.1 301 Moved Permanently');
+             die(header('Location:' . $category->link));
+        }
+
         $this->app->loadClass('pager', $static = true);
         $pager = new pager(0, $this->config->product->recPerPage, $pageID);
 
-        $category   = $this->loadModel('tree')->getByID($categoryID, 'product');
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
         $products   = $this->product->getList($this->tree->getFamily($categoryID), 'id_desc', $pager);
 
