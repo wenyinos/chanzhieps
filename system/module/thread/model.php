@@ -140,6 +140,7 @@ class threadModel extends model
         $thread = fixer::input('post')
             ->stripTags('content', $allowedTags)
             ->setIF(!$canManage, 'readonly', 0)
+            ->setIF(!$this->post->isLink, 'link', '')
             ->setForce('board', $boardID)
             ->setForce('author', $this->app->user->account)
             ->setForce('addedDate', $now) 
@@ -149,9 +150,10 @@ class threadModel extends model
             ->get();
 
         $this->dao->insert(TABLE_THREAD)
-            ->data($thread, $skip = 'captcha, uid')
+            ->data($thread, $skip = 'captcha, uid, isLink')
             ->autoCheck()
-            ->batchCheck($this->config->thread->require->post, 'notempty')
+            ->batchCheckIF(!$this->post->isLink, $this->config->thread->require->post, 'notempty')
+            ->batchCheckIF($this->post->isLink, $this->config->thread->require->link, 'notempty')
             ->check('captcha', 'captcha')
             ->exec();
 
@@ -204,6 +206,7 @@ class threadModel extends model
 
         $thread = fixer::input('post')
             ->setIF(!$canManage, 'readonly', 0)
+            ->setIF(!$this->post->isLink, 'link', '')
             ->stripTags('content', $allowedTags)
             ->setForce('editor', $this->session->user->account)
             ->setForce('editedDate', helper::now())
@@ -212,9 +215,10 @@ class threadModel extends model
             ->get();
 
         $this->dao->update(TABLE_THREAD)
-            ->data($thread, $skip = 'captcha, uid')
+            ->data($thread, $skip = 'captcha, uid, isLink')
             ->autoCheck()
-            ->batchCheck($this->config->thread->require->edit, 'notempty')
+            ->batchCheckIF(!$this->post->isLink, $this->config->thread->require->edit, 'notempty')
+            ->batchCheckIF($this->post->isLink, $this->config->thread->require->link, 'notempty')
             ->check('captcha', 'captcha')
             ->where('id')->eq($threadID)
             ->exec();

@@ -15,5 +15,7 @@ $(document).ready(function()
         }
     });
 
+    $('#isLink').change();
+
     $('.nav-system-forum').addClass('active');
 });

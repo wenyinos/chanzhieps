@@ -10,8 +10,8 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php include '../common//header.html.php';?>
-<?php include '../common//kindeditor.html.php';?>
+<?php include '../common/header.html.php';?>
+<?php include '../common/kindeditor.html.php';?>
 
 <?php $common->printPositionBar($board);?>
 
@@ -27,7 +27,12 @@
             <?php echo html::input('title', '', "class='form-control'");?>
             <span class='input-group-addon'>
               <label class='checkbox'>
-                  <?php echo "<input type='checkbox' name='readonly' value='1'/><span>{$lang->thread->readonly}</span>" ?>
+                <?php echo "<input type='checkbox' name='isLink' id='isLink' value='1'/><span>{$lang->thread->isLink}</span>" ?>
+              </label>
+            </span>
+            <span class='input-group-addon threadInfo'>
+              <label class='checkbox'>
+                <?php echo "<input type='checkbox' name='readonly' value='1'/><span>{$lang->thread->readonly}</span>" ?>
               </label>
             </span>
           </div>
@@ -36,15 +41,21 @@
         <?php endif;?>
         </div>
       </div>
-      <div class='form-group'>
-        <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->thread->content;?></label>
-        <div class='col-md-11 col-sm-10'><?php echo html::textarea('content', '', "rows='15' class='form-control'");?></div>
+      <div class='threadInfo'>
+        <div class='form-group'>
+          <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->thread->content;?></label>
+          <div class='col-md-11 col-sm-10'><?php echo html::textarea('content', '', "rows='15' class='form-control'");?></div>
+        </div>
+        <div class='form-group'>
+          <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->thread->file;?></label>
+          <div class='col-md-7 col-sm-8 col-xs-11'><?php echo $this->fetch('file', 'buildForm');?></div>
+        </div>
+        <div class='form-group hiding' id='captchaBox'></div>
       </div>
-      <div class='form-group'>
-        <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->thread->file;?></label>
-        <div class='col-md-7 col-sm-8 col-xs-11'><?php echo $this->fetch('file', 'buildForm');?></div>
+      <div class='form-group link hidden'>
+        <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->thread->link;?></label>
+        <div class='col-md-11 col-sm-10 required'><?php echo html::input('link', '', "class='form-control'");?></div>
       </div>
-      <div class='form-group hiding' id='captchaBox'></div>
       <div class='form-group'>
         <label class='col-md-1 col-sm-2'></label>
         <div class='col-md-11 col-sm-10'><?php echo html::submitButton();?></div>
@@ -52,5 +63,4 @@
     </form>
   </div>
 </div>
-
-<?php include '../common//footer.html.php';?>
+<?php include '../common/footer.html.php';?>

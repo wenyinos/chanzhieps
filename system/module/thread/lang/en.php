@@ -21,6 +21,8 @@ $lang->thread->postedDate = 'Posted date';
 $lang->thread->replies    = 'Replies';
 $lang->thread->views      = 'Views';
 $lang->thread->lastReply  = 'Last reply';
+$lang->thread->isLink     = 'Locate';
+$lang->thread->link       = 'Link';
 
 $lang->thread->post       = 'Post';
 $lang->thread->postTo     = 'Post to';

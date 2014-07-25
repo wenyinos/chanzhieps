@@ -120,6 +120,12 @@ class thread extends control
         $thread = $this->thread->getByID($threadID);
         if(!$thread) die(js::locate('back'));
 
+        if($thread->link)
+        {
+             header('HTTP/1.1 301 Moved Permanently');
+             die(header('Location:' . $thread->link));
+        }
+
         /* Set editor for current user. */
         $this->thread->setEditor($thread->board, 'view');
 

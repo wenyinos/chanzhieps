@@ -26,6 +26,12 @@
             <?php echo html::input('title', $thread->title, "class='form-control'");?>
             <span class='input-group-addon'>
               <label class='checkbox'>
+                <?php $checked = $thread->link ? 'checked' : '';?>
+                <?php echo "<input type='checkbox' name='isLink' id='isLink' value='1' {$checked}/><span>{$lang->thread->isLink}</span>" ?>
+              </label>
+            </span>
+            <span class='input-group-addon'>
+              <label class='checkbox'>
                   <?php echo "<input type='checkbox' name='readonly' value='1'  $readonly/><span>{$lang->thread->readonly}</span>" ?>
               </label>
             </span>
@@ -35,20 +41,26 @@
         <?php endif;?>
         </div>
       </div>
-      <div class='form-group'>
-        <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->thread->content;?></label>
-        <div class='col-md-11 col-sm-10'><?php echo html::textarea('content', htmlspecialchars($thread->content), "rows='15' class='form-control'");?></div>
-      </div>
-      <div class='form-group'>
-        <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->thread->file;?></label>
-        <div class='col-md-11 col-sm-10'>
-          <?php
-          $this->thread->printFiles($thread, $canManage = true);
-          echo $this->fetch('file', 'buildForm');
-          ?>
+      <div class='threadInfo'>
+        <div class='form-group'>
+          <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->thread->content;?></label>
+          <div class='col-md-11 col-sm-10'><?php echo html::textarea('content', htmlspecialchars($thread->content), "rows='15' class='form-control'");?></div>
         </div>
+        <div class='form-group'>
+          <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->thread->file;?></label>
+          <div class='col-md-11 col-sm-10'>
+            <?php
+            $this->thread->printFiles($thread, $canManage = true);
+            echo $this->fetch('file', 'buildForm');
+            ?>
+          </div>
+        </div>
+        <div class='form-group hiding' id='captchaBox'></div>
       </div>
-      <div class='form-group hiding' id='captchaBox'></div>
+      <div class='form-group link hidden'>
+        <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->thread->link;?></label>
+        <div class='col-md-11 col-sm-10 required'><?php echo html::input('link', $thread->link, "class='form-control'");?></div>
+      </div>
       <div class='form-group'>
         <label class='col-md-1 col-sm-2'></label>
         <div class='col-md-11 col-sm-10'><?php echo html::submitButton() . html::backButton();;?></div>
