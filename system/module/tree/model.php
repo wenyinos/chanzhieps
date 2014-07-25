@@ -313,7 +313,8 @@ class treeModel extends model
      */
     public static function createBrowseLink($category)
     {
-        $linkHtml = html::a(helper::createLink('article', 'browse', "categoryID={$category->id}", "category={$category->alias}"), $category->name, "id='category{$category->id}'");
+        if($category->link)  $linkHtml = html::a($category->link, $category->name, "id='category{$category->id}'");
+        if(!$category->link) $linkHtml = html::a(helper::createLink('article', 'browse', "categoryID={$category->id}", "category={$category->alias}"), $category->name, "id='category{$category->id}'");
         return $linkHtml;
     }
 
@@ -326,7 +327,8 @@ class treeModel extends model
      */
     public static function createProductBrowseLink($category)
     {
-        $linkHtml = html::a(helper::createLink('product', 'browse', "categoryID={$category->id}", "category={$category->alias}"), $category->name, "id='category{$category->id}'");
+        if($category->link)  $linkHtml = html::a($category->link, $category->name, "id='category{$category->id}'");
+        if(!$category->link) $linkHtml = html::a(helper::createLink('product', 'browse', "categoryID={$category->id}", "category={$category->alias}"), $category->name, "id='category{$category->id}'");
         return $linkHtml;
     }
 
@@ -339,7 +341,8 @@ class treeModel extends model
      */
     public static function createBlogBrowseLink($category)
     {
-        $linkHtml = html::a(helper::createLink('blog', 'index', "category={$category->id}", "category={$category->alias}"), $category->name, "id='category{$category->id}'");
+        if($category->link)  $linkHtml = html::a($category->link, $category->name, "id='category{$category->id}'");
+        if(!$category->link) $linkHtml = html::a(helper::createLink('blog', 'index', "category={$category->id}", "category={$category->alias}"), $category->name, "id='category{$category->id}'");
         return $linkHtml;
     }
 
@@ -422,7 +425,7 @@ class treeModel extends model
         $category->grade = $parent ? $parent->grade + 1 : 1;
 
         $this->dao->update(TABLE_CATEGORY)
-            ->data($category, $skip = 'uid')
+            ->data($category, $skip = 'uid,isLink')
             ->autoCheck()
             ->check($this->config->tree->require->edit, 'notempty')
             ->where('id')->eq($categoryID)
