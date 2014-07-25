@@ -67,7 +67,10 @@
         </tr>
         <tr class='link hidden'>
           <th><?php echo $lang->article->link;?></th>
-          <td colspan='2'><?php echo html::input('link', '', "class='form-control'");?></td>
+          <td colspan='2'>
+            <div class='required required-wrapper'></div>
+            <?php echo html::input('link', '', "class='form-control'");?>
+          </td>
         </tr>
         <tbody class='articleInfo'>
         <tr>
