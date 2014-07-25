@@ -16,5 +16,6 @@
 </div>
 <?php if(isset($pageJS)) js::execute($pageJS);?>
 <?php else:?>
-<?php include 'footer.html.php'; ?>
+<?php if(RUN_MODE == 'front') include 'footer.html.php'; ?>
+<?php if(RUN_MODE == 'admin') include 'footer.admin.html.php'; ?>
 <?php endif;?>
