@@ -1647,6 +1647,9 @@ class router
         if(!class_exists('dao')) return;
 
         $sqlLog = $this->getLogRoot() . 'sql.' . date('Ymd') . '.php';
+
+        if(!file_exists($sqlLog)) file_put_contents($sqlLog, "<?php die();?> \n");
+
         $fh = @fopen($sqlLog, 'a');
         if(!$fh) return false;
         fwrite($fh, date('Ymd H:i:s') . ": " . $this->getURI() . "\n");
