@@ -33,6 +33,8 @@ $lang->article->views      = 'Views';
 $lang->article->comments   = 'Comments';
 $lang->article->stick      = 'Sticky';
 $lang->article->order      = 'Order';
+$lang->article->isLink     = 'Locate';
+$lang->article->link       = 'Link';
 
 $lang->article->list       = 'List';
 $lang->article->admin      = 'Admin';

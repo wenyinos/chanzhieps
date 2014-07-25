@@ -6,6 +6,20 @@ $(document).ready(function()
         $('#copyBox').hide().find(':input').attr('disabled', true);
         if($(this).val() != 'original') $('#copyBox').show().find(':input').attr('disabled', false);
     });
+
+    $('#isLink').change(function()
+    {   
+        if($(this).prop('checked'))
+        {   
+            $('.articleInfo').addClass('hidden');
+            $('.link').removeClass('hidden');
+        }   
+        else
+        {   
+            $('.articleInfo').removeClass('hidden');
+            $('.link').addClass('hidden');
+        }   
+    }); 
     
     /* Set current active topNav. */
     if(v.path && v.path.length)

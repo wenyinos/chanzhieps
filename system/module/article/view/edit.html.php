@@ -23,12 +23,9 @@
       <?php if($type != 'page'):?>
       <tr>
         <th class='w-100px'><?php echo $lang->article->category;?></th>
-        <td class='w-p40'>
-        <?php 
-        echo html::select("categories[]", $categories, array_keys($article->categories), "multiple='multiple' class='form-control chosen'");
-        ?>
-        </td><td></td>
+        <td class='w-p40'><?php echo html::select("categories[]", $categories, array_keys($article->categories), "multiple='multiple' class='form-control chosen'");?></td><td></td>
       </tr>
+      <tbody class='articleInfo'>
       <tr>
         <th><?php echo $lang->article->author;?></th>
         <td><?php echo html::input('author', $article->author, "class='form-control'");?></td>
@@ -43,11 +40,27 @@
           </div>
         </td>
       </tr>
+      </tbody>
       <?php endif; ?>
       <tr>
         <th><?php echo $lang->article->title;?></th>
-        <td colspan='2'><?php echo html::input('title', $article->title, "class='form-control'");?></td>
+        <td colspan='2'>
+          <div class='input-group'>
+            <?php echo html::input('title', $article->title, "class='form-control'");?>
+            <span class="input-group-addon">
+              <label class='checkbox'>
+                <?php $checked = $article->link ? 'checked' : '';?>
+                <?php echo "<input type='checkbox' name='isLink' id='isLink' value='1' {$checked} /><span>{$lang->article->isLink}</span>"?>
+              </label>
+            </span>
+          </div>
+        </td>
       </tr>
+      <tr class='link hidden'>
+        <th><?php echo $lang->article->link;?></th>
+        <td colspan='2'> <?php echo html::input('link', $article->link, "class='form-control'");?></td>
+      </tr>
+      <tbody class='articleInfo'>
       <tr>
         <th><?php echo $lang->article->alias;?></th>
         <td colspan='2'>
@@ -66,10 +79,12 @@
         <th><?php echo $lang->article->keywords;?></th>
         <td colspan='2'> <?php echo html::input('keywords', $article->keywords, "class='form-control'");?></td>
       </tr>
+      </tbody>
       <tr>
         <th><?php echo $lang->article->summary;?></th>
         <td colspan='2'><?php echo html::textarea('summary', $article->summary, "rows='2' class='form-control'");?></td>
       </tr>
+      <tbody class='articleInfo'>
       <tr>
         <th><?php echo $lang->article->content;?></th>
         <td colspan='2'><?php echo html::textarea('content', htmlspecialchars($article->content), "rows='10' class='form-control'");?></td>
@@ -88,6 +103,7 @@
         <th><?php echo $lang->article->status;?></th>
         <td><?php echo html::radio('status', $lang->article->statusList, $article->status);?></td>
       </tr>
+      </tbody>
       <tr>
         <th></th><td colspan='2'><?php echo html::submitButton();?></td>
       </tr>

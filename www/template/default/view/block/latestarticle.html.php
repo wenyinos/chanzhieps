@@ -33,6 +33,7 @@ $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 :
     foreach($articles as $article):
     $category = array_shift($article->categories);
     $url = helper::createLink('article', 'view', "id=$article->id", "category={$category->alias}&name=$article->alias");
+    if($article->link) $url = $article->link; 
     ?>
       <div class='item'>
         <div class='item-heading'><strong><?php echo html::a($url, $article->title);?></strong></div>
@@ -63,6 +64,7 @@ $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 :
       $category = array_shift($article->categories);
       $alias    = empty($category) ? "name={$article->alias}" : "category={$category->alias}&name={$article->alias}";
       $url      = helper::createLink('article', 'view', "id={$article->id}", $alias);
+      if($article->link) $url = $article->link; 
       ?>
       <?php if(isset($content->time)):?>
       <li>

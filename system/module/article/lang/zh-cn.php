@@ -33,6 +33,8 @@ $lang->article->views      = '阅读';
 $lang->article->comments   = '评论';
 $lang->article->stick      = '置顶级别';
 $lang->article->order      = '排序';
+$lang->article->isLink     = '跳转';
+$lang->article->link       = '链接';
 
 $lang->article->list       = '文章列表';
 $lang->article->admin      = '维护文章';

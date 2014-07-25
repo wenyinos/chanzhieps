@@ -1,10 +1,10 @@
 <?php 
-include '../common//header.html.php';
+include '../common/header.html.php';
 
 $path = array_keys($category->pathNames);
 js::set('path', $path);
 
-include '../common//treeview.html.php';
+include '../common/treeview.html.php';
 ?>
 <?php echo $common->printPositionBar($category);?>
 <div class='row'>
@@ -14,6 +14,7 @@ include '../common//treeview.html.php';
       <section class='items items-hover'>
         <?php foreach($articles as $article):?>
         <?php $url = inlink('view', "id=$article->id", "category={$category->alias}&name=$article->alias");?>
+        <?php if($article->link) $url = $article->link;?>
         <div class='item'>
           <div class='item-heading'>
             <div class="text-muted pull-right">

@@ -2,6 +2,7 @@
 $config->article->require = new stdclass();
 $config->article->require->create = 'categories, title, content';
 $config->article->require->page   = 'title, content';
+$config->article->require->link   = 'categories, title, link';
 $config->article->require->edit   = 'categories, title, content';
 
 $config->article->editor = new stdclass();

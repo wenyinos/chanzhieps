@@ -286,6 +286,7 @@ class articleModel extends model
             ->add('editedDate', $now)
             ->add('type', $type)
             ->add('order', 0)
+            ->setIF(!$this->post->isLink, 'link', '')
             ->stripTags('content', $this->config->allowedTags->admin)
             ->get();
 
@@ -294,10 +295,11 @@ class articleModel extends model
         $article->content  = $this->deleteHtmlEmptyLine($article->content);
 
         $this->dao->insert(TABLE_ARTICLE)
-            ->data($article, $skip = 'categories,uid')
+            ->data($article, $skip = 'categories,uid,isLink')
             ->autoCheck()
-            ->batchCheckIF($type != 'page', $this->config->article->require->create, 'notempty')
+            ->batchCheckIF($type != 'page' and empty($article->link), $this->config->article->require->create, 'notempty')
             ->batchCheckIF($type == 'page', $this->config->article->require->page, 'notempty')
+            ->batchCheckIF(!empty($article->link), $this->config->article->require->link, 'notempty')
             ->checkIF(($type == 'page') and $this->post->alias, 'alias', 'unique', "type='page'")
             ->exec();
         $articleID = $this->dao->lastInsertID();
@@ -331,6 +333,7 @@ class articleModel extends model
             ->join('categories', ',')
             ->add('editor', $this->app->user->account)
             ->add('editedDate', helper::now())
+            ->setIF(!$this->post->isLink, 'link', '')
             ->get();
 
         $article->keywords = seo::unify($article->keywords, ',');
@@ -338,10 +341,11 @@ class articleModel extends model
         $article->content  = $this->deleteHtmlEmptyLine($article->content);
 
         $this->dao->update(TABLE_ARTICLE)
-            ->data($article, $skip = 'categories,uid')
+            ->data($article, $skip = 'categories,uid,isLink')
             ->autoCheck()
-            ->batchCheckIF($type != 'page', $this->config->article->require->edit, 'notempty')
+            ->batchCheckIF($type != 'page' and empty($article->link), $this->config->article->require->edit, 'notempty')
             ->batchCheckIF($type == 'page', $this->config->article->require->page, 'notempty')
+            ->batchCheckIF(!empty($article->link), $this->config->article->require->link, 'notempty')
             ->checkIF(($type == 'page') and $this->post->alias, 'alias', 'unique', "type='page' and id<>{$articleID}")
             ->where('id')->eq($articleID)
             ->exec();
@@ -431,7 +435,10 @@ class articleModel extends model
             $alias = "name=$article->alias";
         }
 
-        return commonModel::createFrontLink($module, 'view', $param, $alias);
+        $link = commonModel::createFrontLink($module, 'view', $param, $alias);
+        if($article->link) $link = $article->link;
+
+        return $link;
     }
     /**
      * Delete '<p><br /></p>' if it at string's last. 
