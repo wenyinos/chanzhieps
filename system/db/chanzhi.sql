@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS `eps_article` (
 -- DROP TABLE IF EXISTS `eps_block`;
 CREATE TABLE IF NOT EXISTS `eps_block` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `template` varchar(30) NOT NULL,
   `type` varchar(20) NOT NULL,
   `title` varchar(60) NOT NULL,
   `content` text NOT NULL,
@@ -96,6 +97,29 @@ CREATE TABLE IF NOT EXISTS `eps_config` (
   UNIQUE KEY `unique` (`owner`,`module`,`section`,`key`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
+-- DROP TABLE IF EXISTS `eps_extension`;
+CREATE TABLE IF NOT EXISTS `eps_extension` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `name` varchar(150) NOT NULL,
+  `code` varchar(30) NOT NULL,
+  `version` varchar(50) NOT NULL,
+  `author` varchar(100) NOT NULL,
+  `desc` text NOT NULL,
+  `license` text NOT NULL,
+  `type` varchar(20) NOT NULL default 'extension',
+  `site` varchar(150) NOT NULL,
+  `chanzhiCompatible` varchar(100) NOT NULL,
+  `installedTime` datetime NOT NULL,
+  `depends` varchar(100) NOT NULL,
+  `dirs` text NOT NULL,
+  `files` text NOT NULL,
+  `status` varchar(20) NOT NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `code` (`code`),
+  KEY `name` (`name`),
+  KEY `addedTime` (`installedTime`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 -- DROP TABLE IF EXISTS `eps_down`;
 CREATE TABLE IF NOT EXISTS `eps_down` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
@@ -132,10 +156,11 @@ CREATE TABLE IF NOT EXISTS `eps_file` (
 
 -- DROP TABLE IF EXISTS `eps_layout`;
 CREATE TABLE IF NOT EXISTS `eps_layout` (
+  `template` varchar(30) NOT NULL,
   `page` varchar(30) NOT NULL,
   `region` varchar(30) NOT NULL,
   `blocks` text NOT NULL,
-  UNIQUE KEY `layout` (`page`,`region`)
+  UNIQUE KEY `layout` (`template`,`page`,`region`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_message`;
