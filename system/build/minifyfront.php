@@ -32,6 +32,11 @@ $ie8Code .= file_get_contents($jsRoot . 'respond/min.js');
 $result = file_put_contents($jsRoot . 'all.ie8.js', $ie8Code);
 if($result) echo "create all.ie8.js success\n";
 
+$ie9Code = file_get_contents($jsRoot . 'jquery/placeholder/min.js');
+
+$result = file_put_contents($jsRoot . 'all.ie9.js', $ie9Code);
+if($result) echo "create all.ie9.js success\n";
+
 /* Compress it. */
 `java -jar ~/bin/yuicompressor/build/yuicompressor.jar --type js $allJSFile -o $allJSFile`;
 

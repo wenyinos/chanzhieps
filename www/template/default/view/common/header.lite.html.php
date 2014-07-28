@@ -75,7 +75,16 @@ else
 ?>
 <![endif]-->
 <!--[if lt IE 10]>
-<?php js::import($jsRoot . 'jquery/placeholder/min.js'); ?>
+<?php
+if($config->debug)
+{
+    js::import($jsRoot . 'jquery/placeholder/min.js');
+}
+else
+{
+    js::import($jsRoot . 'all.ie9.js');
+}
+?>
 <![endif]-->
 <?php js::set('lang', $lang->js);?>
 <?php
