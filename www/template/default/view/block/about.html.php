@@ -16,6 +16,8 @@ $block->content = json_decode($block->content);
     <strong><?php echo $icon . $block->title;?></strong>
     <?php if(!empty($block->content->moreText) and !empty($block->content->moreUrl)):?>
     <div class='pull-right'><?php echo html::a($block->content->moreUrl, $block->content->moreText);?></div>
+    <?php else:?>
+    <div class='pull-right'><?php echo html::a(helper::createLink('company', 'index'), $this->lang->block->more);?></div>
     <?php endif;?>
   </div>
   <div class='panel-body'>

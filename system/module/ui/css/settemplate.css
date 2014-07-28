@@ -1,19 +1,19 @@
-.cards {padding: 0; margin: 0 -10px;}
-.cards .col-card {width: 352px; float: left; margin: 0 10px;}
-.cards-themes .col-card {width: 212px;}
-.card {position: relative; margin-bottom: 50px; overflow: visible; cursor: pointer;}
-.card.card-theme {margin-bottom: 20px;}
-.teamplate-choosed, .theme-choosed  {display: none}
-.card.current .teamplate-choosed, .card.current .theme-choosed {display: block; position: absolute; font-size: 28px; color: #fff; background: #229F24; width: 50px; height: 50px; right: 0; top: 0; text-align: center; padding-left: 10px; line-height: 35px; border-bottom-left-radius: 50px; z-index: 99}
-.card-foot {position: absolute; bottom: -30px;}
-.card > img {height: 300px; opacity: 0.8}
-.card:hover>img {opacity: 1}
-.card.card-theme > img {height: 180px;}
-.card-caption {position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(0,0,0,0.7); color: #fff;}
-.template-desc {padding: 12px 0; color: #ccc}
-.themes-actions {padding: 12px 0;}
-.themes-actions + .template-desc {padding-top: 2px;}
-.themes-tip {display: inline-block; border-radius: 16px; background: rgba(0,0,0,0.5); padding: 6px 12px;}
-.btn.btn-change-theme {border-radius: 16px;}
-.table-templateinfo tr th {border:none;}
-.table-templateinfo  tr td {border:none;}
+.cards {padding: 0; margin: 0;}
+.col-card {margin: 0;}
+.card {position: relative; margin-bottom: 20px; overflow: visible; min-height: 302px; padding-right: 350px;}
+.cards > .col-card:last-child .card {margin-bottom: 0;}
+.teamplate-choosed {display: none}
+.card.current .teamplate-choosed {display: block; position: absolute; font-size: 28px; color: #fff; background: #229F24; width: 50px; height: 50px; right: 0; top: 0; text-align: center; padding-left: 10px; line-height: 35px; border-bottom-left-radius: 50px; z-index: 99}
+.template-img {width: 350px; position: absolute; right: 0; top: 0; bottom: 0; box-shadow: -1px 0 5px rgba(0,0,0,0.14); cursor: pointer;}
+.themes-tip {display: inline-block; border-radius: 16px; background: #ddd; padding: 6px 12px; position: relative;}
+.current-theme-tip {display: none}
+.card.current .current-theme-tip {display: inline;}
+.themes-list {background: #e5e5e5; padding: 10px; margin-top: 5px; border-top: 1px solid #ddd}
+.theme {width: 165px; float: left; cursor: pointer; margin: 10px}
+.theme-name {margin-top: 5px;}
+.theme.current > .theme-name {color: #47A447}
+.theme > .theme-name .icon-ok-sign {display: none}
+.theme.current > .theme-name .icon-ok-sign {display: inline;}
+.theme-img {height: 80px; overflow: hidden; border: 1px solid #bbb; border-radius: 4px; opacity: 0.8}
+.theme:hover .theme-img {opacity: 1; border-color: #aaa}
+.theme.current .theme-img {border-color: #47A447; -moz-box-shadow:0px 0px 12px #47A447; -webkit-box-shadow:0px 0px 12px #47A447; box-shadow:0px 0px 12px #47A447; opacity: 1}

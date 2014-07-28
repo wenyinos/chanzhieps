@@ -24,46 +24,41 @@
       $themeName = $isCurrent ? $this->config->site->theme : 'default';
       ?>
       <div class='col-card'>
-        <div class="card-template card<?php if($isCurrent) echo ' current';?>" data-template='<?php echo $template['code']?>' data-url='<?php echo inlink('settheme', "template={$template['code']}&theme={$themeName}") ?>' data-theme='<?php echo $themeName;?>'>
+        <div class="card-template card<?php if($isCurrent) echo ' current';?>" data-template='<?php echo $template['code']?>'data-theme='<?php echo $themeName;?>' data-url='<?php echo inlink('settheme', "template={$template['code']}&theme={$themeName}") ?>'>
           <i class='icon-ok teamplate-choosed'></i>
-          <?php echo html::image($templateRoot . 'theme/' . $themeName . '/preview.png');?>
-          <div class='card-caption'>
+          <div class='template-img'><?php echo html::image($templateRoot . 'theme/' . $themeName . '/preview.png');?></div>
+          <div class='card-heading'>
+            <h4><?php echo $template['name']?></h4>
+            <small class='text-muted'><?php echo $lang->ui->template->author . $lang->colon . $template['author'];?></small>
+          </div>
+          <?php if(!empty($desc)):?>
+          <div class="card-content"><div class="template-desc"><?php echo $desc;?></div></div>
+          <?php endif;?>
+          <div class='card-actions'>
+            <button class='btn btn-apply-template<?php if($isCurrent) echo ' btn-success disabled';?>' type='button' data-url='<?php echo inlink('settheme', "template={$template['code']}&theme={$themeName}")?>' data-current='<i class="icon-ok"></i> <?php echo $lang->ui->template->current;?>' data-default='<?php echo $lang->ui->template->apply?>'><?php echo $isCurrent ? "<i class='icon-ok'></i> {$lang->ui->template->current}" : $lang->ui->template->apply?></button> &nbsp;
             <?php if($count > 1):?>
-            <div class='themes-actions text-center'><span class='themes-tip'><?php printf($lang->ui->template->availableThemes, $count);?> &nbsp; <span class='theme-name'><?php if($isCurrent) printf($lang->ui->template->currentTheme, $template['themes'][$this->config->site->theme]) ?></span></span> &nbsp; <button type='button' data-toggle='modal' data-target='#chooseThemes' class='btn btn-success btn-change-theme'><?php echo $lang->ui->template->changeTheme;?></button></div>
-            <?php endif;?>
-            <?php if(!empty($desc)):?>
-            <div class="template-desc text-center"><?php echo $desc;?></div>
+              <span class='themes-tip'><?php printf($lang->ui->template->availableThemes, $count);?><span class='current-theme-tip'> &nbsp; <?php printf($lang->ui->template->currentTheme, $template['themes'][$this->config->site->theme])?></span></span>
             <?php endif;?>
           </div>
           <?php if($count > 1):?>
-          <ul class='themes-list hide'>
+          <div class='themes-list'>
+            <div class='clearfix'>
             <?php foreach($template['themes'] as $theme => $name):?>
-              <li>
               <?php
-                $url = inlink('settheme', "template={$template['code']}&theme={$theme}");
-                $previewImage = html::image($templateRoot . 'theme/' . $theme . '/preview.png');
-                $currentClass = ($config->site->theme == $theme) ? 'btn-success' : '';
-                echo html::a($url, $previewImage, "class='theme-preview btn btn-lg {$currentClass}' title='{$name}' data-theme='{$theme}'");
+              $currentClass = ($isCurrent and $config->site->theme == $theme) ? ' current' : '';
+              $url = inlink('settheme', "template={$template['code']}&theme={$theme}");
               ?>
-              </li>
+              <div class='theme<?php echo $currentClass;?>' data-url='<?php echo $url;?>' data-theme='<?php echo $theme;?>'>
+                <div class='theme-img'><?php echo html::image($templateRoot . 'theme/' . $theme . '/preview.png');?></div>
+                <div class='theme-name text-center'><strong><?php echo $name;?></strong> <i class='icon-ok-sign'></i></div>
+              </div>
             <?php endforeach;?>
-          </ul>
-          <?php endif;?>
-          <div class="card-foot"><strong><?php echo $template['name']?></strong> &nbsp; <span class='text-muted'><?php echo $lang->ui->template->author . $lang->colon . $template['author'];?></span></div>
+            </div>
+          </div>
+          <?php endif; ?>
         </div>
       </div>
       <?php endforeach;?>
-    </div>
-  </div>
-</div>
-<div class='modal fade' id='chooseThemes'>
-  <div class='modal-dialog' style='width: 950px;'>
-    <div class='modal-content'>
-      <div class='modal-header'><i class='icon-cog'></i> <strong><?php echo $lang->ui->template->changeTheme;?></strong></div>
-      <div class='modal-body'>
-        <div class='cards cards-themes'>
-        </div>
-      </div>
     </div>
   </div>
 </div>

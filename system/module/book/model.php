@@ -144,8 +144,9 @@ class bookModel extends model
         $children = $this->getChildren($nodeID);
         if($node->type != 'book') $serial = $serials[$nodeID];
 
+        $anchor = "name='node" . $node->id . "' id='node" . $node->id . "'";
         $titleLink   = $node->type == 'book' ? $node->title : html::a(helper::createLink('book', 'admin', "bookID=$node->id"), $node->title);
-        $editLink    = html::a(helper::createLink('book', 'edit', "nodeID=$node->id"), $this->lang->edit);
+        $editLink    = html::a(helper::createLink('book', 'edit', "nodeID=$node->id"), $this->lang->edit, $anchor);
         $delLink     = empty($children) ? html::a(helper::createLink('book', 'delete', "bookID=$node->id"), $this->lang->delete, "class='deleter'") : '';
         $filesLink   = html::a(helper::createLink('file', 'browse', "objectType=book&objectID=$node->id&isImage=0"), $this->lang->book->files, "data-toggle='modal' data-width='1000'");
         $imagesLink  = html::a(helper::createLink('file', 'browse', "objectType=book&objectID=$node->id&isImage=1"), $this->lang->book->images, "data-toggle='modal' data-width='1000'");

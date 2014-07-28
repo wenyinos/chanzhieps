@@ -1,61 +1,85 @@
 $(document).ready(function()
 {
-    var cardsT = $('.cards-templates');
-    var template = cardsT.data('template');
-    var theme = cardsT.data('theme');
-    var modal = $('#chooseThemes');
+    $('.template-img').lightbox();
 
-    $('.card-template').click(function()
+    $('.theme-img').hover(function()
     {
         var $this = $(this);
-        if(template == $this.data('template')) return;
+        var $img = $this.closest('.card-template').find('.template-img img');
+        $img.attr('src', $this.find('img').attr('src'));
+    }, function()
+    {
+        var $this = $(this);
+        var $img = $this.closest('.card-template').find('.template-img img');
+        $img.attr('src', $this.closest('.themes-list').find('.theme.current .theme-img img').attr('src'));
+    });
+
+    $('.theme').click(function()
+    {
+        var $this = $(this);
+        var $tpl  = $this.closest('.card-template');
+        if($this.hasClass('current') && $tpl.hasClass('current')) return;
 
         $.getJSON($this.data('url'), function(response)
         {
             if(response.result == 'success')
             {
                 messager.success(response.message);
-                $('.card-template.current').removeClass('current');
+
+                if(!$tpl.hasClass('current'))
+                {
+                    var $oldTpl       = $('.card-template.current').removeClass('current');
+                    var $oldTplBtn    = $oldTpl.find('.btn-apply-template');
+                    $oldTplBtn.removeClass('btn success disabled').html($oldTplBtn.data('default'));
+
+                    $tplBtn = $tpl.find('.btn-apply-template');
+                    $tplBtn.addClass('btn-success disabled').html($tplBtn.data('current'));
+                    $tpl.addClass('current');
+                }
+
+                var $themes = $this.closest('.themes-list');
+                $themes.attr('data-theme', $this.data('theme'))
+                       .find('.theme.current').removeClass('current');
                 $this.addClass('current');
-                template = $this.data('template');
-                theme = $this.data('theme');
+
+                $tpl.find('.current-theme-tip strong').text($this.find('.theme-name strong').text());
             }
         });
     });
 
-    modal.on('show.bs.modal', function()
+    $('.btn-apply-template').click(function()
     {
-        $this = $(this);
-        if($this.data('template') != template)
+        var $this = $(this);
+        var $tpl  = $this.closest('.card-template');
+        if($this.hasClass('disabled')) return;
+
+        var $themes = $tpl.find('.themes-list');
+        if($themes.length)
         {
-            $this.data('template', template);
-            var $themeList = $('.card[data-template="' + template + '"] .themes-list li a');
-            var $themes = $this.find('.cards-themes').empty();
-            $themeList.each(function()
+            var defaultTheme = $themes.data('theme') || 'default';
+            var $theme = $themes.find('.theme[data-theme="' + defaultTheme + '"]');
+            if($theme == null || (!$theme.length))
             {
-                var $item = $(this);
-                $themes.append("<div class='col-card'><div class='card-theme card {current}' data-name='{name}' data-url='{url}' data-theme='{theme}'><i class='icon-ok theme-choosed'></i><img src='{img}' alt=''><div class='card-caption'><h4 class='text-center'>{name}</h4></div></div></div>".format({name: $item.attr('title'), url: $item.attr('href'), img: $item.find('img').attr('src'), theme:$item.data('theme'), current: (theme == $item.data('theme') ? 'current' : '')}));
-            });
-            $themes.find('.card').click(function()
+                $theme = $themes.find('.theme').first();
+            }
+            $theme.click();
+        }
+        else
+        {
+            $.getJSON($tpl.data('url'), function(response)
             {
-                var $this = $(this);
-                if(theme == $this.data('theme')) return;
-
-                $.getJSON($this.data('url'), function(response)
+                if(response.result == 'success')
                 {
-                    if(response.result == 'success')
-                    {
-                        messager.success(response.message);
-                        $('.card-theme.current').removeClass('current');
-                        $this.addClass('current');
-                        theme = $this.data('theme');
-                        modal.modal('hide');
+                    messager.success(response.message);
 
-                        var card = $('.card[data-template="' + template + '"]');
-                        card.find('img').attr('src', $this.find('img').attr('src'));
-                        card.find('.theme-name strong').text($this.data('name'));
-                    }
-                });
+                    var $oldTpl       = $('.card-template.current').removeClass('current');
+                    var $oldTplBtn    = $oldTpl.find('.btn-apply-template');
+                    $oldTplBtn.removeClass('btn success disabled').html($oldTplBtn.data('default'));
+
+                    $tplBtn = $tpl.find('.btn-apply-template');
+                    $tplBtn.addClass('btn-success disabled').html($tplBtn.data('current'));
+                    $tpl.addClass('current');
+                }
             });
         }
     });

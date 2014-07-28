@@ -148,7 +148,7 @@ class book extends control
 
             /* No error, save to database. */
             $result = $this->book->manageCatalog($node);
-            if($result) $this->send(array('result' => 'success', 'message'=>$this->lang->saveSuccess, 'locate' => $this->post->referer));
+            if($result) $this->send(array('result' => 'success', 'message'=>$this->lang->saveSuccess, 'locate' => $this->post->referer . "#node" . $node));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
@@ -178,7 +178,7 @@ class book extends control
         if($_POST)
         {
             $result = $this->book->update($nodeID);
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->post->referer));
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->post->referer . "#node" . $nodeID));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
