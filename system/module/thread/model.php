@@ -244,7 +244,17 @@ class threadModel extends model
      */
     public function transfer($threadID, $oldBoard, $targetBoard)
     {
+        $oldThread = $this->getByID($threadID);
+
         $this->dao->update(TABLE_THREAD)->set('board')->eq($targetBoard)->where('id')->eq($threadID)->exec();
+
+        $thread = new stdclass();
+        $thread->title  = $oldThread->title;
+        $thread->board  = $oldThread->board;
+        $thread->author = $oldThread->author;
+        $thread->link   = helper::createLink('thread', 'view', "threadID=$threadID");
+
+        $this->dao->insert(TABLE_THREAD)->data($thread)->autoCheck()->exec();
 
         if(dao::isError()) return false;
 
