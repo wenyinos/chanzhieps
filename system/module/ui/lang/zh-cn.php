@@ -37,5 +37,7 @@ $lang->ui->template->license         = '版权';
 $lang->ui->template->availableThemes = '<strong>%s</strong> 款可用主题';
 $lang->ui->template->currentTheme    = '正在使用 <strong>%s</strong>';
 $lang->ui->template->changeTheme     = '切换主题';
+$lang->ui->template->apply           = '应用模板';
+$lang->ui->template->current         = '当前模板';
 
 $lang->ui->template->enable = '启用';
