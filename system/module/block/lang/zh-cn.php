@@ -28,6 +28,7 @@ $lang->block->titleless  = '隐藏标题';
 $lang->block->borderless = '隐藏边框';
 $lang->block->icon       = '图标';
 $lang->block->grid       = '宽度';
+$lang->block->more       = '更多';
 
 $lang->block->add          = "添加";
 $lang->block->create       = '添加区块';
