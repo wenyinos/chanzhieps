@@ -27,6 +27,7 @@ $lang->block->titleless  = 'Hide Title';
 $lang->block->borderless = 'Hide Border';
 $lang->block->icon       = 'Icon';
 $lang->block->grid       = 'Width';
+$lang->block->more       = 'More';
 
 $lang->block->add          = "Add";
 $lang->block->create       = 'Create Block';
