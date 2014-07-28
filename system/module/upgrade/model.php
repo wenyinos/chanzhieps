@@ -767,13 +767,13 @@ class upgradeModel extends model
         {
             $fd = fopen($indexFile, "a+");
             fclose($fd);
-            chmod($indexFile,0755);
+            chmod($indexFile, 0755);
         }
         
         while($file = $scanDir->read())
         {
             $nextDir = $path . DS . $file;
-            if((is_dir($nextDir)) AND ($file!=".") AND ($file!=".."))
+            if((is_dir($nextDir)) AND ($file != ".") AND ($file != ".."))
             {
                 $this->createIndexFile($nextDir);
             }
