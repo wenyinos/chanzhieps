@@ -1,7 +1,5 @@
 $(document).ready(function()
 {
-    $('.template-img').lightbox();
-
     $('.theme-img').hover(function()
     {
         var $this = $(this);
@@ -43,6 +41,7 @@ $(document).ready(function()
                 $this.addClass('current');
 
                 $tpl.find('.current-theme-tip strong').text($this.find('.theme-name strong').text());
+                $tpl.find('.template-img img').attr('src', $this.find('.theme-img img').attr('src'));
             }
         });
     });
