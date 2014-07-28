@@ -11,7 +11,7 @@ $(document).ready(function()
     {
         var $this = $(this);
         var $img = $this.closest('.card-template').find('.template-img img');
-        $img.attr('src', $this.closest('.jhu').find('.theme.current .theme-img img').attr('src'));
+        $img.attr('src', $this.closest('.themes-list').find('.theme.current .theme-img img').attr('src'));
     });
 
     $('.theme').click(function()
