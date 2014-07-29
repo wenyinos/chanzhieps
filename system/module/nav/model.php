@@ -124,7 +124,7 @@ class navModel extends model
         $entry .= html::a('javascript:;', $this->lang->nav->add, "class='plus{$grade}'");
         if($childGrade < 4) $entry .= html::a('javascript:;', $this->lang->nav->addChild, "class='plus{$childGrade}'");
         $entry .= html::a('javascript:;', $this->lang->delete, "class='remove'");
-        $entry .= "<i class='icon-arrow-up'></i> <i class='icon-arrow-down'></i>";
+        $entry .= "<i class='icon-move sort-handle sort-handle-" . $grade . "'></i>";
 
         return $entry;
     }

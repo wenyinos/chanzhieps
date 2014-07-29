@@ -13,3 +13,8 @@ label{font-weight:500;font-size:13px;}
 .navList .icon-folder-open,.navList .icon-folder-close,.navList .icon-arrow-up,.navList .icon-arrow-down { margin-right: 6px; opacity: 0.6; transition:all 0.3s; }
 .navList li:hover .icon-folder-open,.navList li:hover .icon-folder-close,.navList li:hover .icon-arrow-up,.navList li:hover .icon-arrow-down { opacity: 1; }
 .navList .icon-arrow-up,.navList .icon-arrow-down { color: #384D7A; }
+
+
+#navList .sort-handle {cursor: move; color: #666}
+#navList li.dragging {opacity: 0.35; background-color: #FFF4E5;}
+#navList li.drag-shadow {border: 1px solid #ddd; box-shadow:0 1px 8px rgba(0,0,0,.15); background-color: #fff; z-index: 9999}
