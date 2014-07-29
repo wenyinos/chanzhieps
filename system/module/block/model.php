@@ -392,15 +392,31 @@ class blockModel extends model
         if(isset($block->borderless) and $block->borderless) $blockClass .= 'panel-borderless';
         if(isset($block->titleless) and $block->titleless) $blockClass  .= ' panel-titleless';
 
+        $content = is_object($block->content) ? $block->content : json_decode($block->content);
+
         if(isset($this->config->block->defaultIcons[$block->type])) 
         {
             $defaultIcon = $this->config->block->defaultIcons[$block->type];
-            $content     = is_object($block->content) ? $block->content : json_decode($block->content);
             $iconClass   = isset($content->icon) ? $content->icon : $defaultIcon;
             $icon        = $iconClass ? "<i class='{$iconClass}'></i> " : "" ;
         }
 
+        $color  = '<style>';
+        $color .= '#block' . $block->id . '{';
+        $color .= isset($content->backgroundColor) ? 'background-color:' . $content->backgroundColor . ';' : '';
+        $color .= isset($content->textColor) ? 'color:' . $content->textColor . ';' : '';
+        $color .= isset($content->borderColor) ? 'border-color:' . $content->borderColor . ';' : '';
+        $color .= '}';
+        $color .= '#block' . $block->id . ' .panel-heading{';
+        $color .= isset($content->titleColor) ? 'color:' .$content->titleColor . ';' : '';
+        $color .= isset($content->titleBackground) ? 'background:' .$content->titleBackground . ';' : '';
+        $color .= '}';
+        $color .= isset($content->iconColor) ? '#block' . $block->id . ' i{color:' .$content->iconColor . ';}' : '';
+        $color .= isset($content->linkColor) ? '#block' . $block->id . ' a{color:' .$content->linkColor . ';}' : '';
+        $color .= '</style>';
+
         echo $containerHeader;
+        echo $color;
         include $blockFile;
         echo $containerFooter;
 

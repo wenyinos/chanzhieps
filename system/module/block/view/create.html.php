@@ -12,6 +12,13 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
+<?php
+$colorPlates = '';
+foreach (explode('|', $lang->block->colorPlates) as $value)
+{
+    $colorPlates .= "<div class='color color-tile' data='#" . $value . "'><i class='icon-ok'></i></div>";
+}
+?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class='icon-plus'></i> <?php echo $lang->block->create;?></strong>
@@ -20,19 +27,117 @@
     <form method='post' id='ajaxForm'>
       <table align='center' class='table table-form'>
         <tr>
-          <th class='w-120px'><?php echo $lang->block->type;?></th>
+          <th class='w-80px'><?php echo $lang->block->type;?></th>
           <td><?php echo $this->block->createTypeSelector($type);?></td>
         </tr>
         <tr>
           <th><?php echo $lang->block->title;?></th>
-          <td><?php echo html::input('title', strpos(',html,code,featuredProduct,', $type) == false ?  $lang->block->typeList[$type] : '', "class='form-control'");?></td>
+          <td>
+            <?php if($type == 'code' or $type == 'featuredProduct'): ?>
+            <?php echo html::input('title', strpos(',html,code,featuredProduct,', $type) == false ?  $lang->block->typeList[$type] : '', "class='form-control'");?></div>
+            <?php else:?>
+            <div class='row'>
+              <div class='col-sm-6'><?php echo html::input('title', strpos(',html,code,featuredProduct,', $type) == false ?  $lang->block->typeList[$type] : '', "class='form-control'");?></div>
+              <div class='col-sm-6'>
+                <div class='colorplate clearfix'>
+                  <div class='input-group color active'>
+                    <?php echo html::input('params[titleBackground]', '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
+                    <span class='input-group-btn'>
+                      <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
+                        <?php echo $lang->block->titleBackground;?><span class='caret'></span>
+                      </button>
+                      <div class='dropdown-menu colors'><?php echo $colorPlates; ?></div>
+                    </span>
+                  </div>
+                </div>
+                <div class='colorplate clearfix'>
+                  <div class='input-group color active'>
+                    <?php echo html::input('params[titleColor]', '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
+                    <span class='input-group-btn'>
+                      <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
+                        <?php echo $lang->block->titleColor;?><span class='caret'></span>
+                      </button>
+                      <div class='dropdown-menu colors'><?php echo $colorPlates; ?></div>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div> 
+            <?php endif;?>
+          </td>
         </tr>
         <?php if(isset($config->block->defaultIcons[$type])):?>
         <tr>
           <th><?php echo $lang->block->icon;?></th>
-          <td><?php echo html::select('params[icon]', '', '', "class='chosen-icons' data-value='{$config->block->defaultIcons[$type]}'");?></td>
+          <td>
+            <div class='row'>
+              <div class='col-sm-6'><?php echo html::select('params[icon]', '', '', "class='chosen-icons' data-value='{$config->block->defaultIcons[$type]}'");?></div>
+              <div class='col-sm-6'>
+                <div class='colorplate clearfix'>
+                  <div class='input-group color active'>
+                    <?php echo html::input('params[iconColor]', '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
+                    <span class='input-group-btn'>
+                      <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
+                        <?php echo $lang->block->iconColor;?><span class='caret'></span>
+                      </button>
+                      <div class='dropdown-menu colors'><?php echo $colorPlates; ?></div>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
         </tr>
         <?php endif;?>
+        <tr>
+          <th><?php echo $lang->block->color;?></th>
+          <td>
+            <div class='colorplate clearfix'>
+              <div class='input-group color active'>
+                <?php echo html::input('params[backgroundColor]', '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
+                <span class='input-group-btn'>
+                  <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
+                    <?php echo $lang->block->backgroundColor;?><span class='caret'></span>
+                  </button>
+                  <div class='dropdown-menu colors'><?php echo $colorPlates; ?></div>
+                </span>
+              </div>
+            </div>
+            <div class='colorplate clearfix'>
+              <div class='input-group color active'>
+                <?php echo html::input('params[textColor]', '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
+                <span class='input-group-btn'>
+                  <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
+                    <?php echo $lang->block->textColor;?><span class='caret'></span>
+                  </button>
+                  <div class='dropdown-menu colors'><?php echo $colorPlates; ?></div>
+                </span>
+              </div>
+            </div>
+            <div class='colorplate clearfix'>
+              <div class='input-group color active'>
+                <?php echo html::input('params[borderColor]', '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
+                <span class='input-group-btn'>
+                  <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
+                    <?php echo $lang->block->borderColor;?><span class='caret'></span>
+                  </button>
+                  <div class='dropdown-menu colors'><?php echo $colorPlates; ?></div>
+                </span>
+              </div>
+            </div>
+            <div class='colorplate clearfix'>
+              <div class='input-group color active'>
+                <?php echo html::input('params[linkColor]', '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
+                <span class='input-group-btn'>
+                  <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
+                    <?php echo $lang->block->linkColor;?><span class='caret'></span>
+                  </button>
+                  <div class='dropdown-menu colors'><?php echo $colorPlates; ?></div>
+                </span>
+              </div>
+            </div>
+          </td>
+        </tr>
         <?php echo $this->fetch('block', 'blockForm', 'type=' . $type);?>
         <?php if(isset($config->block->defaultMoreUrl[$type])):?>
         <tr>
@@ -48,7 +153,7 @@
         <tbody id='blockForm'></tbody>
         <tr>
           <th></th>
-          <td colspan='2'>
+          <td>
             <?php echo html::submitButton();?>
             <?php echo html::a($this->session->blockList, $this->lang->goback, "class='btn btn-default'");?>
           </td>
