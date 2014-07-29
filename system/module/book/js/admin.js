@@ -19,35 +19,41 @@ $(document).ready(function()
 
     var saveSort = function(e)
     {
-        var orders = {}, list = e.list;
-        list.each(function()
+        var orders = null;
+        $('.catalog').each(function()
         {
-            var $this = $(this);
-            var order = $this.attr('data-order');
-            var $parent = $this.parent().closest('.catalog');
-            if($parent.length)
+            var $this    = $(this);
+            var order    = $this.attr('data-order'),
+                $order   = $this.children('strong').find('.order');
+            var oldOrder = $order.text(),
+                $parent  = $this.parent().closest('.catalog');
+            while($parent.length)
             {
-                order = $parent.children('strong').find('.order').text() + '.' + order;
+                order = $parent.attr('data-order') + '.' + order;
+                $parent = $parent.parent().closest('.catalog');
             }
-            var $children = $this.children('dl').children('.catalog');
-            if($children.length)
+
+            if(order != oldOrder)
             {
-                $children.each(function()
-                {
-                    var $child = $(this);
-                    var childOrder= order + '.' + $child.attr('data-order');
-                    $child.children('strong').find('.order').text(childOrder);
-                    orders[$child.attr('data-id')] = childOrder;
-                });
+                if(orders == null) orders = {};
+                orders[$this.data('id')] = order;
+                $order.text(order);
             }
-            orders[$this.attr('data-id')] = order;
-            $this.children('strong').find('.order').text(order);
         });
-        
-        // save orders
-        // console.log(orders);
+
+        if(orders)
+        {
+            console.log(orders);
+            // save orders
+        }
     };
 
-    $('.books > dl').sortable({selector: '.catalog.chapter', trigger: '.sort-chapter', dragCssClass: '', finish: saveSort});
-    $('.books > dl > .catalog.chapter > dl').sortable({selector: '.catalog.article', trigger: '.sort-article', dragCssClass: '', finish: saveSort});
+    $('.books > dl, .catalog > dl').each(function()
+    {
+        var $this = $(this);
+        var id = $this.parent().data('id');
+        $this.children('.catalog').children('.actions').find('.sort-handle').addClass('sort-handle-' + id);
+
+        $this.sortable({selector: '.catalog', trigger: '.sort-handle-' + id, dragCssClass: '', finish: saveSort});
+    });
 });

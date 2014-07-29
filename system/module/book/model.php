@@ -151,7 +151,7 @@ class bookModel extends model
         $filesLink   = html::a(helper::createLink('file', 'browse', "objectType=book&objectID=$node->id&isImage=0"), $this->lang->book->files, "data-toggle='modal' data-width='1000'");
         $imagesLink  = html::a(helper::createLink('file', 'browse', "objectType=book&objectID=$node->id&isImage=1"), $this->lang->book->images, "data-toggle='modal' data-width='1000'");
         $catalogLink = html::a(helper::createLink('book', 'catalog', "nodeID=$node->id"), $this->lang->book->catalog);
-        $moveLink    = html::a('javascript:;', "<i class='icon-move'></i>", "class='sort sort-{$node->type}'");
+        $moveLink    = html::a('javascript:;', "<i class='icon-move'></i>", "class='sort sort-handle'");
 
         $childrenHtml = '';
         if($children) 
