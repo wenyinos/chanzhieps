@@ -136,7 +136,7 @@ class bookModel extends model
      */
     public function getAdminCatalog($nodeID, $serials)
     {
-        static $catalog = '';
+        $catalog = '';
         
         $node = $this->getNodeByID($nodeID);
         if(!$node) return $catalog;
@@ -151,19 +151,19 @@ class bookModel extends model
         $filesLink   = html::a(helper::createLink('file', 'browse', "objectType=book&objectID=$node->id&isImage=0"), $this->lang->book->files, "data-toggle='modal' data-width='1000'");
         $imagesLink  = html::a(helper::createLink('file', 'browse', "objectType=book&objectID=$node->id&isImage=1"), $this->lang->book->images, "data-toggle='modal' data-width='1000'");
         $catalogLink = html::a(helper::createLink('book', 'catalog', "nodeID=$node->id"), $this->lang->book->catalog);
-        $upLink      = html::a(helper::createLink('book', 'up', "nodeID=$node->id"), "<i class='icon-arrow-up'></i>", "class='sort'");
-        $downLink    = html::a(helper::createLink('book', 'down', "nodeID=$node->id"), "<i class='icon-arrow-down'></i>", "class='sort'");
+        $moveLink    = html::a('javascript:;', "<i class='icon-move'></i>", "class='sort sort-{$node->type}'");
 
-        if($node->type == 'book')    $catalog .= "<dt class='book'><strong>" . $titleLink . '</strong><span class="actions">' . $editLink . $catalogLink . $delLink . '</span></dt>';
-        if($node->type == 'chapter') $catalog .= "<dd class='catalog chapter'><strong><span class='order'>" . $serial . '</span>&nbsp;' . $titleLink . '</strong><span class="actions">' . $editLink . $catalogLink . $delLink . $upLink . $downLink . '</span></dd>';
-        if($node->type == 'article') $catalog .= "<dd class='catalog article'><strong><span class='order'>" . $serial . '</span>&nbsp;' . $node->title . '</strong><span class="actions">' . $editLink . $filesLink . $imagesLink . $delLink . $upLink . $downLink . '</span></dd>';
-
+        $childrenHtml = '';
         if($children) 
         {
-            $catalog .= '<dl>';
-            foreach($children as $child) $this->getAdminCatalog($child->id, $serials);
-            $catalog .= '</dl>';
+            $childrenHtml .= '<dl>';
+            foreach($children as $child) $childrenHtml .=  $this->getAdminCatalog($child->id, $serials);
+            $childrenHtml .= '</dl>';
         }
+
+        if($node->type == 'book')    $catalog .= "<dt class='book' data-id='" . $node->id . "'><strong>" . $titleLink . '</strong><span class="actions">' . $editLink . $catalogLink . $delLink . '</span></dt>' . $childrenHtml;
+        if($node->type == 'chapter') $catalog .= "<dd class='catalog chapter' data-id='" . $node->id . "'><strong><span class='order'>" . $serial . '</span>&nbsp;' . $titleLink . '</strong><span class="actions">' . $editLink . $catalogLink . $delLink . $moveLink . '</span>' . $childrenHtml . '</dd>';
+        if($node->type == 'article') $catalog .= "<dd class='catalog article' data-id='" . $node->id . "'><strong><span class='order'>" . $serial . '</span>&nbsp;' . $node->title . '</strong><span class="actions">' . $editLink . $filesLink . $imagesLink . $delLink . $moveLink . '</span>' . $childrenHtml . '</dd>';
 
         return $catalog;
     }
