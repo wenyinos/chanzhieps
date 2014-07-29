@@ -11,10 +11,11 @@
  */
 $lang->ui->common       = "Site";
 
-$lang->ui->logo       = 'Logo';
-$lang->ui->setLogo    = "Set Logo";
-$lang->ui->setTheme   = 'Set Theme';
-$lang->ui->setFavicon = "Set favicon";
+$lang->ui->logo          = 'Logo';
+$lang->ui->setLogo       = "Set Logo";
+$lang->ui->setTheme      = 'Set Theme';
+$lang->ui->setFavicon    = "Set favicon";
+$lang->ui->setBaseStyle  = "Set base style";
 
 $lang->ui->setLogoFailed     = "Set logo failed.";
 $lang->ui->noSelectedFile    = "No file selected.";

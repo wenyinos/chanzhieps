@@ -177,6 +177,7 @@ $lang->ui->menu->theme   = 'Theme|ui|settheme|';
 $lang->ui->menu->slide   = array('link' => 'Slide|slide|admin|',  'alias' => 'create,edit');
 $lang->ui->menu->admin   = array('link' => 'Blocks|block|admin|', 'alias' => 'create,edit');
 $lang->ui->menu->pages   = array('link' => 'Layout|block|pages|', 'alias' => 'setregion');
+$lang->ui->menu->styles  = 'Base Style|ui|setbasestyle|';
 
 /* Menu of user module. */
 $lang->user = new stdclass();

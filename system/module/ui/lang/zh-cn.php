@@ -11,11 +11,12 @@
  */
 $lang->ui->common       = "站点";
 
-$lang->ui->logo        = 'Logo';
-$lang->ui->setLogo     = "Logo设置";
-$lang->ui->setTemplate = '模板设置';
-$lang->ui->setTheme    = '主题设置';
-$lang->ui->setFavicon  = "Favicon设置";
+$lang->ui->logo          = 'Logo';
+$lang->ui->setLogo       = "Logo设置";
+$lang->ui->setTemplate   = '模板设置';
+$lang->ui->setTheme      = '主题设置';
+$lang->ui->setFavicon    = "Favicon设置";
+$lang->ui->setBaseStyle  = "全局样式设置";
 
 $lang->ui->setLogoFailed     = "设置Logo失败";
 $lang->ui->noSelectedFile    = "没有选择图片";
