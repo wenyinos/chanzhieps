@@ -120,5 +120,5 @@ $lang->wechat->placeholder->token    = 'Token should English or numbers, length 
 
 $lang->wechat->needCertified  = "This feature needs the account to be certified.";
 $lang->wechat->integrateInfo = "Please interate in the wechat control panel。
-                                <a href='http://www.chanzhi.org/book/weixin/90_integrate-weixin.html' target='_blank'>Help</a>";
+                                <a href='http://api.chanzhi.org/goto.php?item=help_wechat' target='_blank'>Help</a>";
 $lang->wechat->integrateDone = "I have interated with wechat server";

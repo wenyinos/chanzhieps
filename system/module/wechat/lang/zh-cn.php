@@ -120,5 +120,5 @@ $lang->wechat->placeholder->token    = '必须为英文或数字，长度为3-32
 
 $lang->wechat->needCertified = "此功能需要公众号认证后使用。";
 $lang->wechat->integrateInfo = "请到微信的公众平台完成接入，以获取appID和appSecret信息。
-                                <a href='http://www.chanzhi.org/book/weixin/90_integrate-weixin.html' target='_blank'>帮助</a>";
+                                <a href='http://api.chanzhi.org/goto.php?item=help_wechat' target='_blank'>帮助</a>";
 $lang->wechat->integrateDone = "已完成接入";
