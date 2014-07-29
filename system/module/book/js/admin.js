@@ -19,7 +19,6 @@ $(document).ready(function()
 
     var saveSort = function(e)
     {
-        console.log(e);
         var orders = {}, list = e.list;
         list.each(function()
         {
@@ -46,7 +45,7 @@ $(document).ready(function()
         });
         
         // save orders
-        console.log(orders);
+        // console.log(orders);
     };
 
     $('.books > dl').sortable({selector: '.catalog.chapter', trigger: '.sort-chapter', dragCssClass: '', finish: saveSort});

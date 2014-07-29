@@ -3,7 +3,7 @@ $(document).ready(function()
     $(document).on('click', 'a.plus', function()
     {
         v.key ++;
-        $(this).parents('tr').after($('#entry').html().replace(/key/g, v.key));
+        $(this).closest('#blockList').append($('#entry').html().replace(/key/g, v.key)).sortable('reset');
     });
 
     /* Set border and title show. */
