@@ -33,9 +33,9 @@ class blockModel extends model
      * @access public
      * @return array
      */
-    public function getList($pager)
+    public function getList($template = 'default', $pager)
     {
-        $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->orderBy('id_desc')->page($pager)->fetchAll('id');
+        $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('template')->eq($template)->orderBy('id_desc')->page($pager)->fetchAll('id');
         return $blocks;
     }
 
@@ -96,12 +96,13 @@ class blockModel extends model
      * 
      * @param  string    $page 
      * @param  string    $region 
+     * @param  string    $template 
      * @access public
      * @return array
      */
-    public function getRegionBlocks($page, $region)
+    public function getRegionBlocks($page, $region, $template)
     {
-        $regionBlocks = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->fetch('blocks');
+        $regionBlocks = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->fetch('blocks');
         $regionBlocks = json_decode($regionBlocks);
         if(empty($regionBlocks)) return array();
 
@@ -293,18 +294,20 @@ class blockModel extends model
      * 
      * @param string $page 
      * @param string $region 
+     * @param string $template 
      * @access public
      * @return void
      */
-    public function setRegion($page, $region)
+    public function setRegion($page, $region, $template)
     {
         $layout = new stdclass();
         $layout->page   = $page;
         $layout->region = $region;
+        $layout->template = $template;
 
         if(!$this->post->blocks)
         {
-            $this->dao->delete()->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->exec();
+            $this->dao->delete()->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->exec();
             if(!dao::isError()) return true;
         }
 
@@ -321,9 +324,9 @@ class blockModel extends model
         foreach($blocks as $block) $sortedBlocks[] = $block;
         $layout->blocks = helper::jsonEncode($sortedBlocks);
 
-        $count = $this->dao->select('count(*) as count')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->fetch('count');
+        $count = $this->dao->select('count(*) as count')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->fetch('count');
 
-        if($count)  $this->dao->update(TABLE_LAYOUT)->data($layout)->where('page')->eq($page)->andWhere('region')->eq($region)->exec();
+        if($count)  $this->dao->update(TABLE_LAYOUT)->data($layout)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->exec();
         if(!$count) $this->dao->insert(TABLE_LAYOUT)->data($layout)->exec();
 
         return !dao::isError();

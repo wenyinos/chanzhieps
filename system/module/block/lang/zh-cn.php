@@ -31,6 +31,7 @@ $lang->block->grid       = '宽度';
 $lang->block->more       = '更多';
 
 $lang->block->add          = "添加";
+$lang->block->template     = "模板";
 $lang->block->create       = '添加区块';
 $lang->block->browseBlocks = '区块列表';
 $lang->block->browseRegion = '布局设置';

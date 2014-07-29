@@ -30,6 +30,7 @@ $lang->block->grid       = 'Width';
 $lang->block->more       = 'More';
 
 $lang->block->add          = "Add";
+$lang->block->template     = "Template";
 $lang->block->create       = 'Create Block';
 $lang->block->browseBlocks = 'Browse Blocks';
 $lang->block->browseRegion = 'Browse Regions';

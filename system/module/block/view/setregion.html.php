@@ -12,7 +12,7 @@
 ?>
 <?php include '../../common/view/header.modal.html.php';?>
 <?php js::set('key', count($blocks));?>
-<form id='ajaxForm' action="<?php echo inlink('setregion', "page={$page}&region={$region}");?>" method='post'>
+<form id='ajaxForm' action="<?php echo inlink('setregion', "page={$page}&region={$region}&templat={$template}");?>" method='post'>
   <table class='table table-striped table-form'>
     <thead>
       <tr>

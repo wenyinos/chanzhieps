@@ -25,3 +25,8 @@ CREATE TABLE IF NOT EXISTS `eps_extension` (
 ALTER TABLE `eps_category` ADD `link` varchar(255) NOT NULL;
 ALTER TABLE `eps_article` ADD `link` varchar(255) NOT NULL;
 ALTER TABLE `eps_thread` ADD `link` varchar(255) NOT NULL;
+
+ALTER TABLE `eps_block` ADD `template` char(30) NOT NULL DEFAULT 'default';
+ALTER TABLE `eps_layout` ADD `template` char(30) NOT NULL DEFAULT 'default' ;
+ALTER TABLE `eps_layout` DROP INDEX `layout`;
+ALTER TABLE `eps_layout` ADD UNIQUE KEY `layout` (`template`,`page`,`region`);

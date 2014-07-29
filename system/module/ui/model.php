@@ -32,9 +32,23 @@ class uiModel extends model
         return $templates;
     }
 
+    /**
+     * get TemplateOptions   
+     * 
+     * @access public
+     * @return void
+     */
     public function getTemplateOptions()
     {
-        
+        $this->app->loadClass('Spyc', true);
+        $folders = glob($this->app->getTplRoot() . '*');
+        foreach($folders as $folder)
+        {
+            $templateName = str_replace($this->app->getTplRoot(), '', $folder);
+            $config = Spyc::YAMLLoadString(file_get_contents($folder . DS . 'doc' . DS . $this->app->getClientLang() . '.yaml'));
+            $templates[$config['code']] = $config['name'];
+        }
+        return $templates;
     }
 
     /**

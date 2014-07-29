@@ -12,7 +12,12 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel'>
-  <div class='panel-heading'><strong><i class='icon-columns'></i> <?php echo $lang->block->browseRegion;?></strong></div>
+  <div class='panel-heading'>
+    <strong><i class='icon-columns'></i> <?php echo $lang->block->browseRegion;?></strong>
+    <?php foreach($templates as $template):?>
+      <?php echo html::a(helper::createLink('block', 'pages', 'template=' . $template['code']), $template['name'], $currentTemplate == $template['code'] ? "class='active'" : "");?>
+    <?php endforeach;?>
+  </div>
   <table class='table table-bordered table-hover table-striped'>
     <tr>
       <th class='w-200px'><?php echo $lang->block->page;?></th>
@@ -27,7 +32,7 @@
       $regions = $lang->block->regions->$page;
       foreach($regions as $region => $regionName)
       {
-          echo html::a($this->inlink('setregion', "page={$page}&region={$region}"), $regionName, "class='btn btn-xs' data-toggle='modal'");
+          echo html::a($this->inlink('setregion', "page={$page}&region={$region}&template={$currentTemplate}"), $regionName, "class='btn btn-xs' data-toggle='modal'");
       }
       ?>
       </td>

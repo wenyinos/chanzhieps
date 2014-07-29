@@ -14,19 +14,31 @@ class block extends control
     /**
      * Browse blocks admin.
      * 
-     * @param  int    $recTotal 
-     * @param  int    $recPerPage 
-     * @param  int    $pageID 
+     * @param  int       $recTotal 
+     * @param  int       $recPerPage 
+     * @param  int       $pageID 
+     * @param  string    $template 
      * @access public
      * @return void
      */
-    public function admin($recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function admin($template = '', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
         $this->session->set('blockList', $this->app->getURI());
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $this->view->blocks = $this->block->getList($pager);
+        if($template == '') 
+        {
+            $currentTemplate = $this->config->site->template ? $this->config->site->template : 'default';
+        }
+        else
+        {
+            $currentTemplate = $template;
+        }
+
+        $this->view->currentTemplate = $currentTemplate;
+        $this->view->templates       = $this->loadModel('ui')->getTemplates();
+        $this->view->blocks = $this->block->getList($currentTemplate, $pager);
         $this->view->title  = $this->lang->block->common;
         $this->view->pager  = $pager;
         $this->display();
@@ -35,11 +47,23 @@ class block extends control
     /**
      * Pages admin list.
      * 
+     * @param  string    $template 
      * @access public
      * @return void
      */
-    public function pages()
+    public function pages($template = '')
     {
+        if($template == '') 
+        {
+            $currentTemplate = $this->config->site->template ? $this->config->site->template : 'default';
+        }
+        else
+        {
+            $currentTemplate = $template;
+        }
+
+        $this->view->currentTemplate = $currentTemplate;
+        $this->view->templates       = $this->loadModel('ui')->getTemplates();
         $this->display();       
     }
 
@@ -92,20 +116,21 @@ class block extends control
      * 
      * @param string   $page 
      * @param string   $region 
+     * @param string   $template 
      * @access public
      * @return void
      */
-    public function setRegion($page, $region)
+    public function setRegion($page, $region, $template)
     {
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            $result = $this->block->setRegion($page, $region);
+            $result = $this->block->setRegion($page, $region, $template);
 
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('pages')));
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('pages', "templat={$template}")));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
-        $blocks = $this->block->getRegionBlocks($page, $region);
+        $blocks = $this->block->getRegionBlocks($page, $region, $template);
         if(empty($blocks)) $blocks = array(new stdclass());
 
         $this->view->title        = "<i class='icon-cog'></i>" . $this->lang->block->setPage . ' - '. $this->lang->block->pages[$page] . ' - ' . $this->lang->block->regions->{$page}[$region];
@@ -114,6 +139,7 @@ class block extends control
         $this->view->region       = $region;
         $this->view->blocks       = $blocks;
         $this->view->blockOptions = $this->block->getPairs();
+        $this->view->template     = $template;
 
         $this->display();
     }
