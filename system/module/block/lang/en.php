@@ -39,6 +39,7 @@ $lang->block->linkColor       = 'Link Color';
 $lang->block->iconColor       = 'Icon Color';
 
 $lang->block->add          = "Add";
+$lang->block->template     = "Template";
 $lang->block->create       = 'Create Block';
 $lang->block->browseBlocks = 'Browse Blocks';
 $lang->block->browseRegion = 'Browse Regions';

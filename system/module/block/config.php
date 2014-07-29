@@ -6,7 +6,7 @@ $config->block->editor->create = array('id' => 'content', 'tools' => 'full');
 $config->block->editor->edit   = array('id' => 'content', 'tools' => 'full');
 
 $config->block->require = new stdclass();
-$config->block->require->create = 'title';
+$config->block->require->create = 'title, template';
 $config->block->require->edit   = 'title';
 
 $config->block->defaultIcons = array();

@@ -262,11 +262,6 @@ $lang->links->menu = $lang->site->menu;
 
 /* Menu of extension module. */
 $lang->extension = new stdclass();
-$lang->extension->menu = new stdclass();
-
-$lang->extension->menu->browse = '扩展列表|extension|browse|';
-$lang->extension->menu->obtain = '获得插件|extension|obtain|';
-$lang->extension->menu->upload = '本地安装|extension|upload|';
 
 /* The error messages. */
 $lang->error = new stdclass();

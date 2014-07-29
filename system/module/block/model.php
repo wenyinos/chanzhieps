@@ -33,9 +33,9 @@ class blockModel extends model
      * @access public
      * @return array
      */
-    public function getList($pager)
+    public function getList($template = 'default', $pager)
     {
-        $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->orderBy('id_desc')->page($pager)->fetchAll('id');
+        $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('template')->eq($template)->orderBy('id_desc')->page($pager)->fetchAll('id');
         return $blocks;
     }
 
@@ -96,12 +96,13 @@ class blockModel extends model
      * 
      * @param  string    $page 
      * @param  string    $region 
+     * @param  string    $template 
      * @access public
      * @return array
      */
-    public function getRegionBlocks($page, $region)
+    public function getRegionBlocks($page, $region, $template)
     {
-        $regionBlocks = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->fetch('blocks');
+        $regionBlocks = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->fetch('blocks');
         $regionBlocks = json_decode($regionBlocks);
         if(empty($regionBlocks)) return array();
 
@@ -181,8 +182,8 @@ class blockModel extends model
         $type    = isset($block->type) ? $block->type : '';
         $grid    = isset($block->grid) ? $block->grid : '';
 
-        $entry = "<tr class='v-middle'>";
-        $entry .= "<td><div class='input-group'>";
+        $entry = "<div class='block-item row' data-id='" . $blockID . "'>";
+        $entry .= "<div class='col-xs-7'><div class='input-group'>";
         $entry .= html::select("blocks[{$key}]", $blockOptions, $blockID, "class='form-control'");
 
         $titlelessChecked = isset($block->titleless) && $block->titleless ? 'checked' : '';
@@ -199,18 +200,18 @@ class blockModel extends model
                   <input type='checkbox' {$borderlessChecked} value='1'><input type='hidden' name='borderless[{$key}]' /><span>{$this->lang->block->borderless}</span>
                 </label>
               </div>
-            </div></div></td>";
+            </div></div></div>";
 
-        $entry .= "<td class='text-middle'>";
+        $entry .= "<div class='col-xs-2'>";
         $entry .= html::select("grid[{$key}]", $this->lang->block->gridOptions, $grid, "class='form-control'");
-        $entry .= '</td>';
+        $entry .= '</div>';
 
-        $entry .= '<td class="text-center text-middle">';
+        $entry .= '<div class="text-center col-xs-3 actions">';
         $entry .= html::a('javascript:;', $this->lang->block->add, "class='plus'");
         $entry .= html::a('javascript:;', $this->lang->delete, "class='delete'");
         $entry .= html::a(inlink('edit', "blockID={$blockID}&type={$type}"), $this->lang->edit, "class='edit'");
-        $entry .= "<i class='icon-arrow-up'></i> <i class='icon-arrow-down'></i>";
-        $entry .= '</td></tr>';
+        $entry .= "<i class='icon-move sort-handle'></i>";
+        $entry .= '</div></div>';
         return $entry;
     }
 
@@ -293,18 +294,20 @@ class blockModel extends model
      * 
      * @param string $page 
      * @param string $region 
+     * @param string $template 
      * @access public
      * @return void
      */
-    public function setRegion($page, $region)
+    public function setRegion($page, $region, $template)
     {
         $layout = new stdclass();
         $layout->page   = $page;
         $layout->region = $region;
+        $layout->template = $template;
 
         if(!$this->post->blocks)
         {
-            $this->dao->delete()->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->exec();
+            $this->dao->delete()->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->exec();
             if(!dao::isError()) return true;
         }
 
@@ -321,9 +324,9 @@ class blockModel extends model
         foreach($blocks as $block) $sortedBlocks[] = $block;
         $layout->blocks = helper::jsonEncode($sortedBlocks);
 
-        $count = $this->dao->select('count(*) as count')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->fetch('count');
+        $count = $this->dao->select('count(*) as count')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->fetch('count');
 
-        if($count)  $this->dao->update(TABLE_LAYOUT)->data($layout)->where('page')->eq($page)->andWhere('region')->eq($region)->exec();
+        if($count)  $this->dao->update(TABLE_LAYOUT)->data($layout)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->exec();
         if(!$count) $this->dao->insert(TABLE_LAYOUT)->data($layout)->exec();
 
         return !dao::isError();

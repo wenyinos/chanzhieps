@@ -27,7 +27,11 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
     <form method='post' id='ajaxForm'>
       <table align='center' class='table table-form'>
         <tr>
-          <th class='w-80px'><?php echo $lang->block->type;?></th>
+          <th class='w-80px'><?php echo $lang->block->template;?></th>
+          <td><?php echo html::select('template', $this->loadModel('ui')->getTemplateOptions(), $this->config->site->template, "class='form-control'");?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->block->type;?></th>
           <td><?php echo $this->block->createTypeSelector($type);?></td>
         </tr>
         <tr>

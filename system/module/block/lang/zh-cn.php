@@ -39,6 +39,7 @@ $lang->block->linkColor       = '链接颜色';
 $lang->block->iconColor       = '图标颜色';
 
 $lang->block->add          = "添加";
+$lang->block->template     = "模板";
 $lang->block->create       = '添加区块';
 $lang->block->browseBlocks = '区块列表';
 $lang->block->browseRegion = '布局设置';

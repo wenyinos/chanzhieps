@@ -26,7 +26,11 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
     <form method='post' id='ajaxForm'>
       <table align='center' class='table table-form'>
         <tr>
-          <th class='w-80px'><?php echo $lang->block->type;?></th>
+          <th class='w-80px'><?php echo $lang->block->template;?></th>
+          <td><?php echo html::select('template', $this->loadModel('ui')->getTemplateOptions(), $block->template, "class='form-control'");?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->block->type;?></th>
           <td><?php echo $this->block->createTypeSelector($type, $block->id);?></td>
         </tr>
         <tr>
@@ -39,7 +43,7 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
               <div class='col-sm-6'><?php echo html::input('title', $block->title, "class='form-control'");?></div>
               <div class='col-sm-6'>
                 <div class='colorplate clearfix'>
-                  <div class='input-group color active'>
+                  <div class='input-group color active' data="<?php echo $block->content->titleBackground?>">
                     <?php echo html::input('params[titleBackground]', '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
                     <span class='input-group-btn'>
                       <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
@@ -50,7 +54,7 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
                   </div>
                 </div>
                 <div class='colorplate clearfix'>
-                  <div class='input-group color active'>
+                  <div class='input-group color active' data="<?php echo $block->content->titleColor?>">
                     <?php echo html::input('params[titleColor]', '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
                     <span class='input-group-btn'>
                       <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
