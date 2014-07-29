@@ -300,6 +300,7 @@ class router
         $this->setLogRoot();
         $this->setConfigRoot();
         $this->setModuleRoot();
+        $this->setWwwRoot();
         $this->setDataRoot();
         $this->setTplRoot();
 
@@ -495,6 +496,17 @@ class router
     }
 
     /**
+     * Set the www root.
+     * 
+     * @access protected
+     * @return void
+     */
+    protected function setWwwRoot()
+    {
+        $this->wwwRoot = rtrim(dirname($_SERVER['SCRIPT_FILENAME']), DS) . DS;
+    }
+
+    /**
      * Set the data root.
      * 
      * @access protected
@@ -502,8 +514,7 @@ class router
      */
     protected function setDataRoot()
     {
-        $this->wwwRoot = dirname($_SERVER['SCRIPT_FILENAME']);
-        $this->dataRoot = rtrim($this->wwwRoot, DS) . DS . 'data' . DS;
+        $this->dataRoot = $this->wwwRoot . 'data' . DS;
     }
 
     /**
@@ -514,8 +525,7 @@ class router
      */
     protected function setTplRoot()
     {
-        $this->wwwRoot = dirname($_SERVER['SCRIPT_FILENAME']);
-        $this->tplRoot = rtrim($this->wwwRoot, DS) . DS . 'template' . DS;
+        $this->tplRoot = $this->wwwRoot . 'template' . DS;
     }
 
     /**
@@ -639,6 +649,17 @@ class router
     public function getAppLibRoot()
     {
         return $this->appLibRoot;
+    }
+
+    /**
+     * Get the $wwwRoot var
+     * 
+     * @access public
+     * @return string
+     */
+    public function getWwwRoot()
+    {
+        return $this->wwwRoot;
     }
 
     /**
