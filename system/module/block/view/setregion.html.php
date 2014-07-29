@@ -12,13 +12,8 @@
 ?>
 <?php include '../../common/view/header.modal.html.php';?>
 <?php js::set('key', count($blocks));?>
-<<<<<<< HEAD
-<form id='ajaxForm' action="<?php echo inlink('setregion', "page={$page}&region={$region}");?>" method='post'>
-  <table class='table table-striped table-form mg-0'>
-=======
 <form id='ajaxForm' action="<?php echo inlink('setregion', "page={$page}&region={$region}&templat={$template}");?>" method='post'>
   <table class='table table-striped table-form'>
->>>>>>> 3ebe2249615f97c96cfc234e32a6bd7ea82bd589
     <thead>
       <tr>
         <th class='text-center col-xs-7'><?php echo $lang->block->title;?></th>
