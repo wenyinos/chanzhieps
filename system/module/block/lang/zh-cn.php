@@ -9,26 +9,34 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->block->common     = '区块维护';
-$lang->block->id         = '编号';
-$lang->block->title      = '名称';
-$lang->block->limit      = '数量';
-$lang->block->type       = '类型';
-$lang->block->code       = '代码';
-$lang->block->content    = '内容';
-$lang->block->moreLink   = '更多链接';
-$lang->block->page       = '页面';
-$lang->block->regionList = '区域列表';
-$lang->block->select     = '请选择区块';
-$lang->block->categories = '分类';
-$lang->block->showImage  = '显示图片';
-$lang->block->showTime   = '显示时间';
-$lang->block->product    = '产品';
-$lang->block->titleless  = '隐藏标题';
-$lang->block->borderless = '隐藏边框';
-$lang->block->icon       = '图标';
-$lang->block->grid       = '宽度';
-$lang->block->more       = '更多';
+$lang->block->common          = '区块维护';
+$lang->block->id              = '编号';
+$lang->block->title           = '名称';
+$lang->block->limit           = '数量';
+$lang->block->type            = '类型';
+$lang->block->code            = '代码';
+$lang->block->content         = '内容';
+$lang->block->moreLink        = '更多链接';
+$lang->block->page            = '页面';
+$lang->block->regionList      = '区域列表';
+$lang->block->select          = '请选择区块';
+$lang->block->categories      = '分类';
+$lang->block->showImage       = '显示图片';
+$lang->block->showTime        = '显示时间';
+$lang->block->product         = '产品';
+$lang->block->titleless       = '隐藏标题';
+$lang->block->borderless      = '隐藏边框';
+$lang->block->icon            = '图标';
+$lang->block->grid            = '宽度';
+$lang->block->more            = '更多';
+$lang->block->color           = '颜色';
+$lang->block->titleColor      = '名称颜色';
+$lang->block->titleBackground = '名称背景';
+$lang->block->backgroundColor = '背景颜色';
+$lang->block->textColor       = '文字颜色';
+$lang->block->borderColor     = '边框颜色';
+$lang->block->linkColor       = '链接颜色';
+$lang->block->iconColor       = '图标颜色';
 
 $lang->block->add          = "添加";
 $lang->block->template     = "模板";
@@ -50,6 +58,9 @@ $lang->block->gridOptions[8]  = '2/3';
 $lang->block->gridOptions[3]  = '1/4';
 $lang->block->gridOptions[9]  = '3/4';
 $lang->block->gridOptions[12] = '100%';
+
+$lang->block->colorTip    = '十六进制颜色值';
+$lang->block->colorPlates = '333333|000000|CA1407|45872B|148D00|F25D03|2286D2|D92958|A63268|04BFAD|D1270A|FF9400|299182|63731A|3D4DBE|7382D9|754FB9|F2E205|B1C502|364245|C05036|8A342A|E0DDA2|B3D465|EEEEEE|FFD0E5|D0FFFD|FFFF84|F4E6AE|E5E5E5|F1F1F1|FFFFFF';
 
 $lang->block->typeList['html'] = '自定义区块';
 $lang->block->typeList['code'] = '源代码';
