@@ -1,7 +1,20 @@
 $(document).ready(function()
 {
+    var initSortable = function()
+    {
+        $('#navList').sortable({trigger: '.sort-handle-1', selector: 'li', dragCssClass: ''});
+        $('#navList .ulGrade2').sortable({trigger: '.sort-handle-2', selector: 'li', dragCssClass: ''});
+        $('#navList .ulGrade3').sortable({trigger: '.sort-handle-3', selector: 'li', dragCssClass: ''});
+    }
+
+    initSortable();
+
     /* add grade1 memu options */
-    $(document).on('click', '.plus1', function() { $(this).parent().after($('#grade1NavSource').html());});
+    $(document).on('click', '.plus1', function()
+    {
+        $(this).parent().after($('#grade1NavSource').html());
+        initSortable();
+    });
 
     /* add grade2 memu options */
     $(document).on('click', '.plus2', function() 
@@ -22,6 +35,7 @@ $(document).ready(function()
         {
             $(this).parent().after($('#grade2NavSource ul').html()); 
         }
+        initSortable();
     });
 
     /* add grade3 memu options */
@@ -43,6 +57,7 @@ $(document).ready(function()
         {
             $(this).parent().after($('#grade3NavSource ul').html()); 
         }
+        initSortable();
     });
 
     /* toggle children nav. */
