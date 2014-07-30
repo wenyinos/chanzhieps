@@ -19,7 +19,10 @@ if(isset($pageCSS)) css::internal($pageCSS);
               <strong><i class='icon-user text-muted'></i> <?php echo $comment->from;?></strong>
             </span> 
             <small>(<?php echo formatTime($comment->date, 'Y-m-d H:i');?>)<?php echo $lang->colon;?></small>&nbsp;
-            <p><?php echo nl2br($comment->content);?></p>
+            <p>
+              <?php echo nl2br($comment->content);?>
+              <span class='pull-right'><?php echo html::a($this->createLink('message', 'reply', "messageID=$comment->id"), "<i class='icon-reply'></i>", "data-toggle='modal'");?></span>
+            </p>
           </div>
         </div>
         <?php if(!empty($replies[$comment->id])):?>
@@ -31,6 +34,7 @@ if(isset($pageCSS)) css::internal($pageCSS);
                 <strong><i class='icon-user'></i> <?php echo $reply->from;?></strong> <small>(<?php echo formatTime($reply->date, 'Y-m-d H:i');?>)</small><?php echo $lang->colon?>
               </span> 
               &nbsp;<?php echo nl2br($reply->content);?>
+              <span class='pull-right'><?php echo html::a($this->createLink('message', 'reply', "messageID=$reply->id"), "<i class='icon-reply'></i>", "data-toggle='modal'");?></span>
             </div>
           </div>
           <?php endforeach; ?>

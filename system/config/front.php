@@ -42,6 +42,7 @@ $config->rights->guest['message']['index']   = 'index';
 $config->rights->guest['message']['comment'] = 'show';
 $config->rights->guest['message']['notify']  = 'notify';
 $config->rights->guest['message']['post']    = 'post';
+$config->rights->guest['message']['reply']   = 'reply';
 
 $config->rights->guest['book']['index']  = 'index';
 $config->rights->guest['book']['browse'] = 'browse';
