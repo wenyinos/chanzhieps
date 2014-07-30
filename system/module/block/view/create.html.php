@@ -12,10 +12,12 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
-<?php js::set('type', $type);?>
-<?php js::set('cancreatephp', isset($canCreatePHP) ? $canCreatePHP : '');?>
-<?php js::set('okFile', isset($okFile) ? $okFile : '');?>
+
 <?php
+js::set('type', $type);
+js::set('cancreatephp', isset($canCreatePHP) ? $canCreatePHP : '');
+js::set('setOkFile', isset($okFile) ? sprintf($lang->block->setOkFile, $okFile) : '');
+
 $colorPlates = '';
 foreach (explode('|', $lang->block->colorPlates) as $value)
 {
