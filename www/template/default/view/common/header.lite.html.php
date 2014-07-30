@@ -98,6 +98,7 @@ if(RUN_MODE == 'front')
 }
 ?>
 <?php if(RUN_MODE == 'front') $this->block->printRegion($layouts, 'all', 'header');?>
+<?php if(isset($this->config->site->basestyle)) css::internal($this->config->site->basestyle);?>
 </head>
 <body>
 <!--[if lt IE 8]><?php echo $lang->IE6Alert;?><![endif]-->

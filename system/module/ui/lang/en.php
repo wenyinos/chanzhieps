@@ -17,6 +17,7 @@ $lang->ui->setTheme      = 'Set Theme';
 $lang->ui->setFavicon    = "Set favicon";
 $lang->ui->setBaseStyle  = "Set base style";
 
+$lang->ui->noStyleTag        = "Please write base CSS file code, No &lt;style&gt;&lt;/style&gt; tag.";
 $lang->ui->setLogoFailed     = "Set logo failed.";
 $lang->ui->noSelectedFile    = "No file selected.";
 $lang->ui->notAlloweFileType = "Please select %s files.";
