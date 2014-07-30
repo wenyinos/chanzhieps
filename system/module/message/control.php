@@ -164,6 +164,23 @@ class message extends control
         $this->display();
     }
 
+    public function replyComment($messageID)
+    {
+        if($_POST)
+        {
+            $result = $this->message->reply($messageID);
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->sendSuccess));
+            $this->send(array('result' => 'fail', 'reason' => 'error', 'message' => dao::getError()));
+        }
+
+        $message = $this->message->getByID($messageID);
+
+        $this->view->title      = "<i class='icon-mail-reply'></i> " . $this->lang->message->reply . ':' . $message->from;
+        $this->view->modalWidth = 600;
+        $this->view->message    = $message;
+        $this->display();
+    }
+
     /**
      * Pass messages.
      * 

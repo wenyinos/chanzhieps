@@ -8,11 +8,11 @@
  * @package     chanzhiEPS
  * @version     $Id: deny.html.php 824 2010-05-02 15:32:06Z wwccss $
  */
-$moduleName = isset($lang->$module->common) ? $lang->$module->common:  $module;
-$methodName = isset($lang->$module->$method) ? $lang->$module->$method: $method;
+$moduleName = isset($lang->$module->common)  ? $lang->$module->common  : $module;
+$methodName = isset($lang->$module->$method) ? $lang->$module->$method : $method;
 include '../common//header.lite.html.php';
 ?>
-<div class='container w-200px'>
+<div class='container'>
   <div class='alert alert-danger'>
     <h2><?php echo $app->user->account, ' ', $lang->user->deny;?></h2>
     <p> <?php printf($lang->user->errorDeny, $moduleName, $methodName);?></p>
