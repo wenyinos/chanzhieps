@@ -27,7 +27,7 @@
       </div>
       <?php endif; ?>
       <div class='panel-body'>
-        <div  class='books'><?php if(!empty($catalog)) echo $catalog;?></div>
+        <div class='books'><?php if(!empty($catalog)) echo $catalog;?></div>
       </div>
     </div>
   </div>
