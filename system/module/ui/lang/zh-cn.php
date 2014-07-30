@@ -18,6 +18,7 @@ $lang->ui->setTheme      = '主题设置';
 $lang->ui->setFavicon    = "Favicon设置";
 $lang->ui->setBaseStyle  = "全局样式设置";
 
+$lang->ui->noStyleTag        = "请填写全局CSS样式代码，不需要&lt;style&gt;&lt;/style&gt;标签";
 $lang->ui->setLogoFailed     = "设置Logo失败";
 $lang->ui->noSelectedFile    = "没有选择图片";
 $lang->ui->notAlloweFileType = "请选择正确的%s文件.";

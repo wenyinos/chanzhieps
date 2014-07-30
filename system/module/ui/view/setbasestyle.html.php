@@ -23,7 +23,10 @@
           <td><?php echo html::textarea('content', isset($content) ? $content : '', 'rows=20 class="form-control codeeditor"');?></td>
         </tr>
         <tr>
-          <td><?php echo html::submitButton();?></td>
+          <td>
+            <?php echo html::submitButton();?>
+            <strong class="text-info">&nbsp;&nbsp;<?php echo $this->lang->ui->noStyleTag?></strong>
+          </td>
         </tr>
       </table>
     </form>
