@@ -113,7 +113,7 @@ class ui extends control
     {
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            $style = fixer::input('post')->get();
+            $style = fixer::input('post')->stripTags('content', $this->config->allowedTags->admin . '>')->get();
             $return = $this->loadModel('setting')->setItems('system.common.site', array('basestyle' => $style->content));
 
             if($return) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate'=>inlink('setBaseStyle')));
