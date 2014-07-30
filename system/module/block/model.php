@@ -21,7 +21,7 @@ class blockModel extends model
     public function getByID($blockID)
     {
         $block = $this->dao->findByID($blockID)->from(TABLE_BLOCK)->fetch();
-        if(strpos('code', $block->type) === false) $block->content = json_decode($block->content);
+        if(strpos($block->type, 'code') === false) $block->content = json_decode($block->content);
         if(empty($block->content)) $block->content = new stdclass();
         return $block;
     }
@@ -424,5 +424,22 @@ class blockModel extends model
         echo $containerFooter;
 
         if($withGrid) echo '</div>';
+    }
+
+    /**
+     * Whether can create phpcode block or not.
+     * 
+     * @access public
+     * @return array
+     */
+    public function canCreatePHP()
+    {
+        $okFile = dirname($this->app->getDataRoot()) . DS . 'ok';
+        if(!file_exists($okFile) or time() - filemtime($okFile) > 3600)
+        {
+            return array('result' => 'fail', 'okFile' => $okFile);
+        }
+
+        return array('result' => 'success');
     }
 }

@@ -12,6 +12,9 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
+<?php js::set('type', $type);?>
+<?php js::set('cancreatephp', isset($canCreatePHP) ? $canCreatePHP : '');?>
+<?php js::set('okFile', isset($okFile) ? $okFile : '');?>
 <?php
 $colorPlates = '';
 foreach (explode('|', $lang->block->colorPlates) as $value)
@@ -37,8 +40,8 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
         <tr>
           <th><?php echo $lang->block->title;?></th>
           <td>
-            <?php if($type == 'code' or $type == 'featuredProduct'): ?>
-            <?php echo html::input('title', strpos(',html,code,featuredProduct,', $type) == false ?  $lang->block->typeList[$type] : '', "class='form-control'");?></div>
+            <?php if(strpos($type, 'code') !== false or $type == 'featuredProduct'): ?>
+            <?php echo html::input('title', strpos(',html,code,featuredProduct,phpcode,', $type) == false ?  $lang->block->typeList[$type] : '', "class='form-control'");?></div>
             <?php else:?>
             <div class='row'>
               <div class='col-sm-6'><?php echo html::input('title', strpos(',html,code,featuredProduct,', $type) == false ?  $lang->block->typeList[$type] : '', "class='form-control'");?></div>
@@ -93,6 +96,7 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
           </td>
         </tr>
         <?php endif;?>
+        <?php if(strpos($type, 'code') === false):?>
         <tr>
           <th><?php echo $lang->block->color;?></th>
           <td>
@@ -142,6 +146,7 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
             </div>
           </td>
         </tr>
+        <?php endif;?>
         <?php echo $this->fetch('block', 'blockForm', 'type=' . $type);?>
         <?php if(isset($config->block->defaultMoreUrl[$type])):?>
         <tr>

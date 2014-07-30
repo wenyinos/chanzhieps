@@ -15,6 +15,7 @@ $lang->block->title           = 'Title';
 $lang->block->limit           = 'Limit';
 $lang->block->type            = 'Type';
 $lang->block->code            = 'Codes';
+$lang->block->phpcode         = 'php codes';
 $lang->block->content         = 'Content';
 $lang->block->moreLink        = 'More Button';
 $lang->block->page            = 'Page';
@@ -62,8 +63,9 @@ $lang->block->gridOptions[12] = '100%';
 $lang->block->colorTip    = 'HEX color';
 $lang->block->colorPlates = '333333|000000|CA1407|45872B|148D00|F25D03|2286D2|D92958|A63268|04BFAD|D1270A|FF9400|299182|63731A|3D4DBE|7382D9|754FB9|F2E205|B1C502|364245|C05036|8A342A|E0DDA2|B3D465|EEEEEE|FFD0E5|D0FFFD|FFFF84|F4E6AE|E5E5E5|F1F1F1|FFFFFF';
 
-$lang->block->typeList['html'] = 'Html block';
-$lang->block->typeList['code'] = 'Codes';
+$lang->block->typeList['html']    = 'Html block';
+$lang->block->typeList['code']    = 'Codes';
+$lang->block->typeList['phpcode'] = 'php codes';
 
 $lang->block->typeList['latestArticle'] = 'Latest Articles';
 $lang->block->typeList['hotArticle']    = 'Hot Articles';
@@ -83,8 +85,9 @@ $lang->block->typeList['slide']   = 'Slide';
 $lang->block->typeList['header']  = 'Header';
 
 $lang->block->typeGroups = array();
-$lang->block->typeGroups['html'] = 'input';
-$lang->block->typeGroups['code'] = 'input';
+$lang->block->typeGroups['html']    = 'input';
+$lang->block->typeGroups['code']    = 'input';
+$lang->block->typeGroups['phpcode'] = 'input';
 
 $lang->block->typeGroups['latestArticle'] = 'article';
 $lang->block->typeGroups['hotArticle']    = 'article';
