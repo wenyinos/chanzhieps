@@ -256,16 +256,22 @@ class control
      */
     private function setViewFile($moduleName, $methodName)
     {
-        if(RUN_MODE == 'front') return $this->setFrontViewFile($moduleName, $methodName);
 
         $moduleName = strtolower(trim($moduleName));
         $methodName = strtolower(trim($methodName));
 
-        $modulePath  = $this->app->getModulePath($moduleName);
         $viewExtPath = $this->app->getModuleExtPath($moduleName, 'view');
 
         /* The main view file, extension view file and hook file. */
-        $mainViewFile = $modulePath . 'view' . DS . $methodName . '.' . $this->viewType . '.php';
+        if(RUN_MODE == 'front')
+        {
+            $mainViewFile = TPL_ROOT . $moduleName . DS . "{$methodName}.{$this->viewType}.php";
+        }
+        else
+        {
+            $mainViewFile = $this->app->getModulePath($moduleName) . 'view' . DS . $methodName . '.' . $this->viewType . '.php';
+        }
+
         /* Extension view file. */
         $commonExtViewFile = $viewExtPath['common'] . $methodName . ".{$this->viewType}.php";
         $siteExtViewFile   = $viewExtPath['site'] . $methodName . ".{$this->viewType}.php";
@@ -281,43 +287,6 @@ class control
 
         return $viewFile;
 
-    }
-
-    /**
-     * Set the front view file, thus can use fetch other module's page.
-     * 
-     * @param  string    $moduleName 
-     * @param  string    $methodName 
-     * @access private
-     * @return void
-     */
-    private function setFrontViewFile($moduleName, $methodName)
-    {
-        $moduleName = strtolower(trim($moduleName));
-        $methodName = strtolower(trim($methodName));
-
-        $tplPath = $this->app->getTplRoot() . DS . $this->config->site->template . DS . 'view' . DS . $moduleName . DS;
-        $fileName =  $methodName . '.' . $this->viewType . '.php';
-
-        /* The main view file, extension view file and hook file. */
-        $mainViewFile = $tplPath . DS . $fileName;
-
-        /* Extension view file. */
-        $commonExtViewFile = $tplPath . DS . 'ext' . DS . $fileName;
-        $siteExtViewFile   = $tplPath . DS . 'ext' . DS . $this->app->siteCode . DS . $fileName;
- 
-        $viewFile = file_exists($commonExtViewFile) ? $commonExtViewFile : $mainViewFile;
-        $viewFile = file_exists($siteExtViewFile) ? $siteExtViewFile : $viewFile;
-        
-        if(!is_file($viewFile)) $this->app->triggerError("the view file $viewFile not found", __FILE__, __LINE__, $exit = true);
-
-        /* Extension hook file. */
-        $commonExtHookFiles = glob($tplPath . DS . 'ext' . DS . $moduleName . '.' . $methodName . ".*.{$this->viewType}.hook.php");
-        $siteExtHookFiles   = glob($tplPath . DS . 'ext' . DS . $this->app->siteCode . $moduleName . '.' . $methodName . ".*.{$this->viewType}.hook.php");
-        $extHookFiles       = array_merge($commonExtHookFiles, $siteExtHookFiles);
-        if(!empty($extHookFiles)) return array('viewFile' => $viewFile, 'hookFiles' => $extHookFiles);
-
-        return $viewFile;
     }
 
     /**
@@ -362,75 +331,40 @@ class control
         $moduleName = strtolower(trim($moduleName));
         $methodName = strtolower(trim($methodName));
 
-        if(RUN_MODE == 'front')
-        {
-            $commonCSS = $this->getFrontCSS($moduleName, $methodName, 'common');
-            $themeCSS  = $this->getFrontCSS($moduleName, $methodName, $this->config->site->theme);
-            return empty($themeCSS) ? $commonCSS : $themeCSS;
-        }
-
         $modulePath = $this->app->getModulePath($moduleName);
+
         $cssExtPath = $this->app->getModuleExtPath($moduleName, 'css') ;
 
         $css = '';
-        $mainCssFile   = $modulePath . 'css' . DS . 'common.css';
-        $methodCssFile = $modulePath . 'css' . DS . $methodName . '.css';
-        if(file_exists($mainCssFile)) $css .= file_get_contents($mainCssFile);
-        if(is_file($methodCssFile))   $css .= file_get_contents($methodCssFile);
-
-        foreach(glob($cssExtPath['common'] . $methodName . DS . '*.css') as $cssFile)
+        if(RUN_MODE == 'front')
         {
-            $css .= file_get_contents($cssFile);
+            $defaultMainCssFile   = TPL_ROOT . $moduleName . DS . "common.css";
+            $defaultMethodCssFile = TPL_ROOT . $moduleName . DS . "{$methodName}.css";
+            $themeMainCssFile     = TPL_ROOT . $moduleName . DS . "common.{$this->config->site->theme}.css";
+            $themeMethodCssFile   = TPL_ROOT . $moduleName . DS . "{$methodName}.{$this->config->site->theme}.css";
+
+            if(file_exists($defaultMainCssFile))   $css .= file_get_contents($defaultMainCssFile);
+            if(file_exists($defaultMethodCssFile)) $css .= file_get_contents($defaultMethodCssFile);
+            if(file_exists($themeMainCssFile))     $css .= file_get_contents($themeMainCssFile);
+            if(file_exists($themeMethodCssFile))   $css .= file_get_contents($themeMethodCssFile);
+        }
+        else
+        {
+            $mainCssFile   = $modulePath . 'css' . DS . 'common.css';
+            $methodCssFile = $modulePath . 'css' . DS . $methodName . '.css';
+
+            if(file_exists($mainCssFile))   $css .= file_get_contents($mainCssFile);
+            if(file_exists($methodCssFile)) $css .= file_get_contents($methodCssFile);
         }
 
-        foreach(glob($cssExtPath['site'] . $methodName . DS . '*.css') as $cssFile)
-        {
-            $css .= file_get_contents($cssFile);
-        }
+        $commonExtCssFiles = glob($cssExtPath['common'] . $methodName . DS . '*.css');
+        foreach($commonExtCssFiles as $cssFile) $css .= file_get_contents($cssFile);
+
+        $methodExtCssFiles = glob($cssExtPath['site'] . $methodName . DS . '*.css');
+        foreach($methodExtCssFiles as $cssFile) $css .= file_get_contents($cssFile);
 
         return $css;
     }
-
-    /**
-     * Get css code for a front method. 
-     * 
-     * @param  string    $moduleName 
-     * @param  string    $moduleName 
-     * @param  string    $theme 
-     * @access private
-     * @return string
-     */
-    private function getFrontCSS($moduleName, $methodName, $theme = '')
-    {
-        $moduleName = strtolower(trim($moduleName));
-        $methodName = strtolower(trim($methodName));
-
-        $cssPath        = $this->app->getTplRoot() . $this->config->site->template . DS . 'theme' . DS . $theme . DS . 'css' . DS;
-
-        $cssMainExtPath = $cssPath . 'ext' . DS;
-        $cssSiteExtPath = $cssPath . 'ext' . DS . $this->app->siteCode . DS;
-
-        $css = '';
-        $mainJsFile   = $cssPath . $moduleName . '.common.css';
-        $methodJsFile = $cssPath . $moduleName . DS . $methodName . '.css';
-        if(file_exists($mainJsFile))   $css .= file_get_contents($mainJsFile);
-        if(is_file($methodJsFile))     $css .= file_get_contents($methodJsFile);
-
-        $commonExtFiles = glob($cssMainExtPath . $moduleName . DS . $methodName . DS . '*.css');
-        foreach($commonExtFiles as $cssFile)
-        {
-            $css .= file_get_contents($cssFile);
-        }
-
-        $siteExtFiles = glob($cssSiteExtPath . $moduleName . DS . $methodName . DS  . '*.css');
-        foreach($siteExtFiles as $cssFile)
-        {
-            $css .= file_get_contents($cssFile);
-        }
-
-        return $css;
-    }
-
 
     /**
      * Get js code for a method. 
@@ -445,64 +379,37 @@ class control
         $moduleName = strtolower(trim($moduleName));
         $methodName = strtolower(trim($methodName));
         
-        if(RUN_MODE == 'front')
-        {
-            $commonJS = $this->getFrontJS($moduleName, $methodName, 'common');
-            $themeJS  = $this->getFrontJS($moduleName, $methodName, $this->config->site->theme);
-            return empty($themeJS) ? $commonJS : $themeJS;
-        }
-
         $modulePath = $this->app->getModulePath($moduleName);
         $jsExtPath  = $this->app->getModuleExtPath($moduleName, 'js');
 
         $js = '';
-        $mainJsFile   = $modulePath . 'js' . DS . 'common.js';
-        $methodJsFile = $modulePath . 'js' . DS . $methodName . '.js';
-        if(file_exists($mainJsFile))   $js .= file_get_contents($mainJsFile);
-        if(is_file($methodJsFile))     $js .= file_get_contents($methodJsFile);
+        if(RUN_MODE == 'front')
+        {
+            $defaultMainJsFile   = TPL_ROOT . $moduleName . DS . "common.{$this->config->site->theme}.js";
+            $defaultMethodJsFile = TPL_ROOT . $moduleName . DS . "{$methodName}.{$this->config->site->theme}.js";
+            $themeMainJsFile     = TPL_ROOT . $moduleName . DS . "common.{$this->config->site->theme}.js";
+            $themeMethodJsFile   = TPL_ROOT . $moduleName . DS . "{$methodName}.{$this->config->site->theme}.js";
+
+            if(file_exists($defaultMainJsFile))   $js .= file_get_contents($defaultMainJsFile);
+            if(file_exists($defaultMethodJsFile)) $js .= file_get_contents($defaultMethodJsFile);
+
+            if(file_exists($themeMainJsFile))   $js .= file_get_contents($themeMainJsFile);
+            if(file_exists($themeMethodJsFile)) $js .= file_get_contents($themeMethodJsFile);
+        }
+        else
+        {
+            $mainJsFile   = $modulePath . 'js' . DS . 'common.js';
+            $methodJsFile = $modulePath . 'js' . DS . $methodName . '.js';
+
+            if(file_exists($mainJsFile))   $js .= file_get_contents($mainJsFile);
+            if(file_exists($methodJsFile)) $js .= file_get_contents($methodJsFile);
+        }
         
-        foreach(glob($jsExtPath['common'] . $methodName . DS . '*.js') as $jsFile)
-        {
-            $js .= file_get_contents($jsFile);
-        }
+        $commonExtJsFiles = glob($jsExtPath['common'] . $methodName . DS . '*.js');
+        foreach($commonExtJsFiles as $jsFile) $js .= file_get_contents($jsFile);
 
-        foreach(glob($jsExtPath['site'] . $methodName . DS  . '*.js') as $jsFile)
-        {
-            $js .= file_get_contents($jsFile);
-        }
-
-        return $js;
-    }
-
-    /**
-     * Get js code for a method in front mode. 
-     * 
-     * @param  string    $moduleName 
-     * @param  string    $methodName 
-     * @param  string    $theme 
-     * @access private
-     * @return string
-     */
-    private function getFrontJS($moduleName, $methodName, $theme = '')
-    {
-        $moduleName = strtolower(trim($moduleName));
-        $methodName = strtolower(trim($methodName));
-
-        $jsPath        = $this->app->getTplRoot() . $this->config->site->template . DS . 'theme' . DS . $theme . DS . 'js' . DS;
-        $jsMainExtPath = $jsPath . 'ext' . DS;
-        $jsSiteExtPath = $jsPath . 'ext' . DS . $this->app->siteCode . DS;
-
-        $js = '';
-        $mainJsFile   = $jsPath . $moduleName . DS . 'common.js';
-        $methodJsFile = $jsPath . $moduleName . DS . $methodName . '.js';
-        if(file_exists($mainJsFile))   $js .= file_get_contents($mainJsFile);
-        if(is_file($methodJsFile))     $js .= file_get_contents($methodJsFile);
-
-        $commonExtFiles = glob($jsMainExtPath . $moduleName . DS . $methodName . DS . '*.js');
-        foreach($commonExtFiles as $jsFile) $js .= file_get_contents($jsFile);
-
-        $siteExtFiles = glob($jsSiteExtPath . $moduleName . DS . $methodName . DS  . '*.js');
-        foreach($siteExtFiles as $jsFile) $js .= file_get_contents($jsFile);
+        $methodExtJsFiles = glob($jsExtPath['site'] . $methodName . DS  . '*.js');
+        foreach($methodExtJsFiles as $jsFile) $js .= file_get_contents($jsFile);
 
         return $js;
     }
@@ -682,6 +589,7 @@ class control
      */
     public function display($moduleName = '', $methodName = '')
     {
+        define('TPL_ROOT', $this->app->getTplRoot() . $this->config->site->template . DS . 'view' . DS);
         if(empty($this->output)) $this->parse($moduleName, $methodName);
         echo $this->output;
     }
