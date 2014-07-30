@@ -83,6 +83,13 @@ class block extends control
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
+        if($type == 'phpcode')
+        {
+            $return = $this->block->canCreatePHP();
+            if($return['result'] == 'fail') $this->view->okFile = $return['okFile'];
+            $this->view->canCreatePHP = $return['result'] == 'success' ? true : false;
+        }
+
         $this->view->type = $type;
         $this->display();
     }
@@ -104,6 +111,13 @@ class block extends control
             $this->block->update();
             if(!dao::isError()) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+
+        if($type == 'phpcode')
+        {
+            $return = $this->block->canCreatePHP();
+            if($return['result'] == 'fail') $this->view->okFile = $return['okFile'];
+            $this->view->canCreatePHP = $return['result'] == 'success' ? true : false;
         }
 
         $this->view->block = $this->block->getByID($blockID);

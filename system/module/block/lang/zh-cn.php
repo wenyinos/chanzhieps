@@ -15,6 +15,7 @@ $lang->block->title           = '名称';
 $lang->block->limit           = '数量';
 $lang->block->type            = '类型';
 $lang->block->code            = '代码';
+$lang->block->phpcode         = 'php代码';
 $lang->block->content         = '内容';
 $lang->block->moreLink        = '更多链接';
 $lang->block->page            = '页面';
@@ -62,8 +63,9 @@ $lang->block->gridOptions[12] = '100%';
 $lang->block->colorTip    = '十六进制颜色值';
 $lang->block->colorPlates = '333333|000000|CA1407|45872B|148D00|F25D03|2286D2|D92958|A63268|04BFAD|D1270A|FF9400|299182|63731A|3D4DBE|7382D9|754FB9|F2E205|B1C502|364245|C05036|8A342A|E0DDA2|B3D465|EEEEEE|FFD0E5|D0FFFD|FFFF84|F4E6AE|E5E5E5|F1F1F1|FFFFFF';
 
-$lang->block->typeList['html'] = '自定义区块';
-$lang->block->typeList['code'] = '源代码';
+$lang->block->typeList['html']    = '自定义区块';
+$lang->block->typeList['code']    = '源代码';
+$lang->block->typeList['phpcode'] = 'php源代码';
 
 $lang->block->typeList['latestArticle']   = '最新文章';
 $lang->block->typeList['hotArticle']      = '热门文章';
@@ -83,8 +85,9 @@ $lang->block->typeList['slide']           = '幻灯片';
 $lang->block->typeList['header']          = '网站头部';
 
 $lang->block->typeGroups = array();
-$lang->block->typeGroups['html'] = 'input';
-$lang->block->typeGroups['code'] = 'input';
+$lang->block->typeGroups['html']    = 'input';
+$lang->block->typeGroups['code']    = 'input';
+$lang->block->typeGroups['phpcode'] = 'input';
 
 $lang->block->typeGroups['latestArticle'] = 'article';
 $lang->block->typeGroups['hotArticle']    = 'article';

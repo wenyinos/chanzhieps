@@ -36,4 +36,15 @@ $(function()
             $this.closest('.color').addClass('error');
         }
     });
+
+    if(v.type == 'phpcode' && !v.cancreatephp)
+    {
+        var message = '<div class="alert"><h5>请按照下面的步骤操作以确认您的管理员身份。</h5>';
+        message += '<p>创建 <input value="' + v.okFile + '" readonly class="autoSelect red"/> 文件。如果存在该文件，使用编辑软件打开，重新保存一遍。</p></div>';
+
+        bootbox.alert(message, function()
+        {
+            location.href = createLink('block', 'create');
+        });
+    }
 });
