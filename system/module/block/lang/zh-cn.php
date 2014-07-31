@@ -52,6 +52,13 @@ $lang->block->placeholder = new stdclass();
 $lang->block->placeholder->moreText = '区块右上角文字';
 $lang->block->placeholder->moreUrl  = '区块右上角链接地址';
 
+$lang->block->setOkFile = <<<EOT
+<div class='alert'>
+<h5>请按照下面的步骤操作以确认您的管理员身份。</h5>
+<p>创建 <input value='%s' readonly class='autoSelect red'/> 文件。如果存在该文件，使用编辑软件打开，重新保存一遍。</p>
+</div>
+EOT;
+
 $lang->block->gridOptions[0]  = '自动';
 $lang->block->gridOptions[6]  = '1/2';
 $lang->block->gridOptions[4]  = '1/3';

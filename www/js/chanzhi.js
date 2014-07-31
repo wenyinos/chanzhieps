@@ -580,17 +580,17 @@ function autoBlockGrid()
         {
             if(count <= 3)
             {
-                cols.attr('class', 'col-auto col-md-' + (12/count)).data('grid', 12/count);
+                cols.attr('class', 'col-auto col-md-' + (12/count)).attr('data-grid', 12/count);
             }
             else
             {
-                cols.attr('class', 'col-auto col-md-' + dGrid).data('grid', dGrid);
+                cols.attr('class', 'col-auto col-md-' + dGrid).attr('data-grid', dGrid);
             }
             cols.data('handled', true);
         }
         else
         {
-            col.attr('class', 'col-auto col-md-' + dGrid).data('grid', dGrid).data('handled', true);
+            col.attr('class', 'col-auto col-md-' + dGrid).attr('data-grid', dGrid).data('handled', true);
         }
     });
 
@@ -632,19 +632,34 @@ function autoBlockGrid()
 
             $('.block-list .row').each(function()
             {
-                var i = 0, j = 0, k;
+                var nextRow = 0, sum = 0, row = 0, grid;
                 $(this).children("[class*='col-']").each(function()
                 {
                     var col = $(this);
-                    j += parseInt(col.data('grid'));
-                    k = i;
-                    if(j >= 12)
+                    row = nextRow;
+                    grid = parseInt(col.data('grid'));
+                    sum += grid;
+                    if(grid  == 12)
                     {
-                        i++;
-                        if(j > 12) k++;
-                        j = 0;
+                        if(sum > 12 || nextRow > 0)
+                        {
+                            row++;
+                        }
+                        nextRow = row + 1;
+                        sum = 0;
                     }
-                    col.attr('data-row', k);
+                    else if(sum == 12)
+                    {
+                        nextRow = row + 1;
+                        sum = 0;
+                    }
+                    else if(sum > 12)
+                    {
+                        row++;
+                        nextRow = row;
+                        sum = grid;
+                    }
+                    col.attr('data-row', row);
                 });
             });
 
@@ -653,8 +668,15 @@ function autoBlockGrid()
                 var block = $(this);
                 if(block.data('height')) return;
 
-                var row    = block.closest('.row');
-                var rowNo  = block.parent().data('row');
+                var row    = block.closest('.row'),
+                    col    = block.parent();
+                if(col.data('grid') == 12)
+                {
+                    block.data('height', 'auto');
+                    block.css('height', 'auto');
+                    return;
+                }
+                var rowNo  = col.data('row');
                 var height = 0;
                 row.find("[data-row='" + rowNo + "']")
                    .each(function(){height = Math.max($(this).find('.panel-block').outerHeight(), height);})

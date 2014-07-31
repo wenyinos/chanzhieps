@@ -50,7 +50,7 @@ class blockModel extends model
     public function getPageBlocks($module, $method)
     {
         $pages      = "all,{$module}_{$method}";
-        $rawLayouts = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->in($pages)->fetchGroup('page', 'region');
+        $rawLayouts = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->in($pages)->andWhere('template')->eq(isset($this->config->site->template) ? $this->config->site->template : 'default')->fetchGroup('page', 'region');
 
         $blocks = array();
         foreach($rawLayouts as $page => $pageBlocks)
