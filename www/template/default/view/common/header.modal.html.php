@@ -13,5 +13,5 @@ if(isset($pageCSS)) css::internal($pageCSS);
     </div>
     <div class="modal-body">
 <?php else:?>
-<?php include 'header.html.php';?>
+<?php include TPL_ROOT . 'common'  . DS . 'header.html.php';?>
 <?php endif;?>
