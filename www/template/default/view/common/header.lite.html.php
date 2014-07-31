@@ -6,11 +6,7 @@ $themeRoot = $webRoot . "theme/";
 $templateRoot = $webRoot . 'template/' . $config->site->template . '/';
 ?>
 <!DOCTYPE html>
-<?php if(RUN_MODE == 'front' and !empty($config->oauth->sina)):?>
 <html xmlns:wb="http://open.weibo.com/wb">
-<?php else:?>
-<html>
-<?php endif;?>
 <head profile="http://www.w3.org/2005/10/profile">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -48,12 +44,6 @@ $templateRoot = $webRoot . 'template/' . $config->site->template . '/';
       js::import($jsRoot     . 'all.js');
   }
 
-  if(RUN_MODE == 'admin')
-  {
-      css::import($themeRoot . 'default/admin.css');
-      js::import($jsRoot . 'my.admin.js');
-  }
-
   css::import($templateRoot . 'theme/' . $config->site->theme . '/style.css');
 
   if(isset($pageCSS)) css::internal($pageCSS);
@@ -86,19 +76,19 @@ else
 }
 ?>
 <![endif]-->
-<?php js::set('lang', $lang->js);?>
 <?php
-if(RUN_MODE == 'front')
-{
-    if(!empty($config->oauth->sina)) $sina = json_decode($config->oauth->sina);
-    if(!empty($config->oauth->qq))   $qq   = json_decode($config->oauth->qq);
-    if(!empty($sina->verification)) echo $sina->verification; 
-    if(!empty($qq->verification))   echo $qq->verification;
-    if(!empty($sina->widget)) js::import('http://tjs.sjs.sinajs.cn/open/api/js/wb.js');
-}
+js::set('lang', $lang->js);
+
+if(!empty($config->oauth->sina)) $sina = json_decode($config->oauth->sina);
+if(!empty($config->oauth->qq))   $qq   = json_decode($config->oauth->qq);
+if(!empty($sina->verification)) echo $sina->verification; 
+if(!empty($qq->verification))   echo $qq->verification;
+if(!empty($sina->widget)) js::import('http://tjs.sjs.sinajs.cn/open/api/js/wb.js');
+
+$this->block->printRegion($layouts, 'all', 'header');
+
+if(isset($this->config->site->basestyle)) css::internal($this->config->site->basestyle);
 ?>
-<?php if(RUN_MODE == 'front') $this->block->printRegion($layouts, 'all', 'header');?>
-<?php if(isset($this->config->site->basestyle)) css::internal($this->config->site->basestyle);?>
 </head>
 <body>
 <!--[if lt IE 8]><?php echo $lang->IE6Alert;?><![endif]-->

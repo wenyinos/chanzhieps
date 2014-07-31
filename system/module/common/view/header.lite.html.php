@@ -5,11 +5,7 @@ $jsRoot    = $webRoot . "js/";
 $themeRoot = $webRoot . "theme/";
 ?>
 <!DOCTYPE html>
-<?php if(RUN_MODE == 'front' and !empty($config->oauth->sina)):?>
-<html xmlns:wb="http://open.weibo.com/wb">
-<?php else:?>
 <html>
-<?php endif;?>
 <head profile="http://www.w3.org/2005/10/profile">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -53,20 +49,6 @@ $themeRoot = $webRoot . "theme/";
       js::import($jsRoot . 'my.admin.js');
   }
 
-  if(RUN_MODE == 'front' and $config->site->theme)
-  {
-      /* Import custom css. */
-      if($config->site->theme == 'colorful' and isset($config->site->customVersion))
-      {
-          $customCss = str_replace($this->app->getDataRoot(), $this->app->getWebRoot() . 'data/' , $config->site->ui->customCssFile);
-          css::import($customCss . "?v={$config->site->customVersion}");
-      }
-      else
-      {
-         if($config->site->theme != 'default') css::import($themeRoot . $config->site->theme . '/style.css');
-      }
-  }
-
   if(isset($pageCSS)) css::internal($pageCSS);
 
   echo isset($this->config->site->favicon) ? html::icon(json_decode($this->config->site->favicon)->webPath) : html::icon($webRoot . 'favicon.ico');
@@ -98,17 +80,6 @@ else
 ?>
 <![endif]-->
 <?php js::set('lang', $lang->js);?>
-<?php
-if(RUN_MODE == 'front')
-{
-    if(!empty($config->oauth->sina)) $sina = json_decode($config->oauth->sina);
-    if(!empty($config->oauth->qq))   $qq   = json_decode($config->oauth->qq);
-    if(!empty($sina->verification)) echo $sina->verification; 
-    if(!empty($qq->verification))   echo $qq->verification;
-    if(!empty($sina->widget)) js::import('http://tjs.sjs.sinajs.cn/open/api/js/wb.js');
-}
-?>
-<?php if(RUN_MODE == 'front') $this->block->printRegion($layouts, 'all', 'header');?>
 </head>
 <body>
 <!--[if lt IE 10]><?php echo $lang->IE6Alert;?><![endif]-->
