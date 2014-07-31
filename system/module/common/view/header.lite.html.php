@@ -37,7 +37,7 @@ $themeRoot = $webRoot . "theme/";
       js::import($jsRoot . 'jquery/treeview/min.js');
       js::import($jsRoot . 'my.js');
 
-      css::import($themeRoot . 'zui/css/min.css');
+      css::import($webRoot . 'zui/css/min.css');
       css::import($themeRoot . 'default/style.css');
       css::import($jsRoot    . 'jquery/treeview/min.css');
   }

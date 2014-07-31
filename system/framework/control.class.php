@@ -385,16 +385,15 @@ class control
         $js = '';
         if(RUN_MODE == 'front')
         {
-            $defaultMainJsFile   = TPL_ROOT . $moduleName . DS . "common.{$this->config->site->theme}.js";
-            $defaultMethodJsFile = TPL_ROOT . $moduleName . DS . "{$methodName}.{$this->config->site->theme}.js";
+            $defaultMainJsFile   = TPL_ROOT . $moduleName . DS . "common.js";
+            $defaultMethodJsFile = TPL_ROOT . $moduleName . DS . "{$methodName}.js";
             $themeMainJsFile     = TPL_ROOT . $moduleName . DS . "common.{$this->config->site->theme}.js";
             $themeMethodJsFile   = TPL_ROOT . $moduleName . DS . "{$methodName}.{$this->config->site->theme}.js";
 
             if(file_exists($defaultMainJsFile))   $js .= file_get_contents($defaultMainJsFile);
             if(file_exists($defaultMethodJsFile)) $js .= file_get_contents($defaultMethodJsFile);
-
-            if(file_exists($themeMainJsFile))   $js .= file_get_contents($themeMainJsFile);
-            if(file_exists($themeMethodJsFile)) $js .= file_get_contents($themeMethodJsFile);
+            if(file_exists($themeMainJsFile))     $js .= file_get_contents($themeMainJsFile);
+            if(file_exists($themeMethodJsFile))   $js .= file_get_contents($themeMethodJsFile);
         }
         else
         {
