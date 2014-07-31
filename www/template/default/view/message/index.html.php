@@ -29,7 +29,7 @@
                 <small>(<?php echo formatTime($message->date, 'Y-m-d H:i');?>)<?php echo $lang->colon;?></small>&nbsp;
                 <p>
                   <?php echo nl2br($message->content);?>
-                  <span class='pull-right text-muted'><?php echo html::a($this->createLink('message', 'reply', "messageID=$message->id"), $lang->message->reply, "data-toggle='modal'");?></span>
+                  <span class='pull-right'><?php echo html::a($this->createLink('message', 'reply', "messageID=$message->id"), $lang->message->reply, "data-toggle='modal'");?></span>
                 </p>
               </div>
             </div>

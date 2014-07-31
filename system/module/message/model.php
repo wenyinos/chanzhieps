@@ -107,7 +107,7 @@ class messageModel extends model
                 echo "<div class='content clearfix'>";
                 echo "<div class='reply-box radius'>";
                 echo " <span class='author'><strong><i class='icon-user text-muted'></i>" . $reply->from . "</strong> <small>(" . formatTime($reply->date, 'Y-m-d H:i') . ")</small>" . $this->lang->colon . "</span>" . nl2br($reply->content);
-                echo "<span class='link-button text-muted pull-right'>";
+                echo "<span class='link-button pull-right'>";
                 echo html::a(helper::createLink('message', 'reply', "id={$reply->id}"), $this->lang->message->reply, "data-toggle='modal'");
                 echo "</span>";
                 echo "</div></div>";
