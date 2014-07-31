@@ -176,7 +176,7 @@ class messageModel extends model
             if($message->objectType == 'article') $message->objectTitle = isset($articleTitles[$message->objectID]) ? $articleTitles[$message->objectID] : '';
             if($message->objectType == 'product') $message->objectTitle = isset($productTitles[$message->objectID]) ? $productTitles[$message->objectID] : '';
             if($message->objectType == 'book')    $message->objectTitle = isset($bookTitles[$message->objectID]) ? $bookTitles[$message->objectID] : '';
-            if($message->objectType == 'message') $message->objectTitle = isset($messageTitles[$message->objectID]) ? $messageTitles[$message->objectID] : '';
+            if($message->objectType == 'message' or $message->objectType == 'comment') $message->objectTitle = isset($messageTitles[$message->objectID]) ? $messageTitles[$message->objectID] : '';
         }
 
         foreach($messages as $message)
@@ -381,7 +381,7 @@ class messageModel extends model
             $node = $this->loadModel('book')->getNodeByID($message->objectID);
             $link = commonModel::createFrontLink('book', 'read', "articleID=$message->objectID", "book={$node->book->alias}&node={$node->alias}");
         }
-        elseif($message->objectType == 'message')
+        elseif($message->objectType == 'message' or $message->objectType == 'comment')
         {
             $link = commonModel::createFrontLink('message', 'index') . "#comment{$message->objectID}";
         }
