@@ -95,7 +95,7 @@ if(file_exists($modeConfig))   include $modeConfig;
 define('TABLE_SITE',           $config->db->prefix . 'site');
 define('TABLE_CONFIG',         $config->db->prefix . 'config');
 define('TABLE_CATEGORY',       $config->db->prefix . 'category');
-define('TABLE_EXTENSION',      $config->db->prefix . 'extension');
+define('TABLE_PACKAGE',        $config->db->prefix . 'package');
 define('TABLE_RELATION',       $config->db->prefix . 'relation');
 define('TABLE_PRODUCT',        $config->db->prefix . 'product');
 define('TABLE_PRODUCT_CUSTOM', $config->db->prefix . 'product_custom');

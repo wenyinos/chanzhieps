@@ -43,10 +43,10 @@ if($result) echo "create all.ie9.js success\n";
 //-------------------------------- PROCESS CSS FILES ------------------------------ //
 
 /* Define the themeRoot. */
-$themeRoot  = $baseDir . '/www/theme/';
+$themeRoot  = $baseDir . '/www/template/default/theme/';
 
 /* Common css files. */
-$cssCode  = str_replace('../fonts', '../zui/fonts', file_get_contents($themeRoot . 'zui/css/min.css'));
+$cssCode  = str_replace('../fonts', '../../../../zui/fonts', file_get_contents($baseDir . '/www/zui/css/min.css'));
 $cssCode .= file_get_contents($themeRoot . 'default/style.css');
 $cssCode .= file_get_contents($jsRoot . 'jquery/treeview/min.css');
 

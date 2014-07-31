@@ -183,7 +183,7 @@ class packageModel extends model
      */
     public function getLocalPackages($status)
     {
-        $packages = $this->dao->select('*')->from(TABLE_EXTENSION)->where('status')->eq($status)->fi()->fetchAll('code');
+        $packages = $this->dao->select('*')->from(TABLE_PACKAGE)->where('status')->eq($status)->fi()->fetchAll('code');
         foreach($packages as $package)
         {
             if($package->site and stripos(strtolower($package->site), 'http') === false) $package->site = 'http://' . $package->site;
@@ -200,7 +200,7 @@ class packageModel extends model
      */
     public function getInfoFromDB($package)
     {
-        return $this->dao->select('*')->from(TABLE_EXTENSION)->where('code')->eq($package)->fetch();
+        return $this->dao->select('*')->from(TABLE_PACKAGE)->where('code')->eq($package)->fetch();
     }
 
     /**
@@ -771,7 +771,7 @@ class packageModel extends model
      {
          $removeCommands = array();
 
-         $this->dao->delete()->from(TABLE_EXTENSION)->where('code')->eq($package)->exec();
+         $this->dao->delete()->from(TABLE_PACKAGE)->where('code')->eq($package)->exec();
 
          /* Remove the zip file. */
          $packageFile = $this->getPackageFile($package);
@@ -895,7 +895,7 @@ class packageModel extends model
          $package->code   = $code;
          $package->type   = empty($type) ? $package->type : $type;
 
-         $this->dao->replace(TABLE_EXTENSION)->data($package)->exec();
+         $this->dao->replace(TABLE_PACKAGE)->data($package)->exec();
      }
 
      /**
@@ -937,7 +937,7 @@ class packageModel extends model
              }
              $data->files = json_encode($data->files);
          }
-         return $this->dao->update(TABLE_EXTENSION)->data($data)->where('code')->eq($package)->exec();
+         return $this->dao->update(TABLE_PACKAGE)->data($data)->where('code')->eq($package)->exec();
      }
 
      /**
@@ -950,8 +950,8 @@ class packageModel extends model
      public function checkDepends($package)
      {
          $result        = array();
-         $packageInfo = $this->dao->select('*')->from(TABLE_EXTENSION)->where('code')->eq($package)->fetch();
-         $dependsExts   = $this->dao->select('*')->from(TABLE_EXTENSION)->where('depends')->like("%$package%")->andWhere('status')->ne('available')->fetchAll();
+         $packageInfo = $this->dao->select('*')->from(TABLE_PACKAGE)->where('code')->eq($package)->fetch();
+         $dependsExts   = $this->dao->select('*')->from(TABLE_PACKAGE)->where('depends')->like("%$package%")->andWhere('status')->ne('available')->fetchAll();
          if($dependsExts)
          {
              foreach($dependsExts as $dependsExt)

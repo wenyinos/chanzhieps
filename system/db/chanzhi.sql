@@ -97,8 +97,8 @@ CREATE TABLE IF NOT EXISTS `eps_config` (
   UNIQUE KEY `unique` (`owner`,`module`,`section`,`key`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
--- DROP TABLE IF EXISTS `eps_extension`;
-CREATE TABLE IF NOT EXISTS `eps_extension` (
+-- DROP TABLE IF EXISTS `eps_package`;
+CREATE TABLE IF NOT EXISTS `eps_package` (
   `id` mediumint(8) unsigned NOT NULL auto_increment,
   `name` varchar(150) NOT NULL,
   `code` varchar(30) NOT NULL,
