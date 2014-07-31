@@ -211,7 +211,7 @@ body {background: #232323;}
 {
   #header {margin: 0}
   #headNav {background: #fff; padding: 0; margin: 0}
-  #headTitle {padding-left: 10px; padding-right: 10px; position: static;}
+  #headTitle {padding-left: 10px; margin-right: 50px; width: 80%}
 
   #navbar .navbar-header {position: absolute; width: 100%; top: -60px;}
   #navbar .navbar-collapse {border:none; border-bottom: 1px solid #e5e5e5; padding: 0}
