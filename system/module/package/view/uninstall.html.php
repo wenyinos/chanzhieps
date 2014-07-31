@@ -1,11 +1,11 @@
 <?php
 /**
- * The uninstall view file of extension module of ChanZhiEPS.
+ * The uninstall view file of package module of ChanZhiEPS.
  *
  * @copyright   Copyright 2009-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
  * @license     http://api.chanzhi.org/goto.php?item=license
  * @author      Chunsheng Wang <chunsheng@xirangit.com>
- * @package     extension
+ * @package     package
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
@@ -16,10 +16,10 @@
   <i class='icon-info-sign'></i>
   <div class='content'>
   <?php
-    echo "<p class='waring'>{$lang->extension->confirmUninstall}";
-    echo html::a(inlink('uninstall', "extension=$code&confirm=yes"), $lang->extension->uninstall, "class='btn loadInModal'");
+    echo "<p class='waring'>{$lang->package->confirmUninstall}";
+    echo html::a(inlink('uninstall', "package=$code&confirm=yes"), $lang->package->uninstall, "class='btn loadInModal'");
     echo "</p>";
-    echo "<p>{$lang->extension->noticeBackupDB}</p>"
+    echo "<p>{$lang->package->noticeBackupDB}</p>"
   ?>
   </div>
 </div>
@@ -28,7 +28,7 @@
   <i class='icon-info-sign'></i>
   <div class='content'>
   <?php
-    echo "<h3 class='error'>" . $lang->extension->uninstallFailed . "</h3>"; 
+    echo "<h3 class='error'>" . $lang->package->uninstallFailed . "</h3>"; 
     echo "<p>$error</p>";
   ?>
   </div>
@@ -39,13 +39,13 @@
   <div class='content'>
     <?php
     echo "<h3>{$title}</h3>";
-    if(!empty($backupFile)) echo '<p>' . sprintf($lang->extension->backDBFile, $backupFile) . '</p>';
+    if(!empty($backupFile)) echo '<p>' . sprintf($lang->package->backDBFile, $backupFile) . '</p>';
     if($removeCommands)
     {
-        echo "<p class='strong'>{$lang->extension->unremovedFiles}</p>";
+        echo "<p class='strong'>{$lang->package->unremovedFiles}</p>";
         echo join($removeCommands, '<br />');
     }
-    echo "<p class='text-center'>" . html::a(inlink('browse', 'type=available'), $lang->extension->viewAvailable, "class='btn'") . '</p>';
+    echo "<p class='text-center'>" . html::a(inlink('browse', 'type=available'), $lang->package->viewAvailable, "class='btn'") . '</p>';
     ?>
   </div>
 </div>

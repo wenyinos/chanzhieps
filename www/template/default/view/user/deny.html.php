@@ -8,8 +8,8 @@
  * @package     chanzhiEPS
  * @version     $Id: deny.html.php 824 2010-05-02 15:32:06Z wwccss $
  */
-$moduleName = isset($lang->$module->common/  ? $lang->$module->common/  $module;
-$methodName = isset($lang->$module->$method) ? $lang->$module->$method: $method;
+$moduleName = isset($lang->$module->common)  ? $lang->$module->common  : $module;
+$methodName = isset($lang->$module->$method) ? $lang->$module->$method : $method;
 include '../common//header.lite.html.php';
 ?>
 <div class='container w-200px'>
@@ -18,7 +18,7 @@ include '../common//header.lite.html.php';
     <p> <?php printf($lang->user->errorDeny, $moduleName, $methodName);?></p>
     <p>
     <?php
-     echo html::a($this->createLink($config->default->module), $lang->index->common/;
+     echo html::a($this->createLink($config->default->module), $lang->index->common);
      if($refererBeforeDeny) echo html::a(helper::safe64Decode($refererBeforeDeny), $lang->user->goback);
      echo html::a($this->createLink('user', 'logout', "referer=" . helper::safe64Encode($denyPage)), $lang->user->relogin);
     ?>

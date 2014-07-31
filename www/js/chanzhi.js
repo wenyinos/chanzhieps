@@ -273,7 +273,7 @@ $.extend(
                             {
                                 if(typeof(data.locate) != 'undefined' && data.locate)
                                 {
-                                    $('#ajaxModal').load(data.locate);
+                                    $('#ajaxModal').attr('rel', data.locate).load(data.locate);
                                 }
                                 else
                                 {

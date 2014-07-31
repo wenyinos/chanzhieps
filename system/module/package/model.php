@@ -1,18 +1,18 @@
 <?php
 /**
- * The model file of extension module of ChanZhiEPS.
+ * The model file of package module of ChanZhiEPS.
  *
  * @copyright   Copyright 2009-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
  * @license     http://api.chanzhi.org/goto.php?item=license
  * @author      Chunsheng Wang <chunsheng@xirangit.com>
- * @package     extension
+ * @package     package
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-class extensionModel extends model
+class packageModel extends model
 {
     /**
-     * The extension manager version. Don't change it. 
+     * The package manager version. Don't change it. 
      */
     const EXT_MANAGER_VERSION = '1.3';
 
@@ -65,7 +65,7 @@ class extensionModel extends model
      */
     public function setApiRoot()
     {
-        $this->apiRoot = $this->config->extension->apiRoot;
+        $this->apiRoot = $this->config->package->apiRoot;
     }
 
     /**
@@ -88,7 +88,7 @@ class extensionModel extends model
     }
 
     /**
-     * Get extension modules from the api.
+     * Get package modules from the api.
      * 
      * @access public
      * @return string|bool
@@ -104,23 +104,23 @@ class extensionModel extends model
     }
 
     /**
-     * Get extensions by some condition.
+     * Get packages by some condition.
      * 
      * @param  string    $type 
      * @param  mixed     $param 
      * @access public
      * @return array|bool
      */
-    public function getExtensionsByAPI($type, $param, $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function getPackagesByAPI($type, $param, $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
-        $apiURL = $this->apiRoot . "apiGetExtensions-$type-$param-$recTotal-$recPerPage-$pageID.json";
+        $apiURL = $this->apiRoot . "apiGetPackages-$type-$param-$recTotal-$recPerPage-$pageID.json";
         $data   = $this->fetchAPI($apiURL);
-        if(isset($data->extensions))
+        if(isset($data->packages))
         {
-            foreach($data->extensions as $extension)
+            foreach($data->packages as $package)
             {
-                $extension->currentRelease = isset($extension->chanzhiCompatible) ? $extension->chanzhiCompatible : $extension->releaseVersion;
-                $extension->currentRelease->compatible = isset($extension->chanzhiCompatible);
+                $package->currentRelease = isset($package->chanzhiCompatible) ? $package->chanzhiCompatible : $package->releaseVersion;
+                $package->currentRelease->compatible = isset($package->chanzhiCompatible);
             }
             return $data;
         }
@@ -128,23 +128,23 @@ class extensionModel extends model
     }
 
     /**
-     * Get versions for some extensions.
+     * Get versions for some packages.
      * 
-     * @param  string    $extensions 
+     * @param  string    $packages 
      * @access public
      * @return array|bool
      */
-    public function getVersionsByAPI($extensions)
+    public function getVersionsByAPI($packages)
     {
-        $extensions = helper::safe64Encode($extensions);
-        $apiURL = $this->apiRoot . 'apiGetVersions-' . $extensions . '.json';
+        $packages = helper::safe64Encode($packages);
+        $apiURL = $this->apiRoot . 'apiGetVersions-' . $packages . '.json';
         $data = $this->fetchAPI($apiURL);
         if(isset($data->versions)) return (array)$data->versions;
         return false;
     }
 
     /**
-     * Check incompatible extension
+     * Check incompatible package
      * 
      * @param  array    $versions 
      * @access public
@@ -160,72 +160,72 @@ class extensionModel extends model
     }
 
     /**
-     * Download an extension.
+     * Download an package.
      * 
-     * @param  string    $extension 
+     * @param  string    $package 
      * @param  string    $downLink 
      * @access public
      * @return void
      */
-    public function downloadPackage($extension, $downLink)
+    public function downloadPackage($package, $downLink)
     {
-        $packageFile = $this->getPackageFile($extension);
+        $packageFile = $this->getPackageFile($package);
         $this->agent->fetch($downLink);
         file_put_contents($packageFile, $this->agent->results);
     }
 
     /**
-     * Get extensions by status.
+     * Get packages by status.
      * 
      * @param  string    $status 
      * @access public
      * @return array
      */
-    public function getLocalExtensions($status)
+    public function getLocalPackages($status)
     {
-        $extensions = $this->dao->select('*')->from(TABLE_EXTENSION)->where('status')->eq($status)->fi()->fetchAll('code');
-        foreach($extensions as $extension)
+        $packages = $this->dao->select('*')->from(TABLE_EXTENSION)->where('status')->eq($status)->fi()->fetchAll('code');
+        foreach($packages as $package)
         {
-            if($extension->site and stripos(strtolower($extension->site), 'http') === false) $extension->site = 'http://' . $extension->site;
+            if($package->site and stripos(strtolower($package->site), 'http') === false) $package->site = 'http://' . $package->site;
         }
-        return $extensions;
+        return $packages;
     }
 
     /**
-     * Get extension info from database.
+     * Get package info from database.
      * 
-     * @param  string    $extension 
+     * @param  string    $package 
      * @access public
      * @return object
      */
-    public function getInfoFromDB($extension)
+    public function getInfoFromDB($package)
     {
-        return $this->dao->select('*')->from(TABLE_EXTENSION)->where('code')->eq($extension)->fetch();
+        return $this->dao->select('*')->from(TABLE_EXTENSION)->where('code')->eq($package)->fetch();
     }
 
     /**
-     * Get info of an extension from the package file.
+     * Get info of an package from the package file.
      * 
-     * @param  string    $extension 
+     * @param  string    $package 
      * @access public
      * @return object
      */
-    public function getInfoFromPackage($extension)
+    public function getInfoFromPackage($package)
     {
         /* Init the data. */
         $data = new stdclass();
-        $data->name             = $extension;
-        $data->code             = $extension;
+        $data->name             = $package;
+        $data->code             = $package;
         $data->version          = 'unknown';
         $data->author           = 'unknown';
-        $data->desc             = $extension;
+        $data->desc             = $package;
         $data->site             = 'unknown';
         $data->license          = 'unknown';
         $data->chanzhiCompatible = '';
         $data->type             = '';
         $data->depends          = '';
 
-        $info = $this->parseExtensionCFG($extension);
+        $info = $this->parsePackageCFG($package);
         foreach($info as $key => $value) if(isset($data->$key)) $data->$key = $value;
         if(isset($info->chanzhiversion))        $data->chanzhiCompatible = $info->chanzhiversion;
         if(isset($info->chanzhi['compatible'])) $data->chanzhiCompatible = $info->chanzhi['compatible'];
@@ -235,18 +235,18 @@ class extensionModel extends model
     }
 
     /**
-     * Parse extension's config file.
+     * Parse package's config file.
      * 
-     * @param  string    $extension 
+     * @param  string    $package 
      * @access public
      * @return object
      */
-    public function parseExtensionCFG($extension)
+    public function parsePackageCFG($package)
     {
         $info = new stdclass();
 
         /* First, try ini file. before 2.5 version. */
-        $infoFile = "ext/$extension/doc/copyright.txt";
+        $infoFile = "ext/$package/doc/copyright.txt";
         if(file_exists($infoFile)) return (object)parse_ini_file($infoFile);
 
         /**
@@ -255,8 +255,8 @@ class extensionModel extends model
 
         /* Try the yaml of current lang, then try en. */
         $lang = $this->app->getClientLang();
-        $infoFile = "ext/$extension/doc/$lang.yaml";
-        if(!file_exists($infoFile)) $infoFile = "ext/$extension/doc/en.yaml";
+        $infoFile = "ext/$package/doc/$lang.yaml";
+        if(!file_exists($infoFile)) $infoFile = "ext/$package/doc/en.yaml";
         if(!file_exists($infoFile)) return $info;
 
         /* Load the yaml file and parse it into object. */
@@ -273,28 +273,28 @@ class extensionModel extends model
     }
 
     /**
-     * Get the full path of the zip file of a extension. 
+     * Get the full path of the zip file of a package. 
      * 
-     * @param  string    $extension 
+     * @param  string    $package 
      * @access public
      * @return string
      */
-    public function getPackageFile($extension)
+    public function getPackageFile($package)
     {
-        return $this->app->getTmpRoot() . 'extension/' . $extension . '.zip';
+        return $this->app->getTmpRoot() . 'package/' . $package . '.zip';
     }
 
     /**
-     * Get pathes from an extension package.
+     * Get pathes from an package package.
      * 
-     * @param  string    $extension 
+     * @param  string    $package 
      * @access public
      * @return array
      */
-    public function getPathesFromPackage($extension)
+    public function getPathesFromPackage($package)
     {
         $pathes = array();
-        $packageFile = $this->getPackageFile($extension);
+        $packageFile = $this->getPackageFile($package);
 
         /* Get files from the package file. */
         $this->app->loadClass('pclzip', true);
@@ -312,7 +312,7 @@ class extensionModel extends model
         }
 
         /* Append the pathes to stored the extracted files. */
-        $pathes[] = "system/module/extension/ext/";
+        $pathes[] = "system/module/package/ext/";
 
         return array_unique($pathes);
     }
@@ -320,27 +320,27 @@ class extensionModel extends model
     /**
      * Get all files from a package.
      * 
-     * @param  string    $extension 
+     * @param  string    $package 
      * @access public
      * @return array
      */
-    public function getFilesFromPackage($extension)
+    public function getFilesFromPackage($package)
     {
-        $extensionDir = "ext/$extension/";
-        $files = $this->classFile->readDir($extensionDir, array('db', 'doc'));
+        $packageDir = "ext/$package/";
+        $files = $this->classFile->readDir($packageDir, array('db', 'doc'));
         return $files;
     }
 
     /**
-     * Get the extension's condition. 
+     * Get the package's condition. 
      * 
      * @param  string    $extenstion 
      * @access public
      * @return object
      */
-    public function getCondition($extension)
+    public function getCondition($package)
     {
-        $info      = $this->parseExtensionCFG($extension);
+        $info      = $this->parsePackageCFG($package);
         $condition = new stdclass();
 
         $condition->chanzhi   = array('compatible' => '', 'incompatible' => '');
@@ -377,14 +377,14 @@ class extensionModel extends model
     /**
      * Get hook file for install or uninstall.
      * 
-     * @param  string    $extension 
+     * @param  string    $package 
      * @param  string    $hook      preinstall|postinstall|preuninstall|postuninstall 
      * @access public
      * @return string|bool
      */
-    public function getHookFile($extension, $hook)
+    public function getHookFile($package, $hook)
     {
-        $hookFile = "ext/$extension/hook/$hook.php";
+        $hookFile = "ext/$package/hook/$hook.php";
         if(file_exists($hookFile)) return $hookFile;
         return false;
     }
@@ -392,14 +392,14 @@ class extensionModel extends model
     /**
      * Get the install db file.
      * 
-     * @param  string    $extension 
+     * @param  string    $package 
      * @param  string    $method 
      * @access public
      * @return string
      */
-    public function getDBFile($extension, $method = 'install')
+    public function getDBFile($package, $method = 'install')
     {
-        return "ext/$extension/db/$method.sql";
+        return "ext/$package/db/$method.sql";
     }
 
     /**
@@ -416,7 +416,7 @@ class extensionModel extends model
         $return->error  = '';
 
         $tmpRoot = $this->app->getTmpRoot();
-        $downloadPath = $tmpRoot . 'extension';
+        $downloadPath = $tmpRoot . 'package';
 
         if(!is_dir($downloadPath))
         {
@@ -427,13 +427,13 @@ class extensionModel extends model
             else
             {
                 $return->result = 'fail';
-                $return->error  = sprintf($this->lang->extension->errorDownloadPathNotFound, $downloadPath, $downloadPath);
+                $return->error  = sprintf($this->lang->package->errorDownloadPathNotFound, $downloadPath, $downloadPath);
             }
         }
         elseif(!is_writable($downloadPath))
         {
             $return->result = 'fail';
-            $return->error  = sprintf($this->lang->extension->errorDownloadPathNotWritable, $downloadPath, $downloadPath);
+            $return->error  = sprintf($this->lang->package->errorDownloadPathNotWritable, $downloadPath, $downloadPath);
         }
         return $return;
     }
@@ -457,13 +457,13 @@ class extensionModel extends model
             {
                 if(isset($installedExts[$code]))
                 {
-                    if($this->extension->compare4Limit($installedExts[$code]->version, $limit)) $conflictsExt .= $installedExts[$code]->name . " ";
+                    if($this->package->compare4Limit($installedExts[$code]->version, $limit)) $conflictsExt .= $installedExts[$code]->name . " ";
                 }
             }
 
             if($conflictsExt)
             {
-                return array('result' => 'fail', 'error' => sprintf($this->lang->extension->errorConflicts, $conflictsExt));
+                return array('result' => 'fail', 'error' => sprintf($this->lang->package->errorConflicts, $conflictsExt));
             }
         }
         return array('result' => 'success');
@@ -487,7 +487,7 @@ class extensionModel extends model
                 $noDepends = false;
                 if(isset($installedExts[$code]))
                 {
-                    if($this->extension->compare4Limit($installedExts[$code]->version, $limit, 'noBetween'))$noDepends = true;
+                    if($this->package->compare4Limit($installedExts[$code]->version, $limit, 'noBetween'))$noDepends = true;
                 }
                 else
                 {
@@ -502,12 +502,12 @@ class extensionModel extends model
                     if(!empty($limit['max'])) $extVersion .= ' <=v' . $limit['max'];
                     $extVersion .=')';
                 }
-                if($noDepends)$dependsExt .= $code . $extVersion . ' ' . html::a(inlink('obtain', 'type=bycode&param=' . helper::safe64Encode($code)), $this->lang->extension->installExt, '_blank') . '<br />';
+                if($noDepends)$dependsExt .= $code . $extVersion . ' ' . html::a(inlink('obtain', 'type=bycode&param=' . helper::safe64Encode($code)), $this->lang->package->installExt, '_blank') . '<br />';
             }
 
             if($noDepends)
             {
-                return array('result' => 'fail', 'error' => sprintf($this->lang->extension->errorDepends, $dependsExt));
+                return array('result' => 'fail', 'error' => sprintf($this->lang->package->errorDepends, $dependsExt));
             }
             return array('result' => 'success');
         }
@@ -515,13 +515,13 @@ class extensionModel extends model
     }
 
     /**
-     * Check extension files.
+     * Check package files.
      * 
-     * @param  string    $extension 
+     * @param  string    $package 
      * @access public
      * @return object    the check result.
      */
-    public function checkExtensionPathes($extension)
+    public function checkPackagePathes($package)
     {
         $return = new stdclass();
         $return->result        = 'ok';
@@ -531,7 +531,7 @@ class extensionModel extends model
         $return->dirs2Created  = array();
 
         $appRoot = $this->app->getAppRoot();
-        $pathes  = $this->getPathesFromPackage($extension);
+        $pathes  = $this->getPathesFromPackage($package);
 
         $groupedPaths = array();
         foreach($pathes as $path)
@@ -546,13 +546,13 @@ class extensionModel extends model
             {
                 if($path == 'db' or $path == 'doc' or $path == 'hook') continue;
                 if($baseDir == 'system') $path = dirname($appRoot) . DS . $path;
-                if($baseDir == 'www')    $path = $this->app->getWwwRoot() . DS . substr($path, 4);
+                if($baseDir == 'www')    $path = $this->app->getWwwRoot() . substr($path, 4);
 
                 if(is_dir($path))
                 {
                     if(!is_writable($path))
                     {
-                        $return->errors .= sprintf($this->lang->extension->errorTargetPathNotWritable, $path) . '<br />';
+                        $return->errors .= sprintf($this->lang->package->errorTargetPathNotWritable, $path) . '<br />';
                         $return->chmodCommands .= "sudo chmod -R 777 $path<br />";
                     }
                 }
@@ -560,7 +560,7 @@ class extensionModel extends model
                 {
                     if(!@mkdir($path, 0755, true))
                     {
-                        $return->errors .= sprintf($this->lang->extension->errorTargetPathNotExists, $path) . '<br />';
+                        $return->errors .= sprintf($this->lang->package->errorTargetPathNotExists, $path) . '<br />';
                         $return->mkdirCommands .= "mkdir -p $path<br />";
                         $return->chmodCommands .= "sudo chmod -R 777 $path<br />";
                     }
@@ -571,13 +571,13 @@ class extensionModel extends model
 
         if($return->errors) $return->result = 'fail';
         $return->mkdirCommands = str_replace('/', DIRECTORY_SEPARATOR, $return->mkdirCommands);
-        $return->errors .= $this->lang->extension->executeCommands . $return->mkdirCommands;
+        $return->errors .= $this->lang->package->executeCommands . $return->mkdirCommands;
         if(PHP_OS == 'Linux') $return->errors .= $return->chmodCommands;
         return $return;
     }
 
     /**
-     * Check the extension's version is compatibility for chanzhi version
+     * Check the package's version is compatibility for chanzhi version
      * 
      * @param  string    $version 
      * @access public
@@ -594,25 +594,25 @@ class extensionModel extends model
     /**
      * Check files in the package conflicts with exists files or not.
      * 
-     * @param  string    $extension 
+     * @param  string    $package 
      * @param  string    $type
      * @param  bool      $isCheck
      * @access public
      * @return object
      */
-    public function checkFile($extension)
+    public function checkFile($package)
     {
         $return = new stdclass();
         $return->result = 'ok';
         $return->error  = '';
 
-        $extensionFiles = $this->getFilesFromPackage($extension);
+        $packageFiles = $this->getFilesFromPackage($package);
         $appRoot = $this->app->getAppRoot();
-        foreach($extensionFiles as $extensionFile)
+        foreach($packageFiles as $packageFile)
         {
-            $compareFile = $appRoot . str_replace(realpath("ext/$extension") . '/', '', $extensionFile);
+            $compareFile = $appRoot . str_replace(realpath("ext/$package") . '/', '', $packageFile);
             if(!file_exists($compareFile)) continue;
-            if(md5_file($extensionFile) != md5_file($compareFile)) $return->error .= $compareFile . '<br />';
+            if(md5_file($packageFile) != md5_file($compareFile)) $return->error .= $compareFile . '<br />';
         }
 
         if($return->error != '') $return->result = 'fail';
@@ -620,29 +620,29 @@ class extensionModel extends model
     }
 
     /**
-     * Extract an extension.
+     * Extract an package.
      * 
-     * @param  string    $extension 
+     * @param  string    $package 
      * @access public
      * @return object
      */
-    public function extractPackage($extension) 
+    public function extractPackage($package) 
     {
         $return = new stdclass();
         $return->result = 'ok';
         $return->error  = '';
 
         /* try remove old extracted files. */
-        $extensionPath = "ext/$extension";
-        if(is_dir($extensionPath)) $this->classFile->removeDir($extensionPath);
+        $packagePath = "ext/$package";
+        if(is_dir($packagePath)) $this->classFile->removeDir($packagePath);
 
         /* Extract files. */
-        $packageFile = $this->getPackageFile($extension);
+        $packageFile = $this->getPackageFile($package);
         $this->app->loadClass('pclzip', true);
         $zip = new pclzip($packageFile);
         $files = $zip->listContent();
         $removePath = $files[0]['filename'];
-        if($zip->extract(PCLZIP_OPT_PATH, $extensionPath, PCLZIP_OPT_REMOVE_PATH, $removePath) == 0)
+        if($zip->extract(PCLZIP_OPT_PATH, $packagePath, PCLZIP_OPT_REMOVE_PATH, $removePath) == 0)
         {
             $return->result = 'fail';
             $return->error  = $zip->errorInfo(true);
@@ -654,16 +654,16 @@ class extensionModel extends model
     /**
      * Copy package files. 
      * 
-     * @param  int    $extension 
+     * @param  int    $package 
      * @access public
      * @return array
      */
-    public function copyPackageFiles($extension)
+    public function copyPackageFiles($package)
     {
         $appRoot      = $this->app->getAppRoot();
-        $extensionDir = 'ext' . DS . $extension . DS;
-        $systemPathes = scandir($extensionDir . 'system' . DS);
-        $wwwPathes    = scandir($extensionDir . 'www' . DS);
+        $packageDir = 'ext' . DS . $package . DS;
+        $systemPathes = scandir($packageDir . 'system' . DS);
+        $wwwPathes    = scandir($packageDir . 'www' . DS);
 
         $copiedFiles       = array();
         $copiedSystemFiles = array();
@@ -672,13 +672,13 @@ class extensionModel extends model
         foreach($systemPathes as $path)
         {
             if($path == 'db' or $path == 'doc' or $path == 'hook' or $path == '..' or $path == '.') continue;
-            $copiedSystemFiles = $copiedSystemFiles + $this->classFile->copyDir($extensionDir . DS . 'system' . DS . $path, $appRoot . $path);
+            $copiedSystemFiles = $copiedSystemFiles + $this->classFile->copyDir($packageDir . DS . 'system' . DS . $path, $appRoot . $path);
         }
 
         foreach($wwwPathes as $path)
         {
             if($path == '..' or $path == '.') continue;
-            $copiedWwwFiles = $copiedWwwFiles + $this->classFile->copyDir($extensionDir . 'www' . DS . $path, $this->app->getWwwRoot() . $path);
+            $copiedWwwFiles = $copiedWwwFiles + $this->classFile->copyDir($packageDir . 'www' . DS . $path, $this->app->getWwwRoot() . $path);
         }
 
         $copiedFiles = $copiedSystemFiles + $copiedWwwFiles;
@@ -693,18 +693,18 @@ class extensionModel extends model
     }
 
     /**
-     * Remove an extension.
+     * Remove an package.
      * 
-     * @param  string    $extension 
+     * @param  string    $package 
      * @access public
      * @return array     the remove commands need executed manually.
      */
-    public function removePackage($extension)
+    public function removePackage($package)
     {
-        $extension = $this->getInfoFromDB($extension);
-        if($extension->type == 'patch') return true;
-        $dirs  = json_decode($extension->dirs);
-        $files = json_decode($extension->files);
+        $package = $this->getInfoFromDB($package);
+        if($package->type == 'patch') return true;
+        $dirs  = json_decode($package->dirs);
+        $files = json_decode($package->files);
         $appRoot = $this->app->getAppRoot();
         $wwwRoot = $this->app->getWwwRoot();
         $removeCommands = array();
@@ -761,20 +761,20 @@ class extensionModel extends model
     }
 
     /**
-     * Erase an extension's package file.
+     * Erase an package's package file.
      * 
-     * @param  string    $extension 
+     * @param  string    $package 
      * @access public
      * @return array     the remove commands need executed manually.
      */
-     public function erasePackage($extension)
+     public function erasePackage($package)
      {
          $removeCommands = array();
 
-         $this->dao->delete()->from(TABLE_EXTENSION)->where('code')->eq($extension)->exec();
+         $this->dao->delete()->from(TABLE_EXTENSION)->where('code')->eq($package)->exec();
 
          /* Remove the zip file. */
-         $packageFile = $this->getPackageFile($extension);
+         $packageFile = $this->getPackageFile($package);
          if(!file_exists($packageFile)) return false;
          if(file_exists($packageFile) and !@unlink($packageFile))
          {
@@ -782,7 +782,7 @@ class extensionModel extends model
          }
 
          /* Remove the extracted files. */
-         $extractedDir = realpath("ext/$extension");
+         $extractedDir = realpath("ext/$package");
          if($extractedDir != '/' and !$this->classFile->removeDir($extractedDir))
          {
              $removeCommands[] = PHP_OS == 'Linux' ? "rm -fr $extractedDir" : "rmdir $extractedDir /s";
@@ -794,33 +794,33 @@ class extensionModel extends model
      /**
       * Judge need execute db install or not.
       * 
-      * @param  string    $extension 
+      * @param  string    $package 
       * @param  string    $method 
       * @access public
       * @return bool
       */
-     public function needExecuteDB($extension, $method = 'install')
+     public function needExecuteDB($package, $method = 'install')
      {
-         return file_exists($this->getDBFile($extension, $method));
+         return file_exists($this->getDBFile($package, $method));
      }
 
      /**
       * Install the db.
       * 
-      * @param  int    $extension 
+      * @param  int    $package 
       * @access public
       * @return object
       */
-     public function executeDB($extension, $method = 'install')
+     public function executeDB($package, $method = 'install')
      {
          $return = new stdclass();
          $return->result = 'ok';
          $return->error  = '';
 
-         $dbFile = $this->getDBFile($extension, $method);
+         $dbFile = $this->getDBFile($package, $method);
          if(!file_exists($dbFile)) return $return;
 
-         $sqls = file_get_contents($this->getDBFile($extension, $method));
+         $sqls = file_get_contents($this->getDBFile($package, $method));
          $sqls = explode(';', $sqls);
 
          foreach($sqls as $sql)
@@ -843,17 +843,17 @@ class extensionModel extends model
      }
 
      /**
-      * Backup db when uninstall extension. 
+      * Backup db when uninstall package. 
       * 
-      * @param  string    $extension 
+      * @param  string    $package 
       * @access public
       * @return bool|string
       */
-     public function backupDB($extension)
+     public function backupDB($package)
      {
          $zdb = $this->app->loadClass('zdb');
 
-         $sqls = file_get_contents($this->getDBFile($extension, 'uninstall'));
+         $sqls = file_get_contents($this->getDBFile($package, 'uninstall'));
          $sqls = explode(';', $sqls);
 
          /* Get tables for backup. */
@@ -871,7 +871,7 @@ class extensionModel extends model
          /* Back up database. */
          if($backupTables)
          {
-             $backupFile = $this->app->getTmpRoot() . $extension . '.' . date('Ymd') . '.sql';
+             $backupFile = $this->app->getTmpRoot() . $package . '.' . date('Ymd') . '.sql';
              $result     = $zdb->dump($backupFile, $backupTables);
              if($result->result) return $backupFile;
              return false; 
@@ -880,34 +880,34 @@ class extensionModel extends model
      }
 
      /**
-      * Save the extension to database.
+      * Save the package to database.
       * 
-      * @param  string    $extension     the extension code
-      * @param  string    $type          the extension type
+      * @param  string    $package     the package code
+      * @param  string    $type          the package type
       * @access public
       * @return void
       */
-     public function saveExtension($extension, $type)
+     public function savePackage($package, $type)
      {
-         $code      = $extension;
-         $extension = $this->getInfoFromPackage($extension);
-         $extension->status = 'available';
-         $extension->code   = $code;
-         $extension->type   = empty($type) ? $extension->type : $type;
+         $code      = $package;
+         $package = $this->getInfoFromPackage($package);
+         $package->status = 'available';
+         $package->code   = $code;
+         $package->type   = empty($type) ? $package->type : $type;
 
-         $this->dao->replace(TABLE_EXTENSION)->data($extension)->exec();
+         $this->dao->replace(TABLE_EXTENSION)->data($package)->exec();
      }
 
      /**
-      * Update an extension.
+      * Update an package.
       * 
-      * @param  string    $extension 
+      * @param  string    $package 
       * @param  string    $status 
       * @param  array     $files 
       * @access public
       * @return void
       */
-     public function updateExtension($extension, $data)
+     public function updatePackage($package, $data)
      {
          $data = (object)$data;
          $appRoot = $this->app->getAppRoot();
@@ -937,27 +937,27 @@ class extensionModel extends model
              }
              $data->files = json_encode($data->files);
          }
-         return $this->dao->update(TABLE_EXTENSION)->data($data)->where('code')->eq($extension)->exec();
+         return $this->dao->update(TABLE_EXTENSION)->data($data)->where('code')->eq($package)->exec();
      }
 
      /**
-      * Check depends extension.
+      * Check depends package.
       * 
-      * @param  string    $extension 
+      * @param  string    $package 
       * @access public
       * @return array
       */
-     public function checkDepends($extension)
+     public function checkDepends($package)
      {
          $result        = array();
-         $extensionInfo = $this->dao->select('*')->from(TABLE_EXTENSION)->where('code')->eq($extension)->fetch();
-         $dependsExts   = $this->dao->select('*')->from(TABLE_EXTENSION)->where('depends')->like("%$extension%")->andWhere('status')->ne('available')->fetchAll();
+         $packageInfo = $this->dao->select('*')->from(TABLE_EXTENSION)->where('code')->eq($package)->fetch();
+         $dependsExts   = $this->dao->select('*')->from(TABLE_EXTENSION)->where('depends')->like("%$package%")->andWhere('status')->ne('available')->fetchAll();
          if($dependsExts)
          {
              foreach($dependsExts as $dependsExt)
              {
                  $depends = json_decode($dependsExt->depends, true);
-                 if($this->compare4Limit($extensionInfo->version, $depends[$extension])) $result[] = $dependsExt->name;
+                 if($this->compare4Limit($packageInfo->version, $depends[$package])) $result[] = $dependsExt->name;
              }
          }
          return $result;
