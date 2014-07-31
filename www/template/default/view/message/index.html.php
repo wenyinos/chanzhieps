@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php include '../common//header.html.php';?>
+<?php include '../common/header.html.php';?>
 <?php $common->printPositionBar();?>
 <div class='row'>
   <div class='col-md-9'>
@@ -29,25 +29,11 @@
                 <small>(<?php echo formatTime($message->date, 'Y-m-d H:i');?>)<?php echo $lang->colon;?></small>&nbsp;
                 <p>
                   <?php echo nl2br($message->content);?>
-                  <span class='pull-right'><?php echo html::a($this->createLink('message', 'reply', "messageID=$message->id"), "<i class='icon-reply'></i>", "data-toggle='modal'");?></span>
+                  <span class='pull-right text-muted'><?php echo html::a($this->createLink('message', 'reply', "messageID=$message->id"), $lang->message->reply, "data-toggle='modal'");?></span>
                 </p>
               </div>
             </div>
-            <?php if(!empty($replies[$message->id])):?>
-            <div class='comment'>
-              <?php foreach($replies[$message->id] as $reply):?>
-              <div class='content clearfix'>
-                <div class='reply-box radius'>
-                  <span class='author'>
-                    <strong><i class='icon-user'></i> <?php echo $reply->from;?></strong> <small>(<?php echo formatTime($reply->date, 'Y-m-d H:i');?>)</small><?php echo $lang->colon?>
-                  </span> 
-                  &nbsp;<?php echo nl2br($reply->content);?>
-                  <span class='pull-right'><?php echo html::a($this->createLink('message', 'reply', "messageID=$reply->id"), "<i class='icon-reply'></i>", "data-toggle='modal'");?></span>
-                </div>
-              </div>
-              <?php endforeach; ?>
-            </div>
-            <?php endif;?>
+            <?php $this->message->getFrontReplies($message);?>
           </div>
         <?php endforeach; ?>
         </div>
@@ -117,4 +103,4 @@
   </div>
   <div class='col-md-3'><?php $this->block->printRegion($layouts, 'message_index', 'side');?></div>
 </div>
-<?php include '../common//footer.html.php';?>
+<?php include '../common/footer.html.php';?>

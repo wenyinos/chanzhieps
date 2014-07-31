@@ -66,20 +66,71 @@ class messageModel extends model
     }
 
     /**
-     * Get replies of message list. 
+     * Get all replies of a message for admin. 
      * 
-     * @param  mix    $messages 
+     * @param  object  $message 
      * @access public
      * @return array
      */
-    public function getReplies($messages)
+    public function getAdminReplies($message)
     {
-        if(empty($messages)) return false;
-        foreach($messages as $message) $objectList[] = $message->id;
+        $replies = $this->getReplies($message);
+
+        if(!empty($replies))
+        {
+            echo "<dl class='alert alert-info'>";
+            foreach($replies as $reply)
+            {
+                printf($this->lang->message->replyItem, $reply->from, $reply->date, $reply->content);
+                $this->getAdminReplies($reply);
+            }
+            echo "</dl>";
+        }
+    }
+
+    /**
+     * Get all replies of a message for front. 
+     * 
+     * @param  object  $message 
+     * @access public
+     * @return array
+     */
+    public function getFrontReplies($message)
+    {
+        $replies = $this->getReplies($message);
+
+        if(!empty($replies))
+        {
+            echo "<div class='comment'>";
+            foreach($replies as $reply)
+            {
+                echo "<div class='content clearfix'>";
+                echo "<div class='reply-box radius'>";
+                echo " <span class='author'><strong><i class='icon-user text-muted'></i>" . $reply->from . "</strong> <small>(" . formatTime($reply->date, 'Y-m-d H:i') . ")</small>" . $this->lang->colon . "</span>" . nl2br($reply->content);
+                echo "<span class='link-button text-muted pull-right'>";
+                echo html::a(helper::createLink('message', 'reply', "id={$reply->id}"), $this->lang->message->reply, "data-toggle='modal'");
+                echo "</span>";
+                echo "</div></div>";
+                $this->getFrontReplies($reply);
+            }
+            echo "</div>";
+        }
+    }
+
+    /**
+     * Get replies of a message. 
+     * 
+     * @param  object  $message 
+     * @access public
+     * @return array
+     */
+    public function getReplies($message)
+    {
+        if(!$message) return false;
         return $this->dao->select('*')->from(TABLE_MESSAGE)
             ->where('type')->eq('reply')
-            ->andWhere('objectID')->in($objectList)
-            ->fetchGroup('objectID');
+            ->andWhere('objectID')->eq($message->id)
+            ->fetchAll();
     }
 
     /**

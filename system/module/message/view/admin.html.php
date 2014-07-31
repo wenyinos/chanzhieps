@@ -78,17 +78,7 @@ EOT;
     <tr>
       <td class='content-box'>
         <?php echo html::textarea('', $message->content, "rows='2' class='form-control borderless' spellcheck='false'");?>
-        <?php 
-        if(!empty($replies[$messageID]))
-        {
-            echo "<dl class='alert alert-info'>";
-            foreach($replies[$messageID] as $reply)
-            {
-                printf($lang->message->replyItem, $reply->from, $reply->date, $reply->content);
-            }
-            echo '</dl>';
-        }
-        ?>
+        <?php $this->message->getAdminReplies($message);?>
       </td>
     </tr>
     <?php endforeach;?>
