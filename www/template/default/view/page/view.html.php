@@ -1,6 +1,6 @@
 <?php 
-include '../common//header.html.php'; 
-include '../common//treeview.html.php'; 
+include TPL_ROOT . 'common/header.html.php'; 
+include TPL_ROOT . 'common/treeview.html.php'; 
 js::set('pageID', $page->id);
 ?>
 <?php $common->printPositionBar($page);?>
@@ -31,4 +31,4 @@ js::set('pageID', $page->id);
   <div class='col-md-3'><?php $this->block->printRegion($layouts, 'page_view', 'side');?></div>
   <?php endif;?>
 </div>
-<?php include '../common//footer.html.php'; ?>
+<?php include TPL_ROOT . 'common/footer.html.php'; ?>

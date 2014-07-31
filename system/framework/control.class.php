@@ -589,7 +589,7 @@ class control
      */
     public function display($moduleName = '', $methodName = '')
     {
-        define('TPL_ROOT', $this->app->getTplRoot() . $this->config->site->template . DS . 'view' . DS);
+        if(!defined('TPL_ROOT')) define('TPL_ROOT', $this->app->getTplRoot() . $this->config->site->template . DS . 'view' . DS);
         if(empty($this->output)) $this->parse($moduleName, $methodName);
         echo $this->output;
     }

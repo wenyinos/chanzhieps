@@ -30,7 +30,7 @@
     </div>
   </footer>
 </div><?php /* end .page-container in header.html.php */ ?>
-<?php include '../common//qrcode.html.php';?>
+<?php include TPL_ROOT . 'common/qrcode.html.php';?>
 <?php
 if($config->debug) js::import($jsRoot . 'jquery/form/min.js');
 if(isset($pageJS)) js::execute($pageJS);

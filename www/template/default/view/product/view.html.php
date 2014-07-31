@@ -11,8 +11,8 @@
  */
 ?>
 <?php 
-include '../common//header.html.php'; 
-include '../common//treeview.html.php'; 
+include TPL_ROOT . 'common/header.html.php'; 
+include TPL_ROOT . 'common/treeview.html.php'; 
 
 /* set categoryPath for topNav highlight. */
 js::set('path',  $product->path);
@@ -124,4 +124,4 @@ js::set('productID', $product->id);
     <side class='page-side'><?php $this->block->printRegion($layouts, 'product_view', 'side');?></side>
   </div>
 </div>
-<?php include '../common//footer.html.php'; ?>
+<?php include TPL_ROOT . 'common/footer.html.php'; ?>

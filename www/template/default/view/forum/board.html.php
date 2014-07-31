@@ -1,5 +1,5 @@
-<?php include '../common//header.html.php'; ?>
-<?php include '../common//treeview.html.php'; ?>
+<?php include TPL_ROOT . 'common/header.html.php'; ?>
+<?php include TPL_ROOT . 'common/treeview.html.php'; ?>
 <?php $this->block->printRegion($layouts, 'forum_board', 'top');?>
 <?php $common->printPositionBar($board);?>
 <div class='panel'>
@@ -72,4 +72,4 @@
   </table>
 </div>
 <?php $this->block->printRegion($layouts, 'forum_board', 'bottom');?>
-<?php include '../common//footer.html.php'; ?>
+<?php include TPL_ROOT . 'common/footer.html.php'; ?>

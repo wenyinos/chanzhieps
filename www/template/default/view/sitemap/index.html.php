@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php if($onlyBody == 'no') include '../common//header.html.php'; ?>
+<?php if($onlyBody == 'no') include TPL_ROOT . 'common/header.html.php'; ?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class='icon-sitemap'></i> <?php echo $lang->sitemap->common;?></strong>
@@ -78,4 +78,4 @@
     <?php endif;?>
   </div>
 </div>
-<?php if($onlyBody == 'no') include '../common//footer.html.php';?>
+<?php if($onlyBody == 'no') include TPL_ROOT . 'common/footer.html.php';?>

@@ -12,7 +12,7 @@
 ?>
 <?php 
 include './header.html.php';
-include '../common//treeview.html.php';
+include TPL_ROOT . 'common/treeview.html.php';
 if(isset($category)) $path = array_keys($category->pathNames);
 if(!empty($path))         js::set('path',  $path);
 if(!empty($category->id)) js::set('categoryID', $category->id);

@@ -10,7 +10,7 @@
  */
 $moduleName = isset($lang->$module->common)  ? $lang->$module->common  : $module;
 $methodName = isset($lang->$module->$method) ? $lang->$module->$method : $method;
-include '../common//header.lite.html.php';
+include TPL_ROOT . 'common/header.lite.html.php';
 ?>
 <div class='container'>
   <div class='alert alert-danger'>

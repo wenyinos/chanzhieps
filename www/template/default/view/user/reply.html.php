@@ -1,4 +1,4 @@
-<?php include '../common//header.html.php';?>
+<?php include TPL_ROOT . 'common/header.html.php';?>
 <div class='page-user-control'>
   <div class='row'>
     <?php include '././side.html.php';?>
@@ -26,4 +26,4 @@
     </div>
   </div>
 </div>
-<?php include '../common//footer.html.php';?>
+<?php include TPL_ROOT . 'common/footer.html.php';?>

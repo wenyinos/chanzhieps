@@ -1,4 +1,4 @@
-<?php include '../common/header.modal.html.php';?>
+<?php include TPL_ROOT . 'common/header.modal.html.php';?>
 <table class='table table-bordered'>
   <thead>
     <tr>
@@ -59,4 +59,4 @@
     <?php endif;?>
   </table>
 </form>
-<?php include '../common/footer.modal.html.php';?>
+<?php include TPL_ROOT . 'common/footer.modal.html.php';?>

@@ -16,7 +16,7 @@ $path = !empty($category->pathNames) ? array_keys($category->pathNames) : array(
 js::set('path', $path);
 js::set('categoryID', $category->id);
 js::set('articleID', $article->id);
-include '../common//treeview.html.php';
+include TPL_ROOT . 'common/treeview.html.php';
 ?>
 <?php
 $root = '<li>' . $this->lang->currentPos . $this->lang->colon .  html::a($this->inlink('index'), $lang->home) . '</li>';

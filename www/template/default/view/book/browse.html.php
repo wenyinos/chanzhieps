@@ -1,4 +1,4 @@
-<?php include '../common//header.html.php'; ?>
+<?php include TPL_ROOT . 'common/header.html.php'; ?>
 <?php if(isset($node)) $common->printPositionBar($node->origins);?>
 <div class='row'>
   <div class='col-md-3'>
@@ -32,4 +32,4 @@
     </div>
   </div>
 </div>  
-<?php include '../common//footer.html.php';?>
+<?php include TPL_ROOT . 'common/footer.html.php';?>

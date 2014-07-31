@@ -11,11 +11,11 @@
  */
 ?>
 <?php 
-include '../common//header.html.php';
+include TPL_ROOT . 'common/header.html.php';
 $path = isset($category->pathNames) ? array_keys($category->pathNames) : array(0);
 js::set('path', $path);
 
-include '../common//treeview.html.php';
+include TPL_ROOT . 'common/treeview.html.php';
 ?>
 <?php echo $common->printPositionBar($category, isset($product) ? $product : '');?>
 <div class='row'>
@@ -79,4 +79,4 @@ include '../common//treeview.html.php';
     <side class='page-side'><?php $this->block->printRegion($layouts, 'product_browse', 'side');?></side>
   </div>
 </div>
-<?php include '../common//footer.html.php';?>
+<?php include TPL_ROOT . 'common/footer.html.php';?>

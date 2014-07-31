@@ -1,4 +1,4 @@
-<?php include '../common//header.html.php';?>
+<?php include TPL_ROOT . 'common/header.html.php';?>
 <div class='panel panel-body'>
   <div class='panel panel-pure' id='reg'>
     <div class='panel-heading'><strong><?php echo $lang->user->register->welcome;?></strong></h4></div>
@@ -40,4 +40,4 @@
     </div>
   </div>    
 </div>
-<?php include '../common//footer.html.php'; ?>
+<?php include TPL_ROOT . 'common/footer.html.php'; ?>

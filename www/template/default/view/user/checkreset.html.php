@@ -1,4 +1,4 @@
-<?php include '../common//header.html.php';?>
+<?php include TPL_ROOT . 'common/header.html.php';?>
 <section id="check">
   <div class="box-radius">
     <div class="panel panel-default">
@@ -24,4 +24,4 @@
     </div>  
   </div>
 </section>
-<?php include '../common//footer.html.php';?>
+<?php include TPL_ROOT . 'common/footer.html.php';?>

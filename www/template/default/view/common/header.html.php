@@ -1,5 +1,5 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
-<?php include '../common//header.lite.html.php';?>
+<?php include TPL_ROOT . 'common//header.lite.html.php';?>
 <div class='page-container'>
   <?php $this->block->printRegion($layouts, 'all', 'top');?>
   <?php $topNavs = $this->loadModel('nav')->getNavs('top');?>

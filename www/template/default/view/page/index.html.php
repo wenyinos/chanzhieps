@@ -1,4 +1,4 @@
-<?php include '../common//header.html.php';?>
+<?php include TPL_ROOT . 'common/header.html.php';?>
 <?php $common->printPositionBar();?>
 <div class='row'>
   <div class='col-md-9'>
@@ -33,4 +33,4 @@
   </div>
   <div class='col-md-3'><side class='page-side'><?php $this->block->printRegion($layouts, 'page_index', 'side');?></side></div>
 </div>
-<?php include '../common//footer.html.php'; ?>
+<?php include TPL_ROOT . 'common/footer.html.php'; ?>

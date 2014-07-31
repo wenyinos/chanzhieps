@@ -9,8 +9,8 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-include '../common//header.html.php';
-include '../common//kindeditor.html.php';
+include TPL_ROOT . 'common/header.html.php';
+include TPL_ROOT . 'common/kindeditor.html.php';
 
 $this->block->printRegion($layouts, 'thread_view', 'top');
 
@@ -21,4 +21,4 @@ include '././reply.html.php';
 
 $this->block->printRegion($layouts, 'thread_view', 'bottom');
 
-include '../common//footer.html.php';
+include TPL_ROOT . 'common/footer.html.php';

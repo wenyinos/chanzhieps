@@ -1,5 +1,5 @@
 <?php 
-include '../common//header.html.php';
+include TPL_ROOT . 'common/header.html.php';
 ?>
 <?php $common->printPositionBar($this->app->getModuleName());?>
 <div class="row">
@@ -46,4 +46,4 @@ include '../common//header.html.php';
   </div>
 </div>
 
-<?php include '../common//footer.html.php'; ?>
+<?php include TPL_ROOT . 'common/footer.html.php'; ?>

@@ -1,10 +1,10 @@
 <?php 
-include '../common/header.html.php';
+include TPL_ROOT . 'common/header.html.php';
 
 $path = array_keys($category->pathNames);
 js::set('path', $path);
 
-include '../common/treeview.html.php';
+include TPL_ROOT . 'common/treeview.html.php';
 ?>
 <?php echo $common->printPositionBar($category);?>
 <div class='row'>
@@ -42,4 +42,4 @@ include '../common/treeview.html.php';
   </div>
   <div class='col-md-3'><side class='page-side'><?php $this->block->printRegion($layouts, 'article_browse', 'side');?></side></div>
 </div>
-<?php include '../common//footer.html.php';?>
+<?php include TPL_ROOT . 'common/footer.html.php';?>

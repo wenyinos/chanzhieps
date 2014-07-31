@@ -10,7 +10,7 @@
  * @link        http://www.zentao.net
  */
 ?>
-<?php include '../common/header.modal.html.php';?>
+<?php include TPL_ROOT . 'common/header.modal.html.php';?>
 <?php js::set('parents', $parents);?>
 <form id='ajaxForm' class='form-horizontal' action='<?php echo inlink('transfer', "threadID={$thread->id}")?>'  method='post'>
   <div class='form-group'>
@@ -26,4 +26,4 @@
     </div>
   </div>
 </form>
-<?php include '../common/footer.modal.html.php';?>
+<?php include TPL_ROOT . 'common/footer.modal.html.php';?>

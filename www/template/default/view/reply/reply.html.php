@@ -11,8 +11,8 @@
  */
 ?>
 <?php if($this->thread->hasManagePriv($this->app->user->account, $board->owners)) $config->thread->editor->editreply['tools'] = 'full'; ?>
-<?php include '../common//header.html.php';?>
-<?php include '../common//kindeditor.html.php';?>
+<?php include TPL_ROOT . 'common/header.html.php';?>
+<?php include TPL_ROOT . 'common/kindeditor.html.php';?>
 <?php $common->printPositionBar($board, $thread);?>
 <form method='post' id='ajaxForm' enctype='multipart/form-data'>
 <table class='table table-form'>
@@ -40,4 +40,4 @@
     <td colspan='2' align='center'><?php echo html::submitButton('', 'btn btn-primary', 'onclick="return checkGarbage(\'content\')" tabindex=2' ) . html::backButton();?></td></tr>
 </table>
 </form>
-<?php include '../common//footer.html.php';?>
+<?php include TPL_ROOT . 'common/footer.html.php';?>

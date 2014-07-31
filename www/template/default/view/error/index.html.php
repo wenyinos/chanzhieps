@@ -10,10 +10,10 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php include '../common//header.html.php';?>
+<?php include TPL_ROOT . 'common/header.html.php';?>
 <div class='alert alert-danger'>
   <h3><?php echo $lang->error->pageNotFound;?></h3>
   <p><?php echo $this->config->company->desc;?></p>
 </div>
 <?php $this->fetch('sitemap', 'index', 'onlyBody=yes')?>
-<?php include '../common//footer.html.php';?>
+<?php include TPL_ROOT . 'common/footer.html.php';?>

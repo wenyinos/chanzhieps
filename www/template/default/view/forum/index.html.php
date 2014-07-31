@@ -1,4 +1,4 @@
-<?php include '../common//header.html.php'; ?>
+<?php include TPL_ROOT . 'common/header.html.php'; ?>
 <?php $this->block->printRegion($layouts, 'forum_index', 'top');?>
 <?php $common->printPositionBar();?>
 <div id='boards'>
@@ -45,4 +45,4 @@
 <?php endforeach;?>
 </div>
 <?php $this->block->printRegion($layouts, 'forum_index', 'bottom');?>
-<?php include '../common//footer.html.php'; ?>
+<?php include TPL_ROOT . 'common/footer.html.php'; ?>

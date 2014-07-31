@@ -1,5 +1,5 @@
 <?php
-include '../common//header.html.php';
+include TPL_ROOT . 'common/header.html.php';
 js::import($jsRoot . 'md5.js');
 js::set('random', $this->session->random);
 ?>
@@ -47,4 +47,4 @@ js::set('random', $this->session->random);
     </div>
   </div>
 </div>
-<?php include '../common//footer.html.php';?>
+<?php include TPL_ROOT . 'common/footer.html.php';?>

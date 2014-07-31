@@ -10,8 +10,8 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php include '../common//header.html.php';?>
-<?php include '../common//kindeditor.html.php';?>
+<?php include TPL_ROOT . 'common/header.html.php';?>
+<?php include TPL_ROOT . 'common/kindeditor.html.php';?>
 <?php $common->printPositionBar($board, $thread);?>
 
 <div class='panel'>
@@ -39,4 +39,4 @@
     </form>
   </div>
 </div>
-<?php include '../common//footer.html.php';?>
+<?php include TPL_ROOT . 'common/footer.html.php';?>
