@@ -37,7 +37,7 @@
         <?php endif;?>
         <th class='text-center w-160px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->article->addedDate);?></th>
         <th class='text-center w-60px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->article->views);?></th>
-        <th class='text-center w-160px'><?php echo $lang->actions;?></th>
+        <th class='text-center w-180px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
