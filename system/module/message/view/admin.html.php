@@ -33,7 +33,7 @@
     <?php foreach($messages as $messageID => $message):?>
     <tr>
       <td rowspan='2' class='text-center'><strong><?php echo $message->id;?></strong></td>
-      <?php if($message->type == 'comment'):?>
+      <?php if($message->type != 'message'):?>
       <td>
         <?php 
         $config->requestType = $config->frontRequestType;

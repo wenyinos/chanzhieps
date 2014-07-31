@@ -192,6 +192,7 @@ $lang->feedback = new stdclass();
 $lang->feedback->menu = new stdclass();
 $lang->feedback->menu->message = 'Message|message|admin|type=message';
 $lang->feedback->menu->comment = 'Comment|message|admin|type=comment';
+$lang->feedback->menu->answer  = 'Answer|message|admin|type=reply';
 $lang->feedback->menu->thread  = 'Threads|forum|admin|tab=feedback';
 $lang->feedback->menu->reply   = 'Replies|reply|admin|order=id_desc&tab=feedback';
 $lang->feedback->menu->wechat  = 'Wechat|wechat|message|mode=replied&replied=0';
