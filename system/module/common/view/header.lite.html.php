@@ -2,7 +2,7 @@
 <?php
 $webRoot   = $config->webRoot;
 $jsRoot    = $webRoot . "js/";
-$themeRoot = $webRoot . "theme/";
+$themeRoot = $webRoot . "template/default/theme/";
 ?>
 <!DOCTYPE html>
 <html>

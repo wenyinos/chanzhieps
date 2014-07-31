@@ -2,8 +2,7 @@
 <?php
 $webRoot   = $config->webRoot;
 $jsRoot    = $webRoot . "js/";
-$themeRoot = $webRoot . "theme/";
-$templateRoot = $webRoot . 'template/' . $config->site->template . '/';
+$themeRoot = $webRoot . "template/default/theme/";
 ?>
 <!DOCTYPE html>
 <html xmlns:wb="http://open.weibo.com/wb">
@@ -44,7 +43,7 @@ $templateRoot = $webRoot . 'template/' . $config->site->template . '/';
       js::import($jsRoot     . 'all.js');
   }
 
-  css::import($templateRoot . 'theme/' . $config->site->theme . '/style.css');
+  css::import($themeRoot . $config->site->theme . '/style.css');
 
   if(isset($pageCSS)) css::internal($pageCSS);
 
