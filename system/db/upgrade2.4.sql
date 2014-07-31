@@ -1,6 +1,6 @@
 ALTER TABLE `eps_message` ADD `receiveEmail` enum('0','1') NOT NULL DEFAULT '0';
 
-CREATE TABLE IF NOT EXISTS `eps_extension` (
+CREATE TABLE IF NOT EXISTS `eps_package` (
   `id` mediumint(8) unsigned NOT NULL auto_increment,
   `name` varchar(150) NOT NULL,
   `code` varchar(30) NOT NULL,
