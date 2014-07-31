@@ -227,18 +227,21 @@ class messageModel extends model
      */
     public function reply($messageID)
     {
+        $account = $this->app->user->account;
+        $admin   = $this->app->user->admin;
         $message = $this->getByID($messageID);
 
         $reply = fixer::input('post')
-            ->add('objectType', $message->type)
+            ->add('objectType', $message->type == 'reply' ? $message->objectType : $message->type)
             ->add('objectID', $message->id)
-            ->add('to', $message->to)
+            ->add('to', $message->from)
             ->add('type', 'reply')
             ->add('date', helper::now())
+            ->add('status', '0')
             ->add('public', 1)
-            ->add('account', $this->app->user->account)
+            ->setIF($account != 'guest', 'account', $account)
+            ->setIF($admin == 'super', 'status', '1')
             ->add('ip', $this->server->REMOTE_ADDR)
-            ->remove('status')
             ->get();
 
         $this->dao->insert(TABLE_MESSAGE)
