@@ -14,7 +14,7 @@
 if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}
 $webRoot   = $config->webRoot;
 $jsRoot    = $webRoot . "js/";
-$themeRoot = $webRoot . "theme/";
+$themeRoot = $webRoot . "template/default/theme/";
 $navs = $this->tree->getChildren(0, 'blog');
 ?>
 <!DOCTYPE html>
@@ -38,7 +38,7 @@ $navs = $this->tree->getChildren(0, 'blog');
   echo html::meta('keywords',    strip_tags($keywords));
   echo html::meta('description', strip_tags($desc));
 
-  css::import($themeRoot . 'zui/css/min.css');
+  css::import($webRoot . 'zui/css/min.css');
   css::import($themeRoot . 'default/style.css');
   css::import($jsRoot    . 'jquery/treeview/min.css');
 
