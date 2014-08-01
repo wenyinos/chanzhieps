@@ -1,4 +1,4 @@
-<?php include TPL_ROOT . 'common/header.modal.html.php';?>
+<?php include TPL_ROOT . 'common/header.lite.html.php';?>
 <?php 
 $from  = $this->session->user->account == 'guest' ? '' : $this->session->user->realname;
 $email = $this->session->user->account == 'guest' ? '' : $this->session->user->email; 
@@ -26,4 +26,7 @@ $email = $this->session->user->account == 'guest' ? '' : $this->session->user->e
     <tr><td></td><td><?php echo html::submitButton();?></td></tr>
   </table>
 </form>
-<?php include TPL_ROOT . 'common/footer.modal.html.php';?>
+<?php if($config->debug) js::import($jsRoot . 'jquery/form/min.js');?>
+<?php if(isset($pageJS)) js::execute($pageJS);?>
+</body>
+</html>

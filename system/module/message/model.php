@@ -108,7 +108,7 @@ class messageModel extends model
                 echo "<div class='reply-box radius'>";
                 echo " <span class='author'><strong><i class='icon-user text-muted'></i>" . $reply->from . "</strong> <small>(" . formatTime($reply->date, 'Y-m-d H:i') . ")</small>" . $this->lang->colon . "</span>" . nl2br($reply->content);
                 echo "<span class='link-button pull-right'>";
-                echo html::a(helper::createLink('message', 'reply', "id={$reply->id}"), $this->lang->message->reply, "data-toggle='modal' id='reply{$reply->id}'");
+                echo html::a(helper::createLink('message', 'reply', "id={$reply->id}"), $this->lang->message->reply, "data-toggle='modal' data-type='iframe' id='reply{$reply->id}'");
                 echo "</span>";
                 echo "</div></div>";
                 $this->getFrontReplies($reply);

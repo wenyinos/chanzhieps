@@ -1,3 +1,4 @@
+.modal-dialog{width: 700px;}
 .panel-body>.comments-list {margin: -15px -15px 0;}
 .comment{padding: 10px 15px; transition: all 0.5s;}
 .comment p{padding-left:3px;}
