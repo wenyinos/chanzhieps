@@ -126,10 +126,15 @@ class messageModel extends model
      */
     public function getReplies($message)
     {
+        $userMessages = $this->cookie->cmts;
+        $userMessages = trim($userMessages, ',');
+        if(empty($userMessages)) $userMessages = '0';
+
         if(!$message) return false;
         return $this->dao->select('*')->from(TABLE_MESSAGE)
             ->where('type')->eq('reply')
             ->andWhere('objectID')->eq($message->id)
+            ->andWhere("(id in ({$userMessages}) or (status = '1'))")
             ->fetchAll();
     }
 

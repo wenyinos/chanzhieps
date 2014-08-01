@@ -809,6 +809,18 @@ class upgradeModel extends model
     }
 
     /**
+     * Set default currency.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setDefaultCurrency()
+    {
+        if($this->config->site->lang != 'en') return $this->loadModel('setting')->setItems('system.common.product', array('currency' => '￥'));
+        if($this->config->site->lang == 'en') return $this->loadModel('setting')->setItems('system.common.product', array('currency' => '$'));
+    }
+
+    /**
      * Judge any error occers.
      * 
      * @access public
