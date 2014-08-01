@@ -265,6 +265,8 @@ class messageModel extends model
             ->batchCheck($this->config->message->require->reply, 'notempty')
             ->exec();
 
+        $replyID = $this->dao->lastInsertId();
+
         if(!dao::isError()) 
         {
             if($admin == 'super')
@@ -284,7 +286,7 @@ class messageModel extends model
                 $this->loadModel('mail')->send($mail->to, $mail->subject, $mail->body);
             }
 
-            return $this->dao->lastInsertId();
+            return $replyID;
         }
 
         return false;
