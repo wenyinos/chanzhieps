@@ -148,9 +148,10 @@ class message extends control
     {
         if($_POST)
         {
-            $result = $this->message->reply($messageID);
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->sendSuccess));
-            $this->send(array('result' => 'fail', 'reason' => 'error', 'message' => dao::getError()));
+            $replyID = $this->message->reply($messageID);
+            if(!$replyID) $this->send(array('result' => 'fail', 'reason' => 'error', 'message' => dao::getError()));
+            $this->message->setCookie($replyID);
+            $this->send(array('result' => 'success', 'message' => $this->lang->sendSuccess));
         }
 
         $message = $this->message->getByID($messageID);
