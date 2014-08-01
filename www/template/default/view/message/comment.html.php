@@ -21,7 +21,7 @@ if(isset($pageCSS)) css::internal($pageCSS);
             <small>(<?php echo formatTime($comment->date, 'Y-m-d H:i');?>)<?php echo $lang->colon;?></small>&nbsp;
             <p>
               <?php echo nl2br($comment->content);?>
-              <span class='pull-right'><?php echo html::a($this->createLink('message', 'reply', "messageID=$comment->id"), $lang->message->reply, "data-toggle='modal'");?></span>
+              <span class='pull-right'><?php echo html::a($this->createLink('message', 'reply', "messageID=$comment->id"), $lang->message->reply, "id='reply'");?></span>
             </p>
           </div>
         </div>

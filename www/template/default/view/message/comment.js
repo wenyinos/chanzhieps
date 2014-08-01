@@ -25,4 +25,6 @@ $(document).ready(function()
         $('#commentBox').load($(this).attr('href'));
         return false;
     });
+
+    $('a[id*=reply]').modalTrigger();
 });
