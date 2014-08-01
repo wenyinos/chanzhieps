@@ -8,7 +8,7 @@ if(!isset($config->$module->editor->$method)) return;
 
 /* Export $jsRoot var. */
 js::set('jsRoot', $jsRoot);
-js::set('themeRoot', $themeRoot);
+js::set('webRoot', $webRoot);
 
 /* Get editor settings for current page. */
 $editors = $config->$module->editor->$method;
@@ -26,7 +26,7 @@ js::set('editorLang', $editorLang);
 
 /* Import css and js for kindeditor. */
 css::import($jsRoot . 'kindeditor/themes/default/default.css');
-js::import($jsRoot . 'kindeditor/kindeditor-min.js');
+js::import($jsRoot  . 'kindeditor/kindeditor-min.js');
 js::import($jsRoot  . 'kindeditor/lang/' . $editorLang . '.js');
 
 /* set uid for upload. */
@@ -63,7 +63,7 @@ function initKindeditor(afterInit)
         {
             width:'100%',
             items:editorTool,
-            cssPath:[v.themeRoot + 'zui/css/min.css'],
+            cssPath:[v.webRoot + 'zui/css/min.css'],
             bodyClass:'article-content',
             urlType:'absolute', 
             uploadJson: createLink('file', 'ajaxUpload', 'uid=' + v.uid),

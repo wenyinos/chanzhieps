@@ -276,7 +276,7 @@ class messageModel extends model
             }
 
             /* if message type is comment , check is user want to receive email reminder  */
-            if(validater::checkEmail($message->email) && ($message->type != 'comment' || $message->receiveEmail == '1'))
+            if(validater::checkEmail($message->email) && ($message->type != 'comment' || $message->receiveEmail))
             {
                 $mail = new stdclass();
                 $mail->to      = $message->email;

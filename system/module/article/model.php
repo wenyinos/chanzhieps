@@ -440,6 +440,7 @@ class articleModel extends model
 
         return $link;
     }
+
     /**
      * Delete '<p><br /></p>' if it at string's last. 
      * 
