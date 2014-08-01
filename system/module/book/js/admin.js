@@ -17,43 +17,87 @@ $(document).ready(function()
         return false;
     });
 
-    var saveSort = function(e)
+    function saveOrders(orders)
     {
-        var orders = null;
-        $('.catalog').each(function()
-        {
-            var $this    = $(this);
-            var order    = $this.attr('data-order'),
-                $order   = $this.children('strong').find('.order');
-            var oldOrder = $order.text(),
-                $parent  = $this.parent().closest('.catalog');
-            while($parent.length)
-            {
-                order = $parent.attr('data-order') + '.' + order;
-                $parent = $parent.parent().closest('.catalog');
-            }
+        console.log(orders);
+    }
 
-            if(order != oldOrder)
+    function updateOrders(ele, parentOrder, orders)
+    {
+        var root = false;
+        if(typeof ele === 'undefined')
+        {
+            ele = $('.books > dl, .books > .catalog > dl');
+            root = true;
+            orders = {};
+        }
+
+        if(typeof parentOrder === 'undefined')
+        {
+            parentOrder = '';
+            var $parent = ele.closest('.catalog:not(".catalog-empty, .drag-shadow")');
+            if($parent.length)
             {
-                if(orders == null) orders = {};
-                orders[$this.data('id')] = order;
-                $order.text(order);
+                parentOrder = $parent.children('strong').find('.order').text();
+            }
+        }
+
+        var index = 1;
+        ele.children('.catalog:not(".catalog-empty, .drag-shadow")').each(function()
+        {
+            var $this = $(this);
+            var order = (parentOrder === '' ? '' : (parentOrder + '.')) + (index++);
+            orders[$this.data('id')] = order;
+            $this.children('strong').find('.order').text(order);
+            var $dl = $this.children('dl');
+            if($dl.length)
+            {
+                updateOrders($dl, order, orders);
             }
         });
 
-        if(orders)
+        if(root)
         {
-            console.log(orders);
-            // save orders
+            saveOrders(orders);
         }
     };
 
-    $('.books > dl, .catalog > dl').each(function()
-    {
-        var $this = $(this);
-        var id = $this.parent().data('id');
-        $this.children('.catalog').children('.actions').find('.sort-handle').addClass('sort-handle-' + id);
+    $('.books dl').append('<dd class="catalog catalog-empty">&nbsp;</dd>');
 
-        $this.sortable({selector: '.catalog', trigger: '.sort-handle-' + id, dragCssClass: '', finish: saveSort});
+    $('.books > .catalog .catalog, .books > dl .catalog').not('.catalog-empty').droppable(
+    {
+        trigger: function($e){return $e.children('.actions').find('.sort-handle')},
+        target: '.books > .catalog .catalog, .books > dl .catalog',
+        container: '.books',
+        nested: true,
+        flex: true,
+        sensorOffsetY: -10,
+        start: function()
+        {
+            $('.books').addClass('show-empty-catalog');
+        },
+        beforeDrop: function(e)
+        {
+            var selfEle = e.target.closest('.catalog[data-id="' + e.element.data('id') + '"]');
+            return !selfEle.length;
+        },
+        drag: function(e)
+        {
+            if(e.target)
+            {
+                $('.drop-area').removeClass('drop-area');
+                e.target.closest('dl').addClass('drop-area');
+            }
+        },
+        drop: function(e)
+        {
+            e.target.before(e.element);
+            updateOrders();
+        },
+        finish: function()
+        {
+            $('.drop-area').removeClass('drop-area');
+            $('.books').removeClass('show-empty-catalog');
+        }
     });
 });
