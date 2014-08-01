@@ -15,6 +15,14 @@
 .chapter .order,.books .article .order { display: inline-block; margin-right: 0; height: 20px; line-height: 20px; padding: 0 6px; text-align: center; border-radius: 5px; transition: all 0.3s;  }
 .books dd:hover .order,.book:hover:before{border-color: #999}
 
-.catalog.chapter.dragging, .catalog.article.dragging {opacity: 0.35; background-color: #FFF4E5; border: 1px solid #fff}
+.catalog.chapter.dragging, .catalog.article.dragging {opacity: 0.25; background-color: #FFF4E5; border: 1px solid #fff}
 .catalog.chapter.drag-shadow, .catalog.article.drag-shadow {background: #fff; border: 1px solid #ddd; box-shadow:0 1px 8px rgba(0,0,0,.15);}
 .sort {cursor: move;}
+.catalog {position: relative;}
+.catalog.drop-to {background: none;}
+.catalog.drop-to:before {display: block; background-color: #E48600; content: ' '; height: 1px; width: 100%; position: absolute; top: -1px}
+.catalog.dragging .catalog.drop-to:before, .catalog.drop-to.dragging:before {display: none}
+.catalog-empty {display: none; padding: 0; height: 10px; line-height: 5px!important}
+dl.drop-area {background-color: #f1f1f1}
+.show-empty-catalog .catalog-empty {display: block;}
+.books > .catalog > .actions > .sort-handle {display: none}

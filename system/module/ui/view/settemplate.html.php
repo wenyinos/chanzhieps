@@ -31,15 +31,12 @@
             <h4><?php echo $template['name']?></h4>
             <small class='text-muted'><?php echo $lang->ui->template->author . $lang->colon . $template['author'];?></small>
           </div>
+          <div class='card-actions'>
+            <button class='btn btn-apply-template<?php if($isCurrent) echo ' btn-success disabled';?>' type='button' data-url='<?php echo inlink('settheme', "template={$template['code']}&theme={$themeName}")?>' data-current='<i class="icon-ok"></i> <?php echo $lang->ui->template->current;?>' data-default='<?php echo $lang->ui->template->apply?>'><?php echo $isCurrent ? "<i class='icon-ok'></i> {$lang->ui->template->current}" : $lang->ui->template->apply?></button>
+          </div>
           <?php if(!empty($desc)):?>
           <div class="card-content"><div class="template-desc"><?php echo $desc;?></div></div>
           <?php endif;?>
-          <div class='card-actions'>
-            <button class='btn btn-apply-template<?php if($isCurrent) echo ' btn-success disabled';?>' type='button' data-url='<?php echo inlink('settheme', "template={$template['code']}&theme={$themeName}")?>' data-current='<i class="icon-ok"></i> <?php echo $lang->ui->template->current;?>' data-default='<?php echo $lang->ui->template->apply?>'><?php echo $isCurrent ? "<i class='icon-ok'></i> {$lang->ui->template->current}" : $lang->ui->template->apply?></button> &nbsp;
-            <?php if($count > 1):?>
-              <span class='themes-tip'><?php printf($lang->ui->template->availableThemes, $count);?><span class='current-theme-tip'> &nbsp; <?php printf($lang->ui->template->currentTheme, $template['themes'][$this->config->site->theme])?></span></span>
-            <?php endif;?>
-          </div>
           <?php if($count > 1):?>
           <div class='themes-list'>
             <div class='clearfix'>
@@ -49,7 +46,7 @@
               $url = inlink('settheme', "template={$template['code']}&theme={$theme}");
               ?>
               <div class='theme<?php echo $currentClass;?>' data-url='<?php echo $url;?>' data-theme='<?php echo $theme;?>'>
-                <div class='theme-img'><?php echo html::image($templateRoot . 'theme/' . $theme . '/preview.png');?></div>
+              <div class='theme-card'><div class='theme-img'><?php echo html::image($templateRoot . 'theme/' . $theme . '/preview.png');?></div></div>
                 <div class='theme-name text-center'><strong><?php echo $name;?></strong> <i class='icon-ok-sign'></i></div>
               </div>
             <?php endforeach;?>
