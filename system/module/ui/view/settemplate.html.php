@@ -32,7 +32,7 @@
             <small class='text-muted'><?php echo $lang->ui->template->author . $lang->colon . $template['author'];?></small>
           </div>
           <div class='card-actions'>
-            <button class='btn btn-apply-template<?php if($isCurrent) echo ' btn-success disabled';?>' type='button' data-url='<?php echo inlink('settheme', "template={$template['code']}&theme={$themeName}")?>' data-current='<i class="icon-ok"></i> <?php echo $lang->ui->template->current;?>' data-default='<?php echo $lang->ui->template->apply?>'><?php echo $isCurrent ? "<i class='icon-ok'></i> {$lang->ui->template->current}" : $lang->ui->template->apply?></button>
+            <button class='btn btn-apply-template<?php if($isCurrent) echo ' btn-success disabled';?>' type='button' data-url='<?php echo inlink('settemplate', "template={$template['code']}&theme={$themeName}")?>' data-current='<i class="icon-ok"></i> <?php echo $lang->ui->template->current;?>' data-default='<?php echo $lang->ui->template->apply?>'><?php echo $isCurrent ? "<i class='icon-ok'></i> {$lang->ui->template->current}" : $lang->ui->template->apply?></button>
           </div>
           <?php if(!empty($desc)):?>
           <div class="card-content"><div class="template-desc"><?php echo $desc;?></div></div>
@@ -43,7 +43,7 @@
             <?php foreach($template['themes'] as $theme => $name):?>
               <?php
               $currentClass = ($isCurrent and $config->site->theme == $theme) ? ' current' : '';
-              $url = inlink('settheme', "template={$template['code']}&theme={$theme}");
+              $url = inlink('settemplate', "template={$template['code']}&theme={$theme}");
               ?>
               <div class='theme<?php echo $currentClass;?>' data-url='<?php echo $url;?>' data-theme='<?php echo $theme;?>'>
               <div class='theme-card'><div class='theme-img'><?php echo html::image($templateRoot . 'theme/' . $theme . '/preview.png');?></div></div>
