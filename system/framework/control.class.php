@@ -260,16 +260,17 @@ class control
         $moduleName = strtolower(trim($moduleName));
         $methodName = strtolower(trim($methodName));
 
+        $modulePath = $this->app->getModulePath($moduleName);
         $viewExtPath = $this->app->getModuleExtPath($moduleName, 'view');
 
         /* The main view file, extension view file and hook file. */
-        if(RUN_MODE == 'front')
+        if((RUN_MODE != 'front') or (strpos($modulePath, 'module' . DS . 'ext') !== false))
         {
-            $mainViewFile = TPL_ROOT . $moduleName . DS . "{$methodName}.{$this->viewType}.php";
+            $mainViewFile = $modulePath . 'view' . DS . $methodName . '.' . $this->viewType . '.php';
         }
         else
         {
-            $mainViewFile = $this->app->getModulePath($moduleName) . 'view' . DS . $methodName . '.' . $this->viewType . '.php';
+            $mainViewFile = TPL_ROOT . $moduleName . DS . "{$methodName}.{$this->viewType}.php";
         }
 
         /* Extension view file. */
@@ -336,7 +337,15 @@ class control
         $cssExtPath = $this->app->getModuleExtPath($moduleName, 'css') ;
 
         $css = '';
-        if(RUN_MODE == 'front')
+        if((RUN_MODE != 'front') or (strpos($modulePath, 'module' . DS . 'ext') !== false))
+        {
+            $mainCssFile   = $modulePath . 'css' . DS . 'common.css';
+            $methodCssFile = $modulePath . 'css' . DS . $methodName . '.css';
+
+            if(file_exists($mainCssFile))   $css .= file_get_contents($mainCssFile);
+            if(file_exists($methodCssFile)) $css .= file_get_contents($methodCssFile);
+        }
+        else
         {
             $defaultMainCssFile   = TPL_ROOT . $moduleName . DS . "common.css";
             $defaultMethodCssFile = TPL_ROOT . $moduleName . DS . "{$methodName}.css";
@@ -347,14 +356,6 @@ class control
             if(file_exists($defaultMethodCssFile)) $css .= file_get_contents($defaultMethodCssFile);
             if(file_exists($themeMainCssFile))     $css .= file_get_contents($themeMainCssFile);
             if(file_exists($themeMethodCssFile))   $css .= file_get_contents($themeMethodCssFile);
-        }
-        else
-        {
-            $mainCssFile   = $modulePath . 'css' . DS . 'common.css';
-            $methodCssFile = $modulePath . 'css' . DS . $methodName . '.css';
-
-            if(file_exists($mainCssFile))   $css .= file_get_contents($mainCssFile);
-            if(file_exists($methodCssFile)) $css .= file_get_contents($methodCssFile);
         }
 
         $commonExtCssFiles = glob($cssExtPath['common'] . $methodName . DS . '*.css');
@@ -383,7 +384,15 @@ class control
         $jsExtPath  = $this->app->getModuleExtPath($moduleName, 'js');
 
         $js = '';
-        if(RUN_MODE == 'front')
+        if((RUN_MODE !== 'front') or (strpos($modulePath, 'module' . DS . 'ext') !== false))
+        {
+            $mainJsFile   = $modulePath . 'js' . DS . 'common.js';
+            $methodJsFile = $modulePath . 'js' . DS . $methodName . '.js';
+
+            if(file_exists($mainJsFile))   $js .= file_get_contents($mainJsFile);
+            if(file_exists($methodJsFile)) $js .= file_get_contents($methodJsFile);
+        }
+        else
         {
             $defaultMainJsFile   = TPL_ROOT . $moduleName . DS . "common.js";
             $defaultMethodJsFile = TPL_ROOT . $moduleName . DS . "{$methodName}.js";
@@ -395,15 +404,7 @@ class control
             if(file_exists($themeMainJsFile))     $js .= file_get_contents($themeMainJsFile);
             if(file_exists($themeMethodJsFile))   $js .= file_get_contents($themeMethodJsFile);
         }
-        else
-        {
-            $mainJsFile   = $modulePath . 'js' . DS . 'common.js';
-            $methodJsFile = $modulePath . 'js' . DS . $methodName . '.js';
 
-            if(file_exists($mainJsFile))   $js .= file_get_contents($mainJsFile);
-            if(file_exists($methodJsFile)) $js .= file_get_contents($methodJsFile);
-        }
-        
         $commonExtJsFiles = glob($jsExtPath['common'] . $methodName . DS . '*.js');
         foreach($commonExtJsFiles as $jsFile) $js .= file_get_contents($jsFile);
 
