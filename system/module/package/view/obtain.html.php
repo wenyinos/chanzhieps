@@ -12,22 +12,8 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/treeview.html.php';?>
-<div class='side'>
-  <form class='side-search mgb-20' method='post' action='<?php echo inlink('obtain', 'type=bySearch');?>'>
-    <div class="input-group">
-      <?php echo html::input('key', $this->post->key, "class='form-control' placeholder='{$lang->package->bySearch}'");?>
-      <span class="input-group-btn">
-        <?php echo html::submitButton('<i class="icon-search"></i>', '', ''); ?>
-      </span>
-    </div>
-  </form>
-  <div class='list-group'>
-      <?php
-      echo html::a(inlink('obtain', 'type=byUpdatedTime'), $lang->package->byUpdatedTime, '', "class='list-group-item' id='byupdatedtime'");
-      echo html::a(inlink('obtain', 'type=byAddedTime'),   $lang->package->byAddedTime, '', "class='list-group-item' id='byaddedtime'");
-      echo html::a(inlink('obtain', 'type=byDownloads'),   $lang->package->byDownloads, '', "class='list-group-item' id='bydownloads'");
-      ?>
-  </div>
+<div class='row'>
+<div class='col-md-3'>
   <div class='panel panel-sm'>
     <div class='panel-heading'><?php echo $lang->package->byCategory;?></div>
     <div class='panel-body'>
@@ -35,7 +21,31 @@
     </div>
   </div>
 </div>
-<div class='main'>
+<div class='col-md-9'>
+  <table class='table table-borderless'>
+    <tr>
+      <td class='w-p60'>
+        <form id='searchForm' class='side-search mgb-20' method='post' action='<?php echo inlink('obtain', 'type=bySearch');?>'>
+          <div class="input-group">
+            <?php echo html::input('key', $this->post->key, "class='form-control' placeholder='{$lang->package->bySearch}'");?>
+            <span class="input-group-btn">
+              <?php echo html::a("javascript:$('#searchForm').submit();", "<i class='icon icon-search'></i>" , "class='btn'"); ?>
+            </span>
+          </div>
+        </form>
+      </td>
+      <td>
+        <ul class="nav nav-pills">
+          <?php
+          echo '<li>' . html::a(inlink('obtain', 'type=byUpdatedTime'), $lang->package->byUpdatedTime, "id='byupdatedtime'") . '</li>';
+          echo '<li>' . html::a(inlink('obtain', 'type=byAddedTime'),   $lang->package->byAddedTime,   "id='byaddedtime'") . '</li>';
+          echo '<li>' . html::a(inlink('obtain', 'type=byDownloads'),   $lang->package->byDownloads,   "id='bydownloads'") . '</li>';
+          ?>
+        </ul>
+      </td>
+    </tr>
+  </table>
+
   <?php if($packages):?>
   <div class='cards pd-0 mg-0'>
   <?php foreach($packages as $package):?>
@@ -82,14 +92,12 @@
           }
           ?>
         </div>
-        <?php
-          echo "{$lang->package->grade}: ",   html::printStars($package->stars);
-        ?>
+        <?php echo "{$lang->package->grade}: ",   html::printStars($package->stars); ?>
         <div class='pull-right' style='margin-top: -15px'>
           <div class='btn-group'>
           <?php
           $installLink = inlink('install',  "package=$package->code&downLink=" . helper::safe64Encode($currentRelease->downLink) . "&md5={$currentRelease->md5}&type=$package->type&overridePackage=no&ignoreCompitable=yes");
-          echo html::a($package->viewLink, $lang->package->view, '', 'class="btn package"');
+          echo html::a($package->viewLink, $lang->package->view, 'class="btn package"');
           if($currentRelease->public)
           {
               if($package->type != 'computer' and $package->type != 'mobile')
@@ -99,22 +107,22 @@
                       if($installeds[$package->code]->version != $package->latestRelease->releaseVersion and $this->package->checkVersion($package->latestRelease->zentaoCompatible))
                       {
                           $upgradeLink = inlink('upgrade',  "package=$package->code&downLink=" . helper::safe64Encode($currentRelease->downLink) . "&md5=$currentRelease->md5&type=$package->type");
-                          echo html::a($upgradeLink, $lang->package->upgrade, '', 'class="iframe btn"');
+                          echo html::a($upgradeLink, $lang->package->upgrade, "class='iframe btn'");
                       }
                       else
                       {
-                          echo html::commonButton($lang->package->installed, "disabled='disabled' style='color:gray'");
+                          echo html::a('javascript:;', $lang->package->installed, "class='btn disabled'");
                       }
                   }
                   else
                   {
                       $label = $currentRelease->compatible ? $lang->package->installAuto : $lang->package->installForce;
-                      echo html::a($installLink, $label, '', 'class="iframe btn"');
+                      echo html::a($installLink, $label, "data-toggle='modal' class='btn'");
                   }
               }
           }
-          echo html::a($currentRelease->downLink, $lang->package->downloadAB, '', 'class="manual btn"');
-          echo html::a($package->site, $lang->package->site, '_blank', 'class=btn');
+          echo html::a($currentRelease->downLink, $lang->package->downloadAB, 'class="manual btn"');
+          echo html::a($package->site, $lang->package->site, "class='btn' target='_blankn'");
           ?>
           </div>
         </div>
@@ -128,7 +136,7 @@
   </div>
   <?php endif; ?>
   <?php else:?>
-  <div class='alert alert-danger'>
+  <div class='alert alert-warning'>
     <i class='icon icon-remove-sign'></i>
     <div class='content'>
       <h4><?php echo $lang->package->errorOccurs;?></h4>
@@ -137,8 +145,9 @@
   </div>
   <?php endif;?>
 </div>
+</div>
 <script>
 $('#<?php echo $type;?>').addClass('active')
 $('#module<?php echo $moduleID;?>').addClass('active')
 </script>
-<?php include '../../common/view/footer.html.php';?>
+<?php include '../../common/view/footer.admin.html.php';?>
