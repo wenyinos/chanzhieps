@@ -14,7 +14,7 @@
 <?php include '../../common/view/codeeditor.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
-    <strong><i class='icon-html5'></i><?php echo $lang->ui->setBaseStyle;?></strong>
+    <strong><i class='icon-html5'></i> <?php echo $lang->ui->setBaseStyle;?></strong>
   </div>
   <div class='panel-body'>
     <form method='post' id='ajaxForm' class='form-inline'>
@@ -24,8 +24,10 @@
         </tr>
         <tr>
           <td>
-            <?php echo html::submitButton();?>
-            <strong class="text-info">&nbsp;&nbsp;<?php echo $this->lang->ui->noStyleTag?></strong>
+            <div class='form-action'>
+              <?php echo html::submitButton();?>
+              <strong class="text-info">&nbsp;&nbsp;<?php echo $this->lang->ui->noStyleTag?></strong>
+            </div>
           </td>
         </tr>
       </table>
