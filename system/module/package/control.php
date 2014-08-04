@@ -116,6 +116,8 @@ class package extends control
     {
         set_time_limit(0);
         unset($this->lang->package->menu);
+        
+        $installedPackage = $this->package->getInfoFromDB($package);
 
         $this->view->error = '';
         $installTitle      = $upgrade == 'no' ? $this->lang->package->install : $this->lang->package->upgrade;
@@ -127,6 +129,42 @@ class package extends control
 
         /* Get the package file name. */
         $packageFile = $this->package->getPackageFile($package);
+
+        if($downLink)
+        {
+            /* Get the package file name. */
+            $packageFile = $this->package->getPackageFile($package);
+
+            /* Checking download path. */
+            $return = $this->package->checkDownloadPath();
+            if($return->result != 'ok')
+            {
+                $this->view->error = $return->error;
+                die($this->display());
+            }
+
+            /* Check file exists or not. */
+            if(file_exists($packageFile) and $overridePackage == 'no')
+            {
+                $overrideLink = inlink('install', "package=$package&downLink=$downLink&md5=$md5&type=$type&overridePackage=yes&ignoreCompatible=$ignoreCompatible&overrideFile=$overrideFile&agreeLicense=$agreeLicense&upgrade=$upgrade");
+                $this->view->error = sprintf($this->lang->package->errorPackageFileExists, $packageFile, $installType, $overrideLink);
+                die($this->display());
+            }
+
+            /* Download the package file. */
+            $this->package->downloadPackage($package, helper::safe64Decode($downLink));
+            if(!file_exists($packageFile))
+            {
+                $this->view->error = sprintf($this->lang->package->errorDownloadFailed, $packageFile);
+                die($this->display());
+            }
+            elseif($md5 != '' and md5_file($packageFile) != $md5)
+            {
+                unlink($packageFile);
+                $this->view->error = sprintf($this->lang->package->errorMd5Checking, $packageFile);
+                die($this->display());
+            }
+        }
 
         /* Check the package file exists or not. */
         if(!file_exists($packageFile)) 
@@ -215,7 +253,7 @@ class package extends control
             $this->view->agreeLink = $agreeLink;
             if(isset($license) and $upgrade == 'yes') 
             {
-                $this->view->subtitle = sprintf($this->lang->package->upgradeVersion, $this->post->installedVersion, $this->post->upgradeVersion);
+                $this->view->subtitle = sprintf($this->lang->package->upgradeVersion, $installedPackage->version, $packageInfo->version);
             }
 
             die($this->display());
@@ -259,50 +297,6 @@ class package extends control
         if($postHookFile = $this->package->getHookFile($package, $hook)) include $postHookFile;
 
         $this->display();
-    }
-
-    /**
-     * Download from chanzhi plat.
-     * 
-     * @param  string    $package 
-     * @param  string    $downLink 
-     * @access public
-     * @return void
-     */
-    public function download($package, $downLink, $overridePackage = 'no')
-    {
-        /* Get the package file name. */
-        $packageFile = $this->package->getPackageFile($package);
-
-        /* Checking download path. */
-        $return = $this->package->checkDownloadPath();
-        if($return->result != 'ok')
-        {
-            $this->view->error = $return->error;
-            die($this->display());
-        }
-
-        /* Check file exists or not. */
-        if(file_exists($packageFile) and $overridePackage == 'no')
-        {
-            $overrideLink = inlink('install', "package=$package&downLink=$downLink&md5=$md5&type=$type&overridePackage=yes&ignoreCompatible=$ignoreCompatible&overrideFile=$overrideFile&agreeLicense=$agreeLicense&upgrade=$upgrade");
-            $this->view->error = sprintf($this->lang->package->errorPackageFileExists, $packageFile, $installType, $overrideLink);
-            die($this->display());
-        }
-
-        /* Download the package file. */
-        $this->package->downloadPackage($package, helper::safe64Decode($downLink));
-        if(!file_exists($packageFile))
-        {
-            $this->view->error = sprintf($this->lang->package->errorDownloadFailed, $packageFile);
-            die($this->display());
-        }
-        elseif($md5 != '' and md5_file($packageFile) != $md5)
-        {
-            unlink($packageFile);
-            $this->view->error = sprintf($this->lang->package->errorMd5Checking, $packageFile);
-            die($this->display());
-        }
     }
 
     /**

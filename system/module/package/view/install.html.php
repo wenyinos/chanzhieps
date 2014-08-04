@@ -32,22 +32,20 @@
   </div>
 </div>
 <?php else:?>
-<div class='alert alert-success'>
-  <h4><i class='icon-ok-sign'></i> <?php echo $lang->package->successDownloadedPackage;?></h4>
-  <h1 class='text-center'><?php echo sprintf($lang->package->installFinished, $installType);?></h1>
+<div class='alert'>
+  <h2 class='text-center text-success'><?php echo sprintf($lang->package->installFinished, $installType);?></h2>
   <div class='text-center'>
-    <?php echo html::a('javascript:;', $lang->package->viewInstalled, "class='btn btn-success' onclick='return parent.location.href=v.browseLink'");?>
+    <?php echo html::a('javascript:;', $lang->package->viewInstalled, "class='btn btn-primary' onclick='return parent.location.href=v.browseLink'");?>
   </div>
-  <hr>
   <?php
-  echo "<h3 class='success'>{$lang->package->successCopiedFiles}</h3>";
-  echo '<ul>';
+  echo "<h5 class='success'>{$lang->package->successInstallDB}</h5>";
+  echo "<h5 class='success'>{$lang->package->successCopiedFiles}</h5>";
+  echo '<pre>';
   foreach($files as $fileName => $md5)
   {
-      echo "<li>$fileName</li>";
+      echo "$fileName<br/>";
   }
-  echo '</ul>';
-  echo "<h3 class='success'>{$lang->package->successInstallDB}</h3>";
+  echo '</pre>';
   ?>
 </div>
 <?php endif;?>

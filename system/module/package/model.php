@@ -663,9 +663,13 @@ class packageModel extends model
     public function copyPackageFiles($package)
     {
         $appRoot      = $this->app->getAppRoot();
-        $packageDir = 'ext' . DS . $package . DS;
-        $systemPathes = scandir($packageDir . 'system' . DS);
-        $wwwPathes    = scandir($packageDir . 'www' . DS);
+        $packageDir   = 'ext' . DS . $package . DS;
+
+        $systemPathes = array();
+        $wwwPathes    = array();
+
+        if(is_dir($packageDir . 'system' . DS)) $systemPathes = scandir($packageDir . 'system' . DS);
+        if(is_dir($packageDir . 'www' . DS))    $wwwPathes    = scandir($packageDir . 'www' . DS);
 
         $copiedFiles       = array();
         $copiedSystemFiles = array();
