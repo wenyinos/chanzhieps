@@ -760,7 +760,7 @@ class upgradeModel extends model
     }
 
     /**
-     * scan directory and create empty index file. when upgrade from 2.4
+     * Scan directory and create empty index file when upgrade from 2.4
      * 
      * @param  string    $path 
      * @access public
