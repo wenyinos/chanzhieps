@@ -74,6 +74,12 @@ class upgradeModel extends model
                 $this->fixTopRegion();
                 $this->fixSlideHeight();
                 $this->setDefaultSiteType();
+            case '2_4':
+                $this->execSQL($this->getUpgradeFile('2.4'));
+                $this->upgradeSlideTarget();
+                $this->createIndexFile();
+                $this->deleteLogFile();
+                $this->setDefaultCurrency();
 
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -107,6 +113,7 @@ class upgradeModel extends model
             case '2_2'  : $confirmContent .= file_get_contents($this->getUpgradeFile('2.2'));
             case '2_2_1': $confirmContent .= file_get_contents($this->getUpgradeFile('2.2.1'));
             case '2_3'  : $confirmContent .= file_get_contents($this->getUpgradeFile('2.3'));
+            case '2_4'  : $confirmContent .= file_get_contents($this->getUpgradeFile('2.4'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
