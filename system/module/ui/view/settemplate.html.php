@@ -46,8 +46,11 @@
               $url = inlink('settemplate', "template={$template['code']}&theme={$theme}");
               ?>
               <div class='theme<?php echo $currentClass;?>' data-url='<?php echo $url;?>' data-theme='<?php echo $theme;?>'>
-              <div class='theme-card'><div class='theme-img'><?php echo html::image($templateRoot . 'theme/' . $theme . '/preview.png');?></div></div>
-                <div class='theme-name text-center'><strong><?php echo $name;?></strong> <i class='icon-ok-sign'></i></div>
+                <div class='theme-card'>
+                  <i class='icon-ok icon'></i>
+                  <div class='theme-img'><?php echo html::image($templateRoot . 'theme/' . $theme . '/preview.png');?></div>
+                  <div class='theme-name text-center'><strong><?php echo $name;?></strong></div>
+                </div>
               </div>
             <?php endforeach;?>
             </div>

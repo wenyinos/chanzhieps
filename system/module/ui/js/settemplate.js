@@ -28,7 +28,7 @@ $(document).ready(function()
                 {
                     var $oldTpl       = $('.card-template.current').removeClass('current');
                     var $oldTplBtn    = $oldTpl.find('.btn-apply-template');
-                    $oldTplBtn.removeClass('btn success disabled').html($oldTplBtn.data('default'));
+                    $oldTplBtn.removeClass('btn-success disabled').html($oldTplBtn.data('default'));
 
                     $tplBtn = $tpl.find('.btn-apply-template');
                     $tplBtn.addClass('btn-success disabled').html($tplBtn.data('current'));
@@ -73,7 +73,7 @@ $(document).ready(function()
 
                     var $oldTpl       = $('.card-template.current').removeClass('current');
                     var $oldTplBtn    = $oldTpl.find('.btn-apply-template');
-                    $oldTplBtn.removeClass('btn success disabled').html($oldTplBtn.data('default'));
+                    $oldTplBtn.removeClass('btn-success disabled').html($oldTplBtn.data('default'));
 
                     $tplBtn = $tpl.find('.btn-apply-template');
                     $tplBtn.addClass('btn-success disabled').html($tplBtn.data('current'));
