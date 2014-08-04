@@ -24,5 +24,5 @@
 .catalog.dragging .catalog.drop-to:before, .catalog.drop-to.dragging:before {display: none}
 .catalog-empty {display: none; padding: 0; height: 10px; line-height: 5px!important}
 dl.drop-area {background-color: #f1f1f1}
-.show-empty-catalog .catalog-empty {display: block;}
+dl.drop-area .catalog-empty {display: block;}
 .books > .catalog > .actions > .sort-handle {display: none}

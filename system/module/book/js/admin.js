@@ -67,7 +67,7 @@ $(document).ready(function()
     $('.books > .catalog .catalog, .books > dl .catalog').not('.catalog-empty').droppable(
     {
         trigger: function($e){return $e.children('.actions').find('.sort-handle')},
-        target: '.books > .catalog .catalog, .books > dl .catalog',
+        target: function($e){return $e.siblings('.catalog');},
         container: '.books',
         nested: true,
         flex: true,
