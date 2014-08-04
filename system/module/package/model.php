@@ -98,6 +98,7 @@ class packageModel extends model
         $requestType = $this->config->requestType;
         $webRoot     = helper::safe64Encode($this->config->webRoot);
         $apiURL      = $this->apiRoot . 'apiGetmodules-' . $requestType . '-' . $webRoot . '.json';
+
         $data = $this->fetchAPI($apiURL);
         if(isset($data->modules)) return $data->modules;
         return false;
@@ -113,14 +114,15 @@ class packageModel extends model
      */
     public function getPackagesByAPI($type, $param, $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
-        $apiURL = $this->apiRoot . "apiGetPackages-$type-$param-$recTotal-$recPerPage-$pageID.json";
+        $apiURL = $this->apiRoot . "apiGetExtensions-$type-$param-$recTotal-$recPerPage-$pageID.json";
         $data   = $this->fetchAPI($apiURL);
-        if(isset($data->packages))
+
+        if(isset($data->extensions))
         {
-            foreach($data->packages as $package)
+            foreach($data->extensions as $package)
             {
-                $package->currentRelease = isset($package->chanzhiCompatible) ? $package->chanzhiCompatible : $package->releaseVersion;
-                $package->currentRelease->compatible = isset($package->chanzhiCompatible);
+                $package->currentRelease = isset($package->compatibleRelease) ? $package->compatibleRelease : $package->latestRelease;
+                $package->currentRelease->compatible = isset($package->currentRelease);
             }
             return $data;
         }
