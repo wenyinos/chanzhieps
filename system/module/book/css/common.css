@@ -14,6 +14,7 @@
 .chapter, .books .article { line-height: 20px; }
 .chapter .order,.books .article .order { display: inline-block; margin-right: 0; height: 20px; line-height: 20px; padding: 0 6px; text-align: center; border-radius: 5px; transition: all 0.3s;  }
 .books dd:hover .order,.book:hover:before{border-color: #999}
+i.icon-arrow-up, i.icon-arrow-down{cursor:pointer}
 
 .catalog.chapter.dragging, .catalog.article.dragging {opacity: 0.25; background-color: #FFF4E5; border: 1px solid #fff}
 .catalog.chapter.drag-shadow, .catalog.article.drag-shadow {background: #fff; border: 1px solid #ddd; box-shadow:0 1px 8px rgba(0,0,0,.15);}
