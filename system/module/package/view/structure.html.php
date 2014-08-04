@@ -11,11 +11,11 @@
  */
 ?>
 <?php include '../../common/view/header.modal.html.php';?>
-  <div class='panel-body'>
-    <?php 
-    $appRoot = $this->app->getAppRoot();
-    $files   = json_decode($package->files);
-    foreach($files as $file => $md5) echo $appRoot . $file . "<br />";
-    ?>  
-  </div>
+<?php 
+$appRoot = $this->app->getAppRoot();
+$files   = json_decode($package->files);
+echo '<pre>';
+foreach($files as $file => $md5) echo $appRoot . $file . "<br />";
+echo '</pre>';
+?>  
 <?php include '../../common/view/footer.modal.html.php';?>

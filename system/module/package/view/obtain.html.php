@@ -45,7 +45,6 @@
       </td>
     </tr>
   </table>
-
   <?php if($packages):?>
   <div class='cards pd-0 mg-0'>
   <?php foreach($packages as $package):?>
@@ -104,10 +103,10 @@
               {
                   if(isset($installeds[$package->code]))
                   {
-                      if($installeds[$package->code]->version != $package->latestRelease->releaseVersion and $this->package->checkVersion($package->latestRelease->zentaoCompatible))
+                      if($installeds[$package->code]->version != $package->latestRelease->releaseVersion and $this->package->checkVersion($package->latestRelease->chanzhiCompatible))
                       {
                           $upgradeLink = inlink('upgrade',  "package=$package->code&downLink=" . helper::safe64Encode($currentRelease->downLink) . "&md5=$currentRelease->md5&type=$package->type");
-                          echo html::a($upgradeLink, $lang->package->upgrade, "class='iframe btn'");
+                          echo html::a($upgradeLink, $lang->package->upgrade, "class='btn' data-toggle='modal'");
                       }
                       else
                       {
@@ -136,7 +135,7 @@
   </div>
   <?php endif; ?>
   <?php else:?>
-  <div class='alert alert-warning'>
+  <div class='alert alert-default'>
     <i class='icon icon-remove-sign'></i>
     <div class='content'>
       <h4><?php echo $lang->package->errorOccurs;?></h4>
