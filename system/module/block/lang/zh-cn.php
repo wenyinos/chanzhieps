@@ -52,6 +52,8 @@ $lang->block->placeholder = new stdclass();
 $lang->block->placeholder->moreText = '区块右上角文字';
 $lang->block->placeholder->moreUrl  = '区块右上角链接地址';
 
+$lang->block->noPhpTag = '不需要&lt;?php ?&gt;';
+
 $lang->block->setOkFile = <<<EOT
 <div class='alert'>
 <h5>请按照下面的步骤操作以确认您的管理员身份。</h5>
@@ -70,48 +72,49 @@ $lang->block->gridOptions[12] = '100%';
 $lang->block->colorTip    = '十六进制颜色值';
 $lang->block->colorPlates = '333333|000000|CA1407|45872B|148D00|F25D03|2286D2|D92958|A63268|04BFAD|D1270A|FF9400|299182|63731A|3D4DBE|7382D9|754FB9|F2E205|B1C502|364245|C05036|8A342A|E0DDA2|B3D465|EEEEEE|FFD0E5|D0FFFD|FFFF84|F4E6AE|E5E5E5|F1F1F1|FFFFFF';
 
-$lang->block->typeList['html']    = '自定义区块';
-$lang->block->typeList['code']    = '源代码';
-$lang->block->typeList['phpcode'] = 'php源代码';
+$lang->block->default = new stdclass();
+$lang->block->default->typeList['html']    = '自定义区块';
+$lang->block->default->typeList['code']    = '源代码';
+$lang->block->default->typeList['phpcode'] = 'php源代码';
 
-$lang->block->typeList['latestArticle']   = '最新文章';
-$lang->block->typeList['hotArticle']      = '热门文章';
+$lang->block->default->typeList['latestArticle']   = '最新文章';
+$lang->block->default->typeList['hotArticle']      = '热门文章';
 
-$lang->block->typeList['latestProduct']   = '最新产品';
-$lang->block->typeList['featuredProduct'] = '首页推荐产品';
-$lang->block->typeList['hotProduct']      = '热门产品';
+$lang->block->default->typeList['latestProduct']   = '最新产品';
+$lang->block->default->typeList['featuredProduct'] = '首页推荐产品';
+$lang->block->default->typeList['hotProduct']      = '热门产品';
 
-$lang->block->typeList['articleTree']     = '文章分类';
-$lang->block->typeList['productTree']     = '产品分类';
-$lang->block->typeList['blogTree']        = '博客分类';
+$lang->block->default->typeList['articleTree']     = '文章分类';
+$lang->block->default->typeList['productTree']     = '产品分类';
+$lang->block->default->typeList['blogTree']        = '博客分类';
 
-$lang->block->typeList['contact']         = '联系我们';
-$lang->block->typeList['about']           = '公司简介';
-$lang->block->typeList['links']           = '友情链接';
-$lang->block->typeList['slide']           = '幻灯片';
-$lang->block->typeList['header']          = '网站头部';
+$lang->block->default->typeList['contact']         = '联系我们';
+$lang->block->default->typeList['about']           = '公司简介';
+$lang->block->default->typeList['links']           = '友情链接';
+$lang->block->default->typeList['slide']           = '幻灯片';
+$lang->block->default->typeList['header']          = '网站头部';
 
-$lang->block->typeGroups = array();
-$lang->block->typeGroups['html']    = 'input';
-$lang->block->typeGroups['code']    = 'input';
-$lang->block->typeGroups['phpcode'] = 'input';
+$lang->block->default->typeGroups = array();
+$lang->block->default->typeGroups['html']    = 'input';
+$lang->block->default->typeGroups['code']    = 'input';
+$lang->block->default->typeGroups['phpcode'] = 'input';
 
-$lang->block->typeGroups['latestArticle'] = 'article';
-$lang->block->typeGroups['hotArticle']    = 'article';
+$lang->block->default->typeGroups['latestArticle'] = 'article';
+$lang->block->default->typeGroups['hotArticle']    = 'article';
 
-$lang->block->typeGroups['latestProduct']   = 'product';
-$lang->block->typeGroups['featuredProduct'] = 'product';
-$lang->block->typeGroups['hotProduct']      = 'product';
+$lang->block->default->typeGroups['latestProduct']   = 'product';
+$lang->block->default->typeGroups['featuredProduct'] = 'product';
+$lang->block->default->typeGroups['hotProduct']      = 'product';
 
-$lang->block->typeGroups['articleTree'] = 'category';
-$lang->block->typeGroups['productTree'] = 'category';
-$lang->block->typeGroups['blogTree']    = 'category';
+$lang->block->default->typeGroups['articleTree'] = 'category';
+$lang->block->default->typeGroups['productTree'] = 'category';
+$lang->block->default->typeGroups['blogTree']    = 'category';
 
-$lang->block->typeGroups['contact'] = 'system';
-$lang->block->typeGroups['about']   = 'system';
-$lang->block->typeGroups['links']   = 'system';
-$lang->block->typeGroups['slide']   = 'system';
-$lang->block->typeGroups['header']  = 'system';
+$lang->block->default->typeGroups['contact'] = 'system';
+$lang->block->default->typeGroups['about']   = 'system';
+$lang->block->default->typeGroups['links']   = 'system';
+$lang->block->default->typeGroups['slide']   = 'system';
+$lang->block->default->typeGroups['header']  = 'system';
 
 $lang->block->category = new stdclass();
 $lang->block->category->showChildren = '显示子分类';
@@ -119,62 +122,62 @@ $lang->block->category->showChildren = '显示子分类';
 $lang->block->category->showChildrenList[1] = '是';
 $lang->block->category->showChildrenList[0] = '否';
 
-$lang->block->pages['all']            = '全部页面';
-$lang->block->pages['index_index']    = '首页';
+$lang->block->default->pages['all']            = '全部页面';
+$lang->block->default->pages['index_index']    = '首页';
 
-$lang->block->pages['article_browse'] = '文章列表页面';
-$lang->block->pages['article_view']   = '文章详情页面';
+$lang->block->default->pages['article_browse'] = '文章列表页面';
+$lang->block->default->pages['article_view']   = '文章详情页面';
 
-$lang->block->pages['product_browse'] = '产品列表页面';
-$lang->block->pages['product_view']   = '产品详情页面';
+$lang->block->default->pages['product_browse'] = '产品列表页面';
+$lang->block->default->pages['product_view']   = '产品详情页面';
 
-$lang->block->pages['blog_index']     = '博客列表页面';
-$lang->block->pages['blog_view']      = '博客详情页面';
+$lang->block->default->pages['blog_index']     = '博客列表页面';
+$lang->block->default->pages['blog_view']      = '博客详情页面';
 
-$lang->block->pages['forum_index']    = '论坛首页';
-$lang->block->pages['forum_board']    = '帖子列表页面';
-$lang->block->pages['thread_view']    = '帖子查看页面';
-$lang->block->pages['search_list']    = '搜索结果页';
+$lang->block->default->pages['forum_index']    = '论坛首页';
+$lang->block->default->pages['forum_board']    = '帖子列表页面';
+$lang->block->default->pages['thread_view']    = '帖子查看页面';
+$lang->block->default->pages['search_list']    = '搜索结果页';
 
-$lang->block->pages['book_index']     = '手册中心';
-$lang->block->pages['book_browse']    = '手册首页';
-$lang->block->pages['book_read']      = '手册章节';
+$lang->block->default->pages['book_index']     = '手册中心';
+$lang->block->default->pages['book_browse']    = '手册首页';
+$lang->block->default->pages['book_read']      = '手册章节';
 
-$lang->block->pages['message_index']  = '留言';
+$lang->block->default->pages['message_index']  = '留言';
 
-$lang->block->pages['page_view']      = '单页';
+$lang->block->default->pages['page_view']      = '单页';
 
 /* page layout list. */
-$lang->block->regions = new stdclass();
-$lang->block->regions->all['header'] = 'Header(不可见)';
-$lang->block->regions->all['top']    = '页头';
-$lang->block->regions->all['bottom'] = '页尾';
-$lang->block->regions->all['footer'] = 'Footer(不可见)';
+$lang->block->default->regions = new stdclass();
+$lang->block->default->regions->all['header'] = 'Header(不可见)';
+$lang->block->default->regions->all['top']    = '页头';
+$lang->block->default->regions->all['bottom'] = '页尾';
+$lang->block->default->regions->all['footer'] = 'Footer(不可见)';
 
-$lang->block->regions->index_index['top']     = '上部';
-$lang->block->regions->index_index['middle']  = '中部';
-$lang->block->regions->index_index['bottom']  = '底部';
+$lang->block->default->regions->index_index['top']     = '上部';
+$lang->block->default->regions->index_index['middle']  = '中部';
+$lang->block->default->regions->index_index['bottom']  = '底部';
 
-$lang->block->regions->article_browse['side'] = '侧边';
-$lang->block->regions->article_view['side']   = '侧边';
+$lang->block->default->regions->article_browse['side'] = '侧边';
+$lang->block->default->regions->article_view['side']   = '侧边';
 
-$lang->block->regions->product_browse['side'] = '侧边';
-$lang->block->regions->product_view['side']   = '侧边';
+$lang->block->default->regions->product_browse['side'] = '侧边';
+$lang->block->default->regions->product_view['side']   = '侧边';
 
-$lang->block->regions->blog_index['side']     = '侧边';
-$lang->block->regions->blog_view['side']      = '侧边';
+$lang->block->default->regions->blog_index['side']     = '侧边';
+$lang->block->default->regions->blog_view['side']      = '侧边';
 
-$lang->block->regions->forum_index['top']     = '上部';
-$lang->block->regions->forum_index['bottom']  = '底部';
-$lang->block->regions->forum_board['top']     = '上部';
-$lang->block->regions->forum_board['bottom']  = '底部';
-$lang->block->regions->thread_view['top']     = '上部';
-$lang->block->regions->thread_view['bottom']  = '底部';
+$lang->block->default->regions->forum_index['top']     = '上部';
+$lang->block->default->regions->forum_index['bottom']  = '底部';
+$lang->block->default->regions->forum_board['top']     = '上部';
+$lang->block->default->regions->forum_board['bottom']  = '底部';
+$lang->block->default->regions->thread_view['top']     = '上部';
+$lang->block->default->regions->thread_view['bottom']  = '底部';
 
-$lang->block->regions->book_browse['side']    = '侧边';
-$lang->block->regions->book_read['top']       = '上部';
-$lang->block->regions->book_read['bottom']    = '底部';
+$lang->block->default->regions->book_browse['side']    = '侧边';
+$lang->block->default->regions->book_read['top']       = '上部';
+$lang->block->default->regions->book_read['bottom']    = '底部';
 
-$lang->block->regions->message_index['side']  = '侧边';
+$lang->block->default->regions->message_index['side']  = '侧边';
 
-$lang->block->regions->page_view['side']      = '侧边';
+$lang->block->default->regions->page_view['side']      = '侧边';

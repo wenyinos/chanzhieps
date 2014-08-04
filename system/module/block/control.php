@@ -14,10 +14,10 @@ class block extends control
     /**
      * Browse blocks admin.
      * 
+     * @param  string    $template 
      * @param  int       $recTotal 
      * @param  int       $recPerPage 
      * @param  int       $pageID 
-     * @param  string    $template 
      * @access public
      * @return void
      */
@@ -27,20 +27,14 @@ class block extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        if($template == '') 
-        {
-            $currentTemplate = $this->config->site->template ? $this->config->site->template : 'default';
-        }
-        else
-        {
-            $currentTemplate = $template;
-        }
+        $currentTemplate = $template;
+        if(!$currentTemplate) $currentTemplate = $this->config->site->template ? $this->config->site->template : 'default';
 
         $this->view->currentTemplate = $currentTemplate;
         $this->view->templates       = $this->loadModel('ui')->getTemplates();
-        $this->view->blocks = $this->block->getList($currentTemplate, $pager);
-        $this->view->title  = $this->lang->block->common;
-        $this->view->pager  = $pager;
+        $this->view->blocks          = $this->block->getList($currentTemplate, $pager);
+        $this->view->title           = $this->lang->block->common;
+        $this->view->pager           = $pager;
         $this->display();
     }
 
@@ -53,14 +47,8 @@ class block extends control
      */
     public function pages($template = '')
     {
-        if($template == '') 
-        {
-            $currentTemplate = $this->config->site->template ? $this->config->site->template : 'default';
-        }
-        else
-        {
-            $currentTemplate = $template;
-        }
+        $currentTemplate = $template;
+        if(!$currentTemplate) $currentTemplate = $this->config->site->template ? $this->config->site->template : 'default';
 
         $this->view->currentTemplate = $currentTemplate;
         $this->view->templates       = $this->loadModel('ui')->getTemplates();
@@ -70,15 +58,16 @@ class block extends control
     /**
      * Create a block.
      * 
+     * @param  string $template
      * @param  string $type    html|php
      * @access public
      * @return void
      */
-    public function create($type = 'html')
+    public function create( $template = 'default', $type = 'html')
     {
         if($_POST)
         {
-            $this->block->create();
+            $this->block->create($template);
             if(!dao::isError()) $this->send(array('result' => 'success', 'locate' => $this->inlink('admin')));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
@@ -90,25 +79,27 @@ class block extends control
             $this->view->canCreatePHP = $return['result'] == 'success' ? true : false;
         }
 
-        $this->view->type = $type;
+        $this->view->type     = $type;
+        $this->view->template = $template;
         $this->display();
     }
 
     /**
      * Edit a block.
      * 
-     * @param string   $blockID 
+     * @param string   $template
+     * @param int      $blockID 
      * @param string   $type 
      * @access public
      * @return void
      */
-    public function edit($blockID, $type = '')
+    public function edit($template = 'default', $blockID, $type = '')
     {
         if(!$blockID) $this->locate($this->inlink('admin'));
 
         if($_POST)
         {
-            $this->block->update();
+            $this->block->update($template);
             if(!dao::isError()) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
@@ -120,8 +111,9 @@ class block extends control
             $this->view->canCreatePHP = $return['result'] == 'success' ? true : false;
         }
 
-        $this->view->block = $this->block->getByID($blockID);
-        $this->view->type  = $this->get->type ? $this->get->type : $this->view->block->type;
+        $this->view->template = $template;
+        $this->view->block    = $this->block->getByID($blockID);
+        $this->view->type     = $this->get->type ? $this->get->type : $this->view->block->type;
         $this->display();
     }
 
@@ -147,12 +139,12 @@ class block extends control
         $blocks = $this->block->getRegionBlocks($page, $region, $template);
         if(empty($blocks)) $blocks = array(new stdclass());
 
-        $this->view->title        = "<i class='icon-cog'></i>" . $this->lang->block->setPage . ' - '. $this->lang->block->pages[$page] . ' - ' . $this->lang->block->regions->{$page}[$region];
+        $this->view->title        = "<i class='icon-cog'></i>" . $this->lang->block->setPage . ' - '. $this->lang->block->{$template}->pages[$page] . ' - ' . $this->lang->block->$template->regions->{$page}[$region];
         $this->view->modalWidth   = 700;
         $this->view->page         = $page;
         $this->view->region       = $region;
         $this->view->blocks       = $blocks;
-        $this->view->blockOptions = $this->block->getPairs();
+        $this->view->blockOptions = $this->block->getPairs($template);
         $this->view->template     = $template;
 
         $this->display();

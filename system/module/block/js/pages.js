@@ -22,7 +22,7 @@ $(document).ready(function()
     });
 
     /* Delete options. */
-    $(document).on('click', '.delete', function(){$(this).parents('tr').remove();});
+    $(document).on('click', '.delete', function(){$(this).parents('.block-item').remove();});
 
    /* Sort up. */
     $(document).on('click', '.icon-arrow-up', function()
