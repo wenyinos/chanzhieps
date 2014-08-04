@@ -297,7 +297,16 @@ class fileModel extends model
     public function setSavePath()
     {
         $savePath = $this->app->getDataRoot() . "upload/" . date('Ym/', $this->now);
-        if(!file_exists($savePath)) @mkdir($savePath, 0777, true);
+        if(!file_exists($savePath)) 
+        {
+            @mkdir($savePath, 0777, true);
+            if(is_writable($savePath) && !file_exists($savePath . DS . 'index.php'))
+            {
+                $fd = fopen($savePath . DS . 'index.php', "a+");
+                fclose($fd);
+                chmod($savePath . DS . 'index.php' , 0755);
+            }
+        }
         $this->savePath = dirname($savePath) . '/';
     }
     

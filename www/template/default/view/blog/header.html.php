@@ -113,6 +113,7 @@ else
 }
 ?>
 <![endif]-->
+<?php if(isset($this->config->site->basestyle)) css::internal($this->config->site->basestyle);?>
 </head>
 <body>
 <div class='page-container page-blog'>
