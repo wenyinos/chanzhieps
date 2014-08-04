@@ -257,4 +257,17 @@ class book extends control
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success'));
     }
+
+    /**
+     * sort books 
+     * 
+     * @access public
+     * @return void
+     */
+    public function sort()
+    {
+        $result = $this->book->sort();
+        if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+    }
 }

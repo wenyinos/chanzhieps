@@ -20,6 +20,20 @@ $(document).ready(function()
     function saveOrders(orders)
     {
         console.log(orders);
+        $.post(createLink('book','sort'),
+                {sort:orders},
+                function(data)
+                {
+                    if(data.result=="success")
+                    {
+                        location.reload();
+                    }
+                    else
+                    {
+                        alert(data.message);
+                    }
+                },
+                'json');
     }
 
     function updateOrders(ele, parentOrder, orders)

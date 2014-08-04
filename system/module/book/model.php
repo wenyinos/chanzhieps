@@ -700,4 +700,22 @@ class bookModel extends model
 
         return $content;
     }
+
+    /**
+     * sort books
+     * 
+     * @access public
+     * @return void
+     */
+    public function sort()
+    {
+        $nodes = fixer::input('post')->get();
+        foreach($nodes->sort as $id => $order)
+        {
+            $order = explode('.', $order);
+            $num = end($order);
+            $this->dao->update(TABLE_BOOK)->set('`order`')->eq($num)->where('id')->eq($id)->exec();
+        }
+        return !dao::iserror();
+    }
 }
