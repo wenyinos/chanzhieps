@@ -130,6 +130,7 @@ $lang->menu->ui       = 'UI|ui|setlogo|';
 $lang->menu->company  = 'Company|company|setbasic|';
 $lang->menu->user     = 'User|user|admin|';
 $lang->menu->feedback = 'Feedback|message|admin|';
+$lang->menu->package  = 'Extension|package|browse|';
 
 /* Menu groups setting. */
 $lang->menuGroups = new stdclass();

@@ -131,6 +131,7 @@ $lang->menu->ui       = '界面|ui|setlogo|';
 $lang->menu->company  = '公司|company|setbasic|';
 $lang->menu->user     = '会员|user|admin|';
 $lang->menu->feedback = '反馈|message|admin|';
+$lang->menu->package  = '扩展|package|browse|';
 
 /* Menu groups setting. */
 $lang->menuGroups = new stdclass();
@@ -213,7 +214,6 @@ $lang->forum->menu->update = '更新数据|forum|update|';
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
 $lang->site->menu->basic   = '站点设置|site|setbasic|';
-$lang->site->menu->package = '扩展设置|package|browse|';
 $lang->site->menu->nav     = '导航设置|nav|admin|';
 $lang->site->menu->tag     = '关键词设置|tag|admin|';
 $lang->site->menu->oauth   = '开放登录|site|setoauth|';
