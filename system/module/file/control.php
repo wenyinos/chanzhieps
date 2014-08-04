@@ -275,7 +275,6 @@ class file extends control
         if(strpos($fileName, $extension) === false) $fileName .= $extension;
 
         /* urlencode the filename for ie. */
-        a($this->server->http_use_agent);exit;
         $isIE11 = strpos($this->server->http_user_agent, 'Trident') !== false and strpos($this->server->http_user_agent, 'rv:11.0') !== false; 
         if(strpos($this->server->http_user_agent, 'MSIE') !== false or $isIE11) $fileName = urlencode($fileName);
 

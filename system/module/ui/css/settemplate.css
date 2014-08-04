@@ -11,12 +11,13 @@
 .card.current .current-theme-tip {display: inline;}
 .themes-list {padding: 6px; border-top: 1px dashed #ddd}
 .theme {width: 130px; float: left; cursor: pointer; margin: 6px 10px}
-.theme-name {margin-top: 5px;}
-.theme.current > .theme-name {color: #47A447}
-.theme > .theme-name .icon-ok-sign {display: none}
-.theme.current > .theme-name .icon-ok-sign {display: inline;}
-.theme-card {overflow: hidden; border: 2px solid #fff; border-radius: 4px; border-radius: 4px; opacity: 0.8}
-.theme-img {height: 65px; overflow: hidden; border: 1px solid #bbb; opacity: 0.8}
-.theme:hover .theme-img {opacity: 1; border-color: #aaa}
-.theme.current .theme-img {border-color: #47A447; opacity: 1}
-.theme.current .theme-card {border-color: #47A447; -moz-box-shadow:0px 0px 12px #47A447; -webkit-box-shadow:0px 0px 12px #47A447; box-shadow:0px 0px 12px #47A447; opacity: 1}
+.theme-name {padding: 5px 0; background-color: #f1f1f1}
+.theme-card {overflow: hidden; border: 1px solid #aaa; border-radius: 4px; border-radius: 4px; opacity: 0.8; position: relative;}
+.theme-card > .icon {position: absolute; right: 0; top: 0; display: none;}
+.theme-img {height: 65px; overflow: hidden; opacity: 0.8}
+.theme:hover .theme-img {opacity: 1;}
+.card-template.current .theme.current > .theme-name {color: #47A447}
+.card-template.current .theme.current .theme-card > .icon {position: absolute; right: 0; top: 0; display: block; color: #fff; background: none; width: 0; height: 0; border: 20px solid #229F24; border-left-color: transparent; border-bottom-color: transparent;}
+.card-template.current .theme.current .theme-card > .icon:before {position: absolute; right: -15px; top: -15px}
+.card-template.current .theme.current .theme-img {border-color: #47A447; opacity: 1}
+.card-template.current .theme.current .theme-card {border-color: #47A447; -moz-box-shadow:0px 0px 6px #47A447; -webkit-box-shadow:0px 0px 6px #47A447; box-shadow:0px 0px 6px #47A447; opacity: 1}

@@ -20,6 +20,20 @@ $(document).ready(function()
     function saveOrders(orders)
     {
         console.log(orders);
+        $.post(createLink('book','sort'),
+                {sort:orders},
+                function(data)
+                {
+                    if(data.result=="success")
+                    {
+                        location.reload();
+                    }
+                    else
+                    {
+                        alert(data.message);
+                    }
+                },
+                'json');
     }
 
     function updateOrders(ele, parentOrder, orders)
@@ -67,7 +81,7 @@ $(document).ready(function()
     $('.books > .catalog .catalog, .books > dl .catalog').not('.catalog-empty').droppable(
     {
         trigger: function($e){return $e.children('.actions').find('.sort-handle')},
-        target: '.books > .catalog .catalog, .books > dl .catalog',
+        target: function($e){return $e.siblings('.catalog');},
         container: '.books',
         nested: true,
         flex: true,
