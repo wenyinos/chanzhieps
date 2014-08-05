@@ -37,7 +37,7 @@ class product extends control
     {  
         $category = $this->loadModel('tree')->getByID($categoryID, 'product');
 
-        if($category->link)
+        if($category && $category->link)
         {
              header('HTTP/1.1 301 Moved Permanently');
              die(header('Location:' . $category->link));
