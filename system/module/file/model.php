@@ -333,7 +333,7 @@ class fileModel extends model
         $this->replaceFile($fileID);
         
         $fileInfo = fixer::input('post')->remove('upFile')->get();
-        $this->dao->update(TABLE_FILE)->data($fileInfo)->autoCheck()->batchCheck('title', 'notempty')->where('id')->eq($fileID)->exec();
+        $this->dao->update(TABLE_FILE)->data($fileInfo)->autoCheck()->batchCheck($this->config->file->require->edit, 'notempty')->where('id')->eq($fileID)->exec();
     }
     
     /**
