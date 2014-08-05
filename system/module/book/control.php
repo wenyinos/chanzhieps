@@ -266,8 +266,7 @@ class book extends control
      */
     public function sort()
     {
-        $result = $this->book->sort();
-        if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        if($this->book->sort()) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
 }
