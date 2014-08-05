@@ -11,12 +11,13 @@
  */
 $lang->ui->common       = "站点";
 
-$lang->ui->logo          = 'Logo';
-$lang->ui->setLogo       = "Logo设置";
-$lang->ui->setTemplate   = '模板设置';
-$lang->ui->setTheme      = '主题设置';
-$lang->ui->setFavicon    = "Favicon设置";
-$lang->ui->setBaseStyle  = "全局样式设置";
+$lang->ui->logo            = 'Logo';
+$lang->ui->setLogo         = "Logo设置";
+$lang->ui->setTemplate     = '模板设置';
+$lang->ui->installTemplate = '上传模板';
+$lang->ui->setTheme        = '主题设置';
+$lang->ui->setFavicon      = "Favicon设置";
+$lang->ui->setBaseStyle    = "全局样式设置";
 
 $lang->ui->noStyleTag        = "请填写全局CSS样式代码，不需要&lt;style&gt;&lt;/style&gt;标签";
 $lang->ui->setLogoFailed     = "设置Logo失败";
@@ -41,5 +42,23 @@ $lang->ui->template->currentTheme    = '正在使用 <strong>%s</strong>';
 $lang->ui->template->changeTheme     = '切换主题';
 $lang->ui->template->apply           = '应用模板';
 $lang->ui->template->current         = '当前模板';
+$lang->ui->template->conflicts       = "警告！已有名为<strong> %s </strong> 的模板。";
+$lang->ui->template->override        = "覆盖并安装";
+$lang->ui->template->reupload        = "重新上传";
+$lang->ui->template->installSuccess  = '恭喜，模板上传成功';
+$lang->ui->template->manageTemplate  = '设置模板';
+$lang->ui->template->manageBlock     = '设置区块';
+$lang->ui->template->enable          = '启用';
+$lang->ui->template->reload          = '刷新页面';
+$lang->ui->template->doInstall       = '确认安装';
+$lang->ui->template->info            = '模板信息';
 
-$lang->ui->template->enable = '启用';
+$lang->ui->template->error = new stdclass();
+$lang->ui->template->error->paths    = '目录权限错误';
+$lang->ui->template->error->exists   = "<p>目录%s不存在</p>";
+$lang->ui->template->error->writable = "<p>目录%s不可写</p>";
+
+$lang->ui->template->commands = new stdclass();
+$lang->ui->template->commands->execute  = '如果是Linux系统，请执行以下命令继续';
+$lang->ui->template->commands->exists   = "mkdir -p %s;<br/>";
+$lang->ui->template->commands->writable = "chmod 777 -R %s;<br/>";

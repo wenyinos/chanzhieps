@@ -37,14 +37,61 @@ class ui extends control
     }
 
     /**
+     * install template 
+     * 
+     * @access public
+     * @return void
+     */
+    public function installTemplate($package = '', $overridePackage = 'no', $install = 'no')
+    {
+        $this->view->installed = false;
+        list($this->view->authorities, $this->view->commands) = $this->ui->checkAuthorities();
+        if(!empty($this->view->authorities)) exit($this->display());
+        
+        if($_FILES)
+        {
+            $tmpName  = $_FILES['file']['tmp_name'];
+            $fileName = $_FILES['file']['name'];
+
+            $package = basename($fileName, '.zip');
+            move_uploaded_file($tmpName, $this->app->getDataRoot() . "template/$fileName");
+        }
+
+        if($package == '') die($this->display());
+        $this->view->package = $package;
+
+        $installedTemplates = $this->ui->getTemplateOptions();
+        if(($overridePackage == 'no') and isset($installedTemplates[$package]))
+        {
+            $this->view->conflicts = true;
+            $this->view->fileName  = $fileName;
+            die($this->display());
+        }
+
+        $this->ui->extractPackage($package);
+
+        if($install == 'no')
+        {
+            $this->view->template = (object)$this->ui->getInfoFromPackage($package);
+            die($this->display());
+        }
+
+        if($install == 'no') $copyResult = $this->ui->copyTemplateFiles($package);
+
+        $this->view->installed = true;
+        $this->view->title = $this->lang->ui->installTemplate;
+        $this->display();
+    }
+
+    /**
      * custom theme
      *
      * @param $theme
      * @access public
      * return void
      **/
-     public function customTheme($theme = '')
-     {
+    public function customTheme($theme = '')
+    {
         if($theme and isset($this->lang->ui->themes[$theme]) and $this->lang->ui->themes[$theme]['custom'])
         {
             if($_POST)

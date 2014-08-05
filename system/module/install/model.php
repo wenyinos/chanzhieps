@@ -229,7 +229,7 @@ class installModel extends model
     }
 
     /**
-     * Check the database exits or not.
+     * Check the database exists or not.
      * 
      * @access public
      * @return bool
