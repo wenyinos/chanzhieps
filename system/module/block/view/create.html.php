@@ -38,7 +38,7 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
         <tr>
           <th><?php echo $lang->block->title;?></th>
           <td>
-            <?php if(strpos(',code, phpcode, featuredProduct, slide', $type) !== false):?>
+            <?php if(strpos(',code, phpcode, featuredProduct, slide, header', $type) !== false):?>
             <?php echo html::input('title', strpos(',html,code,featuredProduct,phpcode,', $type) == false ?  $lang->block->$template->typeList[$type] : '', "class='form-control'");?></div>
             <?php else:?>
             <div class='row'>
@@ -94,7 +94,7 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
           </td>
         </tr>
         <?php endif;?>
-        <?php if(strpos(',code, phpcode, slide', $type) == false):?>
+        <?php if(strpos(',code, phpcode, slide, header', $type) == false):?>
         <tr>
           <th><?php echo $lang->block->color;?></th>
           <td>
