@@ -54,7 +54,7 @@ $lang->block->placeholder->moreUrl  = 'Url for button of more';
 
 $lang->block->noPhpTag = 'No need &lt;?php ?&gt;';
 
-$lang->upgrade->setOkFile = <<<EOT
+$lang->block->setOkFile = <<<EOT
 <div class='alert'>
 <h5>For security reason, please do these steps. </h5>
 <p>Create "<input value='%s' class='autoSelect' readoly />" file. If this file exists already, reopen it and save again.</p>
@@ -156,7 +156,7 @@ $lang->block->default->regions->all['footer'] = 'Footer(invisible)';
 
 $lang->block->default->regions->index_index['top']     = 'Top';
 $lang->block->default->regions->index_index['middle']  = 'Middle';
-$lang->block->default->regions->index_index['Bottom']  = 'Bottom';
+$lang->block->default->regions->index_index['bottom']  = 'Bottom';
 
 $lang->block->default->regions->article_browse['side'] = 'Side';
 $lang->block->default->regions->article_view['side']   = 'Side';
