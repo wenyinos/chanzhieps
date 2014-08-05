@@ -60,5 +60,5 @@ $lang->ui->template->error->writable = "<p>目录%s不可写</p>";
 
 $lang->ui->template->commands = new stdclass();
 $lang->ui->template->commands->execute  = '如果是Linux系统，请执行以下命令继续';
-$lang->ui->template->commands->exists   = "mkdir -p %s;<br/>";
-$lang->ui->template->commands->writable = "chmod 777 -R %s;<br/>";
+$lang->ui->template->commands->exists   = "mkdir -p %s<br/>";
+$lang->ui->template->commands->writable = "chmod 777 -R %s<br/>";
