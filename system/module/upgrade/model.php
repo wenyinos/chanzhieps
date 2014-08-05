@@ -772,8 +772,8 @@ class upgradeModel extends model
         $indexFile = $path . DS . "index.php";
         if(is_writable($path) && !file_exists($indexFile))
         {
-            $fd = fopen($indexFile, "a+");
-            fclose($fd);
+            $fd = @fopen($indexFile, "a+");
+            @fclose($fd);
             chmod($indexFile, 0755);
         }
         

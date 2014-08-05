@@ -302,7 +302,7 @@ class fileModel extends model
             @mkdir($savePath, 0777, true);
             if(is_writable($savePath) && !file_exists($savePath . DS . 'index.php'))
             {
-                $fd = fopen($savePath . DS . 'index.php', "a+");
+                $fd = @fopen($savePath . DS . 'index.php', "a+");
                 fclose($fd);
                 chmod($savePath . DS . 'index.php' , 0755);
             }
