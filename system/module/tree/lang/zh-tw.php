@@ -17,16 +17,17 @@ $lang->tree->browse      = "類目維護";
 $lang->tree->manage      = "維護類目";
 $lang->tree->fix         = "修復數據";
 
-$lang->tree->common        = '類目';
-$lang->tree->noCategories  = '您還沒有添加類目，請添加類目。';
-$lang->tree->timeCountDown = "<strong id='countDown'>3</strong> 秒後轉向類目管理頁面。";
-$lang->tree->redirect      = '立即轉向';
-$lang->tree->aliasRepeat   = '別名: %s 已經存在,不能重複添加。';
-$lang->tree->aliasConflict = '別名: %s 與系統模組衝突，不能添加。';
-$lang->tree->aliasNumber   = '別名不能為數字。';
-$lang->tree->hasChildren   = '該板塊存在子版塊，不能刪除。';
-$lang->tree->confirmDelete = "您確定刪除該類目嗎？";
-$lang->tree->successFixed  = "成功修復";
+$lang->tree->common           = '類目';
+$lang->tree->noCategories     = '您還沒有添加類目，請添加類目。';
+$lang->tree->timeCountDown    = "<strong id='countDown'>3</strong> 秒後轉向類目管理頁面。";
+$lang->tree->redirect         = '立即轉向';
+$lang->tree->aliasRepeat      = '別名: %s 已經存在,不能重複添加。';
+$lang->tree->aliasConflict    = '別名: %s 與系統模組衝突，不能添加。';
+$lang->tree->aliasNumber      = '別名不能為數字。';
+$lang->tree->hasChildren      = '該板塊存在子版塊，不能刪除。';
+$lang->tree->confirmDelete    = "您確定刪除該類目嗎？";
+$lang->tree->successFixed     = "成功修復";
+$lang->tree->browseByCategory = '類目瀏覽';
 
 /* Lang items for article, products. */
 $lang->category = new stdclass();
@@ -37,6 +38,8 @@ $lang->category->parent   = '上級類目';
 $lang->category->desc     = '描述';
 $lang->category->keywords = '關鍵詞';
 $lang->category->children = "子類目";
+$lang->category->isLink   = '跳轉';
+$lang->category->link     = '連結';
 
 /* Lang items for forum. */
 $lang->board = new stdclass();
@@ -49,6 +52,8 @@ $lang->board->keywords   = '關鍵詞';
 $lang->board->children   = "子版塊";
 $lang->board->readonly   = '訪問權限';
 $lang->board->moderators = '版主';
+$lang->board->isLink     = '跳轉';
+$lang->board->link       = '連結';
 
 $lang->board->readonlyList[0] = '開放';
 $lang->board->readonlyList[1] = '只讀';

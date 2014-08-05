@@ -37,11 +37,12 @@ $lang->slide->buttonUrl   = '按鈕連結';
 $lang->slide->buttonColor = '顏色';
 
 $lang->slide->sort     = '排序';
-$lang->slide->sortTip  = '移動幻燈片後，請點擊 “保存排序” 按保存。';
-$lang->slide->saveSort = '保存排序';
 $lang->slide->admin    = '幻燈片設置';
 $lang->slide->create   = '添加幻燈片';
 $lang->slide->edit     = '編輯幻燈片';
+
+$lang->slide->targetList['_self']  = '當前窗口';
+$lang->slide->targetList['_blank'] = '新開窗口';
 
 $lang->slide->successSort     = '排序成功保存';
 $lang->slide->noImageSelected = '沒有選擇圖片';

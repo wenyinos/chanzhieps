@@ -20,6 +20,7 @@ $lang->site->keywords      = '關鍵詞';
 $lang->site->indexKeywords = '首頁關鍵詞';
 $lang->site->desc          = '站點描述';
 $lang->site->icp           = '備案編號';
+$lang->site->icpLink       = '備案編號連結';
 $lang->site->slogan        = '站點口號';
 $lang->site->mission       = '站點使命';
 $lang->site->copyright     = '創建年份';
@@ -31,8 +32,8 @@ $lang->site->setQQOauth    = "QQ接入";
 $lang->site->oauthHelp     = "使用幫助";
 
 $lang->site->typeList = new stdclass();
-$lang->site->typeList->company = '企業門戶';
-$lang->site->typeList->blog    = '個人網站';
+$lang->site->typeList->portal = '企業門戶';
+$lang->site->typeList->blog   = '個人博客';
 
 $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = '會員';

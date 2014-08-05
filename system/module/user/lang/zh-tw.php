@@ -60,7 +60,7 @@ $lang->user->goback          = "返回前一頁";
 $lang->user->allUsers        = '全部用戶';
 $lang->user->submit          = "提交";
 $lang->user->forbid          = '禁用';
-$lang->user->activate        = '解除禁用';
+$lang->user->activate        = '解禁';
 $lang->user->pullWechatFans  = '更新微信會員數據';
 
 $lang->user->profile     = '個人信息';
@@ -134,10 +134,16 @@ $lang->user->resetmail->reset    = '重置碼：';
 $lang->user->oauth = new stdclass();
 $lang->user->oauth->common       = '開放登錄';
 $lang->user->oauth->provider     = '服務商';
-$lang->user->oauth->clientID     = 'App Key';
-$lang->user->oauth->clientSecret = 'App Secret';
 $lang->user->oauth->verification = '網站驗證';
 $lang->user->oauth->widget       = '網頁組件';
+
+$lang->user->oauth->sina = new stdclass();
+$lang->user->oauth->sina->clientID     = 'App Key';
+$lang->user->oauth->sina->clientSecret = 'App Secret';
+
+$lang->user->oauth->qq = new stdclass();
+$lang->user->oauth->qq->clientID     = 'APP ID';
+$lang->user->oauth->qq->clientSecret = 'APP KEY';
 
 $lang->user->oauth->providers['sina'] = '新浪微博';
 $lang->user->oauth->providers['qq']   = 'QQ';
