@@ -12,7 +12,7 @@
 ?>
 <?php include '../../common/view/header.modal.html.php';?>
 <?php js::set('key', count($blocks));?>
-<form id='ajaxForm' action="<?php echo inlink('setregion', "page={$page}&region={$region}&templat={$template}");?>" method='post'>
+<form id='ajaxForm' action="<?php echo inlink('setregion', "page={$page}&region={$region}&template={$template}");?>" method='post'>
   <table class='table table-striped table-form'>
     <thead>
       <tr>
@@ -23,11 +23,11 @@
     </thead>
   </table>
   <div id='blockList'>
-    <?php $key = 0; foreach($blocks as $block){ echo $this->block->createEntry($block, $key); $key ++;  }?>
+    <?php $key = 0; foreach($blocks as $block){ echo $this->block->createEntry($template, $block, $key); $key ++;  }?>
   </div>
   <div><?php echo html::submitButton();?></div>
 </form>
-<div class='hide'><div id='entry'><?php echo $this->block->createEntry(null, 'key');?></div></div>
+<div class='hide'><div id='entry'><?php echo $this->block->createEntry($template, null, 'key');?></div></div>
 <script>
 $('#blockList').sortable(
 {

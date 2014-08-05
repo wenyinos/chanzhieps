@@ -29,6 +29,7 @@ class blockModel extends model
     /**
      * Get block list of one site.
      * 
+     * @param  string    $template
      * @param  object    $pager 
      * @access public
      * @return array
@@ -130,36 +131,37 @@ class blockModel extends model
      * @access public
      * @return array
      */
-    public function getPairs()
+    public function getPairs($template)
     {
-        return $this->dao->select('id, title')->from(TABLE_BLOCK)->fetchPairs();
+        return $this->dao->select('id, title')->from(TABLE_BLOCK)->where('template')->eq($template)->fetchPairs();
     }
     
     /**
      * Create type  select area.
      * 
+     * @param  string    $template
      * @param  string    $type 
      * @param  int       $blockID 
      * @access public
      * @return string
      */
-    public function createTypeSelector($type, $blockID = 0)
+    public function createTypeSelector($template, $type, $blockID = 0)
     {
         $select = "<div class='btn-group'><button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown'>";
-        $select .= $this->lang->block->typeList[$type] . " <span class='caret'></span></button>";
+        $select .= $this->lang->block->$template->typeList[$type] . " <span class='caret'></span></button>";
         $select .= "<ul class='dropdown-menu' role='menu'>";
-        foreach($this->lang->block->typeGroups as $block => $group)
+        foreach($this->lang->block->$template->typeGroups as $block => $group)
         {
             if(isset($lastGroup) and $group !== $lastGroup) $select .= "<li class='divider'></li>";
             $lastGroup = $group;
             $class = ($block == $type) ? "class='active'" : '';
             if($blockID)
             {
-                $select .= "<li {$class}>" . html::a(helper::createLink('block', $this->app->getMethodName(), "blockID={$blockID}&type={$block}"), $this->lang->block->typeList[$block]) . "</li>";
+                $select .= "<li {$class}>" . html::a(helper::createLink('block', $this->app->getMethodName(), "template={$template}&type={$block}&blockID={$blockID}"), $this->lang->block->$template->typeList[$block]) . "</li>";
             }
             else
             {
-                $select .= "<li {$class}>" . html::a(helper::createLink('block', $this->app->getMethodName(), "type={$block}"), $this->lang->block->typeList[$block]) . "</li>";
+                $select .= "<li {$class}>" . html::a(helper::createLink('block', $this->app->getMethodName(), "template={$template}&type={$block}"), $this->lang->block->$template->typeList[$block]) . "</li>";
             }
         }
         $select .= "</ul></div>" .  html::hidden('type', $type);
@@ -169,15 +171,16 @@ class blockModel extends model
     /**
      * Create form entry of one block backend.
      * 
+     * @param  string  $template
      * @param  object  $block 
      * @param  mix     $key 
      * @access public
      * @return void
      */
-    public function createEntry($block = null, $key)
+    public function createEntry($template, $block = null, $key)
     {
         $blockOptions[''] = $this->lang->block->select;
-        $blockOptions += $this->getPairs();
+        $blockOptions += $this->getPairs($template);
         $blockID = isset($block->id) ? $block->id : '';
         $type    = isset($block->type) ? $block->type : '';
         $grid    = isset($block->grid) ? $block->grid : '';
@@ -209,7 +212,7 @@ class blockModel extends model
         $entry .= '<div class="text-center col-xs-3 actions">';
         $entry .= html::a('javascript:;', $this->lang->block->add, "class='plus'");
         $entry .= html::a('javascript:;', $this->lang->delete, "class='delete'");
-        $entry .= html::a(inlink('edit', "blockID={$blockID}&type={$type}"), $this->lang->edit, "class='edit'");
+        $entry .= html::a(inlink('edit', "template={$template}&blockID={$blockID}&type={$type}"), $this->lang->edit, "class='edit'");
         $entry .= "<i class='icon-move sort-handle'></i>";
         $entry .= '</div></div>';
         return $entry;
@@ -218,12 +221,13 @@ class blockModel extends model
     /**
      * Create a block.
      * 
+     * @param  string  $template
      * @access public
      * @return void
      */
-    public function create()
+    public function create($template)
     {
-        $block = fixer::input('post')->stripTags('content', $this->config->block->allowedTags)->get();
+        $block = fixer::input('post')->add('template', $template)->stripTags('content', $this->config->block->allowedTags)->get();
         $gpcOn = version_compare(phpversion(), '5.4', '<') and get_magic_quotes_gpc();
 
         if(isset($block->params))
@@ -247,12 +251,13 @@ class blockModel extends model
     /**
      * Update  block.
      * 
+     * @param  string  $template
      * @access public
      * @return void
      */
-    public function update()
+    public function update($template)
     {
-        $block = fixer::input('post')->stripTags('content', $this->config->block->allowedTags)->get();
+        $block = fixer::input('post')->add('template', $template)->stripTags('content', $this->config->block->allowedTags)->get();
         $gpcOn = version_compare(phpversion(), '5.4', '<') and get_magic_quotes_gpc();
 
         if(isset($block->params))

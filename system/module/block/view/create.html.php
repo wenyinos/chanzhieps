@@ -32,21 +32,17 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
     <form method='post' id='ajaxForm'>
       <table align='center' class='table table-form'>
         <tr>
-          <th class='w-80px'><?php echo $lang->block->template;?></th>
-          <td><?php echo html::select('template', $this->loadModel('ui')->getTemplateOptions(), $this->config->site->template, "class='form-control'");?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->block->type;?></th>
-          <td><?php echo $this->block->createTypeSelector($type);?></td>
+          <th class='w-80px'><?php echo $lang->block->type;?></th>
+          <td><?php echo $this->block->createTypeSelector($template, $type);?></td>
         </tr>
         <tr>
           <th><?php echo $lang->block->title;?></th>
           <td>
-            <?php if(strpos($type, 'code') !== false or $type == 'featuredProduct'): ?>
-            <?php echo html::input('title', strpos(',html,code,featuredProduct,phpcode,', $type) == false ?  $lang->block->typeList[$type] : '', "class='form-control'");?></div>
+            <?php if(strpos(',code, phpcode, featuredProduct, slide, header', $type) !== false):?>
+            <?php echo html::input('title', strpos(',html,code,featuredProduct,phpcode,', $type) == false ?  $lang->block->$template->typeList[$type] : '', "class='form-control'");?></div>
             <?php else:?>
             <div class='row'>
-              <div class='col-sm-6'><?php echo html::input('title', strpos(',html,code,featuredProduct,', $type) == false ?  $lang->block->typeList[$type] : '', "class='form-control'");?></div>
+              <div class='col-sm-6'><?php echo html::input('title', strpos(',html,code,featuredProduct,', $type) == false ?  $lang->block->$template->typeList[$type] : '', "class='form-control'");?></div>
               <div class='col-sm-6'>
                 <div class='colorplate clearfix'>
                   <div class='input-group color active'>
@@ -98,7 +94,7 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
           </td>
         </tr>
         <?php endif;?>
-        <?php if(strpos($type, 'code') === false):?>
+        <?php if(strpos(',code, phpcode, slide, header', $type) == false):?>
         <tr>
           <th><?php echo $lang->block->color;?></th>
           <td>
@@ -167,6 +163,9 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
           <td>
             <?php echo html::submitButton();?>
             <?php echo html::a($this->session->blockList, $this->lang->goback, "class='btn btn-default'");?>
+            <?php if($type == 'phpcode'):?>
+            <strong class='text-info'>&nbsp;&nbsp;<?php echo $lang->block->noPhpTag;?></strong>
+            <?php endif;?>
           </td>
         </tr>
       </table>

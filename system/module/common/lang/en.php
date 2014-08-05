@@ -33,6 +33,7 @@ $lang->IE6Alert= <<<EOT
     <div class='alert alert-danger' style='margin:100px 0;'>
       <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
       <h2>Please use IE(>8), firefox, chrome, safari, opera to visit this site.</h2>
+      <p>Internet Explorer (IE) browser that you are using is too old (issued by the Microsoft 10 years ago), it has been unable to experience the colorful internet. We strongly recommend that you upgrade to IE11 or select a new modern browser.</p>
       <a href='http://windows.microsoft.com/ie' class='btn btn-danger' target='_blank'><i class='icon-ie'></i> Get latest IE</a>
       <a href='http://www.google.com/chrome' class='btn' target='_blank'><i class='icon-chrome'></i> Chrome</a>
       <a href='http://www.firefox.com/' class='btn' target='_blank'><i class='icon-firefox'></i> Firefox</a>
@@ -260,6 +261,9 @@ $lang->block->menu = $lang->ui->menu;
 /* Menu of tree module. */
 $lang->links = new stdclass();
 $lang->links->menu = $lang->site->menu;
+
+/* Menu of package module. */
+$lang->package = new stdclass();
 
 /* Error info. */
 $lang->error = new stdclass();

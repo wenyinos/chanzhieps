@@ -23,13 +23,13 @@
       <th class='w-200px'><?php echo $lang->block->page;?></th>
       <th class='text-center'><?php echo $lang->block->regionList;?></th>
     </tr>
-    <?php foreach($this->lang->block->pages as $page => $name):?>
-    <?php if(empty($lang->block->regions->$page)) continue;?>
+    <?php foreach($this->lang->block->$currentTemplate->pages as $page => $name):?>
+    <?php if(empty($lang->block->$currentTemplate->regions->$page)) continue;?>
     <tr>
       <td><?php echo $name;?></td>
       <td>
       <?php
-      $regions = $lang->block->regions->$page;
+      $regions = $lang->block->$currentTemplate->regions->$page;
       foreach($regions as $region => $regionName)
       {
           echo html::a($this->inlink('setregion', "page={$page}&region={$region}&template={$currentTemplate}"), $regionName, "class='btn btn-xs' data-toggle='modal'");
