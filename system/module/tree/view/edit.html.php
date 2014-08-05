@@ -43,6 +43,10 @@ $themeRoot = $webRoot . "theme/";
           </div>
         </div>
       </div>
+      <div class='form-group link hidden'> 
+        <label class='col-md-2 control-label'><?php echo $lang->category->link;?></label>
+        <div class='col-md-9 required'><?php echo html::input('link', $category->link, "class='form-control'");?></div>
+      </div>
       <div class='categoryInfo'>
         <div class='form-group'> 
           <label class='col-md-2 control-label'><?php echo $lang->category->alias;?></label>
@@ -58,10 +62,12 @@ $themeRoot = $webRoot . "theme/";
           <label class='col-md-2 control-label'><?php echo $lang->category->keywords;?></label>
           <div class='col-md-9'><?php echo html::input('keywords', $category->keywords, "class='form-control'");?></div>
         </div>
-        <div class='form-group'> 
-          <label class='col-md-2 control-label'><?php echo $lang->category->desc;?></label>
-          <div class='col-md-9'><?php echo html::textarea('desc', $category->desc, "class='form-control' rows=3'");?></div>
-        </div>
+      </div>
+      <div class='form-group'> 
+        <label class='col-md-2 control-label'><?php echo $lang->category->desc;?></label>
+        <div class='col-md-9'><?php echo html::textarea('desc', $category->desc, "class='form-control' rows=3'");?></div>
+      </div>
+      <div class='categoryInfo'>
         <?php if($category->type == 'forum'):?>
         <div class='form-group'>
           <label class='col-md-2 control-label'><?php echo $lang->category->moderators;?></label>
@@ -72,10 +78,6 @@ $themeRoot = $webRoot . "theme/";
           <div class='col-md-4'><?php echo html::radio('readonly', $lang->category->readonlyList, $category->readonly);?></div>
         </div>  
         <?php endif;?>
-      </div>
-      <div class='form-group link hidden'> 
-        <label class='col-md-2 control-label'><?php echo $lang->category->link;?></label>
-        <div class='col-md-9 required'><?php echo html::input('link', $category->link, "class='form-control'");?></div>
       </div>
       <div class='form-group'>
         <label class='col-md-2'></label>
