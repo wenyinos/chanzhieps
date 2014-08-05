@@ -139,7 +139,7 @@ class replyModel extends model
         $this->dao->insert(TABLE_REPLY)
             ->data($reply, $skip = 'captcha, uid')
             ->autoCheck()
-            ->batchCheck($this->config->reply->require->post, 'notempty')
+            ->batchCheck($this->config->reply->require->edit, 'notempty')
             ->check('captcha', 'captcha')
             ->exec();
 
@@ -184,7 +184,7 @@ class replyModel extends model
         $this->dao->update(TABLE_REPLY)
             ->data($reply, $skip = 'captcha, uid')
             ->autoCheck()
-            ->check('content', 'notempty')
+            ->batchCheck($this->config->reply->require->post, 'notempty')
             ->check('captcha', 'captcha')
             ->where('id')->eq($replyID)
             ->exec();

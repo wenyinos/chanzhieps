@@ -46,10 +46,10 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
               <div class='col-sm-6'>
                 <div class='colorplate clearfix'>
                   <div class='input-group color active'>
-                    <?php echo html::input('params[titleBackground]', '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
+                    <?php echo html::input('params[titleColor]', '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
                     <span class='input-group-btn'>
                       <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
-                        <?php echo $lang->block->titleBackground;?><span class='caret'></span>
+                        <?php echo $lang->block->color;?><span class='caret'></span>
                       </button>
                       <div class='dropdown-menu colors'><?php echo $colorPlates; ?></div>
                     </span>
@@ -57,10 +57,10 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
                 </div>
                 <div class='colorplate clearfix'>
                   <div class='input-group color active'>
-                    <?php echo html::input('params[titleColor]', '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
+                    <?php echo html::input('params[titleBackground]', '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
                     <span class='input-group-btn'>
                       <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
-                        <?php echo $lang->block->titleColor;?><span class='caret'></span>
+                        <?php echo $lang->block->backgroundColor;?><span class='caret'></span>
                       </button>
                       <div class='dropdown-menu colors'><?php echo $colorPlates; ?></div>
                     </span>

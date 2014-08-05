@@ -1,4 +1,7 @@
 <?php
+$config->file->require = new stdclass();
+$config->file->require->edit = 'title';
+
 $config->file->thumbs = array();
 $config->file->thumbs['s'] = array('width' => '80',  'height' => '80');
 $config->file->thumbs['m'] = array('width' => '300', 'height' => '300');
