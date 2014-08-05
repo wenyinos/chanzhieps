@@ -77,7 +77,7 @@ class upgradeModel extends model
             case '2_4':
                 $this->execSQL($this->getUpgradeFile('2.4'));
                 $this->upgradeSlideTarget();
-                $this->createIndexFile();
+                $this->createIndexFile($this->app->getDataRoot() . 'upload');
                 $this->deleteLogFile();
                 $this->setDefaultCurrency();
 
