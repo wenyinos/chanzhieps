@@ -27,6 +27,7 @@ tgz:
 	# change mode.
 	chmod 777 -R chanzhieps/system/tmp/
 	chmod 777 -R chanzhieps/www/data
+	chmod 777 -R chanzhieps/www/template
 	chmod 777 -R chanzhieps/system/config
 	chmod 777 chanzhieps/system/module
 	chmod a+rx chanzhieps/system/bin/*
@@ -38,7 +39,8 @@ ips:
 	mkdir chanzhiips
 	cp -frv system chanzhiips/
 	rm -fr chanzhiips/system/config/my.php
-	cp -frv www chanzhiips && rm -fr chanzhiips/www/data/* && mkdir -p chanzhiips/www/data/upload/
+	cp -frv www chanzhiips && rm -fr chanzhiips/www/data/* && mkdir -p chanzhiips/www/data/upload/ && mkdir -p chanzhiips/www/data/template/
+
 	rm -frv chanzhiips/system/tmp/cache/* 
 	rm -frv chanzhiips/system/tmp/extension/*
 	rm -frv chanzhiips/system/tmp/log/*
@@ -59,6 +61,7 @@ ips:
 	# change mode.
 	chmod 777 -R chanzhiips/system/tmp/
 	chmod 777 -R chanzhiips/www/data
+	chmod 777 -R chanzhiips/www/template
 	chmod 777 -R chanzhiips/system/config
 	chmod 777 chanzhiips/system/module
 	chmod a+rx chanzhiips/system/bin/*

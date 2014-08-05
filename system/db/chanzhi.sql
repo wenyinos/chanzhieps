@@ -109,6 +109,7 @@ CREATE TABLE IF NOT EXISTS `eps_package` (
   `type` varchar(20) NOT NULL default 'extension',
   `site` varchar(150) NOT NULL,
   `chanzhiCompatible` varchar(100) NOT NULL,
+  `templateCompatible` varchar(100) NOT NULL,
   `installedTime` datetime NOT NULL,
   `depends` varchar(100) NOT NULL,
   `dirs` text NOT NULL,
