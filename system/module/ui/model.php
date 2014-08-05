@@ -133,6 +133,9 @@ class uiModel extends model
         $fileClass   = $this->app->loadClass('zfile');
         $copiedFiles = $fileClass->copyDir($packagePath, $templateRoot . $package);
 
+        $fileClass = $this->app->loadClass('zfile');
+        $fileClass->removeDir($packagePath);
+
         return $copiedFiles;
     }
 
