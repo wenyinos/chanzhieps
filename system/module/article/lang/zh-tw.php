@@ -18,7 +18,7 @@ $lang->article->categories = '類目';
 $lang->article->title      = '標題';
 $lang->article->alias      = '別名';
 $lang->article->content    = '內容';
-$lang->article->original   = '來源';
+$lang->article->source     = '來源';
 $lang->article->copySite   = '來源網站';
 $lang->article->copyURL    = '來源URL';
 $lang->article->keywords   = '關鍵字';
@@ -33,12 +33,15 @@ $lang->article->views      = '閲讀';
 $lang->article->comments   = '評論';
 $lang->article->stick      = '置頂級別';
 $lang->article->order      = '排序';
+$lang->article->isLink     = '跳轉';
+$lang->article->link       = '連結';
 
 $lang->article->list       = '文章列表';
 $lang->article->admin      = '維護文章';
 $lang->article->create     = '發佈文章';
 $lang->article->edit       = '編輯文章';
 $lang->article->files      = '附件';
+$lang->article->images     = '圖片';
 
 $lang->blog->admin  = '維護博客';
 $lang->blog->list   = '博客列表';
@@ -50,9 +53,9 @@ $lang->page->list   = '單頁列表';
 $lang->page->create = '添加單頁';
 $lang->page->edit   = '編輯單頁';
 
-$lang->article->originalList[0] = '原創';
-$lang->article->originalList[1] = '轉貼';
-$lang->article->originalList[2] = '翻譯';
+$lang->article->sourceList['original']      = '原創';
+$lang->article->sourceList['copied']        = '轉貼';
+$lang->article->sourceList['translational'] = '翻譯';
 
 $lang->article->statusList['normal'] = '正常';
 $lang->article->statusList['draft']  = '草稿';
@@ -63,7 +66,7 @@ $lang->article->lblAddedDate = '<strong>添加時間：</strong> %s &nbsp;&nbsp;
 $lang->article->lblAuthor    = "<strong>作者：</strong> %s &nbsp;&nbsp;";
 $lang->article->lblSource    = '<strong>來源：</strong>';
 $lang->article->lblViews     = ' <strong>閲讀：</strong>%s';
-$lang->article->lblEditor    = '<i>最後編輯：%s 于 %s</i>';
+$lang->article->lblEditor    = '最後編輯：%s 于 %s';
 $lang->article->lblComments  = '<strong>評論：</strong> %s';
 
 $lang->article->none      = '沒有了';

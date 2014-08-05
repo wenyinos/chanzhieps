@@ -21,6 +21,8 @@ $lang->thread->postedDate = '發表於';
 $lang->thread->replies    = '回帖';
 $lang->thread->views      = '閲讀';
 $lang->thread->lastReply  = '最後回帖';
+$lang->thread->isLink     = '跳轉';
+$lang->thread->link       = '連結';
 
 $lang->thread->post       = '發貼';
 $lang->thread->postTo     = '發佈貼子到';

@@ -21,6 +21,7 @@ $lang->book->content     = '內容';
 $lang->book->alias       = '別名';
 $lang->book->order       = '排序';
 $lang->book->files       = '附件';
+$lang->book->images      = '圖片';
 $lang->book->chapterList = '目錄管理';
 $lang->book->articleList = '文章管理';
 
@@ -31,7 +32,7 @@ $lang->book->typeList['article'] = '文章';
 $lang->book->lblAddedDate = '添加時間：<strong>%s</strong> ';
 $lang->book->lblAuthor    = '作者：<strong>%s</strong> ';
 $lang->book->lblViews     = '閲讀：<strong>%s</strong> ';
-$lang->book->lblEditor    = '<i>最後編輯：%s 于 %s</i> ';
+$lang->book->lblEditor    = '最後編輯：%s 于 %s ';
 
 $lang->book->none     = '沒有了';
 $lang->book->chapter  = '返回目錄';

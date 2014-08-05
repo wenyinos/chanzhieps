@@ -50,6 +50,7 @@ $lang->product->admin      = '維護產品';
 $lang->product->create     = '發佈產品';
 $lang->product->edit       = '編輯產品';
 $lang->product->files      = '附件';
+$lang->product->images     = '圖片';
 
 $lang->product->confirmDelete = '您確定刪除該產品嗎？';
 
@@ -62,5 +63,6 @@ $lang->product->statusList['normal']  = '上架';
 $lang->product->statusList['offline'] = '下架';
 
 $lang->product->placeholder = new stdclass();
-$lang->product->placeholder->label = "屬性名稱：如顏色、價格等";
-$lang->product->placeholder->value = "屬性值：如紅色、￥1000等";
+$lang->product->placeholder->label    = "屬性名稱：如顏色、價格等";
+$lang->product->placeholder->value    = "屬性值：如紅色、￥1000等";
+$lang->product->placeholder->currency = "如￥";

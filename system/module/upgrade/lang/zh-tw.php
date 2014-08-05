@@ -16,24 +16,16 @@ $lang->upgrade->fail    = '升級失敗';
 $lang->upgrade->success = '升級成功';
 $lang->upgrade->tohome  = '返迴首頁';
 
-$lang->upgrade->index         = '檢查是否可以執行升級程序';
 $lang->upgrade->backup        = '備份數據';
 $lang->upgrade->selectVersion = '確認升級之前的版本';
 $lang->upgrade->confirm       = '確認要執行的SQL語句';
 $lang->upgrade->execute       = '確認執行';
 $lang->upgrade->next          = '下一步';
 
-$lang->upgrade->setOkFile = <<<EOT
-<div class='alert'>
-<h5>請按照下面的步驟操作以確認您的管理員身份。</h5>
-<p>創建 "<code>%s</code>" 檔案。如果存在該檔案，使用編輯軟件打開，重新保存一遍。</p>
-</div>
-EOT;
-
 $lang->upgrade->backupData = <<<EOT
 <pre>
 <strong>使用phpMyAdmin或者mysqldump命令備份資料庫。</strong>
-<code class='red'>$ mysqldump -u %s</span> -p%s %s > chanzhi.sql</code>
+<textarea class='autoSelect w-400px red' readonly rows='1' > mysqldump -u %s -p%s %s > chanzhi.sql </textarea>
 </pre>
 EOT;
 
@@ -52,3 +44,5 @@ $lang->upgrade->fromVersions['2_0_1'] = '2.0.1.stable';
 $lang->upgrade->fromVersions['2_1']   = '2.1.stable';
 $lang->upgrade->fromVersions['2_2']   = '2.2.stable';
 $lang->upgrade->fromVersions['2_2_1'] = '2.2.1.stable';
+$lang->upgrade->fromVersions['2_3']   = '2.3.stable';
+$lang->upgrade->fromVersions['2_4']   = '2.4.stable';
