@@ -226,3 +226,5 @@ body {background: #232323;}
 }
 @media (max-width: 600px){#navbar .nav > li {width: 33.3333333%}}
 @media (max-width: 480px){#navbar .nav > li {width: 50%}}
+
+body.m-message-reply{background:#fff;}

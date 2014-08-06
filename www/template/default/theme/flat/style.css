@@ -131,3 +131,5 @@ textarea{height: auto;}
   #headNav {border-radius: 0; background-color: #16a085}
   #headNav nav > a, #msgBox {padding: 2px 5px; border-radius: 0}
 }
+
+body.m-message-reply{background:#EDEFF1;}

@@ -152,3 +152,5 @@ textarea{height: auto;}
   #headNav {background-color: #e8d0a9}
   #headNav nav > a, #msgBox {padding: 2px 5px; border-radius: 0}
 }
+
+body.m-message-reply{background:#f5f0cc;}
