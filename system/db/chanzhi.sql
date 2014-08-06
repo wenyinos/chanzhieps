@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS `eps_article` (
   `views` mediumint(5) unsigned NOT NULL DEFAULT '0',
   `sticky` enum('0','1','2','3') NOT NULL DEFAULT '0',
   `order` smallint(5) unsigned NOT NULL,
+  `link` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `order` (`order`),
   KEY `views` (`views`),
@@ -27,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `eps_article` (
 -- DROP TABLE IF EXISTS `eps_block`;
 CREATE TABLE IF NOT EXISTS `eps_block` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
-  `template` varchar(30) NOT NULL,
+  `template` varchar(30) NOT NULL DEFAULT 'default',
   `type` varchar(20) NOT NULL,
   `title` varchar(60) NOT NULL,
   `content` text NOT NULL,
@@ -78,6 +79,7 @@ CREATE TABLE IF NOT EXISTS `eps_category` (
   `postedDate` datetime NOT NULL,
   `postID` mediumint(9) NOT NULL,
   `replyID` mediumint(8) unsigned NOT NULL,
+  `link` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `tree` (`type`),
   KEY `order` (`order`),
@@ -157,7 +159,7 @@ CREATE TABLE IF NOT EXISTS `eps_file` (
 
 -- DROP TABLE IF EXISTS `eps_layout`;
 CREATE TABLE IF NOT EXISTS `eps_layout` (
-  `template` varchar(30) NOT NULL,
+  `template` varchar(30) NOT NULL DEFAULT 'default',
   `page` varchar(30) NOT NULL,
   `region` varchar(30) NOT NULL,
   `blocks` text NOT NULL,
@@ -183,6 +185,7 @@ CREATE TABLE IF NOT EXISTS `eps_message` (
   `status` char(20) NOT NULL,
   `public` enum('0','1') NOT NULL DEFAULT '1',
   `readed` enum('0','1') NOT NULL,
+  `receiveEmail` enum('0','1') NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `status` (`status`),
   KEY `object` (`objectType`,`objectID`)
@@ -292,6 +295,7 @@ CREATE TABLE IF NOT EXISTS `eps_thread` (
   `repliedDate` datetime NOT NULL,
   `replyID` mediumint(8) unsigned NOT NULL,
   `hidden` enum('0','1') NOT NULL DEFAULT '0',
+  `link` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `category` (`board`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
