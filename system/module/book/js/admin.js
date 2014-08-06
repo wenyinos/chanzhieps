@@ -1,39 +1,16 @@
 $(document).ready(function()
 {
-    $('.sort').click(function()
-    {
-        $.getJSON($(this).attr('href'), function(data) 
-        {
-            if(data.result=='success')
-            {
-                location.reload();
-            }
-            else
-            {
-                alert(data.message);
-            }
-        });
-
-        return false;
-    });
-
     function saveOrders(orders)
     {
-        console.log(orders);
         $.post(createLink('book','sort'),
-                {sort:orders},
-                function(data)
+            {sort:orders},
+            function(data)
+            {
+                if(data.result != "success")
                 {
-                    if(data.result=="success")
-                    {
-                        location.reload();
-                    }
-                    else
-                    {
-                        alert(data.message);
-                    }
-                },
-                'json');
+                    window.messager.danger(data.message);
+                }
+            },'json');
     }
 
     function updateOrders(ele, parentOrder, orders)
@@ -89,11 +66,6 @@ $(document).ready(function()
         start: function()
         {
             $('.books').addClass('show-empty-catalog');
-        },
-        beforeDrop: function(e)
-        {
-            var selfEle = e.target.closest('.catalog[data-id="' + e.element.data('id') + '"]');
-            return !selfEle.length;
         },
         drag: function(e)
         {
