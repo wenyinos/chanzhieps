@@ -40,7 +40,6 @@
           <?php if(!empty($desc)):?>
           <div class="card-content"><div class="template-desc"><?php echo $desc;?></div></div>
           <?php endif;?>
-          <?php if($count > 1):?>
           <div class='themes-list'>
             <div class='clearfix'>
             <?php foreach($template['themes'] as $theme => $name):?>
@@ -58,7 +57,6 @@
             <?php endforeach;?>
             </div>
           </div>
-          <?php endif; ?>
         </div>
       </div>
       <?php endforeach;?>
