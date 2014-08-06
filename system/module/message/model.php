@@ -134,7 +134,7 @@ class messageModel extends model
         return $this->dao->select('*')->from(TABLE_MESSAGE)
             ->where('type')->eq('reply')
             ->andWhere('objectID')->eq($message->id)
-            ->andWhere("(id in ({$userMessages}) or (status = '1'))")
+            ->beginIF(defined('RUN_MODE') and RUN_MODE == 'front')->andWhere("(id in ({$userMessages}) or (status = '1'))")->fi()
             ->fetchAll();
     }
 
