@@ -8,7 +8,7 @@ $(document).ready(function()
             {
                 if(data.result != "success")
                 {
-                    window.messager.danger(data.message);
+                    bootbox.alert(data.message);
                 }
             },'json');
     }
