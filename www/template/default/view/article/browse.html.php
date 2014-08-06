@@ -3,6 +3,7 @@ include TPL_ROOT . 'common/header.html.php';
 
 $path = array_keys($category->pathNames);
 js::set('path', $path);
+js::set('categoryID', $category->id);
 
 include TPL_ROOT . 'common/treeview.html.php';
 ?>

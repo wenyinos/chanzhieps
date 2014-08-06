@@ -5,6 +5,7 @@ include TPL_ROOT . 'common/treeview.html.php';
 /* set categoryPath for topNav highlight. */
 js::set('path', $article->path);
 js::set('articleID', $article->id);
+js::set('categoryID', $category->id);
 ?>
 <?php $common->printPositionBar($category, $article);?>
 <div class='row'>
