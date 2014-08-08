@@ -90,11 +90,13 @@ class ui extends control
      * @access public
      * return void
      **/
-    public function customTheme($theme = '')
+    public function customTheme($theme = '', $template = '')
     {
-        if($theme and isset($this->lang->ui->themes[$theme]) and $this->lang->ui->themes[$theme]['custom'])
+        if(empty($template)) $template = $this->config->site->template;
+        $templates = $this->ui->getTemplates();
+        if($_POST)
         {
-            if($_POST)
+            if(isset($templates[$template]) && isset($templates[$template]['themes'][$theme]))
             {
                 $customCssFile  = $this->config->site->ui->customCssFile;
                 $savePath       = dirname($customCssFile);
@@ -106,6 +108,7 @@ class ui extends control
                 $this->loadModel('setting')->setItems('system.common.site', array('customVersion' => time()));
                 $this->send(array('result' => 'success', 'message' => $this->lang->ui->themeSaved));
             }
+            
         }
 
         if($this->config->site->themeSetting) $this->config->themeSetting = json_decode($this->config->site->themeSetting);
@@ -113,6 +116,7 @@ class ui extends control
         $this->view->title      = "<i class='icon-cog'></i> " . $this->lang->ui->customtheme;
         $this->view->modalWidth = 800;
         $this->view->theme      = $theme;
+        $this->view->template   = $template;
         $this->display();
      }
 

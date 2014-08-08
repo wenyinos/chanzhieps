@@ -43,6 +43,10 @@ $(document).ready(function()
                 $tpl.find('.current-theme-tip strong').text($this.find('.theme-name strong').text());
                 $tpl.find('.template-img img').attr('src', $this.find('.theme-img img').attr('src'));
             }
+            else
+            {
+                bootbox.alert(data.message);
+            }
         });
     });
 

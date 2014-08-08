@@ -11,7 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<?php $templateRoot = $webRoot . 'template/' . $config->site->template . '/';?>
+<?php js::import($jsRoot . 'theme.js'); ?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><?php echo $lang->ui->setTemplate;?></strong>
@@ -25,6 +25,7 @@
       $count = count($template['themes']);
       $isCurrent = $this->config->site->template == $code;
       $themeName = $isCurrent ? $this->config->site->theme : 'default';
+      $templateRoot = $webRoot . 'template/' . $code . '/'
       ?>
       <div class='col-card'>
         <div class="card-template card<?php if($isCurrent) echo ' current';?>" data-template='<?php echo $code;?>'data-theme='<?php echo $themeName;?>' data-url='<?php echo inlink('settheme', "template={$code}&theme={$themeName}") ?>'>
@@ -44,12 +45,22 @@
             <div class='clearfix'>
             <?php foreach($template['themes'] as $theme => $name):?>
               <?php
+              $custom = (strrchr($name, '[custom]') == '[custom]');
               $currentClass = ($isCurrent and $config->site->theme == $theme) ? ' current' : '';
-              $url = inlink('settemplate', "template={$code}&theme={$theme}");
+              if($custom)
+              {
+                  $name = substr($name, 0, strlen($name) - 8);
+                  $currentClass .= ' custom';
+              }
+
+              $url = inlink('setTemplate', "template={$code}&theme={$theme}");
               ?>
               <div class='theme<?php echo $currentClass;?>' data-url='<?php echo $url;?>' data-theme='<?php echo $theme;?>'>
                 <div class='theme-card'>
                   <i class='icon-ok icon'></i>
+                  <?php if($custom):?>
+                  <?php echo html::a(inlink('customTheme', "theme={$theme}&template={$code}"), "<span class='icon-cog'></span>", "class='btn btn-primary btn-custom' data-toggle='modal' data-type='ajax'") ?>
+                  <?php endif;?>
                   <div class='theme-img'><?php echo html::image($templateRoot . 'theme/' . $theme . '/preview.png');?></div>
                   <div class='theme-name text-center'><strong><?php echo $name;?></strong></div>
                 </div>
