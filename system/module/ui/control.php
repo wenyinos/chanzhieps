@@ -19,7 +19,7 @@ class ui extends control
      * @access public
      * return void
      **/
-    public function setTemplate($template = '', $theme = '')
+    public function setTemplate($template = '', $theme = '', $custom = false)
     {
         $templates = $this->ui->getTemplates();
         if($template and isset($templates[$template]))
@@ -27,6 +27,8 @@ class ui extends control
             $result = $this->loadModel('setting')->setItems('system.common.site', array('template' => $template ));
             if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $result = $this->loadModel('setting')->setItems('system.common.site', array('theme' => $theme));
+            if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $result = $this->loadModel('setting')->setItems('system.common.site', array('customTheme' => $custom ? $theme : ''));
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }

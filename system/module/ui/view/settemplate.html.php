@@ -53,7 +53,7 @@
                   $currentClass .= ' custom';
               }
 
-              $url = inlink('setTemplate', "template={$code}&theme={$theme}");
+              $url = inlink('setTemplate', "template={$code}&theme={$theme}&custom={$custom}");
               ?>
               <div class='theme<?php echo $currentClass;?>' data-url='<?php echo $url;?>' data-theme='<?php echo $theme;?>'>
                 <div class='theme-card'>
