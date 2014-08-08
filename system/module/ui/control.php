@@ -110,7 +110,6 @@ class ui extends control
                 $this->loadModel('setting')->setItems('system.common.site', array('customVersion' => time()));
                 $this->send(array('result' => 'success', 'message' => $this->lang->ui->themeSaved));
             }
-            
         }
 
         if($this->config->site->themeSetting) $this->config->themeSetting = json_decode($this->config->site->themeSetting);
