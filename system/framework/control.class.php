@@ -307,7 +307,8 @@ class control
             helper::cd($extPath);
             return $extViewFile;
         }
-        $extPath     = dirname(realpath($viewFile)) . "/ext/";
+
+        $extPath = RUN_MODE == 'front' ? dirname(realpath($viewFile)) . '/ext/' : dirname(dirname(realpath($viewFile))) . '/ext/view/';
         $extViewFile = $extPath . basename($viewFile);
 
         if(file_exists($extViewFile))
