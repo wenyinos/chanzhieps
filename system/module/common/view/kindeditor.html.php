@@ -8,7 +8,7 @@ if(!isset($config->$module->editor->$method)) return;
 
 /* Export $jsRoot var. */
 js::set('jsRoot', $jsRoot);
-js::set('themeRoot', $themeRoot);
+js::set('webRoot', $webRoot);
 
 /* Get editor settings for current page. */
 $editors = $config->$module->editor->$method;
@@ -63,7 +63,7 @@ function initKindeditor(afterInit)
         {
             width:'100%',
             items:editorTool,
-            cssPath:[v.themeRoot + 'zui/css/min.css'],
+            cssPath:[v.webRoot + 'zui/css/min.css'],
             bodyClass:'article-content',
             urlType:'absolute', 
             uploadJson: createLink('file', 'ajaxUpload', 'uid=' + v.uid),
