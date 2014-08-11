@@ -1,5 +1,5 @@
 <?php include '../../common/view/header.modal.html.php';?>
-<form method='post' action='<?php echo inlink('customtheme', "theme={$theme}");?>' id='customThemeForm' class='form'>
+<form method='post' action='<?php echo inlink('customtheme', "theme={$theme}&template={$template}");?>' id='customThemeForm' class='form'>
   <?php
   $colorPlates = '';
   foreach (explode('|', $lang->ui->theme->colorPlates) as $value)
@@ -44,7 +44,7 @@
         </div>
       </td>
     </tr>
-    <tr><td></td><td><?php echo html::hidden('theme', $theme) . html::hidden('css') . html::submitButton();?></td></tr>
+    <tr><td></td><td><?php echo html::hidden('theme', $theme) . html::hidden('template', $template) . html::hidden('css') . html::submitButton();?></td></tr>
   </table>
 </form>
 <?php include '../../common/view/footer.modal.html.php';?>

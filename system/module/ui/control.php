@@ -19,7 +19,7 @@ class ui extends control
      * @access public
      * return void
      **/
-    public function setTemplate($template = '', $theme = '')
+    public function setTemplate($template = '', $theme = '', $custom = false)
     {
         $templates = $this->ui->getTemplates();
         if($template and isset($templates[$template]))
@@ -27,6 +27,8 @@ class ui extends control
             $result = $this->loadModel('setting')->setItems('system.common.site', array('template' => $template ));
             if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $result = $this->loadModel('setting')->setItems('system.common.site', array('theme' => $theme));
+            if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $result = $this->loadModel('setting')->setItems('system.common.site', array('customTheme' => $custom ? $theme : ''));
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
@@ -90,11 +92,13 @@ class ui extends control
      * @access public
      * return void
      **/
-    public function customTheme($theme = '')
+    public function customTheme($theme = '', $template = '')
     {
-        if($theme and isset($this->lang->ui->themes[$theme]) and $this->lang->ui->themes[$theme]['custom'])
+        if(empty($template)) $template = $this->config->site->template;
+        $templates = $this->ui->getTemplates();
+        if($_POST)
         {
-            if($_POST)
+            if(isset($templates[$template]) && isset($templates[$template]['themes'][$theme]))
             {
                 $customCssFile  = $this->config->site->ui->customCssFile;
                 $savePath       = dirname($customCssFile);
@@ -113,6 +117,7 @@ class ui extends control
         $this->view->title      = "<i class='icon-cog'></i> " . $this->lang->ui->customtheme;
         $this->view->modalWidth = 800;
         $this->view->theme      = $theme;
+        $this->view->template   = $template;
         $this->display();
      }
 
