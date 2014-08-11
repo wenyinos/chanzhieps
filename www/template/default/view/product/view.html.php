@@ -91,14 +91,10 @@ js::set('categoryID', $category->id);
                   $attributeHtml .= "<li><span class='meta-name'>" . $attribute->label . "</span>";
                   $attributeHtml .= "<span class='meta-value'>" . $attribute->value . "</span></li>";
               }
+              if(empty($attributeHtml)) echo '<p class="product-summary">' . $product->summary . '</p>';
+              echo $attributeHtml;
               ?>
             </ul>
-            <?php
-            if(empty($attributeHtml))
-            {
-                echo '<p class="product-summary">' . $product->summary . '</p>';
-            }
-            ?>
             <?php if($product->mall):?>
             <hr>
             <div class='btn-buy'>
