@@ -77,7 +77,7 @@ class upgradeModel extends model
             case '2_4':
                 $this->execSQL($this->getUpgradeFile('2.4'));
                 $this->upgradeSlideTarget();
-                $this->createIndexFile($this->app->getDataRoot() . 'upload');
+                $this->createIndexFile();
                 $this->deleteLogFile();
                 $this->setDefaultCurrency();
 
@@ -766,8 +766,10 @@ class upgradeModel extends model
      * @access public
      * @return void
      */
-    public function createIndexFile($path)
+    public function createIndexFile($path = null)
     {
+        if(empty($path)) $path = $this->app->getDataRoot() . 'upload'
+
         $scanDir   = dir($path);
         $indexFile = $path . DS . "index.php";
         if(is_writable($path) && !file_exists($indexFile))
