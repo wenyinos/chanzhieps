@@ -122,6 +122,8 @@ class thread extends control
 
         if($thread->link)
         {
+             $this->thread->plusCounter($threadID);
+
              header('HTTP/1.1 301 Moved Permanently');
              die(header('Location:' . $thread->link));
         }
