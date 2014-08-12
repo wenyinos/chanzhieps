@@ -191,6 +191,8 @@ class article extends control
 
         if($article->link)
         {
+            $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($articleID)->exec();
+
             header('HTTP/1.1 301 Moved Permanently');
             die(header('Location:' . $article->link));
         }
@@ -216,7 +218,7 @@ class article extends control
         $this->view->category    = $category;
         $this->view->contact     = $this->loadModel('company')->getContact();
 
-        $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($articleID)->exec(false);
+        $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($articleID)->exec();
 
         $this->display();
     }
