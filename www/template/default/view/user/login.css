@@ -7,7 +7,7 @@
 .btn-oauth .icon{font-size: 40px;position: absolute;left: 75px; text-shadow:none;}
 .btn-oauth .icon:before{display: none;}
 
-a .icon-qq, a .icon-sina{ margin-bottom: -15px; display: inline-block; width: 48px; height: 48px; margin-right: 10px; background: url('theme/default/images/main/socialicons.png') left top no-repeat;}
+a .icon-qq, a .icon-sina{ margin-bottom: -15px; display: inline-block; width: 48px; height: 48px; margin-right: 10px; background: url('template/default/theme/default/images/main/socialicons.png') left top no-repeat;}
 a .icon-sina{background-position: 0 -48px;}
 
 #adminLogin { max-width: 390px; margin: 5% auto; padding: 20px; background-color: #FFF; border: 1px solid #DDD; -moz-box-shadow: 0px 1px 15px rgba(0,0,0,0.15); -webkit-box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.15); box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.15);border-radius: 6px;}

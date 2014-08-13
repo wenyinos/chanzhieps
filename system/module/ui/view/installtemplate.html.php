@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php include '../../common/view/header.iframe.html.php';?>
+<?php include '../../common/view/header.lite.html.php';?>
 <?php if(!empty($authorities)):?>
 <div>
   <h3><?php echo $lang->ui->template->error->paths;?></h3>
