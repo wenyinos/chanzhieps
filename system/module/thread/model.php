@@ -246,15 +246,20 @@ class threadModel extends model
     {
         $oldThread = $this->getByID($threadID);
 
-        $this->dao->update(TABLE_THREAD)->set('board')->eq($targetBoard)->where('id')->eq($threadID)->exec();
+        $newThread = $oldThread;
+        $newThread->board = $targetBoard;
 
-        $thread = new stdclass();
-        $thread->title  = $oldThread->title;
-        $thread->board  = $oldThread->board;
-        $thread->author = $oldThread->author;
-        $thread->link   = helper::createLink('thread', 'view', "threadID=$threadID");
+        unset($newThread->id);
+        unset($newThread->editorRealname);
+        unset($newThread->authorRealname);
+        unset($newThread->files);
 
-        $this->dao->insert(TABLE_THREAD)->data($thread)->autoCheck()->exec();
+        $this->dao->insert(TABLE_THREAD)->data($newThread)->autoCheck()->exec();
+        $newThreadID = $this->dao->lastInsertID();
+
+        $oldThread->board = $oldBoard;
+        $oldThread->link  = helper::createLink('thread', 'view', "threadID=$newThreadID");
+        $this->dao->update(TABLE_THREAD)->data($oldThread)->where('id')->eq($threadID)->exec();
 
         if(dao::isError()) return false;
 

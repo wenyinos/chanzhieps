@@ -16,9 +16,6 @@ js::set('categoryID', $category->id);
         <dl class='dl-inline'>
           <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAddedDate, formatTime($article->addedDate));?>'><i class='icon-time icon-large'></i> <?php echo formatTime($article->addedDate); ?></dd>
           <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAuthor, $article->author);?>'><i class='icon-user icon-large'></i> <?php echo $article->author; ?></dd>
-          <?php if($article->editor):?> 
-          <dd data-toggle='tooltip' data-placement='top' ><i class='icon-edit icon-large'></i><?php printf($lang->article->lblEditor, $this->loadModel('user')->getByAccount($article->editor)->realname, formatTime($article->editedDate));?></dd>
-          <?php endif;?>
           <?php if($article->source != 'original'):?>
           <dt><?php echo $lang->article->sourceList[$article->source] . $lang->colon;?></dt>
           <dd><?php $article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite); ?></dd>
@@ -50,6 +47,9 @@ js::set('categoryID', $category->id);
         <?php if($article->keywords):?>
         <p class='small'><strong class="text-muted"><?php echo $lang->article->keywords;?></strong><span class="article-keywords"><?php echo $lang->colon . $article->keywords;?></span></p>
         <?php endif; ?>
+        <?php if($article->editor):?> 
+        <p class='text-right'></i><?php printf($lang->article->lblEditor, $this->loadModel('user')->getByAccount($article->editor)->realname, formatTime($article->editedDate));?></p>
+        <?php endif;?>
         <?php extract($prevAndNext);?>
         <ul class='pager pager-justify'>
           <?php if($prev): ?>

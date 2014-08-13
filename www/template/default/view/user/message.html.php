@@ -1,6 +1,6 @@
 <?php include TPL_ROOT . 'common/header.html.php';?>
 <div class='row'>
-  <?php include '././side.html.php';?>
+  <?php include './side.html.php';?>
   <div class='col-md-10'>
     <form id='ajaxForm' method='post' target='hiddenwin' action="<?php echo $this->createLink('message', 'batchDelete');?>">
       <div class='panel'>
