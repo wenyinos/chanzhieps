@@ -38,11 +38,11 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
         <tr>
           <th><?php echo $lang->block->title;?></th>
           <td>
-            <?php if(strpos(',code, phpcode, featuredProduct, slide, header', $type) !== false):?>
-            <?php echo html::input('title', strpos(',html,code,featuredProduct,phpcode,', $type) == false ?  $lang->block->$template->typeList[$type] : '', "class='form-control'");?></div>
+            <?php if(strpos(',htmlcode, phpcode, featuredProduct, slide, header', $type) !== false):?>
+            <?php echo html::input('title', strpos(',html,htmlcode,featuredProduct,phpcode,', $type) == false ?  $lang->block->$template->typeList[$type] : '', "class='form-control'");?></div>
             <?php else:?>
             <div class='row'>
-              <div class='col-sm-6'><?php echo html::input('title', strpos(',html,code,featuredProduct,', $type) == false ?  $lang->block->$template->typeList[$type] : '', "class='form-control'");?></div>
+              <div class='col-sm-6'><?php echo html::input('title', strpos(',html,htmlcode,featuredProduct,', $type) == false ?  $lang->block->$template->typeList[$type] : '', "class='form-control'");?></div>
               <div class='col-sm-6'>
                 <div class='colorplate clearfix'>
                   <div class='input-group color active'>
@@ -94,7 +94,7 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
           </td>
         </tr>
         <?php endif;?>
-        <?php if(strpos(',code, phpcode, slide, header', $type) == false):?>
+        <?php if(strpos(',htmlcode, phpcode, slide, header', $type) == false):?>
         <tr>
           <th><?php echo $lang->block->color;?></th>
           <td>

@@ -10,9 +10,9 @@
  * @link        http://www.chanzhi.org
  */
 $lang->block->default = new stdclass();
-$lang->block->default->typeList['html']    = 'Html block';
-$lang->block->default->typeList['code']    = 'Codes';
-$lang->block->default->typeList['phpcode'] = 'php codes';
+$lang->block->default->typeList['html']     = 'Html block';
+$lang->block->default->typeList['htmlcode'] = 'Html codes';
+$lang->block->default->typeList['phpcode']  = 'php codes';
 
 $lang->block->default->typeList['latestArticle'] = 'Latest Articles';
 $lang->block->default->typeList['hotArticle']    = 'Hot Articles';
@@ -32,9 +32,9 @@ $lang->block->default->typeList['slide']   = 'Slide';
 $lang->block->default->typeList['header']  = 'Header';
 
 $lang->block->default->typeGroups = array();
-$lang->block->default->typeGroups['html']    = 'input';
-$lang->block->default->typeGroups['code']    = 'input';
-$lang->block->default->typeGroups['phpcode'] = 'input';
+$lang->block->default->typeGroups['html']     = 'input';
+$lang->block->default->typeGroups['htmlcode'] = 'input';
+$lang->block->default->typeGroups['phpcode']  = 'input';
 
 $lang->block->default->typeGroups['latestArticle'] = 'article';
 $lang->block->default->typeGroups['hotArticle']    = 'article';
