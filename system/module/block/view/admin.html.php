@@ -35,7 +35,7 @@
       <td><?php echo $lang->block->$currentTemplate->typeList[$block->type];?></td>
       <td>
         <?php 
-        echo html::a(inlink('edit',   "template=$currentTemplate&blockID=$block->id"), $lang->edit);
+        echo html::a(inlink('edit',   "template=$currentTemplate&blockID=$block->id&type=$block->type"), $lang->edit);
         echo html::a(inlink('delete', "blockID=$block->id"), $lang->delete, "class='deleter'");
         ?>
       </td>

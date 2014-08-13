@@ -157,7 +157,7 @@ class blockModel extends model
             $class = ($block == $type) ? "class='active'" : '';
             if($blockID)
             {
-                $select .= "<li {$class}>" . html::a(helper::createLink('block', $this->app->getMethodName(), "template={$template}&type={$block}&blockID={$blockID}"), $this->lang->block->$template->typeList[$block]) . "</li>";
+                $select .= "<li {$class}>" . html::a(helper::createLink('block', $this->app->getMethodName(), "template={$template}&blockID={$blockID}&type={$block}"), $this->lang->block->$template->typeList[$block]) . "</li>";
             }
             else
             {
