@@ -16,7 +16,7 @@ jQuery.fn.codeeditor = function(options)
     {
         var $this = $(this).css('display', 'none');
         var id = $this.attr('id') + '-editor';
-        var setting = $.extend({mode: 'html', theme: 'textmate'}, $this.data(), options);
+        var setting = $.extend({mode: $this.data('mode') || 'html', theme: 'textmate'}, $this.data(), options);
         $this.before('<div class="editor-wrapper"><div class="actions"><a href="javascript:;" class="btn-fullscreen"><i class="icon-resize-full"></i></a><a href="javascript:;" data-toggle="dropdown"><i class="icon-adjust"></i> <span class="ace-theme">textmate</span> <i class="icon-caret-down"></i></a><ul class="dropdown-menu pull-right ace-themes"><li><a href="###" data-theme="ambiance">Ambiance</a></li><li><a href="###" data-theme="textmate">Textmate</a></li></ul></div><pre id="{0}"></pre></div>'.format(id));
         var $editor = $('#' + id).addClass('ace-editor').height($this.height()),
             editor = ace.edit(id);

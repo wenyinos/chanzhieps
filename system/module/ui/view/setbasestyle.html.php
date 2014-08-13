@@ -20,7 +20,7 @@
     <form method='post' id='ajaxForm' class='form-inline'>
       <table class='table table-form'>
         <tr>
-          <td><?php echo html::textarea('content', isset($content) ? $content : '', 'rows=20 class="form-control codeeditor"');?></td>
+          <td><?php echo html::textarea('content', isset($content) ? $content : '', 'rows=20 class="form-control codeeditor" data-mode="css"');?></td>
         </tr>
         <tr>
           <td>
