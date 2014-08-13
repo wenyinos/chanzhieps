@@ -149,13 +149,11 @@ $lang->menuGroups->message = 'feedback';
 $lang->article = new stdclass();
 $lang->article->menu = new stdclass();
 $lang->article->menu->browse = array('link' => '文章列表|article|admin|', 'alias' => 'create, edit');
-$lang->article->menu->tree   = '类目管理|tree|browse|type=article';
 
 /* Menu of blog module. */
 $lang->blog = new stdclass();
 $lang->blog->menu = new stdclass();
 $lang->blog->menu->browse = array('link' => '博客列表|article|admin|type=blog', 'alias' => 'create, edit');
-$lang->blog->menu->tree   = '类目管理|tree|browse|type=blog';
 
 /* Menu of page module. */
 $lang->page = new stdclass();
@@ -167,7 +165,6 @@ $lang->page->menu->create = '添加单页|article|create|type=page';
 $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
 $lang->product->menu->browse = array('link' => '产品列表|product|admin|', 'alias' => 'create, edit');
-$lang->product->menu->tree   = '类目管理|tree|browse|type=product';
 $lang->product->currency     = '货币设置';
 
 /* Menu of UI module. */
