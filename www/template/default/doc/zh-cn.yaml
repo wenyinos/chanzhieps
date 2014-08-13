@@ -1,6 +1,6 @@
 name:默认模板
 code:default
-author:Xiying Guan
+author:蝉知官方
 desc:这是蝉知企业门户系统默认模板
 version:2.5
 chanzhiVersion:2.5
@@ -14,4 +14,4 @@ themes:
    tartan:蝉之格
    tree:蝉之树
    wide:宽屏
-   colorful:缤纷[custom]
+   colorful:缤纷【可定制】
