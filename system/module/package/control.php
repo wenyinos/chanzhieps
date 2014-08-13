@@ -25,7 +25,7 @@ class package extends control
     public function browse($status = 'installed')
     {
         $packages = $this->package->getLocalPackages($status);
-        $versions   = array();
+        $versions = array();
         if($packages and $status == 'installed')
         {
             /* Get latest release from remote. */
@@ -53,7 +53,7 @@ class package extends control
         $this->view->title      = $this->lang->package->browse;
         $this->view->position[] = $this->lang->package->browse;
         $this->view->tab        = $status;
-        $this->view->packages = $packages;
+        $this->view->packages   = $packages;
         $this->view->versions   = $versions;
         $this->view->status     = $status;
         $this->display();
@@ -70,10 +70,10 @@ class package extends control
     public function obtain($type = 'byUpdatedTime', $param = '', $recTotal = 0, $recPerPage = 10, $pageID = 1)
     {
         /* Init vars. */
-        $type       = strtolower($type);
-        $moduleID   = $type == 'bymodule' ? (int)$param : 0;
+        $type     = strtolower($type);
+        $moduleID = $type == 'bymodule' ? (int)$param : 0;
         $packages = array();
-        $pager      = null;
+        $pager    = null;
 
         /* Set the key. */
         if($type == 'bysearch') $param = helper::safe64Encode($this->post->key);
@@ -119,9 +119,10 @@ class package extends control
         
         $installedPackage = $this->package->getInfoFromDB($package);
 
-        $this->view->error = '';
-        $installTitle      = $upgrade == 'no' ? $this->lang->package->install : $this->lang->package->upgrade;
-        $installType       = $upgrade == 'no' ? $this->lang->package->installExt : $this->lang->package->upgradeExt; 
+        $installTitle = $upgrade == 'no' ? $this->lang->package->install : $this->lang->package->upgrade;
+        $installType  = $upgrade == 'no' ? $this->lang->package->installExt : $this->lang->package->upgradeExt; 
+
+        $this->view->error       = '';
         $this->view->installType = $installType;
         $this->view->upgrade     = $upgrade;
         $this->view->title       = $installTitle . $this->lang->colon . $package;
@@ -132,9 +133,6 @@ class package extends control
 
         if($downLink)
         {
-            /* Get the package file name. */
-            $packageFile = $this->package->getPackageFile($package);
-
             /* Checking download path. */
             $return = $this->package->checkDownloadPath();
             if($return->result != 'ok')
@@ -376,9 +374,10 @@ class package extends control
     public function deactivate($package)
     {
         $this->package->updatePackage($package, array('status' => 'deactivated'));
+
+        $this->view->title          = $this->lang->package->deactivateFinished;
+        $this->view->position[]     = $this->lang->package->deactivateFinished;
         $this->view->removeCommands = $this->package->removePackage($package);
-        $this->view->title      = $this->lang->package->deactivateFinished;
-        $this->view->position[] = $this->lang->package->deactivateFinished;
         $this->display();
     }
 
@@ -392,9 +391,9 @@ class package extends control
     {
         if($_FILES)
         {
-            $tmpName   = $_FILES['file']['tmp_name'];
-            $fileName  = $_FILES['file']['name'];
-            $package = basename($fileName, '.zip');
+            $tmpName  = $_FILES['file']['tmp_name'];
+            $fileName = $_FILES['file']['name'];
+            $package  = basename($fileName, '.zip');
             move_uploaded_file($tmpName, $this->app->getTmpRoot() . "/package/$fileName");
 
             $info = $this->package->getInfoFromDB($package);
@@ -416,9 +415,9 @@ class package extends control
      */
     public function erase($package)
     {
+        $this->view->title          = $this->lang->package->eraseFinished;
+        $this->view->position[]     = $this->lang->package->eraseFinished;
         $this->view->removeCommands = $this->package->erasePackage($package);
-        $this->view->title      = $this->lang->package->eraseFinished;
-        $this->view->position[] = $this->lang->package->eraseFinished;
         $this->display();
     }
 
@@ -448,7 +447,7 @@ class package extends control
     public function structure($package)
     {
         $package = $this->package->getInfoFromDB($package);
-        $this->view->title = $package->name . '[' . $package->code . '] ' . $this->lang->package->structure;
+        $this->view->title   = $package->name . '[' . $package->code . '] ' . $this->lang->package->structure;
         $this->view->package = $package;
         $this->display();
     }
