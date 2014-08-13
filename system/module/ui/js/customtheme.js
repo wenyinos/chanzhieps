@@ -33,8 +33,7 @@ $(function()
 
     $.setAjaxForm('#customThemeForm', function(response)
     {
-        $('.modal-theme .close[data-dismiss="modal"]').click();
-        messager.success(response.message);
+        setTimeout(function(){$('.close[data-dismiss="modal"]').click();}, 2000);
     });
 
     $('#customThemeForm').submit(function(event)

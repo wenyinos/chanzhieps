@@ -45,13 +45,9 @@
             <div class='clearfix'>
             <?php foreach($template['themes'] as $theme => $name):?>
               <?php
-              $custom = (strrchr($name, '[custom]') == '[custom]');
+              $custom = ($theme == 'colorful' and $code == 'default');
               $currentClass = ($isCurrent and $config->site->theme == $theme) ? ' current' : '';
-              if($custom)
-              {
-                  $name = substr($name, 0, strlen($name) - 8);
-                  $currentClass .= ' custom';
-              }
+              if($custom) $currentClass .= ' custom';
 
               $url = inlink('setTemplate', "template={$code}&theme={$theme}&custom={$custom}");
               ?>
