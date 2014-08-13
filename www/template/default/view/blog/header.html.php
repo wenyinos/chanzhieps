@@ -136,7 +136,7 @@ else
     <div class='wrapper'>
       <ul class="nav navbar-nav">
         <li <?php if(empty($category)) echo "class='active'"?>>
-           <?php echo html::a($this->inlink('index'), $lang->blog->home)?>
+           <?php echo html::a($this->inlink('index'), (isset($this->config->site->type) and $this->config->site->type == 'blog') ? $lang->home : $lang->blog->home)?>
         </li>
         <?php 
         foreach($navs as $nav)
