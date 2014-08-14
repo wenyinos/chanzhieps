@@ -14,7 +14,7 @@ $lang->block->id              = '编号';
 $lang->block->title           = '名称';
 $lang->block->limit           = '数量';
 $lang->block->type            = '类型';
-$lang->block->code            = '代码';
+$lang->block->htmlcode        = 'html代码';
 $lang->block->phpcode         = 'php代码';
 $lang->block->content         = '内容';
 $lang->block->moreLink        = '更多链接';
@@ -53,10 +53,8 @@ $lang->block->placeholder->moreUrl  = '区块右上角链接地址';
 $lang->block->noPhpTag = '不需要&lt;?php ?&gt;';
 
 $lang->block->setOkFile = <<<EOT
-<div class='alert'>
 <h5>请按照下面的步骤操作以确认您的管理员身份。</h5>
-<p>创建 <input value='%s' readonly class='autoSelect red'/> 文件。如果存在该文件，使用编辑软件打开，重新保存一遍。</p>
-</div>
+<p>创建 %s 文件。如果存在该文件，使用编辑软件打开，重新保存一遍。</p>
 EOT;
 
 $lang->block->gridOptions[0]  = '自动';

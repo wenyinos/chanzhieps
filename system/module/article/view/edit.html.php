@@ -45,9 +45,6 @@
       <tr>
         <th><?php echo $lang->article->title;?></th>
         <td colspan='2'>
-          <?php if($type == 'page'):?>
-          <?php echo html::input('title', $article->title, "class='form-control'");?>
-          <?php else:?>
           <div class='input-group'>
             <?php echo html::input('title', $article->title, "class='form-control'");?>
             <span class="input-group-addon">
@@ -57,7 +54,6 @@
               </label>
             </span>
           </div>
-          <?php endif;?>
         </td>
       </tr>
       <tr class='link hidden'>

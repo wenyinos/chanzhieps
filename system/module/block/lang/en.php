@@ -14,7 +14,7 @@ $lang->block->id              = 'ID';
 $lang->block->title           = 'Title';
 $lang->block->limit           = 'Limit';
 $lang->block->type            = 'Type';
-$lang->block->code            = 'Codes';
+$lang->block->htmlcode        = 'html codes';
 $lang->block->phpcode         = 'php codes';
 $lang->block->content         = 'Content';
 $lang->block->moreLink        = 'More Button';
@@ -53,10 +53,8 @@ $lang->block->placeholder->moreUrl  = 'Url for button of more';
 $lang->block->noPhpTag = 'No need &lt;?php ?&gt;';
 
 $lang->block->setOkFile = <<<EOT
-<div class='alert'>
 <h5>For security reason, please do these steps. </h5>
-<p>Create "<input value='%s' class='autoSelect' readoly />" file. If this file exists already, reopen it and save again.</p>
-</div>
+<p>Create %s file. If this file exists already, reopen it and save again.</p>
 EOT;
 
 $lang->block->gridOptions[0]  = 'Auto';

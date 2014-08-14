@@ -55,9 +55,6 @@
         <tr>
           <th><?php echo $lang->article->title;?></th>
           <td colspan='2'>
-            <?php if($type == 'page'):?>
-            <?php echo html::input('title', '', "class='form-control'");?>
-            <?php else:?>
             <div class='input-group'>
               <?php echo html::input('title', '', "class='form-control'");?>
               <span class="input-group-addon">
@@ -66,7 +63,6 @@
                 </label>
               </span>
             </div>
-            <?php endif;?>
           </td>
         </tr>
         <tr class='link hidden'>
@@ -82,9 +78,9 @@
           <td colspan='2'>
             <div class='input-group'>
               <?php if($type == 'page'):?>
-              <span class='input-group-addon'>http://<?php echo $this->server->http_host . $config->webRoot?>page/</span>
+              <span class='input-group-addon'>http://<?php echo $this->server->http_host . $config->webRoot;?>page/</span>
               <?php else:?>
-              <span class='input-group-addon'>http://<?php echo $this->server->http_host . $config->webRoot . $type?>/id_</span>
+              <span class='input-group-addon'>http://<?php echo $this->server->http_host . $config->webRoot . $type;?>/id_</span>
               <?php endif;?>
               <?php echo html::input('alias', '', "class='form-control' placeholder='{$lang->alias}'");?>
               <span class="input-group-addon">.html</span>

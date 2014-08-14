@@ -16,5 +16,5 @@ body.codeeditor-fullscreen .form-action {position: fixed; bottom: 5px; left: 50p
 </style>
 <tr>
   <th><?php echo $lang->block->phpcode;?></th>
-  <td><?php echo html::textarea('content', isset($block) ? $block->content : '', 'rows=20 class="form-control codeeditor"');?></td>
+  <td><?php echo html::textarea('content', isset($block) ? $block->content : '', "rows=20 class='form-control codeeditor' data-mode='php'");?></td>
 </tr>
