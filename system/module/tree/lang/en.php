@@ -62,6 +62,9 @@ $lang->board->placeholder = new stdclass();
 $lang->board->placeholder->moderators  = "Moderators'account, Separated with" . '","';
 $lang->board->placeholder->setChildren = 'Forum needs tow levels boards.';
 
+$lang->category->placeholder = new stdclass();
+$lang->category->placeholder->link = 'Input link, it may be the chain.';
+
 /* Lang items for wechat menu. */
 $lang->wechatMenu = new stdclass();
 $lang->wechatMenu->common     = 'Menu for public account';

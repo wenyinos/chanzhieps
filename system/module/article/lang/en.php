@@ -72,5 +72,6 @@ $lang->article->lblComments  = '<strong>Comments:</strong> %s';
 $lang->article->none      = 'None';
 $lang->article->directory = 'List';
 
-$lang->article->note = new stdclass();
-$lang->article->note->addedDate = 'Schedule to Publish the article after this time';
+$lang->article->placeholder = new stdclass();
+$lang->article->placeholder->addedDate = 'Schedule to Publish the article after this time';
+$lang->article->placeholder->link      = 'Input link, it can be the chain.';

@@ -62,6 +62,9 @@ $lang->board->placeholder = new stdclass();
 $lang->board->placeholder->moderators  = '会员用户名, 多个用户名之间用逗号隔开';
 $lang->board->placeholder->setChildren = '论坛功能需要设置二级版块才能使用。';
 
+$lang->category->placeholder = new stdclass();
+$lang->category->placeholder->link = '输入链接，可以是站外链接';
+
 /* Lang items for wechat menu. */
 $lang->wechatMenu = new stdclass();
 $lang->wechatMenu->common     = '公众号菜单';

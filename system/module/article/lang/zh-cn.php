@@ -72,5 +72,6 @@ $lang->article->lblComments  = '<strong>评论：</strong> %s';
 $lang->article->none      = '没有了';
 $lang->article->directory = '返回目录';
 
-$lang->article->note = new stdclass();
-$lang->article->note->addedDate = '可以延迟到选定的时间发布。';
+$lang->article->placeholder = new stdclass();
+$lang->article->placeholder->addedDate = '可以延迟到选定的时间发布。';
+$lang->article->placeholder->link      = '输入链接，可以是站外链接';

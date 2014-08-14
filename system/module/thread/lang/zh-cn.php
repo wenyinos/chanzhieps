@@ -55,6 +55,9 @@ $lang->thread->successUnstick  = '成功取消置顶';
 $lang->thread->readonlyMessage = '该帖已被设置为 <strong>只读</strong>，您暂时无法发表新的回复。';
 $lang->thread->successTransfer = '转移成功';
 
+$lang->thread->placeholder = new stdclass();
+$lang->thread->placeholder->link = '输入链接，可以是站外连接';
+
 /* Adjust the pager. */
 if(!isset($lang->pager->settedInForum))
 {

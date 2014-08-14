@@ -45,7 +45,7 @@ $themeRoot = $webRoot . "theme/";
       </div>
       <div class='form-group link hidden'> 
         <label class='col-md-2 control-label'><?php echo $lang->category->link;?></label>
-        <div class='col-md-9 required'><?php echo html::input('link', $category->link, "class='form-control'");?></div>
+        <div class='col-md-9 required'><?php echo html::input('link', $category->link, "class='form-control' placeholder='{$lang->category->placeholder->link}'");?></div>
       </div>
       <div class='categoryInfo'>
         <div class='form-group'> 

@@ -60,7 +60,7 @@
         <th><?php echo $lang->article->link;?></th>
         <td colspan='2'>
           <div class='required required-wrapper'></div>
-          <?php echo html::input('link', $article->link, "class='form-control'");?>
+          <?php echo html::input('link', $article->link, "class='form-control' placeholder='{$lang->article->placeholder->link}'");?>
         </td>
       </tr>
       <tbody class='articleInfo'>
@@ -100,7 +100,7 @@
             <span class='add-on'><button class="btn btn-default" type="button"><i class="icon-calendar"></i></button></span>
           </div>
         </td>
-        <td><span class='help-inline'><?php echo $lang->article->note->addedDate;?></span></td>
+        <td><span class='help-inline'><?php echo $lang->article->placeholder->addedDate;?></span></td>
       </tr>
       <tr>
         <th><?php echo $lang->article->status;?></th>
