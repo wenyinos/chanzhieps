@@ -92,7 +92,7 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
           </td>
         </tr>
         <?php endif;?>
-        <?php if(strpos(',htmlcode, phpcode, slide, header', $type) == false):?>
+        <?php if(strpos(',htmlcode, phpcode, slide, header, wechat', $type) == false):?>
         <tr>
           <th><?php echo $lang->block->color;?></th>
           <td>

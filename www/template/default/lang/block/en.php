@@ -26,6 +26,7 @@ $lang->block->default->typeList['productTree'] = 'Product Categories';
 $lang->block->default->typeList['blogTree']    = 'Blog Categories';
 
 $lang->block->default->typeList['contact'] = 'Contact Us';
+$lang->block->default->typeList['wechat']  = 'Follow Us';
 $lang->block->default->typeList['about']   = 'About Us';
 $lang->block->default->typeList['links']   = 'Links';
 $lang->block->default->typeList['slide']   = 'Slide';
@@ -48,6 +49,7 @@ $lang->block->default->typeGroups['productTree'] = 'category';
 $lang->block->default->typeGroups['blogTree']    = 'category';
 
 $lang->block->default->typeGroups['contact'] = 'system';
+$lang->block->default->typeGroups['wechat']  = 'system';
 $lang->block->default->typeGroups['about']   = 'system';
 $lang->block->default->typeGroups['links']   = 'system';
 $lang->block->default->typeGroups['slide']   = 'system';
@@ -55,6 +57,7 @@ $lang->block->default->typeGroups['header']  = 'system';
 
 $lang->block->default->pages['all']            = 'All';
 $lang->block->default->pages['index_index']    = 'Home';
+$lang->block->default->pages['company_index']  = 'About Us';
 
 $lang->block->default->pages['article_browse'] = 'Browse article page';
 $lang->block->default->pages['article_view']   = 'View article page';
@@ -88,6 +91,8 @@ $lang->block->default->regions->all['footer'] = 'Footer(invisible)';
 $lang->block->default->regions->index_index['top']     = 'Top';
 $lang->block->default->regions->index_index['middle']  = 'Middle';
 $lang->block->default->regions->index_index['bottom']  = 'Bottom';
+
+$lang->block->default->regions->company_index['side']  = 'Side';
 
 $lang->block->default->regions->article_browse['side'] = 'Side';
 $lang->block->default->regions->article_view['side']   = 'Side';

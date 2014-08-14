@@ -26,6 +26,7 @@ $lang->block->default->typeList['productTree']     = '产品分类';
 $lang->block->default->typeList['blogTree']        = '博客分类';
 
 $lang->block->default->typeList['contact']         = '联系我们';
+$lang->block->default->typeList['wechat']          = '关注我们';
 $lang->block->default->typeList['about']           = '公司简介';
 $lang->block->default->typeList['links']           = '友情链接';
 $lang->block->default->typeList['slide']           = '幻灯片';
@@ -48,6 +49,7 @@ $lang->block->default->typeGroups['productTree'] = 'category';
 $lang->block->default->typeGroups['blogTree']    = 'category';
 
 $lang->block->default->typeGroups['contact'] = 'system';
+$lang->block->default->typeGroups['wechat']  = 'system';
 $lang->block->default->typeGroups['about']   = 'system';
 $lang->block->default->typeGroups['links']   = 'system';
 $lang->block->default->typeGroups['slide']   = 'system';
@@ -55,6 +57,7 @@ $lang->block->default->typeGroups['header']  = 'system';
 
 $lang->block->default->pages['all']            = '全部页面';
 $lang->block->default->pages['index_index']    = '首页';
+$lang->block->default->pages['company_index']  = '关于我们';
 
 $lang->block->default->pages['article_browse'] = '文章列表页面';
 $lang->block->default->pages['article_view']   = '文章详情页面';
@@ -88,6 +91,8 @@ $lang->block->default->regions->all['footer'] = 'Footer(不可见)';
 $lang->block->default->regions->index_index['top']     = '上部';
 $lang->block->default->regions->index_index['middle']  = '中部';
 $lang->block->default->regions->index_index['bottom']  = '底部';
+
+$lang->block->default->regions->company_index['side']  = '侧边';
 
 $lang->block->default->regions->article_browse['side'] = '侧边';
 $lang->block->default->regions->article_view['side']   = '侧边';
