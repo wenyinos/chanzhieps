@@ -186,7 +186,7 @@ class blockModel extends model
         $grid    = isset($block->grid) ? $block->grid : '';
 
         $entry = "<div class='block-item row' data-id='" . $blockID . "'>";
-        $entry .= "<div class='col-xs-7'><div class='input-group'>";
+        $entry .= "<div class='col-xs-8'><div class='input-group'>";
         $entry .= html::select("blocks[{$key}]", $blockOptions, $blockID, "class='form-control'");
 
         $titlelessChecked = isset($block->titleless) && $block->titleless ? 'checked' : '';
@@ -209,10 +209,10 @@ class blockModel extends model
         $entry .= html::select("grid[{$key}]", $this->lang->block->gridOptions, $grid, "class='form-control'");
         $entry .= '</div>';
 
-        $entry .= '<div class="text-center col-xs-3 actions">';
-        $entry .= html::a('javascript:;', $this->lang->block->add, "class='plus'");
-        $entry .= html::a('javascript:;', $this->lang->delete, "class='delete'");
-        $entry .= html::a(inlink('edit', "template={$template}&blockID={$blockID}&type={$type}"), $this->lang->edit, "class='edit'");
+        $entry .= '<div class="text-center col-xs-2 actions">';
+        $entry .= html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus'");
+        $entry .= html::a('javascript:;', "<i class='icon-remove'></i>", "class='delete'");
+        $entry .= html::a(inlink('edit', "template={$template}&blockID={$blockID}&type={$type}"), "<i class='icon-edit'></i>", "class='edit'");
         $entry .= "<i class='icon-move sort-handle'></i>";
         $entry .= '</div></div>';
         return $entry;
