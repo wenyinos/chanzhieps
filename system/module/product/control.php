@@ -12,6 +12,16 @@
 class product extends control
 {
 
+    public function __construct()
+    {
+        parent::__construct();
+        if(RUN_MODE == 'admin')
+        {
+            $this->view->treeModuleMenu = $this->loadModel('tree')->getTreeMenu('product', 0, array('treeModel', 'createAdminLink'));
+            $this->view->treeManageLink = html::a(helper::createLink('tree', 'browse', "type=product"), $this->lang->tree->manage);
+        }
+    }
+
     /**
      * Index page of product module.
      * 
@@ -105,7 +115,6 @@ class product extends control
         $this->view->pager          = $pager;
         $this->view->categoryID     = $categoryID;
         $this->view->orderBy        = $orderBy;
-        $this->view->treeModuleMenu = $this->loadModel('tree')->getTreeMenu('product', 0, array('treeModel', 'createAdminLink'));
         $this->display();
     }   
 
@@ -134,7 +143,6 @@ class product extends control
         $this->view->title           = $this->lang->product->create;
         $this->view->currentCategory = $categoryID;
         $this->view->categories      = $categories;
-        $this->view->treeModuleMenu  = $this->loadModel('tree')->getTreeMenu('product', 0, array('treeModel', 'createAdminLink'));
         $this->display();
     }
 
@@ -175,7 +183,6 @@ class product extends control
         $this->view->title          = $this->lang->product->edit;
         $this->view->product        = $product;
         $this->view->categories     = $categories;
-        $this->view->treeModuleMenu = $this->loadModel('tree')->getTreeMenu('product', 0, array('treeModel', 'createAdminLink'));
 
         $this->display();
     }
