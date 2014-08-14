@@ -297,9 +297,10 @@ class articleModel extends model
         $this->dao->insert(TABLE_ARTICLE)
             ->data($article, $skip = 'categories,uid,isLink')
             ->autoCheck()
-            ->batchCheckIF($type != 'page' and empty($article->link), $this->config->article->require->create, 'notempty')
-            ->batchCheckIF($type == 'page', $this->config->article->require->page, 'notempty')
-            ->batchCheckIF($this->post->isLink, $this->config->article->require->link, 'notempty')
+            ->batchCheckIF($type != 'page' and !$this->post->isLink, $this->config->article->require->edit, 'notempty')
+            ->batchCheckIF($type == 'page' and !$this->post->isLink, $this->config->article->require->page, 'notempty')
+            ->batchCheckIF($type != 'page' and $this->post->isLink, $this->config->article->require->link, 'notempty')
+            ->batchCheckIF($type == 'page' and $this->post->isLink, $this->config->article->require->pageLink, 'notempty')
             ->checkIF(($type == 'page') and $this->post->alias, 'alias', 'unique', "type='page'")
             ->exec();
         $articleID = $this->dao->lastInsertID();
@@ -343,9 +344,10 @@ class articleModel extends model
         $this->dao->update(TABLE_ARTICLE)
             ->data($article, $skip = 'categories,uid,isLink')
             ->autoCheck()
-            ->batchCheckIF($type != 'page' and empty($article->link), $this->config->article->require->edit, 'notempty')
-            ->batchCheckIF($type == 'page', $this->config->article->require->page, 'notempty')
-            ->batchCheckIF($this->post->isLink, $this->config->article->require->link, 'notempty')
+            ->batchCheckIF($type != 'page' and !$this->post->isLink, $this->config->article->require->edit, 'notempty')
+            ->batchCheckIF($type == 'page' and !$this->post->isLink, $this->config->article->require->page, 'notempty')
+            ->batchCheckIF($type != 'page' and $this->post->isLink, $this->config->article->require->link, 'notempty')
+            ->batchCheckIF($type == 'page' and $this->post->isLink, $this->config->article->require->pageLink, 'notempty')
             ->checkIF(($type == 'page') and $this->post->alias, 'alias', 'unique', "type='page' and id<>{$articleID}")
             ->where('id')->eq($articleID)
             ->exec();
