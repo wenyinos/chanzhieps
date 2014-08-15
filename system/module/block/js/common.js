@@ -53,7 +53,7 @@ $(function()
 
     $('[name="params\\[icon\\]"]').change(function()
     {
-        $panelPreview.find('.icon').attr('class', 'icon ' + ($(this).val() || 'icon-heart-empty');
+        $panelPreview.find('.icon').attr('class', 'icon ' + ($(this).val() || 'icon-heart-empty'));
     }).change();
 
     $('[name="params\\[iconColor\\]"]').change(function()
