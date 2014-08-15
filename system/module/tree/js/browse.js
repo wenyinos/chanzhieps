@@ -55,7 +55,7 @@ $(document).ready(function()
         currencyMenu += v.currency + '<i class="icon-chevron-right"></i>';
         currencyMenu += '</li>';
 
-        $('.leftmenu').append(currencyMenu);
+        $('.nav-left').append(currencyMenu);
         $('#setCurrency').modalTrigger();
     }
 })
