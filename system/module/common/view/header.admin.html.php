@@ -26,18 +26,20 @@
   <?php $moduleMenu = commonModel::createModuleMenu($this->moduleName);?>
   <?php if($moduleMenu or !empty($treeModuleMenu)):?>
   <div class='col-md-2'>
-    <?php if($moduleMenu) echo $moduleMenu;?>
-    <?php if(!empty($treeModuleMenu)):?>
-    <div class='panel category-nav affix hiddden-xs hidden-sm'>
-      <div class='panel-heading'>
-        <strong><?php echo $lang->tree->browseByCategory;?></strong>
-        <?php if(!empty($treeManageLink)):?>
-        <div class='pull-right'><?php echo $treeManageLink;?></div>
-        <?php endif;?>
+    <div class="leftmenu affix hiddden-xs hidden-sm">
+      <?php if($moduleMenu) echo $moduleMenu;?>
+      <?php if(!empty($treeModuleMenu)):?>
+      <div class='panel category-nav'>
+        <div class='panel-heading'>
+          <strong><?php echo $lang->tree->browseByCategory;?></strong>
+          <?php if(!empty($treeManageLink)):?>
+          <div class='pull-right'><?php echo $treeManageLink;?></div>
+          <?php endif;?>
+        </div>
+        <div class='panel-body'><?php echo $treeModuleMenu;?></div>
       </div>
-      <div class='panel-body'><?php echo $treeModuleMenu;?></div>
+      <?php endif;?>
     </div>
-    <?php endif;?>
   </div>
   <div class='col-md-10'>
   <?php endif;?>

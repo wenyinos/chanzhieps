@@ -242,7 +242,7 @@ class commonModel extends model
 
         if(!isset($lang->$currentModule->menu)) return false;
 
-        $string = "<ul class='nav nav-primary nav-stacked leftmenu affix'>\n";
+        $string = "<ul class='nav-left nav nav-primary nav-stacked'>\n";
 
         /* Get menus of current module and current method. */
         $moduleMenus   = $lang->$currentModule->menu;  

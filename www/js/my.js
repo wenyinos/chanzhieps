@@ -35,9 +35,10 @@ $(document).ready(function()
     /* Fixed submenu position for browser which doesn't suppport relative postion in a table cell, like firefox 29. */
     var ua = navigator.userAgent.toLowerCase();
     var ver = (ua.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [0, '0'])[1];
-    if(ua.indexOf('firefox') > -1 && parseFloat(ver) < 30)
+    if(ua.indexOf('firefox') > -1)
     {
-        $('#navbar .dropdown > .dropdown-menu').each(function(){$(this).css('left', $(this).closest('.dropdown').position().left - 2);});
+        if(parseFloat(ver) < 30) $('#navbar .dropdown > .dropdown-menu').each(function(){$(this).css('left', $(this).closest('.dropdown').position().left - 2);});
+        else $('#navbar .dropdown').css('position', 'relative');
     }
 
     /* Auto ajust block grid width */

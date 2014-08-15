@@ -43,7 +43,7 @@ $(document).ready(function()
         var currencyMenu = '<li><a id="setCurrency" href="' + currencyLink + '">';
         currencyMenu += v.currency + '<i class="icon-chevron-right"></i>';
         currencyMenu += '</a></li>';
-        $('.leftmenu').append(currencyMenu);
+        $('.nav-left').append(currencyMenu);
         $('#setCurrency').modalTrigger();
     }
 })

@@ -1,6 +1,7 @@
 $(function()
 {
-  responsiveNavbar();
+    responsiveNavbar();
+    fixCategoryNav();
 });
 
 /**
@@ -28,4 +29,33 @@ function responsiveNavbar()
         if(navbar.hasClass('navbar-simple')) navbar.removeClass('navbar-simple');
         else  navbar.addClass('navbar-simple');
     });
+}
+
+/**
+ * fix height of category nav in 'leftmenu'
+ * 
+ * @access public
+ * @return void
+ */
+function fixCategoryNav()
+{
+    var $categoryNav = $('.category-nav');
+    if($categoryNav.length)
+    {
+        var $panelBody = $categoryNav.find('.panel-body');
+        var ajustHeight = function()
+        {
+
+            if($('html').hasClass('screen-phone'))
+            {
+                $panelBody.css('max-height', 'auto');
+            }
+            else
+            {
+                $panelBody.css('max-height', $(window).height() - 170 - $('.leftmenu > .nav-stacked').height());
+            }
+        };
+        ajustHeight();
+        $(window).resize(ajustHeight);
+    }
 }
