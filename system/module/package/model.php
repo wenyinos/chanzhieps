@@ -185,7 +185,7 @@ class packageModel extends model
      */
     public function getLocalPackages($status)
     {
-        $packages = $this->dao->select('*')->from(TABLE_PACKAGE)->where('status')->eq($status)->fi()->fetchAll('code');
+        $packages = $this->dao->select('*')->from(TABLE_PACKAGE)->where('status')->eq($status)->fetchAll('code');
         foreach($packages as $package)
         {
             if($package->site and stripos(strtolower($package->site), 'http') === false) $package->site = 'http://' . $package->site;
@@ -216,22 +216,22 @@ class packageModel extends model
     {
         /* Init the data. */
         $data = new stdclass();
-        $data->name             = $package;
-        $data->code             = $package;
-        $data->version          = 'unknown';
-        $data->author           = 'unknown';
-        $data->desc             = $package;
-        $data->site             = 'unknown';
-        $data->license          = 'unknown';
+        $data->name              = $package;
+        $data->code              = $package;
+        $data->version           = 'unknown';
+        $data->author            = 'unknown';
+        $data->desc              = $package;
+        $data->site              = 'unknown';
+        $data->license           = 'unknown';
         $data->chanzhiCompatible = '';
-        $data->type             = '';
-        $data->depends          = '';
+        $data->type              = '';
+        $data->depends           = '';
 
         $info = $this->parsePackageCFG($package);
         foreach($info as $key => $value) if(isset($data->$key)) $data->$key = $value;
         if(isset($info->chanzhiversion))        $data->chanzhiCompatible = $info->chanzhiversion;
         if(isset($info->chanzhi['compatible'])) $data->chanzhiCompatible = $info->chanzhi['compatible'];
-        if(isset($info->depends))              $data->depends          = json_encode($info->depends);
+        if(isset($info->depends))               $data->depends           = json_encode($info->depends);
 
         return $data;
     }
@@ -833,7 +833,7 @@ class packageModel extends model
          {
              $sql = trim($sql);
              if(empty($sql)) continue;
-             $sql = str_replace('zt_', $this->config->db->prefix, $sql);
+             $sql = str_replace('eps_', $this->config->db->prefix, $sql);
 
              try
              {
@@ -866,7 +866,7 @@ class packageModel extends model
          $backupTables = array();
          foreach($sqls as $sql)
          {
-             $sql = str_replace('zt_', $this->config->db->prefix, $sql);
+             $sql = str_replace('eps_', $this->config->db->prefix, $sql);
              $sql = preg_replace('/IF EXISTS /i', '', trim($sql));
              if(preg_match('/TABLE +`?([^` ]*)`?/i', $sql, $out))
              {
@@ -955,9 +955,9 @@ class packageModel extends model
       */
      public function checkDepends($package)
      {
-         $result        = array();
+         $result      = array();
          $packageInfo = $this->dao->select('*')->from(TABLE_PACKAGE)->where('code')->eq($package)->fetch();
-         $dependsExts   = $this->dao->select('*')->from(TABLE_PACKAGE)->where('depends')->like("%$package%")->andWhere('status')->ne('available')->fetchAll();
+         $dependsExts = $this->dao->select('*')->from(TABLE_PACKAGE)->where('depends')->like("%$package%")->andWhere('status')->ne('available')->fetchAll();
          if($dependsExts)
          {
              foreach($dependsExts as $dependsExt)
