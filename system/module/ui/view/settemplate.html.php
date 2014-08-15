@@ -15,7 +15,7 @@
 <div class='panel'>
   <div class='panel-heading'>
     <strong><?php echo $lang->ui->setTemplate;?></strong>
-    <div class='panel-actions'><?php echo html::a(inlink('installTemplate'), $lang->ui->installTemplate, "class='btn btn-primary iframe' data-toggle='modal'")?></div>
+    <div class='panel-actions'><?php echo html::a(inlink('installTemplate'), $lang->ui->installTemplate, "class='btn btn-primary iframe' data-toggle='modal' data-width='600'")?></div>
   </div>
   <div class='panel-body'>
     <div class='cards cards-templates' data-template='<?php echo $this->config->site->template?>' data-theme='<?php echo $this->config->site->theme?>'>
