@@ -451,4 +451,17 @@ class blockModel extends model
 
         return array('result' => 'success');
     }
+
+    /**
+     * Load language from a template.
+     * 
+     * @param  string $template
+     * @access public
+     * @return void
+     */
+    public function loadTemplateLang($template)
+    {
+        $this->config->site->template = $template;
+        $this->app->loadLang('block');
+    }
 }

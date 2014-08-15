@@ -23,16 +23,17 @@ class block extends control
      */
     public function admin($template = '', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
+        if(!$template) $template = $this->config->site->template;
+
+        $this->block->loadTemplateLang($template);
+
         $this->session->set('blockList', $this->app->getURI());
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $currentTemplate = $template;
-        if(!$currentTemplate) $currentTemplate = $this->config->site->template ? $this->config->site->template : 'default';
-
-        $this->view->currentTemplate = $currentTemplate;
+        $this->view->currentTemplate = $template;
         $this->view->templates       = $this->loadModel('ui')->getTemplates();
-        $this->view->blocks          = $this->block->getList($currentTemplate, $pager);
+        $this->view->blocks          = $this->block->getList($template, $pager);
         $this->view->title           = $this->lang->block->common;
         $this->view->pager           = $pager;
         $this->display();
@@ -47,10 +48,11 @@ class block extends control
      */
     public function pages($template = '')
     {
-        $currentTemplate = $template;
-        if(!$currentTemplate) $currentTemplate = $this->config->site->template ? $this->config->site->template : 'default';
+        if(!$template) $template = $this->config->site->template;
 
-        $this->view->currentTemplate = $currentTemplate;
+        $this->block->loadTemplateLang($template);
+
+        $this->view->currentTemplate = $template;
         $this->view->templates       = $this->loadModel('ui')->getTemplates();
         $this->display();       
     }
@@ -63,8 +65,12 @@ class block extends control
      * @access public
      * @return void
      */
-    public function create( $template = 'default', $type = 'html')
+    public function create( $template = '', $type = 'html')
     {
+        if(!$template) $template = $this->config->site->template;
+
+        $this->block->loadTemplateLang($template);
+
         if($_POST)
         {
             $this->block->create($template);
@@ -95,6 +101,10 @@ class block extends control
      */
     public function edit($template = 'default', $blockID, $type = '')
     {
+        if(!$template) $template = $this->config->site->template;
+
+        $this->block->loadTemplateLang($template);
+
         if(!$blockID) $this->locate($this->inlink('admin'));
 
         if($_POST)
@@ -128,6 +138,10 @@ class block extends control
      */
     public function setRegion($page, $region, $template)
     {
+        if(!$template) $template = $this->config->site->template;
+
+        $this->block->loadTemplateLang($template);
+
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             $result = $this->block->setRegion($page, $region, $template);
