@@ -246,7 +246,7 @@ class control
 
     //-------------------- View related methods --------------------//
    
-     /**
+    /**
      * Set the view file, thus can use fetch other module's page.
      * 
      * @param  string   $moduleName    module name
@@ -256,7 +256,6 @@ class control
      */
     private function setViewFile($moduleName, $methodName)
     {
-
         $moduleName = strtolower(trim($moduleName));
         $methodName = strtolower(trim($methodName));
 
@@ -287,7 +286,6 @@ class control
         if(!empty($extHookFiles)) return array('viewFile' => $viewFile, 'hookFiles' => $extHookFiles);
 
         return $viewFile;
-
     }
 
     /**

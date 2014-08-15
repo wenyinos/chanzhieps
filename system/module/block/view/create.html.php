@@ -42,8 +42,8 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
             <?php echo html::input('title', strpos(',html,htmlcode,featuredProduct,phpcode,', $type) == false ?  $lang->block->$template->typeList[$type] : '', "class='form-control'");?></div>
             <?php else:?>
             <div class='row'>
-              <div class='col-sm-6'><?php echo html::input('title', strpos(',html,htmlcode,featuredProduct,', $type) == false ?  $lang->block->$template->typeList[$type] : '', "class='form-control'");?></div>
-              <div class='col-sm-6'>
+              <div class='col-sm-5'><?php echo html::input('title', strpos(',html,htmlcode,featuredProduct,', $type) == false ?  $lang->block->$template->typeList[$type] : '', "class='form-control'");?></div>
+              <div class='col-sm-7'>
                 <div class='colorplate clearfix'>
                   <div class='input-group color active'>
                     <span class='input-group-btn'>
@@ -98,48 +98,52 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
         <tr>
           <th><?php echo $lang->block->color;?></th>
           <td>
-            <div class='colorplate clearfix'>
-              <div class='input-group color active'>
-                <span class='input-group-btn'>
-                  <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
-                    <?php echo $lang->block->backgroundColor;?><span class='caret'></span>
-                  </button>
-                  <div class='dropdown-menu colors'><?php echo $colorPlates; ?></div>
-                </span>
-                <?php echo html::input('params[backgroundColor]', '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
+            <div class='input-group'>
+              <div class='colorplate clearfix'>
+                <div class='input-group color active'>
+                  <span class='input-group-btn'>
+                    <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
+                      <?php echo $lang->block->backgroundColor;?><span class='caret'></span>
+                    </button>
+                    <div class='dropdown-menu colors'><?php echo $colorPlates; ?></div>
+                  </span>
+                  <?php echo html::input('params[backgroundColor]', '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
+                </div>
+              </div>
+              <div class='colorplate'>
+                <div class='input-group color active'>
+                  <span class='input-group-btn'>
+                    <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
+                      <?php echo $lang->block->borderColor;?><span class='caret'></span>
+                    </button>
+                    <div class='dropdown-menu colors'><?php echo $colorPlates; ?></div>
+                  </span>
+                  <?php echo html::input('params[borderColor]', '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
+                </div>
               </div>
             </div>
-            <div class='colorplate clearfix'>
-              <div class='input-group color active'>
-                <span class='input-group-btn'>
-                  <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
-                    <?php echo $lang->block->textColor;?><span class='caret'></span>
-                  </button>
-                  <div class='dropdown-menu colors'><?php echo $colorPlates; ?></div>
-                </span>
-                <?php echo html::input('params[textColor]', '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
+            <div class='input-group'>
+              <div class='colorplate clearfix'>
+                <div class='input-group color active'>
+                  <span class='input-group-btn'>
+                    <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
+                      <?php echo $lang->block->textColor;?><span class='caret'></span>
+                    </button>
+                    <div class='dropdown-menu colors'><?php echo $colorPlates; ?></div>
+                  </span>
+                  <?php echo html::input('params[textColor]', '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
+                </div>
               </div>
-            </div>
-            <div class='colorplate clearfix'>
-              <div class='input-group color active'>
-                <span class='input-group-btn'>
-                  <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
-                    <?php echo $lang->block->borderColor;?><span class='caret'></span>
-                  </button>
-                  <div class='dropdown-menu colors'><?php echo $colorPlates; ?></div>
-                </span>
-                <?php echo html::input('params[borderColor]', '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
-              </div>
-            </div>
-            <div class='colorplate clearfix'>
-              <div class='input-group color active'>
-                <span class='input-group-btn'>
-                  <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
-                    <?php echo $lang->block->linkColor;?><span class='caret'></span>
-                  </button>
-                  <div class='dropdown-menu colors'><?php echo $colorPlates; ?></div>
-                </span>
-                <?php echo html::input('params[linkColor]', '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
+              <div class='colorplate clearfix'>
+                <div class='input-group color active'>
+                  <span class='input-group-btn'>
+                    <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
+                      <?php echo $lang->block->linkColor;?><span class='caret'></span>
+                    </button>
+                    <div class='dropdown-menu colors'><?php echo $colorPlates; ?></div>
+                  </span>
+                  <?php echo html::input('params[linkColor]', '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
+                </div>
               </div>
             </div>
           </td>
