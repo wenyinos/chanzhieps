@@ -97,4 +97,3 @@ if(isset($this->config->site->basestyle)) css::internal($this->config->site->bas
 ?>
 </head>
 <body>
-<!--[if lt IE 8]><?php echo $lang->IE6Alert;?><![endif]-->

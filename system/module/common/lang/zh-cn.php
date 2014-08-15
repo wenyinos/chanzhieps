@@ -27,22 +27,6 @@ $lang->agreement        = "已阅读并同意<a href='http://api.chanzhi.org/got
 $lang->poweredBy        = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>{$lang->chanzhiEPSx} %s</a></span>";
 $lang->newVersion       = "提示：蝉知系统已于 <span id='releaseDate'></span> 发布 <span id='version'></span>版本。<a href='' target='_blank' id='upgradeLink'>马上下载</a>";
 
-/* IE6 alert.  */
-$lang->IE6Alert= <<<EOT
-<div class='container'>
-    <div class='alert alert-danger' style='margin:100px 0;'>
-      <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-      <h2>请使用现代浏览器来使用本站功能。</h2>
-      <p>您当前所使用的Internet Explorer(IE)浏览器版本过于古老（由微软在10年前发行），已经无法体验现代丰富多彩的互联网。我们强烈建议您升级到新版本的IE11，或者选择一个全新的现代浏览器。这一切都是免费的！</p><br>
-      <a href='http://windows.microsoft.com/ie' class='btn btn-danger' target='_blank'><i class='icon-ie'></i> 获取IE最新版</a>
-      <a href='http://www.google.com/chrome' class='btn' target='_blank'><i class='icon-chrome'></i> 谷歌浏览器</a>
-      <a href='http://www.firefox.com/' class='btn' target='_blank'><i class='icon-firefox'></i> 火狐浏览器</a>
-      <a href='http://www.opera.com/' class='btn' target='_blank'><i class='icon-opera'></i> Opera浏览器</a>
-      <a href='http://browsehappy.com/' target='_blank' class='btn btn-link alert-link'>了解更多...</a>
-    </div>
-</div>
-EOT;
-
 /* Global lang items. */
 $lang->home           = '首页';
 $lang->welcome        = '欢迎您，<strong>%s</strong>！';
