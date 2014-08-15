@@ -389,6 +389,7 @@ INSERT INTO `eps_layout` (`page`, `region`, `blocks`, `template`) VALUES
 ('index_index', 'top', '[{"id":"5","grid":"","titleless":0,"borderless":0}]', 'default'),
 ('index_index', 'middle', '[{"id":3,"grid":12,"titleless":0,"borderless":0},{"id":"10","grid":4,"titleless":0,"borderless":0},{"id":"1","grid":4,"titleless":0,"borderless":0},{"id":"9","grid":4,"titleless":0,"borderless":0}]', 'default'),
 ('index_index', 'bottom', '[{"id":"11","grid":"","titleless":0,"borderless":0}]', 'default'),
+('company_index', 'side', '[{"id":"9","grid":"","titleless":0,"borderless":0},{"id":"13","grid":"","titleless":0,"borderless":0}]', 'default'),
 ('article_browse', 'side', '[{"id":"6","grid":"","titleless":0,"borderless":0},{"id":"9","grid":"","titleless":0,"borderless":0}]', 'default'),
 ('article_view', 'side', '[{"id":"6","grid":"","titleless":0,"borderless":0},{"id":"9","grid":"","titleless":0,"borderless":0}]', 'default'),
 ('product_browse', 'side', '[{"id":"4","grid":"","titleless":0,"borderless":0},{"id":"7","grid":"","titleless":0,"borderless":0},{"id":"9","grid":"","titleless":0,"borderless":0}]', 'default'),

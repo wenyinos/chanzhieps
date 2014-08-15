@@ -474,6 +474,46 @@ class upgradeModel extends model
     }   
 
     /**
+     * Set company blocks.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setCompanyBlocks()
+    {
+        $wechatBlocks = array();
+        $wechatBlocks['en']    = array('type' => 'wechat', 'title' => 'Follow Us', 'content' => '', 'template' => 'default');
+        $wechatBlocks['zh-cn'] = array('type' => 'wechat', 'title' => '关注我们',  'content' => '', 'template' => 'default');
+        $wechatBlocks['zh-tw'] = array('type' => 'wechat', 'title' => '關注我們',  'content' => '', 'template' => 'default');
+        $wechatBlock = $wechatBlocks[$this->config->site->lang];
+        $this->dao->insert(TABLE_BLOCK)->data($wechatBlock)->exec();
+        $wechatBlockID = $this->dao->lastInsertID();
+
+        $contactBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('type')->eq('contact')->fetchAll('template');
+
+        foreach($contactBlocks as $template => $block)
+        {
+            $companyBlocks = array();
+            $contactBlock  = array();
+            $wechatBlock   = array();
+
+            $contactBlock['id'] = $block->id;
+            $wechatBlock['id']  = $wechatBlockID;
+            $companyBlocks[]    = $contactBlock;
+            $companyBlocks[]    = $wechatBlock;
+
+            $this->dao->insert(TABLE_LAYOUT)
+                ->set('page')->eq('company_index')
+                ->set('region')->eq('side')
+                ->set('blocks')->eq(json_encode($companyBlocks))
+                ->set('template')->eq($template)
+                ->exec();
+        }
+
+        return !dao::isError();
+    }   
+
+    /**
      * Process site desc data.
      * 
      * @access public
