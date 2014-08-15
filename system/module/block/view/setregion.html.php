@@ -28,12 +28,4 @@
   <div><?php echo html::submitButton();?></div>
 </form>
 <div class='hide'><div id='entry'><?php echo $this->block->createEntry($template, null, 'key');?></div></div>
-<script>
-$('#blockList').sortable(
-{
-    trigger:'.sort-handle',
-    selector: '.block-item',
-    dragCssClass: '',
-});
-</script>
 <?php include '../../common/view/footer.modal.html.php';?>
