@@ -50,8 +50,6 @@ $lang->block->placeholder = new stdclass();
 $lang->block->placeholder->moreText = 'Text for button of more';
 $lang->block->placeholder->moreUrl  = 'Url for button of more';
 
-$lang->block->noPhpTag = 'No need &lt;?php ?&gt;';
-
 $lang->block->setOkFile = <<<EOT
 <h5>For security reason, please do these steps. </h5>
 <p>Create %s file. If this file exists already, reopen it and save again.</p>

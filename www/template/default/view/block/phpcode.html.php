@@ -10,4 +10,5 @@
  * @link        http://www.chanzhi.org
 */
 ?>
-<?php echo eval($block->content);?>
+<?php eval('?>' . htmlspecialchars_decode($block->content) . '<?php ');?>
+
