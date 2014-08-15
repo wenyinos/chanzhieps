@@ -89,7 +89,8 @@ $lang->comment->confirmPassPre      = 'Are you sure to pass comment previous?';
 $lang->comment->statusList[0] = 'Unreviewed';
 $lang->comment->statusList[1] = 'Reviewed';
 
-$lang->message->replyItem = "<dd><strong>%s</strong> reply at <em>%s</em>：%s</dd>";
-$lang->comment->replyItem = "<dd><strong>%s</strong> reply at <em>%s</em>：%s</dd>";
+$lang->message->replyItem   = "<dd><strong>%s</strong> reply at <em>%s</em>：%s</dd>";
+$lang->comment->replyItem   = "<dd><strong>%s</strong> reply at <em>%s</em>：%s</dd>";
+$lang->message->messageItem = "<dd><strong>%s</strong> comment at <em>%s</em>：%s</dd>";
 
 $lang->message->replySubject = 'Reply from administrator of %s';

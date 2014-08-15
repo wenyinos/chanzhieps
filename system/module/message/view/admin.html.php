@@ -47,11 +47,12 @@
             $objectViewLink = "<span class='alert-error'>{$lang->comment->deletedObject}</span>";
         }
 
+        $commentTo = $message->type == 'reply' ? $lang->message->reply : $lang->comment->commentTo;
+
         $config->requestType = 'GET';
         echo <<<EOT
         <i class='icon-user'></i> <strong>$message->from</strong> &nbsp; <i class='icon-envelope green icon'></i> $message->email &nbsp; 
-        <span class='gray'>$message->date</span> &nbsp; {$lang->comment->commentTo}
-        $objectViewLink
+        <span class='gray'>$message->date</span> &nbsp; $commentTo $objectViewLink
 EOT;
         ?>
       </td>
@@ -77,8 +78,12 @@ EOT;
     </tr>
     <tr>
       <td class='content-box'>
+            
+        <?php if($message->type == 'reply'):?>
+          <dl class='alert alert-info'><?php $this->message->getObject($message);?></dl>
+        <?php endif;?>
         <?php echo html::textarea('', $message->content, "rows='2' class='form-control borderless' spellcheck='false'");?>
-        <?php $this->message->getAdminReplies($message);?>
+        <?php if($message->type != 'reply') $this->message->getAdminReplies($message);?>
       </td>
     </tr>
     <?php endforeach;?>

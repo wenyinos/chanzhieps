@@ -139,6 +139,19 @@ class messageModel extends model
     }
 
     /**
+     * Get object of a message. 
+     * 
+     * @param  object  $message 
+     * @access public
+     * @return array
+     */
+    public function getObject($message)
+    {
+        $object = $this->dao->select('*')->from(TABLE_MESSAGE)->where('id')->eq($message->objectID)->fetch();
+        printf($this->lang->message->messageItem, $object->from, $object->date, $object->content);
+    }
+
+    /**
      * Get message list.
      * 
      * @param string $type      the message type
