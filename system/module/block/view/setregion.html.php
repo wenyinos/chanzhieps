@@ -13,12 +13,12 @@
 <?php include '../../common/view/header.modal.html.php';?>
 <?php js::set('key', count($blocks));?>
 <form id='ajaxForm' action="<?php echo inlink('setregion', "page={$page}&region={$region}&template={$template}");?>" method='post'>
-  <table class='table table-striped table-form'>
+  <table class='table mgb-0'>
     <thead>
       <tr>
-        <th class='text-center col-xs-7'><?php echo $lang->block->title;?></th>
+        <th class='text-center col-xs-8'><?php echo $lang->block->title;?></th>
         <th class='text-center col-xs-2'><?php echo $lang->block->grid;?></th>
-        <th class='text-center col-xs-3'><?php echo $lang->actions;?></th>
+        <th class='text-center col-xs-2'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
   </table>
@@ -28,4 +28,6 @@
   <div><?php echo html::submitButton();?></div>
 </form>
 <div class='hide'><div id='entry'><?php echo $this->block->createEntry($template, null, 'key');?></div></div>
+</div>
+<div class='modal-footer'>
 <?php include '../../common/view/footer.modal.html.php';?>

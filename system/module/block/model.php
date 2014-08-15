@@ -34,10 +34,9 @@ class blockModel extends model
      * @access public
      * @return array
      */
-    public function getList($template = 'default', $pager)
+    public function getList($template, $pager)
     {
-        $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('template')->eq($template)->orderBy('id_desc')->page($pager)->fetchAll('id');
-        return $blocks;
+        return $this->dao->select('*')->from(TABLE_BLOCK)->where('template')->eq($template)->orderBy('id_desc')->page($pager)->fetchAll('id');
     }
 
     /**
@@ -51,7 +50,10 @@ class blockModel extends model
     public function getPageBlocks($module, $method)
     {
         $pages      = "all,{$module}_{$method}";
-        $rawLayouts = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->in($pages)->andWhere('template')->eq(isset($this->config->site->template) ? $this->config->site->template : 'default')->fetchGroup('page', 'region');
+        $rawLayouts = $this->dao->select('*')->from(TABLE_LAYOUT)
+            ->where('page')->in($pages)
+            ->andWhere('template')->eq(!empty($this->config->site->template) ? $this->config->site->template : 'default')
+            ->fetchGroup('page', 'region');
 
         $blocks = array();
         foreach($rawLayouts as $page => $pageBlocks)

@@ -154,7 +154,7 @@ class block extends control
         if(empty($blocks)) $blocks = array(new stdclass());
 
         $this->view->title        = "<i class='icon-cog'></i>" . $this->lang->block->setPage . ' - '. $this->lang->block->{$template}->pages[$page] . ' - ' . $this->lang->block->$template->regions->{$page}[$region];
-        $this->view->modalWidth   = 700;
+        $this->view->modalWidth   = 800;
         $this->view->page         = $page;
         $this->view->region       = $region;
         $this->view->blocks       = $blocks;
