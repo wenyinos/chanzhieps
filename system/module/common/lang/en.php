@@ -27,22 +27,6 @@ $lang->agreement        = "Agree to the <a href='http://api.chanzhi.org/goto.php
 $lang->poweredBy        = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>{$lang->chanzhiEPSx} %s</a></span>";
 $lang->newVersion       = "Notice: ChanzhiEPS has been upgraded to version: <span id='version'></span> at <span id='releaseDate'></span>. <a href='' target='_blank' id='upgradeLink'>DownLoad Now</a>";
 
-/* IE6 alert.  */
-$lang->IE6Alert= <<<EOT
-<div class='container'>
-    <div class='alert alert-danger' style='margin:100px 0;'>
-      <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-      <h2>Please use IE(>8), firefox, chrome, safari, opera to visit this site.</h2>
-      <p>Internet Explorer (IE) browser that you are using is too old (issued by the Microsoft 10 years ago), it has been unable to experience the colorful internet. We strongly recommend that you upgrade to IE11 or select a new modern browser.</p>
-      <a href='http://windows.microsoft.com/ie' class='btn btn-danger' target='_blank'><i class='icon-ie'></i> Get latest IE</a>
-      <a href='http://www.google.com/chrome' class='btn' target='_blank'><i class='icon-chrome'></i> Chrome</a>
-      <a href='http://www.firefox.com/' class='btn' target='_blank'><i class='icon-firefox'></i> Firefox</a>
-      <a href='http://www.opera.com/' class='btn' target='_blank'><i class='icon-opera'></i> Opera</a>
-      <a href='http://browsehappy.com/' target='_blank' class='btn btn-link alert-link'>Learn more...</a>
-    </div>
-</div>
-EOT;
-
 /* Global lang items. */
 $lang->home           = 'Home';
 $lang->welcome        = 'Welcome, <strong>%s</strong>!';
