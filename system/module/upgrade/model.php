@@ -808,7 +808,7 @@ class upgradeModel extends model
      */
     public function createIndexFile($path = null)
     {
-        if(empty($path)) $path = $this->app->getDataRoot() . 'upload'
+        if(empty($path)) $path = $this->app->getDataRoot() . 'upload';
 
         $scanDir   = dir($path);
         $indexFile = $path . DS . "index.php";
