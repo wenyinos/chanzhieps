@@ -36,6 +36,8 @@ $lang->block->textColor       = 'Text Color';
 $lang->block->borderColor     = 'Border Color';
 $lang->block->linkColor       = 'Link Color';
 $lang->block->iconColor       = 'Icon Color';
+$lang->block->customStyle     = 'Custom style';
+$lang->block->customStyleTip  = 'Change block color and background here.';
 
 $lang->block->add          = "Add";
 $lang->block->template     = "Template";

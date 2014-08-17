@@ -36,6 +36,8 @@ $lang->block->textColor       = '文字颜色';
 $lang->block->borderColor     = '边框颜色';
 $lang->block->linkColor       = '链接颜色';
 $lang->block->iconColor       = '图标颜色';
+$lang->block->customStyle     = '自定义样式';
+$lang->block->customStyleTip  = '在这里调整区块的颜色及背景';
 
 $lang->block->add          = "添加";
 $lang->block->template     = "模板";

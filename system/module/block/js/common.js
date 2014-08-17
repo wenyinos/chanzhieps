@@ -44,4 +44,51 @@ $(function()
             location.href = createLink('block', 'create');
         });
     }
+
+    var $panelPreview = $('#panelPreview > .panel');
+    $('#title').change(function()
+    {
+        $panelPreview.find('.title').text($(this).val());
+    });
+
+    $('[name="params\\[icon\\]"]').change(function()
+    {
+        $panelPreview.find('.icon').attr('class', 'icon ' + ($(this).val() || 'icon-heart-empty'));
+    }).change();
+
+    $('[name="params\\[iconColor\\]"]').change(function()
+    {
+        $panelPreview.find('.icon').css('color', $(this).val());
+    }).change();
+
+    $('[name="params\\[titleColor\\]"]').change(function()
+    {
+        $panelPreview.find('.title').css('color', $(this).val());
+    }).change();
+
+    $('[name="params\\[titleBackground\\]"]').change(function()
+    {
+        $panelPreview.find('.panel-heading').css('background', $(this).val());
+    }).change();
+
+    $('[name="params\\[backgroundColor\\]"]').change(function()
+    {
+        $panelPreview.css('background', $(this).val());
+    }).change();
+
+    $('[name="params\\[textColor\\]"]').change(function()
+    {
+        $panelPreview.find('.panel-body').css('color', $(this).val());
+    }).change();
+
+    $('[name="params\\[borderColor\\]"]').change(function()
+    {
+        $panelPreview.css('border-color', $(this).val());
+        $panelPreview.find('.panel-heading').css('border-bottom-color', $(this).val());
+    }).change();
+
+    $('[name="params\\[linkColor\\]"]').change(function()
+    {
+        $panelPreview.find('a').css('color', $(this).val());
+    }).change();
 });
