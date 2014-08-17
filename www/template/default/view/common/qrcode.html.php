@@ -1,6 +1,6 @@
 <?php $publicList = $this->loadModel('wechat')->getList();?>
 <div id='rightDocker' class='hidden-xs'>
-  <?php if(!empty($public) or extension_loaded('gd')):?>
+  <?php if(!empty($publicList) or extension_loaded('gd')):?>
   <button id='rightDockerBtn' class='btn' data-toggle="popover" data-placement="left" data-target='$next'><i class='icon-qrcode'></i></button>
   <?php endif;?>
   <div class='popover fade'>
@@ -12,7 +12,7 @@
           <?php if(!$public->qrcode) continue;?>
           <td>
             <div class='heading'><i class='icon-weixin'>&nbsp;</i> <?php echo $public->name;?></div>
-            <?php echo html::image('javascript;', "data-src='{$public->qrcode}' width='200' height='200'");?>
+            <?php echo html::image('javascript:;', "data-src='{$public->qrcode}' width='200' height='200'");?>
           </td>
           <?php endforeach;?>
           <?php if(extension_loaded('gd')):?>
