@@ -194,13 +194,13 @@ $lang->forum->menu->update = '更新数据|forum|update|';
 /* Menu of site module. */
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
-$lang->site->menu->basic   = '站点设置|site|setbasic|';
-$lang->site->menu->nav     = '导航设置|nav|admin|';
-$lang->site->menu->tag     = '关键词设置|tag|admin|';
-$lang->site->menu->oauth   = '开放登录|site|setoauth|';
-$lang->site->menu->link    = '友情链接|links|admin|';
-$lang->site->menu->mail    = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->site->menu->wechat  = array('link' => '微信设置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
+$lang->site->menu->basic  = '站点设置|site|setbasic|';
+$lang->site->menu->nav    = '导航设置|nav|admin|';
+$lang->site->menu->tag    = '关键词设置|tag|admin|';
+$lang->site->menu->oauth  = '开放登录|site|setoauth|';
+$lang->site->menu->link   = '友情链接|links|admin|';
+$lang->site->menu->mail   = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->site->menu->wechat = array('link' => '微信设置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
 
 /* Menu of company module. */
 $lang->company->menu = new stdclass();
