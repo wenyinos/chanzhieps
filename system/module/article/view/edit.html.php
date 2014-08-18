@@ -56,7 +56,7 @@
           </div>
         </td>
       </tr>
-      <tr class='link hidden'>
+      <tr class='link'>
         <th><?php echo $lang->article->link;?></th>
         <td colspan='2'>
           <div class='required required-wrapper'></div>

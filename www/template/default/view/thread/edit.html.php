@@ -57,7 +57,7 @@
         </div>
         <div class='form-group hiding' id='captchaBox'></div>
       </div>
-      <div class='form-group link hidden'>
+      <div class='form-group link'>
         <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->thread->link;?></label>
         <div class='col-md-11 col-sm-10 required'><?php echo html::input('link', $thread->link, "class='form-control' placeholder='{$lang->thread->placeholder->link}'");?></div>
       </div>
