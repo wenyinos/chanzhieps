@@ -119,7 +119,7 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
                     <div class='input-group color active' data="<?php echo isset($block->content->titleColor) ? $block->content->titleColor : ''?>">
                       <span class='input-group-btn'>
                         <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
-                          <?php echo $lang->block->title . ' ' . $lang->block->color;?> <span class='caret'></span>
+                          <?php echo $lang->block->textColor;?> <span class='caret'></span>
                         </button>
                         <div class='dropdown-menu colors'><?php echo $colorPlates; ?></div>
                       </span>
@@ -132,7 +132,7 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
                     <div class='input-group color active' data="<?php echo isset($block->content->titleBackground) ? $block->content->titleBackground : ''?>">
                       <span class='input-group-btn'>
                         <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
-                          <?php echo $lang->block->title . ' ' . $lang->block->backgroundColor;?> <span class='caret'></span>
+                          <?php echo $lang->block->backgroundColor;?> <span class='caret'></span>
                         </button>
                         <div class='dropdown-menu colors'><?php echo $colorPlates; ?></div>
                       </span>
