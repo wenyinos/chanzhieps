@@ -49,6 +49,7 @@ class file extends control
      */
     public function ajaxUpload($uid)
     {
+        if(RUN_MODE == 'front' and !commonModel::isAvailable('forum')) exit;
         $file = $this->file->getUpload('imgFile');
         $file = $file[0];
         if($file)

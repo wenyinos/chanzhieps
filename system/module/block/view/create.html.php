@@ -111,7 +111,7 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
                 </td>
               </tr>
               <?php endif;?>
-              <?php if($type !== 'wechat' and $type !== 'featuredProduct'):?>
+              <?php if($type != 'featuredProduct'):?>
               <tr>
                 <th class='w-80px'><?php echo $lang->block->heading;?></th>
                 <td>
@@ -141,6 +141,8 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
                   </div>
                 </td>
               </tr>
+              <?php endif;?>
+              <?php if($type != 'followUs'):?>
               <tr>
                 <th class='w-80px'><?php echo $lang->block->content;?></th>
                 <td>
