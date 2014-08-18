@@ -62,4 +62,10 @@ $(function()
     });
 
     $('input:radio[name="backgroundType"]').change();
+
+    $(document).on('change', '.button-target', function()
+    { 
+        $('.button-target').parent().next('input[type=hidden]').val('');
+        $('input:checked').parent().next('input[type=hidden]').val('_blank');
+    });
 });

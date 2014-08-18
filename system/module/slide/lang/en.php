@@ -17,6 +17,7 @@ $lang->slide->mainLink   = 'Url';
 $lang->slide->summary    = 'Summary';
 $lang->slide->label      = 'Label';
 $lang->slide->button     = 'Button';
+$lang->slide->newWindow  = 'New window';
 
 $lang->slide->background = new stdclass();
 
@@ -41,9 +42,10 @@ $lang->slide->admin    = 'Admin';
 $lang->slide->create   = 'Add';
 $lang->slide->edit     = 'Edit';
 
-$lang->slide->targetList['_self']  = 'Active window';
-$lang->slide->targetList['_blank'] = 'New window';
-
 $lang->slide->successSort     = 'Order data saved.';
 $lang->slide->noImageSelected = 'No images selected';
 $lang->slide->suitableSize    = "You'd better use pictures of same size，<i class='text-muted'>1140px X 270px</i> recommended.";
+
+/* Targets setting. */
+$lang->slide->target = new stdclass();
+$lang->slide->target->_blank = 'New window';

@@ -17,6 +17,7 @@ $lang->slide->mainLink   = '链接';
 $lang->slide->summary    = '摘要';
 $lang->slide->label      = '按钮文字';
 $lang->slide->button     = '按钮';
+$lang->slide->newWindow  = '新开窗口';
 
 $lang->slide->background = new stdclass();
 
@@ -41,9 +42,10 @@ $lang->slide->admin    = '幻灯片设置';
 $lang->slide->create   = '添加幻灯片';
 $lang->slide->edit     = '编辑幻灯片';
 
-$lang->slide->targetList['_self']  = '当前窗口';
-$lang->slide->targetList['_blank'] = '新开窗口';
-
 $lang->slide->successSort     = '排序成功保存';
 $lang->slide->noImageSelected = '没有选择图片';
 $lang->slide->suitableSize    = '所有图片尺寸保持一致，最佳尺寸：1140px X 270px(宽 X 高)';
+
+/* Targets setting. */
+$lang->slide->target = new stdclass();
+$lang->slide->target->_blank = '新开窗口';

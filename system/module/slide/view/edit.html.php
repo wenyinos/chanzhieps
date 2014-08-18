@@ -45,7 +45,14 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
         <tr>
           <th><?php echo $lang->slide->mainLink;?></th>
           <td><?php echo html::input('mainLink', $slide->mainLink, "class='form-control'");?></td>
-          <td><div class='w-200px'><?php echo html::select('target', $lang->slide->targetList, $slide->target, "class='form-control'");?></div></td><td></td>
+          <td>
+            <div class='w-100px'>
+              <label class='checkbox'>
+                <?php $checked = (isset($slide->target) and $slide->target) ? 'checked' : '';?>
+                <?php echo "<input type='checkbox' name='target' id='target' value='1' $checked /><span>{$lang->slide->newWindow}</span>" ?>
+              </label>
+            </div>
+          </td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->slide->background->type;?></th>
@@ -107,7 +114,7 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
             </div>
           </td>
           <td><?php echo html::input('buttonUrl[0]', '', "class='form-control' placeholder='{$lang->slide->buttonUrl}'");?></td>
-          <td><?php echo html::select('buttontarget[0]', $lang->slide->targetList, '', "class='form-control'");?></td>
+          <td class='w-100px'><?php echo html::checkbox('buttonTarget', $lang->slide->target, '', "class='button-target'") . html::hidden('buttonTarget[0]', '');?></td>
           <td><?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus btn btn-mini'") . html::a('javascript:;', "<i class='icon-remove'></i>", "class='delete btn-mini btn'");?></td>
         </tr>
         <?php else: ?>
@@ -132,7 +139,7 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
             </div>
           </td>
           <td><?php echo html::input("buttonUrl[{$key}]", isset($slide->buttonUrl[$key]) ? $slide->buttonUrl[$key] : '', "class='form-control' placeholder='{$lang->slide->buttonUrl}'");?></td>
-          <td><?php echo html::select("buttonTarget[{$key}]", $lang->slide->targetList, isset($slide->buttonTarget[$key]) ? $slide->buttonTarget[$key] : '', "class='form-control'");?></td>
+          <td class='w-100px'><?php echo html::checkbox('buttonTarget', $lang->slide->target, isset($slide->buttonTarget[$key]) ? $slide->buttonTarget[$key] : '', "class='button-target'") . html::hidden("buttonTarget[$key]", '');?></td>
           <td><?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus btn btn-mini'") . html::a('javascript:;', "<i class='icon-remove'></i>", "class='delete btn-mini btn'");?></td>
         </tr>
         <?php endforeach;?>
@@ -175,7 +182,7 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
           </div>
         </td>
         <td><?php echo html::input('buttonUrl[key]', '', "class='form-control' placeholder='{$lang->slide->buttonUrl}'");?></td>
-          <td><?php echo html::select('buttonTarget[0]', $lang->slide->targetList, '', "class='form-control'");?></td>
+        <td class='w-100px'><?php echo html::checkbox('buttonTarget', $lang->slide->target, '', "class='button-target'") . html::hidden('buttonTarget[0]', '');?></td>
         <td><?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus btn btn-mini'") . html::a('javascript:;', "<i class='icon-remove'></i>", "class='delete btn-mini btn'");?></td>
       </tr>
     </tbody>
