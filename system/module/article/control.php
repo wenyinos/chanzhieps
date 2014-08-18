@@ -36,11 +36,7 @@ class article extends control
     {   
         $category = $this->loadModel('tree')->getByID($categoryID, 'article');
 
-        if($category->link)
-        {
-             header('HTTP/1.1 301 Moved Permanently');
-             die(header('Location:' . $category->link));
-        }
+        if($category->link) helper::header301($category->link);
 
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal = 0, $this->config->article->recPerPage, $pageID);
@@ -204,9 +200,7 @@ class article extends control
         if($article->link)
         {
             $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($articleID)->exec();
-
-            header('HTTP/1.1 301 Moved Permanently');
-            die(header('Location:' . $article->link));
+            helper::header301($article->link);
         }
 
         /* fetch category for display. */
