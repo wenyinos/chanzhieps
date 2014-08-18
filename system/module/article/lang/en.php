@@ -74,4 +74,4 @@ $lang->article->directory = 'List';
 
 $lang->article->placeholder = new stdclass();
 $lang->article->placeholder->addedDate = 'Schedule to Publish the article after this time';
-$lang->article->placeholder->link      = 'Input link, it can be the chain.';
+$lang->article->placeholder->link      = 'Input link, it can be outer chain.';

@@ -29,6 +29,9 @@ $lang->tree->confirmDelete    = "Are you sure to delete it?";
 $lang->tree->successFixed     = "Successfully fixed.";
 $lang->tree->browseByCategory = 'Browse By Category';
 
+$lang->tree->placeholder = new stdclass();
+$lang->tree->placeholder->link = 'Input link, it may be outer chain.';
+
 /* Lang items for article, products. */
 $lang->category = new stdclass();
 $lang->category->common   = 'Category';
@@ -61,9 +64,6 @@ $lang->board->readonlyList[1] = 'Readonly';
 $lang->board->placeholder = new stdclass();
 $lang->board->placeholder->moderators  = "Moderators'account, Separated with" . '","';
 $lang->board->placeholder->setChildren = 'Forum needs tow levels boards.';
-
-$lang->category->placeholder = new stdclass();
-$lang->category->placeholder->link = 'Input link, it may be the chain.';
 
 /* Lang items for wechat menu. */
 $lang->wechatMenu = new stdclass();

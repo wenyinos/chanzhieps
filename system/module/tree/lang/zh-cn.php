@@ -32,7 +32,6 @@ $lang->tree->browseByCategory = '类目浏览';
 $lang->tree->placeholder = new stdclass();
 $lang->tree->placeholder->link = '输入链接，可以是站外链接';
 
-
 /* Lang items for article, products. */
 $lang->category = new stdclass();
 $lang->category->common   = '类目';

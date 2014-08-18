@@ -56,7 +56,7 @@ $lang->thread->readonlyMessage = 'The thread has been set <strong>READONLY</stro
 $lang->thread->successTransfer = 'Successfully Transfered';
 
 $lang->thread->placeholder = new stdclass();
-$lang->thread->placeholder->link = 'Input link, it can be the chain.';
+$lang->thread->placeholder->link = 'Input link, it can be outer chain.';
 
 /* Adjust the pager. */
 if(!isset($lang->pager->settedInForum))
