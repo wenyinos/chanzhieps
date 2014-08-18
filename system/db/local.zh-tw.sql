@@ -10,6 +10,6 @@ INSERT INTO `eps_block` (`id`, `type`, `title`, `content`) VALUES
 (8, 'blogTree', '博客分類', '{"showChildren":"1"}', 'default'),
 (9, 'contact', '聯系我們', '', 'default'),
 (10, 'about', '公司簡介', '', 'default'),
-(11, 'links', '友情鏈接', '', 'default');
-(12, 'header', '網站頭部', '', 'default');
+(11, 'links', '友情鏈接', '', 'default'),
+(12, 'header', '網站頭部', '', 'default'),
 (13, 'followUs', '關注我們', '', 'default');

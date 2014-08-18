@@ -11,5 +11,5 @@ INSERT INTO `eps_block` (`id`, `type`, `title`, `content`) VALUES
 (9, 'contact', 'Contact Us', '', 'default'),
 (10, 'about', 'About Us', '', 'default'),
 (11, 'links', 'Link', '', 'default'),
-(12, 'header', 'Header', '', 'default');
+(12, 'header', 'Header', '', 'default'),
 (13, 'followUs', 'Follow Us', '', 'default');
