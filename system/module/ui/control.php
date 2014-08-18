@@ -14,11 +14,12 @@ class ui extends control
     /**
      * Set template.
      *
-     * @param $template
-     * @param $theme
+     * @param  string   $template 
+     * @param  string   $theme 
+     * @param  bool     $custom 
      * @access public
-     * return void
-     **/
+     * @return void
+     */
     public function setTemplate($template = '', $theme = '', $custom = false)
     {
         $templates = $this->ui->getTemplates();
@@ -143,19 +144,25 @@ class ui extends control
         $this->display();
     }
 
+    /**
+     * Set base style.
+     * 
+     * @access public
+     * @return void
+     */
     public function setBaseStyle()
     {
-        if($_SERVER['REQUEST_METHOD'] == 'POST')
+        if($_POST)
         {
-            $style = fixer::input('post')->stripTags('content', $this->config->allowedTags->admin . '>')->get();
+            $style  = fixer::input('post')->stripTags('content', $this->config->allowedTags->admin . '>')->get();
             $return = $this->loadModel('setting')->setItems('system.common.site', array('basestyle' => $style->content));
 
             if($return) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate'=>inlink('setBaseStyle')));
             if(!$return) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
 
-        $this->view->title = $this->lang->ui->setBaseStyle;
-        $this->view->content  = isset($this->config->site->basestyle) ? $this->config->site->basestyle : '';
+        $this->view->title   = $this->lang->ui->setBaseStyle;
+        $this->view->content = isset($this->config->site->basestyle) ? $this->config->site->basestyle : '';
 
         $this->display();
     }

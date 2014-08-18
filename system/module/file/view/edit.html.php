@@ -16,10 +16,3 @@
   </table>
 </form>
 <?php include '../../common/view/footer.modal.html.php';?>
-<script>
-$(function()
-{
-    $.setAjaxForm('#fileForm', function(data){$.reloadAjaxModal();}); 
-    $('.goback').click(function(){$.reloadAjaxModal();})
-})
-</script>
