@@ -40,7 +40,7 @@
           echo "</div>";
       }
 
-      if(empty($children) and $type == 'forum')
+      if(($type == 'forum') and ($boardChildrenCount == 0))
       {
           echo "<div class='form-group'><div class='col-xs-8 col-md-offset-2'><div class='alert alert-warning'>{$this->lang->board->placeholder->setChildren}</div></div></div>";
       }
