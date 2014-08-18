@@ -91,6 +91,7 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
           </td>
         </tr>
       </table>
+      <?php if(strpos(',htmlcode, phpcode, slide, header', $type) == false or $type == 'html'):?>
       <div id='customPanelModal' class='modal fade'>
         <div class='modal-dialog w-800px'>
           <div class='modal-header'><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><i class='icon-cog'></i> <strong><?php echo $lang->block->custom?></strong></div>
@@ -213,6 +214,7 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
           </div>
         </div>
       </div>
+      <?php endif;?>
     </form>
   </div>
 </div>
