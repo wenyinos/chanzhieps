@@ -51,8 +51,8 @@
           <td colspan='2'><?php echo html::input('keywords', $product->keywords, "class='form-control'");?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->product->summary;?></th>
-          <td colspan='2'><?php echo html::textarea('summary', $product->summary, "rows='2' class='form-control'");?></td>
+          <th><?php echo $lang->product->desc;?></th>
+          <td colspan='2'><?php echo html::textarea('desc', $product->desc, "rows='2' class='form-control'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->product->content;?></th>

@@ -117,8 +117,8 @@ class productModel extends model
             if(!empty($product->image->list)) $product->image->primary = $product->image->list[0];
         }
         
-        /* Assign summary to it's product. */
-        foreach($products as $product) $product->summary = empty($product->summary) ? helper::substr(strip_tags($product->content), 250) : $product->summary;
+        /* Assign desc to it's product. */
+        foreach($products as $product) $product->desc = empty($product->desc) ? helper::substr(strip_tags($product->content), 250) : $product->desc;
 
         return $products;
     }
@@ -244,7 +244,7 @@ class productModel extends model
         $now = helper::now();
         $product = fixer::input('post')
             ->join('categories', ',')
-            ->stripTags('content,summary', $this->config->allowedTags->admin)
+            ->stripTags('content,desc', $this->config->allowedTags->admin)
             ->setDefault('price', 0)
             ->setDefault('amount', 0)
             ->setDefault('promotion', 0)
@@ -287,7 +287,7 @@ class productModel extends model
     {
         $product = fixer::input('post')
             ->join('categories', ',')
-            ->stripTags('content,summary', $this->config->allowedTags->admin)
+            ->stripTags('content,desc', $this->config->allowedTags->admin)
             ->setDefault('price', 0)
             ->setDefault('amount', 0)
             ->setDefault('promotion', 0)

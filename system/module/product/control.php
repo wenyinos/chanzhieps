@@ -240,7 +240,7 @@ class product extends control
 
         $title    = $product->name . ' - ' . $category->name;
         $keywords = $product->keywords . ' ' . $category->keywords . ' ' . $this->config->site->keywords;
-        $desc     = strip_tags($product->summary);
+        $desc     = strip_tags($product->desc);
         
         $this->view->title       = $title;
         $this->view->keywords    = $keywords;
