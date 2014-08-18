@@ -67,11 +67,11 @@ class slideModel extends model
             ->remove('files')
             ->get();
 
-        $slide->label         = array_values($slide->label);
-        $slide->buttonClass   = array_values($slide->buttonClass);
-        $slide->buttonUrl     = array_values($slide->buttonUrl);
-        $slide->buttonTarget  = array_values($slide->buttonTarget);
-        $slide->createdDate   = time();
+        $slide->label        = array_values($slide->label);
+        $slide->buttonClass  = array_values($slide->buttonClass);
+        $slide->buttonUrl    = array_values($slide->buttonUrl);
+        $slide->buttonTarget = array_values($slide->buttonTarget);
+        $slide->createdDate  = time();
         if($slide->backgroundType == 'color')
         {
             $this->dao->insert('slide')->data($slide, 'label,buttonClass,buttonUrl,buttonTarget')->batchCheck($this->config->slide->require->create, 'notempty')->check('height', 'ge', 100);

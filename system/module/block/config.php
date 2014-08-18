@@ -13,6 +13,7 @@ $config->block->defaultIcons = array();
 $config->block->defaultIcons['about']         = 'icon-group';
 $config->block->defaultIcons['html']          = '';
 $config->block->defaultIcons['contact']       = 'icon-phone';
+$config->block->defaultIcons['followUs']      = 'icon-weixin';
 $config->block->defaultIcons['links']         = 'icon-link';
 
 $config->block->defaultIcons['latestArticle'] = 'icon-list-ul';

@@ -27,10 +27,10 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
   <div class='panel-heading'><strong><i class='icon-edit'></i> <?php echo $lang->block->edit;?></strong></div>
   <div class='panel-body'>
     <form method='post' id='ajaxForm'>
-      <?php if(strpos(',htmlcode, phpcode, wechat, featuredProduct, slide, header', $type) == false or $type == 'html'):?>
+      <?php if(strpos(',htmlcode, phpcode, slide, header', $type) == false or $type == 'html'):?>
         <div id='panelPreview'>
           <div class='panel panel-block' data-target='#customPanelModal' data-toggle='modal' >
-            <div class='panel-heading'><i class='icon-heart-empty <?php echo $block->content->icon?> icon'></i> <strong class='title'><?php echo $block->title?></strong></div>
+            <div class='panel-heading'><i class='icon-heart-empty <?php echo isset($block->content->icon) ? $block->content->icon: ''?> icon'></i> <strong class='title'><?php echo $block->title?></strong></div>
             <div class='panel-body text-center'>
               <p><?php echo $lang->block->customStyleTip;?></p>
               <a href='#customPanelModal' data-toggle='modal'><?php echo $lang->block->customStyle; ?>...</a>
@@ -106,7 +106,7 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
                 </div>
               </div>
               <?php endif;?>
-              <?php if($type !== 'wechat'):?>
+              <?php if($type != 'featuredProduct'):?>
               <div class='colorplate'>
                 <div class='input-group color active' data="<?php echo isset($block->content->titleColor) ? $block->content->titleColor : ''?>">
                   <span class='input-group-btn'>

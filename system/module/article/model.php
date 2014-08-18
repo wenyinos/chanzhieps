@@ -292,7 +292,7 @@ class articleModel extends model
 
         $article->keywords = seo::unify($article->keywords, ',');
         $article->alias    = seo::unify($article->alias, '-');
-        $article->content  = $this->deleteHtmlEmptyLine($article->content);
+        $article->content  = $this->rtrimContent($article->content);
 
         $this->dao->insert(TABLE_ARTICLE)
             ->data($article, $skip = 'categories,uid,isLink')
@@ -339,7 +339,7 @@ class articleModel extends model
 
         $article->keywords = seo::unify($article->keywords, ',');
         $article->alias    = seo::unify($article->alias, '-');
-        $article->content  = $this->deleteHtmlEmptyLine($article->content);
+        $article->content  = $this->rtrimContent($article->content);
 
         $this->dao->update(TABLE_ARTICLE)
             ->data($article, $skip = 'categories,uid,isLink')
@@ -450,7 +450,7 @@ class articleModel extends model
      * @access public
      * @return string
      */
-    public function deleteHtmlEmptyLine($content)
+    public function rtrimContent($content)
     {
         /* Delete empty line such as '<p><br /></p>' if article content has it at last */
         $res   = '';
