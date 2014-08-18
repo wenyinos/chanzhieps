@@ -11,13 +11,13 @@ $(document).ready(function()
     {   
         if($(this).prop('checked'))
         {   
-            $('.articleInfo').addClass('hidden');
-            $('.link').removeClass('hidden');
+            $('.articleInfo').hide();
+            $('.link').show();
         }   
         else
         {   
-            $('.articleInfo').removeClass('hidden');
-            $('.link').addClass('hidden');
+            $('.articleInfo').show();
+            $('.link').hide();
         }   
     }); 
     

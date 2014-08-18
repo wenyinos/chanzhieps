@@ -4,13 +4,13 @@ $(document).ready(function()
     {   
         if($(this).prop('checked'))
         {   
-            $('.threadInfo').addClass('hidden');
-            $('.link').removeClass('hidden');
+            $('.threadInfo').hide();
+            $('.link').show();
         }   
         else
         {   
-            $('.threadInfo').removeClass('hidden');
-            $('.link').addClass('hidden');
+            $('.threadInfo').show();
+            $('.link').hide();
         }   
     }); 
 });

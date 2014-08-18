@@ -18,13 +18,13 @@ $(document).ready(function()
     {   
         if($(this).prop('checked'))
         {   
-            $('.categoryInfo').addClass('hidden');
-            $('.link').removeClass('hidden');
+            $('.categoryInfo').hide();
+            $('.link').show();
         }   
         else
         {   
-            $('.categoryInfo').removeClass('hidden');
-            $('.link').addClass('hidden');
+            $('.categoryInfo').show();
+            $('.link').hide();
         }   
     }); 
 
