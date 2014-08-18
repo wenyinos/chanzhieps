@@ -11,5 +11,5 @@ INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`) VALUES
 (9, 'contact', '联系我们', '', 'default'),
 (10, 'about', '公司简介', '', 'default'),
 (11, 'links', '友情链接', '', 'default'),
-(12, 'header', '网站头部', '', 'default');
+(12, 'header', '网站头部', '', 'default'),
 (13, 'followUs', '关注我们', '', 'default');
