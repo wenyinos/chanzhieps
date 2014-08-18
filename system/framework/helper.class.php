@@ -418,6 +418,19 @@ class helper
     {
         return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest';
     }
+
+    /**
+     * Header 301 Moved Permanently.
+     * 
+     * @param  string    $locate 
+     * @access public
+     * @return void
+     */
+    public static function header301($locate)
+    {
+        header('HTTP/1.1 301 Moved Permanently');
+        die(header('Location:' . $locate));
+    }
 }
 
 /**

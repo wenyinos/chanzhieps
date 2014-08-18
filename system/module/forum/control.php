@@ -39,11 +39,7 @@ class forum extends control
         $board = $this->loadModel('tree')->getByID($boardID, 'forum');
         if(!$board) die(js::locate('back'));
 
-        if($board->link)
-        {
-            header('HTTP/1.1 301 Moved Permanently');
-            die(header('Location:' . $board->link)); 
-        }
+        if($board->link) helper::header301($board->link); 
  
         /* Get common threads. */
         $this->app->loadClass('pager', $static = true);

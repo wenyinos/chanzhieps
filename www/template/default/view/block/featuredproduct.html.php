@@ -48,7 +48,7 @@ $url      = helper::createLink('product', 'view', "id={$product->id}", "category
         ?>
         </div>
       </div>
-      <div class='card-content text-muted'><?php echo helper::substr($product->summary, 80);?></div>
+      <div class='card-content text-muted'><?php echo helper::substr($product->desc, 80);?></div>
     </a>
   </div>
 </div>

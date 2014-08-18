@@ -47,11 +47,7 @@ class product extends control
     {  
         $category = $this->loadModel('tree')->getByID($categoryID, 'product');
 
-        if($category && $category->link)
-        {
-             header('HTTP/1.1 301 Moved Permanently');
-             die(header('Location:' . $category->link));
-        }
+        if($category && $category->link) helper::header301($category->link);
 
         $this->app->loadClass('pager', $static = true);
         $pager = new pager(0, $this->config->product->recPerPage, $pageID);
@@ -244,7 +240,7 @@ class product extends control
 
         $title    = $product->name . ' - ' . $category->name;
         $keywords = $product->keywords . ' ' . $category->keywords . ' ' . $this->config->site->keywords;
-        $desc     = strip_tags($product->summary);
+        $desc     = strip_tags($product->desc);
         
         $this->view->title       = $title;
         $this->view->keywords    = $keywords;

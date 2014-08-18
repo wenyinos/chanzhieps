@@ -36,11 +36,7 @@ class blog extends control
  
         if($category)
         {
-            if($category->link)
-            {
-                 header('HTTP/1.1 301 Moved Permanently');
-                 die(header('Location:' . $category->link));
-            }
+            if($category->link) helper::header301($category->link);
 
             $this->view->category = $category;
             $this->view->title    = $category->name;
@@ -65,11 +61,7 @@ class blog extends control
         $article = $this->loadModel('article')->getByID($articleID);
         if(!$article) die($this->fetch('error', 'index'));
 
-        if($article->link)
-        {
-             header('HTTP/1.1 301 Moved Permanently');
-             die(header('Location:' . $article->link));
-        }
+        if($article->link) helper::header301($article->link);
 
         /* fetch category for display. */
         $category = array_slice($article->categories, 0, 1);

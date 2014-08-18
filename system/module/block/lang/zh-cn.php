@@ -36,7 +36,12 @@ $lang->block->textColor       = '文字颜色';
 $lang->block->borderColor     = '边框颜色';
 $lang->block->linkColor       = '链接颜色';
 $lang->block->iconColor       = '图标颜色';
-$lang->block->customStyle     = '自定义样式';
+$lang->block->heading         = '标题栏';
+$lang->block->content         = '内容';
+$lang->block->background      = '背景';
+$lang->block->custom          = '自定义';
+$lang->block->preview         = '样式预览';
+$lang->block->textExample     = '区块文字样式示例，<a href="###">链接示例</a>';
 $lang->block->customStyleTip  = '在这里调整区块的颜色及背景';
 
 $lang->block->add          = "添加";
