@@ -55,6 +55,9 @@ $lang->thread->successUnstick  = '成功取消置頂';
 $lang->thread->readonlyMessage = '該帖已被設置為 <strong>只讀</strong>，您暫時無法發表新的回覆。';
 $lang->thread->successTransfer = '轉移成功';
 
+$lang->thread->placeholder = new stdclass();
+$lang->thread->placeholder->link = '輸入連結，可以是站外連接';
+
 /* Adjust the pager. */
 if(!isset($lang->pager->settedInForum))
 {

@@ -133,13 +133,11 @@ $lang->menuGroups->message = 'feedback';
 $lang->article = new stdclass();
 $lang->article->menu = new stdclass();
 $lang->article->menu->browse = array('link' => '文章列表|article|admin|', 'alias' => 'create, edit');
-$lang->article->menu->tree   = '類目管理|tree|browse|type=article';
 
 /* Menu of blog module. */
 $lang->blog = new stdclass();
 $lang->blog->menu = new stdclass();
 $lang->blog->menu->browse = array('link' => '博客列表|article|admin|type=blog', 'alias' => 'create, edit');
-$lang->blog->menu->tree   = '類目管理|tree|browse|type=blog';
 
 /* Menu of page module. */
 $lang->page = new stdclass();
@@ -151,7 +149,6 @@ $lang->page->menu->create = '添加單頁|article|create|type=page';
 $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
 $lang->product->menu->browse = array('link' => '產品列表|product|admin|', 'alias' => 'create, edit');
-$lang->product->menu->tree   = '類目管理|tree|browse|type=product';
 $lang->product->currency     = '貨幣設置';
 
 /* Menu of UI module. */
@@ -163,7 +160,7 @@ $lang->ui->menu->theme   = '模板設置|ui|settemplate|';
 $lang->ui->menu->slide   = array('link' => '幻燈片設置|slide|admin|', 'alias' => 'create,edit');
 $lang->ui->menu->admin   = array('link' => '區塊管理|block|admin|', 'alias' => 'create,edit');
 $lang->ui->menu->pages   = array('link' => '佈局設置|block|pages|', 'alias' => 'setregion');
-$lang->ui->menu->styles  = '樣式設置|ui|setbasestyle|';
+$lang->ui->menu->styles  = '全局樣式|ui|setbasestyle|';
 
 /* Menu of user module. */
 $lang->user = new stdclass();
@@ -197,13 +194,13 @@ $lang->forum->menu->update = '更新數據|forum|update|';
 /* Menu of site module. */
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
-$lang->site->menu->basic   = '站點設置|site|setbasic|';
-$lang->site->menu->nav     = '導航設置|nav|admin|';
-$lang->site->menu->tag     = '關鍵詞設置|tag|admin|';
-$lang->site->menu->oauth   = '開放登錄|site|setoauth|';
-$lang->site->menu->link    = '友情連結|links|admin|';
-$lang->site->menu->mail    = array('link' => '發信設置|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->site->menu->wechat  = array('link' => '微信設置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
+$lang->site->menu->basic  = '站點設置|site|setbasic|';
+$lang->site->menu->nav    = '導航設置|nav|admin|';
+$lang->site->menu->tag    = '關鍵詞設置|tag|admin|';
+$lang->site->menu->oauth  = '開放登錄|site|setoauth|';
+$lang->site->menu->link   = '友情連結|links|admin|';
+$lang->site->menu->mail   = array('link' => '發信設置|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->site->menu->wechat = array('link' => '微信設置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
 
 /* Menu of company module. */
 $lang->company->menu = new stdclass();

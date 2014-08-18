@@ -116,6 +116,22 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
                 <td></td>
               </tr>
               <?php endif;?>
+              <tr>
+                <th class='w-80px'><?php echo $lang->block->border;?></th>
+                <td>
+                  <div class='colorplate'>
+                    <div class='input-group color active' data="<?php echo isset($block->content->borderColor) ? $block->content->borderColor : ''?>">
+                      <span class='input-group-btn'>
+                        <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
+                          <?php echo $lang->block->borderColor;?><span class='caret'></span>
+                        </button>
+                        <div class='dropdown-menu colors'><?php echo $colorPlates; ?></div>
+                      </span>
+                      <?php echo html::input('params[borderColor]', isset($block->content->borderColor) ? $block->content->borderColor : '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
+                    </div>
+                  </div>
+                </td>
+              </tr>
               <?php if($type !== 'featuredProduct'):?>
               <tr>
                 <th class='w-80px'><?php echo $lang->block->heading;?></th>
@@ -149,7 +165,7 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
               <?php endif;?>
               <?php if($type != 'followUs'):?>
               <tr>
-                <th class='w-80px'><?php echo $lang->block->content;?></th>
+                <th rowspan='2' class='w-80px'><?php echo $lang->block->content;?></th>
                 <td>
                   <div class='colorplate'>
                     <div class='input-group color active' data="<?php echo isset($block->content->textColor) ? $block->content->textColor : ''?>">
@@ -178,7 +194,6 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
                 </td>
               </tr>
               <tr>
-                <th class='w-80px'><?php echo $lang->block->background;?></th>
                 <td>
                   <div class='colorplate'>
                     <div class='input-group color active' data="<?php echo isset($block->content->backgroundColor) ? $block->content->backgroundColor : ''?>">
@@ -189,19 +204,6 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
                         <div class='dropdown-menu colors'><?php echo $colorPlates; ?></div>
                       </span>
                       <?php echo html::input('params[backgroundColor]', isset($block->content->backgroundColor) ? $block->content->backgroundColor : '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class='colorplate'>
-                    <div class='input-group color active' data="<?php echo isset($block->content->borderColor) ? $block->content->borderColor : ''?>">
-                      <span class='input-group-btn'>
-                        <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
-                          <?php echo $lang->block->borderColor;?><span class='caret'></span>
-                        </button>
-                        <div class='dropdown-menu colors'><?php echo $colorPlates; ?></div>
-                      </span>
-                      <?php echo html::input('params[borderColor]', isset($block->content->borderColor) ? $block->content->borderColor : '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
                     </div>
                   </div>
                 </td>

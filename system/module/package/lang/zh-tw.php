@@ -91,7 +91,7 @@ $lang->package->waring = '警告';
 
 $lang->package->errorOccurs                  = '錯誤：';
 $lang->package->errorGetModules              = '從www.chanzhi.org獲得插件分類失敗。可能是因為網絡方面的原因，請檢查後重新刷新頁面。';
-$lang->package->errorGetPackages           = '從www.chanzhi.org獲得插件失敗。可能是因為網絡方面的原因，您可以到 <a href="http://www.chanzhi.org/extesion" target="_blank" class="alert-link">www.chanzhi.org</a> 手工下載插件，然後上傳安裝。';
+$lang->package->errorGetPackages             = '從www.chanzhi.org獲得插件失敗。可能是因為網絡方面的原因，您可以到 <a href="http://www.chanzhi.org/extesion" target="_blank" class="alert-link">www.chanzhi.org</a> 手工下載插件，然後上傳安裝。';
 $lang->package->errorDownloadPathNotFound    = '插件下載存儲路徑<strong>%s</strong>不存在。<br />linux下面請執行命令：<strong>mkdir -p %s</strong>來修正。';
 $lang->package->errorDownloadPathNotWritable = '插件下載存儲路徑<strong>%s</strong>不可寫。<br />linux下面請執行命令：<strong>sudo chmod 777 %s</strong>來修正。';
 $lang->package->errorPackageFileExists       = '下載路徑已經有一個名為的<strong>%s</strong>附件。<h3>重新%s，<a href="%s" class="alert-link loadInModal">請點擊此連結</a></h3>';
