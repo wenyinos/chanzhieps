@@ -258,7 +258,7 @@ class threadModel extends model
         $newThreadID = $this->dao->lastInsertID();
 
         $oldThread->board = $oldBoard;
-        $oldThread->link  = helper::createLink('thread', 'view', "threadID=$newThreadID");
+        $oldThread->link  = commonModel::createFrontLink('thread', 'view', "threadID=$newThreadID");
         $this->dao->update(TABLE_THREAD)->data($oldThread)->where('id')->eq($threadID)->exec();
 
         if(dao::isError()) return false;

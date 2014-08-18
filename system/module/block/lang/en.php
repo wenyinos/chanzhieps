@@ -39,8 +39,8 @@ $lang->block->iconColor       = 'Icon Color';
 $lang->block->heading         = 'Heading';
 $lang->block->content         = 'Content';
 $lang->block->background      = 'Background';
-$lang->block->preview         = 'Style preview';
 $lang->block->custom          = 'Custom';
+$lang->block->preview         = 'Style preview';
 $lang->block->textExample     = 'Block text style example，<a href="###">link text</a>';
 $lang->block->customStyleTip  = 'Change block color and background here.';
 
