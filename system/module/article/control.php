@@ -119,7 +119,7 @@ class article extends control
      */
     public function create($type = 'article', $categoryID = '')
     {
-        $this->lang->article->menu = $this->lang->$type->menu;
+        $this->lang->article->menu = $this->lang->{$type}->menu;
         $this->lang->menuGroups->article = $type;
 
         $categories = $this->loadModel('tree')->getOptionMenu($type, 0, $removeRoot = true);
@@ -141,7 +141,7 @@ class article extends control
             $this->view->treeManageLink = html::a(helper::createLink('tree', 'browse', "type={$type}"), $this->lang->tree->manage);
         }
 
-        $this->view->title           = $this->lang->$type->create;
+        $this->view->title           = $this->lang->{$type}->create;
         $this->view->currentCategory = $categoryID;
         $this->view->categories      = $this->loadModel('tree')->getOptionMenu($type, 0, $removeRoot = true);
         $this->view->type            = $type;

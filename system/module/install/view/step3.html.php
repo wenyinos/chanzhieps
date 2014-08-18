@@ -20,7 +20,7 @@
     <div class='modal-header'><strong><?php echo $lang->install->saveConfig;?></strong></div>
     <div class='modal-body'>
       <div class='form-group'><?php echo html::textArea('config', $result->content, "rows='10' class='form-control small'");?></div>
-      <div class='alert alert-warning'><?php printf($lang->install->save2File, $result->myPHP);?></div>
+      <div class='alert alert-default'><?php printf($lang->install->save2File, $result->myPHP);?></div>
     </div>
     <div class='modal-footer'><?php echo html::a(inlink('step4'), $lang->install->next, "class='btn btn-primary'");?></div>
     <?php endif;?>

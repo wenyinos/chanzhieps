@@ -128,7 +128,11 @@ class tree extends control
     public function children($type, $category = 0)
     {
         /* If type is forum, assign board to category. */
-        if($type == 'forum') $this->lang->category = $this->lang->board;
+        if($type == 'forum')
+        {
+            $this->lang->category = $this->lang->board;
+            $this->view->boardChildrenCount = $this->dao->select('count(*) as count')->from(TABLE_CATEGORY)->where('grade')->eq(2)->andWhere('type')->eq('forum')->fetch('count');
+        }
 
         $isWechatMenu = treeModel::isWechatMenu($type);
         if($isWechatMenu) $this->lang->category = $this->lang->wechatMenu;
