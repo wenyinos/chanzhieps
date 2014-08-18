@@ -34,7 +34,7 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
             <strong><?php echo $lang->block->preview?></strong>
           </div>
           <div class='panel panel-block' data-target='#customPanelModal' data-toggle='modal' >
-            <div class='panel-heading'><i class='icon-heart-empty <?php echo $block->content->icon?> icon'></i> <strong class='title'><?php echo $block->title?></strong></div>
+            <div class='panel-heading'><i class='icon-heart-empty <?php echo isset($block->content->icon) ? $block->content->icon : '';?> icon'></i> <strong class='title'><?php echo $block->title?></strong></div>
             <div class='panel-body text-center'>
               <?php echo $lang->block->textExample;?>
             </div>
@@ -115,7 +115,7 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
                 <td></td>
               </tr>
               <?php endif;?>
-              <?php if($type !== 'wechat' and $type !== 'featuredProduct'):?>
+              <?php if($type !== 'featuredProduct'):?>
               <tr>
                 <th class='w-80px'><?php echo $lang->block->heading;?></th>
                 <td>
@@ -145,6 +145,8 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
                   </div>
                 </td>
               </tr>
+              <?php endif;?>
+              <?php if($type != 'followUs'):?>
               <tr>
                 <th class='w-80px'><?php echo $lang->block->content;?></th>
                 <td>

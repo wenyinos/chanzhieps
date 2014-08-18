@@ -12,4 +12,4 @@ INSERT INTO `eps_block` (`id`, `type`, `title`, `content`) VALUES
 (10, 'about', '公司簡介', '', 'default'),
 (11, 'links', '友情鏈接', '', 'default');
 (12, 'header', '網站頭部', '', 'default');
-(13, 'wechat', '關注我們', '', 'default');
+(13, 'followUs', '關注我們', '', 'default');
