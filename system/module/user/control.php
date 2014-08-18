@@ -521,13 +521,16 @@ class user extends control
         /* Step3: Try to get user by the open id, if got, login him. */
         $user = $this->user->getUserByOpenID($provider, $openID);
         $this->session->set('random', md5(time() . mt_rand()));
-        if($user and $this->user->login($user->account, md5($user->password . $this->session->random)))
+        if($user)
         {
-            if($referer) $this->locate(helper::safe64Decode($referer));
+            if($this->user->login($user->account, md5($user->password . $this->session->random)))
+            {
+                if($referer) $this->locate(helper::safe64Decode($referer));
 
-            /* No referer, go to the user control panel. */
-            $default = $this->config->user->default;
-            $this->locate($this->createLink($default->module, $default->method));
+                /* No referer, go to the user control panel. */
+                $default = $this->config->user->default;
+                $this->locate($this->createLink($default->module, $default->method));
+            }
         }
 
         /* Step4.1: if the provider is sina, display the register or bind page. */
