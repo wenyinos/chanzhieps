@@ -29,6 +29,9 @@ $lang->tree->confirmDelete    = "您確定刪除該類目嗎？";
 $lang->tree->successFixed     = "成功修復";
 $lang->tree->browseByCategory = '類目瀏覽';
 
+$lang->tree->placeholder = new stdclass();
+$lang->tree->placeholder->link = '輸入連結，可以是站外連結';
+
 /* Lang items for article, products. */
 $lang->category = new stdclass();
 $lang->category->common   = '類目';

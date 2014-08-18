@@ -89,7 +89,8 @@ $lang->comment->confirmPassPre      = '您確定要通過之前的評論嗎？';
 $lang->comment->statusList[0] = '未審核';
 $lang->comment->statusList[1] = '已審核';
 
-$lang->message->replyItem = "<dd><strong>%s</strong> 于 <em>%s</em> 回覆：%s</dd>";
-$lang->comment->replyItem = "<dd><strong>%s</strong> 于 <em>%s</em> 回覆：%s</dd>";
+$lang->message->replyItem   = "<dd><strong>%s</strong> 于 <em>%s</em> 回覆：%s</dd>";
+$lang->comment->replyItem   = "<dd><strong>%s</strong> 于 <em>%s</em> 回覆：%s</dd>";
+$lang->message->messageItem = "<dd><strong>%s</strong> 于 <em>%s</em> 發表：%s</dd>";
 
 $lang->message->replySubject = '%s管理員的回覆';
