@@ -19,4 +19,6 @@ $(document).ready(function()
             $(this).parents('tr').remove();
         }
     });
+
+    $('.button-target').change();
 })
