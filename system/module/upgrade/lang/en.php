@@ -25,7 +25,7 @@ $lang->upgrade->next          = 'Next';
 $lang->upgrade->backupData = <<<EOT
 <pre>
 <strong>Using phpMyAdmin or mysqldump to backup database.</strong>
-<textarea class='autoSelect w-400px red' readonly rows='1' > mysqldump -u %s -p%s %s > chanzhi.sql </textarea>
+<textarea class='autoSelect w-500px red' readonly rows='1' > mysqldump -u %s -p%s %s > chanzhi.sql </textarea>
 </pre>
 EOT;
 

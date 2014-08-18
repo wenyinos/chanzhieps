@@ -374,8 +374,7 @@ class userModel extends model
         }
 
         /* The password can be the plain or the password after md5. */
-        $oldPassword = $this->createPassword($password, $user->account, $user->join);
-        if($oldPassword != $user->password and !$this->compareHashPassword($password, $user) and $user->password != $this->createPassword($password, $user->account))
+        if(!$this->compareHashPassword($password, $user) and $user->password != $this->createPassword($password, $user->account))
         {
             $user->fails ++;
             if($user->fails > 2 * 4) $user->locked = date('Y-m-d H:i:s', time() + 3 * 60);
@@ -389,8 +388,6 @@ class userModel extends model
         $user->fails  = 0;
         $user->visits ++;
 
-        /* Update password when create password by oldCreatePassword function. */
-        if($oldPassword == $user->password) $user->password = $this->createPassword($password, $user->account);
         $this->dao->update(TABLE_USER)->data($user)->where('account')->eq($account)->exec();
 
         $user->realname  = empty($user->realname) ? $account : $user->realname;

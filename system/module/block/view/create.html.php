@@ -92,7 +92,7 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
         <div class='modal-dialog w-800px'>
           <div class='modal-header'><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><i class='icon-cog'></i> <strong><?php echo $lang->block->custom?></strong></div>
           <div class='modal-body'>
-            <table class='table table-form'>
+            <table class='table table-form mg-0'>
               <?php if(isset($config->block->defaultIcons[$type])):?>
               <tr>
                 <th class='w-80px'><?php echo $lang->block->icon;?></th>
@@ -202,6 +202,9 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
                 </td>
               </tr>
               <?php endif;?>
+              <tr>
+                <td colspan='3' class='text-center'><button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true"><?php echo $lang->confirm;?></button></td>
+              </tr>
             </table>
           </div>
         </div>
