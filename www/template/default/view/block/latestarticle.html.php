@@ -48,7 +48,10 @@ $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 :
             }
             ?>
             </div>
-            <strong class='text-important'><i class='icon-time'></i> <?php echo substr($article->addedDate, 0, 10);?></strong> &nbsp;<?php echo $article->summary;?>
+            <strong class='text-important'>
+              <?php if(isset($content->time)) echo "<i class='icon-time'></i>" . formatTime($article->addedDate, DT_DATE4);?>
+            </strong> 
+            &nbsp;<?php echo $article->summary;?>
           </div>
         </div>
       </div>
