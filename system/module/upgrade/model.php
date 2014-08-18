@@ -485,6 +485,8 @@ class upgradeModel extends model
      */
     public function setCompanyBlocks()
     {
+        $this->app->loadLang('block');
+
         $wechatBlock = array('type' => 'followUs', 'title' => $this->lang->block->default->typeList['followUs'], 'content' => '', 'template' => 'default');
 
         $this->dao->insert(TABLE_BLOCK)->data($wechatBlock)->exec();
