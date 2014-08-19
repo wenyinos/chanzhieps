@@ -32,7 +32,7 @@ class product extends control
     public function index($pageID = 1)
     {
         /* Display browse page. */
-        exit($this->fetch('product', 'browse', "categoryID=0&pageID={$pageID}"));
+        $this->locate($this->inlink('browse', "categoryID=0&pageID={$pageID}"));
     }
 
     /** 
