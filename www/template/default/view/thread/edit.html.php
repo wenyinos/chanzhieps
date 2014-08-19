@@ -24,12 +24,14 @@
         <?php $readonly = $thread->readonly ? 'checked' : ''; if($canManage):?>
           <div class='input-group'>
             <?php echo html::input('title', $thread->title, "class='form-control'");?>
+            <?php if($this->app->user->admin == 'super'):?>
             <span class='input-group-addon'>
               <label class='checkbox'>
                 <?php $checked = $thread->link ? 'checked' : '';?>
                 <?php echo "<input type='checkbox' name='isLink' id='isLink' value='1' {$checked}/><span>{$lang->thread->isLink}</span>" ?>
               </label>
             </span>
+            <?php endif;?>
             <span class='input-group-addon threadInfo'>
               <label class='checkbox'>
                   <?php echo "<input type='checkbox' name='readonly' value='1'  $readonly/><span>{$lang->thread->readonly}</span>" ?>
@@ -37,15 +39,7 @@
             </span>
           </div>
         <?php else:?>
-          <div class='input-group'>
-            <?php echo html::input('title', $thread->title, "class='form-control'");?>
-            <span class='input-group-addon'>
-              <label class='checkbox'>
-                <?php $checked = $thread->link ? 'checked' : '';?>
-                <?php echo "<input type='checkbox' name='isLink' id='isLink' value='1' {$checked}/><span>{$lang->thread->isLink}</span>" ?>
-              </label>
-            </span>
-          </div>
+          <?php echo html::input('title', $thread->title, "class='form-control'");?>
         <?php endif;?>
         </div>
       </div>
@@ -65,10 +59,12 @@
         </div>
         <div class='form-group hiding' id='captchaBox'></div>
       </div>
+      <?php if($this->app->user->admin == 'super'):?>
       <div class='form-group link'>
         <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->thread->link;?></label>
         <div class='col-md-11 col-sm-10 required'><?php echo html::input('link', $thread->link, "class='form-control' placeholder='{$lang->thread->placeholder->link}'");?></div>
       </div>
+      <?php endif;?>
       <div class='form-group'>
         <label class='col-md-1 col-sm-2'></label>
         <div class='col-md-11 col-sm-10'><?php echo html::submitButton() . html::backButton();;?></div>
