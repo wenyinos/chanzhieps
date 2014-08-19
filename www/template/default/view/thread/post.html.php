@@ -37,7 +37,14 @@
             </span>
           </div>
         <?php else:?>
-          <?php echo html::input('title', '', "class='form-control'");?>
+          <div class='input-group'>
+            <?php echo html::input('title', '', "class='form-control'");?>
+            <span class='input-group-addon'>
+              <label class='checkbox'>
+                <?php echo "<input type='checkbox' name='isLink' id='isLink' value='1'/><span>{$lang->thread->isLink}</span>" ?>
+              </label>
+            </span>
+          </div>
         <?php endif;?>
         </div>
       </div>

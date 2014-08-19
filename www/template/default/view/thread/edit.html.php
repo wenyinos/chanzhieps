@@ -30,14 +30,22 @@
                 <?php echo "<input type='checkbox' name='isLink' id='isLink' value='1' {$checked}/><span>{$lang->thread->isLink}</span>" ?>
               </label>
             </span>
-            <span class='input-group-addon'>
+            <span class='input-group-addon threadInfo'>
               <label class='checkbox'>
                   <?php echo "<input type='checkbox' name='readonly' value='1'  $readonly/><span>{$lang->thread->readonly}</span>" ?>
               </label>
             </span>
           </div>
         <?php else:?>
-          <?php echo html::input('title', $thread->title, "class='form-control'");?>
+          <div class='input-group'>
+            <?php echo html::input('title', $thread->title, "class='form-control'");?>
+            <span class='input-group-addon'>
+              <label class='checkbox'>
+                <?php $checked = $thread->link ? 'checked' : '';?>
+                <?php echo "<input type='checkbox' name='isLink' id='isLink' value='1' {$checked}/><span>{$lang->thread->isLink}</span>" ?>
+              </label>
+            </span>
+          </div>
         <?php endif;?>
         </div>
       </div>
