@@ -70,14 +70,14 @@ $config->rights->guest['page']['view']  = 'view';
 $config->rights->guest['misc']['qrcode'] = 'qrcode';
 
 /* For logged member. */
-$config->rights->member['thread']['post']       = 'post';
-$config->rights->member['thread']['reply']      = 'reply';
-$config->rights->member['thread']['edit']       = 'edit';
-$config->rights->member['thread']['hide']       = 'hide';
-$config->rights->member['thread']['stick']      = 'stick';
-$config->rights->member['thread']['delete']     = 'delete';
-$config->rights->member['thread']['transfer']   = 'transfer';
-$config->rights->member['thread']['deletefile'] = 'deletefile';
+$config->rights->member['thread']['post']         = 'post';
+$config->rights->member['thread']['reply']        = 'reply';
+$config->rights->member['thread']['edit']         = 'edit';
+$config->rights->member['thread']['switchstatus'] = 'switchstatus';
+$config->rights->member['thread']['stick']        = 'stick';
+$config->rights->member['thread']['delete']       = 'delete';
+$config->rights->member['thread']['transfer']     = 'transfer';
+$config->rights->member['thread']['deletefile']   = 'deletefile';
 
 $config->rights->member['reply']['post']       = 'post';
 $config->rights->member['reply']['eidt']       = 'edit';

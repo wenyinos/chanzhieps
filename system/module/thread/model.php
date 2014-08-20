@@ -50,7 +50,9 @@ class threadModel extends model
             $board = $board->id;
         }
         $threads = $this->dao->select('*')->from(TABLE_THREAD)
-            ->beginIf($board)->where('board')->in($board)->fi()
+            ->where(1)
+            ->beginIf(RUN_MODE == 'front')->andWhere('hidden')->eq('0')->fi()
+            ->beginIf($board)->andWhere('board')->in($board)->fi()
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
