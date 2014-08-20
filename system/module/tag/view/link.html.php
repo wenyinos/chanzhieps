@@ -11,7 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.modal.html.php';?>
-<form id='ajaxForm' class='form-horizontal' action='<?php echo inlink('link', "tageID={$tag->id}")?>'  method='post'>
+<form id='linkForm' class='form-horizontal' action='<?php echo inlink('link', "tageID={$tag->id}")?>'  method='post'>
   <div class='form-group'>
     <label for='link' class='col-xs-3 control-label'><?php echo $tag->tag;?></label>
     <div class='col-xs-8'>

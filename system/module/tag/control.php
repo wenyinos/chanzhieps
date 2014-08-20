@@ -48,7 +48,7 @@ class tag extends control
         if($_POST)
         {
             $this->dao->update(TABLE_TAG)->set('link')->eq($this->post->link)->where('id')->eq($tagID)->exec();
-            if(!dao::isError()) $this->send(array('result' => 'success'));
+            if(!dao::isError()) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 

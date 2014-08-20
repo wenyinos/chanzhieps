@@ -1,5 +1,8 @@
 $(document).ready(function()
 {
-    $.setAjaxForm('#ajaxForm', function(data) { location.reload(); }); 
+    $.setAjaxForm('#linkForm', function(data) 
+    { 
+        setTimeout(function(){ location.reload();}, 1200); 
+    }); 
 });
 
