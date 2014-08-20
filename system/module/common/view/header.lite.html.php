@@ -82,4 +82,3 @@ else
 <?php js::set('lang', $lang->js);?>
 </head>
 <body>
-<!--[if lt IE 10]><?php echo $lang->IE6Alert;?><![endif]-->
