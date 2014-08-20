@@ -214,7 +214,7 @@ CREATE TABLE IF NOT EXISTS `eps_product` (
   `promotion` float(8,2) NOT NULL,
   `amount` mediumint(8) unsigned DEFAULT NULL,
   `keywords` varchar(150) NOT NULL,
-  `summary` text NOT NULL,
+  `desc` text NOT NULL,
   `content` text NOT NULL,
   `author` varchar(60) NOT NULL,
   `editor` varchar(60) NOT NULL,
