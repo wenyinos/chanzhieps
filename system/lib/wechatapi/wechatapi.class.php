@@ -576,8 +576,10 @@ class wechatapi
         if(!$this->debug) return;
 
         /* Set log file. */
-        $logFile = dirname(dirname(dirname(__FILE__))) . '/tmp/log/wechat.' . date('Ymd') . '.log';
+        $logFile = dirname(dirname(dirname(__FILE__))) . '/tmp/log/wechat.' . date('Ymd') . '.log.php';
         if(!is_writable(dirname($logFile))) return false;
+
+        if(!file_exists($logFile)) file_put_contents($logFile, "<?php die();?> \n");
 
         /* Init the signature. */
         if(!isset($_GET['signature'])) $_GET['signature'] = '';
