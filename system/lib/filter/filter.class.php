@@ -527,10 +527,18 @@ class fixer
      */
     public function stripTags($fieldName, $allowableTags)
     {
+        global $app;
+        $app->loadClass('purifier', true);
+        $purifier = new HTMLPurifier(HTMLPurifier_Config::createDefault());
+
         $fields = $this->processFields($fieldName);
         foreach($fields as $fieldName) 
         {
-            if(!in_array($fieldName, $this->stripedFields)) $this->data->$fieldName = strip_tags($this->data->$fieldName, $allowableTags);
+            if(!in_array($fieldName, $this->stripedFields))
+            {
+                $this->data->$fieldName = $purifier->purify($this->data->$fieldName);
+                $this->data->$fieldName = strip_tags($this->data->$fieldName, $allowableTags);
+            }
             $this->stripedFields[] = $fieldName;
         }
         return $this;
