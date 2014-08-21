@@ -359,7 +359,14 @@ class fixer
      */
     private $data;
 
+    /**
+     * Striped fields not specialchars.
+     * 
+     * @var array 
+     * @access private
+     */
     private $stripedFields = array();
+
     /**
      * The construction function, according the scope, convert it to object.
      * 
@@ -522,10 +529,11 @@ class fixer
      * 
      * @param  string $fieldName 
      * @param  string $allowableTags 
+     * @param  bool   $purify 
      * @access public
-     * @return object fixer object
+     * @return void
      */
-    public function stripTags($fieldName, $allowableTags)
+    public function stripTags($fieldName, $allowableTags, $purify = true)
     {
         global $app;
         $app->loadClass('purifier', true);
@@ -536,7 +544,7 @@ class fixer
         {
             if(!in_array($fieldName, $this->stripedFields))
             {
-                $this->data->$fieldName = $purifier->purify($this->data->$fieldName);
+                if($purify) $this->data->$fieldName = $purifier->purify($this->data->$fieldName);
                 $this->data->$fieldName = strip_tags($this->data->$fieldName, $allowableTags);
             }
             $this->stripedFields[] = $fieldName;
