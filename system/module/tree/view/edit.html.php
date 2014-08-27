@@ -52,7 +52,7 @@ $themeRoot = $webRoot . "theme/";
           <label class='col-md-2 control-label'><?php echo $lang->category->alias;?></label>
           <div class='col-md-9'>
             <div class="input-group">
-              <span class="input-group-addon">http://<?php echo $aliasAddon;?></span>
+              <span class="input-group-addon"><?php echo $aliasAddon;?></span>
               <?php echo html::input('alias', $category->alias, "class='input-xsm form-control' placeholder='{$lang->alias}'");?>
               <span class="input-group-addon">.html</span>
             </div>
