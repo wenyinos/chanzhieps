@@ -21,7 +21,7 @@ class file extends control
      */
     public function buildForm($fileCount = 2, $percent = 0.9)
     {
-        if($this->file->canUpload()) exit;
+        if(!$this->file->canUpload()) exit;
         $this->view->writeable = $this->file->checkSavePath();
         $this->view->fileCount = $fileCount;
         $this->view->percent   = $percent;
