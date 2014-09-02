@@ -74,6 +74,7 @@ function initKindeditor(afterInit)
             afterBlur: function(){this.sync();$('#' + editorID).prev('.ke-container').removeClass('focus');},
             afterFocus: function(){$('#' + editorID).prev('.ke-container').addClass('focus');},
             afterChange: function(){$('#' + editorID ).change().hide();},
+            <?php if(!$this->loadModel('file')->canUpload()) echo "showLocal:false, imageTabIndex:0,";?>
             afterCreate : function()
             {
                 var doc = this.edit.doc; 

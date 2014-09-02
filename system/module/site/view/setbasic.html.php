@@ -19,11 +19,11 @@
       <table class='table table-form'>
         <tr>
           <th class='col-xs-2'><?php echo $lang->site->type;?></th> 
-          <td class='col-xs-5'><?php echo html::radio('type', $lang->site->typeList, isset($this->config->site->type) ? $this->config->site->type : 'portal', "class='checkbox'");?></td><td></td>
+          <td class='col-xs-6'><?php echo html::radio('type', $lang->site->typeList, isset($this->config->site->type) ? $this->config->site->type : 'portal', "class='checkbox'");?></td><td></td>
         </tr>
         <tr>
           <th class='col-xs-2'><?php echo $lang->site->name;?></th> 
-          <td class='col-xs-5'><?php echo html::input('name', $this->config->site->name, "class='form-control'");?></td><td></td>
+          <td class='col-xs-6'><?php echo html::input('name', $this->config->site->name, "class='form-control'");?></td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->site->module;?></th>

@@ -70,6 +70,7 @@ $config->dependence->user[]    = 'user';
 $config->dependence->forum[]   = 'forum';
 $config->dependence->forum[]   = 'user';
 $config->dependence->message[] = 'message';
+$config->dependence->upload[]  = 'upload';
 
 /* Database settings. */
 $config->db = new stdclass();          

@@ -199,6 +199,20 @@ class fileModel extends model
     }
 
     /**
+     * Check can upload front. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function canUpload()
+    {
+       if(RUN_MODE == 'admin') return true;
+       if(commonModel::isAvailable('upload')) return true;
+       if(isset($this->app->user->admin) and $this->app->user->admin == 'super') return true;
+       return false;
+    }
+
+    /**
      * get uploaded files.
      * 
      * @param string $htmlTagName 
@@ -209,6 +223,8 @@ class fileModel extends model
     {
         $files = array();
         if(!isset($_FILES[$htmlTagName])) return $files;
+        if(!$this->canUpload()) return $files;
+        
         /* The tag if an array. */
         if(is_array($_FILES[$htmlTagName]['name']))
         {

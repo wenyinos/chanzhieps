@@ -21,6 +21,7 @@ class file extends control
      */
     public function buildForm($fileCount = 2, $percent = 0.9)
     {
+        if($this->file->canUpload()) exit;
         $this->view->writeable = $this->file->checkSavePath();
         $this->view->fileCount = $fileCount;
         $this->view->percent   = $percent;
@@ -50,6 +51,7 @@ class file extends control
     public function ajaxUpload($uid)
     {
         if(RUN_MODE == 'front' and !commonModel::isAvailable('forum')) exit;
+        if(!$this->loadModel('file')->canUpload())  $this->send(array('error' => 1, 'message' => $this->lang->file->uploadForbidden));
         $file = $this->file->getUpload('imgFile');
         $file = $file[0];
         if($file)

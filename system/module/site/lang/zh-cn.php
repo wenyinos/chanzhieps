@@ -41,3 +41,4 @@ $lang->site->moduleAvailable['forum']   = '论坛';
 $lang->site->moduleAvailable['blog']    = '博客';
 $lang->site->moduleAvailable['book']    = '手册';
 $lang->site->moduleAvailable['message'] = '评论留言';
+$lang->site->moduleAvailable['upload']  = '允许前台上传附件';

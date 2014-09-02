@@ -43,3 +43,4 @@ $lang->file->errorUnwritable  = 'Upload directory is not writable.';
 $lang->file->noAccess         = 'Access is not allowed.';
 $lang->file->invalidParameter = 'Parameter is not valid.';
 $lang->file->unWritable       = 'Directory does not exist.';
+$lang->file->uploadForbidden  = 'Upload function is forbidden.';
