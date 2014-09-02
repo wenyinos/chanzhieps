@@ -41,4 +41,4 @@ $lang->site->moduleAvailable['forum']   = 'Forum';
 $lang->site->moduleAvailable['blog']    = 'Blog';
 $lang->site->moduleAvailable['book']    = 'Book';
 $lang->site->moduleAvailable['message'] = 'Message';
-$lang->site->moduleAvailable['upload']  = 'Allow guests upload files.';
+$lang->site->moduleAvailable['upload']  = 'Upload files';
