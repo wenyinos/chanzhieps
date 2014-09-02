@@ -424,6 +424,7 @@ class articleModel extends model
     public function createPreviewLink($articleID)
     {
         $article = $this->getByID($articleID);
+        if(empty($article)) return null;
         $module  = $article->type;
         $param   = "articleID=$articleID";
         if($article->type != 'page')
