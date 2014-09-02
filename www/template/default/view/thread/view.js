@@ -21,6 +21,7 @@ $(document).ready(function()
         }
     });
     $.setAjaxJSONER('.jsoner');
+    $.setAjaxJSONER('.switcher', function(response){ bootbox.alert(response.message, function(){ location.href = response.locate;  return false;});});
     $('.nav-system-forum').addClass('active');
 
     /* remove empty element */

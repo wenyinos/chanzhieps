@@ -251,7 +251,7 @@ class thread extends control
             {
                 $locate = helper::createLink('forum', 'board', "board=$thread->board");
             }
-            $this->send(array('result' => 'success', 'locate' => $locate));
+            $this->send(array('result' => 'success', 'message' => $this->lang->thread->successHide,  'locate' => $locate));
         }
 
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
