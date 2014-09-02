@@ -83,6 +83,8 @@ class upgradeModel extends model
             case '2_5_beta':
                 $this->execSQL($this->getUpgradeFile('2.5.beta'));
                 $this->setCompanyBlocks();
+            case '2_5_2':
+                $this->execSQL($this->getUpgradeFile('2.5.2'));
 
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -118,6 +120,7 @@ class upgradeModel extends model
             case '2_3'      : $confirmContent .= file_get_contents($this->getUpgradeFile('2.3'));
             case '2_4'      : $confirmContent .= file_get_contents($this->getUpgradeFile('2.4'));
             case '2_5_beta' : $confirmContent .= file_get_contents($this->getUpgradeFile('2.5.beta'));
+            case '2_5_2'    : $confirmContent .= file_get_contents($this->getUpgradeFile('2.5.2'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }

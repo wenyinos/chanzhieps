@@ -41,3 +41,4 @@ $lang->site->moduleAvailable['forum']   = '論壇';
 $lang->site->moduleAvailable['blog']    = '博客';
 $lang->site->moduleAvailable['book']    = '手冊';
 $lang->site->moduleAvailable['message'] = '評論留言';
+$lang->site->moduleAvailable['upload']  = '附件上傳';
