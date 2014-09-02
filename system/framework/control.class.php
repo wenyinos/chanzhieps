@@ -471,6 +471,7 @@ class control
      */
     private function parseJSON($moduleName, $methodName)
     {
+        return false;
         unset($this->view->app);
         unset($this->view->config);
         unset($this->view->lang);
