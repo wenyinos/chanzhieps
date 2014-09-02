@@ -59,8 +59,8 @@ $config->default->method = 'index';            // Default metho.d
 
 /* Upload settings. */
 $config->file = new stdclass();          
-$config->file->dangers = 'php,jsp,py,rb,asp,'; // Dangerous file types.
-$config->file->maxSize = 1024 * 1024;          // Max size allowed(Byte).
+$config->file->dangers = 'php,php3,php4,phtml,php5,jsp,py,rb,asp,aspx,ashx,asa,cer,cdx,aspl,shtm,shtml,html,htm'; // Dangerous file types,
+$config->file->maxSize = 1024 * 1024;  // Max size allowed(Byte).
 
 /* Module dependence setting. */
 $config->dependence = new stdclass();
