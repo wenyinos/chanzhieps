@@ -24,6 +24,7 @@ tgz:
 	find chanzhieps -name '.git*' |xargs rm -frv
 	find chanzhieps -name '.svn*' |xargs rm -frv
 	find chanzhieps -name tests |xargs rm -frv
+	for path in `find chanzhieps/ -type d`; do touch "$$path/index.php"; done	
 	# change mode.
 	chmod 777 -R chanzhieps/system/tmp/
 	chmod 777 -R chanzhieps/www/data
