@@ -229,7 +229,7 @@ class blockModel extends model
      */
     public function create($template)
     {
-        $block = fixer::input('post')->add('template', $template)->stripTags('content', $this->config->block->allowedTags, $purify = false)->get();
+        $block = fixer::input('post')->add('template', $template)->stripTags('content', $this->config->block->allowedTags)->get();
         if($this->post->type == 'phpcode') $block = fixer::input('post')->add('template', $template)->get();
 
         $gpcOn = version_compare(phpversion(), '5.4', '<') and get_magic_quotes_gpc();
@@ -261,7 +261,7 @@ class blockModel extends model
      */
     public function update($template)
     {
-        $block = fixer::input('post')->add('template', $template)->stripTags('content', $this->config->block->allowedTags, $purify = false)->get();
+        $block = fixer::input('post')->add('template', $template)->stripTags('content', $this->config->block->allowedTags)->get();
         if($this->post->type == 'phpcode') $block = fixer::input('post')->add('template', $template)->get();
 
         $gpcOn = version_compare(phpversion(), '5.4', '<') and get_magic_quotes_gpc();

@@ -282,7 +282,7 @@ class control
         /* Extension hook file. */
         $commonExtHookFiles = glob($viewExtPath['common'] . $methodName . "*.{$this->viewType}.hook.php");
         $siteExtHookFiles   = glob($viewExtPath['site'] . $methodName . "*.{$this->viewType}.hook.php");
-        $extHookFiles       = array_merge($commonExtHookFiles, $siteExtHookFiles);
+        $extHookFiles       = array_merge((array) $commonExtHookFiles, (array) $siteExtHookFiles);
         if(!empty($extHookFiles)) return array('viewFile' => $viewFile, 'hookFiles' => $extHookFiles);
 
         return $viewFile;

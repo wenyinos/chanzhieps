@@ -528,12 +528,11 @@ class fixer
      * Strip tags 
      * 
      * @param  string $fieldName 
-     * @param  string $allowableTags 
-     * @param  bool   $purify 
+     * @param  string $allowedTags 
      * @access public
      * @return void
      */
-    public function stripTags($fieldName, $allowableTags, $purify = true)
+    public function stripTags($fieldName, $allowedTags)
     {
         global $app;
         $app->loadClass('purifier', true);
@@ -544,8 +543,8 @@ class fixer
         {
             if(!in_array($fieldName, $this->stripedFields))
             {
-                if($purify) $this->data->$fieldName = $purifier->purify($this->data->$fieldName);
-                $this->data->$fieldName = strip_tags($this->data->$fieldName, $allowableTags);
+                if(RUN_MODE != 'admin') $this->data->$fieldName = $purifier->purify($this->data->$fieldName);
+                $this->data->$fieldName = strip_tags($this->data->$fieldName, $allowedTags);
             }
             $this->stripedFields[] = $fieldName;
         }
