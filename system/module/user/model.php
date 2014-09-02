@@ -81,7 +81,7 @@ class userModel extends model
      */
     public function getBasicInfo($users)
     {
-        $users = $this->dao->select('account, admin, realname, `join`, last, visits')->from(TABLE_USER)->where('account')->in($users)->fetchAll('account', false);
+        $users = $this->dao->select('account, admin, realname, `join`, last, visits')->from(TABLE_USER)->where('account')->in($users)->fetchAll('account');
         if(!$users) return array();
 
         foreach($users as $account => $user)
@@ -106,7 +106,7 @@ class userModel extends model
         return $this->dao->select('*')->from(TABLE_USER)
             ->beginIF(validater::checkEmail($account))->where('email')->eq($account)->fi()
             ->beginIF(!validater::checkEmail($account))->where('account')->eq($account)->fi()
-            ->fetch('', false);
+            ->fetch();
     }
 
     /**
