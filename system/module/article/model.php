@@ -144,6 +144,7 @@ class articleModel extends model
             ->where('type')->eq('comment')
             ->andWhere('objectType')->eq('article')
             ->andWhere('objectID')->in($articleIdList)
+            ->andWhere('status')->eq(1)
             ->groupBy('objectID')
             ->fetchPairs('objectID', 'count');
         foreach($articles as $article) $article->comments = isset($comments[$article->id]) ? $comments[$article->id] : 0;
