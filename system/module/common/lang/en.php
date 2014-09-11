@@ -21,11 +21,12 @@ $lang->divider    = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->back2Top   = 'T<br/>O<br/>P';
 
 /* Lang items for xirang. */
-$lang->chanzhiEPS       = 'chanzhiEPS';
-$lang->chanzhiEPSx      = 'Chanzhi';
-$lang->agreement        = "Agree to the <a href='http://api.chanzhi.org/goto.php?item=license' target='_blank'>《ChanzhiEPS Service Agreement》</a>";
-$lang->poweredBy        = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>{$lang->chanzhiEPSx} %s</a></span>";
-$lang->newVersion       = "Notice: ChanzhiEPS has been upgraded to version: <span id='version'></span> at <span id='releaseDate'></span>. <a href='' target='_blank' id='upgradeLink'>DownLoad Now</a>";
+$lang->chanzhiEPS    = 'chanzhiEPS';
+$lang->chanzhiEPSx   = 'Chanzhi';
+$lang->agreement     = "Agree to the <a href='http://api.chanzhi.org/goto.php?item=license' target='_blank'>《ChanzhiEPS Service Agreement》</a>, And ";
+$lang->logoAgreement = "Keep copyright logos and links of chanzhiEPS visible.";
+$lang->poweredBy     = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>{$lang->chanzhiEPSx} %s</a></span>";
+$lang->newVersion    = "Notice: ChanzhiEPS has been upgraded to version: <span id='version'></span> at <span id='releaseDate'></span>. <a href='' target='_blank' id='upgradeLink'>DownLoad Now</a>";
 
 /* Global lang items. */
 $lang->home           = 'Home';
