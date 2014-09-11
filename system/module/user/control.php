@@ -531,6 +531,7 @@ class user extends control
                 $default = $this->config->user->default;
                 $this->locate($this->createLink($default->module, $default->method));
             }
+            exit;
         }
 
         /* Step4.1: if the provider is sina, display the register or bind page. */
