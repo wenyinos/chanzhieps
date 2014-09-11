@@ -95,7 +95,7 @@ class navModel extends model
         $system        = ($nav->type == 'system')  ? '' : 'hide'; 
         $urlHidden     = ($nav->type == 'custom')  ? '' : 'hide'; 
 
-        $entry = '<i class="icon-folder-open shut"></i>';
+        $entry = '<i class="icon-folder-open-alt shut"></i>';
         if(isset($nav->children) && !empty($nav->children)) $entry = '<i class="icon-folder-close shut"></i>';
 
         /* nav type select tag. */
@@ -121,10 +121,10 @@ class navModel extends model
         $entry .= html::hidden("nav[{$grade}][target][]", isset($nav->target) ? $nav->target : '');
 
         /* operate buttons. */
-        $entry .= html::a('javascript:;', $this->lang->nav->add, "class='plus{$grade}'");
-        if($childGrade < 4) $entry .= html::a('javascript:;', $this->lang->nav->addChild, "class='plus{$childGrade}'");
-        $entry .= html::a('javascript:;', $this->lang->delete, "class='remove'");
-        $entry .= "<i class='icon-move sort-handle sort-handle-" . $grade . "'></i>";
+        $entry .= html::a('javascript:;', "<i class='icon icon-plus'> </i>", "class='plus{$grade}' title='{$this->lang->nav->add}'");
+        $entry .= html::a('javascript:;', "<i class='icon icon-remove'> </i>", "class='remove' title='{$this->lang->delete}'");
+        if($childGrade < 4) $entry .= html::a('javascript:;', "<i class='icon icon-sitemap'> </i>", "title='{$this->lang->nav->addChild}' class='plus{$childGrade}'");
+        $entry .= "<i class='icon-move sort-handle sort-handle-" . $grade . "'> </i>";
 
         return $entry;
     }
