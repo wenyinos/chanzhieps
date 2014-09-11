@@ -22,14 +22,7 @@ $(document).ready(function()
         var container = $(this).parents('.liGrade2');
         if(0 == container.size())
         { 
-            if($(this).parents('.liGrade1').find('.liGrade2').size()==0)
-            {
-                $(this).parents('.liGrade1').append($('#grade2NavSource').html());
-            }
-            else
-            {
-                $(this).parents('.liGrade1').find('.ulGrade2').prepend($('#grade2NavSource ul').html());
-            }
+            $(this).parents('.liGrade1').find('.ulGrade2').show().prepend($('#grade2NavSource ul').html());
         }
         else
         {
@@ -44,14 +37,7 @@ $(document).ready(function()
         var container = $(this).parents('.liGrade3');
         if(0 == container.size())
         { 
-            if($(this).parents('.liGrade2').find('.ulGrade3').size() == 0)
-            {
-                $(this).parents('.liGrade2').append($('#grade3NavSource').html());
-            }
-            else
-            {
-                $(this).parents('.liGrade2').find('.ulGrade3').prepend($('#grade3NavSource ul').html());
-            }
+            $(this).parents('.liGrade2').find('.ulGrade3').prepend($('#grade3NavSource ul').html());
         }
         else
         {
@@ -65,7 +51,7 @@ $(document).ready(function()
     {
         $(this).parent().find("ul").toggle();
         if($(this).parent().find('ul li').size() != 0)
-        $(this).toggleClass('icon-folder-close').toggleClass('icon-folder-open'); 
+        $(this).toggleClass('icon-folder-close').toggleClass('icon-folder-open-alt'); 
     });
 
     /* sort up. */

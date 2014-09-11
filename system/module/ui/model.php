@@ -27,6 +27,7 @@ class uiModel extends model
         {
             $templateName = str_replace($this->app->getTplRoot(), '', $folder);
             $config = Spyc::YAMLLoadString(file_get_contents($folder . DS . 'doc' . DS . $this->app->getClientLang() . '.yaml'));
+            if(empty($config)) continue;
             $templates[$templateName] = $config;
         }
         return $templates;
