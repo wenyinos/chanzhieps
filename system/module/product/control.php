@@ -53,7 +53,7 @@ class product extends control
         $pager = new pager(0, $this->config->product->recPerPage, $pageID);
 
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
-        $products   = $this->product->getList($this->tree->getFamily($categoryID), 'id_desc', $pager);
+        $products   = $this->product->getList($this->tree->getFamily($categoryID), '`order`', $pager);
 
         if(!$category and $categoryID != 0) die($this->fetch('error', 'index'));
 
@@ -94,7 +94,7 @@ class product extends control
      * @access public
      * @return void
      */
-    public function admin($categoryID = 0, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function admin($categoryID = 0, $orderBy = '`order`', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {   
         /* Set the session. */
         $this->session->set('productList', $this->app->getURI(true));
@@ -136,9 +136,12 @@ class product extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin')));
         }
 
+        $maxOrder = $this->dao->select('max(`order`) as maxOrder')->from(TABLE_PRODUCT)->fetch('maxOrder');
+
         $this->view->title           = $this->lang->product->create;
         $this->view->currentCategory = $categoryID;
         $this->view->categories      = $categories;
+        $this->view->order           = $maxOrder + 1;
         $this->display();
     }
 

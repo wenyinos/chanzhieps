@@ -156,7 +156,7 @@ class productModel extends model
             ->leftJoin(TABLE_RELATION)->alias('t2')
             ->on('t1.id = t2.id')
             ->beginIF($categories)->where('t2.category')->in($categories)->fi()
-            ->orderBy('id_desc')
+            ->orderBy('`order`')
             ->fetchPairs('id', 'name');
     }
 
@@ -178,7 +178,7 @@ class productModel extends model
 
         $this->app->loadClass('pager', true);
         $pager = new pager($recTotal = 0, $recPerPage = $count, 1);
-        return $this->getList($family, 'id_desc', $pager);
+        return $this->getList($family, 'addedDate_desc', $pager);
     }
 
     /**
@@ -212,21 +212,21 @@ class productModel extends model
      */
     public function getPrevAndNext($current, $category)
     {
-       $prev = $this->dao->select('t1.id, name, alias')->from(TABLE_PRODUCT)->alias('t1')
+       $prev = $this->dao->select('t1.id, name, alias, t1.order')->from(TABLE_PRODUCT)->alias('t1')
            ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
            ->where('t2.category')->eq($category)
             ->beginIF(RUN_MODE == 'front')->andWhere('t1.status')->eq('normal')->fi()
            ->andWhere('t2.id')->lt($current)
-           ->orderBy('t2.id_desc')
+           ->orderBy('t1.order')
            ->limit(1)
            ->fetch();
 
-       $next = $this->dao->select('t1.id, name, alias')->from(TABLE_PRODUCT)->alias('t1')
+       $next = $this->dao->select('t1.id, name, alias, t1.order')->from(TABLE_PRODUCT)->alias('t1')
            ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
            ->where('t2.category')->eq($category)
             ->beginIF(RUN_MODE == 'front')->andWhere('t1.status')->eq('normal')->fi()
            ->andWhere('t2.id')->gt($current)
-           ->orderBy('t2.id')
+           ->orderBy('t1.order_desc')
            ->limit(1)
            ->fetch();
 
