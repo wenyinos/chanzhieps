@@ -85,6 +85,9 @@ class upgradeModel extends model
                 $this->setCompanyBlocks();
             case '2_5_2':
                 $this->execSQL($this->getUpgradeFile('2.5.2'));
+            case '2_5_3':
+                $this->execSQL($this->getUpgradeFile('2.5.3'));
+                $this->setProductOrder();
 
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -121,6 +124,7 @@ class upgradeModel extends model
             case '2_4'      : $confirmContent .= file_get_contents($this->getUpgradeFile('2.4'));
             case '2_5_beta' : $confirmContent .= file_get_contents($this->getUpgradeFile('2.5.beta'));
             case '2_5_2'    : $confirmContent .= file_get_contents($this->getUpgradeFile('2.5.2'));
+            case '2_5_3'    : $confirmContent .= file_get_contents($this->getUpgradeFile('2.5.3'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
@@ -899,6 +903,25 @@ class upgradeModel extends model
     {
         if($this->config->site->lang != 'en') return $this->loadModel('setting')->setItems('system.common.product', array('currency' => '￥'));
         if($this->config->site->lang == 'en') return $this->loadModel('setting')->setItems('system.common.product', array('currency' => '$'));
+    }
+
+    /**
+     * Set default order for product when upgrade from 2.5.3.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setProductOrder()
+    {
+        $maxID = $this->dao->select('max(`id`) as maxID')->from(TABLE_PRODUCT)->fetch('maxID');
+        $products = $this->dao->select('id')->from(TABLE_PRODUCT)->fetchAll();
+
+        foreach($products as $product)
+        {
+            $this->dao->update(TABLE_PRODUCT)->set('order')->eq($maxID - $product->id)->where('id')->eq($product->id)->exec();
+        }
+
+        return !dao::isError();
     }
 
     /**
