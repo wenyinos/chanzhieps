@@ -69,6 +69,10 @@ class helper
         /* Set vars and alias. */
         if(!is_array($vars)) parse_str($vars, $vars);
         if(!is_array($alias)) parse_str($alias, $alias);
+        foreach($alias as $key => $value)
+        {
+            $alias[$key] = urlencode($value);
+        }
         
         /* Seo modules return directly. */
         if(helper::inSeoMode() and method_exists('uri', 'create' . $moduleName . $methodName))
