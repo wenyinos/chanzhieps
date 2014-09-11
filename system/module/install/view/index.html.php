@@ -21,6 +21,7 @@
     <div class='modal-footer'>
       <div class='text-center mgb-10'>
         <label class='checkbox-inline'><input type='checkbox' id='agree' checked /><?php echo $lang->agreement;?></label>
+        <div class='text-important'><?php echo $lang->logoAgreement;?></div>
       </div>
       <div class='input-group'>
       <?php echo html::a($this->createLink('install', 'step1'), $lang->install->start, "class='btn btn-primary btn-install'");?>
