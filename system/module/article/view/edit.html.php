@@ -15,6 +15,7 @@
 <?php js::set('type',$type);?>
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
+<?php include '../../common/view/codeeditor.html.php';?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-edit'></i> <?php echo $type == 'blog' ? $lang->blog->edit : ($type == 'page' ? $lang->page->edit : $lang->article->edit);?></strong></div>
   <div class='panel-body'>
@@ -91,6 +92,14 @@
       <tr>
         <th><?php echo $lang->article->content;?></th>
         <td colspan='2'><?php echo html::textarea('content', htmlspecialchars($article->content), "rows='10' class='form-control'");?></td>
+      </tr>
+      <tr>
+        <th><?php echo $lang->article->css;?></th>
+        <td colspan='2'><?php echo html::textarea('css', $article->css, "rows=5 class='form-control codeeditor' data-mode='css'");?></td>
+      </tr>
+      <tr>
+        <th><?php echo $lang->article->js;?></th>
+        <td colspan='2'><?php echo html::textarea('js', $article->js, "rows=5 class='form-control codeeditor' data-mode='javascript'");?></td>
       </tr>
       <tr>
         <th><?php echo $lang->article->addedDate;?></th>

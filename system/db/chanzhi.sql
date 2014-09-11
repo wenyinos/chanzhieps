@@ -19,6 +19,8 @@ CREATE TABLE IF NOT EXISTS `eps_article` (
   `sticky` enum('0','1','2','3') NOT NULL DEFAULT '0',
   `order` smallint(5) unsigned NOT NULL,
   `link` varchar(255) NOT NULL,
+  `css` text NOT NULL,
+  `js` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `order` (`order`),
   KEY `views` (`views`),
