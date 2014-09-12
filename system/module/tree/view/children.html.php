@@ -10,15 +10,14 @@
     ?>
     </div>
 
-    <div class='panel-body'>
+    <div class='panel-body' id='childList'>
       <?php
-      $maxOrder = 0;
       foreach($children as $child)
       {
-          if($child->order > $maxOrder) $maxOrder = $child->order;
-          echo "<div class='form-group'>";
+          echo "<div class='form-group category'>";
           echo "<div class='col-xs-6 col-md-4 col-md-offset-2'>" . html::input("children[$child->id]", $child->name, "class='form-control'") . "</div>";
           if(!$isWechatMenu) echo "<div class='col-xs-6 col-md-4'>" . html::input("alias[$child->id]", $child->alias, "class='form-control' placeholder='{$this->lang->category->alias}'") . '</div>';
+          echo "<div class='col-xs-6 col-md-2'><i class='icon-move sort-handle'> </i></div>";
           echo html::hidden("mode[$child->id]", 'update');
           echo "</div>";
       }
@@ -32,10 +31,17 @@
         
       for($i = 0; $i < $newChildrenCount; $i ++)
       {
-          echo "<div class='form-group'>";
+          echo "<div class='form-group category'>";
           echo "<div class='col-xs-6 col-md-4 col-md-offset-2'>" . html::input("children[]", '', "class='form-control' placeholder='{$this->lang->category->name}'") . "</div>";
-          if(!$isWechatMenu) echo "<div class='col-xs-6 col-md-4'>" . html::input("alias[]", '', "class='form-control' placeholder='{$this->lang->category->alias}'") . '</div>';
-          if(!$isWechatMenu) echo "<div class='col-xs-6 col-md-2'>" . html::a('javascript:;', "<i class='icon-plus'></i>", "class='btn btn-link pull-left btn-mini btn-plus'") . html::a('javascript:;', "<i class='icon-remove'></i>", "class='btn btn-link pull-left btn-mini btn-remove'") . '</div>';
+          if(!$isWechatMenu)
+          {
+              echo "<div class='col-xs-6 col-md-4'>" . html::input("alias[]", '', "class='form-control' placeholder='{$this->lang->category->alias}'") . '</div>';
+              echo "<div class='col-xs-6 col-md-2'>";
+              echo "<i class='icon-move sort-handle'> </i>";
+              echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='btn btn-link pull-left btn-mini btn-plus'");
+              echo html::a('javascript:;', "<i class='icon-remove'></i>", "class='btn btn-link pull-left btn-mini btn-remove'");
+              echo '</div>';
+          }
           echo html::hidden('mode[]', 'new');
           echo "</div>";
       }
@@ -47,16 +53,19 @@
       echo "<div class='form-group'><div class='col-xs-8 col-md-offset-2'>" . html::submitButton() . "</div></div>";
 
       echo html::hidden('parent',   $parent);
-      echo html::hidden('maxOrder', $maxOrder);
       ?>      
     </div>
   </div>
 </form>
 <div class='child hide'>
-  <div class='form-group'>
+  <div class='form-group category'>
     <div class='col-xs-6 col-md-4 col-md-offset-2'><?php echo  html::input("children[]", '', "class='form-control' placeholder='{$this->lang->category->name}'");?></div>
     <div class='col-xs-6 col-md-4'><?php echo html::input("alias[]", '', "class='form-control' placeholder='{$this->lang->category->alias}'");?></div>
-    <div class='col-xs-6 col-md-2'><?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='btn btn-link pull-left btn-mini btn-plus'") . html::a('javascript:;', "<i class='icon-remove'></i>", "class='btn btn-link pull-left btn-mini btn-remove'");?></div>
+    <div class='col-xs-6 col-md-2'>
+      <i class='icon-move sort-handle'> </i>
+      <?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='btn btn-link pull-left btn-mini btn-plus'");?>
+      <?php echo html::a('javascript:;', "<i class='icon-remove'></i>", "class='btn btn-link pull-left btn-mini btn-remove'");?>
+    </div>
     <?php echo html::hidden('mode[]', 'new');?>
   </div>
 </div>
