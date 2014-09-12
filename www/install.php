@@ -26,7 +26,7 @@ $app = router::createApp('chanzhi', $systemRoot);
 $config = $app->config;
 
 /* Check installed or not. */
-if(!isset($_SESSION['installing']) and !empty($config->installed)) die(header('location: index.php'));
+if(!isset($_SESSION['installing']) or !empty($config->installed)) die(header('location: index.php'));
 
 /* Reset the config params. */
 $config->set('requestType', 'GET');
