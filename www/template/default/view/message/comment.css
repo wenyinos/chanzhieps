@@ -10,4 +10,4 @@
 
 .pager {margin: 0; display: block;}
 .pager > .page { margin-bottom: -15px; font-size: 12px; text-align: right; color: #999;}
-.signed-user-info{padding: 6px 2px}
+.signed-user-info{padding: 6px 2px; margin-right: 10px;}

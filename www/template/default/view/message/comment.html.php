@@ -57,8 +57,8 @@ if(isset($pageCSS)) css::internal($pageCSS);
       <?php else: ?>
       <div class='form-group'>
         <label for='from' class='col-sm-1 control-label'><?php echo $lang->message->from; ?></label>
-        <div class='col-sm-5'>
-          <div class='signed-user-info'>
+        <div class='col-sm-11'>
+          <div class='signed-user-info pull-left'>
             <i class='icon-user text-muted'></i> <strong><?php echo $this->session->user->realname ;?></strong>
             <?php echo html::hidden('from', $this->session->user->realname);?>
             <?php if($this->session->user->email != ''): ?>
@@ -66,9 +66,7 @@ if(isset($pageCSS)) css::internal($pageCSS);
             <?php echo html::hidden('email', $this->session->user->email); ?>
             <?php endif; ?>
           </div>
-        </div>
-        <div class='col-sm-5'>
-          <label class='checkbox'><input type='checkbox' name='receiveEmail' value='1' checked /> <?php echo $lang->comment->receiveEmail; ?></label>
+          <label class='checkbox pull-left'><input type='checkbox' name='receiveEmail' value='1' checked /> <?php echo $lang->comment->receiveEmail; ?></label>
         </div>
       </div>
       <?php endif; ?>

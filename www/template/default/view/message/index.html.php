@@ -73,7 +73,12 @@
           </div>
           <div class='form-group'>
             <label for='email' class='col-sm-1 control-label'><?php echo $lang->message->email;?></label>
-            <div class='col-sm-5'><?php echo html::input('email', $email, "class='form-control'"); ?></div>
+            <div class='col-sm-5'>
+              <?php echo html::input('email', '', "class='form-control'");?>
+            </div>
+            <div class='col-sm-5'>
+              <label class='checkbox'><input type='checkbox' name='receiveEmail' value='1' checked /> <?php echo $lang->comment->receiveEmail; ?></label>
+            </div>
           </div>
           <div class='form-group'>
             <label for='content' class='col-sm-1 control-label'><?php echo $lang->message->content;?></label>
