@@ -12,6 +12,7 @@
 /* --- GLOBAL STYLE --- */
 ul {padding-left: 16px;}
 ol {padding-left: 20px;}
+.small, small {font-size: 12px;}
 
 /* --- CSS HELPERS --- */
 
