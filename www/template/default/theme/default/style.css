@@ -9,6 +9,10 @@
 * @link        http://www.chanzhi.org
 */
 
+/* --- GLOBAL STYLE --- */
+ul {padding-left: 16px;}
+ol {padding-left: 20px;}
+
 /* --- CSS HELPERS --- */
 
 /* width settings. */
