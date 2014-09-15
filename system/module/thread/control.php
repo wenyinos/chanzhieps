@@ -94,7 +94,7 @@ class thread extends control
 
             $this->thread->update($threadID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'locate' => inlink('view', "threadID=$threadID")));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('view', "threadID=$threadID")));
         }
 
         $board = $this->loadModel('tree')->getById($thread->board);
@@ -274,7 +274,7 @@ class thread extends control
         if(dao::isError()) $this->send(array('result' =>'fail', 'message' => dao::getError()));
 
         $message = $stick == 0 ? $this->lang->thread->successUnstick : $this->lang->thread->successStick;
-        $this->send(array('message' => $message, 'target' => '#manageBox', 'source' => inlink('view', "threaID=$threadID") . ' #manageMenu'));
+        $this->send(array('message' => $message, 'locate' => inlink('view', "threaID=$threadID")));
     }
 
     /**
