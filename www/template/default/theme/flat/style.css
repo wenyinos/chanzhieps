@@ -54,9 +54,9 @@ a:hover,a:active{color: #1ABC9C;}
 .text-muted{color: #666}
 
 /* buttons. */
-.btn{border: none; padding: 7px 12px; -webkit-transition: 0.25s linear; -moz-transition: 0.25s linear; -o-transition: 0.25s linear; transition: 0.25s linear; -webkit-backface-visibility: hidden; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none;}
+.btn{border: none; padding: 6px 12px; -webkit-transition: 0.25s linear; -moz-transition: 0.25s linear; -o-transition: 0.25s linear; transition: 0.25s linear; -webkit-backface-visibility: hidden; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none;}
 .btn-primary{background: #16A085;}
-.btn-primary:hover{background: #1ABC9C;}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active{background: #1ABC9C;}
 .btn-default{color: #f1f1f1; background: #2C3E50;}
 .btn-default:hover{color: #fff; background: #34495E;}
 

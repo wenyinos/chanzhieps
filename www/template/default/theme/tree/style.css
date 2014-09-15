@@ -68,9 +68,9 @@ a:hover,a:active{color: #6e2e16;}
 .panel .tree > li > ul li:last-child:after{border-left-color: #f5f0cc!important}
 
 /* buttons. */
-.btn{border: none; padding: 7px 12px; -webkit-transition: 0.25s linear; -moz-transition: 0.25s linear; -o-transition: 0.25s linear; transition: 0.25s linear; -webkit-backface-visibility: hidden; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none;font-weight: bold;}
-.btn-primary,.btn-primary:active,.btn-primary:focus{background: #6E2E16;}
-.btn-primary:hover{background: #83381c;}
+.btn{border: none; padding: 6px 12px; -webkit-transition: 0.25s linear; -moz-transition: 0.25s linear; -o-transition: 0.25s linear; transition: 0.25s linear; -webkit-backface-visibility: hidden; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none;font-weight: bold;}
+.btn-primary{background: #6E2E16;}
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus{background: #83381c;}
 .btn-default,.btn-default:active,.btn-default:focus{color: #f1f1f1; background: #4b624f;}
 .btn-default:hover{color: #fff; background: #5f7a64;}
 
