@@ -120,8 +120,8 @@ textarea{height: auto;}
 .treeview li:hover .hitarea:before {color: #16A085!important}
 
 /* dropdown */
-.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus{color: #1ABC9C;}
-.dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus{color: #1ABC9C; box-shadow: none;}
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus{background: #edeff1; color: #1ABC9C;}
+.dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus{background: #edeff1; color: #1ABC9C; box-shadow: none;}
 
 /* responsive for mobile devices */
 @media (max-width: 767px)

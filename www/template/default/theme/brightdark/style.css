@@ -124,8 +124,8 @@ textarea{height: auto;}
 .treeview li:hover .hitarea:before {color: #DA3B26!important}
 
 /* dropdown */
-.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus{color: #DA3B26;}
-.dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus{color: #DA3B26; box-shadow: none;}
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus{background: #C9C9C9; color: #DA3B26;}
+.dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus{background: #C9C9C9; color: #DA3B26; box-shadow: none;}
 
 /* responsive for mobile devices */
 @media (max-width: 767px)
