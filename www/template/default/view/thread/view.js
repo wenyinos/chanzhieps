@@ -20,7 +20,7 @@ $(document).ready(function()
             }
         }
     });
-    $.setAjaxJSONER('.jsoner', function(response){ bootbox.alert(response.message, function(){location.href = response.source; return false;});});
+    $.setAjaxJSONER('.jsoner', function(response){ bootbox.alert(response.message, function(){location.href = response.locate; return true;});});
     $.setAjaxJSONER('.switcher', function(response){ bootbox.alert(response.message, function(){location.href = response.locate; return false;});});
     $('.nav-system-forum').addClass('active');
 
