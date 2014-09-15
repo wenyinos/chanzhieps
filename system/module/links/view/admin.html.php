@@ -21,11 +21,11 @@
       <table class='table table-form'>
         <tr>
           <th><?php echo $lang->links->index;?></th> 
-          <td><?php echo html::textarea('index', isset($this->config->links->index) ? $this->config->links->index : '', "class='area-1' rows='10'");?></td> 
+          <td><?php echo html::textarea('index', isset($this->config->links->index) ? htmlspecialchars($this->config->links->index) : '', "class='area-1' rows='10'");?></td> 
         </tr>
         <tr>
           <th><?php echo $lang->links->all;?></th> 
-          <td><?php echo html::textarea('all', isset($this->config->links->all) ? $this->config->links->all : '', "class='area-1' rows='10'");?></td> 
+          <td><?php echo html::textarea('all', isset($this->config->links->all) ? htmlspecialchars($this->config->links->all) : '', "class='area-1' rows='10'");?></td> 
         </tr>
         <tr>
           <th></th>

@@ -67,12 +67,12 @@ js::set('path', $path);
         </tr>
         <tr>
           <th><?php echo $lang->book->summary;?></th>
-          <td colspan='2'><?php echo html::textarea('summary', $node->summary, "class='form-control' rows='2'");?></td>
+          <td colspan='2'><?php echo html::textarea('summary', htmlspecialchars($node->summary), "class='form-control' rows='2'");?></td>
         </tr>
         <?php if($node->type == 'article'):?>
         <tr>
           <th><?php echo $lang->book->content;?></th>
-          <td colspan='2' valign='middle'><?php echo html::textarea('content', $node->content, "rows='15' class='form-control'");?></td>
+          <td colspan='2' valign='middle'><?php echo html::textarea('content', htmlspecialchars($node->content), "rows='15' class='form-control'");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->book->addedDate;?></th>

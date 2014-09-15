@@ -65,7 +65,7 @@ $themeRoot = $webRoot . "theme/";
       </div>
       <div class='form-group'> 
         <label class='col-md-2 control-label'><?php echo $lang->category->desc;?></label>
-        <div class='col-md-9'><?php echo html::textarea('desc', $category->desc, "class='form-control' rows=3'");?></div>
+        <div class='col-md-9'><?php echo html::textarea('desc', htmlspecialchars($category->desc), "class='form-control' rows=3'");?></div>
       </div>
       <div class='categoryInfo'>
         <?php if($category->type == 'forum'):?>

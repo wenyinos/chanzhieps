@@ -23,11 +23,11 @@
         </tr>
         <tr>
           <th><?php echo $lang->company->desc;?></th> 
-          <td colspan='2'><?php echo html::textarea('desc',  isset($this->config->company->desc) ? $this->config->company->desc : '', "class='form-control' rows='5'");?></td> 
+          <td colspan='2'><?php echo html::textarea('desc',  isset($this->config->company->desc) ? htmlspecialchars($this->config->company->desc) : '', "class='form-control' rows='5'");?></td> 
         </tr>
         <tr>
           <th><?php echo $lang->company->content;?></th> 
-          <td colspan='2'><?php echo html::textarea('content',  isset($this->config->company->content) ? $this->config->company->content : '', "class='form-control' rows='15'");?></td> 
+          <td colspan='2'><?php echo html::textarea('content',  isset($this->config->company->content) ? htmlspecialchars($this->config->company->content) : '', "class='form-control' rows='15'");?></td> 
         </tr>
         <tr>
           <th></th>

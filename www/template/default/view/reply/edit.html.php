@@ -20,7 +20,7 @@
     <form method='post' class='form-horizontal' id='editForm' enctype='multipart/form-data'>
       <div class='form-group'>
         <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->reply->content;?></label>
-        <div class='col-md-11 col-sm-10'><?php echo html::textarea('content', $reply->content, "rows='15' class='form-control'");?></div>
+        <div class='col-md-11 col-sm-10'><?php echo html::textarea('content', htmlspecialchars($reply->content), "rows='15' class='form-control'");?></div>
       </div>
       <div class='form-group'>
         <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->thread->file;?></label>
