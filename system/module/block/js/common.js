@@ -45,7 +45,7 @@ $(function()
         });
     }
 
-    var $panelPreview = $('#panelPreview > .panel');
+    var $panelPreview = $('.panel-preview > .panel');
     $('#title').change(function()
     {
         $panelPreview.find('.title').text($(this).val());
