@@ -20,7 +20,7 @@ $browseLink     = $type == 'article' ? 'createBrowseLink' : 'create' . ucfirst($
 <?php $treeMenu = $this->tree->getTreeMenu($type, 0, array('treeModel', $browseLink));?>
 <div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
   <div class='panel-heading'>
-    <h4><?php echo $icon . $block->title;?></h4>
+    <strong><?php echo $icon . $block->title;?></strong>
   </div>
   <div class='panel-body'><?php echo $treeMenu;?></div>
 </div>
@@ -28,7 +28,7 @@ $browseLink     = $type == 'article' ? 'createBrowseLink' : 'create' . ucfirst($
 <?php $topCategories = $this->tree->getChildren(0, $type);?>
 <div id="block<?php echo $block->id?>" class='panel panel-block <?php echo $blockClass;?>'>
   <div class='panel-heading'>
-    <h4><?php echo $icon . $block->title;?></h4>
+    <strong><?php echo $icon . $block->title;?></strong>
   </div>
   <div class='panel-body'>
     <ul class='nav nav-secondary nav-stacked'>

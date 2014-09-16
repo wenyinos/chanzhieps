@@ -49,7 +49,7 @@ $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 :
             ?>
             </div>
             <strong class='text-important'>
-              <?php if(isset($content->time)) echo "<i class='icon-time'></i>" . formatTime($article->addedDate, DT_DATE4);?>
+              <?php if(isset($content->time)) echo "<i class='icon-time'></i> " . formatTime($article->addedDate, DT_DATE4);?>
             </strong> 
             &nbsp;<?php echo $article->summary;?>
           </div>

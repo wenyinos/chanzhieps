@@ -34,7 +34,7 @@ $themeRoot = $webRoot . "template/default/theme/";
       js::import($jsRoot . 'my.js');
 
       css::import($webRoot . 'zui/css/min.css');
-      css::import($themeRoot . 'default/style.css');
+      css::import($themeRoot . 'common/style.css');
       css::import($jsRoot    . 'jquery/treeview/min.css');
   }
   else
@@ -49,7 +49,7 @@ $themeRoot = $webRoot . "template/default/theme/";
   }
   else
   {
-      css::import($themeRoot . $config->site->theme . '/style.css');
+      // css::import($themeRoot . $config->site->theme . '/style.css');
   }
 
   if(isset($pageCSS)) css::internal($pageCSS);

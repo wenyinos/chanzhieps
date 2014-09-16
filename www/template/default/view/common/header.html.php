@@ -3,7 +3,7 @@
 <div class='page-container'>
   <?php $this->block->printRegion($layouts, 'all', 'top');?>
   <?php $topNavs = $this->loadModel('nav')->getNavs('top');?>
-  <nav id='navbar' class='navbar navbar-default' role='navigation'>
+  <nav id='navbar' class='navbar' role='navigation'>
     <div class='navbar-header'>
       <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#navbarCollapse'>
         <span class='icon-bar'></span>
