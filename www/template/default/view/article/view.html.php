@@ -42,7 +42,7 @@ js::execute($article->js);
       <section class='article-content'>
         <?php echo $article->content;?>
       </section>
-      <section>
+      <section class="article-files">
         <?php $this->loadModel('file')->printFiles($article->files);?>
       </section>
       <footer>
