@@ -66,7 +66,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->product->content;?></th>
-          <td colspan='2'><?php echo html::textarea('content', $product->content, "rows='10' class='form-control'");?></td>
+          <td colspan='2'><?php echo html::textarea('content', htmlspecialchars($product->content), "rows='10' class='form-control'");?></td>
         </tr>
         <tr>
           <th rowspan='4'><?php echo $lang->product->attribute?></th>

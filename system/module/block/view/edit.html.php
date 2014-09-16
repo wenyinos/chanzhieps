@@ -28,7 +28,7 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
   <div class='panel-body'>
     <form method='post' id='ajaxForm'>
       <?php if(strpos(',htmlcode, phpcode, slide, header', $type) == false or $type == 'html'):?>
-        <div id='panelPreview'>
+        <div id='panelPreview' class='panel-preview'>
           <div class='heading'>
             <div class='pull-right'><button type='button' class='btn' data-target='#customPanelModal' data-toggle='modal'><?php echo $lang->block->custom?></button></div>
             <strong><?php echo $lang->block->preview?></strong>
@@ -93,9 +93,22 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
       </table>
       <?php if(strpos(',htmlcode, phpcode, slide, header', $type) == false or $type == 'html'):?>
       <div id='customPanelModal' class='modal fade'>
-        <div class='modal-dialog w-800px'>
+        <div class='modal-dialog w-600px'>
           <div class='modal-header'><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><i class='icon-cog'></i> <strong><?php echo $lang->block->custom?></strong></div>
           <div class='modal-body'>
+            <div>
+              <div id='dialogPanelPreivew' class='panel-preview'>
+                <div class='heading'>
+                  <strong><?php echo $lang->block->preview?></strong>
+                </div>
+                <div class='panel panel-block' data-target='#customPanelModal' data-toggle='modal' >
+                  <div class='panel-heading'><i class='icon-heart-empty <?php echo isset($block->content->icon) ? $block->content->icon : '';?> icon'></i> <strong class='title'><?php echo $block->title?></strong></div>
+                  <div class='panel-body text-center'>
+                    <?php echo $lang->block->textExample;?>
+                  </div>
+                </div>
+              </div>
+            </div>
             <table class='table table-form mg-0'>
               <?php if(isset($config->block->defaultIcons[$type])):?>
               <tr>

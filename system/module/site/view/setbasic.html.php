@@ -51,7 +51,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->site->desc;?></th> 
-          <td colspan='2'><?php echo html::textarea('desc', $this->config->site->desc, "class='form-control' rows='10'");?></td> 
+          <td colspan='2'><?php echo html::textarea('desc', htmlspecialchars($this->config->site->desc), "class='form-control' rows='10'");?></td> 
         </tr>
        <tr class='icp'>
           <th><?php echo $lang->site->icp;?></th> 

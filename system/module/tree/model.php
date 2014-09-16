@@ -482,12 +482,13 @@ class treeModel extends model
         {
             $alias = $this->post->alias[$key];
             $alias = seo::unify($alias, '-');
+            $order = $i * 10;
             if(empty($categoryName)) continue;
 
             /* First, save the child without path field. */
             $category->name  = $categoryName;
             $category->alias = $alias;
-            $category->order = $this->post->maxOrder + $i * 10;
+            $category->order = $order;
             $mode = $this->post->mode[$key];
 
             /* Add id to check alias. */
@@ -510,7 +511,6 @@ class treeModel extends model
                     ->set('path')->eq($categoryPath)
                     ->where('id')->eq($categoryID)
                     ->exec();
-                $i ++;
             }
             else
             {
@@ -518,9 +518,11 @@ class treeModel extends model
                 $this->dao->update(TABLE_CATEGORY)
                     ->set('name')->eq($categoryName)
                     ->set('alias')->eq($alias)
+                    ->set('order')->eq($order)
                     ->where('id')->eq($categoryID)
                     ->exec();
             }
+            $i ++;
         }
 
         return !dao::isError();

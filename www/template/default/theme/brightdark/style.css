@@ -59,9 +59,9 @@ a:hover,a:active{color: #da3b26;}
 .text-muted{color: #666}
 
 /* buttons. */
-.btn{border: none; padding: 7px 12px; -webkit-transition: 0.25s linear; -moz-transition: 0.25s linear; -o-transition: 0.25s linear; transition: 0.25s linear; -webkit-backface-visibility: hidden; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none;border-radius: 2px}
+.btn{border: none; padding: 6px 12px; -webkit-transition: 0.25s linear; -moz-transition: 0.25s linear; -o-transition: 0.25s linear; transition: 0.25s linear; -webkit-backface-visibility: hidden; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none;border-radius: 2px}
 .btn-primary{background: #2E353F;}
-.btn-primary:hover{background: #da3b26;}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active{background: #da3b26;}
 .btn-default{color: #f1f1f1; background: #2C3E50;}
 .btn-default:hover{color: #fff; background: #da3b26;}
 
@@ -124,8 +124,8 @@ textarea{height: auto;}
 .treeview li:hover .hitarea:before {color: #DA3B26!important}
 
 /* dropdown */
-.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus{color: #DA3B26;}
-.dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus{color: #DA3B26; box-shadow: none;}
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus{background: #C9C9C9; color: #DA3B26;}
+.dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus{background: #C9C9C9; color: #DA3B26; box-shadow: none;}
 
 /* responsive for mobile devices */
 @media (max-width: 767px)
