@@ -18,7 +18,7 @@
           <?php if(extension_loaded('gd')):?>
           <td>
             <div class='heading'><i class='icon-mobile-phone'></i> <?php echo $lang->qrcodeTip;?></div>
-            <?php echo html::image('javascritp:;', "width='200' height='200' data-src='" . $this->createLink('misc', 'qrcode') . "'");?>
+            <?php echo html::image('javascript:;', "width='200' height='200' data-src='" . $this->createLink('misc', 'qrcode') . "'");?>
           </td>
           <?php endif;?>
         </tr>
