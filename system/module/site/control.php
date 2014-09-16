@@ -21,7 +21,16 @@ class site extends control
     {
         if(!empty($_POST))
         {
-            $setting = fixer::input('post')->join('moduleEnabled', ',')->setDefault('moduleEnabled', '')->get();
+            $setting = fixer::input('post')->join('moduleEnabled', ',')->remove('allowedFiles')->setDefault('moduleEnabled', '')->get();
+
+            $dangers = explode(',', $this->config->file->dangers);
+            $allowedFiles = trim(strtolower($this->post->allowedFiles), ',');
+            $allowedFiles = str_replace($dangers, '', $allowedFiles);
+            $allowedFiles = seo::unify($allowedFiles, ',');
+            $allowedFiles = ',' . $allowedFiles . ','; 
+            $fileConfig   = array('allowed' => $allowedFiles);
+            $this->loadModel('setting')->setItems('system.common.file', $fileConfig);
+
             $result  = $this->loadModel('setting')->setItems('system.common.site', $setting);
             $cache   = $this->loadModel('cache')->createConfigCache();
 

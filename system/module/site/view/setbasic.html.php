@@ -68,6 +68,13 @@
           </td>
         </tr>
         <tr>
+          <th><?php echo $lang->site->allowedFiles;?></th>
+          <td colspan='2'>
+            <?php echo html::textarea('allowedFiles', $this->config->file->allowed, "rows='4' class='form-control'");?>
+            <span class='text-important'><?php echo $lang->site->fileAllowedRole;?></span>
+          </td>
+        </tr>
+        <tr>
           <th></th>
           <td colspan='2'>
             <?php echo html::submitButton();?>

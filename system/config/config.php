@@ -59,7 +59,8 @@ $config->default->method = 'index';            // Default metho.d
 
 /* Upload settings. */
 $config->file = new stdclass();          
-$config->file->dangers = 'php,php3,php4,phtml,php5,jsp,py,rb,asp,aspx,ashx,asa,cer,cdx,aspl,shtm,shtml,html,htm'; // Dangerous file types,
+$config->file->dangers = 'php,php3,php4,phtml,php5,jsp,py,rb,asp,aspx,ashx,asa,cer,cdx,aspl,shtm,shtml,html,htm'; // Dangerous file types.
+$config->file->allowed = ',txt,doc,docx,dot,wps,wri,pdf,ppt,xls,xlsx,ett,xlt,xlsm,csv,jpg,jpeg,png,psd,gif,ico,bmp,swf,avi,rmvb,rm,mp3,mp4,3gp,flv,mov,movie,rar,zip,bz,bz2,tar,gz,'; // Allowed file types.
 $config->file->maxSize = 1024 * 1024;  // Max size allowed(Byte).
 
 /* Module dependence setting. */

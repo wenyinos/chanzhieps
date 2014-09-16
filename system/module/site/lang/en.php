@@ -24,6 +24,7 @@ $lang->site->icpLink       = 'ICP Link';
 $lang->site->slogan        = 'Slogan';
 $lang->site->mission       = 'Mission';
 $lang->site->copyright     = 'Copyright';
+$lang->site->allowedFiles  = 'Allowed file types';
 
 $lang->site->setBasic      = "Baisc";
 $lang->site->setOauth      = "Oauth";
@@ -42,3 +43,5 @@ $lang->site->moduleAvailable['blog']    = 'Blog';
 $lang->site->moduleAvailable['book']    = 'Book';
 $lang->site->moduleAvailable['message'] = 'Message';
 $lang->site->moduleAvailable['upload']  = 'Upload files';
+
+$lang->site->fileAllowedRole = 'Use "," to divide different extension name.';
