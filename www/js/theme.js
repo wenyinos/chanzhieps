@@ -5,126 +5,93 @@
 
     // hex color reg
     var hexReg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
-    var templates = {};
+    var lessFileTemplate = '/template/{0}/theme/{1}/style.less';
+    var lessTemplates = {};
 
-    /* theme */
-    var theme = function(options)
+    var Theme = function(options, variables)
     {
-        this.options   = this.getOptions(options);
-        this.init();
+        this.getOptions(options);
+        this.getLess();
+        this.variables = options.variables || variables;
     };
 
-    theme.DEFAULTS = 
+    Theme.prototype.getOptions = function (options)
     {
-        templateUrl:                '/theme/custom/template.less',
-        colorBackgroud:             '#ffffff',
-        colorFore:                  '#333',
-        colorBorder:                '#e5e5e5',
-        backgroundImage:            'none',
-        fontSize:                   '14px',
-        colorPrimary:               '#cc0f16',
-            colorPrimaryR:          '204',
-            colorPrimaryG:          '15',
-            colorPrimaryB:          '22',
-            colorPrimaryRgb:        '204,15,22',
-            colorPrimaryInverseDim: '#e3e3e3',
-            colorPrimaryInverse:    '#fff',
-            colorSecondaryR:        '153',
-            colorSecondaryG:        '0',
-            colorSecondaryB:        '0',
-            colorSecondaryRgb:      '153,0,0',
-            colorSecondaryDark:     '#820808',
-            colorSecondaryLight:    '#ac0303',
-            colorPale:              '#ffeaeb',
-        borderRadius:               '4px',
-        avatarBorderRadius:         '20px',
-        borderWidth:                '1px',
-        borderStyle:                'solid'
+        this.options = $.extend({}, theme.DEFAULTS, options);
+        if(!this.options.lessFile)
+        {
+            this.options.lessFile = lessFileTemplate.format(template, theme);
+        }
     };
 
-    theme.prototype.getOptions = function (options)
+    Theme.prototype.getBanner = function()
     {
-        options = $.extend({}, theme.DEFAULTS, options);
-        return options;
+        return this.options.banner.format($.extend(
+        {
+            buildTime: (new Date()).format('yyyy-MM-dd mm:hh:ss')
+        }, this, this.options));
     };
 
-    theme.prototype.init = function()
+    Theme.prototype.compileVariables = function(variables)
     {
-        this.getTemplate();
-
-        this.caculateColor();
+        this.variables = variables || this.variables;
+        var lessCode = '';
+        for(var key in variables)
+        {
+            lessCode += '@' + key + ': ' + variables[key] + '\n';
+        }
+        this.variablesCode = lessCode;
+        return lessCode;
     }
 
-    theme.prototype.getTemplate = function()
+    Theme.prototype.compile = function(variables)
+    {
+        this.compileVariables(variables);
+        this.css = '';
+        
+        var lessCode = this.variablesCode + '\n' + this.less,
+            parser   = window.less.Parser(),
+            options  = this.options,
+            that     = this;
+        parser.parse(lessCode, function(error, result)
+        {
+            if(!error)
+            {
+                that.css = that.getBanner() + '\n\n' + result.toCSS();
+            }
+            else
+            {
+                throw new Error('Theme compile: ' + error);
+            }
+        });
+
+        return this.css;
+    };
+
+    Theme.prototype.getLess = function()
     {
         /* get template */
-        var url = this.options.templateUrl;
-        this.template = templates[url];
-        if(this.template == undefined)
+        var url = this.options.lessFile;
+        this.less = lessTemplates[url];
+        if(!this.less)
         {
-            var t = this;
-            $.ajax({url: url, async: false})
-             .success(function(data) { t.template = data; templates[url] = t.template;})
-             .error(function() { throw new Error("Can't get theme template!"); });
+            var that = this;
+            $.ajax({url: url, async: false, type: 'GET'})
+             .done(function(data) {that.less = data; lessTemplates[url] = that.less;})
+             .fail(function() {throw new Error("Can't get theme template(a less file named 'style.less')!");});
         }
-    }
+    };
 
-    theme.prototype.caculateColor = function()
+    Theme.DEFAULTS =
     {
-        var colorPrimary = new color(this.options.colorPrimary);
-        var colorPrimaryInverse = colorPrimary.contrast('#333');
-        this.options.colorPrimaryR = colorPrimary.r;
-        this.options.colorPrimaryG = colorPrimary.g;
-        this.options.colorPrimaryB = colorPrimary.b;
-        this.options.colorPrimaryRgb = colorPrimary.r + ', ' + colorPrimary.g + ', ' + colorPrimary.b;
-        this.options.colorPrimaryInverse = colorPrimaryInverse.hexStr();
-        this.options.colorPrimaryInverseDim = colorPrimaryInverse.darken(10).hexStr();
-
-        var colorSecondary;
-        if(this.options.colorSecondary == undefined)
-        {
-            colorSecondary = colorPrimary.clone().darken(10).desaturate(15);
-
-            this.options.colorSecondary = colorSecondary.hexStr();
-        }
-        else
-        {
-            colorSecondary = new color(this.options.colorSecondary);
-        }
-        this.options.colorSecondaryR = colorSecondary.r;
-        this.options.colorSecondaryG = colorSecondary.g;
-        this.options.colorSecondaryB = colorSecondary.b;
-        this.options.colorSecondaryRgb = colorSecondary.r + ', ' + colorSecondary.g + ', ' + colorSecondary.b;
-        this.options.colorSecondaryDark = colorSecondary.darken(5).hexStr();
-        this.options.colorSecondaryLight = colorSecondary.lighten(5).hexStr();
-
-        this.options.colorPale = new color({h: colorPrimary.hue(), s: 0.54, l: 0.95}).spin(-7).hexStr();
-    }
-
-    theme.prototype.toCss = function()
-    {
-        var css = this.template;
-        for(var name in this.options)
-        {
-            var value = this.options[name];
-            if(value != undefined)
-            {
-                var reg = new RegExp("(@" + name + ",)", "g");
-                css = css.replace(reg, value + ',');
-                reg = new RegExp("(@" + name + ";)", "g");
-                css = css.replace(reg, value + ';');
-                reg = new RegExp("(@" + name + "})", "g");
-                css = css.replace(reg, value + '}');
-                reg = new RegExp("(@" + name + " )", "g");
-                css = css.replace(reg, value + ' ');
-            }
-        }
-
-        return css;
-    }
+        // lessFile: '',
+        theme    : 'default',
+        template : 'default',
+        banner   : '/*\n * Chanzhi custom theme: {template}/theme/{theme}\n *\n * This style built by machine at {buildTime}.\n * Options:\n * {variablesCode}\n */';
+    };
 
     /* color */
-    var color = function(r, g, b, a)
+    var Color = function(r, g, b, a)
     {
         this.r = 0;
         this.g = 0;
@@ -171,7 +138,7 @@
         }
     }
 
-    color.prototype.rgb = function(rgb)
+    Color.prototype.rgb = function(rgb)
     {
         if(rgb != undefined)
         {
@@ -194,7 +161,7 @@
         else return {r: this.r, g: this.g, b: this.b, a: this.a};
     }
 
-    color.prototype.hue = function(hue)
+    Color.prototype.hue = function(hue)
     {
         var hsl = this.toHsl();
 
@@ -208,7 +175,7 @@
         }
     }
 
-    color.prototype.darken = function(amount)
+    Color.prototype.darken = function(amount)
     {
         var hsl = this.toHsl();
 
@@ -219,24 +186,24 @@
         return this;
     }
 
-    color.prototype.clone = function()
+    Color.prototype.clone = function()
     {
         return new color(this.r, this.g, this.b, this.a);
     }
 
-    color.prototype.lighten = function(amount)
+    Color.prototype.lighten = function(amount)
     {
         return this.darken(-amount);
     }
 
-    color.prototype.fade = function(amount)
+    Color.prototype.fade = function(amount)
     {
         this.a = clamp(amount/100, 1);
 
         return this;
     }
 
-    color.prototype.spin = function(amount)
+    Color.prototype.spin = function(amount)
     {
         var hsl = this.toHsl();
         var hue = (hsl.h + amount) % 360;
@@ -247,7 +214,7 @@
         return this;
     }
 
-    color.prototype.toHsl = function()
+    Color.prototype.toHsl = function()
     {
         var r = this.r/ 255,
         g = this.g / 255,
@@ -276,7 +243,7 @@
         return { h: h * 360, s: s, l: l, a: a };
     }
 
-    color.prototype.luma = function()
+    Color.prototype.luma = function()
     {
         var r = this.r / 255,
             g = this.g / 255,
@@ -289,7 +256,7 @@
         return 0.2126 * r + 0.7152 * g + 0.0722 * b;
     }
 
-    color.prototype.saturate = function(amount)
+    Color.prototype.saturate = function(amount)
     {
         var hsl = this.toHsl();
 
@@ -301,12 +268,12 @@
         return this;
     }
 
-    color.prototype.desaturate = function(amount)
+    Color.prototype.desaturate = function(amount)
     {
         return this.saturate(-amount);
     }
 
-    color.prototype.contrast = function(dark, light, threshold)
+    Color.prototype.contrast = function(dark, light, threshold)
     {
         if(threshold == undefined) threshold = 0.43;
         else threshold = number(threshold);
@@ -333,7 +300,7 @@
         }
     }
 
-    color.prototype.hexStr = function()
+    Color.prototype.hexStr = function()
     {
         // return 'rgb('+this.r+','+this.g+','+this.b+')';
 
@@ -433,7 +400,8 @@
         return parseFloat(n);
     }
 
-    window.theme = theme;
+    window.Theme      = Theme;
     window.isHexColor = isHexColor;
-    window.color = color;
+    window.Color      = Color;
+    window.color      = Color; // to compatialbe old code
 }(jQuery, window, document, Math);
