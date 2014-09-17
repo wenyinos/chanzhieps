@@ -1,12 +1,12 @@
 $(function()
 {
-    tempColor = new color();
+    tempColor = new Color();
     $('.color').each(function()
     {
         var $this = $(this);
         var c = $this.attr('data');
         if(!c) return;
-        var cc = new color(c).contrast().hexStr();
+        var cc = new Color(c).contrast().hexStr();
 
         ($this.hasClass('input-group') ? $this.find('.input-group-btn .dropdown-toggle') : $this).css({'background': c, 'color': cc}).find('.caret').css('border-top-color', cc);
     }).click(function()
@@ -28,7 +28,7 @@ $(function()
 
         if(tempColor.isHexColor(val))
         {
-            var ic = (new color(val)).contrast().hexStr();
+            var ic = (new Color(val)).contrast().hexStr();
             $this.attr('placeholder', val).closest('.color').removeClass('error').find('.input-group-btn .dropdown-toggle').css({'background': val, 'color': ic}).find('.caret').css('border-top-color', ic);;
         }
         else
