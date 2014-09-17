@@ -54,6 +54,14 @@ tr.text-center > td.text-right, tr.text-center > th.text-right {text-align: righ
 .mg-0 {margin: 0!important}
 
 /* --- Components --- */
+/* Navbar */
+.navbar {background: #f7f7f7;}
+@media (min-width:768px) {.navbar-brand {display: none;} .navbar-collapse {padding-left: 0;}}
+
+.navbar-toggle .icon-bar {background: #ccc}
+.navbar-toggle:hover, .navbar-toggle:focus {background: #fff;}
+.navbar-toggle:hover .icon-bar, .navbar-toggle:focus .icon-bar {background: #aaa}
+
 /* Breadcrumb */
 .breadcrumb {color: #808080; padding: 0;}
 .breadcrumb:before {color: #aaa; font-size: 14px; margin:0 5px; display: inline-block; content: "\e63d"; font-family: ZenIcon;}
@@ -75,6 +83,10 @@ tr.text-center > td.text-right, tr.text-center > th.text-right {text-align: righ
 .tree > li ul > li:hover:before {content: '\e6ec';}
 .tree > li ul > li:after {position: absolute; display: block; content: ""; width: 15px; left: -1px; top: 12px; height: 20px; border-top: 1px dashed #ccc;}
 .tree > li > ul li:last-child:after {border-left: 1px solid #fff;}
+
+/* Page */
+.page {padding: 8px 0; color: #bbb; text-align: right;}
+.page > a {display: inline-block; margin-left: 3px;}
 
 /* Unordered list */
 .ul-list {padding: 0;}
@@ -108,11 +120,23 @@ tr.text-center > td.text-right, tr.text-center > th.text-right {text-align: righ
 
 /* Article */
 .article {margin-bottom: 20px; border: 1px solid #ddd; padding: 0}
+
 .article > header {padding: 10px 20px 0;}
+.article > header h1, .article > header h2, .article > header h3 {font-size: 22px}
 .article > header > .dl-inline, .article > header > .abstract {margin: 0 -20px; padding: 10px 20px; border-radius: 0}
 .article > header > .dl-inline {background: none}
-.article > .article-content {padding: 20px; border-bottom: 1px dotted #ddd}
-.article > .article-files {padding: 10px 20px; border-bottom: 1px dotted #ddd}
+
+.article > .article-content {padding: 20px;}
+
+.article-files {padding: 10px 20px; border-top: 1px dotted #ddd; background: #f5f5f5}
+.article-files > .files-list {margin: -5px}
+
+.article > footer {border-top: 1px dotted #ddd; padding: 10px 20px 20px}
+
+/* List */
+.list {border: 1px solid #ddd; border-radius: 2px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); margin-bottom: 20px;}
+.list > header {padding: 8px 15px; background-color: #f1f1f1; color: #333}
+.list > header h2 {font-size: 14px; font-weight: bold; margin: 0; padding: 0; line-height: 20px}
 
 /* Carousel */
 .carousel {margin-bottom: 20px; overflow: hidden;}
@@ -134,6 +158,9 @@ tr.text-center > td.text-right, tr.text-center > th.text-right {text-align: righ
 @media (max-width: 620px) {.carousel-caption {top: 10px; padding-top: 0;} .carousel-caption h2 {font-size: 14px;} .carousel-caption ul {font-size: 12px; line-height: 1.2em; padding: 5px 0 5px 20px} .carousel-caption .btn {font-size: 12px; padding: 4px 15px;}}
 @media (max-width: 480px) {.carousel-caption{top: 10px;} .carousel-caption ul {font-size: 12px; line-height: 1.1em; padding: 4px 0 4px 20px} .carousel-caption h2 {font-size: 12px; margin: 0} .carousel-caption .btn {font-size: 12px; padding: 2px 6px;}.carousel-inner>.item>img, .carousel-inner>.item>a>img {min-height: 100px}}
 */
+
+/* Panel actions */
+.panel-actions {margin-top: -6px;margin-right: -12px; float: right;}
 
 /* Panel block */
 .panel-block .panel-body {padding: 10px 15px}
@@ -189,6 +216,19 @@ tr.text-center > td.text-right, tr.text-center > th.text-right {text-align: righ
 .wechat-block .qrcode img {width: 160px; border: 1px solid #ddd;}
 .wechat-block .name {font-size: 12px; margin-bottom: 6px; font-weight: bold;}
 
+/* --- Form --- */
+/* Required */
+form .star {display: none;}/* hide star */
+.required:after {font-family: arial;font-size: 24px}
+[class*="col-"].required {position: relative;}
+[class*="col-"].required:after {position: absolute; top: 4px; right: -2px}
+.control-label.required:after {right: -10px}
+.required-wrapper {position: relative;width: 100%; height: 0;overflow: visible;}
+.required-wrapper.required:after {right: -13px;top: 4px}
+
+/* Form in panel */
+.panel-body > form {padding-right: 10px; max-width: 1000px}
+
 /* --- Specail part --- */
 /* Header */
 #header {position: relative;}
@@ -202,12 +242,8 @@ tr.text-center > td.text-right, tr.text-center > th.text-right {text-align: righ
 #headNav nav > a {display: inline-block; margin-right: 5px;}
 #headNav nav > a:last-child {margin-right: 0;}
 
-/* Navbar */
-#navbar {background: #f7f7f7;}
-@media (min-width:768px) {#navbar .navbar-brand {display: none;} #navbar .navbar-collapse {padding-left: 0;}}
-
 /* Footer */
-#footer {padding: 20px 0; text-align: center; position: relative;}
+#footer {padding: 20px 0; text-align: center; position: relative; border-top: 1px solid #ddd}
 #footNav {position: absolute; left: 0; top: 20px;}
 #footNav a {display: inline-block; margin-right: 10px; color: #777;}
 #footNav a:hover {color: #145BCC}
@@ -221,3 +257,16 @@ tr.text-center > td.text-right, tr.text-center > th.text-right {text-align: righ
 /* Go to top */
 #go2top {position: fixed; font-size: 28px; color: #999; bottom: 80px; right: -40px; width: 40px; line-height: 40px; text-align: center; text-shadow:1px 1px 0px #fff; display: none; border-radius: 20px; background-color: #f1f1f1}
 #go2top:hover { background-color: #e5e5e5; color: #333; border-color: #aaa; text-decoration: none;}
+
+/* Docker */
+#rightDocker {position: fixed; top: 50%; margin-top: -40px; right: 0}
+#rightDockerBtn {border-radius: 4px 0 0 4px}
+#rightDockerBtn i {font-size: 28px; margin-top: 2px; display: block}
+.docker-right {padding: 20px 10px; background: #e5e5e5;}
+.docker-right .table {margin-bottom: 0; font-size: 14px}
+.docker-right .table-borderless td {text-align: center; vertical-align: middle; padding: 0 15px 15px}
+.popover {max-width: 900px}
+.docker-right .icon-mobile-phone, .docker-right .icon-weixin {font-size: 28px; color: #fff; background: #145CCD; display: inline-block; width: 36px; line-height: 36px; height: 36px; border-radius: 25px; vertical-align: middle; margin-right: 10px;}
+.docker-right .icon-weixin {background: #64ab23 url(images/main/weixin.png) no-repeat center}
+.docker-right {vertical-align: middle;}
+.docker-right img {width: 200px; width:auto\0; height: 200px; margin-top: 10px; border: 1px solid #ccc}

@@ -23,7 +23,7 @@
 .card-template.current .theme.current .theme-card {border-color: #47A447; -moz-box-shadow:0px 0px 6px #47A447; -webkit-box-shadow:0px 0px 6px #47A447; box-shadow:0px 0px 6px #47A447; opacity: 1}
 .theme-card > .btn-custom {position: absolute; display: none; opacity: 0; left: 45px; top: 20px; z-index: 10; color: #fff!important}
 .theme.current .theme-card:hover > .btn-custom {opacity: 1; display: block;}
-.theme.current.custom:hover .theme-img img {-webkit-filter: blur(5px);-moz-filter: blur(5px);-ms-filter: blur(5px);-o-filter: blur(5px);filter: blur(5px);filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=15, MakeShadow=false);}
+.theme.current.custom:hover .theme-img {-webkit-filter: blur(5px);-moz-filter: blur(5px);-ms-filter: blur(5px);-o-filter: blur(5px);filter: blur(5px);filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=15, MakeShadow=false);}
 
 .color-tile {display: block; float: left; width: 34px; height: 34px; border-radius: 4px; border: 1px solid #ccc; margin: 2px 4px 2px 0; cursor: pointer; transition: all 0.4s; text-align: center; line-height: 32px;}
 .color-tile:hover, .color-tile.active {border-color: #333; box-shadow: 0 1px 4px rgba(0,0,0,0.5)}

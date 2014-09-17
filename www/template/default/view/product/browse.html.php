@@ -30,7 +30,7 @@ include TPL_ROOT . 'common/treeview.html.php';
             <?php 
             if(empty($product->image)) 
             {
-                echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&name=$product->alias"), '<div class="media-placeholder" style="background-color: hsl(' . rand(0,359) . ',34%,89%)">' . $product->name . '</div>', "class='media-wrapper'");
+                echo html::a(inlink('view', "id=$product->id", "category={$category->alias}&name=$product->alias"), '<div class="media-placeholder" data-id="' . $product->id . '">' . $product->name . '</div>', "class='media-wrapper'");
             }
             else
             {
