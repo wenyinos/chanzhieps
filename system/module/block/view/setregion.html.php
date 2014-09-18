@@ -16,9 +16,11 @@
   <table class='table mgb-0'>
     <thead>
       <tr>
-        <th class='text-center col-xs-8'><?php echo $lang->block->title;?></th>
+        <th class='text-center col-xs-2'><?php echo $lang->block->title;?></th>
         <th class='text-center col-xs-2'><?php echo $lang->block->grid;?></th>
-        <th class='text-center col-xs-2'><?php echo $lang->actions;?></th>
+        <th class='text-center col-xs-2'><?php echo $lang->block->style;?></th>
+        <th class='text-center col-xs-1'><?php echo $lang->actions;?></th>
+        <th class='text-center col-xs-1'><?php echo $lang->block->sort;?></th>
       </tr>
     </thead>
   </table>
@@ -28,6 +30,7 @@
   <div><?php echo html::submitButton();?></div>
 </form>
 <div class='hide'><div id='entry'><?php echo $this->block->createEntry($template, null, 'key');?></div></div>
+<div class='hide'><div id='child'><?php echo $this->block->createEntry($template, null, 'key', 2);?><?php echo html::hidden('parent[key]', 'parent');?></div></div>
 </div>
 <div class='modal-footer'>
 <?php include '../../common/view/footer.modal.html.php';?>

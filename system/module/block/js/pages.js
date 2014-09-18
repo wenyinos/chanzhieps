@@ -3,7 +3,27 @@ $(document).ready(function()
     $(document).on('click', 'a.plus', function()
     {
         v.key ++;
-        $(this).closest('#blockList').append($('#entry').html().replace(/key/g, v.key)).sortable('reset');
+        $(this).parent().parent().after($('#entry').html().replace(/key/g, v.key)).sortable('reset');
+        fixButton();
+    });
+
+    $(document).on('click', 'a.plus-child', function()
+    {
+        v.key ++;
+        $('#child').find('[name*=parent]').val($(this).parents('.block-item').data('block'));
+        var child = $('#child').html().replace(/key/g, v.key);
+        $(this).parent().parent().after(child).sortable('reset');
+        fixButton();
+    });
+
+    $(document).on('click', 'a.btn-add-child', function()
+    {
+        v.key ++;
+        $('#child').find('[name*=parent]').val($(this).parents('.block-item').data('block'));
+        var entry = $('#child').html().replace(/key/g, v.key);
+        $(this).parent().parent().find('.children').append(entry).sortable('reset');
+        $(this).parent().siblings(0).children('.block').attr('disabled', true);
+        fixButton();
     });
 
     /* Set border and title show. */
@@ -22,7 +42,17 @@ $(document).ready(function()
     });
 
     /* Delete options. */
-    $(document).on('click', '.delete', function(){$(this).parents('.block-item').remove();});
+    $(document).on('click', '.delete', function()
+    {
+        if($(this).parents('.children').size() == 0)
+        {
+            $(this).parents('.block-item').remove();
+        }
+        else
+        {
+            $(this).parent().parent('.block-item').remove();
+        }
+    });
 
    /* Sort up. */
     $(document).on('click', '.icon-arrow-up', function()
@@ -38,3 +68,10 @@ $(document).ready(function()
     });
 
 })
+
+function fixButton()
+{
+    $('.children').find('.children').remove();
+    $('.children').find('.btn-add-child').remove();
+    $('.children').find('option[value=row]').remove();
+}
