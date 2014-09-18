@@ -3,6 +3,9 @@
 #blockList .block-item {padding: 5px 0;}
 #blockList .block-item > .actions {line-height: 30px}
 #blockList .block-item > .actions i{padding: 0 3px;}
-#blockList .block-item > .actions .icon-move {cursor: move; color: #666}
+#blockList .block-item  .icon-move {cursor: move; color: #666}
 #blockList .block-item.dragging {opacity: 0.35; background-color: #FFF4E5;}
 #blockList .block-item.drag-shadow {border: 1px solid #ddd; box-shadow:0 1px 8px rgba(0,0,0,.15); background-color: #fff; z-index: 9999}
+.children{margin-left: 20px; clear: both;}
+.block-item label{margin-right: 10px; font-weight: 400;}
+.block-item label input[type='checkbox']{margin: 8px 3px 0 0;}

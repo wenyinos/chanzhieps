@@ -176,47 +176,46 @@ class blockModel extends model
      * @param  string  $template
      * @param  object  $block 
      * @param  mix     $key 
+     * @param  int     $grade 1,2
      * @access public
      * @return void
      */
-    public function createEntry($template, $block = null, $key)
+    public function createEntry($template, $block = null, $key, $grade = 1)
     {
         $blockOptions[''] = $this->lang->block->select;
         $blockOptions += $this->getPairs($template);
+
         $blockID = isset($block->id) ? $block->id : '';
         $type    = isset($block->type) ? $block->type : '';
         $grid    = isset($block->grid) ? $block->grid : '';
 
-        $entry = "<div class='block-item row' data-id='" . $blockID . "'>";
-        $entry .= "<div class='col-xs-8'><div class='input-group'>";
-        $entry .= html::select("blocks[{$key}]", $blockOptions, $blockID, "class='form-control'");
+        $entry = "<div class='block-item row' data-block='{$key}' data-id='{$blockID}'>";
+        $entry .= "<div class='col-xs-3'>" . html::select("blocks[{$key}]", $blockOptions, $blockID, "class='form-control block' id='block_{$key}'") . "</div>";
+        $entry .= "<div class='col-xs-2'>" . html::select("grid[{$key}]", $this->lang->block->gridOptions, $grid, "class='form-control'") . '</div>';
 
         $titlelessChecked = isset($block->titleless) && $block->titleless ? 'checked' : '';
         $borderlessChecked = isset($block->borderless) && $block->borderless ? 'checked' : '';
+        $containerChecked = isset($block->container) && $block->container ? 'checked' : '';
         $entry .= "
-            <div class='input-group-addon'>
-              <div class='checkbox checkbox-inline'>
-                 <label>
-                   <input type='checkbox' {$titlelessChecked} value='1'><input type='hidden' name='titleless[{$key}]' /><span>{$this->lang->block->titleless}</span>
-                 </label>
-              </div>
-              <div class='checkbox checkbox-inline'>
-                <label>
-                  <input type='checkbox' {$borderlessChecked} value='1'><input type='hidden' name='borderless[{$key}]' /><span>{$this->lang->block->borderless}</span>
-                </label>
-              </div>
-            </div></div></div>";
+            <div class='text-center col-xs-3'>
+               <label>
+                 <input type='checkbox' {$titlelessChecked} value='1'><input type='hidden' name='titleless[{$key}]' /><span>{$this->lang->block->titleless}</span>
+               </label>
+              <label>
+                <input type='checkbox' {$borderlessChecked} value='1'><input type='hidden' name='borderless[{$key}]' /><span>{$this->lang->block->borderless}</span>
+              </label>
+            </div>";
 
-        $entry .= "<div class='col-xs-2'>";
-        $entry .= html::select("grid[{$key}]", $this->lang->block->gridOptions, $grid, "class='form-control'");
+        $entry .= '<div class="col-xs-3 actions">';
+        if($grade == 1) $entry .= html::a('javascript:;', $this->lang->block->add, "class='plus'");
+        if($grade == 2) $entry .= html::a('javascript:;', $this->lang->block->add, "class='plus-child'");
+        $entry .= html::a('javascript:;', $this->lang->delete, "class='delete'");
+        $entry .= html::a(inlink('edit', "template={$template}&blockID={$blockID}&type={$type}"), $this->lang->edit, "class='edit'");
+        if($grade == 1) $entry .= html::a('javascript:;', $this->lang->block->addChild, "class='btn-add-child'");
         $entry .= '</div>';
-
-        $entry .= '<div class="text-center col-xs-2 actions">';
-        $entry .= html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus'");
-        $entry .= html::a('javascript:;', "<i class='icon-remove'></i>", "class='delete'");
-        $entry .= html::a(inlink('edit', "template={$template}&blockID={$blockID}&type={$type}"), "<i class='icon-edit'></i>", "class='edit'");
-        $entry .= "<i class='icon-move sort-handle'></i>";
-        $entry .= '</div></div>';
+        $entry .= "<div class='col-xs-1'><i class='icon-move sort-handle'></i></div>";
+        if($grade == 1) $entry .= "<div class='children'></div>";
+        $entry .= "</div>";
         return $entry;
     }
 
