@@ -3,7 +3,7 @@ $(document).ready(function()
     $(document).on('click', 'a.plus', function()
     {
         v.key ++;
-        $(this).parent().parent().after($('#entry').html().replace(/key/g, v.key)).sortable('reset');
+        $(this).parent().parent().after($('#entry').html().replace(/key/g, v.key));
         computeParent();
     });
 
@@ -12,7 +12,7 @@ $(document).ready(function()
         v.key ++;
         $('#child').find('[name*=parent]').val($(this).parents('.block-item').data('block'));
         var child = $('#child').html().replace(/key/g, v.key);
-        $(this).parent().parent().after(child).sortable('reset');
+        $(this).parent().parent().after(child);
         computeParent();
     });
 
@@ -21,7 +21,7 @@ $(document).ready(function()
         v.key ++;
         $('#child').find('[name*=parent]').val($(this).parents('.block-item').data('block'));
         var entry = $('#child').html().replace(/key/g, v.key);
-        $(this).parent().parent().find('.children').append(entry).sortable('reset');
+        $(this).parent().parent().find('.children').append(entry);
         $(this).parent().siblings(0).children('.block').val(0);
         computeParent();
     });

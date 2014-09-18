@@ -232,7 +232,7 @@ class blockModel extends model
         $entry .= html::a(inlink('edit', "template={$template}&blockID={$blockID}&type={$type}"), $this->lang->edit, "class='edit'");
         if($grade == 1) $entry .= html::a('javascript:;', $this->lang->block->addChild, "class='btn-add-child'");
         $entry .= '</div>';
-        $entry .= "<div class='col-xs-1'><i class='icon-move sort-handle'></i></div>";
+        $entry .= "<div class='col-xs-1'><i class='icon-move sort-handle sort-handle-{$grade}'></i></div>";
         if($grade == 1)
         {
             $entry .= "<div class='children'>";
