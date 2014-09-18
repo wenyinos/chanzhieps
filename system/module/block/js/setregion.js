@@ -1,9 +1,10 @@
 $(document).ready(function()
 {
-    $('#blockList').sortable(
+    var initSortable = function()
     {
-        trigger:'.sort-handle',
-        selector: '.block-item',
-        dragCssClass: '',
-    });
+        $('#blockList').sortable({trigger: '.sort-handle-1', selector: '.block-item', dragCssClass: ''});
+        $('#blockList .children').sortable({trigger: '.sort-handle-2', selector: '.block-item', dragCssClass: ''});
+    }
+    
+    initSortable();
 })
