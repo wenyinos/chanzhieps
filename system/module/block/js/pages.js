@@ -4,7 +4,7 @@ $(document).ready(function()
     {
         v.key ++;
         $(this).parent().parent().after($('#entry').html().replace(/key/g, v.key)).sortable('reset');
-        fixButton();
+        computeParent();
     });
 
     $(document).on('click', 'a.plus-child', function()
@@ -13,7 +13,7 @@ $(document).ready(function()
         $('#child').find('[name*=parent]').val($(this).parents('.block-item').data('block'));
         var child = $('#child').html().replace(/key/g, v.key);
         $(this).parent().parent().after(child).sortable('reset');
-        fixButton();
+        computeParent();
     });
 
     $(document).on('click', 'a.btn-add-child', function()
@@ -22,8 +22,8 @@ $(document).ready(function()
         $('#child').find('[name*=parent]').val($(this).parents('.block-item').data('block'));
         var entry = $('#child').html().replace(/key/g, v.key);
         $(this).parent().parent().find('.children').append(entry).sortable('reset');
-        $(this).parent().siblings(0).children('.block').attr('disabled', true);
-        fixButton();
+        $(this).parent().siblings(0).children('.block').val(0);
+        computeParent();
     });
 
     /* Set border and title show. */
@@ -69,9 +69,7 @@ $(document).ready(function()
 
 })
 
-function fixButton()
+function computeParent()
 {
-    $('.children').find('.children').remove();
-    $('.children').find('.btn-add-child').remove();
-    $('.children').find('option[value=row]').remove();
+    $('[name*=parent]').each(function(){$(this).val($(this).parents('.children').parents('.block-item').data('block'));});
 }

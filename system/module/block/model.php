@@ -11,6 +11,8 @@
  */
 class blockModel extends model
 {
+    public $counter;
+
     /**
      * Get block by id.
      * 
@@ -109,20 +111,37 @@ class blockModel extends model
         $regionBlocks = json_decode($regionBlocks);
         if(empty($regionBlocks)) return array();
 
-        $blockIdList = array();
-        foreach($regionBlocks as $block) $blockIdList[] = $block->id;
-
-        $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('id')->in($blockIdList)->fetchAll('id');
+        $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->fetchAll('id');
 
         $sortedBlocks = array();
         foreach($regionBlocks as $block) 
         {
-            if(!isset($blocks[$block->id])) continue;
+            if(!empty($block->children))
+            {
+                $rawBlock = $block;
+                $children = array();
+                foreach($block->children as $child)
+                {
+                    if(empty($blocks[$child->id])) continue;
+                    $rawChild = $blocks[$child->id];
+                    $rawChild->grid       = $child->grid;
+                    $rawChild->titleless  = $child->titleless;
+                    $rawChild->borderless = $child->borderless;
+                    $children[] = $rawChild;
+                }
+                $rawBlock->children = $children;
+            }
+            else
+            {
+                if(empty($blocks[$block->id])) continue;
+                $rawBlock = $blocks[$block->id];
+            }
 
-            $sortedBlocks[$block->id] = $blocks[$block->id];
-            $sortedBlocks[$block->id]->grid       = $block->grid;
-            $sortedBlocks[$block->id]->titleless  = $block->titleless;
-            $sortedBlocks[$block->id]->borderless = $block->borderless;
+            $rawBlock->grid       = $block->grid;
+            $rawBlock->titleless  = $block->titleless;
+            $rawBlock->borderless = $block->borderless;
+
+            $sortedBlocks[] = $rawBlock;
         }
         return $sortedBlocks;
     }
@@ -214,8 +233,22 @@ class blockModel extends model
         if($grade == 1) $entry .= html::a('javascript:;', $this->lang->block->addChild, "class='btn-add-child'");
         $entry .= '</div>';
         $entry .= "<div class='col-xs-1'><i class='icon-move sort-handle'></i></div>";
-        if($grade == 1) $entry .= "<div class='children'></div>";
+        if($grade == 1)
+        {
+            $entry .= "<div class='children'>";
+            if(!empty($block->children))
+            {
+                foreach($block->children as $child)
+                {
+                    $key ++;
+                    $entry .= $this->createEntry($template, $child, $key, 2);
+                }
+            }
+            $entry .= '</div>';
+        }
+        if($grade == 2) $entry .= html::hidden("parent[{$key}]", '');
         $entry .= "</div>";
+        if($grade == 1) $this->counter = $key;
         return $entry;
     }
 
@@ -330,12 +363,24 @@ class blockModel extends model
             $blocks[$key]['borderless'] = $this->post->borderless[$key];
         }
 
-        /* Resort blocks. */
-        foreach($blocks as $block) $sortedBlocks[] = $block;
+        /* Compute children blocks. */
+        $parents = (array) $this->post->parent;
+        foreach($parents as $key => $parent) $children[$parent][] = $key;
+        foreach($blocks as $key => $block)
+        { 
+            if(empty($children[$key])) continue;
+            foreach($children[$key] as $child)
+            {
+                $blocks[$key]['children'][] = $blocks[$child];
+                unset($blocks[$child]);
+            }
+        }
+
+        /* Clear blocks keys. */
+        foreach($blocks as $key => $block) $sortedBlocks[] = $block;
         $layout->blocks = helper::jsonEncode($sortedBlocks);
 
         $count = $this->dao->select('count(*) as count')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->fetch('count');
-
         if($count)  $this->dao->update(TABLE_LAYOUT)->data($layout)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->exec();
         if(!$count) $this->dao->insert(TABLE_LAYOUT)->data($layout)->exec();
 

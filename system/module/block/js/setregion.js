@@ -6,5 +6,6 @@ $(document).ready(function()
         $('#blockList .children').sortable({trigger: '.sort-handle-2', selector: '.block-item', dragCssClass: ''});
     }
     
+    computeParent();
     initSortable();
 })
