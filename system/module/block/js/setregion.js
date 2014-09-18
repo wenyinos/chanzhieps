@@ -9,7 +9,7 @@ $(document).ready(function()
     computeParent();
     initSortable();
 
-    $('#blockList').on('click', '.plus-child', function()
+    $('#blockList').on('click', '.plus-child, .btn-add-child', function()
     {
         setTimeout(initSortable, 200);
     });
