@@ -5,6 +5,11 @@ $(document).ready(function()
         $('#blockList').sortable({trigger: '.sort-handle-1', selector: '.block-item', dragCssClass: ''});
         $('#blockList .children').sortable({trigger: '.sort-handle-2', selector: '.block-item', dragCssClass: ''});
     }
-    
+
     initSortable();
+
+    $('#blockList').on('click', '.plus-child', function()
+    {
+        setTimeout(initSortable, 200);
+    });
 })
