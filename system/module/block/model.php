@@ -57,18 +57,7 @@ class blockModel extends model
             ->andWhere('template')->eq(!empty($this->config->site->template) ? $this->config->site->template : 'default')
             ->fetchGroup('page', 'region');
 
-        $blocks = array();
-        foreach($rawLayouts as $page => $pageBlocks)
-        {
-            foreach($pageBlocks as $regionBlocks) 
-            {
-                $regionBlocks = json_decode($regionBlocks->blocks);
-                if(empty($regionBlocks)) continue;
-                foreach($regionBlocks as $block) $blocks[] = $block->id;
-            }
-        }
-
-        $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('id')->in($blocks)->fetchAll('id');
+        $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->fetchAll('id');
 
         $layouts = array();
         foreach($rawLayouts as $page => $pageBlocks) 
@@ -78,18 +67,35 @@ class blockModel extends model
             {
                 $layouts[$page][$region] = array();
 
-                $regionBlocks =  json_decode($regionBlock->blocks);
+                $regionBlocks = json_decode($regionBlock->blocks);
 
                 foreach($regionBlocks as $block)
                 {
-                    if(isset($blocks[$block->id])) 
+                    if(!empty($block->children))
                     {
-                        $mergedBlock = $blocks[$block->id];
-                        if(isset($block->grid))       $mergedBlock->grid       = $block->grid;
-                        if(isset($block->titleless))  $mergedBlock->titleless  = $block->titleless;
-                        if(isset($block->borderless)) $mergedBlock->borderless = $block->borderless;
-                        $layouts[$page][$region][] = $mergedBlock;
+                        $mergedBlock = $block;
+                        $children = array();
+                        foreach($block->children as $child)
+                        {
+                            if(empty($blocks[$child->id])) continue;
+                            $mergedChild = $blocks[$child->id];
+                            $mergedChild->grid       = $child->grid;
+                            $mergedChild->titleless  = $child->titleless;
+                            $mergedChild->borderless = $child->borderless;
+                            $children[] = $mergedChild;
+                        }
+                        $mergedBlock->children = $children;
                     }
+                    else
+                    {
+                        if(empty($blocks[$block->id])) continue;
+                        $mergedBlock = $blocks[$block->id];
+                    }
+
+                    if(isset($block->grid))       $mergedBlock->grid       = $block->grid;
+                    if(isset($block->titleless))  $mergedBlock->titleless  = $block->titleless;
+                    if(isset($block->borderless)) $mergedBlock->borderless = $block->borderless;
+                    $layouts[$page][$region][] = $mergedBlock;
                 }
             }
         }
@@ -420,65 +426,81 @@ class blockModel extends model
     private function parseBlockContent($block, $withGrid = false, $containerHeader, $containerFooter)
     {
         $withGrid = $withGrid and isset($block->grid);
-        if($withGrid)
+
+        if(!empty($block->children)) 
         {
-            if($block->grid == 0) echo "<div class='col-md-4 col-auto'>";
-            else echo "<div class='col-md-{$block->grid}' data-grid='{$block->grid}'>";
+            if($withGrid)
+            {
+                if($block->grid == 0) echo "<div class='col-md-12 col-auto'>";
+                else echo "<div class='col-md-{$block->grid}' data-grid='{$block->grid}'>";
+            }
+
+            foreach($block->children as $child) $this->parseBlockContent($child, $withGrid, $containerHeader, $containerFooter);
+
+            if($withGrid) echo '</div>';
         }
-
-        $tplPath = $this->app->getTplRoot() . $this->config->site->template . DS . 'view' . DS . 'block' . DS;
-
-        /* First try block/ext/sitecode/view/block/ */
-        $extBlockRoot = $tplPath . "/ext/_{$this->config->site->code}/";
-        $blockFile    = $extBlockRoot . strtolower($block->type) . '.html.php';
-
-        /* Then try block/ext/view/block/ */
-        if(!file_exists($blockFile))
+        else
         {
-            $extBlockRoot = $tplPath . 'ext' . DS;
+            if($withGrid)
+            {
+                if($block->grid == 0) echo "<div class='col-md-4 col-auto'>";
+                else echo "<div class='col-md-{$block->grid}' data-grid='{$block->grid}'>";
+            }
+
+            $tplPath = $this->app->getTplRoot() . $this->config->site->template . DS . 'view' . DS . 'block' . DS;
+
+            /* First try block/ext/sitecode/view/block/ */
+            $extBlockRoot = $tplPath . "/ext/_{$this->config->site->code}/";
             $blockFile    = $extBlockRoot . strtolower($block->type) . '.html.php';
 
-            /* No ext file, use the block/view/block/. */
+            /* Then try block/ext/view/block/ */
             if(!file_exists($blockFile))
             {
-                $blockFile = $tplPath . strtolower($block->type) . '.html.php';
-                if(!file_exists($blockFile)) return '';
+                $extBlockRoot = $tplPath . 'ext' . DS;
+                $blockFile    = $extBlockRoot . strtolower($block->type) . '.html.php';
+
+                /* No ext file, use the block/view/block/. */
+                if(!file_exists($blockFile))
+                {
+                    $blockFile = $tplPath . strtolower($block->type) . '.html.php';
+                    if(!file_exists($blockFile)) return '';
+                }
             }
+
+            $blockClass = '';
+            if(isset($block->borderless) and $block->borderless) $blockClass .= 'panel-borderless';
+            if(isset($block->titleless) and $block->titleless) $blockClass  .= ' panel-titleless';
+
+            $content = is_object($block->content) ? $block->content : json_decode($block->content);
+
+            if(isset($this->config->block->defaultIcons[$block->type])) 
+            {
+                $defaultIcon = $this->config->block->defaultIcons[$block->type];
+                $iconClass   = isset($content->icon) ? $content->icon : $defaultIcon;
+                $icon        = $iconClass ? "<i class='{$iconClass}'></i> " : "" ;
+            }
+
+            $color  = '<style>';
+            $color .= '#block' . $block->id . '{';
+            $color .= isset($content->backgroundColor) ? 'background-color:' . $content->backgroundColor . ';' : '';
+            $color .= isset($content->textColor) ? 'color:' . $content->textColor . ';' : '';
+            $color .= isset($content->borderColor) ? 'border-color:' . $content->borderColor . ';' : '';
+            $color .= '}';
+            $color .= '#block' . $block->id . ' .panel-heading{';
+            $color .= isset($content->titleColor) ? 'color:' .$content->titleColor . ';' : '';
+            $color .= isset($content->titleBackground) ? 'background:' .$content->titleBackground . ';' : '';
+            $color .= '}';
+            $color .= isset($content->iconColor) ? '#block' . $block->id . ' i{color:' .$content->iconColor . ';}' : '';
+            $color .= isset($content->linkColor) ? '#block' . $block->id . ' a{color:' .$content->linkColor . ';}' : '';
+            $color .= '</style>';
+
+            echo $containerHeader;
+            echo $color;
+            include $blockFile;
+            echo $containerFooter;
+
+            if($withGrid) echo '</div>';
         }
-
-        $blockClass = '';
-        if(isset($block->borderless) and $block->borderless) $blockClass .= 'panel-borderless';
-        if(isset($block->titleless) and $block->titleless) $blockClass  .= ' panel-titleless';
-
-        $content = is_object($block->content) ? $block->content : json_decode($block->content);
-
-        if(isset($this->config->block->defaultIcons[$block->type])) 
-        {
-            $defaultIcon = $this->config->block->defaultIcons[$block->type];
-            $iconClass   = isset($content->icon) ? $content->icon : $defaultIcon;
-            $icon        = $iconClass ? "<i class='{$iconClass}'></i> " : "" ;
-        }
-
-        $color  = '<style>';
-        $color .= '#block' . $block->id . '{';
-        $color .= isset($content->backgroundColor) ? 'background-color:' . $content->backgroundColor . ';' : '';
-        $color .= isset($content->textColor) ? 'color:' . $content->textColor . ';' : '';
-        $color .= isset($content->borderColor) ? 'border-color:' . $content->borderColor . ';' : '';
-        $color .= '}';
-        $color .= '#block' . $block->id . ' .panel-heading{';
-        $color .= isset($content->titleColor) ? 'color:' .$content->titleColor . ';' : '';
-        $color .= isset($content->titleBackground) ? 'background:' .$content->titleBackground . ';' : '';
-        $color .= '}';
-        $color .= isset($content->iconColor) ? '#block' . $block->id . ' i{color:' .$content->iconColor . ';}' : '';
-        $color .= isset($content->linkColor) ? '#block' . $block->id . ' a{color:' .$content->linkColor . ';}' : '';
-        $color .= '</style>';
-
-        echo $containerHeader;
-        echo $color;
-        include $blockFile;
-        echo $containerFooter;
-
-        if($withGrid) echo '</div>';
     }
 
     /**
