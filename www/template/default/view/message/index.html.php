@@ -15,7 +15,10 @@
 <div class='row'>
   <div class='col-md-9'>
     <div class='panel'>
-      <div class='panel-heading'><div class='panel-actions'><a href='#commentForm' class='btn btn-primary'><i class='icon-comment-alt'></i> <?php echo $lang->message->post; ?></a></div><strong><i class='icon-comments-alt'></i> <?php echo $lang->message->list;?> (<?php echo $pager->recTotal;?>)</strong></div>
+      <div class='panel-heading'>
+        <strong><i class='icon-comments-alt'></i> <?php echo $lang->message->list;?> (<?php echo $pager->recTotal;?>)</strong>
+        <div class='panel-actions'><a href='#commentForm' class='btn btn-primary'><i class='icon-comment-alt'></i> <?php echo $lang->message->post; ?></a></div>
+      </div>
       <div class='panel-body'>
         <?php if(!empty($messages)):?>
         <div class='comments-list'>
@@ -27,10 +30,10 @@
                   <strong><i class='icon-user text-muted'></i> <?php echo $message->from;?></strong>
                 </span> 
                 <small>(<?php echo formatTime($message->date, 'Y-m-d H:i');?>)<?php echo $lang->colon;?></small>&nbsp;
-                <p>
+                <span class='pull-right'><?php echo html::a($this->createLink('message', 'reply', "messageID=$message->id"), $lang->message->reply, "data-toggle='modal' data-type='iframe'");?></span>
+                <div>
                   <?php echo nl2br($message->content);?>
-                  <span class='pull-right'><?php echo html::a($this->createLink('message', 'reply', "messageID=$message->id"), $lang->message->reply, "data-toggle='modal' data-type='iframe'");?></span>
-                </p>
+                </div>
               </div>
             </div>
             <?php $this->message->getFrontReplies($message);?>

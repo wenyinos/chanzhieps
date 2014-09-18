@@ -11,7 +11,7 @@ js::execute($article->js);
 ?>
 <?php $common->printPositionBar($category, $article);?>
 <div class='row'>
-  <div class='col-md-9'>
+  <div class='col-md-9 col-main'>
     <div class='article'>
       <header>
         <h1><?php echo $article->title;?></h1>
@@ -42,16 +42,18 @@ js::execute($article->js);
       <section class='article-content'>
         <?php echo $article->content;?>
       </section>
-      <section>
+      <section class="article-files">
         <?php $this->loadModel('file')->printFiles($article->files);?>
       </section>
       <footer>
-        <?php if($article->keywords):?>
-        <p class='small'><strong class="text-muted"><?php echo $lang->article->keywords;?></strong><span class="article-keywords"><?php echo $lang->colon . $article->keywords;?></span></p>
-        <?php endif; ?>
-        <?php if($article->editor):?> 
-        <p class='text-right'></i><?php printf($lang->article->lblEditor, $this->loadModel('user')->getByAccount($article->editor)->realname, formatTime($article->editedDate));?></p>
-        <?php endif;?>
+        <div class='article-moreinfo clearfix'>
+          <?php if($article->editor):?> 
+          <p class='text-right pull-right'><?php printf($lang->article->lblEditor, $this->loadModel('user')->getByAccount($article->editor)->realname, formatTime($article->editedDate));?></p>
+          <?php endif;?>
+          <?php if($article->keywords):?>
+          <p class='small'><strong class="text-muted"><?php echo $lang->article->keywords;?></strong><span class="article-keywords"><?php echo $lang->colon . $article->keywords;?></span></p>
+          <?php endif; ?>
+        </div>
         <?php extract($prevAndNext);?>
         <ul class='pager pager-justify'>
           <?php if($prev): ?>
@@ -69,6 +71,6 @@ js::execute($article->js);
     </div>
     <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=article&objectID={$article->id}");?></div>
   </div>
-  <div class='col-md-3'><?php $this->block->printRegion($layouts, 'article_view', 'side');?></div>
+  <div class='col-md-3 col-side'><?php $this->block->printRegion($layouts, 'article_view', 'side');?></div>
 </div>
 <?php include TPL_ROOT . 'common/footer.html.php'; ?>

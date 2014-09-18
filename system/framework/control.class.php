@@ -270,6 +270,7 @@ class control
         else
         {
             $mainViewFile = TPL_ROOT . $moduleName . DS . "{$methodName}.{$this->viewType}.php";
+            if(!file_exists($mainViewFile)) $mainViewFile = $modulePath . 'view' . DS . $methodName . '.' . $this->viewType . '.php';
         }
 
         /* Extension view file. */

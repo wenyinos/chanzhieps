@@ -21,8 +21,8 @@ js::set('categoryID', $category->id);
 ?>
 <?php $common->printPositionBar($category, $product);?>
 <div class='row'>
-  <div class='col-md-9'>
-    <div class='panel panel-body'>
+  <div class='col-md-9 col-main'>
+    <div class='panel panel-body panel-product'>
       <div class='row'>
         <?php if(!empty($product->images)):?>
         <div class='col-md-5'>
@@ -107,9 +107,9 @@ js::set('categoryID', $category->id);
       <h5 class='header-dividing'><i class='icon-file-text-alt text-muted'></i> <?php echo $lang->product->content;?></h5>
       <div class='article-content'>
         <?php echo $product->content;?>
-        <div class='files-list'>
-          <?php $this->loadModel('file')->printFiles($product->files);?>
-        </div>
+      </div>
+      <div class='article-files'>
+        <?php $this->loadModel('file')->printFiles($product->files);?>
       </div>
     </div>
     <div id='comments'>
@@ -117,7 +117,7 @@ js::set('categoryID', $category->id);
       <?php echo html::a('', '', "name='comment'");?>
     </div>
   </div>
-  <div class='col-md-3'>
+  <div class='col-md-3 col-side'>
     <side class='page-side'><?php $this->block->printRegion($layouts, 'product_view', 'side');?></side>
   </div>
 </div>

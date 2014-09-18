@@ -51,14 +51,14 @@ class fileModel extends model
             $file->title = $file->title . ".$file->extension";
             if($file->isImage)
             {
-                $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), html::image($file->smallURL), "target='_blank' data-toggle='lightbox' data-width='{$file->width}' data-height='{$file->height}'") . '</li>';
+                $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), html::image($file->smallURL), "target='_blank' data-toggle='lightbox' data-img-width='{$file->width}' data-img-height='{$file->height}' title='{$file->title}'") . '</li>';
             }
             else
             {
-                $filesHtml .= "<li class='file file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'") . '</li>';
+                $filesHtml .= "<li class='file file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank' title='{$file->title}'") . '</li>';
             }
         }
-        echo "<ul class='article-files clearfix'>" . $imagesHtml . $filesHtml . '</ul>';
+        echo "<ul class='files-list clearfix'>" . $imagesHtml . $filesHtml . '</ul>';
     }
 
     /**
@@ -160,12 +160,26 @@ class fileModel extends model
         $fileTitles = array();
         $now        = helper::now();
         $files      = $this->getUpload();
+        $this->app->loadClass('pclzip', true);
 
         foreach($files as $id => $file)
         {   
             $imageSize = array('width' => 0, 'height' => 0);
 
             if(!move_uploaded_file($file['tmpname'], $this->savePath . $file['pathname'])) return false;
+
+            if(strpos($this->config->file->allowed, ',' . $file['extension'] . ',') == false)
+            {
+                $archive = new PclZip($this->savePath . $file['pathname'] . '.zip');
+                $list    = $archive->create($this->savePath . $file['pathname'], PCLZIP_OPT_REMOVE_ALL_PATH);
+                if($list != 0)
+                {
+                    unlink($this->savePath . $file['pathname']);
+                    $file['pathname']  = $file['pathname'] . '.zip';
+                    $file['extension'] = 'zip';
+                }
+            }
+
             if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions))
             {
                 $this->compressImage($this->savePath . $file['pathname']);
@@ -265,7 +279,6 @@ class fileModel extends model
     {
         $extension = strtolower(trim(pathinfo($filename, PATHINFO_EXTENSION)));
         if(empty($extension)) return 'txt';
-        if(strpos($this->config->file->dangers, strtolower($extension)) !== false) return 'txt';
         return $extension;
     }
 

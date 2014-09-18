@@ -353,7 +353,7 @@ class commonModel extends model
         echo '<ul class="breadcrumb">';
         if($root == '')
         {
-            echo '<li>' . $this->lang->currentPos . $this->lang->colon . html::a($this->config->webRoot, $this->lang->home) . '</li>';
+            echo '<li>' . "<span class='breadcrumb-title'>" . $this->lang->currentPos . $this->lang->colon . '</span>' . html::a($this->config->webRoot, $this->lang->home) . '</li>';
         }
         else
         {
