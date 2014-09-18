@@ -8,4 +8,9 @@ $(document).ready(function()
     
     computeParent();
     initSortable();
+
+    $('#blockList').on('click', '.plus-child', function()
+    {
+        setTimeout(initSortable, 200);
+    });
 })
