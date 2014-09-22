@@ -23,7 +23,7 @@
       </td>
       <td id='<?php echo $thread->id;?>' class='thread-wrapper'>
         <div class='thread-content article-content'><?php echo $thread->content;?></div>
-        <?php $this->thread->printFiles($thread, $this->thread->canManage($board->id, $thread->author));?>
+        <div class='article-files'><?php $this->thread->printFiles($thread, $this->thread->canManage($board->id, $thread->author));?></div>
       </td>
     </tr>
   </table>

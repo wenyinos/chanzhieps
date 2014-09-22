@@ -339,7 +339,7 @@ class threadModel extends model
                 $filesHtml .= '</li>';
             }
         }
-        echo "<ul class='article-files clearfix'><li class='article-files-heading'>". $this->lang->thread->file . '</li>' . $imagesHtml . $filesHtml . '</ul>';
+        echo "<ul class='files-list clearfix'><li class='files-list-heading'>". $this->lang->thread->file . '</li>' . $imagesHtml . $filesHtml . '</ul>';
     }
 
     /**
@@ -379,9 +379,12 @@ class threadModel extends model
 
         $data = new stdclass();
         $data->replies     = $replies;
-        $data->repliedBy   = $reply->author;
-        $data->repliedDate = $reply->addedDate;
-        $data->replyID     = $reply->id;
+        if($reply)
+        {
+            $data->repliedBy   = $reply->author;
+            $data->repliedDate = $reply->addedDate;
+            $data->replyID     = $reply->id;
+        }
 
         $this->dao->update(TABLE_THREAD)->data($data)->where('id')->eq($threadID)->exec();
     }
