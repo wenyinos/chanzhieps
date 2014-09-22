@@ -1,14 +1,32 @@
 $(function()
 {
+    var $form = $('#customThemeForm');
+    var theme = new Theme($form.data());
+    var $css = $('#css');
+
+    $css.height($form.height());
+    $('.codeeditor').codeeditor();
+    var editor = $css.data('editor');
+
+    $('[data-toggle="tooltip"]').tooltip({container: '#triggerModal'});
+
+    tempColor = new Color();
     $('.color').each(function()
     {
         var $this = $(this);
         var c = $this.attr('data');
+        if(!c) return;
+        var cc = new Color(c).contrast().toCssStr();
 
-        ($this.hasClass('input-group') ? $this.find('.input-group-addon') : $this).css({'background': c, 'color': (new color(c)).contrast().hexStr()});
+        var $inputColor = ($this.hasClass('input-group') ? $this.find('.input-group-btn .dropdown-toggle') : $this).css({'background': c === 'transparent' ? '' : c, 'color': cc}).find('.caret').css('border-top-color', cc).closest('.input-group').find('.input-color');
+        if(!$inputColor.attr('placeholder'))
+        {
+            $inputColor.attr('placeholder', c);
+        }
     }).click(function()
     {
         var $this = $(this);
+        if($this.hasClass('input-group')) return;
         var $plate = $this.closest('.colorplate');
         $plate.find('.color.active').removeClass('active');
         if($this.hasClass('color-tile')) $plate.find('.input-color').val($this.attr('data')).change();
@@ -20,10 +38,12 @@ $(function()
         var $this = $(this);
         var val = $this.val();
 
-        if(isHexColor(val))
+        $this.closest('.colorplate').find('.color.active').removeClass('active');
+
+        if(tempColor.isColor(val))
         {
-            var ic = (new color(val)).contrast();
-            $this.attr('placeholder', val).closest('.color').removeClass('error').find('.input-group-addon').css({'background': val, 'color': ic.hexStr()});
+            var ic = (new Color(val)).contrast().toCssStr();
+            $this.attr('placeholder', val).closest('.color').removeClass('error').find('.input-group-btn .dropdown-toggle').css({'background': val, 'color': ic}).find('.caret').css('border-top-color', ic);;
         }
         else
         {
@@ -31,23 +51,102 @@ $(function()
         }
     });
 
+    $('[data-refresh]').on('keyup change', function()
+    {
+        var $this = $(this);
+        var val = $this.val();
+        if(val)
+        {
+            console.log(val);
+            var $refresh = $($this.data('refresh'));
+            $refresh.each(function()
+            {
+                var $input = $(this);
+                if(!$input.data('refresh-disabled') || !$input.val())
+                {
+                    $input.val(val).change();
+                }
+            });
+        }
+    });
+
     $.setAjaxForm('#customThemeForm', function(response)
     {
-        setTimeout(function(){$('.close[data-dismiss="modal"]').click();}, 2000);
+        // setTimeout(function(){$('.close[data-dismiss="modal"]').click();}, 2000);
     });
 
-    $('#customThemeForm').submit(function(event)
+    $form.find('input.form-control, select.form-control').on('keyup change', compileLess);
+
+    $form.submit(function(event)
     {
-        var options = 
-        {
-            templateUrl: config['webRoot'] + 'template/' + $('#template').val() + '/theme/' + $('#theme').val() + '/template.less',
-            colorPrimary: $('#primaryColor').val(),
-            colorBackgroud: $('#backColor').val(),
-            fontSize: $('#fontSize').val(),
-            borderRadius: $('#borderRadius').val()
-        };
-
-        var style = new theme(options);
-        $('#css').val(style.toCss());
+        compileLess();
+        // return false;
     });
+
+    function compileLess()
+    {
+        var css = theme.compile(getThemeSettings());
+        editor.setValue(css);
+        $css.val(css);
+        editor.clearSelection();
+    }
+
+    function getThemeSettings()
+    {
+        var setting = {},
+            $lessTable = $('#lessVarTable tbody').empty();
+        $form.find('input.form-control, select.form-control').each(function()
+        {
+            var $this = $(this);
+            var val = $this.val(),
+                type = $this.data('type'),
+                name = $this.attr('data-name') || $this.attr('name') || $this.attr('id');
+            var desc = $this.attr('data-desc');
+            if(!desc)
+            {
+                var $group = $this.closest('.input-group');
+                if($group.hasClass('color'))
+                {
+                    desc = $group.find('.btn').text();
+                }
+                else if($group.hasClass('input-group-textbox') || $group.hasClass('input-group-select'))
+                {
+                    desc = $group.find('.input-group-addon').first().text();
+                }
+                else if($group.hasClass('input-group-textbox-couple'))
+                {
+                    desc = $group.find('.input-group-addon').first().text();
+                    var label = $this.prev('.input-group-addon').text();
+                    if(label != desc)
+                    {
+                        desc += label;
+                    }
+                }
+                desc = ($group.closest('tr').children('th').first().text() + desc).replace(/\n/, '');
+            }
+
+            if(val)
+            {
+                if(type === 'image')
+                {
+                    val = 'url(' + val + ')';
+                }
+            }
+            else
+            {
+                val = $this.data('default') || $this.attr('placeholder') || null;
+            }
+
+            if(val)
+            {
+                setting[name] = {value: val, desc: desc};
+                $lessTable.append('<tr><td class="name w-p40" style="overflow: hidden"><strong title="{0}">{0}</strong></td><td class="w-p20">{1}</td><td><small>{2}</small></td></tr>'.format(name, val, desc));
+            }
+        });
+        return setting;
+    }
+
+    compileLess();
+
+    ajustModalSize();
 });

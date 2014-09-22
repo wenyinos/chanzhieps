@@ -9,7 +9,7 @@ include TPL_ROOT . 'common/treeview.html.php';
 ?>
 <?php echo $common->printPositionBar($category);?>
 <div class='row'>
-  <div class='col-md-9'>
+  <div class='col-md-9 col-main'>
     <div class='list list-condensed'>
       <header><h2><?php echo $category->name;?></h2></header>
       <section class='items items-hover'>
@@ -41,6 +41,6 @@ include TPL_ROOT . 'common/treeview.html.php';
       <footer class='clearfix'><?php $pager->show('right', 'short');?></footer>
     </div>
   </div>
-  <div class='col-md-3'><side class='page-side'><?php $this->block->printRegion($layouts, 'article_browse', 'side');?></side></div>
+  <div class='col-md-3 col-side'><side class='page-side'><?php $this->block->printRegion($layouts, 'article_browse', 'side');?></side></div>
 </div>
 <?php include TPL_ROOT . 'common/footer.html.php';?>

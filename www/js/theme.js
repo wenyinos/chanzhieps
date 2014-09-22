@@ -7,6 +7,7 @@
     var hexReg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
     var lessFileTemplate = '/template/{0}/theme/{1}/style.less';
     var lessTemplates = {};
+    var useLessCache = false;
 
     var Theme = function(options, variables)
     {
@@ -38,7 +39,8 @@
         var lessCode = '';
         for(var key in variables)
         {
-            lessCode += '@' + key + ': ' + variables[key] + ';\n';
+            var val = variables[key];
+            lessCode += '@' + key + ': ' + (val.value || val) + ';' + (val.desc ? (' // ' + val.desc) : '') + '\n';
         }
         this.variablesCode = lessCode;
         return lessCode + '\n';
@@ -60,10 +62,10 @@
         console.log('lessCode: ', lessCode);
         parser.parse(lessCode, function(error, result)
         {
-            console.log('css:', result.toCSS());
-            if(!error)
+            if(!error && result)
             {
                 css = that.beauty(result.toCSS());
+                console.log('css:', result.toCSS());
             }
             else
             {
@@ -80,7 +82,7 @@
     {
         /* get template */
         var url = this.options.lessFile;
-        this.less = lessTemplates[url];
+        this.less = useLessCache ? lessTemplates[url] : null;
         if(!this.less)
         {
             var that = this;
@@ -96,11 +98,11 @@
         template  : 'default',
         variables :
         {
-            font               : '"Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif',
-            backColor          : "#FFF",
+            font               : {value: '"Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif', desc: 'Global font family'},
+            backgroundColor    : "#FFF",
             foreColor          : "#333",
             secondaryColor     : "#145CCD",
-            pageBackColor      : "#FFF",
+            backColor          : "#FFF",
             backImage          : "none",
             backImageRepeat    : "repeat",
             backImagePositionX : "0%",

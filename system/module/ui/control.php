@@ -116,7 +116,7 @@ class ui extends control
         if($this->config->site->themeSetting) $this->config->themeSetting = json_decode($this->config->site->themeSetting);
 
         $this->view->title      = "<i class='icon-cog'></i> " . $this->lang->ui->customtheme;
-        $this->view->modalWidth = 800;
+        $this->view->modalWidth = '1000';
         $this->view->theme      = $theme;
         $this->view->template   = $template;
         $this->display();

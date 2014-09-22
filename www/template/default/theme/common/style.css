@@ -54,13 +54,18 @@ tr.text-center > td.text-right, tr.text-center > th.text-right {text-align: righ
 .mg-0 {margin: 0!important}
 
 /* --- Components --- */
+/* Nav */
+.nav li .icon-chevron-right {float: right; margin-top: 2px; margin-right: -6px; opacity: .25;}
+
 /* Navbar */
 .navbar {background: #f7f7f7;}
+
 @media (min-width:768px) {.navbar-brand {display: none;} .navbar-collapse {padding-left: 0;}}
 
 .navbar-toggle .icon-bar {background: #ccc}
-.navbar-toggle:hover, .navbar-toggle:focus {background: #fff;}
+.navbar-toggle:hover, .navbar-toggle:focus {background: #fff; outline: none}
 .navbar-toggle:hover .icon-bar, .navbar-toggle:focus .icon-bar {background: #aaa}
+@media (max-width: 767px) {.navbar-nav .open .dropdown-menu {position: absolute;}}
 
 /* Breadcrumb */
 .breadcrumb {color: #808080; padding: 0;}
@@ -162,6 +167,9 @@ tr.text-center > td.text-right, tr.text-center > th.text-right {text-align: righ
 /* Panel actions */
 .panel-actions {margin-top: -6px;margin-right: -12px; float: right;}
 
+/* Pure panel */
+.panel.panel-pure {border: none; box-shadow: none}
+
 /* Panel block */
 .panel-block .panel-body {padding: 10px 15px}
 .panel-block.panel-borderless {border: none; box-shadow:  none;}
@@ -229,6 +237,9 @@ form .star {display: none;}/* hide star */
 /* Form in panel */
 .panel-body > form {padding-right: 10px; max-width: 1000px}
 
+/* File box */
+.file-form .fileBox {margin-bottom: 10px;}
+
 /* --- Specail part --- */
 /* Header */
 #header {position: relative;}
@@ -242,8 +253,12 @@ form .star {display: none;}/* hide star */
 #headNav nav > a {display: inline-block; margin-right: 5px;}
 #headNav nav > a:last-child {margin-right: 0;}
 
+/* Messagebox */
+#msgBox .label.label-badge {font-weight: bold; background-color: #fff;border: 1px solid #ccc; color: #666;padding: 3px;min-width: 20px}
+#msgBox {display: none;}
+
 /* Footer */
-#footer {padding: 20px 0; text-align: center; position: relative; border-top: 1px solid #ddd}
+#footer {padding: 20px 0; text-align: center; position: relative; border-top: 1px solid #ddd;}
 #footNav {position: absolute; left: 0; top: 20px;}
 #footNav a {display: inline-block; margin-right: 10px; color: #777;}
 #footNav a:hover {color: #145BCC}
@@ -255,7 +270,8 @@ form .star {display: none;}/* hide star */
 #powerby:hover:before {left: 120%;}
 
 /* Go to top */
-#go2top {position: fixed; font-size: 28px; color: #999; bottom: 80px; right: -40px; width: 40px; line-height: 40px; text-align: center; text-shadow:1px 1px 0px #fff; display: none; border-radius: 20px; background-color: #f1f1f1}
+#go2top {position: fixed; color: #999; bottom: 80px; right: -40px; width: 40px; text-align: center; text-shadow:1px 1px 0px #fff; display: none; border-radius: 20px; background-color: #f1f1f1}
+#go2top .icon {font-size: 28px; line-height: 40px}
 #go2top:hover { background-color: #e5e5e5; color: #333; border-color: #aaa; text-decoration: none;}
 
 /* Docker */
@@ -270,3 +286,15 @@ form .star {display: none;}/* hide star */
 .docker-right .icon-weixin {background: #64ab23 url(images/main/weixin.png) no-repeat center}
 .docker-right {vertical-align: middle;}
 .docker-right img {width: 200px; width:auto\0; height: 200px; margin-top: 10px; border: 1px solid #ccc}
+
+/* modal with iframe */
+body.body-modal
+{
+  padding: 20px;
+}
+
+/* bootbox */
+.bootbox .modal-dialog {width: 400px; margin-top: 10%;}
+
+/* avatar */
+.avatar-empty {display: block; overflow: hidden; font-size: 28px; color: #fff; background-color: #ddd; border: 1px solid #ccc; width: 36px; height: 36px; line-height: 35px; text-align: center; border-radius: 6px;}
