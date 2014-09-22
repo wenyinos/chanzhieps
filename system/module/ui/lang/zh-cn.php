@@ -248,3 +248,46 @@ $lang->ui->theme->tableStripedColor                    = '隔行背景色';
 $lang->ui->theme->components                           = '特殊组件';
 $lang->ui->theme->breadcrumb                           = '面包屑导航';
 $lang->ui->theme->footer                               = '页脚';
+
+
+
+
+$lang->ui->groups = new stdclass();
+$lang->ui->groups->basic  = '基本样式';
+$lang->ui->groups->navbar = '导航条';
+$lang->ui->groups->block  = '区块';
+$lang->ui->groups->footer = '页脚';
+
+$lang->ui->color          = '颜色';
+$lang->ui->pageBackground = '页面背景';
+$lang->ui->pageText       = '页面文字';
+$lang->ui->aLink          = '普通链接';
+$lang->ui->aVisited       = '已访问链接';
+$lang->ui->aHover         = '高亮链接';
+
+$lang->ui->layout        = '布局';
+$lang->ui->navbar        = '导航条';
+$lang->ui->panel         = '子面板';
+$lang->ui->menuBorder    = '菜单边框';
+$lang->ui->submenuBorder = '子菜单边框';
+$lang->ui->menuNormal    = '普通菜单';
+$lang->ui->menuHover     = '高亮菜单';
+$lang->ui->menuActive    = '选中菜单';
+$lang->ui->submenuNormal = '普通子菜单';
+$lang->ui->submenuHover  = '高亮子菜单';
+$lang->ui->submenuActive = '选中子菜单';
+
+$lang->ui->primaryColor = '基色';
+$lang->ui->backcolor = '背景色';
+$lang->ui->forecolor = '前景色';
+$lang->ui->backgroundImage = '背景图片';
+$lang->ui->repeat = '重复方式';
+$lang->ui->position = '位置';
+$lang->ui->fontSize = '字号';
+$lang->ui->fontFamily = '字体';
+$lang->ui->fontWeight = '加粗';
+$lang->ui->layout = '布局';
+$lang->ui->border = '边框';
+$lang->ui->borderColor = '边框颜色';
+$lang->ui->borderWidth = '边框宽度';
+$lang->ui->radius = '圆角';
