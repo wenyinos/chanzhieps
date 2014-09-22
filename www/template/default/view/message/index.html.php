@@ -13,7 +13,7 @@
 <?php include TPL_ROOT . 'common/header.html.php';?>
 <?php $common->printPositionBar();?>
 <div class='row'>
-  <div class='col-md-9'>
+  <div class='col-md-9 col-main'>
     <div class='panel'>
       <div class='panel-heading'>
         <strong><i class='icon-comments-alt'></i> <?php echo $lang->message->list;?> (<?php echo $pager->recTotal;?>)</strong>
@@ -109,6 +109,6 @@
       </div>
     </div>
   </div>
-  <div class='col-md-3'><?php $this->block->printRegion($layouts, 'message_index', 'side');?></div>
+  <div class='col-md-3 col-side'><?php $this->block->printRegion($layouts, 'message_index', 'side');?></div>
 </div>
 <?php include TPL_ROOT . 'common/footer.html.php';?>

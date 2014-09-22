@@ -86,4 +86,18 @@ $(document).ready(function()
             });
         }
     });
-})
+    
+    $(window).resize(ajustModalSize);
+});
+
+function ajustModalSize()
+{
+    var $dialog = $('#triggerModal .modal-dialog');
+    if(!$dialog.length) return;
+
+    var height = $(window).height();
+    $dialog.css('min-height', height);
+    $('#css-editor').css('height', height - 93);
+
+    $('#customLess-editor, #lessVarTableWrapper').css('height', height - 253);
+}

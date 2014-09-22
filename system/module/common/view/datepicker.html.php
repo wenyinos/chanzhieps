@@ -18,6 +18,6 @@ $(function()
         autoclose: true,
         keyboardNavigation:false,
         language:'<?php echo $clientLang?>'
-    })
+    });
 });
 </script>
