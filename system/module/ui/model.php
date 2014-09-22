@@ -238,7 +238,7 @@ class uiModel extends model
      */
     public function printFormControl($id, $label, $params, $value = false)
     {
-        if($params['type'] == 'color') call_user_func_array('uiModel::print' . ucfirst($params['type']) . 'Control', array('id' => $id, 'label' => $label, 'params' => $params, 'value' => $value));
+        call_user_func_array('uiModel::print' . ucfirst($params['type']) . 'Control', array('id' => $id, 'label' => $label, 'params' => $params, 'value' => $value));
     }
 
     /**
@@ -253,35 +253,113 @@ class uiModel extends model
      */
     public function printColorControl($id, $label, $params, $value = false)
     {
-        $placeholder = $value === false ? $params['default'] : $value;
+        $default = $params['default'];
+        $placeholder = $default;
+        if($placeholder === 'transparent') $placeholder = $this->lang->ui->theme->transparent;
 
         $html = "<div class='colorplate'>\n";
-        $html .= "<div class='input-group color active input-group-color' data='{$placeholder}'>\n";
+        $html .= "<div class='input-group color active input-group-color' data='{$default}'>\n";
         $html .= "<span class='input-group-btn'>\n";
         $html .= "<button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>\n";
         $html .= "{$this->lang->ui->$label} <span class='caret'></span>\n</button>\n";
         $html .= "<div class='dropdown-menu colors'>" . $this->createColorPlates() . "</div>\n</span>\n";
-        $html .= "<input id='{$id}' name='{$id}' type='text' value='{$value}' placeholder='{$placeholder}' class='form-control input-color text-latin' data-toggle='tooltip'>\n";
+        $html .= "<input id='{$id}' name='{$id}' type='text' value='{$value}' data-default='{$default}' placeholder='{$placeholder}' class='form-control input-color text-latin' data-toggle='tooltip' title='{$this->lang->ui->theme->colorTip}'>\n";
         $html .= "</div>\n</div>\n";
         echo $html;
-       
     }
 
     /**
-     * Print html of color input cell.
-     *
-     * @param string       $name
-     * @param string       $value
-     * @param string       $label
-     * @param string       $default
-     * @param string       $class
-     * @param string       $alias
-     * @param string       $tooltip
-     * return string 
+     * Print size control
+     * @param  string  $id
+     * @param  string  $label
+     * @param  array   $params
+     * @param  mix     $value
+     * @return void
      */
-    public function printColorInput($name, $value, $label = '', $default = '%AUTO%', $class = '', $alias= '', $tooltip = '%DEFAULT%')
+    public function printSizeControl($id, $label, $params, $value = false)
     {
+        $this->printTextbox($id, $value, $this->lang->ui->$label, '', $params['default'], '', '', $this->lang->ui->theme->sizeTip);
     }
+
+     /**
+     * Print image control
+     * @param  string  $id
+     * @param  string  $label
+     * @param  array   $params
+     * @param  mix     $value
+     * @return void
+     */
+    public function printImageControl($id, $label, $params, $value = '')
+    {
+        $placeholder = $params['default'];
+        if(empty($placeholder) or $placeholder == 'none') $placeholder = $this->lang->ui->theme->none;
+
+        $this->printTextbox($id, $value, $this->lang->ui->$label, '', $this->lang->ui->theme->none, '', '', $this->lang->ui->theme->backImageTip);
+    }
+
+    /**
+     * Print image repeat contorl
+     * @param  string  $id
+     * @param  string  $label
+     * @param  array   $params
+     * @param  mix     $value
+     * @return void
+     */
+    public function printRepeatControl($id, $label, $params, $value = '')
+    {
+        $this->printSelectList($this->lang->ui->theme->imageRepeatList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
+    }
+
+    public function printPositionControl($id, $label, $params, $value = 'x, y')
+    {
+        $values = explode(',', $value);
+        $defaultValues = explode(',', $params['default']);
+        $defaultValue1 = count($defaultValues) > 0 ? $defaultValues[0] : '0';
+        $defaultValue2 = count($defaultValues) > 1 ? $defaultValues[1] : '0';
+        $value1 = count($values) > 0 ? $values[0] : $defaultValue1;
+        $value2 = count($values) > 1 ? $values[1] : $defaultValue2;
+
+        $this->printTextboxCouple($this->lang->ui->$label, $id, $id . 'X', $value1, 'X', $id . 'Y', $value2, 'Y', '', $defaultValue1, $defaultValue2);
+    }
+
+    /**
+     * Print border control
+     * @param  string $id
+     * @param  string $label
+     * @param  array  $params
+     * @param  string $value
+     * @return void
+     */
+    public function printBorderControl($id, $label, $params, $value = '')
+    {
+        $this->printSelectList($this->lang->ui->theme->borderStyleList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
+    }
+
+    /**
+     * Print nav layout
+     * @param  string $id
+     * @param  string $label
+     * @param  array  $params
+     * @param  string $value
+     * @return void
+     */
+    public function printNavLayoutControl($id, $label, $params, $value = '')
+    {
+        $this->printSelectList($this->lang->ui->theme->navbarLayoutList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
+    }
+
+    // /**
+    //  * Print nav layout
+    //  * @param  string $id
+    //  * @param  string $label
+    //  * @param  array  $params
+    //  * @param  string $value
+    //  * @return void
+    //  */
+    // public function printNavLayout($id, $label, $params, $value = '')
+    // {
+    //     $this->printSelectList($this->lang->ui->theme->navbarLayoutList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
+    // }
 
     /**
      * Print html of textbox with label.
@@ -290,15 +368,15 @@ class uiModel extends model
      * @param string       $value
      * @param string       $startLabel
      * @param string       $endLabel
-     * @param string       $placeholder
+     * @param mix          $placeholder
      * @param string       $class
      * @param string       $alias
      * @param string       $tooltip
      * return string 
      */
-    public function printTextbox($name, $value, $startLabel = '', $endLabel = '', $placeholder = '%AUTO%', $class = '', $alias = '', $tooltip = '')
+    public function printTextbox($name, $value, $startLabel = '', $endLabel = '', $placeholder = false, $class = '', $alias = '', $tooltip = '')
     {
-        if($placeholder == '%AUTO%')
+        if($placeholder === false)
         {
             $placeholder = $value;
         }
@@ -355,6 +433,7 @@ class uiModel extends model
      * Print html of inputgroup with two textbox cell
      *
      * @param string       $labelStart
+     * @param string       $name
      * @param string       $name1
      * @param string       $value1
      * @param string       $label1
@@ -362,21 +441,21 @@ class uiModel extends model
      * @param string       $value2
      * @param string       $label2
      * @param string       $labelEnd
-     * @param string       $placeholder1
-     * @param string       $placeholder2
+     * @param mix          $placeholder1
+     * @param mix          $placeholder2
      * @param string       $tooltip1
      * @param string       $tooltip2
      * @param string       $alias1
      * @param string       $alias2
      * return string 
      */
-    public function printTextboxCouple($labelStart, $name1, $value1, $label1, $name2, $value2, $label2, $labelEnd, $placeholder1 = '%AUTO%', $placeholder2 = '%AUTO%', $tooltip1 = '', $tooltip2 = '', $alias1 = '', $alias2 = '')
+    public function printTextboxCouple($labelStart, $name, $name1, $value1, $label1, $name2, $value2, $label2, $labelEnd, $placeholder1 = false, $placeholder2 = false, $tooltip1 = '', $tooltip2 = '', $alias1 = '', $alias2 = '')
     {
-        if($placeholder1 == '%AUTO%')
+        if($placeholder1 === false)
         {
             $placeholder1 = $value1;
         }
-        if($placeholder2 == '%AUTO%')
+        if($placeholder2 === false)
         {
             $placeholder2 = $value2;
         }
@@ -392,7 +471,7 @@ class uiModel extends model
             $html .= "<span class='input-group-addon" . (empty($labelStart) ? '' : " fix-border") . "'>{$label1}</span>\n";
         }
 
-        $html .= "<input id='{$name1}' name='{$name1}' type='text' value='{$value1}' placeholder='{$placeholder1}' class='form-control input-color text-latin' {$alias1}" . (empty($tooltip1) ? "" : " title='{$tooltip1}' data-toggle='tooltip'") . ">";
+        $html .= "<input id='{$name1}' data-target='{$name}' name='{$name1}' type='text' value='{$value1}' placeholder='{$placeholder1}' class='form-control input-color text-latin' {$alias1}" . (empty($tooltip1) ? "" : " title='{$tooltip1}' data-toggle='tooltip'") . ">";
 
         if(!empty($label2))
         {
@@ -403,12 +482,15 @@ class uiModel extends model
             $html .= "<span class='input-group-addon fix-border fix-padding'></span>\n";
         }
 
-        $html .= "<input id='{$name2}' name='{$name2}' type='text' value='{$value2}' placeholder='{$placeholder2}' class='form-control input-color text-latin' {$alias2}" . (empty($tooltip2) ? "" : " title='{$tooltip2}' data-toggle='tooltip'") . ">\n";
+        $html .= "<input id='{$name2}' data-target='{$name}' name='{$name2}' type='text' value='{$value2}' placeholder='{$placeholder2}' class='form-control input-color text-latin' {$alias2}" . (empty($tooltip2) ? "" : " title='{$tooltip2}' data-toggle='tooltip'") . ">\n";
+
 
         if(!empty($endLabel))
         {
             $html .= "<span class='input-group-addon'>{$endLabel}</span>\n";
         }
+
+        $html .= "<input type='hidden' id='{$name}' name='$name' value='{$value1}, {$value2}'>";
         $html .= "</div>\n";
         echo $html;
     }

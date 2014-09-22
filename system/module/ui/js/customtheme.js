@@ -149,4 +149,6 @@ $(function()
     //compileLess();
 
     ajustModalSize();
+
+    $('.nav-tabs li > a').first().trigger('click');
 });

@@ -9,7 +9,7 @@ LTD www.xirangit.com)
 * @version     $Id$
 * @link        http://www.chanzhi.org */
 
-/* --- Basic style --- */
+/* === Basic style === */
 /* Zui reset */
 .col-md-12, .col-xs-12, .col-sm-12, .col-lg-12 {float: left; width: 100%}
 @media (max-width: 991px) {.col-md-12, .col-xs-12, .col-sm-12, .col-lg-12 {float: none;}}
@@ -27,7 +27,7 @@ tr.text-center > td, tr.text-center > th {text-align: center;}
 tr.text-center > td.text-left, tr.text-center > th.text-left {text-align: left;}
 tr.text-center > td.text-right, tr.text-center > th.text-right {text-align: right;}
 
-/* --- CSS helpers --- */
+/* === CSS helpers === */
 /* width settings. */
 .w-p5  {width: 5%} .w-p10 {width: 10%} .w-p15 {width: 15%} .w-p20 {width: 20%} .w-p25 {width: 25%} .w-p30 {width: 30%} .w-p35 {width: 35%} .w-p40 {width: 40%} .w-p45 {width: 45%} .w-p50 {width: 50%} .w-p55 {width: 55%} .w-p60 {width: 60%} .w-p65 {width: 65%} .w-p70 {width: 70%} .w-p75 {width: 75%} .w-p80 {width: 80%} .w-p85 {width: 85%} .w-p90 {width: 90%} .w-p94 {width: 94%} .w-p95 {width: 95%} .w-p98 {width: 98%} .w-p99 {width: 99%} .w-p100{width: 100%}
 
@@ -53,7 +53,7 @@ tr.text-center > td.text-right, tr.text-center > th.text-right {text-align: righ
 /* Margin and padding settings */
 .mg-0 {margin: 0!important}
 
-/* --- Components --- */
+/* === Components === */
 /* Nav */
 .nav li .icon-chevron-right {float: right; margin-top: 2px; margin-right: -6px; opacity: .25;}
 
@@ -224,7 +224,7 @@ tr.text-center > td.text-right, tr.text-center > th.text-right {text-align: righ
 .wechat-block .qrcode img {width: 160px; border: 1px solid #ddd;}
 .wechat-block .name {font-size: 12px; margin-bottom: 6px; font-weight: bold;}
 
-/* --- Form --- */
+/* === Form === */
 /* Required */
 form .star {display: none;}/* hide star */
 .required:after {font-family: arial;font-size: 24px}
@@ -240,7 +240,7 @@ form .star {display: none;}/* hide star */
 /* File box */
 .file-form .fileBox {margin-bottom: 10px;}
 
-/* --- Specail part --- */
+/* === Specail part === */
 /* Header */
 #header {position: relative;}
 #headTitle {display: table; margin-top: 10px;}
@@ -270,7 +270,7 @@ form .star {display: none;}/* hide star */
 #powerby:hover:before {left: 120%;}
 
 /* Go to top */
-#go2top {position: fixed; color: #999; bottom: 80px; right: -40px; width: 40px; text-align: center; text-shadow:1px 1px 0px #fff; display: none; border-radius: 20px; background-color: #f1f1f1}
+#go2top {position: fixed; color: #999; bottom: 80px; right: -40px; width: 40px; text-align: center; text-shadow:1px 1px 0px #fff; display: none; border-radius: 20px; background-color: #f1f1f1; font-size: 28px; line-height: 40px}
 #go2top .icon {font-size: 28px; line-height: 40px}
 #go2top:hover { background-color: #e5e5e5; color: #333; border-color: #aaa; text-decoration: none;}
 
@@ -288,10 +288,7 @@ form .star {display: none;}/* hide star */
 .docker-right img {width: 200px; width:auto\0; height: 200px; margin-top: 10px; border: 1px solid #ccc}
 
 /* modal with iframe */
-body.body-modal
-{
-  padding: 20px;
-}
+body.body-modal {padding: 20px;}
 
 /* bootbox */
 .bootbox .modal-dialog {width: 400px; margin-top: 10%;}

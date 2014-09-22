@@ -4,12 +4,12 @@
     <div class='col-sm-9'>
       <ul class='nav nav-tabs'>
         <?php foreach($lang->ui->groups as $group => $name):?>
-        <li><?php echo html::a('#' . $group, $name, "data-toggle='tab'");?></li>
+        <li><?php echo html::a('#' . $group . 'Tab', $name, "data-toggle='tab'");?></li>
         <?php endforeach;?>
       </ul>
       <div class='tab-content'>
         <?php foreach($lang->ui->groups as $group => $name):?>
-        <div class='tab-pane' id='<?php echo $group?>'>
+        <div class='tab-pane' id='<?php echo $group?>Tab'>
           <table class='table table-form borderless'>
             <?php
             $options = $config->ui->selectorOptions[$group];
@@ -20,7 +20,7 @@
               <td>
                 <div class='row'>
                   <?php foreach($attributes as $label => $params):?>
-                  <div class='col-sm-3'><?php $this->ui->printFormControl($id = "{$group}-{$selector}-{$label}", $label, $params);?></div>
+                  <div class='col-sm-3' data-id='<?php echo $id?>'><?php $this->ui->printFormControl($id = "{$group}-{$selector}-{$label}", $label, $params);?></div>
                   <?php endforeach;?>
                 </div>
               </td>
