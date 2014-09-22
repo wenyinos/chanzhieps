@@ -379,9 +379,12 @@ class threadModel extends model
 
         $data = new stdclass();
         $data->replies     = $replies;
-        $data->repliedBy   = $reply->author;
-        $data->repliedDate = $reply->addedDate;
-        $data->replyID     = $reply->id;
+        if($reply)
+        {
+            $data->repliedBy   = $reply->author;
+            $data->repliedDate = $reply->addedDate;
+            $data->replyID     = $reply->id;
+        }
 
         $this->dao->update(TABLE_THREAD)->data($data)->where('id')->eq($threadID)->exec();
     }
