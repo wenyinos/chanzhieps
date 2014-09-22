@@ -227,6 +227,47 @@ class uiModel extends model
     }
 
     /**
+     * Print form control.
+     * 
+     * @param  string    $id 
+     * @param  string    $label 
+     * @param  array     $params 
+     * @param  mix       $value 
+     * @access public
+     * @return string
+     */
+    public function printFormControl($id, $label, $params, $value = false)
+    {
+        if($params['type'] == 'color') call_user_func_array('uiModel::print' . ucfirst($params['type']) . 'Control', array('id' => $id, 'label' => $label, 'params' => $params, 'value' => $value));
+    }
+
+    /**
+     * Print color control.
+     * 
+     * @param  string    $id 
+     * @param  string    $label 
+     * @param  array     $params 
+     * @param  mix       $value 
+     * @access public
+     * @return string
+     */
+    public function printColorControl($id, $label, $params, $value = false)
+    {
+        $placeholder = $value === false ? $params['default'] : $value;
+
+        $html = "<div class='colorplate'>\n";
+        $html .= "<div class='input-group color active input-group-color' data='{$placeholder}'>\n";
+        $html .= "<span class='input-group-btn'>\n";
+        $html .= "<button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>\n";
+        $html .= "{$this->lang->ui->$label} <span class='caret'></span>\n</button>\n";
+        $html .= "<div class='dropdown-menu colors'>" . $this->createColorPlates() . "</div>\n</span>\n";
+        $html .= "<input id='{$id}' name='{$id}' type='text' value='{$value}' placeholder='{$placeholder}' class='form-control input-color text-latin' data-toggle='tooltip'>\n";
+        $html .= "</div>\n</div>\n";
+        echo $html;
+       
+    }
+
+    /**
      * Print html of color input cell.
      *
      * @param string       $name
@@ -240,25 +281,6 @@ class uiModel extends model
      */
     public function printColorInput($name, $value, $label = '', $default = '%AUTO%', $class = '', $alias= '', $tooltip = '%DEFAULT%')
     {
-        if($default == '%AUTO%')
-        {
-            $default = $value;
-        }
-        if($tooltip == '%DEFAULT%')
-        {
-            $tooltip = $this->lang->ui->theme->colorTip;
-        }
-        $placeholder = ($default == 'transparent' ? $this->lang->ui->theme->transparent : $default);
-
-        $html = "<div class='colorplate'>\n";
-        $html .= "<div class='input-group color active input-group-color' data='{$default}'>\n";
-        $html .= "<span class='input-group-btn'>\n";
-        $html .= "<button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>\n";
-        $html .= "{$label} <span class='caret'></span>\n</button>\n";
-        $html .= "<div class='dropdown-menu colors'>" . $this->createColorPlates() . "</div>\n</span>\n";
-        $html .= "<input id='{$name}' name='{$name}' type='text' value='{$value}' data-default='{$default}' placeholder='{$placeholder}' class='form-control input-color text-latin {$class}' {$alias}" . (empty($tooltip) ? "" : " title='{$tooltip}' data-toggle='tooltip'") . ">\n";
-        $html .= "</div>\n</div>\n";
-        echo $html;
     }
 
     /**
