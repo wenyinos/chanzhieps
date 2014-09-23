@@ -65,11 +65,10 @@ tr.text-center > td.text-right, tr.text-center > th.text-right {text-align: righ
 .navbar-toggle .icon-bar {background: #ccc}
 .navbar-toggle:hover, .navbar-toggle:focus {background: #fff; outline: none}
 .navbar-toggle:hover .icon-bar, .navbar-toggle:focus .icon-bar {background: #aaa}
-@media (max-width: 767px) {.navbar-nav .open .dropdown-menu {position: absolute;}}
 
 /* Breadcrumb */
 .breadcrumb {color: #808080; padding: 0;}
-.breadcrumb:before {color: #aaa; font-size: 14px; margin:0 5px; display: inline-block; content: "\e63d"; font-family: ZenIcon;}
+/* This style can added an icon before self: .breadcrumb:before {color: #aaa; font-size: 14px; margin:0 5px; display: inline-block; content: "\e63d"; font-family: ZenIcon;}*/
 
 /* Table */
 
@@ -137,6 +136,9 @@ tr.text-center > td.text-right, tr.text-center > th.text-right {text-align: righ
 .article-files > .files-list {margin: -5px}
 
 .article > footer {border-top: 1px dotted #ddd; padding: 10px 20px 20px}
+
+/* Image in article content */
+.device-mobile .article-content img {width: 100% !important; height: auto !important;}
 
 /* List */
 .list {border: 1px solid #ddd; border-radius: 2px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); margin-bottom: 20px;}
@@ -252,6 +254,12 @@ form .star {display: none;}/* hide star */
 #headNav {position: absolute; right: 0; top: 40%;}
 #headNav nav > a {display: inline-block; margin-right: 5px;}
 #headNav nav > a:last-child {margin-right: 0;}
+@media (max-width: 767px) {
+  #header {margin-left: -10px; margin-right: -10px;}
+  #siteSlogan {display: none}
+  #headTitle {margin-top: 22px; padding: 0 10px}
+  #headNav {top: 0; width: 100%; text-align: right; background-color: #e5e5e5; padding: 2px 15px}
+}
 
 /* Messagebox */
 #msgBox .label.label-badge {font-weight: bold; background-color: #fff;border: 1px solid #ccc; color: #666;padding: 3px;min-width: 20px}
@@ -270,7 +278,7 @@ form .star {display: none;}/* hide star */
 #powerby:hover:before {left: 120%;}
 
 /* Go to top */
-#go2top {position: fixed; color: #999; bottom: 80px; right: -40px; width: 40px; text-align: center; text-shadow:1px 1px 0px #fff; display: none; border-radius: 20px; background-color: #f1f1f1; font-size: 28px; line-height: 40px}
+#go2top {position: fixed; color: #999; bottom: 80px; right: -40px; width: 40px; text-align: center; text-shadow:1px 1px 0px #fff; display: none; border-radius: 3px; background-color: #f1f1f1; font-size: 28px; line-height: 40px; border: 1px solid #ddd}
 #go2top .icon {font-size: 28px; line-height: 40px}
 #go2top:hover { background-color: #e5e5e5; color: #333; border-color: #aaa; text-decoration: none;}
 
@@ -295,3 +303,6 @@ body.body-modal {padding: 20px;}
 
 /* avatar */
 .avatar-empty {display: block; overflow: hidden; font-size: 28px; color: #fff; background-color: #ddd; border: 1px solid #ccc; width: 36px; height: 36px; line-height: 35px; text-align: center; border-radius: 6px;}
+
+/* === Blog === */
+#articles .card-heading a {font-weight: bold;}

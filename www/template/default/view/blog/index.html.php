@@ -22,7 +22,7 @@ $root = '<li>' . $this->lang->currentPos . $this->lang->colon .  html::a($this->
 if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
 ?>
 <div class='row'>
-  <div class='col-md-9' id='articles'>
+  <div class='col-md-9 col-main' id='articles'>
     <?php foreach($articles as $article):?>
     <?php if(!isset($category)) $category = array_shift($article->categories);?>
       <?php $url = inlink('view', "id=$article->id", "category={$category->alias}&name=$article->alias"); ?>
@@ -49,6 +49,6 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
     <?php endforeach;?>
     <div class='clearfix pager'><?php $pager->show('right', 'short');?></div>
   </div>
-  <div class='col-md-3'><side class='page-side'><div class='panel-pure panel'><?php echo html::a(helper::createLink('rss', 'index', '?type=blog', '', 'xml'), "<i class='icon-rss text-warning'></i> " . $lang->blog->subscribe, "target='_blank' class='btn btn-lg btn-block'"); ?></div><?php $this->block->printRegion($layouts, 'blog_index', 'side');?></side></div>
+  <div class='col-md-3 col-side'><side class='page-side'><div class='panel-pure panel'><?php echo html::a(helper::createLink('rss', 'index', '?type=blog', '', 'xml'), "<i class='icon-rss text-warning'></i> " . $lang->blog->subscribe, "target='_blank' class='btn btn-lg btn-block'"); ?></div><?php $this->block->printRegion($layouts, 'blog_index', 'side');?></side></div>
 </div>
 <?php include './footer.html.php';?>

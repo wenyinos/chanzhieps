@@ -6,6 +6,7 @@
     // hex color reg
     var hexReg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
     var lessFileTemplate = '/template/{0}/theme/{1}/style.less';
+    var lessConfigTemplate = '/template/{0}/theme/{1}/setting.json';
     var lessTemplates = {};
     var useLessCache = false;
 
@@ -51,14 +52,13 @@
         console.groupCollapsed('%cCOMPILE', 'background-color: green; color:#fff');
         this.compileVariables(variables);
         
-        var lessCode = this.variablesCode + '\n' + this.less,
+        var lessCode = this.less.replace(/@import "@variables";/, this.variablesCode),
             parser   = window.less.Parser(),
             options  = this.options,
             that     = this,
             css      = '';
 
         console.log('variables: ', variables);
-        console.log('variablesCode: ', this.variablesCode);
         console.log('lessCode: ', lessCode);
         parser.parse(lessCode, function(error, result)
         {
@@ -98,18 +98,17 @@
         template  : 'default',
         variables :
         {
-            font               : {value: '"Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif', desc: 'Global font family'},
-            backgroundColor    : "#FFF",
-            foreColor          : "#333",
-            secondaryColor     : "#145CCD",
-            backColor          : "#FFF",
-            backImage          : "none",
-            backImageRepeat    : "repeat",
-            backImagePositionX : "0%",
-            backImagePositionY : "0%",
-            textColor          : "#333",
-            fontSize           : "12px",
-            fontWeight         : "normal"
+            "font-family"             : {value: '"Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif', desc: 'Global font family'},
+            "background-color" : "#FFF",
+            "fore-color"       : "#333",
+            "secondary-color"  : "#145CCD",
+            "back-color"       : "#FFF",
+            "text-color"       : "#333",
+            "font-size"        : "12px",
+            "font-weight"      : "normal",
+            "border-width"     : '1px',
+            "border-style"     : 'solid',
+            "border-radius"    : '3px'
         }
     };
 
