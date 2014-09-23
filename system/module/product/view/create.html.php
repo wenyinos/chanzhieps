@@ -35,7 +35,7 @@
               <div class='col-sm-2'>
                 <div class="input-group">
                   <span class="input-group-addon"><?php echo $lang->product->order;?></span>
-                  <?php echo html::input('order', $order, "class='form-control'");?>
+                  <?php echo html::input('order', '', "class='form-control'");?>
                 </div>
               </div>
             </div>
