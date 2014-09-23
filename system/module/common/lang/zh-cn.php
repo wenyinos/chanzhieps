@@ -112,7 +112,7 @@ $lang->menu->book     = '手册|book|admin|';
 $lang->menu->page     = '单页|article|admin|type=page';
 $lang->menu->forum    = '论坛|forum|admin|';
 $lang->menu->site     = '站点|site|setbasic|';
-$lang->menu->ui       = '界面|ui|setlogo|';
+$lang->menu->ui       = '界面|ui|settemplate|';
 $lang->menu->company  = '公司|company|setbasic|';
 $lang->menu->user     = '会员|user|admin|';
 $lang->menu->feedback = '反馈|message|admin|';

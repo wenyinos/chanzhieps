@@ -112,7 +112,7 @@ $lang->menu->book     = 'Book|book|admin|';
 $lang->menu->page     = 'Page|article|admin|type=page';
 $lang->menu->forum    = 'Forum|forum|admin|';
 $lang->menu->site     = 'Site|site|setbasic|';
-$lang->menu->ui       = 'UI|ui|setlogo|';
+$lang->menu->ui       = 'UI|ui|setsettemplate|';
 $lang->menu->company  = 'Company|company|setbasic|';
 $lang->menu->user     = 'User|user|admin|';
 $lang->menu->feedback = 'Feedback|message|admin|';
