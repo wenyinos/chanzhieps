@@ -18,6 +18,8 @@ include TPL_ROOT . 'common/treeview.html.php';
 js::set('path',  $product->path);
 js::set('productID', $product->id);
 js::set('categoryID', $category->id);
+css::internal($product->css);
+js::execute($product->js);
 ?>
 <?php $common->printPositionBar($category, $product);?>
 <div class='row'>

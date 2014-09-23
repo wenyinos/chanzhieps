@@ -422,4 +422,42 @@ class productModel extends model
            $this->dao->insert(TABLE_RELATION)->data($data)->exec();
        }
     }
+
+    /**
+     * Set css.
+     * 
+     * @param  int      $productID 
+     * @access public
+     * @return int
+     */
+    public function setCss($productID)
+    {
+        $data = fixer::input('post')
+            ->add('editor', $this->app->user->account)
+            ->add('editedDate', helper::now())
+            ->get();
+
+        $this->dao->update(TABLE_PRODUCT)->data($data, $skip = 'uid')->autoCheck()->where('id')->eq($productID)->exec();
+        
+        return !dao::isError();
+    }
+
+    /**
+     * Set js.
+     * 
+     * @param  int      $productID 
+     * @access public
+     * @return int
+     */
+    public function setJs($productID)
+    {
+        $data = fixer::input('post')
+            ->add('editor', $this->app->user->account)
+            ->add('editedDate', helper::now())
+            ->get();
+
+        $this->dao->update(TABLE_PRODUCT)->data($data, $skip = 'uid')->autoCheck()->where('id')->eq($productID)->exec();
+        
+        return !dao::isError();
+    }
 }

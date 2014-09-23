@@ -267,4 +267,45 @@ class product extends control
         if($this->product->delete($productID)) $this->send(array('result' => 'success'));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
+
+    /**
+     * Set css.
+     * 
+     * @param  int      $productID 
+     * @access public
+     * @return void
+     */
+    public function setCss($productID)
+    {
+        if($_POST)
+        {
+            if($this->product->setCss($productID)) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+
+        $this->view->title   = $this->lang->product->css;
+        $this->view->product = $this->product->getByID($productID);
+        $this->display();
+    }
+
+
+    /**
+     * Set js.
+     * 
+     * @param  int      $productID 
+     * @access public
+     * @return void
+     */
+    public function setJs($productID)
+    {
+        if($_POST)
+        {
+            if($this->product->setJs($productID)) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+
+        $this->view->title   = $this->lang->product->js;
+        $this->view->product = $this->product->getByID($productID);
+        $this->display();
+    }
 }
