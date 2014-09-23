@@ -38,11 +38,14 @@ $config->allowedTags->front = '<p><span><h1><h2><h3><h4><h5><em><u><strong><br><
 $config->allowedTags->admin = $config->allowedTags->front . '<div><table><td><th><tr><tbody><iframe><embed><style><header><nav>'; // For admin users.
 
 /* Views and themes. */
-$config->views    = ',html,json,xml,'; // Supported view types.
+$config->views  = ',html,json,xml,'; // Supported view types.
 
 $config->site = new stdclass();
-$config->site->template = 'default';    // Supported themes.
-$config->site->theme    = 'default';    // Supported themes.
+
+$config->template = new stdclass();
+$config->template->name   = 'default';    // Supported themes.
+$config->template->theme  = 'default';    // Supported themes.
+$config->template->parser = 'default';         // Default parser.
 
 /* Suported languags. */
 $config->langs['zh-cn'] = '简体';
