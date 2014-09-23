@@ -54,7 +54,7 @@ class blockModel extends model
         $pages      = "all,{$module}_{$method}";
         $rawLayouts = $this->dao->select('*')->from(TABLE_LAYOUT)
             ->where('page')->in($pages)
-            ->andWhere('template')->eq(!empty($this->config->site->template) ? $this->config->site->template : 'default')
+            ->andWhere('template')->eq(!empty($this->config->template->name) ? $this->config->template->name : 'default')
             ->fetchGroup('page', 'region');
 
         $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->fetchAll('id');
@@ -447,7 +447,7 @@ class blockModel extends model
                 else echo "<div class='col-md-{$block->grid}' data-grid='{$block->grid}'>";
             }
 
-            $tplPath = $this->app->getTplRoot() . $this->config->site->template . DS . 'view' . DS . 'block' . DS;
+            $tplPath = $this->app->getTplRoot() . $this->config->template->name . DS . 'view' . DS . 'block' . DS;
 
             /* First try block/ext/sitecode/view/block/ */
             $extBlockRoot = $tplPath . "/ext/_{$this->config->site->code}/";
@@ -529,7 +529,7 @@ class blockModel extends model
      */
     public function loadTemplateLang($template)
     {
-        $this->config->site->template = $template;
+        $this->config->template->name = $template;
         $this->app->loadLang('block');
     }
 }

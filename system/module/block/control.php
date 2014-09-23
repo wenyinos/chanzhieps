@@ -23,7 +23,7 @@ class block extends control
      */
     public function admin($template = '', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
-        if(!$template) $template = $this->config->site->template;
+        if(!$template) $template = $this->config->template->name;
 
         $this->block->loadTemplateLang($template);
 
@@ -48,7 +48,7 @@ class block extends control
      */
     public function pages($template = '')
     {
-        if(!$template) $template = $this->config->site->template;
+        if(!$template) $template = $this->config->template->name;
 
         $this->block->loadTemplateLang($template);
 
@@ -67,7 +67,7 @@ class block extends control
      */
     public function create( $template = '', $type = 'html')
     {
-        if(!$template) $template = $this->config->site->template;
+        if(!$template) $template = $this->config->template->name;
 
         $this->block->loadTemplateLang($template);
 
@@ -101,7 +101,7 @@ class block extends control
      */
     public function edit($template = 'default', $blockID, $type = '')
     {
-        if(!$template) $template = $this->config->site->template;
+        if(!$template) $template = $this->config->template->name;
 
         $this->block->loadTemplateLang($template);
 
@@ -138,7 +138,7 @@ class block extends control
      */
     public function setRegion($page, $region, $template)
     {
-        if(!$template) $template = $this->config->site->template;
+        if(!$template) $template = $this->config->template->name;
 
         $this->block->loadTemplateLang($template);
 
