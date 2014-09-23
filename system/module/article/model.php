@@ -464,4 +464,42 @@ class articleModel extends model
         }
         return $content;
     }
+
+    /**
+     * Set css.
+     * 
+     * @param  int      $articleID 
+     * @access public
+     * @return int
+     */
+    public function setCss($articleID)
+    {
+        $data = fixer::input('post')
+            ->add('editor', $this->app->user->account)
+            ->add('editedDate', helper::now())
+            ->get();
+
+        $this->dao->update(TABLE_ARTICLE)->data($data, $skip = 'uid')->autoCheck()->where('id')->eq($articleID)->exec();
+        
+        return !dao::isError();
+    }
+
+    /**
+     * Set js.
+     * 
+     * @param  int      $articleID 
+     * @access public
+     * @return int
+     */
+    public function setJs($articleID)
+    {
+        $data = fixer::input('post')
+            ->add('editor', $this->app->user->account)
+            ->add('editedDate', helper::now())
+            ->get();
+
+        $this->dao->update(TABLE_ARTICLE)->data($data, $skip = 'uid')->autoCheck()->where('id')->eq($articleID)->exec();
+        
+        return !dao::isError();
+    }
 }

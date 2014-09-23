@@ -103,14 +103,6 @@
           <td colspan='2'><?php echo html::textarea('content', '', "rows='10' class='form-control'");?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->article->css;?></th>
-          <td colspan='2'><?php echo html::textarea('css', '', "rows=5 class='form-control codeeditor' data-mode='css'");?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->article->js;?></th>
-          <td colspan='2'><?php echo html::textarea('js', '', "rows=5 class='form-control codeeditor' data-mode='javascript'");?></td>
-        </tr>
-        <tr>
           <th><?php echo $lang->article->addedDate;?></th>
           <td>
             <div class="input-append date">
