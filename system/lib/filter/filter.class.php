@@ -536,7 +536,10 @@ class fixer
     {
         global $app;
         $app->loadClass('purifier', true);
-        $purifier = new HTMLPurifier(HTMLPurifier_Config::createDefault());
+        $config = HTMLPurifier_Config::createDefault();
+        $purifier = new HTMLPurifier($config);
+        $def = $config->getHTMLDefinition(true);
+        $def->addAttribute('a', 'target', 'Enum#_blank,_self,_target,_top');
 
         $fields = $this->processFields($fieldName);
         foreach($fields as $fieldName) 
