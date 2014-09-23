@@ -236,9 +236,9 @@ class uiModel extends model
      * @access public
      * @return string
      */
-    public function printFormControl($id, $label, $params, $value = false)
+    public function printFormControl($label, $params, $value = false)
     {
-        call_user_func_array('uiModel::print' . ucfirst($params['type']) . 'Control', array('id' => $id, 'label' => $label, 'params' => $params, 'value' => $value));
+        call_user_func_array('uiModel::print' . ucfirst($params['type']) . 'Control', array('id' => $params['name'], 'label' => $label, 'params' => $params, 'value' => $value));
     }
 
     /**
@@ -292,9 +292,14 @@ class uiModel extends model
     public function printImageControl($id, $label, $params, $value = '')
     {
         $placeholder = $params['default'];
-        if(empty($placeholder) or $placeholder == 'none') $placeholder = $this->lang->ui->theme->none;
+        $default =  $placeholder;
+        if(empty($placeholder) or $placeholder == 'none')
+        {
+            $placeholder = $this->lang->ui->theme->none;
+            $default     = 'none';
+        }
 
-        $this->printTextbox($id, $value, $this->lang->ui->$label, '', $this->lang->ui->theme->none, '', '', $this->lang->ui->theme->backImageTip);
+        $this->printTextbox($id, $value, $this->lang->ui->$label, '', $this->lang->ui->theme->none, '', "data-default='{$default}'", $this->lang->ui->theme->backImageTip);
     }
 
     /**
@@ -310,16 +315,16 @@ class uiModel extends model
         $this->printSelectList($this->lang->ui->theme->imageRepeatList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
     }
 
-    public function printPositionControl($id, $label, $params, $value = 'x, y')
+    public function printPositionControl($id, $label, $params, $value = '0% 0%')
     {
-        $values = explode(',', $value);
-        $defaultValues = explode(',', $params['default']);
+        $values = explode(' ', $value);
+        $defaultValues = explode(' ', $params['default']);
         $defaultValue1 = count($defaultValues) > 0 ? $defaultValues[0] : '0';
         $defaultValue2 = count($defaultValues) > 1 ? $defaultValues[1] : '0';
         $value1 = count($values) > 0 ? $values[0] : $defaultValue1;
         $value2 = count($values) > 1 ? $values[1] : $defaultValue2;
 
-        $this->printTextboxCouple($this->lang->ui->$label, $id, $id . 'X', $value1, 'X', $id . 'Y', $value2, 'Y', '', $defaultValue1, $defaultValue2);
+        $this->printTextboxCouple($this->lang->ui->$label, $id, $id . '-x', $value1, 'X', $id . '-y', $value2, 'Y', '', $defaultValue1, $defaultValue2);
     }
 
     /**
@@ -336,6 +341,19 @@ class uiModel extends model
     }
 
     /**
+     * Print border control
+     * @param  string $id
+     * @param  string $label
+     * @param  array  $params
+     * @param  string $value
+     * @return void
+     */
+    public function printUnderlineControl($id, $label, $params, $value = '')
+    {
+        $this->printSelectList($this->lang->ui->theme->underlineList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
+    }
+
+    /**
      * Print nav layout
      * @param  string $id
      * @param  string $label
@@ -348,18 +366,70 @@ class uiModel extends model
         $this->printSelectList($this->lang->ui->theme->navbarLayoutList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
     }
 
-    // /**
-    //  * Print nav layout
-    //  * @param  string $id
-    //  * @param  string $label
-    //  * @param  array  $params
-    //  * @param  string $value
-    //  * @return void
-    //  */
-    // public function printNavLayout($id, $label, $params, $value = '')
-    // {
-    //     $this->printSelectList($this->lang->ui->theme->navbarLayoutList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
-    // }
+    /**
+     * Print font size control
+     * @param  string $id
+     * @param  string $label
+     * @param  array  $params
+     * @param  string $value
+     * @return void
+     */
+    public function printFontSizeControl($id, $label, $params, $value = '')
+    {
+        $this->printSelectList($this->lang->ui->theme->fontSizeList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
+    }
+
+    /**
+     * Print font family control
+     * @param  string $id
+     * @param  string $label
+     * @param  array  $params
+     * @param  string $value
+     * @return void
+     */
+    public function printFontFamilyControl($id, $label, $params, $value = '')
+    {
+        $this->printSelectList($this->lang->ui->theme->fontList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
+    }
+
+    /**
+     * Print font weight control
+     * @param  string $id
+     * @param  string $label
+     * @param  array  $params
+     * @param  string $value
+     * @return void
+     */
+    public function printFontWeightControl($id, $label, $params, $value = '')
+    {
+        $this->printSelectList($this->lang->ui->theme->fontWeightList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
+    }
+
+    /**
+     * Print sidebar layout
+     * @param  string $id
+     * @param  string $label
+     * @param  array  $params
+     * @param  string $value
+     * @return void
+     */
+    public function printSidebarLayoutControl($id, $label, $params, $value = '')
+    {
+        $this->printSelectList($this->lang->ui->theme->sidebarPullLeftList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
+    }
+
+    /**
+     * Print sidebar width
+     * @param  string $id
+     * @param  string $label
+     * @param  array  $params
+     * @param  string $value
+     * @return void
+     */
+    public function printSidebarWidthControl($id, $label, $params, $value = '')
+    {
+        $this->printSelectList($this->lang->ui->theme->sidebarWidthList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
+    }
 
     /**
      * Print html of textbox with label.
@@ -471,7 +541,7 @@ class uiModel extends model
             $html .= "<span class='input-group-addon" . (empty($labelStart) ? '' : " fix-border") . "'>{$label1}</span>\n";
         }
 
-        $html .= "<input id='{$name1}' data-target='{$name}' name='{$name1}' type='text' value='{$value1}' placeholder='{$placeholder1}' class='form-control input-color text-latin' {$alias1}" . (empty($tooltip1) ? "" : " title='{$tooltip1}' data-toggle='tooltip'") . ">";
+        $html .= "<input id='{$name1}' data-sid='{$name}-1' data-target='{$name}' name='{$name1}' type='text' value='{$value1}' placeholder='{$placeholder1}' class='form-control input-color text-latin' {$alias1}" . (empty($tooltip1) ? "" : " title='{$tooltip1}' data-toggle='tooltip'") . ">";
 
         if(!empty($label2))
         {
@@ -482,7 +552,7 @@ class uiModel extends model
             $html .= "<span class='input-group-addon fix-border fix-padding'></span>\n";
         }
 
-        $html .= "<input id='{$name2}' data-target='{$name}' name='{$name2}' type='text' value='{$value2}' placeholder='{$placeholder2}' class='form-control input-color text-latin' {$alias2}" . (empty($tooltip2) ? "" : " title='{$tooltip2}' data-toggle='tooltip'") . ">\n";
+        $html .= "<input id='{$name2}' data-sid='{$name}-2' data-target='{$name}' name='{$name2}' type='text' value='{$value2}' placeholder='{$placeholder2}' class='form-control input-color text-latin' {$alias2}" . (empty($tooltip2) ? "" : " title='{$tooltip2}' data-toggle='tooltip'") . ">\n";
 
 
         if(!empty($endLabel))
