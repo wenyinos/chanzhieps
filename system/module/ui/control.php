@@ -99,11 +99,12 @@ class ui extends control
     {
         if(empty($template)) $template = $this->config->template->name;
         $templates = $this->ui->getTemplates();
+
         if($_POST)
         {
             if(isset($templates[$template]) && isset($templates[$template]['themes'][$theme]))
             {
-                $customCssFile  = $this->config->template->ui->customCssFile;
+                $customCssFile  = sprintf($this->config->site->ui->customCssFile, $template, $theme);
                 $savePath       = dirname($customCssFile);
                 if(!is_dir($savePath)) mkdir($savePath, 0755, true);
                 file_put_contents($customCssFile, $this->post->css);
