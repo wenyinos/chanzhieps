@@ -25,11 +25,13 @@ class ui extends control
         $templates = $this->ui->getTemplates();
         if($template and isset($templates[$template]))
         {  
-            $result = $this->loadModel('setting')->setItems('system.common.site', array('template' => $template ));
-            if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $result = $this->loadModel('setting')->setItems('system.common.site', array('theme' => $theme));
-            if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $result = $this->loadModel('setting')->setItems('system.common.site', array('customTheme' => $custom ? $theme : ''));
+            $settings = array();
+            $setting['name']   = $template;
+            $setting['theme']  = $theme;
+            $setting['parser'] = $templates[$template]['parser'];
+            $setting['customTheme'] =  $custom ? $theme : '';
+
+            $result = $this->loadModel('setting')->setItems('system.common.template', $setting);
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
@@ -95,25 +97,25 @@ class ui extends control
      **/
     public function customTheme($theme = '', $template = '')
     {
-        if(empty($template)) $template = $this->config->site->template;
+        if(empty($template)) $template = $this->config->template->name;
         $templates = $this->ui->getTemplates();
         if($_POST)
         {
             if(isset($templates[$template]) && isset($templates[$template]['themes'][$theme]))
             {
-                $customCssFile  = $this->config->site->ui->customCssFile;
+                $customCssFile  = $this->config->template->ui->customCssFile;
                 $savePath       = dirname($customCssFile);
                 if(!is_dir($savePath)) mkdir($savePath, 0755, true);
                 file_put_contents($customCssFile, $this->post->css);
 
                 $setting = fixer::input('post')->remove('css,theme')->get();
-                $result  = $this->loadModel('setting')->setItems('system.common.site', array('themeSetting' =>json_encode($setting)));
-                $this->loadModel('setting')->setItems('system.common.site', array('customVersion' => time()));
+                $result  = $this->loadModel('setting')->setItems('system.common.template', array('themeSetting' =>json_encode($setting)));
+                $this->loadModel('setting')->setItems('system.common.template', array('customVersion' => time()));
                 $this->send(array('result' => 'success', 'message' => $this->lang->ui->themeSaved));
             }
         }
 
-        if($this->config->site->themeSetting) $this->config->themeSetting = json_decode($this->config->site->themeSetting);
+        if($this->config->template->themeSetting) $this->config->themeSetting = json_decode($this->config->template->themeSetting);
 
         $this->view->title      = "<i class='icon-cog'></i> " . $this->lang->ui->customtheme;
         $this->view->modalWidth = '1000';

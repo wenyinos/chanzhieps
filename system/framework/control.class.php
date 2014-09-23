@@ -159,6 +159,7 @@ class control
 
         $this->setModuleName($moduleName);
         $this->setMethodName($methodName);
+        $this->setTplRoot();
 
         /* Load the model file auto. */
         $this->loadModel();
@@ -197,6 +198,17 @@ class control
     private function setMethodName($methodName = '')
     {
         $this->methodName = $methodName ? strtolower($methodName) : $this->app->getMethodName();
+    }
+
+    /**
+     * Set TPL_ROOT used in template files.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setTplRoot()
+    {
+        if(!defined('TPL_ROOT')) define('TPL_ROOT', $this->app->getTplRoot() . $this->config->template->name . DS . 'view' . DS);
     }
 
     /**
@@ -254,7 +266,7 @@ class control
      * @access private
      * @return string  the view file
      */
-    private function setViewFile($moduleName, $methodName)
+    public function setViewFile($moduleName, $methodName)
     {
         $moduleName = strtolower(trim($moduleName));
         $methodName = strtolower(trim($methodName));
@@ -262,15 +274,15 @@ class control
         $modulePath = $this->app->getModulePath($moduleName);
         $viewExtPath = $this->app->getModuleExtPath($moduleName, 'view');
 
-        /* The main view file, extension view file and hook file. */
         if((RUN_MODE != 'front') or (strpos($modulePath, 'module' . DS . 'ext') !== false))
         {
+            /* If not in front mode or is ext module, view file is in modeule path. */
             $mainViewFile = $modulePath . 'view' . DS . $methodName . '.' . $this->viewType . '.php';
         }
         else
         {
+            /* If in front mode, view file is in www/template path. */
             $mainViewFile = TPL_ROOT . $moduleName . DS . "{$methodName}.{$this->viewType}.php";
-            if(!file_exists($mainViewFile)) $mainViewFile = $modulePath . 'view' . DS . $methodName . '.' . $this->viewType . '.php';
         }
 
         /* Extension view file. */
@@ -347,10 +359,10 @@ class control
         }
         else
         {
-            $defaultMainCssFile   = TPL_ROOT . $moduleName . DS . "common.css";
-            $defaultMethodCssFile = TPL_ROOT . $moduleName . DS . "{$methodName}.css";
-            $themeMainCssFile     = TPL_ROOT . $moduleName . DS . "common.{$this->config->site->theme}.css";
-            $themeMethodCssFile   = TPL_ROOT . $moduleName . DS . "{$methodName}.{$this->config->site->theme}.css";
+            $defaultMainCssFile   = TPL_ROOT . $moduleName . DS . 'css' . DS . "common.css";
+            $defaultMethodCssFile = TPL_ROOT . $moduleName . DS . 'css' . DS . "{$methodName}.css";
+            $themeMainCssFile     = TPL_ROOT . $moduleName . DS . 'css' . DS . "common.{$this->config->site->theme}.css";
+            $themeMethodCssFile   = TPL_ROOT . $moduleName . DS . 'css' . DS . "{$methodName}.{$this->config->site->theme}.css";
 
             if(file_exists($defaultMainCssFile))   $css .= file_get_contents($defaultMainCssFile);
             if(file_exists($defaultMethodCssFile)) $css .= file_get_contents($defaultMethodCssFile);
@@ -394,10 +406,10 @@ class control
         }
         else
         {
-            $defaultMainJsFile   = TPL_ROOT . $moduleName . DS . "common.js";
-            $defaultMethodJsFile = TPL_ROOT . $moduleName . DS . "{$methodName}.js";
-            $themeMainJsFile     = TPL_ROOT . $moduleName . DS . "common.{$this->config->site->theme}.js";
-            $themeMethodJsFile   = TPL_ROOT . $moduleName . DS . "{$methodName}.{$this->config->site->theme}.js";
+            $defaultMainJsFile   = TPL_ROOT . $moduleName . DS . 'js' . DS . "common.js";
+            $defaultMethodJsFile = TPL_ROOT . $moduleName . DS . 'js' . DS . "{$methodName}.js";
+            $themeMainJsFile     = TPL_ROOT . $moduleName . DS . 'js' . DS . "common.{$this->config->site->theme}.js";
+            $themeMethodJsFile   = TPL_ROOT . $moduleName . DS . 'js' . DS . "{$methodName}.{$this->config->site->theme}.js";
 
             if(file_exists($defaultMainJsFile))   $js .= file_get_contents($defaultMainJsFile);
             if(file_exists($defaultMethodJsFile)) $js .= file_get_contents($defaultMethodJsFile);
@@ -451,14 +463,20 @@ class control
         if(empty($moduleName)) $moduleName = $this->moduleName;
         if(empty($methodName)) $methodName = $this->methodName;
 
-        if($this->viewType == 'json')
+        $parser = $this->config->template->parser;
+
+        if(RUN_MODE == 'front' and $parser != 'default')
         {
-            $this->parseJSON($moduleName, $methodName);
+            include "parser.{$parser}.class.php";
+            if(class_exists($parser . 'Parser')) $parser = call_user_func($parser . 'Parser::getInstance', $this); 
         }
         else
         {
-            $this->parseDefault($moduleName, $methodName);
+            $parser = $this;
         }
+
+        $parser->parseDefault($moduleName, $methodName);
+
         return $this->output;
     }
 
@@ -590,7 +608,6 @@ class control
      */
     public function display($moduleName = '', $methodName = '')
     {
-        if(!defined('TPL_ROOT')) define('TPL_ROOT', $this->app->getTplRoot() . $this->config->site->template . DS . 'view' . DS);
         if(empty($this->output)) $this->parse($moduleName, $methodName);
         echo $this->output;
     }

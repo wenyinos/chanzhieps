@@ -20,13 +20,13 @@
     <div class='panel-actions'><?php echo html::a(inlink('installTemplate'), $lang->ui->installTemplate, "class='btn btn-primary iframe' data-toggle='modal' data-width='600'")?></div>
   </div>
 </div>
-<div class='cards cards-templates' data-template='<?php echo $this->config->site->template?>' data-theme='<?php echo $this->config->site->theme?>'>
+<div class='cards cards-templates' data-template='<?php echo $this->config->template->name?>' data-theme='<?php echo $this->config->template->theme?>'>
   <?php foreach($templates as $code => $template):?>
   <?php
   $desc  = $template['desc'];
   $count = count($template['themes']);
-  $isCurrent = $this->config->site->template == $code;
-  $themeName = $isCurrent ? $this->config->site->theme : 'default';
+  $isCurrent = $this->config->template->name == $code;
+  $themeName = $isCurrent ? $this->config->template->theme : 'default';
   $templateRoot = $webRoot . 'template/' . $code . '/'
   ?>
   <div class='col-card'>
@@ -48,7 +48,7 @@
         <?php foreach($template['themes'] as $theme => $name):?>
           <?php
           $custom = true;
-          $currentClass = ($isCurrent and $config->site->theme == $theme) ? ' current' : '';
+          $currentClass = ($isCurrent and $config->template->theme == $theme) ? ' current' : '';
           if($custom) $currentClass .= ' custom';
 
           $url = inlink('setTemplate', "template={$code}&theme={$theme}&custom={$custom}");

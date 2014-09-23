@@ -136,12 +136,9 @@ class product extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin')));
         }
 
-        $maxOrder = $this->dao->select('max(`order`) as maxOrder')->from(TABLE_PRODUCT)->fetch('maxOrder');
-
         $this->view->title           = $this->lang->product->create;
         $this->view->currentCategory = $categoryID;
         $this->view->categories      = $categories;
-        $this->view->order           = $maxOrder + 1;
         $this->display();
     }
 
