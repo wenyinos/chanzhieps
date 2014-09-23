@@ -20,7 +20,7 @@ include TPL_ROOT . 'common/treeview.html.php';
 ?>
 <?php echo $common->printPositionBar($category, isset($product) ? $product : '');?>
 <div class='row'>
-  <div class='col-md-9'>
+  <div class='col-md-9 col-main'>
     <div class='list list-condensed'>
       <header><h2><i class='icon-th'></i> <?php echo $category->name;?></h2></header>
       <section class='cards cards-products cards-borderless'>
@@ -76,7 +76,7 @@ include TPL_ROOT . 'common/treeview.html.php';
       </footer>
     </div>
   </div>
-  <div class='col-md-3'>
+  <div class='col-md-3 col-side'>
     <side class='page-side'><?php $this->block->printRegion($layouts, 'product_browse', 'side');?></side>
   </div>
 </div>
