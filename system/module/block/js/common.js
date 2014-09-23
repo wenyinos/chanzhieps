@@ -26,7 +26,7 @@ $(function()
 
         $this.closest('.colorplate').find('.color.active').removeClass('active');
 
-        if(tempColor.isHexColor(val))
+        if(tempColor.isColor(val))
         {
             var ic = (new Color(val)).contrast().hexStr();
             $this.attr('placeholder', val).closest('.color').removeClass('error').find('.input-group-btn .dropdown-toggle').css({'background': val, 'color': ic}).find('.caret').css('border-top-color', ic);;
