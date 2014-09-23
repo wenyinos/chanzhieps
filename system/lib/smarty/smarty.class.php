@@ -1702,7 +1702,6 @@ function smartyAutoload($class)
 /**
  * @ignore
  */
-require_once(dirname(__FILE__) . '/smarty.class.php');
 
 /**
  * Smarty Backward Compatability Wrapper Class
