@@ -115,3 +115,30 @@ $config->ui->selectorOptions['footer']['border']['color']  = array('type' => 'co
 
 $config->ui->selectorOptions['footer']['background'] = array();
 $config->ui->selectorOptions['footer']['background']['backcolor'] = array('type' => 'color', 'default' => '#f7f7f7', 'name' => 'footer-backcolor');
+
+/* Default theme setting */
+$config->ui->themes['default'] = $config->ui->selectorOptions;
+
+/* Blue theme setting */
+$config->ui->themes['blue']    = $config->ui->selectorOptions;
+
+unset($config->ui->themes['blue']['footer']);
+
+/* Brightdark theme setting */
+$config->ui->themes['brightdark']    = $config->ui->selectorOptions;
+
+/* Colorful theme setting */
+$config->ui->themes['colorful']    = $config->ui->selectorOptions;
+
+/* Flat theme setting */
+$config->ui->themes['flat']    = $config->ui->selectorOptions;
+
+/* Tartan theme setting */
+$config->ui->themes['tartan']    = $config->ui->selectorOptions;
+
+/* Tree theme setting */
+$config->ui->themes['tree']    = $config->ui->selectorOptions;
+
+/* Wide theme setting */
+$config->ui->themes['wide']    = $config->ui->selectorOptions;
+

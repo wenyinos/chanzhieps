@@ -257,7 +257,7 @@ class uiModel extends model
         $placeholder = $default;
         if($placeholder === 'transparent') $placeholder = $this->lang->ui->theme->transparent;
 
-        $html = "<div class='colorplate'>\n";
+        $html = "<div class='colorplate theme-control' data-id='{$id}'>\n";
         $html .= "<div class='input-group color active input-group-color' data='{$default}'>\n";
         $html .= "<span class='input-group-btn'>\n";
         $html .= "<button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>\n";
@@ -451,7 +451,7 @@ class uiModel extends model
             $placeholder = $value;
         }
 
-        $html = "<div class='input-group input-group-textbox'>\n";
+        $html = "<div class='input-group input-group-textbox theme-control' data-id='{$name}'>\n";
         if(!empty($startLabel))
         {
             $html .= "<span class='input-group-addon'>{$startLabel}</span>\n";
@@ -482,7 +482,7 @@ class uiModel extends model
      */
     public function printSelectList($list, $name, $value = '', $label = '', $class = '', $alias = '', $tooltip = '', $default = '')
     {
-        $html = "<div class='input-group input-group-select'>\n";
+        $html = "<div class='input-group input-group-select theme-control' data-id='{$name}'>\n";
         if(!empty($label))
         {
             $html .= "<span class='input-group-addon'>{$label}</span>\n";
@@ -530,7 +530,7 @@ class uiModel extends model
             $placeholder2 = $value2;
         }
 
-        $html = "<div class='input-group input-group-textbox-couple'>\n";
+        $html = "<div class='input-group input-group-textbox-couple theme-control' data-id='{$name}'>\n";
         if(!empty($labelStart))
         {
             $html .= "<span class='input-group-addon'>{$labelStart}</span>\n";
