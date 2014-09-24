@@ -221,7 +221,7 @@ class fileModel extends model
     public function canUpload()
     {
        if(RUN_MODE == 'admin') return true;
-       if(commonModel::isAvailable('upload')) return true;
+       if($this->config->site->allowUpload == 1) return true;
        if(isset($this->app->user->admin) and $this->app->user->admin == 'super') return true;
        return false;
     }
