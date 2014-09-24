@@ -24,6 +24,7 @@ $lang->site->icpLink       = '备案编号链接';
 $lang->site->slogan        = '站点口号';
 $lang->site->mission       = '站点使命';
 $lang->site->copyright     = '创建年份';
+$lang->site->allowUpload   = '允许上传附件';
 $lang->site->allowedFiles  = '允许附件类型';
 
 $lang->site->setBasic      = "设置基本信息";
@@ -42,6 +43,5 @@ $lang->site->moduleAvailable['forum']   = '论坛';
 $lang->site->moduleAvailable['blog']    = '博客';
 $lang->site->moduleAvailable['book']    = '手册';
 $lang->site->moduleAvailable['message'] = '评论留言';
-$lang->site->moduleAvailable['upload']  = '附件上传';
 
 $lang->site->fileAllowedRole = '多个后缀名之间请用 "," 隔开';
