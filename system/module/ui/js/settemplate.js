@@ -86,18 +86,13 @@ $(document).ready(function()
             });
         }
     });
-    
-    $(window).resize(ajustModalSize);
 });
 
 function ajustModalSize()
 {
+    var $modal = $('#triggerModal');
     var $dialog = $('#triggerModal .modal-dialog');
-    if(!$dialog.length) return;
-
-    var height = $(window).height();
+    var height = Math.max($dialog.height(), $modal.data('min-height') || 400);
     $dialog.css('min-height', height);
-    $('#css-editor').css('height', height - 93);
-
-    $('#customLess-editor, #lessVarTableWrapper').css('height', height - 253);
+    $modal.data('min-height', height);
 }

@@ -51,7 +51,6 @@
 
     Theme.prototype.compile = function(variables)
     {
-        console.groupCollapsed('%cCOMPILE', 'background-color: green; color:#fff');
         this.compileVariables(variables);
         
         var lessCode = this.less.replace(/@import "@variables";/, this.variablesCode),
@@ -60,21 +59,17 @@
             that     = this,
             css      = '';
 
-        console.log('variables: ', variables);
-        console.log('lessCode: ', lessCode);
         parser.parse(lessCode, function(error, result)
         {
             if(!error && result)
             {
                 css = that.beauty(result.toCSS());
-                console.log('css:', result.toCSS());
             }
             else
             {
                 throw new Error('Theme compile: ' + error);
             }
         });
-        console.groupEnd();
 
         this.css = css;
         return css;
@@ -97,7 +92,6 @@
     {
         /* get template */
         var url = this.options.lessFile;
-        console.log(url);
         this.less = useLessCache ? lessTemplates[url] : null;
         if(!this.less)
         {
