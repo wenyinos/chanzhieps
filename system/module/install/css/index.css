@@ -4,6 +4,7 @@ li{line-height: 2em}
 .modal-dialog{position: relative;}
 .modal-header{position: absolute; right: 15px; top: 10px; border: none;z-index: 999}
 .modal-body{padding: 20px 60px;}
+.modal-footer{padding-left:60px;}
 
 .dropdown.btn{padding: 0;overflow: visible;}
 .dropdown a:hover,button a:active,.dropdown a:focus{text-decoration: none;}

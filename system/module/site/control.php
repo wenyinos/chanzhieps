@@ -23,6 +23,30 @@ class site extends control
         {
             $setting = fixer::input('post')->join('moduleEnabled', ',')->remove('allowedFiles')->setDefault('moduleEnabled', '')->get();
 
+            $result  = $this->loadModel('setting')->setItems('system.common.site', $setting);
+            $cache   = $this->loadModel('cache')->createConfigCache();
+
+            if(!$cache) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->error->noWritable, $this->app->getTmpRoot() . 'cache')));
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setbasic')));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+        }
+
+        $this->view->title = $this->lang->site->setBasic;
+        $this->display();
+    }
+
+    /**
+     * Set upload configure.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setUploadConfigure()
+    {
+        if(!empty($_POST))
+        {
+            $setting = fixer::input('post')->remove('allowedFiles')->setDefault('allowUpload', '0')->get();
+
             $dangers = explode(',', $this->config->file->dangers);
             $allowedFiles = trim(strtolower($this->post->allowedFiles), ',');
             $allowedFiles = str_replace($dangers, '', $allowedFiles);
@@ -35,7 +59,7 @@ class site extends control
             $cache   = $this->loadModel('cache')->createConfigCache();
 
             if(!$cache) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->error->noWritable, $this->app->getTmpRoot() . 'cache')));
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setbasic')));
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setuploadconfigure')));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
 

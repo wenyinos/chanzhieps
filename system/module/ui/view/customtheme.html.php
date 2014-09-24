@@ -4,18 +4,18 @@
     <div class='col-sm-9'>
       <ul class='nav nav-tabs'>
         <?php foreach($lang->ui->groups as $group => $name):?>
-        <li><?php echo html::a('#' . $group . 'Tab', $name, "data-toggle='tab'");?></li>
+        <li><?php echo html::a('#' . $group . 'Tab', $name, "data-toggle='tab' class='theme-control-tab'");?></li>
         <?php endforeach;?>
       </ul>
       <div class='tab-content'>
         <?php foreach($lang->ui->groups as $group => $name):?>
-        <div class='tab-pane' id='<?php echo $group?>Tab'>
+        <div class='tab-pane theme-control-tab-pane' id='<?php echo $group?>Tab'>
           <table class='table table-form borderless'>
             <?php
-            $options = $config->ui->selectorOptions[$group];
+            $options = $config->ui->themes[$theme][$group];
             foreach($options as $selector => $attributes):
             ?>
-            <tr>
+            <tr class='theme-control-group'>
               <th><?php echo $lang->ui->{$selector};?></th>
               <td>
                 <div class='row'>

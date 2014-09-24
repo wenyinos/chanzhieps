@@ -463,21 +463,24 @@ class control
         if(empty($moduleName)) $moduleName = $this->moduleName;
         if(empty($methodName)) $methodName = $this->methodName;
 
-        $parser = $this->config->template->parser;
-
-        if(RUN_MODE == 'front' and $parser != 'default')
+        /* If the parser is default or run mode is admin, install, upgrade, call default parser.  */
+        if(RUN_MODE != 'front' or $this->config->template->parser == 'default')
         {
-            include "parser.{$parser}.class.php";
-            if(class_exists($parser . 'Parser')) $parser = call_user_func($parser . 'Parser::getInstance', $this); 
-        }
-        else
-        {
-            $parser = $this;
+            $this->parseDefault($moduleName, $methodName);
+            return $this->output;
         }
 
-        $parser->parseDefault($moduleName, $methodName);
+        /* Call the extened parser. */
+        $parserClassName = $this->config->template->parser . 'Parser';
+        $parserClassFile = 'parser.' . $this->config->template->parser . '.class.php';
+        $parserClassFile = dirname(__FILE__) . DS . $parserClassFile;
+        if(!is_file($parserClassFile)) $this->app->triggerError(" The parser file  $parserClassFile not found", __FILE__, __LINE__, $exit = true);
 
-        return $this->output;
+        helper::import($parserClassFile);
+        if(!class_exists($parserClassName)) $this->app->triggerError(" Can not find class : $parserClassName not found in $parserClassFile <br/>", __FILE__, __LINE__, $exit = true);
+
+        $parser = new $parserClassName($this);
+        return $parser->parse($moduleName, $methodName);
     }
 
     /**

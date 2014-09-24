@@ -15,7 +15,7 @@ if(!function_exists('getWebRoot')){function getWebRoot(){}}
 
 /* The basic settings. */
 $config = new config();
-$config->version     = '2.5.3';        // The version number, don't change.
+$config->version     = '2.5.3';           // The version number, don't change.
 $config->encoding    = 'UTF-8';           // The encoding.
 $config->cookiePath  = '/';               // The path of cookies.
 $config->webRoot     = getWebRoot();      // The web root.
@@ -74,7 +74,6 @@ $config->dependence->user[]    = 'user';
 $config->dependence->forum[]   = 'forum';
 $config->dependence->forum[]   = 'user';
 $config->dependence->message[] = 'message';
-$config->dependence->upload[]  = 'upload';
 
 /* Database settings. */
 $config->db = new stdclass();          

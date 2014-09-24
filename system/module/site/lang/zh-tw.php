@@ -24,6 +24,8 @@ $lang->site->icpLink       = '備案編號連結';
 $lang->site->slogan        = '站點口號';
 $lang->site->mission       = '站點使命';
 $lang->site->copyright     = '創建年份';
+$lang->site->allowUpload   = '允許上傳附件';
+$lang->site->allowedFiles  = '允許附件類型';
 
 $lang->site->setBasic      = "設置基本信息";
 $lang->site->setOauth      = "開放登錄設置";
@@ -41,4 +43,5 @@ $lang->site->moduleAvailable['forum']   = '論壇';
 $lang->site->moduleAvailable['blog']    = '博客';
 $lang->site->moduleAvailable['book']    = '手冊';
 $lang->site->moduleAvailable['message'] = '評論留言';
-$lang->site->moduleAvailable['upload']  = '附件上傳';
+
+$lang->site->fileAllowedRole = '多個尾碼名之間請用 "," 隔開';

@@ -1,5 +1,8 @@
 $(document).ready(function() 
 {
+    /* Mark module and method of this page by add css class to body tag */
+    $('body').addClass('m-' + config['currentModule'] + ' m-' + config['currentModule'] + '-' + config['currentMethod']);
+
     setRequiredFields();
 
     $.setAjaxForm('#ajaxForm');
@@ -47,9 +50,6 @@ $(document).ready(function()
     /* Remove empty headNav */
     var headNav = $('#headNav');
     if(!headNav.find('nav a').length) headNav.addClass('hide');
-
-    /* Mark the module and method with css class */
-    $('body').addClass('m-' + config['currentModule'] + '-' + config['currentMethod']);
 
     /* set right docker */
     $('#rightDockerBtn').popover({container: 'body', html:true, trigger:'manual'}).mouseenter(function()
