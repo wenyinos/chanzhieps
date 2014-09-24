@@ -28,6 +28,7 @@ $lang->site->allowUpload   = 'Allow upload files';
 $lang->site->allowedFiles  = 'Allowed file types';
 
 $lang->site->setBasic      = "Baisc";
+$lang->site->setUpload     = "Upload";
 $lang->site->setOauth      = "Oauth";
 $lang->site->setSinaOauth  = "Weibo Oauth";
 $lang->site->setQQOauth    = "QQ Oauth";
