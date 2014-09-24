@@ -57,7 +57,7 @@
             <div class='theme-card'>
               <i class='icon-ok icon'></i>
               <?php if($custom):?>
-              <?php echo html::a(inlink('customTheme', "theme={$theme}&template={$code}"), "<span class='icon-cog'></span> {$lang->ui->custom}", "class='btn btn-primary btn-custom' data-size='fullscreen' data-toggle='modal' data-type='ajax' data-backdrop='true'") ?>
+              <?php echo html::a(inlink('customTheme', "theme={$theme}&template={$code}"), "<span class='icon-cog'></span> {$lang->ui->custom}", "class='btn btn-primary btn-custom' data-toggle='modal' data-type='ajax' data-backdrop='true'") ?>
               <?php endif;?>
               <div class='theme-img'><?php echo html::image($templateRoot . 'theme/' . $theme . '/preview.png');?></div>
               <div class='theme-name text-center'><strong><?php echo $name;?></strong></div>

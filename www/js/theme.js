@@ -97,6 +97,7 @@
     {
         /* get template */
         var url = this.options.lessFile;
+        console.log(url);
         this.less = useLessCache ? lessTemplates[url] : null;
         if(!this.less)
         {

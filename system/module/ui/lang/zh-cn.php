@@ -138,7 +138,7 @@ $lang->ui->theme->fontWeight                           = '字体加粗';
 $lang->ui->theme->fontWeightList['inherit']            = '默认';
 $lang->ui->theme->fontWeightList['normal']             = '正常';
 $lang->ui->theme->fontWeightList['bold']               = '加粗';
-$lang->ui->theme->fontSize                             = '字体大小';
+
 $lang->ui->theme->fontList['inherit']                         = '默认';
 $lang->ui->theme->fontList['"宋体"']                     = '宋体';
 $lang->ui->theme->fontList['"仿宋"']                     = '仿宋';

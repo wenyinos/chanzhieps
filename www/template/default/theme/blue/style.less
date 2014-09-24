@@ -9,9 +9,7 @@
  */
 
 /* Import old themes */
-@import "/template/default/theme/default/style.css";
 @import "/template/default/theme/blue/style.css";
-@import "/template/default/theme/blue/blog.css";
 
 /* Fixed old style */
 .panel-block .panel-body > .cards {margin: -10px -5px}
@@ -227,15 +225,21 @@
     }
 }
 
+.globalFontFamily(@font) when not(@font = inherit)
+{
+    font-family: @font;
+}
+
 /* Global style */
 body
 {
     .background(@background-color, @background-image, @background-image-repeat, @background-image-position-x, @background-image-position-y);
+    .globalFontFamily(@font-family);
     font-size: @font-size;
     color: @text-color;
     font-weight: @font-weight;
-    font-family: @font-family;
 }
+
 
 /* Links */
 a
@@ -448,10 +452,10 @@ a:visited
 
 
 /* Panel */
-// .panel(@block-body-backcolor, @block-body-color, @block-body-link-color,
-//        @block-border-style, @block-border-color, @block-border-width, @block-border-radius,
-//        @block-heading-color, @block-heading-font-size, @block-heading-font-weight, @block-heading-backcolor);
- 
+.panel(@block-body-backcolor, @block-body-color, @block-body-link-color,
+       @block-border-style, @block-border-color, @block-border-width, @block-border-radius,
+       @block-heading-color, @block-heading-font-size, @block-heading-font-weight, @block-heading-backcolor);
+
 /* Column style */
 @media (min-width: 992px)
 {

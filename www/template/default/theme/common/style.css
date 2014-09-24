@@ -318,7 +318,7 @@ td #aliasLabel {display: table-row;}
 
 /* === Specail part === */
 /* Header */
-#header {position: relative;}
+#header {position: relative; padding-bottom: 10px;]}
 #headTitle {display: table; margin-top: 10px;}
 #headTitle > .wrapper {display: table-row;}
 #siteLogo,
@@ -331,9 +331,14 @@ td #aliasLabel {display: table-row;}
 @media (max-width: 767px) {
   #header {margin-left: -10px; margin-right: -10px;}
   #siteSlogan {display: none}
-  #headTitle {margin-top: 22px; padding: 0 10px}
-  #headNav {top: 0; width: 100%; text-align: right; background-color: #e5e5e5; padding: 2px 15px}
+  #headTitle {margin-top: 22px; padding: 0 10px; position: absolute; z-index: 10010; bottom: -49px; left: 10px;}
+  #siteLogo {padding: 0;}
+  #headNav {position: static; top: 0; width: 100%; text-align: right; background-color: #e5e5e5; padding: 5px 15px}
   #headTitle img {height: 45px; max-width: inherit; min-width: 50px; width: auto;}
+
+  .navbar-header {min-height: 50px}
+  .navbar-brand {display: none}
+  .navbar-toggle {margin-top: 8px;}
 }
 
 /* Messagebox */
@@ -390,4 +395,12 @@ body.body-modal {padding: 20px;}
 
 /* === Blog === */
 #articles .card-heading a {font-weight: bold;}
-.m-blog-index .pager {display: block;}
+
+.m-blog .pager {display: block;}
+.m-blog #headTitle {position: static; margin-top: 10px;}
+
+@media (max-width: 767px){
+  #blogNav .navbar-nav {margin: 0}
+  #blogNav .navbar-nav > li {padding: 3px; float: left; width: 33.333333%}
+  #blogNav .navbar-nav > li > a {text-align: center; border-radius: 6px; padding: 5px;}
+}

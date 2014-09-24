@@ -1,8 +1,7 @@
+/* Mark module and method of this page by add css class to body tag */
+$('html').addClass('m-' + config['currentModule'] + ' m-' + config['currentModule'] + '-' + config['currentMethod']);
 $(document).ready(function() 
 {
-    /* Mark module and method of this page by add css class to body tag */
-    $('body').addClass('m-' + config['currentModule'] + ' m-' + config['currentModule'] + '-' + config['currentMethod']);
-
     setRequiredFields();
 
     $.setAjaxForm('#ajaxForm');

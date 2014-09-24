@@ -299,7 +299,7 @@ class uiModel extends model
             $default     = 'none';
         }
 
-        $this->printTextbox($id, $value, $this->lang->ui->$label, '', $this->lang->ui->theme->none, '', "data-default='{$default}'", $this->lang->ui->theme->backImageTip);
+        $this->printTextbox($id, $value, $this->lang->ui->$label, '', $this->lang->ui->theme->none, '', "data-default='{$default}' data-type='image'", $this->lang->ui->theme->backImageTip);
     }
 
     /**
@@ -559,7 +559,7 @@ class uiModel extends model
             $html .= "<span class='input-group-addon'>{$endLabel}</span>\n";
         }
 
-        $html .= "<input type='hidden' id='{$name}' name='$name' value='{$value1}, {$value2}'>";
+        $html .= "<input type='hidden' id='{$name}' name='$name' value='{$value1} {$value2}'>";
         $html .= "</div>\n";
         echo $html;
     }

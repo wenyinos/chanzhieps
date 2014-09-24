@@ -16,6 +16,11 @@
 @import "@variables";
 
 // Mixins
+.background-image(@image) when not(@image = 'default')
+{
+    background-image: @image;
+}
+
 .line-gradient(@top; @bottom)
 {
     background-image: -moz-linear-gradient(top, @top 0%, @bottom 100%);
@@ -453,16 +458,11 @@ a:visited
 
 .navbarLayout(@navbar-table-layout, @navbar-border-radius, @navbar-backcolor);
 
-// @media (max-width: 767px) {.navbar-nav > li {float: left; width: 33.3333333333%}}
-// @media (max-width: 500px) {.navbar-nav > li {float: left; width: 50%}}
-
-// @media (max-width: 767px) {.navbar-nav .open .dropdown-menu {position: absolute; background-color: @navbar-submenu-backcolor}}
-
 /* Panel */
 .panel(@block-body-backcolor, @block-body-color, @block-body-link-color,
        @block-border-style, @block-border-color, @block-border-width, @block-border-radius,
        @block-heading-color, @block-heading-font-size, @block-heading-font-weight, @block-heading-backcolor);
- 
+
 /* Column style */
 @media (min-width: 992px)
 {

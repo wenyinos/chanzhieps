@@ -5,8 +5,6 @@ $(function()
     var $css = $('#css');
 
     $css.height($form.height());
-    $('.codeeditor').codeeditor();
-    var editor = $css.data('editor');
 
     $('[data-toggle="tooltip"]').tooltip({container: '#triggerModal'});
 
@@ -93,14 +91,22 @@ $(function()
 
     ajustModalSize();
 
+    // Hide tabs
+    $('.theme-control-tab-pane').each(function()
+    {
+        $pane = $(this);
+        if(!$pane.find('.table tr').length)
+        {
+            $('.theme-control-tab[href="#' + $pane.attr('id') +'"]').closest('li').hide();
+        }
+    });
+
     $('.nav-tabs li > a').first().trigger('click');
     
     function compileLess()
     {
         var css = theme.compile(getThemeSettings());
-        editor.setValue(css);
         $css.val(css);
-        editor.clearSelection();
     }
 
     function getThemeSettings()
@@ -114,6 +120,7 @@ $(function()
                 type = $this.data('type'),
                 name = $this.attr('data-name') || $this.attr('name') || $this.attr('id');
             var desc = $this.attr('data-desc');
+            if(name === 'css') return;
             if(!desc)
             {
                 var $group = $this.closest('.input-group');
@@ -139,7 +146,7 @@ $(function()
 
             if(val)
             {
-                if(type === 'image')
+                if(type === 'image' && val != 'inherit')
                 {
                     val = 'url(' + val + ')';
                 }
