@@ -42,10 +42,7 @@ $navs = $this->tree->getChildren(0, 'blog');
   css::import($themeRoot . 'common/style.css');
   css::import($jsRoot    . 'jquery/treeview/min.css');
 
-  if($config->site->theme)
-  {
-      css::import($webRoot . 'data/theme/custom.css');
-  }
+  css::import(sprintf($webRoot . 'data/theme/%s/%s/custom.css', $config->template->name, $config->template->theme));
 
   js::exportConfigVars();
   if($config->debug)

@@ -64,7 +64,7 @@ $lang->ui->template->commands->exists   = "mkdir -p %s<br/>";
 $lang->ui->template->commands->writable = "chmod 777 -R %s<br/>"; 
 
 $lang->ui->customtheme                                 = '自定义主题';
-$lang->ui->custom                                      = '自定义…';
+$lang->ui->custom                                      = '自定义';
 $lang->ui->themeSaved                                  = '主题配置已保存';
 $lang->ui->theme                                       = new stdclass();
 $lang->ui->theme->ajustColor                           = '颜色调整';

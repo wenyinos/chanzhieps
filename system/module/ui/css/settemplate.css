@@ -28,7 +28,7 @@
 .card-template.current .theme.current .theme-card > .icon:before {position: absolute; right: -15px; top: -15px}
 .card-template.current .theme.current .theme-img {border-color: #47A447; opacity: 1}
 .card-template.current .theme.current .theme-card {border-color: #47A447; -moz-box-shadow:0px 0px 6px #47A447; -webkit-box-shadow:0px 0px 6px #47A447; box-shadow:0px 0px 6px #47A447; opacity: 1}
-.theme-card > .btn-custom {position: absolute; display: none; opacity: 0; left: 45px; top: 20px; z-index: 10; color: #fff!important}
+.theme-card > .btn-custom {position: absolute; display: none; opacity: 0; width: 90px; left: 20px; top: 23px; z-index: 10; color: #fff!important}
 .theme.current .theme-card:hover > .btn-custom {opacity: 1; display: block;}
 .theme.current.custom:hover .theme-img {-webkit-filter: blur(5px);-moz-filter: blur(5px);-ms-filter: blur(5px);-o-filter: blur(5px);filter: blur(5px);filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=15, MakeShadow=false);}
 
