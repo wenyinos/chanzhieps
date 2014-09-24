@@ -27,7 +27,6 @@ $lang->block->showTime        = '显示时间';
 $lang->block->product         = '产品';
 $lang->block->titleless       = '无标题';
 $lang->block->borderless      = '无边框';
-$lang->block->container       = '有子区块';
 $lang->block->icon            = '图标';
 $lang->block->border          = '边框';
 $lang->block->grid            = '宽度';

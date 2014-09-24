@@ -48,5 +48,5 @@ $lang->upgrade->fromVersions['2_3']      = '2.3.stable';
 $lang->upgrade->fromVersions['2_4']      = '2.4.stable';
 $lang->upgrade->fromVersions['2_5_beta'] = '2.5.beta';
 $lang->upgrade->fromVersions['2_5_1']    = '2.5.1';
-$Lang->upgrade->fromVersions['2_5_2']    = '2.5.2';
-$Lang->upgrade->fromVersions['2_5_3']    = '2.5.3';
+$lang->upgrade->fromVersions['2_5_2']    = '2.5.2';
+$lang->upgrade->fromVersions['2_5_3']    = '2.5.3';
