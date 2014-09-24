@@ -30,6 +30,9 @@ $lang->install->desc             = <<<EOT
 </blockquote>
 EOT;
 
+$lang->install->agreement  = "已閲讀並同意<a href='http://api.chanzhi.org/goto.php?item=license' target='_blank'>《蟬知企業門戶系統使用協議》</a>。<span class='text-danger'>未經許可，不得去除蟬知系統的任何標誌及連結。</span>";
+$lang->install->newVersion = "提示：蟬知系統已于 <span id='releaseDate'></span> 發佈 <span id='version'></span>版本。<a href='' target='_blank' id='upgradeLink'>馬上下載</a>";
+
 $lang->install->choice     = '您可以選擇：';
 $lang->install->checking   = '系統檢查';
 $lang->install->ok         = '通過(√)';

@@ -474,16 +474,13 @@ class control
         $parserClassName = $this->config->template->parser . 'Parser';
         $parserClassFile = 'parser.' . $this->config->template->parser . '.class.php';
         $parserClassFile = dirname(__FILE__) . DS . $parserClassFile;
-
         if(!is_file($parserClassFile)) $this->app->triggerError(" The parser file  $parserClassFile not found", __FILE__, __LINE__, $exit = true);
 
         helper::import($parserClassFile);
-
         if(!class_exists($parserClassName)) $this->app->triggerError(" Can not find class : $parserClassName not found in $parserClassFile <br/>", __FILE__, __LINE__, $exit = true);
 
         $parser = new $parserClassName($this);
-        $parser->parse($moduleName, $methodName);
-        return true;
+        return $parser->parse($moduleName, $methodName);
     }
 
     /**

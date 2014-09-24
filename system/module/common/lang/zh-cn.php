@@ -23,8 +23,6 @@ $lang->back2Top   = '返回顶部';
 /* Lang items for xirang. */
 $lang->chanzhiEPS       = '蝉知企业门户系统';
 $lang->chanzhiEPSx      = '蝉知';
-$lang->agreement        = "已阅读并同意<a href='http://api.chanzhi.org/goto.php?item=license' target='_blank'>《蝉知企业门户系统使用协议》</a>， 并且";
-$lang->logoAgreement    = "使用过程中保留蝉知系统所有的标志、版权提示和链接。<br>使用过程中不隐藏蝉知系统所有标志、版权提示和链接。";
 $lang->poweredBy        = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>{$lang->chanzhiEPSx} %s</a></span>";
 $lang->newVersion       = "提示：蝉知系统已于 <span id='releaseDate'></span> 发布 <span id='version'></span>版本。<a href='' target='_blank' id='upgradeLink'>马上下载</a>";
 
@@ -157,8 +155,8 @@ $lang->ui = new stdclass();
 $lang->ui->menu = new stdclass();
 $lang->ui->menu->logo    = 'LOGO设置|ui|setlogo|';
 $lang->ui->menu->favicon = '网站图标|ui|setfavicon|';
-$lang->ui->menu->theme   = '模板设置|ui|settemplate|';
 $lang->ui->menu->slide   = array('link' => '幻灯片设置|slide|admin|', 'alias' => 'create,edit');
+$lang->ui->menu->theme   = '模板设置|ui|settemplate|';
 $lang->ui->menu->admin   = array('link' => '区块管理|block|admin|', 'alias' => 'create,edit');
 $lang->ui->menu->pages   = array('link' => '布局设置|block|pages|', 'alias' => 'setregion');
 $lang->ui->menu->styles  = '全局样式|ui|setbasestyle|';
