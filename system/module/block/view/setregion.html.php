@@ -12,17 +12,6 @@
 ?>
 <?php include '../../common/view/header.modal.html.php';?>
   <form id='ajaxForm' action="<?php echo inlink('setregion', "page={$page}&region={$region}&template={$template}");?>" method='post'>
-    <table class='table mgb-0'>
-      <thead>
-        <tr>
-          <th class='text-center col-xs-2'><?php echo $lang->block->title;?></th>
-          <th class='text-center col-xs-2'><?php echo $lang->block->grid;?></th>
-          <th class='text-center col-xs-2'><?php echo $lang->block->style;?></th>
-          <th class='text-center col-xs-1'><?php echo $lang->actions;?></th>
-          <th class='text-center col-xs-1'><?php echo $lang->block->sort;?></th>
-        </tr>
-      </thead>
-    </table>
     <div id='blockList'>
       <?php $key = 0; foreach($blocks as $block){ echo $this->block->createEntry($template, $block, $key); $key = $this->block->counter; $key ++;}?>
     </div>

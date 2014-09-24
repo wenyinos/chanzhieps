@@ -258,14 +258,14 @@ class blockModel extends model
         $grid    = isset($block->grid) ? $block->grid : '';
 
         $entry = "<div class='block-item row' data-block='{$key}' data-id='{$blockID}'>";
-        $entry .= "<div class='col-xs-3'>" . html::select("blocks[{$key}]", $blockOptions, $blockID, "class='form-control block' id='block_{$key}'") . "</div>";
-        $entry .= "<div class='col-xs-2'>" . html::select("grid[{$key}]", $this->lang->block->gridOptions, $grid, "class='form-control'") . '</div>';
+        $entry .= "<div class='col col-type'>" . html::select("blocks[{$key}]", $blockOptions, $blockID, "class='form-control block' id='block_{$key}'") . "</div>";
+        $entry .= "<div class='col col-grid'><div class='input-group'><span class='input-group-addon'>{$this->lang->block->grid}</span>" . html::select("grid[{$key}]", $this->lang->block->gridOptions, $grid, "class='form-control'") . '</div></div>';
 
         $titlelessChecked = isset($block->titleless) && $block->titleless ? 'checked' : '';
         $borderlessChecked = isset($block->borderless) && $block->borderless ? 'checked' : '';
         $containerChecked = isset($block->container) && $block->container ? 'checked' : '';
         $entry .= "
-            <div class='text-center col-xs-3'>
+            <div class='text-center col col-style'>
                <label>
                  <input type='checkbox' {$titlelessChecked} value='1'><input type='hidden' name='titleless[{$key}]' /><span>{$this->lang->block->titleless}</span>
                </label>
@@ -274,14 +274,14 @@ class blockModel extends model
               </label>
             </div>";
 
-        $entry .= '<div class="col-xs-3 actions">';
+        $entry .= '<div class="col col-actions actions">';
         if($grade == 1) $entry .= html::a('javascript:;', $this->lang->block->add, "class='plus'");
         if($grade == 2) $entry .= html::a('javascript:;', $this->lang->block->add, "class='plus-child'");
         $entry .= html::a('javascript:;', $this->lang->delete, "class='delete'");
         $entry .= html::a(inlink('edit', "template={$template}&blockID={$blockID}&type={$type}"), $this->lang->edit, "class='edit'");
         if($grade == 1) $entry .= html::a('javascript:;', $this->lang->block->addChild, "class='btn-add-child'");
         $entry .= '</div>';
-        $entry .= "<div class='col-xs-1'><i class='icon-move sort-handle sort-handle-{$grade}'></i></div>";
+        $entry .= "<div class='col col-move'><span class='sort-handle sort-handle-{$grade}'><i class='icon-move'></i> {$this->lang->block->sort}</span></div>";
         if($grade == 1)
         {
             $entry .= "<div class='children'>";

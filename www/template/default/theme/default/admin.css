@@ -48,8 +48,6 @@ table.tablesorter thead tr .header:after {font-family: ZenIcon; font-weight: nor
 table.tablesorter thead tr .headerSortUp:after {font-family: ZenIcon; font-weight: normal;content: " \e6b9";font-size: 14px;color:#2973EA;}
 table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weight: normal;content: " \e6b8";font-size: 14px;color:#2973EA;}
 
-
-
 /* responsive. */
 @media(max-width:998px) {.affix{position: inherit;} .leftmenu.affix{top: 0; width: 100%; margin-bottom: 20px;}}
 @media(max-width:768px){body{padding-bottom: 0;} .navbar-fixed-bottom{display: none;}}
