@@ -95,7 +95,7 @@ class navModel extends model
         $system        = ($nav->type == 'system')  ? '' : 'hide'; 
         $urlHidden     = ($nav->type == 'custom')  ? '' : 'hide'; 
 
-        $entry = '<i class="icon-folder-open-alt shut"></i>';
+        $entry = '<i class="icon-folder-open-alt shut"></i><i class="icon icon-circle text-muted"></i>';
         if(isset($nav->children) && !empty($nav->children)) $entry = '<i class="icon-folder-close shut"></i>';
 
         /* nav type select tag. */

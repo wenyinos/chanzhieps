@@ -1,19 +1,32 @@
 $(document).ready(function()
 {
-    var initSortable = function()
+    var fixForm = function()
     {
         $('#navList').sortable({trigger: '.sort-handle-1', selector: 'li', dragCssClass: ''});
         $('#navList .ulGrade2').sortable({trigger: '.sort-handle-2', selector: 'li', dragCssClass: ''});
         $('#navList .ulGrade3').sortable({trigger: '.sort-handle-3', selector: 'li', dragCssClass: ''});
+        $('.shut').each(function()
+        {
+            if(!$(this).parent().find('ul li').size())
+            {
+                $(this).hide();
+                $(this).next('.icon-circle').show();
+            }
+            else
+            {
+                $(this).show();
+                $(this).next('.icon-circle').hide();
+            }
+        });
     }
 
-    initSortable();
+    fixForm();
 
     /* add grade1 memu options */
     $(document).on('click', '.plus1', function()
     {
         $(this).parent().after($('#grade1NavSource').html());
-        initSortable();
+        fixForm();
     });
 
     /* add grade2 memu options */
@@ -28,7 +41,7 @@ $(document).ready(function()
         {
             $(this).parent().after($('#grade2NavSource ul').html()); 
         }
-        initSortable();
+        fixForm();
     });
 
     /* add grade3 memu options */
@@ -37,13 +50,13 @@ $(document).ready(function()
         var container = $(this).parents('.liGrade3');
         if(0 == container.size())
         { 
-            $(this).parents('.liGrade2').find('.ulGrade3').prepend($('#grade3NavSource ul').html());
+            $(this).parents('.liGrade2').find('.ulGrade3').show().prepend($('#grade3NavSource ul').html());
         }
         else
         {
             $(this).parent().after($('#grade3NavSource ul').html()); 
         }
-        initSortable();
+        fixForm();
     });
 
     /* toggle children nav. */
@@ -118,6 +131,7 @@ $(document).ready(function()
         $('input[type=checkbox]').parent().next('input[type=hidden]').val('');
         $('input:checked').parent().next('input[type=hidden]').val('_blank');
     });
+
 
 });
 

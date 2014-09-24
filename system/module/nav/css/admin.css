@@ -10,10 +10,11 @@ label{font-weight:500;font-size:13px;}
 
 .navList .form-control { width: auto; min-width: 100px; max-width: 200px; }
 .panel-body > form { max-width: 10000px; }
-.navList .icon-folder-open-alt,.navList .icon-folder-close,.navList .icon-arrow-up,.navList .icon-arrow-down { margin-right: 6px; opacity: 0.6; transition:all 0.3s; }
+.navList .icon-circle, .navList .icon-folder-open-alt, .navList .icon-folder-close, .navList .icon-arrow-up, .navList .icon-arrow-down { margin-right: 6px; opacity: 0.6; transition:all 0.3s; }
 .navList li:hover .icon-folder-open-alt,.navList li:hover .icon-folder-close,.navList li:hover .icon-arrow-up,.navList li:hover .icon-arrow-down { opacity: 1; }
 .navList .icon-arrow-up,.navList .icon-arrow-down { color: #384D7A; }
-
+.navList .icon-folder-close {opacity: 0.8;}
+.navList .icon-circle {font-size: 12px;}
 
 #navList .sort-handle {cursor: move; color: #666}
 #navList li.dragging {opacity: 0.35; background-color: #FFF4E5;}
