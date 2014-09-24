@@ -36,12 +36,12 @@ class site extends control
     }
 
     /**
-     * Set upload configure.
+     * Set upload configures.
      * 
      * @access public
      * @return void
      */
-    public function setUploadConfigure()
+    public function setUpload()
     {
         if(!empty($_POST))
         {
