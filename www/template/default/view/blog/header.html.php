@@ -39,27 +39,10 @@ $navs = $this->tree->getChildren(0, 'blog');
   echo html::meta('description', strip_tags($desc));
 
   css::import($webRoot . 'zui/css/min.css');
-  css::import($themeRoot . 'default/style.css');
+  css::import($themeRoot . 'common/style.css');
   css::import($jsRoot    . 'jquery/treeview/min.css');
 
-  if($config->site->theme)
-  {
-      /* Import custom css. */
-      if($config->site->theme == 'colorful')
-      {
-          $customCss = str_replace($this->app->getDataRoot(), $this->app->getWebRoot() . 'data/' , $config->site->ui->customCssFile);
-          if(!empty($config->site->customVersion)) $customCss .= "?v={$config->site->customVersion}";
-
-          if(!isset($config->site->customVersion)) $customCss = $themeRoot . $config->site->theme . '/style.css';
-
-          css::import($customCss);
-      }
-      else
-      {
-          if($config->site->theme != 'default') css::import($themeRoot . $config->site->theme . '/style.css');
-          css::import($themeRoot . $config->site->theme . '/blog.css');
-      }
-  }
+  css::import(sprintf($webRoot . 'data/theme/%s/%s/custom.css', $config->template->name, $config->template->theme));
 
   js::exportConfigVars();
   if($config->debug)

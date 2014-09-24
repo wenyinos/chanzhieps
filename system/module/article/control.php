@@ -241,4 +241,45 @@ class article extends control
         if($this->article->delete($articleID)) $this->send(array('result' => 'success'));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
+
+    /**
+     * Set css.
+     * 
+     * @param  int      $articleID 
+     * @access public
+     * @return void
+     */
+    public function setCss($articleID)
+    {
+        if($_POST)
+        {
+            if($this->article->setCss($articleID)) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+
+        $this->view->title   = $this->lang->article->css;
+        $this->view->article = $this->article->getByID($articleID);
+        $this->display();
+    }
+
+
+    /**
+     * Set js.
+     * 
+     * @param  int      $articleID 
+     * @access public
+     * @return void
+     */
+    public function setJs($articleID)
+    {
+        if($_POST)
+        {
+            if($this->article->setJs($articleID)) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+
+        $this->view->title   = $this->lang->article->js;
+        $this->view->article = $this->article->getByID($articleID);
+        $this->display();
+    }
 }

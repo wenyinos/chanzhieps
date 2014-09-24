@@ -20,7 +20,7 @@
               <td>
                 <div class='row'>
                   <?php foreach($attributes as $label => $params):?>
-                  <div class='col-sm-3' data-id='<?php echo $id?>'><?php $this->ui->printFormControl($id = "{$group}-{$selector}-{$label}", $label, $params);?></div>
+                  <div class='col-sm-3' data-id='<?php echo $id?>'><?php $this->ui->printFormControl($label, $params);?></div>
                   <?php endforeach;?>
                 </div>
               </td>
