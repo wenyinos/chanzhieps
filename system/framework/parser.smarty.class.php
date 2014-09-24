@@ -11,8 +11,13 @@
  */
 class smartyParser
 {
-    /* Control object. */
-    protected $control;
+    /**
+     * The control object passed by the control.class.php.
+     * 
+     * @var object   
+     * @access public
+     */
+    public $control;
 
     /**
      * Construct function load smarty lib and init smarty configures.
@@ -23,11 +28,11 @@ class smartyParser
      */
     public function __construct($control)
     {
+        global $app, $config;
         $this->control = $control;
 
-        global $app, $config;
+        /* Load smarty class and create smarty object. */
         $app->loadClass('smarty', true);
-
         $this->smarty = new smartyBC();
 
         /* Use system config->debug as smarty->debug. */
@@ -59,6 +64,7 @@ class smartyParser
 
         /* Get view files from control. */
         $viewFile = $this->control->setViewFile($moduleName, $methodName);
+        echo $viewFile;
         if(is_array($viewFile)) extract($viewFile);
 
         /* Assign hook files. */        
@@ -68,6 +74,9 @@ class smartyParser
         /* Assign view variables. */
         foreach($this->control->view as $item => $value) $this->smarty->assign($item, $value);
         
-        $this->smarty->display($viewFile);
+        /* Render the template and return it. */
+        $output = $this->smarty->fetch($viewFile);
+        echo $output;
+        return $output;
     }
 }
