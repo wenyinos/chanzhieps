@@ -195,13 +195,14 @@ $lang->forum->menu->update = 'Update|forum|update|';
 /* Menu of site module. */
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
-$lang->site->menu->basic     = 'Basic|site|setbasic|';
-$lang->site->menu->nav       = 'Navigation|nav|admin|';
-$lang->site->menu->tag       = 'Tags|tag|admin|';
-$lang->site->menu->oauth     = 'Open OAuth|site|setoauth|';
-$lang->site->menu->link      = 'Links|links|admin|';
-$lang->site->menu->mail      = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->site->menu->wechat    = array('link' => 'Wechat|wechat|admin|', 'alias' => 'create,setresponse');
+$lang->site->menu->basic  = 'Basic|site|setbasic|';
+$lang->site->menu->nav    = 'Navigation|nav|admin|';
+$lang->site->menu->upload = 'Uploads|site|setuploadconfigure|';
+$lang->site->menu->tag    = 'Tags|tag|admin|';
+$lang->site->menu->oauth  = 'Open OAuth|site|setoauth|';
+$lang->site->menu->link   = 'Links|links|admin|';
+$lang->site->menu->mail   = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->site->menu->wechat = array('link' => 'Wechat|wechat|admin|', 'alias' => 'create,setresponse');
 
 /* Menu of company module. */
 $lang->company->menu = new stdclass();
