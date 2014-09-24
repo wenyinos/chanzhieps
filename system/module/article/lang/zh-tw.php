@@ -35,6 +35,8 @@ $lang->article->stick      = '置頂級別';
 $lang->article->order      = '排序';
 $lang->article->isLink     = '跳轉';
 $lang->article->link       = '連結';
+$lang->article->css        = 'CSS';
+$lang->article->js         = 'JS';
 
 $lang->article->list       = '文章列表';
 $lang->article->admin      = '維護文章';
