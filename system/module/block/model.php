@@ -414,7 +414,7 @@ class blockModel extends model
 
         /* Compute children blocks. */
         $parents = (array) $this->post->parent;
-        foreach($parents as $key => $parent) $children[$parent][] = $key;
+        foreach($parents as $key => $parent) if(!empty($parent)) $children[$parent][] = $key;
         foreach($blocks as $key => $block)
         { 
             if(empty($children[$key])) continue;
@@ -426,6 +426,7 @@ class blockModel extends model
         }
 
         /* Clear blocks keys. */
+        $sortedBlocks = array();
         foreach($blocks as $key => $block) $sortedBlocks[] = $block;
         $layout->blocks = helper::jsonEncode($sortedBlocks);
 
