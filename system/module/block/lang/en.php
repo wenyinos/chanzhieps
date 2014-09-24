@@ -44,8 +44,11 @@ $lang->block->custom          = 'Custom';
 $lang->block->preview         = 'Style preview';
 $lang->block->textExample     = 'Block text style example，<a href="###">link text</a>';
 $lang->block->customStyleTip  = 'Change block color and background here.';
+$lang->block->style           = 'Style';
+$lang->block->sort            = 'Sort';
 
 $lang->block->add          = "Add";
+$lang->block->addChild     = "Add Child";
 $lang->block->template     = "Template";
 $lang->block->create       = 'Create Block';
 $lang->block->browseBlocks = 'Browse Blocks';
