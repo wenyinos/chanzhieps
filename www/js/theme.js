@@ -13,6 +13,7 @@
     var Theme = function(options, variables)
     {
         this.getOptions(options);
+        // If the theme with an config file then call this: this.getConfig();
         this.getLess();
         this.variables = variables;
     };
@@ -22,7 +23,8 @@
         this.options = $.extend({}, Theme.DEFAULTS, options);
         if(!this.options.lessFile)
         {
-            this.options.lessFile = lessFileTemplate.format(this.options.template, this.options.theme);
+            this.options.lessFile   = lessFileTemplate.format(this.options.template, this.options.theme);
+            this.options.configFile = lessConfigTemplate.format(this.options.template, this.options.theme);
         }
     };
 
@@ -36,7 +38,7 @@
 
     Theme.prototype.compileVariables = function(variables)
     {
-        variables = $.extend({}, this.options.variables, variables || this.variables);
+        variables = $.extend({}, this.config, this.options.variables, variables || this.variables);
         var lessCode = '';
         for(var key in variables)
         {
@@ -78,6 +80,19 @@
         return css;
     };
 
+    Theme.prototype.getConfig = function()
+    {
+        this.config = null;
+        try
+        {
+            $.getJSON(this.options.configFile, function(json)
+            {
+                this.config = json;
+            });
+        }
+        catch(e){}
+    };
+
     Theme.prototype.getLess = function()
     {
         /* get template */
@@ -98,7 +113,7 @@
         template  : 'default',
         variables :
         {
-            "font-family"             : {value: '"Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif', desc: 'Global font family'},
+            "font-family"      : {value: '"Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif', desc: 'Global font family'},
             "background-color" : "#FFF",
             "fore-color"       : "#333",
             "secondary-color"  : "#145CCD",
