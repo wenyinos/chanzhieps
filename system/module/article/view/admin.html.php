@@ -37,7 +37,7 @@
         <?php endif;?>
         <th class='text-center w-160px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->article->addedDate);?></th>
         <th class='text-center w-60px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->article->views);?></th>
-        <th class='text-center w-180px'><?php echo $lang->actions;?></th>
+        <th class='text-center w-220px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
@@ -56,6 +56,8 @@
         <td class='text-center'>
           <?php
           echo html::a($this->createLink('article', 'edit', "articleID=$article->id&type=$article->type"), $lang->edit);
+          echo html::a($this->createLink('article', 'setcss', "articleID=$article->id"), $lang->article->css, "data-toggle='modal'");
+          echo html::a($this->createLink('article', 'setjs', "articleID=$article->id"), $lang->article->js, "data-toggle='modal'");
           echo html::a($this->createLink('file', 'browse', "objectType=$article->type&objectID=$article->id&isImage=0"), $lang->article->files, "data-toggle='modal'");
           echo html::a($this->createLink('file', 'browse', "objectType=$article->type&objectID=$article->id&isImage=1"), $lang->article->images, "data-toggle='modal'");
           echo html::a($this->article->createPreviewLink($article->id), $lang->preview, "target='_blank'");

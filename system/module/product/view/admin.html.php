@@ -30,7 +30,7 @@
         <th class='w-160px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->product->addedDate);?></th>
         <th class='w-60px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->product->status);?></th>
         <th class='w-60px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->product->views);?></th>
-        <th class='w-200px'><?php echo $lang->actions;?></th>
+        <th class='w-260px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
@@ -49,6 +49,8 @@
           $categoryAlias = !empty($categories) ? current($categories)->alias : '';
           $changeStatus  = $product->status == 'normal' ? 'offline' : 'normal';
           echo html::a($this->createLink('product', 'edit', "productID=$product->id"), $lang->edit);
+          echo html::a($this->createLink('product', 'setcss', "productID=$product->id"), $lang->product->css, "data-toggle='modal'");
+          echo html::a($this->createLink('product', 'setjs',  "productID=$product->id"), $lang->product->js, "data-toggle='modal'");
           echo html::a($this->createLink('file',    'browse', "objectType=product&objectID=$product->id&isImage=0"), $lang->product->files, "data-toggle='modal' data-width='1000'");
           echo html::a($this->createLink('file',    'browse', "objectType=product&objectID=$product->id&isImage=1"), $lang->product->images, "data-toggle='modal' data-width='1000'");
           echo html::a($this->createLink('product', 'changeStatus', "productID=$product->id&status=$changeStatus"), $lang->product->statusList[$changeStatus], "class='changeStatus'");

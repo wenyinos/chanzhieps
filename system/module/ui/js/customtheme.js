@@ -57,7 +57,6 @@ $(function()
         var val = $this.val();
         if(val)
         {
-            console.log(val);
             var $refresh = $($this.data('refresh'));
             $refresh.each(function()
             {
@@ -68,6 +67,13 @@ $(function()
                 }
             });
         }
+    });
+
+    $('.input-group-textbox-couple input[data-target]').on('keyup change', function()
+    {
+        var $this = $(this);
+        var name = $this.data('target');
+        $('#' + name).val($('[data-sid="' + name + '-1"]').val() + ' ' + $('[data-sid="' + name + '-2"]').val());
     });
 
     $.setAjaxForm('#customThemeForm', function(response)
@@ -95,7 +101,7 @@ $(function()
     {
         var setting = {},
             $lessTable = $('#lessVarTable tbody').empty();
-        $form.find('input.form-control, select.form-control').each(function()
+        $form.find('input.form-control, select.form-control, input[type="hidden"]').each(function()
         {
             var $this = $(this);
             var val = $this.val(),
@@ -122,7 +128,7 @@ $(function()
                         desc += label;
                     }
                 }
-                desc = ($group.closest('tr').children('th').first().text() + desc).replace(/\n/, '');
+                desc = ($('a[href="#' + $group.closest('.tab-pane').attr('id') + '"]').text() + ':' + $group.closest('tr').children('th').first().text() + desc).replace(/\n/, '');
             }
 
             if(val)
@@ -146,7 +152,7 @@ $(function()
         return setting;
     }
 
-    //compileLess();
+    compileLess();
 
     ajustModalSize();
 

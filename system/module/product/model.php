@@ -248,6 +248,7 @@ class productModel extends model
             ->setDefault('price', 0)
             ->setDefault('amount', 0)
             ->setDefault('promotion', 0)
+            ->setDefault('order', 0)
             ->add('author', $this->app->user->account)
             ->add('addedDate', $now)
             ->add('editedDate', $now)
@@ -262,7 +263,10 @@ class productModel extends model
             ->batchCheck($this->config->product->require->create, 'notempty')
             ->checkIF($product->mall, 'mall', 'URL')
             ->exec();
+
         $productID = $this->dao->lastInsertID();
+
+        if(!$this->post->order) $this->dao->update(TABLE_PRODUCT)->set('order')->eq($productID)->where('id')->eq($productID)->exec();
 
         if(!$this->saveAttributes($productID)) return false;
 
@@ -417,5 +421,43 @@ class productModel extends model
 
            $this->dao->insert(TABLE_RELATION)->data($data)->exec();
        }
+    }
+
+    /**
+     * Set css.
+     * 
+     * @param  int      $productID 
+     * @access public
+     * @return int
+     */
+    public function setCss($productID)
+    {
+        $data = fixer::input('post')
+            ->add('editor', $this->app->user->account)
+            ->add('editedDate', helper::now())
+            ->get();
+
+        $this->dao->update(TABLE_PRODUCT)->data($data, $skip = 'uid')->autoCheck()->where('id')->eq($productID)->exec();
+        
+        return !dao::isError();
+    }
+
+    /**
+     * Set js.
+     * 
+     * @param  int      $productID 
+     * @access public
+     * @return int
+     */
+    public function setJs($productID)
+    {
+        $data = fixer::input('post')
+            ->add('editor', $this->app->user->account)
+            ->add('editedDate', helper::now())
+            ->get();
+
+        $this->dao->update(TABLE_PRODUCT)->data($data, $skip = 'uid')->autoCheck()->where('id')->eq($productID)->exec();
+        
+        return !dao::isError();
     }
 }

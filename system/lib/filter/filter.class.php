@@ -536,11 +536,16 @@ class fixer
     {
         global $app;
         $app->loadClass('purifier', true);
-        $purifier = new HTMLPurifier(HTMLPurifier_Config::createDefault());
+        $config = HTMLPurifier_Config::createDefault();
+        $purifier = new HTMLPurifier($config);
+        $def = $config->getHTMLDefinition(true);
+        $def->addAttribute('a', 'target', 'Enum#_blank,_self,_target,_top');
 
         $fields = $this->processFields($fieldName);
         foreach($fields as $fieldName) 
         {
+            if(version_compare(phpversion(), '5.4', '<') and get_magic_quotes_gpc()) $this->data->$fieldName = stripslashes($this->data->$fieldName);
+
             if(!in_array($fieldName, $this->stripedFields))
             {
                 if(RUN_MODE != 'admin') $this->data->$fieldName = $purifier->purify($this->data->$fieldName);

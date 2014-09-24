@@ -41,6 +41,8 @@ $lang->product->order      = '排序';
 $lang->product->attribute  = '产品属性';
 $lang->product->custom     = '自定义属性';
 $lang->product->sales      = '产品定价';
+$lang->product->css        = 'CSS';
+$lang->product->js         = 'JS';
 
 $lang->product->currencyIcon = "<i class='icon-yen'> </i>";
 

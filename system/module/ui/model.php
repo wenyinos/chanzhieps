@@ -236,9 +236,9 @@ class uiModel extends model
      * @access public
      * @return string
      */
-    public function printFormControl($id, $label, $params, $value = false)
+    public function printFormControl($label, $params, $value = false)
     {
-        call_user_func_array('uiModel::print' . ucfirst($params['type']) . 'Control', array('id' => $id, 'label' => $label, 'params' => $params, 'value' => $value));
+        call_user_func_array('uiModel::print' . ucfirst($params['type']) . 'Control', array('id' => $params['name'], 'label' => $label, 'params' => $params, 'value' => $value));
     }
 
     /**
@@ -292,9 +292,14 @@ class uiModel extends model
     public function printImageControl($id, $label, $params, $value = '')
     {
         $placeholder = $params['default'];
-        if(empty($placeholder) or $placeholder == 'none') $placeholder = $this->lang->ui->theme->none;
+        $default =  $placeholder;
+        if(empty($placeholder) or $placeholder == 'none')
+        {
+            $placeholder = $this->lang->ui->theme->none;
+            $default     = 'none';
+        }
 
-        $this->printTextbox($id, $value, $this->lang->ui->$label, '', $this->lang->ui->theme->none, '', '', $this->lang->ui->theme->backImageTip);
+        $this->printTextbox($id, $value, $this->lang->ui->$label, '', $this->lang->ui->theme->none, '', "data-default='{$default}'", $this->lang->ui->theme->backImageTip);
     }
 
     /**
@@ -310,16 +315,16 @@ class uiModel extends model
         $this->printSelectList($this->lang->ui->theme->imageRepeatList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
     }
 
-    public function printPositionControl($id, $label, $params, $value = 'x, y')
+    public function printPositionControl($id, $label, $params, $value = '0% 0%')
     {
-        $values = explode(',', $value);
-        $defaultValues = explode(',', $params['default']);
+        $values = explode(' ', $value);
+        $defaultValues = explode(' ', $params['default']);
         $defaultValue1 = count($defaultValues) > 0 ? $defaultValues[0] : '0';
         $defaultValue2 = count($defaultValues) > 1 ? $defaultValues[1] : '0';
         $value1 = count($values) > 0 ? $values[0] : $defaultValue1;
         $value2 = count($values) > 1 ? $values[1] : $defaultValue2;
 
-        $this->printTextboxCouple($this->lang->ui->$label, $id, $id . 'X', $value1, 'X', $id . 'Y', $value2, 'Y', '', $defaultValue1, $defaultValue2);
+        $this->printTextboxCouple($this->lang->ui->$label, $id, $id . '-x', $value1, 'X', $id . '-y', $value2, 'Y', '', $defaultValue1, $defaultValue2);
     }
 
     /**
@@ -336,6 +341,19 @@ class uiModel extends model
     }
 
     /**
+     * Print border control
+     * @param  string $id
+     * @param  string $label
+     * @param  array  $params
+     * @param  string $value
+     * @return void
+     */
+    public function printUnderlineControl($id, $label, $params, $value = '')
+    {
+        $this->printSelectList($this->lang->ui->theme->underlineList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
+    }
+
+    /**
      * Print nav layout
      * @param  string $id
      * @param  string $label
@@ -348,18 +366,70 @@ class uiModel extends model
         $this->printSelectList($this->lang->ui->theme->navbarLayoutList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
     }
 
-    // /**
-    //  * Print nav layout
-    //  * @param  string $id
-    //  * @param  string $label
-    //  * @param  array  $params
-    //  * @param  string $value
-    //  * @return void
-    //  */
-    // public function printNavLayout($id, $label, $params, $value = '')
-    // {
-    //     $this->printSelectList($this->lang->ui->theme->navbarLayoutList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
-    // }
+    /**
+     * Print font size control
+     * @param  string $id
+     * @param  string $label
+     * @param  array  $params
+     * @param  string $value
+     * @return void
+     */
+    public function printFontSizeControl($id, $label, $params, $value = '')
+    {
+        $this->printSelectList($this->lang->ui->theme->fontSizeList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
+    }
+
+    /**
+     * Print font family control
+     * @param  string $id
+     * @param  string $label
+     * @param  array  $params
+     * @param  string $value
+     * @return void
+     */
+    public function printFontFamilyControl($id, $label, $params, $value = '')
+    {
+        $this->printSelectList($this->lang->ui->theme->fontList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
+    }
+
+    /**
+     * Print font weight control
+     * @param  string $id
+     * @param  string $label
+     * @param  array  $params
+     * @param  string $value
+     * @return void
+     */
+    public function printFontWeightControl($id, $label, $params, $value = '')
+    {
+        $this->printSelectList($this->lang->ui->theme->fontWeightList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
+    }
+
+    /**
+     * Print sidebar layout
+     * @param  string $id
+     * @param  string $label
+     * @param  array  $params
+     * @param  string $value
+     * @return void
+     */
+    public function printSidebarLayoutControl($id, $label, $params, $value = '')
+    {
+        $this->printSelectList($this->lang->ui->theme->sidebarPullLeftList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
+    }
+
+    /**
+     * Print sidebar width
+     * @param  string $id
+     * @param  string $label
+     * @param  array  $params
+     * @param  string $value
+     * @return void
+     */
+    public function printSidebarWidthControl($id, $label, $params, $value = '')
+    {
+        $this->printSelectList($this->lang->ui->theme->sidebarWidthList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
+    }
 
     /**
      * Print html of textbox with label.
@@ -471,7 +541,7 @@ class uiModel extends model
             $html .= "<span class='input-group-addon" . (empty($labelStart) ? '' : " fix-border") . "'>{$label1}</span>\n";
         }
 
-        $html .= "<input id='{$name1}' data-target='{$name}' name='{$name1}' type='text' value='{$value1}' placeholder='{$placeholder1}' class='form-control input-color text-latin' {$alias1}" . (empty($tooltip1) ? "" : " title='{$tooltip1}' data-toggle='tooltip'") . ">";
+        $html .= "<input id='{$name1}' data-sid='{$name}-1' data-target='{$name}' name='{$name1}' type='text' value='{$value1}' placeholder='{$placeholder1}' class='form-control input-color text-latin' {$alias1}" . (empty($tooltip1) ? "" : " title='{$tooltip1}' data-toggle='tooltip'") . ">";
 
         if(!empty($label2))
         {
@@ -482,8 +552,7 @@ class uiModel extends model
             $html .= "<span class='input-group-addon fix-border fix-padding'></span>\n";
         }
 
-        $html .= "<input id='{$name2}' data-target='{$name}' name='{$name2}' type='text' value='{$value2}' placeholder='{$placeholder2}' class='form-control input-color text-latin' {$alias2}" . (empty($tooltip2) ? "" : " title='{$tooltip2}' data-toggle='tooltip'") . ">\n";
-
+        $html .= "<input id='{$name2}' data-sid='{$name}-2' data-target='{$name}' name='{$name2}' type='text' value='{$value2}' placeholder='{$placeholder2}' class='form-control input-color text-latin' {$alias2}" . (empty($tooltip2) ? "" : " title='{$tooltip2}' data-toggle='tooltip'") . ">\n";
 
         if(!empty($endLabel))
         {
@@ -493,182 +562,5 @@ class uiModel extends model
         $html .= "<input type='hidden' id='{$name}' name='$name' value='{$value1}, {$value2}'>";
         $html .= "</div>\n";
         echo $html;
-    }
-
-    /**
-     * Print input group controls for background setting
-     *
-     * @param string       $title
-     * @param string       $valueSetting
-     * @param string       $commonName
-     * return string 
-     */
-    public function printBackgroundInputs($title, $valueSetting,  $commonName = '', $defaultColor = 'transparent', $ignore = '')
-    {
-        if(empty($commonName))
-        {
-            $backColorName          = 'backColor';
-            $backImageName          = 'backImage';
-            $backImageRepeatName    = 'backImageRepeat';
-            $backImagePositionXName = 'backImagePositionX';
-            $backImagePositionYName = 'backImagePositionY';
-        }
-        else
-        {
-            $backColorName          = $commonName . 'BackColor';
-            $backImageName          = $commonName . 'BackImage';
-            $backImageRepeatName    = $commonName . 'BackImageRepeat';
-            $backImagePositionXName = $commonName . 'BackImagePositionX';
-            $backImagePositionYName = $commonName . 'BackImagePositionY';
-        }
-
-        if(empty($ignore) || stripos($ignore, 'color') === false)
-        {
-            echo "<th>{$title}</th>\n";
-            echo "<td>\n";
-            $this->printColorInput($backColorName, $valueSetting[$backColorName], $this->lang->ui->theme->backColor, $defaultColor);
-            echo "</td>\n";
-        }
-
-        if(empty($ignore) || stripos($ignore, 'image') === false)
-        {
-            echo "<td>\n";
-            $this->printTextbox($backImageName, $valueSetting[$backImageName], $this->lang->ui->theme->backImage, '', $this->lang->ui->theme->none, '', "data-default='none' data-type='image'", $this->lang->ui->theme->backImageTip);
-            echo "</td>\n";
-        }
-
-        if(empty($ignore) || stripos($ignore, 'image') === false)
-        {
-            echo "<td>\n";
-            $this->printSelectList($this->lang->ui->theme->imageRepeatList, $backImageRepeatName, $themeSetting[$backImageRepeatName], $this->lang->ui->theme->imageRepeat);
-            echo "</td>\n";
-        }
-
-        if(empty($ignore) || stripos($ignore, 'image') === false)
-        {
-            echo "<td>\n";
-            $this->printTextboxCouple($this->lang->ui->theme->position, $backImagePositionXName, $valueSetting[$backImagePositionXName], 'X', $backImagePositionYName, $valueSetting[$backImagePositionYName], 'Y', '', '0%', '0%', $this->lang->ui->theme->positionTip, $this->lang->ui->theme->positionTip);
-            echo "</td>\n";
-        }
-    }
-
-    /**
-     * Print input group controls for font setting
-     *
-     * @param string       $title
-     * @param string       $valueSetting
-     * @param string       $commonName
-     * return string 
-     */
-    public function printTextStyleInputs($title, $valueSetting,  $commonName = '', $defaultColor = '#333', $defaultFont = 'inherit', $defaultFontSize = 'inherit', $ignore = '')
-    {
-        if(empty($commonName))
-        {
-            $textColorName  = 'textColor';
-            $fontSizeName   = 'fontSize';
-            $fontFamilyName = 'font';
-            $fontWeightName = 'fontWeight';
-        }
-        else
-        {
-            $textColorName  = $commonName . 'Color';
-            $fontSizeName   = $commonName . 'FontSize';
-            $fontFamilyName = $commonName . 'Font';
-            $fontWeightName = $commonName . 'FontWeight';
-        }
-
-        echo "<th>{$title}</th>\n";
-
-        if(empty($ignore) || stripos($ignore, 'color') === false)
-        {
-            echo "<td>\n";
-            $this->printColorInput($textColorName, $valueSetting[$textColorName], $this->lang->ui->theme->color, $defaultColor);
-            echo "</td>\n";
-        }
-
-        if(empty($ignore) || stripos($ignore, 'size') === false)
-        {
-            echo "<td>\n";
-            if(empty($valueSetting[$fontSizeName]))
-            {
-                $valueSetting[$fontSizeName] =  $defaultFontSize;
-            }
-            $this->printSelectList($this->lang->ui->theme->fontSizeList, $fontSizeName, $valueSetting[$fontSizeName], $this->lang->ui->theme->fontSize, '', empty($commonName) ? '' : "data-default='{$defaultFontSize}'");
-            echo "</td>\n";
-        }
-
-        if(empty($ignore) || stripos($ignore, 'family') === false)
-        {
-            echo "<td>\n";
-            if(empty($valueSetting[$fontFamilyName]))
-            {
-                $valueSetting[$fontFamilyName] =  $defaultFont;
-            }
-            $this->printSelectList($this->lang->ui->theme->fontList, $fontFamilyName, $valueSetting[$fontFamilyName], $this->lang->ui->theme->font, '', empty($commonName) ? '' : "data-default='{$defaultFont}'");
-            echo "</td>\n";
-        }
-
-        if(empty($ignore) || stripos($ignore, 'weight') === false)
-        {
-            echo "<td>\n";
-            $this->printSelectList($this->lang->ui->theme->fontWeightList, $fontWeightName, $valueSetting[$fontWeightName], $this->lang->ui->theme->fontWeight, "data-default='inherit'");
-            echo "</td>\n";
-        }
-    }
-
-    /**
-     * Print input group controls for border setting
-     *
-     * @param string       $title
-     * @param string       $valueSetting
-     * @param string       $commonName
-     * return string 
-     */
-    public function printBorderInputs($title, $valueSetting,  $commonName = '', $defaultStyle = 'none', $defaultColor = 'transparent', $defaultWidth = '1px', $defaultRadius = '0', $ignore = '')
-    {
-        if(empty($commonName))
-        {
-            $borderStyleName  = 'borderStyle';
-            $borderColorName   = 'borderColor';
-            $borderWidthName = 'borderWidth';
-            $borderRadiusName = 'borderRadius';
-        }
-        else
-        {
-            $borderStyleName  = $commonName . 'BorderStyle';
-            $borderColorName   = $commonName . 'BorderColor';
-            $borderWidthName = $commonName . 'BorderWidth';
-            $borderRadiusName = $commonName . 'BorderRadius';
-        }
-
-        echo "<th>{$title}</th>\n";
-
-        if(empty($ignore) || stripos($ignore, 'style') === false)
-        {
-            echo "<td>\n";
-            $this->printSelectList($this->lang->ui->theme->borderStyleList, $borderStyleName, $valueSetting[$borderStyleName], $this->lang->ui->theme->borderStyle, '', "data-default='{$defaultStyle}'", '', $defaultStyle);
-            echo "</td>\n";
-        }
-
-        if(empty($ignore) || stripos($ignore, 'color') === false)
-        {
-            echo "<td>\n";
-            $this->printColorInput($borderColorName, $valueSetting[$borderColorName], $this->lang->ui->theme->color, $defaultColor);
-            echo "</td>\n";
-        }
-
-        if(empty($ignore) || stripos($ignore, 'width') === false)
-        {
-            echo "<td>\n";
-            $this->printTextbox($borderWidthName, $themeSetting[$borderWidthName], $this->lang->ui->theme->width, '', $defaultWidth, '', "data-type='size'");
-            echo "</td>\n";
-        }
-
-        if(empty($ignore) || stripos($ignore, 'radius') === false)
-        {
-            echo "<td>\n";
-            $this->printTextbox($borderRadiusName, $themeSetting[$borderRadiusName], $this->lang->ui->theme->radius, '', $defaultRadius, '', "data-type='size'");
-            echo "</td>\n";
-        }
     }
 }
