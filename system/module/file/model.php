@@ -160,25 +160,16 @@ class fileModel extends model
         $fileTitles = array();
         $now        = helper::now();
         $files      = $this->getUpload();
+
         $this->app->loadClass('pclzip', true);
+
+        $imageSize = array('width' => 0, 'height' => 0);
 
         foreach($files as $id => $file)
         {   
-            $imageSize = array('width' => 0, 'height' => 0);
-
             if(!move_uploaded_file($file['tmpname'], $this->savePath . $file['pathname'])) return false;
 
-            if(strpos($this->config->file->allowed, ',' . $file['extension'] . ',') == false)
-            {
-                $archive = new PclZip($this->savePath . $file['pathname'] . '.zip');
-                $list    = $archive->create($this->savePath . $file['pathname'], PCLZIP_OPT_REMOVE_ALL_PATH);
-                if($list != 0)
-                {
-                    unlink($this->savePath . $file['pathname']);
-                    $file['pathname']  = $file['pathname'] . '.zip';
-                    $file['extension'] = 'zip';
-                }
-            }
+            if(strpos($this->config->file->allowed, ',' . $file['extension'] . ',') == false) $file = $this->saveZip($file);
 
             if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions))
             {
@@ -199,6 +190,38 @@ class fileModel extends model
         }
         $this->loadModel('setting')->setItems('system.common.site', array('lastUpload' => time()));
         return $fileTitles;
+    }
+
+    /**
+     * Save dangerous files to zip . 
+     * 
+     * @param  array    $file 
+     * @access public
+     * @return array
+     */
+    public function saveZip($file)
+    {
+        $pathInfo = pathinfo($file['pathname']);
+
+        $uploadedFile = $this->savePath . $file['pathname'];
+        $gbkName  = function_exists('iconv') ? iconv('utf8', 'gbk', $file['title']) : $file['title'];
+        $tmpFile  = str_replace($pathInfo['filename'], md5(uniqid()) . DS . $gbkName, $uploadedFile);
+
+        mkdir(dirname($tmpFile));
+        copy($uploadedFile, $tmpFile);
+
+        $archive = new PclZip($this->savePath . $file['pathname'] . '.zip');
+        $list    = $archive->create($tmpFile, PCLZIP_OPT_REMOVE_ALL_PATH);
+        if($list != 0)
+        {
+            unlink($this->savePath . $file['pathname']);
+            unlink($tmpFile);
+            rmdir(dirname($tmpFile));
+            $file['pathname']  = $file['pathname'] . '.zip';
+            $file['extension'] = 'zip';
+        }
+
+        return $file;
     }
 
     /**
