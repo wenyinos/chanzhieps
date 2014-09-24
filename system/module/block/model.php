@@ -71,14 +71,30 @@ class blockModel extends model
 
                 foreach($regionBlocks as $block)
                 {
+                    if(!empty($blocks[$block->id]))
+                    {
+                        $block->title    = $blocks[$block->id]->title;
+                        $block->type     = $blocks[$block->id]->type;
+                        $block->content  = $blocks[$block->id]->content;
+                        $block->template = $blocks[$block->id]->template;
+                    }
+
+                    $mergedBlock = new stdclass();
+                    
                     if(!empty($block->children))
                     {
-                        $mergedBlock = $block;
+                        $mergedBlock->id = '';
                         $children = array();
                         foreach($block->children as $child)
                         {
+                            $mergedChild = new stdclass();
+
                             if(empty($blocks[$child->id])) continue;
-                            $mergedChild = $blocks[$child->id];
+                            $mergedChild->id         = $child->id;
+                            $mergedChild->title      = $blocks[$child->id]->title;
+                            $mergedChild->type       = $blocks[$child->id]->type;
+                            $mergedChild->content    = $blocks[$child->id]->content;
+                            $mergedChild->template   = $blocks[$child->id]->template;
                             $mergedChild->grid       = $child->grid;
                             $mergedChild->titleless  = $child->titleless;
                             $mergedChild->borderless = $child->borderless;
@@ -89,7 +105,11 @@ class blockModel extends model
                     else
                     {
                         if(empty($blocks[$block->id])) continue;
-                        $mergedBlock = $blocks[$block->id];
+                        $mergedBlock->id       = $block->id;
+                        $mergedBlock->title    = $blocks[$block->id]->title;
+                        $mergedBlock->type     = $blocks[$block->id]->type;
+                        $mergedBlock->content  = $blocks[$block->id]->content;
+                        $mergedBlock->template = $blocks[$block->id]->template;
                     }
 
                     if(isset($block->grid))       $mergedBlock->grid       = $block->grid;
@@ -122,17 +142,36 @@ class blockModel extends model
         $sortedBlocks = array();
         foreach($regionBlocks as $block) 
         {
+            if(!empty($blocks[$block->id]))
+            {
+                $block->title    = $blocks[$block->id]->title;
+                $block->type     = $blocks[$block->id]->type;
+                $block->template = $blocks[$block->id]->template;
+                $block->content  = $blocks[$block->id]->content;
+            }
+            $rawBlock = new stdclass();
             if(!empty($block->children))
             {
-                $rawBlock = $block;
+                $rawBlock->id = '';
                 $children = array();
                 foreach($block->children as $child)
                 {
                     if(empty($blocks[$child->id])) continue;
-                    $rawChild = $blocks[$child->id];
+                    $rawChild = new stdclass();
+
+                    $child->title    = $blocks[$child->id]->title;
+                    $child->type     = $blocks[$child->id]->type;
+                    $child->content  = $blocks[$child->id]->content;
+                    $child->template = $blocks[$child->id]->template;
+
                     $rawChild->grid       = $child->grid;
                     $rawChild->titleless  = $child->titleless;
                     $rawChild->borderless = $child->borderless;
+                    $rawChild->id         = $child->id;
+                    $rawChild->title      = $child->title;
+                    $rawChild->type       = $child->type;
+                    $rawChild->content    = $child->content;
+                    $rawChild->template   = $child->template;
                     $children[] = $rawChild;
                 }
                 $rawBlock->children = $children;
@@ -140,7 +179,11 @@ class blockModel extends model
             else
             {
                 if(empty($blocks[$block->id])) continue;
-                $rawBlock = $blocks[$block->id];
+                $rawBlock->id       = $block->id;
+                $rawBlock->title    = $block->title;
+                $rawBlock->type     = $block->type;
+                $rawBlock->content  = $block->content;
+                $rawBlock->template = $block->template;
             }
 
             $rawBlock->grid       = $block->grid;
