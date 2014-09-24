@@ -89,6 +89,12 @@ $(function()
         // return false;
     });
 
+    compileLess();
+
+    ajustModalSize();
+
+    $('.nav-tabs li > a').first().trigger('click');
+    
     function compileLess()
     {
         var css = theme.compile(getThemeSettings());
@@ -151,10 +157,5 @@ $(function()
         });
         return setting;
     }
-
-    compileLess();
-
-    ajustModalSize();
-
-    $('.nav-tabs li > a').first().trigger('click');
 });
+

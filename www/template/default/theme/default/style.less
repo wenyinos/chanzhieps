@@ -93,13 +93,13 @@
         color: @headColor;
     }
 
-    .panel-body a,
-    .panel-body a:visited
+    .panel-body a:not(.btn),
+    .panel-body a:not(.btn):visited
     {
         color: @block-body-link-color;
     }
 
-    .panel-body a:hover
+    .panel-body a:not(.btn):hover
     {
         color: lighten(@block-body-link-color, 10%);
     }
@@ -139,6 +139,7 @@
         > li.active > a:active,
         > li.active > a:focus
         {
+            color: contrast(@link-hover-color, @fore-color);
             background-color: @link-hover-color;
         }
     }
@@ -219,14 +220,19 @@
     }
 }
 
+.globalFontFamily(@font) when not(@font = inherit)
+{
+    font-family: @font;
+}
+
 /* Global style */
 body
 {
     .background(@background-color, @background-image, @background-image-repeat, @background-image-position-x, @background-image-position-y);
+    .globalFontFamily(@font-family);
     font-size: @font-size;
     color: @text-color;
     font-weight: @font-weight;
-    font-family: @font-family;
 }
 
 /* Links */
@@ -485,8 +491,8 @@ a:visited
 }
 
 /* Headnav */
-#headNav .login-msg, #headNav nav > a, #msgBox {display: inline-block; margin-left: 5px;}
-#headNav .login-msg:after, #headNav nav > a:after, #msgBox:after {content: '|'; display: inline-block; margin-left: 6px; line-height: 20px; color: #ccc}
+#headNav .login-msg, #headNav nav > a, #msgBox {display: inline-block; margin-left: 1px; margin-right: 6px;}
+#headNav .login-msg:after, #headNav nav > a:after, #msgBox:after {content: '|'; display: inline-block; margin-left: 5px; line-height: 20px; color: #ccc}
 #headNav nav > a:last-child:after {display: none;}
 
 /* Footer */
@@ -499,4 +505,10 @@ a:visited
 
 .footerLayout(@footer-border-style, @footer-backcolor);
 
-/* Blog */
+/* Carousel */
+@media (min-width: 992px) {.carousel-caption.ie-8 {left: 12% !important}}
+@media (max-width: 1199px) {.carousel-caption {top: 3%}}
+@media (max-width: 991px) {.carousel-caption {top: 1%;} .carousel-caption h2 {font-size: 18px; margin: 2px 0} .carousel-caption .btn {margin-top: 0;font-size: 14px; padding: 8px 15px;}}
+@media (max-width: 767px) {.carousel-caption {top: 10px; padding-top: 5px; right: 20px} .carousel-caption h2 {font-size: 16px; margin: 0 0 2px} .carousel-caption ul {font-size: 12px} .carousel-caption .btn {font-size: 14px; padding: 5px 15px;}}
+@media (max-width: 620px) {.carousel-caption {top: 10px; padding-top: 0;} .carousel-caption h2 {font-size: 14px;} .carousel-caption ul {font-size: 12px; line-height: 1.2em; padding: 5px 0 5px 20px} .carousel-caption .btn {font-size: 12px; padding: 4px 15px;}}
+@media (max-width: 480px) {.carousel-caption{top: 10px;} .carousel-caption ul {font-size: 12px; line-height: 1.1em; padding: 4px 0 4px 20px} .carousel-caption h2 {font-size: 12px; margin: 0} .carousel-caption .btn {font-size: 12px; padding: 2px 6px;}.carousel-inner>.item>img, .carousel-inner>.item>a>img {min-height: 100px}}
