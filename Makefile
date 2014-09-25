@@ -12,6 +12,14 @@ tgz:
 	cp -frv system chanzhieps/
 	rm -fr chanzhieps/system/config/my.php
 	cp -frv www chanzhieps && rm -fr chanzhieps/www/data/* && mkdir -p chanzhieps/www/data/upload/
+	mkdir chanzhieps/www/data/css/default/default -p    && cp www/template/default/theme/default/style.css    chanzhieps/www/data/css/default/default/style.css
+	mkdir chanzhieps/www/data/css/default/blue -p       && cp www/template/default/theme/blue/style.css       chanzhieps/www/data/css/default/blue/style.css
+	mkdir chanzhieps/www/data/css/default/brightdark -p && cp www/template/default/theme/brightdark/style.css chanzhieps/www/data/css/default/brightdark/style.css
+	mkdir chanzhieps/www/data/css/default/flat -p       && cp www/template/default/theme/flat/style.css       chanzhieps/www/data/css/default/flat/style.css
+	mkdir chanzhieps/www/data/css/default/tartan -p     && cp www/template/default/theme/tartan/style.css     chanzhieps/www/data/css/default/tartan/style.css
+	mkdir chanzhieps/www/data/css/default/tree -p       && cp www/template/default/theme/tree/style.css       chanzhieps/www/data/css/default/tree/style.css
+	mkdir chanzhieps/www/data/css/default/wide -p       && cp www/template/default/theme/wide/style.css       chanzhieps/www/data/css/default/wide/style.css
+	mkdir chanzhieps/www/data/css/default/colorful -p   && cp www/template/default/theme/colorful/style.css   chanzhieps/www/data/css/default/colorful/style.css
 	rm -frv chanzhieps/system/tmp/cache/* 
 	rm -frv chanzhieps/system/tmp/extension/*
 	rm -frv chanzhieps/system/tmp/log/*
