@@ -76,7 +76,6 @@ $(function()
 
     $.setAjaxForm('#customThemeForm', function(response)
     {
-        // setTimeout(function(){$('.close[data-dismiss="modal"]').click();}, 2000);
     });
 
     $form.find('input.form-control, select.form-control').on('keyup change', compileLess);
@@ -84,7 +83,6 @@ $(function()
     $form.submit(function(event)
     {
         compileLess();
-        // return false;
     });
 
     compileLess();

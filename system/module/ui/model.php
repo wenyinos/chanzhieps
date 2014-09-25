@@ -256,7 +256,7 @@ class uiModel extends model
         $originDefault = $params['default'];
         $default = ($value === false or empty($value)) ? $originDefault : $value;
         $placeholder = $default;
-        if($placeholder === 'transparent') $placeholder = $this->lang->ui->theme->transparent;
+        if($placeholder === 'transparent') $placeholder = $this->lang->ui->transparent;
 
         $html = "<div class='colorplate theme-control' data-id='{$id}'>\n";
         $html .= "<div class='input-group color active input-group-color' data='{$default}'>\n";
@@ -296,11 +296,11 @@ class uiModel extends model
         $default =  $placeholder;
         if(empty($placeholder) or $placeholder == 'none')
         {
-            $placeholder = $this->lang->ui->theme->none;
+            $placeholder = $this->lang->ui->none;
             $default     = 'none';
         }
 
-        $this->printTextbox($id, $value, $this->lang->ui->$label, '', $this->lang->ui->theme->none, '', "data-default='{$default}' data-type='image'", $this->lang->ui->theme->backImageTip);
+        $this->printTextbox($id, $value, $this->lang->ui->$label, '', $this->lang->ui->none, '', "data-default='{$default}' data-type='image'", $this->lang->ui->theme->backImageTip);
     }
 
     /**
