@@ -10,7 +10,7 @@
       <th class='text-center'><?php echo $lang->file->addedDate;?></th>
       <th class='text-center'><?php echo $lang->file->downloads;?></th>
       <th class='text-center'><?php echo $lang->actions;?></th>
-    </tr>          
+    </tr>
   </thead>
   <tbody>
     <?php foreach($files as $file):?>

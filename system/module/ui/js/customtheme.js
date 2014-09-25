@@ -90,7 +90,7 @@ $(function()
     compileLess();
 
     ajustModalSize();
-    $('#triggerModal .modal-dialog').resize(ajustModalSize);
+    $('#ajaxModal .modal-dialog').resize(ajustModalSize);
 
     // Hide tabs
     $('.theme-control-tab-pane').each(function()

@@ -253,7 +253,8 @@ class uiModel extends model
      */
     public function printColorControl($id, $label, $params, $value = false)
     {
-        $default = $params['default'];
+        $originDefault = $params['default'];
+        $default = ($value === false or empty($value)) ? $originDefault : $value;
         $placeholder = $default;
         if($placeholder === 'transparent') $placeholder = $this->lang->ui->theme->transparent;
 
@@ -263,7 +264,7 @@ class uiModel extends model
         $html .= "<button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>\n";
         $html .= "{$this->lang->ui->$label} <span class='caret'></span>\n</button>\n";
         $html .= "<div class='dropdown-menu colors'>" . $this->createColorPlates() . "</div>\n</span>\n";
-        $html .= "<input id='{$id}' name='{$id}' type='text' value='{$value}' data-default='{$default}' placeholder='{$placeholder}' class='form-control input-color text-latin' data-toggle='tooltip' title='{$this->lang->ui->theme->colorTip}'>\n";
+        $html .= "<input id='{$id}' name='{$id}' type='text' value='{$value}' data-origin-default='{$originDefault}' data-default='{$default}' placeholder='{$placeholder}' class='form-control input-color text-latin' data-toggle='tooltip' title='{$this->lang->ui->theme->colorTip}'>\n";
         $html .= "</div>\n</div>\n";
         echo $html;
     }
@@ -493,7 +494,7 @@ class uiModel extends model
             $value = $default;
         }
 
-        $html .= html::select($name, $list, $value, "class='form-control {$class}' {$alias}" . (empty($tooltip) ? "" : " title='{$tooltip}' data-toggle='tooltip'")) . "\n";
+        $html .= html::select($name, $list, $value, "class='form-control {$class}' {$alias}" . (empty($tooltip) ? "" : " title='{$tooltip}' data-toggle='tooltip' data-default='{$default}'")) . "\n";
 
         $html .= "</div>\n";
         echo $html;
