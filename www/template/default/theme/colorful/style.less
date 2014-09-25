@@ -682,6 +682,9 @@ body {
     border-radius: @borderRadius @borderRadius 0 0;
 }
 
+/* Nav */
+.booksNav .nav-primary > li.active > a, .booksNav .nav-primary > li.active > a:hover, .booksNav .nav-primary > li.active > a:focus {background: #f1f1f1; color: @colorPrimary; border-color: #ddd;}
+
 /* Carousel */
 .carousel {-moz-border-radius: @borderRadius; -webkit-border-radius: @borderRadius; border-radius: @borderRadius}
 .right.carousel-control {-webkit-border-radius: 0 @borderRadius @borderRadius 0; -moz-border-radius: 0 @borderRadius @borderRadius 0; border-radius: 0 @borderRadius @borderRadius 0}
@@ -736,6 +739,8 @@ body {
     #blogNav .navbar-nav > li {width: 20%}
     #headTitle {position: absolute;}
     #header {padding-right: 0;}
+
+    #siteName {color: @colorPrimaryInverse}
 }
 @media (max-width: 480){#blogNav .nav > li{width: 33.333333333333%}}
 @media (max-width: 480) {#blogNav .nav > li{width: 50%}}

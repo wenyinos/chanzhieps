@@ -333,6 +333,8 @@ td #aliasLabel {display: table-row;}
   #siteSlogan {display: none}
   #headTitle {margin-top: 22px; padding: 0 10px; position: absolute; z-index: 10010; bottom: -49px; left: 10px;}
   #siteLogo {padding: 0;}
+  #siteName {padding: 0;}
+  #siteName h2 {margin: 12px 0}
   #headNav {position: static; top: 0; width: 100%; text-align: right; background-color: #e5e5e5; padding: 5px 15px}
   #headTitle img {height: 45px; max-width: inherit; min-width: 50px; width: auto;}
 
