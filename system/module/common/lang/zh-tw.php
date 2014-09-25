@@ -23,6 +23,7 @@ $lang->back2Top   = '返回頂部';
 /* Lang items for xirang. */
 $lang->chanzhiEPS       = '蟬知企業門戶系統';
 $lang->chanzhiEPSx      = '蟬知';
+$lang->agreement        = "已閲讀並同意<a href='http://api.chanzhi.org/goto.php?item=license' target='_blank'>《蟬知企業門戶系統使用協議》</a>。<span class='text-danger'>未經許可，不得去除蟬知系統的任何標誌及連結。</span>";
 $lang->poweredBy        = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>{$lang->chanzhiEPSx} %s</a></span>";
 $lang->newVersion       = "提示：蟬知系統已于 <span id='releaseDate'></span> 發佈 <span id='version'></span>版本。<a href='' target='_blank' id='upgradeLink'>馬上下載</a>";
 
