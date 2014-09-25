@@ -46,7 +46,10 @@ $navs = $this->tree->getChildren(0, 'blog');
   {
       css::import(css::import($themeRoot . $config->template->theme . '/style.css'));
   }
-  css::import(sprintf($webRoot . 'data/theme/%s/%s/style.css', $config->template->name, $config->template->theme));
+
+  /* Import customed css file if it exists. */
+  $customCssFile = $this->app->getDataRoot() . 'css' . DS . $this->config->template->name . DS . $this->config->template->theme . DS . 'style.css';
+  if(file_exists($customCssFile)) css::import(sprintf($webRoot . 'data/css/%s/%s/style.css?' . $this->config->template->customVersion, $config->template->name, $config->template->theme));
 
   js::exportConfigVars();
   if($config->debug)
