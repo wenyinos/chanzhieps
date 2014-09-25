@@ -479,13 +479,13 @@ class blockModel extends model
         {
             if($withGrid)
             {
-                if($block->grid == 0) echo "<div class='col-md-12 col-auto'>";
-                else echo "<div class='col-md-{$block->grid}' data-grid='{$block->grid}'>";
+                if($block->grid == 0) echo "<div class='col-md-12 col-auto'><div class='row'>";
+                else echo "<div class='col-md-{$block->grid}' data-grid='{$block->grid}'><div class='row'>";
             }
 
             foreach($block->children as $child) $this->parseBlockContent($child, $withGrid, $containerHeader, $containerFooter);
 
-            if($withGrid) echo '</div>';
+            if($withGrid) echo '</div></div>';
         }
         else
         {
