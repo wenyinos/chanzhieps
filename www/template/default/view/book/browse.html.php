@@ -4,7 +4,7 @@
   <div class='col-md-3'>
     <nav class='booksNav'>
       <ul class='nav nav-primary nav-stacked'>
-        <li class='nav-heading'><?php echo $lang->book->list;?></li>
+        <li class='nav-heading'><strong><?php echo $lang->book->list;?></strong></li>
         <?php
         if(!empty($books))
         {
@@ -23,7 +23,7 @@
     <div class='panel panel-block'>
       <?php if(!empty($book) && $book->title): ?>
       <div class='panel-heading'>
-        <h4 class='title'><?php echo $book->title;?></h4>
+        <strong class='title'><?php echo $book->title;?></strong>
       </div>
       <?php endif; ?>
       <div class='panel-body'>
