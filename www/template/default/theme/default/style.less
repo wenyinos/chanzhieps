@@ -93,6 +93,8 @@
         .line-gradient(@headBackColor);
     }
 
+    .panel-heading > h4 {margin: 0; line-height: 20px}
+
     .panel > .panel-heading a:not(.btn)
     {
         color: @headColor;
@@ -127,6 +129,7 @@
             font-size: @headFontSize;
             background-color: @headBackColor;
             color: @headColor;
+            .line-gradient(@headBackColor);
         }
 
         > li > a
@@ -305,6 +308,11 @@ a:visited
         color: lighten(@link-color, -10%);
     }
 }
+
+/* Nav */
+.booksNav .nav-primary.nav-stacked > li.active > a,
+.booksNav .nav-primary.nav-stacked > li.active > a:hover,
+.booksNav .nav-primary.nav-stacked > li.active > a:focus {background: #f1f1f1; color: @link-color; border-color: #ddd;}
 
 /* Navbar */
 .navbar
