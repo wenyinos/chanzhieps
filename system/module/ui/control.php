@@ -28,7 +28,7 @@ class ui extends control
             $settings = array();
             $setting['name']   = $template;
             $setting['theme']  = $theme;
-            $setting['parser'] = $templates[$template]['parser'];
+            $setting['parser'] = isset($templates[$template]['parser']) ? $templates[$template]['parser'] : 'default';
             $setting['customTheme'] =  $custom ? $theme : '';
 
             $result = $this->loadModel('setting')->setItems('system.common.template', $setting);
