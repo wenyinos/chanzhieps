@@ -44,7 +44,7 @@ $themeRoot = $webRoot . "template/default/theme/";
       js::import($jsRoot     . 'all.js');
   }
 
-  if($config->template->name == 'default' and $config->template->theme != 'default' and $config->template->theme != 'colorful')
+  if($config->template->theme != 'default' and $config->template->theme != 'colorful')
   {
       css::import(css::import($themeRoot . $config->template->theme . '/style.css'));
   }
