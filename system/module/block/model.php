@@ -413,15 +413,18 @@ class blockModel extends model
         }
 
         /* Compute children blocks. */
-        $parents = (array) $this->post->parent;
-        foreach($parents as $key => $parent) if(!empty($parent)) $children[$parent][] = $key;
-        foreach($blocks as $key => $block)
-        { 
-            if(empty($children[$key])) continue;
-            foreach($children[$key] as $child)
-            {
-                $blocks[$key]['children'][] = $blocks[$child];
-                unset($blocks[$child]);
+        if($this->post->parent)
+        {
+            $parents = (array) $this->post->parent;
+            foreach($parents as $key => $parent) $children[$parent][] = $key;
+            foreach($blocks as $key => $block)
+            { 
+                if(empty($children[$key])) continue;
+                foreach($children[$key] as $child)
+                {
+                    $blocks[$key]['children'][] = $blocks[$child];
+                    unset($blocks[$child]);
+                }
             }
         }
 
