@@ -4,6 +4,8 @@
     <?php foreach($lang->ui->groups as $group => $name):?>
     <li><?php echo html::a('#' . $group . 'Tab', $name, "data-toggle='tab' class='theme-control-tab'");?></li>
     <?php endforeach;?>
+
+    <li class='pull-right text-right w-150px'><button type='button' id='resetTheme' class='btn btn-link btn-sm text-danger' data-success-tip='<?php echo $lang->ui->theme->resetTip?>'><?php echo $lang->ui->theme->reset?></button></li>
   </ul>
   <div class='tab-content'>
     <?php foreach($lang->ui->groups as $group => $name):?>

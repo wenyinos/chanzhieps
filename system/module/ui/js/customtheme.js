@@ -31,7 +31,7 @@ $(function()
         $this.addClass('active');
     });
 
-    $('.input-color').on('keyup change', function()
+    $('.input-color').on('keyup change.color', function()
     {
         var $this = $(this);
         var val = $this.val();
@@ -46,24 +46,6 @@ $(function()
         else
         {
             $this.closest('.color').addClass('error');
-        }
-    });
-
-    $('[data-refresh]').on('keyup change', function()
-    {
-        var $this = $(this);
-        var val = $this.val();
-        if(val)
-        {
-            var $refresh = $($this.data('refresh'));
-            $refresh.each(function()
-            {
-                var $input = $(this);
-                if(!$input.data('refresh-disabled') || !$input.val())
-                {
-                    $input.val(val).change();
-                }
-            });
         }
     });
 
@@ -101,6 +83,19 @@ $(function()
     });
 
     $('.nav-tabs li > a').first().trigger('click');
+
+    var $resetThemeBtn = $('#resetTheme');
+    $resetThemeBtn.click(function()
+    {
+        $form.find('input.form-control, select.form-control, input[type="hidden"]').each(function()
+        {
+            var $this = $(this);
+            $this.val($this.data('origin-default') || $this.data('default') || $this.attr('placeholder') || $this.val()).trigger('change.color');
+        });
+
+        $resetThemeBtn.popover({trigger:'manual', content: $resetThemeBtn.data('success-tip'), placement:'left'}).popover('show');
+        setTimeout(function(){$resetThemeBtn.popover('destroy')},2000);
+    });
     
     function compileLess()
     {
