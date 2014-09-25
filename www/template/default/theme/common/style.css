@@ -325,6 +325,7 @@ td #aliasLabel {display: table-row;}
 #siteName,
 #siteSlogan {display: table-cell; padding: 10px 10px 10px 0; vertical-align: middle;}
 #siteSlogan {padding-left: 10px; font-size: 18px; color: #777; font-weight: bold;}
+#siteName h2 {margin: 6px 0}
 #headNav {position: absolute; right: 0; top: 40%;}
 #headNav nav > a {display: inline-block; margin-right: 5px;}
 #headNav nav > a:last-child {margin-right: 0;}
