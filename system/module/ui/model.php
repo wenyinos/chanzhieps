@@ -238,7 +238,8 @@ class uiModel extends model
      */
     public function printFormControl($label, $params, $value = false)
     {
-        call_user_func_array('uiModel::print' . ucfirst($params['type']) . 'Control', array('id' => $params['name'], 'label' => $label, 'params' => $params, 'value' => $value));
+        $methodName = 'print' . $params['type'] . 'Control';
+        call_user_func_array(array($this, $methodName), array('id' => $params['name'], 'label' => $label, 'params' => $params, 'value' => $value));
     }
 
     /**
