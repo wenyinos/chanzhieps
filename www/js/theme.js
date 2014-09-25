@@ -52,7 +52,7 @@
     Theme.prototype.compile = function(variables)
     {
         this.compileVariables(variables);
-        
+
         var lessCode = this.less.replace(/@import "@variables";/, this.variablesCode),
             parser   = window.less.Parser(),
             options  = this.options,
@@ -96,8 +96,8 @@
         if(!this.less)
         {
             var that = this;
-            $.ajax({url: url, async: false, type: 'GET'})
-             .done(function(data) {that.less = data; lessTemplates[url] = that.less;})
+            $.ajax({url: url, async: false, type: 'GET', contentType: 'text/plain'})
+             .done(function(data, textStatus, jqXHR) {that.less = jqXHR.responseText; lessTemplates[url] = that.less;})
              .fail(function() {throw new Error("Can't get theme template(a less file named '" + url + "')!");});
         }
     };

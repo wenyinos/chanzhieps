@@ -1,3 +1,8 @@
+/**
+ * Set trigger modal default name to 'ajaxModal'.
+ */
+(function(){$.ModalTriggerDefaults = {name: 'ajaxModal'};})();
+
 $.extend(
 {
     setAjaxForm: function(formID, callback)
@@ -405,8 +410,15 @@ $.extend(
      */
     reloadAjaxModal: function(duration)
     {
-       if(typeof(duration) == 'undefined') duration = 1000;
-       setTimeout(function(){$('#ajaxModal').load($('#ajaxModal').attr('rel'), function(){$(this).find('.modal-dialog').css('width', $(this).data('width'))})}, duration);
+        if(typeof(duration) == 'undefined') duration = 1000;
+        setTimeout(function()
+        { 
+            var url = $('#ajaxModal').attr('rel') || $('#ajaxModal').attr('ref');
+            $('#ajaxModal .modal-body').load(url + ' .modal-body', function()
+            {
+                $(this).find('.modal-dialog').css('width', $(this).data('width'));
+            });
+        }, duration);
     }
 });
 
