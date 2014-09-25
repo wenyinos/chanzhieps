@@ -226,6 +226,8 @@ CREATE TABLE IF NOT EXISTS `eps_product` (
   `views` mediumint(5) unsigned NOT NULL DEFAULT '0',
   `sticky` enum('0','1','2','3') NOT NULL DEFAULT '0',
   `order` smallint(5) unsigned NOT NULL,
+  `css` text NOT NULL,
+  `js` text NOT NULL,
   PRIMARY KEY (`id`),
   KEY `order` (`order`),
   KEY `views` (`views`),
