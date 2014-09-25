@@ -90,8 +90,8 @@ $(document).ready(function()
 
 function ajustModalSize()
 {
-    var $modal = $('#triggerModal');
-    var $dialog = $('#triggerModal .modal-dialog');
+    var $modal = $('#ajaxModal');
+    var $dialog = $('#ajaxModal .modal-dialog');
     var height = Math.max($dialog.height(), $modal.data('min-height') || 400);
     $dialog.css('min-height', height);
     $modal.data('min-height', height);
