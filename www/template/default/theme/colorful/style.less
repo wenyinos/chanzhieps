@@ -159,7 +159,7 @@ ol {padding-left: 20px;}
 .panel-block .panel-body > .cards {margin: -10px -15px -8px; padding: 0;}
 .panel-block .panel-body > .cards [class*='col-']:last-child .card {border-bottom: none;}
 .panel-block .panel-body > .cards [class*='col-']:last-child .card-heading {padding-bottom: 0;}
-.panel-block .panel-body .card {margin: 0 -10px; border-bottom: 1px #e5e5e5 dashed; transition:all 0.3s; padding: 10px 10px 0 10px;}
+.panel-block .panel-body .card {margin: 0; border-bottom: 1px #e5e5e5 dashed; transition:all 0.3s; padding: 10px 10px 0 10px;}
 .panel-block .panel-body .card:last-child {padding-bottom: 10px;}
 .panel-block .panel-body .card > .media {text-align: center; overflow: hidden; background-color: #f1f1f1; height: 200px; line-height: 200px;  background-repeat: no-repeat; background-position: center; background-size: cover;}
 .ie-8 .panel-block .panel-body .card > .media {line-height: 118px;}
@@ -682,6 +682,9 @@ body {
     border-radius: @borderRadius @borderRadius 0 0;
 }
 
+/* Nav */
+.booksNav .nav-primary > li.active > a, .booksNav .nav-primary > li.active > a:hover, .booksNav .nav-primary > li.active > a:focus {background: #f1f1f1; color: @colorPrimary; border-color: #ddd;}
+
 /* Carousel */
 .carousel {-moz-border-radius: @borderRadius; -webkit-border-radius: @borderRadius; border-radius: @borderRadius}
 .right.carousel-control {-webkit-border-radius: 0 @borderRadius @borderRadius 0; -moz-border-radius: 0 @borderRadius @borderRadius 0; border-radius: 0 @borderRadius @borderRadius 0}
@@ -732,9 +735,12 @@ body {
     #blogNav .nav {margin: 0}
     #blogNav .navbar-nav > li{display: block; float: left; width: 33.333333333%}
     #blogNav .navbar-nav > li > a, #blogNav .navbar-nav > li:first-child > a, #blogNav .navbar-nav > li:last-child > a, #blogNav .navbar-nav.navbar-right > li:first-child > a, #blogNav .navbar-nav.navbar-right > li:last-child > a{text-align: center; padding: 5px; margin: 5px;-moz-border-radius: @borderRadius; -webkit-border-radius: @borderRadius; border-radius: @borderRadius}
-    #headTitle {position: static; margin-top: @borderRadius}
     .card {margin-bottom: 10}
     #blogNav .navbar-nav > li {width: 20%}
+    #headTitle {position: absolute;}
+    #header {padding-right: 0;}
+
+    #siteName {color: @colorPrimaryInverse}
 }
 @media (max-width: 480){#blogNav .nav > li{width: 33.333333333333%}}
 @media (max-width: 480) {#blogNav .nav > li{width: 50%}}
