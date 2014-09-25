@@ -11,7 +11,7 @@
 .block-item label input[type='checkbox']{margin: 8px 3px 0 0;}
 #blockList div.block-item {border: 1px solid #ccc; margin: 10px 5px; background-color: #f1f1f1; padding: 0; border-radius: 3px}
 .block-item .sort-handle {cursor: move; line-height: 32px}
-.block-item .col, .block-item .children {float: left;}
+.block-item .col {float: left;}
 .block-item .form-control {border: none; border-radius: 0; border-right: 1px solid #DDD}
 .block-item .input-group-addon {border: none; border-radius: 0; background-color: #f1f1f1;}
 .block-item .col-type {width: 25%;}
@@ -19,7 +19,7 @@
 .block-item .col-style {width: 25%;}
 .block-item .col-actions {width: 22%;}
 .block-item .col-move {width: 8%;}
-.block-item .children {margin: 0; background-color: #fff; border-top: 1px solid #ccc; background-color: #ddd; padding: 10px 10px 10px 20px}
+.block-item .children {margin: 0; background-color: #fff; border-top: 1px solid #ccc; background-color: #ddd; padding: 10px 10px 10px 20px; width: 100%}
 .block-item .children:empty {display: none}
 #blockList > .block-item:first-child {margin-top: 0;}
 #blockList .block-item .children > .block-item {margin: -1px 0 0 0; border-radius: 0; overflow: hidden;}
