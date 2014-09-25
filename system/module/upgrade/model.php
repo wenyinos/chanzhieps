@@ -87,6 +87,7 @@ class upgradeModel extends model
                 $this->execSQL($this->getUpgradeFile('2.5.2'));
             case '2_5_3':
                 $this->execSQL($this->getUpgradeFile('2.5.3'));
+                $this->fixCustomedCss();
 
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -902,6 +903,37 @@ class upgradeModel extends model
     {
         if($this->config->site->lang != 'en') return $this->loadModel('setting')->setItems('system.common.product', array('currency' => '￥'));
         if($this->config->site->lang == 'en') return $this->loadModel('setting')->setItems('system.common.product', array('currency' => '$'));
+    }
+
+    /**
+     * Fix customed css.
+     * 
+     * @access public
+     * @return void
+     */
+    public function fixCustomedCss()
+    {
+        $customedFile = $this->app->getDataRoot() . 'theme/custom.css';
+        if(is_file($customedFile))
+        {
+            $customPath = $this->app->getDataRoot() . 'css' . DS . 'default' . DS . 'colorful' . DS;
+            mkdir($customPath, 0777, true);
+
+            rename($customedFile, $customPath . 'style.css');
+        }
+
+        if(isset($this->config->site->themeSetting))
+        {
+            $customed = json_decode($this->config->site->themeSetting, true);
+            $setting['default']['colorful']['font-size']        = $customed['fontSize'];
+            $setting['default']['colorful']['border-radius']    = $customed['borderRadius'];
+            $setting['default']['colorful']['color-primary']    = $customed['primaryColor'];
+            $setting['default']['colorful']['background-color'] = $customed['backColor'];
+
+            return  $this->loadModel('setting')->setItems('system.common.template', array('custom' => helper::jsonEncode($setting)) );
+        }
+
+        return true;
     }
 
     /**
