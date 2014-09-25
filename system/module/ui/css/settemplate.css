@@ -65,3 +65,6 @@ linear-gradient(45deg, #999 25%, transparent 25%, transparent 75%, #999 75%, #99
 
 #cssview {height: 100%;}
 .codeeditor-fullscreen .table-form {display: none}
+
+#resetTheme {color: #D2322D}
+#resetTheme:hover {color: #A82824}
