@@ -258,7 +258,8 @@ class blockModel extends model
         $grid    = isset($block->grid) ? $block->grid : '';
 
         $entry = "<div class='block-item row' data-block='{$key}' data-id='{$blockID}'>";
-        $entry .= "<div class='col col-type'>" . html::select("blocks[{$key}]", $blockOptions, $blockID, "class='form-control block' id='block_{$key}'") . "</div>";
+        $readonly = !empty($block->children) ? "readonly='readonly'" : '';
+        $entry .= "<div class='col col-type'>" . html::select("blocks[{$key}]", $blockOptions, $blockID, "class='form-control block' id='block_{$key}' $readonly") . "</div>";
         $entry .= "<div class='col col-grid'><div class='input-group'><span class='input-group-addon'>{$this->lang->block->grid}</span>" . html::select("grid[{$key}]", $this->lang->block->gridOptions, $grid, "class='form-control'") . '</div></div>';
 
         $titlelessChecked = isset($block->titleless) && $block->titleless ? 'checked' : '';
