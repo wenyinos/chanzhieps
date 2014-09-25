@@ -42,6 +42,10 @@ $navs = $this->tree->getChildren(0, 'blog');
   css::import($themeRoot . 'common/style.css');
   css::import($jsRoot    . 'jquery/treeview/min.css');
 
+  if($config->template->name == 'default' and $config->template->theme != 'default' and $config->template->theme != 'colorful')
+  {
+      css::import(css::import($themeRoot . $config->template->theme . '/style.css'));
+  }
   css::import(sprintf($webRoot . 'data/theme/%s/%s/style.css', $config->template->name, $config->template->theme));
 
   js::exportConfigVars();

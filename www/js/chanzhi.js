@@ -609,7 +609,8 @@ function autoBlockGrid()
     $('.block-list .panel-block .cards').each(function()
     {
         var $this = $(this);
-        var grid = $this.closest('[class*="col-"]').data('grid'),
+        var parentGrid = $this.closest('[class*="col-"]').parent().closest('[class*="col-"]').data('grid') || 12;
+        var grid = parentGrid * $this.closest('[class*="col-"]').data('grid') / 12,
             cards = $this.find('[class*="col-"]'),
             layout = $this.data('layout');
 
@@ -624,32 +625,37 @@ function autoBlockGrid()
     });
 
     /* ajust block height */
-    var lastWidth = 0;
+    var lastWidth = 0, winWidth;
     function ajustBlockHeight()
     {
-        var width = $('body').width();
-        if(width == lastWidth) return;
-        lastWidth = width;
+        winWidth = $('body').width();
+        if(winWidth == lastWidth) return;
+        lastWidth = winWidth;
+        ajustRowHeight($(".block-list > .row > [class*='col-'] > .row"), true);
+        ajustRowHeight($('.block-list > .row'), false);
+    }
 
-        var blocks = $('.block-list .row .panel-block');
-        if(!blocks.length) return;
+    function ajustRowHeight($rows, isSub)
+    {
+        var $blocks = $rows.children("[class*='col-']").children('.panel-block, .row');
+        if(!$blocks.length) return;
 
-        if(width < 992)
+        if(winWidth < 992)
         {
-            blocks.css('height', 'auto');
+            $blocks.css('height', 'auto');
         }
         else
         {
-            blocks.data('height', 0);
+            $blocks.data('height', 0);
 
-            $('.block-list .row').each(function()
+            $rows.each(function()
             {
                 var nextRow = 0, sum = 0, row = 0, grid;
                 $(this).children("[class*='col-']").each(function()
                 {
-                    var col = $(this);
-                    row = nextRow;
-                    grid = parseInt(col.data('grid'));
+                    var col  = $(this);
+                        row  = nextRow;
+                        grid = parseInt(col.data('grid'));
                     sum += grid;
                     if(grid  == 12)
                     {
@@ -675,24 +681,29 @@ function autoBlockGrid()
                 });
             });
 
-            blocks.each(function()
+            $blocks.each(function()
             {
                 var block = $(this);
                 if(block.data('height')) return;
 
                 var row    = block.closest('.row'),
                     col    = block.parent();
+                console.log('>>>', block.attr('id'), col, col.data('grid'));
                 if(col.data('grid') == 12)
                 {
                     block.data('height', 'auto');
                     block.css('height', 'auto');
+                    console.log('AUTO');
                     return;
                 }
                 var rowNo  = col.data('row');
                 var height = 0;
-                row.find("[data-row='" + rowNo + "']")
-                   .each(function(){height = Math.max($(this).find('.panel-block').outerHeight(), height);})
-                   .find('.panel-block')
+                row.children("[data-row='" + rowNo + "']")
+                   .each(function()
+                    {
+                        height = Math.max($(this).children('.row').outerHeight() - 20, Math.max($(this).children('.panel-block').outerHeight(), height));
+                    })
+                   .children('.panel-block')
                    .css('height', height).data('height', height);
             });
         }
