@@ -688,12 +688,10 @@ function autoBlockGrid()
 
                 var row    = block.closest('.row'),
                     col    = block.parent();
-                console.log('>>>', block.attr('id'), col, col.data('grid'));
                 if(col.data('grid') == 12)
                 {
                     block.data('height', 'auto');
                     block.css('height', 'auto');
-                    console.log('AUTO');
                     return;
                 }
                 var rowNo  = col.data('row');
