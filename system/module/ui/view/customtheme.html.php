@@ -18,7 +18,8 @@
           <td>
             <div class='row'>
               <?php foreach($attributes as $label => $params):?>
-              <div class='col-sm-3' data-id='<?php echo $id?>'><?php $this->ui->printFormControl($label, $params);?></div>
+              <?php $value = isset($setting[$params['name']]) ? $setting[$params['name']] : '';?>
+              <div class='col-sm-3'><?php $this->ui->printFormControl($label, $params, $value);?></div>
               <?php endforeach;?>
             </div>
           </td>

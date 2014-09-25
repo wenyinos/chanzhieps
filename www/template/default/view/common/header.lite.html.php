@@ -44,7 +44,7 @@ $themeRoot = $webRoot . "template/default/theme/";
       js::import($jsRoot     . 'all.js');
   }
 
-  css::import(sprintf($webRoot . 'data/theme/%s/%s/style.css', $config->template->name, $config->template->theme));
+  css::import(sprintf($webRoot . 'data/css/%s/%s/style.css?' . $this->config->template->customVersion, $config->template->name, $config->template->theme));
 
   if(isset($pageCSS)) css::internal($pageCSS);
 

@@ -89,12 +89,13 @@ class ui extends control
     }
 
     /**
-     * custom theme
-     *
-     * @param $theme
+     * Custom theme.
+     * 
+     * @param  string $theme 
+     * @param  string $template 
      * @access public
-     * return void
-     **/
+     * @return void
+     */
     public function customTheme($theme = '', $template = '')
     {
         if(empty($template)) $template = $this->config->template->name;
@@ -104,22 +105,28 @@ class ui extends control
         {
             if(isset($templates[$template]) && isset($templates[$template]['themes'][$theme]))
             {
-                $customCssFile  = sprintf($this->config->site->ui->customCssFile, $template, $theme);
-                $savePath       = dirname($customCssFile);
-                if(!is_dir($savePath)) mkdir($savePath, 0755, true);
-                file_put_contents($customCssFile, $this->post->css);
+                $cssFile  = sprintf($this->config->site->ui->customCssFile, $template, $theme);
+                $savePath = dirname($cssFile);
+                if(!is_dir($savePath)) mkdir($savePath, 0777, true);
+                file_put_contents($cssFile, $this->post->css);
 
-                $setting = fixer::input('post')->remove('css,theme')->get();
-                $result  = $this->loadModel('setting')->setItems('system.common.template', array('themeSetting' =>json_encode($setting)));
+                $setting       = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true): array();
+                $postedSetting = fixer::input('post')->remove('template,theme,css')->get();
+
+                $setting[$template][$theme] = $postedSetting;
+
+                $result  = $this->loadModel('setting')->setItems('system.common.template', array('custom' => helper::jsonEncode($setting)) );
                 $this->loadModel('setting')->setItems('system.common.template', array('customVersion' => time()));
                 $this->send(array('result' => 'success', 'message' => $this->lang->ui->themeSaved));
             }
         }
 
-        if($this->config->template->themeSetting) $this->config->themeSetting = json_decode($this->config->template->themeSetting);
+        $setting = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array();
+
+        $this->view->setting = !empty($setting[$template][$theme]) ? $setting[$template][$theme] : array();
 
         $this->view->title      = "<i class='icon-cog'></i> " . $this->lang->ui->customtheme;
-        $this->view->modalWidth = '1000';
+        $this->view->modalWidth = 1000;
         $this->view->theme      = $theme;
         $this->view->template   = $template;
         $this->display();

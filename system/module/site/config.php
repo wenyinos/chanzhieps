@@ -4,7 +4,7 @@ $config->site->help['qq']   = 'http://www.chanzhi.org/book/chanzhieps/57.html';
 
 global $app;
 $config->site->ui = new stdclass();
-$config->site->ui->customCssFile = $app->getDataRoot() . 'theme/%s/%s/style.css';
+$config->site->ui->customCssFile = $app->getDataRoot() . 'css/%s/%s/style.css';
 
 $config->themeSetting = new stdclass();
 $config->themeSetting->primaryColor = '#D1270A' ;
