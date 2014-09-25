@@ -106,22 +106,14 @@ class ui extends control
             if(isset($templates[$template]) && isset($templates[$template]['themes'][$theme]))
             {
                 $cssFile  = sprintf($this->config->site->ui->customCssFile, $template, $theme);
-                $savePath       = dirname($cssFile);
+                $savePath = dirname($cssFile);
                 if(!is_dir($savePath)) mkdir($savePath, 0777, true);
                 file_put_contents($cssFile, $this->post->css);
 
-                $setting       = isset($this->config->template->custom) ? $this->config->template->custom: array();
-                $setting       = array();
+                $setting       = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true): array();
                 $postedSetting = fixer::input('post')->remove('template,theme,css')->get();
 
-                if(isset($setting[$template][$theme]))
-                {
-                    $setting[$template][$theme] = $postedSetting;
-                }
-                else
-                {
-                    $setting[$template] = array($theme => $postedSetting);
-                }
+                $setting[$template][$theme] = $postedSetting;
 
                 $result  = $this->loadModel('setting')->setItems('system.common.template', array('custom' => helper::jsonEncode($setting)) );
                 $this->loadModel('setting')->setItems('system.common.template', array('customVersion' => time()));
@@ -130,6 +122,7 @@ class ui extends control
         }
 
         $setting = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array();
+
         $this->view->setting = !empty($setting[$template][$theme]) ? $setting[$template][$theme] : array();
 
         $this->view->title      = "<i class='icon-cog'></i> " . $this->lang->ui->customtheme;
