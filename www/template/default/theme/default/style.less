@@ -346,6 +346,25 @@ a:visited
     background-color: @navbar-menu-backcolor-active;
 }
 
+@media (max-width: 767px)
+{
+    .navbar-nav > li {display: block; float: left; width: 33.333333333333333%}
+    .navbar-collapse.in {overflow: visible;}
+    .navbar-nav > li.open .dropdown-menu
+    {
+        position: absolute;
+        top: 20px;
+        left: 20%;
+        z-index: 99999;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+        background-color: #f7f7f7;
+    }
+}
+@media (max-width: 500px)
+{
+    .navbar-nav > li {width: 50%;}
+}
+
 @media (min-width: 992px)
 {
     .navbar-nav > li > a
