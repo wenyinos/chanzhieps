@@ -495,7 +495,7 @@ class uiModel extends model
             $value = $default;
         }
 
-        $html .= html::select($name, $list, $value, "class='form-control {$class}' {$alias}" . (empty($tooltip) ? "" : " title='{$tooltip}' data-toggle='tooltip' data-default='{$default}'")) . "\n";
+        $html .= html::select($name, $list, $value, "data-default='{$default}' class='form-control {$class}' {$alias}" . (empty($tooltip) ? "" : " title='{$tooltip}' data-toggle='tooltip'")) . "\n";
 
         $html .= "</div>\n";
         echo $html;
