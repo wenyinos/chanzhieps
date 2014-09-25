@@ -268,13 +268,13 @@ class uri
     {
         global $config;
 
-        $link = '/thread/' . array_shift($params);
+        $link = 'thread/' . array_shift($params);
 
         if(isset($alias['pageID']))  $link .= '/p' . $alias['pageID'];
         $link .= '.' . $config->default->view;
         if(isset($alias['replyID'])) $link .= '#'  . $alias['replyID'];
 
-        return  $config->webRoot . $link;
+        return  getWebRoot(true) . $link;
     }
 
     /**
