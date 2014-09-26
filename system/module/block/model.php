@@ -553,7 +553,8 @@ class blockModel extends model
                     $blockFile = $tplPath . strtolower($block->type) . '.html.php';
                     if(!file_exists($blockFile))
                     {
-                        echo '</div>'; return '';
+                        if($withGrid) echo '</div>';
+                        return '';
                     }
                 }
             }
