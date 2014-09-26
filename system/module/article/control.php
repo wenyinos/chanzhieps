@@ -251,14 +251,15 @@ class article extends control
      */
     public function setCss($articleID)
     {
+        $article = $this->article->getByID($articleID);
         if($_POST)
         {
-            if($this->article->setCss($articleID)) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
+            if($this->article->setCss($articleID)) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin', "type={$article->type}")));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
         $this->view->title   = $this->lang->article->css;
-        $this->view->article = $this->article->getByID($articleID);
+        $this->view->article = $article;
         $this->display();
     }
 
@@ -272,14 +273,15 @@ class article extends control
      */
     public function setJs($articleID)
     {
+        $article = $this->article->getByID($articleID);
         if($_POST)
         {
-            if($this->article->setJs($articleID)) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
+            if($this->article->setJs($articleID)) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin', "type={$article->type}")));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
         $this->view->title   = $this->lang->article->js;
-        $this->view->article = $this->article->getByID($articleID);
+        $this->view->article = $article;
         $this->display();
     }
 }
