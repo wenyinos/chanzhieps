@@ -8,7 +8,7 @@ js::execute($page->js);
 <?php $common->printPositionBar($page);?>
 <div class='row'>
   <?php if(!empty($layouts['page_view'])):?>
-  <div class='col-md-9'>
+  <div class='col-md-9 col-main'>
   <?php else:?>
   <div class='col-md-12'>
   <?php endif;?>
@@ -30,7 +30,7 @@ js::execute($page->js);
     </div>
   </div>
   <?php if(!empty($layouts['page_view'])):?>
-  <div class='col-md-3'><?php $this->block->printRegion($layouts, 'page_view', 'side');?></div>
+  <div class='col-md-3 col-side'><?php $this->block->printRegion($layouts, 'page_view', 'side');?></div>
   <?php endif;?>
 </div>
 <?php include TPL_ROOT . 'common/footer.html.php'; ?>
