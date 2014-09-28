@@ -43,9 +43,10 @@ $config->views  = ',html,json,xml,'; // Supported view types.
 $config->site = new stdclass();
 
 $config->template = new stdclass();
-$config->template->name   = 'default';    // Supported themes.
-$config->template->theme  = 'default';    // Supported themes.
-$config->template->parser = 'default';         // Default parser.
+$config->template->name          = 'default';    // Supported themes.
+$config->template->theme         = 'default';    // Supported themes.
+$config->template->parser        = 'default';         // Default parser.
+$config->template->customVersion = '';
 
 /* Suported languags. */
 $config->langs['zh-cn'] = '简体';
