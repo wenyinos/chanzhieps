@@ -44,7 +44,7 @@ $navs = $this->tree->getChildren(0, 'blog');
 
   if($config->template->name == 'default' and $config->template->theme != 'default' and $config->template->theme != 'colorful')
   {
-      css::import(css::import($themeRoot . $config->template->theme . '/style.css'));
+      css::import($themeRoot . $config->template->theme . '/style.css');
   }
 
   /* Import customed css file if it exists. */

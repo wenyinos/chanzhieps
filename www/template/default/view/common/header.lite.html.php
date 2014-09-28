@@ -46,7 +46,7 @@ $themeRoot = $webRoot . "template/default/theme/";
 
   if($config->template->theme != 'default' and $config->template->theme != 'colorful')
   {
-      css::import(css::import($themeRoot . $config->template->theme . '/style.css'));
+      css::import($themeRoot . $config->template->theme . '/style.css');
   }
   /* Import customed css file if it exists. */
   $customCssFile = $this->app->getDataRoot() . 'css' . DS . $this->config->template->name . DS . $this->config->template->theme . DS . 'style.css';
