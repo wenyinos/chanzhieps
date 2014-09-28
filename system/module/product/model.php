@@ -205,7 +205,7 @@ class productModel extends model
     /**
      * Get the prev and next product.
      * 
-     * @param  int    $current  the current product id.
+     * @param  int    $current  the current product order.
      * @param  int    $category the category id.
      * @access public
      * @return array
@@ -216,8 +216,8 @@ class productModel extends model
            ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
            ->where('t2.category')->eq($category)
             ->beginIF(RUN_MODE == 'front')->andWhere('t1.status')->eq('normal')->fi()
-           ->andWhere('t2.id')->lt($current)
-           ->orderBy('t1.order')
+           ->andWhere('t1.order')->lt($current)
+           ->orderBy('t1.order_desc')
            ->limit(1)
            ->fetch();
 
@@ -225,8 +225,8 @@ class productModel extends model
            ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
            ->where('t2.category')->eq($category)
             ->beginIF(RUN_MODE == 'front')->andWhere('t1.status')->eq('normal')->fi()
-           ->andWhere('t2.id')->gt($current)
-           ->orderBy('t1.order_desc')
+           ->andWhere('t1.order')->gt($current)
+           ->orderBy('t1.order')
            ->limit(1)
            ->fetch();
 
