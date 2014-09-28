@@ -35,7 +35,6 @@ $themeRoot = $webRoot . "template/default/theme/";
       js::import($jsRoot . 'my.js');
 
       css::import($webRoot . 'zui/css/min.css');
-      css::import($themeRoot . 'common/style.css');
       css::import($jsRoot    . 'jquery/treeview/min.css');
   }
   else
@@ -43,6 +42,7 @@ $themeRoot = $webRoot . "template/default/theme/";
       css::import($themeRoot . 'default/all.css');
       js::import($jsRoot     . 'all.js');
   }
+  css::import($themeRoot . 'common/style.css');
 
   if($config->template->theme != 'default' and $config->template->theme != 'colorful')
   {
