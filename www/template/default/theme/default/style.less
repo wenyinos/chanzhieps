@@ -33,6 +33,12 @@
 {
     .line-gradient(lighten(@color, 2.5%), darken(@color, 1%));
 }
+
+.line-gradient-with-image(@color; @image) when (@image = 'default'), (@image = 'none')
+{
+    .line-gradient(@color);
+}
+
 .box-shadow(@shadow)
 {
   -moz-box-shadow    : @shadow;
@@ -370,7 +376,7 @@ a:visited
     }
     .navbar-header
     {
-        .line-gradient(@navbar-backcolor);
+        .line-gradient-with-image(@navbar-backcolor, @navbar-background-image);
     }
 }
 @media (max-width: 500px)
@@ -388,7 +394,7 @@ a:visited
     .navbar,
     .navbar-nav > li > a
     {
-        .line-gradient(@navbar-backcolor);
+        .line-gradient-with-image(@navbar-backcolor, @navbar-background-image);
     }
 
     .navbar-nav > li > a:hover,

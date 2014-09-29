@@ -6,7 +6,7 @@ $(function()
 
     $css.height($form.height());
 
-    $('[data-toggle="tooltip"]').tooltip({container: '#triggerModal'});
+    $('[data-toggle="tooltip"]').tooltip({container: '#ajaxModal'});
 
     tempColor = new Color();
     $('.color').each(function()
