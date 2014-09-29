@@ -12,8 +12,8 @@
     <div class='tab-pane theme-control-tab-pane' id='<?php echo $group?>Tab'>
       <table class='table table-form borderless'>
         <?php
-        $options = $config->ui->themes[$theme][$group];
-        foreach($options as $selector => $attributes):
+        $options = isset($config->ui->themes[$theme][$group]) ? $config->ui->themes[$theme][$group] : '';
+        if($options) foreach($options as $selector => $attributes):
         ?>
         <tr class='theme-control-group'>
           <th><?php echo $lang->ui->{$selector};?></th>
