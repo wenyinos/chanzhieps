@@ -47,7 +47,6 @@ $themeRoot  = $baseDir . '/www/template/default/theme/';
 
 /* Common css files. */
 $cssCode  = str_replace('../fonts', '../../../../zui/fonts', file_get_contents($baseDir . '/www/zui/css/min.css'));
-$cssCode .= file_get_contents($themeRoot . 'default/style.css');
 $cssCode .= file_get_contents($jsRoot . 'jquery/treeview/min.css');
 
 /* Combine them. */
