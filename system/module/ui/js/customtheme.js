@@ -6,7 +6,7 @@ $(function()
 
     $css.height($form.height());
 
-    $('[data-toggle="tooltip"]').tooltip({container: '#triggerModal'});
+    $('[data-toggle="tooltip"]').tooltip({container: '#ajaxModal'});
 
     tempColor = new Color();
     $('.color').each(function()
@@ -140,7 +140,7 @@ $(function()
 
             if(val)
             {
-                if(type === 'image' && val != 'inherit')
+                if(type === 'image' && val != 'inherit' && val != 'none' && val.indexOf('url(') != 0)
                 {
                     val = 'url(' + val + ')';
                 }
