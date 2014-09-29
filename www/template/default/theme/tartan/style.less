@@ -72,7 +72,7 @@
     font-family: @font;
 }
 
-.background-image(@image) when not(@image = inherit)
+.background-image(@image) when not(@image = inherit), not(@image = none)
 {
     background-image: @image;
 }

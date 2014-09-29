@@ -140,7 +140,7 @@ $(function()
 
             if(val)
             {
-                if(type === 'image' && val != 'inherit')
+                if(type === 'image' && val != 'inherit' && val != 'none' && val.indexOf('url(') != 0)
                 {
                     val = 'url(' + val + ')';
                 }

@@ -300,8 +300,12 @@ class uiModel extends model
             $placeholder = $this->lang->ui->none;
             $default     = 'none';
         }
+        if($default == 'inherit')
+        {
+            $placeholder = $this->lang->ui->theme->default;
+        }
 
-        $this->printTextbox($id, $value, $this->lang->ui->$label, '', $this->lang->ui->none, '', "data-default='{$default}' data-type='image'", $this->lang->ui->theme->backImageTip);
+        $this->printTextbox($id, $value, $this->lang->ui->$label, '', $placeholder, '', "data-default='{$default}' data-type='image'", $this->lang->ui->theme->backImageTip);
     }
 
     /**
