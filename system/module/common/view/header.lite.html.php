@@ -44,8 +44,8 @@ $themeRoot = $webRoot . "template/default/theme/";
 
   if(RUN_MODE == 'admin')
   {
-      css::import($themeRoot . 'default/admin.css');
       css::import($themeRoot . 'default/style.css');
+      css::import($themeRoot . 'default/admin.css');
       js::import($jsRoot . 'my.admin.js');
   }
 
