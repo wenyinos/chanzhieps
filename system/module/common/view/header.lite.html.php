@@ -34,7 +34,6 @@ $themeRoot = $webRoot . "template/default/theme/";
       js::import($jsRoot . 'my.js');
 
       css::import($webRoot . 'zui/css/min.css');
-      css::import($themeRoot . 'default/style.css');
       css::import($jsRoot    . 'jquery/treeview/min.css');
   }
   else
@@ -46,6 +45,7 @@ $themeRoot = $webRoot . "template/default/theme/";
   if(RUN_MODE == 'admin')
   {
       css::import($themeRoot . 'default/admin.css');
+      css::import($themeRoot . 'default/style.css');
       js::import($jsRoot . 'my.admin.js');
   }
 
