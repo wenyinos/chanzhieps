@@ -90,7 +90,7 @@
     background-image: @image;
 }
 
-a:visited {color: @text-color-inverse}
+a:visited {color: @text-color}
 a:hover, a:focus {color: @color-primary}
 
 .btn-primary {color: @text-color-inverse; background-color: @color-primary; border-color: @color-primary-dark}
@@ -98,6 +98,7 @@ a:hover, a:focus {color: @color-primary}
 .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {background-image: none}
 .btn-link {color: @color-primary}
 .btn-link:hover, .btn-link:focus {color: @color-primary-dark}
+a.btn-primary:visited, a.btn-danger:visited, a.btn-info:visited, a.warning-info:visited, a.btn-success:visited {color: @text-color-inverse;}
 
 .label-primary {background-color: @color-primary}
 .label-primary[href]:hover, .label-primary[href]:focus {background-color: @color-primary-dark}
