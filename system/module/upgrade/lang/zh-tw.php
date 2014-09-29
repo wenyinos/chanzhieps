@@ -50,3 +50,4 @@ $lang->upgrade->fromVersions['2_5_beta'] = '2.5.beta';
 $lang->upgrade->fromVersions['2_5_1']    = '2.5.1';
 $lang->upgrade->fromVersions['2_5_2']    = '2.5.2';
 $lang->upgrade->fromVersions['2_5_3']    = '2.5.3';
+$lang->upgrade->fromVersions['3.0']      = '3.0';

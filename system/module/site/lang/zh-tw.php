@@ -27,7 +27,8 @@ $lang->site->copyright     = '創建年份';
 $lang->site->allowUpload   = '允許上傳附件';
 $lang->site->allowedFiles  = '允許附件類型';
 
-$lang->site->setBasic      = "設置基本信息";
+$lang->site->setBasic      = "基本信息設置";
+$lang->site->setUpload     = "檔案上傳設置";
 $lang->site->setOauth      = "開放登錄設置";
 $lang->site->setSinaOauth  = "新浪微博接入";
 $lang->site->setQQOauth    = "QQ接入";
