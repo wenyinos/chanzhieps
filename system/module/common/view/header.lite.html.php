@@ -32,21 +32,16 @@ $themeRoot = $webRoot . "template/default/theme/";
       js::import($jsRoot . 'chanzhi.js');
       js::import($jsRoot . 'jquery/treeview/min.js');
       js::import($jsRoot . 'my.js');
+      js::import($jsRoot . 'my.admin.js');
 
       css::import($webRoot . 'zui/css/min.css');
       css::import($jsRoot    . 'jquery/treeview/min.css');
+      css::import($themeRoot . 'default/admin.css');
   }
   else
   {
-      css::import($themeRoot . 'default/all.css');
-      js::import($jsRoot     . 'all.js');
-  }
-
-  if(RUN_MODE == 'admin')
-  {
-      css::import($themeRoot . 'default/style.css');
-      css::import($themeRoot . 'default/admin.css');
-      js::import($jsRoot . 'my.admin.js');
+      css::import($themeRoot . 'default/all.admin.css');
+      js::import($jsRoot     . 'all.admin.js');
   }
 
   if(isset($pageCSS)) css::internal($pageCSS);

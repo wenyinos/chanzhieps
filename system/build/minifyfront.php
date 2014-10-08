@@ -24,7 +24,13 @@ $allJSFile  = $jsRoot . 'all.js';
 $jsCode = '';
 foreach($jsFiles as $jsFile) $jsCode .= "\n". file_get_contents($jsFile);
 $result = file_put_contents($allJSFile, $jsCode);
-if($result) echo "create all.js success\n";
+if($result) echo "create all.js success.\n";
+
+$adminAllJSFile  = $jsRoot . 'all.admin.js';
+$jsCode .= "\n". file_get_contents($jsRoot . 'my.admin.js'); 
+$result = file_put_contents($adminAllJSFile, $jsCode);
+if($result) echo "create all.admin.js success\n";
+
 
 $ie8Code = file_get_contents($jsRoot . 'html5shiv/min.js');
 $ie8Code .= file_get_contents($jsRoot . 'respond/min.js');
@@ -51,11 +57,14 @@ $cssCode .= file_get_contents($jsRoot . 'jquery/treeview/min.css');
 
 /* Combine them. */
 $cssFile = $themeRoot . "default/all.css";
-$result  = file_put_contents($cssFile, $cssCode);
-if($result)
-{
-    echo "压缩CSS成功！\n";
-}
+$frontCssCode = $cssCode . file_get_contents($themeRoot . 'common/style.css');
+$result  = file_put_contents($cssFile, $frontCssCode);
+if($result) echo "create all.admin.js success\n";
+
+$adminCssFile = $themeRoot . 'default/all.admin.css';
+$adminCssCode = $cssCode . file_get_contents($themeRoot . 'default/admin.css');
+$result = file_put_contents($adminCssFile, $adminCssCode);
+if($result) echo "Compress Css success!\n";
 
 /* Compress it. */
 `java -jar ~/bin/yuicompressor/build/yuicompressor.jar --type css $cssFile -o $cssFile`;
