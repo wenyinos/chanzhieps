@@ -50,7 +50,12 @@ class productModel extends model
         $product->images = $this->file->getByObject('product', $productID, $isImage = true );
 
         $product->image = new stdclass();
-        $product->image->list    = $product->images;
+        $product->image->list = array();
+        foreach($product->images as $image)
+        {
+            if($image->editor) continue;
+            $product->image->list[] = $image;
+        }
         $product->image->primary = !empty($product->image->list) ? $product->image->list[0] : '';
          
         return $product;
@@ -113,7 +118,15 @@ class productModel extends model
         {
             if(empty($images[$product->id])) continue;
             $product->image = new stdclass();
-            if(isset($images[$product->id]))  $product->image->list = $images[$product->id];
+            $product->image->list = array();
+            if(isset($images[$product->id]))
+            {
+                foreach($images[$product->id] as $image)
+                {
+                    if($image->editor) continue;
+                    $product->image->list[] = $image;
+                }
+            }
             if(!empty($product->image->list)) $product->image->primary = $product->image->list[0];
         }
         

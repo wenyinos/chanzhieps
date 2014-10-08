@@ -26,7 +26,7 @@ js::execute($product->js);
   <div class='col-md-9 col-main'>
     <div class='panel panel-body panel-product'>
       <div class='row'>
-        <?php if(!empty($product->images)):?>
+        <?php if(!empty($product->image->list)):?>
         <div class='col-md-5'>
           <div class='product-image media-wrapper'>
             <?php $title = $product->image->primary->title ? $product->image->primary->title : $product->name;?>
@@ -47,7 +47,7 @@ js::execute($product->js);
         <?php else:?>
         <div class='col-md-12'>
         <?php endif;?>
-          <div class='product-property<?php echo empty($product->images)?' product-lack-img':'';?>'>
+          <div class='product-property<?php echo empty($product->image->list) ? ' product-lack-img' : '';?>'>
             <h1 class='header-dividing'><?php echo $product->name;?></h1>
             <ul class='list-unstyled meta-list'>
               <?php
