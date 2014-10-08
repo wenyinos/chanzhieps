@@ -574,16 +574,16 @@ class blockModel extends model
 
             $style  = '<style>';
             $style .= '#block' . $block->id . '{';
-            $style .= isset($content->backgroundColor) ? 'background-color:' . $content->backgroundColor . ' !important;' : '';
-            $style .= isset($content->textColor) ? 'color:' . $content->textColor . ' !important;;' : '';
-            $style .= isset($content->borderColor) ? 'border-color:' . $content->borderColor . ' !important;;' : '';
+            $style .= !empty($content->backgroundColor) ? 'background-color:' . $content->backgroundColor . ' !important;' : '';
+            $style .= !empty($content->textColor) ? 'color:' . $content->textColor . ' !important;;' : '';
+            $style .= !empty($content->borderColor) ? 'border-color:' . $content->borderColor . ' !important;' : '';
             $style .= '}';
             $style .= '#block' . $block->id . ' .panel-heading{';
-            $style .= isset($content->titleColor) ? 'color:' .$content->titleColor . ';' : '';
-            $style .= isset($content->titleBackground) ? 'background:' .$content->titleBackground . ' !important;;' : '';
+            $style .= !empty($content->titleColor) ? 'color:' .$content->titleColor . ';' : '';
+            $style .= !empty($content->titleBackground) ? 'background:' .$content->titleBackground . ' !important;;' : '';
             $style .= '}';
-            $style .= isset($content->iconColor) ? '#block' . $block->id . ' i{color:' .$content->iconColor . ' !important;}' : '';
-            $style .= isset($content->linkColor) ? '#block' . $block->id . ' a{color:' .$content->linkColor . ' !important;}' : '';
+            $style .= !empty($content->iconColor) ? '#block' . $block->id . ' i{color:' .$content->iconColor . ' !important;}' : '';
+            $style .= !empty($content->linkColor) ? '#block' . $block->id . ' a{color:' .$content->linkColor . ' !important;}' : '';
             $style .= '</style>';
 
             echo $containerHeader;
