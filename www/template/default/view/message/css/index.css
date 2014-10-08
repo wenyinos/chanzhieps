@@ -5,7 +5,8 @@
 .panel-body>.comments-list>.comment:last-child {margin-bottom:10px;}
 .comment p{padding-left:3px;}
 .comment>.comments-list {margin-top: 5px; margin-left: 18px; padding-left: 25px;}
-.comment>.comment {margin: 8px auto; }
+.comment>.comment {margin: 8px auto 0; }
+.comment>.comment {padding: 0 8px; }
 .panel-body>.comments-list>.comment>.comment {border:1px solid #ccc;opacity:0.6;}
 .comment:hover {background-color: #fafafa;}
 .comment>.comments-list>.comment:hover {background-color: #fff;}
