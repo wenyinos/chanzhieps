@@ -59,7 +59,7 @@ class site extends control
             $cache   = $this->loadModel('cache')->createConfigCache();
 
             if(!$cache) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->error->noWritable, $this->app->getTmpRoot() . 'cache')));
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setuploadconfigure')));
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setupload')));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
 
