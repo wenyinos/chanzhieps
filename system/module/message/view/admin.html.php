@@ -78,7 +78,11 @@ EOT;
       </tr>
       <tr>
         <td class='content-box'>
+          <?php if($message->type == 'reply'):?>
+            <dl class='alert alert-info'><?php $this->message->getObject($message);?></dl>
+          <?php endif;?>
           <?php echo html::textarea('', $message->content, "rows='2' class='form-control borderless' spellcheck='false'");?>
+          <?php if($message->type != 'reply') $this->message->getAdminReplies($message);?>
         </td>
       </tr>
       <?php endforeach;?>
