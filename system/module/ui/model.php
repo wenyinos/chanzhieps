@@ -26,7 +26,9 @@ class uiModel extends model
         foreach($folders as $folder)
         {
             $templateName = str_replace($this->app->getTplRoot(), '', $folder);
-            $config = Spyc::YAMLLoadString(file_get_contents($folder . DS . 'doc' . DS . $this->app->getClientLang() . '.yaml'));
+            $docFile      = $folder . DS . 'doc' . DS . $this->app->getClientLang() . '.yaml';
+            if(!is_file($docFile)) continue;
+            $config       = Spyc::YAMLLoadString(file_get_contents($docFile));
             if(empty($config)) continue;
             $templates[$templateName] = $config;
         }
