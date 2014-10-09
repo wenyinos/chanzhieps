@@ -1,5 +1,5 @@
 -- Insert data into `eps_block`;
-INSERT INTO `eps_block` (`id`, `type`, `title`, `content`) VALUES
+INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`) VALUES
 (1, 'latestArticle', 'Latest Article', '{"category":"0","limit":"7"}', 'default'),
 (2, 'hotArticle', 'Hot Article', '{"category":"0","limit":"7"}', 'default'),
 (3, 'latestProduct', 'Latest Product', '{"category":"0","limit":"3","image":"show"}', 'default'),
