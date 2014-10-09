@@ -79,7 +79,7 @@ class fileModel extends model
             ->andWhere('objectID')->in($objectID)
             ->beginIf(isset($isImage) and $isImage)->andWhere('extension')->in($this->config->file->imageExtensions)->fi() 
             ->beginIf(isset($isImage) and !$isImage)->andWhere('extension')->notin($this->config->file->imageExtensions)->fi()
-            ->orderBy('`primary`') 
+            ->orderBy('`primary`, editor_desc') 
             ->fetchGroup('objectID');
 
         /* Process these files. */
