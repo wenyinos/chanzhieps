@@ -457,7 +457,7 @@ a:hover,a:active{color: #6e2e16;}
 .wechat-block {background: #F5F0CC;}
 
 /* header */
-#siteName{color: #fff}
+#siteName, #siteSlogan {color: #6E2E16}
 
 /* headNav. */
 #headNav{top: 30%; background-color: #e3d7a2;background-color:rgba(227,215,162,0.75); -moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px;color: #f1f1f1;}
@@ -469,8 +469,6 @@ a:hover,a:active{color: #6e2e16;}
 #headNav .caret{border-top-color: #4b624f; border-bottom-color: #4b624f;}
 #headNav .dropdown-menu a {display: block;background-color: #fff;color: #333;}
 #headNav nav > a:hover, #msgBox:hover,#msgBox:hover a{background-color: #6E2E16; color: #fff; text-decoration: none; -webkit-transition:background 0.5s; -moz-transition:background 0.5s; -o-transition:background 0.5s; transition:background 0.5s;}
-
-#siteSlogan{color: #E3D7A2}
 
 /* navbar settings.*/
 #navbar{background: #c4b274;border-radius: 2px;border: none;}
