@@ -31,6 +31,7 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
           <td>
             <div class='colorplate clearfix'>
               <div class='input-group color active' data='<?php echo $slide->titleColor;?>'>
+                <label class='input-group-addon'><?php echo $lang->slide->titleColor;?></label>
                 <?php echo html::input('titleColor', $slide->titleColor, "class='form-control input-color text-latin' placeholder='" . $lang->slide->colorTip . "'");?>
                 <span class='input-group-btn'>
                   <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'> <i class='icon icon-question'></i> <span class='caret'></span></button>
@@ -44,15 +45,17 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
         </tr>
         <tr>
           <th><?php echo $lang->slide->mainLink;?></th>
-          <td><?php echo html::input('mainLink', $slide->mainLink, "class='form-control'");?></td>
           <td>
-            <div class='w-100px'>
-              <label class='checkbox'>
-                <?php $checked = (isset($slide->target) and $slide->target) ? 'checked' : '';?>
-                <?php echo "<input type='checkbox' name='target' id='target' value='1' $checked /><span>{$lang->slide->newWindow}</span>" ?>
-              </label>
+            <div class='input-group'>
+              <?php echo html::input('mainLink', $slide->mainLink, "class='form-control'");?>
+              <div class='input-group-addon'>
+                <label class='checkbox'>
+                  <?php $checked = (isset($slide->target) and $slide->target) ? 'checked' : '';?>
+                  <?php echo "<input type='checkbox' name='target' id='target' value='1' $checked /><span>{$lang->slide->newWindow}</span>" ?>
+                </label>
+              </div>
             </div>
-          </td><td></td>
+          </td>
         </tr>
         <tr>
           <th><?php echo $lang->slide->background->type;?></th>
@@ -89,7 +92,7 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
         </tr>
         <tr class='bg-section' data-id='image'>
           <td><?php echo html::file('files[]', "tabindex='-1' class='form-control'");?></td>
-          <td colspan='3'><label class='text-info'><?php echo $lang->slide->suitableSize;?></label></td>
+          <td colspan='2'><label class='text-info'><?php echo $lang->slide->suitableSize;?></label></td>
         </tr>
         <?php if (empty($slide->label)):?>
         <tr>
@@ -113,8 +116,14 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
               </div>
             </div>
           </td>
-          <td><?php echo html::input('buttonUrl[0]', '', "class='form-control' placeholder='{$lang->slide->buttonUrl}'");?></td>
-          <td class='w-100px'><?php echo html::checkbox('buttonTarget', $lang->slide->target, '', "class='button-target'") . html::hidden('buttonTarget[0]', '');?></td>
+          <td>
+            <div class='input-group'>
+              <?php echo html::input('buttonUrl[0]', '', "class='form-control' placeholder='{$lang->slide->buttonUrl}'");?>
+              <div class='input-group-addon'>
+                <?php echo html::checkbox('buttonTarget', $lang->slide->target, '', "class='button-target'") . html::hidden('buttonTarget[0]', '');?>
+              </div>
+            </div>
+          </td>
           <td><?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus btn btn-mini'") . html::a('javascript:;', "<i class='icon-remove'></i>", "class='delete btn-mini btn'");?></td>
         </tr>
         <?php else: ?>
@@ -138,19 +147,25 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
               </div>
             </div>
           </td>
-          <td><?php echo html::input("buttonUrl[{$key}]", isset($slide->buttonUrl[$key]) ? $slide->buttonUrl[$key] : '', "class='form-control' placeholder='{$lang->slide->buttonUrl}'");?></td>
-          <td class='w-100px'><?php echo html::checkbox('buttonTarget', $lang->slide->target, isset($slide->buttonTarget[$key]) ? $slide->buttonTarget[$key] : '', "class='button-target'") . html::hidden("buttonTarget[$key]", '');?></td>
+          <td>
+            <div class='input-group'>
+              <?php echo html::input("buttonUrl[{$key}]", isset($slide->buttonUrl[$key]) ? $slide->buttonUrl[$key] : '', "class='form-control' placeholder='{$lang->slide->buttonUrl}'");?>
+              <div class='input-group-addon'>
+                <?php echo html::checkbox('buttonTarget', $lang->slide->target, isset($slide->buttonTarget[$key]) ? $slide->buttonTarget[$key] : '', "class='button-target'") . html::hidden("buttonTarget[$key]", '');?>
+              </div>
+            </div>
+          </td>
           <td><?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus btn btn-mini'") . html::a('javascript:;', "<i class='icon-remove'></i>", "class='delete btn-mini btn'");?></td>
         </tr>
         <?php endforeach;?>
         <?php endif ?>
         <tr>
           <th><?php echo $lang->slide->summary;?></th>
-          <td colspan='4'><?php echo html::textarea('summary', htmlspecialchars($slide->summary), 'class="form-control"');?></td>
+          <td colspan='3'><?php echo html::textarea('summary', htmlspecialchars($slide->summary), 'class="form-control"');?></td>
         </tr>
         <tr>
           <td></td>
-          <td colspan='4'>
+          <td colspan='3'>
             <?php echo html::hidden('id', $id);?>
             <?php echo html::hidden('image', $slide->image);?>
             <?php echo html::submitButton();?>
@@ -181,8 +196,14 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
             </div>
           </div>
         </td>
-        <td><?php echo html::input('buttonUrl[key]', '', "class='form-control' placeholder='{$lang->slide->buttonUrl}'");?></td>
-        <td class='w-100px'><?php echo html::checkbox('buttonTarget', $lang->slide->target, '', "class='button-target'") . html::hidden('buttonTarget[0]', '');?></td>
+        <td>
+          <div class='input-group'>
+            <?php echo html::input('buttonUrl[key]', '', "class='form-control' placeholder='{$lang->slide->buttonUrl}'");?>
+            <div class='input-group-addon'>
+              <?php echo html::checkbox('buttonTarget', $lang->slide->target, '', "class='button-target'") . html::hidden('buttonTarget[0]', '');?>
+            </div>
+          </div>
+        </td>
         <td><?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus btn btn-mini'") . html::a('javascript:;', "<i class='icon-remove'></i>", "class='delete btn-mini btn'");?></td>
       </tr>
     </tbody>
