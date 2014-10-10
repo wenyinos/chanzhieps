@@ -29,11 +29,11 @@ $themeRoot = $webRoot . "theme/";
       </div>
       <div class='form-group'> 
         <label class='col-md-2 control-label'><?php echo $lang->category->name;?></label>
-        <div class='col-md-6 required'>
+        <div class='col-md-9 required'>
           <div class="input-group">
             <?php echo html::input('name', $category->name, "class='form-control'");?>
             <?php if($category->type != 'forum' or $category->parent != 0):?>
-            <span class="input-group-addon">
+            <span class="input-group-addon w-70px">
               <label class='checkbox'>
                 <?php $checked = $category->link ? 'checked' : '';?>
                 <?php echo "<input type='checkbox' name='isLink' id='isLink' value='1' {$checked} /><span>{$lang->category->isLink}</span>" ?>
@@ -43,10 +43,12 @@ $themeRoot = $webRoot . "theme/";
           </div>
         </div>
       </div>
+      <?php if($category->type != 'forum' or $category->parent != 0):?>
       <div class='form-group link'> 
         <label class='col-md-2 control-label'><?php echo $lang->category->link;?></label>
         <div class='col-md-9 required'><?php echo html::input('link', $category->link, "class='form-control' placeholder='{$lang->tree->placeholder->link}'");?></div>
       </div>
+      <?php endif;?>
       <div class='categoryInfo'>
         <div class='form-group'> 
           <label class='col-md-2 control-label'><?php echo $lang->category->alias;?></label>
@@ -54,7 +56,7 @@ $themeRoot = $webRoot . "theme/";
             <div class="input-group">
               <span class="input-group-addon"><?php echo $aliasAddon;?></span>
               <?php echo html::input('alias', $category->alias, "class='input-xsm form-control' placeholder='{$lang->alias}'");?>
-              <span class="input-group-addon">.html</span>
+              <span class="input-group-addon w-70px">.html</span>
             </div>
           </div>
         </div>
