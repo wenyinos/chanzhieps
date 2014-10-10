@@ -112,7 +112,7 @@ tr.text-center > td.text-right, tr.text-center > th.text-right {text-align: righ
 .meta-list {display: table; width: 100%;}
 .meta-list>li {display: table-row;}
 .meta-name,.meta-value {padding: 8px 6px; display: table-cell; vertical-align: middle;}
-.meta-name {color: #999; text-align: right;}
+.meta-name {text-align: right;}
 
 /* Captcha */
 .captcha {width: 100%; background-color: #fafafa; padding: 8px 10px; border: 1px solid #CCC; border-radius: 2px;}
