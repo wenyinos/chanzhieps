@@ -154,7 +154,7 @@ $lang->product->currency     = '货币设置';
 /* Menu of UI module. */
 $lang->ui = new stdclass();
 $lang->ui->menu = new stdclass();
-$lang->ui->menu->logo    = 'LOGO设置|ui|setlogo|';
+$lang->ui->menu->logo    = 'Logo设置|ui|setlogo|';
 $lang->ui->menu->favicon = '网站图标|ui|setfavicon|';
 $lang->ui->menu->slide   = array('link' => '幻灯片设置|slide|admin|', 'alias' => 'create,edit');
 $lang->ui->menu->theme   = '模板设置|ui|settemplate|';
