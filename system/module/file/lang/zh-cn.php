@@ -12,6 +12,7 @@
 $lang->file->common     = '附件';
 $lang->file->upload     = '上传附件';
 $lang->file->browse     = '附件列表';
+$lang->file->imageList  = '图片列表';
 $lang->file->download   = '下载附件';
 $lang->file->edit       = '编辑';
 $lang->file->primary    = '封面';
