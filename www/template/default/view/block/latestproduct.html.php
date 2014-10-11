@@ -30,7 +30,8 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
       <?php foreach($products as $product):?>
       <?php 
       $productCategory = array_shift($product->categories);
-      $url = helper::createLink('product', 'view', "id=$product->id", "category={$productCategory->alias}&name=$product->alias");
+      $categoryAlias = isset($productCategory->alias) ? $productCategory->alias : '';
+      $url = helper::createLink('product', 'view', "id=$product->id", "category={$categoryAlias}&name=$product->alias");
       ?>
       <?php if(!empty($product->image)): ?>
       <div class='col-md-12'>
