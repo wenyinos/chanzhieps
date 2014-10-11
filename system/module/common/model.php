@@ -603,6 +603,8 @@ class commonModel extends model
      */
     public function printForum($board = '')
     {
+        if($board == 'forum') echo '<li>' . html::a(helper::createLink('forum', 'index'), $this->lang->forumHome) . '</li>';
+
         if(empty($board->pathNames)) return '';
 
         $divider = $this->lang->divider;
