@@ -5,7 +5,7 @@ $(document).ready(function()
         if(data.result == 'success') $.reloadAjaxModal(1500);
     }); 
     $.setAjaxLoader('.edit', '#ajaxModal');
-    $('a.option').click(function(data)
+    $(document).on('click', 'a.option', function(data)
     {
         $.getJSON($(this).attr('href'), function(data) 
         {
