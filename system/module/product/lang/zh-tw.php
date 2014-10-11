@@ -49,7 +49,7 @@ $lang->product->currencyIcon = "<i class='icon-yen'> </i>";
 $lang->product->list       = '產品列表';
 $lang->product->hot        = '熱門產品';
 $lang->product->admin      = '維護產品';
-$lang->product->create     = '發佈產品';
+$lang->product->create     = '添加產品';
 $lang->product->edit       = '編輯產品';
 $lang->product->files      = '附件';
 $lang->product->images     = '圖片';
