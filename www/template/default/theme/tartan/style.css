@@ -275,7 +275,7 @@ table.captcha td label {padding: 0;}
 .file-form .fileBox {margin-bottom: 10px; width: 100%}
 .file-form table.fileBox td {padding: 0!important}
 .file-form .fileBox .input-control > input[type='file'] {width: 100%; height: 100%; height: 26px; line-height: 26px; border: none; position: relative;}
-.file-form .fileBox td .btn {border-radius: 0; border-left: none}
+.file-form .fileBox td .btn {border-radius: 0; border: 1px solid #7a94b2; border-left: none}
 .file-form .fileBox td input, .file-form .fileBox td .form-control {border-radius: 0;}
 .file-form .file-wrapper.form-control {border-right: 0}
 
@@ -506,7 +506,7 @@ a:hover,a:active{color: #35636e;}
 .wechat-block {background: #F5F0CC;}
 
 /* buttons. */
-.btn{border: 1px solid #7a94b2; padding: 6px 12px; -webkit-transition: 0.25s linear; -moz-transition: 0.25s linear; -o-transition: 0.25s linear; transition: 0.25s linear; -webkit-backface-visibility: hidden; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none;}
+.btn{padding: 6px 12px; -webkit-transition: 0.25s linear; -moz-transition: 0.25s linear; -o-transition: 0.25s linear; transition: 0.25s linear; -webkit-backface-visibility: hidden; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none;}
 .btn-primary{background: #7a94b2; border: none;}
 a.btn-primary:visited {color: #f1f1f1}
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active{background: #667b94;}
