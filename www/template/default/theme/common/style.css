@@ -73,7 +73,7 @@ tr.text-center > td.text-right, tr.text-center > th.text-right {text-align: righ
 .navbar-toggle:hover .icon-bar, .navbar-toggle:focus .icon-bar {background: #aaa}
 
 /* Breadcrumb */
-.breadcrumb {color: #808080; padding: 0;}
+.breadcrumb {color: #808080; padding: 0; margin-bottom: 10px;}
 /* This style can added an icon before self: .breadcrumb:before {color: #aaa; font-size: 14px; margin:0 5px; display: inline-block; content: "\e63d"; font-family: ZenIcon;}*/
 @media (max-width: 767px){
   .m-article-view .breadcrumb > li:last-child {display: none}
@@ -112,7 +112,7 @@ tr.text-center > td.text-right, tr.text-center > th.text-right {text-align: righ
 .meta-list {display: table; width: 100%;}
 .meta-list>li {display: table-row;}
 .meta-name,.meta-value {padding: 8px 6px; display: table-cell; vertical-align: middle;}
-.meta-name {color: #999; text-align: right;}
+.meta-name {text-align: right;}
 
 /* Captcha */
 .captcha {width: 100%; background-color: #fafafa; padding: 8px 10px; border: 1px solid #CCC; border-radius: 2px;}

@@ -91,7 +91,7 @@
     Theme.prototype.getLess = function()
     {
         /* get template */
-        var url = this.options.lessFile;
+        var url = this.options.lessFile + '?v=' + (new Date()).getTime();
         this.less = useLessCache ? lessTemplates[url] : null;
         if(!this.less)
         {

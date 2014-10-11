@@ -12,6 +12,7 @@
 $lang->slide->common = '幻灯片';
 
 $lang->slide->title      = '标题';
+$lang->slide->titleColor = '标题颜色';
 $lang->slide->image      = '图片';
 $lang->slide->mainLink   = '链接';
 $lang->slide->summary    = '摘要';

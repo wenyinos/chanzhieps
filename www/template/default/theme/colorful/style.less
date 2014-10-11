@@ -193,7 +193,7 @@ ol {padding-left: 20px;}
 .meta-list {display: table; width: 100%;}
 .meta-list>li {display: table-row;}
 .meta-name,.meta-value {padding: 8px 6px; display: table-cell; vertical-align: middle;}
-.meta-name {color: #999; text-align: right;}
+.meta-name {text-align: right;}
 
 /* style of text */
 .text-latin {font-family: Arial;}
@@ -318,7 +318,7 @@ a.tag-link {color: inherit;}
 .table td .page,.table td .pager {padding: 0;margin: 0;}
 
 /* --- HEADER --- */
-#header {margin: 0 -15px; padding: 20px 15px 10px; min-height: 80px; vertical-align: middle; position: relative;}
+#header {margin: 0 -15px; padding: 10px 15px; min-height: 80px; vertical-align: middle; position: relative;}
 #headTitle {display: table; min-height: 55px}
 #siteName,#siteLogo,#siteSlogan {display: table-cell; vertical-align: middle;}
 
@@ -699,6 +699,17 @@ body {
     -webkit-border-radius: @borderRadius @borderRadius 0 0;
     -moz-border-radius: @borderRadius @borderRadius 0 0;
     border-radius: @borderRadius @borderRadius 0 0;
+}
+.panel > .panel-heading a,
+.panel > .panel-heading a:visited,
+.panel > .panel-heading a:active
+{
+    opacity: 0.8;
+    color: @colorPrimaryInverseDim;
+}
+.panel > .panel-heading a:hover
+{
+  opacity: 1;
 }
 .panel.panel-pure > .panel-heading {color: @colorFore}
 .panel-block.panel-borderless .panel-heading {color: @colorFore}

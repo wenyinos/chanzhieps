@@ -119,6 +119,14 @@ a:visited
     .col-side {width: @sidebar-width}
 }
 
+/* Header */
+#siteName, #siteSlogan {color: contrast(@background-color, #6E2E16, #E3D7A2)}
+.fixedSiteNameContrastColor(@backColor) when (@backColor = transparent)
+{
+    #siteName, #siteSlogan {color: #6E2E16}
+}
+.fixedSiteNameContrastColor(@background-color);
+
 /* Footer */
 #footer
 {

@@ -48,7 +48,7 @@
         <td colspan='2'>
           <div class='input-group'>
             <?php echo html::input('title', $article->title, "class='form-control'");?>
-            <span class="input-group-addon">
+            <span class="input-group-addon w-70px">
               <label class='checkbox'>
                 <?php $checked = $article->link ? 'checked' : '';?>
                 <?php echo "<input type='checkbox' name='isLink' id='isLink' value='1' {$checked} /><span>{$lang->article->isLink}</span>"?>
@@ -75,7 +75,7 @@
             <span class="input-group-addon">http://<?php echo $this->server->http_host . $config->webRoot . $type?>/id_</span>
             <?php endif;?>
             <?php echo html::input('alias', $article->alias, "class='form-control' placeholder='{$lang->alias}'");?>
-            <span class='input-group-addon'>.html</span>
+            <span class='input-group-addon w-70px'>.html</span>
           </div>
         </td>
       </tr>
