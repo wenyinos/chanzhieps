@@ -315,8 +315,8 @@ a.tag-link {color: inherit;}
 .table td .page,.table td .pager {padding: 0;margin: 0;}
 
 /* --- HEADER --- */
-#header {margin: 0 -15px; padding: 20px 15px 10px; min-height: 80px; vertical-align: middle; position: relative;}
-#headTitle {display: table; min-height: 55px}
+#header {margin: 0 -15px; padding: 15px; min-height: 80px; vertical-align: middle; position: relative;}
+#headTitle {display: table; min-height: 55px; margin-top: 0;}
 #siteName,#siteLogo,#siteSlogan {display: table-cell; vertical-align: middle;}
 
 #headNav {position: absolute; right: 15px; top: 40%;}
@@ -489,8 +489,8 @@ a:hover,a:active{color: #1ABC9C;}
 #navbar .dropdown-submenu:hover>a:after {border-left-color: #fff;}
 
 /* Panel. */
-.panel,.list,.page-wrapper .list,#focus .panel-block,#focus .panel-block:hover,#footer,#links,.page-wrapper .article {border-radius: 6px;background: #EDEFF1;border:none;}
-.panel > .panel-heading, .nav-stacked.nav-primary>li.nav-heading, .list > header,.page-wrapper .list > header ,.panel-block > .panel-heading,#focus .panel-block .panel-heading,#focus .panel-block:hover .panel-heading{background: #34495E;color: #f1f1f1;border: none;-moz-border-radius:6px 6px 0 0; -webkit-border-radius:6px 6px 0 0; border-radius:6px 6px 0 0;}
+.panel,.list,.page-wrapper .list,#focus .panel-block,#focus .panel-block:hover,#footer,#links,.page-wrapper .article {border-radius: 6px;background: #EDEFF1; border: 1px solid #bed0e3;}
+.panel > .panel-heading, .nav-stacked.nav-primary>li.nav-heading, .list > header,.page-wrapper .list > header ,.panel-block > .panel-heading,#focus .panel-block .panel-heading,#focus .panel-block:hover .panel-heading{background: #34495E;color: #f1f1f1;border: none;-moz-border-radius:6px 6px 0 0; -webkit-border-radius:6px 6px 0 0; border-radius:6px 6px 0 0; margin: 0 -1px;}
 .panel > .panel-heading .text-muted{color: #95A5A6}
 .panel.panel-pure .panel-heading{background-color: transparent; color: #666;border-bottom: 2px solid #BDC3C7}
 .panel .treeview .hitarea{background-color: #EDEFF1!important}
@@ -551,7 +551,7 @@ textarea{height: auto;}
 .nav-content > li > a:hover{background-color: #1ABC9C;color: #fff;}
 
 /* forum */
-.thread.panel{border-color:#2C3E50!important; box-shadow: none!important;}
+.thread.panel{border-color:#bed0e3!important; box-shadow: none!important;}
 .thread .panel-heading{background: #2C3E50!important;color: #fff!important;}
 
 /* items */
