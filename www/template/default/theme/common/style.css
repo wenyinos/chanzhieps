@@ -318,8 +318,8 @@ td #aliasLabel {display: table-row;}
 
 /* === Specail part === */
 /* Header */
-#header {position: relative; padding-bottom: 10px;]}
-#headTitle {display: table; margin-top: 10px;}
+#header {position: relative; padding-bottom: 10px;}
+#headTitle {display: table; margin-top:10px;}
 #headTitle > .wrapper {display: table-row;}
 #siteLogo,
 #siteName,
