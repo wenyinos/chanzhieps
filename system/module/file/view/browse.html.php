@@ -6,7 +6,7 @@
       <th class='text-center'><?php echo $lang->file->common;?></th>
       <th class='text-center w-60px'><?php echo $lang->file->extension;?></th>
       <th class='text-center w-80px'><?php echo $lang->file->size;?></th>
-      <th class='text-center'><?php echo $lang->file->addedBy;?></th>
+      <th class='text-center w-100px'><?php echo $lang->file->addedBy;?></th>
       <th class='text-center w-160px'><?php echo $lang->file->addedDate;?></th>
       <th class='text-center w-150px'><?php echo $lang->actions;?></th>
     </tr>
