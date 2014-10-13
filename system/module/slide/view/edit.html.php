@@ -66,7 +66,7 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
           <th><?php echo $lang->slide->background->color;?></th>
           <td>
             <div class='row'>
-              <div class='colorplate clearfix col-sm-4'>
+              <div class='colorplate clearfix col-sm-6'>
                 <div class='input-group color active' data='<?php echo $slide->backgroundColor;?>'>
                   <?php echo html::input('backgroundColor', $slide->backgroundColor, "class='form-control input-color text-latin' placeholder='" . $lang->slide->colorTip . "'");?>
                   <span class='input-group-btn'>
