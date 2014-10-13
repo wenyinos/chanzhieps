@@ -21,7 +21,7 @@ js::execute($article->js);
 include TPL_ROOT . 'common/treeview.html.php';
 ?>
 <?php
-$root = '<li>' . $this->lang->currentPos . $this->lang->colon .  html::a($this->inlink('index'), $lang->home) . '</li>';
+$root = '<li>' . $this->lang->currentPos . $this->lang->colon .  html::a($this->inlink('index'), $lang->blog->home) . '</li>';
 $common->printPositionBar($category, $article, '', $root);
 ?>
 <div class='row'>
