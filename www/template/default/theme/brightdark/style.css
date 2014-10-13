@@ -536,9 +536,9 @@ textarea{height: auto;}
 /* .nav */
 .nav>li>a:hover, .nav>li>a:focus{background-color: #f4f8fc}
 .nav-primary {border-radius: 2px;overflow: hidden;}
-.nav-primary > li > a{color: #da3b26; background:#EDEFF1;border-color: ##BDC3C7;border-left: 0;border-right:0;border-radius: 2px}
-.nav-primary > li:hover > a{color: #fff;background-color: #808080;border-color: #808080;box-shadow: none;}
-.nav-stacked.nav-primary>li.active>a, .nav-stacked.nav-primary>li.active>a:hover, .nav-stacked.nav-primary>li.active>a:focus{color: #f1f1f1;background-color: #da3b26;border-color: #da3b26;box-shadow: none;}
+.nav-primary > li > a, .nav-secondary > li > a{color: #333; background:#EDEFF1;border-color: #BDC3C7;border-left: 0;border-right:0;border-radius: 2px}
+.nav-primary > li:hover > a, .nav-secondary > li:hover > a{color: #fff;background-color: #808080;border-color: #808080;box-shadow: none;}
+.nav-stacked.nav-primary>li.active>a, .nav-stacked.nav-primary>li.active>a:hover, .nav-stacked.nav-primary>li.active>a:focus, .nav-stacked.nav-secondary>li.active>a, .nav-stacked.nav-secondary>li.active>a:hover, .nav-stacked.nav-secondary>li.active>a:focus {color: #da3b26; background-color: #f4f8fc;border-color: #ddd;box-shadow: none;}
 
 /* pager */
 .pager > li > a{background-color: #da3b26;color: #f1f1f1;border:none;margin-right: 10px;}
