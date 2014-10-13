@@ -14,8 +14,8 @@
 <?php include '../../common/view/codeeditor.html.php';?>
 <form id='ajaxForm' action="<?php echo inlink('setjs', "productID=$product->id");?>" method='post'>
   <table class="table table-form">
-    <tr><td><?php echo html::textarea('js', $product->js, "rows=5 class='form-control codeeditor' data-mode='javascript'");?></td></tr>
-    <tr><td><?php echo html::submitButton();?></td></tr>
+    <tr><td><?php echo html::textarea('js', $product->js, "rows=5 class='form-control codeeditor' data-mode='javascript' data-height='300px'");?></td></tr>
+    <tr><td><div class='editor-actions'><?php echo html::submitButton();?></div></td></tr>
   </table>
 </form>
 <?php include '../../common/view/footer.modal.html.php';?>
