@@ -40,7 +40,8 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
                 </span>
               </div>
             </div>
-          </td><td></td>
+          </td>
+          <td class='w-70px'></td>
         </tr>
         <tr>
           <th><?php echo $lang->slide->mainLink;?></th>
