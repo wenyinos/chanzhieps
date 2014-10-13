@@ -41,31 +41,23 @@ include TPL_ROOT . 'common/treeview.html.php';
             <div class='card-info'><span class="label label-success label-badge" title='<?php echo $lang->product->views;?>'><?php echo $product->views;?></span></div>
             <div class='card-heading'>
               <?php echo html::a(inlink('view', "id={$product->id}", "category={$category->alias}&name=$product->alias"), '<strong>' . $product->name . '</strong>');?>
-            </div>
-            <div class='card-content text-latin'>
-            <?php
-            if($product->promotion != 0)
-            {
-                echo "<strong class='text-muted'>" . $this->config->product->currency .'</strong>';
-                echo "<strong class='text-danger text-lg'>" . $product->promotion . '</strong>&nbsp;&nbsp;';
-                if($product->price != 0)
-                {
-                    echo "<del class='text-muted'>" . $this->config->product->currency . $product->price .'</del>';
-                }
-            }
-            else
-            {
-                if($product->price != 0)
-                {
-                    echo "<strong class='text-muted'>" . $this->config->product->currency .'</strong>';
-                    echo "<strong class='text-important text-lg'>" . $product->price . '</strong>&nbsp;&nbsp;';
-                }
-                else
-                {
-                    echo "<span class='text-lg'>&nbsp;</span>";
-                }
-            }
-            ?>
+              <span class='card-content text-latin'>
+              <?php
+              if($product->promotion != 0)
+              {
+                  echo "<strong class='text-muted'>"  .'</strong>';
+                  echo "<strong class='text-danger'>" . $this->config->product->currency . $product->promotion . '</strong>&nbsp;&nbsp;';
+              }
+              else
+              {
+                  if($product->price != 0)
+                  {
+                      echo "<strong class='text-muted'>" . $this->config->product->currency .'</strong>';
+                      echo "<strong class='text-danger'>" . $this->config->product->currency . $product->price . '</strong>&nbsp;&nbsp;';
+                  }
+              }
+              ?>
+              </span>
             </div>
           </div>
         </div>

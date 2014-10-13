@@ -48,7 +48,10 @@ js::execute($article->js);
       <footer>
         <div class='article-moreinfo clearfix'>
           <?php if($article->editor):?> 
-          <p class='text-right pull-right'><?php printf($lang->article->lblEditor, $this->loadModel('user')->getByAccount($article->editor)->realname, formatTime($article->editedDate));?></p>
+          <?php $editor = $this->loadModel('user')->getByAccount($article->editor);?>
+          <?php if(!empty($editor)): ?> 
+          <p class='text-right pull-right'><?php printf($lang->article->lblEditor, $editor->realname, formatTime($article->editedDate));?></p>
+          <?php endif;?>
           <?php endif;?>
           <?php if($article->keywords):?>
           <p class='small'><strong class="text-muted"><?php echo $lang->article->keywords;?></strong><span class="article-keywords"><?php echo $lang->colon . $article->keywords;?></span></p>

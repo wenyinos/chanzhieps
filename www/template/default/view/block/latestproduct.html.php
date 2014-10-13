@@ -40,27 +40,22 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
           <div class='media' style='background-image: url(<?php echo $product->image->primary->middleURL; ?>); background-iamge:none\0;'><?php echo html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"); ?></div>
           <div class='card-heading'>
             <?php echo $product->name;?>
-            <div class='text-latin'>
+            <span class='text-latin'>
             <?php
             if($product->promotion != 0)
             {
-                echo "<span class='text-muted'>{$this->config->product->currency}</span> ";
-                echo "<strong class='text-danger'>" . $product->promotion . '</strong>';
-                if($product->price != 0)
-                {
-                    echo "&nbsp;&nbsp;<del class='text-muted'>{$this->config->product->currency} " . $product->price .'</del>';
-                }
+                echo "&nbsp;&nbsp;";
+                echo "<strong class='text-danger'>{$this->config->product->currency}" . $product->promotion . '</strong>';
             }
             else
             {
                 if($product->price != 0)
                 {
-                    echo "<span class='text-muted'>{$this->config->product->currency}</span> ";
-                    echo "<strong class='text-important'>" . $product->price . '</strong>&nbsp;&nbsp;';
+                    echo "<strong class='text-danger'>{$this->config->product->currency}" . $product->price . '</strong>';
                 }
             }
             ?>
-            </div>
+            </span>
           </div>
         </a>
       </div>
