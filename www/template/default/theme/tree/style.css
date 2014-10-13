@@ -112,6 +112,7 @@ ol {padding-left: 20px;}
 .item .media {text-align: center; overflow: hidden; background-color: #f1f1f1; max-height: 100px; transition:all 0.3s; max-width: 200px}
 .item .media img {max-height: 100%; max-width: 100%; }
 .items .item .text-muted {color: #757575}
+.items .item {border-bottom: 1px solid #c5d5a5;}
 
 /* table */
 .table td > a {display: inline-block;}

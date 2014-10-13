@@ -2,7 +2,7 @@
 <table class='table table-bordered'>
   <thead>
     <tr>
-      <th class='text-center w-40px'><?php echo $lang->file->id;?></th>
+      <th class='text-center w-60px'><?php echo $lang->file->id;?></th>
       <th class='text-center'><?php echo $lang->file->common;?></th>
       <th class='text-center w-60px'><?php echo $lang->file->extension;?></th>
       <th class='text-center w-80px'><?php echo $lang->file->size;?></th>
