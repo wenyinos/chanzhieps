@@ -509,7 +509,7 @@ a:hover,a:active{color: #da3b26;}
 
 /* buttons. */
 .btn{padding: 6px 12px; -webkit-transition: 0.25s linear; -moz-transition: 0.25s linear; -o-transition: 0.25s linear; transition: 0.25s linear; -webkit-backface-visibility: hidden; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none;border-radius: 2px}
-.btn-primary{background: #2E353F;}
+.btn-primary{background: #2E353F; border: none;}
 a.btn-primary:visited {color: #f1f1f1}
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active{background: #da3b26;}
 .btn-default{color: #f1f1f1; background: #2C3E50;}
