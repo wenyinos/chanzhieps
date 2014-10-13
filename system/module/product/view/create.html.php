@@ -145,10 +145,12 @@
           <td colspan='2'>
             <div class='row form-group'>
               <div class="col-xs-3"> <?php echo html::input('label[0]', '', "class='form-control' placeholder='{$lang->product->placeholder->label}'" )?></div>
-              <div class="col-xs-8"> <?php echo html::input('value[0]', '', "class='form-control' placeholder='{$lang->product->placeholder->value}'" )?></div>
-              <div class="col-xs-1">
-                <?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='btn btn-link pull-left btn-mini btn-add'");?>
-                <?php echo html::a('javascript:;', "<i class='icon-remove'></i>", "class='btn btn-link pull-left btn-mini btn-remove'");?>
+              <div class="col-xs-9">
+                <div class='input-group'>
+                <?php echo html::input('value[key]', '', "class='form-control' placeholder='{$lang->product->placeholder->value}'" )?>
+                <span class='input-group-addon'><i class='icon-plus'></i></span>
+                <span class='input-group-addon'><i class='icon-remove'></i></span>
+                </div>
               </div>
             </div>
           </td>
@@ -162,10 +164,12 @@
     <div class='hide row-custom'>
       <div class='row form-group'>
         <div class="col-xs-3"> <?php echo html::input('label[key]', '', "class='form-control' placeholder='{$lang->product->placeholder->label}'" )?></div>
-        <div class="col-xs-8"> <?php echo html::input('value[key]', '', "class='form-control' placeholder='{$lang->product->placeholder->value}'" )?></div>
-        <div class="col-xs-1">
-          <?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='btn btn-link pull-left btn-mini btn-add'");?>
-          <?php echo html::a('javascript:;', "<i class='icon-remove'></i>", "class='btn btn-link pull-left btn-mini btn-remove'");?>
+        <div class="col-xs-9">
+          <div class='input-group'>
+          <?php echo html::input('value[key]', '', "class='form-control' placeholder='{$lang->product->placeholder->value}'" )?>
+          <span class='input-group-addon'><i class='icon-plus'></i></span>
+          <span class='input-group-addon'><i class='icon-remove'></i></span>
+          </div>
         </div>
       </div>
     </div>
