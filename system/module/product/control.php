@@ -238,7 +238,20 @@ class product extends control
         $category = $category[0]->id;
 
         $currentCategory = $this->session->productCategory;
-        if($currentCategory > 0 && isset($product->categories[$currentCategory])) $category = $currentCategory;  
+        if($currentCategory > 0)
+        {
+            if(isset($product->categories[$currentCategory]))
+            {
+                $category = $currentCategory;  
+            }
+            else
+            {
+                foreach($product->categories as $productCategory)
+                {
+                    if(strpos($productCategory->path, $currentCategory)) $category = $productCategory->id;
+                }
+            }
+        }
         $category = $this->loadModel('tree')->getByID($category);
 
         $title    = $product->name . ' - ' . $category->name;

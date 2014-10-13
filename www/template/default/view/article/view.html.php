@@ -6,6 +6,7 @@ include TPL_ROOT . 'common/treeview.html.php';
 js::set('path', $article->path);
 js::set('articleID', $article->id);
 js::set('categoryID', $category->id);
+js::set('categoryPath', explode(',', trim($category->path, ',')));
 css::internal($article->css);
 js::execute($article->js);
 ?>
