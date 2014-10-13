@@ -68,4 +68,6 @@ $(function()
         $('.button-target').parent().next('input[type=hidden]').val('');
         $('input:checked').parent().next('input[type=hidden]').val('_blank');
     });
+
+    $('#height').parents('tr').find('.required-wrapper').eq(0).remove();
 });

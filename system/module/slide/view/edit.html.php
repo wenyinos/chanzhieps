@@ -64,26 +64,27 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
         </tr>
         <tr class='bg-section' data-id='color'>
           <th><?php echo $lang->slide->background->color;?></th>
-          <td colspan='3'>
-            <div class='colorplate clearfix'>
-              <div class='input-group color active' data='<?php echo $slide->backgroundColor;?>'>
-                <?php echo html::input('backgroundColor', $slide->backgroundColor, "class='form-control input-color text-latin' placeholder='" . $lang->slide->colorTip . "'");?>
-                <span class='input-group-btn'>
-                  <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'> <i class='icon icon-question'></i> <span class='caret'></span></button>
-                  <div class='dropdown-menu colors'>
-                    <?php echo $colorPlates; ?>
-                  </div>
-                </span>
-              </div>
-            </div>
-          </td>
-        </tr>
-        <tr class='bg-section' data-id='color'>
-          <th><?php echo $lang->slide->height;?></th>
           <td>
-            <div class='input-group'>
-              <?php echo html::input('height', $slide->height, "class='form-control'");?>
-              <span class='input-group-addon'>px</span>
+            <div class='row'>
+              <div class='colorplate clearfix col-sm-4'>
+                <div class='input-group color active' data='<?php echo $slide->backgroundColor;?>'>
+                  <?php echo html::input('backgroundColor', $slide->backgroundColor, "class='form-control input-color text-latin' placeholder='" . $lang->slide->colorTip . "'");?>
+                  <span class='input-group-btn'>
+                    <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
+                      <i class='icon icon-question'></i> 
+                      <span class='caret'></span>
+                    </button>
+                    <div class='dropdown-menu colors'>
+                      <?php echo $colorPlates; ?>
+                    </div>
+                  </span>
+                </div>
+              </div>
+              <div class='col-sm-5 input-group'>
+                <span class='input-group-addon'><?php echo $lang->slide->height;?></span>
+                <?php echo html::input('height', $slide->height, "class='form-control'");?>
+                <span class='input-group-addon'>px</span>
+              </div>
             </div>
           </td>
         </tr>
