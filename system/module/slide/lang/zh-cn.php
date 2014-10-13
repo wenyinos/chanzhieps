@@ -29,7 +29,7 @@ $lang->slide->background->color = '背景颜色';
 $lang->slide->background->typeList = new stdclass();
 
 $lang->slide->background->typeList->image = '图片';
-$lang->slide->background->typeList->color = '纯色';
+$lang->slide->background->typeList->color = '颜色';
 
 $lang->slide->height      = '高度';
 $lang->slide->url         = '链接';
