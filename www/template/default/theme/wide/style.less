@@ -115,7 +115,7 @@ a.list-group-item:hover, a.list-group-item:focus {background-color: @color-prima
 .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {background-color: @color-primary;}
 
 .nav-secondary > li > a:hover,
-.nav-primary > li > a:hover {background-color: @color-primary; border-color: #ddd; color: @text-color-inverse;}
+.nav-primary > li > a:hover {background-color: lighten(@color-primary, 5%); border-color: #ddd; color: @text-color-inverse;}
 .nav-secondary > li.active > a,
 .nav-secondary > li.active > a:hover,
 .nav-secondary > li.active > a:focus,
@@ -141,12 +141,12 @@ a.card:hover, .card:hover a {color: @color-primary}
 .comment:hover > .content > .actions > a {color: @color-primary}
 
 /* Navbar */
-#navbar .dropdown-menu > li > a:hover,
-#navbar .dropdown-menu > li > a:focus,
-#navbar .dropdown-submenu:hover > a,
-#navbar .dropdown-submenu:focus > a,
 #navbar .nav > li > a:hover,
 #navbar .nav > li > a:focus,
+#navbar .dropdown-submenu:focus > a,
+#navbar .dropdown-submenu:hover > a,
+#navbar .dropdown-menu > li > a:focus,
+#navbar .dropdown-menu > li > a:hover {color: #ffffff; background: lighten(@color-primary, 8%);}
 #navbar .nav > li.active > a,
 #navbar .nav > li.active > a:hover {color: #ffffff; background: @color-primary;}
 
