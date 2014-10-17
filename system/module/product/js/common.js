@@ -16,13 +16,13 @@ $(document).ready(function()
     }
     
     key = v.key;
-    $(document).on('click', '.btn-add', function()
+    $(document).on('click', '.icon-plus', function()
     {
         $(this).parents('.row').after($('.row-custom').html().replace(/key/g, key));
         key ++;
     })
 
-    $(document).on('click', '.btn-remove', function()
+    $(document).on('click', '.icon-remove', function()
     {
         if($(this).parents('td').find('.row').size() > 1)
         {

@@ -114,10 +114,15 @@ a.btn-primary:visited, a.btn-danger:visited, a.btn-info:visited, a.warning-info:
 a.list-group-item:hover, a.list-group-item:focus {background-color: @color-primary-dark; color: @text-color-inverse}
 .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {background-color: @color-primary;}
 
+.nav-secondary > li > a:hover,
+.nav-primary > li > a:hover {background-color: lighten(@color-primary, 5%); border-color: #ddd; color: @text-color-inverse;}
+.nav-secondary > li.active > a,
+.nav-secondary > li.active > a:hover,
+.nav-secondary > li.active > a:focus,
 .nav-primary > li.active > a,
 .nav-primary > li.active > a:hover,
-.nav-primary > li.active > a:focus {background-color: @color-primary; border-color: @color-primary-dark}
-.booksNav .nav-primary > li.active > a, .booksNav .nav-primary > li.active > a:hover, .booksNav .nav-primary > li.active > a:focus {color: @color-primary;}
+.nav-primary > li.active > a:focus {background-color: @color-primary; border-color: #ddd}
+.booksNav .nav-primary > li.active > a, .booksNav .nav-primary > li.active > a:hover, .booksNav .nav-primary > li.active > a:focus, .nav-secondary > li.active > a, .nav-secondary > li.active > a:hover, .nav-secondary > li.active > a:focus {color: @color-primary; background: #fff;}
 
 .pager > .active > a, .pager > .active > span, .pager > .active > a:hover, .pager > .active > span:hover, .pager > .active > a:focus, .pager > .active > span:focus {background-color: @color-primary}
 
@@ -136,12 +141,12 @@ a.card:hover, .card:hover a {color: @color-primary}
 .comment:hover > .content > .actions > a {color: @color-primary}
 
 /* Navbar */
-#navbar .dropdown-menu > li > a:hover,
-#navbar .dropdown-menu > li > a:focus,
-#navbar .dropdown-submenu:hover > a,
-#navbar .dropdown-submenu:focus > a,
 #navbar .nav > li > a:hover,
 #navbar .nav > li > a:focus,
+#navbar .dropdown-submenu:focus > a,
+#navbar .dropdown-submenu:hover > a,
+#navbar .dropdown-menu > li > a:focus,
+#navbar .dropdown-menu > li > a:hover {color: #ffffff; background: lighten(@color-primary, 8%);}
 #navbar .nav > li.active > a,
 #navbar .nav > li.active > a:hover {color: #ffffff; background: @color-primary;}
 
@@ -167,6 +172,7 @@ a.card:hover, .card:hover a {color: @color-primary}
 /* Right docker */
 .docker-right .icon-mobile-phone {background: @color-primary}
 
+/* Company page */
 .m-company-index .row > .col-md-9 > .panel > .panel-heading i {background: @color-primary; color: @text-color-inverse;}
 
 #blogNav .nav > li > a:hover,

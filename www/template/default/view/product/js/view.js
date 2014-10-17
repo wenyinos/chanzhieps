@@ -6,5 +6,5 @@ $(document).ready(function()
         return false;
     });
 
-    $('#commentBox').load( createLink('message', 'comment', 'objectType=article&objectID=' + v.productID) );  
+    $('#commentBox').load( createLink('message', 'comment', 'objectType=product&objectID=' + v.productID) );  
 })

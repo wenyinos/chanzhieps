@@ -12,6 +12,7 @@
 $lang->slide->common = 'Slides';
 
 $lang->slide->title      = 'Title';
+$lang->slide->titleColor = 'Title Color';
 $lang->slide->image      = 'Image';
 $lang->slide->mainLink   = 'Url';
 $lang->slide->summary    = 'Summary';

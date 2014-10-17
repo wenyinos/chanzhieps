@@ -315,8 +315,8 @@ a.tag-link {color: inherit;}
 .table td .page,.table td .pager {padding: 0;margin: 0;}
 
 /* --- HEADER --- */
-#header {margin: 0 -15px; padding: 20px 15px 10px; min-height: 80px; vertical-align: middle; position: relative;}
-#headTitle {display: table; min-height: 55px}
+#header {margin: 0 -15px; padding: 15px; min-height: 80px; vertical-align: middle; position: relative;}
+#headTitle {display: table; min-height: 55px; margin-top: 0;}
 #siteName,#siteLogo,#siteSlogan {display: table-cell; vertical-align: middle;}
 
 #headNav {position: absolute; right: 15px; top: 40%;}
@@ -359,14 +359,9 @@ a.tag-link {color: inherit;}
 /* --- FOOTER --- */
 #footer {background-color: #f7f7f7; padding: 20px 15px; border: 1px solid #ddd; border-radius: 4px; text-align: center; position: relative;}
 #footNav {position: absolute; left: 15px; top: 20px;}
-#footNav a {display: inline-block; margin-right: 10px; color: #777;}
-#footNav a:hover {color: #145BCC}
+#footNav a, #powerby a {display: inline-block; margin-right: 10px; color: #777;}
+#footNav a:hover, #powerby a:hover {color: #145BCC}
 #copyrightInfo,#icpInfo {color: #999; font-size: 12px;}
-#powerby {position: absolute; right: 15px; top: 15px; background-color: #ccc; border: #bbb 1px solid; border-radius: 2px; padding: 5px 10px; overflow: hidden; font-size: 12px; transition: all .5s cubic-bezier(0.175,0.885,0.32,1); text-shadow:-1px -1px 0px rgba(0,0,0,0.2); -moz-box-shadow:inset 0px 1px 0 rgba(255,255,255,0.4); -webkit-box-shadow:inset 0px 1px 0 rgba(255,255,255,0.4); box-shadow:inset 0px 1px 0 rgba(255,255,255,0.4);}
-#powerby, #powerby a {color: #fff;}
-#powerby:hover {background-color: #aaa; -moz-box-shadow:0px 1px 2px rgba(0,0,0,0.5); -webkit-box-shadow:0px 1px 2px rgba(0,0,0,0.5); box-shadow:0px 1px 2px rgba(0,0,0,0.5);}
-#powerby:before {content: '.'; display: block; position: absolute; width: 100%; height: 120%; left: -120%; top: -20%; background:-webkit-linear-gradient(0deg,rgba(255, 255, 255, 0),rgba(255, 255, 255, 0.7),rgba(255, 255, 255, 0)); -webkit-transform:skewx(-25deg); -webkit-transition:all .5s; transition:all .5s;}
-#powerby:hover:before {left: 120%;}
 
 /* responsive for mobile devices */
 @media (min-width: 992px) {.carousel-caption{left: 12%\0!important}}
@@ -429,8 +424,7 @@ a.tag-link {color: inherit;}
 .docker-right .table {margin-bottom: 0; font-size: 14px}
 .docker-right .table-borderless td {text-align: center; vertical-align: middle; padding: 0 15px 15px}
 .popover {max-width: 900px}
-.docker-right .icon-mobile-phone, .docker-right .icon-weixin {font-size: 28px; color: #fff; background: #145CCD; display: inline-block; width: 36px; line-height: 36px; height: 36px; border-radius: 25px; vertical-align: middle; margin-right: 10px;}
-.docker-right .icon-weixin {background: #64ab23 url(images/main/weixin.png) no-repeat center}
+.docker-right .icon-mobile-phone, .docker-right .icon-weixin {font-size: 28px; color: #fff; background-color: #145CCD; display: inline-block; width: 36px; line-height: 36px; height: 36px; border-radius: 25px; vertical-align: middle; margin-right: 10px;}
 .docker-right  {vertical-align: middle;}
 .docker-right img {width: 200px; width:auto\0; height: 200px; margin-top: 10px; border: 1px solid #ccc}
 

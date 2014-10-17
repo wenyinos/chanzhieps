@@ -67,4 +67,4 @@ $lang->product->statusList['offline'] = '下架';
 $lang->product->placeholder = new stdclass();
 $lang->product->placeholder->label    = "属性名称：如颜色、价格等";
 $lang->product->placeholder->value    = "属性值：如红色、￥1000等";
-$lang->product->placeholder->currency = "如￥";
+$lang->product->placeholder->currency = "请填写产品价格的货币符号，如人民币填写：￥";

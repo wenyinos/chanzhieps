@@ -208,7 +208,20 @@ class article extends control
         $category = $category[0]->id;
 
         $currentCategory = $this->session->articleCategory;
-        if($currentCategory > 0 && isset($article->categories[$currentCategory])) $category = $currentCategory;  
+        if($currentCategory > 0)
+        {
+            if(isset($article->categories[$currentCategory]))
+            {
+                $category = $currentCategory;  
+            }
+            else
+            {
+                foreach($article->categories as $articleCategory)
+                {
+                    if(strpos($articleCategory->path, $currentCategory)) $category = $articleCategory->id;
+                }
+            }
+        }
 
         $category = $this->loadModel('tree')->getByID($category);
 

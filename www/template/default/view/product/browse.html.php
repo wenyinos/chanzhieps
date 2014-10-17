@@ -52,7 +52,6 @@ include TPL_ROOT . 'common/treeview.html.php';
               {
                   if($product->price != 0)
                   {
-                      echo "<strong class='text-muted'>" . $this->config->product->currency .'</strong>';
                       echo "<strong class='text-danger'>" . $this->config->product->currency . $product->price . '</strong>&nbsp;&nbsp;';
                   }
               }

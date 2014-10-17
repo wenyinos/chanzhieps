@@ -18,6 +18,7 @@ include TPL_ROOT . 'common/treeview.html.php';
 js::set('path',  $product->path);
 js::set('productID', $product->id);
 js::set('categoryID', $category->id);
+js::set('categoryPath', explode(',', trim($category->path, ',')));
 css::internal($product->css);
 js::execute($product->js);
 ?>
