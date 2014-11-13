@@ -14,9 +14,10 @@
 <form id='ajaxForm' action="<?php echo inlink('currency');?>" method='post'>
   <table class="table table-form">
     <tr>
-      <th class='w-70px'><?php echo $lang->product->currency;?></th>
-      <td><?php echo html::input('currency', isset($config->product->currency) ? $config->product->currency : '', "class='form-control' placeholder='{$lang->product->placeholder->currency}'");?></td>
-      <td class='w-160px'><?php echo html::submitButton();?></td>
+      <td><?php echo html::radio('currency', $lang->product->currencyList, isset($config->product->currency) ? $config->product->currency : '');?></td>
+    </tr>
+    <tr>
+      <td><?php echo html::submitButton();?></td>
     </tr>
   </table>
 </form>

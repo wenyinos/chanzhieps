@@ -45,13 +45,13 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
             if($product->promotion != 0)
             {
                 echo "&nbsp;&nbsp;";
-                echo "<strong class='text-danger'>{$this->config->product->currency}" . $product->promotion . '</strong>';
+                echo "<strong class='text-danger'>{$this->lang->product->currencySymbols[$this->config->product->currency]}" . $product->promotion . '</strong>';
             }
             else
             {
                 if($product->price != 0)
                 {
-                    echo "<strong class='text-danger'>{$this->config->product->currency}" . $product->price . '</strong>';
+                    echo "<strong class='text-danger'>{$this->lang->product->currencySymbols[$this->config->product->currency]}" . $product->price . '</strong>';
                 }
             }
             ?>
@@ -79,15 +79,15 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
         {
             if($product->price != 0)
             {
-                echo "<small class='text-muted'>{$this->config->product->currency}</small> ";
+                echo "<small class='text-muted'>{$this->lang->product->currencySymbols[$this->config->product->currency]}</small> ";
                 echo "<del><small class='text-muted'>" . $product->price . "</small></del>";
             }
-            echo "&nbsp; <small class='text-muted'>{$this->config->product->currency}</small> ";
+            echo "&nbsp; <small class='text-muted'>{$this->lang->product->currencySymbols[$this->config->product->currency]}</small> ";
             echo "<strong class='text-danger'>" . $product->promotion . "</strong>";
         }
         else if($product->price != 0)
         {
-            echo "&nbsp; <small class='text-muted'>{$this->config->product->currency}</small> ";
+            echo "&nbsp; <small class='text-muted'>{$this->lang->product->currencySymbols[$this->config->product->currency]}</small> ";
             echo "<strong class='text-important'>" . $product->price . "</strong>";
         }
         ?>

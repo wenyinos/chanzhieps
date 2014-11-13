@@ -7,3 +7,5 @@
 td > .form-group {margin-bottom: 10px;}
 td > .form-group:last-child {margin-bottom: 0;}
 td > .form-group.row .btn {position: relative; margin-top: 5px; display: block; float: left;}
+
+.radio-inline{margin-left: 10px; width: 90px;}
