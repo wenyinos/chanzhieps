@@ -51,7 +51,7 @@ $(document).ready(function()
     if(!headNav.find('nav a').length) headNav.addClass('hide');
 
     /* set right docker */
-    $('#rightDockerBtn').popover({container: 'body', html:true, trigger:'manual'}).mouseenter(function()
+    $('#rightDockerBtn').popover({container: 'body', html:true, trigger:'manual', id: 'dockerPopover'}).mouseenter(function()
     {
         if($('#rightDockerBtn').hasClass('showed')) return;
         $('#rightDocker img[data-src]').each(function()
@@ -61,6 +61,10 @@ $(document).ready(function()
         });
         $(this).addClass('showed').popover('show');
         $("#rightDockerBtn:not('.showed')").popover('hide');
+    });
+    $(window).scroll(function()
+    {
+        $('#rightDockerBtn').popover('hide').removeClass('showed');
     });
     $(document).click(function(){$('#rightDockerBtn').popover('hide').removeClass('showed');}).on('click', '.popover', function(event){event.stopPropagation();});
 });
