@@ -64,10 +64,10 @@ $themeRoot = $webRoot . "theme/";
           <label class='col-md-2 control-label'><?php echo $lang->category->keywords;?></label>
           <div class='col-md-9'><?php echo html::input('keywords', $category->keywords, "class='form-control'");?></div>
         </div>
-      </div>
-      <div class='form-group'> 
-        <label class='col-md-2 control-label'><?php echo $lang->category->desc;?></label>
-        <div class='col-md-9'><?php echo html::textarea('desc', htmlspecialchars($category->desc), "class='form-control' rows=3'");?></div>
+        <div class='form-group'> 
+          <label class='col-md-2 control-label'><?php echo $lang->category->desc;?></label>
+          <div class='col-md-9'><?php echo html::textarea('desc', htmlspecialchars($category->desc), "class='form-control' rows=3'");?></div>
+        </div>
       </div>
       <div class='categoryInfo'>
         <?php if($category->type == 'forum'):?>
