@@ -17,7 +17,7 @@ LTD www.xirangit.com)
 .btn-link {background-color: transparent;}
 
 /* Typesetting */
-ol, ul {padding-left: 20px;}
+ul,ol {margin-top: 10px;}
 .small, small, .label {font-size: 12px;}
 .text-latin {font-family: Arial;}
 .text-lg {font-size: 18px;}
@@ -142,7 +142,7 @@ table.captcha td label {padding: 0;}
 /* Article */
 .article {margin-bottom: 20px; border: 1px solid #ddd; padding: 0}
 
-.article > header {padding: 10px 20px 0;}
+.article > header {padding: 10px 20px;}
 .article > header h1, .article > header h2, .article > header h3 {font-size: 22px}
 .article > header > .dl-inline, .article > header > .abstract {margin: 0 -20px; padding: 10px 20px; border-radius: 0}
 .article > header > .dl-inline {background: none}
