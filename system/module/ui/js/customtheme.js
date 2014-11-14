@@ -85,61 +85,14 @@ $(function()
         $resetThemeBtn.popover({trigger:'manual', content: $resetThemeBtn.data('success-tip'), placement:'left'}).popover('show');
         setTimeout(function(){$resetThemeBtn.popover('destroy')},2000);
     });
-    
-    function getThemeSettings()
+
+    $form.submit(function()
     {
-        var setting = {},
-            $lessTable = $('#lessVarTable tbody').empty();
         $form.find('input.form-control, select.form-control, input[type="hidden"]').each(function()
         {
             var $this = $(this);
-            var val = $this.val(),
-                type = $this.data('type'),
-                name = $this.attr('data-name') || $this.attr('name') || $this.attr('id');
-            var desc = $this.attr('data-desc');
-            if(name === 'css') return;
-            if(!desc)
-            {
-                var $group = $this.closest('.input-group');
-                if($group.hasClass('color'))
-                {
-                    desc = $group.find('.btn').text();
-                }
-                else if($group.hasClass('input-group-textbox') || $group.hasClass('input-group-select'))
-                {
-                    desc = $group.find('.input-group-addon').first().text();
-                }
-                else if($group.hasClass('input-group-textbox-couple'))
-                {
-                    desc = $group.find('.input-group-addon').first().text();
-                    var label = $this.prev('.input-group-addon').text();
-                    if(label != desc)
-                    {
-                        desc += label;
-                    }
-                }
-                desc = ($('a[href="#' + $group.closest('.tab-pane').attr('id') + '"]').text() + ':' + $group.closest('tr').children('th').first().text() + desc).replace(/\n/, '');
-            }
-
-            if(val)
-            {
-                if(type === 'image' && val != 'inherit' && val != 'none' && val.indexOf('url(') != 0)
-                {
-                    val = 'url(' + val + ')';
-                }
-            }
-            else
-            {
-                val = $this.data('default') || $this.attr('placeholder') || null;
-            }
-
-            if(val)
-            {
-                setting[name] = {value: val, desc: desc};
-                $lessTable.append('<tr><td class="name w-p40" style="overflow: hidden"><strong title="{0}">{0}</strong></td><td class="w-p20">{1}</td><td><small>{2}</small></td></tr>'.format(name, val, desc));
-            }
+            if($this.val() === '') $this.val($this.data('origin-default') || $this.data('default') || $this.attr('placeholder') || $this.val()).trigger('change.color');
         });
-        return setting;
-    }
+    });
 });
 

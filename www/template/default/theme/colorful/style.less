@@ -512,32 +512,13 @@ body.body-modal
     background-image: @image;
 }
 
-/*
-   Chanzhi custom theme
-
-   This file built by system automatically.
-   Options:
-   ( '*' mark the key option)
-
-   * colorBackgroud:           @colorBackgroud;
-   * colorFore:                @colorFore;
-   * colorBorder:              @colorBorder;
-   * backgroundImage:          @backgroundImage;
-   * fontSize:                 @fontSize;
-   * colorPrimary:             @colorPrimary;
-     colorPrimaryRgb:          @colorPrimaryRgb;
-     colorPrimaryInverseDim:   @colorPrimaryInverseDim;
-     colorPrimaryInverse:      @colorPrimaryInverse;
-   * colorSecondary:           @colorSecondary;
-     colorSecondaryRgb:        @colorSecondaryRgb;
-     colorSecondaryDark:       @colorSecondaryDark;
-     colorSecondaryLight:      @colorSecondaryLight;
-     colorPale:                @colorPale;
-   * borderRadius:             @borderRadius;
-   * avatarBorderRadius:       @avatarBorderRadius;
-   * borderWidth:              @borderWidth;
-   * borderStyle:              @borderStyle;
-*/
+@darkColor: #333;
+@lightColor: #fff;
+@fore-color: #333;
+@back-color: #fff;
+@border-width: 1px;
+@border-style: solid;
+@border-radius: 3px;
 
 @colorBackgroud: @background-color;
 @colorFore:                @text-color;
@@ -545,7 +526,7 @@ body.body-modal
 @backgroundImage:          @background-image;
 @fontSize:                 @font-size;
 @colorPrimary:             @color-primary;
-@colorPrimaryInverse:      contrast(@color-primary, @fore-color);
+@colorPrimaryInverse:      contrast(@color-primary, @fore-color, @back-color);
 @colorPrimaryInverseDim:   darken(@colorPrimaryInverse, 10%);
 @colorSecondary:           desaturate(darken(@color-primary, 10%), 15%);
 @colorSecondaryDark:       darken(@colorSecondary, 5%);

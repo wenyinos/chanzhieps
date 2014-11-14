@@ -13,7 +13,6 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/codeeditor.html.php';?>
 <?php js::import($jsRoot . 'less/min.js'); ?>
-<?php js::import($jsRoot . 'theme.js'); ?>
 <div class='panel panel-templates'>
   <div class='panel-heading'>
     <strong><?php echo $lang->ui->setTemplate;?></strong>

@@ -14,9 +14,11 @@
 // Default variables
 @darkColor: #333;
 @lightColor: #fff;
-
-// User variables
-@import "@variables";
+@fore-color: #333;
+@back-color: #fff;
+@border-width: 1px;
+@border-style: solid;
+@border-radius: 3px;
 
 // Mixins
 .line-gradient(@top; @bottom)
@@ -33,9 +35,9 @@
 }
 .box-shadow(@shadow)
 {
-  -moz-box-shadow    : @shadow;
-  -webkit-box-shadow : @shadow; // iOS <4.3 & Android <4.1
-  box-shadow         : @shadow;
+    -moz-box-shadow    : @shadow;
+    -webkit-box-shadow : @shadow; // iOS <4.3 & Android <4.1
+    box-shadow         : @shadow;
 }
 .background(@color; @image; @imageRepeat; @imagePositionX; @imagePositionY)
 {
@@ -185,7 +187,7 @@
 
 .btn(@color;)
 {
-    @textColor: contrast(@color, @fore-color);
+    @textColor: contrast(@color, @fore-color, @back-color);
     @border: darken(@color, 12%);
 
     color: @textColor;

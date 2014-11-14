@@ -53,12 +53,13 @@ $(document).ready(initKindeditor);
 function initKindeditor(afterInit)
 {
     $(':input[type=submit]').after("<input type='hidden' id='uid' name='uid' value=" + v.uid + ">");
+    var nextFormControl = 'input:not([type="hidden"]), textarea:not(.ke-edit-textarea), button[type="submit"], select';
 
     $.each(v.editors.id, function(key, editorID)
     {
         if(typeof(v.editors.filterMode) == 'undefined') v.editors.filterMode = true;
         editorTool = eval(v.editors.tools);
-        var K = KindEditor;
+        var K = KindEditor, $editor = $('#' + editorID);
         keEditor = K.create('#' + editorID,
         {
             width:'100%',
@@ -139,8 +140,24 @@ function initKindeditor(afterInit)
                     });
                 }
                 /* End */
+            },
+            afterTab: function(id)
+            {
+                var $next = $editor.next(nextFormControl);
+                if(!$next.length) $next = $editor.parent().next().find(nextFormControl);
+                if(!$next.length) $next = $editor.parent().parent().next().find(nextFormControl);
+                $next = $next.first();
+                var keditor = $next.data('keditor');
+                if(keditor) keditor.focus(); else $next.focus();
             }
         });
+        try
+        {
+            if(!window.editor) window.editor = {};
+            window.editor['#'] = window.editor[editorID] = keEditor;
+            $editor.data('keditor', keEditor);
+        }
+        catch(e){}
     });
 
     if($.isFunction(afterInit)) afterInit();
