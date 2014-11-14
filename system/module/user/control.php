@@ -30,7 +30,7 @@ class user extends control
         parent::__construct();
         if(empty($this->config->oauth->sina)) unset($this->lang->user->menu->sina);
         if(empty($this->config->oauth->qq))   unset($this->lang->user->menu->qq);
-        if(empty($this->loadModel('wechat')->getList())) unset($this->lang->user->menu->wechat);
+        if(!($this->loadModel('wechat')->getList())) unset($this->lang->user->menu->wechat);
     }
 
     /**
@@ -304,6 +304,9 @@ class user extends control
      */
     public function admin()
     {
+        if(empty($this->config->oauth->sina)) unset($this->lang->user->menu->weibo);
+        if(empty($this->config->oauth->qq))   unset($this->lang->user->menu->qq);
+
         $get = fixer::input('get')
             ->setDefault('recTotal', 0)
             ->setDefault('recPerPage', 10)

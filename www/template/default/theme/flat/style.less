@@ -145,7 +145,7 @@
         > li.active > a:active,
         > li.active > a:focus
         {
-            color: contrast(@link-hover-color, @fore-color, @back-color);
+            color: contrast(darken(@link-hover-color, 10%), @fore-color, @back-color);
             background-color: @link-hover-color;
         }
     }
@@ -189,7 +189,7 @@
 
 .btn(@color;)
 {
-    @textColor: contrast(@color, @fore-color, @back-color);
+    @textColor: contrast(darken(@color, 10%), @fore-color, @back-color);
     @border: darken(@color, 12%);
 
     color: @textColor;
