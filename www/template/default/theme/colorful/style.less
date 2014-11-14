@@ -526,7 +526,7 @@ body.body-modal
 @backgroundImage:          @background-image;
 @fontSize:                 @font-size;
 @colorPrimary:             @color-primary;
-@colorPrimaryInverse:      contrast(@color-primary, @fore-color, @back-color);
+@colorPrimaryInverse:      contrast(darken(@color-primary, 10%), @fore-color, @back-color);
 @colorPrimaryInverseDim:   darken(@colorPrimaryInverse, 10%);
 @colorSecondary:           desaturate(darken(@color-primary, 10%), 15%);
 @colorSecondaryDark:       darken(@colorSecondary, 5%);
