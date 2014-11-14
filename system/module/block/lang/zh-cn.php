@@ -72,6 +72,8 @@ $lang->block->gridOptions[4]  = '1/3';
 $lang->block->gridOptions[8]  = '2/3';
 $lang->block->gridOptions[3]  = '1/4';
 $lang->block->gridOptions[9]  = '3/4';
+$lang->block->gridOptions[2]  = '1/6';
+$lang->block->gridOptions[10] = '5/6';
 $lang->block->gridOptions[12] = '100%';
 
 $lang->block->colorTip    = '颜色值如red或#FFF';
