@@ -15,9 +15,11 @@
 // Default variables
 @darkColor: #333;
 @lightColor: #fff;
-
-// User variables
-@import "@variables";
+@fore-color: #333;
+@back-color: #fff;
+@border-width: 1px;
+@border-style: solid;
+@border-radius: 3px;
 
 // Mixins
 .line-gradient(@top; @bottom)
@@ -143,7 +145,7 @@
         > li.active > a:active,
         > li.active > a:focus
         {
-            color: contrast(@link-hover-color, @fore-color);
+            color: contrast(@link-hover-color, @fore-color, @back-color);
             background-color: @link-hover-color;
         }
     }
@@ -187,7 +189,7 @@
 
 .btn(@color;)
 {
-    @textColor: contrast(@color, @fore-color);
+    @textColor: contrast(@color, @fore-color, @back-color);
     @border: darken(@color, 12%);
 
     color: @textColor;
