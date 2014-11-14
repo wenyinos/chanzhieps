@@ -33,6 +33,7 @@ js::execute($product->js);
             <?php $title = $product->image->primary->title ? $product->image->primary->title : $product->name;?>
             <?php echo html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'");?>
           </div>
+          <?php if(count($product->image->list) > 1):?>
           <div class='product-image-menu row'>
             <?php foreach($product->image->list as $image):?>
             <?php if($image->editor) continue;?>
@@ -44,6 +45,7 @@ js::execute($product->js);
             </div>
             <?php endforeach;?>
           </div>
+          <?php endif;?>
         </div>
         <div class='col-md-7'>
         <?php else:?>
