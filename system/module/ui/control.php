@@ -98,17 +98,35 @@ class ui extends control
      */
     public function customTheme($theme = '', $template = '')
     {
+        
         if(empty($template)) $template = $this->config->template->name;
         $templates = $this->ui->getTemplates();
 
+        $cssFile  = sprintf($this->config->site->ui->customCssFile, $template, $theme);
+        $savePath = dirname($cssFile);
+
+        if(!is_writable($savePath))
+        {
+            $this->view->errors = $this->lang->unWritable;
+            $this->display();
+            exit;
+        }
+
         if($_POST)
         {
+            $params = $_POST;
+            foreach($params as $key => $value) if(empty($value)) $params[$key] = 0;
+            unset($params['background-image-position']);
+            unset($params['navbar-background-image-position']);
+            //a($params);exit;
             if(isset($templates[$template]) && isset($templates[$template]['themes'][$theme]))
             {
-                $cssFile  = sprintf($this->config->site->ui->customCssFile, $template, $theme);
-                $savePath = dirname($cssFile);
                 if(!is_dir($savePath)) mkdir($savePath, 0777, true);
-                file_put_contents($cssFile, $this->post->css);
+                $lessTemplate = $this->app->getWwwRoot() . 'template' . DS . $template . DS . 'theme' . DS . $theme . DS . 'style.less';
+
+                $lessc = $this->app->loadClass('lessc');
+                $lessc->setVariables($params);
+                $lessc->compileFile($lessTemplate, $cssFile);
 
                 $setting       = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true): array();
                 $postedSetting = fixer::input('post')->remove('template,theme,css')->get();
@@ -131,6 +149,12 @@ class ui extends control
         $this->view->template   = $template;
         $this->display();
      }
+
+    public function checkSavePath()
+    {
+        $savePath = 
+        is_writable($cssPath);
+    }
 
     /**
      * set logo.
