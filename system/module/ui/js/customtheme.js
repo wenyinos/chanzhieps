@@ -1,7 +1,10 @@
 $(function()
 {
+    $.setAjaxForm('#customThemeForm');
+
+    ajustModalSize();
+
     var $form = $('#customThemeForm');
-    var theme = new Theme($form.data());
     var $css = $('#css');
 
     $css.height($form.height());
@@ -56,20 +59,6 @@ $(function()
         $('#' + name).val($('[data-sid="' + name + '-1"]').val() + ' ' + $('[data-sid="' + name + '-2"]').val());
     });
 
-    $.setAjaxForm('#customThemeForm', function(response)
-    {
-    });
-
-    $form.find('input.form-control, select.form-control').on('keyup change', compileLess);
-
-    $form.submit(function(event)
-    {
-        compileLess();
-    });
-
-    compileLess();
-
-    ajustModalSize();
     $('#ajaxModal .modal-dialog').resize(ajustModalSize);
 
     // Hide tabs
@@ -97,12 +86,6 @@ $(function()
         setTimeout(function(){$resetThemeBtn.popover('destroy')},2000);
     });
     
-    function compileLess()
-    {
-        var css = theme.compile(getThemeSettings());
-        $css.val(css);
-    }
-
     function getThemeSettings()
     {
         var setting = {},

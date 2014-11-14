@@ -32,7 +32,7 @@
     <?php endforeach;?>
   </div>
   <div class="form-footer">
-    <?php echo html::hidden('css', $css) . html::hidden('theme', $theme) . html::hidden('template', $template) . html::submitButton();?>
+    <?php echo html::hidden('theme', $theme) . html::hidden('template', $template) . html::submitButton();?>
   </div>
 </form>
 <?php include '../../common/view/footer.modal.html.php';?>
