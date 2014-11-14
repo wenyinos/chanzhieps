@@ -144,9 +144,9 @@ unset($config->ui->themes['brightdark']['button']);
 unset($config->ui->themes['brightdark']['block']);
 $config->ui->themes['brightdark']['basic']['pageBackground']['backcolor']['default'] = '#2E353F';
 $config->ui->themes['brightdark']['basic']['pageText']['color']['default'] = '#2E353F';
-$config->ui->themes['brightdark']['basic']['aLink']['color']['default'] = '#DA3B26';
-$config->ui->themes['brightdark']['basic']['aVisited']['color']['default'] = '#DA3B26';
-$config->ui->themes['brightdark']['basic']['aHover']['color']['default'] = '#DA3B26';
+$config->ui->themes['brightdark']['basic']['aLink']['color']['default'] = '#3D4DBE';
+$config->ui->themes['brightdark']['basic']['aVisited']['color']['default'] = '#3e4856';
+$config->ui->themes['brightdark']['basic']['aHover']['color']['default'] = '#3D4DBE';
 $config->ui->themes['brightdark']['footer']['border']['border']['default'] = 'none';
 $config->ui->themes['brightdark']['footer']['background']['backcolor']['default'] = '#ECF0F5';
 
