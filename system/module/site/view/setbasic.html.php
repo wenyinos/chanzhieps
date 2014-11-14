@@ -50,6 +50,10 @@
           <td colspan='2'><?php echo html::input('slogan', $this->config->site->slogan, "class='form-control'");?></td>
         </tr>
         <tr>
+          <th><?php echo $lang->site->meta;?></th> 
+          <td colspan='2'><?php echo html::textarea('meta', htmlspecialchars($this->config->site->meta), "class='form-control' rows=5");?></td>
+        </tr>
+        <tr>
           <th><?php echo $lang->site->desc;?></th> 
           <td colspan='2'><?php echo html::textarea('desc', htmlspecialchars($this->config->site->desc), "class='form-control' rows='10'");?></td> 
         </tr>

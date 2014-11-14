@@ -18,6 +18,7 @@ $lang->site->lang          = '语言';
 $lang->site->domain        = '网站域名';
 $lang->site->keywords      = '关键词';
 $lang->site->indexKeywords = '首页关键词';
+$lang->site->meta          = 'meta头信息';
 $lang->site->desc          = '站点描述';
 $lang->site->icp           = '备案编号';
 $lang->site->icpLink       = '备案编号链接';

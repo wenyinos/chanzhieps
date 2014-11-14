@@ -19,9 +19,16 @@ class site extends control
      */
     public function setBasic()
     {
+        $allowedTags = $this->app->user->admin == 'super' ? $this->config->allowedTags->admin : $this->config->allowedTags->front;
+
         if(!empty($_POST))
         {
-            $setting = fixer::input('post')->join('moduleEnabled', ',')->remove('allowedFiles')->setDefault('moduleEnabled', '')->get();
+            $setting = fixer::input('post')
+                ->stripTags('desc,meta', $allowedTags)
+                ->join('moduleEnabled', ',')
+                ->remove('allowedFiles')
+                ->setDefault('moduleEnabled', '')
+                ->get();
 
             $result  = $this->loadModel('setting')->setItems('system.common.site', $setting);
             $cache   = $this->loadModel('cache')->createConfigCache();

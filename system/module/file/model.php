@@ -169,7 +169,7 @@ class fileModel extends model
         {   
             if(!move_uploaded_file($file['tmpname'], $this->savePath . $file['pathname'])) return false;
 
-            if(strpos($this->config->file->allowed, ',' . $file['extension'] . ',') == false) $file = $this->saveZip($file);
+            if(strpos($this->config->file->allowed, ',' . $file['extension'] . ',') === false) $file = $this->saveZip($file);
 
             if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions))
             {

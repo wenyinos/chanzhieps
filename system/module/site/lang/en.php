@@ -18,6 +18,7 @@ $lang->site->lang          = 'Language';
 $lang->site->domain        = 'Domain';
 $lang->site->keywords      = 'Keywords';
 $lang->site->indexKeywords = 'Home Keywords';
+$lang->site->meta          = 'Meta';
 $lang->site->desc          = 'Description';
 $lang->site->icp           = 'ICP';
 $lang->site->icpLink       = 'ICP Link';

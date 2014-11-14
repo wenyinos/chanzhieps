@@ -55,6 +55,7 @@ if($config->requestType == 'PATH_INFO')
             $_SERVER['PATH_INFO'] = '/';
         }
     }
+    $_SERVER['REQUEST_URI'] = $path['basename'];
 }
 else
 {
