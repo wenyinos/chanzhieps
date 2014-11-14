@@ -45,7 +45,7 @@ $lang->slide->edit     = 'Edit';
 
 $lang->slide->successSort     = 'Order data saved.';
 $lang->slide->noImageSelected = 'No images selected';
-$lang->slide->suitableSize    = "You'd better use pictures of same size，<i class='text-muted'>1140px X 270px</i> recommended.";
+$lang->slide->suitableSize    = "You must use pictures of same size.";
 
 /* Targets setting. */
 $lang->slide->target = new stdclass();

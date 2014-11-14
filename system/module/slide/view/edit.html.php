@@ -27,8 +27,8 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
       <table class='table table-form'>
         <tr>
           <th class='w-100px'><?php echo $lang->slide->title;?></th>
-          <td class='w-p40'><?php echo html::input('title', $slide->title, 'class="form-control"');?></td>
-          <td>
+          <td class='w-p40 title'><?php echo html::input('title', $slide->title, 'class="form-control"');?></td>
+          <td class='title-color'>
             <div class='colorplate clearfix'>
               <div class='input-group color active' data='<?php echo $slide->titleColor;?>'>
                 <label class='input-group-addon'><?php echo $lang->slide->titleColor;?></label>
