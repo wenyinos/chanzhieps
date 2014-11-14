@@ -26,13 +26,12 @@ class tag extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $tags = $this->post->tags ? $this->post->tags : array();
+        $tag = $this->post->tag ? $this->post->tag : '';
 
-        $this->view->title      = $this->lang->tag->admin;
-        $this->view->pager      = $pager;
-        $this->view->tags       = $this->tag->getList($tags, $orderBy, $pager);
-        $this->view->tagOptions = $this->dao->select('tag')->from(TABLE_TAG)->fetchPairs('tag', 'tag');
-        $this->view->orderBy    = $orderBy;
+        $this->view->title   = $this->lang->tag->admin;
+        $this->view->pager   = $pager;
+        $this->view->tags    = $this->tag->getList($tag, $orderBy, $pager);
+        $this->view->orderBy = $orderBy;
         $this->display();
     }   
 

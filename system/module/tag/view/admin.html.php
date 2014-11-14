@@ -12,17 +12,20 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
-<div class='panel panel-pure'>
-  <form method='post' class='form-inline form-search '>
-    <div class='input-group'>
-      <?php echo html::select('tags[]', $tagOptions, $this->post->tags, "multiple='multiple' class='form-control chosen  search-query' placeholder='{$lang->tag->inputTag}'"); ?>
-      <span class="input-group-btn"> <?php echo html::submitButton($lang->search, 'btn btn-primary'); ?> </span>
-    </div>
-  </form>
-</div>
-
 <div class='panel'>
-  <div class='panel-heading'><strong><i class='icon-tags'></i> <?php echo $lang->tag->admin;?></strong></div>
+  <div class="panel-heading">
+    <strong><i class='icon-tags'></i> <?php echo $lang->tag->admin;?></strong>
+    <div class="panel-actions">
+      <form method='post' class='form-inline form-search'>
+        <div class="input-group">
+          <?php echo html::input('tag', $this->post->tag, "class='form-control search-query' placeholder='{$lang->tag->inputTag}'");?>
+          <span class="input-group-btn">
+            <?php echo html::submitButton($lang->search, "btn btn-primary"); ?>
+          </span>
+        </div>
+      </form>
+    </div>
+  </div>
   <table class='table table-hover table-bordered table-striped tablesorter'>
     <thead>
       <tr class='text-center'>

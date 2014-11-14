@@ -273,13 +273,14 @@ $lang->error->token        = '必须为英文或数字，长度为3-32字符！'
 
 /* The pager items. */
 $lang->pager = new stdclass();
-$lang->pager->noRecord  = '暂时没有记录。';
-$lang->pager->digest    = '共 <strong>%s</strong> 条记录，每页 <strong>%s</strong> 条，页面：<strong>%s/%s</strong> ';
-$lang->pager->first     = '首页';
-$lang->pager->pre       = '上页';
-$lang->pager->next      = '下页';
-$lang->pager->last      = '末页';
-$lang->pager->locate    = 'Go!';
+$lang->pager->noRecord   = "暂时没有记录";
+$lang->pager->digest     = "共 <strong>%s</strong> 条记录，%s <strong>%s/%s</strong> &nbsp; ";
+$lang->pager->recPerPage = "每页 <strong>%s</strong> 条";
+$lang->pager->first      = "<i class='icon-step-backward' title='首页'></i>";
+$lang->pager->pre        = "<i class='icon-play icon-rotate-180' title='上一页'></i>";
+$lang->pager->next       = "<i class='icon-play' title='下一页'></i>";
+$lang->pager->last       = "<i class='icon-step-forward' title='末页'></i>";
+$lang->pager->locate     = "GO!";
 
 $lang->date = new stdclass();
 $lang->date->minute = '分钟';
