@@ -25,7 +25,7 @@ js::set('provider', $this->get->provider);
           echo html::input('user', $this->get->user, "class='form-control search-query' placeholder='{$lang->user->inputUserName}'"); 
           ?>
           <span class="input-group-btn">
-            <?php echo html::submitButton($lang->user->searchUser,"btn btn-primary"); ?>
+            <?php echo html::submitButton($lang->user->searchUser, "btn btn-primary"); ?>
           </span>
         </div>
       </form>

@@ -296,30 +296,41 @@ class pager
     public function get($align = 'right', $type = 'full')
     {
         /* If the RecTotal is zero, return with no record. */
-        if($this->recTotal == 0) { return "<div style='float:$align; clear:none;' class='page'>{$this->lang->pager->noRecord}</div>"; }
+        if($this->recTotal == 0) { return $type == 'mobile' ? '' : "<div style='float:$align; clear:none;' class='pager'>{$this->lang->pager->noRecord}</div>"; }
 
         /* Set the params. */
         $this->setParams();
         
         /* Create the prePage and nextpage, all types have them. */
-        $pager  = $this->createPrePage();
-        $pager .= $this->createNextPage();
+        $pager  = $this->createPrePage($type);
+        $pager .= $this->createNextPage($type);
 
         /* The short and full type. */
-        if($type !== 'shortest')
+        if($type !== 'shortest' and $type !== 'mobile')
         {
-            $pager  = $this->createDigest($type) . $this->createFirstPage() . $pager;
+            $pager  = $this->createFirstPage() . $pager;
             $pager .= $this->createLastPage();
+        }
+
+        if($type == 'mobile')
+        {
+            $position = $this->pageTotal == 1 ? '' : $this->pageID . '/' . $this->pageTotal;
+            $pager    = $pager . ' ' . $position;
+        }
+        else if($type != 'full') 
+        {
+            $pager = $this->pageID . '/' . $this->pageTotal . ' ' . $pager;
         }
 
         /* Only the full type . */
         if($type == 'full')
         {
+            $pager  = $this->createDigest() . $pager;
             $pager .= $this->createGoTo();
             $pager .= $this->createRecPerPageJS();
         }
 
-        return "<div style='float:$align; clear:none;' class='page form-inline'>$pager</div>";
+        return "<div style='float:$align; clear:none;' class='pager'>$pager</div>";
     }
 
     /**
@@ -328,10 +339,9 @@ class pager
      * @access private
      * @return string
      */
-    private function createDigest($type = 'full')
+    private function createDigest()
     {
-        $recPerPage = $type == 'full' ? $this->createRecPerPageList() : $this->recPerPage;
-        return sprintf($this->lang->pager->digest, $this->recTotal, $recPerPage, $this->pageID, $this->pageTotal);
+        return sprintf($this->lang->pager->digest, $this->recTotal, $this->createRecPerPageList(), $this->pageID, $this->pageTotal);
     }
 
     /**
@@ -344,7 +354,7 @@ class pager
     {
         if($this->pageID == 1) return $this->lang->pager->first . ' ';
         $this->params['pageID'] = 1;
-        return $this->createLink($this->lang->pager->first);
+        return html::a(helper::createLink($this->moduleName, $this->methodName, $this->params), $this->lang->pager->first);
     }
 
     /**
@@ -353,11 +363,20 @@ class pager
      * @access private
      * @return string
      */
-    private function createPrePage()
+    private function createPrePage($type = 'full')
     {
-        if($this->pageID == 1) return $this->lang->pager->pre . ' ';
-        $this->params['pageID'] = $this->pageID - 1;
-        return $this->createLink($this->lang->pager->pre);
+        if($type == 'mobile')
+        {
+            if($this->pageID == 1) return '';
+            $this->params['pageID'] = $this->pageID - 1;
+            return html::a(helper::createLink($this->moduleName, $this->methodName, $this->params), $this->lang->pager->pre, '', 'data-role="button" data-icon="arrow-l" data-iconpos="left" data-inline="true"');
+        }
+        else
+        {
+            if($this->pageID == 1) return $this->lang->pager->pre . ' ';
+            $this->params['pageID'] = $this->pageID - 1;
+            return html::a(helper::createLink($this->moduleName, $this->methodName, $this->params), $this->lang->pager->pre);
+        }
     }    
 
     /**
@@ -366,11 +385,20 @@ class pager
      * @access private
      * @return string
      */
-    private function createNextPage()
+    private function createNextPage($type = 'full')
     {
-        if($this->pageID == $this->pageTotal) return $this->lang->pager->next . ' ';
-        $this->params['pageID'] = $this->pageID + 1;
-        return $this->createLink($this->lang->pager->next);
+        if($type == 'mobile')
+        {
+            if($this->pageID == $this->pageTotal) return '';
+            $this->params['pageID'] = $this->pageID + 1;
+            return html::a(helper::createLink($this->moduleName, $this->methodName, $this->params), $this->lang->pager->next, '', 'data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true"');
+        }
+        else
+        {
+            if($this->pageID == $this->pageTotal) return $this->lang->pager->next . ' ';
+            $this->params['pageID'] = $this->pageID + 1;
+            return html::a(helper::createLink($this->moduleName, $this->methodName, $this->params), $this->lang->pager->next);
+        }
     }
 
     /**
@@ -383,7 +411,7 @@ class pager
     {
         if($this->pageID == $this->pageTotal) return $this->lang->pager->last . ' ';
         $this->params['pageID'] = $this->pageTotal;
-        return $this->createLink($this->lang->pager->last);
+        return html::a(helper::createLink($this->moduleName, $this->methodName, $this->params), $this->lang->pager->last);
     }    
 
     /**
@@ -407,16 +435,15 @@ class pager
         $vars = rtrim($vars, '&');
 
         $js  = <<<EOT
-        <script language='Javascript'>
+        <script>
         vars = '$vars';
         pageCookie = '$this->pageCookie';
-        function submitPage(mode)
+        function submitPage(mode, perPage)
         {
             pageTotal  = parseInt(document.getElementById('_pageTotal').value);
             pageID     = document.getElementById('_pageID').value;
-            recPerPage = document.getElementById('_recPerPage').value;
+            recPerPage = document.getElementById('_recPerPage').getAttribute('data-value');
             recTotal   = document.getElementById('_recTotal').value;
-            $.cookie(pageCookie, recPerPage, {expires:config.cookieLife, path:config.webRoot});
             if(mode == 'changePageID')
             {
                 if(pageID > pageTotal) pageID = pageTotal;
@@ -424,8 +451,10 @@ class pager
             }
             else if(mode == 'changeRecPerPage')
             {
+                recPerPage = perPage;
                 pageID = 1;
             }
+            $.cookie(pageCookie, recPerPage, {expires:config.cookieLife, path:config.webRoot});
 
             vars = vars.replace('_recTotal_', recTotal)
             vars = vars.replace('_recPerPage_', recPerPage)
@@ -438,7 +467,7 @@ EOT;
     }
 
     /**
-    /* Create the select list of RecPerPage. 
+     * Create the select list of RecPerPage. 
      * 
      * @access private
      * @return string
@@ -450,7 +479,13 @@ EOT;
         $range[200]  = 200;
         $range[500]  = 500;
         $range[1000] = 1000;
-        return html::select('_recPerPage', $range, $this->recPerPage, "onchange='submitPage(\"changeRecPerPage\");' class='w-60px'");
+        $html = "<div class='dropdown dropup'><a href='javascript:;' data-toggle='dropdown' id='_recPerPage' data-value='{$this->recPerPage}'>" . (sprintf($this->lang->pager->recPerPage, $this->recPerPage)) . "<span class='caret'></span></a><ul class='dropdown-menu'>";
+        foreach ($range as $key => $value)
+        {
+            $html .= '<li' . ($this->recPerPage == $value ? " class='active'" : '') .'>' . "<a href='javascript:submitPage(\"changeRecPerPage\", $value)'>{$value}</a>" . '</li>';
+        }
+        $html .= '</ul></div>';
+        return $html;
     }
 
     /**
@@ -463,8 +498,8 @@ EOT;
     {
         $goToHtml  = "<input type='hidden' id='_recTotal'  value='$this->recTotal' />\n";
         $goToHtml .= "<input type='hidden' id='_pageTotal' value='$this->pageTotal' />\n";
-        $goToHtml .= "<input type='text'   id='_pageID'    value='$this->pageID' style='text-align:center;width:30px;' /> \n";
-        $goToHtml .= "<input type='button' id='goto'       value='{$this->lang->pager->locate}' onclick='submitPage(\"changePageID\");' class='btn btn-default btn-xs' />";
+        $goToHtml .= "<input type='text'   id='_pageID' value='$this->pageID' style='text-align:center;width:30px;' class='form-control' /> \n";
+        $goToHtml .= "<input type='button' id='goto' value='{$this->lang->pager->locate}' onclick='submitPage(\"changePageID\");' class='btn'/>";
         return $goToHtml;
     }    
 
