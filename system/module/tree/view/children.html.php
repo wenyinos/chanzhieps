@@ -37,7 +37,7 @@
           {
               echo "<div class='col-xs-6 col-md-4'>" . html::input("alias[]", '', "class='form-control' placeholder='{$this->lang->category->alias}'") . '</div>';
               echo "<div class='col-xs-6 col-md-2'>";
-              echo "<i class='icon-move sort-handle'> </i>";
+              echo html::a('', "<i class='icon-move sort-handle'> </i>", "class='btn btn-link btn-mini'");
               echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='btn btn-link pull-left btn-mini btn-plus'");
               echo html::a('javascript:;', "<i class='icon-remove'></i>", "class='btn btn-link pull-left btn-mini btn-remove'");
               echo '</div>';
@@ -62,7 +62,7 @@
     <div class='col-xs-6 col-md-4 col-md-offset-2'><?php echo  html::input("children[]", '', "class='form-control' placeholder='{$this->lang->category->name}'");?></div>
     <div class='col-xs-6 col-md-4'><?php echo html::input("alias[]", '', "class='form-control' placeholder='{$this->lang->category->alias}'");?></div>
     <div class='col-xs-6 col-md-2'>
-      <i class='icon-move sort-handle'> </i>
+      <?php echo html::a('', "<i class='icon-move sort-handle'> </i>", "class='btn btn-link btn-mini'");?>
       <?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='btn btn-link pull-left btn-mini btn-plus'");?>
       <?php echo html::a('javascript:;', "<i class='icon-remove'></i>", "class='btn btn-link pull-left btn-mini btn-remove'");?>
     </div>
