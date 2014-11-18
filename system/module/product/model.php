@@ -132,31 +132,14 @@ class productModel extends model
      * @access public
      * @return array
      */
-    public function getPairs($categories, $orderBy, $pager = null)
-    {
-        return $this->dao->select('t1.id, t1.name, t1.alias')->from(TABLE_PRODUCT)->alias('t1')
-            ->leftJoin(TABLE_RELATION)->alias('t2')
-            ->on('t1.id = t2.id')
-            ->beginIF($categories)->where('t2.category')->in($categories)->fi()
-            ->orderBy($orderBy)
-            ->page($pager, false)
-            ->fetchAll('id');
-    }
-
-    /**
-     * Get product pair.
-     * 
-     * @param string $categories 
-     * @access public
-     * @return array
-     */
-    public function getPair($categories)
+    public function getPairs($categories, $orderBy = '`order`', $pager = null)
     {
         return $this->dao->select('t1.id, name')->from(TABLE_PRODUCT)->alias('t1')
             ->leftJoin(TABLE_RELATION)->alias('t2')
             ->on('t1.id = t2.id')
             ->beginIF($categories)->where('t2.category')->in($categories)->fi()
-            ->orderBy('`order`')
+            ->orderBy($orderBy)
+            ->page($pager, false)
             ->fetchPairs('id', 'name');
     }
 

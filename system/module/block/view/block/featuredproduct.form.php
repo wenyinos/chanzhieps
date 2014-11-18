@@ -11,7 +11,7 @@
 */
 ?>
 <?php include '../../common/view/chosen.html.php';?>
-<?php $products = $this->loadModel('product')->getPair(0);?>
+<?php $products = $this->loadModel('product')->getPairs(0);?>
 <tr>
   <th><?php echo $lang->block->product;?></th>
   <td>
