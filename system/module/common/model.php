@@ -143,7 +143,7 @@ class commonModel extends model
         {
             foreach($config->dependence->$module as $dependModule)
             {
-                if(!isset($config->site->moduleEnabled) or strpos($config->site->moduleEnabled, $dependModule) === false) return false;
+                if(!isset($config->site->modules) or strpos($config->site->modules, $dependModule) === false) return false;
             }
         }
 

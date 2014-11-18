@@ -27,7 +27,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->site->module;?></th>
-          <td><?php echo html::checkbox('moduleEnabled', $lang->site->moduleAvailable, isset($this->config->site->moduleEnabled) ? $this->config->site->moduleEnabled : '');?></td><td></td>
+          <td><?php echo html::checkbox('modules', $lang->site->moduleAvailable, isset($this->config->site->modules) ? $this->config->site->modules : '');?></td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->site->lang;?></th>
@@ -57,11 +57,11 @@
           <th><?php echo $lang->site->desc;?></th> 
           <td colspan='2'><?php echo html::textarea('desc', htmlspecialchars($this->config->site->desc), "class='form-control' rows='10'");?></td> 
         </tr>
-       <tr class='icp'>
-          <th><?php echo $lang->site->icp;?></th> 
+       <tr class='icpSN'>
+          <th><?php echo $lang->site->icpSN;?></th> 
           <td colspan='2'>
             <div class='row'>
-              <div class='col-sm-3'><?php echo html::input('icp', $this->config->site->icp, "class='form-control col-xs-2'");?></div>
+              <div class='col-sm-3'><?php echo html::input('icpSN', $this->config->site->icpSN, "class='form-control col-xs-2'");?></div>
               <div class='col-sm-9'>
                 <div class='input-group'>
                   <span class="input-group-addon"><?php echo $lang->site->icpLink;?></span>

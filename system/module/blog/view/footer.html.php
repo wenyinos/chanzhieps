@@ -23,7 +23,7 @@
         echo "&copy; {$copyright}" . date('Y') . ' ' . $config->company->name . '&nbsp;&nbsp;';
         ?>
       </span>
-      <span id='icpInfo'><?php echo $config->site->icp; ?></span>
+      <span id='icpInfo'><?php echo $config->site->icpSN; ?></span>
       <div id='powerby'>
         <?php printf($lang->poweredBy, $config->version, k(), $config->version);?>
       </div>

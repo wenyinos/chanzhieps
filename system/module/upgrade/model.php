@@ -88,6 +88,8 @@ class upgradeModel extends model
             case '2_5_3':
                 $this->execSQL($this->getUpgradeFile('2.5.3'));
                 $this->fixCustomedCss();
+            case '3_1':
+                $this->fixBasicSite();
 
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -934,6 +936,12 @@ class upgradeModel extends model
         }
 
         return true;
+    }
+
+    public function fixBasicSite()
+    {
+        $this->dao->update(TABLE_CONFIG)->set('`key`')->eq('icpSN')->where('`key`')->eq('icp')->andWhere('section')->eq('site')->exec();
+        $this->dao->update(TABLE_CONFIG)->set('`key`')->eq('modules')->where('`key`')->eq('moduleEnabled')->andWhere('section')->eq('site')->exec();
     }
 
     /**

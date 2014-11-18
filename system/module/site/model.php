@@ -27,7 +27,7 @@ class siteModel extends model
         if(!isset($this->config->site->indexKeywords)) $this->config->site->indexKeywords = '';
         if(!isset($this->config->site->slogan))        $this->config->site->slogan        = '';
         if(!isset($this->config->site->copyright))     $this->config->site->copyright     = '';
-        if(!isset($this->config->site->icp))           $this->config->site->icp           = '';
+        if(!isset($this->config->site->icpSN))         $this->config->site->icpSN         = '';
         if(!isset($this->config->site->meta))          $this->config->site->meta          = '';
         if(!isset($this->config->site->desc))          $this->config->site->desc          = '';
         if(!isset($this->config->site->theme))         $this->config->site->theme         = 'default';
