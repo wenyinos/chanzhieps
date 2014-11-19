@@ -121,7 +121,6 @@ class router
      */
     private $clientLang;
 
-
     /**
      * The control object of current module.
      * 
@@ -319,7 +318,6 @@ class router
         $this->setClientLang();
         $this->loadLang('common');
         $this->setTimezone();
-
 
         $this->loadClass('front',  $static = true);
         $this->loadClass('filter', $static = true);
