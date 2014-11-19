@@ -24,6 +24,7 @@ $(document).ready(function()
     /* Set active menu. */
     $('.leftmenu li.active').removeClass('active');
     $(".leftmenu a[href*='provider=" + v.provider  + "']").parent().addClass('active');
+    $(".leftmenu a[href*='admin=" + v.admin  + "']").parent().addClass('active');
     if($('.leftmenu li.active').size() == 0) $('.leftmenu li:first').addClass('active');
 
     $('#pullBtn').click(function()

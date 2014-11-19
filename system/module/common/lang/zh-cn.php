@@ -169,6 +169,7 @@ $lang->user->menu->all    = '全部会员|user|admin|';
 $lang->user->menu->sina   = '微博会员|user|admin|provider=sina';
 $lang->user->menu->wechat = '微信会员|user|admin|provider=wechat';
 $lang->user->menu->qq     = 'QQ会员|user|admin|provider=qq';
+$lang->user->menu->admin  = '管理员|user|admin|admin=super';
 
 /* Menu of comment module. */
 $lang->feedback = new stdclass();
