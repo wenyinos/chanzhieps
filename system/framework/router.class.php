@@ -310,12 +310,16 @@ class router
         $this->setDebug();
         $this->setErrorHandler();
 
+        $this->fixRequestURI();
+        $this->setSuperVars();
+
         $this->sendHeader();
         $this->connectDB();
 
         $this->setClientLang();
         $this->loadLang('common');
         $this->setTimezone();
+
 
         $this->loadClass('front',  $static = true);
         $this->loadClass('filter', $static = true);
@@ -799,6 +803,26 @@ class router
     public function getWebRoot()
     {
         return $this->config->webRoot;
+    }
+
+    /**
+     * Fix REQUEST_URI of iis.
+     * 
+     * @access public
+     * @return void
+     */
+    public function fixRequestURI()
+    {
+        if($this->config->requestType == 'GET') return true;
+
+        if(isset($_SERVER['HTTP_X_REWRITE_URL']))
+        {
+            $_SERVER['REQUEST_URI'] = $_SERVER['HTTP_X_REWRITE_URL'];
+        }
+        elseif(isset($_SERVER['HTTP_REQUEST_URI']))
+        {
+            $_SERVER['REQUEST_URI'] = $_SERVER['HTTP_REQUEST_URI'];
+        }
     }
 
     //-------------------- Request related methods. --------------------//
