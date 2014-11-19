@@ -31,7 +31,6 @@ $jsCode .= "\n". file_get_contents($jsRoot . 'my.admin.js');
 $result = file_put_contents($adminAllJSFile, $jsCode);
 if($result) echo "create all.admin.js success\n";
 
-
 $ie8Code = file_get_contents($jsRoot . 'html5shiv/min.js');
 $ie8Code .= file_get_contents($jsRoot . 'respond/min.js');
 
