@@ -104,10 +104,11 @@ class ui extends control
 
         $cssFile  = sprintf($this->config->site->ui->customCssFile, $template, $theme);
         $savePath = dirname($cssFile);
+        if(!is_dir($savePath)) mkdir($savePath, 0777, true);
 
         if(!is_writable($savePath))
         {
-            $this->view->errors = $this->lang->unWritable;
+            $this->view->errors = $this->lang->ui->unWritable;
             $this->display();
             exit;
         }
