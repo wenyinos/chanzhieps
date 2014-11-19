@@ -17,6 +17,9 @@ $lang->block->default->typeList['phpcode']  = 'php源代码';
 $lang->block->default->typeList['latestArticle']   = '最新文章';
 $lang->block->default->typeList['hotArticle']      = '热门文章';
 
+$lang->block->default->typeList['latestBlog']      = '最新博文';
+$lang->block->default->typeList['latestThread']    = '最新帖子';
+
 $lang->block->default->typeList['latestProduct']   = '最新产品';
 $lang->block->default->typeList['featuredProduct'] = '首页推荐产品';
 $lang->block->default->typeList['hotProduct']      = '热门产品';
@@ -39,6 +42,9 @@ $lang->block->default->typeGroups['phpcode']  = 'input';
 
 $lang->block->default->typeGroups['latestArticle'] = 'article';
 $lang->block->default->typeGroups['hotArticle']    = 'article';
+
+$lang->block->default->typeGroups['latestBlog']    = 'blog';
+$lang->block->default->typeGroups['latestThread']  = 'thread';
 
 $lang->block->default->typeGroups['latestProduct']   = 'product';
 $lang->block->default->typeGroups['featuredProduct'] = 'product';
