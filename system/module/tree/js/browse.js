@@ -47,15 +47,4 @@ $(document).ready(function()
     })
 
     if(v.isWechatMenu) $(".leftmenu a[href*='wechat']").parent().addClass('active');
-
-    if(v.type == 'product' && (!$('#setCurrency').length))
-    {
-        var currencyLink = createLink('product', 'currency');
-        var currencyMenu = '<li><a id="setCurrency" href="' + currencyLink + '">';
-        currencyMenu += v.currency + '<i class="icon-chevron-right"></i>';
-        currencyMenu += '</li>';
-
-        $('.nav-left').append(currencyMenu);
-        $('#setCurrency').modalTrigger();
-    }
 })

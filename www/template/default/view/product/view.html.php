@@ -27,7 +27,7 @@ js::execute($product->js);
   <div class='col-md-9 col-main'>
     <div class='panel panel-body panel-product'>
       <div class='row'>
-        <?php if(!empty($product->image->list) and !$product->image->primary->editor):?>
+        <?php if(!empty($product->image->list)):?>
         <div class='col-md-5'>
           <div class='product-image media-wrapper'>
             <?php $title = $product->image->primary->title ? $product->image->primary->title : $product->name;?>
@@ -36,7 +36,6 @@ js::execute($product->js);
           <?php if(count($product->image->list) > 1):?>
           <div class='product-image-menu row'>
             <?php foreach($product->image->list as $image):?>
-            <?php if($image->editor) continue;?>
             <?php $title = $image->title ? $image->title : $product->name;?>
             <div class='col-md-3 col-sm-2 col-xs-2'>
               <div class='product-image little-image'>
@@ -113,9 +112,6 @@ js::execute($product->js);
       <h5 class='header-dividing'><i class='icon-file-text-alt text-muted'></i> <?php echo $lang->product->content;?></h5>
       <div class='article-content'>
         <?php echo $product->content;?>
-      </div>
-      <div class='article-files'>
-        <?php $this->loadModel('file')->printFiles($product->files);?>
       </div>
     </div>
     <div id='comments'>

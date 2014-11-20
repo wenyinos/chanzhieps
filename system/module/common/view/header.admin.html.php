@@ -30,13 +30,12 @@
       <?php if($moduleMenu) echo $moduleMenu;?>
       <?php if(!empty($treeModuleMenu)):?>
       <div class='panel category-nav'>
-        <div class='panel-heading'>
-          <strong><?php echo $lang->tree->browseByCategory;?></strong>
+        <div class='panel-body'>
+          <?php echo $treeModuleMenu;?>
           <?php if(!empty($treeManageLink)):?>
-          <div class='pull-right'><?php echo $treeManageLink;?></div>
+          <div class='text-right'><?php echo $treeManageLink;?></div>
           <?php endif;?>
         </div>
-        <div class='panel-body'><?php echo $treeModuleMenu;?></div>
       </div>
       <?php endif;?>
     </div>

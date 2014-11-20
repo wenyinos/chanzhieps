@@ -43,8 +43,7 @@ $lang->product->custom     = '自定义属性';
 $lang->product->sales      = '产品定价';
 $lang->product->css        = 'CSS';
 $lang->product->js         = 'JS';
-
-$lang->product->currencyIcon = "<i class='icon-yen'> </i>";
+$lang->product->currency   = '货币设置';
 
 $lang->product->list       = '产品列表';
 $lang->product->hot        = '热门产品';

@@ -123,7 +123,7 @@ $lang->menuGroups->tag     = 'site';
 $lang->menuGroups->mail    = 'site';
 $lang->menuGroups->nav     = 'site';
 $lang->menuGroups->links   = 'site';
-$lang->menuGroups->wechat = 'site';
+$lang->menuGroups->wechat  = 'site';
 $lang->menuGroups->block   = 'ui';
 $lang->menuGroups->slide   = 'ui';
 $lang->menuGroups->tree    = 'article';
@@ -132,12 +132,12 @@ $lang->menuGroups->message = 'feedback';
 /* Menu of article module. */
 $lang->article = new stdclass();
 $lang->article->menu = new stdclass();
-$lang->article->menu->browse = array('link' => 'List|article|admin|', 'alias' => 'create, edit');
+$lang->article->menu->browse = 'All articles|article|admin|';
 
 /* Menu of blog module. */
 $lang->blog = new stdclass();
 $lang->blog->menu = new stdclass();
-$lang->blog->menu->browse = array('link' => 'List|article|admin|type=blog', 'alias' => 'create, edit');
+$lang->blog->menu->browse = 'All blogs|article|admin|type=blog';
 
 /* Menu of page module. */
 $lang->page = new stdclass();
@@ -148,8 +148,7 @@ $lang->page->menu->create = 'Create|article|create|type=page';
 /* Menu of product module. */
 $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
-$lang->product->menu->browse = array('link' => 'List|product|admin|', 'alias' => 'creaet, edit');
-$lang->product->currency     = 'Currency';
+$lang->product->menu->browse = 'All products|product|admin|';
 
 /* Menu of UI module. */
 $lang->ui = new stdclass();
@@ -195,14 +194,15 @@ $lang->forum->menu->update = 'Update|forum|update|';
 /* Menu of site module. */
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
-$lang->site->menu->basic  = 'Basic|site|setbasic|';
-$lang->site->menu->nav    = 'Navigation|nav|admin|';
-$lang->site->menu->upload = 'Uploads|site|setupload|';
-$lang->site->menu->tag    = 'Tags|tag|admin|';
-$lang->site->menu->oauth  = 'Open OAuth|site|setoauth|';
-$lang->site->menu->link   = 'Links|links|admin|';
-$lang->site->menu->mail   = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->site->menu->wechat = array('link' => 'Wechat|wechat|admin|', 'alias' => 'create,setresponse');
+$lang->site->menu->basic    = 'Basic|site|setbasic|';
+$lang->site->menu->nav      = 'Navigation|nav|admin|';
+$lang->site->menu->upload   = 'Uploads|site|setupload|';
+$lang->site->menu->tag      = 'Tags|tag|admin|';
+$lang->site->menu->oauth    = 'Open OAuth|site|setoauth|';
+$lang->site->menu->link     = 'Links|links|admin|';
+$lang->site->menu->currency = 'Currency|product|currency|';
+$lang->site->menu->mail     = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->site->menu->wechat   = array('link' => 'Wechat|wechat|admin|', 'alias' => 'create,setresponse');
 
 /* Menu of company module. */
 $lang->company->menu = new stdclass();
