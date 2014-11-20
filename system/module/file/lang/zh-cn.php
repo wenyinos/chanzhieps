@@ -45,3 +45,4 @@ $lang->file->noAccess         = '不允许访问。';
 $lang->file->invalidParameter = '参数无效。';
 $lang->file->unWritable       = '目录不可写或不存在。';
 $lang->file->uploadForbidden  = '附件上传功能已禁用。';
+$lang->file->sizeLimit        = "<p class='text-danger'>附件大小不能大于2M</p>";
