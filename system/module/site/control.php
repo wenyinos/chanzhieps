@@ -25,9 +25,9 @@ class site extends control
         {
             $setting = fixer::input('post')
                 ->stripTags('desc,meta', $allowedTags)
-                ->join('moduleEnabled', ',')
+                ->join('modules', ',')
                 ->remove('allowedFiles')
-                ->setDefault('moduleEnabled', '')
+                ->setDefault('modules', '')
                 ->get();
 
             $result  = $this->loadModel('setting')->setItems('system.common.site', $setting);
