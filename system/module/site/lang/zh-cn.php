@@ -12,6 +12,7 @@
 $lang->site->common        = "站点";
 
 $lang->site->type          = '站点类型';
+$lang->site->status        = '站点状态';
 $lang->site->name          = '网站名称';
 $lang->site->module        = '功能模块';
 $lang->site->lang          = '语言';
@@ -38,6 +39,10 @@ $lang->site->oauthHelp     = "使用帮助";
 $lang->site->typeList = new stdclass();
 $lang->site->typeList->portal = '企业门户';
 $lang->site->typeList->blog   = '个人博客';
+
+$lang->site->statusList = new stdclass();
+$lang->site->statusList->normal = '正常';
+$lang->site->statusList->pause  = '暂停';
 
 $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = '会员';

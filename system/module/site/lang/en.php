@@ -12,6 +12,7 @@
 $lang->site->common        = "Site";
 
 $lang->site->type          = 'Type';
+$lang->site->status        = 'Status';
 $lang->site->name          = 'Name';
 $lang->site->module        = 'Modules';
 $lang->site->lang          = 'Language';
@@ -38,6 +39,10 @@ $lang->site->oauthHelp     = "Help";
 $lang->site->typeList = new stdclass();
 $lang->site->typeList->portal = 'Enterprise Portal';
 $lang->site->typeList->blog   = 'Personal Blog';
+
+$lang->site->statusList = new stdclass();
+$lang->site->statusList->normal = 'Normal';
+$lang->site->statusList->pause  = 'Pause';
 
 $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = 'Member';

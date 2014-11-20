@@ -18,6 +18,10 @@
     <form method='post' id='ajaxForm' class='form-inline'>
       <table class='table table-form'>
         <tr>
+          <th class='col-xs-2'><?php echo $lang->site->status;?></th> 
+          <td class='col-xs-6'><?php echo html::radio('status', $lang->site->statusList, isset($this->config->site->status) ? $this->config->site->status : 'normal', "class='checkbox'");?></td><td></td>
+        </tr>
+        <tr>
           <th class='col-xs-2'><?php echo $lang->site->type;?></th> 
           <td class='col-xs-6'><?php echo html::radio('type', $lang->site->typeList, isset($this->config->site->type) ? $this->config->site->type : 'portal', "class='checkbox'");?></td><td></td>
         </tr>
