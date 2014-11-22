@@ -162,7 +162,6 @@ class fileModel extends model
         $files      = $this->getUpload();
 
         $this->app->loadClass('pclzip', true);
-
         $imageSize = array('width' => 0, 'height' => 0);
 
         foreach($files as $id => $file)
@@ -186,7 +185,7 @@ class fileModel extends model
             $file['height']     = $imageSize['height'];
             unset($file['tmpname']);
             $this->dao->insert(TABLE_FILE)->data($file)->exec();
-            $fileTitles[$this->dao->lastInsertId()] = $file['title'];
+            $fileTitles[$this->dao->lastInsertId()] =  $file['title'];
         }
         $this->loadModel('setting')->setItems('system.common.site', array('lastUpload' => time()));
         return $fileTitles;
@@ -262,6 +261,12 @@ class fileModel extends model
         if(!isset($_FILES[$htmlTagName])) return $files;
         if(!$this->canUpload()) return $files;
         
+        $this->app->loadClass('filter', true);
+
+        $this->app->loadClass('purifier', true);
+        $config = HTMLPurifier_Config::createDefault();
+        $purifier = new HTMLPurifier($config);
+
         /* The tag if an array. */
         if(is_array($_FILES[$htmlTagName]['name']))
         {
@@ -269,9 +274,11 @@ class fileModel extends model
             foreach($name as $id => $filename)
             {
                 if(empty($filename)) continue;
+                if(!validater::checkFileName($filename)) continue;
                 $file['extension'] = $this->getExtension($filename);
                 $file['pathname']  = $this->setPathName($id, $file['extension']);
                 $file['title']     = !empty($_POST['labels'][$id]) ? htmlspecialchars($_POST['labels'][$id]) : str_replace('.' . $file['extension'], '', $filename);
+                $file['title']     = $purifier->purify($file['title']);
                 $file['size']      = $size[$id];
                 $file['tmpname']   = $tmp_name[$id];
                 $files[] = $file;
@@ -279,11 +286,13 @@ class fileModel extends model
         }
         else
         {
-            if(empty($_FILES[$htmlTagName]['name'])) return $files;
+            if(empty($_FILES[$htmlTagName]['name'])) return array();
             extract($_FILES[$htmlTagName]);
+            if(!validater::checkFileName($name)) return array();;
             $file['extension'] = $this->getExtension($name);
             $file['pathname']  = $this->setPathName(0, $file['extension']);
             $file['title']     = !empty($_POST['labels'][0]) ? htmlspecialchars($_POST['labels'][0]) : substr($name, 0, strpos($name, $file['extension']) - 1);
+            $file['title']     = $purifier->purify($file['title']);
             $file['size']      = $size;
             $file['tmpname']   = $tmp_name;
             return array($file);

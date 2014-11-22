@@ -330,6 +330,19 @@ class validater
     }
 
     /**
+     * Check file name.
+     * 
+     * @param  string    $var 
+     * @static
+     * @access public
+     * @return bool
+     */
+    public static function checkFileName($var)
+    {
+        return !preg_match('/>+|:+|<+/', $var);
+    }
+
+    /**
      * Call a function to check it.
      * 
      * @param  mixed  $var 
