@@ -19,7 +19,7 @@ include TPL_ROOT . 'common/treeview.html.php';
           <div class='item-heading'>
             <div class="text-muted pull-right">
               <span title="<?php echo $lang->article->views;?>"><i class='icon-eye-open'></i> <?php echo $article->views;?></span> &nbsp; 
-              <span title="<?php echo $lang->article->comments;?>"><i class='icon-comments-alt'></i> <?php echo $article->comments;?></span> &nbsp; 
+              <?php if($article->comments):?><span title="<?php echo $lang->article->comments;?>"><i class='icon-comments-alt'></i> <?php echo $article->comments;?></span> &nbsp;<?php endif;?> 
               <span title="<?php echo $lang->article->addedDate;?>"><i class='icon-time'></i> <?php echo substr($article->addedDate, 0, 10);?></span>
             </div>
             <h4><?php echo html::a($url, $article->title);?></h4>

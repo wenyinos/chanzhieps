@@ -30,6 +30,7 @@ class userModel extends model
             ->orWhere('u.email')->like("%{$this->get->user}%")
             ->fi()
             ->beginIF($this->get->provider)->andWhere('o.provider')->like("%{$this->get->provider}%")->fi()
+            ->beginIF($this->get->admin)->andWhere('u.admin')->eq('super')->fi()
             ->orderBy('id_asc')
             ->page($pager)
             ->fetchAll('id');

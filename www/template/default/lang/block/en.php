@@ -17,6 +17,9 @@ $lang->block->default->typeList['phpcode']  = 'php codes';
 $lang->block->default->typeList['latestArticle'] = 'Latest Articles';
 $lang->block->default->typeList['hotArticle']    = 'Hot Articles';
 
+$lang->block->default->typeList['latestBlog']      = 'Latest Blogs';
+$lang->block->default->typeList['latestThread']    = 'Latest Threads';
+
 $lang->block->default->typeList['latestProduct']   = 'Latest Products';
 $lang->block->default->typeList['featuredProduct'] = 'Featured Products';
 $lang->block->default->typeList['hotProduct']      = 'Hot Products';
@@ -39,6 +42,9 @@ $lang->block->default->typeGroups['phpcode']  = 'input';
 
 $lang->block->default->typeGroups['latestArticle'] = 'article';
 $lang->block->default->typeGroups['hotArticle']    = 'article';
+
+$lang->block->default->typeGroups['latestBlog']    = 'blog';
+$lang->block->default->typeGroups['latestThread']  = 'thread';
 
 $lang->block->default->typeGroups['latestProduct']   = 'product';
 $lang->block->default->typeGroups['featuredProduct'] = 'product';

@@ -19,6 +19,9 @@ $config->block->defaultIcons['links']         = 'icon-link';
 $config->block->defaultIcons['latestArticle'] = 'icon-list-ul';
 $config->block->defaultIcons['hotArticle']    = 'icon-list-ul';
 
+$config->block->defaultIcons['latestBlog']    = 'icon-list-ul';
+$config->block->defaultIcons['latestThread']  = 'icon-list-ul';
+
 $config->block->defaultIcons['latestProduct'] = 'icon-th';
 $config->block->defaultIcons['hotProduct']    = 'icon-th';
 

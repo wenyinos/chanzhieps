@@ -43,8 +43,7 @@ $lang->product->custom     = 'Custom';
 $lang->product->sales      = 'Price';
 $lang->product->css        = 'CSS';
 $lang->product->js         = 'JS';
-
-$lang->product->currencyIcon = "<i class='icon-usd'> </i>";
+$lang->product->currency   = 'Currency';
 
 $lang->product->list       = 'List';
 $lang->product->hot        = 'Hot';

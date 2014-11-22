@@ -10,3 +10,7 @@ td > .form-group.row .btn {position: relative; margin-top: 5px; display: block; 
 
 .tree li a.active{font-weight: bold;}
 .radio-inline{margin-left: 10px; width: 90px;}
+
+.leftmenu > .nav{margin-bottom: 0;}
+.nav-stacked.nav-primary > li:last-child > a{border-bottom-left-radius: 0; border-bottom-right-radius: 0;}
+.category-nav{border-radius: 0 0 3px 3px; border-top:none;}

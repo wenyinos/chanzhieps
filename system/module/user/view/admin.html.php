@@ -13,6 +13,7 @@
 <?php
 include '../../common/view/header.admin.html.php';
 js::set('provider', $this->get->provider);
+js::set('admin', $this->get->admin);
 ?>
 <div class="panel">
   <div class="panel-heading">

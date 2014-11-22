@@ -65,6 +65,31 @@ class threadModel extends model
     }
 
     /**
+     * Get latest threads. 
+     *
+     * @param string  $board  the boards
+     * @param int     $count
+     * @access public
+     * @return array
+     */
+    public function getLatest($boards, $count)
+    {
+        if(is_array($boards))
+        {
+            foreach($boards as $board) $subBoard = $this->getSubBoard($board);
+        }
+        else
+        {
+            $subBoard = $this->getSubBoard($boards);
+        }
+
+        $this->app->loadClass('pager', true);
+        $pager = new pager($recTotal = 0, $recPerPage = $count, 1);
+
+        return $this->getList($subBoard, 'addedDate_desc', $pager);
+    }
+
+    /**
      * Get stick threads.
      * 
      * @param  int    $board 
@@ -512,5 +537,32 @@ EOT;
            $thread->editorRealname    = !empty($thread->editor) ? $speakers[$thread->editor] : '';
            $thread->repliedByRealname = !empty($thread->repliedBy) ? $speakers[$thread->repliedBy] : '';
         }
+    }
+
+    /**
+     * Get children board.
+     * 
+     * @param  array|int  $board 
+     * @access public
+     * @return array|int 
+     */
+    public function getSubBoard($board)
+    {
+        $parents  = $this->dao->select('*')->from(TABLE_CATEGORY)->where('parent')->eq(0)->andWhere('type')->eq('forum')->fetchAll('id');
+        $children = $this->dao->select('*')->from(TABLE_CATEGORY)->where('parent')->ne(0)->andWhere('type')->eq('forum')->fetchAll('id');
+        $parents  = array_keys($parents);
+           
+        if(in_array($board, $parents))
+        {
+            $subBoard = array();
+            foreach($children as $child)
+            {
+                if($child->parent == $board) $subBoard[] = $child->id;
+            }
+
+            return $subBoard;
+        }
+
+        return $board;
     }
 }
