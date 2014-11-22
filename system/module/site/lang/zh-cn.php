@@ -31,6 +31,7 @@ $lang->site->allowedFiles  = '允许附件类型';
 
 $lang->site->setBasic      = "基本信息设置";
 $lang->site->setUpload     = "文件上传设置";
+$lang->site->setRobots     = "Robots 设置";
 $lang->site->setOauth      = "开放登录设置";
 $lang->site->setSinaOauth  = "新浪微博接入";
 $lang->site->setQQOauth    = "QQ接入";

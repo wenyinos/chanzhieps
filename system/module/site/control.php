@@ -43,6 +43,29 @@ class site extends control
     }
 
     /**
+     * Set robots.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setRobots()
+    {
+        if(!empty($_POST))
+        {
+            $setting = new stdclass();
+            $setting->robots = $this->post->robots;
+            $result  = $this->loadModel('setting')->setItems('system.common.site', $setting);
+
+            if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+            $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setrobots')));
+        }
+
+        $this->view->title = $this->lang->site->setBasic;
+        $this->display();
+    }
+
+
+    /**
      * Set upload configures.
      * 
      * @access public
@@ -70,7 +93,7 @@ class site extends control
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
 
-        $this->view->title = $this->lang->site->setBasic;
+        $this->view->title = $this->lang->site->setUpload;
         $this->display();
     }
 
