@@ -8,6 +8,7 @@ $(document).ready(function()
     $.setAjaxDeleter('.deleter');
     $.setReloadDeleter('.reloadDeleter');
     $.setReload('.reload');
+    $.setAjaxLoader('.loadInModal', '#ajaxModal');
 
     /* Ping for keep login every six minute. */
     if(needPing) setInterval('ping()', 1000 * 360);

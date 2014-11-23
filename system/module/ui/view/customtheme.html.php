@@ -1,4 +1,12 @@
 <?php include '../../common/view/header.modal.html.php';?>
+<?php if(!$hasPriv):?>
+<div class='alert alert-danger'>
+  <div>
+    <?php echo $errors;?>
+    <span class='pull-right'><?php echo html::a($this->inlink('customtheme', "theme={$theme}&template={$template}"), $lang->ui->template->reload, "class='btn btn-primary loadInModal'");?></span>
+  </div>
+</div>
+<?php else:?>
 <form method='post' action='<?php echo inlink('customtheme', "theme={$theme}&template={$template}");?>' id='customThemeForm' class='form' data-theme='<?php echo $theme?>' data-template='<?php echo $template?>'>
   <ul class='nav nav-tabs'>
     <?php foreach($lang->ui->groups as $group => $name):?>
@@ -35,4 +43,5 @@
     <?php echo html::hidden('theme', $theme) . html::hidden('template', $template) . html::submitButton();?>
   </div>
 </form>
+<?php endif;?>
 <?php include '../../common/view/footer.modal.html.php';?>

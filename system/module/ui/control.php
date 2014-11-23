@@ -104,22 +104,16 @@ class ui extends control
 
         $cssFile  = sprintf($this->config->site->ui->customCssFile, $template, $theme);
         $savePath = dirname($cssFile);
-        if(!is_dir($savePath)) mkdir($savePath, 0777, true);
-
-        if(!is_writable($savePath))
-        {
-            $this->view->errors = $this->lang->ui->unWritable;
-            $this->display();
-            exit;
-        }
+        if(!file_exists($savePath)) mkdir($savePath, 0777, true);
 
         if($_POST)
         {
             $params = $_POST;
             foreach($params as $key => $value) if(empty($value)) $params[$key] = 0;
+            /* Unset extral params. */
             unset($params['background-image-position']);
             unset($params['navbar-background-image-position']);
-            //a($params);exit;
+
             if(isset($templates[$template]) && isset($templates[$template]['themes'][$theme]))
             {
                 if(!is_dir($savePath)) mkdir($savePath, 0777, true);
@@ -148,6 +142,14 @@ class ui extends control
         $this->view->modalWidth = 1000;
         $this->view->theme      = $theme;
         $this->view->template   = $template;
+        $this->view->hasPriv    = true;
+
+        if(!is_writable($savePath))
+        {
+            $this->view->hasPriv    = false;
+            $this->view->errors     = sprintf($this->lang->ui->unWritable, str_replace(dirname($this->app->getWwwRoot()), '', $savePath));
+        }
+
         $this->display();
      }
 

@@ -1,8 +1,9 @@
-$(function()
+$(document).ready(function()
 {
     $.setAjaxForm('#customThemeForm');
 
-    ajustModalSize();
+    if($('.btn-reload').size() == 0) ajustModalSize();
+    $.setAjaxLoader('.loadInModal', '#ajaxModal');
 
     var $form = $('#customThemeForm');
     var $css = $('#css');
