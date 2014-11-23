@@ -57,7 +57,6 @@ $config->rights->guest['user']['oauthbind']     = 'oauthbind';
 $config->rights->guest['user']['message']       = 'message';
 
 $config->rights->guest['rss']['index']       = 'index';
-$config->rights->guest['robots']['index']    = 'index';
 $config->rights->guest['sitemap']['index']   = 'index';
 
 $config->rights->guest['file']['download']    = 'download';
