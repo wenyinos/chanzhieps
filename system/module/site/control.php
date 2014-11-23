@@ -50,20 +50,27 @@ class site extends control
      */
     public function setRobots()
     {
+        $robotsFile = $this->app->getWwwRoot() . 'robots.txt'; 
+        $writeable  = ((file_exists($robotsFile) and is_writeable($robotsFile)) or is_writeable(dirname($robotsFile)));
+
         if(!empty($_POST))
         {
-            $setting = new stdclass();
-            $setting->robots = $this->post->robots;
-            $result  = $this->loadModel('setting')->setItems('system.common.site', $setting);
-
+            if(!$writeable) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->site->robotsUnwriteable, $robotsFile)) );
+            if(!$this->post->robots) $this->send(array('result' => 'fail', 'message' => array('robots' => sprintf($this->lang->error->notempty, $this->lang->site->robots) )) );
+            
+            $result = file_put_contents($robotsFile, $this->post->robots);
             if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
             $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setrobots')));
         }
 
-        $this->view->title = $this->lang->site->setBasic;
+        $this->view->robots = '';
+        if(file_exists($robotsFile)) $this->view->robots = file_get_contents($robotsFile);
+
+        $this->view->robotsFile = $robotsFile;
+        $this->view->writeable  = $writeable; 
+        $this->view->title      = $this->lang->site->setBasic;
         $this->display();
     }
-
 
     /**
      * Set upload configures.

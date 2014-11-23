@@ -52,4 +52,8 @@ $lang->site->moduleAvailable['blog']    = 'Blog';
 $lang->site->moduleAvailable['book']    = 'Book';
 $lang->site->moduleAvailable['message'] = 'Message';
 
-$lang->site->fileAllowedRole = 'Use "," to divide different extension name.';
+$lang->site->fileAllowedRole   = 'Use "," to divide different extension name.';
+
+$lang->site->robots            = 'Robots';
+$lang->site->robotsUnwriteable = 'Can not write robots file, please make sure %s writeable first.';
+$lang->site->reloadForRobots   = 'Reload this ppage';

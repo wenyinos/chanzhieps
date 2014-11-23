@@ -52,4 +52,8 @@ $lang->site->moduleAvailable['blog']    = '博客';
 $lang->site->moduleAvailable['book']    = '手册';
 $lang->site->moduleAvailable['message'] = '评论留言';
 
-$lang->site->fileAllowedRole = '多个后缀名之间请用 "," 隔开';
+$lang->site->fileAllowedRole   = '多个后缀名之间请用 "," 隔开';
+
+$lang->site->robots            = 'Robots';
+$lang->site->robotsUnwriteable = 'Robots文件%s 不可写，请修改权限后设置。';
+$lang->site->reloadForRobots   = '刷新页面';
