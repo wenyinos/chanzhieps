@@ -463,6 +463,8 @@ class control
         if(empty($moduleName)) $moduleName = $this->moduleName;
         if(empty($methodName)) $methodName = $this->methodName;
 
+        if($this->viewType == 'json') return $this->parseJSON($moduleName, $methodName);
+
         /* If the parser is default or run mode is admin, install, upgrade, call default parser.  */
         if(RUN_MODE != 'front' or $this->config->template->parser == 'default')
         {
