@@ -389,8 +389,13 @@ class package extends control
      */
     public function upload()
     {
+        $canMange = $this->loadModel('common')->verfyAdmin();
+
+        $this->view->canMange = $canMange;
+
         if($_FILES)
         {
+            if(1 or $canMange['result'] != 'success') $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->setOkFile, $canMange['okFile'])));
             $tmpName  = $_FILES['file']['tmp_name'];
             $fileName = $_FILES['file']['name'];
             $package  = basename($fileName, '.zip');

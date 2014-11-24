@@ -71,18 +71,22 @@ class block extends control
 
         $this->block->loadTemplateLang($template);
 
+        if($type == 'phpcode')
+        {
+            $return = $this->loadModel('common')->canCreatePHP();
+            if($return['result'] == 'fail') $this->view->okFile = $return['okFile'];
+            $canCreatePHP = $return['result'] == 'success';
+
+            $this->view->canCreatePHP = $canCreatePHP;
+        }
+
         if($_POST)
         {
+            if($type == 'phpcode' and !$canCreatePHP) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+
             $this->block->create($template);
             if(!dao::isError()) $this->send(array('result' => 'success', 'locate' => $this->inlink('admin')));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        }
-
-        if($type == 'phpcode')
-        {
-            $return = $this->block->canCreatePHP();
-            if($return['result'] == 'fail') $this->view->okFile = $return['okFile'];
-            $this->view->canCreatePHP = $return['result'] == 'success' ? true : false;
         }
 
         $this->view->type     = $type;
@@ -107,18 +111,21 @@ class block extends control
 
         if(!$blockID) $this->locate($this->inlink('admin'));
 
+        if($type == 'phpcode')
+        {
+            $return = $this->loadModel('common')->canCreatePHP();
+            if($return['result'] == 'fail') $this->view->okFile = $return['okFile'];
+            $canCreatePHP = $return['result'] == 'success';
+
+            $this->view->canCreatePHP = $canCreatePHP;
+        }
+
         if($_POST)
         {
+            if($type == 'phpcode' and !$canCreatePHP) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->block->update($template);
             if(!dao::isError()) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        }
-
-        if($type == 'phpcode')
-        {
-            $return = $this->block->canCreatePHP();
-            if($return['result'] == 'fail') $this->view->okFile = $return['okFile'];
-            $this->view->canCreatePHP = $return['result'] == 'success' ? true : false;
         }
 
         $this->view->template = $template;

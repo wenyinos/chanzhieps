@@ -596,23 +596,6 @@ class blockModel extends model
     }
 
     /**
-     * Whether can create phpcode block or not.
-     * 
-     * @access public
-     * @return array
-     */
-    public function canCreatePHP()
-    {
-        $okFile = dirname($this->app->getDataRoot()) . DS . 'ok';
-        if(!file_exists($okFile) or time() - filemtime($okFile) > 3600)
-        {
-            return array('result' => 'fail', 'okFile' => $okFile);
-        }
-
-        return array('result' => 'success');
-    }
-
-    /**
      * Load language from a template.
      * 
      * @param  string $template

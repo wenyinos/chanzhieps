@@ -61,11 +61,6 @@ $lang->block->placeholder = new stdclass();
 $lang->block->placeholder->moreText = 'Text for button of more';
 $lang->block->placeholder->moreUrl  = 'Url for button of more';
 
-$lang->block->setOkFile = <<<EOT
-<h5>For security reason, please do these steps. </h5>
-<p>Create %s file. If this file exists already, reopen it and save again.</p>
-EOT;
-
 $lang->block->gridOptions[0]  = 'Auto';
 $lang->block->gridOptions[6]  = '1/2';
 $lang->block->gridOptions[4]  = '1/3';

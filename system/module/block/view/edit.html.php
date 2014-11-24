@@ -15,7 +15,7 @@
 <?php
 js::set('type', $type);
 js::set('cancreatephp', isset($canCreatePHP) ? $canCreatePHP : '');
-js::set('setOkFile', isset($okFile) ? sprintf($lang->block->setOkFile, $okFile) : '');
+js::set('setOkFile', isset($okFile) ? sprintf($lang->setOkFile, $okFile) : '');
 
 $colorPlates = '';
 foreach (explode('|', $lang->block->colorPlates) as $value)

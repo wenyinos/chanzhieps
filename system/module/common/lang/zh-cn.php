@@ -75,6 +75,11 @@ $lang->fail           = '失败';
 $lang->noResultsMatch = '没有匹配的选项';
 $lang->alias          = '搜索引擎优化使用，可使用英文或数字';
 
+$lang->setOkFile = <<<EOT
+<h5>请按照下面的步骤操作以确认您的管理员身份。</h5>
+<p>创建 %s 文件。如果存在该文件，使用编辑软件打开，重新保存一遍。</p>
+EOT;
+
 /* Items for javascript. */
 $lang->js = new stdclass();
 $lang->js->confirmDelete = '您确定要执行删除操作吗？';

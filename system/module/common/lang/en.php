@@ -75,6 +75,11 @@ $lang->fail           = 'Failed';
 $lang->noResultsMatch = 'No matched results.';
 $lang->alias          = 'For SEO, could be numbers, letters or words';
 
+$lang->setOkFile = <<<EOT
+<h5>For security reason, please do these steps. </h5>
+<p>Create %s file. If this file exists already, reopen it and save again.</p>
+EOT;
+
 /* Items for javascript. */
 $lang->js = new stdclass();
 $lang->js->confirmDelete = 'Are sure to delete it?';
