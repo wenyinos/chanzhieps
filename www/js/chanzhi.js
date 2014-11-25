@@ -197,7 +197,14 @@ $.extend(
             if(!url) url = $(this).data('rel');
             if(!url) return false;
 
-            target.load(url, callback);
+            target.load(url, function()
+            {
+                if(target.hasClass('modal'))
+                {
+                    $.ajustModalPosition('fit', target);
+                }
+                callback && callback();
+            });
 
             return false;
         });
@@ -417,6 +424,7 @@ $.extend(
             $('#ajaxModal .modal-body').load(url + ' .modal-body', function()
             {
                 $(this).find('.modal-dialog').css('width', $(this).data('width'));
+                $.ajustModalPosition('', '#ajaxModal');
             });
         }, duration);
     }
