@@ -89,7 +89,6 @@ $(document).ready(function()
 
     $form.submit(function()
     {
-        console.log(getThemeSettings());
         $form.find('input.form-control, select.form-control, input[type="hidden"]').each(function()
         {
             var $this = $(this);
