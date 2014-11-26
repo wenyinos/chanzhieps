@@ -165,7 +165,7 @@ class threadModel extends model
         $allowedTags = $this->app->user->admin == 'super' ? $this->config->allowedTags->admin : $this->config->allowedTags->front;
 
         $thread = fixer::input('post')
-            ->stripTags('content', $allowedTags)
+            ->stripTags('content,link', $allowedTags)
             ->setIF(!$canManage, 'readonly', 0)
             ->setIF(!$this->post->isLink, 'link', '')
             ->setForce('board', $boardID)
@@ -234,7 +234,7 @@ class threadModel extends model
         $thread = fixer::input('post')
             ->setIF(!$canManage, 'readonly', 0)
             ->setIF(!$this->post->isLink, 'link', '')
-            ->stripTags('content', $allowedTags)
+            ->stripTags('content.link', $allowedTags)
             ->setForce('editor', $this->session->user->account)
             ->setForce('editedDate', helper::now())
             ->setDefault('readonly', 0)
