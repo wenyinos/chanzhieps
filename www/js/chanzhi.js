@@ -197,6 +197,8 @@ $.extend(
             if(!url) url = $(this).data('rel');
             if(!url) return false;
 
+            target.attr('rel', url);
+
             target.load(url, function()
             {
                 if(target.hasClass('modal'))
