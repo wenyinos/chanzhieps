@@ -46,8 +46,8 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
         </tr>
         <tr>
           <th><?php echo $lang->slide->mainLink;?></th>
-          <td>
-            <div class='input-group'>
+          <td colspan='2'>
+            <div class='input-group mainLink'>
               <?php echo html::input('mainLink', $slide->mainLink, "class='form-control'");?>
               <div class='input-group-addon'>
                 <label class='checkbox'>
