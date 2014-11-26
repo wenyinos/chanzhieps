@@ -53,16 +53,6 @@ $lang->ui->template->reload          = '刷新页面';
 $lang->ui->template->doInstall       = '确认安装';
 $lang->ui->template->info            = '模板信息';
 
-$lang->ui->template->error = new stdclass();
-$lang->ui->template->error->paths    = '目录权限错误';
-$lang->ui->template->error->exists   = "<p>目录%s不存在</p>";
-$lang->ui->template->error->writable = "<p>目录%s不可写</p>";
-
-$lang->ui->template->commands = new stdclass();
-$lang->ui->template->commands->execute  = '如果是Linux系统，请执行以下命令继续';
-$lang->ui->template->commands->exists   = "mkdir -p %s<br/>";
-$lang->ui->template->commands->writable = "chmod 777 -R %s<br/>"; 
-
 $lang->ui->customtheme = '自定义主题';
 $lang->ui->custom      = '自定义';
 $lang->ui->themeSaved  = '主题配置已保存';

@@ -108,3 +108,15 @@ $lang->package->errorConflicts               = 'With plug-in "%s" Conflict!';
 $lang->package->errorDepends                 = 'The following dependency plugin is not installed or the version is incorrect:<br /><br /> %s';
 $lang->package->errorIncompatible            = 'The plug-in with your ZenTao incompatible version';
 $lang->package->errorUninstallDepends        = 'Plugin "%s" relying on the plug-in, can not uninstall';
+
+$lang->package->template = new stdclass();
+
+$lang->package->template->error = new stdclass();
+$lang->package->template->error->paths    = 'Errors';
+$lang->package->template->error->exists   = "<p>Directory %s not exists/p>";
+$lang->package->template->error->writable = "<p>Directory %s is unwritable</p>";
+
+$lang->package->template->commands = new stdclass();
+$lang->package->template->commands->execute  = 'Resolve with this commands in Linux OS';
+$lang->package->template->commands->exists   = "mkdir -p %s<br/>";
+$lang->package->template->commands->writable = "chmod 777 -R %s<br/>"; 

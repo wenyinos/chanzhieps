@@ -171,8 +171,11 @@ class package extends control
             die($this->display());
         }
 
+        $packageInfo = $this->package->parsePackageCFG($package);
+        $type = isset($packageInfo->type) ? $packageInfo->type : 'extension';
+
         /* Checking the package pathes. */
-        $return = $this->package->checkPackagePathes($package);
+        $return = $this->package->checkPackagePathes($package, $type);
         if($this->session->dirs2Created == false) $this->session->set('dirs2Created', $return->dirs2Created);    // Save the dirs to be created.
         if($return->result != 'ok')
         {
@@ -265,7 +268,7 @@ class package extends control
         $this->package->savePackage($package, $type);
 
         /* Copy files to target directory. */
-        $this->view->files = $this->package->copyPackageFiles($package);
+        $this->view->files = $this->package->copyPackageFiles($package, $type);
 
         /* Judge need execute db install or not. */
         $data = new stdclass();
@@ -294,6 +297,7 @@ class package extends control
         $hook = $upgrade == 'yes' ? 'postupgrade' : 'postinstall';
         if($postHookFile = $this->package->getHookFile($package, $hook)) include $postHookFile;
 
+        $this->view->type = $type;
         $this->display();
     }
 
@@ -384,26 +388,29 @@ class package extends control
     /**
      * Upload an package
      * 
+     * @param  string $type extension|template
      * @access public
      * @return void
      */
-    public function upload()
+    public function upload($type = 'extension')
     {
         $canMange = $this->loadModel('common')->verfyAdmin();
-
         $this->view->canMange = $canMange;
 
-        if($_FILES)
+        if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            if(1 or $canMange['result'] != 'success') $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->setOkFile, $canMange['okFile'])));
+            if($canMange['result'] != 'success') $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->setOkFile, $canMange['okFile'])));
+            
+            if(empty($_FILES))  $this->send(array('result' => 'fail', 'message' => '' ));
+
             $tmpName  = $_FILES['file']['tmp_name'];
             $fileName = $_FILES['file']['name'];
             $package  = basename($fileName, '.zip');
             move_uploaded_file($tmpName, $this->app->getTmpRoot() . "/package/$fileName");
 
             $info = $this->package->getInfoFromDB($package);
-            $type = (!empty($info) and $info->status == 'installed') ? 'upgrade' : 'install';
-            $link = $type == 'install' ? inlink('install', "package=$package") : inlink('upgrade', "package=$package");
+            $option = (!empty($info) and $info->status == 'installed') ? 'upgrade' : 'install';
+            $link = $option == 'install' ? inlink('install', "package=$package&downLink=&md5=&type={$type}") : inlink('upgrade', "package=$package&downLink=&md5=&type={$type}");
             $this->send(array('result' => 'success', 'message' => $this->lang->package->successUploadedPackage, 'locate' => $link));
         }
 

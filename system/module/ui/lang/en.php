@@ -53,16 +53,6 @@ $lang->ui->template->reload          = 'Reload page';
 $lang->ui->template->doInstall       = 'Do install';
 $lang->ui->template->info            = 'Template info';
 
-$lang->ui->template->error = new stdclass();
-$lang->ui->template->error->paths    = 'Errors';
-$lang->ui->template->error->exists   = "<p>Directory %s not exists/p>";
-$lang->ui->template->error->writable = "<p>Directory %s is unwritable</p>";
-
-$lang->ui->template->commands = new stdclass();
-$lang->ui->template->commands->execute  = 'Resolve with this commands in Linux OS';
-$lang->ui->template->commands->exists   = "mkdir -p %s<br/>";
-$lang->ui->template->commands->writable = "chmod 777 -R %s<br/>"; 
-
 $lang->ui->customtheme = 'Custom theme';
 $lang->ui->custom      = 'Custom';
 $lang->ui->themeSaved  = 'Theme settings saved.';

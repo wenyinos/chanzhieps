@@ -36,43 +36,6 @@ class uiModel extends model
     }
 
     /**
-     * Get authorities needed when install.
-     * 
-     * @access public
-     * @return void
-     */
-    public function checkAuthorities()
-    {
-        $authorities = array();
-
-        $authorities['package']['path']     = $this->app->getDataRoot() . 'template' . DS;
-        $authorities['package']['exists']   = is_dir($authorities['package']['path']);
-        $authorities['package']['writable'] = is_writable($authorities['package']['path']);
-
-        $authorities['template']['path']     = $this->app->getTplRoot();
-        $authorities['template']['exists']   = is_dir($authorities['template']['path']);
-        $authorities['template']['writable'] = is_writable($authorities['template']['path']);
-
-        $errors = '';
-        $commands = '';
-        foreach($authorities as $authority)
-        {
-            if(!$authority['exists'])  
-            {
-                $errors   .= sprintf($this->lang->ui->template->error->exists, $authority['path']);
-                $commands .= sprintf($this->lang->ui->template->commands->exists, $authority['path']);
-            }
-            if(!$authority['writable']) 
-            {
-                $errors   .= sprintf($this->lang->ui->template->error->writable, $authority['path']);
-                $commands .= sprintf($this->lang->ui->template->commands->writable, $authority['path']);
-            }
-        }
-
-        return array($errors, $commands);
-    }
-
-    /**
      * Extract template package.
      * 
      * @param  string    $package 
@@ -117,29 +80,6 @@ class uiModel extends model
         $this->app->loadClass('Spyc', true);
         $tempPath = $this->app->getDataRoot() . 'template/' . $package . DS;
         return Spyc::YAMLLoadString(file_get_contents($tempPath . 'doc' . DS . $this->app->getClientLang() . '.yaml'));
-    }
-
-    /**
-     * Copy package files. 
-     * 
-     * @param  string    $package 
-     * @access public
-     * @return array
-     */
-    public function copyTemplateFiles($package)
-    {
-        $templateRoot = $this->app->getTplRoot();
-        $packagePath  = $this->app->getDataRoot() . 'template' . DS . $package . DS;
-
-        $pathes = scandir($packagePath);
-
-        $fileClass   = $this->app->loadClass('zfile');
-        $copiedFiles = $fileClass->copyDir($packagePath, $templateRoot . $package);
-
-        $fileClass = $this->app->loadClass('zfile');
-        $fileClass->removeDir($packagePath);
-
-        return $copiedFiles;
     }
 
     /**
