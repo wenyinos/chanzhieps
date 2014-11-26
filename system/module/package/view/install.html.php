@@ -35,7 +35,11 @@
 <div class='alert'>
   <h2 class='text-center text-success'><?php echo sprintf($lang->package->installFinished, $installType);?></h2>
   <div class='text-center'>
+    <?php if($type == 'template'):?>
+    <?php echo html::a($this->createLink('ui', 'settemplate'), $lang->package->settemplate, "class='btn btn-primary'");?>
+    <?php else:?>
     <?php echo html::a('javascript:;', $lang->package->viewInstalled, "class='btn btn-primary' onclick='return parent.location.href=v.browseLink'");?>
+    <?php endif;?>
   </div>
   <?php
   echo "<h5 class='success'>{$lang->package->successInstallDB}</h5>";

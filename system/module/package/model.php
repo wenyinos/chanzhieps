@@ -258,6 +258,7 @@ class packageModel extends model
         /* Try the yaml of current lang, then try en. */
         $lang = $this->app->getClientLang();
         $infoFile = "ext/$package/doc/$lang.yaml";
+
         if(!file_exists($infoFile)) $infoFile = "ext/$package/doc/en.yaml";
         if(!file_exists($infoFile)) return $info;
 
@@ -315,6 +316,7 @@ class packageModel extends model
 
         /* Append the pathes to stored the extracted files. */
         $pathes[] = "system/module/package/ext/";
+        $pathes[] = "www/template/";
 
         return array_unique($pathes);
     }
@@ -523,7 +525,7 @@ class packageModel extends model
      * @access public
      * @return object    the check result.
      */
-    public function checkPackagePathes($package)
+    public function checkPackagePathes($package, $type = '')
     {
         $return = new stdclass();
         $return->result        = 'ok';
@@ -538,8 +540,9 @@ class packageModel extends model
         $groupedPaths = array();
         foreach($pathes as $path)
         {
-            if(substr($path, 0, 6) == 'system') $groupedPaths['system'][] = $path;
-            if(substr($path, 0, 3) == 'www')    $groupedPaths['www'][]    = $path;
+            if(substr($path, 0, 6) == 'system') $groupedPaths['system'][]   = $path;
+            if(substr($path, 0, 3) == 'www')    $groupedPaths['www'][]      = $path;
+            if($type == 'template')             $groupedPaths['template'][] = $path;
         }
 
         foreach($groupedPaths as $baseDir => $pathes)
@@ -549,6 +552,7 @@ class packageModel extends model
                 if($path == 'db' or $path == 'doc' or $path == 'hook') continue;
                 if($baseDir == 'system') $path = dirname($appRoot) . DS . $path;
                 if($baseDir == 'www')    $path = $this->app->getWwwRoot() . substr($path, 4);
+                if($type == 'template')  $path = $this->app->getWwwRoot() . 'template' . DS . $package . DS . $path;
 
                 if(is_dir($path))
                 {
@@ -660,20 +664,23 @@ class packageModel extends model
      * @access public
      * @return array
      */
-    public function copyPackageFiles($package)
+    public function copyPackageFiles($package, $type)
     {
         $appRoot      = $this->app->getAppRoot();
         $packageDir   = 'ext' . DS . $package . DS;
 
-        $systemPathes = array();
-        $wwwPathes    = array();
+        $systemPathes   = array();
+        $wwwPathes      = array();
+        $templatePathes = array();
 
-        if(is_dir($packageDir . 'system' . DS)) $systemPathes = scandir($packageDir . 'system' . DS);
-        if(is_dir($packageDir . 'www' . DS))    $wwwPathes    = scandir($packageDir . 'www' . DS);
+        if(is_dir($packageDir . 'system' . DS)) $systemPathes   = scandir($packageDir . 'system' . DS);
+        if(is_dir($packageDir . 'www' . DS))    $wwwPathes      = scandir($packageDir . 'www' . DS);
+        if($type == 'template')                 $templatePathes = scandir($packageDir);
 
-        $copiedFiles       = array();
-        $copiedSystemFiles = array();
-        $copiedWwwFiles    = array();
+        $copiedFiles         = array();
+        $copiedSystemFiles   = array();
+        $copiedWwwFiles      = array();
+        $copiedTemplateFiles = array();
 
         foreach($systemPathes as $path)
         {
@@ -687,7 +694,13 @@ class packageModel extends model
             $copiedWwwFiles = $copiedWwwFiles + $this->classFile->copyDir($packageDir . 'www' . DS . $path, $this->app->getWwwRoot() . $path);
         }
 
-        $copiedFiles = $copiedSystemFiles + $copiedWwwFiles;
+        foreach($templatePathes as $path)
+        {
+            if($path == '..' or $path == '.') continue;
+            $copiedTemplateFiles = $copiedTemplateFiles + $this->classFile->copyDir($packageDir . $path, $this->app->getWwwRoot() . 'template' . DS . $package . DS . $path);
+        }
+
+        $copiedFiles = $copiedSystemFiles + $copiedWwwFiles + $copiedTemplateFiles;
 
         foreach($copiedFiles as $key => $copiedFile)
         {

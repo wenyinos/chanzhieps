@@ -16,7 +16,7 @@
   <div id='responser'></div>
   <div class='input-group'>
     <input type='file' name='file' class='form-control' />
-    <span class='input-group-btn'><?php echo html::submitButton($lang->package->install);?></span>
+    <div class='input-group-btn'><?php echo html::submitButton($lang->package->install);?></div>
   </div>
 </form>
 <?php else:?>

@@ -25,6 +25,7 @@ $lang->package->upload        = '本地安装';
 $lang->package->erase         = '清除';
 $lang->package->upgrade       = '升级插件';
 $lang->package->agreeLicense  = '我同意该授权';
+$lang->package->settemplate   = '设置模板';
 
 $lang->package->structure   = '目录结构';
 $lang->package->installed   = '已安装';
@@ -98,7 +99,7 @@ $lang->package->errorPackageFileExists       = '下载路径已经有一个名�
 $lang->package->errorDownloadFailed          = '下载失败，请重新下载。如果多次重试还不行，请尝试手工下载，然后通过上传功能上传。';
 $lang->package->errorMd5Checking             = '下载文件不完整，请重新下载。如果多次重试还不行，请尝试手工下载，然后通过上传功能上传。';
 $lang->package->errorExtracted               = '包文件<strong> %s </strong>解压缩失败，可能不是一个有效的zip文件。错误信息如下：<br />%s';
-$lang->package->errorCheckIncompatible       = '该插件与蝉知版本不兼容，%s后可能无法使用。。<h3>您可以选择 <a href="%s">强制%s</a> 或者 <a href="#" onclick=parent.location.href="%s">取消</a></h3>';
+$lang->package->errorCheckIncompatible       = '该插件与蝉知版本不兼容，%s后可能无法使用。。<h3>您可以选择 <a href="%s" class="loadInModal">强制%s</a> 或者 <a href="#" onclick=parent.location.href="%s">取消</a></h3>';
 $lang->package->errorFileConflicted          = '有以下文件冲突：<br />%s <h3>您可以选择 <a href="%s">覆盖</a> 或者 <a href="#" onclick=parent.location.href="%s">取消</a></h3>';
 $lang->package->errorPackageNotFound         = '包文件 <strong>%s </strong>没有找到，可能是因为自动下载失败。您可以尝试再次下载。';
 $lang->package->errorTargetPathNotWritable   = '目标路径 <strong>%s </strong>不可写。';
@@ -108,3 +109,15 @@ $lang->package->errorConflicts               = '与插件“%s”冲突！';
 $lang->package->errorDepends                 = '以下依赖插件没有安装或版本不正确：<br /><br /> %s';
 $lang->package->errorIncompatible            = '该插件与您的蝉知版本不兼容';
 $lang->package->errorUninstallDepends        = '插件“%s”依赖该插件，不能卸载';
+
+$lang->package->template = new stdclass();
+
+$lang->package->template->error = new stdclass();
+$lang->package->template->error->paths    = '目录权限错误';
+$lang->package->template->error->exists   = "<p>目录%s不存在</p>";
+$lang->package->template->error->writable = "<p>目录%s不可写</p>";
+
+$lang->package->template->commands = new stdclass();
+$lang->package->template->commands->execute  = '如果是Linux系统，请执行以下命令继续';
+$lang->package->template->commands->exists   = "mkdir -p %s<br/>";
+$lang->package->template->commands->writable = "chmod 777 -R %s<br/>"; 
