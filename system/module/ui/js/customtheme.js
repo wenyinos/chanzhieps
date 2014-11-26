@@ -89,10 +89,23 @@ $(document).ready(function()
 
     $form.submit(function()
     {
+        console.log(getThemeSettings());
         $form.find('input.form-control, select.form-control, input[type="hidden"]').each(function()
         {
             var $this = $(this);
-            if($this.val() === '') $this.val($this.data('origin-default') || $this.data('default') || $this.attr('placeholder') || $this.val()).trigger('change.color');
+            var val = $this.val();
+            var type = $this.data('type');
+            if(val === '') $this.val($this.data('origin-default') || $this.data('default') || $this.attr('placeholder') || $this.val()).trigger('change.color');
+            else if($this.data('type') === 'image' && val != 'inherit' && val != 'none' && val.indexOf('url(') != 0)
+            {
+                $this.val('url(' + val + ')');
+            }
+        });
+
+        $form.find('.input-group-textbox-couple input[data-target]').each(function()
+        {
+            var name = $(this).data('target');
+            $('#' + name).val($('[data-sid="' + name + '-1"]').val() + ' ' + $('[data-sid="' + name + '-2"]').val());
         });
     });
 });
