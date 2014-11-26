@@ -217,7 +217,7 @@ class product extends control
         {
             $this->product->currency();
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         }
 
         unset($this->view->treeModuleMenu);
