@@ -113,6 +113,9 @@ js::execute($product->js);
       <div class='article-content'>
         <?php echo $product->content;?>
       </div>
+      <div class="article-files">
+        <?php $this->loadModel('file')->printFiles($product->files);?>
+      </div>
     </div>
     <div id='comments'>
       <div id='commentBox'></div>
