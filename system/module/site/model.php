@@ -39,5 +39,8 @@ class siteModel extends model
         if(!isset($this->config->company->desc))       $this->config->company->desc       = '';
         if(!isset($this->config->company->content))    $this->config->company->content    = '';
         if(!isset($this->config->company->contact))    $this->config->company->contact    = json_encode(array());
+
+        if(!isset($this->config->product))             $this->config->product             = new stdclass();
+        if(!isset($this->config->product->currency))   $this->config->product->currency   = 'rmb';
     }
 }
