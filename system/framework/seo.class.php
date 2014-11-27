@@ -156,7 +156,10 @@ class seo
     {
         $rawString = $string;
         $started = false;
-        $poses = array();
+
+        $poses    = array();
+        $enclosed = array();
+
         while(strpos($string, '"') !== false)
         {
             $pos = strpos($string, "'");
