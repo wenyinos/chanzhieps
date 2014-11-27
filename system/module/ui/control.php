@@ -62,20 +62,10 @@ class ui extends control
         if($_POST)
         {
             $params = $_POST;
-            foreach($params as $key => $value) if(empty($value)) $params[$key] = 0;
-            /* Unset extral params. */
-            unset($params['background-image-position']);
-            unset($params['navbar-background-image-position']);
 
             if(isset($templates[$template]) && isset($templates[$template]['themes'][$theme]))
             {
-                if(!is_dir($savePath)) mkdir($savePath, 0777, true);
-                $lessTemplate = $this->app->getWwwRoot() . 'template' . DS . $template . DS . 'theme' . DS . $theme . DS . 'style.less';
-
-                $lessc = $this->app->loadClass('lessc');
-                $lessc->setVariables($params);
-                $lessc->compileFile($lessTemplate, $cssFile);
-
+                $this->ui->createCustomerCss($template, $theme, $params);
                 $setting       = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true): array();
                 $postedSetting = fixer::input('post')->remove('template,theme,css')->get();
 
@@ -105,12 +95,6 @@ class ui extends control
 
         $this->display();
      }
-
-    public function checkSavePath()
-    {
-        $savePath = 
-        is_writable($cssPath);
-    }
 
     /**
      * set logo.

@@ -36,53 +36,6 @@ class uiModel extends model
     }
 
     /**
-     * Extract template package.
-     * 
-     * @param  string    $package 
-     * @access public
-     * @return void
-     */
-    public function extractPackage($package)
-    {
-        $packageFile = $this->app->getDataRoot() . "template/{$package}.zip";
-
-        $this->app->loadClass('pclzip', true);
-        $zip = new pclzip($packageFile);
-        $files = $zip->listContent();
-
-        $tempPath = $this->app->getDataRoot() . 'template/' . $package . DS;
-
-        if(is_dir($tempPath))
-        {
-            $fileClass = $this->app->loadClass('zfile');
-            $fileClass->removeDir($tempPath);
-        }
-
-        $return = new stdclass();
-        $removePath = $files[0]['filename'];
-        if($zip->extract(PCLZIP_OPT_PATH, $tempPath, PCLZIP_OPT_REMOVE_PATH, $removePath) == 0)
-        {
-            $return->result = 'fail';
-            $return->error  = $zip->errorInfo(true);
-        }
-        return true;
-    }
-
-    /**
-     * Get info from template package. 
-     * 
-     * @param  string    $package 
-     * @access public
-     * @return void
-     */
-    public function getInfoFromPackage($package)
-    {
-        $this->app->loadClass('Spyc', true);
-        $tempPath = $this->app->getDataRoot() . 'template/' . $package . DS;
-        return Spyc::YAMLLoadString(file_get_contents($tempPath . 'doc' . DS . $this->app->getClientLang() . '.yaml'));
-    }
-
-    /**
      * Get template option menu.   
      * 
      * @access public
@@ -145,6 +98,42 @@ class uiModel extends model
         if($result) return array('result' => true);
 
         return array('result' => false, 'message' => $this->lang->fail);
+    }
+
+    /**
+     * Create customer css.
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @param  array    $params 
+     * @access public
+     * @return void
+     */
+    public function createCustomerCss($template, $theme, $params)
+    {
+        $params = (array) $params;
+        $lessc = $this->app->loadClass('lessc');
+        $cssFile = sprintf($this->config->site->ui->customCssFile, $template, $theme);
+
+        $savePath = dirname($cssFile);
+        if(!is_dir($savePath)) mkdir($savePath, 0777, true);
+        $lessTemplate = $this->app->getWwwRoot() . 'template' . DS . $template . DS . 'theme' . DS . $theme . DS . 'style.less';
+
+        foreach($this->config->ui->themes[$theme] as $section => $selector)
+        {
+            foreach($selector as $attr => $settings)
+            {
+                foreach($settings as $setting) if(isset($params[$setting['name']]) and empty($params[$setting['name']])) $params[$setting['name']] = $setting['default'];
+            }
+        }
+
+        foreach($params as $item => $value) if(empty($value)) $params[$item] = 0;
+
+        unset($params['background-image-position']);
+        unset($params['navbar-background-image-position']);
+
+        $lessc->setVariables($params);
+        return $lessc->compileFile($lessTemplate, $cssFile);
     }
 
     /**
