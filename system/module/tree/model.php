@@ -398,7 +398,7 @@ class treeModel extends model
     {
         $category = fixer::input('post')
             ->join('moderators', ',')
-            ->stripTags('desc', $this->config->allowedTags->admin)
+            ->stripTags('desc,link', $this->config->allowedTags->admin)
             ->setDefault('readonly', 0)
             ->setIF(!$this->post->isLink, 'link', '')
             ->get();

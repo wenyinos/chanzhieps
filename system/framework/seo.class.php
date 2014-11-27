@@ -154,8 +154,29 @@ class seo
      */
     public static function unify($string, $to = ',')
     {
+        $rawString = $string;
+        $started = false;
+        $poses = array();
+        while(strpos($string, '"') !== false)
+        {
+            $pos = strpos($string, "'");
+            if($started) 
+            {
+                $enclosed[] = substr($string, 0, $pos);
+                $string = substr($string, $pos + 1);
+                $started = false;
+            }
+            else
+            {
+                $started = true;
+                $string = substr($string, $pos + 1);
+            }
+        }
+
+        foreach($enclosed as $word) $rawString = str_replace("'$word'", '', $rawString); 
         $labels = array('_', '、', ' ', '-', '\n', '?', '@', '&', '%', '~', '`', '+', '*', '/', '\\', '，', '。');
-        $string = str_replace($labels, $to, $string);
+        $string = str_replace($labels, $to, $rawString);
+        $string .= $to . implode($to, $enclosed);
         return preg_replace("/[{$to}]+/", $to, trim($string, $to));
     }
 }

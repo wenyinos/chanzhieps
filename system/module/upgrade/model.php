@@ -967,4 +967,24 @@ class upgradeModel extends model
         self::$errors = array();
         return $errors;
     }
+
+    /**
+     * Create customer css files.
+     * 
+     * @access public
+     * @return void
+     */
+    public function createCustomerCss()
+    {
+        $lessc = $this->app->loadClass('lessc');
+        $settings = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array();
+        foreach($settings as $template => $themes)
+        {
+            foreach($themes as $theme => $params)
+            {
+                $this->loadModel('ui')->createCustomerCss($template, $theme, $params);
+            }
+        }
+        return true;
+    }
 }

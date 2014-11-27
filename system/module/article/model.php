@@ -288,7 +288,7 @@ class articleModel extends model
             ->add('type', $type)
             ->add('order', 0)
             ->setIF(!$this->post->isLink, 'link', '')
-            ->stripTags('content', $this->config->allowedTags->admin)
+            ->stripTags('content,link', $this->config->allowedTags->admin)
             ->get();
 
         $article->keywords = seo::unify($article->keywords, ',');
@@ -331,7 +331,7 @@ class articleModel extends model
         $category = array_keys($article->categories);
 
         $article = fixer::input('post')
-            ->stripTags('content', $this->config->allowedTags->admin)
+            ->stripTags('content,link', $this->config->allowedTags->admin)
             ->join('categories', ',')
             ->add('editor', $this->app->user->account)
             ->add('editedDate', helper::now())

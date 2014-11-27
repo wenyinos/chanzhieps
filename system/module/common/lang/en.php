@@ -73,7 +73,7 @@ $lang->sendSuccess    = 'Successfully sended.';
 $lang->deleteSuccess  = 'Successfully deleted.';
 $lang->fail           = 'Failed';
 $lang->noResultsMatch = 'No matched results.';
-$lang->alias          = 'For SEO, could be numbers, letters or words';
+$lang->alias          = 'For SEO, could be numbers, words enclosed by ".';
 
 $lang->setOkFile = <<<EOT
 <h5>For security reason, please do these steps. </h5>
