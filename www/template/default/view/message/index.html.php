@@ -14,34 +14,21 @@
 <?php $common->printPositionBar();?>
 <div class='row'>
   <div class='col-md-9 col-main'>
-    <div class='panel'>
-      <div class='panel-heading'>
-        <strong><i class='icon-comments-alt'></i> <?php echo $lang->message->list;?> (<?php echo $pager->recTotal;?>)</strong>
-        <div class='panel-actions'><a href='#commentForm' class='btn btn-primary'><i class='icon-comment-alt'></i> <?php echo $lang->message->post; ?></a></div>
+    <?php if(!empty($messages)):?>
+    <?php foreach($messages as $number => $message):?>
+    <div class='comment card' id="comment<?php echo $message->id?>">
+      <a href='javascript:;'><i class='alert icon alert-default icon-info-sign'><?php echo $message->id?></i></a>
+      <div class='card-content'>
+        <strong><?php echo $message->from . $lang->colon;?></strong>
+        <?php echo nl2br($message->content);?>
+        <span><i class='icon-time'></i><?php echo formatTime($message->date, 'Y-m-d H:i');?> </span>
+        <?php echo html::a($this->createLink('message', 'reply', "messageID=$message->id"), "<i class='icon icon-reply alert alert-info' > </i>", "data-toggle='modal' data-type='iframe'");?>
       </div>
-      <div class='panel-body'>
-        <?php if(!empty($messages)):?>
-        <div class='comments-list'>
-        <?php foreach($messages as $number => $message):?>
-          <div class='comment' id="comment<?php echo $message->id?>">
-            <div class='content clearfix'>
-              <div class='text'>
-                <span class='author'>
-                  <strong><i class='icon-user text-muted'></i> <?php echo $message->from;?></strong>
-                </span> 
-                <small>(<?php echo formatTime($message->date, 'Y-m-d H:i');?>)<?php echo $lang->colon;?></small>&nbsp;
-                <?php echo nl2br($message->content);?>
-                <span class='pull-right'><?php echo html::a($this->createLink('message', 'reply', "messageID=$message->id"), $lang->message->reply, "data-toggle='modal' data-type='iframe'");?></span>
-              </div>
-            </div>
-          </div>
-          <?php $this->message->getFrontReplies($message);?>
-        <?php endforeach; ?>
-        </div>
-        <?php endif;?>
-        <div class='pager clearfix'><?php $pager->show('right', 'short');?></div>
-      </div>
+      <div class='reply'><?php $this->message->getFrontReplies($message);?></div>
     </div>
+    <?php endforeach; ?>
+    <?php endif;?>
+    <div class='pager clearfix'><?php $pager->show('right', 'short');?></div>
 
     <div class='panel'>
       <div class='panel-heading'><strong><i class='icon-comment-alt'></i> <?php echo $lang->message->post;?></strong></div>
@@ -107,6 +94,11 @@
       </div>
     </div>
   </div>
-  <div class='col-md-3 col-side'><?php $this->block->printRegion($layouts, 'message_index', 'side');?></div>
+  <div class='col-md-3 col-side'>
+    <div class='nav'>
+    <a href='#commentForm' class='btn btn-primary btn-lg w-p100'><i class='icon-comment-alt'></i> <?php echo $lang->message->post; ?></a>
+    </div>
+    <?php $this->block->printRegion($layouts, 'message_index', 'side');?>
+  </div>
 </div>
 <?php include TPL_ROOT . 'common/footer.html.php';?>
