@@ -16,15 +16,15 @@
   <div class='col-md-9 col-main'>
     <?php if(!empty($messages)):?>
     <?php foreach($messages as $number => $message):?>
-    <div class='comment card' id="comment<?php echo $message->id?>">
-      <a href='javascript:;'><i class='alert icon alert-default icon-info-sign'><?php echo $message->id?></i></a>
-      <div class='card-content'>
+    <div class='comment' id="comment<?php echo $message->id?>">
+      <div class='comment-id'>#<?php echo $message->id?></div>
+      <div class='comment-content'>
         <strong><?php echo $message->from . $lang->colon;?></strong>
-        <?php echo nl2br($message->content);?>
-        <span><i class='icon-time'></i><?php echo formatTime($message->date, 'Y-m-d H:i');?> </span>
-        <?php echo html::a($this->createLink('message', 'reply', "messageID=$message->id"), "<i class='icon icon-reply alert alert-info' > </i>", "data-toggle='modal' data-type='iframe'");?>
+        <?php echo nl2br($message->content);?>&nbsp;&nbsp;
+        <span class='text-muted comment-info'><i class='icon-time'></i> <?php echo formatTime($message->date, 'Y-m-d H:i');?> </span>
+        &nbsp;<?php echo html::a($this->createLink('message', 'reply', "messageID=$message->id"), "<i class='icon icon-reply' ></i>", "data-toggle='modal' data-type='iframe' data-icon='reply' data-title='{$lang->message->reply}'");?>
+        <div class='reply'><?php $this->message->getFrontReplies($message);?></div>
       </div>
-      <div class='reply'><?php $this->message->getFrontReplies($message);?></div>
     </div>
     <?php endforeach; ?>
     <?php endif;?>

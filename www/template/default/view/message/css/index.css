@@ -1,4 +1,13 @@
 .card.comment .card-content{margin:10px; padding-bottom:0px; padding-left:6px;}
-.reply{padding-left:15px;}
-.reply .card-content{margin:0;}
-.icon-reply{background:none;border:none;}
+.pager {margin: 0}
+
+.comment {display: table; width: 100%; border: 1px solid #ddd; border-radius: 3px; transition: all .5s cubic-bezier(.175,.885,.32,1); box-shadow: 0 1px 2px rgba(0,0,0,.075); margin-bottom: 10px; padding: 0;}
+.comment:before {display: none;}
+.comment-id, .comment-content {display: table-cell; padding: 8px;}
+.comment-id {vertical-align: top; font-size: 20px; font-weight: bold; color: #888; text-align: center; background: #f1f1f1; border-right: 1px solid #ddd; width: 60px; font-style: italic; }
+.reply > .reply-content {padding:0 0 0 20px;}
+.reply > .reply-content:first-child {border-top: 1px solid #ddd; padding-top: 5px; margin-top: 5px;}
+
+.comment-info {display: inline-block;}
+.icon-reply {color: #808080}
+.icon-reply:hover {color: #333}
