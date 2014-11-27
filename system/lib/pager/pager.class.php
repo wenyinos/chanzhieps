@@ -106,10 +106,10 @@ class pager
     public function __construct($recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
         $this->setApp();
-        $this->setRecTotal($recTotal);
-        $this->setRecPerPage($recPerPage);
+        $this->setRecTotal((int) $recTotal);
+        $this->setRecPerPage((int) $recPerPage);
         $this->setPageTotal();
-        $this->setPageID($pageID);
+        $this->setPageID((int) $pageID);
         $this->setLang();
         $this->setModuleName();
         $this->setMethodName();

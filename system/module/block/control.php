@@ -73,7 +73,7 @@ class block extends control
 
         if($type == 'phpcode')
         {
-            $return = $this->loadModel('common')->canCreatePHP();
+            $return = $this->loadModel('common')->verfyAdmin();
             if($return['result'] == 'fail') $this->view->okFile = $return['okFile'];
             $canCreatePHP = $return['result'] == 'success';
 
