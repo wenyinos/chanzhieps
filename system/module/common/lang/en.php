@@ -153,7 +153,7 @@ $lang->page->menu->create = 'Create|article|create|type=page';
 /* Menu of product module. */
 $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
-$lang->product->menu->browse = 'All products|product|admin|';
+$lang->product->menu->browse = array('link' => 'All products|product|admin|', 'alias' => 'create, edit');
 
 /* Menu of UI module. */
 $lang->ui = new stdclass();
@@ -206,7 +206,6 @@ $lang->site->menu->tag      = 'Tags|tag|admin|';
 #$lang->site->menu->robots   = 'Robots|site|setrobots|';
 $lang->site->menu->oauth    = 'Open OAuth|site|setoauth|';
 $lang->site->menu->link     = 'Links|links|admin|';
-$lang->site->menu->currency = 'Currency|product|currency|';
 $lang->site->menu->mail     = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
 $lang->site->menu->wechat   = array('link' => 'Wechat|wechat|admin|', 'alias' => 'create,setresponse');
 

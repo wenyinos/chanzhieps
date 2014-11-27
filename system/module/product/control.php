@@ -210,9 +210,6 @@ class product extends control
      */
     public function currency()
     {
-        $this->lang->product->menu = $this->lang->site->menu;
-        $this->lang->menuGroups->product = 'site';
-
         if($_POST)
         {
             $this->product->currency();
@@ -220,8 +217,6 @@ class product extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         }
 
-        unset($this->view->treeModuleMenu);
-        unset($this->view->treeManageLink);
         $this->view->title = $this->lang->product->currency;
         $this->display();
     }
