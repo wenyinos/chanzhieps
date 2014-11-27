@@ -8,7 +8,7 @@ css::internal('body{background-color:#f6f5f5}');
 <div class='container'>
   <div id='adminLogin'>
     <form method='post' id='ajaxForm'>
-      <div id='logo' class='text-center'><?php echo html::image("$themeRoot/default/images/main/logo.login.png");?></div>
+      <?php echo $this->config->site->name;?>
       <div id='formError' class='alert alert-danger hiding'></div>
       <?php echo html::input('account','',"class='form-control' placeholder='{$lang->user->inputAccountOrEmail}'");?>
       <?php echo html::password('password','',"class='form-control' placeholder='{$lang->user->inputPassword}'");?>
@@ -17,6 +17,7 @@ css::internal('body{background-color:#f6f5f5}');
     </form>
   </div>
 </div>
+<div id='logo' class='text-center w-100px '><?php echo html::image("$themeRoot/default/images/main/logo.login.png");?></div>
 <?php
 if($config->debug) js::import($jsRoot . 'jquery/form/min.js');
 if(isset($pageJS)) js::execute($pageJS);
