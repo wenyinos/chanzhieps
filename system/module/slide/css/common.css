@@ -20,3 +20,4 @@ i.icon-arrow-up, i.icon-arrow-down{cursor:pointer;}
 .table.table-form td.title-color label.input-group-addon{border-radius: 0;}
 .table.table-form td.title{padding-right:0}
 .table.table-form td.title input{border-radius: 3px 0 0 3px;}
+.table.table-form td .mainLink{width: 590px;}

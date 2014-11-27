@@ -352,6 +352,7 @@ class threadModel extends model
         {
             if($file->isImage)
             {
+                if($file->editor) continue;
                 $imagesHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank' data-toggle='lightbox'");
                 if($canManage) $imagesHtml .= "<span class='file-actions'>" . html::a(helper::createLink('thread', 'deleteFile', "threadID=$thread->id&fileID=$file->id"), "<i class='icon-trash'></i>", "class='deleter'") . '</span>';
                 $imagesHtml .= '</li>';
@@ -364,7 +365,7 @@ class threadModel extends model
                 $filesHtml .= '</li>';
             }
         }
-        echo "<ul class='files-list clearfix'><li class='files-list-heading'>". $this->lang->thread->file . '</li>' . $imagesHtml . $filesHtml . '</ul>';
+        if($imagesHtml or $filesHtml) echo "<ul class='files-list clearfix'><li class='files-list-heading'>". $this->lang->thread->file . '</li>' . $imagesHtml . $filesHtml . '</ul>';
     }
 
     /**

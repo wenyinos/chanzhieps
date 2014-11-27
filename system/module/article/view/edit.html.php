@@ -83,11 +83,11 @@
         <th><?php echo $lang->article->keywords;?></th>
         <td colspan='2'> <?php echo html::input('keywords', $article->keywords, "class='form-control'");?></td>
       </tr>
-      </tbody>
       <tr>
         <th><?php echo $lang->article->summary;?></th>
         <td colspan='2'><?php echo html::textarea('summary', $article->summary, "rows='2' class='form-control'");?></td>
       </tr>
+      </tbody>
       <tbody class='articleInfo'>
       <tr>
         <th><?php echo $lang->article->content;?></th>
