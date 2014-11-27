@@ -25,8 +25,8 @@ if(isset($pageCSS)) css::internal($pageCSS);
             </p>
           </div>
         </div>
-        <?php $this->message->getFrontReplies($comment);?>
       </div>
+      <?php $this->message->getFrontReplies($comment);?>
       <?php endforeach; ?>
     </div>
     <div class='pager clearfix' id='pager'><?php $pager->show('right', 'shortest');?></div>

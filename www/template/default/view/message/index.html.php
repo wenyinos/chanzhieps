@@ -36,8 +36,8 @@
                 </div>
               </div>
             </div>
-            <?php $this->message->getFrontReplies($message);?>
           </div>
+          <?php $this->message->getFrontReplies($message);?>
         <?php endforeach; ?>
         </div>
         <?php endif;?>

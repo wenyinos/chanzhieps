@@ -110,10 +110,9 @@ class messageModel extends model
                 echo "<span class='link-button pull-right'>";
                 echo html::a(helper::createLink('message', 'reply', "id={$reply->id}"), $this->lang->message->reply, "data-toggle='modal' data-type='iframe' id='reply{$reply->id}'");
                 echo "</span>";
-                echo "</div></div>";
+                echo "</div></div></div>";
                 $this->getFrontReplies($reply);
             }
-            echo "</div>";
         }
     }
 
