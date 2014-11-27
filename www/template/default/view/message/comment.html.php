@@ -9,19 +9,20 @@ if(isset($pageCSS)) css::internal($pageCSS);
     <div class='panel-actions'><a href='#commentForm' class='btn btn-primary'><i class='icon-comment-alt'></i> <?php echo $lang->message->post; ?></a></div>
     <strong><i class='icon-comments'></i> <?php echo $lang->message->list;?></strong>
   </div>
-</div>
-<?php foreach($comments as $number => $comment):?>
-<div class='comment card' id="comment<?php echo $comment->id?>">
-  <a href='javascript:;'> <i class='alert icon alert-default icon-info-sign'><?php echo $comment->id?></i></a>
-  <div class='card-content'>
-    <strong><?php echo $comment->from . $lang->colon;?></strong>
-    <?php echo nl2br($comment->content);?>
-    <span><i class='icon-time'></i><?php echo formatTime($comment->date, 'Y-m-d H:i');?> </span>
-    <?php echo html::a($this->createLink('comment', 'reply', "commentID=$comment->id"), "<i class='icon icon-reply alert alert-info' > </i>", "data-toggle='modal' data-type='iframe'");?>
+  <?php foreach($comments as $number => $comment):?>
+  <div class='comment' id="comment<?php echo $message->id?>">
+    <div class='comment-id'>#<?php echo $comment->id?></div>
+    <div class='comment-content'>
+      <strong><?php echo $comment->from . $lang->colon;?></strong>
+      <?php echo nl2br($comment->content);?>&nbsp;&nbsp;
+      <span class='text-muted comment-info'><i class='icon-time'></i> <?php echo formatTime($comment->date, 'Y-m-d H:i');?> </span>
+      &nbsp;<?php echo html::a($this->createLink('message', 'reply', "commentID=$comment->id"), "<i class='icon icon-reply' ></i>", "data-toggle='modal' data-type='iframe' data-icon='reply' data-title='{$lang->comment->reply}'");?>
+      <div class='reply'><?php $this->message->getFrontReplies($comment);?></div>
+    </div>
   </div>
-  <div class='reply'><?php $this->message->getFrontReplies($comment);?></div>
+  <?php endforeach; ?>
+
 </div>
-<?php endforeach; ?>
 <div class='pager clearfix' id='pager'><?php $pager->show('right', 'shortest');?></div>
 <?php endif;?>
 

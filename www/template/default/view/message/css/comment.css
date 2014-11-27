@@ -4,3 +4,14 @@
 
 .mgb-0{margin-bottom:0; border-bottom:none; border-radius:3px 3px 0 0;}
 .icon-reply{background:none;border:none;}
+
+.comment {display: table; width: 100%; border-bottom: 1px solid #ddd; transition: all .5s cubic-bezier(.175,.885,.32,1);padding: 0;}
+.comment:before {display: none;}
+.comment-id, .comment-content {display: table-cell; padding: 8px;}
+.comment-id {vertical-align: top; font-size: 16px; color: #888; text-align: center; background: #f1f1f1; border-right: 1px solid #ddd; width: 60px; font-style: italic; }
+.reply > .reply-content {padding:0 0 0 20px;}
+.reply > .reply-content:first-child {border-top: 1px solid #ddd; padding-top: 5px; margin-top: 5px;}
+
+.comment-info {display: inline-block;}
+
+.pager {margin-top: 10px;}
