@@ -51,7 +51,6 @@ class ui extends control
      */
     public function customTheme($theme = '', $template = '')
     {
-        
         if(empty($template)) $template = $this->config->template->name;
         $templates = $this->ui->getTemplates();
 

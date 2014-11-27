@@ -1,13 +1,11 @@
 VERSION=$(shell head -n 1 VERSION)
 
-all: tgz
-linux: tgz build4linux
+all: zip
 
 clean:
 	rm -fr chanzhieps
-	rm -fr *.tar.gz
 	rm -fr *.zip
-tgz:
+zip:
 	mkdir chanzhieps
 	cp -frv system chanzhieps/
 	rm -fr chanzhieps/system/config/my.php
@@ -45,37 +43,3 @@ tgz:
 	# zip it.
 	zip -r -9 chanzhiEPS.$(VERSION).zip chanzhieps
 	rm -fr chanzhieps
-ips:
-	mkdir chanzhiips
-	cp -frv system chanzhiips/
-	rm -fr chanzhiips/system/config/my.php
-	cp -frv www chanzhiips && rm -fr chanzhiips/www/data/* && mkdir -p chanzhiips/www/data/upload/ && mkdir -p chanzhiips/www/data/template/
-
-	rm -frv chanzhiips/system/tmp/cache/* 
-	rm -frv chanzhiips/system/tmp/extension/*
-	rm -frv chanzhiips/system/tmp/log/*
-	rm -frv chanzhiips/system/tmp/model/*
-	# combine js and css files.
-	mkdir -pv chanzhiips/system/build/ && cp system/build/minifyfront.php chanzhiips/system/build/
-	cd chanzhiips/system/build/ && php ./minifyfront.php
-	rm -frv chanzhiips/system/build
-	# merge chanzhiips
-	svn export https://github.com/xirang/chanzhiips/trunk ips
-	rsync -av --exclude='db/' --exclude='.git/' --exclude='README.md' ips/ chanzhiips
-	cat ips/system/db/install.sql >> chanzhiips/system/db/chanzhi.sql
-	# delete the unused files.
-	find chanzhiips -name '.git*' |xargs rm -frv
-	find chanzhiips -name '.svn*' |xargs rm -frv
-	find chanzhiips -name tests |xargs rm -frv
-	cd chanzhiips/system/module && rm -frv rss product blog forum reply thread message book
-	# change mode.
-	chmod 777 -R chanzhiips/system/tmp/
-	chmod 777 -R chanzhiips/www/data
-	chmod 777 -R chanzhiips/www/template
-	chmod 777 -R chanzhiips/system/config
-	chmod 777 chanzhiips/system/module
-	chmod a+rx chanzhiips/system/bin/*
-	# zip it.
-	zip -r -9 chanzhiIPS.`cat chanzhiips/VERSION`.zip chanzhiips
-	rm -fr chanzhiips
-	rm -fr ips
