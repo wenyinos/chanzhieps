@@ -347,21 +347,21 @@ class package extends control
      * @access public
      * @return void
      */
-    public function activate($package, $ignore = 'no')
+    public function activate($package, $type = 'extension', $ignore = 'no')
     {
         if($ignore == 'no')
         {
             $return = $this->package->checkFile($package);
             if($return->result != 'ok')
             {
-                $ignoreLink = inlink('activate', "package=$package&downLink=$downLink&md5=$md5&type=$type&ignore=yes");
+                $ignoreLink = inlink('activate', "package=$package&type=$type&ignore=yes");
                 $resetLink  = inlink('browse', 'type=deactivated');
                 $this->view->error = sprintf($this->lang->package->errorFileConflicted, $return->error, $ignoreLink, $resetLink);
                 die($this->display());
             }
         }
 
-        $this->package->copyPackageFiles($package);
+        $this->package->copyPackageFiles($package, $type);
         $this->package->updatePackage($package, array('status' => 'installed'));
         $this->view->title      = $this->lang->package->activateFinished;
         $this->view->position[] = $this->lang->package->activateFinished;
