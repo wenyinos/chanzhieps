@@ -17,8 +17,8 @@ $lang->site->name          = 'Name';
 $lang->site->module        = 'Modules';
 $lang->site->lang          = 'Language';
 $lang->site->domain        = 'Domain';
-$lang->site->keywords      = 'Keywords';
-$lang->site->indexKeywords = 'Home Keywords';
+$lang->site->keywords      = 'Site Keywords';
+$lang->site->indexKeywords = 'Index Keywords';
 $lang->site->meta          = 'Meta';
 $lang->site->desc          = 'Description';
 $lang->site->icpSN         = 'ICP';
@@ -38,8 +38,8 @@ $lang->site->setQQOauth    = "QQ Oauth";
 $lang->site->oauthHelp     = "Help";
 
 $lang->site->typeList = new stdclass();
-$lang->site->typeList->portal = 'Enterprise Portal';
-$lang->site->typeList->blog   = 'Personal Blog';
+$lang->site->typeList->portal = 'Portal';
+$lang->site->typeList->blog   = 'Blog';
 
 $lang->site->statusList = new stdclass();
 $lang->site->statusList->normal = 'Normal';

@@ -71,7 +71,7 @@ class ui extends control
 
                 $setting[$template][$theme] = $postedSetting;
 
-                $result  = $this->loadModel('setting')->setItems('system.common.template', array('custom' => helper::jsonEncode($setting)) );
+                $result = $this->loadModel('setting')->setItems('system.common.template', array('custom' => helper::jsonEncode($setting)) );
                 $this->loadModel('setting')->setItems('system.common.template', array('customVersion' => time()));
                 $this->send(array('result' => 'success', 'message' => $this->lang->ui->themeSaved));
             }
@@ -89,8 +89,8 @@ class ui extends control
 
         if(!is_writable($savePath))
         {
-            $this->view->hasPriv    = false;
-            $this->view->errors     = sprintf($this->lang->ui->unWritable, str_replace(dirname($this->app->getWwwRoot()), '', $savePath));
+            $this->view->hasPriv = false;
+            $this->view->errors  = sprintf($this->lang->ui->unWritable, str_replace(dirname($this->app->getWwwRoot()), '', $savePath));
         }
 
         $this->display();

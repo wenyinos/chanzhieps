@@ -55,11 +55,11 @@
         </tr>
         <tr>
           <th><?php echo $lang->site->meta;?></th> 
-          <td colspan='2'><?php echo html::textarea('meta', htmlspecialchars($this->config->site->meta), "class='form-control' rows=5");?></td>
+          <td colspan='2'><?php echo html::textarea('meta', htmlspecialchars($this->config->site->meta), "class='form-control' rows=3");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->site->desc;?></th> 
-          <td colspan='2'><?php echo html::textarea('desc', htmlspecialchars($this->config->site->desc), "class='form-control' rows='10'");?></td> 
+          <td colspan='2'><?php echo html::textarea('desc', htmlspecialchars($this->config->site->desc), "class='form-control' rows='3'");?></td> 
         </tr>
        <tr class='icpSN'>
           <th><?php echo $lang->site->icpSN;?></th> 
