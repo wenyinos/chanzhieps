@@ -20,17 +20,17 @@ class userModel extends model
      * @access public
      * @return object 
      */
-    public function getList($pager = null)
+    public function getList($pager = null, $user = '', $provider = '', $admin = '')
     {
         return $this->dao->select('u.*, o.provider as provider, openID as openID')->from(TABLE_USER)->alias('u')
             ->leftJoin(TABLE_OAUTH)->alias('o')->on('u.account = o.account')->where('1')
-            ->beginIF($this->get->user)
-            ->andWhere('u.account')->like("%{$this->get->user}%")
-            ->orWhere('u.realname')->like("%{$this->get->user}%")
-            ->orWhere('u.email')->like("%{$this->get->user}%")
+            ->beginIF($user)
+            ->andWhere('u.account')->like("%{$user}%")
+            ->orWhere('u.realname')->like("%{$user}%")
+            ->orWhere('u.email')->like("%{$user}%")
             ->fi()
-            ->beginIF($this->get->provider)->andWhere('o.provider')->like("%{$this->get->provider}%")->fi()
-            ->beginIF($this->get->admin)->andWhere('u.admin')->eq('super')->fi()
+            ->beginIF($provider)->andWhere('o.provider')->like("%{$provider}%")->fi()
+            ->beginIF($admin)->andWhere('u.admin')->ne('no')->fi()
             ->orderBy('id_asc')
             ->page($pager)
             ->fetchAll('id');

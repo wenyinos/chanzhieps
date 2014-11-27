@@ -173,7 +173,7 @@ $lang->user->menu->all    = 'All Users|user|admin|';
 $lang->user->menu->sina   = 'Weibo Users|user|admin|provider=sina';
 $lang->user->menu->wechat = 'Wechat Users|user|admin|provider=wechat';
 $lang->user->menu->qq     = 'QQ Users|user|admin|provider=qq';
-$lang->user->menu->admin  = 'Admin Users|user|admin|admin=super';
+$lang->user->menu->admin  = 'Admin Users|user|admin|admin=1';
 
 /* Menu of comment module. */
 $lang->feedback = new stdclass();
