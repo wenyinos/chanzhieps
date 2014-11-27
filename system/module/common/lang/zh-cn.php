@@ -24,7 +24,7 @@ $lang->back2Top   = '返回顶部';
 $lang->chanzhiEPS  = '蝉知企业门户系统';
 $lang->chanzhiEPSx = '蝉知';
 $lang->agreement   = "已阅读并同意<a href='http://api.chanzhi.org/goto.php?item=license' target='_blank'>《蝉知企业门户系统使用协议》</a>。<span class='text-danger'>未经许可，不得去除蝉知系统的任何标志及链接。</span>";
-$lang->poweredBy   = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'><i class='icon icon-chanzhi'></i> {$lang->chanzhiEPSx} %s</a></span>";
+$lang->poweredBy   = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'><i class='icon icon-chanzhi'></i> %s</a></span>";
 $lang->newVersion  = "提示：蝉知系统已于 <span id='releaseDate'></span> 发布 <span id='version'></span>版本。<a href='' target='_blank' id='upgradeLink'>马上下载</a>";
 
 /* Global lang items. */
@@ -203,7 +203,7 @@ $lang->site->menu->basic    = '站点设置|site|setbasic|';
 $lang->site->menu->nav      = '导航设置|nav|admin|';
 $lang->site->menu->upload   = '上传设置|site|setupload|';
 $lang->site->menu->tag      = '关键词设置|tag|admin|';
-$lang->site->menu->robots   = 'Robots|site|setrobots|';
+#$lang->site->menu->robots   = 'Robots|site|setrobots|';
 $lang->site->menu->oauth    = '开放登录|site|setoauth|';
 $lang->site->menu->link     = '友情链接|links|admin|';
 $lang->site->menu->currency = '货币设置|product|currency|';

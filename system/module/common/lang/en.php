@@ -24,7 +24,7 @@ $lang->back2Top   = 'T<br/>O<br/>P';
 $lang->chanzhiEPS  = 'chanzhiEPS';
 $lang->chanzhiEPSx = 'Chanzhi';
 $lang->agreement   = "I Agree to the <a href='http://api.chanzhi.org/goto.php?item=license' target='_blank'>chanzhiEPS Service Agreement</a>, <span class='text-danger'>and promise to keep the logo, link of chanzhiEPS.</span>";
-$lang->poweredBy   = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'><i class='icon icon-chanzhi'></i> {$lang->chanzhiEPSx} %s</a></span>";
+$lang->poweredBy   = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'><i class='icon icon-chanzhi'></i> %s</a></span>";
 $lang->newVersion  = "Notice: ChanzhiEPS has been upgraded to version: <span id='version'></span> at <span id='releaseDate'></span>. <a href='' target='_blank' id='upgradeLink'>DownLoad Now</a>";
 
 /* Global lang items. */
@@ -203,7 +203,7 @@ $lang->site->menu->basic    = 'Basic|site|setbasic|';
 $lang->site->menu->nav      = 'Navigation|nav|admin|';
 $lang->site->menu->upload   = 'Uploads|site|setupload|';
 $lang->site->menu->tag      = 'Tags|tag|admin|';
-$lang->site->menu->robots   = 'Robots|site|setrobots|';
+#$lang->site->menu->robots   = 'Robots|site|setrobots|';
 $lang->site->menu->oauth    = 'Open OAuth|site|setoauth|';
 $lang->site->menu->link     = 'Links|links|admin|';
 $lang->site->menu->currency = 'Currency|product|currency|';

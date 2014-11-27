@@ -1,5 +1,6 @@
 <?php include '../../common/view/header.modal.html.php';?>
 <form id='replyForm' method='post' action="<?php echo inlink('reply', "messageID={$message->id}");?>">
+  <div class='alert alert-info'><?php echo $message->content;?></div>
   <table class='table table-form'>
     <tr>
       <th class='w-80px'><?php echo $lang->message->from;?></th>
