@@ -30,10 +30,8 @@
                   <strong><i class='icon-user text-muted'></i> <?php echo $message->from;?></strong>
                 </span> 
                 <small>(<?php echo formatTime($message->date, 'Y-m-d H:i');?>)<?php echo $lang->colon;?></small>&nbsp;
+                <?php echo nl2br($message->content);?>
                 <span class='pull-right'><?php echo html::a($this->createLink('message', 'reply', "messageID=$message->id"), $lang->message->reply, "data-toggle='modal' data-type='iframe'");?></span>
-                <div class='content-box'>
-                  <?php echo nl2br($message->content);?>
-                </div>
               </div>
             </div>
           </div>
