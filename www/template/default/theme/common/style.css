@@ -358,7 +358,7 @@ td #aliasLabel {display: table-row;}
 #copyrightInfo, #icpInfo {color: #999; font-size: 12px;}
 #powerby {position: absolute; right: 0; top: 20px; padding: 0; overflow: hidden;}
 #powerby a {margin: 0;}
-#powerby .icon-chanzhi {display: inline-block; width: 16px; height: 16px; background: url(images/logo_icon.png) no-repeat center; position: relative; top: 3px}
+#powerby .icon-chanzhi {display: inline-block; width: 30px; height: 16px; background: url(images/logo_icon.png) no-repeat center; position: relative; top: 3px}
 @media (max-width: 767px) {
   #footNav, #icpInfo {display: none;}
   #footer {text-align: left; padding-right: 100px;}
