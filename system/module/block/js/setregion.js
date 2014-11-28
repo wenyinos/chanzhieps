@@ -19,6 +19,14 @@ $(document).ready(function()
     computeParent();
     initSortable();
 
+    $('input[type=checkbox]').change(function()
+    {
+        if($(this).prop('checked')) $(this).next('input[type=hidden]').val(1);
+        if(!$(this).prop('checked')) $(this).next('input[type=hidden]').val(0);
+    });
+
+    $('input[type=checkbox]').change();
+
     $('#blockList').on('click', '.plus, .plus-child, .btn-add-child', function()
     {
         setTimeout(hideEmptyChildren, 100);
