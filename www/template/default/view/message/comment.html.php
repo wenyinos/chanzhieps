@@ -22,9 +22,9 @@ if(isset($pageCSS)) css::internal($pageCSS);
       <span class='time'><?php echo formatTime($comment->date, 'Y/m/d');?> </span>
     </th>
     <td class='td-content'>
-      <?php echo nl2br($comment->content);?>&nbsp;&nbsp;
+      <?php echo nl2br($comment->content);?>
     </td>
-    <td class='td-action'> <?php echo html::a($this->createLink('comment', 'reply', "commentID=$comment->id"), $lang->comment->reply, "data-toggle='modal' data-type='iframe' data-icon='reply' data-title='{$lang->comment->reply}'");?> </td>
+    <td class='td-action'> <?php echo html::a($this->createLink('message', 'reply', "commentID=$comment->id"), $lang->comment->reply, "data-toggle='modal' data-type='iframe' data-icon='reply' data-title='{$lang->comment->reply}'");?> </td>
     </tr>
     <?php $this->message->getFrontReplies($comment);?>
   </table>
