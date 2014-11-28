@@ -20,6 +20,5 @@ a .icon-sina{background-position: 0 -48px;}
 @media (max-width: 700px){ #adminLogin{border: none;margin: 0 auto;box-shadow: none;padding: 20px 15px;background-color: #fff; margin: 0 auto; border-radius: 0} body {padding: 0;} .container {padding: 0;} #adminLogin #siteName {background: #fff}}
 @media (max-width: 767px) {#login .panel {margin: 20px auto; width: 100%;} #login .panel-heading {padding: 0 0 10px 0;} #login .panel-body {padding: 10px 0; min-height: inherit;} .btn-oauth {padding-left: 80px;} .btn-oauth .icon {left: 20px;}}
 
-#siteName{font-size:24px; color:#777; font-family:'微软雅黑', '黑体';display:block;}
-#powerdBy{margin-top:-30px;}
+#siteName{font-size:24px; color:#036; font-weight:600; display:block;}
 hr{margin-top:8px;}

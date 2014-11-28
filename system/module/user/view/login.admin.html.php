@@ -36,7 +36,6 @@ css::internal('body{background-color:#f6f5f5}');
       </div>
     </form>
   </div>
-    <div class='text-muted text-center' id='powerdBy'><?php printf($lang->poweredByAdmin, $config->version, k(), $config->version); ?></div>
 </div>
 <?php
 if($config->debug) js::import($jsRoot . 'jquery/form/min.js');
