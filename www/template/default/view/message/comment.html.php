@@ -10,10 +10,10 @@ if(isset($pageCSS)) css::internal($pageCSS);
     <strong><i class='icon-comments'></i> <?php echo $lang->message->list;?></strong>
   </div>
 </div>
-<?php $class = '';?>
+<?php $i = 0;?>
 <?php foreach($comments as $number => $comment):?>
-<?php $class = $class == 'success' ? '' : 'success';?>
-<div class='comment w-p100' id="comment<?php echo $comment->id?>">
+<?php $class = $i%2 ? '' : 'success';?>
+<div class='comment w-p100 <?php if($i == 0) echo 'first'?>' id="comment<?php echo $comment->id?>">
   <div class='<?php echo $class;?> comment-id'><?php echo $comment->id?></div>
   <table class='table table-borderless w-p100'>
     <tr>
@@ -29,8 +29,11 @@ if(isset($pageCSS)) css::internal($pageCSS);
     <?php $this->message->getFrontReplies($comment);?>
   </table>
 </div>
+<?php $i ++;?>
 <?php endforeach;?>
-<div class='pager clearfix' id='pager'><?php $pager->show('right', 'shortest');?></div>
+<div class='text-right'>
+  <div class='pager clearfix' id='pager'><?php $pager->show('right', 'shortest');?></div>
+</div>
 <?php endif;?>
 
 <div class='panel'>
