@@ -31,6 +31,10 @@ if(!isset($config->installed) or !$config->installed) die(header('location: inst
 
 /* Connect to db, load module. */
 $common = $app->loadCommon();
+
+/* Check site status. */
+if(isset($app->config->site->status) and $app->config->site->status == 'pause') exit;
+
 $app->parseRequest();
 $common->checkPriv();
 $app->loadModule();
