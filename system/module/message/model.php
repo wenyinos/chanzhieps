@@ -104,7 +104,7 @@ class messageModel extends model
             foreach($replies as $reply)
             {
                 echo "<tr class='reply'>";
-                echo "<th class='th-from'>$reply->from<br />";
+                echo "<th class='th-from text-important'>$reply->from<br />";
                 echo "<span class='time'>" . formatTime($reply->date, 'Y/m/d') . "</span></th>";
                 echo "<td class='td-content' >" . nl2br($reply->content) . '</td>';
                 echo "<td class='td-action'>";
