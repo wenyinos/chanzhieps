@@ -46,7 +46,8 @@ class tag extends control
     {
         if($_POST)
         {
-            $this->dao->update(TABLE_TAG)->set('link')->eq($this->post->link)->where('id')->eq($tagID)->exec();
+            $link = fixer::input('post')->stripTags('link', $this->config->allowedTags->admin)->get();
+            $this->dao->update(TABLE_TAG)->data($link)->autoCheck()->where('id')->eq($tagID)->exec();
             if(!dao::isError()) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
