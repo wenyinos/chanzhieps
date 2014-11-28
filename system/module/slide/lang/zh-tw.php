@@ -45,7 +45,7 @@ $lang->slide->edit     = '編輯幻燈片';
 
 $lang->slide->successSort     = '排序成功保存';
 $lang->slide->noImageSelected = '沒有選擇圖片';
-$lang->slide->suitableSize    = '所有圖片尺寸保持一致，最佳尺寸：1140px X 270px(寬 X 高)';
+$lang->slide->suitableSize    = '背景圖片大小保持一致。';
 
 /* Targets setting. */
 $lang->slide->target = new stdclass();

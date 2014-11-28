@@ -21,11 +21,12 @@ $lang->divider    = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->back2Top   = '返回頂部';
 
 /* Lang items for xirang. */
-$lang->chanzhiEPS  = '蟬知企業門戶系統';
-$lang->chanzhiEPSx = '蟬知';
-$lang->agreement   = "已閲讀並同意<a href='http://api.chanzhi.org/goto.php?item=license' target='_blank'>《蟬知企業門戶系統使用協議》</a>。<span class='text-danger'>未經許可，不得去除蟬知系統的任何標誌及連結。</span>";
-$lang->poweredBy   = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'><i class='icon icon-bell'></i> {$lang->chanzhiEPSx} %s</a></span>";
-$lang->newVersion  = "提示：蟬知系統已于 <span id='releaseDate'></span> 發佈 <span id='version'></span>版本。<a href='' target='_blank' id='upgradeLink'>馬上下載</a>";
+$lang->chanzhiEPS     = '蟬知企業門戶系統';
+$lang->chanzhiEPSx    = '蟬知';
+$lang->agreement      = "已閲讀並同意<a href='http://api.chanzhi.org/goto.php?item=license' target='_blank'>《蟬知企業門戶系統使用協議》</a>。<span class='text-danger'>未經許可，不得去除蟬知系統的任何標誌及連結。</span>";
+$lang->poweredBy      = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'><i class='icon icon-chanzhi'></i> %s</a></span>";
+$lang->poweredByAdmin = "<span id='poweredBy'>由 <a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>蟬知企業門戶系統 %s</a> 強力驅動！</span>";
+$lang->newVersion     = "提示：蟬知系統已于 <span id='releaseDate'></span> 發佈 <span id='version'></span>版本。<a href='' target='_blank' id='upgradeLink'>馬上下載</a>";
 
 /* Global lang items. */
 $lang->home           = '首頁';
@@ -74,6 +75,11 @@ $lang->deleteSuccess  = '刪除成功';
 $lang->fail           = '失敗';
 $lang->noResultsMatch = '沒有匹配的選項';
 $lang->alias          = '搜索引擎優化使用，可使用英文或數字';
+
+$lang->setOkFile = <<<EOT
+<h5>請按照下面的步驟操作以確認您的管理員身份。</h5>
+<p>創建 %s 檔案。如果存在該檔案，使用編輯軟件打開，重新保存一遍。</p>
+EOT;
 
 /* Items for javascript. */
 $lang->js = new stdclass();
@@ -132,12 +138,12 @@ $lang->menuGroups->message = 'feedback';
 /* Menu of article module. */
 $lang->article = new stdclass();
 $lang->article->menu = new stdclass();
-$lang->article->menu->browse = array('link' => '文章列表|article|admin|', 'alias' => 'create, edit');
+$lang->article->menu->browse = '所有文章|article|admin|';
 
 /* Menu of blog module. */
 $lang->blog = new stdclass();
 $lang->blog->menu = new stdclass();
-$lang->blog->menu->browse = array('link' => '博客列表|article|admin|type=blog', 'alias' => 'create, edit');
+$lang->blog->menu->browse = '所有博客|article|admin|type=blog';
 
 /* Menu of page module. */
 $lang->page = new stdclass();
@@ -148,8 +154,7 @@ $lang->page->menu->create = '添加單頁|article|create|type=page';
 /* Menu of product module. */
 $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
-$lang->product->menu->browse = array('link' => '產品列表|product|admin|', 'alias' => 'create, edit');
-$lang->product->currency     = '貨幣設置';
+$lang->product->menu->browse = array('link' => '所有產品|product|admin|', 'alias' => 'create, edit');
 
 /* Menu of UI module. */
 $lang->ui = new stdclass();
@@ -169,6 +174,7 @@ $lang->user->menu->all    = '全部會員|user|admin|';
 $lang->user->menu->sina   = '微博會員|user|admin|provider=sina';
 $lang->user->menu->wechat = '微信會員|user|admin|provider=wechat';
 $lang->user->menu->qq     = 'QQ會員|user|admin|provider=qq';
+$lang->user->menu->admin  = '管理員|user|admin|admin=1';
 
 /* Menu of comment module. */
 $lang->feedback = new stdclass();
@@ -194,14 +200,15 @@ $lang->forum->menu->update = '更新數據|forum|update|';
 /* Menu of site module. */
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
-$lang->site->menu->basic  = '站點設置|site|setbasic|';
-$lang->site->menu->nav    = '導航設置|nav|admin|';
-$lang->site->menu->upload = '上傳設置|site|setupload|';
-$lang->site->menu->tag    = '關鍵詞設置|tag|admin|';
-$lang->site->menu->oauth  = '開放登錄|site|setoauth|';
-$lang->site->menu->link   = '友情連結|links|admin|';
-$lang->site->menu->mail   = array('link' => '發信設置|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->site->menu->wechat = array('link' => '微信設置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
+$lang->site->menu->basic    = '站點設置|site|setbasic|';
+$lang->site->menu->nav      = '導航設置|nav|admin|';
+$lang->site->menu->upload   = '上傳設置|site|setupload|';
+$lang->site->menu->tag      = '關鍵詞設置|tag|admin|';
+#$lang->site->menu->robots   = 'Robots|site|setrobots|';
+$lang->site->menu->oauth    = '開放登錄|site|setoauth|';
+$lang->site->menu->link     = '友情連結|links|admin|';
+$lang->site->menu->mail     = array('link' => '發信設置|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->site->menu->wechat   = array('link' => '微信設置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
 
 /* Menu of company module. */
 $lang->company->menu = new stdclass();
@@ -273,13 +280,14 @@ $lang->error->token        = '必須為英文或數字，長度為3-32字元！'
 
 /* The pager items. */
 $lang->pager = new stdclass();
-$lang->pager->noRecord  = '暫時沒有記錄。';
-$lang->pager->digest    = '共 <strong>%s</strong> 條記錄，每頁 <strong>%s</strong> 條，頁面：<strong>%s/%s</strong> ';
-$lang->pager->first     = '首頁';
-$lang->pager->pre       = '上頁';
-$lang->pager->next      = '下頁';
-$lang->pager->last      = '末頁';
-$lang->pager->locate    = 'Go!';
+$lang->pager->noRecord   = "暫時沒有記錄";
+$lang->pager->digest     = "共 <strong>%s</strong> 條記錄，%s <strong>%s/%s</strong> &nbsp; ";
+$lang->pager->recPerPage = "每頁 <strong>%s</strong> 條";
+$lang->pager->first      = "<i class='icon-step-backward' title='首頁'></i>";
+$lang->pager->pre        = "<i class='icon-play icon-rotate-180' title='上一頁'></i>";
+$lang->pager->next       = "<i class='icon-play' title='下一頁'></i>";
+$lang->pager->last       = "<i class='icon-step-forward' title='末頁'></i>";
+$lang->pager->locate     = "GO!";
 
 $lang->date = new stdclass();
 $lang->date->minute = '分鐘';

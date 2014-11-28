@@ -53,19 +53,10 @@ $lang->ui->template->reload          = '刷新頁面';
 $lang->ui->template->doInstall       = '確認安裝';
 $lang->ui->template->info            = '模板信息';
 
-$lang->ui->template->error = new stdclass();
-$lang->ui->template->error->paths    = '目錄權限錯誤';
-$lang->ui->template->error->exists   = "<p>目錄%s不存在</p>";
-$lang->ui->template->error->writable = "<p>目錄%s不可寫</p>";
-
-$lang->ui->template->commands = new stdclass();
-$lang->ui->template->commands->execute  = '如果是Linux系統，請執行以下命令繼續';
-$lang->ui->template->commands->exists   = "mkdir -p %s<br/>";
-$lang->ui->template->commands->writable = "chmod 777 -R %s<br/>"; 
-
 $lang->ui->customtheme = '自定義主題';
 $lang->ui->custom      = '自定義';
 $lang->ui->themeSaved  = '主題配置已保存';
+$lang->ui->unWritable  = "不能生成樣式檔案，請檢查 %s目錄的權限";
 
 $lang->ui->theme                  = new stdclass();
 $lang->ui->theme->colorPlates                          = '#333333|#000000|#CA1407|#45872B|#148D00|#F25D03|#2286D2|#D92958|#A63268|#04BFAD|#D1270A|#FF9400|#299182|#63731A|#3D4DBE|#7382D9|#754FB9|#F2E205|#B1C502|#364245|#C05036|#8A342A|#E0DDA2|#B3D465|#EEEEEE|#FFD0E5|#D0FFFD|#FFFF84|#F4E6AE|#E5E5E5|#F1F1F1|#FFFFFF|transparent';
@@ -90,10 +81,10 @@ $lang->ui->theme->fontWeightList['inherit']            = '預設';
 $lang->ui->theme->fontWeightList['normal']             = '正常';
 $lang->ui->theme->fontWeightList['bold']               = '加粗';
 $lang->ui->theme->fontList['inherit']                  = '預設';
-$lang->ui->theme->fontList['宋體']                     = '宋體';
-$lang->ui->theme->fontList['仿宋']                     = '仿宋';
-$lang->ui->theme->fontList['黑體']                     = '黑體';
-$lang->ui->theme->fontList['微軟雅黑']                 = '微軟雅黑';
+$lang->ui->theme->fontList['SimSun']                   = '宋體';
+$lang->ui->theme->fontList['FangSong']                 = '仿宋';
+$lang->ui->theme->fontList['SimHei']                   = '黑體';
+$lang->ui->theme->fontList['Microsoft YaHei']          = '微軟雅黑';
 $lang->ui->theme->fontList['Arial']                    = 'Arial';
 $lang->ui->theme->fontList['Courier']                  = 'Courier';
 $lang->ui->theme->fontList['Console']                  = 'Console';

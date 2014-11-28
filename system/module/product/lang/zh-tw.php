@@ -43,8 +43,7 @@ $lang->product->custom     = '自定義屬性';
 $lang->product->sales      = '產品定價';
 $lang->product->css        = 'CSS';
 $lang->product->js         = 'JS';
-
-$lang->product->currencyIcon = "<i class='icon-yen'> </i>";
+$lang->product->currency   = '貨幣設置';
 
 $lang->product->list       = '產品列表';
 $lang->product->hot        = '熱門產品';
@@ -68,3 +67,40 @@ $lang->product->placeholder = new stdclass();
 $lang->product->placeholder->label    = "屬性名稱：如顏色、價格等";
 $lang->product->placeholder->value    = "屬性值：如紅色、￥1000等";
 $lang->product->placeholder->currency = "請填寫產品價格的貨幣符號，如人民幣填寫：￥";
+
+$lang->product->currencyList['rmb']  = '人民幣';
+$lang->product->currencyList['usd']  = '美元';
+$lang->product->currencyList['hkd']  = '港元';
+$lang->product->currencyList['twd']  = '台元';
+$lang->product->currencyList['euro'] = '歐元';
+$lang->product->currencyList['dem']  = '馬克';
+$lang->product->currencyList['chf']  = '瑞士法郎';
+$lang->product->currencyList['frf']  = '法國法郎';
+$lang->product->currencyList['gbp']  = '英鎊';
+$lang->product->currencyList['nlg']  = '荷蘭盾';
+$lang->product->currencyList['cad']  = '加拿大元';
+$lang->product->currencyList['sur']  = '盧布';
+$lang->product->currencyList['inr']  = '盧比';
+$lang->product->currencyList['aud']  = '澳大利亞元';
+$lang->product->currencyList['nzd']  = '新西蘭元';
+$lang->product->currencyList['thb']  = '泰國銖';
+$lang->product->currencyList['sgd']  = '新加坡元';
+
+/* Currency symbols setting. */
+$lang->product->currencySymbols['rmb']  = '￥';
+$lang->product->currencySymbols['usd']  = '$';
+$lang->product->currencySymbols['hkd']  = 'HK$';
+$lang->product->currencySymbols['twd']  = 'NT$';
+$lang->product->currencySymbols['euro'] = 'ECU';
+$lang->product->currencySymbols['dem']  = 'DM';
+$lang->product->currencySymbols['chf']  = 'SF';
+$lang->product->currencySymbols['frf']  = 'FF';
+$lang->product->currencySymbols['gbp']  = '￡';
+$lang->product->currencySymbols['nlg']  = 'F';
+$lang->product->currencySymbols['cad']  = 'CAN$';
+$lang->product->currencySymbols['sur']  = 'Rbs';
+$lang->product->currencySymbols['inr']  = 'Rs';
+$lang->product->currencySymbols['aud']  = 'A$';
+$lang->product->currencySymbols['nzd']  = 'NZ$';
+$lang->product->currencySymbols['thb']  = 'B';
+$lang->product->currencySymbols['sgd']  = 'S$';

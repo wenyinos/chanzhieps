@@ -109,15 +109,3 @@ $lang->package->errorConflicts               = '与插件“%s”冲突！';
 $lang->package->errorDepends                 = '以下依赖插件没有安装或版本不正确：<br /><br /> %s';
 $lang->package->errorIncompatible            = '该插件与您的蝉知版本不兼容';
 $lang->package->errorUninstallDepends        = '插件“%s”依赖该插件，不能卸载';
-
-$lang->package->template = new stdclass();
-
-$lang->package->template->error = new stdclass();
-$lang->package->template->error->paths    = '目录权限错误';
-$lang->package->template->error->exists   = "<p>目录%s不存在</p>";
-$lang->package->template->error->writable = "<p>目录%s不可写</p>";
-
-$lang->package->template->commands = new stdclass();
-$lang->package->template->commands->execute  = '如果是Linux系统，请执行以下命令继续';
-$lang->package->template->commands->exists   = "mkdir -p %s<br/>";
-$lang->package->template->commands->writable = "chmod 777 -R %s<br/>"; 

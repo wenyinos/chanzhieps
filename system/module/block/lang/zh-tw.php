@@ -61,17 +61,14 @@ $lang->block->placeholder = new stdclass();
 $lang->block->placeholder->moreText = '區塊右上角文字';
 $lang->block->placeholder->moreUrl  = '區塊右上角連結地址';
 
-$lang->block->setOkFile = <<<EOT
-<h5>請按照下面的步驟操作以確認您的管理員身份。</h5>
-<p>創建 %s 檔案。如果存在該檔案，使用編輯軟件打開，重新保存一遍。</p>
-EOT;
-
 $lang->block->gridOptions[0]  = '自動';
 $lang->block->gridOptions[6]  = '1/2';
 $lang->block->gridOptions[4]  = '1/3';
 $lang->block->gridOptions[8]  = '2/3';
 $lang->block->gridOptions[3]  = '1/4';
 $lang->block->gridOptions[9]  = '3/4';
+$lang->block->gridOptions[2]  = '1/6';
+$lang->block->gridOptions[10] = '5/6';
 $lang->block->gridOptions[12] = '100%';
 
 $lang->block->colorTip    = '顏色值如red或#FFF';
