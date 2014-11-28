@@ -632,13 +632,25 @@ class control
         {
             if(!helper::isAjaxRequest())
             {
-                if(!empty($data['locate']))
+                if(isset($data['result']) and $data['result'] == 'success')
                 {
-                    $this->locate($data['locate']);
+                    if(!empty($data['message'])) echo js::alert($data['message']);
+                    $locate = empty($data['locate']) ? $_SERVER['HTTP_REFERER'] : $data['locate'];
+                    js::execute("location.href='{$locate}'");
                 }
-                else
+
+                if(isset($data['result']) and $data['result'] == 'fail')
                 {
-                    $this->locate($_SERVER['HTTP_REFERER']);
+                   if(!empty($data['message'])) 
+                   {
+                       $message = json_decode(json_encode((array)$data['message']));
+                       foreach($message as $item => $errors)
+                       {
+                            $message->$item = implode(',', $errors);
+                       }
+                       echo js::alert(strip_tags(implode(" ", (array) $message)));
+                       echo js::execute('history.go(-1)');
+                   }
                 }
             }
 
