@@ -1,7 +1,9 @@
 .pager {margin: 0}
 .mgb-0{margin-bottom:0; border-bottom:none; border-radius:3px 3px 0 0;}
+.mgb-0 .panel-heading{margin-bottom:0; border-bottom:none; border-radius:3px 3px 0 0;}
 
 .comment {display: table; border: 1px solid #ddd; border-radius: 3px; transition: all .5s cubic-bezier(.175,.885,.32,1); box-shadow: 0 1px 2px rgba(0,0,0,.075); margin-bottom: 10px; padding: 0; max-width:100%;}
+.comment.first{ border-radius: 0 0 3px 3px;}
 .comment-id, .comment-content {display: table-cell; padding: 8px;}
 .comment-id.success{background:#e5ffe6;}
 .comment-id {vertical-align: middle; font-size: 12px; font-weight: 400; color: #888; text-align: center; background: #f1f1f1; border-right: 1px solid #ddd; width: 60px;}
