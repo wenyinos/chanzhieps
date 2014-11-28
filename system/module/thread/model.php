@@ -234,7 +234,7 @@ class threadModel extends model
         $thread = fixer::input('post')
             ->setIF(!$canManage, 'readonly', 0)
             ->setIF(!$this->post->isLink, 'link', '')
-            ->stripTags('content.link', $allowedTags)
+            ->stripTags('content,link', $allowedTags)
             ->setForce('editor', $this->session->user->account)
             ->setForce('editedDate', helper::now())
             ->setDefault('readonly', 0)

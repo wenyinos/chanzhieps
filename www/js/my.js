@@ -52,21 +52,23 @@ $(document).ready(function()
     if(!headNav.find('nav a').length) headNav.addClass('hide');
 
     /* set right docker */
-    $('#rightDockerBtn').popover({container: 'body', html:true, trigger:'manual', id: 'dockerPopover'}).mouseenter(function()
+    var $dockerBtn = $('#rightDockerBtn');
+    $dockerBtn.popover({container: 'body', html:true, trigger:'manual', id: 'dockerPopover'}).click(function(e)
     {
-        if($('#rightDockerBtn').hasClass('showed')) return;
+        if($dockerBtn.hasClass('showed')) return;
         $('#rightDocker img[data-src]').each(function()
         {
             var $this = $(this);
             $this.attr('src', $this.data('src')).removeAttr('data-src');
         });
-        $(this).addClass('showed').popover('show');
+        $dockerBtn.addClass('showed').popover('show');
         $("#rightDockerBtn:not('.showed')").popover('hide');
+        e.stopPropagation();
     });
     $(window).scroll(function()
     {
-        $('#rightDockerBtn').popover('hide').removeClass('showed');
+        $dockerBtn.popover('hide').removeClass('showed');
     });
-    $(document).click(function(){$('#rightDockerBtn').popover('hide').removeClass('showed');}).on('click', '.popover', function(event){event.stopPropagation();});
+    $(document).click(function(){$dockerBtn.popover('hide').removeClass('showed');}).on('click', '.popover', function(event){event.stopPropagation();});
 });
 
