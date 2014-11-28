@@ -7,16 +7,33 @@ css::internal('body{background-color:#f6f5f5}');
 ?> 
 <div class='container'>
   <div id='adminLogin'>
-    <div id='siteName' class='text-center'>
+    <div id='siteName'>
       <?php echo $this->config->site->name;?>
     </div>
-    <hr>
     <form method='post' id='ajaxForm'>
       <div id='formError' class='alert alert-danger hiding'></div>
-      <?php echo html::input('account','',"class='form-control' placeholder='{$lang->user->inputAccountOrEmail}'");?>
-      <?php echo html::password('password','',"class='form-control' placeholder='{$lang->user->inputPassword}'");?>
-      <?php echo html::hidden('referer', $referer);?>
-      <?php echo html::submitButton($lang->user->login->common, 'btn btn-primary btn-block');?>
+      <div class='row'>
+        <div class='col-xs-4 text-center'>
+          <img src='/template/default/theme/default/images/main/logo.login.admin.png' alt=''>
+        </div>
+        <div class='col-xs-8'>
+          <table class="table table-form">
+            <tr>
+              <th class='w-60px'><?php echo $lang->user->account?></th>
+              <td><?php echo html::input('account','',"class='form-control' placeholder='{$lang->user->inputAccountOrEmail}'");?></td>
+            </tr>
+            <tr>
+              <th><?php echo $lang->user->password?></th>
+              <td><?php echo html::password('password','',"class='form-control' placeholder='{$lang->user->inputPassword}'");?></td>
+            </tr>
+            <tr>
+              <th></th>
+              <td><?php echo html::submitButton($lang->user->login->common, 'btn btn-primary btn');?></td>
+            </tr>
+          </table>
+          <?php echo html::hidden('referer', $referer);?>
+        </div>
+      </div>
     </form>
   </div>
     <div class='text-muted text-center' id='powerdBy'><?php printf($lang->poweredByAdmin, $config->version, k(), $config->version); ?></div>
