@@ -56,12 +56,12 @@ $cssCode .= file_get_contents($jsRoot . 'jquery/treeview/min.css');
 
 /* Combine them. */
 $cssFile = $themeRoot . "default/all.css";
-$frontCssCode = $cssCode . file_get_contents($themeRoot . 'common/style.css');
+$frontCssCode = $cssCode . str_replace('url(images/', 'url(../common/images/', file_get_contents($themeRoot . 'common/style.css'));
 $result  = file_put_contents($cssFile, $frontCssCode);
 if($result) echo "create all.admin.js success\n";
 
 $adminCssFile = $themeRoot . 'default/all.admin.css';
-$adminCssCode = $cssCode . file_get_contents($themeRoot . 'default/admin.css');
+$adminCssCode = $cssCode . str_replace('url(images/', 'url(../common/images/', file_get_contents($themeRoot . 'default/admin.css'));
 $result = file_put_contents($adminCssFile, $adminCssCode);
 if($result) echo "Compress Css success!\n";
 
