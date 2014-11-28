@@ -153,7 +153,7 @@ $lang->page->menu->create = '添加单页|article|create|type=page';
 /* Menu of product module. */
 $lang->product = new stdclass();
 $lang->product->menu = new stdclass();
-$lang->product->menu->browse = '所有产品|product|admin|';
+$lang->product->menu->browse = array('link' => '所有产品|product|admin|', 'alias' => 'create, edit');
 
 /* Menu of UI module. */
 $lang->ui = new stdclass();
@@ -173,7 +173,7 @@ $lang->user->menu->all    = '全部会员|user|admin|';
 $lang->user->menu->sina   = '微博会员|user|admin|provider=sina';
 $lang->user->menu->wechat = '微信会员|user|admin|provider=wechat';
 $lang->user->menu->qq     = 'QQ会员|user|admin|provider=qq';
-$lang->user->menu->admin  = '管理员|user|admin|admin=super';
+$lang->user->menu->admin  = '管理员|user|admin|admin=1';
 
 /* Menu of comment module. */
 $lang->feedback = new stdclass();
@@ -206,7 +206,6 @@ $lang->site->menu->tag      = '关键词设置|tag|admin|';
 #$lang->site->menu->robots   = 'Robots|site|setrobots|';
 $lang->site->menu->oauth    = '开放登录|site|setoauth|';
 $lang->site->menu->link     = '友情链接|links|admin|';
-$lang->site->menu->currency = '货币设置|product|currency|';
 $lang->site->menu->mail     = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
 $lang->site->menu->wechat   = array('link' => '微信设置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
 

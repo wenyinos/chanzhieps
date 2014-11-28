@@ -304,18 +304,19 @@ class user extends control
      */
     public function admin()
     {
-        if(empty($this->config->oauth->sina)) unset($this->lang->user->menu->weibo);
-        if(empty($this->config->oauth->qq))   unset($this->lang->user->menu->qq);
-
         $get = fixer::input('get')
             ->setDefault('recTotal', 0)
             ->setDefault('recPerPage', 10)
             ->setDefault('pageID', 1)
+            ->setDefault('user', '')
+            ->setDefault('provider', '')
+            ->setDefault('admin', '')
             ->get();
+
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($get->recTotal, $get->recPerPage, $get->pageID);
 
-        $users = $this->user->getList($pager);
+        $users = $this->user->getList($pager, $get->user, $get->provider, $get->admin);
         
         $this->view->users = $users;
         $this->view->pager = $pager;

@@ -29,7 +29,7 @@ if(isset($pageCSS)) css::internal($pageCSS);
     <?php $this->message->getFrontReplies($comment);?>
   </table>
 </div>
-<?php endforeach; ?>
+<?php endforeach;?>
 <div class='pager clearfix' id='pager'><?php $pager->show('right', 'shortest');?></div>
 <?php endif;?>
 

@@ -103,11 +103,14 @@ class messageModel extends model
         {
             foreach($replies as $reply)
             {
-                echo "<div class='reply-content'><strong>" . $reply->from .  $this->lang->colon . "</strong>";
-                echo nl2br($reply->content);
-                echo "&nbsp; &nbsp;<span class='text-muted comment-info'><i  class='icon icon-time'></i> " . formatTime($reply->date, 'Y-m-d H:i') . " </span>&nbsp;";
-                echo html::a(helper::createLink('message', 'reply', "id={$reply->id}"), "<i class='icon icon-reply'></i>", " data-toggle='modal' data-type='iframe' id='reply{$reply->id}'");
-                echo "</div>";
+                echo "<tr class='reply'>";
+                echo "<th class='th-from'>$reply->from<br />";
+                echo "<span class='time'>" . formatTime($reply->date, 'Y/m/d') . "</span></th>";
+                echo "<td class='td-content' >" . nl2br($reply->content) . '</td>';
+                echo "<td class='td-action'>";
+                echo html::a(helper::createLink('message', 'reply', "id={$reply->id}"), $this->lang->message->reply, " data-toggle='modal' data-type='iframe' id='reply{$reply->id}'");
+                echo '</td>';
+                echo '</tr>';
                 $this->getFrontReplies($reply);
             }
         }

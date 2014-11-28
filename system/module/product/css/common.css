@@ -13,4 +13,4 @@ td > .form-group.row .btn {position: relative; margin-top: 5px; display: block; 
 
 .leftmenu > .nav{margin-bottom: 0;}
 .nav-stacked.nav-primary > li:last-child > a{border-bottom-left-radius: 0; border-bottom-right-radius: 0;}
-.category-nav{border-radius: 0 0 3px 3px; border-top:none;}
+.leftmenu > .category-nav{border-radius: 0; border-top:none; border-bottom: none; margin-bottom: 0;}
