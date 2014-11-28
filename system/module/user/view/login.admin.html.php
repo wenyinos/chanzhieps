@@ -18,10 +18,8 @@ css::internal('body{background-color:#f6f5f5}');
       <?php echo html::hidden('referer', $referer);?>
       <?php echo html::submitButton($lang->user->login->common, 'btn btn-primary btn-block');?>
     </form>
-    <div id='powerdBy'>
-      <i class="icon icon-chanzhi"></i>
-      <?php printf($lang->poweredByAdmin, $config->version, k(), $config->version); ?></div>
   </div>
+    <div class='text-muted text-center' id='powerdBy'><?php printf($lang->poweredByAdmin, $config->version, k(), $config->version); ?></div>
 </div>
 <?php
 if($config->debug) js::import($jsRoot . 'jquery/form/min.js');

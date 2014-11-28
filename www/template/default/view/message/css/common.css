@@ -12,6 +12,6 @@
 .comment table.table tr:first-child{border-top:0;}
 th.th-from{text-align:center; padding-right:0;width:100px;border-right:solid 1px #f1f1f1;vertical-align:middle;}
 td.td-action{width:50px;}
-td.td-content{overflow:hidden;}
+td.td-content{word-wrap: break-word; word-break:break-all;}
 .time{font-size:10px; font-weight:normal;color:inherit;}
 table tr.reply .th-from{color:#0D3D88; font-weight:normal}
