@@ -627,7 +627,23 @@ class control
      */
     public function send($data, $type = 'json')
     {
-        if($type == 'json') echo json_encode($data);
+        $data = (array) $data;
+        if($type == 'json')
+        {
+            if(!helper::isAjaxRequest())
+            {
+                if(!empty($data['locate']))
+                {
+                    $this->locate($data['locate']);
+                }
+                else
+                {
+                    $this->locate($_SERVER['HTTP_REFERER']);
+                }
+            }
+
+            echo json_encode($data);
+        }
         die(helper::removeUTF8Bom(ob_get_clean()));
     }
 
