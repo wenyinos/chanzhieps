@@ -18,7 +18,7 @@ zip:
 	mkdir chanzhieps/www/data/css/default/tree -p       && cp www/template/default/theme/tree/style.css       chanzhieps/www/data/css/default/tree/style.css
 	mkdir chanzhieps/www/data/css/default/wide -p       && cp www/template/default/theme/wide/style.css       chanzhieps/www/data/css/default/wide/style.css
 	mkdir chanzhieps/www/data/css/default/colorful -p   && cp www/template/default/theme/colorful/style.css   chanzhieps/www/data/css/default/colorful/style.css
-	rm chanzhieps/www/robots.txt && touch chanzhieps/www/robots.txt  && chmod 777 chanzhieps/www/robots.txt
+	touch chanzhieps/www/robots.txt && rm chanzhieps/www/robots.txt && touch chanzhieps/www/robots.txt  && chmod 777 chanzhieps/www/robots.txt
 	rm -frv chanzhieps/system/tmp/cache/* 
 	rm -frv chanzhieps/system/tmp/extension/*
 	rm -frv chanzhieps/system/tmp/log/*
