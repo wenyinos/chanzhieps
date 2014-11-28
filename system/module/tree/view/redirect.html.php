@@ -13,7 +13,7 @@
 <?php include '../../common/view/header.admin.html.php';?>
 
 <div class='form-group'>
-<div class='col-xs-6 col-md-6 col-md-offset-3 alert alert-info'>
+<div class='col-xs-6 col-md-6 col-md-offset-3 alert'>
   <i class='icon-info-sign'></i>
   <div class='content'>
     <h4><?php echo $message; ?></h4>
