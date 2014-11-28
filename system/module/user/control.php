@@ -320,7 +320,6 @@ class user extends control
         
         $this->view->users = $users;
         $this->view->pager = $pager;
-
         $this->view->title = $this->lang->user->list;
         $this->display();
     }
