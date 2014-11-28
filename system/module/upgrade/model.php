@@ -94,6 +94,7 @@ class upgradeModel extends model
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
+        $this->createCustomerCss();
         $this->deletePatch();
     }
 

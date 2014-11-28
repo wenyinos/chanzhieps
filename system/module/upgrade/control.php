@@ -64,6 +64,8 @@ class upgrade extends control
         $this->view->confirm     = $this->upgrade->getConfirm($this->post->fromVersion);
         $this->view->fromVersion = $this->post->fromVersion;
 
+        if(empty($this->view->confirm)) $this->locate(inlink('execute'));
+
         $this->display();
     }
 
