@@ -10,16 +10,24 @@ if(isset($pageCSS)) css::internal($pageCSS);
     <strong><i class='icon-comments'></i> <?php echo $lang->message->list;?></strong>
   </div>
 </div>
+<?php $class = '';?>
 <?php foreach($comments as $number => $comment):?>
-<div class='comment card' id="comment<?php echo $comment->id?>">
-  <a href='javascript:;'> <i class='alert icon alert-default icon-info-sign'><?php echo $comment->id?></i></a>
-  <div class='card-content'>
-    <strong><?php echo $comment->from . $lang->colon;?></strong>
-    <?php echo nl2br($comment->content);?>
-    <span><i class='icon-time'></i><?php echo formatTime($comment->date, 'Y-m-d H:i');?> </span>
-    <?php echo html::a($this->createLink('comment', 'reply', "commentID=$comment->id"), "<i class='icon icon-reply alert alert-info' > </i>", "data-toggle='modal' data-type='iframe'");?>
-  </div>
-  <div class='reply'><?php $this->message->getFrontReplies($comment);?></div>
+<?php $class = $class == 'success' ? '' : 'success';?>
+<div class='comment w-p100' id="comment<?php echo $comment->id?>">
+  <div class='<?php echo $class;?> comment-id'><?php echo $comment->id?></div>
+  <table class='table table-borderless w-p100'>
+    <tr>
+    <th class='th-from'>
+      <?php echo $comment->from?><br>
+      <span class='time'><?php echo formatTime($comment->date, 'Y/m/d');?> </span>
+    </th>
+    <td class='td-content'>
+      <?php echo nl2br($comment->content);?>&nbsp;&nbsp;
+    </td>
+    <td class='td-action'> <?php echo html::a($this->createLink('comment', 'reply', "commentID=$comment->id"), $lang->comment->reply, "data-toggle='modal' data-type='iframe' data-icon='reply' data-title='{$lang->comment->reply}'");?> </td>
+    </tr>
+    <?php $this->message->getFrontReplies($comment);?>
+  </table>
 </div>
 <?php endforeach; ?>
 <div class='pager clearfix' id='pager'><?php $pager->show('right', 'shortest');?></div>

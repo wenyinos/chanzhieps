@@ -15,20 +15,28 @@
 <div class='row'>
   <div class='col-md-9 col-main'>
     <?php if(!empty($messages)):?>
+    <?php $class = 'success';?>
     <?php foreach($messages as $number => $message):?>
-    <div class='comment' id="comment<?php echo $message->id?>">
-      <div class='comment-id'>#<?php echo $message->id?></div>
-      <div class='comment-content'>
-        <strong><?php echo $message->from . $lang->colon;?></strong>
-        <?php echo nl2br($message->content);?>&nbsp;&nbsp;
-        <span class='text-muted comment-info'><i class='icon-time'></i> <?php echo formatTime($message->date, 'Y-m-d H:i');?> </span>
-        &nbsp;<?php echo html::a($this->createLink('message', 'reply', "messageID=$message->id"), "<i class='icon icon-reply' ></i>", "data-toggle='modal' data-type='iframe' data-icon='reply' data-title='{$lang->message->reply}'");?>
-        <div class='reply'><?php $this->message->getFrontReplies($message);?></div>
-      </div>
+    <?php $class = $class == 'success' ? '' : 'success';?>
+    <div class='comment w-p100' id="comment<?php echo $message->id?>">
+      <div class='<?php echo $class;?> comment-id'><?php echo $message->id?></div>
+      <table class='table table-borderless w-p100'>
+        <tr>
+        <th class='th-from'>
+          <?php echo $message->from;?><br>
+          <span class='time'> <?php echo formatTime($message->date, 'Y/m/d');?> </span>
+        </th>
+        <td class='td-content'>
+          <?php echo nl2br($message->content);?>&nbsp;&nbsp;
+        </td>
+        <td class='td-action'> <?php echo html::a($this->createLink('message', 'reply', "messageID=$message->id"), $lang->message->reply, "data-toggle='modal' data-type='iframe' data-icon='reply' data-title='{$lang->message->reply}'");?> </td>
+        </tr>
+        <?php $this->message->getFrontReplies($message);?>
+      </table>
     </div>
     <?php endforeach; ?>
     <?php endif;?>
-    <div class='pager clearfix'><?php $pager->show('right', 'short');?></div>
+    <div class='text-right'><div class='pager clearfix'><?php $pager->show('right', 'short');?></div></div>
 
     <div class='panel'>
       <div class='panel-heading'><strong><i class='icon-comment-alt'></i> <?php echo $lang->message->post;?></strong></div>
