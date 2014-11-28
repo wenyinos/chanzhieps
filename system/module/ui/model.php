@@ -127,7 +127,13 @@ class uiModel extends model
             }
         }
 
-        foreach($params as $item => $value) if(empty($value)) $params[$item] = 0;
+        /* Format old fontfamily names. */
+        $fontsList = array_flip($this->lang->ui->theme->fontList);
+        foreach($params as $item => $value)
+        {
+            if(empty($value)) $params[$item] = 0;
+            if(isset($fontsList[$value])) $params[$item] = $fontsList[$value];
+        }
 
         unset($params['background-image-position']);
         unset($params['navbar-background-image-position']);
