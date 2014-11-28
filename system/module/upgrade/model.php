@@ -939,10 +939,18 @@ class upgradeModel extends model
         return true;
     }
 
+    /**
+     * Fix BasicSite for icpSN and modules.
+     * 
+     * @access public
+     * @return bool
+     */
     public function fixBasicSite()
     {
         $this->dao->update(TABLE_CONFIG)->set('`key`')->eq('icpSN')->where('`key`')->eq('icp')->andWhere('section')->eq('site')->exec();
         $this->dao->update(TABLE_CONFIG)->set('`key`')->eq('modules')->where('`key`')->eq('moduleEnabled')->andWhere('section')->eq('site')->exec();
+
+        return !dao::isError();
     }
 
     /**
