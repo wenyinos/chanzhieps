@@ -15,7 +15,7 @@
   <div class='form-group'>
     <label for='link' class='col-xs-3 control-label'><?php echo $tag->tag;?></label>
     <div class='col-xs-8'>
-      <?php echo html::input('link', $tag->link, "class='form-control' placeholder='{$lang->tag->inputLink}'");?>
+      <?php echo html::input('link', htmlspecialchars($tag->link), "class='form-control' placeholder='{$lang->tag->inputLink}'");?>
     </div>
   </div>
   <div class='form-group'>
