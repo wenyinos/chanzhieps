@@ -354,7 +354,7 @@ class pager
     {
         if($this->pageID == 1) return $this->lang->pager->first . ' ';
         $this->params['pageID'] = 1;
-        return html::a(helper::createLink($this->moduleName, $this->methodName, $this->params), $this->lang->pager->first);
+        return $this->createLink($this->lang->pager->first);
     }
 
     /**
@@ -369,13 +369,13 @@ class pager
         {
             if($this->pageID == 1) return '';
             $this->params['pageID'] = $this->pageID - 1;
-            return html::a(helper::createLink($this->moduleName, $this->methodName, $this->params), $this->lang->pager->pre, '', 'data-role="button" data-icon="arrow-l" data-iconpos="left" data-inline="true"');
+            return $this->createLink($this->lang->pager->pre);
         }
         else
         {
             if($this->pageID == 1) return $this->lang->pager->pre . ' ';
             $this->params['pageID'] = $this->pageID - 1;
-            return html::a(helper::createLink($this->moduleName, $this->methodName, $this->params), $this->lang->pager->pre);
+            return $this->createLink($this->lang->pager->pre);
         }
     }    
 
@@ -391,13 +391,13 @@ class pager
         {
             if($this->pageID == $this->pageTotal) return '';
             $this->params['pageID'] = $this->pageID + 1;
-            return html::a(helper::createLink($this->moduleName, $this->methodName, $this->params), $this->lang->pager->next, '', 'data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true"');
+            return $this->createLink($this->lang->pager->next);
         }
         else
         {
             if($this->pageID == $this->pageTotal) return $this->lang->pager->next . ' ';
             $this->params['pageID'] = $this->pageID + 1;
-            return html::a(helper::createLink($this->moduleName, $this->methodName, $this->params), $this->lang->pager->next);
+            return $this->createLink($this->lang->pager->next);
         }
     }
 
@@ -411,7 +411,7 @@ class pager
     {
         if($this->pageID == $this->pageTotal) return $this->lang->pager->last . ' ';
         $this->params['pageID'] = $this->pageTotal;
-        return html::a(helper::createLink($this->moduleName, $this->methodName, $this->params), $this->lang->pager->last);
+        return $this->createLink($this->lang->pager->last);
     }    
 
     /**
