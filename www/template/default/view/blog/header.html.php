@@ -37,6 +37,7 @@ $navs = $this->tree->getChildren(0, 'blog');
   echo html::title($title . $config->site->name);
   echo html::meta('keywords',    strip_tags($keywords));
   echo html::meta('description', strip_tags($desc));
+  if(isset($this->config->site->meta)) echo $this->config->site->meta;
 
   css::import($webRoot . 'zui/css/min.css');
   css::import($themeRoot . 'common/style.css');

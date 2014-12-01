@@ -90,7 +90,7 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
         </tr>
         <tr class='bg-section' data-id='image'>
           <th rowspan='2'><?php echo $lang->slide->image;?></th>
-          <td><?php echo html::image($slide->image, "class='image'");?></td>
+          <td colspan='3'><?php echo html::image($slide->image, "class='image'");?></td>
         </tr>
         <tr class='bg-section' data-id='image'>
           <td><?php echo html::file('files[]', "tabindex='-1' class='form-control'");?></td>

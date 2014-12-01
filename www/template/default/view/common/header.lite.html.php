@@ -24,7 +24,7 @@ $themeRoot = $webRoot . "template/default/theme/";
   echo html::title($title . $config->site->name);
   echo html::meta('keywords',    strip_tags($keywords));
   echo html::meta('description', strip_tags($desc));
-  if($this->config->site->meta) echo $this->config->site->meta;
+  if(isset($this->config->site->meta)) echo $this->config->site->meta;
 
   js::exportConfigVars();
   if($config->debug)
