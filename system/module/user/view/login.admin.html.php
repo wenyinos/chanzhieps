@@ -14,7 +14,7 @@ css::internal('body{background-color:#f6f5f5}');
       <div id='formError' class='alert alert-danger hiding'></div>
       <div class='row'>
         <div class='col-xs-4 text-center'>
-          <img src='/template/default/theme/default/images/main/logo.login.admin.png' alt=''>
+        <?php echo html::image($this->config->webRoot . 'template/default/theme/default/images/main/logo.login.admin.png'); ?>
         </div>
         <div class='col-xs-8'>
           <table class="table table-form">
