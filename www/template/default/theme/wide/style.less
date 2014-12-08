@@ -181,6 +181,13 @@ a.card:hover, .card:hover a {color: @color-primary}
 #blogNav .nav > li > a:focus,
 #blogNav .nav > li.active > a,
 #blogNav .nav > li.active > a:hover {color: @color-primary; border-bottom: 4px solid @color-primary;}
+@media (max-width: 767px)
+{
+    #blogNav .nav > li > a:hover,
+    #blogNav .nav > li > a:focus,
+    #blogNav .nav > li.active > a,
+    #blogNav .nav > li.active > a:hover {color: @text-color-inverse; border-bottom: none; background: @color-primary; border-radius: 0}
+}
 
 /* style of footer */
 .m-blog #footNav .icon-rss-sign:hover{text-decoration: none; color: @color-primary}
