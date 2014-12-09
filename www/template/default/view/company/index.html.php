@@ -14,4 +14,5 @@ include TPL_ROOT . 'common/header.html.php';
     </div>
   </div>
   <div class='col-md-3 col-side'><side class='page-side'><?php $this->block->printRegion($layouts, 'company_index', 'side');?></side></div>
+</div>
 <?php include TPL_ROOT . 'common/footer.html.php'; ?>
