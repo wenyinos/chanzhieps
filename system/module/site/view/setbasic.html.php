@@ -55,7 +55,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->site->meta;?></th> 
-          <td colspan='2'><?php echo html::textarea('meta', htmlspecialchars($this->config->site->meta), "class='form-control' rows=3");?></td>
+          <td colspan='2'><?php echo html::textarea('meta', htmlspecialchars($this->config->site->meta), "placeholder='{$lang->site->metaHolder}' class='form-control' rows=3");?></td>
         </tr>
         <tr>
           <th><?php echo $lang->site->desc;?></th> 
