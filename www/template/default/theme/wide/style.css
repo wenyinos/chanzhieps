@@ -640,8 +640,7 @@ body {background: #232323;}
 @media (min-width: 992px)
 {
   .m-index-index #header .wrapper {padding: 0 15px}
-  .m-index-index #navbarCollapse {right: 15px}
-
+  .m-index-index #navbarCollapse {right: 10px}
   .carousel-caption{left: 19%\0!important}
 }
 @media (max-width: 991px)
@@ -679,6 +678,7 @@ body.m-message-reply{background:#fff;}
 @media (min-width: 1200px) {#blogNav {max-width: 1170px;}}
 
 /* style of blogNav */
+.m-blog #headTitle {margin-top: 40px;}
 #blogNav {position: relative; background: none; border: none; min-height: 0; -moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0}
 #blogNav .wrapper {position: absolute; right: 0; top: -72px;}
 #blogNav .nav > li > a {background: none; border-width: 0; font-weight: normal; padding: 26px 10px; margin-left: 10px;}
@@ -718,7 +718,8 @@ body.m-message-reply{background:#fff;}
     #blogNav .nav > li.active > a,
     #blogNav .nav > li.active > a:hover {background: #e91b23; color: #fff}
 
-    #blogNav .navbar-nav.navbar-right > li > a {padding: 26px 15px;}
+    #blogNav .navbar-nav.navbar-right > li {width: 100%}
+    #blogNav .navbar-nav.navbar-right > li > a {padding: 26px 15px; border-radius: 0}
     #blogNav .navbar-nav.navbar-right > li > a:hover,
     #blogNav .navbar-nav.navbar-right > li > a:focus,
     #blogNav .navbar-nav.navbar-right > li.active > a,
