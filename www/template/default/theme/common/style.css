@@ -320,16 +320,20 @@ td #aliasLabel {display: table-row;}
 /* === Specail part === */
 /* Header */
 #header {position: relative; padding-bottom: 10px;}
-#headTitle {display: table; margin-top:10px;}
+#headTitle {display: table; margin-top: 10px;}
 #headTitle > .wrapper {display: table-row;}
 #siteLogo,
 #siteName,
 #siteSlogan {display: table-cell; padding: 10px 10px 10px 0; vertical-align: middle;}
 #siteSlogan {padding-left: 10px; font-size: 18px; color: #777; font-weight: bold;}
+#siteLogo {padding: 0;}
 #siteName h2 {margin: 6px 0}
-#headNav {position: absolute; right: 0; top: 40%;}
+#headNav, #searchbar {position: absolute; right: 0; top: 10px;}
 #headNav nav > a {display: inline-block; margin-right: 5px;}
 #headNav nav > a:last-child {margin-right: 0;}
+#searchbar {position: absolute; top: 45%; max-width: 200px;}
+#searchbar .form-control {border-radius: 16px 0 0 16px}
+#searchbar .btn {border-radius: 0 16px 16px 0}
 @media (max-width: 767px) {
   #header {margin-left: -10px; margin-right: -10px;}
   #siteSlogan {display: none}
@@ -339,6 +343,10 @@ td #aliasLabel {display: table-row;}
   #siteName h2 {margin: 12px 0}
   #headNav {position: static; top: 0; width: 100%; text-align: right; background-color: #e5e5e5; padding: 5px 15px}
   #headTitle img {height: 45px; max-width: inherit; min-width: 50px; width: auto;}
+
+  #searchbar {right: auto; left: 10px; top: 2px; max-width: 150px}
+  #searchbar .form-control, #searchbar .btn {padding: 3px 8px; height: 26px}
+  #searchbar .btn {padding: 3p}
 
   .navbar-header {min-height: 50px}
   .navbar-brand {display: none}

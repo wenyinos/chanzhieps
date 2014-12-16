@@ -29,4 +29,14 @@
       <nav><?php echo commonModel::printTopBar();?></nav>
     </div>
   </div>
+  <div id='searchbar'>
+    <form role='search'>
+      <div class='input-group'>
+        <input type='text' class='form-control' placeholder='<?php echo $this->lang->search?>' name='searchInput' id='searchInput'>
+        <div class='input-group-btn'>
+          <button class='btn btn-default' type='submit'><i class='icon icon-search'></i></button>
+        </div>
+      </div>
+    </form>
+  </div>
 </header>

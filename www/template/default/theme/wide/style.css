@@ -496,10 +496,10 @@ body {background: #232323;}
 
 /* Containers */
 .page-container {margin: 0; overflow: hidden;}
-.page-content, #header .wrapper, #navbar, #focus, .focus-middle, .focus-bottom, #footer > .wrapper {margin: 0 auto; max-width: 1170px;}
-@media (min-width: 768px) {.page-content, #header .wrapper, #navbar, .focus-middle, .focus-bottom, #footer > .wrapper {max-width: 750px;}}
-@media (min-width: 992px) {.page-content, #header .wrapper, #navbar, .focus-middle, .focus-bottom, #footer > .wrapper {max-width: 970px;}}
-@media (min-width: 1200px) {.page-content, #header .wrapper, #navbar, .focus-middle, .focus-bottom, #footer > .wrapper {max-width: 1170px;}}
+.page-content, #header .wrapper, #searchbar > form, #navbar, #focus, .focus-middle, .focus-bottom, #footer > .wrapper {margin: 0 auto; max-width: 1170px;}
+@media (min-width: 768px) {.page-content, #header .wrapper, #searchbar > form, #navbar, .focus-middle, .focus-bottom, #footer > .wrapper {max-width: 750px;}}
+@media (min-width: 992px) {.page-content, #header .wrapper, #searchbar > form, #navbar, .focus-middle, .focus-bottom, #footer > .wrapper {max-width: 970px;}}
+@media (min-width: 1200px) {.page-content, #header .wrapper, #searchbar > form, #navbar, .focus-middle, .focus-bottom, #footer > .wrapper {max-width: 1170px;}}
 
 .page-container, .m-index-index .page-content, .m-index-index #links {max-width: inherit; padding: 0; background-color: #fff}
 @media (min-width: 768px) {.page-container, .m-index-index .page-content, .m-index-index #links, #focus {max-width: inherit;}}
@@ -510,7 +510,7 @@ body {background: #232323;}
 #header {padding: 0; border-bottom: 1px solid #e5e5e5; min-height: 112px; background: #fff}
 #headNav:empty {display: none}
 #headNav {width: 100%; position: absolute; top: 0; right: 0; border-bottom: 1px solid #e5e5e5; height: 42px; text-align: right;}
-#headNav nav {float: right;}
+#headNav nav {float: right; margin-right: 200px;}
 #headNav nav > a, #headNav nav > span {float: left; display: block; height: 42px;line-height: 42px; border-right: 1px solid #e5e5e5; padding: 0 15px;}
 #headNav nav > span.hiding {display: none}
 #headNav nav > span:after, #headNav .login-msg:after, #msgBox:after, #headNav nav > a:after {display: none}
@@ -523,12 +523,19 @@ body {background: #232323;}
 #siteLogo img {height: 60px;}
 #siteName h2{line-height: 50px;}
 
+/* Search bar */
+#searchbar {top: 0; right: 0; left: 0; max-width: inherit;}
+#searchbar .input-group {max-width: 200px; float: right; padding: 4px 0 4px 5px;}
+#searchbar .form-control {border-radius: 0;}
+#searchbar .btn {border-radius: 0;}
+.m-index #searchbar .input-group {max-width: 208px; padding-right: 8px;}
+
 /* Navbar */
 #navbar {position: relative; background: none; border: none; min-height: 0; background: #fff}
-#navbar .collapse {position: absolute; right: 0; top: -72px;}
+#navbar .collapse {position: absolute; right: 0; top: -71px;}
 #navbar .nav > li {display: block; float: left; width: auto;}
 @media (min-width: 768px){#navbar .nav > li {display: block;float: left;width: auto;}@-moz-document url-prefix(){#navbar .nav > li{position: inherit;}}}
-#navbar .nav > li > a {background: none; border-width: 0; font-weight: normal; padding: 26px 20px;}
+#navbar .nav > li > a {background: none; border-width: 0; font-weight: normal; padding: 25px 20px;}
 #navbar .nav > li > a, #navbar .nav > li:last-child > a, #navbar .nav > li:first-child > a {-webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0}
 #navbar .dropdown-menu {margin-top: -1px; margin-left: -1px;}
 #navbar .dropdown-menu > li > a:hover,
@@ -555,7 +562,7 @@ body {background: #232323;}
 /* for ie8 start */
 @media (min-width: 768px)
 {
-    #navbar .nav > li > a {background: none; border-width: 0; font-weight: normal; padding: 26px 20px;}
+    #navbar .nav > li > a {background: none; border-width: 0; font-weight: normal; padding: 25px 20px;}
     #navbar .dropdown-menu > li > a:hover,
     #navbar .dropdown-menu > li > a:focus,
     #navbar .dropdown-submenu:hover > a,
@@ -652,6 +659,7 @@ body {background: #232323;}
 {
   #header {margin: 0}
   #headNav {background: #fff; padding: 0; margin: 0}
+  #headNav nav {margin-right: 0;}
   #headTitle {padding-left: 10px; margin-right: 50px; width: 80%}
 
   #navbar .navbar-header {position: absolute; width: 100%; top: -60px;}
@@ -659,6 +667,10 @@ body {background: #232323;}
   #navbar .navbar-nav {margin: 0}
   #navbar .nav > li {width: 25%}
   #navbar .nav > li > a {padding: 20px 20px;}
+
+  #searchbar .input-group {float: left; padding: 5px}
+  #searchbar .form-control {padding: 5px 10px; height: 30px}
+  #searchbar .btn {padding: 5px 10px; height: 30px}
 
   .carousel-caption {left: 8%}
 

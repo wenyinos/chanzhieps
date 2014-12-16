@@ -319,7 +319,7 @@ a.tag-link {color: inherit;}
 #headTitle {display: table; min-height: 55px; margin-top: 0;}
 #siteName,#siteLogo,#siteSlogan {display: table-cell; vertical-align: middle;}
 
-#headNav {position: absolute; right: 15px; top: 40%;}
+#headNav {right: 15px; top: 0;}
 #headNav .login-msg, #headNav nav > a, #msgBox {display: inline-block; margin-left: 5px;}
 #headNav .login-msg:after, #headNav nav > a:after, #msgBox:after{content: '|'; display: inline-block; margin-left: 6px; line-height: 20px; color: #ccc}
 #headNav nav > a:last-child:after{display: none;}
@@ -451,7 +451,7 @@ a:hover,a:active{color: #3D4DBE;}
 #siteName{color: #fff}
 
 /* headNav. */
-#headNav{top: 30%; background-color: #808080; -moz-border-radius:2px; -webkit-border-radius:2px; border-radius:2px;color: #f1f1f1;}
+#headNav{top: 30%; background-color: #808080; border-radius: 0 0 2px 2px; color: #f1f1f1;}
 #headNav .login-msg{display: inline-block; padding-left: 15px; color: #f1f1f1;}
 #headNav nav > a, #msgBox{color: #f1f1f1; display: inline-block; padding: 10px 15px; margin: 0; background-color: #808080; -moz-border-radius:6px; -webkit-border-radius:6px; border-radius:6px; -webkit-transition:background 0.5s; -moz-transition:background 0.5s; -o-transition:background 0.5s; transition:background 0.5s;border-radius: 0}
 #headNav nav > a:first-child{padding-left: 20px; -moz-border-radius:2px 0 0 2px; -webkit-border-radius:2px 0 0 2px; border-radius:2px 0 0 2px; }
@@ -462,6 +462,17 @@ a:hover,a:active{color: #3D4DBE;}
 #headNav .dropdown-menu a {display: block;background-color: #fff;color: #333;}
 #headNav a:hover{background-color: #3e4856; color: #fff; text-decoration: none; -webkit-transition:background 0.5s; -moz-transition:background 0.5s; -o-transition:background 0.5s; transition:background 0.5s;}
 #headNav nav > a:hover, #msgBox:hover,#msgBox:hover a{background-color: #3e4856; color: #fff; text-decoration: none; -webkit-transition:background 0.5s; -moz-transition:background 0.5s; -o-transition:background 0.5s; transition:background 0.5s;}
+
+/* search bar */
+#searchbar {position: relative; max-width: inherit;}
+#searchbar > form {position: absolute; bottom: -43px; right: 8px; z-index: 1001; max-width: 200px;}
+#searchbar .form-control {border-radius: 2px 0 0 2px; padding: 3px 8px; height: 28px; border-color: #808080}
+#searchbar .btn {border-radius: 0 2px 2px 0; padding: 3px 8px; height: 28px; border: none;}
+@media (max-width: 767px)
+{
+  #searchbar {position: absolute; left: 15px; top: 3px;}
+  #searchbar > form {position: static;}
+}
 
 /* navbar */
 #navbar{background: #808080;border-radius: 2px;border: none;}

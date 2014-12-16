@@ -465,6 +465,17 @@ a:hover,a:active{color: #6e2e16;}
 #headNav .dropdown-menu a {display: block;background-color: #fff;color: #333;}
 #headNav nav > a:hover, #msgBox:hover,#msgBox:hover a{background-color: #6E2E16; color: #fff; text-decoration: none; -webkit-transition:background 0.5s; -moz-transition:background 0.5s; -o-transition:background 0.5s; transition:background 0.5s;}
 
+/* search bar */
+#searchbar {position: relative; max-width: inherit;}
+#searchbar > form {position: absolute; bottom: -50px; right: 5px; z-index: 1001; max-width: 200px;}
+#searchbar .form-control {border-radius: 4px 0 0 4px; padding: 3px 8px; height: 30px; border-color: #c4b274}
+#searchbar .btn {border-radius: 0 4px 4px 0; padding: 3px 8px; height: 30px; border: none; background: #6E2E16}
+@media (max-width: 767px)
+{
+  #searchbar {position: absolute; left: 15px; top: 2px;}
+  #searchbar > form {position: static;}
+}
+
 /* navbar settings.*/
 #navbar{background: #c4b274;border-radius: 2px;border: none;}
 @media (min-width: 768px){#navbar .nav > li {display: block;float: left;width: auto;}@-moz-document url-prefix(){#navbar .nav > li{position: inherit;}}}
