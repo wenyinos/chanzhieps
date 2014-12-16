@@ -1,6 +1,4 @@
-/**
- * Set trigger modal default name to 'ajaxModal'.
- */
+/* Set trigger modal default name to 'ajaxModal'. */
 (function(){$.ModalTriggerDefaults = {name: 'ajaxModal'};})();
 
 $.extend(
