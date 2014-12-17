@@ -31,7 +31,7 @@ $config->ui->selectorOptions['basic']['aVisited']['color'] = array('type' => 'co
 
 $config->ui->selectorOptions['basic']['aHover'] = array();
 $config->ui->selectorOptions['basic']['aHover']['color']     = array('type' => 'color', 'default' => '#347AEB', 'name' => 'link-hover-color');
-$config->ui->selectorOptions['basic']['aHover']['underline'] = array('type' => 'underline', 'default' => 'none', 'name' => 'link-decoration');
+$config->ui->selectorOptions['basic']['aHover']['underline'] = array('type' => 'underline', 'default' => 'none', 'name' => 'link-hover-decoration');
 
 $config->ui->selectorOptions['basic']['column'] = array();
 $config->ui->selectorOptions['basic']['column']['sidebarLayout'] = array('type' => 'sidebarLayout', 'default' => 'false', 'name' => 'sidebar-pull-left');
