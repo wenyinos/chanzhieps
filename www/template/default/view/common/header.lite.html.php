@@ -45,11 +45,6 @@ $themeRoot = $webRoot . "template/default/theme/";
       js::import($jsRoot     . 'all.js');
   }
 
-  if($config->template->theme != 'default' and $config->template->theme != 'colorful')
-  {
-      css::import($themeRoot . $config->template->theme . '/style.css');
-  }
-
   /* Import customed css file if it exists. */
   $customCssFile = $this->app->getDataRoot() . 'css' . DS . $this->config->template->name . DS . $this->config->template->theme . DS . 'style.css';
   if(file_exists($customCssFile)) css::import(sprintf($webRoot . 'data/css/%s/%s/style.css?' . $this->config->template->customVersion, $config->template->name, $config->template->theme));
