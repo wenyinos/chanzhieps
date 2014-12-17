@@ -147,10 +147,13 @@ table.captcha td label {padding: 0;}
 .article > header > .dl-inline {background: none}
 
 .article > .article-content {padding: 20px;}
-.article > .article-content img{border: 1px solid #E5E5E5; padding: 3px; border-radius: 3px;}
+.article > .article-content img{border: 1px solid #E5E5E5; padding: 3px;}
 
 .article-files {padding: 10px 20px; border-top: 1px dotted #ddd; background: #f5f5f5}
 .article-files > .files-list {margin: -5px}
+
+/* Fix img in p with text-intent, set http://xirang.5upm.com/bug-view-126.html */
+.article-content p[style*="text-indent:2em"] > img {position: relative; left: -2em}
 
 .article > footer {border-top: 1px dotted #ddd; padding: 10px 20px 20px}
 

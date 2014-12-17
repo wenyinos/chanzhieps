@@ -430,15 +430,16 @@ $.extend(
     }
 });
 
-/**
- * Resize image's max width and max height to made it center and middle.
- *
- * @param   int   maxWidth
- * @param   int   maxHeight
- * @return void
- */
+/* jQuery extensions */
 (function($) 
 {
+    /**
+     * Resize image's max width and max height to made it center and middle.
+     *
+     * @param   int   maxWidth
+     * @param   int   maxHeight
+     * @return void
+     */
     jQuery.fn.resizeImage = function(maxWidth, maxHeight)
     { 
         container = $(this).parent();
@@ -452,6 +453,32 @@ $.extend(
         $(this).css('max-height', maxHeight);
 
         return true;
+    };
+
+    /**
+     * Force to break all letters
+     *
+     * @param   string   filter
+     * @param   minLen   min text length
+     * @return void
+     */
+    jQuery.fn.breakAll = function(filter, minLen)
+    {
+        return $(this).each(function()
+        {
+            var $set = $(this), $e, text;
+            if(filter) $set = $set.find(filter);
+            if(!minLen) minLen = 10;
+            $set.each(function()
+            {
+                $e = $(this);
+                if($e.children().length) return;
+                text = $e.text();
+                if(text.length < minLen || text.indexOf(' ') > -1) return;
+                
+                $e.css({'word-break': 'break-all', 'white-space': 'normal'});
+            });
+        });
     };
 })(jQuery);
 

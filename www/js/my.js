@@ -70,5 +70,7 @@ $(document).ready(function()
         $dockerBtn.popover('hide').removeClass('showed');
     });
     $(document).click(function(){$dockerBtn.popover('hide').removeClass('showed');}).on('click', '.popover', function(event){event.stopPropagation();});
+
+    $('.article-content').breakAll('a');
 });
 
