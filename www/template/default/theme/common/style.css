@@ -356,7 +356,7 @@ td #aliasLabel {display: table-row;}
   .navbar-brand {display: none}
   .navbar-toggle {margin-top: 8px;}
 }
-@media (max-width: 480px) {#headTitle img {max-width: 200px;}}
+@media (max-width: 480px) {#headTitle img {max-width: 200px;} #searchbar {max-width: 90px} #headNav .login-msg {display: none!important}}
 
 /* Messagebox */
 #msgBox {display: inline-block;}

@@ -658,6 +658,7 @@ body {background: #232323;}
   #header {margin: 0}
   #headNav {background: #fff; padding: 0; margin: 0}
   #headNav nav {margin-right: 0;}
+  #headNav nav > a, #headNav nav > span {padding: 0 5px;}
   #headTitle {padding-left: 10px; margin-right: 50px; width: 80%}
 
   #navbar .navbar-header {position: absolute; width: 100%; top: -60px;}
@@ -666,6 +667,7 @@ body {background: #232323;}
   #navbar .nav > li {width: 25%}
   #navbar .nav > li > a {padding: 20px 20px;}
 
+  #searchbar {max-width: 200px}
   #searchbar .input-group {float: left; padding: 5px}
   #searchbar .form-control {padding: 5px 10px; height: 30px}
   #searchbar .btn {padding: 5px 10px; height: 30px}
@@ -675,7 +677,7 @@ body {background: #232323;}
   .page-content {padding-left: 10px; padding-right: 10px;}
   #footer {padding-left: 10px;}
 }
-@media (max-width: 600px){#navbar .nav > li {width: 33.3333333%}}
+@media (max-width: 600px){#navbar .nav > li {width: 33.3333333%;} #searchbar {max-width: 100px} #headNav .login-msg {display: none}}
 @media (max-width: 480px){#navbar .nav > li {width: 50%}}
 
 body.m-message-reply{background:#fff;}
