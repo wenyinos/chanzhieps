@@ -101,6 +101,32 @@ class uiModel extends model
     }
 
     /**
+     * Get custom params.
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @access public
+     * @return array
+     */
+    public function getCustomParams($template, $theme)
+    {
+        $userSetting = $setting = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array();
+        $userSetting = !empty($userSetting[$template][$theme]) ? $userSetting[$template][$theme] : array();
+        $params = array();
+        foreach($this->config->ui->selectorOptions as $groupName => $group)
+        {
+            foreach($group as $name => $style)
+            {
+                foreach($style as $attr => $setting)
+                {
+                    $params[$setting['name']] = empty($userSetting[$setting['name']]) ? $setting['default'] : $userSetting[$setting['name']];
+                }
+            }
+        }
+        return $params;
+    }
+
+    /**
      * Create customer css.
      * 
      * @param  string    $template 
@@ -109,9 +135,11 @@ class uiModel extends model
      * @access public
      * @return void
      */
-    public function createCustomerCss($template, $theme, $params)
+    public function createCustomerCss($template, $theme, $params = null)
     {
-        $params = (array) $params;
+        if(isset($params)) $params = (array) $params;
+        else $params = $this->getCustomParams($template, $theme);
+
         $lessc = $this->app->loadClass('lessc');
         $cssFile = sprintf($this->config->site->ui->customCssFile, $template, $theme);
 
