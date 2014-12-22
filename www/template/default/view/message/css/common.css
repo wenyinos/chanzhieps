@@ -18,3 +18,5 @@ td.td-action{width:50px;}
 td.td-content{word-wrap: break-word; word-break:break-all;}
 .time{font-size:10px; font-weight:normal;color:inherit;}
 table tr.reply .th-from{font-weight:normal}
+
+.signed-user-info {display: inline-block; padding-top: 6px; vertical-align: middle; margin-right: 8px;}

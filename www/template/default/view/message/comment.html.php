@@ -60,15 +60,15 @@ if(isset($pageCSS)) css::internal($pageCSS);
       <div class='form-group'>
         <label for='from' class='col-sm-1 control-label'><?php echo $lang->message->from; ?></label>
         <div class='col-sm-11'>
-          <div class='signed-user-info pull-left'>
+          <span class='signed-user-info'>
             <i class='icon-user text-muted'></i> <strong><?php echo $this->session->user->realname ;?></strong>
             <?php echo html::hidden('from', $this->session->user->realname);?>
             <?php if($this->session->user->email != ''): ?>
             <span class='text-muted'>&nbsp;(<?php echo $this->session->user->email;?>)</span>
             <?php echo html::hidden('email', $this->session->user->email); ?>
             <?php endif; ?>
-          </div>
-          <label class='checkbox pull-left'><input type='checkbox' name='receiveEmail' value='1' checked /> <?php echo $lang->comment->receiveEmail; ?></label>
+          </span>
+          <label class='checkbox-inline'><input type='checkbox' name='receiveEmail' value='1' checked /> <?php echo $lang->comment->receiveEmail; ?></label>
         </div>
       </div>
       <?php endif; ?>
