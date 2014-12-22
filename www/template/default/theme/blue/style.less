@@ -756,19 +756,20 @@ body
 a
 {
     color: @link-color;
-    font-decoration: @link-decoration;
-}
-a:hover
-{
-    color: @link-hover-color;
-}
-a:active, a:focus
-{
-    color: lighten(@link-hover-color, 10%);
+    text-decoration: @link-decoration;
 }
 a:visited
 {
     color: @link-visited-color;
+}
+a:hover, a:visited:hover
+{
+    color: @link-hover-color;
+    text-decoration: @link-hover-decoration;
+}
+a:active, a:focus
+{
+    color: lighten(@link-hover-color, 10%);
 }
 
 /* Buttons */
@@ -853,5 +854,7 @@ a:visited
     background-color: @footer-backcolor;
     .border(@footer-border-style, @footer-border-color, @border-width, @border-radius);
 }
+#footNav a:hover, #powerby a:hover {color: @link-hover-color;}
+#powerby:hover .icon-chanzhi > i, #powerby:hover .icon-chanzhi > i:before, #powerby:hover .icon-chanzhi > i:after {border-color: @link-hover-color;}
 
 .footerLayout(@footer-border-style, @footer-backcolor);

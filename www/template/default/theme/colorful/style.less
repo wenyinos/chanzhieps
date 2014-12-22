@@ -367,7 +367,6 @@ a.tag-link {color: inherit;}
 #footer {background-color: #f7f7f7; padding: 20px 15px; border: 1px solid #ddd; border-radius: 4px; text-align: center; position: relative;}
 #footNav {position: absolute; left: 15px; top: 20px;}
 #footNav a, #powerby a {display: inline-block; margin-right: 10px; color: #777;}
-#footNav a:hover, #powerby a:hover {color: #145BCC}
 #copyrightInfo,#icpInfo {color: #999; font-size: 12px;}
 
 /* responsive for mobile devices */
@@ -736,6 +735,8 @@ body {
 @media (max-width: 480) {#blogNav .nav > li{width: 50%}}
 
 /* style of footer */
+#footNav a:hover, #powerby a:hover {color: @colorPrimary;}
+#powerby:hover .icon-chanzhi > i, #powerby:hover .icon-chanzhi > i:before, #powerby:hover .icon-chanzhi > i:after {border-color: @colorPrimary;}
 #footNav .icon-rss-sign{color: @colorPrimary}
 #footNav .icon-rss-sign:hover{text-decoration: none; color: @colorSecondary}
 
