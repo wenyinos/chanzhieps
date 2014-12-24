@@ -97,7 +97,6 @@ if(file_exists($domainConfig)) include $domainConfig;
 if(file_exists($modeConfig))   include $modeConfig;
 
 /* The tables. */
-define('TABLE_SITE',           $config->db->prefix . 'site');
 define('TABLE_CONFIG',         $config->db->prefix . 'config');
 define('TABLE_CATEGORY',       $config->db->prefix . 'category');
 define('TABLE_PACKAGE',        $config->db->prefix . 'package');
