@@ -2,7 +2,7 @@
 <div class='row'>
   <div class='col-md-6'>
     <div class='panel panel-default'>
-      <div class='panel-heading'><?php echo $lang->user->oauth->lblProfile;?></div>
+      <div class='panel-heading'><h3><?php echo $lang->user->oauth->lblProfile;?></h3></div>
       <div class='panel-body'>
         <form method='post' id='registerForm' action='<?php echo $this->createLink('user', 'oauthRegister');?>' role='form'>
           <div class='form-group'>
@@ -23,7 +23,7 @@
   </div>
   <div class='col-md-6'>
     <div class='panel panel-default'>
-      <div class='panel-heading'><?php echo $lang->user->oauth->lblBind;?></div>
+      <div class='panel-heading'><h3><?php echo $lang->user->oauth->lblBind;?></h3></div>
       <div class='panel-body'>
         <form method='post' id='bindForm' action='<?php echo $this->createLink('user', 'oauthBind');?>' role='form'>
           <div class='form-group'>
