@@ -16,7 +16,7 @@ $(document).ready(function()
     /* Load message notify. */
     $('#headNav #msgBox').load(createLink('message', 'notify'), function()
     {
-        if($('#headNav #msgBox').find('.label').length > 0) $('#msgBox').removeClass('hide').show();
+        if($('#headNav #msgBox').find('.label').length > 0) $('#msgBox').removeClass('hiding');
     });
 
     /* Set 'go to top' button. */

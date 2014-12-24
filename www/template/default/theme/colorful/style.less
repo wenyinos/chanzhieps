@@ -288,7 +288,8 @@ table.captcha td label {padding: 0;}
 .article {border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); margin-bottom: 20px;}
 .article > header h1,.article > header h2,.article > header h3{font-size: 22px}
 .article > header > dl {margin: 0 0 10px; background: transparent; border: 0;padding: 5px 2px 0 2px;}
-.article > footer > p {padding: 0 0 10px;} 
+.article > footer > p {padding: 0 0 10px;}
+.article > header > .dl-inline {margin: 0; padding: 10px 0;}
 .article > header > .abstract {margin: 0; padding: 10px;}
 .article > footer {position: relative;padding-top: 15px;}
 .article > footer .pager {margin-bottom: 0;}
@@ -366,7 +367,6 @@ a.tag-link {color: inherit;}
 #footer {background-color: #f7f7f7; padding: 20px 15px; border: 1px solid #ddd; border-radius: 4px; text-align: center; position: relative;}
 #footNav {position: absolute; left: 15px; top: 20px;}
 #footNav a, #powerby a {display: inline-block; margin-right: 10px; color: #777;}
-#footNav a:hover, #powerby a:hover {color: #145BCC}
 #copyrightInfo,#icpInfo {color: #999; font-size: 12px;}
 
 /* responsive for mobile devices */
@@ -399,7 +399,6 @@ a.tag-link {color: inherit;}
   #header {padding-top: 30px; min-height: inherit; padding-top: 0;}
   #headNav {position: static; font-size: 12px; line-height: 30px; background-color: #e5e5e5; margin-right: -10px; margin-left: -10px; text-align: right; padding: 0 10px;}
   #headTitle {position: absolute; z-index: 10010; bottom: -49px; left: 25px; min-height: inherit; height: 45px;}
-  #headTitle img {height: 45px; max-width: inherit; min-width: 50px; width: auto;}
   .navbar-brand {display: none}
   .navbar-header {min-height: 50px}
   .navbar-toggle {margin-top: 8px}
@@ -736,6 +735,8 @@ body {
 @media (max-width: 480) {#blogNav .nav > li{width: 50%}}
 
 /* style of footer */
+#footNav a:hover, #powerby a:hover {color: @colorPrimary;}
+#powerby:hover .icon-chanzhi > i, #powerby:hover .icon-chanzhi > i:before, #powerby:hover .icon-chanzhi > i:after {border-color: @colorPrimary;}
 #footNav .icon-rss-sign{color: @colorPrimary}
 #footNav .icon-rss-sign:hover{text-decoration: none; color: @colorSecondary}
 

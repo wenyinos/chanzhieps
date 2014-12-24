@@ -391,7 +391,6 @@ a.tag-link {color: inherit;}
   #headNav {position: static; font-size: 12px; line-height: 30px; background-color: #e5e5e5; margin-right: -10px; margin-left: -10px; text-align: right; padding: 0 10px;}
   #searchbar {left: 15px;}
   #headTitle {position: absolute; z-index: 10010; bottom: -49px; left: 25px; min-height: inherit; height: 45px;}
-  #headTitle img {height: 45px; max-width: inherit; min-width: 50px; width: auto;}
   .navbar-brand {display: none}
   .navbar-header {min-height: 50px}
   .navbar-toggle {margin-top: 8px}
@@ -757,19 +756,20 @@ body
 a
 {
     color: @link-color;
-    font-decoration: @link-decoration;
-}
-a:hover
-{
-    color: @link-hover-color;
-}
-a:active, a:focus
-{
-    color: lighten(@link-hover-color, 10%);
+    text-decoration: @link-decoration;
 }
 a:visited
 {
     color: @link-visited-color;
+}
+a:hover, a:visited:hover
+{
+    color: @link-hover-color;
+    text-decoration: @link-hover-decoration;
+}
+a:active, a:focus
+{
+    color: lighten(@link-hover-color, 10%);
 }
 
 /* Buttons */
@@ -854,5 +854,7 @@ a:visited
     background-color: @footer-backcolor;
     .border(@footer-border-style, @footer-border-color, @border-width, @border-radius);
 }
+#footNav a:hover, #powerby a:hover {color: @link-hover-color;}
+#powerby:hover .icon-chanzhi > i, #powerby:hover .icon-chanzhi > i:before, #powerby:hover .icon-chanzhi > i:after {border-color: @link-hover-color;}
 
 .footerLayout(@footer-border-style, @footer-backcolor);

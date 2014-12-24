@@ -24,7 +24,7 @@ $lang->back2Top   = 'T<br/>O<br/>P';
 $lang->chanzhiEPS     = 'chanzhiEPS';
 $lang->chanzhiEPSx    = 'Chanzhi';
 $lang->agreement      = "I Agree to the <a href='http://api.chanzhi.org/goto.php?item=license' target='_blank'>chanzhiEPS Service Agreement</a>, <span class='text-danger'>and promise to keep the logo, link of chanzhiEPS.</span>";
-$lang->poweredBy      = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'><i class='icon icon-chanzhi'></i> %s</a></span>";
+$lang->poweredBy      = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>%s</a></span>";
 $lang->poweredByAdmin = "<span id='poweredBy'>Powered by <a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>ChanzhiEPS %s</a></span>";
 $lang->newVersion     = "Notice: ChanzhiEPS has been upgraded to version: <span id='version'></span> at <span id='releaseDate'></span>. <a href='' target='_blank' id='upgradeLink'>DownLoad Now</a>";
 
