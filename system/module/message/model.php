@@ -134,6 +134,7 @@ class messageModel extends model
             ->where('type')->eq('reply')
             ->andWhere('objectID')->eq($message->id)
             ->beginIF(defined('RUN_MODE') and RUN_MODE == 'front')->andWhere("(id in ({$userMessages}) or (status = '1'))")->fi()
+            ->orderby('id_asc')
             ->fetchAll();
     }
 
