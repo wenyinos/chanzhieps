@@ -149,8 +149,8 @@ $lang->user->oauth->providers['sina'] = '新浪微博';
 $lang->user->oauth->providers['qq']   = 'QQ';
 
 $lang->user->oauth->lblWelcome    = '开放登录，快捷方便';
-$lang->user->oauth->lblProfile    = "<h3>设置用户名，完成注册</h3>";
-$lang->user->oauth->lblBind       = "<h3>或绑定已有帐号</h3>";
+$lang->user->oauth->lblProfile    = "设置用户名，完成注册";
+$lang->user->oauth->lblBind       = "或绑定已有帐号";
 $lang->user->oauth->lblBindFailed = "绑定账户失败！";
 
 $lang->user->statusList = new stdclass();
