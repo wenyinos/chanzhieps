@@ -181,7 +181,7 @@ class commonModel extends model
      */
     public function isOpenMethod($module, $method)
     {   
-        if($module == 'user'and strpos(',login|logout|deny|resetpassword|checkresetkey', $method)) return true;
+        if($module == 'user' and strpos(',login|logout|deny|resetpassword|checkresetkey', $method)) return true;
         if($module == 'wechat' and $method == 'response') return true;
 
         if($this->loadModel('user')->isLogon() and stripos($method, 'ajax') !== false) return true;
@@ -630,20 +630,6 @@ class commonModel extends model
     {
         $this->printForum($board);
         if($thread) echo '<li>' . $thread->title . '</li>';
-    }
-
-    /**
-     * Print the position bar of Search. 
-     * 
-     * @param  int    $module 
-     * @param  int    $object 
-     * @param  int    $keywords 
-     * @access public
-     * @return void
-     */
-    public function printSearch($module, $object, $keywords)
-    {
-        echo "<li> {$this->lang->position['search']} > " . html::a(inlink('xunSearch', "module=$module") . "?key=$keywords", $keywords);
     }
 
     /**
