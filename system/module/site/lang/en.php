@@ -52,6 +52,7 @@ $lang->site->moduleAvailable['blog']    = 'Blog';
 $lang->site->moduleAvailable['book']    = 'Book';
 $lang->site->moduleAvailable['message'] = 'Message';
 
+$lang->site->metaHolder        = 'Tags liek <meta>, <script>, <style>, <link> is accepted.';
 $lang->site->fileAllowedRole   = 'Use "," to divide different extension name.';
 
 $lang->site->robots            = 'Robots';
