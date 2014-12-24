@@ -19,14 +19,14 @@ js::execute($page->js);
       <section class='article-content'>
         <?php echo $page->content;?>
       </section>
-      <section>
-        <?php $this->loadModel('file')->printFiles($page->files);?>
-      </section>
+      <?php if(!empty($page->keywords)):?>
+      <section><?php $this->loadModel('file')->printFiles($page->files);?></section>
+      <?php endif;?>
+      <?php if($page->keywords):?>
       <footer>
-        <?php if($page->keywords):?>
         <p class='small'><strong class="text-muted"><?php echo $lang->article->keywords;?></strong><span class="article-keywords"><?php echo $lang->colon . $page->keywords;?></span></p>
-        <?php endif; ?>
       </footer>
+      <?php endif;?>
     </div>
   </div>
   <?php if(!empty($layouts['page_view'])):?>
