@@ -21,8 +21,8 @@ $lang->ui->setBaseStyle    = "全局样式设置";
 
 $lang->ui->noStyleTag        = "请填写全局CSS样式代码，不需要&lt;style&gt;&lt;/style&gt;标签";
 $lang->ui->setLogoFailed     = "设置Logo失败";
-$lang->ui->noSelectedFile    = "没有选择图片";
-$lang->ui->notAlloweFileType = "请选择正确的%s文件.";
+$lang->ui->noSelectedFile    = "获取上传图片失败，可能是图片大小超出上传限制";
+$lang->ui->notAlloweFileType = "请选择正确的%s文件";
 $lang->ui->suitableLogoSize  = '最佳高度范围：50px~80px，最佳宽度范围：80px~240px';
 
 $lang->ui->favicon = new stdclass();
