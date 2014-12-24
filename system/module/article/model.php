@@ -315,6 +315,7 @@ class articleModel extends model
         $this->loadModel('tag')->save($article->keywords);
 
         if($type != 'page') $this->processCategories($articleID, $type, $this->post->categories);
+
         return $articleID;
     }
 
@@ -477,6 +478,7 @@ class articleModel extends model
         $data = fixer::input('post')
             ->add('editor', $this->app->user->account)
             ->add('editedDate', helper::now())
+            ->stripTags('css', $this->config->allowedTags->admin)
             ->get();
 
         $this->dao->update(TABLE_ARTICLE)->data($data, $skip = 'uid')->autoCheck()->where('id')->eq($articleID)->exec();
@@ -494,6 +496,7 @@ class articleModel extends model
     public function setJs($articleID)
     {
         $data = fixer::input('post')
+            ->stripTags('js', $this->config->allowedTags->admin)
             ->add('editor', $this->app->user->account)
             ->add('editedDate', helper::now())
             ->get();
