@@ -30,9 +30,10 @@
     </div>
   </div>
   <div id='searchbar'>
-    <form role='search'>
+    <form action='<?php echo helper::createLink('search')?>' method='get' role='search'>
       <div class='input-group'>
-        <input type='text' class='form-control' placeholder='<?php echo $this->lang->search?>' name='searchInput' id='searchInput'>
+        <?php $keywords = ($this->app->getModuleName() == 'search') ? $this->session->serachIngWord : '';?>
+        <?php echo html::input('words', $keywords, "class='form-control' placeholder=''");?>
         <div class='input-group-btn'>
           <button class='btn btn-default' type='submit'><i class='icon icon-search'></i></button>
         </div>
