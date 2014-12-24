@@ -207,7 +207,16 @@ class wechatapi
             $message = new simpleXMLElement($this->rawData);
             foreach($message as $key => $value)
             {
-                $key = lcfirst($key);
+                if( function_exists('lcfirst')) 
+                {
+                    $key = lcfirst($key);
+                }
+                else
+                {
+                    $first = strtolower(substr($key, 0, 1));   
+                    $key   = $first . substr($key, 1);
+                }
+
                 $value = $key == 'event' ? strtolower($value) : $value;
                 $this->message->$key = (string)$value;
             }
