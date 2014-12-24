@@ -586,3 +586,15 @@ function formatTime($time, $format = '')
     if($format) return date($format, strtotime($time));
     return trim($time);
 }
+
+/**
+ * Check curl ssl enabled.
+ * 
+ * @access public
+ * @return void
+ */
+function checkCurlSSL()
+{
+    $version = curl_version();
+    return ($version['features'] & CURL_VERSION_SSL);
+}
