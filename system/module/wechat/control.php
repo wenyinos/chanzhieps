@@ -95,8 +95,9 @@ class wechat extends control
         $publics = $this->wechat->getList();
         if(empty($publics)) $this->locate(inlink('create'));
 
-        $this->view->title   = $this->lang->wechat->admin;
-        $this->view->publics = $publics;
+        $this->view->title     = $this->lang->wechat->admin;
+        $this->view->publics   = $publics;
+        $this->view->sslLoaded = extension_loaded('openssl');
         $this->display();
     }
 

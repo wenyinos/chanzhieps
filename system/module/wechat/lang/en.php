@@ -118,7 +118,7 @@ $lang->wechat->placeholder->name     = 'Name of public';
 $lang->wechat->placeholder->account  = 'gh_xxx format';
 $lang->wechat->placeholder->token    = 'Token should English or numbers, length of 3-32 characters.';
 
-$lang->wechat->needCertified  = "This feature needs the account to be certified.";
-$lang->wechat->integrateInfo = "Please interate in the wechat control panel。
-                                <a href='http://api.chanzhi.org/goto.php?item=help_wechat' target='_blank'>Help</a>";
-$lang->wechat->integrateDone = "I have interated with wechat server";
+$lang->wechat->curlSSLRequired = "This function requires curl module with ssl encryption transmission supports.";
+$lang->wechat->needCertified   = "This feature needs the account to be certified.";
+$lang->wechat->integrateInfo   = "Please interate in the wechat control panel. <a href='http://api.chanzhi.org/goto.php?item=help_wechat' target='_blank'>Help</a>";
+$lang->wechat->integrateDone   = "I have interated with wechat server";

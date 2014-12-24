@@ -11,6 +11,11 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php if(!checkCurlSSL()):?>
+  <div class='alert alert-danger'>
+    <?php echo $lang->wechat->curlSSLRequired;?>
+  </div>
+<?php else:?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-list-ul"></i> <?php echo $lang->wechat->list;?></strong>
@@ -60,4 +65,5 @@
     </tbody>
   </table>
 </div>
+<?php endif;?>
 <?php include '../../common/view/footer.admin.html.php';?>

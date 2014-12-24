@@ -118,7 +118,7 @@ $lang->wechat->placeholder->name     = '公众号名称';
 $lang->wechat->placeholder->account  = '请输入gh_xxx 格式的原始ID';
 $lang->wechat->placeholder->token    = '必须为英文或数字，长度为3-32字符';
 
-$lang->wechat->needCertified = "此功能需要公众号认证后使用。";
-$lang->wechat->integrateInfo = "请到微信的公众平台完成接入，以获取appID和appSecret信息。
-                                <a href='http://api.chanzhi.org/goto.php?item=help_wechat' target='_blank'>帮助</a>";
-$lang->wechat->integrateDone = "已完成接入";
+$lang->wechat->curlSSLRequired = "微信公众号功能需要curl模块，并支持ssl加密传输。";
+$lang->wechat->needCertified   = "此功能需要公众号认证后使用。";
+$lang->wechat->integrateInfo   = "请到微信的公众平台完成接入，以获取appID和appSecret信息。 <a href='http://api.chanzhi.org/goto.php?item=help_wechat' target='_blank'>帮助</a>";
+$lang->wechat->integrateDone   = "已完成接入";
