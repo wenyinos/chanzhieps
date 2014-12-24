@@ -434,6 +434,9 @@ class treeModel extends model
 
         $this->fixPath($category->type);
 
+        $this->loadModel('file')->updateObjectID($this->post->uid, $categoryID, 'category');
+        $this->file->copyFromContent($this->post->content, $categoryID, 'category');
+
         return !dao::isError();
     }
         
