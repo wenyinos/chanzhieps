@@ -253,7 +253,7 @@ class wechat extends control
     public function commitMenu($public)
     {
         $this->setApi($public);
-        $menu = $this->wechat->getMenu($public);
+        $menu   = $this->wechat->getMenu($public);
         $result = $this->api->commitMenu($menu);
         if($result['result'] == 'success') $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         $this->send($result);
