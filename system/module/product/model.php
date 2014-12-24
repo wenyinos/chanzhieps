@@ -260,6 +260,7 @@ class productModel extends model
 
         $this->loadModel('tag')->save($product->keywords);
         $this->processCategories($productID, $this->post->categories);
+
         return $productID;
     }
 
@@ -417,6 +418,7 @@ class productModel extends model
     {
         $data = fixer::input('post')
             ->add('editor', $this->app->user->account)
+            ->stripTags('css', $this->config->allowedTags->admin)
             ->add('editedDate', helper::now())
             ->get();
 
@@ -435,6 +437,7 @@ class productModel extends model
     public function setJs($productID)
     {
         $data = fixer::input('post')
+            ->stripTags('js', $this->config->allowedTags->admin)
             ->add('editor', $this->app->user->account)
             ->add('editedDate', helper::now())
             ->get();
