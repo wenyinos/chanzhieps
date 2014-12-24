@@ -24,7 +24,7 @@ class site extends control
         if(!empty($_POST))
         {
             $setting = fixer::input('post')
-                ->stripTags('desc,meta', $allowedTags)
+                ->stripTags('meta', $allowedTags)
                 ->join('modules', ',')
                 ->remove('allowedFiles')
                 ->setDefault('modules', '')
