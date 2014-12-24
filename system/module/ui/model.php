@@ -131,7 +131,7 @@ class uiModel extends model
      * 
      * @param  string    $template 
      * @param  string    $theme 
-     * @param  array    $params 
+     * @param  array     $params 
      * @access public
      * @return void
      */
