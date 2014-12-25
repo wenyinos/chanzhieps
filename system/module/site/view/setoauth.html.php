@@ -58,43 +58,6 @@
     </div>
   </div>
   <?php endforeach;?>
-
-  <div class='col-sm-8'>
-    <div class='panel'>
-      <div class='panel-heading'>
-        <strong><?php echo $lang->ranzhi->common;?></strong>
-        <div class='panel-actions'>
-        </div>
-      </div>
-      <div class='panel-body'>
-        <form action='<?php echo helper::createLink('ranzhi', 'saveConfig');?>' method='post' id='ranzhiAjaxForm'>
-          <table class='table table-form'>
-            <tr>
-              <th class='w-100px'><?php echo $lang->ranzhi->code;?></th>
-              <td><?php echo html::input('code', $this->config->ranzhi->code, "class='form-control'");?></td> 
-            </tr>
-            <tr>
-              <th><?php echo $lang->ranzhi->key;?></th>
-              <td><?php echo html::input('key', $this->config->ranzhi->key, "class='form-control'");?></td> 
-            </tr>
-            <tr>
-              <th><?php echo $lang->ranzhi->ranzhiURL;?></th>
-              <td>
-                <div class='input-group'>
-                  <?php echo html::input('ranzhiURL', $this->config->ranzhi->ranzhiURL, "class='form-control'");?>
-                  <span class='input-group-addon'> <?php echo $lang->ranzhi->requestType;?> </span>
-                  <?php echo html::select('requestType', $lang->ranzhi->requestTypeList, $this->config->ranzhi->requestType, "class='form-control'");?>
-                </div>
-              </td> 
-            </tr>
-            <tr>
-             <th></th> <td><?php echo html::submitButton() . html::hidden('provider', $providerCode);?></td>
-            </tr>
-          </table>
-        </form>
-      </div> 
-    </div> 
-  </div>
 </div>
 
 <?php include '../../common/view/footer.admin.html.php';?>
