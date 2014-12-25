@@ -53,3 +53,4 @@ $lang->upgrade->fromVersions['2_5_3']    = '2.5.3';
 $lang->upgrade->fromVersions['3_0']      = '3.0';
 $lang->upgrade->fromVersions['3_0_1']    = '3.0.1';
 $lang->upgrade->fromVersions['3_1']      = '3.1';
+$lang->upgrade->fromVersions['3_2']      = '3.3';

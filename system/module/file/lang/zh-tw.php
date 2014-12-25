@@ -22,7 +22,7 @@ $lang->file->allow      = '允許';
 $lang->file->toggle     = '切換';
 $lang->file->label      = '標題：';
 $lang->file->lblInfo    = '<i>(類型：%s, 大小：%s, 添加于：%s，下載%s次)</i>';
-$lang->file->limit      = "(<span class='text-danger'>2M以內</span>)";
+$lang->file->limit      = "(<span class='text-danger'>%sM以內</span>)";
 
 $lang->file->id        = '編號';
 $lang->file->title     = '名稱';
@@ -45,4 +45,4 @@ $lang->file->noAccess         = '不允許訪問。';
 $lang->file->invalidParameter = '參數無效。';
 $lang->file->unWritable       = '目錄不可寫或不存在。';
 $lang->file->uploadForbidden  = '附件上傳功能已禁用。';
-$lang->file->sizeLimit        = "<p class='text-danger'>附件大小不能大於2M</p>";
+$lang->file->sizeLimit        = "<p class='text-danger'>附件大小不能大於%sM</p>";

@@ -52,6 +52,7 @@ $lang->site->moduleAvailable['blog']    = '博客';
 $lang->site->moduleAvailable['book']    = '手冊';
 $lang->site->moduleAvailable['message'] = '評論留言';
 
+$lang->site->metaHolder        = '可放置<meta><script><style>和<link>標籤。';
 $lang->site->fileAllowedRole   = '多個尾碼名之間請用 "," 隔開';
 
 $lang->site->robots            = 'Robots';
