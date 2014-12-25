@@ -50,7 +50,7 @@
   <table class='table table-form'>
     <?php if($writeable):?>
     <tr>
-      <td class='text-middle'><?php echo $lang->file->upload . $lang->file->limit;?></td>
+      <td class='text-middle'><?php echo $lang->file->upload . sprintf($lang->file->limit, $this->config->file->maxSize / 1024 /1024);?></td>
       <td><?php echo $this->fetch('file', 'buildForm');?></td>
     </tr>
     <tr><td colspan='2' class='text-center'><?php echo html::submitButton();?></td></tr>

@@ -45,4 +45,4 @@ $lang->file->noAccess         = 'Access is not allowed.';
 $lang->file->invalidParameter = 'Parameter is not valid.';
 $lang->file->unWritable       = 'Directory does not exist.';
 $lang->file->uploadForbidden  = 'Upload function is forbidden.';
-$lang->file->sizeLimit        = "<p class='text-danger'>The size of file must be less than 2M</p>";
+$lang->file->sizeLimit        = "<p class='text-danger'>The size of file must be less than %sM</p>";

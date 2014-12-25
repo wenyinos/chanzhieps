@@ -15,7 +15,7 @@
   </table>
 EOT;
   for($i = 1; $i <= $fileCount; $i ++) echo str_replace('$i', $i, $fileRow);
-  echo $lang->file->sizeLimit;
+  printf($lang->file->sizeLimit, $this->config->file->maxSize / 1024 / 1024);
   ?>
 </div>
 <?php endif;?>
