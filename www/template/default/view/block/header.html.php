@@ -29,15 +29,4 @@
       <nav><?php echo commonModel::printTopBar();?></nav>
     </div>
   </div>
-  <div id='searchbar'>
-    <form action='<?php echo helper::createLink('search')?>' method='get' role='search'>
-      <div class='input-group'>
-        <?php $keywords = ($this->app->getModuleName() == 'search') ? $this->session->serachIngWord : '';?>
-        <?php echo html::input('words', $keywords, "class='form-control' placeholder=''");?>
-        <div class='input-group-btn'>
-          <button class='btn btn-default' type='submit'><i class='icon icon-search'></i></button>
-        </div>
-      </div>
-    </form>
-  </div>
 </header>
