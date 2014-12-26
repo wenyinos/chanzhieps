@@ -501,7 +501,7 @@ h5{font-size: 14px;}
 #footNav .icon-rss-sign{color: #f39800}
 #footNav .icon-rss-sign:hover{text-decoration: none; color: #ED9C28}
 
-#poweredBy .icon-chanzhi {top: 1px}
+#poweredBy .icon-chanzhi {top: 1px; overflow: hidden;}
 #poweredBy .icon-chanzhi > i, #poweredBy .icon-chanzhi > i:before, #poweredBy .icon-chanzhi > i:after {border-color: #0d3d88}
 #poweredBy:hover .icon-chanzhi > i, #poweredBy:hover .icon-chanzhi > i:before, #poweredBy:hover .icon-chanzhi > i:after {border-color: #347aeb}
 
