@@ -4,7 +4,7 @@
 
 <nav class="navbar navbar-default navbar-fixed-bottom hidden-sm hidden-xs" role="navigation">
   <div class="collapse navbar-collapse navbar-ex6-collapse">
-    <div class='navbar-text pull-right'><?php printf($lang->poweredBy, $config->version, k(), $config->version);?></div>
+    <div class='navbar-text pull-right'><?php printf($lang->poweredBy, $config->version, k(), "<span class='icon icon-chanzhi'><i class='ic1'></i><i class='ic2'></i><i class='ic3'></i><i class='ic4'></i><i class='ic5'></i><i class='ic6'></i><i class='ic7'></i></span> " . $config->version);?></div>
   </div>
 </nav>
 
