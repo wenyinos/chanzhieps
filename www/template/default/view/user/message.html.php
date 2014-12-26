@@ -21,7 +21,7 @@
             <td><input type='checkbox' name='messages[]' value="<?php echo $message->id?>" /></td>
             <td class='hidden-xxxs'><?php echo $message->from;?></td>
             <td class='hidden-xxs'><?php echo substr($message->date, 5);?></td>
-            <td class='text-left'><?php echo $message->content;?></td>
+            <td class='text-left break-all'><?php echo $message->content;?></td>
             <td class='hidden-xs'><?php echo $lang->message->readedStatus[$message->readed];?></td>
             <?php if(!$message->readed):?>
             <td class='hidden-xxs'><?php echo html::a($this->createLink('message', 'view', "message=$message->id"), $message->link ? $lang->message->view : $lang->message->readed);?></td>
