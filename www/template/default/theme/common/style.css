@@ -448,7 +448,7 @@ body.body-modal {padding: 20px;}
 }
 
 /* Pager. */
-.pager {margin-bottom:0;line-height: 20px; color: #999}
+.pager {margin: 10px 0;line-height: 20px; color: #999}
 .pager .dropdown {display: inline-block;}
 .pager a {color: #444}
 .pager a:hover {color: #141414}
