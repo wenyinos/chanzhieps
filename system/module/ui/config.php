@@ -137,6 +137,7 @@ $config->ui->themes['blue']['block']['heading']['color']['default'] = '#FFF';
 
 /* Brightdark theme setting */
 $config->ui->themes['brightdark']    = $config->ui->selectorOptions;
+unset($config->ui->themes['brightdark']['basic']['aVisited']);
 unset($config->ui->themes['brightdark']['basic']['border']);
 unset($config->ui->themes['brightdark']['basic']['colorset']);
 unset($config->ui->themes['brightdark']['navbar']);
@@ -145,13 +146,13 @@ unset($config->ui->themes['brightdark']['block']);
 $config->ui->themes['brightdark']['basic']['pageBackground']['backcolor']['default'] = '#2E353F';
 $config->ui->themes['brightdark']['basic']['pageText']['color']['default'] = '#2E353F';
 $config->ui->themes['brightdark']['basic']['aLink']['color']['default'] = '#3D4DBE';
-$config->ui->themes['brightdark']['basic']['aVisited']['color']['default'] = '#3e4856';
 $config->ui->themes['brightdark']['basic']['aHover']['color']['default'] = '#3D4DBE';
 $config->ui->themes['brightdark']['footer']['border']['border']['default'] = 'none';
 $config->ui->themes['brightdark']['footer']['background']['backcolor']['default'] = '#ECF0F5';
 
 /* Flat theme setting */
 $config->ui->themes['flat']    = $config->ui->selectorOptions;
+unset($config->ui->themes['flat']['basic']['aVisited']);
 unset($config->ui->themes['flat']['basic']['border']);
 unset($config->ui->themes['flat']['basic']['colorset']);
 unset($config->ui->themes['flat']['navbar']);
@@ -159,13 +160,13 @@ unset($config->ui->themes['flat']['button']);
 unset($config->ui->themes['flat']['block']);
 $config->ui->themes['flat']['basic']['pageText']['color']['default'] = '#34495E';
 $config->ui->themes['flat']['basic']['aLink']['color']['default'] = '#16A085';
-$config->ui->themes['flat']['basic']['aVisited']['color']['default'] = '#16A085';
 $config->ui->themes['flat']['basic']['aHover']['color']['default'] = '#1ABC9C';
 $config->ui->themes['flat']['footer']['border']['border']['default'] = 'none';
 $config->ui->themes['flat']['footer']['background']['backcolor']['default'] = '#EDEFF1';
 
 /* Tartan theme setting */
 $config->ui->themes['tartan']    = $config->ui->selectorOptions;
+unset($config->ui->themes['tartan']['basic']['aVisited']);
 unset($config->ui->themes['tartan']['basic']['border']);
 unset($config->ui->themes['tartan']['basic']['colorset']);
 unset($config->ui->themes['tartan']['navbar']);
@@ -175,13 +176,13 @@ $config->ui->themes['tartan']['basic']['pageBackground']['backgroundImage']['def
 $config->ui->themes['tartan']['basic']['pageBackground']['backcolor']['default'] = '#5F7A64';
 $config->ui->themes['tartan']['basic']['pageText']['color']['default'] = '#6F6658';
 $config->ui->themes['tartan']['basic']['aLink']['color']['default'] = '#254952';
-$config->ui->themes['tartan']['basic']['aVisited']['color']['default'] = '#254952';
 $config->ui->themes['tartan']['basic']['aHover']['color']['default'] = '#35636E';
 $config->ui->themes['tartan']['footer']['border']['border']['default'] = 'none';
 $config->ui->themes['tartan']['footer']['background']['backcolor']['default'] = '#F5F0CC';
 
 /* Tree theme setting */
 $config->ui->themes['tree']    = $config->ui->selectorOptions;
+unset($config->ui->themes['tree']['basic']['aVisited']);
 unset($config->ui->themes['tree']['basic']['border']);
 unset($config->ui->themes['tree']['basic']['colorset']);
 unset($config->ui->themes['tree']['navbar']);
@@ -189,7 +190,6 @@ unset($config->ui->themes['tree']['button']);
 unset($config->ui->themes['tree']['block']);
 $config->ui->themes['tree']['basic']['pageText']['color']['default'] = '#5F7A64';
 $config->ui->themes['tree']['basic']['aLink']['color']['default'] = '#6E2E16';
-$config->ui->themes['tree']['basic']['aVisited']['color']['default'] = '#6E2E16';
 $config->ui->themes['tree']['basic']['aHover']['color']['default'] = '#6E2E16';
 $config->ui->themes['tree']['footer']['border']['border']['default'] = 'none';
 $config->ui->themes['tree']['footer']['background']['backcolor']['default'] = '#F5F0CC';

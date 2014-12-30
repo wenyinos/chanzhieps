@@ -16,28 +16,32 @@
               <th class='w-80px hidden-xxs'><?php echo $lang->actions;?></th>
             </tr>
           </thead>
-          <?php foreach($messages as $message):?>
-          <tr class='text-center'>
-            <td><input type='checkbox' name='messages[]' value="<?php echo $message->id?>" /></td>
-            <td class='hidden-xxxs'><?php echo $message->from;?></td>
-            <td class='hidden-xxs'><?php echo substr($message->date, 5);?></td>
-            <td class='text-left'><?php echo $message->content;?></td>
-            <td class='hidden-xs'><?php echo $lang->message->readedStatus[$message->readed];?></td>
-            <?php if(!$message->readed):?>
-            <td class='hidden-xxs'><?php echo html::a($this->createLink('message', 'view', "message=$message->id"), $message->link ? $lang->message->view : $lang->message->readed);?></td>
-            <?php else:?>
-            <td class='hidden-xxs'><?php echo $lang->message->readed;?></td>
-            <?php endif;?>
-          </tr>
-          <?php endforeach;?>
-          <tr>
-            <td colspan='6'>
-              <?php
-              if($messages) echo html::submitButton($lang->message->deleteSelected);
-              $pager->show();
-              ?>
-            </td>
-          </tr>
+          <tbody>
+            <?php foreach($messages as $message):?>
+            <tr class='text-center'>
+              <td><input type='checkbox' name='messages[]' value="<?php echo $message->id?>" /></td>
+              <td class='hidden-xxxs'><?php echo $message->from;?></td>
+              <td class='hidden-xxs'><?php echo substr($message->date, 5);?></td>
+              <td class='text-left break-all'><?php echo $message->content;?></td>
+              <td class='hidden-xs'><?php echo $lang->message->readedStatus[$message->readed];?></td>
+              <?php if(!$message->readed):?>
+              <td class='hidden-xxs'><?php echo html::a($this->createLink('message', 'view', "message=$message->id"), $message->link ? $lang->message->view : $lang->message->readed);?></td>
+              <?php else:?>
+              <td class='hidden-xxs'><?php echo $message->link ? html::a($this->createLink('message', 'view', "message=$message->id"), $lang->message->view) : $lang->message->readed;?></td>
+              <?php endif;?>
+            </tr>
+            <?php endforeach;?>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan='6'>
+                <?php
+                if($messages) echo html::submitButton($lang->message->deleteSelected);
+                $pager->show();
+                ?>
+              </td>
+            </tr>
+          </tfoot>
         </table>
       </div>
     </form>
