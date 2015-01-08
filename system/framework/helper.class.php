@@ -220,7 +220,7 @@ class helper
                 $startDel   = false;
                 foreach($modelLines as $line => $code)
                 {
-                    if($startDel and preg_match("/.*function\s+\w+/", $code)) $startDel = false; 
+                    if($startDel and preg_match('/.* function\s+(\w+)\s*\(.*\)/Ui', $code)) $startDel = false;
                     if($startDel)
                     {
                         unset($modelLines[$line]);
@@ -230,7 +230,7 @@ class helper
                         foreach($conflics as $functionName => $count)
                         {
                             if($count <= 1) continue;
-                            if(preg_match("/.*function\s+{$functionName}/", $code)) 
+                            if(preg_match('/.* function\s+' . $functionName . '\s*\(.*\)/Ui', $code)) 
                             {
                                 $conflics[$functionName] = $count - 1;
                                 $startDel = true;
