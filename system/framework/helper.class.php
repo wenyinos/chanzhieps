@@ -197,13 +197,43 @@ class helper
             foreach($extFiles as $extFile)
             {
                 $extLines = trim(file_get_contents($extFile));
-                if(strpos($extLines, '<?php') !== false) $extLines = ltrim($extLines, '<?php');
-                if(strpos($extLines, '?>')    !== false) $extLines = rtrim($extLines, '?>');
+                if(strpos($extLines, '<?php') !== false) $extLines = ltrim($extLines, "<?php");
+                if(strpos($extLines, "?>")    !== false) $extLines = rtrim($extLines, "?>");
                 $modelLines .= $extLines . "\n";
             }
 
             /* Create the merged model file. */
             $modelLines .= "}";
+            preg_match_all('/.* function\s+(\w+)\(.*\)\s*\n*\r*\{/', $modelLines, $functions);
+            $functions  = $functions[1];
+            $conflics   = array_count_values($functions);
+            $modelLines = explode("\n", $modelLines);
+
+            $startDel = false;
+            foreach($modelLines as $line => $code)
+            {
+                if($startDel and preg_match("/.*function\s+\w+/", $code)) $startDel = false; 
+                if($startDel)
+                {
+                    unset($modelLines[$line]);
+                }
+                else
+                {
+                    foreach($conflics as $functionName => $count)
+                    {
+                        if($count <= 1) continue;
+                        if(preg_match("/.*function\s+{$functionName}/", $code)) 
+                        {
+                            $conflics[$functionName] = $count - 1;
+                            $startDel = true;
+                            unset($modelLines[$line]);
+                        }
+                    }
+                }
+            }
+
+            $modelLines = join("\n", $modelLines);
+
             file_put_contents($mergedModelFile, $modelLines);
 
             return $mergedModelFile;
