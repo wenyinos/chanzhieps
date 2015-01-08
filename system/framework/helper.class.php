@@ -204,35 +204,44 @@ class helper
 
             /* Create the merged model file. */
             $modelLines .= "}";
-            preg_match_all('/.* function\s+(\w+)\(.*\)\s*\n*\r*\{/', $modelLines, $functions);
-            $functions  = $functions[1];
-            $conflics   = array_count_values($functions);
-            $modelLines = explode("\n", $modelLines);
 
-            $startDel = false;
-            foreach($modelLines as $line => $code)
+
+            /* Unset conflic function for model. */
+            preg_match_all('/.* function\s+(\w+)\s*\(.*\)[^\{]*\{/Ui', $modelLines, $functions);
+            $functions = $functions[1];
+            $conflics  = array_count_values($functions);
+            foreach($conflics as $functionName => $count)
             {
-                if($startDel and preg_match("/.*function\s+\w+/", $code)) $startDel = false; 
-                if($startDel)
+                if($count <= 1) unset($conflics[$functionName]);
+            }
+            if($conflics)
+            {
+                $modelLines = explode("\n", $modelLines);
+                $startDel   = false;
+                foreach($modelLines as $line => $code)
                 {
-                    unset($modelLines[$line]);
-                }
-                else
-                {
-                    foreach($conflics as $functionName => $count)
+                    if($startDel and preg_match("/.*function\s+\w+/", $code)) $startDel = false; 
+                    if($startDel)
                     {
-                        if($count <= 1) continue;
-                        if(preg_match("/.*function\s+{$functionName}/", $code)) 
+                        unset($modelLines[$line]);
+                    }
+                    else
+                    {
+                        foreach($conflics as $functionName => $count)
                         {
-                            $conflics[$functionName] = $count - 1;
-                            $startDel = true;
-                            unset($modelLines[$line]);
+                            if($count <= 1) continue;
+                            if(preg_match("/.*function\s+{$functionName}/", $code)) 
+                            {
+                                $conflics[$functionName] = $count - 1;
+                                $startDel = true;
+                                unset($modelLines[$line]);
+                            }
                         }
                     }
                 }
-            }
 
-            $modelLines = join("\n", $modelLines);
+                $modelLines = join("\n", $modelLines);
+            }
 
             file_put_contents($mergedModelFile, $modelLines);
 
@@ -404,13 +413,13 @@ class helper
         $items = explode('.', $domain);
         $postfix = str_replace($items[0] . '.', '', $domain);
         if(strpos($config->domainPostfix, "|$postfix|") !== false) return $items[0];
-        
+
         $postfix = str_replace($items[0] . '.' . $items[1] . '.', '', $domain);
         if(strpos($config->domainPostfix, "|$postfix|") !== false) return $items[1];
 
         return $siteCode = $domain;
     }
-    
+
     /**
      * Enhanced substr version: support multibyte languages like Chinese.
      *
@@ -433,11 +442,11 @@ class helper
      *
      * return bool
      */
-     public static function inSeoMode()
-     {
+    public static function inSeoMode()
+    {
         global $config;
         return $config->requestType == 'PATH_INFO' and $config->seoMode;
-     }
+    }
 
     /**
      * Check is ajax request 
