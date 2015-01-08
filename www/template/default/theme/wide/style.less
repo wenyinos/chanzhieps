@@ -495,10 +495,10 @@ body {background: #232323;}
 
 /* Containers */
 .page-container {margin: 0; overflow: hidden;}
-.page-content, #header .wrapper, #searchbar > form, #navbar, #focus, .focus-middle, .focus-bottom, #footer > .wrapper {margin: 0 auto; max-width: 1170px;}
-@media (min-width: 768px) {.page-content, #header .wrapper, #searchbar > form, #navbar, .focus-middle, .focus-bottom, #footer > .wrapper {max-width: 750px;}}
-@media (min-width: 992px) {.page-content, #header .wrapper, #searchbar > form, #navbar, .focus-middle, .focus-bottom, #footer > .wrapper {max-width: 970px;}}
-@media (min-width: 1200px) {.page-content, #header .wrapper, #searchbar > form, #navbar, .focus-middle, .focus-bottom, #footer > .wrapper {max-width: 1170px;}}
+.page-content, #header .wrapper, #navbar, #focus, .focus-middle, .focus-bottom, #footer > .wrapper {margin: 0 auto; max-width: 1170px;}
+@media (min-width: 768px) {.page-content, #header .wrapper, #navbar, .focus-middle, .focus-bottom, #footer > .wrapper {max-width: 750px;}}
+@media (min-width: 992px) {.page-content, #header .wrapper, #navbar, .focus-middle, .focus-bottom, #footer > .wrapper {max-width: 970px;}}
+@media (min-width: 1200px) {.page-content, #header .wrapper, #navbar, .focus-middle, .focus-bottom, #footer > .wrapper {max-width: 1170px;}}
 
 .page-container, .m-index-index .page-content, .m-index-index #links {max-width: inherit; padding: 0; background-color: #fff}
 @media (min-width: 768px) {.page-container, .m-index-index .page-content, .m-index-index #links, #focus {max-width: inherit;}}
@@ -521,13 +521,6 @@ body {background: #232323;}
 #siteLogo {padding: 5px 0}
 #siteLogo img {height: 60px;}
 #siteName h2{line-height: 50px;}
-
-/* Search bar */
-#searchbar {top: 0; right: 0; left: 0; max-width: inherit; height: 0}
-#searchbar .input-group {max-width: 200px; float: right; padding: 4px 0 4px 5px;}
-#searchbar .form-control {border-radius: 0;}
-#searchbar .btn {border-radius: 0;}
-.m-index #searchbar .input-group {max-width: 208px; padding-right: 8px;}
 
 /* Navbar */
 #navbar {position: relative; background: none; border: none; min-height: 0; background: #fff}
@@ -669,18 +662,13 @@ body {background: #232323;}
   #navbar .nav > li {width: 25%}
   #navbar .nav > li > a {padding: 20px 20px;}
 
-  #searchbar {max-width: 200px}
-  #searchbar .input-group {float: left; padding: 5px}
-  #searchbar .form-control {padding: 5px 10px; height: 30px}
-  #searchbar .btn {padding: 5px 10px; height: 30px}
-
   .carousel-caption {left: 8%}
 
   .page-content {padding-left: 10px; padding-right: 10px;}
   #footer {padding-left: 10px;}
 }
-@media (max-width: 600px){#navbar .nav > li {width: 33.3333333%;} #searchbar {max-width: 100px} #headNav .login-msg {display: none}}
-@media (max-width: 480px){#navbar .nav > li {width: 50%}}
+@media (max-width: 600px) {#navbar .nav > li {width: 33.3333333%;} #headNav .login-msg {display: none}}
+@media (max-width: 480px) {#navbar .nav > li {width: 50%}}
 
 body.m-message-reply{background:#fff;}
 
@@ -842,9 +830,9 @@ a.btn-primary:visited, a.btn-danger:visited, a.btn-info:visited, a.warning-info:
 .text-primary {color: @color-primary}
 .text-primary:hover, .text-link:hover, .text-link:active{color: @color-primary-dark}
 
-.form-control:focus {border-color: @color-primary-dark;}
+.form-control:focus {border-color: @color-primary-dark; box-shadow: none}
 
-.ke-container.focus, .ke-input-text:focus {border-color: @color-primary-dark !important;}
+.ke-container.focus, .ke-input-text:focus {border-color: @color-primary-dark !important; box-shadow: none}
 .ke-menu-item-on, .ke-colorpicker-cell-on {background-color: @color-primary !important}
 
 a.list-group-item:hover, a.list-group-item:focus {background-color: @color-primary-dark; color: @text-color-inverse}
