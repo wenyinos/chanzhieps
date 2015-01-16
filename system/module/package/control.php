@@ -145,12 +145,13 @@ class package extends control
             if(file_exists($packageFile) and $overridePackage == 'no')
             {
                 $overrideLink = inlink('install', "package=$package&downLink=$downLink&md5=$md5&type=$type&overridePackage=yes&ignoreCompatible=$ignoreCompatible&overrideFile=$overrideFile&agreeLicense=$agreeLicense&upgrade=$upgrade");
-                $this->view->error = sprintf($this->lang->package->errorPackageFileExists, $packageFile, $installType, $overrideLink);
+                $this->view->error = sprintf($this->lang->package->errorPackageFileExists, $packageFile, $overrideLink, $installType);
                 die($this->display());
             }
 
             /* Download the package file. */
-            $this->package->downloadPackage($package, helper::safe64Decode($downLink));
+            if(!file_exists($packageFile) or ($md5 != '' and md5_file($packageFile) != $md5))  $this->package->downloadPackage($package, helper::safe64Decode($downLink));
+
             if(!file_exists($packageFile))
             {
                 $this->view->error = sprintf($this->lang->package->errorDownloadFailed, $packageFile);
