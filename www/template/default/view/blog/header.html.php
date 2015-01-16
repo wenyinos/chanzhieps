@@ -44,8 +44,17 @@ $navs = $this->tree->getChildren(0, 'blog');
   css::import($jsRoot    . 'jquery/treeview/min.css');
 
   /* Import customed css file if it exists. */
-  $customCssFile = $this->app->getDataRoot() . 'css' . DS . $this->config->template->name . DS . $this->config->template->theme . DS . 'style.css';
-  if(file_exists($customCssFile)) css::import(sprintf($webRoot . 'data/css/%s/%s/style.css?' . $this->config->template->customVersion, $config->template->name, $config->template->theme));
+  $siteCustomCssFile = $this->app->getDataRoot() . 'css' . DS . $this->config->site->code . DS . $this->config->template->name . DS . $this->config->template->theme . DS . 'style.css';
+  if($this->config->multi && file_exists($siteCustomCssFile))
+  {
+      css::import(sprintf($webRoot . 'data/css/%s/%s/%s/style.css?' . $this->config->template->customVersion, $config->site->code, $config->template->name, $config->template->theme));
+  }
+  else
+  {
+      $customCssFile = $this->app->getDataRoot() . 'css' . DS . $this->config->template->name . DS . $this->config->template->theme . DS . 'style.css';
+      if(file_exists($customCssFile)) css::import(sprintf($webRoot . 'data/css/%s/%s/style.css?' . $this->config->template->customVersion, $config->template->name, $config->template->theme));
+       
+  }
 
   js::exportConfigVars();
   if($config->debug)
