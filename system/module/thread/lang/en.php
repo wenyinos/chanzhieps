@@ -53,6 +53,7 @@ $lang->thread->readonly        = 'Read only';
 $lang->thread->successStick    = 'Successfully sticky.';
 $lang->thread->successUnstick  = 'Successfully unsticky.';
 $lang->thread->successHide     = 'Successfully hide.';
+$lang->thread->successShow     = 'Successfully show.';
 $lang->thread->readonlyMessage = 'The thread has been set <strong>READONLY</strong>，you can not post new reply。';
 $lang->thread->successTransfer = 'Successfully Transfered';
 
