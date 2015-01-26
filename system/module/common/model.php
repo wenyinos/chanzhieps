@@ -111,6 +111,8 @@ class commonModel extends model
      */
     public static function hasPriv($module, $method)
     {
+        $module = strtolower($module);
+        $method = strtolower($method);
         global $app, $config;
 
         if(RUN_MODE == 'admin')
@@ -122,7 +124,18 @@ class commonModel extends model
         if(!commonModel::isAvailable($module)) return false;
 
         $rights  = $app->user->rights;
-        if(isset($rights[strtolower($module)][strtolower($method)])) return true;
+        if(isset($rights[$module][$method])) return true;
+
+        /* Check rights one more time to enable new created rights.*/
+        if($app->user->account == 'guest')
+        { 
+            if(isset($config->rights->guest[$module][$method])) return true;
+        }
+        else
+        {
+            if(isset($config->rights->guest[$module][$method]) or isset($config->rights->member[$module][$method])) return true;
+        }
+
         return false;
     }
 
