@@ -35,7 +35,7 @@ $config->sessionVar  = RUN_MODE . 'sid';  // The session var name.
 /* Set the allowed tags.  */
 $config->allowedTags = new stdclass();
 $config->allowedTags->front = '<p><span><h1><h2><h3><h4><h5><em><u><strong><br><ol><ul><li><img><a><b><font><hr><pre>';           // For front mode.
-$config->allowedTags->admin = $config->allowedTags->front . '<div><table><td><th><tr><tbody><iframe><embed><style><header><nav><meta>'; // For admin users.
+$config->allowedTags->admin = $config->allowedTags->front . '<dd><dt><dl><div><table><td><th><tr><tbody><iframe><embed><style><header><nav><meta>'; // For admin users.
 
 /* Views and themes. */
 $config->views  = ',html,json,xml,'; // Supported view types.
@@ -45,7 +45,7 @@ $config->site = new stdclass();
 $config->template = new stdclass();
 $config->template->name          = 'default';    // Supported themes.
 $config->template->theme         = 'default';    // Supported themes.
-$config->template->parser        = 'default';         // Default parser.
+$config->template->parser        = 'default';    // Default parser.
 $config->template->customVersion = '';
 
 /* Suported languags. */
