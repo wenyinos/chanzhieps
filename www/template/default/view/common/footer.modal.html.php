@@ -16,5 +16,5 @@
 </div>
 <?php if(isset($pageJS)) js::execute($pageJS);?>
 <?php else:?>
-<?php include 'footer.html.php'; ?>
+<?php include TPL_ROOT . 'common/footer.html.php'; ?>
 <?php endif;?>
