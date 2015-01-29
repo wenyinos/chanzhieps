@@ -16,8 +16,8 @@ $this->block->printRegion($layouts, 'thread_view', 'top');
 
 $common->printPositionBar($board, $thread);
 
-if($pager->pageID == 1) include './thread.html.php';
-include './reply.html.php';
+if($pager->pageID == 1) include TPL_ROOT . 'thread/thread.html.php';
+include TPL_ROOT . 'thread/reply.html.php';
 
 $this->block->printRegion($layouts, 'thread_view', 'bottom');
 
