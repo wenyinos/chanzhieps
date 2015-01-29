@@ -10,4 +10,4 @@
  * @link        http://www.chanzhi.org
 */
 ?>
-<?php include 'latestarticle.html.php';?>
+<?php include TPL_ROOT . 'block/latestarticle.html.php';?>
