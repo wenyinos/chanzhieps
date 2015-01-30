@@ -370,7 +370,7 @@ class packageModel extends model
      */
     public function processLicense($license)
     {
-        if(strlen($license) > 10) return $license;    // more then 10 letters, not gpl, lgpl, apache, bsd or mit.
+        if(strlen($license) > 10) return $license;    // more then 10 letters, not zpl, gpl, lgpl, apache, bsd or mit.
 
         $licenseFile = dirname(__FILE__) . '/license/' . strtolower($license) . '.txt';
         if(file_exists($licenseFile)) return file_get_contents($licenseFile);
