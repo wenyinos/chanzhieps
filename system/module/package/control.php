@@ -251,6 +251,12 @@ class package extends control
             $license       = $this->package->processLicense($packageInfo->license);
             $agreeLink     = inlink('install', "package=$package&downLink=$downLink&md5=$md5&type=$type&overridePackage=$overridePackage&ignoreCompatible=$ignoreCompatible&overrideFile=$overrideFile&agreeLicense=yes&upgrade=$upgrade");
 
+            /* Format license if used zpl. */
+            if(strtolower($packageInfo->license) == 'zpl')
+            {
+                $license = sprintf($license, $packageInfo->name, $packageInfo->author, $packageInfo->site);
+            }
+
             $this->view->license   = $license;
             $this->view->author    = $packageInfo->author;
             $this->view->agreeLink = $agreeLink;
