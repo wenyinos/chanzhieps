@@ -20,6 +20,7 @@
     <p><?php echo join($removeCommands, '<br />');?></p>
     <?php endif;?>
     <div class='text-center'><?php echo html::a(inlink('browse', 'type=deactivated'), $lang->package->viewDeactivated, "class='btn'");?></div>
+    <?php echo js::execute("parent.$('.clearfix').load(window.parent.location.href + ' .clearfix')");?>
   </div>
 </div>
 <?php include '../../common/view/footer.modal.html.php';?>

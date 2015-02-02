@@ -776,7 +776,7 @@ class packageModel extends model
     public function cleanModelCache()
     {
         $modelCacheFiles = glob($this->app->getTmpRoot() . 'model/*');
-        foreach($modelCacheFiles as $cacheFile) @unlink($cacheFile);
+        foreach($modelCacheFiles as $cacheFile) helper::rmDirAndFile($cacheFile);
     }
 
     /**
