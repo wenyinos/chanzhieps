@@ -471,6 +471,33 @@ class helper
         header('HTTP/1.1 301 Moved Permanently');
         die(header('Location:' . $locate));
     }
+
+    /**
+     * Delete directorys don't check is empty. 
+     * 
+     * @param  int    $path 
+     * @static
+     * @access public
+     * @return void
+     */
+    public static function rmDirAndFile($path)
+    {
+        if(is_file($path)) 
+        {
+            @unlink($path);
+            return true;
+        }
+        if(is_dir($path))
+        {
+            $children =  glob("$path/*");
+            foreach($children as $child)
+            {
+                helper::rmDirAndFile($child);
+            }
+            @rmdir($path);
+            return true;
+        }
+    }
 }
 
 /**
