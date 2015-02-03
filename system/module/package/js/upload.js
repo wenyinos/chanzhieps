@@ -6,7 +6,7 @@ $(document).ready(function()
         {
             setTimeout(function()
             {
-                $('#ajaxModal').attr('rel', response.locate).load(response.locate, function()
+                $('#ajaxModal').attr('ref', response.locate).load(response.locate, function()
                 {
                     $.ajustModalPosition();
                 });

@@ -34,7 +34,6 @@
 <?php else:?>
 <div class='alert'>
   <h2 class='text-center text-success'><?php echo sprintf($lang->package->installFinished, $installType);?></h2>
-  <?php echo js::execute("parent.$('.clearfix').load(window.parent.location.href + ' .clearfix')");?>
   <div class='text-center'>
     <?php if($type == 'template'):?>
     <?php echo html::a($this->createLink('ui', 'settemplate'), $lang->package->settemplate, "class='btn btn-primary'");?>
