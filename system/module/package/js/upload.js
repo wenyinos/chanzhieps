@@ -14,13 +14,6 @@ $(document).ready(function()
         }
     });
 
-    if(!v.canManage) 
-    {
-        $.setAjaxLoader('.loadInModal', '#ajaxModal');
-    }
-    else
-    {
-        $.unbink('setAjaxLoader');
-    }
+    $.setAjaxLoader('.okFile', '#ajaxModal');
 });
 
