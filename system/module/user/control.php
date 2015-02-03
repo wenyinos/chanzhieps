@@ -89,7 +89,7 @@ class user extends control
         /* If the user logon already, goto the pre page. */
         if($this->user->isLogon())
         {
-            if($this->referer and strpos($loginLink . $denyLink . $regLink, $this->referer) !== false) $this->locate($this->referer);
+            if($this->referer and strpos($loginLink . $denyLink . $regLink, $this->referer) === false) $this->locate($this->referer);
             $this->locate($this->createLink($this->config->default->module));
             exit;
         }
