@@ -2,8 +2,8 @@
 /**
  * The zh-cn language file of install module of chanzhiEPS.
  *
- * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     http://api.chanzhi.org/goto.php?item=license
+ * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @license     ZPL (http://zpl.pub/page/zplv11.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     install
  * @version     $Id$
@@ -18,6 +18,7 @@ $lang->install->error   = '错误 ';
 $lang->install->start            = '开始安装';
 $lang->install->keepInstalling   = '继续安装当前版本';
 $lang->install->welcome          = '您睿智地选择了蝉知企业门户系统!';
+$lang->install->license          = '授权协议';
 $lang->install->desc             = <<<EOT
 <p>使用蝉知，您可以：</p>
 <blockquote>
