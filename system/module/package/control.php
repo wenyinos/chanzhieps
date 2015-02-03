@@ -213,7 +213,7 @@ class package extends control
         if($conflictsResult['result'] == 'fail') 
         {
             $this->view->error = $conflictsResult['error'];
-            $this->display();
+            die($this->display());
         }
 
         /* Check Depends. */
@@ -221,7 +221,7 @@ class package extends control
         if($depentsResult['result'] == 'fail') 
         {
             $this->view->error = $rdepentsResult['error'];
-            $this->display();
+            die($this->display());
         }
 
         /* Check version compatible. */
@@ -251,8 +251,8 @@ class package extends control
         if($agreeLicense == 'no')
         {
             $packageInfo = $this->package->getInfoFromPackage($package);
-            $license       = $this->package->processLicense($packageInfo->license);
-            $agreeLink     = inlink('install', "package=$package&downLink=$downLink&md5=$md5&type=$type&overridePackage=$overridePackage&ignoreCompatible=$ignoreCompatible&overrideFile=$overrideFile&agreeLicense=yes&upgrade=$upgrade");
+            $license     = $this->package->processLicense($packageInfo->license);
+            $agreeLink   = inlink('install', "package=$package&downLink=$downLink&md5=$md5&type=$type&overridePackage=$overridePackage&ignoreCompatible=$ignoreCompatible&overrideFile=$overrideFile&agreeLicense=yes&upgrade=$upgrade");
 
             /* Format license if used zpl. */
             if(strtolower($packageInfo->license) == 'zpl')
