@@ -58,7 +58,7 @@
   <?php if(commonModel::isAvailable('forum')):?>
   <?php
   foreach($threads as $id => $editedDate):
-  $url = str_replace('&', '&amp;', $systemURL . helper::createLink('thread', 'view', "id=$id"));
+  $url = str_replace('&', '&amp;', helper::createLink('thread', 'view', "id=$id"));
   ?>
   <url>
     <loc><?php echo $url;?></loc>
