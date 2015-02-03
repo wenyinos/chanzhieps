@@ -553,6 +553,7 @@ class user extends control
         {
             $this->session->set('oauthOpenID', $openID);                     // Save the openID to session.
             if($this->get->referer != false) $this->setReferer($referer);    // Set the referer.
+            $this->config->oauth->sina = json_encode($this->config->oauth->sina);
 
             $this->view->title   = $this->lang->user->login->common;
             $this->view->referer = $referer;
