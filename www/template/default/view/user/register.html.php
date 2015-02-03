@@ -71,3 +71,4 @@ js::set('random', $this->session->random);
     </div>    
   </div>
 </div>
+<?php include TPL_ROOT . 'common/footer.html.php';?>
