@@ -39,6 +39,19 @@ class install extends control
     }
 
     /**
+     * step0 check agree license. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function step0()
+    {
+        $this->view->license = file_get_contents($this->app->getBasePath() . '/doc/LICENSE');
+        $this->view->title   = $this->lang->install->welcome;
+        $this->display();
+    }
+
+    /**
      * Checking the system.
      * 
      * @access public

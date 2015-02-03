@@ -18,6 +18,7 @@ $lang->install->error   = 'Error ';
 $lang->install->start            = 'Start install';
 $lang->install->keepInstalling   = 'Keep install this version';
 $lang->install->welcome          = 'Welcome to use chanzhiEPS.';
+$lang->install->license          = 'License';
 $lang->install->desc             = <<<EOT
 <p>Using chanzhiEPS, you can do</p>
 <blockquote>
