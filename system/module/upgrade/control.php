@@ -20,7 +20,22 @@ class upgrade extends control
      */
     public function index()
     {
+        if(version_compare($this->config->installedVersion, '4.0', '<')) $this->locate(inlink('upgradeLicense'));
         $this->locate(inlink('backup'));
+    }
+
+    /**
+     * Upgrade license when upgrade to 4.0.
+     * 
+     * @access public
+     * @return void
+     */
+    public function upgradeLicense()
+    {
+        if($this->get->agree) $this->locate(inlink('backup'));
+
+        $this->view->license = file_get_contents($this->app->getBasePath() . '/doc/LICENSE');
+        $this->display();
     }
 
     /**

@@ -21,6 +21,7 @@ $lang->upgrade->selectVersion = 'Select version to upgrade from';
 $lang->upgrade->confirm       = 'Confirm the SQL to be excuted.';
 $lang->upgrade->execute       = 'Execute';
 $lang->upgrade->next          = 'Next';
+$lang->upgrade->updateLicense = 'The license of ChanZhi 4.0 has changed to Z PUBLIC LICENSE(ZPL) 1.1.';
 
 $lang->upgrade->backupData = <<<EOT
 <pre>
