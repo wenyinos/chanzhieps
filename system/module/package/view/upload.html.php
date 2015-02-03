@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.modal.html.php';?>
+<?php js::set('canManage', $canMange['result'] == 'success' ? true : false);?>
 <?php if($canMange['result'] == 'success'):?>
 <form method='post' enctype='multipart/form-data' id='uploadForm' action='<?php echo inlink('upload')?>'>
   <div id='responser'></div>

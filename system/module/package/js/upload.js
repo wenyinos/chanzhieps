@@ -6,12 +6,21 @@ $(document).ready(function()
         {
             setTimeout(function()
             {
-                $('#ajaxModal').attr('ref', response.locate).load(response.locate, function()
+                $('#ajaxModal').attr('rel', response.locate).load(response.locate, function()
                 {
                     $.ajustModalPosition();
                 });
             }, 2000);
         }
     });
+
+    if(!v.canManage) 
+    {
+        $.setAjaxLoader('.loadInModal', '#ajaxModal');
+    }
+    else
+    {
+        $.unbink('setAjaxLoader');
+    }
 });
 
