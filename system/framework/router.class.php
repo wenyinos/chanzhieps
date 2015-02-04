@@ -997,7 +997,8 @@ class router
      */
     public function setModuleName($moduleName = '')
     {
-        $this->moduleName = strtolower($moduleName);
+        $specialChar = array('&', '<', '>', '"', "'", '/', ' ', '%', '*', '+', ',', ';', '=', '^', '|', '`', ':', '.');
+        $this->moduleName = str_replace($specialChar, '', strtolower($moduleName));
     }
 
     /**
@@ -1036,7 +1037,8 @@ class router
      */
     public function setMethodName($methodName = '')
     {
-        $this->methodName = strtolower($methodName);
+        $specialChar = array('&', '<', '>', '"', "'", '/', ' ', '%', '*', '+', ',', ';', '=', '^', '|', '`', ':', '.');
+        $this->methodName = str_replace($specialChar, '', strtolower($methodName));
     }
 
     /**
