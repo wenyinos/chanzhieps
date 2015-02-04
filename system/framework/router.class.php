@@ -966,7 +966,7 @@ class router
      */
     public function setModuleName($moduleName = '')
     {
-        $this->moduleName = strtolower($moduleName);
+        $this->moduleName = strip_tags(urldecode(strtolower($moduleName)));
     }
 
     /**
@@ -1005,7 +1005,7 @@ class router
      */
     public function setMethodName($methodName = '')
     {
-        $this->methodName = strtolower($methodName);
+        $this->methodName = strip_tags(urldecode(strtolower($methodName)));
     }
 
     /**
@@ -1222,7 +1222,7 @@ class router
         {
             if(isset($passedParams[$i]))
             {
-                $defaultParams[$key] = $passedParams[$i];
+                $defaultParams[$key] = strip_tags(urldecode($passedParams[$i]));
             }
             else
             {
