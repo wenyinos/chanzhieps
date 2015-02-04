@@ -715,7 +715,6 @@ class router
     /**
      * Set the language used by the client user.
      * 
-     *
      * @param   string $lang  zh-cn|zh-tw|en
      * @access  public
      * @return  void
