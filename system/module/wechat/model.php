@@ -363,7 +363,7 @@ class wechatModel extends model
      */
     public function getMenu($public)
     {
-        $menus = $this->dao->select('*')->from(TABLE_CATEGORY)->where('type')->like('wechat_%')->orderBy('`order`')->fetchGroup('parent');
+        $menus = $this->dao->select('*')->from(TABLE_CATEGORY)->where('type')->like("wechat_{$public}%")->orderBy('`order`')->fetchGroup('parent');
         $responseList = $this->dao->select('*')->from(TABLE_WX_RESPONSE)->where('public')->eq($public)->andWhere('`group`')->eq('menu')->fetchAll('key');
         foreach($responseList as $response) $response = $this->processResponse($response);
 
