@@ -23,7 +23,9 @@
       </td>
       <td id='<?php echo $thread->id;?>' class='thread-wrapper'>
         <div class='thread-content article-content'><?php echo $thread->content;?></div>
+        <?php if(!empty($thread->files)):?>
         <div class='article-files'><?php $this->thread->printFiles($thread, $this->thread->canManage($board->id, $thread->author));?></div>
+        <?php endif;?>
       </td>
     </tr>
   </table>
