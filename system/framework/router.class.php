@@ -997,8 +997,7 @@ class router
      */
     public function setModuleName($moduleName = '')
     {
-        $specialChar = array('&', '<', '>', '"', "'", '/', ' ', '%', '*', '+', ',', ';', '=', '^', '|', '`', ':', '.');
-        $this->moduleName = str_replace($specialChar, '', strtolower($moduleName));
+        $this->moduleName = strip_tags(urldecode(strtolower($moduleName)));
     }
 
     /**
@@ -1037,8 +1036,7 @@ class router
      */
     public function setMethodName($methodName = '')
     {
-        $specialChar = array('&', '<', '>', '"', "'", '/', ' ', '%', '*', '+', ',', ';', '=', '^', '|', '`', ':', '.');
-        $this->methodName = str_replace($specialChar, '', strtolower($methodName));
+        $this->methodName = strip_tags(urldecode(strtolower($methodName)));
     }
 
     /**
@@ -1255,7 +1253,7 @@ class router
         {
             if(isset($passedParams[$i]))
             {
-                $defaultParams[$key] = $passedParams[$i];
+                $defaultParams[$key] = strip_tags(urldecode($passedParams[$i]));
             }
             else
             {
