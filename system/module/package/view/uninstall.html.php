@@ -46,7 +46,6 @@
         echo join($removeCommands, '<br />');
     }
     echo "<p class='text-center'>" . html::a(inlink('browse', 'type=available'), $lang->package->viewAvailable, "class='btn'") . '</p>';
-    echo js::execute("parent.$('.clearfix').load(window.parent.location.href + ' .clearfix')");
     ?>
   </div>
 </div>

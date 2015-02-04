@@ -22,7 +22,7 @@
 <?php else:?>
 <div>
   <?php printf($lang->setOkFile, $canMange['okFile']);?>
-  <div class='text-right'><?php echo html::a($this->inlink('upload'), $lang->confirm, "class='btn btn-primary loadInModal'");?></div>
+  <div class='text-right'><?php echo html::a($this->inlink('upload'), $lang->confirm, "class='btn btn-primary okFile'");?></div>
 </div>
 <?php endif;?>
 <?php include '../../common/view/footer.modal.html.php';?>
