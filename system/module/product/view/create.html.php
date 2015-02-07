@@ -147,7 +147,7 @@
               <div class="col-xs-3"> <?php echo html::input('label[0]', '', "class='form-control' placeholder='{$lang->product->placeholder->label}'" )?></div>
               <div class="col-xs-9">
                 <div class='input-group'>
-                <?php echo html::input('value[key]', '', "class='form-control' placeholder='{$lang->product->placeholder->value}'" )?>
+                <?php echo html::input('value[0]', '', "class='form-control' placeholder='{$lang->product->placeholder->value}'" )?>
                 <span class='input-group-addon'><i class='icon-plus'></i></span>
                 <span class='input-group-addon'><i class='icon-remove'></i></span>
                 </div>
