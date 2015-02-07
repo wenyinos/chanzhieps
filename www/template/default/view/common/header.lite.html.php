@@ -8,6 +8,7 @@ $themeRoot = $webRoot . "template/default/theme/";
 <html xmlns:wb="http://open.weibo.com/wb">
 <head profile="http://www.w3.org/2005/10/profile">
   <meta charset="utf-8">
+  <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta http-equiv="Cache-Control"  content="no-transform">
   <meta name="Generator" content="<?php echo 'chanzhi' . $this->config->version . ' www.chanzhi.org'; ?>">
