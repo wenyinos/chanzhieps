@@ -143,15 +143,12 @@ class package extends control
             }
 
             /* Check file exists or not. */
-            if($this->cookie->{"installing_$package"} === false and file_exists($packageFile) and $overridePackage == 'no')
+            if(file_exists($packageFile) and $overridePackage == 'no' and md5_file($packageFile) != $md5)
             {
                 $overrideLink = inlink('install', "package=$package&downLink=$downLink&md5=$md5&type=$type&overridePackage=yes&ignoreCompatible=$ignoreCompatible&overrideFile=$overrideFile&agreeLicense=$agreeLicense&upgrade=$upgrade");
                 $this->view->error = sprintf($this->lang->package->errorPackageFileExists, $packageFile, $overrideLink, $installType);
                 die($this->display());
             }
-
-            /* Set cookie of has pass file exist check. */
-            setcookie("installing_$package", true, time() + 120);
 
             /* Download the package file. */
             if(!file_exists($packageFile) or ($md5 != '' and md5_file($packageFile) != $md5))  $this->package->downloadPackage($package, helper::safe64Decode($downLink));
