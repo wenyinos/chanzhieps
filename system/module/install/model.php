@@ -245,8 +245,36 @@ class installModel extends model
      */
     public function dbExists()
     {
-        $sql = "SHOW DATABASES like '{$this->config->db->name}'";
-        return $this->dbh->query($sql)->fetch();
+        try
+        {
+            $sql = "SHOW DATABASES like '{$this->config->db->name}'";
+            return $this->dbh->query($sql)->fetch();
+        }
+        catch (PDOException $e) 
+        {
+            $errorInfo = $e->errorInfo;
+            $errorCode = $errorInfo[1];
+            $message   = $e->getMessage();
+            /* If access denied for user. */
+            if($errorCode == 1227)
+            {
+                try
+                {
+                    $sql = "USE {$this->config->db->name}";
+                    return $this->dbh->query($sql);
+                }
+                catch (PDOException $e) 
+                {
+                    $errorInfo = $e->errorInfo;
+                    $errorCode = $errorInfo[1];
+                    $message   = $e->getMessage();
+                    /* If unknown database. */
+                    if($errorCode == 1049) return false;
+                    $this->app->triggerError($message . "<p>The sql is: $sql</p>", __FILE__, __LINE__, $exit = true);
+                }
+            }
+            $this->app->triggerError($message . "<p>The sql is: $sql</p>", __FILE__, __LINE__, $exit = true);
+        }
     }
 
     /**

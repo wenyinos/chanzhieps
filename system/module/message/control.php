@@ -20,7 +20,7 @@ class message extends control
     public function __construct()
     {
         parent::__construct();
-        if(!isset($config->site->modules) or strpos($config->site->modules, 'message') === false) die();
+        if(!isset($this->config->site->modules) or strpos($this->config->site->modules, 'message') === false) die();
     }
 
     /**
