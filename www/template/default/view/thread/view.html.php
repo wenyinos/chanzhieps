@@ -12,7 +12,9 @@
 include TPL_ROOT . 'common/header.html.php';
 include TPL_ROOT . 'common/kindeditor.html.php';
 
-$this->block->printRegion($layouts, 'thread_view', 'top');
+echo "<div class='row focus-top' data-default-grid='4'>";
+$this->block->printRegion($layouts, 'thread_view', 'top', true);
+echo "</div>";
 
 $common->printPositionBar($board, $thread);
 
