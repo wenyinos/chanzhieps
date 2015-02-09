@@ -395,6 +395,12 @@ td #aliasLabel {display: table-row;}
   #footer {text-align: left; padding-right: 100px;}
 }
 
+@media (max-width: 480px) {
+  #footer {text-align: center; padding: 15px;}
+  #powerby {position: static;}
+}
+
+
 /* Go to top */
 #go2top {position: fixed; color: #999; bottom: 80px; right: -40px; width: 40px; text-align: center; text-shadow:1px 1px 0px #fff; display: none; border-radius: 3px; background-color: #f1f1f1; font-size: 28px; line-height: 40px; border: 1px solid #ddd}
 #go2top .icon {font-size: 28px; line-height: 40px}
