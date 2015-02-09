@@ -13,6 +13,7 @@ $lang->site->common        = "站点";
 
 $lang->site->type          = '站点类型';
 $lang->site->status        = '站点状态';
+$lang->site->pauseTip      = '暂停提示';
 $lang->site->name          = '网站名称';
 $lang->site->module        = '功能模块';
 $lang->site->lang          = '前台语言';

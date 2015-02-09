@@ -13,6 +13,7 @@ $lang->site->common        = "Site";
 
 $lang->site->type          = 'Type';
 $lang->site->status        = 'Status';
+$lang->site->pauseTip      = 'Tip for pause site';
 $lang->site->name          = 'Name';
 $lang->site->module        = 'Modules';
 $lang->site->lang          = 'Language';
