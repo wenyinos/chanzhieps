@@ -2,8 +2,8 @@
 /**
  * The obtain view file of package module of ChanZhiEPS.
  *
- * @copyright   Copyright 2009-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     http://api.chanzhi.org/goto.php?item=license
+ * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @license     ZPL (http://zpl.pub/page/zplv11.html) 
  * @author      Chunsheng Wang <chunsheng@xirangit.com>
  * @package     package
  * @version     $Id$
@@ -13,7 +13,20 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/treeview.html.php';?>
 <div class='row'>
-<div class='col-md-3'>
+<div class='col-md-2'>
+  <form id='searchForm' class='side-search mgb-20' method='post' action='<?php echo inlink('obtain', 'type=bySearch');?>'>
+    <div class="input-group">
+      <?php echo html::input('key', $this->post->key, "class='form-control' placeholder='{$lang->package->bySearch}'");?>
+      <span class="input-group-btn">
+        <button class='btn btn-submit' id='submit' type='submit'><i class='icon-search'></i></button>
+      </span>
+    </div>
+  </form>
+  <div class="list-group">
+    <?php echo html::a(inlink('obtain', 'type=byUpdatedTime'), $lang->package->byUpdatedTime, "id='byupdatedtime' class='list-group-item'");?>
+    <?php echo html::a(inlink('obtain', 'type=byAddedTime'),   $lang->package->byAddedTime,   "id='byaddedtime' class='list-group-item'");?>
+    <?php echo html::a(inlink('obtain', 'type=byDownloads'),   $lang->package->byDownloads,   "id='bydownloads' class='list-group-item'");?>
+  </div>
   <div class='panel panel-sm'>
     <div class='panel-heading'><?php echo $lang->package->byCategory;?></div>
     <div class='panel-body'>
@@ -21,30 +34,7 @@
     </div>
   </div>
 </div>
-<div class='col-md-9'>
-  <table class='table table-borderless'>
-    <tr>
-      <td class='w-p60'>
-        <form id='searchForm' class='side-search mgb-20' method='post' action='<?php echo inlink('obtain', 'type=bySearch');?>'>
-          <div class="input-group">
-            <?php echo html::input('key', $this->post->key, "class='form-control' placeholder='{$lang->package->bySearch}'");?>
-            <span class="input-group-btn">
-              <?php echo html::a("javascript:$('#searchForm').submit();", "<i class='icon icon-search'></i>" , "class='btn'"); ?>
-            </span>
-          </div>
-        </form>
-      </td>
-      <td>
-        <ul class="nav nav-pills">
-          <?php
-          echo '<li>' . html::a(inlink('obtain', 'type=byUpdatedTime'), $lang->package->byUpdatedTime, "id='byupdatedtime'") . '</li>';
-          echo '<li>' . html::a(inlink('obtain', 'type=byAddedTime'),   $lang->package->byAddedTime,   "id='byaddedtime'") . '</li>';
-          echo '<li>' . html::a(inlink('obtain', 'type=byDownloads'),   $lang->package->byDownloads,   "id='bydownloads'") . '</li>';
-          ?>
-        </ul>
-      </td>
-    </tr>
-  </table>
+<div class='col-md-10'>
   <?php if($packages):?>
   <div class='cards pd-0 mg-0'>
   <?php foreach($packages as $package):?>

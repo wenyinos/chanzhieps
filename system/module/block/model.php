@@ -2,8 +2,8 @@
 /**
  * The model file of block module of chanzhiEPS.
  *
- * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     http://api.chanzhi.org/goto.php?item=license
+ * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @license     ZPL (http://zpl.pub/page/zplv11.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     block
  * @version     $ID$
@@ -297,9 +297,9 @@ class blockModel extends model
         $entry .= "<div class='col col-type'>" . html::select("blocks[{$key}]", $blockOptions, $blockID, "class='form-control block' id='block_{$key}' $readonly") . "</div>";
         $entry .= "<div class='col col-grid'><div class='input-group'><span class='input-group-addon'>{$this->lang->block->grid}</span>" . html::select("grid[{$key}]", $this->lang->block->gridOptions, $grid, "class='form-control'") . '</div></div>';
 
-        $titlelessChecked = isset($block->titleless) && $block->titleless ? 'checked' : '';
+        $titlelessChecked  = isset($block->titleless) && $block->titleless ? 'checked' : '';
         $borderlessChecked = isset($block->borderless) && $block->borderless ? 'checked' : '';
-        $containerChecked = isset($block->container) && $block->container ? 'checked' : '';
+        $containerChecked  = isset($block->container) && $block->container ? 'checked' : '';
         $entry .= "
             <div class='text-center col col-style'>
                <label>

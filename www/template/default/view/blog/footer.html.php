@@ -2,16 +2,16 @@
 /**
  * The footer view file of blog module of chanzhiEPS.
  *
- * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     http://api.chanzhi.org/goto.php?item=license
+ * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @license     ZPL (http://zpl.pub/page/zplv11.html)
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     blog
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
 ?>
+    <div class='row all-bottom'><div class='col-md-12'><?php $this->loadModel('block')->printRegion($layouts, 'all', 'bottom', false);?></div></div>
   </div></div><?php /* end .page-content then .page-wrapper in header.html.php */ ?>
-  <?php if(RUN_MODE == 'front') $this->loadModel('block')->printRegion($layouts, 'all', 'bottom');?>
   <footer id='footer'>
     <div class='wrapper'>
       <div id='footNav'>
@@ -35,6 +35,6 @@
 if($config->debug) js::import($jsRoot . 'jquery/form/min.js');
 if(isset($pageJS)) js::execute($pageJS);
 ?>
-<?php if(RUN_MODE == 'front') $this->loadModel('block')->printRegion($layouts, 'all', 'footer');?>
+<div class='hide'><?php if(RUN_MODE == 'front') $this->loadModel('block')->printRegion($layouts, 'all', 'footer');?></div>
 </body>
 </html>
