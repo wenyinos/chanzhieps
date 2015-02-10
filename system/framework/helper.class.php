@@ -205,7 +205,6 @@ class helper
             /* Create the merged model file. */
             $modelLines .= "}";
 
-
             /* Unset conflic function for model. */
             preg_match_all('/.* function\s+(\w+)\s*\(.*\)[^\{]*\{/Ui', $modelLines, $functions);
             $functions = $functions[1];
