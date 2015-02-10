@@ -1,8 +1,4 @@
-<?php
-include TPL_ROOT . 'common/header.html.php';
-js::import($jsRoot . 'md5.js');
-js::set('random', $this->session->random);
-?>
+<?php include TPL_ROOT . 'common/header.html.php';?>
 <div class='panel panel-body' id='reg'>
   <div class='row'>
     <?php include TPL_ROOT . 'user/oauthlogin.html.php';?>
