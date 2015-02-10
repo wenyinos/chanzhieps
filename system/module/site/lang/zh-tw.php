@@ -59,3 +59,4 @@ $lang->site->fileAllowedRole   = '多個尾碼名之間請用 "," 隔開';
 $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Robots檔案%s 不可寫，請修改權限後設置。';
 $lang->site->reloadForRobots   = '刷新頁面';
+$lang->site->defaultTip        = '站點維護中……';

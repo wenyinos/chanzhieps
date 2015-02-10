@@ -24,7 +24,7 @@
         <?php $class = $this->config->site->status == 'pause' ? '' : 'hide';?>
         <tr class="pauseTip <?php echo $class?>">
           <th class='col-xs-2'><?php echo $lang->site->pauseTip;?></th> 
-          <td class='col-xs-6'><?php echo html::textarea('pauseTip', isset($this->config->site->pauseTip) ? $this->config->site->pauseTip : '');?></td>
+          <td class='col-xs-6'><?php echo html::textarea('pauseTip', !empty($this->config->site->pauseTip) ? $this->config->site->pauseTip : $lang->site->defaultTip);?></td>
         </tr>
         <tr>
           <th class='col-xs-2'><?php echo $lang->site->type;?></th> 
