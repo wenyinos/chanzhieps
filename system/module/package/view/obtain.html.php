@@ -18,7 +18,7 @@
     <div class="input-group">
       <?php echo html::input('key', $this->post->key, "class='form-control' placeholder='{$lang->package->bySearch}'");?>
       <span class="input-group-btn">
-        <?php echo html::a("javascript:$('#searchForm').submit();", "<i class='icon icon-search'></i>" , "class='btn'"); ?>
+        <button class='btn btn-submit' id='submit' type='submit'><i class='icon-search'></i></button>
       </span>
     </div>
   </form>
