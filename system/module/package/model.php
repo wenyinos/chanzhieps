@@ -95,7 +95,7 @@ class packageModel extends model
      */
     public function getModulesByAPI()
     {
-        $requestType = $this->config->requestType;
+        $requestType = helper::safe64Encode($this->config->requestType);
         $webRoot     = helper::safe64Encode($this->config->webRoot);
         $apiURL      = $this->apiRoot . 'apiGetmodules-' . $requestType . '-' . $webRoot . '.json';
 

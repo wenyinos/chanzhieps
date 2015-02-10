@@ -1139,13 +1139,28 @@ class router
         if(!method_exists($module, $methodName)) $this->triggerError("the module $moduleName has no $methodName method", __FILE__, __LINE__, $exit = true);
         $this->control = $module;
 
+        /* include default value for module*/
+        $defaultValueFiles = glob($this->getTmpRoot() . "defaultvalue/*.php");
+        if($defaultValueFiles) foreach($defaultValueFiles as $file) include $file;
+
         /* Get the default setings of the method to be called useing the reflecting. */
         $defaultParams = array();
         $methodReflect = new reflectionMethod($className, $methodName);
+
         foreach($methodReflect->getParameters() as $param)
         {
-            $name    = $param->getName();
-            $default = $param->isDefaultValueAvailable() ? $param->getDefaultValue() : '_NOT_SET';
+            $name = $param->getName();
+            
+            $default = '_NOT_SET';
+            if(isset($paramDefaultValue[$className][$methodName][$name]))
+            {
+                $default = $paramDefaultValue[$className][$methodName][$name];
+            }
+            elseif($param->isDefaultValueAvailable())
+            {
+                $default = $param->getDefaultValue();
+            }
+
             $defaultParams[$name] = $default;
         }
 

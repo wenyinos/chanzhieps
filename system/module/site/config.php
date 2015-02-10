@@ -7,7 +7,7 @@ $config->site->editor->setbasic = array('id' => 'pauseTip', 'tools' => 'simple')
 
 global $app;
 $config->site->ui = new stdclass();
-if($config->multi) $config->site->ui->customCssFile = $app->getDataRoot() . 'css/' . $config->site->code . '/%s/%s/style.css';
+if($config->multi)  $config->site->ui->customCssFile = $app->getDataRoot() . 'css/' . $config->site->code . '/%s/%s/style.css';
 if(!$config->multi) $config->site->ui->customCssFile = $app->getDataRoot() . 'css/%s/%s/style.css';
 
 $config->themeSetting = new stdclass();

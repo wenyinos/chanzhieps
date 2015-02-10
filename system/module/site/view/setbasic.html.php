@@ -23,16 +23,16 @@
         </tr>
         <?php $class = $this->config->site->status == 'pause' ? '' : 'hide';?>
         <tr class="pauseTip <?php echo $class?>">
-          <th class='col-xs-2'><?php echo $lang->site->pauseTip;?></th> 
-          <td class='col-xs-6'><?php echo html::textarea('pauseTip', isset($this->config->site->pauseTip) ? $this->config->site->pauseTip : '');?></td>
+          <th><?php echo $lang->site->pauseTip;?></th> 
+          <td><?php echo html::textarea('pauseTip', !empty($this->config->site->pauseTip) ? $this->config->site->pauseTip : $lang->site->defaultTip);?></td>
         </tr>
         <tr>
-          <th class='col-xs-2'><?php echo $lang->site->type;?></th> 
-          <td class='col-xs-6'><?php echo html::radio('type', $lang->site->typeList, isset($this->config->site->type) ? $this->config->site->type : 'portal', "class='checkbox'");?></td><td></td>
+          <th><?php echo $lang->site->type;?></th> 
+          <td><?php echo html::radio('type', $lang->site->typeList, isset($this->config->site->type) ? $this->config->site->type : 'portal', "class='checkbox'");?></td><td></td>
         </tr>
         <tr>
-          <th class='col-xs-2'><?php echo $lang->site->name;?></th> 
-          <td class='col-xs-6'><?php echo html::input('name', $this->config->site->name, "class='form-control'");?></td><td></td>
+          <th><?php echo $lang->site->name;?></th> 
+          <td><?php echo html::input('name', $this->config->site->name, "class='form-control'");?></td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->site->module;?></th>
