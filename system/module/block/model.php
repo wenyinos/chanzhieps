@@ -283,7 +283,7 @@ class blockModel extends model
      * @access public
      * @return void
      */
-    public function createEntry($template, $page, $region, $block = null, $key, $grade = 1)
+    public function createEntry($template, $region, $block = null, $key, $grade = 1)
     {
         $blockOptions[''] = $this->lang->block->select;
         $blockOptions += $this->getPairs($template);
@@ -295,7 +295,7 @@ class blockModel extends model
         $entry = "<div class='block-item row' data-block='{$key}' data-id='{$blockID}'>";
         $readonly = !empty($block->children) ? "readonly='readonly'" : '';
         $entry .= "<div class='col col-type'>" . html::select("blocks[{$key}]", $blockOptions, $blockID, "class='form-control block' id='block_{$key}' $readonly") . "</div>";
-        if($page != 'all' or $region != 'bottom') $entry .= "<div class='col col-grid'><div class='input-group'><span class='input-group-addon'>{$this->lang->block->grid}</span>" . html::select("grid[{$key}]", $this->lang->block->gridOptions, $grid, "class='form-control'") . '</div></div>';
+        if($region != 'bottom') $entry .= "<div class='col col-grid'><div class='input-group'><span class='input-group-addon'>{$this->lang->block->grid}</span>" . html::select("grid[{$key}]", $this->lang->block->gridOptions, $grid, "class='form-control'") . '</div></div>';
 
         $titlelessChecked  = isset($block->titleless) && $block->titleless ? 'checked' : '';
         $borderlessChecked = isset($block->borderless) && $block->borderless ? 'checked' : '';
@@ -326,7 +326,7 @@ class blockModel extends model
                 foreach($block->children as $child)
                 {
                     $key ++;
-                    $entry .= $this->createEntry($template, $page, $region, $child, $key, 2);
+                    $entry .= $this->createEntry($template, $region, $child, $key, 2);
                 }
             }
             $entry .= '</div>';
