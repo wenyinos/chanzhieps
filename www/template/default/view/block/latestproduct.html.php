@@ -29,9 +29,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
     <div class='cards cards-borderless'>
       <?php foreach($products as $product):?>
       <?php 
-      $productCategory = array_shift($product->categories);
-      $categoryAlias = isset($productCategory->alias) ? $productCategory->alias : '';
-      $url = helper::createLink('product', 'view', "id=$product->id", "category={$categoryAlias}&name=$product->alias");
+      $url = helper::createLink('product', 'view', "id=$product->id", "category={$product->category->alias}&name=$product->alias");
       ?>
       <?php if(!empty($product->image)): ?>
       <div class='col-md-12'>
@@ -45,13 +43,13 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
             if($product->promotion != 0)
             {
                 echo "&nbsp;&nbsp;";
-                echo "<strong class='text-danger'>{$this->lang->product->currencySymbols[$this->config->product->currency]}" . $product->promotion . '</strong>';
+                echo "<strong class='text-danger'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency) . $product->promotion . '</strong>';
             }
             else
             {
                 if($product->price != 0)
                 {
-                    echo "<strong class='text-danger'>{$this->lang->product->currencySymbols[$this->config->product->currency]}" . $product->price . '</strong>';
+                    echo "<strong class='text-danger'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency) . $product->price . '</strong>';
                 }
             }
             ?>
@@ -66,11 +64,9 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
   <?php else:?>
   <div class='panel-body'>
     <ul class='ul-list'>
-      <?php foreach($products as $product):?>
-      <?php $productCategory = array_shift($product->categories);?>
       <?php 
-      $category = array_shift($product->categories);
-      $url = helper::createLink('product', 'view', "id=$product->id", "category={$productCategory->alias}&name=$product->alias");
+      foreach($products as $product):
+      $url = helper::createLink('product', 'view', "id=$product->id", "category={$product->category->alias}&name=$product->alias");
       ?>
       <li>
         <span class='text-latin pull-right'>
@@ -79,15 +75,15 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
         {
             if($product->price != 0)
             {
-                echo "<small class='text-muted'>{$this->lang->product->currencySymbols[$this->config->product->currency]}</small> ";
+                echo "<small class='text-muted'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency) . "</small> ";
                 echo "<del><small class='text-muted'>" . $product->price . "</small></del>";
             }
-            echo "&nbsp; <small class='text-muted'>{$this->lang->product->currencySymbols[$this->config->product->currency]}</small> ";
+            echo "&nbsp; <small class='text-muted'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency) . "</small> ";
             echo "<strong class='text-danger'>" . $product->promotion . "</strong>";
         }
         else if($product->price != 0)
         {
-            echo "&nbsp; <small class='text-muted'>{$this->lang->product->currencySymbols[$this->config->product->currency]}</small> ";
+            echo "&nbsp; <small class='text-muted'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency) . "</small> ";
             echo "<strong class='text-important'>" . $product->price . "</strong>";
         }
         ?>

@@ -36,6 +36,7 @@ $browseLink     = $type == 'article' ? 'createBrowseLink' : 'create' . ucfirst($
       foreach($topCategories as $topCategory)
       {
           $browseLink = helper::createLink($type, 'browse', "categoryID={$topCategory->id}", "category={$topCategory->alias}");
+          if($type == 'blog') $browseLink = helper::createLink('blog', 'index', "categoryID={$topCategory->id}", "category={$topCategory->alias}");
           echo '<li>' . html::a($browseLink, "<i class='icon-folder-close-alt '></i> &nbsp;" . $topCategory->name, "id='category{$topCategory->id}'") . '</li>';
       }
       ?>

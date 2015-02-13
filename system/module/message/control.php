@@ -12,18 +12,6 @@
 class message extends control
 {
     /**
-     * The construct function for forbid message.
-     * 
-     * @access public
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        if(!isset($config->site->modules) or strpos($config->site->modules, 'message') === false) die();
-    }
-
-    /**
      * The index page of message front.
      * 
      * @param  int    $pageID 

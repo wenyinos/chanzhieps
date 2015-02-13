@@ -15,7 +15,7 @@ if(!function_exists('getWebRoot')){function getWebRoot(){}}
 
 /* The basic settings. */
 $config = new config();
-$config->version     = '3.3';             // The version number, don't change.
+$config->version     = '4.0';             // The version number, don't change.
 $config->encoding    = 'UTF-8';           // The encoding.
 $config->cookiePath  = '/';               // The path of cookies.
 $config->webRoot     = getWebRoot();      // The web root.

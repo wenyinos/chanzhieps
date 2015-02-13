@@ -116,11 +116,11 @@ class articleModel extends model
             ->from(TABLE_RELATION)->alias('t1')
             ->leftJoin(TABLE_CATEGORY)->alias('t2')->on('t1.category = t2.id')
             ->where('t2.type')->eq($type)
-            ->beginIf($categories)->andWhere('t1.category')->in($categories)->fi()
             ->fetchGroup('article', 'id');
 
         /* Assign categories to it's article. */
         foreach($articles as $article) $article->categories = isset($categories[$article->id]) ? $categories[$article->id] : array();
+        foreach($articles as $article) $article->category   = current($article->categories);
 
         /* Get images for these articles. */
         $images = $this->loadModel('file')->getByObject($type, array_keys($articles), $isImage = true);

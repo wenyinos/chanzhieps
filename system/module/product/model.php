@@ -99,11 +99,11 @@ class productModel extends model
             ->from(TABLE_RELATION)->alias('t1')
             ->leftJoin(TABLE_CATEGORY)->alias('t2')->on('t1.category = t2.id')
             ->where('t2.type')->eq('product')
-            ->beginIF($categories)->andWhere('t1.category')->in($categories)->fi()
             ->fetchGroup('product', 'id');
 
         /* Assign categories to it's product. */
         foreach($products as $product) $product->categories = !empty($categories[$product->id]) ? $categories[$product->id] : array();
+        foreach($products as $product) $product->category = current($product->categories);
 
         /* Get images for these products. */
         $images = $this->loadModel('file')->getByObject('product', array_keys($products), $isImage = true);

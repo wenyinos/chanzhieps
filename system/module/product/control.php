@@ -179,9 +179,9 @@ class product extends control
             $product->attributes = array($attribute);
         }
 
-        $this->view->title          = $this->lang->product->edit;
-        $this->view->product        = $product;
-        $this->view->categories     = $categories;
+        $this->view->title      = $this->lang->product->edit;
+        $this->view->product    = $product;
+        $this->view->categories = $categories;
 
         $this->display();
     }

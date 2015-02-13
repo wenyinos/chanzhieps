@@ -2,5 +2,8 @@ $(document).ready(function()
 {
     $.setAjaxLoader('.loadInModal', '#ajaxModal');
 
-    $('.btn-reload').click(function(){ $.reloadAjaxModal();});
+    $(document).on('click', '.btn-reload', function()
+    {
+        $.reloadAjaxModal(); 
+    })
 });

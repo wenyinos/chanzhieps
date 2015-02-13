@@ -4,7 +4,6 @@
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPL (http://zpl.pub/page/zplv11.html)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     upgrade
  * @version     $Id: model.php 5019 2013-07-05 02:02:31Z wyd621@gmail.com $
@@ -90,6 +89,8 @@ class upgradeModel extends model
                 $this->fixCustomedCss();
             case '3_1':
                 $this->fixBasicSite();
+            case '3_3':
+                $this->execSQL($this->getUpgradeFile('3.3'));
 
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
@@ -128,6 +129,7 @@ class upgradeModel extends model
             case '2_5_beta' : $confirmContent .= file_get_contents($this->getUpgradeFile('2.5.beta'));
             case '2_5_2'    : $confirmContent .= file_get_contents($this->getUpgradeFile('2.5.2'));
             case '2_5_3'    : $confirmContent .= file_get_contents($this->getUpgradeFile('2.5.3'));
+            case '3_3'      : $confirmContent .= file_get_contents($this->getUpgradeFile('3.3'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }

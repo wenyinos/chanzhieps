@@ -11,7 +11,7 @@
 */
 ?>
 <?php if($this->app->getModuleName() != 'links' and !empty($this->config->links->index)):?>
-<div id="block<?php echo $block->id;?>" class='panel'>
+<div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
   <div class='panel-heading'>
     <strong><i class='icon'><?php echo $icon;?></i><?php echo $block->title;?></strong>
     <div class='pull-right'>
