@@ -119,6 +119,8 @@ class commonModel extends model
         {
             if($app->user->admin == 'no')    return false;
             if($app->user->admin == 'super') return true;
+
+            return false;
         }
 
         if(!commonModel::isAvailable($module)) return false;
