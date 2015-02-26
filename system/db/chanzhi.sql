@@ -360,7 +360,7 @@ CREATE TABLE IF NOT EXISTS `eps_wx_public` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_wx_response`;
-CREATE TABLE `eps_wx_response` (
+CREATE TABLE IF NOT EXISTS `eps_wx_response` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `public` smallint(3) NOT NULL,
   `key` varchar(100) NOT NULL,
@@ -373,7 +373,7 @@ CREATE TABLE `eps_wx_response` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_wx_message`;
-CREATE TABLE `eps_wx_message` (
+CREATE TABLE IF NOT EXISTS `eps_wx_message` (
   `id` mediumint(10) unsigned NOT NULL AUTO_INCREMENT,
   `public` smallint(3) NOT NULL,
   `wid` char(64) NOT NULL,
