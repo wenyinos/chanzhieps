@@ -30,17 +30,17 @@ $url      = helper::createLink('product', 'view', "id={$product->id}", "category
         <?php
         if($product->promotion != 0)
         {
-            echo "&nbsp;&nbsp;<strong class='text-danger'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->promotion . '</strong>';
+            echo "&nbsp;&nbsp;<strong class='text-danger'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency) . $product->promotion . '</strong>';
             if($product->price != 0)
             {
-                echo "&nbsp;&nbsp;<del class='text-muted'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->price .'</del>';
+                echo "&nbsp;&nbsp;<del class='text-muted'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency) . $product->price .'</del>';
             }
         }
         else
         {
             if($product->price != 0)
             {
-                echo "<span class='text-muted'> {$this->lang->product->currencySymbols[$this->config->product->currency]}</span> ";
+                echo "<span class='text-muted'> " . zget($this->lang->product->currencySymbols, $this->config->product->currency) . "</span> ";
                 echo "<strong class='text-important'>" . $product->price . '</strong>&nbsp;&nbsp;';
             }
         }

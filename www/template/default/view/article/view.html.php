@@ -75,7 +75,9 @@ js::execute($article->js);
         </ul>
       </footer>
     </div>
+    <?php if(isset($this->config->site->modules) and strpos($this->config->site->modules, 'message') !== false):?>
     <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=article&objectID={$article->id}");?></div>
+    <?php endif;?>
   </div>
   <div class='col-md-3 col-side'><?php $this->block->printRegion($layouts, 'article_view', 'side');?></div>
 </div>

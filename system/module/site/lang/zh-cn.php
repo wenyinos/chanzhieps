@@ -13,6 +13,7 @@ $lang->site->common        = "站点";
 
 $lang->site->type          = '站点类型';
 $lang->site->status        = '站点状态';
+$lang->site->pauseTip      = '暂停提示';
 $lang->site->name          = '网站名称';
 $lang->site->module        = '功能模块';
 $lang->site->lang          = '前台语言';
@@ -58,3 +59,4 @@ $lang->site->fileAllowedRole   = '多个后缀名之间请用 "," 隔开';
 $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Robots文件%s 不可写，请修改权限后设置。';
 $lang->site->reloadForRobots   = '刷新页面';
+$lang->site->defaultTip        = '站点维护中……';

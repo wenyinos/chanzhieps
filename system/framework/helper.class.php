@@ -205,7 +205,6 @@ class helper
             /* Create the merged model file. */
             $modelLines .= "}";
 
-
             /* Unset conflic function for model. */
             preg_match_all('/.* function\s+(\w+)\s*\(.*\)[^\{]*\{/Ui', $modelLines, $functions);
             $functions = $functions[1];
@@ -636,4 +635,26 @@ function checkCurlSSL()
 {
     $version = curl_version();
     return ($version['features'] & CURL_VERSION_SSL);
+}
+
+/**
+ * When the $var has the $key, return it, esle result one default value.
+ * 
+ * @param  array|object    $var 
+ * @param  string|int      $key 
+ * @param  mixed           $valueWhenNone     value when the key not exits.
+ * @param  mixed           $valueWhenExists   value when the key exits.
+ * @access public
+ * @return void
+ */
+function zget($var, $key, $valueWhenNone = '', $valueWhenExists = '')
+{
+    $var = (array)$var;
+    if(isset($var[$key]))
+    {
+        if($valueWhenExists) return $valueWhenExists;
+        return $var[$key];
+    }
+    if($valueWhenNone) return $valueWhenNone;
+    return $key;
 }

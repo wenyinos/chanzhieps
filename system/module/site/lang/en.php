@@ -13,6 +13,7 @@ $lang->site->common        = "Site";
 
 $lang->site->type          = 'Type';
 $lang->site->status        = 'Status';
+$lang->site->pauseTip      = 'Tip for pause site';
 $lang->site->name          = 'Name';
 $lang->site->module        = 'Modules';
 $lang->site->lang          = 'Language';
@@ -58,3 +59,4 @@ $lang->site->fileAllowedRole   = 'Use "," to divide different extension name.';
 $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Can not write robots file, please make sure %s writeable first.';
 $lang->site->reloadForRobots   = 'Reload this ppage';
+$lang->site->defaultTip        = 'Under maintenance.';

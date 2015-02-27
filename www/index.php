@@ -33,7 +33,10 @@ if(!isset($config->installed) or !$config->installed) die(header('location: inst
 $common = $app->loadCommon();
 
 /* Check site status. */
-if(isset($app->config->site->status) and $app->config->site->status == 'pause') exit;
+if(isset($app->config->site->status) and $app->config->site->status == 'pause')
+{
+    die("<div style='text-align:center'>" . htmlspecialchars_decode($app->config->site->pauseTip) . '</div>');
+}
 
 $app->parseRequest();
 $common->checkPriv();

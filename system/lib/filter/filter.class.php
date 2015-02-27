@@ -551,7 +551,7 @@ class fixer
         $app->loadClass('purifier', true);
         $config = HTMLPurifier_Config::createDefault();
         /* Disable caching. */
-        $config->set('Cache', 'DefinitionImpl', null);
+        $config->set('Cache.DefinitionImpl', null);
         $purifier = new HTMLPurifier($config);
         $def = $config->getHTMLDefinition(true);
         $def->addAttribute('a', 'target', 'Enum#_blank,_self,_target,_top');
