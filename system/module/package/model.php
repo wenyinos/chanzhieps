@@ -12,11 +12,6 @@
 class packageModel extends model
 {
     /**
-     * The package manager version. Don't change it. 
-     */
-    const EXT_MANAGER_VERSION = '1.3';
-
-    /**
      * The api agent(use snoopy).
      * 
      * @var object   
@@ -77,7 +72,7 @@ class packageModel extends model
      */
     public function fetchAPI($url)
     {
-        $url .= '?lang=' . str_replace('-', '_', $this->app->getClientLang()) . '&managerVersion=' . self::EXT_MANAGER_VERSION . '&chanzhiVersion=' . $this->config->version;
+        $url .= '?lang=' . str_replace('-', '_', $this->app->getClientLang()) . '&chanzhiVersion=' . $this->config->version;
         $this->agent->fetch($url);
         $result = json_decode($this->agent->results);
 
@@ -185,7 +180,7 @@ class packageModel extends model
      */
     public function getLocalPackages($status)
     {
-        $packages = $this->dao->select('*')->from(TABLE_PACKAGE)->where('status')->eq($status)->fetchAll('code');
+        $packages = $this->dao->setAutoLang(false)->select('*')->from(TABLE_PACKAGE)->where('status')->eq($status)->fetchAll('code');
         foreach($packages as $package)
         {
             if($package->site and stripos(strtolower($package->site), 'http') === false) $package->site = 'http://' . $package->site;
@@ -202,7 +197,7 @@ class packageModel extends model
      */
     public function getInfoFromDB($package)
     {
-        return $this->dao->select('*')->from(TABLE_PACKAGE)->where('code')->eq($package)->fetch();
+        return $this->dao->setAutoLang(false)->select('*')->from(TABLE_PACKAGE)->where('code')->eq($package)->fetch();
     }
 
     /**
@@ -790,7 +785,7 @@ class packageModel extends model
      {
          $removeCommands = array();
 
-         $this->dao->delete()->from(TABLE_PACKAGE)->where('code')->eq($package)->exec();
+         $this->dao->setAutoLang(false)->delete()->from(TABLE_PACKAGE)->where('code')->eq($package)->exec();
 
          /* Remove the zip file. */
          $packageFile = $this->getPackageFile($package);
@@ -912,6 +907,7 @@ class packageModel extends model
          $package = $this->getInfoFromPackage($package);
          $package->status = 'available';
          $package->code   = $code;
+         $package->lang   = 'all';
          $package->type   = empty($type) ? $package->type : $type;
 
          $this->dao->replace(TABLE_PACKAGE)->data($package)->exec();
@@ -956,7 +952,7 @@ class packageModel extends model
              }
              $data->files = json_encode($data->files);
          }
-         return $this->dao->update(TABLE_PACKAGE)->data($data)->where('code')->eq($package)->exec();
+         return $this->dao->setAutoLang(false)->update(TABLE_PACKAGE)->data($data)->where('code')->eq($package)->exec();
      }
 
      /**
@@ -969,8 +965,8 @@ class packageModel extends model
      public function checkDepends($package)
      {
          $result      = array();
-         $packageInfo = $this->dao->select('*')->from(TABLE_PACKAGE)->where('code')->eq($package)->fetch();
-         $dependsExts = $this->dao->select('*')->from(TABLE_PACKAGE)->where('depends')->like("%$package%")->andWhere('status')->ne('available')->fetchAll();
+         $packageInfo = $this->dao->setAutoLang(false)->select('*')->from(TABLE_PACKAGE)->where('code')->eq($package)->fetch();
+         $dependsExts = $this->dao->setAutoLang(false)->select('*')->from(TABLE_PACKAGE)->where('depends')->like("%$package%")->andWhere('status')->ne('available')->fetchAll();
          if($dependsExts)
          {
              foreach($dependsExts as $dependsExt)
