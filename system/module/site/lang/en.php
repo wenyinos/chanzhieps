@@ -17,6 +17,7 @@ $lang->site->pauseTip      = 'Tip for pause site';
 $lang->site->name          = 'Name';
 $lang->site->module        = 'Modules';
 $lang->site->lang          = 'Language';
+$lang->site->defaultLang   = 'Default Language';
 $lang->site->domain        = 'Domain';
 $lang->site->keywords      = 'Site Keywords';
 $lang->site->indexKeywords = 'Index Keywords';
@@ -31,6 +32,7 @@ $lang->site->allowUpload   = 'Allow upload files';
 $lang->site->allowedFiles  = 'Allowed file types';
 
 $lang->site->setBasic      = "Baisc";
+$lang->site->setLang       = "Languages";
 $lang->site->setUpload     = "Upload";
 $lang->site->setRobots     = "Robots";
 $lang->site->setOauth      = "Oauth";

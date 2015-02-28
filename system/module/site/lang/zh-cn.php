@@ -16,7 +16,8 @@ $lang->site->status        = '站点状态';
 $lang->site->pauseTip      = '暂停提示';
 $lang->site->name          = '网站名称';
 $lang->site->module        = '功能模块';
-$lang->site->lang          = '前台语言';
+$lang->site->lang          = '站点语言';
+$lang->site->defaultLang   = '默认语言';
 $lang->site->domain        = '网站域名';
 $lang->site->keywords      = '关键词';
 $lang->site->indexKeywords = '首页关键词';
@@ -31,6 +32,7 @@ $lang->site->allowUpload   = '允许上传附件';
 $lang->site->allowedFiles  = '允许附件类型';
 
 $lang->site->setBasic      = "基本信息设置";
+$lang->site->setLang       = "语言设置";
 $lang->site->setUpload     = "文件上传设置";
 $lang->site->setRobots     = "Robots 设置";
 $lang->site->setOauth      = "开放登录设置";
