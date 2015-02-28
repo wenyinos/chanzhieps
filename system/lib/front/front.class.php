@@ -662,6 +662,8 @@ EOT;
         $runMode         = RUN_MODE;
         $requiredFields  = '';
         if(isset($config->$moduleName->require->$methodName)) $requiredFields = str_replace(' ', '', $config->$moduleName->require->$methodName);
+        $langVar = isset($config->langsShortcuts[$clientLang]) ? $config->langsShortcuts[$clientLang] : '';
+        if($clientLang == $config->default->lang) $langVar = ''; 
 
         $jsConfig = new stdclass();
         $jsConfig->webRoot        = $config->webRoot;
@@ -680,6 +682,7 @@ EOT;
         $jsConfig->save           = $lang->save;
         $jsConfig->router         = $app->server->SCRIPT_NAME;
         $jsConfig->runMode        = $runMode;
+        $jsConfig->langVar        = $langVar;
 
         $js  = self::start(false);
         $js .= 'var config=' . json_encode($jsConfig);
