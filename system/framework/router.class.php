@@ -721,7 +721,18 @@ class router
      */
     public function setClientLang($lang = '')
     {
-        if(RUN_MODE == 'front') return $this->clientLang = $this->config->default->lang;
+        if(RUN_MODE == 'front')
+        {
+            if($this->config->requestType == 'GET' and isset($_GET[$this->config->langVar])) return $this->clientLang = $_GET[$this->config->langVar];
+            if($this->config->requestType == 'PATH_INFO')
+            {
+                foreach($this->config->langsShortcuts as $language => $code)
+                {
+                    if(strpos(trim($_SERVER['REQUEST_URI'], '/'), $code) === 0) return $this->clientLang = $language;
+                }
+            }
+            return $this->clientLang = $this->config->default->lang;
+        }
 
         if(!empty($lang))
         {
@@ -804,7 +815,12 @@ class router
         if($this->config->requestType == 'PATH_INFO')
         {
             $this->parsePathInfo();
+
+            $langCode = $this->config->langsShortcuts[$this->clientLang];
+            if(strpos($this->URI, $langCode) === 0) $this->URI = substr($this->URI, strlen($langCode) + 1);
+
             $this->URI = seo::parseURI($this->URI);
+
             $this->setRouteByPathInfo();
         }
         elseif($this->config->requestType == 'GET')
@@ -1067,7 +1083,8 @@ class router
     public function setRouteByPathInfo()
     {
         if(!empty($this->URI))
-        {
+        { 
+
             /* There's the request seperator, split the URI by it. */
             if(strpos($this->URI, '-') !== false)
             {
