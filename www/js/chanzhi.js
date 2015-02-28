@@ -503,6 +503,7 @@ function createLink(moduleName, methodName, vars, viewType)
     if(config.requestType == 'PATH_INFO')
     {
         link = config.webRoot + moduleName + config.requestFix + methodName;
+        if(config.langVar != '') link = '/' + config.langVar + link;
         if(vars)
         {
             if(config.pathType == "full")
