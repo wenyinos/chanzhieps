@@ -35,7 +35,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
       <div class='col-md-12'>
         <a class='card' href="<?php echo $url;?>">
           <?php $title = $product->image->primary->title ? $product->image->primary->title : $product->name;?>
-          <div class='media' style='background-image: url(<?php echo $product->image->primary->middleURL; ?>); background-image:none\0;'><?php echo html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"); ?></div>
+          <div class='media' style='background-image: url(<?php echo $product->image->primary->middleURL; ?>);'><?php echo html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"); ?></div>
           <div class='card-heading'>
             <?php echo $product->name;?>
             <span class='text-latin'>

@@ -272,7 +272,8 @@ a:active, a:focus
 }
 
 /* Containers. */
-.page-container {padding: 0 15px; margin: 0 auto; position: relative; max-width: 1170px\0;}
+.page-container {padding: 0 15px; margin: 0 auto 20px auto;position: relative;}
+.ie-8 .page-container {max-width: 1170px}
 .page-container:before,.page-container:after {content: " "; display: table;}
 .page-container:after {clear: both;}
 @media (min-width: 768px) {.page-container {max-width: 750px;}}

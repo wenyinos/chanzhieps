@@ -41,7 +41,8 @@ ol {padding-left: 20px;}
 
 /* --- LAYOUT SETTING --- */
 /* containers. */
-.page-container {padding: 0 15px; margin: 0 auto 20px auto;position: relative; max-width: 1170px\0;}
+.page-container {padding: 0 15px; margin: 0 auto 20px auto;position: relative;}
+// .ie-8 .page-container {max-width: 1170px}
 .page-container:before,.page-container:after {content: " "; display: table;}
 .page-container:after {clear: both;}
 @media (min-width: 768px) {.page-container {max-width: 750px;}}
@@ -158,8 +159,10 @@ ol {padding-left: 20px;}
 .panel-block .panel-body > .cards [class*='col-']:last-child .card-heading {padding-bottom: 0;}
 .panel-block .panel-body .card {border-bottom: 1px #e5e5e5 dashed; transition:all 0.3s; padding: 10px 10px 0 10px;}
 .panel-block .panel-body .card:last-child {padding-bottom: 10px;}
-.panel-block .panel-body .card > .media {text-align: center; overflow: hidden; background-color: #f1f1f1; height: 200px; line-height: 200px; line-height: 118px\0; background-repeat: no-repeat; background-position: center; background-size: contain;}
-.panel-block .panel-body .card > .media img {width: 100%; max-height: 100%; display: none; display: inline-block\0;}
+.panel-block .panel-body .card > .media {text-align: center; overflow: hidden; background-color: #f1f1f1; height: 200px; line-height: 200px; background-repeat: no-repeat; background-position: center; background-size: contain;}
+.ie-8 .panel-block .panel-body .card > .media {line-height: 118px; background-image: none!important}
+.panel-block .panel-body .card > .media img {width: 100%; max-height: 100%; display: none;}
+.ie-8 .panel-block .panel-body .card > .media img {display: inline-block;}
 .panel-block .panel-body .card:hover {background-color: #fafafa;}
 .panel-block .panel-body > .card {margin: -10px -15px -8px;border: 0;box-shadow: none; padding-bottom: 10px;}
 
@@ -364,7 +367,7 @@ a.tag-link {color: inherit;}
 #copyrightInfo,#icpInfo {color: #999; font-size: 12px;}
 
 /* responsive for mobile devices */
-@media (min-width: 992px) {.carousel-caption{left: 12%\0!important}}
+@media (min-width: 992px) {.ie-8 .carousel-caption{left: 12%!important}}
 @media (max-width: 1199px) {.carousel-caption {top: 3%}}
 @media (max-width: 991px)
 {
@@ -425,7 +428,8 @@ a.tag-link {color: inherit;}
 .popover {max-width: 900px}
 .docker-right .icon-mobile-phone, .docker-right .icon-weixin {font-size: 28px; color: #fff; display: inline-block; width: 36px; line-height: 36px; height: 36px; border-radius: 25px; vertical-align: middle; margin-right: 10px;}
 .docker-right  {vertical-align: middle;}
-.docker-right img {width: 200px; width:auto\0; height: 200px; margin-top: 10px; border: 1px solid #ccc}
+.docker-right img {width: 200px; height: 200px; margin-top: 10px; border: 1px solid #ccc}
+.ie-8 .docker-right img {width: auto;}
 
 /* bootbox */
 .bootbox .modal-dialog {width: 400px; margin-top: 10%;}
@@ -589,12 +593,14 @@ body {background: #232323;}
 
 /* Carousel */
 .carousel {position: relative; -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0;}
-.carousel-control, .carousel-control.left, .carousel-control.right {position: absolute; line-height: 1em; width: 60px; height: 60px; -webkit-border-radius: 40px; -moz-border-radius: 40px; border-radius: 40px; background: #666; top: 50%; text-align: center; margin-top: -30px; background: none\0; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#00000000', GradientType=0)}
+.carousel-control, .carousel-control.left, .carousel-control.right {position: absolute; line-height: 1em; width: 60px; height: 60px; -webkit-border-radius: 40px; -moz-border-radius: 40px; border-radius: 40px; background: #666; top: 50%; text-align: center; margin-top: -30px; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#00000000', GradientType=0)}
+.ie-8 .carousel-control, .ie-8 .carousel-control.left, .ie-8 .carousel-control.right {background: none}
 .carousel-control.left {left: -80px;}
 .carousel-control.right {right: -80px;}
 .carousel:hover .carousel-control.left {left: 5%;}
 .carousel:hover .carousel-control.right {right: 5%;}
-.carousel-control:hover {background: #e91b23; text-align: center; background: none\0;}
+.carousel-control:hover {background: #e91b23; text-align: center;}
+.ie-8 .carousel-control:hover {background: none}
 .carousel-control .icon-prev, .carousel-control .icon-next {display: block; text-align: center; font-size: 60px; height: 60px; width: 60px; left: 5px; top: -3px; margin: 0; line-height: 60px;}
 .carousel-caption {left: 19%}
 
@@ -643,7 +649,7 @@ body {background: #232323;}
 {
   .m-index-index #header .wrapper {padding: 0 15px}
   .m-index-index #navbarCollapse {right: 10px}
-  .carousel-caption{left: 19%\0!important}
+  .ie-8 .carousel-caption{left: 19%!important}
 }
 @media (max-width: 991px)
 {
@@ -893,7 +899,8 @@ a.card:hover, .card:hover a {color: @color-primary}
 }
 /* for ie8 end */
 
-.carousel-control:hover {background: @color-primary; text-align: center; background: none\0;}
+.carousel-control:hover {background: @color-primary; text-align: center;}
+.ie-8 .carousel-control:hover { background: none;}
 
 /* Right docker */
 .docker-right .icon-mobile-phone {background: @color-primary}
