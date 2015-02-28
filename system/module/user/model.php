@@ -22,7 +22,8 @@ class userModel extends model
      */
     public function getList($pager = null, $user = '', $provider = '', $admin = '')
     {
-        return $this->dao->select('u.*, o.provider as provider, openID as openID')->from(TABLE_USER)->alias('u')
+        return $this->dao->setAutolang(false)
+            ->select('u.*, o.provider as provider, openID as openID')->from(TABLE_USER)->alias('u')
             ->leftJoin(TABLE_OAUTH)->alias('o')->on('u.account = o.account')->where('1')
             ->beginIF($user)
             ->andWhere('u.account')->like("%{$user}%")
@@ -48,6 +49,7 @@ class userModel extends model
     {
         return $this->dao->select('u.*, o.provider as provider, openID as openID')->from(TABLE_USER)->alias('u')
             ->leftJoin(TABLE_OAUTH)->alias('o')->on('u.account = o.account')
+            ->setAutolang(false)
             ->where('o.provider')->eq($provider)
             ->andWhere('o.openID')->eq($openID)
             ->fetch();
@@ -65,6 +67,7 @@ class userModel extends model
         $users = $this->dao->select('account, realname')->from(TABLE_USER) 
             ->beginIF(strpos($params, 'admin') !== false)->where('admin')->ne('no')->fi()
             ->orderBy('id_asc')
+            ->setAutolang(false)
             ->fetchPairs();
 
         /* Append empty users. */
@@ -82,7 +85,7 @@ class userModel extends model
      */
     public function getBasicInfo($users)
     {
-        $users = $this->dao->select('account, admin, realname, `join`, last, visits')->from(TABLE_USER)->where('account')->in($users)->fetchAll('account');
+        $users = $this->dao->setAutolang(false)->select('account, admin, realname, `join`, last, visits')->from(TABLE_USER)->where('account')->in($users)->fetchAll('account');
         if(!$users) return array();
 
         foreach($users as $account => $user)
@@ -105,6 +108,7 @@ class userModel extends model
     public function getByAccount($account)
     {
         return $this->dao->select('*')->from(TABLE_USER)
+            ->setAutolang(false)
             ->beginIF(validater::checkEmail($account))->where('email')->eq($account)->fi()
             ->beginIF(!validater::checkEmail($account))->where('account')->eq($account)->fi()
             ->fetch();
@@ -119,7 +123,7 @@ class userModel extends model
      */
     public function getRealNameAndEmails($users)
     {
-        $users = $this->dao->select('account, email, realname')->from(TABLE_USER)->where('account')->in($users)->fetchAll('account');
+        $users = $this->dao->setAutolang(false)->select('account, email, realname')->from(TABLE_USER)->where('account')->in($users)->fetchAll('account');
         if(!$users) return array();     
         foreach($users as $account => $user) if($user->realname == '') $user->realname = $account; 
         return $users;         
@@ -134,7 +138,7 @@ class userModel extends model
      */
     public function getRealNamePairs($users)
     {
-        $userPairs = $this->dao->select('account, realname')->from(TABLE_USER)->where('account')->in($users)->fetchPairs('account');
+        $userPairs = $this->dao->setAutolang(false)->select('account, realname')->from(TABLE_USER)->where('account')->in($users)->fetchPairs('account');
 
         foreach($users as $account) if(!isset($userPairs[$account])) $userPairs[$account] = $account;
 
@@ -202,7 +206,7 @@ class userModel extends model
         if($fan->sex == 1) $user->gender = 'm';
         if($fan->sex == 2) $user->gender = 'f';
 
-        $pulledFan = $this->dao->select('*')->from(TABLE_OAUTH)->where('provider')->eq('wechat')->andWhere('openID')->eq($fan->openID)->fetch();
+        $pulledFan = $this->dao->setAutolang(false)->select('*')->from(TABLE_OAUTH)->where('provider')->eq('wechat')->andWhere('openID')->eq($fan->openID)->fetch();
 
         if(empty($pulledFan))
         {
@@ -217,7 +221,7 @@ class userModel extends model
         }
         else
         {
-            $userInfo = $this->dao->select('*')->from(TABLE_USER)->where('account')->eq($pulledFan->account)->fetch();
+            $userInfo = $this->dao->setAutolang(false)->select('*')->from(TABLE_USER)->where('account')->eq($pulledFan->account)->fetch();
             $user->account = $pulledFan->account;
             if(empty($userInfo))
             {
@@ -258,7 +262,7 @@ class userModel extends model
             ->removeIF(RUN_MODE != 'admin', 'admin')
             ->get();
 
-        return $this->dao->update(TABLE_USER)
+        return $this->dao->update(TABLE_USER)->setAutolang(false)
             ->data($user, $skip = 'password1,password2')
             ->autoCheck()
             ->batchCheck($this->config->user->require->edit, 'notempty')
@@ -306,7 +310,7 @@ class userModel extends model
             ->remove('password1, password2, ip, account, admin, join, visits')
             ->get();
 
-        $this->dao->update(TABLE_USER)->data($user)->autoCheck()->where('account')->eq($account)->exec();
+        $this->dao->setAutolang(false)->update(TABLE_USER)->data($user)->autoCheck()->where('account')->eq($account)->exec();
     }   
 
     /**
@@ -342,7 +346,7 @@ class userModel extends model
         if(!$account or !$password) return false;
 
         /* First get the user from database by account or email. */
-        $user = $this->dao->select('*')->from(TABLE_USER)
+        $user = $this->dao->setAutolang(false)->select('*')->from(TABLE_USER)
             ->beginIF(validater::checkEmail($account))->where('email')->eq($account)->fi()
             ->beginIF(!validater::checkEmail($account))->where('account')->eq($account)->fi()
             ->fetch();
@@ -379,7 +383,7 @@ class userModel extends model
         {
             $user->fails ++;
             if($user->fails > 2 * 4) $user->locked = date('Y-m-d H:i:s', time() + 3 * 60);
-            $this->dao->update(TABLE_USER)->data($user)->where('id')->eq($user->id)->exec();
+            $this->dao->setAutolang(false)->update(TABLE_USER)->data($user)->where('id')->eq($user->id)->exec();
             return false;
         }
 
@@ -389,7 +393,7 @@ class userModel extends model
         $user->fails  = 0;
         $user->visits ++;
 
-        $this->dao->update(TABLE_USER)->data($user)->where('account')->eq($account)->exec();
+        $this->dao->setAutolang(false)->update(TABLE_USER)->data($user)->where('account')->eq($account)->exec();
 
         $user->realname  = empty($user->realname) ? $account : $user->realname;
         $user->shortLast = substr($user->last, 5, -3);
@@ -446,7 +450,7 @@ class userModel extends model
         $format = 'Y-m-d H:i:s';
 
         $date = date($format,$intdate);
-        $this->dao->update(TABLE_USER)->set('locked')->eq($date)->where('id')->eq($userID)->exec();
+        $this->dao->setAutolang(false)->update(TABLE_USER)->set('locked')->eq($date)->where('id')->eq($userID)->exec();
 
         return !dao::isError();
     }
@@ -460,7 +464,7 @@ class userModel extends model
      */
     public function activate($userID)
     {
-        $this->dao->update(TABLE_USER)->set('locked')->eq('')->where('id')->eq($userID)->exec();
+        $this->dao->setAutolang(false)->update(TABLE_USER)->set('locked')->eq('')->where('id')->eq($userID)->exec();
         return !dao::isError();
     }
 
@@ -477,7 +481,7 @@ class userModel extends model
         $user = $this->getByAccount($account);
         if(!$user) return false;
 
-        $this->dao->delete()->from(TABLE_USER)->where('account')->eq($account)->exec();
+        $this->dao->setAutolang(false)->delete()->from(TABLE_USER)->where('account')->eq($account)->exec();
 
         return !dao::isError();
     }
@@ -491,7 +495,7 @@ class userModel extends model
      */
     public function reset($account, $reset)
     {
-        $this->dao->update(TABLE_USER)->set('reset')->eq($reset)->where('account')->eq($account)->exec();
+        $this->dao->setAutolang(false)->update(TABLE_USER)->set('reset')->eq($reset)->where('account')->eq($account)->exec();
     }
 
     /**
@@ -505,7 +509,8 @@ class userModel extends model
     {
         $resetTime = substr($reset, -10);
         if((time() - $resetTime) > $this->config->user->resetExpired) return false;
-        $user = $this->dao->select('*')->from(TABLE_USER)
+        $user = $this->dao->setAutolang(false)
+            ->select('*')->from(TABLE_USER)
             ->where('reset')->eq($reset)
             ->fetch('');
         return $user;
@@ -521,11 +526,11 @@ class userModel extends model
      */
     public function resetPassword($reset, $password)
     {
-        $user = $this->dao->select('*')->from(TABLE_USER)
+        $user = $this->dao->setAutolang(false)->select('*')->from(TABLE_USER)
                 ->where('reset')->eq($reset)
                 ->fetch();
         
-        $this->dao->update(TABLE_USER)
+        $this->dao->setAutolang(false)->update(TABLE_USER)
             ->set('password')->eq($this->createPassword($password, $user->account))
             ->set('reset')->eq('')
             ->where('reset')->eq($reset)
@@ -636,7 +641,7 @@ class userModel extends model
      */
     public function getUserByOpenID($provider, $openID)
     {
-        $account = $this->dao->select('account')->from(TABLE_OAUTH)
+        $account = $this->dao->setAutolang(false)->select('account')->from(TABLE_OAUTH)
             ->where('provider')->eq($provider)
             ->andWhere('openID')->eq($openID)
             ->fetch('account');
