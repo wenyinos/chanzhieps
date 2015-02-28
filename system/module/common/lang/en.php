@@ -201,6 +201,7 @@ $lang->forum->menu->update = 'Update|forum|update|';
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
 $lang->site->menu->basic    = 'Basic|site|setbasic|';
+$lang->site->menu->lang     = 'Language|site|setlang|';
 $lang->site->menu->nav      = 'Navigation|nav|admin|';
 $lang->site->menu->upload   = 'Uploads|site|setupload|';
 $lang->site->menu->tag      = 'Tags|tag|admin|';
