@@ -503,7 +503,7 @@ function createLink(moduleName, methodName, vars, viewType)
     if(config.requestType == 'PATH_INFO')
     {
         link = config.webRoot + moduleName + config.requestFix + methodName;
-        if(config.langVar != '') link = '/' + config.langVar + link;
+        if(config.langCode != '') link = '/' + config.langCode + link;
         if(vars)
         {
             if(config.pathType == "full")
@@ -520,6 +520,7 @@ function createLink(moduleName, methodName, vars, viewType)
     else
     {
         link = config.router + '?' + config.moduleVar + '=' + moduleName + '&' + config.methodVar + '=' + methodName + '&' + config.viewVar + '=' + viewType;
+        if(config.langCode != '') link = link + '&l=' + config.langCode;
         if(vars) for(i = 0; i < vars.length; i ++) link += '&' + vars[i][0] + '=' + vars[i][1];
     }
     return link;
