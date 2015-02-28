@@ -307,6 +307,7 @@ class router
         $this->connectDB();
 
         $this->setClientLang();
+        $this->setLangCode();
         $this->loadLang('common');
         $this->setTimezone();
 
@@ -761,6 +762,17 @@ class router
     }
 
     /**
+     * Set lang code.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setLangCode()
+    {
+        $this->config->langCode = $this->clientLang == $this->config->default->lang ? '' : $this->config->langsShortcuts[$this->clientLang];
+    }
+
+    /**
      * Get the $clientLang var.
      * 
      * @access public
@@ -1164,6 +1176,7 @@ class router
         $defaultParams = array();
         $methodReflect = new reflectionMethod($className, $methodName);
 
+        if($this->config->requestType == 'GET') unset($_GET[$this->config->langVar]);
         foreach($methodReflect->getParameters() as $param)
         {
             $name = $param->getName();

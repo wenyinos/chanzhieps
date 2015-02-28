@@ -66,13 +66,8 @@ class helper
     {
         global $app, $config;
 
-        $lang = '';
-        if(RUN_MODE  == 'front')
-        {
-            $clientLang   = $app->getClientLang();
-            $lang = isset($config->langsShortcuts[$clientLang]) ? $config->langsShortcuts[$clientLang] : '';
-            if($clientLang == $config->default->lang) $lang = '';
-        }
+        $clientLang = $app->getClientLang();
+        $lang       = $config->langCode;
 
         /* Set vars and alias. */
         if(!is_array($vars)) parse_str($vars, $vars);
