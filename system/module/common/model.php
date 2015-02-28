@@ -305,7 +305,7 @@ class commonModel extends model
         global $app, $lang , $config;
 
         $string  = '<ul class="nav navbar-nav navbar-right">';
-        $string .= sprintf('<li>%s</li>', html::a($config->webRoot, '<i class="icon-home icon-large"></i> ' . $lang->frontHome, "target='_blank' class='navbar-link'"));
+        $string .= sprintf('<li>%s</li>', html::a($config->homeRoot, '<i class="icon-home icon-large"></i> ' . $lang->frontHome, "target='_blank' class='navbar-link'"));
         $string .= sprintf('<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-large"></i> %s <b class="caret"></b></a>', $app->user->realname);
         $string .= sprintf('<ul class="dropdown-menu"><li>%s</li><li>%s</li></ul>', html::a(helper::createLink('user', 'changePassword'), $lang->changePassword, "data-toggle='modal'"), html::a(helper::createLink('user','logout'), $lang->logout));
         $string .= '</li></ul>';
@@ -349,7 +349,7 @@ class commonModel extends model
     {
         global $app;
         echo "<ul class='nav'>";
-        echo '<li>' . html::a($app->config->webRoot, $app->lang->homePage) . '</li>';
+        echo '<li>' . html::a($app->config->homeRoot, $app->lang->homePage) . '</li>';
         foreach($app->site->menuLinks as $menu) echo "<li>$menu</li>";
         echo '</ul>';
     }
@@ -368,7 +368,7 @@ class commonModel extends model
         echo '<ul class="breadcrumb">';
         if($root == '')
         {
-            echo '<li>' . "<span class='breadcrumb-title'>" . $this->lang->currentPos . $this->lang->colon . '</span>' . html::a($this->config->webRoot, $this->lang->home) . '</li>';
+            echo '<li>' . "<span class='breadcrumb-title'>" . $this->lang->currentPos . $this->lang->colon . '</span>' . html::a($this->config->homeRoot, $this->lang->home) . '</li>';
         }
         else
         {

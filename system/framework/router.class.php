@@ -307,7 +307,7 @@ class router
         $this->connectDB();
 
         $this->setClientLang();
-        $this->setLangCode();
+        $this->fixLangConfig();
         $this->loadLang('common');
         $this->setTimezone();
 
@@ -767,9 +767,12 @@ class router
      * @access public
      * @return void
      */
-    public function setLangCode()
+    public function fixLangConfig()
     {
-        $this->config->langCode = $this->clientLang == $this->config->default->lang ? '' : $this->config->langsShortcuts[$this->clientLang];
+        $langCode = $this->clientLang == $this->config->default->lang ? '' : $this->config->langsShortcuts[$this->clientLang];
+        $this->config->langCode = $langCode;
+        if($langCode and $this->config->requestType == 'PATH_INFO') $this->config->homeRoot = $this->config->webRoot . '/' . $langCode; 
+        if($langCode and $this->config->requestType == 'GET')       $this->config->homeRoot = $this->config->webRoot .  "?{$this->config->langVar}=$langCode";
     }
 
     /**
