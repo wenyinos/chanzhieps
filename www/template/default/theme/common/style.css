@@ -471,3 +471,7 @@ body.body-modal {padding: 20px;}
 .row {margin-left: -7px; margin-right: -7px;}
 .row > [class*='col-'] {padding-left: 7px; padding-right: 7px;}
 .row > [class*='col-'] > .panel, .row > [class*='col-'] > .carousel, .page-content > .panel, #boards > .panel, .page-side > .panel, .row > [class*='col-'] > .nav, .row > [class*='col-'] > .list-group, .m-blog .card {margin-bottom: 14px;}
+
+#languageBar{ padding-left:10px;}
+#languageBar a{margin-right:6px;}
+#languageBar a.disabled{margin-right:6px;}
