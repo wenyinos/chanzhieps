@@ -771,8 +771,7 @@ class router
     {
         $langCode = $this->clientLang == $this->config->default->lang ? '' : $this->config->langsShortcuts[$this->clientLang];
         $this->config->langCode = $langCode;
-        if($langCode and $this->config->requestType == 'PATH_INFO') $this->config->homeRoot = $this->config->webRoot . '/' . $langCode; 
-        if($langCode and $this->config->requestType == 'GET')       $this->config->homeRoot = $this->config->webRoot .  "?{$this->config->langVar}=$langCode";
+        $this->config->homeRoot = getHomeRoot();
     }
 
     /**
