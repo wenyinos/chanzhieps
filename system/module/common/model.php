@@ -351,7 +351,6 @@ class commonModel extends model
         $langs = explode(',', $config->site->lang);
         foreach($langs as $lang)
         {
-            if($lang == $app->getClientLang()) continue;
             echo html::a(getHomeRoot($config->langsShortcuts[$lang]), $config->langs[$lang]);
         }
     }
