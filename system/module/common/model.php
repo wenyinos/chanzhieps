@@ -335,7 +335,25 @@ class commonModel extends model
         {
             echo html::a(helper::createLink('user', 'login'), $app->lang->login);
             echo html::a(helper::createLink('user', 'register'), $app->lang->register);
-        }    
+        }
+    }
+
+    /**
+     * Print language bar.
+     * 
+     * @static
+     * @access public
+     * @return string
+     */
+    public static function printLanguageBar()
+    {
+        global $config, $app;
+        $langs = explode(',', $config->site->lang);
+        foreach($langs as $lang)
+        {
+            if($lang == $app->getClientLang()) continue;
+            echo html::a(getHomeRoot($config->langsShortcuts[$lang]), $config->langs[$lang]);
+        }
     }
 
     /**
