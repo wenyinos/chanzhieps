@@ -52,10 +52,10 @@ class cacheModel extends model
                     $enabledLangs[$lang] = $this->config->langs[$lang];
                 }
                 if(empty($enabledLangs)) return;
-                $configCache .= "\$config->langs = array();\n";
+                $configCache .= "\$config->enabledLangs = array();\n";
                 foreach($enabledLangs as $code => $name)
                 {
-                    $configCache .= "\$config->langs['{$code}'] = '$name';\n";
+                    $configCache .= "\$config->enabledLangs['{$code}'] = '$name';\n";
                 }
             }
 
