@@ -725,15 +725,17 @@ class router
         if(RUN_MODE == 'front')
         {
             $flipedLangs = array_flip($this->config->langsShortcuts);
-            if($this->config->requestType == 'GET' and isset($_GET[$this->config->langVar])) return $this->clientLang = $flipedLangs[$_GET[$this->config->langVar]];
+            if($this->config->requestType == 'GET' and isset($_GET[$this->config->langVar])) $this->clientLang = $flipedLangs[$_GET[$this->config->langVar]];
             if($this->config->requestType == 'PATH_INFO')
             {
                 foreach($this->config->langsShortcuts as $language => $code)
                 {
-                    if(strpos(trim($_SERVER['REQUEST_URI'], '/'), $code) === 0) return $this->clientLang = $language;
+                    if(strpos(trim($_SERVER['REQUEST_URI'], '/'), $code) === 0) $this->clientLang = $language;
                 }
             }
-            return $this->clientLang = $this->config->default->lang;
+
+            if(!isset($this->config->langs[$this->clientLang])) $this->clientLang = $this->config->default->lang;
+            return $this->clientLang;
         }
 
         if(!empty($lang))
@@ -759,6 +761,7 @@ class router
             $this->clientLang = $this->config->default->lang;
         }
 
+        if(!isset($this->config->langs[$this->clientLang])) $this->clientLang = $this->config->default->lang;
         setcookie('lang', $this->clientLang, $this->config->cookieLife, $this->config->cookiePath);
     }
 
