@@ -734,7 +734,7 @@ class router
                 }
             }
 
-            if(!isset($this->config->langs[$this->clientLang])) $this->clientLang = $this->config->default->lang;
+            if(!isset($this->config->enabledLangs[$this->clientLang])) $this->clientLang = $this->config->default->lang;
             return $this->clientLang;
         }
 
@@ -754,14 +754,13 @@ class router
         if(!empty($this->clientLang))
         {
             $this->clientLang = strtolower($this->clientLang);
-            if(!isset($this->config->langs[$this->clientLang])) $this->clientLang = $this->config->default->lang;
         }
         else
         {
             $this->clientLang = $this->config->default->lang;
         }
 
-        if(!isset($this->config->langs[$this->clientLang])) $this->clientLang = $this->config->default->lang;
+        if(!isset($this->config->enabledLangs[$this->clientLang])) $this->clientLang = $this->config->default->lang;
         setcookie('lang', $this->clientLang, $this->config->cookieLife, $this->config->cookiePath);
     }
 
