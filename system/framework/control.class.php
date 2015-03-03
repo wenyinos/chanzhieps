@@ -274,7 +274,7 @@ class control
         $modulePath = $this->app->getModulePath($moduleName);
         $viewExtPath = $this->app->getModuleExtPath($moduleName, 'view');
 
-        if((RUN_MODE != 'front') or (strpos($modulePath, 'module' . DS . 'ext') !== false))
+        if((RUN_MODE != 'front') or (strpos($modulePath, 'module' . DS . 'ext' . DS) !== false))
         {
             /* If not in front mode or is ext module, view file is in modeule path. */
             $mainViewFile = $modulePath . 'view' . DS . $methodName . '.' . $this->viewType . '.php';
