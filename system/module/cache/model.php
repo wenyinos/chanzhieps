@@ -37,11 +37,33 @@ class cacheModel extends model
         if(!is_writable($this->cacheRoot)) return false;
         if(is_file($cacheFile) and !is_writable($cacheFile)) return false;
 
-        $siteConfigs = $this->loadModel('setting')->getItems('owner=system&module=common&section=site&key=defaultLang');
+        $siteConfigs = $this->loadModel('setting')->getItems('owner=system&module=common&section=site');
+
         $configCache = "<?php\n";
         foreach($siteConfigs as $config)
         {
-            $configCache .= "\$config->default->lang = '$config->value';\n";
+            if($config->key == 'lang') 
+            {
+                $langs = explode(',', $config->value);
+                $enabledLangs = array();
+                foreach($langs as $lang) 
+                {
+                    if(!isset($this->config->langs[$lang])) return;
+                    $enabledLangs[$lang] = $this->config->langs[$lang];
+                }
+                if(empty($enabledLangs)) return;
+                $configCache .= "\$config->langs = array();\n";
+                foreach($enabledLangs as $code => $name)
+                {
+                    $configCache .= "\$config->langs['{$code}'] = '$name';\n";
+                }
+            }
+
+            if($config->key == 'defaultLang')
+            {
+                if(!isset($this->config->langs[$config->value])) return;
+                $configCache .= "\$config->default->lang = '$config->value';\n";
+            }
         }
 
         file_put_contents($cacheFile, $configCache);
