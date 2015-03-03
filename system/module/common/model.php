@@ -720,7 +720,7 @@ class commonModel extends model
      */
     public function verfyAdmin()
     {
-        $okFile = $this->app->getWwwRoot() . 'ok';
+        $okFile = $this->app->getWwwRoot() . 'ok.txt';
         if(!file_exists($okFile) or time() - filemtime($okFile) > 3600)
         {
             return array('result' => 'fail', 'okFile' => $okFile);
