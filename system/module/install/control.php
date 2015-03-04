@@ -59,7 +59,7 @@ class install extends control
      */
     public function step1()
     {
-        $this->view->title  = $this->lang->install->checking;
+        $this->view->title          = $this->lang->install->checking;
         $this->view->phpVersion     = $this->install->getPhpVersion();
         $this->view->phpResult      = $this->install->checkPHP();
         $this->view->pdoResult      = $this->install->checkPDO();

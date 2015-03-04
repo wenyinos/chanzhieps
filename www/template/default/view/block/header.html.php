@@ -26,7 +26,10 @@
   </div>
   <div id='headNav'>
     <div class='wrapper'>
-      <nav><?php echo commonModel::printTopBar();?></nav>
+      <nav>
+        <?php echo commonModel::printTopBar();?>
+        <span id='languageBar'><?php echo commonModel::printLanguageBar();?></span>
+      </nav>
     </div>
   </div>
 </header>

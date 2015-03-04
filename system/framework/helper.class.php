@@ -66,6 +66,9 @@ class helper
     {
         global $app, $config;
 
+        $clientLang = $app->getClientLang();
+        $lang       = $config->langCode;
+
         /* Set vars and alias. */
         if(!is_array($vars)) parse_str($vars, $vars);
         if(!is_array($alias)) parse_str($alias, $alias);
@@ -75,6 +78,7 @@ class helper
         if(helper::inSeoMode() and method_exists('uri', 'create' . $moduleName . $methodName))
         {
             $link = call_user_func_array('uri::create' . $moduleName . $methodName, array('param'=> $vars, 'alias'=>$alias));
+            if($lang) $link = '/' . $lang . $link;
             if($link) return $link;
         }
         
@@ -108,12 +112,14 @@ class helper
                 foreach($vars as $value) $link .= "{$config->requestFix}$value";
                 $link .= '.' . $viewType;
             }
+            if($lang) $link = '/' . $lang . $link;
         }
         elseif($config->requestType == 'GET')
         {
             $link .= "?{$config->moduleVar}=$moduleName&{$config->methodVar}=$methodName";
             if($viewType != 'html') $link .= "&{$config->viewVar}=" . $viewType;
             foreach($vars as $key => $value) $link .= "&$key=$value";
+            if($lang) $link .= "&{$config->langVar}={$lang}";
         }
 
         return $link;
@@ -584,6 +590,27 @@ function getWebRoot($full = false)
         return $http . $_SERVER['HTTP_HOST'] . substr($path, 0, (strrpos($path, '/') + 1));
     }
     return substr($path, 0, (strrpos($path, '/') + 1));
+}
+
+/**
+ * Get home root.
+ * 
+ * @param  string $langCode 
+ * @access public
+ * @return string
+ */
+function getHomeRoot($langCode = '')
+{
+    global $config;
+
+    $langCode = $langCode == '' ? $config->langCode : $langCode;
+    if($langCode == $config->langsShortcuts[$config->default->lang]) return $config->webRoot;
+    $homeRoot = $config->webRoot;
+
+    if($langCode and $config->requestType == 'PATH_INFO') $homeRoot = $config->webRoot . $langCode; 
+    if($langCode and $config->requestType == 'GET')       $homeRoot = $config->webRoot . "?{$config->langVar}=$langCode";
+    return $homeRoot;
+
 }
 
 /**

@@ -39,10 +39,6 @@
           <td><?php echo html::checkbox('modules', $lang->site->moduleAvailable, isset($this->config->site->modules) ? $this->config->site->modules : '');?></td><td></td>
         </tr>
         <tr>
-          <th><?php echo $lang->site->lang;?></th>
-          <td><?php echo html::select('lang', $config->langs, isset($this->config->site->lang) ? $this->config->site->lang : 'zh-cn', "class='form-control chosen'");?></td><td></td>
-        </tr>
-        <tr>
           <th><?php echo $lang->site->copyright;?></th> 
           <td><?php echo html::input('copyright', $this->config->site->copyright, "class='form-control'");?></td><td></td>
         </tr>

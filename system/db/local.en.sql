@@ -1,15 +1,15 @@
 -- Insert data into `eps_block`;
 INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`) VALUES
-(1, 'latestArticle', 'Latest Article', '{"category":"0","limit":"7"}', 'default'),
-(2, 'hotArticle', 'Hot Article', '{"category":"0","limit":"7"}', 'default'),
-(3, 'latestProduct', 'Latest Product', '{"category":"0","limit":"3","image":"show"}', 'default'),
-(4, 'hotProduct', 'Hot Product', '{"category":"0","limit":"3","image":"show"}', 'default'),
-(5, 'slide', 'Slide', '', 'default'),
-(6, 'articleTree', 'Article Category', '{"showChildren":"0"}', 'default'),
-(7, 'productTree', 'Product Category', '{"showChildren":"0"}', 'default'),
-(8, 'blogTree', 'Blog Category', '{"showChildren":"1"}', 'default'),
-(9, 'contact', 'Contact Us', '', 'default'),
-(10, 'about', 'About Us', '', 'default'),
-(11, 'links', 'Link', '', 'default'),
-(12, 'header', 'Header', '', 'default'),
-(13, 'followUs', 'Follow Us', '', 'default');
+(101, 'latestArticle', 'Latest Article', '{"category":"0","limit":"7"}', 'default'),
+(102, 'hotArticle', 'Hot Article', '{"category":"0","limit":"7"}', 'default'),
+(103, 'latestProduct', 'Latest Product', '{"category":"0","limit":"3","image":"show"}', 'default'),
+(104, 'hotProduct', 'Hot Product', '{"category":"0","limit":"3","image":"show"}', 'default'),
+(105, 'slide', 'Slide', '', 'default'),
+(106, 'articleTree', 'Article Category', '{"showChildren":"0"}', 'default'),
+(107, 'productTree', 'Product Category', '{"showChildren":"0"}', 'default'),
+(108, 'blogTree', 'Blog Category', '{"showChildren":"1"}', 'default'),
+(109, 'contact', 'Contact Us', '', 'default'),
+(110, 'about', 'About Us', '', 'default'),
+(111, 'links', 'Link', '', 'default'),
+(112, 'header', 'Header', '', 'default'),
+(113, 'followUs', 'Follow Us', '', 'default');

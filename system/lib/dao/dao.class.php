@@ -115,6 +115,15 @@ class dao
     public $method;
 
     /**
+     * If auto add lang statement.
+     *
+     * @var bool
+     * @access public
+     */
+    public $autoLang;
+
+
+    /**
      * The queries executed. Every query will be saved in this array.
      * 
      * @var array
@@ -185,6 +194,19 @@ class dao
     }
 
     /**
+     * Set autoLang item.
+     * 
+     * @param  bool    $autoLang 
+     * @access public
+     * @return void
+     */
+    public function setAutoLang($autoLang)
+    {
+        $this->autoLang = $autoLang;
+        return $this;
+    }
+
+    /**
      * Reset the vars.
      * 
      * @access private
@@ -197,6 +219,7 @@ class dao
         $this->setAlias('');
         $this->setMode('');
         $this->setMethod('');
+        $this->setAutoLang(true);
     }
 
     //-------------------- According to the query method, call according method of sql class. --------------------//
@@ -387,6 +410,7 @@ class dao
     public function data($data, $skipFields = '')
     {
         if(!is_object($data)) $data = (object)$data;
+        if($this->autoLang and !isset($data->lang)) $data->lang = $this->app->getClientLang();
         $this->sqlobj->data($data, $skipFields);
         return $this;
     }
@@ -431,6 +455,45 @@ class dao
             if($this->fields == '') $this->fields = '*';
             if($this->table == '')  $this->app->triggerError('Must set the table name', __FILE__, __LINE__, $exit = true);
             $sql = sprintf($this->sqlobj->get(), $this->fields, $this->table);
+        }
+
+        /* If the method if select, update or delete, set the lang condition. */
+        if($this->autoLang and $this->table != '' and $this->method != 'insert' and $this->method != 'replace')
+        {
+            $lang = $this->app->getClientLang();
+
+            /* Get the position to insert lang = ?. */
+            $wherePOS  = strrpos($sql, DAO::WHERE);             // The position of WHERE keyword.
+            $groupPOS  = strrpos($sql, DAO::GROUPBY);           // The position of GROUP BY keyword.
+            $havingPOS = strrpos($sql, DAO::HAVING);            // The position of HAVING keyword.
+            $orderPOS  = strrpos($sql, DAO::ORDERBY);           // The position of ORDERBY keyword.
+            $limitPOS  = strrpos($sql, DAO::LIMIT);             // The position of LIMIT keyword.
+            $splitPOS  = $orderPOS ? $orderPOS : $limitPOS;     // If $orderPOS, use it instead of $limitPOS.
+            $splitPOS  = $havingPOS? $havingPOS: $splitPOS;     // If $havingPOS, use it instead of $orderPOS.
+            $splitPOS  = $groupPOS ? $groupPOS : $splitPOS;     // If $groupPOS, use it instead of $havingPOS.
+
+            /* Set the conditon to be appened. */
+            $tableName = !empty($this->alias) ? $this->alias : $this->table;
+            $langCondition = " $tableName.lang in('{$lang}', 'all') ";
+
+            /* If $spliPOS > 0, split the sql at $splitPOS. */
+            if($splitPOS)
+            {
+                $firstPart = substr($sql, 0, $splitPOS);
+                $lastPart  = substr($sql, $splitPOS);
+                if($wherePOS)
+                {
+                    $sql = $firstPart . " AND $langCondition " . $lastPart;
+                }
+                else
+                {
+                    $sql = $firstPart . " WHERE $langCondition " . $lastPart;
+                }
+            }
+            else
+            {
+                $sql .= $wherePOS ? " AND $langCondition" : " WHERE $langCondition";
+            }
         }
 
         self::$querys[] = $this->processKeywords($sql);

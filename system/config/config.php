@@ -30,6 +30,7 @@ $config->requestFix  = '-';               // RequestType=PATH_INFO: the divider 
 $config->moduleVar   = 'm';               // RequestType=GET: the name of the module var.
 $config->methodVar   = 'f';               // RequestType=GET: the name of the method var.
 $config->viewVar     = 't';               // RequestType=GET: the name of the view var.
+$config->langVar     = 'l';               // RequestType=GET: the name of the view var.
 $config->sessionVar  = RUN_MODE . 'sid';  // The session var name.
 
 /* Set the allowed tags.  */
@@ -52,6 +53,11 @@ $config->template->customVersion = '';
 $config->langs['zh-cn'] = '简体';
 $config->langs['zh-tw'] = '繁体';
 $config->langs['en']    = 'English';
+
+/* Languags shortcuts. */
+$config->langsShortcuts['zh-cn'] = 'cn';
+$config->langsShortcuts['zh-tw'] = 'tw';
+$config->langsShortcuts['en']    = 'en';
 
 /* Default params. */
 $config->default = new stdclass();          

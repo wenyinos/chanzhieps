@@ -123,7 +123,7 @@ else
         <?php if(isset($config->site->logo)):?>
         <?php $logo = json_decode($config->site->logo);?>
         <div id='siteLogo'>
-          <?php echo html::a($this->config->webRoot, html::image($logo->webPath, "class='logo' title='{$this->config->company->name}'"));?>
+          <?php echo html::a($this->config->homeRoot, html::image($logo->webPath, "class='logo' title='{$this->config->company->name}'"));?>
         </div>
         <?php else: ?>
         <div id='siteName'><h2><?php echo $config->site->name;?></h2></div>
@@ -148,7 +148,7 @@ else
       </ul>
       <?php if(!isset($this->config->site->type) or $this->config->site->type != 'blog'):?>
       <ul class="nav navbar-nav navbar-right">
-        <li><?php echo html::a($config->webRoot, '<i class="icon-home icon-large"></i> ' . $lang->blog->siteHome);?></li>
+        <li><?php echo html::a($config->homeRoot, '<i class="icon-home icon-large"></i> ' . $lang->blog->siteHome);?></li>
       </ul>
       <?php endif;?>
     </div>

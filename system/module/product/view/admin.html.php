@@ -29,7 +29,7 @@
         <th class='w-p10'><?php commonModel::printOrderLink('amount', $orderBy, $vars, $lang->product->amount);?></th>
         <th class='w-160px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->product->addedDate);?></th>
         <th class='w-60px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->product->status);?></th>
-        <th class='w-60px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->product->views);?></th>
+        <th class='w-70px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->product->views);?></th>
         <th class='w-260px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>

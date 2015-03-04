@@ -201,6 +201,7 @@ $lang->forum->menu->update = '更新数据|forum|update|';
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
 $lang->site->menu->basic    = '站点设置|site|setbasic|';
+$lang->site->menu->lang     = '语言设置|site|setlang|';
 $lang->site->menu->nav      = '导航设置|nav|admin|';
 $lang->site->menu->upload   = '上传设置|site|setupload|';
 $lang->site->menu->tag      = '关键词设置|tag|admin|';

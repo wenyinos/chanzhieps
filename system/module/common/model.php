@@ -119,6 +119,8 @@ class commonModel extends model
         {
             if($app->user->admin == 'no')    return false;
             if($app->user->admin == 'super') return true;
+
+            return false;
         }
 
         if(!commonModel::isAvailable($module)) return false;
@@ -303,7 +305,7 @@ class commonModel extends model
         global $app, $lang , $config;
 
         $string  = '<ul class="nav navbar-nav navbar-right">';
-        $string .= sprintf('<li>%s</li>', html::a($config->webRoot, '<i class="icon-home icon-large"></i> ' . $lang->frontHome, "target='_blank' class='navbar-link'"));
+        $string .= sprintf('<li>%s</li>', html::a($config->homeRoot, '<i class="icon-home icon-large"></i> ' . $lang->frontHome, "target='_blank' class='navbar-link'"));
         $string .= sprintf('<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-large"></i> %s <b class="caret"></b></a>', $app->user->realname);
         $string .= sprintf('<ul class="dropdown-menu"><li>%s</li><li>%s</li></ul>', html::a(helper::createLink('user', 'changePassword'), $lang->changePassword, "data-toggle='modal'"), html::a(helper::createLink('user','logout'), $lang->logout));
         $string .= '</li></ul>';
@@ -333,7 +335,24 @@ class commonModel extends model
         {
             echo html::a(helper::createLink('user', 'login'), $app->lang->login);
             echo html::a(helper::createLink('user', 'register'), $app->lang->register);
-        }    
+        }
+    }
+
+    /**
+     * Print language bar.
+     * 
+     * @static
+     * @access public
+     * @return string
+     */
+    public static function printLanguageBar()
+    {
+        global $config, $app;
+        $langs = explode(',', $config->site->lang);
+        foreach($langs as $lang)
+        {
+            echo html::a(getHomeRoot($config->langsShortcuts[$lang]), $config->langs[$lang]);
+        }
     }
 
     /**
@@ -347,7 +366,7 @@ class commonModel extends model
     {
         global $app;
         echo "<ul class='nav'>";
-        echo '<li>' . html::a($app->config->webRoot, $app->lang->homePage) . '</li>';
+        echo '<li>' . html::a($app->config->homeRoot, $app->lang->homePage) . '</li>';
         foreach($app->site->menuLinks as $menu) echo "<li>$menu</li>";
         echo '</ul>';
     }
@@ -366,7 +385,7 @@ class commonModel extends model
         echo '<ul class="breadcrumb">';
         if($root == '')
         {
-            echo '<li>' . "<span class='breadcrumb-title'>" . $this->lang->currentPos . $this->lang->colon . '</span>' . html::a($this->config->webRoot, $this->lang->home) . '</li>';
+            echo '<li>' . "<span class='breadcrumb-title'>" . $this->lang->currentPos . $this->lang->colon . '</span>' . html::a($this->config->homeRoot, $this->lang->home) . '</li>';
         }
         else
         {
@@ -701,7 +720,7 @@ class commonModel extends model
      */
     public function verfyAdmin()
     {
-        $okFile = $this->app->getWwwRoot() . 'ok';
+        $okFile = $this->app->getWwwRoot() . 'ok.txt';
         if(!file_exists($okFile) or time() - filemtime($okFile) > 3600)
         {
             return array('result' => 'fail', 'okFile' => $okFile);

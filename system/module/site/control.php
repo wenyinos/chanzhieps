@@ -31,15 +31,35 @@ class site extends control
                 ->stripTags('pauseTip', $allowedTags)
                 ->get();
 
-            $result  = $this->loadModel('setting')->setItems('system.common.site', $setting);
-            $cache   = $this->loadModel('cache')->createConfigCache();
+            $result = $this->loadModel('setting')->setItems('system.common.site', $setting);
 
-            if(!$cache) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->error->noWritable, $this->app->getTmpRoot() . 'cache')));
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setbasic')));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
 
         $this->view->title = $this->lang->site->setBasic;
+        $this->display();
+    }
+
+    /**
+     * Set language items. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function setLang()
+    {
+        if(!empty($_POST))
+        {
+            $setting = fixer::input('post')->join('lang', ',')->get();
+
+            $result = $this->loadModel('setting')->setItems('system.common.site', $setting, $lang = 'all');
+            $this->dao->delete()->from(TABLE_CONFIG)->where("`key`")->eq('defaultLang')->andWhere('lang')->ne('all')->exec();
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setLang')));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+        }
+
+        $this->view->title = $this->lang->site->setLang;
         $this->display();
     }
 
@@ -94,9 +114,7 @@ class site extends control
             $this->loadModel('setting')->setItems('system.common.file', $fileConfig);
 
             $result  = $this->loadModel('setting')->setItems('system.common.site', $setting);
-            $cache   = $this->loadModel('cache')->createConfigCache();
 
-            if(!$cache) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->error->noWritable, $this->app->getTmpRoot() . 'cache')));
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setupload')));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }

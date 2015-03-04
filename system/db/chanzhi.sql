@@ -21,8 +21,10 @@ CREATE TABLE IF NOT EXISTS `eps_article` (
   `link` varchar(255) NOT NULL,
   `css` text NOT NULL,
   `js` text NOT NULL,
+  `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `order` (`order`),
+  KEY `lang` (`lang`),
   KEY `views` (`views`),
   KEY `sticky` (`sticky`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -34,7 +36,9 @@ CREATE TABLE IF NOT EXISTS `eps_block` (
   `type` varchar(20) NOT NULL,
   `title` varchar(60) NOT NULL,
   `content` text NOT NULL,
-  PRIMARY KEY (`id`)
+  `lang` char(30) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `lang` (`lang`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_book`;
@@ -55,7 +59,9 @@ CREATE TABLE IF NOT EXISTS `eps_book` (
   `editedDate` datetime NOT NULL,
   `views` mediumint(5) unsigned NOT NULL DEFAULT '0',
   `order` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `lang` (`lang`),
   KEY `order` (`order`),
   KEY `parent` (`parent`),
   KEY `path` (`path`)
@@ -82,7 +88,9 @@ CREATE TABLE IF NOT EXISTS `eps_category` (
   `postID` mediumint(9) NOT NULL,
   `replyID` mediumint(8) unsigned NOT NULL,
   `link` varchar(255) NOT NULL,
+  `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `lang` (`lang`),
   KEY `tree` (`type`),
   KEY `order` (`order`),
   KEY `parent` (`parent`),
@@ -97,8 +105,10 @@ CREATE TABLE IF NOT EXISTS `eps_config` (
   `section` char(30) NOT NULL DEFAULT '',
   `key` char(30) DEFAULT NULL,
   `value` text NOT NULL,
+  `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `unique` (`owner`,`module`,`section`,`key`)
+  KEY `lang` (`lang`),
+  UNIQUE KEY `unique` (`owner`,`module`,`section`,`key`,`lang`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_package`;
@@ -119,7 +129,9 @@ CREATE TABLE IF NOT EXISTS `eps_package` (
   `dirs` text NOT NULL,
   `files` text NOT NULL,
   `status` varchar(20) NOT NULL,
+  `lang` char(30) NOT NULL,
   PRIMARY KEY  (`id`),
+  KEY `lang` (`lang`),
   UNIQUE KEY `code` (`code`),
   KEY `name` (`name`),
   KEY `addedTime` (`installedTime`)
@@ -133,7 +145,9 @@ CREATE TABLE IF NOT EXISTS `eps_down` (
   `ip` char(15) NOT NULL,
   `time` datetime NOT NULL,
   `referer` varchar(200) NOT NULL,
+  `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `lang` (`lang`),
   KEY `fileID` (`file`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -155,7 +169,9 @@ CREATE TABLE IF NOT EXISTS `eps_file` (
   `extra` varchar(255) NOT NULL,
   `primary` enum('1','0') DEFAULT '0',
   `editor` enum('1','0') NOT NULL DEFAULT '0',
+  `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `lang` (`lang`),
   KEY `object` (`objectType`,`objectID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -165,7 +181,8 @@ CREATE TABLE IF NOT EXISTS `eps_layout` (
   `page` varchar(30) NOT NULL,
   `region` varchar(30) NOT NULL,
   `blocks` text NOT NULL,
-  UNIQUE KEY `layout` (`template`,`page`,`region`)
+  `lang` char(30) NOT NULL,
+  UNIQUE KEY `layout` (`template`,`page`,`region`,`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_message`;
@@ -188,7 +205,9 @@ CREATE TABLE IF NOT EXISTS `eps_message` (
   `public` enum('0','1') NOT NULL DEFAULT '1',
   `readed` enum('0','1') NOT NULL,
   `receiveEmail` enum('0','1') NOT NULL DEFAULT '0',
+  `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `lang` (`lang`),
   KEY `status` (`status`),
   KEY `object` (`objectType`,`objectID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -198,6 +217,7 @@ CREATE TABLE IF NOT EXISTS `eps_oauth` (
   `account` varchar(30) NOT NULL,
   `provider` varchar(30) NOT NULL,
   `openID` varchar(60) NOT NULL,
+  `lang` char(30) NOT NULL,
   UNIQUE KEY `account` (`account`,`provider`,`openID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -228,7 +248,9 @@ CREATE TABLE IF NOT EXISTS `eps_product` (
   `order` smallint(5) unsigned NOT NULL,
   `css` text NOT NULL,
   `js` text NOT NULL,
+  `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `lang` (`lang`),
   KEY `order` (`order`),
   KEY `views` (`views`),
   KEY `sticky` (`sticky`),
@@ -240,6 +262,7 @@ CREATE TABLE IF NOT EXISTS `eps_relation` (
   `type` char(20) NOT NULL,
   `id` mediumint(9) NOT NULL,
   `category` smallint(5) NOT NULL,
+  `lang` char(30) NOT NULL,
   UNIQUE KEY `relation` (`type`,`id`,`category`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -253,7 +276,9 @@ CREATE TABLE IF NOT EXISTS `eps_reply` (
   `addedDate` datetime NOT NULL,
   `editedDate` datetime NOT NULL,
   `hidden` enum('0','1') NOT NULL DEFAULT '0',
+  `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `lang` (`lang`),
   KEY `thread` (`thread`),
   KEY `author` (`author`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -264,7 +289,9 @@ CREATE TABLE IF NOT EXISTS `eps_product_custom` (
   `label` varchar(100) NOT NULL,
   `value` varchar(200) NOT NULL,
   `order` smallint(5) unsigned NOT NULL,
+  `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `lang` (`lang`),
   UNIQUE KEY `label` (`product`,`label`),
   KEY `product` (`product`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -275,7 +302,9 @@ CREATE TABLE IF NOT EXISTS `eps_tag` (
   `tag` varchar(50) NOT NULL,
   `link` varchar(100) NOT NULL,
   `rank` smallint(5) unsigned NOT NULL,
+  `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `lang` (`lang`),
   KEY `tag` (`tag`),
   KEY `rank` (`rank`),
   KEY `link` (`link`)
@@ -300,7 +329,9 @@ CREATE TABLE IF NOT EXISTS `eps_thread` (
   `replyID` mediumint(8) unsigned NOT NULL,
   `hidden` enum('0','1') NOT NULL DEFAULT '0',
   `link` varchar(255) NOT NULL,
+  `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `lang` (`lang`),
   KEY `category` (`board`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -336,7 +367,9 @@ CREATE TABLE IF NOT EXISTS `eps_user` (
   `reset` char(64) NOT NULL,
   `locked` datetime NOT NULL,
   `public` varchar(30) NOT NULL DEFAULT '0',
+  `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `lang` (`lang`),
   KEY `admin` (`admin`),
   KEY `account` (`account`,`password`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
@@ -356,11 +389,13 @@ CREATE TABLE IF NOT EXISTS `eps_wx_public` (
   `status`    enum('wait', 'normal') NOT NULL,
   `certified` enum('1', '0') NOT NULL DEFAULT '0',
   `addedDate` datetime NOT NULL,
-  PRIMARY KEY (`id`)
+  `lang` char(30) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `lang` (`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_wx_response`;
-CREATE TABLE `eps_wx_response` (
+CREATE TABLE IF NOT EXISTS `eps_wx_response` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
   `public` smallint(3) NOT NULL,
   `key` varchar(100) NOT NULL,
@@ -368,12 +403,14 @@ CREATE TABLE `eps_wx_response` (
   `type` enum('text','news','link') NOT NULL DEFAULT 'text',
   `source` varchar(100) NOT NULL,
   `content` text NOT NULL,
+  `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `key` (`public`,`key`)
+  KEY `lang` (`lang`),
+  UNIQUE KEY `key` (`public`,`key`,`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_wx_message`;
-CREATE TABLE `eps_wx_message` (
+CREATE TABLE IF NOT EXISTS `eps_wx_message` (
   `id` mediumint(10) unsigned NOT NULL AUTO_INCREMENT,
   `public` smallint(3) NOT NULL,
   `wid` char(64) NOT NULL,
@@ -384,22 +421,96 @@ CREATE TABLE `eps_wx_message` (
   `type` char(30) NOT NULL,
   `replied` tinyint(3) NOT NULL DEFAULT '0',
   `time` datetime NOT NULL,
-  PRIMARY KEY (`id`)
+  `lang` char(30) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `lang` (`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- Insert data into `eps_layout`;
-INSERT INTO `eps_layout` (`page`, `region`, `blocks`, `template`) VALUES
-('all', 'top', '[{"id":"12","grid":"","titleless":0,"borderless":0}]', 'default'),
-('index_index', 'top', '[{"id":"5","grid":"","titleless":0,"borderless":0}]', 'default'),
-('index_index', 'middle', '[{"id":3,"grid":12,"titleless":0,"borderless":0},{"id":"10","grid":4,"titleless":0,"borderless":0},{"id":"1","grid":4,"titleless":0,"borderless":0},{"id":"9","grid":4,"titleless":0,"borderless":0}]', 'default'),
-('index_index', 'bottom', '[{"id":"11","grid":"","titleless":0,"borderless":0}]', 'default'),
-('company_index', 'side', '[{"id":"9","grid":"","titleless":0,"borderless":0},{"id":"13","grid":"","titleless":0,"borderless":0}]', 'default'),
-('article_browse', 'side', '[{"id":"6","grid":"","titleless":0,"borderless":0},{"id":"9","grid":"","titleless":0,"borderless":0}]', 'default'),
-('article_view', 'side', '[{"id":"6","grid":"","titleless":0,"borderless":0},{"id":"9","grid":"","titleless":0,"borderless":0}]', 'default'),
-('product_browse', 'side', '[{"id":"4","grid":"","titleless":0,"borderless":0},{"id":"7","grid":"","titleless":0,"borderless":0},{"id":"9","grid":"","titleless":0,"borderless":0}]', 'default'),
-('product_view', 'side', '[{"id":"4","grid":"","titleless":0,"borderless":0},{"id":"7","grid":"","titleless":0,"borderless":0},{"id":"9","grid":"","titleless":0,"borderless":0}]', 'default'),
-('message_index', 'side', '[{"id":"9","grid":"","titleless":0,"borderless":0}]', 'default'),
-('blog_index', 'side', '[{"id":"8","grid":"","titleless":0,"borderless":0}]', 'default'),
-('blog_view', 'side', '[{"id":"8","grid":"","titleless":0,"borderless":0}]', 'default'),
-('page_index', 'side', '[{"id":"2","grid":"","titleless":0,"borderless":0},{"id":"9","grid":"","titleless":0,"borderless":0}]', 'default'),
-('page_view', 'side', '[{"id":"2","grid":"","titleless":0,"borderless":0},{"id":"9","grid":"","titleless":0,"borderless":0}]', 'default');
+INSERT INTO `eps_layout` (`page`, `region`, `blocks`, `template`,`lang`) VALUES
+('all', 'top', '[{"id":"12","grid":"","titleless":0,"borderless":0}]', 'default','zh-cn'),
+('index_index', 'top', '[{"id":"5","grid":"","titleless":0,"borderless":0}]', 'default','zh-cn'),
+('index_index', 'middle', '[{"id":"3","grid":12,"titleless":0,"borderless":0},{"id":"10","grid":4,"titleless":0,"borderless":0},{"id":"1","grid":4,"titleless":0,"borderless":0},{"id":"9","grid":4,"titleless":0,"borderless":0}]', 'default','zh-cn'),
+('index_index', 'bottom', '[{"id":"11","grid":"","titleless":0,"borderless":0}]', 'default','zh-cn'),
+('company_index', 'side', '[{"id":"9","grid":"","titleless":0,"borderless":0},{"id":"13","grid":"","titleless":0,"borderless":0}]', 'default','zh-cn'),
+('article_browse', 'side', '[{"id":"6","grid":"","titleless":0,"borderless":0},{"id":"9","grid":"","titleless":0,"borderless":0}]', 'default','zh-cn'),
+('article_view', 'side', '[{"id":"6","grid":"","titleless":0,"borderless":0},{"id":"9","grid":"","titleless":0,"borderless":0}]', 'default','zh-cn'),
+('product_browse', 'side', '[{"id":"4","grid":"","titleless":0,"borderless":0},{"id":"7","grid":"","titleless":0,"borderless":0},{"id":"9","grid":"","titleless":0,"borderless":0}]', 'default','zh-cn'),
+('product_view', 'side', '[{"id":"4","grid":"","titleless":0,"borderless":0},{"id":"7","grid":"","titleless":0,"borderless":0},{"id":"9","grid":"","titleless":0,"borderless":0}]', 'default','zh-cn'),
+('message_index', 'side', '[{"id":"9","grid":"","titleless":0,"borderless":0}]', 'default','zh-cn'),
+('blog_index', 'side', '[{"id":"8","grid":"","titleless":0,"borderless":0}]', 'default','zh-cn'),
+('blog_view', 'side', '[{"id":"8","grid":"","titleless":0,"borderless":0}]', 'default','zh-cn'),
+('page_index', 'side', '[{"id":"2","grid":"","titleless":0,"borderless":0},{"id":"9","grid":"","titleless":0,"borderless":0}]', 'default','zh-cn'),
+('page_view', 'side', '[{"id":"2","grid":"","titleless":0,"borderless":0},{"id":"9","grid":"","titleless":0,"borderless":0}]', 'default','zh-cn'),
+('all', 'top', '[{"id":"112","grid":"","titleless":0,"borderless":0}]', 'default','en'),
+('index_index', 'top', '[{"id":"105","grid":"","titleless":0,"borderless":0}]', 'default','en'),
+('index_index', 'middle', '[{"id":"103","grid":12,"titleless":0,"borderless":0},{"id":"110","grid":4,"titleless":0,"borderless":0},{"id":"101","grid":4,"titleless":0,"borderless":0},{"id":"109","grid":4,"titleless":0,"borderless":0}]', 'default','en'),
+('index_index', 'bottom', '[{"id":"111","grid":"","titleless":0,"borderless":0}]', 'default','en'),
+('company_index', 'side', '[{"id":"109","grid":"","titleless":0,"borderless":0},{"id":"113","grid":"","titleless":0,"borderless":0}]', 'default','en'),
+('article_browse', 'side', '[{"id":"106","grid":"","titleless":0,"borderless":0},{"id":"109","grid":"","titleless":0,"borderless":0}]', 'default','en'),
+('article_view', 'side', '[{"id":"106","grid":"","titleless":0,"borderless":0},{"id":"109","grid":"","titleless":0,"borderless":0}]', 'default','en'),
+('product_browse', 'side', '[{"id":"104","grid":"","titleless":0,"borderless":0},{"id":"107","grid":"","titleless":0,"borderless":0},{"id":"109","grid":"","titleless":0,"borderless":0}]', 'default','en'),
+('product_view', 'side', '[{"id":"104","grid":"","titleless":0,"borderless":0},{"id":"107","grid":"","titleless":0,"borderless":0},{"id":"109","grid":"","titleless":0,"borderless":0}]', 'default','en'),
+('message_index', 'side', '[{"id":"109","grid":"","titleless":0,"borderless":0}]', 'default','en'),
+('blog_index', 'side', '[{"id":"108","grid":"","titleless":0,"borderless":0}]', 'default','en'),
+('blog_view', 'side', '[{"id":"108","grid":"","titleless":0,"borderless":0}]', 'default','en'),
+('page_index', 'side', '[{"id":"102","grid":"","titleless":0,"borderless":0},{"id":"109","grid":"","titleless":0,"borderless":0}]', 'default','en'),
+('page_view', 'side', '[{"id":"102","grid":"","titleless":0,"borderless":0},{"id":"109","grid":"","titleless":0,"borderless":0}]', 'default','en'),
+('all', 'top', '[{"id":"212","grid":"","titleless":0,"borderless":0}]', 'default','zh-tw'),
+('index_index', 'top', '[{"id":"205","grid":"","titleless":0,"borderless":0}]', 'default','zh-tw'),
+('index_index', 'middle', '[{"id":"203","grid":12,"titleless":0,"borderless":0},{"id":"210","grid":4,"titleless":0,"borderless":0},{"id":"201","grid":4,"titleless":0,"borderless":0},{"id":"209","grid":4,"titleless":0,"borderless":0}]', 'default','zh-tw'),
+('index_index', 'bottom', '[{"id":"211","grid":"","titleless":0,"borderless":0}]', 'default','zh-tw'),
+('company_index', 'side', '[{"id":"209","grid":"","titleless":0,"borderless":0},{"id":"213","grid":"","titleless":0,"borderless":0}]', 'default','zh-tw'),
+('article_browse', 'side', '[{"id":"206","grid":"","titleless":0,"borderless":0},{"id":"209","grid":"","titleless":0,"borderless":0}]', 'default','zh-tw'),
+('article_view', 'side', '[{"id":"206","grid":"","titleless":0,"borderless":0},{"id":"209","grid":"","titleless":0,"borderless":0}]', 'default','zh-tw'),
+('product_browse', 'side', '[{"id":"204","grid":"","titleless":0,"borderless":0},{"id":"207","grid":"","titleless":0,"borderless":0},{"id":"209","grid":"","titleless":0,"borderless":0}]', 'default','zh-tw'),
+('product_view', 'side', '[{"id":"204","grid":"","titleless":0,"borderless":0},{"id":"207","grid":"","titleless":0,"borderless":0},{"id":"209","grid":"","titleless":0,"borderless":0}]', 'default','zh-tw'),
+('message_index', 'side', '[{"id":"209","grid":"","titleless":0,"borderless":0}]', 'default','zh-tw'),
+('blog_index', 'side', '[{"id":"208","grid":"","titleless":0,"borderless":0}]', 'default','zh-tw'),
+('blog_view', 'side', '[{"id":"208","grid":"","titleless":0,"borderless":0}]', 'default','zh-tw'),
+('page_index', 'side', '[{"id":"202","grid":"","titleless":0,"borderless":0},{"id":"209","grid":"","titleless":0,"borderless":0}]', 'default','zh-tw'),
+('page_view', 'side', '[{"id":"202","grid":"","titleless":0,"borderless":0},{"id":"209","grid":"","titleless":0,"borderless":0}]', 'default','zh-tw');
+
+-- Insert data into `eps_block`;
+INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) VALUES
+(1, 'latestArticle', '最新文章', '{"category":"0","limit":"7"}', 'default','zh-cn'),
+(2, 'hotArticle', '热门文章', '{"category":"0","limit":"7"}', 'default','zh-cn'),
+(3, 'latestProduct', '最新产品', '{"category":"0","limit":"3","image":"show"}', 'default','zh-cn'),
+(4, 'hotProduct', '热门产品', '{"category":"0","limit":"3","image":"show"}', 'default','zh-cn'),
+(5, 'slide', '幻灯片', '', 'default','zh-cn'),
+(6, 'articleTree', '文章分类', '{"showChildren":"0"}', 'default','zh-cn'),
+(7, 'productTree', '产品分类', '{"showChildren":"0"}', 'default','zh-cn'),
+(8, 'blogTree', '博客分类', '{"showChildren":"1"}', 'default','zh-cn'),
+(9, 'contact', '联系我们', '', 'default','zh-cn'),
+(10, 'about', '公司简介', '', 'default','zh-cn'),
+(11, 'links', '友情链接', '', 'default','zh-cn'),
+(12, 'header', '网站头部', '', 'default','zh-cn'),
+(13, 'followUs', '关注我们', '', 'default','zh-cn');
+INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) VALUES
+(101, 'latestArticle', 'Latest Article', '{"category":"0","limit":"7"}', 'default','en'),
+(102, 'hotArticle', 'Hot Article', '{"category":"0","limit":"7"}', 'default','en'),
+(103, 'latestProduct', 'Latest Product', '{"category":"0","limit":"3","image":"show"}', 'default','en'),
+(104, 'hotProduct', 'Hot Product', '{"category":"0","limit":"3","image":"show"}', 'default','en'),
+(105, 'slide', 'Slide', '', 'default','en'),
+(106, 'articleTree', 'Article Category', '{"showChildren":"0"}', 'default','en'),
+(107, 'productTree', 'Product Category', '{"showChildren":"0"}', 'default','en'),
+(108, 'blogTree', 'Blog Category', '{"showChildren":"1"}', 'default','en'),
+(109, 'contact', 'Contact Us', '', 'default','en'),
+(110, 'about', 'About Us', '', 'default','en'),
+(111, 'links', 'Link', '', 'default','en'),
+(112, 'header', 'Header', '', 'default','en'),
+(113, 'followUs', 'Follow Us', '', 'default','en');
+INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) VALUES
+(201, 'latestArticle', '最新文章', '{"category":"0","limit":"7"}', 'default','zh-tw'),
+(202, 'hotArticle', '熱門文章', '{"category":"0","limit":"7"}', 'default','zh-tw'),
+(203, 'latestProduct', '最新產品', '{"category":"0","limit":"3","image":"show"}', 'default','zh-tw'),
+(204, 'hotProduct', '熱門產品', '{"category":"0","limit":"3","image":"show"}', 'default','zh-tw'),
+(205, 'slide', '幻燈片', '', 'default','zh-tw'),
+(206, 'articleTree', '文章分類', '{"showChildren":"0"}', 'default','zh-tw'),
+(207, 'productTree', '產品分類', '{"showChildren":"0"}', 'default','zh-tw'),
+(208, 'blogTree', '博客分類', '{"showChildren":"1"}', 'default','zh-tw'),
+(209, 'contact', '聯繫我們', '', 'default','zh-tw'),
+(210, 'about', '公司簡介', '', 'default','zh-tw'),
+(211, 'links', '友情鏈接', '', 'default','zh-tw'),
+(212, 'header', '網站頭部', '', 'default','zh-tw'),
+(213, 'followUs', '關注我們', '', 'default','zh-tw');

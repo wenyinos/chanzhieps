@@ -58,14 +58,6 @@ class router
     private $tmpRoot;
 
     /**
-     * The root directory of cache.
-     * 
-     * @var string
-     * @access private
-     */
-    private $cacheRoot;
-
-    /**
      * The root directory of log.
      * 
      * @var string
@@ -286,7 +278,6 @@ class router
         $this->setCoreLibRoot();
         $this->setAppRoot($appName, $appRoot);
         $this->setTmpRoot();
-        $this->setCacheRoot();
         $this->setLogRoot();
         $this->setConfigRoot();
         $this->setModuleRoot();
@@ -307,6 +298,7 @@ class router
         $this->connectDB();
 
         $this->setClientLang();
+        $this->fixLangConfig();
         $this->loadLang('common');
         $this->setTimezone();
 
@@ -431,17 +423,6 @@ class router
     protected function setTmpRoot()
     {
         $this->tmpRoot = $this->appRoot . 'tmp' . DS;
-    }
-
-    /**
-     * Set the cache root.
-     * 
-     * @access protected
-     * @return void
-     */
-    protected function setCacheRoot()
-    {
-        $this->cacheRoot = $this->tmpRoot . 'cache' . DS;
     }
 
     /**
@@ -645,17 +626,6 @@ class router
     } 
 
     /**
-     * Get the $cacheRoot var
-     * 
-     * @access public
-     * @return string
-     */
-    public function getCacheRoot()
-    {
-        return $this->cacheRoot;
-    } 
-
-    /**
      * Get the $logRoot var
      * 
      * @access public
@@ -721,32 +691,64 @@ class router
      */
     public function setClientLang($lang = '')
     {
-        if(RUN_MODE == 'front') return $this->clientLang = $this->config->default->lang;
+        $result = $this->dbh->query("select value from " . TABLE_CONFIG . " where owner = 'system' and module = 'common' and section = 'site' and `key` = 'defaultLang'")->fetch();
+        $defaultLang = !empty($result->value) ? $result->value : $this->config->default->lang;
+
+        $result = $this->dbh->query("select value from " . TABLE_CONFIG . " where owner = 'system' and module = 'common' and section = 'site' and `key` = 'lang'")->fetch();
+        $enabledLangs = isset($result->value) ? $result->value : '';
+        $enabledLangs = explode(',', $enabledLangs);
+        if(empty($enabledLangs)) $enabledLangs = arraay_keys($this->config->langs);
+        if(!in_array($defaultLang, $enabledLangs)) $defaultLang = current($enabledLangs);
 
         if(!empty($lang))
         {
             $this->clientLang = $lang;
         }
+        elseif(RUN_MODE == 'front')
+        {
+            $flipedLangs = array_flip($this->config->langsShortcuts);
+            if($this->config->requestType == 'GET' and isset($_GET[$this->config->langVar])) $this->clientLang = $flipedLangs[$_GET[$this->config->langVar]];
+            if($this->config->requestType == 'PATH_INFO')
+            {
+                foreach($this->config->langsShortcuts as $language => $code)
+                {
+                    if(strpos(trim($_SERVER['REQUEST_URI'], '/'), $code) === 0) $this->clientLang = $language;
+                }
+            }
+        }
         elseif(isset($_COOKIE['lang']))
         {
             $this->clientLang = $_COOKIE['lang'];
-        }    
+        }
         elseif(RUN_MODE == 'admin' and isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
         {
             $this->clientLang = strpos($_SERVER['HTTP_ACCEPT_LANGUAGE'], ',') === false ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, strpos($_SERVER['HTTP_ACCEPT_LANGUAGE'], ','));
         }
 
-        if(!empty($this->clientLang))
+        if(!empty($this->clientLang) and in_array($this->clientLang, $enabledLangs)) 
         {
             $this->clientLang = strtolower($this->clientLang);
-            if(!isset($this->config->langs[$this->clientLang])) $this->clientLang = $this->config->default->lang;
         }
         else
         {
-            $this->clientLang = $this->config->default->lang;
+            $this->clientLang = $defaultLang;
         }
-
         setcookie('lang', $this->clientLang, $this->config->cookieLife, $this->config->cookiePath);
+
+        if(in_array($this->clientLang, $enabledLangs)) return $this->clientLang;
+    }
+
+    /**
+     * Set lang code.
+     * 
+     * @access public
+     * @return void
+     */
+    public function fixLangConfig()
+    {
+        $langCode = $this->clientLang == $this->config->default->lang ? '' : $this->config->langsShortcuts[$this->clientLang];
+        $this->config->langCode = $langCode;
+        $this->config->homeRoot = getHomeRoot();
     }
 
     /**
@@ -804,7 +806,12 @@ class router
         if($this->config->requestType == 'PATH_INFO')
         {
             $this->parsePathInfo();
+
+            $langCode = $this->config->langsShortcuts[$this->clientLang];
+            if(strpos($this->URI, $langCode) === 0) $this->URI = substr($this->URI, strlen($langCode) + 1);
+
             $this->URI = seo::parseURI($this->URI);
+
             $this->setRouteByPathInfo();
         }
         elseif($this->config->requestType == 'GET')
@@ -1067,7 +1074,8 @@ class router
     public function setRouteByPathInfo()
     {
         if(!empty($this->URI))
-        {
+        { 
+
             /* There's the request seperator, split the URI by it. */
             if(strpos($this->URI, '-') !== false)
             {
@@ -1147,6 +1155,7 @@ class router
         $defaultParams = array();
         $methodReflect = new reflectionMethod($className, $methodName);
 
+        if($this->config->requestType == 'GET') unset($_GET[$this->config->langVar]);
         foreach($methodReflect->getParameters() as $param)
         {
             $name = $param->getName();
