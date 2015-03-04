@@ -347,7 +347,7 @@ class upgradeModel extends model
 
                 $this->dao->insert(TABLE_BOOK)->data($article)->exec();
                 $articleID = $this->dao->lastInsertID();
-                $this->dao->update(TABLE_FILE)
+                $this->dao->setAutoLang(false)->update(TABLE_FILE)
                     ->set('objectType')->eq('book')
                     ->set('objectID')->eq($articleID)
                     ->where('objectType')->like('book_%')
@@ -376,7 +376,7 @@ class upgradeModel extends model
     {
         $this->loadModel('file');
 
-        $files = $this->dao->select('*')->from(TABLE_FILE)->fetchAll();
+        $files = $this->dao->setAutoLang(false)->select('*')->from(TABLE_FILE)->fetchAll();
 
         foreach($files as $file)
         {

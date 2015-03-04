@@ -74,7 +74,7 @@ class fileModel extends model
     public function getByObject($objectType, $objectID, $isImage = null)
     {
         /* Get files group by objectID. */
-        $files = $this->dao->select('*')
+        $files = $this->dao->setAutoLang(false)->select('*')
             ->from(TABLE_FILE)
             ->where('objectType')->eq($objectType)
             ->andWhere('objectID')->in($objectID)
@@ -141,7 +141,7 @@ class fileModel extends model
      */
     public function getByID($fileID)
     {
-        $file = $this->dao->findById($fileID)->from(TABLE_FILE)->fetch();
+        $file = $this->dao->setAutoLang(false)->findById($fileID)->from(TABLE_FILE)->fetch();
         $file->realPath = $this->savePath . $file->pathname;
         $file->webPath  = $this->webPath . $file->pathname;
         return $this->processFile($file);
@@ -184,6 +184,7 @@ class fileModel extends model
             $file['extra']      = $extra;
             $file['width']      = $imageSize['width'];
             $file['height']     = $imageSize['height'];
+            $file['lang']       = 'all';
             unset($file['tmpname']);
             $this->dao->insert(TABLE_FILE)->data($file)->exec();
             $fileTitles[$this->dao->lastInsertId()] =  $file['title'];
@@ -395,7 +396,8 @@ class fileModel extends model
         $this->replaceFile($fileID);
         
         $fileInfo = fixer::input('post')->remove('upFile')->get();
-        $this->dao->update(TABLE_FILE)->data($fileInfo)->autoCheck()->batchCheck($this->config->file->require->edit, 'notempty')->where('id')->eq($fileID)->exec();
+        $fileInfo->lang = 'all';
+        $this->dao->setAutoLang(false)->update(TABLE_FILE)->data($fileInfo)->autoCheck()->batchCheck($this->config->file->require->edit, 'notempty')->where('id')->eq($fileID)->exec();
     }
     
     /**
@@ -409,7 +411,7 @@ class fileModel extends model
         if($files = $this->getUpload($postName))
         {
             $file      = $files[0];
-            $fileInfo  = $this->dao->select('pathname, extension')->from(TABLE_FILE)->where('id')->eq($fileID)->fetch();
+            $fileInfo  = $this->dao->setAutoLang(false)->select('pathname, extension')->from(TABLE_FILE)->where('id')->eq($fileID)->fetch();
             $extension = strtolower($file['extension']);
 
             if($extension != $fileInfo->extension)
@@ -440,7 +442,8 @@ class fileModel extends model
             $fileInfo->size      = $file['size'];
             $fileInfo->width     = $imageSize['width'];
             $fileInfo->height    = $imageSize['height'];
-            $this->dao->update(TABLE_FILE)->data($fileInfo)->where('id')->eq($fileID)->exec();
+            $fileInfo->lang      = 'all';
+            $this->dao->setAutoLang(false)->update(TABLE_FILE)->data($fileInfo)->where('id')->eq($fileID)->exec();
             $this->loadModel('setting')->setItems('system.common.site', array('lastUpload' => time()));
             return true;
         }
@@ -529,6 +532,7 @@ class fileModel extends model
             $imageSize      = $this->getImageSize($this->savePath . $file['pathname']);
             $file['width']  = $imageSize['width'];
             $file['height'] = $imageSize['height'];
+            $file['lang']   = 'all';
 
             $this->dao->insert(TABLE_FILE)->data($file)->exec();
             $_SESSION['album'][$uid][] = $this->dao->lastInsertID();
@@ -593,9 +597,10 @@ class fileModel extends model
         $data = new stdclass();
         $data->objectID   = $objectID;
         $data->objectType = $objectType;
+        $data->lang       = 'all';
         if(isset($_SESSION['album'][$uid]) and $_SESSION['album'][$uid])
         {
-            $this->dao->update(TABLE_FILE)->data($data)->where('id')->in($_SESSION['album'][$uid])->exec();
+            $this->dao->setAutoLang(false)->update(TABLE_FILE)->data($data)->where('id')->in($_SESSION['album'][$uid])->exec();
             if(dao::isError()) return false;
             return !dao::isError(); 
         }
@@ -620,7 +625,7 @@ class fileModel extends model
             $pathname = str_replace($this->webPath, '', $pathname);
             $pathname = str_replace('\?fromSpace=y', '', $pathname);
 
-            $data = $this->dao->select('*')->from(TABLE_FILE)->where('pathname')->eq($pathname)->fetch();
+            $data = $this->dao->setAutoLang(false)->select('*')->from(TABLE_FILE)->where('pathname')->eq($pathname)->fetch();
             if(!$data) $data = new stdclass();
 
             $data->pathname   = $pathname;
@@ -630,8 +635,9 @@ class fileModel extends model
             $data->addedBy    = $this->app->user->account;
             $data->addedDate  = helper::now();
             $data->editor     = 1;
+            $data->lang       = 'all';
 
-            $fileExists = $this->dao->select('count(*) as count')->from(TABLE_FILE)
+            $fileExists = $this->dao->setAutoLang(false)->select('count(*) as count')->from(TABLE_FILE)
                 ->where('objectType')->eq($objectType)
                 ->andWhere('objectID')->eq($objectID)
                 ->andWhere('pathname')->eq($pathname)

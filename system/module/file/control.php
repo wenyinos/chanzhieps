@@ -72,6 +72,7 @@ class file extends control
             $file['addedBy']   = $this->app->user->account;
             $file['addedDate'] = helper::now();
             $file['editor']    = 1;
+            $file['lang']      = 'all';
             unset($file['tmpname']);
             $this->dao->insert(TABLE_FILE)->data($file)->exec();
 
