@@ -35,6 +35,10 @@
           <td><?php echo html::input('name', $this->config->site->name, "class='form-control'");?></td><td></td>
         </tr>
         <tr>
+          <th><?php echo $lang->site->domain;?></th> 
+          <td><?php echo html::input('domain',  isset($this->config->site->domain) ? $this->config->site->domain : '', "class='form-control'");?></td><td></td>
+        </tr>
+        <tr>
           <th><?php echo $lang->site->module;?></th>
           <td><?php echo html::checkbox('modules', $lang->site->moduleAvailable, isset($this->config->site->modules) ? $this->config->site->modules : '');?></td><td></td>
         </tr>
