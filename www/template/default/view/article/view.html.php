@@ -19,7 +19,7 @@ js::execute($article->js);
         <dl class='dl-inline'>
           <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAddedDate, formatTime($article->addedDate));?>'><i class='icon-time icon-large'></i> <?php echo formatTime($article->addedDate); ?></dd>
           <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAuthor, $article->author);?>'><i class='icon-user icon-large'></i> <?php echo $article->author; ?></dd>
-          <?php if($article->source != 'original'):?>
+          <?php if($article->source != 'original' and $article->copyURL != ''):?>
           <dt><?php echo $lang->article->sourceList[$article->source] . $lang->colon;?></dt>
           <dd><?php $article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite); ?></dd>
           <?php else: ?>
@@ -75,7 +75,7 @@ js::execute($article->js);
         </ul>
       </footer>
     </div>
-    <?php if(isset($this->config->site->modules) and strpos($this->config->site->modules, 'message') !== false):?>
+    <?php if(commonModel::isAvailable('message')):?>
     <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=article&objectID={$article->id}");?></div>
     <?php endif;?>
   </div>

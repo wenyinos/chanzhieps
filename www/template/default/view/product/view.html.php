@@ -117,10 +117,12 @@ js::execute($product->js);
         <?php $this->loadModel('file')->printFiles($product->files);?>
       </div>
     </div>
+    <?php if(commonModel::isAvailable('message')):?>
     <div id='comments'>
-      <div id='commentBox'></div>
+      <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=product&objectID={$product->id}");?></div>
       <?php echo html::a('', '', "name='comment'");?>
     </div>
+    <?php endif;?>
   </div>
   <div class='col-md-3 col-side'>
     <side class='page-side'><?php $this->block->printRegion($layouts, 'product_view', 'side');?></side>
