@@ -297,6 +297,7 @@ class router
         $this->sendHeader();
         $this->connectDB();
 
+        $this->fixDomain();
         $this->setClientLang();
         $this->fixLangConfig();
         $this->loadLang('common');
@@ -678,6 +679,18 @@ class router
     public function getTplRoot()
     {
         return $this->tplRoot;
+    }
+
+    public function fixDomain()
+    {
+        $result = $this->dbh->query("select value from " . TABLE_CONFIG . " where owner = 'system' and module = 'common' and section = 'site' and `key` = 'domain'")->fetch();
+        $mainDomain = !empty($result->value) ? $result->value : '';
+        $webRoot = getWebRoot(true);
+        $currentURI = rtrim($webRoot, '/') . $this->server->request_uri;
+        if($mainDomain and strpos($webRoot, $mainDomain) == false)
+        {
+            header301(str_replace($this->server->http_host, $mainDomain, $currentURI));
+        }
     }
 
     //-------------------- Client environment related functions --------------------//

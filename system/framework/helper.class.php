@@ -685,3 +685,9 @@ function zget($var, $key, $valueWhenNone = '', $valueWhenExists = '')
     if($valueWhenNone) return $valueWhenNone;
     return $key;
 }
+
+function header301($url)
+{
+    header('HTTP/1.1 301 Moved Permanently');
+    die(header('Location:' . $url));
+}
