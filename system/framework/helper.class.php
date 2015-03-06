@@ -736,7 +736,7 @@ function processArrayEvils($params)
             foreach($values as $key => $value)
             {
                 $params[$item][$key] = processEvil($value);
-                if(processEvil($key) != $item) unset($params[$item][$key]);
+                if(processEvil($key) != $key) unset($params[$item][$key]);
             }
         }
     }
