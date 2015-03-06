@@ -697,8 +697,15 @@ class router
         return $this->tplRoot;
     }
 
+    /**
+     * Check domain exisits and header 301.
+     * 
+     * @access public
+     * @return void
+     */
     public function fixDomain()
     {
+        if(!$this->config->installed) return true;
         $result = $this->dbh->query("select value from " . TABLE_CONFIG . " where owner = 'system' and module = 'common' and section = 'site' and `key` = 'domain'")->fetch();
         $mainDomain = !empty($result->value) ? $result->value : '';
         $webRoot = getWebRoot(true);
@@ -720,14 +727,22 @@ class router
      */
     public function setClientLang($lang = '')
     {
-        $result = $this->dbh->query("select value from " . TABLE_CONFIG . " where owner = 'system' and module = 'common' and section = 'site' and `key` = 'defaultLang'")->fetch();
-        $defaultLang = !empty($result->value) ? $result->value : $this->config->default->lang;
+        if(RUN_MODE != 'install')
+        {
+            $result = $this->dbh->query("select value from " . TABLE_CONFIG . " where owner = 'system' and module = 'common' and section = 'site' and `key` = 'defaultLang'")->fetch();
+            $defaultLang = !empty($result->value) ? $result->value : $this->config->default->lang;
 
-        $result = $this->dbh->query("select value from " . TABLE_CONFIG . " where owner = 'system' and module = 'common' and section = 'site' and `key` = 'lang'")->fetch();
-        $enabledLangs = isset($result->value) ? $result->value : '';
-        $enabledLangs = explode(',', $enabledLangs);
-        if(empty($enabledLangs)) $enabledLangs = array_keys($this->config->langs);
-        if(!in_array($defaultLang, $enabledLangs)) $defaultLang = current($enabledLangs);
+            $result = $this->dbh->query("select value from " . TABLE_CONFIG . " where owner = 'system' and module = 'common' and section = 'site' and `key` = 'lang'")->fetch();
+            $enabledLangs = isset($result->value) ? $result->value : '';
+            $enabledLangs = explode(',', $enabledLangs);
+            if(empty($enabledLangs)) $enabledLangs = array_keys($this->config->langs);
+            if(!in_array($defaultLang, $enabledLangs)) $defaultLang = current($enabledLangs);
+        }
+        else
+        {
+            $defaultLang  = $this->config->default->lang;
+            $enabledLangs = array_keys($this->config->langs);
+        }
 
         if(!empty($lang))
         {
