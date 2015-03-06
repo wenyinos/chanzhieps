@@ -372,9 +372,12 @@ class file extends control
                 }
                 else
                 {
-                    if(strpos($filename, 'f_') === false) continue;
                     $fileExtension = $this->file->getExtension($file);
-                    if(in_array($fileExtension, $this->config->file->imageExtensions, true) === false) continue;
+                    if(!in_array($fileExtension, $this->config->file->imageExtensions, true))
+                    {
+                        unset($fileList[$i]);
+                        continue;
+                    }
 
                     $fileList[$i]['is_dir']    = false;
                     $fileList[$i]['has_file']  = false;
