@@ -19,7 +19,7 @@ js::execute($page->js);
       <section class='article-content'>
         <?php echo $page->content;?>
       </section>
-      <?php if(!empty($page->keywords)):?>
+      <?php if(!empty($page->files)):?>
       <section><?php $this->loadModel('file')->printFiles($page->files);?></section>
       <?php endif;?>
       <?php if($page->keywords):?>
