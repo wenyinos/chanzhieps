@@ -604,7 +604,7 @@ function getHomeRoot($langCode = '')
     global $config;
 
     $langCode = $langCode == '' ? $config->langCode : $langCode;
-    if($langCode == $config->langsShortcuts[$config->default->lang]) return $config->webRoot;
+    if($langCode == $config->langsShortcuts[$config->site->defaultLang]) return $config->webRoot;
     $homeRoot = $config->webRoot;
 
     if($langCode and $config->requestType == 'PATH_INFO') $homeRoot = $config->webRoot . $langCode; 
