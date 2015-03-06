@@ -109,6 +109,18 @@ class site extends control
             $allowedFiles = trim(strtolower($this->post->allowedFiles), ',');
             $allowedFiles = str_replace($dangers, '', $allowedFiles);
             $allowedFiles = seo::unify($allowedFiles, ',');
+            if(!preg_match('/^[a-z0-9,]+$/', $allowedFiles)) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+
+            foreach ($allowedFiles as $extension)
+            {  
+                if(strlen($extension) > 5) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+            }
+
+            foreach ($dangers as $danger)
+            {  
+                if(strpos($allowedFiles, $danger) !== false) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+            }
+
             $allowedFiles = ',' . $allowedFiles . ','; 
             $fileConfig   = array('allowed' => $allowedFiles);
             $this->loadModel('setting')->setItems('system.common.file', $fileConfig);

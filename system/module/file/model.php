@@ -104,7 +104,7 @@ class fileModel extends model
         $file->smallURL  = '';
         $file->isImage   = false;
 
-        if(in_array(strtolower($file->extension), $this->config->file->imageExtensions) !== false)
+        if(in_array(strtolower($file->extension), $this->config->file->imageExtensions, true) !== false)
         {
             $file->middleURL = $this->webPath . str_replace('f_', 'm_', $file->pathname);
             $file->smallURL  = $this->webPath . str_replace('f_', 's_', $file->pathname);
@@ -162,16 +162,22 @@ class fileModel extends model
         $now        = helper::now();
         $files      = $this->getUpload();
 
-        $this->app->loadClass('pclzip', true);
         $imageSize = array('width' => 0, 'height' => 0);
 
         foreach($files as $id => $file)
         {   
-            if(!move_uploaded_file($file['tmpname'], $this->savePath . $file['pathname'])) return false;
+            if(strpos($this->config->file->allowed, ',' . $file['extension'] . ',') === false)
+            {
+                if(!move_uploaded_file($file['tmpname'], $this->savePath . $file['pathname'] . '.txt')) return false;
+                $file['pathname'] .= '.txt';
+                $file = $this->saveZip($file);
+            }
+            else
+            {
+                if(!move_uploaded_file($file['tmpname'], $this->savePath . $file['pathname'])) return false;
+            }          
 
-            if(strpos($this->config->file->allowed, ',' . $file['extension'] . ',') === false) $file = $this->saveZip($file);
-
-            if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions))
+            if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions, true))
             {
                 $this->compressImage($this->savePath . $file['pathname']);
                 $imageSize = $this->getImageSize($this->savePath . $file['pathname']);
@@ -187,14 +193,14 @@ class fileModel extends model
             $file['lang']       = 'all';
             unset($file['tmpname']);
             $this->dao->insert(TABLE_FILE)->data($file)->exec();
-            $fileTitles[$this->dao->lastInsertId()] =  $file['title'];
+            $fileTitles[$this->dao->lastInsertId()] = $file['title'];
         }
         $this->loadModel('setting')->setItems('system.common.site', array('lastUpload' => time()));
         return $fileTitles;
     }
 
     /**
-     * Save dangerous files to zip . 
+     * Save dangerous files to zip. 
      * 
      * @param  array    $file 
      * @access public
@@ -202,23 +208,23 @@ class fileModel extends model
      */
     public function saveZip($file)
     {
+        $this->app->loadClass('pclzip', true);
         $pathInfo = pathinfo($file['pathname']);
 
         $uploadedFile = $this->savePath . $file['pathname'];
-        $gbkName  = function_exists('iconv') ? iconv('utf8', 'gbk', $file['title']) : $file['title'];
-        $tmpFile  = str_replace($pathInfo['filename'], md5(uniqid()) . DS . $gbkName, $uploadedFile);
+        $gbkName      = function_exists('iconv') ? iconv('utf-8', 'gbk', $file['title']) : $file['title'];
+        $tmpFile      = dirname($file['tmpname']) . DS . md5(uniqid()) . DS . $gbkName . '.' . $file['extension'];
 
         mkdir(dirname($tmpFile));
         copy($uploadedFile, $tmpFile);
-
-        $archive = new PclZip($this->savePath . $file['pathname'] . '.zip');
+        $archive = new PclZip($this->savePath . substr($file['pathname'], 0, -4) . '.zip');
         $list    = $archive->create($tmpFile, PCLZIP_OPT_REMOVE_ALL_PATH);
         if($list != 0)
         {
-            unlink($this->savePath . $file['pathname']);
+            unlink($uploadedFile);
             unlink($tmpFile);
             rmdir(dirname($tmpFile));
-            $file['pathname']  = $file['pathname'] . '.zip';
+            $file['pathname']  = substr($file['pathname'], 0, 4) . '.zip';
             $file['extension'] = 'zip';
         }
 
@@ -312,7 +318,7 @@ class fileModel extends model
     public function getExtension($filename)
     {
         $extension = strtolower(trim(pathinfo($filename, PATHINFO_EXTENSION)));
-        if(empty($extension)) return 'txt';
+        if(empty($extension) or !preg_match('/^[a-z0-9]+$/', $extension) or strlen($extension) > 5) return 'txt';
         return $extension;
     }
 
@@ -394,12 +400,14 @@ class fileModel extends model
     public function edit($fileID)
     {
         $this->replaceFile($fileID);
-        
         $fileInfo = fixer::input('post')->remove('upFile')->get();
+        if(!validater::checkFileName($fileInfo->title)) return false;
         $fileInfo->lang = 'all';
+        $this->dao->update(TABLE_FILE)->data($fileInfo)->autoCheck()->batchCheck($this->config->file->require->edit, 'notempty')->where('id')->eq($fileID)->exec();
         $this->dao->setAutoLang(false)->update(TABLE_FILE)->data($fileInfo)->autoCheck()->batchCheck($this->config->file->require->edit, 'notempty')->where('id')->eq($fileID)->exec();
+
     }
-    
+
     /**
      * Replace a file.
      * 
@@ -430,7 +438,18 @@ class fileModel extends model
 
             $realPathName = $this->savePath . $fileInfo->pathname;
             $imageSize    = array('width' => 0, 'height' => 0);
-            move_uploaded_file($file['tmpname'], $realPathName);
+            if(strpos($this->config->file->allowed, ',' . $extension . ',') === false)
+            {
+                if(!move_uploaded_file($file['tmpname'], $this->savePath . $file['pathname'] . '.txt')) return false;
+                $file['pathname'] .= '.txt';
+                $file = $this->saveZip($file); 
+            }
+            else
+            {
+                if(!move_uploaded_file($file['tmpname'], $this->savePath . $file['pathname'])) return false;
+            }
+
+            if(strpos($this->config->file->allowed, ',' . $file['extension'] . ',') === false) $file = $this->saveZip($file);
             if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions))
             {
                 $this->compressImage($realPathName);
