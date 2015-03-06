@@ -598,7 +598,7 @@ function setGo2Top()
         if($(window).scrollTop() < 100) $('#go2top').fadeOut(); else $('#go2top').fadeIn();
     }).resize(function ()
     {
-        var parent = $('#go2top').closest('.page-container');
+        var parent = $('#go2top').closest('.page-container').find('.page-content');
         $('#go2top').css('left', parent.offset().left + parent.width() + 30);
         if(parent.width() == $('.m-index-index').width()) $('#go2top').css('left', parent.width() - 90);
     }).scroll().resize();
