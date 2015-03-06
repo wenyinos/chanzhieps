@@ -686,8 +686,59 @@ function zget($var, $key, $valueWhenNone = '', $valueWhenExists = '')
     return $key;
 }
 
+/**
+ * Header lcoation 301. 
+ * 
+ * @param  string    $url 
+ * @access public
+ * @return void
+ */
 function header301($url)
 {
     header('HTTP/1.1 301 Moved Permanently');
     die(header('Location:' . $url));
+}
+
+/**
+ * Process evil params.
+ * 
+ * @param  string    $value 
+ * @access public
+ * @return void
+ */
+function processEvil($value)
+{
+    $value       = (string) $value;
+    $evils       = array('eval', 'exec', 'passthru', 'proc_open', 'shell_exec', 'system', '$$');
+    $gibbedEvils = array('e v a l', 'e x e c', ' p a s s t h r u', ' p r o c _ o p e n', 's h e l l _ e x e c', 's y s t e m', '$ $');
+    return str_ireplace($evils, $gibbedEvils, $value);
+}
+
+/**
+ * Process array evils.
+ * 
+ * @param  array    $params 
+ * @access public
+ * @return array
+ */
+function processArrayEvils($params)
+{
+    $params = (array) $params;
+    foreach($params as $item => $values)
+    {
+        if(!is_array($values))
+        {
+            $params[$item] = processEvil($values);
+            if(processEvil($item) != $item) unset($params[$item]);
+        }
+        else
+        {
+            foreach($values as $key => $value)
+            {
+                $params[$item][$key] = processEvil($value);
+                if(processEvil($key) != $item) unset($params[$item][$key]);
+            }
+        }
+    }
+    return $params;
 }

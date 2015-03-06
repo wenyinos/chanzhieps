@@ -285,6 +285,7 @@ class router
         $this->setDataRoot();
         $this->setTplRoot();
 
+        $this->filterSuperVars();
         $this->setSuperVars();
 
         $this->loadConfig('common');
@@ -490,6 +491,21 @@ class router
     protected function setTplRoot()
     {
         $this->tplRoot = $this->wwwRoot . 'template' . DS;
+    }
+
+    /**
+     * Filter superVars.
+     * 
+     * @access public
+     * @return void
+     */
+    public function filterSuperVars()
+    {
+        $_POST   = processArrayEvils($_POST);
+        $_GET    = processArrayEvils($_GET);
+        $_COOKIE = processArrayEvils($_COOKIE);
+        unset($_GLOBALS);
+        unset($_REQUEST);
     }
 
     /**
@@ -710,7 +726,7 @@ class router
         $result = $this->dbh->query("select value from " . TABLE_CONFIG . " where owner = 'system' and module = 'common' and section = 'site' and `key` = 'lang'")->fetch();
         $enabledLangs = isset($result->value) ? $result->value : '';
         $enabledLangs = explode(',', $enabledLangs);
-        if(empty($enabledLangs)) $enabledLangs = arraay_keys($this->config->langs);
+        if(empty($enabledLangs)) $enabledLangs = array_keys($this->config->langs);
         if(!in_array($defaultLang, $enabledLangs)) $defaultLang = current($enabledLangs);
 
         if(!empty($lang))
