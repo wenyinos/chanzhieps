@@ -4,9 +4,6 @@ js::import($jsRoot . 'md5.js');
 js::set('scriptName', $_SERVER['SCRIPT_NAME']);
 js::set('random', $this->session->random);
 ?>
-<style>
-html {background: #0a67fb; box-shadow: inset 0 350px 350px #0354d4; position: absolute; width: 100%; height: 100%} body {background: none}
-</style>
 <div class='container'>
   <div id='adminLogin'>
     <div id='siteName'>
