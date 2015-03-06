@@ -705,7 +705,7 @@ class router
      */
     public function fixDomain()
     {
-        if(RUN_MODE == 'install' or RUN_MODE == 'upgrade') return true;
+        if(RUN_MODE == 'install' or RUN_MODE == 'upgrade' or !$this->config->installed) return true;
         $result = $this->dbh->query("select value from " . TABLE_CONFIG . " where owner = 'system' and module = 'common' and section = 'site' and `key` = 'domain'")->fetch();
         $mainDomain = !empty($result->value) ? $result->value : '';
         $webRoot = getWebRoot(true);
@@ -727,7 +727,7 @@ class router
      */
     public function setClientLang($lang = '')
     {
-        if(RUN_MODE != 'install' and RUN_MODE != 'upgrade')
+        if(RUN_MODE != 'install' and RUN_MODE != 'upgrade'  and $this->config->installed)
         {
             $result = $this->dbh->query("select value from " . TABLE_CONFIG . " where owner = 'system' and module = 'common' and section = 'site' and `key` = 'defaultLang'")->fetch();
             $defaultLang = !empty($result->value) ? $result->value : $this->config->default->lang;
