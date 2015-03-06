@@ -374,6 +374,8 @@ class file extends control
                 {
                     if(strpos($filename, 'f_') === false) continue;
                     $fileExtension = $this->file->getExtension($file);
+                    if(in_array($fileExtension, $this->config->file->imageExtensions, true) === false) continue;
+
                     $fileList[$i]['is_dir']    = false;
                     $fileList[$i]['has_file']  = false;
                     $fileList[$i]['filesize']  = filesize($file);
