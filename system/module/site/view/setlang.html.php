@@ -22,7 +22,9 @@
         </tr>
         <tr>
           <th><?php echo $lang->site->defaultLang;?></th>
-          <td class='w-p20'><?php echo html::select('defaultLang', $config->langs, isset($this->config->site->defaultLang) ? $this->config->site->defaultLang : 'zh-cn', "class='form-control'");?></td><td></td>
+          <td class='w-p20'>
+            <?php echo html::select('defaultLang', $config->langs, isset($this->config->site->defaultLang) ? $this->config->site->defaultLang : 'zh-cn', "class='form-control'");?>
+          </td>
           <td></td>
         </tr>
         <tr>

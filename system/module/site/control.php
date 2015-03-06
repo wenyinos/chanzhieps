@@ -52,6 +52,8 @@ class site extends control
         if(!empty($_POST))
         {
             $setting = fixer::input('post')->join('lang', ',')->get();
+            if(empty($setting->lang) or empty($setting->defaultLang)) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+            if(strpos($setting->lang, $setting->defaultLang) === false) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
 
             $result = $this->loadModel('setting')->setItems('system.common.site', $setting, $lang = 'all');
             $this->dao->delete()->from(TABLE_CONFIG)->where("`key`")->eq('defaultLang')->andWhere('lang')->ne('all')->exec();
