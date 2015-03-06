@@ -1,18 +1,18 @@
 -- Insert data into `eps_block`;
-INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`) VALUES
-("block1", 'latestArticle', '最新文章', '{"category":"0","limit":"7"}', 'default'),
-("block2", 'hotArticle', '热门文章', '{"category":"0","limit":"7"}', 'default'),
-("block3", 'latestProduct', '最新产品', '{"category":"0","limit":"3","image":"show"}', 'default'),
-("block4", 'hotProduct', '热门产品', '{"category":"0","limit":"3","image":"show"}', 'default'),
-("block5", 'slide', '幻灯片', '', 'default'),
-("block6", 'articleTree', '文章分类', '{"showChildren":"0"}', 'default'),
-("block7", 'productTree', '产品分类', '{"showChildren":"0"}', 'default'),
-("block8", 'blogTree', '博客分类', '{"showChildren":"1"}', 'default'),
-("block9", 'contact', '联系我们', '', 'default'),
-("block10", 'about', '公司简介', '', 'default'),
-("block11", 'links', '友情链接', '', 'default'),
-("block12", 'header', '网站头部', '', 'default'),
-("block13", 'followUs', '关注我们', '', 'default');
+INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) VALUES
+("block1", 'latestArticle', '最新文章', '{"category":"0","limit":"7"}', 'default', 'zh-cn'),
+("block2", 'hotArticle', '热门文章', '{"category":"0","limit":"7"}', 'default', 'zh-cn'),
+("block3", 'latestProduct', '最新产品', '{"category":"0","limit":"3","image":"show"}', 'default', 'zh-cn'),
+("block4", 'hotProduct', '热门产品', '{"category":"0","limit":"3","image":"show"}', 'default', 'zh-cn'),
+("block5", 'slide', '幻灯片', '', 'default', 'zh-cn'),
+("block6", 'articleTree', '文章分类', '{"showChildren":"0"}', 'default', 'zh-cn'),
+("block7", 'productTree', '产品分类', '{"showChildren":"0"}', 'default', 'zh-cn'),
+("block8", 'blogTree', '博客分类', '{"showChildren":"1"}', 'default', 'zh-cn'),
+("block9", 'contact', '联系我们', '', 'default', 'zh-cn'),
+("block10", 'about', '公司简介', '', 'default', 'zh-cn'),
+("block11", 'links', '友情链接', '', 'default', 'zh-cn'),
+("block12", 'header', '网站头部', '', 'default', 'zh-cn'),
+("block13", 'followUs', '关注我们', '', 'default', 'zh-cn');
 
 INSERT INTO `eps_layout` (`page`, `region`, `blocks`, `template`,`lang`) VALUES
 ('all', 'top', '[{"id":"block12","grid":"","titleless":0,"borderless":0}]', 'default','zh-cn'),
