@@ -14,6 +14,7 @@ error_reporting(0);
 
 /* Set run mode. */
 define('RUN_MODE', 'upgrade');
+define('LANG_CREATED', false);
 
 /* Load the framework. */
 include 'loader.php';

@@ -219,7 +219,14 @@ class dao
         $this->setAlias('');
         $this->setMode('');
         $this->setMethod('');
-        $this->setAutoLang(true);
+        if(defined('LANG_CREATED') and LANG_CREATED == false)
+        {
+            $this->setAutoLang(false);
+        }
+        else
+        {
+            $this->setAutoLang(true);
+        }
     }
 
     //-------------------- According to the query method, call according method of sql class. --------------------//
