@@ -525,6 +525,7 @@ class blockModel extends model
         {
             if($withGrid)
             {
+                if(!isset($block->grid)) $block->grid = 12; 
                 if($block->grid == 0)
                 {
                     echo "<div class='col-md-4 col-auto'>";
