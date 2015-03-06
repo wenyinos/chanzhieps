@@ -94,7 +94,9 @@ class upgradeModel extends model
             case '3_2';
             case '3_3':
                 $this->execSQL($this->getUpgradeFile('3.3'));
-
+            case '4_0':
+                $this->fixLang();
+                $this->fillDefaultBlocks();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -137,6 +139,7 @@ class upgradeModel extends model
             case '3_1';
             case '3_2';
             case '3_3'      : $confirmContent .= file_get_contents($this->getUpgradeFile('3.3'));
+            case '4_0';
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
@@ -149,8 +152,7 @@ class upgradeModel extends model
      */
     public function deletePatch()
     {
-        return true;
-        $this->dao->delete()->from(TABLE_EXTENSION)->where('type')->eq('patch')->exec();
+        $this->dao->setAutoLang(false)->delete()->from(TABLE_PACKAGE)->where('type')->eq('patch')->exec();
     }
 
     /**
@@ -1004,5 +1006,103 @@ class upgradeModel extends model
             }
         }
         return true;
+    }
+
+    /**
+     * Fix Lang fields.
+     * 
+     * @access public
+     * @return void
+     */
+    public function fixLang()
+    {
+        $this->dbh->exec('USE ' . $this->config->db->name);
+        $tables = $this->dbh->query('show tables')->fetchAll(PDO::FETCH_COLUMN );
+
+        foreach($tables as $table)
+        {
+            $fields = $this->dbh->query("DESC {$table}")->fetchAll(PDO::FETCH_COLUMN );
+            if(!in_array('lang', $fields))
+            {
+                $this->dbh->exec("alter table `{$table}` add lang char(30) not null;");         
+            }
+            $this->dbh->exec("update `{$table}` set lang = '{$this->config->default->lang}' where lang = '';");         
+        }
+        $this->dbh->exec("UPDATE " . TABLE_PACKAGE . " set lang = 'all';");
+        $this->dbh->exec("UPDATE " . TABLE_FILE . " set lang = 'all';");
+
+        $this->dbh->exec("ALTER TABLE " . TABLE_CONFIG  . " DROP INDEX `unique`;");
+        $this->dbh->exec("CREATE UNIQUE INDEX `unique` ON " . TABLE_CONFIG  . " (`owner`,`module`,`section`,`key`,`lang`);");
+        $this->dbh->exec("ALTER TABLE " . TABLE_LAYOUT  . " DROP INDEX `layout`;");
+        $this->dbh->exec("CREATE UNIQUE INDEX `layout` ON " . TABLE_LAYOUT  . " (`template`,`page`,`region`,`lang`);");
+    }
+
+    /**
+     * 
+     * 
+     * @access public
+     * @return void
+     */
+    public function fillDefaultBlocks()
+    {
+        $mysqlVersion = $this->loadModel('install')->getMysqlVersion();
+        $currentLang = $this->config->default->lang;
+        foreach($this->config->langs as $lang => $name)
+        {
+            if($lang != $currentLang)
+            {
+                $sqlFile = $this->app->getAppRoot() . 'db' . DS . 'blocks.' . $lang . '.sql';
+                if(file_exists($sqlFile))
+                {
+                    $maxBlockID = $this->dao->setAutoLang(false)->select("max(id) as maxID")->from(TABLE_BLOCK)->fetch('maxID');
+
+                    /* Read the sql file to lines, remove the comment lines, then join theme by ';'. */
+                    $sqls =  file_get_contents($sqlFile);
+                    $marks  = array();
+                    $blocks = array();
+                    for($i = 1; $i <= 13; $i ++)
+                    {
+                        $marks[]  = '"block' . $i .'"';
+                        $block = '"';
+                        $blocks[] = $block . ($maxBlockID + $i) . '"';
+                    }
+
+                    /*Replace block ids with computed id.*/
+                    $sqls = str_replace($marks, $blocks, $sqls);
+                    $sqls = explode("\n", $sqls);
+
+                    foreach($sqls as $key => $line) 
+                    {
+                        $line       = trim($line);
+                        $sqls[$key] = $line;
+                        if(strpos($line, '--') !== false or empty($line)) unset($sqls[$key]);
+                    }
+                    $sqls = explode(';', join("\n", $sqls));
+
+                    foreach($sqls as $sql)
+                    {
+                        $sql = trim($sql);
+                        if(empty($sql)) continue;
+
+                        if($mysqlVersion <= 4.1)
+                        {
+                            $sql = str_replace('DEFAULT CHARSET=utf8', '', $sql);
+                            $sql = str_replace('CHARACTER SET utf8 COLLATE utf8_general_ci', '', $sql);
+                        }
+
+                        $sql = str_replace(array('eps_', 'xr_'), $this->config->db->prefix, $sql);
+                        try
+                        {
+                            $this->dbh->exec($sql);
+                        }
+                        catch (PDOException $e) 
+                        {
+                            self::$errors[] = $e->getMessage() . "<p>The sql is: $sql</p>";
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }
