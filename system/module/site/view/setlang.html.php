@@ -12,7 +12,7 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel'>
-  <div class='panel-heading'><strong><i class='icon-globe'></i> <?php echo $lang->site->setBasic;?></strong></div>
+  <div class='panel-heading'><strong><i class='icon-globe'></i> <?php echo $lang->site->setLang;?></strong></div>
   <div class='panel-body'>
     <form method='post' id='ajaxForm' class='form-inline'>
       <table class='table table-form'>
