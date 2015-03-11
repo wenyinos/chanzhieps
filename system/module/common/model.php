@@ -57,6 +57,7 @@ class commonModel extends model
                 }
             }
         }
+        if(!isset($this->config->site->status)) $this->config->site->status = 'normal';
     }
 
     /**
