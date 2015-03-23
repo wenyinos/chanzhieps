@@ -129,8 +129,7 @@ ol {padding-left: 20px;}
 .panel > .panel-heading,.nav-stacked.nav-primary>li.nav-heading,.list > header, #navbar {background-color: #f1f1f1; background-image: -moz-linear-gradient(#fafafa, #f1f1f1); background-image: -webkit-linear-gradient(#FAFAFA, #f1f1f1); background-image: linear-gradient(#FAFAFA, #f1f1f1); background-repeat: repeat-x;}
 .panel.panel-pure {box-shadow: none; border: 0; border-radius: 0;}
 .panel.panel-pure .panel-heading {background: transparent;}
-.panel-actions{float: right;margin-top: -9px;margin-right: -12px;}
-.panel-actions .btn{margin-top: 3px;}
+.panel-actions{float: right;margin-top: -6px; margin-right: -12px;}
 .panel-heading > h1,.panel-heading > h2,.panel-heading > h3,.panel-heading > h4,.panel-heading > h5,.panel-heading > h6 {margin: 0}
 .panel-actions .btn.btn-link:hover{background: transparent;box-shadow: none;}
 
