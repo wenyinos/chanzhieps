@@ -12,6 +12,7 @@
  */
 error_reporting(E_ALL ^ E_NOTICE ^ E_STRICT);
 define('RUN_MODE', 'shell');
+define('LANG_CREATED', false);
 date_default_timezone_set('Asia/Shanghai');
 
 /* Judge the args. */
