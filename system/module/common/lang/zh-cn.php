@@ -60,6 +60,7 @@ $lang->delete         = '删除';
 $lang->close          = '关闭';
 $lang->save           = '保存';
 $lang->confirm        = '确认';
+$lang->send           = '发送';
 $lang->preview        = '预览';
 $lang->goback         = '返回';
 $lang->search         = '搜索';
