@@ -61,10 +61,13 @@ class http
      */
     public function log($url, $results)
     {
-        $logFile = $this->app->getLogRoot() . 'saas.'. date('Ymd') . '.log';
+        $logFile  = $this->app->getLogRoot() . 'saas.'. date('Ymd') . '.php';
+        $initCont = '';
+        if(!file_exists($logFile)) $initCont = "<?php\ndie();\n?>\n";
         $fh = @fopen($logFile, 'a');
         if(!$fh) return false;
 
+        if($initCont) fwrite($fh, $initCont);
         fwrite($fh, date('Ymd H:i:s') . ": " . $this->app->getURI() . "\n");
         fwrite($fh, "url:    " . $url . "\n");
         fwrite($fh, "results:" . print_r($results, true));
