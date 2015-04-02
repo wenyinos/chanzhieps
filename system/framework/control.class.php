@@ -371,10 +371,10 @@ class control
         }
 
         $commonExtCssFiles = glob($cssExtPath['common'] . $methodName . DS . '*.css');
-        foreach($commonExtCssFiles as $cssFile) $css .= file_get_contents($cssFile);
+        if(!empty($commonExtCssFiles)) foreach($commonExtCssFiles as $cssFile) $css .= file_get_contents($cssFile);
 
         $methodExtCssFiles = glob($cssExtPath['site'] . $methodName . DS . '*.css');
-        foreach($methodExtCssFiles as $cssFile) $css .= file_get_contents($cssFile);
+        if(!empty($methodExtCssFiles)) foreach($methodExtCssFiles as $cssFile) $css .= file_get_contents($cssFile);
 
         return $css;
     }
@@ -543,7 +543,7 @@ class control
         extract((array)$this->view);
         ob_start();
         include $viewFile;
-        if(isset($hookFiles)) foreach($hookFiles as $hookFile) include $hookFile;
+        if(isset($hookFiles)) foreach($hookFiles as $hookFile) if(file_exists($hookFile)) include $hookFile;
         $this->output .= ob_get_contents();
         ob_end_clean();
 
