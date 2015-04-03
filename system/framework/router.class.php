@@ -735,8 +735,14 @@ class router
 
             $result = $this->dbh->query("select value from " . TABLE_CONFIG . " where owner = 'system' and module = 'common' and section = 'site' and `key` = 'lang'")->fetch();
             $enabledLangs = isset($result->value) ? $result->value : '';
-            $enabledLangs = explode(',', $enabledLangs);
-            if(empty($enabledLangs)) $enabledLangs = array_keys($this->config->langs);
+            if(empty($enabledLangs))
+            {
+                $enabledLangs = array_keys($this->config->langs);
+            }
+            else
+            {
+                $enabledLangs = explode(',', $enabledLangs);
+            }
             if(!in_array($defaultLang, $enabledLangs)) $defaultLang = current($enabledLangs);
         }
         else
