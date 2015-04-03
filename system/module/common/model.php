@@ -198,6 +198,7 @@ class commonModel extends model
     {   
         if($module == 'user' and strpos(',login|logout|deny|resetpassword|checkresetkey', $method)) return true;
         if($module == 'wechat' and $method == 'response') return true;
+        if(RUN_MODE == 'admin' and $module == 'misc' and $method == 'ping') return true;
 
         if($this->loadModel('user')->isLogon() and stripos($method, 'ajax') !== false) return true;
 
