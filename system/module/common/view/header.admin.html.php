@@ -33,7 +33,7 @@
         <div class='panel-body'>
           <?php echo $treeModuleMenu;?>
           <?php if(!empty($treeManageLink)):?>
-          <div class='text-right'><?php echo $treeManageLink;?></div>
+          <div class='text-right'><?php if(commonModel::hasPriv('tree', 'browse')) echo $treeManageLink;?></div>
           <?php endif;?>
         </div>
       </div>

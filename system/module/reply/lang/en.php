@@ -19,4 +19,5 @@ $lang->reply->files     = 'Files:';
 $lang->reply->addedDate = 'Date';
 $lang->reply->admin     = 'Reply';
 
-$lang->reply->edit = 'Edit';
+$lang->reply->edit       = 'Edit';
+$lang->reply->deleteFile = 'Delete file';

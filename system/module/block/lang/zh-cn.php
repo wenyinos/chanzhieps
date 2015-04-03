@@ -47,6 +47,8 @@ $lang->block->customStyleTip  = '在这里调整区块的颜色及背景';
 $lang->block->style           = '样式';
 $lang->block->sort            = '排序';
 
+$lang->block->admin        = "区块管理";
+$lang->block->pages        = "布局设置";
 $lang->block->add          = "添加";
 $lang->block->addChild     = "子区块";
 $lang->block->template     = "模板";
@@ -56,6 +58,7 @@ $lang->block->browseRegion = '布局设置';
 $lang->block->edit         = '编辑区块';
 $lang->block->view         = '查看区块';
 $lang->block->setPage      = '配置页面';
+$lang->block->setregion    = '配置布局';
 
 $lang->block->placeholder = new stdclass();
 $lang->block->placeholder->moreText = '区块右上角文字';

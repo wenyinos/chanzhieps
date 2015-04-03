@@ -11,11 +11,15 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php
+$setResponsePriv    = commonModel::hasPriv('wechat', 'setResponse');
+$deleteResponsePriv = commonModel::hasPriv('wechat', 'deleteResponse');
+?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-list-ul"></i> <?php echo $lang->wechat->response->list;?></strong>
     <div class='panel-actions'>
-      <?php echo html::a($this->inlink('setResponse', "publicID=$publicID"), $lang->wechat->response->create, "class='btn btn-primary' data-toggle='modal'");?>
+      <?php if($setResponsePriv) echo html::a($this->inlink('setResponse', "publicID=$publicID"), $lang->wechat->response->create, "class='btn btn-primary' data-toggle='modal'");?>
     </div>
   </div>
   <table class='table table-hover table-striped tablesorter'>
@@ -64,8 +68,8 @@
         </td>
         <td>
           <?php
-          echo html::a($this->createLink('wechat', 'setResponse', "public={$response->public}&group={$response->group}&key=$response->key"), $lang->edit, "data-toggle='modal'");
-          echo html::a($this->createLink('wechat', 'deleteResponse', "responseID=$response->id"), $lang->delete, "class='deleter'");
+          if($setResponsePriv)   echo html::a($this->createLink('wechat', 'setResponse', "public={$response->public}&group={$response->group}&key=$response->key"), $lang->edit, "data-toggle='modal'");
+          if($deleteResponsePriv)echo html::a($this->createLink('wechat', 'deleteResponse', "responseID=$response->id"), $lang->delete, "class='deleter'");
           ?>
         </td>
       </tr>

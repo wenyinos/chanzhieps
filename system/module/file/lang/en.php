@@ -37,8 +37,10 @@ $lang->file->downloads = 'Downloads';
 $lang->file->publics[0] = 'Needed login';
 $lang->file->publics[1] = 'ok';
 
-$lang->file->edit       = 'Edit';
-$lang->file->editFile   = 'Change file';
+$lang->file->sort        = 'Sort';
+$lang->file->edit        = 'Edit';
+$lang->file->editFile    = 'Change file';
+$lang->file->fileManager = 'File manager';
 
 $lang->file->errorUnwritable  = 'Upload directory is not writable.';
 $lang->file->noAccess         = 'Access is not allowed.';

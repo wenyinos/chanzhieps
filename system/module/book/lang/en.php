@@ -4,9 +4,13 @@ $lang->book->list         = 'List';
 $lang->book->articles     = 'Articles';
 $lang->book->backtolist   = 'Back to list';
 
-$lang->book->createBook  = 'Create a book';
-$lang->book->create      = 'Create';
-$lang->book->catalog     = 'Catalog';
+$lang->book->admin      = 'Book List';
+$lang->book->createBook = 'Create a book';
+$lang->book->create     = 'Create';
+$lang->book->catalog    = 'Catalog';
+$lang->book->edit       = 'Edit';
+$lang->book->sort       = 'Sort';
+
 $lang->book->id          = 'Id';
 $lang->book->type        = 'Type';
 $lang->book->parent      = 'Parent';

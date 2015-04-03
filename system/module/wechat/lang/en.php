@@ -9,6 +9,8 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
+$lang->wechat->common = 'Wechat';
+
 $lang->wechat->id        = 'ID';
 $lang->wechat->type      = 'Type';
 $lang->wechat->name      = 'Name';
@@ -22,12 +24,19 @@ $lang->wechat->users     = 'Users';
 $lang->wechat->content   = 'Content';
 $lang->wechat->qrcode    = 'QRcode';
 
-$lang->wechat->create            = 'Create';
-$lang->wechat->edit              = 'Edit';
-$lang->wechat->admin             = 'Admin';
-$lang->wechat->list              = 'List';
-$lang->wechat->setMenu           = 'Menu';
-$lang->wechat->integrate         = 'Integrate';
+$lang->wechat->create         = 'Create';
+$lang->wechat->edit           = 'Edit';
+$lang->wechat->admin          = 'Admin';
+$lang->wechat->list           = 'List';
+$lang->wechat->setMenu        = 'Menu';
+$lang->wechat->integrate      = 'Integrate';
+$lang->wechat->adminResponse  = 'Response';
+$lang->wechat->setResponse    = 'Set response';
+$lang->wechat->deleteResponse = 'Delete response';
+$lang->wechat->reply          = 'Reply';
+$lang->wechat->commitMenu     = 'Menu';
+$lang->wechat->deleteMenu     = 'Delete menu';
+$lang->wechat->messageList    = 'Message';
 
 $lang->wechat->typeList['subscribe'] = 'Subscribe';
 $lang->wechat->typeList['service']   = 'Service';

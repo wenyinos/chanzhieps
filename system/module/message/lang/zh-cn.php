@@ -29,6 +29,7 @@ $lang->message->thanks            = '感谢您的留言，通过审核之后才�
 $lang->message->noSelectedMessage = '您没有选择任何留言。';
 $lang->message->needCheck         = '留言通过审核之后才会显示。';
 
+$lang->message->admin          = '后台首页';
 $lang->message->pass           = '通过';
 $lang->message->reply          = '回复';
 $lang->message->view           = '查看';

@@ -18,7 +18,7 @@
   <div class='content'>
     <h4><?php echo $message; ?></h4>
     <p><?php echo $lang->tree->timeCountDown; ?></p>
-    <?php echo html::a($this->createLink('tree', 'browse', "type=$type"), $lang->tree->redirect, "class='btn btn-primary' id='countDownBtn'"); ?>
+    <?php if(commonModel::hasPriv('tree', 'browse')) echo html::a($this->createLink('tree', 'browse', "type=$type"), $lang->tree->redirect, "class='btn btn-primary' id='countDownBtn'"); ?>
   </div>
 </div>
 </div>

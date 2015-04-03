@@ -30,6 +30,11 @@
       </tr>
     </thead>
     <tbody>
+      <?php
+      $deletePriv = commonModel::hasPriv('message', 'delete');
+      $passPriv   = commonModel::hasPriv('message', 'pass');
+      $replyPriv  = commonModel::hasPriv('message', 'reply');
+      ?>
       <?php foreach($messages as $messageID => $message):?>
       <tr>
         <td rowspan='2' class='text-center'><strong><?php echo $message->id;?></strong></td>
@@ -67,12 +72,12 @@ EOT;
         <?php endif;?>
         <td rowspan='2' class='text-center text-middle'>
           <?php 
-          echo html::a(inlink('reply', "messageID=$message->id"), $lang->message->reply, "data-toggle='modal'");
-          echo html::a(inlink('delete', "messageID=$message->id&type=single&status=$status"), $lang->message->delete, "class='deleter'");
-          if($status == 0) echo html::a(inlink('pass', "messageID=$message->id&type=single"), $lang->message->pass, "class='pass'");
+          if($replyPriv) echo html::a(inlink('reply', "messageID=$message->id"), $lang->message->reply, "data-toggle='modal'");
+          if($deletePriv) echo html::a(inlink('delete', "messageID=$message->id&type=single&status=$status"), $lang->message->delete, "class='deleter'");
+          if($status == 0 and $passPriv) echo html::a(inlink('pass', "messageID=$message->id&type=single"), $lang->message->pass, "class='pass'");
           echo '<br />';
-          if($status == 0) echo html::a(inlink('delete', "messageID=$message->id&type=pre&status=$status"), $lang->message->deletePre, "class='pre' data-confirm='{$lang->message->confirmDeletePre}'");
-          if($status == 0) echo html::a(inlink('pass',   "messageID=$message->id&type=pre"), $lang->message->passPre, "class='pre' data-confirm='{$lang->message->confirmPassPre}'");
+          if($status == 0 and $deletePriv) echo html::a(inlink('delete', "messageID=$message->id&type=pre&status=$status"), $lang->message->deletePre, "class='pre' data-confirm='{$lang->message->confirmDeletePre}'");
+          if($status == 0 and $passPriv)   echo html::a(inlink('pass',   "messageID=$message->id&type=pre"), $lang->message->passPre, "class='pre' data-confirm='{$lang->message->confirmPassPre}'");
           ?>
         </td>
       </tr>
