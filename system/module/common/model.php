@@ -448,6 +448,25 @@ class commonModel extends model
     }
 
     /**
+     * print link;
+     * 
+     * @param  string $module 
+     * @param  string $method 
+     * @param  string $vars 
+     * @param  string $label 
+     * @param  string $misc 
+     * @static
+     * @access public
+     * @return bool
+     */
+    public static function printLink($module, $method, $vars = '', $label, $misc = '')
+    {   
+        if(!commonModel::hasPriv($module, $method)) return false;
+        echo html::a(helper::createLink($module, $method, $vars), $label, $misc);
+        return true;
+    }
+
+    /**
      * Set the user info.
      * 
      * @access public
