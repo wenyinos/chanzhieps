@@ -29,6 +29,7 @@ $lang->message->thanks            = 'Thanks for your message, it will display af
 $lang->message->noSelectedMessage = 'No message selected.';
 $lang->message->needCheck         = 'Message will display after approved.';
 
+$lang->message->admin          = 'Index';
 $lang->message->pass           = 'Pass';
 $lang->message->reply          = 'Reply';
 $lang->message->view           = 'View';

@@ -21,12 +21,20 @@
     echo html::a(inlink('browse', "status=available"), $lang->package->available,   $status == 'available' ? "class='active'" : '');
     ?>
     <div class='panel-actions'>
-      <?php echo html::a(inlink('upload'), $lang->package->upload, "class='btn btn-primary' data-toggle='modal'");?>
-      <?php echo html::a(inlink('obtain'), $lang->package->obtain, "class='btn btn-primary'");?>
+      <?php if(commonModel::hasPriv('package', 'upload')) echo html::a(inlink('upload'), $lang->package->upload, "class='btn btn-primary' data-toggle='modal'");?>
+      <?php if(commonModel::hasPriv('package', 'obtain')) echo html::a(inlink('obtain'), $lang->package->obtain, "class='btn btn-primary'");?>
     </div>
   </div>
   <div class='panel-body'>
   <div class='cards'>
+    <?php
+    $structurePriv  = commonModel::hasPriv('package', 'structure');
+    $deactivatePriv = commonModel::hasPriv('package', 'deactivate');
+    $activatePriv   = commonModel::hasPriv('package', 'activate');
+    $uninstallPriv  = commonModel::hasPriv('package', 'uninstall');
+    $installPriv    = commonModel::hasPriv('package', 'install');
+    $erasePriv      = commonModel::hasPriv('package', 'erase');
+    ?>
     <?php foreach($packages as $package):?>
     <div class='col-md-6'><div class='card'>
       <div class='card-heading'><strong><?php echo $package->name;?></strong></div>
@@ -35,12 +43,12 @@
           <div class='pull-right'>
             <div class='btn-group'>
               <?php
-              $structureCode  = html::a(inlink('structure',  "package=$package->code"), $lang->package->structure,  "class='btn' data-toggle='modal'");
-              $deactivateCode = html::a(inlink('deactivate', "package=$package->code"), $lang->package->deactivate, "class='btn' data-toggle='modal'");
-              $activateCode   = html::a(inlink('activate',   "package=$package->code"), $lang->package->activate,   "class='btn' data-toggle='modal'");
-              $uninstallCode  = html::a(inlink('uninstall',  "package=$package->code"), $lang->package->uninstall,  "class='btn' data-toggle='modal'");
-              $installCode    = html::a(inlink('install',    "package=$package->code"), $lang->package->install,    "class='btn' data-toggle='modal'");
-              $eraseCode      = html::a(inlink('erase',      "package=$package->code"), $lang->package->erase,      "class='btn' data-toggle='modal'");
+              $structureCode  = $structurePriv  ? html::a(inlink('structure',  "package=$package->code"), $lang->package->structure,  "class='btn' data-toggle='modal'") : '';
+              $deactivateCode = $deactivatePriv ? html::a(inlink('deactivate', "package=$package->code"), $lang->package->deactivate, "class='btn' data-toggle='modal'") : '';
+              $activateCode   = $activatePriv   ? html::a(inlink('activate',   "package=$package->code"), $lang->package->activate,   "class='btn' data-toggle='modal'") : '';
+              $uninstallCode  = $uninstallPriv  ? html::a(inlink('uninstall',  "package=$package->code"), $lang->package->uninstall,  "class='btn' data-toggle='modal'") : '';
+              $installCode    = $installPriv    ? html::a(inlink('install',    "package=$package->code"), $lang->package->install,    "class='btn' data-toggle='modal'") : '';
+              $eraseCode      = $erasePriv      ? html::a(inlink('erase',      "package=$package->code"), $lang->package->erase,      "class='btn' data-toggle='modal'") : '';
               
               if(isset($package->viewLink))
               {

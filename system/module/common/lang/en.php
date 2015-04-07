@@ -131,6 +131,7 @@ $lang->menuGroups->mail    = 'site';
 $lang->menuGroups->nav     = 'site';
 $lang->menuGroups->links   = 'site';
 $lang->menuGroups->wechat  = 'site';
+$lang->menuGroups->group   = 'site';
 $lang->menuGroups->block   = 'ui';
 $lang->menuGroups->slide   = 'ui';
 $lang->menuGroups->tree    = 'article';
@@ -211,6 +212,7 @@ $lang->site->menu->oauth    = 'Open OAuth|site|setoauth|';
 $lang->site->menu->link     = 'Links|links|admin|';
 $lang->site->menu->mail     = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
 $lang->site->menu->wechat   = array('link' => 'Wechat|wechat|admin|', 'alias' => 'create,setresponse');
+$lang->site->menu->group    = array('link' => 'Group|group|browse|', 'alias' => 'managepriv,managemember');
 
 /* Menu of company module. */
 $lang->company->menu = new stdclass();
@@ -252,6 +254,10 @@ $lang->block->menu = $lang->ui->menu;
 /* Menu of tree module. */
 $lang->links = new stdclass();
 $lang->links->menu = $lang->site->menu;
+
+/* Menu of group module. */
+$lang->group = new stdclass();
+$lang->group->menu = $lang->site->menu;
 
 /* Menu of package module. */
 $lang->package = new stdclass();

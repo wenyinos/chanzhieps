@@ -37,6 +37,10 @@
   <div class='col-md-10'>
     <?php if($packages):?>
     <div class='cards pd-0 mg-0'>
+    <?php
+    $upgradePriv = commonModel::hasPriv('package', 'upgrade');
+    $installPriv = commonModel::hasPriv('package', 'install');
+    ?>
     <?php foreach($packages as $package):?>
       <?php 
       $currentRelease = $package->currentRelease;
@@ -96,7 +100,7 @@
                         if($installeds[$package->code]->version != $package->latestRelease->releaseVersion and $this->package->checkVersion($package->latestRelease->chanzhiCompatible))
                         {
                             $upgradeLink = inlink('upgrade',  "package=$package->code&downLink=" . helper::safe64Encode($currentRelease->downLink) . "&md5=$currentRelease->md5&type=$package->type");
-                            echo html::a($upgradeLink, $lang->package->upgrade, "class='btn' data-toggle='modal'");
+                            if($upgradePriv) echo html::a($upgradeLink, $lang->package->upgrade, "class='btn' data-toggle='modal'");
                         }
                         else
                         {
@@ -106,7 +110,7 @@
                     else
                     {
                         $label = $currentRelease->compatible ? $lang->package->installAuto : $lang->package->installForce;
-                        echo html::a($installLink, $label, "data-toggle='modal' class='btn'");
+                        if($installPriv) echo html::a($installLink, $label, "data-toggle='modal' class='btn'");
                     }
                 }
             }

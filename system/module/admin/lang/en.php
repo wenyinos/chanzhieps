@@ -1,6 +1,10 @@
 <?php 
-$lang->admin->shortcuts = new stdclass();
+$lang->admin->common        = 'Admin';
+$lang->admin->index         = 'Index';
+$lang->admin->ignore        = 'Ignore safety warning';
+$lang->admin->ignoreupgrade = 'Ignore upgrade prompt';
 
+$lang->admin->shortcuts = new stdclass();
 $lang->admin->shortcuts->article  = 'Article';
 $lang->admin->shortcuts->product  = 'Product';
 $lang->admin->shortcuts->feedback = 'Feedback';

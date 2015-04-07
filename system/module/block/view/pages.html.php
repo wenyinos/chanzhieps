@@ -30,9 +30,10 @@
       <td>
       <?php
       $regions = $lang->block->$currentTemplate->regions->$page;
+      $hasPriv = commonModel::hasPriv('block', 'pages');
       foreach($regions as $region => $regionName)
       {
-          echo html::a($this->inlink('setregion', "page={$page}&region={$region}&template={$currentTemplate}"), $regionName, "class='btn btn-xs' data-toggle='modal'");
+          if($hasPriv) echo html::a($this->inlink('setregion', "page={$page}&region={$region}&template={$currentTemplate}"), $regionName, "class='btn btn-xs' data-toggle='modal'");
       }
       ?>
       </td>

@@ -146,12 +146,12 @@ class bookModel extends model
 
         $anchor      = "name='node{$node->id}' id='node{$node->id}'";
         $titleLink   = $node->type == 'book' ? $node->title : html::a(helper::createLink('book', 'admin', "bookID=$node->id"), $node->title);
-        $editLink    = html::a(helper::createLink('book', 'edit', "nodeID=$node->id"), $this->lang->edit, $anchor);
-        $delLink     = empty($children) ? html::a(helper::createLink('book', 'delete', "bookID=$node->id"), $this->lang->delete, "class='deleter'") : '';
-        $filesLink   = html::a(helper::createLink('file', 'browse', "objectType=book&objectID=$node->id&isImage=0"), $this->lang->book->files, "data-toggle='modal' data-width='1000'");
-        $imagesLink  = html::a(helper::createLink('file', 'browse', "objectType=book&objectID=$node->id&isImage=1"), $this->lang->book->images, "data-toggle='modal' data-width='1000'");
-        $catalogLink = html::a(helper::createLink('book', 'catalog', "nodeID=$node->id"), $this->lang->book->catalog);
-        $moveLink    = html::a('javascript:;', "<i class='icon-move'></i>", "class='sort sort-handle'");
+        $editLink    = commonModel::hasPriv('book', 'edit') ? html::a(helper::createLink('book', 'edit', "nodeID=$node->id"), $this->lang->edit, $anchor) : '';
+        $delLink     = empty($children) ? (commonModel::hasPriv('book', 'edit') ? html::a(helper::createLink('book', 'delete', "bookID=$node->id"), $this->lang->delete, "class='deleter'") : '') : '';
+        $filesLink   = commonModel::hasPriv('file', 'browse') ? html::a(helper::createLink('file', 'browse', "objectType=book&objectID=$node->id&isImage=0"), $this->lang->book->files, "data-toggle='modal' data-width='1000'") : '';
+        $imagesLink  = commonModel::hasPriv('file', 'browse') ? html::a(helper::createLink('file', 'browse', "objectType=book&objectID=$node->id&isImage=1"), $this->lang->book->images, "data-toggle='modal' data-width='1000'") : '';
+        $catalogLink = commonModel::hasPriv('book', 'catalog') ? html::a(helper::createLink('book', 'catalog', "nodeID=$node->id"), $this->lang->book->catalog) : '';
+        $moveLink    = commonModel::hasPriv('book', 'sort') ? html::a('javascript:;', "<i class='icon-move'></i>", "class='sort sort-handle'") : '';
 
         $childrenHtml = '';
         if($children) 

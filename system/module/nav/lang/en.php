@@ -10,6 +10,7 @@
  * @link        http://www.zentao.net
  */
 
+$lang->nav->common   = 'Navigation';
 $lang->nav->setNav   = 'Navigation';
 $lang->nav->add      = 'Add';
 $lang->nav->addChild = 'Child';

@@ -49,6 +49,10 @@ js::set('admin', $this->get->admin);
       </tr>
     </thead>
     <tbody>
+    <?php
+    $editPriv   = commonModel::hasPriv('user', 'edit');
+    $forbidPriv = commonModel::hasPriv('user', 'forbid');
+    ?>
     <?php foreach($users as $user):?>
     <tr class='text-center'>
       <td><?php echo $user->id;?></td>
@@ -67,8 +71,8 @@ js::set('admin', $this->get->admin);
       </td>
       <td class='operate'>
         <?php //if($user->provider == 'wechat') echo html::a($this->createLink('wechat', 'message', "from={$user->openID}"), $lang->user->messages);?>
-        <?php echo html::a($this->createLink('user', 'edit', "account=$user->account"), $lang->edit); ?>
-        <?php if($user->locked < helper::now() or $user->locked == helper::now()):?>
+        <?php if($editPriv) echo html::a($this->createLink('user', 'edit', "account=$user->account"), $lang->edit); ?>
+        <?php if($user->locked <= helper::now() and $forbidPriv):?>
         <span class="dropdown">
           <a href='###' class="dropdown-toggle" data-toggle="dropdown"><?php echo $lang->user->forbid?> <span class="caret"></span></a>
           <ul class="dropdown-menu pull-right text-left" role="menu">

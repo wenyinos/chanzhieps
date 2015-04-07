@@ -16,8 +16,11 @@ $lang->ui->setLogo         = "Set Logo";
 $lang->ui->setTemplate     = 'Set Template';
 $lang->ui->installTemplate = 'Upload Template';
 $lang->ui->setTheme        = 'Set Theme';
+$lang->ui->customTheme     = 'Custom theme';
 $lang->ui->setFavicon      = "Set favicon";
 $lang->ui->setBaseStyle    = "Set base style";
+$lang->ui->deleteFavicon   = "Delete favicon";
+$lang->ui->deleteLogo      = "Delete logo";
 
 $lang->ui->noStyleTag        = "Please write base CSS file code, No &lt;style&gt;&lt;/style&gt; tag.";
 $lang->ui->setLogoFailed     = "Set logo failed.";

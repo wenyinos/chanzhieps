@@ -9,15 +9,18 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->ui->common       = "站点";
+$lang->ui->common       = "界面";
 
 $lang->ui->logo            = 'Logo';
 $lang->ui->setLogo         = "Logo设置";
 $lang->ui->setTemplate     = '模板设置';
 $lang->ui->installTemplate = '上传模板';
 $lang->ui->setTheme        = '主题设置';
+$lang->ui->customTheme     = '自定义主题';
 $lang->ui->setFavicon      = "Favicon设置";
 $lang->ui->setBaseStyle    = "全局样式设置";
+$lang->ui->deleteFavicon   = "删除Favicon";
+$lang->ui->deleteLogo      = "删除Logo";
 
 $lang->ui->noStyleTag        = "请填写全局CSS样式代码，不需要&lt;style&gt;&lt;/style&gt;标签";
 $lang->ui->setLogoFailed     = "设置Logo失败";

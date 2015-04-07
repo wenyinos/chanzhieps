@@ -116,17 +116,16 @@ class commonModel extends model
         $method = strtolower($method);
         global $app, $config;
 
+        $rights  = $app->user->rights;
         if(RUN_MODE == 'admin')
         {
-            if($app->user->admin == 'no')    return false;
             if($app->user->admin == 'super') return true;
-
+            if(isset($rights[$module][$method])) return true;
             return false;
         }
 
         if(!commonModel::isAvailable($module)) return false;
 
-        $rights  = $app->user->rights;
         if(isset($rights[$module][$method])) return true;
 
         /* Check rights one more time to enable new created rights.*/
@@ -199,6 +198,7 @@ class commonModel extends model
     {   
         if($module == 'user' and strpos(',login|logout|deny|resetpassword|checkresetkey', $method)) return true;
         if($module == 'wechat' and $method == 'response') return true;
+        if(RUN_MODE == 'admin' and $module == 'misc' and $method == 'ping') return true;
 
         if($this->loadModel('user')->isLogon() and stripos($method, 'ajax') !== false) return true;
 

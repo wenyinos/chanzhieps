@@ -45,13 +45,16 @@ $lang->product->css        = 'CSS';
 $lang->product->js         = 'JS';
 $lang->product->currency   = 'Currency';
 
-$lang->product->list       = 'List';
-$lang->product->hot        = 'Hot';
-$lang->product->admin      = 'Admin';
-$lang->product->create     = 'Create';
-$lang->product->edit       = 'Edit';
-$lang->product->files      = 'Files';
-$lang->product->images     = 'Images';
+$lang->product->list         = 'List';
+$lang->product->hot          = 'Hot';
+$lang->product->admin        = 'Admin';
+$lang->product->create       = 'Create';
+$lang->product->edit         = 'Edit';
+$lang->product->changeStatus = 'Change status';
+$lang->product->setcss       = 'Set CSS';
+$lang->product->setjs        = 'Set JS';
+$lang->product->files        = 'Files';
+$lang->product->images       = 'Images';
 
 $lang->product->confirmDelete = 'Are you sure to delete it?';
 
