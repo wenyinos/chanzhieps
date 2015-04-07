@@ -11,4 +11,5 @@
  */
 $lang->links->common  = '友情链接';
 $lang->links->index   = '首页链接';
+$lang->links->admin   = '友链管理';
 $lang->links->all     = '所有链接';

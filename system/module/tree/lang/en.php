@@ -16,6 +16,7 @@ $lang->tree->delete      = "Delete";
 $lang->tree->browse      = "Manage";
 $lang->tree->manage      = "Manage";
 $lang->tree->fix         = "Fix data";
+$lang->tree->children    = "Children";
 
 $lang->tree->common           = 'Category';
 $lang->tree->noCategories     = 'No category yet, add one first.';

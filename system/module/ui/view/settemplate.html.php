@@ -16,10 +16,11 @@
 <div class='panel panel-templates'>
   <div class='panel-heading'>
     <strong><?php echo $lang->ui->setTemplate;?></strong>
-    <div class='panel-actions'><?php echo html::a($this->createLink('package', 'upload'), $lang->ui->installTemplate, "class='btn btn-primary' data-toggle='modal' data-width='600'")?></div>
+    <div class='panel-actions'><?php commonModel::printLink('package', 'upload', '', $lang->ui->installTemplate, "class='btn btn-primary' data-toggle='modal' data-width='600'")?></div>
   </div>
 </div>
 <div class='cards cards-templates' data-template='<?php echo $this->config->template->name?>' data-theme='<?php echo $this->config->template->theme?>'>
+  <?php $customThemePriv = commonModel::hasPriv('ui', 'customTheme');?>
   <?php foreach($templates as $code => $template):?>
   <?php
   $desc  = $template['desc'];
@@ -55,7 +56,7 @@
           <div class='theme<?php echo $currentClass;?>' data-url='<?php echo $url;?>' data-theme='<?php echo $theme;?>'>
             <div class='theme-card'>
               <i class='icon-ok icon'></i>
-              <?php if($custom):?>
+              <?php if($custom and $customThemePriv):?>
               <?php echo html::a(inlink('customTheme', "theme={$theme}&template={$code}"), "<span class='icon-cog'></span> {$lang->ui->custom}", "class='btn btn-primary btn-custom' data-toggle='modal' data-type='ajax' data-backdrop='true'") ?>
               <?php endif;?>
               <div class='theme-img'><?php echo html::image($templateRoot . 'theme/' . $theme . '/preview.png');?></div>

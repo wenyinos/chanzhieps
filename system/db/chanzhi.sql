@@ -175,6 +175,25 @@ CREATE TABLE IF NOT EXISTS `eps_file` (
   KEY `object` (`objectType`,`objectID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+-- DROP TABLE IF EXISTS `eps_group`;
+CREATE TABLE IF NOT EXISTS `eps_group` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `name` char(30) NOT NULL,
+  `role` char(30) NOT NULL default '',
+  `desc` char(255) NOT NULL default '',
+  `lang` char(30) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- DROP TABLE IF EXISTS `eps_grouppriv`;
+CREATE TABLE IF NOT EXISTS `eps_grouppriv` (
+  `group` mediumint(8) unsigned NOT NULL default '0', 
+  `module` char(30) NOT NULL default '',
+  `method` char(30) NOT NULL default '',
+  `lang` char(30) NOT NULL,
+  UNIQUE KEY `group` (`group`,`module`,`method`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 -- DROP TABLE IF EXISTS `eps_layout`;
 CREATE TABLE IF NOT EXISTS `eps_layout` (
   `template` varchar(30) NOT NULL DEFAULT 'default',
@@ -373,6 +392,14 @@ CREATE TABLE IF NOT EXISTS `eps_user` (
   KEY `admin` (`admin`),
   KEY `account` (`account`,`password`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- DROP TABLE IF EXISTS `eps_usergroup`;
+CREATE TABLE IF NOT EXISTS `eps_usergroup` (
+  `account` char(30) NOT NULL default '',
+  `group` mediumint(8) unsigned NOT NULL default '0',
+  `lang` char(30) NOT NULL,
+  UNIQUE KEY `account` (`account`,`group`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_wx_public`;
 CREATE TABLE IF NOT EXISTS `eps_wx_public` (

@@ -15,7 +15,7 @@
   <div class='panel-heading'>
     <strong><i class="icon-list-ul"></i> <?php echo $lang->wechat->response->list;?></strong>
     <div class='panel-actions'>
-      <?php echo html::a($this->inlink('setResponse', "publicID=$publicID"), $lang->wechat->response->create, "class='btn btn-primary' data-toggle='modal'");?>
+      <?php commonModel::printLink('wechat', 'setResponse', "publicID=$publicID", $lang->wechat->response->create, "class='btn btn-primary' data-toggle='modal'");?>
     </div>
   </div>
   <table class='table table-hover table-striped tablesorter'>
@@ -64,8 +64,8 @@
         </td>
         <td>
           <?php
-          echo html::a($this->createLink('wechat', 'setResponse', "public={$response->public}&group={$response->group}&key=$response->key"), $lang->edit, "data-toggle='modal'");
-          echo html::a($this->createLink('wechat', 'deleteResponse', "responseID=$response->id"), $lang->delete, "class='deleter'");
+          commonModel::printLink('wechat', 'setResponse', "public={$response->public}&group={$response->group}&key=$response->key", $lang->edit, "data-toggle='modal'");
+          commonModel::printLink('wechat', 'deleteResponse', "responseID=$response->id", $lang->delete, "class='deleter'");
           ?>
         </td>
       </tr>

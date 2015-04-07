@@ -9,6 +9,8 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
+$lang->wechat->common = '微信设置';
+
 $lang->wechat->id        = '编号';
 $lang->wechat->type      = '类型';
 $lang->wechat->name      = '微信名';
@@ -22,12 +24,19 @@ $lang->wechat->users     = '微信会员';
 $lang->wechat->content   = '内容';
 $lang->wechat->qrcode    = '二维码';
 
-$lang->wechat->create    = '添加公众号';
-$lang->wechat->edit      = '编辑公众号';
-$lang->wechat->admin     = '维护公众号';
-$lang->wechat->list      = '公众号列表';
-$lang->wechat->setMenu   = '菜单';
-$lang->wechat->integrate = '接入';
+$lang->wechat->create         = '添加公众号';
+$lang->wechat->edit           = '编辑公众号';
+$lang->wechat->admin          = '维护公众号';
+$lang->wechat->list           = '公众号列表';
+$lang->wechat->setMenu        = '菜单';
+$lang->wechat->integrate      = '接入';
+$lang->wechat->adminResponse  = '响应';
+$lang->wechat->setResponse    = '设置响应';
+$lang->wechat->deleteResponse = '删除响应';
+$lang->wechat->reply          = '回复';
+$lang->wechat->commitMenu     = '菜单';
+$lang->wechat->deleteMenu     = '删除菜单';
+$lang->wechat->messageList    = '消息';
 
 $lang->wechat->typeList['subscribe'] = '订阅号';
 $lang->wechat->typeList['service']   = '服务号';

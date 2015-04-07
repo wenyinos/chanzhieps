@@ -12,6 +12,7 @@
     </tr>
   </thead>
   <tbody>
+    <?php $downloadPriv = commonModel::hasPriv('file', 'download');?>
     <?php foreach($files as $file):?>
     <tr class='text-center text-middle'>
       <td><?php echo $file->id;?></td>
@@ -19,12 +20,12 @@
         <?php
         if($file->isImage)
         {
-            echo html::a(inlink('download', "id=$file->id"), html::image($file->smallURL, "class='image-small' title='{$file->title}'"), "target='_blank'");
+            echo $downloadPriv ? html::a(inlink('download', "id=$file->id"), html::image($file->smallURL, "class='image-small' title='{$file->title}'"), "target='_blank'") : html::image($file->smallURL, "class='image-small' title='{$file->title}'");
             if($file->primary == 1) echo '<small class="label label-success">'. $lang->file->primary .'</small>';
         }
         else
         {
-            echo html::a(inlink('download', "id=$file->id"), "{$file->title}.{$file->extension}", "target='_blank'");
+            echo $downloadPriv ? html::a(inlink('download', "id=$file->id"), "{$file->title}.{$file->extension}", "target='_blank'") : "{$file->title}.{$file->extension}";
         }
         ?>
       </td>
@@ -34,9 +35,9 @@
       <td><?php echo $file->addedDate;?></td>
       <td class='text-center'>
       <?php
-      echo html::a(inlink('edit',   "id=$file->id"), $lang->edit, "class='edit'");
-      echo html::a(inlink('delete', "id=$file->id"), $lang->delete, "class='deleter'");
-      if($file->isImage) echo html::a(inlink('setPrimary', "id=$file->id"), $lang->file->setPrimary, "class='option'");
+      commonModel::printLink('user', 'edit',   "id=$file->id", $lang->edit, "class='edit'");
+      commonModel::printLink('user', 'delete', "id=$file->id", $lang->delete, "class='deleter'");
+      if($file->isImage) commonModel::printLink('user', 'setPrimary', "id=$file->id", $lang->file->setPrimary, "class='option'");
       ?>
       </td>
     </tr>

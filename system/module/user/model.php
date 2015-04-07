@@ -326,7 +326,7 @@ class userModel extends model
         $user = $this->identify($account, $password);
         if(!$user) return false;
 
-        if(RUN_MODE == 'front') $user->rights = $this->authorize($user);
+        $user->rights = $this->authorize($user);
         $this->session->set('user', $user);
         $this->app->user = $this->session->user;
 
@@ -413,12 +413,25 @@ class userModel extends model
      */
     public function authorize($user)
     {
-        $rights = $this->config->rights->guest;
+        $rights = array();
+        if(RUN_MODE == 'front') $rights = $this->config->rights->guest;
         if($user->account == 'guest') return $rights;
 
-        foreach($this->config->rights->member as $moduleName => $moduleMethods)
+        if(RUN_MODE == 'front')
         {
-            foreach($moduleMethods as $method) $rights[$moduleName][$method] = $method;
+            foreach($this->config->rights->member as $moduleName => $moduleMethods)
+            {
+                foreach($moduleMethods as $method) $rights[$moduleName][$method] = $method;
+            }
+        }
+        elseif(RUN_MODE == 'admin')
+        {
+            $stmt = $this->dao->select('module, method')->from(TABLE_USERGROUP)->alias('t1')
+                ->leftJoin(TABLE_GROUPPRIV)->alias('t2')->on('t1.group = t2.group')
+                ->where('t1.account')->eq($user->account)->query();
+
+            if(!$stmt) return $rights;
+            while($row = $stmt->fetch(PDO::FETCH_ASSOC)) $rights[strtolower($row['module'])][strtolower($row['method'])] = true;
         }
 
         return $rights;

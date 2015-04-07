@@ -11,4 +11,5 @@
  */
 $lang->links->common  = 'Links';
 $lang->links->index   = 'Home links';
+$lang->links->admin   = 'Link manage';
 $lang->links->all     = 'All links';

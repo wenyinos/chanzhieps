@@ -24,15 +24,17 @@ $lang->thread->lastReply  = 'Last reply';
 $lang->thread->isLink     = 'Locate';
 $lang->thread->link       = 'Link';
 
-$lang->thread->post       = 'Post';
-$lang->thread->postTo     = 'Post to';
-$lang->thread->browse     = 'Threads';
-$lang->thread->stick      = 'Sticky';
-$lang->thread->edit       = 'Edit';
-$lang->thread->status     = 'Status';
-$lang->thread->hide       = 'Hide';
-$lang->thread->show       = 'Show';
-$lang->thread->transfer   = 'Transfer';
+$lang->thread->post         = 'Post';
+$lang->thread->postTo       = 'Post to';
+$lang->thread->browse       = 'Threads';
+$lang->thread->stick        = 'Sticky';
+$lang->thread->edit         = 'Edit';
+$lang->thread->status       = 'Status';
+$lang->thread->hide         = 'Hide';
+$lang->thread->show         = 'Show';
+$lang->thread->transfer     = 'Transfer';
+$lang->thread->switchStatus = 'Hide/Show';
+$lang->thread->deleteFile   = 'Delete file';
 
 $lang->thread->sticks[0] = 'Don\'t stick';
 $lang->thread->sticks[1] = 'Stick on board';

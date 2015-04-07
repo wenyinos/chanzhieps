@@ -23,7 +23,7 @@
         <td><?php echo $reply->authorRealname;?></td>
         <td><?php echo substr($reply->addedDate, 5, -3);?></td>
         <td>
-          <?php echo html::a($this->createLink('reply', 'delete', "replyID=$reply->id"), $lang->delete, "class='deleter'"); ?>
+          <?php commonModel::printLink('reply', 'delete', "replyID=$reply->id", $lang->delete, "class='deleter'"); ?>
         </td>
       </tr>  
       <?php endforeach;?>

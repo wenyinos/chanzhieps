@@ -207,58 +207,6 @@ class book extends control
     }
 
     /**
-     * sort up.
-     * 
-     * @param  int    $id 
-     * @access public
-     * @return string;
-     */
-    public function up($id)
-    {
-        $node = $this->book->getNodeByID($id);
-        $prev = $this->dao->select('id, `order`')
-            ->from(TABLE_BOOK)
-            ->where('parent')->eq($node->parent)
-            ->andWhere('`order`')->lt($node->order)
-            ->orderBy('`order` desc')
-            ->limit(1)
-            ->fetch();
-        if(!$prev) return false;
-
-        $this->dao->update(TABLE_BOOK)->set('`order`')->eq($node->order)->where('id')->eq($prev->id)->exec();
-        $this->dao->update(TABLE_BOOK)->set('`order`')->eq($prev->order)->where('id')->eq($node->id)->exec();
-
-        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        $this->send(array('result' => 'success'));
-    }
-
-    /**
-     * sort down.
-     * 
-     * @param  int    $id 
-     * @access public
-     * @return string;
-     */
-    public function down($id)
-    {
-        $node = $this->book->getNodeByID($id);
-        $next = $this->dao->select('id, `order`')
-            ->from(TABLE_BOOK)
-            ->where('parent')->eq($node->parent)
-            ->andWhere('`order`')->gt($node->order)
-            ->orderBy('`order`')
-            ->limit(1)
-            ->fetch();
-        if(!$next) return false;
-
-        $this->dao->update(TABLE_BOOK)->set('`order`')->eq($node->order)->where('id')->eq($next->id)->exec();
-        $this->dao->update(TABLE_BOOK)->set('`order`')->eq($next->order)->where('id')->eq($node->id)->exec();
-
-        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        $this->send(array('result' => 'success'));
-    }
-
-    /**
      * sort books 
      * 
      * @access public

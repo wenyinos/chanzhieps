@@ -67,12 +67,12 @@ EOT;
         <?php endif;?>
         <td rowspan='2' class='text-center text-middle'>
           <?php 
-          echo html::a(inlink('reply', "messageID=$message->id"), $lang->message->reply, "data-toggle='modal'");
-          echo html::a(inlink('delete', "messageID=$message->id&type=single&status=$status"), $lang->message->delete, "class='deleter'");
-          if($status == 0) echo html::a(inlink('pass', "messageID=$message->id&type=single"), $lang->message->pass, "class='pass'");
+          commonModel::printLink('message', 'reply', "messageID=$message->id", $lang->message->reply, "data-toggle='modal'");
+          commonModel::printLink('message', 'delete', "messageID=$message->id&type=single&status=$status", $lang->message->delete, "class='deleter'");
+          if($status == 0) commonModel::printLink('message', 'pass', "messageID=$message->id&type=single", $lang->message->pass, "class='pass'");
           echo '<br />';
-          if($status == 0) echo html::a(inlink('delete', "messageID=$message->id&type=pre&status=$status"), $lang->message->deletePre, "class='pre' data-confirm='{$lang->message->confirmDeletePre}'");
-          if($status == 0) echo html::a(inlink('pass',   "messageID=$message->id&type=pre"), $lang->message->passPre, "class='pre' data-confirm='{$lang->message->confirmPassPre}'");
+          if($status == 0) commonModel::printLink('message', 'delete', "messageID=$message->id&type=pre&status=$status", $lang->message->deletePre, "class='pre' data-confirm='{$lang->message->confirmDeletePre}'");
+          if($status == 0) commonModel::printLink('message', 'pass',   "messageID=$message->id&type=pre", $lang->message->passPre, "class='pre' data-confirm='{$lang->message->confirmPassPre}'");
           ?>
         </td>
       </tr>

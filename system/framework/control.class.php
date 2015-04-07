@@ -371,12 +371,10 @@ class control
         }
 
         $commonExtCssFiles = glob($cssExtPath['common'] . $methodName . DS . '*.css');
-        $commonExtCssFiles = empty($commonExtCssFiles) ? array() : $commonExtCssFiles;
-        foreach($commonExtCssFiles as $cssFile) $css .= file_get_contents($cssFile);
+        if(!empty($commonExtCssFiles)) foreach($commonExtCssFiles as $cssFile) $css .= file_get_contents($cssFile);
 
         $methodExtCssFiles = glob($cssExtPath['site'] . $methodName . DS . '*.css');
-        $methodExtCssFiles = empty($methodExtCssFiles) ? array() : $methodExtCssFiles;
-        foreach($methodExtCssFiles as $cssFile) $css .= file_get_contents($cssFile);
+        if(!empty($methodExtCssFiles)) foreach($methodExtCssFiles as $cssFile) $css .= file_get_contents($cssFile);
 
         return $css;
     }
@@ -545,7 +543,7 @@ class control
         extract((array)$this->view);
         ob_start();
         include $viewFile;
-        if(isset($hookFiles)) foreach($hookFiles as $hookFile) if($hookFile) include $hookFile;
+        if(isset($hookFiles)) foreach($hookFiles as $hookFile) if(file_exists($hookFile)) include $hookFile;
         $this->output .= ob_get_contents();
         ob_end_clean();
 
@@ -635,10 +633,7 @@ class control
     public function send($data, $type = 'json')
     {
         $data = (array) $data;
-        if($type == 'json')
-        {
-            echo json_encode($data);
-        }
+        if($type == 'json') echo json_encode($data);
         die(helper::removeUTF8Bom(ob_get_clean()));
     }
 

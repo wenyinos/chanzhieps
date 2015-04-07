@@ -16,6 +16,7 @@ $lang->tree->delete      = "删除类目";
 $lang->tree->browse      = "类目维护";
 $lang->tree->manage      = "维护类目";
 $lang->tree->fix         = "修复数据";
+$lang->tree->children    = "子类目";
 
 $lang->tree->common           = '类目';
 $lang->tree->noCategories     = '您还没有添加类目，请添加类目。';

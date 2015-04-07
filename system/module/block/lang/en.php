@@ -47,6 +47,8 @@ $lang->block->customStyleTip  = 'Change block color and background here.';
 $lang->block->style           = 'Style';
 $lang->block->sort            = 'Sort';
 
+$lang->block->admin        = "Block management";
+$lang->block->pages        = "Layout settings";
 $lang->block->add          = "Add";
 $lang->block->addChild     = "Add Child";
 $lang->block->template     = "Template";
@@ -56,6 +58,7 @@ $lang->block->browseRegion = 'Browse Regions';
 $lang->block->edit         = 'Edit';
 $lang->block->view         = 'view';
 $lang->block->setPage      = 'Set page blocks';
+$lang->block->setregion    = 'Set region';
 
 $lang->block->placeholder = new stdclass();
 $lang->block->placeholder->moreText = 'Text for button of more';

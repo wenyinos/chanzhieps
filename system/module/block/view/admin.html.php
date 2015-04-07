@@ -18,7 +18,7 @@
       <?php echo html::a(helper::createLink('block', 'admin', 'template=' . $template['code']), $template['name'], $currentTemplate == $template['code'] ? "class='active'" : "");?>
     <?php endforeach;?>
     <div class='panel-actions'>
-      <?php echo html::a(inlink('create', "template=$currentTemplate"), '<i class="icon-plus"></i> ' . $lang->block->create, 'class="btn btn-primary"');?>
+      <?php commonModel::printLink('block', 'create', "template=$currentTemplate", '<i class="icon-plus"></i> ' . $lang->block->create, 'class="btn btn-primary"');?>
     </div>
   </div>
   <table class='table table-bordered table-hover table-striped'>
@@ -35,8 +35,8 @@
       <td><?php echo $lang->block->$currentTemplate->typeList[$block->type];?></td>
       <td>
         <?php 
-        echo html::a(inlink('edit',   "template=$currentTemplate&blockID=$block->id&type=$block->type"), $lang->edit);
-        echo html::a(inlink('delete', "blockID=$block->id"), $lang->delete, "class='deleter'");
+        commonModel::printLink('block', 'edit',   "template=$currentTemplate&blockID=$block->id&type=$block->type", $lang->edit);
+        commonModel::printLink('block', 'delete', "blockID=$block->id", $lang->delete, "class='deleter'");
         ?>
       </td>
     </tr>

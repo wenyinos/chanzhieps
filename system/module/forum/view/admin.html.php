@@ -39,15 +39,15 @@
         <?php 
         if($thread->hidden)
         {
-            echo html::a($this->createLink('thread', 'switchStatus', "threadID=$thread->id"), $lang->thread->show, "class='reload'"); 
+            commonModel::printLink('thread', 'switchStatus', "threadID=$thread->id", $lang->thread->show, "class='reload'"); 
         }
         else
         {
-            echo html::a($this->createLink('thread', 'switchStatus', "threadID=$thread->id"), $lang->thread->hide, "class='reload'"); 
+            commonModel::printLink('thread', 'switchStatus', "threadID=$thread->id", $lang->thread->hide, "class='reload'"); 
         }
         ?>
-        <?php echo html::a($this->createLink('thread', 'transfer', "threadID=$thread->id"), $lang->thread->transfer, "data-toggle='modal'"); ?>
-        <?php echo html::a($this->createLink('thread', 'delete', "threadID=$thread->id"), $lang->delete, "class='deleter'"); ?>
+        <?php commonModel::printLink('thread', 'transfer', "threadID=$thread->id", $lang->thread->transfer, "data-toggle='modal'");?>
+        <?php commonModel::printLink('thread', 'delete', "threadID=$thread->id", $lang->delete, "class='deleter'");?>
         </td>
       </tr>  
       <?php endforeach;?>

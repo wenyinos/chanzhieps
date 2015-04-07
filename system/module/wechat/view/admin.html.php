@@ -20,8 +20,8 @@
   <div class='panel-heading'>
     <strong><i class="icon-list-ul"></i> <?php echo $lang->wechat->list;?></strong>
     <div class='panel-actions'>
-      <?php echo html::a($this->inlink('create'), '<i class="icon-plus"></i>', "class='btn btn-primary', title='{$lang->wechat->create}'");?>
-      <?php echo html::a($this->createLink('user', 'admin', "provider=wechat"), '<i class="icon-user"></i> ', "class='btn btn-primary' title='{$lang->wechat->users}'");?>
+      <?php commonModel::printLink('wechat', 'create', '', '<i class="icon-plus"></i>', "class='btn btn-primary', title='{$lang->wechat->create}'");?>
+      <?php commonModel::printLink('user', 'admin', "provider=wechat", '<i class="icon-user"></i> ', "class='btn btn-primary' title='{$lang->wechat->users}'");?>
     </div>
   </div>
   <table class='table table-hover table-striped tablesorter'>
@@ -43,21 +43,21 @@
         <td><?php echo $public->appID;?></td>
         <td>
           <?php
-          echo html::a($this->createLink('wechat', 'edit', "publicID=$public->id"), $lang->edit);
+          commonModel::printLink('wechat', 'edit', "publicID=$public->id", $lang->edit);
           if(!$public->certified and $public->type == 'subscribe')
           {
              echo html::a('javascript:;', $lang->wechat->setMenu, "class='text-muted' data-container='body' data-toggle='popover' data-placement='right' data-content='{$lang->wechat->needCertified}'");
           }
           else
           {
-              echo html::a($this->createLink('tree', 'browse', "type=wechat_$public->id"), $lang->wechat->setMenu);
+              commonModel::printLink('tree', 'browse', "type=wechat_$public->id", $lang->wechat->setMenu);
           }
-          echo html::a($this->createLink('wechat', 'adminResponse', "publicID=$public->id"), $lang->wechat->response->keywords);
-          echo html::a($this->createLink('wechat', 'setResponse', "publicID=$public->id&group=default&key=default"), $lang->wechat->response->default, "data-toggle='modal'");
-          echo html::a($this->createLink('wechat', 'setResponse', "publicID=$public->id&group=subscribe&key=subscribe"), $lang->wechat->response->subscribe, "data-toggle='modal'");
-          echo html::a($this->createLink('wechat', 'delete', "publicID=$public->id"), $lang->delete, "class='deleter'");
-          echo html::a($this->createLink('wechat', 'integrate', "publicID=$public->id"), $lang->wechat->integrate);
-          echo html::a($this->createLink('wechat', 'qrcode', "publicID=$public->id"), $lang->wechat->qrcode, "data-toggle=modal");
+          commonModel::printLink('wechat', 'adminResponse', "publicID=$public->id", $lang->wechat->response->keywords);
+          commonModel::printLink('wechat', 'setResponse', "publicID=$public->id&group=default&key=default", $lang->wechat->response->default, "data-toggle='modal'");
+          commonModel::printLink('wechat', 'setResponse', "publicID=$public->id&group=subscribe&key=subscribe", $lang->wechat->response->subscribe, "data-toggle='modal'");
+          commonModel::printLink('wechat', 'delete', "publicID=$public->id", $lang->delete, "class='deleter'");
+          commonModel::printLink('wechat', 'integrate', "publicID=$public->id", $lang->wechat->integrate);
+          commonModel::printLink('wechat', 'qrcode', "publicID=$public->id", $lang->wechat->qrcode, "data-toggle=modal");
           ?>
         </td>
       </tr>

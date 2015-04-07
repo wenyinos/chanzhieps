@@ -32,7 +32,7 @@
       $regions = $lang->block->$currentTemplate->regions->$page;
       foreach($regions as $region => $regionName)
       {
-          echo html::a($this->inlink('setregion', "page={$page}&region={$region}&template={$currentTemplate}"), $regionName, "class='btn btn-xs' data-toggle='modal'");
+          commonModel::printLink('block', 'setregion', "page={$page}&region={$region}&template={$currentTemplate}", $regionName, "class='btn btn-xs' data-toggle='modal'");
       }
       ?>
       </td>
