@@ -34,7 +34,7 @@
       </tr>
     </thead>
     <tbody>
-    <?php $replyPriv = commonModel::hasPriv('wechat', 'reply');?>
+      <?php $replyPriv = commonModel::hasPriv('wechat', 'reply');?>
       <?php foreach($messageList as $message):?>
       <tr class='text-center'>
         <td class='w-100px text-right'><?php echo $message->fromUserName . $lang->colon;?></td>

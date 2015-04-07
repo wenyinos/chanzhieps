@@ -49,10 +49,7 @@ js::set('admin', $this->get->admin);
       </tr>
     </thead>
     <tbody>
-    <?php
-    $editPriv   = commonModel::hasPriv('user', 'edit');
-    $forbidPriv = commonModel::hasPriv('user', 'forbid');
-    ?>
+    <?php $forbidPriv = commonModel::hasPriv('user', 'forbid');?>
     <?php foreach($users as $user):?>
     <tr class='text-center'>
       <td><?php echo $user->id;?></td>
@@ -71,7 +68,7 @@ js::set('admin', $this->get->admin);
       </td>
       <td class='operate'>
         <?php //if($user->provider == 'wechat') echo html::a($this->createLink('wechat', 'message', "from={$user->openID}"), $lang->user->messages);?>
-        <?php if($editPriv) echo html::a($this->createLink('user', 'edit', "account=$user->account"), $lang->edit); ?>
+        <?php commonModel::printLink('user', 'edit', "account=$user->account", $lang->edit); ?>
         <?php if($user->locked <= helper::now() and $forbidPriv):?>
         <span class="dropdown">
           <a href='###' class="dropdown-toggle" data-toggle="dropdown"><?php echo $lang->user->forbid?> <span class="caret"></span></a>
@@ -82,7 +79,7 @@ js::set('admin', $this->get->admin);
           </ul>
         </span>
         <?php endif;?>
-        <?php if($user->locked > helper::now()) echo html::a(inlink('activate', "id=$user->id"), $lang->user->activate, "class='forbider'");?>
+        <?php if($user->locked > helper::now()) commonModel::printLink('user', 'activate', "id=$user->id", $lang->user->activate, "class='forbider'");?>
       </td>
     </tr>
     <?php endforeach;?>
@@ -90,7 +87,7 @@ js::set('admin', $this->get->admin);
     <tfoot>
       <tr>
         <td colspan='12'>
-        <?php if($this->get->provider == 'wechat') echo html::a(inlink('pullWechatFans'), "<i class='icon-refresh '> {$lang->user->pullWechatFans} </i>", "class='btn btn-primary' id='pullBtn'")?>
+        <?php if($this->get->provider == 'wechat') commonModel::printLink('user', 'pullWechatFans', '', "<i class='icon-refresh '> {$lang->user->pullWechatFans} </i>", "class='btn btn-primary' id='pullBtn'")?>
         <?php $pager->show();?>
         </td>
       </tr>

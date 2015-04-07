@@ -19,11 +19,6 @@
     </thead>
     <?php endif;?>
     <tbody>
-<?php
-$switchStatusPriv = commonModel::hasPriv('thread', 'switchStatus');
-$transferPriv     = commonModel::hasPriv('thread', 'transfer');
-$deletePriv       = commonModel::hasPriv('thread', 'delete');
-?>
       <?php foreach($threads as $thread):?>
       <tr class='text-center'>
         <td><?php echo $thread->id;?></td>
@@ -44,15 +39,15 @@ $deletePriv       = commonModel::hasPriv('thread', 'delete');
         <?php 
         if($thread->hidden)
         {
-            if($switchStatusPriv) echo html::a($this->createLink('thread', 'switchStatus', "threadID=$thread->id"), $lang->thread->show, "class='reload'"); 
+            commonModel::printLink('thread', 'switchStatus', "threadID=$thread->id", $lang->thread->show, "class='reload'"); 
         }
         else
         {
-            if($switchStatusPriv) echo html::a($this->createLink('thread', 'switchStatus', "threadID=$thread->id"), $lang->thread->hide, "class='reload'"); 
+            commonModel::printLink('thread', 'switchStatus', "threadID=$thread->id", $lang->thread->hide, "class='reload'"); 
         }
         ?>
-        <?php if($transferPriv) echo html::a($this->createLink('thread', 'transfer', "threadID=$thread->id"), $lang->thread->transfer, "data-toggle='modal'"); ?>
-        <?php if($deletePriv)   echo html::a($this->createLink('thread', 'delete', "threadID=$thread->id"), $lang->delete, "class='deleter'"); ?>
+        <?php commonModel::printLink('thread', 'transfer', "threadID=$thread->id", $lang->thread->transfer, "data-toggle='modal'");?>
+        <?php commonModel::printLink('thread', 'delete', "threadID=$thread->id", $lang->delete, "class='deleter'");?>
         </td>
       </tr>  
       <?php endforeach;?>

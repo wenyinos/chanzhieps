@@ -21,8 +21,8 @@
     echo html::a(inlink('browse', "status=available"), $lang->package->available,   $status == 'available' ? "class='active'" : '');
     ?>
     <div class='panel-actions'>
-      <?php if(commonModel::hasPriv('package', 'upload')) echo html::a(inlink('upload'), $lang->package->upload, "class='btn btn-primary' data-toggle='modal'");?>
-      <?php if(commonModel::hasPriv('package', 'obtain')) echo html::a(inlink('obtain'), $lang->package->obtain, "class='btn btn-primary'");?>
+      <?php commonModel::printLink('package', 'upload', '', $lang->package->upload, "class='btn btn-primary' data-toggle='modal'");?>
+      <?php commonModel::printLink('package', 'obtain', '', $lang->package->obtain, "class='btn btn-primary'");?>
     </div>
   </div>
   <div class='panel-body'>

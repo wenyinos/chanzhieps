@@ -15,16 +15,12 @@
   <div class='panel-heading'>
     <strong><i class='icon-picture'></i> <?php echo $lang->slide->admin;?></strong>
     <div class='panel-actions'>
-      <?php if(commonModel::hasPriv('slide', 'create')) echo html::a(inlink('create'), '<i class="icon-plus"></i> ' . $lang->slide->create, "class='btn btn-primary'");?>
+      <?php commonModel::printLink('slide', 'create', '', '<i class="icon-plus"></i> ' . $lang->slide->create, "class='btn btn-primary'");?>
     </div>
   </div>
   <form id='sortForm' action='<?php echo inLink('sort')?>' method='post'>
     <table class='table'>
       <tbody>
-        <?php
-        $editPriv   = commonModel::hasPriv('slide', 'edit');
-        $deletePriv = commonModel::hasPriv('slide', 'delete');
-        ?>
         <?php foreach($slides as  $key => $slide):?>
         <?php if($slide->backgroundType == 'color') $slide->height = $slide->height ? $slide->height : 180; ?>
         <tr class='text-middle'>
@@ -54,8 +50,8 @@
           <td class='w-50px text-center'>
             <a href='javascript:;' class='btn btn-move-up btn-sm'><i class='icon-arrow-up'></i></a>
             <a href='javascript:;' class='btn btn-move-down btn-sm'><i class='icon-arrow-down'></i></a>
-            <?php if($editPriv)  echo html::a($this->createLink('slide', 'edit', "id=$slide->id"), "<i class='icon-pencil'></i>", "class='btn btn-sm' title='{$lang->edit}'");?>
-            <?php if($deletePriv)echo html::a($this->createLink('slide', 'delete', "id=$slide->id"), "<i class='icon-remove'></i>", "class='deleter btn btn-sm' title='{$lang->delete}'");?>
+            <?php commonModel::printLink('slide', 'edit', "id=$slide->id", "<i class='icon-pencil'></i>", "class='btn btn-sm' title='{$lang->edit}'");?>
+            <?php commonModel::printLink('slide', 'delete', "id=$slide->id", "<i class='icon-remove'></i>", "class='deleter btn btn-sm' title='{$lang->delete}'");?>
           </td>
         </tr>
         <?php endforeach;?>

@@ -12,7 +12,6 @@
       </tr>
     </thead>
     <tbody>
-      <?php $deletePriv = commonModel::hasPriv('reply', 'delete');?>
       <?php foreach($replies as $reply):?>
       <tr class='text-center'>
         <td><?php echo $reply->id;?></td>
@@ -24,7 +23,7 @@
         <td><?php echo $reply->authorRealname;?></td>
         <td><?php echo substr($reply->addedDate, 5, -3);?></td>
         <td>
-          <?php if($deletePriv) echo html::a($this->createLink('reply', 'delete', "replyID=$reply->id"), $lang->delete, "class='deleter'"); ?>
+          <?php commonModel::printLink('reply', 'delete', "replyID=$reply->id", $lang->delete, "class='deleter'"); ?>
         </td>
       </tr>  
       <?php endforeach;?>

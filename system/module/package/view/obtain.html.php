@@ -37,10 +37,6 @@
   <div class='col-md-10'>
     <?php if($packages):?>
     <div class='cards pd-0 mg-0'>
-    <?php
-    $upgradePriv = commonModel::hasPriv('package', 'upgrade');
-    $installPriv = commonModel::hasPriv('package', 'install');
-    ?>
     <?php foreach($packages as $package):?>
       <?php 
       $currentRelease = $package->currentRelease;
@@ -89,7 +85,6 @@
           <div class='pull-right' style='margin-top: -15px'>
             <div class='btn-group'>
             <?php
-            $installLink = inlink('install',  "package=$package->code&downLink=" . helper::safe64Encode($currentRelease->downLink) . "&md5={$currentRelease->md5}&type=$package->type&overridePackage=no&ignoreCompitable=yes");
             echo html::a($package->viewLink, $lang->package->view, 'class="btn package" target="_blank"');
             if($currentRelease->public)
             {
@@ -99,8 +94,7 @@
                     {
                         if($installeds[$package->code]->version != $package->latestRelease->releaseVersion and $this->package->checkVersion($package->latestRelease->chanzhiCompatible))
                         {
-                            $upgradeLink = inlink('upgrade',  "package=$package->code&downLink=" . helper::safe64Encode($currentRelease->downLink) . "&md5=$currentRelease->md5&type=$package->type");
-                            if($upgradePriv) echo html::a($upgradeLink, $lang->package->upgrade, "class='btn' data-toggle='modal'");
+                            commonModel::printLink('package', 'upgrade', "package=$package->code&downLink=" . helper::safe64Encode($currentRelease->downLink) . "&md5=$currentRelease->md5&type=$package->type", $lang->package->upgrade, "class='btn' data-toggle='modal'");
                         }
                         else
                         {
@@ -110,7 +104,7 @@
                     else
                     {
                         $label = $currentRelease->compatible ? $lang->package->installAuto : $lang->package->installForce;
-                        if($installPriv) echo html::a($installLink, $label, "data-toggle='modal' class='btn'");
+                        commonModel::printLink('package', 'install',  "package=$package->code&downLink=" . helper::safe64Encode($currentRelease->downLink) . "&md5={$currentRelease->md5}&type=$package->type&overridePackage=no&ignoreCompitable=yes", $label, "data-toggle='modal' class='btn'");
                     }
                 }
             }
