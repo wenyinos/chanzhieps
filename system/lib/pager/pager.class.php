@@ -249,7 +249,7 @@ class pager
             if(strtolower($key) == 'pageid')     $this->params[$key] = $this->pageID;
         }
 
-        parse_str($_SERVER['QUERY_STRING'], $query);
+        parse_str(strip_tags(urldecode($_SERVER['QUERY_STRING'])), $query);
 
         unset($query['m']);
         unset($query['f']);
@@ -515,7 +515,7 @@ EOT;
         global $config; 
         if(helper::inSeoMode() && method_exists('uri', 'create' . $this->moduleName . $this->methodName)) 
         {
-            $link  = $_SERVER['REQUEST_URI'];
+            $link  = strip_tags(urldecode($_SERVER['REQUEST_URI']));
 
             if($this->params['pageID'] == 1) return html::a(preg_replace('/\/p\d+\./', '.', $link), $title);
 

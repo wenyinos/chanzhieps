@@ -633,10 +633,7 @@ class control
     public function send($data, $type = 'json')
     {
         $data = (array) $data;
-        if($type == 'json')
-        {
-            echo json_encode($data);
-        }
+        if($type == 'json') echo json_encode($data);
         die(helper::removeUTF8Bom(ob_get_clean()));
     }
 

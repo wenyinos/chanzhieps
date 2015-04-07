@@ -57,6 +57,7 @@ class commonModel extends model
                 }
             }
         }
+        if(!isset($this->config->site->status)) $this->config->site->status = 'normal';
     }
 
     /**
@@ -349,6 +350,7 @@ class commonModel extends model
     {
         global $config, $app;
         $langs = explode(',', $config->site->lang);
+        if(count($langs) == 1) return false;
         foreach($langs as $lang)
         {
             echo html::a(getHomeRoot($config->langsShortcuts[$lang]), $config->langs[$lang]);
@@ -706,7 +708,7 @@ class commonModel extends model
 
         $config->requestType = $config->frontRequestType;
         $link = helper::createLink($module, $method, $vars, $alias);
-        $link = str_replace($_SERVER['SCRIPT_NAME'], '/index.php', $link);
+        $link = str_replace($_SERVER['SCRIPT_NAME'], $config->webRoot . 'index.php', $link);
         $config->requestType = 'GET';
 
         return $link;

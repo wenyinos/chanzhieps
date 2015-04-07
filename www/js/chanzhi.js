@@ -600,7 +600,7 @@ function setGo2Top()
     {
         var parent = $('#go2top').closest('.page-container').find('.page-content');
         $('#go2top').css('left', parent.offset().left + parent.width() + 30);
-        if(parent.width() == $('.m-index-index').width()) $('#go2top').css('left', parent.width() - 90);
+        if(parent.width() == $(window).width()) $('#go2top').css('left', parent.width() - 90);
     }).scroll().resize();
 
     $('#go2top').tooltip({container: 'body', placement: 'left'})

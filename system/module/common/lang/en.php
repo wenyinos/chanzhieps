@@ -60,6 +60,7 @@ $lang->delete         = 'Delete';
 $lang->close          = 'Close';
 $lang->save           = 'Save';
 $lang->confirm        = 'Confirm';
+$lang->send           = 'Send';
 $lang->preview        = 'Preview';
 $lang->goback         = 'Back';
 $lang->search         = 'Search';

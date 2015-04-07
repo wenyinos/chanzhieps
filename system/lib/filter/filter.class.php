@@ -123,7 +123,7 @@ class validater
      */
     public static function checkDomain($var)
     {
-        return preg_match('/^([a-z0-9-]+\.)+[a-z]{2,6}$/', $var);
+        return preg_match('/^([a-z0-9-]+\.)+[a-z]{2,15}$/', $var);
     }
 
     /**

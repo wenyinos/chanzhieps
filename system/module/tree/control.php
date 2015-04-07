@@ -55,7 +55,8 @@ class tree extends control
             $this->lang->menuGroups->tree = 'wechat';
         }
         
-        $userFunc = $isWechatMenu ? array('treeModel', 'createWechatMenuLink') : array('treeModel', 'createManageLink');
+        $modelName = class_exists('exttreeModel') ? 'exttreeModel' : 'treeModel';
+        $userFunc = $isWechatMenu ? array($modelName, 'createWechatMenuLink') : array($modelName, 'createManageLink');
         $this->view->treeMenu = $this->tree->getTreeMenu($type, 0, $userFunc);
 
         $this->view->title    = $this->lang->tree->common;
