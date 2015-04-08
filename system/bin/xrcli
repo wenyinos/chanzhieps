@@ -64,7 +64,6 @@ else
     $_SERVER['SCRIPT_NAME'] = $_SERVER['HTTP_HOST'] . 'index.php';
     $_SERVER['REQUEST_URI'] = isset($request['query']) ? $request['query'] : '';
 }
-$_SERVER['REMOTE_ADDR'] = '127.0.0.1';
 
 /* Get systemRoot. */
 $systemRoot = dirname(dirname(__FILE__)); 
