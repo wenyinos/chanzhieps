@@ -99,6 +99,10 @@ $lang->user->forbidDate['30']    = '一个月';
 $lang->user->forbidDate['3000']  = '永久';
 $lang->user->operate             = '操作';
 
+$lang->user->adminList['super']  = '超级管理员';
+$lang->user->adminList['common'] = '管理员';
+$lang->user->adminList['no']     = '普通会员';
+
 $lang->user->genderList = new stdclass();
 $lang->user->genderList->m = '男';
 $lang->user->genderList->f = '女';
