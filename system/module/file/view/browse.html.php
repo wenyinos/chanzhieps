@@ -35,9 +35,9 @@
       <td><?php echo $file->addedDate;?></td>
       <td class='text-center'>
       <?php
-      commonModel::printLink('user', 'edit',   "id=$file->id", $lang->edit, "class='edit'");
-      commonModel::printLink('user', 'delete', "id=$file->id", $lang->delete, "class='deleter'");
-      if($file->isImage) commonModel::printLink('user', 'setPrimary', "id=$file->id", $lang->file->setPrimary, "class='option'");
+      commonModel::printLink('file', 'edit',   "id=$file->id", $lang->edit, "class='edit'");
+      commonModel::printLink('file', 'delete', "id=$file->id", $lang->delete, "class='deleter'");
+      if($file->isImage) commonModel::printLink('file', 'setPrimary', "id=$file->id", $lang->file->setPrimary, "class='option'");
       ?>
       </td>
     </tr>
