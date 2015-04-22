@@ -705,7 +705,7 @@ class router
      */
     public function fixDomain()
     {
-        if(RUN_MODE == 'install' or RUN_MODE == 'upgrade' or RUN_MODE == 'shell' or !$this->config->installed) return true;
+        if(RUN_MODE == 'install' or RUN_MODE == 'upgrade' or RUN_MODE == 'shell' or RUN_MODE == 'admin' or !$this->config->installed) return true;
         $result = $this->dbh->query("select value from " . TABLE_CONFIG . " where owner = 'system' and module = 'common' and section = 'site' and `key` = 'domain'")->fetch();
         $mainDomain = !empty($result->value) ? $result->value : '';
         $mainDomain = str_replace('http://', '', $mainDomain);
