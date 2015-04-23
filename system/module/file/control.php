@@ -77,6 +77,7 @@ class file extends control
             $this->dao->insert(TABLE_FILE)->data($file)->exec();
 
             $_SESSION['album'][$uid][] = $this->dao->lastInsertID();
+            $this->loadModel('setting')->setItems('system.common.site', array('lastUpload' => time()));
             die(json_encode(array('error' => 0, 'url' => $url)));
         }
     }
