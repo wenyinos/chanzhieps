@@ -191,6 +191,7 @@ class fileModel extends model
             $file['width']      = $imageSize['width'];
             $file['height']     = $imageSize['height'];
             $file['lang']       = 'all';
+            if($objectType == 'logo') $file['lang'] = $this->app->getClientLang();
             unset($file['tmpname']);
             $this->dao->insert(TABLE_FILE)->data($file)->exec();
             $fileTitles[$this->dao->lastInsertId()] = $file['title'];
