@@ -20,11 +20,7 @@
       <table class='table table-form'>
         <tr>
           <td><?php echo html::file('files', "class='form-control'");?></td>
-<<<<<<< HEAD
-          <td><?php echo html::submitButton();?><?php if(isset($logo->webPath) and commonModel::hasPriv('ui', 'deleteLogo')) echo html::a(inlink('deleteLogo'), $lang->reset, "class='btn'");?></td>
-=======
           <td><?php echo html::submitButton();?><?php if(isset($logo->webPath)) commonModel::printLink('ui', 'deleteLogo', '', $lang->reset, "class='btn'");?></td>
->>>>>>> f57a6ad509bff5f06da2468e8c3e78747a443fde
           <td><strong class='text-info'><?php echo $lang->ui->suitableLogoSize; ?></strong></td>
         </tr>
         <tr><td colspan='3'><?php if(isset($logo->webPath)) echo html::image($logo->webPath, "class='logo'");?></td></tr>
