@@ -80,6 +80,7 @@ class forum extends control
         {
             $this->lang->menuGroups->forum = 'feedback';
             $this->lang->forum->menu       = $this->lang->feedback->menu;
+            if(!($this->loadModel('wechat')->getList())) unset($this->lang->forum->menu->wechat);
         }
 
         $this->view->boardID  = $boardID;
