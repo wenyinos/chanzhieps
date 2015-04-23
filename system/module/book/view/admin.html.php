@@ -19,7 +19,7 @@ js::set('path', $path);
   <div class='panel-heading'>
     <strong><i class='icon-book'></i> <?php echo $book->title;?></strong>
     <div class='panel-actions'>
-      <?php if(commonModel::hasPriv('book', 'create')) echo html::a(inlink('create'), '<i class="icon-plus"></i> ' . $lang->book->createBook, "class='btn btn-primary'");?>
+      <?php commonModel::printLink('book', 'create', '', '<i class="icon-plus"></i> ' . $lang->book->createBook, "class='btn btn-primary'");?>
     </div>
   </div>
   <div class='panel-body'><div class='books'><?php echo $catalog;?></div></div>

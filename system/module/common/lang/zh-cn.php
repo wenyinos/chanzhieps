@@ -50,7 +50,7 @@ $lang->currentPos     = '当前位置';
 $lang->categoryMenu   = '分类导航';
 $lang->wechatTip      = '微信订阅';
 $lang->qrcodeTip      = '移动访问';
-   
+
 /* Global action items. */
 $lang->reset          = '重置';
 $lang->edit           = '编辑';
@@ -68,6 +68,8 @@ $lang->more           = '更多';
 $lang->actions        = '操作';
 $lang->feature        = '未来';
 $lang->year           = '年';
+$lang->selectAll      = '全选';
+$lang->selectReverse  = '反选';
 $lang->loading        = '稍候...';
 $lang->saveSuccess    = '保存成功';
 $lang->setSuccess     = '设置成功';

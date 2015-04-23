@@ -425,6 +425,7 @@ $.extend(
             {
                 $(this).find('.modal-dialog').css('width', $(this).data('width'));
                 $.ajustModalPosition('fit', '#ajaxModal');
+                $(this).find('.modal-body').unwrap();
             });
         }, duration);
     }

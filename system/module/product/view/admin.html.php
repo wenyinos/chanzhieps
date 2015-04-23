@@ -17,7 +17,7 @@
 <div class='panel'>
   <div class='panel-heading'>
   <strong><i class="icon-list-ul"></i> <?php echo $lang->product->list;?></strong>
-  <div class='panel-actions'><?php if(commonModel::hasPriv('product', 'create')) echo html::a($this->inlink('create', "category={$categoryID}"), '<i class="icon-plus"></i> ' . $lang->product->create, 'class="btn btn-primary"');?></div>
+  <div class='panel-actions'><?php commonModel::printLink('product', 'create', "category={$categoryID}", '<i class="icon-plus"></i> ' . $lang->product->create, 'class="btn btn-primary"');?></div>
   </div>
   <table class='table table-hover table-striped tablesorter'>
     <thead>
@@ -34,14 +34,6 @@
       </tr>
     </thead>
     <tbody>
-<?php
-$editPriv         = commonModel::hasPriv('product', 'edit');
-$treePriv         = commonModel::hasPriv('tree', 'browse');
-$changeStatusPriv = commonModel::hasPriv('product', 'changeStatus');
-$deletePriv       = commonModel::hasPriv('product', 'delete');
-$setcssPriv       = commonModel::hasPriv('product', 'setcss');
-$setjsPriv        = commonModel::hasPriv('product', 'setjs');
-?>
       <?php foreach($products as $product):?>
       <tr class='text-center'>
         <td><?php echo $product->id;?></td>
@@ -56,17 +48,14 @@ $setjsPriv        = commonModel::hasPriv('product', 'setjs');
           $categories    = $product->categories;
           $categoryAlias = !empty($categories) ? current($categories)->alias : '';
           $changeStatus  = $product->status == 'normal' ? 'offline' : 'normal';
-          if($editPriv)echo html::a($this->createLink('product', 'edit', "productID=$product->id"), $lang->edit);
-          if($treePriv)
-          {
-              echo html::a($this->createLink('file', 'browse', "objectType=product&objectID=$product->id&isImage=0"), $lang->product->files, "data-toggle='modal' data-width='1000'");
-              echo html::a($this->createLink('file', 'browse', "objectType=product&objectID=$product->id&isImage=1"), $lang->product->images, "data-toggle='modal' data-width='1000'");
-          }
-          if($changeStatusPriv)echo html::a($this->createLink('product', 'changeStatus', "productID=$product->id&status=$changeStatus"), $lang->product->statusList[$changeStatus], "class='changeStatus'");
+          commonModel::printLink('product', 'edit', "productID=$product->id", $lang->edit);
+          commonModel::printLink('file', 'browse', "objectType=product&objectID=$product->id&isImage=0", $lang->product->files, "data-toggle='modal' data-width='1000'");
+          commonModel::printLink('file', 'browse', "objectType=product&objectID=$product->id&isImage=1", $lang->product->images, "data-toggle='modal' data-width='1000'");
+          commonModel::printLink('product', 'changeStatus', "productID=$product->id&status=$changeStatus", $lang->product->statusList[$changeStatus], "class='changeStatus'");
           echo html::a(commonModel::createFrontLink('product', 'view',  "productID=$product->id", "name=$product->alias&category=$categoryAlias"), $lang->preview, "target='_blank'");
-          if($deletePriv)echo html::a($this->createLink('product', 'delete', "productID=$product->id"), $lang->delete, "class='deleter'");
-          if($setcssPriv)echo html::a($this->createLink('product', 'setcss', "productID=$product->id"), $lang->product->css, "data-toggle='modal'");
-          if($setjsPriv) echo html::a($this->createLink('product', 'setjs',  "productID=$product->id"), $lang->product->js, "data-toggle='modal'");
+          commonModel::printLink('product', 'delete', "productID=$product->id", $lang->delete, "class='deleter'");
+          commonModel::printLink('product', 'setcss', "productID=$product->id", $lang->product->css, "data-toggle='modal'");
+          commonModel::printLink('product', 'setjs',  "productID=$product->id", $lang->product->js, "data-toggle='modal'");
           ?>
         </td>
       </tr>

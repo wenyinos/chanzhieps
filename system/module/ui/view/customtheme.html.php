@@ -3,7 +3,7 @@
 <div class='alert alert-danger'>
   <div>
     <?php echo $errors;?>
-    <span class='pull-right'><?php if(commonModel::hasPriv('ui', 'customtheme')) echo html::a(inlink('customtheme', "theme={$theme}&template={$template}"), $lang->ui->template->reload, "class='btn btn-primary loadInModal'");?></span>
+    <span class='pull-right'><?php commonModel::printLink('ui', 'customtheme', "theme={$theme}&template={$template}", $lang->ui->template->reload, "class='btn btn-primary loadInModal'");?></span>
   </div>
 </div>
 <?php else:?>

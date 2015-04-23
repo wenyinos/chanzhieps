@@ -119,6 +119,7 @@ class commonModel extends model
         $rights  = $app->user->rights;
         if(RUN_MODE == 'admin')
         {
+            if($app->user->admin == 'no') return false;
             if($app->user->admin == 'super') return true;
             if(isset($rights[$module][$method])) return true;
             return false;
@@ -445,6 +446,25 @@ class commonModel extends model
 
         $link = helper::createLink($module, $method, sprintf($vars, $orderBy));
         echo "<div class='$className'>" . html::a($link, $label) . '</div>';
+    }
+
+    /**
+     * print link;
+     * 
+     * @param  string $module 
+     * @param  string $method 
+     * @param  string $vars 
+     * @param  string $label 
+     * @param  string $misc 
+     * @static
+     * @access public
+     * @return bool
+     */
+    public static function printLink($module, $method, $vars = '', $label, $misc = '')
+    {   
+        if(!commonModel::hasPriv($module, $method)) return false;
+        echo html::a(helper::createLink($module, $method, $vars), $label, $misc);
+        return true;
     }
 
     /**

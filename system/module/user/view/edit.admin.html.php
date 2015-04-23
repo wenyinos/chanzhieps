@@ -10,7 +10,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->user->admin;?></th>
-          <td><input name='admin' type='checkbox' value='super' <?php if($user->admin == 'super') echo 'checked';?>></td><td></td>
+          <td><?php echo html::select('admin', $lang->user->adminList, $user->admin, "class='form-control'")?></td><td></td>
         </tr>  
         <tr>
           <th><?php echo $lang->user->email;?></th>

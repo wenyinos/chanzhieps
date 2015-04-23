@@ -37,13 +37,12 @@
       </tr>
     </thead>
     <tbody>
-      <?php $linkPriv = commonModel::hasPriv('tag', 'link');?>
       <?php foreach($tags as $tag):?>
       <tr class='text-center text-middle'>
         <td><?php echo $tag->tag;?></td>
         <td><?php echo $tag->rank;?></td>
         <td class='text-left'><?php echo $tag->link;?></td>
-        <td> <?php if($linkPriv) echo html::a($this->createLink('tag', 'link', "id=$tag->id"), $lang->tag->editLink, "data-toggle='modal'"); ?> </td>
+        <td> <?php commonModel::printLink('tag', 'link', "id=$tag->id", $lang->tag->editLink, "data-toggle='modal'"); ?> </td>
       </tr>
       <?php endforeach;?>
     </tbody>

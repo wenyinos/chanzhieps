@@ -641,6 +641,7 @@ class userModel extends model
             ->set('account')->eq($account)
             ->set('provider')->eq($provider)
             ->set('openID')->eq($openID)
+            ->set('lang')->eq('all')
             ->exec();
     }
 

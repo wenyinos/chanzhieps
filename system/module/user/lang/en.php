@@ -99,6 +99,10 @@ $lang->user->forbidDate['30']    = '30d';
 $lang->user->forbidDate['3000']  = 'ever';
 $lang->user->operate             = 'Operate';
 
+$lang->user->adminList['super']  = 'Super administrator';
+$lang->user->adminList['common'] = 'Administrator';
+$lang->user->adminList['no']     = 'Member';
+
 $lang->user->genderList = new stdclass();
 $lang->user->genderList->m = 'Male';
 $lang->user->genderList->f = 'Female';
