@@ -227,6 +227,38 @@ class html
     }
 
     /**
+     * Create select buttons include 'selectAll' and 'selectAll'.
+     * 
+     * @param  string $scope  the scope of select reverse.
+     * @return string
+     */
+     static public function selectButton($scope = "")
+    {
+                $string = <<<EOT
+<script>
+$(function()
+{
+    if($('body').data('bindSelectBtn')) return;
+    $('body').data('bindSelectBtn', true);
+    $(document).on('click', '.check-all, .check-inverse', function()
+    {
+        var e = $(this);
+        if(e.closest('.datatable').length) return;
+        scope = e.data('scope');
+        scope = scope ? $('#' + scope) : e.closest('.table');
+        if(!scope.length) scope = e.closest('form');
+        scope.find('input:checkbox').each(e.hasClass('check-inverse') ? function() { $(this).prop("checked", !$(this).prop("checked"));} : function() { $(this).prop("checked", true);});
+    });
+});
+</script>
+EOT;
+        global $lang;
+        $string .= "<a class='btn btn-select-all check-all' data-scope='$scope' href='javascript:;' >{$lang->selectAll}</a>";
+        $string .= "<a class='btn btn-select-reverse check-inverse' data-scope='$scope' href='javascript:;'>{$lang->selectReverse}</a>";
+        return  $string;
+    }
+
+    /**
      * Create tags like "<input type='text' />"
      *
      * @param  string $name     the name of the text input tag.

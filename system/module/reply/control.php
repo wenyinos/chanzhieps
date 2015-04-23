@@ -56,6 +56,7 @@ class reply extends control
         {
             $this->lang->reply->menu = $this->lang->feedback->menu;
             $this->lang->menuGroups->reply = 'feedback';
+            if(!($this->loadModel('wechat')->getList())) unset($this->lang->reply->menu->wechat);
         }
 
         $this->view->title   = $this->lang->reply->admin;

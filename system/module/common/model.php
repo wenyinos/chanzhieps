@@ -58,6 +58,7 @@ class commonModel extends model
             }
         }
         if(!isset($this->config->site->status)) $this->config->site->status = 'normal';
+        if(($this->loadModel('wechat')->getList())) $this->config->site->wechat = true;
     }
 
     /**
@@ -119,6 +120,7 @@ class commonModel extends model
         $rights  = $app->user->rights;
         if(RUN_MODE == 'admin')
         {
+            if($app->user->admin == 'no') return false;
             if($app->user->admin == 'super') return true;
             if(isset($rights[$module][$method])) return true;
             return false;
@@ -215,7 +217,7 @@ class commonModel extends model
      */
     public static function createMainMenu($currentModule)
     {
-        global $app, $lang;
+        global $app, $lang, $config;
 
         /* Set current module. */
         if(isset($lang->menuGroups->$currentModule)) $currentModule = $lang->menuGroups->$currentModule;
@@ -225,10 +227,31 @@ class commonModel extends model
         /* Print all main menus. */
         foreach($lang->menu as $moduleName => $moduleMenu)
         {
+            if($moduleName == 'feedback')
+            {
+                list($label, $module, $method, $vars) = explode('|', $moduleMenu);
+
+                if(!commonModel::isAvailable('message'))
+                {
+                    if(commonModel::isAvailable('forum'))
+                    {
+                        $moduleMenu = "$label|forum|admin|tab=feedback";
+                    }
+                    elseif(isset($config->site->wechat))
+                    {
+                        $moduleMenu = "$label|wechat|message|mode=replied&replied=0";
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+            }
+
             $class = $moduleName == $currentModule ? " class='active'" : '';
             list($label, $module, $method, $vars) = explode('|', $moduleMenu);
 
-            if(!commonModel::isAvailable($module)) continue;
+            if($module != 'user' and !commonModel::isAvailable($module)) continue;
             
             /* Just whether blog menu should shown. */
             if(!commonModel::isAvailable('blog') && $vars == 'type=blog') continue;  
@@ -282,6 +305,7 @@ class commonModel extends model
             list($label, $module, $method, $vars) = explode('|', $methodLink);
             $label .= '<i class="icon-chevron-right"></i>';
 
+            if($module != 'user' and !commonModel::isAvailable($module)) continue;
             if(commonModel::hasPriv($module, $method))
             {
                 $class = '';
