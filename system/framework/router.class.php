@@ -744,6 +744,9 @@ class router
                 $enabledLangs = explode(',', $enabledLangs);
             }
             if(!in_array($defaultLang, $enabledLangs)) $defaultLang = current($enabledLangs);
+
+            /* Set default lang. */
+            $this->config->default->lang = $defaultLang;
         }
         else
         {
@@ -761,9 +764,10 @@ class router
             if($this->config->requestType == 'GET' and isset($_GET[$this->config->langVar])) $this->clientLang = $flipedLangs[$_GET[$this->config->langVar]];
             if($this->config->requestType == 'PATH_INFO')
             {
+                $pathInfo = $this->getPathInfo('PATH_INFO');
                 foreach($this->config->langsShortcuts as $language => $code)
                 {
-                    if(strpos(trim($_SERVER['REQUEST_URI'], '/'), $code) === 0) $this->clientLang = $language;
+                    if(strpos(trim($pathInfo, '/'), $code) === 0) $this->clientLang = $language;
                 }
             }
         }

@@ -316,10 +316,8 @@ class installModel extends model
         $clientLang = $this->app->getClientLang();
 
         $dbFile = $this->app->getAppRoot() . 'db' . DS . 'chanzhi.sql';
-        $defaultDataFile = $this->app->getAppRoot() . 'db' . DS . 'local.' . $clientLang . '.sql';
 
         $dbContents = file_get_contents($dbFile);
-        if(file_exists($defaultDataFile)) $dbContents .= file_get_contents($defaultDataFile);
         
         $tables = array_merge(explode(';', $dbContents));
 
