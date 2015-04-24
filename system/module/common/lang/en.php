@@ -101,6 +101,7 @@ $lang->company->phone     = 'Phone';
 $lang->company->email     = 'Email';
 $lang->company->fax       = 'Fax';
 $lang->company->qq        = 'QQ';
+$lang->company->skype     = 'Skype';
 $lang->company->weibo     = 'Weibo';
 $lang->company->weixin    = 'Wechat';
 $lang->company->wangwang  = 'Wangwang';

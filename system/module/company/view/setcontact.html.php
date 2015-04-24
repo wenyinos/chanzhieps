@@ -37,6 +37,10 @@
           <td><?php echo html::input('qq', isset($contact->qq) ? $contact->qq : '', "class='form-control'");?></td><td></td>
         </tr>
         <tr>
+          <th><?php echo $lang->company->skype;?></th> 
+          <td><?php echo html::input('skype', isset($contact->skype) ? $contact->skype : '', "class='form-control'");?></td><td></td>
+        </tr>
+        <tr>
           <th><?php echo $lang->company->weixin;?></th> 
           <td><?php echo html::input('weixin', isset($contact->weixin) ? $contact->weixin : '', "class='form-control'");?></td><td></td>
         </tr>
