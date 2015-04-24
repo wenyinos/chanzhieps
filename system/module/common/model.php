@@ -580,7 +580,11 @@ class commonModel extends model
      */
     public function printProduct($module, $product)
     {
-        if(empty($module->pathNames)) return '';
+        if(empty($module->pathNames))
+        {
+            echo '<li>' . $module->name . '</li>';
+            return '';
+        }
         foreach($module->pathNames as $moduleID => $moduleName)
         {
             echo '<li>' . html::a(inlink('browse', "moduleID=$moduleID", "category=" . $this->loadModel('tree')->getAliasByID($moduleID)), $moduleName) . '</li>';
