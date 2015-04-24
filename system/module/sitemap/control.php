@@ -40,7 +40,7 @@ class sitemap extends control
         $this->view->blogTree    = $this->tree->getTreeMenu('blog', 0, array('treeModel', 'createBlogBrowseLink'));
         $this->view->boards      = $this->loadModel('forum')->getBoards();
         $this->view->books       = $this->dao->select('id, title, alias')->from(TABLE_BOOK)->where('type')->eq('book')->fetchAll();
-        $this->view->pages       = $this->dao->select('id, title, alias')->from(TABLE_ARTICLE)->where('type')->eq('page')->fetchAll('id');
+        $this->view->pages       = $this->dao->select('id, title, alias')->from(TABLE_ARTICLE)->where('type')->eq('page')->andWhere('status')->eq('normal')->fetchAll('id');
         $this->view->onlyBody    = $onlyBody;
 
         $this->display();
@@ -70,7 +70,7 @@ class sitemap extends control
         }
 
         $articles = $this->article->getList('article', $this->tree->getFamily(0, 'article'), 'id_desc');
-        $pages    = $this->article->getList('page', 0, 'id_desc');
+        $pages    = $this->dao->select('id, title, alias')->from(TABLE_ARTICLE)->where('type')->eq('page')->andWhere('status')->eq('normal')->fetchAll('id');
         $blogs    = $this->article->getList('blog', $this->tree->getFamily(0, 'blog'), 'id_desc');
         $products = $this->product->getList($this->tree->getFamily(0), 'id_desc');
         $board    = $this->tree->getFamily(0);
