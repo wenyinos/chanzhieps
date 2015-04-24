@@ -31,7 +31,7 @@ js::execute($product->js);
         <div class='col-md-5'>
           <div class='product-image media-wrapper'>
             <?php $title = $product->image->primary->title ? $product->image->primary->title : $product->name;?>
-            <?php echo html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'");?>
+            <?php echo html::image($product->image->primary->fullURL, "title='{$title}' alt='{$product->name}'");?>
           </div>
           <?php if(count($product->image->list) > 1):?>
           <div class='product-image-menu row'>
