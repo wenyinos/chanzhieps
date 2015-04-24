@@ -205,7 +205,7 @@ class settingModel extends model
      */
     public function updateVersion($version)
     {
-        return $this->setItem('system.common.global.version', $version);
+        return $this->setItem('system.common.global.version', $version, 'all');
     }
 
     /**
