@@ -30,12 +30,12 @@
             </tr>
             <tr>
               <th><?php echo $lang->install->dbPort;?></th>
-              <td><?php echo html::input('dbPort', '3306', "class='form-control'");?></td>
+              <td><?php echo html::input('dbPort', '', "class='form-control'");?></td>
               <td></td>
             </tr>
             <tr>
               <th><?php echo $lang->install->dbUser;?></th>
-              <td><?php echo html::input('dbUser', 'root', "class='form-control'");?></td>
+              <td><?php echo html::input('dbUser', '', "class='form-control'");?></td>
               <td></td>
             </tr>
             <tr>
