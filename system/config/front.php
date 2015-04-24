@@ -22,9 +22,10 @@ $config->rights->guest['article']['view']   = 'view';
 $config->rights->guest['blog']['index']  = 'index';
 $config->rights->guest['blog']['view']   = 'view';
 
-$config->rights->guest['product']['index']  = 'index';
-$config->rights->guest['product']['browse'] = 'browse';
-$config->rights->guest['product']['view']   = 'view';
+$config->rights->guest['product']['index']    = 'index';
+$config->rights->guest['product']['browse']   = 'browse';
+$config->rights->guest['product']['view']     = 'view';
+$config->rights->guest['product']['redirect'] = 'redirect';
 
 $config->rights->guest['company']['index']   = 'index';
 $config->rights->guest['company']['contact'] = 'contact';

@@ -324,4 +324,17 @@ class product extends control
         $this->view->product = $this->product->getByID($productID);
         $this->display();
     }
+
+    /**
+     * Redirect mall of product.
+     * 
+     * @param  int    $productID 
+     * @access public
+     * @return void
+     */
+    public function redirect($productID)
+    {
+        $product = $this->product->getByID($productID);
+        helper::header301(htmlspecialchars_decode($product->mall));
+    }
 }
