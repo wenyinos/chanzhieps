@@ -212,6 +212,7 @@ table.captcha td label {padding: 0;}
 .panel-block .panel-body > .items .item:last-child {border: none}
 .panel-block .panel-body > .items .item .media {max-width: inherit; overflow: hidden; max-height: 300px; margin-right: 10px;}
 .panel-block .panel-body > .items .item-content {margin-top: 5px;}
+.panel-block .panel-body > .items .item .small .media{max-width: 60px;}
 
 /* Panel block: cards */
 .panel-block .panel-body > .cards {margin: -10px -15px; padding: 0}
