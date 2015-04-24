@@ -553,7 +553,7 @@ function setRequiredFields()
  */
 function selectLang(lang)
 {
-    $.cookie('lang', lang, {expires:config.cookieLife, path:config.webRoot});
+    $.cookie(config.runMode + 'Lang', lang, {expires:config.cookieLife, path:config.webRoot});
     location.href = removeAnchor(location.href);
 }
 

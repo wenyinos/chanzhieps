@@ -753,6 +753,8 @@ class router
             $defaultLang  = $this->config->default->lang;
             $enabledLangs = array_keys($this->config->langs);
         }
+            
+        $langCookieVar = RUN_MODE . 'Lang';
 
         if(!empty($lang))
         {
@@ -771,9 +773,9 @@ class router
                 }
             }
         }
-        elseif(isset($_COOKIE['lang']))
+        elseif(isset($_COOKIE[$langCookieVar]))
         {
-            $this->clientLang = $_COOKIE['lang'];
+            $this->clientLang = $_COOKIE[$langCookieVar];
         }
         elseif(RUN_MODE == 'admin' and isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
         {
