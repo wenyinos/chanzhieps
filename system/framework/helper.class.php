@@ -78,13 +78,15 @@ class helper
         if(helper::inSeoMode() and method_exists('uri', 'create' . $moduleName . $methodName))
         {
             $link = call_user_func_array('uri::create' . $moduleName . $methodName, array('param'=> $vars, 'alias'=>$alias));
-            if($lang) $link = '/' . $lang . $link;
+            /* Add client lang. */
+            if($lang and $link and strpos($link, $config->webRoot) === 0) $link = $config->webRoot . $lang . '/' . substr($link, strlen($config->webRoot));
             if($link) return $link;
         }
         
         /* Set the view type. */
         if(empty($viewType)) $viewType = $app->getViewType();
         $link = $config->requestType == 'PATH_INFO' ? $config->webRoot : $_SERVER['SCRIPT_NAME'];
+        if($config->requestType == 'PATH_INFO' and $lang) $link .= "$lang/";
 
         /* The PATH_INFO type. */
         if($config->requestType == 'PATH_INFO')
@@ -112,7 +114,6 @@ class helper
                 foreach($vars as $value) $link .= "{$config->requestFix}$value";
                 $link .= '.' . $viewType;
             }
-            if($lang) $link = '/' . $lang . $link;
         }
         elseif($config->requestType == 'GET')
         {

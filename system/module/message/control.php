@@ -93,6 +93,8 @@ class message extends control
      */
     public function admin($type = 'message', $status = '0', $recTotal = 0, $recPerPage = 5, $pageID = 1)
     {
+        if(!($this->loadModel('wechat')->getList())) unset($this->lang->message->menu->wechat);
+
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 

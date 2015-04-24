@@ -79,7 +79,7 @@ $config->dependence->blog[]    = 'blog';
 $config->dependence->book[]    = 'book';
 $config->dependence->user[]    = 'user';
 $config->dependence->forum[]   = 'forum';
-$config->dependence->forum[]   = 'user';
+$config->dependence->reply[]   = 'forum';
 $config->dependence->message[] = 'message';
 
 /* Database settings. */

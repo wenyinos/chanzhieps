@@ -75,7 +75,8 @@ class uiModel extends model
         if(!$this->file->checkSavePath()) return array('result' => false, 'message' => $this->lang->file->errorUnwritable);
 
         /* Delete old files. */
-        $oldFiles = $this->dao->select('id')->from(TABLE_FILE)->where('objectType')->eq($section)->fetchAll('id');
+        $clientLang = $this->app->getClientLang();
+        $oldFiles = $this->dao->select('id')->from(TABLE_FILE)->where('objectType')->eq($section)->andWhere('lang')->eq($clientLang)->fetchAll('id');
         foreach($oldFiles as $file) $fileModel->delete($file->id);
         if(dao::isError()) return array('result' => false, 'message' => $this->lang->fail);
 
