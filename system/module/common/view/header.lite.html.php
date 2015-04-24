@@ -12,7 +12,7 @@ $themeRoot = $webRoot . "template/default/theme/";
   <meta http-equiv="Cache-Control"  content="no-transform">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php if($this->app->getModuleName() == 'user' and $this->app->getMethodName() == 'deny'):?>
-  <meta http-equiv='refresh' content="5;url='<?php echo helper::createLink('index');?>'">
+  <meta http-equiv='refresh' content="5;url='<?php echo helper::createLink($config->default->module);?>'">
   <?php endif;?>
   <?php
   if(!isset($title))    $title    = '';
