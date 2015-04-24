@@ -10,6 +10,13 @@
  * Licensed under MIT or GPLv3, see LICENSE
  */
 
+/**
+ * Change log.
+ *
+ * chujilu 20150424 Add errors and remove exception when parse error.
+ *
+ */
+
 
 /**
  * The less compiler and parser.
@@ -52,6 +59,8 @@ class lessc {
 
 	public $importDisabled = false;
 	public $importDir = '';
+
+    public $errors = array();
 
 	protected $numberPrecision = null;
 
@@ -1769,7 +1778,8 @@ class lessc {
 			$parser->count = 0;
 			$parser->buffer = (string)$strValue;
 			if (!$parser->propertyValue($value)) {
-				throw new Exception("failed to parse passed in variable $name: $strValue");
+				//throw new Exception("failed to parse passed in variable $name: $strValue");
+                $this->errors[trim($name, '@')] = "Failed to parse this variable.";
 			}
 
 			$this->set($name, $value);

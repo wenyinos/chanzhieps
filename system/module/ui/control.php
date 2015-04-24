@@ -64,7 +64,8 @@ class ui extends control
 
             if(isset($templates[$template]) && isset($templates[$template]['themes'][$theme]))
             {
-                $this->ui->createCustomerCss($template, $theme, $params);
+                $errors = $this->ui->createCustomerCss($template, $theme, $params);
+                if(!empty($errors)) $this->send(array('result' => 'fail', 'message' => $errors));
                 $setting       = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true): array();
                 $postedSetting = fixer::input('post')->remove('template,theme,css')->get();
 
