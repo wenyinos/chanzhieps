@@ -737,11 +737,11 @@ class packageModel extends model
 
                 if(md5_file($file) != $savedMD5)
                 {
-                    $removeCommands[] = PHP_OS == 'Linux' ? "rm -fr $file #changed" : "del $file :changed";
+                    $removeCommands[] = PHP_OS == 'Linux' ? "rm -fr $file #changed" : str_replace('/', '\\', "del $file &rem changed");
                 }
                 elseif(!@unlink($file))
                 {
-                    $removeCommands[] = PHP_OS == 'Linux' ? "rm -fr $file" : "del $file";
+                    $removeCommands[] = PHP_OS == 'Linux' ? "rm -fr $file" : str_replace('/', '\\', "del $file");
                 }
             }
         }
@@ -752,7 +752,7 @@ class packageModel extends model
             rsort($dirs);    // remove from the lower level directory.
             foreach($dirs as $dir)
             {
-                if(!@rmdir($appRoot . $dir)) $removeCommands[] = "rmdir $appRoot$dir";
+                if(!@rmdir($dir)) $removeCommands[] = "rmdir $dir";
             }
         }
 
