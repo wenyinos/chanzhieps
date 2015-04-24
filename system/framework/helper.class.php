@@ -584,11 +584,13 @@ function getWebRoot($full = false)
         $path = empty($url['path']) ? '/' : rtrim($url['path'], '/');
         $path = empty($path) ? '/' : $path;
     }
+
     if($full)
     {
         $http = (isset($_SERVER['HTTPS']) and strtolower($_SERVER['HTTPS']) != 'off') ? 'https://' : 'http://';
         return $http . $_SERVER['HTTP_HOST'] . substr($path, 0, (strrpos($path, '/') + 1));
     }
+
     return substr($path, 0, (strrpos($path, '/') + 1));
 }
 
