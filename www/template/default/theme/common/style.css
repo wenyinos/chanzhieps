@@ -218,9 +218,8 @@ table.captcha td label {padding: 0;}
 .panel-block .panel-body > .cards {margin: -10px -15px; padding: 0}
 .panel-block .panel-body > .cards [class*='col-'] {padding: 0;}
 .panel-block .panel-body .card {margin: 0; border-bottom: 1px #ddd dotted; transition:all 0.3s; padding: 10px 10px 0; border-radius: 0}
-.panel-block .panel-body .card:hover {background-color: #f5f5f5;}
 .panel-block .panel-body > .cards [class*='col-']:last-child .card {border-bottom: none;}
-.panel-block .panel-body .card > .media {text-align: center; overflow: hidden; background-color: #f1f1f1; height: 200px; line-height: 200px; background-repeat: no-repeat; background-position: center; background-size: contain;}
+.panel-block .panel-body .card > .media {text-align: center; overflow: hidden; height: 200px; line-height: 200px; background-repeat: no-repeat; background-position: center; background-size: contain;}
 .ie-8 .panel-block .panel-body .card > .media {line-height: 118px; background-image: none!important}
 .panel-block .panel-body .card > .media img {width: 100%; max-height: 100%; display: none;}
 .ie-8 .panel-block .panel-body .card > .media img {display: inline-block;}
