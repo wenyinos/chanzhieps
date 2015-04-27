@@ -19,6 +19,7 @@ $lang->site->module        = 'Modules';
 $lang->site->lang          = 'Language';
 $lang->site->defaultLang   = 'Default Language';
 $lang->site->domain        = 'Main Domain';
+$lang->site->allowedDomain = 'Allowed Domain';
 $lang->site->keywords      = 'Site Keywords';
 $lang->site->indexKeywords = 'Index Keywords';
 $lang->site->meta          = 'Meta';
@@ -57,8 +58,10 @@ $lang->site->moduleAvailable['blog']    = 'Blog';
 $lang->site->moduleAvailable['book']    = 'Book';
 $lang->site->moduleAvailable['message'] = 'Message';
 
-$lang->site->metaHolder        = 'Tags liek <meta>, <script>, <style>, <link> is accepted.';
-$lang->site->fileAllowedRole   = 'Use "," to divide different extension name.';
+$lang->site->metaHolder       = 'Tags liek <meta>, <script>, <style>, <link> is accepted.';
+$lang->site->fileAllowedRole  = 'Use "," to divide different extension name.';
+$lang->site->domainTip        = 'Redirect all request to this domian.';
+$lang->site->allowedDomainTip = 'Use "," to divide different domain.';
 
 $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Can not write robots file, please make sure %s writeable first.';

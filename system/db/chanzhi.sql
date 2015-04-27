@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `eps_book` (
 -- DROP TABLE IF EXISTS `eps_category`;
 CREATE TABLE IF NOT EXISTS `eps_category` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
-  `name` char(30) NOT NULL DEFAULT '',
+  `name` varchar(100) NOT NULL DEFAULT '',
   `alias` varchar(100) NOT NULL,
   `desc` text NOT NULL,
   `keywords` varchar(150) NOT NULL,

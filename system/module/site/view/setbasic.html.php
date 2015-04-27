@@ -36,7 +36,13 @@
         </tr>
         <tr>
           <th><?php echo $lang->site->domain;?></th> 
-          <td><?php echo html::input('domain',  isset($this->config->site->domain) ? $this->config->site->domain : '', "class='form-control'");?></td><td></td>
+          <td><?php echo html::input('domain',  isset($this->config->site->domain) ? $this->config->site->domain : '', "class='form-control'");?></td>
+          <td title="<?php echo $lang->site->domainTip;?>"><i class='icon-question-sign'></i></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->site->allowedDomain;?></th> 
+          <td><?php echo html::input('allowedDomain',  isset($this->config->site->allowedDomain) ? $this->config->site->allowedDomain : '', "class='form-control'");?></td>
+          <td title="<?php echo $lang->site->allowedDomainTip;?>"><i class='icon-question-sign'></i></td>
         </tr>
         <tr>
           <th><?php echo $lang->site->module;?></th>
@@ -70,8 +76,9 @@
           <th><?php echo $lang->site->icpSN;?></th> 
           <td colspan='2'>
             <div class='row'>
-              <div class='col-sm-3'><?php echo html::input('icpSN', $this->config->site->icpSN, "class='form-control col-xs-2'");?></div>
-              <div class='col-sm-9'>
+              <?php $placeholder = ($this->app->getClientLang() == 'en') ? "placeholder='Only for site in China mainland'" : '';?>
+              <div class='col-sm-4'><?php echo html::input('icpSN', $this->config->site->icpSN, "class='form-control col-xs-2' $placeholder");?></div>
+              <div class='col-sm-8'>
                 <div class='input-group'>
                   <span class="input-group-addon"><?php echo $lang->site->icpLink;?></span>
                   <?php echo html::input('icpLink', isset($this->config->site->icpLink) ? $this->config->site->icpLink : 'http://www.miitbeian.gov.cn', "class='form-control'")?>

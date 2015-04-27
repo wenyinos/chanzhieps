@@ -413,7 +413,7 @@ class helper
     {
         global $config;
 
-        $domain = str_replace('-', '_', $domain);    // Replace '-' by '_'.
+        $domain = strtolower(str_replace('-', '_', $domain));    // Replace '-' by '_'.
         if(strpos($domain, ':') !== false) $domain = substr($domain, 0, strpos($domain, ':'));    // Remove port from domain.
 
         $items = explode('.', $domain);

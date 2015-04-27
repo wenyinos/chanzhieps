@@ -103,7 +103,7 @@ js::execute($product->js);
             <?php if($product->mall):?>
             <hr>
             <div class='btn-buy'>
-            <?php echo html::a($product->mall, $lang->product->buyNow, "class='btn btn-lg btn-primary' target='_blank'");?>
+            <?php echo html::a(inlink('redirect', "id={$product->id}"), $lang->product->buyNow, "class='btn btn-lg btn-primary' target='_blank'");?>
             </div>
             <?php endif;?>
           </div>

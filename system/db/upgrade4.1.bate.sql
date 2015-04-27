@@ -19,3 +19,5 @@ CREATE TABLE IF NOT EXISTS `eps_usergroup` (
   `lang` char(30) NOT NULL,
   UNIQUE KEY `account` (`account`,`group`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+ALTER TABLE `eps_category` CHANGE `name` `name` varchar(100) NOT NULL;

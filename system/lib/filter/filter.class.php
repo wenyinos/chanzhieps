@@ -739,7 +739,6 @@ class fixer
         foreach($this->data as $field => $value)
         {
             if(!isset($fields[$field])) unset($this->data->$field);
-            if(!in_array($field, $this->stripedFields)) $this->data->$field = $this->specialChars($this->data->field);
         }
 
         return $this->data;

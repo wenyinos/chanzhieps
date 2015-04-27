@@ -168,7 +168,8 @@ class uiModel extends model
         unset($params['navbar-background-image-position']);
 
         $lessc->setVariables($params);
-        return $lessc->compileFile($lessTemplate, $cssFile);
+        $lessc->compileFile($lessTemplate, $cssFile);
+        return $lessc->errors;
     }
 
     /**
