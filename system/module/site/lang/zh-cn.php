@@ -19,6 +19,7 @@ $lang->site->module        = '功能模块';
 $lang->site->lang          = '站点语言';
 $lang->site->defaultLang   = '默认语言';
 $lang->site->domain        = '主域名';
+$lang->site->allowedDomain = '可访问域名';
 $lang->site->keywords      = '关键词';
 $lang->site->indexKeywords = '首页关键词';
 $lang->site->meta          = 'Meta信息';
@@ -55,8 +56,10 @@ $lang->site->moduleAvailable['blog']    = '博客';
 $lang->site->moduleAvailable['book']    = '手册';
 $lang->site->moduleAvailable['message'] = '评论留言';
 
-$lang->site->metaHolder        = '可放置<meta><script><style>和<link>标签。';
-$lang->site->fileAllowedRole   = '多个后缀名之间请用 "," 隔开';
+$lang->site->metaHolder       = '可放置<meta><script><style>和<link>标签。';
+$lang->site->fileAllowedRole  = '多个后缀名之间请用 "," 隔开';
+$lang->site->domainTip        = '设置主域名可使所有网站访问跳转到该域名，设置前请确保主域名解析正确。该值为空时不进行跳转。';
+$lang->site->allowedDomainTip = '多个域名使用 , 隔开，如www.chanzhi.org,www.chanzhi.com。该值为空时允许所有域名访问。';
 
 $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Robots文件%s 不可写，请修改权限后设置。';
