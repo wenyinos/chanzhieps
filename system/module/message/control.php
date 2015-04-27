@@ -118,10 +118,12 @@ class message extends control
         $this->lang->message = $this->lang->$type;
         if($_POST)
         {
+            $isAuto = ((isset($this->config->site->captcha) and $this->config->site->captcha == 'auto') or !isset($this->config->site->captcha)) ? true : false;
+            $isOpen = (isset($this->config->site->captcha) and $this->config->site->captcha == 'open') ? true : false;
             /* If no captcha but is garbage, return the error info. */
-            if($this->post->captcha === false and $this->loadModel('captcha')->isEvil($this->post->content))
+            if($this->post->captcha === false and (($isAuto and $this->loadModel('captcha')->isEvil($this->post->content)) or $isOpen))
             {
-                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->captcha->create4Comment()));
+                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->loadModel('captcha')->create4Comment()));
             }
 
             /* Try to save to database. */
@@ -150,6 +152,14 @@ class message extends control
     {
         if($_POST)
         {
+            $isAuto = ((isset($this->config->site->captcha) and $this->config->site->captcha == 'auto') or !isset($this->config->site->captcha)) ? true : false;
+            $isOpen = (isset($this->config->site->captcha) and $this->config->site->captcha == 'open') ? true : false;
+            /* If no captcha but is garbage, return the error info. */
+            if($this->post->captcha === false and (($isAuto and $this->loadModel('captcha')->isEvil($this->post->content)) or $isOpen))
+            {
+                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->loadModel('captcha')->create4MessageReply()));
+            }
+
             $replyID = $this->message->reply($messageID);
             if(!$replyID) $this->send(array('result' => 'fail', 'reason' => 'error', 'message' => dao::getError()));
             $this->message->setCookie($replyID);

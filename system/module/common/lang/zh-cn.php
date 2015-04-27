@@ -208,6 +208,7 @@ $lang->site->menu = new stdclass();
 $lang->site->menu->basic    = '站点设置|site|setbasic|';
 $lang->site->menu->lang     = '语言设置|site|setlang|';
 $lang->site->menu->nav      = '导航设置|nav|admin|';
+$lang->site->menu->security = '安全设置|site|setsecurity|';
 $lang->site->menu->upload   = '上传设置|site|setupload|';
 $lang->site->menu->tag      = '关键词设置|tag|admin|';
 #$lang->site->menu->robots   = 'Robots|site|setrobots|';

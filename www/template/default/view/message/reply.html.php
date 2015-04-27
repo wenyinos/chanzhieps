@@ -23,6 +23,7 @@ $email = $this->session->user->account == 'guest' ? '' : $this->session->user->e
         <?php echo html::textarea('content', '', "class='form-control' rows='5'");?>
       </td>
     </tr>
+    <tr id='captchaBox' class='hiding'></tr>
     <tr><td></td><td><?php echo html::submitButton();?></td></tr>
   </table>
 </form>
