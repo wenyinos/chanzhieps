@@ -30,6 +30,8 @@ $lang->site->mission       = 'Mission';
 $lang->site->copyright     = 'Copyright';
 $lang->site->allowUpload   = 'Allow upload files';
 $lang->site->allowedFiles  = 'Allowed file types';
+$lang->site->twContent     = 'traditional contents';
+$lang->site->cn2tw         = 'Copy from simplified Chinese content';
 
 $lang->site->setBasic      = "Baisc";
 $lang->site->setLang       = "Languages";

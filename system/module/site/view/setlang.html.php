@@ -20,6 +20,10 @@
           <th class='w-200px'><?php echo $lang->site->lang;?></th>
           <td colspan='2'><?php echo html::checkbox('lang', $config->langs, isset($this->config->site->lang) ? $this->config->site->lang : 'zh-cn');?></td><td></td>
         </tr>
+        <tr id='twTR'>
+          <th><?php echo $lang->site->twContent;?></th>
+          <td colspan='2'><?php echo html::checkbox('cn2tw', array(1 => $lang->site->cn2tw), isset($this->config->site->cn2tw) ? $this->config->site->cn2tw : '');?></td><td></td>
+        </tr>
         <tr>
           <th><?php echo $lang->site->defaultLang;?></th>
           <td class='w-p20'>

@@ -51,7 +51,12 @@ class site extends control
     {
         if(!empty($_POST))
         {
-            $setting = fixer::input('post')->join('lang', ',')->get();
+            $setting = fixer::input('post')
+                ->setDefault('cn2tw', 0)
+                ->join('lang', ',')
+                ->join('cn2tw', '')
+                ->get();
+
             if(empty($setting->lang) or empty($setting->defaultLang)) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
             if(strpos($setting->lang, $setting->defaultLang) === false) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
 
