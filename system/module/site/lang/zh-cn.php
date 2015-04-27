@@ -32,6 +32,8 @@ $lang->site->copyright     = '创建年份';
 $lang->site->allowUpload   = '允许上传附件';
 $lang->site->allowedFiles  = '允许附件类型';
 $lang->site->captcha       = '验证码';
+$lang->site->twContent     = '繁体内容';
+$lang->site->cn2tw         = '自动从简体版复制';
 
 $lang->site->setBasic      = "基本信息设置";
 $lang->site->setLang       = "语言设置";
