@@ -11,18 +11,21 @@
  */
 $lang->thread->common    = '主题';
 
-$lang->thread->id         = '编号';
-$lang->thread->title      = '标题';
-$lang->thread->board      = '板块';
-$lang->thread->author     = '作者';
-$lang->thread->content    = '内容';
-$lang->thread->file       = '附件: ';
-$lang->thread->postedDate = '发表于';
-$lang->thread->replies    = '回帖';
-$lang->thread->views      = '阅读';
-$lang->thread->lastReply  = '最后回帖';
-$lang->thread->isLink     = '跳转';
-$lang->thread->link       = '链接';
+$lang->thread->id          = '编号';
+$lang->thread->title       = '标题';
+$lang->thread->board       = '板块';
+$lang->thread->author      = '作者';
+$lang->thread->content     = '内容';
+$lang->thread->file        = '附件: ';
+$lang->thread->postedDate  = '发表于';
+$lang->thread->replies     = '回帖';
+$lang->thread->views       = '阅读';
+$lang->thread->lastReply   = '最后回帖';
+$lang->thread->isLink      = '跳转';
+$lang->thread->link        = '链接';
+$lang->thread->color       = '颜色';
+$lang->thread->colorTip    = '十六进制颜色值';
+$lang->thread->colorPlates = '333333|000000|CA1407|45872B|148D00|F25D03|2286D2|D92958|A63268|04BFAD|D1270A|FF9400|299182|63731A|3D4DBE|7382D9|754FB9|F2E205|B1C502|364245|C05036|8A342A|E0DDA2|B3D465|EEEEEE|FFD0E5|D0FFFD|FFFF84|F4E6AE|E5E5E5|F1F1F1|FFFFFF';
 
 $lang->thread->post         = '发贴';
 $lang->thread->postTo       = '发布贴子到';

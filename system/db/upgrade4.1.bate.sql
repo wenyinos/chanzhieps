@@ -22,3 +22,4 @@ CREATE TABLE IF NOT EXISTS `eps_usergroup` (
 
 ALTER TABLE `eps_category` CHANGE `name` `name` varchar(100) NOT NULL;
 ALTER TABLE `eps_user` ADD `realnames` varchar(100) NOT NULL default '';
+ALTER TABLE `eps_thread` ADD `color` char(10) NOT NULL AFTER `title`;

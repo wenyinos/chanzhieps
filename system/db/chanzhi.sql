@@ -334,6 +334,7 @@ CREATE TABLE IF NOT EXISTS `eps_thread` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `board` mediumint(9) NOT NULL,
   `title` varchar(255) NOT NULL,
+  `color` char(10) NOT NULL,
   `content` text NOT NULL,
   `author` varchar(60) NOT NULL,
   `editor` varchar(60) NOT NULL,
