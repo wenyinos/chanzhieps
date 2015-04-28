@@ -36,3 +36,5 @@ CREATE TABLE IF NOT EXISTS `eps_log` (
   `lang` char(30) NOT NULL DEFAULT 'all',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+ALTER TABLE `eps_user` ADD `realnames` varchar(100) NOT NULL default '';

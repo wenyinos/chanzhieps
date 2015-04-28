@@ -274,6 +274,7 @@ class user extends control
         $this->view->user = $this->user->getByAccount($account);
         if(RUN_MODE == 'admin') 
         { 
+            $this->view->siteLang = explode(',', $this->config->site->lang);
             $this->display('user', 'edit.admin');
         }
         else
