@@ -360,6 +360,7 @@ CREATE TABLE IF NOT EXISTS `eps_user` (
   `account` char(30) NOT NULL DEFAULT '',
   `password` char(32) NOT NULL DEFAULT '',
   `realname` char(30) NOT NULL DEFAULT '',
+  `realnames` varchar(100) NOT NULL DEFAULT '',
   `nickname` char(60) NOT NULL DEFAULT '',
   `admin` enum('no','common','super') NOT NULL DEFAULT 'no',
   `avatar` char(30) NOT NULL DEFAULT '',

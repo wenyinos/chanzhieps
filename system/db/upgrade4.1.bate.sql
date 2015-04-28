@@ -21,3 +21,4 @@ CREATE TABLE IF NOT EXISTS `eps_usergroup` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 ALTER TABLE `eps_category` CHANGE `name` `name` varchar(100) NOT NULL;
+ALTER TABLE `eps_user` ADD `realnames` varchar(100) NOT NULL default '';

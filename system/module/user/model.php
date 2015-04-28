@@ -22,7 +22,7 @@ class userModel extends model
      */
     public function getList($pager = null, $user = '', $provider = '', $admin = '')
     {
-        return $this->dao->setAutolang(false)
+        $users = $this->dao->setAutolang(false)
             ->select('u.*, o.provider as provider, openID as openID')->from(TABLE_USER)->alias('u')
             ->leftJoin(TABLE_OAUTH)->alias('o')->on('u.account = o.account')->where('1')
             ->beginIF($user)
@@ -35,6 +35,17 @@ class userModel extends model
             ->orderBy('id_asc')
             ->page($pager)
             ->fetchAll('id');
+
+        foreach($users as $user)
+        {
+            if($user->admin == 'super' and $user->realnames)
+            {
+                $user->realname  = $this->computeRealname($user->realnames);
+                $user->realnames = json_decode($user->realnames);
+            }
+        }
+
+        return $users;
     }
 
     /**
@@ -64,16 +75,24 @@ class userModel extends model
      */
     public function getPairs($params = '')
     {
-        $users = $this->dao->select('account, realname')->from(TABLE_USER) 
+        $users = $this->dao->select('account, realname, realnames')->from(TABLE_USER) 
             ->beginIF(strpos($params, 'admin') !== false)->where('admin')->ne('no')->fi()
             ->orderBy('id_asc')
             ->setAutolang(false)
-            ->fetchPairs();
+            ->fetchAll('account');
+
+        $userPairs = array();
+        foreach($users as $account => $user)
+        {
+            if(!$account) continue;
+            $userPairs[$account] = !empty($user->realnames) ? $this->computeRealname($user->realnames) : $user->realname;
+            if($userPairs[$account] == '') $userPairs[$account] = $account;
+        }
 
         /* Append empty users. */
-        if(strpos($params, 'noempty') === false) $users = array('' => '') + $users;
+        if(strpos($params, 'noempty') === false) $userPairs = array('' => '') + $userPairs;
 
-        return $users;
+        return $userPairs;
     }
 
     /**
@@ -85,11 +104,13 @@ class userModel extends model
      */
     public function getBasicInfo($users)
     {
-        $users = $this->dao->setAutolang(false)->select('account, admin, realname, `join`, last, visits')->from(TABLE_USER)->where('account')->in($users)->fetchAll('account');
+        $users = $this->dao->setAutolang(false)->select('account, admin, realnames, realname, `join`, last, visits')->from(TABLE_USER)->where('account')->in($users)->fetchAll('account');
         if(!$users) return array();
 
         foreach($users as $account => $user)
         {
+            if(!$account) continue;
+            $user->realname  = !empty($user->realnames) ? $this->computeRealname($user->realnames) : $user->realname;
             $user->realname  = empty($user->realname) ? $account : $user->realname;
             $user->shortLast = substr($user->last, 5, -3);
             $user->shortJoin = substr($user->join, 5, -3);
@@ -107,11 +128,19 @@ class userModel extends model
      */
     public function getByAccount($account)
     {
-        return $this->dao->select('*')->from(TABLE_USER)
+        $user = $this->dao->select('*')->from(TABLE_USER)
             ->setAutolang(false)
             ->beginIF(validater::checkEmail($account))->where('email')->eq($account)->fi()
             ->beginIF(!validater::checkEmail($account))->where('account')->eq($account)->fi()
             ->fetch();
+
+        if($user->admin == 'super' and $user->realnames)
+        {
+            $user->realname  = $this->computeRealname($user->realnames);
+            $user->realnames = json_decode($user->realnames);
+        }
+
+         return $user;
     }
 
     /**
@@ -123,9 +152,15 @@ class userModel extends model
      */
     public function getRealNameAndEmails($users)
     {
-        $users = $this->dao->setAutolang(false)->select('account, email, realname')->from(TABLE_USER)->where('account')->in($users)->fetchAll('account');
+        $users = $this->dao->setAutolang(false)->select('account, email, realnames, realname')->from(TABLE_USER)->where('account')->in($users)->fetchAll('account');
         if(!$users) return array();     
-        foreach($users as $account => $user) if($user->realname == '') $user->realname = $account; 
+        foreach($users as $account => $user)
+        {
+            if(!$account) continue;
+            $user->realname = !empty($user->realnames) ? $this->computeRealname($user->realnames) : $user->realname;
+            if($user->realname == '') $user->realname = $account; 
+        }
+
         return $users;         
     }
 
@@ -138,13 +173,22 @@ class userModel extends model
      */
     public function getRealNamePairs($users)
     {
-        $userPairs = $this->dao->setAutolang(false)->select('account, realname')->from(TABLE_USER)->where('account')->in($users)->fetchPairs('account');
+        $userList = $this->dao->setAutolang(false)->select('account, realnames, realname')->from(TABLE_USER)->where('account')->in($users)->fetchAll('account');
 
-        foreach($users as $account) if(!isset($userPairs[$account])) $userPairs[$account] = $account;
+        foreach($users as $account)
+        {
+            if(!isset($userList[$account])) $userList[$account] = $account;
+        }
 
-        if(!$userPairs) return array();     
+        if(!$userList) return array();     
 
-        foreach($userPairs as $account => $realname) if($realname == '') $userPairs[$account] = $account; 
+        $userPairs = array();
+        foreach($userList as $account => $user)
+        {
+            if(!$account) continue;
+            $userPairs[$account] = !empty($user->realnames) ? $this->computeRealname($user->realnames) : $user->realname;
+            if($userPairs[$account] == '') $userPairs[$account] = $account; 
+        }
 
         return $userPairs;         
     }
@@ -261,6 +305,12 @@ class userModel extends model
             ->remove('ip, account, join, visits')
             ->removeIF(RUN_MODE != 'admin', 'admin')
             ->get();
+
+        if($user->admin == 'super' and $user->realnames)
+        {
+            $user->realnames = helper::jsonEncode($user->realnames);
+            $this->config->user->require->edit = 'realnames, email';
+        }
 
         return $this->dao->update(TABLE_USER)->setAutolang(false)
             ->data($user, $skip = 'password1,password2')
@@ -395,6 +445,7 @@ class userModel extends model
 
         $this->dao->setAutolang(false)->update(TABLE_USER)->data($user)->where('account')->eq($account)->exec();
 
+        if($user->admin == 'super' and !empty($user->realnames)) $user->realname = $this->computeRealname($user->realnames);
         $user->realname  = empty($user->realname) ? $account : $user->realname;
         $user->shortLast = substr($user->last, 5, -3);
         $user->shortJoin = substr($user->join, 5, -3);
@@ -661,5 +712,21 @@ class userModel extends model
             ->fetch('account');
         if(!$account) return false;
         return $this->getByAccount($account);
+    }
+
+    /**
+     * compute realname of client lang.
+     * 
+     * @param  string    $realname 
+     * @access public
+     * @return string
+     */
+    public function computeRealname($realnames)
+    {
+        $realnames = json_decode($realnames);
+        $clientLang = $this->app->getClientLang();
+        if(strpos($clientLang, 'zh-') !== false) $clientLang = str_replace('zh-', '', $clientLang);
+
+        return isset($realnames->{$clientLang}) ? $realnames->{$clientLang} : '';
     }
 }
