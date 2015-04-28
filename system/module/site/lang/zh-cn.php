@@ -35,6 +35,7 @@ $lang->site->captcha       = '验证码';
 $lang->site->twContent     = '繁体内容';
 $lang->site->cn2tw         = '自动从简体版复制';
 $lang->site->cdn           = 'CDN地址';
+$lang->site->checkLoginIP  = '校验登录地址';
 
 $lang->site->setBasic      = "基本信息设置";
 $lang->site->setLang       = "语言设置";
@@ -53,6 +54,10 @@ $lang->site->typeList->blog   = '个人博客';
 $lang->site->statusList = new stdclass();
 $lang->site->statusList->normal = '正常';
 $lang->site->statusList->pause  = '暂停';
+
+$lang->site->checkLoginIPList = array();
+$lang->site->checkLoginIPList['open']  = '打开';
+$lang->site->checkLoginIPList['close'] = '关闭';
 
 $lang->site->captchaList = array();
 $lang->site->captchaList['open']  = '打开';

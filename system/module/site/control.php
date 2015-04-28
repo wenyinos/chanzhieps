@@ -112,6 +112,7 @@ class site extends control
         {
             $setting = fixer::input('post')
                 ->setDefault('captcha', 'auto')
+                ->setDefault('checkLoginIP', 'close')
                 ->get();
 
             $result = $this->loadModel('setting')->setItems('system.common.site', $setting, 'all');
