@@ -35,6 +35,7 @@ $lang->site->captcha       = 'Captcha';
 $lang->site->twContent     = 'traditional contents';
 $lang->site->cn2tw         = 'Copy from simplified Chinese content';
 $lang->site->cdn           = 'CND Site';
+$lang->site->checkLoginIP  = 'Check login position';
 
 $lang->site->setBasic      = "Baisc";
 $lang->site->setLang       = "Languages";
@@ -53,6 +54,10 @@ $lang->site->typeList->blog   = 'Blog';
 $lang->site->statusList = new stdclass();
 $lang->site->statusList->normal = 'Normal';
 $lang->site->statusList->pause  = 'Pause';
+
+$lang->site->checkLoginIPList = array();
+$lang->site->checkLoginIPList['open']  = 'Open';
+$lang->site->checkLoginIPList['close'] = 'Close';
 
 $lang->site->captchaList = array();
 $lang->site->captchaList['open']  = 'Open';

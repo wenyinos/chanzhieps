@@ -21,6 +21,10 @@
           <td colspan='2'><?php echo html::radio('captcha', $lang->site->captchaList, isset($this->config->site->captcha) ? $this->config->site->captcha : 'auto');?></td><td></td>
         </tr>
         <tr>
+          <th class='w-200px'><?php echo $lang->site->checkLoginIP;?></th>
+          <td colspan='2'><?php echo html::radio('checkLoginIP', $lang->site->checkLoginIPList, isset($this->config->site->checkLoginIP) ? $this->config->site->checkLoginIP : 'close');?></td><td></td>
+        </tr>
+        <tr>
           <th></th>
           <td colspan='2'>
             <?php echo html::submitButton();?>
