@@ -21,5 +21,21 @@ CREATE TABLE IF NOT EXISTS `eps_usergroup` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 ALTER TABLE `eps_category` CHANGE `name` `name` varchar(100) NOT NULL;
+
+CREATE TABLE IF NOT EXISTS `eps_log` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `account` char(30) NOT NULL,
+  `browser` char(100) NOT NULL,
+  `fingerprint` char(100) NOT NULL,
+  `ip` char(30) NOT NULL,
+  `position` char(100) NOT NULL,
+  `date` datetime NOT NULL,
+  `desc` text NOT NULL,
+  `ext` text NOT NULL,
+  `type` varchar(30) NOT NULL DEFAULT 'adminlogin',
+  `lang` char(30) NOT NULL DEFAULT 'all',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 ALTER TABLE `eps_user` ADD `realnames` varchar(100) NOT NULL default '';
 ALTER TABLE `eps_thread` ADD `color` char(10) NOT NULL AFTER `title`;

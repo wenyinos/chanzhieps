@@ -431,6 +431,9 @@ class userModel extends model
         /* The password can be the plain or the password after md5. */
         if(!$this->compareHashPassword($password, $user) and $user->password != $this->createPassword($password, $user->account))
         {
+            /* Save login log if user is admin. */
+            if($user->admin == 'super' or $user->admin == 'common') $this->saveLog($user->account, 'fail');
+
             $user->fails ++;
             if($user->fails > 2 * 4) $user->locked = date('Y-m-d H:i:s', time() + 3 * 60);
             $this->dao->setAutolang(false)->update(TABLE_USER)->data($user)->where('id')->eq($user->id)->exec();
@@ -442,6 +445,9 @@ class userModel extends model
         $user->last   = helper::now();
         $user->fails  = 0;
         $user->visits ++;
+
+        /* Save login log if user is admin. */
+        if($user->admin == 'super' or $user->admin == 'common') $this->saveLog($user->account, 'success');
 
         $this->dao->setAutolang(false)->update(TABLE_USER)->data($user)->where('account')->eq($account)->exec();
 
@@ -715,6 +721,76 @@ class userModel extends model
     }
 
     /**
+     * Save admin login log. 
+     * 
+     * @param  string $account 
+     * @access public
+     * @return bool
+     */
+    public function saveLog($account, $result)
+    {
+        $this->app->loadClass('IP');
+        $ip = helper::getRemoteIP();
+        $position = IP::find($ip);
+
+        $extData = new stdclass();
+        $extData->userAgent = $this->server->http_user_agent;
+
+        $data = new stdclass();
+        $data->account     = $account;
+        $data->date        = helper::now();
+        $data->ip          = $ip;
+        $data->position    = is_array($position) ? join(' ', $position) : $position;
+        $data->browser     = helper::getBrowser() . ' ' . helper::getBrowserVersion();
+        $data->fingerprint = '';
+        $data->type        = 'adminlogin';
+        $data->desc        = $result;
+        $data->lang        = 'all';
+        $data->ext         = json_encode($extData);
+
+        $this->dao->insert(TABLE_LOG)->data($data)->exec();
+        return !dao::isError();
+    }
+
+    /**
+     * Get admin login log list. 
+     * 
+     * @param  object $pager 
+     * @param  string $account 
+     * @param  string $ip 
+     * @param  string $position 
+     * @param  string $date 
+     * @access public
+     * @return array
+     */
+    public function getLogList($pager = null, $account = '', $ip = '', $position = '', $date = '')
+    {
+        $logs = $this->dao->select()->from(TABLE_LOG)->setAutolang(false)
+            ->where('1=1')
+            ->beginIf(!empty($account))->andWhere('account')->eq($account)->fi()
+            ->beginIf(!empty($ip))->andWhere('ip')->eq($ip)->fi()
+            ->beginIf(!empty($position))->andWhere('position')->like($position)->fi()
+            ->beginIf(!empty($date))->andWhere('date')->eq($date)->fi()
+            ->orderby('id_desc')
+            ->page($pager)
+            ->fetchAll('id');
+
+        foreach($logs as $log)
+        {
+            if(!empty($log->ext))
+            {
+                $extData = json_decode($log->ext);
+                foreach($extData as $key => $value)
+                {
+                    $log->$key = $value;
+                }
+            }
+        }
+
+        return $logs;
+    }
+
+    /*
      * compute realname of client lang.
      * 
      * @param  string    $realname 
