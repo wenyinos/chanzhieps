@@ -180,6 +180,7 @@ $lang->user->menu->sina   = '微博会员|user|admin|provider=sina';
 $lang->user->menu->wechat = '微信会员|user|admin|provider=wechat';
 $lang->user->menu->qq     = 'QQ会员|user|admin|provider=qq';
 $lang->user->menu->admin  = '管理员|user|admin|admin=1';
+$lang->user->menu->log    = '登录日志|user|adminlog|';
 
 /* Menu of comment module. */
 $lang->feedback = new stdclass();
