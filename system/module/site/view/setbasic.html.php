@@ -36,7 +36,13 @@
         </tr>
         <tr>
           <th><?php echo $lang->site->domain;?></th> 
-          <td><?php echo html::input('domain',  isset($this->config->site->domain) ? $this->config->site->domain : '', "class='form-control'");?></td><td></td>
+          <td><?php echo html::input('domain',  isset($this->config->site->domain) ? $this->config->site->domain : '', "class='form-control'");?></td>
+          <td title="<?php echo $lang->site->domainTip;?>"><i class='icon-question-sign'></i></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->site->allowedDomain;?></th> 
+          <td><?php echo html::input('allowedDomain',  isset($this->config->site->allowedDomain) ? $this->config->site->allowedDomain : '', "class='form-control'");?></td>
+          <td title="<?php echo $lang->site->allowedDomainTip;?>"><i class='icon-question-sign'></i></td>
         </tr>
         <tr>
           <th><?php echo $lang->site->module;?></th>

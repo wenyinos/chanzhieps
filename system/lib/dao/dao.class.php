@@ -481,6 +481,9 @@ class dao
 
             /* Set the conditon to be appened. */
             $tableName = !empty($this->alias) ? $this->alias : $this->table;
+
+            if($this->app->config->cn2tw) $lang = str_replace('zh-tw', 'zh-cn', $lang);
+
             $langCondition = " $tableName.lang in('{$lang}', 'all') ";
 
             /* If $spliPOS > 0, split the sql at $splitPOS. */

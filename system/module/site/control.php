@@ -51,7 +51,12 @@ class site extends control
     {
         if(!empty($_POST))
         {
-            $setting = fixer::input('post')->join('lang', ',')->get();
+            $setting = fixer::input('post')
+                ->setDefault('cn2tw', 0)
+                ->join('lang', ',')
+                ->join('cn2tw', '')
+                ->get();
+
             if(empty($setting->lang) or empty($setting->defaultLang)) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
             if(strpos($setting->lang, $setting->defaultLang) === false) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
 
@@ -92,6 +97,30 @@ class site extends control
         $this->view->robotsFile = $robotsFile;
         $this->view->writeable  = $writeable; 
         $this->view->title      = $this->lang->site->setBasic;
+        $this->display();
+    }
+
+    /**
+     * set site security info.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setSecurity()
+    {
+        if(!empty($_POST))
+        {
+            $setting = fixer::input('post')
+                ->setDefault('captcha', 'auto')
+                ->get();
+
+            $result = $this->loadModel('setting')->setItems('system.common.site', $setting, 'all');
+
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setsecurity')));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+        }
+
+        $this->view->title = $this->lang->site->setBasic;
         $this->display();
     }
 

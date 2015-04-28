@@ -208,6 +208,7 @@ $lang->site->menu = new stdclass();
 $lang->site->menu->basic    = 'Basic|site|setbasic|';
 $lang->site->menu->lang     = 'Language|site|setlang|';
 $lang->site->menu->nav      = 'Navigation|nav|admin|';
+$lang->site->menu->security = 'Security|site|setsecurity|';
 $lang->site->menu->upload   = 'Uploads|site|setupload|';
 $lang->site->menu->tag      = 'Tags|tag|admin|';
 #$lang->site->menu->robots   = 'Robots|site|setrobots|';

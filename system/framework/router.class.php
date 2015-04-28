@@ -298,9 +298,9 @@ class router
         $this->sendHeader();
         $this->connectDB();
 
-        $this->fixDomain();
         $this->setClientLang();
         $this->fixLangConfig();
+        $this->fixDomain();
         $this->loadLang('common');
         $this->setTimezone();
 
@@ -706,7 +706,27 @@ class router
     public function fixDomain()
     {
         if(RUN_MODE == 'install' or RUN_MODE == 'upgrade' or RUN_MODE == 'shell' or RUN_MODE == 'admin' or !$this->config->installed) return true;
-        $result = $this->dbh->query("select value from " . TABLE_CONFIG . " where owner = 'system' and module = 'common' and section = 'site' and `key` = 'domain'")->fetch();
+
+        /* Check domain is allowed. */
+        $domains = $this->dbh->query("select value from " . TABLE_CONFIG . " where owner = 'system' and module = 'common' and section = 'site' and `key` = 'allowedDomain' and `lang` in ('all', '$this->clientLang')")->fetch();
+        if(!empty($domains) and !empty($domains->value))
+        {
+            $allowed = false;
+            $domains = explode(',', str_replace('，', ',', $domains->value));
+            foreach($domains as $domain)
+            {
+                $tmpCode  = helper::getSiteCode($domain);
+                $siteCode = helper::getSiteCode($this->server->http_host);
+                if($siteCode == $tmpCode)
+                {
+                    $allowed = true;
+                    break;
+                }
+            }
+            if(!$allowed) die('domain denied.');
+        }
+        
+        $result = $this->dbh->query("select value from " . TABLE_CONFIG . " where owner = 'system' and module = 'common' and section = 'site' and `key` = 'domain' and `lang` in ('all', '$this->clientLang')")->fetch();
         $mainDomain = !empty($result->value) ? $result->value : '';
         $mainDomain = str_replace('http://', '', $mainDomain);
         $webRoot = getWebRoot(true);
@@ -735,6 +755,10 @@ class router
 
             $result = $this->dbh->query("select value from " . TABLE_CONFIG . " where owner = 'system' and module = 'common' and section = 'site' and `key` = 'lang'")->fetch();
             $enabledLangs = isset($result->value) ? $result->value : '';
+
+            $result = $this->dbh->query("select value from " . TABLE_CONFIG . " where owner = 'system' and module = 'common' and section = 'site' and `key` = 'cn2tw'")->fetch();
+            $this->config->cn2tw = isset($result->value) ? $result->value : '';
+
             if(empty($enabledLangs))
             {
                 $enabledLangs = array_keys($this->config->langs);

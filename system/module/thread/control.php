@@ -44,10 +44,12 @@ class thread extends control
         /* User posted a thread, try to save it to database. */
         if($_POST)
         {
+            $isAuto = ((isset($this->config->site->captcha) and $this->config->site->captcha == 'auto') or !isset($this->config->site->captcha)) ? true : false;
+            $isOpen = (isset($this->config->site->captcha) and $this->config->site->captcha == 'open') ? true : false;
             /* If no captcha but is garbage, return the error info. */
-            if($this->post->captcha === false and $this->loadModel('captcha')->isEvil($_POST['content']))
+            if($this->post->captcha === false and (($isAuto and $this->loadModel('captcha')->isEvil($this->post->content)) or $isOpen))
             {
-                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->captcha->create4Thread()));
+                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->loadModel('captcha')->create4Thread()));
             }
 
             $threadID = $this->thread->post($boardID);

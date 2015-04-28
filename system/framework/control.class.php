@@ -619,6 +619,11 @@ class control
     public function display($moduleName = '', $methodName = '')
     {
         if(empty($this->output)) $this->parse($moduleName, $methodName);
+        if($this->config->cn2tw and $this->app->getClientLang() == 'zh-tw')
+        {
+            $this->app->loadClass('zhconversion', true);
+            $this->output = zhconversion::cn2tw($this->output);
+        }
         echo $this->output;
     }
 

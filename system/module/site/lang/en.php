@@ -19,6 +19,7 @@ $lang->site->module        = 'Modules';
 $lang->site->lang          = 'Language';
 $lang->site->defaultLang   = 'Default Language';
 $lang->site->domain        = 'Main Domain';
+$lang->site->allowedDomain = 'Allowed Domain';
 $lang->site->keywords      = 'Site Keywords';
 $lang->site->indexKeywords = 'Index Keywords';
 $lang->site->meta          = 'Meta';
@@ -30,9 +31,13 @@ $lang->site->mission       = 'Mission';
 $lang->site->copyright     = 'Copyright';
 $lang->site->allowUpload   = 'Allow upload files';
 $lang->site->allowedFiles  = 'Allowed file types';
+$lang->site->captcha       = 'Captcha';
+$lang->site->twContent     = 'traditional contents';
+$lang->site->cn2tw         = 'Copy from simplified Chinese content';
 
 $lang->site->setBasic      = "Baisc";
 $lang->site->setLang       = "Languages";
+$lang->site->setSecurity   = "Security";
 $lang->site->setUpload     = "Upload";
 $lang->site->setRobots     = "Robots";
 $lang->site->setOauth      = "Oauth";
@@ -48,6 +53,11 @@ $lang->site->statusList = new stdclass();
 $lang->site->statusList->normal = 'Normal';
 $lang->site->statusList->pause  = 'Pause';
 
+$lang->site->captchaList = array();
+$lang->site->captchaList['open']  = 'Open';
+$lang->site->captchaList['close'] = 'Close';
+$lang->site->captchaList['auto']  = 'Automatic';
+
 $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = 'Member';
 $lang->site->moduleAvailable['forum']   = 'Forum';
@@ -55,8 +65,10 @@ $lang->site->moduleAvailable['blog']    = 'Blog';
 $lang->site->moduleAvailable['book']    = 'Book';
 $lang->site->moduleAvailable['message'] = 'Message';
 
-$lang->site->metaHolder        = 'Tags liek <meta>, <script>, <style>, <link> is accepted.';
-$lang->site->fileAllowedRole   = 'Use "," to divide different extension name.';
+$lang->site->metaHolder       = 'Tags liek <meta>, <script>, <style>, <link> is accepted.';
+$lang->site->fileAllowedRole  = 'Use "," to divide different extension name.';
+$lang->site->domainTip        = 'Redirect all request to this domian.';
+$lang->site->allowedDomainTip = 'Use "," to divide different domain.';
 
 $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Can not write robots file, please make sure %s writeable first.';
