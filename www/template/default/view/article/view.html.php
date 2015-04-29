@@ -81,4 +81,7 @@ js::execute($article->js);
   </div>
   <div class='col-md-3 col-side'><?php $this->block->printRegion($layouts, 'article_view', 'side');?></div>
 </div>
+
+<?php $videoList = $article->files;?>
+<?php include TPL_ROOT . 'common/jplayer.html.php'; ?>
 <?php include TPL_ROOT . 'common/footer.html.php'; ?>

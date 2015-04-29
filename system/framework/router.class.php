@@ -1053,6 +1053,7 @@ class router
      */
     public function setModuleName($moduleName = '')
     {
+        if(!preg_match('/^[a-zA-Z0-9]+$/', $moduleName)) $this->triggerError("The modulename '$moduleName' illegal. ", __FILE__, __LINE__, $exit = true);
         $this->moduleName = strip_tags(urldecode(strtolower($moduleName)));
     }
 
@@ -1092,6 +1093,7 @@ class router
      */
     public function setMethodName($methodName = '')
     {
+        if(!preg_match('/^[a-zA-Z0-9]+$/', $methodName)) $this->triggerError("The methodname '$methodName' illegal. ", __FILE__, __LINE__, $exit = true);
         $this->methodName = strip_tags(urldecode(strtolower($methodName)));
     }
 
@@ -1105,6 +1107,7 @@ class router
     public function getModulePath($moduleName = '')
     {
         if($moduleName == '') $moduleName = $this->moduleName;
+        if(!preg_match('/^[a-zA-Z0-9]+$/', $moduleName)) $this->triggerError("The modulename '$moduleName' illegal. ", __FILE__, __LINE__, $exit = true);
         $modulePath = $this->getModuleRoot() . strtolower(trim($moduleName)) . DS;
         if(!file_exists($modulePath)) $modulePath = $this->getModuleRoot() . 'ext' . DS . '_' . $this->siteCode . DS . $moduleName . DS;
         return $modulePath;
@@ -1120,6 +1123,7 @@ class router
      */
     public function getModuleExtPath($moduleName, $ext)
     {
+        if(!preg_match('/^[a-zA-Z0-9]+$/', $moduleName) or !preg_match('/^[a-zA-Z0-9]+$/', $ext)) $this->triggerError("The modulename '$moduleName' or ext '$ext' illegal. ", __FILE__, __LINE__, $exit = true);
         $paths = array();
         $paths['common'] = $this->getModulePath($moduleName) . 'ext' . DS . $ext . DS;
         $paths['site'] = $this->getModulePath($moduleName) . 'ext' . DS . '_' . $this->siteCode . DS . $ext . DS;
@@ -1320,6 +1324,7 @@ class router
      */
     private function mergeParams($defaultParams, $passedParams)
     {
+
         $passedParams = array_values($passedParams);
         $i = 0;
         foreach($defaultParams as $key => $defaultValue)

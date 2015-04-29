@@ -265,6 +265,14 @@ class helper
      */
     static public function dbIN($ids)
     {
+        if(is_array($ids)) 
+        {
+            if(!get_magic_quotes_gpc()) { foreach ($ids as $key=>$value) { $ids[$key] = addslashes($value); } }
+            return "IN ('" . join("','", $ids) . "')";
+        }
+        if(!get_magic_quotes_gpc()) $ids = addslashes($ids);
+        return "IN ('" . str_replace(',', "','", str_replace(' ', '', $ids)) . "')";
+
         if(is_array($ids)) return "IN ('" . join("','", $ids) . "')";
         return "IN ('" . str_replace(',', "','", str_replace(' ', '',$ids)) . "')";
     }
@@ -812,8 +820,8 @@ function header301($url)
 function processEvil($value)
 {
     $value       = (string) $value;
-    $evils       = array('eval', 'exec', 'passthru', 'proc_open', 'shell_exec', 'system', '$$');
-    $gibbedEvils = array('e v a l', 'e x e c', ' p a s s t h r u', ' p r o c _ o p e n', 's h e l l _ e x e c', 's y s t e m', '$ $');
+    $evils       = array('eval', 'exec', 'passthru', 'proc_open', 'shell_exec', 'system', '$$', 'include', 'require', 'assert');
+    $gibbedEvils = array('e v a l', 'e x e c', ' p a s s t h r u', ' p r o c _ o p e n', 's h e l l _ e x e c', 's y s t e m', '$ $', 'i n c l u d e', 'r e q u i r e', 'a s s e r t');
     return str_ireplace($evils, $gibbedEvils, $value);
 }
 

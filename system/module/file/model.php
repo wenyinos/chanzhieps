@@ -103,6 +103,7 @@ class fileModel extends model
         $file->middleURL = '';
         $file->smallURL  = '';
         $file->isImage   = false;
+        $file->isVideo   = false;
 
         if(in_array(strtolower($file->extension), $this->config->file->imageExtensions, true) !== false)
         {
@@ -116,6 +117,8 @@ class fileModel extends model
 
             $file->isImage = true;
         }
+
+        if(in_array(strtolower($file->extension), $this->config->file->videoExtensions, true) !== false) $file->isVideo = true;
 
         return $file;
     }
