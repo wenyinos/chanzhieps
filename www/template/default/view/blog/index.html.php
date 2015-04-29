@@ -49,15 +49,13 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
           <?php if($stick->comments):?>&nbsp; <a href="<?php echo $url . '#commentForm'?>"><span data-toggle='tooltip' title='<?php printf($lang->article->lblComments, $stick->comments);?>'><i class="icon-comments-alt"></i> <?php echo $stick->comments;?></span></a><?php endif;?>
         </div>
       </div>
+    <?php unset($articles[$stick->id]);?>
     <?php endforeach;?>
     <?php foreach($articles as $article):?>
     <?php if(!isset($category)) $category = array_shift($article->categories);?>
       <?php $url = inlink('view', "id=$article->id", "category={$category->alias}&name=$article->alias"); ?>
       <div class="card">
-        <h4 class='card-heading'>
-          <?php echo html::a($url, $article->title);?>
-          <?php if($article->sticky):?><span class='label label-danger'><?php echo $lang->article->stick;?></span><?php endif;?>
-        </h4>
+        <h4 class='card-heading'><?php echo html::a($url, $article->title);?></h4>
         <div class='card-content text-muted'>
           <?php if(!empty($article->image)):?>
             <div class='media pull-right'>

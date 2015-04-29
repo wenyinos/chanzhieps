@@ -99,7 +99,6 @@
         <td class='text-center'><?php echo $article->id;?></td>
         <td>
           <?php echo $article->title;?>
-          <?php if($article->sticky):?><span class='label label-danger'><?php echo $lang->article->stick;?></span><?php endif;?>
           <?php if($article->status == 'draft') echo '<span class="label label-xsm label-warning">' . $lang->article->statusList[$article->status] .'</span>';?>
         </td>
         <?php if($type != 'page'):?>

@@ -102,7 +102,7 @@ class article extends control
         $this->view->type       = $type;
         $this->view->categoryID = $categoryID;
         $this->view->articles   = $articles;
-        $this->view->sticks     = $this->article->getSticks($families, 'article');
+        $this->view->sticks     = $this->article->getSticks($families, $type);
         $this->view->pager      = $pager;
         $this->view->orderBy    = $orderBy;
 
