@@ -23,8 +23,9 @@ class blog extends control
     {   
         $category = $this->loadModel('tree')->getByID($categoryID, 'blog');
 
+        $recPerPage = !empty($this->config->site->blogRec) ? $this->config->site->blogRec : $this->config->blog->recPerPage;
         $this->app->loadClass('pager', $static = true);
-        $pager = new pager(0, $this->config->blog->recPerPage, $pageID);
+        $pager = new pager(0, $recPerPage, $pageID);
 
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
         $families   = $categoryID ? $this->tree->getFamily($categoryID, 'blog') : '';

@@ -46,6 +46,7 @@ $lang->site->setOauth      = "开放登录设置";
 $lang->site->setSinaOauth  = "新浪微博接入";
 $lang->site->setQQOauth    = "QQ接入";
 $lang->site->oauthHelp     = "使用帮助";
+$lang->site->setRecPerPage = "列表数量设置";
 
 $lang->site->typeList = new stdclass();
 $lang->site->typeList->portal = '企业门户';
@@ -80,3 +81,11 @@ $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Robots文件%s 不可写，请修改权限后设置。';
 $lang->site->reloadForRobots   = '刷新页面';
 $lang->site->defaultTip        = '站点维护中……';
+
+$lang->site->recPerPage = new stdclass();
+$lang->site->recPerPage->article = '文章列表';
+$lang->site->recPerPage->product = '产品列表';
+$lang->site->recPerPage->blog    = '博客列表';
+$lang->site->recPerPage->forum   = '论坛列表';
+$lang->site->recPerPage->reply   = '回帖列表';
+$lang->site->recPerPage->message = '留言列表';

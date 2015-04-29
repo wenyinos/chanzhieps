@@ -42,8 +42,9 @@ class forum extends control
         if($board->link) helper::header301($board->link); 
  
         /* Get common threads. */
+        $recPerPage = !empty($this->config->site->forumRec) ? $this->config->site->forumRec : $this->config->forum->recPerPage;
         $this->app->loadClass('pager', $static = true);
-        $pager   = new pager(0, $this->config->forum->recPerPage, $pageID);
+        $pager   = new pager(0, $recPerPage, $pageID);
         $threads = $this->loadModel('thread')->getList($board->id, $orderBy = 'repliedDate_desc', $pager);
 
         $this->view->title    = $board->name;

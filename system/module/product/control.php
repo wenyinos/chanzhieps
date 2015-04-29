@@ -49,8 +49,9 @@ class product extends control
 
         if($category && $category->link) helper::header301($category->link);
 
+        $recPerPage = !empty($this->config->site->productRec) ? $this->config->site->productRec : $this->config->product->recPerPage;
         $this->app->loadClass('pager', $static = true);
-        $pager = new pager(0, $this->config->product->recPerPage, $pageID);
+        $pager = new pager(0, $recPerPage, $pageID);
 
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
         $products   = $this->product->getList($this->tree->getFamily($categoryID), '`order` desc', $pager);

@@ -38,8 +38,9 @@ class article extends control
 
         if($category->link) helper::header301($category->link);
 
+        $recPerPage = !empty($this->config->site->articleRec) ? $this->config->site->articleRec : $this->config->article->recPerPage;
         $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal = 0, $this->config->article->recPerPage, $pageID);
+        $pager = new pager($recTotal = 0, $recPerPage, $pageID);
 
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
         $families   = $categoryID ? $this->tree->getFamily($categoryID, 'article') : '';

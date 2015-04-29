@@ -126,6 +126,28 @@ class site extends control
     }
 
     /**
+     * Set record count of perPage for article/product/blog/thread.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setRecPerPage()
+    {
+        if(!empty($_POST))
+        {
+            $setting = fixer::input('post')->get();
+
+            $result = $this->loadModel('setting')->setItems('system.common.site', $setting, 'all');
+
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+        }
+
+        $this->view->title = $this->lang->site->setRecPerPage;
+        $this->display();
+    }
+
+    /**
      * Set upload configures.
      * 
      * @access public
