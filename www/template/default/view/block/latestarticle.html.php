@@ -33,34 +33,37 @@ $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 :
     foreach($articles as $article):
     $url = helper::createLink('article', 'view', "id=$article->id", "category={$article->category->alias}&name=$article->alias");
     ?>
-      <div class='item'>
-        <div class='item-heading'><strong><?php echo html::a($url, $article->title);?></strong></div>
-        <div class='item-content'>
-          
-          <div class='text small text-muted'>
-            <div class='media pull-left'>
-            <?php 
-            if(!empty($article->image))
-            {
-                $title = $article->image->primary->title ? $article->image->primary->title : $article->title;
-                echo html::a($url, html::image($article->image->primary->smallURL, "title='{$title}' class='thumbnail'" ));
-            }
-            ?>
-            </div>
-            <strong class='text-important'>
-              <?php if(isset($content->time)) echo "<i class='icon-time'></i> " . formatTime($article->addedDate, DT_DATE4);?>
-            </strong> 
-            &nbsp;<?php echo $article->summary;?>
+    <div class='item'>
+      <div class='item-heading'>
+        <strong><?php echo html::a($url, $article->title);?></strong>
+        <?php if($article->sticky):?><span class='label label-danger'><?php echo $this->lang->article->stick;?></span><?php endif;?>
+      </div>
+      <div class='item-content'>
+        
+        <div class='text small text-muted'>
+          <div class='media pull-left'>
+          <?php 
+          if(!empty($article->image))
+          {
+              $title = $article->image->primary->title ? $article->image->primary->title : $article->title;
+              echo html::a($url, html::image($article->image->primary->smallURL, "title='{$title}' class='thumbnail'" ));
+          }
+          ?>
           </div>
+          <strong class='text-important'>
+            <?php if(isset($content->time)) echo "<i class='icon-time'></i> " . formatTime($article->addedDate, DT_DATE4);?>
+          </strong> 
+          &nbsp;<?php echo $article->summary;?>
         </div>
       </div>
-      <?php endforeach;?>
+    </div>
+    <?php endforeach;?>
     </div>
   </div>
   <?php else:?>
   <div class='panel-body'>
     <ul class='ul-list'>
-      <?php foreach($articles as $article): ?>
+      <?php foreach($articles as $article):?>
       <?php 
       $alias = "category={$article->category->alias}&name={$article->alias}";
       $url   = helper::createLink('article', 'view', "id={$article->id}", $alias);
@@ -68,10 +71,14 @@ $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 :
       <?php if(isset($content->time)):?>
       <li>
         <?php echo html::a($url, $article->title, "title='{$article->title}'");?>
+        <?php if($article->sticky):?><span class='label label-danger'><?php echo $this->lang->article->stick;?></span><?php endif;?>
         <span class='pull-right'><?php echo substr($article->addedDate, 0, 10);?></span>
       </li>
       <?php else:?>
-      <li><?php echo html::a($url, $article->title, "title='{$article->title}'");?></li>
+      <li>
+        <?php echo html::a($url, $article->title, "title='{$article->title}'");?>
+        <?php if($article->sticky):?><span class='label label-danger'><?php echo $this->lang->article->stick;?></span><?php endif;?>
+      </li>
       <?php endif;?>
       
       <?php endforeach;?>
