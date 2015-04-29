@@ -37,7 +37,13 @@
         <?php endif;?>
         <th class='text-center w-160px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->article->addedDate);?></th>
         <th class='text-center w-70px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->article->views);?></th>
-        <th class='text-center w-300px'><?php echo $lang->actions;?></th>
+        <?php if($type != 'page'):?>
+        <th class='text-center w-300px'>
+        <?php else:?>
+        <th class='text-center w-220px'>
+        <?php endif;?>
+          <?php echo $lang->actions;?>
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -64,6 +70,7 @@
           commonModel::printLink('article', 'setcss', "articleID=$stick->id", $lang->article->css, "data-toggle='modal'");
           commonModel::printLink('article', 'setjs', "articleID=$stick->id", $lang->article->js, "data-toggle='modal'");
           ?>
+          <?php if($type != 'page'):?>
           <span class='dropdown'>
             <a data-toggle='dropdown' href='###'><?php echo $lang->article->sticks[$stick->sticky]; ?> <span class='caret'></span></a>
             <ul class='dropdown-menu' role='menu' aria-labelledby='dLabel'>
@@ -82,6 +89,7 @@
             ?>
             </ul>
           </span>
+          <?php endif;?>
         </td>
       </tr>
       <?php unset($articles[$stick->id])?>
@@ -109,6 +117,7 @@
           commonModel::printLink('article', 'setcss', "articleID=$article->id", $lang->article->css, "data-toggle='modal'");
           commonModel::printLink('article', 'setjs', "articleID=$article->id", $lang->article->js, "data-toggle='modal'");
           ?>
+          <?php if($type != 'page'):?>
           <span class='dropdown'>
             <a data-toggle='dropdown' href='###'><?php echo $lang->article->sticks[$article->sticky]; ?> <span class='caret'></span></a>
             <ul class='dropdown-menu' role='menu' aria-labelledby='dLabel'>
@@ -127,6 +136,7 @@
             ?>
             </ul>
           </span>
+          <?php endif;?>
         </td>
       </tr>
       <?php endforeach;?>

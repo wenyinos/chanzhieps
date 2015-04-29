@@ -245,13 +245,14 @@ class articleModel extends model
      * @access public
      * @return array
      */
-    public function getSticks($categories)
+    public function getSticks($categories, $type)
     { 
         if(!$categories) return array();
 
         $sticks = $this->dao->select('t1.*, t2.category')->from(TABLE_ARTICLE)->alias('t1')
                 ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
                 ->where('t1.sticky')->eq(2)
+                ->andWhere('t2.type')->eq($type)
                 ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')
                 ->andWhere('t1.addedDate')->le(helper::now())
                 ->andWhere('t1.status')->eq('normal')
@@ -266,7 +267,7 @@ class articleModel extends model
         $categories = $this->dao->select('t2.id, t2.name, t2.alias, t1.id AS article')
             ->from(TABLE_RELATION)->alias('t1')
             ->leftJoin(TABLE_CATEGORY)->alias('t2')->on('t1.category = t2.id')
-            ->where('t2.type')->eq('article')
+            ->where('t2.type')->eq($type)
             ->fetchGroup('article', 'id');
 
         /* Assign categories to it's article. */

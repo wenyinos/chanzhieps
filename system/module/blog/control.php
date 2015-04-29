@@ -27,11 +27,13 @@ class blog extends control
         $pager = new pager(0, $this->config->blog->recPerPage, $pageID);
 
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
-        $articles   = $this->loadModel('article')->getList('blog', $this->tree->getFamily($categoryID, 'blog'), $orderBy = 'addedDate_desc', $pager);
+        $families   = $categoryID ? $this->tree->getFamily($categoryID, 'blog') : '';
+        $articles   = $this->loadModel('article')->getList('blog', $families, 'addedDate_desc', $pager);
 
         $this->view->title      = $this->lang->blog->common;
         $this->view->categoryID = $categoryID;
         $this->view->articles   = $articles;
+        $this->view->sticks     = $this->article->getSticks($families, 'blog');
         $this->view->pager      = $pager;
  
         if($category)
