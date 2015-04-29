@@ -1,4 +1,5 @@
 <?php include '../../common/view/header.modal.html.php';?>
+<?php if(!empty($error)) echo $error;?>
 <form method='post' action='<?php echo inlink('changepassword');?>' id='passwordForm' class='form'>
   <table class='table table-form borderless'>
     <tr>

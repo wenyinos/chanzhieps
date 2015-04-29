@@ -40,3 +40,17 @@ $lang->mail->subject        = "It's a testing email from zentao.";
 $lang->mail->content        = 'Well done, the email notification feature works now!';
 $lang->mail->successSended  = 'Successfully sended!';
 $lang->mail->needConfigure  = "I can not find the configuration, please configure it first.";
+
+$lang->mail->captcha       = 'Email captcha';
+$lang->mail->verifyFail    = 'Wrong captcha';
+$lang->mail->verifySuccess = 'Right captcha';
+$lang->mail->sendNotice    = 'The action of <strong>%s</strong> need verification your E-mail for site security.';
+$lang->mail->noConfigure   = " <span class='text-info'>I can not find the configuration, con't use email captcha.</span>";
+$lang->mail->noEmail       = " <span class='text-info'>I can not find your email address, con't use email captcha.</span>";
+$lang->mail->sendContent   = <<<EOT
+Hello %s：
+</br>&nbsp;&nbsp;&nbsp;&nbsp;You are changing some infomation at <strong>%s</strong>(%s), action is <strong>%s</strong>. The code you need is:%s
+</br>
+</br><strong>%s</strong> build by <a href='http://www.chanzhi.org' target='_blank'>ChanZhiEPS</a>.
+</br><a href='http://www.cnezsoft.com' target='_blank'>Nature Easy Soft</a>
+EOT;

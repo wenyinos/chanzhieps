@@ -1,8 +1,10 @@
 <?php include '../../common/view/header.admin.html.php';?>
+<?php if(!empty($error)) echo $error?>
+<?php if(isset($captchaContent)) echo $captchaContent?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-eidt'></i> <?php echo $lang->user->editProfile;?></strong></div>
   <div class='panel-body'>
-    <form method='post' id='ajaxForm' class='form form-inline'>
+    <form method='post' id='editForm' class='form form-inline'>
       <table class='table table-form'>
         <tr>
           <th class='w-100px'><?php echo $lang->user->realname;?></th>
@@ -76,11 +78,12 @@
           <th><?php echo $lang->user->gtalk;?></th>
           <td><?php echo html::input('gtalk', $user->gtalk, "class='form-control'");?></td><td></td>
         </tr>  
-        <tr><th></th><td colspan="2"><?php echo html::submitButton();?></td></tr>
+        <tr>
+          <th><?php echo html::a($this->createLink('mail', 'captcha', "type={$lang->user->edit}"), $lang->save, "data-toggle='modal' class='hidden captchaModal'")?></th>
+          <td colspan="2"><?php echo html::submitButton();?></td>
+        </tr>
       </table>
     </form>        
   </div>
 </div>
-
-
 <?php include '../../common/view/footer.admin.html.php';?>

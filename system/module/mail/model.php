@@ -378,6 +378,46 @@ class mailModel extends model
     }
 
     /**
+     * Check verify.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function checkVerify()
+    {
+        if($this->session->verify and $this->session->verify > 0) 
+        {
+            $this->session->set('verify', $this->session->verify - 1);
+            if(empty($_POST))
+            {
+                if($this->session->verify > 0) return true;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Get mail captcha error.
+     * 
+     * @access public
+     * @return string
+     */
+    public function checkCaptchaSetting()
+    {
+        $msg = '';
+        if(!$this->config->mail->turnon) $msg .= $this->lang->mail->noConfigure;
+
+        $user = $this->loadModel('user')->getByAccount($this->app->user->account);
+        if(empty($user->email)) $msg .= $this->lang->mail->noEmail;
+
+        return empty($msg) ? false : $msg;
+    }
+
+    /**
      * Is error?
      * 
      * @access public
