@@ -750,3 +750,16 @@ function autoBlockGrid()
 
     setTimeout(ajustBlockHeight, 500);
 }
+
+function playVideo(src, extension, id)
+{
+    media = $("[src='" + src  + "']");
+    w = media.width();
+    h = media.height();
+    containerID = "media_container_" + id;
+    id = "media_" + id;
+    media.replaceWith("<div id='" + id + "'  class='jp-player text-center' data-extension='" + extension + "' data-src='" + src  + "' style='width:" + w + "px;height:" + h + "px;' ></div>");
+    $('#' + id).wrap("<div class='jp-type-single'></div>");
+    $('#' + id).parent().wrap("<div id='" + containerID  + "' class='jp-video jp-video-360p' role='application' aria-label='media player'></div>");
+    $('#' + id).after($('#playerBar').html());
+}
