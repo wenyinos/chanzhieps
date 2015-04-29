@@ -124,6 +124,7 @@ define('TABLE_GROUPPRIV',      $config->db->prefix . 'grouppriv');
 define('TABLE_USERGROUP',      $config->db->prefix . 'usergroup');
 define('TABLE_FILE',           $config->db->prefix . 'file');
 define('TABLE_DOWN',           $config->db->prefix . 'down');
+define('TABLE_LOG',            $config->db->prefix . 'log');
 define('TABLE_MESSAGE',        $config->db->prefix . 'message');
 define('TABLE_WX_PUBLIC',      $config->db->prefix . 'wx_public');
 define('TABLE_WX_MESSAGE',     $config->db->prefix . 'wx_message');

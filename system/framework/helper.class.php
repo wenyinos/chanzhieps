@@ -477,6 +477,105 @@ class helper
         header('HTTP/1.1 301 Moved Permanently');
         die(header('Location:' . $locate));
     }
+
+    /**
+     * Get browser.
+     * 
+     * @access public
+     * @return string
+     */
+    public static function getBrowser()
+    {
+        if(empty($_SERVER['HTTP_USER_AGENT'])) return 'unknow';
+
+        $agent = $_SERVER["HTTP_USER_AGENT"];
+        if(strpos($agent, 'MSIE') !== false || strpos($agent, 'rv:11.0')) 
+        {
+            return "ie";
+        }
+        else if(strpos($agent, 'Firefox') !== false)
+        {
+            return "firefox";
+        }
+        else if(strpos($agent, 'Chrome') !== false)
+        {
+            return "chrome";
+        }
+        else if(strpos($agent, 'Opera') !== false)
+        {
+            return 'opera';
+        }
+        else if((strpos($agent, 'Chrome') == false) && strpos($agent, 'Safari') !== false)
+        {
+            return 'safari';
+        }
+        else
+        {
+            return 'unknown';
+        }
+    }
+
+    /**
+     * Get browser version. 
+     * 
+     * @access public
+     * @return string
+     */
+    public static function getBrowserVersion()
+    {
+        if(empty($_SERVER['HTTP_USER_AGENT'])) return 'unknow';
+
+        $agent = $_SERVER['HTTP_USER_AGENT'];   
+        if(preg_match('/MSIE\s(\d+)\..*/i', $agent, $regs))
+        {
+            return $regs[1];
+        }
+        else if(preg_match('/FireFox\/(\d+)\..*/i', $agent, $regs))
+        {
+            return $regs[1];
+        }
+        else if(preg_match('/Opera[\s|\/](\d+)\..*/i', $agent, $regs))
+        {
+            return $regs[1];
+        }
+        else if(preg_match('/Chrome\/(\d+)\..*/i', $agent, $regs))
+        {
+            return $regs[1];
+        }
+        else if((strpos($agent,'Chrome') == false) && preg_match('/Safari\/(\d+)\..*$/i', $agent, $regs))
+        {
+            return $regs[1];
+        }
+        else
+        {
+            return 'unknow';
+        }
+    }
+
+    /**
+     * Get remote ip. 
+     * 
+     * @access public
+     * @return string
+     */
+    public static function getRemoteIp()
+    {
+        $ip = '';
+        if(!empty($_SERVER['HTTP_CLIENT_IP']))
+        {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        }
+        else if(!empty($_SERVER["HTTP_X_FORWARDED_FOR"]))
+        {
+            $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+        }
+        else if(!empty($_SERVER["REMOTE_ADDR"]))
+        {
+            $ip = $_SERVER["REMOTE_ADDR"];
+        }
+
+        return $ip;
+    }
 }
 
 /**

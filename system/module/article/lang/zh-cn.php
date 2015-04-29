@@ -31,7 +31,7 @@ $lang->article->status     = '状态';
 $lang->article->type       = '类型';
 $lang->article->views      = '阅读';
 $lang->article->comments   = '评论';
-$lang->article->stick      = '置顶级别';
+$lang->article->stick      = '置顶';
 $lang->article->order      = '排序';
 $lang->article->isLink     = '跳转';
 $lang->article->link       = '链接';
@@ -63,6 +63,13 @@ $lang->article->sourceList['translational'] = '翻译';
 
 $lang->article->statusList['normal'] = '正常';
 $lang->article->statusList['draft']  = '草稿';
+
+$lang->article->sticks[0] = '不置顶';
+$lang->article->sticks[1] = '类目置顶';
+$lang->article->sticks[2] = '全局置顶';
+
+$lang->article->successStick   = '置顶成功';
+$lang->article->successUnstick = '取消置顶成功';
 
 $lang->article->confirmDelete = '您确定删除该文章吗？';
 

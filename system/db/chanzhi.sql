@@ -334,6 +334,7 @@ CREATE TABLE IF NOT EXISTS `eps_thread` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `board` mediumint(9) NOT NULL,
   `title` varchar(255) NOT NULL,
+  `color` char(10) NOT NULL,
   `content` text NOT NULL,
   `author` varchar(60) NOT NULL,
   `editor` varchar(60) NOT NULL,
@@ -360,6 +361,7 @@ CREATE TABLE IF NOT EXISTS `eps_user` (
   `account` char(30) NOT NULL DEFAULT '',
   `password` char(32) NOT NULL DEFAULT '',
   `realname` char(30) NOT NULL DEFAULT '',
+  `realnames` varchar(100) NOT NULL DEFAULT '',
   `nickname` char(60) NOT NULL DEFAULT '',
   `admin` enum('no','common','super') NOT NULL DEFAULT 'no',
   `avatar` char(30) NOT NULL DEFAULT '',
@@ -399,6 +401,22 @@ CREATE TABLE IF NOT EXISTS `eps_usergroup` (
   `group` mediumint(8) unsigned NOT NULL default '0',
   `lang` char(30) NOT NULL,
   UNIQUE KEY `account` (`account`,`group`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- DROP TABLE IF EXISTS `eps_log`;
+CREATE TABLE IF NOT EXISTS `eps_log` (
+  `id` mediumint(8) unsigned NOT NULL auto_increment,
+  `account` char(30) NOT NULL,
+  `browser` char(100) NOT NULL,
+  `fingerprint` char(100) NOT NULL,
+  `ip` char(30) NOT NULL,
+  `position` char(100) NOT NULL,
+  `date` datetime NOT NULL,
+  `desc` text NOT NULL,
+  `ext` text NOT NULL,
+  `type` varchar(30) NOT NULL DEFAULT 'adminlogin',
+  `lang` char(30) NOT NULL DEFAULT 'all',
+  PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_wx_public`;

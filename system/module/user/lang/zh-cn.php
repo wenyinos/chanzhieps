@@ -172,3 +172,16 @@ $lang->user->control->menus[20] = '<i class="icon-edit"></i> 编辑信息 <i cla
 $lang->user->control->menus[28] = '<i class="icon-comments-alt"></i> 我的消息 <i class="icon-chevron-right"></i>|user|message';
 $lang->user->control->menus[30] = '<i class="icon-share"></i> 我的主题 <i class="icon-chevron-right"></i>|user|thread';
 $lang->user->control->menus[40] = '<i class="icon-mail-reply"></i> 我的回帖 <i class="icon-chevron-right"></i>|user|reply';
+
+$lang->user->log = new stdclass();
+$lang->user->log->common = '日志';
+$lang->user->log->list   = '管理员登录日志';
+
+$lang->user->log->id          = 'ID';
+$lang->user->log->account     = '用户';
+$lang->user->log->browser     = '浏览器';
+$lang->user->log->fingerprint = '浏览器指纹';
+$lang->user->log->ip          = 'IP';
+$lang->user->log->position    = '登录地址';
+$lang->user->log->date        = '登录时间';
+$lang->user->log->desc        = '描述';

@@ -13,6 +13,13 @@
 <?php include TPL_ROOT . 'common/header.html.php';?>
 <?php include TPL_ROOT . 'common/kindeditor.html.php';?>
 <?php $common->printPositionBar($board, $thread);?>
+<?php
+$colorPlates = '';
+foreach (explode('|', $lang->thread->colorPlates) as $value)
+{
+    $colorPlates .= "<div class='color color-tile' data='#" . $value . "'><i class='icon-ok'></i></div>";
+}
+?>
 
 <div class="panel">
   <div class="panel-heading"><strong><i class="icon-edit"></i> <?php echo $lang->thread->edit . $lang->colon . $thread->title;?></strong></div>
@@ -21,9 +28,21 @@
       <div class='form-group'>
         <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->thread->title;?></label>
         <div class='col-md-11 col-sm-10'>
-        <?php $readonly = $thread->readonly ? 'checked' : ''; if($canManage):?>
+          <?php $readonly = $thread->readonly ? 'checked' : ''; if($canManage):?>
           <div class='input-group'>
             <?php echo html::input('title', $thread->title, "class='form-control'");?>
+            <div class='input-group-addon colorplate clearfix'>
+                <div class='input-group color active' data="<?php echo $thread->color?>">
+                <label class='input-group-addon'><?php echo $lang->thread->color;?></label>
+                <?php echo html::input('color', $thread->color, "class='form-control input-color text-latin' placeholder='" . $lang->thread->colorTip . "'");?>
+                <span class='input-group-btn'>
+                  <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'> <i class='icon icon-question'></i> <span class='caret'></span></button>
+                  <div class='dropdown-menu colors'>
+                    <?php echo $colorPlates; ?>
+                  </div>
+                </span>
+              </div>
+            </div>
             <?php if($this->app->user->admin == 'super'):?>
             <span class='input-group-addon'>
               <label class='checkbox'>
@@ -38,9 +57,23 @@
               </label>
             </span>
           </div>
-        <?php else:?>
-          <?php echo html::input('title', $thread->title, "class='form-control'");?>
-        <?php endif;?>
+          <?php else:?>
+          <div class='input-group'>
+            <?php echo html::input('title', $thread->title, "class='form-control'");?>
+            <div class='input-group-addon colorplate clearfix'>
+              <div class='input-group color active' data='#FFF'>
+                <label class='input-group-addon'><?php echo $lang->thread->color;?></label>
+                <?php echo html::input('color', '#FFF', "class='form-control input-color text-latin' placeholder='" . $lang->thread->colorTip . "'");?>
+                <span class='input-group-btn'>
+                  <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'> <i class='icon icon-question'></i> <span class='caret'></span></button>
+                  <div class='dropdown-menu colors'>
+                    <?php echo $colorPlates; ?>
+                  </div>
+                </span>
+              </div>
+            </div>
+          </div>
+          <?php endif;?>
         </div>
       </div>
       <div class='threadInfo'>

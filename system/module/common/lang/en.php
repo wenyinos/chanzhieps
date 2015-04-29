@@ -180,6 +180,7 @@ $lang->user->menu->sina   = 'Weibo Users|user|admin|provider=sina';
 $lang->user->menu->wechat = 'Wechat Users|user|admin|provider=wechat';
 $lang->user->menu->qq     = 'QQ Users|user|admin|provider=qq';
 $lang->user->menu->admin  = 'Admin Users|user|admin|admin=1';
+$lang->user->menu->log    = 'Login logs|user|adminlog|';
 
 /* Menu of comment module. */
 $lang->feedback = new stdclass();
@@ -208,6 +209,7 @@ $lang->site->menu = new stdclass();
 $lang->site->menu->basic    = 'Basic|site|setbasic|';
 $lang->site->menu->lang     = 'Language|site|setlang|';
 $lang->site->menu->nav      = 'Navigation|nav|admin|';
+$lang->site->menu->security = 'Security|site|setsecurity|';
 $lang->site->menu->upload   = 'Uploads|site|setupload|';
 $lang->site->menu->tag      = 'Tags|tag|admin|';
 #$lang->site->menu->robots   = 'Robots|site|setrobots|';

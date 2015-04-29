@@ -105,7 +105,7 @@ class articleModel extends model
                 ->fi()
                 ->beginIf($categories)->andWhere('t2.category')->in($categories)->fi()
                 ->groupBy('t2.id')
-                ->orderBy($orderBy)
+                ->orderBy('sticky_desc,' . $orderBy)
                 ->page($pager)
                 ->fetchAll('id');
         }
@@ -236,6 +236,72 @@ class articleModel extends model
         $this->app->loadClass('pager', true);
         $pager = new pager($recTotal = 0, $recPerPage = $count, 1);
         return $this->getList($type, $family, 'addedDate_desc', $pager);
+    }
+
+    /**
+     * Get stick articles.
+     * 
+     * @param  mix    $categories 
+     * @access public
+     * @return array
+     */
+    public function getSticks($categories, $type)
+    { 
+        if(!$categories) return array();
+
+        $sticks = $this->dao->select('t1.*, t2.category')->from(TABLE_ARTICLE)->alias('t1')
+                ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
+                ->where('t1.sticky')->eq(2)
+                ->andWhere('t2.type')->eq($type)
+                ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')
+                ->andWhere('t1.addedDate')->le(helper::now())
+                ->andWhere('t1.status')->eq('normal')
+                ->fi()
+                ->beginIf($categories)->andWhere('t2.category')->notin($categories)->fi()
+                ->orderBy('id_desc')
+                ->fetchAll('id');
+
+        if(!$sticks) return array();
+
+        /* Get categories for these articles. */
+        $categories = $this->dao->select('t2.id, t2.name, t2.alias, t1.id AS article')
+            ->from(TABLE_RELATION)->alias('t1')
+            ->leftJoin(TABLE_CATEGORY)->alias('t2')->on('t1.category = t2.id')
+            ->where('t2.type')->eq($type)
+            ->fetchGroup('article', 'id');
+
+        /* Assign categories to it's article. */
+        foreach($sticks as $stick) $stick->categories = isset($categories[$stick->id]) ? $categories[$stick->id] : array();
+        foreach($sticks as $stick) $stick->category   = current($stick->categories);
+
+        /* Get images for these sticks. */
+        $images = $this->loadModel('file')->getByObject('article', array_keys($sticks), $isImage = true);
+
+        /* Assign images to it's article. */
+        foreach($sticks as $stick)
+        {
+            if(empty($images[$stick->id])) continue;
+
+            $stick->image = new stdclass();
+            $stick->image->list    = $images[$stick->id];
+            $stick->image->primary = $stick->image->list[0];
+        }
+
+        /* Assign summary to it's article. */
+        foreach($sticks as $stick) $stick->summary = empty($stick->summary) ? helper::substr(strip_tags($stick->content), 200, '...') : $stick->summary;
+
+        /* Assign comments to it's article. */
+        $stickIdList = array_keys($sticks);
+        $comments = $this->dao->select("objectID, count(*) as count")->from(TABLE_MESSAGE)
+            ->where('type')->eq('comment')
+            ->andWhere('objectType')->eq('article')
+            ->andWhere('objectID')->in($stickIdList)
+            ->andWhere('status')->eq(1)
+            ->groupBy('objectID')
+            ->fetchPairs('objectID', 'count');
+        foreach($sticks as $stick) $stick->comments = isset($comments[$stick->id]) ? $comments[$stick->id] : 0;
+ 
+        return $sticks;
     }
 
     /**

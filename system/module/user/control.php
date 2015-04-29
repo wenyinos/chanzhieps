@@ -274,6 +274,7 @@ class user extends control
         $this->view->user = $this->user->getByAccount($account);
         if(RUN_MODE == 'admin') 
         { 
+            $this->view->siteLang = explode(',', $this->config->site->lang);
             $this->display('user', 'edit.admin');
         }
         else
@@ -641,5 +642,34 @@ class user extends control
         }
 
         $this->send(array('result' => 'fail', 'message' => $this->lang->user->loginFailed));
+    }
+
+    /**
+     * Admin user login log. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function adminLog()
+    {
+        $get = fixer::input('get')
+            ->setDefault('recTotal', 0)
+            ->setDefault('recPerPage', 10)
+            ->setDefault('pageID', 1)
+            ->setDefault('account', '')
+            ->setDefault('ip', '')
+            ->setDefault('position', '')
+            ->setDefault('date', '')
+            ->get();
+
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($get->recTotal, $get->recPerPage, $get->pageID);
+
+        $logs = $this->user->getLogList($pager, $get->account, $get->ip, $get->position, $get->date);
+        
+        $this->view->logs  = $logs;
+        $this->view->pager = $pager;
+        $this->view->title = $this->lang->user->log->list;
+        $this->display();
     }
 }

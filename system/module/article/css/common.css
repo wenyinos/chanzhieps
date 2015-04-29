@@ -2,3 +2,4 @@
 .leftmenu > .nav{margin-bottom: 0;}
 .nav-stacked.nav-primary > li:last-child > a{border-bottom-left-radius: 0; border-bottom-right-radius: 0;}
 .category-nav{border-radius: 0 0 3px 3px; border-top:none;}
+.dropdown-menu{min-width: 90px;}

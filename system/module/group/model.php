@@ -169,12 +169,20 @@ class groupModel extends model
      */
     public function getUserPairs($groupID)
     {
-        return $this->dao->select('t2.account, t2.realname')
+        $users = $this->dao->select('t2.account, t2.realname, t2.realnames')
             ->from(TABLE_USERGROUP)->alias('t1')
             ->leftJoin(TABLE_USER)->alias('t2')->on('t1.account = t2.account')
             ->where('`group`')->eq((int)$groupID)
             ->orderBy('t2.account')
-            ->fetchPairs();
+            ->fetchAll('account');
+
+        $userPairs = array();
+        foreach($users as $account => $user)
+        {
+            $userPairs[$account] = !empty($user->realnames) ? $this->loadModel('user')->computeRealname($user->realnames) : $user->realname;
+            if($userPairs[$account] == '') $userPairs[$account] = $account;
+        }
+        return $userPairs;
     }
 
     /**

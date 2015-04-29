@@ -102,6 +102,29 @@ EOT;
     }
 
     /**
+     * Create captcha for message reply.
+     * 
+     * @access public
+     * @return string
+     */
+    public function create4MessageReply()
+    {
+        $captcha = $this->create();
+        return <<<EOT
+<th>{$this->lang->captcha->common}</th>
+<td>
+  <table class='captcha'>
+    <tr class='text-middle'>
+      <td class='text-lg w-110px'><span class='label label-danger'>{$captcha->first} {$captcha->operator} {$captcha->second}</span></td>
+      <td class='text-lg text-center w-40px'> {$this->lang->captcha->equal} </td>
+      <td><input type='text' name='captcha' id='captcha' class='w-80px inline-block form-control text-center' placeholder='{$this->lang->captcha->placeholder}'/> &nbsp;</td>
+    </tr>
+  </table>
+</td>
+EOT;
+    }
+
+    /**
      * Create captcha.
      * 
      * @access public

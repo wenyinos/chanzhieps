@@ -23,11 +23,41 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
 ?>
 <div class='row'>
   <div class='col-md-9 col-main' id='articles'>
+    <?php foreach($sticks as $stick):?>
+    <?php if(!isset($category)) $category = array_shift($stick->categories);?>
+      <?php $url = inlink('view', "id=$stick->id", "category={$category->alias}&name=$stick->alias"); ?>
+      <div class="card">
+        <h4 class='card-heading'>
+          <?php echo html::a($url, $stick->title);?>
+          <span class='label label-danger'><?php echo $lang->article->stick;?></span>
+        </h4>
+        <div class='card-content text-muted'>
+          <?php if(!empty($stick->image)):?>
+            <div class='media pull-right'>
+              <?php
+              $title = $stick->image->primary->title ? $stick->image->primary->title : $stick->title;
+              echo html::a($url, html::image($stick->image->primary->smallURL, "title='{$title}' class='thumbnail'" ));
+              ?>
+            </div>
+          <?php endif;?>
+          <?php echo $stick->summary;?>
+        </div>
+        <div class="card-actions text-muted">
+          <span data-toggle='tooltip' title='<?php printf($lang->article->lblAddedDate, formatTime($stick->addedDate));?>'><i class="icon-time"></i> <?php echo date('Y/m/d', strtotime($stick->addedDate));?></span>
+          &nbsp; <span data-toggle='tooltip' title='<?php printf($lang->article->lblAuthor, $stick->author);?>'><i class="icon-user"></i> <?php echo $stick->author;?></span>
+          &nbsp; <span data-toggle='tooltip' title='<?php printf($lang->article->lblViews, $stick->views);?>'><i class="icon-eye-open"></i> <?php echo $stick->views;?></span>
+          <?php if($stick->comments):?>&nbsp; <a href="<?php echo $url . '#commentForm'?>"><span data-toggle='tooltip' title='<?php printf($lang->article->lblComments, $stick->comments);?>'><i class="icon-comments-alt"></i> <?php echo $stick->comments;?></span></a><?php endif;?>
+        </div>
+      </div>
+    <?php endforeach;?>
     <?php foreach($articles as $article):?>
     <?php if(!isset($category)) $category = array_shift($article->categories);?>
       <?php $url = inlink('view', "id=$article->id", "category={$category->alias}&name=$article->alias"); ?>
       <div class="card">
-        <h4 class='card-heading'><?php echo html::a($url, $article->title);?></h4>
+        <h4 class='card-heading'>
+          <?php echo html::a($url, $article->title);?>
+          <?php if($article->sticky):?><span class='label label-danger'><?php echo $lang->article->stick;?></span><?php endif;?>
+        </h4>
         <div class='card-content text-muted'>
           <?php if(!empty($article->image)):?>
             <div class='media pull-right'>

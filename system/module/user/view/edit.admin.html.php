@@ -6,7 +6,31 @@
       <table class='table table-form'>
         <tr>
           <th class='w-100px'><?php echo $lang->user->realname;?></th>
-          <td class='w-p40'><?php echo html::input('realname', $user->realname, "class='form-control'");?></td><td></td>
+          <td class='w-p60'>
+           <?php if($user->admin == 'super'):?>
+           <?php if(count(explode(',', $this->config->site->lang)) > 1):?>
+           <div class='input-group'>
+             <?php if(strpos($this->config->site->lang, 'zh-cn') !== false):?>
+             <label class='input-group-addon'><?php echo $config->langs['zh-cn']?></label>
+             <?php echo html::input("realnames[cn]", isset($user->realnames->cn) ? $user->realnames->cn : '', "class='form-control'");?>
+             <?php endif;?>
+             <?php if(strpos($this->config->site->lang, 'zh-tw') !== false):?>
+             <label class='input-group-addon'><?php echo $config->langs['zh-tw'];?></label>
+             <?php echo html::input("realnames[tw]", isset($user->realnames->tw) ? $user->realnames->tw : '', "class='form-control'");?>
+             <?php endif;?>
+             <?php if(strpos($this->config->site->lang, 'en') !== false):?>
+             <label class='input-group-addon'><?php echo $config->langs['en']?></label>
+             <?php echo html::input("realnames[en]", isset($user->realnames->en) ? $user->realnames->en : '', "class='form-control'");?>
+             <?php endif;?>
+           </div>
+           <?php else:?>
+           <?php echo html::input("realnames[{$this->config->site->defaultLang}]", $user->realname, "class='form-control'")?>
+           <?php endif;?>
+           <?php else:?>
+           <?php echo html::input('realname', $user->realname, "class='form-control'")?>
+           <?php endif;?>
+          </td>
+          <td></td>
         </tr>
         <tr>
           <th><?php echo $lang->user->admin;?></th>

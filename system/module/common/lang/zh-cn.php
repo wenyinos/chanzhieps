@@ -180,6 +180,7 @@ $lang->user->menu->sina   = '微博会员|user|admin|provider=sina';
 $lang->user->menu->wechat = '微信会员|user|admin|provider=wechat';
 $lang->user->menu->qq     = 'QQ会员|user|admin|provider=qq';
 $lang->user->menu->admin  = '管理员|user|admin|admin=1';
+$lang->user->menu->log    = '登录日志|user|adminlog|';
 
 /* Menu of comment module. */
 $lang->feedback = new stdclass();
@@ -208,6 +209,7 @@ $lang->site->menu = new stdclass();
 $lang->site->menu->basic    = '站点设置|site|setbasic|';
 $lang->site->menu->lang     = '语言设置|site|setlang|';
 $lang->site->menu->nav      = '导航设置|nav|admin|';
+$lang->site->menu->security = '安全设置|site|setsecurity|';
 $lang->site->menu->upload   = '上传设置|site|setupload|';
 $lang->site->menu->tag      = '关键词设置|tag|admin|';
 #$lang->site->menu->robots   = 'Robots|site|setrobots|';

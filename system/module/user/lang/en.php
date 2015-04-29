@@ -172,3 +172,16 @@ $lang->user->control->menus[20] = '<i class="icon-large icon-edit"></i> Edit <i 
 $lang->user->control->menus[28] = '<i class="icon-large icon-comments-alt"></i> Messages <i class="icon-chevron-right"></i>|user|message';
 $lang->user->control->menus[30] = '<i class="icon-large icon-share"></i> Threads <i class="icon-chevron-right"></i>|user|thread';
 $lang->user->control->menus[40] = '<i class="icon-large icon-mail-reply"></i> Replies <i class="icon-chevron-right"></i>|user|reply';
+
+$lang->user->log = new stdclass();
+$lang->user->log->common = 'Log';
+$lang->user->log->list   = 'Admin user login log';
+
+$lang->user->log->id          = 'ID';
+$lang->user->log->account     = 'User';
+$lang->user->log->browser     = 'Browser';
+$lang->user->log->fingerprint = 'fingerprint';
+$lang->user->log->ip          = 'IP';
+$lang->user->log->position    = 'Position';
+$lang->user->log->date        = 'Date';
+$lang->user->log->desc        = 'description';

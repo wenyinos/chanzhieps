@@ -42,7 +42,8 @@ class article extends control
         $pager = new pager($recTotal = 0, $this->config->article->recPerPage, $pageID);
 
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
-        $articles   = $this->article->getList('article', $this->tree->getFamily($categoryID, 'article'), 'addedDate_desc', $pager);
+        $families   = $categoryID ? $this->tree->getFamily($categoryID, 'article') : '';
+        $articles   = $this->article->getList('article', $families, 'addedDate_desc', $pager);
 
         if($category)
         {
@@ -60,6 +61,7 @@ class article extends control
         $this->view->keywords  = $keywords;
         $this->view->desc      = $desc;
         $this->view->category  = $category;
+        $this->view->sticks    = $this->article->getSticks($families, 'article');
         $this->view->articles  = $articles;
         $this->view->pager     = $pager;
         $this->view->contact   = $this->loadModel('company')->getContact();
@@ -99,6 +101,7 @@ class article extends control
         $this->view->type       = $type;
         $this->view->categoryID = $categoryID;
         $this->view->articles   = $articles;
+        $this->view->sticks     = $this->article->getSticks($families, 'article');
         $this->view->pager      = $pager;
         $this->view->orderBy    = $orderBy;
 
@@ -296,5 +299,24 @@ class article extends control
         $this->view->title   = $this->lang->article->js;
         $this->view->article = $article;
         $this->display();
+    }
+
+    /**
+     * Stick an article.
+     * 
+     * @param  int    $articleID 
+     * @param  int    $stick 
+     * @access public
+     * @return void
+     */
+    public function stick($articleID, $stick)
+    {
+        $article = $this->article->getByID($articleID);
+
+        $this->dao->update(TABLE_ARTICLE)->set('sticky')->eq($stick)->where('id')->eq($articleID)->exec();
+        if(dao::isError()) $this->send(array('result' =>'fail', 'message' => dao::getError()));
+
+        $message = $stick == 0 ? $this->lang->article->successUnstick : $this->lang->article->successStick;
+        $this->send(array('result' => 'success', 'message' => $message, 'locate' => inlink('admin', "type={$article->type}")));
     }
 }

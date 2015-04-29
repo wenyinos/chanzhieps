@@ -31,11 +31,15 @@ $lang->site->mission       = 'Mission';
 $lang->site->copyright     = 'Copyright';
 $lang->site->allowUpload   = 'Allow upload files';
 $lang->site->allowedFiles  = 'Allowed file types';
+$lang->site->captcha       = 'Captcha';
 $lang->site->twContent     = 'traditional contents';
 $lang->site->cn2tw         = 'Copy from simplified Chinese content';
+$lang->site->cdn           = 'CND Site';
+$lang->site->checkLoginIP  = 'Check login position';
 
 $lang->site->setBasic      = "Baisc";
 $lang->site->setLang       = "Languages";
+$lang->site->setSecurity   = "Security";
 $lang->site->setUpload     = "Upload";
 $lang->site->setRobots     = "Robots";
 $lang->site->setOauth      = "Oauth";
@@ -50,6 +54,15 @@ $lang->site->typeList->blog   = 'Blog';
 $lang->site->statusList = new stdclass();
 $lang->site->statusList->normal = 'Normal';
 $lang->site->statusList->pause  = 'Pause';
+
+$lang->site->checkLoginIPList = array();
+$lang->site->checkLoginIPList['open']  = 'Open';
+$lang->site->checkLoginIPList['close'] = 'Close';
+
+$lang->site->captchaList = array();
+$lang->site->captchaList['open']  = 'Open';
+$lang->site->captchaList['close'] = 'Close';
+$lang->site->captchaList['auto']  = 'Automatic';
 
 $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = 'Member';

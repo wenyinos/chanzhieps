@@ -101,6 +101,31 @@ class site extends control
     }
 
     /**
+     * set site security info.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setSecurity()
+    {
+        if(!empty($_POST))
+        {
+            $setting = fixer::input('post')
+                ->setDefault('captcha', 'auto')
+                ->setDefault('checkLoginIP', 'close')
+                ->get();
+
+            $result = $this->loadModel('setting')->setItems('system.common.site', $setting, 'all');
+
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setsecurity')));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+        }
+
+        $this->view->title = $this->lang->site->setBasic;
+        $this->display();
+    }
+
+    /**
      * Set upload configures.
      * 
      * @access public

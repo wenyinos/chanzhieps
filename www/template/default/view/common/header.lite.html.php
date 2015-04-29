@@ -1,6 +1,6 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
 <?php
-$webRoot   = $config->webRoot;
+$webRoot   = isset($config->site->cdn) ? $config->site->cdn . $config->webRoot : $config->webRoot;
 $jsRoot    = $webRoot . "js/";
 $themeRoot = $webRoot . "template/default/theme/";
 ?>

@@ -246,7 +246,7 @@ $.extend(
                 }
 
                 /* If the response has locate param, locate the browse. */
-                if(response.locate) return location.href = response.locate;
+                if(response.locate) return setTimeout(function(){location.href = response.locate;}, 1200);
 
                 /* If target and source returned in reponse, update target with the source. */
                 if(response.target && response.source)
