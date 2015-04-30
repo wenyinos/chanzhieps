@@ -24,6 +24,11 @@ $('#submit').click(function()
                 dataType:'json',
                 success:function(data)
                 {
+                    if(data.reason == 'captcha')
+                    {
+                        $('.captchaModal').prop('href', data.url);
+                        setTimeout(function(){$('.captchaModal').click();}, 1000);
+                    }
                     if(data.result == 'fail') showFormError(data.message);
                     if(data.result == 'success') location.href=data.locate;
                     if(typeof(data) != 'object') showFormError(data);

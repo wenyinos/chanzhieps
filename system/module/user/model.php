@@ -134,6 +134,8 @@ class userModel extends model
             ->beginIF(!validater::checkEmail($account))->where('account')->eq($account)->fi()
             ->fetch();
 
+        if(!$user) return $user;
+
         if(!empty($user->realnames))
         {
             $user->realname  = $this->computeRealname($user->realnames);
@@ -834,5 +836,25 @@ class userModel extends model
         if(strpos($clientLang, 'zh-') !== false) $clientLang = str_replace('zh-', '', $clientLang);
 
         return isset($realnames->{$clientLang}) ? $realnames->{$clientLang} : '';
+    }
+
+    /**
+     * check client IP is allowed. 
+     * 
+     * @access public
+     * @return bool
+     */
+    public function checkIP()
+    {
+        if(!isset($this->config->site->checkIP) or $this->config->site->checkIP == 'close') return true;
+        if(!isset($this->config->site->allowedIP) or $this->config->site->allowedIP == '') return true;
+
+        $ips = explode(',', $this->config->site->allowedIP);
+        $clientIP = helper::getRemoteIp();
+        foreach($ips as $ip)
+        {
+            if(ipInNetwork($clientIP, $ip)) return true;
+        }
+        return false;
     }
 }
