@@ -433,6 +433,9 @@ class user extends control
 
         if(!empty($_POST))
         {
+            $user = $this->user->identify($this->app->user->account, $this->post->password);
+            if(!$user) $this->send(array( 'result' => 'fail', 'message' => $this->lang->user->identifyFailed ) );
+
             $this->user->updatePassword($this->app->user->account);
             if(dao::isError()) $this->send(array( 'result' => 'fail', 'message' => dao::getError() ) );
             $this->session->set('verify', '');
