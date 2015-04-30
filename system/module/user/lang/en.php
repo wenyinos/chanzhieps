@@ -14,6 +14,7 @@ $lang->user->common    = 'User';
 $lang->user->id        = 'ID';
 $lang->user->account   = 'Account';
 $lang->user->admin     = 'Admin';
+$lang->user->oldPwd    = 'Old password';
 $lang->user->password  = 'Password';
 $lang->user->password2 = 'Repeat it';
 $lang->user->realname  = 'Name';
@@ -88,6 +89,7 @@ $lang->user->forbidFail      = 'Failed forbid';
 $lang->user->activateSuccess = 'Successfully activate.';
 $lang->user->activateFail    = 'Failed activate.';
 $lang->user->pullSuccess     = 'Get wechat users successfully';
+$lang->user->wrongPwd        = 'Wrong password';
 
 $lang->user->forbidUser = 'Manage user';
 $lang->user->forbidDate = array();

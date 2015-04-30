@@ -282,6 +282,7 @@ class user extends control
             $this->user->update($account);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->session->set('verify', '');
+
             $locate = RUN_MODE == 'front' ? inlink('profile') : inlink('admin');
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess , 'locate' => $locate));
         }
