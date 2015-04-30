@@ -852,3 +852,50 @@ function processArrayEvils($params)
     }
     return $params;
 }
+
+/**
+ * ip in network  
+ * 
+ * @param  string $ip 
+ * @param  string $network 
+ * @access public
+ * @return void
+ */
+function ipInNetwork($ip, $network)
+{
+    $ip = (double) (sprintf("%u", ip2long($ip)));
+    $s  = explode('/', $network);
+    $networkStart = (double) (sprintf("%u", ip2long($s[0])));
+    $networkLen = pow(2, 32 - $s[1]);
+    $networkEnd = $networkStart + $networkLen - 1;
+
+    if ($ip >= $networkStart && $ip <= $networkEnd)
+    {
+        return true;
+    }
+    return false;
+}
+
+/**
+ * Is IP or network 
+ * 
+ * @param  string $ip 
+ * @access public
+ * @return bool
+ */
+function isIPOrNetwork($ip)
+{
+    $ip = trim($ip);
+    if(strpos($ip, '/') !== false)
+    {
+        $s = explode('/', $ip);
+        preg_match('/^(((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]\d)|\d)(\.((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]\d)|\d)){3})$/', $s[0], $matches);
+        if(!empty($matches) and $s[1] > 0 and $s[1] < 36) return true;
+    }
+    else
+    {
+        preg_match('/^(((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]\d)|\d)(\.((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]\d)|\d)){3})$/', $ip, $matches);
+        if(!empty($matches)) return true;
+    }
+    return false;
+}

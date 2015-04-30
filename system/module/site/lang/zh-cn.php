@@ -32,10 +32,13 @@ $lang->site->copyright     = '创建年份';
 $lang->site->allowUpload   = '允许上传附件';
 $lang->site->allowedFiles  = '允许附件类型';
 $lang->site->captcha       = '验证码';
+$lang->site->mailCaptcha   = '邮箱验证码';
 $lang->site->twContent     = '繁体内容';
 $lang->site->cn2tw         = '自动从简体版复制';
 $lang->site->cdn           = 'CDN地址';
-$lang->site->checkLoginIP  = '校验登录地址';
+$lang->site->checkIP       = '检查登录IP';
+$lang->site->checkPosition = '校验登录地址';
+$lang->site->allowedIP     = '允许登录IP';
 
 $lang->site->setBasic      = "基本信息设置";
 $lang->site->setLang       = "语言设置";
@@ -56,9 +59,13 @@ $lang->site->statusList = new stdclass();
 $lang->site->statusList->normal = '正常';
 $lang->site->statusList->pause  = '暂停';
 
-$lang->site->checkLoginIPList = array();
-$lang->site->checkLoginIPList['open']  = '打开';
-$lang->site->checkLoginIPList['close'] = '关闭';
+$lang->site->checkIPList = array();
+$lang->site->checkIPList['open']  = '打开';
+$lang->site->checkIPList['close'] = '关闭';
+
+$lang->site->checkPositionList = array();
+$lang->site->checkPositionList['open']  = '打开';
+$lang->site->checkPositionList['close'] = '关闭';
 
 $lang->site->captchaList = array();
 $lang->site->captchaList['open']  = '打开';
@@ -76,6 +83,8 @@ $lang->site->metaHolder       = '可放置<meta><script><style>和<link>标签�
 $lang->site->fileAllowedRole  = '多个后缀名之间请用 "," 隔开';
 $lang->site->domainTip        = '设置主域名可使所有网站访问跳转到该域名，设置前请确保主域名解析正确。该值为空时不进行跳转。';
 $lang->site->allowedDomainTip = '多个域名使用 , 隔开，如www.chanzhi.org,www.chanzhi.com。该值为空时允许所有域名访问。';
+$lang->site->allowedIPTip     = '多个IP使用 , 隔开，如202.194.133.1,202.194.132.0/28。该值为空时允许所有IP访问。';
+$lang->site->wrongAllowedIP   = 'IP 格式错误';
 
 $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Robots文件%s 不可写，请修改权限后设置。';

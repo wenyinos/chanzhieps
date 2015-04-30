@@ -323,7 +323,7 @@ class userModel extends model
         }
 
         return $this->dao->update(TABLE_USER)->setAutolang(false)
-            ->data($user, $skip = 'password1,password2')
+            ->data($user, $skip = 'oldPwd,password1,password2')
             ->autoCheck()
             ->batchCheck($this->config->user->require->edit, 'notempty')
             ->check('email', 'email')
