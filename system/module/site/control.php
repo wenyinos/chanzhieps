@@ -112,13 +112,26 @@ class site extends control
         {
             $setting = fixer::input('post')
                 ->setDefault('captcha', 'auto')
-                ->setDefault('checkLoginIP', 'close')
+                ->setDefault('checkIP', 'close')
+                ->setDefault('checkPosition', 'close')
+                ->setDefault('allowedIP', '')
                 ->get();
+
+            /* check IP. */
+            $ips = empty($_POST['allowedIP']) ? array() : explode(',', $this->post->allowedIP);
+            foreach($ips as $ip)
+            {
+                if(!empty($ip) and !isIPOrNetwork($ip)) 
+                {
+                    dao::$errors['allowedIP'][] = $this->lang->site->wrongAllowedIP;
+                    break;
+                }
+            }
 
             $result = $this->loadModel('setting')->setItems('system.common.site', $setting, 'all');
 
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setsecurity')));
-            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
         $this->view->title = $this->lang->site->setBasic;
