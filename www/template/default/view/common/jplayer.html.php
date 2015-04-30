@@ -14,12 +14,16 @@ $(document).ready(function()
         
         var reg = /\.flv$|\.flv\?|\.webm$|\.webm\?|\.wmv$|\.rtmp\?|\.rtmp$|\.mp3\?|\.mp3$|\.ogg\?|\.ogg$|\.mp4\?|\.mp4$|\.mp4\?/;
         mediaType = reg.exec(src);
-        mediaType = mediaType.toString().replace('.', '');
-        mediaType = mediaType.toString().replace('?', '');
-        mediaTypeList = <?php echo json_encode($this->config->file->mediaTypes)?>;
-        mediaType = eval("mediaTypeList." + mediaType.toLowerCase());
 
-        if(typeof(mediaType) == 'string')
+        if(mediaType)
+        {
+            mediaType = mediaType.toString().replace('.', '');
+            mediaType = mediaType.toString().replace('?', '');
+            mediaTypeList = <?php echo json_encode($this->config->file->mediaTypes);?>;
+            mediaType = eval("mediaTypeList." + mediaType.toLowerCase());
+        }
+
+        if(mediaType && typeof(eval("mediaTypeList." + mediaType.toLowerCase())) == 'string')
         {
             $(this).replaceWith("<div id='" + id + "'  class='jp-player text-center' data-src='" + src + "'></div>");
             $('#' + id).wrap("<div class='jp-type-single'></div>");
