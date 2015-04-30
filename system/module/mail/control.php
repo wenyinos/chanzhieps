@@ -168,4 +168,63 @@ class mail extends control
         $this->dao->delete('*')->from(TABLE_CONFIG)->where('module')->eq('mail')->exec(); 
         $this->locate(inlink('detect'));
     }
+
+    /**
+     * Send E-mail.
+     * 
+     * @param  string $item 
+     * @param  string $item 
+     * @access public
+     * @return void
+     */
+    public function captcha($type, $url = '', $target = 'modal')
+    {
+        if($url == '') $url = helper::safe64Encode('close');
+
+        if($_POST)
+        {
+            $this->session->set('verifyCode', mt_rand());
+            $account = $this->app->user->account;
+            $content = sprintf($this->lang->mail->sendContent, $account, $this->config->site->name, $this->server->http_host, $type,$this->session->verifyCode, $this->config->site->name);
+            $this->loadModel('mail')->send($account, $this->lang->mail->captcha . ' ' . $this->config->site->name, $content, true); 
+
+            if(!$this->mail->isError()) $this->send(array('result' => 'success', 'message' => $this->lang->mail->successSended, 'locate' => inlink('verify', "url=$url&target=$target")));
+
+            $error = str_replace('\n', "<br />", join('', $this->mail->getError()));
+            $this->send(array('result' => 'fail', 'message' => $error));
+        }
+
+        $user = $this->loadModel('user')->getByAccount($this->app->user->account);
+        $this->view->title  = $this->lang->mail->captcha;
+        $this->view->type   = $type;
+        $this->view->url    = $url;
+        $this->view->target = $target;
+        $this->view->email  = $user->email;
+        $this->display();
+    }
+
+    /**
+     * verify capycha.
+     * 
+     * @param  string $url 
+     * @access public
+     * @return void
+     */
+    public function verify($url, $target)
+    {
+        if($_POST)
+        {
+            if(trim($this->post->captcha) != $this->session->verifyCode) $this->send(array('result' => 'fail', 'message' => $this->lang->mail->verifyFail));
+            $this->session->set('verify', 6);
+            $this->send(array('result' => 'success', 'message' => $this->lang->mail->verifySuccess, 'locate' => helper::safe64Decode($url), 'target' => $target));
+        }
+
+        $this->session->set('verify', '');
+
+        $this->view->title  = $this->lang->mail->captcha;
+        $this->view->url    = $url;
+        $this->view->target = $target;
+        $this->display();
+
+    }
 }

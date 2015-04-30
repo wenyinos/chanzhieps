@@ -262,16 +262,31 @@ class user extends control
     {
         if(!$account or RUN_MODE == 'front') $account = $this->app->user->account;
         if($this->app->user->account == 'guest') $this->locate(inlink('login'));
+        $user = $this->user->getByAccount($account);
+
+        /* use email captcha. */
+        if(RUN_MODE == 'admin' and ($user->admin == 'super' or $user->admin == 'common' or $this->post->admin == 'super' or $this->post->admin == 'common')) 
+        { 
+            $error = $this->loadModel('mail')->checkCaptchaSetting();
+            $pass  = $this->mail->checkVerify();
+            $this->view->error = $error;
+            if(!$error and !$pass) 
+            {
+                if(empty($_POST)) $this->view->captchaContent = $this->fetch('mail', 'captcha', array('type' => $this->lang->user->edit, 'url' => helper::safe64Encode(inlink('edit')), 'target' => 'self'));
+                else $this->send(array('result' => 'fail', 'reason' => 'captcha'));
+            }
+        }
 
         if(!empty($_POST))
         {
             $this->user->update($account);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->session->set('verify', '');
             $locate = RUN_MODE == 'front' ? inlink('profile') : inlink('admin');
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess , 'locate' => $locate));
         }
 
-        $this->view->user = $this->user->getByAccount($account);
+        $this->view->user = $user;
         if(RUN_MODE == 'admin') 
         { 
             $this->view->siteLang = explode(',', $this->config->site->lang);
@@ -410,10 +425,17 @@ class user extends control
     {
         if($this->app->user->account == 'guest') $this->locate(inlink('login'));
 
+        /* use email captcha. */
+        $error = $this->loadModel('mail')->checkCaptchaSetting();
+        $pass  = $this->mail->checkVerify();
+        $this->view->error = $error;
+        if(!$error and !$pass) die($this->fetch('mail', 'captcha', array('type' => $this->lang->user->changePassword, 'url' => helper::safe64Encode(inlink('changePassword')), 'target' => 'modal')));
+
         if(!empty($_POST))
         {
             $this->user->updatePassword($this->app->user->account);
             if(dao::isError()) $this->send(array( 'result' => 'fail', 'message' => dao::getError() ) );
+            $this->session->set('verify', '');
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         }
 

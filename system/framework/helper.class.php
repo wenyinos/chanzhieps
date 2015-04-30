@@ -205,7 +205,7 @@ class helper
             {
                 $extLines = trim(file_get_contents($extFile));
                 if(strpos($extLines, '<?php') !== false) $extLines = ltrim($extLines, "<?php");
-                if(strpos($extLines, "?>")    !== false) $extLines = rtrim($extLines, "?>");
+                if(strpos($extLines, "?>")    !== false) $extLines = rtrim($extLines, '?>');
                 $modelLines .= $extLines . "\n";
             }
 
@@ -270,11 +270,9 @@ class helper
             if(!get_magic_quotes_gpc()) { foreach ($ids as $key=>$value) { $ids[$key] = addslashes($value); } }
             return "IN ('" . join("','", $ids) . "')";
         }
+
         if(!get_magic_quotes_gpc()) $ids = addslashes($ids);
         return "IN ('" . str_replace(',', "','", str_replace(' ', '', $ids)) . "')";
-
-        if(is_array($ids)) return "IN ('" . join("','", $ids) . "')";
-        return "IN ('" . str_replace(',', "','", str_replace(' ', '',$ids)) . "')";
     }
 
     /**
