@@ -3,8 +3,12 @@
 <form method='post' action='<?php echo inlink('changepassword');?>' id='passwordForm' class='form'>
   <table class='table table-form borderless'>
     <tr>
-      <th class="col-xs-4"><?php echo $lang->user->account;?></th>
-      <td class="col-xs-6"><?php echo $this->app->user->account;?></td><td></td>
+      <th class="w-100px"><?php echo $lang->user->account;?></th>
+      <td><?php echo $this->app->user->account;?></td><td></td>
+    </tr>  
+    <tr>
+      <th><?php echo $lang->user->password;?></th>
+      <td><?php echo html::password('password', '', "class='form-control'");?></td><td></td>
     </tr>  
     <tr>
       <th><?php echo $lang->user->newPassword;?></th>

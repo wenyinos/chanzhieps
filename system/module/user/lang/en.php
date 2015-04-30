@@ -14,6 +14,7 @@ $lang->user->common    = 'User';
 $lang->user->id        = 'ID';
 $lang->user->account   = 'Account';
 $lang->user->admin     = 'Admin';
+$lang->user->oldPwd    = 'Old password';
 $lang->user->password  = 'Password';
 $lang->user->password2 = 'Repeat it';
 $lang->user->realname  = 'Name';
@@ -80,6 +81,7 @@ $lang->user->searchUser          = 'Search';
 
 $lang->user->errorDeny       = "Sorry, you don't have the permission to access <b>%s</b>'s<b>%s</b>. Please contact the administrator.<br/> This page will jump to homepage after 5 seconds";
 $lang->user->loginFailed     = "Login failed, please check you account and password.";
+$lang->user->identifyFailed  = "identify failed，please check you password.";
 $lang->user->locked          = "Failed too much, please login again after ten minutes";
 $lang->user->lockedForEver   = "User has been forbidden for ever.";
 $lang->user->lblRegistered   = 'Congratulations, register successfully!';
@@ -88,6 +90,7 @@ $lang->user->forbidFail      = 'Failed forbid';
 $lang->user->activateSuccess = 'Successfully activate.';
 $lang->user->activateFail    = 'Failed activate.';
 $lang->user->pullSuccess     = 'Get wechat users successfully';
+$lang->user->wrongPwd        = 'Wrong password';
 
 $lang->user->forbidUser = 'Manage user';
 $lang->user->forbidDate = array();

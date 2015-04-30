@@ -300,6 +300,7 @@ class userModel extends model
         /* If the user want to change his password. */
         if($this->post->password1 != false)
         {
+            if(RUN_MODE == 'front') $this->checkOldPassword();
             $this->checkPassword();
             if(dao::isError()) return false;
 
@@ -348,6 +349,26 @@ class userModel extends model
         else
         {
             dao::$errors['password1'][] = $this->lang->user->inputPassword;
+        }
+        return !dao::isError();
+    }
+
+    /**
+     * Check old password.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function checkOldPassword()
+    {
+        if($this->post->oldPwd != false)
+        {
+            $hash = md5(md5($this->post->oldPwd) . $this->app->user->account);
+            if($hash != $this->app->user->password) dao::$errors['oldPwd'][] = $this->lang->user->wrongPwd;
+        }
+        else
+        {
+            dao::$errors['oldPwd'][] = $this->lang->user->inputPassword;
         }
         return !dao::isError();
     }
