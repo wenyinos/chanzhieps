@@ -213,7 +213,7 @@ class articleModel extends model
 
         $this->app->loadClass('pager', true);
         $pager = new pager($recTotal = 0, $recPerPage = $count, 1);
-        return $this->getList($type, $family, 'views_desc', $pager);
+        return $this->getList($type, $family, 'sticky_desc, views_desc', $pager);
     }
 
     /**
@@ -235,7 +235,7 @@ class articleModel extends model
 
         $this->app->loadClass('pager', true);
         $pager = new pager($recTotal = 0, $recPerPage = $count, 1);
-        return $this->getList($type, $family, 'addedDate_desc', $pager);
+        return $this->getList($type, $family, 'sticky_desc, addedDate_desc', $pager);
     }
 
     /**
