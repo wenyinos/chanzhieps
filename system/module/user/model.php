@@ -134,10 +134,18 @@ class userModel extends model
             ->beginIF(!validater::checkEmail($account))->where('account')->eq($account)->fi()
             ->fetch();
 
-        if($user->admin == 'super' and $user->realnames)
+        if(!empty($user->realnames))
         {
             $user->realname  = $this->computeRealname($user->realnames);
             $user->realnames = json_decode($user->realnames);
+        }
+        else
+        {
+            $clientLang = $this->config->site->defaultLang;
+            $clientLang = strpos($clientLang, 'zh-') !== false ? str_replace('zh-', '', $clientLang) : $clientLang;
+
+            $user->realnames = new stdclass();
+            $user->realnames->$clientLang = $user->realname;
         }
 
          return $user;
@@ -302,14 +310,15 @@ class userModel extends model
         $user = fixer::input('post')
             ->cleanInt('imobile, qq, zipcode')
             ->setDefault('admin', 'no')
+            ->setIF(RUN_MODE == 'admin' and $this->post->admin != 'super', 'realnames', '')
             ->remove('ip, account, join, visits')
             ->removeIF(RUN_MODE != 'admin', 'admin')
             ->get();
 
-        if($user->admin == 'super' and $user->realnames)
+        if((isset($user->admin) and $user->admin == 'super') or $user->realnames)
         {
             $user->realnames = helper::jsonEncode($user->realnames);
-            $this->config->user->require->edit = 'realnames, email';
+            $this->config->user->require->edit = 'email, realnames';
         }
 
         return $this->dao->update(TABLE_USER)->setAutolang(false)
