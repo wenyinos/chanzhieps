@@ -585,6 +585,10 @@ class blockModel extends model
             $style .= '}';
             $style .= !empty($content->iconColor) ? '#block' . $block->id . ' i{color:' .$content->iconColor . ' !important;}' : '';
             $style .= !empty($content->linkColor) ? '#block' . $block->id . ' a{color:' .$content->linkColor . ' !important;}' : '';
+            $style .= isset($content->paddingTop) ? '#block' . $block->id . ' .panel-body' . '{padding-top:' . $content->paddingTop . 'px !important;}' : '';
+            $style .= isset($content->paddingRight) ? '#block' . $block->id . ' .panel-body' . '{padding-right:' . $content->paddingRight . 'px !important;}' : '';
+            $style .= isset($content->paddingBottom) ? '#block' . $block->id . ' .panel-body' . '{padding-bottom:' . $content->paddingBottom . 'px !important;}' : '';
+            $style .= isset($content->paddingLeft) ? '#block' . $block->id . ' .panel-body' . '{padding-left:' . $content->paddingLeft . 'px !important;}' : '';
             $style .= '</style>';
 
             echo $containerHeader;

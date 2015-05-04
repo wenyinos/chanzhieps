@@ -28,6 +28,7 @@ $lang->block->product         = '产品';
 $lang->block->titleless       = '无标题';
 $lang->block->borderless      = '无边框';
 $lang->block->icon            = '图标';
+$lang->block->padding         = '内边距';
 $lang->block->border          = '边框';
 $lang->block->grid            = '宽度';
 $lang->block->more            = '更多';
@@ -60,9 +61,15 @@ $lang->block->view         = '查看区块';
 $lang->block->setPage      = '配置页面';
 $lang->block->setregion    = '配置布局';
 
+$lang->block->paddingTop    = '上';
+$lang->block->paddingBottom = '下';
+$lang->block->paddingLeft   = '左';
+$lang->block->paddingRight  = '右';
+
 $lang->block->placeholder = new stdclass();
 $lang->block->placeholder->moreText = '区块右上角文字';
 $lang->block->placeholder->moreUrl  = '区块右上角链接地址';
+$lang->block->placeholder->padding = '0';
 
 $lang->block->gridOptions[0]  = '自动';
 $lang->block->gridOptions[6]  = '1/2';

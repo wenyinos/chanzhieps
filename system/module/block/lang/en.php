@@ -29,6 +29,7 @@ $lang->block->titleless       = 'Hide Title';
 $lang->block->borderless      = 'Hide Border';
 $lang->block->icon            = 'Icon';
 $lang->block->border          = 'Border';
+$lang->block->padding         = 'Padding';
 $lang->block->grid            = 'Width';
 $lang->block->more            = 'More';
 $lang->block->color           = 'Color';
@@ -60,9 +61,15 @@ $lang->block->view         = 'view';
 $lang->block->setPage      = 'Set page blocks';
 $lang->block->setregion    = 'Set region';
 
+$lang->block->paddingTop    = 'Top';
+$lang->block->paddingBottom = 'Bottom';
+$lang->block->paddingLeft   = 'Left';
+$lang->block->paddingRight  = 'Right';
+
 $lang->block->placeholder = new stdclass();
 $lang->block->placeholder->moreText = 'Text for button of more';
 $lang->block->placeholder->moreUrl  = 'Url for button of more';
+$lang->block->placeholder->padding = '0';
 
 $lang->block->gridOptions[0]  = 'Auto';
 $lang->block->gridOptions[6]  = '1/2';

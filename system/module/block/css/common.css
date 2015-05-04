@@ -10,6 +10,8 @@
 .color .input-group-addon {min-width: 40px; text-align: center;}
 .color .btn{text-shadow: none;}
 
+.input-group-addon + .input-group-addon.fix-border{border-left: 1px solid #ccc;}
+
 .dropdown-menu.colors {padding: 5px; width: 205px}
 
 #ajaxForm {position: relative;}

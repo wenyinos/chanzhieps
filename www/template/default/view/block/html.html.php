@@ -18,7 +18,5 @@
     <div class='pull-right'><?php echo html::a($block->content->moreUrl, $block->content->moreText);?></div>
     <?php endif;?>
   </div>
-  <div class='panel-body'>
-    <div class='article-content'><?php echo $block->content->content;?></div>
-  </div>
+  <div class='panel-body'><?php echo $block->content->content;?></div>
 </div>

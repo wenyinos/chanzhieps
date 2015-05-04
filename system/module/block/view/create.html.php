@@ -139,6 +139,24 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
                   </div>
                 </td>
               </tr>
+              <?php if($type == 'html'):?>
+              <tr>
+                <th class='w-80px'><?php echo $lang->block->padding;?></th>
+                <td colspan='2'>
+                  <div class='input-group'>
+                    <span class='input-group-addon'><?php echo $lang->block->padding;?></span>
+                    <span class='input-group-addon fix-border'><?php echo $lang->block->paddingTop;?></span>
+                    <?php echo html::input('params[paddingTop]', '', "class='form-control' placeholder='{$lang->block->placeholder->padding}'");?>
+                    <span class='input-group-addon fix-border'><?php echo $lang->block->paddingRight;?></span>
+                    <?php echo html::input('params[paddingRight]', '', "class='form-control' placeholder='{$lang->block->placeholder->padding}'");?>
+                    <span class='input-group-addon fix-border'><?php echo $lang->block->paddingBottom;?></span>
+                    <?php echo html::input('params[paddingBottom]', '', "class='form-control' placeholder='{$lang->block->placeholder->padding}'");?>
+                    <span class='input-group-addon fix-border'><?php echo $lang->block->paddingLeft;?></span>
+                    <?php echo html::input('params[paddingLeft]', '', "class='form-control' placeholder='{$lang->block->placeholder->padding}'");?>
+                  </div>
+                </td>
+              </tr>
+              <?php endif;?>
               <?php if($type != 'featuredProduct'):?>
               <tr>
                 <th class='w-80px'><?php echo $lang->block->heading;?></th>
