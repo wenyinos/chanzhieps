@@ -21,6 +21,10 @@
   <td><?php echo html::input('params[limit]', isset($block->content->limit) ? $block->content->limit : '', "class='text-4 form-control'");?></td>
 </tr>
 <tr>
+  <th><?php echo $lang->block->recPerRow;?></th>
+  <td><?php echo html::input('params[recPerRow]', isset($block->content->recPerRow) ? $block->content->recPerRow : '', "class='text-4 form-control'");?></td>
+</tr>
+<tr>
   <th><?php echo $lang->block->showImage;?></th>
   <td><input type='checkbox' name='params[image]' <?php if(isset($block->content->image) && $block->content->image) echo 'checked';?> value='1' /></td>
 </tr>

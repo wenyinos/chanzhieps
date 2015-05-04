@@ -32,7 +32,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
       $url = helper::createLink('product', 'view', "id=$product->id", "category={$product->category->alias}&name=$product->alias");
       ?>
       <?php if(!empty($product->image)): ?>
-      <div class='col-md-12'>
+      <div class='col-md-12' data-recperrow="<?php echo $content->recPerRow;?>">
         <a class='card' href="<?php echo $url;?>">
           <?php $title = $product->image->primary->title ? $product->image->primary->title : $product->name;?>
           <div class='media' style='background-image: url(<?php echo $product->image->primary->middleURL; ?>);'><?php echo html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"); ?></div>

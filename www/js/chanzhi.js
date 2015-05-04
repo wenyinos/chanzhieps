@@ -652,11 +652,18 @@ function autoBlockGrid()
         var grid = parentGrid * $this.closest('[class*="col-"]').data('grid') / 12,
             cards = $this.find('[class*="col-"]'),
             layout = $this.data('layout');
+            recPerRow = cards.data('recperrow');
 
         if(layout == 'horizontal') cards.attr('class', 'col-md-3 col-sm-4 col-xs-6');
         else if(layout == 'vertical') cards.attr('class', 'col-lg-12');
         else
         {
+            if(recPerRow)
+            {
+                width = 1 / recPerRow * 100;
+                cards.attr('style', "width:" + width + '%');
+            }
+
             if(grid >= 9) cards.attr('class', 'col-md-4 col-sm-6');
             else if(grid >= 5) cards.attr('class', 'col-md-6');
             else cards.attr('class', 'col-md-12');

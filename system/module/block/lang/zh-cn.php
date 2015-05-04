@@ -13,6 +13,7 @@ $lang->block->common          = '区块维护';
 $lang->block->id              = '编号';
 $lang->block->title           = '名称';
 $lang->block->limit           = '数量';
+$lang->block->recPerRow       = '每行数量';
 $lang->block->type            = '类型';
 $lang->block->htmlcode        = 'html代码';
 $lang->block->phpcode         = 'php代码';
