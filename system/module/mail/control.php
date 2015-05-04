@@ -195,13 +195,20 @@ class mail extends control
             $this->send(array('result' => 'fail', 'message' => $error . $account));
         }
 
+        $check  = $this->loadModel('mail')->checkEmailSetting($account);
+        $okFile = $this->loadModel('common')->verfyAdmin();
+        $pass   = $this->mail->checkVerify();
+
         $user = $this->loadModel('user')->getByAccount($account);
-        $this->view->title   = $this->lang->mail->captcha;
+        $this->view->title   = $this->lang->mail->verify;
         $this->view->type    = $type;
         $this->view->url     = $url;
         $this->view->target  = $target;
         $this->view->account = $account;
         $this->view->email   = $user->email;
+        $this->view->check   = $check;
+        $this->view->okFile  = $okFile;
+        $this->view->pass    = $pass;
         $this->display();
     }
 
@@ -223,7 +230,7 @@ class mail extends control
 
         $this->session->set('verify', '');
 
-        $this->view->title  = $this->lang->mail->captcha;
+        $this->view->title  = $this->lang->mail->verify;
         $this->view->url    = $url;
         $this->view->target = $target;
         $this->display();

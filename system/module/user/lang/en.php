@@ -188,3 +188,6 @@ $lang->user->log->ip          = 'IP';
 $lang->user->log->position    = 'Position';
 $lang->user->log->date        = 'Date';
 $lang->user->log->desc        = 'description';
+
+$lang->user->ipDenied       = 'This IP not allowed login, please do these steps.';
+$lang->user->positionDenied = 'This position not allowed login, please do these steps.';

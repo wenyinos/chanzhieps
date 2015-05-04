@@ -108,7 +108,7 @@ class user extends control
                     {
                         $pass = $this->loadModel('mail')->checkVerify();
                         $captchaUrl = $this->createLink('mail', 'captcha', "type={$this->lang->user->login->common}&url=&target=modal&account={$this->post->account}");
-                        if(!$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => 'IP denied', 'url' => $captchaUrl));
+                        if(!$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => $this->lang->user->ipDenied, 'url' => $captchaUrl));
                     }
                 }
             }
@@ -283,14 +283,13 @@ class user extends control
         /* use email captcha. */
         if(RUN_MODE == 'admin' and ($user->admin == 'super' or $user->admin == 'common' or $this->post->admin == 'super' or $this->post->admin == 'common')) 
         { 
-            $error = $this->loadModel('mail')->checkCaptchaSetting();
-            $pass  = $this->mail->checkVerify();
-            $this->view->error = $error;
-            if(!$error and !$pass) 
-            {
-                if(empty($_POST)) $this->view->captchaContent = $this->fetch('mail', 'captcha', array('type' => $this->lang->user->edit, 'url' => helper::safe64Encode(inlink('edit')), 'target' => 'salf'));
-                else $this->send(array('result' => 'fail', 'reason' => 'captcha'));
-            }
+            $check  = $this->loadModel('mail')->checkEmailSetting();
+            $okFile = $this->loadModel('common')->verfyAdmin();
+            $pass   = $this->mail->checkVerify();
+            $this->view->check  = $check;
+            $this->view->pass   = $pass;
+            $this->view->okFile = $okFile;
+            if(!empty($_POST) && !$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha'));
         }
 
         if(!empty($_POST))
@@ -303,7 +302,8 @@ class user extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess , 'locate' => $locate));
         }
 
-        $this->view->user = $user;
+        $this->view->title = $this->lang->user->edit;
+        $this->view->user  = $user;
         if(RUN_MODE == 'admin') 
         { 
             $this->view->siteLang = explode(',', $this->config->site->lang);
@@ -443,13 +443,17 @@ class user extends control
         if($this->app->user->account == 'guest') $this->locate(inlink('login'));
 
         /* use email captcha. */
-        $error = $this->loadModel('mail')->checkCaptchaSetting();
-        $pass  = $this->mail->checkVerify();
-        $this->view->error = $error;
-        if(!$error and !$pass) die($this->fetch('mail', 'captcha', array('type' => $this->lang->user->changePassword, 'url' => helper::safe64Encode(inlink('changePassword')), 'target' => 'modal')));
+        $check  = $this->loadModel('mail')->checkEmailSetting();
+        $okFile = $this->loadModel('common')->verfyAdmin();
+        $pass   = $this->mail->checkVerify();
+        $this->view->check  = $check;
+        $this->view->okFile = $okFile;
+        $this->view->pass   = $pass;
 
         if(!empty($_POST))
         {
+            if(!$pass) $this->send(array( 'result' => 'fail', 'message' => $this->lang->mail->needVerify));
+
             $user = $this->user->identify($this->app->user->account, $this->post->password);
             if(!$user) $this->send(array( 'result' => 'fail', 'message' => $this->lang->user->identifyFailed ) );
 

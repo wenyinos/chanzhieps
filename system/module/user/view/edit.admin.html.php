@@ -1,6 +1,12 @@
-<?php include '../../common/view/header.admin.html.php';?>
-<?php if(!empty($error)) echo $error?>
-<?php if(isset($captchaContent)) echo $captchaContent?>
+<?php include '../../common/view/header.modal.html.php';?>
+<?php if(isset($pass) and !$pass):?>
+<?php 
+$type   = $lang->user->edit;
+$url    = helper::safe64Encode($this->app->getURI());
+$target = 'self';
+include '../../mail/view/captcha.html.php';
+?>
+<?php else:?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-eidt'></i> <?php echo $lang->user->editProfile;?></strong></div>
   <div class='panel-body'>
@@ -87,4 +93,5 @@
     </form>        
   </div>
 </div>
-<?php include '../../common/view/footer.admin.html.php';?>
+<?php endif;?>
+<?php include '../../common/view/footer.modal.html.php';?>

@@ -1,5 +1,5 @@
 <?php include '../../common/view/header.modal.html.php';?>
-<?php if(!empty($error)) echo $error;?>
+<?php if($pass):?>
 <form method='post' action='<?php echo inlink('changepassword');?>' id='passwordForm' class='form'>
   <table class='table table-form borderless'>
     <tr>
@@ -21,4 +21,11 @@
     <tr><td></td><td><?php echo html::submitButton();?></td></tr>
   </table>
 </form>
+<?php else:?>
+<?php 
+$type = $lang->user->changePassword;
+$url  = helper::safe64Encode($this->createLink('user', 'changepassword'));
+include '../../mail/view/captcha.html.php';
+?>
+<?php endif;?>
 <?php include '../../common/view/footer.modal.html.php';?>

@@ -41,12 +41,18 @@ $lang->mail->content        = 'Well done, the email notification feature works n
 $lang->mail->successSended  = 'Successfully sended!';
 $lang->mail->needConfigure  = "I can not find the configuration, please configure it first.";
 
+$lang->mail->verify        = 'Verify identify of admin';
 $lang->mail->captcha       = 'Email captcha';
+$lang->mail->needVerify    = 'Need to verify the identity of Administrator';
 $lang->mail->verifyFail    = 'Wrong captcha';
 $lang->mail->verifySuccess = 'Right captcha';
-$lang->mail->sendNotice    = 'The action of <strong>%s</strong> need verification your E-mail for site security.';
 $lang->mail->noConfigure   = " <span class='text-info'>I can not find the configuration, con't use email captcha.</span>";
 $lang->mail->noEmail       = " <span class='text-info'>I can not find your email address, con't use email captcha.</span>";
+$lang->mail->sendNotice    = <<<EOT
+For security reason.<strong>%s</strong> please do these steps</br>
+<strong>File</strong>:Create %s file. If this file exists already, reopen it and save again.%s</br>
+<strong>Email</strong>:The email captcha will send to %s. %s</br>
+EOT;
 $lang->mail->sendContent   = <<<EOT
 Hello %s：
 </br>&nbsp;&nbsp;&nbsp;&nbsp;You are changing some infomation at <strong>%s</strong>(%s), action is <strong>%s</strong>. The code you need is:%s

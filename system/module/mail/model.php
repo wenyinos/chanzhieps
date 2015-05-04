@@ -385,6 +385,11 @@ class mailModel extends model
      */
     public function checkVerify()
     {
+        /* check Ok file. */
+        $okFile = $this->loadModel('common')->verfyAdmin();
+        if($okFile['result'] == 'success') return true;
+
+        /* check session.*/
         if($this->session->verify and $this->session->verify > 0) 
         {
             $this->session->set('verify', $this->session->verify - 1);
@@ -406,15 +411,16 @@ class mailModel extends model
      * @access public
      * @return string
      */
-    public function checkCaptchaSetting()
+    public function checkEmailSetting($account = '')
     {
         $msg = '';
+        if($account == '') $account = $this->app->user->account;
         if(!$this->config->mail->turnon) $msg .= $this->lang->mail->noConfigure;
 
-        $user = $this->loadModel('user')->getByAccount($this->app->user->account);
+        $user = $this->loadModel('user')->getByAccount($account);
         if(empty($user->email)) $msg .= $this->lang->mail->noEmail;
 
-        return empty($msg) ? false : $msg;
+        return empty($msg) ? array('result' => 'success') : array('result' => 'fail', 'message' => $msg);
     }
 
     /**
