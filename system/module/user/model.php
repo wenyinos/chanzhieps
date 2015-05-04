@@ -134,10 +134,20 @@ class userModel extends model
             ->beginIF(!validater::checkEmail($account))->where('account')->eq($account)->fi()
             ->fetch();
 
-        if($user->admin == 'super' and $user->realnames)
+        if(!$user) return $user;
+
+        if(!empty($user->realnames))
         {
             $user->realname  = $this->computeRealname($user->realnames);
             $user->realnames = json_decode($user->realnames);
+        }
+        else
+        {
+            $clientLang = $this->config->site->defaultLang;
+            $clientLang = strpos($clientLang, 'zh-') !== false ? str_replace('zh-', '', $clientLang) : $clientLang;
+
+            $user->realnames = new stdclass();
+            $user->realnames->$clientLang = $user->realname;
         }
 
          return $user;
@@ -303,18 +313,19 @@ class userModel extends model
         $user = fixer::input('post')
             ->cleanInt('imobile, qq, zipcode')
             ->setDefault('admin', 'no')
+            ->setIF(RUN_MODE == 'admin' and $this->post->admin != 'super', 'realnames', '')
             ->remove('ip, account, join, visits')
             ->removeIF(RUN_MODE != 'admin', 'admin')
             ->get();
 
-        if($user->admin == 'super' and $user->realnames)
+        if((isset($user->admin) and $user->admin == 'super') or $user->realnames)
         {
             $user->realnames = helper::jsonEncode($user->realnames);
-            $this->config->user->require->edit = 'realnames, email';
+            $this->config->user->require->edit = 'email, realnames';
         }
 
         return $this->dao->update(TABLE_USER)->setAutolang(false)
-            ->data($user, $skip = 'password1,password2')
+            ->data($user, $skip = 'oldPwd,password1,password2')
             ->autoCheck()
             ->batchCheck($this->config->user->require->edit, 'notempty')
             ->check('email', 'email')
@@ -825,5 +836,25 @@ class userModel extends model
         if(strpos($clientLang, 'zh-') !== false) $clientLang = str_replace('zh-', '', $clientLang);
 
         return isset($realnames->{$clientLang}) ? $realnames->{$clientLang} : '';
+    }
+
+    /**
+     * check client IP is allowed. 
+     * 
+     * @access public
+     * @return bool
+     */
+    public function checkIP()
+    {
+        if(!isset($this->config->site->checkIP) or $this->config->site->checkIP == 'close') return true;
+        if(!isset($this->config->site->allowedIP) or $this->config->site->allowedIP == '') return true;
+
+        $ips = explode(',', $this->config->site->allowedIP);
+        $clientIP = helper::getRemoteIp();
+        foreach($ips as $ip)
+        {
+            if(ipInNetwork($clientIP, $ip)) return true;
+        }
+        return false;
     }
 }

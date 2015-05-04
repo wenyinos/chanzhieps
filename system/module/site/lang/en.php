@@ -32,10 +32,13 @@ $lang->site->copyright     = 'Copyright';
 $lang->site->allowUpload   = 'Allow upload files';
 $lang->site->allowedFiles  = 'Allowed file types';
 $lang->site->captcha       = 'Captcha';
+$lang->site->mailCaptcha   = 'Mail captcha';
 $lang->site->twContent     = 'traditional contents';
 $lang->site->cn2tw         = 'Copy from simplified Chinese content';
 $lang->site->cdn           = 'CND Site';
-$lang->site->checkLoginIP  = 'Check login position';
+$lang->site->checkIP       = 'Check login IP';
+$lang->site->checkPosition = 'Check login position';
+$lang->site->allowedIP     = 'Allowed IP list';
 
 $lang->site->setBasic      = "Baisc";
 $lang->site->setLang       = "Languages";
@@ -46,6 +49,7 @@ $lang->site->setOauth      = "Oauth";
 $lang->site->setSinaOauth  = "Weibo Oauth";
 $lang->site->setQQOauth    = "QQ Oauth";
 $lang->site->oauthHelp     = "Help";
+$lang->site->setRecPerPage = "Record per page";
 
 $lang->site->typeList = new stdclass();
 $lang->site->typeList->portal = 'Portal';
@@ -55,9 +59,13 @@ $lang->site->statusList = new stdclass();
 $lang->site->statusList->normal = 'Normal';
 $lang->site->statusList->pause  = 'Pause';
 
-$lang->site->checkLoginIPList = array();
-$lang->site->checkLoginIPList['open']  = 'Open';
-$lang->site->checkLoginIPList['close'] = 'Close';
+$lang->site->checkIPList = array();
+$lang->site->checkIPList['open']  = 'Open';
+$lang->site->checkIPList['close'] = 'Close';
+
+$lang->site->checkPositionList = array();
+$lang->site->checkPositionList['open']  = 'Open';
+$lang->site->checkPositionList['close'] = 'Close';
 
 $lang->site->captchaList = array();
 $lang->site->captchaList['open']  = 'Open';
@@ -75,6 +83,8 @@ $lang->site->metaHolder       = 'Tags liek <meta>, <script>, <style>, <link> is 
 $lang->site->fileAllowedRole  = 'Use "," to divide different extension name.';
 $lang->site->domainTip        = 'Redirect all request to this domian.';
 $lang->site->allowedDomainTip = 'Use "," to divide different domain.';
+$lang->site->allowedIPTip     = 'Use "," to divide different IP.';
+$lang->site->wrongAllowedIP   = 'Wrong IP';
 
 $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Can not write robots file, please make sure %s writeable first.';

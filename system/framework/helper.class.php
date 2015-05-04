@@ -817,10 +817,14 @@ function header301($url)
  */
 function processEvil($value)
 {
-    $value       = (string) $value;
-    $evils       = array('eval', 'exec', 'passthru', 'proc_open', 'shell_exec', 'system', '$$', 'include', 'require', 'assert');
-    $gibbedEvils = array('e v a l', 'e x e c', ' p a s s t h r u', ' p r o c _ o p e n', 's h e l l _ e x e c', 's y s t e m', '$ $', 'i n c l u d e', 'r e q u i r e', 'a s s e r t');
-    return str_ireplace($evils, $gibbedEvils, $value);
+    if(strpos(htmlspecialchars_decode($value), '<?') !== false)
+    {
+        $value       = (string) $value;
+        $evils       = array('eval', 'exec', 'passthru', 'proc_open', 'shell_exec', 'system', '$$', 'include', 'require', 'assert');
+        $gibbedEvils = array('e v a l', 'e x e c', ' p a s s t h r u', ' p r o c _ o p e n', 's h e l l _ e x e c', 's y s t e m', '$ $', 'i n c l u d e', 'r e q u i r e', 'a s s e r t');
+        return str_ireplace($evils, $gibbedEvils, $value);
+    }
+    return $value;
 }
 
 /**
@@ -851,4 +855,53 @@ function processArrayEvils($params)
         }
     }
     return $params;
+}
+
+/**
+ * ip in network  
+ * 
+ * @param  string $ip 
+ * @param  string $network 
+ * @access public
+ * @return void
+ */
+function ipInNetwork($ip, $network)
+{
+    if(strpos($network, '/') === false) return $ip == $network;
+
+    $ip = (double) (sprintf("%u", ip2long($ip)));
+    $s  = explode('/', $network);
+    $networkStart = (double) (sprintf("%u", ip2long($s[0])));
+    $networkLen = pow(2, 32 - $s[1]);
+    $networkEnd = $networkStart + $networkLen - 1;
+
+    if ($ip >= $networkStart && $ip <= $networkEnd)
+    {
+        return true;
+    }
+    return false;
+}
+
+/**
+ * Is IP or network 
+ * 
+ * @param  string $ip 
+ * @access public
+ * @return bool
+ */
+function isIPOrNetwork($ip)
+{
+    $ip = trim($ip);
+    if(strpos($ip, '/') !== false)
+    {
+        $s = explode('/', $ip);
+        preg_match('/^(((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]\d)|\d)(\.((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]\d)|\d)){3})$/', $s[0], $matches);
+        if(!empty($matches) and $s[1] > 0 and $s[1] < 36) return true;
+    }
+    else
+    {
+        preg_match('/^(((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]\d)|\d)(\.((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]\d)|\d)){3})$/', $ip, $matches);
+        if(!empty($matches)) return true;
+    }
+    return false;
 }

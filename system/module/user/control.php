@@ -97,6 +97,22 @@ class user extends control
         /* If the user sumbit post, check the user and then authorize him. */
         if(!empty($_POST))
         {
+            /* check client ip and position if login is admin. */
+            if(RUN_MODE == 'admin')
+            {
+                $user = $this->user->getByAccount($this->post->account);
+                if($user and !empty($user->email) and $this->config->mail->turnon)
+                {
+                    $checkIP = $this->user->checkIP();
+                    if(!$checkIP)
+                    {
+                        $pass = $this->loadModel('mail')->checkVerify();
+                        $captchaUrl = $this->createLink('mail', 'captcha', "type={$this->lang->user->login->common}&url=&target=modal&account={$this->post->account}");
+                        if(!$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => 'IP denied', 'url' => $captchaUrl));
+                    }
+                }
+            }
+
             if(!$this->user->login($this->post->account, $this->post->password)) $this->send(array('result'=>'fail', 'message' => $this->lang->user->loginFailed));
 
             /* Goto the referer or to the default module */
@@ -272,7 +288,7 @@ class user extends control
             $this->view->error = $error;
             if(!$error and !$pass) 
             {
-                if(empty($_POST)) $this->view->captchaContent = $this->fetch('mail', 'captcha', array('type' => $this->lang->user->edit, 'url' => helper::safe64Encode(inlink('edit')), 'target' => 'self'));
+                if(empty($_POST)) $this->view->captchaContent = $this->fetch('mail', 'captcha', array('type' => $this->lang->user->edit, 'url' => helper::safe64Encode(inlink('edit')), 'target' => 'salf'));
                 else $this->send(array('result' => 'fail', 'reason' => 'captcha'));
             }
         }

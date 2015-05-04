@@ -177,29 +177,31 @@ class mail extends control
      * @access public
      * @return void
      */
-    public function captcha($type, $url = '', $target = 'modal')
+    public function captcha($type, $url = '', $target = 'modal', $account = '')
     {
-        if($url == '') $url = helper::safe64Encode('close');
+        $type = strip_tags($type);
+        if($url == '')     $url     = helper::safe64Encode('close');
+        if($account == '') $account = $this->app->user->account;
 
         if($_POST)
         {
             $this->session->set('verifyCode', mt_rand());
-            $account = $this->app->user->account;
             $content = sprintf($this->lang->mail->sendContent, $account, $this->config->site->name, $this->server->http_host, $type,$this->session->verifyCode, $this->config->site->name);
             $this->loadModel('mail')->send($account, $this->lang->mail->captcha . ' ' . $this->config->site->name, $content, true); 
 
             if(!$this->mail->isError()) $this->send(array('result' => 'success', 'message' => $this->lang->mail->successSended, 'locate' => inlink('verify', "url=$url&target=$target")));
 
             $error = str_replace('\n', "<br />", join('', $this->mail->getError()));
-            $this->send(array('result' => 'fail', 'message' => $error));
+            $this->send(array('result' => 'fail', 'message' => $error . $account));
         }
 
-        $user = $this->loadModel('user')->getByAccount($this->app->user->account);
-        $this->view->title  = $this->lang->mail->captcha;
-        $this->view->type   = $type;
-        $this->view->url    = $url;
-        $this->view->target = $target;
-        $this->view->email  = $user->email;
+        $user = $this->loadModel('user')->getByAccount($account);
+        $this->view->title   = $this->lang->mail->captcha;
+        $this->view->type    = $type;
+        $this->view->url     = $url;
+        $this->view->target  = $target;
+        $this->view->account = $account;
+        $this->view->email   = $user->email;
         $this->display();
     }
 

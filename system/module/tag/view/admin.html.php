@@ -42,7 +42,10 @@
         <td><?php echo $tag->tag;?></td>
         <td><?php echo $tag->rank;?></td>
         <td class='text-left'><?php echo $tag->link;?></td>
-        <td> <?php commonModel::printLink('tag', 'link', "id=$tag->id", $lang->tag->editLink, "data-toggle='modal'"); ?> </td>
+        <td>
+          <?php commonModel::printLink('tag', 'link', "id=$tag->id", $lang->tag->editLink, "data-toggle='modal'"); ?>
+          <?php commonModel::printLink('tag', 'related', "tag=$tag->tag", $lang->tag->related, "data-toggle='modal'"); ?>
+        </td>
       </tr>
       <?php endforeach;?>
     </tbody>
