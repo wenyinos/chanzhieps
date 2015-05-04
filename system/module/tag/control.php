@@ -36,6 +36,39 @@ class tag extends control
     }   
 
     /**
+     * Keyword is related with articles, products, pages and books.
+     * 
+     * @param  int    $tag 
+     * @access public
+     * @return void
+     */
+    public function related($tag)
+    {
+        $articles = $this->dao->select('*')->from(TABLE_ARTICLE)->where("concat(',', keywords, ',')")->like("%,{$tag},%")->orderBy('type, id_desc')->fetchGroup('type');
+        $products = $this->dao->select('*')->from(TABLE_PRODUCT)->where("concat(',', keywords, ',')")->like("%,{$tag},%")->fetchAll();
+        $nodes    = $this->dao->select('*')->from(TABLE_BOOK)->where("concat(',', keywords, ',')")->like("%,{$tag},%")->fetchAll('id');
+
+        $books = $this->dao->select('*')->from(TABLE_BOOK)->fetchAll('id');
+        foreach($nodes as $node)
+        {
+            if($node->type == 'article')
+            {
+                $path   = explode(',', trim($node->path, ','));
+                $bookID = $path[0];
+                $node->book = new stdclass();
+                $node->book->alias = $books[$bookID]->alias;
+            }
+        }
+
+        $this->view->title    = $this->lang->tag->related;
+        $this->view->articles = $articles;
+        $this->view->products = $products;
+        $this->view->nodes    = $nodes;
+
+        $this->display();
+    }
+
+    /**
      * Set link for a tag.
      * 
      * @param  int    $tagID 
