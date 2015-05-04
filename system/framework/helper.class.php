@@ -867,6 +867,8 @@ function processArrayEvils($params)
  */
 function ipInNetwork($ip, $network)
 {
+    if(strpos($network, '/') === false) return $ip == $network;
+
     $ip = (double) (sprintf("%u", ip2long($ip)));
     $s  = explode('/', $network);
     $networkStart = (double) (sprintf("%u", ip2long($s[0])));

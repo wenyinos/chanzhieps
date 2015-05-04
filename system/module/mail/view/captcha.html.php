@@ -10,7 +10,7 @@
 <?php include '../../common/view/header.modal.html.php';?>
 <?php endif;?>
 
-<form class='form-inline' id='sendMailForm' action="<?php echo $this->createLink('mail', 'captcha', "type=$type&url=$url&target=$target");?>" method='post'>
+<form class='form-inline' id='sendMailForm' action="<?php echo $this->createLink('mail', 'captcha', "type=$type&url=$url&target=$target&account=$account");?>" method='post'>
   <div class='alert alert-success'>
     <?php echo sprintf($lang->mail->sendNotice, $type, $email) . html::submitButton($this->lang->send) . html::hidden('sendMail', 1);?>
   </div>

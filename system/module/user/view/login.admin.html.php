@@ -26,7 +26,7 @@ js::set('random', $this->session->random);
               <td><?php echo html::password('password','',"class='form-control' placeholder='{$lang->user->inputPassword}'");?></td>
             </tr>
             <tr>
-              <th></th>
+              <th><?php echo html::a('', $lang->save, "data-toggle='modal' class='hidden captchaModal'")?></th>
               <td><?php echo html::submitButton($lang->user->login->common, 'btn btn-primary btn');?></td>
             </tr>
           </table>
