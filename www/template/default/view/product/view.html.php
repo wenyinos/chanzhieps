@@ -23,6 +23,7 @@ css::internal($product->css);
 js::execute($product->js);
 ?>
 <?php $common->printPositionBar($category, $product);?>
+<div class='row'><?php $this->block->printRegion($layouts, 'product_view', 'top', true);?></div>
 <div class='row'>
   <div class='col-md-9 col-main'>
     <div class='panel panel-body panel-product'>
@@ -128,5 +129,6 @@ js::execute($product->js);
     <side class='page-side'><?php $this->block->printRegion($layouts, 'product_view', 'side');?></side>
   </div>
 </div>
+<div class='row'><?php $this->block->printRegion($layouts, 'product_view', 'bottom', true);?></div>
 <?php include TPL_ROOT . 'common/jplayer.html.php'; ?>
 <?php include TPL_ROOT . 'common/footer.html.php'; ?>

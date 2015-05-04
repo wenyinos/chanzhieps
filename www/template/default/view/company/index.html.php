@@ -2,6 +2,7 @@
 include TPL_ROOT . 'common/header.html.php';
 ?>
 <?php $common->printPositionBar($this->app->getModuleName());?>
+<div class='row'><?php $this->block->printRegion($layouts, 'company_index', 'top', true);?></div>
 <div class="row">
   <div class="col-md-9 col-main">
     <div class='panel'>
@@ -15,4 +16,5 @@ include TPL_ROOT . 'common/header.html.php';
   </div>
   <div class='col-md-3 col-side'><side class='page-side'><?php $this->block->printRegion($layouts, 'company_index', 'side');?></side></div>
 </div>
+<div class='row'><?php $this->block->printRegion($layouts, 'company_index', 'bottom', true);?></div>
 <?php include TPL_ROOT . 'common/footer.html.php'; ?>

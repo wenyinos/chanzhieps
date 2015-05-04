@@ -1,5 +1,6 @@
 <?php include TPL_ROOT . 'common/header.html.php'; ?>
 <?php if(isset($node)) $common->printPositionBar($node->origins);?>
+<div class='row'><?php $this->block->printRegion($layouts, 'book_browse', 'top', true);?></div>
 <div class='row'>
   <div class='col-md-3'>
     <nav class='booksNav'>
@@ -32,4 +33,5 @@
     </div>
   </div>
 </div>  
+<div class='row'><?php $this->block->printRegion($layouts, 'book_browse', 'bottom', true);?></div>
 <?php include TPL_ROOT . 'common/footer.html.php';?>

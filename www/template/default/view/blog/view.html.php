@@ -24,6 +24,7 @@ include TPL_ROOT . 'common/treeview.html.php';
 $root = '<li>' . $this->lang->currentPos . $this->lang->colon .  html::a($this->inlink('index'), $lang->blog->home) . '</li>';
 $common->printPositionBar($category, $article, '', $root);
 ?>
+<div class='row'><?php $this->block->printRegion($layouts, 'blog_view', 'top', true);?></div>
 <div class='row'>
   <div class='col-md-9 col-main'>
     <div class='article'>
@@ -83,4 +84,5 @@ $common->printPositionBar($category, $article, '', $root);
   </div>
   <div class='col-md-3 col-side'><side class='page-side'><div class='panel-pure panel'><?php echo html::a(helper::createLink('rss', 'index', '?type=blog', '', 'xml'), "<i class='icon-rss text-warning'></i> " . $lang->blog->subscribe, "target='_blank' class='btn btn-lg btn-block'"); ?></div><?php $this->block->printRegion($layouts, 'blog_view', 'side');?></side></div>
 </div>
+<div class='row'><?php $this->block->printRegion($layouts, 'blog_view', 'bottom', true);?></div>
 <?php include TPL_ROOT . 'blog/footer.html.php';?>

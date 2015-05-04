@@ -8,6 +8,7 @@ js::set('categoryID', $category->id);
 include TPL_ROOT . 'common/treeview.html.php';
 ?>
 <?php echo $common->printPositionBar($category);?>
+<div class='row'><?php $this->block->printRegion($layouts, 'article_browse', 'top', true);?></div>
 <div class='row'>
   <div class='col-md-9 col-main'>
     <div class='list list-condensed'>
@@ -71,4 +72,5 @@ include TPL_ROOT . 'common/treeview.html.php';
   </div>
   <div class='col-md-3 col-side'><side class='page-side'><?php $this->block->printRegion($layouts, 'article_browse', 'side');?></side></div>
 </div>
+<div class='row'><?php $this->block->printRegion($layouts, 'article_browse', 'bottom', true);?></div>
 <?php include TPL_ROOT . 'common/footer.html.php';?>

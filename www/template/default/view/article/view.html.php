@@ -11,6 +11,7 @@ css::internal($article->css);
 js::execute($article->js);
 ?>
 <?php $common->printPositionBar($category, $article);?>
+<div class='row'><?php $this->block->printRegion($layouts, 'article_view', 'top', true);?></div>
 <div class='row'>
   <div class='col-md-9 col-main'>
     <div class='article'>
@@ -81,6 +82,7 @@ js::execute($article->js);
   </div>
   <div class='col-md-3 col-side'><?php $this->block->printRegion($layouts, 'article_view', 'side');?></div>
 </div>
+<div class='row'><?php $this->block->printRegion($layouts, 'article_view', 'bottom', true);?></div>
 
 <?php $videoList = $article->files;?>
 <?php include TPL_ROOT . 'common/jplayer.html.php'; ?>

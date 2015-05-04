@@ -12,6 +12,7 @@
 ?>
 <?php include TPL_ROOT . 'common/header.html.php';?>
 <?php $common->printPositionBar();?>
+<div class='row'><?php $this->block->printRegion($layouts, 'message_index', 'top', true);?></div>
 <div class='row'>
   <div class='col-md-9 col-main'>
     <?php if(!empty($messages)):?>
@@ -109,4 +110,5 @@
     <?php $this->block->printRegion($layouts, 'message_index', 'side');?>
   </div>
 </div>
+<div class='row'><?php $this->block->printRegion($layouts, 'message_index', 'bottom', true);?></div>
 <?php include TPL_ROOT . 'common/footer.html.php';?>

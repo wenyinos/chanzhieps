@@ -98,16 +98,33 @@ $lang->block->default->regions->index_index['top']     = '上部';
 $lang->block->default->regions->index_index['middle']  = '中部';
 $lang->block->default->regions->index_index['bottom']  = '底部';
 
-$lang->block->default->regions->company_index['side']  = '侧边';
+$lang->block->default->regions->company_index['top']    = '上部';
+$lang->block->default->regions->company_index['bottom'] = '底部';
+$lang->block->default->regions->company_index['side']   = '侧边';
 
-$lang->block->default->regions->article_browse['side'] = '侧边';
+$lang->block->default->regions->article_browse['top']    = '上部';
+$lang->block->default->regions->article_browse['bottom'] = '底部';
+$lang->block->default->regions->article_browse['side']   = '侧边';
+
+$lang->block->default->regions->article_view['top']    = '上部';
+$lang->block->default->regions->article_view['bottom'] = '底部';
 $lang->block->default->regions->article_view['side']   = '侧边';
 
-$lang->block->default->regions->product_browse['side'] = '侧边';
+$lang->block->default->regions->product_browse['top']    = '上部';
+$lang->block->default->regions->product_browse['bottom'] = '底部';
+$lang->block->default->regions->product_browse['side']   = '侧边';
+
+$lang->block->default->regions->product_view['top']    = '上部';
+$lang->block->default->regions->product_view['bottom'] = '底部';
 $lang->block->default->regions->product_view['side']   = '侧边';
 
-$lang->block->default->regions->blog_index['side']     = '侧边';
-$lang->block->default->regions->blog_view['side']      = '侧边';
+$lang->block->default->regions->blog_index['top']    = '上部';
+$lang->block->default->regions->blog_index['bottom'] = '底部';
+$lang->block->default->regions->blog_index['side']   = '侧边';
+
+$lang->block->default->regions->blog_view['top']    = '上部';
+$lang->block->default->regions->blog_view['bottom'] = '底部';
+$lang->block->default->regions->blog_view['side']   = '侧边';
 
 $lang->block->default->regions->forum_index['top']     = '上部';
 $lang->block->default->regions->forum_index['bottom']  = '底部';
@@ -116,10 +133,17 @@ $lang->block->default->regions->forum_board['bottom']  = '底部';
 $lang->block->default->regions->thread_view['top']     = '上部';
 $lang->block->default->regions->thread_view['bottom']  = '底部';
 
-$lang->block->default->regions->book_browse['side']    = '侧边';
+$lang->block->default->regions->book_browse['top']    = '上部';
+$lang->block->default->regions->book_browse['bottom'] = '底部';
+$lang->block->default->regions->book_browse['side']   = '侧边';
+
 $lang->block->default->regions->book_read['top']       = '上部';
 $lang->block->default->regions->book_read['bottom']    = '底部';
 
-$lang->block->default->regions->message_index['side']  = '侧边';
+$lang->block->default->regions->message_index['top']    = '上部';
+$lang->block->default->regions->message_index['bottom'] = '底部';
+$lang->block->default->regions->message_index['side']   = '侧边';
 
-$lang->block->default->regions->page_view['side']      = '侧边';
+$lang->block->default->regions->page_view['top']    = '上部';
+$lang->block->default->regions->page_view['bottom'] = '底部';
+$lang->block->default->regions->page_view['side']   = '侧边';
