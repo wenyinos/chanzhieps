@@ -438,6 +438,19 @@ body.body-modal {padding: 20px;}
   .page {color :transparent; white-space:nowrap; overflow:hidden;}
 }
 
+/* Search bar */
+#searchbar {position: absolute; right: 0; top: 45%; max-width: 200px;}
+#searchbar .form-control {border-radius: 16px 0 0 16px}
+#searchbar .btn {border-radius: 0 16px 16px 0}
+@media (max-width: 767px) {
+  #searchbar {right: auto; left: 10px; top: 2px; max-width: 150px}
+  #searchbar .form-control, #searchbar .btn {padding: 3px 8px; height: 26px}
+  #searchbar .btn {padding: 3p}
+  #headNav.hide {display: block; height: 30px}
+  #headNav.hide + #searchbar {max-width: 400px; left: auto; right: 0; padding: 0 10px;}
+}
+@media (max-width: 480px) {#searchbar {max-width: 90px}}
+
 /* === Blog === */
 #articles .card-heading a {font-weight: bold;}
 
@@ -449,6 +462,10 @@ body.body-modal {padding: 20px;}
   #blogNav .navbar-nav > li {padding: 3px; float: left; width: 33.333333%}
   #blogNav .navbar-nav > li > a {text-align: center; border-radius: 6px; padding: 5px;}
 }
+
+/* Search bar */
+.m-blog #searchbar {top: 30%;}
+@media (max-width: 767px) {.m-blog #searchbar {top: 30%; left: auto; right: 10px;}}
 
 /* Pager. */
 .pager {margin: 10px 0;line-height: 20px; color: #999}

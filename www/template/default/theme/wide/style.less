@@ -951,3 +951,27 @@ body
     .col-main {width: 100% - @sidebar-width;}
     .col-side {width: @sidebar-width}
 }
+
+/* Search bar */
+#searchbar > form {margin: 0 auto; max-width: 1170px;}
+@media (min-width: 768px) {#searchbar > form {max-width: 750px;}}
+@media (min-width: 992px) {#searchbar > form {max-width: 970px;}}
+@media (min-width: 1200px) {#searchbar > form {max-width: 1170px;}}
+#searchbar {top: 0; right: 0; left: 0; max-width: inherit; height: 0}
+#searchbar .input-group {max-width: 200px; float: right; padding: 4px 0 4px 5px;}
+#searchbar .form-control {border-radius: 0;}
+#searchbar .btn {border-radius: 0;}
+.m-index #searchbar .input-group {max-width: 208px; padding-right: 8px;}
+#headNav.hide {display: block;}
+@media (max-width: 992px) {.m-index #searchbar .input-group {padding-right: 0; padding-left: 15px;}}
+@media (max-width: 767px) {
+  #searchbar {max-width: 200px}
+  #searchbar .input-group {float: left; padding: 5px}
+  #searchbar .form-control {padding: 5px 10px; height: 30px}
+  #searchbar .btn {padding: 5px 10px; height: 30px}
+  #headNav.hide {height: 40px;}
+}
+@media (max-width: 600px) {#searchbar {max-width: 100px}}
+#headNav nav {float: right; margin-right: 200px;}
+
+.m-blog #searchbar {top: 5px;}

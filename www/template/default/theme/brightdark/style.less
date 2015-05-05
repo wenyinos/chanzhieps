@@ -895,3 +895,21 @@ a:active, a:focus
 
 /* breadcrumb */
 .breadcrumb a, .breadcrumb a:visited, .breadcrumb a:hover {color: contrast(darken(@background-color, 10%), @fore-color, @back-color)}
+
+/* Search bar */
+#searchbar {position: relative; max-width: inherit;}
+#searchbar > form {position: absolute; bottom: -43px; right: 8px; z-index: 1001; max-width: 200px;}
+#searchbar .form-control {border-radius: 2px 0 0 2px; padding: 3px 8px; height: 28px; border: none}
+#searchbar .btn {border-radius: 0 2px 2px 0; padding: 3px 8px; height: 28px; border: none;}
+@media (max-width: 767px) {
+  #searchbar {position: absolute; left: 15px; top: 3px;}
+  #searchbar > form {position: static;}
+  #headNav.hide {height: 34px}
+  #headNav.hide + #searchbar {left: auto; padding: 0 15px;}
+  #headNav.hide + #searchbar > form {max-width: 100%}
+}
+@media (max-width: 480px) {#searchbar {max-width: 90px}}
+
+.m-blog  #searchbar {position: absolute; width: 200px; right: 10px; top: 20%;}
+.m-blog  #searchbar .form-control {border: none;}
+@media (max-width: 767px) {.m-blog  #searchbar {top: 30%; left: auto; right: 20px;}}
