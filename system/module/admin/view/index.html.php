@@ -32,6 +32,15 @@
   </div>
   <?php endif;?>
 
+  <?php if(!$checkPosition):?>
+  <div class='alert alert-success'>
+    <div>
+      <?php echo $lang->site->changePosition;?>
+      <?php echo html::a($this->createLink('site', 'setsecurity'), $lang->site->usePosition, "class='red'");?>
+    </div>
+  </div>
+  <?php endif;?>
+
   <div class='row'>
     <div class='col-md-4 col-sm-6'> 
       <div class="shortcut article-admin">

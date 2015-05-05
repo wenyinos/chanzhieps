@@ -133,8 +133,11 @@ class site extends control
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setsecurity')));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
+        $position = $this->app->loadClass('IP')->find(helper::getRemoteIp());
+        unset($position[3]);
 
-        $this->view->title = $this->lang->site->setBasic;
+        $this->view->title    = $this->lang->site->setBasic;
+        $this->view->position = join(' ', $position);
         $this->display();
     }
 
