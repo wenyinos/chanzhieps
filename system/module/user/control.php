@@ -100,16 +100,16 @@ class user extends control
             /* check client ip and position if login is admin. */
             if(RUN_MODE == 'admin')
             {
-                $user = $this->user->getByAccount($this->post->account);
-                if($user and !empty($user->email) and $this->config->mail->turnon)
+                $user          = $this->user->getByAccount($this->post->account);
+                $checkIP       = $this->user->checkIP();
+                $checkPosition = $this->user->checkPosition();
+                if($user and (!$checkIP or !$checkPosition))
                 {
-                    $checkIP = $this->user->checkIP();
-                    if(!$checkIP)
-                    {
-                        $pass = $this->loadModel('mail')->checkVerify();
-                        $captchaUrl = $this->createLink('mail', 'captcha', "type={$this->lang->user->login->common}&url=&target=modal&account={$this->post->account}");
-                        if(!$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => $this->lang->user->ipDenied, 'url' => $captchaUrl));
-                    }
+                    $error  = $checkIP ? '' : $this->lang->user->ipDenied;
+                    $error .= $checkPosition ? '' : $this->lang->user->positionDenied;
+                    $pass   = $this->loadModel('mail')->checkVerify();
+                    $captchaUrl = $this->createLink('mail', 'captcha', "type={$this->lang->user->login->common}&url=&target=modal&account={$this->post->account}");
+                    if(!$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => $error, 'url' => $captchaUrl));
                 }
             }
 

@@ -20,6 +20,7 @@ class admin extends control
     public function index()
     {
         $this->view->ignoreUpgrade = isset($this->config->global->ignoreUpgrade) and $this->config->global->ignoreUpgrade;
+        $this->view->checkPosition = $this->loadModel('user')->checkPosition();
         $this->display();
     }
 
