@@ -129,6 +129,8 @@ define('TABLE_MESSAGE',        $config->db->prefix . 'message');
 define('TABLE_WX_PUBLIC',      $config->db->prefix . 'wx_public');
 define('TABLE_WX_MESSAGE',     $config->db->prefix . 'wx_message');
 define('TABLE_WX_RESPONSE',    $config->db->prefix . 'wx_response');
+define('TABLE_SEARCH_INDEX',   $config->db->prefix . 'search_index');
+define('TABLE_SEARCH_DICT',    $config->db->prefix . 'search_dict');
 
 /* Include extension config files. */
 $extConfigFiles = glob($configRoot . 'ext' . DS . '*.php');

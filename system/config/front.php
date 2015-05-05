@@ -70,6 +70,8 @@ $config->rights->guest['page']['view']  = 'view';
 
 $config->rights->guest['misc']['qrcode'] = 'qrcode';
 
+$config->rights->guest['search']['index'] = 'index';
+
 /* For logged member. */
 $config->rights->member['thread']['post']         = 'post';
 $config->rights->member['thread']['reply']        = 'reply';
@@ -98,3 +100,4 @@ $config->rights->member['file']['ajaxupload'] = 'ajaxupload';
 
 $config->rights->member['message']['view']        = 'view';
 $config->rights->member['message']['batchdelete'] = 'batchdelete';
+
