@@ -359,7 +359,7 @@ td #aliasLabel {display: table-row;}
 #msgBox.hiding {display: none;}
 
 /* Icon chanzhi */
-.icon-chanzhi {display: inline-block!important; width: 32px; height: 12px; position: relative;}
+.icon-chanzhi {display: inline-block; width: 32px; height: 12px; position: relative;}
 .icon-chanzhi > i, .icon-chanzhi > i:before, .icon-chanzhi > i:after {display: block; border: 1px solid #777; position: absolute; content: ''; left: -1000em; top: 0; transition: all .5s cubic-bezier(.175,.885,.32,1);}
 .icon-chanzhi > .ic1 {width: 5px; height: 5px; left: 0; top: 3px;}
 .icon-chanzhi > .ic1:before {width: 1px; height: 10px; left: 1px; top: -4px; border-right: none}
@@ -389,9 +389,10 @@ td #aliasLabel {display: table-row;}
 #footNav a:hover, #powerby a:hover {color: #145BCC}
 #copyrightInfo, #icpInfo {color: #999; font-size: 12px;}
 #powerby {position: absolute; right: 0; top: 20px; padding: 0; overflow: hidden;}
-#powerby a {margin: 0;}
+#powerby a {margin: 0; display: block; padding-left: 36px;}
 #powerby a:hover, #powerby:hover .icon-chanzhi > i, #powerby:hover .icon-chanzhi > i:before, #powerby:hover .icon-chanzhi > i:after {border-color: #1152b7; text-decoration: none}
-#powerby .icon-chanzhi {top: 1px;}
+#powerby a > .name {text-indent: -2em; display: block; overflow: hidden;}
+#powerby .icon-chanzhi {top: 3px; position: absolute; left: 0}
 @media (max-width: 767px) {
   #footNav, #icpInfo {display: none;}
   #footer {text-align: left; padding-right: 100px;}
@@ -437,6 +438,19 @@ body.body-modal {padding: 20px;}
   .page {color :transparent; white-space:nowrap; overflow:hidden;}
 }
 
+/* Search bar */
+#searchbar {position: absolute; right: 0; top: 45%; max-width: 200px;}
+#searchbar .form-control {border-radius: 16px 0 0 16px}
+#searchbar .btn {border-radius: 0 16px 16px 0}
+@media (max-width: 767px) {
+  #searchbar {right: auto; left: 10px; top: 2px; max-width: 150px}
+  #searchbar .form-control, #searchbar .btn {padding: 3px 8px; height: 26px}
+  #searchbar .btn {padding: 3p}
+  #headNav.hide {display: block; height: 30px}
+  #headNav.hide + #searchbar {max-width: 400px; left: auto; right: 0; padding: 0 10px;}
+}
+@media (max-width: 480px) {#searchbar {max-width: 90px}}
+
 /* === Blog === */
 #articles .card-heading a {font-weight: bold;}
 
@@ -448,6 +462,10 @@ body.body-modal {padding: 20px;}
   #blogNav .navbar-nav > li {padding: 3px; float: left; width: 33.333333%}
   #blogNav .navbar-nav > li > a {text-align: center; border-radius: 6px; padding: 5px;}
 }
+
+/* Search bar */
+.m-blog #searchbar {top: 30%;}
+@media (max-width: 767px) {.m-blog #searchbar {top: 30%; left: auto; right: 10px;}}
 
 /* Pager. */
 .pager {margin: 10px 0;line-height: 20px; color: #999}
