@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php js::set('position', $position)?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-globe'></i> <?php echo $lang->site->setSecurity;?></strong></div>
   <div class='panel-body'>
@@ -23,8 +24,17 @@
         </tr>
         <tr>
           <th class='w-200px'><?php echo $lang->site->checkPosition;?></th>
-          <td colspan='2'><?php echo html::radio('checkPosition', $lang->site->checkPositionList, isset($this->config->site->chackPosition) ? $this->config->site->chackPosition : 'close');?></td>
+          <td colspan='2'><?php echo html::radio('checkPosition', $lang->site->checkPositionList, isset($this->config->site->checkPosition) ? $this->config->site->checkPosition : 'close');?></td>
           <td></td>
+        </tr>
+        <tr>
+          <?php $allowedPosition = isset($this->config->site->allowedPosition) ? $this->config->site->allowedPosition : '';?>
+          <th class='w-200px'><?php echo $lang->site->allowedPosition;?></th>
+          <td colspan='2'><?php echo html::input('allowedPositionShow', $allowedPosition, "class='form-control' disabled='disabled'");?></td>
+          <td>
+            <?php echo html::input('allowedPosition', $allowedPosition, "class='hide'");?>
+            <?php echo $allowedPosition == $position ? '' : html::a('', $lang->site->usePosition, "id='usePosition' class='red'")?>
+          </td>
         </tr>
         <tr>
           <th class='w-200px'><?php echo $lang->site->checkIP;?></th>

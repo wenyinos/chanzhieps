@@ -471,6 +471,34 @@ CREATE TABLE IF NOT EXISTS `eps_wx_message` (
   KEY `lang` (`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+-- DROP TABLE IF EXISTS `eps_search_index`;
+CREATE TABLE IF NOT EXISTS `eps_search_index` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `objectType` char(20) NOT NULL,
+  `objectID` mediumint(9) NOT NULL,
+  `title` text NOT NULL,
+  `content` text NOT NULL,
+  `params` text NOT NULL,
+  `addedDate` datetime NOT NULL,
+  `editedDate` datetime NOT NULL,
+  `status` char(30) NOT NULL DEFAULT 'normal',
+  `lang` char(30) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `object` (`objectType`,`objectID`),
+  KEY `lang` (`lang`),
+  KEY `addedDate` (`addedDate`),
+  FULLTEXT KEY `content` (`title`,`content`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- DROP TABLE IF EXISTS `eps_search_dict`;
+CREATE TABLE IF NOT EXISTS `eps_search_dict` (
+  `key` smallint(5) unsigned NOT NULL,
+  `value` char(3) NOT NULL,
+  `lang` char(30) NOT NULL,
+  PRIMARY KEY (`key`),
+  KEY `lang` (`lang`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
 -- Insert data into `eps_layout`;
 INSERT INTO `eps_layout` (`page`, `region`, `blocks`, `template`,`lang`) VALUES
 ('all', 'top', '[{"id":"12","grid":"","titleless":0,"borderless":0}]', 'default','zh-cn'),

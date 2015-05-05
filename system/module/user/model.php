@@ -857,4 +857,22 @@ class userModel extends model
         }
         return false;
     }
+
+    /**
+     * checkPosition 
+     * 
+     * @access public
+     * @return bool
+     */
+    public function checkPosition()
+    {
+        if(!isset($this->config->site->checkPosition) or $this->config->site->checkPosition == 'close') return true;
+        if(!isset($this->config->site->allowedPosition) or $this->config->site->allowedPosition == '') return true;
+
+        $allowedPosition = $this->config->site->allowedPosition;
+        $position = $this->app->loadClass('IP')->find(helper::getRemoteIp());
+        unset($position[3]);
+        $currentPosition = join(' ', $position);
+        return $allowedPosition == $currentPosition;
+    }
 }

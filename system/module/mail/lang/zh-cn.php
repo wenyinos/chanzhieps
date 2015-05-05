@@ -45,7 +45,7 @@ $lang->mail->verify        = '验证管理员身份';
 $lang->mail->captcha       = '验证码';
 $lang->mail->needVerify    = '需要验证管理员身份';
 $lang->mail->verifyFail    = '验证码错误';
-$lang->mail->verifySuccess = '验证码正确';
+$lang->mail->verifySuccess = '验证通过，请继续操作';
 $lang->mail->noConfigure   = " <span class='text-info'>无法找到发信配置信息，邮箱验证未启用。</span>";
 $lang->mail->noEmail       = " <span class='text-info'>未填写个人邮箱，邮箱验证未启用。</span>";
 $lang->mail->sendNotice    = <<<EOT
