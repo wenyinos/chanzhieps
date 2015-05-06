@@ -91,6 +91,7 @@ $lang->js->deleteing     = '删除中';
 $lang->js->doing         = '处理中';
 $lang->js->loading       = '加载中';
 $lang->js->timeout       = '网络超时,请重试';
+$lang->js->errorThrown   = '<h4>执行出错：</h4>';
 
 /* Contact fields*/
 $lang->company = new stdclass();
@@ -291,7 +292,7 @@ $lang->error->passwordsame = '两次密码应当相等。';
 $lang->error->passwordrule = '密码应该符合规则，长度至少为六位。';
 $lang->error->captcha      = '请输入正确的验证码。';
 $lang->error->noWritable   = '%s 可能不可写，请修改权限！';
-$lang->error->fingerprint  = '身份验证错误！';
+$lang->error->fingerprint  = '身份认证过期，请重试！';
 $lang->error->token        = '必须为英文或数字，长度为3-32字符！';
 
 /* The pager items. */

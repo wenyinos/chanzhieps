@@ -1,5 +1,6 @@
 <?php
 include '../../common/view/header.lite.html.php';
+js::import($jsRoot . 'fingerprint/fingerprint.js');
 js::import($jsRoot . 'md5.js');
 js::set('scriptName', $_SERVER['SCRIPT_NAME']);
 js::set('random', $this->session->random);
@@ -9,7 +10,7 @@ js::set('random', $this->session->random);
     <div id='siteName'>
       <?php echo $this->config->site->name;?>
     </div>
-    <form method='post' id='ajaxForm'>
+    <form method='post' id='ajaxForm' data-checkfingerprint='1'>
       <div id='formError' class='alert alert-danger hiding'></div>
       <div class='row'>
         <div class='col-xs-4 text-center'>

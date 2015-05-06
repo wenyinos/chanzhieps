@@ -88,6 +88,7 @@ class thread extends control
 
         if($_POST)
         {
+            a('iifiiyyyiig');
             /* If no captcha but is garbage, return the error info. */
             if($this->post->captcha === false and $this->loadModel('captcha')->isEvil($_POST['content']))
             {

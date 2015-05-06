@@ -134,7 +134,7 @@ $.extend(
                     bootbox.alert(v.lang.timeout);
                     return false;
                 }
-                bootbox.alert(jqXHR.responseText + textStatus + errorThrown);
+                bootbox.alert(v.lang.errorThrown + '<div class="alert">' + jqXHR.responseText + '</div>');
             }
         };
 

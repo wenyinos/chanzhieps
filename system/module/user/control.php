@@ -97,6 +97,8 @@ class user extends control
         /* If the user sumbit post, check the user and then authorize him. */
         if(!empty($_POST))
         {
+            if(!validater::checkFingerprint($this->post->fingerprint))  $this->send(array( 'result' => 'fail', 'message' => $this->lang->error->fingerprint));
+
             /* check client ip and position if login is admin. */
             if(RUN_MODE == 'admin')
             {

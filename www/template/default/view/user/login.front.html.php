@@ -1,6 +1,7 @@
 <?php
 include TPL_ROOT . 'common/header.html.php';
 js::import($jsRoot . 'md5.js');
+js::import($jsRoot . 'fingerprint/fingerprint.js');
 js::set('random', $this->session->random);
 ?>
 <div class='panel panel-body' id='login'>
@@ -9,7 +10,7 @@ js::set('random', $this->session->random);
       <div class='panel panel-pure'>
         <div class='panel-heading'><strong><?php echo $lang->user->login->welcome;?></strong></div>
         <div class='panel-body'>
-          <form method='post' id='ajaxForm' role='form'>
+          <form method='post' id='ajaxForm' role='form' data-checkfingerprint='1'>
             <div class='form-group hiding'><div id='formError' class='alert alert-danger'></div></div>
             <div class='form-group'><?php echo html::input('account','',"placeholder='{$lang->user->inputAccountOrEmail}' class='form-control input-lg'");?></div>
             <div class='form-group'><?php echo html::password('password','',"placeholder='{$lang->user->inputPassword}' class='form-control input-lg'");?></div>

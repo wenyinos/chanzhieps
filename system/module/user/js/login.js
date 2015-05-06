@@ -19,7 +19,7 @@ $('#submit').click(function()
             $.ajax(
             {
                 type: "POST",
-                data:"account=" + $('#account').val() + '&password=' + $('#password').val() + '&referer=' + encodeURIComponent($('#referer').val()),
+                data:"account=" + $('#account').val() + '&password=' + $('#password').val() + '&referer=' + encodeURIComponent($('#referer').val()) + '&fingerprint=' + $('#fingerprint').val(),
                 url:loginURL,
                 dataType:'json',
                 success:function(data)

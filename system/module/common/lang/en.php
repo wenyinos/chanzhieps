@@ -91,6 +91,7 @@ $lang->js->deleteing     = 'Deleting...';
 $lang->js->doing         = 'Processing...';
 $lang->js->loading       = 'Loading...';
 $lang->js->timeout       = 'Timeout';
+$lang->js->errorThrown   = '<h4>Something error ：</h4>';
 
 /* Contact fields*/
 $lang->company = new stdclass();
