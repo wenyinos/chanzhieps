@@ -219,6 +219,7 @@ $lang->site->menu->link       = '友情链接|links|admin|';
 $lang->site->menu->mail       = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
 $lang->site->menu->wechat     = array('link' => '微信设置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
 $lang->site->menu->group      = array('link' => '分组权限|group|browse|', 'alias' => 'managepriv,managemember');
+$lang->site->menu->search     = '更新搜索索引|search|buildindex|';
 
 /* Menu of company module. */
 $lang->company->menu = new stdclass();
@@ -290,6 +291,7 @@ $lang->error->passwordsame = '两次密码应当相等。';
 $lang->error->passwordrule = '密码应该符合规则，长度至少为六位。';
 $lang->error->captcha      = '请输入正确的验证码。';
 $lang->error->noWritable   = '%s 可能不可写，请修改权限！';
+$lang->error->fingerprint  = '身份验证错误！';
 $lang->error->token        = '必须为英文或数字，长度为3-32字符！';
 
 /* The pager items. */

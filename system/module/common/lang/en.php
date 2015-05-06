@@ -218,6 +218,7 @@ $lang->site->menu->link     = 'Links|links|admin|';
 $lang->site->menu->mail     = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
 $lang->site->menu->wechat   = array('link' => 'Wechat|wechat|admin|', 'alias' => 'create,setresponse');
 $lang->site->menu->group    = array('link' => 'Group|group|browse|', 'alias' => 'managepriv,managemember');
+$lang->site->menu->search   = 'Update Search Index|search|buildindex|';
 
 /* Menu of company module. */
 $lang->company->menu = new stdclass();
@@ -269,27 +270,28 @@ $lang->package = new stdclass();
 
 /* Error info. */
 $lang->error = new stdclass();
-$lang->error->length          = array("<strong>%s</strong>length should be<strong>%s</strong>", "<strong>%s</strong>length should between<strong>%s</strong>and <strong>%s</strong>.");
-$lang->error->reg             = "<strong>%s</strong>should like<strong>%s</strong>";
-$lang->error->unique          = "<strong>%s</strong>has<strong>%s</strong>already. If you are sure this record has been deleted, you can restore it in admin panel, trash page.";
-$lang->error->notempty        = "<strong>%s</strong>can not be empty.";
-$lang->error->equal           = "<strong>%s</strong>must be<strong>%s</strong>.";
-$lang->error->gt              = "<strong>%s</strong> should be geater than <strong>%s</strong>.";
-$lang->error->ge              = "<strong>%s</strong> should be not less than <strong>%s</strong>.";
-$lang->error->lt              = "<strong>%s</strong> should be less than <strong>%s</strong>";
-$lang->error->le              = "<strong>%s</strong> should be no greater than <strong>%s</strong>.";
-$lang->error->in              = '<strong>%s</strong>must in<strong>%s</strong>。';
-$lang->error->int             = array("<strong>%s</strong>should be interger", "<strong>%s</strong>should between<strong>%s-%s</strong>.");
-$lang->error->float           = "<strong>%s</strong>should be a interger or float.";
-$lang->error->email           = "<strong>%s</strong>should be email.";
-$lang->error->URL             = "<strong>%s</strong>should be url.";
-$lang->error->date            = "<strong>%s</strong>should be date";
-$lang->error->account         = "<strong>%s</strong>should be a valid account.";
-$lang->error->passwordsame    = "Two passwords must be the same";
-$lang->error->passwordrule    = "Password should more than six letters.";
-$lang->error->captcha         = 'Captcah wrong.';
-$lang->error->noWritable      = '%s maybe not write, please modify permissions!';
-$lang->error->token           = 'Should English or numbers, length of 3-32 characters.';
+$lang->error->length       = array("<strong>%s</strong>length should be<strong>%s</strong>", "<strong>%s</strong>length should between<strong>%s</strong>and <strong>%s</strong>.");
+$lang->error->reg          = "<strong>%s</strong>should like<strong>%s</strong>";
+$lang->error->unique       = "<strong>%s</strong>has<strong>%s</strong>already. If you are sure this record has been deleted, you can restore it in admin panel, trash page.";
+$lang->error->notempty     = "<strong>%s</strong>can not be empty.";
+$lang->error->equal        = "<strong>%s</strong>must be<strong>%s</strong>.";
+$lang->error->gt           = "<strong>%s</strong> should be geater than <strong>%s</strong>.";
+$lang->error->ge           = "<strong>%s</strong> should be not less than <strong>%s</strong>.";
+$lang->error->lt           = "<strong>%s</strong> should be less than <strong>%s</strong>";
+$lang->error->le           = "<strong>%s</strong> should be no greater than <strong>%s</strong>.";
+$lang->error->in           = '<strong>%s</strong>must in<strong>%s</strong>。';
+$lang->error->int          = array("<strong>%s</strong>should be interger", "<strong>%s</strong>should between<strong>%s-%s</strong>.");
+$lang->error->float        = "<strong>%s</strong>should be a interger or float.";
+$lang->error->email        = "<strong>%s</strong>should be email.";
+$lang->error->URL          = "<strong>%s</strong>should be url.";
+$lang->error->date         = "<strong>%s</strong>should be date";
+$lang->error->account      = "<strong>%s</strong>should be a valid account.";
+$lang->error->passwordsame = "Two passwords must be the same";
+$lang->error->passwordrule = "Password should more than six letters.";
+$lang->error->captcha      = 'Captcah wrong.';
+$lang->error->noWritable   = '%s maybe not write, please modify permissions!';
+$lang->error->fingerprint  = 'identity authent faild';
+$lang->error->token        = 'Should English or numbers, length of 3-32 characters.';
 
 /* The pager items. */
 $lang->pager = new stdclass();
