@@ -261,6 +261,9 @@ class productModel extends model
         $this->loadModel('tag')->save($product->keywords);
         $this->processCategories($productID, $this->post->categories);
 
+        $product = $this->getByID($productID);
+        $this->loadModel('search')->save('product', $product);
+
         return $productID;
     }
 
@@ -304,7 +307,9 @@ class productModel extends model
         $this->loadModel('tag')->save($product->keywords);
         $this->processCategories($productID, $this->post->categories);
 
-        return !dao::isError();
+        $product = $this->getByID($productID);
+        if(empty($product)) return false;
+        return $this->loadModel('search')->save('product', $product);
     }
 
     /**
@@ -370,7 +375,7 @@ class productModel extends model
         $this->dao->delete()->from(TABLE_PRODUCT)->where('id')->eq($productID)->exec();
         $this->dao->delete()->from(TABLE_PRODUCT_CUSTOM)->where('product')->eq($productID)->exec();
 
-        return !dao::isError();
+        return $this->loadModel('search')->deleteIndex('product', $productID);
     }
 
     /**

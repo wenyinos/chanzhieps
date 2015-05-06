@@ -328,6 +328,26 @@ class validater
         if(!is_array($value)) $value = explode(',', $value);
         return in_array($var, $value);
     }
+    
+    /**
+     * Check fingerprint. 
+     * 
+     * @param  int    $var 
+     * @access public
+     * @return void
+     */
+    public static function checkFingerprint($var)
+    {
+        global $app;
+        $fingerprint = zget($_SESSION, 'fingerprint', false);
+
+        if($fingerprint and $fingerprint['createdTime'] > (time() - 360))
+        {
+            return $var == $fingerprint['fingerprint'];
+        }
+
+        return false;
+    }
 
     /**
      * Check file name.

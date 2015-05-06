@@ -393,6 +393,9 @@ class articleModel extends model
 
         if($type != 'page') $this->processCategories($articleID, $type, $this->post->categories);
 
+        $article = $this->getByID($articleID);
+        $this->loadModel('search')->save($type, $article);
+
         return $articleID;
     }
 
@@ -439,7 +442,11 @@ class articleModel extends model
         $this->loadModel('tag')->save($article->keywords);
         if($type != 'page') $this->processCategories($articleID, $type, $this->post->categories);
 
-        return !dao::isError();
+        if(dao::isError()) return false;
+
+        $article = $this->getByID($articleID);
+        if(empty($article)) return false;
+        return $this->loadModel('search')->save($type, $article);
     }
         
     /**
@@ -456,8 +463,7 @@ class articleModel extends model
 
         $this->dao->delete()->from(TABLE_RELATION)->where('id')->eq($articleID)->andWhere('type')->eq($article->type)->exec();
         $this->dao->delete()->from(TABLE_ARTICLE)->where('id')->eq($articleID)->exec();
-
-        return !dao::isError();
+        return $this->loadModel('search')->deleteIndex($article->type, $articleID);
     }
 
     /**

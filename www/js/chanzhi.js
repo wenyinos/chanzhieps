@@ -7,6 +7,7 @@ $.extend(
     {
         if($(document).data('setAjaxForm:' + formID)) return;
 
+        appendFingerprint(formID);
         form = $(formID);
 
         var options = 
@@ -17,6 +18,7 @@ $.extend(
             
             success: function(response)
             {
+                appendFingerprint(formID);
                 $.enableForm(formID);
                 var submitButton = $(formID).find(':input[type=submit], .submit');
 
@@ -769,4 +771,24 @@ function playVideo(src, extension, id)
     $('#' + id).wrap("<div class='jp-type-single'></div>");
     $('#' + id).parent().wrap("<div id='" + containerID  + "' class='jp-video jp-video-360p' role='application' aria-label='media player'></div>");
     $('#' + id).after($('#playerBar').html());
+}
+
+function appendFingerprint(formID)
+{ 
+    if($(formID).data('checkfingerprint'))
+    {
+        fingerprint = new Fingerprint().get();
+
+        $.getJSON
+        (
+            createLink('misc', 'ajaxgetfingerprint', 'clientFiniger=' + fingerprint),
+            function(response)
+            {
+                if(response.result == 'success')
+                {
+                    $(formID).append("<input type='hidden' id='fingerprint'  name='fingerprint' value='" + response.fingerprint + "'>");
+                }
+            }
+        );
+    }
 }

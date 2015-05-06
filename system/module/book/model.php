@@ -607,7 +607,8 @@ class bookModel extends model
             if(dao::isError()) return false;
         }
 
-        return true;
+        $book = $this->getNodeByID($bookID);
+        return $this->loadModel('search')->save('book', $book);
     }
 
     /**
@@ -691,7 +692,7 @@ class bookModel extends model
         if(!$book) return false;
 
         $this->dao->delete()->from(TABLE_BOOK)->where('id')->eq($id)->exec();
-        return !dao::isError();
+        return $this->loadModel('search')->deleteIndex('book', $bookID);
     }
 
     /**

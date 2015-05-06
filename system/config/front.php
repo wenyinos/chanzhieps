@@ -68,7 +68,8 @@ $config->rights->guest['error']['index'] = 'index';
 $config->rights->guest['page']['index'] = 'index';
 $config->rights->guest['page']['view']  = 'view';
 
-$config->rights->guest['misc']['qrcode'] = 'qrcode';
+$config->rights->guest['misc']['qrcode']         = 'qrcode';
+$config->rights->guest['misc']['ajaxgetfiniger'] = 'ajaxgetfiniger';
 
 $config->rights->guest['search']['index'] = 'index';
 
