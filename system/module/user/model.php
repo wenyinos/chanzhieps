@@ -392,7 +392,7 @@ class userModel extends model
             ->remove('password1, password2, ip, account, admin, join, visits')
             ->get();
 
-        $this->dao->setAutolang(false)->update(TABLE_USER)->data($user)->autoCheck()->where('account')->eq($account)->exec();
+        $this->dao->setAutolang(false)->update(TABLE_USER)->data($user, 'fingerprint')->autoCheck()->where('account')->eq($account)->exec();
     }   
 
     /**
