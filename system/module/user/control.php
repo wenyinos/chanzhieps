@@ -453,6 +453,7 @@ class user extends control
         if(!empty($_POST))
         {
             if(!$pass) $this->send(array( 'result' => 'fail', 'message' => $this->lang->mail->needVerify));
+            if(!validater::checkFingerprint($this->post->fingerprint))  $this->send(array( 'result' => 'fail', 'message' => $this->lang->error->fingerprint));
 
             $user = $this->user->identify($this->app->user->account, $this->post->password);
             if(!$user) $this->send(array( 'result' => 'fail', 'message' => $this->lang->user->identifyFailed ) );
