@@ -12,8 +12,11 @@
 
     <div class='panel-body' id='childList'>
       <?php
+      $maxID = 0;
       foreach($children as $child)
       {
+          $maxID = $maxID < $child->id ? $child->id : $maxID;
+
           echo "<div class='form-group category'>";
           echo "<div class='col-xs-6 col-md-4 col-md-offset-2'>" . html::input("children[$child->id]", $child->name, "class='form-control'") . "</div>";
           if(!$isWechatMenu) echo "<div class='col-xs-6 col-md-4'>" . html::input("alias[$child->id]", $child->alias, "class='form-control' placeholder='{$this->lang->category->alias}'") . '</div>';
@@ -69,4 +72,5 @@
     <?php echo html::hidden('mode[]', 'new');?>
   </div>
 </div>
+<?php js::set('maxID', $maxID)?>
 <?php if(isset($pageJS)) js::execute($pageJS);?>
