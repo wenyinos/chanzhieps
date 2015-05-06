@@ -23,7 +23,7 @@ $(document).ready(function()
         <div class="modal-body">
   <?php endif;?>
   <form class='form-inline' id='sendMailForm' action="<?php echo $this->createLink('mail', 'captcha', "type=$type&url=$url&target=$target&account=$account");?>" method='post'>
-    <div class='alert alert-success'>
+    <div class='alert'>
       <?php $refUrl = helper::safe64Decode($url) == 'close' ? $this->app->getURI() : helper::safe64Decode($url);?>
       <?php $fileBtn = html::a($refUrl, $lang->confirm, "class='btn btn-mini btn-primary okFile'")?>
       <?php $mailBtn = $check['result'] == 'success' ? html::submitButton($this->lang->send, 'btn btn-mini btn-primary') . html::hidden('sendMail', 1) : $check['message'];?>
