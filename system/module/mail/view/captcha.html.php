@@ -3,9 +3,11 @@
 <script>
 $(document).ready(function()
 {
+    $('#formError').remove();
     setTimeout(function(){$('#ajaxModal button.close').click()}, 500);
 });
 </script>
+<div class='alert'><?php echo $lang->mail->verifySuccess;?></div>
 <?php else:?>
   <?php
   if(!isset($target))  $target  = 'modal';

@@ -45,3 +45,4 @@
 
   <div class='page-wrapper'>
     <div class='page-content'>
+      <?php $this->block->printRegion($layouts, 'all', 'banner');?>

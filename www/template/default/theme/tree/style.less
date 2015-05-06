@@ -784,3 +784,21 @@ a:active, a:focus
 #powerby:hover .icon-chanzhi > i, #powerby:hover .icon-chanzhi > i:before, #powerby:hover .icon-chanzhi > i:after {border-color: @link-hover-color;}
 
 .footerLayout(@footer-border-style, @footer-backcolor);
+
+/* Search bar */
+#searchbar {position: relative; max-width: inherit;}
+#searchbar > form {position: absolute; bottom: -50px; right: 5px; z-index: 1001; max-width: 200px;}
+#searchbar .form-control {border-radius: 4px 0 0 4px; padding: 3px 8px; height: 30px; border-color: #c4b274}
+#searchbar .btn {border-radius: 0 4px 4px 0; padding: 3px 8px; height: 30px; border: none; background: #6E2E16}
+@media (max-width: 767px) {
+  #searchbar {position: absolute; left: 15px; top: 2px;}
+  #searchbar > form {position: static;}
+  #headNav.hide {background: none;}
+  #headNav.hide + #searchbar {left: auto; padding: 0 15px;}
+  #headNav.hide + #searchbar > form {max-width: 100%}
+}
+@media (max-width: 480px) {#searchbar {max-width: 90px}}
+
+.m-blog #searchbar {position: absolute; width: 200px; right: 10px; top: 20%;}
+.m-blog #searchbar .form-control {border-color: #6E2E16;}
+@media (max-width: 767px) {.m-blog #searchbar {top: 30%; left: auto; right: 15px;}}

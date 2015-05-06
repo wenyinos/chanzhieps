@@ -419,7 +419,10 @@ class helper
     {
         global $config;
 
-        $domain = strtolower(str_replace('-', '_', $domain));    // Replace '-' by '_'.
+        $domain = strtolower($domain);
+        if(!preg_match('/^([a-z0-9-]+\.)+[a-z]{2,6}$/', $domain)) die('domain denied');
+
+        $domain = str_replace('-', '_', $domain);    // Replace '-' by '_'.
         if(strpos($domain, ':') !== false) $domain = substr($domain, 0, strpos($domain, ':'));    // Remove port from domain.
 
         $items = explode('.', $domain);

@@ -91,6 +91,7 @@ $lang->block->default->pages['page_view']      = 'Page';
 $lang->block->default->regions = new stdclass();
 $lang->block->default->regions->all['header'] = 'Header(invisible)';
 $lang->block->default->regions->all['top']    = 'Top';
+$lang->block->default->regions->all['banner'] = 'Banner';
 $lang->block->default->regions->all['bottom'] = 'Bottom';
 $lang->block->default->regions->all['footer'] = 'Footer(invisible)';
 

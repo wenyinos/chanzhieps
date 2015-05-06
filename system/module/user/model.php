@@ -143,7 +143,7 @@ class userModel extends model
         }
         else
         {
-            $clientLang = $this->config->site->defaultLang;
+            $clientLang = isset($this->config->site->defaultLang) ? $this->config->site->defaultLang : $this->config->site->lang;
             $clientLang = strpos($clientLang, 'zh-') !== false ? str_replace('zh-', '', $clientLang) : $clientLang;
 
             $user->realnames = new stdclass();
@@ -856,5 +856,23 @@ class userModel extends model
             if(ipInNetwork($clientIP, $ip)) return true;
         }
         return false;
+    }
+
+    /**
+     * checkPosition 
+     * 
+     * @access public
+     * @return bool
+     */
+    public function checkPosition()
+    {
+        if(!isset($this->config->site->checkPosition) or $this->config->site->checkPosition == 'close') return true;
+        if(!isset($this->config->site->allowedPosition) or $this->config->site->allowedPosition == '') return true;
+
+        $allowedPosition = $this->config->site->allowedPosition;
+        $position = $this->app->loadClass('IP')->find(helper::getRemoteIp());
+        unset($position[3]);
+        $currentPosition = join(' ', $position);
+        return $allowedPosition == $currentPosition;
     }
 }
