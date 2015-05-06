@@ -196,6 +196,9 @@ class threadModel extends model
             /* Update board stats. */
             $this->loadModel('forum')->updateBoardStats($boardID);
 
+            $thread = $this->getByID($threadID);
+            $this->loadModel('search')->save('thread', $thread);
+
             return $threadID;
         }
 
@@ -257,7 +260,9 @@ class threadModel extends model
         /* Upload file.*/
         $this->loadModel('file')->saveUpload('thread', $threadID);
 
-        return true;
+        $thread = $this->getByID($threadID);
+        if(empty($thread)) return false;
+        return $this->loadModel('search')->save('thread', $thread);
     }
 
     /**
