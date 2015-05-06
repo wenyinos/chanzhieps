@@ -135,8 +135,8 @@ class thread extends control
         $board = $this->loadModel('tree')->getById($thread->board);
 
         /* Get replies. */
-        $recPerPage = !empty($this->config->site->replyRec) ? $this->config->site->replyRec : $this->config->reply->recPerPage;
         $this->app->loadConfig('reply');
+        $recPerPage = !empty($this->config->site->replyRec) ? $this->config->site->replyRec : $this->config->reply->recPerPage;
         $this->app->loadClass('pager', $static = true);
         $pager   = new pager(0, $recPerPage, $pageID);
         $replies = $this->loadModel('reply')->getByThread($threadID, $pager);
