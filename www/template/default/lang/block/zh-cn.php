@@ -99,9 +99,11 @@ $lang->block->default->regions->index_index['top']     = '上部';
 $lang->block->default->regions->index_index['middle']  = '中部';
 $lang->block->default->regions->index_index['bottom']  = '底部';
 
-$lang->block->default->regions->company_index['top']    = '上部';
-$lang->block->default->regions->company_index['bottom'] = '底部';
-$lang->block->default->regions->company_index['side']   = '侧边';
+$lang->block->default->regions->company_index['global_top']    = '全局上部';
+$lang->block->default->regions->company_index['main_top']      = '主体上部';
+$lang->block->default->regions->company_index['main_bottom']   = '主体底部';
+$lang->block->default->regions->company_index['side']          = '侧边';
+$lang->block->default->regions->company_index['global_bottom'] = '全局底部';
 
 $lang->block->default->regions->article_browse['top']    = '上部';
 $lang->block->default->regions->article_browse['bottom'] = '底部';

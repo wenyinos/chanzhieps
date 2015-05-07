@@ -405,19 +405,6 @@ class uiModel extends model
     }
 
     /**
-     * Print product view control.
-     * @param  string $id
-     * @param  string $label
-     * @param  array  $params
-     * @param  string $value
-     * @return void
-     */
-    public function printProductViewControl($id, $label, $params, $value = '')
-    {
-        $this->printSelectList($this->lang->ui->theme->productViewList, $id, $value, $this->lang->ui->$label, '', '', '', $params['default']);
-    }
-
-    /**
      * Print html of textbox with label.
      *
      * @param string       $name
