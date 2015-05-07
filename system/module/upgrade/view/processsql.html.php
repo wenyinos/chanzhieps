@@ -9,7 +9,8 @@
  * @version     $Id$
  */
 ?>
-<?php include '../../common/view/header.lite.html.php';?>
+<?php
+include '../../common/view/header.lite.html.php';?>
 <div class='container'>
   <div class='modal-dialog w-450px'>
     <?php if($result == 'fail'):?>
@@ -21,4 +22,7 @@
     <?php endif;?>
   </div>
 </div>
+<?php if($this->config->version == '4.2'):?>
+<script> $().ready(function(){ $.getJSON(createLink('search', 'buildIndex'), function(){return false;});}); </script>
+<?php endif;?>
 <?php include '../../install/view/footer.html.php';?>
