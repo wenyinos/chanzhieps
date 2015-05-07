@@ -15,7 +15,6 @@ $lang->group->create             = 'Create';
 $lang->group->edit               = 'Edit';
 $lang->group->copy               = 'Copy';
 $lang->group->delete             = 'Delete';
-$lang->group->manageAppPriv      = 'Application';
 $lang->group->managePriv         = 'Privilege';
 $lang->group->managePrivByGroup  = 'Privilege';
 $lang->group->managePrivByModule = 'Manage privilege by module';
@@ -43,6 +42,7 @@ $lang->group->extent   = 'extent';
 $lang->group->havePriv = 'Have Privilege';
 $lang->group->noPriv   = 'No Privilege';
 
+$lang->group->selectAll = 'Select All';
 $lang->group->manageAll = 'View all customers and orders';
 
 $lang->group->copyOptions['copyPriv'] = 'Copy priviledge';

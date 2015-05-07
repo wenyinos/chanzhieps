@@ -181,6 +181,7 @@ if(commonModel::isAvilable('order'))
     $lang->user->control->menus[25] = '<i class="icon-shopping-cart"></i> My Orders <i class="icon-chevron-right"></i>|order|browse';
     $lang->user->control->menus[26] = '<i class="icon-map-marker"> </i> Addresses <i class="icon-chevron-right"></i>|address|browse';
 }
+
 $lang->user->log = new stdclass();
 $lang->user->log->common = 'Log';
 $lang->user->log->list   = 'Admin user login log';
