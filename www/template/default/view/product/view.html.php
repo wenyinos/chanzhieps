@@ -100,7 +100,25 @@ js::execute($product->js);
               if(empty($attributeHtml)) echo '<p class="product-summary">' . $product->desc . '</p>';
               echo $attributeHtml;
               ?>
+              <?php if(commonModel::isAvailable('order')):?>
+              <li id='countBox'>
+                <span class='meta-name'><?php echo $lang->product->count; ?></span>
+                <span class='meta-value'>
+                  <div class='input-group'>
+                    <span class='input-group-addon'><i class='icon icon-minus'></i></span>
+                    <?php echo html::input('count', 1, "class='form-control'"); ?>
+                    <span class='input-group-addon'><i class='icon icon-plus'></i></span>
+                  </div>
+                </span>
+              </li>
+              <?php endif;?>
             </ul>
+            <?php if(commonModel::isAvailable('order')):?>
+            <span id='buyBtnBox'>
+              <label class='btn-buy'><?php echo $lang->product->buyNow;?></label>
+              <label class='btn-cart'><?php echo $lang->product->addToCart;?></label>
+            </span>
+            <?php endif;?>
             <?php if($product->mall):?>
             <hr>
             <div class='btn-buy'>

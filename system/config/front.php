@@ -73,6 +73,12 @@ $config->rights->guest['misc']['ajaxgetfiniger'] = 'ajaxgetfiniger';
 
 $config->rights->guest['search']['index'] = 'index';
 
+$config->rights->guest['cart']['add']           = 'add';
+$config->rights->guest['cart']['printtopbar']   = 'printtopbar';
+$config->rights->guest['order']['confirm']      = 'confirm';
+$config->rights->guest['order']['processorder'] = 'processorder';
+
+
 /* For logged member. */
 $config->rights->member['thread']['post']         = 'post';
 $config->rights->member['thread']['reply']        = 'reply';
@@ -102,3 +108,17 @@ $config->rights->member['file']['ajaxupload'] = 'ajaxupload';
 $config->rights->member['message']['view']        = 'view';
 $config->rights->member['message']['batchdelete'] = 'batchdelete';
 
+$config->rights->member['cart']['delete'] = 'delete';
+$config->rights->member['cart']['browse'] = 'browse';
+$config->rights->member['cart']['delete'] = 'delete';
+
+$config->rights->member['order']['create']          = 'pay';
+$config->rights->member['order']['browse']          = 'browse';
+$config->rights->member['order']['track']           = 'track';
+$config->rights->member['order']['cancel']          = 'cancel';
+$config->rights->member['order']['confirmdelivery'] = 'confirmdelivery';
+
+$config->rights->member['address']['create'] = 'create';
+$config->rights->member['address']['edit']   = 'edit';
+$config->rights->member['address']['delete'] = 'delete';
+$config->rights->member['address']['browse'] = 'browse';

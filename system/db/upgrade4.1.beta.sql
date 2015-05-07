@@ -64,3 +64,67 @@ CREATE TABLE IF NOT EXISTS `eps_search_dict` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 ALTER TABLE `eps_user` ADD `realnames` varchar(100) NOT NULL default '';
 ALTER TABLE `eps_thread` ADD `color` char(10) NOT NULL AFTER `title`;
+
+-- DROP TABLE IF EXISTS `eps_order`;
+CREATE TABLE `eps_order` (
+  `id` mediumint(9) NOT NULL AUTO_INCREMENT,
+  `account` char(30) NOT NULL,
+  `amount` decimal(8,2) NOT NULL DEFAULT '0.00',
+  `payment` char(30) NOT NULL,
+  `sn` char(50) NOT NULL,
+  `address` varchar(200) NOT NULL,
+  `note` text NOT NULL,
+  `createdDate` datetime NOT NULL,
+  `paidDate` datetime NOT NULL,
+  `payStatus` enum('not_paid', 'paid') NOT NULL DEFAULT 'not_paid',
+  `deliveriedDate` datetime NOT NULL,
+  `deliveriedBy` char(30) NOT NULL,
+  `deliveryStatus` enum('not_send', 'send', 'confirmed') NOT NULL DEFAULT 'not_send',
+  `express` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `waybill` char(30) NOT NULL,
+  `confirmedDate` datetime NOT NULL,
+  `finishedDate` datetime NOT NULL,
+  `finishedBy` char(30) NOT NULL,
+  `status` enum('normal', 'canceled', 'finished') NOT NULL DEFAULT 'normal',
+  `lang` char(30) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `account` (`account`),
+  KEY `status` (`status`),
+  KEY `createdDate` (`createdDate`),
+  KEY `deliveriedDate` (`deliveriedDate`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `eps_orderProduct` (
+  `id`          mediumint(9) NOT NULL AUTO_INCREMENT,
+  `orderID`     mediumint(9) UNSIGNED NOT NULL default 0, 
+  `productID`   mediumint(8) UNSIGNED Not null default 0,
+  `productName` varchar(150) NOT NULL,
+  `price` decimal(8,2) NOT NULL DEFAULT 0.00,
+  `count` smallint(5) UNSIGNED NOT NULL DEFAULT 0,
+  `lang` char(30) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `orderID` (`orderID`),
+  KEY `productID` (`productID`)
+);
+
+CREATE TABLE IF NOT EXISTS `eps_cart` (
+  `id` mediumint(9) NOT NULL AUTO_INCREMENT,
+  `account` char(30) NOT NULL,
+  `product` mediumint(8) UNSIGNED Not null default 0,
+  `count` smallint(5) UNSIGNED NOT NULL DEFAULT 0,
+  `lang` char(30) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `account` (`account`)
+);
+
+CREATE TABLE IF NOT EXISTS `eps_address` (
+  `id` mediumint(9) NOT NULL AUTO_INCREMENT,
+  `account` char(30) NOT NULL,
+  `contact` varchar(50) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `phone` char(20) NOT NULL,
+  `zipcode` char(6) NOT NULL,
+  `lang` char(30) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `account` (`account`)
+)
