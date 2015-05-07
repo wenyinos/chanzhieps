@@ -37,9 +37,6 @@ $config->ui->selectorOptions['basic']['column'] = array();
 $config->ui->selectorOptions['basic']['column']['sidebarLayout'] = array('type' => 'sidebarLayout', 'default' => 'false', 'name' => 'sidebar-pull-left');
 $config->ui->selectorOptions['basic']['column']['sidebarWidth']  = array('type' => 'sidebarWidth', 'default' => '25%', 'name' => 'sidebar-width');
 
-$config->ui->selectorOptions['basic']['productView'] = array();
-$config->ui->selectorOptions['basic']['productView']['productView'] = array('type' => 'productView', 'default' => 'true', 'name' => 'product-view');
-
 $config->ui->selectorOptions['navbar']['layout'] = array();
 $config->ui->selectorOptions['navbar']['layout']['layout'] = array('type' => 'navLayout', 'default' => 'true', 'name' => 'navbar-table-layout');
 
