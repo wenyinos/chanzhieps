@@ -19,3 +19,11 @@
 .panel-body {position: relative;}
 .panel-body .back2top {position: absolute; bottom: 0; right: -30px; display: block; width: 30px; padding: 5px 8px; border:1px solid #ddd; border-radius: 0 4px 4px 0}
 .panel-body .back2top:hover {text-decoration: none; background-color: #E5E5E5}
+#buyBtnBox{margin-left:85px; font-weight:400;}
+.btn-buy {background:#f40; font-size:16px; padding:8px 16px; color:#FFF; cursor:pointer;}
+.btn-buy:hover, .btn-buy:visited {background:#f20; color:#FFF;}
+.btn-cart{background:#E43E41; font-size:16px; padding:8px 16px; color:#FFF; cursor:pointer;}
+.btn-cart:hover, .btn-cart:visited {background:#E41a41; color:#FFF;}
+
+#countBox .input-group {width:120px;}
+#countBox .input-group span {cursor:pointer; background:inherit;}

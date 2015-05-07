@@ -19,6 +19,7 @@ $lang->minus      = ' - ';
 $lang->dollarSign = '￥';
 $lang->divider    = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->back2Top   = '返回顶部';
+$lang->cancel     = '取消';
 
 /* Lang items for xirang. */
 $lang->chanzhiEPS     = '蝉知企业门户系统';
@@ -125,6 +126,7 @@ $lang->menu->site     = '站点|site|setbasic|';
 $lang->menu->ui       = '界面|ui|setlogo|';
 $lang->menu->company  = '公司|company|setbasic|';
 $lang->menu->user     = '会员|user|admin|';
+$lang->menu->order    = '订单|order|admin|';
 $lang->menu->feedback = '反馈|message|admin|';
 $lang->menu->package  = '扩展|package|browse|';
 
@@ -226,6 +228,15 @@ $lang->site->menu->search     = '更新搜索索引|search|buildindex|';
 $lang->company->menu = new stdclass();
 $lang->company->menu->basic   = '公司信息|company|setbasic|';
 $lang->company->menu->contact = '联系方式|company|setcontact|';
+
+$lang->cart    = new stdclass();
+$lang->order   = new stdclass();
+$lang->address = new stdclass();
+
+$lang->order->menu = new stdclass();
+$lang->order->menu->admin   = '订单管理|order|admin|';
+$lang->order->menu->express = '快递设置|tree|browse|type=express|';
+$lang->order->menu->setting = '系统设置|order|setting|';
 
 /* Menu of tree module. */
 $lang->tree = new stdclass();

@@ -19,6 +19,7 @@ $lang->minus      = ' - ';
 $lang->dollarSign = '$';
 $lang->divider    = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->back2Top   = 'T<br/>O<br/>P';
+$lang->cancel = 'cancel';
 
 /* Lang items for xirang. */
 $lang->chanzhiEPS     = 'chanzhiEPS';
@@ -125,6 +126,7 @@ $lang->menu->site     = 'Site|site|setbasic|';
 $lang->menu->ui       = 'UI|ui|setlogo|';
 $lang->menu->company  = 'Company|company|setbasic|';
 $lang->menu->user     = 'User|user|admin|';
+$lang->menu->order    = 'Order|order|admin|';
 $lang->menu->feedback = 'Feedback|message|admin|';
 $lang->menu->package  = 'Extension|package|browse|';
 
@@ -225,6 +227,15 @@ $lang->site->menu->search   = 'Update Search Index|search|buildindex|';
 $lang->company->menu = new stdclass();
 $lang->company->menu->basic   = 'Basic|company|setbasic|';
 $lang->company->menu->contact = 'Contact|company|setcontact|';
+
+$lang->cart    = new stdclass();
+$lang->order   = new stdclass();
+$lang->address = new stdclass();
+
+$lang->order->menu = new stdclass();
+$lang->order->menu->admin   = 'Order list|order|admin|';
+$lang->order->menu->express = 'Express|tree|browse|type=express|';
+$lang->order->menu->setting = 'Settings|order|setting|';
 
 /* Menu of tree module. */
 $lang->tree = new stdclass();

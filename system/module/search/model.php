@@ -32,6 +32,7 @@ class searchModel extends model
         }
         
         $words = str_replace('"', '', $against);
+        $words = str_pad($words, 5, '_');
     
         $scoreColumn = "((1 * (MATCH(title) AGAINST('{$against}' IN BOOLEAN MODE))) + (0.6 * (MATCH(title) AGAINST('{$against}' IN BOOLEAN MODE))) )";
         $results = $this->dao->select("*, {$scoreColumn} as score")
@@ -46,7 +47,9 @@ class searchModel extends model
         foreach($results as $record)
         {
             $record->title   = str_replace('</span> ', '</span>', $this->decode($this->markKeywords($record->title, $words)));
+            $record->title   = str_replace('_', '', $this->decode($this->markKeywords($record->title, $words)));
             $record->summary = $this->getSummary($record->content, $words);
+            $record->summary = str_replace('_', '', $record->summary);
         }
 
         return $this->processLinks($results);

@@ -55,6 +55,13 @@ $lang->product->setcss       = '设置CSS';
 $lang->product->setjs        = '设置JS';
 $lang->product->files        = '附件';
 $lang->product->images       = '图片';
+$lang->product->addToCart    = "<i class='icon icon-shopping-cart'></i> 加入购物车";
+$lang->product->count        = '数量';
+
+$lang->product->congratulations  = "恭喜";
+$lang->product->addToCartSuccess = "添加到购物车成功。";
+$lang->product->gotoCart         = "去购物车结算";
+$lang->product->goback           = "返回";
 
 $lang->product->confirmDelete = '您确定删除该产品吗？';
 

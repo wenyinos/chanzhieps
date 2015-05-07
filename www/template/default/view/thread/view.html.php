@@ -23,4 +23,5 @@ include TPL_ROOT . 'thread/reply.html.php';
 
 $this->block->printRegion($layouts, 'thread_view', 'bottom');
 
+include TPL_ROOT . 'common/jplayer.html.php';
 include TPL_ROOT . 'common/footer.html.php';

@@ -35,4 +35,5 @@ js::execute($page->js);
   <?php endif;?>
 </div>
 <div class='row'><?php $this->block->printRegion($layouts, 'page_view', 'bottom', true);?></div>
+<?php include TPL_ROOT . 'common/jplayer.html.php'; ?>
 <?php include TPL_ROOT . 'common/footer.html.php'; ?>

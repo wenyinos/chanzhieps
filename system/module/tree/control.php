@@ -44,6 +44,14 @@ class tree extends control
             $this->lang->menuGroups->tree = 'product';
         }
 
+        if($type == 'express')
+        {
+            $this->lang->tree->menu = $this->lang->order->menu;
+            $this->lang->menuGroups->tree = 'order';
+            $this->lang->category->common = $this->lang->express->name;
+            $this->lang->category->name   = $this->lang->express->name;
+        }
+
         $isWechatMenu = treeModel::isWechatMenu($type);
         $this->view->isWechatMenu = $isWechatMenu;
 
@@ -133,6 +141,14 @@ class tree extends control
         {
             $this->lang->category = $this->lang->board;
             $this->view->boardChildrenCount = $this->dao->select('count(*) as count')->from(TABLE_CATEGORY)->where('grade')->eq(2)->andWhere('type')->eq('forum')->fetch('count');
+        }
+
+        if($type == 'express')
+        {
+            $this->lang->tree->menu = $this->lang->order->menu;
+            $this->lang->menuGroups->tree = 'order';
+            $this->lang->category->common = $this->lang->express->name;
+            $this->lang->category->name   = $this->lang->express->name;
         }
 
         $isWechatMenu = treeModel::isWechatMenu($type);

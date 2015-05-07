@@ -1,0 +1,2 @@
+.panel-heading > a.active { background-color: #3280fc; border-radius: 13px; color: #fff; } 
+.panel-heading > a { display: inline-block; line-height: 26px; margin: -3px 3px; padding: 0 10px; }

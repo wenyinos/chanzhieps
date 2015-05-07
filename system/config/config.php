@@ -79,8 +79,14 @@ $config->dependence->blog[]    = 'blog';
 $config->dependence->book[]    = 'book';
 $config->dependence->user[]    = 'user';
 $config->dependence->forum[]   = 'forum';
+$config->dependence->forum[]   = 'user';
 $config->dependence->reply[]   = 'forum';
+$config->dependence->reply[]   = 'user';
 $config->dependence->message[] = 'message';
+$config->dependence->cart[]    = 'shop';
+$config->dependence->address[] = 'shop';
+$config->dependence->order[]   = 'shop';
+$config->dependence->order[]   = 'user';
 
 /* Database settings. */
 $config->db = new stdclass();          
@@ -96,11 +102,13 @@ $myConfig     = $configRoot . 'my.php';
 $routeConfig  = $configRoot . 'route.php';
 $domainConfig = $configRoot . 'domain.php';
 $modeConfig   = $configRoot . RUN_MODE . '.php';
+$shopConfig   = $configRoot . 'shop.php';
 
 if(file_exists($myConfig))     include $myConfig;
 if(file_exists($routeConfig))  include $routeConfig;
 if(file_exists($domainConfig)) include $domainConfig;
 if(file_exists($modeConfig))   include $modeConfig;
+if(file_exists($shopConfig))   include $shopConfig;
 
 /* The tables. */
 define('TABLE_CONFIG',         $config->db->prefix . 'config');
@@ -131,6 +139,11 @@ define('TABLE_WX_MESSAGE',     $config->db->prefix . 'wx_message');
 define('TABLE_WX_RESPONSE',    $config->db->prefix . 'wx_response');
 define('TABLE_SEARCH_INDEX',   $config->db->prefix . 'search_index');
 define('TABLE_SEARCH_DICT',    $config->db->prefix . 'search_dict');
+define('TABLE_CART',           $config->db->prefix . 'cart');
+define('TABLE_ORDER',          $config->db->prefix . 'order');
+define('TABLE_ORDERPRODUCT',   $config->db->prefix . 'orderProduct');
+define('TABLE_ADDRESS',        $config->db->prefix . 'address');
+
 
 /* Include extension config files. */
 $extConfigFiles = glob($configRoot . 'ext' . DS . '*.php');

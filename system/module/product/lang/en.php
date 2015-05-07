@@ -55,6 +55,13 @@ $lang->product->setcss       = 'Set CSS';
 $lang->product->setjs        = 'Set JS';
 $lang->product->files        = 'Files';
 $lang->product->images       = 'Images';
+$lang->product->addToCart    = "<i class='icon icon-shopping-cart'></i> 加入购物车";
+$lang->product->count        = 'Count';
+
+$lang->product->congratulations  = "congratulations";
+$lang->product->addToCartSuccess = "Add to cart successfully.";
+$lang->product->gotoCart         = "Go to cart";
+$lang->product->goback           = "Go Back";
 
 $lang->product->confirmDelete = 'Are you sure to delete it?';
 
