@@ -1106,6 +1106,5 @@ class upgradeModel extends model
                 }
             }
         }
-
     }
 }
