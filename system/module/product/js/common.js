@@ -37,13 +37,18 @@ $(document).ready(function()
 
     if(v.categoryID !== 0) $('.tree #category' + v.categoryID).addClass('active');
 
-    if(!$('#setCurrency').length)
+    if((!$('#setCurrency').length) && (!$('#showView').length))
     {
         var currencyLink = createLink('product', 'currency');
-        var currencyMenu = '<ul class="nav-left nav nav-primary nav-stacked"><li><a id="setCurrency" href="' + currencyLink + '">';
-        currencyMenu += v.currency + '<i class="icon-chevron-right"></i>';
-        currencyMenu += '</a></li></ul>';
-        $('.category-nav').after(currencyMenu);
+        var showViewLink = createLink('product', 'showView');
+
+        var menu = '<ul class="nav-left nav nav-primary nav-stacked">';
+        menu += '<li><a id="showView" href="' + showViewLink + '">' + v.showView + '<i class="icon-chevron-right"></i></a></li>';
+        menu += '<li><a id="setCurrency" href="' + currencyLink + '">' + v.currency + '<i class="icon-chevron-right"></i></a></li>';
+        menu += '</ul>';
+
+        $('.category-nav').after(menu);
         $('#setCurrency').modalTrigger();
+        $('#showView').modalTrigger();
     }
 })

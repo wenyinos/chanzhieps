@@ -15,6 +15,7 @@
 <?php include '../../common/view/chosen.html.php';?>
 <?php js::set('key', count($product->attributes));?>
 <?php js::set('currency', $lang->product->currency);?>
+<?php js::set('showView', $lang->product->showView);?>
 <div class='panel'>
   <div class='panel-heading'><?php echo $lang->product->edit;?></div>
   <div class='panel-body'>
