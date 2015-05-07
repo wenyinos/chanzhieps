@@ -35,13 +35,13 @@ class misc extends control
     }   
 
     /**
-     * create a fingerprint.
+     * Create a fingerprint.
      * 
-     * @param  int    $clientFiniger 
+     * @param  int    $clientFinger 
      * @access public
      * @return void
      */
-    public function ajaxGetFingerprint($clientFiniger)
+    public function ajaxGetFingerprint($clientFinger)
     {
         if($this->session->fingerprint and $this->session->fingerprint['createdTime'] > (time() - 360 ))
         {
@@ -50,7 +50,7 @@ class misc extends control
         else
         {
             $fingerprint = array();
-            $fingerprint['fingerprint']     = md5(uniqid($clientFiniger . '_'));
+            $fingerprint['fingerprint'] = md5(uniqid($clientFinger . '_'));
             $fingerprint['createdTime'] = time();
             $this->session->set('fingerprint', $fingerprint);
         }

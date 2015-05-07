@@ -338,7 +338,6 @@ class validater
      */
     public static function checkFingerprint($var)
     {
-        global $app;
         $fingerprint = zget($_SESSION, 'fingerprint', false);
 
         if($fingerprint and $fingerprint['createdTime'] > (time() - 360))
