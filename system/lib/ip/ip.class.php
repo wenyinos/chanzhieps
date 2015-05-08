@@ -88,16 +88,16 @@ class IP
         {
             self::$ip = new self();
 
-            self::$fp = fopen(__DIR__ . '/17monipdb.dat', 'rb');
+            self::$fp = fopen(__DIR__ . '/ip.dat', 'rb');
             if (self::$fp === FALSE)
             {
-                throw new Exception('Invalid 17monipdb.dat file!');
+                throw new Exception('Invalid ip.dat file!');
             }
 
             self::$offset = unpack('Nlen', fread(self::$fp, 4));
             if (self::$offset['len'] < 4)
             {
-                throw new Exception('Invalid 17monipdb.dat file!');
+                throw new Exception('Invalid ip.dat file!');
             }
 
             self::$index = fread(self::$fp, self::$offset['len'] - 4);
