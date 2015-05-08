@@ -1,5 +1,7 @@
-<link href="/js/jplayer/dist/skin/blue.monday/css/jplayer.blue.monday.min.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="/js/jplayer/dist/jplayer/jquery.jplayer.min.js"></script>
+<?php js::import($jsRoot . 'jplayer/dist/jplayer/jquery.jplayer.min.js');?>
+<?php css::import($jsRoot . 'jplayer/dist/skin/blue.monday/css/jplayer.blue.monday.min.css');?>
+ 
+<script type="text/javascript" src="/js/"></script>
 <script type="text/javascript">
 $(document).ready(function()
 {
