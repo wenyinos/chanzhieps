@@ -11,7 +11,7 @@ if(!empty($providerConfig['sina']->clientID) or !empty($providerConfig['qq']->cl
         {
             $providerConfig = isset($config->oauth->$providerCode) ? json_decode($config->oauth->$providerCode) : '';
             if(empty($providerConfig->clientID)) continue;
-            $params = "provider=$providerCode";
+            $params = "provider=$providerCode&fingerprint=fingerprintval";
             if($referer and !strpos($referer, 'login') and !strpos($referer, 'oauth')) $params .= "&referer=" . helper::safe64Encode($referer);
             echo html::a(inlink('oauthLogin', $params), "<i class='icon-{$providerCode} icon'></i> " . $providerName, "class='btn btn-default btn-oauth btn-lg btn-block btn-{$providerCode}'");
         }
@@ -23,4 +23,14 @@ if(!empty($providerConfig['sina']->clientID) or !empty($providerConfig['qq']->cl
 <?php else:?>
   <div class='col-md-12'>
 <?php endif;?>
-
+<script>
+$().ready(function()
+{
+    $('a.btn-oauth').each(function()
+    {
+        fingerprint = new Fingerprint().get();
+        alert(fingerprint);
+        $(this).attr('href', $(this).attr('href').replace('fingerprintval', fingerprint) )
+    })
+})
+</script>

@@ -103,7 +103,7 @@
               </div>
             </div>
             <div class='form-group'>
-              <div class='col-md-6 col-sm-6 col-md-offset-2 col-sm-offset-3'><?php echo html::submitButton();?></div>
+              <div class='col-md-6 col-sm-6 col-md-offset-2 col-sm-offset-3'><?php echo html::submitButton() . html::hidden('token', $token);?></div>
             </div>
           </form>
         </div>

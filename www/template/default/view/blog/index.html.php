@@ -21,9 +21,10 @@ if(!empty($category->id)) js::set('categoryID', $category->id);
 $root = '<li>' . $this->lang->currentPos . $this->lang->colon .  html::a($this->inlink('index'), $lang->blog->home) . '</li>';
 if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
 ?>
-<div class='row'><?php $this->block->printRegion($layouts, 'blog_index', 'top', true);?></div>
+<div class='row'><?php $this->block->printRegion($layouts, 'blog_index', 'topBanner', true);?></div>
 <div class='row'>
   <div class='col-md-9 col-main' id='articles'>
+  <div class='row'><?php $this->block->printRegion($layouts, 'blog_index', 'top', true);?></div>
     <?php foreach($sticks as $stick):?>
     <?php if(!isset($category)) $category = array_shift($stick->categories);?>
       <?php $url = inlink('view', "id=$stick->id", "category={$category->alias}&name=$stick->alias"); ?>
@@ -77,8 +78,9 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
       </div>
     <?php endforeach;?>
     <div class='clearfix pager'><?php $pager->show('right', 'short');?></div>
+  <div class='row'><?php $this->block->printRegion($layouts, 'blog_index', 'bottom', true);?></div>
   </div>
   <div class='col-md-3 col-side'><side class='page-side'><div class='panel-pure panel'><?php echo html::a(helper::createLink('rss', 'index', '?type=blog', '', 'xml'), "<i class='icon-rss text-warning'></i> " . $lang->blog->subscribe, "target='_blank' class='btn btn-lg btn-block'"); ?></div><?php $this->block->printRegion($layouts, 'blog_index', 'side');?></side></div>
 </div>
-<div class='row'><?php $this->block->printRegion($layouts, 'blog_index', 'bottom', true);?></div>
+<div class='row'><?php $this->block->printRegion($layouts, 'blog_index', 'bottomBanner', true);?></div>
 <?php include TPL_ROOT . 'blog/footer.html.php';?>
