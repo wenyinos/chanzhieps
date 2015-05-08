@@ -48,6 +48,7 @@ class fileModel extends model
         foreach($files as $file)
         {
             if($file->editor) continue;
+            if($file->isVideo) continue;
             $file->title = $file->title . ".$file->extension";
             if($file->isImage)
             {
