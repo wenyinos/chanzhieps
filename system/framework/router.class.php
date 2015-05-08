@@ -1327,7 +1327,7 @@ class router
         foreach($passedParams as $k => $v)
         { 
             if(in_array(strtolower($k), array('words', 'referer'), true)) continue;
-            if(!empty($v) and !preg_match('/^[a-zA-Z0-9.]+$/', $v)) die('Wrong');
+            if(!empty($v) and !preg_match('/^[a-zA-Z0-9\/.]+$/', $v)) die('Wrong');
         }
 
         $passedParams = array_values($passedParams);
