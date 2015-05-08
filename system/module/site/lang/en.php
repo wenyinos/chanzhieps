@@ -94,6 +94,7 @@ $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Can not write robots file, please make sure %s writeable first.';
 $lang->site->reloadForRobots   = 'Reload this ppage';
 $lang->site->defaultTip        = 'Under maintenance.';
+$lang->site->icpTip            = 'Only for site in China mainland';
 
 $lang->site->recPerPage = new stdclass();
 $lang->site->recPerPage->article = 'Article List';

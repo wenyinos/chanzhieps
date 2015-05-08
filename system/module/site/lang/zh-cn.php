@@ -94,6 +94,7 @@ $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Robots文件%s 不可写，请修改权限后设置。';
 $lang->site->reloadForRobots   = '刷新页面';
 $lang->site->defaultTip        = '站点维护中……';
+$lang->site->icpTip            = '';
 
 $lang->site->recPerPage = new stdclass();
 $lang->site->recPerPage->article = '文章列表';
