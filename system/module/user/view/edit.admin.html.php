@@ -1,4 +1,5 @@
 <?php include '../../common/view/header.modal.html.php';?>
+<?php js::import($jsRoot . 'fingerprint/fingerprint.js');?>
 <?php if(isset($pass) and !$pass):?>
 <?php 
 $module = 'user';
@@ -11,7 +12,7 @@ include '../../mail/view/captcha.html.php';
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-eidt'></i> <?php echo $lang->user->editProfile;?></strong></div>
   <div class='panel-body'>
-    <form method='post' id='editForm' class='form form-inline'>
+    <form method='post' id='editForm' class='form form-inline' data-checkfingerprint='1'>
       <table class='table table-form'>
         <tr>
           <th class='w-100px'><?php echo $lang->user->realname;?></th>
@@ -88,7 +89,7 @@ include '../../mail/view/captcha.html.php';
         </tr>  
         <tr>
           <th><?php echo html::a($this->createLink('mail', 'captcha', "module=user&method=edit"), $lang->save, "data-toggle='modal' class='hidden captchaModal'")?></th>
-          <td colspan="2"><?php echo html::submitButton();?></td>
+          <td colspan="2"><?php echo html::hidden('token', $token) . html::submitButton();?></td>
         </tr>
       </table>
     </form>        

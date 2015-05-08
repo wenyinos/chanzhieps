@@ -314,11 +314,11 @@ class userModel extends model
             ->cleanInt('imobile, qq, zipcode')
             ->setDefault('admin', 'no')
             ->setIF(RUN_MODE == 'admin' and $this->post->admin != 'super', 'realnames', '')
-            ->remove('ip, account, join, visits')
+            ->remove('ip, account, join, visits, fingerprint, token')
             ->removeIF(RUN_MODE != 'admin', 'admin')
             ->get();
 
-        if((isset($user->admin) and $user->admin == 'super') or $user->realnames)
+        if((isset($user->admin) and $user->admin == 'super') or !empty($user->realnames))
         {
             $user->realnames = helper::jsonEncode($user->realnames);
             $this->config->user->require->edit = 'email, realnames';

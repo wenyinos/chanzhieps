@@ -1,4 +1,5 @@
 <?php include TPL_ROOT . 'common/header.html.php';?>
+<?php js::import($jsRoot . 'fingerprint/fingerprint.js');?>
 <div class="page-user-control">
   <div class="row">
     <?php include TPL_ROOT . 'user/side.html.php';?>
@@ -6,7 +7,7 @@
       <div class='panel'>
         <div class='panel-heading'><strong><i class='icon-edit'></i> <?php echo $lang->user->editProfile;?></strong></div>
         <div class='panel-body'>
-          <form method='post' id='ajaxForm' class='form form-horizontal'>
+          <form method='post' id='ajaxForm' class='form form-horizontal' data-checkfingerprint='1'>
             <div class='form-group'>
               <label for='realname' class='col-md-2 col-sm-3 control-label'><?php echo $lang->user->realname;?></label>
               <div class='col-md-6 col-sm-6'>
