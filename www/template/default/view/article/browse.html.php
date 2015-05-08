@@ -8,10 +8,11 @@ js::set('categoryID', $category->id);
 include TPL_ROOT . 'common/treeview.html.php';
 ?>
 <?php echo $common->printPositionBar($category);?>
-<div class='row'><?php $this->block->printRegion($layouts, 'article_browse', 'top', true);?></div>
+<div class='row'><?php $this->block->printRegion($layouts, 'article_browse', 'topBanner', true);?></div>
 <div class='row'>
   <div class='col-md-9 col-main'>
     <div class='list list-condensed'>
+    <div class='row'><?php $this->block->printRegion($layouts, 'article_browse', 'top', true);?></div>
       <header><h2><?php echo $category->name;?></h2></header>
       <section class='items items-hover'>
         <?php foreach($sticks as $stick):?>
@@ -69,8 +70,9 @@ include TPL_ROOT . 'common/treeview.html.php';
       </section>
       <footer class='clearfix'><?php $pager->show('right', 'short');?></footer>
     </div>
+    <div class='row'><?php $this->block->printRegion($layouts, 'article_browse', 'bottom', true);?></div>
   </div>
   <div class='col-md-3 col-side'><side class='page-side'><?php $this->block->printRegion($layouts, 'article_browse', 'side');?></side></div>
 </div>
-<div class='row'><?php $this->block->printRegion($layouts, 'article_browse', 'bottom', true);?></div>
+<div class='row'><?php $this->block->printRegion($layouts, 'article_browse', 'bottomBanner', true);?></div>
 <?php include TPL_ROOT . 'common/footer.html.php';?>

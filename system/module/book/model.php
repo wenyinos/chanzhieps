@@ -606,8 +606,7 @@ class bookModel extends model
             $this->file->copyFromContent($this->post->content, $nodeID, 'book');
             if(dao::isError()) return false;
         }
-
-        $book = $this->getNodeByID($bookID);
+        $book = $this->getNodeByID($nodeID);
         return $this->loadModel('search')->save('book', $book);
     }
 

@@ -6,13 +6,14 @@ css::internal($page->css);
 js::execute($page->js);
 ?>
 <?php $common->printPositionBar($page);?>
-<div class='row'><?php $this->block->printRegion($layouts, 'page_view', 'top', true);?></div>
+<div class='row'><?php $this->block->printRegion($layouts, 'page_view', 'topBanner', true);?></div>
 <div class='row'>
   <?php if(!empty($layouts['page_view'])):?>
   <div class='col-md-9 col-main'>
   <?php else:?>
   <div class='col-md-12'>
   <?php endif;?>
+    <div class='row'><?php $this->block->printRegion($layouts, 'page_view', 'top', true);?></div>
     <div class='article'>
       <header>
         <h1><?php echo $page->title;?></h1>
@@ -29,11 +30,12 @@ js::execute($page->js);
       </footer>
       <?php endif;?>
     </div>
+    <div class='row'><?php $this->block->printRegion($layouts, 'page_view', 'bottom', true);?></div>
   </div>
   <?php if(!empty($layouts['page_view'])):?>
   <div class='col-md-3 col-side'><?php $this->block->printRegion($layouts, 'page_view', 'side');?></div>
   <?php endif;?>
 </div>
-<div class='row'><?php $this->block->printRegion($layouts, 'page_view', 'bottom', true);?></div>
+<div class='row'><?php $this->block->printRegion($layouts, 'page_view', 'bottomBanner', true);?></div>
 <?php include TPL_ROOT . 'common/jplayer.html.php'; ?>
 <?php include TPL_ROOT . 'common/footer.html.php'; ?>

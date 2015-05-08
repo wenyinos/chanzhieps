@@ -103,29 +103,41 @@ $lang->block->default->regions->company_index['top']    = 'Top';
 $lang->block->default->regions->company_index['bottom'] = 'Bottom';
 $lang->block->default->regions->company_index['side']   = 'Side';
 
-$lang->block->default->regions->article_browse['top']    = 'Top';
-$lang->block->default->regions->article_browse['bottom'] = 'Bottom';
-$lang->block->default->regions->article_browse['side']   = 'Side';
+$lang->block->default->regions->article_browse['topBanner']    = 'TopBanner';
+$lang->block->default->regions->article_browse['top']          = 'Top';
+$lang->block->default->regions->article_browse['bottom']       = 'Bottom';
+$lang->block->default->regions->article_browse['side']         = 'Side';
+$lang->block->default->regions->article_browse['bottomBanner'] = 'BottomBanner';
 
-$lang->block->default->regions->article_view['top']    = 'Top';
-$lang->block->default->regions->article_view['bottom'] = 'Bottom';
-$lang->block->default->regions->article_view['side']   = 'Side';
+$lang->block->default->regions->article_view['topBanner']    = 'TopBanner';
+$lang->block->default->regions->article_view['top']          = 'Top';
+$lang->block->default->regions->article_view['bottom']       = 'Bottom';
+$lang->block->default->regions->article_view['side']         = 'Side';
+$lang->block->default->regions->article_view['bottomBanner'] = 'BottomBanner';
 
-$lang->block->default->regions->product_browse['top']    = 'Top';
-$lang->block->default->regions->product_browse['bottom'] = 'Bottom';
-$lang->block->default->regions->product_browse['side']   = 'Side';
+$lang->block->default->regions->product_browse['topBanner']    = 'TopBanner';
+$lang->block->default->regions->product_browse['top']          = 'Top';
+$lang->block->default->regions->product_browse['bottom']       = 'Bottom';
+$lang->block->default->regions->product_browse['side']         = 'Side';
+$lang->block->default->regions->product_browse['bottomBanner'] = 'BottomBanner';
 
-$lang->block->default->regions->product_view['top']    = 'Top';
-$lang->block->default->regions->product_view['bottom'] = 'Bottom';
-$lang->block->default->regions->product_view['side']   = 'Side';
+$lang->block->default->regions->product_view['topBanner']    = 'TopBanner';
+$lang->block->default->regions->product_view['top']          = 'Top';
+$lang->block->default->regions->product_view['bottom']       = 'Bottom';
+$lang->block->default->regions->product_view['side']         = 'Side';
+$lang->block->default->regions->product_view['bottomBanner'] = 'BottomBanner';
 
-$lang->block->default->regions->blog_index['top']    = 'Top';
-$lang->block->default->regions->blog_index['bottom'] = 'Bottom';
-$lang->block->default->regions->blog_index['side']   = 'Side';
+$lang->block->default->regions->blog_index['topBanner']    = 'TopBanner';
+$lang->block->default->regions->blog_index['top']          = 'Top';
+$lang->block->default->regions->blog_index['bottom']       = 'Bottom';
+$lang->block->default->regions->blog_index['side']         = 'Side';
+$lang->block->default->regions->blog_index['bottomBanner'] = 'BottomBanner';
 
-$lang->block->default->regions->blog_view['top']    = 'Top';
-$lang->block->default->regions->blog_view['bottom'] = 'Bottom';
-$lang->block->default->regions->blog_view['side']   = 'Side';
+$lang->block->default->regions->blog_view['topBanner']    = 'TopBanner';
+$lang->block->default->regions->blog_view['top']          = 'Top';
+$lang->block->default->regions->blog_view['bottom']       = 'Bottom';
+$lang->block->default->regions->blog_view['side']         = 'Side';
+$lang->block->default->regions->blog_view['bottomBanner'] = 'BottomBanner';
 
 $lang->block->default->regions->forum_index['top']     = 'Top';
 $lang->block->default->regions->forum_index['bottom']  = 'Bottom';
@@ -134,17 +146,23 @@ $lang->block->default->regions->forum_board['bottom']  = 'Bottom';
 $lang->block->default->regions->thread_view['top']     = 'Top';
 $lang->block->default->regions->thread_view['bottom']  = 'Bottom';
 
-$lang->block->default->regions->book_browse['top']    = 'Top';
-$lang->block->default->regions->book_browse['bottom'] = 'Bottom';
-$lang->block->default->regions->book_browse['side']   = 'Side';
+$lang->block->default->regions->book_browse['topBanner']    = 'TopBanner';
+$lang->block->default->regions->book_browse['top']          = 'Top';
+$lang->block->default->regions->book_browse['bottom']       = 'Bottom';
+$lang->block->default->regions->book_browse['side']         = 'Side';
+$lang->block->default->regions->book_browse['bottomBanner'] = 'BottomBanner';
 
 $lang->block->default->regions->book_read['top']       = 'Top';
 $lang->block->default->regions->book_read['bottom']    = 'Bottom';
 
-$lang->block->default->regions->message_index['top']    = 'Top';
-$lang->block->default->regions->message_index['bottom'] = 'Bottom';
-$lang->block->default->regions->message_index['side']   = 'Side';
+$lang->block->default->regions->message_index['topBanner']    = 'TopBanner';
+$lang->block->default->regions->message_index['top']          = 'Top';
+$lang->block->default->regions->message_index['bottom']       = 'Bottom';
+$lang->block->default->regions->message_index['side']         = 'Side';
+$lang->block->default->regions->message_index['bottomBanner'] = 'BottomBanner';
 
-$lang->block->default->regions->page_view['top']    = 'Top';
-$lang->block->default->regions->page_view['bottom'] = 'Bottom';
-$lang->block->default->regions->page_view['side']   = 'Side';
+$lang->block->default->regions->page_view['topBanner']    = 'TopBanner';
+$lang->block->default->regions->page_view['top']          = 'Top';
+$lang->block->default->regions->page_view['bottom']       = 'Bottom';
+$lang->block->default->regions->page_view['side']         = 'Side';
+$lang->block->default->regions->page_view['bottomBanner'] = 'BottomBanner';
