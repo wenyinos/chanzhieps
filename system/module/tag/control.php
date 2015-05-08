@@ -36,15 +36,15 @@ class tag extends control
     }   
 
     /**
-     * Keyword is related with articles, products, pages and books.
+     * What are the sources of tag.
      * 
-     * @param  int    $tag 
+     * @param  string   $tag 
      * @access public
      * @return void
      */
-    public function related($tag)
+    public function source($tag)
     {
-        $articles = $this->dao->select('*')->from(TABLE_ARTICLE)->where("concat(',', keywords, ',')")->like("%,{$tag},%")->orderBy('type, id_desc')->fetchGroup('type');
+        $articles = $this->dao->select('*')->from(TABLE_ARTICLE)->where("concat(',', keywords, ',')")->like("%,{$tag},%")->orderBy('type, id_desc')->fetchAll();
         $products = $this->dao->select('*')->from(TABLE_PRODUCT)->where("concat(',', keywords, ',')")->like("%,{$tag},%")->fetchAll();
         $nodes    = $this->dao->select('*')->from(TABLE_BOOK)->where("concat(',', keywords, ',')")->like("%,{$tag},%")->fetchAll('id');
 
@@ -60,7 +60,7 @@ class tag extends control
             }
         }
 
-        $this->view->title    = $this->lang->tag->related;
+        $this->view->title    = $this->lang->tag->source;
         $this->view->articles = $articles;
         $this->view->products = $products;
         $this->view->nodes    = $nodes;
