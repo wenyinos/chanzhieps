@@ -66,6 +66,7 @@ $lang->resource->article->edit   = 'edit';
 $lang->resource->article->delete = 'delete';
 $lang->resource->article->setcss = 'setcss';
 $lang->resource->article->setjs  = 'setjs';
+$lang->resource->article->stick  = 'stick';
 
 /* Block module. */
 $lang->resource->block = new stdclass();
@@ -163,6 +164,7 @@ $lang->resource->product->currency     = 'currency';
 $lang->resource->product->delete       = 'delete';
 $lang->resource->product->setcss       = 'setcss';
 $lang->resource->product->setjs        = 'setjs';
+$lang->resource->product->showView     = 'showView';
 
 /* Reply module. */
 $lang->resource->reply = new stdclass();
