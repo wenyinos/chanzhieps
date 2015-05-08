@@ -37,10 +37,8 @@
         <?php endif;?>
         <th class='text-center w-160px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->article->addedDate);?></th>
         <th class='text-center w-70px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->article->views);?></th>
-        <?php $actionClass = $type == 'page' ? 'w-220px' : 'w-300px';?>
-        <th class='text-center <?php echo $actionClass;?>'>
-          <?php echo $lang->actions;?>
-        </th>
+        <?php $actionClass = $type == 'page' ? 'w-220px' : 'w-260px';?>
+        <th class='text-center <?php echo $actionClass;?>'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
@@ -69,14 +67,16 @@
           ?>
           <?php if($type != 'page'):?>
           <span class='dropdown'>
-            <a data-toggle='dropdown' href='###'><?php echo $lang->article->sticks[$stick->sticky]; ?> <span class='caret'></span></a>
+            <a data-toggle='dropdown' href='###'><?php echo $lang->article->stick; ?><span class='caret'></span></a>
             <ul class='dropdown-menu' role='menu' aria-labelledby='dLabel'>
               <?php
               foreach($lang->article->sticks as $sticky => $label)
               {
                   if($stick->sticky != $sticky)
                   {
-                      echo '<li>' . html::a(inlink('stick', "article=$stick->id&stick=$sticky"), $label, "class='jsoner'") . '</li>';
+                      echo '<li>';
+                      commonModel::printLink('article', 'stick', "article=$stick->id&stick=$sticky", $label, "class='jsoner'");
+                      echo '</li>';
                   }
                   else
                   {
@@ -115,14 +115,16 @@
           ?>
           <?php if($type != 'page'):?>
           <span class='dropdown'>
-            <a data-toggle='dropdown' href='###'><?php echo $lang->article->sticks[$article->sticky]; ?> <span class='caret'></span></a>
+            <a data-toggle='dropdown' href='###'><?php echo $lang->article->stick; ?><span class='caret'></span></a>
             <ul class='dropdown-menu' role='menu' aria-labelledby='dLabel'>
             <?php
               foreach($lang->article->sticks as $stick => $label)
               {
                   if($article->sticky != $stick)
                   {
-                      echo '<li>' . html::a(inlink('stick', "article=$article->id&stick=$stick"), $label, "class='jsoner'") . '</li>';
+                      echo '<li>';
+                      commonModel::printLink('article', 'stick', "article=$article->id&stick=$stick", $label, "class='jsoner'");
+                      echo '</li>';
                   }
                   else
                   {
