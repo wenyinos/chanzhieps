@@ -391,7 +391,7 @@ td #aliasLabel {display: table-row;}
 #powerby {position: absolute; right: 0; top: 20px; padding: 0; overflow: hidden;}
 #powerby a {margin: 0; display: block; padding-left: 36px;}
 #powerby a:hover, #powerby:hover .icon-chanzhi > i, #powerby:hover .icon-chanzhi > i:before, #powerby:hover .icon-chanzhi > i:after {border-color: #1152b7; text-decoration: none}
-#powerby a > .name {text-indent: -2em; display: block; overflow: hidden;}
+#powerby a > .name {display: block; width: 0; overflow: hidden; position: absolute;}
 #powerby .icon-chanzhi {top: 3px; position: absolute; left: 0}
 @media (max-width: 767px) {
   #footNav, #icpInfo {display: none;}
