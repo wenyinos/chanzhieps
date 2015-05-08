@@ -63,6 +63,7 @@ $lang->user->submit          = "Submit";
 $lang->user->forbid          = 'Forbid';
 $lang->user->activate        = 'Activate';
 $lang->user->pullWechatFans  = 'Pull wechat uses';
+$lang->user->adminlog        = 'Admin login';
 
 $lang->user->profile     = 'Profile';
 $lang->user->editProfile = 'Edit profile';

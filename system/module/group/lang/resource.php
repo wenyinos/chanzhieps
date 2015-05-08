@@ -173,11 +173,12 @@ $lang->resource->reply->deleteFile = 'deleteFile';
 
 /* Site module. */
 $lang->resource->site = new stdclass();
-$lang->resource->site->setBasic  = 'setBasic';
-$lang->resource->site->setLang   = 'setLang';
-$lang->resource->site->setRobots = 'setRobots';
-$lang->resource->site->setUpload = 'setUpload';
-$lang->resource->site->setOauth  = 'setOauth';
+$lang->resource->site->setBasic      = 'setBasic';
+$lang->resource->site->setLang       = 'setLang';
+$lang->resource->site->setRobots     = 'setRobots';
+$lang->resource->site->setUpload     = 'setUpload';
+$lang->resource->site->setOauth      = 'setOauth';
+$lang->resource->site->setRecPerPage = 'setRecPerPage';
 
 /* Slide module. */
 $lang->resource->slide = new stdclass();
@@ -219,9 +220,10 @@ $lang->resource->ui->deleteLogo    = 'deleteLogo';
 
 /* User module. */
 $lang->resource->user = new stdclass();
-$lang->resource->user->admin   = 'list';
-$lang->resource->user->edit    = 'edit';
-$lang->resource->user->forbid  = 'forbid';
+$lang->resource->user->admin    = 'list';
+$lang->resource->user->edit     = 'edit';
+$lang->resource->user->forbid   = 'forbid';
+$lang->resource->user->adminlog = 'adminlog';
 
 /* Wechat module. */
 $lang->resource->wechat = new stdclass();
