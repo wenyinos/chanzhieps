@@ -621,8 +621,8 @@ class control
         if(empty($this->output)) $this->parse($moduleName, $methodName);
         if($this->config->cn2tw and $this->app->getClientLang() == 'zh-tw')
         {
-            $this->app->loadClass('zhconversion', true);
-            $this->output = zhconversion::cn2tw($this->output);
+            $this->app->loadClass('cn2tw', true);
+            $this->output = cn2tw::translate($this->output);
         }
 
         if(isset($this->config->site->cdn))
