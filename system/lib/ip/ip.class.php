@@ -1,10 +1,10 @@
 <?php
 
 /*
-    全球 IPv4 地址归属地数据库(17MON.CN 版)
-    高春辉(pAUL gAO) <gaochunhui@gmail.com>
-    Build 20141009 版权所有 17MON.CN
-    (C) 2006 - 2014 保留所有权利
+    全球 IPv4 地址归属地数据库(IPIP.NET 版)
+    高春辉(Paul Gao) <gaochunhui@gmail.com> 
+    Build 20150401 版权所有 IPIP.NET
+    (C) 2006 - 2015 保留所有权利
     请注意及时更新 IP 数据库版本
     数据问题请加 QQ 群: 346280296
     Code for PHP 5.3+ only

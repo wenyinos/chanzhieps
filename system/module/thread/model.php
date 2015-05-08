@@ -355,6 +355,7 @@ class threadModel extends model
 
         foreach($thread->files as $file)
         {
+            if($file->isVideo) continue;
             if($file->isImage)
             {
                 if($file->editor) continue;

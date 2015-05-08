@@ -45,10 +45,6 @@
           <td title="<?php echo $lang->site->allowedDomainTip;?>"><i class='icon-question-sign'></i></td>
         </tr>
         <tr>
-          <th><?php echo $lang->site->cdn;?></th>
-          <td><?php echo html::input('cdn', isset($this->config->site->cdn) ? $this->config->site->cdn : '', "class='form-control'");?></td><td></td>
-        </tr>
-        <tr>
           <th><?php echo $lang->site->module;?></th>
           <td><?php echo html::checkbox('modules', $lang->site->moduleAvailable, isset($this->config->site->modules) ? $this->config->site->modules : '');?></td><td></td>
         </tr>
