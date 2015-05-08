@@ -5,7 +5,7 @@ $jsRoot    = $webRoot . "js/";
 $themeRoot = $webRoot . "template/default/theme/";
 ?>
 <!DOCTYPE html>
-<html xmlns:wb="http://open.weibo.com/wb">
+<html xmlns:wb="http://open.weibo.com/wb" lang='<?php echo $app->getClientLang();?>'>
 <head profile="http://www.w3.org/2005/10/profile">
   <meta charset="utf-8">
   <meta name="renderer" content="webkit">
