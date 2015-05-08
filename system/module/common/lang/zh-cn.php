@@ -137,7 +137,7 @@ $lang->menuGroups->mail    = 'site';
 $lang->menuGroups->nav     = 'site';
 $lang->menuGroups->links   = 'site';
 $lang->menuGroups->wechat  = 'site';
-$lang->menuGroups->group   = 'site';
+$lang->menuGroups->group   = 'user';
 $lang->menuGroups->block   = 'ui';
 $lang->menuGroups->slide   = 'ui';
 $lang->menuGroups->tree    = 'article';
@@ -183,6 +183,7 @@ $lang->user->menu->sina   = '微博会员|user|admin|provider=sina';
 $lang->user->menu->wechat = '微信会员|user|admin|provider=wechat';
 $lang->user->menu->qq     = 'QQ会员|user|admin|provider=qq';
 $lang->user->menu->admin  = '管理员|user|admin|admin=1';
+$lang->user->menu->group  = array('link' => '分组权限|group|browse|', 'alias' => 'managepriv,managemember');
 $lang->user->menu->log    = '登录日志|user|adminlog|';
 
 /* Menu of comment module. */
@@ -221,7 +222,6 @@ $lang->site->menu->oauth      = '开放登录|site|setoauth|';
 $lang->site->menu->link       = '友情链接|links|admin|';
 $lang->site->menu->mail       = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
 $lang->site->menu->wechat     = array('link' => '微信设置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
-$lang->site->menu->group      = array('link' => '分组权限|group|browse|', 'alias' => 'managepriv,managemember');
 $lang->site->menu->search     = '更新搜索索引|search|buildindex|';
 
 /* Menu of company module. */

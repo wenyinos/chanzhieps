@@ -172,21 +172,25 @@ class mail extends control
     /**
      * Send E-mail.
      * 
-     * @param  string $item 
-     * @param  string $item 
+     * @param  string $module 
+     * @param  string $method 
+     * @param  string $url 
+     * @param  string $target 
+     * @param  string $account 
      * @access public
      * @return void
      */
-    public function captcha($type, $url = '', $target = 'modal', $account = '')
+    public function captcha($module, $method, $url = '', $target = 'modal', $account = '')
     {
-        $type = strip_tags($type);
         if($url == '')     $url     = helper::safe64Encode('close');
         if($account == '') $account = $this->app->user->account;
 
         if($_POST)
         {
             $this->session->set('verifyCode', mt_rand());
-            $content = sprintf($this->lang->mail->sendContent, $account, $this->config->site->name, $this->server->http_host, $type,$this->session->verifyCode, $this->config->site->name);
+            $this->app->loadlang($module);
+            $action  = isset($this->lang->{$module}->{$method}->common) ? $this->lang->{$module}->{$method}->common : $this->lang->{$module}->{$method};
+            $content = sprintf($this->lang->mail->sendContent, $account, $this->config->site->name, $this->server->http_host, $action, $this->session->verifyCode, $this->config->site->name);
             $this->loadModel('mail')->send($account, $this->lang->mail->captcha . ' ' . $this->config->site->name, $content, true); 
 
             if(!$this->mail->isError()) $this->send(array('result' => 'success', 'message' => $this->lang->mail->successSended, 'locate' => inlink('verify', "url=$url&target=$target")));
@@ -201,7 +205,8 @@ class mail extends control
 
         $user = $this->loadModel('user')->getByAccount($account);
         $this->view->title   = $this->lang->mail->verify;
-        $this->view->type    = $type;
+        $this->view->module  = $module;
+        $this->view->method  = $method;
         $this->view->url     = $url;
         $this->view->target  = $target;
         $this->view->account = $account;

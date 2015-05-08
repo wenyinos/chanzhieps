@@ -44,6 +44,7 @@ $lang->product->sales      = 'Price';
 $lang->product->css        = 'CSS';
 $lang->product->js         = 'JS';
 $lang->product->currency   = 'Currency';
+$lang->product->showView   = 'Product View';
 
 $lang->product->list         = 'List';
 $lang->product->hot          = 'Hot';
@@ -114,3 +115,6 @@ $lang->product->currencySymbols['aud']  = 'A$';
 $lang->product->currencySymbols['nzd']  = 'NZ$';
 $lang->product->currencySymbols['thb']  = 'B';
 $lang->product->currencySymbols['sgd']  = 'S$';
+
+$lang->product->showViewList[1] = 'show';
+$lang->product->showViewList[0] = 'hide';

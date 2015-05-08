@@ -5,7 +5,7 @@ $jsRoot    = $webRoot . "js/";
 $themeRoot = $webRoot . "template/default/theme/";
 ?>
 <!DOCTYPE html>
-<html>
+<html lang='<?php echo $app->getClientLang();?>'>
 <head profile="http://www.w3.org/2005/10/profile">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">

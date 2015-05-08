@@ -1,5 +1,7 @@
-<link href="/js/jplayer/dist/skin/blue.monday/css/jplayer.blue.monday.min.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="/js/jplayer/dist/jplayer/jquery.jplayer.min.js"></script>
+<?php js::import($jsRoot . 'jplayer/dist/jplayer/jquery.jplayer.min.js');?>
+<?php css::import($jsRoot . 'jplayer/dist/skin/blue.monday/css/jplayer.blue.monday.min.css');?>
+ 
+<script type="text/javascript" src="/js/"></script>
 <script type="text/javascript">
 $(document).ready(function()
 {
@@ -25,9 +27,9 @@ $(document).ready(function()
 
         if(mediaType && typeof(eval("mediaTypeList." + mediaType.toLowerCase())) == 'string')
         {
-            $(this).replaceWith("<div id='" + id + "'  class='jp-player text-center' data-src='" + src + "'></div>");
+            $(this).replaceWith("<div id='" + id + "'  class='jp-player text-center' data-src='" + src + "' style='margin: 0 auto;'></div>");
             $('#' + id).wrap("<div class='jp-type-single'></div>");
-            $('#' + id).parent().wrap("<div id='" + containerID  + "' class='jp-video jp-video-360p' role='application' aria-label='media player'></div>");
+            $('#' + id).parent().wrap("<div id='" + containerID  + "' class='jp-video jp-video-360p' style='width: " + (w + 2) + "px' role='application' aria-label='media player'></div>");
             $('#' + id).after($('#playerBar').html());
 
             mediaSetting = {};

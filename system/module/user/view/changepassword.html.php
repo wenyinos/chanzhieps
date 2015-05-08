@@ -19,13 +19,14 @@
       <th><?php echo $lang->user->password2;?></th>
       <td><?php echo html::password('password2', '', "class='form-control'");?></td><td></td>
     </tr>  
-    <tr><td></td><td><?php echo html::submitButton();?></td></tr>
+    <tr><td></td><td><?php echo html::submitButton() . html::hidden('token', $token);?></td></tr>
   </table>
 </form>
 <?php else:?>
 <?php 
-$type = $lang->user->changePassword;
-$url  = helper::safe64Encode($this->createLink('user', 'changepassword'));
+$module = 'user';
+$method = 'changePassword';
+$url    = helper::safe64Encode($this->createLink('user', 'changepassword'));
 include '../../mail/view/captcha.html.php';
 ?>
 <?php endif;?>

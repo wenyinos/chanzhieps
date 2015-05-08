@@ -108,6 +108,14 @@ class site extends control
      */
     public function setSecurity()
     {
+        $check  = $this->loadModel('mail')->checkEmailSetting();
+        $okFile = $this->loadModel('common')->verfyAdmin();
+        $pass   = $this->mail->checkVerify();
+        $this->view->check  = $check;
+        $this->view->pass   = $pass;
+        $this->view->okFile = $okFile;
+        if(!empty($_POST) && !$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha'));
+
         if(!empty($_POST))
         {
             $setting = fixer::input('post')
@@ -121,7 +129,7 @@ class site extends control
             $ips = empty($_POST['allowedIP']) ? array() : explode(',', $this->post->allowedIP);
             foreach($ips as $ip)
             {
-                if(!empty($ip) and !isIPOrNetwork($ip)) 
+                if(!empty($ip) and !helper::checkIP($ip)) 
                 {
                     dao::$errors['allowedIP'][] = $this->lang->site->wrongAllowedIP;
                     break;
@@ -149,6 +157,12 @@ class site extends control
      */
     public function setRecPerPage()
     {
+        $this->app->loadConfig('article');
+        $this->app->loadConfig('product');
+        $this->app->loadConfig('blog');
+        $this->app->loadConfig('forum');
+        $this->app->loadConfig('reply');
+        $this->app->loadConfig('message');
         if(!empty($_POST))
         {
             $setting = fixer::input('post')->get();

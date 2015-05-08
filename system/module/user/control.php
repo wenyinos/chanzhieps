@@ -97,8 +97,6 @@ class user extends control
         /* If the user sumbit post, check the user and then authorize him. */
         if(!empty($_POST))
         {
-            if(!validater::checkFingerprint($this->post->fingerprint))  $this->send(array( 'result' => 'fail', 'message' => $this->lang->error->fingerprint));
-
             /* check client ip and position if login is admin. */
             if(RUN_MODE == 'admin')
             {
@@ -110,7 +108,7 @@ class user extends control
                     $error  = $checkIP ? '' : $this->lang->user->ipDenied;
                     $error .= $checkPosition ? '' : $this->lang->user->positionDenied;
                     $pass   = $this->loadModel('mail')->checkVerify();
-                    $captchaUrl = $this->createLink('mail', 'captcha', "type={$this->lang->user->login->common}&url=&target=modal&account={$this->post->account}");
+                    $captchaUrl = $this->createLink('mail', 'captcha', "module=user&method=login&url=&target=modal&account={$this->post->account}");
                     if(!$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => $error, 'url' => $captchaUrl));
                 }
             }
@@ -296,6 +294,7 @@ class user extends control
 
         if(!empty($_POST))
         {
+            if(!$this->user->checkToken($this->post->token, $this->post->fingerprint))  $this->send(array( 'result' => 'fail', 'message' => $this->lang->error->fingerprint));
             $this->user->update($account);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->session->set('verify', '');
@@ -306,6 +305,7 @@ class user extends control
 
         $this->view->title = $this->lang->user->edit;
         $this->view->user  = $user;
+        $this->view->token = $this->user->getToken();
         if(RUN_MODE == 'admin') 
         { 
             $this->view->siteLang = explode(',', $this->config->site->lang);
@@ -454,8 +454,8 @@ class user extends control
 
         if(!empty($_POST))
         {
+            if(!$this->user->checkToken($this->post->token, $this->post->fingerprint))  $this->send(array( 'result' => 'fail', 'message' => $this->lang->error->fingerprint));
             if(!$pass) $this->send(array( 'result' => 'fail', 'message' => $this->lang->mail->needVerify));
-            if(!validater::checkFingerprint($this->post->fingerprint))  $this->send(array( 'result' => 'fail', 'message' => $this->lang->error->fingerprint));
 
             $user = $this->user->identify($this->app->user->account, $this->post->password);
             if(!$user) $this->send(array( 'result' => 'fail', 'message' => $this->lang->user->identifyFailed ) );
@@ -469,6 +469,7 @@ class user extends control
         $this->view->title      = "<i class='icon-key'></i> " . $this->lang->user->changePassword;
         $this->view->modalWidth = 500; 
         $this->view->user       = $this->user->getByAccount($this->app->user->account);
+        $this->view->token      = $this->user->getToken();
         $this->display();
     }
 
@@ -540,14 +541,16 @@ class user extends control
      * OAuth login.
      * 
      * @param  string    $provider sina|qq
+     * @param  int       $fingerprint
      * @param  string    $referer  the referer before login
      * @access public
      * @return void
      */
-    public function oauthLogin($provider, $referer = '')
+    public function oauthLogin($provider, $fingerprint = 0, $referer = '')
     {
         /* Save the provider to session.*/
         $this->session->set('oauthProvider', $provider);
+        $this->session->set('fingerprint', $fingerprint);
 
         /* Init OAuth client. */
         $this->app->loadClass('oauth', $static = true);

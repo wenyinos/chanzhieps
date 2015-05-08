@@ -33,27 +33,4 @@ class misc extends control
         $this->app->loadClass('qrcode');
         QRcode::png($this->server->http_referer, false, 4, 6); 
     }   
-
-    /**
-     * create a fingerprint.
-     * 
-     * @param  int    $clientFiniger 
-     * @access public
-     * @return void
-     */
-    public function ajaxGetFingerprint($clientFiniger)
-    {
-        if($this->session->fingerprint and $this->session->fingerprint['createdTime'] > (time() - 360 ))
-        {
-            $fingerprint = $this->session->fingerprint;
-        }
-        else
-        {
-            $fingerprint = array();
-            $fingerprint['fingerprint']     = md5(uniqid($clientFiniger . '_'));
-            $fingerprint['createdTime'] = time();
-            $this->session->set('fingerprint', $fingerprint);
-        }
-        $this->send(array('result' => 'success', 'fingerprint' => $fingerprint['fingerprint']));
-    }
 }

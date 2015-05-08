@@ -21,4 +21,7 @@
     <?php endif;?>
   </div>
 </div>
+<?php if($this->config->version == '4.2'):?>
+<script> $().ready(function(){ $.getJSON(createLink('search', 'buildIndex'), function(){return false;});}); </script>
+<?php endif;?>
 <?php include '../../install/view/footer.html.php';?>

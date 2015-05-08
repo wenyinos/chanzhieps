@@ -64,6 +64,13 @@ $lang->article->sourceList['translational'] = 'Translational';
 $lang->article->statusList['normal'] = 'Normal';
 $lang->article->statusList['draft']  = 'Draft';
 
+$lang->article->sticks[0] = 'unstick';
+$lang->article->sticks[1] = 'stick in category';
+$lang->article->sticks[2] = 'stick';
+
+$lang->article->successStick   = 'Stick successfully';
+$lang->article->successUnstick = 'Unstick successfully';
+
 $lang->article->confirmDelete = 'Are you sure to delete this article?';
 
 $lang->article->lblAddedDate = '<strong>Added:</strong> %s &nbsp;&nbsp;';

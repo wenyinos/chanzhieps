@@ -335,8 +335,10 @@ td #aliasLabel {display: table-row;}
 #siteLogo {padding: 0;}
 #siteName h2 {margin: 6px 0}
 #headNav {position: absolute; right: 0; top: 10px;}
-#headNav nav > a {display: inline-block; margin-right: 5px;}
+#headNav nav > a, #languageBar {display: inline-block; margin-right: 5px;}
 #headNav nav > a:last-child {margin-right: 0;}
+#languageBar > a {display: inline-block; margin-right: 4px;}
+#languageBar > a:last-child {margin-right: 0;}
 @media (max-width: 767px) {
   #header {margin-left: -10px; margin-right: -10px;}
   #siteSlogan {display: none}
@@ -391,7 +393,7 @@ td #aliasLabel {display: table-row;}
 #powerby {position: absolute; right: 0; top: 20px; padding: 0; overflow: hidden;}
 #powerby a {margin: 0; display: block; padding-left: 36px;}
 #powerby a:hover, #powerby:hover .icon-chanzhi > i, #powerby:hover .icon-chanzhi > i:before, #powerby:hover .icon-chanzhi > i:after {border-color: #1152b7; text-decoration: none}
-#powerby a > .name {text-indent: -2em; display: block; overflow: hidden;}
+#powerby a > .name {display: block; width: 0; overflow: hidden; position: absolute;}
 #powerby .icon-chanzhi {top: 3px; position: absolute; left: 0}
 @media (max-width: 767px) {
   #footNav, #icpInfo {display: none;}
@@ -489,6 +491,3 @@ body.body-modal {padding: 20px;}
 .row {margin-left: -7px; margin-right: -7px;}
 .row > [class*='col-'] {padding-left: 7px; padding-right: 7px;}
 .row > [class*='col-'] > .panel, .row > [class*='col-'] > .carousel, .page-content > .panel, #boards > .panel, .page-side > .panel, .row > [class*='col-'] > .nav, .row > [class*='col-'] > .list-group, .m-blog .card {margin-bottom: 14px;}
-
-#languageBar{ padding-left:10px;}
-#languageBar a{margin-right:6px;}

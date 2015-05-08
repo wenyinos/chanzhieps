@@ -1,11 +1,12 @@
 <?php include TPL_ROOT . 'common/header.html.php';?>
+<?php js::import($jsRoot . 'fingerprint/fingerprint.js');?>
 <div class='panel panel-body' id='reg'>
   <div class='row'>
     <?php include TPL_ROOT . 'user/oauthlogin.html.php';?>
       <div class='panel panel-pure'>
         <div class='panel-heading'><strong><?php echo $lang->user->register->welcome;?></strong></h4></div>
         <div class='panel-body'>
-          <form method='post' id='ajaxForm' class='form-horizontal' role='form'>
+          <form method='post' id='ajaxForm' class='form-horizontal' role='form' data-checkfingerprint='1'>
             <div class='form-group'>
               <label class='col-sm-3 control-label'><?php echo $lang->user->account;?></label>
               <div class='col-sm-9'><?php echo html::input('account', '', "class='form-control form-control' autocomplete='off' placeholder='" . $lang->user->register->lblAccount . "'");?></div>

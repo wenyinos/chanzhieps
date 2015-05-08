@@ -17,28 +17,32 @@
     <form method='post' id='ajaxForm' class='form-inline'>
       <table class='table table-form'>
         <tr>
-          <th class='col-xs-2'><?php echo $lang->site->recPerPage->article;?></th> 
-          <td class='col-xs-6'><?php echo html::input('articleRec', isset($this->config->site->articleRec) ? $this->config->site->articleRec : '', "class='form-control'");?></td><td></td>
+          <th class='col-xs-2'><?php echo $lang->site->setPage->article;?></th> 
+          <td class='col-xs-6'><?php echo html::input('articleRec', !empty($this->config->site->articleRec) ? $this->config->site->articleRec : $this->config->article->recPerPage, "class='form-control'");?></td><td></td>
         </tr>
         <tr>
-          <th class='col-xs-2'><?php echo $lang->site->recPerPage->product;?></th> 
-          <td class='col-xs-6'><?php echo html::input('productRec', isset($this->config->site->productRec) ? $this->config->site->productRec : '', "class='form-control'");?></td><td></td>
+          <th class='col-xs-2'><?php echo $lang->site->setPage->product;?></th> 
+          <td class='col-xs-6'><?php echo html::input('productRec', !empty($this->config->site->productRec) ? $this->config->site->productRec : $this->config->product->recPerPage, "class='form-control'");?></td><td></td>
         </tr>
         <tr>
-          <th class='col-xs-2'><?php echo $lang->site->recPerPage->blog;?></th> 
-          <td class='col-xs-6'><?php echo html::input('blogRec', isset($this->config->site->blogRec) ? $this->config->site->blogRec : '', "class='form-control'");?></td><td></td>
+          <th class='col-xs-2'><?php echo $lang->site->setPage->blog;?></th> 
+          <td class='col-xs-6'><?php echo html::input('blogRec', !empty($this->config->site->blogRec) ? $this->config->site->blogRec : $this->config->blog->recPerPage, "class='form-control'");?></td><td></td>
         </tr>
         <tr>
-          <th class='col-xs-2'><?php echo $lang->site->recPerPage->message;?></th> 
-          <td class='col-xs-6'><?php echo html::input('messageRec', isset($this->config->site->messageRec) ? $this->config->site->messageRec : '', "class='form-control'");?></td><td></td>
+          <th class='col-xs-2'><?php echo $lang->site->setPage->message;?></th> 
+          <td class='col-xs-6'><?php echo html::input('messageRec', !empty($this->config->site->messageRec) ? $this->config->site->messageRec : $this->config->message->recPerPage, "class='form-control'");?></td><td></td>
         </tr>
         <tr>
-          <th class='col-xs-2'><?php echo $lang->site->recPerPage->forum;?></th> 
-          <td class='col-xs-6'><?php echo html::input('forumRec', isset($this->config->site->forumRec) ? $this->config->site->forumRec : '', "class='form-control'");?></td><td></td>
+          <th class='col-xs-2'><?php echo $lang->site->setPage->comment;?></th> 
+          <td class='col-xs-6'><?php echo html::input('commentRec', !empty($this->config->site->commentRec) ? $this->config->site->commentRec : $this->config->message->recPerPage, "class='form-control'");?></td><td></td>
         </tr>
         <tr>
-          <th class='col-xs-2'><?php echo $lang->site->recPerPage->reply;?></th> 
-          <td class='col-xs-6'><?php echo html::input('replyRec', isset($this->config->site->replyRec) ? $this->config->site->replyRec : '', "class='form-control'");?></td><td></td>
+          <th class='col-xs-2'><?php echo $lang->site->setPage->forum;?></th> 
+          <td class='col-xs-6'><?php echo html::input('forumRec', !empty($this->config->site->forumRec) ? $this->config->site->forumRec : $this->config->forum->recPerPage, "class='form-control'");?></td><td></td>
+        </tr>
+        <tr>
+          <th class='col-xs-2'><?php echo $lang->site->setPage->reply;?></th> 
+          <td class='col-xs-6'><?php echo html::input('replyRec', !empty($this->config->site->replyRec) ? $this->config->site->replyRec : $this->config->reply->recPerPage, "class='form-control'");?></td><td></td>
         </tr>
         <tr>
           <th></th>

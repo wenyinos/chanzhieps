@@ -316,7 +316,7 @@ class threadModel extends model
 
         /* Update board stats. */
         $this->loadModel('forum')->updateBoardStats($thread->board);
-        return !dao::isError();
+        return $this->loadModel('search')->deleteIndex('thread', $threadID);
     }
 
     /**
@@ -355,6 +355,7 @@ class threadModel extends model
 
         foreach($thread->files as $file)
         {
+            if($file->isVideo) continue;
             if($file->isImage)
             {
                 if($file->editor) continue;

@@ -113,8 +113,6 @@ $lang->ui->theme->sidebarWidthList["33.333333333333%"] = "1/3";
 $lang->ui->theme->sidebarWidthList["50%"]              = "1/2";
 $lang->ui->theme->underlineList['none']                = '无';
 $lang->ui->theme->underlineList['underline']           = '带下划线';
-$lang->ui->theme->productViewList['true']              = '显示';
-$lang->ui->theme->productViewList['false']             = '不显示';
 
 $lang->ui->groups = new stdclass();
 $lang->ui->groups->basic  = '基本样式';
@@ -153,7 +151,6 @@ $lang->ui->text          = '文字';
 $lang->ui->column        = '分栏';
 $lang->ui->sidebarLayout = '侧边栏布局';
 $lang->ui->sidebarWidth  = '侧边栏宽度';
-$lang->ui->productView   = '产品浏览量';
 
 $lang->ui->primaryColor    = '基色';
 $lang->ui->backcolor       = '背景色';

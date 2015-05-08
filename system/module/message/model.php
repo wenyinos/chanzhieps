@@ -320,7 +320,7 @@ class messageModel extends model
             ->from(TABLE_MESSAGE)
             ->where('type')->eq($message->type)
             ->beginIF($mode == 'single')->andWhere('id')->eq($messageID)->fi()
-            ->beginIF($mode == 'pre')->andWhere('id')->ge($messageID)->fi()
+            ->beginIF($mode == 'pre')->andWhere('id')->ge($messageID)->andWhere('status')->ne('1')->fi()
             ->exec(false);
         return !dao::isError();
     }
