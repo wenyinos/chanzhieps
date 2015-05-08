@@ -44,14 +44,25 @@ $lang->product->sales      = '產品定價';
 $lang->product->css        = 'CSS';
 $lang->product->js         = 'JS';
 $lang->product->currency   = '貨幣設置';
+$lang->product->showView   = '產品瀏覽量';
 
-$lang->product->list       = '產品列表';
-$lang->product->hot        = '熱門產品';
-$lang->product->admin      = '維護產品';
-$lang->product->create     = '添加產品';
-$lang->product->edit       = '編輯產品';
-$lang->product->files      = '附件';
-$lang->product->images     = '圖片';
+$lang->product->list         = '產品列表';
+$lang->product->hot          = '熱門產品';
+$lang->product->admin        = '維護產品';
+$lang->product->create       = '添加產品';
+$lang->product->edit         = '編輯產品';
+$lang->product->changeStatus = '修改產品狀態';
+$lang->product->setcss       = '設置CSS';
+$lang->product->setjs        = '設置JS';
+$lang->product->files        = '附件';
+$lang->product->images       = '圖片';
+$lang->product->addToCart    = "<i class='icon icon-shopping-cart'></i> 加入購物車";
+$lang->product->count        = '數量';
+
+$lang->product->congratulations  = "恭喜";
+$lang->product->addToCartSuccess = "添加到購物車成功。";
+$lang->product->gotoCart         = "去購物車結算";
+$lang->product->goback           = "返回";
 
 $lang->product->confirmDelete = '您確定刪除該產品嗎？';
 
@@ -104,3 +115,6 @@ $lang->product->currencySymbols['aud']  = 'A$';
 $lang->product->currencySymbols['nzd']  = 'NZ$';
 $lang->product->currencySymbols['thb']  = 'B';
 $lang->product->currencySymbols['sgd']  = 'S$';
+
+$lang->product->showViewList[1] = '顯示';
+$lang->product->showViewList[0] = '不顯示';

@@ -15,7 +15,6 @@ $lang->group->create             = '新增分組';
 $lang->group->edit               = '編輯分組';
 $lang->group->copy               = '複製分組';
 $lang->group->delete             = '刪除分組';
-$lang->group->manageAppPriv      = '應用';
 $lang->group->managePriv         = '權限';
 $lang->group->managePrivByGroup  = '權限維護';
 $lang->group->managePrivByModule = '按模組分配權限';
@@ -43,6 +42,7 @@ $lang->group->extent   = '權限範圍';
 $lang->group->havePriv = '已授權';
 $lang->group->noPriv   = '未授權';
 
+$lang->group->selectAll = '全選';
 $lang->group->manageAll = '可瀏覽所有客戶和訂單';
 
 $lang->group->copyOptions['copyPriv'] = '複製權限';

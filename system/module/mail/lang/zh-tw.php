@@ -19,14 +19,14 @@ $lang->mail->password    = 'smtp密碼';
 $lang->mail->secure      = '是否加密';
 $lang->mail->debug       = '調試級別';
 
-$lang->mail->turnonList[1]  = '打開';
+$lang->mail->turnonList[1] = '打開';
 $lang->mail->turnonList[0] = '關閉';
 
 $lang->mail->debugList[0] = '關閉';
 $lang->mail->debugList[1] = '一般';
 $lang->mail->debugList[2] = '較高';
 
-$lang->mail->authList[1]  = '需要';
+$lang->mail->authList[1] = '需要';
 $lang->mail->authList[0] = '不需要';
 
 $lang->mail->secureList['']    = '不加密';
@@ -40,3 +40,23 @@ $lang->mail->subject        = '測試郵件';
 $lang->mail->content        = '郵箱設置成功';
 $lang->mail->successSended  = '成功發送！';
 $lang->mail->needConfigure  = '無法找到郵件配置信息，請先配置郵件發送參數。';
+
+$lang->mail->verify        = '驗證管理員身份';
+$lang->mail->captcha       = '驗證碼';
+$lang->mail->needVerify    = '需要驗證管理員身份';
+$lang->mail->verifyFail    = '驗證碼錯誤';
+$lang->mail->verifySuccess = '驗證通過，請繼續操作';
+$lang->mail->noConfigure   = " <span class='text-info'>無法找到發信配置信息，郵箱驗證未啟用。</span>";
+$lang->mail->noEmail       = " <span class='text-info'>未填寫個人郵箱，郵箱驗證未啟用。</span>";
+$lang->mail->sendNotice    = <<<EOT
+為了網站安全，<strong>%s</strong> 操作需要進行管理員身份驗證。</br>
+<strong>檔案方式</strong>：創建 %s 檔案。如果存在該檔案，使用編輯軟件打開，重新保存一遍。%s</br>
+<strong>郵箱方式</strong>：驗證碼將發送至 %s。%s</br>
+EOT;
+$lang->mail->sendContent   = <<<EOT
+%s 您好：
+</br>&nbsp;&nbsp;&nbsp;&nbsp;您正在<strong>%s</strong>(%s)上進行<strong>%s</strong>操作，所需的驗證碼為：%s
+</br>
+</br><strong>%s</strong>由<a href='http://www.chanzhi.org' target='_blank'>蟬知企業門戶系統</a>搭建。
+</br><a href='http://www.cnezsoft.com' target='_blank'>易軟天創</a>為天下企業提供專業的管理工具。
+EOT;

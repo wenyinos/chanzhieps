@@ -5,5 +5,12 @@ $lang->tag->link   = '連結';
 
 $lang->tag->admin     = '關鍵詞管理';
 $lang->tag->editLink  = '編輯連結';
+$lang->tag->source    = '來源';
 $lang->tag->inputLink = '請輸入連結';
 $lang->tag->inputTag  = '請輸入關鍵詞';
+
+$lang->tag->sourceList['article'] = '文章';
+$lang->tag->sourceList['blog']    = '博客';
+$lang->tag->sourceList['page']    = '單頁';
+$lang->tag->sourceList['product'] = '產品';
+$lang->tag->sourceList['book']    = '手冊';
