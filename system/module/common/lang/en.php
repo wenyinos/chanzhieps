@@ -183,6 +183,7 @@ $lang->user->menu->sina   = 'Weibo Users|user|admin|provider=sina';
 $lang->user->menu->wechat = 'Wechat Users|user|admin|provider=wechat';
 $lang->user->menu->qq     = 'QQ Users|user|admin|provider=qq';
 $lang->user->menu->admin  = 'Admin Users|user|admin|admin=1';
+$lang->user->menu->group  = array('link' => 'Group|group|browse|', 'alias' => 'managepriv,managemember');
 $lang->user->menu->log    = 'Login logs|user|adminlog|';
 
 /* Menu of comment module. */
@@ -209,19 +210,19 @@ $lang->forum->menu->update = 'Update|forum|update|';
 /* Menu of site module. */
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
-$lang->site->menu->basic    = 'Basic|site|setbasic|';
-$lang->site->menu->lang     = 'Language|site|setlang|';
-$lang->site->menu->nav      = 'Navigation|nav|admin|';
-$lang->site->menu->security = 'Security|site|setsecurity|';
-$lang->site->menu->upload   = 'Uploads|site|setupload|';
-$lang->site->menu->tag      = 'Tags|tag|admin|';
-#$lang->site->menu->robots   = 'Robots|site|setrobots|';
-$lang->site->menu->oauth    = 'Open OAuth|site|setoauth|';
-$lang->site->menu->link     = 'Links|links|admin|';
-$lang->site->menu->mail     = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->site->menu->wechat   = array('link' => 'Wechat|wechat|admin|', 'alias' => 'create,setresponse');
-$lang->site->menu->group    = array('link' => 'Group|group|browse|', 'alias' => 'managepriv,managemember');
-$lang->site->menu->search   = 'Update Search Index|search|buildindex|';
+$lang->site->menu->basic      = 'Basic|site|setbasic|';
+$lang->site->menu->lang       = 'Language|site|setlang|';
+$lang->site->menu->nav        = 'Navigation|nav|admin|';
+$lang->site->menu->security   = 'Security|site|setsecurity|';
+$lang->site->menu->upload     = 'Uploads|site|setupload|';
+$lang->site->menu->tag        = 'Tags|tag|admin|';
+$lang->site->menu->recPerPage = 'Set Records Per Page|site|setRecPerPage|';
+#$lang->site->menu->robots    = 'Robots|site|setrobots|';
+$lang->site->menu->oauth      = 'Open OAuth|site|setoauth|';
+$lang->site->menu->link       = 'Links|links|admin|';
+$lang->site->menu->mail       = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->site->menu->wechat     = array('link' => 'Wechat|wechat|admin|', 'alias' => 'create,setresponse');
+$lang->site->menu->search     = 'Update Search Index|search|buildindex|';
 
 /* Menu of company module. */
 $lang->company->menu = new stdclass();
