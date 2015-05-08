@@ -491,26 +491,32 @@ class bookModel extends model
             $node->alias     = seo::unify($node->alias, '-');
             $node->keywords  = seo::unify($node->keywords, ',');
 
-           if($mode == 'new')
-           {
-               $node->editedDate = $now;
-               $this->dao->insert(TABLE_BOOK)->data($node)->exec();
+            if($mode == 'new')
+            {
+                $node->editedDate = $now;
+                $this->dao->insert(TABLE_BOOK)->data($node)->exec();
 
-               /* After saving, update it's path. */
-               $nodeID   = $this->dao->lastInsertID();
-               $nodePath = $parentNode->path . "$nodeID,";
-               $this->dao->update(TABLE_BOOK)->set('path')->eq($nodePath)->where('id')->eq($nodeID)->exec();
-           }
-           else
-           {
-               $nodeID = $key;
-               $node->editedDate = $now;
-               $node->editor     = $this->app->user->account;
-               $this->dao->update(TABLE_BOOK)->data($node)->autoCheck()->where('id')->eq($nodeID)->exec();
-           }
+                /* After saving, update it's path. */
+                $nodeID   = $this->dao->lastInsertID();
+                $nodePath = $parentNode->path . "$nodeID,";
+                $this->dao->update(TABLE_BOOK)->set('path')->eq($nodePath)->where('id')->eq($nodeID)->exec();
+            }
+            else
+            {
+                $nodeID = $key;
+                $node->editedDate = $now;
+                $node->editor     = $this->app->user->account;
+                $this->dao->update(TABLE_BOOK)->data($node)->autoCheck()->where('id')->eq($nodeID)->exec();
+            }
 
             /* Save keywords. */
             $this->loadModel('tag')->save($node->keywords);
+
+            if($node->type == 'article')
+            {
+                $article = $this->dao->select('*')->from(TABLE_BOOK)->where('id')->eq($nodeID)->fetch();
+                $this->loadModel('search')->save('book', $article);
+            }
         }
 
         return !dao::isError();
