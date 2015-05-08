@@ -660,7 +660,7 @@ function autoBlockGrid()
         else if(layout == 'vertical') cards.attr('class', 'col-lg-12');
         else
         {
-            if(recPerRow)
+            if(recPerRow && $(window).width() > 767)
             {
                 width = 1 / recPerRow * 100;
                 cards.attr('style', "width:" + width + '%');
