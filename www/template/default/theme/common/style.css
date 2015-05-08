@@ -467,7 +467,7 @@ body.body-modal {padding: 20px;}
 
 /* Search bar */
 .m-blog #searchbar {top: 30%;}
-@media (max-width: 767px) {.m-blog #searchbar {top: 30%; left: auto; right: 10px;}}
+@media (max-width: 767px) {.m-blog #searchbar {top: 2%; left: 10px; right: auto;}}
 
 /* Pager. */
 .pager {margin: 10px 0;line-height: 20px; color: #999}
