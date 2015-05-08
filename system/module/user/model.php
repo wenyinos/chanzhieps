@@ -221,7 +221,7 @@ class userModel extends model
             ->setIF($this->post->password1 == false, 'password', '')
             ->setIF($this->cookie->referer != '', 'referer', $this->cookie->referer)
             ->setIF($this->cookie->referer == '', 'referer', '')
-            ->remove('admin, ip')
+            ->remove('admin, ip, fingerprint')
             ->get();
         $user->password = $this->createPassword($this->post->password1, $user->account); 
 
