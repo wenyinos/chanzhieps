@@ -40,6 +40,7 @@ $lang->site->checkIP         = 'Check login IP';
 $lang->site->checkPosition   = 'Check login position';
 $lang->site->allowedIP       = 'Allowed IP list';
 $lang->site->allowedPosition = 'Allowed position';
+$lang->site->setsecurity     = 'Security setting';
 
 $lang->site->setBasic      = "Baisc";
 $lang->site->setLang       = "Languages";

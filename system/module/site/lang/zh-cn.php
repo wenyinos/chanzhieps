@@ -40,6 +40,7 @@ $lang->site->checkIP         = '检查登录IP';
 $lang->site->checkPosition   = '校验登录地区';
 $lang->site->allowedIP       = '允许登录IP';
 $lang->site->allowedPosition = '允许登录地区';
+$lang->site->setsecurity     = '安全设置';
 
 $lang->site->setBasic      = "基本信息设置";
 $lang->site->setLang       = "语言设置";
