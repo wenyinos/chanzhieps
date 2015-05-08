@@ -184,7 +184,7 @@ class group extends control
         }
         $group      = $this->group->getById($groupID);
         $groupUsers = $this->group->getUserPairs($groupID);
-        $allUsers   = $this->user->getPairs('admin');
+        $allUsers   = $this->user->getPairs('admin, noempty');
         $otherUsers = array_diff_assoc($allUsers, $groupUsers);
 
         $title      = $group->name . $this->lang->group->manageMember;

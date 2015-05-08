@@ -276,7 +276,7 @@ $lang->links->menu = $lang->site->menu;
 
 /* Menu of group module. */
 $lang->group = new stdclass();
-$lang->group->menu = $lang->site->menu;
+$lang->group->menu = $lang->user->menu;
 
 /* Menu of package module. */
 $lang->package = new stdclass();
