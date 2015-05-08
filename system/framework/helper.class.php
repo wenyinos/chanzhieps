@@ -267,7 +267,10 @@ class helper
     {
         if(is_array($ids)) 
         {
-            if(!get_magic_quotes_gpc()) { foreach ($ids as $key=>$value) { $ids[$key] = addslashes($value); } }
+            if(!get_magic_quotes_gpc())
+            {
+                foreach ($ids as $key=>$value)  $ids[$key] = addslashes($value); 
+            }
             return "IN ('" . join("','", $ids) . "')";
         }
 

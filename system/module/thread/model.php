@@ -316,7 +316,7 @@ class threadModel extends model
 
         /* Update board stats. */
         $this->loadModel('forum')->updateBoardStats($thread->board);
-        return !dao::isError();
+        return $this->loadModel('search')->deleteIndex('thread', $threadID);
     }
 
     /**

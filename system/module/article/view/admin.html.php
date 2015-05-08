@@ -37,11 +37,8 @@
         <?php endif;?>
         <th class='text-center w-160px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->article->addedDate);?></th>
         <th class='text-center w-70px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->article->views);?></th>
-        <?php if($type != 'page'):?>
-        <th class='text-center w-300px'>
-        <?php else:?>
-        <th class='text-center w-220px'>
-        <?php endif;?>
+        <?php $actionClass = $type == 'page' ? 'w-220px' : 'w-300px';?>
+        <th class='text-center <?php echo $actionClass;?>'>
           <?php echo $lang->actions;?>
         </th>
       </tr>
@@ -74,19 +71,19 @@
           <span class='dropdown'>
             <a data-toggle='dropdown' href='###'><?php echo $lang->article->sticks[$stick->sticky]; ?> <span class='caret'></span></a>
             <ul class='dropdown-menu' role='menu' aria-labelledby='dLabel'>
-            <?php
-            foreach($lang->article->sticks as $sticky => $label)
-            {
-                if($stick->sticky != $sticky)
-                {
-                    echo '<li>' . html::a(inlink('stick', "article=$stick->id&stick=$sticky"), $label, "class='jsoner'") . '</li>';
-                }
-                else
-                {
-                    echo '<li class="active"><a href="###">' . $label . '</a></li>';
-                }
-            }
-            ?>
+              <?php
+              foreach($lang->article->sticks as $sticky => $label)
+              {
+                  if($stick->sticky != $sticky)
+                  {
+                      echo '<li>' . html::a(inlink('stick', "article=$stick->id&stick=$sticky"), $label, "class='jsoner'") . '</li>';
+                  }
+                  else
+                  {
+                      echo '<li class="active"><a href="###">' . $label . '</a></li>';
+                  }
+              }
+              ?>
             </ul>
           </span>
           <?php endif;?>
@@ -121,18 +118,18 @@
             <a data-toggle='dropdown' href='###'><?php echo $lang->article->sticks[$article->sticky]; ?> <span class='caret'></span></a>
             <ul class='dropdown-menu' role='menu' aria-labelledby='dLabel'>
             <?php
-            foreach($lang->article->sticks as $stick => $label)
-            {
-                if($article->sticky != $stick)
-                {
-                    echo '<li>' . html::a(inlink('stick', "article=$article->id&stick=$stick"), $label, "class='jsoner'") . '</li>';
-                }
-                else
-                {
-                    echo '<li class="active"><a href="###">' . $label . '</a></li>';
-                }
-            }
-            ?>
+              foreach($lang->article->sticks as $stick => $label)
+              {
+                  if($article->sticky != $stick)
+                  {
+                      echo '<li>' . html::a(inlink('stick', "article=$article->id&stick=$stick"), $label, "class='jsoner'") . '</li>';
+                  }
+                  else
+                  {
+                      echo '<li class="active"><a href="###">' . $label . '</a></li>';
+                  }
+              }
+              ?>
             </ul>
           </span>
           <?php endif;?>

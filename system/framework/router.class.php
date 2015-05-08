@@ -1324,8 +1324,14 @@ class router
      */
     private function mergeParams($defaultParams, $passedParams)
     {
+        foreach($passedParams as $k => $v)
+        { 
+            if(in_array(strtolower($k), array('words', 'referer'), true)) continue;
+            if(!preg_match('/^[a-zA-Z0-9.]+$/', $v)) die('Wrong');
+        }
 
         $passedParams = array_values($passedParams);
+
         $i = 0;
         foreach($defaultParams as $key => $defaultValue)
         {

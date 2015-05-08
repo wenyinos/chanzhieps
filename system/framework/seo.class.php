@@ -103,7 +103,6 @@ class seo
             return seo::convertURI($module, 'view', $params, $pageID);
         }
 
-
         if($module == 'book' && count($items) > 2)
         {
             $uri      = str_replace('/' . $items[1], '', $uri );

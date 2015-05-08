@@ -9,8 +9,7 @@
  * @version     $Id$
  */
 ?>
-<?php
-include '../../common/view/header.lite.html.php';?>
+<?php include '../../common/view/header.lite.html.php';?>
 <div class='container'>
   <div class='modal-dialog w-450px'>
     <?php if($result == 'fail'):?>
