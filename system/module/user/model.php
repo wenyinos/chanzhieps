@@ -855,7 +855,7 @@ class userModel extends model
         $clientIP = helper::getRemoteIp();
         foreach($ips as $ip)
         {
-            if(ipInNetwork($clientIP, $ip)) return true;
+            if(helper::checkIpScope($clientIP, $ip)) return true;
         }
         return false;
     }

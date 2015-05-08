@@ -10,8 +10,17 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php include '../../common/view/header.admin.html.php';?>
+<?php include '../../common/view/header.modal.html.php';?>
 <?php js::set('position', $position)?>
+<?php if(isset($pass) and !$pass):?>
+<?php 
+$module = 'user';
+$method = 'edit';
+$url    = helper::safe64Encode($this->app->getURI());
+$target = 'self';
+include '../../mail/view/captcha.html.php';
+?>
+<?php else:?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-globe'></i> <?php echo $lang->site->setSecurity;?></strong></div>
   <div class='panel-body'>
@@ -56,4 +65,5 @@
     </form>
   </div>
 </div>
-<?php include '../../common/view/footer.admin.html.php';?>
+<?php endif;?>
+<?php include '../../common/view/footer.modal.html.php';?>

@@ -12,8 +12,9 @@
 $lang->block->common          = 'Block';
 $lang->block->id              = 'ID';
 $lang->block->title           = 'Title';
+$lang->block->amount          = 'Amount';
 $lang->block->limit           = 'Limit';
-$lang->block->recPerRow       = 'Number per row';
+$lang->block->recPerRow       = 'Amount per row';
 $lang->block->type            = 'Type';
 $lang->block->htmlcode        = 'html codes';
 $lang->block->phpcode         = 'php codes';
