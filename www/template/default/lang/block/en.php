@@ -99,9 +99,11 @@ $lang->block->default->regions->index_index['top']     = 'Top';
 $lang->block->default->regions->index_index['middle']  = 'Middle';
 $lang->block->default->regions->index_index['bottom']  = 'Bottom';
 
-$lang->block->default->regions->company_index['top']    = 'Top';
-$lang->block->default->regions->company_index['bottom'] = 'Bottom';
-$lang->block->default->regions->company_index['side']   = 'Side';
+$lang->block->default->regions->company_index['topBanner']    = 'TopBanner';
+$lang->block->default->regions->company_index['top']          = 'Top';
+$lang->block->default->regions->company_index['bottom']       = 'Bottom';
+$lang->block->default->regions->company_index['side']         = 'Side';
+$lang->block->default->regions->company_index['bottomBanner'] = 'BottomBanner';
 
 $lang->block->default->regions->article_browse['topBanner']    = 'TopBanner';
 $lang->block->default->regions->article_browse['top']          = 'Top';
