@@ -5,12 +5,12 @@ $lang->tag->link   = 'link';
 
 $lang->tag->admin     = 'Manage keywords';
 $lang->tag->editLink  = 'Edit Link';
-$lang->tag->related   = 'Related Project';
+$lang->tag->source    = 'Source';
 $lang->tag->inputLink = 'Please input link';
 $lang->tag->inputTag  = 'Please input tag';
 
-$lang->tag->relatedArticle  = 'Related Article';
-$lang->tag->relatedBlog     = 'Related Blog';
-$lang->tag->relatedPage     = 'Related Page';
-$lang->tag->relatedProduct  = 'Related Product';
-$lang->tag->relatedBook     = 'Related Book';
+$lang->tag->sourceList['article'] = 'Article';
+$lang->tag->sourceList['blog']    = 'Blog';
+$lang->tag->sourceList['page']    = 'Page';
+$lang->tag->sourceList['product'] = 'Product';
+$lang->tag->sourceList['book']    = 'Book';

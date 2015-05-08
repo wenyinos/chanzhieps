@@ -23,9 +23,10 @@ css::internal($product->css);
 js::execute($product->js);
 ?>
 <?php $common->printPositionBar($category, $product);?>
-<div class='row'><?php $this->block->printRegion($layouts, 'product_view', 'top', true);?></div>
+<div class='row'><?php $this->block->printRegion($layouts, 'product_view', 'topBanner', true);?></div>
 <div class='row'>
   <div class='col-md-9 col-main'>
+    <div class='row'><?php $this->block->printRegion($layouts, 'product_view', 'top', true);?></div>
     <div class='panel panel-body panel-product'>
       <div class='row'>
         <?php if(!empty($product->image->list)):?>
@@ -119,9 +120,9 @@ js::execute($product->js);
               <label class='btn-cart'><?php echo $lang->product->addToCart;?></label>
             </span>
             <?php endif;?>
-            <?php if($product->mall):?>
+            <?php if(!commonModel::isAvailable('order') and $product->mall):?>
             <hr>
-            <div class='btn-buy'>
+            <div class='btn-gobuy'>
             <?php echo html::a(inlink('redirect', "id={$product->id}"), $lang->product->buyNow, "class='btn btn-lg btn-primary' target='_blank'");?>
             </div>
             <?php endif;?>
@@ -142,11 +143,12 @@ js::execute($product->js);
       <?php echo html::a('', '', "name='comment'");?>
     </div>
     <?php endif;?>
+    <div class='row'><?php $this->block->printRegion($layouts, 'product_view', 'bottom', true);?></div>
   </div>
   <div class='col-md-3 col-side'>
     <side class='page-side'><?php $this->block->printRegion($layouts, 'product_view', 'side');?></side>
   </div>
 </div>
-<div class='row'><?php $this->block->printRegion($layouts, 'product_view', 'bottom', true);?></div>
+<div class='row'><?php $this->block->printRegion($layouts, 'product_view', 'bottomBanner', true);?></div>
 <?php include TPL_ROOT . 'common/jplayer.html.php'; ?>
 <?php include TPL_ROOT . 'common/footer.html.php'; ?>

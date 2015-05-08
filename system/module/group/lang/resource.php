@@ -46,6 +46,10 @@ $lang->moduleOrder[100] = 'package';
 $lang->moduleOrder[105] = 'tree';
 $lang->moduleOrder[110] = 'file';
 
+$lang->moduleOrder[115] = 'search';
+
+$lang->moduleOrder[120] = 'order';
+
 $lang->resource = new stdclass();
 
 /* Admin module. */
@@ -234,3 +238,17 @@ $lang->resource->wechat->commitMenu     = 'commitMenu';
 $lang->resource->wechat->deleteMenu     = 'deleteMenu';
 $lang->resource->wechat->message        = 'messageList';
 $lang->resource->wechat->qrcode         = 'qrcode';
+
+/* Order module. */
+if(!isset($lang->resource->order))$lang->resource->order = new stdclass();
+$lang->resource->order->admin         = 'admin';
+$lang->resource->order->delivery      = 'delivery';
+$lang->resource->order->finish        = 'finish';
+$lang->resource->order->pay           = 'pay';
+$lang->resource->order->setting       = 'setting';
+
+/* Search module. */
+if(!isset($lang->resource->search))$lang->resource->search = new stdclass();
+$lang->resource->search->buildIndex   = 'buildIndex';
+
+
