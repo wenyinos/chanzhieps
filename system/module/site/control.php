@@ -121,7 +121,7 @@ class site extends control
             $ips = empty($_POST['allowedIP']) ? array() : explode(',', $this->post->allowedIP);
             foreach($ips as $ip)
             {
-                if(!empty($ip) and !isIPOrNetwork($ip)) 
+                if(!empty($ip) and !helper::checkIP($ip)) 
                 {
                     dao::$errors['allowedIP'][] = $this->lang->site->wrongAllowedIP;
                     break;
