@@ -98,6 +98,17 @@ class commonModel extends model
             die(js::locate(helper::createLink('user', 'login', "referer=$referer")));
         }
 
+        /* if remote ip not equal loginIP, go to login page. */
+        if(RUN_MODE == 'admin' and isset($this->config->site->checkIP) and $this->config->site->checkIP == 'open')
+        {
+            if(helper::getRemoteIP() != $this->app->user->loginIP)
+            {
+                session_destroy();
+                $referer = helper::safe64Encode($this->app->getURI(true));
+                die(js::locate(helper::createLink('user', 'login', "referer=$referer")));
+            }
+        }
+
         /* Check the priviledge. */
         if(!commonModel::hasPriv($module, $method)) $this->deny($module, $method);
     }

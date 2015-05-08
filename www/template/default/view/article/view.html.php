@@ -11,9 +11,10 @@ css::internal($article->css);
 js::execute($article->js);
 ?>
 <?php $common->printPositionBar($category, $article);?>
-<div class='row'><?php $this->block->printRegion($layouts, 'article_view', 'top', true);?></div>
+<div class='row'><?php $this->block->printRegion($layouts, 'article_view', 'topBanner', true);?></div>
 <div class='row'>
   <div class='col-md-9 col-main'>
+    <div class='row'><?php $this->block->printRegion($layouts, 'article_view', 'top', true);?></div>
     <div class='article'>
       <header>
         <h1><?php echo $article->title;?></h1>
@@ -76,12 +77,13 @@ js::execute($article->js);
         </ul>
       </footer>
     </div>
+    <div class='row'><?php $this->block->printRegion($layouts, 'article_view', 'bottom', true);?></div>
     <?php if(commonModel::isAvailable('message')):?>
     <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=article&objectID={$article->id}");?></div>
     <?php endif;?>
   </div>
   <div class='col-md-3 col-side'><?php $this->block->printRegion($layouts, 'article_view', 'side');?></div>
 </div>
-<div class='row'><?php $this->block->printRegion($layouts, 'article_view', 'bottom', true);?></div>
+<div class='row'><?php $this->block->printRegion($layouts, 'article_view', 'bottomBanner', true);?></div>
 <?php include TPL_ROOT . 'common/jplayer.html.php'; ?>
 <?php include TPL_ROOT . 'common/footer.html.php'; ?>

@@ -19,10 +19,11 @@ js::set('categoryID', $category->id);
 include TPL_ROOT . 'common/treeview.html.php';
 ?>
 <?php echo $common->printPositionBar($category, isset($product) ? $product : '');?>
-<div class='row'><?php $this->block->printRegion($layouts, 'product_browse', 'top', true);?></div>
+<div class='row'><?php $this->block->printRegion($layouts, 'product_browse', 'topBanner', true);?></div>
 <div class='row'>
   <div class='col-md-9 col-main'>
     <div class='list list-condensed'>
+    <div class='row'><?php $this->block->printRegion($layouts, 'product_browse', 'top', true);?></div>
       <header><h2><i class='icon-th'></i> <?php echo $category->name;?></h2></header>
       <section class='cards cards-products cards-borderless'>
         <?php foreach($products as $product):?>
@@ -68,10 +69,11 @@ include TPL_ROOT . 'common/treeview.html.php';
         <?php $pager->show('right', 'short');?>
       </footer>
     </div>
+    <div class='row'><?php $this->block->printRegion($layouts, 'product_browse', 'bottom', true);?></div>
   </div>
   <div class='col-md-3 col-side'>
     <side class='page-side'><?php $this->block->printRegion($layouts, 'product_browse', 'side');?></side>
   </div>
 </div>
-<div class='row'><?php $this->block->printRegion($layouts, 'product_browse', 'bottom', true);?></div>
+<div class='row'><?php $this->block->printRegion($layouts, 'product_browse', 'bottomBanner', true);?></div>
 <?php include TPL_ROOT . 'common/footer.html.php';?>

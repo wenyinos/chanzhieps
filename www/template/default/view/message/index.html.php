@@ -12,9 +12,10 @@
 ?>
 <?php include TPL_ROOT . 'common/header.html.php';?>
 <?php $common->printPositionBar();?>
-<div class='row'><?php $this->block->printRegion($layouts, 'message_index', 'top', true);?></div>
+<div class='row'><?php $this->block->printRegion($layouts, 'message_index', 'topBanner', true);?></div>
 <div class='row'>
   <div class='col-md-9 col-main'>
+    <div class='row'><?php $this->block->printRegion($layouts, 'message_index', 'top', true);?></div>
     <?php if(!empty($messages)):?>
     <?php $class = 'success';?>
     <?php foreach($messages as $number => $message):?>
@@ -102,6 +103,7 @@
         </form>
       </div>
     </div>
+    <div class='row'><?php $this->block->printRegion($layouts, 'message_index', 'bottom', true);?></div>
   </div>
   <div class='col-md-3 col-side'>
     <div class='nav'>
@@ -110,5 +112,5 @@
     <?php $this->block->printRegion($layouts, 'message_index', 'side');?>
   </div>
 </div>
-<div class='row'><?php $this->block->printRegion($layouts, 'message_index', 'bottom', true);?></div>
+<div class='row'><?php $this->block->printRegion($layouts, 'message_index', 'bottomBanner', true);?></div>
 <?php include TPL_ROOT . 'common/footer.html.php';?>
