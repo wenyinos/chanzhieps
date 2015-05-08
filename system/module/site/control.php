@@ -108,6 +108,14 @@ class site extends control
      */
     public function setSecurity()
     {
+        $check  = $this->loadModel('mail')->checkEmailSetting();
+        $okFile = $this->loadModel('common')->verfyAdmin();
+        $pass   = $this->mail->checkVerify();
+        $this->view->check  = $check;
+        $this->view->pass   = $pass;
+        $this->view->okFile = $okFile;
+        if(!empty($_POST) && !$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha'));
+
         if(!empty($_POST))
         {
             $setting = fixer::input('post')
