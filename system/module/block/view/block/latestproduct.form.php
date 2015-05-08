@@ -17,12 +17,14 @@
   <td><?php echo html::select('params[category][]', $categories, isset($block->content->category) ? $block->content->category : '', "class='text-4 form-control chosen' multiple='multiple'");?></td>
 </tr>
 <tr>
-  <th><?php echo $lang->block->limit;?></th>
-  <td><?php echo html::input('params[limit]', isset($block->content->limit) ? $block->content->limit : '', "class='text-4 form-control'");?></td>
-</tr>
-<tr>
-  <th><?php echo $lang->block->recPerRow;?></th>
-  <td><?php echo html::input('params[recPerRow]', isset($block->content->recPerRow) ? $block->content->recPerRow : '', "class='text-4 form-control'");?></td>
+  <th><?php echo $lang->block->amount;?></th>
+  <td>
+    <div class='input-group'>
+      <span class='input-group-addon'><?php echo $lang->block->limit;?></span>
+      <?php echo html::input('params[limit]', isset($block->content->limit) ? $block->content->limit : '', "class='text-4 form-control'");?>
+      <span class='input-group-addon'><?php echo $lang->block->recPerRow;?></span>
+      <?php echo html::input('params[recPerRow]', isset($block->content->recPerRow) ? $block->content->recPerRow : '', "class='text-4 form-control'");?>
+    </div>
 </tr>
 <tr>
   <th><?php echo $lang->block->showImage;?></th>
