@@ -408,7 +408,8 @@ class userModel extends model
         $user = $this->identify($account, $password);
         if(!$user) return false;
 
-        $user->rights = $this->authorize($user);
+        $user->rights  = $this->authorize($user);
+        $user->loginIP = helper::getRemoteIP();
         $this->session->set('user', $user);
         $this->app->user = $this->session->user;
 
