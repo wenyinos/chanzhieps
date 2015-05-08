@@ -80,6 +80,7 @@ $lang->site->moduleAvailable['forum']   = 'Forum';
 $lang->site->moduleAvailable['blog']    = 'Blog';
 $lang->site->moduleAvailable['book']    = 'Book';
 $lang->site->moduleAvailable['message'] = 'Message';
+$lang->site->moduleAvailable['search']  = 'search';
 $lang->site->moduleAvailable['shop']    = 'shop';
 
 $lang->site->metaHolder       = 'Tags liek <meta>, <script>, <style>, <link> is accepted.';
