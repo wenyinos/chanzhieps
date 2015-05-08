@@ -43,4 +43,5 @@
 </div>
 <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=book&objectID=$article->id");?></div>
 <?php $this->block->printRegion($layouts, 'book_read', 'bottom');?>
+<?php include TPL_ROOT . 'common/jplayer.html.php'; ?>
 <?php include TPL_ROOT . 'common/footer.html.php'; ?>
