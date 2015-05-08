@@ -120,9 +120,9 @@ js::execute($product->js);
               <label class='btn-cart'><?php echo $lang->product->addToCart;?></label>
             </span>
             <?php endif;?>
-            <?php if($product->mall):?>
+            <?php if(!commonModel::isAvailable('order') and $product->mall):?>
             <hr>
-            <div class='btn-buy'>
+            <div class='btn-gobuy'>
             <?php echo html::a(inlink('redirect', "id={$product->id}"), $lang->product->buyNow, "class='btn btn-lg btn-primary' target='_blank'");?>
             </div>
             <?php endif;?>

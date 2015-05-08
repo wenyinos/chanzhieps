@@ -40,6 +40,7 @@ $lang->site->checkIP         = '检查登录IP';
 $lang->site->checkPosition   = '校验登录地区';
 $lang->site->allowedIP       = '允许登录IP';
 $lang->site->allowedPosition = '允许登录地区';
+$lang->site->setsecurity     = '安全设置';
 
 $lang->site->setBasic      = "基本信息设置";
 $lang->site->setLang       = "语言设置";
@@ -80,6 +81,7 @@ $lang->site->moduleAvailable['forum']   = '论坛';
 $lang->site->moduleAvailable['blog']    = '博客';
 $lang->site->moduleAvailable['book']    = '手册';
 $lang->site->moduleAvailable['message'] = '评论留言';
+$lang->site->moduleAvailable['search']  = '搜索';
 $lang->site->moduleAvailable['shop']    = '商城';
 
 $lang->site->metaHolder       = '可放置<meta><script><style>和<link>标签。';

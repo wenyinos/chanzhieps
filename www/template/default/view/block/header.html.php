@@ -32,6 +32,7 @@
       </nav>
     </div>
   </div>
+  <?php if(commonModel::isAvailable('search')):?>
   <div id='searchbar'>
     <form action='<?php echo helper::createLink('search')?>' method='get' role='search'>
       <div class='input-group'>
@@ -44,4 +45,5 @@
       </div>
     </form>
   </div>
+  <?php endif;?>
 </header>

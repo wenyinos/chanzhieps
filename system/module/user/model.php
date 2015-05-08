@@ -776,7 +776,7 @@ class userModel extends model
         $data->ip          = $ip;
         $data->position    = is_array($position) ? join(' ', $position) : $position;
         $data->browser     = helper::getBrowser() . ' ' . helper::getBrowserVersion();
-        $data->fingerprint = '';
+        $data->fingerprint = $this->post->fingerprint ? $this->post->fingerprint : $this->session->fingerprint;
         $data->type        = 'adminlogin';
         $data->desc        = $result;
         $data->lang        = 'all';

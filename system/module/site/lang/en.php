@@ -40,6 +40,7 @@ $lang->site->checkIP         = 'Check login IP';
 $lang->site->checkPosition   = 'Check login position';
 $lang->site->allowedIP       = 'Allowed IP list';
 $lang->site->allowedPosition = 'Allowed position';
+$lang->site->setsecurity     = 'Security setting';
 
 $lang->site->setBasic      = "Baisc";
 $lang->site->setLang       = "Languages";
@@ -80,6 +81,7 @@ $lang->site->moduleAvailable['forum']   = 'Forum';
 $lang->site->moduleAvailable['blog']    = 'Blog';
 $lang->site->moduleAvailable['book']    = 'Book';
 $lang->site->moduleAvailable['message'] = 'Message';
+$lang->site->moduleAvailable['search']  = 'search';
 $lang->site->moduleAvailable['shop']    = 'shop';
 
 $lang->site->metaHolder       = 'Tags liek <meta>, <script>, <style>, <link> is accepted.';

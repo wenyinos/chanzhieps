@@ -46,6 +46,10 @@ $lang->moduleOrder[100] = 'package';
 $lang->moduleOrder[105] = 'tree';
 $lang->moduleOrder[110] = 'file';
 
+$lang->moduleOrder[115] = 'search';
+
+$lang->moduleOrder[120] = 'order';
+
 $lang->resource = new stdclass();
 
 /* Admin module. */
@@ -169,11 +173,13 @@ $lang->resource->reply->deleteFile = 'deleteFile';
 
 /* Site module. */
 $lang->resource->site = new stdclass();
-$lang->resource->site->setBasic  = 'setBasic';
-$lang->resource->site->setLang   = 'setLang';
-$lang->resource->site->setRobots = 'setRobots';
-$lang->resource->site->setUpload = 'setUpload';
-$lang->resource->site->setOauth  = 'setOauth';
+$lang->resource->site->setBasic      = 'setBasic';
+$lang->resource->site->setLang       = 'setLang';
+$lang->resource->site->setRobots     = 'setRobots';
+$lang->resource->site->setUpload     = 'setUpload';
+$lang->resource->site->setOauth      = 'setOauth';
+$lang->resource->site->setRecPerPage = 'setRecPerPage';
+$lang->resource->site->setsecurity   = 'setsecurity';
 
 /* Slide module. */
 $lang->resource->slide = new stdclass();
@@ -215,9 +221,10 @@ $lang->resource->ui->deleteLogo    = 'deleteLogo';
 
 /* User module. */
 $lang->resource->user = new stdclass();
-$lang->resource->user->admin   = 'list';
-$lang->resource->user->edit    = 'edit';
-$lang->resource->user->forbid  = 'forbid';
+$lang->resource->user->admin    = 'list';
+$lang->resource->user->edit     = 'edit';
+$lang->resource->user->forbid   = 'forbid';
+$lang->resource->user->adminlog = 'adminlog';
 
 /* Wechat module. */
 $lang->resource->wechat = new stdclass();
@@ -234,3 +241,17 @@ $lang->resource->wechat->commitMenu     = 'commitMenu';
 $lang->resource->wechat->deleteMenu     = 'deleteMenu';
 $lang->resource->wechat->message        = 'messageList';
 $lang->resource->wechat->qrcode         = 'qrcode';
+
+/* Order module. */
+if(!isset($lang->resource->order))$lang->resource->order = new stdclass();
+$lang->resource->order->admin         = 'admin';
+$lang->resource->order->delivery      = 'delivery';
+$lang->resource->order->finish        = 'finish';
+$lang->resource->order->pay           = 'pay';
+$lang->resource->order->setting       = 'setting';
+
+/* Search module. */
+if(!isset($lang->resource->search))$lang->resource->search = new stdclass();
+$lang->resource->search->buildIndex   = 'buildIndex';
+
+

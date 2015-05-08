@@ -63,6 +63,7 @@ $lang->user->submit          = "提交";
 $lang->user->forbid          = '禁用';
 $lang->user->activate        = '解禁';
 $lang->user->pullWechatFans  = '更新微信会员数据';
+$lang->user->adminlog        = '登录日志';
 
 $lang->user->profile     = '个人信息';
 $lang->user->editProfile = '编辑信息';
