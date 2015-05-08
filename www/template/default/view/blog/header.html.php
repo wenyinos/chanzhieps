@@ -127,6 +127,7 @@ else
         <?php endif;?>
       </div>
     </div>
+    <?php if(commonModel::isAvailable('search')):?>
     <div id='searchbar'>
       <form action='<?php echo helper::createLink('search')?>' method='get' role='search'>
         <div class='input-group'>
@@ -139,6 +140,7 @@ else
         </div>
       </form>
     </div>
+    <?php endif;?>
   </header>
   <nav id="blogNav" class="navbar navbar-default" role="navigation">
     <div class='wrapper'>

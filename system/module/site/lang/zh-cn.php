@@ -80,6 +80,7 @@ $lang->site->moduleAvailable['forum']   = '论坛';
 $lang->site->moduleAvailable['blog']    = '博客';
 $lang->site->moduleAvailable['book']    = '手册';
 $lang->site->moduleAvailable['message'] = '评论留言';
+$lang->site->moduleAvailable['search']  = '搜索';
 $lang->site->moduleAvailable['shop']    = '商城';
 
 $lang->site->metaHolder       = '可放置<meta><script><style>和<link>标签。';

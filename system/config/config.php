@@ -87,6 +87,7 @@ $config->dependence->cart[]    = 'shop';
 $config->dependence->address[] = 'shop';
 $config->dependence->order[]   = 'shop';
 $config->dependence->order[]   = 'user';
+$config->dependence->search[]  = 'search';
 
 /* Database settings. */
 $config->db = new stdclass();          
