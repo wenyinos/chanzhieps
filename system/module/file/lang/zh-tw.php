@@ -37,8 +37,10 @@ $lang->file->downloads = '下載次數';
 $lang->file->publics[0] = '需要登錄';
 $lang->file->publics[1] = '允許';
 
-$lang->file->edit       = '編輯';
-$lang->file->editFile   = '更改附件';
+$lang->file->sort        = '排序';
+$lang->file->edit        = '編輯';
+$lang->file->editFile    = '更改附件';
+$lang->file->fileManager = '檔案管理';
 
 $lang->file->errorUnwritable  = '上傳目錄不可寫，無法上傳附件。';
 $lang->file->noAccess         = '不允許訪問。';

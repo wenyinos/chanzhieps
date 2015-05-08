@@ -14,6 +14,7 @@ $lang->user->common    = '用戶';
 $lang->user->id        = '編號';
 $lang->user->account   = '用戶名';
 $lang->user->admin     = '管理員';
+$lang->user->oldPwd    = '原密碼';
 $lang->user->password  = '密碼';
 $lang->user->password2 = '請重複密碼';
 $lang->user->realname  = '真實姓名';
@@ -62,6 +63,7 @@ $lang->user->submit          = "提交";
 $lang->user->forbid          = '禁用';
 $lang->user->activate        = '解禁';
 $lang->user->pullWechatFans  = '更新微信會員數據';
+$lang->user->adminlog        = '登錄日誌';
 
 $lang->user->profile     = '個人信息';
 $lang->user->editProfile = '編輯信息';
@@ -80,6 +82,7 @@ $lang->user->searchUser          = '搜索';
 
 $lang->user->errorDeny       = "抱歉，您無權訪問『<b>%s</b>』模組的『<b>%s</b>』功能。請聯繫管理員獲取權限。點擊後退返回上頁。<br/> 5秒鐘後將自動返迴首頁...";
 $lang->user->loginFailed     = "登錄失敗，請檢查您的用戶名或密碼是否填寫正確。";
+$lang->user->identifyFailed  = "驗證失敗，請檢查您的密碼是否正確。";
 $lang->user->locked          = "用戶已經被鎖定，請%s後再重新嘗試登錄";
 $lang->user->lockedForEver   = "用戶已經被永久禁用。";
 $lang->user->lblRegistered   = '恭喜您，已經成功註冊。';
@@ -88,6 +91,7 @@ $lang->user->forbidFail      = '禁用失敗';
 $lang->user->activateSuccess = '解除禁用成功';
 $lang->user->activateFail    = '解除禁用失敗';
 $lang->user->pullSuccess     = '獲取微信會員成功';
+$lang->user->wrongPwd        = '密碼錯誤';
 
 $lang->user->forbidUser          = '禁用管理';
 $lang->user->forbidDate = array();
@@ -98,6 +102,10 @@ $lang->user->forbidDate['7']     = '一周';
 $lang->user->forbidDate['30']    = '一個月';
 $lang->user->forbidDate['3000']  = '永久';
 $lang->user->operate             = '操作';
+
+$lang->user->adminList['super']  = '超級管理員';
+$lang->user->adminList['common'] = '管理員';
+$lang->user->adminList['no']     = '普通會員';
 
 $lang->user->genderList = new stdclass();
 $lang->user->genderList->m = '男';
@@ -168,3 +176,25 @@ $lang->user->control->menus[20] = '<i class="icon-edit"></i> 編輯信息 <i cla
 $lang->user->control->menus[28] = '<i class="icon-comments-alt"></i> 我的消息 <i class="icon-chevron-right"></i>|user|message';
 $lang->user->control->menus[30] = '<i class="icon-share"></i> 我的主題 <i class="icon-chevron-right"></i>|user|thread';
 $lang->user->control->menus[40] = '<i class="icon-mail-reply"></i> 我的回帖 <i class="icon-chevron-right"></i>|user|reply';
+
+if(commonModel::isAvailable('order'))
+{
+    $lang->user->control->menus[25] = '<i class="icon-shopping-cart"></i> 我的訂單 <i class="icon-chevron-right"></i>|order|browse';
+    $lang->user->control->menus[26] = '<i class="icon-map-marker"> </i> 地址管理 <i class="icon-chevron-right"></i>|address|browse';
+}
+
+$lang->user->log = new stdclass();
+$lang->user->log->common = '日誌';
+$lang->user->log->list   = '管理員登錄日誌';
+
+$lang->user->log->id          = 'ID';
+$lang->user->log->account     = '用戶';
+$lang->user->log->browser     = '瀏覽器';
+$lang->user->log->fingerprint = '瀏覽器指紋';
+$lang->user->log->ip          = 'IP';
+$lang->user->log->position    = '登錄地址';
+$lang->user->log->date        = '登錄時間';
+$lang->user->log->desc        = '描述';
+
+$lang->user->ipDenied       = '登錄IP受限，請按提示操作。';
+$lang->user->positionDenied = '登錄地區受限，請按提示操作。';

@@ -31,7 +31,7 @@ $lang->article->status     = '狀態';
 $lang->article->type       = '類型';
 $lang->article->views      = '閲讀';
 $lang->article->comments   = '評論';
-$lang->article->stick      = '置頂級別';
+$lang->article->stick      = '置頂';
 $lang->article->order      = '排序';
 $lang->article->isLink     = '跳轉';
 $lang->article->link       = '連結';
@@ -41,6 +41,8 @@ $lang->article->js         = 'JS';
 $lang->article->list       = '文章列表';
 $lang->article->admin      = '維護文章';
 $lang->article->create     = '發佈文章';
+$lang->article->setcss     = '設置CSS';
+$lang->article->setjs      = '設置JS';
 $lang->article->edit       = '編輯文章';
 $lang->article->files      = '附件';
 $lang->article->images     = '圖片';
@@ -61,6 +63,13 @@ $lang->article->sourceList['translational'] = '翻譯';
 
 $lang->article->statusList['normal'] = '正常';
 $lang->article->statusList['draft']  = '草稿';
+
+$lang->article->sticks[0] = '不置頂';
+$lang->article->sticks[1] = '類目置頂';
+$lang->article->sticks[2] = '全局置頂';
+
+$lang->article->successStick   = '置頂成功';
+$lang->article->successUnstick = '取消置頂成功';
 
 $lang->article->confirmDelete = '您確定刪除該文章嗎？';
 

@@ -19,4 +19,5 @@ $lang->reply->files     = '附件：';
 $lang->reply->addedDate = '回覆時間';
 $lang->reply->admin     = '回帖列表';
 
-$lang->reply->edit = '編輯回帖';
+$lang->reply->edit       = '編輯回帖';
+$lang->reply->deleteFile = '刪除附件';

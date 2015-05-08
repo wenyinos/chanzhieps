@@ -1,6 +1,10 @@
 <?php 
-$lang->admin->shortcuts = new stdclass();
+$lang->admin->common        = '後台管理';
+$lang->admin->index         = '首頁';
+$lang->admin->ignore        = '忽略安全警告';
+$lang->admin->ignoreupgrade = '忽略升級提示';
 
+$lang->admin->shortcuts = new stdclass();
 $lang->admin->shortcuts->article  = '發佈文章';
 $lang->admin->shortcuts->product  = '添加產品';
 $lang->admin->shortcuts->feedback = '處理反饋';

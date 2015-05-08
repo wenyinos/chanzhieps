@@ -37,25 +37,27 @@ $lang->order->totalToPay     = "共計：<strong id='amount' class='text-danger'
 $lang->order->payInfo        = "%s %s 商品訂單";
 $lang->order->goToBank       = "請到網上銀行完成支付。";
 $lang->order->track          = '查看物流';
-$lang->order->life           = '訂單跟踪';
+$lang->order->life           = '訂單跟蹤';
 $lang->order->days           = '天';
 
-$lang->order->confirmLimit         = '確認收貨週期';
+$lang->order->confirmLimit         = '確認收貨周期';
 $lang->order->confirmReceived      = '確認收貨';
-$lang->order->deliveryConfirmed    = '您的訂單已經收貨成功。！';
-$lang->order->confirmWarning       = "<span class='text-danger'>請收到貨後，再確認收貨！否則您可能前貨兩空！</span>";
+$lang->order->deliveryConfirmed    = '您的訂單已經確認收貨成功！';
+$lang->order->confirmWarning       = "<span class='text-danger'>請收到貨後，再確認收貨！否則您可能錢貨兩空！</span>";
 $lang->order->cancelWarning        = "確認取消訂單？";
 $lang->order->cancelSuccess        = "訂單已取消";
 $lang->order->paymentRequired      = '需要至少一種交易方式';
-$lang->order->confirmLimitRequired = '需要設定確認收貨週期';
-$lang->order->finishWarning        = "确认完成";
+$lang->order->confirmLimitRequired = '需要設定確認收貨周期';
+$lang->order->finishWarning        = "確認完成";
 
-$lang->order->alipayPid = '合作者ID';
-$lang->order->alipayKey = '合作者KEY';
+$lang->order->alipayPid   = '合作者ID';
+$lang->order->alipayKey   = '合作者KEY';
+$lang->order->alipayEmail = '支付寶郵箱';
 
 $lang->order->placeholder = new stdclass();
-$lang->order->placeholder->pid = '合作身份者id，以2088开头的16位纯数字';
-$lang->order->placeholder->key = '安全检验码，以数字和字母组成的32位字符';
+$lang->order->placeholder->pid   = '合作身份者id，以2088開頭的16位純數字';
+$lang->order->placeholder->key   = '安全檢驗碼，以數字和字母組成的32位字元';
+$lang->order->placeholder->email = '支付寶商家郵箱';
 
 $lang->order->paymentList = array();
 $lang->order->paymentList['alipay'] = '支付寶支付';
