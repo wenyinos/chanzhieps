@@ -24,12 +24,13 @@ $(document).ready(function()
         </div>
         <div class="modal-body">
   <?php endif;?>
-  <form class='form-inline' id='sendMailForm' action="<?php echo $this->createLink('mail', 'captcha', "type=$type&url=$url&target=$target&account=$account");?>" method='post'>
+  <form class='form-inline' id='sendMailForm' action="<?php echo $this->createLink('mail', 'captcha', "module=$module&method=$method&url=$url&target=$target&account=$account");?>" method='post'>
     <div class='alert'>
       <?php $refUrl = helper::safe64Decode($url) == 'close' ? $this->app->getURI() : helper::safe64Decode($url);?>
+      <?php $action = isset($lang->$module->$method->common) ? $lang->$module->$method->common : $lang->$module->$method;?>
       <?php $fileBtn = html::a($refUrl, $lang->confirm, "class='btn btn-mini btn-primary okFile'")?>
       <?php $mailBtn = $check['result'] == 'success' ? html::submitButton($this->lang->send, 'btn btn-mini btn-primary') . html::hidden('sendMail', 1) : $check['message'];?>
-      <?php echo sprintf($lang->mail->sendNotice, $type, $okFile['okFile'], $fileBtn, $email, $mailBtn);?>
+      <?php echo sprintf($lang->mail->sendNotice, $action, $okFile['okFile'], $fileBtn, $email, $mailBtn);?>
     </div>
   </form>
   <script>

@@ -20,6 +20,7 @@ $(document).ready(function()
         {
             if(response.locate == 'close')
             {
+                $('#formError').remove();
                 return setTimeout(function(){$('#ajaxModal button.close').click()}, 1200);
             }
             if(response.target == 'modal')
