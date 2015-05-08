@@ -149,6 +149,12 @@ class site extends control
      */
     public function setRecPerPage()
     {
+        $this->app->loadConfig('article');
+        $this->app->loadConfig('product');
+        $this->app->loadConfig('blog');
+        $this->app->loadConfig('forum');
+        $this->app->loadConfig('reply');
+        $this->app->loadConfig('message');
         if(!empty($_POST))
         {
             $setting = fixer::input('post')->get();
