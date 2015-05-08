@@ -179,6 +179,7 @@ $lang->resource->site->setRobots     = 'setRobots';
 $lang->resource->site->setUpload     = 'setUpload';
 $lang->resource->site->setOauth      = 'setOauth';
 $lang->resource->site->setRecPerPage = 'setRecPerPage';
+$lang->resource->site->setsecurity   = 'setsecurity';
 
 /* Slide module. */
 $lang->resource->slide = new stdclass();
