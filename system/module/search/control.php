@@ -48,7 +48,15 @@ class search extends control
      */
     public function buildIndex()
     {
-        $this->search->buildAllIndex();
-        $this->send(array('result' => 'success', 'message' => $this->lang->search->buildSuccessfully));
+        //$this->search->buildAllIndex();
+        if(helper::isAjaxRequest())
+        {
+            $this->send(array('result' => 'success', 'message' => $this->lang->search->buildSuccessfully));
+        }
+        else
+        {
+            echo js::alert($this->lang->search->buildSuccessfully);
+            die("<script>history.go(-1)</script>");
+        }
     }
 }
