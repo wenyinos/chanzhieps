@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
+$lang->forum->common      = '論壇';
 $lang->forum->board       = '版塊';
 $lang->forum->owners      = '版主';
 $lang->forum->threadList  = '主題列表';

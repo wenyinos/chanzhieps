@@ -4,9 +4,13 @@ $lang->book->list         = '手冊列表';
 $lang->book->articles     = '文檔導航';
 $lang->book->backtolist   = '返回手冊列表';
 
-$lang->book->createBook  = '添加手冊';
-$lang->book->create      = '添加';
-$lang->book->catalog     = '章節';
+$lang->book->admin      = '手冊列表';
+$lang->book->createBook = '添加手冊';
+$lang->book->create     = '添加';
+$lang->book->catalog    = '章節';
+$lang->book->edit       = '編輯';
+$lang->book->sort       = '排序';
+
 $lang->book->id          = '編號';
 $lang->book->type        = '類型';
 $lang->book->parent      = '類目';

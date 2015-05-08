@@ -12,7 +12,9 @@
 $lang->block->common          = '區塊維護';
 $lang->block->id              = '編號';
 $lang->block->title           = '名稱';
-$lang->block->limit           = '數量';
+$lang->block->amount          = '數量';
+$lang->block->limit           = '總數量';
+$lang->block->recPerRow       = '每行數量';
 $lang->block->type            = '類型';
 $lang->block->htmlcode        = 'html代碼';
 $lang->block->phpcode         = 'php代碼';
@@ -28,6 +30,7 @@ $lang->block->product         = '產品';
 $lang->block->titleless       = '無標題';
 $lang->block->borderless      = '無邊框';
 $lang->block->icon            = '表徵圖';
+$lang->block->padding         = '內邊距';
 $lang->block->border          = '邊框';
 $lang->block->grid            = '寬度';
 $lang->block->more            = '更多';
@@ -47,6 +50,8 @@ $lang->block->customStyleTip  = '在這裡調整區塊的顏色及背景';
 $lang->block->style           = '樣式';
 $lang->block->sort            = '排序';
 
+$lang->block->admin        = "區塊管理";
+$lang->block->pages        = "佈局設置";
 $lang->block->add          = "添加";
 $lang->block->addChild     = "子區塊";
 $lang->block->template     = "模板";
@@ -56,10 +61,17 @@ $lang->block->browseRegion = '佈局設置';
 $lang->block->edit         = '編輯區塊';
 $lang->block->view         = '查看區塊';
 $lang->block->setPage      = '配置頁面';
+$lang->block->setregion    = '配置佈局';
+
+$lang->block->paddingTop    = '上';
+$lang->block->paddingBottom = '下';
+$lang->block->paddingLeft   = '左';
+$lang->block->paddingRight  = '右';
 
 $lang->block->placeholder = new stdclass();
 $lang->block->placeholder->moreText = '區塊右上角文字';
 $lang->block->placeholder->moreUrl  = '區塊右上角連結地址';
+$lang->block->placeholder->padding = '0';
 
 $lang->block->gridOptions[0]  = '自動';
 $lang->block->gridOptions[6]  = '1/2';

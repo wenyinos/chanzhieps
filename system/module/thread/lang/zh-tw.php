@@ -11,28 +11,33 @@
  */
 $lang->thread->common    = '主題';
 
-$lang->thread->id         = '編號';
-$lang->thread->title      = '標題';
-$lang->thread->board      = '板塊';
-$lang->thread->author     = '作者';
-$lang->thread->content    = '內容';
-$lang->thread->file       = '附件: ';
-$lang->thread->postedDate = '發表於';
-$lang->thread->replies    = '回帖';
-$lang->thread->views      = '閲讀';
-$lang->thread->lastReply  = '最後回帖';
-$lang->thread->isLink     = '跳轉';
-$lang->thread->link       = '連結';
+$lang->thread->id          = '編號';
+$lang->thread->title       = '標題';
+$lang->thread->board       = '板塊';
+$lang->thread->author      = '作者';
+$lang->thread->content     = '內容';
+$lang->thread->file        = '附件: ';
+$lang->thread->postedDate  = '發表於';
+$lang->thread->replies     = '回帖';
+$lang->thread->views       = '閲讀';
+$lang->thread->lastReply   = '最後回帖';
+$lang->thread->isLink      = '跳轉';
+$lang->thread->link        = '連結';
+$lang->thread->color       = '顏色';
+$lang->thread->colorTip    = '十六進制顏色值';
+$lang->thread->colorPlates = '333333|000000|CA1407|45872B|148D00|F25D03|2286D2|D92958|A63268|04BFAD|D1270A|FF9400|299182|63731A|3D4DBE|7382D9|754FB9|F2E205|B1C502|364245|C05036|8A342A|E0DDA2|B3D465|EEEEEE|FFD0E5|D0FFFD|FFFF84|F4E6AE|E5E5E5|F1F1F1|FFFFFF';
 
-$lang->thread->post       = '發貼';
-$lang->thread->postTo     = '發佈貼子到';
-$lang->thread->browse     = '主題列表';
-$lang->thread->stick      = '置頂';
-$lang->thread->edit       = '編輯主題';
-$lang->thread->status     = '狀態';
-$lang->thread->hide       = '隱藏';
-$lang->thread->show       = '顯示';
-$lang->thread->transfer   = '轉移';
+$lang->thread->post         = '發貼';
+$lang->thread->postTo       = '發佈貼子到';
+$lang->thread->browse       = '主題列表';
+$lang->thread->stick        = '置頂';
+$lang->thread->edit         = '編輯主題';
+$lang->thread->status       = '狀態';
+$lang->thread->hide         = '隱藏';
+$lang->thread->show         = '顯示';
+$lang->thread->transfer     = '轉移';
+$lang->thread->switchStatus = '隱藏/顯示';
+$lang->thread->deleteFile   = '刪除附件';
 
 $lang->thread->sticks[0] = '不置頂';
 $lang->thread->sticks[1] = '版塊置頂';

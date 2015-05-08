@@ -19,12 +19,13 @@ $lang->minus      = ' - ';
 $lang->dollarSign = '￥';
 $lang->divider    = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->back2Top   = '返回頂部';
+$lang->cancel     = '取消';
 
 /* Lang items for xirang. */
 $lang->chanzhiEPS     = '蟬知企業門戶系統';
 $lang->chanzhiEPSx    = '蟬知';
 $lang->agreement      = "已閲讀並同意<a href='http://zpl.pub/page/zplv11.html' target='_blank'>《Z PUBLIC LICENSE授權協議1.1》</a>。<span class='text-danger'>未經許可，不得去除、隱藏或遮掩蟬知系統的任何標誌及連結。</span>";
-$lang->poweredBy      = " <span id='poweredBy'><a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>%s</a></span>";
+$lang->poweredBy      = "<a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>%s</a>";
 $lang->poweredByAdmin = "<span id='poweredBy'>由 <a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>蟬知企業門戶系統 %s</a> 強力驅動！</span>";
 $lang->newVersion     = "提示：蟬知系統已于 <span id='releaseDate'></span> 發佈 <span id='version'></span>版本。<a href='' target='_blank' id='upgradeLink'>馬上下載</a>";
 
@@ -50,7 +51,7 @@ $lang->currentPos     = '當前位置';
 $lang->categoryMenu   = '分類導航';
 $lang->wechatTip      = '微信訂閲';
 $lang->qrcodeTip      = '移動訪問';
-   
+
 /* Global action items. */
 $lang->reset          = '重置';
 $lang->edit           = '編輯';
@@ -60,6 +61,7 @@ $lang->delete         = '刪除';
 $lang->close          = '關閉';
 $lang->save           = '保存';
 $lang->confirm        = '確認';
+$lang->send           = '發送';
 $lang->preview        = '預覽';
 $lang->goback         = '返回';
 $lang->search         = '搜索';
@@ -67,6 +69,8 @@ $lang->more           = '更多';
 $lang->actions        = '操作';
 $lang->feature        = '未來';
 $lang->year           = '年';
+$lang->selectAll      = '全選';
+$lang->selectReverse  = '反選';
 $lang->loading        = '稍候...';
 $lang->saveSuccess    = '保存成功';
 $lang->setSuccess     = '設置成功';
@@ -88,6 +92,7 @@ $lang->js->deleteing     = '刪除中';
 $lang->js->doing         = '處理中';
 $lang->js->loading       = '加載中';
 $lang->js->timeout       = '網絡超時,請重試';
+$lang->js->errorThrown   = '<h4>執行出錯：</h4>';
 
 /* Contact fields*/
 $lang->company = new stdclass();
@@ -98,6 +103,7 @@ $lang->company->phone     = '電話';
 $lang->company->email     = 'Email';
 $lang->company->fax       = '傳真';
 $lang->company->qq        = 'QQ';
+$lang->company->skype     = 'Skype';
 $lang->company->weibo     = '微博';
 $lang->company->weixin    = '微信';
 $lang->company->wangwang  = '旺旺';
@@ -120,6 +126,7 @@ $lang->menu->site     = '站點|site|setbasic|';
 $lang->menu->ui       = '界面|ui|setlogo|';
 $lang->menu->company  = '公司|company|setbasic|';
 $lang->menu->user     = '會員|user|admin|';
+$lang->menu->order    = '訂單|order|admin|';
 $lang->menu->feedback = '反饋|message|admin|';
 $lang->menu->package  = '擴展|package|browse|';
 
@@ -130,6 +137,7 @@ $lang->menuGroups->mail    = 'site';
 $lang->menuGroups->nav     = 'site';
 $lang->menuGroups->links   = 'site';
 $lang->menuGroups->wechat  = 'site';
+$lang->menuGroups->group   = 'user';
 $lang->menuGroups->block   = 'ui';
 $lang->menuGroups->slide   = 'ui';
 $lang->menuGroups->tree    = 'article';
@@ -175,6 +183,8 @@ $lang->user->menu->sina   = '微博會員|user|admin|provider=sina';
 $lang->user->menu->wechat = '微信會員|user|admin|provider=wechat';
 $lang->user->menu->qq     = 'QQ會員|user|admin|provider=qq';
 $lang->user->menu->admin  = '管理員|user|admin|admin=1';
+$lang->user->menu->group  = array('link' => '分組權限|group|browse|', 'alias' => 'managepriv,managemember');
+$lang->user->menu->log    = '登錄日誌|user|adminlog|';
 
 /* Menu of comment module. */
 $lang->feedback = new stdclass();
@@ -200,21 +210,33 @@ $lang->forum->menu->update = '更新數據|forum|update|';
 /* Menu of site module. */
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
-$lang->site->menu->basic    = '站點設置|site|setbasic|';
-$lang->site->menu->lang     = '語言設置|site|setlang|';
-$lang->site->menu->nav      = '導航設置|nav|admin|';
-$lang->site->menu->upload   = '上傳設置|site|setupload|';
-$lang->site->menu->tag      = '關鍵詞設置|tag|admin|';
-#$lang->site->menu->robots   = 'Robots|site|setrobots|';
-$lang->site->menu->oauth    = '開放登錄|site|setoauth|';
-$lang->site->menu->link     = '友情連結|links|admin|';
-$lang->site->menu->mail     = array('link' => '發信設置|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->site->menu->wechat   = array('link' => '微信設置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
+$lang->site->menu->basic      = '站點設置|site|setbasic|';
+$lang->site->menu->lang       = '語言設置|site|setlang|';
+$lang->site->menu->nav        = '導航設置|nav|admin|';
+$lang->site->menu->security   = '安全設置|site|setsecurity|';
+$lang->site->menu->upload     = '上傳設置|site|setupload|';
+$lang->site->menu->tag        = '關鍵詞設置|tag|admin|';
+$lang->site->menu->recPerPage = '列表數量設置|site|setrecperpage|';
+#$lang->site->menu->robots    = 'Robots|site|setrobots|';
+$lang->site->menu->oauth      = '開放登錄|site|setoauth|';
+$lang->site->menu->link       = '友情連結|links|admin|';
+$lang->site->menu->mail       = array('link' => '發信設置|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->site->menu->wechat     = array('link' => '微信設置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
+$lang->site->menu->search     = '更新搜索索引|search|buildindex|';
 
 /* Menu of company module. */
 $lang->company->menu = new stdclass();
 $lang->company->menu->basic   = '公司信息|company|setbasic|';
 $lang->company->menu->contact = '聯繫方式|company|setcontact|';
+
+$lang->cart    = new stdclass();
+$lang->order   = new stdclass();
+$lang->address = new stdclass();
+
+$lang->order->menu = new stdclass();
+$lang->order->menu->admin   = '訂單管理|order|admin|';
+$lang->order->menu->express = '快遞設置|tree|browse|type=express|';
+$lang->order->menu->setting = '系統設置|order|setting|';
 
 /* Menu of tree module. */
 $lang->tree = new stdclass();
@@ -248,9 +270,13 @@ $lang->slide->menu = $lang->ui->menu;
 $lang->block = new stdclass();
 $lang->block->menu = $lang->ui->menu;
 
-/* Menu of tree module. */
+/* Menu of links module. */
 $lang->links = new stdclass();
 $lang->links->menu = $lang->site->menu;
+
+/* Menu of group module. */
+$lang->group = new stdclass();
+$lang->group->menu = $lang->user->menu;
 
 /* Menu of package module. */
 $lang->package = new stdclass();
@@ -277,6 +303,7 @@ $lang->error->passwordsame = '兩次密碼應當相等。';
 $lang->error->passwordrule = '密碼應該符合規則，長度至少為六位。';
 $lang->error->captcha      = '請輸入正確的驗證碼。';
 $lang->error->noWritable   = '%s 可能不可寫，請修改權限！';
+$lang->error->fingerprint  = '身份認證過期，請重試！';
 $lang->error->token        = '必須為英文或數字，長度為3-32字元！';
 
 /* The pager items. */

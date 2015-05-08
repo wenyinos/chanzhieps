@@ -11,4 +11,5 @@
  */
 $lang->links->common  = '友情連結';
 $lang->links->index   = '首頁連結';
+$lang->links->admin   = '友鏈管理';
 $lang->links->all     = '所有連結';
