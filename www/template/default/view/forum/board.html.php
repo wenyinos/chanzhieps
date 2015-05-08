@@ -25,18 +25,18 @@
     </thead>
     <tbody>
       <?php foreach($sticks as $thread):?>
-      <?php $style = $thread->color ? "style='background-color:{$thread->color}'" : '';?>
+      <?php $style = $thread->color ? "style='color:{$thread->color}'" : '';?>
       <tr class='text-center'>
-        <td <?php echo $style?> class='w-10px'><span class='sticky-thread text-danger'><i class="icon-comment-alt icon-large"></i></span></td>
-        <td <?php echo $style?> class='text-left'>
-          <?php echo html::a($this->createLink('thread', 'view', "id=$thread->id"), $thread->title);?>
+        <td class='w-10px'><span class='sticky-thread text-danger'><i class="icon-comment-alt icon-large"></i></span></td>
+        <td class='text-left'>
+          <?php echo html::a($this->createLink('thread', 'view', "id=$thread->id"), $thread->title, $style);?>
           <?php echo "<span class='label label-danger'>{$lang->thread->stick}</span> "?>
         </td>
-        <td <?php echo $style?> class='hidden-xxs'><strong><?php echo $thread->authorRealname;?></strong></td>
-        <td <?php echo $style?> class='hidden-xs'><?php echo substr($thread->addedDate, 5, -3);?></td>
-        <td <?php echo $style?> class='hidden-xs'><?php echo $thread->views;?></td>
-        <td <?php echo $style?> class='hidden-xxxs'><?php echo $thread->replies;?></td>
-        <td <?php echo $style?> class='hidden-sm hidden-xs'>
+        <td class='hidden-xxs'><strong><?php echo $thread->authorRealname;?></strong></td>
+        <td class='hidden-xs'><?php echo substr($thread->addedDate, 5, -3);?></td>
+        <td class='hidden-xs'><?php echo $thread->views;?></td>
+        <td class='hidden-xxxs'><?php echo $thread->replies;?></td>
+        <td class='hidden-sm hidden-xs'>
           <?php 
           if($thread->replies)
           {
@@ -50,15 +50,15 @@
       <?php endforeach;?>
 
       <?php foreach($threads as $thread):?>
-      <?php $style = $thread->color ? "style='background-color:{$thread->color}'" : '';?>
+      <?php $style = $thread->color ? "style='color:{$thread->color}'" : '';?>
       <tr class='text-center'>
-        <td <?php echo $style;?>class='w-10px'><?php echo $thread->isNew ? "<span class='text-success'><i class='icon-comment-alt icon-large'></i></span>" : "<span class='text-muted'><i class='icon-comment-alt icon-large'></i></span>";?></td>
-        <td <?php echo $style;?>class='text-left'><?php echo html::a($this->createLink('thread', 'view', "id=$thread->id"), $thread->title);?></td>
-        <td <?php echo $style;?>class='hidden-xxs'><strong><?php echo $thread->authorRealname;?></strong></td>
-        <td <?php echo $style;?>class='hidden-xs'><?php echo substr($thread->addedDate, 5, -3);?></td>
-        <td <?php echo $style;?>class='hidden-xs'><?php echo $thread->views;?></td>
-        <td <?php echo $style;?>class='hidden-xxxs'><?php echo $thread->replies;?></td>
-        <td <?php echo $style;?>class='hidden-sm hidden-xs'>
+        <td class='w-10px'><?php echo $thread->isNew ? "<span class='text-success'><i class='icon-comment-alt icon-large'></i></span>" : "<span class='text-muted'><i class='icon-comment-alt icon-large'></i></span>";?></td>
+        <td class='text-left'><?php echo html::a($this->createLink('thread', 'view', "id=$thread->id"), $thread->title, $style);?></td>
+        <td class='hidden-xxs'><strong><?php echo $thread->authorRealname;?></strong></td>
+        <td class='hidden-xs'><?php echo substr($thread->addedDate, 5, -3);?></td>
+        <td class='hidden-xs'><?php echo $thread->views;?></td>
+        <td class='hidden-xxxs'><?php echo $thread->replies;?></td>
+        <td class='hidden-sm hidden-xs'>
           <?php 
           if($thread->replies)
           {
