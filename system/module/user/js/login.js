@@ -6,11 +6,12 @@ $('#submit').click(function()
     var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
     if(!reg.test($('#account').val())) password = md5(md5(md5($('#password').val()) + $('#account').val()) + v.random);
 
+    fingerprint = new Fingerprint().get();
     loginURL = createLink('user', 'login');
     $.ajax(
     {
         type: "POST",
-        data:"account=" + $('#account').val() + '&password=' + password + '&referer=' + encodeURIComponent($('#referer').val()),
+        data:"account=" + $('#account').val() + '&password=' + password + '&referer=' + encodeURIComponent($('#referer').val()) + '&fingerprint=' + fingerprint,
         url:loginURL,
         dataType:'json',
         success:function(data)
@@ -19,7 +20,7 @@ $('#submit').click(function()
             $.ajax(
             {
                 type: "POST",
-                data:"account=" + $('#account').val() + '&password=' + $('#password').val() + '&referer=' + encodeURIComponent($('#referer').val()) + '&fingerprint=' + $('#fingerprint').val(),
+                data: "account=" + $('#account').val() + '&password=' + $('#password').val() + '&referer=' + encodeURIComponent($('#referer').val()) + '&fingerprint=' + fingerprint,
                 url:loginURL,
                 dataType:'json',
                 success:function(data)

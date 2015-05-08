@@ -325,7 +325,7 @@ class userModel extends model
         }
 
         return $this->dao->update(TABLE_USER)->setAutolang(false)
-            ->data($user, $skip = 'oldPwd,password1,password2')
+            ->data($user, $skip = 'token,oldPwd,password1,password2')
             ->autoCheck()
             ->batchCheck($this->config->user->require->edit, 'notempty')
             ->check('email', 'email')
@@ -392,7 +392,7 @@ class userModel extends model
             ->remove('password1, password2, ip, account, admin, join, visits')
             ->get();
 
-        $this->dao->setAutolang(false)->update(TABLE_USER)->data($user, 'fingerprint')->autoCheck()->where('account')->eq($account)->exec();
+        $this->dao->setAutolang(false)->update(TABLE_USER)->data($user, 'token,fingerprint')->autoCheck()->where('account')->eq($account)->exec();
     }   
 
     /**
@@ -408,7 +408,9 @@ class userModel extends model
         $user = $this->identify($account, $password);
         if(!$user) return false;
 
-        $user->rights = $this->authorize($user);
+        $user->rights      = $this->authorize($user);
+        $user->fingerprint = $this->post->fingerprint ? $this->post->fingerprint : $this->session->fingerprint;
+
         $this->session->set('user', $user);
         $this->app->user = $this->session->user;
 
@@ -874,5 +876,43 @@ class userModel extends model
         unset($position[3]);
         $currentPosition = join(' ', $position);
         return $allowedPosition == $currentPosition;
+    }
+
+    /**
+     * Create a token.
+     * 
+     * @access public
+     * @return void
+     */
+    public function getToken()
+    {
+        if(!empty($this->app->user->token) and $this->app->user->tokenExpired >= time())
+        {
+            $token = $this->app->user->token;
+        }
+        else
+        {
+            $this->app->user->tokenExpired = time() + 180;
+            $this->app->user->token = uniqid(md5($this->app->user->fingerprint . $this->app->user->tokenExpired));
+        }
+        return $this->app->user->token;
+    }
+
+    /**
+     * Check Token and fingerprint.
+     * 
+     * @param  string    $token 
+     * @access public
+     * @return void
+     */
+    public function checkToken($token, $fingerprint)
+    {
+       if($fingerprint != $this->app->user->fingerprint) return false;
+
+       if($token != $this->getToken()) return false;
+
+       if(strpos($token, md5($this->app->user->fingerprint . $this->app->user->tokenExpired)) === 0) return true;
+
+       return false;
     }
 }
