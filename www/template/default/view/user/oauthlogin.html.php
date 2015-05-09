@@ -28,7 +28,7 @@ $().ready(function()
 {
     $('a.btn-oauth').each(function()
     {
-        fingerprint = new Fingerprint().get();
+        fingerprint = getFingerptint();
         $(this).attr('href', $(this).attr('href').replace('fingerprintval', fingerprint) )
     })
 })
