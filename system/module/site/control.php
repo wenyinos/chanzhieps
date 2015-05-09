@@ -142,7 +142,7 @@ class site extends control
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
         $position = $this->app->loadClass('IP')->find(helper::getRemoteIp());
-        unset($position[3]);
+        if(isset($position[3])) unset($position[3]);
 
         $this->view->title    = $this->lang->site->setBasic;
         $this->view->position = join(' ', $position);
