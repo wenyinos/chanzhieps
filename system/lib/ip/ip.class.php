@@ -88,7 +88,7 @@ class IP
         {
             self::$ip = new self();
 
-            self::$fp = fopen(__DIR__ . '/ip.dat', 'rb');
+            self::$fp = fopen(dirname(__FILE__) . '/ip.dat', 'rb');
             if (self::$fp === FALSE)
             {
                 throw new Exception('Invalid ip.dat file!');
