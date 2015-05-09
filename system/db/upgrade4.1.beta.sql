@@ -66,7 +66,7 @@ ALTER TABLE `eps_user` ADD `realnames` varchar(100) NOT NULL default '';
 ALTER TABLE `eps_thread` ADD `color` char(10) NOT NULL AFTER `title`;
 
 -- DROP TABLE IF EXISTS `eps_order`;
-CREATE TABLE `eps_order` (
+CREATE TABLE IF NOT EXISTS `eps_order` (
   `id` mediumint(9) NOT NULL AUTO_INCREMENT,
   `account` char(30) NOT NULL,
   `amount` decimal(8,2) NOT NULL DEFAULT '0.00',
@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `eps_orderProduct` (
   PRIMARY KEY (`id`),
   KEY `orderID` (`orderID`),
   KEY `productID` (`productID`)
-);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `eps_cart` (
   `id` mediumint(9) NOT NULL AUTO_INCREMENT,
@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `eps_cart` (
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `account` (`account`)
-);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `eps_address` (
   `id` mediumint(9) NOT NULL AUTO_INCREMENT,
@@ -127,4 +127,4 @@ CREATE TABLE IF NOT EXISTS `eps_address` (
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `account` (`account`)
-)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;

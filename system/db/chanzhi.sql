@@ -500,7 +500,7 @@ CREATE TABLE IF NOT EXISTS `eps_search_dict` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_order`;
-CREATE TABLE `eps_order` (
+CREATE TABLE IF NOT EXISTS `eps_order` (
   `id` mediumint(9) NOT NULL AUTO_INCREMENT,
   `account` char(30) NOT NULL,
   `amount` decimal(8,2) NOT NULL DEFAULT '0.00',
@@ -529,7 +529,7 @@ CREATE TABLE `eps_order` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_orderProduct`;
-CREATE TABLE `eps_orderProduct` (
+CREATE TABLE IF NOT EXISTS `eps_orderProduct` (
   `id`          mediumint(9) NOT NULL AUTO_INCREMENT,
   `orderID`     mediumint(9) UNSIGNED NOT NULL default 0, 
   `productID`   mediumint(8) UNSIGNED Not null default 0,
@@ -540,10 +540,10 @@ CREATE TABLE `eps_orderProduct` (
   PRIMARY KEY (`id`),
   KEY `orderID` (`orderID`),
   KEY `productID` (`productID`)
-);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_cart`;
-CREATE TABLE `eps_cart` (
+CREATE TABLE IF NOT EXISTS `eps_cart` (
   `id` mediumint(9) NOT NULL AUTO_INCREMENT,
   `account` char(30) NOT NULL,
   `product` mediumint(8) UNSIGNED Not null default 0,
@@ -551,10 +551,10 @@ CREATE TABLE `eps_cart` (
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `account` (`account`)
-);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_address`;
-CREATE TABLE `eps_address` (
+CREATE TABLE IF NOT EXISTS `eps_address` (
   `id` mediumint(9) NOT NULL AUTO_INCREMENT,
   `account` char(30) NOT NULL,
   `contact` varchar(50) NOT NULL,
@@ -564,7 +564,7 @@ CREATE TABLE `eps_address` (
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `account` (`account`)
-);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- Insert data into `eps_layout`;
 INSERT INTO `eps_layout` (`page`, `region`, `blocks`, `template`,`lang`) VALUES
