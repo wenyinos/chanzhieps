@@ -550,7 +550,6 @@ class fixer
         global $app;
         $app->loadClass('purifier', true);
         $config = HTMLPurifier_Config::createDefault();
-        $config->set('HTML.Allowed', str_replace(array('<', '>'), array('', ','), $allowedTags));
 
         /* Disable caching. */
         $config->set('Cache.DefinitionImpl', null);
