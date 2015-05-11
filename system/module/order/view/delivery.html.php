@@ -20,7 +20,7 @@
     </tr>
     <tr>
       <th class='w-100px'><?php echo $lang->order->waybill;?></th>
-      <td><?php echo html::texearea('waybill', '', "class='form-control'");?></td>
+      <td><?php echo html::textarea('waybill', '', "class='form-control'");?></td>
     </tr>
     <tr>
       <th class='w-100px'><?php echo $lang->order->deliveriedDate;?></th>
