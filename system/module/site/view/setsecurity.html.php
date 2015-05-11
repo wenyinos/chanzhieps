@@ -31,10 +31,9 @@ include '../../mail/view/captcha.html.php';
           <td colspan='3'><?php echo html::radio('captcha', $lang->site->captchaList, isset($this->config->site->captcha) ? $this->config->site->captcha : 'auto');?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->site->safeMode;?></th>
+          <th><?php echo $lang->site->importantOption;?></th>
           <td colspan='3'>
-            <?php echo html::checkbox('safeMode', array('1' => $lang->site->safeMode), isset($this->config->site->safeMode) ? $this->config->site->safeMode : '');?><br>
-            <span class='text-important'><?php echo $lang->site->safeModeholder;?></span>
+            <?php echo html::checkbox('importantValidate', $lang->site->validateTypes, $this->config->site->importantValidate);?><br>
           </td>
         </tr>
         <tr>

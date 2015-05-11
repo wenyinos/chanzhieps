@@ -385,24 +385,43 @@ class mailModel extends model
      */
     public function checkVerify()
     {
-        if(isset($this->config->site->safeMode) and $this->config->site->safeMode == '1') return true;
-        /* check Ok file. */
+        $okFileChecked = false;
+        $checkOkFile   = true;
+
+        if(isset($this->config->site->importantValidate) and strpos($this->config->site->importantValidate, 'okFile') === false)
+        {
+            $checkOkFile = false;
+        }
+
         $okFile = $this->loadModel('common')->verfyAdmin();
-        if($okFile['result'] == 'success') return true;
+        if($okFile['result'] == 'success') $okFileChecked = true;
+
+        $captchaChecked = false;
+        $checkCaptcha   = true;
 
         /* check session.*/
+        if(isset($this->config->site->importantValidate) and strpos($this->config->site->importantValidate, 'email') === false)
+        {
+            $checkCaptcha = false;
+        }
+
         if($this->session->verify and $this->session->verify > 0) 
         {
             $this->session->set('verify', $this->session->verify - 1);
             if(empty($_POST))
             {
-                if($this->session->verify > 0) return true;
+                if($this->session->verify > 0) $captchaChecked = true;
             }
             else
             {
-                return true;
+                $captchaChecked = true;
             }
         }
+
+        if(!$checkCaptcha  and !$checkOkFile) return true;
+        if($okFileChecked  and $checkOkFile)  return true;
+        if($captchaChecked and $checkCaptcha) return true;
+
         return false;
     }
 

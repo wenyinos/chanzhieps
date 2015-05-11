@@ -48,11 +48,10 @@ $lang->mail->verifyFail    = '验证码错误';
 $lang->mail->verifySuccess = '验证通过，请继续操作';
 $lang->mail->noConfigure   = " <span class='text-info'>无法找到发信配置信息，邮箱验证未启用。</span>";
 $lang->mail->noEmail       = " <span class='text-info'>未填写个人邮箱，邮箱验证未启用。</span>";
-$lang->mail->sendNotice    = <<<EOT
-为了网站安全，<strong>%s</strong> 操作需要进行管理员身份验证。</br>
-<strong>文件方式</strong>：创建 %s 文件。如果存在该文件，使用编辑软件打开，重新保存一遍。%s</br>
-<strong>邮箱方式</strong>：验证码将发送至 %s。%s</br>
-EOT;
+$lang->mail->verfyReason   = " 为了网站安全，<strong>%s</strong> 操作需要进行管理员身份验证。</br>";
+$lang->mail->okFileVerfy   = "<strong>文件方式</strong>：创建 %s 文件。如果存在该文件，使用编辑软件打开，重新保存一遍。%s</br>";
+$lang->mail->emailVerfy    = "<strong>邮箱方式</strong>：验证码将发送至 %s。%s</br>";
+
 $lang->mail->sendContent   = <<<EOT
 %s 您好：
 </br>&nbsp;&nbsp;&nbsp;&nbsp;您正在<strong>%s</strong>(%s)上进行<strong>%s</strong>操作，所需的验证码为：%s

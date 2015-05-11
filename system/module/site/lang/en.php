@@ -37,7 +37,7 @@ $lang->site->twContent       = 'traditional contents';
 $lang->site->cn2tw           = 'Copy from simplified Chinese content';
 $lang->site->cdn             = 'CND Site';
 
-$lang->site->safeMode        = 'Safe mode';
+$lang->site->importantOption = 'Important option';
 $lang->site->checkIP         = 'Check login IP';
 $lang->site->checkPosition   = 'Check login position';
 $lang->site->allowedPosition = 'Allowed position';

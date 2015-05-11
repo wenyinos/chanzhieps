@@ -48,11 +48,10 @@ $lang->mail->verifyFail    = 'Wrong captcha';
 $lang->mail->verifySuccess = 'Right captcha';
 $lang->mail->noConfigure   = " <span class='text-info'>I can not find the configuration, con't use email captcha.</span>";
 $lang->mail->noEmail       = " <span class='text-info'>I can not find your email address, con't use email captcha.</span>";
-$lang->mail->sendNotice    = <<<EOT
-For security reason.<strong>%s</strong> please do these steps</br>
-<strong>File</strong>:Create %s file. If this file exists already, reopen it and save again.%s</br>
-<strong>Email</strong>:The email captcha will send to %s. %s</br>
-EOT;
+$lang->mail->verfyReason   = " For security reason.<strong>%s</strong> please do these steps</br>";
+$lang->mail->okFileVerfy   = "<strong>File</strong>:Create %s file. If this file exists already, reopen it and save again.%s</br>";
+$lang->mail->emailVerfy    = "<strong>Email</strong>:The email captcha will send to %s. %s</br>";
+
 $lang->mail->sendContent   = <<<EOT
 Hello %s：
 </br>&nbsp;&nbsp;&nbsp;&nbsp;You are changing some infomation at <strong>%s</strong>(%s), action is <strong>%s</strong>. The code you need is:%s

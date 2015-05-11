@@ -48,11 +48,10 @@ $lang->mail->verifyFail    = '驗證碼錯誤';
 $lang->mail->verifySuccess = '驗證通過，請繼續操作';
 $lang->mail->noConfigure   = " <span class='text-info'>無法找到發信配置信息，郵箱驗證未啟用。</span>";
 $lang->mail->noEmail       = " <span class='text-info'>未填寫個人郵箱，郵箱驗證未啟用。</span>";
-$lang->mail->sendNotice    = <<<EOT
-為了網站安全，<strong>%s</strong> 操作需要進行管理員身份驗證。</br>
-<strong>檔案方式</strong>：創建 %s 檔案。如果存在該檔案，使用編輯軟件打開，重新保存一遍。%s</br>
-<strong>郵箱方式</strong>：驗證碼將發送至 %s。%s</br>
-EOT;
+$lang->mail->verfyReason   = " 為了網站安全，<strong>%s</strong> 操作需要進行管理員身份驗證。</br>";
+$lang->mail->okFileVerfy   = "<strong>檔案方式</strong>：創建 %s 檔案。如果存在該檔案，使用編輯軟件打開，重新保存一遍。%s</br>";
+$lang->mail->emailVerfy    = "<strong>郵箱方式</strong>：驗證碼將發送至 %s。%s</br>";
+
 $lang->mail->sendContent   = <<<EOT
 %s 您好：
 </br>&nbsp;&nbsp;&nbsp;&nbsp;您正在<strong>%s</strong>(%s)上進行<strong>%s</strong>操作，所需的驗證碼為：%s

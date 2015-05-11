@@ -124,8 +124,8 @@ class site extends control
                 ->setDefault('checkSessionIP', '0')
                 ->setDefault('checkPosition', 'close')
                 ->setDefault('allowedIP', '')
-                ->setDefault('safeMode', '0')
-                ->join('safeMode', '')
+                ->setDefault('importantValidate', '')
+                ->join('importantValidate', ',')
                 ->get();
 
             /* check IP. */

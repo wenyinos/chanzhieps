@@ -98,12 +98,10 @@ class commonModel extends model
             die(js::locate(helper::createLink('user', 'login', "referer=$referer")));
         }
 
-        $safeMode = (isset($this->config->site->safeMode) and  $this->config->site->safeMode == 1);
-
         /* if remote ip not equal loginIP, go to login page. */
         if(RUN_MODE == 'admin')
         {
-            if(!$safeMode and $this->config->site->checkSessionIP and (helper::getRemoteIP() != $this->app->user->loginIP))
+            if($this->config->site->checkSessionIP and (helper::getRemoteIP() != $this->app->user->loginIP))
             {
                 session_destroy();
                 $referer = helper::safe64Encode($this->app->getURI(true));

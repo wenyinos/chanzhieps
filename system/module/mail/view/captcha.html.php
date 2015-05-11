@@ -1,4 +1,5 @@
 <?php include_once '../../common/view/header.modal.html.php';?>
+<?php if($methodName = 'setsecurity') $this->config->site->importantValidate = 'okFile';?>
 <?php if(isset($pass) and $pass):?>
 <script>
 $(document).ready(function()
@@ -30,7 +31,9 @@ $(document).ready(function()
       <?php $action = isset($lang->$module->$method->common) ? $lang->$module->$method->common : $lang->$module->$method;?>
       <?php $fileBtn = html::a($refUrl, $lang->confirm, "class='btn btn-mini btn-primary okFile'")?>
       <?php $mailBtn = $check['result'] == 'success' ? html::submitButton($this->lang->send, 'btn btn-mini btn-primary') . html::hidden('sendMail', 1) : $check['message'];?>
-      <?php echo sprintf($lang->mail->sendNotice, $action, $okFile['okFile'], $fileBtn, $email, $mailBtn);?>
+      <?php printf($lang->mail->verfyReason, $action);?>
+      <?php if(strpos($this->config->site->importantValidate, 'okFile') !== false) printf($lang->mail->okFileVerfy, $okFile['okFile'], $fileBtn);?>
+      <?php if(strpos($this->config->site->importantValidate, 'email')  !== false) printf($lang->mail->emailVerfy, $email, $mailBtn);?>
     </div>
   </form>
   <script>

@@ -15,3 +15,4 @@ $config->themeSetting->primaryColor = '#D1270A' ;
 $config->themeSetting->backColor    = '#FFFFFF';
 $config->themeSetting->borderRadius = '4px';
 $config->themeSetting->fontSize     = '14px';
+$this->config->site->importantValidate = 'okFile,email';
