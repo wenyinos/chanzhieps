@@ -127,7 +127,6 @@ class site extends control
                 ->setDefault('safeMode', '0')
                 ->join('safeMode', '')
                 ->get();
-            a($setting);
 
             /* check IP. */
             $ips = empty($_POST['allowedIP']) ? array() : explode(',', $this->post->allowedIP);
