@@ -606,7 +606,7 @@ function setGo2Top()
         if(parent.width() == $(window).width()) $('#go2top').css('left', parent.width() - 90);
     }).scroll().resize();
 
-    $('#go2top').tooltip({container: 'body', placement: 'left'})
+    $('#go2top').tooltip({container: 'body', placement: 'left', html: true})
         .click(function(){$('body,html').animate({scrollTop:0},400); return false;});
  }
 
