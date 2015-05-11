@@ -48,7 +48,7 @@ class search extends control
      */
     public function buildIndex()
     {
-        //$this->search->buildAllIndex();
+        $this->search->buildAllIndex();
         if(helper::isAjaxRequest())
         {
             $this->send(array('result' => 'success', 'message' => $this->lang->search->buildSuccessfully));
