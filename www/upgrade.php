@@ -21,7 +21,6 @@ include 'loader.php';
 
 /* Instance the app and run it. */
 $app = router::createApp('chanzhi', $systemRoot);
-$common = $app->loadCommon();
 $config = $app->config;
 
 /* Judge my.php exists or not. */
@@ -37,6 +36,7 @@ if(!file_exists($myConfig))
 $config->frontRequestType = $config->requestType;
 $config->set('requestType', 'GET');
 $config->set('default.module', 'upgrade');
+$common = $app->loadCommon();
 $app->setDebug();
 
 /* Check the installed version is the latest or not. */

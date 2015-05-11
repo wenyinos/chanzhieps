@@ -58,3 +58,4 @@ $lang->upgrade->fromVersions['3_2']      = '3.2';
 $lang->upgrade->fromVersions['3_3']      = '3.3';
 $lang->upgrade->fromVersions['4_0']      = '4.0';
 $lang->upgrade->fromVersions['4_1_beta'] = '4.1.beta';
+$lang->upgrade->fromVersions['4_2']      = '4.2';
