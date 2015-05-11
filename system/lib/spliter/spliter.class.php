@@ -53,7 +53,7 @@ class spliter
                     
                     /* Process intigers. */
                     if(is_numeric($word) and (strpos($word, '.') === false)) $word = "|" . $word . "|";
-                    $word   = str_pad($word, 5, '_');
+                    $word   = str_pad(strtolower($word), 5, '_');
                     $words .= ' ' . $word;
                 }
                 continue;
