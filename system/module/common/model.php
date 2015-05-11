@@ -103,7 +103,7 @@ class commonModel extends model
         /* if remote ip not equal loginIP, go to login page. */
         if(RUN_MODE == 'admin')
         {
-            if(!$safeMode and $this->config->site->checkSessionIP and (helper::getRemoteIP() != $this->app->user->loginIP))
+            if(!$safeMode and !empty($this->config->site->checkSessionIP) and (helper::getRemoteIP() != $this->app->user->loginIP))
             {
                 session_destroy();
                 $referer = helper::safe64Encode($this->app->getURI(true));

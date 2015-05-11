@@ -619,7 +619,7 @@ class control
     public function display($moduleName = '', $methodName = '')
     {
         if(empty($this->output)) $this->parse($moduleName, $methodName);
-        if($this->config->cn2tw and $this->app->getClientLang() == 'zh-tw')
+        if(isset($this->config->cn2tw) and $this->app->getClientLang() == 'zh-tw')
         {
             $this->app->loadClass('cn2tw', true);
             $this->output = cn2tw::translate($this->output);
