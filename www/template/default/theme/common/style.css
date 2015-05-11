@@ -390,7 +390,7 @@ td #aliasLabel {display: table-row;}
 /* Footer */
 #footer {padding: 20px 0; text-align: center; position: relative; border-top: 1px solid #ddd;}
 #footNav {position: absolute; left: 0; top: 20px;}
-#footNav a, #powerby a {display: inline-block; margin-right: 10px; color: #777;}
+#footNav a, #powerby a {display: inline-block; margin-right: 10px; color: #777; position: relative;}
 #footNav a:hover, #powerby a:hover {color: #145BCC}
 #copyrightInfo, #icpInfo {color: #999; font-size: 12px;}
 #powerby {position: absolute; right: 0; top: 20px; padding: 0; overflow: hidden;}
