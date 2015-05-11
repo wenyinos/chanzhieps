@@ -848,6 +848,7 @@ class userModel extends model
      */
     public function checkIP()
     {
+        if(isset($this->config->site->safeMode) and $this->config->site->safeMode == '1') return true;
         if(!isset($this->config->site->checkIP) or $this->config->site->checkIP == 'close') return true;
         if(!isset($this->config->site->allowedIP) or $this->config->site->allowedIP == '') return true;
 
@@ -868,6 +869,7 @@ class userModel extends model
      */
     public function checkPosition()
     {
+        if(isset($this->config->site->safeMode) and $this->config->site->safeMode == '1') return true;
         if(!isset($this->config->site->checkPosition) or $this->config->site->checkPosition == 'close') return true;
         if(!isset($this->config->site->allowedPosition) or $this->config->site->allowedPosition == '') return true;
 

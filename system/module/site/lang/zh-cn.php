@@ -31,15 +31,17 @@ $lang->site->mission         = '站点使命';
 $lang->site->copyright       = '创建年份';
 $lang->site->allowUpload     = '允许上传附件';
 $lang->site->allowedFiles    = '允许附件类型';
-$lang->site->captcha         = '验证码';
+$lang->site->captcha         = '前台表单';
 $lang->site->mailCaptcha     = '邮箱验证码';
 $lang->site->twContent       = '繁体内容';
 $lang->site->cn2tw           = '自动从简体版复制';
 $lang->site->cdn             = 'CDN地址';
-$lang->site->checkIP         = '检查登录IP';
-$lang->site->checkPosition   = '校验登录地区';
-$lang->site->allowedIP       = '允许登录IP';
+
+$lang->site->safeMode        = '安全模式';
+$lang->site->checkIP         = '后台登录IP白名单';
+$lang->site->checkPosition   = '后台登录地区验证';
 $lang->site->allowedPosition = '允许登录地区';
+$lang->site->checkSessionIP  = '登录期间IP';
 $lang->site->setsecurity     = '安全设置';
 
 $lang->site->setBasic      = "基本信息设置";
@@ -52,7 +54,7 @@ $lang->site->setSinaOauth  = "新浪微博接入";
 $lang->site->setQQOauth    = "QQ接入";
 $lang->site->oauthHelp     = "使用帮助";
 $lang->site->setRecPerPage = "列表数量设置";
-$lang->site->usePosition   = "使用当前登录地址";
+$lang->site->usePosition   = "使用当前登录地址: <span>%s</span>";
 
 $lang->site->typeList = new stdclass();
 $lang->site->typeList->portal = '企业门户';
@@ -70,10 +72,14 @@ $lang->site->checkPositionList = array();
 $lang->site->checkPositionList['open']  = '打开';
 $lang->site->checkPositionList['close'] = '关闭';
 
+$lang->site->sessionIpoptions = array();
+$lang->site->sessionIpoptions[0] = '可以改变';
+$lang->site->sessionIpoptions[1] = '不允许改变';
+
 $lang->site->captchaList = array();
-$lang->site->captchaList['open']  = '打开';
-$lang->site->captchaList['close'] = '关闭';
-$lang->site->captchaList['auto']  = '自动';
+$lang->site->captchaList['open']  = '不用验证码';
+$lang->site->captchaList['close'] = '一直启用验证码';
+$lang->site->captchaList['auto']  = '有敏感内容时自动启用验证码';
 
 $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = '会员';
@@ -88,9 +94,11 @@ $lang->site->metaHolder       = '可放置<meta><script><style>和<link>标签�
 $lang->site->fileAllowedRole  = '多个后缀名之间请用 "," 隔开';
 $lang->site->domainTip        = '设置主域名可使所有网站访问跳转到该域名，设置前请确保主域名解析正确。该值为空时不进行跳转。';
 $lang->site->allowedDomainTip = '多个域名使用 , 隔开，如www.chanzhi.org,www.chanzhi.com。该值为空时允许所有域名访问。';
-$lang->site->allowedIPTip     = '多个IP使用 , 隔开，如202.194.133.1,202.194.132.0/28。该值为空时允许所有IP访问。';
+$lang->site->allowedIPTip     = '多个IP使用 , 隔开，如202.194.133.1,202.194.132.0/28。允许所有IP访问请留空。';
 $lang->site->wrongAllowedIP   = 'IP 格式错误';
 $lang->site->changePosition   = '您当前的登录地区与允许登录地区不一致。';
+$lang->site->safeModeholder   = '安全模式下会降低后台安全验证级别，建议在对安全要求不高的环境下启用。';
+$lang->site->sessionIpTip     = '开启后，因为某些运营商的IP不是固定的，IP变化后会自动退出蝉知。';
 
 $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Robots文件%s 不可写，请修改权限后设置。';

@@ -28,8 +28,14 @@ include '../../mail/view/captcha.html.php';
       <table class='table table-form'>
         <tr>
           <th class='w-200px'><?php echo $lang->site->captcha;?></th>
-          <td colspan='2'><?php echo html::radio('captcha', $lang->site->captchaList, isset($this->config->site->captcha) ? $this->config->site->captcha : 'auto');?></td>
-          <td></td>
+          <td colspan='3'><?php echo html::radio('captcha', $lang->site->captchaList, isset($this->config->site->captcha) ? $this->config->site->captcha : 'auto');?></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->site->safeMode;?></th>
+          <td colspan='3'>
+            <?php echo html::checkbox('safeMode', array('1' => $lang->site->safeMode), isset($this->config->site->safeMode) ? $this->config->site->safeMode : '');?><br>
+            <span class='text-important'><?php echo $lang->site->safeModeholder;?></span>
+          </td>
         </tr>
         <tr>
           <th class='w-200px'><?php echo $lang->site->checkPosition;?></th>
@@ -42,18 +48,22 @@ include '../../mail/view/captcha.html.php';
           <td colspan='2'><?php echo html::input('allowedPositionShow', $allowedPosition, "class='form-control' disabled='disabled'");?></td>
           <td>
             <?php echo html::input('allowedPosition', $allowedPosition, "class='hide'");?>
-            <?php echo $allowedPosition == $position ? '' : html::a('', $lang->site->usePosition, "id='usePosition' class='red'")?>
+            <?php echo $allowedPosition == $position ? '' : html::a('', sprintf($lang->site->usePosition, $position), "id='usePosition' class=''")?>
+          </td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->site->checkSessionIP;?></th>
+          <td colspan='3'>
+            <?php echo html::radio('checkSessionIP', $lang->site->sessionIpoptions, isset($this->config->site->checkSessionIP) ? $this->config->site->checkSessionIP : 0);?>
+            <br/><span class='text-important'><?php echo $lang->site->sessionIpTip;?></span>
           </td>
         </tr>
         <tr>
           <th class='w-200px'><?php echo $lang->site->checkIP;?></th>
-          <td colspan='2'><?php echo html::radio('checkIP', $lang->site->checkIPList, isset($this->config->site->checkIP) ? $this->config->site->checkIP : 'close');?></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th class='w-200px'><?php echo $lang->site->allowedIP;?></th>
-          <td colspan='2'><?php echo html::input('allowedIP', isset($this->config->site->allowedIP) ? $this->config->site->allowedIP : '', "class='form-control' placeholder='{$lang->site->allowedIPTip}'");?></td>
-          <td title="<?php echo $lang->site->allowedIPTip;?>"><i class='icon icon-question-sign'></i></td>
+          <td colspan='3'>
+            <?php echo html::textarea('allowedIP', isset($this->config->site->allowedIP) ? $this->config->site->allowedIP : '', "class='form-control' placeholder='{$lang->site->allowedIPTip}'");?>
+            <span class='text-important'><?php echo $lang->site->allowedIPTip;?></span>
+          </td>
         </tr>
         <tr>
           <th></th>

@@ -385,6 +385,7 @@ class mailModel extends model
      */
     public function checkVerify()
     {
+        if(isset($this->config->site->safeMode) and $this->config->site->safeMode == '1') return true;
         /* check Ok file. */
         $okFile = $this->loadModel('common')->verfyAdmin();
         if($okFile['result'] == 'success') return true;
