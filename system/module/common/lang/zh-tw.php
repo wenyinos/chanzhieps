@@ -18,7 +18,7 @@ $lang->raquo      = '&raquo;';
 $lang->minus      = ' - ';
 $lang->dollarSign = '￥';
 $lang->divider    = "<span class='divider'>{$lang->raquo}</span> ";
-$lang->back2Top   = '返回頂部';
+$lang->back2Top   = '返<br/>回<br/>頂<br/>部';
 $lang->cancel     = '取消';
 
 /* Lang items for xirang. */
