@@ -423,7 +423,7 @@ class helper
         global $config;
 
         $domain = strtolower($domain);
-        if(!preg_match('/^([a-z0-9\-]+\.)+[a-z0-9\-]+$/', $domain)) die('domain denied');
+        if($domain != 'localhost' and !preg_match('/^([a-z0-9\-]+\.)+[a-z0-9\-]+$/', $domain)) die('domain denied');
 
         $domain = str_replace('-', '_', $domain);    // Replace '-' by '_'.
         if(strpos($domain, ':') !== false) $domain = substr($domain, 0, strpos($domain, ':'));    // Remove port from domain.
