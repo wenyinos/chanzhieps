@@ -422,7 +422,7 @@ class helper
     {
         global $config;
 
-        $domain = substr($domain, 0, strpos($domain, ':'));
+        if(strpos($domain, ':') !== false) $domain = substr($domain, 0, strpos($domain, ':'));
         $domain = strtolower($domain);
         if($domain != 'localhost' and !preg_match('/^([a-z0-9\-]+\.)+[a-z0-9\-]+$/', $domain)) die('domain denied');
 
