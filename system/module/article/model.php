@@ -286,7 +286,9 @@ class articleModel extends model
         foreach($sticks as $stick) $stick->category   = current($stick->categories);
 
         /* Get images for these sticks. */
-        $images = $this->loadModel('file')->getByObject('article', array_keys($sticks), $isImage = true);
+        $stickIDList = array();
+        foreach($sticks as $stick) $stickIDList[] = $stick->id;
+        $images = $this->loadModel('file')->getByObject('article', $stickIDList, $isImage = true);
 
         /* Assign images to it's article. */
         foreach($sticks as $stick)
