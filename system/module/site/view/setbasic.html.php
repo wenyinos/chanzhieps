@@ -77,7 +77,7 @@
           <td colspan='2'>
             <div class='row'>
               <?php $placeholder = ($this->app->getClientLang() == 'en') ? "placeholder='{$lang->site->icpTip}'" : '';?>
-              <div class='col-sm-4'><?php echo html::input('icpSN', $this->config->site->icpSN, "class='form-control col-xs-2' $placeholder");?></div>
+              <div class='col-sm-4'><?php echo html::input('icpSN', isset($this->config->site->icpSN) ? $this->config->site->icpSN : '', "class='form-control col-xs-2' $placeholder");?></div>
               <div class='col-sm-8'>
                 <div class='input-group'>
                   <span class="input-group-addon"><?php echo $lang->site->icpLink;?></span>
