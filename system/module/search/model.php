@@ -220,7 +220,7 @@ class searchModel extends model
 
         $content = str_replace($words, $markedWords, $content . ' ');
         $content = str_replace("</span > <span class='text-danger'>", '', $content);
-        $content = str_replace("</span >", '</span>', $content);
+        $content = str_replace("</span > ", '</span>', $content);
 
         return $content;
     }
