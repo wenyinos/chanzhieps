@@ -34,7 +34,7 @@ include '../../mail/view/captcha.html.php';
                 <?php endif;?>
               </div>
               <?php else:?>
-              <?php $clientLang = $this->config->site->defaultLang;?>
+              <?php $clientLang = $this->config->site->lang;?>
               <?php $clientLang = strpos($clientLang, 'zh-') !== false ? str_replace('zh-', '', $clientLang) : $clientLang;?>
               <?php echo html::input("realnames[{$clientLang}]", $user->realname, "class='form-control'")?>
               <?php endif;?>
