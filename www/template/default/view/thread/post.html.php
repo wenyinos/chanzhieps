@@ -33,9 +33,9 @@ foreach (explode('|', $lang->thread->colorPlates) as $value)
           <div class='input-group'>
             <?php echo html::input('title', '', "class='form-control'");?>
             <div class='input-group-addon colorplate clearfix'>
-              <div class='input-group color active' data='#FFF'>
+              <div class='input-group color active' data=''>
                 <label class='input-group-addon'><?php echo $lang->thread->color;?></label>
-                <?php echo html::input('color', '#FFF', "class='form-control input-color text-latin' placeholder='" . $lang->thread->colorTip . "'");?>
+                <?php echo html::input('color', '', "class='form-control input-color text-latin' placeholder='" . $lang->thread->colorTip . "'");?>
                 <span class='input-group-btn'>
                   <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'> <i class='icon icon-question'></i> <span class='caret'></span></button>
                   <div class='dropdown-menu colors'>
@@ -58,21 +58,7 @@ foreach (explode('|', $lang->thread->colorPlates) as $value)
             </span>
           </div>
           <?php else:?>
-          <div class='input-group'>
-            <?php echo html::input('title', '', "class='form-control'");?>
-            <div class='input-group-addon colorplate clearfix'>
-              <div class='input-group color active' data='#FFF'>
-                <label class='input-group-addon'><?php echo $lang->thread->color;?></label>
-                <?php echo html::input('color', '#FFF', "class='form-control input-color text-latin' placeholder='" . $lang->thread->colorTip . "'");?>
-                <span class='input-group-btn'>
-                  <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'> <i class='icon icon-question'></i> <span class='caret'></span></button>
-                  <div class='dropdown-menu colors'>
-                    <?php echo $colorPlates; ?>
-                  </div>
-                </span>
-              </div>
-            </div>
-          </div>
+          <?php echo html::input('title', '', "class='form-control'");?>
           <?php endif;?>
         </div>
       </div>
