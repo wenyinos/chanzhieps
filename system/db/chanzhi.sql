@@ -388,6 +388,7 @@ CREATE TABLE IF NOT EXISTS `eps_user` (
   `reset` char(64) NOT NULL,
   `locked` datetime NOT NULL,
   `public` varchar(30) NOT NULL DEFAULT '0',
+  `emailCertified` enum('0', '1') NOT NULL DEFAULT '0',
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `lang` (`lang`),
