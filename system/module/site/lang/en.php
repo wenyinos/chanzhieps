@@ -40,6 +40,7 @@ $lang->site->cdn             = 'CND Site';
 $lang->site->importantOption = 'Important option';
 $lang->site->checkIP         = 'Check login IP';
 $lang->site->checkPosition   = 'Check login position';
+$lang->site->checkEmail      = 'Check Email';
 $lang->site->allowedPosition = 'Allowed position';
 $lang->site->checkSessionIP  = 'Check the login ip';
 $lang->site->setsecurity     = 'Security setting';
@@ -71,6 +72,10 @@ $lang->site->checkIPList['close'] = 'Close';
 $lang->site->checkPositionList = array();
 $lang->site->checkPositionList['open']  = 'Open';
 $lang->site->checkPositionList['close'] = 'Close';
+
+$lang->site->checkEmailList = array();
+$lang->site->checkEmailList['open']  = 'Open';
+$lang->site->checkEmailList['close'] = 'Close';
 
 $lang->site->sessionIpoptions = array();
 $lang->site->sessionIpoptions[0] = 'Can chaneged';

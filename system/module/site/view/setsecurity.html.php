@@ -31,6 +31,11 @@ include '../../mail/view/captcha.html.php';
           <td colspan='3'><?php echo html::radio('captcha', $lang->site->captchaList, isset($this->config->site->captcha) ? $this->config->site->captcha : 'auto');?></td>
         </tr>
         <tr>
+          <th class='w-200px'><?php echo $lang->site->checkEmail;?></th>
+          <td colspan='2'><?php echo html::radio('checkEmail', $lang->site->checkEmailList, isset($this->config->site->checkEmail) ? $this->config->site->checkEmail : 'close');?></td>
+          <td></td>
+        </tr>
+        <tr>
           <th><?php echo $lang->site->importantOption;?></th>
           <td colspan='3'>
             <?php echo html::checkbox('importantValidate', $lang->site->validateTypes, $this->config->site->importantValidate);?><br>

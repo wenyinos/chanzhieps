@@ -123,6 +123,7 @@ class site extends control
                 ->setDefault('checkIP', 'close')
                 ->setDefault('checkSessionIP', '0')
                 ->setDefault('checkPosition', 'close')
+                ->setDefault('checkEmail', 'close')
                 ->setDefault('allowedIP', '')
                 ->setDefault('importantValidate', '')
                 ->join('importantValidate', ',')

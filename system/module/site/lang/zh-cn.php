@@ -40,6 +40,7 @@ $lang->site->cdn             = 'CDN地址';
 $lang->site->importantOption = '重要操作';
 $lang->site->checkIP         = '后台登录IP白名单';
 $lang->site->checkPosition   = '后台登录地区验证';
+$lang->site->checkEmail      = '邮箱验证';
 $lang->site->allowedPosition = '允许登录地区';
 $lang->site->checkSessionIP  = '登录期间IP';
 $lang->site->setsecurity     = '安全设置';
@@ -71,6 +72,10 @@ $lang->site->checkIPList['close'] = '关闭';
 $lang->site->checkPositionList = array();
 $lang->site->checkPositionList['open']  = '打开';
 $lang->site->checkPositionList['close'] = '关闭';
+
+$lang->site->checkEmailList = array();
+$lang->site->checkEmailList['open']  = '打开';
+$lang->site->checkEmailList['close'] = '关闭';
 
 $lang->site->sessionIpoptions = array();
 $lang->site->sessionIpoptions[0] = '可以改变';
