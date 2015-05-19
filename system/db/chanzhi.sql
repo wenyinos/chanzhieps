@@ -245,7 +245,7 @@ CREATE TABLE IF NOT EXISTS `eps_product` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(150) NOT NULL,
   `alias` varchar(100) NOT NULL,
-  `mall` varchar(255) NOT NULL,
+  `mall` text NOT NULL,
   `brand` varchar(100) DEFAULT NULL,
   `model` char(30) DEFAULT NULL,
   `color` char(20) NOT NULL,
