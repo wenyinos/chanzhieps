@@ -299,6 +299,8 @@ class userModel extends model
      */
     public function update($account)
     {
+        $oldUser = $this->getByAccount($account);
+
         /* If the user want to change his password. */
         if($this->post->password1 != false)
         {
@@ -317,6 +319,8 @@ class userModel extends model
             ->remove('ip, account, join, visits, fingerprint, token')
             ->removeIF(RUN_MODE != 'admin', 'admin')
             ->get();
+
+        if($user->email != $oldUser->email) $user->emailCertified = 0;
 
         if((isset($user->admin) and $user->admin == 'super') or !empty($user->realnames))
         {
@@ -916,5 +920,27 @@ class userModel extends model
        if(strpos($token, md5($this->app->user->fingerprint . $this->app->user->tokenExpired)) === 0) return true;
 
        return false;
+    }
+
+    /**
+     * Check email.
+     * 
+     * @param  int    $email 
+     * @param  int    $account 
+     * @access public
+     * @return void
+     */
+    public function checkEmail($email, $account)
+    {
+        if(!$email or !validater::checkEmail($email)) return false;
+
+        $this->loadModel('mail');
+        $this->mail->send($email, $this->lang->mail->subject, $this->lang->mail->content); 
+        if(!$this->mail->isError()) 
+        {
+            $this->dao->update(TABLE_USER)->set('email')->eq($email)->set('emailCertified')->eq('1')->where('account')->eq($account)->exec();
+            return !dao::isError();
+        }
+        return false;
     }
 }

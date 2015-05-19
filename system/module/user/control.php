@@ -97,10 +97,11 @@ class user extends control
         /* If the user sumbit post, check the user and then authorize him. */
         if(!empty($_POST))
         {
+            $user = $this->user->getByAccount($this->post->account);
+
             /* check client ip and position if login is admin. */
             if(RUN_MODE == 'admin')
             {
-                $user          = $this->user->getByAccount($this->post->account);
                 $checkIP       = $this->user->checkIP();
                 $checkPosition = $this->user->checkPosition();
                 if($user and (!$checkIP or !$checkPosition))
@@ -114,6 +115,16 @@ class user extends control
             }
 
             if(!$this->user->login($this->post->account, $this->post->password)) $this->send(array('result'=>'fail', 'message' => $this->lang->user->loginFailed));
+
+            if(RUN_MODE == 'front')
+            {
+                if(isset($this->config->site->checkEmail) and $this->config->site->checkEmail == 'open' and $this->config->mail->turnon and !$user->emailCertified)
+                {
+                    $result = $this->user->checkEmail($user->email, $user->account);
+                    $referer = helper::safe64Encode($this->post->referer);
+                    if(!$result) $this->send(array('result'=>'success', 'locate'=> inlink('checkEmail', "account={$user->account}&referer={$referer}")));
+                }
+            }
 
             /* Goto the referer or to the default module */
             if($this->post->referer != false and strpos($loginLink . $denyLink . $regLink, $this->post->referer) === false)
@@ -722,6 +733,31 @@ class user extends control
         $this->view->logs  = $logs;
         $this->view->pager = $pager;
         $this->view->title = $this->lang->user->log->list;
+        $this->display();
+    }
+
+    /**
+     * Check email.
+     * 
+     * @param  string    $account 
+     * @access public
+     * @return void
+     */
+    public function checkEmail($account, $referer = '')
+    {
+        $this->setReferer($referer);
+        $user = $this->user->getByAccount($account);
+
+        if($_POST)
+        {
+            $result = $this->user->checkEmail($this->post->email, $account);
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->user->checkEmailSuccess, 'locate' => $this->post->referer));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->user->checkEmailFail));
+        }
+
+        $this->view->title   = $this->lang->user->checkEmail;
+        $this->view->user    = $user;
+        $this->view->referer = $this->referer;
         $this->display();
     }
 }
