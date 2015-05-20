@@ -3,7 +3,6 @@
 $clientLang = $this->app->getClientLang();
 css::import($jsRoot . 'datetimepicker/css/min.css');
 js::import($jsRoot  . 'datetimepicker/js/min.js'); 
-if($clientLang != 'en') js::import($jsRoot . 'datetimepicker/js/locales/' . $clientLang . '.js'); 
 ?>
 <script language='javascript'>
 $(function()
@@ -40,27 +39,20 @@ $(function()
         startDate: startDate
     };
 
-    var dateOptions = $.extend(options, {minView: 2, format: 'yyyy-mm-dd'});
-    var timeOptions = $.extend(options, {startView: 1, minView: 0, maxView: 1, format: 'hh:ii'});
+    var dateOptions = $.extend({}, options, {minView: 2, format: 'yyyy-mm-dd'});
+    var timeOptions = $.extend({}, options, {startView: 1, minView: 0, maxView: 1, format: 'hh:ii'});
 
     $('.form-datetime').fixedDate().datetimepicker(options);
-    $('.form-date').fixedDate().datetimepicker($.extend(options, {minView: 2, format: 'yyyy-mm-dd'}));
-    $('.form-time').fixedDate().datetimepicker($.extend(options, {startView: 1, minView: 0, maxView: 1, format: 'hh:ii'}));
+    $('.form-date').fixedDate().datetimepicker(dateOptions);
+    $('.form-time').fixedDate().datetimepicker(timeOptions);
 
     $('.datepicker-wrapper').click(function()
     {
         $(this).find('.form-date, .form-datetime, .form-time').datetimepicker('show').focus();
     });
-    
-    $(".date").datetimepicker
-    ({
-        format: 'yyyy-mm-dd hh:ii',
-        startDate:startDate,
-        pickerPosition: 'top-left',
-        todayBtn: true,
-        autoclose: true,
-        keyboardNavigation:false,
-        language:'<?php echo $clientLang?>'
-    });
+
+    $('.input-append.date').on('click', function(){
+        $(this).find('input').datetimepicker('show').focus();
+    }).find('input').datetimepicker($.extend({}, options, {pickerPosition: 'top-right'}));
 });
 </script>
