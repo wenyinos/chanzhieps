@@ -40,6 +40,7 @@ $lang->site->cdn             = 'CDN地址';
 $lang->site->importantOption = '重要操作';
 $lang->site->checkIP         = '後台登錄IP白名單';
 $lang->site->checkPosition   = '後台登錄地區驗證';
+$lang->site->checkEmail      = '會員郵箱綁定';
 $lang->site->allowedPosition = '允許登錄地區';
 $lang->site->checkSessionIP  = '登錄期間IP';
 $lang->site->setsecurity     = '安全設置';
@@ -71,6 +72,10 @@ $lang->site->checkIPList['close'] = '關閉';
 $lang->site->checkPositionList = array();
 $lang->site->checkPositionList['open']  = '打開';
 $lang->site->checkPositionList['close'] = '關閉';
+
+$lang->site->checkEmailList = array();
+$lang->site->checkEmailList['open']  = '打開';
+$lang->site->checkEmailList['close'] = '關閉';
 
 $lang->site->sessionIpoptions = array();
 $lang->site->sessionIpoptions[0] = '可以改變';

@@ -40,17 +40,20 @@ $lang->mail->subject        = '測試郵件';
 $lang->mail->content        = '郵箱設置成功';
 $lang->mail->successSended  = '成功發送！';
 $lang->mail->needConfigure  = '無法找到郵件配置信息，請先配置郵件發送參數。';
+$lang->mail->error          = '你的郵箱地址有誤，請填寫正確的郵箱地址。'; 
+$lang->mail->trySendlater   = '三分鐘內不能重複發送郵件。'; 
 
 $lang->mail->verify        = '驗證管理員身份';
 $lang->mail->captcha       = '驗證碼';
 $lang->mail->needVerify    = '需要驗證管理員身份';
-$lang->mail->verifyFail    = '驗證碼錯誤';
+$lang->mail->verifyFail    = '請填寫正確的驗證碼';
 $lang->mail->verifySuccess = '驗證通過，請繼續操作';
 $lang->mail->noConfigure   = " <span class='text-info'>無法找到發信配置信息，郵箱驗證未啟用。</span>";
 $lang->mail->noEmail       = " <span class='text-info'>未填寫個人郵箱，郵箱驗證未啟用。</span>";
 $lang->mail->verfyReason   = " 為了網站安全，<strong>%s</strong> 操作需要進行管理員身份驗證。</br>";
 $lang->mail->okFileVerfy   = "<strong>檔案方式</strong>：創建 %s 檔案。如果存在該檔案，使用編輯軟件打開，重新保存一遍。%s</br>";
 $lang->mail->emailVerfy    = "<strong>郵箱方式</strong>：驗證碼將發送至 %s。%s</br>";
+$lang->mail->sendSuccess   = '驗證碼已發送到您的郵箱中';
 
 $lang->mail->sendContent   = <<<EOT
 %s 您好：
