@@ -106,6 +106,8 @@ $config->rights->member['user']['checkemail'] = 'checkemail';
 
 $config->rights->member['file']['ajaxupload'] = 'ajaxupload';
 
+$config->rights->member['mail']['sendmailcode'] = 'sendmailcode';
+
 $config->rights->member['message']['view']        = 'view';
 $config->rights->member['message']['batchdelete'] = 'batchdelete';
 
