@@ -86,6 +86,10 @@ $lang->site->captchaList['open']  = 'Open';
 $lang->site->captchaList['close'] = 'Close';
 $lang->site->captchaList['auto']  = 'Automatic';
 
+$lang->site->validateTypes = new stdclass();
+$lang->site->validateTypes->okFile = 'ok.txt';
+$lang->site->validateTypes->email  = 'email';
+
 $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = 'Member';
 $lang->site->moduleAvailable['forum']   = 'Forum';
@@ -102,7 +106,6 @@ $lang->site->allowedDomainTip = 'Use "," to divide different domain.';
 $lang->site->allowedIPTip     = 'Use "," to divide different IP.';
 $lang->site->wrongAllowedIP   = 'Wrong IP';
 $lang->site->changePosition   = 'Your current login position not in allowed position.';
-$lang->site->safeModeholder   = "You'd better use Safe mode in a safe environment";
 $lang->site->sessionIpTip     = 'If opened login ip would be checked.';
 
 $lang->site->robots            = 'Robots';
