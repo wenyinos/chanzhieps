@@ -12,7 +12,7 @@
 ?>
 <?php
 if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}
-$webRoot   = isset($config->site->cdn) ? $config->site->cdn . $config->webRoot : $config->webRoot;
+$webRoot   = $config->webRoot;
 $jsRoot    = $webRoot . "js/";
 $themeRoot = $webRoot . "template/default/theme/";
 $navs = $this->tree->getChildren(0, 'blog');
