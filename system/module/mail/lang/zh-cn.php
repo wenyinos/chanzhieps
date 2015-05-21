@@ -40,17 +40,20 @@ $lang->mail->subject        = '测试邮件';
 $lang->mail->content        = '邮箱设置成功';
 $lang->mail->successSended  = '成功发送！';
 $lang->mail->needConfigure  = '无法找到邮件配置信息，请先配置邮件发送参数。';
+$lang->mail->error          = '你的邮箱地址有误，请填写正确的邮箱地址。'; 
+$lang->mail->trySendlater   = '三分钟内不能重复发送邮件。'; 
 
 $lang->mail->verify        = '验证管理员身份';
 $lang->mail->captcha       = '验证码';
 $lang->mail->needVerify    = '需要验证管理员身份';
-$lang->mail->verifyFail    = '验证码错误';
+$lang->mail->verifyFail    = '请填写正确的验证码';
 $lang->mail->verifySuccess = '验证通过，请继续操作';
 $lang->mail->noConfigure   = " <span class='text-info'>无法找到发信配置信息，邮箱验证未启用。</span>";
 $lang->mail->noEmail       = " <span class='text-info'>未填写个人邮箱，邮箱验证未启用。</span>";
 $lang->mail->verfyReason   = " 为了网站安全，<strong>%s</strong> 操作需要进行管理员身份验证。</br>";
 $lang->mail->okFileVerfy   = "<strong>文件方式</strong>：创建 %s 文件。如果存在该文件，使用编辑软件打开，重新保存一遍。%s</br>";
 $lang->mail->emailVerfy    = "<strong>邮箱方式</strong>：验证码将发送至 %s。%s</br>";
+$lang->mail->sendSuccess   = '验证码已发送到您的邮箱中';
 
 $lang->mail->sendContent   = <<<EOT
 %s 您好：

@@ -241,4 +241,37 @@ class mail extends control
         $this->display();
 
     }
+
+    /**
+     * Send mail code. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function sendMailCode($module, $method)
+    {
+        $account = $this->app->user->account; 
+        $email   = $this->post->email ? $this->post->email : $this->app->user->email;
+
+        $lastSendVar  = "lastSendTo{$account}";
+        $lastSendTime = $this->session->$lastSendVar;
+
+        if((time() - $lastSendTime) < 180) $this->send(array('result' => 'fail', 'message' => $this->lang->mail->trySendlater));
+
+        $this->session->set('verifyCode', mt_rand());
+        if(!validater::checkEmail($email)) $this->send(array('result' => 'fail', 'message' => $this->lang->mail->error));
+
+        $action  = isset($this->lang->{$module}->{$method}->common) ? $this->lang->{$module}->{$method}->common : $this->lang->{$module}->{$method};
+        $content = sprintf($this->lang->mail->sendContent, $account, $this->config->site->name, $this->server->http_host, $action, $this->session->verifyCode, $this->config->site->name);
+        $this->loadModel('mail')->send($email, $this->lang->mail->captcha, $content, true); 
+
+        if(!$this->mail->isError())
+        {
+            $this->session->set('lastSendTo' . $account, time());
+            $this->send(array('result' => 'success', 'message' => $this->lang->mail->sendSuccess));
+        }
+
+        $error = str_replace('\n', "<br />", join('', $this->mail->getError()));
+        $this->send(array('result' => 'fail', 'message' => $error));
+    }
 }

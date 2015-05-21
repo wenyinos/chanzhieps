@@ -40,6 +40,8 @@ $lang->mail->subject        = "It's a testing email from zentao.";
 $lang->mail->content        = 'Well done, the email notification feature works now!';
 $lang->mail->successSended  = 'Successfully sended!';
 $lang->mail->needConfigure  = "I can not find the configuration, please configure it first.";
+$lang->mail->error          = 'Please input correct email.'; 
+$lang->mail->trySendlater   = 'Can not send email in three minutes.'; 
 
 $lang->mail->verify        = 'Verify identify of admin';
 $lang->mail->captcha       = 'Email captcha';
@@ -51,6 +53,7 @@ $lang->mail->noEmail       = " <span class='text-info'>I can not find your email
 $lang->mail->verfyReason   = " For security reason.<strong>%s</strong> please do these steps</br>";
 $lang->mail->okFileVerfy   = "<strong>File</strong>:Create %s file. If this file exists already, reopen it and save again.%s</br>";
 $lang->mail->emailVerfy    = "<strong>Email</strong>:The email captcha will send to %s. %s</br>";
+$lang->mail->sendSuccess   = 'Captcha has been sent to your mailbox.';
 
 $lang->mail->sendContent   = <<<EOT
 Hello %s：
