@@ -3,12 +3,22 @@
   <div class='panel panel-pure' id='checkEmail'>
     <div class='panel-heading'><strong><?php echo $lang->user->checkEmail;?></strong></div>
     <div class='panel-body'>
-      <form method='post' action='<?php echo inlink('checkEmail', "account=$user->account");?>' id='ajaxForm'>
-        <div class='alert alert-danger'><?php echo $lang->user->emailNoCertified;?></div>
-        <div class='form-group'>
-          <?php echo html::input('email', $user->email, "class='form-control'");?>
-        </div>
-        <?php echo html::submitButton('', 'btn btn-primary btn-block') . html::hidden('referer', $referer);?>
+      <form method='post' action='<?php echo inlink('checkEmail');?>' id='ajaxForm'>
+        <table class='table table-form'>
+          <tr>
+            <th><?php echo $lang->user->email;?></th>
+            <td><?php echo html::input('email', $user->email, "class='form-control'");?></td>
+            <td><?php echo html::a($this->createLink('mail', 'sendmailcode', "module=user&method=checkEmail"), $lang->user->getEmailCode, "id='mailSender' class='btn btn-xs'");?></td>
+          </tr>
+          <tr>
+            <th><?php echo $lang->user->captcha;?></th>
+            <td><?php echo html::input('captcha', '', "class='form-control'");?></td>
+          </tr>
+          <tr>
+            <th></th>
+            <td><?php echo html::submitButton() . html::hidden('referer', $referer);?></td>
+          </tr>
+        </table>
       </form>
     </div>
   </div>

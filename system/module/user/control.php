@@ -120,9 +120,8 @@ class user extends control
             {
                 if(isset($this->config->site->checkEmail) and $this->config->site->checkEmail == 'open' and $this->config->mail->turnon and !$user->emailCertified)
                 {
-                    $result = $this->user->checkEmail($user->email, $user->account);
                     $referer = helper::safe64Encode($this->post->referer);
-                    if(!$result) $this->send(array('result'=>'success', 'locate'=> inlink('checkEmail', "account={$user->account}&referer={$referer}")));
+                    $this->send(array('result'=>'success', 'locate'=> inlink('checkEmail', "referer={$referer}")));
                 }
             }
 
@@ -743,16 +742,18 @@ class user extends control
      * @access public
      * @return void
      */
-    public function checkEmail($account, $referer = '')
+    public function checkEmail($referer = '')
     {
         $this->setReferer($referer);
-        $user = $this->user->getByAccount($account);
+        $user = $this->user->getByAccount($this->app->user->account);
+        if($user->emailCertified) $this->locate(inlink('control'));
 
         if($_POST)
         {
-            $result = $this->user->checkEmail($this->post->email, $account);
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->user->checkEmailSuccess, 'locate' => $this->post->referer));
-            $this->send(array('result' => 'fail', 'message' => $this->lang->user->checkEmailFail));
+            if(!trim($this->post->captcha) or trim($this->post->captcha) != $this->session->verifyCode) $this->send(array('result' => 'fail', 'message' => $this->lang->user->verifyFail));
+            $this->user->checkEmail($this->post->email);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->user->checkEmailSuccess, 'locate' => $this->post->referer));
         }
 
         $this->view->title   = $this->lang->user->checkEmail;

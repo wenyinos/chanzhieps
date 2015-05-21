@@ -40,6 +40,7 @@ $lang->user->ip        = '最后IP';
 $lang->user->last      = '最后登录';
 $lang->user->allowTime = '开放时间';
 $lang->user->status    = '状态';
+$lang->user->captcha   = '验证码';
 $lang->user->alert     = '您的帐号已被禁用';
 
 $lang->user->list            = '会员列表';
@@ -64,7 +65,8 @@ $lang->user->forbid          = '禁用';
 $lang->user->activate        = '解禁';
 $lang->user->pullWechatFans  = '更新微信会员数据';
 $lang->user->adminlog        = '登录日志';
-$lang->user->checkEmail      = '验证邮箱';
+$lang->user->checkEmail      = '绑定邮箱';
+$lang->user->getEmailCode    = '获取邮箱验证码';
 
 $lang->user->profile     = '个人信息';
 $lang->user->editProfile = '编辑信息';
@@ -93,10 +95,9 @@ $lang->user->activateSuccess   = '解除禁用成功';
 $lang->user->activateFail      = '解除禁用失败';
 $lang->user->pullSuccess       = '获取微信会员成功';
 $lang->user->wrongPwd          = '密码错误';
-$lang->user->checkEmailSuccess = '邮箱通过验证';
-$lang->user->checkEmailFail    = '邮箱验证失败';
+$lang->user->checkEmailSuccess = '邮箱绑定成功';
 
-$lang->user->forbidUser          = '禁用管理';
+$lang->user->forbidUser = '禁用管理';
 $lang->user->forbidDate = array();
 $lang->user->forbidDate['1']     = '一天';
 $lang->user->forbidDate['2']     = '两天';
@@ -199,6 +200,6 @@ $lang->user->log->position    = '登录地址';
 $lang->user->log->date        = '登录时间';
 $lang->user->log->desc        = '描述';
 
-$lang->user->ipDenied         = '登录IP受限，请按提示操作。';
-$lang->user->positionDenied   = '登录地区受限，请按提示操作。';
-$lang->user->emailNoCertified = '邮箱验证失败，请填写正确的邮箱。';
+$lang->user->ipDenied       = '登录IP受限，请按提示操作。';
+$lang->user->positionDenied = '登录地区受限，请按提示操作。';
+$lang->user->verifyFail     = '请填写正确的验证码';

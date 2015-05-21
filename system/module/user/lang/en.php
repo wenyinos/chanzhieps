@@ -40,6 +40,7 @@ $lang->user->ip        = 'Last ip address';
 $lang->user->last      = 'Last login time';
 $lang->user->allowTime = 'Allow time';
 $lang->user->status    = 'Status';
+$lang->user->captcha   = 'Captcha';
 $lang->user->alert     = 'Your account has been forbidden';
 
 $lang->user->list            = 'User list';
@@ -65,6 +66,7 @@ $lang->user->activate        = 'Activate';
 $lang->user->pullWechatFans  = 'Pull wechat uses';
 $lang->user->adminlog        = 'Admin login';
 $lang->user->checkEmail      = 'Check Email';
+$lang->user->getEmailCode    = 'Get email code';
 
 $lang->user->profile     = 'Profile';
 $lang->user->editProfile = 'Edit profile';
@@ -94,7 +96,6 @@ $lang->user->activateFail      = 'Failed activate.';
 $lang->user->pullSuccess       = 'Get wechat users successfully';
 $lang->user->wrongPwd          = 'Wrong password';
 $lang->user->checkEmailSuccess = 'Check email successfully';
-$lang->user->checkEmailFail    = 'Check email fail';
 
 $lang->user->forbidUser = 'Manage user';
 $lang->user->forbidDate = array();
@@ -199,6 +200,6 @@ $lang->user->log->position    = 'Position';
 $lang->user->log->date        = 'Date';
 $lang->user->log->desc        = 'description';
 
-$lang->user->ipDenied         = 'This IP not allowed login, please do these steps.';
-$lang->user->positionDenied   = 'This position not allowed login, please do these steps.';
-$lang->user->emailNoCertified = 'Check email fail,Please input correct email.';
+$lang->user->ipDenied       = 'This IP not allowed login, please do these steps.';
+$lang->user->positionDenied = 'This position not allowed login, please do these steps.';
+$lang->user->verifyFail     = 'Check email fail,Please input correct email.';

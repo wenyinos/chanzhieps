@@ -930,17 +930,18 @@ class userModel extends model
      * @access public
      * @return void
      */
-    public function checkEmail($email, $account)
+    public function checkEmail($email)
     {
-        if(!$email or !validater::checkEmail($email)) return false;
+        $user = new stdclass();
+        $user->email          = $email;
+        $user->emailCertified = 1;
 
-        $this->loadModel('mail');
-        $this->mail->send($email, $this->lang->mail->subject, $this->lang->mail->content); 
-        if(!$this->mail->isError()) 
-        {
-            $this->dao->update(TABLE_USER)->set('email')->eq($email)->set('emailCertified')->eq('1')->where('account')->eq($account)->exec();
-            return !dao::isError();
-        }
-        return false;
+        $this->dao->update(TABLE_USER)
+            ->data($user)
+            ->check('email', 'notempty')
+            ->where('account')->eq($this->app->user->account)
+            ->exec();
+
+        return !dao::isError();
     }
 }
