@@ -233,7 +233,7 @@ class searchModel extends model
      */
     public function buildAllIndex()
     {
-        $this->dbh->query('TRUNCATE ' . TABLE_SEARCH_INDEX);
+        $this->dao->delete()->from(TABLE_SEARCH_INDEX)->exec();
 
         $categories = $this->dao->select('id,alias')->from(TABLE_CATEGORY)->fetchPairs();
         $articles   = $this->dao->select('t1.*, t2.category as category')->from(TABLE_ARTICLE)->alias('t1')->leftJoin(TABLE_RELATION)->alias('t2')->on("t1.id=t2.id")->where('t2.type')->in('article,blog')->fetchAll('id');
