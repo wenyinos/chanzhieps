@@ -24,10 +24,13 @@
           <th class='col-xs-2'><?php echo $lang->site->setPage->product;?></th> 
           <td class='col-xs-6'><?php echo html::input('productRec', !empty($this->config->site->productRec) ? $this->config->site->productRec : $this->config->product->recPerPage, "class='form-control'");?></td><td></td>
         </tr>
+        <?php if(strpos($this->config->site->modules, 'blog') !== false):?>
         <tr>
           <th class='col-xs-2'><?php echo $lang->site->setPage->blog;?></th> 
           <td class='col-xs-6'><?php echo html::input('blogRec', !empty($this->config->site->blogRec) ? $this->config->site->blogRec : $this->config->blog->recPerPage, "class='form-control'");?></td><td></td>
         </tr>
+        <?php endif;?>
+        <?php if(strpos($this->config->site->modules, 'message') !== false):?>
         <tr>
           <th class='col-xs-2'><?php echo $lang->site->setPage->message;?></th> 
           <td class='col-xs-6'><?php echo html::input('messageRec', !empty($this->config->site->messageRec) ? $this->config->site->messageRec : $this->config->message->recPerPage, "class='form-control'");?></td><td></td>
@@ -36,6 +39,8 @@
           <th class='col-xs-2'><?php echo $lang->site->setPage->comment;?></th> 
           <td class='col-xs-6'><?php echo html::input('commentRec', !empty($this->config->site->commentRec) ? $this->config->site->commentRec : $this->config->message->recPerPage, "class='form-control'");?></td><td></td>
         </tr>
+        <?php endif;?>
+        <?php if(strpos($this->config->site->modules, 'forum') !== false):?>
         <tr>
           <th class='col-xs-2'><?php echo $lang->site->setPage->forum;?></th> 
           <td class='col-xs-6'><?php echo html::input('forumRec', !empty($this->config->site->forumRec) ? $this->config->site->forumRec : $this->config->forum->recPerPage, "class='form-control'");?></td><td></td>
@@ -44,6 +49,7 @@
           <th class='col-xs-2'><?php echo $lang->site->setPage->reply;?></th> 
           <td class='col-xs-6'><?php echo html::input('replyRec', !empty($this->config->site->replyRec) ? $this->config->site->replyRec : $this->config->reply->recPerPage, "class='form-control'");?></td><td></td>
         </tr>
+        <?php endif;?>
         <tr>
           <th></th>
           <td colspan='2'>

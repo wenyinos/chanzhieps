@@ -163,10 +163,14 @@ class site extends control
     {
         $this->app->loadConfig('article');
         $this->app->loadConfig('product');
-        $this->app->loadConfig('blog');
-        $this->app->loadConfig('forum');
-        $this->app->loadConfig('reply');
-        $this->app->loadConfig('message');
+        if(strpos($this->config->site->modules, 'blog') !== false) $this->app->loadConfig('blog');
+        if(strpos($this->config->site->modules, 'message') !== false) $this->app->loadConfig('message');
+        if(strpos($this->config->site->modules, 'forum') !== false) 
+        {
+            $this->app->loadConfig('forum');
+            $this->app->loadConfig('reply');
+        }
+
         if(!empty($_POST))
         {
             $setting = fixer::input('post')->get();
