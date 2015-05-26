@@ -98,10 +98,12 @@ js::execute($product->js);
                   $attributeHtml .= "<li><span class='meta-name'>" . $attribute->label . "</span>";
                   $attributeHtml .= "<span class='meta-value'>" . $attribute->value . "</span></li>";
               }
-              if(empty($attributeHtml)) echo '<p class="product-summary">' . $product->desc . '</p>';
               echo $attributeHtml;
               ?>
-              <?php if(commonModel::isAvailable('order')):?>
+            </ul>
+            <?php if(empty($attributeHtml)) echo '<div class="product-summary">' . $product->desc . '</div>'; ?>
+            <?php if(commonModel::isAvailable('order')):?>
+            <ul class='list-unstyled meta-list'>
               <li id='countBox'>
                 <span class='meta-name'><?php echo $lang->product->count; ?></span>
                 <span class='meta-value'>
@@ -112,9 +114,7 @@ js::execute($product->js);
                   </div>
                 </span>
               </li>
-              <?php endif;?>
             </ul>
-            <?php if(commonModel::isAvailable('order')):?>
             <span id='buyBtnBox'>
               <label class='btn-buy'><?php echo $lang->product->buyNow;?></label>
               <label class='btn-cart'><?php echo $lang->product->addToCart;?></label>
