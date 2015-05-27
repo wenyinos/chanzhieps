@@ -14,8 +14,6 @@
 <?php js::set('position', $position)?>
 <?php if(isset($pass) and !$pass):?>
 <?php 
-$module = 'user';
-$method = 'edit';
 $url    = helper::safe64Encode($this->app->getURI());
 $target = 'self';
 include '../../mail/view/captcha.html.php';
