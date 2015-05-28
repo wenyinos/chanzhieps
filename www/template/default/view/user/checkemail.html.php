@@ -8,7 +8,7 @@
           <tr>
             <th><?php echo $lang->user->email;?></th>
             <td><?php echo html::input('email', $user->email, "class='form-control'");?></td>
-            <td><?php echo html::a($this->createLink('mail', 'sendmailcode', "module=user&method=checkEmail"), $lang->user->getEmailCode, "id='mailSender' class='btn btn-xs'");?></td>
+            <td><?php echo html::a($this->createLink('mail', 'sendmailcode'), $lang->user->getEmailCode, "id='mailSender' class='btn btn-xs'");?></td>
           </tr>
           <tr>
             <th><?php echo $lang->user->captcha;?></th>

@@ -109,7 +109,7 @@ class user extends control
                     $error  = $checkIP ? '' : $this->lang->user->ipDenied;
                     $error .= $checkPosition ? '' : $this->lang->user->positionDenied;
                     $pass   = $this->loadModel('mail')->checkVerify();
-                    $captchaUrl = $this->createLink('mail', 'captcha', "module=user&method=login&url=&target=modal&account={$this->post->account}");
+                    $captchaUrl = $this->createLink('mail', 'captcha', "url=&target=modal&account={$this->post->account}");
                     if(!$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => $error, 'url' => $captchaUrl));
                 }
             }
@@ -293,10 +293,8 @@ class user extends control
         /* use email captcha. */
         if(RUN_MODE == 'admin' and ($user->admin == 'super' or $user->admin == 'common' or $this->post->admin == 'super' or $this->post->admin == 'common')) 
         { 
-            $check  = $this->loadModel('mail')->checkEmailSetting();
             $okFile = $this->loadModel('common')->verfyAdmin();
-            $pass   = $this->mail->checkVerify();
-            $this->view->check  = $check;
+            $pass   = $this->loadModel('mail')->checkVerify();
             $this->view->pass   = $pass;
             $this->view->okFile = $okFile;
             if(!empty($_POST) && !$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha'));
@@ -455,10 +453,8 @@ class user extends control
         if($this->app->user->account == 'guest') $this->locate(inlink('login'));
 
         /* use email captcha. */
-        $check  = $this->loadModel('mail')->checkEmailSetting();
         $okFile = $this->loadModel('common')->verfyAdmin();
-        $pass   = $this->mail->checkVerify();
-        $this->view->check  = $check;
+        $pass   = $this->loadModel('mail')->checkVerify();
         $this->view->okFile = $okFile;
         $this->view->pass   = $pass;
 

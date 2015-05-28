@@ -24,9 +24,7 @@
 </form>
 <?php else:?>
 <?php 
-$module = 'user';
-$method = 'changePassword';
-$url    = helper::safe64Encode($this->createLink('user', 'changepassword'));
+$url = helper::safe64Encode($this->createLink('user', 'changepassword'));
 include '../../mail/view/captcha.html.php';
 ?>
 <?php endif;?>
