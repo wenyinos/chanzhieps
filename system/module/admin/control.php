@@ -32,7 +32,7 @@ class admin extends control
      **/
     public function ignoreUpgrade()
     {
-        $result = $this->loadModel('setting')->setItems('system.common.global', array('ignoreUpgrade' => true));
+        $result = $this->loadModel('setting')->setItems('system.common.global', array('ignoreUpgrade' => true), 'all');
         if($result) $this->send(array('result' => 'success', 'locate' => inlink('index')));
         $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
     }

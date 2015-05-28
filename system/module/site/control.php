@@ -108,10 +108,8 @@ class site extends control
      */
     public function setSecurity()
     {
-        $check  = $this->loadModel('mail')->checkEmailSetting();
         $okFile = $this->loadModel('common')->verfyAdmin();
-        $pass   = $this->mail->checkVerify();
-        $this->view->check  = $check;
+        $pass   = $this->loadModel('mail')->checkVerify();
         $this->view->pass   = $pass;
         $this->view->okFile = $okFile;
         if(!empty($_POST) && !$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha'));
@@ -123,6 +121,7 @@ class site extends control
                 ->setDefault('checkIP', 'close')
                 ->setDefault('checkSessionIP', '0')
                 ->setDefault('checkPosition', 'close')
+                ->setDefault('checkEmail', 'close')
                 ->setDefault('allowedIP', '')
                 ->setDefault('importantValidate', '')
                 ->join('importantValidate', ',')
@@ -162,10 +161,14 @@ class site extends control
     {
         $this->app->loadConfig('article');
         $this->app->loadConfig('product');
-        $this->app->loadConfig('blog');
-        $this->app->loadConfig('forum');
-        $this->app->loadConfig('reply');
-        $this->app->loadConfig('message');
+        if(strpos($this->config->site->modules, 'blog') !== false) $this->app->loadConfig('blog');
+        if(strpos($this->config->site->modules, 'message') !== false) $this->app->loadConfig('message');
+        if(strpos($this->config->site->modules, 'forum') !== false) 
+        {
+            $this->app->loadConfig('forum');
+            $this->app->loadConfig('reply');
+        }
+
         if(!empty($_POST))
         {
             $setting = fixer::input('post')->get();

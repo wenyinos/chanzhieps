@@ -426,24 +426,6 @@ class mailModel extends model
     }
 
     /**
-     * Get mail captcha error.
-     * 
-     * @access public
-     * @return string
-     */
-    public function checkEmailSetting($account = '')
-    {
-        $msg = '';
-        if($account == '') $account = $this->app->user->account;
-        if(!$this->config->mail->turnon) $msg .= $this->lang->mail->noConfigure;
-
-        $user = $this->loadModel('user')->getByAccount($account);
-        if(empty($user->email)) $msg .= $this->lang->mail->noEmail;
-
-        return empty($msg) ? array('result' => 'success') : array('result' => 'fail', 'message' => $msg);
-    }
-
-    /**
      * Is error?
      * 
      * @access public

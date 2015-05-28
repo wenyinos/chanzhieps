@@ -18,9 +18,8 @@
       <tr class='text-center'>
         <th class='w-60px'> <?php echo $lang->user->log->id;?></th>
         <th class='w-100px'><?php echo $lang->user->log->account;?></th>
-        <th><?php echo $lang->user->log->desc;?></th>
-        <th class='w-100px'><?php echo $lang->user->log->browser;?></th>
-        <th class='w-200px'><?php echo $lang->user->log->fingerprint;?></th>
+        <th class='w-120px'><?php echo $lang->user->log->desc;?></th>
+        <th class='w-120px'><?php echo $lang->user->log->browser;?></th>
         <th class='w-100px'><?php echo $lang->user->log->ip;?></th>
         <th class='w-200px'><?php echo $lang->user->log->position;?></th>
         <th class='w-150px'><?php echo $lang->user->log->date;?></th>
@@ -33,7 +32,6 @@
       <td><?php commonModel::printLink('user', 'adminlog', "account=$log->account", $log->account);?></td>
       <td><?php echo $log->desc;?></td>
       <td><?php echo $log->browser;?></td>
-      <td><?php echo $log->fingerprint;?></td>
       <td><?php commonModel::printLink('user', 'adminlog', "ip=$log->ip", $log->ip);?></td>
       <td><?php commonModel::printLink('user', 'adminlog', "position=$log->position", $log->position);?></td>
       <td><?php echo $log->date;?></td>

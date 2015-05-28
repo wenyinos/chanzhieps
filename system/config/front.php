@@ -95,15 +95,18 @@ $config->rights->member['reply']['hide']       = 'hide';
 $config->rights->member['reply']['delete']     = 'delete';
 $config->rights->member['reply']['deletefile'] = 'deletefile';
 
-$config->rights->member['user']['control'] = 'control';
-$config->rights->member['user']['profile'] = 'profile';
-$config->rights->member['user']['edit']    = 'edit';
-$config->rights->member['user']['logout']  = 'logout';
-$config->rights->member['user']['thread']  = 'thread';
-$config->rights->member['user']['reply']   = 'reply';
-$config->rights->member['user']['message'] = 'message';
+$config->rights->member['user']['control']    = 'control';
+$config->rights->member['user']['profile']    = 'profile';
+$config->rights->member['user']['edit']       = 'edit';
+$config->rights->member['user']['logout']     = 'logout';
+$config->rights->member['user']['thread']     = 'thread';
+$config->rights->member['user']['reply']      = 'reply';
+$config->rights->member['user']['message']    = 'message';
+$config->rights->member['user']['checkemail'] = 'checkemail';
 
 $config->rights->member['file']['ajaxupload'] = 'ajaxupload';
+
+$config->rights->member['mail']['sendmailcode'] = 'sendmailcode';
 
 $config->rights->member['message']['view']        = 'view';
 $config->rights->member['message']['batchdelete'] = 'batchdelete';

@@ -715,6 +715,7 @@ class router
             $domains = explode(',', str_replace('，', ',', $domains->value));
             foreach($domains as $domain)
             {
+                $domain   = str_replace('http://', '', $domain);
                 $tmpCode  = helper::getSiteCode($domain);
                 $siteCode = helper::getSiteCode($this->server->http_host);
                 if($siteCode == $tmpCode)

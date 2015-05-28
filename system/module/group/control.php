@@ -32,6 +32,10 @@ class group extends control
      */
     public function browse($companyID = 0)
     {
+        if(empty($this->config->oauth->sina)) unset($this->lang->user->menu->sina);
+        if(empty($this->config->oauth->qq))   unset($this->lang->user->menu->qq);
+        if(!($this->loadModel('wechat')->getList())) unset($this->lang->user->menu->wechat);
+
         $groups = $this->group->getList($companyID);
         $groupUsers = array();
         foreach($groups as $group) $groupUsers[$group->id] = $this->group->getUserPairs($group->id);

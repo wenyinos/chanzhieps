@@ -97,10 +97,11 @@ class user extends control
         /* If the user sumbit post, check the user and then authorize him. */
         if(!empty($_POST))
         {
+            $user = $this->user->getByAccount($this->post->account);
+
             /* check client ip and position if login is admin. */
             if(RUN_MODE == 'admin')
             {
-                $user          = $this->user->getByAccount($this->post->account);
                 $checkIP       = $this->user->checkIP();
                 $checkPosition = $this->user->checkPosition();
                 if($user and (!$checkIP or !$checkPosition))
@@ -108,12 +109,21 @@ class user extends control
                     $error  = $checkIP ? '' : $this->lang->user->ipDenied;
                     $error .= $checkPosition ? '' : $this->lang->user->positionDenied;
                     $pass   = $this->loadModel('mail')->checkVerify();
-                    $captchaUrl = $this->createLink('mail', 'captcha', "module=user&method=login&url=&target=modal&account={$this->post->account}");
+                    $captchaUrl = $this->createLink('mail', 'captcha', "url=&target=modal&account={$this->post->account}");
                     if(!$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => $error, 'url' => $captchaUrl));
                 }
             }
 
             if(!$this->user->login($this->post->account, $this->post->password)) $this->send(array('result'=>'fail', 'message' => $this->lang->user->loginFailed));
+
+            if(RUN_MODE == 'front')
+            {
+                if(isset($this->config->site->checkEmail) and $this->config->site->checkEmail == 'open' and $this->config->mail->turnon and !$user->emailCertified)
+                {
+                    $referer = helper::safe64Encode($this->post->referer);
+                    $this->send(array('result'=>'success', 'locate'=> inlink('checkEmail', "referer={$referer}")));
+                }
+            }
 
             /* Goto the referer or to the default module */
             if($this->post->referer != false and strpos($loginLink . $denyLink . $regLink, $this->post->referer) === false)
@@ -283,10 +293,8 @@ class user extends control
         /* use email captcha. */
         if(RUN_MODE == 'admin' and ($user->admin == 'super' or $user->admin == 'common' or $this->post->admin == 'super' or $this->post->admin == 'common')) 
         { 
-            $check  = $this->loadModel('mail')->checkEmailSetting();
             $okFile = $this->loadModel('common')->verfyAdmin();
-            $pass   = $this->mail->checkVerify();
-            $this->view->check  = $check;
+            $pass   = $this->loadModel('mail')->checkVerify();
             $this->view->pass   = $pass;
             $this->view->okFile = $okFile;
             if(!empty($_POST) && !$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha'));
@@ -445,10 +453,8 @@ class user extends control
         if($this->app->user->account == 'guest') $this->locate(inlink('login'));
 
         /* use email captcha. */
-        $check  = $this->loadModel('mail')->checkEmailSetting();
         $okFile = $this->loadModel('common')->verfyAdmin();
-        $pass   = $this->mail->checkVerify();
-        $this->view->check  = $check;
+        $pass   = $this->loadModel('mail')->checkVerify();
         $this->view->okFile = $okFile;
         $this->view->pass   = $pass;
 
@@ -722,6 +728,33 @@ class user extends control
         $this->view->logs  = $logs;
         $this->view->pager = $pager;
         $this->view->title = $this->lang->user->log->list;
+        $this->display();
+    }
+
+    /**
+     * Check email.
+     * 
+     * @param  string    $account 
+     * @access public
+     * @return void
+     */
+    public function checkEmail($referer = '')
+    {
+        $this->setReferer($referer);
+        $user = $this->user->getByAccount($this->app->user->account);
+        if($user->emailCertified) $this->locate(inlink('control'));
+
+        if($_POST)
+        {
+            if(!trim($this->post->captcha) or trim($this->post->captcha) != $this->session->verifyCode) $this->send(array('result' => 'fail', 'message' => $this->lang->user->verifyFail));
+            $this->user->checkEmail($this->post->email);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->user->checkEmailSuccess, 'locate' => $this->post->referer));
+        }
+
+        $this->view->title   = $this->lang->user->checkEmail;
+        $this->view->user    = $user;
+        $this->view->referer = $this->referer;
         $this->display();
     }
 }

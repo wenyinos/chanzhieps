@@ -229,7 +229,7 @@ class fileModel extends model
             unlink($uploadedFile);
             unlink($tmpFile);
             rmdir(dirname($tmpFile));
-            $file['pathname']  = substr($file['pathname'], 0, 4) . '.zip';
+            $file['pathname']  = substr($file['pathname'], 0, -4) . '.zip';
             $file['extension'] = 'zip';
         }
 

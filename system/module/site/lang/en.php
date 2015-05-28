@@ -40,6 +40,7 @@ $lang->site->cdn             = 'CND Site';
 $lang->site->importantOption = 'Important option';
 $lang->site->checkIP         = 'Check login IP';
 $lang->site->checkPosition   = 'Check login position';
+$lang->site->checkEmail      = 'Check Email';
 $lang->site->allowedPosition = 'Allowed position';
 $lang->site->checkSessionIP  = 'Check the login ip';
 $lang->site->setsecurity     = 'Security setting';
@@ -72,6 +73,10 @@ $lang->site->checkPositionList = array();
 $lang->site->checkPositionList['open']  = 'Open';
 $lang->site->checkPositionList['close'] = 'Close';
 
+$lang->site->checkEmailList = array();
+$lang->site->checkEmailList['open']  = 'Open';
+$lang->site->checkEmailList['close'] = 'Close';
+
 $lang->site->sessionIpoptions = array();
 $lang->site->sessionIpoptions[0] = 'Can chaneged';
 $lang->site->sessionIpoptions[1] = 'Must be same';
@@ -80,6 +85,10 @@ $lang->site->captchaList = array();
 $lang->site->captchaList['open']  = 'Open';
 $lang->site->captchaList['close'] = 'Close';
 $lang->site->captchaList['auto']  = 'Automatic';
+
+$lang->site->validateTypes = new stdclass();
+$lang->site->validateTypes->okFile = 'ok.txt';
+$lang->site->validateTypes->email  = 'email';
 
 $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = 'Member';
@@ -97,7 +106,6 @@ $lang->site->allowedDomainTip = 'Use "," to divide different domain.';
 $lang->site->allowedIPTip     = 'Use "," to divide different IP.';
 $lang->site->wrongAllowedIP   = 'Wrong IP';
 $lang->site->changePosition   = 'Your current login position not in allowed position.';
-$lang->site->safeModeholder   = "You'd better use Safe mode in a safe environment";
 $lang->site->sessionIpTip     = 'If opened login ip would be checked.';
 
 $lang->site->robots            = 'Robots';
