@@ -194,7 +194,6 @@ $lang->user->log->list   = '管理員登錄日誌';
 $lang->user->log->id          = 'ID';
 $lang->user->log->account     = '用戶';
 $lang->user->log->browser     = '瀏覽器';
-$lang->user->log->fingerprint = '瀏覽器指紋';
 $lang->user->log->ip          = 'IP';
 $lang->user->log->position    = '登錄地址';
 $lang->user->log->date        = '登錄時間';
