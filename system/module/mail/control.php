@@ -215,9 +215,9 @@ class mail extends control
      * @access public
      * @return void
      */
-    public function sendMailCode()
+    public function sendMailCode($account = '')
     {
-        $account = $this->app->user->account; 
+        $account = $account ? $account : $this->app->user->account; 
         $user    = $this->loadModel('user')->getByAccount($account);
         $email   = $this->post->email ? $this->post->email : $user->email;
 

@@ -42,7 +42,7 @@ $(document).ready(function()
         <th><?php echo $lang->mail->email;?></th>
         <td><?php echo html::input('captcha', '', "class='form-control' placeholder={$lang->mail->captcha}");?></td>
         <td class='w-50px'><?php echo $mailBtn;?></td>
-        <td><?php echo html::a($this->createLink('mail', 'sendmailcode'), $lang->mail->getEmailCode, "id='mailSender' class='btn btn-xs'");?></td>
+        <td><?php echo html::a($this->createLink('mail', 'sendmailcode', "account=$account"), $lang->mail->getEmailCode, "id='mailSender' class='btn btn-xs'");?></td>
       </tr>
       <?php endif;?>
     </table>

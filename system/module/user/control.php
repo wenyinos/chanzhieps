@@ -109,7 +109,7 @@ class user extends control
                     $error  = $checkIP ? '' : $this->lang->user->ipDenied;
                     $error .= $checkPosition ? '' : $this->lang->user->positionDenied;
                     $pass   = $this->loadModel('mail')->checkVerify();
-                    $captchaUrl = $this->createLink('mail', 'captcha', "module=user&method=login&url=&target=modal&account={$this->post->account}");
+                    $captchaUrl = $this->createLink('mail', 'captcha', "url=&target=modal&account={$this->post->account}");
                     if(!$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => $error, 'url' => $captchaUrl));
                 }
             }
