@@ -2,6 +2,8 @@ $(document).ready(function()
 {
     $('#execButton').click(function()
     {
+        $('#execButton').hide();
+        
         $.getJSON($(this).attr('href'), function(response)
         {
            if(response.result == 'finished')
