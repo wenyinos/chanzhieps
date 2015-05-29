@@ -46,17 +46,23 @@ class search extends control
      * @access public
      * @return void
      */
-    public function buildIndex()
+    public function buildIndex($type = 'article', $lastID = '')
     {
-        $this->search->buildAllIndex();
         if(helper::isAjaxRequest())
         {
-            $this->send(array('result' => 'success', 'message' => $this->lang->search->buildSuccessfully));
+            $result = $this->search->buildAllIndex($type, $lastID);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            if(isset($result['finished']) and $result['finished'])
+            {
+                $this->send(array('result' => 'finished', 'message' => $this->lang->search->buildSuccessfully));
+            }
+            else
+            {
+                $this->send(array('result' => 'unfinished', 'message' => sprintf($this->lang->search->buildResult, $result['count']),'next' => inlink('buildIndex', "type={$result['type']}&lastID={$result['lastID']}") ));
+            }
         }
-        else
-        {
-            echo js::alert($this->lang->search->buildSuccessfully);
-            die("<script>history.go(-1)</script>");
-        }
+
+        $this->view->title = $this->lang->search->buildIndex;
+        $this->display();
     }
 }
