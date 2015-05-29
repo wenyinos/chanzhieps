@@ -18,7 +18,7 @@
       <tr class='text-center'>
         <th class='w-60px'> <?php echo $lang->user->log->id;?></th>
         <th class='w-100px'><?php echo $lang->user->log->account;?></th>
-        <th class='w-120px'><?php echo $lang->user->log->desc;?></th>
+        <th><?php echo $lang->user->log->desc;?></th>
         <th class='w-120px'><?php echo $lang->user->log->browser;?></th>
         <th class='w-100px'><?php echo $lang->user->log->ip;?></th>
         <th class='w-200px'><?php echo $lang->user->log->position;?></th>
