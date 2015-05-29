@@ -78,7 +78,6 @@ $config->rights->guest['cart']['printtopbar']   = 'printtopbar';
 $config->rights->guest['order']['confirm']      = 'confirm';
 $config->rights->guest['order']['processorder'] = 'processorder';
 
-
 /* For logged member. */
 $config->rights->member['thread']['post']         = 'post';
 $config->rights->member['thread']['reply']        = 'reply';
@@ -105,8 +104,6 @@ $config->rights->member['user']['message']    = 'message';
 $config->rights->member['user']['checkemail'] = 'checkemail';
 
 $config->rights->member['file']['ajaxupload'] = 'ajaxupload';
-
-$config->rights->member['mail']['sendmailcode'] = 'sendmailcode';
 
 $config->rights->member['message']['view']        = 'view';
 $config->rights->member['message']['batchdelete'] = 'batchdelete';

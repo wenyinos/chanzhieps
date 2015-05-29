@@ -142,6 +142,7 @@ $lang->menuGroups->block   = 'ui';
 $lang->menuGroups->slide   = 'ui';
 $lang->menuGroups->tree    = 'article';
 $lang->menuGroups->message = 'feedback';
+$lang->menuGroups->search  = 'site';
 
 /* Menu of article module. */
 $lang->article = new stdclass();
@@ -262,6 +263,10 @@ $lang->wechat->menu = $lang->site->menu;
 /* Menu of nav module. */
 $lang->nav = new stdclass();
 $lang->nav->menu = $lang->site->menu;
+
+/* Menu of search module. */
+$lang->search = new stdclass();
+$lang->search->menu = $lang->site->menu;
 
 /* Menu of tree module. */
 $lang->slide = new stdclass();
