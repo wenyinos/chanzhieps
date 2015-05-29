@@ -65,6 +65,7 @@ class settingModel extends model
         if(!empty($lang)) $item->lang = $lang;
 
         $this->dao->replace(TABLE_CONFIG)->data($item)->exec();
+        return !dao::isError();
     }
 
     /**

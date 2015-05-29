@@ -780,10 +780,11 @@ class commonModel extends model
 
         global $config;
 
+        $requestType = $config->requestType;
         $config->requestType = $config->frontRequestType;
         $link = helper::createLink($module, $method, $vars, $alias);
         $link = str_replace($_SERVER['SCRIPT_NAME'], $config->webRoot . 'index.php', $link);
-        $config->requestType = 'GET';
+        $config->requestType = $requestType;
 
         return $link;
     }
