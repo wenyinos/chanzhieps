@@ -194,7 +194,6 @@ $lang->user->log->list   = 'Admin user login log';
 $lang->user->log->id          = 'ID';
 $lang->user->log->account     = 'User';
 $lang->user->log->browser     = 'Browser';
-$lang->user->log->fingerprint = 'fingerprint';
 $lang->user->log->ip          = 'IP';
 $lang->user->log->position    = 'Position';
 $lang->user->log->date        = 'Date';
