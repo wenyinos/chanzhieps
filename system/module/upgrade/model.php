@@ -99,7 +99,9 @@ class upgradeModel extends model
                 $this->fillDefaultBlocks();
             case '4_1_beta':
                 $this->execSQL($this->getUpgradeFile('4.1.beta'));
-            case '4_2':
+            case '4_2';
+            case '4_2_1':
+                $this->execSQL($this->getUpgradeFile('4.2.1'));
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -143,8 +145,9 @@ class upgradeModel extends model
             case '3_2';
             case '3_3'      : $confirmContent .= file_get_contents($this->getUpgradeFile('3.3'));
             case '4_0';
-            case '4_1_beta' :  $confirmContent .= file_get_contents($this->getUpgradeFile('4.1.beta'));
+            case '4_1_beta' : $confirmContent .= file_get_contents($this->getUpgradeFile('4.1.beta'));
             case '4_2';
+            case '4_2_1' : $confirmContent .= file_get_contents($this->getUpgradeFile('4.2.1'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
