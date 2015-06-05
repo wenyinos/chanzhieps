@@ -25,7 +25,7 @@ class ui extends control
         $templates = $this->ui->getTemplates();
         if($template and isset($templates[$template]))
         {  
-            $settings = array();
+            $setting = array();
             $setting['name']   = $template;
             $setting['theme']  = $theme;
             $setting['parser'] = isset($templates[$template]['parser']) ? $templates[$template]['parser'] : 'default';
