@@ -226,7 +226,7 @@ class site extends control
     }
 
     /**
-     * set site basic info.
+     * set oauth login configure.
      * 
      * @access public
      * return void
