@@ -218,7 +218,6 @@ $lang->site->menu->security   = '安全设置|site|setsecurity|';
 $lang->site->menu->upload     = '上传设置|site|setupload|';
 $lang->site->menu->tag        = '关键词设置|tag|admin|';
 $lang->site->menu->recPerPage = '列表数量设置|site|setrecperpage|';
-#$lang->site->menu->robots    = 'Robots|site|setrobots|';
 $lang->site->menu->oauth      = '开放登录|site|setoauth|';
 $lang->site->menu->yangcong   = '洋葱登录|site|setyangcong|';
 $lang->site->menu->link       = '友情链接|links|admin|';

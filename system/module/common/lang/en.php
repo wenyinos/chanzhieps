@@ -218,7 +218,6 @@ $lang->site->menu->security   = 'Security|site|setsecurity|';
 $lang->site->menu->upload     = 'Uploads|site|setupload|';
 $lang->site->menu->tag        = 'Tags|tag|admin|';
 $lang->site->menu->recPerPage = 'Set Records Per Page|site|setrecperpage|';
-#$lang->site->menu->robots    = 'Robots|site|setrobots|';
 $lang->site->menu->oauth      = 'Open OAuth|site|setoauth|';
 $lang->site->menu->link       = 'Links|links|admin|';
 $lang->site->menu->mail       = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
