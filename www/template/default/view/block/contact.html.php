@@ -12,7 +12,7 @@
 $block->content = json_decode($block->content);
 ?>
 <?php $contact = $this->loadModel('company')->getContact();?>
-<div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
+<div id="block<?php echo $block->id;?>" class='panel-block-contact panel panel-block <?php echo $blockClass;?>'>
   <div class='panel-heading'>
     <strong><?php echo $icon . $block->title;?></strong>
     <?php if(!empty($block->content->moreText) and !empty($block->content->moreUrl)):?>
