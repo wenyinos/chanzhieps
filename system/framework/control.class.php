@@ -293,8 +293,8 @@ class control
         if(!is_file($viewFile)) $this->app->triggerError("the view file $viewFile not found", __FILE__, __LINE__, $exit = true);
 
         /* Extension hook file. */
-        $commonExtHookFiles = glob($viewExtPath['common'] . $methodName . "*.{$this->viewType}.hook.php");
-        $siteExtHookFiles   = glob($viewExtPath['site'] . $methodName . "*.{$this->viewType}.hook.php");
+        $commonExtHookFiles = glob($viewExtPath['common'] . $methodName . ".*.{$this->viewType}.hook.php");
+        $siteExtHookFiles   = glob($viewExtPath['site'] . $methodName . ".*.{$this->viewType}.hook.php");
         $extHookFiles       = array_merge((array) $commonExtHookFiles, (array) $siteExtHookFiles);
         if(!empty($extHookFiles)) return array('viewFile' => $viewFile, 'hookFiles' => $extHookFiles);
 
