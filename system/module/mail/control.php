@@ -217,7 +217,7 @@ class mail extends control
      */
     public function sendMailCode($account = '')
     {
-        $account = $account ? $account : $this->app->user->account; 
+        $account = ($account and $account != 'qq') ? $account : $this->app->user->account; 
         $user    = $this->loadModel('user')->getByAccount($account);
         $email   = $this->post->email ? $this->post->email : $user->email;
 

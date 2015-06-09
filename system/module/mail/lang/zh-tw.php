@@ -7,17 +7,18 @@ $lang->mail->save   = '成功保存';
 $lang->mail->test   = '測試發信';
 $lang->mail->reset  = '重置';
 
-$lang->mail->turnon      = '是否打開';
-$lang->mail->fromAddress = '發信郵箱';
-$lang->mail->fromName    = '發信人';
-$lang->mail->mta         = '發信方式';
-$lang->mail->host        = 'smtp伺服器';
-$lang->mail->port        = 'smtp連接埠號';
-$lang->mail->auth        = '是否需要驗證';
-$lang->mail->username    = 'smtp帳號';
-$lang->mail->password    = 'smtp密碼';
-$lang->mail->secure      = '是否加密';
-$lang->mail->debug       = '調試級別';
+$lang->mail->turnon       = '是否打開';
+$lang->mail->fromAddress  = '發信郵箱';
+$lang->mail->fromName     = '發信人';
+$lang->mail->mta          = '發信方式';
+$lang->mail->host         = 'smtp伺服器';
+$lang->mail->port         = 'smtp連接埠號';
+$lang->mail->auth         = '是否需要驗證';
+$lang->mail->username     = 'smtp帳號';
+$lang->mail->password     = 'smtp密碼';
+$lang->mail->secure       = '是否加密';
+$lang->mail->debug        = '調試級別';
+$lang->mail->getEmailCode = '獲取郵箱驗證碼';
 
 $lang->mail->turnonList[1] = '打開';
 $lang->mail->turnonList[0] = '關閉';
@@ -44,21 +45,22 @@ $lang->mail->error          = '你的郵箱地址有誤，請填寫正確的郵�
 $lang->mail->trySendlater   = '三分鐘內不能重複發送郵件。'; 
 
 $lang->mail->verify        = '驗證管理員身份';
+$lang->mail->okFile        = '檔案方式';
+$lang->mail->email         = '郵箱驗證碼';
 $lang->mail->captcha       = '驗證碼';
 $lang->mail->needVerify    = '需要驗證管理員身份';
 $lang->mail->verifyFail    = '請填寫正確的驗證碼';
 $lang->mail->verifySuccess = '驗證通過，請繼續操作';
-$lang->mail->noConfigure   = " <span class='text-info'>無法找到發信配置信息，郵箱驗證未啟用。</span>";
-$lang->mail->noEmail       = " <span class='text-info'>未填寫個人郵箱，郵箱驗證未啟用。</span>";
-$lang->mail->verfyReason   = " 為了網站安全，<strong>%s</strong> 操作需要進行管理員身份驗證。</br>";
-$lang->mail->okFileVerfy   = "<strong>檔案方式</strong>：創建 %s 檔案。如果存在該檔案，使用編輯軟件打開，重新保存一遍。%s</br>";
-$lang->mail->emailVerfy    = "<strong>郵箱方式</strong>：驗證碼將發送至 %s。%s</br>";
+$lang->mail->noConfigure   = "無法找到發信配置信息，郵箱驗證未啟用。";
+$lang->mail->noEmail       = "未填寫個人郵箱，郵箱驗證未啟用。";
+$lang->mail->okFileVerfy   = "創建 %s 檔案。如果存在該檔案，使用編輯軟件打開，重新保存一遍。%s<br />";
+$lang->mail->emailVerfy    = "驗證碼將發送至 %s。%s<br />";
 $lang->mail->sendSuccess   = '驗證碼已發送到您的郵箱中';
 
 $lang->mail->sendContent   = <<<EOT
 %s 您好：
-</br>&nbsp;&nbsp;&nbsp;&nbsp;您正在<strong>%s</strong>(%s)上進行<strong>%s</strong>操作，所需的驗證碼為：%s
-</br>
-</br><strong>%s</strong>由<a href='http://www.chanzhi.org' target='_blank'>蟬知企業門戶系統</a>搭建。
-</br><a href='http://www.cnezsoft.com' target='_blank'>易軟天創</a>為天下企業提供專業的管理工具。
+<br />&nbsp;&nbsp;&nbsp;&nbsp;您在<strong>%s</strong>(%s)上進行的操作需要驗證管理員身份，所需的驗證碼為：%s
+<br />
+<br /><strong>%s</strong>由<a href='http://www.chanzhi.org' target='_blank'>蟬知企業門戶系統</a>搭建。
+<br /><a href='http://www.cnezsoft.com' target='_blank'>易軟天創</a>為天下企業提供專業的管理工具。
 EOT;

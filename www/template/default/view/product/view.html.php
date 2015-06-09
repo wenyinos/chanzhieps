@@ -123,7 +123,7 @@ js::execute($product->js);
             <?php if(!commonModel::isAvailable('order') and $product->mall):?>
             <hr>
             <div class='btn-gobuy'>
-            <?php echo html::a(inlink('redirect', "id={$product->id}"), $lang->product->buyNow, "class='btn btn-lg btn-primary' target='_blank'");?>
+              <?php echo html::a(inlink('redirect', "id={$product->id}"), $lang->product->buyNow, "class='btn btn-lg btn-primary' target='_blank'");?>
             </div>
             <?php endif;?>
           </div>

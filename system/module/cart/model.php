@@ -21,7 +21,6 @@ class cartModel extends model
      */
     public function add($productID, $count)
     {
-
         $hasProduct = $this->dao->select('count(*) as count')->from(TABLE_CART)->where('account')->eq($this->app->user->account)->andWhere('product')->eq($productID)->fetch('count');
 
         if(!$hasProduct)
@@ -87,6 +86,5 @@ class cartModel extends model
         }
         
         return $products;
-
     }
 }

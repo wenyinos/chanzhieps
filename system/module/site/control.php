@@ -201,10 +201,14 @@ class site extends control
             $allowedFiles = seo::unify($allowedFiles, ',');
             if(!preg_match('/^[a-z0-9,]+$/', $allowedFiles)) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
 
+            $allowedFiles = explode(',', $allowedFiles);
+
             foreach ($allowedFiles as $extension)
             {  
                 if(strlen($extension) > 5) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
             }
+
+            $allowedFiles = implode(',', $allowedFiles);
 
             foreach ($dangers as $danger)
             {  

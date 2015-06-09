@@ -30,5 +30,4 @@ $(document).ready(function()
         if($('#count').val() <= 1) return false;
         $('#count').val(parseInt($('#count').val()) - 1);  
     });
-
 })
