@@ -133,6 +133,7 @@ class commonModel extends model
         {
             if($app->user->admin == 'no') return false;
             if($app->user->admin == 'super') return true;
+            if($app->user->admin != 'no' and $module == 'admin' and $method == 'index') return true;
             if(isset($rights[$module][$method])) return true;
             return false;
         }
