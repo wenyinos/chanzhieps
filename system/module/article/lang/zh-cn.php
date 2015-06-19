@@ -82,6 +82,8 @@ $lang->article->lblComments  = '<strong>评论：</strong> %s';
 
 $lang->article->none      = '没有了';
 $lang->article->directory = '返回目录';
+$lang->article->noCssTag  = '不需要&lt;style&gt;&lt;/style&gt;标签';
+$lang->article->noJsTag   = '不需要&lt;script&gt;&lt;/script&gt;标签';
 
 $lang->article->placeholder = new stdclass();
 $lang->article->placeholder->addedDate = '可以延迟到选定的时间发布。';

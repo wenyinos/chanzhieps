@@ -82,6 +82,8 @@ $lang->article->lblComments  = '<strong>Comments:</strong> %s';
 
 $lang->article->none      = 'None';
 $lang->article->directory = 'List';
+$lang->article->noCssTag  = 'No &lt;style&gt;&lt;/style&gt; tag';
+$lang->article->noJsTag   = 'No &lt;script&gt;&lt;/script&gt; tag';
 
 $lang->article->placeholder = new stdclass();
 $lang->article->placeholder->addedDate = 'Schedule to Publish the article after this time';

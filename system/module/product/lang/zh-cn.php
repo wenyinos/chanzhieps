@@ -70,6 +70,8 @@ $lang->product->prev      = '上一个';
 $lang->product->next      = '下一个';
 $lang->product->none      = '没有了';
 $lang->product->directory = '返回目录';
+$lang->product->noCssTag  = '不需要&lt;style&gt;&lt;/style&gt;标签';
+$lang->product->noJsTag   = '不需要&lt;script&gt;&lt;/script&gt;标签';
 
 $lang->product->statusList['normal']  = '上架';
 $lang->product->statusList['offline'] = '下架';
