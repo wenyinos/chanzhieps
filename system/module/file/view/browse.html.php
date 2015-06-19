@@ -37,7 +37,11 @@
       <?php
       commonModel::printLink('file', 'edit',   "id=$file->id", $lang->edit, "class='edit'");
       commonModel::printLink('file', 'delete', "id=$file->id", $lang->delete, "class='deleter'");
-      if($file->isImage) commonModel::printLink('file', 'setPrimary', "id=$file->id", $lang->file->setPrimary, "class='option'");
+      if($file->isImage)
+      {
+          if($file->primary)  commonModel::printLink('file', 'setPrimary', "id=$file->id", $lang->file->cancelPrimary, "class='option'");
+          if(!$file->primary) commonModel::printLink('file', 'setPrimary', "id=$file->id", $lang->file->setPrimary, "class='option'");
+      }
       ?>
       </td>
     </tr>

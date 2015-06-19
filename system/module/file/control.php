@@ -220,17 +220,25 @@ class file extends control
     public function setPrimary($fileID)
     {
         $file = $this->file->getByID($fileID);
-        if(!$file) $this->send(array( 'result' => 'fail', 'message' => $this->lang->fail));
+        if(!$file or !$file->isImage) $this->send(array( 'result' => 'fail', 'message' => $this->lang->fail));
 
-        $this->dao->update(TABLE_FILE)
-            ->set('primary')->eq(0)
-            ->where('id')->ne($fileID)
-            ->andWhere('objectType')->eq($file->objectType)
-            ->andWhere('objectID')->eq($file->objectID)
-            ->exec(false);
+        if(!$file->primary)
+        {
+            $this->dao->update(TABLE_FILE)
+                ->set('primary')->eq(0)
+                ->where('id')->ne($fileID)
+                ->andWhere('objectType')->eq($file->objectType)
+                ->andWhere('objectID')->eq($file->objectID)
+                ->exec(false);
 
-        $this->dao->update(TABLE_FILE)->set('primary')->eq(1)->where('id')->eq($fileID)->exec();
+            $this->dao->update(TABLE_FILE)->set('primary')->eq(1)->where('id')->eq($fileID)->exec();
+        }
+        else
+        {
+            $this->dao->update(TABLE_FILE)->set('primary')->eq(0)->where('id')->eq($fileID)->exec();
+        }
 
+        if(dao::isError()) $this->send(array( 'result' => 'fail', 'message' => dao::getError()));
         $this->send(array( 'result' => 'success', 'message' => $this->lang->setSuccess));
     }
 

@@ -9,20 +9,21 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->file->common     = 'Files';
-$lang->file->upload     = 'Upload';
-$lang->file->browse     = 'Browse';
-$lang->file->imageList  = 'Image List';
-$lang->file->download   = 'Download';
-$lang->file->edit       = 'Edit';
-$lang->file->primary    = 'Primary';
-$lang->file->setPrimary = 'Set as primary';
-$lang->file->deny       = 'Deny';
-$lang->file->allow      = 'Allow';
-$lang->file->toggle     = 'Toggle';
-$lang->file->label      = 'Label';
-$lang->file->lblInfo    = '<i>(Type:%s, Size:%s, Added at: %s，Downloads: %s)</i>';
-$lang->file->limit      = "(<span class='text-danger'>Less than 2M</span>)";
+$lang->file->common        = 'Files';
+$lang->file->upload        = 'Upload';
+$lang->file->browse        = 'Browse';
+$lang->file->imageList     = 'Image List';
+$lang->file->download      = 'Download';
+$lang->file->edit          = 'Edit';
+$lang->file->primary       = 'Primary';
+$lang->file->setPrimary    = 'Set as primary';
+$lang->file->cancelPrimary = 'Cancel primary';
+$lang->file->deny          = 'Deny';
+$lang->file->allow         = 'Allow';
+$lang->file->toggle        = 'Toggle';
+$lang->file->label         = 'Label';
+$lang->file->lblInfo       = '<i>(Type:%s, Size:%s, Added at: %s，Downloads: %s)</i>';
+$lang->file->limit         = "(<span class='text-danger'>Less than 2M</span>)";
 
 $lang->file->id        = 'ID';
 $lang->file->title     = 'Title';
