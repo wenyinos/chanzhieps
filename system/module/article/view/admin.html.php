@@ -37,7 +37,7 @@
         <?php endif;?>
         <th class='text-center w-160px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->article->addedDate);?></th>
         <th class='text-center w-70px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->article->views);?></th>
-        <?php $actionClass = $type == 'page' ? 'w-220px' : 'w-260px';?>
+        <?php $actionClass = $type == 'page' ? 'w-200px' : 'w-220px';?>
         <th class='text-center <?php echo $actionClass;?>'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
@@ -58,12 +58,9 @@
         <td class='text-center'>
           <?php
           commonModel::printLink('article', 'edit', "articleID=$stick->id&type=$stick->type", $lang->edit);
-          commonModel::printLink('file', 'browse', "objectType=$stick->type&objectID=$stick->id&isImage=0", $lang->article->files, "data-toggle='modal'");
           commonModel::printLink('file', 'browse', "objectType=$stick->type&objectID=$stick->id&isImage=1", $lang->article->images, "data-toggle='modal'");
+          commonModel::printLink('file', 'browse', "objectType=$stick->type&objectID=$stick->id&isImage=0", $lang->article->files, "data-toggle='modal'");
           echo html::a($this->article->createPreviewLink($stick->id), $lang->preview, "target='_blank'");
-          commonModel::printLink('article', 'delete', "articleID=$stick->id", $lang->delete, 'class="deleter"');
-          commonModel::printLink('article', 'setcss', "articleID=$stick->id", $lang->article->css, "data-toggle='modal'");
-          commonModel::printLink('article', 'setjs', "articleID=$stick->id", $lang->article->js, "data-toggle='modal'");
           ?>
           <?php if($type != 'page'):?>
           <span class='dropdown'>
@@ -87,6 +84,14 @@
             </ul>
           </span>
           <?php endif;?>
+          <span class='dropdown'>
+            <a data-toggle='dropdown' href='javascript:;'><?php echo $this->lang->more;?><span class='caret'></span></a>
+            <ul class='dropdown-menu pull-right'>    
+              <li><?php commonModel::printLink('article', 'delete', "articleID=$stick->id", $lang->delete, 'class="deleter"');?></li>
+              <li><?php commonModel::printLink('article', 'setcss', "articleID=$stick->id", $lang->article->css, "data-toggle='modal'");?></li>
+              <li><?php commonModel::printLink('article', 'setjs', "articleID=$stick->id", $lang->article->js, "data-toggle='modal'");?></li>
+            </ul>
+          </span>
         </td>
       </tr>
       <?php unset($articles[$stick->id])?>
@@ -106,12 +111,9 @@
         <td class='text-center'>
           <?php
           commonModel::printLink('article', 'edit', "articleID=$article->id&type=$article->type", $lang->edit);
-          commonModel::printLink('file', 'browse', "objectType=$article->type&objectID=$article->id&isImage=0", $lang->article->files, "data-toggle='modal'");
           commonModel::printLink('file', 'browse', "objectType=$article->type&objectID=$article->id&isImage=1", $lang->article->images, "data-toggle='modal'");
+          commonModel::printLink('file', 'browse', "objectType=$article->type&objectID=$article->id&isImage=0", $lang->article->files, "data-toggle='modal'");
           echo html::a($this->article->createPreviewLink($article->id), $lang->preview, "target='_blank'");
-          commonModel::printLink('article', 'delete', "articleID=$article->id", $lang->delete, 'class="deleter"');
-          commonModel::printLink('article', 'setcss', "articleID=$article->id", $lang->article->css, "data-toggle='modal'");
-          commonModel::printLink('article', 'setjs', "articleID=$article->id", $lang->article->js, "data-toggle='modal'");
           ?>
           <?php if($type != 'page'):?>
           <span class='dropdown'>
@@ -135,6 +137,14 @@
             </ul>
           </span>
           <?php endif;?>
+          <span class='dropdown'>
+            <a data-toggle='dropdown' href='javascript:;'><?php echo $this->lang->more;?><span class='caret'></span></a>
+            <ul class='dropdown-menu pull-right'>    
+              <li><?php commonModel::printLink('article', 'delete', "articleID=$article->id", $lang->delete, 'class="deleter"');?></li>
+              <li><?php commonModel::printLink('article', 'setcss', "articleID=$article->id", $lang->article->css, "data-toggle='modal'");?></li>
+              <li><?php commonModel::printLink('article', 'setjs',  "articleID=$article->id", $lang->article->js, "data-toggle='modal'");?></li>
+            </ul>
+          </span>
         </td>
       </tr>
       <?php endforeach;?>

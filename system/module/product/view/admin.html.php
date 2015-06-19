@@ -31,7 +31,7 @@
         <th class='w-160px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->product->addedDate);?></th>
         <th class='w-60px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->product->status);?></th>
         <th class='w-70px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->product->views);?></th>
-        <th class='w-260px'><?php echo $lang->actions;?></th>
+        <th class='w-210px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
@@ -50,14 +50,19 @@
           $categoryAlias = !empty($categories) ? current($categories)->alias : '';
           $changeStatus  = $product->status == 'normal' ? 'offline' : 'normal';
           commonModel::printLink('product', 'edit', "productID=$product->id", $lang->edit);
-          commonModel::printLink('file', 'browse', "objectType=product&objectID=$product->id&isImage=0", $lang->product->files, "data-toggle='modal' data-width='1000'");
           commonModel::printLink('file', 'browse', "objectType=product&objectID=$product->id&isImage=1", $lang->product->images, "data-toggle='modal' data-width='1000'");
+          commonModel::printLink('file', 'browse', "objectType=product&objectID=$product->id&isImage=0", $lang->product->files, "data-toggle='modal' data-width='1000'");
           commonModel::printLink('product', 'changeStatus', "productID=$product->id&status=$changeStatus", $lang->product->statusList[$changeStatus], "class='changeStatus'");
           echo html::a(commonModel::createFrontLink('product', 'view',  "productID=$product->id", "name=$product->alias&category=$categoryAlias"), $lang->preview, "target='_blank'");
-          commonModel::printLink('product', 'delete', "productID=$product->id", $lang->delete, "class='deleter'");
-          commonModel::printLink('product', 'setcss', "productID=$product->id", $lang->product->css, "data-toggle='modal'");
-          commonModel::printLink('product', 'setjs',  "productID=$product->id", $lang->product->js, "data-toggle='modal'");
           ?>
+          <span class='dropdown'>
+            <a data-toggle='dropdown' href='javascript:;'><?php echo $this->lang->more;?><span class='caret'></span></a>
+            <ul class='dropdown-menu pull-right'>    
+              <li><?php commonModel::printLink('product', 'delete', "productID=$product->id", $lang->delete, "class='deleter'");?></li>
+              <li><?php commonModel::printLink('product', 'setcss', "productID=$product->id", $lang->product->css, "data-toggle='modal'");?></li>
+              <li><?php commonModel::printLink('product', 'setjs',  "productID=$product->id", $lang->product->js, "data-toggle='modal'");?></li>
+            </ul>
+          </span>
         </td>
       </tr>
       <?php endforeach;?>
