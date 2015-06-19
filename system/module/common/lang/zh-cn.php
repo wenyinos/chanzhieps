@@ -64,7 +64,6 @@ $lang->confirm        = '确认';
 $lang->send           = '发送';
 $lang->preview        = '预览';
 $lang->goback         = '返回';
-$lang->search         = '搜索';
 $lang->more           = '更多';
 $lang->actions        = '操作';
 $lang->feature        = '未来';

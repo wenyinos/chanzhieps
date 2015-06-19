@@ -8,6 +8,7 @@ $lang->tag->editLink  = 'Edit Link';
 $lang->tag->source    = 'Source';
 $lang->tag->inputLink = 'Please input link';
 $lang->tag->inputTag  = 'Please input tag';
+$lang->tag->search    = 'Search';
 
 $lang->tag->sourceList['article'] = 'Article';
 $lang->tag->sourceList['blog']    = 'Blog';

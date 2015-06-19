@@ -20,7 +20,7 @@
         <div class="input-group">
           <?php echo html::input('tag', $this->post->tag, "class='form-control search-query' placeholder='{$lang->tag->inputTag}'");?>
           <span class="input-group-btn">
-            <?php echo html::submitButton($lang->search, "btn btn-primary"); ?>
+            <?php echo html::submitButton($lang->tag->search, "btn btn-primary"); ?>
           </span>
         </div>
       </form>

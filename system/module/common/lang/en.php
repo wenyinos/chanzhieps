@@ -64,7 +64,6 @@ $lang->confirm        = 'Confirm';
 $lang->send           = 'Send';
 $lang->preview        = 'Preview';
 $lang->goback         = 'Back';
-$lang->search         = 'Search';
 $lang->more           = 'More';
 $lang->actions        = 'Actions';
 $lang->feature        = 'Feature';
