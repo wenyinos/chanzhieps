@@ -14,7 +14,7 @@
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php
 $colorPlates = '';
-foreach (explode('|', $lang->slide->colorPlates) as $value)
+foreach (explode('|', $lang->colorPlates) as $value)
 {
     $colorPlates .= "<div class='color color-tile' data='#" . $value . "'><i class='icon-ok'></i></div>";
 }
@@ -31,7 +31,7 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
             <div class='colorplate clearfix'>
               <div class='input-group color active' data='#FFF'>
                 <label class='input-group-addon'><?php echo $lang->slide->titleColor;?></label>
-                <?php echo html::input('titleColor', '#FFF', "class='form-control input-color text-latin' placeholder='" . $lang->slide->colorTip . "'");?>
+                <?php echo html::input('titleColor', '#FFF', "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'");?>
                 <span class='input-group-btn'>
                   <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'> <i class='icon icon-question'></i> <span class='caret'></span></button>
                   <div class='dropdown-menu colors'>
@@ -66,7 +66,7 @@ foreach (explode('|', $lang->slide->colorPlates) as $value)
             <div class='row'>
               <div class='colorplate clearfix col-sm-6'>
                 <div class='input-group color active' data='#114DAD'>
-                  <?php echo html::input('backgroundColor', '#114DAD', "class='form-control input-color text-latin' placeholder='" . $lang->slide->colorTip . "'");?>
+                  <?php echo html::input('backgroundColor', '#114DAD', "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'");?>
                   <span class='input-group-btn'>
                     <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
                       <i class='icon icon-question'></i> 

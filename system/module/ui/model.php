@@ -182,13 +182,13 @@ class uiModel extends model
     {
         if(empty($plates))
         {
-            $plates = $this->lang->ui->theme->colorPlates;
+            $plates = $this->lang->colorPlates;
         }
 
         $colorPlates = '';
         foreach (explode('|', $plates) as $value)
         {
-            $colorPlates .= "<div class='color color-tile' data='{$value}' data-toggle='tooltip' title='{$value}'><i class='icon-ok'></i></div>";
+            $colorPlates .= "<div class='color color-tile' data='#{$value}' data-toggle='tooltip' title='{$value}'><i class='icon-ok'></i></div>";
         }
         return $colorPlates;
     }

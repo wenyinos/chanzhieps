@@ -15,7 +15,7 @@
 <?php $common->printPositionBar($board, $thread);?>
 <?php
 $colorPlates = '';
-foreach (explode('|', $lang->thread->colorPlates) as $value)
+foreach (explode('|', $lang->colorPlates) as $value)
 {
     $colorPlates .= "<div class='color color-tile' data='#" . $value . "'><i class='icon-ok'></i></div>";
 }
@@ -33,8 +33,8 @@ foreach (explode('|', $lang->thread->colorPlates) as $value)
             <?php echo html::input('title', $thread->title, "class='form-control'");?>
             <div class='input-group-addon colorplate clearfix'>
                 <div class='input-group color active' data="<?php echo $thread->color?>">
-                <label class='input-group-addon'><?php echo $lang->thread->color;?></label>
-                <?php echo html::input('color', $thread->color, "class='form-control input-color text-latin' placeholder='" . $lang->thread->colorTip . "'");?>
+                <label class='input-group-addon'><?php echo $lang->color;?></label>
+                <?php echo html::input('color', $thread->color, "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'");?>
                 <span class='input-group-btn'>
                   <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'> <i class='icon icon-question'></i> <span class='caret'></span></button>
                   <div class='dropdown-menu colors'>

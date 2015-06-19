@@ -61,8 +61,7 @@ $lang->ui->custom      = '自定义';
 $lang->ui->themeSaved  = '主题配置已保存';
 $lang->ui->unWritable  = "不能生成样式文件，请检查 %s目录的权限";
 
-$lang->ui->theme                  = new stdclass();
-$lang->ui->theme->colorPlates                          = '#333333|#000000|#CA1407|#45872B|#148D00|#F25D03|#2286D2|#D92958|#A63268|#04BFAD|#D1270A|#FF9400|#299182|#63731A|#3D4DBE|#7382D9|#754FB9|#F2E205|#B1C502|#364245|#C05036|#8A342A|#E0DDA2|#B3D465|#EEEEEE|#FFD0E5|#D0FFFD|#FFFF84|#F4E6AE|#E5E5E5|#F1F1F1|#FFFFFF|transparent';
+$lang->ui->theme = new stdclass();
 $lang->ui->theme->reset                                = '重置为默认';
 $lang->ui->theme->default                              = '默认';
 $lang->ui->theme->resetTip                             = '参数已重置，保存后生效';

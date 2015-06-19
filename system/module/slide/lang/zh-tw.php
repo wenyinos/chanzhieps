@@ -33,8 +33,6 @@ $lang->slide->background->typeList->color = '顏色';
 
 $lang->slide->height      = '高度';
 $lang->slide->url         = '連結';
-$lang->slide->colorTip    = '十六進制顏色值';
-$lang->slide->colorPlates = '333333|000000|CA1407|45872B|148D00|F25D03|2286D2|D92958|A63268|04BFAD|D1270A|FF9400|299182|63731A|3D4DBE|7382D9|754FB9|F2E205|B1C502|364245|C05036|8A342A|E0DDA2|B3D465|EEEEEE|FFD0E5|D0FFFD|FFFF84|F4E6AE|E5E5E5|F1F1F1|FFFFFF';
 $lang->slide->buttonUrl   = '按鈕連結';
 $lang->slide->buttonColor = '顏色';
 
