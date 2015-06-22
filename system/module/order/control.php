@@ -22,7 +22,8 @@ class order extends control
     public function confirm($product = 0, $count = 0)
     {
         $this->loadModel('product');
-        if($this->app->user->account == 'guest') $this->locate($this->createLink('user', 'login'));
+        $referer = helper::safe64Encode(inlink('confirm', "product={$product}&count={$count}"));
+        if($this->app->user->account == 'guest') $this->locate($this->createLink('user', 'login', "referer={$referer}"));
 
         if($_POST) $product = $this->post->product;
         $this->view->products = $this->order->getPostedProducts($product, $count);
