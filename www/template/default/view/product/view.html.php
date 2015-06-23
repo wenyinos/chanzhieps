@@ -99,7 +99,18 @@ js::execute($product->js);
               {
                   if(empty($attribute->label) and empty($attribute->value)) continue;
                   $attributeHtml .= "<li><span class='meta-name'>" . $attribute->label . "</span>";
-                  $attributeHtml .= "<span class='meta-value'>" . $attribute->value . "</span></li>";
+
+                  $http  = strpos($attribute->value, 'https') !== false ? 'https://' : 'http://';
+                  $attribute->value = str_replace($http, '', $attribute->value);
+                  $value = strpos($attribute->value, ':') !== false ? substr($attribute->value, 0, strpos($attribute->value, ':')) : $attribute->value;
+                  if(preg_match('/^([a-z0-9\-]+\.)+[a-z0-9\-]+$/', $value))
+                  {
+                      $attributeHtml .= "<span class='meta-value'>" . html::a($http . $attribute->value, $attribute->value, "target='_blank'") . "</span></li>";
+                  }
+                  else
+                  {
+                      $attributeHtml .= "<span class='meta-value'>" . $attribute->value . "</span></li>";
+                  }
               }
               echo $attributeHtml;
               ?>
