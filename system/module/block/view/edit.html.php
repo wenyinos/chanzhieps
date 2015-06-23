@@ -18,7 +18,7 @@ js::set('cancreatephp', isset($canCreatePHP) ? $canCreatePHP : '');
 js::set('setOkFile', isset($okFile) ? sprintf($lang->setOkFile, $okFile) : '');
 
 $colorPlates = '';
-foreach (explode('|', $lang->block->colorPlates) as $value)
+foreach (explode('|', $lang->colorPlates) as $value)
 {
     $colorPlates .= "<div class='color color-tile' data='#" . $value . "'><i class='icon-ok'></i></div>";
 }
@@ -122,7 +122,7 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
                         </button>
                         <div class='dropdown-menu colors'><?php echo $colorPlates; ?></div>
                       </span>
-                      <?php echo html::input('params[iconColor]', isset($block->content->iconColor) ? $block->content->iconColor : '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
+                      <?php echo html::input('params[iconColor]', isset($block->content->iconColor) ? $block->content->iconColor : '', "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'");?>
                     </div>
                   </div>
                 </td>
@@ -140,7 +140,7 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
                         </button>
                         <div class='dropdown-menu colors'><?php echo $colorPlates; ?></div>
                       </span>
-                      <?php echo html::input('params[borderColor]', isset($block->content->borderColor) ? $block->content->borderColor : '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
+                      <?php echo html::input('params[borderColor]', isset($block->content->borderColor) ? $block->content->borderColor : '', "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'");?>
                     </div>
                   </div>
                 </td>
@@ -175,7 +175,7 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
                         </button>
                         <div class='dropdown-menu colors'><?php echo $colorPlates; ?></div>
                       </span>
-                      <?php echo html::input('params[titleColor]', isset($block->content->titleColor) ? $block->content->titleColor : '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
+                      <?php echo html::input('params[titleColor]', isset($block->content->titleColor) ? $block->content->titleColor : '', "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'");?>
                     </div>
                   </div>
                 </td>
@@ -188,7 +188,7 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
                         </button>
                         <div class='dropdown-menu colors'><?php echo $colorPlates; ?></div>
                       </span>
-                      <?php echo html::input('params[titleBackground]', isset($block->content->titleBackground) ? $block->content->titleBackground : '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
+                      <?php echo html::input('params[titleBackground]', isset($block->content->titleBackground) ? $block->content->titleBackground : '', "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'");?>
                     </div>
                   </div>
                 </td>
@@ -206,7 +206,7 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
                         </button>
                         <div class='dropdown-menu colors'><?php echo $colorPlates; ?></div>
                       </span>
-                      <?php echo html::input('params[textColor]', isset($block->content->textColor) ? $block->content->textColor : '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
+                      <?php echo html::input('params[textColor]', isset($block->content->textColor) ? $block->content->textColor : '', "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'");?>
                     </div>
                   </div>
                 </td>
@@ -219,7 +219,7 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
                         </button>
                         <div class='dropdown-menu colors'><?php echo $colorPlates; ?></div>
                       </span>
-                      <?php echo html::input('params[linkColor]', isset($block->content->linkColor) ? $block->content->linkColor : '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
+                      <?php echo html::input('params[linkColor]', isset($block->content->linkColor) ? $block->content->linkColor : '', "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'");?>
                     </div>
                   </div>
                 </td>
@@ -234,7 +234,7 @@ foreach (explode('|', $lang->block->colorPlates) as $value)
                         </button>
                         <div class='dropdown-menu colors'><?php echo $colorPlates; ?></div>
                       </span>
-                      <?php echo html::input('params[backgroundColor]', isset($block->content->backgroundColor) ? $block->content->backgroundColor : '', "class='form-control input-color text-latin' placeholder='" . $lang->block->colorTip . "'");?>
+                      <?php echo html::input('params[backgroundColor]', isset($block->content->backgroundColor) ? $block->content->backgroundColor : '', "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'");?>
                     </div>
                   </div>
                 </td>

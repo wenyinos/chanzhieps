@@ -15,7 +15,12 @@
 <form id='ajaxForm' action="<?php echo inlink('setcss', "productID=$product->id");?>" method='post'>
   <table class="table table-form">
     <tr><td><?php echo html::textarea('css', $product->css, "rows=5 class='form-control codeeditor' data-mode='css' data-height='300px'");?></td></tr>
-    <tr><td><div class='editor-actions'><?php echo html::submitButton();?></div></td></tr>
+    <tr>
+      <td>
+        <?php echo html::submitButton();?>
+        <strong class='text-info'><?php echo $lang->product->noCssTag;?></strong>
+      </td>
+    </tr>
   </table>
 </form>
 <?php include '../../common/view/footer.modal.html.php';?>

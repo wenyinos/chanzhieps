@@ -46,6 +46,7 @@ $lang->mail->trySendlater   = 'Can not send email in three minutes.';
 
 $lang->mail->verify        = 'Verify identify of admin';
 $lang->mail->okFile        = 'File';
+$lang->mail->created       = 'Created';
 $lang->mail->email         = 'Email';
 $lang->mail->captcha       = 'Email captcha';
 $lang->mail->needVerify    = 'Need to verify the identity of Administrator';
@@ -54,12 +55,12 @@ $lang->mail->verifySuccess = 'Right captcha';
 $lang->mail->noConfigure   = "I can not find the configuration, can't use email captcha.";
 $lang->mail->noEmail       = "I can not find your email address, can't use email captcha.";
 $lang->mail->okFileVerfy   = "Create %s file. If this file exists already, reopen it and save again.%s<br />";
-$lang->mail->emailVerfy    = "The email captcha will send to %s. %s<br />";
-$lang->mail->sendSuccess   = 'Captcha has been sent to your mailbox.';
+$lang->mail->sendSuccess   = 'Captcha has been sent to %s.';
 
 $lang->mail->sendContent   = <<<EOT
-Hello %s：
-<br />&nbsp;&nbsp;&nbsp;&nbsp;You are changing some infomation at <strong>%s</strong>(%s), The code you need is:%s
+%s：
+<br />You are requesting the verification code:%s from <strong>%s</strong>(%s).
+<br />If not your request, please ignore it.
 <br />
 <br /><strong>%s</strong> build by <a href='http://www.chanzhi.org' target='_blank'>ChanZhiEPS</a>.
 <br /><a href='http://www.cnezsoft.com' target='_blank'>Nature Easy Soft</a>

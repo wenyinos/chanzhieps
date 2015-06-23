@@ -44,22 +44,23 @@ $lang->mail->needConfigure  = '无法找到邮件配置信息，请先配置邮�
 $lang->mail->error          = '你的邮箱地址有误，请填写正确的邮箱地址。'; 
 $lang->mail->trySendlater   = '三分钟内不能重复发送邮件。'; 
 
-$lang->mail->verify        = '验证管理员身份';
+$lang->mail->verify        = '为了安全起见，当前操作需要验证您的管理员权限';
 $lang->mail->okFile        = '文件方式';
+$lang->mail->created       = '我已创建';
 $lang->mail->email         = '邮箱验证码';
 $lang->mail->captcha       = '验证码';
 $lang->mail->needVerify    = '需要验证管理员身份';
 $lang->mail->verifyFail    = '请填写正确的验证码';
 $lang->mail->verifySuccess = '验证通过，请继续操作';
-$lang->mail->noConfigure   = "无法找到发信配置信息，邮箱验证未启用。";
-$lang->mail->noEmail       = "未填写个人邮箱，邮箱验证未启用。";
-$lang->mail->okFileVerfy   = "创建 %s 文件。如果存在该文件，使用编辑软件打开，重新保存一遍。%s<br />";
-$lang->mail->emailVerfy    = "验证码将发送至 %s。%s<br />";
-$lang->mail->sendSuccess   = '验证码已发送到您的邮箱中';
+$lang->mail->noConfigure   = "无法找到发信配置信息，邮箱验证无法启用。";
+$lang->mail->noEmail       = "未填写个人邮箱，邮箱验证无法启用。";
+$lang->mail->okFileVerfy   = "请创建 %s 文件。如果存在该文件，使用编辑软件打开，重新保存一遍。%s<br />";
+$lang->mail->sendSuccess   = '验证码已发送至 %s';
 
 $lang->mail->sendContent   = <<<EOT
 %s 您好：
-<br />&nbsp;&nbsp;&nbsp;&nbsp;您在<strong>%s</strong>(%s)上进行的操作需要验证管理员身份，所需的验证码为：%s
+<br />您在<strong>%s</strong>(%s)上面的验证码为：%s
+<br />如非您本人操作，请忽略。
 <br />
 <br /><strong>%s</strong>由<a href='http://www.chanzhi.org' target='_blank'>蝉知企业门户系统</a>搭建。
 <br /><a href='http://www.cnezsoft.com' target='_blank'>易软天创</a>为天下企业提供专业的管理工具。

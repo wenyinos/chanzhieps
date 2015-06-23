@@ -70,6 +70,8 @@ $lang->product->prev      = 'Previous';
 $lang->product->next      = 'Next';
 $lang->product->none      = 'None';
 $lang->product->directory = 'Back';
+$lang->product->noCssTag  = 'No &lt;style&gt;&lt;/style&gt; tag';
+$lang->product->noJsTag   = 'No &lt;script&gt;&lt;/script&gt; tag';
 
 $lang->product->statusList['normal']  = 'On sale';
 $lang->product->statusList['offline'] = 'Offline';

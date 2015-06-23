@@ -318,7 +318,29 @@ class userModel extends model
             ->setIF(RUN_MODE == 'admin' and $this->post->admin != 'super', 'realnames', '')
             ->remove('ip, account, join, visits, fingerprint, token')
             ->removeIF(RUN_MODE != 'admin', 'admin')
+            ->removeIF(RUN_MODE == 'admin', 'groups')
             ->get();
+
+        if(RUN_MODE == 'admin')
+        {
+            if($user->admin == 'common')
+            {
+                $this->dao->delete()->from(TABLE_USERGROUP)->where('account')->eq($account)->exec();
+
+                if($this->post->groups)
+                {
+                    foreach($this->post->groups as $group)
+                    {
+                        $data          = new stdclass();
+                        $data->account = $account;
+                        $data->group   = $group;
+                        $this->dao->insert(TABLE_USERGROUP)->data($data)->exec();
+                    }
+                }
+            }
+
+            if($user->admin == 'no') $this->dao->delete()->from(TABLE_USERGROUP)->where('account')->eq($account)->exec();
+        }
 
         if($user->email != $oldUser->email) $user->emailCertified = 0;
 

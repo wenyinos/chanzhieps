@@ -237,7 +237,7 @@ class mail extends control
         if(!$this->mail->isError())
         {
             $this->session->set('lastSendTo' . $account, time());
-            $this->send(array('result' => 'success', 'message' => $this->lang->mail->sendSuccess));
+            $this->send(array('result' => 'success', 'message' => sprintf($this->lang->mail->sendSuccess, $email)));
         }
 
         $error = str_replace('\n', "<br />", join('', $this->mail->getError()));

@@ -45,6 +45,11 @@ include '../../mail/view/captcha.html.php';
           <th><?php echo $lang->user->admin;?></th>
           <td><?php echo html::select('admin', $lang->user->adminList, $user->admin, "class='form-control'")?></td><td></td>
         </tr>  
+        <?php $class = $user->admin == 'common' ? '' : 'hide';?>
+        <tr class="groups <?php echo $class;?>">
+          <th><?php echo $lang->user->privilege;?></th>
+          <td><?php echo html::checkbox('groups', $groups, implode(',', $user->groups));?></td>
+        </tr>
         <tr>
           <th><?php echo $lang->user->email;?></th>
           <td><?php echo html::input('email', $user->email, "class='form-control'");?></td><td></td>

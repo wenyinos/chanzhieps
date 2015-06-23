@@ -9,20 +9,21 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->file->common     = '附件';
-$lang->file->upload     = '上传附件';
-$lang->file->browse     = '附件列表';
-$lang->file->imageList  = '图片列表';
-$lang->file->download   = '下载附件';
-$lang->file->edit       = '编辑';
-$lang->file->primary    = '封面';
-$lang->file->setPrimary = '设为封面';
-$lang->file->deny       = '禁止';
-$lang->file->allow      = '允许';
-$lang->file->toggle     = '切换';
-$lang->file->label      = '标题：';
-$lang->file->lblInfo    = '<i>(类型：%s, 大小：%s, 添加于：%s，下载%s次)</i>';
-$lang->file->limit      = "(<span class='text-danger'>%sM以内</span>)";
+$lang->file->common        = '附件';
+$lang->file->upload        = '上传附件';
+$lang->file->browse        = '附件列表';
+$lang->file->imageList     = '图片列表';
+$lang->file->download      = '下载附件';
+$lang->file->edit          = '编辑';
+$lang->file->primary       = '封面';
+$lang->file->setPrimary    = '设为封面';
+$lang->file->cancelPrimary = '取消封面';
+$lang->file->deny          = '禁止';
+$lang->file->allow         = '允许';
+$lang->file->toggle        = '切换';
+$lang->file->label         = '标题：';
+$lang->file->lblInfo       = '<i>(类型：%s, 大小：%s, 添加于：%s，下载%s次)</i>';
+$lang->file->limit         = "(<span class='text-danger'>%sM以内</span>)";
 
 $lang->file->id        = '编号';
 $lang->file->title     = '名称';

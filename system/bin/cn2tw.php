@@ -24,6 +24,17 @@ foreach(glob('../module/*') as $moduleName)
     convToTW($defaultLangFile, $targetLangFile);
 }
 
+foreach(glob('../../www/template/default/lang/*') as $moduleName)
+{
+    $moduleLangPath  = realpath($moduleName) . '/';
+    $defaultLangFile = $moduleLangPath . 'zh-cn.php';
+    $targetLangFile  = $moduleLangPath . $langType . '.php';
+
+    if(!file_exists($defaultLangFile)) continue;
+
+    convToTW($defaultLangFile, $targetLangFile);
+}
+
 function convToTW($defaultLangFile, $targetLangFile)
 {
     $langDesc = 'zh-tw';

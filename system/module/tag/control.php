@@ -21,7 +21,7 @@ class tag extends control
      * @access public
      * @return void
      */
-    public function admin($orderBy = 'rank_asc', $recTotal = 0, $recPerPage = 10, $pageID = 1)
+    public function admin($orderBy = 'rank_desc', $recTotal = 0, $recPerPage = 10, $pageID = 1)
     {   
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);

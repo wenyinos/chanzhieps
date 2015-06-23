@@ -54,7 +54,6 @@ $lang->resource = new stdclass();
 
 /* Admin module. */
 $lang->resource->admin = new stdclass();
-$lang->resource->admin->index         = 'index';
 $lang->resource->admin->ignore        = 'ignore';
 $lang->resource->admin->ignoreupgrade = 'ignoreupgrade';
 

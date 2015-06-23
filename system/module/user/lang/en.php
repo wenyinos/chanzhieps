@@ -42,6 +42,7 @@ $lang->user->allowTime = 'Allow time';
 $lang->user->status    = 'Status';
 $lang->user->captcha   = 'Captcha';
 $lang->user->alert     = 'Your account has been forbidden';
+$lang->user->privilege = 'Privilege';
 
 $lang->user->list            = 'User list';
 $lang->user->view            = "User info";

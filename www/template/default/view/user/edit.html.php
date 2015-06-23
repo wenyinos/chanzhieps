@@ -45,7 +45,7 @@
             </div>
             <div class='form-group'>
               <label for='oldPwd' class='col-md-2 col-sm-3 control-label'><?php echo $lang->user->oldPwd;?></label>
-              <div class='col-md-4 col-sm-6'>
+              <div class='col-md-6 col-sm-6'>
                 <?php echo html::password('oldPwd', '', "class='form-control'");?>
               </div>
             </div>
