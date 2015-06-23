@@ -15,6 +15,7 @@ $lang->ui->logo            = 'Logo';
 $lang->ui->setLogo         = "Logo设置";
 $lang->ui->setTemplate     = '模板设置';
 $lang->ui->installTemplate = '上传模板';
+$lang->ui->exportTheme     = '导出风格';
 $lang->ui->setTheme        = '主题设置';
 $lang->ui->customTheme     = '自定义主题';
 $lang->ui->setFavicon      = "Favicon设置";
