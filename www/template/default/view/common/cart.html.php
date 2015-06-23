@@ -8,15 +8,25 @@
             {
                 if(twinkle) 
                 {
-                    $('#cartBox a .text-danger').css('color', '#fff');
-                    $('#cartBox a').addClass('btn btn-lg btn-success').fadeOut().fadeToggle(
-                        'slow',
-                        'linear',
-                        function()
-                        {
-                            $('#cartBox a').removeClass('btn btn-lg btn-success')
-                            $('#cartBox a .text-danger').css('color', '');
-                        });
+                    bootbox.dialog(
+                    {  
+                        message: v.addToCartSuccess,  
+                        buttons:
+                        {  
+                            back:
+                            {  
+                                label:     v.goback,
+                                className: 'btn-default',  
+                                callback:  function(){location.reload();}  
+                            },
+                            cart:
+                            {  
+                                label:     v.gotoCart,  
+                                className: 'btn-primary',  
+                                callback:  function(){location.href = createLink('cart', 'browse');}  
+                            }  
+                        }  
+                    });
                 }
             }
         );

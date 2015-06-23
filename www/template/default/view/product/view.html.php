@@ -19,6 +19,9 @@ js::set('path',  $product->path);
 js::set('productID', $product->id);
 js::set('categoryID', $category->id);
 js::set('categoryPath', explode(',', trim($category->path, ',')));
+js::set('addToCartSuccess', $lang->product->addToCartSuccess);
+js::set('gotoCart', $lang->product->gotoCart);
+js::set('goback', $lang->product->goback);
 css::internal($product->css);
 js::execute($product->js);
 ?>
