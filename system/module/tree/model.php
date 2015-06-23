@@ -248,6 +248,10 @@ class treeModel extends model
     {
         $treeMenu = array();
         $stmt = $this->dbh->query($this->buildQuery($type, $startCategoryID, $siteID));
+
+        $modelName = class_exists('exttreeModel') ? 'exttreeModel' : 'treeModel';
+        if(isset($userFunc[0])) $userFunc[0] = $modelName;
+
         while($category = $stmt->fetch())
         {
             if(treeModel::isWechatMenu($type))

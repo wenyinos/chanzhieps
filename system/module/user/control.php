@@ -41,6 +41,10 @@ class user extends control
      */
     public function register()
     {
+        if($this->app->user->account != 'guest')
+        {
+            $this->locate(inlink('control'));   
+        }
         if(!empty($_POST))
         {
             $this->user->create();
