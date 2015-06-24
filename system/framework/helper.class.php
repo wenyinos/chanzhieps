@@ -77,7 +77,7 @@ class helper
         /* Seo modules return directly. */
         if(helper::inSeoMode() and method_exists('uri', 'create' . $moduleName . $methodName))
         {
-            $link = call_user_func_array('uri::create' . $moduleName . $methodName, array('param'=> $vars, 'alias'=>$alias));
+            $link = call_user_func_array('uri::create' . $moduleName . $methodName, array('param'=> $vars, 'alias'=>$alias, 'viewType'=>$viewType));
             /* Add client lang. */
             if($lang and $link and strpos($link, $config->webRoot) === 0) $link = $config->webRoot . $lang . '/' . substr($link, strlen($config->webRoot));
             if($link) return $link;

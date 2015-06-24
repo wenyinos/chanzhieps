@@ -178,16 +178,19 @@ class uri
      *
      * @params array    $params
      * @params array    $alias  
+     * @params string   $viewType  
      * return string
      */
-    public static function createArticleBrowse($params, $alias)
+    public static function createArticleBrowse($params, $alias, $viewType)
     {
         global $config;
 
         $link = 'article/c' . array_shift($params);
         if(!empty($alias['category'])) $link = $alias['category'];
 
-        return $config->webRoot . $link . '.' . $config->default->view;
+        $viewType = $viewType ? $viewType : $config->default->view;
+
+        return $config->webRoot . $link . '.' . $viewType;
     }
 
     /**
@@ -195,9 +198,10 @@ class uri
      *
      * @params array    $params
      * @params array    $alias  
+     * @params string   $viewType  
      * return string
      */
-    public static function createArticleView($params, $alias)
+    public static function createArticleView($params, $alias, $viewType)
     {
         global $config;
 
@@ -206,7 +210,9 @@ class uri
         $link .= array_shift($params);
         if(!empty($alias['name'])) $link .= '_' . $alias['name'];
 
-        return $config->webRoot . $link . '.' . $config->default->view;
+        $viewType = $viewType ? $viewType : $config->default->view;
+
+        return $config->webRoot . $link . '.' . $viewType;
     }
 
     /**
@@ -214,17 +220,20 @@ class uri
      *
      * @params array    $params
      * @params array    $alias  
+     * @params string   $viewType  
      * return string
      */
 
-    public static function createProductBrowse($params, $alias)
+    public static function createProductBrowse($params, $alias, $viewType)
     {
         global $config;
 
         $link = 'product/c' . array_shift($params);
         if(!empty($alias['category'])) $link = $alias['category'];
 
-        return $config->webRoot . $link . '.' . $config->default->view;
+        $viewType = $viewType ? $viewType : $config->default->view;
+
+        return $config->webRoot . $link . '.' . $viewType;
     }
 
     /**
@@ -232,9 +241,10 @@ class uri
      *
      * @params array    $params
      * @params array    $alias  
+     * @params string   $viewType  
      * return string
      */
-    public static function createProductView($params, $alias)
+    public static function createProductView($params, $alias, $viewType)
     {
         global $config;
 
@@ -243,7 +253,8 @@ class uri
         $link .= array_shift($params);
         if(!empty($alias['name'])) $link .= '_' . $alias['name'];
 
-        return $config->webRoot . $link . '.' . $config->default->view;
+        $viewType = $viewType ? $viewType : $config->default->view;
+        return $config->webRoot . $link . '.' . $viewType;
     }
 
     /**
@@ -251,16 +262,18 @@ class uri
      *
      * @params array    $params
      * @params array    $alias  
+     * @params string   $viewType  
      * return string
      */
-    public static function createForumBoard($params, $alias)
+    public static function createForumBoard($params, $alias, $viewType)
     {
         global $config;
 
         $link = 'forum/';
         $link .= !empty($alias['category']) ? $alias['category'] : 'c' . array_shift($params);
 
-        return $config->webRoot . $link . '.' . $config->default->view;
+        $viewType = $viewType ? $viewType : $config->default->view;
+        return $config->webRoot . $link . '.' . $viewType;
     }
 
     /**
@@ -268,16 +281,18 @@ class uri
      *
      * @params array    $params
      * @params array    $alias  
+     * @params string   $viewType  
      * return string
      */
-    public static function createThreadView($params, $alias)
+    public static function createThreadView($params, $alias, $viewType)
     {
         global $config;
+        $viewType = $viewType ? $viewType : $config->default->view;
 
         $link = 'thread/' . array_shift($params);
 
         if(isset($alias['pageID']))  $link .= '/p' . $alias['pageID'];
-        $link .= '.' . $config->default->view;
+        $link .= '.' . $viewType;
         if(isset($alias['replyID'])) $link .= '#'  . $alias['replyID'];
 
         return  getWebRoot(true) . $link;
@@ -288,16 +303,18 @@ class uri
      *
      * @params array    $params
      * @params array    $alias  
+     * @params string   $viewType  
      * return string
      */
-    public static function createBlogIndex($params, $alias)
+    public static function createBlogIndex($params, $alias, $viewType)
     {
         global $config;
+        $viewType = $viewType ? $viewType : $config->default->view;
 
         $link = $config->webRoot . 'blog';
-        if(isset($alias['category']) and trim($alias['category']) != '') return $link . '/' . $alias['category'] . '.' . $config->default->view;
-        if(!empty($params)) return $link . '/c' . array_shift($params) . '.' . $config->default->view;
-        return $link . '.' . $config->default->view;
+        if(isset($alias['category']) and trim($alias['category']) != '') return $link . '/' . $alias['category'] . '.' . $viewType;
+        if(!empty($params)) return $link . '/c' . array_shift($params) . '.' . $viewType;
+        return $link . '.' . $viewType;
     }
 
     /**
@@ -305,16 +322,18 @@ class uri
      *
      * @params array    $params
      * @params array    $alias  
+     * @params string   $viewType  
      * return string
      */
-    public static function createBlogView($params, $alias)
+    public static function createBlogView($params, $alias, $viewType)
     {
         global $config;
 
         $link = 'blog/' . array_shift($params);
         if($alias['name']) $link .= '_' . $alias['name'];
 
-        return $config->webRoot . $link . '.' . $config->default->view;
+        $viewType = $viewType ? $viewType : $config->default->view;
+        return $config->webRoot . $link . '.' . $viewType;
     }
 
     /**
@@ -322,16 +341,18 @@ class uri
      *
      * @params array    $params
      * @params array    $alias  
+     * @params string   $viewType  
      * return string
      */
-    public static function createBookBrowse($params, $alias)
+    public static function createBookBrowse($params, $alias, $viewType)
     {
         global $config;
+        $viewType = $viewType ? $viewType : $config->default->view;
 
         $link = 'book/' . $alias['book'];
-        if(!isset($alias['node'])) return $config->webRoot . $link . '.' . $config->default->view;
-        if($alias['node'])  return $config->webRoot . $link . '/' . $alias['node'] . '.' . $config->default->view;
-        if(!$alias['node']) return $config->webRoot . $link . '/c' . array_shift($params). '.' . $config->default->view;
+        if(!isset($alias['node'])) return $config->webRoot . $link . '.' . $viewType;
+        if($alias['node'])  return $config->webRoot . $link . '/' . $alias['node'] . '.' . $viewType;
+        if(!$alias['node']) return $config->webRoot . $link . '/c' . array_shift($params). '.' . $viewType;
     }
 
     /**
@@ -339,17 +360,19 @@ class uri
      *
      * @params array    $params
      * @params array    $alias  
+     * @params string   $viewType  
      * return string
      */
-    public static function createBookRead($params, $alias)
+    public static function createBookRead($params, $alias, $viewType)
     {
         global $config;
+        $viewType = $viewType ? $viewType : $config->default->view;
 
         $link = 'book/' . $alias['book'] . '/';
         $link .= array_shift($params);
         if($alias['node']) $link .= '_' . $alias['node'];
 
-        return $config->webRoot . $link . '.' . $config->default->view;
+        return $config->webRoot . $link . '.' . $viewType;
     }
 
     /**
@@ -357,15 +380,17 @@ class uri
      *
      * @params array    $params
      * @params array    $alias  
+     * @params string   $viewType  
      * return string
      */
-    public static function createPageView($params, $alias)
+    public static function createPageView($params, $alias, $viewType)
     {
         global $config;
+        $viewType = $viewType ? $viewType : $config->default->view;
 
         $link = 'page/' . array_shift($params);
         if($alias['name']) $link = 'page/' . $alias['name'];
 
-        return $config->webRoot . $link . '.' . $config->default->view;
+        return $config->webRoot . $link . '.' . $viewType;
     }
 }
