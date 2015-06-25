@@ -36,6 +36,7 @@ $lang->site->mailCaptcha     = 'Mail captcha';
 $lang->site->twContent       = 'traditional contents';
 $lang->site->cn2tw           = 'Copy from simplified Chinese content';
 $lang->site->cdn             = 'CND Site';
+$lang->site->sensitive       = 'Sensitive Words';
 
 $lang->site->importantOption = 'Important option';
 $lang->site->checkIP         = 'Check login IP';
@@ -44,6 +45,7 @@ $lang->site->checkEmail      = 'Check Email';
 $lang->site->allowedPosition = 'Allowed position';
 $lang->site->checkSessionIP  = 'Check the login ip';
 $lang->site->setsecurity     = 'Security setting';
+$lang->site->filterSensitive = 'Filter sensitive words';
 
 $lang->site->setBasic      = "Baisc";
 $lang->site->setLang       = "Languages";
@@ -68,6 +70,10 @@ $lang->site->statusList->pause  = 'Pause';
 $lang->site->checkIPList = array();
 $lang->site->checkIPList['open']  = 'Open';
 $lang->site->checkIPList['close'] = 'Close';
+
+$lang->site->filterSensitiveList = array();
+$lang->site->filterSensitiveList['open']  = 'Open';
+$lang->site->filterSensitiveList['close'] = 'Close';
 
 $lang->site->checkPositionList = array();
 $lang->site->checkPositionList['open']  = 'Open';
