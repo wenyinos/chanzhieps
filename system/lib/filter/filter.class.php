@@ -343,6 +343,29 @@ class validater
     }
 
     /**
+     * Check sensitive words.
+     * 
+     * @param  object   $vars 
+     * @param  array    $dicts 
+     * @static
+     * @access public
+     * @return void
+     */
+    public static function checkSensitive($vars, $dicts)
+    {
+        foreach($vars as $var)
+        {
+            if(!$var) continue;
+            foreach($dicts as $dict)
+            {
+                if(strpos($var, $dict) === false) continue;
+                if(strpos($var, $dict) !== false) return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * Call a function to check it.
      * 
      * @param  mixed  $var 

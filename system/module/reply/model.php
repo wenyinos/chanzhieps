@@ -136,6 +136,13 @@ class replyModel extends model
             ->remove('recTotal, recPerPage, pageID, files, labels, hidden')
             ->get();
 
+        if(isset($this->config->site->filterSensitive) and $this->config->site->filterSensitive == 'open')
+        {
+            $dicts = !empty($this->config->site->sensitive) ? $this->config->site->sensitive : $this->config->sensitive;
+            $dicts = explode(',', $dicts);
+            if(!validater::checkSensitive($reply, $dicts)) return array('result' => 'fail', 'message' => $this->lang->error->sensitive);
+        }
+
         $this->dao->insert(TABLE_REPLY)
             ->data($reply, $skip = 'captcha, uid')
             ->autoCheck()
@@ -180,6 +187,13 @@ class replyModel extends model
             ->stripTags('content', $allowedTags)
             ->remove('files,labels,hidden')
             ->get();
+
+        if(isset($this->config->site->filterSensitive) and $this->config->site->filterSensitive == 'open')
+        {
+            $dicts = !empty($this->config->site->sensitive) ? $this->config->site->sensitive : $this->config->sensitive;
+            $dicts = explode(',', $dicts);
+            if(!validater::checkSensitive($reply, $dicts)) return array('result' => 'fail', 'message' => $this->lang->error->sensitive);
+        }
 
         $this->dao->update(TABLE_REPLY)
             ->data($reply, $skip = 'captcha, uid')

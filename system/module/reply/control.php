@@ -34,6 +34,7 @@ class reply extends control
 
             $replyID = $this->reply->post($threadID);
 
+            if(is_array($replyID)) $this->send($replyID);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('thread', 'locate', "threadID=$threadID&replyID=$replyID")));
         }
@@ -94,9 +95,9 @@ class reply extends control
                 $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->captcha->create4Thread()));
             }
 
-            $this->reply->update($replyID);
+            $return = $this->reply->update($replyID);
+            if(is_array($return)) $this->send($return);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('thread', 'view', "threaID=$thread->id")));
         }
 

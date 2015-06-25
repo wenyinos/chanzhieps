@@ -231,6 +231,13 @@ class messageModel extends model
             ->add('ip', $this->server->REMOTE_ADDR)
             ->get();
 
+        if(isset($this->config->site->filterSensitive) and $this->config->site->filterSensitive == 'open')
+        {
+            $dicts = !empty($this->config->site->sensitive) ? $this->config->site->sensitive : $this->config->sensitive;
+            $dicts = explode(',', $dicts);
+            if(!validater::checkSensitive($message, $dicts)) return array('result' => 'fail', 'reason' => 'error', 'message' => $this->lang->error->sensitive);
+        }
+
         $this->dao->insert(TABLE_MESSAGE)
             ->data($message, $skip = 'captcha, secret')
             ->autoCheck()

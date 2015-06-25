@@ -137,6 +137,8 @@ class message extends control
                 $this->send(array('result' => 'fail', 'reason' => 'error', 'message' => dao::getError()));
             }
 
+            if(is_array($messageID)) $this->send($messageID);
+
             /* If save successfully, save the cookie and send success info. */
             $this->message->setCookie($messageID);
             $this->send(array('result' => 'success', 'message' => $this->lang->message->thanks));

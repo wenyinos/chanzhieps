@@ -176,6 +176,13 @@ class threadModel extends model
             ->remove('files, labels, views, replies, hidden, stick')
             ->get();
 
+        if(isset($this->config->site->filterSensitive) and $this->config->site->filterSensitive == 'open')
+        {
+            $dicts = !empty($this->config->site->sensitive) ? $this->config->site->sensitive : $this->config->sensitive;
+            $dicts = explode(',', $dicts);
+            if(!validater::checkSensitive($thread, $dicts)) return array('result' => 'fail', 'message' => $this->lang->error->sensitive);
+        }
+
         $this->dao->insert(TABLE_THREAD)
             ->data($thread, $skip = 'captcha, uid, isLink')
             ->autoCheck()
@@ -243,6 +250,13 @@ class threadModel extends model
             ->setDefault('readonly', 0)
             ->remove('files,labels, views, replies, stick, hidden')
             ->get();
+
+        if(isset($this->config->site->filterSensitive) and $this->config->site->filterSensitive == 'open')
+        {
+            $dicts = !empty($this->config->site->sensitive) ? $this->config->site->sensitive : $this->config->sensitive;
+            $dicts = explode(',', $dicts);
+            if(!validater::checkSensitive($thread, $dicts)) return array('result' => 'fail', 'message' => $this->lang->error->sensitive);
+        }
 
         $this->dao->update(TABLE_THREAD)
             ->data($thread, $skip = 'captcha, uid, isLink')

@@ -118,6 +118,7 @@ class site extends control
         {
             $setting = fixer::input('post')
                 ->setDefault('captcha', 'auto')
+                ->setDefault('filterSensitive', 'close')
                 ->setDefault('checkIP', 'close')
                 ->setDefault('checkSessionIP', '0')
                 ->setDefault('checkPosition', 'close')
@@ -125,6 +126,7 @@ class site extends control
                 ->setDefault('allowedIP', '')
                 ->setDefault('importantValidate', '')
                 ->join('importantValidate', ',')
+                ->setForce('sensitive', seo::unify($this->post->sensitive, ','))
                 ->get();
 
             /* check IP. */

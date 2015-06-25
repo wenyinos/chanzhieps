@@ -36,6 +36,7 @@ $lang->site->mailCaptcha     = '邮箱验证码';
 $lang->site->twContent       = '繁体内容';
 $lang->site->cn2tw           = '自动从简体版复制';
 $lang->site->cdn             = 'CDN地址';
+$lang->site->sensitive       = '敏感词';
 
 $lang->site->importantOption = '重要操作';
 $lang->site->checkIP         = '后台登录IP白名单';
@@ -44,6 +45,7 @@ $lang->site->checkEmail      = '会员邮箱绑定';
 $lang->site->allowedPosition = '允许登录地区';
 $lang->site->checkSessionIP  = '登录期间IP';
 $lang->site->setsecurity     = '安全设置';
+$lang->site->filterSensitive = '敏感词过滤';
 
 $lang->site->setBasic      = "基本信息设置";
 $lang->site->setLang       = "语言设置";
@@ -68,6 +70,10 @@ $lang->site->statusList->pause  = '暂停';
 $lang->site->checkIPList = array();
 $lang->site->checkIPList['open']  = '打开';
 $lang->site->checkIPList['close'] = '关闭';
+
+$lang->site->filterSensitiveList = array();
+$lang->site->filterSensitiveList['open']  = '打开';
+$lang->site->filterSensitiveList['close'] = '关闭';
 
 $lang->site->checkPositionList = array();
 $lang->site->checkPositionList['open']  = '打开';
