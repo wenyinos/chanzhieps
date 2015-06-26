@@ -144,7 +144,7 @@ define('TABLE_CART',           $config->db->prefix . 'cart');
 define('TABLE_ORDER',          $config->db->prefix . 'order');
 define('TABLE_ORDERPRODUCT',   $config->db->prefix . 'orderProduct');
 define('TABLE_ADDRESS',        $config->db->prefix . 'address');
-
+define('TABLE_SLIDE',          $config->db->prefix . 'slide');
 
 /* Include extension config files. */
 $extConfigFiles = glob($configRoot . 'ext' . DS . '*.php');

@@ -102,6 +102,7 @@ class upgradeModel extends model
             case '4_2';
             case '4_2_1':
                 $this->execSQL($this->getUpgradeFile('4.2.1'));
+                $this->moveSlideData();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -147,7 +148,7 @@ class upgradeModel extends model
             case '4_0';
             case '4_1_beta' : $confirmContent .= file_get_contents($this->getUpgradeFile('4.1.beta'));
             case '4_2';
-            case '4_2_1' : $confirmContent .= file_get_contents($this->getUpgradeFile('4.2.1'));
+            case '4_2_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('4.2.1'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
@@ -1046,7 +1047,7 @@ class upgradeModel extends model
     }
 
     /**
-     * 
+     * Fill default blocks.
      * 
      * @access public
      * @return void
@@ -1112,4 +1113,68 @@ class upgradeModel extends model
             }
         }
     }
+
+    /**
+     * Move slide data from config to slide table when upgrade from 4.2.1.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function moveSlideData()
+    {
+        $slides = $this->dao->select('*')->from(TABLE_CONFIG)
+            ->where('owner')->eq('system')
+            ->andWhere('module')->eq('common')
+            ->andWhere('section')->eq('slides')
+            ->fetchAll('key');
+
+        foreach($slides as $key => $slide)
+        {
+            $value = json_decode($slide->value);
+
+            $data = new stdclass();
+            $data->title           = $value->title;
+            $data->titleColor      = $value->titleColor;
+            $data->mainLink        = $value->mainLink;
+            $data->backgroundType  = $value->backgroundType;
+            $data->backgroundColor = $value->backgroundColor;
+            $data->height          = $value->height;
+            $data->summary         = $value->summary;
+            $data->image           = null;
+            $data->createdDate     = date('Y-m-d H:i:s', $value->createdDate);
+            $data->order           = $key;
+            $data->lang            = $value->lang; 
+            $data->label           = helper::jsonEncode($value->label);
+            $data->buttonClass     = helper::jsonEncode($value->buttonClass);
+            $data->buttonUrl       = helper::jsonEncode($value->buttonUrl);
+            $data->buttonTarget    = helper::jsonEncode($value->buttonTarget);
+
+            if($value->backgroundType == 'image')
+            {
+                $oldPathname = str_replace('data/upload/', '', $value->image);
+                $oldImage    = $this->dao->select('*')->from(TABLE_FILE)->where('objectType')->eq('slide')->andWhere('pathname')->eq($oldPathname)->fetch();
+                if(!$oldImage) return false;
+
+                $oldImagePath = $this->app->getDataRoot() . 'upload/' . $oldImage->pathname;
+                if(file_exists($oldImagePath))
+                {
+                    $pathname  = 'slides/slide_' . $oldImage->id . '.' . $oldImage->extension;
+                    $imagePath = $this->app->getDataRoot() . $pathname;
+
+                    if(copy($oldImagePath, $imagePath))
+                    {
+                        $image = $oldImage;
+                        unset($image->id);
+                        $image->pathname = $pathname;
+                        $this->dao->insert(TABLE_FILE)->data($image)->autoCheck()->exec();
+                    }
+                    $data->image = 'data/' . $image->pathname;
+                }
+            }
+
+            $this->dao->insert(TABLE_SLIDE)->data($data)->autoCheck()->exec();
+        }
+
+        return !dao::isError();
+    } 
 }
