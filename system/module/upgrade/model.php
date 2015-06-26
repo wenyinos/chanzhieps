@@ -1143,7 +1143,7 @@ class upgradeModel extends model
             $data->image           = null;
             $data->createdDate     = date('Y-m-d H:i:s', $value->createdDate);
             $data->order           = $key;
-            $data->lang            = $value->lang; 
+            $data->lang            = $slide->lang; 
             $data->label           = helper::jsonEncode($value->label);
             $data->buttonClass     = helper::jsonEncode($value->buttonClass);
             $data->buttonUrl       = helper::jsonEncode($value->buttonUrl);
@@ -1151,7 +1151,7 @@ class upgradeModel extends model
 
             if($value->backgroundType == 'image')
             {
-                $oldPathname = str_replace('data/upload/', '', $value->image);
+                $oldPathname = str_replace('/data/upload/', '', $value->image);
                 $oldImage    = $this->dao->select('*')->from(TABLE_FILE)->where('objectType')->eq('slide')->andWhere('pathname')->eq($oldPathname)->fetch();
                 if(!$oldImage) return false;
 
@@ -1166,13 +1166,13 @@ class upgradeModel extends model
                         $image = $oldImage;
                         unset($image->id);
                         $image->pathname = $pathname;
-                        $this->dao->insert(TABLE_FILE)->data($image)->autoCheck()->exec();
+                        $this->dao->insert(TABLE_FILE)->data($image)->exec();
                     }
                     $data->image = 'data/' . $image->pathname;
                 }
             }
 
-            $this->dao->insert(TABLE_SLIDE)->data($data)->autoCheck()->exec();
+            $this->dao->insert(TABLE_SLIDE)->data($data)->exec();
         }
 
         return !dao::isError();
