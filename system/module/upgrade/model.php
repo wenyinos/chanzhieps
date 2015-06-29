@@ -103,6 +103,7 @@ class upgradeModel extends model
             case '4_2_1':
                 $this->execSQL($this->getUpgradeFile('4.2.1'));
                 $this->moveSlideData();
+                $this->fixLocationConfig();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -1177,4 +1178,15 @@ class upgradeModel extends model
 
         return !dao::isError();
     } 
+
+    /**
+     * Fix location config.
+     * 
+     * @access public
+     * @return void
+     */
+    public function fixLocationConfig()
+    {
+        $this->dao->update(TABLE_CONFIG)->set('`key`')->eq('allowedLocation')->where('`key`')->eq('allowedPosition')->andWhere('section')->eq('site')->exec();
+    }
 }

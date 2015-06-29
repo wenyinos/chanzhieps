@@ -103,15 +103,15 @@ class user extends control
         {
             $user = $this->user->getByAccount($this->post->account);
 
-            /* check client ip and position if login is admin. */
+            /* check client ip and location if login is admin. */
             if(RUN_MODE == 'admin')
             {
                 $checkIP       = $this->user->checkIP();
-                $checkPosition = $this->user->checkPosition();
-                if($user and (!$checkIP or !$checkPosition))
+                $checkLocation = $this->user->checkLocation();
+                if($user and (!$checkIP or !$checkLocation))
                 {
                     $error  = $checkIP ? '' : $this->lang->user->ipDenied;
-                    $error .= $checkPosition ? '' : $this->lang->user->positionDenied;
+                    $error .= $checkLocation ? '' : $this->lang->user->locationDenied;
                     $pass   = $this->loadModel('mail')->checkVerify();
                     $captchaUrl = $this->createLink('mail', 'captcha', "url=&target=modal&account={$this->post->account}");
                     if(!$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => $error, 'url' => $captchaUrl));
@@ -722,14 +722,14 @@ class user extends control
             ->setDefault('pageID', 1)
             ->setDefault('account', '')
             ->setDefault('ip', '')
-            ->setDefault('position', '')
+            ->setDefault('location', '')
             ->setDefault('date', '')
             ->get();
 
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($get->recTotal, $get->recPerPage, $get->pageID);
 
-        $logs = $this->user->getLogList($pager, $get->account, $get->ip, $get->position, $get->date);
+        $logs = $this->user->getLogList($pager, $get->account, $get->ip, $get->location, $get->date);
         
         $this->view->logs  = $logs;
         $this->view->pager = $pager;

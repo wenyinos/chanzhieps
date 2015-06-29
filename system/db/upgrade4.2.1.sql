@@ -25,3 +25,5 @@ CREATE TABLE IF NOT EXISTS `eps_slide` (
   PRIMARY KEY (`id`),
   KEY `lang` (`lang`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+ALTER TABLE `eps_log` CHANGE `position` `location` char(100) NOT NULL;

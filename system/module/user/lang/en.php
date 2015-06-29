@@ -196,10 +196,10 @@ $lang->user->log->id          = 'ID';
 $lang->user->log->account     = 'User';
 $lang->user->log->browser     = 'Browser';
 $lang->user->log->ip          = 'IP';
-$lang->user->log->position    = 'Position';
+$lang->user->log->location    = 'Location';
 $lang->user->log->date        = 'Date';
 $lang->user->log->desc        = 'description';
 
 $lang->user->ipDenied       = 'This IP not allowed login, please do these steps.';
-$lang->user->positionDenied = 'This position not allowed login, please do these steps.';
+$lang->user->locationDenied = 'This location not allowed login, please do these steps.';
 $lang->user->verifyFail     = 'Check email fail,Please input correct email.';

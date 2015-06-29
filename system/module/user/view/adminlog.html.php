@@ -21,7 +21,7 @@
         <th><?php echo $lang->user->log->desc;?></th>
         <th class='w-120px'><?php echo $lang->user->log->browser;?></th>
         <th class='w-100px'><?php echo $lang->user->log->ip;?></th>
-        <th class='w-200px'><?php echo $lang->user->log->position;?></th>
+        <th class='w-200px'><?php echo $lang->user->log->location;?></th>
         <th class='w-150px'><?php echo $lang->user->log->date;?></th>
       </tr>
     </thead>
@@ -33,7 +33,7 @@
       <td><?php echo $log->desc;?></td>
       <td><?php echo $log->browser;?></td>
       <td><?php commonModel::printLink('user', 'adminlog', "ip=$log->ip", $log->ip);?></td>
-      <td><?php commonModel::printLink('user', 'adminlog', "position=$log->position", $log->position);?></td>
+      <td><?php commonModel::printLink('user', 'adminlog', "location=$log->location", $log->location);?></td>
       <td><?php echo $log->date;?></td>
     </tr>
     <?php endforeach;?>
