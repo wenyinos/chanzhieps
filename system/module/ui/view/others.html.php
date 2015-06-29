@@ -13,7 +13,7 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
-    <strong><i class='icon-certificate'></i><?php echo $lang->ui->others;?></strong>
+    <strong><i class='icon-cogs'> </i><?php echo $lang->ui->others;?></strong>
   </div>
   <div class='panel-body'>
     <form method='post' id='ajaxForm' enctype='multipart/form-data'>
