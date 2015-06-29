@@ -31,6 +31,7 @@ $lang->site->mission         = '站点使命';
 $lang->site->copyright       = '创建年份';
 $lang->site->allowUpload     = '允许上传附件';
 $lang->site->allowedFiles    = '允许附件类型';
+$lang->site->setImageSize    = '图片缩略图大小';
 $lang->site->captcha         = '前台表单';
 $lang->site->mailCaptcha     = '邮箱验证码';
 $lang->site->twContent       = '繁体内容';
@@ -86,6 +87,13 @@ $lang->site->checkEmailList['close'] = '关闭';
 $lang->site->sessionIpoptions = array();
 $lang->site->sessionIpoptions[0] = '可以改变';
 $lang->site->sessionIpoptions[1] = '不允许改变';
+
+$lang->site->imageSize['s'] = '小图';
+$lang->site->imageSize['m'] = '中图';
+$lang->site->imageSize['l'] = '大图';
+
+$lang->site->image['width']  = '宽度';
+$lang->site->image['height'] = '高度';
 
 $lang->site->captchaList = array();
 $lang->site->captchaList['close'] = '不用验证码';

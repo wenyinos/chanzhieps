@@ -193,9 +193,11 @@ class site extends control
      */
     public function setUpload()
     {
+        $this->loadModel('file');
+
         if(!empty($_POST))
         {
-            $setting = fixer::input('post')->remove('allowedFiles')->setDefault('allowUpload', '0')->get();
+            $setting = fixer::input('post')->remove('allowedFiles,thumbs')->setDefault('allowUpload', '0')->get();
 
             $dangers = explode(',', $this->config->file->dangers);
             $allowedFiles = trim(strtolower($this->post->allowedFiles), ',');
@@ -218,7 +220,8 @@ class site extends control
             }
 
             $allowedFiles = ',' . $allowedFiles . ','; 
-            $fileConfig   = array('allowed' => $allowedFiles);
+            $thumbs = helper::jsonEncode($this->post->thumbs);
+            $fileConfig = array('allowed' => $allowedFiles, 'thumbs' => $thumbs);
             $this->loadModel('setting')->setItems('system.common.file', $fileConfig);
 
             $result  = $this->loadModel('setting')->setItems('system.common.site', $setting);
