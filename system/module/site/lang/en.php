@@ -88,8 +88,8 @@ $lang->site->sessionIpoptions[0] = 'Can chaneged';
 $lang->site->sessionIpoptions[1] = 'Must be same';
 
 $lang->site->captchaList = array();
-$lang->site->captchaList['open']  = 'Open';
 $lang->site->captchaList['close'] = 'Close';
+$lang->site->captchaList['open']  = 'Open';
 $lang->site->captchaList['auto']  = 'Automatic';
 
 $lang->site->validateTypes = new stdclass();
