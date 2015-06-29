@@ -149,7 +149,6 @@ class bookModel extends model
         $editLink    = commonModel::hasPriv('book', 'edit') ? html::a(helper::createLink('book', 'edit', "nodeID=$node->id"), $this->lang->edit, $anchor) : '';
         $delLink     = empty($children) ? (commonModel::hasPriv('book', 'edit') ? html::a(helper::createLink('book', 'delete', "bookID=$node->id"), $this->lang->delete, "class='deleter'") : '') : '';
         $filesLink   = commonModel::hasPriv('file', 'browse') ? html::a(helper::createLink('file', 'browse', "objectType=book&objectID=$node->id&isImage=0"), $this->lang->book->files, "data-toggle='modal' data-width='1000'") : '';
-        $imagesLink  = commonModel::hasPriv('file', 'browse') ? html::a(helper::createLink('file', 'browse', "objectType=book&objectID=$node->id&isImage=1"), $this->lang->book->images, "data-toggle='modal' data-width='1000'") : '';
         $catalogLink = commonModel::hasPriv('book', 'catalog') ? html::a(helper::createLink('book', 'catalog', "nodeID=$node->id"), $this->lang->book->catalog) : '';
         $moveLink    = commonModel::hasPriv('book', 'sort') ? html::a('javascript:;', "<i class='icon-move'></i>", "class='sort sort-handle'") : '';
 
@@ -163,7 +162,7 @@ class bookModel extends model
 
         if($node->type == 'book')    $catalog .= "<dt class='book' data-id='" . $node->id . "'><strong>" . $titleLink . '</strong><span class="actions">' . $editLink . $catalogLink . $delLink . '</span></dt>' . $childrenHtml;
         if($node->type == 'chapter') $catalog .= "<dd class='catalog chapter' data-id='" . $node->id . "'><strong><span class='order'>" . $serial . '</span>&nbsp;' . $titleLink . '</strong><span class="actions">' . $editLink . $catalogLink . $delLink . $moveLink . '</span>' . $childrenHtml . '</dd>';
-        if($node->type == 'article') $catalog .= "<dd class='catalog article' data-id='" . $node->id . "'><strong><span class='order'>" . $serial . '</span>&nbsp;' . $node->title . '</strong><span class="actions">' . $editLink . $filesLink . $imagesLink . $delLink . $moveLink . '</span>' . $childrenHtml . '</dd>';
+        if($node->type == 'article') $catalog .= "<dd class='catalog article' data-id='" . $node->id . "'><strong><span class='order'>" . $serial . '</span>&nbsp;' . $node->title . '</strong><span class="actions">' . $editLink . $filesLink . $delLink . $moveLink . '</span>' . $childrenHtml . '</dd>';
 
         return $catalog;
     }

@@ -15,18 +15,24 @@ $lang->ui->logo            = 'Logo';
 $lang->ui->setLogo         = "Set Logo";
 $lang->ui->setTemplate     = 'Set Template';
 $lang->ui->installTemplate = 'Upload Template';
+$lang->ui->exportTheme     = 'Export Theme';
 $lang->ui->setTheme        = 'Set Theme';
 $lang->ui->customTheme     = 'Custom theme';
 $lang->ui->setFavicon      = "Set favicon";
 $lang->ui->setBaseStyle    = "Set base style";
 $lang->ui->deleteFavicon   = "Delete favicon";
 $lang->ui->deleteLogo      = "Delete logo";
+$lang->ui->others          = "Set others";
+$lang->ui->productView     = "Product view";
 
 $lang->ui->noStyleTag        = "Please write base CSS file code, No &lt;style&gt;&lt;/style&gt; tag.";
 $lang->ui->setLogoFailed     = "Set logo failed.";
 $lang->ui->noSelectedFile    = "No file selected.";
 $lang->ui->notAlloweFileType = "Please select %s files.";
 $lang->ui->suitableLogoSize  = 'Suitable height: 50px~80p, width: 80px~240px';
+
+$lang->ui->productViewList[1] = 'Show'; 
+$lang->ui->productViewList[0] = 'Hide'; 
 
 $lang->ui->favicon = new stdclass();
 $lang->ui->favicon->help  = "Help";

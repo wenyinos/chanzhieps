@@ -18,7 +18,7 @@ class product extends control
         if(RUN_MODE == 'admin')
         {
             $this->view->treeModuleMenu = $this->loadModel('tree')->getTreeMenu('product', 0, array('treeModel', 'createAdminLink'));
-            $this->view->treeManageLink = html::a(helper::createLink('tree', 'browse', "type=product"), $this->lang->tree->manage);
+            $this->view->treeManageLink = html::a(helper::createLink('product', 'currency'), $this->lang->product->currency, "data-toggle='modal'") . '&nbsp;&nbsp;' . html::a(helper::createLink('tree', 'browse', "type=product"), $this->lang->tree->manage);
         }
     }
 
@@ -219,25 +219,6 @@ class product extends control
         }
 
         $this->view->title = $this->lang->product->currency;
-        $this->display();
-    }
-
-    /**
-     * Set product view show or not. 
-     * 
-     * @access public
-     * @return void
-     */
-    public function showView()
-    {
-        if($_POST)
-        {
-            $this->loadModel('setting')->setItem('system.common.product.view', $this->post->showView);
-            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
-        }
-
-        $this->view->title = $this->lang->product->showView;
         $this->display();
     }
 

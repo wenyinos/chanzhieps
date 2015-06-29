@@ -194,4 +194,26 @@ class ui extends control
 
         $this->locate(inlink('setLogo'));
     }
+
+    /**
+     * Set others for ui.
+     * 
+     * @access public
+     * @return void
+     */
+    public function others()
+    {
+        if(!empty($_POST))
+        {
+            $setting = fixer::input('post')->get();
+
+            $result = $this->loadModel('setting')->setItems('system.common.ui', $setting);
+
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('others')));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+        }
+
+        $this->view->title = $this->lang->ui->others;
+        $this->display();
+    }
 }

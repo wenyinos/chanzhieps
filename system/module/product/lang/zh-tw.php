@@ -44,7 +44,6 @@ $lang->product->sales      = '產品定價';
 $lang->product->css        = 'CSS';
 $lang->product->js         = 'JS';
 $lang->product->currency   = '貨幣設置';
-$lang->product->showView   = '產品瀏覽量';
 
 $lang->product->list         = '產品列表';
 $lang->product->hot          = '熱門產品';
@@ -115,6 +114,3 @@ $lang->product->currencySymbols['aud']  = 'A$';
 $lang->product->currencySymbols['nzd']  = 'NZ$';
 $lang->product->currencySymbols['thb']  = 'B';
 $lang->product->currencySymbols['sgd']  = 'S$';
-
-$lang->product->showViewList[1] = '顯示';
-$lang->product->showViewList[0] = '不顯示';
