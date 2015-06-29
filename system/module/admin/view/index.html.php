@@ -32,11 +32,11 @@
   </div>
   <?php endif;?>
 
-  <?php if(!$checkPosition):?>
+  <?php if(!$checkLocation):?>
   <div class='alert alert-success'>
     <div>
-      <?php echo $lang->site->changePosition;?>
-      <?php echo html::a($this->createLink('site', 'setsecurity'), $lang->site->usePosition, "class='red'");?>
+      <?php echo $lang->site->changeLocation;?>
+      <?php echo html::a($this->createLink('site', 'setsecurity'), $lang->site->changeSetting, "class='red'");?>
     </div>
   </div>
   <?php endif;?>

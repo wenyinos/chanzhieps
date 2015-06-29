@@ -41,9 +41,9 @@ $lang->site->sensitive       = 'Sensitive Words';
 
 $lang->site->importantOption = 'Important option';
 $lang->site->checkIP         = 'Check login IP';
-$lang->site->checkPosition   = 'Check login position';
+$lang->site->checkLocation   = 'Check login location';
 $lang->site->checkEmail      = 'Check Email';
-$lang->site->allowedPosition = 'Allowed position';
+$lang->site->allowedLocation = 'Allowed location';
 $lang->site->checkSessionIP  = 'Check the login ip';
 $lang->site->setsecurity     = 'Security setting';
 $lang->site->filterSensitive = 'Filter sensitive words';
@@ -58,7 +58,8 @@ $lang->site->setSinaOauth  = "Weibo Oauth";
 $lang->site->setQQOauth    = "QQ Oauth";
 $lang->site->oauthHelp     = "Help";
 $lang->site->setRecPerPage = "Record per page";
-$lang->site->usePosition   = "Use current Position";
+$lang->site->useLocation   = "Use current Location";
+$lang->site->changeSetting = "Change settings";
 
 $lang->site->typeList = new stdclass();
 $lang->site->typeList->portal = 'Portal';
@@ -76,9 +77,9 @@ $lang->site->filterSensitiveList = array();
 $lang->site->filterSensitiveList['open']  = 'Open';
 $lang->site->filterSensitiveList['close'] = 'Close';
 
-$lang->site->checkPositionList = array();
-$lang->site->checkPositionList['open']  = 'Open';
-$lang->site->checkPositionList['close'] = 'Close';
+$lang->site->checkLocationList = array();
+$lang->site->checkLocationList['open']  = 'Open';
+$lang->site->checkLocationList['close'] = 'Close';
 
 $lang->site->checkEmailList = array();
 $lang->site->checkEmailList['open']  = 'Open';
@@ -119,7 +120,7 @@ $lang->site->domainTip        = 'Redirect all request to this domian.';
 $lang->site->allowedDomainTip = 'Use "," to divide different domain.';
 $lang->site->allowedIPTip     = 'Use "," to divide different IP.';
 $lang->site->wrongAllowedIP   = 'Wrong IP';
-$lang->site->changePosition   = 'Your current login position not in allowed position.';
+$lang->site->changeLocation   = 'Your current login location not in allowed location.';
 $lang->site->sessionIpTip     = 'If opened login ip would be checked.';
 
 $lang->site->robots            = 'Robots';

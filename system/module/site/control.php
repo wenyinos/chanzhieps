@@ -121,7 +121,7 @@ class site extends control
                 ->setDefault('filterSensitive', 'close')
                 ->setDefault('checkIP', 'close')
                 ->setDefault('checkSessionIP', '0')
-                ->setDefault('checkPosition', 'close')
+                ->setDefault('checkLocation', 'close')
                 ->setDefault('checkEmail', 'close')
                 ->setDefault('allowedIP', '')
                 ->setDefault('importantValidate', '')
@@ -145,11 +145,17 @@ class site extends control
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setsecurity')));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
-        $position = $this->app->loadClass('IP')->find(helper::getRemoteIp());
-        if(isset($position[3])) unset($position[3]);
+
+        $location = $this->app->loadClass('IP')->find(helper::getRemoteIp());
+        if(is_array($location))
+        {
+            $locations = $location;
+            $location  = join(' ', $locations);
+            if(count($location) > 3) $location = $locations[0] . ' ' . $locations[1] . ' ' . $locations[2];
+        }
 
         $this->view->title    = $this->lang->site->setBasic;
-        $this->view->position = join(' ', $position);
+        $this->view->location = $location;
         $this->display();
     }
 

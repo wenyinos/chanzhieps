@@ -196,10 +196,10 @@ $lang->user->log->id          = 'ID';
 $lang->user->log->account     = '用户';
 $lang->user->log->browser     = '浏览器';
 $lang->user->log->ip          = 'IP';
-$lang->user->log->position    = '登录地址';
+$lang->user->log->location    = '登录地址';
 $lang->user->log->date        = '登录时间';
 $lang->user->log->desc        = '描述';
 
 $lang->user->ipDenied       = '登录IP受限，请按提示操作。';
-$lang->user->positionDenied = '登录地区受限，请按提示操作。';
+$lang->user->locationDenied = '登录地区受限，请按提示操作。';
 $lang->user->verifyFail     = '请填写正确的验证码';

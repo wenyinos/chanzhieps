@@ -11,7 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.modal.html.php';?>
-<?php js::set('position', $position)?>
+<?php js::set('location', $location)?>
 <?php if(isset($pass) and !$pass):?>
 <?php 
 $url    = helper::safe64Encode($this->app->getURI());
@@ -48,17 +48,17 @@ include '../../mail/view/captcha.html.php';
           </td>
         </tr>
         <tr>
-          <th class='w-200px'><?php echo $lang->site->checkPosition;?></th>
-          <td colspan='2'><?php echo html::radio('checkPosition', $lang->site->checkPositionList, isset($this->config->site->checkPosition) ? $this->config->site->checkPosition : 'close');?></td>
+          <th class='w-200px'><?php echo $lang->site->checkLocation;?></th>
+          <td colspan='2'><?php echo html::radio('checkLocation', $lang->site->checkLocationList, isset($this->config->site->checkLocation) ? $this->config->site->checkLocation : 'close');?></td>
           <td></td>
         </tr>
         <tr>
-          <?php $allowedPosition = isset($this->config->site->allowedPosition) ? $this->config->site->allowedPosition : '';?>
-          <th class='w-200px'><?php echo $lang->site->allowedPosition;?></th>
-          <td colspan='2'><?php echo html::input('allowedPositionShow', $allowedPosition, "class='form-control' disabled='disabled'");?></td>
+          <?php $allowedLocation = isset($this->config->site->allowedLocation) ? $this->config->site->allowedLocation : '';?>
+          <th class='w-200px'><?php echo $lang->site->allowedLocation;?></th>
+          <td colspan='2'><?php echo html::input('allowedLocationShow', $allowedLocation, "class='form-control' disabled='disabled'");?></td>
           <td>
-            <?php echo html::input('allowedPosition', $allowedPosition, "class='hide'");?>
-            <?php echo $allowedPosition == $position ? '' : html::a('', sprintf($lang->site->usePosition, $position), "id='usePosition' class=''")?>
+            <?php echo html::input('allowedLocation', $allowedLocation, "class='hide'");?>
+            <?php echo $allowedLocation == $location ? '' : html::a('', sprintf($lang->site->useLocation, $location), "id='useLocation' class=''")?>
           </td>
         </tr>
         <tr>

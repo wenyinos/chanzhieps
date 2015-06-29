@@ -41,9 +41,9 @@ $lang->site->sensitive       = '敏感词';
 
 $lang->site->importantOption = '重要操作';
 $lang->site->checkIP         = '后台登录IP白名单';
-$lang->site->checkPosition   = '后台登录地区验证';
+$lang->site->checkLocation   = '后台登录地区验证';
 $lang->site->checkEmail      = '会员邮箱绑定';
-$lang->site->allowedPosition = '允许登录地区';
+$lang->site->allowedLocation = '允许登录地区';
 $lang->site->checkSessionIP  = '登录期间IP';
 $lang->site->setsecurity     = '安全设置';
 $lang->site->filterSensitive = '敏感词过滤';
@@ -58,7 +58,8 @@ $lang->site->setSinaOauth  = "新浪微博接入";
 $lang->site->setQQOauth    = "QQ接入";
 $lang->site->oauthHelp     = "使用帮助";
 $lang->site->setRecPerPage = "列表数量设置";
-$lang->site->usePosition   = "使用当前登录地址: <span>%s</span>";
+$lang->site->useLocation   = "使用当前登录地址: <span>%s</span>";
+$lang->site->changeSetting = "更改设置";
 
 $lang->site->typeList = new stdclass();
 $lang->site->typeList->portal = '企业门户';
@@ -76,9 +77,9 @@ $lang->site->filterSensitiveList = array();
 $lang->site->filterSensitiveList['open']  = '打开';
 $lang->site->filterSensitiveList['close'] = '关闭';
 
-$lang->site->checkPositionList = array();
-$lang->site->checkPositionList['open']  = '打开';
-$lang->site->checkPositionList['close'] = '关闭';
+$lang->site->checkLocationList = array();
+$lang->site->checkLocationList['open']  = '打开';
+$lang->site->checkLocationList['close'] = '关闭';
 
 $lang->site->checkEmailList = array();
 $lang->site->checkEmailList['open']  = '打开';
@@ -119,7 +120,7 @@ $lang->site->domainTip        = '设置主域名可使所有网站访问跳转�
 $lang->site->allowedDomainTip = '多个域名使用 , 隔开，如www.chanzhi.org,www.chanzhi.com。该值为空时允许所有域名访问。';
 $lang->site->allowedIPTip     = '多个IP使用 , 隔开，如202.194.133.1,202.194.132.0/28。允许所有IP访问请留空。';
 $lang->site->wrongAllowedIP   = 'IP 格式错误';
-$lang->site->changePosition   = '您当前的登录地区与允许登录地区不一致。';
+$lang->site->changeLocation   = '您当前的登录地区与允许登录地区不一致。';
 $lang->site->sessionIpTip     = '开启后，因为某些运营商的IP不是固定的，IP变化后会自动退出蝉知。';
 
 $lang->site->robots            = 'Robots';

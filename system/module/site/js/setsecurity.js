@@ -8,18 +8,18 @@ $(document).ready(function()
     });
     $('[name=checkIP]').change();
 
-    $('[name=checkPosition]').change(function()
+    $('[name=checkLocation]').change(function()
     {
-        var checkIP = $('[name=checkPosition]:checked').val(); 
-        if(checkIP == 'close') $('#allowedPosition').parents('tr').addClass('hide');
-        else $('#allowedPosition').parents('tr').removeClass('hide');
+        var checkIP = $('[name=checkLocation]:checked').val(); 
+        if(checkIP == 'close') $('#allowedLocation').parents('tr').addClass('hide');
+        else $('#allowedLocation').parents('tr').removeClass('hide');
     });
-    $('[name=checkPosition]').change();
+    $('[name=checkLocation]').change();
 
-    $('#usePosition').click(function()
+    $('#useLocation').click(function()
     {
-        $('#allowedPositionShow').val(v.position);
-        $('#allowedPosition').val(v.position);
+        $('#allowedLocationShow').val(v.location);
+        $('#allowedLocation').val(v.location);
         return false;
     });
 

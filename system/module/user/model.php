@@ -791,7 +791,7 @@ class userModel extends model
     {
         $this->app->loadClass('IP');
         $ip = helper::getRemoteIP();
-        $position = IP::find($ip);
+        $location = IP::find($ip);
 
         $extData = new stdclass();
         $extData->userAgent = $this->server->http_user_agent;
@@ -800,7 +800,7 @@ class userModel extends model
         $data->account     = $account;
         $data->date        = helper::now();
         $data->ip          = $ip;
-        $data->position    = is_array($position) ? join(' ', $position) : $position;
+        $data->location    = is_array($location) ? join(' ', $location) : $location;
         $data->browser     = helper::getBrowser() . ' ' . helper::getBrowserVersion();
         $data->type        = 'adminlogin';
         $data->desc        = $result;
@@ -817,18 +817,18 @@ class userModel extends model
      * @param  object $pager 
      * @param  string $account 
      * @param  string $ip 
-     * @param  string $position 
+     * @param  string $location 
      * @param  string $date 
      * @access public
      * @return array
      */
-    public function getLogList($pager = null, $account = '', $ip = '', $position = '', $date = '')
+    public function getLogList($pager = null, $account = '', $ip = '', $location = '', $date = '')
     {
         $logs = $this->dao->select()->from(TABLE_LOG)->setAutolang(false)
             ->where('1=1')
             ->beginIf(!empty($account))->andWhere('account')->eq($account)->fi()
             ->beginIf(!empty($ip))->andWhere('ip')->eq($ip)->fi()
-            ->beginIf(!empty($position))->andWhere('position')->like($position)->fi()
+            ->beginIf(!empty($location))->andWhere('location')->like($location)->fi()
             ->beginIf(!empty($date))->andWhere('date')->eq($date)->fi()
             ->orderby('id_desc')
             ->page($pager)
@@ -887,22 +887,26 @@ class userModel extends model
     }
 
     /**
-     * checkPosition 
+     * checkLocation 
      * 
      * @access public
      * @return bool
      */
-    public function checkPosition()
+    public function checkLocation()
     {
         if(isset($this->config->site->safeMode) and $this->config->site->safeMode == '1') return true;
-        if(!isset($this->config->site->checkPosition) or $this->config->site->checkPosition == 'close') return true;
-        if(!isset($this->config->site->allowedPosition) or $this->config->site->allowedPosition == '') return true;
+        if(!isset($this->config->site->checkLocation) or $this->config->site->checkLocation == 'close') return true;
+        if(!isset($this->config->site->allowedLocation) or $this->config->site->allowedLocation == '') return true;
 
-        $allowedPosition = $this->config->site->allowedPosition;
-        $position = $this->app->loadClass('IP')->find(helper::getRemoteIp());
-        unset($position[3]);
-        $currentPosition = join(' ', $position);
-        return $allowedPosition == $currentPosition;
+        $allowedLocation = $this->config->site->allowedLocation;
+        $location = $this->app->loadClass('IP')->find(helper::getRemoteIp());
+        if(is_array($location))
+        {
+            $locations = $location;
+            $location  = join(' ', $locations);
+            if(count($location) > 3) $location = $locations[0] . ' ' . $locations[1] . ' ' . $locations[2];
+        }
+        return $allowedLocation == $location;
     }
 
     /**
