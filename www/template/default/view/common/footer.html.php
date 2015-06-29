@@ -45,7 +45,8 @@ if($extHookFiles) foreach($extHookFiles as $extHookFile) include $extHookFile;
 ?>
 <a href='#' id='go2top' class='icon-arrow-up' data-toggle='tooltip' title='<?php echo $lang->back2Top; ?>'></a>
 </div><?php /* end "div.page-container" in "header.html.php" */ ?>
-<?php include dirname(__FILE__) . DS . 'qrcode.html.php';?>
+<?php $qrcode = isset($this->config->ui->QRCode) ? $this->config->ui->QRCode : 1;?>
+<?php if($qrcode) include dirname(__FILE__) . DS . 'qrcode.html.php';?>
 <div class='hide'><?php if(RUN_MODE == 'front') $this->loadModel('block')->printRegion($layouts, 'all', 'footer');?></div>
 <?php if(commonModel::isAvailable('order')) include TPL_ROOT . 'common/cart.html.php';?>
 </body>

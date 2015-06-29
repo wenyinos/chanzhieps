@@ -22,6 +22,10 @@
           <th class='w-80px'><?php echo $lang->ui->productView;?></td>
           <td><?php echo html::radio('productView', $lang->ui->productViewList, isset($this->config->ui->productView) ? $this->config->ui->productView : '1');?></td>
         </tr>
+        <tr>
+          <th><?php echo $lang->ui->QRCode;?></td>
+          <td><?php echo html::radio('QRCode', $lang->ui->QRCodeList, isset($this->config->ui->QRCode) ? $this->config->ui->QRCode : '1');?></td>
+        </tr>
         <tr><td colspan='2'><?php echo html::submitButton();?></td></tr>
       </table>
     </form>

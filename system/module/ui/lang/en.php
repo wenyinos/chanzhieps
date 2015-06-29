@@ -24,6 +24,7 @@ $lang->ui->deleteFavicon   = "Delete favicon";
 $lang->ui->deleteLogo      = "Delete logo";
 $lang->ui->others          = "Set others";
 $lang->ui->productView     = "Product view";
+$lang->ui->QRCode          = "QR Code";
 
 $lang->ui->noStyleTag        = "Please write base CSS file code, No &lt;style&gt;&lt;/style&gt; tag.";
 $lang->ui->setLogoFailed     = "Set logo failed.";
@@ -33,6 +34,9 @@ $lang->ui->suitableLogoSize  = 'Suitable height: 50px~80p, width: 80px~240px';
 
 $lang->ui->productViewList[1] = 'Show'; 
 $lang->ui->productViewList[0] = 'Hide'; 
+
+$lang->ui->QRCodeList[1] = 'Show'; 
+$lang->ui->QRCodeList[0] = 'Hide'; 
 
 $lang->ui->favicon = new stdclass();
 $lang->ui->favicon->help  = "Help";
