@@ -16,7 +16,6 @@
 <?php js::set('key', 1);?>
 <?php js::set('categoryID', $currentCategory);?>
 <?php js::set('currency', $lang->product->currency);?>
-<?php js::set('showView', $lang->product->showView);?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-plus"></i> <?php echo $lang->product->create;?></strong>

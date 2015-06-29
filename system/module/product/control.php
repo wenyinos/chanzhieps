@@ -223,25 +223,6 @@ class product extends control
     }
 
     /**
-     * Set product view show or not. 
-     * 
-     * @access public
-     * @return void
-     */
-    public function showView()
-    {
-        if($_POST)
-        {
-            $this->loadModel('setting')->setItem('system.common.product.view', $this->post->showView);
-            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
-        }
-
-        $this->view->title = $this->lang->product->showView;
-        $this->display();
-    }
-
-    /**
      * View a product.
      * 
      * @param int $productID 

@@ -1,5 +1,4 @@
 <?php
-$config->ui = new stdclass();
 $config->ui->groups = array('basic', 'navbar', 'block', 'button', 'footer');
 
 $config->ui->selectorOptions = array();

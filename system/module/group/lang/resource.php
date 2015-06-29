@@ -163,7 +163,6 @@ $lang->resource->product->currency     = 'currency';
 $lang->resource->product->delete       = 'delete';
 $lang->resource->product->setcss       = 'setcss';
 $lang->resource->product->setjs        = 'setjs';
-$lang->resource->product->showView     = 'showView';
 
 /* Reply module. */
 $lang->resource->reply = new stdclass();
@@ -219,6 +218,7 @@ $lang->resource->ui->setBaseStyle  = 'setBaseStyle';
 $lang->resource->ui->setFavicon    = 'setFavicon';
 $lang->resource->ui->deleteFavicon = 'deleteFavicon';
 $lang->resource->ui->deleteLogo    = 'deleteLogo';
+$lang->resource->ui->others        = 'others';
 
 /* User module. */
 $lang->resource->user = new stdclass();

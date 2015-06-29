@@ -178,6 +178,7 @@ $lang->ui->menu->theme   = '模板设置|ui|settemplate|';
 $lang->ui->menu->admin   = array('link' => '区块管理|block|admin|', 'alias' => 'create,edit');
 $lang->ui->menu->pages   = array('link' => '布局设置|block|pages|', 'alias' => 'setregion');
 $lang->ui->menu->styles  = '全局样式|ui|setbasestyle|';
+$lang->ui->menu->others  = '其他设置|ui|others|';
 
 /* Menu of user module. */
 $lang->user = new stdclass();
