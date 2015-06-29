@@ -120,10 +120,14 @@ class message extends control
         $this->lang->message = $this->lang->$type;
         if($_POST)
         {
-            $isAuto = ((isset($this->config->site->captcha) and $this->config->site->captcha == 'auto') or !isset($this->config->site->captcha)) ? true : false;
-            $isOpen = (isset($this->config->site->captcha) and $this->config->site->captcha == 'open') ? true : false;
+            $captchaConfig = isset($this->config->site->captcha) ? $this->config->site->captcha : 'auto';
+            $needCaptcha   = false;
+            if($captchaConfig == 'auto' and $this->loadModel('captcha')->isEvil($this->post->content)) $needCaptcha = true;
+            if($captchaConfig == 'open')  $needCaptcha = true;
+            if($captchaConfig == 'close') $needCaptcha = false;
+
             /* If no captcha but is garbage, return the error info. */
-            if($this->post->captcha === false and (($isAuto and $this->loadModel('captcha')->isEvil($this->post->content)) or $isOpen))
+            if($this->post->captcha === false and $needCaptcha)
             {
                 $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->loadModel('captcha')->create4Comment()));
             }
@@ -156,10 +160,14 @@ class message extends control
     {
         if($_POST)
         {
-            $isAuto = ((isset($this->config->site->captcha) and $this->config->site->captcha == 'auto') or !isset($this->config->site->captcha)) ? true : false;
-            $isOpen = (isset($this->config->site->captcha) and $this->config->site->captcha == 'open') ? true : false;
+            $captchaConfig = isset($this->config->site->captcha) ? $this->config->site->captcha : 'auto';
+            $needCaptcha   = false;
+            if($captchaConfig == 'auto' and $this->loadModel('captcha')->isEvil($this->post->content)) $needCaptcha = true;
+            if($captchaConfig == 'open')  $needCaptcha = true;
+            if($captchaConfig == 'close') $needCaptcha = false;
+
             /* If no captcha but is garbage, return the error info. */
-            if($this->post->captcha === false and (($isAuto and $this->loadModel('captcha')->isEvil($this->post->content)) or $isOpen))
+            if($this->post->captcha === false and $needCaptcha)
             {
                 $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->loadModel('captcha')->create4MessageReply()));
             }
