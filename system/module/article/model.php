@@ -89,6 +89,10 @@ class articleModel extends model
         {
             $articles = $this->dao->select('*')->from(TABLE_ARTICLE)
                 ->where('type')->eq('page')
+                ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')
+                ->andWhere('addedDate')->le(helper::now())
+                ->andWhere('status')->eq('normal')
+                ->fi()
                 ->orderBy('id_desc')
                 ->page($pager)
                 ->fetchAll('id');
@@ -236,6 +240,21 @@ class articleModel extends model
         $this->app->loadClass('pager', true);
         $pager = new pager($recTotal = 0, $recPerPage = $count, 1);
         return $this->getList($type, $family, 'sticky_desc, addedDate_desc', $pager);
+    }
+
+    /**
+     * Get page list. 
+     *
+     * @param int              $count
+     * @param string           $type
+     * @access public
+     * @return array
+     */
+    public function getPageList($count)
+    {
+        $this->app->loadClass('pager', true);
+        $pager = new pager($recTotal = 0, $recPerPage = $count, 1);
+        return $this->getList('page', '', 'id_desc', $pager);
     }
 
     /**

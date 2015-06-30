@@ -25,6 +25,8 @@ $config->block->defaultIcons['latestThread']  = 'icon-list-ul';
 $config->block->defaultIcons['latestProduct'] = 'icon-th';
 $config->block->defaultIcons['hotProduct']    = 'icon-th';
 
+$config->block->defaultIcons['pageList'] = 'icon-list-ul';
+
 $config->block->defaultIcons['articleTree']   = 'icon-folder-close';
 $config->block->defaultIcons['productTree']   = 'icon-folder-close';
 $config->block->defaultIcons['blogTree']      = 'icon-folder-close';

@@ -98,18 +98,20 @@ $config->db->strictMode = false;               // Turn off the strict mode.
 $config->db->prefix     = 'eps_';              // The prefix of the table name.
 
 /* Include my.php, domain.php and front or admin.php. */
-$configRoot   = dirname(__FILE__) . DS;
-$myConfig     = $configRoot . 'my.php';
-$routeConfig  = $configRoot . 'route.php';
-$domainConfig = $configRoot . 'domain.php';
-$modeConfig   = $configRoot . RUN_MODE . '.php';
-$shopConfig   = $configRoot . 'shop.php';
+$configRoot      = dirname(__FILE__) . DS;
+$myConfig        = $configRoot . 'my.php';
+$routeConfig     = $configRoot . 'route.php';
+$domainConfig    = $configRoot . 'domain.php';
+$modeConfig      = $configRoot . RUN_MODE . '.php';
+$shopConfig      = $configRoot . 'shop.php';
+$sensitiveConfig = $configRoot . 'sensitive.php';
 
-if(file_exists($myConfig))     include $myConfig;
-if(file_exists($routeConfig))  include $routeConfig;
-if(file_exists($domainConfig)) include $domainConfig;
-if(file_exists($modeConfig))   include $modeConfig;
-if(file_exists($shopConfig))   include $shopConfig;
+if(file_exists($myConfig))        include $myConfig;
+if(file_exists($routeConfig))     include $routeConfig;
+if(file_exists($domainConfig))    include $domainConfig;
+if(file_exists($modeConfig))      include $modeConfig;
+if(file_exists($shopConfig))      include $shopConfig;
+if(file_exists($sensitiveConfig)) include $sensitiveConfig;
 
 /* The tables. */
 define('TABLE_CONFIG',         $config->db->prefix . 'config');
