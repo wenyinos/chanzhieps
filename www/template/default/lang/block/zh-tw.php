@@ -24,6 +24,8 @@ $lang->block->default->typeList['latestProduct']   = '最新產品';
 $lang->block->default->typeList['featuredProduct'] = '首頁推薦產品';
 $lang->block->default->typeList['hotProduct']      = '熱門產品';
 
+$lang->block->default->typeList['pageList']        = '單頁列表';
+
 $lang->block->default->typeList['articleTree']     = '文章分類';
 $lang->block->default->typeList['productTree']     = '產品分類';
 $lang->block->default->typeList['blogTree']        = '博客分類';
@@ -49,6 +51,8 @@ $lang->block->default->typeGroups['latestThread']  = 'thread';
 $lang->block->default->typeGroups['latestProduct']   = 'product';
 $lang->block->default->typeGroups['featuredProduct'] = 'product';
 $lang->block->default->typeGroups['hotProduct']      = 'product';
+
+$lang->block->default->typeGroups['pageList']        = 'page';
 
 $lang->block->default->typeGroups['articleTree'] = 'category';
 $lang->block->default->typeGroups['productTree'] = 'category';
