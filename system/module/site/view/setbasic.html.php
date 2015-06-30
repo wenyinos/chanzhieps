@@ -34,15 +34,20 @@
           <th><?php echo $lang->site->name;?></th> 
           <td><?php echo html::input('name', $this->config->site->name, "class='form-control'");?></td><td></td>
         </tr>
-        <tr>
+        <tr title="<?php echo $lang->site->domainTip;?>">
           <th><?php echo $lang->site->domain;?></th> 
           <td><?php echo html::input('domain',  isset($this->config->site->domain) ? $this->config->site->domain : '', "class='form-control'");?></td>
-          <td title="<?php echo $lang->site->domainTip;?>"><i class='icon-question-sign'></i></td>
+          <td><i class='icon-question-sign'></i></td>
         </tr>
-        <tr>
+        <tr title="<?php echo $lang->site->allowedDomainTip;?>">
           <th><?php echo $lang->site->allowedDomain;?></th> 
           <td><?php echo html::input('allowedDomain',  isset($this->config->site->allowedDomain) ? $this->config->site->allowedDomain : '', "class='form-control'");?></td>
-          <td title="<?php echo $lang->site->allowedDomainTip;?>"><i class='icon-question-sign'></i></td>
+          <td><i class='icon-question-sign'></i></td>
+        </tr>
+        <tr title="<?php echo $lang->site->schemeTip;?>">
+          <th><?php echo $lang->site->scheme;?></th> 
+          <td><?php echo html::radio('scheme', $lang->site->schemeList, isset($this->config->site->scheme) ? $this->config->site->scheme : 'http', "class='checkbox'");?></td>
+          <td></td>
         </tr>
         <tr>
           <th><?php echo $lang->site->module;?></th>
