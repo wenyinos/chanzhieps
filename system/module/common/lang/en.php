@@ -178,6 +178,7 @@ $lang->ui->menu->theme   = 'Theme|ui|settemplate|';
 $lang->ui->menu->admin   = array('link' => 'Blocks|block|admin|', 'alias' => 'create,edit');
 $lang->ui->menu->pages   = array('link' => 'Layout|block|pages|', 'alias' => 'setregion');
 $lang->ui->menu->styles  = 'Base Style|ui|setbasestyle|';
+$lang->ui->menu->others  = 'Others|ui|others|';
 
 /* Menu of user module. */
 $lang->user = new stdclass();
@@ -312,6 +313,7 @@ $lang->error->captcha      = 'Captcah wrong.';
 $lang->error->noWritable   = '%s maybe not write, please modify permissions!';
 $lang->error->fingerprint  = 'identity authent faild';
 $lang->error->token        = 'Should English or numbers, length of 3-32 characters.';
+$lang->error->sensitive    = 'There can be no sensitive words in the content.';
 
 /* The pager items. */
 $lang->pager = new stdclass();
