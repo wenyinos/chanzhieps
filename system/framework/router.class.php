@@ -726,16 +726,32 @@ class router
             }
             if(!$allowed) die('domain denied.');
         }
-        
+
         $result = $this->dbh->query("select value from " . TABLE_CONFIG . " where owner = 'system' and module = 'common' and section = 'site' and `key` = 'domain' and `lang` in ('all', '$this->clientLang')")->fetch();
         $mainDomain = !empty($result->value) ? $result->value : '';
         $mainDomain = str_replace('http://', '', $mainDomain);
+        $mainDomain = str_replace('https://', '', $mainDomain);
         $webRoot = getWebRoot(true);
         $currentURI = rtrim($webRoot, '/') . $this->server->request_uri;
+
+        $redirect    = false;
+        $redirectURI = $currentURI;
         if($mainDomain and strpos($webRoot, $mainDomain) == false)
         {
-            header301(str_replace($this->server->http_host, $mainDomain, $currentURI));
+            $redirect = true;
+            $redirectURI = str_replace($this->server->http_host, $mainDomain, $currentURI);
         }
+
+        /* check scheme. */
+        $result = $this->dbh->query("select value from " . TABLE_CONFIG . " where owner = 'system' and module = 'common' and section = 'site' and `key` = 'scheme' and `lang` in ('all', '$this->clientLang')")->fetch();
+        $scheme = !empty($result->value) ? $result->value : 'http';
+        if(strpos($redirectURI, $scheme . '://') !== 0)
+        {
+            $redirect = true;
+            $redirectURI = $scheme . substr($redirectURI, strpos($redirectURI, '://'));
+        }
+
+        if($redirect) header301($redirectURI);
     }
 
     //-------------------- Client environment related functions --------------------//
