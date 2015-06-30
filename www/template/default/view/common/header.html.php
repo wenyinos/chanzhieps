@@ -3,6 +3,8 @@
 <div class='page-container'>
   <?php $this->block->printRegion($layouts, 'all', 'top');?>
   <?php $topNavs = $this->loadModel('nav')->getNavs('top');?>
+  <!-- Remove topNavs if front page need login. -->
+  <?php if(isset($this->config->site->front) and $this->config->site->front == 'login' and $this->app->user->account == 'guest') $topNavs = array();?>
   <nav id='navbar' class='navbar' role='navigation'>
     <div class='navbar-header'>
       <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#navbarCollapse'>

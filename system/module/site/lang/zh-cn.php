@@ -48,6 +48,7 @@ $lang->site->allowedLocation = '允许登录地区';
 $lang->site->checkSessionIP  = '登录期间IP';
 $lang->site->setsecurity     = '安全设置';
 $lang->site->filterSensitive = '敏感词过滤';
+$lang->site->front           = '网站浏览';
 
 $lang->site->setBasic      = "基本信息设置";
 $lang->site->setLang       = "语言设置";
@@ -109,6 +110,10 @@ $lang->site->validateTypes->email  = '邮件验证码验证';
 $lang->site->schemeList = array();
 $lang->site->schemeList['http']  = 'http';
 $lang->site->schemeList['https'] = 'https';
+
+$lang->site->frontList = array();
+$lang->site->frontList['guest'] = '不需要登录';
+$lang->site->frontList['login'] = '需要登录';
 
 $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = '会员';
