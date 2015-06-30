@@ -48,6 +48,11 @@ include '../../mail/view/captcha.html.php';
           </td>
         </tr>
         <tr>
+          <th class='w-200px'><?php echo $lang->site->front;?></th>
+          <td colspan='2'><?php echo html::radio('front', $lang->site->frontList, isset($this->config->site->front) ? $this->config->site->front : 'guest');?></td>
+          <td></td>
+        </tr>
+        <tr>
           <th class='w-200px'><?php echo $lang->site->checkLocation;?></th>
           <td colspan='2'><?php echo html::radio('checkLocation', $lang->site->checkLocationList, isset($this->config->site->checkLocation) ? $this->config->site->checkLocation : 'close');?></td>
           <td></td>

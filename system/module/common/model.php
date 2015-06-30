@@ -109,6 +109,17 @@ class commonModel extends model
             }
         }
 
+        /* go to login page, if the setting of front page is need login. */
+        if(RUN_MODE == 'front')
+        {
+            $frontConfig = isset($this->config->site->front) ? $this->config->site->front : 'guest';
+            if($frontConfig == 'login' and $this->app->user->account == 'guest')
+            {
+                $referer = helper::safe64Encode($this->app->getURI(true));
+                die(js::locate(helper::createLink('user', 'login', "referer=$referer")));
+            }
+        }
+
         /* Check the priviledge. */
         if(!commonModel::hasPriv($module, $method)) $this->deny($module, $method);
     }

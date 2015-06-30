@@ -48,6 +48,7 @@ $lang->site->allowedLocation = 'Allowed location';
 $lang->site->checkSessionIP  = 'Check the login ip';
 $lang->site->setsecurity     = 'Security setting';
 $lang->site->filterSensitive = 'Filter sensitive words';
+$lang->site->front           = 'Visit website';
 
 $lang->site->setBasic      = "Baisc";
 $lang->site->setLang       = "Languages";
@@ -109,6 +110,10 @@ $lang->site->validateTypes->email  = 'email';
 $lang->site->schemeList = array();
 $lang->site->schemeList['http']  = 'http';
 $lang->site->schemeList['https'] = 'https';
+
+$lang->site->frontList = array();
+$lang->site->frontList['guest'] = "needn't login";
+$lang->site->frontList['login'] = 'need login';
 
 $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = 'Member';
