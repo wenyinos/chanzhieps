@@ -83,8 +83,10 @@ foreach (explode('|', $lang->colorPlates) as $value)
         <tr>
           <th></th>
           <td>
-            <?php echo html::submitButton();?>
-            <?php echo html::a($this->session->blockList, $this->lang->goback, "class='btn btn-default'");?>
+            <div class='form-action'>
+              <?php echo html::submitButton();?>
+              <?php echo html::a($this->session->blockList, $this->lang->goback, "class='btn btn-default'");?>
+            </div>
           </td>
         </tr>
       </table>
