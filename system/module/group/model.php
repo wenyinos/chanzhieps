@@ -179,8 +179,8 @@ class groupModel extends model
         $userPairs = array();
         foreach($users as $account => $user)
         {
-            $userPairs[$account] = !empty($user->realnames) ? $this->loadModel('user')->computeRealname($user->realnames) : $user->realname;
-            if($userPairs[$account] == '') $userPairs[$account] = $account;
+            if(!$account) continue;
+            $userPairs[$account] = $this->loadModel('user')->computeRealname($user);
         }
         return $userPairs;
     }
