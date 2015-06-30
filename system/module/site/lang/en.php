@@ -31,6 +31,7 @@ $lang->site->mission         = 'Mission';
 $lang->site->copyright       = 'Copyright';
 $lang->site->allowUpload     = 'Allow upload files';
 $lang->site->allowedFiles    = 'Allowed file types';
+$lang->site->setImageSize    = 'Set thumbs';
 $lang->site->captcha         = 'Captcha';
 $lang->site->mailCaptcha     = 'Mail captcha';
 $lang->site->twContent       = 'traditional contents';
@@ -88,6 +89,13 @@ $lang->site->checkEmailList['close'] = 'Close';
 $lang->site->sessionIpoptions = array();
 $lang->site->sessionIpoptions[0] = 'Can chaneged';
 $lang->site->sessionIpoptions[1] = 'Must be same';
+
+$lang->site->imageSize['s'] = 'Small';
+$lang->site->imageSize['m'] = 'Middle';
+$lang->site->imageSize['l'] = 'Large';
+
+$lang->site->image['width']  = 'Width';
+$lang->site->image['height'] = 'Height';
 
 $lang->site->captchaList = array();
 $lang->site->captchaList['close'] = 'Close';
