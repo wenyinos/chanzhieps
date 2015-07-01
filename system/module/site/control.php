@@ -43,6 +43,28 @@ class site extends control
     }
 
     /**
+     * set sensitive.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setSensitive()
+    {
+        if(!empty($_POST))
+        {
+            $setting = fixer::input('post')->get();
+
+            $result = $this->loadModel('setting')->setItems('system.common.site', $setting);
+
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setsensitive')));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+        }
+
+        $this->view->title = $this->lang->site->setsensitive;
+        $this->display();
+    }
+
+    /**
      * Set language items. 
      * 
      * @access public

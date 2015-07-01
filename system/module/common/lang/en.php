@@ -220,6 +220,7 @@ $lang->site->menu->lang       = 'Language|site|setlang|';
 $lang->site->menu->nav        = 'Navigation|nav|admin|';
 $lang->site->menu->security   = 'Security|site|setsecurity|';
 $lang->site->menu->upload     = 'Uploads|site|setupload|';
+$lang->site->menu->sensitive  = 'Sensitive words|site|setsensitive|';
 $lang->site->menu->tag        = 'Tags|tag|admin|';
 $lang->site->menu->recPerPage = 'Set Records Per Page|site|setrecperpage|';
 $lang->site->menu->oauth      = 'Open OAuth|site|setoauth|';
