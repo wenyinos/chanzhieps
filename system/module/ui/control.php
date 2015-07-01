@@ -157,8 +157,9 @@ class ui extends control
             if(!$return['result']) $this->send(array('result' => 'fail', 'message' => $return['message']));
          }
 
-        $this->view->title   = $this->lang->ui->setFavicon;
-        $this->view->favicon = isset($this->config->site->favicon) ? json_decode($this->config->site->favicon) : false;
+        $this->view->title          = $this->lang->ui->setFavicon;
+        $this->view->favicon        = isset($this->config->site->favicon) ? json_decode($this->config->site->favicon) : false;
+        $this->view->defaultFavicon = file_exists($this->app->getWwwRoot() . 'favicon.ico');
 
         $this->display();
     }
@@ -171,8 +172,10 @@ class ui extends control
      */ 
     public function deleteFavicon() 
     {
-        $favicon = isset($this->config->site->favicon) ? json_decode($this->config->site->favicon) : false;
+        $defaultFavicon = $this->app->getWwwRoot() . 'favicon.ico';
+        if(file_exists($defaultFavicon)) unlink($defaultFavicon);
 
+        $favicon = isset($this->config->site->favicon) ? json_decode($this->config->site->favicon) : false;
         $this->loadModel('setting')->deleteItems("owner=system&module=common&section=site&key=favicon");
         if($favicon) $this->loadModel('file')->delete($favicon->fileID);
 

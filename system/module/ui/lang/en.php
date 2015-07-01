@@ -26,6 +26,7 @@ $lang->ui->others          = "Set others";
 $lang->ui->productView     = "Product view";
 $lang->ui->QRCode          = "QR Code";
 
+$lang->ui->deleteFavicon     = "Do not display favicon";
 $lang->ui->noStyleTag        = "Please write base CSS file code, No &lt;style&gt;&lt;/style&gt; tag.";
 $lang->ui->setLogoFailed     = "Set logo failed.";
 $lang->ui->noSelectedFile    = "No file selected.";

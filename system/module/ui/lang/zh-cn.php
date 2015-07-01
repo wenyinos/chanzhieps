@@ -26,6 +26,7 @@ $lang->ui->others          = "其他设置";
 $lang->ui->productView     = "产品点击量";
 $lang->ui->QRCode          = "移动二维码";
 
+$lang->ui->deleteFavicon     = "不显示网站图标";
 $lang->ui->noStyleTag        = "请填写全局CSS样式代码，不需要&lt;style&gt;&lt;/style&gt;标签";
 $lang->ui->setLogoFailed     = "设置Logo失败";
 $lang->ui->noSelectedFile    = "获取上传图片失败，可能是图片大小超出上传限制";
