@@ -106,7 +106,7 @@ class messageModel extends model
                 echo "<tr class='reply'>";
                 echo "<th class='th-from text-important'>$reply->from<br />";
                 echo "<span class='time'>" . formatTime($reply->date, 'Y/m/d') . "</span></th>";
-                echo "<td class='td-content' >" . nl2br($reply->content) . '</td>';
+                echo "<td class='td-content'><div class='content-detail'>" . nl2br($reply->content) . '</div></td>';
                 echo "<td class='td-action'>";
                 echo html::a(helper::createLink('message', 'reply', "id={$reply->id}"), $this->lang->message->reply, " data-toggle='modal' data-type='iframe' id='reply{$reply->id}'");
                 echo '</td>';
