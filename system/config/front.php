@@ -74,6 +74,8 @@ $config->rights->guest['misc']['ajaxgetfiniger'] = 'ajaxgetfiniger';
 $config->rights->guest['search']['index'] = 'index';
 
 $config->rights->guest['cart']['add']           = 'add';
+$config->rights->guest['cart']['delete']        = 'delete';
+$config->rights->guest['cart']['browse']        = 'browse';
 $config->rights->guest['cart']['printtopbar']   = 'printtopbar';
 $config->rights->guest['order']['confirm']      = 'confirm';
 $config->rights->guest['order']['processorder'] = 'processorder';
@@ -107,10 +109,6 @@ $config->rights->member['file']['ajaxupload'] = 'ajaxupload';
 
 $config->rights->member['message']['view']        = 'view';
 $config->rights->member['message']['batchdelete'] = 'batchdelete';
-
-$config->rights->member['cart']['delete'] = 'delete';
-$config->rights->member['cart']['browse'] = 'browse';
-$config->rights->member['cart']['delete'] = 'delete';
 
 $config->rights->member['order']['create']          = 'pay';
 $config->rights->member['order']['browse']          = 'browse';

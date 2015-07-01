@@ -91,7 +91,7 @@
   </div>
   <div class='panel-body'>
     <?php echo $lang->cart->noProducts;?>
-    <?php echo html::a(helper::createLink('product', 'browse'), $lang->cart->pickProducts, "class='btn btn-xs btn-primary'");?>
+    <?php echo html::a(helper::createLink('product', 'browse', 'category=0'), $lang->cart->pickProducts, "class='btn btn-xs btn-primary'");?>
     <?php echo html::a(helper::createLink('index', 'index'), $lang->cart->goHome, "class='btn btn-xs btn-default'");?>
   </div>
 </div>
