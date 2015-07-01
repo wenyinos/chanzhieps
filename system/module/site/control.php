@@ -29,6 +29,7 @@ class site extends control
                 ->remove('allowedFiles')
                 ->setDefault('modules', '')
                 ->stripTags('pauseTip', $allowedTags)
+                ->remove('uid')
                 ->get();
 
             $result = $this->loadModel('setting')->setItems('system.common.site', $setting);

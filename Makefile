@@ -9,7 +9,7 @@ zip:
 	mkdir chanzhieps
 	cp -frv system chanzhieps/
 	rm -fr chanzhieps/system/config/my.php
-	cp -frv www chanzhieps && rm -fr chanzhieps/www/data/* && mkdir -p chanzhieps/www/data/upload/
+	cp -frv www chanzhieps && rm -fr chanzhieps/www/data/* && mkdir -p chanzhieps/www/data/upload/ && mkdir -p chanzhieps/www/data/slides/
 	mkdir -p chanzhieps/www/data/css/default/default
 	mkdir -p chanzhieps/www/data/css/default/blue
 	mkdir -p chanzhieps/www/data/css/default/brightdark

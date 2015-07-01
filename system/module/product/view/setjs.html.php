@@ -17,8 +17,10 @@
     <tr><td><?php echo html::textarea('js', $product->js, "rows=5 class='form-control codeeditor' data-mode='javascript' data-height='300px'");?></td></tr>
     <tr>
       <td>
-        <?php echo html::submitButton();?>
-        <strong class='text-info'><?php echo $lang->product->noJsTag;?></strong>
+        <div class='form-action'>
+          <?php echo html::submitButton();?>
+          <strong class='text-info'><?php echo $lang->product->noJsTag;?></strong>
+        </div>
       </td>
     </tr>
   </table>

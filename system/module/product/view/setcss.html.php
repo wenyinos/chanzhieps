@@ -17,8 +17,10 @@
     <tr><td><?php echo html::textarea('css', $product->css, "rows=5 class='form-control codeeditor' data-mode='css' data-height='300px'");?></td></tr>
     <tr>
       <td>
-        <?php echo html::submitButton();?>
-        <strong class='text-info'><?php echo $lang->product->noCssTag;?></strong>
+        <div class='form-action'>
+          <?php echo html::submitButton();?>
+          <strong class='text-info'><?php echo $lang->product->noCssTag;?></strong>
+        </div>
       </td>
     </tr>
   </table>

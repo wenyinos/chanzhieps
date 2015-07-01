@@ -15,7 +15,6 @@
 <?php js::set('type',$type);?>
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
-<?php include '../../common/view/codeeditor.html.php';?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-edit'></i> <?php echo $type == 'blog' ? $lang->blog->edit : ($type == 'page' ? $lang->page->edit : $lang->article->edit);?></strong></div>
   <div class='panel-body'>
