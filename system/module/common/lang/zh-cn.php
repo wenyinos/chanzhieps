@@ -220,6 +220,7 @@ $lang->site->menu->lang       = '语言设置|site|setlang|';
 $lang->site->menu->nav        = '导航设置|nav|admin|';
 $lang->site->menu->security   = '安全设置|site|setsecurity|';
 $lang->site->menu->upload     = '上传设置|site|setupload|';
+$lang->site->menu->sensitive  = '敏感词设置|site|setsensitive|';
 $lang->site->menu->tag        = '关键词设置|tag|admin|';
 $lang->site->menu->recPerPage = '列表数量设置|site|setrecperpage|';
 $lang->site->menu->oauth      = '开放登录|site|setoauth|';

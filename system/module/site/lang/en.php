@@ -47,6 +47,7 @@ $lang->site->checkEmail      = 'Check Email';
 $lang->site->allowedLocation = 'Allowed location';
 $lang->site->checkSessionIP  = 'Check the login ip';
 $lang->site->setsecurity     = 'Security setting';
+$lang->site->setsensitive    = 'Set sensitive words';
 $lang->site->filterSensitive = 'Filter sensitive words';
 $lang->site->front           = 'Visit website';
 

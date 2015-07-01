@@ -47,6 +47,7 @@ $lang->site->checkEmail      = '会员邮箱绑定';
 $lang->site->allowedLocation = '允许登录地区';
 $lang->site->checkSessionIP  = '登录期间IP';
 $lang->site->setsecurity     = '安全设置';
+$lang->site->setsensitive    = '敏感词设置';
 $lang->site->filterSensitive = '敏感词过滤';
 $lang->site->front           = '网站浏览';
 
