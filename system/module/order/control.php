@@ -23,6 +23,7 @@ class order extends control
     {
         $this->loadModel('product');
         $referer = helper::safe64Encode(inlink('confirm', "product={$product}&count={$count}"));
+        if($_POST) $referer = helper::safe64Encode($this->createLink('cart', "browse"));
         if($this->app->user->account == 'guest') $this->locate($this->createLink('user', 'login', "referer={$referer}"));
 
         if($_POST) $product = $this->post->product;

@@ -1,7 +1,6 @@
 <?php js::import($jsRoot . 'jplayer/dist/jplayer/jquery.jplayer.min.js');?>
 <?php css::import($jsRoot . 'jplayer/dist/skin/blue.monday/css/jplayer.blue.monday.min.css');?>
  
-<script type="text/javascript" src="/js/"></script>
 <script type="text/javascript">
 $(document).ready(function()
 {
