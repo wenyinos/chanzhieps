@@ -694,9 +694,9 @@ class userModel extends model
      * @access public
      * @return string
      */
-    public function createOAuthCallbackURL($provider, $referer)
+    public function createOAuthCallbackURL($provider)
     {
-        return commonModel::getSysURL() . helper::createLink('user', 'oauthCallback', "provider=$provider&referer=$referer");
+        return commonModel::getSysURL() . helper::createLink('user', 'oauthCallback', "provider=$provider");
     }
 
     /**

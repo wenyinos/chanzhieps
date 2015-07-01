@@ -563,11 +563,12 @@ class user extends control
         /* Save the provider to session.*/
         $this->session->set('oauthProvider', $provider);
         $this->session->set('fingerprint', $fingerprint);
+        $this->session->set('referer', $referer);
 
         /* Init OAuth client. */
         $this->app->loadClass('oauth', $static = true);
         $this->config->oauth->$provider = json_decode($this->config->oauth->$provider);
-        $client = oauth::factory($provider, $this->config->oauth->$provider, $this->user->createOAuthCallbackURL($provider, $referer));
+        $client = oauth::factory($provider, $this->config->oauth->$provider, $this->user->createOAuthCallbackURL($provider));
 
         /* Create the authorize url and locate to it. */
         $authorizeURL = $client->createAuthorizeAPI();
@@ -582,16 +583,17 @@ class user extends control
      * @access public
      * @return void
      */
-    public function oauthCallback($provider, $referer = '')
+    public function oauthCallback($provider)
     {
         /* First check the state and provider fields. */
         if($this->get->state != $this->session->oauthState)  die('state wrong!');
         if($provider != $this->session->oauthProvider)       die('provider wrong.');
+        $referer = $this->session->referer;
 
         /* Init the OAuth client. */
         $this->app->loadClass('oauth', $static = true);
         $this->config->oauth->$provider = json_decode($this->config->oauth->$provider);
-        $client = oauth::factory($provider, $this->config->oauth->$provider, $this->user->createOAuthCallbackURL($provider, $referer));
+        $client = oauth::factory($provider, $this->config->oauth->$provider, $this->user->createOAuthCallbackURL($provider));
 
         /* Begin OAuth authing. */
         $token  = $client->getToken($this->get->code);    // Step1: get token by the code.
