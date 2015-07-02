@@ -131,11 +131,25 @@ class site extends control
      */
     public function setSecurity()
     {
-        $okFile = $this->loadModel('common')->verfyAdmin();
-        $pass   = $this->loadModel('mail')->checkVerify();
-        $this->view->pass   = $pass;
-        $this->view->okFile = $okFile;
-        if(!empty($_POST) && !$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha'));
+        $captcha           = (isset($this->config->site->captcha) and ($this->config->site->captcha == 'open' and ($this->post->captcha == 'close' or $this->post->captcha == 'auto')) or ($this->config->site->captcha == 'auto' and $this->post->captcha == 'close'));
+        $checkEmail        = (isset($this->config->site->checkEmail) and $this->config->site->checkEmail == 'open' and $this->post->checkEmail == 'close');
+        $front             = (isset($this->config->site->front) and $this->config->site->front == 'login' and $this->post->front == 'guest');
+        $checkLocation     = (isset($this->config->site->checkLocation) and $this->config->site->checkLocation == 'open' and $this->post->checkLocation == 'close');
+        $checkSessionIP    = (isset($this->config->site->checkSessionIP) and $this->config->site->checkSessionIP == 1 and $this->post->checkSessionIP == 0);
+        $allowedIP         = (isset($this->config->site->allowedIP) and ($this->config->site->allowedIP != $this->post->allowedIP));
+
+        $newImportantValidate = $this->post->importantValidate ? implode(',', $this->post->importantValidate) : '';
+        $oldImportantValidate = $this->config->site->importantValidate;
+        $importantValidate    = ($oldImportantValidate == 'okFile,email' and (!$newImportantValidate or $newImportantValidate == 'okFile' or $newImportantValidate == 'email')) or (($oldImportantValidate == 'okFile' or $oldImportantValidate == 'email') and !$newImportantValidate);
+
+        if($captcha or $checkEmail or $front or $checkLocation or $checkSessionIP or $allowedIP or $importantValidate)
+        {
+            $okFile = $this->loadModel('common')->verfyAdmin();
+            $pass   = $this->loadModel('mail')->checkVerify();
+            $this->view->pass   = $pass;
+            $this->view->okFile = $okFile;
+            if(!empty($_POST) && !$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha'));
+        }
 
         if(!empty($_POST))
         {

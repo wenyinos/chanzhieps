@@ -1,6 +1,6 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
 <?php include_once '../../common/view/header.modal.html.php';?>
-<?php if($methodName == 'setsecurity') $this->config->site->importantValidate = 'okFile';?>
+<?php if(strpos($this->server->http_referer, 'setsecurity') !== false) $this->config->site->importantValidate = 'okFile';?>
 <?php if(isset($pass) and $pass):?>
 <script>
 $(document).ready(function()
