@@ -1094,6 +1094,7 @@ class router
 
         if(!is_file($this->controlFile) && $this->getModuleName() != 'error') 
         {
+            if($this->server->request_uri == '/favicon.ico') die();
             $this->setModuleName('error');
             $this->setMethodName('index');
             return $this->setControlFile();
@@ -1177,7 +1178,6 @@ class router
     {
         if(!empty($this->URI))
         { 
-
             /* There's the request seperator, split the URI by it. */
             if(strpos($this->URI, '-') !== false)
             {
