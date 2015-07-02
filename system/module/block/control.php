@@ -75,14 +75,14 @@ class block extends control
         {
             $return = $this->loadModel('common')->verfyAdmin();
             if($return['result'] == 'fail') $this->view->okFile = $return['okFile'];
-            $canCreatePHP = $return['result'] == 'success';
+            $canCreatePHP = $this->loadModel('mail')->checkVerify();
 
             $this->view->canCreatePHP = $canCreatePHP;
         }
 
         if($_POST)
         {
-            if($type == 'phpcode' and !$canCreatePHP) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            if($type == 'phpcode' and !$canCreatePHP) $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => dao::getError()));
 
             $this->block->create($template);
             if(!dao::isError()) $this->send(array('result' => 'success', 'locate' => $this->inlink('admin')));
@@ -115,14 +115,14 @@ class block extends control
         {
             $return = $this->loadModel('common')->verfyAdmin();
             if($return['result'] == 'fail') $this->view->okFile = $return['okFile'];
-            $canCreatePHP = $return['result'] == 'success';
+            $canCreatePHP = $this->loadModel('mail')->checkVerify();
 
             $this->view->canCreatePHP = $canCreatePHP;
         }
 
         if($_POST)
         {
-            if($type == 'phpcode' and !$canCreatePHP) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            if($type == 'phpcode' and !$canCreatePHP) $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => dao::getError()));
             $this->block->update($template);
             if(!dao::isError()) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
