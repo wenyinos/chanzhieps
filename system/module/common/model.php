@@ -809,7 +809,18 @@ class commonModel extends model
      */
     public function verfyAdmin()
     {
-        $okFile = $this->app->getWwwRoot() . 'ok.txt';
+        if($this->session->okFileName == false or $this->session->okFileName == '')
+        {
+            $this->session->set('okFileName', helper::createRandomStr(4, $skip = '0-9A-Z') . '.txt');
+        }
+        $okFile = $this->app->getTmpRoot() . $this->session->okFileName;
+
+        if(file_exists($okFile) and time() - filemtime($okFile) > 3600)
+        {
+            $this->session->set('okFileName', helper::createRandomStr(4, $skip = '0-9A-Z') . '.txt');
+            $okFile = $this->app->getTmpRoot() . $this->session->okFileName;
+        }
+
         if(!file_exists($okFile) or time() - filemtime($okFile) > 3600)
         {
             return array('result' => 'fail', 'okFile' => $okFile);

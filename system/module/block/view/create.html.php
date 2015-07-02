@@ -29,7 +29,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
     <strong><i class='icon-plus'></i> <?php echo $lang->block->create;?></strong>
   </div>
   <div class='panel-body'>
-    <form method='post' id='ajaxForm'>
+    <form method='post' id='createForm'>
       <?php if(strpos(',htmlcode, phpcode, slide, header', $type) == false or $type == 'html'):?>
         <div id='panelPreview' class='panel-preview'>
           <div class='heading'>
@@ -85,6 +85,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
           <td>
             <div class='form-action'>
               <?php echo html::submitButton();?>
+              <?php echo html::a($this->createLink('mail', 'captcha'), $lang->save, "data-toggle='modal' class='hidden captchaModal'")?></th>
               <?php echo html::a($this->session->blockList, $this->lang->goback, "class='btn btn-default'");?>
             </div>
           </td>
