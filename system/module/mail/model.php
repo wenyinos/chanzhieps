@@ -385,6 +385,8 @@ class mailModel extends model
      */
     public function checkVerify()
     {
+        if(strpos($this->server->http_referer, 'setsecurity') !== false) $this->config->site->importantValidate = 'okFile';
+
         $okFileChecked = false;
         $checkOkFile   = true;
 

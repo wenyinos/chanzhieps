@@ -140,7 +140,9 @@ class site extends control
 
         $newImportantValidate = $this->post->importantValidate ? implode(',', $this->post->importantValidate) : '';
         $oldImportantValidate = $this->config->site->importantValidate;
-        $importantValidate    = ($oldImportantValidate == 'okFile,email' and (!$newImportantValidate or $newImportantValidate == 'okFile' or $newImportantValidate == 'email')) or (($oldImportantValidate == 'okFile' or $oldImportantValidate == 'email') and !$newImportantValidate);
+        $importantValidate    = (($oldImportantValidate == 'okFile,email' and (!$newImportantValidate or $newImportantValidate == 'okFile' or $newImportantValidate == 'email'))
+                                or ($oldImportantValidate == 'okFile' and (!$newImportantValidate or $newImportantValidate == 'email'))
+                                or ($oldImportantValidate == 'email' and (!$newImportantValidate or $newImportantValidate == 'okFile')));
 
         if($captcha or $checkEmail or $front or $checkLocation or $checkSessionIP or $allowedIP or $importantValidate)
         {
