@@ -29,14 +29,6 @@ include '../../mail/view/captcha.html.php';
           <td colspan='3'><?php echo html::radio('captcha', $lang->site->captchaList, isset($this->config->site->captcha) ? $this->config->site->captcha : 'auto');?></td>
         </tr>
         <tr>
-          <th><?php echo $lang->site->filterSensitive;?></th>
-          <td colspan='3'><?php echo html::radio('filterSensitive', $lang->site->filterSensitiveList, isset($this->config->site->filterSensitive) ? $this->config->site->filterSensitive : 'close');?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->site->sensitive;?></th>
-          <td colspan='3'><?php echo html::textarea('sensitive', !empty($this->config->site->sensitive) ? $this->config->site->sensitive : $config->sensitive, "class='form-control' rows=5");?></td>
-        </tr>
-        <tr>
           <th class='w-200px'><?php echo $lang->site->checkEmail;?></th>
           <td colspan='2'><?php echo html::radio('checkEmail', $lang->site->checkEmailList, isset($this->config->site->checkEmail) ? $this->config->site->checkEmail : 'close');?></td>
           <td></td>
