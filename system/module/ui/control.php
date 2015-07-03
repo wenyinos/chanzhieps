@@ -253,6 +253,13 @@ class ui extends control
         $this->display();
     }
 
+    /**
+     * Download theme.
+     * 
+     * @param  string    $exportedFile 
+     * @access public
+     * @return void
+     */
     public function downloadtheme($exportedFile)
     {
         $fileData = file_get_contents($exportedFile);
