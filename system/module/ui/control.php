@@ -216,4 +216,44 @@ class ui extends control
         $this->view->title = $this->lang->ui->others;
         $this->display();
     }
+
+    /**
+     * Export theme function.
+     * 
+     * @access public
+     * @return void
+     */
+    public function exportTheme()
+    {
+        if($_POST)
+        {
+            $initResult = $this->ui->initExportPath($this->post->template, $this->post->theme);
+            if(!$initResult) $this->send(array('result' => 'fail', 'message' => 'failed to init export paths'));
+
+            if(!$this->ui->checkExportParams()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $exportedFile = $this->ui->exportTheme($this->post->template, $this->post->theme);
+            $exportedFile = urlencode($exportedFile);
+            $this->send(array('result' => 'success', 'message' => $this->lang->ui->exportedSuccess, 'locate' => inlink('downloadtheme', "theme={$exportedFile}")));
+        }
+
+        $templateList = $this->ui->getTemplates();
+
+        foreach($templateList as $code => $template)
+        {
+            $templates[$code] = $template['name'];
+            $themes[$code]    = $template['themes'];
+        }
+
+        $this->view->templates = $templates;
+        $this->view->themes    = $themes;
+        $this->view->title     = $this->lang->ui->exportTheme;
+        $this->display();
+    }
+
+    public function downloadtheme($exportedFile)
+    {
+        $fileData = file_get_contents($exportedFile);
+        $pathInfo = pathinfo($exportedFile);
+        $this->loadModel('file')->sendDownHeader($pathInfo['basename'], 'zip', $fileData, filesize($exportedFile));
+    }
 }

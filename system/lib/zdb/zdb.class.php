@@ -39,7 +39,7 @@ class zdb
      * @access public
      * @return object
      */
-    public function dump($fileName, $tables = array())
+    public function dump($fileName, $tables = array(), $fields = array(), $mode = 'data,schema', $condations = array(), $replaces = array())
     {
         /* Init the return. */
         $return = new stdclass();
@@ -81,9 +81,10 @@ class zdb
             if(!isset($allTables[$table])) continue;
 
             /* Create sql code. */
-            $backupSql  = "DROP TABLE IF EXISTS `$table`;\n";
-            $backupSql .= $this->getSchemaSQL($table);
-            $backupSql .= $this->getDataSQL($table);
+            $backupSql = '';
+            if(strpos($mode, 'schema') !== false) $backupSql .= "DROP TABLE IF EXISTS `$table`;\n";
+            if(strpos($mode, 'schema') !== false) $backupSql .= $this->getSchemaSQL($table);
+            if(strpos($mode, 'data') !== false)   $backupSql .= $this->getDataSQL($table, zget($condations, $table), zget($fields, $table), zget($replaces, $table));
 
             /* Write sql code. */
             fwrite($fp, $backupSql);
@@ -122,9 +123,10 @@ class zdb
      * @access public
      * @return string
      */
-    public function getDataSQL($table)
+    public function getDataSQL($table, $where = '', $fields = '*', $replace = false)
     {
-        $rows = $this->dbh->query("select * from `$table`")->fetchAll(PDO::FETCH_ASSOC);
+        if(empty($fields)) $fields = '*';
+        $rows = $this->dbh->query("select {$fields} from `$table` $where")->fetchAll(PDO::FETCH_ASSOC);
         $sql  = '';
         if(!empty($rows))
         {
@@ -146,7 +148,8 @@ class zdb
                 $values[] = "($value)";
             }
 
-            $sql .= "INSERT INTO `$table`($keys) VALUES" . join(',', $values) . ";\n";
+            if(!$replace) $sql .= "INSERT INTO `$table`($keys) VALUES" . join(',', $values) . ";\n";
+            if($replace)  $sql .= "REPLACE INTO `$table`($keys) VALUES" . join(',', $values) . ";\n";
         }
         return $sql;
     }
