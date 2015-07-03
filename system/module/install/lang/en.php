@@ -61,16 +61,17 @@ $lang->install->dataRoot     = 'Upload directory.';
 $lang->install->mkdir        = '<p>Should creat the directory %s。<br /> Under linux, can try<br /> mkdir -p %s</p>';
 $lang->install->chmod        = 'Should change the permission of "%s".<br />Under linux, can try<br />chmod o=rwx -R %s';
 
-$lang->install->settingDB    = 'Set database';
-$lang->install->dbHost     = 'Database host';
-$lang->install->dbHostNote = 'If localhost can connect, try 127.0.0.1';
-$lang->install->dbPort     = 'Host port';
-$lang->install->dbUser     = 'Database user';
-$lang->install->dbPassword = 'Database password';
-$lang->install->dbName     = 'Database name';
-$lang->install->dbPrefix   = 'Table prefix';
-$lang->install->createDB   = 'Auto create database';
-$lang->install->clearDB    = 'Clear data if database exists.';
+$lang->install->settingDB      = 'Set database';
+$lang->install->dbHost         = 'Database host';
+$lang->install->dbHostNote     = 'If localhost can connect, try 127.0.0.1';
+$lang->install->dbPort         = 'Host port';
+$lang->install->dbUser         = 'Database user';
+$lang->install->dbPassword     = 'Database password';
+$lang->install->dbName         = 'Database name';
+$lang->install->dbPrefix       = 'Table prefix';
+$lang->install->createDB       = 'Auto create database';
+$lang->install->clearDB        = 'Clear data if database exists.';
+$lang->install->importDemoData = 'Import demo data';
 
 $lang->install->errorDBName        = "'.' are not allowed in database name";
 $lang->install->errorConnectDB     = 'Database connect failed.';

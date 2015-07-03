@@ -61,16 +61,17 @@ $lang->install->dataRoot     = '上传文件目录';
 $lang->install->mkdir        = '<p>需要创建目录%s。linux下面命令为：<br /> <code>mkdir -p %s</code></p>';
 $lang->install->chmod        = '需要修改目录 "%s" 的权限。linux下面命令为：<br /><code>chmod o=rwx -R %s</code>';
 
-$lang->install->settingDB  = '设置数据库';
-$lang->install->dbHost     = '数据库服务器';
-$lang->install->dbHostNote = '如果127.0.0.1无法访问，尝试使用localhost';
-$lang->install->dbPort     = '服务器端口';
-$lang->install->dbUser     = '数据库用户名';
-$lang->install->dbPassword = '数据库密码';
-$lang->install->dbName     = '数据库名';
-$lang->install->dbPrefix   = '建表使用的前缀';
-$lang->install->createDB   = '自动创建数据库';
-$lang->install->clearDB    = '清空现有数据';
+$lang->install->settingDB      = '设置数据库';
+$lang->install->dbHost         = '数据库服务器';
+$lang->install->dbHostNote     = '如果127.0.0.1无法访问，尝试使用localhost';
+$lang->install->dbPort         = '服务器端口';
+$lang->install->dbUser         = '数据库用户名';
+$lang->install->dbPassword     = '数据库密码';
+$lang->install->dbName         = '数据库名';
+$lang->install->dbPrefix       = '建表使用的前缀';
+$lang->install->createDB       = '自动创建数据库';
+$lang->install->clearDB        = '清空现有数据';
+$lang->install->importDemoData = '导入demo数据';
 
 $lang->install->errorDBName        = "数据库名不能带'.'";
 $lang->install->errorConnectDB     = '数据库连接失败。 ';
