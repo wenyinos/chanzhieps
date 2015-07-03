@@ -292,6 +292,7 @@ class user extends control
     {
         if(!$account or RUN_MODE == 'front') $account = $this->app->user->account;
         if($this->app->user->account == 'guest') $this->locate(inlink('login'));
+        if(RUN_MODE == 'admin') $this->config->user->require->edit = 'realname, email';
         $user = $this->user->getByAccount($account);
 
         /* use email captcha. */
@@ -329,6 +330,37 @@ class user extends control
         {
             $this->display();
         }
+    }
+
+    /**
+     * Edit email. 
+     * 
+     * @param  string $account 
+     * @access public
+     * @return void
+     */
+    public function editEmail()
+    {
+        $account = $this->app->user->account;
+        $user    = $this->user->getByAccount($account);
+
+        if(!empty($_POST))
+        {
+            if(!$this->user->checkToken($this->post->token, $this->post->fingerprint))  $this->send(array( 'result' => 'fail', 'message' => $this->lang->error->fingerprint));
+            if($user->email != '')
+            {
+                if(!trim($this->post->captcha) or trim($this->post->captcha) != $this->session->verifyCode) $this->send(array('result' => 'fail', 'message' => $this->lang->user->verifyFail));
+            }
+
+            $this->user->updateEmail($account);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $locate = inlink('checkemail');
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess , 'locate' => $locate));
+        }
+
+        $this->view->token = $this->user->getToken();
+        $this->view->user  = $user;
+        $this->display();
     }
 
     /**

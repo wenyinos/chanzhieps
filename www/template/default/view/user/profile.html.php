@@ -10,7 +10,10 @@
             <dt><?php echo $lang->user->realname;?></dt>
             <dd><?php echo $user->realname;?></dd>
             <dt><?php echo $lang->user->email;?></dt>
-            <dd><?php echo $user->email;?></dd>
+            <dd>
+              <?php echo $user->email;?>&nbsp;&nbsp;&nbsp;
+              <?php echo html::a(inlink('editemail'), "<i class='icon-pencil'></i> " . $lang->user->editEmail, "class='btn btn-mini btn-primary'");?>
+            </dd>
             <dt><?php echo $lang->user->company;?></dt>
             <dd><?php echo $user->company;?></dd>
             <dt><?php echo $lang->user->address;?></dt>

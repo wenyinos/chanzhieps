@@ -54,7 +54,7 @@ $lang->mail->verifyFail    = '请填写正确的验证码';
 $lang->mail->verifySuccess = '验证通过，请继续操作';
 $lang->mail->noConfigure   = "无法找到发信配置信息，邮箱验证无法启用。";
 $lang->mail->noEmail       = "未填写个人邮箱，邮箱验证无法启用。";
-$lang->mail->okFileVerfy   = "请创建 %s 文件。如果存在该文件，使用编辑软件打开，重新保存一遍。%s<br />";
+$lang->mail->okFileVerfy   = "请创建 %s 文件。%s<br />";
 $lang->mail->sendSuccess   = '验证码已发送至 %s';
 
 $lang->mail->sendContent   = <<<EOT

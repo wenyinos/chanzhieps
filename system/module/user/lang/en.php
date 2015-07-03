@@ -68,6 +68,8 @@ $lang->user->pullWechatFans  = 'Pull wechat uses';
 $lang->user->adminlog        = 'Admin login';
 $lang->user->checkEmail      = 'Check Email';
 $lang->user->getEmailCode    = 'Get email code';
+$lang->user->editEmail       = 'Edit Email';
+$lang->user->newEmail        = 'New Email';
 
 $lang->user->profile     = 'Profile';
 $lang->user->editProfile = 'Edit profile';
