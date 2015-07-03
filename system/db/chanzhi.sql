@@ -327,6 +327,7 @@ CREATE TABLE IF NOT EXISTS `eps_reply` (
   KEY `author` (`author`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+-- DROP TABLE IF EXISTS `eps_product_custom`;
 CREATE TABLE IF NOT EXISTS `eps_product_custom` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `product` mediumint(8) unsigned NOT NULL DEFAULT '0',
@@ -436,7 +437,7 @@ CREATE TABLE IF NOT EXISTS `eps_log` (
   `browser` char(100) NOT NULL,
   `fingerprint` char(100) NOT NULL,
   `ip` char(30) NOT NULL,
-  `position` char(100) NOT NULL,
+  `location` char(100) NOT NULL,
   `date` datetime NOT NULL,
   `desc` text NOT NULL,
   `ext` text NOT NULL,
