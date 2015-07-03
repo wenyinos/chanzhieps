@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS `eps_article` (
 -- DROP TABLE IF EXISTS `eps_block`;
 CREATE TABLE IF NOT EXISTS `eps_block` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `originID` smallint(5) unsigned NOT NULL,
   `template` varchar(30) NOT NULL DEFAULT 'default',
   `type` varchar(20) NOT NULL,
   `title` varchar(60) NOT NULL,
@@ -225,6 +226,7 @@ CREATE TABLE IF NOT EXISTS `eps_layout` (
   `page` varchar(30) NOT NULL,
   `region` varchar(30) NOT NULL,
   `blocks` text NOT NULL,
+  `imported` enum('no', 'doing', 'finished') NOT NULL DEFAULT 'no',
   `lang` char(30) NOT NULL,
   UNIQUE KEY `layout` (`template`,`page`,`region`,`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

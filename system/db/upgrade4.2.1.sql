@@ -27,3 +27,5 @@ CREATE TABLE IF NOT EXISTS `eps_slide` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 ALTER TABLE `eps_log` CHANGE `position` `location` char(100) NOT NULL;
+ALTER TABLE `eps_block` ADD `originID` smallint(5) unsigned NOT NULL;
+ALTER TABLE `eps_layout` ADD `imported` enum('no', 'doing', 'finished') NOT NULL DEFAULT 'no';
