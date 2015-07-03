@@ -38,6 +38,7 @@ $lang->site->twContent       = '繁体内容';
 $lang->site->cn2tw           = '自动从简体版复制';
 $lang->site->cdn             = 'CDN地址';
 $lang->site->sensitive       = '敏感词';
+$lang->site->scheme          = '默认访问协议';
 
 $lang->site->importantOption = '重要操作';
 $lang->site->checkIP         = '后台登录IP白名单';
@@ -46,7 +47,9 @@ $lang->site->checkEmail      = '会员邮箱绑定';
 $lang->site->allowedLocation = '允许登录地区';
 $lang->site->checkSessionIP  = '登录期间IP';
 $lang->site->setsecurity     = '安全设置';
+$lang->site->setsensitive    = '敏感词设置';
 $lang->site->filterSensitive = '敏感词过滤';
+$lang->site->front           = '网站浏览';
 
 $lang->site->setBasic      = "基本信息设置";
 $lang->site->setLang       = "语言设置";
@@ -102,8 +105,16 @@ $lang->site->captchaList['open']  = '一直启用验证码';
 $lang->site->captchaList['auto']  = '有敏感内容时自动启用验证码';
 
 $lang->site->validateTypes = new stdclass();
-$lang->site->validateTypes->okFile = 'ok.txt文件验证';
+$lang->site->validateTypes->okFile = 'txt文件验证';
 $lang->site->validateTypes->email  = '邮件验证码验证';
+
+$lang->site->schemeList = array();
+$lang->site->schemeList['http']  = 'http';
+$lang->site->schemeList['https'] = 'https';
+
+$lang->site->frontList = array();
+$lang->site->frontList['guest'] = '不需要登录';
+$lang->site->frontList['login'] = '需要登录';
 
 $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = '会员';
@@ -122,6 +133,7 @@ $lang->site->allowedIPTip     = '多个IP使用 , 隔开，如202.194.133.1,202.
 $lang->site->wrongAllowedIP   = 'IP 格式错误';
 $lang->site->changeLocation   = '您当前的登录地区与允许登录地区不一致。';
 $lang->site->sessionIpTip     = '开启后，因为某些运营商的IP不是固定的，IP变化后会自动退出蝉知。';
+$lang->site->schemeTip        = '所有访问会跳转至默认访问协议。';
 
 $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Robots文件%s 不可写，请修改权限后设置。';

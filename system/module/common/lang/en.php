@@ -81,7 +81,7 @@ $lang->alias          = 'For SEO, could be numbers, words enclosed by ".';
 
 $lang->setOkFile = <<<EOT
 <h5>For security reason, please do these steps. </h5>
-<p>Create %s file. If this file exists already, reopen it and save again.</p>
+<p>Create %s file.</p>
 EOT;
 
 $lang->color       = 'Color';
@@ -178,6 +178,7 @@ $lang->ui->menu->theme   = 'Theme|ui|settemplate|';
 $lang->ui->menu->admin   = array('link' => 'Blocks|block|admin|', 'alias' => 'create,edit');
 $lang->ui->menu->pages   = array('link' => 'Layout|block|pages|', 'alias' => 'setregion');
 $lang->ui->menu->styles  = 'Base Style|ui|setbasestyle|';
+$lang->ui->menu->others  = 'Others|ui|others|';
 
 /* Menu of user module. */
 $lang->user = new stdclass();
@@ -219,6 +220,7 @@ $lang->site->menu->lang       = 'Language|site|setlang|';
 $lang->site->menu->nav        = 'Navigation|nav|admin|';
 $lang->site->menu->security   = 'Security|site|setsecurity|';
 $lang->site->menu->upload     = 'Uploads|site|setupload|';
+$lang->site->menu->sensitive  = 'Sensitive words|site|setsensitive|';
 $lang->site->menu->tag        = 'Tags|tag|admin|';
 $lang->site->menu->recPerPage = 'Set Records Per Page|site|setrecperpage|';
 $lang->site->menu->oauth      = 'Open OAuth|site|setoauth|';
@@ -312,6 +314,7 @@ $lang->error->captcha      = 'Captcah wrong.';
 $lang->error->noWritable   = '%s maybe not write, please modify permissions!';
 $lang->error->fingerprint  = 'identity authent faild';
 $lang->error->token        = 'Should English or numbers, length of 3-32 characters.';
+$lang->error->sensitive    = 'There can be no sensitive words in the content.';
 
 /* The pager items. */
 $lang->pager = new stdclass();

@@ -20,10 +20,18 @@ class cart extends control
      */
     public function add($product, $count)
     {
-        if($this->app->user->account == 'guest') $this->send(array('result' => 'fail', 'locate' => $this->createLink('user', 'login')));
-        $result = $this->cart->add($product, $count);
-        if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
-        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        if($this->app->user->account == 'guest')
+        {
+            /* Save info to cookie if user is guest. */
+            $this->cart->addInCookie($product, $count);
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        }
+        else
+        {
+            $result = $this->cart->add($product, $count);
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
     }
 
     /**
@@ -50,7 +58,20 @@ class cart extends control
      */
     public function printtopbar()
     {
-        $count = $this->dao->select('count(*) as count')->from(TABLE_CART)->where('account')->eq($this->app->user->account)->fetch('count');
+        /* Get info from cookie. */
+        $cart  = $this->cart->getListByCookie();
+        $count = count($cart);
+
+        /* Save cookie's cart info. */
+        if($this->app->user->account != 'guest')
+        {
+            if(count($cart) > 0)
+            {
+                foreach($cart as $product) $this->cart->add($product->product, $product->count);
+                setcookie('cart', '[]', time() + 60 * 60 * 24);
+            }
+            $count = $this->dao->select('count(*) as count')->from(TABLE_CART)->where('account')->eq($this->app->user->account)->fetch('count');
+        }
         echo html::a($this->createLink('cart', 'browse'), sprintf($this->lang->cart->topbarInfo, $count));
     }
 
@@ -63,8 +84,15 @@ class cart extends control
      */
     public function delete($product)
     {
-        $this->dao->delete()->from(TABLE_CART)->where('product')->eq($product)->andWhere('account')->eq($this->app->user->account)->exec();
-        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        if($this->app->user->account != 'guest')
+        {
+            $this->dao->delete()->from(TABLE_CART)->where('product')->eq($product)->andWhere('account')->eq($this->app->user->account)->exec();
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+        else
+        {
+            $this->cart->deleteInCookie($product);
+        }
         $this->send(array('result' => 'success', 'message' => $this->lang->deleteSuccess, 'locate' => inlink('browse')));
     }
 }

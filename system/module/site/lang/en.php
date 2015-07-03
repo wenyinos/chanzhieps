@@ -38,6 +38,7 @@ $lang->site->twContent       = 'traditional contents';
 $lang->site->cn2tw           = 'Copy from simplified Chinese content';
 $lang->site->cdn             = 'CND Site';
 $lang->site->sensitive       = 'Sensitive Words';
+$lang->site->scheme          = 'Default scheme';
 
 $lang->site->importantOption = 'Important option';
 $lang->site->checkIP         = 'Check login IP';
@@ -46,7 +47,9 @@ $lang->site->checkEmail      = 'Check Email';
 $lang->site->allowedLocation = 'Allowed location';
 $lang->site->checkSessionIP  = 'Check the login ip';
 $lang->site->setsecurity     = 'Security setting';
+$lang->site->setsensitive    = 'Set sensitive words';
 $lang->site->filterSensitive = 'Filter sensitive words';
+$lang->site->front           = 'Visit website';
 
 $lang->site->setBasic      = "Baisc";
 $lang->site->setLang       = "Languages";
@@ -105,6 +108,14 @@ $lang->site->validateTypes = new stdclass();
 $lang->site->validateTypes->okFile = 'ok.txt';
 $lang->site->validateTypes->email  = 'email';
 
+$lang->site->schemeList = array();
+$lang->site->schemeList['http']  = 'http';
+$lang->site->schemeList['https'] = 'https';
+
+$lang->site->frontList = array();
+$lang->site->frontList['guest'] = "needn't login";
+$lang->site->frontList['login'] = 'need login';
+
 $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = 'Member';
 $lang->site->moduleAvailable['forum']   = 'Forum';
@@ -122,6 +133,7 @@ $lang->site->allowedIPTip     = 'Use "," to divide different IP.';
 $lang->site->wrongAllowedIP   = 'Wrong IP';
 $lang->site->changeLocation   = 'Your current login location not in allowed location.';
 $lang->site->sessionIpTip     = 'If opened login ip would be checked.';
+$lang->site->schemeTip        = 'Redirect all request to this scheme.';
 
 $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Can not write robots file, please make sure %s writeable first.';

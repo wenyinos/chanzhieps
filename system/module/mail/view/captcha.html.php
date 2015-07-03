@@ -1,6 +1,6 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
 <?php include_once '../../common/view/header.modal.html.php';?>
-<?php if($methodName == 'setsecurity') $this->config->site->importantValidate = 'okFile';?>
+<?php if(strpos($this->server->http_referer, 'setsecurity') !== false) $this->config->site->importantValidate = 'okFile';?>
 <?php if(isset($pass) and $pass):?>
 <script>
 $(document).ready(function()
@@ -28,7 +28,7 @@ $(document).ready(function()
   <?php endif;?>
   <form class='form-inline' id='captchaForm' action="<?php echo $this->createLink('mail', 'captcha', "url=$url&target=$target&account=$account");?>" method='post'>
     <?php $refUrl  = helper::safe64Decode($url) == 'close' ? $this->app->getURI() : helper::safe64Decode($url);?>
-    <?php $fileBtn = html::a($refUrl, $lang->mail->created, "class='btn btn-mini btn-primary okFile'")?>
+    <?php $fileBtn = html::a($refUrl, $lang->mail->created, "class='btn btn-sm btn-primary okFile'")?>
     <?php $mailBtn = html::submitButton();?>
     <table class='table table-form'>
       <?php if(strpos($this->config->site->importantValidate, 'okFile') !== false):?>

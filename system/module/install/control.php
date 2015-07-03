@@ -129,6 +129,10 @@ class install extends control
         {
             $this->install->createAdmin();
             if(dao::isError()) die(js::error(dao::getError()));
+
+            if($this->post->importDemoData) $this->install->importDemoData();
+            if(dao::isError()) echo js::alert($this->lang->install->errorImportDemoData);
+
             $this->loadModel('setting')->updateVersion($this->config->version);
             die(js::locate(inlink('step5')));
         }

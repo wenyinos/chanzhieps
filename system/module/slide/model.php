@@ -38,9 +38,9 @@ class slideModel extends model
      * @access public
      * @return array
      */
-    public function getList()
+    public function getList($groupID)
     {
-        $slides = $this->dao->select('*')->from(TABLE_SLIDE)->orderBy('`order`')->fetchAll('id');
+        $slides = $this->dao->select('*')->from(TABLE_SLIDE)->where('`group`')->eq($groupID)->orderBy('`order`')->fetchAll('id');
 
         foreach($slides as $slide)
         {
@@ -59,13 +59,13 @@ class slideModel extends model
      * @access public
      * @return bool
      */
-    public function create($image)
+    public function create($groupID, $image)
     {
         $slide = fixer::input('post')
             ->stripTags('summary', $this->config->allowedTags->front)
+            ->add('group', $groupID)
             ->add('image', $image)
             ->add('createdDate', helper::now())
-            ->add('createdBy', $this->app->user->account)
             ->remove('files')
             ->get();
 
@@ -96,23 +96,22 @@ class slideModel extends model
      */
     public function update($id)
     {
-        $image = $this->uploadImage();
+        $slide = $this->getByID($id);
+        $image = $this->uploadImage($slide->group);
 
-        $slide = fixer::input('post')
+        $data = fixer::input('post')
             ->stripTags('summary', $this->config->allowedTags->front)
             ->setIf(!empty($image), 'image', $image)
-            ->add('editedDate', helper::now())
-            ->add('editedBy', $this->app->user->account)
             ->remove('files')
             ->get();
 
-        $slide->label        = helper::jsonEncode(array_values($slide->label));
-        $slide->buttonClass  = helper::jsonEncode(array_values($slide->buttonClass));
-        $slide->buttonUrl    = helper::jsonEncode(array_values($slide->buttonUrl));
-        $slide->buttonTarget = helper::jsonEncode(array_values($slide->buttonTarget));
+        $data->label        = helper::jsonEncode(array_values($data->label));
+        $data->buttonClass  = helper::jsonEncode(array_values($data->buttonClass));
+        $data->buttonUrl    = helper::jsonEncode(array_values($data->buttonUrl));
+        $data->buttonTarget = helper::jsonEncode(array_values($data->buttonTarget));
 
         $this->dao->update(TABLE_SLIDE)
-            ->data($slide, $skip = 'uid')
+            ->data($data, $skip = 'uid')
             ->batchCheckIF($this->post->backgroundType == 'color', $this->config->slide->require->create, 'notempty')
             ->checkIF($this->post->backgroundType == 'color', 'height', 'ge', 100)
             ->where('id')->eq($id)
@@ -152,29 +151,30 @@ class slideModel extends model
      * @access public
      * @return string webPath
      */
-    public function uploadImage()
+    public function uploadImage($groupID)
     {
         $fileTitles = array();
         $imageSize  = array('width' => 0, 'height' => 0);
         $maxSlideID = $this->dao->select('max(`id`) as maxID')->from(TABLE_SLIDE)->fetch('maxID');
 
-        $files = $this->getUpload();
+        $files = $this->getUpload($groupID);
         foreach($files as $id => $file)
         {   
+            $savePath = $this->app->getDataRoot() . 'upload/';
             if(strpos($this->config->file->allowed, ',' . $file['extension'] . ',') === false)
             {
-                if(!move_uploaded_file($file['tmpname'], $this->app->getDataRoot() . $file['pathname'] . '.txt')) return false;
+                if(!move_uploaded_file($file['tmpname'], $savePath . $file['pathname'] . '.txt')) return false;
                 $file['pathname'] .= '.txt';
                 $file = $this->file->saveZip($file);
             }
             else
             {
-                if(!move_uploaded_file($file['tmpname'], $this->app->getDataRoot() . $file['pathname'])) return false;
+                if(!move_uploaded_file($file['tmpname'], $savePath . $file['pathname'])) return false;
             }          
 
             if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions, true))
             {
-                $imageSize = $this->file->getImageSize($this->app->getDataRoot() . $file['pathname']);
+                $imageSize = $this->file->getImageSize($savePath . $file['pathname']);
             }
 
             $file['objectType'] = 'slide';
@@ -194,7 +194,7 @@ class slideModel extends model
 
         $imageIdList = array_keys($fileTitles);
         $image = $this->dao->select('*')->from(TABLE_FILE)->where('id')->eq($imageIdList[0])->fetch(); 
-        $image->webPath = 'data/' . $image->pathname;
+        $image->webPath = '/data/upload/' . $image->pathname;
 
         return $image->webPath;
     }
@@ -205,10 +205,10 @@ class slideModel extends model
      * @access public
      * @return array
      */
-    public function getUpload()
+    public function getUpload($groupID)
     {
         $maxFileID  = $this->dao->select('max(`id`) as maxID')->from(TABLE_FILE)->fetch('maxID');
-        $title = 'slide_' . ($maxFileID + 1);
+        $title = 'group' . $groupID . '_slide' . ($maxFileID + 1);
 
         $files = array();
         if(!isset($_FILES['files'])) return $files;
@@ -220,7 +220,7 @@ class slideModel extends model
             if(empty($filename)) continue;
             if(!validater::checkFileName($filename)) continue;
             $file['extension'] = $this->file->getExtension($filename);
-            $file['pathname']  = 'slides/' . $title . '.' . $file['extension'];
+            $file['pathname']  = 'source/' . $title . '.' . $file['extension'];
             $file['title']     = $title;
             $file['size']      = $size[$id];
             $file['tmpname']   = $tmp_name[$id];
@@ -244,9 +244,9 @@ class slideModel extends model
 
         if(!dao::isError())
         {
-            $pathname = str_replace('data/', '', $slide->image);
+            $pathname = str_replace('/data/upload/', '', $slide->image);
             $file = $this->dao->select('*')->from(TABLE_FILE)->where('objectType')->eq('slide')->andWhere('pathname')->eq($pathname)->fetch();
-            $file->realPath = $this->app->getDataRoot() . $file->pathname;
+            $file->realPath = $this->app->getDataRoot() . 'upload/' . $file->pathname;
             if(file_exists($file->realPath)) unlink($file->realPath);
             $this->dao->delete()->from(TABLE_FILE)->where('id')->eq($file->id)->exec();
             return !dao::isError();

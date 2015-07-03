@@ -38,12 +38,6 @@
               </div>
             </div>
             <div class='form-group'>
-              <label for='email' class='col-md-2 col-sm-3 control-label'><?php echo $lang->user->email;?></label>
-              <div class='col-md-6 col-sm-6'>
-                <?php echo html::input('email', $user->email, "class='form-control'");?>
-              </div>
-            </div>
-            <div class='form-group'>
               <label for='oldPwd' class='col-md-2 col-sm-3 control-label'><?php echo $lang->user->oldPwd;?></label>
               <div class='col-md-6 col-sm-6'>
                 <?php echo html::password('oldPwd', '', "class='form-control'");?>

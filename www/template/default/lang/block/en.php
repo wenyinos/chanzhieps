@@ -24,6 +24,8 @@ $lang->block->default->typeList['latestProduct']   = 'Latest Products';
 $lang->block->default->typeList['featuredProduct'] = 'Featured Products';
 $lang->block->default->typeList['hotProduct']      = 'Hot Products';
 
+$lang->block->default->typeList['pageList']        = 'Page List';
+
 $lang->block->default->typeList['articleTree'] = 'Article Categories';
 $lang->block->default->typeList['productTree'] = 'Product Categories';
 $lang->block->default->typeList['blogTree']    = 'Blog Categories';
@@ -49,6 +51,8 @@ $lang->block->default->typeGroups['latestThread']  = 'thread';
 $lang->block->default->typeGroups['latestProduct']   = 'product';
 $lang->block->default->typeGroups['featuredProduct'] = 'product';
 $lang->block->default->typeGroups['hotProduct']      = 'product';
+
+$lang->block->default->typeGroups['pageList']        = 'page';
 
 $lang->block->default->typeGroups['articleTree'] = 'category';
 $lang->block->default->typeGroups['productTree'] = 'category';

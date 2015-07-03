@@ -1,27 +1,20 @@
 <?php include TPL_ROOT . 'common/header.html.php';?>
-<section id="check">
-  <div class="box-radius">
-    <div class="panel panel-default">
-      <div class="panel-heading"><h4><strong><?php echo $lang->user->changePassword;?></strong></h4></div>
-      <div class="panel-body">
-        <form method='post' id='ajaxForm'>
-          <table> 
-            <tr>
-              <th class='w-100px'><?php echo $lang->user->password;?></th>
-              <td><?php echo html::password('password1', '', "class='text-box'");?></td>
-            </tr>  
-            <tr>
-              <th><?php echo $lang->user->password2;?></th>
-              <td><?php echo html::password('password2', '', "class='text-box'");?></td>
-            </tr>
-            <tr>
-              <th></th>
-              <td><?php echo html::submitButton($lang->user->submit,'btn btn-primary btn-block') . html::hidden('reset', $reset);?></td>
-            </tr>
-          </table>
-        </form>
-      </div>
-    </div>  
+<div class='panel panel-body'>
+  <div class='panel panel-pure' id='reset'>
+    <div class='panel-heading'><strong><?php echo $lang->user->changePassword;?></strong></div>
+    <div class='panel-body'>
+      <form method='post' id='ajaxForm'>
+        <div class='form-group row'>
+          <label class='col-sm-3 control-label'><?php echo $lang->user->password;?></label>
+          <div class='col-sm-9'><?php echo html::password('password1', '', "class='form-control'")?></div>
+        </div>
+        <div class='form-group row'>
+          <label class='col-sm-3 control-label'><?php echo $lang->user->password2;?></label>
+          <div class='col-sm-9'><?php echo html::password('password2', '', "class='form-control'")?></div>
+        </div>
+        <?php echo html::submitButton($lang->user->submit,'btn btn-primary btn-block') . html::hidden('reset', $reset);?></td>
+      </form>
+    </div>
   </div>
-</section>
+</div>  
 <?php include TPL_ROOT . 'common/footer.html.php';?>

@@ -65,6 +65,7 @@ function initKindeditor(afterInit)
             width:'100%',
             items:editorTool,
             cssPath:[v.webRoot + 'zui/css/min.css'],
+            cssData: '.article-content table.table-kindeditor th, .article-content table.table-kindeditor td {border-bottom: initial;} .article-content table.ke-zeroborder.table-kindeditor td {border: 1px dotted #AAA;}',
             bodyClass:'article-content',
             urlType:'absolute', 
             uploadJson: createLink('file', 'ajaxUpload', 'uid=' + v.uid),

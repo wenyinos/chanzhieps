@@ -20,3 +20,4 @@ td.td-content{word-wrap: break-word; word-break:break-all;}
 table tr.reply .th-from{font-weight:normal}
 
 .signed-user-info {display: inline-block; padding-top: 6px; vertical-align: middle; margin-right: 8px;}
+.content-abstract {height: 100px; overflow: hidden;}

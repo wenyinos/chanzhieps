@@ -27,6 +27,7 @@ $lang->block->categories      = '分类';
 $lang->block->showImage       = '图文';
 $lang->block->showTime        = '显示时间';
 $lang->block->product         = '产品';
+$lang->block->slide           = '幻灯片';
 $lang->block->titleless       = '无标题';
 $lang->block->borderless      = '无边框';
 $lang->block->icon            = '图标';

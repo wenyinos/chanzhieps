@@ -190,6 +190,7 @@ KindEditor.lang({
 	'table.borderWidth' : 'Width',
 	'table.borderColor' : 'Color',
 	'table.backgroundColor' : 'Background',
+	'table.defaultBorderColor' : 'Defualt style',
 	'map.address' : 'Address: ',
 	'map.search' : 'Search',
 	'baidumap.address' : 'Address: ',

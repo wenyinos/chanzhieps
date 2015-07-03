@@ -38,11 +38,8 @@ class userModel extends model
 
         foreach($users as $user)
         {
-            if($user->admin == 'super' and $user->realnames)
-            {
-                $user->realname  = $this->computeRealname($user->realnames);
-                $user->realnames = json_decode($user->realnames);
-            }
+            $user->realname  = $this->computeRealname($user);
+            $user->realnames = json_decode($user->realnames);
         }
 
         return $users;
@@ -85,8 +82,7 @@ class userModel extends model
         foreach($users as $account => $user)
         {
             if(!$account) continue;
-            $userPairs[$account] = !empty($user->realnames) ? $this->computeRealname($user->realnames) : $user->realname;
-            if($userPairs[$account] == '') $userPairs[$account] = $account;
+            $userPairs[$account] = $this->computeRealname($user);
         }
 
         /* Append empty users. */
@@ -110,8 +106,7 @@ class userModel extends model
         foreach($users as $account => $user)
         {
             if(!$account) continue;
-            $user->realname  = !empty($user->realnames) ? $this->computeRealname($user->realnames) : $user->realname;
-            $user->realname  = empty($user->realname) ? $account : $user->realname;
+            $user->realname  = $this->computeRealname($user);
             $user->shortLast = substr($user->last, 5, -3);
             $user->shortJoin = substr($user->join, 5, -3);
         }
@@ -138,7 +133,7 @@ class userModel extends model
 
         if(!empty($user->realnames))
         {
-            $user->realname  = $this->computeRealname($user->realnames);
+            $user->realname  = $this->computeRealname($user);
             $user->realnames = json_decode($user->realnames);
         }
         else
@@ -167,8 +162,7 @@ class userModel extends model
         foreach($users as $account => $user)
         {
             if(!$account) continue;
-            $user->realname = !empty($user->realnames) ? $this->computeRealname($user->realnames) : $user->realname;
-            if($user->realname == '') $user->realname = $account; 
+            $user->realname = $this->computeRealname($user);
         }
 
         return $users;         
@@ -196,8 +190,7 @@ class userModel extends model
         foreach($userList as $account => $user)
         {
             if(!$account) continue;
-            $userPairs[$account] = !empty($user->realnames) ? $this->computeRealname($user->realnames) : $user->realname;
-            if($userPairs[$account] == '') $userPairs[$account] = $account; 
+            $userPairs[$account] = $this->computeRealname($user);
         }
 
         return $userPairs;         
@@ -319,6 +312,7 @@ class userModel extends model
             ->remove('ip, account, join, visits, fingerprint, token')
             ->removeIF(RUN_MODE != 'admin', 'admin')
             ->removeIF(RUN_MODE == 'admin', 'groups')
+            ->removeIF(RUN_MODE == 'front', 'email')
             ->get();
 
         if(RUN_MODE == 'admin')
@@ -342,21 +336,45 @@ class userModel extends model
             if($user->admin == 'no') $this->dao->delete()->from(TABLE_USERGROUP)->where('account')->eq($account)->exec();
         }
 
-        if($user->email != $oldUser->email) $user->emailCertified = 0;
+        if(RUN_MODE == 'admin' and $user->email != $oldUser->email) $user->emailCertified = 0;
 
         if((isset($user->admin) and $user->admin == 'super') or !empty($user->realnames))
         {
             $user->realnames = helper::jsonEncode($user->realnames);
-            $this->config->user->require->edit = 'email, realnames';
+            $this->config->user->require->edit = 'realnames';
         }
 
         return $this->dao->update(TABLE_USER)->setAutolang(false)
             ->data($user, $skip = 'token,oldPwd,password1,password2')
             ->autoCheck()
             ->batchCheck($this->config->user->require->edit, 'notempty')
+            ->checkIF($this->post->gtalk != false, 'gtalk', 'email')
+            ->beginIF(RUN_MODE == 'admin')
             ->check('email', 'email')
             ->check('email', 'unique', "account!='$account'")
-            ->checkIF($this->post->gtalk != false, 'gtalk', 'email')
+            ->fi()
+            ->where('account')->eq($account)
+            ->exec();
+    }
+
+    /**
+     * Update email. 
+     * 
+     * @param  string $account 
+     * @access public
+     * @return void
+     */
+    public function updateEmail($account)
+    {
+        $this->checkOldPassword();
+        $data = fixer::input('post')->remove('oldPwd, captcha, token, fingerprint')->get();
+        $data->emailCertified = 0;
+
+        return $this->dao->update(TABLE_USER)->setAutolang(false)
+            ->data($data)
+            ->check('email', 'notempty')
+            ->check('email', 'email')
+            ->check('email', 'unique', "account!='$account'")
             ->where('account')->eq($account)
             ->exec();
     }
@@ -511,8 +529,7 @@ class userModel extends model
 
         $this->dao->setAutolang(false)->update(TABLE_USER)->data($user)->where('account')->eq($account)->exec();
 
-        if($user->admin == 'super' and !empty($user->realnames)) $user->realname = $this->computeRealname($user->realnames);
-        $user->realname  = empty($user->realname) ? $account : $user->realname;
+        $user->realname = $this->computeRealname($user);
         $user->shortLast = substr($user->last, 5, -3);
         $user->shortJoin = substr($user->join, 5, -3);
         unset($_SESSION['random']);
@@ -702,9 +719,9 @@ class userModel extends model
      * @access public
      * @return string
      */
-    public function createOAuthCallbackURL($provider, $referer)
+    public function createOAuthCallbackURL($provider)
     {
-        return commonModel::getSysURL() . helper::createLink('user', 'oauthCallback', "provider=$provider&referer=$referer");
+        return commonModel::getSysURL() . helper::createLink('user', 'oauthCallback', "provider=$provider");
     }
 
     /**
@@ -856,13 +873,21 @@ class userModel extends model
      * @access public
      * @return string
      */
-    public function computeRealname($realnames)
+    public function computeRealname($user)
     {
-        $realnames = json_decode($realnames);
-        $clientLang = $this->app->getClientLang();
-        if(strpos($clientLang, 'zh-') !== false) $clientLang = str_replace('zh-', '', $clientLang);
+        if(!$user->realnames)
+        {
+            $realname = $user->realname;
+        }
+        else
+        {
+            $realnames = json_decode($user->realnames);
+            $clientLang = $this->app->getClientLang();
+            if(strpos($clientLang, 'zh-') !== false) $clientLang = str_replace('zh-', '', $clientLang);
+            $realname = isset($realnames->{$clientLang}) ? $realnames->{$clientLang} : '';
+        }
 
-        return isset($realnames->{$clientLang}) ? $realnames->{$clientLang} : '';
+        return $realname ? $realname : $user->account;
     }
 
     /**

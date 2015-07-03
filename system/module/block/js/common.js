@@ -39,10 +39,7 @@ $(function()
 
     if(v.type == 'phpcode' && !v.cancreatephp)
     {
-        bootbox.alert(v.setOkFile, function()
-        {
-            location.href = createLink('block', 'create');
-        });
+        bootbox.alert(v.setOkFile);
     }
 
     var $panelPreview = $('.panel-preview > .panel');

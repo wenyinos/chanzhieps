@@ -278,6 +278,29 @@ class installModel extends model
     }
 
     /**
+     * Import demo data. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function importDemoData()
+    {
+        $demoDataFile = $this->app->getAppRoot() . 'db/demo.sql';
+        $insertTables = explode(";\n", file_get_contents($demoDataFile));
+        foreach($insertTables as $table)
+        { 
+            $table = trim($table);
+            if(empty($table)) continue;
+  
+            $table = str_replace('`eps_', $this->config->db->name . '.`eps_', $table);
+            $table = str_replace('eps_', $this->config->db->prefix, $table);
+            if(!$this->dbh->query($table)) return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Get the mysql version.
      * 
      * @access public

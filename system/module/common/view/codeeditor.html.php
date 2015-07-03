@@ -1,6 +1,7 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
 <?php js::import($jsRoot . 'ace/ace.js');?>
 <style>
+body.codeeditor-fullscreen .form-action {position: fixed; bottom: 5px; left: 50px; z-index: 1105; width: 600px}
 .editor-wrapper {position: relative; z-index: 1;}
 .editor-wrapper pre {z-index: 2; margin-bottom: 0;}
 .editor-wrapper .actions {position: absolute; right: 15px; top: 10px; z-index: 3;}
@@ -26,7 +27,7 @@ jQuery.fn.codeeditor = function(options)
         if(setting.height) $this.css('height', setting.height);
         $this.css('display', 'none');
         var id = $this.attr('id') + '-editor';
-        $this.before('<div class="editor-wrapper"><div class="actions"><a href="javascript:;" class="btn-fullscreen"><i class="icon-resize-full"></i></a><a href="javascript:;" data-toggle="dropdown"><i class="icon-adjust"></i> <span class="ace-theme">Light</span> <i class="icon-caret-down"></i></a><ul class="dropdown-menu pull-right ace-themes"><li><a href="###" data-theme="ambiance">Dark</a></li><li><a href="###" data-theme="textmate">Light</a></li></ul></div><pre id="{0}"></pre><div class="editor-resizer"><i class="icon icon-sort"></i></div></div>'.format(id));
+        $this.before('<div class="editor-wrapper"><div class="actions"><a href="javascript:;" class="btn-fullscreen"><i class="icon-resize-full"></i></a></div><pre id="{0}"></pre><div class="editor-resizer"><i class="icon icon-sort"></i></div></div>'.format(id));
         var $editor = $('#' + id).addClass('ace-editor').height($this.height()),
             editor = ace.edit(id);
         var $wrapper = $editor.closest('.editor-wrapper'),
@@ -34,7 +35,6 @@ jQuery.fn.codeeditor = function(options)
         editor.setValue($this.val());
         editor.setShowPrintMargin(false);
         editor.clearSelection();
-        setTheme(getTheme(setting.theme));
         session.setMode("ace/mode/" + setting.mode);
         session.setUseWorker(false);
         session.on('change', function(e)
@@ -57,8 +57,6 @@ jQuery.fn.codeeditor = function(options)
                 $editor.height($editor.data('origin-height'));
             }
             editor.resize();
-        }).on('click', '.ace-themes > li > a', function(){
-            setTheme($(this).data('theme'));
         }).on('mousedown', '.editor-resizer', function(e){
             var dragStartData = {y: e.screenY, height: $editor.outerHeight()};
             $wrapper.data('dragStartData', dragStartData);
@@ -76,28 +74,6 @@ jQuery.fn.codeeditor = function(options)
         }).on('mouseup', function(){
             $wrapper.data('dragStartData', null);
         });
-
-        function setTheme(theme)
-        {
-            $wrapper.find('.ace-themes > li.active').removeClass('active');
-            var $activeTheme = $wrapper.find('.ace-themes > li > a[data-theme="' + theme + '"]');
-            $activeTheme.closest('li').addClass('active');
-            $wrapper.find('.ace-theme').text($activeTheme.text());
-            editor.setTheme("ace/theme/" + theme);
-            if(window['localStorage'])
-            {
-                localStorage.setItem('codeeditor_theme', theme);
-            }
-        }
-
-        function getTheme(theme)
-        {
-            if(window['localStorage'])
-            {
-                theme = localStorage.getItem('codeeditor_theme') || theme || 'textmate';
-            }
-            return theme;
-        }
     });
 };
 $(function()

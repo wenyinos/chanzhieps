@@ -68,6 +68,8 @@ $lang->user->pullWechatFans  = 'Pull wechat uses';
 $lang->user->adminlog        = 'Admin login';
 $lang->user->checkEmail      = 'Check Email';
 $lang->user->getEmailCode    = 'Get email code';
+$lang->user->editEmail       = 'Edit Email';
+$lang->user->newEmail        = 'New Email';
 
 $lang->user->profile     = 'Profile';
 $lang->user->editProfile = 'Edit profile';
@@ -157,6 +159,7 @@ $lang->user->oauth->sina->clientSecret = 'App Secret';
 $lang->user->oauth->qq = new stdclass();
 $lang->user->oauth->qq->clientID     = 'APP ID';
 $lang->user->oauth->qq->clientSecret = 'APP KEY';
+$lang->user->oauth->qq->callbackURL  = 'callbackURL:http:://www.chanzhi.org/user-oauthcallback-qq.html';
 
 $lang->user->oauth->providers['sina'] = 'Sina weibo';
 $lang->user->oauth->providers['qq']   = 'QQ';

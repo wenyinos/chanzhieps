@@ -29,6 +29,7 @@ class site extends control
                 ->remove('allowedFiles')
                 ->setDefault('modules', '')
                 ->stripTags('pauseTip', $allowedTags)
+                ->remove('uid')
                 ->get();
 
             $result = $this->loadModel('setting')->setItems('system.common.site', $setting);
@@ -38,6 +39,28 @@ class site extends control
         }
 
         $this->view->title = $this->lang->site->setBasic;
+        $this->display();
+    }
+
+    /**
+     * set sensitive.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setSensitive()
+    {
+        if(!empty($_POST))
+        {
+            $setting = fixer::input('post')->get();
+
+            $result = $this->loadModel('setting')->setItems('system.common.site', $setting);
+
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setsensitive')));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+        }
+
+        $this->view->title = $this->lang->site->setsensitive;
         $this->display();
     }
 
@@ -108,11 +131,27 @@ class site extends control
      */
     public function setSecurity()
     {
-        $okFile = $this->loadModel('common')->verfyAdmin();
-        $pass   = $this->loadModel('mail')->checkVerify();
-        $this->view->pass   = $pass;
-        $this->view->okFile = $okFile;
-        if(!empty($_POST) && !$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha'));
+        $captcha           = (isset($this->config->site->captcha) and ($this->config->site->captcha == 'open' and ($this->post->captcha == 'close' or $this->post->captcha == 'auto')) or ($this->config->site->captcha == 'auto' and $this->post->captcha == 'close'));
+        $checkEmail        = (isset($this->config->site->checkEmail) and $this->config->site->checkEmail == 'open' and $this->post->checkEmail == 'close');
+        $front             = (isset($this->config->site->front) and $this->config->site->front == 'login' and $this->post->front == 'guest');
+        $checkLocation     = (isset($this->config->site->checkLocation) and $this->config->site->checkLocation == 'open' and $this->post->checkLocation == 'close');
+        $checkSessionIP    = (isset($this->config->site->checkSessionIP) and $this->config->site->checkSessionIP == 1 and $this->post->checkSessionIP == 0);
+        $allowedIP         = (isset($this->config->site->allowedIP) and ($this->config->site->allowedIP != $this->post->allowedIP));
+
+        $newImportantValidate = $this->post->importantValidate ? implode(',', $this->post->importantValidate) : '';
+        $oldImportantValidate = $this->config->site->importantValidate;
+        $importantValidate    = (($oldImportantValidate == 'okFile,email' and (!$newImportantValidate or $newImportantValidate == 'okFile' or $newImportantValidate == 'email'))
+                                or ($oldImportantValidate == 'okFile' and (!$newImportantValidate or $newImportantValidate == 'email'))
+                                or ($oldImportantValidate == 'email' and (!$newImportantValidate or $newImportantValidate == 'okFile')));
+
+        if($captcha or $checkEmail or $front or $checkLocation or $checkSessionIP or $allowedIP or $importantValidate)
+        {
+            $okFile = $this->loadModel('common')->verfyAdmin();
+            $pass   = $this->loadModel('mail')->checkVerify();
+            $this->view->pass   = $pass;
+            $this->view->okFile = $okFile;
+            if(!empty($_POST) && !$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha'));
+        }
 
         if(!empty($_POST))
         {

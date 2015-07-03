@@ -1123,6 +1123,12 @@ class upgradeModel extends model
      */
     public function moveSlideData()
     {
+        $this->app->loadLang('slide');
+        $this->dao->insert(TABLE_CATEGORY)->set('name')->eq($this->lang->slide->defaultGroup)->set('type')->eq('slide')->exec();
+        $group     = $this->dao->lastInsertID();
+        $groupPath = ",$group,";
+        $this->dao->update(TABLE_CATEGORY)->set('path')->eq($groupPath)->where('id')->eq($group)->exec();
+
         $slides = $this->dao->select('*')->from(TABLE_CONFIG)
             ->where('owner')->eq('system')
             ->andWhere('module')->eq('common')
@@ -1135,6 +1141,7 @@ class upgradeModel extends model
 
             $data = new stdclass();
             $data->title           = $value->title;
+            $data->group           = $group;
             $data->titleColor      = $value->titleColor;
             $data->mainLink        = $value->mainLink;
             $data->backgroundType  = $value->backgroundType;

@@ -89,6 +89,10 @@ class articleModel extends model
         {
             $articles = $this->dao->select('*')->from(TABLE_ARTICLE)
                 ->where('type')->eq('page')
+                ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')
+                ->andWhere('addedDate')->le(helper::now())
+                ->andWhere('status')->eq('normal')
+                ->fi()
                 ->orderBy('id_desc')
                 ->page($pager)
                 ->fetchAll('id');
@@ -239,6 +243,21 @@ class articleModel extends model
     }
 
     /**
+     * Get page list. 
+     *
+     * @param int              $count
+     * @param string           $type
+     * @access public
+     * @return array
+     */
+    public function getPageList($count)
+    {
+        $this->app->loadClass('pager', true);
+        $pager = new pager($recTotal = 0, $recPerPage = $count, 1);
+        return $this->getList('page', '', 'id_desc', $pager);
+    }
+
+    /**
      * Get stick articles.
      * 
      * @param  mix    $categories 
@@ -247,7 +266,7 @@ class articleModel extends model
      */
     public function getSticks($categories, $type)
     { 
-        $globalSticks = $this->dao->select('t1.*, t2.category')->from(TABLE_ARTICLE)->alias('t1')
+        $sticks = $this->dao->select('t1.*, t2.category')->from(TABLE_ARTICLE)->alias('t1')
                 ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
                 ->where('t1.sticky')->eq(2)
                 ->andWhere('t2.type')->eq($type)
@@ -255,12 +274,7 @@ class articleModel extends model
                 ->andWhere('t1.addedDate')->le(helper::now())
                 ->andWhere('t1.status')->eq('normal')
                 ->fi()
-                ->orderBy('id_desc')
-                ->fetchAll('id');
-
-        $categorySticks = $this->dao->select('t1.*, t2.category')->from(TABLE_ARTICLE)->alias('t1')
-                ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
-                ->where('t1.sticky')->eq(1)
+                ->orWhere('t1.sticky')->eq(1)
                 ->andWhere('t2.type')->eq($type)
                 ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')
                 ->andWhere('t1.addedDate')->le(helper::now())
@@ -269,8 +283,6 @@ class articleModel extends model
                 ->beginIf($categories)->andWhere('t2.category')->in($categories)->fi()
                 ->orderBy('id_desc')
                 ->fetchAll('id');
-
-        $sticks = array_merge($globalSticks, $categorySticks);
 
         if(!$sticks) return array();
 

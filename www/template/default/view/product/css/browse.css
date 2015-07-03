@@ -8,6 +8,7 @@
 .cards-products>div { padding-top: 15px; border-bottom: 1px dotted #e5e5e5; }
 .cards-products .card { margin-bottom: 15px; }
 .list-condensed .cards { padding-top: 0; margin: 0; }
-.cards-products .card-info {position: absolute; right: 10px; top: 10px;}
+.cards-products .card-info {position: relative;}
+.cards-products .card-info > .views-count {position: absolute; right: 0; top: 10px; opacity: .8}
 .card > .media-wrapper{background: none;}
 .card:hover > .media-wrapper{background: none;}

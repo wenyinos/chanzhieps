@@ -11,6 +11,8 @@
  */
 ?>
 <?php include TPL_ROOT . 'common/header.html.php';?>
+<?php js::set('showDetail', $this->lang->message->showDetail);?>
+<?php js::set('showAbstract', $this->lang->message->showAbstract);?>
 <?php $common->printPositionBar();?>
 <div class='row'><?php $this->block->printRegion($layouts, 'message_index', 'topBanner', true);?></div>
 <div class='row'>
@@ -29,7 +31,7 @@
           <span class='time'> <?php echo formatTime($message->date, 'Y/m/d');?> </span>
         </th>
         <td class='td-content'>
-          <?php echo nl2br($message->content);?>&nbsp;&nbsp;
+          <div class='content-detail'><?php echo nl2br($message->content);?></div>
         </td>
         <td class='td-action'> <?php echo html::a($this->createLink('message', 'reply', "messageID=$message->id"), $lang->message->reply, "data-toggle='modal' data-type='iframe' data-icon='reply' data-title='{$lang->message->reply}'");?> </td>
         </tr>

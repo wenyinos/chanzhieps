@@ -27,7 +27,7 @@
           <table class="table table-form">
             <tr>
               <th class='w-100px'><?php echo $lang->user->oauth->verification;?></th>
-              <td class='w-p60'>
+              <td class='w-p75'>
                 <?php echo html::input('verification', isset($oauth->verification) ? $oauth->verification : '', "class='form-control'");?>
               </td><td></td>
             </tr>
@@ -47,6 +47,12 @@
             <tr>
               <th><?php echo $lang->user->oauth->widget;?></th>
               <td><?php echo html::input('widget', isset($oauth->widget) ? $oauth->widget : '', "class='form-control'");?></td>
+            </tr>
+            <?php endif;?>
+            <?php if($providerCode == 'qq'):?>
+            <tr>
+              <th></th>
+              <td><div class='text-danger'><?php echo $lang->user->oauth->qq->callbackURL;?></div></td>
             </tr>
             <?php endif;?>
             <tr>

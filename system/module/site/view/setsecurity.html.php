@@ -12,29 +12,14 @@
 ?>
 <?php include '../../common/view/header.modal.html.php';?>
 <?php js::set('location', $location)?>
-<?php if(isset($pass) and !$pass):?>
-<?php 
-$url    = helper::safe64Encode($this->app->getURI());
-$target = 'self';
-include '../../mail/view/captcha.html.php';
-?>
-<?php else:?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-globe'></i> <?php echo $lang->site->setSecurity;?></strong></div>
   <div class='panel-body'>
-    <form method='post' id='ajaxForm' class='form-inline'>
+    <form method='post' id='securityForm' class='form-inline'>
       <table class='table table-form'>
         <tr>
           <th class='w-200px'><?php echo $lang->site->captcha;?></th>
           <td colspan='3'><?php echo html::radio('captcha', $lang->site->captchaList, isset($this->config->site->captcha) ? $this->config->site->captcha : 'auto');?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->site->filterSensitive;?></th>
-          <td colspan='3'><?php echo html::radio('filterSensitive', $lang->site->filterSensitiveList, isset($this->config->site->filterSensitive) ? $this->config->site->filterSensitive : 'close');?></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->site->sensitive;?></th>
-          <td colspan='3'><?php echo html::textarea('sensitive', !empty($this->config->site->sensitive) ? $this->config->site->sensitive : $config->sensitive, "class='form-control' rows=5");?></td>
         </tr>
         <tr>
           <th class='w-200px'><?php echo $lang->site->checkEmail;?></th>
@@ -46,6 +31,11 @@ include '../../mail/view/captcha.html.php';
           <td colspan='3'>
             <?php echo html::checkbox('importantValidate', $lang->site->validateTypes, $this->config->site->importantValidate);?><br>
           </td>
+        </tr>
+        <tr>
+          <th class='w-200px'><?php echo $lang->site->front;?></th>
+          <td colspan='2'><?php echo html::radio('front', $lang->site->frontList, isset($this->config->site->front) ? $this->config->site->front : 'guest');?></td>
+          <td></td>
         </tr>
         <tr>
           <th class='w-200px'><?php echo $lang->site->checkLocation;?></th>
@@ -78,6 +68,7 @@ include '../../mail/view/captcha.html.php';
         <tr>
           <th></th>
           <td colspan='2'>
+            <?php echo html::a($this->createLink('mail', 'captcha'), $lang->save, "data-toggle='modal' class='hidden captchaModal'")?>
             <?php echo html::submitButton();?>
           </td>
         </tr>
@@ -85,5 +76,4 @@ include '../../mail/view/captcha.html.php';
     </form>
   </div>
 </div>
-<?php endif;?>
 <?php include '../../common/view/footer.modal.html.php';?>

@@ -81,7 +81,7 @@ $lang->alias          = '搜索引擎优化使用，可使用英文或数字';
 
 $lang->setOkFile = <<<EOT
 <h5>请按照下面的步骤操作以确认您的管理员身份。</h5>
-<p>创建 %s 文件。如果存在该文件，使用编辑软件打开，重新保存一遍。</p>
+<p>创建 %s 文件。</p>
 EOT;
 
 $lang->color       = '颜色';
@@ -173,7 +173,7 @@ $lang->ui = new stdclass();
 $lang->ui->menu = new stdclass();
 $lang->ui->menu->logo    = 'Logo设置|ui|setlogo|';
 $lang->ui->menu->favicon = '网站图标|ui|setfavicon|';
-$lang->ui->menu->slide   = array('link' => '幻灯片设置|slide|admin|', 'alias' => 'create,edit');
+$lang->ui->menu->slide   = '幻灯片设置|tree|browse|type=slide';
 $lang->ui->menu->theme   = '模板设置|ui|settemplate|';
 $lang->ui->menu->admin   = array('link' => '区块管理|block|admin|', 'alias' => 'create,edit');
 $lang->ui->menu->pages   = array('link' => '布局设置|block|pages|', 'alias' => 'setregion');
@@ -220,10 +220,10 @@ $lang->site->menu->lang       = '语言设置|site|setlang|';
 $lang->site->menu->nav        = '导航设置|nav|admin|';
 $lang->site->menu->security   = '安全设置|site|setsecurity|';
 $lang->site->menu->upload     = '上传设置|site|setupload|';
+$lang->site->menu->sensitive  = '敏感词设置|site|setsensitive|';
 $lang->site->menu->tag        = '关键词设置|tag|admin|';
 $lang->site->menu->recPerPage = '列表数量设置|site|setrecperpage|';
 $lang->site->menu->oauth      = '开放登录|site|setoauth|';
-$lang->site->menu->yangcong   = '洋葱登录|site|setyangcong|';
 $lang->site->menu->link       = '友情链接|links|admin|';
 $lang->site->menu->mail       = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
 $lang->site->menu->wechat     = array('link' => '微信设置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
@@ -271,7 +271,7 @@ $lang->nav->menu = $lang->site->menu;
 $lang->search = new stdclass();
 $lang->search->menu = $lang->site->menu;
 
-/* Menu of tree module. */
+/* Menu of slide module. */
 $lang->slide = new stdclass();
 $lang->slide->menu = $lang->ui->menu;
 

@@ -109,6 +109,17 @@ class commonModel extends model
             }
         }
 
+        /* go to login page, if the setting of front page is need login. */
+        if(RUN_MODE == 'front')
+        {
+            $frontConfig = isset($this->config->site->front) ? $this->config->site->front : 'guest';
+            if($frontConfig == 'login' and $this->app->user->account == 'guest')
+            {
+                $referer = helper::safe64Encode($this->app->getURI(true));
+                die(js::locate(helper::createLink('user', 'login', "referer=$referer")));
+            }
+        }
+
         /* Check the priviledge. */
         if(!commonModel::hasPriv($module, $method)) $this->deny($module, $method);
     }
@@ -211,6 +222,7 @@ class commonModel extends model
     public function isOpenMethod($module, $method)
     {   
         if($module == 'user' and strpos(',login|logout|deny|resetpassword|checkresetkey', $method)) return true;
+        if($module == 'cart' and $method == 'printtopbar') return true;
         if($module == 'mail' and strpos(',captcha|sendmailcode', $method)) return true;
         if($module == 'misc' and strtolower($method) == 'ajaxgetfingerprint') return true;
         if($module == 'wechat' and $method == 'response') return true;
@@ -798,7 +810,18 @@ class commonModel extends model
      */
     public function verfyAdmin()
     {
-        $okFile = $this->app->getWwwRoot() . 'ok.txt';
+        if($this->session->okFileName == false or $this->session->okFileName == '')
+        {
+            $this->session->set('okFileName', helper::createRandomStr(4, $skip = '0-9A-Z') . '.txt');
+        }
+        $okFile = $this->app->getTmpRoot() . $this->session->okFileName;
+
+        if(file_exists($okFile) and time() - filemtime($okFile) > 3600)
+        {
+            $this->session->set('okFileName', helper::createRandomStr(4, $skip = '0-9A-Z') . '.txt');
+            $okFile = $this->app->getTmpRoot() . $this->session->okFileName;
+        }
+
         if(!file_exists($okFile) or time() - filemtime($okFile) > 3600)
         {
             return array('result' => 'fail', 'okFile' => $okFile);

@@ -227,7 +227,7 @@ class mail extends control
         if((time() - $lastSendTime) < 180) $this->send(array('result' => 'fail', 'message' => $this->lang->mail->trySendlater));
 
         if(!$this->config->mail->turnon) $this->send(array('result' => 'fail', 'message' => $this->lang->mail->noConfigure));
-        if(empty($user->email)) $this->send(array('result' => 'fail', 'message' => $this->lang->mail->noEmail));
+        if(empty($email)) $this->send(array('result' => 'fail', 'message' => $this->lang->mail->noEmail));
         if(!validater::checkEmail($email)) $this->send(array('result' => 'fail', 'message' => $this->lang->mail->error));
 
         if(!$lastSendTime or time() - $lastSendTime > 1800 or !$this->session->verifyCode) $this->session->set('verifyCode', mt_rand());

@@ -49,6 +49,7 @@ class cartModel extends model
     public function getListByAccount($account = '')
     {
         $addedProducts = $this->dao->select('*')->from(TABLE_CART)->where('account')->eq($account)->fetchAll('product');
+        if($account == 'guest') $addedProducts = $this->getListByCookie();
 
         /* Get products(use groupBy to distinct products).  */
         $products = $this->dao->select('t1.*, t2.category')->from(TABLE_PRODUCT)->alias('t1')
@@ -86,5 +87,71 @@ class cartModel extends model
         }
         
         return $products;
+    }
+
+    /**
+     * Get list from cookie. 
+     * 
+     * @access public
+     * @return array
+     */
+    public function getListByCookie()
+    {
+        $cart    = ($this->cookie->cart === false or $this->cookie->cart == '') ? array() : json_decode($this->cookie->cart);
+        $newCart = array();
+        $id      = 1;
+        foreach($cart as $product)
+        {
+            $pro = new stdclass();
+            $pro->id      = $id;
+            $pro->account = 'guest';
+            $pro->product = $product->product;
+            $pro->count   = $product->count;
+            $pro->lang    = 'zh-cn';
+            $newCart[$product->product] = $pro;
+            $id += 1;
+        }
+        return $newCart;
+    }
+
+    /**
+     * Add a prodcut to cart, save in cookie. 
+     * 
+     * @param  int    $productID 
+     * @param  int    $count 
+     * @access public
+     * @return void
+     */
+    public function addInCookie($productID, $count)
+    {
+        $cart = $this->getListByCookie();
+
+        if(isset($cart[$productID]))
+        {
+            $cart[$productID]->count += $count;
+        }
+        else
+        {
+            $tmp  = new stdclass();
+            $tmp->product = $productID;
+            $tmp->count   = $count;
+            $cart[$productID] = $tmp;
+        }
+
+        setcookie('cart', json_encode($cart), time() + 60 * 60 * 24);
+    }
+
+    /**
+     * Delete a product to cart, save in cookie. 
+     * 
+     * @param  int    $productID 
+     * @access public
+     * @return void
+     */
+    public function deleteInCookie($productID)
+    {
+        $cart = $this->getListByCookie();
+        if(isset($cart[$productID])) unset($cart[$productID]);
+        setcookie('cart', json_encode($cart), time() + 60 * 60 * 24);
     }
 }

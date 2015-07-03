@@ -292,6 +292,7 @@ class user extends control
     {
         if(!$account or RUN_MODE == 'front') $account = $this->app->user->account;
         if($this->app->user->account == 'guest') $this->locate(inlink('login'));
+        if(RUN_MODE == 'admin') $this->config->user->require->edit = 'realname, email';
         $user = $this->user->getByAccount($account);
 
         /* use email captcha. */
@@ -329,6 +330,37 @@ class user extends control
         {
             $this->display();
         }
+    }
+
+    /**
+     * Edit email. 
+     * 
+     * @param  string $account 
+     * @access public
+     * @return void
+     */
+    public function editEmail()
+    {
+        $account = $this->app->user->account;
+        $user    = $this->user->getByAccount($account);
+
+        if(!empty($_POST))
+        {
+            if(!$this->user->checkToken($this->post->token, $this->post->fingerprint))  $this->send(array( 'result' => 'fail', 'message' => $this->lang->error->fingerprint));
+            if($user->email != '')
+            {
+                if(!trim($this->post->captcha) or trim($this->post->captcha) != $this->session->verifyCode) $this->send(array('result' => 'fail', 'message' => $this->lang->user->verifyFail));
+            }
+
+            $this->user->updateEmail($account);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $locate = inlink('checkemail');
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess , 'locate' => $locate));
+        }
+
+        $this->view->token = $this->user->getToken();
+        $this->view->user  = $user;
+        $this->display();
     }
 
     /**
@@ -563,11 +595,12 @@ class user extends control
         /* Save the provider to session.*/
         $this->session->set('oauthProvider', $provider);
         $this->session->set('fingerprint', $fingerprint);
+        $this->session->set('referer', $referer);
 
         /* Init OAuth client. */
         $this->app->loadClass('oauth', $static = true);
         $this->config->oauth->$provider = json_decode($this->config->oauth->$provider);
-        $client = oauth::factory($provider, $this->config->oauth->$provider, $this->user->createOAuthCallbackURL($provider, $referer));
+        $client = oauth::factory($provider, $this->config->oauth->$provider, $this->user->createOAuthCallbackURL($provider));
 
         /* Create the authorize url and locate to it. */
         $authorizeURL = $client->createAuthorizeAPI();
@@ -582,16 +615,17 @@ class user extends control
      * @access public
      * @return void
      */
-    public function oauthCallback($provider, $referer = '')
+    public function oauthCallback($provider)
     {
         /* First check the state and provider fields. */
         if($this->get->state != $this->session->oauthState)  die('state wrong!');
         if($provider != $this->session->oauthProvider)       die('provider wrong.');
+        $referer = $this->session->referer;
 
         /* Init the OAuth client. */
         $this->app->loadClass('oauth', $static = true);
         $this->config->oauth->$provider = json_decode($this->config->oauth->$provider);
-        $client = oauth::factory($provider, $this->config->oauth->$provider, $this->user->createOAuthCallbackURL($provider, $referer));
+        $client = oauth::factory($provider, $this->config->oauth->$provider, $this->user->createOAuthCallbackURL($provider));
 
         /* Begin OAuth authing. */
         $token  = $client->getToken($this->get->code);    // Step1: get token by the code.
