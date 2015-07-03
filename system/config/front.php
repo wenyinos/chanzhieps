@@ -104,6 +104,7 @@ $config->rights->member['user']['thread']     = 'thread';
 $config->rights->member['user']['reply']      = 'reply';
 $config->rights->member['user']['message']    = 'message';
 $config->rights->member['user']['checkemail'] = 'checkemail';
+$config->rights->member['user']['editemail']  = 'editemail';
 
 $config->rights->member['file']['ajaxupload'] = 'ajaxupload';
 

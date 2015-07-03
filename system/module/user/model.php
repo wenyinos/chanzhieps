@@ -312,6 +312,7 @@ class userModel extends model
             ->remove('ip, account, join, visits, fingerprint, token')
             ->removeIF(RUN_MODE != 'admin', 'admin')
             ->removeIF(RUN_MODE == 'admin', 'groups')
+            ->removeIF(RUN_MODE == 'front', 'email')
             ->get();
 
         if(RUN_MODE == 'admin')
@@ -335,21 +336,45 @@ class userModel extends model
             if($user->admin == 'no') $this->dao->delete()->from(TABLE_USERGROUP)->where('account')->eq($account)->exec();
         }
 
-        if($user->email != $oldUser->email) $user->emailCertified = 0;
+        if(RUN_MODE == 'admin' and $user->email != $oldUser->email) $user->emailCertified = 0;
 
         if((isset($user->admin) and $user->admin == 'super') or !empty($user->realnames))
         {
             $user->realnames = helper::jsonEncode($user->realnames);
-            $this->config->user->require->edit = 'email, realnames';
+            $this->config->user->require->edit = 'realnames';
         }
 
         return $this->dao->update(TABLE_USER)->setAutolang(false)
             ->data($user, $skip = 'token,oldPwd,password1,password2')
             ->autoCheck()
             ->batchCheck($this->config->user->require->edit, 'notempty')
+            ->checkIF($this->post->gtalk != false, 'gtalk', 'email')
+            ->beginIF(RUN_MODE == 'admin')
             ->check('email', 'email')
             ->check('email', 'unique', "account!='$account'")
-            ->checkIF($this->post->gtalk != false, 'gtalk', 'email')
+            ->fi()
+            ->where('account')->eq($account)
+            ->exec();
+    }
+
+    /**
+     * Update email. 
+     * 
+     * @param  string $account 
+     * @access public
+     * @return void
+     */
+    public function updateEmail($account)
+    {
+        $this->checkOldPassword();
+        $data = fixer::input('post')->remove('oldPwd, captcha, token, fingerprint')->get();
+        $data->emailCertified = 0;
+
+        return $this->dao->update(TABLE_USER)->setAutolang(false)
+            ->data($data)
+            ->check('email', 'notempty')
+            ->check('email', 'email')
+            ->check('email', 'unique', "account!='$account'")
             ->where('account')->eq($account)
             ->exec();
     }

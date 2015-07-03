@@ -81,7 +81,7 @@ $lang->alias          = 'For SEO, could be numbers, words enclosed by ".';
 
 $lang->setOkFile = <<<EOT
 <h5>For security reason, please do these steps. </h5>
-<p>Create %s file. If this file exists already, reopen it and save again.</p>
+<p>Create %s file.</p>
 EOT;
 
 $lang->color       = 'Color';
