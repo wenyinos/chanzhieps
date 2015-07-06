@@ -191,6 +191,7 @@ KindEditor.lang({
 	'table.border' : '边框',
 	'table.borderWidth' : '边框',
 	'table.borderColor' : '颜色',
+	'table.defaultBorderColor' : '默认颜色',
 	'table.backgroundColor' : '背景颜色',
 	'map.address' : '地址: ',
 	'map.search' : '搜索',

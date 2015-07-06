@@ -191,6 +191,7 @@ KindEditor.lang({
 	'table.borderWidth' : '邊框',
 	'table.borderColor' : '顏色',
 	'table.backgroundColor' : '背景顏色',
+	'table.defaultBorderColor' : '默认顏色',
 	'map.address' : '住所: ',
 	'map.search' : '尋找',
 	'baidumap.address' : '住所: ',
