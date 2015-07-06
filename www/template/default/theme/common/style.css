@@ -411,7 +411,6 @@ td #aliasLabel {display: table-row;}
   #powerby {position: static;}
 }
 
-
 /* Go to top */
 #go2top {position: fixed; color: #999; bottom: 80px; right: -40px; width: 40px; text-align: center; text-shadow:1px 1px 0px #fff; display: none; border-radius: 3px; background-color: #f1f1f1; font-size: 28px; line-height: 40px; border: 1px solid #ddd}
 #go2top .icon {font-size: 28px; line-height: 40px}
@@ -445,6 +444,7 @@ body.body-modal {padding: 20px;}
   .ke-toolbar {display: none !important;}
   .page {color :transparent; white-space:nowrap; overflow:hidden;}
 }
+.article-content table.table-kindeditor th, .article-content table.table-kindeditor td {border-bottom: initial;}
 
 /* Search bar */
 #searchbar {position: absolute; right: 0; top: 45%; max-width: 200px;}
@@ -497,4 +497,3 @@ body.body-modal {padding: 20px;}
 .row {margin-left: -7px; margin-right: -7px;}
 .row > [class*='col-'] {padding-left: 7px; padding-right: 7px;}
 .row > [class*='col-'] > .panel, .row > [class*='col-'] > .carousel, .page-content > .panel, #boards > .panel, .page-side > .panel, .row > [class*='col-'] > .nav, .row > [class*='col-'] > .list-group, .m-blog .card {margin-bottom: 14px;}
-
