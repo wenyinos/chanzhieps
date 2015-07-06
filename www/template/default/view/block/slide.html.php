@@ -10,7 +10,8 @@
  * @link        http://www.chanzhi.org
 */
 ?>
-<?php $slides = $this->loadModel('slide')->getList();?>
+<?php $block->content = json_decode($block->content);?>
+<?php $slides = $this->loadModel('slide')->getList($block->content->group);?>
 <?php 
 if($slides):?>
 <div id='slide' class='carousel slide' data-ride='carousel'>

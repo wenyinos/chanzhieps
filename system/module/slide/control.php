@@ -17,10 +17,11 @@ class slide extends control
      * @access public
      * @return void
      */
-    public function admin()
+    public function admin($groupID)
     {
         $this->view->title  = $this->lang->slide->admin;
-        $this->view->slides = $this->slide->getList();
+        $this->view->group  = $groupID;
+        $this->view->slides = $this->slide->getList($groupID);
         $this->display();
     }
 
@@ -30,7 +31,7 @@ class slide extends control
      * @access public 
      * @return void
      */
-    public function create()
+    public function create($groupID)
     {
         if($_POST)
         {
@@ -38,7 +39,7 @@ class slide extends control
             {   
                 if(empty($_FILES)) $this->send(array('result' => 'fail', 'message' => $this->lang->slide->noImageSelected));
 
-                $image = $this->slide->uploadImage();
+                $image = $this->slide->uploadImage($groupID);
                 if(!$image) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
             }
             else
@@ -46,9 +47,9 @@ class slide extends control
                 $image = null;
             }
 
-            if($this->slide->create($image))
+            if($this->slide->create($groupID, $image))
             {
-                $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->inlink('admin')));
+                $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->inlink('admin', "group={$groupID}")));
             }
 
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
@@ -66,15 +67,17 @@ class slide extends control
      */
     public function edit($id)
     {
+        $slide = $this->slide->getByID($id);
+
         if($_POST)
         {
             if($this->slide->update($id))
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>$this->inLink('admin')) );
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>$this->inLink('admin', "groupID={$slide->group}")));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
         $this->view->id    = $id;
-        $this->view->slide = $this->slide->getByID($id);
+        $this->view->slide = $slide;
         $this->display();
     }
 

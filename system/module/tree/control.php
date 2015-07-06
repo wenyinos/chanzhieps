@@ -52,6 +52,13 @@ class tree extends control
             $this->lang->category->name   = $this->lang->express->name;
         }
 
+        if($type == 'slide')
+        {
+            $this->lang->category   = $this->lang->slideGroup;
+            $this->lang->tree->menu = $this->lang->ui->menu;
+            $this->lang->menuGroups->tree = 'ui';
+        }
+
         $isWechatMenu = treeModel::isWechatMenu($type);
         $this->view->isWechatMenu = $isWechatMenu;
 
@@ -150,6 +157,14 @@ class tree extends control
             $this->lang->category->common = $this->lang->express->name;
             $this->lang->category->name   = $this->lang->express->name;
         }
+
+        if($type == 'slide')
+        {
+            $this->lang->category   = $this->lang->slideGroup;
+            $this->lang->tree->menu = $this->lang->ui->menu;
+            $this->lang->menuGroups->tree = 'ui';
+        }
+
 
         $isWechatMenu = treeModel::isWechatMenu($type);
         if($isWechatMenu) $this->lang->category = $this->lang->wechatMenu;

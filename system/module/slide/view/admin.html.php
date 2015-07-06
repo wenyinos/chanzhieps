@@ -15,7 +15,7 @@
   <div class='panel-heading'>
     <strong><i class='icon-picture'></i> <?php echo $lang->slide->admin;?></strong>
     <div class='panel-actions'>
-      <?php commonModel::printLink('slide', 'create', '', '<i class="icon-plus"></i> ' . $lang->slide->create, "class='btn btn-primary'");?>
+      <?php commonModel::printLink('slide', 'create', "groupID=$group", '<i class="icon-plus"></i> ' . $lang->slide->create, "class='btn btn-primary'");?>
     </div>
   </div>
   <form id='sortForm' action='<?php echo inLink('sort')?>' method='post'>

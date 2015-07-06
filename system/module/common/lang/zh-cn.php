@@ -173,7 +173,7 @@ $lang->ui = new stdclass();
 $lang->ui->menu = new stdclass();
 $lang->ui->menu->logo    = 'Logo设置|ui|setlogo|';
 $lang->ui->menu->favicon = '网站图标|ui|setfavicon|';
-$lang->ui->menu->slide   = array('link' => '幻灯片设置|slide|admin|', 'alias' => 'create,edit');
+$lang->ui->menu->slide   = '幻灯片设置|tree|browse|type=slide';
 $lang->ui->menu->theme   = '模板设置|ui|settemplate|';
 $lang->ui->menu->admin   = array('link' => '区块管理|block|admin|', 'alias' => 'create,edit');
 $lang->ui->menu->pages   = array('link' => '布局设置|block|pages|', 'alias' => 'setregion');
@@ -271,7 +271,7 @@ $lang->nav->menu = $lang->site->menu;
 $lang->search = new stdclass();
 $lang->search->menu = $lang->site->menu;
 
-/* Menu of tree module. */
+/* Menu of slide module. */
 $lang->slide = new stdclass();
 $lang->slide->menu = $lang->ui->menu;
 
