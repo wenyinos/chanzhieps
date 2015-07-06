@@ -36,6 +36,7 @@ $lang->product->addedDate  = 'Added date';
 $lang->product->editedDate = 'Edited date';
 $lang->product->status     = 'Status';
 $lang->product->views      = 'Views';
+$lang->product->viewsCount = 'Views count';
 $lang->product->stick      = 'Sticky';
 $lang->product->order      = 'Order';
 $lang->product->attribute  = 'Attribute';

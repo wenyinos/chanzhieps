@@ -40,8 +40,8 @@ include TPL_ROOT . 'common/treeview.html.php';
                 echo html::a(inlink('view', "id=$product->id", "category={$product->category->alias}&name=$product->alias"), html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"), "class='media-wrapper'");
             }
             ?>
-            <?php $productView = isset($this->config->ui->productView) ? $this->config->ui->productView : true;?>
-            <?php if($productView):?><div class='card-info'><span class="label label-success label-badge" title='<?php echo $lang->product->views;?>'><?php echo $product->views;?></span></div><?php endif;?>
+            <?php $productView = isset($this->config->product->view) ? $this->config->product->view : true;?>
+            <?php if($productView):?><div class='card-info'><span data-toggle='tooltip' class='text-muted views-count' title='<?php echo $lang->product->viewsCount;?>'><i class="icon icon-eye-open"></i> <?php echo $product->views;?></span></div><?php endif;?>
             <div class='card-heading'>
               <?php echo html::a(inlink('view', "id={$product->id}", "category={$product->category->alias}&name=$product->alias"), '<strong>' . $product->name . '</strong>');?>
               <span class='card-content text-latin'>
