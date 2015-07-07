@@ -1123,64 +1123,80 @@ class upgradeModel extends model
      */
     public function moveSlideData()
     {
-        $this->app->loadLang('slide');
-        $this->dao->insert(TABLE_CATEGORY)->set('name')->eq($this->lang->slide->defaultGroup)->set('type')->eq('slide')->exec();
-        $group     = $this->dao->lastInsertID();
-        $groupPath = ",$group,";
-        $this->dao->update(TABLE_CATEGORY)->set('path')->eq($groupPath)->where('id')->eq($group)->exec();
-
         $slides = $this->dao->select('*')->from(TABLE_CONFIG)
             ->where('owner')->eq('system')
             ->andWhere('module')->eq('common')
             ->andWhere('section')->eq('slides')
-            ->fetchAll('key');
+            ->fetchGroup('lang');
 
-        foreach($slides as $key => $slide)
+        if(!$slides) return false;
+
+        foreach($slides as $lang => $langSlides)
         {
-            $value = json_decode($slide->value);
+            if(!$langSlides) return false;
 
-            $data = new stdclass();
-            $data->title           = $value->title;
-            $data->group           = $group;
-            $data->titleColor      = $value->titleColor;
-            $data->mainLink        = $value->mainLink;
-            $data->backgroundType  = $value->backgroundType;
-            $data->backgroundColor = $value->backgroundColor;
-            $data->height          = $value->height;
-            $data->summary         = $value->summary;
-            $data->image           = null;
-            $data->createdDate     = date('Y-m-d H:i:s', $value->createdDate);
-            $data->order           = $key;
-            $data->lang            = $slide->lang; 
-            $data->label           = helper::jsonEncode($value->label);
-            $data->buttonClass     = helper::jsonEncode($value->buttonClass);
-            $data->buttonUrl       = helper::jsonEncode($value->buttonUrl);
-            $data->buttonTarget    = helper::jsonEncode($value->buttonTarget);
+            $this->app->loadLang('slide');
+            $this->dao->insert(TABLE_CATEGORY)->set('name')->eq($this->lang->slide->defaultGroup)->set('type')->eq('slide')->set('lang')->eq($lang)->exec();
+            $group     = $this->dao->lastInsertID();
+            $groupPath = ",$group,";
+            $this->dao->update(TABLE_CATEGORY)->set('path')->eq($groupPath)->where('id')->eq($group)->exec();
 
-            if($value->backgroundType == 'image')
+            $slideBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('type')->eq('slide')->andWhere('lang')->eq($lang)->fetchAll();
+            foreach($slideBlocks as $slideBlock)
             {
-                $oldPathname = str_replace('/data/upload/', '', $value->image);
-                $oldImage    = $this->dao->select('*')->from(TABLE_FILE)->where('objectType')->eq('slide')->andWhere('pathname')->eq($oldPathname)->fetch();
-                if(!$oldImage) return false;
-
-                $oldImagePath = $this->app->getDataRoot() . 'upload/' . $oldImage->pathname;
-                if(file_exists($oldImagePath))
-                {
-                    $pathname  = 'slides/slide_' . $oldImage->id . '.' . $oldImage->extension;
-                    $imagePath = $this->app->getDataRoot() . $pathname;
-
-                    if(copy($oldImagePath, $imagePath))
-                    {
-                        $image = $oldImage;
-                        unset($image->id);
-                        $image->pathname = $pathname;
-                        $this->dao->insert(TABLE_FILE)->data($image)->exec();
-                    }
-                    $data->image = 'data/' . $image->pathname;
-                }
+                $content = array();
+                $content['group'] = $group;
+                $slideBlock->content = helper::jsonEncode($content);
+                $this->dao->update(TABLE_BLOCK)->set('content')->eq($slideBlock->content)->where('id')->eq($slideBlock->id)->exec();
             }
 
-            $this->dao->insert(TABLE_SLIDE)->data($data)->exec();
+            foreach($langSlides as $slide)
+            {
+                $value = json_decode($slide->value);
+
+                $data = new stdclass();
+                $data->title           = $value->title;
+                $data->group           = $group;
+                $data->titleColor      = $value->titleColor;
+                $data->mainLink        = $value->mainLink;
+                $data->backgroundType  = $value->backgroundType;
+                $data->backgroundColor = $value->backgroundColor;
+                $data->height          = $value->height;
+                $data->summary         = $value->summary;
+                $data->image           = null;
+                $data->createdDate     = date('Y-m-d H:i:s', $value->createdDate);
+                $data->order           = $slide->key;
+                $data->lang            = $lang; 
+                $data->label           = helper::jsonEncode($value->label);
+                $data->buttonClass     = helper::jsonEncode($value->buttonClass);
+                $data->buttonUrl       = helper::jsonEncode($value->buttonUrl);
+                $data->buttonTarget    = helper::jsonEncode($value->buttonTarget);
+
+                if($value->backgroundType == 'image')
+                {
+                    $oldPathname = str_replace('/data/upload/', '', $value->image);
+                    $oldImage    = $this->dao->select('*')->from(TABLE_FILE)->where('objectType')->eq('slide')->andWhere('pathname')->eq($oldPathname)->fetch();
+                    if(!$oldImage) return false;
+
+                    $oldImagePath = $this->app->getDataRoot() . 'upload/' . $oldImage->pathname;
+                    if(file_exists($oldImagePath))
+                    {
+                        $pathname  = 'source/group' . $group . '_slide' . $oldImage->id . '.' . $oldImage->extension;
+                        $imagePath = $this->app->getDataRoot() . 'upload/' . $pathname;
+
+                        if(copy($oldImagePath, $imagePath))
+                        {
+                            $image = $oldImage;
+                            unset($image->id);
+                            $image->pathname = $pathname;
+                            $this->dao->insert(TABLE_FILE)->data($image)->exec();
+                        }
+                        $data->image = '/data/upload/' . $image->pathname;
+                    }
+                }
+
+                $this->dao->insert(TABLE_SLIDE)->data($data)->exec();
+            }
         }
 
         return !dao::isError();
