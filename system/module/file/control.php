@@ -128,6 +128,66 @@ class file extends control
     }
 
     /**
+     * The list page of an object
+     * 
+     * @param  string $type 
+     * @param  string $orderBy 
+     * @param  int    $pageID       current page id
+     * @access public
+     * @return void
+     */
+    public function sourceBrowse($type = 'all', $orderBy = 'id_desc', $pageID = 1)
+    {
+        $this->lang->file->menu = $this->lang->ui->menu;
+        $this->lang->menuGroups->file = 'ui';
+
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager(0, 10, $pageID);
+
+        $this->view->title     = $this->lang->file->source;
+        $this->view->writeable = $this->file->checkSavePath();
+        $this->view->type      = $type;
+        $this->view->files     = $this->file->getSourceList($type, $orderBy, $pager);
+        $this->view->pager     = $pager;
+        $this->display();
+    }
+
+    /**
+     * Edit for the file
+     * 
+     * @param  string $objectType 
+     * @param  int    $objectID 
+     * @access public
+     * @return void
+     */
+    public function sourceEdit($fileID, $objectType)
+    {
+        $file = $this->file->getById($fileID);
+        if(!empty($_POST))
+        {
+            if(!$this->file->checkSavePath()) $this->send(array('result' => 'fail', 'message' => $this->lang->file->errorUnwritable));
+            if($this->post->filename == false or $this->post->filename == '') $this->send(array('result' => 'fail', 'message' => $this->lang->file->nameEmpty));
+
+            $filename = $this->post->filename;
+            $allowedChar = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_';
+            for($i = 0; $i < strlen($filename); $i++)
+            {
+                if(strpos($allowedChar, $filename[$i]) === false) $this->send(array('result' => 'fail', 'message' => $this->lang->file->evilChar));
+            }
+
+            if(file_exists($this->app->getDataRoot() . 'upload/source/' . $filename . '.' . $file->extension)) 
+                $this->send(array('result' => 'fail', 'message' => $this->lang->file->sameName));
+            $this->file->sourceEdit($fileID, $filename);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('file', 'sourcebrowse')));
+        }
+        $this->view->title      = $this->lang->file->edit;
+        $this->view->modalWidth = 500;
+        $this->view->file       = $file;
+        $this->display();
+    }
+
+    /**
      * Upload files for an object.
      * 
      * @param  string $objectType 
@@ -279,6 +339,21 @@ class file extends control
      */
     public function delete($fileID)
     {
+        $this->dao->delete()->from(TABLE_FILE)->where('id')->eq($fileID)->exec();
+        if(!dao::isError()) $this->send(array('result' => 'success')); 
+        $this->send(array('result' => 'fail', 'message' => dao::getError())); 
+    }
+
+    /**
+     * Delet a file.
+     *
+     * @param  int  $fileID
+     * @return void
+     */
+    public function sourceDelete($fileID)
+    {
+        $file = $this->file->getByID($fileID);
+        if(file_exists($file->realPath)) unlink($file->realPath);
         $this->dao->delete()->from(TABLE_FILE)->where('id')->eq($fileID)->exec();
         if(!dao::isError()) $this->send(array('result' => 'success')); 
         $this->send(array('result' => 'fail', 'message' => dao::getError())); 

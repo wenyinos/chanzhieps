@@ -178,6 +178,7 @@ $lang->ui->menu->theme   = 'Theme|ui|settemplate|';
 $lang->ui->menu->admin   = array('link' => 'Blocks|block|admin|', 'alias' => 'create,edit');
 $lang->ui->menu->pages   = array('link' => 'Layout|block|pages|', 'alias' => 'setregion');
 $lang->ui->menu->styles  = 'Base Style|ui|setbasestyle|';
+$lang->ui->menu->source  = 'Source|file|sourcebrowse|';
 $lang->ui->menu->others  = 'Others|ui|others|';
 
 /* Menu of user module. */
