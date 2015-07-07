@@ -1,5 +1,7 @@
 <?php
 $config->ui->groups = array('basic', 'navbar', 'block', 'button', 'footer');
+$config->ui->require = new stdclass();
+$config->ui->require->exportTheme = "author,email,demo";
 
 $config->ui->selectorOptions = array();
 
