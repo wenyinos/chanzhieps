@@ -4,6 +4,7 @@ ALTER TABLE `eps_log` DROP `fingerprint`;
 
 CREATE TABLE IF NOT EXISTS `eps_slide` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `group` smallint(5) unsigned NOT NULL,
   `title` varchar(60) NOT NULL,
   `titleColor` char(10) NOT NULL,
   `mainLink` varchar(255) NOT NULL,
@@ -17,9 +18,6 @@ CREATE TABLE IF NOT EXISTS `eps_slide` (
   `buttonTarget` varchar(30) NOT NULL,
   `summary` text NOT NULL,
   `createdDate` datetime NOT NULL,
-  `createdBy` char(30) NOT NULL,
-  `editedDate` datetime NOT NULL,
-  `editedBy` char(30) NOT NULL,
   `order` smallint(5) unsigned NOT NULL DEFAULT '0',
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
@@ -27,3 +25,5 @@ CREATE TABLE IF NOT EXISTS `eps_slide` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 ALTER TABLE `eps_log` CHANGE `position` `location` char(100) NOT NULL;
+ALTER TABLE `eps_block` ADD `originID` smallint(5) unsigned NOT NULL;
+ALTER TABLE `eps_layout` ADD `imported` enum('no', 'doing', 'finished') NOT NULL DEFAULT 'no';

@@ -536,4 +536,120 @@ class uiModel extends model
         $html .= "</div>\n";
         echo $html;
     }
+
+    public function checkExportParams()
+    {
+        $this->lang->exportlang = $this->lang->ui->template;
+        $this->dao->insert('exportlang')->data($_POST)->batchCheck($this->config->ui->require->exportTheme, 'notempty');
+        return !dao::isError();
+    }
+    /**
+     * Export theme.
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @access public
+     * @return void
+     */
+    public function exportTheme($template, $theme)
+    {
+        $themeInfo  = fixer::input('post')
+            ->add('type', 'theme')
+            ->get();
+        
+        $yaml  = $this->app->loadClass('spyc')->dump($themeInfo);      
+        file_put_contents($this->exportDocPath . $this->app->getClientLang() . '.yaml', $yaml);
+        
+        $this->exportDB($template, $theme);
+        if(dao::isError()) return false;
+
+        $exportedFile = $this->exportFiles($template, $theme);
+        return $exportedFile;
+    }
+
+    /**
+     * Init export paths.
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @access public
+     * @return bool
+     */
+    public function initExportPath($template, $theme)
+    {
+        $this->exportPath       = $this->app->getTmpRoot() . 'theme' . DS . $template . DS . $theme . DS;
+        $this->exportDocPath    = $this->exportPath . 'doc' . DS;
+        $this->exportDbPath     = $this->exportPath . 'db' . DS;
+        $this->exportCssPath    = $this->exportPath . 'www' . DS . 'data' . DS . 'css' . DS . $template . DS . $theme . DS;
+        $this->exportSourcePath = $this->exportPath . 'www' . DS . 'data' . DS . 'upload' . DS;
+
+        if(!is_dir($this->exportPath))       mkdir($this->exportPath, 0777, true);
+        if(!is_dir($this->exportDocPath))    mkdir($this->exportDocPath, 0777, true);
+        if(!is_dir($this->exportDbPath))     mkdir($this->exportDbPath, 0777, true);
+        if(!is_dir($this->exportCssPath))    mkdir($this->exportCssPath, 0777, true);
+        if(!is_dir($this->exportSourcePath)) mkdir($this->exportSourcePath, 0777, true);
+
+        return (is_dir($this->exportPath) and is_dir($this->exportDbPath) and is_dir($this->exportSourcePath) and is_dir($this->exportCssPath));
+    }
+
+    /**
+     * Export theme sqls. 
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @access public
+     * @return bool
+     */
+    public function exportDB($template, $theme)
+    {
+        $lang = $this->app->getClientLang();
+        $tables = array(TABLE_BLOCK, TABLE_LAYOUT, TABLE_CONFIG, TABLE_SLIDE);
+
+        $condations = array();
+        $condations[TABLE_BLOCK]  = "where template='{$template}' and lang in ('all', '{$lang}')";
+        $condations[TABLE_LAYOUT] = "where template='{$template}' and lang in ('all', '{$lang}')";
+        $condations[TABLE_CONFIG] = "where owner = 'system' and module = 'common' and `key` in ('custom', 'basestyle')";
+
+        $fields = array();
+        $fields[TABLE_BLOCK]  = "id as originID,`template`,`type`,`title`,`content`,`lang`";
+        $fields[TABLE_LAYOUT] = "*, 'doing' as imported";
+        $fields[TABLE_CONFIG] = "owner, module, section, `key`, `value`, lang";
+        $fields[TABLE_SLIDE]  = "title,titleColor,mainLink,backgroundType,backgroundColor,height,image,label,buttonClass,buttonUrl,buttonTarget,summary,lang,`order`";
+
+        $replaces = array();
+        $replaces[TABLE_BLOCK]  = true;
+        $replaces[TABLE_LAYOUT] = true;
+        $replaces[TABLE_CONFIG] = true;
+        $replaces[TABLE_SLIDE]  = false;
+    
+        $zdb = $this->app->loadClass('zdb');
+        return $zdb->dump($this->exportDbPath . 'install.sql', $tables, $fields, 'data', $condations, true);
+    }
+
+    /**
+     * Export files.
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @access public
+     * @return string
+     */
+    public function exportFiles($template, $theme)
+    {
+        $zfile = $this->app->loadClass('zfile');
+        $customCssFile = $this->exportCssPath . 'style.css';
+        $originCssFile = sprintf($this->config->site->ui->customCssFile, $template, $theme);
+        if(!is_dir(dirname($customCssFile))) mkdir(dirname($customCssFile), '0777', true);
+        copy($originCssFile, $customCssFile);
+
+        $sourcePath = $this->app->getWwwRoot() . 'data' . DS . 'upload' . DS . 'source';
+        if(is_dir($sourcePath)) $zfile->copyDir($sourcePath, $this->exportSourcePath . 'source');
+
+        $this->app->loadClass('pclzip', true);
+        $archive = new PclZip(dirname($this->exportPath) . DS . $theme . '.zip');
+        $list    = $archive->create($this->exportPath, PCLZIP_OPT_REMOVE_PATH, dirname($this->exportPath));
+
+        if(empty($list)) $this->app->loadClass('zfile')->removeDir(dirname($this->exportPath));
+        return dirname($this->exportPath) . DS . $theme . '.zip';
+    }
 }

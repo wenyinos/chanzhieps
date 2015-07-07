@@ -18,6 +18,8 @@ $lang->reply->author    = '作者';
 $lang->reply->files     = '附件：';
 $lang->reply->addedDate = '回复时间';
 $lang->reply->admin     = '回帖列表';
+$lang->reply->sofa      = '沙发';
+$lang->reply->stool     = '板凳';
 
 $lang->reply->edit       = '编辑回帖';
 $lang->reply->deleteFile = '删除附件';

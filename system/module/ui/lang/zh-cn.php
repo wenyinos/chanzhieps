@@ -25,6 +25,7 @@ $lang->ui->deleteLogo      = "删除Logo";
 $lang->ui->others          = "其他设置";
 $lang->ui->productView     = "产品点击量";
 $lang->ui->QRCode          = "移动二维码";
+$lang->ui->templateName    = "模板名称";
 
 $lang->ui->deleteFavicon     = "不显示网站图标";
 $lang->ui->noStyleTag        = "请填写全局CSS样式代码，不需要&lt;style&gt;&lt;/style&gt;标签";
@@ -32,6 +33,7 @@ $lang->ui->setLogoFailed     = "设置Logo失败";
 $lang->ui->noSelectedFile    = "获取上传图片失败，可能是图片大小超出上传限制";
 $lang->ui->notAlloweFileType = "请选择正确的%s文件";
 $lang->ui->suitableLogoSize  = '最佳高度范围：50px~80px，最佳宽度范围：80px~240px';
+$lang->ui->exportedSuccess   = '导出成功';
 
 $lang->ui->productViewList[1] = '显示'; 
 $lang->ui->productViewList[0] = '不显示'; 
@@ -66,6 +68,10 @@ $lang->ui->template->enable          = '启用';
 $lang->ui->template->reload          = '刷新页面';
 $lang->ui->template->doInstall       = '确认安装';
 $lang->ui->template->info            = '模板信息';
+$lang->ui->template->demo            = '演示网址';
+$lang->ui->template->qq              = 'QQ';
+$lang->ui->template->email           = 'Email';
+$lang->ui->template->site            = 'site';
 
 $lang->ui->customtheme = '自定义主题';
 $lang->ui->custom      = '自定义';

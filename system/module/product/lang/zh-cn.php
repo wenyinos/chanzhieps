@@ -36,6 +36,7 @@ $lang->product->addedDate  = '添加时间';
 $lang->product->editedDate = '编辑时间';
 $lang->product->status     = '状态';
 $lang->product->views      = '浏览';
+$lang->product->viewsCount = '浏览次数';
 $lang->product->stick      = '置顶级别';
 $lang->product->order      = '排序';
 $lang->product->attribute  = '产品属性';

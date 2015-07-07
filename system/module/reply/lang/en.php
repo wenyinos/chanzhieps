@@ -17,7 +17,9 @@ $lang->reply->content   = 'Content';
 $lang->reply->author    = 'Author';
 $lang->reply->files     = 'Files:';
 $lang->reply->addedDate = 'Date';
-$lang->reply->admin     = 'Reply';
+$lang->reply->admin     = 'Admin';
+$lang->reply->sofa      = 'Sofa';
+$lang->reply->stool     = 'Stool';
 
 $lang->reply->edit       = 'Edit';
 $lang->reply->deleteFile = 'Delete file';

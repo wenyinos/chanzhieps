@@ -45,6 +45,8 @@ $lang->slide->successSort     = 'Order data saved.';
 $lang->slide->noImageSelected = 'No images selected';
 $lang->slide->suitableSize    = "You must use pictures of same size.";
 
+$lang->slide->defaultGroup = 'Default Group';
+
 /* Targets setting. */
 $lang->slide->target = new stdclass();
 $lang->slide->target->_blank = 'New window';

@@ -785,6 +785,18 @@ function getFingerptint()
         if(typeof(value) == 'string') fingerprint += value.length;
     })
     return fingerprint;
+}
 
-
+function associateSelect(first, sencond, data)
+{
+    $(first).change(function()
+    {
+        $(sencond).html('');
+        options = eval("data." + $(first).val());
+        $.each(options, function(key, value)
+        {
+            option = '<option value="' + key + '">' + value  + '</option>';
+            $(sencond).append(option);
+        })
+    })  
 }

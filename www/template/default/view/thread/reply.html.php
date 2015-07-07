@@ -2,7 +2,14 @@
 <?php foreach($replies as $reply):?>
 <div id = "<?php echo $reply->id;?>" class="panel panel thread reply <?php echo $i%2!=0?'striped':'';?>">
   <div class='panel-heading'>
-    <div class='panel-actions'><strong>#<?php echo $i++;?></strong></div>
+    <div class='panel-actions'>
+      <strong>#<?php echo $i++;?></strong>
+    </div>
+    <?php if($i == 2):?>
+    <span class='label label-danger'><?php echo $lang->reply->sofa;?></span>
+    <?php elseif($i == 3):?>
+    <span class='label label-success'><?php echo $lang->reply->stool;?></span>
+    <?php endif;?>
     <span class='muted'><i class='icon-comment-alt'></i> <?php echo $reply->addedDate;?></span>
   </div>
   <table class='table'>

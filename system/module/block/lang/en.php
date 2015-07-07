@@ -27,6 +27,7 @@ $lang->block->categories      = 'Categories';
 $lang->block->showImage       = 'Show image';
 $lang->block->showTime        = 'Show time';
 $lang->block->product         = 'Product';
+$lang->block->slide           = 'Slide';
 $lang->block->titleless       = 'Hide Title';
 $lang->block->borderless      = 'Hide Border';
 $lang->block->icon            = 'Icon';

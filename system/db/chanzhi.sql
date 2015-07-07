@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS `eps_article` (
 -- DROP TABLE IF EXISTS `eps_block`;
 CREATE TABLE IF NOT EXISTS `eps_block` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `originID` smallint(5) unsigned NOT NULL,
   `template` varchar(30) NOT NULL DEFAULT 'default',
   `type` varchar(20) NOT NULL,
   `title` varchar(60) NOT NULL,
@@ -44,6 +45,7 @@ CREATE TABLE IF NOT EXISTS `eps_block` (
 -- DROP TABLE IF EXISTS `eps_slide`;
 CREATE TABLE IF NOT EXISTS `eps_slide` (
   `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `group` smallint(5) unsigned NOT NULL,
   `title` varchar(60) NOT NULL,
   `titleColor` char(10) NOT NULL,
   `mainLink` varchar(255) NOT NULL,
@@ -57,9 +59,6 @@ CREATE TABLE IF NOT EXISTS `eps_slide` (
   `buttonTarget` varchar(30) NOT NULL,
   `summary` text NOT NULL,
   `createdDate` datetime NOT NULL,
-  `createdBy` char(30) NOT NULL,
-  `editedDate` datetime NOT NULL,
-  `editedBy` char(30) NOT NULL,
   `order` smallint(5) unsigned NOT NULL DEFAULT '0',
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
@@ -225,6 +224,7 @@ CREATE TABLE IF NOT EXISTS `eps_layout` (
   `page` varchar(30) NOT NULL,
   `region` varchar(30) NOT NULL,
   `blocks` text NOT NULL,
+  `imported` enum('no', 'doing', 'finished') NOT NULL DEFAULT 'no',
   `lang` char(30) NOT NULL,
   UNIQUE KEY `layout` (`template`,`page`,`region`,`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
