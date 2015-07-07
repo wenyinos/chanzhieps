@@ -553,10 +553,12 @@ class uiModel extends model
      */
     public function exportTheme($template, $theme)
     {
-        $themeInfo  = fixer::input('post')->get();
+        $themeInfo  = fixer::input('post')
+            ->add('type', 'theme')
+            ->get();
         
         $yaml  = $this->app->loadClass('spyc')->dump($themeInfo);      
-        file_put_contents($this->exportPath . 'doc.yaml', $yaml);
+        file_put_contents($this->exportDocPath . $this->app->getClientLang() . '.yaml', $yaml);
         
         $this->exportDB($template, $theme);
         if(dao::isError()) return false;
@@ -575,16 +577,19 @@ class uiModel extends model
      */
     public function initExportPath($template, $theme)
     {
-        $this->exportPath     = $this->app->getTmpRoot() . 'theme' . DS . $template . DS . $theme . DS;
-        $this->exportDocPath  = $this->exportPath . 'doc' . DS;
-        $this->exportDbPath   = $this->exportPath . 'db' . DS;
-        $this->exportFilePath = $this->exportPath . 'files' . DS;
+        $this->exportPath       = $this->app->getTmpRoot() . 'theme' . DS . $template . DS . $theme . DS;
+        $this->exportDocPath    = $this->exportPath . 'doc' . DS;
+        $this->exportDbPath     = $this->exportPath . 'db' . DS;
+        $this->exportCssPath    = $this->exportPath . 'www' . DS . 'data' . DS . 'css' . DS . $template . DS . $theme . DS;
+        $this->exportSourcePath = $this->exportPath . 'www' . DS . 'data' . DS . 'upload' . DS;
 
-        if(!is_dir($this->exportPath))     mkdir($this->exportPath, 0777, true);
-        if(!is_dir($this->exportDbPath))   mkdir($this->exportDbPath, 0777, true);
-        if(!is_dir($this->exportFilePath)) mkdir($this->exportFilePath, 0777, true);
+        if(!is_dir($this->exportPath))       mkdir($this->exportPath, 0777, true);
+        if(!is_dir($this->exportDocPath))    mkdir($this->exportDocPath, 0777, true);
+        if(!is_dir($this->exportDbPath))     mkdir($this->exportDbPath, 0777, true);
+        if(!is_dir($this->exportCssPath))    mkdir($this->exportCssPath, 0777, true);
+        if(!is_dir($this->exportSourcePath)) mkdir($this->exportSourcePath, 0777, true);
 
-        return (is_dir($this->exportPath) and is_dir($this->exportDbPath) and is_dir($this->exportFilePath));
+        return (is_dir($this->exportPath) and is_dir($this->exportDbPath) and is_dir($this->exportSourcePath) and is_dir($this->exportCssPath));
     }
 
     /**
@@ -632,12 +637,13 @@ class uiModel extends model
     public function exportFiles($template, $theme)
     {
         $zfile = $this->app->loadClass('zfile');
-        $customCssFile = $this->exportFilePath . 'style.css';
+        $customCssFile = $this->exportCssPath . 'style.css';
         $originCssFile = sprintf($this->config->site->ui->customCssFile, $template, $theme);
         if(!is_dir(dirname($customCssFile))) mkdir(dirname($customCssFile), '0777', true);
         copy($originCssFile, $customCssFile);
+
         $sourcePath = $this->app->getWwwRoot() . 'data' . DS . 'upload' . DS . 'source';
-        if(is_dir($sourcePath)) $zfile->copyDir($sourcePath, $this->exportFilePath . 'source');
+        if(is_dir($sourcePath)) $zfile->copyDir($sourcePath, $this->exportSourcePath . 'source');
 
         $this->app->loadClass('pclzip', true);
         $archive = new PclZip(dirname($this->exportPath) . DS . $theme . '.zip');
