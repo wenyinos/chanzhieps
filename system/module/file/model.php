@@ -93,6 +93,31 @@ class fileModel extends model
     }
 
     /**
+     * Get source list. 
+     * 
+     * @param  string $type 
+     * @param  string $orderBy 
+     * @param  object $pager 
+     * @access public
+     * @return array
+     */
+    public function getSourceList($type = '', $orderBy = 'id_desc', $pager = null)
+    {
+        $files = $this->dao->setAutoLang(false)->select('*')
+            ->from(TABLE_FILE)
+            ->where('objectType')->in('source,slide')
+            ->beginIf($type == '')->andWhere('extension')->in($type)->fi() 
+            ->orderBy($orderBy) 
+            ->page($pager)
+            ->fetchAll('id');
+
+        /* Process these files. */
+        foreach($files as $objectFiles) $this->processFile($objectFiles);
+
+        return $files;
+    }
+
+    /**
      * processFile just is image and add smallURL and middleURL if necessary.
      *
      * @param  object $file
@@ -183,7 +208,7 @@ class fileModel extends model
 
             if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions, true))
             {
-                $this->compressImage($this->savePath . $file['pathname']);
+                if($this->get->objectType != 'source') $this->compressImage($this->savePath . $file['pathname']);
                 $imageSize = $this->getImageSize($this->savePath . $file['pathname']);
             }
 
@@ -294,6 +319,8 @@ class fileModel extends model
                 $file['title']     = $purifier->purify($file['title']);
                 $file['size']      = $size[$id];
                 $file['tmpname']   = $tmp_name[$id];
+                if($this->get->objectType == 'source') $file['pathname'] = "source/" . substr($filename, 0, strlen($filename) - strlen($this->getExtension($filename)) - 1) . '.' . $this->getExtension($filename);
+                if($this->get->objectType == 'source') $file['title']    = str_replace('.' . $file['extension'], '', $filename);
                 $files[] = $file;
             }
         }
@@ -308,6 +335,8 @@ class fileModel extends model
             $file['title']     = $purifier->purify($file['title']);
             $file['size']      = $size;
             $file['tmpname']   = $tmp_name;
+            if($this->get->objectType == 'source') $file['pathname'] = "source/" . substr($filename, 0, strlen($filename) - strlen($this->getExtension($filename)) - 1) . '.' . $this->getExtension($filename);
+            if($this->get->objectType == 'source') $file['title']    = str_replace('.' . $file['extension'], '', $filename);
             return array($file);
         }
         return $files;
@@ -371,6 +400,8 @@ class fileModel extends model
     public function setSavePath()
     {
         $savePath = $this->app->getDataRoot() . "upload/" . date('Ym/', $this->now);
+        if($this->get->objectType == 'source') $savePath = $this->app->getDataRoot() . "upload/source/";
+
         if(!file_exists($savePath)) 
         {
             @mkdir($savePath, 0777, true);
@@ -475,6 +506,29 @@ class fileModel extends model
         {
             return false;
         }
+    }
+
+    /**
+     * Source edit.  
+     * 
+     * @param  int    $fileID 
+     * @param  string $filename 
+     * @access public
+     * @return bool|string
+     */
+    public function sourceEdit($fileID, $filename)
+    {
+        $file = $this->getByID($fileID);
+        $newPath = "source/{$filename}.{$file->extension}";
+        $uploadPath = $this->app->getDataRoot() . 'upload/';
+        rename($uploadPath . $file->pathname, $uploadPath . $newPath);
+        $this->dao->update(TABLE_FILE)
+            ->set('title')->eq($filename)
+            ->set('pathname')->eq($newPath)
+            ->where('id')->eq($fileID)
+            ->exec();
+        if(!dao::isError()) return true;
+        return false;
     }
  
     /**

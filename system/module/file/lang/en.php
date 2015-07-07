@@ -17,6 +17,7 @@ $lang->file->download      = 'Download';
 $lang->file->edit          = 'Edit';
 $lang->file->primary       = 'Primary';
 $lang->file->setPrimary    = 'Set as primary';
+$lang->file->name          = 'name';
 $lang->file->cancelPrimary = 'Cancel primary';
 $lang->file->deny          = 'Deny';
 $lang->file->allow         = 'Allow';
@@ -24,6 +25,10 @@ $lang->file->toggle        = 'Toggle';
 $lang->file->label         = 'Label';
 $lang->file->lblInfo       = '<i>(Type:%s, Size:%s, Added at: %s，Downloads: %s)</i>';
 $lang->file->limit         = "(<span class='text-danger'>Less than 2M</span>)";
+$lang->file->source        = 'Source';
+$lang->file->sourceList    = 'Source list';
+$lang->file->uploadSource  = 'Upload source';
+$lang->file->sourceURI     = 'URL';
 
 $lang->file->id        = 'ID';
 $lang->file->title     = 'Title';
@@ -43,9 +48,15 @@ $lang->file->edit        = 'Edit';
 $lang->file->editFile    = 'Change file';
 $lang->file->fileManager = 'File manager';
 
+$lang->file->viewType[0] = 'Image';
+$lang->file->viewType[1] = 'List';
+
 $lang->file->errorUnwritable  = 'Upload directory is not writable.';
 $lang->file->noAccess         = 'Access is not allowed.';
 $lang->file->invalidParameter = 'Parameter is not valid.';
 $lang->file->unWritable       = 'Directory does not exist.';
 $lang->file->uploadForbidden  = 'Upload function is forbidden.';
 $lang->file->sizeLimit        = "<p class='text-danger'>The size of file must be less than %sM</p>";
+$lang->file->sameName         = "Have a same name file";
+$lang->file->nameEmpty        = "File name con'n empty";
+$lang->file->evilChar         = "Please remove evil char";
