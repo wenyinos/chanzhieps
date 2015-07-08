@@ -37,9 +37,9 @@ class slide extends control
         {
             if($this->post->backgroundType == 'image')
             {   
-                if(empty($_FILES)) $this->send(array('result' => 'fail', 'message' => $this->lang->slide->noImageSelected));
+                if(empty($_FILES) and empty($_POST['image'])) $this->send(array('result' => 'fail', 'message' => $this->lang->slide->noImageSelected));
 
-                $image = $this->slide->uploadImage($groupID);
+                $image = empty($_POST['image']) ? $this->slide->uploadImage($groupID) : $this->post->image;
                 if(!$image) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
             }
             else

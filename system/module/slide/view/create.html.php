@@ -88,8 +88,15 @@ foreach (explode('|', $lang->colorPlates) as $value)
         </tr>
         <tr class='bg-section' data-id='image'>
           <th><?php echo $lang->slide->background->image;?></th>
-          <td><?php echo html::file('files[]', "tabindex='-1' class='form-control'");?></td>
-          <td colspan='2'><label class='text-info'><?php echo $lang->slide->suitableSize;?></label></td>
+          <td>
+            <?php echo html::file('files[]', "tabindex='-1' class='form-control'");?>
+            <?php echo html::input('image', '', "class='form-control image-select'");?>
+          </td>
+          <td colspan='2'>
+            <?php echo html::a($this->createLink('file', 'selectfile', 'path=source/&type=image&callback=fileHide'), $lang->slide->sourceImage, "class='btn btn-primary' id='selectSource' data-toggle='modal'")?>
+            <?php echo html::a('javascript:void(0)', $lang->slide->upload, "class='btn btn-primary' onclick='fileShow()' id='uploadFile'")?>
+            <label class='text-info'><?php echo $lang->slide->suitableSize;?></label>
+          </td>
         </tr>
         <tr>
           <th><?php echo $lang->slide->button;?></th>

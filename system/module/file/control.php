@@ -486,4 +486,96 @@ class file extends control
             if($a['order'] == 'name') return strcmp($a['filename'], $b['filename']);
         }
     }
+
+    /**
+     * Select file. 
+     * 
+     * @param  string $path 
+     * @param  string $type 
+     * @param  string $callback 
+     * @access public
+     * @return void
+     */
+    public function selectFile($path = '', $type = 'image', $callback = '')
+    {
+        $callback  = $callback == '' ? "''" : "$callback()";
+        $fileTypes = array('gif', 'jpg', 'jpeg', 'png', 'bmp');
+        $order = 'name';
+
+        if($path == '')
+        {
+            $currentPath    = $this->file->savePath;
+            $currentUrl     = $this->file->webPath;
+            $currentDirPath = '';
+            $moveupDirPath  = '';
+        }
+        else
+        {
+            $currentPath    = $this->file->savePath . '/' . $path;
+            $currentUrl     = $this->file->webPath . $path;
+            $currentDirPath = $path;
+            $moveupDirPath  = preg_replace('/(.*?)[^\/]+\/$/', '$1', $currentDirPath);
+        }
+
+        if(preg_match('/\.\./', $currentPath)) die($this->lang->file->noAccess);
+        if(!preg_match('/\/$/', $currentPath)) die($this->lang->file->invalidParameter);
+        if(!file_exists($currentPath) || !is_dir($currentPath)) die($this->lang->file->unWritable);
+
+        $fileList = array();
+        if($fileDir = opendir($currentPath))
+        {
+            $i = 0;
+            while(($filename = readdir($fileDir)) !== false)
+            {
+                if($filename{0} == '.') continue;
+                $file = $currentPath . $filename;
+                $fileList[$i]['filename'] = $filename;
+                if(is_dir($file))
+                {
+                    $fileList[$i]['isDir']    = true;
+                    $fileList[$i]['hasFile']  = (count(scandir($file)) > 2);
+                    $fileList[$i]['fileSize'] = 0;
+                    $fileList[$i]['isPhoto']  = false;
+                    $fileList[$i]['filetype'] = '';
+                }
+                else
+                {
+                    $fileExtension = $this->file->getExtension($file);
+                    if(!in_array($fileExtension, $this->config->file->editorExtensions, true))
+                    {
+                        unset($fileList[$i]);
+                        continue;
+                    }
+
+                    $fileList[$i]['isDir']    = false;
+                    $fileList[$i]['hasFile']  = false;
+                    $fileList[$i]['fileSize'] = filesize($file);
+                    $fileList[$i]['dirPath']  = '';
+                    $fileList[$i]['isPhoto']  = in_array($fileExtension, $fileTypes);
+                    $fileList[$i]['filetype'] = $fileExtension;
+                    $fileList[$i]['filename'] = $filename . "?fromSpace=y";
+                }
+
+                $fileList[$i]['datetime'] = date('Y-m-d H:i:s', filemtime($file));
+                $fileList[$i]['order']    = $order;
+                $i++;
+            }
+            closedir($fileDir);
+        }
+
+        usort($fileList, "file::sort");
+
+        $result = array();
+        $result['moveupDirPath']  = $moveupDirPath;
+        $result['currentDirPath'] = $currentDirPath;
+        $result['currentUrl']     = $currentUrl;
+        $result['totalCount']     = count($fileList);
+        $result['fileList']       = $fileList;
+
+        $this->view->title    = $this->lang->file->source;
+        $this->view->result   = $result;
+        $this->view->type     = $type;
+        $this->view->callback = $callback;
+        $this->display();
+    }
 }

@@ -19,6 +19,7 @@ $lang->slide->summary    = 'Summary';
 $lang->slide->label      = 'Label';
 $lang->slide->button     = 'Button';
 $lang->slide->newWindow  = 'New window';
+$lang->slide->upload     = 'Upload';
 
 $lang->slide->background = new stdclass();
 
@@ -35,6 +36,7 @@ $lang->slide->height      = 'Height';
 $lang->slide->url         = 'URL';
 $lang->slide->buttonUrl   = 'Button Url';
 $lang->slide->buttonColor = 'Button Color';
+$lang->slide->sourceImage = 'Source image';
 
 $lang->slide->sort     = 'Order';
 $lang->slide->admin    = 'Admin';
