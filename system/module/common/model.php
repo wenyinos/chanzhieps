@@ -818,6 +818,7 @@ class commonModel extends model
 
         if(file_exists($okFile) and time() - filemtime($okFile) > 3600)
         {
+            @unlink($okFile);
             $this->session->set('okFileName', helper::createRandomStr(4, $skip = '0-9A-Z') . '.txt');
             $okFile = $this->app->getTmpRoot() . $this->session->okFileName;
         }
