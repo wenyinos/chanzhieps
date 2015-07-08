@@ -142,10 +142,10 @@ $lang->site->defaultTip        = '站点维护中……';
 $lang->site->icpTip            = '';
 
 $lang->site->customizableList = new stdclass();
-$lang->site->customizableList->article = '文章列表';
-$lang->site->customizableList->product = '产品列表';
-$lang->site->customizableList->blog    = '博客列表';
-$lang->site->customizableList->forum   = '论坛列表';
-$lang->site->customizableList->reply   = '回帖列表';
-$lang->site->customizableList->message = '留言列表';
-$lang->site->customizableList->comment = '评论列表';
+$lang->site->customizableList->article = '文章列表数量';
+$lang->site->customizableList->product = '产品列表数量';
+$lang->site->customizableList->blog    = '博客列表数量';
+$lang->site->customizableList->forum   = '论坛列表数量';
+$lang->site->customizableList->reply   = '回帖列表数量';
+$lang->site->customizableList->message = '留言列表数量';
+$lang->site->customizableList->comment = '评论列表数量';

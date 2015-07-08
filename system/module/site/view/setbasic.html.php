@@ -31,6 +31,21 @@
           <td><?php echo html::radio('type', $lang->site->typeList, isset($this->config->site->type) ? $this->config->site->type : 'portal', "class='checkbox'");?></td><td></td>
         </tr>
         <tr>
+          <th><?php echo $lang->site->lang;?></th>
+          <td><?php echo html::checkbox('lang', $config->langs, isset($this->config->site->lang) ? $this->config->site->lang : 'zh-cn');?></td><td></td>
+        </tr>
+        <tr id='twTR'>
+          <th><?php echo $lang->site->twContent;?></th>
+          <td><?php echo html::checkbox('cn2tw', array(1 => $lang->site->cn2tw), isset($this->config->site->cn2tw) ? $this->config->site->cn2tw : '');?></td><td></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->site->defaultLang;?></th>
+          <td>
+            <?php echo html::select('defaultLang', $config->langs, isset($this->config->site->defaultLang) ? $this->config->site->defaultLang : $this->app->getClientLang(), "class='form-control'");?>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
           <th><?php echo $lang->site->name;?></th> 
           <td><?php echo html::input('name', $this->config->site->name, "class='form-control'");?></td><td></td>
         </tr>

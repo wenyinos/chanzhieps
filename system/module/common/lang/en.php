@@ -127,7 +127,7 @@ $lang->menu->page     = 'Page|article|admin|type=page';
 $lang->menu->forum    = 'Forum|forum|admin|';
 $lang->menu->site     = 'Site|site|setbasic|';
 $lang->menu->ui       = 'UI|ui|setlogo|';
-$lang->menu->company  = 'Company|company|setbasic|';
+$lang->menu->security = 'Security|site|setsecurity|';
 $lang->menu->user     = 'User|user|admin|';
 $lang->menu->order    = 'Order|order|admin|';
 $lang->menu->feedback = 'Feedback|message|admin|';
@@ -140,12 +140,13 @@ $lang->menuGroups->mail    = 'site';
 $lang->menuGroups->nav     = 'site';
 $lang->menuGroups->links   = 'site';
 $lang->menuGroups->wechat  = 'site';
-$lang->menuGroups->group   = 'site';
+$lang->menuGroups->group   = 'security';
 $lang->menuGroups->block   = 'ui';
 $lang->menuGroups->slide   = 'ui';
 $lang->menuGroups->tree    = 'article';
 $lang->menuGroups->message = 'feedback';
 $lang->menuGroups->search  = 'site';
+$lang->menuGroups->company = 'site';
 
 /* Menu of article module. */
 $lang->article = new stdclass();
@@ -188,9 +189,6 @@ $lang->user->menu->all    = 'All Users|user|admin|';
 $lang->user->menu->sina   = 'Weibo Users|user|admin|provider=sina';
 $lang->user->menu->wechat = 'Wechat Users|user|admin|provider=wechat';
 $lang->user->menu->qq     = 'QQ Users|user|admin|provider=qq';
-$lang->user->menu->admin  = 'Admin Users|user|admin|admin=1';
-$lang->user->menu->group  = array('link' => 'Group|group|browse|', 'alias' => 'managepriv,managemember');
-$lang->user->menu->log    = 'Login logs|user|adminlog|';
 
 /* Menu of comment module. */
 $lang->feedback = new stdclass();
@@ -217,23 +215,28 @@ $lang->forum->menu->update = 'Update|forum|update|';
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
 $lang->site->menu->basic      = 'Basic|site|setbasic|';
-$lang->site->menu->lang       = 'Language|site|setlang|';
+$lang->site->menu->basic      = 'Basic|company|setbasic|';
+$lang->site->menu->contact    = 'Contact|company|setcontact|';
 $lang->site->menu->nav        = 'Navigation|nav|admin|';
-$lang->site->menu->security   = 'Security|site|setsecurity|';
-$lang->site->menu->upload     = 'Uploads|site|setupload|';
-$lang->site->menu->sensitive  = 'Sensitive words|site|setsensitive|';
 $lang->site->menu->tag        = 'Tags|tag|admin|';
-$lang->site->menu->recPerPage = 'Set Records Per Page|site|setrecperpage|';
-$lang->site->menu->oauth      = 'Open OAuth|site|setoauth|';
 $lang->site->menu->link       = 'Links|links|admin|';
+$lang->site->menu->oauth      = 'Open OAuth|site|setoauth|';
 $lang->site->menu->mail       = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
 $lang->site->menu->wechat     = array('link' => 'Wechat|wechat|admin|', 'alias' => 'create,setresponse');
 $lang->site->menu->search     = 'Update Search Index|search|buildindex|';
+$lang->site->menu->sensitive  = 'Sensitive words|site|setsensitive|';
+
+/* Menu of security module. */
+$lang->security = new stdclass();
+$lang->security->menu = new stdclass();
+$lang->security->menu->basic  = 'Basic|site|setsecurity|';
+$lang->security->menu->upload = 'Uploads|site|setupload|';
+$lang->security->menu->admin  = 'Admin User|user|admin|admin=1';
+$lang->security->menu->group  = array('link' => 'Group|group|browse|', 'alias' => 'managepriv,managemember');
+$lang->security->menu->log    = 'Login log|user|adminlog|';
 
 /* Menu of company module. */
-$lang->company->menu = new stdclass();
-$lang->company->menu->basic   = 'Basic|company|setbasic|';
-$lang->company->menu->contact = 'Contact|company|setcontact|';
+$lang->company->menu = $lang->site->menu;
 
 $lang->cart    = new stdclass();
 $lang->order   = new stdclass();
@@ -286,7 +289,7 @@ $lang->links->menu = $lang->site->menu;
 
 /* Menu of group module. */
 $lang->group = new stdclass();
-$lang->group->menu = $lang->user->menu;
+$lang->group->menu = $lang->security->menu;
 
 /* Menu of package module. */
 $lang->package = new stdclass();

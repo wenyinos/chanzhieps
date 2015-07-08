@@ -204,13 +204,27 @@ class ui extends control
      */
     public function others()
     {
+        /* Get configs of list number. */
+        $this->app->loadConfig('article');
+        $this->app->loadConfig('product');
+        if(strpos($this->config->site->modules, 'blog') !== false) $this->app->loadConfig('blog');
+        if(strpos($this->config->site->modules, 'message') !== false) $this->app->loadConfig('message');
+        if(strpos($this->config->site->modules, 'forum') !== false) 
+        {
+            $this->app->loadConfig('forum');
+            $this->app->loadConfig('reply');
+        }
+
         if(!empty($_POST))
         {
-            $setting = fixer::input('post')->get();
 
-            $result = $this->loadModel('setting')->setItems('system.common.ui', $setting);
+            $setting = fixer::input('post')->get('productView,QRCode');
+            $result  = $this->loadModel('setting')->setItems('system.common.ui', $setting);
+            if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
 
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('others')));
+            $setting = fixer::input('post')->remove('productView,QRCode')->get();
+            $result  = $this->loadModel('setting')->setItems('system.common.site', $setting, 'all');
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
 
