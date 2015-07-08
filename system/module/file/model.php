@@ -50,6 +50,7 @@ class fileModel extends model
             if($file->editor) continue;
             if($file->isVideo) continue;
             $file->title = $file->title . ".$file->extension";
+            $fileMD5 = md5_file(rtrim($this->app->getWwwRoot(), '/') . $file->fullURL);
             if($file->isImage)
             {
                 if($file->objectType == 'product') continue;
@@ -57,7 +58,12 @@ class fileModel extends model
             }
             else
             {
-                $filesHtml .= "<li class='file file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank' title='{$file->title}'") . '</li>';
+                $filesHtml .= "<li class='file file-{$file->extension}'>";
+                $filesHtml .= html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank' title='{$file->title}'");
+                $filesHtml .= "<span class='file-download'><i class='icon-download'></i> " .  $file->downloads . "</span>";
+                $filesHtml .= "<span class='file-md5'>" ;
+                $filesHtml .= html::a('javascript:void(0)', 'MD5', "class='label label-default' data-toggle='popover' data-placement='bottom' data-content='$fileMD5'");
+                $filesHtml .= '</span></li>';
             }
         }
         echo "<ul class='files-list clearfix'>" . $imagesHtml . $filesHtml . '</ul>';
