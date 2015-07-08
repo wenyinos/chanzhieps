@@ -19,4 +19,23 @@ $(document).ready(function()
             $(this).parents('tr').remove();
         }
     });
+
+    $('#image').hide();
+    $('#uploadFile').hide();
 })
+
+function fileHide()
+{
+    $('#image').attr('disabled', false);
+    $('#image').show();
+    $('#uploadFile').show();
+    $('[name*=files]').hide();
+}
+
+function fileShow()
+{
+    $('[name*=files]').show();
+    $('#image').attr('disabled', true);
+    $('#image').hide();
+    $('#uploadFile').hide();
+}

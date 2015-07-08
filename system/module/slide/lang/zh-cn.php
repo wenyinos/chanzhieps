@@ -19,6 +19,7 @@ $lang->slide->summary    = '摘要';
 $lang->slide->label      = '按钮文字';
 $lang->slide->button     = '按钮';
 $lang->slide->newWindow  = '新开窗口';
+$lang->slide->upload     = '上传';
 
 $lang->slide->background = new stdclass();
 
@@ -35,6 +36,7 @@ $lang->slide->height      = '高度';
 $lang->slide->url         = '链接';
 $lang->slide->buttonUrl   = '按钮链接';
 $lang->slide->buttonColor = '颜色';
+$lang->slide->sourceImage = '素材库图片';
 
 $lang->slide->sort     = '排序';
 $lang->slide->admin    = '幻灯片设置';
