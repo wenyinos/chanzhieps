@@ -30,12 +30,26 @@ class site extends control
                 ->setDefault('modules', '')
                 ->stripTags('pauseTip', $allowedTags)
                 ->remove('uid')
+                ->remove('lang,cn2tw,defaultLang')
                 ->get();
 
             $result = $this->loadModel('setting')->setItems('system.common.site', $setting);
+            if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
 
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setbasic')));
-            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+            $setting = fixer::input('post')
+                ->setDefault('cn2tw', 0)
+                ->join('lang', ',')
+                ->join('cn2tw', '')
+                ->get('lang,cn2tw,defaultLang');
+
+            if(empty($setting->lang) or empty($setting->defaultLang)) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+            if(strpos($setting->lang, $setting->defaultLang) === false) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+
+            $result = $this->loadModel('setting')->setItems('system.common.site', $setting, $lang = 'all');
+            $this->dao->delete()->from(TABLE_CONFIG)->where("`key`")->eq('defaultLang')->andWhere('lang')->ne('all')->exec();
+            if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+
+            $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setbasic')));
         }
 
         $this->view->title = $this->lang->site->setBasic;
@@ -61,35 +75,6 @@ class site extends control
         }
 
         $this->view->title = $this->lang->site->setsensitive;
-        $this->display();
-    }
-
-    /**
-     * Set language items. 
-     * 
-     * @access public
-     * @return void
-     */
-    public function setLang()
-    {
-        if(!empty($_POST))
-        {
-            $setting = fixer::input('post')
-                ->setDefault('cn2tw', 0)
-                ->join('lang', ',')
-                ->join('cn2tw', '')
-                ->get();
-
-            if(empty($setting->lang) or empty($setting->defaultLang)) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
-            if(strpos($setting->lang, $setting->defaultLang) === false) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
-
-            $result = $this->loadModel('setting')->setItems('system.common.site', $setting, $lang = 'all');
-            $this->dao->delete()->from(TABLE_CONFIG)->where("`key`")->eq('defaultLang')->andWhere('lang')->ne('all')->exec();
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setLang')));
-            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
-        }
-
-        $this->view->title = $this->lang->site->setLang;
         $this->display();
     }
 
@@ -131,6 +116,9 @@ class site extends control
      */
     public function setSecurity()
     {
+        $this->lang->site->menu = $this->lang->security->menu;
+        $this->lang->menuGroups->site = 'security';
+
         $captcha           = (isset($this->config->site->captcha) and ($this->config->site->captcha == 'open' and ($this->post->captcha == 'close' or $this->post->captcha == 'auto')) or ($this->config->site->captcha == 'auto' and $this->post->captcha == 'close'));
         $checkEmail        = (isset($this->config->site->checkEmail) and $this->config->site->checkEmail == 'open' and $this->post->checkEmail == 'close');
         $front             = (isset($this->config->site->front) and $this->config->site->front == 'login' and $this->post->front == 'guest');
@@ -199,38 +187,6 @@ class site extends control
     }
 
     /**
-     * Set record count of perPage for article/product/blog/thread.
-     * 
-     * @access public
-     * @return void
-     */
-    public function setRecPerPage()
-    {
-        $this->app->loadConfig('article');
-        $this->app->loadConfig('product');
-        if(strpos($this->config->site->modules, 'blog') !== false) $this->app->loadConfig('blog');
-        if(strpos($this->config->site->modules, 'message') !== false) $this->app->loadConfig('message');
-        if(strpos($this->config->site->modules, 'forum') !== false) 
-        {
-            $this->app->loadConfig('forum');
-            $this->app->loadConfig('reply');
-        }
-
-        if(!empty($_POST))
-        {
-            $setting = fixer::input('post')->get();
-
-            $result = $this->loadModel('setting')->setItems('system.common.site', $setting, 'all');
-
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
-            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
-        }
-
-        $this->view->title = $this->lang->site->setRecPerPage;
-        $this->display();
-    }
-
-    /**
      * Set upload configures.
      * 
      * @access public
@@ -238,6 +194,9 @@ class site extends control
      */
     public function setUpload()
     {
+        $this->lang->site->menu = $this->lang->security->menu;
+        $this->lang->menuGroups->site = 'security';
+
         $this->loadModel('file');
 
         if(!empty($_POST))

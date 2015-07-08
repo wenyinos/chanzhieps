@@ -142,10 +142,10 @@ $lang->site->defaultTip        = 'Under maintenance.';
 $lang->site->icpTip            = 'Only for site in China mainland';
 
 $lang->site->customizableList = new stdclass();
-$lang->site->customizableList->article = 'Article List';
-$lang->site->customizableList->product = 'Product List';
-$lang->site->customizableList->blog    = 'Blog List';
-$lang->site->customizableList->forum   = 'Thread List';
-$lang->site->customizableList->reply   = 'Reply List';
-$lang->site->customizableList->message = 'Message List';
-$lang->site->customizableList->comment = 'Comment List';
+$lang->site->customizableList->article = 'Article List Number';
+$lang->site->customizableList->product = 'Product List Number';
+$lang->site->customizableList->blog    = 'Blog List Number';
+$lang->site->customizableList->forum   = 'Thread List Number';
+$lang->site->customizableList->reply   = 'Reply List Number';
+$lang->site->customizableList->message = 'Message List Number';
+$lang->site->customizableList->comment = 'Comment List Number';

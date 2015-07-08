@@ -385,6 +385,13 @@ class user extends control
      */
     public function admin()
     {
+        /* Change menu when browse all admin user. */
+        if($this->get->admin == 1)
+        {
+            $this->lang->user->menu = $this->lang->security->menu;
+            $this->lang->menuGroups->user = 'security';
+        }
+
         $get = fixer::input('get')
             ->setDefault('recTotal', 0)
             ->setDefault('recPerPage', 10)
@@ -750,6 +757,9 @@ class user extends control
      */
     public function adminLog()
     {
+        $this->lang->user->menu = $this->lang->security->menu;
+        $this->lang->menuGroups->user = 'security';
+
         $get = fixer::input('get')
             ->setDefault('recTotal', 0)
             ->setDefault('recPerPage', 10)

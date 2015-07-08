@@ -127,7 +127,7 @@ $lang->menu->page     = '单页|article|admin|type=page';
 $lang->menu->forum    = '论坛|forum|admin|';
 $lang->menu->site     = '站点|site|setbasic|';
 $lang->menu->ui       = '界面|ui|setlogo|';
-$lang->menu->company  = '公司|company|setbasic|';
+$lang->menu->security = '安全|site|setsecurity|';
 $lang->menu->user     = '会员|user|admin|';
 $lang->menu->order    = '订单|order|admin|';
 $lang->menu->feedback = '反馈|message|admin|';
@@ -140,12 +140,13 @@ $lang->menuGroups->mail    = 'site';
 $lang->menuGroups->nav     = 'site';
 $lang->menuGroups->links   = 'site';
 $lang->menuGroups->wechat  = 'site';
-$lang->menuGroups->group   = 'user';
+$lang->menuGroups->group   = 'security';
 $lang->menuGroups->block   = 'ui';
 $lang->menuGroups->slide   = 'ui';
 $lang->menuGroups->tree    = 'article';
 $lang->menuGroups->message = 'feedback';
 $lang->menuGroups->search  = 'site';
+$lang->menuGroups->company = 'site';
 
 /* Menu of article module. */
 $lang->article = new stdclass();
@@ -188,9 +189,6 @@ $lang->user->menu->all    = '全部会员|user|admin|';
 $lang->user->menu->sina   = '微博会员|user|admin|provider=sina';
 $lang->user->menu->wechat = '微信会员|user|admin|provider=wechat';
 $lang->user->menu->qq     = 'QQ会员|user|admin|provider=qq';
-$lang->user->menu->admin  = '管理员|user|admin|admin=1';
-$lang->user->menu->group  = array('link' => '分组权限|group|browse|', 'alias' => 'managepriv,managemember');
-$lang->user->menu->log    = '登录日志|user|adminlog|';
 
 /* Menu of comment module. */
 $lang->feedback = new stdclass();
@@ -217,23 +215,28 @@ $lang->forum->menu->update = '更新数据|forum|update|';
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
 $lang->site->menu->basic      = '站点设置|site|setbasic|';
-$lang->site->menu->lang       = '语言设置|site|setlang|';
+$lang->site->menu->company    = '公司信息|company|setbasic|';
+$lang->site->menu->contact    = '联系方式|company|setcontact|';
 $lang->site->menu->nav        = '导航设置|nav|admin|';
-$lang->site->menu->security   = '安全设置|site|setsecurity|';
-$lang->site->menu->upload     = '上传设置|site|setupload|';
 $lang->site->menu->sensitive  = '敏感词设置|site|setsensitive|';
-$lang->site->menu->tag        = '关键词设置|tag|admin|';
-$lang->site->menu->recPerPage = '列表数量设置|site|setrecperpage|';
-$lang->site->menu->oauth      = '开放登录|site|setoauth|';
 $lang->site->menu->link       = '友情链接|links|admin|';
+$lang->site->menu->oauth      = '开放登录|site|setoauth|';
 $lang->site->menu->mail       = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
 $lang->site->menu->wechat     = array('link' => '微信设置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
 $lang->site->menu->search     = '更新搜索索引|search|buildindex|';
+$lang->site->menu->tag        = '关键词设置|tag|admin|';
+
+/* Menu of security module. */
+$lang->security = new stdclass();
+$lang->security->menu = new stdclass();
+$lang->security->menu->basic  = '基本设置|site|setsecurity|';
+$lang->security->menu->upload = '附件上传|site|setupload|';
+$lang->security->menu->admin  = '管理员|user|admin|admin=1';
+$lang->security->menu->group  = array('link' => '分组权限|group|browse|', 'alias' => 'managepriv,managemember');
+$lang->security->menu->log    = '登录日志|user|adminlog|';
 
 /* Menu of company module. */
-$lang->company->menu = new stdclass();
-$lang->company->menu->basic   = '公司信息|company|setbasic|';
-$lang->company->menu->contact = '联系方式|company|setcontact|';
+$lang->company->menu = $lang->site->menu;
 
 $lang->cart    = new stdclass();
 $lang->order   = new stdclass();
@@ -286,7 +289,7 @@ $lang->links->menu = $lang->site->menu;
 
 /* Menu of group module. */
 $lang->group = new stdclass();
-$lang->group->menu = $lang->user->menu;
+$lang->group->menu = $lang->security->menu;
 
 /* Menu of package module. */
 $lang->package = new stdclass();

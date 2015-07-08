@@ -42,7 +42,7 @@
             $imagesHtml .= "<span class='file-actions'>";
             $imagesHtml .= html::a(helper::createLink('file', 'sourcedelete', "id=$file->id"), "<i class='icon-trash'></i>", "class='deleter'");
             $imagesHtml .= html::a(helper::createLink('file', 'sourceedit', "id=$file->id&objectType=source"), "<i class='icon-edit'></i>", "data-toggle='modal'");
-            $imagesHtml .= html::a('javascript:void(0)', $lang->file->sourceURI, "data-toggle='popover' data-placement='bottom' data-content='$file->fullURL'");
+            $imagesHtml .= html::a('javascript:void(0)', $lang->file->sourceURI, "onclick=bootbox.alert('$file->fullURL')");
             $imagesHtml .= '</span>';
             $imagesHtml .= '</li>';
         }
