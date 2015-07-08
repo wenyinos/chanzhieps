@@ -235,7 +235,7 @@ class file extends control
             {
                 $fileName = $file->title . '.' . $file->extension;
                 $fileData = file_get_contents($file->realPath);
-                $this->sendDownHeader($fileName, $file->extension, $fileData, filesize($file->realPath));
+                $this->file->sendDownHeader($fileName, $file->extension, $fileData, filesize($file->realPath));
             }
             else
             {

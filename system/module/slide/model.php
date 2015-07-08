@@ -240,16 +240,6 @@ class slideModel extends model
         $slide = $this->getByID($id);
         $this->dao->delete()->from(TABLE_SLIDE)->where('id')->eq($id)->exec();
 
-        if($slide->backgroundType == 'color') return !dao::isError();
-
-        if(!dao::isError())
-        {
-            $pathname = str_replace('/data/upload/', '', $slide->image);
-            $file = $this->dao->select('*')->from(TABLE_FILE)->where('objectType')->eq('slide')->andWhere('pathname')->eq($pathname)->fetch();
-            $file->realPath = $this->app->getDataRoot() . 'upload/' . $file->pathname;
-            if(file_exists($file->realPath)) unlink($file->realPath);
-            $this->dao->delete()->from(TABLE_FILE)->where('id')->eq($file->id)->exec();
-            return !dao::isError();
-        }
+        return !dao::isError();
     }
 }
