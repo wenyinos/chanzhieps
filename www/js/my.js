@@ -73,5 +73,7 @@ $(document).ready(function()
     $(document).click(function(){$dockerBtn.popover('hide').removeClass('showed');}).on('click', '.popover', function(event){event.stopPropagation();});
 
     $('.article-content').breakAll('a');
+
+    $('.file-md5 a').popover();
 });
 
