@@ -307,6 +307,8 @@ class router
         $this->loadClass('front',  $static = true);
         $this->loadClass('filter', $static = true);
         $this->loadClass('dao',    $static = true);
+
+        if(RUN_MODE == 'admin' and helper::isAjaxRequest()) $this->config->debug = 2;
     }
 
     /**
