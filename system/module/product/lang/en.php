@@ -58,6 +58,8 @@ $lang->product->files        = 'Files';
 $lang->product->images       = 'Images';
 $lang->product->addToCart    = "<i class='icon icon-shopping-cart'></i> 加入购物车";
 $lang->product->count        = 'Count';
+$lang->product->comments     = 'Comments';
+$lang->product->detail       = 'Detail';
 
 $lang->product->congratulations  = "congratulations";
 $lang->product->addToCartSuccess = "Add to cart successfully.";
@@ -80,6 +82,10 @@ $lang->product->placeholder = new stdclass();
 $lang->product->placeholder->label    = "Attribute name: price, color etc";
 $lang->product->placeholder->value    = "Attribute value: $1000, red etc";
 $lang->product->placeholder->currency = "Dollar sign for price of product, \"$\" for USD dollar.";
+
+$lang->product->listMode = new stdclass();
+$lang->product->listMode->card  = "<i class='icon icon-th-large'></i> Card";
+$lang->product->listMode->list  = "<i class='icon icon-list'></i> List";
 
 $lang->product->currencyList['rmb']  = 'Renminbi Yuan';
 $lang->product->currencyList['usd']  = 'U.S.Dollar';

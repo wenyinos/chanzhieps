@@ -84,8 +84,8 @@ $lang->product->placeholder->value    = "属性值：如红色、￥1000等";
 $lang->product->placeholder->currency = "请填写产品价格的货币符号，如人民币填写：￥";
 
 $lang->product->listMode = new stdclass();
-$lang->product->listMode->card  = "<i class='icon icon-th-large'></i>图片 ";
-$lang->product->listMode->list  = "<i class='icon icon-list'></i>列表 ";
+$lang->product->listMode->card  = "<i class='icon icon-th-large'></i> 图片 ";
+$lang->product->listMode->list  = "<i class='icon icon-list'></i> 列表 ";
 
 $lang->product->currencyList['rmb']  = '人民币';
 $lang->product->currencyList['usd']  = '美元';
