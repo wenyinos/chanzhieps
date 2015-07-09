@@ -179,6 +179,7 @@ $lang->ui->menu->theme   = 'Theme|ui|settemplate|';
 $lang->ui->menu->admin   = array('link' => 'Blocks|block|admin|', 'alias' => 'create,edit');
 $lang->ui->menu->pages   = array('link' => 'Layout|block|pages|', 'alias' => 'setregion');
 $lang->ui->menu->styles  = 'Base Style|ui|setbasestyle|';
+$lang->ui->menu->js      = 'Base js|ui|setbasejs|';
 $lang->ui->menu->source  = 'Source|file|sourcebrowse|';
 $lang->ui->menu->others  = 'Others|ui|others|';
 
@@ -215,16 +216,16 @@ $lang->forum->menu->update = 'Update|forum|update|';
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
 $lang->site->menu->basic      = 'Basic|site|setbasic|';
-$lang->site->menu->basic      = 'Basic|company|setbasic|';
+$lang->site->menu->company    = 'Company|company|setbasic|';
 $lang->site->menu->contact    = 'Contact|company|setcontact|';
 $lang->site->menu->nav        = 'Navigation|nav|admin|';
-$lang->site->menu->tag        = 'Tags|tag|admin|';
+$lang->site->menu->sensitive  = 'Sensitive Words|site|setsensitive|';
 $lang->site->menu->link       = 'Links|links|admin|';
 $lang->site->menu->oauth      = 'Open OAuth|site|setoauth|';
 $lang->site->menu->mail       = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
 $lang->site->menu->wechat     = array('link' => 'Wechat|wechat|admin|', 'alias' => 'create,setresponse');
 $lang->site->menu->search     = 'Update Search Index|search|buildindex|';
-$lang->site->menu->sensitive  = 'Sensitive words|site|setsensitive|';
+$lang->site->menu->tag        = 'Tags|tag|admin|';
 
 /* Menu of security module. */
 $lang->security = new stdclass();

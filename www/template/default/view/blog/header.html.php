@@ -110,6 +110,7 @@ else
 ?>
 <![endif]-->
 <?php if(isset($this->config->site->basestyle)) css::internal($this->config->site->basestyle);?>
+<?php if(isset($this->config->site->basejs)) js::execute($this->config->site->basejs);?>
 </head>
 <body>
 <div class='page-container page-blog'>

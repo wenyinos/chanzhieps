@@ -20,6 +20,7 @@ $lang->ui->setTheme        = '主题设置';
 $lang->ui->customTheme     = '自定义主题';
 $lang->ui->setFavicon      = "Favicon设置";
 $lang->ui->setBaseStyle    = "全局样式设置";
+$lang->ui->setBaseJs       = "全局JS设置";
 $lang->ui->deleteFavicon   = "删除Favicon";
 $lang->ui->deleteLogo      = "删除Logo";
 $lang->ui->others          = "其他设置";
@@ -29,6 +30,7 @@ $lang->ui->templateName    = "模板名称";
 
 $lang->ui->deleteFavicon     = "不显示网站图标";
 $lang->ui->noStyleTag        = "请填写全局CSS样式代码，不需要&lt;style&gt;&lt;/style&gt;标签";
+$lang->ui->noJsTag           = "请填写全局JS代码，不需要&lt;script&gt;&lt;/script&gt;标签";
 $lang->ui->setLogoFailed     = "设置Logo失败";
 $lang->ui->noSelectedFile    = "获取上传图片失败，可能是图片大小超出上传限制";
 $lang->ui->notAlloweFileType = "请选择正确的%s文件";

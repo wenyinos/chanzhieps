@@ -140,6 +140,28 @@ class ui extends control
     }
 
     /**
+     * Set base js.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setBaseJs()
+    {
+        if($_POST)
+        {
+            $js = fixer::input('post')->stripTags('content', $this->config->allowedTags->admin, false)->get();
+            $return = $this->loadModel('setting')->setItems('system.common.site', array('basejs' => $js->content));
+
+            if($return) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate'=>inlink('setBaseJs')));
+            if(!$return) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+        }
+
+        $this->view->title   = $this->lang->ui->setBaseJs;
+        $this->view->content = isset($this->config->site->basejs) ? $this->config->site->basejs : '';
+        $this->display();
+    }
+
+    /**
      * Upload favicon.
      * 
      * @access public
