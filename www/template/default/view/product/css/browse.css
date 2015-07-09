@@ -12,3 +12,10 @@
 .cards-products .card-info > .views-count {position: absolute; right: 0; top: 10px; opacity: .8}
 .card > .media-wrapper{background: none;}
 .card:hover > .media-wrapper{background: none;}
+
+
+.table-list td{vertical-align:middle;}
+#modeControl a {padding: 7px; }
+#modeControl a:first-child{padding: 7px; margin-right:4px;}
+body a{outline:none;blr:expression(this.onFocus=this.blur());}
+#modeControl a.selected{background: #166EFC;color:#FFF;}
