@@ -120,6 +120,17 @@ class productModel extends model
         /* Assign desc to it's product. */
         foreach($products as $product) $product->desc = empty($product->desc) ? helper::substr(strip_tags($product->content), 250) : $product->desc;
 
+        /* Assign comments to it's product. */
+        $productList = array_keys($products);
+        $comments = $this->dao->select("objectID, count(*) as count")->from(TABLE_MESSAGE)
+            ->where('type')->eq('comment')
+            ->andWhere('objectType')->eq('product')
+            ->andWhere('objectID')->in($productList)
+            ->andWhere('status')->eq(1)
+            ->groupBy('objectID')
+            ->fetchPairs('objectID', 'count');
+        foreach($products as $product) $product->comments = isset($comments[$product->id]) ? $comments[$product->id] : 0;
+
         return $products;
     }
 
