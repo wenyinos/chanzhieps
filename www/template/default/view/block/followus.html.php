@@ -15,7 +15,7 @@ $publicList = $this->loadModel('wechat')->getList();
 <?php if(!empty($publicList)):?>
 <div id="block<?php echo $block->id;?>" class='panel panel-block hidden-sm hidden-xs <?php echo $blockClass;?>'>
   <div class='panel-heading'>
-    <strong><?php echo $block->title;?></strong>
+    <strong><?php echo $icon . $block->title;?></strong>
     <?php if(!empty($block->content->moreText) and !empty($block->content->moreUrl)):?>
     <div class='pull-right'><?php echo html::a($block->content->moreUrl, $block->content->moreText);?></div>
     <?php endif;?>
