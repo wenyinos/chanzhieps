@@ -39,5 +39,21 @@
     </li>
     <?php endforeach;?>
     <?php endif;?>
+
+    <?php if(!empty($categories)):?>
+    <?php foreach($categories as $category):?>
+    <li class='list-group-item'>
+      <span class='label label-danger'>
+        <?php echo $category->type == 'forum' ? $lang->tag->sourceList['board'] : $lang->tag->sourceList['category'];?>
+      </span>
+      <?php
+      $method = 'browse';
+      if($category->type == 'forum') $method = 'board';
+      if($category->type == 'blog')  $method = 'index';
+      echo html::a(commonModel::createFrontLink($category->type, $method, "categoryID={$category->id}", "category={$category->alias}"), $category->name, "target='_blank'");
+      ?>
+    </li>
+    <?php endforeach;?>
+    <?php endif;?>
   </ul>
 <?php include '../../common/view/footer.modal.html.php';?>

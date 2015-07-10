@@ -47,7 +47,6 @@ class tag extends control
         $articles = $this->dao->select('*')->from(TABLE_ARTICLE)->where("concat(',', keywords, ',')")->like("%,{$tag},%")->orderBy('type, id_desc')->fetchAll();
         $products = $this->dao->select('*')->from(TABLE_PRODUCT)->where("concat(',', keywords, ',')")->like("%,{$tag},%")->fetchAll();
         $nodes    = $this->dao->select('*')->from(TABLE_BOOK)->where("concat(',', keywords, ',')")->like("%,{$tag},%")->fetchAll('id');
-
         $books = $this->dao->select('*')->from(TABLE_BOOK)->fetchAll('id');
         foreach($nodes as $node)
         {
@@ -60,10 +59,13 @@ class tag extends control
             }
         }
 
-        $this->view->title    = $this->lang->tag->source;
-        $this->view->articles = $articles;
-        $this->view->products = $products;
-        $this->view->nodes    = $nodes;
+        $categories = $this->dao->select('*')->from(TABLE_CATEGORY)->where("concat(',', keywords, ',')")->like("%,{$tag},%")->fetchAll();
+
+        $this->view->title      = $this->lang->tag->source;
+        $this->view->articles   = $articles;
+        $this->view->products   = $products;
+        $this->view->nodes      = $nodes;
+        $this->view->categories = $categories;
 
         $this->display();
     }
