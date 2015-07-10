@@ -12,6 +12,7 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php js::import($jsRoot . 'less/min.js'); ?>
+<?php include 'header.html.php';?>
 <div class='panel panel-templates'>
   <div class='panel-heading'>
     <strong><?php echo $lang->ui->setTemplate;?></strong>
