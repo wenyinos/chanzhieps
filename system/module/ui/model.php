@@ -164,12 +164,20 @@ class uiModel extends model
             if(isset($fontsList[$value])) $params[$item] = $fontsList[$value];
         }
 
+        $extraCss = $params['css'];
+
         unset($params['background-image-position']);
         unset($params['navbar-background-image-position']);
         unset($params['css']);
 
+        $lessc->setFormatter("compressed");
         $lessc->setVariables($params);
-        $lessc->compileFile($lessTemplate, $cssFile);
+        $css  = '/* User custom theme style for teamplate:' . $template . ' - theme:' . $theme . '. (' . date("Y-m-d H:i:s") . ') */' . "\r\n";
+        $css .= $lessc->compileFile($lessTemplate);
+        $css .= "\r\n\r\n" . '/* Extra css for teamplate:' . $template . ' - theme:' . $theme . ' */' . "\r\n";
+        $css .= $extraCss;
+        file_put_contents($cssFile, $css);
+
         return $lessc->errors;
     }
 
