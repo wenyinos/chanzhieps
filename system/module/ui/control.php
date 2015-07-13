@@ -266,11 +266,11 @@ class ui extends control
     {
         if($_POST)
         {
-            $initResult = $this->ui->initExportPath($this->post->template, $this->post->theme);
+            $initResult = $this->ui->initExportPath($this->post->template, $this->post->theme, $this->post->code);
             if(!$initResult) $this->send(array('result' => 'fail', 'message' => 'failed to init export paths'));
 
             if(!$this->ui->checkExportParams()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $exportedFile = $this->ui->exportTheme($this->post->template, $this->post->theme);
+            $exportedFile = $this->ui->exportTheme($this->post->template, $this->post->theme, $this->post->code);
             $exportedFile = urlencode($exportedFile);
             $this->send(array('result' => 'success', 'message' => $this->lang->ui->exportedSuccess, 'locate' => inlink('downloadtheme', "theme={$exportedFile}")));
         }
