@@ -46,6 +46,20 @@ class uiModel extends model
     }
 
     /**
+     * Get themes by template.
+     * 
+     * @param  string    $template 
+     * @access public
+     * @return array
+     */
+    public function getThemesByTemplate($template)
+    {
+        $templates = $this->getTemplates();   
+        $template  = zget($templates, $template);
+        return $template['themes'];
+    }
+
+    /**
      * Get template option menu.   
      * 
      * @access public
@@ -607,12 +621,13 @@ class uiModel extends model
      */
     public function initExportPath($template, $theme, $code)
     {
-        $this->exportPath       = $this->app->getTmpRoot() . 'theme' . DS . $template . DS . $theme . DS;
+        $this->exportPath       = $this->app->getTmpRoot() . 'theme' . DS . $template . DS . $code . DS;
         $this->exportDocPath    = $this->exportPath . 'doc' . DS;
         $this->exportDbPath     = $this->exportPath . 'db' . DS;
-        $this->exportCssPath    = $this->exportPath . 'www' . DS . 'data' . DS . 'css' . DS . $template . DS . $theme . DS;
-        $this->exportSourcePath = $this->exportPath . 'www' . DS . 'data' . DS . 'source' . DS . $code;
-        $this->exportSlidePath  = $this->exportPath . 'www' . DS . 'data' . DS . 'slide';
+        $this->exportCssPath    = $this->exportPath . 'www' . DS . 'data' . DS . 'css' . DS . $template . DS . $code . DS;
+        $this->exportLessPath   = $this->exportPath . 'www' . DS . 'template' . DS . $template . DS . $code . DS;
+        $this->exportSourcePath = $this->exportPath . 'www' . DS . 'data' . DS . 'source' . DS . $code . DS;
+        $this->exportSlidePath  = $this->exportPath . 'www' . DS . 'data' . DS . 'slide' . DS;
 
         if(is_dir($this->exportPath)) $this->app->loadClass('zfile')->removeDir($this->exportPath);     
 
@@ -621,6 +636,7 @@ class uiModel extends model
         if(!is_dir($this->exportDocPath))    mkdir($this->exportDocPath,    0777, true);
         if(!is_dir($this->exportDbPath))     mkdir($this->exportDbPath,     0777, true);
         if(!is_dir($this->exportCssPath))    mkdir($this->exportCssPath,    0777, true);
+        if(!is_dir($this->exportLessPath))   mkdir($this->exportLessPath,   0777, true);
         if(!is_dir($this->exportSourcePath)) mkdir($this->exportSourcePath, 0777, true);
         if(!is_dir($this->exportSlidePath))  mkdir($this->exportSlidePath,  0777, true);
 
@@ -683,8 +699,11 @@ class uiModel extends model
         /* Copy customed css file. */
         $customCssFile = $this->exportCssPath . 'style.css';
         $originCssFile = sprintf($this->config->site->ui->customCssFile, $template, $theme);
-        if(!is_dir(dirname($customCssFile))) mkdir(dirname($customCssFile), '0777', true);
-        copy($originCssFile, $customCssFile);
+        copy($originCssFile, $this->exportCssPath . 'style.css');
+
+        /* Copy less file. */
+        $lessFile = $this->app->getWwwRoot() . 'template' . DS . $template . DS . 'theme' . DS . $theme . DS . 'style.less';
+        if(file_exists($lessFile)) copy($lessFile, $this->exportLessPath . 'style.less');
 
         /* Copy source files. */
         $sourcePath = $this->app->getWwwRoot() . 'data' . DS . 'source' . DS . $theme;
@@ -696,12 +715,12 @@ class uiModel extends model
 
         /* Zip theme files. */
         $this->app->loadClass('pclzip', true);
-        $zipFile = dirname($this->exportPath) . DS . $theme . '.zip';
+        $zipFile = dirname($this->exportPath) . DS . $code . '.zip';
         if(file_exists($zipFile)) unlink($zipFile);
-        $archive = new PclZip(dirname($this->exportPath) . DS . $theme . '.zip');
+        $archive = new PclZip($zipFile);
         $list    = $archive->create($this->exportPath, PCLZIP_OPT_REMOVE_PATH, dirname($this->exportPath));
 
         if(empty($list)) $this->app->loadClass('zfile')->removeDir(dirname($this->exportPath));
-        return dirname($this->exportPath) . DS . $theme . '.zip';
+        return $zipFile;
     }
 }
