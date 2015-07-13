@@ -160,16 +160,19 @@ class message extends control
     {
         if($_POST)
         {
-            $captchaConfig = isset($this->config->site->captcha) ? $this->config->site->captcha : 'auto';
-            $needCaptcha   = false;
-            if($captchaConfig == 'auto' and $this->loadModel('captcha')->isEvil($this->post->content)) $needCaptcha = true;
-            if($captchaConfig == 'open')  $needCaptcha = true;
-            if($captchaConfig == 'close') $needCaptcha = false;
-
-            /* If no captcha but is garbage, return the error info. */
-            if($this->post->captcha === false and $needCaptcha)
+            if(RUN_MODE == 'front')
             {
-                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->loadModel('captcha')->create4MessageReply()));
+                $captchaConfig = isset($this->config->site->captcha) ? $this->config->site->captcha : 'auto';
+                $needCaptcha   = false;
+                if($captchaConfig == 'auto' and $this->loadModel('captcha')->isEvil($this->post->content)) $needCaptcha = true;
+                if($captchaConfig == 'open')  $needCaptcha = true;
+                if($captchaConfig == 'close') $needCaptcha = false;
+
+                /* If no captcha but is garbage, return the error info. */
+                if($this->post->captcha === false and $needCaptcha)
+                {
+                    $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->loadModel('captcha')->create4MessageReply()));
+                }
             }
 
             $replyID = $this->message->reply($messageID);

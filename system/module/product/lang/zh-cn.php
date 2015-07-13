@@ -58,6 +58,8 @@ $lang->product->files        = '附件';
 $lang->product->images       = '图片';
 $lang->product->addToCart    = "<i class='icon icon-shopping-cart'></i> 加入购物车";
 $lang->product->count        = '数量';
+$lang->product->comments     = '评论';
+$lang->product->detail       = '查看详情';
 
 $lang->product->congratulations  = "恭喜";
 $lang->product->addToCartSuccess = "成功加入购物车。";
@@ -80,6 +82,10 @@ $lang->product->placeholder = new stdclass();
 $lang->product->placeholder->label    = "属性名称：如颜色、价格等";
 $lang->product->placeholder->value    = "属性值：如红色、￥1000等";
 $lang->product->placeholder->currency = "请填写产品价格的货币符号，如人民币填写：￥";
+
+$lang->product->listMode = new stdclass();
+$lang->product->listMode->card  = "<i class='icon icon-th-large'></i> 图片 ";
+$lang->product->listMode->list  = "<i class='icon icon-list'></i> 列表 ";
 
 $lang->product->currencyList['rmb']  = '人民币';
 $lang->product->currencyList['usd']  = '美元';

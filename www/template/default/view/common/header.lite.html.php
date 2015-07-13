@@ -101,6 +101,7 @@ if(!empty($sina->widget)) js::import('http://tjs.sjs.sinajs.cn/open/api/js/wb.js
 $this->block->printRegion($layouts, 'all', 'header');
 
 if(isset($this->config->site->basestyle)) css::internal($this->config->site->basestyle);
+if(isset($this->config->site->basejs)) js::execute($this->config->site->basejs);
 ?>
 </head>
 <body>

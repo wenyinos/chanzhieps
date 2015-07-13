@@ -179,6 +179,7 @@ $lang->ui->menu->theme   = '模板设置|ui|settemplate|';
 $lang->ui->menu->admin   = array('link' => '区块管理|block|admin|', 'alias' => 'create,edit');
 $lang->ui->menu->pages   = array('link' => '布局设置|block|pages|', 'alias' => 'setregion');
 $lang->ui->menu->styles  = '全局样式|ui|setbasestyle|';
+$lang->ui->menu->js      = '全局js|ui|setbasejs|';
 $lang->ui->menu->source  = '素材库|file|sourcebrowse|';
 $lang->ui->menu->others  = '其他设置|ui|others|';
 
