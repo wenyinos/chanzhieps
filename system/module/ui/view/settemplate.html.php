@@ -25,7 +25,7 @@
   $templateRoot = $webRoot . 'template/' . $code . '/'
   ?>
   <div class='col-card'>
-    <div class="card-template card<?php if($isCurrent) echo ' current';?>" data-template='<?php echo $code;?>'data-theme='<?php echo $themeName;?>' data-url='<?php commonModel::printLink('ui', 'settheme', "template={$code}&theme={$themeName}") ?>'>
+    <div class="card-template card<?php if($isCurrent) echo ' current';?>" data-template='<?php echo $code;?>'data-theme='<?php echo $themeName;?>' data-url='<?php inlink('settheme', "template={$code}&theme={$themeName}") ?>'>
       <i class='icon-ok teamplate-choosed'></i>
       <div class='template-img'><?php echo html::image($templateRoot . 'theme/' . $themeName . '/preview.png');?></div>
       <div class='card-heading'>
@@ -33,7 +33,7 @@
         <small class='text-muted'><?php echo $lang->ui->template->author . $lang->colon . $template['author'];?></small>
       </div>
       <div class='card-actions'>
-        <button class='btn btn-apply-template<?php if($isCurrent) echo ' btn-success disabled';?>' type='button' data-url='<?php commonModel::printLink('ui', 'settemplate', "template={$code}&theme={$themeName}")?>' data-current='<i class="icon-ok"></i> <?php echo $lang->ui->template->current;?>' data-default='<?php echo $lang->ui->template->apply?>'><?php echo $isCurrent ? "<i class='icon-ok'></i> {$lang->ui->template->current}" : $lang->ui->template->apply?></button>
+        <button class='btn btn-apply-template<?php if($isCurrent) echo ' btn-success disabled';?>' type='button' data-url='<?php inlink('settemplate', "template={$code}&theme={$themeName}")?>' data-current='<i class="icon-ok"></i> <?php echo $lang->ui->template->current;?>' data-default='<?php echo $lang->ui->template->apply?>'><?php echo $isCurrent ? "<i class='icon-ok'></i> {$lang->ui->template->current}" : $lang->ui->template->apply?></button>
       </div>
       <?php if(!empty($desc)):?>
       <div class="card-content"><div class="template-desc"><?php echo $desc;?></div></div>
