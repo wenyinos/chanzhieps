@@ -14,14 +14,6 @@
 <?php include '../../common/view/codeeditor.html.php';?>
 <?php js::import($jsRoot . 'less/min.js'); ?>
 <div class='panel panel-templates'>
-  <div class='panel-heading'>
-    <strong><?php echo $lang->ui->setTemplate;?></strong>
-    <div class='panel-actions'>
-      <?php commonModel::printLink('package', 'upload', '', $lang->ui->installTemplate, "class='btn btn-primary' data-toggle='modal' data-width='600'")?>
-      <?php commonModel::printLink('ui', 'exportTheme', '', $lang->ui->exportTheme, "class='btn btn-primary' data-toggle='modal' data-width='600'")?>
-    </div>
-  </div>
-</div>
 <div class='cards cards-templates' data-template='<?php echo $this->config->template->name?>' data-theme='<?php echo $this->config->template->theme?>'>
   <?php $customThemePriv = commonModel::hasPriv('ui', 'customTheme');?>
   <?php foreach($templates as $code => $template):?>
@@ -33,7 +25,7 @@
   $templateRoot = $webRoot . 'template/' . $code . '/'
   ?>
   <div class='col-card'>
-    <div class="card-template card<?php if($isCurrent) echo ' current';?>" data-template='<?php echo $code;?>'data-theme='<?php echo $themeName;?>' data-url='<?php echo inlink('settheme', "template={$code}&theme={$themeName}") ?>'>
+    <div class="card-template card<?php if($isCurrent) echo ' current';?>" data-template='<?php echo $code;?>'data-theme='<?php echo $themeName;?>' data-url='<?php commonModel::printLink('ui', 'settheme', "template={$code}&theme={$themeName}") ?>'>
       <i class='icon-ok teamplate-choosed'></i>
       <div class='template-img'><?php echo html::image($templateRoot . 'theme/' . $themeName . '/preview.png');?></div>
       <div class='card-heading'>
@@ -41,7 +33,7 @@
         <small class='text-muted'><?php echo $lang->ui->template->author . $lang->colon . $template['author'];?></small>
       </div>
       <div class='card-actions'>
-        <button class='btn btn-apply-template<?php if($isCurrent) echo ' btn-success disabled';?>' type='button' data-url='<?php echo inlink('settemplate', "template={$code}&theme={$themeName}")?>' data-current='<i class="icon-ok"></i> <?php echo $lang->ui->template->current;?>' data-default='<?php echo $lang->ui->template->apply?>'><?php echo $isCurrent ? "<i class='icon-ok'></i> {$lang->ui->template->current}" : $lang->ui->template->apply?></button>
+        <button class='btn btn-apply-template<?php if($isCurrent) echo ' btn-success disabled';?>' type='button' data-url='<?php commonModel::printLink('ui', 'settemplate', "template={$code}&theme={$themeName}")?>' data-current='<i class="icon-ok"></i> <?php echo $lang->ui->template->current;?>' data-default='<?php echo $lang->ui->template->apply?>'><?php echo $isCurrent ? "<i class='icon-ok'></i> {$lang->ui->template->current}" : $lang->ui->template->apply?></button>
       </div>
       <?php if(!empty($desc)):?>
       <div class="card-content"><div class="template-desc"><?php echo $desc;?></div></div>
@@ -54,13 +46,13 @@
           $currentClass = ($isCurrent and $config->template->theme == $theme) ? ' current' : '';
           if($custom) $currentClass .= ' custom';
 
-          $url = inlink('setTemplate', "template={$code}&theme={$theme}&custom={$custom}");
+          $url = $this->createLink('ui', 'setTemplate', "template={$code}&theme={$theme}&custom={$custom}");
           ?>
           <div class='theme<?php echo $currentClass;?>' data-url='<?php echo $url;?>' data-theme='<?php echo $theme;?>'>
             <div class='theme-card'>
               <i class='icon-ok icon'></i>
               <?php if($custom and $customThemePriv):?>
-              <?php echo html::a(inlink('customTheme', "theme={$theme}&template={$code}"), "<span class='icon-cog'></span> {$lang->ui->custom}", "class='btn btn-primary btn-custom' data-toggle='modal' data-type='ajax' data-backdrop='true'") ?>
+              <?php commonModel::printLink('ui', 'customTheme', "theme={$theme}&template={$code}", "<span class='icon-cog'></span> {$lang->ui->custom}", "class='btn btn-primary btn-custom' data-toggle='modal' data-type='ajax' data-backdrop='true'") ?>
               <?php endif;?>
               <div class='theme-img'><?php echo html::image($templateRoot . 'theme/' . $theme . '/preview.png');?></div>
               <div class='theme-name text-center'><strong><?php echo $name;?></strong></div>
