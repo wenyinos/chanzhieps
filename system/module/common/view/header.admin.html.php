@@ -23,8 +23,10 @@
 </nav>
 
 <div class="clearfix row-main">
+  <?php $moduleName = $this->moduleName; ?>
+  <?php if($moduleName != 'ui' && $lang->menuGroups->$moduleName != 'ui'): ?>
   <?php $moduleMenu = commonModel::createModuleMenu($this->moduleName);?>
-  <?php if($this->moduleName != 'ui' and ($moduleMenu or !empty($treeModuleMenu))):?>
+  <?php if($moduleMenu or !empty($treeModuleMenu)):?>
   <div class='col-md-2'>
     <div class="leftmenu affix hiddden-xs hidden-sm">
       <?php if($moduleMenu) echo $moduleMenu;?>
@@ -41,4 +43,7 @@
     </div>
   </div>
   <div class='col-md-10'>
+  <?php endif;?>
+  <?php else:?>
+    <?php include '../../ui/view/header.html.php';?>
   <?php endif;?>

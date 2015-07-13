@@ -13,7 +13,6 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/codeeditor.html.php';?>
 <?php js::import($jsRoot . 'less/min.js'); ?>
-<?php include 'header.html.php';?>
 <div class='panel panel-templates'>
   <div class='panel-heading'>
     <strong><?php echo $lang->ui->setTemplate;?></strong>
@@ -38,7 +37,7 @@
       <i class='icon-ok teamplate-choosed'></i>
       <div class='template-img'><?php echo html::image($templateRoot . 'theme/' . $themeName . '/preview.png');?></div>
       <div class='card-heading'>
-        <h4><?php echo $template['name']?></h4>
+        <h4 class='template-name'><?php echo $template['name']?></h4>
         <small class='text-muted'><?php echo $lang->ui->template->author . $lang->colon . $template['author'];?></small>
       </div>
       <div class='card-actions'>

@@ -41,7 +41,13 @@ $(document).ready(function()
                 $this.addClass('current');
 
                 $tpl.find('.current-theme-tip strong').text($this.find('.theme-name strong').text());
-                $tpl.find('.template-img img').attr('src', $this.find('.theme-img img').attr('src'));
+
+                var $menu = $('#menu');
+                $menu.find('.menu-theme-img').attr('src', $this.find('.theme-img img').attr('src'));
+                $menu.find('.menu-template-name').text($tpl.find('.template-name').text());
+                $menu.find('.menu-theme-name').text($this.find('.theme-name').text());
+
+                if(window.refreshThemePicker) window.refreshThemePicker($tpl.data('template'), $this.data('theme'));
             }
             else
             {

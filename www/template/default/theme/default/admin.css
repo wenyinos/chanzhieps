@@ -621,3 +621,40 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
 .icon-rotate-270:before {display: inline-block; -webkit-transform: rotate(270deg); -moz-transform: rotate(270deg); -ms-transform: rotate(270deg); -o-transform: rotate(270deg); transform: rotate(270deg); filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);}
 .icon-rotate-180:before {display: inline-block; -webkit-transform: rotate(180deg); -moz-transform: rotate(180deg); -ms-transform: rotate(180deg); -o-transform: rotate(180deg); transform: rotate(180deg); filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);}
 .icon-rotate-90:before {display: inline-block; -webkit-transform: rotate(90deg); -moz-transform: rotate(90deg); -ms-transform: rotate(90deg); -o-transform: rotate(90deg); transform: rotate(90deg); filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);}
+
+/* menu */
+#menu {margin: -20px -10px 15px; border-bottom: 1px solid #ddd; height: 41px;}
+#menu .nav {float: left;}
+#menu .nav > li {float: left; position: relative; padding: 5px;}
+
+#menu .nav > li > a {padding: 5px;}
+#menu .nav > li > a > .icon, #menu .dropdown-menu > li > a > .icon  {display: inline-block; width: 20px; text-align: center;}
+#menu .nav > li.nav-item-primary {background-color: #ebf2f9;}
+
+#menu .dropdown-menu > li > a  {padding-left: 15px;}
+#menu .nav > li .dropdown-menu { margin-top: 0;}
+#menu .nav > li > a:hover {background-color: #ddd; color: #232323;}
+#menu .nav > li.active > a {background-color: #ebf2f9; font-weight: bold;}
+#menu .nav > li > a:active, #menu .nav > li > a:focus { background-color: #fff;}
+#menu .nav > li.divider {margin: 0 5px; padding: 0; width: 1px; height: 40px; background-color: #ddd;}
+#menu .nav > li.divider.angle {background: #fff; width: 10px; margin: 0; position: relative;}
+#menu .nav > li.divider.angle:before, #menu .nav > li.divider.angle:after {position: absolute; content: ' '; display: block; width: 0; height: 0; top: 0; left: 0; border-style: solid; border-width: 20px 0 20px 10px; border-color: transparent transparent transparent #cdcdcd; z-index: 1;}
+#menu .nav > li.divider.angle:after {z-index: 2; left: -1px; border-color: transparent transparent transparent #fff;}
+#menu .nav > li.nav-item-primary + li.divider.angle:after { border-left-color: #ebf2f9;}
+#menu > .pull-right { margin-right: 15px;}
+#menu > .pull-right > .btn { position: relative; top: 4px;}
+
+#menu .theme-picker-dropdown {min-width: 450px; padding-right: 5px; padding-bottom: 0;}
+#menu .theme-picker {display: table; width: 100%;}
+#menu .menu-templates {display: table-cell; width: 30%; border-right: 1px solid #ddd; min-width: 150px; vertical-align: top;}
+#menu .menu-themes-list {display: table-cell; vertical-align: top;}
+#menu .menu-theme-preview {display: table-cell; width: 128px; vertical-align: top;}
+#menu .menu-themes {margin-left: -1px; border-left: 1px solid #ddd; display: none}
+#menu .menu-themes.show {display: block;}
+#menu .theme-picker .nav {float: none;}
+#menu .theme-picker .nav > li {float: none; padding: 0;}
+#menu .theme-picker .nav > li > a {padding: 5px 10px; position: relative;}
+#menu .theme-picker .nav > li.hover > a {background-color: #e5e5e5}
+#menu .theme-picker .nav > li.active > a:before, #menu .theme-picker .nav > li.hover > a:before {font-family: ZenIcon; content: '\e64f'; color: #999; position: absolute; display: block; width: 20px; height: 20px; text-align: center; line-height: 20px; right: 5px; top: 5px; font-size: 14px;}
+#menu .theme-picker .nav > li.active > a:before {content: '\e60d'}
+#menu .theme-picker-footer {height: 38px; border-top: 1px solid #ddd; background-color: #ebf2f9; line-height: 34px; padding: 1px 10px; margin-right: -5px;}
