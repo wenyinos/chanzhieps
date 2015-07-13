@@ -33,7 +33,7 @@ class messageModel extends model
      */
     public function getByAccount($account, $pager)
     {
-         return $this->dao->select('*')->from(TABLE_MESSAGE)
+        return $this->dao->select('*')->from(TABLE_MESSAGE)
             ->where('`to`')->eq($account)
             ->orderBy('id_desc')
             ->page($pager)
@@ -267,7 +267,7 @@ class messageModel extends model
         $reply = fixer::input('post')
             ->add('objectType', $message->type == 'reply' ? $message->objectType : $message->type)
             ->add('objectID', $message->id)
-            ->add('to', $message->from)
+            ->add('to', $message->account)
             ->add('type', 'reply')
             ->add('date', helper::now())
             ->add('status', '0')
