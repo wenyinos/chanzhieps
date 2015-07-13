@@ -25,13 +25,13 @@
               $themesList   = '';
               ?>
               <li class='menu-template <?php if($isCurrent) echo 'active';?>' data-template='<?php echo $code; ?>'>
-                <?php echo html::a(inlink('settemplate', "template={$code}&theme={$themeName}"), $template['name']) ?>
+                <?php commonModel::printLink('ui', 'settemplate', "template={$code}&theme={$themeName}", $template['name']) ?>
               </li>
               <?php
               foreach($template['themes'] as $theme => $name)
               {
                   $currentClass = ($isCurrent and $currentTheme == $theme) ? ' active' : '';
-                  $themesList .= "<li class='menu-theme {$currentClass}' data-theme='{$theme}'>" . html::a(inlink('setTemplate', "template={$code}&theme={$theme}"), $name) . '</li>';
+                  $themesList .= "<li class='menu-theme {$currentClass}' data-theme='{$theme}'>" . html::a($this->createLink('ui', 'setTemplate', "template={$code}&theme={$theme}"), $name) . '</li>';
               }
               ?>
               <?php $templateThemes .= "<ul class='menu-themes nav" . ($isCurrent ? ' show' : '') . "' data-template='{$code}'>" . $themesList . '</ul>'; ?>
@@ -47,8 +47,8 @@
         </div>
         <div class='theme-picker-footer'>
           <div class='pull-right'>
-            <?php echo html::a(inlink('customTheme', "theme={$currentTheme}&template={$currentTemplate}"), '<i class="icon-cog"></i> ' . $lang->ui->customtheme, 'class="btn btn-link"')?>
-            <?php echo html::a(inlink('setTemplate'), '<i class="icon-cogs"></i> ' . $lang->ui->setTemplate, 'class="btn btn-link"')?>
+            <?php commonModel::printLink('ui', 'customTheme', "theme={$currentTheme}&template={$currentTemplate}", '<i class="icon-cog"></i> ' . $lang->ui->customtheme, 'class="btn btn-link"')?>
+            <?php commonModel::printLink('ui', 'setTemplate', '', '<i class="icon-cogs"></i> ' . $lang->ui->setTemplate, 'class="btn btn-link"')?>
           </div>
           <?php echo $lang->ui->currentTheme ?>： <span class='menu-template-name'><?php echo $templates[$config->template->name]['name'];?></span> <i class="icon icon-angle-right"></i> <span class='menu-theme-name'><?php echo $templates[$config->template->name]['themes'][$currentTheme]?></span>
         </div>
