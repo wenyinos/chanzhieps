@@ -24,7 +24,7 @@
 
 <div class="clearfix row-main">
   <?php $moduleMenu = commonModel::createModuleMenu($this->moduleName);?>
-  <?php if($moduleMenu or !empty($treeModuleMenu)):?>
+  <?php if($this->moduleName != 'ui' and ($moduleMenu or !empty($treeModuleMenu))):?>
   <div class='col-md-2'>
     <div class="leftmenu affix hiddden-xs hidden-sm">
       <?php if($moduleMenu) echo $moduleMenu;?>

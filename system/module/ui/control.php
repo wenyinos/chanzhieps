@@ -66,11 +66,13 @@ class ui extends control
             $errors = $this->ui->createCustomerCss($template, $theme, $params);
             if(!empty($errors)) $this->send(array('result' => 'fail', 'message' => $errors));
             $setting       = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true): array();
-            $postedSetting = fixer::input('post')->remove('template,theme,css')->get();
+            $postedSetting = fixer::input('post')->remove('template,theme')->get();
 
             $setting[$template][$theme] = $postedSetting;
 
-            $result = $this->loadModel('setting')->setItems('system.common.template', array('custom' => helper::jsonEncode($setting)) );
+            a($postedSetting);
+
+            $result = $this->loadModel('setting')->setItems('system.common.template', array('custom' => helper::jsonEncode($setting)));
             $this->loadModel('setting')->setItems('system.common.template', array('customVersion' => time()));
             $this->send(array('result' => 'success', 'message' => $this->lang->ui->themeSaved));
         }
