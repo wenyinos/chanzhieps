@@ -70,8 +70,6 @@ class ui extends control
 
             $setting[$template][$theme] = $postedSetting;
 
-            a($postedSetting);
-
             $result = $this->loadModel('setting')->setItems('system.common.template', array('custom' => helper::jsonEncode($setting)));
             $this->loadModel('setting')->setItems('system.common.template', array('customVersion' => time()));
             $this->send(array('result' => 'success', 'message' => $this->lang->ui->themeSaved));
