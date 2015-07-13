@@ -84,6 +84,13 @@ class slideModel extends model
             ->checkIF($this->post->backgroundType == 'color', 'height', 'ge', 100)
             ->exec();
 
+        if($image) 
+        {
+            $slideID = $this->dao->lastInsertId();
+            $pathname = str_replace('/data/', '', $image);
+            $this->dao->update(TABLE_FILE)->set('objectID')->eq($slideID)->where('pathname')->eq($pathname)->exec();
+        }
+
         return !dao::isError();
     }
 
@@ -116,6 +123,12 @@ class slideModel extends model
             ->checkIF($this->post->backgroundType == 'color', 'height', 'ge', 100)
             ->where('id')->eq($id)
             ->exec();
+
+        if($image) 
+        {
+            $pathname = str_replace('/data/', '', $image);
+            $this->dao->update(TABLE_FILE)->set('objectID')->eq($id)->where('pathname')->eq($pathname)->exec();
+        }
 
         return !dao::isError();
     }
@@ -155,46 +168,59 @@ class slideModel extends model
     {
         $fileTitles = array();
         $imageSize  = array('width' => 0, 'height' => 0);
-        $maxSlideID = $this->dao->select('max(`id`) as maxID')->from(TABLE_SLIDE)->fetch('maxID');
 
-        $files = $this->getUpload($groupID);
+        $files = $this->getUpload();
         foreach($files as $id => $file)
         {   
-            $savePath = $this->app->getDataRoot() . 'upload/';
+            $file['objectType'] = 'slide';
+            $file['addedBy']    = $this->app->user->account;
+            $file['addedDate']  = helper::now();
+            $file['lang']       = 'all';
+            $this->dao->insert(TABLE_FILE)->data($file, $skip = 'tmpname')->exec();
+            $fileID = $this->dao->lastInsertId();
+            $file['title']    = $groupID . '_' .$fileID;
+            $file['pathname'] = 'slides/' . $file['title'] . '.' . $file['extension'];
+
+            $dataRoot = $this->app->getDataRoot();
             if(strpos($this->config->file->allowed, ',' . $file['extension'] . ',') === false)
             {
-                if(!move_uploaded_file($file['tmpname'], $savePath . $file['pathname'] . '.txt')) return false;
+                if(!move_uploaded_file($file['tmpname'], $dataRoot . $file['pathname'] . '.txt'))
+                {
+                    $this->dao->delete()->from(TABLE_FILE)->where('id')->eq($fileID)->exec();
+                    return false;
+                }
                 $file['pathname'] .= '.txt';
                 $file = $this->file->saveZip($file);
             }
             else
             {
-                if(!move_uploaded_file($file['tmpname'], $savePath . $file['pathname'])) return false;
+                if(!move_uploaded_file($file['tmpname'], $dataRoot . $file['pathname']))
+                {
+                    $this->dao->delete()->from(TABLE_FILE)->where('id')->eq($fileID)->exec();
+                    return false;
+                }
             }          
 
             if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions, true))
             {
-                $imageSize = $this->file->getImageSize($savePath . $file['pathname']);
+                $imageSize = $this->file->getImageSize($dataRoot . $file['pathname']);
             }
 
-            $file['objectType'] = 'slide';
-            $file['objectID']   = $maxSlideID + 1;
-            $file['addedBy']    = $this->app->user->account;
-            $file['addedDate']  = helper::now();
-            $file['width']      = $imageSize['width'];
-            $file['height']     = $imageSize['height'];
-            $file['lang']       = 'all';
-            unset($file['tmpname']);
-            $this->dao->insert(TABLE_FILE)->data($file)->exec();
-            $fileTitles[$this->dao->lastInsertId()] = $file['title'];
+            $file['width']  = $imageSize['width'];
+            $file['height'] = $imageSize['height'];
+
+            $this->dao->update(TABLE_FILE)->data($file, $skip = 'tmpname')->where('id')->eq($fileID)->exec();
+
+            $fileTitles[$fileID] = $file['title'];
         }
+
         $this->loadModel('setting')->setItems('system.common.site', array('lastUpload' => time()));
 
         if(!$fileTitles) return false; 
 
         $imageIdList = array_keys($fileTitles);
         $image = $this->dao->select('*')->from(TABLE_FILE)->where('id')->eq($imageIdList[0])->fetch(); 
-        $image->webPath = '/data/upload/' . $image->pathname;
+        $image->webPath = '/data/' . $image->pathname;
 
         return $image->webPath;
     }
@@ -205,11 +231,8 @@ class slideModel extends model
      * @access public
      * @return array
      */
-    public function getUpload($groupID)
+    public function getUpload()
     {
-        $maxFileID  = $this->dao->select('max(`id`) as maxID')->from(TABLE_FILE)->fetch('maxID');
-        $title = 'group' . $groupID . '_slide' . ($maxFileID + 1);
-
         $files = array();
         if(!isset($_FILES['files'])) return $files;
         if(!$this->loadModel('file')->canUpload()) return $files;
@@ -220,8 +243,6 @@ class slideModel extends model
             if(empty($filename)) continue;
             if(!validater::checkFileName($filename)) continue;
             $file['extension'] = $this->file->getExtension($filename);
-            $file['pathname']  = 'source/' . $title . '.' . $file['extension'];
-            $file['title']     = $title;
             $file['size']      = $size[$id];
             $file['tmpname']   = $tmp_name[$id];
             $files[] = $file;
