@@ -99,6 +99,8 @@ $lang->user->activateFail      = 'Failed activate.';
 $lang->user->pullSuccess       = 'Get wechat users successfully';
 $lang->user->wrongPwd          = 'Wrong password';
 $lang->user->checkEmailSuccess = 'Check email successfully';
+$lang->user->sendRecoverEmail  = 'Send recover password email.';
+$lang->user->resetSuccess      = 'Reset password successed, please login';
 
 $lang->user->forbidUser = 'Manage user';
 $lang->user->forbidDate = array();
@@ -141,10 +143,9 @@ $lang->user->resetPassword->failed     = "Please input your correct mail";
 
 $lang->user->resetmail = new stdclass();
 $lang->user->resetmail->subject  = 'Modify password';
-$lang->user->resetmail->notice   = 'System letter, please do not reply';
 $lang->user->resetmail->account  = 'Hello,'; 
-$lang->user->resetmail->resetUrl = 'Please click the link to change your password:';
-$lang->user->resetmail->reset    = 'Reset Key:'; 
+$lang->user->resetmail->resetUrl = 'You have requested a reset password operation in %s(%s). Please click the link to change your password:';
+$lang->user->resetmail->notice   = 'System letter, please do not reply';
 
 $lang->user->oauth = new stdclass();
 $lang->user->oauth->common       = 'OAuth';

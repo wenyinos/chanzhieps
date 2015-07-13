@@ -99,6 +99,8 @@ $lang->user->activateFail      = '解除禁用失败';
 $lang->user->pullSuccess       = '获取微信会员成功';
 $lang->user->wrongPwd          = '密码错误';
 $lang->user->checkEmailSuccess = '邮箱绑定成功';
+$lang->user->sendRecoverEmail  = '发送重置邮件';
+$lang->user->resetSuccess      = '重置密码成功，请用新密码登录';
 
 $lang->user->forbidUser = '禁用管理';
 $lang->user->forbidDate = array();
@@ -140,11 +142,10 @@ $lang->user->resetPassword->success    = "密码更改链接已经发送到您�
 $lang->user->resetPassword->failed     = "您的密保邮箱错误，请重新输入";
 
 $lang->user->resetmail = new stdclass();
-$lang->user->resetmail->subject  = '密码修改';
-$lang->user->resetmail->notice   = '系统发信，请勿回复';
-$lang->user->resetmail->account  = '尊敬的用户'; 
-$lang->user->resetmail->resetUrl = '请点击下面的链接，进行密码修改：'; 
-$lang->user->resetmail->reset    = '重置码：'; 
+$lang->user->resetmail->subject  = '重置密码';
+$lang->user->resetmail->account  = '你好，'; 
+$lang->user->resetmail->resetUrl = '您在%s（%s）请求了重置密码操作，请点击下面的链接，进行重置密码：'; 
+$lang->user->resetmail->notice   = '系统发信，请勿回复（如果您没有进行操作，请忽略此邮件）';
 
 $lang->user->oauth = new stdclass();
 $lang->user->oauth->common       = '开放登录';

@@ -66,11 +66,11 @@ class ui extends control
             $errors = $this->ui->createCustomerCss($template, $theme, $params);
             if(!empty($errors)) $this->send(array('result' => 'fail', 'message' => $errors));
             $setting       = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true): array();
-            $postedSetting = fixer::input('post')->remove('template,theme,css')->get();
+            $postedSetting = fixer::input('post')->remove('template,theme')->get();
 
             $setting[$template][$theme] = $postedSetting;
 
-            $result = $this->loadModel('setting')->setItems('system.common.template', array('custom' => helper::jsonEncode($setting)) );
+            $result = $this->loadModel('setting')->setItems('system.common.template', array('custom' => helper::jsonEncode($setting)));
             $this->loadModel('setting')->setItems('system.common.template', array('customVersion' => time()));
             $this->send(array('result' => 'success', 'message' => $this->lang->ui->themeSaved));
         }
@@ -264,11 +264,11 @@ class ui extends control
     {
         if($_POST)
         {
-            $initResult = $this->ui->initExportPath($this->post->template, $this->post->theme);
+            $initResult = $this->ui->initExportPath($this->post->template, $this->post->theme, $this->post->code);
             if(!$initResult) $this->send(array('result' => 'fail', 'message' => 'failed to init export paths'));
 
             if(!$this->ui->checkExportParams()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $exportedFile = $this->ui->exportTheme($this->post->template, $this->post->theme);
+            $exportedFile = $this->ui->exportTheme($this->post->template, $this->post->theme, $this->post->code);
             $exportedFile = urlencode($exportedFile);
             $this->send(array('result' => 'success', 'message' => $this->lang->ui->exportedSuccess, 'locate' => inlink('downloadtheme', "theme={$exportedFile}")));
         }

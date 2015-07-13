@@ -574,7 +574,7 @@ class user extends control
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
             $this->user->resetPassword($this->post->reset, $this->post->password1); 
-            $this->send(array('result' => 'success', 'locate' => inlink('login')));
+            $this->send(array('result' => 'success', 'message' => $this->lang->user->resetSuccess, 'locate' => inlink('login')));
         }
 
         if(!$this->user->checkReset($reset))

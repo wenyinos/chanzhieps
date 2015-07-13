@@ -48,6 +48,7 @@ $lang->ui->favicon->help  = "帮助";
 
 $lang->ui->template = new stdclass();
 $lang->ui->template->name            = '名称';
+$lang->ui->template->code            = '代码';
 $lang->ui->template->version         = '版本';
 $lang->ui->template->author          = '作者';
 $lang->ui->template->charge          = '费用';
@@ -79,6 +80,7 @@ $lang->ui->customtheme = '自定义主题';
 $lang->ui->custom      = '自定义';
 $lang->ui->themeSaved  = '主题配置已保存';
 $lang->ui->unWritable  = "不能生成样式文件，请检查 %s目录的权限";
+$lang->ui->codeHolder  = "字母加数字组合成的主题代号";
 
 $lang->ui->theme = new stdclass();
 $lang->ui->theme->reset                                = '重置为默认';
@@ -88,7 +90,7 @@ $lang->ui->theme->sizeTip                              = '默认单位为像素�
 $lang->ui->theme->colorTip                             = '如: red 或 #FFF';
 $lang->ui->theme->positionTip                          = '如: 100px, 50%, left, top, center';
 $lang->ui->theme->backImageTip                         = '图片地址，如: image.jpg';
-$lang->ui->theme->customCss                            = '自定义样式表';
+$lang->ui->theme->extraStyle                           = '附加样式表';
 $lang->ui->theme->borderStyleList['none']              = '无边框';
 $lang->ui->theme->borderStyleList['solid']             = '实线';
 $lang->ui->theme->borderStyleList['dashed']            = '虚线';
