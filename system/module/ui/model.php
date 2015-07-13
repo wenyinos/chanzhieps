@@ -172,10 +172,14 @@ class uiModel extends model
 
         $lessc->setFormatter("compressed");
         $lessc->setVariables($params);
+        
+        $extraCss = $lessc->compile($extraCss);
+
         $css  = '/* User custom theme style for teamplate:' . $template . ' - theme:' . $theme . '. (' . date("Y-m-d H:i:s") . ') */' . "\r\n";
         $css .= $lessc->compileFile($lessTemplate);
         $css .= "\r\n\r\n" . '/* Extra css for teamplate:' . $template . ' - theme:' . $theme . ' */' . "\r\n";
         $css .= $extraCss;
+
         file_put_contents($cssFile, $css);
 
         return $lessc->errors;
