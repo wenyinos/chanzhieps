@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php include '../../common/view/codeeditor.html.php';?>
 <?php js::import($jsRoot . 'less/min.js'); ?>
 <?php include 'header.html.php';?>
 <div class='panel panel-templates'>

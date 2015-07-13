@@ -72,7 +72,10 @@ $(document).ready(function()
         }
     });
 
-    $('.nav-tabs li > a').first().trigger('click');
+    $('.nav-tabs li > a').on('show.bs.tab show.zui.tab', function()
+    {
+        $form.attr('data-tab', $(this).attr('href').replace('#', ''));
+    }).first().trigger('click');
 
     var $resetThemeBtn = $('#resetTheme');
     $resetThemeBtn.click(function()
@@ -107,5 +110,7 @@ $(document).ready(function()
             $('#' + name).val($('[data-sid="' + name + '-1"]').val() + ' ' + $('[data-sid="' + name + '-2"]').val());
         });
     });
+
+    $('.codeeditor').codeeditor();
 });
 
