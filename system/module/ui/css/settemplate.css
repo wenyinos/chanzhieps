@@ -69,3 +69,9 @@ linear-gradient(45deg, #999 25%, transparent 25%, transparent 75%, #999 75%, #99
 
 #resetTheme {color: #D2322D}
 #resetTheme:hover {color: #A82824}
+
+#cssTab {position: relative;}
+#cssTab .text-tip {position: absolute; right: 0; bottom: -40px}
+
+.modal-dialog.editor-fullscreen .form-footer {position: fixed; left: 15px; bottom: 5px;}
+.modal-dialog.editor-fullscreen #cssTab .text-tip {position: fixed; right: 15px; bottom: 10px;}
