@@ -48,6 +48,7 @@ $lang->ui->favicon->help  = "帮助";
 
 $lang->ui->template = new stdclass();
 $lang->ui->template->name            = '名称';
+$lang->ui->template->code            = '代码';
 $lang->ui->template->version         = '版本';
 $lang->ui->template->author          = '作者';
 $lang->ui->template->charge          = '费用';
@@ -79,6 +80,7 @@ $lang->ui->customtheme = '自定义主题';
 $lang->ui->custom      = '自定义';
 $lang->ui->themeSaved  = '主题配置已保存';
 $lang->ui->unWritable  = "不能生成样式文件，请检查 %s目录的权限";
+$lang->ui->codeHolder  = "字母加数字组合成的主题代号";
 
 $lang->ui->theme = new stdclass();
 $lang->ui->theme->reset                                = '重置为默认';

@@ -537,6 +537,12 @@ class uiModel extends model
         echo $html;
     }
 
+    /**
+     * Check export params.
+     * 
+     * @access public
+     * @return bool
+     */
     public function checkExportParams()
     {
         $this->lang->exportlang = $this->lang->ui->template;
@@ -583,7 +589,9 @@ class uiModel extends model
         $this->exportCssPath    = $this->exportPath . 'www' . DS . 'data' . DS . 'css' . DS . $template . DS . $theme . DS;
         $this->exportSourcePath = $this->exportPath . 'www' . DS . 'data' . DS . 'upload' . DS;
 
-        if(!is_dir($this->exportPath))       mkdir($this->exportPath, 0777, true);
+        if(is_dir($this->exportPath)) $this->app->loadClass('zfile')->removeDir($this->exportPath);     
+        mkdir($this->exportPath, 0777, true);
+
         if(!is_dir($this->exportDocPath))    mkdir($this->exportDocPath, 0777, true);
         if(!is_dir($this->exportDbPath))     mkdir($this->exportDbPath, 0777, true);
         if(!is_dir($this->exportCssPath))    mkdir($this->exportCssPath, 0777, true);
@@ -614,7 +622,7 @@ class uiModel extends model
         $fields[TABLE_BLOCK]  = "id as originID,`template`,`type`,`title`,`content`,`lang`";
         $fields[TABLE_LAYOUT] = "*, 'doing' as imported";
         $fields[TABLE_CONFIG] = "owner, module, section, `key`, `value`, lang";
-        $fields[TABLE_SLIDE]  = "title,titleColor,mainLink,backgroundType,backgroundColor,height,image,label,buttonClass,buttonUrl,buttonTarget,summary,lang,`order`";
+        $fields[TABLE_SLIDE]  = "title,`group`,titleColor,mainLink,backgroundType,backgroundColor,height,image,label,buttonClass,buttonUrl,buttonTarget,summary,lang,`order`";
 
         $replaces = array();
         $replaces[TABLE_BLOCK]  = true;
@@ -646,6 +654,8 @@ class uiModel extends model
         if(is_dir($sourcePath)) $zfile->copyDir($sourcePath, $this->exportSourcePath . 'source');
 
         $this->app->loadClass('pclzip', true);
+        $zipFile = dirname($this->exportPath) . DS . $theme . '.zip';
+        if(file_exists($zipFile)) unlink($zipFile);
         $archive = new PclZip(dirname($this->exportPath) . DS . $theme . '.zip');
         $list    = $archive->create($this->exportPath, PCLZIP_OPT_REMOVE_PATH, dirname($this->exportPath));
 

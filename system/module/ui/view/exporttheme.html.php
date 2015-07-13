@@ -14,6 +14,20 @@
       </td>
     </tr>
     <tr>
+      <th><?php echo $lang->ui->template->name;?></th>
+      <td>
+        <div class='required required-wrapper'></div>
+        <?php echo html::input('name', '', "class='form-control'");?>
+      </td>
+    </tr>
+    <tr>
+      <th><?php echo $lang->ui->template->code;?></th>
+      <td>
+        <div class='required required-wrapper'></div>
+        <?php echo html::input('code', '', "placeholder='{$lang->ui->codeHolder}' class='form-control'");?>
+      </td>
+    </tr>
+    <tr>
       <th><?php echo $lang->ui->template->author;?></th>
       <td>
         <div class='required required-wrapper'></div>
