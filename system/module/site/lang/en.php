@@ -105,7 +105,7 @@ $lang->site->captchaList['open']  = 'Open';
 $lang->site->captchaList['auto']  = 'Automatic';
 
 $lang->site->validateTypes = new stdclass();
-$lang->site->validateTypes->okFile = 'ok.txt';
+$lang->site->validateTypes->okFile = 'file';
 $lang->site->validateTypes->email  = 'email';
 
 $lang->site->schemeList = array();
