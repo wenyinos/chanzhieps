@@ -32,6 +32,16 @@ class uiModel extends model
             if(empty($config)) continue;
             $templates[$templateName] = $config;
         }
+
+        $importedTemes = $this->dao->select('*')->from(TABLE_PACKAGE)->where('type')->eq('theme')->fetchGroup('templateCompatible');
+        foreach($importedTemes as $template => $themes)
+        {
+            foreach($themes as $theme)
+            {
+                if(!isset($templates[$template])) continue;
+                $templates[$template]['themes'][$theme->code] = $theme->name;
+            }
+        }
         return $templates;
     }
 
