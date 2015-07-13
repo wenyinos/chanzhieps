@@ -1,4 +1,4 @@
-<?php $templates       = $this->ui->getTemplates(); ?>
+<?php $templates       = $this->loadModel('ui')->getTemplates(); ?>
 <?php $currentTemplate = $this->config->template->name; ?>
 <?php $currentTheme    = $this->config->template->theme; ?>
 <nav id='menu'>
