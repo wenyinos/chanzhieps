@@ -40,7 +40,7 @@
     </div>
     <?php endforeach;?>
     <div class='tab-pane theme-control-tab-pane' id='cssTab'>
-      <?php echo html::textarea('css', isset($css) ? $css : '', "rows=20 class='form-control codeeditor' data-mode='css' data-height='250'");?>
+      <?php echo html::textarea('css', isset($setting['css']) ? $setting['css'] : '', "rows=20 class='form-control codeeditor' data-mode='css' data-height='250'");?>
     </div>
   </div>
   <div class="form-footer">
