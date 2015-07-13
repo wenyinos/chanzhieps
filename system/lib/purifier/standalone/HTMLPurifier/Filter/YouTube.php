@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * change log.
+ * Fix for chanzhi. 20150713 chujilu@cnezsoft.com
+ *
+ */
 class HTMLPurifier_Filter_YouTube extends HTMLPurifier_Filter
 {
 
@@ -16,10 +20,16 @@ class HTMLPurifier_Filter_YouTube extends HTMLPurifier_Filter
      */
     public function preFilter($html, $config, $context)
     {
-        $pre_regex = '#<object[^>]+>.+?' .
-            'http://www.youtube.com/((?:v|cp)/[A-Za-z0-9\-_=]+).+?</object>#s';
-        $pre_replace = '<span class="youtube-embed">\1</span>';
-        return preg_replace($pre_regex, $pre_replace, $html);
+        $pre_regex_list = array();
+        $pre_regex_list[] = '/.*<embed.*src="(http\:\/\/player\.youku\.com\/player\.php\/[\/\-_A-Za-z0-9=]*\/v.swf)".*\/>.*/i';
+        $pre_regex_list[] = '/.*<embed.*src="(http\:\/\/player\.video\.qiyi\.com\/[\/\-_A-Za-z0-9=]*\.swf[\/\-_A-Za-z0-9=]*)".*\/>.*/i';
+        $pre_regex_list[] = '/.*<embed.*src="(http\:\/\/www\.tudou\.com\/[\/\-\&_A-Za-z0-9=]*\/v\.swf)".*\/>.*/i';
+        $pre_regex_list[] = '/.*<embed.*src="(http\:\/\/share\.vrs\.sohu\.com\/[\/\-_A-Za-z0-9=]*\/v.swf[\/\-\&_A-Za-z0-9=]*)".*\/>.*/i';
+        $pre_regex_list[] = '/.*<embed.*src="(http\:\/\/static\.video\.qq\.com\/TPout\.swf\?[\/\-\&_A-Za-z0-9=]*)".*\/>.*/i';
+        $pre_regex_list[] = '/.*<embed.*src="(http\:\/\/player\.ku6\.com\/[\/\-\._A-Za-z0-9=]*\/v\.swf)".*\/>.*/i';
+        $pre_replace = '<span class="chanzhi-embed">$1</span>';
+        foreach($pre_regex_list as $pre_regex) $html = preg_replace($pre_regex, $pre_replace, $html);
+        return $html;
     }
 
     /**
@@ -30,7 +40,7 @@ class HTMLPurifier_Filter_YouTube extends HTMLPurifier_Filter
      */
     public function postFilter($html, $config, $context)
     {
-        $post_regex = '#<span class="youtube-embed">((?:v|cp)/[A-Za-z0-9\-_=]+)</span>#';
+        $post_regex = '/<span class="chanzhi-embed">(.*)<\/span>/i';
         return preg_replace_callback($post_regex, array($this, 'postFilterCallback'), $html);
     }
 
@@ -51,10 +61,10 @@ class HTMLPurifier_Filter_YouTube extends HTMLPurifier_Filter
     {
         $url = $this->armorUrl($matches[1]);
         return '<object width="425" height="350" type="application/x-shockwave-flash" ' .
-        'data="http://www.youtube.com/' . $url . '">' .
-        '<param name="movie" value="http://www.youtube.com/' . $url . '"></param>' .
+        'data="' . $url . '">' .
+        '<param name="movie" value="' . $url . '"></param>' .
         '<!--[if IE]>' .
-        '<embed src="http://www.youtube.com/' . $url . '"' .
+        '<embed src="' . $url . '"' .
         'type="application/x-shockwave-flash"' .
         'wmode="transparent" width="425" height="350" />' .
         '<![endif]-->' .

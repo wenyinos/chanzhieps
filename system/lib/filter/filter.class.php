@@ -573,6 +573,7 @@ class fixer
         global $app;
         $app->loadClass('purifier', true);
         $config = HTMLPurifier_Config::createDefault();
+        $config->set('Filter.YouTube', 1);
 
         /* Disable caching. */
         $config->set('Cache.DefinitionImpl', null);
@@ -588,20 +589,7 @@ class fixer
 
             if(!in_array($fieldName, $this->stripedFields))
             {
-                $embedPattern = '/<embed.+?src=\'.+?\'.+>|<embed.+?src=".+?".+>/';
-                preg_match_all($embedPattern, $this->data->$fieldName, $embedList);
-                if(!empty($embedList))
-                {
-                    foreach($embedList[0] as $key => $embed) $this->data->$fieldName = str_ireplace($embed, 'chanzhi_embed_mark' . $key, $this->data->$fieldName);
-                }
-
                 if(RUN_MODE != 'admin') $this->data->$fieldName = $purifier->purify($this->data->$fieldName);
-                $this->data->$fieldName = strip_tags($this->data->$fieldName, $allowedTags);
-
-                if(!empty($embedList))
-                {
-                    foreach($embedList[0] as $key => $embed) $this->data->$fieldName = str_ireplace('chanzhi_embed_mark' . $key, $embed, $this->data->$fieldName);
-                }
             }
             $this->stripedFields[] = $fieldName;
         }

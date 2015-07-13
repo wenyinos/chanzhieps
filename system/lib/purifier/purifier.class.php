@@ -21869,5 +21869,5 @@ class HTMLPurifier_VarParser_Native extends HTMLPurifier_VarParser
     }
 }
 
-
+include_once dirname(__FILE__) . '/standalone/HTMLPurifier/Filter/YouTube.php';
 
