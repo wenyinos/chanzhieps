@@ -88,6 +88,7 @@ $lang->ui->theme->sizeTip                              = 'The default unit is pi
 $lang->ui->theme->colorTip                             = 'Such as: red or #FFF';
 $lang->ui->theme->positionTip                          = 'Such as: 100px, 50%, left, top, center';
 $lang->ui->theme->backImageTip                         = 'Image URL: image.jpg';
+$lang->ui->theme->customCss                            = 'CSS';
 $lang->ui->theme->borderStyleList['none']              = 'No Border';
 $lang->ui->theme->borderStyleList['solid']             = 'Solid';
 $lang->ui->theme->borderStyleList['dashed']            = 'Dashed';

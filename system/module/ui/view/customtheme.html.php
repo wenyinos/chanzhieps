@@ -12,6 +12,7 @@
     <?php foreach($lang->ui->groups as $group => $name):?>
     <li><?php echo html::a('#' . $group . 'Tab', $name, "data-toggle='tab' class='theme-control-tab'");?></li>
     <?php endforeach;?>
+    <li><a href='#cssTab' data-toggle='tab'><?php echo $lang->ui->theme->customCss; ?></a></li>
 
     <li class='pull-right text-right w-150px'><button type='button' id='resetTheme' class='btn btn-link btn-sm text-danger' data-success-tip='<?php echo $lang->ui->theme->resetTip?>'><?php echo $lang->ui->theme->reset?></button></li>
   </ul>
@@ -38,6 +39,9 @@
       </table>
     </div>
     <?php endforeach;?>
+    <div class='tab-pane theme-control-tab-pane' id='cssTab'>
+      <?php echo html::textarea('css', isset($css) ? $css : '', "rows=20 class='form-control codeeditor' data-mode='css' data-height='250'");?>
+    </div>
   </div>
   <div class="form-footer">
     <?php echo html::hidden('theme', $theme) . html::hidden('template', $template) . html::submitButton();?>
