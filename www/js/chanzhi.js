@@ -13,7 +13,7 @@ $.extend(
         var options = 
         {
             target  : null,
-            timeout : 30000,
+            timeout : 60000,
             dataType:'json',
             
             success: function(response)
