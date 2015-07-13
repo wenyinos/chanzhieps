@@ -1181,8 +1181,8 @@ class upgradeModel extends model
                     $oldImagePath = $this->app->getDataRoot() . 'upload/' . $oldImage->pathname;
                     if(file_exists($oldImagePath))
                     {
-                        $pathname  = 'source/group' . $group . '_slide' . $oldImage->id . '.' . $oldImage->extension;
-                        $imagePath = $this->app->getDataRoot() . 'upload/' . $pathname;
+                        $pathname  = 'slides/' . $group . '_' . $oldImage->id . '.' . $oldImage->extension;
+                        $imagePath = $this->app->getDataRoot() . $pathname;
 
                         if(copy($oldImagePath, $imagePath))
                         {
@@ -1191,7 +1191,7 @@ class upgradeModel extends model
                             $image->pathname = $pathname;
                             $this->dao->insert(TABLE_FILE)->data($image)->exec();
                         }
-                        $data->image = '/data/upload/' . $image->pathname;
+                        $data->image = '/data/' . $image->pathname;
                     }
                 }
 

@@ -11,6 +11,10 @@
  */
 $lang->ui->common       = "界面";
 
+$lang->ui->clientDesktop        = '桌面';
+$lang->ui->clientMobile         = '移动';
+$lang->ui->currentTheme         = '当前模板主题';
+
 $lang->ui->logo            = 'Logo';
 $lang->ui->setLogo         = "Logo设置";
 $lang->ui->setTemplate     = '模板设置';
@@ -91,6 +95,7 @@ $lang->ui->theme->colorTip                             = '如: red 或 #FFF';
 $lang->ui->theme->positionTip                          = '如: 100px, 50%, left, top, center';
 $lang->ui->theme->backImageTip                         = '图片地址，如: image.jpg';
 $lang->ui->theme->extraStyle                           = '附加样式表';
+$lang->ui->theme->customStyleTip                       = '附加样式支持Less语法。';
 $lang->ui->theme->borderStyleList['none']              = '无边框';
 $lang->ui->theme->borderStyleList['solid']             = '实线';
 $lang->ui->theme->borderStyleList['dashed']            = '虚线';

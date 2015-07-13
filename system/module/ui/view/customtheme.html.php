@@ -30,7 +30,7 @@
             <div class='row'>
               <?php foreach($attributes as $label => $params):?>
               <?php $value = isset($setting[$params['name']]) ? $setting[$params['name']] : '';?>
-              <div class='col-sm-3'><?php $this->ui->printFormControl($label, $params, $value);?></div>
+              <div class='col-sm-3' title='@<?php echo $params['name']?>'><?php $this->ui->printFormControl($label, $params, $value);?></div>
               <?php endforeach;?>
             </div>
           </td>
@@ -41,6 +41,7 @@
     <?php endforeach;?>
     <div class='tab-pane theme-control-tab-pane' id='cssTab'>
       <?php echo html::textarea('css', isset($setting['css']) ? $setting['css'] : '', "rows=20 class='form-control codeeditor' data-mode='css' data-height='250'");?>
+      <p class='text-info text-tip'><?php echo $lang->ui->theme->customStyleTip; ?></p>
     </div>
   </div>
   <div class="form-footer">

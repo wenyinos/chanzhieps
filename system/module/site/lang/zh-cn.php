@@ -105,7 +105,7 @@ $lang->site->captchaList['open']  = '一直启用验证码';
 $lang->site->captchaList['auto']  = '有敏感内容时自动启用验证码';
 
 $lang->site->validateTypes = new stdclass();
-$lang->site->validateTypes->okFile = 'txt文件验证';
+$lang->site->validateTypes->okFile = '文件验证';
 $lang->site->validateTypes->email  = '邮件验证码验证';
 
 $lang->site->schemeList = array();

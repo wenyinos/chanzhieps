@@ -49,15 +49,15 @@
           <th><?php echo $lang->site->name;?></th> 
           <td><?php echo html::input('name', $this->config->site->name, "class='form-control'");?></td><td></td>
         </tr>
-        <tr title="<?php echo $lang->site->domainTip;?>">
+        <tr>
           <th><?php echo $lang->site->domain;?></th> 
           <td><?php echo html::input('domain',  isset($this->config->site->domain) ? $this->config->site->domain : '', "class='form-control'");?></td>
-          <td><i class='icon-question-sign'></i></td>
+          <td><?php echo html::a('javascript:void(0)', "<i class='icon-question-sign'></i>", "data-custom='{$lang->site->domainTip}' data-toggle='modal' data-icon='question-sign' data-title='{$lang->site->domain}'")?></td>
         </tr>
-        <tr title="<?php echo $lang->site->allowedDomainTip;?>">
+        <tr>
           <th><?php echo $lang->site->allowedDomain;?></th> 
           <td><?php echo html::input('allowedDomain',  isset($this->config->site->allowedDomain) ? $this->config->site->allowedDomain : '', "class='form-control'");?></td>
-          <td><i class='icon-question-sign'></i></td>
+          <td><?php echo html::a('javascript:void(0)', "<i class='icon-question-sign'></i>", "data-custom='{$lang->site->allowedDomainTip}' data-toggle='modal' data-icon='question-sign' data-title='{$lang->site->allowedDomain}'")?></td>
         </tr>
         <tr title="<?php echo $lang->site->schemeTip;?>">
           <th><?php echo $lang->site->scheme;?></th> 

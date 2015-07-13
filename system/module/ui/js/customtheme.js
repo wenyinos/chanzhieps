@@ -75,7 +75,7 @@ $(document).ready(function()
     $('.nav-tabs li > a').on('show.bs.tab show.zui.tab', function()
     {
         $form.attr('data-tab', $(this).attr('href').replace('#', ''));
-    }).first().trigger('click');
+    }).first().tab('show');
 
     var $resetThemeBtn = $('#resetTheme');
     $resetThemeBtn.click(function()
@@ -98,7 +98,7 @@ $(document).ready(function()
             var val = $this.val();
             var type = $this.data('type');
             if(val === '') $this.val($this.data('origin-default') || $this.data('default') || $this.attr('placeholder') || $this.val()).trigger('change.color');
-            else if($this.data('type') === 'image' && val != 'inherit' && val != 'none' && val.indexOf('url(') != 0)
+            else if(type === 'image' && val != 'inherit' && val != 'none' && val.indexOf('url(') != 0)
             {
                 $this.val('url(' + val + ')');
             }

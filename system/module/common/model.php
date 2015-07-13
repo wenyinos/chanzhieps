@@ -301,13 +301,13 @@ class commonModel extends model
      * @access public
      * @return void
      */
-    public static function createModuleMenu($currentModule)
+    public static function createModuleMenu($currentModule, $navClass = 'nav-left nav-primary nav-stacked', $chevron = true)
     {
         global $lang, $app;
 
         if(!isset($lang->$currentModule->menu)) return false;
 
-        $string = "<ul class='nav-left nav nav-primary nav-stacked'>\n";
+        $string = "<ul class='nav " . $navClass . "'>\n";
 
         /* Get menus of current module and current method. */
         $moduleMenus   = $lang->$currentModule->menu;  
@@ -329,7 +329,7 @@ class commonModel extends model
 
             /* Split the methodLink to label, module, method, vars. */
             list($label, $module, $method, $vars) = explode('|', $methodLink);
-            $label .= '<i class="icon-chevron-right"></i>';
+            if($chevron) $label .= '<i class="icon-chevron-right"></i>';
 
             if($module != 'user' and !commonModel::isAvailable($module)) continue;
             if(commonModel::hasPriv($module, $method))
