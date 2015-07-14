@@ -177,10 +177,11 @@ class mail extends control
      * @param  string $url 
      * @param  string $target 
      * @param  string $account 
+     * @param  string $method 
      * @access public
      * @return void
      */
-    public function captcha($url = '', $target = 'modal', $account = '')
+    public function captcha($url = '', $target = 'modal', $account = '', $method = '')
     {
         if($url == '')     $url     = helper::safe64Encode('close');
         if($account == '') $account = $this->app->user->account;
@@ -196,13 +197,14 @@ class mail extends control
         $this->session->set('verify', '');
 
         $okFile = $this->loadModel('common')->verfyAdmin();
-        $pass   = $this->mail->checkVerify();
+        $pass   = $this->mail->checkVerify($method == 'setsecurity' ? 'okFile' : '');
 
         $user = $this->loadModel('user')->getByAccount($account);
         $this->view->title   = $this->lang->mail->verify;
         $this->view->url     = $url;
         $this->view->target  = $target;
         $this->view->account = $account;
+        $this->view->method  = $method;
         $this->view->email   = $user->email;
         $this->view->okFile  = $okFile;
         $this->view->pass    = $pass;

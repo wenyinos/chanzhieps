@@ -24,7 +24,8 @@
 
 <div class="clearfix row-main">
   <?php $moduleName = $this->moduleName; ?>
-  <?php if($moduleName != 'ui' && $lang->menuGroups->$moduleName != 'ui'): ?>
+  <?php $menuGroup  = zget($lang->menuGroups, $moduleName);?>
+  <?php if($moduleName != 'ui' && $menuGroup != 'ui'): ?>
   <?php $moduleMenu = commonModel::createModuleMenu($this->moduleName);?>
   <?php if($moduleMenu or !empty($treeModuleMenu)):?>
   <div class='col-md-2'>

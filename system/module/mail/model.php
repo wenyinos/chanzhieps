@@ -380,13 +380,13 @@ class mailModel extends model
     /**
      * Check verify.
      * 
+     * @param  string $importantValidate 
      * @access public
      * @return bool
      */
-    public function checkVerify()
+    public function checkVerify($importantValidate = '')
     {
-        if(strpos($this->server->http_referer, 'setsecurity') !== false) $this->config->site->importantValidate = 'okFile';
-
+        if($importantValidate != '') $this->config->site->importantValidate = $importantValidate;
         $okFileChecked = false;
         $checkOkFile   = true;
 
