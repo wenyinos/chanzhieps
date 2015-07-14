@@ -79,11 +79,11 @@ class order extends control
         $this->app->loadLang('product');
 
         $pager = new pager($recTotal, $recPerPage, $pageID);
-        $this->view->orders = $this->order->getList($mode, $value, $orderBy, $pager);
-        $this->view->pager  = $pager;
-        $this->view->orderBy  = $orderBy;
-        $this->view->mode   = $mode;
-        $this->view->value  = $value;
+        $this->view->orders  = $this->order->getList($mode, $value, $orderBy, $pager);
+        $this->view->pager   = $pager;
+        $this->view->orderBy = $orderBy;
+        $this->view->mode    = $mode;
+        $this->view->value   = $value;
 
         $this->view->title          = $this->lang->order->admin;
         $this->view->currencySymbol = $this->lang->product->currencySymbols[$this->config->product->currency];
