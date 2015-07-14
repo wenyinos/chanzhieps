@@ -1,6 +1,5 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
 <?php include_once '../../common/view/header.modal.html.php';?>
-<?php if(strpos($this->server->http_referer, 'setsecurity') !== false and $this->app->getMethodName() == 'captcha') $this->config->site->importantValidate = 'okFile';?>
 <?php if(isset($pass) and $pass):?>
 <script>
 $(document).ready(function()
@@ -14,7 +13,9 @@ $(document).ready(function()
   <?php
   if(!isset($target))  $target  = 'modal';
   if(!isset($account)) $account = '';
+  if(!isset($method))  $method  = '';
   if(!isset($email))   $email   = $this->app->user->email;
+  if($method == 'setsecurity') $this->config->site->importantValidate = 'okFile';
   ?>
   <?php if(!helper::isAjaxRequest()):?>
   <div class="modal" id="ajaxModal" ref="<?php echo $this->app->getURI();?>">
@@ -26,7 +27,7 @@ $(document).ready(function()
         </div>
         <div class="modal-body">
   <?php endif;?>
-  <form class='form-inline' id='captchaForm' action="<?php echo $this->createLink('mail', 'captcha', "url=$url&target=$target&account=$account");?>" method='post'>
+  <form class='form-inline' id='captchaForm' action="<?php echo $this->createLink('mail', 'captcha', "url=$url&target=$target&account=$account&method=$method");?>" method='post'>
     <?php $refUrl  = helper::safe64Decode($url) == 'close' ? $this->app->getURI() : helper::safe64Decode($url);?>
     <?php $fileBtn = html::a($refUrl, $lang->mail->created, "class='btn btn-sm btn-primary okFile'")?>
     <?php $mailBtn = html::submitButton();?>

@@ -42,6 +42,7 @@ $config->allowedTags->admin = $config->allowedTags->front . '<dd><dt><dl><div><t
 $config->views  = ',html,json,xml,'; // Supported view types.
 
 $config->site = new stdclass();
+$config->site->importantValidate = 'okFile,email';
 
 $config->template = new stdclass();
 $config->template->name          = 'default';    // Supported themes.
