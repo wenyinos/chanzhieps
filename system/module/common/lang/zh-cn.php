@@ -126,7 +126,7 @@ $lang->menu->book     = '手册|book|admin|';
 $lang->menu->page     = '单页|article|admin|type=page';
 $lang->menu->forum    = '论坛|forum|admin|';
 $lang->menu->site     = '站点|site|setbasic|';
-$lang->menu->ui       = '界面|ui|setlogo|';
+$lang->menu->ui       = '界面|ui|settemplate|';
 $lang->menu->security = '安全|site|setsecurity|';
 $lang->menu->user     = '会员|user|admin|';
 $lang->menu->order    = '订单|order|admin|';
@@ -172,16 +172,15 @@ $lang->product->menu->browse = array('link' => '所有产品|product|admin|', 'a
 /* Menu of UI module. */
 $lang->ui = new stdclass();
 $lang->ui->menu = new stdclass();
-$lang->ui->menu->logo    = 'Logo设置|ui|setlogo|';
-$lang->ui->menu->favicon = '网站图标|ui|setfavicon|';
-$lang->ui->menu->slide   = '幻灯片设置|tree|browse|type=slide';
-$lang->ui->menu->theme   = '模板设置|ui|settemplate|';
-$lang->ui->menu->admin   = array('link' => '区块管理|block|admin|', 'alias' => 'create,edit');
-$lang->ui->menu->pages   = array('link' => '布局设置|block|pages|', 'alias' => 'setregion');
+$lang->ui->menu->logo    = 'Logo|ui|setlogo|';
+$lang->ui->menu->favicon = '小图标|ui|setfavicon|';
+$lang->ui->menu->slide   = '幻灯片|tree|browse|type=slide';
+$lang->ui->menu->block   = array('link' => '区块|block|admin|', 'alias' => 'create,edit');
+$lang->ui->menu->layout  = array('link' => '布局|block|pages|', 'alias' => 'setregion');
 $lang->ui->menu->styles  = '全局样式|ui|setbasestyle|';
 $lang->ui->menu->js      = '全局js|ui|setbasejs|';
-$lang->ui->menu->source  = '素材库|file|sourcebrowse|';
-$lang->ui->menu->others  = '其他设置|ui|others|';
+$lang->ui->menu->source  = '素材|file|sourcebrowse|';
+$lang->ui->menu->others  = '其他|ui|others|';
 
 /* Menu of user module. */
 $lang->user = new stdclass();
