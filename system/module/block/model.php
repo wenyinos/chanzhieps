@@ -250,23 +250,23 @@ class blockModel extends model
      * @access public
      * @return string
      */
-    public function createTypeSelector($template, $type, $blockID = 0)
+    public function createTypeSelector($editTemplate, $editTheme, $type, $blockID = 0)
     {
         $select = "<div class='btn-group'><button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown'>";
-        $select .= $this->lang->block->$template->typeList[$type] . " <span class='caret'></span></button>";
+        $select .= $this->lang->block->$editTemplate->typeList[$type] . " <span class='caret'></span></button>";
         $select .= "<ul class='dropdown-menu' role='menu'>";
-        foreach($this->lang->block->$template->typeGroups as $block => $group)
+        foreach($this->lang->block->$editTemplate->typeGroups as $block => $group)
         {
             if(isset($lastGroup) and $group !== $lastGroup) $select .= "<li class='divider'></li>";
             $lastGroup = $group;
             $class = ($block == $type) ? "class='active'" : '';
             if($blockID)
             {
-                $select .= "<li {$class}>" . html::a(helper::createLink('block', $this->app->getMethodName(), "template={$template}&blockID={$blockID}&type={$block}"), $this->lang->block->$template->typeList[$block]) . "</li>";
+                $select .= "<li {$class}>" . html::a(helper::createLink('block', $this->app->getMethodName(), "editTemplate={$editTemplate}&editTheme={$editTheme}&blockID={$blockID}&type={$block}"), $this->lang->block->$editTemplate->typeList[$block]) . "</li>";
             }
             else
             {
-                $select .= "<li {$class}>" . html::a(helper::createLink('block', $this->app->getMethodName(), "template={$template}&type={$block}"), $this->lang->block->$template->typeList[$block]) . "</li>";
+                $select .= "<li {$class}>" . html::a(helper::createLink('block', $this->app->getMethodName(), "editTemplate={$editTemplate}&editTheme={$editTheme}&type={$block}"), $this->lang->block->$editTemplate->typeList[$block]) . "</li>";
             }
         }
         $select .= "</ul></div>" .  html::hidden('type', $type);
@@ -355,7 +355,7 @@ class blockModel extends model
         {
             foreach($block->params as $field => $value)
             {
-                if(is_array($value)) $block->params[$field] = join($value, ',');
+                if($field == 'category' and is_array($value)) $block->params[$field] = join($value, ',');
             }
             if($this->post->content) $block->params['content'] = $gpcOn ? stripslashes($block->content) : $block->content;
             $block->content = helper::jsonEncode($block->params);
@@ -378,22 +378,30 @@ class blockModel extends model
      */
     public function update($template)
     {
-        $block = fixer::input('post')->add('template', $template)->stripTags('content', $this->config->block->allowedTags)->get();
-        if($this->post->type == 'phpcode') $block = fixer::input('post')->add('template', $template)->get();
+        $block = $this->getByID($this->post->blockID);
+
+        $data = fixer::input('post')->add('template', $template)->stripTags('content', $this->config->block->allowedTags)->get();
+        if($this->post->type == 'phpcode') $data = fixer::input('post')->add('template', $template)->get();
 
         $gpcOn = version_compare(phpversion(), '5.4', '<') and get_magic_quotes_gpc();
 
-        if(isset($block->params))
+        if(isset($data->params))
         {
-            foreach($block->params as $field => $value)
+            foreach($data->params as $field => $value)
             {
-                if(is_array($value)) $block->params[$field] = join($value, ',');
+                if($field == 'category' and is_array($value)) $data->params[$field] = join($value, ',');
             }
-            if($this->post->content) $block->params['content'] = $gpcOn ? stripslashes($block->content) : $block->content;
-            $block->content = helper::jsonEncode($block->params);
+
+            foreach($block->content as $field => $value)
+            {
+                if(is_object($value) and !isset($data->params[$field])) $data->params[$field] = $value;
+            }
+
+            if($this->post->content) $data->params['content'] = $gpcOn ? stripslashes($data->content) : $data->content;
+            $data->content = helper::jsonEncode($data->params);
         }
 
-        $this->dao->update(TABLE_BLOCK)->data($block, 'params,uid,blockID')
+        $this->dao->update(TABLE_BLOCK)->data($data, 'params,uid,blockID')
             ->batchCheck($this->config->block->require->edit, 'notempty')
             ->autoCheck()
             ->where('id')->eq($this->post->blockID)
@@ -536,7 +544,9 @@ class blockModel extends model
                 }
             }
 
-            $tplPath = $this->app->getTplRoot() . $this->config->template->name . DS . 'view' . DS . 'block' . DS;
+            $template = $this->config->template->name;
+            $theme    = $this->config->template->theme;
+            $tplPath = $this->app->getTplRoot() . $template . DS . 'view' . DS . 'block' . DS;
 
             /* First try block/ext/sitecode/view/block/ */
             $extBlockRoot = $tplPath . "/ext/_{$this->config->site->code}/";
@@ -574,21 +584,24 @@ class blockModel extends model
             }
 
             $style  = '<style>';
-            $style .= '#block' . $block->id . '{';
-            $style .= !empty($content->backgroundColor) ? 'background-color:' . $content->backgroundColor . ' !important;' : '';
-            $style .= !empty($content->textColor) ? 'color:' . $content->textColor . ' !important;;' : '';
-            $style .= !empty($content->borderColor) ? 'border-color:' . $content->borderColor . ' !important;' : '';
-            $style .= '}';
-            $style .= '#block' . $block->id . ' .panel-heading{';
-            $style .= !empty($content->titleColor) ? 'color:' .$content->titleColor . ';' : '';
-            $style .= !empty($content->titleBackground) ? 'background:' .$content->titleBackground . ' !important;;' : '';
-            $style .= '}';
-            $style .= !empty($content->iconColor) ? '#block' . $block->id . ' i{color:' .$content->iconColor . ' !important;}' : '';
-            $style .= !empty($content->linkColor) ? '#block' . $block->id . ' a{color:' .$content->linkColor . ' !important;}' : '';
-            $style .= isset($content->paddingTop) ? '#block' . $block->id . ' .panel-body' . '{padding-top:' . $content->paddingTop . 'px !important;}' : '';
-            $style .= isset($content->paddingRight) ? '#block' . $block->id . ' .panel-body' . '{padding-right:' . $content->paddingRight . 'px !important;}' : '';
-            $style .= isset($content->paddingBottom) ? '#block' . $block->id . ' .panel-body' . '{padding-bottom:' . $content->paddingBottom . 'px !important;}' : '';
-            $style .= isset($content->paddingLeft) ? '#block' . $block->id . ' .panel-body' . '{padding-left:' . $content->paddingLeft . 'px !important;}' : '';
+            if(isset($content->$theme))
+            {
+                $style .= '#block' . $block->id . '{';
+                $style .= !empty($content->$theme->backgroundColor) ? 'background-color:' . $content->$theme->backgroundColor . ' !important;' : '';
+                $style .= !empty($content->$theme->textColor) ? 'color:' . $content->$theme->textColor . ' !important;;' : '';
+                $style .= !empty($content->$theme->borderColor) ? 'border-color:' . $content->$theme->borderColor . ' !important;' : '';
+                $style .= '}';
+                $style .= '#block' . $block->id . ' .panel-heading{';
+                $style .= !empty($content->$theme->titleColor) ? 'color:' .$content->$theme->titleColor . ';' : '';
+                $style .= !empty($content->$theme->titleBackground) ? 'background:' .$content->$theme->titleBackground . ' !important;;' : '';
+                $style .= '}';
+                $style .= !empty($content->$theme->iconColor) ? '#block' . $block->id . ' i{color:' .$content->$theme->iconColor . ' !important;}' : '';
+                $style .= !empty($content->$theme->linkColor) ? '#block' . $block->id . ' a{color:' .$content->$theme->linkColor . ' !important;}' : '';
+                $style .= isset($content->$theme->paddingTop) ? '#block' . $block->id . ' .panel-body' . '{padding-top:' . $content->$theme->paddingTop . 'px !important;}' : '';
+                $style .= isset($content->$theme->paddingRight) ? '#block' . $block->id . ' .panel-body' . '{padding-right:' . $content->$theme->paddingRight . 'px !important;}' : '';
+                $style .= isset($content->$theme->paddingBottom) ? '#block' . $block->id . ' .panel-body' . '{padding-bottom:' . $content->$theme->paddingBottom . 'px !important;}' : '';
+                $style .= isset($content->$theme->paddingLeft) ? '#block' . $block->id . ' .panel-body' . '{padding-left:' . $content->$theme->paddingLeft . 'px !important;}' : '';
+            }
             $style .= '</style>';
 
             echo $containerHeader;
