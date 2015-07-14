@@ -1,6 +1,8 @@
 <?php $templates       = $this->loadModel('ui')->getTemplates(); ?>
 <?php $currentTemplate = $this->config->template->name; ?>
 <?php $currentTheme    = $this->config->template->theme; ?>
+<?php $editingTemplate = $this->ui->getEditingTemplate();?>
+<?php $editingTheme    = $this->ui->getEditingTheme();?>
 <nav id='menu'>
   <ul class='nav'>
     <li class='nav-item-primary'>
@@ -12,29 +14,30 @@
     </li>
     <li class="divider angle"></li>
     <li class='menu-theme-picker'>
-      <a href='javascript:;' data-toggle='dropdown'><span class='menu-template-name'><?php echo $templates[$config->template->name]['name'];?></span><i class="icon icon-angle-right"></i><span class='menu-theme-name'><?php echo $templates[$config->template->name]['themes'][$currentTheme]?></span> &nbsp;<i class='icon-caret-down'></i></a>
+      <a href='javascript:;' data-toggle='dropdown'><span class='menu-template-name'><?php echo $templates[$editingTemplate]['name'];?></span><i class="icon icon-angle-right"></i><span class='menu-theme-name'><?php echo $templates[$editingTemplate]['themes'][$editingTheme]?></span> &nbsp;<i class='icon-caret-down'></i></a>
       <div class='dropdown-menu theme-picker-dropdown'>
-        <div class='theme-picker' data-template='<?php echo $currentTemplate?>' data-theme='<?php echo $currentTheme?>'>
+        <div class='theme-picker' data-template='<?php echo $editingTemplate?>' data-theme='<?php echo $editingTheme?>'>
           <div class='menu-templates'>
             <ul class='nav'>
               <?php $templateThemes = ''; ?>
-              <?php foreach($templates as $code => $template):?>
+              <?php foreach($templates as $code => $tpl):?>
               <?php
               $isCurrent    = $currentTemplate == $code;
-              $themeName    = $isCurrent ? $currentTheme : 'default';
+              $isEditing    = $editingTemplate == $code;
+              $themeName    = $isEditing ? $editingTheme : 'default';
               $themesList   = '';
               ?>
-              <li class='menu-template <?php if($isCurrent) echo 'active';?>' data-template='<?php echo $code; ?>'>
-                <?php commonModel::printLink('ui', 'settemplate', "template={$code}&theme={$themeName}", $template['name']) ?>
+              <li class='menu-template <?php if($isEditing) echo 'active';?>' data-template='<?php echo $code; ?>'>
+                <?php commonModel::printLink('ui', 'settemplate', "template=&theme=&custome=false&editTemplate={$code}&editTheme={$themeName}", $tpl['name']) ?>
               </li>
               <?php
-              foreach($template['themes'] as $theme => $name)
+              foreach($tpl['themes'] as $theme => $name)
               {
-                  $currentClass = ($isCurrent and $currentTheme == $theme) ? ' active' : '';
-                  $themesList .= "<li class='menu-theme {$currentClass}' data-theme='{$theme}'>" . html::a($this->createLink('ui', 'setTemplate', "template={$code}&theme={$theme}"), $name) . '</li>';
+                  $editingClass = ($isEditing and $editingTheme == $theme) ? ' active' : '';
+                  $themesList .= "<li class='menu-theme {$editingClass}' data-theme='{$theme}'>" . html::a($this->createLink('ui', 'setTemplate', "template=&theme=&custome=false&editTemplate={$code}&editTheme={$theme}"), $name) . '</li>';
               }
               ?>
-              <?php $templateThemes .= "<ul class='menu-themes nav" . ($isCurrent ? ' show' : '') . "' data-template='{$code}'>" . $themesList . '</ul>'; ?>
+              <?php $templateThemes .= "<ul class='menu-themes nav" . ($isEditing ? ' show' : '') . "' data-template='{$code}'>" . $themesList . '</ul>'; ?>
               <?php endforeach;?>
             </ul>
           </div>
@@ -42,12 +45,12 @@
             <?php echo $templateThemes; ?>
           </div>
           <div class='menu-theme-preview'>
-            <?php echo html::image($webRoot . 'template/' . $currentTemplate . '/theme/' . $currentTheme . '/preview.png');?>
+            <?php echo html::image($webRoot . 'template/' . $editingTemplate . '/theme/' . $editingTheme . '/preview.png');?>
           </div>
         </div>
         <div class='theme-picker-footer'>
           <div class='pull-right'>
-            <?php commonModel::printLink('ui', 'customTheme', "theme={$currentTheme}&template={$currentTemplate}", '<i class="icon-cog"></i> ' . $lang->ui->customtheme, 'class="btn btn-link"')?>
+            <?php commonModel::printLink('ui', 'customTheme', "theme={$editingTheme}&template={$editingTemplate}", '<i class="icon-cog"></i> ' . $lang->ui->customtheme, 'class="btn btn-link"')?>
             <?php commonModel::printLink('ui', 'setTemplate', '', '<i class="icon-cogs"></i> ' . $lang->ui->setTemplate, 'class="btn btn-link"')?>
           </div>
           <?php echo $lang->ui->currentTheme ?>： <span class='menu-template-name'><?php echo $templates[$config->template->name]['name'];?></span> <i class="icon icon-angle-right"></i> <span class='menu-theme-name'><?php echo $templates[$config->template->name]['themes'][$currentTheme]?></span>

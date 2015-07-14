@@ -17,14 +17,28 @@ class ui extends control
      * @param  string   $template 
      * @param  string   $theme 
      * @param  bool     $custom 
+     * @param  string   $editTemplate 
+     * @param  string   $editTheme 
      * @access public
      * @return void
      */
-    public function setTemplate($template = '', $theme = '', $custom = false)
+    public function setTemplate($template = '', $theme = '', $custom = false, $editTemplate = '', $editTheme = '')
     {
         $templates = $this->ui->getTemplates();
+
+        /* Set editing template and theme in session. */
+        if($editTemplate != '' and $editTheme != '')
+        {
+            if(isset($templates[$editTemplate])) $this->session->set('editTemplate', $editTemplate);
+            if(isset($templates[$editTemplate]['themes'][$editTheme])) $this->session->set('editTheme', $editTheme);
+            $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
+        }
+
         if($template and isset($templates[$template]))
         {  
+            $this->session->set('editTemplate', $editTemplate);
+            $this->session->set('editTheme', $editTheme);
+
             $setting = array();
             $setting['name']   = $template;
             $setting['theme']  = $theme;

@@ -723,4 +723,32 @@ class uiModel extends model
         if(empty($list)) $this->app->loadClass('zfile')->removeDir(dirname($this->exportPath));
         return $zipFile;
     }
+
+    /**
+     * Get editing template. 
+     * 
+     * @access public
+     * @return string
+     */
+    public function getEditingTemplate()
+    {
+        $template = $this->config->template->name;
+        if($this->session->editTemplate != '') $template = $this->session->editTemplate;
+        if($this->get->editTemplate != '') $template = $this->get->editTemplate;
+        return $template;
+    }
+
+    /**
+     * Get editing theme. 
+     * 
+     * @access public
+     * @return string
+     */
+    public function getEditingTheme()
+    {
+        $theme = $this->config->template->theme;
+        if($this->session->editTheme != '') $theme = $this->session->editTheme;
+        if($this->get->editTheme != '') $theme = $this->get->editTheme;
+        return $theme;
+    }
 }
