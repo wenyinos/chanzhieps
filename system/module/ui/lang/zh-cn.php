@@ -9,11 +9,11 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->ui->common       = "界面";
+$lang->ui->common = "界面";
 
-$lang->ui->clientDesktop        = '桌面';
-$lang->ui->clientMobile         = '移动';
-$lang->ui->currentTheme         = '当前模板主题';
+$lang->ui->clientDesktop = '桌面';
+$lang->ui->clientMobile  = '移动';
+$lang->ui->currentTheme  = '当前应用模板主题';
 
 $lang->ui->logo            = 'Logo';
 $lang->ui->setLogo         = "Logo设置";
@@ -46,6 +46,9 @@ $lang->ui->productViewList[0] = '不显示';
 
 $lang->ui->QRCodeList[1] = '显示'; 
 $lang->ui->QRCodeList[0] = '不显示'; 
+
+$lang->ui->logoList['current'] = '当前主题';
+$lang->ui->logoList['all']     = '所有主题';
 
 $lang->ui->favicon = new stdclass();
 $lang->ui->favicon->help  = "帮助";

@@ -99,10 +99,13 @@ class uiModel extends model
         if(!$this->file->checkSavePath()) return array('result' => false, 'message' => $this->lang->file->errorUnwritable);
 
         /* Delete old files. */
-        $clientLang = $this->app->getClientLang();
-        $oldFiles = $this->dao->select('id')->from(TABLE_FILE)->where('objectType')->eq($section)->andWhere('lang')->eq($clientLang)->fetchAll('id');
-        foreach($oldFiles as $file) $fileModel->delete($file->id);
-        if(dao::isError()) return array('result' => false, 'message' => $this->lang->fail);
+        if($section != 'logo')
+        {
+            $clientLang = $this->app->getClientLang();
+            $oldFiles = $this->dao->select('id')->from(TABLE_FILE)->where('objectType')->eq($section)->andWhere('lang')->eq($clientLang)->fetchAll('id');
+            foreach($oldFiles as $file) $fileModel->delete($file->id);
+            if(dao::isError()) return array('result' => false, 'message' => $this->lang->fail);
+        }
 
         /* Upload new logo. */
         $uploadResult = $fileModel->saveUpload($htmlTagName);
@@ -119,7 +122,15 @@ class uiModel extends model
         $setting->addedBy   = $file->addedBy;
         $setting->addedDate = $file->addedDate;
 
-        $result = $this->loadModel('setting')->setItems('system.common.site', array($section => helper::jsonEncode($setting)));
+        if($section == 'logo')
+        {
+            $result = $this->loadModel('setting')->setItems('system.common.logo', array($this->getEditingTheme() => helper::jsonEncode($setting)));
+            if($this->post->theme == 'all') $result = $this->loadModel('setting')->setItems('system.common.site', array($section => helper::jsonEncode($setting)));
+        }
+        else
+        {
+            $result = $this->loadModel('setting')->setItems('system.common.site', array($section => helper::jsonEncode($setting)));
+        }
         if($result) return array('result' => true);
 
         return array('result' => false, 'message' => $this->lang->fail);

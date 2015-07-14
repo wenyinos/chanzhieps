@@ -13,6 +13,7 @@
 <header id='header' class='clearfix'>
   <div id='headTitle'>
     <div class="wrapper">
+      <?php if(isset($this->config->template->theme) and isset($this->config->logo->{$this->config->template->theme})) $this->config->site->logo = $this->config->logo->{$this->config->template->theme};?>
       <?php if(isset($this->config->site->logo)):?>
       <?php $logo = json_decode($this->config->site->logo);?>
       <div id='siteLogo'>
