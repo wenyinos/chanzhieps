@@ -29,7 +29,7 @@
         <th class='w-60px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->order->id);?></th>
         <th class='w-60px'><?php commonModel::printOrderLink('account', $orderBy, $vars, $lang->order->account);?></th>
         <th><?php echo $lang->order->productInfo;?></th>
-        <th class='w-80px'><?php commonModel::printOrderLink('amount', $orderBy, $vars, $lang->order->amount);?></th>
+        <th class='text-right w-80px'><?php commonModel::printOrderLink('amount', $orderBy, $vars, $lang->order->amount);?></th>
         <th class='w-200px'><?php echo $lang->order->life;?></th>
         <th class='w-60px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->product->status);?></th>
         <th class='w-150px'><?php echo $lang->actions;?></th>
@@ -44,10 +44,8 @@
           <dl>
             <?php foreach($order->products as $product):?>
             <dd class='text-left'>
-              <span class='text-info'><?php echo $product->productName;?></span>
-              <span>
-              <?php echo $lang->order->price . $lang->colon . $product->price . ' ' . $lang->order->count . $lang->colon. $product->count; ?>
-              </span>
+              <span><?php echo html::a(commonModel::createFrontLink('product', 'view', "id=$product->id"), $product->productName, "target='_blank'");?></span>
+              <span><?php echo $lang->order->price . $lang->colon . $product->price . ' ' . $lang->order->count . $lang->colon. $product->count;?></span>
             </dd>
             <?php endforeach;?>
           </dl>
