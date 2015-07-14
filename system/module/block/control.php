@@ -21,9 +21,9 @@ class block extends control
      * @access public
      * @return void
      */
-    public function admin($template = '', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function admin($recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
-        if(!$template) $template = $this->config->template->name;
+        $template = $this->loadModel('ui')->getEditingTemplate();
 
         $this->block->loadTemplateLang($template);
 
@@ -31,11 +31,12 @@ class block extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $this->view->currentTemplate = $template;
-        $this->view->templates       = $this->loadModel('ui')->getTemplates();
-        $this->view->blocks          = $this->block->getList($template, $pager);
-        $this->view->title           = $this->lang->block->common;
-        $this->view->pager           = $pager;
+        $this->view->editTemplate = $template;
+        $this->view->editTheme    = $this->loadModel('ui')->getEditingTheme();
+        $this->view->templates    = $this->loadModel('ui')->getTemplates();
+        $this->view->blocks       = $this->block->getList($template, $pager);
+        $this->view->title        = $this->lang->block->common;
+        $this->view->pager        = $pager;
         $this->display();
     }
 
@@ -60,16 +61,14 @@ class block extends control
     /**
      * Create a block.
      * 
-     * @param  string $template
+     * @param  string $editTemplate
      * @param  string $type    html|php
      * @access public
      * @return void
      */
-    public function create( $template = '', $type = 'html')
+    public function create($editTemplate, $editTheme, $type = 'html')
     {
-        if(!$template) $template = $this->config->template->name;
-
-        $this->block->loadTemplateLang($template);
+        $this->block->loadTemplateLang($editTemplate);
 
         if($type == 'phpcode')
         {
@@ -84,13 +83,14 @@ class block extends control
         {
             if($type == 'phpcode' and !$canCreatePHP) $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => dao::getError()));
 
-            $this->block->create($template);
+            $this->block->create($editTemplate);
             if(!dao::isError()) $this->send(array('result' => 'success', 'locate' => $this->inlink('admin')));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
-        $this->view->type     = $type;
-        $this->view->template = $template;
+        $this->view->type         = $type;
+        $this->view->editTemplate = $editTemplate;
+        $this->view->editTheme    = $editTheme;
         $this->display();
     }
 
@@ -103,11 +103,9 @@ class block extends control
      * @access public
      * @return void
      */
-    public function edit($template = 'default', $blockID, $type = '')
+    public function edit($editTemplate,  $editTheme, $blockID, $type = '')
     {
-        if(!$template) $template = $this->config->template->name;
-
-        $this->block->loadTemplateLang($template);
+        $this->block->loadTemplateLang($editTemplate);
 
         if(!$blockID) $this->locate($this->inlink('admin'));
 
@@ -123,14 +121,15 @@ class block extends control
         if($_POST)
         {
             if($type == 'phpcode' and !$canCreatePHP) $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => dao::getError()));
-            $this->block->update($template);
+            $this->block->update($editTemplate);
             if(!dao::isError()) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
-        $this->view->template = $template;
-        $this->view->block    = $this->block->getByID($blockID);
-        $this->view->type     = $this->get->type ? $this->get->type : $this->view->block->type;
+        $this->view->editTemplate = $editTemplate;
+        $this->view->editTheme    = $this->loadModel('ui')->getEditingTheme();
+        $this->view->block        = $this->block->getByID($blockID);
+        $this->view->type         = $this->get->type ? $this->get->type : $this->view->block->type;
         $this->display();
     }
 
