@@ -9,9 +9,9 @@
       <td>
         <div class='required required-wrapper'></div>
         <div class='input-group'>
-          <?php echo html::select('template', $templates, $this->config->template->name, "class='form-control'");?>
+          <?php echo html::select('template', $templateOptions, $this->config->template->name, "class='form-control'");?>
           <span class='input-group-addon'></span>
-          <?php echo html::select('theme', '', '', "class='form-control'");?>
+          <?php echo html::select('theme', array(''), '', "class='form-control'");?>
         </div>
       </td>
     </tr>
