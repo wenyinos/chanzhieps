@@ -1,7 +1,6 @@
 <?php $templates       = $this->loadModel('ui')->getTemplates(); ?>
 <?php $currentTemplate = $this->config->template->name; ?>
 <?php $currentTheme    = $this->config->template->theme; ?>
-<?php $customThemePriv = commonModel::hasPriv('ui', 'customTheme');?>
 <nav id='menu'>
   <ul class='nav'>
     <li class='nav-item-primary'>
@@ -56,7 +55,7 @@
         </div>
       </div>
     </li>
-    <li class="divider"></li>
+    <li class="divider angle"></li>
   </ul>
   <?php $moduleMenu = commonModel::createModuleMenu($this->moduleName, '', false);?>
   <?php if($moduleMenu) echo $moduleMenu;?>
@@ -107,7 +106,12 @@ $(function()
         return false;
     }).on('click', '.btn-custom', function(e){e.stopPropagation();});
 
-    $('.menu-theme-picker').on('show.bs.dropdown show.zui.dropdown', refreshPicker);
+    $('.menu-theme-picker').on('show.bs.dropdown show.zui.dropdown', function()
+    {
+        var $list = $('#menu .menu-themes');
+        $list.css('max-height', $(window).height() - 170);
+        refreshPicker();
+    });
 
     refreshPicker();
 

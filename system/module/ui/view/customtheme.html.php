@@ -48,11 +48,11 @@
         </div>
         <?php endforeach;?>
         <div class='tab-pane theme-control-tab-pane' id='cssTab'>
-          <?php echo html::textarea('css', isset($setting['css']) ? $setting['css'] : '', "rows=20 class='form-control codeeditor' data-mode='css' data-height='250'");?>
+          <?php echo html::textarea('css', isset($setting['css']) ? $setting['css'] : '', "rows=20 class='form-control codeeditor' data-mode='css' data-height='350'");?>
           <p class='text-info text-tip'><?php echo $lang->ui->theme->customStyleTip; ?></p>
         </div>
         <div class='tab-pane theme-control-tab-pane' id='jsTab'>
-          <?php echo html::textarea('js', isset($setting['js']) ? $setting['js'] : '', "rows=20 class='form-control codeeditor' data-mode='css' data-height='250'");?>
+          <?php echo html::textarea('js', isset($setting['js']) ? $setting['js'] : '', "rows=20 class='form-control codeeditor' data-mode='css' data-height='350'");?>
           <p class='text-info text-tip'><?php echo $lang->ui->theme->customScriptTip; ?></p>
         </div>
       </div>
