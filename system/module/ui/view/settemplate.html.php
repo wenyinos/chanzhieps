@@ -50,7 +50,7 @@
             <div class='theme-card'>
               <i class='icon-ok icon'></i>
               <div class='theme-actions dropdown'>
-                <?php commonModel::printLink('ui', 'deleteTheme', "theme={$theme}&template={$code}", "<span class='icon-remove'></span>", "title='{$lang->delete}' class='deleter btn btn-link btn-mini' data-type='ajax' data-backdrop='true'") ?>
+                <?php if(!in_array("$code.$theme", $this->config->ui->systemThemes)) commonModel::printLink('ui', 'deleteTheme', "template={$code}&theme={$theme}", "<span class='icon-remove'></span>", "title='{$lang->delete}' class='deleter btn btn-link btn-mini' data-type='ajax' data-backdrop='true'") ?>
               </div>
               <div class='theme-img'><?php echo html::image($templateRoot . 'theme/' . $theme . '/preview.png');?></div>
               <div class='theme-name text-center'><strong><?php echo $name;?></strong></div>

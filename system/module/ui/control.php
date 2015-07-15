@@ -445,4 +445,19 @@ class ui extends control
 
         $this->send(array('result' => 'success', 'message' => $this->lang->ui->importThemeSuccess, "locate" => inlink('customtheme')));
     }
+
+    /**
+     * Delete a theme.
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @access public
+     * @return void
+     */
+    public function deleteTheme($template, $theme)
+    {
+        $result = $this->ui->deleteTheme($template, $theme);
+        if($result) $this->send(array('result' => 'success', 'message' => $this->lang->ui->deleteThemeSuccess, "locate" => inlink('setTemplate')));
+        $this->send(array('result' => 'fail', 'message' => $this->lang->ui->deleteThemeFail));
+    }
 }
