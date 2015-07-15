@@ -598,9 +598,10 @@ class uiModel extends model
     {
         $themeInfo  = fixer::input('post')
             ->add('type', 'theme')
+            ->add('templateCompatible', $this->post->template)
             ->get();
         
-        $yaml  = $this->app->loadClass('spyc')->dump($themeInfo);      
+        $yaml  = $this->app->loadClass('spyc')->dump($themeInfo);
         file_put_contents($this->exportDocPath . $this->app->getClientLang() . '.yaml', $yaml);
         
         $this->exportDB($template, $theme);
@@ -625,9 +626,10 @@ class uiModel extends model
         $this->exportDocPath    = $this->exportPath . 'doc' . DS;
         $this->exportDbPath     = $this->exportPath . 'db' . DS;
         $this->exportCssPath    = $this->exportPath . 'www' . DS . 'data' . DS . 'css' . DS . $template . DS . $code . DS;
-        $this->exportLessPath   = $this->exportPath . 'www' . DS . 'template' . DS . $template . DS . $code . DS;
-        $this->exportSourcePath = $this->exportPath . 'www' . DS . 'data' . DS . 'source' . DS . $code . DS;
+        $this->exportLessPath   = $this->exportPath . 'www' . DS . 'template' . DS . $template . DS . 'theme' . DS . $code . DS;
+        $this->exportSourcePath = $this->exportPath . 'www' . DS . 'data' . DS . 'source' . DS . $template . DS . $code . DS;
         $this->exportSlidePath  = $this->exportPath . 'www' . DS . 'data' . DS . 'slide' . DS;
+        $this->exportConfigPath = $this->exportPath . 'system' . DS . 'module' . DS . 'ui' . DS . 'ext' . DS . 'config' . DS;
 
         if(is_dir($this->exportPath)) $this->app->loadClass('zfile')->removeDir($this->exportPath);     
 
@@ -638,6 +640,7 @@ class uiModel extends model
         if(!is_dir($this->exportCssPath))    mkdir($this->exportCssPath,    0777, true);
         if(!is_dir($this->exportLessPath))   mkdir($this->exportLessPath,   0777, true);
         if(!is_dir($this->exportSourcePath)) mkdir($this->exportSourcePath, 0777, true);
+        if(!is_dir($this->exportConfigPath)) mkdir($this->exportConfigPath, 0777, true);
         if(!is_dir($this->exportSlidePath))  mkdir($this->exportSlidePath,  0777, true);
 
         return (is_dir($this->exportPath) and is_dir($this->exportDbPath) and is_dir($this->exportSourcePath) and is_dir($this->exportCssPath));
@@ -653,17 +656,17 @@ class uiModel extends model
      */
     public function exportDB($template, $theme)
     {
-        $lang = $this->app->getClientLang();
+        $lang   = $this->app->getClientLang();
         $tables = array(TABLE_BLOCK, TABLE_LAYOUT, TABLE_CONFIG, TABLE_SLIDE);
 
         $condations = array();
         $condations[TABLE_BLOCK]  = "where template='{$template}' and lang in ('all', '{$lang}')";
-        $condations[TABLE_LAYOUT] = "where template='{$template}' and lang in ('all', '{$lang}')";
+        $condations[TABLE_LAYOUT] = "where template='{$template}' and theme = '{$theme}' and lang in ('all', '{$lang}')";
         $condations[TABLE_CONFIG] = "where owner = 'system' and module = 'common' and `key` in ('custom', 'basestyle')";
 
         $fields = array();
         $fields[TABLE_BLOCK]  = "id as originID,`template`,`type`,`title`,`content`,`lang`";
-        $fields[TABLE_LAYOUT] = "*, 'doing' as imported";
+        $fields[TABLE_LAYOUT] = "*, 'doing' as imported, 'THEME_CODEFIX' as theme";
         $fields[TABLE_CONFIG] = "owner, module, section, `key`, `value`, lang";
         $fields[TABLE_SLIDE]  = "title,`group`,titleColor,mainLink,backgroundType,backgroundColor,height,image,label,buttonClass,buttonUrl,buttonTarget,summary,lang,`order`";
 
@@ -677,6 +680,10 @@ class uiModel extends model
         $zdb->dump($this->exportDbPath . 'install.sql', $tables, $fields, 'data', $condations, true);
 
         $sqls = file_get_contents($this->exportDbPath . 'install.sql');
+        $sqls = str_replace(TABLE_BLOCK,  "eps_block",  $sqls);
+        $sqls = str_replace(TABLE_LAYOUT, "eps_layout", $sqls);
+        $sqls = str_replace(TABLE_SLIDE,  "eps_slide", $sqls);
+        $sqls = str_replace(TABLE_CONFIG, "eps_config", $sqls);
         $sqls = str_replace("/$theme/", "/THEME_CODEFIX/", $sqls);
         $sqls = str_replace("/$theme\\", "/THEME_CODEFIX\\", $sqls);
         $sqls = str_replace("/$theme\/", "/THEME_CODEFIX\/", $sqls);
@@ -694,6 +701,17 @@ class uiModel extends model
      */
     public function exportFiles($template, $theme, $code)
     {
+        /* Export config file. */
+        if(isset($this->config->ui->themes[$theme]))
+        {
+            $configCode = "<?php\n";
+            $configCode .= '$this->config->ui->themes["' . $code . '"] = ';
+            $configCode .= "\n";
+            $configCode .= var_export($this->config->ui->themes[$theme], true);
+            $configCode .= ";";
+            file_put_contents($this->exportConfigPath . "$code.php", $configCode);
+        }
+
         $zfile = $this->app->loadClass('zfile');
 
         /* Copy customed css file. */
@@ -706,12 +724,25 @@ class uiModel extends model
         if(file_exists($lessFile)) copy($lessFile, $this->exportLessPath . 'style.less');
 
         /* Copy source files. */
-        $sourcePath = $this->app->getWwwRoot() . 'data' . DS . 'source' . DS . $theme;
+        $sourcePath = $this->app->getWwwRoot() . 'data' . DS . 'source' . DS . $template . DS . $theme;
         if(is_dir($sourcePath)) $zfile->copyDir($sourcePath, $this->exportSourcePath);
 
         /* Copy slide files. */
         $slidePath = $this->app->getWwwRoot() . 'data' . DS . 'slide';
         if(is_dir($slidePath)) $zfile->copyDir($slidePath, $this->exportSlidePath);
+        
+        /* Upload preview picture. */
+        if($_FILES)
+        {
+            $tmpName  = $_FILES['file']['tmp_name'];
+            $fileName = $_FILES['file']['name'];
+            move_uploaded_file($tmpName, $this->exportLessPath . 'preview.png');
+        }
+        else
+        {
+            $previewImage = $this->app->getWwwRoot() . 'template' . DS . $template . DS . 'theme' . DS . $theme . DS . 'preview.png';
+            copy($previewImage, $this->exportLessPath . 'preview.png'); 
+        }
 
         /* Zip theme files. */
         $this->app->loadClass('pclzip', true);

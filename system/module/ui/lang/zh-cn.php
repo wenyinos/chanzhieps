@@ -11,9 +11,11 @@
  */
 $lang->ui->common       = "界面";
 
-$lang->ui->clientDesktop        = '桌面';
-$lang->ui->clientMobile         = '移动';
-$lang->ui->currentTheme         = '当前模板主题';
+$lang->ui->clientDesktop  = '桌面';
+$lang->ui->clientMobile   = '移动';
+$lang->ui->currentTheme   = '当前模板主题';
+$lang->ui->uploadTheme    = '上传主题';
+$lang->ui->installTheme   = '安装主题';
 
 $lang->ui->logo            = 'Logo';
 $lang->ui->setLogo         = "Logo设置";
@@ -40,6 +42,7 @@ $lang->ui->noSelectedFile    = "获取上传图片失败，可能是图片大小
 $lang->ui->notAlloweFileType = "请选择正确的%s文件";
 $lang->ui->suitableLogoSize  = '最佳高度范围：50px~80px，最佳宽度范围：80px~240px';
 $lang->ui->exportedSuccess   = '导出成功';
+$lang->ui->fileRequired      = '请选择一个文件';
 
 $lang->ui->productViewList[1] = '显示'; 
 $lang->ui->productViewList[0] = '不显示'; 
@@ -60,6 +63,7 @@ $lang->ui->template->chanzhiVersion  = '兼容版本';
 $lang->ui->template->desc            = '简介';
 $lang->ui->template->theme           = '主题';
 $lang->ui->template->license         = '版权';
+$lang->ui->template->preview         = '效果图';
 $lang->ui->template->availableThemes = '<strong>%s</strong> 款可用主题';
 $lang->ui->template->currentTheme    = '正在使用 <strong>%s</strong>';
 $lang->ui->template->changeTheme     = '切换主题';

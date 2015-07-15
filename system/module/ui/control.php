@@ -302,4 +302,188 @@ class ui extends control
         $pathInfo = pathinfo($exportedFile);
         $this->loadModel('file')->sendDownHeader($pathInfo['basename'], 'zip', $fileData, filesize($exportedFile));
     }
+
+    /**
+     * Upload a theme package. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function uploadTheme()
+    {
+        $canMange = $this->loadModel('common')->verfyAdmin();
+        $this->view->canMange = $canMange;
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST')
+        {
+            if($canMange['result'] != 'success') $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->setOkFile, $canMange['okFile'])));
+            
+            if(empty($_FILES))  $this->send(array('result' => 'fail', 'message' => $this->lang->ui->filesRequired));
+
+            $tmpName  = $_FILES['file']['tmp_name'];
+            $fileName = $_FILES['file']['name'];
+            $package  = basename($fileName, '.zip');
+            move_uploaded_file($tmpName, $this->app->getTmpRoot() . "/package/$fileName");
+
+            $link = inlink('installtheme', "package=$package&downLink=&md5=");
+            $this->app->loadLang('package');
+            $this->send(array('result' => 'success', 'message' => $this->lang->package->successUploadedPackage, 'locate' => $link));
+        }
+
+        $this->view->title = $this->lang->ui->uploadTheme;
+        $this->display();
+    }
+
+    /**
+     * Install a theme.
+     * 
+     * @param  string   $package 
+     * @param  string   $downLink 
+     * @param  string   $md5 
+     * @access public
+     * @return void
+     */
+    public function installtheme($package, $downLink = '', $md5 = '', $ignoreCompatible = 'no', $agreeLicense = 'no')
+    {
+        set_time_limit(0);
+
+        $this->view->error = '';
+        $this->view->title = $this->lang->ui->installTheme;
+
+        /* Get the package file name. */
+        $packageFile = $this->loadModel('package')->getPackageFile($package);
+
+        /* Check the package file exists or not. */
+        if(!file_exists($packageFile)) 
+        {
+            $this->view->error = sprintf($this->lang->package->errorPackageNotFound, $packageFile);
+            die($this->display());
+        }
+
+        $packageInfo = $this->loadModel('package')->parsePackageCFG($package, 'theme');
+
+        $type = 'theme';
+
+        /* Checking the package pathes. */
+        $return = $this->package->checkPackagePathes($package, $type);
+        if($this->session->dirs2Created == false) $this->session->set('dirs2Created', $return->dirs2Created);    // Save the dirs to be created.
+        if($return->result != 'ok')
+        {
+            $this->view->error = $return->errors;
+            die($this->display());
+        }
+
+        /* Extract the package. */
+        $return = $this->package->extractPackage($package, 'theme');
+        if($return->result != 'ok')
+        {
+            $this->view->error = sprintf($this->lang->package->errorExtracted, $packageFile, $return->error);
+            die($this->display());
+        }
+
+        /* Get condition. e.g. chanzhi|depends|conflicts. */
+        $condition     = $this->package->getCondition($package, 'theme');
+        $installedExts = $this->package->getLocalPackages('installed', 'theme');
+
+        /* Check version incompatible */
+        $incompatible = $condition->chanzhi['incompatible'];
+        if($this->package->checkVersion($incompatible))
+        {
+            $this->view->error = sprintf($this->lang->package->errorIncompatible);
+            die($this->display());
+        }
+
+        /* Check conflicts. */
+        $conflictsResult = $this->package->checkConflicts($condition, $installedExts);
+        if($conflictsResult['result'] == 'fail') 
+        {
+            $this->view->error = $conflictsResult['error'];
+            die($this->display());
+        }
+
+        /* Check Depends. */
+        $depentsResult = $this->package->checkExtRequired($condition->depends, $installedExts);
+        if($depentsResult['result'] == 'fail') 
+        {
+            $this->view->error = $rdepentsResult['error'];
+            die($this->display());
+        }
+
+        /* Check version compatible. */
+        $chanzhiCompatible = $condition->chanzhi['compatible'];
+        if(!$this->package->checkVersion($chanzhiCompatible) and $ignoreCompatible == 'no')
+        {
+            $ignoreLink = inlink('installtheme', "package=$package&downLink=$downLink&md5=$md5&ignoreCompatible=yes&agreeLicense=$agreeLicense");
+            $returnLink = inlink('obtain');
+            $this->view->error = sprintf($this->lang->package->errorCheckIncompatible, 'install', $ignoreLink, 'install', $returnLink);
+            die($this->display());
+        }
+
+        /* Print the license form. */
+        if($agreeLicense == 'no')
+        {
+            $packageInfo = $this->package->getInfoFromPackage($package, 'theme');
+            $license     = $this->package->processLicense($packageInfo->license);
+            $agreeLink   = inlink('installtheme', "package=$package&downLink=$downLink&md5=$md5&type=$type&ignoreCompatible=$ignoreCompatible&agreeLicense=yes");
+
+            /* Format license if used zpl. */
+            if(strtolower($packageInfo->license) == 'zpl')
+            {
+                $license = sprintf($license, $packageInfo->name, $packageInfo->author, $packageInfo->site);
+            }
+
+            $this->view->license   = $license;
+            $this->view->author    = $packageInfo->author;
+            $this->view->agreeLink = $agreeLink;
+            die($this->display());
+        }
+    
+        /* Process theme code. */
+        $installedThemes = $this->ui->getThemesByTemplate($packageInfo->template);
+        if(isset($installedThemes[$packageInfo->code]))
+        {
+            $package = $this->package->fixThemeCode($package, $installedThemes);
+        }
+
+        $packageInfo = $this->package->parsePackageCFG($package, 'theme');
+        if(!empty($packageInfo->customParams))
+        {
+            $this->package->saveCustomParams($package, $packageInfo->customParams);
+        }
+
+        /* Save to database. */
+        $this->package->savePackage($package, $type);
+
+        /* Copy files to target directory. */
+        $this->view->files = $this->package->copyPackageFiles($package, $type);
+
+        /* Judge need execute db install or not. */
+        $data = new stdclass();
+        $data->status = 'installed';
+        $data->dirs   = $this->session->dirs2Created;
+        $data->files  = $this->view->files;
+        $data->installedTime = helper::now();
+        $this->session->set('dirs2Created', array());   // clean the session.
+
+        /* Execute the install.sql. */
+        $return = $this->package->executeDB($package, 'install');
+        if($return->result != 'ok')
+        {
+            $this->view->error = sprintf($this->lang->package->errorInstallDB, $return->error);
+            die($this->display());
+        }
+        
+        $this->package->fixThemeData($packageInfo->template);
+
+        /* Update status, dirs, files and installed time. */
+        $this->package->updatePackage($package, $data);
+        $this->view->downloadedPackage = !empty($downLink);
+
+        /* The postInstall hook file. */
+        $hook = 'postinstall';
+        if($postHookFile = $this->package->getHookFile($package, $hook)) include $postHookFile;
+
+        $this->view->type = $type;
+        $this->display();
+    }
 }

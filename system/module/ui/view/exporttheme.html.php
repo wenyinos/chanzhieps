@@ -28,6 +28,12 @@
       </td>
     </tr>
     <tr>
+      <th><?php echo $lang->ui->template->preview;?></th>
+      <td>
+        <?php echo html::file('file', '', "class='form-control'");?>
+      </td>
+    </tr>
+    <tr>
       <th><?php echo $lang->ui->template->author;?></th>
       <td>
         <div class='required required-wrapper'></div>
