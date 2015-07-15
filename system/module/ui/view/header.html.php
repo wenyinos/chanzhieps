@@ -93,6 +93,22 @@ $(function()
     {
         var $this = $(this);
         refreshPicker($this.closest('.menu-themes').data('template'), $this.data('theme'));
+    })
+    .on('click', '.menu-template > a, .menu-theme > a', function(e)
+    {
+        $.getJSON($(this).attr('href'), function(response)
+        {
+            if(response.result == 'success')
+            {
+                messager.success(response.message);
+                window.location.reload();
+            }
+            else
+            {
+                bootbox.alert(data.message);
+            }
+        });
+        return false;
     });
 
     $('.menu-theme-picker').on('show.bs.dropdown show.zui.dropdown', refreshPicker);
