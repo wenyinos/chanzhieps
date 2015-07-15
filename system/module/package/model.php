@@ -1178,12 +1178,12 @@ class packageModel extends model
       */
      public function mergeCustome($info)
      {
-        $importedCustome = $this->dao->setAutoLang(false)->select('*')->form(TABLE_CONFIG)->where('lang')->eq('imported')->andWhere('`key`')->eq('custom')->fetch('value');
+        $importedCustome = $this->dao->setAutoLang(false)->select('*')->from(TABLE_CONFIG)->where('lang')->eq('imported')->andWhere('`key`')->eq('custom')->fetch('value');
         $custome = json_decode($importedCustome, true);
         
         $setting = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true): array();
 
-        if(isset($custome[$info->template][$info->theme])) $setting[$info->template][$info->theme] = $custome[$info->template][$info->theme];
+        if(isset($custome[$info->template][$info->theme])) $setting[$info->template][$info->code] = $custome[$info->template][$info->theme];
         $this->loadModel('setting')->setItems('system.common.template', array('custom' => helper::jsonEncode($setting)));
         $this->dao->delete()->from(TABLE_CONFIG)->where('lang')->eq('imported')->andWhere('`key`')->eq('custom')->exec();
      }
