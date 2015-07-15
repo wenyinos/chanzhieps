@@ -364,12 +364,15 @@ class ui extends control
      * @access public
      * @return void
      */
-    public function installtheme($package, $downLink = '', $md5 = '', $ignoreCompatible = 'no', $agreeLicense = 'no')
+    public function installtheme($package, $downLink = '', $md5 = '')
     {
         set_time_limit(0);
 
-        $this->view->error = '';
-        $this->view->title = $this->lang->ui->installTheme;
+        $this->view->error        = '';
+        $this->view->title        = $this->lang->ui->installTheme;
+
+        /* Ignore merge blocks before blocks imported. */
+        $this->view->blocksMerged = true;
 
         /* Get the package file name. */
         $packageFile = $this->loadModel('package')->getPackageFile($package);
@@ -377,12 +380,11 @@ class ui extends control
         /* Check the package file exists or not. */
         if(!file_exists($packageFile)) 
         {
-            $this->view->error = sprintf($this->lang->package->errorPackageNotFound, $packageFile);
+            $this->view->error        = sprintf($this->lang->package->errorPackageNotFound, $packageFile);
             die($this->display());
         }
 
         $packageInfo = $this->loadModel('package')->parsePackageCFG($package, 'theme');
-
         $type = 'theme';
 
         /* Checking the package pathes. */
@@ -401,64 +403,9 @@ class ui extends control
             $this->view->error = sprintf($this->lang->package->errorExtracted, $packageFile, $return->error);
             die($this->display());
         }
+        
+        $packageInfo = $this->loadModel('package')->parsePackageCFG($package, 'theme');
 
-        /* Get condition. e.g. chanzhi|depends|conflicts. */
-        $condition     = $this->package->getCondition($package, 'theme');
-        $installedExts = $this->package->getLocalPackages('installed', 'theme');
-
-        /* Check version incompatible */
-        $incompatible = $condition->chanzhi['incompatible'];
-        if($this->package->checkVersion($incompatible))
-        {
-            $this->view->error = sprintf($this->lang->package->errorIncompatible);
-            die($this->display());
-        }
-
-        /* Check conflicts. */
-        $conflictsResult = $this->package->checkConflicts($condition, $installedExts);
-        if($conflictsResult['result'] == 'fail') 
-        {
-            $this->view->error = $conflictsResult['error'];
-            die($this->display());
-        }
-
-        /* Check Depends. */
-        $depentsResult = $this->package->checkExtRequired($condition->depends, $installedExts);
-        if($depentsResult['result'] == 'fail') 
-        {
-            $this->view->error = $rdepentsResult['error'];
-            die($this->display());
-        }
-
-        /* Check version compatible. */
-        $chanzhiCompatible = $condition->chanzhi['compatible'];
-        if(!$this->package->checkVersion($chanzhiCompatible) and $ignoreCompatible == 'no')
-        {
-            $ignoreLink = inlink('installtheme', "package=$package&downLink=$downLink&md5=$md5&ignoreCompatible=yes&agreeLicense=$agreeLicense");
-            $returnLink = inlink('obtain');
-            $this->view->error = sprintf($this->lang->package->errorCheckIncompatible, 'install', $ignoreLink, 'install', $returnLink);
-            die($this->display());
-        }
-
-        /* Print the license form. */
-        if($agreeLicense == 'no')
-        {
-            $packageInfo = $this->package->getInfoFromPackage($package, 'theme');
-            $license     = $this->package->processLicense($packageInfo->license);
-            $agreeLink   = inlink('installtheme', "package=$package&downLink=$downLink&md5=$md5&type=$type&ignoreCompatible=$ignoreCompatible&agreeLicense=yes");
-
-            /* Format license if used zpl. */
-            if(strtolower($packageInfo->license) == 'zpl')
-            {
-                $license = sprintf($license, $packageInfo->name, $packageInfo->author, $packageInfo->site);
-            }
-
-            $this->view->license   = $license;
-            $this->view->author    = $packageInfo->author;
-            $this->view->agreeLink = $agreeLink;
-            die($this->display());
-        }
-    
         /* Process theme code. */
         $installedThemes = $this->ui->getThemesByTemplate($packageInfo->template);
         if(isset($installedThemes[$packageInfo->code]))
@@ -493,9 +440,23 @@ class ui extends control
             $this->view->error = sprintf($this->lang->package->errorInstallDB, $return->error);
             die($this->display());
         }
-        
-        $this->package->fixThemeData($packageInfo->template);
+        $this->view->blocksMerged   = false;
 
+        if(!$_POST)
+        {
+            $this->app->loadLang('block');
+            $this->view->importedBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('originID')->ne(0)->fetchAll('originID');
+            $this->view->oldBlocks      = $this->dao->select('*')->from(TABLE_BLOCK)->where('originID')->eq(0)->fetchAll('id');
+            $this->view->blocksMerged   = true;
+            $this->view->packageInfo    = $packageInfo;
+            die($this->display());
+        }
+        else
+        {
+            $this->package->mergeBlocks($packageInfo);
+            $this->view->blocksMerged   = false;
+        }
+        
         /* Update status, dirs, files and installed time. */
         $this->package->updatePackage($package, $data);
         $this->view->downloadedPackage = !empty($downLink);

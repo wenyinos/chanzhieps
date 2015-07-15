@@ -178,9 +178,14 @@ class packageModel extends model
      * @access public
      * @return array
      */
-    public function getLocalPackages($status)
+    public function getLocalPackages($status, $type = 'ext')
     {
-        $packages = $this->dao->setAutoLang(false)->select('*')->from(TABLE_PACKAGE)->where('status')->eq($status)->fetchAll('code');
+        $packages = $this->dao->setAutoLang(false)
+            ->select('*')->from(TABLE_PACKAGE)
+            ->where('status')->eq($status)
+            ->beginIf($type == 'theme')->andWhere('type')->eq('theme')->fi()
+            ->beginIf($type != 'theme')->andWhere('type')->ne('theme')->fi()
+            ->fetchAll('code');
         foreach($packages as $package)
         {
             if($package->site and stripos(strtolower($package->site), 'http') === false) $package->site = 'http://' . $package->site;
@@ -207,22 +212,23 @@ class packageModel extends model
      * @access public
      * @return object
      */
-    public function getInfoFromPackage($package)
+    public function getInfoFromPackage($package, $type = 'ext')
     {
         /* Init the data. */
         $data = new stdclass();
-        $data->name              = $package;
-        $data->code              = $package;
-        $data->version           = 'unknown';
-        $data->author            = 'unknown';
-        $data->desc              = $package;
-        $data->site              = 'unknown';
-        $data->license           = 'unknown';
-        $data->chanzhiCompatible = '';
-        $data->type              = '';
-        $data->depends           = '';
+        $data->name                = $package;
+        $data->code                = $package;
+        $data->version             = 'unknown';
+        $data->author              = 'unknown';
+        $data->desc                = $package;
+        $data->site                = 'unknown';
+        $data->license             = 'unknown';
+        $data->chanzhiCompatible   = '';
+        $data->type                = '';
+        $data->depends             = '';
+        $data->templateCompatible  = '';
 
-        $info = $this->parsePackageCFG($package);
+        $info = $this->parsePackageCFG($package, $type);
         foreach($info as $key => $value) if(isset($data->$key)) $data->$key = $value;
         if(isset($info->chanzhiversion))        $data->chanzhiCompatible = $info->chanzhiversion;
         if(isset($info->chanzhi['compatible'])) $data->chanzhiCompatible = $info->chanzhi['compatible'];
@@ -238,12 +244,12 @@ class packageModel extends model
      * @access public
      * @return object
      */
-    public function parsePackageCFG($package)
+    public function parsePackageCFG($package, $type = 'ext')
     {
         $info = new stdclass();
 
         /* First, try ini file. before 2.5 version. */
-        $infoFile = "ext/$package/doc/copyright.txt";
+        $infoFile = "{$type}/$package/doc/copyright.txt";
         if(file_exists($infoFile)) return (object)parse_ini_file($infoFile);
 
         /**
@@ -252,7 +258,7 @@ class packageModel extends model
 
         /* Try the yaml of current lang, then try en. */
         $lang = $this->app->getClientLang();
-        $infoFile = "ext/$package/doc/$lang.yaml";
+        $infoFile = "{$type}/$package/doc/$lang.yaml";
 
         if(!file_exists($infoFile)) $infoFile = "ext/$package/doc/en.yaml";
         if(!file_exists($infoFile)) return $info;
@@ -333,13 +339,14 @@ class packageModel extends model
     /**
      * Get the package's condition. 
      * 
-     * @param  string    $extenstion 
+     * @param  string    $package 
+     * @param  string    $type ext|theme
      * @access public
      * @return object
      */
-    public function getCondition($package)
+    public function getCondition($package, $type = 'ext')
     {
-        $info      = $this->parsePackageCFG($package);
+        $info      = $this->parsePackageCFG($package, $type);
         $condition = new stdclass();
 
         $condition->chanzhi   = array('compatible' => '', 'incompatible' => '');
@@ -396,9 +403,9 @@ class packageModel extends model
      * @access public
      * @return string
      */
-    public function getDBFile($package, $method = 'install')
+    public function getDBFile($package, $method = 'install', $type = 'ext')
     {
-        return "ext/$package/db/$method.sql";
+        return "$type/$package/db/$method.sql";
     }
 
     /**
@@ -627,14 +634,14 @@ class packageModel extends model
      * @access public
      * @return object
      */
-    public function extractPackage($package) 
+    public function extractPackage($package, $type = 'ext') 
     {
         $return = new stdclass();
         $return->result = 'ok';
         $return->error  = '';
 
         /* try remove old extracted files. */
-        $packagePath = "ext/$package";
+        $packagePath = "{$type}/$package";
         if(is_dir($packagePath)) $this->classFile->removeDir($packagePath);
 
         /* Extract files. */
@@ -655,14 +662,14 @@ class packageModel extends model
     /**
      * Copy package files. 
      * 
-     * @param  int    $package 
+     * @param  type    $package 
      * @access public
      * @return array
      */
-    public function copyPackageFiles($package, $type)
+    public function copyPackageFiles($package, $type = 'ext')
     {
-        $appRoot      = $this->app->getAppRoot();
-        $packageDir   = 'ext' . DS . $package . DS;
+        $appRoot    = $this->app->getAppRoot();
+        $packageDir = $type . DS . $package . DS;
 
         $systemPathes   = array();
         $wwwPathes      = array();
@@ -835,7 +842,7 @@ class packageModel extends model
          if(!file_exists($dbFile)) return $return;
 
          $sqls = file_get_contents($this->getDBFile($package, $method));
-         $sqls = explode(';', $sqls);
+         $sqls = explode(';\n', $sqls);
 
          foreach($sqls as $sql)
          {
@@ -903,13 +910,13 @@ class packageModel extends model
       */
      public function savePackage($package, $type)
      {
-         $code      = $package;
-         $package = $this->getInfoFromPackage($package);
+         $code    = $package;
+         $package = $this->getInfoFromPackage($package, $type);
          $package->status = 'available';
          $package->code   = $code;
          $package->lang   = 'all';
          $package->type   = empty($type) ? $package->type : $type;
-
+        
          $this->dao->replace(TABLE_PACKAGE)->data($package)->exec();
      }
 
@@ -1005,5 +1012,122 @@ class packageModel extends model
 
          if($type != 'between') return !$result;
          return $result;
+     }
+
+     /**
+      * Merge blocks.
+      * 
+      * @access public
+      * @return void
+      */
+     public function mergeBlocks()
+     {
+        $blocks2merge  = $this->post->blocks2merge;
+        $blocks2create = $this->post->blocks2create;
+        
+        $oldBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('id')->in(array_values($blocks2merge))->fetchAll('id');
+        $newBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('oringinID')->ne('0')->fetchAll('oringinID');
+
+        foreach($blocks2merge as $oringinID => $blockID)
+        {
+            $old = zget($oldBlocks, $blockID);
+            $old->content = json_decode($old->content); 
+
+            $new = zget($newBlocks, $blockID);
+            $new->content = json_decode($new->content); 
+
+
+        }
+
+        $this->fixThemeData($packageInfo->template);
+     }
+
+     /**
+      * Fix block and layout data of a theme. 
+      * 
+      * @param  string    $template 
+      * @access public
+      * @return void
+      */
+     public function fixThemeData($template)
+     {
+        $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('originID')->gt(0)->andWhere('template')->eq($template)->fetchAll();
+        foreach($blocks as $block)
+        {
+            $content = json_decode($block->content);
+            if(isset($content->category)) $content->category = 0;
+            $block->content = json_encode($content);
+            $this->dao->replace(TABLE_BLOCK)->data($block)->exec();
+        }
+
+        $blockOptions = $this->dao->select('originID, id')->from(TABLE_BLOCK)->where('originID')->gt(0)->andWhere('template')->eq($template)->fetchPairs();
+        $layouts      = $this->dao->select('*')->from(TABLE_LAYOUT)->where('template')->eq($template)->andWhere('imported')->eq('doing')->fetchAll();
+        
+        foreach($layouts as $layout)
+        {
+            $layout->imported = 'finished';
+            $blocks = json_decode($layout->blocks);
+            if(!empty($blocks))
+            {
+                foreach($blocks as $block) $block->id = zget($blockOptions, $block->id);
+            }
+            $layout->blocks = json_encode($blocks);
+            $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
+        }
+     }
+
+     /**
+      * Fix theme code.
+      * 
+      * @param  int    $package 
+      * @param  int    $themes 
+      * @access public
+      * @return void
+      */
+     public function fixThemeCode($package, $themes)
+     {
+        $themeInfo = $this->parsePackageCFG($package, 'theme');
+        $themeInfo->templateCompatible = $themeInfo->template;
+        $code      = $themeInfo->code;
+
+        $i = 1;
+        while(isset($themes[$themeInfo->code . '_' . $i])) $i ++ ;
+        $newCode = $themeInfo->code . '_' . $i;
+        $themeInfo->code = $newCode;
+        $newPackage = $newCode;
+
+        /* Write new newCode to yaml file. */
+        $yaml     = $this->app->loadClass('spyc')->dump($themeInfo);      
+        $lang     = $this->app->getClientLang();
+        $infoFile = "theme/$package/doc/$lang.yaml";
+        file_put_contents($infoFile, $yaml);
+
+        /* Replace codofix in db file with new newCode. */
+        $dbFile  = $this->getDBFile($package, 'install', 'theme');
+        $content = file_get_contents($dbFile); 
+        $content = str_replace('THEME_CODEFI', $newCode, $content);
+        file_put_contents($dbFile, $content);
+
+        /* Change code in config file. */
+        $configCode = file_get_contents("./theme/{$package}/system/module/ui/ext/config/{$code}.php");
+        $configCode = str_replace('$this->config->ui->themes["' . $code . '"] = ', '$this->config->ui->themes["' . $newCode . '"] = ', $configCode);
+        file_put_contents("./theme/{$package}/system/module/ui/ext/config/{$code}.php", $configCode);
+
+        /* Rename files named by old newCode. */
+        $files2move = array();
+        $files2move["./theme/{$package}/www/data/css/{$themeInfo->template}/{$code}"]       = "./theme/{$package}/www/data/css/{$themeInfo->template}/{$newCode}";
+        $files2move["./theme/{$package}/www/data/source/{$themeInfo->template}/{$code}"]    = "./theme/{$package}/www/data/source/{$themeInfo->template}/{$newCode}";
+        $files2move["./theme/{$package}/system/module/ui/ext/config/{$code}.php"]           = "./theme/{$package}/system/module/ui/ext/config/{$newCode}.php";
+        $files2move["./theme/{$package}/www/template/{$themeInfo->template}/theme/{$code}"] = "./theme/{$package}/www/template/{$themeInfo->template}/theme/{$newCode}";
+        foreach($files2move as $oldFile => $newFile)
+        {
+            if(is_dir($oldFile))
+            {
+                rename($oldFile, $newFile);
+            }
+        }
+
+        rename("theme/{$package}", "theme/{$newPackage}");
+        return $newPackage;
      }
 }
