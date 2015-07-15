@@ -1,7 +1,6 @@
 <?php $templates       = $this->loadModel('ui')->getTemplates(); ?>
 <?php $currentTemplate = $this->config->template->name; ?>
 <?php $currentTheme    = $this->config->template->theme; ?>
-<?php $customThemePriv = commonModel::hasPriv('ui', 'customTheme');?>
 <nav id='menu'>
   <ul class='nav'>
     <li class='nav-item-primary'>
@@ -19,26 +18,22 @@
           <div class='menu-templates'>
             <ul class='nav'>
               <?php $templateThemes = ''; ?>
-              <?php foreach($templates as $code => $templateInfo):?>
+              <?php foreach($templates as $code => $tpl):?>
               <?php
               $isCurrent    = $currentTemplate == $code;
               $themeName    = $isCurrent ? $currentTheme : 'default';
               $themesList   = '';
               ?>
               <li class='menu-template <?php if($isCurrent) echo 'active';?>' data-template='<?php echo $code; ?>'>
-                <?php commonModel::printLink('ui', 'settemplate', "template={$code}&theme={$themeName}", $templateInfo['name']) ?>
+                <?php commonModel::printLink('ui', 'settemplate', "template={$code}&theme={$themeName}", $tpl['name']) ?>
               </li>
               <?php
-              foreach($templateInfo['themes'] as $themeCode => $name)
+              foreach($tpl['themes'] as $theTheme => $name)
               {
-                  $selectThemeUrl = $this->createLink('ui', 'setTemplate', "template={$code}&theme={$themeCode}");
-                  $themeClass = $isCurrent && $currentTheme == $themeCode ? 'current' : '';
-                  $themesList .= "<div class='theme menu-theme {$themeClass}' data-url='{$selectThemeUrl}' data-theme='{$themeCode}'><div class='theme-card'><i class='icon-ok icon'></i>";
-                  if($customThemePriv)
-                  {
-                      $themesList .= html::a($this->createLink('ui', 'customTheme', "theme={$themeCode}&template={$code}"), "<span class='icon-cog'></span> {$lang->ui->custom}", "class='btn btn-primary btn-custom'");
-                  }
-                  $themesList .= "<div class='theme-img'>" . html::image($webRoot . "template/{$code}/theme/{$themeCode}/preview.png") . '</div>';
+                  $selectThemeUrl = $this->createLink('ui', 'setTemplate', "template={$code}&theme={$theTheme}");
+                  $themeClass = $isCurrent && $currentTheme == $theTheme ? 'current' : '';
+                  $themesList .= "<div class='theme menu-theme {$themeClass}' data-url='{$selectThemeUrl}' data-theme='{$theTheme}'><div class='theme-card'><i class='icon-ok icon'></i>";
+                  $themesList .= "<div class='theme-img'>" . html::image($webRoot . "template/{$code}/theme/{$theTheme}/preview.png") . '</div>';
                   $themesList .= "<div class='theme-name'>{$name}</div>";
                   $themesList .= '</div></div>';
               }
@@ -60,7 +55,7 @@
         </div>
       </div>
     </li>
-    <li class="divider"></li>
+    <li class="divider angle"></li>
   </ul>
   <?php $moduleMenu = commonModel::createModuleMenu($this->moduleName, '', false);?>
   <?php if($moduleMenu) echo $moduleMenu;?>
@@ -109,9 +104,14 @@ $(function()
             }
         });
         return false;
-    });
+    }).on('click', '.btn-custom', function(e){e.stopPropagation();});
 
-    $('.menu-theme-picker').on('show.bs.dropdown show.zui.dropdown', refreshPicker);
+    $('.menu-theme-picker').on('show.bs.dropdown show.zui.dropdown', function()
+    {
+        var $list = $('#menu .menu-themes');
+        $list.css('max-height', $(window).height() - 170);
+        refreshPicker();
+    });
 
     refreshPicker();
 

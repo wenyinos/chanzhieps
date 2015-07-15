@@ -11,11 +11,6 @@
  */
 class package extends control
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     /**
      * Browse packages.
      *
@@ -174,6 +169,7 @@ class package extends control
         }
 
         $packageInfo = $this->package->parsePackageCFG($package);
+
         $type = isset($packageInfo->type) ? $packageInfo->type : 'extension';
 
         /* Checking the package pathes. */
