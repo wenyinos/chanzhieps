@@ -18,16 +18,16 @@
       <th class='w-200px'><?php echo $lang->block->page;?></th>
       <th class='text-center'><?php echo $lang->block->regionList;?></th>
     </tr>
-    <?php foreach($this->lang->block->$editTemplate->pages as $page => $name):?>
-    <?php if(empty($lang->block->$editTemplate->regions->$page)) continue;?>
+    <?php foreach($this->lang->block->$template->pages as $page => $name):?>
+    <?php if(empty($lang->block->$template->regions->$page)) continue;?>
     <tr>
       <td><?php echo $name;?></td>
       <td>
       <?php
-      $regions = $lang->block->$editTemplate->regions->$page;
+      $regions = $lang->block->$template->regions->$page;
       foreach($regions as $region => $regionName)
       {
-          commonModel::printLink('block', 'setregion', "page={$page}&region={$region}&editTemplate={$editTemplate}&editTheme={$editTheme}", $regionName, "class='btn btn-xs' data-toggle='modal'");
+          commonModel::printLink('block', 'setregion', "page={$page}&region={$region}", $regionName, "class='btn btn-xs' data-toggle='modal'");
       }
       ?>
       </td>

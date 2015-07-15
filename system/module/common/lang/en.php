@@ -126,7 +126,7 @@ $lang->menu->book     = 'Book|book|admin|';
 $lang->menu->page     = 'Page|article|admin|type=page';
 $lang->menu->forum    = 'Forum|forum|admin|';
 $lang->menu->site     = 'Site|site|setbasic|';
-$lang->menu->ui       = 'UI|ui|setlogo|';
+$lang->menu->ui       = 'UI|ui|customtheme|';
 $lang->menu->security = 'Security|site|setsecurity|';
 $lang->menu->user     = 'User|user|admin|';
 $lang->menu->order    = 'Order|order|admin|';
@@ -172,14 +172,13 @@ $lang->product->menu->browse = array('link' => 'All products|product|admin|', 'a
 /* Menu of UI module. */
 $lang->ui = new stdclass();
 $lang->ui->menu = new stdclass();
+$lang->ui->menu->logo    = 'Custom|ui|customtheme|';
 $lang->ui->menu->logo    = 'Logo|ui|setlogo|';
 $lang->ui->menu->favicon = 'Favicon|ui|setfavicon|';
 $lang->ui->menu->slide   = array('link' => 'Slide|slide|admin|',  'alias' => 'create,edit');
 $lang->ui->menu->theme   = 'Theme|ui|settemplate|';
 $lang->ui->menu->admin   = array('link' => 'Blocks|block|admin|', 'alias' => 'create,edit');
 $lang->ui->menu->pages   = array('link' => 'Layout|block|pages|', 'alias' => 'setregion');
-$lang->ui->menu->styles  = 'Base Style|ui|setbasestyle|';
-$lang->ui->menu->js      = 'Base js|ui|setbasejs|';
 $lang->ui->menu->source  = 'Source|file|sourcebrowse|';
 $lang->ui->menu->others  = 'Others|ui|others|';
 

@@ -2,9 +2,6 @@ $(document).ready(function()
 {
     $.setAjaxForm('#customThemeForm');
 
-    if($('.btn-reload').size() == 0) ajustModalSize();
-    $.setAjaxLoader('.loadInModal', '#ajaxModal');
-
     var $form = $('#customThemeForm');
     var $css = $('#css');
 
@@ -60,8 +57,6 @@ $(document).ready(function()
         $('#' + name).val($('[data-sid="' + name + '-1"]').val() + ' ' + $('[data-sid="' + name + '-2"]').val());
     });
 
-    $('#ajaxModal .modal-dialog').resize(ajustModalSize);
-
     // Hide tabs
     $('.theme-control-tab-pane').each(function()
     {
@@ -110,7 +105,5 @@ $(document).ready(function()
             $('#' + name).val($('[data-sid="' + name + '-1"]').val() + ' ' + $('[data-sid="' + name + '-2"]').val());
         });
     });
-
-    $('.codeeditor').codeeditor();
 });
 

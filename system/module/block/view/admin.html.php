@@ -15,7 +15,7 @@
   <div class='panel-heading'>
     <strong><i class='icon-th'></i> <?php echo $lang->block->browseBlocks;?></strong>
     <div class='panel-actions'>
-      <?php commonModel::printLink('block', 'create', "editTemplate=$editTemplate&editTheme=$editTheme", '<i class="icon-plus"></i> ' . $lang->block->create, 'class="btn btn-primary"');?>
+      <?php commonModel::printLink('block', 'create', '', '<i class="icon-plus"></i> ' . $lang->block->create, 'class="btn btn-primary"');?>
     </div>
   </div>
   <table class='table table-bordered table-hover table-striped'>
@@ -29,10 +29,10 @@
     <tr class='text-center'>
       <td><?php echo $block->id;?></td>
       <td class='text-left'><?php echo $block->title;?></td>
-      <td><?php echo $lang->block->$editTemplate->typeList[$block->type];?></td>
+      <td><?php echo $lang->block->$template->typeList[$block->type];?></td>
       <td>
         <?php 
-        commonModel::printLink('block', 'edit',   "editTemplate=$editTemplate&editTheme=$editTheme&blockID=$block->id&type=$block->type", $lang->edit);
+        commonModel::printLink('block', 'edit',"blockID=$block->id&type=$block->type", $lang->edit);
         commonModel::printLink('block', 'delete', "blockID=$block->id", $lang->delete, "class='deleter'");
         ?>
       </td>

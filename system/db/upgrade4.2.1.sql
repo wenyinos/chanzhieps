@@ -28,8 +28,7 @@ ALTER TABLE `eps_log` CHANGE `position` `location` char(100) NOT NULL;
 ALTER TABLE `eps_block` ADD `originID` smallint(5) unsigned NOT NULL;
 ALTER TABLE `eps_layout`
 ADD `theme` varchar(30) NOT NULL DEFAULT 'default' AFTER `template`,
-ADD `imported` enum('no', 'doing', 'finished') NOT NULL DEFAULT 'no';
+ADD `import` enum('no', 'doing', 'finished') NOT NULL DEFAULT 'no';
 
-ALTER TABLE `eps_layout`ADD UNIQUE `template_theme_page_region_lang` (`template`, `theme`, `page`, `region`, `lang`),DROP INDEX `layout`;
-
+ALTER TABLE `eps_layout`ADD UNIQUE `region` (`template`, `theme`, `page`, `region`, `lang`),DROP INDEX `layout`;
 ALTER TABLE `eps_file` CHANGE `objectID` `objectID` char(50) NOT NULL;

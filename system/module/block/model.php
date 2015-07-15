@@ -151,9 +151,9 @@ class blockModel extends model
      * @access public
      * @return array
      */
-    public function getRegionBlocks($page, $region, $editTemplate, $editTheme)
+    public function getRegionBlocks($page, $region, $template, $theme)
     {
-        $regionBlocks = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($editTemplate)->andWhere('theme')->eq($editTheme)->fetch('blocks');
+        $regionBlocks = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->andWhere('theme')->eq($theme)->fetch('blocks');
         $regionBlocks = json_decode($regionBlocks);
         if(empty($regionBlocks)) return array();
 
@@ -245,29 +245,29 @@ class blockModel extends model
     /**
      * Create type  select area.
      * 
-     * @param  string    $template
+     * @param  string    $template 
      * @param  string    $type 
      * @param  int       $blockID 
      * @access public
      * @return string
      */
-    public function createTypeSelector($editTemplate, $editTheme, $type, $blockID = 0)
+    public function createTypeSelector($template, $type, $blockID = 0)
     {
         $select = "<div class='btn-group'><button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown'>";
-        $select .= $this->lang->block->$editTemplate->typeList[$type] . " <span class='caret'></span></button>";
+        $select .= $this->lang->block->$template->typeList[$type] . " <span class='caret'></span></button>";
         $select .= "<ul class='dropdown-menu' role='menu'>";
-        foreach($this->lang->block->$editTemplate->typeGroups as $block => $group)
+        foreach($this->lang->block->$template->typeGroups as $block => $group)
         {
             if(isset($lastGroup) and $group !== $lastGroup) $select .= "<li class='divider'></li>";
             $lastGroup = $group;
             $class = ($block == $type) ? "class='active'" : '';
             if($blockID)
             {
-                $select .= "<li {$class}>" . html::a(helper::createLink('block', $this->app->getMethodName(), "editTemplate={$editTemplate}&editTheme={$editTheme}&blockID={$blockID}&type={$block}"), $this->lang->block->$editTemplate->typeList[$block]) . "</li>";
+                $select .= "<li {$class}>" . html::a(helper::createLink('block', $this->app->getMethodName(), "blockID={$blockID}&type={$block}"), $this->lang->block->$template->typeList[$block]) . "</li>";
             }
             else
             {
-                $select .= "<li {$class}>" . html::a(helper::createLink('block', $this->app->getMethodName(), "editTemplate={$editTemplate}&editTheme={$editTheme}&type={$block}"), $this->lang->block->$editTemplate->typeList[$block]) . "</li>";
+                $select .= "<li {$class}>" . html::a(helper::createLink('block', $this->app->getMethodName(), "type={$block}"), $this->lang->block->$template->typeList[$block]) . "</li>";
             }
         }
         $select .= "</ul></div>" .  html::hidden('type', $type);
@@ -284,10 +284,10 @@ class blockModel extends model
      * @access public
      * @return void
      */
-    public function createEntry($editTemplate, $editTheme, $region, $block = null, $key, $grade = 1)
+    public function createEntry($template, $region, $block = null, $key, $grade = 1)
     {
         $blockOptions[''] = $this->lang->block->select;
-        $blockOptions += $this->getPairs($editTemplate);
+        $blockOptions += $this->getPairs($template);
 
         $blockID = isset($block->id) ? $block->id : '';
         $type    = isset($block->type) ? $block->type : '';
@@ -315,7 +315,7 @@ class blockModel extends model
         if($grade == 1) $entry .= html::a('javascript:;', $this->lang->block->add, "class='plus'");
         if($grade == 2) $entry .= html::a('javascript:;', $this->lang->block->add, "class='plus-child'");
         $entry .= html::a('javascript:;', $this->lang->delete, "class='delete'");
-        $entry .= html::a(inlink('edit', "editTemplate={$editTemplate}&editTheme={$editTheme}&blockID={$blockID}&type={$type}"), $this->lang->edit, "class='edit'");
+        $entry .= html::a(inlink('edit', "blockID={$blockID}&type={$type}"), $this->lang->edit, "class='edit'");
         if($grade == 1) $entry .= html::a('javascript:;', $this->lang->block->addChild, "class='btn-add-child'");
         $entry .= '</div>';
         $entry .= "<div class='col col-move'><span class='sort-handle sort-handle-{$grade}'><i class='icon-move'></i> {$this->lang->block->sort}</span></div>";
@@ -327,7 +327,7 @@ class blockModel extends model
                 foreach($block->children as $child)
                 {
                     $key ++;
-                    $entry .= $this->createEntry($editTemplate, $editTheme, $region, $child, $key, 2);
+                    $entry .= $this->createEntry($template, $region, $child, $key, 2);
                 }
             }
             $entry .= '</div>';
@@ -343,7 +343,7 @@ class blockModel extends model
      * 
      * @param  string  $template
      * @access public
-     * @return void
+     * @return bool
      */
     public function create($template)
     {
@@ -375,7 +375,7 @@ class blockModel extends model
      * 
      * @param  string  $template
      * @access public
-     * @return void
+     * @return bool
      */
     public function update($template)
     {
@@ -393,9 +393,12 @@ class blockModel extends model
                 if($field == 'category' and is_array($value)) $data->params[$field] = join($value, ',');
             }
 
-            foreach($block->content as $field => $value)
+            if(isset($block->content->custom))
             {
-                if(is_object($value) and !isset($data->params[$field])) $data->params[$field] = $value;
+                foreach($block->content->custom as $field => $value)
+                {
+                    if(!isset($data->params['custom'][$field])) $data->params['custom'][$field] = $value;
+                }
             }
 
             if($this->post->content) $data->params['content'] = $gpcOn ? stripslashes($data->content) : $data->content;
@@ -418,7 +421,7 @@ class blockModel extends model
      * @param  int    $blockID 
      * @param  null    $table 
      * @access public
-     * @return void
+     * @return bool
      */
     public function delete($blockID, $table = null)
     {
@@ -432,20 +435,21 @@ class blockModel extends model
      * @param string $page 
      * @param string $region 
      * @param string $template 
+     * @param string $theme 
      * @access public
-     * @return void
+     * @return bool
      */
-    public function setRegion($page, $region, $editTemplate, $editTheme)
+    public function setRegion($page, $region, $template, $theme)
     {
         $layout = new stdclass();
         $layout->page     = $page;
         $layout->region   = $region;
-        $layout->template = $editTemplate;
-        $layout->theme    = $editTheme;
+        $layout->template = $template;
+        $layout->theme    = $theme;
 
         if(!$this->post->blocks)
         {
-            $this->dao->delete()->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($editTemplate)->andWhere('theme')->eq($editTheme)->exec();
+            $this->dao->delete()->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->andWhere('theme')->eq($theme)->exec();
             if(!dao::isError()) return true;
         }
 
@@ -479,8 +483,8 @@ class blockModel extends model
         foreach($blocks as $key => $block) $sortedBlocks[] = $block;
         $layout->blocks = helper::jsonEncode($sortedBlocks);
 
-        $count = $this->dao->select('count(*) as count')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($editTemplate)->andWhere('theme')->eq($editTheme)->fetch('count');
-        if($count)  $this->dao->update(TABLE_LAYOUT)->data($layout)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($editTemplate)->andWhere('theme')->eq($editTheme)->exec();
+        $count = $this->dao->select('count(*) as count')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->andWhere('theme')->eq($theme)->fetch('count');
+        if($count)  $this->dao->update(TABLE_LAYOUT)->data($layout)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->andWhere('theme')->eq($theme)->exec();
         if(!$count) $this->dao->insert(TABLE_LAYOUT)->data($layout)->exec();
 
         return !dao::isError();
@@ -492,10 +496,11 @@ class blockModel extends model
      * @param  array    $blocks 
      * @param  string   $method 
      * @param  string   $region 
+     * @param  bool     $withGrid 
      * @param  string   $containerHeader 
      * @param  string   $containerFooter 
      * @access public
-     * @return void
+     * @return string
      */
     public function printRegion($blocks, $method = '', $region = '', $withGrid = false, $containerHeader = '', $containerFooter = '')
     {
@@ -586,23 +591,23 @@ class blockModel extends model
             }
 
             $style  = '<style>';
-            if(isset($content->$theme))
+            if(isset($content->custom->$theme))
             {
                 $style .= '#block' . $block->id . '{';
-                $style .= !empty($content->$theme->backgroundColor) ? 'background-color:' . $content->$theme->backgroundColor . ' !important;' : '';
-                $style .= !empty($content->$theme->textColor) ? 'color:' . $content->$theme->textColor . ' !important;;' : '';
-                $style .= !empty($content->$theme->borderColor) ? 'border-color:' . $content->$theme->borderColor . ' !important;' : '';
+                $style .= !empty($content->custom->$theme->backgroundColor) ? 'background-color:' . $content->custom->$theme->backgroundColor . ' !important;' : '';
+                $style .= !empty($content->custom->$theme->textColor) ? 'color:' . $content->custom->$theme->textColor . ' !important;;' : '';
+                $style .= !empty($content->custom->$theme->borderColor) ? 'border-color:' . $content->custom->$theme->borderColor . ' !important;' : '';
                 $style .= '}';
                 $style .= '#block' . $block->id . ' .panel-heading{';
-                $style .= !empty($content->$theme->titleColor) ? 'color:' .$content->$theme->titleColor . ';' : '';
-                $style .= !empty($content->$theme->titleBackground) ? 'background:' .$content->$theme->titleBackground . ' !important;;' : '';
+                $style .= !empty($content->custom->$theme->titleColor) ? 'color:' .$content->custom->$theme->titleColor . ';' : '';
+                $style .= !empty($content->custom->$theme->titleBackground) ? 'background:' .$content->custom->$theme->titleBackground . ' !important;;' : '';
                 $style .= '}';
-                $style .= !empty($content->$theme->iconColor) ? '#block' . $block->id . ' i{color:' .$content->$theme->iconColor . ' !important;}' : '';
-                $style .= !empty($content->$theme->linkColor) ? '#block' . $block->id . ' a{color:' .$content->$theme->linkColor . ' !important;}' : '';
-                $style .= isset($content->$theme->paddingTop) ? '#block' . $block->id . ' .panel-body' . '{padding-top:' . $content->$theme->paddingTop . 'px !important;}' : '';
-                $style .= isset($content->$theme->paddingRight) ? '#block' . $block->id . ' .panel-body' . '{padding-right:' . $content->$theme->paddingRight . 'px !important;}' : '';
-                $style .= isset($content->$theme->paddingBottom) ? '#block' . $block->id . ' .panel-body' . '{padding-bottom:' . $content->$theme->paddingBottom . 'px !important;}' : '';
-                $style .= isset($content->$theme->paddingLeft) ? '#block' . $block->id . ' .panel-body' . '{padding-left:' . $content->$theme->paddingLeft . 'px !important;}' : '';
+                $style .= !empty($content->custom->$theme->iconColor) ? '#block' . $block->id . ' i{color:' .$content->custom->$theme->iconColor . ' !important;}' : '';
+                $style .= !empty($content->custom->$theme->linkColor) ? '#block' . $block->id . ' a{color:' .$content->custom->$theme->linkColor . ' !important;}' : '';
+                $style .= isset($content->custom->$theme->paddingTop) ? '#block' . $block->id . ' .panel-body' . '{padding-top:' . $content->custom->$theme->paddingTop . 'px !important;}' : '';
+                $style .= isset($content->custom->$theme->paddingRight) ? '#block' . $block->id . ' .panel-body' . '{padding-right:' . $content->custom->$theme->paddingRight . 'px !important;}' : '';
+                $style .= isset($content->custom->$theme->paddingBottom) ? '#block' . $block->id . ' .panel-body' . '{padding-bottom:' . $content->custom->$theme->paddingBottom . 'px !important;}' : '';
+                $style .= isset($content->custom->$theme->paddingLeft) ? '#block' . $block->id . ' .panel-body' . '{padding-left:' . $content->custom->$theme->paddingLeft . 'px !important;}' : '';
             }
             $style .= '</style>';
 
