@@ -55,6 +55,7 @@ class blockModel extends model
         $rawLayouts = $this->dao->select('*')->from(TABLE_LAYOUT)
             ->where('page')->in($pages)
             ->andWhere('template')->eq(!empty($this->config->template->name) ? $this->config->template->name : 'default')
+            ->andWhere('theme')->eq(!empty($this->config->template->theme) ? $this->config->template->theme : 'default')
             ->fetchGroup('page', 'region');
 
         $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->fetchAll('id');
@@ -150,9 +151,9 @@ class blockModel extends model
      * @access public
      * @return array
      */
-    public function getRegionBlocks($page, $region, $template)
+    public function getRegionBlocks($page, $region, $editTemplate, $editTheme)
     {
-        $regionBlocks = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->fetch('blocks');
+        $regionBlocks = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($editTemplate)->andWhere('theme')->eq($editTheme)->fetch('blocks');
         $regionBlocks = json_decode($regionBlocks);
         if(empty($regionBlocks)) return array();
 
@@ -283,10 +284,10 @@ class blockModel extends model
      * @access public
      * @return void
      */
-    public function createEntry($template, $region, $block = null, $key, $grade = 1)
+    public function createEntry($editTemplate, $editTheme, $region, $block = null, $key, $grade = 1)
     {
         $blockOptions[''] = $this->lang->block->select;
-        $blockOptions += $this->getPairs($template);
+        $blockOptions += $this->getPairs($editTemplate);
 
         $blockID = isset($block->id) ? $block->id : '';
         $type    = isset($block->type) ? $block->type : '';
@@ -314,7 +315,7 @@ class blockModel extends model
         if($grade == 1) $entry .= html::a('javascript:;', $this->lang->block->add, "class='plus'");
         if($grade == 2) $entry .= html::a('javascript:;', $this->lang->block->add, "class='plus-child'");
         $entry .= html::a('javascript:;', $this->lang->delete, "class='delete'");
-        $entry .= html::a(inlink('edit', "template={$template}&blockID={$blockID}&type={$type}"), $this->lang->edit, "class='edit'");
+        $entry .= html::a(inlink('edit', "editTemplate={$editTemplate}&editTheme={$editTheme}&blockID={$blockID}&type={$type}"), $this->lang->edit, "class='edit'");
         if($grade == 1) $entry .= html::a('javascript:;', $this->lang->block->addChild, "class='btn-add-child'");
         $entry .= '</div>';
         $entry .= "<div class='col col-move'><span class='sort-handle sort-handle-{$grade}'><i class='icon-move'></i> {$this->lang->block->sort}</span></div>";
@@ -326,7 +327,7 @@ class blockModel extends model
                 foreach($block->children as $child)
                 {
                     $key ++;
-                    $entry .= $this->createEntry($template, $region, $child, $key, 2);
+                    $entry .= $this->createEntry($editTemplate, $editTheme, $region, $child, $key, 2);
                 }
             }
             $entry .= '</div>';
@@ -434,16 +435,17 @@ class blockModel extends model
      * @access public
      * @return void
      */
-    public function setRegion($page, $region, $template)
+    public function setRegion($page, $region, $editTemplate, $editTheme)
     {
         $layout = new stdclass();
-        $layout->page   = $page;
-        $layout->region = $region;
-        $layout->template = $template;
+        $layout->page     = $page;
+        $layout->region   = $region;
+        $layout->template = $editTemplate;
+        $layout->theme    = $editTheme;
 
         if(!$this->post->blocks)
         {
-            $this->dao->delete()->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->exec();
+            $this->dao->delete()->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($editTemplate)->andWhere('theme')->eq($editTheme)->exec();
             if(!dao::isError()) return true;
         }
 
@@ -477,8 +479,8 @@ class blockModel extends model
         foreach($blocks as $key => $block) $sortedBlocks[] = $block;
         $layout->blocks = helper::jsonEncode($sortedBlocks);
 
-        $count = $this->dao->select('count(*) as count')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->fetch('count');
-        if($count)  $this->dao->update(TABLE_LAYOUT)->data($layout)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->exec();
+        $count = $this->dao->select('count(*) as count')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($editTemplate)->andWhere('theme')->eq($editTheme)->fetch('count');
+        if($count)  $this->dao->update(TABLE_LAYOUT)->data($layout)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($editTemplate)->andWhere('theme')->eq($editTheme)->exec();
         if(!$count) $this->dao->insert(TABLE_LAYOUT)->data($layout)->exec();
 
         return !dao::isError();

@@ -221,12 +221,13 @@ CREATE TABLE IF NOT EXISTS `eps_grouppriv` (
 -- DROP TABLE IF EXISTS `eps_layout`;
 CREATE TABLE IF NOT EXISTS `eps_layout` (
   `template` varchar(30) NOT NULL DEFAULT 'default',
+  `theme` varchar(30) NOT NULL DEFAULT 'default',
   `page` varchar(30) NOT NULL,
   `region` varchar(30) NOT NULL,
   `blocks` text NOT NULL,
   `imported` enum('no', 'doing', 'finished') NOT NULL DEFAULT 'no',
   `lang` char(30) NOT NULL,
-  UNIQUE KEY `layout` (`template`,`page`,`region`,`lang`)
+  UNIQUE KEY `layout` (`template`,`theme`,`page`,`region`,`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_message`;
