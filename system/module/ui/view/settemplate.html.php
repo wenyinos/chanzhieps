@@ -11,8 +11,6 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<?php include '../../common/view/codeeditor.html.php';?>
-<?php js::import($jsRoot . 'less/min.js'); ?>
 <div class='panel panel-templates'>
 <div class='cards cards-templates' data-template='<?php echo $this->config->template->name?>' data-theme='<?php echo $this->config->template->theme?>'>
   <?php $customThemePriv = commonModel::hasPriv('ui', 'customTheme');?>

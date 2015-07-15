@@ -1,8 +1,7 @@
 <?php $templates       = $this->loadModel('ui')->getTemplates(); ?>
 <?php $currentTemplate = $this->config->template->name; ?>
 <?php $currentTheme    = $this->config->template->theme; ?>
-<?php $editingTemplate = $this->ui->getEditingTemplate();?>
-<?php $editingTheme    = $this->ui->getEditingTheme();?>
+<?php $customThemePriv = commonModel::hasPriv('ui', 'customTheme');?>
 <nav id='menu'>
   <ul class='nav'>
     <li class='nav-item-primary'>
@@ -14,43 +13,43 @@
     </li>
     <li class="divider angle"></li>
     <li class='menu-theme-picker'>
-      <a href='javascript:;' data-toggle='dropdown'><span class='menu-template-name'><?php echo $templates[$editingTemplate]['name'];?></span><i class="icon icon-angle-right"></i><span class='menu-theme-name'><?php echo $templates[$editingTemplate]['themes'][$editingTheme]?></span> &nbsp;<i class='icon-caret-down'></i></a>
+      <a href='javascript:;' data-toggle='dropdown'><span class='menu-template-name'><?php echo $templates[$currentTemplate]['name'];?></span><i class="icon icon-angle-right"></i><span class='menu-theme-name'><?php echo $templates[$currentTemplate]['themes'][$currentTheme]?></span> &nbsp;<i class='icon-caret-down'></i></a>
       <div class='dropdown-menu theme-picker-dropdown'>
-        <div class='theme-picker' data-template='<?php echo $editingTemplate?>' data-theme='<?php echo $editingTheme?>'>
+        <div class='theme-picker' data-template='<?php echo $currentTemplate?>' data-theme='<?php echo $currentTheme?>'>
           <div class='menu-templates'>
             <ul class='nav'>
               <?php $templateThemes = ''; ?>
               <?php foreach($templates as $code => $tpl):?>
               <?php
               $isCurrent    = $currentTemplate == $code;
-              $isEditing    = $editingTemplate == $code;
-              $themeName    = $isEditing ? $editingTheme : 'default';
+              $themeName    = $isCurrent ? $currentTheme : 'default';
               $themesList   = '';
               ?>
-              <li class='menu-template <?php if($isEditing) echo 'active';?>' data-template='<?php echo $code; ?>'>
-                <?php commonModel::printLink('ui', 'settemplate', "template=&theme=&custome=false&editTemplate={$code}&editTheme={$themeName}", $tpl['name']) ?>
+              <li class='menu-template <?php if($isCurrent) echo 'active';?>' data-template='<?php echo $code; ?>'>
+                <?php commonModel::printLink('ui', 'settemplate', "template={$code}&theme={$themeName}", $tpl['name']) ?>
               </li>
               <?php
-              foreach($tpl['themes'] as $theme => $name)
+              foreach($tpl['themes'] as $theTheme => $name)
               {
-                  $editingClass = ($isEditing and $editingTheme == $theme) ? ' active' : '';
-                  $themesList .= "<li class='menu-theme {$editingClass}' data-theme='{$theme}'>" . html::a($this->createLink('ui', 'setTemplate', "template=&theme=&custome=false&editTemplate={$code}&editTheme={$theme}"), $name) . '</li>';
+                  $selectThemeUrl = $this->createLink('ui', 'setTemplate', "template={$code}&theme={$theTheme}");
+                  $themeClass = $isCurrent && $currentTheme == $theTheme ? 'current' : '';
+                  $themesList .= "<div class='theme menu-theme {$themeClass}' data-url='{$selectThemeUrl}' data-theme='{$theTheme}'><div class='theme-card'><i class='icon-ok icon'></i>";
+                  $themesList .= "<div class='theme-img'>" . html::image($webRoot . "template/{$code}/theme/{$theTheme}/preview.png") . '</div>';
+                  $themesList .= "<div class='theme-name'>{$name}</div>";
+                  $themesList .= '</div></div>';
               }
               ?>
-              <?php $templateThemes .= "<ul class='menu-themes nav" . ($isEditing ? ' show' : '') . "' data-template='{$code}'>" . $themesList . '</ul>'; ?>
+              <?php $templateThemes .= "<div class='menu-themes clearfix" . ($isCurrent ? ' show' : '') . "' data-template='{$code}'>" . $themesList . '</div>'; ?>
               <?php endforeach;?>
             </ul>
           </div>
           <div class='menu-themes-list'>
             <?php echo $templateThemes; ?>
           </div>
-          <div class='menu-theme-preview'>
-            <?php echo html::image($webRoot . 'template/' . $editingTemplate . '/theme/' . $editingTheme . '/preview.png');?>
-          </div>
         </div>
         <div class='theme-picker-footer'>
           <div class='pull-right'>
-            <?php commonModel::printLink('ui', 'customTheme', "theme={$editingTheme}&template={$editingTemplate}", '<i class="icon-cog"></i> ' . $lang->ui->customtheme, 'class="btn btn-link"')?>
+            <?php commonModel::printLink('ui', 'customTheme', '', '<i class="icon-cog"></i> ' . $lang->ui->customtheme, 'class="btn btn-link"')?>
             <?php commonModel::printLink('ui', 'setTemplate', '', '<i class="icon-cogs"></i> ' . $lang->ui->setTemplate, 'class="btn btn-link"')?>
           </div>
           <?php echo $lang->ui->currentTheme ?>： <span class='menu-template-name'><?php echo $templates[$config->template->name]['name'];?></span> <i class="icon icon-angle-right"></i> <span class='menu-theme-name'><?php echo $templates[$config->template->name]['themes'][$currentTheme]?></span>
@@ -73,32 +72,27 @@
 $(function()
 {
     var $themePicker = $('#menu .theme-picker');
-    var refreshPicker = function(template, theme)
-    {
-        if(!template || typeof(template) !== 'string') template = $(this).data('template') || $themePicker.attr('data-template');
-        if(!theme || typeof(theme) !== 'string') theme = $(this).data('theme') || $themePicker.attr('data-theme');
 
-        console.log('refreshPicker template', template, 'theme', theme);
+    var refreshPicker = function(template)
+    {
+        var currentTemplate = $themePicker.attr('data-template');
+        var currentTheme = $themePicker.attr('data-theme');
+        if(!template || typeof(template) !== 'string') template = $(this).data('template') || currentTemplate;
 
         $themePicker.find('.menu-template.hover').removeClass('hover');
         $themePicker.find('.menu-template[data-template="' + template + '"]').addClass('hover');
 
+        $themePicker.find('.menu-theme.current').removeClass('current');
         $themePicker.find('.menu-themes.show').removeClass('show');
         $themePicker.find('.menu-themes[data-template="' + template + '"]').addClass('show');
-        $themePicker.find('.menu-theme.hover').removeClass('hover');
-        $themePicker.find('.menu-theme[data-theme="' + theme + '"]').addClass('hover');
-        $themePicker.find('.menu-theme-preview img').attr('src', '<?php echo $webRoot;?>template/' + template + '/theme/' + theme + '/preview.png');
+        $themePicker.find('.menu-themes[data-template="' + currentTemplate + '"] .menu-theme[data-theme="' + currentTheme + '"]').addClass('current');
     };
 
     $themePicker.on('mouseenter', '.menu-template', refreshPicker)
-    .on('mouseenter', '.menu-theme', function()
+    .on('click', '.menu-template > a, .menu-theme', function(e)
     {
         var $this = $(this);
-        refreshPicker($this.closest('.menu-themes').data('template'), $this.data('theme'));
-    })
-    .on('click', '.menu-template > a, .menu-theme > a', function(e)
-    {
-        $.getJSON($(this).attr('href'), function(response)
+        $.getJSON($this.attr('href') || $this.data('url'), function(response)
         {
             if(response.result == 'success')
             {
@@ -111,7 +105,7 @@ $(function()
             }
         });
         return false;
-    });
+    }).on('click', '.btn-custom', function(e){e.stopPropagation();});
 
     $('.menu-theme-picker').on('show.bs.dropdown show.zui.dropdown', refreshPicker);
 

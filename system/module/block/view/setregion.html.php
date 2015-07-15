@@ -11,7 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.modal.html.php';?>
-  <form id='ajaxForm' action="<?php echo inlink('setregion', "page={$page}&region={$region}&template={$template}");?>" method='post'>
+  <form id='ajaxForm' action="<?php echo inlink('setregion', "page={$page}&region={$region}");?>" method='post'>
     <div id='blockList'>
       <?php $key = 0; foreach($blocks as $block){ echo $this->block->createEntry($template, $region, $block, $key); $key = $this->block->counter; $key ++;}?>
     </div>

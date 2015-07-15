@@ -12,27 +12,22 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel'>
-  <div class='panel-heading'>
-    <strong><i class='icon-columns'></i> <?php echo $lang->block->browseRegion;?></strong>
-    <?php foreach($templates as $template):?>
-      <?php echo html::a(helper::createLink('block', 'pages', 'template=' . $template['code']), $template['name'], $currentTemplate == $template['code'] ? "class='active'" : "");?>
-    <?php endforeach;?>
-  </div>
+  <div class='panel-heading'><strong><i class='icon-columns'></i> <?php echo $lang->block->browseRegion;?></strong></div>
   <table class='table table-bordered table-hover table-striped'>
     <tr>
       <th class='w-200px'><?php echo $lang->block->page;?></th>
       <th class='text-center'><?php echo $lang->block->regionList;?></th>
     </tr>
-    <?php foreach($this->lang->block->$currentTemplate->pages as $page => $name):?>
-    <?php if(empty($lang->block->$currentTemplate->regions->$page)) continue;?>
+    <?php foreach($this->lang->block->$template->pages as $page => $name):?>
+    <?php if(empty($lang->block->$template->regions->$page)) continue;?>
     <tr>
       <td><?php echo $name;?></td>
       <td>
       <?php
-      $regions = $lang->block->$currentTemplate->regions->$page;
+      $regions = $lang->block->$template->regions->$page;
       foreach($regions as $region => $regionName)
       {
-          commonModel::printLink('block', 'setregion', "page={$page}&region={$region}&template={$currentTemplate}", $regionName, "class='btn btn-xs' data-toggle='modal'");
+          commonModel::printLink('block', 'setregion', "page={$page}&region={$region}", $regionName, "class='btn btn-xs' data-toggle='modal'");
       }
       ?>
       </td>

@@ -55,6 +55,7 @@ class blockModel extends model
         $rawLayouts = $this->dao->select('*')->from(TABLE_LAYOUT)
             ->where('page')->in($pages)
             ->andWhere('template')->eq(!empty($this->config->template->name) ? $this->config->template->name : 'default')
+            ->andWhere('theme')->eq(!empty($this->config->template->theme) ? $this->config->template->theme : 'default')
             ->fetchGroup('page', 'region');
 
         $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->fetchAll('id');
@@ -150,9 +151,9 @@ class blockModel extends model
      * @access public
      * @return array
      */
-    public function getRegionBlocks($page, $region, $template)
+    public function getRegionBlocks($page, $region, $template, $theme)
     {
-        $regionBlocks = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->fetch('blocks');
+        $regionBlocks = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->andWhere('theme')->eq($theme)->fetch('blocks');
         $regionBlocks = json_decode($regionBlocks);
         if(empty($regionBlocks)) return array();
 
@@ -244,29 +245,29 @@ class blockModel extends model
     /**
      * Create type  select area.
      * 
-     * @param  string    $template
+     * @param  string    $template 
      * @param  string    $type 
      * @param  int       $blockID 
      * @access public
      * @return string
      */
-    public function createTypeSelector($editTemplate, $editTheme, $type, $blockID = 0)
+    public function createTypeSelector($template, $type, $blockID = 0)
     {
         $select = "<div class='btn-group'><button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown'>";
-        $select .= $this->lang->block->$editTemplate->typeList[$type] . " <span class='caret'></span></button>";
+        $select .= $this->lang->block->$template->typeList[$type] . " <span class='caret'></span></button>";
         $select .= "<ul class='dropdown-menu' role='menu'>";
-        foreach($this->lang->block->$editTemplate->typeGroups as $block => $group)
+        foreach($this->lang->block->$template->typeGroups as $block => $group)
         {
             if(isset($lastGroup) and $group !== $lastGroup) $select .= "<li class='divider'></li>";
             $lastGroup = $group;
             $class = ($block == $type) ? "class='active'" : '';
             if($blockID)
             {
-                $select .= "<li {$class}>" . html::a(helper::createLink('block', $this->app->getMethodName(), "editTemplate={$editTemplate}&editTheme={$editTheme}&blockID={$blockID}&type={$block}"), $this->lang->block->$editTemplate->typeList[$block]) . "</li>";
+                $select .= "<li {$class}>" . html::a(helper::createLink('block', $this->app->getMethodName(), "blockID={$blockID}&type={$block}"), $this->lang->block->$template->typeList[$block]) . "</li>";
             }
             else
             {
-                $select .= "<li {$class}>" . html::a(helper::createLink('block', $this->app->getMethodName(), "editTemplate={$editTemplate}&editTheme={$editTheme}&type={$block}"), $this->lang->block->$editTemplate->typeList[$block]) . "</li>";
+                $select .= "<li {$class}>" . html::a(helper::createLink('block', $this->app->getMethodName(), "type={$block}"), $this->lang->block->$template->typeList[$block]) . "</li>";
             }
         }
         $select .= "</ul></div>" .  html::hidden('type', $type);
@@ -314,7 +315,7 @@ class blockModel extends model
         if($grade == 1) $entry .= html::a('javascript:;', $this->lang->block->add, "class='plus'");
         if($grade == 2) $entry .= html::a('javascript:;', $this->lang->block->add, "class='plus-child'");
         $entry .= html::a('javascript:;', $this->lang->delete, "class='delete'");
-        $entry .= html::a(inlink('edit', "template={$template}&blockID={$blockID}&type={$type}"), $this->lang->edit, "class='edit'");
+        $entry .= html::a(inlink('edit', "blockID={$blockID}&type={$type}"), $this->lang->edit, "class='edit'");
         if($grade == 1) $entry .= html::a('javascript:;', $this->lang->block->addChild, "class='btn-add-child'");
         $entry .= '</div>';
         $entry .= "<div class='col col-move'><span class='sort-handle sort-handle-{$grade}'><i class='icon-move'></i> {$this->lang->block->sort}</span></div>";
@@ -342,7 +343,7 @@ class blockModel extends model
      * 
      * @param  string  $template
      * @access public
-     * @return void
+     * @return bool
      */
     public function create($template)
     {
@@ -374,7 +375,7 @@ class blockModel extends model
      * 
      * @param  string  $template
      * @access public
-     * @return void
+     * @return bool
      */
     public function update($template)
     {
@@ -417,7 +418,7 @@ class blockModel extends model
      * @param  int    $blockID 
      * @param  null    $table 
      * @access public
-     * @return void
+     * @return bool
      */
     public function delete($blockID, $table = null)
     {
@@ -431,19 +432,21 @@ class blockModel extends model
      * @param string $page 
      * @param string $region 
      * @param string $template 
+     * @param string $theme 
      * @access public
-     * @return void
+     * @return bool
      */
-    public function setRegion($page, $region, $template)
+    public function setRegion($page, $region, $template, $theme)
     {
         $layout = new stdclass();
-        $layout->page   = $page;
-        $layout->region = $region;
+        $layout->page     = $page;
+        $layout->region   = $region;
         $layout->template = $template;
+        $layout->theme    = $theme;
 
         if(!$this->post->blocks)
         {
-            $this->dao->delete()->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->exec();
+            $this->dao->delete()->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->andWhere('theme')->eq($theme)->exec();
             if(!dao::isError()) return true;
         }
 
@@ -477,8 +480,8 @@ class blockModel extends model
         foreach($blocks as $key => $block) $sortedBlocks[] = $block;
         $layout->blocks = helper::jsonEncode($sortedBlocks);
 
-        $count = $this->dao->select('count(*) as count')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->fetch('count');
-        if($count)  $this->dao->update(TABLE_LAYOUT)->data($layout)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->exec();
+        $count = $this->dao->select('count(*) as count')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->andWhere('theme')->eq($theme)->fetch('count');
+        if($count)  $this->dao->update(TABLE_LAYOUT)->data($layout)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->andWhere('theme')->eq($theme)->exec();
         if(!$count) $this->dao->insert(TABLE_LAYOUT)->data($layout)->exec();
 
         return !dao::isError();
@@ -490,10 +493,11 @@ class blockModel extends model
      * @param  array    $blocks 
      * @param  string   $method 
      * @param  string   $region 
+     * @param  bool     $withGrid 
      * @param  string   $containerHeader 
      * @param  string   $containerFooter 
      * @access public
-     * @return void
+     * @return string
      */
     public function printRegion($blocks, $method = '', $region = '', $withGrid = false, $containerHeader = '', $containerFooter = '')
     {

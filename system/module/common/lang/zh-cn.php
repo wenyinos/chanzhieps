@@ -126,7 +126,7 @@ $lang->menu->book     = '手册|book|admin|';
 $lang->menu->page     = '单页|article|admin|type=page';
 $lang->menu->forum    = '论坛|forum|admin|';
 $lang->menu->site     = '站点|site|setbasic|';
-$lang->menu->ui       = '界面|ui|settemplate|';
+$lang->menu->ui       = '界面|ui|customtheme|';
 $lang->menu->security = '安全|site|setsecurity|';
 $lang->menu->user     = '会员|user|admin|';
 $lang->menu->order    = '订单|order|admin|';
@@ -172,6 +172,7 @@ $lang->product->menu->browse = array('link' => '所有产品|product|admin|', 'a
 /* Menu of UI module. */
 $lang->ui = new stdclass();
 $lang->ui->menu = new stdclass();
+$lang->ui->menu->custom    = '自定义|ui|customtheme|';
 $lang->ui->menu->logo    = 'Logo|ui|setlogo|';
 $lang->ui->menu->favicon = '小图标|ui|setfavicon|';
 $lang->ui->menu->slide   = '幻灯片|tree|browse|type=slide';

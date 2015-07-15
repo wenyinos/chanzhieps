@@ -2,7 +2,7 @@ $(document).ready(function()
 {
     $('#type').change(function()
     {
-        location.href = createLink('block', 'create', 'editTemplate=' + v.editTemplate + 'editTheme=' + v.editTheme + 'type=' + $(this).val());
+        location.href = createLink('block', 'create', 'type=' + $(this).val());
     })
 
     $.setAjaxForm('#createForm', function(response)

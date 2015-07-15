@@ -95,8 +95,7 @@ class ui extends control
 
         $this->view->setting = !empty($setting[$template][$theme]) ? $setting[$template][$theme] : array();
 
-        $this->view->title      = "<i class='icon-cog'></i> " . $this->lang->ui->customtheme;
-        $this->view->modalWidth = 1000;
+        $this->view->title      = $this->lang->ui->customtheme;
         $this->view->theme      = $theme;
         $this->view->template   = $template;
         $this->view->hasPriv    = true;
@@ -126,8 +125,8 @@ class ui extends control
             if(!$return['result']) $this->send(array('result' => 'fail', 'message' => $return['message']));
         }
 
-        $editingTheme = $this->ui->getEditingTheme();
-        if(isset($this->config->logo->$editingTheme)) $this->config->site->logo = $this->config->logo->$editingTheme;
+        $theme = $this->config->template->theme;
+        if(isset($this->config->logo->$theme)) $this->config->site->logo = $this->config->logo->$theme;
 
         $this->view->title = $this->lang->ui->setLogo;
         $this->view->logo  = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : false;
@@ -229,7 +228,7 @@ class ui extends control
      */ 
     public function deleteLogo() 
     {
-        $theme = $this->ui->getEditingTheme();
+        $theme = $this->config->template->theme;
         $this->loadModel('setting')->deleteItems("owner=system&module=common&section=logo&key=$theme");
         $this->loadModel('setting')->deleteItems("owner=system&module=common&section=site&key=logo");
 
