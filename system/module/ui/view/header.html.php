@@ -64,6 +64,7 @@
   <div class="pull-right">
     <ul class="nav">
       <li><?php commonModel::printLink('package', 'upload', '', '<i class="icon-download-alt"></i> ' . $lang->ui->installTemplate, "data-toggle='modal' data-width='600'")?></li>
+      <li><?php commonModel::printLink('ui', 'uploadTheme', '', '<i class="icon-download-alt"></i> ' . $lang->ui->uploadTheme, "data-toggle='modal' data-width='600'")?></li>
       <li><?php commonModel::printLink('ui', 'exportTheme', '', '<i class="icon-upload-alt"></i> ' . $lang->ui->exportTheme, "data-toggle='modal' data-width='600'")?></li>
     </ul>
   </div>
@@ -76,8 +77,6 @@ $(function()
     {
         if(!template || typeof(template) !== 'string') template = $(this).data('template') || $themePicker.attr('data-template');
         if(!theme || typeof(theme) !== 'string') theme = $(this).data('theme') || $themePicker.attr('data-theme');
-
-        console.log('refreshPicker template', template, 'theme', theme);
 
         $themePicker.find('.menu-template.hover').removeClass('hover');
         $themePicker.find('.menu-template[data-template="' + template + '"]').addClass('hover');
