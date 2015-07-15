@@ -17,14 +17,28 @@ class ui extends control
      * @param  string   $template 
      * @param  string   $theme 
      * @param  bool     $custom 
+     * @param  string   $editTemplate 
+     * @param  string   $editTheme 
      * @access public
      * @return void
      */
-    public function setTemplate($template = '', $theme = '', $custom = false)
+    public function setTemplate($template = '', $theme = '', $custom = false, $editTemplate = '', $editTheme = '')
     {
         $templates = $this->ui->getTemplates();
+
+        /* Set editing template and theme in session. */
+        if($editTemplate != '' and $editTheme != '')
+        {
+            if(isset($templates[$editTemplate])) $this->session->set('editTemplate', $editTemplate);
+            if(isset($templates[$editTemplate]['themes'][$editTheme])) $this->session->set('editTheme', $editTheme);
+            $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
+        }
+
         if($template and isset($templates[$template]))
         {  
+            $this->session->set('editTemplate', $editTemplate);
+            $this->session->set('editTheme', $editTheme);
+
             $setting = array();
             $setting['name']   = $template;
             $setting['theme']  = $theme;
@@ -111,6 +125,9 @@ class ui extends control
             if($return['result']) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate'=>inlink('setLogo')));
             if(!$return['result']) $this->send(array('result' => 'fail', 'message' => $return['message']));
         }
+
+        $editingTheme = $this->ui->getEditingTheme();
+        if(isset($this->config->logo->$editingTheme)) $this->config->site->logo = $this->config->logo->$editingTheme;
 
         $this->view->title = $this->lang->ui->setLogo;
         $this->view->logo  = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : false;
@@ -212,9 +229,14 @@ class ui extends control
      */ 
     public function deleteLogo() 
     {
-        $logo = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : false;
-
+        $theme = $this->ui->getEditingTheme();
+        $this->loadModel('setting')->deleteItems("owner=system&module=common&section=logo&key=$theme");
         $this->loadModel('setting')->deleteItems("owner=system&module=common&section=site&key=logo");
+
+        $logo = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : false;
+        if($logo) $this->loadModel('file')->delete($logo->fileID);
+
+        $logo = isset($this->config->logo->$theme) ? json_decode($this->config->logo->$theme) : false;
         if($logo) $this->loadModel('file')->delete($logo->fileID);
 
         $this->locate(inlink('setLogo'));

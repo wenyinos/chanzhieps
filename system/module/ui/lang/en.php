@@ -9,11 +9,11 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->ui->common       = "Site";
+$lang->ui->common = "Site";
 
-$lang->ui->clientDesktop       = 'Desktop';
-$lang->ui->clientMobile        = 'Mobile';
-$lang->ui->switchTemplateTheme = 'Switch template';
+$lang->ui->clientDesktop = 'Desktop';
+$lang->ui->clientMobile  = 'Mobile';
+$lang->ui->currentTheme  = 'Used template&theme';
 
 $lang->ui->logo            = 'Logo';
 $lang->ui->setLogo         = "Set Logo";
@@ -46,6 +46,9 @@ $lang->ui->productViewList[0] = 'Hide';
 
 $lang->ui->QRCodeList[1] = 'Show'; 
 $lang->ui->QRCodeList[0] = 'Hide'; 
+
+$lang->ui->logoList['current'] = 'Current theme';
+$lang->ui->logoList['all']     = 'All theme';
 
 $lang->ui->favicon = new stdclass();
 $lang->ui->favicon->help  = "Help";

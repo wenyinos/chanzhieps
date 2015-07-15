@@ -104,6 +104,7 @@ class upgradeModel extends model
                 $this->execSQL($this->getUpgradeFile('4.2.1'));
                 $this->moveSlideData();
                 $this->fixLocationConfig();
+                $this->updateBlockTheme();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -1211,5 +1212,95 @@ class upgradeModel extends model
     public function fixLocationConfig()
     {
         $this->dao->update(TABLE_CONFIG)->set('`key`')->eq('allowedLocation')->where('`key`')->eq('allowedPosition')->andWhere('section')->eq('site')->exec();
+    }
+
+    /**
+     * Update block theme for custom style when upgrade from 4.2.1.
+     * 
+     * @access public
+     * @return void
+     */
+    public function updateBlockTheme()
+    {
+        $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->fetchAll();
+        $theme = $this->config->template->theme;
+        foreach($blocks as $block)
+        {
+            $content = json_decode($block->content, true);
+
+            if(!isset($content[$theme])) $content[$theme] = array();
+
+            if(isset($content['iconColor']))
+            {
+                $content[$theme]['iconColor'] = $content['iconColor'];
+                unset($content['iconColor']);
+            }
+
+            if(isset($content['borderColor']))
+            {
+                $content[$theme]['borderColor'] = $content['borderColor'];
+                unset($content['borderColor']);
+            }
+
+            if(isset($content['titleColor']))
+            {
+                $content[$theme]['titleColor'] = $content['titleColor'];
+                unset($content['titleColor']);
+            }
+
+            if(isset($content['titleBackground']))
+            {
+                $content[$theme]['titleBackground'] = $content['titleBackground'];
+                unset($content['titleBackground']);
+            }
+
+            if(isset($content['textColor']))
+            {
+                $content[$theme]['textColor'] = $content['textColor'];
+                unset($content['textColor']);
+            }
+
+            if(isset($content['linkColor']))
+            {
+                $content[$theme]['linkColor'] = $content['linkColor'];
+                unset($content['linkColor']);
+            }
+
+            if(isset($content['backgroundColor']))
+            {
+                $content[$theme]['backgroundColor'] = $content['backgroundColor'];
+                unset($content['backgroundColor']);
+            }
+
+            if(isset($content['paddingTop']))
+            {
+                $content[$theme]['paddingTop'] = $content['paddingTop'];
+                unset($content['paddingTop']);
+            }
+
+            if(isset($content['paddingRight']))
+            {
+                $content[$theme]['paddingRight'] = $content['paddingRight'];
+                unset($content['paddingRight']);
+            }
+
+            if(isset($content['paddingBottom']))
+            {
+                $content[$theme]['paddingBottom'] = $content['paddingBottom'];
+                unset($content['paddingBottom']);
+            }
+
+            if(isset($content['paddingLeft']))
+            {
+                $content[$theme]['paddingLeft'] = $content['paddingLeft'];
+                unset($content['paddingLeft']);
+            }
+
+            if(empty($content[$theme])) continue;
+
+            $block->content = helper::jsonEncode($content);
+            $this->dao->update(TABLE_BLOCK)->set('content')->eq($block->content)->where('id')->eq($block->id)->exec();
+        }
+        return !dao::isError();
     }
 }
