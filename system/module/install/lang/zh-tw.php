@@ -61,16 +61,17 @@ $lang->install->dataRoot     = '上傳檔案目錄';
 $lang->install->mkdir        = '<p>需要創建目錄%s。linux下面命令為：<br /> <code>mkdir -p %s</code></p>';
 $lang->install->chmod        = '需要修改目錄 "%s" 的權限。linux下面命令為：<br /><code>chmod o=rwx -R %s</code>';
 
-$lang->install->settingDB  = '設置資料庫';
-$lang->install->dbHost     = '資料庫伺服器';
-$lang->install->dbHostNote = '如果127.0.0.1無法訪問，嘗試使用localhost';
-$lang->install->dbPort     = '伺服器連接埠';
-$lang->install->dbUser     = '資料庫用戶名';
-$lang->install->dbPassword = '資料庫密碼';
-$lang->install->dbName     = '資料庫名';
-$lang->install->dbPrefix   = '建表使用的首碼';
-$lang->install->createDB   = '自動創建資料庫';
-$lang->install->clearDB    = '清空現有數據';
+$lang->install->settingDB      = '設置資料庫';
+$lang->install->dbHost         = '資料庫伺服器';
+$lang->install->dbHostNote     = '如果127.0.0.1無法訪問，嘗試使用localhost';
+$lang->install->dbPort         = '伺服器連接埠';
+$lang->install->dbUser         = '資料庫用戶名';
+$lang->install->dbPassword     = '資料庫密碼';
+$lang->install->dbName         = '資料庫名';
+$lang->install->dbPrefix       = '建表使用的首碼';
+$lang->install->createDB       = '自動創建資料庫';
+$lang->install->clearDB        = '清空現有數據';
+$lang->install->importDemoData = '導入demo數據';
 
 $lang->install->errorDBName        = "資料庫名不能帶'.'";
 $lang->install->errorConnectDB     = '資料庫連接失敗。 ';

@@ -13,8 +13,6 @@ $lang->ui->common = "Site";
 
 $lang->ui->clientDesktop = 'Desktop';
 $lang->ui->clientMobile  = 'Mobile';
-$lang->ui->currentTheme  = 'Used template&theme';
-
 $lang->ui->logo            = 'Logo';
 $lang->ui->setLogo         = "Set Logo";
 $lang->ui->setTemplate     = 'Set Template';
@@ -23,23 +21,32 @@ $lang->ui->exportTheme     = 'Export Theme';
 $lang->ui->setTheme        = 'Set Theme';
 $lang->ui->customTheme     = 'Custom theme';
 $lang->ui->setFavicon      = "Set favicon";
-$lang->ui->setBaseStyle    = "Set base style";
-$lang->ui->setBaseJs       = "Set base js";
 $lang->ui->deleteFavicon   = "Delete favicon";
 $lang->ui->deleteLogo      = "Delete logo";
 $lang->ui->others          = "Set others";
 $lang->ui->productView     = "Product view";
 $lang->ui->QRCode          = "QR Code";
 $lang->ui->templateName    = "Template Name";
+$lang->ui->currentTheme    = 'Used template&theme';
+$lang->ui->uploadTheme     = 'Upload Theme';
+$lang->ui->installTheme    = 'Install Theme';
+$lang->ui->importedBlocks  = 'Import Blocks';
+$lang->ui->matchedBlock    = 'Matched Blocks';
+$lang->ui->createBlock     = 'Create Block';
+$lang->ui->useOldBlock     = 'Use Old Blocks';
 
-$lang->ui->deleteFavicon     = "Do not display favicon";
-$lang->ui->noStyleTag        = "Please write base CSS file code, No &lt;style&gt;&lt;/style&gt; tag.";
-$lang->ui->noJsTag           = "Please write base JS file code, No &lt;script&gt;&lt;/script&gt; tag.";
-$lang->ui->setLogoFailed     = "Set logo failed.";
-$lang->ui->noSelectedFile    = "No file selected.";
-$lang->ui->notAlloweFileType = "Please select %s files.";
-$lang->ui->suitableLogoSize  = 'Suitable height: 50px~80p, width: 80px~240px';
-$lang->ui->exportedSuccess   = 'Export Successfully';
+$lang->ui->noStyleTag             = "Please write base CSS file code, No &lt;style&gt;&lt;/style&gt; tag.";
+$lang->ui->noJsTag                = "Please write base JS file code, No &lt;script&gt;&lt;/script&gt; tag.";
+$lang->ui->setLogoFailed          = "Set logo failed.";
+$lang->ui->noSelectedFile         = "No file selected.";
+$lang->ui->notAlloweFileType      = "Please select %s files.";
+$lang->ui->suitableLogoSize       = 'Suitable height: 50px~80p, width: 80px~240px';
+$lang->ui->exportedSuccess        = 'Export Successfully';
+$lang->ui->deleteThemeSuccess     = 'Delete theme successfully';
+$lang->ui->deleteThemeFail        = 'Delete theme failed';
+$lang->ui->fileRequired           = 'Please select file';
+$lang->ui->importThemeSuccess     = 'Import theme successfully';
+$lang->ui->packagePathUnwriteable = 'Package directory is not writable.';
 
 $lang->ui->productViewList[1] = 'Show'; 
 $lang->ui->productViewList[0] = 'Hide'; 
@@ -50,11 +57,18 @@ $lang->ui->QRCodeList[0] = 'Hide';
 $lang->ui->logoList['current'] = 'Current theme';
 $lang->ui->logoList['all']     = 'All theme';
 
+$lang->ui->deleteThemeList['blue']       = 'Blue';
+$lang->ui->deleteThemeList['brightdark'] = 'Brightdark';
+$lang->ui->deleteThemeList['flat']       = 'Flat';
+$lang->ui->deleteThemeList['tree']       = 'Tree';
+$lang->ui->deleteThemeList['colorful']   = 'Colorful';
+
 $lang->ui->favicon = new stdclass();
 $lang->ui->favicon->help  = "Help";
 
 $lang->ui->template = new stdclass();
 $lang->ui->template->name            = 'Name';
+$lang->ui->template->code            = 'Code';
 $lang->ui->template->version         = 'Version';
 $lang->ui->template->author          = 'Author';
 $lang->ui->template->charge          = 'Charge';
@@ -62,6 +76,7 @@ $lang->ui->template->chanzhiVersion  = 'Compatible version';
 $lang->ui->template->desc            = 'Desc';
 $lang->ui->template->theme           = 'Theme';
 $lang->ui->template->license         = 'License';
+$lang->ui->template->preview         = 'Preview';
 $lang->ui->template->availableThemes = 'There are <strong>%s</strong> themes available.';
 $lang->ui->template->currentTheme    = '<strong>%s</strong> is using';
 $lang->ui->template->changeTheme     = 'Change theme';
@@ -86,6 +101,7 @@ $lang->ui->customtheme = 'Custom theme';
 $lang->ui->custom      = 'Custom';
 $lang->ui->themeSaved  = 'Theme settings saved.';
 $lang->ui->unWritable  = "Failed to save css file Please check %s is writable.";
+$lang->ui->codeHolder  = "Code must be a combination of number and letters.";
 
 $lang->ui->theme = new stdclass();
 $lang->ui->theme->reset                                = 'Apply default settings';

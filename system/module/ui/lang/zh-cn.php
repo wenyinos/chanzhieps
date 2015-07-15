@@ -30,13 +30,11 @@ $lang->ui->templateName    = "模板名称";
 $lang->ui->currentTheme    = '当前模板主题';
 $lang->ui->uploadTheme     = '导入主题';
 $lang->ui->installTheme    = '安装主题';
-$lang->ui->currentTheme    = '当前模板主题';
 $lang->ui->importedBlocks  = '导入区块';
 $lang->ui->matchedBlock    = '对应区块';
 $lang->ui->createBlock     = '导入新区块';
 $lang->ui->useOldBlock     = '使用已有区块';
 
-$lang->ui->deleteFavicon          = "不显示网站图标";
 $lang->ui->noStyleTag             = "请填写全局CSS样式代码，不需要&lt;style&gt;&lt;/style&gt;标签";
 $lang->ui->noJsTag                = "请填写全局JS代码，不需要&lt;script&gt;&lt;/script&gt;标签";
 $lang->ui->setLogoFailed          = "设置Logo失败";
@@ -63,6 +61,7 @@ $lang->ui->deleteThemeList['blue']       = '蓝色';
 $lang->ui->deleteThemeList['brightdark'] = '蝉憩';
 $lang->ui->deleteThemeList['flat']       = '清泉';
 $lang->ui->deleteThemeList['tree']       = '蝉之树';
+$lang->ui->deleteThemeList['colorful']   = '缤纷';
 
 $lang->ui->favicon = new stdclass();
 $lang->ui->favicon->help  = "帮助";

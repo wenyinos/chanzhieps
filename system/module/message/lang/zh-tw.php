@@ -28,6 +28,8 @@ $lang->message->viewComment       = '留言';
 $lang->message->thanks            = '感謝您的留言，通過審核之後才會顯示！';
 $lang->message->noSelectedMessage = '您沒有選擇任何留言。';
 $lang->message->needCheck         = '留言通過審核之後才會顯示。';
+$lang->message->showDetail        = '顯示全部';
+$lang->message->showAbstract      = '收起';
 
 $lang->message->admin          = '後台首頁';
 $lang->message->pass           = '通過';

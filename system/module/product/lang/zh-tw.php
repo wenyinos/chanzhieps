@@ -36,6 +36,7 @@ $lang->product->addedDate  = '添加時間';
 $lang->product->editedDate = '編輯時間';
 $lang->product->status     = '狀態';
 $lang->product->views      = '瀏覽';
+$lang->product->viewsCount = '瀏覽次數';
 $lang->product->stick      = '置頂級別';
 $lang->product->order      = '排序';
 $lang->product->attribute  = '產品屬性';
@@ -57,9 +58,11 @@ $lang->product->files        = '附件';
 $lang->product->images       = '圖片';
 $lang->product->addToCart    = "<i class='icon icon-shopping-cart'></i> 加入購物車";
 $lang->product->count        = '數量';
+$lang->product->comments     = '評論';
+$lang->product->detail       = '查看詳情';
 
 $lang->product->congratulations  = "恭喜";
-$lang->product->addToCartSuccess = "添加到購物車成功。";
+$lang->product->addToCartSuccess = "成功加入購物車。";
 $lang->product->gotoCart         = "去購物車結算";
 $lang->product->goback           = "返回";
 
@@ -69,6 +72,8 @@ $lang->product->prev      = '上一個';
 $lang->product->next      = '下一個';
 $lang->product->none      = '沒有了';
 $lang->product->directory = '返回目錄';
+$lang->product->noCssTag  = '不需要&lt;style&gt;&lt;/style&gt;標籤';
+$lang->product->noJsTag   = '不需要&lt;script&gt;&lt;/script&gt;標籤';
 
 $lang->product->statusList['normal']  = '上架';
 $lang->product->statusList['offline'] = '下架';
@@ -77,6 +82,10 @@ $lang->product->placeholder = new stdclass();
 $lang->product->placeholder->label    = "屬性名稱：如顏色、價格等";
 $lang->product->placeholder->value    = "屬性值：如紅色、￥1000等";
 $lang->product->placeholder->currency = "請填寫產品價格的貨幣符號，如人民幣填寫：￥";
+
+$lang->product->listMode = new stdclass();
+$lang->product->listMode->card  = "<i class='icon icon-th-large'></i> 圖片 ";
+$lang->product->listMode->list  = "<i class='icon icon-list'></i> 列表 ";
 
 $lang->product->currencyList['rmb']  = '人民幣';
 $lang->product->currencyList['usd']  = '美元';

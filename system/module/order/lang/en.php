@@ -39,6 +39,7 @@ $lang->order->goToBank       = "Please pay your order online.";
 $lang->order->track          = 'Logistics tracking';
 $lang->order->life           = 'order life';
 $lang->order->days           = 'Days';
+$lang->order->deliveryInfo   = 'Delivery Information';
 
 $lang->order->confirmLimit         = 'confirm delivery in';
 $lang->order->confirmReceived      = 'Confirm Received';
