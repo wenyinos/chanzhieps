@@ -172,10 +172,10 @@ $lang->product->menu->browse = array('link' => 'All products|product|admin|', 'a
 /* Menu of UI module. */
 $lang->ui = new stdclass();
 $lang->ui->menu = new stdclass();
-$lang->ui->menu->logo    = 'Custom|ui|customtheme|';
+$lang->ui->menu->custom  = 'Custom|ui|customtheme|';
 $lang->ui->menu->logo    = 'Logo|ui|setlogo|';
 $lang->ui->menu->favicon = 'Favicon|ui|setfavicon|';
-$lang->ui->menu->slide   = array('link' => 'Slide|slide|admin|',  'alias' => 'create,edit');
+$lang->ui->menu->slide   = 'Slide|slide|admin|';
 $lang->ui->menu->theme   = 'Theme|ui|settemplate|';
 $lang->ui->menu->admin   = array('link' => 'Blocks|block|admin|', 'alias' => 'create,edit');
 $lang->ui->menu->pages   = array('link' => 'Layout|block|pages|', 'alias' => 'setregion');

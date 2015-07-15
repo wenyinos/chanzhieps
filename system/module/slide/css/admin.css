@@ -5,3 +5,5 @@
 .carousel-inner .item:hover .actions {background-color: rgba(255,255,255,0.6); opacity: 1}
 .carousel-inner .item .btn-pure {padding: 0; height: 32px; min-width: 32px; font-size: 14px; font-weight: normal; display: inline-block; line-height: 32px}
 a.btn-sm{margin-bottom:5px;padding:5px;}
+.leftmenu.affix{top: 100px;}
+.leftmenu .tree li a.active{font-weight: bold;}

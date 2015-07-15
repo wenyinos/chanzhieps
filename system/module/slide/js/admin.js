@@ -31,6 +31,8 @@ $(document).ready(function()
     });
 
     ajustSortBtn();
+
+    if(v.groupID !== 0) $('.tree #group' + v.groupID).addClass('active');
 });
 
 function ajustSortBtn()

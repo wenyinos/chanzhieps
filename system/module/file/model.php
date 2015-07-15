@@ -540,21 +540,44 @@ class fileModel extends model
      * @param  int    $fileID 
      * @param  string $filename 
      * @access public
-     * @return bool|string
+     * @return array
      */
     public function sourceEdit($fileID, $filename)
     {
-        $file = $this->getByID($fileID);
-        $newPath = "source/{$filename}.{$file->extension}";
-        $uploadPath = $this->app->getDataRoot() . 'upload/';
-        rename($uploadPath . $file->pathname, $uploadPath . $newPath);
-        $this->dao->update(TABLE_FILE)
-            ->set('title')->eq($filename)
-            ->set('pathname')->eq($newPath)
-            ->where('id')->eq($fileID)
-            ->exec();
-        if(!dao::isError()) return true;
-        return false;
+        $file       = $this->getByID($fileID);
+        $uploadPath = $this->app->getDataRoot();
+        $basePath   = "source/{$this->config->template->name}/{$this->config->template->theme}/";
+        if($file->objectType == 'slide') $basePath   = "slides/";
+
+        $files = $this->getUpload('upFile');
+        if(!empty($files)) 
+        {
+            $fileInfo = $files[0];
+            if(file_exists("{$uploadPath}{$file->pathname}")) @unlink("{$uploadPath}{$file->pathname}");
+            $newPath = "{$basePath}{$filename}.{$fileInfo['extension']}";
+            if(!move_uploaded_file($fileInfo['tmpname'], "{$uploadPath}{$newPath}")) return array('result' => 'fail', 'message' => '');
+            $this->dao->update(TABLE_FILE)
+                ->set('title')->eq($filename)
+                ->set('pathname')->eq($newPath)
+                ->set('extension')->eq($fileInfo['extension'])
+                ->set('size')->eq($fileInfo['size'])
+                ->where('id')->eq($fileID)
+                ->exec();
+        }
+        else
+        {
+            if(file_exists("{$uploadPath}{$basePath}{$filename}.{$file->extension}")) return array('result' => 'fail', 'message' => $this->lang->file->sameName);
+            $newPath = "{$basePath}{$filename}.{$file->extension}";
+            rename($uploadPath . $file->pathname, $uploadPath . $newPath);
+            $this->dao->update(TABLE_FILE)
+                ->set('title')->eq($filename)
+                ->set('pathname')->eq($newPath)
+                ->where('id')->eq($fileID)
+                ->exec();
+        }
+
+        if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
+        return array('result' => 'success');
     }
  
     /**

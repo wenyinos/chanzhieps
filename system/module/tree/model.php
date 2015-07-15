@@ -394,6 +394,19 @@ class treeModel extends model
     }
 
     /**
+     * Create the slide admin link.
+     * 
+     * @param  object      $group 
+     * @access public
+     * @return string
+     */
+    public static function createSlideAdminLink($group)
+    {
+        $linkHtml = html::a(helper::createLink('slide', 'admin', "group={$group->id}"), $group->name, "id='group{$group->id}'");
+        return $linkHtml;
+    }
+
+    /**
      * Update a category.
      * 
      * @param  int     $categoryID 

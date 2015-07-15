@@ -232,9 +232,6 @@ class ui extends control
         $this->loadModel('setting')->deleteItems("owner=system&module=common&section=logo&key=$theme");
         $this->loadModel('setting')->deleteItems("owner=system&module=common&section=site&key=logo");
 
-        $logo = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : false;
-        if($logo) $this->loadModel('file')->delete($logo->fileID);
-
         $logo = isset($this->config->logo->$theme) ? json_decode($this->config->logo->$theme) : false;
         if($logo) $this->loadModel('file')->delete($logo->fileID);
 
