@@ -19,26 +19,22 @@
           <div class='menu-templates'>
             <ul class='nav'>
               <?php $templateThemes = ''; ?>
-              <?php foreach($templates as $code => $template):?>
+              <?php foreach($templates as $code => $tpl):?>
               <?php
               $isCurrent    = $currentTemplate == $code;
               $themeName    = $isCurrent ? $currentTheme : 'default';
               $themesList   = '';
               ?>
               <li class='menu-template <?php if($isCurrent) echo 'active';?>' data-template='<?php echo $code; ?>'>
-                <?php commonModel::printLink('ui', 'settemplate', "template={$code}&theme={$themeName}", $template['name']) ?>
+                <?php commonModel::printLink('ui', 'settemplate', "template={$code}&theme={$themeName}", $tpl['name']) ?>
               </li>
               <?php
-              foreach($template['themes'] as $theme => $name)
+              foreach($tpl['themes'] as $theTheme => $name)
               {
-                  $selectThemeUrl = $this->createLink('ui', 'setTemplate', "template={$code}&theme={$theme}");
-                  $themeClass = $isCurrent && $currentTheme == $theme ? 'current' : '';
-                  $themesList .= "<div class='theme menu-theme {$themeClass}' data-url='{$selectThemeUrl}' data-theme='{$theme}'><div class='theme-card'><i class='icon-ok icon'></i>";
-                  if($customThemePriv)
-                  {
-                      $themesList .= html::a($this->createLink('ui', 'customTheme', "theme={$theme}&template={$code}"), "<span class='icon-cog'></span> {$lang->ui->custom}", "class='btn btn-primary btn-custom'");
-                  }
-                  $themesList .= "<div class='theme-img'>" . html::image($webRoot . "template/{$code}/theme/{$theme}/preview.png") . '</div>';
+                  $selectThemeUrl = $this->createLink('ui', 'setTemplate', "template={$code}&theme={$theTheme}");
+                  $themeClass = $isCurrent && $currentTheme == $theTheme ? 'current' : '';
+                  $themesList .= "<div class='theme menu-theme {$themeClass}' data-url='{$selectThemeUrl}' data-theme='{$theTheme}'><div class='theme-card'><i class='icon-ok icon'></i>";
+                  $themesList .= "<div class='theme-img'>" . html::image($webRoot . "template/{$code}/theme/{$theTheme}/preview.png") . '</div>';
                   $themesList .= "<div class='theme-name'>{$name}</div>";
                   $themesList .= '</div></div>';
               }
@@ -109,7 +105,7 @@ $(function()
             }
         });
         return false;
-    });
+    }).on('click', '.btn-custom', function(e){e.stopPropagation();});
 
     $('.menu-theme-picker').on('show.bs.dropdown show.zui.dropdown', refreshPicker);
 

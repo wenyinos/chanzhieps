@@ -95,8 +95,7 @@ class ui extends control
 
         $this->view->setting = !empty($setting[$template][$theme]) ? $setting[$template][$theme] : array();
 
-        $this->view->title      = "<i class='icon-cog'></i> " . $this->lang->ui->customtheme;
-        $this->view->modalWidth = 1000;
+        $this->view->title      = $this->lang->ui->customtheme;
         $this->view->theme      = $theme;
         $this->view->template   = $template;
         $this->view->hasPriv    = true;

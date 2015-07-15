@@ -93,12 +93,3 @@ $(document).ready(function()
         }
     });
 });
-
-function ajustModalSize()
-{
-    var $modal = $('#ajaxModal');
-    var $dialog = $('#ajaxModal .modal-dialog');
-    var height = Math.max($dialog.height(), $modal.data('min-height') || 400);
-    $dialog.css('min-height', height);
-    $modal.data('min-height', height);
-}

@@ -623,7 +623,7 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
 .icon-rotate-90:before {display: inline-block; -webkit-transform: rotate(90deg); -moz-transform: rotate(90deg); -ms-transform: rotate(90deg); -o-transform: rotate(90deg); transform: rotate(90deg); filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);}
 
 /* menu */
-#menu {margin: -20px -10px 15px; border-bottom: 1px solid #ddd; height: 41px;}
+#menu {margin: -20px -10px 20px; border-bottom: 1px solid #ddd; height: 41px;}
 #menu .nav {float: left;}
 #menu .nav > li {float: left; position: relative; padding: 5px;}
 
@@ -634,7 +634,7 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
 #menu .dropdown-menu > li > a  {padding-left: 15px;}
 #menu .nav > li .dropdown-menu { margin-top: 0;}
 #menu .nav > li > a:hover {background-color: #ddd; color: #232323;}
-#menu .nav > li.active > a {background-color: #ebf2f9; font-weight: bold;}
+#menu .nav > li.active > a {background-color: #ebf2f9; font-weight: bold; color: #145ccd}
 #menu .nav > li > a:active, #menu .nav > li > a:focus { background-color: #fff;}
 #menu .nav > li.divider {margin: 0 5px; padding: 0; width: 1px; height: 40px; background-color: #ddd;}
 #menu .nav > li.divider.angle {background: #fff; width: 10px; margin: 0; position: relative;}
@@ -667,7 +667,6 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
 #menu .theme:hover .theme-img {opacity: 1;}
 .theme-card > .btn-custom {position: absolute; display: none; opacity: 0; width: 90px; left: 20px; top: 23px; z-index: 10; color: #fff!important}
 #menu .theme.current .theme-card > .btn-custom {opacity: 1; display: block;}
-#menu .theme.current:hover .theme-img {-webkit-filter: blur(5px);-moz-filter: blur(5px);-ms-filter: blur(5px);-o-filter: blur(5px);filter: blur(5px);filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=15, MakeShadow=false);}
 #menu .theme-card > .icon {position: absolute; right: 0; top: 0; display: none; z-index: 10}
 #menu .theme.current .theme-card > .icon {position: absolute; right: 0; top: 0; display: block; color: #fff; background: none; width: 0; height: 0; border: 20px solid #229F24; border-left-color: transparent; border-bottom-color: transparent;}
 #menu .theme.current .theme-card > .icon:before {position: absolute; right: -15px; top: -15px}
