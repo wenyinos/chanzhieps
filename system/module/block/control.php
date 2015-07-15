@@ -47,14 +47,16 @@ class block extends control
      * @access public
      * @return void
      */
-    public function pages($template = '')
+    public function pages($editTemplate = '', $editTheme = '')
     {
-        if(!$template) $template = $this->config->template->name;
+        if(!$editTemplate) $editTemplate = $this->loadModel('ui')->getEditingTemplate();
+        if(!$editTheme)    $editTheme    = $this->loadModel('ui')->getEditingTheme();
 
-        $this->block->loadTemplateLang($template);
+        $this->block->loadTemplateLang($editTemplate);
 
-        $this->view->currentTemplate = $template;
-        $this->view->templates       = $this->loadModel('ui')->getTemplates();
+        $this->view->editTemplate = $editTemplate;
+        $this->view->editTheme    = $editTheme;
+        $this->view->templates    = $this->loadModel('ui')->getTemplates();
         $this->display();       
     }
 
@@ -127,7 +129,7 @@ class block extends control
         }
 
         $this->view->editTemplate = $editTemplate;
-        $this->view->editTheme    = $this->loadModel('ui')->getEditingTheme();
+        $this->view->editTheme    = $editTheme;
         $this->view->block        = $this->block->getByID($blockID);
         $this->view->type         = $this->get->type ? $this->get->type : $this->view->block->type;
         $this->display();
@@ -142,30 +144,29 @@ class block extends control
      * @access public
      * @return void
      */
-    public function setRegion($page, $region, $template)
+    public function setRegion($page, $region, $editTemplate, $editTheme)
     {
-        if(!$template) $template = $this->config->template->name;
-
-        $this->block->loadTemplateLang($template);
+        $this->block->loadTemplateLang($editTemplate);
 
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            $result = $this->block->setRegion($page, $region, $template);
+            $result = $this->block->setRegion($page, $region, $editTemplate, $editTheme);
 
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('pages', "templat={$template}")));
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('pages', "editTemplat={$editTemplate}&editTheme={$editTheme}")));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
-        $blocks = $this->block->getRegionBlocks($page, $region, $template);
+        $blocks = $this->block->getRegionBlocks($page, $region, $editTemplate, $editTheme);
         if(empty($blocks)) $blocks = array(new stdclass());
 
-        $this->view->title        = "<i class='icon-cog'></i> " . $this->lang->block->setPage . ' - '. $this->lang->block->{$template}->pages[$page] . ' - ' . $this->lang->block->$template->regions->{$page}[$region];
+        $this->view->title        = "<i class='icon-cog'></i> " . $this->lang->block->setPage . ' - '. $this->lang->block->{$editTemplate}->pages[$page] . ' - ' . $this->lang->block->$editTemplate->regions->{$page}[$region];
         $this->view->modalWidth   = 900;
         $this->view->page         = $page;
         $this->view->region       = $region;
         $this->view->blocks       = $blocks;
-        $this->view->blockOptions = $this->block->getPairs($template);
-        $this->view->template     = $template;
+        $this->view->blockOptions = $this->block->getPairs($editTemplate);
+        $this->view->editTemplate = $editTemplate;
+        $this->view->editTheme    = $editTheme;
 
         $this->display();
     }
