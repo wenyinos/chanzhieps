@@ -10,10 +10,12 @@
  * @link        http://www.chanzhi.org
 */
 ?>
-<?php $block->content = json_decode($block->content);?>
-<?php $slides = isset($block->content->group) ? $this->loadModel('slide')->getList($block->content->group) : array();?>
-<?php 
-if($slides):?>
+<?php
+$block->content = json_decode($block->content);
+$goupID = !empty($block->content->group) ? $block->content->group : '';
+$slides = $this->loadModel('slide')->getList($block->content->group);
+if($slides):
+?>
 <div id='slide' class='carousel slide' data-ride='carousel'>
   <div class='carousel-inner'>
     <?php $height = 0;?>

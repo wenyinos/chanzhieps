@@ -38,8 +38,14 @@ class slideModel extends model
      * @access public
      * @return array
      */
-    public function getList($groupID)
+    public function getList($groupID = '')
     {
+        if(!$groupID)
+        {
+            $group   = $this->loadModel('tree')->getFirst('slide');
+            $groupID = $group->id;
+        }
+
         $slides = $this->dao->select('*')->from(TABLE_SLIDE)->where('`group`')->eq($groupID)->orderBy('`order`')->fetchAll('id');
 
         foreach($slides as $slide)
