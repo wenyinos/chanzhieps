@@ -26,9 +26,8 @@ $(function()
 });
 </script>
 <style>
-body {background: #fff0d5;}
-.alert.with-icon > .icon, .alert.with-icon > .icon + .content {padding: 10px 15px 20px;}
-.alert.with-icon > .icon {padding-left: 25px;}
+.alert.with-icon > .icon, .alert.with-icon > .icon + .content {padding: 10px 20px 20px;}
+.alert.with-icon > .icon {padding-left: 35px;}
 .alert-deny {max-width: 500px; margin: 8% auto; padding: 0; background-color: #FFF; border: 1px solid #DDD; box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.2); border-radius: 6px;}
 .btn-link {border-color: none!important}
 </style>
