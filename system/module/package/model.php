@@ -317,6 +317,7 @@ class packageModel extends model
 
         /* Append the pathes to stored the extracted files. */
         $pathes[] = "system/module/package/ext/";
+        $pathes[] = "system/module/ui/theme/";
         $pathes[] = "www/template/";
 
         return array_unique($pathes);
@@ -1097,6 +1098,7 @@ class packageModel extends model
 
          $blockOptions = $this->dao->select('originID, id')->from(TABLE_BLOCK)->where('originID')->in($blocks2Create)->eq($packageInfo->template)->fetchPairs();
 
+         $blocks2Delete = array();
          $oldBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('id')->in(array_values($blocks2Merge))->fetchAll('id');
          $newBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('originID')->ne('0')->fetchAll('originID');
          foreach($blocks2Merge as $originID => $blockID)
@@ -1106,7 +1108,9 @@ class packageModel extends model
              if(!is_object($old->content)) $old->content = json_decode($old->content); 
 
              $new = zget($newBlocks, $blockID);
+             if(!is_object($new)) continue;
              if(!is_object($new->content)) $new->content = json_decode($new->content); 
+             if(!isset($old->content->custome)) $old->content->custome = new stdclass();
              $old->content->custome->{$packageInfo->code} = zget($old->content->custome, $packageInfo->code);
 
              $old->content = json_encode($old->content);
