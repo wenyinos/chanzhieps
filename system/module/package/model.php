@@ -1112,6 +1112,7 @@ class packageModel extends model
              $old->content = json_encode($old->content);
              $this->dao->replace(TABLE_BLOCK)->data($old)->exec();
              $blockOptions[$originID] = $blockID;
+             $blocks2Delete[] = $originID;
          }
 
          $layouts = $this->dao->select('*')->from(TABLE_LAYOUT)->where('template')->eq($packageInfo->template)->andWhere('import')->eq('doing')->fetchAll();
@@ -1130,6 +1131,9 @@ class packageModel extends model
              $layout->blocks = json_encode($blocks);
              $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
          }
+
+         $this->dao->delete()->from(TABLE_BLOCK)->where('originID')->in($blocks2Delete)->exec();
+         $this->dao->update(TABLE_BLOCK)->set('originID')->eq('0')->exec();
      }
 
      /**
