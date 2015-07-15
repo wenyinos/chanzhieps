@@ -114,6 +114,8 @@ class file extends control
     public function edit($fileID)
     {
         $file = $this->file->getById($fileID);
+        if($file->objectType == 'source') $this->file->setSavePath('source');
+
         if(!empty($_POST))
         {
             if(!$this->file->checkSavePath()) $this->send(array('result' => 'fail', 'message' => $this->lang->file->errorUnwritable));
@@ -136,8 +138,9 @@ class file extends control
      * @access public
      * @return void
      */
-    public function sourceBrowse($type = 'all', $orderBy = 'id_desc', $pageID = 1)
+    public function sourceBrowse($type = '', $orderBy = 'id_desc', $pageID = 1)
     {
+        $this->file->setSavePath('source');
         $this->lang->file->menu = $this->lang->ui->menu;
         $this->lang->menuGroups->file = 'ui';
 
@@ -162,6 +165,7 @@ class file extends control
      */
     public function sourceEdit($fileID, $objectType)
     {
+        $this->file->setSavePath('source');
         $file = $this->file->getById($fileID);
         if(!empty($_POST))
         {
@@ -197,6 +201,7 @@ class file extends control
      */
     public function upload($objectType, $objectID)
     {
+        $this->file->setSavePath($objectType);
         if(!$this->file->checkSavePath()) $this->send(array('result' => 'fail', 'message' => $this->lang->file->errorUnwritable));
         $files = $this->file->getUpload('files');
         if($files) $this->file->saveUpload($objectType, $objectID);
@@ -214,6 +219,13 @@ class file extends control
     public function download($fileID, $mouse = '')
     {
         $file = $this->file->getById($fileID);
+
+        /* Change savePath id objectType is source. */
+        if(strpos(',slide,source,', ",{$file->objectType},") !== false)
+        {
+            $this->file->setSavePath('source');
+            $file = $this->file->getById($fileID);
+        }
 
         /* Judge the mode, down or open. */
         $mode  = 'down';
@@ -352,8 +364,9 @@ class file extends control
      */
     public function sourceDelete($fileID)
     {
+        $this->file->setSavePath('source');
         $file = $this->file->getByID($fileID);
-        if(file_exists($file->realPath)) unlink($file->realPath);
+        if(file_exists($file->realPath)) @unlink($file->realPath);
         $this->dao->delete()->from(TABLE_FILE)->where('id')->eq($fileID)->exec();
         if(!dao::isError()) $this->send(array('result' => 'success')); 
         $this->send(array('result' => 'fail', 'message' => dao::getError())); 
@@ -496,85 +509,15 @@ class file extends control
      * @access public
      * @return void
      */
-    public function selectFile($path = '', $type = 'image', $callback = '')
+    public function selectImage($callback = '')
     {
-        $callback  = $callback == '' ? "''" : "$callback()";
-        $fileTypes = array('gif', 'jpg', 'jpeg', 'png', 'bmp');
-        $order = 'name';
-
-        if($path == '')
-        {
-            $currentPath    = $this->file->savePath;
-            $currentUrl     = $this->file->webPath;
-            $currentDirPath = '';
-            $moveupDirPath  = '';
-        }
-        else
-        {
-            $currentPath    = $this->file->savePath . '/' . $path;
-            $currentUrl     = $this->file->webPath . $path;
-            $currentDirPath = $path;
-            $moveupDirPath  = preg_replace('/(.*?)[^\/]+\/$/', '$1', $currentDirPath);
-        }
-
-        if(preg_match('/\.\./', $currentPath)) die($this->lang->file->noAccess);
-        if(!preg_match('/\/$/', $currentPath)) die($this->lang->file->invalidParameter);
-        if(!file_exists($currentPath) || !is_dir($currentPath)) die($this->lang->file->unWritable);
-
-        $fileList = array();
-        if($fileDir = opendir($currentPath))
-        {
-            $i = 0;
-            while(($filename = readdir($fileDir)) !== false)
-            {
-                if($filename{0} == '.') continue;
-                $file = $currentPath . $filename;
-                $fileList[$i]['filename'] = $filename;
-                if(is_dir($file))
-                {
-                    $fileList[$i]['isDir']    = true;
-                    $fileList[$i]['hasFile']  = (count(scandir($file)) > 2);
-                    $fileList[$i]['fileSize'] = 0;
-                    $fileList[$i]['isPhoto']  = false;
-                    $fileList[$i]['filetype'] = '';
-                }
-                else
-                {
-                    $fileExtension = $this->file->getExtension($file);
-                    if(!in_array($fileExtension, $this->config->file->editorExtensions, true))
-                    {
-                        unset($fileList[$i]);
-                        continue;
-                    }
-
-                    $fileList[$i]['isDir']    = false;
-                    $fileList[$i]['hasFile']  = false;
-                    $fileList[$i]['fileSize'] = filesize($file);
-                    $fileList[$i]['dirPath']  = '';
-                    $fileList[$i]['isPhoto']  = in_array($fileExtension, $fileTypes);
-                    $fileList[$i]['filetype'] = $fileExtension;
-                    $fileList[$i]['filename'] = $filename . "?fromSpace=y";
-                }
-
-                $fileList[$i]['datetime'] = date('Y-m-d H:i:s', filemtime($file));
-                $fileList[$i]['order']    = $order;
-                $i++;
-            }
-            closedir($fileDir);
-        }
-
-        usort($fileList, "file::sort");
-
-        $result = array();
-        $result['moveupDirPath']  = $moveupDirPath;
-        $result['currentDirPath'] = $currentDirPath;
-        $result['currentUrl']     = $currentUrl;
-        $result['totalCount']     = count($fileList);
-        $result['fileList']       = $fileList;
+        $callback = $callback == '' ? "''" : "$callback()";
+        $result   = array();
+        $files    = $this->file->getSourceList();
+        foreach($files as $key => $file) if($file->isImage) $result[$key] = $file; 
 
         $this->view->title    = $this->lang->file->source;
-        $this->view->result   = $result;
-        $this->view->type     = $type;
+        $this->view->files    = $result;
         $this->view->callback = $callback;
         $this->display();
     }

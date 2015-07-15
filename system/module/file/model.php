@@ -111,10 +111,13 @@ class fileModel extends model
     {
         $files = $this->dao->setAutoLang(false)->select('*')
             ->from(TABLE_FILE)
-            ->where('objectType')->in('source,slide')
-            ->beginIf($type == '')->andWhere('extension')->in($type)->fi() 
+            ->where('objectType')->eq('slide')
+            ->beginIf($type != '')->andWhere('extension')->in($type)->fi() 
+            ->orWhere('objectType')->eq('source')
+            ->andWhere('objectID')->eq("{$this->config->template->name}_{$this->config->template->theme}")
+            ->beginIf($type != '')->andWhere('extension')->in($type)->fi() 
             ->orderBy($orderBy) 
-            ->page($pager)
+            ->beginIf($pager != null)->page($pager)->fi()
             ->fetchAll('id');
 
         /* Process these files. */
@@ -131,7 +134,7 @@ class fileModel extends model
      */    
     public function processFile($file)
     {
-        $file->fullURL   = $this->webPath . $file->pathname;
+        $file->fullURL   = $this->getWebPath($file->objectType) . $file->pathname;
         $file->middleURL = '';
         $file->smallURL  = '';
         $file->isImage   = false;
@@ -139,13 +142,13 @@ class fileModel extends model
 
         if(in_array(strtolower($file->extension), $this->config->file->imageExtensions, true) !== false)
         {
-            $file->middleURL = $this->webPath . str_replace('f_', 'm_', $file->pathname);
-            $file->smallURL  = $this->webPath . str_replace('f_', 's_', $file->pathname);
-            $file->largeURL  = $this->webPath . str_replace('f_', 'l_', $file->pathname);
+            $file->middleURL = $this->getWebPath($file->objectType) . str_replace('f_', 'm_', $file->pathname);
+            $file->smallURL  = $this->getWebPath($file->objectType) . str_replace('f_', 's_', $file->pathname);
+            $file->largeURL  = $this->getWebPath($file->objectType) . str_replace('f_', 'l_', $file->pathname);
 
-            if(!file_exists(str_replace($this->webPath, $this->savePath, $file->middleURL))) $file->middleURL = $file->fullURL;
-            if(!file_exists(str_replace($this->webPath, $this->savePath, $file->smallURL)))  $file->smallURL  = $file->fullURL;
-            if(!file_exists(str_replace($this->webPath, $this->savePath, $file->largeURL)))  $file->largeURL  = $file->fullURL;
+            if(!file_exists(str_replace($this->getWebPath($file->objectType), $this->savePath, $file->middleURL))) $file->middleURL = $file->fullURL;
+            if(!file_exists(str_replace($this->getWebPath($file->objectType), $this->savePath, $file->smallURL)))  $file->smallURL  = $file->fullURL;
+            if(!file_exists(str_replace($this->getWebPath($file->objectType), $this->savePath, $file->largeURL)))  $file->largeURL  = $file->fullURL;
 
             $file->isImage = true;
         }
@@ -178,7 +181,7 @@ class fileModel extends model
     {
         $file = $this->dao->setAutoLang(false)->findById($fileID)->from(TABLE_FILE)->fetch();
         $file->realPath = $this->savePath . $file->pathname;
-        $file->webPath  = $this->webPath . $file->pathname;
+        $file->webPath  = $this->getWebPath($file->objectType) . $file->pathname;
         return $this->processFile($file);
     }
 
@@ -197,6 +200,9 @@ class fileModel extends model
         $now        = helper::now();
         $files      = $this->getUpload();
 
+        /* Process file path if objectType is source. */
+        if($objectType == 'source') foreach($files as $key => $file) $files[$key]['pathname'] = "source/{$this->config->template->name}/{$this->config->template->theme}/{$file['title']}.{$file['extension']}";
+
         $imageSize = array('width' => 0, 'height' => 0);
 
         foreach($files as $id => $file)
@@ -214,7 +220,7 @@ class fileModel extends model
 
             if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions, true))
             {
-                if($this->get->objectType != 'source') $this->compressImage($this->savePath . $file['pathname']);
+                if($objectType != 'source') $this->compressImage($this->savePath . $file['pathname']);
                 $imageSize = $this->getImageSize($this->savePath . $file['pathname']);
             }
 
@@ -325,8 +331,6 @@ class fileModel extends model
                 $file['title']     = $purifier->purify($file['title']);
                 $file['size']      = $size[$id];
                 $file['tmpname']   = $tmp_name[$id];
-                if($this->get->objectType == 'source') $file['pathname'] = "source/" . substr($filename, 0, strlen($filename) - strlen($this->getExtension($filename)) - 1) . '.' . $this->getExtension($filename);
-                if($this->get->objectType == 'source') $file['title']    = str_replace('.' . $file['extension'], '', $filename);
                 $files[] = $file;
             }
         }
@@ -341,8 +345,6 @@ class fileModel extends model
             $file['title']     = $purifier->purify($file['title']);
             $file['size']      = $size;
             $file['tmpname']   = $tmp_name;
-            if($this->get->objectType == 'source') $file['pathname'] = "source/" . substr($filename, 0, strlen($filename) - strlen($this->getExtension($filename)) - 1) . '.' . $this->getExtension($filename);
-            if($this->get->objectType == 'source') $file['title']    = str_replace('.' . $file['extension'], '', $filename);
             return array($file);
         }
         return $files;
@@ -400,13 +402,20 @@ class fileModel extends model
     /**
      * Set the save path.
      * 
+     * @param  string $objectType 
      * @access public
      * @return void
      */
-    public function setSavePath()
+    public function setSavePath($objectType = '')
     {
         $savePath = $this->app->getDataRoot() . "upload/" . date('Ym/', $this->now);
-        if($this->get->objectType == 'source') $savePath = $this->app->getDataRoot() . "upload/source/";
+        $this->savePath = dirname($savePath) . '/';
+
+        if($objectType == 'source')
+        {
+            $savePath = $this->app->getDataRoot() . "source/{$this->config->template->name}/{$this->config->template->theme}/";
+            $this->savePath = $this->app->getDataRoot();
+        }
 
         if(!file_exists($savePath)) 
         {
@@ -418,7 +427,6 @@ class fileModel extends model
                 chmod($savePath . DS . 'index.php' , 0755);
             }
         }
-        $this->savePath = dirname($savePath) . '/';
     }
     
     /**
@@ -430,6 +438,19 @@ class fileModel extends model
     public function setWebPath()
     {
         $this->webPath = $this->app->getWebRoot() . "data/upload/";
+    }
+
+    /**
+     * Get the web path.
+     * 
+     * @param  string $objectType 
+     * @access public
+     * @return void
+     */
+    public function getWebPath($objectType = '')
+    {
+        if(strpos(',slide,source,', ",$objectType,") !== false) return $this->app->getWebRoot() . "data/";
+        return $this->app->getWebRoot() . "data/upload/";
     }
 
     /**
@@ -461,19 +482,19 @@ class fileModel extends model
         if($files = $this->getUpload($postName))
         {
             $file      = $files[0];
-            $fileInfo  = $this->dao->setAutoLang(false)->select('pathname, extension')->from(TABLE_FILE)->where('id')->eq($fileID)->fetch();
+            $fileInfo  = $this->dao->setAutoLang(false)->select('pathname, extension, objectType')->from(TABLE_FILE)->where('id')->eq($fileID)->fetch();
             $extension = strtolower($file['extension']);
+
+            /* Remove old file. */
+            if(file_exists($this->savePath . $fileInfo->pathname)) unlink($this->savePath . $fileInfo->pathname);
+            foreach($this->config->file->thumbs as $size => $configure)
+            {
+                $thumbPath = $this->savePath . str_replace('f_', $size . '_', $fileInfo->pathname);
+                if(file_exists($thumbPath)) unlink($thumbPath);
+            }
 
             if($extension != $fileInfo->extension)
             {
-                /* Remove old file. */
-                if(file_exists($this->savePath . $fileInfo->pathname)) unlink($this->savePath . $fileInfo->pathname);
-                foreach($this->config->file->thumbs as $size => $configure)
-                {
-                    $thumbPath = $this->savePath . str_replace('f_', $size . '_', $fileInfo->pathname);
-                    if(file_exists($thumbPath)) unlink($thumbPath);
-                }
-
                 $fileInfo->pathname  = str_replace(".{$fileInfo->extension}", ".$extension", $fileInfo->pathname);
                 $fileInfo->extension = $extension;
             }
@@ -482,16 +503,15 @@ class fileModel extends model
             $imageSize    = array('width' => 0, 'height' => 0);
             if(strpos($this->config->file->allowed, ',' . $extension . ',') === false)
             {
-                if(!move_uploaded_file($file['tmpname'], $this->savePath . $file['pathname'] . '.txt')) return false;
-                $file['pathname'] .= '.txt';
-                $file = $this->saveZip($file); 
+                if(!move_uploaded_file($file['tmpname'], $this->savePath . $fileInfo->pathname . '.txt')) return false;
+                $fileInfo->pathname .= '.txt';
+                $this->saveZip($file); 
             }
             else
             {
-                if(!move_uploaded_file($file['tmpname'], $this->savePath . $file['pathname'])) return false;
+                if(!move_uploaded_file($file['tmpname'], $this->savePath . $fileInfo->pathname)) return false;
             }
 
-            if(strpos($this->config->file->allowed, ',' . $file['extension'] . ',') === false) $file = $this->saveZip($file);
             if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions))
             {
                 $this->compressImage($realPathName);

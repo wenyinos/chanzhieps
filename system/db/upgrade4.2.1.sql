@@ -31,3 +31,4 @@ ADD `theme` varchar(30) NOT NULL DEFAULT 'default' AFTER `template`,
 ADD `import` enum('no', 'doing', 'finished') NOT NULL DEFAULT 'no';
 
 ALTER TABLE `eps_layout`ADD UNIQUE `region` (`template`, `theme`, `page`, `region`, `lang`),DROP INDEX `layout`;
+ALTER TABLE `eps_file` CHANGE `objectID` `objectID` char(50) NOT NULL;

@@ -393,9 +393,12 @@ class blockModel extends model
                 if($field == 'category' and is_array($value)) $data->params[$field] = join($value, ',');
             }
 
-            foreach($block->content as $field => $value)
+            if(isset($block->content->custom))
             {
-                if(is_object($value) and !isset($data->params[$field])) $data->params[$field] = $value;
+                foreach($block->content->custom as $field => $value)
+                {
+                    if(!isset($data->params['custom'][$field])) $data->params['custom'][$field] = $value;
+                }
             }
 
             if($this->post->content) $data->params['content'] = $gpcOn ? stripslashes($data->content) : $data->content;
@@ -588,23 +591,23 @@ class blockModel extends model
             }
 
             $style  = '<style>';
-            if(isset($content->$theme))
+            if(isset($content->custom->$theme))
             {
                 $style .= '#block' . $block->id . '{';
-                $style .= !empty($content->$theme->backgroundColor) ? 'background-color:' . $content->$theme->backgroundColor . ' !important;' : '';
-                $style .= !empty($content->$theme->textColor) ? 'color:' . $content->$theme->textColor . ' !important;;' : '';
-                $style .= !empty($content->$theme->borderColor) ? 'border-color:' . $content->$theme->borderColor . ' !important;' : '';
+                $style .= !empty($content->custom->$theme->backgroundColor) ? 'background-color:' . $content->custom->$theme->backgroundColor . ' !important;' : '';
+                $style .= !empty($content->custom->$theme->textColor) ? 'color:' . $content->custom->$theme->textColor . ' !important;;' : '';
+                $style .= !empty($content->custom->$theme->borderColor) ? 'border-color:' . $content->custom->$theme->borderColor . ' !important;' : '';
                 $style .= '}';
                 $style .= '#block' . $block->id . ' .panel-heading{';
-                $style .= !empty($content->$theme->titleColor) ? 'color:' .$content->$theme->titleColor . ';' : '';
-                $style .= !empty($content->$theme->titleBackground) ? 'background:' .$content->$theme->titleBackground . ' !important;;' : '';
+                $style .= !empty($content->custom->$theme->titleColor) ? 'color:' .$content->custom->$theme->titleColor . ';' : '';
+                $style .= !empty($content->custom->$theme->titleBackground) ? 'background:' .$content->custom->$theme->titleBackground . ' !important;;' : '';
                 $style .= '}';
-                $style .= !empty($content->$theme->iconColor) ? '#block' . $block->id . ' i{color:' .$content->$theme->iconColor . ' !important;}' : '';
-                $style .= !empty($content->$theme->linkColor) ? '#block' . $block->id . ' a{color:' .$content->$theme->linkColor . ' !important;}' : '';
-                $style .= isset($content->$theme->paddingTop) ? '#block' . $block->id . ' .panel-body' . '{padding-top:' . $content->$theme->paddingTop . 'px !important;}' : '';
-                $style .= isset($content->$theme->paddingRight) ? '#block' . $block->id . ' .panel-body' . '{padding-right:' . $content->$theme->paddingRight . 'px !important;}' : '';
-                $style .= isset($content->$theme->paddingBottom) ? '#block' . $block->id . ' .panel-body' . '{padding-bottom:' . $content->$theme->paddingBottom . 'px !important;}' : '';
-                $style .= isset($content->$theme->paddingLeft) ? '#block' . $block->id . ' .panel-body' . '{padding-left:' . $content->$theme->paddingLeft . 'px !important;}' : '';
+                $style .= !empty($content->custom->$theme->iconColor) ? '#block' . $block->id . ' i{color:' .$content->custom->$theme->iconColor . ' !important;}' : '';
+                $style .= !empty($content->custom->$theme->linkColor) ? '#block' . $block->id . ' a{color:' .$content->custom->$theme->linkColor . ' !important;}' : '';
+                $style .= isset($content->custom->$theme->paddingTop) ? '#block' . $block->id . ' .panel-body' . '{padding-top:' . $content->custom->$theme->paddingTop . 'px !important;}' : '';
+                $style .= isset($content->custom->$theme->paddingRight) ? '#block' . $block->id . ' .panel-body' . '{padding-right:' . $content->custom->$theme->paddingRight . 'px !important;}' : '';
+                $style .= isset($content->custom->$theme->paddingBottom) ? '#block' . $block->id . ' .panel-body' . '{padding-bottom:' . $content->custom->$theme->paddingBottom . 'px !important;}' : '';
+                $style .= isset($content->custom->$theme->paddingLeft) ? '#block' . $block->id . ' .panel-body' . '{padding-left:' . $content->custom->$theme->paddingLeft . 'px !important;}' : '';
             }
             $style .= '</style>';
 

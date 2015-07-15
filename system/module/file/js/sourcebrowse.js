@@ -20,6 +20,4 @@ $(document).ready(function()
         $('#listView').show();
         $('#imageView').hide();
     });
-
-    $('[data-toggle="popover"]').popover();
 });
