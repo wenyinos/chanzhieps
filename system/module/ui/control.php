@@ -122,29 +122,6 @@ class ui extends control
     }
 
     /**
-     * Set base style.
-     * 
-     * @access public
-     * @return void
-     */
-    public function setBaseStyle()
-    {
-        if($_POST)
-        {
-            $style  = fixer::input('post')->stripTags('content', $this->config->allowedTags->admin, false)->get();
-            $return = $this->loadModel('setting')->setItems('system.common.site', array('basestyle' => $style->content));
-
-            if($return) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate'=>inlink('setBaseStyle')));
-            if(!$return) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
-        }
-
-        $this->view->title   = $this->lang->ui->setBaseStyle;
-        $this->view->content = isset($this->config->site->basestyle) ? $this->config->site->basestyle : '';
-
-        $this->display();
-    }
-
-    /**
      * Set base js.
      * 
      * @access public
