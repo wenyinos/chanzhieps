@@ -78,8 +78,6 @@ $(function()
         if(!template || typeof(template) !== 'string') template = $(this).data('template') || $themePicker.attr('data-template');
         if(!theme || typeof(theme) !== 'string') theme = $(this).data('theme') || $themePicker.attr('data-theme');
 
-        console.log('refreshPicker template', template, 'theme', theme);
-
         $themePicker.find('.menu-template.hover').removeClass('hover');
         $themePicker.find('.menu-template[data-template="' + template + '"]').addClass('hover');
 
@@ -95,22 +93,6 @@ $(function()
     {
         var $this = $(this);
         refreshPicker($this.closest('.menu-themes').data('template'), $this.data('theme'));
-    })
-    .on('click', '.menu-template > a, .menu-theme > a', function(e)
-    {
-        $.getJSON($(this).attr('href'), function(response)
-        {
-            if(response.result == 'success')
-            {
-                messager.success(response.message);
-                window.location.reload();
-            }
-            else
-            {
-                bootbox.alert(data.message);
-            }
-        });
-        return false;
     });
 
     $('.menu-theme-picker').on('show.bs.dropdown show.zui.dropdown', refreshPicker);
