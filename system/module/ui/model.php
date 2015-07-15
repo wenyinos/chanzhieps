@@ -711,7 +711,7 @@ class uiModel extends model
         $fields[TABLE_BLOCK]    = "id as originID,`template`,`type`,`title`,`content`,`lang`";
         $fields[TABLE_LAYOUT]   = "*, 'doing' as import, 'THEME_CODEFIX' as theme";
         $fields[TABLE_CONFIG]   = "owner, module, section, `key`, `value`, lang";
-        $fields[TABLE_SLIDE]    = "title,`group`,titleColor,mainLink,backgroundType,backgroundColor,height,image,label,buttonClass,buttonUrl,buttonTarget,summary,lang,`order`";
+        $fields[TABLE_SLIDE]    = "title,`group`,titleColor,mainLink,backgroundType,backgroundColor,height,image,label,buttonClass,buttonUrl,buttonTarget,summary, 'imported' as lang,`order`";
         $fields[TABLE_CATEGORY] = "id as alias, name, lang, 'tmpSlide' as type";
 
         $replaces = array();
@@ -806,33 +806,5 @@ class uiModel extends model
 
         if(empty($list)) $this->app->loadClass('zfile')->removeDir(dirname($this->exportPath));
         return $zipFile;
-    }
-
-    /**
-     * Get editing template. 
-     * 
-     * @access public
-     * @return string
-     */
-    public function getEditingTemplate()
-    {
-        $template = $this->config->template->name;
-        if($this->session->editTemplate != '') $template = $this->session->editTemplate;
-        if($this->get->editTemplate != '') $template = $this->get->editTemplate;
-        return $template;
-    }
-
-    /**
-     * Get editing theme. 
-     * 
-     * @access public
-     * @return string
-     */
-    public function getEditingTheme()
-    {
-        $theme = $this->config->template->theme;
-        if($this->session->editTheme != '') $theme = $this->session->editTheme;
-        if($this->get->editTheme != '') $theme = $this->get->editTheme;
-        return $theme;
     }
 }

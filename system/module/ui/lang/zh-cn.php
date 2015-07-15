@@ -38,15 +38,16 @@ $lang->ui->matchedBlock    = '对应区块';
 $lang->ui->createBlock     = '导入新区块';
 $lang->ui->useOldBlock     = '使用已有区块';
 
-$lang->ui->deleteFavicon     = "不显示网站图标";
-$lang->ui->noStyleTag        = "请填写全局CSS样式代码，不需要&lt;style&gt;&lt;/style&gt;标签";
-$lang->ui->noJsTag           = "请填写全局JS代码，不需要&lt;script&gt;&lt;/script&gt;标签";
-$lang->ui->setLogoFailed     = "设置Logo失败";
-$lang->ui->noSelectedFile    = "获取上传图片失败，可能是图片大小超出上传限制";
-$lang->ui->notAlloweFileType = "请选择正确的%s文件";
-$lang->ui->suitableLogoSize  = '最佳高度范围：50px~80px，最佳宽度范围：80px~240px';
-$lang->ui->exportedSuccess   = '导出成功';
-$lang->ui->fileRequired      = '请选择一个文件';
+$lang->ui->deleteFavicon      = "不显示网站图标";
+$lang->ui->noStyleTag         = "请填写全局CSS样式代码，不需要&lt;style&gt;&lt;/style&gt;标签";
+$lang->ui->noJsTag            = "请填写全局JS代码，不需要&lt;script&gt;&lt;/script&gt;标签";
+$lang->ui->setLogoFailed      = "设置Logo失败";
+$lang->ui->noSelectedFile     = "获取上传图片失败，可能是图片大小超出上传限制";
+$lang->ui->notAlloweFileType  = "请选择正确的%s文件";
+$lang->ui->suitableLogoSize   = '最佳高度范围：50px~80px，最佳宽度范围：80px~240px';
+$lang->ui->exportedSuccess    = '导出成功';
+$lang->ui->fileRequired       = '请选择一个文件';
+$lang->ui->importThemeSuccess = '导入主题成功';
 
 $lang->ui->productViewList[1] = '显示'; 
 $lang->ui->productViewList[0] = '不显示'; 
