@@ -404,14 +404,11 @@ class ui extends control
             die($this->display());
         }
         
-        $packageInfo = $this->loadModel('package')->parsePackageCFG($package, 'theme');
+        $packageInfo = $this->package->parsePackageCFG($package, 'theme');
 
         /* Process theme code. */
         $installedThemes = $this->ui->getThemesByTemplate($packageInfo->template);
-        if(isset($installedThemes[$packageInfo->code]))
-        {
-            $package = $this->package->fixThemeCode($package, $installedThemes);
-        }
+        $package = $this->package->fixThemeCode($package, $installedThemes);
 
         $packageInfo = $this->package->parsePackageCFG($package, 'theme');
         if(!empty($packageInfo->customParams))
@@ -434,12 +431,14 @@ class ui extends control
         $this->session->set('dirs2Created', array());   // clean the session.
 
         /* Execute the install.sql. */
-        $return = $this->package->executeDB($package, 'install');
+        $return = $this->package->executeDB($package, 'install', 'theme');
         if($return->result != 'ok')
         {
             $this->view->error = sprintf($this->lang->package->errorInstallDB, $return->error);
             die($this->display());
         }
+
+        $this->package->fixSlides($package);
         $this->view->blocksMerged   = false;
 
         if(!$_POST)
@@ -454,7 +453,7 @@ class ui extends control
         else
         {
             $this->package->mergeBlocks($packageInfo);
-            $this->view->blocksMerged   = false;
+            $this->view->blocksMerged = false;
         }
         
         /* Update status, dirs, files and installed time. */

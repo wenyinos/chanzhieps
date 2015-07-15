@@ -639,7 +639,7 @@ class uiModel extends model
         $this->exportCssPath    = $this->exportPath . 'www' . DS . 'data' . DS . 'css' . DS . $template . DS . $code . DS;
         $this->exportLessPath   = $this->exportPath . 'www' . DS . 'template' . DS . $template . DS . 'theme' . DS . $code . DS;
         $this->exportSourcePath = $this->exportPath . 'www' . DS . 'data' . DS . 'source' . DS . $template . DS . $code . DS;
-        $this->exportSlidePath  = $this->exportPath . 'www' . DS . 'data' . DS . 'slide' . DS;
+        $this->exportSlidePath  = $this->exportPath . 'www' . DS . 'data' . DS . 'slidestmp' . DS;
         $this->exportConfigPath = $this->exportPath . 'system' . DS . 'module' . DS . 'ui' . DS . 'ext' . DS . 'config' . DS;
 
         if(is_dir($this->exportPath)) $this->app->loadClass('zfile')->removeDir($this->exportPath);     
@@ -658,6 +658,28 @@ class uiModel extends model
     }
 
     /**
+     * Get used slidegroups.
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @access public
+     * @return void
+     */
+    public function getUsedSlideGroups($template)
+    {
+        $slideBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('type')->eq('slide')->andWhere('template')->eq($template)->fetchAll();
+        $groups = array();
+
+        foreach($slideBlocks as $block)
+        {
+            $slide = json_decode($block->content);
+            if(isset($slide->group) and $slide->group) $groups[] = $slide->group;
+        }
+
+        return array_unique($groups);
+    }
+
+    /**
      * Export theme sqls. 
      * 
      * @param  string    $template 
@@ -668,24 +690,36 @@ class uiModel extends model
     public function exportDB($template, $theme)
     {
         $lang   = $this->app->getClientLang();
-        $tables = array(TABLE_BLOCK, TABLE_LAYOUT, TABLE_CONFIG, TABLE_SLIDE);
+        $tables = array(TABLE_BLOCK, TABLE_LAYOUT, TABLE_CONFIG);
+ 
+        $groups = $this->getUsedSlideGroups($template, $theme);
+        $groups = join(",", $groups);
+        if(!empty($groups))
+        {
+            $tables[] = TABLE_SLIDE;
+            $tables[] = TABLE_CATEGORY;
+        }
 
         $condations = array();
-        $condations[TABLE_BLOCK]  = "where template='{$template}' and lang in ('all', '{$lang}')";
-        $condations[TABLE_LAYOUT] = "where template='{$template}' and theme = '{$theme}' and lang in ('all', '{$lang}')";
-        $condations[TABLE_CONFIG] = "where owner = 'system' and module = 'common' and `key` in ('custom', 'basestyle')";
+        $condations[TABLE_BLOCK]    = "where template='{$template}' and lang in ('all', '{$lang}')";
+        $condations[TABLE_LAYOUT]   = "where template='{$template}' and theme = '{$theme}' and lang in ('all', '{$lang}')";
+        $condations[TABLE_CONFIG]   = "where owner = 'system' and module = 'common' and `key` in ('custom', 'basestyle')";
+        $condations[TABLE_CATEGORY] = "where type = 'slide'";
+        $condations[TABLE_SLIDE]    = "where `group` in ({$groups})";
 
         $fields = array();
-        $fields[TABLE_BLOCK]  = "id as originID,`template`,`type`,`title`,`content`,`lang`";
-        $fields[TABLE_LAYOUT] = "*, 'doing' as imported, 'THEME_CODEFIX' as theme";
-        $fields[TABLE_CONFIG] = "owner, module, section, `key`, `value`, lang";
-        $fields[TABLE_SLIDE]  = "title,`group`,titleColor,mainLink,backgroundType,backgroundColor,height,image,label,buttonClass,buttonUrl,buttonTarget,summary,lang,`order`";
+        $fields[TABLE_BLOCK]    = "id as originID,`template`,`type`,`title`,`content`,`lang`";
+        $fields[TABLE_LAYOUT]   = "*, 'doing' as import, 'THEME_CODEFIX' as theme";
+        $fields[TABLE_CONFIG]   = "owner, module, section, `key`, `value`, lang";
+        $fields[TABLE_SLIDE]    = "title,`group`,titleColor,mainLink,backgroundType,backgroundColor,height,image,label,buttonClass,buttonUrl,buttonTarget,summary,lang,`order`";
+        $fields[TABLE_CATEGORY] = "id as alias, name, lang, 'tmpSlide' as type";
 
         $replaces = array();
-        $replaces[TABLE_BLOCK]  = true;
-        $replaces[TABLE_LAYOUT] = true;
-        $replaces[TABLE_CONFIG] = true;
-        $replaces[TABLE_SLIDE]  = false;
+        $replaces[TABLE_BLOCK]    = true;
+        $replaces[TABLE_LAYOUT]   = true;
+        $replaces[TABLE_CONFIG]   = true;
+        $replaces[TABLE_SLIDE]    = false;
+        $replaces[TABLE_CATEGORY] = false;
     
         $zdb = $this->app->loadClass('zdb');
         $zdb->dump($this->exportDbPath . 'install.sql', $tables, $fields, 'data', $condations, true);
@@ -695,9 +729,12 @@ class uiModel extends model
         $sqls = str_replace(TABLE_LAYOUT, "eps_layout", $sqls);
         $sqls = str_replace(TABLE_SLIDE,  "eps_slide", $sqls);
         $sqls = str_replace(TABLE_CONFIG, "eps_config", $sqls);
+        $sqls = str_replace(TABLE_CATEGORY, "eps_category", $sqls);
         $sqls = str_replace("/$theme/", "/THEME_CODEFIX/", $sqls);
         $sqls = str_replace("/$theme\\", "/THEME_CODEFIX\\", $sqls);
         $sqls = str_replace("/$theme\/", "/THEME_CODEFIX\/", $sqls);
+        $sqls = str_replace("'$theme'", "'THEME_CODEFIX'", $sqls);
+        $sqls = str_replace("\"$theme\"", "\"THEME_CODEFIX\"", $sqls);
         return file_put_contents($this->exportDbPath . 'install.sql', $sqls);
     }
 
@@ -739,9 +776,15 @@ class uiModel extends model
         if(is_dir($sourcePath)) $zfile->copyDir($sourcePath, $this->exportSourcePath);
 
         /* Copy slide files. */
-        $slidePath = $this->app->getWwwRoot() . 'data' . DS . 'slide';
-        if(is_dir($slidePath)) $zfile->copyDir($slidePath, $this->exportSlidePath);
-        
+        $groups = $this->getUsedSlideGroups($template, $theme);
+        $slidePath = $this->app->getWwwRoot() . 'data' . DS . 'slides';
+        $usedSlides = array();
+        foreach($groups as $group) $usedSlides[] = glob($slidePath . DS . "{$group}_*.*");
+        foreach($usedSlides as $slides) 
+        {
+            foreach($slides as $slide) copy($slide, str_replace($slidePath . DS, $this->exportSlidePath, $slide));
+        }
+
         /* Upload preview picture. */
         if($_FILES)
         {
