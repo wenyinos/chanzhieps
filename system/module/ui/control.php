@@ -394,6 +394,7 @@ class ui extends control
     {
         $packageInfo = $this->loadModel('package')->parsePackageCFG($this->post->package, 'theme');
         $this->package->mergeBlocks($packageInfo);
+        $this->package->mergeCustome($packageInfo);
         $setting = array();
         $setting['name']   = $packageInfo->template;
         $setting['theme']  = $packageInfo->code;

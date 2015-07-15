@@ -1169,4 +1169,23 @@ class packageModel extends model
          $this->dao->update(TABLE_CATEGORY)->set('type')->eq('slide')->where('type')->eq('tmpSlide')->exec();
      }
 
+     /**
+      * Merge custome.
+      * 
+      * @param  object    $info 
+      * @access public
+      * @return void
+      */
+     public function mergeCustome($info)
+     {
+        $importedCustome = $this->dao->setAutoLang(false)->select('*')->form(TABLE_CONFIG)->where('lang')->eq('imported')->andWhere('`key`')->eq('custom')->fetch('value');
+        $custome = json_decode($importedCustome, true);
+        
+        $setting = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true): array();
+
+        if(isset($custome[$info->template][$info->theme])) $setting[$info->template][$info->theme] = $custome[$info->template][$info->theme];
+        $this->loadModel('setting')->setItems('system.common.template', array('custom' => helper::jsonEncode($setting)));
+        $this->dao->delete()->from(TABLE_CONFIG)->where('lang')->eq('imported')->andWhere('`key`')->eq('custom')->exec();
+     }
+
 }

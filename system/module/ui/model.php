@@ -703,14 +703,14 @@ class uiModel extends model
         $condations = array();
         $condations[TABLE_BLOCK]    = "where template='{$template}' and lang in ('all', '{$lang}')";
         $condations[TABLE_LAYOUT]   = "where template='{$template}' and theme = '{$theme}' and lang in ('all', '{$lang}')";
-        $condations[TABLE_CONFIG]   = "where owner = 'system' and module = 'common' and `key` in ('custom', 'basestyle')";
+        $condations[TABLE_CONFIG]   = "where owner = 'system' and module = 'common' and `key` = 'custom'";
         $condations[TABLE_CATEGORY] = "where type = 'slide'";
         $condations[TABLE_SLIDE]    = "where `group` in ({$groups})";
 
         $fields = array();
         $fields[TABLE_BLOCK]    = "id as originID,`template`,`type`,`title`,`content`,`lang`";
         $fields[TABLE_LAYOUT]   = "*, 'doing' as import, 'THEME_CODEFIX' as theme";
-        $fields[TABLE_CONFIG]   = "owner, module, section, `key`, `value`, lang";
+        $fields[TABLE_CONFIG]   = "owner, module, section, `key`, `value`, 'imported' as lang";
         $fields[TABLE_SLIDE]    = "title,`group`,titleColor,mainLink,backgroundType,backgroundColor,height,image,label,buttonClass,buttonUrl,buttonTarget,summary, 'imported' as lang,`order`";
         $fields[TABLE_CATEGORY] = "id as alias, name, lang, 'tmpSlide' as type";
 
