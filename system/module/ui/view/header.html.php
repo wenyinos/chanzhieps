@@ -18,20 +18,20 @@
           <div class='menu-templates'>
             <ul class='nav'>
               <?php $templateThemes = ''; ?>
-              <?php foreach($templates as $code => $template):?>
+              <?php foreach($templates as $code => $templateInfo):?>
               <?php
               $isCurrent    = $currentTemplate == $code;
               $themeName    = $isCurrent ? $currentTheme : 'default';
               $themesList   = '';
               ?>
               <li class='menu-template <?php if($isCurrent) echo 'active';?>' data-template='<?php echo $code; ?>'>
-                <?php commonModel::printLink('ui', 'settemplate', "template={$code}&theme={$themeName}", $template['name']) ?>
+                <?php commonModel::printLink('ui', 'settemplate', "template={$code}&theme={$themeName}", $templateInfo['name']) ?>
               </li>
               <?php
-              foreach($template['themes'] as $theme => $name)
+              foreach($templateInfo['themes'] as $themeCode => $name)
               {
-                  $currentClass = ($isCurrent and $currentTheme == $theme) ? ' active' : '';
-                  $themesList .= "<li class='menu-theme {$currentClass}' data-theme='{$theme}'>" . html::a($this->createLink('ui', 'setTemplate', "template={$code}&theme={$theme}"), $name) . '</li>';
+                  $currentClass = ($isCurrent and $currentTheme == $themeCode) ? ' active' : '';
+                  $themesList .= "<li class='menu-theme {$currentClass}' data-theme='{$themeCode}'>" . html::a($this->createLink('ui', 'setTemplate', "template={$code}&theme={$themeCode}"), $name) . '</li>';
               }
               ?>
               <?php $templateThemes .= "<ul class='menu-themes nav" . ($isCurrent ? ' show' : '') . "' data-template='{$code}'>" . $themesList . '</ul>'; ?>
