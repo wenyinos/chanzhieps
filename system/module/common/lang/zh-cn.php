@@ -177,8 +177,6 @@ $lang->ui->menu->favicon = '小图标|ui|setfavicon|';
 $lang->ui->menu->slide   = '幻灯片|tree|browse|type=slide';
 $lang->ui->menu->block   = array('link' => '区块|block|admin|', 'alias' => 'create,edit');
 $lang->ui->menu->layout  = array('link' => '布局|block|pages|', 'alias' => 'setregion');
-$lang->ui->menu->styles  = '全局样式|ui|setbasestyle|';
-$lang->ui->menu->js      = '全局js|ui|setbasejs|';
 $lang->ui->menu->source  = '素材|file|sourcebrowse|';
 $lang->ui->menu->others  = '其他|ui|others|';
 
