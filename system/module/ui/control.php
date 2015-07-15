@@ -283,7 +283,11 @@ class ui extends control
             $tmpName  = $_FILES['file']['tmp_name'];
             $fileName = $_FILES['file']['name'];
             $package  = basename($fileName, '.zip');
-            move_uploaded_file($tmpName, $this->app->getTmpRoot() . "/package/$fileName");
+
+            $packagePath = $this->app->getTmpRoot() . "package";
+            if(!is_dir($packagePath)) mkdir($packagePath, 0777, true); 
+            if(!is_writeable($packagePath)) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->ui->packagePathUnwriteable, $packagePath)));
+            $result = move_uploaded_file($tmpName, $this->app->getTmpRoot() . "package/$fileName");
 
             $link = inlink('installtheme', "package=$package&downLink=&md5=");
             $this->app->loadLang('package');

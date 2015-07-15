@@ -12,7 +12,7 @@
 ?>
 <?php include '../../common/view/header.modal.html.php';?>
 <?php js::set('browseLink', inlink('browse'));?>
-<?php if($blocksMerged):?>
+<?php if($blocksMerged and empty($error)):?>
   <form method='post' action= '<?php echo inlink('fixTheme');?>' id="ajaxForm">
   <table class='table tabel-condensed'>
     <tr>
@@ -52,21 +52,5 @@
       <?php echo html::a('javascript:;', $lang->package->refreshPage, "class='btn btn-reload'");?>
     </div>
   </div>
-  <div class='alert'>
-    <h2 class='text-center text-success'><?php echo sprintf($lang->package->installFinished, 'install');?></h2>
-    <div class='text-center'>
-      <?php echo html::a($this->createLink('ui', 'settemplate'), $lang->package->settemplate, "class='btn btn-primary'");?>
-    </div>
-    <?php
-    echo "<h5 class='success'>{$lang->package->successInstallDB}</h5>";
-    echo "<h5 class='success'>{$lang->package->successCopiedFiles}</h5>";
-    echo '<pre>';
-    foreach($files as $fileName => $md5)
-    {
-        echo "$fileName<br/>";
-    }
-    echo '</pre>';
-    ?>
-  </div>
-  <?php endif;?>
+<?php endif;?>
 <?php include '../../common/view/footer.modal.html.php';?>
