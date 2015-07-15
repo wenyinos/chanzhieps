@@ -727,13 +727,12 @@ class uiModel extends model
         $sqls = file_get_contents($this->exportDbPath . 'install.sql');
         $sqls = str_replace(TABLE_BLOCK,  "eps_block",  $sqls);
         $sqls = str_replace(TABLE_LAYOUT, "eps_layout", $sqls);
-        $sqls = str_replace(TABLE_SLIDE,  "eps_slide", $sqls);
+        $sqls = str_replace(TABLE_SLIDE,  "eps_slide",  $sqls);
         $sqls = str_replace(TABLE_CONFIG, "eps_config", $sqls);
         $sqls = str_replace(TABLE_CATEGORY, "eps_category", $sqls);
         $sqls = str_replace("/$theme/", "/THEME_CODEFIX/", $sqls);
         $sqls = str_replace("/$theme\\", "/THEME_CODEFIX\\", $sqls);
         $sqls = str_replace("/$theme\/", "/THEME_CODEFIX\/", $sqls);
-        $sqls = str_replace("'$theme'", "'THEME_CODEFIX'", $sqls);
         $sqls = str_replace("\"$theme\"", "\"THEME_CODEFIX\"", $sqls);
         return file_put_contents($this->exportDbPath . 'install.sql', $sqls);
     }

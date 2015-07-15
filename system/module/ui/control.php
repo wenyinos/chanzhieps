@@ -415,9 +415,8 @@ class ui extends control
         {
             $this->package->saveCustomParams($package, $packageInfo->customParams);
         }
-
         /* Save to database. */
-        $this->package->savePackage($package, $type);
+        if(!$_POST) $this->package->savePackage($package, $type);
 
         /* Copy files to target directory. */
         $this->view->files = $this->package->copyPackageFiles($package, $type);
@@ -444,16 +443,16 @@ class ui extends control
         if(!$_POST)
         {
             $this->app->loadLang('block');
-            $this->view->importedBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('originID')->ne(0)->fetchAll('originID');
+            $this->view->importedBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('originID')->gt(0)->fetchAll('originID');
             $this->view->oldBlocks      = $this->dao->select('*')->from(TABLE_BLOCK)->where('originID')->eq(0)->fetchAll('id');
             $this->view->blocksMerged   = true;
-            $this->view->packageInfo    = $packageInfo;
+            $this->view->package        = $package;
             die($this->display());
         }
         else
         {
             $this->package->mergeBlocks($packageInfo);
-            $this->view->blocksMerged = false;
+            $this->send($array);
         }
         
         /* Update status, dirs, files and installed time. */
