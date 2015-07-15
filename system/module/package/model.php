@@ -1110,6 +1110,7 @@ class packageModel extends model
              $new = zget($newBlocks, $blockID);
              if(!is_object($new)) continue;
              if(!is_object($new->content)) $new->content = json_decode($new->content); 
+             if(!isset($old->content)) $old->content = new stdclass();
              if(!isset($old->content->custome)) $old->content->custome = new stdclass();
              $old->content->custome->{$packageInfo->code} = zget($old->content->custome, $packageInfo->code);
 
