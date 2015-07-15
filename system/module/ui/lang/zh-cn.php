@@ -11,18 +11,13 @@
  */
 $lang->ui->common = "界面";
 
-$lang->ui->clientDesktop = '桌面';
-$lang->ui->clientMobile  = '移动';
-$lang->ui->currentTheme  = '当前模板主题';
-$lang->ui->uploadTheme   = '上传主题';
-$lang->ui->installTheme  = '安装主题';
-$lang->ui->currentTheme  = '当前应用模板主题';
-
+$lang->ui->clientDesktop   = '桌面';
+$lang->ui->clientMobile    = '移动';
 $lang->ui->logo            = 'Logo';
 $lang->ui->setLogo         = "Logo设置";
 $lang->ui->setTemplate     = '模板设置';
 $lang->ui->installTemplate = '上传模板';
-$lang->ui->exportTheme     = '导出风格';
+$lang->ui->exportTheme     = '导出主题';
 $lang->ui->setTheme        = '主题设置';
 $lang->ui->customTheme     = '自定义主题';
 $lang->ui->setFavicon      = "Favicon设置";
@@ -34,6 +29,14 @@ $lang->ui->others          = "其他设置";
 $lang->ui->productView     = "产品点击量";
 $lang->ui->QRCode          = "移动二维码";
 $lang->ui->templateName    = "模板名称";
+$lang->ui->currentTheme    = '当前模板主题';
+$lang->ui->uploadTheme     = '导入主题';
+$lang->ui->installTheme    = '安装主题';
+$lang->ui->currentTheme    = '当前应用模板主题';
+$lang->ui->importedBlocks  = '导入区块';
+$lang->ui->matchedBlock    = '对应区块';
+$lang->ui->createBlock     = '导入新区块';
+$lang->ui->useOldBlock     = '使用已有区块';
 
 $lang->ui->deleteFavicon     = "不显示网站图标";
 $lang->ui->noStyleTag        = "请填写全局CSS样式代码，不需要&lt;style&gt;&lt;/style&gt;标签";
