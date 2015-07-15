@@ -21,4 +21,21 @@ $(document).ready(function()
     });
 
     $('.button-target').change();
+
+    $('#imageShow').hide();
+    $('#uploadFile').hide();
 })
+
+function fileHide()
+{
+    $('#imageShow').show();
+    $('#uploadFile').show();
+    $('[name*=files]').hide();
+}
+
+function fileShow()
+{
+    $('[name*=files]').show();
+    $('#imageShow').hide();
+    $('#uploadFile').hide();
+}

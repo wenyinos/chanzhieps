@@ -84,7 +84,7 @@ class slideModel extends model
             ->checkIF($this->post->backgroundType == 'color', 'height', 'ge', 100)
             ->exec();
 
-        if($image) 
+        if($image and empty($_POST['image'])) 
         {
             $slideID = $this->dao->lastInsertId();
             $pathname = str_replace('/data/', '', $image);

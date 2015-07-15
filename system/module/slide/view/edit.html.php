@@ -93,8 +93,15 @@ foreach (explode('|', $lang->colorPlates) as $value)
           <td colspan='3'><?php echo html::image($slide->image, "class='image'");?></td>
         </tr>
         <tr class='bg-section' data-id='image'>
-          <td><?php echo html::file('files[]', "tabindex='-1' class='form-control'");?></td>
-          <td colspan='2'><label class='text-info'><?php echo $lang->slide->suitableSize;?></label></td>
+          <td>
+            <?php echo html::file('files[]', "tabindex='-1' class='form-control'");?>
+            <?php echo html::input('imageShow', '', "class='form-control image-select' disabled='disabled'");?>
+          </td>
+          <td colspan='2'>
+            <?php echo html::a($this->createLink('file', 'selectimage', 'callback=fileHide'), $lang->slide->sourceImage, "class='btn btn-primary' id='selectSource' data-toggle='modal'")?>
+            <?php echo html::a('javascript:void(0)', $lang->slide->upload, "class='btn btn-primary' onclick='fileShow()' id='uploadFile'")?>
+            <label class='text-info'><?php echo $lang->slide->suitableSize;?></label>
+          </td>
         </tr>
         <?php if (empty($slide->label)):?>
         <tr>
@@ -169,7 +176,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
           <td></td>
           <td colspan='3'>
             <?php echo html::hidden('id', $id);?>
-            <?php echo html::hidden('image', $slide->image);?>
+            <?php echo html::hidden('image', $slide->image, "class='image-select'");?>
             <?php echo html::submitButton();?>
           </td>
         </tr>
