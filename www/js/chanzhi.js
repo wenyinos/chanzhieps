@@ -792,7 +792,7 @@ function associateSelect(first, sencond, data, firstVal, sencondVal)
     $(first).change(function()
     {
         $(sencond).html('');
-        options = eval("data." + $(first).val());
+        var options = data[$(first).val()];
         $.each(options, function(key, value)
         {
             selected = key == sencondVal ? "selected" : '';

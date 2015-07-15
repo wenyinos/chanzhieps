@@ -2,7 +2,7 @@
 <?php js::set('themes', $themes) ?>
 <?php js::set('template', $this->config->template->name);?>
 <?php js::set('theme', $this->config->template->theme);?>
-<form id='ajaxForm' method='post' action="<?php echo inlink('exportTheme');?>">
+<form id='ajaxForm' class='export-theme-form' method='post' action="<?php echo inlink('exportTheme');?>">
   <table class='table table-form'>
     <tr>
       <th class='w-80px'><?php echo $lang->ui->templateName?></th>
