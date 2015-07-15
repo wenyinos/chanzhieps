@@ -14,6 +14,9 @@ $(function()
         $(this).addClass('selected');
         $('#modeControl').parents('.list-condensed').find('section').hide();
         $('#' + $(this).data('mode') + 'Mode').show();
+        $.cookie('productViewType', $(this).data('mode'), {path: "/"});
     })
-    $('#modeControl a').first().click();
+    var type = $.cookie('productViewType');
+    if(type == '') type = 'card';
+    $('#modeControl').find('[data-mode=' + type +']').click();
 })
