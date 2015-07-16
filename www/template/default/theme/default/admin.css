@@ -311,6 +311,7 @@ a.tag-link {color: inherit;}
 
 .popover-danger {background-color: #F8E3E6; border-color: #F8E3E6; color: #D2322D;}
 .popover-danger.right .arrow,.popover-danger.right .arrow:after {border-right-color: #F8E3E6;}
+.input-group-btn .popover {font-size: 13px}
 
 /* fix page in table footer */
 .table td .page,.table td .pager {padding: 0;margin: 0;}
