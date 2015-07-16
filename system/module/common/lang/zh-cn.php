@@ -96,6 +96,7 @@ $lang->js->doing         = '处理中';
 $lang->js->loading       = '加载中';
 $lang->js->timeout       = '网络超时,请重试';
 $lang->js->errorThrown   = '<h4>执行出错：</h4>';
+$lang->js->continueShopping = '继续购物';
 
 /* Contact fields*/
 $lang->company = new stdclass();
