@@ -57,6 +57,11 @@ $lang->ui->QRCodeList[0] = '不显示';
 $lang->ui->logoList['current'] = '当前主题';
 $lang->ui->logoList['all']     = '所有主题';
 
+$lang->ui->deleteThemeList['blue']       = '蓝色';
+$lang->ui->deleteThemeList['brightdark'] = '蝉憩';
+$lang->ui->deleteThemeList['flat']       = '清泉';
+$lang->ui->deleteThemeList['tree']       = '蝉之树';
+
 $lang->ui->favicon = new stdclass();
 $lang->ui->favicon->help  = "帮助";
 
