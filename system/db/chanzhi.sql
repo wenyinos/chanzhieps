@@ -185,7 +185,7 @@ CREATE TABLE IF NOT EXISTS `eps_file` (
   `width` smallint(5) unsigned NOT NULL DEFAULT '0',
   `height` smallint(5) unsigned NOT NULL DEFAULT '0',
   `objectType` char(20) NOT NULL,
-  `objectID` mediumint(9) NOT NULL,
+  `objectID` char(50) NOT NULL,
   `addedBy` char(30) NOT NULL DEFAULT '',
   `addedDate` datetime NOT NULL,
   `public` enum('1','0') NOT NULL DEFAULT '1',
@@ -225,7 +225,7 @@ CREATE TABLE IF NOT EXISTS `eps_layout` (
   `page` varchar(30) NOT NULL,
   `region` varchar(30) NOT NULL,
   `blocks` text NOT NULL,
-  `imported` enum('no', 'doing', 'finished') NOT NULL DEFAULT 'no',
+  `import` enum('no', 'doing', 'finished') NOT NULL DEFAULT 'no',
   `lang` char(30) NOT NULL,
   UNIQUE KEY `layout` (`template`,`theme`,`page`,`region`,`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -436,7 +436,6 @@ CREATE TABLE IF NOT EXISTS `eps_log` (
   `id` mediumint(8) unsigned NOT NULL auto_increment,
   `account` char(30) NOT NULL,
   `browser` char(100) NOT NULL,
-  `fingerprint` char(100) NOT NULL,
   `ip` char(30) NOT NULL,
   `location` char(100) NOT NULL,
   `date` datetime NOT NULL,
