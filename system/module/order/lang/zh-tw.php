@@ -39,6 +39,7 @@ $lang->order->goToBank       = "請到網上銀行完成支付。";
 $lang->order->track          = '查看物流';
 $lang->order->life           = '訂單跟蹤';
 $lang->order->days           = '天';
+$lang->order->deliveryInfo   = '發貨信息';
 
 $lang->order->confirmLimit         = '確認收貨周期';
 $lang->order->confirmReceived      = '確認收貨';

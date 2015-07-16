@@ -64,7 +64,6 @@ $lang->confirm        = '確認';
 $lang->send           = '發送';
 $lang->preview        = '預覽';
 $lang->goback         = '返回';
-$lang->search         = '搜索';
 $lang->more           = '更多';
 $lang->actions        = '操作';
 $lang->feature        = '未來';
@@ -82,8 +81,12 @@ $lang->alias          = '搜索引擎優化使用，可使用英文或數字';
 
 $lang->setOkFile = <<<EOT
 <h5>請按照下面的步驟操作以確認您的管理員身份。</h5>
-<p>創建 %s 檔案。如果存在該檔案，使用編輯軟件打開，重新保存一遍。</p>
+<p>創建 %s 檔案。</p>
 EOT;
+
+$lang->color       = '顏色';
+$lang->colorTip    = '十六進制顏色值';
+$lang->colorPlates = '333333|000000|CA1407|45872B|148D00|F25D03|2286D2|D92958|A63268|04BFAD|D1270A|FF9400|299182|63731A|3D4DBE|7382D9|754FB9|F2E205|B1C502|364245|C05036|8A342A|E0DDA2|B3D465|EEEEEE|FFD0E5|D0FFFD|FFFF84|F4E6AE|E5E5E5|F1F1F1|FFFFFF';
 
 /* Items for javascript. */
 $lang->js = new stdclass();
@@ -123,8 +126,8 @@ $lang->menu->book     = '手冊|book|admin|';
 $lang->menu->page     = '單頁|article|admin|type=page';
 $lang->menu->forum    = '論壇|forum|admin|';
 $lang->menu->site     = '站點|site|setbasic|';
-$lang->menu->ui       = '界面|ui|setlogo|';
-$lang->menu->company  = '公司|company|setbasic|';
+$lang->menu->ui       = '界面|ui|customtheme|';
+$lang->menu->security = '安全|site|setsecurity|';
 $lang->menu->user     = '會員|user|admin|';
 $lang->menu->order    = '訂單|order|admin|';
 $lang->menu->feedback = '反饋|message|admin|';
@@ -137,11 +140,13 @@ $lang->menuGroups->mail    = 'site';
 $lang->menuGroups->nav     = 'site';
 $lang->menuGroups->links   = 'site';
 $lang->menuGroups->wechat  = 'site';
-$lang->menuGroups->group   = 'user';
+$lang->menuGroups->group   = 'security';
 $lang->menuGroups->block   = 'ui';
 $lang->menuGroups->slide   = 'ui';
 $lang->menuGroups->tree    = 'article';
 $lang->menuGroups->message = 'feedback';
+$lang->menuGroups->search  = 'site';
+$lang->menuGroups->company = 'site';
 
 /* Menu of article module. */
 $lang->article = new stdclass();
@@ -167,13 +172,14 @@ $lang->product->menu->browse = array('link' => '所有產品|product|admin|', 'a
 /* Menu of UI module. */
 $lang->ui = new stdclass();
 $lang->ui->menu = new stdclass();
-$lang->ui->menu->logo    = 'Logo設置|ui|setlogo|';
-$lang->ui->menu->favicon = '網站表徵圖|ui|setfavicon|';
-$lang->ui->menu->slide   = array('link' => '幻燈片設置|slide|admin|', 'alias' => 'create,edit');
-$lang->ui->menu->theme   = '模板設置|ui|settemplate|';
-$lang->ui->menu->admin   = array('link' => '區塊管理|block|admin|', 'alias' => 'create,edit');
-$lang->ui->menu->pages   = array('link' => '佈局設置|block|pages|', 'alias' => 'setregion');
-$lang->ui->menu->styles  = '全局樣式|ui|setbasestyle|';
+$lang->ui->menu->custom  = '自定義|ui|customtheme|';
+$lang->ui->menu->logo    = 'Logo|ui|setlogo|';
+$lang->ui->menu->favicon = '小表徵圖|ui|setfavicon|';
+$lang->ui->menu->slide   = '幻燈片|slide|admin|';
+$lang->ui->menu->block   = array('link' => '區塊|block|admin|', 'alias' => 'create,edit');
+$lang->ui->menu->layout  = array('link' => '佈局|block|pages|', 'alias' => 'setregion');
+$lang->ui->menu->source  = '素材|file|sourcebrowse|';
+$lang->ui->menu->others  = '其他|ui|others|';
 
 /* Menu of user module. */
 $lang->user = new stdclass();
@@ -182,9 +188,6 @@ $lang->user->menu->all    = '全部會員|user|admin|';
 $lang->user->menu->sina   = '微博會員|user|admin|provider=sina';
 $lang->user->menu->wechat = '微信會員|user|admin|provider=wechat';
 $lang->user->menu->qq     = 'QQ會員|user|admin|provider=qq';
-$lang->user->menu->admin  = '管理員|user|admin|admin=1';
-$lang->user->menu->group  = array('link' => '分組權限|group|browse|', 'alias' => 'managepriv,managemember');
-$lang->user->menu->log    = '登錄日誌|user|adminlog|';
 
 /* Menu of comment module. */
 $lang->feedback = new stdclass();
@@ -211,23 +214,28 @@ $lang->forum->menu->update = '更新數據|forum|update|';
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
 $lang->site->menu->basic      = '站點設置|site|setbasic|';
-$lang->site->menu->lang       = '語言設置|site|setlang|';
+$lang->site->menu->company    = '公司信息|company|setbasic|';
+$lang->site->menu->contact    = '聯繫方式|company|setcontact|';
 $lang->site->menu->nav        = '導航設置|nav|admin|';
-$lang->site->menu->security   = '安全設置|site|setsecurity|';
-$lang->site->menu->upload     = '上傳設置|site|setupload|';
-$lang->site->menu->tag        = '關鍵詞設置|tag|admin|';
-$lang->site->menu->recPerPage = '列表數量設置|site|setrecperpage|';
-#$lang->site->menu->robots    = 'Robots|site|setrobots|';
-$lang->site->menu->oauth      = '開放登錄|site|setoauth|';
+$lang->site->menu->sensitive  = '敏感詞設置|site|setsensitive|';
 $lang->site->menu->link       = '友情連結|links|admin|';
+$lang->site->menu->oauth      = '開放登錄|site|setoauth|';
 $lang->site->menu->mail       = array('link' => '發信設置|mail|admin|', 'alias' => 'detect,edit,save,test');
 $lang->site->menu->wechat     = array('link' => '微信設置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
 $lang->site->menu->search     = '更新搜索索引|search|buildindex|';
+$lang->site->menu->tag        = '關鍵詞設置|tag|admin|';
+
+/* Menu of security module. */
+$lang->security = new stdclass();
+$lang->security->menu = new stdclass();
+$lang->security->menu->basic  = '基本設置|site|setsecurity|';
+$lang->security->menu->upload = '附件上傳|site|setupload|';
+$lang->security->menu->admin  = '管理員|user|admin|admin=1';
+$lang->security->menu->group  = array('link' => '分組權限|group|browse|', 'alias' => 'managepriv,managemember');
+$lang->security->menu->log    = '登錄日誌|user|adminlog|';
 
 /* Menu of company module. */
-$lang->company->menu = new stdclass();
-$lang->company->menu->basic   = '公司信息|company|setbasic|';
-$lang->company->menu->contact = '聯繫方式|company|setcontact|';
+$lang->company->menu = $lang->site->menu;
 
 $lang->cart    = new stdclass();
 $lang->order   = new stdclass();
@@ -262,7 +270,11 @@ $lang->wechat->menu = $lang->site->menu;
 $lang->nav = new stdclass();
 $lang->nav->menu = $lang->site->menu;
 
-/* Menu of tree module. */
+/* Menu of search module. */
+$lang->search = new stdclass();
+$lang->search->menu = $lang->site->menu;
+
+/* Menu of slide module. */
 $lang->slide = new stdclass();
 $lang->slide->menu = $lang->ui->menu;
 
@@ -276,7 +288,7 @@ $lang->links->menu = $lang->site->menu;
 
 /* Menu of group module. */
 $lang->group = new stdclass();
-$lang->group->menu = $lang->user->menu;
+$lang->group->menu = $lang->security->menu;
 
 /* Menu of package module. */
 $lang->package = new stdclass();
@@ -305,6 +317,7 @@ $lang->error->captcha      = '請輸入正確的驗證碼。';
 $lang->error->noWritable   = '%s 可能不可寫，請修改權限！';
 $lang->error->fingerprint  = '身份認證過期，請重試！';
 $lang->error->token        = '必須為英文或數字，長度為3-32字元！';
+$lang->error->sensitive    = '內容中不能存在敏感詞!';
 
 /* The pager items. */
 $lang->pager = new stdclass();

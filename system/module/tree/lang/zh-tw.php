@@ -71,6 +71,12 @@ $lang->express = new stdclass();
 $lang->express->common = '快遞';
 $lang->express->name   = '快遞名稱';
 
+/* Lang items for express. */
+$lang->slideGroup = new stdclass();
+$lang->slideGroup->common = '幻燈片';
+$lang->slideGroup->name   = '幻燈片分組';
+$lang->slideGroup->view   = '查看幻燈片';
+
 /* Lang items for wechat menu. */
 $lang->wechatMenu = new stdclass();
 $lang->wechatMenu->common     = '公眾號菜單';

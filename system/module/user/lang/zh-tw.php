@@ -42,6 +42,7 @@ $lang->user->allowTime = '開放時間';
 $lang->user->status    = '狀態';
 $lang->user->captcha   = '驗證碼';
 $lang->user->alert     = '您的帳號已被禁用';
+$lang->user->privilege = '權限';
 
 $lang->user->list            = '會員列表';
 $lang->user->view            = "用戶詳情";
@@ -67,6 +68,8 @@ $lang->user->pullWechatFans  = '更新微信會員數據';
 $lang->user->adminlog        = '登錄日誌';
 $lang->user->checkEmail      = '綁定郵箱';
 $lang->user->getEmailCode    = '獲取郵箱驗證碼';
+$lang->user->editEmail       = '修改郵箱';
+$lang->user->newEmail        = '新郵箱';
 
 $lang->user->profile     = '個人信息';
 $lang->user->editProfile = '編輯信息';
@@ -96,6 +99,8 @@ $lang->user->activateFail      = '解除禁用失敗';
 $lang->user->pullSuccess       = '獲取微信會員成功';
 $lang->user->wrongPwd          = '密碼錯誤';
 $lang->user->checkEmailSuccess = '郵箱綁定成功';
+$lang->user->sendRecoverEmail  = '發送重置郵件';
+$lang->user->resetSuccess      = '重置密碼成功，請用新密碼登錄';
 
 $lang->user->forbidUser = '禁用管理';
 $lang->user->forbidDate = array();
@@ -137,11 +142,10 @@ $lang->user->resetPassword->success    = "密碼更改連結已經發送到您�
 $lang->user->resetPassword->failed     = "您的密保郵箱錯誤，請重新輸入";
 
 $lang->user->resetmail = new stdclass();
-$lang->user->resetmail->subject  = '密碼修改';
-$lang->user->resetmail->notice   = '系統發信，請勿回覆';
-$lang->user->resetmail->account  = '尊敬的用戶'; 
-$lang->user->resetmail->resetUrl = '請點擊下面的連結，進行密碼修改：'; 
-$lang->user->resetmail->reset    = '重置碼：'; 
+$lang->user->resetmail->subject  = '重置密碼';
+$lang->user->resetmail->account  = '你好，'; 
+$lang->user->resetmail->resetUrl = '您在%s（%s）請求了重置密碼操作，請點擊下面的連結，進行重置密碼：'; 
+$lang->user->resetmail->notice   = '系統發信，請勿回覆（如果您沒有進行操作，請忽略此郵件）';
 
 $lang->user->oauth = new stdclass();
 $lang->user->oauth->common       = '開放登錄';
@@ -156,6 +160,7 @@ $lang->user->oauth->sina->clientSecret = 'App Secret';
 $lang->user->oauth->qq = new stdclass();
 $lang->user->oauth->qq->clientID     = 'APP ID';
 $lang->user->oauth->qq->clientSecret = 'APP KEY';
+$lang->user->oauth->qq->callbackURL  = '回調地址：http:://www.chanzhi.org/user-oauthcallback-qq.html';
 
 $lang->user->oauth->providers['sina'] = '新浪微博';
 $lang->user->oauth->providers['qq']   = 'QQ';
@@ -176,8 +181,7 @@ $lang->user->control->welcome     = '歡迎您，<strong>%s</strong>';
 $lang->user->control->lblPassword = "留空，則保持不變。";
 
 $lang->user->control->menus[10] = '<i class="icon-user"></i> 個人信息 <i class="icon-chevron-right"></i>|user|profile';
-$lang->user->control->menus[20] = '<i class="icon-edit"></i> 編輯信息 <i class="icon-chevron-right"></i>|user|edit';
-$lang->user->control->menus[28] = '<i class="icon-comments-alt"></i> 我的消息 <i class="icon-chevron-right"></i>|user|message';
+$lang->user->control->menus[20] = '<i class="icon-comments-alt"></i> 我的消息 <i class="icon-chevron-right"></i>|user|message';
 $lang->user->control->menus[30] = '<i class="icon-share"></i> 我的主題 <i class="icon-chevron-right"></i>|user|thread';
 $lang->user->control->menus[40] = '<i class="icon-mail-reply"></i> 我的回帖 <i class="icon-chevron-right"></i>|user|reply';
 
@@ -195,10 +199,10 @@ $lang->user->log->id          = 'ID';
 $lang->user->log->account     = '用戶';
 $lang->user->log->browser     = '瀏覽器';
 $lang->user->log->ip          = 'IP';
-$lang->user->log->position    = '登錄地址';
+$lang->user->log->location    = '登錄地址';
 $lang->user->log->date        = '登錄時間';
 $lang->user->log->desc        = '描述';
 
 $lang->user->ipDenied       = '登錄IP受限，請按提示操作。';
-$lang->user->positionDenied = '登錄地區受限，請按提示操作。';
+$lang->user->locationDenied = '登錄地區受限，請按提示操作。';
 $lang->user->verifyFail     = '請填寫正確的驗證碼';

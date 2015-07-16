@@ -19,6 +19,7 @@ $lang->slide->summary    = '摘要';
 $lang->slide->label      = '按鈕文字';
 $lang->slide->button     = '按鈕';
 $lang->slide->newWindow  = '新開窗口';
+$lang->slide->upload     = '上傳';
 
 $lang->slide->background = new stdclass();
 
@@ -35,6 +36,7 @@ $lang->slide->height      = '高度';
 $lang->slide->url         = '連結';
 $lang->slide->buttonUrl   = '按鈕連結';
 $lang->slide->buttonColor = '顏色';
+$lang->slide->sourceImage = '素材庫圖片';
 
 $lang->slide->sort     = '排序';
 $lang->slide->admin    = '幻燈片設置';
@@ -44,6 +46,8 @@ $lang->slide->edit     = '編輯幻燈片';
 $lang->slide->successSort     = '排序成功保存';
 $lang->slide->noImageSelected = '沒有選擇圖片';
 $lang->slide->suitableSize    = '背景圖片大小保持一致。';
+
+$lang->slide->defaultGroup = '預設分組';
 
 /* Targets setting. */
 $lang->slide->target = new stdclass();

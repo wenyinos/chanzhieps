@@ -9,30 +9,65 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->ui->common       = "界面";
+$lang->ui->common = "界面";
 
+$lang->ui->clientDesktop   = '桌面';
+$lang->ui->clientMobile    = '移動';
 $lang->ui->logo            = 'Logo';
 $lang->ui->setLogo         = "Logo設置";
 $lang->ui->setTemplate     = '模板設置';
 $lang->ui->installTemplate = '上傳模板';
+$lang->ui->exportTheme     = '導出主題';
 $lang->ui->setTheme        = '主題設置';
 $lang->ui->customTheme     = '自定義主題';
 $lang->ui->setFavicon      = "Favicon設置";
-$lang->ui->setBaseStyle    = "全局樣式設置";
 $lang->ui->deleteFavicon   = "刪除Favicon";
 $lang->ui->deleteLogo      = "刪除Logo";
+$lang->ui->others          = "其他設置";
+$lang->ui->productView     = "產品點擊量";
+$lang->ui->QRCode          = "移動二維碼";
+$lang->ui->templateName    = "模板名稱";
+$lang->ui->currentTheme    = '當前模板主題';
+$lang->ui->uploadTheme     = '導入主題';
+$lang->ui->installTheme    = '安裝主題';
+$lang->ui->importedBlocks  = '導入區塊';
+$lang->ui->matchedBlock    = '對應區塊';
+$lang->ui->createBlock     = '導入新區塊';
+$lang->ui->useOldBlock     = '使用已有區塊';
 
-$lang->ui->noStyleTag        = "請填寫全局CSS樣式代碼，不需要&lt;style&gt;&lt;/style&gt;標籤";
-$lang->ui->setLogoFailed     = "設置Logo失敗";
-$lang->ui->noSelectedFile    = "獲取上傳圖片失敗，可能是圖片大小超出上傳限制";
-$lang->ui->notAlloweFileType = "請選擇正確的%s檔案";
-$lang->ui->suitableLogoSize  = '最佳高度範圍：50px~80px，最佳寬度範圍：80px~240px';
+$lang->ui->noStyleTag         = "請填寫全局CSS樣式代碼，不需要&lt;style&gt;&lt;/style&gt;標籤";
+$lang->ui->noJsTag            = "請填寫全局JS代碼，不需要&lt;script&gt;&lt;/script&gt;標籤";
+$lang->ui->setLogoFailed      = "設置Logo失敗";
+$lang->ui->noSelectedFile     = "獲取上傳圖片失敗，可能是圖片大小超出上傳限制";
+$lang->ui->notAlloweFileType  = "請選擇正確的%s檔案";
+$lang->ui->suitableLogoSize   = '最佳高度範圍：50px~80px，最佳寬度範圍：80px~240px';
+$lang->ui->exportedSuccess    = '導出成功';
+$lang->ui->deleteThemeSuccess = '刪除主題成功';
+$lang->ui->deleteThemeFail    = '刪除主題失敗';
+$lang->ui->fileRequired       = '請選擇一個檔案';
+$lang->ui->importThemeSuccess = '導入主題成功';
+
+$lang->ui->productViewList[1] = '顯示'; 
+$lang->ui->productViewList[0] = '不顯示'; 
+
+$lang->ui->QRCodeList[1] = '顯示'; 
+$lang->ui->QRCodeList[0] = '不顯示'; 
+
+$lang->ui->logoList['current'] = '當前主題';
+$lang->ui->logoList['all']     = '所有主題';
+
+$lang->ui->deleteThemeList['blue']       = '藍色';
+$lang->ui->deleteThemeList['brightdark'] = '蟬憩';
+$lang->ui->deleteThemeList['flat']       = '清泉';
+$lang->ui->deleteThemeList['tree']       = '蟬之樹';
+$lang->ui->deleteThemeList['colorful']   = '繽紛';
 
 $lang->ui->favicon = new stdclass();
 $lang->ui->favicon->help  = "幫助";
 
 $lang->ui->template = new stdclass();
 $lang->ui->template->name            = '名稱';
+$lang->ui->template->code            = '代碼';
 $lang->ui->template->version         = '版本';
 $lang->ui->template->author          = '作者';
 $lang->ui->template->charge          = '費用';
@@ -40,6 +75,7 @@ $lang->ui->template->chanzhiVersion  = '兼容版本';
 $lang->ui->template->desc            = '簡介';
 $lang->ui->template->theme           = '主題';
 $lang->ui->template->license         = '版權';
+$lang->ui->template->preview         = '效果圖';
 $lang->ui->template->availableThemes = '<strong>%s</strong> 款可用主題';
 $lang->ui->template->currentTheme    = '正在使用 <strong>%s</strong>';
 $lang->ui->template->changeTheme     = '切換主題';
@@ -55,11 +91,16 @@ $lang->ui->template->enable          = '啟用';
 $lang->ui->template->reload          = '刷新頁面';
 $lang->ui->template->doInstall       = '確認安裝';
 $lang->ui->template->info            = '模板信息';
+$lang->ui->template->demo            = '演示網址';
+$lang->ui->template->qq              = 'QQ';
+$lang->ui->template->email           = 'Email';
+$lang->ui->template->site            = 'site';
 
 $lang->ui->customtheme = '自定義主題';
 $lang->ui->custom      = '自定義';
 $lang->ui->themeSaved  = '主題配置已保存';
 $lang->ui->unWritable  = "不能生成樣式檔案，請檢查 %s目錄的權限";
+$lang->ui->codeHolder  = "字母加數字組合成的主題代號";
 
 $lang->ui->theme = new stdclass();
 $lang->ui->theme->reset                                = '重置為預設';
@@ -69,6 +110,10 @@ $lang->ui->theme->sizeTip                              = '預設單位為像素�
 $lang->ui->theme->colorTip                             = '如: red 或 #FFF';
 $lang->ui->theme->positionTip                          = '如: 100px, 50%, left, top, center';
 $lang->ui->theme->backImageTip                         = '圖片地址，如: image.jpg';
+$lang->ui->theme->extraStyle                           = 'CSS';
+$lang->ui->theme->extraScript                          = 'Javascript';
+$lang->ui->theme->customStyleTip                       = '樣式表支持Less語法。';
+$lang->ui->theme->customScriptTip                      = '已包含 jQuery 1.9.0。';
 $lang->ui->theme->borderStyleList['none']              = '無邊框';
 $lang->ui->theme->borderStyleList['solid']             = '實線';
 $lang->ui->theme->borderStyleList['dashed']            = '虛線';
