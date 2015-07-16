@@ -92,14 +92,18 @@ $lang->resource->company->setcontact = 'setContact';
 
 /* File module. */
 $lang->resource->file = new stdclass();
-$lang->resource->file->browse      = 'browse';
-$lang->resource->file->setPrimary  = 'setPrimary';
-$lang->resource->file->upload      = 'upload';
-$lang->resource->file->download    = 'download';
-$lang->resource->file->edit        = 'edit';
-$lang->resource->file->sort        = 'sort';
-$lang->resource->file->fileManager = 'fileManager';
-$lang->resource->file->delete      = 'delete';
+$lang->resource->file->browse       = 'browse';
+$lang->resource->file->setPrimary   = 'setPrimary';
+$lang->resource->file->upload       = 'upload';
+$lang->resource->file->download     = 'download';
+$lang->resource->file->edit         = 'edit';
+$lang->resource->file->sort         = 'sort';
+$lang->resource->file->fileManager  = 'fileManager';
+$lang->resource->file->delete       = 'delete';
+$lang->resource->file->sourceBrowse = 'sourceList';
+$lang->resource->file->sourceDelete = 'sourceDelete';
+$lang->resource->file->sourceEdit   = 'sourceEdit';
+$lang->resource->file->selectImage  = 'selectImage';
 
 /* Forum module. */
 $lang->resource->forum = new stdclass();
@@ -173,13 +177,12 @@ $lang->resource->reply->deleteFile = 'deleteFile';
 
 /* Site module. */
 $lang->resource->site = new stdclass();
-$lang->resource->site->setBasic      = 'setBasic';
-$lang->resource->site->setLang       = 'setLang';
-$lang->resource->site->setRobots     = 'setRobots';
-$lang->resource->site->setUpload     = 'setUpload';
-$lang->resource->site->setOauth      = 'setOauth';
-$lang->resource->site->setRecPerPage = 'setRecPerPage';
-$lang->resource->site->setsecurity   = 'setsecurity';
+$lang->resource->site->setBasic     = 'setBasic';
+$lang->resource->site->setRobots    = 'setRobots';
+$lang->resource->site->setUpload    = 'setUpload';
+$lang->resource->site->setOauth     = 'setOauth';
+$lang->resource->site->setsecurity  = 'setsecurity';
+$lang->resource->site->setsensitive = 'setsensitive';
 
 /* Slide module. */
 $lang->resource->slide = new stdclass();
