@@ -11,6 +11,8 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php include '../../common/view/treeview.html.php';?>
+<?php js::set('groupID', $group);?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class='icon-picture'></i> <?php echo $lang->slide->admin;?></strong>

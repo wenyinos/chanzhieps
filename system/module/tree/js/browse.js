@@ -47,4 +47,6 @@ $(document).ready(function()
     })
 
     if(v.isWechatMenu) $(".leftmenu a[href*='wechat']").parent().addClass('active');
+
+    if(v.type == 'slide') $("a[href*='slide']").parent().addClass('active');
 })

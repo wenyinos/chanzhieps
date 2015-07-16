@@ -46,5 +46,20 @@
   <div class='col-md-10'>
   <?php endif;?>
   <?php else:?>
-    <?php include '../../ui/view/header.html.php';?>
+  <?php include '../../ui/view/header.html.php';?>
+  <?php if(!empty($treeModuleMenu)):?>
+  <div class='col-md-2'>
+    <div class="leftmenu affix hiddden-xs hidden-sm">
+      <div class='panel category-nav'>
+        <div class='panel-body'>
+          <?php echo $treeModuleMenu;?>
+          <?php if(!empty($treeManageLink)):?>
+          <div class='text-right'><?php if(commonModel::hasPriv('tree', 'browse')) echo $treeManageLink;?></div>
+          <?php endif;?>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='col-md-10'>
+  <?php endif;?>
   <?php endif;?>
