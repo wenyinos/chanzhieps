@@ -288,7 +288,7 @@ class ui extends control
             $themes[$code]    = $template['themes'];
         }
 
-        $this->view->templates = $templates;
+        $this->view->templateOptions = $templates;
         $this->view->themes    = $themes;
         $this->view->title     = $this->lang->ui->exportTheme;
         $this->display();
