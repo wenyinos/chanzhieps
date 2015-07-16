@@ -114,7 +114,6 @@ class file extends control
     public function edit($fileID)
     {
         $file = $this->file->getById($fileID);
-        if($file->objectType == 'source') $this->file->setSavePath('source');
 
         if(!empty($_POST))
         {
@@ -151,19 +150,19 @@ class file extends control
         $this->view->writeable = $this->file->checkSavePath();
         $this->view->type      = $type;
         $this->view->files     = $this->file->getSourceList($type, $orderBy, $pager);
+        $this->view->users     = $this->loadModel('user')->getPairs();
         $this->view->pager     = $pager;
         $this->display();
     }
 
     /**
-     * Edit for the file
+     * Edit for the source file. 
      * 
-     * @param  string $objectType 
-     * @param  int    $objectID 
+     * @param  int $fileID 
      * @access public
      * @return void
      */
-    public function sourceEdit($fileID, $objectType)
+    public function sourceEdit($fileID)
     {
         $this->file->setSavePath('source');
         $file = $this->file->getById($fileID);
@@ -173,16 +172,10 @@ class file extends control
             if($this->post->filename == false or $this->post->filename == '') $this->send(array('result' => 'fail', 'message' => $this->lang->file->nameEmpty));
 
             $filename = $this->post->filename;
-            $allowedChar = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_';
-            for($i = 0; $i < strlen($filename); $i++)
-            {
-                if(strpos($allowedChar, $filename[$i]) === false) $this->send(array('result' => 'fail', 'message' => $this->lang->file->evilChar));
-            }
+            if(!validater::checkFileName($filename)) $this->send(array('result' => 'fail', 'message' => $this->lang->file->evilChar));
 
-            if(file_exists($this->app->getDataRoot() . 'upload/source/' . $filename . '.' . $file->extension)) 
-                $this->send(array('result' => 'fail', 'message' => $this->lang->file->sameName));
-            $this->file->sourceEdit($fileID, $filename);
-            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $result = $this->file->sourceEdit($fileID, $filename);
+            if($result['result'] == 'fail') $this->send($result);
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('file', 'sourcebrowse')));
         }
         $this->view->title      = $this->lang->file->edit;
