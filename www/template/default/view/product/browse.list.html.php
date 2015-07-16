@@ -22,10 +22,6 @@
         <td>
           <?php echo "<strong class='text-danger'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->price . '</strong>&nbsp;&nbsp;'; ?>
         </td>
-        <td class='text-muted'>
-          <span class='icon icon-eye-open'><?php echo $lang->product->views . $lang->colon . $product->views;?></span><br>
-          <span class='icon icon-comments-alt'><?php echo $lang->product->comments . $lang->colon . $product->comments;?></span>
-        </td>
         <td class="w-100px">
           <?php if(commonModel::isAvailable('order')):?>
           <?php echo html::a(inlink('view', "id={$product->id}", "category={$product->category->alias}&name=$product->alias"), $lang->product->buyNow, "class='btn btn-xs btn-success'")?>
