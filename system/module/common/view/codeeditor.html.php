@@ -7,7 +7,7 @@ body.codeeditor-fullscreen .form-action {position: fixed; bottom: 5px; left: 50p
 .editor-wrapper .actions {position: absolute; right: 15px; top: 10px; z-index: 3;}
 .editor-wrapper .actions > a {color: #808080; border: 1px solid #aaa; min-width: 14px; height: 24px; line-height: 24px; text-align: center; display: block; border-radius: 3px; float: left; margin-left: 6px; padding: 0 5px}
 .editor-wrapper .actions > a:hover {color: #999}
-.editor-wrapper.fullscreen {position: fixed; left: 0; top: 40px; bottom: 40px; right: 0}
+.editor-wrapper.fullscreen {position: fixed; left: 0; top: 40px; bottom: 40px; right: 0; z-index: 10}
 .editor-wrapper.fullscreen .pre {height: 100%; width: 100%}
 
 .modal-dialog.editor-fullscreen {position: absolute; bottom: 0; right: 0; top: 0; left: 0;  width: 100%!important; margin: 0!important; height: auto!important; border-radius: 0}
