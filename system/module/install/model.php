@@ -289,6 +289,8 @@ class installModel extends model
         $insertTables = explode(";\n", file_get_contents($demoDataFile));
         foreach($insertTables as $table)
         { 
+            if(strpos($table, '`eps_user`') !== false and $this->post->account == 'demo') continue;
+
             $table = trim($table);
             if(empty($table)) continue;
   
