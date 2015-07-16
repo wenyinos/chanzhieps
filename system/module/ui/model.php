@@ -807,4 +807,30 @@ class uiModel extends model
         if(empty($list)) $this->app->loadClass('zfile')->removeDir(dirname($this->exportPath));
         return $zipFile;
     }
+
+    /**
+     * Delete a theme.
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @access public
+     * @return void
+     */
+    public function deleteTheme($template, $theme)
+    {
+        $this->dao->setAutoLang(false)->delete()->from(TABLE_PACKAGE)->where('templateCompatible')->eq($template)->andWhere('code')->eq($theme)->exec();
+        if(dao::isError()) return false;
+
+        $this->dao->setAutoLang(false)->delete()->from(TABLE_LAYOUT)->where('template')->eq($template)->andWhere('theme')->eq($theme)->exec();
+        if(dao::isError()) return false;
+
+        $themeDirs = array();
+        $themeDirs[] = $this->app->getWwwRoot() . DS . 'data' . DS . 'source' . DS . $template . DS . $theme;
+        $themeDirs[] = $this->app->getWwwRoot() . DS . 'data' . DS . 'css' . DS . $template . DS . $theme;
+        $themeDirs[] = $this->app->getWwwRoot() . DS . 'template' . DS . $template . DS . 'theme' . DS . $theme;
+
+        $zfile = $this->app->loadClass('zfile');
+        foreach($themeDirs as $dir) $zfile->removeDir($dir);
+        return true;
+    }
 }

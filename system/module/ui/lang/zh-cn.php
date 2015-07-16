@@ -46,6 +46,8 @@ $lang->ui->noSelectedFile     = "获取上传图片失败，可能是图片大�
 $lang->ui->notAlloweFileType  = "请选择正确的%s文件";
 $lang->ui->suitableLogoSize   = '最佳高度范围：50px~80px，最佳宽度范围：80px~240px';
 $lang->ui->exportedSuccess    = '导出成功';
+$lang->ui->deleteThemeSuccess = '删除主题成功';
+$lang->ui->deleteThemeFail    = '删除主题失败';
 $lang->ui->fileRequired       = '请选择一个文件';
 $lang->ui->importThemeSuccess = '导入主题成功';
 
@@ -57,6 +59,11 @@ $lang->ui->QRCodeList[0] = '不显示';
 
 $lang->ui->logoList['current'] = '当前主题';
 $lang->ui->logoList['all']     = '所有主题';
+
+$lang->ui->deleteThemeList['blue']       = '蓝色';
+$lang->ui->deleteThemeList['brightdark'] = '蝉憩';
+$lang->ui->deleteThemeList['flat']       = '清泉';
+$lang->ui->deleteThemeList['tree']       = '蝉之树';
 
 $lang->ui->favicon = new stdclass();
 $lang->ui->favicon->help  = "帮助";

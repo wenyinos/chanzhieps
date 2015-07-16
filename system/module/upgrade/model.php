@@ -102,9 +102,11 @@ class upgradeModel extends model
             case '4_2';
             case '4_2_1':
                 $this->execSQL($this->getUpgradeFile('4.2.1'));
+                $this->reserveCurrentTheme();
                 $this->moveSlideData();
                 $this->fixLocationConfig();
                 $this->updateBlockTheme();
+                $this->updateLayoutTheme();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -1117,6 +1119,31 @@ class upgradeModel extends model
     }
 
     /**
+     * Reserve current theme of default template when upgrade from 4.2.1.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function reserveCurrentTheme()
+    {
+        $themes = $this->loadModel('ui')->getThemesByTemplate('default');
+        if(!isset($themes[$this->config->template->theme]))
+        {
+            $theme = new stdclass();
+            $theme->name               = $this->lang->ui->deleteThemeList[$this->config->template->theme];
+            $theme->code               = $this->config->template->theme;
+            $theme->type               = 'theme';
+            $theme->status             = 'available';
+            $theme->lang               = 'all';
+            $theme->templateCompatible = 'default';
+
+            $this->dao->insert(TABLE_PACKAGE)->data($theme)->exec();
+        }
+
+        return !dao::isError();
+    }  
+
+    /**
      * Move slide data from config to slide table when upgrade from 4.2.1.
      * 
      * @access public
@@ -1228,79 +1255,110 @@ class upgradeModel extends model
         {
             $content = json_decode($block->content, true);
 
-            if(!isset($content[$theme])) $content[$theme] = array();
+            $content['custom'] = array();
+            $content['custom'][$theme] = array();
 
             if(isset($content['iconColor']))
             {
-                $content[$theme]['iconColor'] = $content['iconColor'];
+                $content['custom'][$theme]['iconColor'] = $content['iconColor'];
                 unset($content['iconColor']);
             }
 
             if(isset($content['borderColor']))
             {
-                $content[$theme]['borderColor'] = $content['borderColor'];
+                $content['custom'][$theme]['borderColor'] = $content['borderColor'];
                 unset($content['borderColor']);
             }
 
             if(isset($content['titleColor']))
             {
-                $content[$theme]['titleColor'] = $content['titleColor'];
+                $content['custom'][$theme]['titleColor'] = $content['titleColor'];
                 unset($content['titleColor']);
             }
 
             if(isset($content['titleBackground']))
             {
-                $content[$theme]['titleBackground'] = $content['titleBackground'];
+                $content['custom'][$theme]['titleBackground'] = $content['titleBackground'];
                 unset($content['titleBackground']);
             }
 
             if(isset($content['textColor']))
             {
-                $content[$theme]['textColor'] = $content['textColor'];
+                $content['custom'][$theme]['textColor'] = $content['textColor'];
                 unset($content['textColor']);
             }
 
             if(isset($content['linkColor']))
             {
-                $content[$theme]['linkColor'] = $content['linkColor'];
+                $content['custom'][$theme]['linkColor'] = $content['linkColor'];
                 unset($content['linkColor']);
             }
 
             if(isset($content['backgroundColor']))
             {
-                $content[$theme]['backgroundColor'] = $content['backgroundColor'];
+                $content['custom'][$theme]['backgroundColor'] = $content['backgroundColor'];
                 unset($content['backgroundColor']);
             }
 
             if(isset($content['paddingTop']))
             {
-                $content[$theme]['paddingTop'] = $content['paddingTop'];
+                $content['custom'][$theme]['paddingTop'] = $content['paddingTop'];
                 unset($content['paddingTop']);
             }
 
             if(isset($content['paddingRight']))
             {
-                $content[$theme]['paddingRight'] = $content['paddingRight'];
+                $content['custom'][$theme]['paddingRight'] = $content['paddingRight'];
                 unset($content['paddingRight']);
             }
 
             if(isset($content['paddingBottom']))
             {
-                $content[$theme]['paddingBottom'] = $content['paddingBottom'];
+                $content['custom'][$theme]['paddingBottom'] = $content['paddingBottom'];
                 unset($content['paddingBottom']);
             }
 
             if(isset($content['paddingLeft']))
             {
-                $content[$theme]['paddingLeft'] = $content['paddingLeft'];
+                $content['custom'][$theme]['paddingLeft'] = $content['paddingLeft'];
                 unset($content['paddingLeft']);
             }
 
-            if(empty($content[$theme])) continue;
+            if(empty($content['custom'][$theme])) continue;
 
             $block->content = helper::jsonEncode($content);
             $this->dao->update(TABLE_BLOCK)->set('content')->eq($block->content)->where('id')->eq($block->id)->exec();
         }
+        return !dao::isError();
+    }
+
+    /**
+     * Add theme for layout. 
+     * 
+     * @access public
+     * @return bool
+     */
+    public function updateLayoutTheme()
+    {
+        $this->dao->update(TABLE_LAYOUT)->set('theme')->eq($this->config->template->theme)->where('template')->eq($this->config->template->name)->exec();
+
+        $layoutList = $this->dao->setAutoLang(false)->select('*')->from(TABLE_LAYOUT)->fetchGroup('template');
+        
+        foreach($layoutList as $template => $layouts)
+        {
+            $themes = $this->loadModel('ui')->getThemesByTemplate($template);
+
+            foreach($themes as $code => $theme)
+            {
+                foreach($layouts as $layout)
+                {
+                    if($template == $this->config->template->name and $code == $this->config->template->theme) continue;
+                    $layout->theme = $code;
+                    $this->dao->insert(TABLE_LAYOUT)->data($layout)->exec();
+                }
+            }
+        }
+
         return !dao::isError();
     }
 }

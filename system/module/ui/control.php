@@ -288,7 +288,7 @@ class ui extends control
             $themes[$code]    = $template['themes'];
         }
 
-        $this->view->templates = $templates;
+        $this->view->templateOptions = $templates;
         $this->view->themes    = $themes;
         $this->view->title     = $this->lang->ui->exportTheme;
         $this->display();
@@ -444,5 +444,20 @@ class ui extends control
         $result = $this->loadModel('setting')->setItems('system.common.template', $setting);
 
         $this->send(array('result' => 'success', 'message' => $this->lang->ui->importThemeSuccess, "locate" => inlink('customtheme')));
+    }
+
+    /**
+     * Delete a theme.
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @access public
+     * @return void
+     */
+    public function deleteTheme($template, $theme)
+    {
+        $result = $this->ui->deleteTheme($template, $theme);
+        if($result) $this->send(array('result' => 'success', 'message' => $this->lang->ui->deleteThemeSuccess, "locate" => inlink('setTemplate')));
+        $this->send(array('result' => 'fail', 'message' => $this->lang->ui->deleteThemeFail));
     }
 }

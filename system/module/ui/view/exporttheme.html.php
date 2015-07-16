@@ -1,15 +1,17 @@
 <?php include '../../common/view/header.modal.html.php';?>
 <?php js::set('themes', $themes) ?>
-<form id='ajaxForm' method='post' action="<?php echo inlink('exportTheme');?>">
+<?php js::set('template', $this->config->template->name);?>
+<?php js::set('theme', $this->config->template->theme);?>
+<form id='ajaxForm' class='export-theme-form' method='post' action="<?php echo inlink('exportTheme');?>">
   <table class='table table-form'>
     <tr>
       <th class='w-80px'><?php echo $lang->ui->templateName?></th>
       <td>
         <div class='required required-wrapper'></div>
         <div class='input-group'>
-          <?php echo html::select('template', $templates, $this->config->template, "class='form-control'");?>
+          <?php echo html::select('template', $templateOptions, $this->config->template->name, "class='form-control'");?>
           <span class='input-group-addon'></span>
-          <?php echo html::select('theme', '', '', "class='form-control'");?>
+          <?php echo html::select('theme', array(''), '', "class='form-control'");?>
         </div>
       </td>
     </tr>

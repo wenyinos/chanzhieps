@@ -49,7 +49,9 @@
           <div class='theme<?php echo $currentClass;?>' data-url='<?php echo $url;?>' data-theme='<?php echo $theme;?>'>
             <div class='theme-card'>
               <i class='icon-ok icon'></i>
-              <?php commonModel::printLink('ui', 'deleteTheme', "theme={$theme}&template={$code}", "<span class='icon-times'></span> {$lang->delete}", "class='btn btn-danger deleter' data-type='ajax' data-backdrop='true'") ?>
+              <div class='theme-actions dropdown'>
+                <?php if(!in_array("$code.$theme", $this->config->ui->systemThemes)) commonModel::printLink('ui', 'deleteTheme', "template={$code}&theme={$theme}", "<span class='icon-remove'></span>", "title='{$lang->delete}' class='deleter btn btn-link btn-mini' data-type='ajax' data-backdrop='true'") ?>
+              </div>
               <div class='theme-img'><?php echo html::image($templateRoot . 'theme/' . $theme . '/preview.png');?></div>
               <div class='theme-name text-center'><strong><?php echo $name;?></strong></div>
             </div>

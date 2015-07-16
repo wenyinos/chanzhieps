@@ -787,15 +787,16 @@ function getFingerptint()
     return fingerprint;
 }
 
-function associateSelect(first, sencond, data)
+function associateSelect(first, sencond, data, firstVal, sencondVal)
 {
     $(first).change(function()
     {
         $(sencond).html('');
-        options = eval("data." + $(first).val());
+        var options = data[$(first).val()];
         $.each(options, function(key, value)
         {
-            option = '<option value="' + key + '">' + value  + '</option>';
+            selected = key == sencondVal ? "selected" : '';
+            option = '<option ' + selected + ' value="' + key + '">' + value  + '</option>';
             $(sencond).append(option);
         })
     })  

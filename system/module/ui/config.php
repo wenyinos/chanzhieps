@@ -1,7 +1,9 @@
 <?php
+$config->ui->systemThemes = array('default.default', 'default.tartan', 'default.wide');
+
 $config->ui->groups = array('basic', 'navbar', 'block', 'button', 'footer');
 $config->ui->require = new stdclass();
-$config->ui->require->exportTheme = "name,code,author,email,demo";
+$config->ui->require->exportTheme = "name,code,author,email";
 
 $config->ui->selectorOptions = array();
 
