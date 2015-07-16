@@ -18,8 +18,8 @@
                         {  
                             back:
                             {  
-                                label:     v.goback,
-                                className: 'btn-default',  
+                                label:     v.lang.continueShopping,
+                                className: 'btn-primary',  
                                 callback:  function(){location.reload();}  
                             },
                             cart:
