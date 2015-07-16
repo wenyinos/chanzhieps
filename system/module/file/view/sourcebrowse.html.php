@@ -42,7 +42,7 @@
             $imageHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank' data-toggle='lightbox'");
             $imageHtml .= "<span class='file-actions'>";
             $imageHtml .= html::a(helper::createLink('file', 'sourcedelete', "id=$file->id"), "<i class='icon-trash'></i>", "class='deleter'");
-            $imageHtml .= html::a(helper::createLink('file', 'sourceedit', "id=$file->id&objectType=source"), "<i class='icon-edit'></i>", "data-toggle='modal'");
+            $imageHtml .= html::a(helper::createLink('file', 'sourceedit', "id=$file->id"), "<i class='icon-edit'></i>", "data-toggle='modal'");
             $imageHtml .= html::a('javascript:void(0)', $lang->file->sourceURI, "data-toggle='modal' data-custom=\"$fullURL\"");
             $imageHtml .= '</span>';
             $imageHtml .= '</li>';
@@ -53,7 +53,7 @@
             $fileHtml .= "<li class='file file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'");
             $fileHtml .= "<span class='file-actions'>";
             $fileHtml .= html::a(helper::createLink('file', 'sourcedelete', "id=$file->id"), "<i class='icon-trash'></i>", "class='deleter'");
-            $fileHtml .= html::a(helper::createLink('file', 'sourceedit', "id=$file->id&objectType=source"), "<i class='icon-edit'></i>", "data-toggle='modal'");
+            $fileHtml .= html::a(helper::createLink('file', 'sourceedit', "id=$file->id"), "<i class='icon-edit'></i>", "data-toggle='modal'");
             $fileHtml .= html::a('javascript:void(0)', $lang->file->sourceURI, "data-toggle='modal' data-custom=\"$fullURL\"");
             $fileHtml .= '</span>';
             $fileHtml .= '</li>';
@@ -100,8 +100,8 @@
           <td class='text-center'>
           <?php
           $fullURL = html::input('', $file->fullURL, "size='" . strlen($file->fullURL) . "' style='border:none; background:none;' onmouseover='this.select()'");
-          commonModel::printLink('file', 'sourceedit',   "id=$file->id&objectType=source", $lang->edit, "data-toggle='modal'");
           commonModel::printLink('file', 'sourcedelete', "id=$file->id", $lang->delete, "class='deleter'");
+          commonModel::printLink('file', 'sourceedit',   "id=$file->id", $lang->edit, "data-toggle='modal'");
           echo html::a('javascript:void(0)', $lang->file->sourceURI, "data-toggle='modal' data-custom=\"$fullURL\"");
           ?>
           </td>

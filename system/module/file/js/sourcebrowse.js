@@ -11,6 +11,7 @@ $(document).ready(function()
         $('.list-view').removeClass('selected');
         $('#imageView').show();
         $('#listView').hide();
+        $.cookie('sourceViewType', 'image', {path: "/"});
     });
 
     $('.list-view').click(function()
@@ -19,5 +20,10 @@ $(document).ready(function()
         $('.image-view').removeClass('selected');
         $('#listView').show();
         $('#imageView').hide();
+        $.cookie('sourceViewType', 'list', {path: "/"});
     });
+
+    var type = $.cookie('sourceViewType');
+    if(type == '') type = 'image';
+    $('.' + type + '-view').click();
 });
