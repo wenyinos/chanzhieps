@@ -12,9 +12,9 @@ $(document).ready(function()
         $img.attr('src', $this.closest('.themes-list').find('.theme.current .theme-img img').attr('src'));
     });
 
-    $('.theme').click(function()
+    $('.theme').on('click', '.theme-img, .theme-name', function()
     {
-        var $this = $(this);
+        var $this = $(this).closest('.theme');
         var $tpl  = $this.closest('.card-template');
         if($this.hasClass('current') && $tpl.hasClass('current')) return;
 

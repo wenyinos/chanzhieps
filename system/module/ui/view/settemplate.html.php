@@ -49,9 +49,9 @@
           <div class='theme<?php echo $currentClass;?>' data-url='<?php echo $url;?>' data-theme='<?php echo $theme;?>'>
             <div class='theme-card'>
               <i class='icon-ok icon'></i>
-              <?php if($custom and $customThemePriv):?>
-              <?php commonModel::printLink('ui', 'customTheme', "theme={$theme}&template={$code}", "<span class='icon-cog'></span> {$lang->ui->custom}", "class='btn btn-primary btn-custom' data-toggle='modal' data-type='ajax' data-backdrop='true'") ?>
-              <?php endif;?>
+              <div class='theme-actions dropdown'>
+                <?php commonModel::printLink('ui', 'deleteTheme', "theme={$theme}&template={$code}", "<span class='icon-remove'></span>", "title='{$lang->delete}' class='deleter btn btn-link btn-mini' data-type='ajax' data-backdrop='true'") ?>
+              </div>
               <div class='theme-img'><?php echo html::image($templateRoot . 'theme/' . $theme . '/preview.png');?></div>
               <div class='theme-name text-center'><strong><?php echo $name;?></strong></div>
             </div>

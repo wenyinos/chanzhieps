@@ -17,28 +17,15 @@ class ui extends control
      * @param  string   $template 
      * @param  string   $theme 
      * @param  bool     $custom 
-     * @param  string   $editTemplate 
-     * @param  string   $editTheme 
      * @access public
      * @return void
      */
-    public function setTemplate($template = '', $theme = '', $custom = false, $editTemplate = '', $editTheme = '')
+    public function setTemplate($template = '', $theme = '', $custom = false)
     {
         $templates = $this->ui->getTemplates();
 
-        /* Set editing template and theme in session. */
-        if($editTemplate != '' and $editTheme != '')
-        {
-            if(isset($templates[$editTemplate])) $this->session->set('editTemplate', $editTemplate);
-            if(isset($templates[$editTemplate]['themes'][$editTheme])) $this->session->set('editTheme', $editTheme);
-            $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
-        }
-
         if($template and isset($templates[$template]))
         {  
-            $this->session->set('editTemplate', $editTemplate);
-            $this->session->set('editTheme', $editTheme);
-
             $setting = array();
             $setting['name']   = $template;
             $setting['theme']  = $theme;
@@ -301,7 +288,7 @@ class ui extends control
             $themes[$code]    = $template['themes'];
         }
 
-        $this->view->templates = $templates;
+        $this->view->templateOptions = $templates;
         $this->view->themes    = $themes;
         $this->view->title     = $this->lang->ui->exportTheme;
         $this->display();
@@ -412,20 +399,11 @@ class ui extends control
         {
             $this->package->saveCustomParams($package, $packageInfo->customParams);
         }
-
         /* Save to database. */
-        $this->package->savePackage($package, $type);
+        if(!$_POST) $this->package->savePackage($package, $type);
 
         /* Copy files to target directory. */
         $this->view->files = $this->package->copyPackageFiles($package, $type);
-
-        /* Judge need execute db install or not. */
-        $data = new stdclass();
-        $data->status = 'installed';
-        $data->dirs   = $this->session->dirs2Created;
-        $data->files  = $this->view->files;
-        $data->installedTime = helper::now();
-        $this->session->set('dirs2Created', array());   // clean the session.
 
         /* Execute the install.sql. */
         $return = $this->package->executeDB($package, 'install', 'theme');
@@ -438,30 +416,33 @@ class ui extends control
         $this->package->fixSlides($package);
         $this->view->blocksMerged   = false;
 
-        if(!$_POST)
-        {
-            $this->app->loadLang('block');
-            $this->view->importedBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('originID')->ne(0)->fetchAll('originID');
-            $this->view->oldBlocks      = $this->dao->select('*')->from(TABLE_BLOCK)->where('originID')->eq(0)->fetchAll('id');
-            $this->view->blocksMerged   = true;
-            $this->view->packageInfo    = $packageInfo;
-            die($this->display());
-        }
-        else
-        {
-            $this->package->mergeBlocks($packageInfo);
-            $this->view->blocksMerged = false;
-        }
-        
-        /* Update status, dirs, files and installed time. */
-        $this->package->updatePackage($package, $data);
-        $this->view->downloadedPackage = !empty($downLink);
-
-        /* The postInstall hook file. */
-        $hook = 'postinstall';
-        if($postHookFile = $this->package->getHookFile($package, $hook)) include $postHookFile;
-
-        $this->view->type = $type;
+        $this->app->loadLang('block');
+        $this->view->importedBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('originID')->gt(0)->fetchAll('originID');
+        $this->view->oldBlocks      = $this->dao->select('*')->from(TABLE_BLOCK)->where('originID')->eq(0)->fetchAll('id');
+        $this->view->blocksMerged   = true;
+        $this->view->package        = $package;
         $this->display();
+
+    }
+
+    /**
+     * Fix theme datas.
+     * 
+     * @access public
+     * @return void
+     */
+    public function fixTheme()
+    {
+        $packageInfo = $this->loadModel('package')->parsePackageCFG($this->post->package, 'theme');
+        $this->package->mergeBlocks($packageInfo);
+        $setting = array();
+        $setting['name']   = $packageInfo->template;
+        $setting['theme']  = $packageInfo->code;
+        $setting['parser'] = isset($packageInfo->parser) ? $packageInfo->parser : 'default';
+        $setting['customTheme'] =  '';
+
+        $result = $this->loadModel('setting')->setItems('system.common.template', $setting);
+
+        $this->send(array('result' => 'success', 'message' => $this->lang->ui->importThemeSuccess, "locate" => inlink('customtheme')));
     }
 }
