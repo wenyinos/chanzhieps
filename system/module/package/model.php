@@ -655,7 +655,6 @@ class packageModel extends model
             $return->result = 'fail';
             $return->error  = $zip->errorInfo(true);
         }
-
         return $return;
     }
 
@@ -832,16 +831,16 @@ class packageModel extends model
       * @access public
       * @return object
       */
-     public function executeDB($package, $method = 'install')
+     public function executeDB($package, $method = 'install', $type = 'ext')
      {
          $return = new stdclass();
          $return->result = 'ok';
          $return->error  = '';
 
-         $dbFile = $this->getDBFile($package, $method);
+         $dbFile = $this->getDBFile($package, $method, $type);
          if(!file_exists($dbFile)) return $return;
 
-         $sqls = file_get_contents($this->getDBFile($package, $method));
+         $sqls = file_get_contents($this->getDBFile($package, $method, $type));
          $sqls = explode(';\n', $sqls);
 
          foreach($sqls as $sql)
@@ -849,7 +848,6 @@ class packageModel extends model
              $sql = trim($sql);
              if(empty($sql)) continue;
              $sql = str_replace('eps_', $this->config->db->prefix, $sql);
-
              try
              {
                  $this->dbh->query($sql);
@@ -1015,68 +1013,6 @@ class packageModel extends model
      }
 
      /**
-      * Merge blocks.
-      * 
-      * @access public
-      * @return void
-      */
-     public function mergeBlocks()
-     {
-        $blocks2merge  = $this->post->blocks2merge;
-        $blocks2create = $this->post->blocks2create;
-        
-        $oldBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('id')->in(array_values($blocks2merge))->fetchAll('id');
-        $newBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('oringinID')->ne('0')->fetchAll('oringinID');
-
-        foreach($blocks2merge as $oringinID => $blockID)
-        {
-            $old = zget($oldBlocks, $blockID);
-            $old->content = json_decode($old->content); 
-
-            $new = zget($newBlocks, $blockID);
-            $new->content = json_decode($new->content); 
-
-
-        }
-
-        $this->fixThemeData($packageInfo->template);
-     }
-
-     /**
-      * Fix block and layout data of a theme. 
-      * 
-      * @param  string    $template 
-      * @access public
-      * @return void
-      */
-     public function fixThemeData($template)
-     {
-        $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('originID')->gt(0)->andWhere('template')->eq($template)->fetchAll();
-        foreach($blocks as $block)
-        {
-            $content = json_decode($block->content);
-            if(isset($content->category)) $content->category = 0;
-            $block->content = json_encode($content);
-            $this->dao->replace(TABLE_BLOCK)->data($block)->exec();
-        }
-
-        $blockOptions = $this->dao->select('originID, id')->from(TABLE_BLOCK)->where('originID')->gt(0)->andWhere('template')->eq($template)->fetchPairs();
-        $layouts      = $this->dao->select('*')->from(TABLE_LAYOUT)->where('template')->eq($template)->andWhere('imported')->eq('doing')->fetchAll();
-        
-        foreach($layouts as $layout)
-        {
-            $layout->imported = 'finished';
-            $blocks = json_decode($layout->blocks);
-            if(!empty($blocks))
-            {
-                foreach($blocks as $block) $block->id = zget($blockOptions, $block->id);
-            }
-            $layout->blocks = json_encode($blocks);
-            $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
-        }
-     }
-
-     /**
       * Fix theme code.
       * 
       * @param  int    $package 
@@ -1090,44 +1026,142 @@ class packageModel extends model
         $themeInfo->templateCompatible = $themeInfo->template;
         $code      = $themeInfo->code;
 
-        $i = 1;
-        while(isset($themes[$themeInfo->code . '_' . $i])) $i ++ ;
-        $newCode = $themeInfo->code . '_' . $i;
+        $renameCode = isset($themes[$themeInfo->code]);
+        if($renameCode)
+        {
+            $i = 1;
+            while(isset($themes[$themeInfo->code . '_' . $i])) $i ++ ;
+            $newCode = $themeInfo->code . '_' . $i;
+        }
+        else
+        {
+            $newCode = $themeInfo->code;
+        }
+
         $themeInfo->code = $newCode;
         $newPackage = $newCode;
-
-        /* Write new newCode to yaml file. */
-        $yaml     = $this->app->loadClass('spyc')->dump($themeInfo);      
-        $lang     = $this->app->getClientLang();
-        $infoFile = "theme/$package/doc/$lang.yaml";
-        file_put_contents($infoFile, $yaml);
 
         /* Replace codofix in db file with new newCode. */
         $dbFile  = $this->getDBFile($package, 'install', 'theme');
         $content = file_get_contents($dbFile); 
-        $content = str_replace('THEME_CODEFI', $newCode, $content);
+        $content = str_replace('THEME_CODEFIX', $newCode, $content);
         file_put_contents($dbFile, $content);
 
-        /* Change code in config file. */
-        $configCode = file_get_contents("./theme/{$package}/system/module/ui/ext/config/{$code}.php");
-        $configCode = str_replace('$this->config->ui->themes["' . $code . '"] = ', '$this->config->ui->themes["' . $newCode . '"] = ', $configCode);
-        file_put_contents("./theme/{$package}/system/module/ui/ext/config/{$code}.php", $configCode);
-
-        /* Rename files named by old newCode. */
-        $files2move = array();
-        $files2move["./theme/{$package}/www/data/css/{$themeInfo->template}/{$code}"]       = "./theme/{$package}/www/data/css/{$themeInfo->template}/{$newCode}";
-        $files2move["./theme/{$package}/www/data/source/{$themeInfo->template}/{$code}"]    = "./theme/{$package}/www/data/source/{$themeInfo->template}/{$newCode}";
-        $files2move["./theme/{$package}/system/module/ui/ext/config/{$code}.php"]           = "./theme/{$package}/system/module/ui/ext/config/{$newCode}.php";
-        $files2move["./theme/{$package}/www/template/{$themeInfo->template}/theme/{$code}"] = "./theme/{$package}/www/template/{$themeInfo->template}/theme/{$newCode}";
-        foreach($files2move as $oldFile => $newFile)
+        if($renameCode)
         {
-            if(is_dir($oldFile))
+            /* Write new newCode to yaml file. */
+            $yaml     = $this->app->loadClass('spyc')->dump($themeInfo);      
+            $lang     = $this->app->getClientLang();
+            $infoFile = "theme/$package/doc/$lang.yaml";
+            file_put_contents($infoFile, $yaml);
+
+            /* Change code in config file. */
+            $configCode = file_get_contents("./theme/{$package}/system/module/ui/ext/config/{$code}.php");
+            $configCode = str_replace('$this->config->ui->themes["' . $code . '"] = ', '$this->config->ui->themes["' . $newCode . '"] = ', $configCode);
+            file_put_contents("./theme/{$package}/system/module/ui/ext/config/{$code}.php", $configCode);
+
+            /* Rename files named by old newCode. */
+            $files2Move = array();
+            $files2Move["./theme/{$package}/www/data/css/{$themeInfo->template}/{$code}"]       = "./theme/{$package}/www/data/css/{$themeInfo->template}/{$newCode}";
+            $files2Move["./theme/{$package}/www/data/source/{$themeInfo->template}/{$code}"]    = "./theme/{$package}/www/data/source/{$themeInfo->template}/{$newCode}";
+            $files2Move["./theme/{$package}/system/module/ui/ext/config/{$code}.php"]           = "./theme/{$package}/system/module/ui/ext/config/{$newCode}.php";
+            $files2Move["./theme/{$package}/www/template/{$themeInfo->template}/theme/{$code}"] = "./theme/{$package}/www/template/{$themeInfo->template}/theme/{$newCode}";
+            foreach($files2Move as $oldFile => $newFile)
             {
-                rename($oldFile, $newFile);
+                if(is_dir($oldFile))
+                {
+                    rename($oldFile, $newFile);
+                }
             }
         }
 
-        rename("theme/{$package}", "theme/{$newPackage}");
+        if($renameCode) 
+        {
+            $this->classFile->copyDir("theme/{$package}", "theme/{$newPackage}");
+            $this->classFile->removeDir("theme/{$package}");
+        }
         return $newPackage;
      }
+
+     /**
+      * Merge blocks.
+      * 
+      * @access public
+      * @return void
+      */
+     public function mergeBlocks($packageInfo)
+     {
+         $merged = array();
+         $blocks2Merge  = $this->post->blocks2Merge;
+         $blocks2Create = $this->post->blocks2Create;
+
+         $blockOptions = $this->dao->select('originID, id')->from(TABLE_BLOCK)->where('originID')->in($blocks2Create)->eq($packageInfo->template)->fetchPairs();
+
+         $oldBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('id')->in(array_values($blocks2Merge))->fetchAll('id');
+         $newBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('originID')->ne('0')->fetchAll('originID');
+         foreach($blocks2Merge as $originID => $blockID)
+         {
+             if($blockID == 0) continue;
+             $old = zget($oldBlocks, $blockID);
+             if(!is_object($old->content)) $old->content = json_decode($old->content); 
+
+             $new = zget($newBlocks, $blockID);
+             if(!is_object($new->content)) $new->content = json_decode($new->content); 
+             $old->content->custome->{$packageInfo->code} = zget($old->content->custome, $packageInfo->code);
+
+             $old->content = json_encode($old->content);
+             $this->dao->replace(TABLE_BLOCK)->data($old)->exec();
+             $blockOptions[$originID] = $blockID;
+             $blocks2Delete[] = $originID;
+         }
+
+         $layouts = $this->dao->select('*')->from(TABLE_LAYOUT)->where('template')->eq($packageInfo->template)->andWhere('import')->eq('doing')->fetchAll();
+         foreach($layouts as $layout)
+         {
+             $layout->import = 'finished';
+             $blocks = json_decode($layout->blocks);
+             if(!empty($blocks))
+             {
+                 foreach($blocks as $block) 
+                 {
+                     $newID  =  zget($blockOptions, $block->id);
+                     $block->id = $newID;
+                 }
+             }
+             $layout->blocks = json_encode($blocks);
+             $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
+         }
+
+         $this->dao->delete()->from(TABLE_BLOCK)->where('originID')->in($blocks2Delete)->exec();
+         $this->dao->update(TABLE_BLOCK)->set('originID')->eq('0')->exec();
+     }
+
+     /**
+      * Fix slides data.
+      * 
+      * @param  int    $package 
+      * @access public
+      * @return void
+      */
+     public function fixSlides($package)
+     {
+         $importedSlides = glob('theme' . DS . $package . DS . 'www' . DS . 'data' . DS . 'slidestmp' . DS . '*');
+         $importedGroups = $this->dao->select('`alias`,id')->from(TABLE_CATEGORY)->where('type')->eq('tmpSlide')->fetchPairs();
+         foreach($importedSlides as $slide)
+         {
+             $slideInfo = pathinfo($slide);   
+             $basename  = $slideInfo['basename'];
+             list($group, $fileID) = explode('_', $slideInfo['filename']);
+
+             $newGroup = zget($importedGroups, $group);
+             $newFile  = $this->app->getWwwRoot() . 'data' . DS . 'slides' . DS . $newGroup . '_' . $fileID . '.' . $slideInfo['extension'];
+             rename($slide, $newFile);
+             $this->dao->setAutoLang(false)->update(TABLE_SLIDE)->set('group')->eq($newGroup)->where('`group`')->eq($group)->andWhere('lang')->eq('imported')->exec();
+             $this->dao->setAutoLang(false)->update(TABLE_SLIDE)->set("image")->eq("/data/slides/{$newGroup}_{$fileID}.{$slideInfo['extension']}")->where('image')->like("%{$slideInfo['basename']}")->andWhere('lang')->eq('imported')->exec();
+             $this->dao->update(TABLE_BLOCK)->set('content')->eq(json_encode(array("group" => $newGroup)))->where('originID')->ne('0')->andWhere('type')->eq('slide')->andWhere('content')->like("%\"{$group}\"%")->exec();
+         }
+         $this->dao->setAutoLang(false)->update(TABLE_SLIDE)->set('lang')->eq($this->app->getClientLang())->where('lang')->eq('imported')->exec();
+         $this->dao->update(TABLE_CATEGORY)->set('type')->eq('slide')->where('type')->eq('tmpSlide')->exec();
+     }
+
 }
