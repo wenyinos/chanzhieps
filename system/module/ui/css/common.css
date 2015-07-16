@@ -1,2 +1,4 @@
 .export-theme-form {padding-right: 40px;}
 .export-theme-form .table-form {width: 100%;}
+
+.input-group-btn .popover-success {min-width: 130px}
