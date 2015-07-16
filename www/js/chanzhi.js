@@ -799,5 +799,5 @@ function associateSelect(first, sencond, data, firstVal, sencondVal)
             option = '<option ' + selected + ' value="' + key + '">' + value  + '</option>';
             $(sencond).append(option);
         })
-    })  
+    }).change();
 }
