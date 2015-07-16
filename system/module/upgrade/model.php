@@ -107,6 +107,7 @@ class upgradeModel extends model
                 $this->fixLocationConfig();
                 $this->updateBlockTheme();
                 $this->updateLayoutTheme();
+                $this->moveBaseStyle();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -1360,5 +1361,19 @@ class upgradeModel extends model
         }
 
         return !dao::isError();
+    }
+
+    /**
+     * Move base Style.
+     * 
+     * @access public
+     * @return void
+     */
+    public function moveBaseStyle()
+    {
+        $template = $this->config->template; 
+        $setting  = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true): array();
+        $setting[$template->name][$template->theme]['css'] = $this->config->site->basestyle;
+        return $this->loadModel('setting')->setItems('system.common.template', array('custom' => helper::jsonEncode($setting)));
     }
 }

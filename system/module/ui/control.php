@@ -122,51 +122,6 @@ class ui extends control
     }
 
     /**
-     * Set base style.
-     * 
-     * @access public
-     * @return void
-     */
-    public function setBaseStyle()
-    {
-        if($_POST)
-        {
-            $style  = fixer::input('post')->stripTags('content', $this->config->allowedTags->admin, false)->get();
-            $return = $this->loadModel('setting')->setItems('system.common.site', array('basestyle' => $style->content));
-
-            if($return) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate'=>inlink('setBaseStyle')));
-            if(!$return) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
-        }
-
-        $this->view->title   = $this->lang->ui->setBaseStyle;
-        $this->view->content = isset($this->config->site->basestyle) ? $this->config->site->basestyle : '';
-
-        $this->display();
-    }
-
-    /**
-     * Set base js.
-     * 
-     * @access public
-     * @return void
-     */
-    public function setBaseJs()
-    {
-        if($_POST)
-        {
-            $js = fixer::input('post')->stripTags('content', $this->config->allowedTags->admin, false)->get();
-            $return = $this->loadModel('setting')->setItems('system.common.site', array('basejs' => $js->content));
-
-            if($return) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate'=>inlink('setBaseJs')));
-            if(!$return) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
-        }
-
-        $this->view->title   = $this->lang->ui->setBaseJs;
-        $this->view->content = isset($this->config->site->basejs) ? $this->config->site->basejs : '';
-        $this->display();
-    }
-
-    /**
      * Upload favicon.
      * 
      * @access public
@@ -328,7 +283,11 @@ class ui extends control
             $tmpName  = $_FILES['file']['tmp_name'];
             $fileName = $_FILES['file']['name'];
             $package  = basename($fileName, '.zip');
-            move_uploaded_file($tmpName, $this->app->getTmpRoot() . "/package/$fileName");
+
+            $packagePath = $this->app->getTmpRoot() . "package";
+            if(!is_dir($packagePath)) mkdir($packagePath, 0777, true); 
+            if(!is_writeable($packagePath)) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->ui->packagePathUnwriteable, $packagePath)));
+            $result = move_uploaded_file($tmpName, $this->app->getTmpRoot() . "package/$fileName");
 
             $link = inlink('installtheme', "package=$package&downLink=&md5=");
             $this->app->loadLang('package');
