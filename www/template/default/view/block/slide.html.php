@@ -11,7 +11,7 @@
 */
 ?>
 <?php $block->content = json_decode($block->content);?>
-<?php $slides = $this->loadModel('slide')->getList($block->content->group);?>
+<?php $slides = isset($block->content->group) ? $this->loadModel('slide')->getList($block->content->group) : array();?>
 <?php 
 if($slides):?>
 <div id='slide' class='carousel slide' data-ride='carousel'>
