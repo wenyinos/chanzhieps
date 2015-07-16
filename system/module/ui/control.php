@@ -403,6 +403,7 @@ class ui extends control
 
         $result = $this->loadModel('setting')->setItems('system.common.template', $setting);
 
+        unset($this->session->originTheme);
         $this->send(array('result' => 'success', 'message' => $this->lang->ui->importThemeSuccess, "locate" => inlink('customtheme')));
     }
 
