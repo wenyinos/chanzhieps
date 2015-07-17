@@ -47,6 +47,14 @@ class upgrade extends control
     {
         $this->view->title = $this->lang->upgrade->backup;
         $this->view->db    = $this->config->db;
+        $slidePath = $this->app->getDataRoot() . 'slides';
+        if(!is_dir($slidePath)) mkdir($slidePath, 0777, true);
+        $this->view->createSlidePath = false;
+        if(!is_writeable($slidePath))
+        {
+            $this->view->slidePath       = $slidePath;
+            $this->view->createSlidePath = true;
+        }
         $this->display();
     }
 

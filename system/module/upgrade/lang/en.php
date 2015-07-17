@@ -30,6 +30,10 @@ $lang->upgrade->backupData = <<<EOT
 </pre>
 EOT;
 
+$lang->upgrade->createSlidePath = <<<EOT
+<div class='alert alert-danger'>Slide path %s must be writeable. Please create the path and make sure it can be writeable.</div>
+EOT;
+
 $lang->upgrade->versionNote = "Please choose the version to upgrade.";
 
 $lang->upgrade->fromVersions['1_1']      = '1.1.stable';
