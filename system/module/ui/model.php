@@ -199,7 +199,7 @@ class uiModel extends model
             if(isset($fontsList[$value])) $params[$item] = $fontsList[$value];
         }
 
-        $extraCss = $params['css'];
+        $extraCss = isset($params['css']) ? $params['css'] : '';
 
         unset($params['background-image-position']);
         unset($params['navbar-background-image-position']);
