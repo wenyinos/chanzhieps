@@ -17,13 +17,13 @@
   </div>
   <div class='panel-body'>
     <form method='post' id='ajaxForm' enctype='multipart/form-data'>
-      <table class='table table-form w-p50'>
+      <table class='table table-form w-p60'>
         <tr>
-          <th class='w-200px'><?php echo $lang->ui->productView;?></td>
+          <th class='w-200px'><?php echo $lang->ui->productView;?></th>
           <td class='w-p30'><?php echo html::radio('productView', $lang->ui->productViewList, isset($this->config->ui->productView) ? $this->config->ui->productView : '1');?></td><td></td>
         </tr>
         <tr>
-          <th><?php echo $lang->ui->QRCode;?></td>
+          <th><?php echo $lang->ui->QRCode;?></th>
           <td><?php echo html::radio('QRCode', $lang->ui->QRCodeList, isset($this->config->ui->QRCode) ? $this->config->ui->QRCode : '1');?></td><td></td>
         </tr>
         <tr>
