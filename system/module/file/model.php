@@ -207,6 +207,7 @@ class fileModel extends model
 
         foreach($files as $id => $file)
         {   
+            if($objectType == 'source') $this->config->file->allowed .= ',css,js,';
             if(strpos($this->config->file->allowed, ',' . $file['extension'] . ',') === false)
             {
                 if(!move_uploaded_file($file['tmpname'], $this->savePath . $file['pathname'] . '.txt')) return false;
@@ -554,12 +555,11 @@ class fileModel extends model
         {
             $fileInfo = $files[0];
             if(file_exists("{$uploadPath}{$file->pathname}")) @unlink("{$uploadPath}{$file->pathname}");
-            $newPath = "{$basePath}{$filename}.{$fileInfo['extension']}";
+            $newPath = "{$basePath}{$filename}.{$file->extension}";
             if(!move_uploaded_file($fileInfo['tmpname'], "{$uploadPath}{$newPath}")) return array('result' => 'fail', 'message' => '');
             $this->dao->update(TABLE_FILE)
                 ->set('title')->eq($filename)
                 ->set('pathname')->eq($newPath)
-                ->set('extension')->eq($fileInfo['extension'])
                 ->set('size')->eq($fileInfo['size'])
                 ->where('id')->eq($fileID)
                 ->exec();
