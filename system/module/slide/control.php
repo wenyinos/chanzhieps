@@ -29,7 +29,7 @@ class slide extends control
         $this->view->group          = $groupID;
         $this->view->slides         = $this->slide->getList($groupID);
         $this->view->treeModuleMenu = $this->loadModel('tree')->getTreeMenu('slide', 0, array('treeModel', 'createSlideAdminLink'));
-        $this->view->treeManageLink = html::a(helper::createLink('tree', 'browse', "type=slide"), $this->lang->tree->manage);
+        $this->view->treeManageLink = html::a(helper::createLink('tree', 'browse', "type=slide"), $this->lang->slideGroup->manage);
         $this->display();
     }
 

@@ -178,7 +178,7 @@ CREATE TABLE IF NOT EXISTS `eps_down` (
 -- DROP TABLE IF EXISTS `eps_file`;
 CREATE TABLE IF NOT EXISTS `eps_file` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `pathname` char(50) NOT NULL,
+  `pathname` char(200) NOT NULL,
   `title` char(90) NOT NULL,
   `extension` char(30) NOT NULL,
   `size` mediumint(8) unsigned NOT NULL DEFAULT '0',

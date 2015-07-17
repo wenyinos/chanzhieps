@@ -45,7 +45,7 @@ $lang->site->checkIP         = '后台登录IP白名单';
 $lang->site->checkLocation   = '后台登录地区验证';
 $lang->site->checkEmail      = '会员邮箱绑定';
 $lang->site->allowedLocation = '允许登录地区';
-$lang->site->checkSessionIP  = '登录期间IP';
+$lang->site->checkSessionIP  = '后台检查IP';
 $lang->site->setsecurity     = '安全设置';
 $lang->site->setsensitive    = '敏感词设置';
 $lang->site->filterSensitive = '敏感词过滤';
@@ -89,8 +89,8 @@ $lang->site->checkEmailList['open']  = '打开';
 $lang->site->checkEmailList['close'] = '关闭';
 
 $lang->site->sessionIpoptions = array();
-$lang->site->sessionIpoptions[0] = '可以改变';
-$lang->site->sessionIpoptions[1] = '不允许改变';
+$lang->site->sessionIpoptions[0] = '不检查';
+$lang->site->sessionIpoptions[1] = '检查';
 
 $lang->site->imageSize['s'] = '小图';
 $lang->site->imageSize['m'] = '中图';
@@ -132,7 +132,7 @@ $lang->site->allowedDomainTip = '多个域名使用 , 隔开，如www.chanzhi.or
 $lang->site->allowedIPTip     = '多个IP使用 , 隔开，如202.194.133.1,202.194.132.0/28。允许所有IP访问请留空。';
 $lang->site->wrongAllowedIP   = 'IP 格式错误';
 $lang->site->changeLocation   = '您当前的登录地区与允许登录地区不一致。';
-$lang->site->sessionIpTip     = '开启后，因为某些运营商的IP不是固定的，IP变化后会自动退出蝉知。';
+$lang->site->sessionIpTip     = '开启后，如IP变化将自动退出登录。';
 $lang->site->schemeTip        = '所有访问会跳转至默认访问协议。';
 
 $lang->site->robots            = 'Robots';
