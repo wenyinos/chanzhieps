@@ -1180,7 +1180,11 @@ class packageModel extends model
              $this->dao->setAutoLang(false)->update(TABLE_SLIDE)->set('group')->eq($newGroup)->where('`group`')->eq($group)->andWhere('lang')->eq('imported')->exec();
              $this->dao->setAutoLang(false)->update(TABLE_SLIDE)->set("image")->eq("/data/slides/{$newGroup}_{$fileID}.{$slideInfo['extension']}")->where('image')->like("%{$slideInfo['basename']}")->andWhere('lang')->eq('imported')->exec();
              $this->dao->update(TABLE_BLOCK)->set('content')->eq(json_encode(array("group" => $newGroup)))->where('originID')->ne('0')->andWhere('type')->eq('slide')->andWhere('content')->like("%\"{$group}\"%")->exec();
+
+             $this->dao->setAutoLang(false)->update(TABLE_FILE)->set("pathname")->eq("slides/{$newGroup}_{$fileID}.{$slideInfo['extension']}")->where('pathname')->like("%{$slideInfo['basename']}")->andWhere('addedBy')->eq('')->exec();
+             $this->dao->setAutoLang(false)->update(TABLE_FILE)->set("addedBy")->eq($this->app->user->account)->where('addedBy')->eq('IMPORTED')->exec();
          }
+
          $this->dao->setAutoLang(false)->update(TABLE_SLIDE)->set('lang')->eq($this->app->getClientLang())->where('lang')->eq('imported')->exec();
          $this->dao->update(TABLE_CATEGORY)->set('type')->eq('slide')->where('type')->eq('tmpSlide')->exec();
      }
