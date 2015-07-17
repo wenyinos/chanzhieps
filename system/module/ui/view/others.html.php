@@ -17,14 +17,14 @@
   </div>
   <div class='panel-body'>
     <form method='post' id='ajaxForm' enctype='multipart/form-data'>
-      <table class='table table-form'>
+      <table class='table table-form w-p50'>
         <tr>
-          <th class='col-md-2'><?php echo $lang->ui->productView;?></td>
-          <td class='col-md-5'><?php echo html::radio('productView', $lang->ui->productViewList, isset($this->config->ui->productView) ? $this->config->ui->productView : '1');?></td><td></td>
+          <th class='w-200px'><?php echo $lang->ui->productView;?></td>
+          <td class='w-p30'><?php echo html::radio('productView', $lang->ui->productViewList, isset($this->config->ui->productView) ? $this->config->ui->productView : '1');?></td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->ui->QRCode;?></td>
-          <td><?php echo html::radio('QRCode', $lang->ui->QRCodeList, isset($this->config->ui->QRCode) ? $this->config->ui->QRCode : '1');?></td><td></td
+          <td><?php echo html::radio('QRCode', $lang->ui->QRCodeList, isset($this->config->ui->QRCode) ? $this->config->ui->QRCode : '1');?></td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->site->customizableList->article;?></th> 
@@ -61,7 +61,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->site->setImageSize;?></th>
-          <td>
+          <td colspan='2'>
             <?php foreach($this->config->file->thumbs as $key => $thumb):?> 
             <div class='input-group' style='margin-bottom: 10px'>
               <span class='input-group-addon'><?php echo $lang->site->imageSize[$key];?></span>
@@ -74,7 +74,6 @@
             </div>
             <?php endforeach;?>
           </td>
-          <td></td>
         </tr>
         <?php endif;?>
         <tr><th></th><td colspan='2'><?php echo html::submitButton();?></td></tr>

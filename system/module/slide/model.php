@@ -42,7 +42,8 @@ class slideModel extends model
     {
         if(!$groupID)
         {
-            $group   = $this->loadModel('tree')->getFirst('slide');
+            $group = $this->loadModel('tree')->getFirst('slide');
+            if(!$group) return array();
             $groupID = $group->id;
         }
 

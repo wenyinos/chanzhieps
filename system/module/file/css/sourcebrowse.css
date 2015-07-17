@@ -17,3 +17,4 @@
 
 a.selected {background: #005BAC; color: #FFF;}
 .panel-actions a {padding: 7px;}
+.panel-actions a.list-view{margin-right: 10px;}

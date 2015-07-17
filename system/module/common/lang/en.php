@@ -90,12 +90,13 @@ $lang->colorPlates = '333333|000000|CA1407|45872B|148D00|F25D03|2286D2|D92958|A6
 
 /* Items for javascript. */
 $lang->js = new stdclass();
-$lang->js->confirmDelete = 'Are sure to delete it?';
-$lang->js->deleteing     = 'Deleting...';
-$lang->js->doing         = 'Processing...';
-$lang->js->loading       = 'Loading...';
-$lang->js->timeout       = 'Timeout';
-$lang->js->errorThrown   = '<h4>Something error ：</h4>';
+$lang->js->confirmDelete    = 'Are sure to delete it?';
+$lang->js->deleteing        = 'Deleting...';
+$lang->js->doing            = 'Processing...';
+$lang->js->loading          = 'Loading...';
+$lang->js->timeout          = 'Timeout';
+$lang->js->errorThrown      = '<h4>Something error ：</h4>';
+$lang->js->continueShopping = 'Continue Shopping';
 
 /* Contact fields*/
 $lang->company = new stdclass();

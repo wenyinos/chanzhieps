@@ -89,8 +89,8 @@ $lang->site->checkEmailList['open']  = 'Open';
 $lang->site->checkEmailList['close'] = 'Close';
 
 $lang->site->sessionIpoptions = array();
-$lang->site->sessionIpoptions[0] = "Don't check";
 $lang->site->sessionIpoptions[1] = 'Check';
+$lang->site->sessionIpoptions[0] = "Don't check";
 
 $lang->site->imageSize['s'] = 'Small';
 $lang->site->imageSize['m'] = 'Middle';
@@ -100,9 +100,9 @@ $lang->site->image['width']  = 'Width';
 $lang->site->image['height'] = 'Height';
 
 $lang->site->captchaList = array();
-$lang->site->captchaList['close'] = 'Close';
 $lang->site->captchaList['open']  = 'Open';
 $lang->site->captchaList['auto']  = 'Automatic';
+$lang->site->captchaList['close'] = 'Close';
 
 $lang->site->validateTypes = new stdclass();
 $lang->site->validateTypes->okFile = 'file';
@@ -113,8 +113,8 @@ $lang->site->schemeList['http']  = 'http';
 $lang->site->schemeList['https'] = 'https';
 
 $lang->site->frontList = array();
-$lang->site->frontList['guest'] = "needn't login";
 $lang->site->frontList['login'] = 'need login';
+$lang->site->frontList['guest'] = "needn't login";
 
 $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = 'Member';

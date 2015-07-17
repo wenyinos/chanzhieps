@@ -61,7 +61,7 @@ $lang->order->placeholder->key   = '安全检验码，以数字和字母组成�
 $lang->order->placeholder->email = '支付宝商家邮箱';
 
 $lang->order->paymentList = array();
-$lang->order->paymentList['alipay'] = '支付宝支付';
+$lang->order->paymentList['alipay'] = '支付宝及时到帐';
 $lang->order->paymentList['COD']    = '货到付款';
 
 $lang->order->statusList = array();

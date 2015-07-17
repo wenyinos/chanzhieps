@@ -638,6 +638,12 @@ INSERT INTO `eps_layout` (`page`, `region`, `blocks`, `template`,`lang`) VALUES
 ('page_index', 'side', '[{"id":"209","grid":"","titleless":0,"borderless":0},{"id":"202","grid":"","titleless":0,"borderless":0},{"id":"210","grid":"","titleless":0,"borderless":0}]', 'default','zh-tw'),
 ('page_view', 'side', '[{"id":"209","grid":"","titleless":0,"borderless":0},{"id":"202","grid":"","titleless":0,"borderless":0},{"id":"210","grid":"","titleless":0,"borderless":0}]', 'default','zh-tw');
 
+UPDATE `eps_layout` set `theme` = 'default';
+
+INSERT INTO `eps_layout` (template,page,region,blocks,import,lang,theme) select template,page,region,blocks,import,lang, 'wide' as theme from `eps_layout` where theme='default';
+
+INSERT INTO `eps_layout` (template,page,region,blocks,import,lang,theme) select template,page,region,blocks,import,lang, 'tartan' as theme from `eps_layout` where theme='default';
+
 -- Insert data into `eps_block`;
 INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) VALUES
 (1, 'latestArticle', '最新文章', '{"category":"0","limit":"7"}', 'default','zh-cn'),
