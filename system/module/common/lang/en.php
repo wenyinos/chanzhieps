@@ -214,26 +214,26 @@ $lang->forum->menu->update = 'Update|forum|update|';
 /* Menu of site module. */
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
-$lang->site->menu->basic      = 'Basic|site|setbasic|';
-$lang->site->menu->company    = 'Company|company|setbasic|';
-$lang->site->menu->contact    = 'Contact|company|setcontact|';
-$lang->site->menu->nav        = 'Navigation|nav|admin|';
-$lang->site->menu->sensitive  = 'Sensitive Words|site|setsensitive|';
-$lang->site->menu->link       = 'Links|links|admin|';
-$lang->site->menu->oauth      = 'Open OAuth|site|setoauth|';
-$lang->site->menu->mail       = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->site->menu->wechat     = array('link' => 'Wechat|wechat|admin|', 'alias' => 'create,setresponse');
-$lang->site->menu->search     = 'Update Search Index|search|buildindex|';
-$lang->site->menu->tag        = 'Tags|tag|admin|';
+$lang->site->menu->basic   = 'Basic|site|setbasic|';
+$lang->site->menu->company = 'Company|company|setbasic|';
+$lang->site->menu->contact = 'Contact|company|setcontact|';
+$lang->site->menu->nav     = 'Navigation|nav|admin|';
+$lang->site->menu->link    = 'Links|links|admin|';
+$lang->site->menu->oauth   = 'Open OAuth|site|setoauth|';
+$lang->site->menu->mail    = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->site->menu->wechat  = array('link' => 'Wechat|wechat|admin|', 'alias' => 'create,setresponse');
+$lang->site->menu->search  = 'Update Search Index|search|buildindex|';
+$lang->site->menu->tag     = 'Tags|tag|admin|';
 
 /* Menu of security module. */
 $lang->security = new stdclass();
 $lang->security->menu = new stdclass();
-$lang->security->menu->basic  = 'Basic|site|setsecurity|';
-$lang->security->menu->upload = 'Uploads|site|setupload|';
-$lang->security->menu->admin  = 'Admin User|user|admin|admin=1';
-$lang->security->menu->group  = array('link' => 'Group|group|browse|', 'alias' => 'managepriv,managemember');
-$lang->security->menu->log    = 'Login log|user|adminlog|';
+$lang->security->menu->basic     = 'Basic|site|setsecurity|';
+$lang->security->menu->upload    = 'Uploads|site|setupload|';
+$lang->security->menu->sensitive = 'Sensitive Words|site|setsensitive|';
+$lang->security->menu->admin     = 'Admin User|user|admin|admin=1';
+$lang->security->menu->group     = array('link' => 'Group|group|browse|', 'alias' => 'managepriv,managemember');
+$lang->security->menu->log       = 'Login log|user|adminlog|';
 
 /* Menu of company module. */
 $lang->company->menu = $lang->site->menu;

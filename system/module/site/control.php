@@ -64,6 +64,9 @@ class site extends control
      */
     public function setSensitive()
     {
+        $this->lang->site->menu = $this->lang->security->menu;
+        $this->lang->menuGroups->site = 'security';
+
         if(!empty($_POST))
         {
             $setting = fixer::input('post')->get();
