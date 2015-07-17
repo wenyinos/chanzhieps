@@ -84,8 +84,8 @@ $lang->product->placeholder->value    = "屬性值：如紅色、￥1000等";
 $lang->product->placeholder->currency = "請填寫產品價格的貨幣符號，如人民幣填寫：￥";
 
 $lang->product->listMode = new stdclass();
-$lang->product->listMode->card  = "<i class='icon icon-th-large'></i> 圖片 ";
-$lang->product->listMode->list  = "<i class='icon icon-list'></i> 列表 ";
+$lang->product->listMode->card  = "<i class='icon icon-th-large'></i>";
+$lang->product->listMode->list  = "<i class='icon icon-list'></i>";
 
 $lang->product->currencyList['rmb']  = '人民幣';
 $lang->product->currencyList['usd']  = '美元';

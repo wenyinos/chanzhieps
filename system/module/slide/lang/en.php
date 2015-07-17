@@ -38,10 +38,11 @@ $lang->slide->buttonUrl   = 'Button Url';
 $lang->slide->buttonColor = 'Button Color';
 $lang->slide->sourceImage = 'Source image';
 
-$lang->slide->sort     = 'Order';
-$lang->slide->admin    = 'Admin';
-$lang->slide->create   = 'Add';
-$lang->slide->edit     = 'Edit';
+$lang->slide->sort        = 'Order';
+$lang->slide->admin       = 'Admin';
+$lang->slide->create      = 'Add';
+$lang->slide->edit        = 'Edit';
+$lang->slide->createGroup = 'Add group';
 
 $lang->slide->successSort     = 'Order data saved.';
 $lang->slide->noImageSelected = 'No images selected';

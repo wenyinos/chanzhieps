@@ -45,7 +45,7 @@ $lang->site->checkIP         = '後台登錄IP白名單';
 $lang->site->checkLocation   = '後台登錄地區驗證';
 $lang->site->checkEmail      = '會員郵箱綁定';
 $lang->site->allowedLocation = '允許登錄地區';
-$lang->site->checkSessionIP  = '登錄期間IP';
+$lang->site->checkSessionIP  = '後台檢查IP';
 $lang->site->setsecurity     = '安全設置';
 $lang->site->setsensitive    = '敏感詞設置';
 $lang->site->filterSensitive = '敏感詞過濾';
@@ -89,8 +89,8 @@ $lang->site->checkEmailList['open']  = '打開';
 $lang->site->checkEmailList['close'] = '關閉';
 
 $lang->site->sessionIpoptions = array();
-$lang->site->sessionIpoptions[0] = '可以改變';
-$lang->site->sessionIpoptions[1] = '不允許改變';
+$lang->site->sessionIpoptions[1] = '檢查';
+$lang->site->sessionIpoptions[0] = '不檢查';
 
 $lang->site->imageSize['s'] = '小圖';
 $lang->site->imageSize['m'] = '中圖';
@@ -100,9 +100,9 @@ $lang->site->image['width']  = '寬度';
 $lang->site->image['height'] = '高度';
 
 $lang->site->captchaList = array();
-$lang->site->captchaList['close'] = '不用驗證碼';
 $lang->site->captchaList['open']  = '一直啟用驗證碼';
 $lang->site->captchaList['auto']  = '有敏感內容時自動啟用驗證碼';
+$lang->site->captchaList['close'] = '不用驗證碼';
 
 $lang->site->validateTypes = new stdclass();
 $lang->site->validateTypes->okFile = '檔案驗證';
@@ -113,8 +113,8 @@ $lang->site->schemeList['http']  = 'http';
 $lang->site->schemeList['https'] = 'https';
 
 $lang->site->frontList = array();
-$lang->site->frontList['guest'] = '不需要登錄';
 $lang->site->frontList['login'] = '需要登錄';
+$lang->site->frontList['guest'] = '不需要登錄';
 
 $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = '會員';
@@ -132,7 +132,7 @@ $lang->site->allowedDomainTip = '多個域名使用 , 隔開，如www.chanzhi.or
 $lang->site->allowedIPTip     = '多個IP使用 , 隔開，如202.194.133.1,202.194.132.0/28。允許所有IP訪問請留空。';
 $lang->site->wrongAllowedIP   = 'IP 格式錯誤';
 $lang->site->changeLocation   = '您當前的登錄地區與允許登錄地區不一致。';
-$lang->site->sessionIpTip     = '開啟後，因為某些運營商的IP不是固定的，IP變化後會自動退出蟬知。';
+$lang->site->sessionIpTip     = '開啟後，如IP變化將自動退出登錄。';
 $lang->site->schemeTip        = '所有訪問會跳轉至預設訪問協議。';
 
 $lang->site->robots            = 'Robots';

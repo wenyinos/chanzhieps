@@ -90,12 +90,13 @@ $lang->colorPlates = '333333|000000|CA1407|45872B|148D00|F25D03|2286D2|D92958|A6
 
 /* Items for javascript. */
 $lang->js = new stdclass();
-$lang->js->confirmDelete = '您確定要執行刪除操作嗎？';
-$lang->js->deleteing     = '刪除中';
-$lang->js->doing         = '處理中';
-$lang->js->loading       = '加載中';
-$lang->js->timeout       = '網絡超時,請重試';
-$lang->js->errorThrown   = '<h4>執行出錯：</h4>';
+$lang->js->confirmDelete    = '您確定要執行刪除操作嗎？';
+$lang->js->deleteing        = '刪除中';
+$lang->js->doing            = '處理中';
+$lang->js->loading          = '加載中';
+$lang->js->timeout          = '網絡超時,請重試';
+$lang->js->errorThrown      = '<h4>執行出錯：</h4>';
+$lang->js->continueShopping = '繼續購物';
 
 /* Contact fields*/
 $lang->company = new stdclass();
@@ -213,26 +214,26 @@ $lang->forum->menu->update = '更新數據|forum|update|';
 /* Menu of site module. */
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
-$lang->site->menu->basic      = '站點設置|site|setbasic|';
-$lang->site->menu->company    = '公司信息|company|setbasic|';
-$lang->site->menu->contact    = '聯繫方式|company|setcontact|';
-$lang->site->menu->nav        = '導航設置|nav|admin|';
-$lang->site->menu->sensitive  = '敏感詞設置|site|setsensitive|';
-$lang->site->menu->link       = '友情連結|links|admin|';
-$lang->site->menu->oauth      = '開放登錄|site|setoauth|';
-$lang->site->menu->mail       = array('link' => '發信設置|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->site->menu->wechat     = array('link' => '微信設置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
-$lang->site->menu->search     = '更新搜索索引|search|buildindex|';
-$lang->site->menu->tag        = '關鍵詞設置|tag|admin|';
+$lang->site->menu->basic   = '站點設置|site|setbasic|';
+$lang->site->menu->company = '公司信息|company|setbasic|';
+$lang->site->menu->contact = '聯繫方式|company|setcontact|';
+$lang->site->menu->nav     = '導航設置|nav|admin|';
+$lang->site->menu->link    = '友情連結|links|admin|';
+$lang->site->menu->oauth   = '開放登錄|site|setoauth|';
+$lang->site->menu->mail    = array('link' => '發信設置|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->site->menu->wechat  = array('link' => '微信設置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
+$lang->site->menu->search  = '更新搜索索引|search|buildindex|';
+$lang->site->menu->tag     = '關鍵詞設置|tag|admin|';
 
 /* Menu of security module. */
 $lang->security = new stdclass();
 $lang->security->menu = new stdclass();
-$lang->security->menu->basic  = '基本設置|site|setsecurity|';
-$lang->security->menu->upload = '附件上傳|site|setupload|';
-$lang->security->menu->admin  = '管理員|user|admin|admin=1';
-$lang->security->menu->group  = array('link' => '分組權限|group|browse|', 'alias' => 'managepriv,managemember');
-$lang->security->menu->log    = '登錄日誌|user|adminlog|';
+$lang->security->menu->basic     = '基本設置|site|setsecurity|';
+$lang->security->menu->upload    = '附件上傳|site|setupload|';
+$lang->security->menu->sensitive = '敏感詞設置|site|setsensitive|';
+$lang->security->menu->admin     = '管理員|user|admin|admin=1';
+$lang->security->menu->group     = array('link' => '分組權限|group|browse|', 'alias' => 'managepriv,managemember');
+$lang->security->menu->log       = '登錄日誌|user|adminlog|';
 
 /* Menu of company module. */
 $lang->company->menu = $lang->site->menu;
