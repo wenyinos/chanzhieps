@@ -32,6 +32,9 @@ class ui extends control
             $setting['parser'] = isset($templates[$template]['parser']) ? $templates[$template]['parser'] : 'default';
             $setting['customTheme'] =  $custom ? $theme : '';
 
+            $cssFile = sprintf($this->config->site->ui->customCssFile, $template, $theme);
+            if(!file_exists($cssFile)) $this->ui->createCustomerCss($template, $theme);
+
             $result = $this->loadModel('setting')->setItems('system.common.template', $setting);
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
