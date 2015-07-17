@@ -118,10 +118,19 @@ class commonModel extends model
                 $referer = helper::safe64Encode($this->app->getURI(true));
                 die(js::locate(helper::createLink('user', 'login', "referer=$referer")));
             }
+
         }
 
         /* Check the priviledge. */
         if(!commonModel::hasPriv($module, $method)) $this->deny($module, $method);
+        if(!isset($this->config->rights->guest[strtolower($module)][strtolower($method)]) and !helper::isAjaxRequest() and RUN_MODE == 'front' and $this->app->user->account != 'guest' and strtolower($method) != 'checkemail')
+        {
+            if(isset($this->config->site->checkEmail) and $this->config->site->checkEmail == 'open' and !$this->app->user->emailCertified)
+            {
+                exit(js::locate(helper::createLink('user', 'checkEmail')));
+            }
+        }
+
     }
 
     /**
