@@ -29,23 +29,6 @@
           </td>
         </tr>
         <tr>
-          <th><?php echo $lang->site->setImageSize;?></th>
-          <td>
-            <?php foreach($this->config->file->thumbs as $key => $thumb):?> 
-            <div class='input-group' style='margin-bottom: 10px'>
-              <span class='input-group-addon'><?php echo $lang->site->imageSize[$key];?></span>
-              <span class='input-group-addon'><?php echo $lang->site->image['width'];?></span>
-              <?php echo html::input("thumbs[$key][width]", $thumb['width'], "class='form-control' placeholder='{$thumb['width']}'");?>
-              <span class="input-group-addon">px</span>
-              <span class='input-group-addon fix-border'><?php echo $lang->site->image['height'];?></span>
-              <?php echo html::input("thumbs[$key][height]", $thumb['height'], "class='form-control' placeholder='{$thumb['height']}'");?>
-              <span class="input-group-addon">px</span>
-            </div>
-            <?php endforeach;?>
-          </td>
-          <td></td>
-        </tr>
-        <tr>
           <th></th>
           <td colspan='2'>
             <?php echo html::submitButton();?>
