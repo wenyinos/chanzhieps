@@ -78,10 +78,10 @@ $(document).ready(function()
         $form.find('input.form-control, select.form-control, input[type="hidden"]').each(function()
         {
             var $this = $(this);
-            $this.val($this.data('origin-default') || $this.data('default') || $this.attr('placeholder') || $this.val()).trigger('change.color');
+            $this.val($this.attr('data-origin-default') || $this.attr('data-default') || $this.attr('placeholder') || $this.val()).trigger('change.color');
         });
 
-        $resetThemeBtn.popover({trigger:'manual', content: $resetThemeBtn.data('success-tip'), placement:'left'}).popover('show');
+        $resetThemeBtn.popover({trigger:'manual', content: $resetThemeBtn.data('success-tip'), placement:'right'}).popover('show');
         setTimeout(function(){$resetThemeBtn.popover('destroy')},2000);
     });
 

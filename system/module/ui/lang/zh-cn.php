@@ -16,6 +16,7 @@ $lang->ui->clientMobile    = '移动';
 $lang->ui->logo            = 'Logo';
 $lang->ui->setLogo         = "Logo设置";
 $lang->ui->setTemplate     = '模板设置';
+$lang->ui->manageTemplate  = '模板管理';
 $lang->ui->installTemplate = '导入模板';
 $lang->ui->exportTheme     = '导出主题';
 $lang->ui->setTheme        = '主题设置';

@@ -319,6 +319,7 @@ a.tag-link {color: inherit;}
 #header {margin: 0 -15px; padding: 15px; min-height: 80px; vertical-align: middle; position: relative;}
 #headTitle {display: table; min-height: 55px; margin-top: 0;}
 #siteName,#siteLogo,#siteSlogan {display: table-cell; vertical-align: middle;}
+#siteName {padding: 0;}
 
 #headNav {position: absolute; right: 15px; top: 40%;}
 #headNav .login-msg, #headNav nav > a, #msgBox {display: inline-block; margin: 0}
@@ -591,7 +592,7 @@ body {background: #232323;}
 .m-index-index .page-wrapper {padding-top: 0;}
 
 /* Carousel */
-.carousel {position: relative; -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0;}
+.carousel {position: relative; -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0; z-index: 1;}
 .carousel-control, .carousel-control.left, .carousel-control.right {position: absolute; line-height: 1em; width: 60px; height: 60px; -webkit-border-radius: 40px; -moz-border-radius: 40px; border-radius: 40px; background: #666; top: 50%; text-align: center; margin-top: -30px; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#00000000', GradientType=0)}
 .ie-8 .carousel-control, .ie-8 .carousel-control.left, .ie-8 .carousel-control.right {background: none}
 .carousel-control.left {left: -80px;}
@@ -600,7 +601,7 @@ body {background: #232323;}
 .carousel:hover .carousel-control.right {right: 5%;}
 .carousel-control:hover {background: #e91b23; text-align: center;}
 .ie-8 .carousel-control:hover {background: none}
-.carousel-control .icon-prev, .carousel-control .icon-next {display: block; text-align: center; font-size: 60px; height: 60px; width: 60px; left: 5px; top: -3px; margin: 0; line-height: 60px;}
+.carousel-control .icon-prev, .carousel-control .icon-next {display: block; text-align: center; font-size: 60px; height: 60px; width: 60px; top: -3px; margin: 0; line-height: 50px; right: auto; left: auto;}
 .carousel-caption {left: 19%}
 
 /* List */

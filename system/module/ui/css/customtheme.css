@@ -37,12 +37,13 @@ linear-gradient(45deg, #999 25%, transparent 25%, transparent 75%, #999 75%, #99
 #resetTheme:hover {color: #A82824}
 
 #cssTab, #jsTab {position: relative;}
-#cssTab .text-tip, #jsTab .text-tip {position: absolute; right: 0; bottom: -40px}
+#cssTab .text-tip, #jsTab .text-tip {position: absolute; left: 150px; bottom: -47px}
 
 #mainPanel .panel-heading {padding: 4px 5px 0 5px}
 #mainPanel .nav-tabs {margin-bottom: -1px}
-#mainPanel .nav-tabs > li > a {padding: 5px 15px 8px}
-#mainPanel .nav-tabs > li.active > a {padding: 6px 15px 7px; color: #333; font-weight: bold;}
+#mainPanel .nav-tabs > li > a {padding: 5px 10px 8px}
+#mainPanel .nav-tabs > li > a.active, #mainPanel .nav-tabs > li > a.focus {outline: none;}
+#mainPanel .nav-tabs > li.active > a {padding: 6px 10px 7px; color: #333; font-weight: bold;}
 
 body.codeeditor-fullscreen .form-footer {position: fixed; left: 20px; bottom: -5px; z-index: 1010}
 body.codeeditor-fullscreen #cssTab .text-tip, body.codeeditor-fullscreen #jsTab .text-tip {position: fixed; left: 120px; bottom: 0; z-index: 1010}

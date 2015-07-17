@@ -18,9 +18,6 @@
         <li><?php echo html::a('#' . $group . 'Tab', $name, "data-toggle='tab' class='theme-control-tab'");?></li>
         <?php endforeach;?>
         <li><a href='#cssTab' data-toggle='tab'><?php echo $lang->ui->theme->extraStyle; ?></a></li>
-        <li><a href='#jsTab' data-toggle='tab'><?php echo $lang->ui->theme->extraScript; ?></a></li>
-
-        <li class='pull-right text-right w-150px'><button type='button' id='resetTheme' class='btn btn-link btn-sm text-danger' data-success-tip='<?php echo $lang->ui->theme->resetTip?>'><?php echo $lang->ui->theme->reset?></button></li>
       </ul>
     </div>
     <div class='panel-body'>
@@ -51,13 +48,9 @@
           <?php echo html::textarea('css', isset($setting['css']) ? $setting['css'] : '', "rows=20 class='form-control codeeditor' data-mode='css' data-height='350'");?>
           <p class='text-info text-tip'><?php echo $lang->ui->theme->customStyleTip; ?></p>
         </div>
-        <div class='tab-pane theme-control-tab-pane' id='jsTab'>
-          <?php echo html::textarea('js', isset($setting['js']) ? $setting['js'] : '', "rows=20 class='form-control codeeditor' data-mode='css' data-height='350'");?>
-          <p class='text-info text-tip'><?php echo $lang->ui->theme->customScriptTip; ?></p>
-        </div>
       </div>
       <div class="form-footer">
-        <?php echo html::hidden('theme', $theme) . html::hidden('template', $template) . html::submitButton();?>
+        <?php echo html::hidden('theme', $theme) . html::hidden('template', $template) . html::submitButton();?> <button type='button' id='resetTheme' class='btn btn-link btn-sm text-danger' data-success-tip='<?php echo $lang->ui->theme->resetTip?>'><?php echo $lang->ui->theme->reset?></button>
       </div>
     </div>
   </div>
