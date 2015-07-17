@@ -12,11 +12,12 @@
 ?>
 <?php
 $block->content = json_decode($block->content);
-$goupID = !empty($block->content->group) ? $block->content->group : '';
-$slides = $this->loadModel('slide')->getList($block->content->group);
+$goupID  = !empty($block->content->group) ? $block->content->group : '';
+$slides  = $this->loadModel('slide')->getList($block->content->group);
+$slideId = 'slide' . rand();
 if($slides):
 ?>
-<div id='slide' class='carousel slide' data-ride='carousel'>
+<div id='<?php echo $slideId;?>' class='carousel slide' data-ride='carousel'>
   <div class='carousel-inner'>
     <?php $height = 0;?>
     <?php foreach($slides as $slide):?>
@@ -46,8 +47,8 @@ if($slides):
     <?php endforeach;?>
   </div>
   <?php if(count($slides) > 1):?>
-  <a class='left carousel-control' href='#slide' data-slide='prev'> <i class='icon-prev'></i> </a>
-  <a class='right carousel-control' href='#slide' data-slide='next'> <i class='icon-next'></i> </a>
+  <a class='left carousel-control' href='#<?php echo $slideId;?>' data-slide='prev'> <i class='icon-prev'></i> </a>
+  <a class='right carousel-control' href='#<?php echo $slideId;?>' data-slide='next'> <i class='icon-next'></i> </a>
   <?php endif;?>
 </div>
 <?php endif;?>
