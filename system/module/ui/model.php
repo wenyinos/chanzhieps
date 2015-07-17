@@ -690,7 +690,7 @@ class uiModel extends model
     public function exportDB($template, $theme)
     {
         $lang   = $this->app->getClientLang();
-        $tables = array(TABLE_BLOCK, TABLE_LAYOUT, TABLE_CONFIG);
+        $tables = array(TABLE_BLOCK, TABLE_LAYOUT, TABLE_CONFIG, TABLE_FILE);
  
         $groups = $this->getUsedSlideGroups($template, $theme);
         $groups = join(",", $groups);
@@ -706,6 +706,7 @@ class uiModel extends model
         $condations[TABLE_CONFIG]   = "where owner = 'system' and module = 'common' and `key` = 'custom'";
         $condations[TABLE_CATEGORY] = "where type = 'slide'";
         $condations[TABLE_SLIDE]    = "where `group` in ({$groups})";
+        $condations[TABLE_FILE]     = "where (objectType = 'source' and objectID = '{$template}_{$theme}') or objectType = 'slide'";
 
         $fields = array();
         $fields[TABLE_BLOCK]    = "id as originID,`template`,`type`,`title`,`content`,`lang`";
@@ -713,6 +714,7 @@ class uiModel extends model
         $fields[TABLE_CONFIG]   = "owner, module, section, `key`, `value`, 'imported' as lang";
         $fields[TABLE_SLIDE]    = "title,`group`,titleColor,mainLink,backgroundType,backgroundColor,height,image,label,buttonClass,buttonUrl,buttonTarget,summary, 'imported' as lang,`order`";
         $fields[TABLE_CATEGORY] = "id as alias, name, lang, 'tmpSlide' as type";
+        $fields[TABLE_FILE] = "pathname,title,extension,size,width,height,objectType,addedDate,public,extra,editor,lang,'{$template}_THEME_CODEFIX'asobjectID";
 
         $replaces = array();
         $replaces[TABLE_BLOCK]    = true;
@@ -720,6 +722,7 @@ class uiModel extends model
         $replaces[TABLE_CONFIG]   = true;
         $replaces[TABLE_SLIDE]    = false;
         $replaces[TABLE_CATEGORY] = false;
+        $replaces[TABLE_FILE]     = false;
     
         $zdb = $this->app->loadClass('zdb');
         $zdb->dump($this->exportDbPath . 'install.sql', $tables, $fields, 'data', $condations, true);
@@ -730,6 +733,7 @@ class uiModel extends model
         $sqls = str_replace(TABLE_SLIDE,  "eps_slide",  $sqls);
         $sqls = str_replace(TABLE_CONFIG, "eps_config", $sqls);
         $sqls = str_replace(TABLE_CATEGORY, "eps_category", $sqls);
+        $sqls = str_replace(TABLE_FILE,     "eps_file", $sqls);
         $sqls = str_replace("/$theme/", "/THEME_CODEFIX/", $sqls);
         $sqls = str_replace("/$theme\\", "/THEME_CODEFIX\\", $sqls);
         $sqls = str_replace("/$theme\/", "/THEME_CODEFIX\/", $sqls);
