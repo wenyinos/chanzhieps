@@ -1098,6 +1098,12 @@ class packageModel extends model
              $content = json_decode($block->content);
              if(!is_object($content)) continue;
              if(isset($content->category)) $content->category = 0;
+             if(isset($content->custom->{$packageInfo->theme}))
+             { 
+                 $custom = $content->custom->{$packageInfo->theme};
+                 $content->custom = new stdclass();
+                 $content->custom->{$packageInfo->code} = $custom;
+             }
              $block->content = json_encode($content);
              $this->dao->replace(TABLE_BLOCK)->data($block)->exec();
          }
