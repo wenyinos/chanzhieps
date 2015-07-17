@@ -1207,5 +1207,4 @@ class packageModel extends model
         $this->loadModel('setting')->setItems('system.common.template', array('custom' => helper::jsonEncode($setting)));
         $this->dao->delete()->from(TABLE_CONFIG)->where('lang')->eq('imported')->andWhere('`key`')->eq('custom')->exec();
      }
-
 }
