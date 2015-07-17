@@ -224,12 +224,10 @@ class site extends control
             }
 
             $allowedFiles = ',' . $allowedFiles . ','; 
-            $thumbs = helper::jsonEncode($this->post->thumbs);
-            $fileConfig = array('allowed' => $allowedFiles, 'thumbs' => $thumbs);
-            $this->loadModel('setting')->setItems('system.common.file', $fileConfig);
+            $result = $this->loadModel('setting')->setItem('system.common.file.allowed', $allowedFiles);
+            if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
 
             $result  = $this->loadModel('setting')->setItems('system.common.site', $setting);
-
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setupload')));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }

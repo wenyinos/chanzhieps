@@ -191,6 +191,7 @@ class ui extends control
         /* Get configs of list number. */
         $this->app->loadConfig('article');
         $this->app->loadConfig('product');
+        $this->app->loadConfig('file');
         if(strpos($this->config->site->modules, 'blog') !== false) $this->app->loadConfig('blog');
         if(strpos($this->config->site->modules, 'message') !== false) $this->app->loadConfig('message');
         if(strpos($this->config->site->modules, 'forum') !== false) 
@@ -201,12 +202,15 @@ class ui extends control
 
         if(!empty($_POST))
         {
+            $thumbs = helper::jsonEncode($this->post->thumbs);
+            $result = $this->loadModel('setting')->setItem('system.common.file.thumbs', $thumbs);
+            if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
 
             $setting = fixer::input('post')->get('productView,QRCode');
             $result  = $this->loadModel('setting')->setItems('system.common.ui', $setting);
             if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
 
-            $setting = fixer::input('post')->remove('productView,QRCode')->get();
+            $setting = fixer::input('post')->remove('productView,QRCode,thumbs')->get();
             $result  = $this->loadModel('setting')->setItems('system.common.site', $setting, 'all');
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
