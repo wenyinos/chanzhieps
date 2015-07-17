@@ -641,7 +641,7 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
 
 #menu .dropdown-menu > li > a  {padding-left: 15px;}
 #menu .nav > li .dropdown-menu { margin-top: 0;}
-#menu .nav > li > a:hover {background-color: #ddd; color: #232323;}
+#menu .nav > li > a:hover {background-color: none; color: #232323;}
 #menu .nav > li.active > a {background-color: #ebf2f9; font-weight: bold; color: #145ccd}
 #menu .nav > li > a:active, #menu .nav > li > a:focus { background-color: #fff;}
 #menu .nav > li.divider {margin: 0 5px; padding: 0; width: 1px; height: 40px; background-color: #ddd;}
