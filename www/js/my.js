@@ -24,17 +24,16 @@ $(document).ready(function()
     setGo2Top();
 
     /* Slide pictures start.   */
-    if($('#slide').length)
+    $('.carousel').each(function()
     {
-        $('#slide').carousel();
-        $('#slide .item').first().addClass('active');
-        $('#slide .item[data-url]').click(function()
-        {
-            var url    = $(this).data('url');
-            var target = $(this).data('target');
-            if(url && url.length) window.open(url, target);
-        });
-    }
+        var $carousel = $(this).carousel();
+        $carousel.find('.item').first().addClass('active');
+    }).on('click', '.item[data-url]', function()
+    {
+        var url    = $(this).data('url');
+        var target = $(this).data('target');
+        if(url && url.length) window.open(url, target);
+    });
 
     /* Fixed submenu position for browser which doesn't suppport relative postion in a table cell, like firefox 29. */
     var ua = navigator.userAgent.toLowerCase();
