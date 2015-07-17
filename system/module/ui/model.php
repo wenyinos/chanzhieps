@@ -714,7 +714,7 @@ class uiModel extends model
         $fields[TABLE_CONFIG]   = "owner, module, section, `key`, `value`, 'imported' as lang";
         $fields[TABLE_SLIDE]    = "title,`group`,titleColor,mainLink,backgroundType,backgroundColor,height,image,label,buttonClass,buttonUrl,buttonTarget,summary, 'imported' as lang,`order`";
         $fields[TABLE_CATEGORY] = "id as alias, name, lang, 'tmpSlide' as type";
-        $fields[TABLE_FILE] = "pathname,title,extension,size,width,height,objectType,addedDate,public,extra,editor,lang,'{$template}_THEME_CODEFIX'asobjectID";
+        $fields[TABLE_FILE]     = "pathname,title,extension,size,width,height,objectType,addedDate,public,extra, 'IMPORTED' as addedBy,lang,'{$template}_THEME_CODEFIX' as objectID";
 
         $replaces = array();
         $replaces[TABLE_BLOCK]    = true;
@@ -734,9 +734,8 @@ class uiModel extends model
         $sqls = str_replace(TABLE_CONFIG, "eps_config", $sqls);
         $sqls = str_replace(TABLE_CATEGORY, "eps_category", $sqls);
         $sqls = str_replace(TABLE_FILE,     "eps_file", $sqls);
-        $sqls = str_replace("/$theme/", "/THEME_CODEFIX/", $sqls);
-        $sqls = str_replace("/$theme\\", "/THEME_CODEFIX\\", $sqls);
-        $sqls = str_replace("/$theme\/", "/THEME_CODEFIX\/", $sqls);
+        $sqls = str_replace("source/{$template}/{$theme}/", "source/{$template}/THEME_CODEFIX/", $sqls);
+        $sqls = str_replace("\/{$template}\/{$theme}\/", "/THEME_CODEFIX/", $sqls);
         $sqls = str_replace("\"$theme\"", "\"THEME_CODEFIX\"", $sqls);
         return file_put_contents($this->exportDbPath . 'install.sql', $sqls);
     }
