@@ -10,7 +10,7 @@
             <td class='w-10px'></td>
             <td class='text-middle w-100px'><?php echo $lang->file->source . sprintf($lang->file->limit, $this->config->file->maxSize / 1024 /1024);?></td>
             <td><?php echo $this->fetch('file', 'buildForm');?></td>
-            <td class='w-40px'></td>
+            <te class='w-40px'></td>
           </tr>
           <tr><td colspan='4' class='text-center'><?php echo html::submitButton();?></td></tr>
           <?php else:?>
@@ -25,8 +25,8 @@
   <div class='panel-heading'>
     <?php echo $lang->file->sourceList?>
     <span class='panel-actions'>
-      <?php echo html::a('javascript:void(0)', "<i class='icon icon-th-large'></i> " . $lang->file->viewType[0], "class='image-view selected'")?>
-      <?php echo html::a('javascript:void(0)', "<i class='icon icon-list'></i> " . $lang->file->viewType[1], "class='list-view'")?>
+      <?php echo html::a('javascript:void(0)', "<i class='icon icon-th-large'></i>", "class='image-view selected'")?>
+      <?php echo html::a('javascript:void(0)', "<i class='icon icon-list'></i>", "class='list-view'")?>
       <?php echo html::commonButton($lang->file->uploadSource, 'btn btn-sm btn-primary', "data-toggle='modal' data-target='#uploadModal'")?>
     </span>
   </div>
