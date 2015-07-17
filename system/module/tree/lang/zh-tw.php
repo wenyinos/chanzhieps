@@ -73,9 +73,10 @@ $lang->express->name   = '快遞名稱';
 
 /* Lang items for express. */
 $lang->slideGroup = new stdclass();
-$lang->slideGroup->common = '幻燈片';
+$lang->slideGroup->common = '分組';
 $lang->slideGroup->name   = '幻燈片分組';
 $lang->slideGroup->view   = '查看幻燈片';
+$lang->slideGroup->manage = "設置分組";
 
 /* Lang items for wechat menu. */
 $lang->wechatMenu = new stdclass();

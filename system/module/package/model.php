@@ -1092,6 +1092,16 @@ class packageModel extends model
       */
      public function mergeBlocks($packageInfo)
      {
+         $importedBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('originID')->ne('0')->fetchAll('originID');
+         foreach($importedBlocks as $block)
+         {
+             $content = json_decode($block->content);
+             if(!is_object($content)) continue;
+             if(isset($content->category)) $content->category = 0;
+             $block->content = json_encode($content);
+             $this->dao->replace(TABLE_BLOCK)->data($block)->exec();
+         }
+
          $merged = array();
          $blocks2Merge  = $this->post->blocks2Merge;
          $blocks2Create = $this->post->blocks2Create;

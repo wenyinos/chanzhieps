@@ -206,3 +206,7 @@ $lang->user->log->desc        = 'description';
 $lang->user->ipDenied       = 'This IP not allowed login, please do these steps.';
 $lang->user->locationDenied = 'This location not allowed login, please do these steps.';
 $lang->user->verifyFail     = 'Check email fail,Please input correct email.';
+
+$lang->user->placeholder = new stdclass();
+$lang->user->placeholder->password   = 'Please enter your website login password';
+$lang->user->placeholder->verifyCode = 'Please enter the code you received.';
