@@ -1354,6 +1354,7 @@ class upgradeModel extends model
                 foreach($layouts as $layout)
                 {
                     if($template == $this->config->template->name and $code == $this->config->template->theme) continue;
+                    if($code == $layout->theme) continue;
                     $layout->theme = $code;
                     $this->dao->insert(TABLE_LAYOUT)->data($layout)->exec();
                 }
@@ -1373,7 +1374,7 @@ class upgradeModel extends model
     {
         $template = $this->config->template; 
         $setting  = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true): array();
-        $setting[$template->name][$template->theme]['css'] = $this->config->site->basestyle;
+        $setting[$template->name][$template->theme]['css'] = isset($this->config->site->basestyle) ? $this->config->site->basestyle : '';
         return $this->loadModel('setting')->setItems('system.common.template', array('custom' => helper::jsonEncode($setting)));
     }
 }
