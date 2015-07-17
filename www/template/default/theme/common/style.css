@@ -137,9 +137,9 @@ table.captcha td label {padding: 0;}
 
 .files-list > li.file.file-zip > a:before, .files-list > li.file.file-rar > a:before {content: '\e751'}
 .files-list > li.file.file-doc > a:before {content: '\e72c';}
-.files-list > li.file > .file-md5 {top: 3px; right: 5px; position: absolute;}
-.files-list > li.file > .file-md5 > a {color: #fff; font-size: 10px;}
-.files-list > li.file > .file-download {top: 43px; right: 5px; position: absolute;}
+.files-list > li.file > .file-md5 {top: 43px; right: 5px; position: absolute;}
+.files-list > li.file > .file-md5 > a{color: #fff; background-color: #909090; font-size: 10px;}
+.files-list > li.file > .file-download {top: 3px; right: 5px; position: absolute;}
 
 /* Article */
 .article {margin-bottom: 20px; border: 1px solid #ddd; padding: 0}

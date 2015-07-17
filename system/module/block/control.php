@@ -67,7 +67,7 @@ class block extends control
         {
             $return = $this->loadModel('common')->verfyAdmin();
             if($return['result'] == 'fail') $this->view->okFile = $return['okFile'];
-            $canCreatePHP = $this->loadModel('mail')->checkVerify();
+            $canCreatePHP = $this->loadModel('mail')->checkVerify('okFile');
 
             $this->view->canCreatePHP = $canCreatePHP;
         }
@@ -106,7 +106,7 @@ class block extends control
         {
             $return = $this->loadModel('common')->verfyAdmin();
             if($return['result'] == 'fail') $this->view->okFile = $return['okFile'];
-            $canCreatePHP = $this->loadModel('mail')->checkVerify();
+            $canCreatePHP = $this->loadModel('mail')->checkVerify('okFile');
 
             $this->view->canCreatePHP = $canCreatePHP;
         }

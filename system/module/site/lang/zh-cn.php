@@ -89,8 +89,8 @@ $lang->site->checkEmailList['open']  = '打开';
 $lang->site->checkEmailList['close'] = '关闭';
 
 $lang->site->sessionIpoptions = array();
-$lang->site->sessionIpoptions[0] = '不检查';
 $lang->site->sessionIpoptions[1] = '检查';
+$lang->site->sessionIpoptions[0] = '不检查';
 
 $lang->site->imageSize['s'] = '小图';
 $lang->site->imageSize['m'] = '中图';
@@ -100,9 +100,9 @@ $lang->site->image['width']  = '宽度';
 $lang->site->image['height'] = '高度';
 
 $lang->site->captchaList = array();
-$lang->site->captchaList['close'] = '不用验证码';
 $lang->site->captchaList['open']  = '一直启用验证码';
 $lang->site->captchaList['auto']  = '有敏感内容时自动启用验证码';
+$lang->site->captchaList['close'] = '不用验证码';
 
 $lang->site->validateTypes = new stdclass();
 $lang->site->validateTypes->okFile = '文件验证';
@@ -113,8 +113,8 @@ $lang->site->schemeList['http']  = 'http';
 $lang->site->schemeList['https'] = 'https';
 
 $lang->site->frontList = array();
-$lang->site->frontList['guest'] = '不需要登录';
 $lang->site->frontList['login'] = '需要登录';
+$lang->site->frontList['guest'] = '不需要登录';
 
 $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = '会员';

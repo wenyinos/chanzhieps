@@ -84,7 +84,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
           <td>
             <div class='form-action'>
               <?php echo html::submitButton() . html::hidden('blockID', $block->id);?>
-              <?php echo html::a($this->createLink('mail', 'captcha'), $lang->save, "data-toggle='modal' class='hidden captchaModal'")?></th>
+              <?php echo html::a($this->createLink('mail', 'captcha', "url=&target=modal&account=&type=okFile"), $lang->save, "data-toggle='modal' class='hidden captchaModal'")?></th>
               <?php echo html::a($this->session->blockList, $this->lang->goback, "class='btn btn-default btn-cancel'");?>
             </div>
           </td>
