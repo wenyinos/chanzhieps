@@ -76,6 +76,7 @@ $lang->slideGroup = new stdclass();
 $lang->slideGroup->common = 'Slide';
 $lang->slideGroup->name   = 'Slide Group';
 $lang->slideGroup->view   = 'View Slides';
+$lang->slideGroup->manage = "Manage Group";
 
 /* Lang items for wechat menu. */
 $lang->wechatMenu = new stdclass();
