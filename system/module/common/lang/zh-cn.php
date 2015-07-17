@@ -214,26 +214,26 @@ $lang->forum->menu->update = '更新数据|forum|update|';
 /* Menu of site module. */
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
-$lang->site->menu->basic      = '站点设置|site|setbasic|';
-$lang->site->menu->company    = '公司信息|company|setbasic|';
-$lang->site->menu->contact    = '联系方式|company|setcontact|';
-$lang->site->menu->nav        = '导航设置|nav|admin|';
-$lang->site->menu->sensitive  = '敏感词设置|site|setsensitive|';
-$lang->site->menu->link       = '友情链接|links|admin|';
-$lang->site->menu->oauth      = '开放登录|site|setoauth|';
-$lang->site->menu->mail       = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->site->menu->wechat     = array('link' => '微信设置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
-$lang->site->menu->search     = '更新搜索索引|search|buildindex|';
-$lang->site->menu->tag        = '关键词设置|tag|admin|';
+$lang->site->menu->basic   = '站点设置|site|setbasic|';
+$lang->site->menu->company = '公司信息|company|setbasic|';
+$lang->site->menu->contact = '联系方式|company|setcontact|';
+$lang->site->menu->nav     = '导航设置|nav|admin|';
+$lang->site->menu->link    = '友情链接|links|admin|';
+$lang->site->menu->oauth   = '开放登录|site|setoauth|';
+$lang->site->menu->mail    = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->site->menu->wechat  = array('link' => '微信设置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
+$lang->site->menu->search  = '更新搜索索引|search|buildindex|';
+$lang->site->menu->tag     = '关键词设置|tag|admin|';
 
 /* Menu of security module. */
 $lang->security = new stdclass();
 $lang->security->menu = new stdclass();
-$lang->security->menu->basic  = '基本设置|site|setsecurity|';
-$lang->security->menu->upload = '附件上传|site|setupload|';
-$lang->security->menu->admin  = '管理员|user|admin|admin=1';
-$lang->security->menu->group  = array('link' => '分组权限|group|browse|', 'alias' => 'managepriv,managemember');
-$lang->security->menu->log    = '登录日志|user|adminlog|';
+$lang->security->menu->basic     = '基本设置|site|setsecurity|';
+$lang->security->menu->upload    = '附件上传|site|setupload|';
+$lang->security->menu->sensitive = '敏感词设置|site|setsensitive|';
+$lang->security->menu->admin     = '管理员|user|admin|admin=1';
+$lang->security->menu->group     = array('link' => '分组权限|group|browse|', 'alias' => 'managepriv,managemember');
+$lang->security->menu->log       = '登录日志|user|adminlog|';
 
 /* Menu of company module. */
 $lang->company->menu = $lang->site->menu;
