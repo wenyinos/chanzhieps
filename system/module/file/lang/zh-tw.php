@@ -29,6 +29,9 @@ $lang->file->source        = '素材';
 $lang->file->sourceList    = '素材列表';
 $lang->file->uploadSource  = '上傳素材';
 $lang->file->sourceURI     = '查看地址';
+$lang->file->sourceDelete  = '刪除素材';
+$lang->file->sourceEdit    = '編輯素材';
+$lang->file->selectImage   = '選擇素材';
 
 $lang->file->id        = '編號';
 $lang->file->title     = '名稱';

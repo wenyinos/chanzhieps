@@ -206,3 +206,7 @@ $lang->user->log->desc        = '描述';
 $lang->user->ipDenied       = '登錄IP受限，請按提示操作。';
 $lang->user->locationDenied = '登錄地區受限，請按提示操作。';
 $lang->user->verifyFail     = '請填寫正確的驗證碼';
+
+$lang->user->placeholder = new stdclass();
+$lang->user->placeholder->password   = '請輸入您的網站登錄密碼';
+$lang->user->placeholder->verifyCode = '請輸入驗證郵件裡面收到的驗證碼';
