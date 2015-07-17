@@ -45,7 +45,7 @@ $lang->site->checkIP         = 'Check login IP';
 $lang->site->checkLocation   = 'Check login location';
 $lang->site->checkEmail      = 'Check Email';
 $lang->site->allowedLocation = 'Allowed location';
-$lang->site->checkSessionIP  = 'Check the login ip';
+$lang->site->checkSessionIP  = 'Check admin ip';
 $lang->site->setsecurity     = 'Security setting';
 $lang->site->setsensitive    = 'Set sensitive words';
 $lang->site->filterSensitive = 'Filter sensitive words';
@@ -89,8 +89,8 @@ $lang->site->checkEmailList['open']  = 'Open';
 $lang->site->checkEmailList['close'] = 'Close';
 
 $lang->site->sessionIpoptions = array();
-$lang->site->sessionIpoptions[0] = 'Can chaneged';
-$lang->site->sessionIpoptions[1] = 'Must be same';
+$lang->site->sessionIpoptions[0] = "Don't check";
+$lang->site->sessionIpoptions[1] = 'Check';
 
 $lang->site->imageSize['s'] = 'Small';
 $lang->site->imageSize['m'] = 'Middle';
