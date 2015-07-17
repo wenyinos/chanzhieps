@@ -12,8 +12,8 @@
 ?>
 <?php
 $block->content = json_decode($block->content);
-$goupID  = !empty($block->content->group) ? $block->content->group : '';
-$slides  = $this->loadModel('slide')->getList($block->content->group);
+$groupID = !empty($block->content->group) ? $block->content->group : '';
+$slides  = $this->loadModel('slide')->getList($groupID);
 $slideId = 'slide' . rand();
 if($slides):
 ?>
