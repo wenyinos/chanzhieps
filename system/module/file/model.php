@@ -62,7 +62,7 @@ class fileModel extends model
                 $filesHtml .= html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank' title='{$file->title}'");
                 $filesHtml .= "<span class='file-download'><i class='icon-download'></i> " .  $file->downloads . "</span>";
                 $filesHtml .= "<span class='file-md5'>" ;
-                $filesHtml .= html::a('javascript:void(0)', 'MD5', "class='label label-default' data-toggle='popover' data-placement='bottom' data-content='$fileMD5'");
+                $filesHtml .= html::a('javascript:void(0)', 'MD5', "class='label' data-toggle='popover' data-placement='bottom' data-content='$fileMD5'");
                 $filesHtml .= '</span></li>';
             }
         }
