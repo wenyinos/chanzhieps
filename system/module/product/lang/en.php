@@ -84,8 +84,8 @@ $lang->product->placeholder->value    = "Attribute value: $1000, red etc";
 $lang->product->placeholder->currency = "Dollar sign for price of product, \"$\" for USD dollar.";
 
 $lang->product->listMode = new stdclass();
-$lang->product->listMode->card  = "<i class='icon icon-th-large'></i> Card";
-$lang->product->listMode->list  = "<i class='icon icon-list'></i> List";
+$lang->product->listMode->card  = "<i class='icon icon-th-large'></i>";
+$lang->product->listMode->list  = "<i class='icon icon-list'></i>";
 
 $lang->product->currencyList['rmb']  = 'Renminbi Yuan';
 $lang->product->currencyList['usd']  = 'U.S.Dollar';
