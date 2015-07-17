@@ -1354,6 +1354,7 @@ class upgradeModel extends model
                 foreach($layouts as $layout)
                 {
                     if($template == $this->config->template->name and $code == $this->config->template->theme) continue;
+                    if($code == $layout->theme) continue;
                     $layout->theme = $code;
                     $this->dao->insert(TABLE_LAYOUT)->data($layout)->exec();
                 }

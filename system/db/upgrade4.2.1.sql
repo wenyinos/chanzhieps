@@ -33,5 +33,4 @@ ADD `import` enum('no', 'doing', 'finished') NOT NULL DEFAULT 'no';
 ALTER TABLE `eps_layout` ADD UNIQUE `layout` (`template`, `theme`, `page`, `region`, `lang`),DROP INDEX `layout`;
 ALTER TABLE `eps_file` 
 CHANGE `objectID` `objectID` char(50) NOT NULL,
-CHANGE `pathname` `pathname` char(200) NOT NULL,
-;
+CHANGE `pathname` `pathname` char(200) NOT NULL;
