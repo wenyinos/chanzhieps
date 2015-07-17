@@ -15,7 +15,7 @@ $(document).ready(function()
   if(!isset($account)) $account = '';
   if(!isset($method))  $method  = '';
   if(!isset($email))   $email   = $this->app->user->email;
-  if($method == 'setsecurity') $this->config->site->importantValidate = 'okFile';
+  if(isset($type) and $type != '') $this->config->site->importantValidate = $type;
   ?>
   <?php if(!helper::isAjaxRequest()):?>
   <div class="modal" id="ajaxModal" ref="<?php echo $this->app->getURI();?>">
