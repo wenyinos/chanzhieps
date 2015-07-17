@@ -38,10 +38,11 @@ $lang->slide->buttonUrl   = '按钮链接';
 $lang->slide->buttonColor = '颜色';
 $lang->slide->sourceImage = '素材库图片';
 
-$lang->slide->sort     = '排序';
-$lang->slide->admin    = '幻灯片设置';
-$lang->slide->create   = '添加幻灯片';
-$lang->slide->edit     = '编辑幻灯片';
+$lang->slide->sort        = '排序';
+$lang->slide->admin       = '幻灯片设置';
+$lang->slide->create      = '添加幻灯片';
+$lang->slide->edit        = '编辑幻灯片';
+$lang->slide->createGroup = '添加幻灯片分组';
 
 $lang->slide->successSort     = '排序成功保存';
 $lang->slide->noImageSelected = '没有选择图片';
