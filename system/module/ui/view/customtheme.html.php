@@ -19,8 +19,6 @@
         <?php endforeach;?>
         <li><a href='#cssTab' data-toggle='tab'><?php echo $lang->ui->theme->extraStyle; ?></a></li>
         <li><a href='#jsTab' data-toggle='tab'><?php echo $lang->ui->theme->extraScript; ?></a></li>
-
-        <li class='pull-right text-right w-150px'><button type='button' id='resetTheme' class='btn btn-link btn-sm text-danger' data-success-tip='<?php echo $lang->ui->theme->resetTip?>'><?php echo $lang->ui->theme->reset?></button></li>
       </ul>
     </div>
     <div class='panel-body'>
@@ -57,7 +55,7 @@
         </div>
       </div>
       <div class="form-footer">
-        <?php echo html::hidden('theme', $theme) . html::hidden('template', $template) . html::submitButton();?>
+        <?php echo html::hidden('theme', $theme) . html::hidden('template', $template) . html::submitButton();?> <button type='button' id='resetTheme' class='btn btn-link btn-sm text-danger' data-success-tip='<?php echo $lang->ui->theme->resetTip?>'><?php echo $lang->ui->theme->reset?></button>
       </div>
     </div>
   </div>

@@ -16,6 +16,7 @@ $lang->ui->clientMobile  = 'Mobile';
 $lang->ui->logo            = 'Logo';
 $lang->ui->setLogo         = "Set Logo";
 $lang->ui->setTemplate     = 'Set Template';
+$lang->ui->manageTemplate  = 'Manage templates';
 $lang->ui->installTemplate = 'Import Template';
 $lang->ui->exportTheme     = 'Export Theme';
 $lang->ui->setTheme        = 'Set Theme';

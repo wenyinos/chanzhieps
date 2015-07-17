@@ -626,7 +626,7 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
 /* menu */
 #menu {margin: -20px -10px 20px; border-bottom: 1px solid #ddd; height: 41px;}
 #menu .nav {float: left;}
-#menu .nav > li {float: left; position: relative; padding: 5px;}
+#menu .nav > li {float: left; position: relative; padding: 5px 0;}
 
 #menu .nav > li > a {padding: 5px;}
 #menu .nav > li > a > .icon, #menu .dropdown-menu > li > a > .icon  {display: inline-block; width: 20px; text-align: center;}
@@ -642,7 +642,7 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
 #menu .dropdown-menu > li > a  {padding-left: 15px;}
 #menu .nav > li .dropdown-menu { margin-top: 0;}
 #menu .nav > li > a:hover {background-color: none; color: #232323;}
-#menu .nav > li.active > a {background-color: #ebf2f9; font-weight: bold; color: #145ccd}
+#menu .nav > li.active > a {color: #145ccd}
 #menu .nav > li > a:active, #menu .nav > li > a:focus { background-color: #fff;}
 #menu .nav > li.divider {margin: 0 5px; padding: 0; width: 1px; height: 40px; background-color: #ddd;}
 #menu .nav > li.divider.angle {background: #fff; width: 10px; margin: 0; position: relative;}
@@ -652,12 +652,13 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
 #menu > .pull-right { margin-right: 15px;}
 #menu > .pull-right > .btn { position: relative; top: 4px;}
 
-#menu .theme-picker-dropdown {width: 740px; padding-bottom: 0; left: -10px;}
+#menu .theme-picker-dropdown {width: 740px; padding-bottom: 0; left: -10px;  box-shadow: 0 6px 20px rgba(0,0,0,.3);}
 @media (min-width: 1200px) {#menu .theme-picker-dropdown {width: 880px}}
-@media (max-width: 840px) {#menu .theme-picker-dropdown {left: -95px}}
+@media (max-width: 840px) {#menu .theme-picker-dropdown {left: -55px}}
 @media (max-width: 760px) {#menu .theme-picker-dropdown {width: 600px}}
 #menu .theme-picker {display: table; width: 100%;}
-#menu .menu-templates {display: table-cell; border-right: 1px solid #ddd; min-width: 150px; vertical-align: top;}
+#menu .menu-templates {display: table-cell; border-right: 1px solid #ddd; min-width: 150px; vertical-align: top; padding-bottom: 50px;}
+#menu .menu-templates > .actions {position: absolute; left: 10px; bottom: 8px;}
 #menu .menu-themes-list {display: table-cell; vertical-align: top;}
 #menu .menu-theme-preview {display: table-cell; width: 128px; vertical-align: top;}
 #menu .menu-theme-preview img {max-width: 128px;}

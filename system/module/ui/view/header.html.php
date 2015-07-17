@@ -4,11 +4,7 @@
 <nav id='menu'>
   <ul class='nav'>
     <li class='nav-item-primary'>
-      <a href='javascript:;' data-toggle='dropdown'><i class="icon icon-desktop"></i> <?php echo $lang->ui->clientDesktop;?> &nbsp;<i class='icon-caret-down'></i></a>
-      <ul class='dropdown-menu'>
-        <li class="active"><a href='###'><i class="icon icon-desktop"></i> <?php echo $lang->ui->clientDesktop;?></a></li>
-        <li><a href='###'><i class="icon icon-mobile-phone"></i> <?php echo $lang->ui->clientMobile;?></a></li>
-      </ul>
+      <a href='javascript:;' data-toggle='dropdown'><i class="icon icon-desktop"></i> <?php echo $lang->ui->clientDesktop;?></a>
     </li>
     <li class="divider angle"></li>
     <li class='menu-theme-picker'>
@@ -41,17 +37,13 @@
               <?php $templateThemes .= "<div class='menu-themes clearfix" . ($isCurrent ? ' show' : '') . "' data-template='{$code}'>" . $themesList . '</div>'; ?>
               <?php endforeach;?>
             </ul>
+            <div class='actions'>
+              <?php commonModel::printLink('ui', 'setTemplate', '', '<i class="icon-cog"></i> ' . $lang->ui->manageTemplate)?>
+            </div>
           </div>
           <div class='menu-themes-list'>
             <?php echo $templateThemes; ?>
           </div>
-        </div>
-        <div class='theme-picker-footer'>
-          <div class='pull-right'>
-            <?php commonModel::printLink('ui', 'customTheme', '', '<i class="icon-cog"></i> ' . $lang->ui->customtheme, 'class="btn btn-link"')?>
-            <?php commonModel::printLink('ui', 'setTemplate', '', '<i class="icon-cogs"></i> ' . $lang->ui->setTemplate, 'class="btn btn-link"')?>
-          </div>
-          <?php echo $lang->ui->currentTheme ?>： <span class='menu-template-name'><?php echo $templates[$config->template->name]['name'];?></span> <i class="icon icon-angle-right"></i> <span class='menu-theme-name'><?php echo $templates[$config->template->name]['themes'][$currentTheme]?></span>
         </div>
       </div>
     </li>
@@ -95,8 +87,10 @@ $(function()
         {
             if(response.result == 'success')
             {
+                $themePicker.find('.menu-theme.current').removeClass('current');
+                if($this.hasClass('menu-theme')) $this.addClass('current');
                 messager.success(response.message);
-                window.location.reload();
+                setTimeout(function(){window.location.reload();}, 1000);
             }
             else
             {
@@ -109,7 +103,7 @@ $(function()
     $('.menu-theme-picker').on('show.bs.dropdown show.zui.dropdown', function()
     {
         var $list = $('#menu .menu-themes');
-        $list.css('max-height', $(window).height() - 170);
+        $list.css('max-height', $(window).height() - 130);
         refreshPicker();
     });
 
