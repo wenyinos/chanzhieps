@@ -52,8 +52,9 @@ $lang->mail->captcha       = 'Email captcha';
 $lang->mail->needVerify    = 'Need to verify the identity of Administrator';
 $lang->mail->verifyFail    = 'Wrong captcha';
 $lang->mail->verifySuccess = 'Right captcha';
-$lang->mail->noConfigure   = "I can not find the configuration, can't use email captcha.";
-$lang->mail->noEmail       = "I can not find your email address, can't use email captcha.";
+$lang->mail->noConfigure   = "Can't find the configuration";
+$lang->mail->noEmail       = "Can't find your email address";
+$lang->mail->noCaptcha     = "can't send email captcha.";
 $lang->mail->okFileVerfy   = "Create %s file.%s<br />";
 $lang->mail->sendSuccess   = 'Captcha has been sent to %s.';
 
