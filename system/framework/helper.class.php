@@ -422,14 +422,14 @@ class helper
     {
         global $config;
 
-        if(strpos($domain, ':') !== false) $domain = substr($domain, 0, strpos($domain, ':'));
+        if(strpos($domain, ':') !== false) $domain = substr($domain, 0, strpos($domain, ':')); // Remove port from domain.
         $domain = strtolower($domain);
-        if($domain != 'localhost' and !preg_match('/^([a-z0-9\-]+\.)+[a-z0-9\-]+$/', $domain)) die('domain denied');
 
-        $domain = str_replace('-', '_', $domain);    // Replace '-' by '_'.
-        if(strpos($domain, ':') !== false) $domain = substr($domain, 0, strpos($domain, ':'));    // Remove port from domain.
+        if($domain == 'localhost') return $domain;
+        if(!preg_match('/^([a-z0-9\-]+\.)+[a-z0-9\-]+$/', $domain)) die('domain denied');
 
-        $items = explode('.', $domain);
+        $domain  = str_replace('-', '_', $domain);    // Replace '-' by '_'.
+        $items   = explode('.', $domain);
         $postfix = str_replace($items[0] . '.', '', $domain);
         if(strpos($config->domainPostfix, "|$postfix|") !== false) return $items[0];
 
