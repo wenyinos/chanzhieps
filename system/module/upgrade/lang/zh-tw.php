@@ -30,6 +30,10 @@ $lang->upgrade->backupData = <<<EOT
 </pre>
 EOT;
 
+$lang->upgrade->createSlidePath = <<<EOT
+<div class='alert'> 請創建幻燈片目錄：<b>%s</b> 並開啟該目錄寫權限後繼續。 </div>
+EOT;
+
 $lang->upgrade->versionNote = "務必選擇正確的版本，否則會造成數據丟失。";
 
 $lang->upgrade->fromVersions['1_1']      = '1.1.stable';

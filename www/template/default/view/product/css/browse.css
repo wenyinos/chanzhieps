@@ -16,7 +16,6 @@
 
 
 .table-list td{vertical-align:middle;}
-#modeControl a {padding: 7px; }
-#modeControl a:first-child{padding: 7px; margin-right:4px;}
+#modeControl a {padding: 3px; }
 body a{outline:none;blr:expression(this.onFocus=this.blur());}
 #modeControl a.selected{background: #166EFC;color:#FFF;}

@@ -119,7 +119,7 @@ class userModel extends model
      * 
      * @param mixed $account
      * @access public
-     * @return object           the user.
+     * @return object|bool           the user.
      */
     public function getByAccount($account)
     {
@@ -128,8 +128,7 @@ class userModel extends model
             ->beginIF(validater::checkEmail($account))->where('email')->eq($account)->fi()
             ->beginIF(!validater::checkEmail($account))->where('account')->eq($account)->fi()
             ->fetch();
-
-        if(!$user) return $user;
+        if(empty($user)) return false;
 
         if(!empty($user->realnames))
         {
