@@ -25,6 +25,7 @@ class uiModel extends model
         $folders = glob($this->app->getTplRoot() . '*');
         foreach($folders as $folder)
         {
+            if(!is_dir($folder)) continue;
             $templateName = str_replace($this->app->getTplRoot(), '', $folder);
             $docFile      = $folder . DS . 'doc' . DS . $this->app->getClientLang() . '.yaml';
             if(!is_file($docFile)) continue;
