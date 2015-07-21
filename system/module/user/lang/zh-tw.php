@@ -160,7 +160,7 @@ $lang->user->oauth->sina->clientSecret = 'App Secret';
 $lang->user->oauth->qq = new stdclass();
 $lang->user->oauth->qq->clientID     = 'APP ID';
 $lang->user->oauth->qq->clientSecret = 'APP KEY';
-$lang->user->oauth->qq->callbackURL  = '回調地址：http:://www.chanzhi.org/user-oauthcallback-qq.html';
+$lang->user->oauth->qq->callbackURL  = '回調地址：http://www.chanzhi.org/user-oauthcallback-qq.html';
 
 $lang->user->oauth->providers['sina'] = '新浪微博';
 $lang->user->oauth->providers['qq']   = 'QQ';
