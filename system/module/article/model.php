@@ -75,7 +75,7 @@ class articleModel extends model
 
     /** 
      * Get article list.
-     * 
+     *
      * @param  string  $type 
      * @param  array   $categories 
      * @param  string  $orderBy 
@@ -99,7 +99,8 @@ class articleModel extends model
         }
         else
         {
-            /* Get articles(use groupBy to distinct articles).  */
+            /*Get articles containing the search word (use groupBy to distinct articles).  */
+            $searchWord = $this->get->searchWord;
             $articles = $this->dao->select('t1.*, t2.category')->from(TABLE_ARTICLE)->alias('t1')
                 ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
                 ->where('t1.type')->eq($type)
@@ -108,6 +109,12 @@ class articleModel extends model
                 ->andWhere('t1.status')->eq('normal')
                 ->fi()
                 ->beginIf($categories)->andWhere('t2.category')->in($categories)->fi()
+                ->beginIf($searchWord)
+                ->andWhere('title')->like("%{$searchWord}%")
+                ->orWhere('keywords')->like("%{$searchWord}%")
+                ->orWhere('summary')->like("%{$searchWord}%")
+                ->orWhere('content')->like("%{$searchWord}%")
+                ->fi()
                 ->groupBy('t2.id')
                 ->orderBy($orderBy)
                 ->page($pager)

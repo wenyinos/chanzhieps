@@ -133,7 +133,8 @@ ol {padding-left: 20px;}
 .panel-actions{float: right;margin-top: -6px; margin-right: -12px;}
 .panel-heading > h1,.panel-heading > h2,.panel-heading > h3,.panel-heading > h4,.panel-heading > h5,.panel-heading > h6 {margin: 0}
 .panel-actions .btn.btn-link:hover{background: transparent;box-shadow: none;}
-.panel-actions .form-search{width: 300px;}
+.panel-actions .form-search{width: 300px; float: left;}
+.panel-actions a.btn{margin-left: 10px;}
 
 /* panel-block */
 .panel-block {transition: height 0.3s;}
