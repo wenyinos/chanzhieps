@@ -152,6 +152,7 @@ $lang->user->oauth->common       = '开放登录';
 $lang->user->oauth->provider     = '服务商';
 $lang->user->oauth->verification = '网站验证';
 $lang->user->oauth->widget       = '网页组件';
+$lang->user->oauth->callbackURL  = '回调地址';
 
 $lang->user->oauth->sina = new stdclass();
 $lang->user->oauth->sina->clientID     = 'App Key';
@@ -160,7 +161,7 @@ $lang->user->oauth->sina->clientSecret = 'App Secret';
 $lang->user->oauth->qq = new stdclass();
 $lang->user->oauth->qq->clientID     = 'APP ID';
 $lang->user->oauth->qq->clientSecret = 'APP KEY';
-$lang->user->oauth->qq->callbackURL  = '回调地址：http://www.chanzhi.org/user-oauthcallback-qq.html';
+$lang->user->oauth->qq->callbackURL  = 'http://%s/user-oauthcallback-qq.html';
 
 $lang->user->oauth->providers['sina'] = '新浪微博';
 $lang->user->oauth->providers['qq']   = 'QQ';

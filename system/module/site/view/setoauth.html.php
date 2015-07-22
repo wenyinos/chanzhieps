@@ -51,8 +51,8 @@
             <?php endif;?>
             <?php if($providerCode == 'qq'):?>
             <tr>
-              <th></th>
-              <td><div class='text-danger'><?php echo $lang->user->oauth->qq->callbackURL;?></div></td>
+              <th><?php echo $lang->user->oauth->callbackURL;?></th>
+              <td><?php printf($lang->user->oauth->qq->callbackURL, $this->server->http_host);?></td>
             </tr>
             <?php endif;?>
             <tr>
