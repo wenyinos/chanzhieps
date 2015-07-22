@@ -273,7 +273,8 @@ $lang->nav->menu = $lang->site->menu;
 
 /* Menu of search module. */
 $lang->search = new stdclass();
-$lang->search->menu = $lang->site->menu;
+$lang->search->menu   = $lang->site->menu;
+$lang->search->common = '搜索';
 
 /* Menu of slide module. */
 $lang->slide = new stdclass();

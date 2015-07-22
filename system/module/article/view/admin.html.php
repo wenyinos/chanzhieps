@@ -23,7 +23,23 @@
   <div class='panel-actions'><?php commonModel::printLink('article', 'create', "type={$type}", '<i class="icon-plus"></i> ' . $lang->page->create, 'class="btn btn-primary"');?></div>
   <?php else:?>
   <strong><i class="icon-list-ul"></i> <?php echo $lang->article->list;?></strong>
-  <div class='panel-actions'><?php commonModel::printLink('article', 'create', "type={$type}&category={$categoryID}", '<i class="icon-plus"></i> ' . $lang->article->create, 'class="btn btn-primary"');?></div>
+  <div class='panel-actions'>
+    <form method='get' class='form-inline form-search'>
+      <?php echo html::hidden('m', 'article');?>
+      <?php echo html::hidden('f', 'admin');?>
+      <?php echo html::hidden('type', $type);?>
+      <?php echo html::hidden('categoryID', $categoryID);?>
+      <?php echo html::hidden('orderBy', $orderBy);?>
+      <?php echo html::hidden('recTotal', $pager->recTotal);?>
+      <?php echo html::hidden('recPerPage', $pager->recPerPage);?>
+      <?php echo html::hidden('pageID', $pager->pageID);?>
+      <div class="input-group">
+        <?php echo html::input('searchWord', $this->get->searchWord, "class='form-control search-query'");?>
+        <span class="input-group-btn"><?php echo html::submitButton($lang->search->common, "btn btn-primary"); ?></span>
+      </div>
+    </form>
+    <?php commonModel::printLink('article', 'create', "type={$type}&category={$categoryID}", '<i class="icon-plus"></i> ' . $lang->article->create, 'class="btn btn-primary"');?>
+  </div>
   <?php endif;?>
   </div>
   <table class='table table-hover table-striped tablesorter'>
