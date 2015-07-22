@@ -5,7 +5,7 @@
  * @copyright Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
  * @author    chunsheng wang <chunsheng@cnezsoft.com> 
  * @package   OAuth
- * @license   LGPL
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @version   $Id$
  * @Link      http://www.chanzhi.org
  */

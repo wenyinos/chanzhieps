@@ -3,7 +3,7 @@
  * The setbasic view file of site module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      xiying Guang <guanxiying@xirangit.com>
  * @package     site
  * @version     $Id$
@@ -51,8 +51,8 @@
             <?php endif;?>
             <?php if($providerCode == 'qq'):?>
             <tr>
-              <th></th>
-              <td><div class='text-danger'><?php echo $lang->user->oauth->qq->callbackURL;?></div></td>
+              <th><?php echo $lang->user->oauth->callbackURL;?></th>
+              <td><?php printf($lang->user->oauth->qq->callbackURL, $this->server->http_host);?></td>
             </tr>
             <?php endif;?>
             <tr>
