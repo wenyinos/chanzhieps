@@ -31,6 +31,7 @@ if(!isset($config->installed) or !$config->installed) die(header('location: inst
 
 /* Connect to db, load module. */
 $common = $app->loadCommon();
+$common->checkDomain();
 
 /* Check site status. */
 if($app->config->site->status == 'pause')
