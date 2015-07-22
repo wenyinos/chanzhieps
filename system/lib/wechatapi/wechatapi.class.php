@@ -3,7 +3,7 @@
  * The wechat class file of chanzhiEPS.
  *
  * @copyright   Copyright 2013-2014 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     LGPL
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     lib
  * @version     $Id$
