@@ -3,10 +3,10 @@
  * The html template file of step4 method of install module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
- * @author	  Chunsheng Wang <chunsheng@cnezsoft.com>
- * @package	  chanzhiEPS
- * @version	  $Id: step4.html.php 867 2010-06-17 09:32:58Z wwccss $
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
+ * @author	    Chunsheng Wang <chunsheng@cnezsoft.com>
+ * @package	    chanzhiEPS
+ * @version	    $Id: step4.html.php 867 2010-06-17 09:32:58Z wwccss $
  */
 ?>
 <?php include '../../common/view/header.lite.html.php';?>

@@ -3,7 +3,7 @@
  * The model file of common module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     common
  * @version     $Id$
@@ -241,6 +241,60 @@ class commonModel extends model
 
         return false;
     }   
+
+    /**
+     * Check domain and header 301.
+     * 
+     * @access public
+     * @return void
+     */
+    public function checkDomain()
+    {
+        if(RUN_MODE == 'install' or RUN_MODE == 'upgrade' or RUN_MODE == 'shell' or RUN_MODE == 'admin' or !$this->config->installed) return true;
+
+        $domains    = isset($this->config->site->allowedDomain) ? $this->config->site->allowedDomain : '';
+        $domains    = str_replace(array('http://', 'https://'), '', $domains);
+        $mainDomain = isset($this->config->site->domain) ? $this->config->site->domain : '';
+        $mainDomain = str_replace(array('http://', 'https://'), '', $mainDomain);
+        $host       = $this->server->http_host;
+
+        /* Check domain is allowed. */
+        if(!empty($domains))
+        {
+            $allowed   = false;
+            $domains   = explode(',', str_replace('，', ',', $domains));
+            $domains[] = $mainDomain;
+            foreach($domains as $domain)
+            {
+                if(empty($domain)) continue;
+                if(strpos($host, $domain) !== false and substr($host, strpos($host, $domain)) == $domain)
+                {
+                    $allowed = true;
+                    break;
+                }
+            }
+            if(!$allowed) die('domain denied.');
+        }
+
+        /* Check main domain. */
+        $redirect    = false;
+        $redirectURI = getWebRoot(true) . $this->app->getURI();
+        if($mainDomain and $mainDomain != $host)
+        {
+            $redirect = true;
+            $redirectURI = str_replace($host, $mainDomain, $redirectURI);
+        }
+
+        /* Check scheme. */
+        $scheme = isset($this->config->site->scheme) ? $this->config->site->scheme : 'http';
+        if(strpos($redirectURI, $scheme . '://') !== 0)
+        {
+            $redirect = true;
+            $redirectURI = $scheme . substr($redirectURI, strpos($redirectURI, '://'));
+        }
+
+        if($redirect) header301($redirectURI);
+    }
 
     /**
      * Create the main menu.

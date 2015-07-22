@@ -3,7 +3,7 @@
  * The router file of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     chanzhiEPS
  * @version     $Id$
@@ -31,6 +31,7 @@ if(!isset($config->installed) or !$config->installed) die(header('location: inst
 
 /* Connect to db, load module. */
 $common = $app->loadCommon();
+$common->checkDomain();
 
 /* Check site status. */
 if($app->config->site->status == 'pause')
