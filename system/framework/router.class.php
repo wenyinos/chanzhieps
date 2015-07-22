@@ -300,7 +300,6 @@ class router
 
         $this->setClientLang();
         $this->fixLangConfig();
-        $this->fixDomain();
         $this->loadLang('common');
         $this->setTimezone();
 
@@ -697,63 +696,6 @@ class router
     public function getTplRoot()
     {
         return $this->tplRoot;
-    }
-
-    /**
-     * Check domain exisits and header 301.
-     * 
-     * @access public
-     * @return void
-     */
-    public function fixDomain()
-    {
-        if(RUN_MODE == 'install' or RUN_MODE == 'upgrade' or RUN_MODE == 'shell' or RUN_MODE == 'admin' or !$this->config->installed) return true;
-
-        /* Check domain is allowed. */
-        $domains = $this->dbh->query("select value from " . TABLE_CONFIG . " where owner = 'system' and module = 'common' and section = 'site' and `key` = 'allowedDomain' and `lang` in ('all', '$this->clientLang')")->fetch();
-        if(!empty($domains) and !empty($domains->value))
-        {
-            $allowed = false;
-            $domains = explode(',', str_replace('，', ',', $domains->value));
-            foreach($domains as $domain)
-            {
-                $domain   = str_replace('http://', '', $domain);
-                $tmpCode  = helper::getSiteCode($domain);
-                $siteCode = helper::getSiteCode($this->server->http_host);
-                if($siteCode == $tmpCode)
-                {
-                    $allowed = true;
-                    break;
-                }
-            }
-            if(!$allowed) die('domain denied.');
-        }
-
-        $result = $this->dbh->query("select value from " . TABLE_CONFIG . " where owner = 'system' and module = 'common' and section = 'site' and `key` = 'domain' and `lang` in ('all', '$this->clientLang')")->fetch();
-        $mainDomain = !empty($result->value) ? $result->value : '';
-        $mainDomain = str_replace('http://', '', $mainDomain);
-        $mainDomain = str_replace('https://', '', $mainDomain);
-        $webRoot = getWebRoot(true);
-        $currentURI = rtrim($webRoot, '/') . $this->server->request_uri;
-
-        $redirect    = false;
-        $redirectURI = $currentURI;
-        if($mainDomain and strpos($webRoot, $mainDomain) == false)
-        {
-            $redirect = true;
-            $redirectURI = str_replace($this->server->http_host, $mainDomain, $currentURI);
-        }
-
-        /* check scheme. */
-        $result = $this->dbh->query("select value from " . TABLE_CONFIG . " where owner = 'system' and module = 'common' and section = 'site' and `key` = 'scheme' and `lang` in ('all', '$this->clientLang')")->fetch();
-        $scheme = !empty($result->value) ? $result->value : 'http';
-        if(strpos($redirectURI, $scheme . '://') !== 0)
-        {
-            $redirect = true;
-            $redirectURI = $scheme . substr($redirectURI, strpos($redirectURI, '://'));
-        }
-
-        if($redirect) header301($redirectURI);
     }
 
     //-------------------- Client environment related functions --------------------//
