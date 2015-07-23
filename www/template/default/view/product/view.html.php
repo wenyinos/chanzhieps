@@ -60,20 +60,23 @@ js::execute($product->js);
             <ul class='list-unstyled meta-list'>
               <?php
               $attributeHtml = '';
-              if($product->promotion != 0)
+              if(!$product->unsaleable)
               {
-                  if($product->price != 0)
+                  if($product->promotion != 0)
+                  {
+                      if($product->price != 0)
+                      {
+                          $attributeHtml .= "<li><span class='meta-name'>" . $lang->product->price . "</span>";
+                          $attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . $lang->product->currencySymbols[$this->config->product->currency] . "</span> <del><strong class='text-latin'>" . $product->price . "</del></strong></span></li>";
+                      }
+                      $attributeHtml .= "<li><span class='meta-name'>" . $lang->product->promotion . "</span>";
+                      $attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . $lang->product->currencySymbols[$this->config->product->currency] . "</span> <strong class='text-danger text-latin text-lg'>" . $product->promotion . "</strong></span></li>";
+                  }
+                  else if($product->price != 0)
                   {
                       $attributeHtml .= "<li><span class='meta-name'>" . $lang->product->price . "</span>";
-                      $attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . $lang->product->currencySymbols[$this->config->product->currency] . "</span> <del><strong class='text-latin'>" . $product->price . "</del></strong></span></li>";
+                      $attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . $lang->product->currencySymbols[$this->config->product->currency] . "</span> <strong class='text-important text-latin text-lg'>" . $product->price . "</strong></span></li>";
                   }
-                  $attributeHtml .= "<li><span class='meta-name'>" . $lang->product->promotion . "</span>";
-                  $attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . $lang->product->currencySymbols[$this->config->product->currency] . "</span> <strong class='text-danger text-latin text-lg'>" . $product->promotion . "</strong></span></li>";
-              }
-              else if($product->price != 0)
-              {
-                  $attributeHtml .= "<li><span class='meta-name'>" . $lang->product->price . "</span>";
-                  $attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . $lang->product->currencySymbols[$this->config->product->currency] . "</span> <strong class='text-important text-latin text-lg'>" . $product->price . "</strong></span></li>";
               }
               if($product->amount)
               {
@@ -116,7 +119,7 @@ js::execute($product->js);
               ?>
             </ul>
             <?php if(empty($attributeHtml)) echo '<div class="product-summary">' . $product->desc . '</div>'; ?>
-            <?php if(commonModel::isAvailable('order')):?>
+            <?php if(!$product->unsaleable and commonModel::isAvailable('order')):?>
             <ul class='list-unstyled meta-list'>
               <li id='countBox'>
                 <span class='meta-name'><?php echo $lang->product->count; ?></span>
@@ -134,7 +137,7 @@ js::execute($product->js);
               <label class='btn-cart'><?php echo $lang->product->addToCart;?></label>
             </span>
             <?php endif;?>
-            <?php if(!commonModel::isAvailable('order') and $product->mall):?>
+            <?php if(!commonModel::isAvailable('order') and !$product->unsaleable and $product->mall):?>
             <hr>
             <div class='btn-gobuy'>
               <?php echo html::a(inlink('redirect', "id={$product->id}"), $lang->product->buyNow, "class='btn btn-lg btn-primary' target='_blank'");?>

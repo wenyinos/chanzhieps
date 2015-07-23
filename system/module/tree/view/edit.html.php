@@ -40,6 +40,15 @@ $themeRoot = $webRoot . "theme/";
               </label>
             </span>
             <?php endif;?>
+            <?php if($category->type == 'product'):?>
+            <span class="input-group-addon">
+              <label class='checkbox'>
+                <?php $checked = $category->unsaleable ? 'checked' : '';?>
+                <input type='checkbox' name='unsaleable' id='unsaleable' value='1' <?php echo $checked;?> />
+                <span><?php echo $lang->category->unsaleable;?></span>
+              </label>
+            </span>
+            <?php endif;?>
           </div>
         </div>
       </div>

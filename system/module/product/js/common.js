@@ -36,4 +36,20 @@ $(document).ready(function()
     })
 
     if(v.categoryID !== 0) $('.tree #category' + v.categoryID).addClass('active');
+
+    $('#unsaleable').change(function()
+    {   
+        if($(this).prop('checked'))
+        {   
+            $('#price').parents('tr').hide();
+            $('#brand').parents('tr').find('th').attr('rowspan', '3');
+        }   
+        else
+        {   
+            $('#price').parents('tr').show();
+            $('#brand').parents('tr').find('th').attr('rowspan', '4');
+        }   
+    }); 
+
+    $('#unsaleable').change();
 })

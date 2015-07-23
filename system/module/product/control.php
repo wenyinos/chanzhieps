@@ -139,10 +139,12 @@ class product extends control
 
         $maxID = $this->dao->select('max(id) as maxID')->from(TABLE_PRODUCT)->fetch('maxID');
 
-        $this->view->title           = $this->lang->product->create;
-        $this->view->currentCategory = $categoryID;
-        $this->view->categories      = $categories;
-        $this->view->order           = $maxID + 1;
+        if($categoryID) $this->view->currentCategory = $this->tree->getByID($categoryID);
+
+        $this->view->title      = $this->lang->product->create;
+        $this->view->categoryID = $categoryID;
+        $this->view->categories = $categories;
+        $this->view->order      = $maxID + 1;
         $this->display();
     }
 

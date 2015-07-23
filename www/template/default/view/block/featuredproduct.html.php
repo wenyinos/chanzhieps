@@ -28,20 +28,23 @@ $url      = helper::createLink('product', 'view', "id={$product->id}", "category
         <strong><?php echo $product->name; ?></strong>
         <span class='text-latin'>
         <?php
-        if($product->promotion != 0)
+        if(!$product->unsaleable)
         {
-            echo "&nbsp;&nbsp;<strong class='text-danger'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency) . $product->promotion . '</strong>';
-            if($product->price != 0)
+            if($product->promotion != 0)
             {
-                echo "&nbsp;&nbsp;<del class='text-muted'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency) . $product->price .'</del>';
+                echo "&nbsp;&nbsp;<strong class='text-danger'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency) . $product->promotion . '</strong>';
+                if($product->price != 0)
+                {
+                    echo "&nbsp;&nbsp;<del class='text-muted'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency) . $product->price .'</del>';
+                }
             }
-        }
-        else
-        {
-            if($product->price != 0)
+            else
             {
-                echo "<span class='text-muted'> " . zget($this->lang->product->currencySymbols, $this->config->product->currency) . "</span> ";
-                echo "<strong class='text-important'>" . $product->price . '</strong>&nbsp;&nbsp;';
+                if($product->price != 0)
+                {
+                    echo "<span class='text-muted'> " . zget($this->lang->product->currencySymbols, $this->config->product->currency) . "</span> ";
+                    echo "<strong class='text-important'>" . $product->price . '</strong>&nbsp;&nbsp;';
+                }
             }
         }
         ?>

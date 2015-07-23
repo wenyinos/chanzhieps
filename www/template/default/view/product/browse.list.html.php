@@ -20,10 +20,26 @@
           <?php echo html::a(inlink('view', "id={$product->id}", "category={$product->category->alias}&name=$product->alias"), '<strong>' . $product->name . '</strong>');?>
         </td>
         <td>
-          <?php echo "<strong class='text-danger'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->price . '</strong>&nbsp;&nbsp;'; ?>
+          <?php
+          if(!$product->unsaleable)
+          {
+              if($product->promotion != 0)
+              {
+                  echo "<strong class='text-muted'>"  .'</strong>';
+                  echo "<strong class='text-danger'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->promotion . '</strong>&nbsp;&nbsp;';
+              }
+              else
+              {
+                  if($product->price != 0)
+                  {
+                      echo "<strong class='text-danger'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->price . '</strong>&nbsp;&nbsp;';
+                  }
+              }
+          }
+          ?>
         </td>
         <td class="w-100px">
-          <?php if(commonModel::isAvailable('order')):?>
+          <?php if(!$product->unsaleable and commonModel::isAvailable('order')):?>
           <?php echo html::a(inlink('view', "id={$product->id}", "category={$product->category->alias}&name=$product->alias"), $lang->product->buyNow, "class='btn btn-xs btn-success'")?>
           <?php else:?>
           <?php echo html::a(inlink('view', "id={$product->id}", "category={$product->category->alias}&name=$product->alias"), $lang->product->detail, "class='btn btn-xs btn-success'")?>

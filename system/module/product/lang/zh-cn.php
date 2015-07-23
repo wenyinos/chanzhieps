@@ -39,6 +39,7 @@ $lang->product->views      = '浏览';
 $lang->product->viewsCount = '浏览次数';
 $lang->product->stick      = '置顶级别';
 $lang->product->order      = '排序';
+$lang->product->unsaleable = '非卖品';
 $lang->product->attribute  = '产品属性';
 $lang->product->custom     = '自定义属性';
 $lang->product->sales      = '产品定价';
