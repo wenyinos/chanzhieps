@@ -40,7 +40,8 @@
         if($file->isImage)
         {
             $imageHtml .= "<li class='file-image file-{$file->extension}'>";
-            $imageHtml .= html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL) . "<div class='file-source'>" . $file->fullURL . "</div>", "target='_blank' data-toggle='lightbox'");
+            $imageHtml .= html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank' data-toggle='lightbox'");
+            $imageHtml .= "<div class='file-source'>" . $file->fullURL . "</div>";
             $imageHtml .= "<span class='file-actions'>";
             $imageHtml .= html::a(helper::createLink('file', 'sourcedelete', "id=$file->id"), "<i class='icon-trash'></i>", "class='deleter'");
             $imageHtml .= html::a(helper::createLink('file', 'sourceedit', "id=$file->id"), "<i class='icon-edit'></i>", "data-toggle='modal'");
@@ -51,7 +52,8 @@
         {
             $file->title = $file->title . ".$file->extension";
             $fileHtml .= "<li class='file file-{$file->extension}'>";
-            $fileHtml .= html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title . "<div class='file-source'>" . $file->fullURL . "</div>", "target='_blank'");
+            $fileHtml .= html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'");
+            $fileHtml .= "<div class='file-source'>" . $file->fullURL . "</div>";
             $fileHtml .= "<span class='file-actions'>";
             $fileHtml .= html::a(helper::createLink('file', 'sourcedelete', "id=$file->id"), "<i class='icon-trash'></i>", "class='deleter'");
             $fileHtml .= html::a(helper::createLink('file', 'sourceedit', "id=$file->id"), "<i class='icon-edit'></i>", "data-toggle='modal'");
@@ -67,14 +69,15 @@
   <div id='listView' class='hide'>
     <table class='table table-bordered'>
       <thead>
-        <tr>
-          <th class='text-center w-60px'><?php echo $lang->file->id;?></th>
-          <th class='text-center'><?php echo $lang->file->source;?></th>
-          <th class='text-center w-60px'><?php echo $lang->file->extension;?></th>
-          <th class='text-center w-80px'><?php echo $lang->file->size;?></th>
-          <th class='text-center w-100px'><?php echo $lang->file->addedBy;?></th>
-          <th class='text-center w-160px'><?php echo $lang->file->addedDate;?></th>
-          <th class='text-center w-150px'><?php echo $lang->actions;?></th>
+        <tr class='text-center'>
+          <th class=' w-60px'><?php echo $lang->file->id;?></th>
+          <th><?php echo $lang->file->source;?></th>
+          <th><?php echo $lang->file->sourceURI;?></th>
+          <th class='w-60px'><?php echo $lang->file->extension;?></th>
+          <th class='w-80px'><?php echo $lang->file->size;?></th>
+          <th class='w-100px'><?php echo $lang->file->addedBy;?></th>
+          <th class='w-160px'><?php echo $lang->file->addedDate;?></th>
+          <th class='w-80px'><?php echo $lang->actions;?></th>
         </tr>
       </thead>
       <tbody>
@@ -93,17 +96,16 @@
             }
             ?>
           </td>
+          <td class='text-left'><?php echo $file->fullURL;?></td>
           <td><?php echo $file->extension;?></td>
           <td><?php echo number_format($file->size / 1024 , 1) . 'K';?></td>
           <td><?php echo isset($users[$file->addedBy]) ? $users[$file->addedBy] : '';?></td>
           <td><?php echo $file->addedDate;?></td>
           <td class='text-center'>
-          <?php
-          $fullURL = html::input('', $file->fullURL, "size='" . strlen($file->fullURL) . "' style='border:none; background:none;' onmouseover='this.select()'");
-          commonModel::printLink('file', 'sourcedelete', "id=$file->id", $lang->delete, "class='deleter'");
-          commonModel::printLink('file', 'sourceedit',   "id=$file->id", $lang->edit, "data-toggle='modal'");
-          echo html::a('javascript:void(0)', $lang->file->sourceURI, "data-toggle='modal' data-custom=\"$fullURL\"");
-          ?>
+            <?php
+            commonModel::printLink('file', 'sourceedit',   "id=$file->id", $lang->edit, "data-toggle='modal'");
+            commonModel::printLink('file', 'sourcedelete', "id=$file->id", $lang->delete, "class='deleter'");
+            ?>
           </td>
         </tr>
         <?php endforeach;?>          

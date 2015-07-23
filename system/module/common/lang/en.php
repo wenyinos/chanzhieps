@@ -120,7 +120,7 @@ $lang->sitemap->common = 'Sitemap';
 /* The main menus. */
 $lang->menu = new stdclass();
 $lang->menu->admin    = 'Home|admin|index|';
-$lang->menu->article  = 'Article|article|admin|';
+$lang->menu->article  = 'Article|article|admin|type=article';
 $lang->menu->blog     = 'Blog|article|admin|type=blog';
 $lang->menu->product  = 'Product|product|admin|';
 $lang->menu->book     = 'Book|book|admin|';

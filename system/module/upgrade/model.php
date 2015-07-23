@@ -108,6 +108,9 @@ class upgradeModel extends model
                 $this->updateBlockTheme();
                 $this->updateLayoutTheme();
                 $this->moveBaseStyle();
+            case '4_3_beta':
+                $this->execSQL($this->getUpgradeFile('4.3.beta'));
+                $this->setDefaultEnableModules();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -154,6 +157,7 @@ class upgradeModel extends model
             case '4_1_beta' : $confirmContent .= file_get_contents($this->getUpgradeFile('4.1.beta'));
             case '4_2';
             case '4_2_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('4.2.1'));
+            case '4_3_beta' : $confirmContent .= file_get_contents($this->getUpgradeFile('4.3.beta'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
@@ -1376,5 +1380,18 @@ class upgradeModel extends model
         $setting  = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true): array();
         $setting[$template->name][$template->theme]['css'] = isset($this->config->site->basestyle) ? $this->config->site->basestyle : '';
         return $this->loadModel('setting')->setItems('system.common.template', array('custom' => helper::jsonEncode($setting)));
+    }
+
+    /**
+     * Set default enable modules when upgrade from 4.3.beta.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function setDefaultEnableModules()
+    {
+        $modules = $this->config->site->modules . ',article,page,product';
+        $this->dao->update(TABLE_CONFIG)->set('`value`')->eq($modules)->where('`key`')->eq('modules')->andWhere('section')->eq('site')->exec();
+        return !dao::isError();
     }
 }
