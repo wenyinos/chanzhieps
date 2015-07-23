@@ -85,6 +85,8 @@ class articleModel extends model
      */
     public function getList($type, $categories, $orderBy, $pager = null)
     {
+        $searchWord = $this->get->searchWord;
+        $categoryID   = $this->get->categoryID;
         if($type == 'page')
         {
             $articles = $this->dao->select('*')->from(TABLE_ARTICLE)
@@ -93,6 +95,12 @@ class articleModel extends model
                 ->andWhere('addedDate')->le(helper::now())
                 ->andWhere('status')->eq('normal')
                 ->fi()
+                ->beginIf($searchWord)
+                ->andWhere('title')->like("%{$searchWord}%")
+                ->orWhere('keywords')->like("%{$searchWord}%")->andWhere('type')->eq($type)
+                ->orWhere('summary')->like("%{$searchWord}%")->andWhere('type')->eq($type)
+                ->orWhere('content')->like("%{$searchWord}%")->andWhere('type')->eq($type)
+                ->fi()
                 ->orderBy('id_desc')
                 ->page($pager)
                 ->fetchAll('id');
@@ -100,20 +108,21 @@ class articleModel extends model
         else
         {
             /*Get articles containing the search word (use groupBy to distinct articles).  */
-            $searchWord = $this->get->searchWord;
             $articles = $this->dao->select('t1.*, t2.category')->from(TABLE_ARTICLE)->alias('t1')
                 ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
                 ->where('t1.type')->eq($type)
                 ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')
                 ->andWhere('t1.addedDate')->le(helper::now())
-                ->andWhere('t1.status')->eq('normal')
-                ->fi()
+                ->andWhere('t1.status')->eq('normal') ->fi()
                 ->beginIf($categories)->andWhere('t2.category')->in($categories)->fi()
                 ->beginIf($searchWord)
                 ->andWhere('title')->like("%{$searchWord}%")
-                ->orWhere('keywords')->like("%{$searchWord}%")
-                ->orWhere('summary')->like("%{$searchWord}%")
-                ->orWhere('content')->like("%{$searchWord}%")
+                ->orWhere('keywords')->like("%{$searchWord}%")->andWhere('t1.type')
+                ->orWhere('summary')->like("%{$searchWord}%")->andWhere('t1.type')
+                ->orWhere('content')->like("%{$searchWord}%")->andWhere('t1.type')
+                ->fi()
+                ->beginif($searchWord & $categoryID != 0)
+                ->andWhere('t2.category')->eq($categoryID)
                 ->fi()
                 ->groupBy('t2.id')
                 ->orderBy($orderBy)
