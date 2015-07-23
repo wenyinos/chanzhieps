@@ -396,7 +396,7 @@ class commonModel extends model
             list($label, $module, $method, $vars) = explode('|', $methodLink);
             if($chevron) $label .= '<i class="icon-chevron-right"></i>';
 
-            if($module != 'user' and !commonModel::isAvailable($module)) continue;
+            if($module != 'user' and $module != 'article' and !commonModel::isAvailable($module)) continue;
             if(commonModel::hasPriv($module, $method))
             {
                 $class = '';
