@@ -76,7 +76,10 @@ $config->file->maxSize = 2 * 1024 * 1024;  // Max size allowed(Byte).
 
 /* Module dependence setting. */
 $config->dependence = new stdclass();
+$config->dependence->article[] = 'article';
 $config->dependence->blog[]    = 'blog';
+$config->dependence->page[]    = 'page';
+$config->dependence->product[] = 'product';
 $config->dependence->book[]    = 'book';
 $config->dependence->user[]    = 'user';
 $config->dependence->forum[]   = 'forum';

@@ -18,22 +18,28 @@
   <div class='panel-body'>
     <form method='post' id='ajaxForm' enctype='multipart/form-data'>
       <table class='table table-form w-p60'>
+        <?php if(strpos($this->config->site->modules, 'product') !== false):?>
         <tr>
           <th class='w-200px'><?php echo $lang->ui->productView;?></th>
           <td class='w-p30'><?php echo html::radio('productView', $lang->ui->productViewList, isset($this->config->ui->productView) ? $this->config->ui->productView : '1');?></td><td></td>
         </tr>
+        <?php endif;?>
         <tr>
-          <th><?php echo $lang->ui->QRCode;?></th>
-          <td><?php echo html::radio('QRCode', $lang->ui->QRCodeList, isset($this->config->ui->QRCode) ? $this->config->ui->QRCode : '1');?></td><td></td>
+          <th class='w-200px'><?php echo $lang->ui->QRCode;?></th>
+          <td class='w-p30'><?php echo html::radio('QRCode', $lang->ui->QRCodeList, isset($this->config->ui->QRCode) ? $this->config->ui->QRCode : '1');?></td><td></td>
         </tr>
+        <?php if(strpos($this->config->site->modules, 'article') !== false):?>
         <tr>
           <th><?php echo $lang->site->customizableList->article;?></th> 
           <td><?php echo html::input('articleRec', !empty($this->config->site->articleRec) ? $this->config->site->articleRec : $this->config->article->recPerPage, "class='form-control'");?></td><td></td>
         </tr>
+        <?php endif;?>
+        <?php if(strpos($this->config->site->modules, 'product') !== false):?>
         <tr>
           <th><?php echo $lang->site->customizableList->product;?></th> 
           <td><?php echo html::input('productRec', !empty($this->config->site->productRec) ? $this->config->site->productRec : $this->config->product->recPerPage, "class='form-control'");?></td><td></td>
         </tr>
+        <?php endif;?>
         <?php if(strpos($this->config->site->modules, 'blog') !== false):?>
         <tr>
           <th><?php echo $lang->site->customizableList->blog;?></th> 
