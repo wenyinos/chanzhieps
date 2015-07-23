@@ -38,7 +38,11 @@ class productModel extends model
 
         /* Get product path to highlight main nav. */
         $path = '';
-        foreach($product->categories as $category) $path .= $category->path;
+        foreach($product->categories as $category)
+        {
+            $path .= $category->path;
+            if($category->unsaleable and !$product->unsaleable) $product->unsaleable = 1;
+        }
         $product->path = explode(',', trim($path, ','));
 
         /* Get product attributes. */
@@ -95,7 +99,7 @@ class productModel extends model
         if(!$products) return array();
 
         /* Get categories for these products. */
-        $categories = $this->dao->select('t2.id, t2.name, t2.alias, t1.id AS product')
+        $categories = $this->dao->select('t2.id, t2.name, t2.alias, t2.unsaleable, t1.id AS product')
             ->from(TABLE_RELATION)->alias('t1')
             ->leftJoin(TABLE_CATEGORY)->alias('t2')->on('t1.category = t2.id')
             ->where('t2.type')->eq('product')
@@ -104,6 +108,14 @@ class productModel extends model
         /* Assign categories to it's product. */
         foreach($products as $product) $product->categories = !empty($categories[$product->id]) ? $categories[$product->id] : array();
         foreach($products as $product) $product->category = current($product->categories);
+
+        foreach($products as $product)
+        {
+            foreach($product->categories as $category)
+            {
+                if($category->unsaleable and !$product->unsaleable) $product->unsaleable = 1;
+            }
+        }
 
         /* Get images for these products. */
         $images = $this->loadModel('file')->getByObject('product', array_keys($products), $isImage = true);

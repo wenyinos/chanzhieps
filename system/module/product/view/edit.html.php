@@ -31,11 +31,18 @@
           <th><?php echo $lang->product->name;?></th>
           <td colspan='2'>
             <div class='row order'>
-              <div class='col-sm-10'><?php echo html::input('name', $product->name, "class='form-control'");?></div>
-              <div class='col-sm-2'>
+              <div class='col-sm-9'><?php echo html::input('name', $product->name, "class='form-control'");?></div>
+              <div class='col-sm-3'>
                 <div class="input-group">
                   <span class="input-group-addon"><?php echo $lang->product->order;?></span>
                   <?php echo html::input('order', $product->order, "class='form-control'");?>
+                  <span class="input-group-addon">
+                    <label class='checkbox'>
+                      <?php $checked = $product->unsaleable ? 'checked' : '';?>
+                      <input type='checkbox' name='unsaleable' id='unsaleable' value='1' <?php echo $checked;?>/>
+                      <span><?php echo $lang->product->unsaleable;?></span>
+                    </label>
+                  </span>
                 </div>
               </div>
             </div>
