@@ -163,7 +163,6 @@ $lang->blog->menu->browse = '所有博客|article|admin|type=blog';
 $lang->page = new stdclass();
 $lang->page->menu = new stdclass();
 $lang->page->menu->browse = array('link' => '单页列表|article|admin|type=page', 'alias' => 'edit');
-$lang->page->menu->create = '添加单页|article|create|type=page';
 
 /* Menu of product module. */
 $lang->product = new stdclass();
