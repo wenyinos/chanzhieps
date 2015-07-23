@@ -86,7 +86,7 @@ class articleModel extends model
     public function getList($type, $categories, $orderBy, $pager = null)
     {
         $searchWord = $this->get->searchWord;
-        $categoryID   = $this->get->categoryID;
+        $categoryID = $this->get->categoryID;
         if($type == 'page')
         {
             $articles = $this->dao->select('*')->from(TABLE_ARTICLE)
@@ -113,16 +113,26 @@ class articleModel extends model
                 ->where('t1.type')->eq($type)
                 ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')
                 ->andWhere('t1.addedDate')->le(helper::now())
-                ->andWhere('t1.status')->eq('normal') ->fi()
-                ->beginIf($categories)->andWhere('t2.category')->in($categories)->fi()
-                ->beginIf($searchWord)
-                ->andWhere('title')->like("%{$searchWord}%")
-                ->orWhere('keywords')->like("%{$searchWord}%")->andWhere('t1.type')->eq($type)
-                ->orWhere('summary')->like("%{$searchWord}%")->andWhere('t1.type')->eq($type)
-                ->orWhere('content')->like("%{$searchWord}%")->andWhere('t1.type')->eq($type)
+                ->andWhere('t1.status')->eq('normal')
                 ->fi()
-                ->beginIf($searchWord && $categoryID != 0)
-                ->andWhere('t2.category')->eq($categoryID)
+                ->beginIf($searchWord)
+
+                ->andWhere('title')->like("%{$searchWord}%")
+                ->andWhere('t1.type')->eq($type)
+                ->beginIf($categories)->andWhere('t2.category')->in($categories)->fi()
+
+                ->orWhere('keywords')->like("%{$searchWord}%")
+                ->andWhere('t1.type')->eq($type)
+                ->beginIf($categories)->andWhere('t2.category')->in($categories)->fi()
+
+                ->orWhere('summary')->like("%{$searchWord}%")
+                ->andWhere('t1.type')->eq($type)
+                ->beginIf($categories)->andWhere('t2.category')->in($categories)->fi()
+
+                ->orWhere('content')->like("%{$searchWord}%")
+                ->andWhere('t1.type')->eq($type)
+                ->beginIf($categories)->andWhere('t2.category')->in($categories)->fi()
+
                 ->fi()
                 ->groupBy('t2.id')
                 ->orderBy($orderBy)
