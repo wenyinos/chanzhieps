@@ -39,7 +39,7 @@ class productModel extends model
         /* Get product path to highlight main nav. */
         $path = '';
         foreach($product->categories as $category)
-        {
+        {   
             $path .= $category->path;
             if($category->unsaleable and !$product->unsaleable) $product->unsaleable = 1;
         }
@@ -84,14 +84,43 @@ class productModel extends model
      * @access public
      * @return array
      */
-    public function getList($categories, $orderBy, $pager = null)
-    {
+    public function getList($categories, $orderBy, $pager = null) 
+    {   
+        $searchWord = $this->get->searchWord;
+        $categoryID = $this->get->categoryID;
         /* Get products(use groupBy to distinct products).  */
         $products = $this->dao->select('t1.*, t2.category')->from(TABLE_PRODUCT)->alias('t1')
             ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
             ->where('1 = 1')
             ->beginIF($categories)->andWhere('t2.category')->in($categories)->fi()
             ->beginIF(RUN_MODE == 'front')->andWhere('t1.status')->eq('normal')->fi()
+            ->beginIF($searchWord)
+
+            ->andWhere('name')->like("%{$searchWord}%")
+            ->beginIF($categories)->andWhere('t2.category')->in($categories)->fi()
+
+            ->orWhere('brand')->like("%{$searchWord}%")
+            ->beginIF($categories)->andWhere('t2.category')->in($categories)->fi()
+
+            ->orWhere('model')->like("%{$searchWord}%")
+            ->beginIF($categories)->andWhere('t2.category')->in($categories)->fi()
+            
+            ->orWhere('color')->like("%{$searchWord}%")
+            ->beginIF($categories)->andWhere('t2.category')->in($categories)->fi()
+
+            ->orWhere('origin')->like("%{$searchWord}%")
+            ->beginIF($categories)->andWhere('t2.category')->in($categories)->fi()
+
+            ->orWhere('keywords')->like("%{$searchWord}%")
+            ->beginIF($categories)->andWhere('t2.category')->in($categories)->fi()
+
+            ->orWhere('`desc`')->like("%{$searchWord}%")
+            ->beginIF($categories)->andWhere('t2.category')->in($categories)->fi()
+
+            ->orWhere('content')->like("%{$searchWord}%")
+            ->beginIF($categories)->andWhere('t2.category')->in($categories)->fi()
+            
+            ->fi()
             ->groupBy('t2.id')
             ->orderBy($orderBy)
             ->page($pager)
@@ -116,7 +145,6 @@ class productModel extends model
                 if($category->unsaleable and !$product->unsaleable) $product->unsaleable = 1;
             }
         }
-
         /* Get images for these products. */
         $images = $this->loadModel('file')->getByObject('product', array_keys($products), $isImage = true);
 
