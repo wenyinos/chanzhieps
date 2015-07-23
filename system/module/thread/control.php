@@ -128,7 +128,7 @@ class thread extends control
     public function view($threadID, $pageID = 1)
     {
         $thread = $this->thread->getByID($threadID);
-        if(!$thread) die(js::locate('back'));
+        if(!$thread or $thread->hidden) die(js::locate('back'));
 
         if($thread->link)
         {

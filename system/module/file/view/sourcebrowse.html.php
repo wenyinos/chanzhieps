@@ -39,22 +39,22 @@
         $fullURL = html::input('', $file->fullURL, "size='" . strlen($file->fullURL) . "' style='border:none; background:none;' onmouseover='this.select()'");
         if($file->isImage)
         {
-            $imageHtml .= "<li class='file-image file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank' data-toggle='lightbox'");
+            $imageHtml .= "<li class='file-image file-{$file->extension}'>";
+            $imageHtml .= html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL) . "<div class='file-source'>" . $file->fullURL . "</div>", "target='_blank' data-toggle='lightbox'");
             $imageHtml .= "<span class='file-actions'>";
             $imageHtml .= html::a(helper::createLink('file', 'sourcedelete', "id=$file->id"), "<i class='icon-trash'></i>", "class='deleter'");
             $imageHtml .= html::a(helper::createLink('file', 'sourceedit', "id=$file->id"), "<i class='icon-edit'></i>", "data-toggle='modal'");
-            $imageHtml .= html::a('javascript:void(0)', $lang->file->sourceURI, "data-toggle='modal' data-custom=\"$fullURL\"");
             $imageHtml .= '</span>';
             $imageHtml .= '</li>';
         }
         else
         {
             $file->title = $file->title . ".$file->extension";
-            $fileHtml .= "<li class='file file-{$file->extension}'>" . html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'");
+            $fileHtml .= "<li class='file file-{$file->extension}'>";
+            $fileHtml .= html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title . "<div class='file-source'>" . $file->fullURL . "</div>", "target='_blank'");
             $fileHtml .= "<span class='file-actions'>";
             $fileHtml .= html::a(helper::createLink('file', 'sourcedelete', "id=$file->id"), "<i class='icon-trash'></i>", "class='deleter'");
             $fileHtml .= html::a(helper::createLink('file', 'sourceedit', "id=$file->id"), "<i class='icon-edit'></i>", "data-toggle='modal'");
-            $fileHtml .= html::a('javascript:void(0)', $lang->file->sourceURI, "data-toggle='modal' data-custom=\"$fullURL\"");
             $fileHtml .= '</span>';
             $fileHtml .= '</li>';
         }
