@@ -88,7 +88,12 @@ class replyModel extends model
      */
     public function getList($orderBy = 'addedDate_desc', $pager = null)
     {
+        $searchWord = $this->get->searchWord;
         $replies = $this->dao->select('*')->from(TABLE_REPLY)
+            ->where(1)
+            ->beginIf($searchWord)
+            ->andwhere('content')->like("%{$searchWord}%")
+            ->fi()
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');

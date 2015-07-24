@@ -159,11 +159,9 @@ class bookModel extends model
             foreach($children as $child) $childrenHtml .=  $this->getAdminCatalog($child->id, $serials);
             $childrenHtml .= '</dl>';
         }
-
         if($node->type == 'book')    $catalog .= "<dt class='book' data-id='" . $node->id . "'><strong>" . $titleLink . '</strong><span class="actions">' . $editLink . $catalogLink . $delLink . '</span></dt>' . $childrenHtml;
         if($node->type == 'chapter') $catalog .= "<dd class='catalog chapter' data-id='" . $node->id . "'><strong><span class='order'>" . $serial . '</span>&nbsp;' . $titleLink . '</strong><span class="actions">' . $editLink . $catalogLink . $delLink . $moveLink . '</span>' . $childrenHtml . '</dd>';
         if($node->type == 'article') $catalog .= "<dd class='catalog article' data-id='" . $node->id . "'><strong><span class='order'>" . $serial . '</span>&nbsp;' . $node->title . '</strong><span class="actions">' . $editLink . $filesLink . $delLink . $moveLink . '</span>' . $childrenHtml . '</dd>';
-
         return $catalog;
     }
 
