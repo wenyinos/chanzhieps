@@ -419,6 +419,7 @@ class treeModel extends model
             ->join('moderators', ',')
             ->stripTags('desc,link', $this->config->allowedTags->admin)
             ->setDefault('readonly', 0)
+            ->setDefault('unsaleable', 0)
             ->setIF(!$this->post->isLink, 'link', '')
             ->get();
 

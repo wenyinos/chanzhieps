@@ -120,7 +120,7 @@ $lang->sitemap->common = 'Sitemap';
 /* The main menus. */
 $lang->menu = new stdclass();
 $lang->menu->admin    = 'Home|admin|index|';
-$lang->menu->article  = 'Article|article|admin|';
+$lang->menu->article  = 'Article|article|admin|type=article';
 $lang->menu->blog     = 'Blog|article|admin|type=blog';
 $lang->menu->product  = 'Product|product|admin|';
 $lang->menu->book     = 'Book|book|admin|';
@@ -274,6 +274,7 @@ $lang->nav->menu = $lang->site->menu;
 /* Menu of search module. */
 $lang->search = new stdclass();
 $lang->search->menu = $lang->site->menu;
+$lang->search->common = 'Search';
 
 /* Menu of tree module. */
 $lang->slide = new stdclass();

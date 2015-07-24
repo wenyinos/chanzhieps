@@ -120,7 +120,7 @@ $lang->sitemap->common = '站点地图';
 /* The main menus. */
 $lang->menu = new stdclass();
 $lang->menu->admin    = '首页|admin|index|';
-$lang->menu->article  = '文章|article|admin|';
+$lang->menu->article  = '文章|article|admin|type=article';
 $lang->menu->blog     = '博客|article|admin|type=blog';
 $lang->menu->product  = '产品|product|admin|';
 $lang->menu->book     = '手册|book|admin|';
@@ -163,7 +163,6 @@ $lang->blog->menu->browse = '所有博客|article|admin|type=blog';
 $lang->page = new stdclass();
 $lang->page->menu = new stdclass();
 $lang->page->menu->browse = array('link' => '单页列表|article|admin|type=page', 'alias' => 'edit');
-$lang->page->menu->create = '添加单页|article|create|type=page';
 
 /* Menu of product module. */
 $lang->product = new stdclass();
@@ -273,7 +272,8 @@ $lang->nav->menu = $lang->site->menu;
 
 /* Menu of search module. */
 $lang->search = new stdclass();
-$lang->search->menu = $lang->site->menu;
+$lang->search->menu   = $lang->site->menu;
+$lang->search->common = '搜索';
 
 /* Menu of slide module. */
 $lang->slide = new stdclass();

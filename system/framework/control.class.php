@@ -138,6 +138,14 @@ class control
     private $output;
 
     /**
+     * The prefix of view file for mobile or PC. 
+     * 
+     * @var string   
+     * @access public
+     */
+    public $viewPrefix;
+
+    /**
      * The construct function.
      *
      * 1. global the global vars, refer them by the class member such as $this->app.
@@ -151,11 +159,11 @@ class control
     {
         /* Global the globals, and refer them to the class member. */
         global $app, $config, $lang, $dbh, $common;
-        $this->app        = $app;
-        $this->config     = $config;
-        $this->lang       = $lang;
-        $this->dbh        = $dbh;
-        $this->viewType   = $this->app->getViewType();
+        $this->app      = $app;
+        $this->config   = $config;
+        $this->lang     = $lang;
+        $this->dbh      = $dbh;
+        $this->viewType = $this->app->getViewType();
 
         $this->setModuleName($moduleName);
         $this->setMethodName($methodName);
@@ -163,6 +171,7 @@ class control
 
         /* Load the model file auto. */
         $this->loadModel();
+        $this->setViewPrefix();
 
         /* Assign them to the view. */
         $this->view          = new stdclass();
@@ -256,6 +265,18 @@ class control
         $this->global  = $this->app->global;
     }
 
+    /**
+     * Set the prefix of view file for mobile or PC.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setViewPrefix()
+    {
+        $this->viewPrefix = '';
+        if(isset($this->config->viewPrefix[$this->viewType])) $this->viewPrefix = $this->config->viewPrefix[$this->viewType];
+    }
+
     //-------------------- View related methods --------------------//
    
     /**
@@ -271,30 +292,34 @@ class control
         $moduleName = strtolower(trim($moduleName));
         $methodName = strtolower(trim($methodName));
 
-        $modulePath = $this->app->getModulePath($moduleName);
+        $modulePath  = $this->app->getModulePath($moduleName);
         $viewExtPath = $this->app->getModuleExtPath($moduleName, 'view');
+
+        /* Set infix for view file in mobile or pc. */
+        $viewType = $this->viewType;
+        if(isset($this->config->viewPrefix[$this->viewType])) $viewType = 'html';
 
         if((RUN_MODE != 'front') or (strpos($modulePath, 'module' . DS . 'ext' . DS) !== false))
         {
             /* If not in front mode or is ext module, view file is in modeule path. */
-            $mainViewFile = $modulePath . 'view' . DS . $methodName . '.' . $this->viewType . '.php';
+            $mainViewFile = $modulePath . 'view' . DS . $this->viewPrefix . $methodName . '.' . $viewType . '.php';
         }
         else
         {
             /* If in front mode, view file is in www/template path. */
-            $mainViewFile = TPL_ROOT . $moduleName . DS . "{$methodName}.{$this->viewType}.php";
+            $mainViewFile = TPL_ROOT . $moduleName . DS . $this->viewPrefix . "{$methodName}.{$viewType}.php";
         }
 
         /* Extension view file. */
-        $commonExtViewFile = $viewExtPath['common'] . $methodName . ".{$this->viewType}.php";
-        $siteExtViewFile   = $viewExtPath['site'] . $methodName . ".{$this->viewType}.php";
+        $commonExtViewFile = $viewExtPath['common'] . $this->viewPrefix . $methodName . ".{$viewType}.php";
+        $siteExtViewFile   = $viewExtPath['site'] . $this->viewPrefix . $methodName . ".{$viewType}.php";
         $viewFile = file_exists($commonExtViewFile) ? $commonExtViewFile : $mainViewFile;
         $viewFile = file_exists($siteExtViewFile) ? $siteExtViewFile : $viewFile;
         if(!is_file($viewFile)) $this->app->triggerError("the view file $viewFile not found", __FILE__, __LINE__, $exit = true);
 
         /* Extension hook file. */
-        $commonExtHookFiles = glob($viewExtPath['common'] . $methodName . ".*.{$this->viewType}.hook.php");
-        $siteExtHookFiles   = glob($viewExtPath['site'] . $methodName . ".*.{$this->viewType}.hook.php");
+        $commonExtHookFiles = glob($viewExtPath['common'] . $this->viewPrefix . $methodName . ".*.{$viewType}.hook.php");
+        $siteExtHookFiles   = glob($viewExtPath['site'] . $this->viewPrefix . $methodName . ".*.{$viewType}.hook.php");
         $extHookFiles       = array_merge((array) $commonExtHookFiles, (array) $siteExtHookFiles);
         if(!empty($extHookFiles)) return array('viewFile' => $viewFile, 'hookFiles' => $extHookFiles);
 
@@ -351,18 +376,18 @@ class control
         $css = '';
         if((RUN_MODE != 'front') or (strpos($modulePath, 'module' . DS . 'ext') !== false))
         {
-            $mainCssFile   = $modulePath . 'css' . DS . 'common.css';
-            $methodCssFile = $modulePath . 'css' . DS . $methodName . '.css';
+            $mainCssFile   = $modulePath . 'css' . DS . $this->viewPrefix . 'common.css';
+            $methodCssFile = $modulePath . 'css' . DS . $this->viewPrefix . $methodName . '.css';
 
             if(file_exists($mainCssFile))   $css .= file_get_contents($mainCssFile);
             if(file_exists($methodCssFile)) $css .= file_get_contents($methodCssFile);
         }
         else
         {
-            $defaultMainCssFile   = TPL_ROOT . $moduleName . DS . 'css' . DS . "common.css";
-            $defaultMethodCssFile = TPL_ROOT . $moduleName . DS . 'css' . DS . "{$methodName}.css";
-            $themeMainCssFile     = TPL_ROOT . $moduleName . DS . 'css' . DS . "common.{$this->config->site->theme}.css";
-            $themeMethodCssFile   = TPL_ROOT . $moduleName . DS . 'css' . DS . "{$methodName}.{$this->config->site->theme}.css";
+            $defaultMainCssFile   = TPL_ROOT . $moduleName . DS . 'css' . DS . $this->viewPrefix . "common.css";
+            $defaultMethodCssFile = TPL_ROOT . $moduleName . DS . 'css' . DS . $this->viewPrefix . "{$methodName}.css";
+            $themeMainCssFile     = TPL_ROOT . $moduleName . DS . 'css' . DS . $this->viewPrefix . "common.{$this->config->site->theme}.css";
+            $themeMethodCssFile   = TPL_ROOT . $moduleName . DS . 'css' . DS . $this->viewPrefix . "{$methodName}.{$this->config->site->theme}.css";
 
             if(file_exists($defaultMainCssFile))   $css .= file_get_contents($defaultMainCssFile);
             if(file_exists($defaultMethodCssFile)) $css .= file_get_contents($defaultMethodCssFile);
@@ -370,10 +395,10 @@ class control
             if(file_exists($themeMethodCssFile))   $css .= file_get_contents($themeMethodCssFile);
         }
 
-        $commonExtCssFiles = glob($cssExtPath['common'] . $methodName . DS . '*.css');
+        $commonExtCssFiles = glob($cssExtPath['common'] . $methodName . DS . $this->viewPrefix . '*.css');
         if(!empty($commonExtCssFiles)) foreach($commonExtCssFiles as $cssFile) $css .= file_get_contents($cssFile);
 
-        $methodExtCssFiles = glob($cssExtPath['site'] . $methodName . DS . '*.css');
+        $methodExtCssFiles = glob($cssExtPath['site'] . $methodName . DS . $this->viewPrefix . '*.css');
         if(!empty($methodExtCssFiles)) foreach($methodExtCssFiles as $cssFile) $css .= file_get_contents($cssFile);
 
         return $css;
@@ -398,18 +423,18 @@ class control
         $js = '';
         if((RUN_MODE !== 'front') or (strpos($modulePath, 'module' . DS . 'ext') !== false))
         {
-            $mainJsFile   = $modulePath . 'js' . DS . 'common.js';
-            $methodJsFile = $modulePath . 'js' . DS . $methodName . '.js';
+            $mainJsFile   = $modulePath . 'js' . DS . $this->viewPrefix . 'common.js';
+            $methodJsFile = $modulePath . 'js' . DS . $this->viewPrefix . $methodName . '.js';
 
             if(file_exists($mainJsFile))   $js .= file_get_contents($mainJsFile);
             if(file_exists($methodJsFile)) $js .= file_get_contents($methodJsFile);
         }
         else
         {
-            $defaultMainJsFile   = TPL_ROOT . $moduleName . DS . 'js' . DS . "common.js";
-            $defaultMethodJsFile = TPL_ROOT . $moduleName . DS . 'js' . DS . "{$methodName}.js";
-            $themeMainJsFile     = TPL_ROOT . $moduleName . DS . 'js' . DS . "common.{$this->config->site->theme}.js";
-            $themeMethodJsFile   = TPL_ROOT . $moduleName . DS . 'js' . DS . "{$methodName}.{$this->config->site->theme}.js";
+            $defaultMainJsFile   = TPL_ROOT . $moduleName . DS . 'js' . DS . $this->viewPrefix . "common.js";
+            $defaultMethodJsFile = TPL_ROOT . $moduleName . DS . 'js' . DS . $this->viewPrefix . "{$methodName}.js";
+            $themeMainJsFile     = TPL_ROOT . $moduleName . DS . 'js' . DS . $this->viewPrefix . "common.{$this->config->site->theme}.js";
+            $themeMethodJsFile   = TPL_ROOT . $moduleName . DS . 'js' . DS . $this->viewPrefix . "{$methodName}.{$this->config->site->theme}.js";
 
             if(file_exists($defaultMainJsFile))   $js .= file_get_contents($defaultMainJsFile);
             if(file_exists($defaultMethodJsFile)) $js .= file_get_contents($defaultMethodJsFile);
@@ -417,13 +442,13 @@ class control
             if(file_exists($themeMethodJsFile))   $js .= file_get_contents($themeMethodJsFile);
         }
 
-        $commonExtJsFiles = glob($jsExtPath['common'] . $methodName . DS . '*.js');
+        $commonExtJsFiles = glob($jsExtPath['common'] . $methodName . DS . $this->viewPrefix . '*.js');
         if(!empty($commonExtJsFiles))
         {
             foreach($commonExtJsFiles as $jsFile) $js .= file_get_contents($jsFile);
         }
 
-        $methodExtJsFiles = glob($jsExtPath['site'] . $methodName . DS  . '*.js');
+        $methodExtJsFiles = glob($jsExtPath['site'] . $methodName . DS  . $this->viewPrefix . '*.js');
         if(!empty($methodExtJsFiles))
         {
             foreach($methodExtJsFiles as $jsFile) $js .= file_get_contents($jsFile);

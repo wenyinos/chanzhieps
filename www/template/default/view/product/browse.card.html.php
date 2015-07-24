@@ -19,16 +19,19 @@
         <?php echo html::a(inlink('view', "id={$product->id}", "category={$product->category->alias}&name=$product->alias"), '<strong>' . $product->name . '</strong>');?>
         <span class='card-content text-latin'>
         <?php
-        if($product->promotion != 0)
+        if(!$product->unsaleable)
         {
-            echo "<strong class='text-muted'>"  .'</strong>';
-            echo "<strong class='text-danger'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->promotion . '</strong>&nbsp;&nbsp;';
-        }
-        else
-        {
-            if($product->price != 0)
+            if($product->promotion != 0)
             {
-                echo "<strong class='text-danger'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->price . '</strong>&nbsp;&nbsp;';
+                echo "<strong class='text-muted'>"  .'</strong>';
+                echo "<strong class='text-danger'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->promotion . '</strong>&nbsp;&nbsp;';
+            }
+            else
+            {
+                if($product->price != 0)
+                {
+                    echo "<strong class='text-danger'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->price . '</strong>&nbsp;&nbsp;';
+                }
             }
         }
         ?>

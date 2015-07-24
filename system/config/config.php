@@ -39,7 +39,7 @@ $config->allowedTags->front = '<p><span><h1><h2><h3><h4><h5><em><u><strong><br><
 $config->allowedTags->admin = $config->allowedTags->front . '<dd><dt><dl><div><table><td><th><tr><tbody><iframe><style><header><nav><meta>'; // For admin users.
 
 /* Views and themes. */
-$config->views  = ',html,json,xml,'; // Supported view types.
+$config->views  = ',html,json,xml,mhtml,'; // Supported view types.
 
 $config->site = new stdclass();
 $config->site->importantValidate = 'okFile,email';
@@ -74,9 +74,15 @@ $config->file->dangers = 'php,php3,php4,phtml,php5,jsp,py,rb,asp,aspx,ashx,asa,c
 $config->file->allowed = ',txt,doc,docx,dot,wps,wri,pdf,ppt,xls,xlsx,ett,xlt,xlsm,csv,jpg,jpeg,png,psd,gif,ico,bmp,swf,avi,rmvb,rm,mp3,mp4,3gp,flv,mov,movie,rar,zip,bz,bz2,tar,gz,'; // Allowed file types.
 $config->file->maxSize = 2 * 1024 * 1024;  // Max size allowed(Byte).
 
+/* View type settings. */ 
+$config->viewPrefix['mhtml'] = 'm.';
+
 /* Module dependence setting. */
 $config->dependence = new stdclass();
+$config->dependence->article[] = 'article';
 $config->dependence->blog[]    = 'blog';
+$config->dependence->page[]    = 'page';
+$config->dependence->product[] = 'product';
 $config->dependence->book[]    = 'book';
 $config->dependence->user[]    = 'user';
 $config->dependence->forum[]   = 'forum';

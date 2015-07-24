@@ -192,9 +192,9 @@ class ui extends control
     public function others()
     {
         /* Get configs of list number. */
-        $this->app->loadConfig('article');
-        $this->app->loadConfig('product');
         $this->app->loadConfig('file');
+        if(strpos($this->config->site->modules, 'article') !== false) $this->app->loadConfig('article');
+        if(strpos($this->config->site->modules, 'product') !== false) $this->app->loadConfig('product');
         if(strpos($this->config->site->modules, 'blog') !== false) $this->app->loadConfig('blog');
         if(strpos($this->config->site->modules, 'message') !== false) $this->app->loadConfig('message');
         if(strpos($this->config->site->modules, 'forum') !== false) 

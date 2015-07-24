@@ -15,16 +15,25 @@
 <?php js::set('categoryID', $categoryID);?>
 <div class='panel'>
   <div class='panel-heading'>
-  <?php if($type == 'blog'):?>
-  <strong><i class="icon-th-large"></i> <?php echo $lang->blog->list;?></strong>
-  <div class='panel-actions'><?php commonModel::printLink('article', 'create', "type={$type}&category={$categoryID}", '<i class="icon-plus"></i> ' . $lang->blog->create, 'class="btn btn-primary"');?></div>
-  <?php elseif($type == 'page'):?>
-  <strong><i class="icon-list-ul"></i> <?php echo $lang->page->list;?></strong>
-  <div class='panel-actions'><?php commonModel::printLink('article', 'create', "type={$type}", '<i class="icon-plus"></i> ' . $lang->page->create, 'class="btn btn-primary"');?></div>
-  <?php else:?>
-  <strong><i class="icon-list-ul"></i> <?php echo $lang->article->list;?></strong>
-  <div class='panel-actions'><?php commonModel::printLink('article', 'create', "type={$type}&category={$categoryID}", '<i class="icon-plus"></i> ' . $lang->article->create, 'class="btn btn-primary"');?></div>
-  <?php endif;?>
+  <strong><i class="icon-th-large"></i> <?php echo $lang->$type->list;?></strong>
+  <div class='panel-actions'>
+    <form method='get' class='form-inline form-search'>
+      <?php echo html::hidden('m', 'article');?>
+      <?php echo html::hidden('f', 'admin');?>
+      <?php echo html::hidden('type', $type);?>
+      <?php echo html::hidden('categoryID', $categoryID);?>
+      <?php echo html::hidden('orderBy', $orderBy);?>
+      <?php echo html::hidden('recTotal', isset($this->get->recTotal) ? $this->get->recTotal : 0);?>
+      <?php echo html::hidden('recPerPage', isset($this->get->recPerPage) ? $this->get->recPerPage : 10);?>
+      <?php echo html::hidden('pageID', isset($this->get->pageID) ? $this->get->pageID :  1);?>
+      <div class="input-group">
+        <?php echo html::input('searchWord', $this->get->searchWord, "class='form-control search-query'");?>
+        <span class="input-group-btn"><?php echo html::submitButton($lang->search->common, "btn btn-primary"); ?></span>
+      </div>
+    </form>
+     <?php if($type == 'page') commonModel::printLink('article', 'create', "type={$type}", '<i class="icon-plus"></i> ' . $lang->page->create, 'class="btn btn-primary"');?>
+     <?php if($type != 'page') commonModel::printLink('article', 'create', "type={$type}&category={$categoryID}", '<i class="icon-plus"></i> ' . $lang->article->create, 'class="btn btn-primary"');?>
+   </div>
   </div>
   <table class='table table-hover table-striped tablesorter'>
     <thead>

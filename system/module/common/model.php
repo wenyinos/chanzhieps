@@ -319,10 +319,12 @@ class commonModel extends model
             $class = $moduleName == $currentModule ? " class='active'" : '';
             list($label, $module, $method, $vars) = explode('|', $moduleMenu);
 
-            if($module != 'user' and !commonModel::isAvailable($module)) continue;
+            if($module != 'user' and $module != 'article' and !commonModel::isAvailable($module)) continue;
             
-            /* Just whether blog menu should shown. */
+            /* Just whether article/blog/page menu should shown. */
+            if(!commonModel::isAvailable('article') && $vars == 'type=article') continue;  
             if(!commonModel::isAvailable('blog') && $vars == 'type=blog') continue;  
+            if(!commonModel::isAvailable('page') && $vars == 'type=page') continue;  
 
             if(commonModel::hasPriv($module, $method))
             {
@@ -373,7 +375,7 @@ class commonModel extends model
             list($label, $module, $method, $vars) = explode('|', $methodLink);
             if($chevron) $label .= '<i class="icon-chevron-right"></i>';
 
-            if($module != 'user' and !commonModel::isAvailable($module)) continue;
+            if($module != 'user' and $module != 'article' and !commonModel::isAvailable($module)) continue;
             if(commonModel::hasPriv($module, $method))
             {
                 $class = '';
