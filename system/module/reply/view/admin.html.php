@@ -1,6 +1,21 @@
 <?php include '../../common/view/header.admin.html.php'; ?>
 <div class='panel'>
-  <div class='panel-heading'><strong><i class='icon-comments'></i> <?php echo $lang->reply->list;?></strong></div>
+  <div class='panel-heading'>
+  <div class='panel-actions'>
+      <form method='get' class='form-inline form-search'>
+        <?php echo html::hidden('m', 'reply');?>
+        <?php echo html::hidden('f', 'admin');?>
+        <?php echo html::hidden('orderBy', 'addedDate_desc');?>
+        <?php echo html::hidden('recTotal', isset($this->get->recTotal) ? $this->get->recTotal : 0);?>
+        <?php echo html::hidden('recPerPage', isset($this->get->recPerPage) ? $this->get->recPerPage : 20);?>
+        <?php echo html::hidden('pageID', isset($this->get->pageID) ? $this->get->pageID :  1);?>
+        <div class="input-group">
+          <?php echo html::input('searchWord', $this->get->searchWord, "class='form-control search-query'");?>
+          <span class="input-group-btn"><?php echo html::submitButton($lang->search->common, "btn btn-primary"); ?></span>
+        </div>
+      </form>
+    </div>
+  <strong><i class='icon-comments'></i> <?php echo $lang->reply->list;?></strong></div>
   <table class='table table-hover table-bordered table-striped' id='replyList'>
     <thead>
       <tr class='text-center'>

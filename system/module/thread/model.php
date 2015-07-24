@@ -42,16 +42,22 @@ class threadModel extends model
      * @access public
      * @return array
      */
-    public function getList($board, $orderBy, $pager = null)
+    public function getList($board, $orderBy, $pager = null) 
     {
         if(!is_array($board))
         {
             $board = $this->loadModel('tree')->getByID($board, 'forum');
             $board = $board->id;
         }
+        $searchWord = $this->get->searchWord;
         $threads = $this->dao->select('*')->from(TABLE_THREAD)
             ->where(1)
             ->beginIf(RUN_MODE == 'front')->andWhere('hidden')->eq('0')->fi()
+            ->beginIf($board)->andWhere('board')->in($board)->fi()
+            ->beginIf($searchWord)
+            ->andWhere('title')->like("%{$searchWord}%")
+            ->beginIf($board)->andWhere('board')->in($board)->fi()
+            ->orWhere('content')->like("%{$searchWord}%")
             ->beginIf($board)->andWhere('board')->in($board)->fi()
             ->orderBy($orderBy)
             ->page($pager)
