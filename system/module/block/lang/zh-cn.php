@@ -86,6 +86,10 @@ $lang->block->gridOptions[12] = '100%';
 
 $lang->block->category = new stdclass();
 $lang->block->category->showChildren = '显示子分类';
+$lang->block->category->fromCurrent  = '当前类目开始';
 
 $lang->block->category->showChildrenList[1] = '是';
 $lang->block->category->showChildrenList[0] = '否';
+
+$lang->block->category->fromCurrentList[1] = '是';
+$lang->block->category->fromCurrentList[0] = '否';
