@@ -17,6 +17,6 @@ $(function()
         $.cookie('productViewType', $(this).data('mode'), {path: "/"});
     })
     var type = $.cookie('productViewType');
-    if(type == '') type = 'card';
+    if(typeof(type) == 'undefined' || type == '') type = 'card';
     $('#modeControl').find('[data-mode=' + type +']').click();
 })
