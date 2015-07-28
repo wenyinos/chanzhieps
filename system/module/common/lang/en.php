@@ -51,6 +51,7 @@ $lang->currentPos     = 'Positon';
 $lang->categoryMenu   = 'Categories';
 $lang->wechatTip      = 'Wechat';
 $lang->qrcodeTip      = 'Mobile';
+$lang->language       = 'Language';
 
 /* Global action items. */
 $lang->reset          = 'Reset';

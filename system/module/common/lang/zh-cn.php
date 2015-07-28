@@ -51,6 +51,7 @@ $lang->currentPos     = '当前位置';
 $lang->categoryMenu   = '分类导航';
 $lang->wechatTip      = '微信订阅';
 $lang->qrcodeTip      = '移动访问';
+$lang->language       = '语言';
 
 /* Global action items. */
 $lang->reset          = '重置';

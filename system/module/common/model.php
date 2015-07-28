@@ -408,26 +408,43 @@ class commonModel extends model
 
     /**
      * Print the top bar.
-     * 
+     *
+     * @param  boolean $asListItem 
      * @access public
      * @return void
      */
-    public static function printTopBar()
+    public static function printTopBar($asListItem = false)
     {
         if(!commonModel::isAvailable('user')) return '';
 
         global $app;
         if($app->session->user->account != 'guest')
         {
-            printf('<span class="login-msg">' . $app->lang->welcome . '</span>', $app->session->user->realname);
-            echo html::a(helper::createLink('user', 'control'), $app->lang->dashboard);
-            echo "<span id='msgBox' class='hiding'></span>";
-            echo html::a(helper::createLink('user', 'logout'),  $app->lang->logout);
-        }    
+            if($asListItem)
+            {
+                echo '<li>' . html::a(helper::createLink('user', 'control'), $app->lang->dashboard) . '</li>';
+                echo '<li>' . html::a(helper::createLink('user', 'logout'),  $app->lang->logout) . '</li>';
+            }
+            else
+            {
+                printf('<span class="login-msg">' . $app->lang->welcome . '</span>', $app->session->user->realname);
+                echo html::a(helper::createLink('user', 'control'), $app->lang->dashboard);
+                echo "<span id='msgBox' class='hiding'></span>";
+                echo html::a(helper::createLink('user', 'logout'),  $app->lang->logout);
+            }
+        }
         else
         {
-            echo html::a(helper::createLink('user', 'login'), $app->lang->login);
-            echo html::a(helper::createLink('user', 'register'), $app->lang->register);
+            if($asListItem)
+            {
+                echo '<li>' . html::a(helper::createLink('user', 'login'), $app->lang->login) . '</li>';
+                echo '<li>' . html::a(helper::createLink('user', 'register'), $app->lang->register) . '</li>';
+            }
+            else
+            {
+                echo html::a(helper::createLink('user', 'login'), $app->lang->login);
+                echo html::a(helper::createLink('user', 'register'), $app->lang->register);
+            }
         }
     }
 
@@ -435,17 +452,28 @@ class commonModel extends model
      * Print language bar.
      * 
      * @static
+     * @param  boolean $asListItem 
      * @access public
      * @return string
      */
-    public static function printLanguageBar()
+    public static function printLanguageBar($asListItem = false)
     {
         global $config, $app;
         $langs = explode(',', $config->site->lang);
         if(count($langs) == 1) return false;
+        if($asListItem)
+        {
+            echo "<li class='dropdown-header'>{$app->lang->language}</li>";
+        }
         foreach($langs as $lang)
         {
-            echo html::a(getHomeRoot($config->langsShortcuts[$lang]), $config->langs[$lang]);
+            $a = html::a(getHomeRoot($config->langsShortcuts[$lang]), $config->langs[$lang]);
+            if($asListItem)
+            {
+                $liClass = $config->site->defaultLang === $lang ? " class='active'" : '';
+                $a = "<li{$liClass}>{$a}</li>";
+            }
+            echo $a;
         }
     }
 
