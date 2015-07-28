@@ -118,7 +118,6 @@ class commonModel extends model
                 $referer = helper::safe64Encode($this->app->getURI(true));
                 die(js::locate(helper::createLink('user', 'login', "referer=$referer")));
             }
-
         }
 
         /* Check the priviledge. */
@@ -130,7 +129,6 @@ class commonModel extends model
                 exit(js::locate(helper::createLink('user', 'checkEmail')));
             }
         }
-
     }
 
     /**
