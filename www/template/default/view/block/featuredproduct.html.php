@@ -25,6 +25,14 @@ $url      = helper::createLink('product', 'view', "id={$product->id}", "category
     <a class='card' href="<?php echo $url;?>">
       <div class='media' style='background-image: url(<?php echo $product->image->primary->middleURL; ?>);'><?php echo html::image($product->image->primary->middleURL, "title='{$product->name}' alt='{$product->name}'"); ?></div>
       <div class='card-heading'>
+        <?php if($content->showCategory):?>
+        <?php if($content->categoryName == 'abbr'):?>
+        <?php $categoryName = '[' . ($category->abbr ? $category->abbr : $category->name) . '] ';?>
+        <?php echo html::a(helper::createLink('product', 'browse', "categoryID={$category->id}", "category={$category->alias}"), $categoryName);?>
+        <?php else:?>
+        <?php echo html::a(helper::createLink('product', 'browse', "categoryID={$category->id}", "category={$category->alias}"), '[' . $category->name . '] ');?>
+        <?php endif;?>
+        <?php endif;?>
         <strong><?php echo $product->name; ?></strong>
         <span class='text-latin'>
         <?php

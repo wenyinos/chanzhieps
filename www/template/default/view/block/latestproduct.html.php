@@ -37,6 +37,14 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
           <?php $title = $product->image->primary->title ? $product->image->primary->title : $product->name;?>
           <div class='media' style='background-image: url(<?php echo $product->image->primary->middleURL; ?>);'><?php echo html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"); ?></div>
           <div class='card-heading'>
+            <?php if($content->showCategory):?>
+            <?php if($content->categoryName == 'abbr'):?>
+            <?php $categoryName = '[' . ($product->category->abbr ? $product->category->abbr : $product->category->name) . '] ';?>
+            <?php echo html::a(helper::createLink('product', 'browse', "categoryID={$product->category->id}", "category={$product->category->alias}"), $categoryName);?>
+            <?php else:?>
+            <?php echo html::a(helper::createLink('product', 'browse', "categoryID={$product->category->id}", "category={$product->category->alias}"), '[' . $product->category->name . '] ');?>
+            <?php endif;?>
+            <?php endif;?>
             <?php echo $product->name;?>
             <span class='text-latin'>
             <?php
@@ -94,6 +102,14 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
         }
         ?>
         </span>
+        <?php if($content->showCategory):?>
+        <?php if($content->categoryName == 'abbr'):?>
+        <?php $categoryName = '[' . ($product->category->abbr ? $product->category->abbr : $product->category->name) . '] ';?>
+        <?php echo html::a(helper::createLink('product', 'browse', "categoryID={$product->category->id}", "category={$product->category->alias}"), $categoryName);?>
+        <?php else:?>
+        <?php echo html::a(helper::createLink('product', 'browse', "categoryID={$product->category->id}", "category={$product->category->alias}"), '[' . $product->category->name . '] ');?>
+        <?php endif;?>
+        <?php endif;?>
         <?php echo html::a($url, $product->name);?>
       </li>
       <?php endforeach;?>

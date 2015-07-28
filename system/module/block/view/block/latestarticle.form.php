@@ -21,6 +21,17 @@
   <td><?php echo html::input('params[limit]', isset($block->content->limit) ? $block->content->limit : '', "class='text-4 form-control'");?></td>
 </tr>
 <tr>
+  <th><?php echo $lang->block->showCategory;?></th>
+  <td>
+    <div class='input-group'>
+      <span class='input-group-addon'>
+        <input type='checkbox' name='params[showCategory]' <?php if(isset($block->content->showCategory) && $block->content->showCategory) echo 'checked';?> value='1' />
+      </span>
+      <?php echo html::select('params[categoryName]', $lang->block->category->showCategoryList, isset($block->content->categoryName) ? $block->content->categoryName : '', "class='form-control'");?>
+    </div>
+  </td>
+</tr>
+<tr>
   <th><?php echo $lang->block->showImage;?></th>
   <td><input type='checkbox' name='params[image]' <?php if(isset($block->content->image) && $block->content->image) echo 'checked';?> value='1' /></td>
 </tr>

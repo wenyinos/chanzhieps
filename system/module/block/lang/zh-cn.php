@@ -25,6 +25,7 @@ $lang->block->regionList      = '区域列表';
 $lang->block->select          = '请选择区块';
 $lang->block->categories      = '分类';
 $lang->block->showImage       = '图文';
+$lang->block->showCategory    = '显示类目';
 $lang->block->showTime        = '显示时间';
 $lang->block->product         = '产品';
 $lang->block->slide           = '幻灯片';
@@ -93,3 +94,6 @@ $lang->block->category->showChildrenList[0] = '否';
 
 $lang->block->category->fromCurrentList[1] = '是';
 $lang->block->category->fromCurrentList[0] = '否';
+
+$lang->block->category->showCategoryList['abbr'] = '简称';
+$lang->block->category->showCategoryList['name'] = '全称';

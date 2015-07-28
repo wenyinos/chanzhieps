@@ -20,3 +20,14 @@
   <th><?php echo $lang->block->limit;?></th>
   <td><?php echo html::input('params[limit]', isset($block->content->limit) ? $block->content->limit : '', "class='text-4 form-control'");?></td>
 </tr>
+<tr>
+  <th><?php echo $lang->block->showCategory;?></th>
+  <td>
+    <div class='input-group'>
+      <span class='input-group-addon'>
+        <input type='checkbox' name='params[showCategory]' <?php if(isset($block->content->showCategory) && $block->content->showCategory) echo 'checked';?> value='1' />
+      </span>
+      <?php echo html::select('params[categoryName]', $lang->block->category->showCategoryList, isset($block->content->categoryName) ? $block->content->categoryName : '', "class='form-control'");?>
+    </div>
+  </td>
+</tr>
