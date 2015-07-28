@@ -256,12 +256,12 @@ class bookModel extends model
 
         if(!$node) $node = $this->dao->select('*')->from(TABLE_BOOK)->where('alias')->eq($nodeID)->fetch();
         if(!$node) return false;
-
+                
         $node->origins = $this->dao->select('id, type, alias, title')->from(TABLE_BOOK)->where('id')->in($node->path)->orderBy('grade')->fetchAll('id');
         $node->book    = current($node->origins);
         $node->files   = $this->loadModel('file')->getByObject('book', $nodeID);
         $node->content = $replaceTag ? $this->loadModel('tag')->addLink($node->content) : $node->content;
-
+        
         return $node;
     }
 

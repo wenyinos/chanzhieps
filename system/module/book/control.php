@@ -93,16 +93,15 @@ class book extends control
     public function admin($nodeID = '')
     {
         $this->book->setMenu();
-
+        
         if($nodeID)  ($node = $this->book->getNodeByID($nodeID))   && $book   = $node->book;
         if(!$nodeID or !$node)   ($node = $book = $this->book->getFirstBook()) && $nodeID = $node->id;
         if(!$node)  $this->locate(inlink('create'));
-
         $this->view->title   = $this->lang->book->common;
         $this->view->book    = $book;
         $this->view->node    = $node;
         $this->view->catalog = $this->book->getAdminCatalog($nodeID, $this->book->computeSN($book->id));
-
+        
         $this->display();
     }
 
@@ -217,4 +216,37 @@ class book extends control
         if($this->book->sort()) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
-}
+
+
+    /**
+     * search articles of book
+     *
+     * @access protect
+     * @return void
+     */
+    public function search($recTotal = 0, $recPerPage = 10, $pageID = 1, $searchWord = '')
+    {
+        $this->book->setMenu();
+        
+        $this->app->loadClass('pager');
+        $pager = new pager($recTotal, $recPerPage, $pageID);
+
+        $articles = $this->dao->select('*')->from(TABLE_BOOK)
+            ->where('type')->eq('article')
+            ->beginIf($searchWord)
+            ->andWhere('title')->like("%{$searchWord}%")
+            ->orWhere('keywords')->like("%{$searchWord}%")
+            ->orWhere('content')->like("%{$searchWord}%")
+            ->orWhere('summary')->like("%{$searchWord}%")
+            ->fi()
+            ->orderBy('id_desc')
+            ->page($pager)
+            ->fetchAll('id'); 
+
+        $this->view->title    = $this->lang->book->searchResults;
+        $this->view->articles = $articles;
+        $this->view->pager    = $pager;
+
+        $this->display();
+    }
+}    
