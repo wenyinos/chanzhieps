@@ -52,6 +52,10 @@ $themeRoot = $webRoot . "theme/";
           </div>
         </div>
       </div>
+      <div class='form-group'> 
+        <label class='col-md-2 control-label'><?php echo $lang->category->abbr;?></label>
+        <div class='col-md-9'><?php echo html::input('abbr', $category->abbr, "class='form-control'");?></div>
+      </div>
       <?php if($category->type != 'forum' or $category->parent != 0):?>
       <div class='form-group link'> 
         <label class='col-md-2 control-label'><?php echo $lang->category->link;?></label>

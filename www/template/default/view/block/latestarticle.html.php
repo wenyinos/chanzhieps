@@ -36,6 +36,14 @@ $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 :
     <div class='item'>
       <div class='item-heading'>
         <?php if($article->sticky):?><span class='label label-danger'><?php echo $this->lang->article->stick;?></span><?php endif;?>
+        <?php if($content->showCategory):?>
+        <?php if($content->categoryName == 'abbr'):?>
+        <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] ';?>
+        <?php echo html::a(helper::createLink('article', 'browse', "categoryID={$article->category->id}", "category={$article->category->alias}"), $categoryName);?>
+        <?php else:?>
+        <?php echo '[' . $article->category->name . '] ';?>
+        <?php endif;?>
+        <?php endif;?>
         <strong><?php echo html::a($url, $article->title);?></strong>
       </div>
       <div class='item-content'>
@@ -70,12 +78,28 @@ $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 :
       ?>
       <?php if(isset($content->time)):?>
       <li>
+        <?php if($content->showCategory):?>
+        <?php if($content->categoryName == 'abbr'):?>
+        <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] ';?>
+        <?php echo html::a(helper::createLink('article', 'browse', "categoryID={$article->category->id}", "category={$article->category->alias}"), $categoryName);?>
+        <?php else:?>
+        <?php echo html::a(helper::createLink('article', 'browse', "categoryID={$article->category->id}", "category={$article->category->alias}"), '[' . $article->category->name . '] ');?>
+        <?php endif;?>
+        <?php endif;?>
         <?php echo html::a($url, $article->title, "title='{$article->title}'");?>
         <?php if($article->sticky):?><span class='label label-danger'><?php echo $this->lang->article->stick;?></span><?php endif;?>
         <span class='pull-right'><?php echo substr($article->addedDate, 0, 10);?></span>
       </li>
       <?php else:?>
       <li>
+        <?php if($content->showCategory):?>
+        <?php if($content->categoryName == 'abbr'):?>
+        <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] ';?>
+        <?php echo html::a(helper::createLink('article', 'browse', "categoryID={$article->category->id}", "category={$article->category->alias}"), $categoryName);?>
+        <?php else:?>
+        <?php echo html::a(helper::createLink('article', 'browse', "categoryID={$article->category->id}", "category={$article->category->alias}"), '[' . $article->category->name . '] ');?>
+        <?php endif;?>
+        <?php endif;?>
         <?php echo html::a($url, $article->title, "title='{$article->title}'");?>
         <?php if($article->sticky):?><span class='label label-danger'><?php echo $this->lang->article->stick;?></span><?php endif;?>
       </li>

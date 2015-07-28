@@ -18,6 +18,7 @@ $themeRoot = $this->config->webRoot . 'theme/';
 $content = json_decode($block->content);
 $method  = 'get' . ucfirst(str_replace('thread', '', strtolower($block->type)));
 $threads = $this->loadModel('thread')->$method(empty($content->category) ? 0 : $content->category, $content->limit);
+$boards  = $this->dao->select('*')->from(TABLE_CATEGORY)->where('type')->eq('forum')->andWhere('grade')->eq(2)->fetchAll('id');
 ?>
 <div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
   <div class='panel-heading'>
@@ -30,6 +31,14 @@ $threads = $this->loadModel('thread')->$method(empty($content->category) ? 0 : $
     <ul class='ul-list'>
       <?php foreach($threads as $thread): ?>
       <li>
+        <?php if($content->showCategory):?>
+        <?php if($content->categoryName == 'abbr'):?>
+        <?php $boardName = '[' . ($boards[$thread->board]->abbr ? $boards[$thread->board]->abbr : $boards[$thread->board]->name) . '] ';?>
+        <?php echo html::a(helper::createLink('forum', 'board', "boardID={$thread->board}", "category={$boards[$thread->board]->alias}"), $boardName);?>
+        <?php else:?>
+        <?php echo html::a(helper::createLink('forum', 'board', "boardID={$thread->board}", "category={$boards[$thread->board]->alias}"), '[' . $boards[$thread->board]->name . '] ');?>
+        <?php endif;?>
+        <?php endif;?>
         <?php echo html::a(helper::createLink('thread', 'view', "id=$thread->id"), $thread->title);?>
         <span class='pull-right'><?php echo substr($thread->addedDate, 0, 10);?></span>
       </li>

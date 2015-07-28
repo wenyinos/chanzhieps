@@ -142,7 +142,7 @@ class articleModel extends model
         if(!$articles) return array();
 
         /* Get categories for these articles. */
-        $categories = $this->dao->select('t2.id, t2.name, t2.alias, t1.id AS article')
+        $categories = $this->dao->select('t2.id, t2.name, t2.abbr, t2.alias, t1.id AS article')
             ->from(TABLE_RELATION)->alias('t1')
             ->leftJoin(TABLE_CATEGORY)->alias('t2')->on('t1.category = t2.id')
             ->where('t2.type')->eq($type)

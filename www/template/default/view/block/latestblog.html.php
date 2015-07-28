@@ -34,7 +34,17 @@ $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 :
     $url = helper::createLink('blog', 'view', "id=$article->id", "category={$article->category->alias}&name=$article->alias");
     ?>
       <div class='item'>
-        <div class='item-heading'><strong><?php echo html::a($url, $article->title);?></strong></div>
+        <div class='item-heading'>
+          <?php if($content->showCategory):?>
+          <?php if($content->categoryName == 'abbr'):?>
+          <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] ';?>
+          <?php echo html::a(helper::createLink('blog', 'index', "categoryID={$article->category->id}", "category={$article->category->alias}"), $categoryName);?>
+          <?php else:?>
+          <?php echo html::a(helper::createLink('blog', 'index', "categoryID={$article->category->id}", "category={$article->category->alias}"), '[' . $article->category->name . '] ');?>
+          <?php endif;?>
+          <?php endif;?>
+          <strong><?php echo html::a($url, $article->title);?></strong>
+        </div>
         <div class='item-content'>
           
           <div class='text small text-muted'>
@@ -67,11 +77,29 @@ $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 :
       ?>
       <?php if(isset($content->time)):?>
       <li>
+        <?php if($content->showCategory):?>
+        <?php if($content->categoryName == 'abbr'):?>
+        <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] ';?>
+        <?php echo html::a(helper::createLink('blog', 'index', "categoryID={$article->category->id}", "category={$article->category->alias}"), $categoryName);?>
+        <?php else:?>
+        <?php echo html::a(helper::createLink('blog', 'index', "categoryID={$article->category->id}", "category={$article->category->alias}"), '[' . $article->category->name . '] ');?>
+        <?php endif;?>
+        <?php endif;?>
         <?php echo html::a($url, $article->title, "title='{$article->title}'");?>
         <span class='pull-right'><?php echo substr($article->addedDate, 0, 10);?></span>
       </li>
       <?php else:?>
-      <li><?php echo html::a($url, $article->title, "title='{$article->title}'");?></li>
+      <li>
+        <?php if($content->showCategory):?>
+        <?php if($content->categoryName == 'abbr'):?>
+        <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] ';?>
+        <?php echo html::a(helper::createLink('blog', 'index', "categoryID={$article->category->id}", "category={$article->category->alias}"), $categoryName);?>
+        <?php else:?>
+        <?php echo html::a(helper::createLink('blog', 'index', "categoryID={$article->category->id}", "category={$article->category->alias}"), '[' . $article->category->name . '] ');?>
+        <?php endif;?>
+        <?php endif;?>
+        <?php echo html::a($url, $article->title, "title='{$article->title}'");?>
+      </li>
       <?php endif;?>
       
       <?php endforeach;?>

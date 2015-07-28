@@ -44,7 +44,7 @@ class threadModel extends model
      */
     public function getList($board, $orderBy, $pager = null) 
     {
-        if(!is_array($board))
+        if($board and !is_array($board))
         {
             $board = $this->loadModel('tree')->getByID($board, 'forum');
             $board = $board->id;
