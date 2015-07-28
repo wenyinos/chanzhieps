@@ -179,6 +179,8 @@ class slideModel extends model
         $files = $this->getUpload();
         foreach($files as $id => $file)
         {   
+            if(!in_array(strtolower($file['extension']), $this->config->file->imageExtensions, true)) return false;
+
             $file['objectType'] = 'slide';
             $file['addedBy']    = $this->app->user->account;
             $file['addedDate']  = helper::now();
@@ -188,30 +190,30 @@ class slideModel extends model
             $file['title']    = $groupID . '_' .$fileID;
             $file['pathname'] = 'slides/' . $file['title'] . '.' . $file['extension'];
 
-            $dataRoot = $this->app->getDataRoot();
-            if(strpos($this->config->file->allowed, ',' . $file['extension'] . ',') === false)
+            $imagePath = $this->app->getDataRoot() . $file['pathname'];
+            if(!move_uploaded_file($file['tmpname'], $imagePath))
             {
-                if(!move_uploaded_file($file['tmpname'], $dataRoot . $file['pathname'] . '.txt'))
-                {
-                    $this->dao->delete()->from(TABLE_FILE)->where('id')->eq($fileID)->exec();
-                    return false;
-                }
-                $file['pathname'] .= '.txt';
-                $file = $this->file->saveZip($file);
+                $this->dao->delete()->from(TABLE_FILE)->where('id')->eq($fileID)->exec();
+                return false;
+            }
+
+            $this->app->loadClass('phpthumb', true);
+            $imageInfo = pathinfo($imagePath);
+            if(!is_writable($imageInfo['dirname'])) return false;
+
+            $thumbPath = $this->app->getDataRoot() . 'slides/m_' . substr($file['pathname'], strlen('slides') + 1) ;
+            if(extension_loaded('gd'))
+            {
+                $thumb = phpThumbFactory::create($imagePath);
+                $thumb->resize($this->config->slide->mobileWidth);
+                $thumb->save($thumbPath);
             }
             else
             {
-                if(!move_uploaded_file($file['tmpname'], $dataRoot . $file['pathname']))
-                {
-                    $this->dao->delete()->from(TABLE_FILE)->where('id')->eq($fileID)->exec();
-                    return false;
-                }
-            }          
-
-            if(in_array(strtolower($file['extension']), $this->config->file->imageExtensions, true))
-            {
-                $imageSize = $this->file->getImageSize($dataRoot . $file['pathname']);
+                copy($imagePath, $thumbPath);   
             }
+
+            $imageSize = $this->file->getImageSize($imagePath);
 
             $file['width']  = $imageSize['width'];
             $file['height'] = $imageSize['height'];

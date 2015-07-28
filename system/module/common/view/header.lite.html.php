@@ -15,10 +15,10 @@ $themeRoot = $webRoot . "template/default/theme/";
   <meta http-equiv='refresh' content="5;url='<?php echo helper::createLink($config->default->module);?>'">
   <?php endif;?>
   <?php
-  if(!isset($title))    $title    = '';
-  if(!empty($title))    $title   .= $lang->minus;
-  if(empty($keywords)) $keywords  = $config->site->keywords;
-  if(empty($desc))      $desc     = $config->site->desc;
+  if(!isset($title))   $title    = '';
+  if(!empty($title))   $title   .= $lang->minus;
+  if(empty($keywords)) $keywords = $config->site->keywords;
+  if(empty($desc))     $desc     = $config->site->desc;
 
   echo html::title($title . $config->site->name);
   echo html::meta('keywords',    strip_tags($keywords));

@@ -321,7 +321,8 @@ class uiModel extends model
             $placeholder = $this->lang->ui->theme->default;
         }
 
-        $this->printTextbox($id, $value, $this->lang->ui->$label, '', $placeholder, '', "data-default='{$default}' data-type='image'", $this->lang->ui->theme->backImageTip);
+        $selectImageLabel = html::a(helper::createLink('file', 'selectimage', "callback=&id={$id}"), $this->lang->ui->selectSourceImage, "id='selectSource' data-toggle='modal'");
+        $this->printTextbox($id, $value, $this->lang->ui->$label, $selectImageLabel, $placeholder, '', "data-default='{$default}' data-type='image'", $this->lang->ui->theme->backImageTip);
     }
 
     /**

@@ -48,6 +48,7 @@ $lang->ui->deleteThemeFail        = '删除主题失败';
 $lang->ui->fileRequired           = '请选择一个文件';
 $lang->ui->importThemeSuccess     = '导入主题成功';
 $lang->ui->packagePathUnwriteable = '上传目录：%s 不可写';
+$lang->ui->selectSourceImage      = '从素材库选择';
 
 $lang->ui->productViewList[1] = '显示'; 
 $lang->ui->productViewList[0] = '不显示'; 

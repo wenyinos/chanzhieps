@@ -107,3 +107,4 @@ $(document).ready(function()
     });
 });
 
+function fileHide(){$('#uploadFile').show();}

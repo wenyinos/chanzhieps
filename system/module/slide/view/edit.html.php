@@ -98,7 +98,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
             <?php echo html::input('imageShow', '', "class='form-control image-select' disabled='disabled'");?>
           </td>
           <td colspan='2'>
-            <?php echo html::a($this->createLink('file', 'selectimage', 'callback=fileHide'), $lang->slide->sourceImage, "class='btn btn-primary' id='selectSource' data-toggle='modal'")?>
+            <?php echo html::a($this->createLink('file', 'selectimage', 'callback=fileHide&id=image'), $lang->slide->sourceImage, "class='btn btn-primary' id='selectSource' data-toggle='modal'")?>
             <?php echo html::a('javascript:void(0)', $lang->slide->upload, "class='btn btn-primary' onclick='fileShow()' id='uploadFile'")?>
             <label class='text-info'><?php echo $lang->slide->suitableSize;?></label>
           </td>

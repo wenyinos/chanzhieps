@@ -502,7 +502,7 @@ class file extends control
      * @access public
      * @return void
      */
-    public function selectImage($callback = '')
+    public function selectImage($callback = '', $id = '')
     {
         $callback = $callback == '' ? "''" : "$callback()";
         $result   = array();
@@ -512,6 +512,7 @@ class file extends control
         $this->view->title    = $this->lang->file->source;
         $this->view->files    = $result;
         $this->view->callback = $callback;
+        $this->view->id       = $id;
         $this->display();
     }
 }
