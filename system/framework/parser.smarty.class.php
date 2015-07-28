@@ -50,7 +50,7 @@ class smartyParser
      *
      * @param string $moduleName    module name
      * @param string $methodName    method name
-     * @access private
+     * @access public
      * @return string
      */
     public function parse($moduleName, $methodName)
