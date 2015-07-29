@@ -1,5 +1,4 @@
 <?php include TPL_ROOT . 'common/header.html.php';?>
-<?php include TPL_ROOT . 'common/treeview.html.php';?>
 
 <!-- <div id='focus' class='block-list'>
   <div class='row focus-top' data-default-grid='12'><?php $this->block->printRegion($layouts, 'index_index', 'top', true);?></div>
