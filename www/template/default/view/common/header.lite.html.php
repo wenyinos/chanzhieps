@@ -63,43 +63,47 @@ $themeRoot = $webRoot . "template/default/theme/";
 
   echo isset($this->config->site->favicon) ? html::icon(json_decode($this->config->site->favicon)->webPath) : file_exists($this->app->getWwwRoot() . 'favicon.ico') ? html::icon($webRoot . 'favicon.ico') : '';
   echo html::rss($this->createLink('rss', 'index', '', '', 'xml'), $config->site->name);
-?>
-<!--[if lt IE 9]>
-<?php
-if($config->debug)
-{
-    js::import($jsRoot . 'html5shiv/min.js');
-    js::import($jsRoot . 'respond/min.js');
-}
-else
-{
-    js::import($jsRoot . 'all.ie8.js');
-}
-?>
-<![endif]-->
-<!--[if lt IE 10]>
-<?php
-if($config->debug)
-{
-    js::import($jsRoot . 'jquery/placeholder/min.js');
-}
-else
-{
-    js::import($jsRoot . 'all.ie9.js');
-}
-?>
-<![endif]-->
-<?php
-js::set('lang', $lang->js);
-
-if(!empty($config->oauth->sina)) $sina = json_decode($config->oauth->sina);
-if(!empty($config->oauth->qq))   $qq   = json_decode($config->oauth->qq);
-if(!empty($sina->verification)) echo $sina->verification; 
-if(!empty($qq->verification))   echo $qq->verification;
-if(!empty($sina->widget)) js::import('http://tjs.sjs.sinajs.cn/open/api/js/wb.js');
-
-$this->block->printRegion($layouts, 'all', 'header');
-
-?>
+  ?>
+  <!--[if lt IE 9]>
+  <?php
+  if($config->debug)
+  {
+      js::import($jsRoot . 'html5shiv/min.js');
+      js::import($jsRoot . 'respond/min.js');
+  }
+  else
+  {
+      js::import($jsRoot . 'all.ie8.js');
+  }
+  ?>
+  <![endif]-->
+  <!--[if lt IE 10]>
+  <?php
+  if($config->debug)
+  {
+      js::import($jsRoot . 'jquery/placeholder/min.js');
+  }
+  else
+  {
+      js::import($jsRoot . 'all.ie9.js');
+  }
+  ?>
+  <![endif]-->
+  <?php
+  js::set('lang', $lang->js);
+  
+  $template   = $this->config->template->name ? $this->config->template->name : 'default';
+  $theme      = $this->config->template->theme ? $this->config->template->theme : 'default';
+  $baseCustom = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array(); 
+  if(!empty($baseCustom[$template][$theme]['js'])) js::execute($baseCustom[$template][$theme]['js']);
+  
+  if(!empty($config->oauth->sina)) $sina = json_decode($config->oauth->sina);
+  if(!empty($config->oauth->qq))   $qq   = json_decode($config->oauth->qq);
+  if(!empty($sina->verification)) echo $sina->verification; 
+  if(!empty($qq->verification))   echo $qq->verification;
+  if(!empty($sina->widget)) js::import('http://tjs.sjs.sinajs.cn/open/api/js/wb.js');
+  
+  $this->block->printRegion($layouts, 'all', 'header');
+  ?>
 </head>
 <body>

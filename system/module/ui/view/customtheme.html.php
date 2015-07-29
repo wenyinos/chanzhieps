@@ -20,6 +20,7 @@
         <?php endforeach;?>
         <?php endif;?>
         <li><a href='#cssTab' data-toggle='tab'><?php echo $lang->ui->theme->extraStyle; ?></a></li>
+        <li><a href='#jsTab' data-toggle='tab'><?php echo $lang->ui->theme->extraScript; ?></a></li>
       </ul>
     </div>
     <div class='panel-body'>
@@ -51,6 +52,10 @@
         <div class='tab-pane theme-control-tab-pane' id='cssTab'>
           <?php echo html::textarea('css', isset($setting['css']) ? $setting['css'] : '', "rows=20 class='form-control codeeditor' data-mode='css' data-height='350'");?>
           <p class='text-info text-tip'><?php echo $lang->ui->theme->customStyleTip; ?></p>
+        </div>
+        <div class='tab-pane theme-control-tab-pane' id='jsTab'>
+          <?php echo html::textarea('js', isset($setting['js']) ? $setting['js'] : '', "rows=20 class='form-control codeeditor' data-mode='javascript' data-height='350'");?>
+          <p class='text-info text-tip'><?php echo $lang->ui->theme->customScriptTip; ?></p>
         </div>
       </div>
       <div class="form-footer">
