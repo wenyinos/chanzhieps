@@ -1,27 +1,17 @@
 <?php
 include TPL_ROOT . 'common/header.html.php';
-include TPL_ROOT . 'common/form.html.php';
 ?>
-
-<div class="panel-section">
-  <div class="panel-heading">
-    <div class="title"><strong><?php echo $lang->user->login->welcome;?></strong></div>
+<hr class='space'>
+<div class='panel-section'>
+  <?php include TPL_ROOT . 'user/oauthlogin.html.php';?>
+  <div class='panel-heading'>
+    <div class='title'><strong><?php echo $lang->user->login->welcome;?></strong></div>
   </div>
-  <div class="panel-body">
-    <div class="row">
-      <div class="col-6"><a href="###" class="btn danger block"><i class="icon-weibo"></i> 新浪微博</a></div>
-      <div class="col-6"><a href="###" class="btn info block"><i class="icon-qq"></i> QQ</a></div>
-    </div>
-  </div>
-  <hr>
-  <div class="panel-heading">
-    <div class="title"><strong><?php echo $lang->user->login->welcome;?></strong></div>
-  </div>
-  <div class="panel-body">
+  <div class='panel-body'>
   <form method='post' id='loginForm' role='form' data-checkfingerprint='1'>
     <div class='form-group hide form-message alert text-danger bg-danger-pale'>
-      <i class="icon icon-info-sign icon-s1"></i>
-      <div class="content"></div>
+      <i class='icon icon-info-sign icon-s1'></i>
+      <div class='content'></div>
     </div>
     <div class='form-group'><?php echo html::input('account','',"placeholder='{$lang->user->inputAccountOrEmail}' class='form-control'");?></div>
     <div class='form-group'><?php echo html::password('password','',"placeholder='{$lang->user->inputPassword}' class='form-control'");?></div>
@@ -34,5 +24,5 @@ include TPL_ROOT . 'common/form.html.php';
   </form>
   </div>
 </div>
-
+<?php include TPL_ROOT . 'common/form.html.php'; ?>
 <?php include TPL_ROOT . 'common/footer.html.php';?>
