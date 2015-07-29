@@ -1,9 +1,6 @@
 <?php
 include TPL_ROOT . 'common/header.html.php';
-js::import($jsRoot . 'md5.js');
-js::import($jsRoot . 'fingerprint/fingerprint.js');
-js::import($templateCommonRoot . 'js/mzui.form.min.js');
-js::set('random', $this->session->random);
+include TPL_ROOT . 'common/form.html.php';
 ?>
 
 <div class="panel-section">
