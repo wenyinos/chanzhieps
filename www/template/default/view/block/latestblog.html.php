@@ -35,7 +35,7 @@ $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 :
     ?>
       <div class='item'>
         <div class='item-heading'>
-          <?php if($content->showCategory):?>
+          <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
           <?php if($content->categoryName == 'abbr'):?>
           <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] ';?>
           <?php echo html::a(helper::createLink('blog', 'index', "categoryID={$article->category->id}", "category={$article->category->alias}"), $categoryName);?>
@@ -77,7 +77,7 @@ $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 :
       ?>
       <?php if(isset($content->time)):?>
       <li>
-        <?php if($content->showCategory):?>
+        <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
         <?php if($content->categoryName == 'abbr'):?>
         <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] ';?>
         <?php echo html::a(helper::createLink('blog', 'index', "categoryID={$article->category->id}", "category={$article->category->alias}"), $categoryName);?>
@@ -90,7 +90,7 @@ $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 :
       </li>
       <?php else:?>
       <li>
-        <?php if($content->showCategory):?>
+        <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
         <?php if($content->categoryName == 'abbr'):?>
         <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] ';?>
         <?php echo html::a(helper::createLink('blog', 'index', "categoryID={$article->category->id}", "category={$article->category->alias}"), $categoryName);?>
