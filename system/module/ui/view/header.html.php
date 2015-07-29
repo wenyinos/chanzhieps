@@ -29,7 +29,7 @@
                   $selectThemeUrl = $this->createLink('ui', 'setTemplate', "template={$code}&theme={$theTheme}");
                   $themeClass = $isCurrent && $currentTheme == $theTheme ? 'current' : '';
                   $themesList .= "<div class='theme menu-theme {$themeClass}' data-url='{$selectThemeUrl}' data-theme='{$theTheme}'><div class='theme-card'><i class='icon-ok icon'></i>";
-                  $themesList .= "<div class='theme-img'>" . html::image($webRoot . "template/{$code}/theme/{$theTheme}/preview.png") . '</div>';
+                  $themesList .= "<div class='theme-img'>" . html::image($webRoot . "template/{$code}/theme/{$theTheme}/preview.png", "alt={$theTheme}") . '</div>';
                   $themesList .= "<div class='theme-name'>{$name}</div>";
                   $themesList .= '</div></div>';
               }

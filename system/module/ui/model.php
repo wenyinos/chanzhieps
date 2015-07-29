@@ -32,10 +32,17 @@ class uiModel extends model
             $config       = Spyc::YAMLLoadString(file_get_contents($docFile));
             if(empty($config)) continue;
             $templates[$templateName] = $config;
+            if(!isset($templates[$templateName]['themes']))
+            {
+                $templates[$templateName]['themes'] = array('default' => 'default');
+
+                $themePath = $this->app->getWwwRoot() . 'template' . DS . $templateName . '/theme/default';
+                if(!is_dir($themePath)) mkdir($themePath, 0777, true);
+            }
         }
 
-        $importedTemes = $this->dao->select('*')->from(TABLE_PACKAGE)->where('type')->eq('theme')->fetchGroup('templateCompatible');
-        foreach($importedTemes as $template => $themes)
+        $importedThemes = $this->dao->select('*')->from(TABLE_PACKAGE)->where('type')->eq('theme')->fetchGroup('templateCompatible');
+        foreach($importedThemes as $template => $themes)
         {
             foreach($themes as $theme)
             {
@@ -57,7 +64,7 @@ class uiModel extends model
     {
         $templates = $this->getTemplates();   
         $template  = zget($templates, $template);
-        return $template['themes'];
+        return isset($template['themes']) ? $template['themes'] : array();
     }
 
     /**
@@ -211,10 +218,17 @@ class uiModel extends model
         
         if(!empty($extraCss)) $extraCss = $lessc->compile($extraCss);
 
-        $css  = '/* User custom theme style for teamplate:' . $template . ' - theme:' . $theme . '. (' . date("Y-m-d H:i:s") . ') */' . "\r\n";
-        $css .= $lessc->compileFile($lessTemplate);
-        $css .= "\r\n\r\n" . '/* Extra css for teamplate:' . $template . ' - theme:' . $theme . ' */' . "\r\n";
-        $css .= $extraCss;
+        $css  = '';
+        if(file_exists($lessTemplate))
+        {
+            $css .= '/* User custom theme style for teamplate:' . $template . ' - theme:' . $theme . '. (' . date("Y-m-d H:i:s") . ') */' . "\r\n";
+            $css .= $lessc->compileFile($lessTemplate);
+        }
+        if($extraCss)
+        {
+            $css .= "\r\n\r\n" . '/* Extra css for teamplate:' . $template . ' - theme:' . $theme . ' */' . "\r\n";
+            $css .= $extraCss;
+        }
 
         file_put_contents($cssFile, $css);
 
