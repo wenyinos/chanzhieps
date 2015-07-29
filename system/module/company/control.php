@@ -29,6 +29,18 @@ class company extends control
     }
 
     /**
+     * company contact.
+     * @return void
+     */
+    public function contact()
+    {
+        $this->view->title   = $lang->company->contact;
+        $this->view->contact = $this->company->getContact();
+        
+        $this->display();
+    }
+
+    /**
      * set company basic info.
      * 
      * @access public
