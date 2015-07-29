@@ -30,7 +30,9 @@
     </thead>
 
     <tbody>
+      <?php $maxID = 0;?>
       <?php foreach($children as $child):?>
+      <?php $maxID = $maxID < $child->id ? $child->id : $maxID;?>
       <tr class='text-center text-middle'>
         <td><?php echo html::select("type[$child->id]",     $lang->book->typeList, $child->type, "class='form-control'");?></td>
         <td><?php echo html::input("author[$child->id]",    $child->author,    "class='form-control'");?></td>
@@ -47,7 +49,7 @@
       <?php endforeach;?>
 
       <?php for($i = 0; $i < BOOK::NEW_CATALOG_COUNT ; $i ++):?>
-      <tr class='text-center text-middle'>
+      <tr class='text-center text-middle node'>
         <td><?php echo html::select("type[]", $lang->book->typeList, '', "class='form-control'");?></td>
         <td><?php echo html::input("author[]", $app->user->realname, "class='form-control'");?></td>
         <td><?php echo html::input("title[]", '', "class='form-control'");?></td>
@@ -72,4 +74,5 @@
   </table>
 </div>
 </form>
+<?php js::set('maxID', $maxID)?>
 <?php include '../../common/view/footer.admin.html.php';?>
