@@ -18,13 +18,19 @@ $browseLink      = $type == 'article' ? 'createBrowseLink' : 'create' . ucfirst(
 $startCategory = 0;
 if(isset($block->content->fromCurrent) and $block->content->fromCurrent)
 {
-    if($this->app->getModuleName() == 'article' and $this->session->articleCategory)
+    if($type == 'article' and $this->app->getModuleName() == 'article' and $this->session->articleCategory)
     {
         $category = $this->tree->getByID($this->session->articleCategory);
         $startCategory = $category->parent;
     }
 
-    if($this->app->getModuleName() == 'product' and $this->session->productCategory)
+    if($type == 'blog' and $this->app->getModuleName() == 'blog' and $this->session->articleCategory)
+    {
+        $category = $this->tree->getByID($this->session->articleCategory);
+        $startCategory = $category->parent;
+    }
+
+    if($type == 'product' and $this->app->getModuleName() == 'product' and $this->session->productCategory)
     {
         $category = $this->tree->getByID($this->session->productCategory);
         $startCategory = $category->parent;
