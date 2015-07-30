@@ -1,6 +1,7 @@
 <?php
 js::set('objectType', $objectType);
 js::set('objectID',   $objectID);
+js::set('messageRefreshUrl', $this->createLink('message', 'comment', "objecType=$objectType&objectID=$objectID"));
 if(isset($pageCSS)) css::internal($pageCSS);
 ?>
 <hr>
@@ -38,7 +39,7 @@ if(isset($pageCSS)) css::internal($pageCSS);
 </div>
 
 <div class='modal fade' id='commentDialog'>
-  <div class='modal-dialog fixed-header'>
+  <div class='modal-dialog'>
     <div class='modal-content'>
       <div class='modal-header'>
         <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>×</span></button>
@@ -92,6 +93,7 @@ if(isset($pageCSS)) css::internal($pageCSS);
 </div>
 
 <?php include TPL_ROOT . 'common/form.html.php'; ?>
+<?php if(isset($pageJS)) js::execute($pageJS);?>
 <script>
 $(function()
 {
@@ -102,11 +104,14 @@ $(function()
         if(response.result == 'success')
         {
             $('#commentDialog').modal('hide');
-            setTimeout(function()
+            if(window.v)
             {
-                var link = "<?php echo $this->createLink('message', 'comment', "objecType=$objectType&objectID=$objectID")?>";
-                $commentBox.load(link, location.href="#first");
-            }, 200)
+                setTimeout(function()
+                {
+                    var link = window.v.messageRefreshUrl;
+                    if(link) $commentBox.load(link, location.href="#first");
+                }, 200)
+            }
         }
         if(response.reason == 'needChecking')
         {
