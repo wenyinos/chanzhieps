@@ -95,23 +95,46 @@ class messageModel extends model
      * @access public
      * @return array
      */
-    public function getFrontReplies($message)
+    public function getFrontReplies($message, $type = '')
     {
         $replies = $this->getReplies($message);
 
         if(!empty($replies))
         {
-            foreach($replies as $reply)
+            if($type !== 'simple')
             {
-                echo "<tr class='reply'>";
-                echo "<th class='th-from text-important'>$reply->from<br />";
-                echo "<span class='time'>" . formatTime($reply->date, 'Y/m/d') . "</span></th>";
-                echo "<td class='td-content'><div class='content-detail'>" . nl2br($reply->content) . '</div></td>';
-                echo "<td class='td-action'>";
-                echo html::a(helper::createLink('message', 'reply', "id={$reply->id}"), $this->lang->message->reply, " data-toggle='modal' data-type='iframe' id='reply{$reply->id}'");
-                echo '</td>';
-                echo '</tr>';
-                $this->getFrontReplies($reply);
+                foreach($replies as $reply)
+                {
+                    echo "<tr class='reply'>";
+                    echo "<th class='th-from text-important'>$reply->from<br />";
+                    echo "<span class='time'>" . formatTime($reply->date, 'Y/m/d') . "</span></th>";
+                    echo "<td class='td-content'><div class='content-detail'>" . nl2br($reply->content) . '</div></td>';
+                    echo "<td class='td-action'>";
+                    echo html::a(helper::createLink('message', 'reply', "id={$reply->id}"), $this->lang->message->reply, " data-toggle='modal' data-type='iframe' id='reply{$reply->id}'");
+                    echo '</td>';
+                    echo '</tr>';
+                    $this->getFrontReplies($reply);
+                }
+            }
+            else
+            {
+                echo "<div class='replies'>";
+                foreach($replies as $reply)
+                {
+                    echo "<div class='reply card'>";
+
+                    echo "<div class='card-heading'>";
+                    echo "<span class='text-important'><i class='icon-reply'></i> {$reply->from}</span> &nbsp; <small class='text-muted'>" . formatTime($reply->date, 'Y/m/d') . "</small>";
+                    echo "<div class='actions'>" . html::a(helper::createLink('message', 'reply', "id={$reply->id}"), $this->lang->message->reply, " data-toggle='modal' data-type='ajax' id='reply{$reply->id}'") . "</div>";
+                    echo '</div>';
+
+                    echo "<div class='card-content'>" . nl2br($reply->content) . "</div>";
+
+                    $this->getFrontReplies($reply, $type);
+
+                    echo '</div>';
+                }
+                echo '</div>';
             }
         }
     }
