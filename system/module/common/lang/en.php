@@ -100,6 +100,7 @@ $lang->js->loading          = 'Loading...';
 $lang->js->timeout          = 'Timeout';
 $lang->js->errorThrown      = '<h4>Something error ：</h4>';
 $lang->js->continueShopping = 'Continue Shopping';
+$lang->js->required         = 'Required';
 
 /* Contact fields*/
 $lang->company = new stdclass();

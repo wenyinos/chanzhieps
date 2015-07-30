@@ -31,7 +31,7 @@ $boards  = $this->dao->select('*')->from(TABLE_CATEGORY)->where('type')->eq('for
     <ul class='ul-list'>
       <?php foreach($threads as $thread): ?>
       <li>
-        <?php if($content->showCategory):?>
+        <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
         <?php if($content->categoryName == 'abbr'):?>
         <?php $boardName = '[' . ($boards[$thread->board]->abbr ? $boards[$thread->board]->abbr : $boards[$thread->board]->name) . '] ';?>
         <?php echo html::a(helper::createLink('forum', 'board', "boardID={$thread->board}", "category={$boards[$thread->board]->alias}"), $boardName);?>

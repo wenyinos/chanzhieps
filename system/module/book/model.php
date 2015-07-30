@@ -469,8 +469,8 @@ class bookModel extends model
         /* Init the catalogue object. */
         $now = helper::now();
         $node = new stdclass();
-        $node->parent     = $parentNode ? $parentNode->id : 0;
-        $node->grade      = $parentNode ? $parentNode->grade + 1 : 1;
+        $node->parent = $parentNode ? $parentNode->id : 0;
+        $node->grade  = $parentNode ? $parentNode->grade + 1 : 1;
 
         foreach($this->post->title as $key => $nodeTitle)
         {

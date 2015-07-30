@@ -101,6 +101,8 @@ class orderModel extends model
         $orderProduct = new stdclass();
         $orderProduct->orderID = $orderID;
         
+        if(!$this->post->product) return array('result' => 'fail', 'message' => $this->lang->order->noProducts);
+
         /* Save products of the order and compute order amount. */
         $amount = 0;
         foreach($this->post->product as $product)

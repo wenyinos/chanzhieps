@@ -31,6 +31,8 @@ $thisMethodName     = $this->app->getMethodName();
   echo html::meta('description', strip_tags($desc));
   if(isset($this->config->site->meta)) echo $this->config->site->meta;
 
+  js::exportConfigVars();
+  js::set('lang', $lang->js);
   if($config->debug)
   {
       js::import($templateCommonRoot . 'js/mzui.all.min.js');

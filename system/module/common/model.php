@@ -422,7 +422,9 @@ class commonModel extends model
         {
             if($asListItem)
             {
-                echo '<li>' . html::a(helper::createLink('user', 'control'), $app->lang->dashboard) . '</li>';
+                echo "<li class='menu-user-center text-center'>" . html::a(helper::createLink('user', 'control'), "<div class='user-avatar'><i class='icon icon-user avatar icon-s2 bg-primary circle'></i><strong class='user-name'>{$app->session->user->realname}</strong></div>") . '</li>';
+                // echo "<li class='menu-user-center text-center'></li>";
+                echo "<li>" . html::a(helper::createLink('user', 'control'), $app->lang->dashboard) . '</li>';
                 echo '<li>' . html::a(helper::createLink('user', 'logout'),  $app->lang->logout) . '</li>';
             }
             else
