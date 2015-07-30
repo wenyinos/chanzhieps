@@ -74,6 +74,19 @@ $config->file->dangers = 'php,php3,php4,phtml,php5,jsp,py,rb,asp,aspx,ashx,asa,c
 $config->file->allowed = ',txt,doc,docx,dot,wps,wri,pdf,ppt,xls,xlsx,ett,xlt,xlsm,csv,jpg,jpeg,png,psd,gif,ico,bmp,swf,avi,rmvb,rm,mp3,mp4,3gp,flv,mov,movie,rar,zip,bz,bz2,tar,gz,'; // Allowed file types.
 $config->file->maxSize = 2 * 1024 * 1024;  // Max size allowed(Byte).
 
+/*Thanks list*/
+$config->thanksList['IPIP.NET'] = 'http://www.ipip.net/';
+$config->thanksList['Lessphp v0.4.0'] = 'http://leafo.net/lessphp/';
+$config->thanksList['MobileDetect 2.8.15'] = 'http://mobiledetect.net/';
+$config->thanksList['PhpConcept 2.8.2'] = 'http://www.phpconcept.net/';
+$config->thanksList['PHPMailer 5.1'] = 'http://phpmailer.sourceforge.net/';
+$config->thanksList['PhpThumb 3.0'] = 'http://phpthumb.sourceforge.net/';
+$config->thanksList['HTML Purifier 4.6.0'] = 'http://htmlpurifier.org/';
+$config->thanksList['PHP QRCode 1.1.4'] = 'http://phpqrcode.sourceforge.net/';
+$config->thanksList['Smarty 3.1.9'] = 'http://www.smarty.net/';
+$config->thanksList['Snoopy 1.2.4'] = 'http://snoopy.sourceforge.net/';
+$config->thanksList['Spyc 0.5'] = 'http://code.google.com/p/spyc/';
+
 /* View type settings. */ 
 $config->viewPrefix['mhtml'] = 'm.';
 
