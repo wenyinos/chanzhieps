@@ -81,6 +81,8 @@ $lang->article->lblEditor    = 'Edited by %s at %s';
 $lang->article->lblComments  = '<strong>Comments:</strong> %s';
 
 $lang->article->none      = 'None';
+$lang->article->previous  = 'Previous';
+$lang->article->next      = 'Next';
 $lang->article->directory = 'List';
 $lang->article->noCssTag  = 'No &lt;style&gt;&lt;/style&gt; tag';
 $lang->article->noJsTag   = 'No &lt;script&gt;&lt;/script&gt; tag';
