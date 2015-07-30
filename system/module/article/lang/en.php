@@ -3,7 +3,7 @@
  * The article category zh-cn file of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     article
  * @version     $Id$
@@ -81,6 +81,8 @@ $lang->article->lblEditor    = 'Edited by %s at %s';
 $lang->article->lblComments  = '<strong>Comments:</strong> %s';
 
 $lang->article->none      = 'None';
+$lang->article->previous  = 'Previous';
+$lang->article->next      = 'Next';
 $lang->article->directory = 'List';
 $lang->article->noCssTag  = 'No &lt;style&gt;&lt;/style&gt; tag';
 $lang->article->noJsTag   = 'No &lt;script&gt;&lt;/script&gt; tag';

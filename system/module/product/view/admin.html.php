@@ -3,7 +3,7 @@
  * The admin view file of product of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     product
  * @version     $Id$
@@ -16,7 +16,21 @@
 <div class='panel'>
   <div class='panel-heading'>
   <strong><i class="icon-list-ul"></i> <?php echo $lang->product->list;?></strong>
-  <div class='panel-actions'><?php commonModel::printLink('product', 'create', "category={$categoryID}", '<i class="icon-plus"></i> ' . $lang->product->create, 'class="btn btn-primary"');?></div>
+  <div class='panel-actions'>
+    <form method='get' class='form-inline form-search'>
+      <?php echo html::hidden('m', 'product');?>
+      <?php echo html::hidden('f', 'admin');?>
+      <?php echo html::hidden('categoryID', $categoryID);?>
+      <?php echo html::hidden('orderBy', $orderBy);?>
+      <?php echo html::hidden('recTotal', isset($this->get->recTotal) ? $this->get->recTotal : 0);?>
+      <?php echo html::hidden('recPerPage', isset($this->get->recPerPage) ? $this->get->recPerPage : 10);?>
+      <?php echo html::hidden('pageID', isset($this->get->pageID) ? $this->get->pageID : 1);?>
+      <div class="input-group">
+      <?php echo html::input("searchWord", $this->get->searchWord, "class='form-control search-query'");?>
+      <span class="input-group-btn"><?php echo html::submitButton($lang->search->common, "btn btn-primary");?> </span>
+      </div>
+    </form>
+    <?php commonModel::printLink('product', 'create', "category={$categoryID}", '<i class="icon-plus"></i> ' . $lang->product->create, 'class="btn btn-primary"');?></div>
   </div>
   <table class='table table-hover table-striped tablesorter'>
     <thead>
@@ -62,8 +76,7 @@
             </ul>
           </span>
         </td>
-      </tr>
-      <?php endforeach;?>
+      </tr> <?php endforeach;?>
     </tbody>
     <tfoot><tr><td colspan='8'><?php $pager->show();?></td></tr></tfoot>
   </table>

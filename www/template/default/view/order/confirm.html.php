@@ -3,7 +3,7 @@
  * The order view of order module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     order 
  * @version     $Id$
@@ -12,11 +12,13 @@
 ?>
 <?php include TPL_ROOT . 'common/header.html.php';?>
 <?php js::set('currencySymbol', $currencySymbol);?>
+<?php js::set('createdSuccess', $lang->order->createdSuccess);?>
+<?php js::set('goToPay', $lang->order->goToPay);?>
 <?php if(!empty($products)):?>
 <?php $total = 0;?>
 <div class='panel'>
   <div class='panel-heading'><strong><?php echo $lang->order->confirm;?></strong></div>
-  <form id='ajaxForm' action='<?php echo helper::createLink('order', 'create'); ?>' method='post'>
+  <form id='confirmForm' action='<?php echo helper::createLink('order', 'create'); ?>' method='post'>
     <div class='panel-body'>
       <div id='addressBox'>
         <div>

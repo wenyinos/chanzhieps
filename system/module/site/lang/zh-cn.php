@@ -3,7 +3,7 @@
  * The site module zh-cn file of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     site
  * @version     $Id$
@@ -118,9 +118,12 @@ $lang->site->frontList['guest'] = '不需要登录';
 
 $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = '会员';
-$lang->site->moduleAvailable['forum']   = '论坛';
+$lang->site->moduleAvailable['article'] = '文章';
 $lang->site->moduleAvailable['blog']    = '博客';
+$lang->site->moduleAvailable['product'] = '产品';
 $lang->site->moduleAvailable['book']    = '手册';
+$lang->site->moduleAvailable['page']    = '单页';
+$lang->site->moduleAvailable['forum']   = '论坛';
 $lang->site->moduleAvailable['message'] = '评论留言';
 $lang->site->moduleAvailable['search']  = '搜索';
 $lang->site->moduleAvailable['shop']    = '商城';

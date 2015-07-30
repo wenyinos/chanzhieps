@@ -3,7 +3,7 @@
  * The model file of user module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     user
  * @version     $Id$
@@ -119,7 +119,7 @@ class userModel extends model
      * 
      * @param mixed $account
      * @access public
-     * @return object           the user.
+     * @return object|bool           the user.
      */
     public function getByAccount($account)
     {
@@ -128,8 +128,7 @@ class userModel extends model
             ->beginIF(validater::checkEmail($account))->where('email')->eq($account)->fi()
             ->beginIF(!validater::checkEmail($account))->where('account')->eq($account)->fi()
             ->fetch();
-
-        if(!$user) return $user;
+        if(empty($user)) return false;
 
         if(!empty($user->realnames))
         {

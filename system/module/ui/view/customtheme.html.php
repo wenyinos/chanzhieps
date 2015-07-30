@@ -14,14 +14,18 @@
   <div class='panel' id='mainPanel'>
     <div class='panel-heading'>
       <ul class='nav nav-tabs'>
+        <?php if(in_array("$template.$theme", $this->config->ui->systemThemes)):?>
         <?php foreach($lang->ui->groups as $group => $name):?>
         <li><?php echo html::a('#' . $group . 'Tab', $name, "data-toggle='tab' class='theme-control-tab'");?></li>
         <?php endforeach;?>
+        <?php endif;?>
         <li><a href='#cssTab' data-toggle='tab'><?php echo $lang->ui->theme->extraStyle; ?></a></li>
+        <li><a href='#jsTab' data-toggle='tab'><?php echo $lang->ui->theme->extraScript; ?></a></li>
       </ul>
     </div>
     <div class='panel-body'>
       <div class='tab-content'>
+        <?php if(in_array("$template.$theme", $this->config->ui->systemThemes)):?>
         <?php foreach($lang->ui->groups as $group => $name):?>
         <div class='tab-pane theme-control-tab-pane' id='<?php echo $group?>Tab'>
           <table class='table table-form borderless'>
@@ -44,9 +48,14 @@
           </table>
         </div>
         <?php endforeach;?>
+        <?php endif;?>
         <div class='tab-pane theme-control-tab-pane' id='cssTab'>
           <?php echo html::textarea('css', isset($setting['css']) ? $setting['css'] : '', "rows=20 class='form-control codeeditor' data-mode='css' data-height='350'");?>
           <p class='text-info text-tip'><?php echo $lang->ui->theme->customStyleTip; ?></p>
+        </div>
+        <div class='tab-pane theme-control-tab-pane' id='jsTab'>
+          <?php echo html::textarea('js', isset($setting['js']) ? $setting['js'] : '', "rows=20 class='form-control codeeditor' data-mode='javascript' data-height='350'");?>
+          <p class='text-info text-tip'><?php echo $lang->ui->theme->customScriptTip; ?></p>
         </div>
       </div>
       <div class="form-footer">

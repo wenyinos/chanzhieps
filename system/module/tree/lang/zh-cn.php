@@ -3,7 +3,7 @@
  * The tree category zh-cn file of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     tree
  * @version     $Id$
@@ -35,20 +35,23 @@ $lang->tree->placeholder->link = '输入链接，可以是站外链接';
 
 /* Lang items for article, products. */
 $lang->category = new stdclass();
-$lang->category->common   = '类目';
-$lang->category->name     = '类目名称';
-$lang->category->alias    = '别名';
-$lang->category->parent   = '上级类目';
-$lang->category->desc     = '描述';
-$lang->category->keywords = '关键词';
-$lang->category->children = "子类目";
-$lang->category->isLink   = '跳转';
-$lang->category->link     = '链接';
+$lang->category->common     = '类目';
+$lang->category->name       = '类目名称';
+$lang->category->abbr       = '简称';
+$lang->category->alias      = '别名';
+$lang->category->parent     = '上级类目';
+$lang->category->desc       = '描述';
+$lang->category->keywords   = '关键词';
+$lang->category->children   = "子类目";
+$lang->category->unsaleable = '非卖品';
+$lang->category->isLink     = '跳转';
+$lang->category->link       = '链接';
 
 /* Lang items for forum. */
 $lang->board = new stdclass();
 $lang->board->common     = '版块';
 $lang->board->name       = '版块';
+$lang->board->abbr       = '简称';
 $lang->board->alias      = '别名';
 $lang->board->parent     = '上级版块';
 $lang->board->desc       = '描述';

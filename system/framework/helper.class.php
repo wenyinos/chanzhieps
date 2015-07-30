@@ -422,14 +422,14 @@ class helper
     {
         global $config;
 
-        if(strpos($domain, ':') !== false) $domain = substr($domain, 0, strpos($domain, ':'));
+        if(strpos($domain, ':') !== false) $domain = substr($domain, 0, strpos($domain, ':')); // Remove port from domain.
         $domain = strtolower($domain);
-        if($domain != 'localhost' and !preg_match('/^([a-z0-9\-]+\.)+[a-z0-9\-]+$/', $domain)) die('domain denied');
 
-        $domain = str_replace('-', '_', $domain);    // Replace '-' by '_'.
-        if(strpos($domain, ':') !== false) $domain = substr($domain, 0, strpos($domain, ':'));    // Remove port from domain.
+        if($domain == 'localhost') return $domain;
+        if(!preg_match('/^([a-z0-9\-]+\.)+[a-z0-9\-]+$/', $domain)) die('domain denied');
 
-        $items = explode('.', $domain);
+        $domain  = str_replace('-', '_', $domain);    // Replace '-' by '_'.
+        $items   = explode('.', $domain);
         $postfix = str_replace($items[0] . '.', '', $domain);
         if(strpos($config->domainPostfix, "|$postfix|") !== false) return $items[0];
 
@@ -476,6 +476,50 @@ class helper
     public static function isAjaxRequest()
     {
         return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest';
+    }
+
+    /**
+     * Set viewType.
+     * 
+     * @static
+     * @access public
+     * @return void
+     */
+    public static function setViewType()
+    {
+        global $config, $app;
+        if($config->requestType == 'PATH_INFO')
+        {
+            $pathInfo = $app->getPathInfo('PATH_INFO');
+            if(empty($pathInfo)) $pathInfo = $app->getPathInfo('ORIG_PATH_INFO');
+            if(!empty($pathInfo))
+            {
+                $dotPos = strrpos($pathInfo, '.');
+                if($dotPos)
+                {
+                    $viewType = substr($pathInfo, $dotPos + 1);
+                }
+                else
+                {
+                    $config->default->view = $config->default->view == 'mhtml' ? 'html' : $config->default->view;
+                }
+            }
+        }
+        elseif($config->requestType == 'GET')
+        {
+            if(isset($_GET[$config->viewVar]))
+            {
+                $viewType = $_GET[$config->viewVar]; 
+            }
+            else
+            {
+                /* Set default view when url has not module name. such as only domain. */
+                $config->default->view = ($config->default->view == 'mhtml' and isset($_GET[$config->moduleVar])) ? 'html' : $config->default->view;
+            }
+        }
+
+        if(isset($viewType) and strpos($config->views, ',' . $viewType . ',') === false) $viewType = $config->default->view;
+        $app->viewType = isset($viewType) ? $viewType : $config->default->view;
     }
 
     /**

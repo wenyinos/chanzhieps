@@ -11,6 +11,9 @@ $lang->book->catalog    = '章节';
 $lang->book->edit       = '编辑';
 $lang->book->sort       = '排序';
 
+$lang->book->searchResults     = '搜索结果';
+$lang->book->inputArticleTitle = '请输入文章标题';
+
 $lang->book->id          = '编号';
 $lang->book->type        = '类型';
 $lang->book->parent      = '类目';
@@ -24,6 +27,7 @@ $lang->book->summary     = '简介';
 $lang->book->content     = '内容';
 $lang->book->alias       = '别名';
 $lang->book->order       = '排序';
+$lang->book->views       = '阅读';
 $lang->book->files       = '附件';
 $lang->book->images      = '图片';
 $lang->book->chapterList = '目录管理';

@@ -3,7 +3,7 @@
  * The latest article front view file of block module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     block
  * @version     $Id$
@@ -36,6 +36,14 @@ $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 :
     <div class='item'>
       <div class='item-heading'>
         <?php if($article->sticky):?><span class='label label-danger'><?php echo $this->lang->article->stick;?></span><?php endif;?>
+        <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
+        <?php if($content->categoryName == 'abbr'):?>
+        <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] ';?>
+        <?php echo html::a(helper::createLink('article', 'browse', "categoryID={$article->category->id}", "category={$article->category->alias}"), $categoryName);?>
+        <?php else:?>
+        <?php echo '[' . $article->category->name . '] ';?>
+        <?php endif;?>
+        <?php endif;?>
         <strong><?php echo html::a($url, $article->title);?></strong>
       </div>
       <div class='item-content'>
@@ -70,12 +78,28 @@ $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 :
       ?>
       <?php if(isset($content->time)):?>
       <li>
+        <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
+        <?php if($content->categoryName == 'abbr'):?>
+        <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] ';?>
+        <?php echo html::a(helper::createLink('article', 'browse', "categoryID={$article->category->id}", "category={$article->category->alias}"), $categoryName);?>
+        <?php else:?>
+        <?php echo html::a(helper::createLink('article', 'browse', "categoryID={$article->category->id}", "category={$article->category->alias}"), '[' . $article->category->name . '] ');?>
+        <?php endif;?>
+        <?php endif;?>
         <?php echo html::a($url, $article->title, "title='{$article->title}'");?>
         <?php if($article->sticky):?><span class='label label-danger'><?php echo $this->lang->article->stick;?></span><?php endif;?>
         <span class='pull-right'><?php echo substr($article->addedDate, 0, 10);?></span>
       </li>
       <?php else:?>
       <li>
+        <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
+        <?php if($content->categoryName == 'abbr'):?>
+        <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] ';?>
+        <?php echo html::a(helper::createLink('article', 'browse', "categoryID={$article->category->id}", "category={$article->category->alias}"), $categoryName);?>
+        <?php else:?>
+        <?php echo html::a(helper::createLink('article', 'browse', "categoryID={$article->category->id}", "category={$article->category->alias}"), '[' . $article->category->name . '] ');?>
+        <?php endif;?>
+        <?php endif;?>
         <?php echo html::a($url, $article->title, "title='{$article->title}'");?>
         <?php if($article->sticky):?><span class='label label-danger'><?php echo $this->lang->article->stick;?></span><?php endif;?>
       </li>

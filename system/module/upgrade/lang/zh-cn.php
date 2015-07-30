@@ -3,7 +3,7 @@
  * The upgrade module zh-cn file of ZenTaoPMS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     upgrade
  * @version     $$
@@ -31,9 +31,7 @@ $lang->upgrade->backupData = <<<EOT
 EOT;
 
 $lang->upgrade->createSlidePath = <<<EOT
-<div class='alert'>
-请创建幻灯片目录：<b>%s</b> 并开启该目录写权限后继续。
-</div>
+<div class='alert'> 请创建幻灯片目录：<b>%s</b> 并开启该目录写权限后继续。 </div>
 EOT;
 
 $lang->upgrade->versionNote = "务必选择正确的版本，否则会造成数据丢失。";

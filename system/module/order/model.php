@@ -3,7 +3,7 @@
  * The model file of order module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     order
  * @version     $Id$
@@ -101,6 +101,8 @@ class orderModel extends model
         $orderProduct = new stdclass();
         $orderProduct->orderID = $orderID;
         
+        if(!$this->post->product) return array('result' => 'fail', 'message' => $this->lang->order->noProducts);
+
         /* Save products of the order and compute order amount. */
         $amount = 0;
         foreach($this->post->product as $product)

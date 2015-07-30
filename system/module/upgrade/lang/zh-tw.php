@@ -3,7 +3,7 @@
  * The upgrade module zh-tw file of ZenTaoPMS.
  *
  * @copyright   Copyright 2009-2015 青島易軟天創網絡科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     upgrade
  * @version     $$
@@ -28,6 +28,10 @@ $lang->upgrade->backupData = <<<EOT
 <strong>使用phpMyAdmin或者mysqldump命令備份資料庫。</strong>
 <textarea class='autoSelect w-500px red' readonly rows='1' > mysqldump -u %s -p%s %s > chanzhi.sql </textarea>
 </pre>
+EOT;
+
+$lang->upgrade->createSlidePath = <<<EOT
+<div class='alert'> 請創建幻燈片目錄：<b>%s</b> 並開啟該目錄寫權限後繼續。 </div>
 EOT;
 
 $lang->upgrade->versionNote = "務必選擇正確的版本，否則會造成數據丟失。";

@@ -3,7 +3,7 @@
  * The edit view of tree module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     tree
  * @version     $Id: edit.html.php 824 2010-05-02 15:32:06Z wwccss $
@@ -40,8 +40,21 @@ $themeRoot = $webRoot . "theme/";
               </label>
             </span>
             <?php endif;?>
+            <?php if($category->type == 'product'):?>
+            <span class="input-group-addon">
+              <label class='checkbox'>
+                <?php $checked = $category->unsaleable ? 'checked' : '';?>
+                <input type='checkbox' name='unsaleable' id='unsaleable' value='1' <?php echo $checked;?> />
+                <span><?php echo $lang->category->unsaleable;?></span>
+              </label>
+            </span>
+            <?php endif;?>
           </div>
         </div>
+      </div>
+      <div class='form-group'> 
+        <label class='col-md-2 control-label'><?php echo $lang->category->abbr;?></label>
+        <div class='col-md-9'><?php echo html::input('abbr', $category->abbr, "class='form-control'");?></div>
       </div>
       <?php if($category->type != 'forum' or $category->parent != 0):?>
       <div class='form-group link'> 

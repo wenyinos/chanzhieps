@@ -3,7 +3,7 @@
  * The block module zh-cn file of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     block
  * @version     $Id$
@@ -25,6 +25,7 @@ $lang->block->regionList      = '区域列表';
 $lang->block->select          = '请选择区块';
 $lang->block->categories      = '分类';
 $lang->block->showImage       = '图文';
+$lang->block->showCategory    = '显示类目';
 $lang->block->showTime        = '显示时间';
 $lang->block->product         = '产品';
 $lang->block->slide           = '幻灯片';
@@ -86,6 +87,13 @@ $lang->block->gridOptions[12] = '100%';
 
 $lang->block->category = new stdclass();
 $lang->block->category->showChildren = '显示子分类';
+$lang->block->category->fromCurrent  = '当前类目开始';
 
 $lang->block->category->showChildrenList[1] = '是';
 $lang->block->category->showChildrenList[0] = '否';
+
+$lang->block->category->fromCurrentList[1] = '是';
+$lang->block->category->fromCurrentList[0] = '否';
+
+$lang->block->category->showCategoryList['abbr'] = '简称';
+$lang->block->category->showCategoryList['name'] = '全称';

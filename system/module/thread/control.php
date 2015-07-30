@@ -3,7 +3,7 @@
  * The control file of thread module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     thread
  * @version     $Id$
@@ -128,7 +128,7 @@ class thread extends control
     public function view($threadID, $pageID = 1)
     {
         $thread = $this->thread->getByID($threadID);
-        if(!$thread) die(js::locate('back'));
+        if(!$thread or $thread->hidden) die(js::locate('back'));
 
         if($thread->link)
         {

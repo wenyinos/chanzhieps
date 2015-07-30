@@ -3,7 +3,7 @@
  * The model file of thread module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     thread
  * @version     $Id$
@@ -42,16 +42,22 @@ class threadModel extends model
      * @access public
      * @return array
      */
-    public function getList($board, $orderBy, $pager = null)
+    public function getList($board, $orderBy, $pager = null) 
     {
-        if(!is_array($board))
+        if($board and !is_array($board))
         {
             $board = $this->loadModel('tree')->getByID($board, 'forum');
             $board = $board->id;
         }
+        $searchWord = $this->get->searchWord;
         $threads = $this->dao->select('*')->from(TABLE_THREAD)
             ->where(1)
             ->beginIf(RUN_MODE == 'front')->andWhere('hidden')->eq('0')->fi()
+            ->beginIf($board)->andWhere('board')->in($board)->fi()
+            ->beginIf($searchWord)
+            ->andWhere('title')->like("%{$searchWord}%")
+            ->beginIf($board)->andWhere('board')->in($board)->fi()
+            ->orWhere('content')->like("%{$searchWord}%")
             ->beginIf($board)->andWhere('board')->in($board)->fi()
             ->orderBy($orderBy)
             ->page($pager)

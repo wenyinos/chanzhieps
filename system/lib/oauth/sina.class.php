@@ -2,12 +2,12 @@
 /**
  * The sina client class for OAuth.
  * 
- * @copyright Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @author    chunsheng wang <chunsheng@cnezsoft.com> 
- * @package   OAuth
- * @license   LGPL
- * @version   $Id$
- * @Link      http://www.chanzhi.org
+ * @copyright    Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @license      ZPLV1 (http://www.chanzhi.org/license/)
+ * @author       chunsheng wang <chunsheng@cnezsoft.com> 
+ * @package      OAuth
+ * @version      $Id$
+ * @Link         http://www.chanzhi.org
  */
 class sina extends OAuth
 {

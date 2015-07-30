@@ -3,7 +3,7 @@
  * The file module zh-cn file of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     file
  * @version     $Id$
@@ -28,7 +28,7 @@ $lang->file->limit         = "(<span class='text-danger'>%sM以内</span>)";
 $lang->file->source        = '素材';
 $lang->file->sourceList    = '素材列表';
 $lang->file->uploadSource  = '上传素材';
-$lang->file->sourceURI     = '查看地址';
+$lang->file->sourceURI     = '地址';
 $lang->file->sourceDelete  = '删除素材';
 $lang->file->sourceEdit    = '编辑素材';
 $lang->file->selectImage   = '选择素材';

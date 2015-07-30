@@ -7,3 +7,6 @@
 a.btn-sm{margin-bottom:5px;padding:5px;}
 .leftmenu.affix{top: 100px;}
 .leftmenu .tree li a.active{font-weight: bold;}
+
+.table{margin-bottom: 0;}
+.table td:last-child{border-bottom: none;}

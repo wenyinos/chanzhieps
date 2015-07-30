@@ -3,7 +3,7 @@
  * The user module english file of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     user
  * @version     $Id$
@@ -152,6 +152,7 @@ $lang->user->oauth->common       = 'OAuth';
 $lang->user->oauth->provider     = 'Provider';
 $lang->user->oauth->verification = 'Verification';
 $lang->user->oauth->widget       = 'Widget';
+$lang->user->oauth->callbackURL  = 'callbackURL';
 
 $lang->user->oauth->sina = new stdclass();
 $lang->user->oauth->sina->clientID     = 'App Key';
@@ -160,7 +161,7 @@ $lang->user->oauth->sina->clientSecret = 'App Secret';
 $lang->user->oauth->qq = new stdclass();
 $lang->user->oauth->qq->clientID     = 'APP ID';
 $lang->user->oauth->qq->clientSecret = 'APP KEY';
-$lang->user->oauth->qq->callbackURL  = 'callbackURL:http:://www.chanzhi.org/user-oauthcallback-qq.html';
+$lang->user->oauth->qq->callbackURL  = 'http://%s/user-oauthcallback-qq.html';
 
 $lang->user->oauth->providers['sina'] = 'Sina weibo';
 $lang->user->oauth->providers['qq']   = 'QQ';

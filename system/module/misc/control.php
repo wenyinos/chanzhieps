@@ -3,7 +3,7 @@
  * The control file of misc of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Yidong Wang <yidong@cnezsoft.com>
  * @package     misc
  * @version     $Id$
@@ -33,4 +33,30 @@ class misc extends control
         $this->app->loadClass('qrcode');
         QRcode::png($this->server->http_referer, false, 4, 6); 
     }   
+
+    /**
+     * Show about info of zentao.
+     *
+     * @access public
+     * @return void
+     */
+    public function about()
+    {
+        $this->view->title = $this->lang->about;
+        $this->display();
+    }
+
+    /**
+     * Express thanks.
+     *
+     * @access public
+     * @return void
+     */
+    public function thanks()
+    {
+        $this->view->title      = $this->lang->thanks;
+        $this->view->modalWidth = 700;
+        $this->display();
+    }
+
 }

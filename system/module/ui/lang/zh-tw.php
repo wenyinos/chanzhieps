@@ -3,7 +3,7 @@
  * The ui module zh-tw file of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青島易軟天創網絡科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     ui
  * @version     $Id$
@@ -16,6 +16,7 @@ $lang->ui->clientMobile    = '移動';
 $lang->ui->logo            = 'Logo';
 $lang->ui->setLogo         = "Logo設置";
 $lang->ui->setTemplate     = '模板設置';
+$lang->ui->manageTemplate  = '模板管理';
 $lang->ui->installTemplate = '導入模板';
 $lang->ui->exportTheme     = '導出主題';
 $lang->ui->setTheme        = '主題設置';

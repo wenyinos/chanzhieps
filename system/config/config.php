@@ -3,7 +3,7 @@
  * The config file of chanzhiEPS
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     chanzhiEPS
  * @version     $Id$
@@ -39,7 +39,7 @@ $config->allowedTags->front = '<p><span><h1><h2><h3><h4><h5><em><u><strong><br><
 $config->allowedTags->admin = $config->allowedTags->front . '<dd><dt><dl><div><table><td><th><tr><tbody><iframe><style><header><nav><meta>'; // For admin users.
 
 /* Views and themes. */
-$config->views  = ',html,json,xml,'; // Supported view types.
+$config->views  = ',html,json,xml,mhtml,'; // Supported view types.
 
 $config->site = new stdclass();
 $config->site->importantValidate = 'okFile,email';
@@ -74,9 +74,28 @@ $config->file->dangers = 'php,php3,php4,phtml,php5,jsp,py,rb,asp,aspx,ashx,asa,c
 $config->file->allowed = ',txt,doc,docx,dot,wps,wri,pdf,ppt,xls,xlsx,ett,xlt,xlsm,csv,jpg,jpeg,png,psd,gif,ico,bmp,swf,avi,rmvb,rm,mp3,mp4,3gp,flv,mov,movie,rar,zip,bz,bz2,tar,gz,'; // Allowed file types.
 $config->file->maxSize = 2 * 1024 * 1024;  // Max size allowed(Byte).
 
+/*Thanks list*/
+$config->thanksList['IPIP.NET'] = 'http://www.ipip.net/';
+$config->thanksList['Lessphp v0.4.0'] = 'http://leafo.net/lessphp/';
+$config->thanksList['MobileDetect 2.8.15'] = 'http://mobiledetect.net/';
+$config->thanksList['PhpConcept 2.8.2'] = 'http://www.phpconcept.net/';
+$config->thanksList['PHPMailer 5.1'] = 'http://phpmailer.sourceforge.net/';
+$config->thanksList['PhpThumb 3.0'] = 'http://phpthumb.sourceforge.net/';
+$config->thanksList['HTML Purifier 4.6.0'] = 'http://htmlpurifier.org/';
+$config->thanksList['PHP QRCode 1.1.4'] = 'http://phpqrcode.sourceforge.net/';
+$config->thanksList['Smarty 3.1.9'] = 'http://www.smarty.net/';
+$config->thanksList['Snoopy 1.2.4'] = 'http://snoopy.sourceforge.net/';
+$config->thanksList['Spyc 0.5'] = 'http://code.google.com/p/spyc/';
+
+/* View type settings. */ 
+$config->viewPrefix['mhtml'] = 'm.';
+
 /* Module dependence setting. */
 $config->dependence = new stdclass();
+$config->dependence->article[] = 'article';
 $config->dependence->blog[]    = 'blog';
+$config->dependence->page[]    = 'page';
+$config->dependence->product[] = 'product';
 $config->dependence->book[]    = 'book';
 $config->dependence->user[]    = 'user';
 $config->dependence->forum[]   = 'forum';

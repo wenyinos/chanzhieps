@@ -3,7 +3,7 @@
  * The model file of common module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     common
  * @version     $Id$
@@ -118,7 +118,6 @@ class commonModel extends model
                 $referer = helper::safe64Encode($this->app->getURI(true));
                 die(js::locate(helper::createLink('user', 'login', "referer=$referer")));
             }
-
         }
 
         /* Check the priviledge. */
@@ -130,7 +129,6 @@ class commonModel extends model
                 exit(js::locate(helper::createLink('user', 'checkEmail')));
             }
         }
-
     }
 
     /**
@@ -243,6 +241,39 @@ class commonModel extends model
     }   
 
     /**
+     * Check domain and header 301.
+     * 
+     * @access public
+     * @return void
+     */
+    public function checkDomain()
+    {
+        if(RUN_MODE == 'install' or RUN_MODE == 'upgrade' or RUN_MODE == 'shell' or RUN_MODE == 'admin' or !$this->config->installed) return true;
+
+        $httpHost   = $this->server->http_host;
+        $currentURI = getWebRoot(true) . $this->app->getURI();
+        $scheme     = isset($this->config->site->scheme) ? $this->config->site->scheme : 'http';
+        $mainDomain = isset($this->config->site->domain) ? $this->config->site->domain : '';
+        $mainDomain = str_replace(array('http://', 'https://'), '', $mainDomain);
+
+        /* Check main domain and scheme. */
+        $redirectURI = $currentURI;
+        if(strpos($redirectURI, $scheme . '://') !== 0) $redirectURI = $scheme . substr($redirectURI, strpos($redirectURI, '://'));
+        if(!empty($mainDomain) and $httpHost != $mainDomain) $redirectURI = str_replace($httpHost, $mainDomain, $redirectURI);
+        if($redirectURI != $currentURI) header301($redirectURI);
+
+        /* Check domain is allowed. */
+        $allowedDomains = isset($this->config->site->allowedDomain) ? $this->config->site->allowedDomain : '';
+        $allowedDomains = str_replace(array('http://', 'https://'), '', $allowedDomains);
+        if(!empty($allowedDomains))
+        {
+            if(strpos($allowedDomains, $httpHost) !== false) return true;
+            if(!empty($mainDomain) and hepler::getSiteCode($httpHost) == hepler::getSiteCode($mainDomain)) return true;
+            die('domain denied.');
+        }
+    }
+
+    /**
      * Create the main menu.
      * 
      * @param  string $currentModule 
@@ -286,10 +317,12 @@ class commonModel extends model
             $class = $moduleName == $currentModule ? " class='active'" : '';
             list($label, $module, $method, $vars) = explode('|', $moduleMenu);
 
-            if($module != 'user' and !commonModel::isAvailable($module)) continue;
+            if($module != 'user' and $module != 'article' and !commonModel::isAvailable($module)) continue;
             
-            /* Just whether blog menu should shown. */
+            /* Just whether article/blog/page menu should shown. */
+            if(!commonModel::isAvailable('article') && $vars == 'type=article') continue;  
             if(!commonModel::isAvailable('blog') && $vars == 'type=blog') continue;  
+            if(!commonModel::isAvailable('page') && $vars == 'type=page') continue;  
 
             if(commonModel::hasPriv($module, $method))
             {
@@ -340,7 +373,7 @@ class commonModel extends model
             list($label, $module, $method, $vars) = explode('|', $methodLink);
             if($chevron) $label .= '<i class="icon-chevron-right"></i>';
 
-            if($module != 'user' and !commonModel::isAvailable($module)) continue;
+            if($module != 'user' and $module != 'article' and !commonModel::isAvailable($module)) continue;
             if(commonModel::hasPriv($module, $method))
             {
                 $class = '';
@@ -367,7 +400,7 @@ class commonModel extends model
         $string  = '<ul class="nav navbar-nav navbar-right">';
         $string .= sprintf('<li>%s</li>', html::a($config->homeRoot, '<i class="icon-home icon-large"></i> ' . $lang->frontHome, "target='_blank' class='navbar-link'"));
         $string .= sprintf('<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-large"></i> %s <b class="caret"></b></a>', $app->user->realname);
-        $string .= sprintf('<ul class="dropdown-menu"><li>%s</li><li>%s</li></ul>', html::a(helper::createLink('user', 'changePassword'), $lang->changePassword, "data-toggle='modal'"), html::a(helper::createLink('user','logout'), $lang->logout));
+        $string .= sprintf('<ul class="dropdown-menu"><li>%s</li><li>%s</li><li>%s</li><li>%s</li></ul>', html::a(helper::createLink('user', 'changePassword'), $lang->changePassword, "data-toggle='modal'"), html::a(helper::createLink('misc', 'about'), $lang->about, "data-toggle='modal'"), html::a(helper::createLink('misc','thanks'), $lang->thanks, "data-toggle='modal'"), html::a(helper::createLink('user','logout'), $lang->logout));
         $string .= '</li></ul>';
 
         return $string;
@@ -375,26 +408,45 @@ class commonModel extends model
 
     /**
      * Print the top bar.
-     * 
+     *
+     * @param  boolean $asListItem 
      * @access public
      * @return void
      */
-    public static function printTopBar()
+    public static function printTopBar($asListItem = false)
     {
         if(!commonModel::isAvailable('user')) return '';
 
         global $app;
         if($app->session->user->account != 'guest')
         {
-            printf('<span class="login-msg">' . $app->lang->welcome . '</span>', $app->session->user->realname);
-            echo html::a(helper::createLink('user', 'control'), $app->lang->dashboard);
-            echo "<span id='msgBox' class='hiding'></span>";
-            echo html::a(helper::createLink('user', 'logout'),  $app->lang->logout);
-        }    
+            if($asListItem)
+            {
+                echo "<li class='menu-user-center text-center'>" . html::a(helper::createLink('user', 'control'), "<div class='user-avatar'><i class='icon icon-user avatar icon-s2 bg-primary circle'></i><strong class='user-name'>{$app->session->user->realname}</strong></div>") . '</li>';
+                // echo "<li class='menu-user-center text-center'></li>";
+                echo "<li>" . html::a(helper::createLink('user', 'control'), $app->lang->dashboard) . '</li>';
+                echo '<li>' . html::a(helper::createLink('user', 'logout'),  $app->lang->logout) . '</li>';
+            }
+            else
+            {
+                printf('<span class="login-msg">' . $app->lang->welcome . '</span>', $app->session->user->realname);
+                echo html::a(helper::createLink('user', 'control'), $app->lang->dashboard);
+                echo "<span id='msgBox' class='hiding'></span>";
+                echo html::a(helper::createLink('user', 'logout'),  $app->lang->logout);
+            }
+        }
         else
         {
-            echo html::a(helper::createLink('user', 'login'), $app->lang->login);
-            echo html::a(helper::createLink('user', 'register'), $app->lang->register);
+            if($asListItem)
+            {
+                echo '<li>' . html::a(helper::createLink('user', 'login'), $app->lang->login) . '</li>';
+                echo '<li>' . html::a(helper::createLink('user', 'register'), $app->lang->register) . '</li>';
+            }
+            else
+            {
+                echo html::a(helper::createLink('user', 'login'), $app->lang->login);
+                echo html::a(helper::createLink('user', 'register'), $app->lang->register);
+            }
         }
     }
 
@@ -402,17 +454,28 @@ class commonModel extends model
      * Print language bar.
      * 
      * @static
+     * @param  boolean $asListItem 
      * @access public
      * @return string
      */
-    public static function printLanguageBar()
+    public static function printLanguageBar($asListItem = false)
     {
         global $config, $app;
         $langs = explode(',', $config->site->lang);
         if(count($langs) == 1) return false;
+        if($asListItem)
+        {
+            echo "<li class='dropdown-header'>{$app->lang->language}</li>";
+        }
         foreach($langs as $lang)
         {
-            echo html::a(getHomeRoot($config->langsShortcuts[$lang]), $config->langs[$lang]);
+            $a = html::a(getHomeRoot($config->langsShortcuts[$lang]), $config->langs[$lang]);
+            if($asListItem)
+            {
+                $liClass = $config->site->defaultLang === $lang ? " class='active'" : '';
+                $a = "<li{$liClass}>{$a}</li>";
+            }
+            echo $a;
         }
     }
 

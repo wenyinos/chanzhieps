@@ -3,7 +3,7 @@
  * The model file of book module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     book
  * @version     $Id$
@@ -159,11 +159,9 @@ class bookModel extends model
             foreach($children as $child) $childrenHtml .=  $this->getAdminCatalog($child->id, $serials);
             $childrenHtml .= '</dl>';
         }
-
         if($node->type == 'book')    $catalog .= "<dt class='book' data-id='" . $node->id . "'><strong>" . $titleLink . '</strong><span class="actions">' . $editLink . $catalogLink . $delLink . '</span></dt>' . $childrenHtml;
         if($node->type == 'chapter') $catalog .= "<dd class='catalog chapter' data-id='" . $node->id . "'><strong><span class='order'>" . $serial . '</span>&nbsp;' . $titleLink . '</strong><span class="actions">' . $editLink . $catalogLink . $delLink . $moveLink . '</span>' . $childrenHtml . '</dd>';
         if($node->type == 'article') $catalog .= "<dd class='catalog article' data-id='" . $node->id . "'><strong><span class='order'>" . $serial . '</span>&nbsp;' . $node->title . '</strong><span class="actions">' . $editLink . $filesLink . $delLink . $moveLink . '</span>' . $childrenHtml . '</dd>';
-
         return $catalog;
     }
 
@@ -258,12 +256,12 @@ class bookModel extends model
 
         if(!$node) $node = $this->dao->select('*')->from(TABLE_BOOK)->where('alias')->eq($nodeID)->fetch();
         if(!$node) return false;
-
+                
         $node->origins = $this->dao->select('id, type, alias, title')->from(TABLE_BOOK)->where('id')->in($node->path)->orderBy('grade')->fetchAll('id');
         $node->book    = current($node->origins);
         $node->files   = $this->loadModel('file')->getByObject('book', $nodeID);
         $node->content = $replaceTag ? $this->loadModel('tag')->addLink($node->content) : $node->content;
-
+        
         return $node;
     }
 
@@ -471,8 +469,8 @@ class bookModel extends model
         /* Init the catalogue object. */
         $now = helper::now();
         $node = new stdclass();
-        $node->parent     = $parentNode ? $parentNode->id : 0;
-        $node->grade      = $parentNode ? $parentNode->grade + 1 : 1;
+        $node->parent = $parentNode ? $parentNode->id : 0;
+        $node->grade  = $parentNode ? $parentNode->grade + 1 : 1;
 
         foreach($this->post->title as $key => $nodeTitle)
         {

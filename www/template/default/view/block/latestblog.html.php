@@ -3,7 +3,7 @@
  * The latest blog front view file of block module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     block
  * @version     $Id$
@@ -34,7 +34,17 @@ $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 :
     $url = helper::createLink('blog', 'view', "id=$article->id", "category={$article->category->alias}&name=$article->alias");
     ?>
       <div class='item'>
-        <div class='item-heading'><strong><?php echo html::a($url, $article->title);?></strong></div>
+        <div class='item-heading'>
+          <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
+          <?php if($content->categoryName == 'abbr'):?>
+          <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] ';?>
+          <?php echo html::a(helper::createLink('blog', 'index', "categoryID={$article->category->id}", "category={$article->category->alias}"), $categoryName);?>
+          <?php else:?>
+          <?php echo html::a(helper::createLink('blog', 'index', "categoryID={$article->category->id}", "category={$article->category->alias}"), '[' . $article->category->name . '] ');?>
+          <?php endif;?>
+          <?php endif;?>
+          <strong><?php echo html::a($url, $article->title);?></strong>
+        </div>
         <div class='item-content'>
           
           <div class='text small text-muted'>
@@ -67,11 +77,29 @@ $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 :
       ?>
       <?php if(isset($content->time)):?>
       <li>
+        <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
+        <?php if($content->categoryName == 'abbr'):?>
+        <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] ';?>
+        <?php echo html::a(helper::createLink('blog', 'index', "categoryID={$article->category->id}", "category={$article->category->alias}"), $categoryName);?>
+        <?php else:?>
+        <?php echo html::a(helper::createLink('blog', 'index', "categoryID={$article->category->id}", "category={$article->category->alias}"), '[' . $article->category->name . '] ');?>
+        <?php endif;?>
+        <?php endif;?>
         <?php echo html::a($url, $article->title, "title='{$article->title}'");?>
         <span class='pull-right'><?php echo substr($article->addedDate, 0, 10);?></span>
       </li>
       <?php else:?>
-      <li><?php echo html::a($url, $article->title, "title='{$article->title}'");?></li>
+      <li>
+        <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
+        <?php if($content->categoryName == 'abbr'):?>
+        <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] ';?>
+        <?php echo html::a(helper::createLink('blog', 'index', "categoryID={$article->category->id}", "category={$article->category->alias}"), $categoryName);?>
+        <?php else:?>
+        <?php echo html::a(helper::createLink('blog', 'index', "categoryID={$article->category->id}", "category={$article->category->alias}"), '[' . $article->category->name . '] ');?>
+        <?php endif;?>
+        <?php endif;?>
+        <?php echo html::a($url, $article->title, "title='{$article->title}'");?>
+      </li>
       <?php endif;?>
       
       <?php endforeach;?>

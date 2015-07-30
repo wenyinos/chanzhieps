@@ -52,8 +52,9 @@ $lang->mail->captcha       = '驗證碼';
 $lang->mail->needVerify    = '需要驗證管理員身份';
 $lang->mail->verifyFail    = '請填寫正確的驗證碼';
 $lang->mail->verifySuccess = '驗證通過，請繼續操作';
-$lang->mail->noConfigure   = "無法找到發信配置信息，郵箱驗證無法啟用。";
-$lang->mail->noEmail       = "未填寫個人郵箱，郵箱驗證無法啟用。";
+$lang->mail->noConfigure   = "無法找到發信配置信息";
+$lang->mail->noEmail       = "未填寫個人郵箱";
+$lang->mail->noCaptcha     = "郵箱驗證無法啟用。";
 $lang->mail->okFileVerfy   = "請創建 %s 檔案。%s<br />";
 $lang->mail->sendSuccess   = '驗證碼已發送至 %s';
 

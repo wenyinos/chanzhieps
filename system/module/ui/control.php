@@ -3,7 +3,7 @@
  * The control file of ui module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     ui
  * @version     $Id$
@@ -192,9 +192,9 @@ class ui extends control
     public function others()
     {
         /* Get configs of list number. */
-        $this->app->loadConfig('article');
-        $this->app->loadConfig('product');
         $this->app->loadConfig('file');
+        if(strpos($this->config->site->modules, 'article') !== false) $this->app->loadConfig('article');
+        if(strpos($this->config->site->modules, 'product') !== false) $this->app->loadConfig('product');
         if(strpos($this->config->site->modules, 'blog') !== false) $this->app->loadConfig('blog');
         if(strpos($this->config->site->modules, 'message') !== false) $this->app->loadConfig('message');
         if(strpos($this->config->site->modules, 'forum') !== false) 

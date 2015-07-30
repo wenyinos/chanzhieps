@@ -3,7 +3,7 @@
  * The ui module zh-cn file of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     ui
  * @version     $Id$
@@ -48,6 +48,7 @@ $lang->ui->deleteThemeFail        = 'Delete theme failed';
 $lang->ui->fileRequired           = 'Please select file';
 $lang->ui->importThemeSuccess     = 'Import theme successfully';
 $lang->ui->packagePathUnwriteable = 'Package directory is not writable.';
+$lang->ui->selectSourceImage      = 'Select image from source';
 
 $lang->ui->productViewList[1] = 'Show'; 
 $lang->ui->productViewList[0] = 'Hide'; 

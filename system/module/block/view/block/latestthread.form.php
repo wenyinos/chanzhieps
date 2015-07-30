@@ -3,7 +3,7 @@
  * The latest thread form view file of block module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     block
  * @version     $Id$
@@ -19,4 +19,15 @@
 <tr>
   <th><?php echo $lang->block->limit;?></th>
   <td><?php echo html::input('params[limit]', isset($block->content->limit) ? $block->content->limit : '', "class='text-4 form-control'");?></td>
+</tr>
+<tr>
+  <th><?php echo $lang->block->showCategory;?></th>
+  <td>
+    <div class='input-group'>
+      <span class='input-group-addon'>
+        <input type='checkbox' name='params[showCategory]' <?php if(isset($block->content->showCategory) && $block->content->showCategory) echo 'checked';?> value='1' />
+      </span>
+      <?php echo html::select('params[categoryName]', $lang->block->category->showCategoryList, isset($block->content->categoryName) ? $block->content->categoryName : '', "class='form-control'");?>
+    </div>
+  </td>
 </tr>

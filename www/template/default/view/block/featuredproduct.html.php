@@ -3,7 +3,7 @@
  * The featured product front view file of block module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     block
  * @version     $Id$
@@ -25,23 +25,34 @@ $url      = helper::createLink('product', 'view', "id={$product->id}", "category
     <a class='card' href="<?php echo $url;?>">
       <div class='media' style='background-image: url(<?php echo $product->image->primary->middleURL; ?>);'><?php echo html::image($product->image->primary->middleURL, "title='{$product->name}' alt='{$product->name}'"); ?></div>
       <div class='card-heading'>
+        <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
+        <?php if($content->categoryName == 'abbr'):?>
+        <?php $categoryName = '[' . ($category->abbr ? $category->abbr : $category->name) . '] ';?>
+        <?php echo html::a(helper::createLink('product', 'browse', "categoryID={$category->id}", "category={$category->alias}"), $categoryName);?>
+        <?php else:?>
+        <?php echo html::a(helper::createLink('product', 'browse', "categoryID={$category->id}", "category={$category->alias}"), '[' . $category->name . '] ');?>
+        <?php endif;?>
+        <?php endif;?>
         <strong><?php echo $product->name; ?></strong>
         <span class='text-latin'>
         <?php
-        if($product->promotion != 0)
+        if(!$product->unsaleable)
         {
-            echo "&nbsp;&nbsp;<strong class='text-danger'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency) . $product->promotion . '</strong>';
-            if($product->price != 0)
+            if($product->promotion != 0)
             {
-                echo "&nbsp;&nbsp;<del class='text-muted'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency) . $product->price .'</del>';
+                echo "&nbsp;&nbsp;<strong class='text-danger'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency) . $product->promotion . '</strong>';
+                if($product->price != 0)
+                {
+                    echo "&nbsp;&nbsp;<del class='text-muted'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency) . $product->price .'</del>';
+                }
             }
-        }
-        else
-        {
-            if($product->price != 0)
+            else
             {
-                echo "<span class='text-muted'> " . zget($this->lang->product->currencySymbols, $this->config->product->currency) . "</span> ";
-                echo "<strong class='text-important'>" . $product->price . '</strong>&nbsp;&nbsp;';
+                if($product->price != 0)
+                {
+                    echo "<span class='text-muted'> " . zget($this->lang->product->currencySymbols, $this->config->product->currency) . "</span> ";
+                    echo "<strong class='text-important'>" . $product->price . '</strong>&nbsp;&nbsp;';
+                }
             }
         }
         ?>

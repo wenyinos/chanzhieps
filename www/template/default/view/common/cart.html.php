@@ -2,9 +2,9 @@
     function loadCartInfo(twinkle)
     {
         <?php if($this->app->user->account != 'guest'):?>
-        $('#headNav .login-msg').append("<span class='text-center text-middle' id='cartBox'></span>");
+        if($('#cartBox').length == 0) $('#headNav .login-msg').append("<span class='text-center text-middle' id='cartBox'></span>");
         <?php else:?>
-        $('#headNav div nav').prepend("<span class='text-center text-middle' id='cartBox'></span>");
+        if($('#cartBox').length == 0) $('#headNav div nav').prepend("<span class='text-center text-middle' id='cartBox'></span>");
         <?php endif;?>
         $('#cartBox').load(createLink('cart', 'printTopBar'),
             function()

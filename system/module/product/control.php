@@ -3,7 +3,7 @@
  * The control file of product module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     product
  * @version     $Id$
@@ -139,10 +139,12 @@ class product extends control
 
         $maxID = $this->dao->select('max(id) as maxID')->from(TABLE_PRODUCT)->fetch('maxID');
 
-        $this->view->title           = $this->lang->product->create;
-        $this->view->currentCategory = $categoryID;
-        $this->view->categories      = $categories;
-        $this->view->order           = $maxID + 1;
+        if($categoryID) $this->view->currentCategory = $this->tree->getByID($categoryID);
+
+        $this->view->title      = $this->lang->product->create;
+        $this->view->categoryID = $categoryID;
+        $this->view->categories = $categories;
+        $this->view->order      = $maxID + 1;
         $this->display();
     }
 

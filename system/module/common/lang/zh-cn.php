@@ -3,7 +3,7 @@
  * The common simplified chinese file of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     chanzhiEPS
  * @version     $Id$
@@ -21,6 +21,8 @@ $lang->divider    = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->back2Top   = '返<br/>回<br/>顶<br/>部';
 $lang->cancel     = '取消';
 
+$lang->about  = '关于';
+$lang->thanks = '致谢';
 /* Lang items for xirang. */
 $lang->chanzhiEPS     = '蝉知企业门户系统';
 $lang->chanzhiEPSx    = '蝉知';
@@ -51,6 +53,7 @@ $lang->currentPos     = '当前位置';
 $lang->categoryMenu   = '分类导航';
 $lang->wechatTip      = '微信订阅';
 $lang->qrcodeTip      = '移动访问';
+$lang->language       = '语言';
 
 /* Global action items. */
 $lang->reset          = '重置';
@@ -97,6 +100,7 @@ $lang->js->loading          = '加载中';
 $lang->js->timeout          = '网络超时,请重试';
 $lang->js->errorThrown      = '<h4>执行出错：</h4>';
 $lang->js->continueShopping = '继续购物';
+$lang->js->required         = '必填';
 
 /* Contact fields*/
 $lang->company = new stdclass();
@@ -120,7 +124,7 @@ $lang->sitemap->common = '站点地图';
 /* The main menus. */
 $lang->menu = new stdclass();
 $lang->menu->admin    = '首页|admin|index|';
-$lang->menu->article  = '文章|article|admin|';
+$lang->menu->article  = '文章|article|admin|type=article';
 $lang->menu->blog     = '博客|article|admin|type=blog';
 $lang->menu->product  = '产品|product|admin|';
 $lang->menu->book     = '手册|book|admin|';
@@ -163,7 +167,6 @@ $lang->blog->menu->browse = '所有博客|article|admin|type=blog';
 $lang->page = new stdclass();
 $lang->page->menu = new stdclass();
 $lang->page->menu->browse = array('link' => '单页列表|article|admin|type=page', 'alias' => 'edit');
-$lang->page->menu->create = '添加单页|article|create|type=page';
 
 /* Menu of product module. */
 $lang->product = new stdclass();
@@ -273,7 +276,8 @@ $lang->nav->menu = $lang->site->menu;
 
 /* Menu of search module. */
 $lang->search = new stdclass();
-$lang->search->menu = $lang->site->menu;
+$lang->search->menu   = $lang->site->menu;
+$lang->search->common = '搜索';
 
 /* Menu of slide module. */
 $lang->slide = new stdclass();
@@ -322,14 +326,17 @@ $lang->error->sensitive    = '内容中不能存在敏感词!';
 
 /* The pager items. */
 $lang->pager = new stdclass();
-$lang->pager->noRecord   = "暂时没有记录";
-$lang->pager->digest     = "共 <strong>%s</strong> 条记录，%s <strong>%s/%s</strong> &nbsp; ";
-$lang->pager->recPerPage = "每页 <strong>%s</strong> 条";
-$lang->pager->first      = "<i class='icon-step-backward' title='首页'></i>";
-$lang->pager->pre        = "<i class='icon-play icon-rotate-180' title='上一页'></i>";
-$lang->pager->next       = "<i class='icon-play' title='下一页'></i>";
-$lang->pager->last       = "<i class='icon-step-forward' title='末页'></i>";
-$lang->pager->locate     = "GO!";
+$lang->pager->noRecord     = "暂时没有记录";
+$lang->pager->digest       = "共 <strong>%s</strong> 条记录，%s <strong>%s/%s</strong> &nbsp; ";
+$lang->pager->recPerPage   = "每页 <strong>%s</strong> 条";
+$lang->pager->first        = "<i class='icon-step-backward' title='首页'></i>";
+$lang->pager->pre          = "<i class='icon-play icon-rotate-180' title='上一页'></i>";
+$lang->pager->next         = "<i class='icon-play' title='下一页'></i>";
+$lang->pager->last         = "<i class='icon-step-forward' title='末页'></i>";
+$lang->pager->locate       = "GO!";
+$lang->pager->previousPage = "上一页";
+$lang->pager->nextPage     = "下一页";
+$lang->pager->summery      = "第 <strong>%s-%s</strong> 项，共 <strong>%s</strong> 项";
 
 $lang->date = new stdclass();
 $lang->date->minute = '分钟';

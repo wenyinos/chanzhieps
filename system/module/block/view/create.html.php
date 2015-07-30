@@ -3,7 +3,7 @@
  * The create view file of block module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     block
  * @version     $Id$
@@ -46,7 +46,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
       <?php endif;?>
       <table align='center' class='table table-form'>
         <tr>
-          <th class='w-80px'><?php echo $lang->block->type;?></th>
+          <th class='w-100px'><?php echo $lang->block->type;?></th>
           <td><?php echo $this->block->createTypeSelector($template, $type);?></td>
         </tr>
         <tr>

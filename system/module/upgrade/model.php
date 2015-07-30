@@ -3,7 +3,7 @@
  * The model file of upgrade module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     upgrade
  * @version     $Id: model.php 5019 2013-07-05 02:02:31Z wyd621@gmail.com $
@@ -108,6 +108,9 @@ class upgradeModel extends model
                 $this->updateBlockTheme();
                 $this->updateLayoutTheme();
                 $this->moveBaseStyle();
+            case '4_3_beta':
+                $this->execSQL($this->getUpgradeFile('4.3.beta'));
+                $this->setDefaultEnableModules();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -154,6 +157,7 @@ class upgradeModel extends model
             case '4_1_beta' : $confirmContent .= file_get_contents($this->getUpgradeFile('4.1.beta'));
             case '4_2';
             case '4_2_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('4.2.1'));
+            case '4_3_beta' : $confirmContent .= file_get_contents($this->getUpgradeFile('4.3.beta'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
@@ -1375,6 +1379,19 @@ class upgradeModel extends model
         $template = $this->config->template; 
         $setting  = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true): array();
         $setting[$template->name][$template->theme]['css'] = isset($this->config->site->basestyle) ? $this->config->site->basestyle : '';
-        return $this->loadModel('setting')->setItems('system.common.template', array('custom' => helper::jsonEncode($setting)));
+        return $this->loadModel('setting')->setItems('system.common.template', array('custom' => helper::jsonEncode($setting)), $this->config->site->lang);
+    }
+
+    /**
+     * Set default enable modules when upgrade from 4.3.beta.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function setDefaultEnableModules()
+    {
+        $modules = $this->config->site->modules . ',article,page,product';
+        $this->dao->update(TABLE_CONFIG)->set('`value`')->eq($modules)->where('`key`')->eq('modules')->andWhere('section')->eq('site')->exec();
+        return !dao::isError();
     }
 }

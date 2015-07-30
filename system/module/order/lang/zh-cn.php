@@ -24,10 +24,12 @@ $lang->order->admin          = '订单管理';
 $lang->order->setting        = '系统设置';
 $lang->order->browse         = '我的订单';
 $lang->order->bought         = '查看已买到的商品';
+$lang->order->createdSuccess = '订单创建成功！';
 $lang->order->paidSuccess    = '订单支付成功！';
 $lang->order->submit         = '提交订单';
 $lang->order->cancel         = '取消';
 $lang->order->pay            = '支付';
+$lang->order->goToPay        = '去支付';
 $lang->order->return         = '收款';
 $lang->order->delivery       = '发货';
 $lang->order->finish         = '完成';
@@ -35,7 +37,6 @@ $lang->order->confirm        = '确认订单信息';
 $lang->order->selectProducts = "选择了<strong class='text-danger'>%s</strong>件商品，";
 $lang->order->totalToPay     = "共计：<strong id='amount' class='text-danger'>%s</strong>";
 $lang->order->payInfo        = "%s %s 商品订单";
-$lang->order->goToBank       = "请到网上银行完成支付。";
 $lang->order->track          = '查看物流';
 $lang->order->life           = '订单跟踪';
 $lang->order->days           = '天';
@@ -50,6 +51,7 @@ $lang->order->cancelSuccess        = "订单已取消";
 $lang->order->paymentRequired      = '需要至少一种交易方式';
 $lang->order->confirmLimitRequired = '需要设定确认收货周期';
 $lang->order->finishWarning        = "确认完成";
+$lang->order->noProducts           = "订单中没有产品";
 
 $lang->order->alipayPid   = '合作者ID';
 $lang->order->alipayKey   = '合作者KEY';
@@ -61,7 +63,7 @@ $lang->order->placeholder->key   = '安全检验码，以数字和字母组成�
 $lang->order->placeholder->email = '支付宝商家邮箱';
 
 $lang->order->paymentList = array();
-$lang->order->paymentList['alipay'] = '支付宝及时到帐';
+$lang->order->paymentList['alipay'] = '支付宝即时到帐';
 $lang->order->paymentList['COD']    = '货到付款';
 
 $lang->order->statusList = array();

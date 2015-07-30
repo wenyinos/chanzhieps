@@ -1,6 +1,23 @@
 <?php include '../../common/view/header.admin.html.php'; ?>
 <div class='panel'>
-  <div class='panel-heading'><strong><i class="icon-comments-alt"></i> <?php echo $lang->forum->threadList;?></strong></div>
+  <div class='panel-heading'>
+    <strong><i class="icon-comments-alt"></i> <?php echo $lang->forum->threadList;?></strong>
+    <div class='panel-actions'>
+      <form method='get' class='form-inline form-search'>
+        <?php echo html::hidden('m', 'forum');?>
+        <?php echo html::hidden('f', 'admin');?>
+        <?php echo html::hidden('boardID', $boardID);?>
+        <?php echo html::hidden('orderBy', $orderBy);?>
+        <?php echo html::hidden('recTotal', isset($this->get->recTotal) ? $this->get->recTotal : 0);?>
+        <?php echo html::hidden('recPerPage', isset($this->get->recPerPage) ? $this->get->recPerPage : 10);?>
+        <?php echo html::hidden('pageID', isset($this->get->pageID) ? $this->get->pageID :  1);?>
+        <div class="input-group">
+          <?php echo html::input('searchWord', $this->get->searchWord, "class='form-control search-query'");?>
+          <span class="input-group-btn"><?php echo html::submitButton($lang->search->common, "btn btn-primary"); ?></span>
+        </div>
+      </form>
+    </div>
+  </div>
   <table class='table table-hover table-striped tablesorter' id='threadList'>
     <?php if($threads):?>
     <thead>

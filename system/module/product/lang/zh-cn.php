@@ -3,7 +3,7 @@
  * The product category zh-cn file of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     product
  * @version     $Id$
@@ -39,6 +39,7 @@ $lang->product->views      = '浏览';
 $lang->product->viewsCount = '浏览次数';
 $lang->product->stick      = '置顶级别';
 $lang->product->order      = '排序';
+$lang->product->unsaleable = '非卖品';
 $lang->product->attribute  = '产品属性';
 $lang->product->custom     = '自定义属性';
 $lang->product->sales      = '产品定价';

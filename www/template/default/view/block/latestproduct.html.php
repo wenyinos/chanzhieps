@@ -3,7 +3,7 @@
  * The hot product front view file of block module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     block
  * @version     $Id$
@@ -37,19 +37,30 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
           <?php $title = $product->image->primary->title ? $product->image->primary->title : $product->name;?>
           <div class='media' style='background-image: url(<?php echo $product->image->primary->middleURL; ?>);'><?php echo html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"); ?></div>
           <div class='card-heading'>
+            <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
+            <?php if($content->categoryName == 'abbr'):?>
+            <?php $categoryName = '[' . ($product->category->abbr ? $product->category->abbr : $product->category->name) . '] ';?>
+            <?php echo html::a(helper::createLink('product', 'browse', "categoryID={$product->category->id}", "category={$product->category->alias}"), $categoryName);?>
+            <?php else:?>
+            <?php echo html::a(helper::createLink('product', 'browse', "categoryID={$product->category->id}", "category={$product->category->alias}"), '[' . $product->category->name . '] ');?>
+            <?php endif;?>
+            <?php endif;?>
             <?php echo $product->name;?>
             <span class='text-latin'>
             <?php
-            if($product->promotion != 0)
+            if(!$product->unsaleable)
             {
-                echo "&nbsp;&nbsp;";
-                echo "<strong class='text-danger'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency) . $product->promotion . '</strong>';
-            }
-            else
-            {
-                if($product->price != 0)
+                if($product->promotion != 0)
                 {
-                    echo "<strong class='text-danger'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency) . $product->price . '</strong>';
+                    echo "&nbsp;&nbsp;";
+                    echo "<strong class='text-danger'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency) . $product->promotion . '</strong>';
+                }
+                else
+                {
+                    if($product->price != 0)
+                    {
+                        echo "<strong class='text-danger'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency) . $product->price . '</strong>';
+                    }
                 }
             }
             ?>
@@ -71,23 +82,34 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
       <li>
         <span class='text-latin pull-right'>
         <?php
-        if($product->promotion != 0)
+        if(!$product->unsaleable)
         {
-            if($product->price != 0)
+            if($product->promotion != 0)
             {
-                echo "<small class='text-muted'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency) . "</small> ";
-                echo "<del><small class='text-muted'>" . $product->price . "</small></del>";
+                if($product->price != 0)
+                {
+                    echo "<small class='text-muted'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency) . "</small> ";
+                    echo "<del><small class='text-muted'>" . $product->price . "</small></del>";
+                }
+                echo "&nbsp; <small class='text-muted'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency) . "</small> ";
+                echo "<strong class='text-danger'>" . $product->promotion . "</strong>";
             }
-            echo "&nbsp; <small class='text-muted'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency) . "</small> ";
-            echo "<strong class='text-danger'>" . $product->promotion . "</strong>";
-        }
-        else if($product->price != 0)
-        {
-            echo "&nbsp; <small class='text-muted'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency) . "</small> ";
-            echo "<strong class='text-important'>" . $product->price . "</strong>";
+            else if($product->price != 0)
+            {
+                echo "&nbsp; <small class='text-muted'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency) . "</small> ";
+                echo "<strong class='text-important'>" . $product->price . "</strong>";
+            }
         }
         ?>
         </span>
+        <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
+        <?php if($content->categoryName == 'abbr'):?>
+        <?php $categoryName = '[' . ($product->category->abbr ? $product->category->abbr : $product->category->name) . '] ';?>
+        <?php echo html::a(helper::createLink('product', 'browse', "categoryID={$product->category->id}", "category={$product->category->alias}"), $categoryName);?>
+        <?php else:?>
+        <?php echo html::a(helper::createLink('product', 'browse', "categoryID={$product->category->id}", "category={$product->category->alias}"), '[' . $product->category->name . '] ');?>
+        <?php endif;?>
+        <?php endif;?>
         <?php echo html::a($url, $product->name);?>
       </li>
       <?php endforeach;?>

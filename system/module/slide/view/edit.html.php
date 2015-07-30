@@ -3,7 +3,7 @@
  * The edit view file of slide of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Xiying Guan<guanxiying@xirangit.com>
  * @package     slide
  * @version     $Id$
@@ -98,7 +98,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
             <?php echo html::input('imageShow', '', "class='form-control image-select' disabled='disabled'");?>
           </td>
           <td colspan='2'>
-            <?php echo html::a($this->createLink('file', 'selectimage', 'callback=fileHide'), $lang->slide->sourceImage, "class='btn btn-primary' id='selectSource' data-toggle='modal'")?>
+            <?php echo html::a($this->createLink('file', 'selectimage', 'callback=fileHide&id=image'), $lang->slide->sourceImage, "class='btn btn-primary' id='selectSource' data-toggle='modal'")?>
             <?php echo html::a('javascript:void(0)', $lang->slide->upload, "class='btn btn-primary' onclick='fileShow()' id='uploadFile'")?>
             <label class='text-info'><?php echo $lang->slide->suitableSize;?></label>
           </td>

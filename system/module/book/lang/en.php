@@ -11,6 +11,9 @@ $lang->book->catalog    = 'Catalog';
 $lang->book->edit       = 'Edit';
 $lang->book->sort       = 'Sort';
 
+$lang->book->searchResults      = 'Search results';
+$lang->book->inputArticleTitle  = 'Please enter the article title';
+
 $lang->book->id          = 'Id';
 $lang->book->type        = 'Type';
 $lang->book->parent      = 'Parent';

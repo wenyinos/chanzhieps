@@ -3,7 +3,7 @@
  * The control file of file module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     file
  * @version     $Id: control.php 1042 2010-08-19 09:02:39Z yuren_@126.com $
@@ -502,7 +502,7 @@ class file extends control
      * @access public
      * @return void
      */
-    public function selectImage($callback = '')
+    public function selectImage($callback = '', $id = '')
     {
         $callback = $callback == '' ? "''" : "$callback()";
         $result   = array();
@@ -512,6 +512,7 @@ class file extends control
         $this->view->title    = $this->lang->file->source;
         $this->view->files    = $result;
         $this->view->callback = $callback;
+        $this->view->id       = $id;
         $this->display();
     }
 }

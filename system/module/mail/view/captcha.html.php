@@ -50,12 +50,11 @@ $(document).ready(function()
         <td class='w-50px'><?php echo $mailBtn;?></td>
         <td><?php echo html::a($this->createLink('mail', 'sendmailcode', "account=$account"), $lang->mail->getEmailCode, "id='mailSender' class='btn btn-success'");?></td>
         <?php endif;?>
-        <?php if(empty($email)):?>
-        <td><?php echo $lang->mail->noEmail;?></td>
-        <?php endif;?>
-        <?php if(!$this->config->mail->turnon):?>
-        <td><?php echo $lang->mail->noConfigure;?></td>
-        <?php endif;?>
+        <td>
+        <?php if(empty($email)) echo $lang->mail->noEmail;?>
+        <?php if(!$this->config->mail->turnon) echo '&nbsp;' . $lang->mail->noConfigure;?>
+        <?php if(!$this->config->mail->turnon or empty($email)) echo $lang->mail->noCaptcha;?>
+        </td>
       </tr>
       <?php endif;?>
     </table>

@@ -2,8 +2,8 @@
 /**
  * The smarty parser class file.
  *
- * @copyright   Copyright 2013-2013 青岛息壤网络信息有限公司 (QingDao XiRang Network Infomation Co,LTD www.xirangit.com)
- * @license     http://api.chanzhi.org/goto.php?item=license
+ * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     framework
  * @version     $Id$
@@ -50,7 +50,7 @@ class smartyParser
      *
      * @param string $moduleName    module name
      * @param string $methodName    method name
-     * @access private
+     * @access public
      * @return string
      */
     public function parse($moduleName, $methodName)

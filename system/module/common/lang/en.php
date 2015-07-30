@@ -3,7 +3,7 @@
  * The common simplified chinese file of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     chanzhiEPS
  * @version     $Id$
@@ -21,6 +21,8 @@ $lang->divider    = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->back2Top   = 'T<br/>O<br/>P';
 $lang->cancel = 'cancel';
 
+$lang->about  = 'about';
+$lang->thanks = 'thanks';
 /* Lang items for xirang. */
 $lang->chanzhiEPS     = 'chanzhiEPS';
 $lang->chanzhiEPSx    = 'Chanzhi';
@@ -51,6 +53,7 @@ $lang->currentPos     = 'Positon';
 $lang->categoryMenu   = 'Categories';
 $lang->wechatTip      = 'Wechat';
 $lang->qrcodeTip      = 'Mobile';
+$lang->language       = 'Language';
 
 /* Global action items. */
 $lang->reset          = 'Reset';
@@ -97,6 +100,7 @@ $lang->js->loading          = 'Loading...';
 $lang->js->timeout          = 'Timeout';
 $lang->js->errorThrown      = '<h4>Something error ：</h4>';
 $lang->js->continueShopping = 'Continue Shopping';
+$lang->js->required         = 'Required';
 
 /* Contact fields*/
 $lang->company = new stdclass();
@@ -120,7 +124,7 @@ $lang->sitemap->common = 'Sitemap';
 /* The main menus. */
 $lang->menu = new stdclass();
 $lang->menu->admin    = 'Home|admin|index|';
-$lang->menu->article  = 'Article|article|admin|';
+$lang->menu->article  = 'Article|article|admin|type=article';
 $lang->menu->blog     = 'Blog|article|admin|type=blog';
 $lang->menu->product  = 'Product|product|admin|';
 $lang->menu->book     = 'Book|book|admin|';
@@ -274,6 +278,7 @@ $lang->nav->menu = $lang->site->menu;
 /* Menu of search module. */
 $lang->search = new stdclass();
 $lang->search->menu = $lang->site->menu;
+$lang->search->common = 'Search';
 
 /* Menu of tree module. */
 $lang->slide = new stdclass();
@@ -322,14 +327,17 @@ $lang->error->sensitive    = 'There can be no sensitive words in the content.';
 
 /* The pager items. */
 $lang->pager = new stdclass();
-$lang->pager->noRecord   = "No records yet.";
-$lang->pager->digest     = "<strong>%s</strong> records, %s <strong>%s/%s</strong> &nbsp; ";
-$lang->pager->recPerPage = "<strong>%s</strong> per page";
-$lang->pager->first      = "<i class='icon-step-backward' title='First'></i>";
-$lang->pager->pre        = "<i class='icon-play icon-rotate-180' title='Previous'></i>";
-$lang->pager->next       = "<i class='icon-play' title='Next'></i>";
-$lang->pager->last       = "<i class='icon-step-forward' title='Last'></i>";
-$lang->pager->locate     = "GO!";
+$lang->pager->noRecord     = "No records yet.";
+$lang->pager->digest       = "<strong>%s</strong> records, %s <strong>%s/%s</strong> &nbsp; ";
+$lang->pager->recPerPage   = "<strong>%s</strong> per page";
+$lang->pager->first        = "<i class='icon-step-backward' title='First'></i>";
+$lang->pager->pre          = "<i class='icon-play icon-rotate-180' title='Previous'></i>";
+$lang->pager->next         = "<i class='icon-play' title='Next'></i>";
+$lang->pager->last         = "<i class='icon-step-forward' title='Last'></i>";
+$lang->pager->locate       = "GO!";
+$lang->pager->previousPage = "Previous";
+$lang->pager->nextPage     = "Next";
+$lang->pager->summery      = "<strong>%s-%s</strong> of <strong>%s</strong>";
 
 $lang->date = new stdclass();
 $lang->date->minute = 'minute';

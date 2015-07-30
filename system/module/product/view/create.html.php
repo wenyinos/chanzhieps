@@ -3,7 +3,7 @@
  * The create view file of product module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPL (http://zpl.pub/page/zplv11.html)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Xiying Guan <guanxiying@xirangit.com>
  * @package     product
  * @version     $Id$
@@ -14,7 +14,7 @@
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
 <?php js::set('key', 1);?>
-<?php js::set('categoryID', $currentCategory);?>
+<?php js::set('categoryID', $categoryID);?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class="icon-plus"></i> <?php echo $lang->product->create;?></strong>
@@ -24,17 +24,24 @@
       <table class='table table-form'>
         <tr>
           <th class='w-100px'><?php echo $lang->product->category;?></th>
-          <td class='w-p40'><?php echo html::select("categories[]", $categories, $currentCategory, "multiple='multiple' class='form-control chosen'");?></td><td></td>
+          <td class='w-p40'><?php echo html::select("categories[]", $categories, $categoryID, "multiple='multiple' class='form-control chosen'");?></td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->product->name;?></th>
           <td colspan='2'>
             <div class='row order'>
-              <div class='col-sm-10'><?php echo html::input('name', '', "class='form-control'");?></div>
-              <div class='col-sm-2'>
+              <div class='col-sm-9'><?php echo html::input('name', '', "class='form-control'");?></div>
+              <div class='col-sm-3'>
                 <div class="input-group">
                   <span class="input-group-addon"><?php echo $lang->product->order;?></span>
                   <?php echo html::input('order', $order, "class='form-control'");?>
+                  <span class="input-group-addon">
+                    <label class='checkbox'>
+                      <?php $checked = (isset($currentCategory->unsaleable) and $currentCategory->unsaleable) ? 'checked' : '';?>
+                      <input type='checkbox' name='unsaleable' id='unsaleable' value='1' <?php echo $checked;?> />
+                      <span><?php echo $lang->product->unsaleable;?></span>
+                    </label>
+                  </span>
                 </div>
               </div>
             </div>
