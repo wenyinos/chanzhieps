@@ -54,4 +54,23 @@ $(document).ready(function()
         return false;
     });
 
+    $.setAjaxForm('#confirmForm', function(response)
+    {
+        if(response.result == 'success')
+        {
+            bootbox.dialog(
+            {  
+                message: v.createdSuccess,  
+                buttons:
+                {  
+                    cart:
+                    {  
+                        label:     v.goToPay,  
+                        className: 'btn-primary',  
+                        callback:  function(){window.open(response.locate, '_blank');}  
+                    }  
+                }  
+            });
+        }
+    })
 });

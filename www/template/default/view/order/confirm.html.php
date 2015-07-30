@@ -12,11 +12,13 @@
 ?>
 <?php include TPL_ROOT . 'common/header.html.php';?>
 <?php js::set('currencySymbol', $currencySymbol);?>
+<?php js::set('createdSuccess', $lang->order->createdSuccess);?>
+<?php js::set('goToPay', $lang->order->goToPay);?>
 <?php if(!empty($products)):?>
 <?php $total = 0;?>
 <div class='panel'>
   <div class='panel-heading'><strong><?php echo $lang->order->confirm;?></strong></div>
-  <form id='ajaxForm' action='<?php echo helper::createLink('order', 'create'); ?>' method='post'>
+  <form id='confirmForm' action='<?php echo helper::createLink('order', 'create'); ?>' method='post'>
     <div class='panel-body'>
       <div id='addressBox'>
         <div>
