@@ -21,6 +21,8 @@ $lang->divider    = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->back2Top   = 'T<br/>O<br/>P';
 $lang->cancel = 'cancel';
 
+$lang->about  = 'about';
+$lang->thanks = 'thanks';
 /* Lang items for xirang. */
 $lang->chanzhiEPS     = 'chanzhiEPS';
 $lang->chanzhiEPSx    = 'Chanzhi';
@@ -325,14 +327,17 @@ $lang->error->sensitive    = 'There can be no sensitive words in the content.';
 
 /* The pager items. */
 $lang->pager = new stdclass();
-$lang->pager->noRecord   = "No records yet.";
-$lang->pager->digest     = "<strong>%s</strong> records, %s <strong>%s/%s</strong> &nbsp; ";
-$lang->pager->recPerPage = "<strong>%s</strong> per page";
-$lang->pager->first      = "<i class='icon-step-backward' title='First'></i>";
-$lang->pager->pre        = "<i class='icon-play icon-rotate-180' title='Previous'></i>";
-$lang->pager->next       = "<i class='icon-play' title='Next'></i>";
-$lang->pager->last       = "<i class='icon-step-forward' title='Last'></i>";
-$lang->pager->locate     = "GO!";
+$lang->pager->noRecord     = "No records yet.";
+$lang->pager->digest       = "<strong>%s</strong> records, %s <strong>%s/%s</strong> &nbsp; ";
+$lang->pager->recPerPage   = "<strong>%s</strong> per page";
+$lang->pager->first        = "<i class='icon-step-backward' title='First'></i>";
+$lang->pager->pre          = "<i class='icon-play icon-rotate-180' title='Previous'></i>";
+$lang->pager->next         = "<i class='icon-play' title='Next'></i>";
+$lang->pager->last         = "<i class='icon-step-forward' title='Last'></i>";
+$lang->pager->locate       = "GO!";
+$lang->pager->previousPage = "Previous";
+$lang->pager->nextPage     = "Next";
+$lang->pager->summery      = "<strong>%s-%s</strong> of <strong>%s</strong>";
 
 $lang->date = new stdclass();
 $lang->date->minute = 'minute';

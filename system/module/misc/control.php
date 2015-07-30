@@ -33,4 +33,30 @@ class misc extends control
         $this->app->loadClass('qrcode');
         QRcode::png($this->server->http_referer, false, 4, 6); 
     }   
+
+    /**
+     * Show about info of zentao.
+     *
+     * @access public
+     * @return void
+     */
+    public function about()
+    {
+        $this->view->title = $this->lang->about;
+        $this->display();
+    }
+
+    /**
+     * Express thanks.
+     *
+     * @access public
+     * @return void
+     */
+    public function thanks()
+    {
+        $this->view->title      = $this->lang->thanks;
+        $this->view->modalWidth = 700;
+        $this->display();
+    }
+
 }

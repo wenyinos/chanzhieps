@@ -32,7 +32,7 @@ $(function()
 .btn-link {border-color: none!important}
 </style>
 <div class='container w-200px'>
-    <div class='alert with-icon alert-deny'>
+  <div class='alert with-icon alert-deny'>
     <i class='icon-frown icon'></i>
     <div class='content'>
       <h2><?php echo $app->user->account, ' ', $lang->user->deny;?></h2>
