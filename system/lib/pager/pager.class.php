@@ -282,7 +282,37 @@ class pager
      */
     public function show($align = 'right', $type = 'full')
     {
-        echo $this->get($align, $type);
+        if($align === 'justify')
+        {
+            echo $this->getJustify($type);
+        }
+        else
+        {
+            echo $this->get($align, $type);
+        }
+    }
+
+    /**
+     * Get the justify pager html string
+     * @return [type] [description]
+     */
+    public function getJustify()
+    {
+        $pager = '';
+
+        $pager .= "<li class='previous" . ($this->pageID == 1 ? ' disabled' : '') . "'>";
+        $this->params['pageID'] = 1;
+        $pager .= $this->createLink('« ' . $this->lang->pager->previousPage) . '</li>';
+
+        $pager .= "<li class='caption'>";
+        $pager .= sprintf($this->lang->pager->summery, $this->recPerPage * ($this->pageID - 1) + 1, min($this->recPerPage * $this->pageID, $this->recTotal), $this->recTotal);
+        $pager .= '</li>';
+
+        $pager .= "<li class='next" . ($this->pageID == $this->pageTotal ? ' disabled' : '') . "'>";
+        $this->params['pageID'] = min($this->pageTotal, $this->pageID + 1);
+        $pager .= $this->createLink($this->lang->pager->nextPage . ' »') . '</li>';
+
+        return "<ul class='pager pager-justify'>{$pager}</ul>";
     }
 
     /**
