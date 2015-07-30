@@ -14,31 +14,31 @@ include TPL_ROOT . 'common/header.html.php';
       <div class='content'></div>
     </div>
     <div class='form-group'>
-      <label for='account'><?php echo $lang->user->account;?></label>
+      <label class='control-label' for='account'><?php echo $lang->user->account;?></label>
       <?php echo html::input('account', '', "class='form-control form-control' autocomplete='off' placeholder='" . $lang->user->register->lblAccount . "'");?>
     </div>
     <div class='form-group'>
-      <label for='realname'><?php echo $lang->user->realname;?></label>
+      <label class='control-label' for='realname'><?php echo $lang->user->realname;?></label>
       <?php echo html::input('realname', '', "class='form-control'");?>
     </div>
     <div class='form-group'>
-      <label for='email'><?php echo $lang->user->email;?></label>
+      <label class='control-label' for='email'><?php echo $lang->user->email;?></label>
       <?php echo html::input('email', '', "class='form-control' autocomplete='off'") . '';?>
     </div>
     <div class='form-group'>
-      <label for='password1'><?php echo $lang->user->password;?></label>
+      <label class='control-label' for='password1'><?php echo $lang->user->password;?></label>
       <?php echo html::password('password1', '', "class='form-control' autocomplate='off' placeholder='" . $lang->user->register->lblPassword . "'");?>
     </div>
     <div class='form-group'>
-      <label for='password2'><?php echo $lang->user->password2;?></label>
+      <label class='control-label' for='password2'><?php echo $lang->user->password2;?></label>
       <?php echo html::password('password2', '', "class='form-control'");?>
     </div>
     <div class='form-group'>
-      <label for='company'><?php echo $lang->user->company;?></label>
+      <label class='control-label' for='company'><?php echo $lang->user->company;?></label>
       <?php echo html::input('company', '', "class='form-control'");?>
     </div>
     <div class='form-group'>
-      <label for='phone'><?php echo $lang->user->phone;?></label>
+      <label class='control-label' for='phone'><?php echo $lang->user->phone;?></label>
       <?php echo html::input('phone', '', "class='form-control'");?>
     </div>
     <div class='form-group'><?php echo html::submitButton($lang->register, 'btn primary block');?><?php echo html::hidden('referer', $referer);?></div>
