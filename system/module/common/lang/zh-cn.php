@@ -326,14 +326,17 @@ $lang->error->sensitive    = '内容中不能存在敏感词!';
 
 /* The pager items. */
 $lang->pager = new stdclass();
-$lang->pager->noRecord   = "暂时没有记录";
-$lang->pager->digest     = "共 <strong>%s</strong> 条记录，%s <strong>%s/%s</strong> &nbsp; ";
-$lang->pager->recPerPage = "每页 <strong>%s</strong> 条";
-$lang->pager->first      = "<i class='icon-step-backward' title='首页'></i>";
-$lang->pager->pre        = "<i class='icon-play icon-rotate-180' title='上一页'></i>";
-$lang->pager->next       = "<i class='icon-play' title='下一页'></i>";
-$lang->pager->last       = "<i class='icon-step-forward' title='末页'></i>";
-$lang->pager->locate     = "GO!";
+$lang->pager->noRecord     = "暂时没有记录";
+$lang->pager->digest       = "共 <strong>%s</strong> 条记录，%s <strong>%s/%s</strong> &nbsp; ";
+$lang->pager->recPerPage   = "每页 <strong>%s</strong> 条";
+$lang->pager->first        = "<i class='icon-step-backward' title='首页'></i>";
+$lang->pager->pre          = "<i class='icon-play icon-rotate-180' title='上一页'></i>";
+$lang->pager->next         = "<i class='icon-play' title='下一页'></i>";
+$lang->pager->last         = "<i class='icon-step-forward' title='末页'></i>";
+$lang->pager->locate       = "GO!";
+$lang->pager->previousPage = "上一页";
+$lang->pager->nextPage     = "下一页";
+$lang->pager->summery      = "第 <strong>%s-%s</strong> 项，共 <strong>%s</strong> 项";
 
 $lang->date = new stdclass();
 $lang->date->minute = '分钟';

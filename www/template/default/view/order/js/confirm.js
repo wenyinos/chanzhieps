@@ -67,7 +67,11 @@ $(document).ready(function()
                     {  
                         label:     v.goToPay,  
                         className: 'btn-primary',  
-                        callback:  function(){window.open(response.locate, '_blank');}  
+                        callback:  function()
+                        {
+                            window.open(response.locate, '_blank');
+                            setTimeout(function(){location.href = createLink('order', 'browse');}, 1000);
+                        }  
                     }  
                 }  
             });

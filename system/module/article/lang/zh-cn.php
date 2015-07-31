@@ -81,6 +81,8 @@ $lang->article->lblEditor    = '最后编辑：%s 于 %s';
 $lang->article->lblComments  = '<strong>评论：</strong> %s';
 
 $lang->article->none      = '没有了';
+$lang->article->previous  = '上一篇';
+$lang->article->next      = '下一篇';
 $lang->article->directory = '返回目录';
 $lang->article->noCssTag  = '不需要&lt;style&gt;&lt;/style&gt;标签';
 $lang->article->noJsTag   = '不需要&lt;script&gt;&lt;/script&gt;标签';

@@ -1160,6 +1160,14 @@ class router
         $methodName = isset($_GET[$this->config->methodVar]) ? strtolower($_GET[$this->config->methodVar]) : $this->config->default->method;
         $this->setModuleName($moduleName);
         $this->setMethodName($methodName);
+
+        if(strpos($this->URI, '/index.php/user-oauthCallback-qq.html') !== false)
+        {    
+            $this->setModuleName('user');
+            $this->setMethodName('oauthCallback');
+            array_unshift($_GET, 'qq');
+        }    
+
         $this->setControlFile();
     }
 

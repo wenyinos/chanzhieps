@@ -22,5 +22,9 @@ $(function()
         }
     };
 
+    // Set required feilds in form
     setRequiredFields();
+
+    // make company links on app navbar as modalTrigger to open content with modal
+    $('#appnav .nav-system-company a').modalTrigger();
 });

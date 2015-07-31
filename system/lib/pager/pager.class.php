@@ -282,7 +282,40 @@ class pager
      */
     public function show($align = 'right', $type = 'full')
     {
-        echo $this->get($align, $type);
+        if($align === 'justify')
+        {
+            echo $this->getJustify($type);
+        }
+        else
+        {
+            echo $this->get($align, $type);
+        }
+    }
+
+    /**
+     * Get the justify pager html string
+     * @return [type] [description]
+     */
+    public function getJustify()
+    {
+        if($this->recTotal <= 0) return '';
+
+        $pager = '';
+
+        $pager .= "<li class='previous" . ($this->pageID == 1 ? ' disabled' : '') . "'>";
+        $this->params['pageID'] = 1;
+        $pager .= $this->createLink('« ' . $this->lang->pager->previousPage) . '</li>';
+
+        $pager .= "<li class='caption'>";
+        $firstId = $this->recPerPage * ($this->pageID - 1) + 1;
+        $pager .= sprintf($this->lang->pager->summery, $firstId, max(min($this->recPerPage * $this->pageID, $this->recTotal), $firstId), $this->recTotal);
+        $pager .= '</li>';
+
+        $pager .= "<li class='next" . (($this->pageID == $this->pageTotal || $this->pageTotal <= 1) ? ' disabled' : '') . "'>";
+        $this->params['pageID'] = min($this->pageTotal, $this->pageID + 1);
+        $pager .= $this->createLink($this->lang->pager->nextPage . ' »') . '</li>';
+
+        return "<ul class='pager pager-justify'>{$pager}</ul>";
     }
 
     /**

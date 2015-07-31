@@ -25,6 +25,7 @@ $lang->block->regionList      = 'Regions List';
 $lang->block->select          = 'Please select a block';
 $lang->block->categories      = 'Categories';
 $lang->block->showImage       = 'Show image';
+$lang->block->showCategory    = 'Show Category';
 $lang->block->showTime        = 'Show time';
 $lang->block->product         = 'Product';
 $lang->block->slide           = 'Slide';
@@ -86,6 +87,14 @@ $lang->block->gridOptions[12] = '100%';
 
 $lang->block->category = new stdclass();
 $lang->block->category->showChildren = 'Show Children';
+$lang->block->category->fromCurrent  = 'From Current';
 
 $lang->block->category->showChildrenList[1] = 'Yes';
 $lang->block->category->showChildrenList[0] = 'No';
+
+$lang->block->category->fromCurrentList[1] = 'Yes';
+$lang->block->category->fromCurrentList[0] = 'No';
+
+$lang->block->category->showCategoryList['abbr'] = 'Abbr';
+$lang->block->category->showCategoryList['name'] = 'Name';
+

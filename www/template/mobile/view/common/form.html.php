@@ -1,4 +1,10 @@
 <?php 
+if(!isset($templateCommonRoot))
+{
+    $thisModuleName     = $this->app->getModuleName();
+    $thisMethodName     = $this->app->getMethodName();
+    $templateCommonRoot = $config->webRoot . "template/{$this->config->template->name}/theme/common/";
+}
 if($thisModuleName === 'user' and $thisMethodName === 'login')
 {
     js::import($jsRoot . 'md5.js');

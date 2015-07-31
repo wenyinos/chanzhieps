@@ -118,9 +118,12 @@ $lang->site->frontList['guest'] = "needn't login";
 
 $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = 'Member';
-$lang->site->moduleAvailable['forum']   = 'Forum';
+$lang->site->moduleAvailable['article'] = 'Article';
 $lang->site->moduleAvailable['blog']    = 'Blog';
+$lang->site->moduleAvailable['product'] = 'Product';
 $lang->site->moduleAvailable['book']    = 'Book';
+$lang->site->moduleAvailable['page']    = 'Page';
+$lang->site->moduleAvailable['forum']   = 'Forum';
 $lang->site->moduleAvailable['message'] = 'Message';
 $lang->site->moduleAvailable['search']  = 'search';
 $lang->site->moduleAvailable['shop']    = 'shop';

@@ -4,7 +4,7 @@
 <?php $this->block->printRegion($layouts, 'all', 'top');?>
 <?php $topNavs = $this->loadModel('nav')->getNavs('top');?>
 
-<header class='appbar fix-top'>
+<header class='appbar fix-top' id='appbar'>
   <div class='appbar-title'>
     <a href='<?php echo $webRoot;?>'><?php
       if(isset($this->config->site->logo))
@@ -32,7 +32,7 @@
   </div>
 </header>
 
-<nav class='appnav fix-top appnav-auto'>
+<nav class='appnav fix-top appnav-auto' id='appnav'>
   <div class='mainnav'>
     <ul class='nav'>
     <?php $subnavs = '';?>

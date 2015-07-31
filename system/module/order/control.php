@@ -77,6 +77,7 @@ class order extends control
     {
         $this->app->loadClass('pager', $static = true);
         $this->app->loadLang('product');
+        $this->app->loadConfig('product');
 
         $pager = new pager($recTotal, $recPerPage, $pageID);
         $this->view->orders  = $this->order->getList($mode, $value, $orderBy, $pager);
