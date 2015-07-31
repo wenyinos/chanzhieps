@@ -16,8 +16,11 @@ $lang->order->deliveriedDate = 'Deliveried Time';
 $lang->order->confirmedDate  = 'Time of receipt';
 $lang->order->payment        = 'Transaction Mode';
 $lang->order->createdDate    = 'Order time';
-$lang->order->express        = '快遞';
-$lang->order->waybill        = '快遞單';
+$lang->order->express        = 'Courier company';
+$lang->order->waybill        = 'Waybill number';
+$lang->order->expressInfo    = 'Express information';
+$lang->order->receiver       = 'Receiver';
+$lang->order->noRecord       = 'No record';
 $lang->order->status         = 'Status';
 
 $lang->order->admin          = 'Admin Orders';

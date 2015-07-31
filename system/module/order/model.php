@@ -504,4 +504,32 @@ class orderModel extends model
 
         return array('result' => 'success', 'message' => $this->lang->saveSuccess);
     }
+    /**                                                                                                         
+     * Display express info.                                                                                    
+     *                                                                                                          
+     * @param $order                                                                                            
+     * @access public                                                                                           
+     * @return string                                                                                           
+     */                                                                                                         
+     public function expressInfo($order='')                                                                     
+     {                                                                                                          
+         $expressList = $this->loadModel('tree')->getPairs(0, 'express');                                       
+         $expressInfo = zget($expressList, $order->express);                                                    
+         return $expressInfo;                                                                                   
+     }        
+
+    /**
+     * Cut address to get receiver and phone.
+     *
+     * @param $address
+     * @access public
+     * @return string 
+     */
+    public function receiverInfo($address)
+    {
+        $receiverInfo = substr($address, 0, strpos($address, "]")+1);
+        return $receiverInfo;
+    } 
+
+
 }

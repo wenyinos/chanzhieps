@@ -29,8 +29,9 @@
         <th class='w-60px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->order->id);?></th>
         <th class='w-60px'><?php commonModel::printOrderLink('account', $orderBy, $vars, $lang->order->account);?></th>
         <th><?php echo $lang->order->productInfo;?></th>
-        <th class='text-right w-80px'><?php commonModel::printOrderLink('amount', $orderBy, $vars, $lang->order->amount);?></th>
+        <th class='w-60px'><?php commonModel::printOrderLink('amount', $orderBy, $vars, $lang->order->amount);?></th>
         <th class='w-200px'><?php echo $lang->order->life;?></th>
+        <th class='w-200px'><?php echo $lang->order->expressInfo;?></th>
         <th class='w-60px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->product->status);?></th>
         <th class='w-150px'><?php echo $lang->actions;?></th>
       </tr>
@@ -50,13 +51,23 @@
             <?php endforeach;?>
           </dl>
         </td>
-        <td class='text-right'><?php echo $order->amount;?></td>
+        <td class='text-center'><?php echo $order->amount;?></td>
         <td>
-          <?php echo $lang->order->createdDate . $lang->colon .  $order->createdDate;?>
-          <?php if($order->payment != 'COD' and ($order->paidDate > $order->createdDate)) echo $lang->order->paidDate . $lang->colon .  $order->paidDate;?>
-          <?php if($order->deliveriedDate > $order->createdDate)echo $lang->order->deliveriedDate . $lang->colon .  $order->deliveriedDate;?>
-          <?php if($order->confirmedDate > $order->deliveriedDate)echo $lang->order->confirmedDate . $lang->colon .  $order->confirmedDate;?>
-          <?php if($order->payment == 'COD' and ($order->paidDate > $order->createdDate)) echo $lang->order->paidDate . $lang->colon .  $order->paidDate;?>
+          <?php echo $lang->order->createdDate . $lang->colon .  $order->createdDate . '</br>';?>
+          <?php if($order->payment != 'COD' and ($order->paidDate > $order->createdDate)) echo $lang->order->paidDate . $lang->colon .  $order->paidDate . '</br>';?>
+          <?php if($order->deliveriedDate > $order->createdDate)echo $lang->order->deliveriedDate . $lang->colon .  $order->deliveriedDate . '</br>';?>
+          <?php if($order->confirmedDate > $order->deliveriedDate)echo $lang->order->confirmedDate . $lang->colon .  $order->confirmedDate . '</br>';?>
+          <?php if($order->payment == 'COD' and ($order->paidDate > $order->createdDate)) echo $lang->order->paidDate . $lang->colon .  $order->paidDate . '</br>';?>
+        </td>
+        <td class = 'text-left'>
+          <?php if($order->deliveryStatus !== 'not_send') 
+                {
+                    echo $lang->order->express . $lang->colon . $this->order->expressInfo($order) . '</br>';
+                    echo $lang->order->waybill . $lang->colon . $order->waybill . '</br>'; 
+                    echo $lang->order->receiver . $lang->colon . $this->order->receiverInfo($order->address).'</br>';
+                }
+                else echo $lang->order->noRecord;
+          ?>
         </td>
         <td>
           <?php echo $this->order->processStatus($order);?>
