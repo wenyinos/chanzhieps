@@ -16,8 +16,11 @@ $lang->order->deliveriedDate = '发货时间';
 $lang->order->confirmedDate  = '收货时间';
 $lang->order->payment        = '交易方式';
 $lang->order->createdDate    = '下单时间';
-$lang->order->express        = '快递';
-$lang->order->waybill        = '快递单';
+$lang->order->express        = '快递公司';
+$lang->order->waybill        = '快递单号';
+$lang->order->expressInfo    = '快递详情';
+$lang->order->receiver       = '收货人';
+$lang->order->noRecord       = '无';
 $lang->order->status         = '状态';
 
 $lang->order->admin          = '订单管理';
@@ -40,7 +43,7 @@ $lang->order->payInfo        = "%s %s 商品订单";
 $lang->order->track          = '查看物流';
 $lang->order->life           = '订单跟踪';
 $lang->order->days           = '天';
-$lang->order->deliveryInfo   = '发货信息';
+$lang->order->deliveryInfo   = '查看详情';
 
 $lang->order->confirmLimit         = '确认收货周期';
 $lang->order->confirmReceived      = '确认收货';

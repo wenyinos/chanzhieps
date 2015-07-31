@@ -88,7 +88,7 @@ class order extends control
 
         $this->view->title          = $this->lang->order->admin;
         $this->view->currencySymbol = $this->lang->product->currencySymbols[$this->config->product->currency];
-
+        
         $this->display();
     }
 

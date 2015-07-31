@@ -7,15 +7,15 @@ include TPL_ROOT . 'common/header.html.php';
 
 <?php $common->printPositionBar();?>
 <div class='panel-section'>
-  <?php if(!empty($messages)):?>
-  <div class='panel-heading'>
-    <a href='#commentDialog' data-toggle='modal' class='btn primary block'><i class='icon-comment-alt'></i> <?php echo $lang->message->post; ?></a>
-  </div>
-  <div class='panel-heading'>
-    <div class='title text-info'><i class='icon-comments'></i> <?php echo $lang->message->list;?></div>
-  </div>
-  <div id='commentsListWrapper'>
-    <div class='cards condensed' id='commentsList'>
+  <div id='commentsListWrapper'><div id='commentsList'> <?php // Double div for ajax load. ?>
+    <?php if(!empty($messages)):?>
+    <div class='panel-heading'>
+      <a href='#commentDialog' data-toggle='modal' class='btn primary block'><i class='icon-comment-alt'></i> <?php echo $lang->message->post; ?></a>
+    </div>
+    <div class='panel-heading'>
+      <div class='title text-info'><i class='icon-comments'></i> <?php echo $lang->message->list;?></div>
+    </div>
+    <div class='cards condensed'>
       <?php foreach($messages as $number => $message):?>
       <div class='card comment'>
         <div class='card-heading'>
@@ -33,14 +33,14 @@ include TPL_ROOT . 'common/header.html.php';
         <?php $pager->show('justify');?>
       </div>
     </div>
-  </div>
-  <?php else: ?>
-  <div class='panel-body'>
-    <div class='alert text-center bg-primary-pale text-info'>
-      <p><i class='icon-comments-alt icon-s3'></i></p><strong>0 <?php echo $lang->message->common?></strong>
+    <?php else: ?>
+    <div class='panel-body'>
+      <div class='alert text-center bg-primary-pale text-info'>
+        <p><i class='icon-comments-alt icon-s3'></i></p><strong>0 <?php echo $lang->message->common?></strong>
+      </div>
     </div>
-  </div>
-  <?php endif; ?>
+    <?php endif; ?>
+  </div></div>
   <div class='panel-heading'>
     <a href='#commentDialog' data-toggle='modal' class='btn primary block'><i class='icon-comment-alt'></i> <?php echo $lang->message->post; ?></a>
   </div>
