@@ -52,7 +52,14 @@
             <?php if($providerCode == 'qq'):?>
             <tr>
               <th><?php echo $lang->user->oauth->callbackURL;?></th>
-              <td><?php printf($lang->user->oauth->qq->callbackURL, $this->server->http_host);?></td>
+              <td>
+                <?php $callbackURL = commonModel::createFrontLink('user', 'oauthCallback', "provider=qq");?>
+                <?php if($callbackURL == '/user-oauthCallback-qq.html'):?>
+                <?php echo $this->server->http_host . $callbackURL;?>
+                <?php else:?>
+                <?php echo $this->server->http_host . '/index.php/user-oauthCallback-qq.html';?>
+                <?php endif;?>
+              </td>
             </tr>
             <?php endif;?>
             <tr>
