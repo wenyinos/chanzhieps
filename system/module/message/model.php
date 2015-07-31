@@ -124,7 +124,7 @@ class messageModel extends model
                     echo "<div class='reply card'>";
 
                     echo "<div class='card-heading'>";
-                    echo "<span class='text-important'><i class='icon-reply'></i> {$reply->from}</span> &nbsp; <small class='text-muted'>" . formatTime($reply->date, 'Y/m/d') . "</small>";
+                    echo "<span class='text-important'><i class='icon-reply'></i> {$reply->from}</span> &nbsp; <small class='text-muted'>" . formatTime($reply->date, 'Y/m/d H:m') . "</small>";
                     echo "<div class='actions'>" . html::a(helper::createLink('message', 'reply', "id={$reply->id}"), $this->lang->message->reply, " data-toggle='modal' data-type='ajax' id='reply{$reply->id}'") . "</div>";
                     echo '</div>';
 
