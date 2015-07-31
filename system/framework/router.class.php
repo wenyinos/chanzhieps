@@ -167,7 +167,7 @@ class router
      * @var string
      * @access private
      */
-    private $viewType;
+    public $viewType;
 
     /**
      * The global $config object.
@@ -910,7 +910,7 @@ class router
      * @access  private
      * @return  string the PATH_INFO
      */
-    private function getPathInfo($varName)
+    public function getPathInfo($varName)
     {
         $value = @getenv($varName);
         if(strpos($value, $_SERVER['SCRIPT_NAME']) !== false) $value = str_replace($_SERVER['SCRIPT_NAME'], '', $value);
