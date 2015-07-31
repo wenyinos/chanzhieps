@@ -167,7 +167,6 @@ $lang->blog->menu->browse = 'All blogs|article|admin|type=blog';
 $lang->page = new stdclass();
 $lang->page->menu = new stdclass();
 $lang->page->menu->browse = array('link' => 'List|article|admin|type=page', 'alias' => 'edit');
-$lang->page->menu->create = 'Create|article|create|type=page';
 
 /* Menu of product module. */
 $lang->product = new stdclass();
