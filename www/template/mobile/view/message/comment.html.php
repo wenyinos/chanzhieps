@@ -10,12 +10,12 @@ if(isset($pageCSS)) css::internal($pageCSS);
     <a href='#commentDialog' data-toggle='modal' class='btn primary block'><i class='icon-comment-alt'></i> <?php echo $lang->message->post; ?></a>
   </div>
 
-  <?php if(isset($comments) and $comments):?>
-  <div class='panel-heading'>
-    <div class='title text-info'><i class='icon-comments'></i> <?php echo $lang->message->list;?></div>
-  </div>
-  <div id='commentsListWrapper'>
-    <div class='cards condensed' id='commentsList'>
+  <div id='commentsListWrapper'><div id='commentsList'> <?php // Double div for ajax load. ?>
+    <?php if(isset($comments) and $comments):?>
+    <div class='panel-heading'>
+      <div class='title text-info'><i class='icon-comments'></i> <?php echo $lang->message->list;?></div>
+    </div>
+    <div class='cards condensed'>
       <?php foreach($comments as $number => $comment):?>
         <div class='card comment'>
           <div class='card-heading'>
@@ -33,13 +33,14 @@ if(isset($pageCSS)) css::internal($pageCSS);
         <?php $pager->show('justify');?>
       </div>
     </div>
-  </div>
-  <div class='panel-footer'>
-    <?php if(count($comments) > 5): ?>
-    <a href='#commentDialog' data-toggle='modal' class='btn primary block'><i class='icon-comment-alt'></i> <?php echo $lang->message->post; ?></a>
-    <?php endif; ?>
-  </div>
-  <?php endif;?>
+    </div>
+    <div class='panel-footer'>
+      <?php if(count($comments) > 5): ?>
+      <a href='#commentDialog' data-toggle='modal' class='btn primary block'><i class='icon-comment-alt'></i> <?php echo $lang->message->post; ?></a>
+      <?php endif; ?>
+    </div>
+    <?php endif;?>
+  </div></div>
 </div>
 
 <div class='modal fade' id='commentDialog'>
