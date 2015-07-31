@@ -14,24 +14,28 @@ if(isset($pageCSS)) css::internal($pageCSS);
   <div class='panel-heading'>
     <div class='title text-info'><i class='icon-comments'></i> <?php echo $lang->message->list;?></div>
   </div>
-  <div class='cards condensed'>
-  <?php foreach($comments as $number => $comment):?>
-    <div class='card comment'>
-      <div class='card-heading'>
-        <span class='text-special name'><?php echo $comment->from?></span> &nbsp; <small class='text-muted time'><?php echo formatTime($comment->date, 'Y/m/d');?></small>
-        <div class='actions'>
-          <?php echo html::a($this->createLink('message', 'reply', "commentID=$comment->id"), $lang->comment->reply, "data-toggle='modal' data-type='ajax' data-icon='reply' data-title='{$lang->comment->reply}'");?>
+  <div id='commentsListWrapper'>
+    <div class='cards condensed' id='commentsList'>
+      <?php foreach($comments as $number => $comment):?>
+        <div class='card comment'>
+          <div class='card-heading'>
+            <span class='text-special name'><?php echo $comment->from?></span> &nbsp; <small class='text-muted time'><?php echo formatTime($comment->date, 'Y/m/d');?></small>
+            <div class='actions'>
+              <?php echo html::a($this->createLink('message', 'reply', "commentID=$comment->id"), $lang->comment->reply, "data-toggle='modal' data-type='ajax' data-icon='reply' data-title='{$lang->comment->reply}'");?>
+            </div>
+          </div>
+          <div class='card-content'><?php echo nl2br($comment->content);?></div>
+          <?php $this->message->getFrontReplies($comment, 'simple');?>
         </div>
+      <?php endforeach;?>
+      <div class='panel-body'>
+        <hr class='space'>
+        <?php $pager->show('justify');?>
       </div>
-      <div class='card-content'><?php echo nl2br($comment->content);?></div>
-      <?php $this->message->getFrontReplies($comment, 'simple');?>
     </div>
-  <?php endforeach;?>
   </div>
   <div class='panel-footer'>
-    <?php $pager->show('justify');?>
     <?php if(count($comments) > 5): ?>
-    <hr class='space'>
     <a href='#commentDialog' data-toggle='modal' class='btn primary block'><i class='icon-comment-alt'></i> <?php echo $lang->message->post; ?></a>
     <?php endif; ?>
   </div>
@@ -47,14 +51,12 @@ if(isset($pageCSS)) css::internal($pageCSS);
       </div>
       <div class='modal-body'>
         <form method='post' id='commentForm' action="<?php echo $this->createLink('message', 'post', 'type=comment');?>">
-          <div class='form-group'>
-            <div class='col-sm-11 required'>
-              <?php
-              echo html::textarea('content', '', "class='form-control' rows='3' placeholder='{$lang->message->content}'");
-              echo html::hidden('objectType', $objectType);
-              echo html::hidden('objectID', $objectID);
-              ?>
-            </div>
+          <div class='form-group required'>
+            <?php
+            echo html::textarea('content', '', "class='form-control' rows='3' placeholder='{$lang->message->content}'");
+            echo html::hidden('objectType', $objectType);
+            echo html::hidden('objectID', $objectID);
+            ?>
           </div>
           <?php if($this->session->user->account == 'guest'): ?>
           <div class='form-group required'>
@@ -97,6 +99,11 @@ if(isset($pageCSS)) css::internal($pageCSS);
 <script>
 $(function()
 {
+    $.refreshCommentList = function()
+    {
+        $('#commentsListWrapper').load(window.location.href + ' #commentsList');
+    };
+
     var $commentForm = $('#commentForm'),
         $commentBox = $('#commentBox');
     $commentForm.ajaxform({onSuccess: function(response)
@@ -104,14 +111,8 @@ $(function()
         if(response.result == 'success')
         {
             $('#commentDialog').modal('hide');
-            if(window.v)
-            {
-                setTimeout(function()
-                {
-                    var link = window.v.messageRefreshUrl;
-                    if(link) $commentBox.load(link, location.href="#first");
-                }, 200)
-            }
+            $commentForm.find('#content').val('');
+            setTimeout($.refreshCommentList, 200)
         }
         if(response.reason == 'needChecking')
         {

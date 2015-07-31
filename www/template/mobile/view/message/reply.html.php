@@ -11,10 +11,10 @@
         </div>
         <?php if($this->session->user->account == 'guest'): ?>
         <div class="form-group">
-          <?php echo html::input('from', $from, "class='form-control' placeholder='{$lang->message->from}'");?>
+          <?php echo html::input('from', '', "class='form-control' placeholder='{$lang->message->from}'");?>
         </div>
         <div class="form-group">
-          <?php echo html::input('email', $email, "class='form-control' placeholder='{$lang->message->email}'"); ?>
+          <?php echo html::input('email', '', "class='form-control' placeholder='{$lang->message->email}'"); ?>
         </div>
         <?php else: ?>
         <div class='form-group'>
@@ -28,7 +28,9 @@
           </span>
         </div>
         <?php endif; ?>
-        <div class='form-group hide captcha-box'></div>
+        <table style='width: 100%'>
+          <tr class='hide captcha-box'></tr>
+        </table>
         <div class='form-group'>
           <?php echo html::submitButton('', 'btn primary block');?>
         </div>
@@ -47,14 +49,10 @@ $(function()
         if(response.result == 'success')
         {
             $.closeModal();
-            if(window.v)
+            if($.isFunction($.refreshCommentList))
             {
-                setTimeout(function()
-                {
-                    var link = window.v.messageRefreshUrl;
-                    if(link) $commentBox.load(link, location.href="#first");
-                }, 200)
-            };
+                setTimeout($.refreshCommentList, 200);
+            }
         }
         if(response.reason == 'needChecking')
         {

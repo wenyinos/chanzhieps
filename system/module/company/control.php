@@ -34,7 +34,7 @@ class company extends control
      */
     public function contact()
     {
-        $this->view->title   = $lang->company->contact;
+        $this->view->title   = $this->lang->company->contact;
         $this->view->contact = $this->company->getContact();
         
         $this->display();

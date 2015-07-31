@@ -30,6 +30,7 @@ js::execute($article->js);
   <section class='abstract bg-gray-pale small'><strong><?php echo $lang->article->summary;?></strong><?php echo $lang->colon . $article->summary;?></section>
   <?php endif; ?>
   <div class='panel-body'>
+    <hr class="space">
     <section class='article-content'>
       <?php echo $article->content;?>
     </section>
