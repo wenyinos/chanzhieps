@@ -333,6 +333,7 @@ class productModel extends model
             ->setDefault('price', 0)
             ->setDefault('amount', 0)
             ->setDefault('promotion', 0)
+            ->setDefault('unsaleable', 0)
             ->add('editor', $this->app->user->account)
             ->add('editedDate', helper::now())
             ->get();
