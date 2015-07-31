@@ -298,6 +298,8 @@ class pager
      */
     public function getJustify()
     {
+        if($this->recTotal <= 0) return '';
+
         $pager = '';
 
         $pager .= "<li class='previous" . ($this->pageID == 1 ? ' disabled' : '') . "'>";
@@ -305,10 +307,11 @@ class pager
         $pager .= $this->createLink('« ' . $this->lang->pager->previousPage) . '</li>';
 
         $pager .= "<li class='caption'>";
-        $pager .= sprintf($this->lang->pager->summery, $this->recPerPage * ($this->pageID - 1) + 1, min($this->recPerPage * $this->pageID, $this->recTotal), $this->recTotal);
+        $firstId = $this->recPerPage * ($this->pageID - 1) + 1;
+        $pager .= sprintf($this->lang->pager->summery, $firstId, max(min($this->recPerPage * $this->pageID, $this->recTotal), $firstId), $this->recTotal);
         $pager .= '</li>';
 
-        $pager .= "<li class='next" . ($this->pageID == $this->pageTotal ? ' disabled' : '') . "'>";
+        $pager .= "<li class='next" . (($this->pageID == $this->pageTotal || $this->pageTotal <= 1) ? ' disabled' : '') . "'>";
         $this->params['pageID'] = min($this->pageTotal, $this->pageID + 1);
         $pager .= $this->createLink($this->lang->pager->nextPage . ' »') . '</li>';
 
