@@ -11,7 +11,12 @@
  */
 ?>
 <?php include TPL_ROOT . 'common/header.html.php';?>
-<?php //TODO: Print block: article_browse ?>
+<?php
+$path = array_keys($category->pathNames);
+js::set('path', $path);
+js::set('categoryID', $category->id);
+//TODO: Print block: article_browse
+?>
 
 <?php echo $common->printPositionBar($category);?>
 
