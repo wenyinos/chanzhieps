@@ -19,7 +19,7 @@ include TPL_ROOT . 'common/header.html.php';
       <?php foreach($messages as $number => $message):?>
       <div class='card comment'>
         <div class='card-heading'>
-          <span class='text-special name'><?php echo $message->from?></span> &nbsp; <small class='text-muted time'><?php echo formatTime($message->date, 'Y/m/d');?></small>
+          <span class='text-special name'><?php echo $message->from?></span> &nbsp; <small class='text-muted time'><?php echo formatTime($message->date, 'Y/m/d H:m');?></small>
           <div class='actions'>
             <?php echo html::a($this->createLink('message', 'reply', "commentID=$message->id"), $lang->message->reply, "data-toggle='modal' data-type='ajax' data-icon='reply' data-title='{$lang->message->reply}'");?>
           </div>

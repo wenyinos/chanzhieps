@@ -19,7 +19,7 @@ if(isset($pageCSS)) css::internal($pageCSS);
       <?php foreach($comments as $number => $comment):?>
         <div class='card comment'>
           <div class='card-heading'>
-            <span class='text-special name'><?php echo $comment->from?></span> &nbsp; <small class='text-muted time'><?php echo formatTime($comment->date, 'Y/m/d');?></small>
+            <span class='text-special name'><?php echo $comment->from?></span> &nbsp; <small class='text-muted time'><?php echo formatTime($comment->date, 'Y/m/d H:m');?></small>
             <div class='actions'>
               <?php echo html::a($this->createLink('message', 'reply', "commentID=$comment->id"), $lang->comment->reply, "data-toggle='modal' data-type='ajax' data-icon='reply' data-title='{$lang->comment->reply}'");?>
             </div>
