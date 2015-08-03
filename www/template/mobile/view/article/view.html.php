@@ -81,7 +81,7 @@ js::execute($article->js);
 </div>
 
 <?php if(commonModel::isAvailable('message')):?>
-    <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=article&objectID={$article->id}");?></div>
-    <?php endif;?>
+<div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=article&objectID={$article->id}");?></div>
+<?php endif;?>
 
 <?php include TPL_ROOT . 'common/footer.html.php';?>
