@@ -54,6 +54,7 @@ if(isset($pageCSS)) css::internal($pageCSS);
     <?php endif;?>
   </div></div>
 </div>
+<hr class='space'>
 
 <div class='modal fade' id='commentDialog'>
   <div class='modal-dialog'>
