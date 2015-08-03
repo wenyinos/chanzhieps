@@ -147,8 +147,8 @@ foreach($product->attributes as $attribute)
     <tr>
       <td colspan='2'>
         <div class='row'>
-          <div class='col-6'><button type='button' class='btn block primary btn-buy'><?php echo $lang->product->buyNow;?></button></div>
-          <div class='col-6'><button type='button' class='btn block warning btn-cart'><?php echo $lang->product->addToCart;?></button></div>
+          <div class='col-6'><button type='button' class='btn block primary btn-buy' data-url='<?php echo $this->createLink('order', 'confirm', "product={$product->id}&count=count");?>'><?php echo $lang->product->buyNow;?></button></div>
+          <div class='col-6'><button type='button' class='btn block warning btn-cart' data-url='<?php echo $this->createLink('cart', 'add', "product={$product->id}&count=count");?>'><?php echo $lang->product->addToCart;?></button></div>
         </div>
       </td>
     </tr>
