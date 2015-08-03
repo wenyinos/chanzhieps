@@ -9,6 +9,12 @@ $config->block->require = new stdclass();
 $config->block->require->create = 'title, template';
 $config->block->require->edit   = 'title';
 
+$config->block->categoryList = new stdclass();
+$config->block->categoryList->custom  = ',html,htmlcode,phpcode,';
+$config->block->categoryList->article = ',latestArticle,hotArticle,latestBlog,latestThread,pageList,articleTree,blogTree,';
+$config->block->categoryList->product = ',latestProduct,hotProduct,featuredProduct,productTree,';
+$config->block->categoryList->system  = ',contact,followUs,about,links,slide,header,';
+
 $config->block->defaultIcons = array();
 $config->block->defaultIcons['about']         = 'icon-group';
 $config->block->defaultIcons['html']          = '';

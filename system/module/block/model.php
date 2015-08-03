@@ -582,6 +582,7 @@ class blockModel extends model
             if(isset($block->titleless) and $block->titleless) $blockClass  .= ' panel-titleless';
 
             $content = is_object($block->content) ? $block->content : json_decode($block->content);
+            $blockClass = "block-{$content->category}-{$block->type}";
 
             if(isset($this->config->block->defaultIcons[$block->type])) 
             {
