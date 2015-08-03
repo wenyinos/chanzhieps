@@ -1,8 +1,18 @@
+<?php
+/**
+ * The index view file of message for mobile template of chanzhiEPS.
+ *
+ * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
+ * @author      Hao Sun <daitingting@xirangit.com>
+ * @package     product
+ * @version     $Id$
+ * @link        http://www.chanzhi.org
+ */
+?>
 <?php 
 include TPL_ROOT . 'common/header.html.php';
 // TODO: check follow methods: showDetail and showAbstract
-// js::set('showDetail', $this->lang->message->showDetail);
-// js::set('showAbstract', $this->lang->message->showAbstract);
 ?>
 
 <?php $common->printPositionBar();?>
