@@ -18,7 +18,8 @@ class product extends control
         if(RUN_MODE == 'admin')
         {
             $this->view->treeModuleMenu = $this->loadModel('tree')->getTreeMenu('product', 0, array('treeModel', 'createAdminLink'));
-            $this->view->treeManageLink = html::a(helper::createLink('product', 'currency'), $this->lang->product->currency, "data-toggle='modal'") . '&nbsp;&nbsp;' . html::a(helper::createLink('tree', 'browse', "type=product"), $this->lang->tree->manage);
+            $this->view->treeManageLink = html::a(helper::createLink('product', 'setting'), $this->lang->product->setting, "data-toggle='modal'");
+            $this->view->treeManageLink .=   '&nbsp;&nbsp;' . html::a(helper::createLink('tree', 'browse', "type=product"), $this->lang->tree->manage);
         }
     }
 
@@ -206,25 +207,6 @@ class product extends control
     }
 
     /**
-     * Set currency. 
-     * 
-     * @access public
-     * @return void
-     */
-    public function currency()
-    {
-        if($_POST)
-        {
-            $this->product->currency();
-            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
-        }
-
-        $this->view->title = $this->lang->product->currency;
-        $this->display();
-    }
-
-    /**
      * View a product.
      * 
      * @param int $productID 
@@ -339,5 +321,24 @@ class product extends control
     {
         $product = $this->product->getByID($productID);
         helper::header301(htmlspecialchars_decode($product->mall));
+    }
+
+    /**
+     * Set currency and stock.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setting()
+    {
+        if($_POST)
+        {
+            $result = $this->product->saveSetting();
+            if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        }
+
+        $this->view->title = $this->lang->product->setting;
+        $this->display();
     }
 }

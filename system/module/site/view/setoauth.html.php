@@ -55,9 +55,9 @@
               <td>
                 <?php $callbackURL = commonModel::createFrontLink('user', 'oauthCallback', "provider=qq");?>
                 <?php if($callbackURL == '/user-oauthCallback-qq.html'):?>
-                <?php echo $this->server->http_host . $callbackURL;?>
+                <?php echo commonModel::getSysURL() . $callbackURL;?>
                 <?php else:?>
-                <?php echo $this->server->http_host . '/index.php/user-oauthCallback-qq.html';?>
+                <?php echo commonModel::getSysURL() . '/index.php/user-oauthCallback-qq.html';?>
                 <?php endif;?>
               </td>
             </tr>

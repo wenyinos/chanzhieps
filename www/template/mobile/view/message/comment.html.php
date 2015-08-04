@@ -1,4 +1,16 @@
 <?php
+/**
+ * The comment view file of message for mobile template of chanzhiEPS.
+ *
+ * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
+ * @author      Hao Sun <sunhao@cnezsoft.com>
+ * @package     message
+ * @version     $Id$
+ * @link        http://www.chanzhi.org
+ */
+?>
+<?php
 js::set('objectType', $objectType);
 js::set('objectID',   $objectID);
 js::set('messageRefreshUrl', $this->createLink('message', 'comment', "objecType=$objectType&objectID=$objectID"));
@@ -42,6 +54,7 @@ if(isset($pageCSS)) css::internal($pageCSS);
     <?php endif;?>
   </div></div>
 </div>
+<hr class='space'>
 
 <div class='modal fade' id='commentDialog'>
   <div class='modal-dialog'>

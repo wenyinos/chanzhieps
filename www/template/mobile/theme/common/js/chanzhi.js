@@ -27,4 +27,17 @@ $(function()
 
     // make company links on app navbar as modalTrigger to open content with modal
     $('#appnav .nav-system-company a').modalTrigger();
+
+    // set active item on #appnav
+    var $appNav = $('#appnav');
+    var activedNav = v.activedNav;
+    if(!activedNav)
+    {
+        if(config && config.currentModule)
+        {
+            if(config.currentModule === 'article' || config.currentModule === 'product') activedNav = '.nav-' + config.currentModule + '-0';
+            else activedNav = '.nav-system-' + (config.currentModule === 'index' ? 'home' : config.currentModule);
+        }
+    }
+    $appNav.find(activedNav).addClass('active');
 });

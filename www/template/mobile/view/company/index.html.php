@@ -1,3 +1,16 @@
+<?php
+/**
+ * The aboutus view file of company for mobile template of chanzhiEPS.
+ * The view should be used as ajax content
+ *
+ * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
+ * @author      Hao Sun <sunhao@cnezsoft.com>
+ * @package     company
+ * @version     $Id$
+ * @link        http://www.chanzhi.org
+ */
+?>
 <div class='modal-dialog'>
   <div class='modal-content'>
     <div class='modal-header'>
