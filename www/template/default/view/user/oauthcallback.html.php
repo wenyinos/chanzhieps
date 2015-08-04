@@ -2,42 +2,60 @@
 <div class='row'>
   <div class='col-md-6'>
     <div class='panel panel-default'>
-      <div class='panel-heading'><h3><?php echo $lang->user->oauth->lblProfile;?></h3></div>
+      <div class='panel-heading'>
+        <strong><?php echo $lang->user->oauth->lblProfile;?></strong>
+        <div class='panel-actions'><?php echo html::a(inlink('ignoreBind'), $lang->user->oauth->ignore . '>>', "class='btn btn-primary'") . html::hidden('referer', $referer);?></div>
+      </div>
       <div class='panel-body'>
-        <form method='post' id='registerForm' action='<?php echo $this->createLink('user', 'oauthRegister');?>' role='form'>
+        <form method='post' id='registerForm' class='form-horizontal' action='<?php echo $this->createLink('user', 'oauthRegister');?>' role='form'>
           <div class='form-group'>
-            <label for='username'><?php echo $lang->user->account;?></label>
-            <?php echo html::input('account', '', "placeholder='{$lang->user->register->lblAccount}'") . '<font color="red">*</font>';?>
+            <label class='col-sm-2 control-label' for='username'><?php echo $lang->user->account;?></label>
+            <div class='col-sm-9 required'><?php echo html::input('account', '', "class='form-control' placeholder='{$lang->user->register->lblAccount}'");?></div>
           </div>
           <div class='form-group'>
-            <label for='email'><?php echo $lang->user->email;?></label>
-            <?php echo html::input('email') . '<font color="red">*</font>';?>
+            <label class='col-sm-2 control-label' for='realname'><?php echo $lang->user->realname;?></label>
+            <div class='col-sm-9 required'><?php echo html::input('realname', '', "class='form-control'");?></div>
           </div>
-          <?php 
-          echo html::submitButton('', 'btn btn-success btn-wider');
-          echo html::hidden('referer', $referer);
-          ?>
+          <div class='form-group'>
+            <label class='col-sm-2 control-label' for='email'><?php echo $lang->user->email;?></label>
+            <div class='col-sm-9 required'><?php echo html::input('email', '', "class='form-control'");?></div>
+          </div>
+          <div class='form-group'>
+            <label class='col-sm-2 control-label' for='password'><?php echo $lang->user->password;?></label>
+            <div class='col-sm-9 required'><?php echo html::password('password1', '', "class='form-control'");?></div>
+          </div>
+          <div class='form-group'>
+            <label class='col-sm-2 control-label' for='password'><?php echo $lang->user->password2;?></label>
+            <div class='col-sm-9 required'><?php echo html::password('password2', '', "class='form-control'");?></div>
+          </div>
+          <div class='form-group'>
+            <label class='col-sm-2 control-label'></label>
+            <div class='col-sm-9'><?php echo html::submitButton('', 'btn btn-success') . html::hidden('referer', $referer);?></div>
+          </div>
         </form>
       </div>
     </div>
   </div>
   <div class='col-md-6'>
     <div class='panel panel-default'>
-      <div class='panel-heading'><h3><?php echo $lang->user->oauth->lblBind;?></h3></div>
+      <div class='panel-heading'>
+        <strong><?php echo $lang->user->oauth->lblBind;?></strong>
+        <div class='panel-actions'><?php echo html::a(inlink('ignoreBind'), $lang->user->oauth->ignore . '>>', "class='btn btn-primary'") . html::hidden('referer', $referer);?></div>
+      </div>
       <div class='panel-body'>
-        <form method='post' id='bindForm' action='<?php echo $this->createLink('user', 'oauthBind');?>' role='form'>
+        <form method='post' id='bindForm' class='form-horizontal' action='<?php echo $this->createLink('user', 'oauthBind');?>' role='form'>
           <div class='form-group'>
-            <label for='useraccount'><?php echo $lang->user->account;?></label>
-            <?php echo html::input('account')?>
+            <label class='col-sm-2 control-label' for='useraccount'><?php echo $lang->user->account;?></label>
+            <div class='col-sm-9'><?php echo html::input('account', '', "class='form-control'");?></div>
           </div>
           <div class='form-group'>
-            <label for='password'><?php echo $lang->user->password;?></label>
-            <?php echo html::password('password');?>
+            <label class='col-sm-2 control-label' for='password'><?php echo $lang->user->password;?></label>
+            <div class='col-sm-9'><?php echo html::password('password', '', "class='form-control'");?></div>
           </div>
-          <?php 
-          echo html::submitButton($lang->login, 'btn btn-success btn-wider');
-          echo html::hidden('referer', $referer);
-          ?>
+          <div class='form-group'>
+            <label class='col-sm-2 control-label'></label>
+            <div class='col-sm-9'><?php echo html::submitButton($lang->login, 'btn btn-success') . html::hidden('referer', $referer);?></div>
+          </div>
         </form>
       </div>
     </div>

@@ -123,10 +123,11 @@ class userModel extends model
      */
     public function getByAccount($account)
     {
-        $user = $this->dao->select('*')->from(TABLE_USER)
-            ->setAutolang(false)
-            ->beginIF(validater::checkEmail($account))->where('email')->eq($account)->fi()
-            ->beginIF(!validater::checkEmail($account))->where('account')->eq($account)->fi()
+        $user = $this->dao->setAutolang(false)
+            ->select('u.*, o.provider as provider, openID as openID')->from(TABLE_USER)->alias('u')
+            ->leftJoin(TABLE_OAUTH)->alias('o')->on('u.account = o.account')
+            ->beginIF(validater::checkEmail($account))->where('u.email')->eq($account)->fi()
+            ->beginIF(!validater::checkEmail($account))->where('u.account')->eq($account)->fi()
             ->fetch();
         if(empty($user)) return false;
 
@@ -734,25 +735,53 @@ class userModel extends model
      */
     public function registerOauthAccount($provider, $openID)
     {
+        if($this->post->password1) $this->checkPassword();
+
         $user = fixer::input('post')
             ->setForce('join', helper::now())
             ->setForce('last', helper::now())
             ->setForce('visits', 1)
             ->setIF($this->cookie->referer != '', 'referer', $this->cookie->referer)
             ->setIF($this->cookie->referer == '', 'referer', '')
-            ->add('password', $this->createPassword(md5(mt_rand()), $openID))     // Set a random password.
             ->remove('admin, ip')
             ->get();
 
-        $this->dao->insert(TABLE_USER)->data($user)
-            ->autoCheck()
-            ->check('account', 'notempty')
-            ->check('account', 'unique')
-            ->check('account', 'account')
-            ->checkIF($provider != 'qq', 'email', 'notempty')
-            ->checkIF($provider != 'qq', 'email', 'unique')
-            ->checkIF($provider != 'qq', 'email', 'email')
-            ->exec();
+        $user->password = $this->createPassword(md5(mt_rand()), $openID);
+        if($this->post->password1) $user->password = $this->createPassword($this->post->password1, $user->account); 
+        if(!isset($user->password1)) $this->config->user->require->register = 'account';
+
+        $oldUser = $this->getByOpenID($openID, $provider);
+        if($oldUser)
+        {
+            $this->dao->update(TABLE_USER)->data($user, $skip = 'password1,password2')
+                ->autoCheck()
+                ->batchCheck($this->config->user->require->register, 'notempty')
+                ->check('account', 'unique')
+                ->check('account', 'account')
+                ->checkIF(isset($user->email), 'email', 'unique')
+                ->checkIF(isset($user->email), 'email', 'email')
+                ->where('id')->eq($oldUser->id)
+                ->exec();
+
+           $this->dao->update(TABLE_MESSAGE)->set('account')->eq($user->account)->where('account')->eq($oldUser->account)->exec();
+           $this->dao->update(TABLE_THREAD)->set('author')->eq($user->account)->where('author')->eq($oldUser->account)->exec();
+           $this->dao->update(TABLE_THREAD)->set('repliedBy')->eq($user->account)->where('repliedBy')->eq($oldUser->account)->exec();
+           $this->dao->update(TABLE_REPLY)->set('author')->eq($user->account)->where('author')->eq($oldUser->account)->exec();
+           $this->dao->update(TABLE_CATEGORY)->set('postedBy')->eq($user->account)->where('postedBy')->eq($oldUser->account)->exec();
+           $this->dao->update(TABLE_ADDRESS)->set('account')->eq($user->account)->where('account')->eq($oldUser->account)->exec();
+           $this->dao->update(TABLE_CART)->set('account')->eq($user->account)->where('account')->eq($oldUser->account)->exec();
+        }
+        else
+        { 
+            $this->dao->insert(TABLE_USER)->data($user, $skip = 'password1,password2')
+                ->autoCheck()
+                ->batchCheck($this->config->user->require->register, 'notempty')
+                ->check('account', 'unique')
+                ->check('account', 'account')
+                ->check('email', 'unique')
+                ->check('email', 'email')
+                ->exec();
+        }
 
         if(dao::isError()) return false;
         return $this->bindOAuthAccount($this->post->account, $provider, $openID);
@@ -771,11 +800,59 @@ class userModel extends model
     {
         if(!$account or !$provider or !$openID) return false;
 
-        return $this->dao->replace(TABLE_OAUTH)
-            ->set('account')->eq($account)
-            ->set('provider')->eq($provider)
-            ->set('openID')->eq($openID)
-            ->set('lang')->eq('all')
+        $openUser = $this->dao->select('*')->from(TABLE_OAUTH)->where('provider')->eq($provider)->andWhere('openID')->eq($openID)->fetch();
+          
+        if(empty($openUser))
+        {
+            return $this->dao->replace(TABLE_OAUTH)
+                ->set('account')->eq($account)
+                ->set('provider')->eq($provider)
+                ->set('openID')->eq($openID)
+                ->set('lang')->eq('all')
+                ->exec();
+        }
+        else
+        {
+            $user = $this->getByOpenID($openID, $provider);
+            if($user)
+            { 
+                $this->dao->update(TABLE_MESSAGE)->set('account')->eq($account)->where('account')->eq($user->account)->exec();
+                $this->dao->update(TABLE_THREAD)->set('author')->eq($account)->where('author')->eq($user->account)->exec();
+                $this->dao->update(TABLE_THREAD)->set('repliedBy')->eq($account)->where('repliedBy')->eq($user->account)->exec();
+                $this->dao->update(TABLE_REPLY)->set('author')->eq($account)->where('author')->eq($user->account)->exec();
+                $this->dao->update(TABLE_CATEGORY)->set('postedBy')->eq($account)->where('postedBy')->eq($user->account)->exec();
+               $this->dao->update(TABLE_ADDRESS)->set('account')->eq($account)->where('account')->eq($user->account)->exec();
+               $this->dao->update(TABLE_CART)->set('account')->eq($account)->where('account')->eq($user->account)->exec();
+
+                $this->dao->setAutolang(false)->delete()->from(TABLE_USER)->where('id')->eq($user->id)->exec();
+                if(dao::isError()) return false;
+            }
+
+            return $this->dao->setAutolang(false)->update(TABLE_OAUTH)
+                ->set('account')->eq($account)
+                ->set('provider')->eq($provider)
+                ->where('openID')->eq($openID)
+                ->exec();
+        }
+    }
+
+    /**
+     * Unbind an OAuth account.
+     * 
+     * @param  string    $account    the chanzhi system account
+     * @param  string    $provider   the OAuth provider
+     * @param  string    $openID     the open id from provider
+     * @access public
+     * @return bool
+     */
+    public function unbindOAuthAccount($account, $provider, $openID)
+    {
+        if(!$account or !$provider or !$openID) return false;
+
+        return $this->dao->setAutolang(false)->delete()->from(TABLE_OAUTH)
+            ->where('account')->eq($account)
+            ->andWhere('provider')->eq($provider)
+            ->andWhere('openID')->eq($openID)
             ->exec();
     }
 
