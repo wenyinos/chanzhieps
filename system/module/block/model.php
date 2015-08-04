@@ -589,7 +589,12 @@ class blockModel extends model
                 }
             }
 
-            $blockClass = "block-{$block->category}-{$block->type}";
+            foreach($this->config->block->categoryList as $category => $typeList)
+            {
+                if(strpos($typeList, ",{$block->type},") !== false) $blockCategory = $category;
+            }
+
+            $blockClass = "block-{$blockCategory}-{$block->type}";
             if(isset($block->borderless) and $block->borderless) $blockClass .= 'panel-borderless';
             if(isset($block->titleless) and $block->titleless) $blockClass  .= ' panel-titleless';
 
