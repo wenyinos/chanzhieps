@@ -15,11 +15,9 @@ include TPL_ROOT . 'common/header.html.php';
 $common->printPositionBar($board, $thread);
 ?>
 
-<div class="panel panel-section panel-body cards cards-list">
 <?php
 if($pager->pageID == 1) include TPL_ROOT . 'thread/thread.html.php';
 include TPL_ROOT . 'thread/reply.html.php';
 ?>
-</div>
-
+<?php include TPL_ROOT . 'common/form.html.php'; ?>
 <?php include TPL_ROOT . 'common/footer.html.php';?>
