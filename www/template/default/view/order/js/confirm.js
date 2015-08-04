@@ -76,5 +76,12 @@ $(document).ready(function()
                 }  
             });
         }
+        else
+        {
+            if(typeof(response.message) == 'string')
+            {
+                bootbox.alert("<span class='text-danger'>" + response.message + "</span>");
+            }
+        }
     })
 });
