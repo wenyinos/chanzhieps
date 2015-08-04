@@ -10,3 +10,8 @@ a.btn-sm{margin-bottom:5px;padding:5px;}
 
 .table{margin-bottom: 0;}
 .table td:last-child{border-bottom: none;}
+.item.active{height: 110px; text-align: center; padding: 6px;}
+.panel-body{padding:3px;}
+.panel-heading{text-align: center;}
+.item img{max-height: 100%;}
+.mainbutton{text-align: right; padding-bottom:5px;}

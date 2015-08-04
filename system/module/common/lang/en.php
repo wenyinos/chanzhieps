@@ -21,6 +21,8 @@ $lang->divider    = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->back2Top   = 'T<br/>O<br/>P';
 $lang->cancel = 'cancel';
 
+$lang->noRecord = 'No record';
+$lang->toBeAdd    = 'To be add';
 $lang->about  = 'about';
 $lang->thanks = 'thanks';
 /* Lang items for xirang. */

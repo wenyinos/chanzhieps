@@ -272,4 +272,29 @@ class slideModel extends model
 
         return !dao::isError();
     }
+
+     /**
+      * Get slide catagory.
+      *
+      * @access public 
+      * @return string
+      */
+     public function getCatagory()
+     {   
+          return $this->dao->select('*')->from(TABLE_CATEGORY)->where('type')->eq('slide')->orderBy('id')->fetchall();
+     }
+     
+     /**
+      * Get first slide.
+      *
+      * @param  $groupID
+      * @access public
+      * @return array
+      */
+    public function getFirstSlide($groupID) 
+    {
+        return $this->dao->select('*')->from(TABLE_SLIDE)->where('`group`')->eq($groupID)->orderBy('id')->limit(1)->fetch(); 
+    }
+
+
 }

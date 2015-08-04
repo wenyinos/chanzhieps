@@ -14,7 +14,6 @@ $config->rights = new stdclass();
 
 /* For guest users. */
 $config->rights->guest['index']['index'] = 'index';
-
 $config->rights->guest['article']['index']  = 'index';
 $config->rights->guest['article']['browse'] = 'browse';
 $config->rights->guest['article']['view']   = 'view';
