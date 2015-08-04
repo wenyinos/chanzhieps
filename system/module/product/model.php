@@ -392,26 +392,6 @@ class productModel extends model
     }
 
     /**
-     * Set currency. 
-     * 
-     * @access public
-     * @return void
-     */
-    public function currency()
-    {
-        $currency = new stdclass();
-        $currency->owner   = 'system';
-        $currency->module  = 'common';
-        $currency->section = 'product';
-        $currency->key     = 'currency';
-        $currency->value   = $this->post->currency;
-
-        $this->dao->replace(TABLE_CONFIG)->data($currency)->exec();
-
-        return !dao::isError();
-    }
-        
-    /**
      * Delete a product.
      * 
      * @param  int      $productID 
@@ -501,6 +481,22 @@ class productModel extends model
 
         $this->dao->update(TABLE_PRODUCT)->data($data, $skip = 'uid')->autoCheck()->where('id')->eq($productID)->exec();
         
+        return !dao::isError();
+    }
+
+    /**
+     * Save settings.
+     * 
+     * @access public
+     * @return void
+     */
+    public function saveSetting()
+    {
+        $setting = new stdclass();
+        $setting->stock    = $this->post->stock;
+        $setting->currency = $this->post->currency;
+
+        $this->loadModel('setting')->setItems('system.common.product', $setting);
         return !dao::isError();
     }
 }
