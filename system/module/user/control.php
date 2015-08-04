@@ -638,6 +638,10 @@ class user extends control
         $token  = $client->getToken($this->get->code);    // Step1: get token by the code.
         $openID = $client->getOpenID($token);             // Step2: get open id by the token.
 
+        $openUser = $client->getUserInfo($token, $openID);                    // Get open user info.
+        $this->session->set('openUser', $openUser);
+        $this->session->set('openID', $openID);                     // Save the openID to session.
+
         /* Step3: Try to get user by the open id, if got, login him. */
         $user = $this->user->getUserByOpenID($provider, $openID);
         $this->session->set('random', md5(time() . mt_rand()));
@@ -654,41 +658,13 @@ class user extends control
             exit;
         }
 
-        /* Step4.1: if the provider is sina, display the register or bind page. */
-        if($provider == 'sina')
-        {
-            $this->session->set('oauthOpenID', $openID);                     // Save the openID to session.
-            if($this->get->referer != false) $this->setReferer($referer);    // Set the referer.
-            $this->config->oauth->sina = json_encode($this->config->oauth->sina);
+        /* Step4.1: if bind, display the register or bind page. */
+        if($this->get->referer != false) $this->setReferer($referer);    // Set the referer.
+        $this->config->oauth->$provider = json_encode($this->config->oauth->$provider);
 
-            $this->view->title   = $this->lang->user->login->common;
-            $this->view->referer = $referer;
-            die($this->display());
-        }
-
-        /* Step4.2: if the provider is qq, register a user with random user. Shit! */
-        if($provider == 'qq')
-        {
-            $openUser = $client->getUserInfo($token, $openID);                    // Get open user info.
-            $this->post->set('account', uniqid('qq_'));                           // Create a uniq account.
-            $this->post->set('realname', htmlspecialchars($openUser->nickname));  // Set the realname.
-            $this->user->registerOauthAccount($provider, $openID);
-
-            $user = $this->user->getUserByOpenID($provider, $openID);
-            $this->session->set('random', md5(time() . mt_rand()));
-            if($user and $this->user->login($user->account, md5($user->password . $this->session->random)))
-            {
-                if($referer) $this->locate(helper::safe64Decode($referer));
-
-                /* No referer, go to the user control panel. */
-                $default = $this->config->user->default;
-                $this->locate($this->createLink($default->module, $default->method));
-            }
-            else
-            {
-                die('some error occers.');
-            }
-        }
+        $this->view->title   = $this->lang->user->login->common;
+        $this->view->referer = $referer;
+        die($this->display());
     }
 
     /**
@@ -700,15 +676,15 @@ class user extends control
     public function oauthRegister()
     {
         /* If session timeout, locate to login page. */
-        if($this->session->oauthProvider == false or $this->session->oauthOpenID == false) $this->send(array('result' => 'success', 'locate'=> inlink('login')));
+        if($this->session->oauthProvider == false or $this->session->openID == false) $this->send(array('result' => 'success', 'locate'=> inlink('login')));
 
         if($_POST)
         {
-            $this->user->registerOauthAccount($this->session->oauthProvider, $this->session->oauthOpenID);
+            $this->user->registerOauthAccount($this->session->oauthProvider, $this->session->openID);
 
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
-            $user = $this->user->getUserByOpenID($this->session->oauthProvider, $this->session->oauthOpenID);
+            $user = $this->user->getUserByOpenID($this->session->oauthProvider, $this->session->openID);
             $this->session->set('random', md5(time() . mt_rand()));
             if($user and $this->user->login($user->account, md5($user->password . $this->session->random)))
             {
@@ -721,6 +697,10 @@ class user extends control
 
             $this->send(array('result' => 'fail', 'message' => 'I have registered but can\'t login, some error occers.'));
         }
+
+        $this->view->title   = $this->lang->user->oauth->lblProfile;
+        $this->view->referer = $this->post->referer;
+        $this->display();
     }
 
     /**
@@ -731,22 +711,83 @@ class user extends control
      */
     public function oauthBind()
     {
-        if(!$this->session->random) $this->session->set('random', md5(time() . mt_rand()));
-        if($this->user->login($this->post->account, md5($this->user->createPassword($this->post->password, $this->post->account) . $this->session->random)))
+        if($_POST)
         {
-            if($this->user->bindOAuthAccount($this->post->account, $this->session->oauthProvider, $this->session->oauthOpenID))
+            if(!$this->session->random) $this->session->set('random', md5(time() . mt_rand()));
+            if($this->user->login($this->post->account, md5($this->user->createPassword($this->post->password, $this->post->account) . $this->session->random)))
             {
-                $default = $this->config->user->default;
-                if($this->post->referer != false) $this->send(array('result'=>'success', 'locate'=> helper::safe64Decode($this->post->referer)));
-                if($this->post->referer == false) $this->send(array('result'=>'success', 'locate'=> $this->createLink($default->module, $default->method)));
+                if($this->user->bindOAuthAccount($this->post->account, $this->session->oauthProvider, $this->session->openID))
+                {
+                    $default = $this->config->user->default;
+                    if($this->post->referer != false) $this->send(array('result'=>'success', 'locate'=> helper::safe64Decode($this->post->referer)));
+                    if($this->post->referer == false) $this->send(array('result'=>'success', 'locate'=> $this->createLink($default->module, $default->method)));
+                }
+                else
+                {
+                    $this->send(array('result' => 'fail', 'message' => $this->lang->user->oauth->lblBindFailed));
+                }
             }
-            else
-            {
-                $this->send(array('result' => 'fail', 'message' => $this->lang->user->oauth->lblBindFailed));
-            }
+            $this->send(array('result' => 'fail', 'message' => $this->lang->user->loginFailed));
         }
 
-        $this->send(array('result' => 'fail', 'message' => $this->lang->user->loginFailed));
+        $this->view->title   = $this->lang->user->oauth->lblBind;
+        $this->view->referer = $this->post->referer;
+        $this->display();
+    }
+
+    /**
+     * Unbind an openID and an account of chanzhi system.
+     * 
+     * @param  string    $account 
+     * @param  string    $provider 
+     * @param  int       $openID 
+     * @access public
+     * @return void
+     */
+    public function oauthUnbind($account, $provider, $openID)
+    {
+        $result = $this->user->unbindOAuthAccount($account, $provider, $openID);
+        if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->user->oauth->lblUnbindFailed));
+
+        $account = uniqid("{$provider}_");
+        $this->post->set('account', $account);                           // Create a uniq account.
+        if($provider == 'qq')   $this->post->set('realname', ($this->session->openUser->nickname ? htmlspecialchars($this->session->openUser->nickname) : $account));  // Set the realname.
+        if($provider == 'sina') $this->post->set('realname', ($this->session->openUser->name ? htmlspecialchars($this->session->openUser->name) : $account));  // Set the realname.
+        $result = $this->user->registerOauthAccount($provider, $openID);
+        if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->user->oauth->lblUnbindFailed));
+        $this->send(array('result' => 'success', 'message' => $this->lang->user->oauth->lblUnbindSuccess, 'locate' => helper::createLink('user', 'profile')));
+    }
+
+    /**
+     * Ignore bind an openID and an account.
+     * 
+     * @access public
+     * @return void
+     */
+    public function ignoreBind()
+    {
+        $provider = $this->session->oauthProvider;
+        $openID   = $this->session->openID;
+
+        $this->post->set('account', uniqid("{$provider}_"));        // Create a uniq account.
+        if($provider == 'qq')   $this->post->set('realname', htmlspecialchars($this->session->openUser->nickname));  // Set the realname.
+        if($provider == 'sina') $this->post->set('realname', htmlspecialchars($this->session->openUser->name));  // Set the realname.
+        $this->user->registerOauthAccount($provider, $openID);
+
+        $user = $this->user->getUserByOpenID($provider, $openID);
+        $this->session->set('random', md5(time() . mt_rand()));
+        if($user and $this->user->login($user->account, md5($user->password . $this->session->random)))
+        {
+            if($referer) $this->locate(helper::safe64Decode($referer));
+
+            /* No referer, go to the user control panel. */
+            $default = $this->config->user->default;
+            $this->locate($this->createLink($default->module, $default->method));
+        }
+        else
+        {
+            die('some error occers.');
+        }
     }
 
     /**
