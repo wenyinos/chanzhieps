@@ -24,7 +24,14 @@ $(document).ready(function()
             }
         });
     });
-    $('.icon-plus').parent().click(function() { $('#count').val(parseInt($('#count').val()) + 1); });
+    $('.icon-plus').parent().click(function(){ $('#count').val(parseInt($('#count').val()) + 1).change(); });
+    if(v.stockOpened) 
+    {
+       $('#count').change(function()
+       {
+          if($('#count').val() > v.stock) $(this).val(v.stock);
+       })
+    }
     $('.icon-minus').parent().click(function() 
     { 
         if($('#count').val() <= 1) return false;

@@ -22,6 +22,8 @@ js::set('categoryPath', explode(',', trim($category->path, ',')));
 js::set('addToCartSuccess', $lang->product->addToCartSuccess);
 js::set('gotoCart', $lang->product->gotoCart);
 js::set('goback', $lang->product->goback);
+js::set('stockOpened', $stockOpened);
+js::set('stock', $product->amount);
 css::internal($product->css);
 js::execute($product->js);
 ?>
@@ -80,7 +82,7 @@ js::execute($product->js);
               }
               if($product->amount)
               {
-                  $attributeHtml .= "<li><span class='meta-name'>" . $lang->product->amount . "</span>";
+                  $attributeHtml .= "<li><span class='meta-name'>" . $lang->product->stock . "</span>";
                   $attributeHtml .= "<span class='meta-value'>" . $product->amount . " <small>" . $product->unit . "</small></span></li>";
               }
               if($product->brand)
@@ -120,6 +122,7 @@ js::execute($product->js);
             </ul>
             <?php if(empty($attributeHtml)) echo '<div class="product-summary">' . $product->desc . '</div>'; ?>
             <?php if(!$product->unsaleable and commonModel::isAvailable('order')):?>
+            <?php if(!$stockOpened or $product->amount > 0):?>
             <ul class='list-unstyled meta-list'>
               <li id='countBox'>
                 <span class='meta-name'><?php echo $lang->product->count; ?></span>
@@ -132,9 +135,14 @@ js::execute($product->js);
                 </span>
               </li>
             </ul>
+            <?php endif;?>
             <span id='buyBtnBox'>
+              <?php if($stockOpened and $product->amount < 1):?>
+              <label class='btn-soldout'><?php echo $lang->product->soldout;?></label>
+              <?php else:?>
               <label class='btn-buy'><?php echo $lang->product->buyNow;?></label>
               <label class='btn-cart'><?php echo $lang->product->addToCart;?></label>
+              <?php endif;?>
             </span>
             <?php endif;?>
             <?php if(!commonModel::isAvailable('order') and !$product->unsaleable and $product->mall):?>
