@@ -58,23 +58,37 @@ $(document).ready(function()
     {
         if(response.result == 'success')
         {
-            bootbox.dialog(
-            {  
-                message: v.createdSuccess,  
-                buttons:
+            if($('[name=payment]').eq(0).prop('checked'))
+            {
+                bootbox.dialog(
                 {  
-                    cart:
+                    message: v.createdSuccess,  
+                    buttons:
                     {  
-                        label:     v.goToPay,  
-                        className: 'btn-primary',  
-                        callback:  function()
-                        {
-                            window.open(response.locate, '_blank');
-                            setTimeout(function(){location.href = createLink('order', 'browse');}, 1000);
+                        cart:
+                        {  
+                            label:     v.goToPay,  
+                            className: 'btn-primary',  
+                            callback:  function()
+                            {
+                                window.open(response.locate, '_blank');
+                                setTimeout(function(){location.href = createLink('order', 'browse');}, 600);
+                            }  
                         }  
                     }  
-                }  
-            });
+                });
+            }
+            else
+            {
+                setTimeout(function(){location.href = createLink('order', 'browse');}, 600);
+            }
+        }
+        else
+        {
+            if(typeof(response.message) == 'string')
+            {
+                bootbox.alert("<span class='text-danger'>" + response.message + "</span>");
+            }
         }
     })
 });

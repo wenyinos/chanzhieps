@@ -55,6 +55,7 @@ $lang->order->paymentRequired      = '需要至少一种交易方式';
 $lang->order->confirmLimitRequired = '需要设定确认收货周期';
 $lang->order->finishWarning        = "确认完成";
 $lang->order->noProducts           = "订单中没有产品";
+$lang->order->lowStocks            = "<strong>%s</strong> 库存不足";
 
 $lang->order->alipayPid   = '合作者ID';
 $lang->order->alipayKey   = '合作者KEY';

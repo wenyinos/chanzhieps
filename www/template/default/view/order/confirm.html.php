@@ -14,6 +14,7 @@
 <?php js::set('currencySymbol', $currencySymbol);?>
 <?php js::set('createdSuccess', $lang->order->createdSuccess);?>
 <?php js::set('goToPay', $lang->order->goToPay);?>
+<?php js::set('checkStock', $this->config->prodcut->stock);?>
 <?php if(!empty($products)):?>
 <?php $total = 0;?>
 <div class='panel'>
@@ -86,7 +87,7 @@
           <td class='w-140px text-middle'>
             <div class='input-group'>
               <span class='input-group-addon'><i class='icon icon-minus'></i></span>
-              <?php echo html::input("count[$product->id]", $product->count, "class='form-control'"); ?>
+              <?php echo html::input("count[$product->id]", $product->count, "data-stock='{$product->amount}' class='form-control'"); ?>
               <span class='input-group-addon'><i class='icon icon-plus'></i></span>
             </div>
           </td>

@@ -250,6 +250,7 @@ class product extends control
         $this->view->prevAndNext = $this->product->getPrevAndNext($product->order, $category->id);
         $this->view->category    = $category;
         $this->view->contact     = $this->loadModel('company')->getContact();
+        $this->view->stockOpened = $this->config->product->stock == 1;
 
         $this->dao->update(TABLE_PRODUCT)->set('views = views + 1')->where('id')->eq($productID)->exec(false);
 

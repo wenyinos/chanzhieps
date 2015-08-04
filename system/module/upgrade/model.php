@@ -1391,9 +1391,15 @@ class upgradeModel extends model
      */
     public function setDefaultEnableModules()
     {
-        $modules = $this->config->site->modules . ',article,page,product';
-        $this->dao->update(TABLE_CONFIG)->set('`value`')->eq($modules)->where('`key`')->eq('modules')->andWhere('section')->eq('site')->exec();
-        return !dao::isError();
+        $moduleSettings = $this->dao->setAutolang(false)->select('*')->from(TABLE_CONFIG)->where('`key`')->eq('modules')->andWhere('section')->eq('site')->fetchGroup('lang');
+        foreach($moduleSettings as $lang => $moduleSetting)
+        {
+            $setting = new stdclass();
+            $setting->modules = $moduleSetting[0]->value . ',article,page,product';
+            if(!$this->loadModel('setting')->setItems('system.common.site', $setting, $lang)) return false;
+        }
+
+        return true;
     }
 
     /**
