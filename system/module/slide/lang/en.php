@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 $lang->slide->common = 'Slides';
-
+$lang->slide->slide = 'Slide groups';
 $lang->slide->title      = 'Title';
 $lang->slide->titleColor = 'Title Color';
 $lang->slide->image      = 'Image';
@@ -20,6 +20,8 @@ $lang->slide->label      = 'Label';
 $lang->slide->button     = 'Button';
 $lang->slide->newWindow  = 'New window';
 $lang->slide->upload     = 'Upload';
+$lang->slide->enter      = 'Enter';
+$lang->slide->return     = 'Return';
 
 $lang->slide->background = new stdclass();
 

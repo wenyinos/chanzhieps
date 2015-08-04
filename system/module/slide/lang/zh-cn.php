@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 $lang->slide->common = '幻灯片';
-
+$lang->slide->slide  = '幻灯片分组';
 $lang->slide->title      = '标题';
 $lang->slide->titleColor = '标题颜色';
 $lang->slide->image      = '图片';
@@ -20,6 +20,8 @@ $lang->slide->label      = '按钮文字';
 $lang->slide->button     = '按钮';
 $lang->slide->newWindow  = '新开窗口';
 $lang->slide->upload     = '上传';
+$lang->slide->enter      = '进入';
+$lang->slide->return     = '返回分组';
 
 $lang->slide->background = new stdclass();
 
