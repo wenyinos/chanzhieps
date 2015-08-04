@@ -11,7 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.modal.html.php';?>
-<form id='' action="<?php echo inlink('setting');?>" method='post'>
+<form id='ajaxForm' action="<?php echo inlink('setting');?>" method='post'>
   <table class="table table-form">
     <tr>
       <th class='w-60px'><?php echo $lang->product->stock;?></th>
