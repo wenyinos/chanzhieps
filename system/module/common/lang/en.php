@@ -23,8 +23,8 @@ $lang->cancel = 'cancel';
 
 $lang->noRecord = 'No record';
 $lang->toBeAdd    = 'To be add';
-$lang->about  = 'about';
-$lang->thanks = 'thanks';
+$lang->about  = 'About';
+$lang->thanks = 'Thanks';
 /* Lang items for xirang. */
 $lang->chanzhiEPS     = 'chanzhiEPS';
 $lang->chanzhiEPSx    = 'Chanzhi';
