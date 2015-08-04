@@ -2,7 +2,7 @@ $(document).ready(function()
 {
     /* Set current active topNav. */
     var hasActive = false;
-    if(v.categoryID > 0 && $('nav-product-' + v.categoryID).length >= 1)
+    if(v.categoryID > 0 && $('.nav-product-' + v.categoryID).length >= 1)
     {
         hasActive = true;
         $('.nav-product-' + v.categoryID).addClass('active');

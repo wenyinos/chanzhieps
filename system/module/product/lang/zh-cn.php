@@ -45,7 +45,9 @@ $lang->product->custom     = '自定义属性';
 $lang->product->sales      = '产品定价';
 $lang->product->css        = 'CSS';
 $lang->product->js         = 'JS';
-$lang->product->currency   = '货币设置';
+
+$lang->product->currency = '货币';
+$lang->product->stock    = '库存';
 
 $lang->product->list         = '产品列表';
 $lang->product->hot          = '热门产品';
@@ -61,6 +63,7 @@ $lang->product->addToCart    = "<i class='icon icon-shopping-cart'></i> 加入�
 $lang->product->count        = '数量';
 $lang->product->comments     = '评论';
 $lang->product->detail       = '查看详情';
+$lang->product->setting      = '系统设置';
 
 $lang->product->congratulations  = "恭喜";
 $lang->product->addToCartSuccess = "成功加入购物车。";
@@ -124,3 +127,7 @@ $lang->product->currencySymbols['aud']  = 'A$';
 $lang->product->currencySymbols['nzd']  = 'NZ$';
 $lang->product->currencySymbols['thb']  = 'B';
 $lang->product->currencySymbols['sgd']  = 'S$';
+
+$lang->product->stockOptions = array();
+$lang->product->stockOptions[0] = '不开启';
+$lang->product->stockOptions[1] = '开启';

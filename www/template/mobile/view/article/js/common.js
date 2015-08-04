@@ -1,4 +1,4 @@
-$(document).ready(function()
+$(function()
 {
     /* Set current active topNav. */
     var hasActive = false;

@@ -17,22 +17,27 @@ class slide extends control
      * @access public
      * @return void
      */
-    public function admin($groupID = '')
+    public function admin()
     {
-        if(!$groupID)
-        {
-            $firstGroup = $this->loadModel('tree')->getFirst('slide');
-            $groupID = $firstGroup->id;
-        }
-
-        $this->view->title          = $this->lang->slide->admin;
-        $this->view->group          = $groupID;
-        $this->view->slides         = $this->slide->getList($groupID);
-        $this->view->treeModuleMenu = $this->loadModel('tree')->getTreeMenu('slide', 0, array('treeModel', 'createSlideAdminLink'));
-        $this->view->treeManageLink = html::a(helper::createLink('tree', 'browse', "type=slide"), $this->lang->slideGroup->manage);
+        $this->view->groups = $this->slide->getCatagory();
         $this->display();
     }
 
+    /**
+     * Browse slides.
+     *
+     * @param $groupID
+     * @access public
+     * @return void
+     */
+    public function browse($groupID= '')
+    {
+        $this->view->title  = $this->lang->slide->admin;
+        $this->view->group  = $groupID;
+        $this->view->slides = $this->slide->getList($groupID);
+
+        $this->display();
+    }
     /**
      * Create a slide.
      *
