@@ -111,6 +111,7 @@ class upgradeModel extends model
             case '4_3_beta':
                 $this->execSQL($this->getUpgradeFile('4.3.beta'));
                 $this->setDefaultEnableModules();
+                $this->setCategoryForBlock();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -1392,6 +1393,25 @@ class upgradeModel extends model
     {
         $modules = $this->config->site->modules . ',article,page,product';
         $this->dao->update(TABLE_CONFIG)->set('`value`')->eq($modules)->where('`key`')->eq('modules')->andWhere('section')->eq('site')->exec();
+        return !dao::isError();
+    }
+
+    /**
+     * Set category for block when upgrade from 4.3.beta.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setCategoryForBlock()
+    {
+        $blocks = $this->dao->setAutolang(false)->select('*')->from(TABLE_BLOCK)->fetchAll();
+        foreach($this->config->block->categoryList as $key => $blockList)
+        {
+            foreach($blocks as $block)
+            {
+                if(strpos($blockList, ',' . $block->type . ',') !== false) $this->dao->setAutolang(false)->update(TABLE_BLOCK)->set('category')->eq($key)->where('id')->eq($block->id)->exec();
+            }
+        }
         return !dao::isError();
     }
 }
