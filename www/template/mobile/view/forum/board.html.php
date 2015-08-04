@@ -16,7 +16,7 @@
 <div class='panel-section'>
   <?php if(count($threads) > 5 && $this->forum->canPost($board)):?>
   <div class='panel-heading'>
-    <button type='button' data-toggle='modal' data-target='#postDialog' class='btn block primary'><i class='icon icon-pencil'></i> <?php echo $lang->forum->post?></button>
+    <?php echo html::a($this->createLink('thread', 'post', "boardID=$board->id"), '<i class="icon-pencil"></i>&nbsp;&nbsp;' . $lang->forum->post, "class='btn primary block' data-toggle='modal'"); ?>
   </div>
   <?php endif;?>
 
@@ -35,7 +35,7 @@
           <div class='card-content text-muted small'><i class='icon icon-eye-open'></i> <?php echo $thread->views;?> &nbsp; <i class='icon-user'></i> <?php echo $thread->authorRealname;?> <?php echo substr($thread->addedDate, 5, -3);?></div>
         </div>
         <div class='table-cell middle thumbnail-cell text-right'>
-          <div class='counter text-right'><div class='title<?php if($thread->isNew) echo ' text-success';?>'><?php echo $thread->replies;?></div><div class='caption text-muted small'><?php echo $lang->thread->replies?></div></div>
+          <div class='counter text-right'><div class='title'><?php echo $thread->replies;?></div><div class='caption text-muted small'><?php echo $lang->thread->replies?></div></div>
         </div>
       </div>
     </a>
