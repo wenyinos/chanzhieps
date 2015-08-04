@@ -1,0 +1,48 @@
+<?php
+/**
+ * The view file of page for mobile template of chanzhiEPS.
+ *
+ * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
+ * @author      Hao Sun <sunhao@cnezsoft.com>
+ * @package     page
+ * @version     $Id$
+ * @link        http://www.chanzhi.org
+ */
+?>
+<?php 
+include TPL_ROOT . 'common/header.html.php';
+js::set('pageID', $page->id);
+css::internal($page->css);
+js::execute($page->js);
+?>
+<?php $common->printPositionBar($page);?>
+
+<div class='appheader'>
+  <div class='heading'>
+    <h2><?php echo $page->title;?></h2>
+  </div>
+</div>
+
+<div class='panel-section article'>
+  <div class='panel-body'>
+    <hr class="space">
+    <section class='article-content'>
+      <?php echo $page->content;?>
+    </section>
+  </div>
+  <?php if(!empty($page->files)):?>
+  <section class="article-files">
+    <?php $this->loadModel('file')->printFiles($page->files);?>
+  </section>
+  <?php endif;?>
+  <div class='panel-footer'>
+    <div class='article-moreinfo clearfix'>
+      <?php if($page->keywords):?>
+      <p class='small'><strong class="text-muted"><?php echo $lang->article->keywords;?></strong><span class="article-keywords"><?php echo $lang->colon . $page->keywords;?></span></p>
+      <?php endif; ?>
+    </div>
+  </div>
+</div>
+
+<?php include TPL_ROOT . 'common/footer.html.php';?>
