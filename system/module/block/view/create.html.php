@@ -51,7 +51,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
             <?php echo $this->block->createTypeSelector($template, $type);?>
             <?php foreach($config->block->categoryList as $category => $typeList):?>
             <?php if(strpos($typeList, ",{$type},") !== false):?>
-            <?php echo html::hidden('params[category]', $category);?>
+            <?php echo html::hidden('category', $category);?>
             <?php endif;?>
             <?php endforeach;?>
           </td>
