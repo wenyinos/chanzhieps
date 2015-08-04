@@ -21,11 +21,9 @@
       <?php endif;?>
       <div class='card-footer'>
         <?php if($reply->editor): ?>
-        <small><i class="icon-pencil"></i> <?php printf($lang->reply->lblEdited, $reply->editorRealname, $reply->editedDate); ?></small>
+        <small><i class="icon-pencil"></i> <?php printf($lang->thread->lblEdited, $reply->editorRealname, $reply->editedDate); ?></small>
         <?php endif; ?>
-        &nbsp;
-        
-        <div class='actions pull-right'>
+        <div class='actions text-right'>
           <?php if($this->app->user->account != 'guest'): ?>
             <?php if($this->thread->canManage($board->id)) echo html::a($this->createLink('reply', 'delete', "replyID=$reply->id"), '<i class="icon-trash"></i> ' . $lang->delete, "class='deleter text-muted'") . ' &nbsp; ';?>
             <?php if($this->thread->canManage($board->id, $reply->author)) echo html::a($this->createLink('reply', 'edit',   "replyID=$reply->id"), '<i class="icon-pencil"></i> ' . $lang->edit, "data-toggle='modal' class='text-muted'") . ' &nbsp; '; ?>

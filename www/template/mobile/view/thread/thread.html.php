@@ -23,9 +23,8 @@
       <?php if($thread->editor): ?>
       <small><i class="icon-pencil"></i> <?php printf($lang->thread->lblEdited, $thread->editorRealname, $thread->editedDate); ?></small>
       <?php endif; ?>
-      &nbsp;
       <?php if($this->app->user->account != 'guest'): ?>
-      <div class="actions pull-right">
+      <div class="actions text-right">
         <?php if($this->thread->canManage($board->id)): ?>
         <span class='dropdown dropup'>
           <a data-toggle='dropdown' href='###' class='text-muted'><i class='icon-flag-alt'></i> <?php echo $lang->thread->sticks[$thread->stick]; ?> <span class='caret'></span></a>
