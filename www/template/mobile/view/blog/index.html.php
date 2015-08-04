@@ -1,32 +1,27 @@
 <?php
 /**
- * The browse view file of article for mobile template of chanzhiEPS.
+ * The blog index view file for mobile template of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Hao Sun <sunhao@cnezsoft.com>
- * @package     article
+ * @package     blog
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php include TPL_ROOT . 'common/header.html.php';?>
+<?php include TPL_ROOT . 'blog/header.html.php';?>
+
 <?php
-$path = array_keys($category->pathNames);
-js::set('path', $path);
-js::set('categoryID', $category->id);
-//TODO: Print block: article_browse
+$root = '<li><span class="breadcrumb-title">' . $this->lang->currentPos . $this->lang->colon . '</span>' .  html::a($this->inlink('index'), $lang->blog->home) . '</li>';
+if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
 ?>
-
-<?php echo $common->printPositionBar($category);?>
-
+<hr class='space'>
 <div class='panel panel-section'>
-  <div class='panel-heading'>
-    <div class='title'><strong><?php echo $category->name;?></strong></div>
-  </div>
   <div class='cards condensed cards-list'>
     <?php foreach($sticks as $stick):?>
-    <?php $url = inlink('view', "id=$stick->id", "category={$stick->category->alias}&name=$stick->alias");?>
+    <?php if(!isset($category)) $category = array_shift($stick->categories);?>
+    <?php $url = inlink('view', "id=$stick->id", "category={$category->alias}&name=$stick->alias"); ?>
     <a class='card' href='<?php echo $url?>'>
       <div class='card-heading'>
         <div class='pull-right'>
@@ -36,7 +31,7 @@ js::set('categoryID', $category->id);
       </div>
       <div class='table-layout'>
         <div class='table-cell'>
-          <div class='card-content text-muted small'><?php echo helper::substr($stick->summary, 60, '...');?></div>
+          <div class='card-content text-muted small'><?php echo $stick->summary;?></div>
           <div class='card-footer small text-muted'>
             <span title="<?php echo $lang->article->views;?>"><i class='icon-eye-open'></i> <?php echo $stick->views;?></span>
             <?php if($stick->comments):?>&nbsp;&nbsp; <span title="<?php echo $lang->article->comments;?>"><i class='icon-comments-alt'></i> <?php echo $stick->comments;?></span> &nbsp;<?php endif;?>
@@ -57,14 +52,15 @@ js::set('categoryID', $category->id);
     <?php endforeach;?>
 
     <?php foreach($articles as $article):?>
-    <?php $url = inlink('view', "id=$article->id", "category={$article->category->alias}&name=$article->alias");?>
+    <?php if(!isset($category)) $category = array_shift($article->categories);?>
+    <?php $url = inlink('view', "id=$article->id", "category={$category->alias}&name=$article->alias"); ?>
     <a class='card' href='<?php echo $url?>'>
       <div class='card-heading'>
         <h5><?php echo $article->title?></h5>
       </div>
       <div class='table-layout'>
         <div class='table-cell'>
-          <div class='card-content text-muted small'><?php echo helper::substr($article->summary, 60, '...');?></div>
+          <div class='card-content text-muted small'><?php echo $article->summary;?></div>
           <div class='card-footer small text-muted'>
             <span title="<?php echo $lang->article->views;?>"><i class='icon-eye-open'></i> <?php echo $article->views;?></span>
             <?php if($article->comments):?>&nbsp;&nbsp; <span title="<?php echo $lang->article->comments;?>"><i class='icon-comments-alt'></i> <?php echo $article->comments;?></span> &nbsp;<?php endif;?>
@@ -88,4 +84,4 @@ js::set('categoryID', $category->id);
   </div>
 </div>
 
-<?php include TPL_ROOT . 'common/footer.html.php';?>
+<?php include TPL_ROOT . 'blog/footer.html.php';?>
