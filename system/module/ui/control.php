@@ -408,8 +408,9 @@ class ui extends control
         $this->package->mergeBlocks($packageInfo);
         $this->package->mergeCustome($packageInfo);
         $setting = array();
-        $setting['name']   = $packageInfo->template;
-        $setting['theme']  = $packageInfo->code;
+        $setting[$device]['name']  = $packageInfo->template;
+        $setting[$device]['theme'] = $packageInfo->code;
+        $setting[$device]  = helper::jsonEncode($setting[$device]);
         $setting['parser'] = isset($packageInfo->parser) ? $packageInfo->parser : 'default';
 
         $result = $this->loadModel('setting')->setItems('system.common.template', $setting);

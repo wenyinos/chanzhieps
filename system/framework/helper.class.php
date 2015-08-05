@@ -724,7 +724,7 @@ class helper
             if($app->session->device) return $app->session->device;
             return 'desktop';
         }
-        elseif(RUN_MODE == 'admin')
+        elseif(RUN_MODE == 'front')
         {
             /* Detect mobile. */
             $mobile = $app->loadClass('mobile');
