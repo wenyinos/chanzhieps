@@ -132,8 +132,13 @@ class uiModel extends model
 
         if($section == 'logo')
         {
-            $result = $this->loadModel('setting')->setItems('system.common.logo', array($this->config->template->theme => helper::jsonEncode($setting)));
-            if($this->post->theme == 'all') $result = $this->loadModel('setting')->setItems('system.common.site', array($section => helper::jsonEncode($setting)));
+            $template = $this->config->template->name; 
+            $theme    = $this->post->theme == 'all' ? 'all' : $this->config->template->theme; 
+            $logo = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();
+            if(!isset($logo->$template)) $logo->$template = new stdclass();
+            $logo->$template->$theme = $setting; 
+
+            $result = $this->loadModel('setting')->setItems('system.common.site', array($section => helper::jsonEncode($logo)));
         }
         else
         {
