@@ -50,6 +50,10 @@ $lang->ui->importThemeSuccess     = '导入主题成功';
 $lang->ui->packagePathUnwriteable = '上传目录：%s 不可写';
 $lang->ui->selectSourceImage      = '从素材库选择';
 
+$lang->ui->deviceList = new stdclass();
+$lang->ui->deviceList->desktop = "<i class='icon icon-desktop'></i>桌面";
+$lang->ui->deviceList->mobile  = "<i class='icon icon-tablet'></i>移动";
+
 $lang->ui->productViewList[1] = '显示'; 
 $lang->ui->productViewList[0] = '不显示'; 
 

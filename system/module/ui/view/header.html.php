@@ -1,13 +1,18 @@
 <?php $templates       = $this->loadModel('ui')->getTemplates(); ?>
 <?php $currentTemplate = $this->config->template->name; ?>
 <?php $currentTheme    = $this->config->template->theme; ?>
+<?php $currentDevice   = $this->session->device ? $this->session->device : 'desktop';?>
 <nav id='menu'>
   <ul class='nav'>
     <li class='nav-item-primary'>
-      <a href='javascript:;' data-toggle='dropdown'><i class="icon icon-desktop"></i> <?php echo $lang->ui->clientDesktop;?> <i class='icon-caret-down'></i></a>
-      <ul class='dropdown-menu'>
-        <li class='active'><a href='###'><i class='icon icon-desktop'></i><?php echo $lang->ui->clientDesktop ?><i class='icon-ok'></i></a></li>
-        <li><a href='###'><i class='icon icon-tablet'></i><?php echo $lang->ui->clientMobile ?><i class='icon-ok'></i></a></li>
+      <a href='javascript:;' data-toggle='dropdown'>
+        <?php echo $lang->ui->deviceList->{$currentDevice};?> <i class='icon-caret-down'></i>
+      </a>
+      <ul id='deviceMenu' class='dropdown-menu'>
+        <?php foreach($lang->ui->deviceList as $device => $name):?>
+        <?php $class = $device == $currentDevice ? "class='active'" : '';?>
+        <li <?php echo $class;?>><a href='<?php echo inlink('setdevice', "device={$device}")?>'><?php echo $name;?><i class='icon-ok'></i></a></li>
+        <?php endforeach;?>
       </ul>
     </li>
     <li class="divider angle"></li>
@@ -122,5 +127,18 @@ $(function()
         $themePicker.attr('data-template', template).attr('data-theme', theme);
         refreshPicker(template, theme);
     };
+    $('#deviceMenu a').click(function()
+    {
+        $.getJSON($(this).attr('href'), function(response)
+        {
+            if(response.result == 'success') 
+            {
+                messager.success(response.message);
+                location.reload();
+            }
+            return false;
+        })   
+        return false;
+    });
 });
 </script>
