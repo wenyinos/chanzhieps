@@ -76,7 +76,6 @@ class blockModel extends model
                     {
                         $block->title    = $blocks[$block->id]->title;
                         $block->type     = $blocks[$block->id]->type;
-                        $block->category = $blocks[$block->id]->category;
                         $block->content  = $blocks[$block->id]->content;
                         $block->template = $blocks[$block->id]->template;
                     }
@@ -84,7 +83,6 @@ class blockModel extends model
                     {
                         $block->title    = '';
                         $block->type     = '';
-                        $block->category = '';
                         $block->content  = '';
                         $block->template = '';
                     }
@@ -133,7 +131,6 @@ class blockModel extends model
                         $mergedBlock->id       = $block->id;
                         $mergedBlock->title    = $block->title;
                         $mergedBlock->type     = $block->type;
-                        $mergedBlock->category = $block->category;
                         $mergedBlock->content  = $block->content;
                         $mergedBlock->template = $block->template;
                     }
@@ -172,7 +169,6 @@ class blockModel extends model
             {
                 $block->title    = $blocks[$block->id]->title;
                 $block->type     = $blocks[$block->id]->type;
-                $block->category = $blocks[$block->id]->category;
                 $block->template = $blocks[$block->id]->template;
                 $block->content  = $blocks[$block->id]->content;
             }
@@ -180,7 +176,6 @@ class blockModel extends model
             {
                 $block->title    = '';
                 $block->type     = '';
-                $block->category = '';
                 $block->template = '';
                 $block->content  = '';
 
@@ -229,7 +224,6 @@ class blockModel extends model
                 $rawBlock->id       = $block->id;
                 $rawBlock->title    = $block->title;
                 $rawBlock->type     = $block->type;
-                $rawBlock->category = $block->category;
                 $rawBlock->content  = $block->content;
                 $rawBlock->template = $block->template;
             }
