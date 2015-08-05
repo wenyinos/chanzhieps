@@ -27,20 +27,17 @@ class ui extends control
         if($template and isset($templates[$template]))
         {  
             $setting = array();
-            $setting['name']        = $template;
-            $setting['theme']       = $theme;
-            $setting['parser']      = isset($templates[$template]['parser']) ? $templates[$template]['parser'] : 'default';
-
-            $device = helper::getDevice();
-            $config = new stdclass();
-            $config->{$device} = $setting;
+            $device  = helper::getDevice();
+            $setting[$device]['name']  = $template;
+            $setting[$device]['theme'] = $theme;
+            $setting[$device]  = helper::jsonEncode($setting[$device]);
+            $setting['parser'] = isset($templates[$template]['parser']) ? $templates[$template]['parser'] : 'default';
+            $setting['customTheme'] =  $custom ? $theme : '';
 
             $cssFile = sprintf($this->config->site->ui->customCssFile, $template, $theme);
             if(!file_exists($cssFile)) $this->ui->createCustomerCss($template, $theme);
 
-            $result = $this->loadModel('setting')->setItems('system.common.template', $config);
-            a($result);
-            a($this->config->template);exit;
+            $result = $this->loadModel('setting')->setItems('system.common.template', $setting);
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
