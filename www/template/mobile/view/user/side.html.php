@@ -1,5 +1,5 @@
 <style>
-.user-control-nav {padding: 0 7px 4px; border-bottom: 1px solid #e5e5e5; margin-top: 10px;}
+.user-control-nav {padding: 0 7px 4px; border-bottom: 1px solid #e5e5e5; margin-top: 10px; margin-bottom: 10px;}
 .user-control-nav > li {float: left; margin: 0 3px 6px;}
 .user-control-nav > li > a {float: left; border: 1px solid #f1f1f1; border-radius: 2px; min-width: 100px;}
 .user-control-nav > li.active > a {background-color: #ebf2f9; color: #3280fc; border-color: #3280fc;}

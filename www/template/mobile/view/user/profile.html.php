@@ -12,9 +12,11 @@
 ?>
 <?php include TPL_ROOT . 'common/header.html.php';?>
 <?php include TPL_ROOT . 'user/side.html.php';?>
-
 <table class="table table-layout">
   <tbody>
+    <tr>
+      <td colspan='2'><strong><i class='icon icon-user'></i> <?php echo $lang->user->profile?></strong></td>
+    </tr>
     <tr>
       <th><?php echo $lang->user->realname;?></th>
       <td>
