@@ -57,7 +57,7 @@
         <?php endif; ?>
         <?php if($contact->weibo): ?>
         <div class='card'>
-          <i class='icon icon-s3 icon-wechat bg-danger circle'></i>
+          <i class='icon icon-s3 icon-weibo bg-danger circle'></i>
           <div class='card-content'>
             <small class='text-muted'><?php echo $this->lang->company->weibo?></small>
             <div class='lead'><?php echo $contact->weibo?></div>

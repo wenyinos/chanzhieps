@@ -98,8 +98,8 @@ class orderModel extends model
 
         $orderID = $this->dao->lastInsertID();
 
-        $orderProduct = new stdclass();
-        $orderProduct->orderID = $orderID;
+        $goods = new stdclass();
+        $goods->orderID = $orderID;
         
         if(!$this->post->product) return array('result' => 'fail', 'message' => $this->lang->order->noProducts);
 
@@ -109,17 +109,28 @@ class orderModel extends model
         {
             $product = $this->dao->select('*')->from(TABLE_PRODUCT)->where('id')->eq($product)->fetch();
             if(empty($product)) continue;
-            $orderProduct->productID   = $product->id; 
-            $orderProduct->productName = $product->name; 
-            $orderProduct->count       = $this->post->count[$product->id];
 
-            $orderProduct->price = $product->promotion > 0 ? $product->promotion : $product->price; 
-            if(!$orderProduct->price) continue;
+            $goods->productID   = $product->id; 
+            $goods->productName = $product->name; 
+            $goods->count       = $this->post->count[$product->id];
 
-            $amount += $orderProduct->price * $orderProduct->count;
+            if($this->config->product->stock)
+            {
+                if($product->amount < $goods->count)
+                {
+                    $this->clearOrder($orderID);
+                    return array('result' => 'fail', 'message' => sprintf($this->lang->order->lowStocks, $goods->productName));
+                }
+            }
 
-            $this->dao->insert(TABLE_ORDERPRODUCT)->data($orderProduct)->autoCheck()->exec();
+            $goods->price = $product->promotion > 0 ? $product->promotion : $product->price; 
+            if(!$goods->price) continue;
+
+            $amount += $goods->price * $goods->count;
+
+            $this->dao->insert(TABLE_ORDERPRODUCT)->data($goods)->autoCheck()->exec();
         }
+
         /* Check valid products count. */
         $productCout = $this->dao->select("count(*) as count")->from(TABLE_ORDERPRODUCT)->where('orderID')->eq($orderID)->fetch('count');
         if(!$productCout)  return array('result' => 'fail', 'message' => $this->lang->order->noProducts);
@@ -258,6 +269,26 @@ class orderModel extends model
             ->set('paidDate')->eq(helper::now())
             ->where('id')->eq($order->id)->exec();
 
+        if(dao::isError()) return false;
+        return true;
+    }
+
+    /**
+     * Fix stocks of an order.
+     * 
+     * @param  int    $orderID 
+     * @access public
+     * @return void
+     */
+    public function fixStocks($orderID)
+    {
+        $goodsList = $this->dao->select('*')->from(TABLE_ORDERPRODUCT)->where('orderID')->eq($orderID)->fetchAll();
+
+        foreach($goodsList as $goods)
+        {
+            $this->dao->update(TABLE_PRODUCT)->set("amount=amount - {$goods->count}")->where('id')->eq($goods->productID)->exec();
+        }
+
         return !dao::isError();
     }
 
@@ -300,6 +331,13 @@ class orderModel extends model
         return !dao::isError();
     }
 
+    /**
+     * cancel an order.
+     * 
+     * @param  int    $orderID 
+     * @access public
+     * @return void
+     */
     public function cancel($orderID)
     {
         $this->dao->update(TABLE_ORDER)
@@ -417,12 +455,17 @@ class orderModel extends model
      */
     public function delivery($orderID)
     {
+        $order = $this->getByID($orderID);
+
         $delivery = fixer::input('post')
             ->add('deliveriedBy', $this->app->user->account)
             ->add('deliveryStatus', 'send')
             ->get();
         $this->dao->update(TABLE_ORDER)->data($delivery)->where('id')->eq($orderID)->exec();
-        return !dao::isError();
+
+        if(dao::isError()) return false;
+
+        if($order->payment == 'COD' and $this->config->product->stock) return $this->fixStocks($orderID);
     }
 
     /**
@@ -531,5 +574,18 @@ class orderModel extends model
         return $receiverInfo;
     } 
 
-
+    /**
+     * Clear an order.
+     * 
+     * @param  int    $orderID 
+     * @access public
+     * @return bool
+     */
+    public function clearOrder($orderID)
+    {
+        $this->dao->delete()->from(TABLE_ORDER)->where('id')->eq($orderID)->exec();
+        if(dao::isError()) return false;
+        $this->dao->delete()->from(TABLE_ORDERPRODUCT)->where('orderID')->eq($orderID)->exec();
+        return !dao::isError();
+    }
 }

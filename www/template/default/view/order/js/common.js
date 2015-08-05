@@ -53,11 +53,13 @@ $(document).ready(function()
     
     $('input[name*=count]').change(function()
     {
+        if($(this).val() > $(this).data('stock')) $(this).val($(this).data('stock'));
         amount = $(this).val() * $(this).parents('tr').find('input[name*=price]').val();
         $(this).parents('tr').find('.amountContainer').text(amount);
         countAmount();
     });
 
+    $('input[name*=count]').change();
     function countAmount()
     {
         amount = 0;

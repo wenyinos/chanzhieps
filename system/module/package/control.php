@@ -110,6 +110,7 @@ class package extends control
      */
     public function install($package, $downLink = '', $md5 = '', $type = '', $overridePackage = 'no', $ignoreCompatible = 'no', $overrideFile = 'no', $agreeLicense = 'no', $upgrade = 'no')
     {
+        if($downLink) $this->view->canMange = $this->loadModel('common')->verfyAdmin();
         set_time_limit(0);
         unset($this->lang->package->menu);
         

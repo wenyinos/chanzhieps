@@ -44,14 +44,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
       <table align='center' class='table table-form'>
         <tr>
           <th class='w-100px'><?php echo $lang->block->type;?></th>
-          <td>
-            <?php echo $this->block->createTypeSelector($template, $type, $block->id);?>
-            <?php foreach($config->block->categoryList as $category => $typeList):?>
-            <?php if(strpos($typeList, ",{$type},") !== false):?>
-            <?php echo html::hidden('params[category]', $category);?>
-            <?php endif;?>
-            <?php endforeach;?>
-          </td>
+          <td><?php echo $this->block->createTypeSelector($template, $type, $block->id);?></td>
         </tr>
         <tr>
           <th><?php echo $lang->block->title;?></th>

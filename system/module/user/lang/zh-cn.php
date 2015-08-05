@@ -165,10 +165,18 @@ $lang->user->oauth->qq->clientSecret = 'APP KEY';
 $lang->user->oauth->providers['sina'] = '新浪微博';
 $lang->user->oauth->providers['qq']   = 'QQ';
 
-$lang->user->oauth->lblWelcome    = '开放登录，快捷方便';
-$lang->user->oauth->lblProfile    = "设置用户名，完成注册";
-$lang->user->oauth->lblBind       = "或绑定已有帐号";
-$lang->user->oauth->lblBindFailed = "绑定账户失败！";
+$lang->user->oauth->typeList['sina']   = '新浪微博会员';
+$lang->user->oauth->typeList['qq']     = 'QQ会员';
+$lang->user->oauth->typeList['wechat'] = '微信会员';
+
+$lang->user->oauth->lblWelcome       = '开放登录，快捷方便';
+$lang->user->oauth->lblProfile       = "设置用户名，完成注册";
+$lang->user->oauth->lblBind          = "或绑定已有帐号";
+$lang->user->oauth->lblUnbind        = "解除绑定";
+$lang->user->oauth->lblUnbindSuccess = "解除绑定成功！";
+$lang->user->oauth->lblUnbindFailed  = "解除绑定失败！";
+$lang->user->oauth->lblBindFailed    = "绑定账户失败！";
+$lang->user->oauth->ignore           = "忽略";
 
 $lang->user->statusList = new stdclass();
 $lang->user->statusList->locked    = "<label class='label label-danger'>锁定</label>";

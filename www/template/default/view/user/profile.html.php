@@ -8,7 +8,18 @@
         <div class='panel-body'>
           <dl class='dl-horizontal'>
             <dt><?php echo $lang->user->realname;?></dt>
-            <dd><?php echo $user->realname;?></dd>
+            <dd>
+              <?php echo $user->realname;?>
+              <?php if(isset($user->provider) and isset($user->openID)):?>
+              <?php if(strpos($user->account, "{$user->provider}_") === false):?>
+              <span class='label label-info'><?php echo $lang->user->oauth->typeList[$user->provider];?></span>
+              <?php echo html::a(inlink('oauthUnbind', "account=$user->account&provider=$user->provider&openID=$user->openID"), "<i class='icon-unlink'></i> " . $lang->user->oauth->lblUnbind, "class='btn btn-primary jsoner'");?>
+              <?php else:?>
+              <?php echo html::a(inlink('oauthRegister'), "<i class='icon-link'></i> " . $lang->user->oauth->lblProfile, "class='btn btn-primary'");?>
+              <?php echo html::a(inlink('oauthBind'), "<i class='icon-link'></i> " . $lang->user->oauth->lblBind, "class='btn btn-primary'");?>
+              <?php endif;?>
+              <?php endif;?>
+            </dd>
             <dt><?php echo $lang->user->email;?></dt>
             <dd>
               <?php echo $user->email;?>&nbsp;&nbsp;&nbsp;

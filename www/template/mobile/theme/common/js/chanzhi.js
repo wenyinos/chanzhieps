@@ -40,4 +40,13 @@ $(function()
         }
     }
     $appNav.find(activedNav).addClass('active');
+
+    // init deleter
+    $(document).on('click', '.deleter', function(e) {
+
+        var $this   = $(this);
+        var options = $.extend({url: $this.attr('href'), confirm: window.v.lang.confirmDelete}, $this.data(), options);
+        e.preventDefault();
+        $.ajaxaction(options, $this);
+    });
 });
