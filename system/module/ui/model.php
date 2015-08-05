@@ -191,7 +191,7 @@ class uiModel extends model
         if(!is_dir($savePath)) mkdir($savePath, 0777, true);
         $lessTemplate = $this->app->getWwwRoot() . 'template' . DS . $template . DS . 'theme' . DS . $theme . DS . 'style.less';
 
-        foreach($this->config->ui->themes[$theme] as $section => $selector)
+        foreach($this->config->ui->themes[$template][$theme] as $section => $selector)
         {
             foreach($selector as $attr => $settings)
             {
@@ -756,6 +756,7 @@ class uiModel extends model
         $sqls = str_replace("source/{$template}/{$theme}/", "source/{$template}/THEME_CODEFIX/", $sqls);
         $sqls = str_replace("data\/source\/{$template}\/{$theme}\/", "data\/source\/{$template}\/THEME_CODEFIX\/", $sqls);
         $sqls = str_replace("data\\\/source\\\/{$template}\\\/{$theme}\\\/", "data\\\/source\\\/{$template}\\\/THEME_CODEFIX\\\/", $sqls);
+
         return file_put_contents($this->exportDbPath . 'install.sql', $sqls);
     }
 
@@ -771,12 +772,12 @@ class uiModel extends model
     public function exportFiles($template, $theme, $code)
     {
         /* Export config file. */
-        if(isset($this->config->ui->themes[$theme]))
+        if(isset($this->config->ui->themes[$template][$theme]))
         {
             $configCode = "<?php\n";
-            $configCode .= '$this->config->ui->themes["' . $code . '"] = ';
+            $configCode .= '$this->config->ui->themes["' . $template . '"]["' . $code . '"] = ';
             $configCode .= "\n";
-            $configCode .= var_export($this->config->ui->themes[$theme], true);
+            $configCode .= var_export($this->config->ui->themes[$template][$theme], true);
             $configCode .= ";";
             file_put_contents($this->exportConfigPath . "$code.php", $configCode);
         }
