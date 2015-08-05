@@ -429,8 +429,8 @@ class commonModel extends model
             }
             else
             {
-                printf('<span class="login-msg"> </span>', $app->session->user->realname);
-                echo html::a(helper::createLink('user', 'control'), $app->session->user->realname);
+                echo "&ensp;<i class='icon-user icon-small'>&thinsp;" .  html::a(helper::createLink('user', 'control'), $app->session->user->realname) . "</i>";
+                printf('<span class="login-msg"> </span>');
                 echo "<span id='msgBox' class='hiding'></span>";
                 echo html::a(helper::createLink('user', 'logout'),  $app->lang->logout);
             }
