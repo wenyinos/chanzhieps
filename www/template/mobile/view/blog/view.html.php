@@ -34,7 +34,7 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
 
 <div class='panel-section article'>
   <?php if($article->summary):?>
-  <section class='abstract bg-gray-pale small'><strong><?php echo $lang->article->summary;?></strong><?php echo $lang->colon . $article->summary;?></section>
+  <section class='abstract bg-gray-pale small with-padding'><strong><?php echo $lang->article->summary;?></strong><?php echo $lang->colon . $article->summary;?></section>
   <?php endif; ?>
   <div class='panel-body'>
     <hr class="space">

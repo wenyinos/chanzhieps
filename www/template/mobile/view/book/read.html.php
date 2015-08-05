@@ -1,25 +1,18 @@
 <?php
 /**
- * The view file of article for mobile template of chanzhiEPS.
+ * The read view file of book for mobile template of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Hao Sun <sunhao@cnezsoft.com>
- * @package     article
+ * @package     book
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php 
-include TPL_ROOT . 'common/header.html.php';
-js::set('path', $article->path);
-js::set('articleID', $article->id);
-js::set('categoryID', $category->id);
-js::set('categoryPath', explode(',', trim($category->path, ',')));
-css::internal($article->css);
-js::execute($article->js);
-?>
-<?php $common->printPositionBar($category);?>
+<?php include TPL_ROOT . 'common/header.html.php';?>
+<?php js::set('articleID', $article->id)?>
+<?php $common->printPositionBar($article->origins);?>
 
 <div class='appheader'>
   <div class='heading'>
@@ -27,12 +20,7 @@ js::execute($article->js);
     <div class='caption text-muted'>
       <small><i class='icon-time icon-large'></i> <?php echo formatTime($article->addedDate); ?></small> &nbsp;&nbsp;
       <small><i class='icon-user icon-large'></i> <?php echo $article->author; ?></small> &nbsp;&nbsp;
-      <small><i class='icon-eye-open'></i> <?php echo $article->views; ?></small> &nbsp;&nbsp;
-      <?php if($article->source != 'original' and $article->copyURL != ''):?>
-      <small><?php echo $lang->article->sourceList[$article->source] . $lang->colon;?><?php $article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite); ?></small>
-      <?php else: ?>
-      <small class='text-success bg-success-pale'><?php echo $lang->article->sourceList[$article->source]; ?></small>
-      <?php endif;?>
+      <small><i class='icon-eye-open'></i> <?php echo $article->views; ?></small>
     </div>
   </div>
 </div>
@@ -57,7 +45,7 @@ js::execute($article->js);
       <?php if($article->editor):?> 
       <?php $editor = $this->loadModel('user')->getByAccount($article->editor);?>
       <?php if(!empty($editor)): ?> 
-      <p class='text-right pull-right'><?php printf($lang->article->lblEditor, $editor->realname, formatTime($article->editedDate));?></p>
+      <p class='text-muted'><i class='icon-edit'></i> <?php printf($lang->article->lblEditor, $editor->realname, formatTime($article->editedDate));?></p>
       <?php endif;?>
       <?php endif;?>
       <?php if($article->keywords):?>
@@ -65,23 +53,22 @@ js::execute($article->js);
       <?php endif; ?>
     </div>
     <?php extract($prevAndNext);?>
-    <ul class='pager pager-justify'>
+
       <?php if($prev): ?>
-      <li class='previous'><?php echo html::a(inlink('view', "id=$prev->id", "category={$category->alias}&name={$prev->alias}"), '<i class="icon-arrow-left"></i> ' . $lang->article->previous, "title='{$prev->title}'"); ?></li>
+      <?php echo html::a(inlink('read', "articleID=$prev->id", "book={$book->alias}&node={$prev->alias}"), "<i class='icon-arrow-left'></i> " . $prev->title, "class='btn block text-left default'"); ?>
       <?php else: ?>
-      <li class='previous disabled'><a href='###'><i class='icon-arrow-left'></i> <?php print($lang->article->none); ?></a></li>
+      <a href='###' class='btn block text-left default disabled'><i class='icon-arrow-left'></i> <?php print($lang->article->none); ?></a>
       <?php endif; ?>
       <?php if($next):?>
-      <li class='next'><?php echo html::a(inlink('view', "id=$next->id", "category={$category->alias}&name={$next->alias}"), $lang->article->next . ' <i class="icon-arrow-right"></i>', "title='{$next->title}'"); ?></li>
+      <?php echo html::a(inlink('read', "articleID=$next->id", "book={$book->alias}&node={$next->alias}"), "<i class='icon-arrow-right'></i> " . $next->title, "class='btn block text-left default'"); ?>
       <?php else:?>
-      <li class='next disabled'><a href='###'><?php print($lang->article->none); ?><i class='icon-arrow-right'></i></a></li>
+      <a href='###' class='btn block text-left default disabled'><?php print($lang->article->none); ?><i class='icon-arrow-right'></i></a>
       <?php endif; ?>
-    </ul>
+      <?php echo html::a(inlink('browse', "bookID={$parent->id}", "book={$book->alias}&title={$parent->alias}"), "<i class='icon-list-ul'></i> " . $lang->book->chapter, "class='btn block text-left default'");?>
   </div>
 </div>
 
 <?php if(commonModel::isAvailable('message')):?>
 <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=article&objectID={$article->id}");?></div>
 <?php endif;?>
-
 <?php include TPL_ROOT . 'common/footer.html.php';?>

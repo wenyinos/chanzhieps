@@ -40,14 +40,16 @@ class book extends control
         $node = $this->book->getNodeByID($nodeID);
         if($node)
         {
-            $book = $this->book->getBookByNode($node);
+            $book    = $this->book->getBookByNode($node);
+            $serials = $this->book->computeSN($book->id);
 
             $this->view->title    = $book->title;
             $this->view->keywords = trim($node->keywords . ' ' . $this->config->site->keywords);
             $this->view->node     = $node;
             $this->view->book     = $book;
+            $this->view->serials  = $serials;
             $this->view->books    = $this->book->getBookList();
-            $this->view->catalog  = $this->book->getFrontCatalog($node->id, $this->book->computeSN($book->id));
+            $this->view->catalog  = $this->book->getFrontCatalog($node->id, $serials);
         }
         $this->display();
     }
