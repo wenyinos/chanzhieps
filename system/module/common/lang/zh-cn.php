@@ -21,8 +21,14 @@ $lang->divider    = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->back2Top   = '返<br/>回<br/>顶<br/>部';
 $lang->cancel     = '取消';
 
-$lang->noRecord   = '无';
-$lang->toBeAdd      = '待添加';
+/*Language shorthand*/
+$lang->cn = '简';
+$lang->tw = '繁';
+$lang->en = 'EN';
+
+$lang->noRecord = '无';
+$lang->toBeAdd  = '待添加';
+
 $lang->about  = '关于';
 $lang->thanks = '致谢';
 /* Lang items for xirang. */

@@ -14,7 +14,7 @@
   <div class='panel' id='mainPanel'>
     <div class='panel-heading'>
       <ul class='nav nav-tabs'>
-        <?php if(in_array("$template.$theme", $this->config->ui->systemThemes)):?>
+        <?php if(isset($this->config->ui->themes[$template][$theme])):?>
         <?php foreach($lang->ui->groups as $group => $name):?>
         <li><?php echo html::a('#' . $group . 'Tab', $name, "data-toggle='tab' class='theme-control-tab'");?></li>
         <?php endforeach;?>
@@ -25,12 +25,12 @@
     </div>
     <div class='panel-body'>
       <div class='tab-content'>
-        <?php if(in_array("$template.$theme", $this->config->ui->systemThemes)):?>
+        <?php if(isset($this->config->ui->themes[$template][$theme])):?>
         <?php foreach($lang->ui->groups as $group => $name):?>
         <div class='tab-pane theme-control-tab-pane' id='<?php echo $group?>Tab'>
           <table class='table table-form borderless'>
             <?php
-            $options = isset($config->ui->themes[$theme][$group]) ? $config->ui->themes[$theme][$group] : '';
+            $options = isset($config->ui->themes[$template][$theme][$group]) ? $config->ui->themes[$template][$theme][$group] : '';
             if($options) foreach($options as $selector => $attributes):
             ?>
             <tr class='theme-control-group'>

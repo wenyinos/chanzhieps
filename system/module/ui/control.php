@@ -115,11 +115,14 @@ class ui extends control
             if(!$return['result']) $this->send(array('result' => 'fail', 'message' => $return['message']));
         }
 
-        $theme = $this->config->template->theme;
-        if(isset($this->config->logo->$theme)) $this->config->site->logo = $this->config->logo->$theme;
+        $template = $this->config->template->name;
+        $theme    = $this->config->template->theme;
+        $logoSetting = json_decode($this->config->site->logo);
+
+        $logo = isset($logoSetting->$template->$theme) ? $logoSetting->$template->$theme : (isset($logoSetting->$template->all) ? $logoSetting->$template->all : false);
 
         $this->view->title = $this->lang->ui->setLogo;
-        $this->view->logo  = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : false;
+        $this->view->logo  = $logo;
 
         $this->display();
     }

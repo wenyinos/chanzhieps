@@ -429,8 +429,8 @@ class commonModel extends model
             }
             else
             {
-                printf('<span class="login-msg">' . $app->lang->welcome . '</span>', $app->session->user->realname);
-                echo html::a(helper::createLink('user', 'control'), $app->lang->dashboard);
+                echo "&ensp;<i class='icon-user icon-small'>&thinsp;" .  html::a(helper::createLink('user', 'control'), $app->session->user->realname) . "</i>";
+                printf('<span class="login-msg"> </span>');
                 echo "<span id='msgBox' class='hiding'></span>";
                 echo html::a(helper::createLink('user', 'logout'),  $app->lang->logout);
             }
@@ -466,16 +466,19 @@ class commonModel extends model
         if($asListItem)
         {
             echo "<li class='dropdown-header'>{$app->lang->language}</li>";
-        }
-        foreach($langs as $lang)
-        {
-            $a = html::a(getHomeRoot($config->langsShortcuts[$lang]), $config->langs[$lang]);
-            if($asListItem)
+            foreach($langs as $lang)
             {
+                $a = html::a(getHomeRoot($config->langsShortcuts[$lang]), $config->langs[$lang]);
                 $liClass = $config->site->defaultLang === $lang ? " class='active'" : '';
                 $a = "<li{$liClass}>{$a}</li>";
+                echo $a;
             }
-            echo $a;
+        }
+        else
+        {
+            echo html::a(getHomeRoot($config->langsShortcuts[$langs[0]]), $app->lang->cn); 
+            echo html::a(getHomeRoot($config->langsShortcuts[$langs[1]]), $app->lang->tw); 
+            echo html::a(getHomeRoot($config->langsShortcuts[$langs[2]]), $app->lang->en); 
         }
     }
 
