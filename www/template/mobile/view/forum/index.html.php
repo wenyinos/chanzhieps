@@ -19,7 +19,7 @@
     <div class='title text-primary'><i class='icon icon-comments'></i> <strong><?php echo $parentBoard->name;?></strong></div>
   </div>
   <div class='panel-body'>
-    <div class="cards cards-list">
+    <div class='cards cards-list'>
     <?php foreach($parentBoard->children as $childBoard):?>
       <?php
       $isNewBoard = $this->forum->isNew($childBoard);
