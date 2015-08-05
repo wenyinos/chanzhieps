@@ -4,7 +4,11 @@
 <nav id='menu'>
   <ul class='nav'>
     <li class='nav-item-primary'>
-      <a href='javascript:;' data-toggle='dropdown'><i class="icon icon-desktop"></i> <?php echo $lang->ui->clientDesktop;?></a>
+      <a href='javascript:;' data-toggle='dropdown'><i class="icon icon-desktop"></i> <?php echo $lang->ui->clientDesktop;?> <i class='icon-caret-down'></i></a>
+      <ul class='dropdown-menu'>
+        <li class='active'><a href='###'><i class='icon icon-desktop'></i><?php echo $lang->ui->clientDesktop ?><i class='icon-ok'></i></a></li>
+        <li><a href='###'><i class='icon icon-tablet'></i><?php echo $lang->ui->clientMobile ?><i class='icon-ok'></i></a></li>
+      </ul>
     </li>
     <li class="divider angle"></li>
     <li class='menu-theme-picker'>
