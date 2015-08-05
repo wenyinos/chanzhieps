@@ -709,6 +709,30 @@ class helper
         $str = str_shuffle($str); 
         return substr($str,0,$length); 
     }
+
+    /**
+     * Get device.
+     * 
+     * @access public
+     * @return void
+     */
+    public static function getDevice()
+    {
+        global $app;
+        if(RUN_MODE == 'admin')
+        {
+            if($app->session->device) return $app->session->device;
+            return 'desktop';
+        }
+        elseif(RUN_MODE == 'front')
+        {
+            /* Detect mobile. */
+            $mobile = $app->loadClass('mobile');
+            if($mobile->isMobile()) return 'mobile';
+        }
+        return 'desktop';
+    }
+
 }
 
 /**

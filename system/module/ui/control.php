@@ -27,8 +27,10 @@ class ui extends control
         if($template and isset($templates[$template]))
         {  
             $setting = array();
-            $setting['name']   = $template;
-            $setting['theme']  = $theme;
+            $device  = helper::getDevice();
+            $setting[$device]['name']  = $template;
+            $setting[$device]['theme'] = $theme;
+            $setting[$device]  = helper::jsonEncode($setting[$device]);
             $setting['parser'] = isset($templates[$template]['parser']) ? $templates[$template]['parser'] : 'default';
             $setting['customTheme'] =  $custom ? $theme : '';
 
@@ -406,10 +408,10 @@ class ui extends control
         $this->package->mergeBlocks($packageInfo);
         $this->package->mergeCustome($packageInfo);
         $setting = array();
-        $setting['name']   = $packageInfo->template;
-        $setting['theme']  = $packageInfo->code;
+        $setting[$device]['name']  = $packageInfo->template;
+        $setting[$device]['theme'] = $packageInfo->code;
+        $setting[$device]  = helper::jsonEncode($setting[$device]);
         $setting['parser'] = isset($packageInfo->parser) ? $packageInfo->parser : 'default';
-        $setting['customTheme'] =  '';
 
         $result = $this->loadModel('setting')->setItems('system.common.template', $setting);
 
@@ -430,5 +432,18 @@ class ui extends control
         $result = $this->ui->deleteTheme($template, $theme);
         if($result) $this->send(array('result' => 'success', 'message' => $this->lang->ui->deleteThemeSuccess, "locate" => inlink('setTemplate')));
         $this->send(array('result' => 'fail', 'message' => $this->lang->ui->deleteThemeFail));
+    }
+
+    /**
+     * Set device admin.
+     * 
+     * @param  string    $device 
+     * @access public
+     * @return void
+     */
+    public function setDevice($device)
+    {
+        $this->session->set('device', $device);   
+        $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
     }
 }
