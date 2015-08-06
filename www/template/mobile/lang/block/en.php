@@ -35,7 +35,6 @@ $lang->block->default->typeList['followUs'] = 'Follow Us';
 $lang->block->default->typeList['about']    = 'About Us';
 $lang->block->default->typeList['links']    = 'Links';
 $lang->block->default->typeList['slide']    = 'Slide';
-$lang->block->default->typeList['header']   = 'Header';
 
 $lang->block->default->typeGroups = array();
 $lang->block->default->typeGroups['html']     = 'input';
@@ -63,7 +62,6 @@ $lang->block->default->typeGroups['followUs'] = 'system';
 $lang->block->default->typeGroups['about']    = 'system';
 $lang->block->default->typeGroups['links']    = 'system';
 $lang->block->default->typeGroups['slide']    = 'system';
-$lang->block->default->typeGroups['header']   = 'system';
 
 $lang->block->default->pages['all']            = 'All';
 $lang->block->default->pages['index_index']    = 'Home';
