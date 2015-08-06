@@ -36,12 +36,12 @@
         <div class='table-layout'>
           <div class='table-cell'>
             <div class='card-heading'>
-              <h5>
+              <h4>
                 <?php
                 echo $childBoard->name;
                 if(!empty($moderators)) printf('<small>' . $lang->forum->lblOwner . '</small>', $moderators);
                 ?>
-              </h5>
+              </h4>
             </div>
             <div class='card-content text-muted small'><?php echo $childBoard->desc;?></div>
             <?php

@@ -47,6 +47,11 @@
       <?php endforeach;?>
     </div>
   </div>
+  <?php if(count($addresses) >= 5): ?>
+  <div class='panel-footer'>
+    <button type='button' class='btn primary block' data-toggle='modal' data-remote='<?php echo inlink('create'); ?>'><i class='icon icon-plus'></i> <?php echo $lang->address->create?></button>
+  </div>
+  <?php endif; ?>
 </div>
 <script>
 $(function()
