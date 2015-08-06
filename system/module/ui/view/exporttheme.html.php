@@ -1,7 +1,7 @@
 <?php include '../../common/view/header.modal.html.php';?>
 <?php js::set('themes', $themes) ?>
-<?php js::set('template', $this->config->template->name);?>
-<?php js::set('theme', $this->config->template->theme);?>
+<?php js::set('template', $this->config->template->{$this->device}->name);?>
+<?php js::set('theme', $this->config->template->{$this->device}->theme);?>
 <form id='ajaxForm' class='export-theme-form' method='post' action="<?php echo inlink('exportTheme');?>">
   <table class='table table-form'>
     <tr>
@@ -9,7 +9,7 @@
       <td>
         <div class='required required-wrapper'></div>
         <div class='input-group'>
-          <?php echo html::select('template', $templateOptions, $this->config->template->name, "class='form-control'");?>
+          <?php echo html::select('template', $templateOptions, $this->config->template->{$this->device}->name, "class='form-control'");?>
           <span class='input-group-addon'></span>
           <?php echo html::select('theme', array(''), '', "class='form-control'");?>
         </div>

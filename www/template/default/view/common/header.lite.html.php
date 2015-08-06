@@ -47,15 +47,15 @@ $themeRoot = $webRoot . "template/default/theme/";
   }
 
   /* Import customed css file if it exists. */
-  $siteCustomCssFile = $this->app->getDataRoot() . 'css' . DS . $config->site->code . DS . $this->config->template->name . DS . $this->config->template->theme . DS . 'style.css';
+  $siteCustomCssFile = $this->app->getDataRoot() . 'css' . DS . $config->site->code . DS . $this->config->template->{$this->device}->name . DS . $this->config->template->{$this->device}->theme . DS . 'style.css';
   if($config->multi && file_exists($siteCustomCssFile))
   {
-      css::import(sprintf($webRoot . 'data/css/%s/%s/%s/style.css?' . $this->config->template->customVersion, $config->site->code, $config->template->name, $config->template->theme));
+      css::import(sprintf($webRoot . 'data/css/%s/%s/%s/style.css?' . $this->config->template->customVersion, $config->site->code, $config->template->{$this->device}->name, $config->template->{$this->device}->theme));
   }
   else
   {
-      $customCssFile = $this->app->getDataRoot() . 'css' . DS . $this->config->template->name . DS . $this->config->template->theme . DS . 'style.css';
-      if(file_exists($customCssFile)) css::import(sprintf($webRoot . 'data/css/%s/%s/style.css?' . $this->config->template->customVersion, $config->template->name, $config->template->theme));
+      $customCssFile = $this->app->getDataRoot() . 'css' . DS . $this->config->template->{$this->device}->name . DS . $this->config->template->{$this->device}->theme . DS . 'style.css';
+      if(file_exists($customCssFile)) css::import(sprintf($webRoot . 'data/css/%s/%s/style.css?' . $this->config->template->customVersion, $config->template->{$this->device}->name, $config->template->{$this->device}->theme));
        
   }
 
@@ -92,8 +92,8 @@ $themeRoot = $webRoot . "template/default/theme/";
   <?php
   js::set('lang', $lang->js);
   
-  $template   = $this->config->template->name ? $this->config->template->name : 'default';
-  $theme      = $this->config->template->theme ? $this->config->template->theme : 'default';
+  $template   = $this->config->template->{$this->device}->name ? $this->config->template->{$this->device}->name : 'default';
+  $theme      = $this->config->template->{$this->device}->theme ? $this->config->template->{$this->device}->theme : 'default';
   $baseCustom = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array(); 
   if(!empty($baseCustom[$template][$theme]['js'])) js::execute($baseCustom[$template][$theme]['js']);
   

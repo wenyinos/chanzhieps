@@ -51,11 +51,12 @@ class blockModel extends model
      */
     public function getPageBlocks($module, $method)
     {
-        $pages      = "all,{$module}_{$method}";
+        $device = helper::getDevice();
+        $pages  = "all,{$module}_{$method}";
         $rawLayouts = $this->dao->select('*')->from(TABLE_LAYOUT)
             ->where('page')->in($pages)
-            ->andWhere('template')->eq(!empty($this->config->template->name) ? $this->config->template->name : 'default')
-            ->andWhere('theme')->eq(!empty($this->config->template->theme) ? $this->config->template->theme : 'default')
+            ->andWhere('template')->eq(!empty($this->config->template->{$device}->name) ? $this->config->template->{$device}->name : 'default')
+            ->andWhere('theme')->eq(!empty($this->config->template->{$device}->theme) ? $this->config->template->{$device}->theme : 'default')
             ->fetchGroup('page', 'region');
 
         $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->fetchAll('id');
@@ -557,9 +558,10 @@ class blockModel extends model
                 }
             }
 
-            $template = $this->config->template->name;
-            $theme    = $this->config->template->theme;
-            $tplPath = $this->app->getTplRoot() . $template . DS . 'view' . DS . 'block' . DS;
+            $device   = helper::getDevice();
+            $template = $this->config->template->{$device}->name;
+            $theme    = $this->config->template->{$device}->theme;
+            $tplPath  = $this->app->getTplRoot() . $template . DS . 'view' . DS . 'block' . DS;
 
             /* First try block/ext/sitecode/view/block/ */
             $extBlockRoot = $tplPath . "/ext/_{$this->config->site->code}/";
@@ -640,7 +642,6 @@ class blockModel extends model
      */
     public function loadTemplateLang($template)
     {
-        $this->config->template->name = $template;
         $this->app->loadLang('block');
     }
 }

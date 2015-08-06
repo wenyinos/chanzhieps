@@ -3,7 +3,9 @@
   <div class='modal-dialog'>
     <div class='modal-content'>
       <div class='modal-header'><?php echo $lang->file->uploadSource?></div>
-      <form id="fileForm" method='post' enctype='multipart/form-data' action='<?php echo inlink('upload', "objectType=source&objectID={$this->config->template->name}_{$this->config->template->theme}");?>'>
+      <?php $template = $this->config->template->{$this->device}->name;?>
+      <?php $theme    = $this->config->template->{$this->device}->theme;?>
+      <form id="fileForm" method='post' enctype='multipart/form-data' action='<?php echo inlink('upload', "objectType=source&objectID={$template}_{$theme}");?>'>
         <table class='table table-form'>
           <?php if($writeable):?>
           <tr>

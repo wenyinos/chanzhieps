@@ -45,15 +45,15 @@ $navs = $this->tree->getChildren(0, 'blog');
   css::import($jsRoot    . 'jquery/treeview/min.css');
 
   /* Import customed css file if it exists. */
-  $siteCustomCssFile = $this->app->getDataRoot() . 'css' . DS . $this->config->site->code . DS . $this->config->template->name . DS . $this->config->template->theme . DS . 'style.css';
+  $siteCustomCssFile = $this->app->getDataRoot() . 'css' . DS . $this->config->site->code . DS . $this->config->template->{$this->device}->name . DS . $this->config->template->{$this->device}->theme . DS . 'style.css';
   if($this->config->multi && file_exists($siteCustomCssFile))
   {
-      css::import(sprintf($webRoot . 'data/css/%s/%s/%s/style.css?' . $this->config->template->customVersion, $config->site->code, $config->template->name, $config->template->theme));
+      css::import(sprintf($webRoot . 'data/css/%s/%s/%s/style.css?' . $this->config->template->customVersion, $config->site->code, $config->template->{$this->device}->name, $config->template->{$this->device}->theme));
   }
   else
   {
-      $customCssFile = $this->app->getDataRoot() . 'css' . DS . $this->config->template->name . DS . $this->config->template->theme . DS . 'style.css';
-      if(file_exists($customCssFile)) css::import(sprintf($webRoot . 'data/css/%s/%s/style.css?' . $this->config->template->customVersion, $config->template->name, $config->template->theme));
+      $customCssFile = $this->app->getDataRoot() . 'css' . DS . $this->config->template->{$this->device}->name . DS . $this->config->template->{$this->device}->theme . DS . 'style.css';
+      if(file_exists($customCssFile)) css::import(sprintf($webRoot . 'data/css/%s/%s/style.css?' . $this->config->template->customVersion, $config->template->{$this->device}->name, $config->template->{$this->device}->theme));
        
   }
 
@@ -119,8 +119,8 @@ else
     <div id='headTitle'>
       <div class="wrapper">
         <?php if(isset($this->config->site->logo)):?>
-        <?php $template   = $this->config->template->name;?>
-        <?php $theme       = $this->config->template->theme;?>
+        <?php $template    = $this->config->template->{$this->device}->name;?>
+        <?php $theme       = $this->config->template->{$this->device}->theme;?>
         <?php $logoSetting = json_decode($this->config->site->logo);?>
         <?php $logo = isset($logoSetting->$template->$theme) ? $logoSetting->$template->$theme : (isset($logoSetting->$template->all) ? $logoSetting->$template->all : false);?>
         <div id='siteLogo'>

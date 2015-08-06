@@ -9,6 +9,10 @@
     <a href='<?php echo $webRoot;?>'><?php
       if(isset($this->config->site->logo))
       {
+          $template    = $this->config->template->{$this->device}->name;
+          $theme       = $this->config->template->{$this->device}->theme;
+          $logoSetting = json_decode($this->config->site->logo);
+          $logo = isset($logoSetting->$template->$theme) ? $logoSetting->$template->$theme : (isset($logoSetting->$template->all) ? $logoSetting->$template->all : false);
           echo html::image($logo->webPath, "class='logo' title='{$this->config->company->name}'");
       }
       else
