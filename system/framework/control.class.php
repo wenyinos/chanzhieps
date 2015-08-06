@@ -146,6 +146,14 @@ class control
     public $viewPrefix;
 
     /**
+     * The device of visit website.
+     * 
+     * @var string   
+     * @access public
+     */
+    public $device;
+
+    /**
      * The construct function.
      *
      * 1. global the global vars, refer them by the class member such as $this->app.
@@ -165,6 +173,7 @@ class control
         $this->dbh      = $dbh;
         $this->viewType = $this->app->getViewType();
 
+        $this->setCurrentDevice();
         $this->setModuleName($moduleName);
         $this->setMethodName($methodName);
         $this->setTplRoot();
@@ -275,6 +284,17 @@ class control
     {
         $this->viewPrefix = '';
         if(isset($this->config->viewPrefix[$this->viewType])) $this->viewPrefix = $this->config->viewPrefix[$this->viewType];
+    }
+
+    /**
+     * Set current device of visit website.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setCurrentDevice()
+    {
+        $this->device = helper::getDevice();
     }
 
     //-------------------- View related methods --------------------//
