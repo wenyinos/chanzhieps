@@ -3,12 +3,13 @@
 
 <?php $this->block->printRegion($layouts, 'all', 'top');?>
 <?php $topNavs = $this->loadModel('nav')->getNavs('top');?>
-
 <header class='appbar fix-top' id='appbar'>
   <div class='appbar-title'>
     <a href='<?php echo $webRoot;?>'><?php
       if(isset($this->config->site->logo))
       {
+          $logoSetting = json_decode($this->config->site->logo);
+          $logo = isset($logoSetting->$templateName->$themeName) ? $logoSetting->$templateName->$themeName : (isset($logoSetting->$templateName->all) ? $logoSetting->$templateName->all : false);
           echo html::image($logo->webPath, "class='logo' title='{$this->config->company->name}'");
       }
       else
