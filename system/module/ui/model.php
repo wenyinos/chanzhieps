@@ -132,8 +132,9 @@ class uiModel extends model
 
         if($section == 'logo')
         {
-            $template = $this->config->template->name; 
-            $theme    = $this->post->theme == 'all' ? 'all' : $this->config->template->theme; 
+            $device = helper::getDevice();
+            $template = $this->config->template->{$device}->name; 
+            $theme    = $this->post->theme == 'all' ? 'all' : $this->config->template->{$device}->theme; 
             $logo = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();
             if(!isset($logo->$template)) $logo->$template = new stdclass();
             $logo->$template->$theme = $setting; 

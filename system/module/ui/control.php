@@ -27,10 +27,9 @@ class ui extends control
         if($template and isset($templates[$template]))
         {  
             $setting = array();
-            $device  = helper::getDevice();
-            $setting[$device]['name']  = $template;
-            $setting[$device]['theme'] = $theme;
-            $setting[$device]  = helper::jsonEncode($setting[$device]);
+            $setting[$this->device]['name']  = $template;
+            $setting[$this->device]['theme'] = $theme;
+            $setting[$this->device]  = helper::jsonEncode($setting[$this->device]);
             $setting['parser'] = isset($templates[$template]['parser']) ? $templates[$template]['parser'] : 'default';
             $setting['customTheme'] =  $custom ? $theme : '';
 
@@ -57,8 +56,8 @@ class ui extends control
      */
     public function customTheme($theme = '', $template = '')
     {
-        if(empty($theme))    $theme    = $this->config->template->theme;
-        if(empty($template)) $template = $this->config->template->name;
+        if(empty($theme))    $theme    = $this->config->template->{$this->device}->theme;
+        if(empty($template)) $template = $this->config->template->{$this->device}->name;
 
         $templates = $this->ui->getTemplates();
         if(!isset($templates[$template]['themes'][$theme])) die();
@@ -117,8 +116,8 @@ class ui extends control
             if(!$return['result']) $this->send(array('result' => 'fail', 'message' => $return['message']));
         }
 
-        $template = $this->config->template->name;
-        $theme    = $this->config->template->theme;
+        $template = $this->config->template->{$this->device}->name;
+        $theme    = $this->config->template->{$this->device}->theme;
         $logoSetting = json_decode($this->config->site->logo);
 
         $logo = isset($logoSetting->$template->$theme) ? $logoSetting->$template->$theme : (isset($logoSetting->$template->all) ? $logoSetting->$template->all : false);
@@ -178,7 +177,7 @@ class ui extends control
      */ 
     public function deleteLogo() 
     {
-        $theme = $this->config->template->theme;
+        $theme = $this->config->template->{$this->device}->theme;
         $this->loadModel('setting')->deleteItems("owner=system&module=common&section=logo&key=$theme");
         $this->loadModel('setting')->deleteItems("owner=system&module=common&section=site&key=logo");
 
@@ -408,9 +407,9 @@ class ui extends control
         $this->package->mergeBlocks($packageInfo);
         $this->package->mergeCustome($packageInfo);
         $setting = array();
-        $setting[$device]['name']  = $packageInfo->template;
-        $setting[$device]['theme'] = $packageInfo->code;
-        $setting[$device]  = helper::jsonEncode($setting[$device]);
+        $setting[$this->device]['name']  = $packageInfo->template;
+        $setting[$this->device]['theme'] = $packageInfo->code;
+        $setting[$this->device]  = helper::jsonEncode($setting[$this->device]);
         $setting['parser'] = isset($packageInfo->parser) ? $packageInfo->parser : 'default';
 
         $result = $this->loadModel('setting')->setItems('system.common.template', $setting);

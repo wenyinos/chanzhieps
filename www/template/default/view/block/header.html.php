@@ -14,8 +14,9 @@
   <div id='headTitle'>
     <div class="wrapper">
       <?php if(isset($this->config->site->logo)):?>
-      <?php $tempalate   = $this->config->template->name;?>
-      <?php $theme       = $this->config->template->theme;?>
+      <?php $device = helper::getDevice();?>
+      <?php $template    = $this->config->template->{$device}->name;?>
+      <?php $theme       = $this->config->template->{$device}->theme;?>
       <?php $logoSetting = json_decode($this->config->site->logo);?>
       <?php $logo = isset($logoSetting->$template->$theme) ? $logoSetting->$template->$theme : (isset($logoSetting->$template->all) ? $logoSetting->$template->all : false);?>
       <div id='siteLogo'>

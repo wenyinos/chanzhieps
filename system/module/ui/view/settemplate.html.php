@@ -12,14 +12,14 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel panel-templates'>
-<div class='cards cards-templates' data-template='<?php echo $this->config->template->name?>' data-theme='<?php echo $this->config->template->theme?>'>
+<div class='cards cards-templates' data-template='<?php echo $this->config->template->{$this->device}->name?>' data-theme='<?php echo $this->config->template->{$this->device}->theme?>'>
   <?php $customThemePriv = commonModel::hasPriv('ui', 'customTheme');?>
   <?php foreach($templates as $code => $template):?>
   <?php
   $desc  = $template['desc'];
   $count = count($template['themes']);
-  $isCurrent = $this->config->template->name == $code;
-  $themeName = $isCurrent ? $this->config->template->theme : 'default';
+  $isCurrent = $this->config->template->{$this->device}->name == $code;
+  $themeName = $isCurrent ? $this->config->template->{$this->device}->theme : 'default';
   $templateRoot = $webRoot . 'template/' . $code . '/'
   ?>
   <div class='col-card'>
@@ -41,7 +41,7 @@
         <?php foreach($template['themes'] as $theme => $name):?>
           <?php
           $custom = true;
-          $currentClass = ($isCurrent and $config->template->theme == $theme) ? ' current' : '';
+          $currentClass = ($isCurrent and $config->template->{$this->device}->theme == $theme) ? ' current' : '';
           if($custom) $currentClass .= ' custom';
 
           $url = $this->createLink('ui', 'setTemplate', "template={$code}&theme={$theme}&custom={$custom}");

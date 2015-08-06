@@ -226,7 +226,7 @@ class control
      */
     public function setTplRoot()
     {
-        if(!defined('TPL_ROOT')) define('TPL_ROOT', $this->app->getTplRoot() . $this->config->template->name . DS . 'view' . DS);
+        if(!defined('TPL_ROOT')) define('TPL_ROOT', $this->app->getTplRoot() . $this->config->template->{$this->device}->name . DS . 'view' . DS);
     }
 
     /**
