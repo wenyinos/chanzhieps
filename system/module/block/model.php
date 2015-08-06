@@ -600,7 +600,7 @@ class blockModel extends model
             {
                 $defaultIcon = $this->config->block->defaultIcons[$block->type];
                 $iconClass   = isset($content->icon) ? $content->icon : $defaultIcon;
-                $icon        = $iconClass ? "<i class='{$iconClass}'></i> " : "" ;
+                $icon        = $iconClass ? "<i class='icon {$iconClass}'></i> " : "" ;
             }
 
             $style  = '<style>';
