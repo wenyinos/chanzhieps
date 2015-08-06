@@ -7,3 +7,4 @@ $lang->address->contact = '联系人';
 
 $lang->address->browse = '地址列表';
 $lang->address->create = '添加新地址';
+$lang->address->edit   = '编辑地址';
