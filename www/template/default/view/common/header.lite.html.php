@@ -92,7 +92,7 @@ $themeRoot = $webRoot . "template/default/theme/";
   <?php
   js::set('lang', $lang->js);
   
-  $template   = $this->config->template->{$this->device}->name ? $this->config->template->{$this->device}->name : 'default';
+  $template   = $this->config->template->{$this->device}->name ? $this->config->template->{$this->device}->name : ($this->device == 'mobile' ? 'mobile' : 'default');
   $theme      = $this->config->template->{$this->device}->theme ? $this->config->template->{$this->device}->theme : 'default';
   $baseCustom = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array(); 
   if(!empty($baseCustom[$template][$theme]['js'])) js::execute($baseCustom[$template][$theme]['js']);
