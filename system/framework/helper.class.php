@@ -728,7 +728,7 @@ class helper
         {
             /* Detect mobile. */
             $mobile = $app->loadClass('mobile');
-            if(!$mobile->isMobile())
+            if($mobile->isMobile())
             {
                 if(!isset($config->template->mobile)) return 'desktop';
                 return 'mobile';
