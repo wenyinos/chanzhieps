@@ -728,15 +728,14 @@ class helper
         {
             /* Detect mobile. */
             $mobile = $app->loadClass('mobile');
-            if($mobile->isMobile())
+            if(!$mobile->isMobile())
             {
-                if(!is_object($config->template->desktop) and is_object($config->template->mobile)) return 'desktop';
+                if(!isset($config->template->mobile)) return 'desktop';
                 return 'mobile';
             }
         }
         return 'desktop';
     }
-
 }
 
 /**
