@@ -35,15 +35,15 @@ $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 :
     ?>
     <div class='card'>
       <div class='card-heading'>
-        <?php if($article->sticky):?><span class='text-danger'>[<?php echo $this->lang->article->stick;?>]</span><?php endif;?>
         <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
         <?php if($content->categoryName == 'abbr'):?>
         <?php $categoryName = '[' . ($article->category->abbr ? $article->category->abbr : $article->category->name) . '] ';?>
-        <?php echo html::a(helper::createLink('article', 'browse', "categoryID={$article->category->id}", "category={$article->category->alias}"), $categoryName);?>
+        <?php echo html::a(helper::createLink('article', 'browse', "categoryID={$article->category->id}", "category={$article->category->alias}"), $categoryName, "class='text-special'");?>
         <?php else:?>
-        <?php echo '[' . $article->category->name . '] ';?>
+        <?php echo '<span class="text-special">[' . $article->category->name . ']</span>';?>
         <?php endif;?>
         <?php endif;?>
+        <?php if($article->sticky):?><span class='text-danger'>[<?php echo $this->lang->article->stick;?>]</span><?php endif;?>
         <strong><?php echo html::a($url, $article->title);?></strong>
       </div>
       <div class='table-layout'>
@@ -85,7 +85,7 @@ $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 :
         <?php endif;?>
         <?php if($article->sticky):?><span class='text-danger'>[<?php echo $this->lang->article->stick;?>]</span><?php endif;?>
         <?php echo html::a($url, $article->title, "title='{$article->title}'");?>
-        <span class='pull-right'><?php echo substr($article->addedDate, 0, 10);?></span>
+        <span class='pull-right text-muted'><?php echo substr($article->addedDate, 0, 10);?></span>
       </div>
       <?php else:?>
       <div class='list-group-item'>
