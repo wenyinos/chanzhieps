@@ -718,7 +718,7 @@ class helper
      */
     public static function getDevice()
     {
-        global $app;
+        global $app, $config;
         if(RUN_MODE == 'admin')
         {
             if($app->session->device) return $app->session->device;
@@ -728,11 +728,14 @@ class helper
         {
             /* Detect mobile. */
             $mobile = $app->loadClass('mobile');
-            if($mobile->isMobile()) return 'mobile';
+            if($mobile->isMobile())
+            {
+                if(!isset($config->template->mobile)) return 'desktop';
+                return 'mobile';
+            }
         }
         return 'desktop';
     }
-
 }
 
 /**
