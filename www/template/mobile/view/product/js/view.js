@@ -17,9 +17,9 @@ $(function()
                 {
                     if($.isFunction($.refreshCart))
                     {
-                        $.refreshCart();
+                        $.refreshCart(true);
                     }
-                    if(window.v && window.v.addToCartSuccess)
+                    else if(window.v && window.v.addToCartSuccess)
                     {
                         $.messager.success(window.v.addToCartSuccess);
                     }

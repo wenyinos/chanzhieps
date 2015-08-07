@@ -37,8 +37,11 @@
       </div>
     </div>
     <?php endif; ?>
+    <?php if(commonModel::isAvailable('search')):?>
+    <button type='button' class='btn with-badge' data-toggle='modal' data-remote='<?php echo $this->createLink('cart', 'browse');?>'><i class='icon icon-shopping-cart'></i><strong class='cart-count badge small text-danger circle hide'>12</strong></button>
+    <?php endif; ?>
     <div class='dropdown'>
-      <button type='button' class='btn' data-toggle='dropdown'><i class='icon-bars'></i></button>
+      <button type='button' class='btn' data-toggle='dropdown'><i class='icon-bars circle'></i></button>
       <ul class='dropdown-menu pull-right'>
         <?php echo commonModel::printTopBar(true);?>
         <li class='divider'></li>
