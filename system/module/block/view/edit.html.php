@@ -50,7 +50,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
         <div class='tab-pane theme-control-tab-pane' id='contentTab'>
           <table align='center' class='table table-form'>
             <tr>
-              <th class='w-80px'><?php echo $lang->block->type;?></th>
+              <th class='w-100px'><?php echo $lang->block->type;?></th>
               <td><?php echo $this->block->createTypeSelector($template, $type, $block->id);?></td>
             </tr>
             <tr>
@@ -86,6 +86,10 @@ foreach (explode('|', $lang->colorPlates) as $value)
               </td>
             </tr>
             <?php endif;?>
+            <tr>
+              <th><?php echo $lang->block->class;?></th>
+              <td><?php echo html::input('params[class]', isset($block->content->class) ? $block->content->class : '', "class='form-control' placeholder='{$lang->block->placeholder->class}'");?></td>
+            </tr>
           </table>
         </div>
         <?php if(strpos(',htmlcode, phpcode, slide, header', $type) == false or $type == 'html'):?>
@@ -93,7 +97,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
           <table class='table table-form mg-0'>
             <?php if(isset($config->block->defaultIcons[$type])):?>
             <tr>
-              <th class='w-80px'><?php echo $lang->block->icon;?></th>
+              <th class='w-100px'><?php echo $lang->block->icon;?></th>
               <td>
                 <div class='colorplate'>
                   <div class='input-group color active' data="<?php echo isset($block->content->custom->$theme->iconColor) ? $block->content->custom->$theme->iconColor : ''?>">
@@ -111,7 +115,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
             </tr>
             <?php endif;?>
             <tr>
-              <th class='w-80px'><?php echo $lang->block->border;?></th>
+              <th class='w-100px'><?php echo $lang->block->border;?></th>
               <td>
                 <div class='colorplate'>
                   <div class='input-group color active' data="<?php echo isset($block->content->custom->$theme->borderColor) ? $block->content->custom->$theme->borderColor : ''?>">
@@ -128,7 +132,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
             </tr>
             <?php if($type == 'html'):?>
             <tr>
-              <th class='w-80px'><?php echo $lang->block->padding;?></th>
+              <th class='w-100px'><?php echo $lang->block->padding;?></th>
               <td colspan='2'>
                 <div class='input-group'>
                   <span class='input-group-addon'><?php echo $lang->block->padding;?></span>
@@ -146,7 +150,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
             <?php endif;?>
             <?php if($type !== 'featuredProduct'):?>
             <tr>
-              <th class='w-80px'><?php echo $lang->block->heading;?></th>
+              <th class='w-100px'><?php echo $lang->block->heading;?></th>
               <td>
                 <div class='colorplate'>
                   <div class='input-group color active' data="<?php echo isset($block->content->custom->$theme->titleColor) ? $block->content->custom->$theme->titleColor : ''?>">
@@ -177,7 +181,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
             <?php endif;?>
             <?php if($type != 'followUs'):?>
             <tr>
-              <th rowspan='2' class='w-80px'><?php echo $lang->block->content;?></th>
+              <th rowspan='2' class='w-100px'><?php echo $lang->block->content;?></th>
               <td>
                 <div class='colorplate'>
                   <div class='input-group color active' data="<?php echo isset($block->content->custom->$theme->textColor) ? $block->content->custom->$theme->textColor : ''?>">
@@ -226,11 +230,13 @@ foreach (explode('|', $lang->colorPlates) as $value)
         <?php endif;?>
         <div class='tab-pane theme-control-tab-pane' id='cssTab'>
           <?php echo html::textarea('css', isset($block->content->custom->$theme->css) ? $block->content->custom->$theme->css : '', "rows=20 class='form-control codeeditor' data-mode='css' data-height='350'");?>
-          <p class='text-info text-tip'><?php echo $lang->ui->theme->customStyleTip; ?></p>
+          <p class='text-info text-tip'><?php echo $lang->ui->theme->customStyleTip;?></p>
+          <p class='text-info text-tip'><?php echo $lang->block->placeholder->blockID;?></p>
         </div>
         <div class='tab-pane theme-control-tab-pane' id='jsTab'>
           <?php echo html::textarea('js', isset($block->content->custom->$theme->js) ? $block->content->custom->$theme->js : '', "rows=20 class='form-control codeeditor' data-mode='javascript' data-height='350'");?>
           <p class='text-info text-tip'><?php echo $lang->ui->theme->customScriptTip; ?></p>
+          <p class='text-info text-tip'><?php echo $lang->block->placeholder->blockID;?></p>
         </div>
       </div>
       <div class='form-footer'>

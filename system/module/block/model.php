@@ -591,10 +591,11 @@ class blockModel extends model
             }
 
             $blockClass = "block-{$blockCategory}-{$block->type}";
-            if(isset($block->borderless) and $block->borderless) $blockClass .= 'panel-borderless';
+            if(isset($block->borderless) and $block->borderless) $blockClass .= ' panel-borderless';
             if(isset($block->titleless) and $block->titleless) $blockClass  .= ' panel-titleless';
 
             $content = is_object($block->content) ? $block->content : json_decode($block->content);
+            if(isset($content->class)) $blockClass .= ' ' . $content->class;
 
             if(isset($this->config->block->defaultIcons[$block->type])) 
             {
@@ -621,7 +622,10 @@ class blockModel extends model
                 $style .= isset($content->custom->$theme->paddingRight) ? '#block' . $block->id . ' .panel-body' . '{padding-right:' . $content->custom->$theme->paddingRight . 'px !important;}' : '';
                 $style .= isset($content->custom->$theme->paddingBottom) ? '#block' . $block->id . ' .panel-body' . '{padding-bottom:' . $content->custom->$theme->paddingBottom . 'px !important;}' : '';
                 $style .= isset($content->custom->$theme->paddingLeft) ? '#block' . $block->id . ' .panel-body' . '{padding-left:' . $content->custom->$theme->paddingLeft . 'px !important;}' : '';
-                $style .= !empty($content->custom->$theme->css) ? $content->custom->$theme->css : '';
+                if(!empty($content->custom->$theme->css))
+                {
+                    $style .= str_replace('#blockID', "#block{$block->id}", $content->custom->$theme->css);
+                }
             }
             $style .= '</style>';
             $script = !empty($content->custom->$theme->js) ? "<script language='Javascript'>" . $content->custom->$theme->js . "</script>" : '';
