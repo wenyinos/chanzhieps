@@ -1,6 +1,6 @@
 <?php
 /**
- * The index view file of forum for mobile template of chanzhiEPS.
+ * The board view file of forum for mobile template of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPLV1 (http://www.chanzhi.org/license/)
@@ -12,7 +12,7 @@
 ?>
 <?php include TPL_ROOT . 'common/header.html.php';?>
 <?php echo $common->printPositionBar($board);?>
-
+<div class='block-region region-top'><?php $this->loadModel('block')->printRegion($layouts, 'forum_board', 'top');?></div>
 <div class='panel-section'>
   <?php if(count($threads) > 5 && $this->forum->canPost($board)):?>
   <div class='panel-heading'>
@@ -64,5 +64,6 @@
     <?php if($this->forum->canPost($board)) echo html::a($this->createLink('thread', 'post', "boardID=$board->id"), '<i class="icon-pencil"></i>&nbsp;&nbsp;' . $lang->forum->post, "class='btn primary block' data-toggle='modal'");?>
   </div>
 </div>
+<div class='block-region region-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'forum_board', 'bottom');?></div>
 <?php include TPL_ROOT . 'common/form.html.php'; ?>
 <?php include TPL_ROOT . 'common/footer.html.php';?>

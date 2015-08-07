@@ -12,7 +12,7 @@
 ?>
 <?php include TPL_ROOT . 'common/header.html.php';?>
 <?php echo $common->printPositionBar($this->app->getModuleName());?>
-
+<div class='block-region region-top'><?php $this->loadModel('block')->printRegion($layouts, 'forum_index', 'top');?></div>
 <?php foreach($boards as $parentBoard):?>
 <div class='panel-section'>
   <div class='panel-heading'>
@@ -63,5 +63,5 @@
   </div>
 </div>
 <?php endforeach;?>
-
+<div class='block-region region-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'forum_index', 'bottom');?></div>
 <?php include TPL_ROOT . 'common/footer.html.php';?>

@@ -16,6 +16,8 @@
 $root = '<li><span class="breadcrumb-title">' . $this->lang->currentPos . $this->lang->colon . '</span>' .  html::a($this->inlink('index'), $lang->blog->home) . '</li>';
 if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
 ?>
+<div class='block-region region-top'><?php $this->loadModel('block')->printRegion($layouts, 'blog_view', 'top');?></div>
+
 <div class='appheader'>
   <div class='heading'>
     <h2><?php echo $article->title;?></h2>
@@ -78,5 +80,7 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
 <?php if(commonModel::isAvailable('message')):?>
 <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=article&objectID={$article->id}");?></div>
 <?php endif;?>
+
+<div class='block-region region-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'blog_view', 'bottom');?></div>
 
 <?php include TPL_ROOT . 'blog/footer.html.php';?>

@@ -1,7 +1,8 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
 <?php include TPL_ROOT . 'common/header.lite.html.php';?>
 
-<?php $this->block->printRegion($layouts, 'all', 'top');?>
+<div class='block-region region-all-top'><?php $this->block->printRegion($layouts, 'all', 'top');?></div>
+
 <?php $topNavs = $this->loadModel('nav')->getNavs('top');?>
 <style>
 .appbar-title-label {
@@ -65,3 +66,7 @@
     </ul>
   </div>
 </nav>
+
+<div class='block-region region-all-banner'>
+  <?php $this->block->printRegion($layouts, 'all', 'banner');?>
+</div>
