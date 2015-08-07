@@ -384,7 +384,7 @@ class blockModel extends model
      * @access public
      * @return bool
      */
-    public function update($template)
+    public function update($template, $theme)
     {
         $block = $this->getByID($this->post->blockID);
 
@@ -393,26 +393,26 @@ class blockModel extends model
 
         $gpcOn = version_compare(phpversion(), '5.4', '<') and get_magic_quotes_gpc();
 
-        if(isset($data->params))
+        if(!isset($data->params)) $data->params = array();
+        $data->params['custom'][$theme]['css'] = $data->css;
+        $data->params['custom'][$theme]['js']  = $data->js;
+        foreach($data->params as $field => $value)
         {
-            foreach($data->params as $field => $value)
-            {
-                if($field == 'category' and is_array($value)) $data->params[$field] = join($value, ',');
-            }
-
-            if(isset($block->content->custom))
-            {
-                foreach($block->content->custom as $field => $value)
-                {
-                    if(!isset($data->params['custom'][$field])) $data->params['custom'][$field] = $value;
-                }
-            }
-
-            if($this->post->content) $data->params['content'] = $gpcOn ? stripslashes($data->content) : $data->content;
-            $data->content = helper::jsonEncode($data->params);
+            if($field == 'category' and is_array($value)) $data->params[$field] = join($value, ',');
         }
 
-        $this->dao->update(TABLE_BLOCK)->data($data, 'params,uid,blockID')
+        if(isset($block->content->custom))
+        {
+            foreach($block->content->custom as $field => $value)
+            {
+                if(!isset($data->params['custom'][$field])) $data->params['custom'][$field] = $value;
+            }
+        }
+
+        if($this->post->content) $data->params['content'] = $gpcOn ? stripslashes($data->content) : $data->content;
+        $data->content = helper::jsonEncode($data->params);
+
+        $this->dao->update(TABLE_BLOCK)->data($data, 'params,uid,blockID,css,js')
             ->batchCheck($this->config->block->require->edit, 'notempty')
             ->autoCheck()
             ->where('id')->eq($this->post->blockID)
@@ -621,12 +621,15 @@ class blockModel extends model
                 $style .= isset($content->custom->$theme->paddingRight) ? '#block' . $block->id . ' .panel-body' . '{padding-right:' . $content->custom->$theme->paddingRight . 'px !important;}' : '';
                 $style .= isset($content->custom->$theme->paddingBottom) ? '#block' . $block->id . ' .panel-body' . '{padding-bottom:' . $content->custom->$theme->paddingBottom . 'px !important;}' : '';
                 $style .= isset($content->custom->$theme->paddingLeft) ? '#block' . $block->id . ' .panel-body' . '{padding-left:' . $content->custom->$theme->paddingLeft . 'px !important;}' : '';
+                $style .= !empty($content->custom->$theme->css) ? $content->custom->$theme->css : '';
             }
             $style .= '</style>';
+            $script = !empty($content->custom->$theme->js) ? "<script language='Javascript'>" . $content->custom->$theme->js . "</script>" : '';
 
             echo $containerHeader;
             if(file_exists($blockFile)) include $blockFile;
             echo $style;
+            echo $script;
             echo $containerFooter;
 
             if($withGrid) echo "</div>";
