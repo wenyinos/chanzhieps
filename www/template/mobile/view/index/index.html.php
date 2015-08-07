@@ -13,13 +13,13 @@
 <?php include TPL_ROOT . 'common/header.html.php';?>
 
 <div id='focus'>
-  <div id='focusTop' class='focus-region focus-top'>
+  <div id='focusTop' class='block-region focus-top'>
     <?php $this->block->printRegion($layouts, 'index_index', 'top', false);?>
   </div>
-  <div id='focusMiddle' class='focus-region focus-middle'>
+  <div id='focusMiddle' class='block-region focus-middle'>
     <?php $this->block->printRegion($layouts, 'index_index', 'middle', false);?>
   </div>
-  <div id='focusBottom' class='focus-region focus-bottom'>
+  <div id='focusBottom' class='block-region focus-bottom'>
     <?php $this->block->printRegion($layouts, 'index_index', 'bottom', false);?>
   </div>
 </div>

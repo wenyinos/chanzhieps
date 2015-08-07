@@ -20,6 +20,8 @@ js::set('categoryID', $category->id);
 
 <?php echo $common->printPositionBar($category);?>
 
+<div class='block-region region-top'><?php $this->loadModel('block')->printRegion($layouts, 'article_browse', 'top');?></div>
+
 <div class='panel panel-section'>
   <div class='panel-heading'>
     <div class='title'><strong><?php echo $category->name;?></strong></div>
@@ -87,5 +89,7 @@ js::set('categoryID', $category->id);
     <?php $pager->show('justify');?>
   </div>
 </div>
+
+<div class='block-region region-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'article_browse', 'bottom');?></div>
 
 <?php include TPL_ROOT . 'common/footer.html.php';?>

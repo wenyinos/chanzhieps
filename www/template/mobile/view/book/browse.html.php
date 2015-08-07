@@ -15,6 +15,7 @@
 <?php
   $bookModel = $this->loadModel('book');
 ?>
+<div class='block-region region-top'><?php $this->loadModel('block')->printRegion($layouts, 'book_browse', 'top');?></div>
 <div class='panel-section panel'>
   <div class='panel-body'>
     <div class='dropdown selector'>
@@ -64,4 +65,5 @@
     </div>
   </div>
 </div>
+<div class='block-region region-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'book_browse', 'bottom');?></div>
 <?php include TPL_ROOT . 'common/footer.html.php';?>

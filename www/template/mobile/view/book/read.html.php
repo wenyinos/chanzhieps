@@ -13,7 +13,7 @@
 <?php include TPL_ROOT . 'common/header.html.php';?>
 <?php js::set('articleID', $article->id)?>
 <?php $common->printPositionBar($article->origins);?>
-
+<div class='block-region region-top'><?php $this->loadModel('block')->printRegion($layouts, 'book_read', 'top');?></div>
 <div class='appheader'>
   <div class='heading'>
     <h2><?php echo $article->title;?></h2>
@@ -71,4 +71,5 @@
 <?php if(commonModel::isAvailable('message')):?>
 <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=article&objectID={$article->id}");?></div>
 <?php endif;?>
+<div class='block-region region-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'book_read', 'bottom');?></div>
 <?php include TPL_ROOT . 'common/footer.html.php';?>

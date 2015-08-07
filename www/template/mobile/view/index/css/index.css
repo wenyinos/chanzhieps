@@ -1,4 +1,3 @@
 #focus {padding-top: 10px;}
-#focus > .focus-region {padding: 0 10px;}
-#focus > .focus-region > .panel-block {margin-bottom: 10px;}
+#focus > .block-region > .panel-block {margin-bottom: 10px;}
 #focus > .focus-top > .panel-block-slide {margin: -10px -10px 10px;}

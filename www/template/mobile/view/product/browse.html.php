@@ -59,6 +59,8 @@ foreach($products as $product)
 }
 ?>
 
+<div class='block-region region-top'><?php $this->loadModel('block')->printRegion($layouts, 'product_browse', 'top');?></div>
+
 <div class='panel panel-section'>
   <div class='panel-heading'>
     <div class='title'><strong><?php echo $category->name;?></strong></div>
@@ -77,4 +79,6 @@ foreach($products as $product)
     <?php $pager->show('justify');?>
   </div>
 </div>
+
+<div class='block-region region-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'product_browse', 'bottom');?></div>
 <?php include TPL_ROOT . 'common/footer.html.php';?>

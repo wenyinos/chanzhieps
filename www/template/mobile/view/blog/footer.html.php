@@ -1,3 +1,5 @@
+<div class='block-region region-all-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'all', 'bottom');?></div>
+
 <footer  class="appbar fix-bottom">
   <ul class="nav">
     <li><?php echo html::a(helper::createLink('rss', 'index', '?type=blog', '', 'xml'), "<i class='icon-rss text-warning'></i> " . $lang->blog->subscribe, "target='_blank' class='text-important'"); ?></li>
@@ -9,5 +11,6 @@
 <?php
 if(isset($pageJS)) js::execute($pageJS);
 ?>
+<div class='block-region region-all-footer hidden'><?php $this->loadModel('block')->printRegion($layouts, 'all', 'footer');?></div>
 </body>
 </html>

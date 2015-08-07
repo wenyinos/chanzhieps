@@ -21,6 +21,8 @@ js::execute($article->js);
 ?>
 <?php $common->printPositionBar($category);?>
 
+<div class='block-region region-article-view-top'><?php $this->loadModel('block')->printRegion($layouts, 'article_view', 'top');?></div>
+
 <div class='appheader'>
   <div class='heading'>
     <h2><?php echo $article->title;?></h2>
@@ -83,5 +85,7 @@ js::execute($article->js);
 <?php if(commonModel::isAvailable('message')):?>
 <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=article&objectID={$article->id}");?></div>
 <?php endif;?>
+
+<div class='block-region region-article-view-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'article_view', 'bottom');?></div>
 
 <?php include TPL_ROOT . 'common/footer.html.php';?>
