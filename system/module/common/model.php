@@ -58,7 +58,7 @@ class commonModel extends model
             }
         }
         $device = helper::getDevice();
-        if(isset($this->config->template->{$device})) $this->config->template->{$device} = json_decode($this->config->template->{$device});
+        if(isset($this->config->template->{$device}) and !is_object($this->config->template->{$device})) $this->config->template->{$device} = json_decode($this->config->template->{$device});
 
         if(!isset($this->config->site->status)) $this->config->site->status = 'normal';
         if(($this->loadModel('wechat')->getList())) $this->config->site->wechat = true;

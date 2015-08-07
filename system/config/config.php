@@ -46,8 +46,11 @@ $config->site->importantValidate = 'okFile,email';
 
 $config->template = new stdclass();
 $config->template->desktop = new stdclass();
+$config->template->mobile  = new stdclass();
 $config->template->desktop->name  = 'default';   // Supported themes.
 $config->template->desktop->theme = 'default';   // Supported themes.
+$config->template->mobile->name   = 'mobile';   // Supported themes.
+$config->template->mobile->theme  = 'default';   // Supported themes.
 $config->template->parser         = 'default';   // Default parser.
 $config->template->customVersion  = '';
 

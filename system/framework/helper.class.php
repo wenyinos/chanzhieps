@@ -730,8 +730,8 @@ class helper
             $mobile = $app->loadClass('mobile');
             if($mobile->isMobile())
             {
-                if(isset($config->template->mobile)) return 'mobile';
-                return 'desktop';
+                if(!is_object($config->template->desktop) and is_object($config->template->mobile)) return 'desktop';
+                return 'mobile';
             }
         }
         return 'desktop';
