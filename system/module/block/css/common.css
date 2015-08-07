@@ -21,7 +21,7 @@
 .panel-preview > .heading > .pull-right {position: relative; top: -3px}
 .panel-preview > .heading > .pull-right > .btn {padding: 2px 10px}
 .panel-preview > .panel {margin-bottom: 0;width: 100%; margin: 0 auto; line-height: 20px;}
-.form-footer{padding-left: 85px;}
+.form-footer{padding-left: 105px;}
 #editForm[data-tab='cssTab'] .form-footer, #editForm[data-tab='jsTab'] .form-footer {padding-left: 0;}
 #editForm .panel-heading {padding: 4px 5px 0 5px}
 #editForm .nav-tabs {margin-bottom: -1px}
