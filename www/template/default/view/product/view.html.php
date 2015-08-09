@@ -35,25 +35,30 @@ js::execute($product->js);
     <div class='panel panel-body panel-product'>
       <div class='row'>
         <?php if(!empty($product->image->list)):?>
-        <div class='col-md-5'>
-          <div class='product-image media-wrapper'>
+        <div class='col-sm-5' id='productImageWrapper'>
+          <div class='product-image media-wrapper' id='productImage'>
             <?php $title = $product->image->primary->title ? $product->image->primary->title : $product->name;?>
             <?php echo html::image($product->image->primary->fullURL, "title='{$title}' alt='{$product->name}'");?>
+            <div class='image-zoom-region'></div>
           </div>
           <?php if(count($product->image->list) > 1):?>
-          <div class='product-image-menu row'>
-            <?php foreach($product->image->list as $image):?>
-            <?php $title = $image->title ? $image->title : $product->name;?>
-            <div class='col-md-3 col-sm-2 col-xs-2'>
-              <div class='product-image little-image'>
-                <?php echo html::image($image->smallURL, "title='{$title}' alt='{$product->name}'");?>
+          <div class='product-image-menu-wrapper' id='imageMenuWrapper'>
+            <button type='button' class='btn btn-link btn-img-scroller btn-prev-img'><i class="icon icon-chevron-left"></i></button>
+            <button type='button' class='btn btn-link btn-img-scroller btn-next-img'><i class="icon icon-chevron-right"></i></button>
+            <div class='product-image-menu clearfix' id='imageMenu'>
+              <?php foreach($product->image->list as $image):?>
+              <?php $title = $image->title ? $image->title : $product->name;?>
+              <div class="product-image-wrapper">
+                <div class='product-image little-image'>
+                  <?php echo html::image($image->smallURL, "title='{$title}' alt='{$product->name}'");?>
+                </div>
               </div>
+              <?php endforeach;?>
             </div>
-            <?php endforeach;?>
           </div>
           <?php endif;?>
         </div>
-        <div class='col-md-7'>
+        <div class='col-sm-7'>
         <?php else:?>
         <div class='col-md-12'>
         <?php endif;?>
