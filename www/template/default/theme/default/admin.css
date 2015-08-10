@@ -632,7 +632,7 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
 #menu .nav > li > a {padding: 5px;}
 #menu .nav > li > a > .icon, #menu .dropdown-menu > li > a > .icon  {display: inline-block; width: 20px; text-align: center;}
 #menu .nav > li.nav-item-primary {background-color: #ebf2f9;}
-#menu .nav-item-primary .dropdown-menu  {width: 200px; padding: 8px 4px; background-color: #fafafa}
+#menu .nav-item-primary .dropdown-menu  {width: 187px; padding: 8px 4px; background-color: #fafafa}
 #menu .nav-item-primary .dropdown-menu > li {float: left; margin: 0 4px;}
 #menu .nav-item-primary .dropdown-menu > li > a {width: 80px; text-align: center; border-radius: 2px; border: 1px solid #e5e5e5; padding: 0; background-color: #fff; color: #666; position: relative;}
 #menu .nav-item-primary .dropdown-menu > li.active > a {color: #333; border-color: #229F24; box-shadow:0px 0px 6px #47A447;}

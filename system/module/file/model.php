@@ -109,12 +109,16 @@ class fileModel extends model
      */
     public function getSourceList($type = '', $orderBy = 'id_desc', $pager = null)
     {
+        $device   = helper::getDevice();
+        $template = $this->config->template->{$device}->name;
+        $theme    = $this->config->template->{$device}->theme;
+
         $files = $this->dao->setAutoLang(false)->select('*')
             ->from(TABLE_FILE)
             ->where('objectType')->eq('slide')
             ->beginIf($type != '')->andWhere('extension')->in($type)->fi() 
             ->orWhere('objectType')->eq('source')
-            ->andWhere('objectID')->eq("{$this->config->template->name}_{$this->config->template->theme}")
+            ->andWhere('objectID')->eq("{$template}_{$theme}")
             ->beginIf($type != '')->andWhere('extension')->in($type)->fi() 
             ->orderBy($orderBy) 
             ->beginIf($pager != null)->page($pager)->fi()
@@ -201,7 +205,10 @@ class fileModel extends model
         $files      = $this->getUpload();
 
         /* Process file path if objectType is source. */
-        if($objectType == 'source') foreach($files as $key => $file) $files[$key]['pathname'] = "source/{$this->config->template->name}/{$this->config->template->theme}/{$file['title']}.{$file['extension']}";
+        $device   = helper::getDevice();
+        $template = $this->config->template->{$device}->name;
+        $theme    = $this->config->template->{$device}->theme;
+        if($objectType == 'source') foreach($files as $key => $file) $files[$key]['pathname'] = "source/{$template}/{$theme}/{$file['title']}.{$file['extension']}";
 
         $imageSize = array('width' => 0, 'height' => 0);
 
@@ -414,7 +421,10 @@ class fileModel extends model
 
         if($objectType == 'source')
         {
-            $savePath = $this->app->getDataRoot() . "source/{$this->config->template->name}/{$this->config->template->theme}/";
+            $device   = helper::getDevice();
+            $template = $this->config->template->{$device}->name;
+            $theme    = $this->config->template->{$device}->theme;
+            $savePath = $this->app->getDataRoot() . "source/{$template}/{$theme}/";
             $this->savePath = $this->app->getDataRoot();
         }
 
@@ -545,9 +555,12 @@ class fileModel extends model
      */
     public function sourceEdit($fileID, $filename)
     {
+        $device     = helper::getDevice();
+        $template   = $this->config->template->{$device}->name;
+        $theme      = $this->config->template->{$device}->theme;
         $file       = $this->getByID($fileID);
         $uploadPath = $this->app->getDataRoot();
-        $basePath   = "source/{$this->config->template->name}/{$this->config->template->theme}/";
+        $basePath   = "source/{$template}/{$theme}/";
         if($file->objectType == 'slide') $basePath   = "slides/";
 
         $files = $this->getUpload('upFile');

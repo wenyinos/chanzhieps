@@ -39,16 +39,23 @@ $config->allowedTags->front = '<p><span><h1><h2><h3><h4><h5><em><u><strong><br><
 $config->allowedTags->admin = $config->allowedTags->front . '<dd><dt><dl><div><table><td><th><tr><tbody><iframe><style><header><nav><meta>'; // For admin users.
 
 /* Views and themes. */
-$config->views  = ',html,json,xml,mhtml,'; // Supported view types.
+$config->views  = ',html,json,xml,'; // Supported view types.
 
 $config->site = new stdclass();
 $config->site->importantValidate = 'okFile,email';
 
 $config->template = new stdclass();
-$config->template->name          = 'default';    // Supported themes.
-$config->template->theme         = 'default';    // Supported themes.
-$config->template->parser        = 'default';    // Default parser.
-$config->template->customVersion = '';
+$config->template->desktop = new stdclass();
+$config->template->desktop->name  = 'default';   // Supported themes.
+$config->template->desktop->theme = 'default';   // Supported themes.
+$config->template->parser         = 'default';   // Default parser.
+$config->template->customVersion  = '';
+if(RUN_MODE == 'admin')
+{
+    $config->template->mobile = new stdclass();
+    $config->template->mobile->name  = 'mobile';   // Supported themes.
+    $config->template->mobile->theme = 'default';   // Supported themes.
+}
 
 /* Suported languags. */
 $config->langs['zh-cn'] = '简体';
@@ -86,9 +93,6 @@ $config->thanksList['PHP QRCode 1.1.4'] = 'http://phpqrcode.sourceforge.net/';
 $config->thanksList['Smarty 3.1.9'] = 'http://www.smarty.net/';
 $config->thanksList['Snoopy 1.2.4'] = 'http://snoopy.sourceforge.net/';
 $config->thanksList['Spyc 0.5'] = 'http://code.google.com/p/spyc/';
-
-/* View type settings. */ 
-$config->viewPrefix['mhtml'] = 'm.';
 
 /* Module dependence setting. */
 $config->dependence = new stdclass();

@@ -81,6 +81,10 @@ foreach (explode('|', $lang->colorPlates) as $value)
         <?php endif;?>
         <tbody id='blockForm'></tbody>
         <tr>
+          <th><?php echo $lang->block->class;?></th>
+          <td><?php echo html::input('params[class]', '', "class='form-control' placeholder='{$lang->block->placeholder->class}'");?></td>
+        </tr>
+        <tr>
           <th></th>
           <td>
             <div class='form-action'>

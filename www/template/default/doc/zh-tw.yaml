@@ -6,6 +6,7 @@ desc:這是蟬知默認模板
 version:2.5
 chanzhiVersion:2.5
 charge:free
+device:,desktop,
 license:http://www.chanzhi.org/book/chanzhieps/58_license.html
 themes:
    default:默認

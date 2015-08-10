@@ -41,7 +41,7 @@ $lang->ui->noJsTag                = "请填写全局JS代码，不需要&lt;scri
 $lang->ui->setLogoFailed          = "设置Logo失败";
 $lang->ui->noSelectedFile         = "获取上传图片失败，可能是图片大小超出上传限制";
 $lang->ui->notAlloweFileType      = "请选择正确的%s文件";
-$lang->ui->suitableLogoSize       = '最佳高度范围：50px~80px，最佳宽度范围：80px~240px';
+$lang->ui->suitableLogoSize       = '最佳高度范围：%s，最佳宽度范围：%s';
 $lang->ui->exportedSuccess        = '导出成功';
 $lang->ui->deleteThemeSuccess     = '删除主题成功';
 $lang->ui->deleteThemeFail        = '删除主题失败';
@@ -49,6 +49,10 @@ $lang->ui->fileRequired           = '请选择一个文件';
 $lang->ui->importThemeSuccess     = '导入主题成功';
 $lang->ui->packagePathUnwriteable = '上传目录：%s 不可写';
 $lang->ui->selectSourceImage      = '从素材库选择';
+
+$lang->ui->deviceList = new stdclass();
+$lang->ui->deviceList->desktop = "<i class='icon icon-desktop'></i>桌面";
+$lang->ui->deviceList->mobile  = "<i class='icon icon-tablet'></i>移动";
 
 $lang->ui->productViewList[1] = '显示'; 
 $lang->ui->productViewList[0] = '不显示'; 

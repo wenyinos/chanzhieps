@@ -93,6 +93,42 @@ class bookModel extends model
     }
 
     /**
+     * Get orgins tree of node
+     * @param  object $node current node
+     * @return array      
+     */
+    public function getOriginsTree($node)
+    {
+        if($node->type === 'book' || empty($node->origins)) return null;
+
+        $tree = array();
+
+        foreach($node->origins as $originNode)
+        {
+            if($node->id == $originNode->id) continue;
+
+            $subTree = array();
+            $children = $this->getChildren($originNode->id);
+            $subNode = new stdclass();
+            foreach($children as $child)
+            {
+                $childNode = new stdclass();
+                $childNode->id      = $child->id;
+                $childNode->alias   = $child->alias;
+                $childNode->title   = $child->title;
+                $childNode->type    = $child->type;
+                $childNode->current = stripos($node->path, ',' . $child->id . ',') !== false;
+                if($childNode->current) $subNode->current = $childNode;
+                $subTree[] = $childNode;
+            }
+            
+            $subNode->nodes = $subTree;
+            $tree[] = $subNode;
+        }
+        return $tree;
+    }
+
+    /**
      * Get book catalog for front.
      * 
      * @param  int    $nodeID 

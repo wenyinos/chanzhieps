@@ -11,4 +11,10 @@ $(document).ready(function()
             $('.captchaModal').click();
         }   
     }); 
+
+    var $form = $('#editForm');
+    $('.nav-tabs li > a').on('show.bs.tab show.zui.tab', function()
+    {
+        $form.attr('data-tab', $(this).attr('href').replace('#', ''));
+    }).first().tab('show');
 })

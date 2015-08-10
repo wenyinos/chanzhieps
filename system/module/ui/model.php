@@ -21,6 +21,8 @@ class uiModel extends model
      */
     public function getTemplates()
     {
+        $device = helper::getDevice();
+
         $this->app->loadClass('Spyc', true);
         $folders = glob($this->app->getTplRoot() . '*');
         foreach($folders as $folder)
@@ -29,8 +31,9 @@ class uiModel extends model
             $templateName = str_replace($this->app->getTplRoot(), '', $folder);
             $docFile      = $folder . DS . 'doc' . DS . $this->app->getClientLang() . '.yaml';
             if(!is_file($docFile)) continue;
-            $config       = Spyc::YAMLLoadString(file_get_contents($docFile));
+            $config = Spyc::YAMLLoadString(file_get_contents($docFile));
             if(empty($config)) continue;
+            if(isset($config['device']) and strpos($config['device'], ",{$device},") === false) continue;;
             $templates[$templateName] = $config;
             if(!isset($templates[$templateName]['themes']))
             {
@@ -132,8 +135,9 @@ class uiModel extends model
 
         if($section == 'logo')
         {
-            $template = $this->config->template->name; 
-            $theme    = $this->post->theme == 'all' ? 'all' : $this->config->template->theme; 
+            $device = helper::getDevice();
+            $template = $this->config->template->{$device}->name; 
+            $theme    = $this->post->theme == 'all' ? 'all' : $this->config->template->{$device}->theme; 
             $logo = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();
             if(!isset($logo->$template)) $logo->$template = new stdclass();
             $logo->$template->$theme = $setting; 

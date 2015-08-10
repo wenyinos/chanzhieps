@@ -22,7 +22,12 @@
           <td><?php echo html::file('files', "class='form-control'");?></td>
           <td><?php echo html::select('theme', $lang->ui->logoList, '', "class='form-control'");?></td>
           <td><?php echo html::submitButton();?><?php if(isset($logo->webPath)) commonModel::printLink('ui', 'deleteLogo', '', $lang->reset, "class='btn'");?></td>
-          <td><strong class='text-info'><?php echo $lang->ui->suitableLogoSize; ?></strong></td>
+          <td>
+            <strong class='text-info'>
+              <?php if($this->device == 'desktop') printf($lang->ui->suitableLogoSize, '50px-80px', '80px-240px');?>
+              <?php if($this->device == 'mobile') printf($lang->ui->suitableLogoSize, '<50px', '50px-200px');?>
+            </strong>
+          </td>
         </tr>
         <tr><td colspan='4'><?php if(isset($logo->webPath)) echo html::image($logo->webPath, "class='logo'");?></td></tr>
       </table>

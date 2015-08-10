@@ -1,3 +1,5 @@
+<?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
+<div class='block-region region-all-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'all', 'bottom');?></div>
 <div class='appinfo'>
   <div class='copyright'>
     <?php
@@ -37,5 +39,7 @@ $extHookRule  = $siteExtPath . 'footer.front.*.hook.php';
 $extHookFiles = glob($extHookRule);
 if($extHookFiles) foreach($extHookFiles as $extHookFile) include $extHookFile;
 ?>
+<div class='block-region region-footer hidden'><?php $this->loadModel('block')->printRegion($layouts, 'all', 'footer');?></div>
+<?php if(commonModel::isAvailable('order')) include TPL_ROOT . 'common/cart.html.php';?>
 </body>
 </html>

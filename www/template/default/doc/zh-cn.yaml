@@ -6,6 +6,7 @@ desc:这是蝉知企业门户系统默认模板
 version:2.5
 chanzhiVersion:2.5
 charge:free
+device:,desktop,
 license:http://www.chanzhi.org/book/chanzhieps/58_license.html
 themes:
    default:默认

@@ -146,6 +146,14 @@ class control
     public $viewPrefix;
 
     /**
+     * The device of visit website.
+     * 
+     * @var string   
+     * @access public
+     */
+    public $device;
+
+    /**
      * The construct function.
      *
      * 1. global the global vars, refer them by the class member such as $this->app.
@@ -165,6 +173,7 @@ class control
         $this->dbh      = $dbh;
         $this->viewType = $this->app->getViewType();
 
+        $this->setCurrentDevice();
         $this->setModuleName($moduleName);
         $this->setMethodName($methodName);
         $this->setTplRoot();
@@ -217,7 +226,7 @@ class control
      */
     public function setTplRoot()
     {
-        if(!defined('TPL_ROOT')) define('TPL_ROOT', $this->app->getTplRoot() . $this->config->template->name . DS . 'view' . DS);
+        if(!defined('TPL_ROOT')) define('TPL_ROOT', $this->app->getTplRoot() . $this->config->template->{$this->device}->name . DS . 'view' . DS);
     }
 
     /**
@@ -273,8 +282,25 @@ class control
      */
     public function setViewPrefix()
     {
+        global $app, $config;
         $this->viewPrefix = '';
-        if(isset($this->config->viewPrefix[$this->viewType])) $this->viewPrefix = $this->config->viewPrefix[$this->viewType];
+        if(RUN_MODE == 'front')
+        {
+            /* Detect mobile. */
+            $mobile = $app->loadClass('mobile');
+            if($mobile->isMobile() and !isset($config->template->mobile)) $this->viewPrefix = 'm.';
+        }
+    }
+
+    /**
+     * Set current device of visit website.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setCurrentDevice()
+    {
+        $this->device = helper::getDevice();
     }
 
     //-------------------- View related methods --------------------//
@@ -307,6 +333,8 @@ class control
         else
         {
             /* If in front mode, view file is in www/template path. */
+            $mainViewFile = TPL_ROOT . $moduleName . DS . $this->viewPrefix . "{$methodName}.{$viewType}.php";
+            if($this->viewPrefix == 'm.' and !is_file($mainViewFile)) $this->viewPrefix = '';
             $mainViewFile = TPL_ROOT . $moduleName . DS . $this->viewPrefix . "{$methodName}.{$viewType}.php";
         }
 

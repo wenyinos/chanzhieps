@@ -41,7 +41,7 @@ $lang->ui->noJsTag                = "Please write base JS file code, No &lt;scri
 $lang->ui->setLogoFailed          = "Set logo failed.";
 $lang->ui->noSelectedFile         = "No file selected.";
 $lang->ui->notAlloweFileType      = "Please select %s files.";
-$lang->ui->suitableLogoSize       = 'Suitable height: 50px~80p, width: 80px~240px';
+$lang->ui->suitableLogoSize       = 'Suitable height: %s, width: %s';
 $lang->ui->exportedSuccess        = 'Export Successfully';
 $lang->ui->deleteThemeSuccess     = 'Delete theme successfully';
 $lang->ui->deleteThemeFail        = 'Delete theme failed';
@@ -49,6 +49,10 @@ $lang->ui->fileRequired           = 'Please select file';
 $lang->ui->importThemeSuccess     = 'Import theme successfully';
 $lang->ui->packagePathUnwriteable = 'Package directory is not writable.';
 $lang->ui->selectSourceImage      = 'Select image from source';
+
+$lang->ui->deviceList = new stdclass();
+$lang->ui->deviceList->desktop = "<i class='icon icon-desktop'></i>Desktop";
+$lang->ui->deviceList->mobile  = "<i class='icon icon-tablet'></i>Mobile";
 
 $lang->ui->productViewList[1] = 'Show'; 
 $lang->ui->productViewList[0] = 'Hide'; 

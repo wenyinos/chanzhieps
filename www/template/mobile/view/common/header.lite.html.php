@@ -2,8 +2,8 @@
 <?php
 $webRoot            = $config->webRoot;
 $jsRoot             = $webRoot . "js/";
-$templateName       = $this->config->template->name;
-$themeName          = $this->config->template->theme;
+$templateName       = $this->config->template->{$this->device}->name;
+$themeName          = $this->config->template->{$this->device}->theme;
 $templateRoot       = $webRoot . "template/{$templateName}/";
 $templateThemeRoot  = "{$templateRoot}theme/";
 $templateCommonRoot = "{$templateThemeRoot}common/";
@@ -48,12 +48,12 @@ $thisMethodName     = $this->app->getMethodName();
   $siteCustomCssFile = $this->app->getDataRoot() . 'css' . DS . $config->site->code . DS . $templateName . DS . $themeName . DS . 'style.css';
   if($config->multi && file_exists($siteCustomCssFile))
   {
-      css::import(sprintf($webRoot . 'data/css/%s/%s/%s/style.css?' . $this->config->template->customVersion, $config->site->code, $config->template->name, $config->template->theme));
+      css::import(sprintf($webRoot . 'data/css/%s/%s/%s/style.css?' . $this->config->template->customVersion, $config->site->code, $config->template->{$this->device}->name, $config->template->{$this->device}->theme));
   }
   else
   {
       $customCssFile = $this->app->getDataRoot() . 'css' . DS . $templateName . DS . $themeName . DS . 'style.css';
-      if(file_exists($customCssFile)) css::import(sprintf($webRoot . 'data/css/%s/%s/style.css?' . $this->config->template->customVersion, $config->template->name, $config->template->theme));
+      if(file_exists($customCssFile)) css::import(sprintf($webRoot . 'data/css/%s/%s/style.css?' . $this->config->template->customVersion, $config->template->{$this->device}->name, $config->template->{$this->device}->theme));
        
   }
 

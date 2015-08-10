@@ -1400,4 +1400,23 @@ class upgradeModel extends model
 
         return true;
     }
+
+    /**
+     * Fix template for device.
+     * 
+     * @access public
+     * @return void
+     */
+    public function fixTemplate()
+    {
+        $template = $this->dao->select('value')->from(TABLE_CONFIG)->where('section')->eq('template')->andWhere('`key`')->eq('name')->fetch('value');
+        $theme    = $this->dao->select('value')->from(TABLE_CONFIG)->where('section')->eq('template')->andWhere('`key`')->eq('theme')->fetch('value');
+
+        $currentTemplate = new stdclass();
+        $currentTemplate->name    = $template;
+        $currentTemplate->theme   = $theme;
+        $setting = helper::jsonEncode($currentTemplate);
+
+        return $this->loadModel('setting')->setItem('system.common.template.desktop', $setting);
+    }
 }

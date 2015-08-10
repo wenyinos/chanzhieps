@@ -18,9 +18,11 @@
       <h5 class='modal-title'><?php echo $lang->aboutUs?></h5>
     </div>
     <div class='modal-body'>
+      <div class='block-region region-top no-padding'><?php $this->block->printRegion($layouts, 'company_index', 'top');?></div>
       <div class='article-content'>
         <?php echo $company->content;?>
       </div>
+      <div class='block-region region-bottom no-padding'><?php $this->block->printRegion($layouts, 'company_index', 'bottom');?></div>
     </div>
   </div>
 </div>

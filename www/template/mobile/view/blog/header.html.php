@@ -1,7 +1,8 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
 <?php include TPL_ROOT . 'common/header.lite.html.php';?>
 
-<?php $this->block->printRegion($layouts, 'all', 'top');?>
+<div class='block-region region-all-top'><?php $this->block->printRegion($layouts, 'all', 'top');?></div>
+
 <?php $topNavs = $this->loadModel('nav')->getNavs('top');?>
 <style>
 .appbar-title-label {
@@ -13,6 +14,10 @@
     <a href='<?php echo $webRoot;?>'><?php
       if(isset($this->config->site->logo))
       {
+          $template    = $this->config->template->{$this->device}->name;
+          $theme       = $this->config->template->{$this->device}->theme;
+          $logoSetting = json_decode($this->config->site->logo);
+          $logo = isset($logoSetting->$template->$theme) ? $logoSetting->$template->$theme : (isset($logoSetting->$template->all) ? $logoSetting->$template->all : false);
           echo html::image($logo->webPath, "class='logo' title='{$this->config->company->name}'");
       }
       else
@@ -61,3 +66,7 @@
     </ul>
   </div>
 </nav>
+
+<div class='block-region region-all-banner'>
+  <?php $this->block->printRegion($layouts, 'all', 'banner');?>
+</div>

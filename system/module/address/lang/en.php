@@ -7,3 +7,4 @@ $lang->address->contact = 'contact';
 
 $lang->address->browse = 'Address List';
 $lang->address->create = 'Add new Address';
+$lang->address->edit   = 'Edit address';

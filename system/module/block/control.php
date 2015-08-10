@@ -22,7 +22,7 @@ class block extends control
      */
     public function admin($recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
-        $template = $this->config->template->name;
+        $template = $this->config->template->{$this->device}->name;
         $this->block->loadTemplateLang($template);
 
         $this->session->set('blockList', $this->app->getURI());
@@ -44,7 +44,7 @@ class block extends control
      */
     public function pages()
     {
-        $template = $this->config->template->name;
+        $template = $this->config->template->{$this->device}->name;
         $this->block->loadTemplateLang($template);
 
         $this->view->template = $template;
@@ -60,7 +60,7 @@ class block extends control
      */
     public function create($type = 'html')
     {
-        $template = $this->config->template->name;
+        $template = $this->config->template->{$this->device}->name;
         $this->block->loadTemplateLang($template);
 
         if($type == 'phpcode')
@@ -83,7 +83,7 @@ class block extends control
 
         $this->view->type     = $type;
         $this->view->template = $template;
-        $this->view->theme    = $this->config->template->theme;
+        $this->view->theme    = $this->config->template->{$this->device}->theme;
         $this->display();
     }
 
@@ -97,7 +97,8 @@ class block extends control
      */
     public function edit($blockID, $type = '')
     {
-        $template = $this->config->template->name;
+        $template = $this->config->template->{$this->device}->name;
+        $theme    = $this->config->template->{$this->device}->theme;
         $this->block->loadTemplateLang($template);
 
         if(!$blockID) $this->locate($this->inlink('admin'));
@@ -114,13 +115,13 @@ class block extends control
         if($_POST)
         {
             if($type == 'phpcode' and !$canCreatePHP) $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => dao::getError()));
-            $this->block->update($template);
+            $this->block->update($template, $theme);
             if(!dao::isError()) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
         $this->view->template = $template;
-        $this->view->theme    = $this->config->template->theme;
+        $this->view->theme    = $theme;
         $this->view->block    = $this->block->getByID($blockID);
         $this->view->type     = $this->get->type ? $this->get->type : $this->view->block->type;
         $this->display();
@@ -136,8 +137,8 @@ class block extends control
      */
     public function setRegion($page, $region)
     {
-        $template = $this->config->template->name;
-        $theme    = $this->config->template->theme;
+        $template = $this->config->template->{$this->device}->name;
+        $theme    = $this->config->template->{$this->device}->theme;
         $this->block->loadTemplateLang($template);
 
         if($_SERVER['REQUEST_METHOD'] == 'POST')

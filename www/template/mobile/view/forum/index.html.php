@@ -12,14 +12,14 @@
 ?>
 <?php include TPL_ROOT . 'common/header.html.php';?>
 <?php echo $common->printPositionBar($this->app->getModuleName());?>
-
+<div class='block-region region-top'><?php $this->loadModel('block')->printRegion($layouts, 'forum_index', 'top');?></div>
 <?php foreach($boards as $parentBoard):?>
 <div class='panel-section'>
   <div class='panel-heading'>
     <div class='title text-primary'><i class='icon icon-comments'></i> <strong><?php echo $parentBoard->name;?></strong></div>
   </div>
   <div class='panel-body'>
-    <div class="cards cards-list">
+    <div class='cards cards-list'>
     <?php foreach($parentBoard->children as $childBoard):?>
       <?php
       $isNewBoard = $this->forum->isNew($childBoard);
@@ -36,12 +36,12 @@
         <div class='table-layout'>
           <div class='table-cell'>
             <div class='card-heading'>
-              <h5>
+              <h4>
                 <?php
                 echo $childBoard->name;
                 if(!empty($moderators)) printf('<small>' . $lang->forum->lblOwner . '</small>', $moderators);
                 ?>
-              </h5>
+              </h4>
             </div>
             <div class='card-content text-muted small'><?php echo $childBoard->desc;?></div>
             <?php
@@ -63,5 +63,5 @@
   </div>
 </div>
 <?php endforeach;?>
-
+<div class='block-region region-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'forum_index', 'bottom');?></div>
 <?php include TPL_ROOT . 'common/footer.html.php';?>

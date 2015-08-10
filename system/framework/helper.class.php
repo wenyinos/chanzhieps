@@ -479,50 +479,6 @@ class helper
     }
 
     /**
-     * Set viewType.
-     * 
-     * @static
-     * @access public
-     * @return void
-     */
-    public static function setViewType()
-    {
-        global $config, $app;
-        if($config->requestType == 'PATH_INFO')
-        {
-            $pathInfo = $app->getPathInfo('PATH_INFO');
-            if(empty($pathInfo)) $pathInfo = $app->getPathInfo('ORIG_PATH_INFO');
-            if(!empty($pathInfo))
-            {
-                $dotPos = strrpos($pathInfo, '.');
-                if($dotPos)
-                {
-                    $viewType = substr($pathInfo, $dotPos + 1);
-                }
-                else
-                {
-                    $config->default->view = $config->default->view == 'mhtml' ? 'html' : $config->default->view;
-                }
-            }
-        }
-        elseif($config->requestType == 'GET')
-        {
-            if(isset($_GET[$config->viewVar]))
-            {
-                $viewType = $_GET[$config->viewVar]; 
-            }
-            else
-            {
-                /* Set default view when url has not module name. such as only domain. */
-                $config->default->view = ($config->default->view == 'mhtml' and isset($_GET[$config->moduleVar])) ? 'html' : $config->default->view;
-            }
-        }
-
-        if(isset($viewType) and strpos($config->views, ',' . $viewType . ',') === false) $viewType = $config->default->view;
-        $app->viewType = isset($viewType) ? $viewType : $config->default->view;
-    }
-
-    /**
      * Header 301 Moved Permanently.
      * 
      * @param  string    $locate 
@@ -708,6 +664,33 @@ class helper
 
         $str = str_shuffle($str); 
         return substr($str,0,$length); 
+    }
+
+    /**
+     * Get device.
+     * 
+     * @access public
+     * @return void
+     */
+    public static function getDevice()
+    {
+        global $app, $config;
+        if(RUN_MODE == 'admin')
+        {
+            if($app->session->device) return $app->session->device;
+            return 'desktop';
+        }
+        elseif(RUN_MODE == 'front')
+        {
+            /* Detect mobile. */
+            $mobile = $app->loadClass('mobile');
+            if($mobile->isMobile())
+            {
+                if(!isset($config->template->mobile)) return 'desktop';
+                return 'mobile';
+            }
+        }
+        return 'desktop';
     }
 }
 

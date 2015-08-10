@@ -76,6 +76,30 @@ class cart extends control
     }
 
     /**
+     * Get count of products in cart
+     * @access public
+     * @return void
+     */
+    public function count()
+    {
+        /* Get info from cookie. */
+        $cart  = $this->cart->getListByCookie();
+        $count = count($cart);
+
+        /* Save cookie's cart info. */
+        if($this->app->user->account != 'guest')
+        {
+            if(count($cart) > 0)
+            {
+                foreach($cart as $product) $this->cart->add($product->product, $product->count);
+                setcookie('cart', '[]', time() + 60 * 60 * 24);
+            }
+            $count = $this->dao->select('count(*) as count')->from(TABLE_CART)->where('account')->eq($this->app->user->account)->fetch('count');
+        }
+        $this->send(array('result' => 'success', 'count' => (int) $count));
+    }
+
+    /**
      * Delete product fron cart.
      * 
      * @param  int    $product 

@@ -51,11 +51,12 @@ class blockModel extends model
      */
     public function getPageBlocks($module, $method)
     {
-        $pages      = "all,{$module}_{$method}";
+        $device = helper::getDevice();
+        $pages  = "all,{$module}_{$method}";
         $rawLayouts = $this->dao->select('*')->from(TABLE_LAYOUT)
             ->where('page')->in($pages)
-            ->andWhere('template')->eq(!empty($this->config->template->name) ? $this->config->template->name : 'default')
-            ->andWhere('theme')->eq(!empty($this->config->template->theme) ? $this->config->template->theme : 'default')
+            ->andWhere('template')->eq(!empty($this->config->template->{$device}->name) ? $this->config->template->{$device}->name : 'default')
+            ->andWhere('theme')->eq(!empty($this->config->template->{$device}->theme) ? $this->config->template->{$device}->theme : 'default')
             ->fetchGroup('page', 'region');
 
         $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->fetchAll('id');
@@ -383,7 +384,7 @@ class blockModel extends model
      * @access public
      * @return bool
      */
-    public function update($template)
+    public function update($template, $theme)
     {
         $block = $this->getByID($this->post->blockID);
 
@@ -392,26 +393,26 @@ class blockModel extends model
 
         $gpcOn = version_compare(phpversion(), '5.4', '<') and get_magic_quotes_gpc();
 
-        if(isset($data->params))
+        if(!isset($data->params)) $data->params = array();
+        $data->params['custom'][$theme]['css'] = $data->css;
+        $data->params['custom'][$theme]['js']  = $data->js;
+        foreach($data->params as $field => $value)
         {
-            foreach($data->params as $field => $value)
-            {
-                if($field == 'category' and is_array($value)) $data->params[$field] = join($value, ',');
-            }
-
-            if(isset($block->content->custom))
-            {
-                foreach($block->content->custom as $field => $value)
-                {
-                    if(!isset($data->params['custom'][$field])) $data->params['custom'][$field] = $value;
-                }
-            }
-
-            if($this->post->content) $data->params['content'] = $gpcOn ? stripslashes($data->content) : $data->content;
-            $data->content = helper::jsonEncode($data->params);
+            if($field == 'category' and is_array($value)) $data->params[$field] = join($value, ',');
         }
 
-        $this->dao->update(TABLE_BLOCK)->data($data, 'params,uid,blockID')
+        if(isset($block->content->custom))
+        {
+            foreach($block->content->custom as $field => $value)
+            {
+                if(!isset($data->params['custom'][$field])) $data->params['custom'][$field] = $value;
+            }
+        }
+
+        if($this->post->content) $data->params['content'] = $gpcOn ? stripslashes($data->content) : $data->content;
+        $data->content = helper::jsonEncode($data->params);
+
+        $this->dao->update(TABLE_BLOCK)->data($data, 'params,uid,blockID,css,js')
             ->batchCheck($this->config->block->require->edit, 'notempty')
             ->autoCheck()
             ->where('id')->eq($this->post->blockID)
@@ -557,9 +558,10 @@ class blockModel extends model
                 }
             }
 
-            $template = $this->config->template->name;
-            $theme    = $this->config->template->theme;
-            $tplPath = $this->app->getTplRoot() . $template . DS . 'view' . DS . 'block' . DS;
+            $device   = helper::getDevice();
+            $template = $this->config->template->{$device}->name;
+            $theme    = $this->config->template->{$device}->theme;
+            $tplPath  = $this->app->getTplRoot() . $template . DS . 'view' . DS . 'block' . DS;
 
             /* First try block/ext/sitecode/view/block/ */
             $extBlockRoot = $tplPath . "/ext/_{$this->config->site->code}/";
@@ -589,16 +591,17 @@ class blockModel extends model
             }
 
             $blockClass = "block-{$blockCategory}-{$block->type}";
-            if(isset($block->borderless) and $block->borderless) $blockClass .= 'panel-borderless';
+            if(isset($block->borderless) and $block->borderless) $blockClass .= ' panel-borderless';
             if(isset($block->titleless) and $block->titleless) $blockClass  .= ' panel-titleless';
 
             $content = is_object($block->content) ? $block->content : json_decode($block->content);
+            if(isset($content->class)) $blockClass .= ' ' . $content->class;
 
             if(isset($this->config->block->defaultIcons[$block->type])) 
             {
                 $defaultIcon = $this->config->block->defaultIcons[$block->type];
                 $iconClass   = isset($content->icon) ? $content->icon : $defaultIcon;
-                $icon        = $iconClass ? "<i class='{$iconClass}'></i> " : "" ;
+                $icon        = $iconClass ? "<i class='icon {$iconClass}'></i> " : "" ;
             }
 
             $style  = '<style>';
@@ -619,12 +622,18 @@ class blockModel extends model
                 $style .= isset($content->custom->$theme->paddingRight) ? '#block' . $block->id . ' .panel-body' . '{padding-right:' . $content->custom->$theme->paddingRight . 'px !important;}' : '';
                 $style .= isset($content->custom->$theme->paddingBottom) ? '#block' . $block->id . ' .panel-body' . '{padding-bottom:' . $content->custom->$theme->paddingBottom . 'px !important;}' : '';
                 $style .= isset($content->custom->$theme->paddingLeft) ? '#block' . $block->id . ' .panel-body' . '{padding-left:' . $content->custom->$theme->paddingLeft . 'px !important;}' : '';
+                if(!empty($content->custom->$theme->css))
+                {
+                    $style .= str_replace('#blockID', "#block{$block->id}", $content->custom->$theme->css);
+                }
             }
             $style .= '</style>';
+            $script = !empty($content->custom->$theme->js) ? "<script language='Javascript'>" . $content->custom->$theme->js . "</script>" : '';
 
             echo $containerHeader;
             if(file_exists($blockFile)) include $blockFile;
             echo $style;
+            echo $script;
             echo $containerFooter;
 
             if($withGrid) echo "</div>";
@@ -640,7 +649,6 @@ class blockModel extends model
      */
     public function loadTemplateLang($template)
     {
-        $this->config->template->name = $template;
         $this->app->loadLang('block');
     }
 }

@@ -1534,10 +1534,15 @@ class router
             $langFiles = array_merge(array($mainLangFile), $extLangFiles);
         }
 
-        $langPath     = $this->getTplRoot() . $this->config->template->name . DS . 'lang' . DS . $moduleName . DS; 
-        $templateLangFile = $langPath . $this->clientLang . '.php';
+        global $app;
+        if(is_object($app))
+        {
+            $device = helper::getDevice();
+            $langPath = $this->getTplRoot() . $this->config->template->{$device}->name . DS . 'lang' . DS . $moduleName . DS; 
+            $templateLangFile = $langPath . $this->clientLang . '.php';
 
-        if(file_exists($templateLangFile)) $langFiles[] = $templateLangFile;
+            if(file_exists($templateLangFile)) $langFiles[] = $templateLangFile;
+        }
 
         global $lang;
         if(!is_object($lang)) $lang = new language();
