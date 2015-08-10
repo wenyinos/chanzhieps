@@ -545,7 +545,7 @@ class packageModel extends model
         {
             if(substr($path, 0, 6) == 'system') $groupedPaths['system'][]   = $path;
             if(substr($path, 0, 3) == 'www')    $groupedPaths['www'][]      = $path;
-            if($type == 'template')             $groupedPaths['template'][] = $path;
+            if($type == 'template' and (substr($path, 0, 3) != 'www') and (substr($path, 0, 6) != 'system')) $groupedPaths['template'][] = $path;
         }
 
         foreach($groupedPaths as $baseDir => $pathes)
@@ -555,7 +555,7 @@ class packageModel extends model
                 if($path == 'db' or $path == 'doc' or $path == 'hook') continue;
                 if($baseDir == 'system') $path = dirname($appRoot) . DS . $path;
                 if($baseDir == 'www')    $path = $this->app->getWwwRoot() . substr($path, 4);
-                if($type == 'template')  $path = $this->app->getWwwRoot() . 'template' . DS . $package . DS . $path;
+                if($baseDir == 'template' and $type == 'template')  $path = $this->app->getWwwRoot() . 'template' . DS . $package . DS . $path;
 
                 if(is_dir($path))
                 {
@@ -670,6 +670,7 @@ class packageModel extends model
     {
         $appRoot    = $this->app->getAppRoot();
         $packageDir = $type . DS . $package . DS;
+        if($type == 'template') $packageDir = 'ext' . DS . $package . DS;
 
         $systemPathes   = array();
         $wwwPathes      = array();
