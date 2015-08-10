@@ -50,6 +50,10 @@ $lang->ui->importThemeSuccess     = 'Import theme successfully';
 $lang->ui->packagePathUnwriteable = 'Package directory is not writable.';
 $lang->ui->selectSourceImage      = 'Select image from source';
 
+$lang->ui->deviceList = new stdclass();
+$lang->ui->deviceList->desktop = "<i class='icon icon-desktop'></i>Desktop";
+$lang->ui->deviceList->mobile  = "<i class='icon icon-tablet'></i>Mobile";
+
 $lang->ui->productViewList[1] = 'Show'; 
 $lang->ui->productViewList[0] = 'Hide'; 
 
