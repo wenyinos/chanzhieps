@@ -114,7 +114,7 @@ class orderModel extends model
             $goods->productName = $product->name; 
             $goods->count       = $this->post->count[$product->id];
 
-            if($this->config->product->stock)
+            if(isset($this->config->product->stock) && $this->config->product->stock)
             {
                 if($product->amount < $goods->count)
                 {
@@ -367,7 +367,7 @@ class orderModel extends model
      * @access public
      * @return string
      */
-    public function printActions($order)
+    public function printActions($order, $btnLink = false)
     {
         if(RUN_MODE == 'admin' and $order->status == 'normal')
         {
@@ -385,17 +385,34 @@ class orderModel extends model
 
         if(RUN_MODE == 'front' and $order->status == 'normal')
         {
-            /* Pay link. */
-            if($order->payment != 'COD' and $order->payStatus != 'paid') echo html::a($this->createPayLink($order), $this->lang->order->pay, "target='_blank'");
+            if($btnLink)
+            {
+                /* Pay link. */
+                if($order->payment != 'COD' and $order->payStatus != 'paid') echo html::a($this->createPayLink($order), $this->lang->order->pay, "target='_blank' class='btn-go2pay btn warning'");
 
-            /* Track link. */
-            if($order->deliveryStatus != 'not_send') echo html::a(inlink('track', "orderID={$order->id}"), $this->lang->order->track, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' data-toggle='modal'") . '<br>';
+                /* Track link. */
+                if($order->deliveryStatus != 'not_send') echo html::a(inlink('track', "orderID={$order->id}"), $this->lang->order->track, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' data-toggle='modal' class='btn btn-link'");
 
-            /* Confirm link. */
-            if($order->deliveryStatus == 'send') echo html::a('javascript:;', $this->lang->order->confirmReceived, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' class='confirmDelivery'");
+                /* Confirm link. */
+                if($order->deliveryStatus == 'send') echo html::a('javascript:;', $this->lang->order->confirmReceived, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' class='confirmDelivery btn primary'");
 
-            /* Cancel link. */
-            if($order->deliveryStatus == 'not_send' and $order->payStatus != 'paid' and $order->status == 'normal') echo html::a('javascript:;', $this->lang->order->cancel, "data-rel='" . helper::createLink('order', 'cancel', "orderID=$order->id") . "' class='cancelLink'");
+                /* Cancel link. */
+                if($order->deliveryStatus == 'not_send' and $order->payStatus != 'paid' and $order->status == 'normal') echo html::a('javascript:;', $this->lang->order->cancel, "data-rel='" . helper::createLink('order', 'cancel', "orderID=$order->id") . "' class='cancelLink btn btn-link'");
+            }
+            else
+            {
+                /* Pay link. */
+                if($order->payment != 'COD' and $order->payStatus != 'paid') echo html::a($this->createPayLink($order), $this->lang->order->pay, "target='_blank' class='btn-go2pay'");
+
+                /* Track link. */
+                if($order->deliveryStatus != 'not_send') echo html::a(inlink('track', "orderID={$order->id}"), $this->lang->order->track, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' data-toggle='modal'") . '<br>';
+
+                /* Confirm link. */
+                if($order->deliveryStatus == 'send') echo html::a('javascript:;', $this->lang->order->confirmReceived, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' class='confirmDelivery'");
+
+                /* Cancel link. */
+                if($order->deliveryStatus == 'not_send' and $order->payStatus != 'paid' and $order->status == 'normal') echo html::a('javascript:;', $this->lang->order->cancel, "data-rel='" . helper::createLink('order', 'cancel', "orderID=$order->id") . "' class='cancelLink'");
+            }
         }
    }
 

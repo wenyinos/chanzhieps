@@ -43,6 +43,7 @@ class cart extends control
     public function browse()
     {
         $this->app->loadLang('product');
+        $this->app->loadConfig('product');
         $this->app->loadLang('order');
         $this->view->currencySymbol = $this->lang->product->currencySymbols[$this->config->product->currency];
         $this->view->title    = $this->lang->cart->browse;

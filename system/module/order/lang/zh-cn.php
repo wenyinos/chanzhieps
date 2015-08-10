@@ -37,13 +37,14 @@ $lang->order->return         = '收款';
 $lang->order->delivery       = '发货';
 $lang->order->finish         = '完成';
 $lang->order->confirm        = '确认订单信息';
-$lang->order->selectProducts = "选择了<strong class='text-danger'>%s</strong>件商品，";
+$lang->order->selectProducts = "选择了 <strong class='text-danger'>%s</strong> 件商品，";
 $lang->order->totalToPay     = "共计：<strong id='amount' class='text-danger'>%s</strong>";
 $lang->order->payInfo        = "%s %s 商品订单";
 $lang->order->track          = '查看物流';
 $lang->order->life           = '订单跟踪';
 $lang->order->days           = '天';
 $lang->order->deliveryInfo   = '查看详情';
+$lang->order->backToCart     = '返回购物车修改';
 
 $lang->order->confirmLimit         = '确认收货周期';
 $lang->order->confirmReceived      = '确认收货';

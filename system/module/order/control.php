@@ -214,6 +214,7 @@ class order extends control
         $this->view->pager  = $pager;
 
         $this->app->loadLang('product');
+        $this->app->loadConfig('product');
         $this->view->currencySymbol = $this->lang->product->currencySymbols[$this->config->product->currency];
 
         $this->view->title = $this->lang->order->browse;

@@ -1,0 +1,6 @@
+.input-number {width: 120px;}
+.card .thumbnail-cell {padding-left: 10px; padding-top: 5px; max-width: 200px; min-width: 100px;}
+.media-placeholder {font-size: 16px; min-height: 70px; max-height: 100px;}
+.table-layout > tbody > tr > th {width: 50px;}
+
+.panel-body + .panel-body {margin-top: 10px;}

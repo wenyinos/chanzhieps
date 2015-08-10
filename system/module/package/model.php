@@ -1155,6 +1155,23 @@ class packageModel extends model
 
          $this->dao->delete()->from(TABLE_BLOCK)->where('originID')->in($blocks2Delete)->exec();
          $this->dao->update(TABLE_BLOCK)->set('originID')->eq('0')->exec();
+         $custom = json_decode($this->config->template->custom);
+         $css = $custom->{$packageInfo->template}->{$packageInfo->code}->css;
+         $js  = $custom->{$packageInfo->template}->{$packageInfo->code}->js;
+         foreach($blockOptions as $originID => $blockID)
+         {
+            $css = str_replace('#block' . $originID . ",", '#block' . $blockID . ',', $css);
+            $css = str_replace('#block' . $originID . " ", '#block' . $blockID . ' ', $css);
+            $css = str_replace('#block' . $originID . "{", '#block' . $blockID . '{', $css);
+            $js  = str_replace('#block' . $originID . ",", '#block' . $blockID . ',', $js);
+            $js  = str_replace('#block' . $originID . " ", '#block' . $blockID . ' ', $js);
+            $js  = str_replace('#block' . $originID . "{", '#block' . $blockID . '{', $js);
+         }
+
+         $custom->{$packageInfo->template}->{$packageInfo->code}->css = $css;
+         $custom->{$packageInfo->template}->{$packageInfo->code}->js  = $js;
+         $custom = json_encode($custom);
+         return $this->loadModel('setting')->setItems('system.common.template', array('custom' => $custom));
      }
 
      /**

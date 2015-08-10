@@ -21,7 +21,7 @@ $(function()
                 {
                     $count.addClass('twinkle');
                     setTimeout(function(){$count.removeClass('twinkle')}, 200);
-                    if(window.v && window.v.addToCartSuccess) $.messager.success(window.v.addToCartSuccess + "<div><button type='button' class='btn success dismiss' data-toggle='modal' data-remote='<?php echo $this->createLink('cart', 'browse');?>'>" + window.v.gotoCart + " <i class='icon-arrow-right'></i></button><div class='msger-cart-count'><i class='icon icon-shopping-cart icon-s3'></i><strong class='cart-count badge'>" + data.count + "</strong></div></div>", {time: 10000, cssClass: 'msger-cart'});
+                    if(window.v && window.v.addToCartSuccess) $.messager.success(window.v.addToCartSuccess + "<div><a class='btn success dismiss' href='<?php echo $this->createLink('cart', 'browse');?>'>" + window.v.gotoCart + " <i class='icon-arrow-right'></i></a><div class='msger-cart-count'><i class='icon icon-shopping-cart icon-s3'></i><strong class='cart-count badge'>" + data.count + "</strong></div></div>", {time: 10000, cssClass: 'msger-cart'});
                 }
             }
         });
