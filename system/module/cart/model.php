@@ -48,13 +48,14 @@ class cartModel extends model
      */
     public function getListByAccount($account = '')
     {
-        $addedProducts = $this->dao->select('*')->from(TABLE_CART)->where('account')->eq($account)->fetchAll('product');
-        if($account == 'guest') $addedProducts = $this->getListByCookie();
+        $goodsInDb     = $this->dao->select('*')->from(TABLE_CART)->where('account')->eq($account)->fetchAll('product');
+        $goodsInCookie = $this->getListByCookie();
+        $goodsList = (array) $goodsInDb + (array) $goodsInCookie;
 
         /* Get products(use groupBy to distinct products).  */
         $products = $this->dao->select('t1.*, t2.category')->from(TABLE_PRODUCT)->alias('t1')
             ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
-            ->where('t1.id')->in(array_keys($addedProducts))
+            ->where('t1.id')->in(array_keys($goodsList))
             ->andWhere('t2.type')->eq('product')
             ->beginIF(RUN_MODE == 'front')->andWhere('t1.status')->eq('normal')->fi()
             ->groupBy('t2.id')
@@ -79,7 +80,7 @@ class cartModel extends model
         /* Assign images to it's product. */
         foreach($products as $product)
         {
-            $product->count = $addedProducts[$product->id]->count;
+            $product->count = $goodsList[$product->id]->count;
             if(empty($images[$product->id])) continue;
             $product->image = new stdclass();
             if(isset($images[$product->id]))  $product->image->list = $images[$product->id];

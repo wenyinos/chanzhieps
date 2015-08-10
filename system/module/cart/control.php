@@ -59,20 +59,19 @@ class cart extends control
      */
     public function printtopbar()
     {
-        /* Get info from cookie. */
-        $cart  = $this->cart->getListByCookie();
-        $count = count($cart);
+        $count = 0;
 
-        /* Save cookie's cart info. */
+        $goodsInCookie = $this->cart->getListByCookie();
+
         if($this->app->user->account != 'guest')
         {
-            if(count($cart) > 0)
-            {
-                foreach($cart as $product) $this->cart->add($product->product, $product->count);
-                setcookie('cart', '[]', time() + 60 * 60 * 24);
-            }
-            $count = $this->dao->select('count(*) as count')->from(TABLE_CART)->where('account')->eq($this->app->user->account)->fetch('count');
+            $count = $this->dao->select('count(*) as count')->from(TABLE_CART)
+                ->where('account')->eq($this->app->user->account)
+                ->beginIf(!empty($goodsInCookie))->andWhere('product')->notin(array_keys($goodsInCookie))->fi()
+                ->fetch('count');
         }
+        $count = $count + count($goodsInCookie);
+
         if($this->app->user->account != 'guest' or $count != 0) echo html::a($this->createLink('cart', 'browse'), sprintf($this->lang->cart->topbarInfo, $count));
     }
 
@@ -109,15 +108,9 @@ class cart extends control
      */
     public function delete($product)
     {
-        if($this->app->user->account != 'guest')
-        {
-            $this->dao->delete()->from(TABLE_CART)->where('product')->eq($product)->andWhere('account')->eq($this->app->user->account)->exec();
-            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        }
-        else
-        {
-            $this->cart->deleteInCookie($product);
-        }
+        $this->dao->delete()->from(TABLE_CART)->where('product')->eq($product)->andWhere('account')->eq($this->app->user->account)->exec();
+        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->cart->deleteInCookie($product);
         $this->send(array('result' => 'success', 'message' => $this->lang->deleteSuccess, 'locate' => inlink('browse')));
     }
 }
