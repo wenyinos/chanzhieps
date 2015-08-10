@@ -88,6 +88,7 @@ $lang->block->mobile->pages['book_read']      = 'Book content';
 $lang->block->mobile->pages['message_index']  = 'Inquire';
 
 $lang->block->mobile->pages['page_view']      = 'Page';
+$lang->block->mobile->pages['page_index']     = 'Page list';
 
 /* page layou>mobile-> list. */
 $lang->block->mobile->regions = new stdclass();
