@@ -226,3 +226,4 @@ $lang->ui->info            = '信息';
 $lang->ui->danger          = '危险';
 $lang->ui->warning         = '警告';
 $lang->ui->success         = '积极';
+$lang->ui->removeDirFaild  = "<h4>以下目录删除失败</h4><pre>%s</pre> <div class='text-important'>请手动删除，或者设置这些文件的可写权限后继续。</div>";

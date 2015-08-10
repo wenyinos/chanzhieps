@@ -70,6 +70,11 @@ class uiModel extends model
         return isset($template['themes']) ? $template['themes'] : array();
     }
 
+    public function getInstalledThemes()
+    {
+        return $this->dao->select('*')->from(TABLE_PACKAGE)->where('type')->eq('theme')->fetchGroup('templateCompatible', 'code');
+    }
+
     /**
      * Get template option menu.   
      * 
@@ -864,5 +869,44 @@ class uiModel extends model
         $zfile = $this->app->loadClass('zfile');
         foreach($themeDirs as $dir) $zfile->removeDir($dir);
         return true;
+    }
+
+    /**
+     * Remove template data.
+     * 
+     * @param  string    $template 
+     * @access public
+     * @return bool
+     */
+    public function removeTemplateData($template)
+    {
+        $this->dao->delete()->from(TABLE_PACKAGE)->where('type')->eq('template')->andwhere('code')->eq($template)->exec();
+        if(dao::isError()) return false;
+        $this->dao->delete()->from(TABLE_BLOCK)->where('template')->eq($template)->exec();
+        if(dao::isError()) return false;
+        $this->dao->delete()->from(TABLE_LAYOUT)->where('template')->eq($template)->exec();
+        if(dao::isError()) return false;
+        return true;
+    }
+
+    /**
+     * Remove template files.
+     * 
+     * @param  string    $template 
+     * @access public
+     * @return bool|array
+     */
+    public function removeTemplateFiles($template)
+    {
+        $templatePath = $this->app->getWwwRoot() . 'template' . DS . $template;
+        $customPath   = $this->app->getWwwRoot() . 'data' . DS . 'css' . DS . $template;
+        $sourcePath   = $this->app->getWwwRoot() . 'data' . DS . 'source' . DS . $template;
+
+        $zfile = $this->app->loadClass('zfile');
+        $faildPaths = array();
+        if(is_dir($templatePath) and !$zfile->removeDir($templatePath)) $faildPaths[] = $templatePath;
+        if(is_dir($customPath) and !$zfile->removeDir($customPath)) $faildPaths[] = $customPath;
+        if(is_dir($sourcePath) and !$zfile->removeDir($sourcePath)) $faildPaths[] = $sourcePath;
+        return empty($faildPaths) ? true : $faildPaths;
     }
 }

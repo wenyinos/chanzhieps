@@ -41,8 +41,9 @@ class ui extends control
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
 
-        $this->view->title     = $this->lang->ui->setTemplate;
-        $this->view->templates = $templates;
+        $this->view->title           = $this->lang->ui->setTemplate;
+        $this->view->templates       = $templates;
+        $this->view->installedThemes = $this->ui->getInstalledThemes();
         $this->display();
     }
 
@@ -443,6 +444,22 @@ class ui extends control
     public function setDevice($device)
     {
         $this->session->set('device', $device);   
+        $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
+    }
+
+    /**
+     * Delete a template.
+     * 
+     * @param  string    $template 
+     * @access public
+     * @return void
+     */
+    public function uninstallTemplate($template)
+    {
+        $result = $this->ui->removeTemplateData($template);
+        if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $result = $this->ui->removeTemplateFiles($template);
+        if($result !== true) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->ui->removeDirFaild, join('<br/>', $result))) );
         $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
     }
 }
