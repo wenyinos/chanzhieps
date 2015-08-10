@@ -81,7 +81,7 @@ class orderModel extends model
         if($this->post->createAddress)
         {
             $address = $this->createAddress();
-            if(!$address)) return array('result' => 'fail', 'message' => dao::getError());
+            if(!$address) return array('result' => 'fail', 'message' => dao::getError());
             $order->address = $address->contact . ' [' . $address->phone . '] ' . $address->address . ' ' . $address->zipcode;
         }
 
