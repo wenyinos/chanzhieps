@@ -94,13 +94,16 @@ $(document).ready(function()
     var $imageZoom = $productImage.find('.image-zoom-region');
     var $productImage2xWrapper = $('#productImage2xWrapper');
     var $pageWrapper = $('.page-wrapper');
+    var $img = $productImage.find('img');
     $productImage.on('mousemove', function(e)
     {
         var width = $productImage.width(), height = 300;
-        var pageOffset = $pageWrapper.offset();
-        var x = e.pageX - pageOffset.left - 15.5, y = e.pageY - pageOffset.top - 46;
-        x = Math.max(0, Math.min(width/2, x - width/4));
-        y = Math.max(0, Math.min(height/2, y - height/4));
+        var offset = $productImage.offset();
+        var x = e.pageX - offset.left, y = e.pageY - offset.top;
+        var position = $img.position();
+        var imgWidth = $img.width(), imgHeight = $img.height();
+        x = Math.max(position.left, Math.min(Math.min(width/2, position.left + imgWidth - width/2), x - width/4));
+        y = Math.max(position.top, Math.min(Math.min(height/2, position.top + imgHeight - height/2), y - height/4));
         $imageZoom.css({left: x, top: y});
         $productImage2xWrapper.css({left: -2*x, top: -2*y});
     }).on('mouseleave', function(){$productImage2x.removeClass('show');})
