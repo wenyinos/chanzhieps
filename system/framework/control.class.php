@@ -282,8 +282,14 @@ class control
      */
     public function setViewPrefix()
     {
+        global $app, $config;
         $this->viewPrefix = '';
-        if(isset($this->config->viewPrefix[$this->viewType])) $this->viewPrefix = $this->config->viewPrefix[$this->viewType];
+        if(RUN_MODE == 'front')
+        {
+            /* Detect mobile. */
+            $mobile = $app->loadClass('mobile');
+            if(!$mobile->isMobile() and !isset($config->template->mobile)) $this->viewPrefix = 'm.';
+        }
     }
 
     /**
@@ -327,6 +333,8 @@ class control
         else
         {
             /* If in front mode, view file is in www/template path. */
+            $mainViewFile = TPL_ROOT . $moduleName . DS . $this->viewPrefix . "{$methodName}.{$viewType}.php";
+            if($this->viewPrefix == 'm.' and !is_file($mainViewFile)) $this->viewPrefix = '';
             $mainViewFile = TPL_ROOT . $moduleName . DS . $this->viewPrefix . "{$methodName}.{$viewType}.php";
         }
 

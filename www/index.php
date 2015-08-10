@@ -29,14 +29,6 @@ $config = $app->config;
 if(isset($_GET['mode']) and $_GET['mode'] == 'getconfig') die($app->exportConfig());
 if(!isset($config->installed) or !$config->installed) die(header('location: install.php'));
 
-/* Detect mobile. */
-$mobile = $app->loadClass('mobile');
-if(!$mobile->isTablet() and $mobile->isMobile() and $config->default->view == 'html')
-{
-    $config->default->view = 'mhtml';
-    helper::setViewType();
-}
-
 /* Connect to db, load module. */
 $common = $app->loadCommon();
 $common->checkDomain();
