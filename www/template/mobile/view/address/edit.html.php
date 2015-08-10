@@ -44,9 +44,9 @@ $(function()
     $editForm.ajaxform({onResultSuccess: function(response)
     {
         $.closeModal();
-        if($.isFunction($.refreshPage))
+        if($.isFunction($.refreshAddressList))
         {
-            setTimeout($.refreshPage, 200);
+            setTimeout($.refreshAddressList, 200);
             response.locate = false;
         }
     }});

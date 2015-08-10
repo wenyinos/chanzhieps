@@ -43,6 +43,7 @@ $lang->order->track          = 'Logistics tracking';
 $lang->order->life           = 'order life';
 $lang->order->days           = 'Days';
 $lang->order->deliveryInfo   = 'Delivery Information';
+$lang->order->backToCart     = 'Back to cart for change';
 
 $lang->order->confirmLimit         = 'confirm delivery in';
 $lang->order->confirmReceived      = 'Confirm Received';

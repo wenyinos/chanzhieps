@@ -20,8 +20,8 @@
   <div class='panel-heading'>
     <div class='title strong'><i class='icon icon-map-marker'></i> <?php echo $lang->address->browse?></div>
   </div>
-  <div id='listWrapper'>
-    <div class='cards condensed cards-list' id='list'>
+  <div id='addressListWrapper'>
+    <div class='cards condensed cards-list' id='addressList'>
       <?php foreach($addresses as $address):?>
       <?php
         $addressText = $address->contact . ' [' . $address->phone . '] ' . $address->address . ' ' . $address->zipcode;
@@ -56,9 +56,9 @@
 <script>
 $(function()
 {
-    $.refreshPage = function()
+    $.refreshAddressList = function()
     {
-        $('#listWrapper').load(window.location.href + ' #list');
+        $('#addressListWrapper').load(window.location.href + ' #addressList');
     };
 });
 </script>

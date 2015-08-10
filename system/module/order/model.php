@@ -114,7 +114,7 @@ class orderModel extends model
             $goods->productName = $product->name; 
             $goods->count       = $this->post->count[$product->id];
 
-            if($this->config->product->stock)
+            if(isset($this->config->product->stock) && $this->config->product->stock)
             {
                 if($product->amount < $goods->count)
                 {
