@@ -1,7 +1,7 @@
 .product-image {text-align: center; max-height: 320px; overflow: hidden;}
 .product-image.media-wrapper {height: 300px; line-height: 300px; border: 1px solid #ddd; position: relative;}
 .product-image.media-wrapper img {transition: all .2s cubic-bezier(0.175,0.885,0.32,1); width: auto}
-.product-image > img {width: 100%;cursor:pointer;}
+.product-image > img {width: 100%;cursor:pointer; max-height: 100%;}
 .product-image.media-wrapper:hover {cursor: pointer;}
 .product-image.media-wrapper .image-zoom-region {position: absolute; width: 50%; height: 50%; background-color: rgba(0,0,0,.15); border: 2px solid #fff; top: 0; left: 0; border-color: rgba(255,255,255,0.5); display: none}
 .product-image.media-wrapper:hover .image-zoom-region {display: block;}
