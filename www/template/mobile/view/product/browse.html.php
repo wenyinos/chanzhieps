@@ -21,17 +21,15 @@ foreach($products as $product)
     $url   = inlink('view', "id={$product->id}", "category={$product->category->alias}&name=$product->alias");
     $card = "<a class='card' href='{$url}'>";
     
-    $card .= "<div class='card-img'>";
     if(empty($product->image)) 
     {
         $imgColor = $product->id * 57 % 360;
-        $card .= "<div class='media-placeholder' style='background-color: hsl({$imgColor}, 60%, 80%); color: hsl({$imgColor}, 80%, 30%);' data-id='{$product->id}'>{$product->name}</div>";
+        $card .= "<div class='card-img holder'><div class='media-placeholder' style='background-color: hsl({$imgColor}, 60%, 80%); color: hsl({$imgColor}, 80%, 30%);' data-id='{$product->id}'>{$product->name}</div></div>";
     }
     else
     {
-        $card .= html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'");
+        $card .= "<div class='card-img'>" . html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'") . '</div>';
     }
-    $card .= '</div>'; // end of .card-img
 
     $card .= "<div class='card-content'>";
     $card .= "<div>{$product->name}</div>";

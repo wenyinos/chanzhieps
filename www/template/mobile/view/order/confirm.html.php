@@ -47,7 +47,7 @@
                 {
                     $productName = helper::substr($product->name, 10, '...');
                     $imgColor = $product->id * 57 % 360;
-                    echo "<div class='media-placeholder' style='background-color: hsl({$imgColor}, 60%, 80%); color: hsl({$imgColor}, 80%, 30%);' data-id='{$product->id}'>{$productName}</div>";
+                    echo "<div class='media-holder'><div class='media-placeholder' style='background-color: hsl({$imgColor}, 60%, 80%); color: hsl({$imgColor}, 80%, 30%);' data-id='{$product->id}'>{$productName}</div></div>";
                 }
                 else
                 {
