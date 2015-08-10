@@ -288,7 +288,7 @@ class control
         {
             /* Detect mobile. */
             $mobile = $app->loadClass('mobile');
-            if(!$mobile->isMobile() and !isset($config->template->mobile)) $this->viewPrefix = 'm.';
+            if($mobile->isMobile() and !isset($config->template->mobile)) $this->viewPrefix = 'm.';
         }
     }
 
