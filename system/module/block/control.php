@@ -20,19 +20,16 @@ class block extends control
      * @access public
      * @return void
      */
-    public function admin($recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function admin()
     {
         $template = $this->config->template->{$this->device}->name;
         $this->block->loadTemplateLang($template);
 
         $this->session->set('blockList', $this->app->getURI());
-        $this->app->loadClass('pager', $static = true);
-        $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $this->view->template = $template;
-        $this->view->blocks   = $this->block->getList($template, $pager);
+        $this->view->blocks   = $this->block->getList($template);
         $this->view->title    = $this->lang->block->common;
-        $this->view->pager    = $pager;
         $this->display();
     }
 
