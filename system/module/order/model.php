@@ -80,16 +80,8 @@ class orderModel extends model
 
         if($this->post->createAddress)
         {
-            $address = new stdclass();
-            $this->loadModel('address');
-            $address->account = $this->app->user->account;
-            $address->address = $this->post->address;
-            $address->contact = $this->post->contact;
-            $address->phone   = $this->post->phone;
-            $address->zipcode = $this->post->zipcode;
-
-            $this->dao->insert(TABLE_ADDRESS)->data($address)->batchCheck($this->config->address->require->create, 'notempty')->exec();
-            if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
+            $address = $this->createAddress();
+            if(!$address)) return array('result' => 'fail', 'message' => dao::getError());
             $order->address = $address->contact . ' [' . $address->phone . '] ' . $address->address . ' ' . $address->zipcode;
         }
 
@@ -139,6 +131,27 @@ class orderModel extends model
         $this->dao->delete()->from(TABLE_CART)->where('account')->eq($this->app->user->account)->andWhere('product')->in($this->post->product)->exec();
         foreach($this->post->product as $product) $this->loadModel('cart')->deleteInCookie($product);
         if(!dao::isError()) return $orderID;
+    }
+
+    /**
+     * Create address from order.
+     * 
+     * @access public
+     * @return void
+     */
+    public function createAddress()
+    {
+        $address = new stdclass();
+        $this->loadModel('address');
+        $address->account = $this->app->user->account;
+        $address->address = $this->post->address;
+        $address->contact = $this->post->contact;
+        $address->phone   = $this->post->phone;
+        $address->zipcode = $this->post->zipcode;
+
+        $this->dao->insert(TABLE_ADDRESS)->data($address)->batchCheck($this->config->address->require->create, 'notempty')->exec();
+        if(dao::isError()) return false;
+        return $address;
     }
 
     /**
