@@ -41,7 +41,9 @@ $thisMethodName     = $this->app->getMethodName();
   }
   else
   {
-      // todo: optimize js and css files for production environment
+      js::import($templateCommonRoot . 'js/mzui.all.min.js');
+      js::import($templateCommonRoot . 'js/chanzhi.js');
+      css::import($templateCommonRoot . 'css/mzui.min.css');
   }
 
   /* Import customed css file if it exists. */
