@@ -22,7 +22,7 @@ include TPL_ROOT . 'common/header.lite.html.php';
 .alert-deny h2 {margin: 0 0 20px}
 body {background-color: #f1f1f1}
 </style>
-<div class='container w-200px'>
+<div class='container'>
   <div class='alert alert-deny'>
     <i class='icon-frown icon'></i>
     <div class='content'>

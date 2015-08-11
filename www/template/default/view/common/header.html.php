@@ -14,7 +14,7 @@
     </div>
     <div class='collapse navbar-collapse' id='navbarCollapse'>
       <ul class='nav navbar-nav'>
-        <?php foreach($topNavs as $nav1):?>
+        <?php foreach($topNavs->{$this->device} as $nav1):?>
           <?php if(empty($nav1->children)):?>
             <li class='<?php echo $nav1->class?>'><?php echo html::a($nav1->url, $nav1->title, !empty($nav1->target) ? "target='$nav1->target'" : '');?></li>
             <?php else: ?>

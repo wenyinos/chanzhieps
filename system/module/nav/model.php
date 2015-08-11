@@ -20,19 +20,33 @@ class navModel extends model
     public function getNavs($type = 'top')
     {
         global $config;
+        $device = helper::getDevice();
 
-        if(!isset($config->nav->$type)) return $this->getDefault();
-        $navs = json_decode($config->nav->$type);
-
-        foreach($navs as $nav)
+        if(!isset($config->nav->$type))
         {
-            $nav->url = $this->getUrl($nav);   
-            foreach($nav->children as $grade2Nav)
+            $navs = new stdclass();
+            $navs->$device = $this->getDefault();
+            return $navs;
+        }
+
+        $navs = json_decode($config->nav->$type);
+        if(!isset($navs->$device)) $navs->$device = $this->getDefault();
+
+        foreach($navs as $navList)
+        {
+            foreach($navList as $nav)
             {
-                $grade2Nav->url = $this->getUrl($grade2Nav);   
-                foreach($grade2Nav->children as $grade3Nav)
+                $nav->url = $this->getUrl($nav);   
+                if(isset($nav->children))
                 {
-                    $grade3Nav->url = $this->getUrl($grade3Nav);   
+                    foreach($nav->children as $grade2Nav)
+                    {
+                        $grade2Nav->url = $this->getUrl($grade2Nav);   
+                        foreach($grade2Nav->children as $grade3Nav)
+                        {
+                            $grade3Nav->url = $this->getUrl($grade3Nav);   
+                        }
+                    }
                 }
             }
         }
@@ -47,13 +61,12 @@ class navModel extends model
      */
     public function getDefault()
     {
-        $systemNavs = $this->config->nav->system;
-        unset($systemNavs->blog);
-        unset($systemNavs->forum);
-        unset($systemNavs->book);
-        unset($systemNavs->message);
+        global $config;
+        $defaultNavs = new stdclass();
+        $defaultNavs->home    = $config->homeRoot;
+        $defaultNavs->company = commonModel::createFrontLink('company', 'index');
 
-        foreach($systemNavs as $item => $url)
+        foreach($defaultNavs as $item => $url)
         {
             $nav = new stdclass();
             $nav->type   = 'system';
@@ -63,6 +76,7 @@ class navModel extends model
             $nav->url    = $url;
             $navs[] = $nav;
         }
+
         return $navs;
     }
 
@@ -113,7 +127,7 @@ class navModel extends model
         $entry .= html::input("nav[{$grade}][url][]", $nav->url, "placeholder='{$this->lang->nav->inputUrl}' class='urlInput form-control {$urlHidden}'");
 
         /* hidden tags. */
-        if($grade >1 ) $entry .= html::hidden("nav[{$grade}][parent][]", '', "class='grade{$grade}parent'");
+        if($grade > 1 ) $entry .= html::hidden("nav[{$grade}][parent][]", '', "class='grade{$grade}parent'");
         $entry .= html::hidden("nav[{$grade}][key][]", '', "class='input grade{$grade}key'"); 
 
         /* nav target select. */
@@ -190,7 +204,7 @@ class navModel extends model
     {
         global $config;
 
-        if($nav->type == 'system')  return $config->nav->system->{$nav->system};   
+        if($nav->type == 'system') return $config->nav->system->{$nav->system};   
 
         if($nav->type == 'article')
         {   

@@ -3,7 +3,6 @@
 
 <div class='block-region region-all-top'><?php $this->block->printRegion($layouts, 'all', 'top');?></div>
 
-<?php $topNavs = $this->loadModel('nav')->getNavs('top');?>
 <style>
 .appbar-title-label {
 

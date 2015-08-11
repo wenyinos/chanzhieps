@@ -71,7 +71,7 @@ class address extends control
      */
     public function delete($id)
     {
-        $this->dao->delete()->from(TABLE_ADDRESS)->where('id')->eq($id)->exec();
+        $this->dao->delete()->from(TABLE_ADDRESS)->where('id')->eq($id)->and('account')->eq($this->app->user->account)->exec();
         if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $this->send(array('result' => 'success', 'message' => $this->lang->deleteSuccess, 'locate' => inlink('browse')));
     }

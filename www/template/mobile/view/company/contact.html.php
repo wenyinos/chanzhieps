@@ -19,7 +19,7 @@
     </div>
     <div class='modal-body'>
       <div class='cards borderless with-icon'>
-        <?php if($contact->contacts): ?>
+        <?php if(!empty($contact->contacts)): ?>
         <div class='card'>
           <i class='icon icon-s3 icon-user bg-important circle'></i>
           <div class='card-content'>
@@ -28,7 +28,7 @@
           </div>
         </div>
         <?php endif; ?>
-        <?php if($contact->email): ?>
+        <?php if(!empty($contact->email)): ?>
         <div class='card'>
           <i class='icon icon-s3 icon-envelope bg-special circle'></i>
           <div class='card-content'>
@@ -37,7 +37,7 @@
           </div>
         </div>
         <?php endif; ?>
-        <?php if($contact->qq): ?>
+        <?php if(!empty($contact->qq)): ?>
         <div class='card'>
           <i class='icon icon-s3 icon-qq bg-info circle'></i>
           <div class='card-content'>
@@ -46,7 +46,7 @@
           </div>
         </div>
         <?php endif; ?>
-        <?php if($contact->weixin): ?>
+        <?php if(!empty($contact->weixin)): ?>
         <div class='card'>
           <i class='icon icon-s3 icon-wechat bg-success circle'></i>
           <div class='card-content'>
@@ -55,7 +55,7 @@
           </div>
         </div>
         <?php endif; ?>
-        <?php if($contact->weibo): ?>
+        <?php if(!empty($contact->weibo)): ?>
         <div class='card'>
           <i class='icon icon-s3 icon-weibo bg-danger circle'></i>
           <div class='card-content'>
@@ -64,7 +64,7 @@
           </div>
         </div>
         <?php endif; ?>
-        <?php if($contact->wangwang): ?>
+        <?php if(!empty($contact->wangwang)): ?>
         <div class='card'>
           <i class='icon icon-s3 icon-comment-alt bg-warning circle'></i>
           <div class='card-content'>
@@ -73,7 +73,7 @@
           </div>
         </div>
         <?php endif; ?>
-        <?php if($contact->site): ?>
+        <?php if(!empty($contact->site)): ?>
         <div class='card'>
           <i class='icon icon-s3 icon-globe bg-primary circle'></i>
           <div class='card-content'>
@@ -82,7 +82,7 @@
           </div>
         </div>
         <?php endif; ?>
-        <?php if($contact->address): ?>
+        <?php if(!empty($contact->address)): ?>
         <div class='card'>
           <i class='icon icon-s3 icon-building bg-gray circle'></i>
           <div class='card-content'>
