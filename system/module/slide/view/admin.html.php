@@ -11,32 +11,46 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<div class='mainbutton' >
-<?php commonModel::printLink('tree', 'browse', "type=slide", '<i class="icon-group"></i> ' . $lang->slide->createGroup, "class='btn btn-primary'");?>
-</div>
-  <div class='row'>
-  <?php foreach($groups as $group):?>
-    <div class='col-md-3 col-sm-6'>
-      <div class='panel project-block'>
-        <div class='panel-heading'>
-          <strong><?php commonModel::printLink('slide', 'browse', "groupID=$group->id", $group->name);?></strong>
-        </div>
-        <div class='panel-body'>
-          <?php if($slide = $this->slide->getFirstSlide($group->id)):?>
-          <?php if ($slide->backgroundType == 'image'): ?>
-          <div class='item active'>
-            <?php print(html::image($slide->image));?>
-          <?php else: ?>
-          <div class='item active' style='<?php echo 'background-color: ' . $slide->backgroundColor;?>'>
-          <?php endif;?>
-          <?php else:?>
-          <div class = 'item active'><?php echo $lang->toBeAdd;?>
-          <?php endif; ?>
-          </div>
-        </div> 
-      </div>
-    </div>
-   <?php endforeach;?>
+<div class='panel'>
+  <div class='panel-heading'>
+    <i class='icon-th'></i> <?php echo $lang->slide->slide ?>
+    <div class='panel-actions'><?php commonModel::printLink('tree', 'browse', "type=slide", '<i class="icon-plus-sign"></i> ' . $lang->slide->createGroup, "class='btn btn-primary'");?></div>
   </div>
+  <div class='panel-body'>
+    <section class='row cards-borderless'>
+      <?php foreach($groups as $group):?>
+      <div class='col-lg-3 col-md-4 col-sm-6'>
+        <a class='card card-slide' href='<?php echo inLink('browse', "groupID=$group->id") ?>'>
+          <?php $count = count($group->slides); ?>
+          <div class='slides-holder slides-holder-<?php echo min(5, $count);?>'>
+            <?php if(!empty($group->slides)): ?>
+            <?php $index = 1; ?>
+            <?php foreach($group->slides as $slide):?>
+            <?php if($index > 5) break; ?>
+            <div class='slide-item slide-item-<?php echo $index++ ?>'>
+              <?php if ($slide->backgroundType == 'image'): ?>
+              <?php print(html::image($slide->middleImage));?>
+              <?php else: ?>
+              <div class='plain-slide' style='<?php echo 'background-color: ' . $slide->backgroundColor;?>'></div>
+              <?php endif; ?>
+            </div>
+            <?php endforeach;?>
+            <div class='slides-count'><i class='icon-picture'></i> <?php echo $count; ?></div>
+            <?php else: ?>
+            <div class='empty-holder'>
+              <i class='icon-pencil icon-3x icon'></i>
+            </div>
+            <?php endif; ?>
+          </div>
+          <div class='card-heading text-center'><strong><?php echo $group->name ?></strong></div>
+        </a>
+      </div>
+      <?php endforeach;?>
+      <div class='col-lg-3 col-md-4 col-sm-6'>
+        <?php commonModel::printLink('tree', 'browse', "type=slide", '<div class="slides-holder create-btn"><div class="empty-holder"><i class="icon-plus-sign icon icon-3x"></i> ' . $lang->slide->createGroup . '</div></div>', "class='card card-slide'");?>
+      </div>
+    </section>
+  </div>
+</div>
 <?php include '../../common/view/footer.admin.html.php';?>
   
