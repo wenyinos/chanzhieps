@@ -30,7 +30,7 @@
           <?php foreach($blocks as $block):?>
           <?php if(strpos($blockList, ",$block->type,") !== false):?>
           <li>
-            <span class='pull-left'><span ><?php echo '[' . $lang->block->default->typeList[$block->type] . ']';?></span><?php echo ' ' . $block->title;?></span>
+            <span class='pull-left'><span ><?php echo '[' . $lang->block->{$template}->typeList[$block->type] . ']';?></span><?php echo ' ' . $block->title;?></span>
             <span class='pull-right'>
               <?php echo html::a(helper::createLink('block', 'edit', "blockID=$block->id&type=$block->type"), $lang->edit);?>
               <?php echo html::a(helper::createLink('block', 'delete', "blockID=$block->id"), $lang->delete, "class='deleter'");?>
