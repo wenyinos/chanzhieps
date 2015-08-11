@@ -646,6 +646,29 @@ INSERT INTO `eps_layout` (template,page,region,blocks,import,lang,theme) select 
 
 INSERT INTO `eps_layout` (template,page,region,blocks,import,lang,theme) select template,page,region,blocks,import,lang, 'tartan' as theme from `eps_layout` where theme='default';
 
+INSERT INTO `eps_layout` (`template`, `theme`, `page`, `region`, `blocks`, `import`, `lang`) VALUES
+('mobile','default','index_index','top','[{"id":"25","grid":"0","titleless":"0","borderless":"0"}]','no','zh-cn'),
+('mobile','default','index_index','middle','[{"id":"31","grid":"0","titleless":"0","borderless":"0"},{"id":"23","grid":"12","titleless":"0","borderless":"0"},{"id":"21","grid":"0","titleless":"0","borderless":"0"}]','no','zh-cn'),
+('mobile','default','article_browse','top','[{"id":"26","grid":"0","titleless":"0","borderless":"0"}]','no','zh-cn'),
+('mobile','default','article_view','top','[{"id":"26","grid":"0","titleless":"0","borderless":"0"}]','no','zh-cn'),
+('mobile','default','product_browse','top','[{"id":"27","grid":"0","titleless":"0","borderless":"0"}]','no','zh-cn'),
+('mobile','default','product_view','top','[{"id":"27","grid":"0","titleless":"0","borderless":"0"}]','no','zh-cn'),
+('mobile','default','page_view','top','[{"id":"29","grid":"0","titleless":"0","borderless":"0"}]','no','zh-cn'),
+('mobile','default','index_index','top','[{"id":"125","grid":"0","titleless":"0","borderless":"0"}]','no','en'),
+('mobile','default','index_index','middle','[{"id":"131","grid":"0","titleless":"0","borderless":"0"},{"id":"123","grid":"12","titleless":"0","borderless":"0"},{"id":"121","grid":"0","titleless":"0","borderless":"0"}]','no','en'),
+('mobile','default','article_browse','top','[{"id":"126","grid":"0","titleless":"0","borderless":"0"}]','no','en'),
+('mobile','default','article_view','top','[{"id":"126","grid":"0","titleless":"0","borderless":"0"}]','no','en'),
+('mobile','default','product_browse','top','[{"id":"127","grid":"0","titleless":"0","borderless":"0"}]','no','en'),
+('mobile','default','product_view','top','[{"id":"127","grid":"0","titleless":"0","borderless":"0"}]','no','en'),
+('mobile','default','page_view','top','[{"id":"129","grid":"0","titleless":"0","borderless":"0"}]','no','en'),
+('mobile','default','index_index','top','[{"id":"225","grid":"0","titleless":"0","borderless":"0"}]','no','zh-tw'),
+('mobile','default','index_index','middle','[{"id":"231","grid":"0","titleless":"0","borderless":"0"},{"id":"223","grid":"12","titleless":"0","borderless":"0"},{"id":"221","grid":"0","titleless":"0","borderless":"0"}]','no','zh-tw'),
+('mobile','default','article_browse','top','[{"id":"226","grid":"0","titleless":"0","borderless":"0"}]','no','zh-tw'),
+('mobile','default','article_view','top','[{"id":"226","grid":"0","titleless":"0","borderless":"0"}]','no','zh-tw'),
+('mobile','default','product_browse','top','[{"id":"227","grid":"0","titleless":"0","borderless":"0"}]','no','zh-tw'),
+('mobile','default','product_view','top','[{"id":"227","grid":"0","titleless":"0","borderless":"0"}]','no','zh-tw'),
+('mobile','default','page_view','top','[{"id":"229","grid":"0","titleless":"0","borderless":"0"}]','no','zh-tw');
+
 -- Insert data into `eps_block`;
 INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) VALUES
 (1, 'latestArticle', '最新文章', '{"category":"0","limit":"7"}', 'default','zh-cn'),
@@ -662,6 +685,21 @@ INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) V
 (12, 'links', '友情链接', '', 'default','zh-cn'),
 (13, 'header', '网站头部', '', 'default','zh-cn'),
 (14, 'followUs', '关注我们', '', 'default','zh-cn');
+
+INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) VALUES
+(21, 'latestArticle', '最新文章', '{"category":"0","limit":"7"}', 'mobile','zh-cn'),
+(22, 'hotArticle', '热门文章', '{"category":"0","limit":"7"}', 'mobile','zh-cn'),
+(23, 'latestProduct', '最新产品', '{"category":"0","limit":"3","image":"show"}', 'mobile','zh-cn'),
+(24, 'hotProduct', '热门产品', '{"category":"0","limit":"3","image":"show"}', 'mobile','zh-cn'),
+(25, 'slide', '幻灯片', '', 'default','zh-cn'),
+(26, 'articleTree', '文章分类', '{"showChildren":"0"}', 'mobile','zh-cn'),
+(27, 'productTree', '产品分类', '{"showChildren":"0"}', 'mobile','zh-cn'),
+(28, 'blogTree', '博客分类', '{"showChildren":"1"}', 'mobile','zh-cn'),
+(29, 'pageList', '单页列表', '{"limit":"7"}', 'mobile','zh-cn'),
+(30, 'contact', '联系我们', '', 'mobile','zh-cn'),
+(31, 'about', '公司简介', '', 'mobile','zh-cn'),
+(32, 'links', '友情链接', '', 'mobile','zh-cn'),
+(33, 'followUs', '关注我们', '', 'mobile','zh-cn');
 INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) VALUES
 (101, 'latestArticle', 'Latest Article', '{"category":"0","limit":"7"}', 'default','en'),
 (102, 'hotArticle', 'Hot Article', '{"category":"0","limit":"7"}', 'default','en'),
@@ -678,6 +716,20 @@ INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) V
 (113, 'header', 'Header', '', 'default','en'),
 (114, 'followUs', 'Follow Us', '', 'default','en');
 INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) VALUES
+(121, 'latestArticle', 'Latest Article', '{"category":"0","limit":"7"}', 'mobile','en'),
+(122, 'hotArticle', 'Hot Article', '{"category":"0","limit":"7"}', 'mobile','en'),
+(123, 'latestProduct', 'Latest Product', '{"category":"0","limit":"3","image":"show"}', 'mobile','en'),
+(124, 'hotProduct', 'Hot Product', '{"category":"0","limit":"3","image":"show"}', 'mobile','en'),
+(125, 'slide', 'Slide', '', 'mobile','en'),
+(126, 'articleTree', 'Article Category', '{"showChildren":"0"}', 'mobile','en'),
+(127, 'productTree', 'Product Category', '{"showChildren":"0"}', 'mobile','en'),
+(128, 'blogTree', 'Blog Category', '{"showChildren":"1"}', 'mobile','en'),
+(129, 'pageList', 'Page List', '{"limit":"7"}', 'mobile','en'),
+(130, 'contact', 'Contact Us', '', 'mobile','en'),
+(131, 'about', 'About Us', '', 'mobile','en'),
+(132, 'links', 'Link', '', 'mobile','en'),
+(133, 'followUs', 'Follow Us', '', 'mobile','en');
+INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) VALUES
 (201, 'latestArticle', '最新文章', '{"category":"0","limit":"7"}', 'default','zh-tw'),
 (202, 'hotArticle', '熱門文章', '{"category":"0","limit":"7"}', 'default','zh-tw'),
 (203, 'latestProduct', '最新產品', '{"category":"0","limit":"3","image":"show"}', 'default','zh-tw'),
@@ -692,6 +744,20 @@ INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) V
 (212, 'links', '友情鏈接', '', 'default','zh-tw'),
 (213, 'header', '網站頭部', '', 'default','zh-tw'),
 (214, 'followUs', '關注我們', '', 'default','zh-tw');
+INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) VALUES
+(221, 'latestArticle', '最新文章', '{"category":"0","limit":"7"}', 'mobile','zh-tw'),
+(222, 'hotArticle', '熱門文章', '{"category":"0","limit":"7"}', 'mobile','zh-tw'),
+(223, 'latestProduct', '最新產品', '{"category":"0","limit":"3","image":"show"}', 'mobile','zh-tw'),
+(224, 'hotProduct', '熱門產品', '{"category":"0","limit":"3","image":"show"}', 'mobile','zh-tw'),
+(225, 'slide', '幻燈片', '', 'mobile','zh-tw'),
+(226, 'articleTree', '文章分類', '{"showChildren":"0"}', 'mobile','zh-tw'),
+(227, 'productTree', '產品分類', '{"showChildren":"0"}', 'mobile','zh-tw'),
+(228, 'blogTree', '博客分類', '{"showChildren":"1"}', 'mobile','zh-tw'),
+(229, 'pageList', '單頁列表', '{"limit":"7"}', 'mobile','zh-tw'),
+(230, 'contact', '聯繫我們', '', 'mobile','zh-tw'),
+(231, 'about', '公司簡介', '', 'mobile','zh-tw'),
+(232, 'links', '友情鏈接', '', 'mobile','zh-tw'),
+(233, 'followUs', '關注我們', '', 'mobile','zh-tw');
 INSERT INTO `eps_group` (`id`, `name`, `role`, `desc`, `lang`) VALUES
 (1, '管理员', '', '拥有后台所有权限', 'zh-cn'),
 (2, '网站编辑', '', '拥有发布以及编辑权限', 'zh-cn'),
