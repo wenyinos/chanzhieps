@@ -15,7 +15,7 @@ $block->content = json_decode($block->content);
   <div class='panel-heading'>
     <strong><?php echo $icon . $block->title;?></strong>
     <?php if(!empty($block->content->moreText) and !empty($block->content->moreUrl)):?>
-    <div class='pull-right'><?php echo html::a($block->content->moreUrl, $block->content->moreText);?></div>
+    <div class='pull-right'><?php echo html::a($block->content->moreUrl, $block->content->moreText, "data-toggle='modal' data-type='ajax'");?></div>
     <?php endif;?>
   </div>
   <div class='panel-body'>

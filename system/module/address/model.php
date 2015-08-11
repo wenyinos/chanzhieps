@@ -42,6 +42,7 @@ class addressModel extends model
         $this->dao->update(TABLE_ADDRESS)
             ->data($address)
             ->where('id')->eq($id)
+            ->beginIf(RUN_MODE == 'front')->andWhere('account')->eq($this->app->user->account)->fi()
             ->batchCheck($this->config->address->require->edit, 'notempty')
             ->exec();
 
