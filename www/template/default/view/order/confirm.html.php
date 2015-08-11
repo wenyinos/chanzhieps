@@ -14,7 +14,7 @@
 <?php js::set('currencySymbol', $currencySymbol);?>
 <?php js::set('createdSuccess', $lang->order->createdSuccess);?>
 <?php js::set('goToPay', $lang->order->goToPay);?>
-<?php js::set('checkStock', $this->config->prodcut->stock);?>
+<?php js::set('checkStock', $this->config->product->stock);?>
 <?php if(!empty($products)):?>
 <?php $total = 0;?>
 <div class='panel'>

@@ -31,7 +31,7 @@
         <small class='text-muted'><?php echo $lang->ui->template->author . $lang->colon . $template['author'];?></small>
       </div>
       <div class='card-actions'>
-        <button class='btn btn-apply-template<?php if($isCurrent) echo ' btn-success disabled';?>' type='button' data-url='<?php inlink('settemplate', "template={$code}&theme={$themeName}")?>' data-current='<i class="icon-ok"></i> <?php echo $lang->ui->template->current;?>' data-default='<?php echo $lang->ui->template->apply?>'><?php echo $isCurrent ? "<i class='icon-ok'></i> {$lang->ui->template->current}" : $lang->ui->template->apply?></button>
+       <?php if(!$isCurrent and $code != 'default' and $code != 'mobile') commonModel::printLink('ui', 'uninstallTemplate', "template={$code}", $lang->delete, "class='btn btn-default template-deleter'");?>
       </div>
       <?php if(!empty($desc)):?>
       <div class="card-content"><div class="template-desc"><?php echo $desc;?></div></div>
@@ -43,7 +43,7 @@
           $custom = true;
           $currentClass = ($isCurrent and $config->template->{$this->device}->theme == $theme) ? ' current' : '';
           if($custom) $currentClass .= ' custom';
-
+          $themeInfo = isset($installedThemes[$code][$theme]) ? $installedThemes[$code][$theme] : NULL;
           $url = $this->createLink('ui', 'setTemplate', "template={$code}&theme={$theme}&custom={$custom}");
           ?>
           <div class='theme<?php echo $currentClass;?>' data-url='<?php echo $url;?>' data-theme='<?php echo $theme;?>'>
@@ -55,7 +55,7 @@
               <div class='theme-img'><?php echo html::image($templateRoot . 'theme/' . $theme . '/preview.png');?></div>
               <div class='theme-name text-center'><strong><?php echo $name;?></strong></div>
             </div>
-          </div>
+         </div>
         <?php endforeach;?>
         </div>
       </div>

@@ -1438,4 +1438,68 @@ class upgradeModel extends model
         }
         return true;
     }
+
+    /**
+     * Set default blocks and layout for mobile.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setDefaultBlocks()
+    {
+        $mysqlVersion = $this->loadModel('install')->getMysqlVersion();
+        foreach($this->config->langs as $lang => $name)
+        {
+            $sqlFile = $this->app->getAppRoot() . 'db' . DS . 'mobileBlocks.' . $lang . '.sql';
+            if(file_exists($sqlFile))
+            {
+                $maxBlockID = $this->dao->setAutoLang(false)->select("max(id) as maxID")->from(TABLE_BLOCK)->fetch('maxID');
+
+                /* Read the sql file to lines, remove the comment lines, then join theme by ';'. */
+                $sqls =  file_get_contents($sqlFile);
+                $marks  = array();
+                $blocks = array();
+                for($i = 1; $i <= 7; $i ++)
+                {
+                    $marks[]  = '"block' . $i .'"';
+                    $block = '"';
+                    $blocks[] = $block . ($maxBlockID + $i) . '"';
+                }
+
+                /*Replace block ids with computed id.*/
+                $sqls = str_replace($marks, $blocks, $sqls);
+                $sqls = explode("\n", $sqls);
+
+                foreach($sqls as $key => $line) 
+                {
+                    $line       = trim($line);
+                    $sqls[$key] = $line;
+                    if(strpos($line, '--') !== false or empty($line)) unset($sqls[$key]);
+                }
+                $sqls = explode(';', join("\n", $sqls));
+
+                foreach($sqls as $sql)
+                {
+                    $sql = trim($sql);
+                    if(empty($sql)) continue;
+
+                    if($mysqlVersion <= 4.1)
+                    {
+                        $sql = str_replace('DEFAULT CHARSET=utf8', '', $sql);
+                        $sql = str_replace('CHARACTER SET utf8 COLLATE utf8_general_ci', '', $sql);
+                    }
+
+                    $sql = str_replace(array('eps_', 'xr_'), $this->config->db->prefix, $sql);
+                    try
+                    {
+                        $this->dbh->exec($sql);
+                    }
+                    catch (PDOException $e) 
+                    {
+                        self::$errors[] = $e->getMessage() . "<p>The sql is: $sql</p>";
+                    }
+                }
+            }
+        }
+    }
 }
