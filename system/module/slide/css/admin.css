@@ -4,8 +4,9 @@
 .card-slide {overflow: visible;}
 .plain-slide {height: 150px; box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1); transition: box-shadow .2s;}
 .slides-holder {height: 230px; position: relative; background-color: #fff; margin: 0 auto;}
-.slide-item {width: auto; position: absolute; bottom: 10px; right: 10px; width: 85%; transition: bottom .2s, right .2s; overflow: hidden;}
-.slide-item img {max-height: 200px; max-width: 100%; box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1); transition: box-shadow .2s; width: 100%;}
+.slide-item {width: auto; max-height: 200px; position: absolute; bottom: 10px; right: 10px; width: 100%; padding-left: 45px; padding-right: 5px; transition: bottom .2s, right .2s; overflow: hidden;}
+.slide-item img {max-height: 200px; max-width: 100%; box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.1); transition: box-shadow .2s;}
+.slide-item-1 img {width: 100%; max-height: none}
 .card:hover .slide-item img, .card:hover .plain-slide {box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);}
 .empty-holder {height: 200px; position: absolute; bottom: 0; width: 100%; text-align: center; background-color: #f1f1f1; color: #999;}
 .empty-holder > .icon {display: block; margin-top: 70px; margin-bottom: 10px;}
