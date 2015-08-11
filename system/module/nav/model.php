@@ -127,7 +127,7 @@ class navModel extends model
         $entry .= html::input("nav[{$grade}][url][]", $nav->url, "placeholder='{$this->lang->nav->inputUrl}' class='urlInput form-control {$urlHidden}'");
 
         /* hidden tags. */
-        if($grade >1 ) $entry .= html::hidden("nav[{$grade}][parent][]", '', "class='grade{$grade}parent'");
+        if($grade > 1 ) $entry .= html::hidden("nav[{$grade}][parent][]", '', "class='grade{$grade}parent'");
         $entry .= html::hidden("nav[{$grade}][key][]", '', "class='input grade{$grade}key'"); 
 
         /* nav target select. */
