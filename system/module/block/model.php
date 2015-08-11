@@ -36,7 +36,7 @@ class blockModel extends model
      * @access public
      * @return array
      */
-    public function getList($template, $pager)
+    public function getList($template, $pager = null)
     {
         return $this->dao->select('*')->from(TABLE_BLOCK)->where('template')->eq($template)->orderBy('id_desc')->page($pager)->fetchAll('id');
     }

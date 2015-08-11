@@ -20,6 +20,8 @@ class nav extends control
      */
     public function admin($type = 'top')
     {   
+        $navs = $this->nav->getNavs($type);
+
         foreach($this->lang->nav->system as $module => $name)
         {
             if(!commonModel::isAvailable($module)) unset($this->lang->nav->system->$module);
@@ -27,37 +29,44 @@ class nav extends control
 
         if($_POST)
         {
-            $navs = $_POST['nav'];
-            foreach($navs as $key => $nav)
+            $navList = $_POST['nav'];
+            foreach($navList as $key => $nav)
             {
-                $navs[$key] = $this->nav->organizeNav($nav);
+                $navList[$key] = $this->nav->organizeNav($nav);
             }
 
-            if(isset($navs[2]))
+            if(isset($navList[2]))
             {
-                $navs[2] = $this->nav->group($navs[2]);
-                if(isset($navs[3])) $navs[3] = $this->nav->group($navs[3]);
+                $navList[2] = $this->nav->group($navList[2]);
+                if(isset($navList[3])) $navList[3] = $this->nav->group($navList[3]);
 
-                foreach($navs[2] as &$navList)
+                foreach($navList[2] as &$navList)
                 {
                     foreach($navList as &$nav)
-                    $nav['children'] = isset($navs[3][$nav['key']]) ?  $navs[3][$nav['key']] : array();
+                    $nav['children'] = isset($navList[3][$nav['key']]) ?  $navList[3][$nav['key']] : array();
                 }
             }
 
-            foreach($navs[1] as &$nav)
+            foreach($navList[1] as &$nav)
             {
-                $nav['children'] = isset($navs[2][$nav['key']]) ?  $navs[2][$nav['key']] : array();
+                $nav['children'] = isset($navList[2][$nav['key']]) ?  $navList[2][$nav['key']] : array();
             }
 
-            $settings =  array($type => helper::jsonEncode($navs[1]));
-            $result   = $this->loadModel('setting')->setItems('system.common.nav', $settings);
+            $settings = array();
+            $settings[$this->device] = $navList[1];
+            foreach($navs as $device => $list)
+            {
+                if($device != $this->device) $settings[$device] = $list;
+            }
+
+            $settings   =  array($type => helper::jsonEncode($settings));
+            $clientLang = $this->app->getClientLang();
+            $result     = $this->loadModel('setting')->setItems('system.common.nav', $settings, $clientLang);
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->failed));
         }
         $this->view->title        = $this->lang->nav->setNav;
-        $this->view->navs         = $this->nav->getNavs($type);
-
+        $this->view->navs         = $navs->{$this->device};
         $this->view->types        = $this->lang->nav->types; 
         $this->view->articleTree  = $this->loadModel('tree')->getOptionMenu('article');
 

@@ -88,6 +88,11 @@ $lang->block->gridOptions[2]  = '1/6';
 $lang->block->gridOptions[10] = '5/6';
 $lang->block->gridOptions[12] = '100%';
 
+$lang->block->categoryList['custom']  = '自定义';
+$lang->block->categoryList['article'] = '文章';
+$lang->block->categoryList['product'] = '产品';
+$lang->block->categoryList['system']  = '系统';
+
 $lang->block->category = new stdclass();
 $lang->block->category->showChildren = '显示子分类';
 $lang->block->category->fromCurrent  = '当前类目开始';

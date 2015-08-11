@@ -55,7 +55,7 @@
   <div class='mainnav'>
     <ul class='nav'>
     <?php $subnavs = '';?>
-    <?php foreach($topNavs as $nav1):?>
+    <?php foreach($topNavs->{$this->device} as $nav1):?>
       <li class='<?php echo $nav1->class?>'>
       <?php
       if(empty($nav1->children))

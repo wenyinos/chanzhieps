@@ -18,29 +18,32 @@
       <?php commonModel::printLink('block', 'create', '', '<i class="icon-plus"></i> ' . $lang->block->create, 'class="btn btn-primary"');?>
     </div>
   </div>
-  <table class='table table-bordered table-hover table-striped'>
-    <tr class='text-center'>
-      <th class='text-center w-100px'><?php echo $lang->block->id;?></th>
-      <th><?php echo $lang->block->title;?></th>
-      <th><?php echo $lang->block->type;?></th>
-      <th class='w-200px'><?php echo $lang->actions;?></th>
-    </tr>
-    <?php foreach($blocks as $block):?>
-    <tr class='text-center'>
-      <td><?php echo $block->id;?></td>
-      <td class='text-left'><?php echo $block->title;?></td>
-      <td><?php echo $lang->block->$template->typeList[$block->type];?></td>
-      <td>
-        <?php 
-        commonModel::printLink('block', 'edit',"blockID=$block->id&type=$block->type", $lang->edit);
-        commonModel::printLink('block', 'delete', "blockID=$block->id", $lang->delete, "class='deleter'");
-        ?>
-      </td>
-    </tr>
+
+  <div class='panel-body'>
+  <div class='row'>
+    <?php foreach($config->block->categoryList as $category => $blockList):?>
+    <div class='col-md-3'>
+      <div class='panel'>
+      <div class='panel-heading'><strong><?php echo $lang->block->categoryList[$category];?></strong></div>
+        <div class='panel-body'>
+          <ul class='ul-list'>
+          <?php foreach($blocks as $block):?>
+          <?php if(strpos($blockList, ",$block->type,") !== false):?>
+          <li>
+            <span class='pull-left'><span ><?php echo '[' . $lang->block->{$template}->typeList[$block->type] . ']';?></span><?php echo ' ' . $block->title;?></span>
+            <span class='pull-right'>
+              <?php echo html::a(helper::createLink('block', 'edit', "blockID=$block->id&type=$block->type"), $lang->edit);?>
+              <?php echo html::a(helper::createLink('block', 'delete', "blockID=$block->id"), $lang->delete, "class='deleter'");?>
+            </span>
+          </li>
+          <?php endif;?>
+          <?php endforeach;?>
+          </ul>
+        </div>
+      </div>
+    </div>
     <?php endforeach;?>
-    <tr>
-      <td colspan='4'> <?php echo $pager->get(); ?> </td>
-    </tr>
-  </table>
+  </div>
+  </div>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>
