@@ -24,7 +24,7 @@ include TPL_ROOT . 'common/header.html.php';
       <a href='#commentDialog' data-toggle='modal' class='btn primary block'><i class='icon-comment-alt'></i> <?php echo $lang->message->post; ?></a>
     </div>
     <div class='panel-heading'>
-      <div class='title text-info'><i class='icon-comments'></i> <?php echo $lang->message->list;?></div>
+      <div class='title'><i class='icon-comments'></i> <?php echo $lang->message->list;?></div>
     </div>
     <div class='cards condensed'>
       <?php foreach($messages as $number => $message):?>
