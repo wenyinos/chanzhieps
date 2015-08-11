@@ -24,7 +24,7 @@ class navModel extends model
 
         if(!isset($config->nav->$type))
         {
-            $navs = stdclass();
+            $navs = new stdclass();
             $navs->$device = $this->getDefault();
             return $navs;
         }
