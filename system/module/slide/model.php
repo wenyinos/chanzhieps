@@ -28,6 +28,12 @@ class slideModel extends model
         $slide->buttonClass  = json_decode($slide->buttonClass);
         $slide->buttonUrl    = json_decode($slide->buttonUrl);
         $slide->buttonTarget = json_decode($slide->buttonTarget);
+        $slide->middleImage  = '';
+        if($slide->image)
+        {
+            $imagePath = '/data/slides/';
+            $slide->middleImage = $imagePath . 'm_' . str_replace($imagePath, '', $slide->image);
+        }
 
         return $slide;
     }
@@ -55,6 +61,12 @@ class slideModel extends model
             $slide->buttonClass  = json_decode($slide->buttonClass);
             $slide->buttonUrl    = json_decode($slide->buttonUrl);
             $slide->buttonTarget = json_decode($slide->buttonTarget);
+            $slide->middleImage  = '';
+            if($slide->image)
+            {
+                $imagePath = '/data/slides/';
+                $slide->middleImage = $imagePath . 'm_' . str_replace($imagePath, '', $slide->image);
+            }
         }
         
         return $slides;
