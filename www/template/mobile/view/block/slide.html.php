@@ -26,7 +26,7 @@ if($slides):
     <?php if($height == 0 and $slide->height) $height = $slide->height;?>
     <?php if ($slide->backgroundType == 'image'): ?>
     <div class='item<?php if($index === 0) echo ' active';?>'<?php echo $url . ' ' . $target;?>>
-    <?php print(html::image($slide->image));?>
+    <?php print(html::image($slide->middleImage));?>
     <?php else: ?>
     <div class='item<?php if($index === 0) echo ' active';?>'<?php echo $url . ' ' . $target;?> style='<?php echo 'background-color: ' . $slide->backgroundColor . '; height: ' . $height . 'px';?>'>
     <?php endif ?>
@@ -38,7 +38,7 @@ if($slides):
         if(trim($label) != '')
         {
             if($slide->buttonUrl[$key])  echo html::a($slide->buttonUrl[$key], $label, "class='btn btn-{$slide->buttonClass[$key]}' target='{$slide->buttonTarget[$key]}'");
-            if(!$slide->buttonUrl[$key]) echo html::commonButton($label, "btn btn-lg btn-{$slide->buttonClass[$key]}");
+            if(!$slide->buttonUrl[$key]) echo html::commonButton($label, "btn {$slide->buttonClass[$key]}");
         }
         endforeach;
         ?>

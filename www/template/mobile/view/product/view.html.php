@@ -38,7 +38,7 @@ js::execute($product->js);
     $indicators = '';
     ?>
     <?php foreach($product->image->list as $image):?>
-      <div class='item<?php if($imgIndex === 0) echo ' active';?>'><?php echo html::image($image->largeURL, "title='{$title}' alt='{$product->name}'");?></div>
+      <div class='item<?php if($imgIndex === 0) echo ' active';?>'><?php echo html::image($image->middleURL, "title='{$title}' alt='{$product->name}'");?></div>
       <?php $indicators .= "<li data-target='#productSlide' data-slide-to='{$imgIndex}' class='" . ($imgIndex === 0 ? 'active':'') . "'></li>"; ?>
     <?php $imgIndex++; ?>
     <?php endforeach;?>
