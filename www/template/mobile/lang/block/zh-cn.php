@@ -88,6 +88,7 @@ $lang->block->mobile->pages['book_read']      = '手册章节';
 $lang->block->mobile->pages['message_index']  = '留言';
 
 $lang->block->mobile->pages['page_view']      = '单页';
+$lang->block->mobile->pages['page_index']     = '单页列表';
 
 /* page layout list. */
 $lang->block->mobile->regions = new stdclass();
@@ -140,3 +141,6 @@ $lang->block->mobile->regions->message_index['bottom']       = '底部';
 
 $lang->block->mobile->regions->page_view['top']          = '上部';
 $lang->block->mobile->regions->page_view['bottom']       = '底部';
+$lang->block->mobile->regions->page_index['top']          = '上部';
+$lang->block->mobile->regions->page_index['bottom']       = '底部';
+
