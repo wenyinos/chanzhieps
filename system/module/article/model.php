@@ -141,45 +141,7 @@ class articleModel extends model
         }
         if(!$articles) return array();
 
-        /* Get categories for these articles. */
-        $categories = $this->dao->select('t2.id, t2.name, t2.abbr, t2.alias, t1.id AS article')
-            ->from(TABLE_RELATION)->alias('t1')
-            ->leftJoin(TABLE_CATEGORY)->alias('t2')->on('t1.category = t2.id')
-            ->where('t2.type')->eq($type)
-            ->fetchGroup('article', 'id');
-
-        /* Assign categories to it's article. */
-        foreach($articles as $article) $article->categories = isset($categories[$article->id]) ? $categories[$article->id] : array();
-        foreach($articles as $article) $article->category   = current($article->categories);
-
-        /* Get images for these articles. */
-        $images = $this->loadModel('file')->getByObject($type, array_keys($articles), $isImage = true);
-
-        /* Assign images to it's article. */
-        foreach($articles as $article)
-        {
-            if(empty($images[$article->id])) continue;
-
-            $article->image = new stdclass();
-            $article->image->list    = $images[$article->id];
-            $article->image->primary = $article->image->list[0];
-        }
-
-        /* Assign summary to it's article. */
-        foreach($articles as $article) $article->summary = empty($article->summary) ? helper::substr(strip_tags($article->content), 200, '...') : $article->summary;
-
-        /* Assign comments to it's article. */
-        $articleIdList = array_keys($articles);
-        $comments = $this->dao->select("objectID, count(*) as count")->from(TABLE_MESSAGE)
-            ->where('type')->eq('comment')
-            ->andWhere('objectType')->eq('article')
-            ->andWhere('objectID')->in($articleIdList)
-            ->andWhere('status')->eq(1)
-            ->groupBy('objectID')
-            ->fetchPairs('objectID', 'count');
-        foreach($articles as $article) $article->comments = isset($comments[$article->id]) ? $comments[$article->id] : 0;
- 
-        return $articles;
+        return $this->processArticleList($articles, $type);
     }
 
     /**
@@ -312,47 +274,57 @@ class articleModel extends model
 
         if(!$sticks) return array();
 
-        /* Get categories for these articles. */
-        $categories = $this->dao->select('t2.id, t2.name, t2.alias, t1.id AS article')
+        return $this->processArticleList($sticks, $type);
+    }
+
+    /**
+     * Process article list.
+     * 
+     * @param  array    $articles 
+     * @param  string   $type 
+     * @access public
+     * @return array
+     */
+    public function processArticleList($articles, $type)
+    {
+        $categories = $this->dao->select('t2.id, t2.name, t2.abbr, t2.alias, t1.id AS article')
             ->from(TABLE_RELATION)->alias('t1')
             ->leftJoin(TABLE_CATEGORY)->alias('t2')->on('t1.category = t2.id')
             ->where('t2.type')->eq($type)
             ->fetchGroup('article', 'id');
 
         /* Assign categories to it's article. */
-        foreach($sticks as $stick) $stick->categories = isset($categories[$stick->id]) ? $categories[$stick->id] : array();
-        foreach($sticks as $stick) $stick->category   = current($stick->categories);
+        foreach($articles as $article) $article->categories = isset($categories[$article->id]) ? $categories[$article->id] : array();
+        foreach($articles as $article) $article->category   = current($article->categories);
 
-        /* Get images for these sticks. */
-        $stickIDList = array();
-        foreach($sticks as $stick) $stickIDList[] = $stick->id;
-        $images = $this->loadModel('file')->getByObject('article', $stickIDList, $isImage = true);
+        /* Get images for these articles. */
+        $images = $this->loadModel('file')->getByObject($type, array_keys($articles), $isImage = true);
 
         /* Assign images to it's article. */
-        foreach($sticks as $stick)
+        foreach($articles as $article)
         {
-            if(empty($images[$stick->id])) continue;
+            if(empty($images[$article->id])) continue;
 
-            $stick->image = new stdclass();
-            $stick->image->list    = $images[$stick->id];
-            $stick->image->primary = $stick->image->list[0];
+            $article->image = new stdclass();
+            $article->image->list    = $images[$article->id];
+            $article->image->primary = $article->image->list[0];
         }
 
         /* Assign summary to it's article. */
-        foreach($sticks as $stick) $stick->summary = empty($stick->summary) ? helper::substr(strip_tags($stick->content), 200, '...') : $stick->summary;
+        foreach($articles as $article) $article->summary = empty($article->summary) ? helper::substr(strip_tags($article->content), 200, '...') : $article->summary;
 
         /* Assign comments to it's article. */
-        $stickIdList = array_keys($sticks);
+        $articleIdList = array_keys($articles);
         $comments = $this->dao->select("objectID, count(*) as count")->from(TABLE_MESSAGE)
             ->where('type')->eq('comment')
             ->andWhere('objectType')->eq('article')
-            ->andWhere('objectID')->in($stickIdList)
+            ->andWhere('objectID')->in($articleIdList)
             ->andWhere('status')->eq(1)
             ->groupBy('objectID')
             ->fetchPairs('objectID', 'count');
-        foreach($sticks as $stick) $stick->comments = isset($comments[$stick->id]) ? $comments[$stick->id] : 0;
+        foreach($articles as $article) $article->comments = isset($comments[$article->id]) ? $comments[$article->id] : 0;
  
-        return $sticks;
+        return $articles;
     }
 
     /**
