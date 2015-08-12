@@ -49,6 +49,7 @@ CREATE TABLE IF NOT EXISTS `eps_slide` (
   `title` varchar(60) NOT NULL,
   `titleColor` char(10) NOT NULL,
   `mainLink` varchar(255) NOT NULL,
+  `target` enum('0', '1') NOT NULL DEFAULT '0',
   `backgroundType` char(20) NOT NULL,
   `backgroundColor` char(10) NOT NULL,
   `height` smallint(5) unsigned NOT NULL DEFAULT '0',
