@@ -181,7 +181,7 @@ class uri
      * @params string   $viewType  
      * return string
      */
-    public static function createArticleBrowse($params, $alias, $viewType)
+    public static function createArticleBrowse($params, $alias, $viewType = '')
     {
         global $config;
 
@@ -201,7 +201,7 @@ class uri
      * @params string   $viewType  
      * return string
      */
-    public static function createArticleView($params, $alias, $viewType)
+    public static function createArticleView($params, $alias, $viewType = '')
     {
         global $config;
 
@@ -224,7 +224,7 @@ class uri
      * return string
      */
 
-    public static function createProductBrowse($params, $alias, $viewType)
+    public static function createProductBrowse($params, $alias, $viewType = '')
     {
         global $config;
 
@@ -244,7 +244,7 @@ class uri
      * @params string   $viewType  
      * return string
      */
-    public static function createProductView($params, $alias, $viewType)
+    public static function createProductView($params, $alias, $viewType = '')
     {
         global $config;
 
@@ -265,7 +265,7 @@ class uri
      * @params string   $viewType  
      * return string
      */
-    public static function createForumBoard($params, $alias, $viewType)
+    public static function createForumBoard($params, $alias, $viewType = '')
     {
         global $config;
 
@@ -284,7 +284,7 @@ class uri
      * @params string   $viewType  
      * return string
      */
-    public static function createThreadView($params, $alias, $viewType)
+    public static function createThreadView($params, $alias, $viewType = '')
     {
         global $config;
         $viewType = $viewType ? $viewType : $config->default->view;
@@ -306,7 +306,7 @@ class uri
      * @params string   $viewType  
      * return string
      */
-    public static function createBlogIndex($params, $alias, $viewType)
+    public static function createBlogIndex($params, $alias, $viewType = '')
     {
         global $config;
         $viewType = $viewType ? $viewType : $config->default->view;
@@ -325,7 +325,7 @@ class uri
      * @params string   $viewType  
      * return string
      */
-    public static function createBlogView($params, $alias, $viewType)
+    public static function createBlogView($params, $alias, $viewType = '')
     {
         global $config;
 
@@ -344,7 +344,7 @@ class uri
      * @params string   $viewType  
      * return string
      */
-    public static function createBookBrowse($params, $alias, $viewType)
+    public static function createBookBrowse($params, $alias, $viewType = '')
     {
         global $config;
         $viewType = $viewType ? $viewType : $config->default->view;
@@ -363,7 +363,7 @@ class uri
      * @params string   $viewType  
      * return string
      */
-    public static function createBookRead($params, $alias, $viewType)
+    public static function createBookRead($params, $alias, $viewType = '')
     {
         global $config;
         $viewType = $viewType ? $viewType : $config->default->view;
@@ -383,7 +383,7 @@ class uri
      * @params string   $viewType  
      * return string
      */
-    public static function createPageView($params, $alias, $viewType)
+    public static function createPageView($params, $alias, $viewType = '')
     {
         global $config;
         $viewType = $viewType ? $viewType : $config->default->view;
