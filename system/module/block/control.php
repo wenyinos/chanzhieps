@@ -14,9 +14,6 @@ class block extends control
     /**
      * Browse blocks admin.
      * 
-     * @param  int       $recTotal 
-     * @param  int       $recPerPage 
-     * @param  int       $pageID 
      * @access public
      * @return void
      */

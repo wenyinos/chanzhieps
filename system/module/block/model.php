@@ -100,7 +100,6 @@ class blockModel extends model
                             {
                                 $child->title    = $blocks[$child->id]->title;
                                 $child->type     = $blocks[$child->id]->type;
-                                $child->category = $blocks[$child->id]->category;
                                 $child->content  = $blocks[$child->id]->content;
                                 $child->template = $blocks[$child->id]->template;
                             }
@@ -108,7 +107,6 @@ class blockModel extends model
                             {
                                 $child->title    = '';
                                 $child->type     = '';
-                                $child->category = '';
                                 $child->content  = '';
                                 $child->template = '';
                             }
@@ -117,7 +115,6 @@ class blockModel extends model
                             $mergedChild->id         = $child->id;
                             $mergedChild->title      = $child->title;
                             $mergedChild->type       = $child->type;
-                            $mergedChild->category   = $child->category;
                             $mergedChild->content    = $child->content;
                             $mergedChild->template   = $child->template;
                             $mergedChild->grid       = $child->grid;
@@ -193,7 +190,6 @@ class blockModel extends model
                     {
                         $child->title    = $blocks[$child->id]->title;
                         $child->type     = $blocks[$child->id]->type;
-                        $child->category = $blocks[$child->id]->category;
                         $child->content  = $blocks[$child->id]->content;
                         $child->template = $blocks[$child->id]->template;
                     }
@@ -201,7 +197,6 @@ class blockModel extends model
                     {
                         $child->title    = '';
                         $child->type     = '';
-                        $child->category = '';
                         $child->content  = '';
                         $child->template = '';
                     }
@@ -213,7 +208,6 @@ class blockModel extends model
                     $rawChild->id         = $child->id;
                     $rawChild->title      = $child->title;
                     $rawChild->type       = $child->type;
-                    $rawChild->category   = $child->category;
                     $rawChild->content    = $child->content;
                     $rawChild->template   = $child->template;
                     $children[] = $rawChild;
