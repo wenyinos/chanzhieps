@@ -19,7 +19,7 @@
       <td>
         <div class='form-action'>
           <?php echo html::submitButton();?>
-          <strong class='text-info'><?php echo $lang->article->noCssTag;?></strong>
+          <strong class='text-info'><?php echo $lang->article->noJsTag;?></strong>
         </div>
       </td>
     </tr>
