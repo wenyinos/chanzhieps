@@ -30,7 +30,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
       <ul class='nav nav-tabs'>
         <li><a href='#contentTab' data-toggle='tab'><?php echo $lang->block->content;?></a></li>
         <?php if(strpos(',htmlcode, phpcode, slide, header', $type) == false or $type == 'html'):?>
-        <li><a href='#customTab' data-toggle='tab'><?php echo $lang->block->custom;?></a></li>
+        <li><a href='#customTab' data-toggle='tab'><?php echo $lang->block->style;?></a></li>
         <?php endif;?>
         <li><a href='#cssTab' data-toggle='tab'><?php echo $lang->ui->theme->extraStyle; ?></a></li>
         <li><a href='#jsTab' data-toggle='tab'><?php echo $lang->ui->theme->extraScript; ?></a></li>
