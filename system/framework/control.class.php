@@ -321,33 +321,32 @@ class control
         $modulePath  = $this->app->getModulePath($moduleName);
         $viewExtPath = $this->app->getModuleExtPath($moduleName, 'view');
 
-        /* Set infix for view file in mobile or pc. */
-        $viewType = $this->viewType;
-        if(isset($this->config->viewPrefix[$this->viewType])) $viewType = 'html';
-
         if((RUN_MODE != 'front') or (strpos($modulePath, 'module' . DS . 'ext' . DS) !== false))
         {
             /* If not in front mode or is ext module, view file is in modeule path. */
-            $mainViewFile = $modulePath . 'view' . DS . $this->viewPrefix . $methodName . '.' . $viewType . '.php';
+            $mainViewFile = $modulePath . 'view' . DS . $this->viewPrefix . $methodName . '.' . $this->viewType . '.php';
         }
         else
         {
             /* If in front mode, view file is in www/template path. */
-            $mainViewFile = TPL_ROOT . $moduleName . DS . $this->viewPrefix . "{$methodName}.{$viewType}.php";
-            if($this->viewPrefix == 'm.' and !is_file($mainViewFile)) $this->viewPrefix = '';
-            $mainViewFile = TPL_ROOT . $moduleName . DS . $this->viewPrefix . "{$methodName}.{$viewType}.php";
+            $mainViewFile = TPL_ROOT . $moduleName . DS . $this->viewPrefix . "{$methodName}.{$this->viewType}.php";
+            if($this->viewPrefix == 'm.' and !is_file($mainViewFile))
+            {
+                $this->viewPrefix = '';
+                $mainViewFile = TPL_ROOT . $moduleName . DS . $this->viewPrefix . "{$methodName}.{$this->viewType}.php";
+            }
         }
 
         /* Extension view file. */
-        $commonExtViewFile = $viewExtPath['common'] . $this->viewPrefix . $methodName . ".{$viewType}.php";
-        $siteExtViewFile   = $viewExtPath['site'] . $this->viewPrefix . $methodName . ".{$viewType}.php";
+        $commonExtViewFile = $viewExtPath['common'] . $this->viewPrefix . $methodName . ".{$this->viewType}.php";
+        $siteExtViewFile   = $viewExtPath['site'] . $this->viewPrefix . $methodName . ".{$this->viewType}.php";
         $viewFile = file_exists($commonExtViewFile) ? $commonExtViewFile : $mainViewFile;
         $viewFile = file_exists($siteExtViewFile) ? $siteExtViewFile : $viewFile;
         if(!is_file($viewFile)) $this->app->triggerError("the view file $viewFile not found", __FILE__, __LINE__, $exit = true);
 
         /* Extension hook file. */
-        $commonExtHookFiles = glob($viewExtPath['common'] . $this->viewPrefix . $methodName . ".*.{$viewType}.hook.php");
-        $siteExtHookFiles   = glob($viewExtPath['site'] . $this->viewPrefix . $methodName . ".*.{$viewType}.hook.php");
+        $commonExtHookFiles = glob($viewExtPath['common'] . $this->viewPrefix . $methodName . ".*.{$this->viewType}.hook.php");
+        $siteExtHookFiles   = glob($viewExtPath['site'] . $this->viewPrefix . $methodName . ".*.{$this->viewType}.hook.php");
         $extHookFiles       = array_merge((array) $commonExtHookFiles, (array) $siteExtHookFiles);
         if(!empty($extHookFiles)) return array('viewFile' => $viewFile, 'hookFiles' => $extHookFiles);
 
