@@ -30,6 +30,8 @@ class company extends control
 
     /**
      * company contact.
+     * 
+     * @access public
      * @return void
      */
     public function contact()
