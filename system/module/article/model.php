@@ -307,7 +307,7 @@ class articleModel extends model
                 ->andWhere('t1.status')->eq('normal')
                 ->fi()
                 ->beginIf($categories)->andWhere('t2.category')->in($categories)->fi()
-                ->orderBy('id_desc')
+                ->orderBy('t1.sticky_desc, t1.addedDate_desc')
                 ->fetchAll('id');
 
         if(!$sticks) return array();

@@ -44,7 +44,9 @@ class article extends control
 
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
         $families   = $categoryID ? $this->tree->getFamily($categoryID, 'article') : '';
+        $sticks     = $this->article->getSticks($families, 'article');
         $articles   = $this->article->getList('article', $families, 'addedDate_desc', $pager);
+        $articles   = $sticks + $articles;
 
         if($category)
         {
@@ -62,7 +64,6 @@ class article extends control
         $this->view->keywords  = $keywords;
         $this->view->desc      = $desc;
         $this->view->category  = $category;
-        $this->view->sticks    = $this->article->getSticks($families, 'article');
         $this->view->articles  = $articles;
         $this->view->pager     = $pager;
         $this->view->contact   = $this->loadModel('company')->getContact();
@@ -90,7 +91,9 @@ class article extends control
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $families = $categoryID ? $this->loadModel('tree')->getFamily($categoryID, $type) : '';
+        $sticks   = $this->article->getSticks($families, $type);
         $articles = $this->article->getList($type, $families, $orderBy, $pager);
+        $articles = $sticks + $articles;
 
         if($type != 'page') 
         {
@@ -102,7 +105,6 @@ class article extends control
         $this->view->type       = $type;
         $this->view->categoryID = $categoryID;
         $this->view->articles   = $articles;
-        $this->view->sticks     = $this->article->getSticks($families, $type);
         $this->view->pager      = $pager;
         $this->view->orderBy    = $orderBy;
 

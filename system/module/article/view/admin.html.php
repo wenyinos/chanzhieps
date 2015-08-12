@@ -51,65 +51,12 @@
       </tr>
     </thead>
     <tbody>
-      <?php foreach($sticks as $stick):?>
-      <tr>
-        <td class='text-center'><?php echo $stick->id;?></td>
-        <td>
-          <?php echo $stick->title;?>
-          <span class='label label-danger'><?php echo $lang->article->stick;?></span>
-          <?php if($stick->status == 'draft') echo '<span class="label label-xsm label-warning">' . $lang->article->statusList[$stick->status] .'</span>';?>
-        </td>
-        <?php if($type != 'page'):?>
-        <td class='text-center'><?php foreach($stick->categories as $category) echo $category->name . ' ';?></td>
-        <?php endif;?>
-        <td class='text-center'><?php echo $stick->addedDate;?></td>
-        <td class='text-center'><?php echo $stick->views;?></td>
-        <td class='text-center'>
-          <?php
-          commonModel::printLink('article', 'edit', "articleID=$stick->id&type=$stick->type", $lang->edit);
-          commonModel::printLink('file', 'browse', "objectType=$stick->type&objectID=$stick->id&isImage=1", $lang->article->images, "data-toggle='modal'");
-          commonModel::printLink('file', 'browse', "objectType=$stick->type&objectID=$stick->id&isImage=0", $lang->article->files, "data-toggle='modal'");
-          echo html::a($this->article->createPreviewLink($stick->id), $lang->preview, "target='_blank'");
-          ?>
-          <?php if($type != 'page'):?>
-          <span class='dropdown'>
-            <a data-toggle='dropdown' href='###'><?php echo $lang->article->stick; ?><span class='caret'></span></a>
-            <ul class='dropdown-menu' role='menu' aria-labelledby='dLabel'>
-              <?php
-              foreach($lang->article->sticks as $sticky => $label)
-              {
-                  if($stick->sticky != $sticky)
-                  {
-                      echo '<li>';
-                      commonModel::printLink('article', 'stick', "article=$stick->id&stick=$sticky", $label, "class='jsoner'");
-                      echo '</li>';
-                  }
-                  else
-                  {
-                      echo '<li class="active"><a href="###">' . $label . '</a></li>';
-                  }
-              }
-              ?>
-            </ul>
-          </span>
-          <?php endif;?>
-          <span class='dropdown'>
-            <a data-toggle='dropdown' href='javascript:;'><?php echo $this->lang->more;?><span class='caret'></span></a>
-            <ul class='dropdown-menu pull-right'>    
-              <li><?php commonModel::printLink('article', 'delete', "articleID=$stick->id", $lang->delete, 'class="deleter"');?></li>
-              <li><?php commonModel::printLink('article', 'setcss', "articleID=$stick->id", $lang->article->css, "data-toggle='modal'");?></li>
-              <li><?php commonModel::printLink('article', 'setjs', "articleID=$stick->id", $lang->article->js, "data-toggle='modal'");?></li>
-            </ul>
-          </span>
-        </td>
-      </tr>
-      <?php unset($articles[$stick->id])?>
-      <?php endforeach;?>
       <?php $maxOrder = 0; foreach($articles as $article):?>
       <tr>
         <td class='text-center'><?php echo $article->id;?></td>
         <td>
           <?php echo $article->title;?>
+          <?php if($article->sticky):?><span class='label label-danger'><?php echo $lang->article->stick;?></span><?php endif;?>
           <?php if($article->status == 'draft') echo '<span class="label label-xsm label-warning">' . $lang->article->statusList[$article->status] .'</span>';?>
         </td>
         <?php if($type != 'page'):?>
