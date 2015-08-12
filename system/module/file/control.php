@@ -213,7 +213,7 @@ class file extends control
     {
         $file = $this->file->getById($fileID);
 
-        /* Change savePath id objectType is source. */
+        /* Change savePath if objectType is source or slide. */
         if(strpos(',slide,source,', ",{$file->objectType},") !== false)
         {
             $this->file->setSavePath('source');
