@@ -77,6 +77,7 @@ class cart extends control
 
     /**
      * Get count of products in cart
+     *
      * @access public
      * @return void
      */
@@ -100,7 +101,7 @@ class cart extends control
     }
 
     /**
-     * Delete product fron cart.
+     * Delete product from cart.
      * 
      * @param  int    $product 
      * @access public
