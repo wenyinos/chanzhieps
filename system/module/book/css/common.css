@@ -26,3 +26,5 @@ i.icon-arrow-up, i.icon-arrow-down{cursor:pointer}
 dl.drop-area {background-color: #f1f1f1}
 dl.drop-area .catalog-empty {display: block;}
 .books > .catalog > .actions > .sort-handle {display: none}
+
+.leftmenu.affix{max-height: 500px; overflow-y:scroll;}
