@@ -15,7 +15,7 @@ if(!function_exists('getWebRoot')){function getWebRoot(){}}
 
 /* The basic settings. */
 $config = new config();
-$config->version     = '4.3.beta';        // The version number, don't change.
+$config->version     = '4.4';        // The version number, don't change.
 $config->encoding    = 'UTF-8';           // The encoding.
 $config->cookiePath  = '/';               // The path of cookies.
 $config->webRoot     = getWebRoot();      // The web root.
@@ -82,17 +82,16 @@ $config->file->allowed = ',txt,doc,docx,dot,wps,wri,pdf,ppt,xls,xlsx,ett,xlt,xls
 $config->file->maxSize = 2 * 1024 * 1024;  // Max size allowed(Byte).
 
 /*Thanks list*/
-$config->thanksList['IPIP.NET'] = 'http://www.ipip.net/';
-$config->thanksList['Lessphp v0.4.0'] = 'http://leafo.net/lessphp/';
+$config->thanksList['IPIP.NET']            = 'http://www.ipip.net/';
+$config->thanksList['Lessphp v0.4.0']      = 'http://leafo.net/lessphp/';
 $config->thanksList['MobileDetect 2.8.15'] = 'http://mobiledetect.net/';
-$config->thanksList['PhpConcept 2.8.2'] = 'http://www.phpconcept.net/';
-$config->thanksList['PHPMailer 5.1'] = 'http://phpmailer.sourceforge.net/';
-$config->thanksList['PhpThumb 3.0'] = 'http://phpthumb.sourceforge.net/';
+$config->thanksList['PhpConcept 2.8.2']    = 'http://www.phpconcept.net/';
+$config->thanksList['PHPMailer 5.1']       = 'http://phpmailer.sourceforge.net/';
+$config->thanksList['PhpThumb 3.0']        = 'http://phpthumb.sourceforge.net/';
 $config->thanksList['HTML Purifier 4.6.0'] = 'http://htmlpurifier.org/';
-$config->thanksList['PHP QRCode 1.1.4'] = 'http://phpqrcode.sourceforge.net/';
-$config->thanksList['Smarty 3.1.9'] = 'http://www.smarty.net/';
-$config->thanksList['Snoopy 1.2.4'] = 'http://snoopy.sourceforge.net/';
-$config->thanksList['Spyc 0.5'] = 'http://code.google.com/p/spyc/';
+$config->thanksList['PHP QRCode 1.1.4']    = 'http://phpqrcode.sourceforge.net/';
+$config->thanksList['Snoopy 1.2.4']        = 'http://snoopy.sourceforge.net/';
+$config->thanksList['Spyc 0.5']            = 'http://code.google.com/p/spyc/';
 
 /* Module dependence setting. */
 $config->dependence = new stdclass();
