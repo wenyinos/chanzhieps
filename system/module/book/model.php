@@ -93,9 +93,11 @@ class bookModel extends model
     }
 
     /**
-     * Get orgins tree of node
-     * @param  object $node current node
-     * @return array      
+     * Get origins tree of node.
+     * 
+     * @param  object    $node 
+     * @access public
+     * @return void
      */
     public function getOriginsTree($node)
     {

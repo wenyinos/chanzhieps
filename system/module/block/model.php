@@ -484,9 +484,7 @@ class blockModel extends model
         foreach($blocks as $key => $block) $sortedBlocks[] = $block;
         $layout->blocks = helper::jsonEncode($sortedBlocks);
 
-        $count = $this->dao->select('count(*) as count')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->andWhere('theme')->eq($theme)->fetch('count');
-        if($count)  $this->dao->update(TABLE_LAYOUT)->data($layout)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->andWhere('theme')->eq($theme)->exec();
-        if(!$count) $this->dao->insert(TABLE_LAYOUT)->data($layout)->exec();
+        $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
 
         return !dao::isError();
     }
