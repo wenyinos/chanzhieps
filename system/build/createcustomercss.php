@@ -10,7 +10,7 @@ include $systemRoot . 'lib/lessc/lessc.class.php';
 $lessc = new lessc();
 
 $params = array();
-foreach($config->ui->themes as $theme => $defaults)
+foreach($config->ui->themes['default'] as $theme => $defaults)
 {
     if($theme == 'common') continue;
     foreach($defaults as $section => $selector)
