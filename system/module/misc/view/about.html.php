@@ -11,10 +11,10 @@
   </div>
   <div class='col-xs-6' style='border-left: 1px solid #ddd'>
     <ul class='list-unstyled' id='aboutNav'>
-      <li><?php echo html::a('http://www.chanzhi.org', "<i class='icon-globe'></i> " . $lang->misc->offcialSite, "target='_blank'")?></li>
-      <li><?php echo html::a('http://www.chanzhi.org/vip/25_vip-support.html', "<i class='icon-question-sign'></i> " . $lang->misc->support, "target='_blank'")?></li>
-      <li><?php echo html::a('http://www.chanzhi.org/book/chanzhieps.html', "<i class='icon-book'></i> " . $lang->misc->userbook, "target='_blank'")?></li>
-      <li><?php echo html::a('http://www.chanzhi.org/forum/', "<i class='icon-comments-alt'></i> " . $lang->misc->forum, "target='_blank'")?></li>
+      <li><?php echo html::a('http://api.chanzhi.org/goto.php?item=official', "<i class='icon-globe'></i> " . $lang->misc->offcialSite, "target='_blank'")?></li>
+      <li><?php echo html::a('http://api.chanzhi.org/goto.php?item=support', "<i class='icon-question-sign'></i> " . $lang->misc->support, "target='_blank'")?></li>
+      <li><?php echo html::a('http://api.chanzhi.org/goto.php?item=book', "<i class='icon-book'></i> " . $lang->misc->userbook, "target='_blank'")?></li>
+      <li><?php echo html::a('http://api.chanzhi.org/goto.php?item=forum', "<i class='icon-comments-alt'></i> " . $lang->misc->forum, "target='_blank'")?></li>
     </ul>
   </div>
 </div>
