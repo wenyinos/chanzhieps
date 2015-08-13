@@ -10,8 +10,7 @@
  * @link        http://www.chanzhi.org
 */
 ?>
-<?php include '../../common/view/codeeditor.html.php';?>
 <tr>
   <th><?php echo $lang->block->htmlcode;?></th>
-  <td><?php echo html::textarea('content', isset($block) ? $block->content : '', "rows=20 class='form-control codeeditor'");?></td>
+  <td><?php echo html::textarea('content', '', "rows=20 class='form-control codeeditor' data-height='350'");?></td>
 </tr>

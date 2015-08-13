@@ -346,24 +346,24 @@ class blockModel extends model
      * @access public
      * @return bool
      */
-    public function create($template)
+    public function create($template, $theme)
     {
         $block = fixer::input('post')->add('template', $template)->stripTags('content', $this->config->block->allowedTags)->get();
         if($this->post->type == 'phpcode') $block = fixer::input('post')->add('template', $template)->get();
 
         $gpcOn = version_compare(phpversion(), '5.4', '<') and get_magic_quotes_gpc();
 
-        if(isset($block->params))
+        if(!isset($block->params)) $block->params = array();
+        $block->params['custom'][$theme]['css'] = $block->css;
+        $block->params['custom'][$theme]['js']  = $block->js;
+        foreach($block->params as $field => $value)
         {
-            foreach($block->params as $field => $value)
-            {
-                if($field == 'category' and is_array($value)) $block->params[$field] = join($value, ',');
-            }
-            if($this->post->content) $block->params['content'] = $gpcOn ? stripslashes($block->content) : $block->content;
-            $block->content = helper::jsonEncode($block->params);
+            if($field == 'category' and is_array($value)) $block->params[$field] = join($value, ',');
         }
+        if($this->post->content) $block->params['content'] = $gpcOn ? stripslashes($block->content) : $block->content;
+        $block->content = helper::jsonEncode($block->params);
 
-        $this->dao->insert(TABLE_BLOCK)->data($block, 'params,uid')->batchCheck($this->config->block->require->create, 'notempty')->autoCheck()->exec();
+        $this->dao->insert(TABLE_BLOCK)->data($block, 'params,uid,css,js')->batchCheck($this->config->block->require->create, 'notempty')->autoCheck()->exec();
 
         $blockID = $this->dao->lastInsertID();
         $this->loadModel('file')->updateObjectID($this->post->uid, $blockID, 'block');
