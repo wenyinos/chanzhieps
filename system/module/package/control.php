@@ -110,8 +110,8 @@ class package extends control
      */
     public function install($package, $downLink = '', $md5 = '', $type = '', $overridePackage = 'no', $ignoreCompatible = 'no', $overrideFile = 'no', $agreeLicense = 'no', $upgrade = 'no')
     {
-        $this->view->canMange = array('result' => 'success');
-        if($downLink) $this->view->canMange = $this->loadModel('common')->verfyAdmin();
+        $this->view->canManage = array('result' => 'success');
+        if($downLink) $this->view->canManage = $this->loadModel('common')->verfyAdmin();
         set_time_limit(0);
         unset($this->lang->package->menu);
         
@@ -400,12 +400,12 @@ class package extends control
      */
     public function upload($type = 'extension')
     {
-        $canMange = $this->loadModel('common')->verfyAdmin();
-        $this->view->canMange = $canMange;
+        $canManage = $this->loadModel('common')->verfyAdmin();
+        $this->view->canManage = $canManage;
 
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            if($canMange['result'] != 'success') $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->setOkFile, $canMange['okFile'])));
+            if($canManage['result'] != 'success') $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->setOkFile, $canManage['okFile'])));
             
             if(empty($_FILES))  $this->send(array('result' => 'fail', 'message' => '' ));
 
