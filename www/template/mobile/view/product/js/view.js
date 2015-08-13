@@ -1,3 +1,23 @@
++(function($){
+    'use strict';
+
+    var minDelta = 20;
+
+    $.fn.numberInput = function(){
+        return $(this).each(function(){
+            var $input = $(this);
+            $input.on('click', '.btn-minus, .btn-plus', function(){
+                var $val = $input.find('.form-control-number, [type="number"]');
+                var val = parseInt($val.val());
+                val = Math.max(1, $(this).hasClass('btn-minus') ? (val - 1) : (val + 1));
+                $val.val(val).trigger('change');
+            });
+        });
+    };
+
+    $(function(){$('.input-number').numberInput();});
+}(Zepto));
+
 $(function()
 {
     $(document).on('click', '.btn-buy', function()

@@ -1,2 +1,3 @@
-.input-number {width: 120px;}
+.input-number {width: 150px;}
+.input-number input {border-left: none; border-right: none}
 .breadcrumb+.block-region {margin-top: 0;}
