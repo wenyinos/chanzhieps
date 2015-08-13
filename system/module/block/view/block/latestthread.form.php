@@ -21,7 +21,7 @@
   <td><?php echo html::input('params[limit]', isset($block->content->limit) ? $block->content->limit : '', "class='text-4 form-control'");?></td>
 </tr>
 <tr>
-  <th><?php echo $lang->block->showCategory;?></th>
+  <th><?php echo $lang->block->showBoard;?></th>
   <td>
     <div class='input-group'>
       <span class='input-group-addon'>
