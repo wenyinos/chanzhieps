@@ -56,14 +56,9 @@ class thread extends control
                 $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->loadModel('captcha')->create4Thread()));
             }
 
-            $threadID = $this->thread->post($boardID);
+            $result = $this->thread->post($boardID);
+            $this->send($result);
 
-            if(is_array($threadID)) $this->send($threadID);
-
-            if(dao::isError()) $this->send(array('result' =>'fail', 'message' => dao::getError()));
-
-            $locate = inlink('view', "threadID=$threadID");
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $locate));
         }
 
         $this->view->title     = $board->name . $this->lang->minus . $this->lang->thread->post;
