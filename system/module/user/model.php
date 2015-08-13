@@ -119,7 +119,7 @@ class userModel extends model
      * 
      * @param mixed $account
      * @access public
-     * @return object|bool           the user.
+     * @return object|bool
      */
     public function getByAccount($account)
     {
@@ -195,7 +195,6 @@ class userModel extends model
 
         return $userPairs;         
     }
-
 
     /**
      * Create a user.
@@ -344,17 +343,21 @@ class userModel extends model
             $this->config->user->require->edit = 'realnames';
         }
 
-        return $this->dao->update(TABLE_USER)->setAutolang(false)
+        $this->dao->update(TABLE_USER)->setAutolang(false)
             ->data($user, $skip = 'token,oldPwd,password1,password2')
             ->autoCheck()
             ->batchCheck($this->config->user->require->edit, 'notempty')
             ->checkIF($this->post->gtalk != false, 'gtalk', 'email')
+
             ->beginIF(RUN_MODE == 'admin')
             ->check('email', 'email')
             ->check('email', 'unique', "account!='$account'")
             ->fi()
+
             ->where('account')->eq($account)
             ->exec();
+
+        return !dao::isError();
     }
 
     /**
@@ -370,13 +373,15 @@ class userModel extends model
         $data = fixer::input('post')->remove('oldPwd, captcha, token, fingerprint')->get();
         $data->emailCertified = 0;
 
-        return $this->dao->update(TABLE_USER)->setAutolang(false)
+        $this->dao->update(TABLE_USER)->setAutolang(false)
             ->data($data)
             ->check('email', 'notempty')
             ->check('email', 'email')
             ->check('email', 'unique', "account!='$account'")
             ->where('account')->eq($account)
             ->exec();
+
+        return !dao::isError();
     }
 
     /**
@@ -396,6 +401,7 @@ class userModel extends model
         {
             dao::$errors['password1'][] = $this->lang->user->inputPassword;
         }
+
         return !dao::isError();
     }
 
@@ -437,6 +443,7 @@ class userModel extends model
             ->get();
 
         $this->dao->setAutolang(false)->update(TABLE_USER)->data($user, 'token,fingerprint')->autoCheck()->where('account')->eq($account)->exec();
+        return !dao::isError();
     }   
 
     /**
@@ -534,7 +541,6 @@ class userModel extends model
         $user->shortJoin = substr($user->join, 5, -3);
         unset($_SESSION['random']);
 
-        /* Return him.*/
         return $user;
     }
 
@@ -659,8 +665,8 @@ class userModel extends model
         $user = $this->dao->setAutolang(false)
             ->select('*')->from(TABLE_USER)
             ->where('reset')->eq($reset)
-            ->fetch('');
-        return $user;
+            ->fetch();
+        return !empty($user);
     }
 
     /**
@@ -682,6 +688,7 @@ class userModel extends model
             ->set('reset')->eq('')
             ->where('reset')->eq($reset)
             ->exec();
+        return !dao::isError();
     }
 
     /**
@@ -764,12 +771,14 @@ class userModel extends model
                 ->exec();
 
            $this->dao->update(TABLE_MESSAGE)->set('account')->eq($user->account)->where('account')->eq($oldUser->account)->exec();
+           $this->dao->update(TABLE_MESSAGE)->set('to')->eq($user->account)->where('account')->eq($oldUser->account)->exec();
            $this->dao->update(TABLE_THREAD)->set('author')->eq($user->account)->where('author')->eq($oldUser->account)->exec();
            $this->dao->update(TABLE_THREAD)->set('repliedBy')->eq($user->account)->where('repliedBy')->eq($oldUser->account)->exec();
            $this->dao->update(TABLE_REPLY)->set('author')->eq($user->account)->where('author')->eq($oldUser->account)->exec();
            $this->dao->update(TABLE_CATEGORY)->set('postedBy')->eq($user->account)->where('postedBy')->eq($oldUser->account)->exec();
            $this->dao->update(TABLE_ADDRESS)->set('account')->eq($user->account)->where('account')->eq($oldUser->account)->exec();
            $this->dao->update(TABLE_CART)->set('account')->eq($user->account)->where('account')->eq($oldUser->account)->exec();
+           $this->dao->update(TABLE_ORDER)->set('account')->eq($user->account)->where('account')->eq($oldUser->account)->exec();
         }
         else
         { 
@@ -817,22 +826,25 @@ class userModel extends model
             if($user)
             { 
                 $this->dao->update(TABLE_MESSAGE)->set('account')->eq($account)->where('account')->eq($user->account)->exec();
+                $this->dao->update(TABLE_MESSAGE)->set('to')->eq($account)->where('account')->eq($user->account)->exec();
                 $this->dao->update(TABLE_THREAD)->set('author')->eq($account)->where('author')->eq($user->account)->exec();
                 $this->dao->update(TABLE_THREAD)->set('repliedBy')->eq($account)->where('repliedBy')->eq($user->account)->exec();
                 $this->dao->update(TABLE_REPLY)->set('author')->eq($account)->where('author')->eq($user->account)->exec();
                 $this->dao->update(TABLE_CATEGORY)->set('postedBy')->eq($account)->where('postedBy')->eq($user->account)->exec();
-               $this->dao->update(TABLE_ADDRESS)->set('account')->eq($account)->where('account')->eq($user->account)->exec();
-               $this->dao->update(TABLE_CART)->set('account')->eq($account)->where('account')->eq($user->account)->exec();
+                $this->dao->update(TABLE_ADDRESS)->set('account')->eq($account)->where('account')->eq($user->account)->exec();
+                $this->dao->update(TABLE_CART)->set('account')->eq($account)->where('account')->eq($user->account)->exec();
+                $this->dao->update(TABLE_ORDER)->set('account')->eq($account)->where('account')->eq($user->account)->exec();
 
                 $this->dao->setAutolang(false)->delete()->from(TABLE_USER)->where('id')->eq($user->id)->exec();
                 if(dao::isError()) return false;
             }
 
-            return $this->dao->setAutolang(false)->update(TABLE_OAUTH)
+            $this->dao->setAutolang(false)->update(TABLE_OAUTH)
                 ->set('account')->eq($account)
                 ->set('provider')->eq($provider)
                 ->where('openID')->eq($openID)
                 ->exec();
+            return !dao::isError();
         }
     }
 
@@ -849,11 +861,12 @@ class userModel extends model
     {
         if(!$account or !$provider or !$openID) return false;
 
-        return $this->dao->setAutolang(false)->delete()->from(TABLE_OAUTH)
+        $this->dao->setAutolang(false)->delete()->from(TABLE_OAUTH)
             ->where('account')->eq($account)
             ->andWhere('provider')->eq($provider)
             ->andWhere('openID')->eq($openID)
             ->exec();
+        return !dao::isError();
     }
 
     /**
@@ -870,6 +883,7 @@ class userModel extends model
             ->where('provider')->eq($provider)
             ->andWhere('openID')->eq($openID)
             ->fetch('account');
+
         if(!$account) return false;
         return $this->getByAccount($account);
     }
