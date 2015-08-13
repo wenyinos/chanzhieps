@@ -141,11 +141,11 @@ $lang->user->resetPassword = new stdclass();
 $lang->user->resetPassword->success    = "Password change link has been sent to your mailbox";
 $lang->user->resetPassword->failed     = "Please input your correct mail";
 
-$lang->user->resetmail = new stdclass();
-$lang->user->resetmail->subject  = 'Modify password';
-$lang->user->resetmail->account  = 'Hello,'; 
-$lang->user->resetmail->resetUrl = 'You have requested a reset password operation in %s(%s). Please click the link to change your password:';
-$lang->user->resetmail->notice   = 'System letter, please do not reply';
+$lang->user->resetMail = new stdclass();
+$lang->user->resetMail->subject  = 'Modify password';
+$lang->user->resetMail->account  = 'Hello,'; 
+$lang->user->resetMail->resetUrl = 'You have requested a reset password operation in %s(%s). Please click the link to change your password:';
+$lang->user->resetMail->notice   = 'System letter, please do not reply';
 
 $lang->user->oauth = new stdclass();
 $lang->user->oauth->common       = 'OAuth';
