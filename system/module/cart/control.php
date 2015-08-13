@@ -47,6 +47,7 @@ class cart extends control
         $this->app->loadLang('order');
         $this->view->currencySymbol = $this->lang->product->currencySymbols[$this->config->product->currency];
         $this->view->title    = $this->lang->cart->browse;
+        if($this->app->user->account != 'guest') $this->cart->mergeToDb();
         $this->view->products = $this->cart->getListByAccount($this->app->user->account);
         $this->display();
     }

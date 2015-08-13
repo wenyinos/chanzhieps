@@ -155,4 +155,17 @@ class cartModel extends model
         if(isset($cart[$productID])) unset($cart[$productID]);
         setcookie('cart', json_encode($cart), time() + 60 * 60 * 24);
     }
+
+    public function mergeToDb()
+    {
+        if($this->app->user->account == 'guest') return true;
+        $goodsList = $this->getListByCookie();
+        foreach($goodsList as $id => $goods)
+        {
+            $goods->account = $this->app->user->account;
+            $this->dao->insert(TABLE_CART)->data($goods)->exec();;
+            unset($goodsList[$id]);
+        }
+        setcookie('cart', json_encode($goodsList), time() + 60 * 60 * 24);
+    }
 }
