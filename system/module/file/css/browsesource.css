@@ -21,4 +21,5 @@ a.selected {background: #005BAC; color: #FFF;}
 .panel-actions a {padding: 7px;}
 .panel-actions a.list-view{margin-right: 10px;}
 
-.file-source {display: block; color: #666; text-align: left; margin: 0; overflow:hidden; padding: 10px; height: 40px; line-height: 20px;}
+.file-source {display: block; color: #666; text-align: left; margin: 0; overflow:hidden; padding: 10px; height: 40px; line-height: 20px; background:#EBF2F9;}
+.file-source input{border:none;background:none;}
