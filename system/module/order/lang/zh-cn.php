@@ -32,7 +32,7 @@ $lang->order->paidSuccess    = '订单支付成功！';
 $lang->order->submit         = '提交订单';
 $lang->order->cancel         = '取消';
 $lang->order->pay            = '支付';
-$lang->order->goToPay        = '去支付';
+$lang->order->goToPay        = '订单创建成功，请到支付页面完成付款。';
 $lang->order->return         = '收款';
 $lang->order->delivery       = '发货';
 $lang->order->finish         = '完成';
@@ -45,6 +45,7 @@ $lang->order->life           = '订单跟踪';
 $lang->order->days           = '天';
 $lang->order->deliveryInfo   = '查看详情';
 $lang->order->backToCart     = '返回购物车修改';
+$lang->order->paid           = '我已付款';
 
 $lang->order->confirmLimit         = '确认收货周期';
 $lang->order->confirmReceived      = '确认收货';

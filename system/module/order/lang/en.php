@@ -31,6 +31,7 @@ $lang->order->paidSuccess    = 'Order successsfully paid!';
 $lang->order->submit         = 'Submit order';
 $lang->order->cancel         = 'Cancel';
 $lang->order->pay            = 'Pay';
+$lang->order->goToPay        = 'Please complete the payment.';
 $lang->order->return         = 'Receive payment';
 $lang->order->delivery       = 'delivery';
 $lang->order->finish         = 'finish';
@@ -44,6 +45,7 @@ $lang->order->life           = 'order life';
 $lang->order->days           = 'Days';
 $lang->order->deliveryInfo   = 'Delivery Information';
 $lang->order->backToCart     = 'Back to cart for change';
+$lang->order->paid           = 'I have paid';
 
 $lang->order->confirmLimit         = 'confirm delivery in';
 $lang->order->confirmReceived      = 'Confirm Received';

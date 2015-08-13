@@ -61,7 +61,7 @@ class order extends control
         if(empty($order)) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         if($order->payment != 'COD') 
         {
-              $this->send(array('result' => 'success', 'locate' => $this->order->createPayLink($order)));
+            $this->send(array('result' => 'success', 'payLink' => $this->order->createPayLink($order)));
         }
 
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('browse')));
