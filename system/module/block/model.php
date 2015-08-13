@@ -346,24 +346,24 @@ class blockModel extends model
      * @access public
      * @return bool
      */
-    public function create($template)
+    public function create($template, $theme)
     {
         $block = fixer::input('post')->add('template', $template)->stripTags('content', $this->config->block->allowedTags)->get();
         if($this->post->type == 'phpcode') $block = fixer::input('post')->add('template', $template)->get();
 
         $gpcOn = version_compare(phpversion(), '5.4', '<') and get_magic_quotes_gpc();
 
-        if(isset($block->params))
+        if(!isset($block->params)) $block->params = array();
+        $block->params['custom'][$theme]['css'] = $block->css;
+        $block->params['custom'][$theme]['js']  = $block->js;
+        foreach($block->params as $field => $value)
         {
-            foreach($block->params as $field => $value)
-            {
-                if($field == 'category' and is_array($value)) $block->params[$field] = join($value, ',');
-            }
-            if($this->post->content) $block->params['content'] = $gpcOn ? stripslashes($block->content) : $block->content;
-            $block->content = helper::jsonEncode($block->params);
+            if($field == 'category' and is_array($value)) $block->params[$field] = join($value, ',');
         }
+        if($this->post->content) $block->params['content'] = $gpcOn ? stripslashes($block->content) : $block->content;
+        $block->content = helper::jsonEncode($block->params);
 
-        $this->dao->insert(TABLE_BLOCK)->data($block, 'params,uid')->batchCheck($this->config->block->require->create, 'notempty')->autoCheck()->exec();
+        $this->dao->insert(TABLE_BLOCK)->data($block, 'params,uid,css,js')->batchCheck($this->config->block->require->create, 'notempty')->autoCheck()->exec();
 
         $blockID = $this->dao->lastInsertID();
         $this->loadModel('file')->updateObjectID($this->post->uid, $blockID, 'block');
@@ -593,7 +593,7 @@ class blockModel extends model
             {
                 $defaultIcon = $this->config->block->defaultIcons[$block->type];
                 $iconClass   = isset($content->icon) ? $content->icon : $defaultIcon;
-                $icon        = $iconClass ? "<i class='icon {$iconClass}'></i> " : "" ;
+                $icon        = $iconClass ? "<i class='icon panel-icon {$iconClass}'></i> " : "" ;
             }
 
             $style  = '<style>';
@@ -608,7 +608,7 @@ class blockModel extends model
                 $style .= !empty($content->custom->$theme->titleColor) ? 'color:' .$content->custom->$theme->titleColor . ';' : '';
                 $style .= !empty($content->custom->$theme->titleBackground) ? 'background:' .$content->custom->$theme->titleBackground . ' !important;;' : '';
                 $style .= '}';
-                $style .= !empty($content->custom->$theme->iconColor) ? '#block' . $block->id . ' i{color:' .$content->custom->$theme->iconColor . ' !important;}' : '';
+                $style .= !empty($content->custom->$theme->iconColor) ? '#block' . $block->id . ' .panel-icon {color:' .$content->custom->$theme->iconColor . ' !important;}' : '';
                 $style .= !empty($content->custom->$theme->linkColor) ? '#block' . $block->id . ' a{color:' .$content->custom->$theme->linkColor . ' !important;}' : '';
                 $style .= isset($content->custom->$theme->paddingTop) ? '#block' . $block->id . ' .panel-body' . '{padding-top:' . $content->custom->$theme->paddingTop . 'px !important;}' : '';
                 $style .= isset($content->custom->$theme->paddingRight) ? '#block' . $block->id . ' .panel-body' . '{padding-right:' . $content->custom->$theme->paddingRight . 'px !important;}' : '';
@@ -616,11 +616,14 @@ class blockModel extends model
                 $style .= isset($content->custom->$theme->paddingLeft) ? '#block' . $block->id . ' .panel-body' . '{padding-left:' . $content->custom->$theme->paddingLeft . 'px !important;}' : '';
                 if(!empty($content->custom->$theme->css))
                 {
-                    $style .= str_replace('#blockID', "#block{$block->id}", $content->custom->$theme->css);
+                    $style .= str_ireplace('#blockID', "#block{$block->id}", $content->custom->$theme->css);
+                    $lessc = $this->app->loadClass('lessc');
+                    $lessc->setFormatter("compressed");
+                    $style = $lessc->compile($style);
                 }
             }
             $style .= '</style>';
-            $script = !empty($content->custom->$theme->js) ? "<script language='Javascript'>" . $content->custom->$theme->js . "</script>" : '';
+            $script = !empty($content->custom->$theme->js) ? "<script>" . $content->custom->$theme->js . "</script>" : '';
 
             echo $containerHeader;
             if(file_exists($blockFile)) include $blockFile;
