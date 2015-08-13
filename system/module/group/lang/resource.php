@@ -247,12 +247,11 @@ $lang->resource->wechat->qrcode         = 'qrcode';
 
 /* Order module. */
 if(!isset($lang->resource->order))$lang->resource->order = new stdclass();
-$lang->resource->order->admin         = 'admin';
-$lang->resource->order->delivery      = 'delivery';
-$lang->resource->order->deliveryInfo  = 'deliveryInfo';
-$lang->resource->order->finish        = 'finish';
-$lang->resource->order->pay           = 'pay';
-$lang->resource->order->setting       = 'setting';
+$lang->resource->order->admin    = 'admin';
+$lang->resource->order->delivery = 'delivery';
+$lang->resource->order->finish   = 'finish';
+$lang->resource->order->pay      = 'pay';
+$lang->resource->order->setting  = 'setting';
 
 /* Search module. */
 if(!isset($lang->resource->search))$lang->resource->search = new stdclass();
