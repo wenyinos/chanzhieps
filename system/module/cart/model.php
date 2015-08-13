@@ -48,9 +48,16 @@ class cartModel extends model
      */
     public function getListByAccount($account = '')
     {
-        $goodsInDb     = $this->dao->select('*')->from(TABLE_CART)->where('account')->eq($account)->fetchAll('product');
-        $goodsInCookie = $this->getListByCookie();
-        $goodsList = (array) $goodsInDb + (array) $goodsInCookie;
+        if($this->app->user->account != 'guest')
+        {
+            $goodsList = $this->dao->select('*')->from(TABLE_CART)->where('account')->eq($account)->fetchAll('product');
+        }
+        else
+        {
+            $goodsInDb     = $this->dao->select('*')->from(TABLE_CART)->where('account')->eq($account)->fetchAll('product');
+            $goodsInCookie = $this->getListByCookie();
+            $goodsList     = (array) $goodsInDb + (array) $goodsInCookie;
+        }
 
         /* Get products(use groupBy to distinct products).  */
         $products = $this->dao->select('t1.*, t2.category')->from(TABLE_PRODUCT)->alias('t1')
