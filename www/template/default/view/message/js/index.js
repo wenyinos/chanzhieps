@@ -27,9 +27,9 @@ $(document).ready(function()
         if(obj.height() > 100)
         {
             var buttons = "<a href='javascript:void(0)' onclick='showDetail(this)' class='showDetail'> ... " + v.showDetail + "</a>";
-            buttons    += "<a href='javascript:void(0)' onclick='showAbstract(this)' class='showAbstract'> " + v.showAbstract + "</a>";
+            buttons    += "<a href='javascript:void(0)' onclick='hideDetail(this)' class='hideDetail'> " + v.hideDetail + "</a>";
             obj.parent().append(buttons);
-            obj.parent().find('.showAbstract').hide();
+            obj.parent().find('.hideDetail').hide();
             obj.addClass('content-abstract');
         }
     });
@@ -40,13 +40,13 @@ function showDetail(obj)
     var tdContent = $(obj).parents('.td-content');
     tdContent.find('.content-detail').removeClass('content-abstract');
     tdContent.find('.showDetail').hide();
-    tdContent.find('.showAbstract').show();
+    tdContent.find('.hideDetail').show();
 }
 
-function showAbstract(obj)
+function hideDetail(obj)
 {
     var tdContent = $(obj).parents('.td-content');
     tdContent.find('.content-detail').addClass('content-abstract');
     tdContent.find('.showDetail').show();
-    tdContent.find('.showAbstract').hide();
+    tdContent.find('.hideDetail').hide();
 }
