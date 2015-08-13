@@ -12,6 +12,7 @@
 ?>
 <?php
 include TPL_ROOT . 'common/header.html.php';
+include TPL_ROOT . 'common/files.html.php';
 
 /* set categoryPath for topNav highlight. */
 js::set('path',  $product->path);

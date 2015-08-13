@@ -485,8 +485,8 @@ class js
      */
     static private function start($full = true)
     {
-        if($full) return "<html><meta http-equiv='Content-Type' content='text/html; charset=utf-8' /><style>body{background:white}</style><script language='Javascript'>";
-        return "<script language='Javascript'>";
+        if($full) return "<html><meta http-equiv='Content-Type' content='text/html; charset=utf-8' /><style>body{background:white}</style><script>";
+        return "<script>";
     }
 
     /**

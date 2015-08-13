@@ -12,6 +12,7 @@
 ?>
 <?php 
 include TPL_ROOT . 'common/header.html.php';
+include TPL_ROOT . 'common/files.html.php';
 js::set('path', $article->path);
 js::set('articleID', $article->id);
 js::set('categoryID', $category->id);
