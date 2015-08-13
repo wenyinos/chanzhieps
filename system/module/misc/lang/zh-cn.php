@@ -7,4 +7,6 @@ $lang->misc->userbook    = '用户手册';
 $lang->misc->forum       = '论坛交流';
 
 $lang->misc->thanksTitle      = '蝉知构建于众多优秀的开源项目之上';
-$lang->misc->thanksSubtitle = '衷心感谢这些项目背后的伟大程序员们！';
+$lang->misc->thanksFooter     = '感谢%s提供的安全审计';
+$lang->misc->thanksObjectName = '站长安全网';
+
