@@ -67,7 +67,6 @@ $config->langAbbrLabels['zh-cn'] = '简';
 $config->langAbbrLabels['zh-tw'] = '繁';
 $config->langAbbrLabels['en']    = 'En';
 
-
 /* Languags shortcuts. */
 $config->langsShortcuts['zh-cn'] = 'cn';
 $config->langsShortcuts['zh-tw'] = 'tw';

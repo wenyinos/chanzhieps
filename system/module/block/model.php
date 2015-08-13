@@ -351,7 +351,7 @@ class blockModel extends model
         $block = fixer::input('post')->add('template', $template)->stripTags('content', $this->config->block->allowedTags)->get();
         if($this->post->type == 'phpcode') $block = fixer::input('post')->add('template', $template)->get();
 
-        $gpcOn = version_compare(phpversion(), '5.4', '<') and get_magic_quotes_gpc();
+        $gpcOn = (version_compare(phpversion(), '5.4', '<') and get_magic_quotes_gpc());
 
         if(!isset($block->params)) $block->params = array();
         $block->params['custom'][$theme]['css'] = $block->css;
@@ -385,7 +385,7 @@ class blockModel extends model
         $data = fixer::input('post')->add('template', $template)->stripTags('content', $this->config->block->allowedTags)->get();
         if($this->post->type == 'phpcode') $data = fixer::input('post')->add('template', $template)->get();
 
-        $gpcOn = version_compare(phpversion(), '5.4', '<') and get_magic_quotes_gpc();
+        $gpcOn = (version_compare(phpversion(), '5.4', '<') and get_magic_quotes_gpc());
 
         if(!isset($data->params)) $data->params = array();
         $data->params['custom'][$theme]['css'] = $data->css;
@@ -522,7 +522,7 @@ class blockModel extends model
      */
     private function parseBlockContent($block, $withGrid = false, $containerHeader, $containerFooter)
     {
-        $withGrid = $withGrid and isset($block->grid);
+        $withGrid = ($withGrid and isset($block->grid));
         if(!empty($block->children)) 
         {
             if($withGrid)
@@ -616,14 +616,15 @@ class blockModel extends model
                 $style .= isset($content->custom->$theme->paddingLeft) ? '#block' . $block->id . ' .panel-body' . '{padding-left:' . $content->custom->$theme->paddingLeft . 'px !important;}' : '';
                 if(!empty($content->custom->$theme->css))
                 {
-                    $style .= str_ireplace('#blockID', "#block{$block->id}", $content->custom->$theme->css);
+                    $customStyle = str_ireplace('#blockID', "#block{$block->id}", $content->custom->$theme->css);
                     $lessc = $this->app->loadClass('lessc');
                     $lessc->setFormatter("compressed");
-                    $style = $lessc->compile($style);
+                    $customStyle = $lessc->compile($customStyle);
+                    $style .= $customStyle;
                 }
             }
             $style .= '</style>';
-            $script = !empty($content->custom->$theme->js) ? "<script>" . $content->custom->$theme->js . "</script>" : '';
+            $script = !empty($content->custom->$theme->js) ? "<script language='Javascript'>" . str_ireplace('#blockID', "#block{$block->id}", $content->custom->$theme->js) . "</script>" : '';
 
             echo $containerHeader;
             if(file_exists($blockFile)) include $blockFile;

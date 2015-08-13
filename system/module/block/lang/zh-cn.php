@@ -72,12 +72,13 @@ $lang->block->paddingLeft   = '左';
 $lang->block->paddingRight  = '右';
 
 $lang->block->placeholder = new stdclass();
-$lang->block->placeholder->moreText        = '区块右上角文字';
-$lang->block->placeholder->moreUrl         = '区块右上角链接地址';
-$lang->block->placeholder->padding         = '0';
-$lang->block->placeholder->customStyleTip  = '样式表支持Less语法，可以用#blockID作为id选择器。';
-$lang->block->placeholder->customScriptTip = '已包含 jQuery 1.9.0，可以用#blockID作为id选择器。';
-$lang->block->placeholder->class           = '多个类名之间用空格隔开';
+$lang->block->placeholder->moreText               = '区块右上角文字';
+$lang->block->placeholder->moreUrl                = '区块右上角链接地址';
+$lang->block->placeholder->padding                = '0';
+$lang->block->placeholder->customStyleTip         = '样式表支持Less语法，可以用#blockID作为id选择器。';
+$lang->block->placeholder->desktopCustomScriptTip = '已包含 jQuery 1.9.0，可以用#blockID作为id选择器。';
+$lang->block->placeholder->mobileCustomScriptTip  = '支持基本的jQuery语法，可以用#blockID作为id选择器。';
+$lang->block->placeholder->class                  = '多个类名之间用空格隔开';
 
 $lang->block->gridOptions[0]  = '自动';
 $lang->block->gridOptions[6]  = '1/2';
