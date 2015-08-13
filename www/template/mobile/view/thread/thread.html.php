@@ -27,7 +27,7 @@
       <div class="actions text-right">
         <?php if($this->thread->canManage($board->id)): ?>
         <span class='dropdown dropup'>
-          <a data-toggle='dropdown' href='###' class='text-muted'><i class='icon-flag-alt'></i> <?php echo $lang->thread->sticks[$thread->stick]; ?> <span class='caret'></span></a>
+          <a data-toggle='dropdown' href='###' class='text-muted'><i class='icon-flag-alt'></i> <?php echo $lang->thread->sticks[$thread->stick]; ?> <i class='icon-caret-up'></i></a>
           <ul class='dropdown-menu' role='menu' aria-labelledby='dLabel'>
           <?php
           foreach($lang->thread->sticks as $stick => $label)

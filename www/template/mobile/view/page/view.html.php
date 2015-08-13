@@ -12,6 +12,7 @@
 ?>
 <?php 
 include TPL_ROOT . 'common/header.html.php';
+include TPL_ROOT . 'common/files.html.php';
 js::set('pageID', $page->id);
 css::internal($page->css);
 js::execute($page->js);

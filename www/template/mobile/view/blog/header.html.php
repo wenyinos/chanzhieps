@@ -38,7 +38,7 @@
       <?php endif; ?>
 
       <button type='button' class='btn' data-toggle='dropdown'><i class='icon-bars'></i></button>
-      <ul class='dropdown-menu pull-right'>
+      <ul class='dropdown-menu dropdown-menu-right'>
         <?php echo commonModel::printTopBar(true);?>
         <li class='divider'></li>
         <?php echo commonModel::printLanguageBar(true);?>
