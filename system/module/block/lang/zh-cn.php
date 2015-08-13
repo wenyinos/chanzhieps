@@ -51,7 +51,7 @@ $lang->block->textExample     = '区块文字样式示例，<a href="###">链接
 $lang->block->customStyleTip  = '在这里调整区块的颜色及背景';
 $lang->block->style           = '样式';
 $lang->block->sort            = '排序';
-$lang->block->class           = 'class选择器';
+$lang->block->class           = 'css类名';
 
 $lang->block->admin        = "区块管理";
 $lang->block->pages        = "布局设置";
@@ -72,11 +72,12 @@ $lang->block->paddingLeft   = '左';
 $lang->block->paddingRight  = '右';
 
 $lang->block->placeholder = new stdclass();
-$lang->block->placeholder->moreText = '区块右上角文字';
-$lang->block->placeholder->moreUrl  = '区块右上角链接地址';
-$lang->block->placeholder->padding  = '0';
-$lang->block->placeholder->blockID  = '可以用#blockID作为id选择器';
-$lang->block->placeholder->class    = '多个选择器之间用空格隔开';
+$lang->block->placeholder->moreText        = '区块右上角文字';
+$lang->block->placeholder->moreUrl         = '区块右上角链接地址';
+$lang->block->placeholder->padding         = '0';
+$lang->block->placeholder->customStyleTip  = '样式表支持Less语法，可以用#blockID作为id选择器。';
+$lang->block->placeholder->customScriptTip = '已包含 jQuery 1.9.0，可以用#blockID作为id选择器。';
+$lang->block->placeholder->class           = '多个类名之间用空格隔开';
 
 $lang->block->gridOptions[0]  = '自动';
 $lang->block->gridOptions[6]  = '1/2';

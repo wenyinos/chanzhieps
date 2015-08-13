@@ -16,18 +16,19 @@
 
 #ajaxForm {position: relative;}
 .panel-preview {background-color: #f5f5f5; border-radius: 6px; padding: 12px 20px;}
-#panelPreview.panel-preview {position: absolute; right: 20px; width: 35%;}
 .panel-preview > .heading {margin-bottom: 10px;}
 .panel-preview > .heading > .pull-right {position: relative; top: -3px}
 .panel-preview > .heading > .pull-right > .btn {padding: 2px 10px}
 .panel-preview > .panel {margin-bottom: 0;width: 100%; margin: 0 auto; line-height: 20px;}
-.form-footer{padding-left: 105px;}
-#editForm[data-tab='cssTab'] .form-footer, #editForm[data-tab='jsTab'] .form-footer {padding-left: 0;}
-#editForm .panel-heading {padding: 4px 5px 0 5px}
-#editForm .nav-tabs {margin-bottom: -1px}
-#editForm .nav-tabs > li > a {padding: 5px 10px 8px}
-#editForm .nav-tabs > li > a.active, #mainPanel .nav-tabs > li > a.focus {outline: none;}
-#editForm .nav-tabs > li.active > a {padding: 6px 10px 7px; color: #333; font-weight: bold;}
+.form-footer{padding-left: 85px;}
+.blockForm[data-tab='cssTab'] .form-footer, .blockForm[data-tab='jsTab'] .form-footer {padding-left: 0;}
+.blockForm[data-tab='cssTab'] .tab-content, .blockForm[data-tab='jsTab'] .tab-content {width: 100%;}
+.blockForm[data-tab='cssTab'] #panelPreview, .blockForm[data-tab='jsTab'] #panelPreview {display:none;}
+.blockForm > .panel > .panel-heading {padding: 4px 5px 0 5px}
+.blockForm .nav-tabs {margin-bottom: -1px}
+.blockForm .nav-tabs > li > a {padding: 5px 10px 8px}
+.blockForm .nav-tabs > li > a.active, #mainPanel .nav-tabs > li > a.focus {outline: none;}
+.blockForm .nav-tabs > li.active > a {padding: 6px 10px 7px; color: #333; font-weight: bold;}
 #titleTDCell > .required-wrapper {width: 50%;}
 
 #dialogPanelPreivew.panel-preview {margin-bottom: 10px; padding: 10px 20px 15px 20px;}

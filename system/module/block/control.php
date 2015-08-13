@@ -55,6 +55,7 @@ class block extends control
     public function create($type = 'html')
     {
         $template = $this->config->template->{$this->device}->name;
+        $theme    = $this->config->template->{$this->device}->theme;
         $this->block->loadTemplateLang($template);
 
         if($type == 'phpcode')
@@ -70,14 +71,14 @@ class block extends control
         {
             if($type == 'phpcode' and !$canCreatePHP) $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => dao::getError()));
 
-            $this->block->create($template);
+            $this->block->create($template, $theme);
             if(!dao::isError()) $this->send(array('result' => 'success', 'locate' => $this->inlink('admin')));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
         $this->view->type     = $type;
         $this->view->template = $template;
-        $this->view->theme    = $this->config->template->{$this->device}->theme;
+        $this->view->theme    = $theme;
         $this->display();
     }
 

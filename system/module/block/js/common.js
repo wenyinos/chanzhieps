@@ -83,4 +83,13 @@ $(function()
     {
         $panelPreview.find('a').css('color', $(this).val());
     }).change();
+
+    var $form = $('.blockForm');
+    $('.nav-tabs li > a').on('show.bs.tab show.zui.tab', function()
+    {
+        $form.attr('data-tab', $(this).attr('href').replace('#', ''));
+
+        var height = $($(this).attr('href')).outerHeight() - 30;
+        $('#panelPreview > .panel').css('height', height).data('height', height);
+    }).first().tab('show');
 });
