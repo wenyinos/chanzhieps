@@ -2,7 +2,7 @@
 <?php include dirname(__FILE__) . DS . 'header.lite.html.php';?>
 <div class='page-container'>
   <?php $this->block->printRegion($layouts, 'all', 'top');?>
-  <?php $topNavs = $this->loadModel('nav')->getNavs('top');?>
+  <?php $topNavs = $this->loadModel('nav')->getNavs('desktop_top');?>
   <nav id='navbar' class='navbar navbar-default' role='navigation'>
     <div class='navbar-header'>
       <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#navbarCollapse'>
