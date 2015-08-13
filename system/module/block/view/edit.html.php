@@ -22,7 +22,6 @@ foreach (explode('|', $lang->colorPlates) as $value)
 {
     $colorPlates .= "<div class='color color-tile' data='#" . $value . "'><i class='icon-ok'></i></div>";
 }
-a($block);
 ?>
 <form method='post' id='editForm' class='blockForm'>
   <div class='panel'>
