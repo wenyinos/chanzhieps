@@ -29,8 +29,7 @@ class site extends control
                 ->remove('allowedFiles')
                 ->setDefault('modules', '')
                 ->stripTags('pauseTip', $allowedTags)
-                ->remove('uid')
-                ->remove('lang,cn2tw,defaultLang')
+                ->remove('uid,lang,cn2tw,defaultLang')
                 ->get();
 
             $result = $this->loadModel('setting')->setItems('system.common.site', $setting);

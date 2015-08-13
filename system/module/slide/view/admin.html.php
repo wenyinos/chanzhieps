@@ -13,7 +13,7 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
-    <i class='icon-th'></i> <?php echo $lang->slide->slide ?>
+    <i class='icon-th'></i> <?php echo $lang->slide->group;?>
     <div class='panel-actions'><?php commonModel::printLink('tree', 'browse', "type=slide", '<i class="icon-plus-sign"></i> ' . $lang->slide->createGroup, "class='btn btn-primary'");?></div>
   </div>
   <div class='panel-body'>
