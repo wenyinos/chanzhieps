@@ -122,9 +122,7 @@ class message extends control
         {
             $captchaConfig = isset($this->config->site->captcha) ? $this->config->site->captcha : 'auto';
             $needCaptcha   = false;
-            if($captchaConfig == 'auto' and $this->loadModel('captcha')->isEvil($this->post->content)) $needCaptcha = true;
-            if($captchaConfig == 'open')  $needCaptcha = true;
-            if($captchaConfig == 'close') $needCaptcha = false;
+            if(($captchaConfig == 'auto' and $this->loadModel('captcha')->isEvil($this->post->content)) or $captchaConfig == 'open') $needCaptcha = true;
 
             /* If no captcha but is garbage, return the error info. */
             if($this->post->captcha === false and $needCaptcha)
@@ -132,20 +130,8 @@ class message extends control
                 $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->loadModel('captcha')->create4Comment()));
             }
 
-            /* Try to save to database. */
-            $messageID = $this->message->post($type);
-
-            /* If save fail, return the error info. */
-            if(!$messageID)
-            {
-                $this->send(array('result' => 'fail', 'reason' => 'error', 'message' => dao::getError()));
-            }
-
-            if(is_array($messageID)) $this->send($messageID);
-
-            /* If save successfully, save the cookie and send success info. */
-            $this->message->setCookie($messageID);
-            $this->send(array('result' => 'success', 'message' => $this->lang->message->thanks));
+            $result = $this->message->post($type);
+            $this->send($result);
         }
     }
 
