@@ -9,8 +9,8 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->slide->common = 'Slides';
-$lang->slide->slide = 'Slide groups';
+$lang->slide->common     = 'Slides';
+$lang->slide->group      = 'Slide groups';
 $lang->slide->title      = 'Title';
 $lang->slide->titleColor = 'Title Color';
 $lang->slide->image      = 'Image';
