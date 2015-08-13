@@ -170,9 +170,9 @@ class replyModel extends model
             /* Update board stats. */
             $this->loadModel('forum')->updateBoardStats($thread->board);
 
-            return $replyID;
+            return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => helper::createLink('thread', 'view', "threadID=$threadID"));
         }
-        return false;
+        return array('result' => 'fail', 'message' => dao::getError());
     }
 
     /**
