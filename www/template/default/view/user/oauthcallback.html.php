@@ -4,7 +4,6 @@
     <div class='panel panel-default'>
       <div class='panel-heading'>
         <strong><?php echo $lang->user->oauth->lblProfile;?></strong>
-        <div class='panel-actions'><?php echo html::a(inlink('ignoreBind'), $lang->user->oauth->ignore . '>>', "class='btn btn-primary'") . html::hidden('referer', $referer);?></div>
       </div>
       <div class='panel-body'>
         <form method='post' id='registerForm' class='form-horizontal' action='<?php echo $this->createLink('user', 'oauthRegister');?>' role='form'>
@@ -30,7 +29,9 @@
           </div>
           <div class='form-group'>
             <label class='col-sm-2 control-label'></label>
-            <div class='col-sm-9'><?php echo html::submitButton('', 'btn btn-success') . html::hidden('referer', $referer);?></div>
+            <div class='col-sm-9'>
+              <?php echo html::submitButton('', 'btn btn-success') . html::a(inlink('ignoreBind'), $lang->user->oauth->ignore, "class='btn btn-primary'"). html::hidden('referer', $referer);?>
+            </div>
           </div>
         </form>
       </div>
@@ -40,7 +41,6 @@
     <div class='panel panel-default'>
       <div class='panel-heading'>
         <strong><?php echo $lang->user->oauth->lblBind;?></strong>
-        <div class='panel-actions'><?php echo html::a(inlink('ignoreBind'), $lang->user->oauth->ignore . '>>', "class='btn btn-primary'") . html::hidden('referer', $referer);?></div>
       </div>
       <div class='panel-body'>
         <form method='post' id='bindForm' class='form-horizontal' action='<?php echo $this->createLink('user', 'oauthBind');?>' role='form'>
