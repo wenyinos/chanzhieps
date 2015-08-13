@@ -478,9 +478,7 @@ class commonModel extends model
         }
         else
         {
-            echo html::a(getHomeRoot($config->langsShortcuts[$langs[0]]), $app->lang->cn); 
-            echo html::a(getHomeRoot($config->langsShortcuts[$langs[1]]), $app->lang->tw); 
-            echo html::a(getHomeRoot($config->langsShortcuts[$langs[2]]), $app->lang->en); 
+            foreach($langs as $lang) echo html::a(getHomeRoot($config->langsShortcuts[$lang]), $config->langAbbrLabels[$lang]); 
         }
     }
 
