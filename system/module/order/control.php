@@ -303,20 +303,4 @@ class order extends control
         }
         $this->display();
     }
-
-    /**
-     * View delivery info page.
-     * 
-     * @param  int    $orderID 
-     * @access public
-     * @return void
-     */
-    public function deliveryInfo($orderID)
-    {
-        $this->view->title       = $this->lang->order->deliveryInfo;
-        $this->view->order       = $this->order->getByID($orderID);
-        $this->view->subtitle    = "<span class='text-danger'>{$this->view->order->address}</span>";
-        $this->view->expressList = $this->loadModel('tree')->getPairs(0, 'express');
-        $this->display();
-    }
 }

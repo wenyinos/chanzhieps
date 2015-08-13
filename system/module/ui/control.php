@@ -255,9 +255,9 @@ class ui extends control
             $themes[$code]    = $template['themes'];
         }
 
+        $this->view->title           = $this->lang->ui->exportTheme;
         $this->view->templateOptions = $templates;
-        $this->view->themes    = $themes;
-        $this->view->title     = $this->lang->ui->exportTheme;
+        $this->view->themes          = $themes;
         $this->display();
     }
 
@@ -283,12 +283,12 @@ class ui extends control
      */
     public function uploadTheme()
     {
-        $canMange = $this->loadModel('common')->verfyAdmin();
-        $this->view->canMange = $canMange;
+        $canManage = $this->loadModel('common')->verfyAdmin();
+        $this->view->canManage = $canManage;
 
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            if($canMange['result'] != 'success') $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->setOkFile, $canMange['okFile'])));
+            if($canManage['result'] != 'success') $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->setOkFile, $canManage['okFile'])));
             
             if(empty($_FILES))  $this->send(array('result' => 'fail', 'message' => $this->lang->ui->filesRequired));
 
@@ -323,8 +323,8 @@ class ui extends control
     {
         set_time_limit(0);
 
-        $this->view->error        = '';
-        $this->view->title        = $this->lang->ui->installTheme;
+        $this->view->error = '';
+        $this->view->title = $this->lang->ui->installTheme;
 
         /* Ignore merge blocks before blocks imported. */
         $this->view->blocksMerged = true;
@@ -335,7 +335,7 @@ class ui extends control
         /* Check the package file exists or not. */
         if(!file_exists($packageFile)) 
         {
-            $this->view->error        = sprintf($this->lang->package->errorPackageNotFound, $packageFile);
+            $this->view->error = sprintf($this->lang->package->errorPackageNotFound, $packageFile);
             die($this->display());
         }
 
@@ -393,7 +393,6 @@ class ui extends control
         $this->view->blocksMerged   = true;
         $this->view->package        = $package;
         $this->display();
-
     }
 
     /**
@@ -406,7 +405,7 @@ class ui extends control
     {
         $packageInfo = $this->loadModel('package')->parsePackageCFG($this->post->package, 'theme');
         $this->package->mergeBlocks($packageInfo);
-        $this->package->mergeCustome($packageInfo);
+        $this->package->mergeCustom($packageInfo);
         $setting = array();
         $setting[$this->device]['name']  = $packageInfo->template;
         $setting[$this->device]['theme'] = $packageInfo->code;

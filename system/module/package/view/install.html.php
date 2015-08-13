@@ -11,7 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.modal.html.php';?>
-<?php if($canMange['result'] == 'success'):?>
+<?php if($canManage['result'] == 'success'):?>
 <?php js::set('browseLink', inlink('browse'));?>
 <?php if($error):?>
 <div class='alert alert-default'>
@@ -56,7 +56,7 @@
 <?php endif;?>
 <?php else:?>
 <div>
-  <?php printf($lang->setOkFile, $canMange['okFile']);?>
+  <?php printf($lang->setOkFile, $canManage['okFile']);?>
   <div class='text-right'><?php echo html::a('javascript:;', $lang->confirm, "class='btn btn-primary okFile' onclick='$.reloadAjaxModal()'");?></div>
 </div>
 <?php endif;?>

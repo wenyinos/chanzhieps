@@ -361,6 +361,13 @@ class orderModel extends model
         return !dao::isError();
     }
 
+    /**
+     * Pay an order backend.
+     * 
+     * @param  int    $orderID 
+     * @access public
+     * @return void
+     */
     public function pay($orderID)
     {
         $this->dao->update(TABLE_ORDER)
@@ -393,7 +400,6 @@ class orderModel extends model
 
             /* Finish link. */
             if($order->payStatus == 'paid' and $order->deliveryStatus == 'confirmed' and $order->status != 'finished' and $order->status != 'canceled') echo html::a('javascript:;', $this->lang->order->finish, "data-rel='" . helper::createLink('order', 'finish', "orderID=$order->id") . "' class='finisher'");
-            if($order->deliveryStatus != 'not_send') echo html::a(inlink('deliveryInfo', "orderID={$order->id}"), $this->lang->order->deliveryInfo, "data-toggle='modal'");
         }
 
         if(RUN_MODE == 'front' and $order->status == 'normal')
@@ -577,6 +583,7 @@ class orderModel extends model
 
         return array('result' => 'success', 'message' => $this->lang->saveSuccess);
     }
+
     /**                                                                                                         
      * Display express info.                                                                                    
      *                                                                                                          

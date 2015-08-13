@@ -270,8 +270,9 @@ class messageModel extends model
             ->batchCheck($this->config->message->require->post, 'notempty')
             ->exec();
 
-        if(dao::isError()) return false;
-        return $this->dao->lastInsertId();
+        if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
+        $this->setCookie($this->dao->lastInsertId());
+        return array('result' => 'success', 'message' => $this->lang->message->thanks);
     }
 
     /**

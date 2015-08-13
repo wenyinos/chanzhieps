@@ -70,6 +70,12 @@ class uiModel extends model
         return isset($template['themes']) ? $template['themes'] : array();
     }
 
+    /**
+     * Get installed themes in db.
+     * 
+     * @access public
+     * @return array
+     */
     public function getInstalledThemes()
     {
         return $this->dao->select('*')->from(TABLE_PACKAGE)->where('type')->eq('theme')->fetchGroup('templateCompatible', 'code');
@@ -880,11 +886,11 @@ class uiModel extends model
      */
     public function removeTemplateData($template)
     {
-        $this->dao->delete()->from(TABLE_PACKAGE)->where('type')->eq('template')->andwhere('code')->eq($template)->exec();
+        $this->dao->delete()->setAutoLang(false)->from(TABLE_PACKAGE)->where('type')->eq('template')->andwhere('code')->eq($template)->exec();
         if(dao::isError()) return false;
-        $this->dao->delete()->from(TABLE_BLOCK)->where('template')->eq($template)->exec();
+        $this->dao->delete()->setAutoLang(false)->from(TABLE_BLOCK)->where('template')->eq($template)->exec();
         if(dao::isError()) return false;
-        $this->dao->delete()->from(TABLE_LAYOUT)->where('template')->eq($template)->exec();
+        $this->dao->delete()->setAutoLang(false)->from(TABLE_LAYOUT)->where('template')->eq($template)->exec();
         if(dao::isError()) return false;
         return true;
     }

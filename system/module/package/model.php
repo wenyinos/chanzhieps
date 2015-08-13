@@ -209,6 +209,7 @@ class packageModel extends model
      * Get info of an package from the package file.
      * 
      * @param  string    $package 
+     * @param  string $type 
      * @access public
      * @return object
      */
@@ -230,6 +231,7 @@ class packageModel extends model
 
         $info = $this->parsePackageCFG($package, $type);
         foreach($info as $key => $value) if(isset($data->$key)) $data->$key = $value;
+
         if(isset($info->chanzhiversion))        $data->chanzhiCompatible = $info->chanzhiversion;
         if(isset($info->chanzhi['compatible'])) $data->chanzhiCompatible = $info->chanzhi['compatible'];
         if(isset($info->depends))               $data->depends           = json_encode($info->depends);
@@ -241,6 +243,7 @@ class packageModel extends model
      * Parse package's config file.
      * 
      * @param  string    $package 
+     * @param  string    $type 
      * @access public
      * @return object
      */
@@ -251,10 +254,6 @@ class packageModel extends model
         /* First, try ini file. before 2.5 version. */
         $infoFile = "{$type}/$package/doc/copyright.txt";
         if(file_exists($infoFile)) return (object)parse_ini_file($infoFile);
-
-        /**
-         * Then try parse yaml file. since 2.5 version.  
-         */
 
         /* Try the yaml of current lang, then try en. */
         $lang = $this->app->getClientLang();
@@ -1128,8 +1127,8 @@ class packageModel extends model
              if(!is_object($new)) continue;
              if(!is_object($new->content)) $new->content = json_decode($new->content); 
              if(!isset($old->content)) $old->content = new stdclass();
-             if(!isset($old->content->custome)) $old->content->custome = new stdclass();
-             $old->content->custome->{$packageInfo->code} = zget($old->content->custome, $packageInfo->code);
+             if(!isset($old->content->custom)) $old->content->custom = new stdclass();
+             $old->content->custom->{$packageInfo->code} = zget($old->content->custom, $packageInfo->code);
 
              $old->content = json_encode($old->content);
              $this->dao->replace(TABLE_BLOCK)->data($old)->exec();
@@ -1142,28 +1141,29 @@ class packageModel extends model
          {
              $layout->import = 'finished';
              $blocks = json_decode($layout->blocks);
+
              if(!empty($blocks))
              {
-                 foreach($blocks as $block) 
-                 {
-                     $newID  =  zget($blockOptions, $block->id);
-                     $block->id = $newID;
-                 }
+                 foreach($blocks as $block) $block->id = zget($blockOptions, $block->id);
              }
+
              $layout->blocks = json_encode($blocks);
              $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
          }
 
          $this->dao->delete()->from(TABLE_BLOCK)->where('originID')->in($blocks2Delete)->exec();
          $this->dao->update(TABLE_BLOCK)->set('originID')->eq('0')->exec();
+
          $custom = json_decode($this->config->template->custom);
          $css = $custom->{$packageInfo->template}->{$packageInfo->code}->css;
          $js  = $custom->{$packageInfo->template}->{$packageInfo->code}->js;
+
          foreach($blockOptions as $originID => $blockID)
          {
             $css = str_replace('#block' . $originID . ",", '#block' . $blockID . ',', $css);
             $css = str_replace('#block' . $originID . " ", '#block' . $blockID . ' ', $css);
             $css = str_replace('#block' . $originID . "{", '#block' . $blockID . '{', $css);
+
             $js  = str_replace('#block' . $originID . ",", '#block' . $blockID . ',', $js);
             $js  = str_replace('#block' . $originID . " ", '#block' . $blockID . ' ', $js);
             $js  = str_replace('#block' . $originID . "{", '#block' . $blockID . '{', $js);
@@ -1188,7 +1188,7 @@ class packageModel extends model
          $importedGroups = $this->dao->select('`alias`,id')->from(TABLE_CATEGORY)->where('type')->eq('tmpSlide')->fetchPairs();
          foreach($importedSlides as $slide)
          {
-             $slideInfo = pathinfo($slide);   
+             $slideInfo = pathinfo($slide);
              $basename  = $slideInfo['basename'];
              list($group, $fileID) = explode('_', $slideInfo['filename']);
 
@@ -1208,20 +1208,20 @@ class packageModel extends model
      }
 
      /**
-      * Merge custome.
+      * Merge custom.
       * 
       * @param  object    $info 
       * @access public
       * @return void
       */
-     public function mergeCustome($info)
+     public function mergeCustom($info)
      {
-        $importedCustome = $this->dao->setAutoLang(false)->select('*')->from(TABLE_CONFIG)->where('lang')->eq('imported')->andWhere('`key`')->eq('custom')->fetch('value');
-        $custome = json_decode($importedCustome, true);
+        $importedCustom = $this->dao->setAutoLang(false)->select('*')->from(TABLE_CONFIG)->where('lang')->eq('imported')->andWhere('`key`')->eq('custom')->fetch('value');
+        $custom = json_decode($importedCustom, true);
         
         $setting = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true): array();
 
-        if(isset($custome[$info->template][$info->theme])) $setting[$info->template][$info->code] = $custome[$info->template][$info->theme];
+        if(isset($custom[$info->template][$info->theme])) $setting[$info->template][$info->code] = $custom[$info->template][$info->theme];
         $this->loadModel('setting')->setItems('system.common.template', array('custom' => helper::jsonEncode($setting)));
         $this->dao->delete()->from(TABLE_CONFIG)->where('lang')->eq('imported')->andWhere('`key`')->eq('custom')->exec();
      }

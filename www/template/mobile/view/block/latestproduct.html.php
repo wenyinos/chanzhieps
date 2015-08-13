@@ -33,7 +33,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
       $index = 0;
       foreach($products as $product)
       {
-          $url   = inlink('view', "id={$product->id}", "category={$product->category->alias}&name=$product->alias");
+          $url = helper::createLink('product', 'view', "id=$product->id", "category={$product->category->alias}&name=$product->alias");
           $card = "<div class='card'>";
           
           $card .= "<a class='card-img' href='{$url}'>";

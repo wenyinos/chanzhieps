@@ -466,11 +466,12 @@ class commonModel extends model
         if(count($langs) == 1) return false;
         if($asListItem)
         {
+            $clientLang = $app->getClientLang();
             echo "<li class='dropdown-header'>{$app->lang->language}</li>";
             foreach($langs as $lang)
             {
                 $a = html::a(getHomeRoot($config->langsShortcuts[$lang]), $config->langs[$lang]);
-                $liClass = $config->site->defaultLang === $lang ? " class='active'" : '';
+                $liClass = $clientLang === $lang ? " class='active'" : '';
                 $a = "<li{$liClass}>{$a}</li>";
                 echo $a;
             }

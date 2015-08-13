@@ -558,10 +558,11 @@ class fileModel extends model
         $device     = helper::getDevice();
         $template   = $this->config->template->{$device}->name;
         $theme      = $this->config->template->{$device}->theme;
-        $file       = $this->getByID($fileID);
         $uploadPath = $this->app->getDataRoot();
         $basePath   = "source/{$template}/{$theme}/";
         if($file->objectType == 'slide') $basePath   = "slides/";
+
+        $file  = $this->getByID($fileID);
 
         $files = $this->getUpload('upFile');
         if(!empty($files)) 

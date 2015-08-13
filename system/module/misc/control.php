@@ -35,7 +35,7 @@ class misc extends control
     }   
 
     /**
-     * Show about info of zentao.
+     * Show about info of chanzhi.
      *
      * @access public
      * @return void
@@ -47,7 +47,7 @@ class misc extends control
     }
 
     /**
-     * Express thanks.
+     * The thanks page.
      *
      * @access public
      * @return void
@@ -58,5 +58,4 @@ class misc extends control
         $this->view->modalWidth = 700;
         $this->display();
     }
-
 }
