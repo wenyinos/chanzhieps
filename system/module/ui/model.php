@@ -149,9 +149,9 @@ class uiModel extends model
             $device = helper::getDevice();
             $template = $this->config->template->{$device}->name; 
             $theme    = $this->post->theme == 'all' ? 'all' : $this->config->template->{$device}->theme; 
-            $logo = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();
-            if(!isset($logo->$template)) $logo->$template = new stdclass();
-            $logo->$template->$theme = $setting; 
+            $logo = isset($this->config->site->logo) ? json_decode($this->config->site->logo, true) : array();
+            if(!isset($logo[$template])) $logo[$template] = array();
+            $logo[$template]['themes'][$theme] = $setting; 
 
             $result = $this->loadModel('setting')->setItems('system.common.site', array($section => helper::jsonEncode($logo)));
         }

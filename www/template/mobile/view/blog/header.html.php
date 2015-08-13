@@ -10,13 +10,12 @@
 </style>
 <header class='appbar fix-top' id='appbar'>
   <div class='appbar-title'>
-    <a href='<?php echo $webRoot;?>'><?php
-      if(isset($this->config->site->logo))
+    <a href='<?php echo $webRoot;?>'>
+      <?php
+      $logoSetting = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();
+      $logo = isset($logoSetting->$templateName->themes->$themeName) ? $logoSetting->$templateName->themes->$themeName : (isset($logoSetting->$templateName->themes->all) ? $logoSetting->$templateName->themes->all : false);
+      if($logo)
       {
-          $template    = $this->config->template->{$this->device}->name;
-          $theme       = $this->config->template->{$this->device}->theme;
-          $logoSetting = json_decode($this->config->site->logo);
-          $logo = isset($logoSetting->$template->$theme) ? $logoSetting->$template->$theme : (isset($logoSetting->$template->all) ? $logoSetting->$template->all : false);
           echo html::image($logo->webPath, "class='logo' title='{$this->config->company->name}'");
       }
       else

@@ -6,18 +6,20 @@
 <?php $topNavs = $this->loadModel('nav')->getNavs('mobile_top');?>
 <header class='appbar fix-top' id='appbar'>
   <div class='appbar-title'>
-    <a href='<?php echo $webRoot;?>'><?php
-      if(isset($this->config->site->logo))
+    <a href='<?php echo $webRoot;?>'>
+      <?php
+      $logoSetting = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();
+      $logo = isset($logoSetting->$templateName->themes->$themeName) ? $logoSetting->$templateName->themes->$themeName : (isset($logoSetting->$templateName->themes->all) ? $logoSetting->$templateName->themes->all : false);
+      if($logo)
       {
-          $logoSetting = json_decode($this->config->site->logo);
-          $logo = isset($logoSetting->$templateName->$themeName) ? $logoSetting->$templateName->$themeName : (isset($logoSetting->$templateName->all) ? $logoSetting->$templateName->all : false);
           echo html::image($logo->webPath, "class='logo' title='{$this->config->company->name}'");
       }
       else
       {
           echo '<h4>' . $this->config->site->name . '</h4>';
       }
-      ?></a>
+      ?>
+    </a>
   </div>
   <div class='appbar-actions'>
     <?php if(commonModel::isAvailable('search')):?>

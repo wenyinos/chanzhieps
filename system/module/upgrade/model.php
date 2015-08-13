@@ -1495,4 +1495,37 @@ class upgradeModel extends model
             }
         }
     }
+
+    /**
+     * Fix Logo data when upgrade form 4.3.beta.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function fixLogo()
+    {
+        $logos = $this->dao->setAutoLang(false)->select('*')->from(TABLE_CONFIG)->where('section')->eq('logo')->fetchGroup('lang');
+        $logosForAllThemes = $this->dao->setAutoLang(false)->select('*')->from(TABLE_CONFIG)->where('`key`')->eq('logo')->fetchGroup('lang');
+
+        $logoSetting = array();
+        foreach($logos as $lang => $logoList)
+        {
+            if(isset($logosForAllThemes[$lang]))
+            {
+                $logoForAllThemes = $logosForAllThemes[$lang][0];
+                $logoSetting['default']['themes']['all'] = json_decode($logoForAllThemes->value);
+            }
+
+            foreach($logoList as $logo)
+            {
+                $logoSetting['default']['themes'][$logo->key] = json_decode($logo->value);
+            }
+
+            $result = $this->loadModel('setting')->setItems('system.common.site', array('logo' => helper::jsonEncode($logoSetting)), $lang);
+
+            if(!$result) return false;
+        }
+
+        return true;
+    }
 }

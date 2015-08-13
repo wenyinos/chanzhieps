@@ -23,7 +23,6 @@ $lang->book->addedDate   = '发布时间';
 $lang->book->editedDate  = '编辑时间';
 $lang->book->title       = '标题';
 $lang->book->keywords    = '关键词';
-$lang->book->path        = '章节路径';
 $lang->book->summary     = '简介';
 $lang->book->content     = '内容';
 $lang->book->alias       = '别名';

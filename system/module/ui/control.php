@@ -119,9 +119,9 @@ class ui extends control
 
         $template = $this->config->template->{$this->device}->name;
         $theme    = $this->config->template->{$this->device}->theme;
-        $logoSetting = json_decode($this->config->site->logo);
+        $logoSetting = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();;
 
-        $logo = isset($logoSetting->$template->$theme) ? $logoSetting->$template->$theme : (isset($logoSetting->$template->all) ? $logoSetting->$template->all : false);
+        $logo = isset($logoSetting->$template->themes->$theme) ? $logoSetting->$template->themes->$theme : (isset($logoSetting->$template->themes->all) ? $logoSetting->$template->themes->all : false);
 
         $this->view->title = $this->lang->ui->setLogo;
         $this->view->logo  = $logo;
