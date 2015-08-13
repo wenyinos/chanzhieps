@@ -406,7 +406,7 @@ class ui extends control
     {
         $packageInfo = $this->loadModel('package')->parsePackageCFG($this->post->package, 'theme');
         $this->package->mergeBlocks($packageInfo);
-        $this->package->mergeCustome($packageInfo);
+        $this->package->mergeCustom($packageInfo);
         $setting = array();
         $setting[$this->device]['name']  = $packageInfo->template;
         $setting[$this->device]['theme'] = $packageInfo->code;
