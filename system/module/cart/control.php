@@ -11,6 +11,11 @@
  */
 class cart extends control
 {
+    public function __construct()
+    {
+        parent::__construct();
+        if($this->app->user->account != 'guest') $this->cart->mergeToDb();
+    }
     /**
      * Add a product to cart.
      * 

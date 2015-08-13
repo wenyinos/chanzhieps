@@ -26,9 +26,7 @@ class reply extends control
         {
             $captchaConfig = isset($this->config->site->captcha) ? $this->config->site->captcha : 'auto';
             $needCaptcha   = false;
-            if($captchaConfig == 'auto' and $this->loadModel('captcha')->isEvil($this->post->content)) $needCaptcha = true;
-            if($captchaConfig == 'open')  $needCaptcha = true;
-            if($captchaConfig == 'close') $needCaptcha = false;
+            if($captchaConfig == 'open' or ($captchaConfig == 'auto' and $this->loadModel('captcha')->isEvil($this->post->content))) $needCaptcha = true;
 
             /* If no captcha but is garbage, return the error info. */
             if($this->post->captcha === false and $needCaptcha)
@@ -36,11 +34,8 @@ class reply extends control
                 $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->loadModel('captcha')->create4Reply()));
             }
 
-            $replyID = $this->reply->post($threadID);
-
-            if(is_array($replyID)) $this->send($replyID);
-            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('thread', 'locate', "threadID=$threadID&replyID=$replyID")));
+            $result = $this->reply->post($threadID);
+            $this->send($result);
         }
     }
 

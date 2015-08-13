@@ -48,9 +48,16 @@ class cartModel extends model
      */
     public function getListByAccount($account = '')
     {
-        $goodsInDb     = $this->dao->select('*')->from(TABLE_CART)->where('account')->eq($account)->fetchAll('product');
-        $goodsInCookie = $this->getListByCookie();
-        $goodsList = (array) $goodsInDb + (array) $goodsInCookie;
+        if($this->app->user->account != 'guest')
+        {
+            $goodsList = $this->dao->select('*')->from(TABLE_CART)->where('account')->eq($account)->fetchAll('product');
+        }
+        else
+        {
+            $goodsInDb     = $this->dao->select('*')->from(TABLE_CART)->where('account')->eq($account)->fetchAll('product');
+            $goodsInCookie = $this->getListByCookie();
+            $goodsList     = (array) $goodsInDb + (array) $goodsInCookie;
+        }
 
         /* Get products(use groupBy to distinct products).  */
         $products = $this->dao->select('t1.*, t2.category')->from(TABLE_PRODUCT)->alias('t1')
@@ -154,5 +161,18 @@ class cartModel extends model
         $cart = $this->getListByCookie();
         if(isset($cart[$productID])) unset($cart[$productID]);
         setcookie('cart', json_encode($cart), time() + 60 * 60 * 24);
+    }
+
+    public function mergeToDb()
+    {
+        if($this->app->user->account == 'guest') return true;
+        $goodsList = $this->getListByCookie();
+        foreach($goodsList as $id => $goods)
+        {
+            $goods->account = $this->app->user->account;
+            $this->dao->insert(TABLE_CART)->data($goods)->exec();;
+            unset($goodsList[$id]);
+        }
+        setcookie('cart', json_encode($goodsList), time() + 60 * 60 * 24);
     }
 }

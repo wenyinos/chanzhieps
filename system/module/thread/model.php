@@ -215,10 +215,10 @@ class threadModel extends model
             $thread = $this->getByID($threadID);
             $this->loadModel('search')->save('thread', $thread);
 
-            return $threadID;
+            return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => helper::createLink('thread', 'view', "threadID=$threadID"));
         }
 
-        return false;
+        return array('result' => 'fail', 'message' => dao::getError());
     }
 
     /**
