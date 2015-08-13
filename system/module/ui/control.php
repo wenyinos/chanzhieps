@@ -283,12 +283,12 @@ class ui extends control
      */
     public function uploadTheme()
     {
-        $canMange = $this->loadModel('common')->verfyAdmin();
-        $this->view->canMange = $canMange;
+        $canManage = $this->loadModel('common')->verfyAdmin();
+        $this->view->canManage = $canManage;
 
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            if($canMange['result'] != 'success') $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->setOkFile, $canMange['okFile'])));
+            if($canManage['result'] != 'success') $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->setOkFile, $canManage['okFile'])));
             
             if(empty($_FILES))  $this->send(array('result' => 'fail', 'message' => $this->lang->ui->filesRequired));
 
