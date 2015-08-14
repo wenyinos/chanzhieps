@@ -15,4 +15,4 @@ a.btn-sm{margin-bottom:5px;padding:5px;}
 .mainbutton{text-align: right; padding-bottom:5px;}
 .btn.btn-primary.return{background-color: orange; border-style: none}
 
-#sortForm{overflow-y: scroll; height: 380px;}
+#sortForm{overflow-y: auto; height: 420px;}
