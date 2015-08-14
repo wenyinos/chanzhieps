@@ -1,13 +1,8 @@
 //vars
 @color-pale: mix(#fff, @color-primary, 90%);
-@color-inverse: contrast(@color-primary, #333, #fff, 50%);
-
-.color-inverse {
-  color: @color-inverse;
-}
-
+@color-inverse: contrast(@color-primary, #333, #fff, 40%);
 @color-inverse-dark: darken(@color-primary, 50%);
-@color-primary-text: contrast(@color-primary, @color-inverse-dark, @color-primary);
+@color-primary-text: contrast(@color-primary, @color-inverse-dark, @color-primary, 50%);
 
 .override-colorset(@color) when not(@color = #3280FC)
 {
@@ -25,7 +20,7 @@
 
 
   // type
-  .text-primary {color: @color-primary;}
+  .text-primary {color: @color-primary-text;}
   .bg-primary {
     background-color: @color-primary;
     color: @color-inverse;
@@ -92,16 +87,16 @@
 
       &.with-icon {
         > .icon {
-          color: @color-primary;
+          color: @color-primary-text;
         }
       }
 
       > h4 {
-        color: @color-primary;
+        color: @color-primary-text;
       }
 
       .level-number, .reply-time {
-        color: @color-primary;
+        color: @color-primary-text;
       }
     }
   }
