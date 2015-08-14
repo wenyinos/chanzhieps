@@ -12,7 +12,7 @@
 ?>
 <?php include TPL_ROOT . 'common/header.html.php';?>
 <?php js::set('showDetail', $this->lang->message->showDetail);?>
-<?php js::set('showAbstract', $this->lang->message->showAbstract);?>
+<?php js::set('hideDetail', $this->lang->message->hideDetail);?>
 <?php $common->printPositionBar();?>
 <div class='row'><?php $this->block->printRegion($layouts, 'message_index', 'topBanner', true);?></div>
 <div class='row'>

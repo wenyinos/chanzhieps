@@ -12,7 +12,7 @@
 ?>
 <?php 
 include TPL_ROOT . 'common/header.html.php';
-// TODO: check follow methods: showDetail and showAbstract
+// TODO: check follow methods: showDetail and hideDetail
 ?>
 
 <?php $common->printPositionBar();?>
