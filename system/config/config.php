@@ -43,6 +43,7 @@ $config->views  = ',html,json,xml,'; // Supported view types.
 
 $config->site = new stdclass();
 $config->site->importantValidate = 'okFile,email';
+$config->site->modules = 'article,product';
 
 $config->template = new stdclass();
 $config->template->desktop = new stdclass();
