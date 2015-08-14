@@ -17,26 +17,31 @@
     <div class='panel-actions'><?php commonModel::printLink('tree', 'browse', "type=slide", '<i class="icon-plus-sign"></i> ' . $lang->slide->createGroup, "class='btn btn-primary'");?></div>
   </div>
   <div class='panel-body'>
-    <section class='row cards-borderless'>
+    <section class='row'>
       <?php foreach($groups as $group):?>
       <div class='col-lg-3 col-md-4 col-sm-6'>
         <a class='card card-slide' href='<?php echo inLink('browse', "groupID=$group->id") ?>'>
-          <?php $count = count($group->slides); ?>
-          <div class='slides-holder slides-holder-<?php echo min(5, $count);?>'>
+          <?php $count = min(5, count($group->slides)); ?>
+            <div class='slides-holder text-center'>
             <?php if(!empty($group->slides)): ?>
             <?php $index = 0; ?>
             <?php foreach($group->slides as $slide):?>
+            <?php
+            $number  = $count - ($index + 1);
+            $right   = $number * 50 / $count;
+            $bottom  = $number * 60 / $count;
+            $padding = $count * 9;
+            $style   = "bottom:{$bottom}px; right:{$right}px;padding-left:{$padding}px";
+            ?>
             <?php if($index > 4) break; ?>
-            <div class='slide-item slide-item-<?php echo ++$index ?>'>
+            <div class='slide-item' style="<?php echo $style;?>">
               <?php if ($slide->backgroundType == 'image'): ?>
               <?php print(html::image($slide->image));?>
-              <?php else: ?>
+              <?php else:?>
               <div class='plain-slide' style='<?php echo 'background-color: ' . $slide->backgroundColor;?>'></div>
               <?php endif; ?>
-              <?php if($count > 5 && $index === 1): ?>
-              <div class='slides-count'><i class='icon-picture'></i> <?php echo $count; ?></div>
-              <?php endif; ?>
             </div>
+            <?php $index ++;?>
             <?php endforeach;?>
             <?php else: ?>
             <div class='empty-holder'>
