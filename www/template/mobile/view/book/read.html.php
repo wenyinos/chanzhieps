@@ -30,7 +30,7 @@ include TPL_ROOT . 'common/files.html.php';
 
 <div class='panel-section article'>
   <?php if($article->summary):?>
-  <section class='abstract bg-gray-pale small with-padding'><strong><?php echo $lang->article->summary;?></strong><?php echo $lang->colon . $article->summary;?></section>
+  <section class='abstract bg-gray-pale small with-padding'><strong><?php echo $lang->book->summary;?></strong><?php echo $lang->colon . $article->summary;?></section>
   <?php endif; ?>
   <div class='panel-body'>
     <hr class="space">
@@ -48,11 +48,11 @@ include TPL_ROOT . 'common/files.html.php';
       <?php if($article->editor):?> 
       <?php $editor = $this->loadModel('user')->getByAccount($article->editor);?>
       <?php if(!empty($editor)): ?> 
-      <p class='text-muted'><i class='icon-edit'></i> <?php printf($lang->article->lblEditor, $editor->realname, formatTime($article->editedDate));?></p>
+      <p class='text-muted'><i class='icon-edit'></i> <?php printf($lang->book->lblEditor, $editor->realname, formatTime($article->editedDate));?></p>
       <?php endif;?>
       <?php endif;?>
       <?php if($article->keywords):?>
-      <p class='small'><strong class="text-muted"><?php echo $lang->article->keywords;?></strong><span class="article-keywords"><?php echo $lang->colon . $article->keywords;?></span></p>
+      <p class='small'><strong class="text-muted"><?php echo $lang->book->keywords;?></strong><span class="article-keywords"><?php echo $lang->colon . $article->keywords;?></span></p>
       <?php endif; ?>
     </div>
     <?php extract($prevAndNext);?>
@@ -60,12 +60,12 @@ include TPL_ROOT . 'common/files.html.php';
       <?php if($prev): ?>
       <?php echo html::a(inlink('read', "articleID=$prev->id", "book={$book->alias}&node={$prev->alias}"), "<i class='icon-arrow-left'></i> " . $prev->title, "class='btn block text-left default'"); ?>
       <?php else: ?>
-      <a href='###' class='btn block text-left default disabled'><i class='icon-arrow-left'></i> <?php print($lang->article->none); ?></a>
+      <a href='###' class='btn block text-left default disabled'><i class='icon-arrow-left'></i> <?php print($lang->book->none); ?></a>
       <?php endif; ?>
       <?php if($next):?>
       <?php echo html::a(inlink('read', "articleID=$next->id", "book={$book->alias}&node={$next->alias}"), "<i class='icon-arrow-right'></i> " . $next->title, "class='btn block text-left default'"); ?>
       <?php else:?>
-      <a href='###' class='btn block text-left default disabled'><?php print($lang->article->none); ?><i class='icon-arrow-right'></i></a>
+      <a href='###' class='btn block text-left default disabled'><?php print($lang->book->none); ?><i class='icon-arrow-right'></i></a>
       <?php endif; ?>
       <?php echo html::a(inlink('browse', "bookID={$parent->id}", "book={$book->alias}&title={$parent->alias}"), "<i class='icon-list-ul'></i> " . $lang->book->chapter, "class='btn block text-left default'");?>
   </div>
