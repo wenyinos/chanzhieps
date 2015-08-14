@@ -23,12 +23,14 @@
         <?php if(strpos($blockList, ",$block->type,") !== false):?>
         <?php if(strpos($block->type, 'code') === false) $block->content = json_decode($block->content); ?>
         <span class='block-item'>
-          <a href='<?php echo inlink('edit', "block={$block->id}")?>'> <?php echo $block->title;?> </a>
-          <?php echo html::a(helper::createLink('block', 'delete', "blockID=$block->id"), "<i class='icon icon-remove-sign text-muted '></i>", "class='deleter pull-right'");?>
+          <a href='<?php echo inlink('edit', "block={$block->id}")?>' title="<?php echo $block->title?>"> <?php echo helper::subStr($block->title, 8);?> </a>
+          <?php echo html::a(helper::createLink('block', 'delete', "blockID=$block->id"), "<i class='icon icon-remove-sign text-important '></i>", "class='deleter pull-right'");?>
         </span>
         <?php endif;?>
         <?php endforeach;?>
-        <?php echo html::a(inlink('create'), "<i class='icon icon-plus'> </i>" . $lang->block->create, "class='btn btn-default'");?>
+        <p></p>
+        <br/>
+        <?php echo html::a(inlink('create'), "<i class='icon icon-plus'> </i>" . $lang->block->create, "class='btn btn-default btn-block'");?>
       </div>
     </div>
   </div>
