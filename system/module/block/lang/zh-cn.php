@@ -26,6 +26,7 @@ $lang->block->select          = '请选择区块';
 $lang->block->categories      = '分类';
 $lang->block->showImage       = '图文';
 $lang->block->showCategory    = '显示类目';
+$lang->block->showBoard       = '显示版块';
 $lang->block->showTime        = '显示时间';
 $lang->block->product         = '产品';
 $lang->block->slide           = '幻灯片';

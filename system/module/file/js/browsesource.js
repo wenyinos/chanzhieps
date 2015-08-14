@@ -26,4 +26,6 @@ $(document).ready(function()
     var type = $.cookie('sourceViewType');
     if(type == '') type = 'image';
     $('.' + type + '-view').click();
+    
+    $('.file-source input').mouseover(function(){$(this).select()});
 });

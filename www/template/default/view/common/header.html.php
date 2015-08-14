@@ -2,7 +2,7 @@
 <?php include TPL_ROOT . 'common/header.lite.html.php';?>
 <div class='page-container'>
   <?php $this->block->printRegion($layouts, 'all', 'top');?>
-  <?php $topNavs = $this->loadModel('nav')->getNavs('top');?>
+  <?php $topNavs = $this->loadModel('nav')->getNavs('desktop_top');?>
   <nav id='navbar' class='navbar' role='navigation'>
     <div class='navbar-header'>
       <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#navbarCollapse'>
@@ -14,7 +14,7 @@
     </div>
     <div class='collapse navbar-collapse' id='navbarCollapse'>
       <ul class='nav navbar-nav'>
-        <?php foreach($topNavs->{$this->device} as $nav1):?>
+        <?php foreach($topNavs as $nav1):?>
           <?php if(empty($nav1->children)):?>
             <li class='<?php echo $nav1->class?>'><?php echo html::a($nav1->url, $nav1->title, !empty($nav1->target) ? "target='$nav1->target'" : '');?></li>
             <?php else: ?>

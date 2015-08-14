@@ -43,7 +43,7 @@
         {
             $imageHtml .= "<li class='file-image file-{$file->extension}'>";
             $imageHtml .= html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank' data-toggle='lightbox'");
-            $imageHtml .= "<div class='file-source'>" . $file->fullURL . "</div>";
+            $imageHtml .= "<div class='file-source'><input type='text' value='" . $file->fullURL . "'/></div>";
             $imageHtml .= "<span class='file-actions'>";
             $imageHtml .= html::a(helper::createLink('file', 'sourcedelete', "id=$file->id"), "<i class='icon-trash'></i>", "class='deleter'");
             $imageHtml .= html::a(helper::createLink('file', 'sourceedit', "id=$file->id"), "<i class='icon-edit'></i>", "data-toggle='modal'");
@@ -55,7 +55,7 @@
             $file->title = $file->title . ".$file->extension";
             $fileHtml .= "<li class='file file-{$file->extension}'>";
             $fileHtml .= html::a(helper::createLink('file', 'download', "fileID=$file->id&mouse=left"), $file->title, "target='_blank'");
-            $fileHtml .= "<div class='file-source'>" . $file->fullURL . "</div>";
+            $fileHtml .= "<div class='file-source'><input type='text' value='" . $file->fullURL . "'/></div>";
             $fileHtml .= "<span class='file-actions'>";
             $fileHtml .= html::a(helper::createLink('file', 'sourcedelete', "id=$file->id"), "<i class='icon-trash'></i>", "class='deleter'");
             $fileHtml .= html::a(helper::createLink('file', 'sourceedit', "id=$file->id"), "<i class='icon-edit'></i>", "data-toggle='modal'");

@@ -26,6 +26,7 @@ $lang->block->select          = 'Please select a block';
 $lang->block->categories      = 'Categories';
 $lang->block->showImage       = 'Show image';
 $lang->block->showCategory    = 'Show Category';
+$lang->block->showBoard       = 'Show Board';
 $lang->block->showTime        = 'Show time';
 $lang->block->product         = 'Product';
 $lang->block->slide           = 'Slide';

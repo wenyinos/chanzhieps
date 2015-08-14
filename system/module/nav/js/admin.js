@@ -131,8 +131,6 @@ $(document).ready(function()
         $('input[type=checkbox]').parent().next('input[type=hidden]').val('');
         $('input:checked').parent().next('input[type=hidden]').val('_blank');
     });
-
-
 });
 
 /**

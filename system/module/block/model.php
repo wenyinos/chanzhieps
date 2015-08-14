@@ -242,6 +242,39 @@ class blockModel extends model
     {
         return $this->dao->select('id, title')->from(TABLE_BLOCK)->where('template')->eq($template)->fetchPairs();
     }
+
+    /**
+     * Create block type dropdown menu.
+     * 
+     * @param  string    $template 
+     * @param  string    $type 
+     * @param  int       $blockID 
+     * @param  string    $method 
+     * @param  string    $class
+     * @access public
+     * @return string
+     */
+    public function createTypeMenu($template, $type = '', $blockID = 0, $method = '', $class = '')
+    {
+        if(empty($method)) $method = $this->app->getMethodName();
+        $select = "<ul class='dropdown-menu $class' role='menu'>";
+        foreach($this->lang->block->$template->typeGroups as $block => $group)
+        {
+            if(isset($lastGroup) and $group !== $lastGroup) $select .= "<li class='divider'></li>";
+            $lastGroup = $group;
+            $class = ($block == $type) ? "class='active'" : '';
+            if($blockID)
+            {
+                $select .= "<li {$class}>" . html::a(helper::createLink('block', $method, "blockID={$blockID}&type={$block}"), $this->lang->block->$template->typeList[$block]) . "</li>";
+            }
+            else
+            {
+                $select .= "<li {$class}>" . html::a(helper::createLink('block', $method, "type={$block}"), $this->lang->block->$template->typeList[$block]) . "</li>";
+            }
+        }
+        $select .= "</ul>";
+        return $select;
+    }
     
     /**
      * Create type  select area.
@@ -256,22 +289,8 @@ class blockModel extends model
     {
         $select = "<div class='btn-group'><button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown'>";
         $select .= $this->lang->block->$template->typeList[$type] . " <span class='caret'></span></button>";
-        $select .= "<ul class='dropdown-menu' role='menu'>";
-        foreach($this->lang->block->$template->typeGroups as $block => $group)
-        {
-            if(isset($lastGroup) and $group !== $lastGroup) $select .= "<li class='divider'></li>";
-            $lastGroup = $group;
-            $class = ($block == $type) ? "class='active'" : '';
-            if($blockID)
-            {
-                $select .= "<li {$class}>" . html::a(helper::createLink('block', $this->app->getMethodName(), "blockID={$blockID}&type={$block}"), $this->lang->block->$template->typeList[$block]) . "</li>";
-            }
-            else
-            {
-                $select .= "<li {$class}>" . html::a(helper::createLink('block', $this->app->getMethodName(), "type={$block}"), $this->lang->block->$template->typeList[$block]) . "</li>";
-            }
-        }
-        $select .= "</ul></div>" .  html::hidden('type', $type);
+        $select .= $this->createTypeMenu($template, $type, $blockID);
+        $select .= "</div>" .  html::hidden('type', $type);
         return $select;
     }
 
