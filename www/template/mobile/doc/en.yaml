@@ -10,4 +10,5 @@ charge:free
 device:,mobile,
 license:http://www.chanzhi.org/book/chanzhieps/58_license.html
 themes:
-   default:default
+   default:Default
+   colorful:Colorful

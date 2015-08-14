@@ -236,3 +236,6 @@ unset($config->ui->themes['mobile']['default']['button']);
 unset($config->ui->themes['mobile']['default']['block']);
 unset($config->ui->themes['mobile']['default']['footer']);
 $config->ui->themes['mobile']['default']['basic']['colorset']['primary']['default'] = '#3280FC';
+
+/* Colorful theme of mobile template */
+$config->ui->themes['mobile']['colorful'] = $config->ui->themes['mobile']['default'];
