@@ -76,8 +76,10 @@ $lang->block->placeholder = new stdclass();
 $lang->block->placeholder->moreText = 'Text for button of more';
 $lang->block->placeholder->moreUrl  = 'Url for button of more';
 $lang->block->placeholder->padding  = '0';
-$lang->block->placeholder->blockID  = '#blockID can be used as id selector';
-$lang->block->placeholder->class    = 'Separated by a space between the plurality of selectors';
+$lang->block->placeholder->customStyleTip         = 'Stylesheet supports Less syntax, #blockID can be used as id selector.';
+$lang->block->placeholder->desktopCustomScriptTip = 'Already included jQuery 1.9.0, #blockID can be used as id selector.';
+$lang->block->placeholder->mobileCustomScriptTip  = 'Support basic jQuery syntax, #blockID can be used as id selector.';
+$lang->block->placeholder->class                  = 'Separated by a space between the plurality of selectors';
 
 $lang->block->gridOptions[0]  = 'Auto';
 $lang->block->gridOptions[6]  = '1/2';

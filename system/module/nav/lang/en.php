@@ -36,6 +36,9 @@ $lang->nav->system->blog    = 'Blog';
 $lang->nav->system->book    = 'Book';
 $lang->nav->system->message = 'Inquire';
 
+$lang->nav->desktop = 'Desktop';
+$lang->nav->mobile  = 'Mobile';
+
 /* Targets setting. */
 $lang->nav->newWindow = new stdclass();
 $lang->nav->newWindow->_blank = 'New window';
