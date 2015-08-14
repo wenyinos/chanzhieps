@@ -189,7 +189,7 @@ $lang->ui->menu->favicon = 'Favicon|ui|setfavicon|';
 $lang->ui->menu->slide   = 'Slide|slide|admin|';
 $lang->ui->menu->block   = array('link' => 'Blocks|block|admin|', 'alias' => 'create,edit');
 $lang->ui->menu->layout  = array('link' => 'Layout|block|pages|', 'alias' => 'setregion');
-$lang->ui->menu->source  = 'Source|file|sourcebrowse|';
+$lang->ui->menu->source  = 'Source|file|browsesource|';
 $lang->ui->menu->others  = 'Others|ui|others|';
 
 /* Menu of user module. */

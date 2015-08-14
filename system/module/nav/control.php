@@ -71,5 +71,5 @@ class nav extends control
         $this->view->articleTree  = $this->loadModel('tree')->getOptionMenu('article');
 
         $this->display();
-    }   
+    }
 }
