@@ -31,6 +31,7 @@ $lang->toBeAdd  = '待添加';
 
 $lang->about  = '关于';
 $lang->thanks = '致谢';
+
 /* Lang items for xirang. */
 $lang->chanzhiEPS     = '蝉知企业门户系统';
 $lang->chanzhiEPSx    = '蝉知';

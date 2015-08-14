@@ -234,12 +234,21 @@ class book extends control
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $articles = $this->dao->select('*')->from(TABLE_BOOK)
-            ->where('type')->eq('article')
+            ->where(1)
             ->beginIf($searchWord)
+
+            ->andwhere('type')->eq('article')
             ->andWhere('title')->like("%{$searchWord}%")
+            
             ->orWhere('keywords')->like("%{$searchWord}%")
+            ->andwhere('type')->eq('article')
+            
             ->orWhere('content')->like("%{$searchWord}%")
+            ->andwhere('type')->eq('article')
+
             ->orWhere('summary')->like("%{$searchWord}%")
+            ->andwhere('type')->eq('article')
+
             ->fi()
             ->orderBy('id_desc')
             ->page($pager)

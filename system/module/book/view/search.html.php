@@ -37,6 +37,8 @@
         <th class='w-60px'><?php echo $lang->book->id;?></th>
         <th class=''><?php echo $lang->book->title;?></th>
         <th class='w-120px'><?php echo $lang->book->keywords;?></th>
+        <th class='w-120px'><?php echo $lang->book->path;?></th>
+        <th class='w-60px'><?php echo $lang->book->author;?></th>
         <th class='w-60px'><?php echo $lang->book->views;?></th>
         <th class='w-150px'><?php echo $lang->book->addedDate;?></th>
         <th class='w-120px'><?php echo $lang->actions;?></th>
@@ -48,6 +50,8 @@
         <td><?php echo $article->id;?></td>
         <td class='text-left'><?php echo $article->title;?></td>
         <td><?php echo $article->keywords;?></td>
+        <td><?php echo $this->book->explodePath($article->path);?></td>
+        <td><?php echo $article->author;?></td>
         <td><?php echo $article->views;?></td>
         <td><?php echo $article->addedDate;?></td>
         <td>

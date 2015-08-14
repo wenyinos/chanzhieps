@@ -39,12 +39,15 @@ $lang->product->views      = 'Views';
 $lang->product->viewsCount = 'Views count';
 $lang->product->stick      = 'Sticky';
 $lang->product->order      = 'Order';
+$lang->product->unsaleable = 'Not for sale';
 $lang->product->attribute  = 'Attribute';
 $lang->product->custom     = 'Custom';
 $lang->product->sales      = 'Price';
 $lang->product->css        = 'CSS';
 $lang->product->js         = 'JS';
+
 $lang->product->currency   = 'Currency';
+$lang->product->stock    = 'Stock';
 
 $lang->product->list         = 'List';
 $lang->product->hot          = 'Hot';
@@ -60,6 +63,8 @@ $lang->product->addToCart    = "<i class='icon icon-shopping-cart'></i> 加入�
 $lang->product->count        = 'Count';
 $lang->product->comments     = 'Comments';
 $lang->product->detail       = 'Detail';
+$lang->product->setting      = 'Setting';
+$lang->product->soldout      = 'Sold out';
 
 $lang->product->congratulations  = "congratulations";
 $lang->product->addToCartSuccess = "Add to cart successfully.";
@@ -123,3 +128,7 @@ $lang->product->currencySymbols['aud']  = 'A$';
 $lang->product->currencySymbols['nzd']  = 'NZ$';
 $lang->product->currencySymbols['thb']  = 'B';
 $lang->product->currencySymbols['sgd']  = 'S$';
+
+$lang->product->stockOptions = array();
+$lang->product->stockOptions[0] = 'Close';
+$lang->product->stockOptions[1] = 'open';

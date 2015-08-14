@@ -27,11 +27,16 @@ $lang->order->admin          = 'Admin Orders';
 $lang->order->setting        = 'Settings';
 $lang->order->browse         = 'My Orders';
 $lang->order->bought         = 'Browse bought producs';
-$lang->order->paidSuccess    = 'Order successsfully paid!';
+$lang->order->createdSuccess = 'Order created successfully！';
+$lang->order->paidSuccess    = 'Order paid successfully!';
 $lang->order->submit         = 'Submit order';
 $lang->order->cancel         = 'Cancel';
 $lang->order->pay            = 'Pay';
+<<<<<<< HEAD
+$lang->order->goToPay        = 'To pay';
+=======
 $lang->order->goToPay        = 'Please complete the payment.';
+>>>>>>> c73775486ee30d2d16f52c9c318ca6d2fe679f66
 $lang->order->return         = 'Receive payment';
 $lang->order->delivery       = 'delivery';
 $lang->order->finish         = 'finish';
@@ -56,6 +61,8 @@ $lang->order->cancelSuccess        = "order successsfully canceled";
 $lang->order->paymentRequired      = 'At least one mode required';
 $lang->order->confirmLimitRequired = 'You should set a  expiry dates of delivery receiving';
 $lang->order->finishWarning        = "<span class='text-danger'>Make sure to finish this order ?</span>";
+$lang->order->noProducts           = "No products in order";
+$lang->order->lowStocks            = "<strong>%s</strong>Inventory shortage ";
 
 $lang->order->alipayPid = 'Partner ID';
 $lang->order->alipayKey = 'Partner KEY';

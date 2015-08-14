@@ -780,4 +780,22 @@ class bookModel extends model
         }
         return !dao::isError();
     }
+    /**
+     * Explode path.
+     *
+     * @access public
+     * @return string
+     */
+    public function explodePath($str)
+    {
+        $path = '';
+        $chapters = explode(',', $str, -2);
+        foreach($chapters as $chapterID)
+        {
+            $chapter = $this->dao->select('title')->from(TABLE_BOOK)->where('id')->eq($chapterID)->fetch('title'); 
+            $path .= $chapter.'/';
+        }
+        
+        return $path;
+    }
 }

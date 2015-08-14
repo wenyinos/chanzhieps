@@ -226,3 +226,4 @@ $lang->ui->info            = 'Info';
 $lang->ui->danger          = 'Danger';
 $lang->ui->warning         = 'Warning';
 $lang->ui->success         = 'Success';
+$lang->ui->removeDirFaild  = "<h4>Delete the following directories failed</h4><pre>%s</pre> <div class='text-important'>Please manually delete, or set up these files writable. </div>";
