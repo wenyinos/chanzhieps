@@ -20,7 +20,6 @@ $lang->slide->label      = 'Label';
 $lang->slide->button     = 'Button';
 $lang->slide->newWindow  = 'New window';
 $lang->slide->upload     = 'Upload';
-$lang->slide->enter      = 'Enter';
 $lang->slide->return     = 'Return';
 
 $lang->slide->background = new stdclass();

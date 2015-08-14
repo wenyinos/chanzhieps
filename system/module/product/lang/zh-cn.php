@@ -130,5 +130,5 @@ $lang->product->currencySymbols['thb']  = 'B';
 $lang->product->currencySymbols['sgd']  = 'S$';
 
 $lang->product->stockOptions = array();
-$lang->product->stockOptions[0] = '不开启';
+$lang->product->stockOptions[0] = '关闭';
 $lang->product->stockOptions[1] = '开启';

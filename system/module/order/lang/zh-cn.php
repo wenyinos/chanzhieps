@@ -40,6 +40,7 @@ $lang->order->confirm        = '确认订单信息';
 $lang->order->selectProducts = "选择了 <strong class='text-danger'>%s</strong> 件商品，";
 $lang->order->totalToPay     = "共计：<strong id='amount' class='text-danger'>%s</strong>";
 $lang->order->payInfo        = "%s %s 商品订单";
+$lang->order->goToBank       = "请在线支付您的订单。";
 $lang->order->track          = '查看物流';
 $lang->order->life           = '订单跟踪';
 $lang->order->days           = '天';

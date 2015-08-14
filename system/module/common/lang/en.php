@@ -28,8 +28,10 @@ $lang->en = 'EN';
 
 $lang->noRecord = 'No record';
 $lang->toBeAdd    = 'To be add';
+
 $lang->about  = 'About';
 $lang->thanks = 'Thanks';
+
 /* Lang items for xirang. */
 $lang->chanzhiEPS     = 'chanzhiEPS';
 $lang->chanzhiEPSx    = 'Chanzhi';

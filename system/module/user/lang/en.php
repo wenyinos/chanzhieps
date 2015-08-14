@@ -165,10 +165,18 @@ $lang->user->oauth->qq->clientSecret = 'APP KEY';
 $lang->user->oauth->providers['sina'] = 'Sina weibo';
 $lang->user->oauth->providers['qq']   = 'QQ';
 
-$lang->user->oauth->lblWelcome    = 'OAuth login';
-$lang->user->oauth->lblProfile    = "<h3>Register a new account</h3>";
-$lang->user->oauth->lblBind       = "<h3>Or bind an registered account</h3>";
-$lang->user->oauth->lblBindFailed = "Bind user failed！";
+$lang->user->oauth->typeList['sina']   = 'Sina membership';
+$lang->user->oauth->typeList['qq']     = 'QQ membership';
+$lang->user->oauth->typeList['wechat'] = 'Wechat membership';
+
+$lang->user->oauth->lblWelcome       = 'OAuth login';
+$lang->user->oauth->lblProfile       = "<h3>Register a new account</h3>";
+$lang->user->oauth->lblBind          = "<h3>Or bind an registered account</h3>";
+$lang->user->oauth->lblUnbind        = "Unbind";
+$lang->user->oauth->lblUnbindSuccess = "Unbind successfully!";
+$lang->user->oauth->lblUnbindFailed  = "Unbind failed!";
+$lang->user->oauth->lblBindFailed    = "Bind user failed！";
+$lang->user->oauth->ignore           = "Ignore";
 
 $lang->user->statusList = new stdclass();
 $lang->user->statusList->locked    = "<label class='label label-danger'>Locked</label>";

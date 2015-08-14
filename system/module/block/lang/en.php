@@ -51,6 +51,7 @@ $lang->block->textExample     = 'Block text style example，<a href="###">link t
 $lang->block->customStyleTip  = 'Change block color and background here.';
 $lang->block->style           = 'Style';
 $lang->block->sort            = 'Sort';
+$lang->block->class           = 'Class selector';
 
 $lang->block->admin        = "Block management";
 $lang->block->pages        = "Layout settings";
@@ -73,7 +74,9 @@ $lang->block->paddingRight  = 'Right';
 $lang->block->placeholder = new stdclass();
 $lang->block->placeholder->moreText = 'Text for button of more';
 $lang->block->placeholder->moreUrl  = 'Url for button of more';
-$lang->block->placeholder->padding = '0';
+$lang->block->placeholder->padding  = '0';
+$lang->block->placeholder->blockID  = '#blockID can be used as id selector';
+$lang->block->placeholder->class    = 'Separated by a space between the plurality of selectors';
 
 $lang->block->gridOptions[0]  = 'Auto';
 $lang->block->gridOptions[6]  = '1/2';
@@ -84,6 +87,11 @@ $lang->block->gridOptions[9]  = '3/4';
 $lang->block->gridOptions[2]  = '1/6';
 $lang->block->gridOptions[10] = '5/6';
 $lang->block->gridOptions[12] = '100%';
+
+$lang->block->categoryList['custom']  = 'Custom';
+$lang->block->categoryList['article'] = 'Article';
+$lang->block->categoryList['product'] = 'Product';
+$lang->block->categoryList['system']  = 'System';
 
 $lang->block->category = new stdclass();
 $lang->block->category->showChildren = 'Show Children';
