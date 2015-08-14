@@ -62,11 +62,10 @@ $config->langs['zh-cn'] = '简体';
 $config->langs['zh-tw'] = '繁体';
 $config->langs['en']    = 'English';
 
-/* Languags show in front. */
-$config->frontLangs['zh-cn'] = '简';
-$config->frontLangs['zh-tw'] = '繁';
-$config->frontLangs['en']    = 'En';
-
+/* Suported languags label. */
+$config->langAbbrLabels['zh-cn'] = '简';
+$config->langAbbrLabels['zh-tw'] = '繁';
+$config->langAbbrLabels['en']    = 'En';
 
 /* Languags shortcuts. */
 $config->langsShortcuts['zh-cn'] = 'cn';
