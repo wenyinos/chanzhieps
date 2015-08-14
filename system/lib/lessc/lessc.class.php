@@ -1177,22 +1177,43 @@ class lessc {
 	}
 
 	protected function lib_contrast($args) {
-		if ($args[0] != 'list' || count($args[2]) < 3) {
-			return array(array('color', 0, 0, 0), 0);
-		}
+			$darkColor  = array('color', 0, 0, 0);
+	    $lightColor = array('color', 255, 255, 255);
+	    $threshold  = 0.43;
+	    if ( $args[0] == 'list' ) {
+	        $inputColor = ( isset($args[2][0]) ) ? $this->assertColor($args[2][0])  : $lightColor;
+	        $darkColor  = ( isset($args[2][1]) ) ? $this->assertColor($args[2][1])  : $darkColor;
+	        $lightColor = ( isset($args[2][2]) ) ? $this->assertColor($args[2][2])  : $lightColor;
+	        if( isset($args[2][3]) ) {
+	        	if( isset($args[2][3][2]) && $args[2][3][2] == '%' ) {
+	        		$args[2][3][1] /= 100; 
+	        		unset($args[2][3][2]); 
+	        	}
+		        $threshold = $this->assertNumber($args[2][3]);
+	        }
+	    }
+	    else {
+	        $inputColor  = $this->assertColor($args);
+	    }
+	    $inputColor = $this->coerceColor($inputColor);
+	    $darkColor  = $this->coerceColor($darkColor);
+	    $lightColor = $this->coerceColor($lightColor);
+	    //Figure out which is actually light and dark!
+	    if ( $this->lib_luma($darkColor) > $this->lib_luma($lightColor) ) {
+	        $t  = $lightColor;
+	        $lightColor = $darkColor;
+	        $darkColor  = $t;
+	    }
+	    $inputColor_alpha = $this->lib_alpha($inputColor);
+	    if ( ( $this->lib_luma($inputColor) * $inputColor_alpha) < $threshold) {
+	        return $lightColor;
+	    }
+	    return $darkColor;
+	}
 
-		list($inputColor, $darkColor, $lightColor) = $args[2];
-
-		$inputColor = $this->assertColor($inputColor);
-		$darkColor = $this->assertColor($darkColor);
-		$lightColor = $this->assertColor($lightColor);
-		$hsl = $this->toHSL($inputColor);
-
-		if ($hsl[3] > 50) {
-			return $darkColor;
-		}
-
-		return $lightColor;
+	protected function lib_luma($color) {
+	    $color = $this->coerceColor($color);
+	    return (0.2126 * $color[0] / 255) + (0.7152 * $color[1] / 255) + (0.0722 * $color[2] / 255);
 	}
 
 	protected function assertColor($value, $error = "expected color value") {
