@@ -13,7 +13,7 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
-    <i class='icon-th'></i> <?php echo $lang->slide->group;?>
+    <i class='icon-th'></i> <strong><?php echo $lang->slide->group;?></strong>
     <div class='panel-actions'><?php commonModel::printLink('tree', 'browse', "type=slide", '<i class="icon-plus-sign"></i> ' . $lang->slide->createGroup, "class='btn btn-primary'");?></div>
   </div>
   <div class='panel-body'>
@@ -24,18 +24,20 @@
           <?php $count = count($group->slides); ?>
           <div class='slides-holder slides-holder-<?php echo min(5, $count);?>'>
             <?php if(!empty($group->slides)): ?>
-            <?php $index = 1; ?>
+            <?php $index = 0; ?>
             <?php foreach($group->slides as $slide):?>
-            <?php if($index > 5) break; ?>
-            <div class='slide-item slide-item-<?php echo $index++ ?>'>
+            <?php if($index > 4) break; ?>
+            <div class='slide-item slide-item-<?php echo ++$index ?>'>
               <?php if ($slide->backgroundType == 'image'): ?>
-              <?php print(html::image($slide->middleImage));?>
+              <?php print(html::image($slide->image));?>
               <?php else: ?>
               <div class='plain-slide' style='<?php echo 'background-color: ' . $slide->backgroundColor;?>'></div>
               <?php endif; ?>
+              <?php if($count > 5 && $index === 1): ?>
+              <div class='slides-count'><i class='icon-picture'></i> <?php echo $count; ?></div>
+              <?php endif; ?>
             </div>
             <?php endforeach;?>
-            <div class='slides-count'><i class='icon-picture'></i> <?php echo $count; ?></div>
             <?php else: ?>
             <div class='empty-holder'>
               <i class='icon-pencil icon-3x icon'></i>

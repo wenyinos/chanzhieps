@@ -28,12 +28,6 @@ class slideModel extends model
         $slide->buttonClass  = json_decode($slide->buttonClass);
         $slide->buttonUrl    = json_decode($slide->buttonUrl);
         $slide->buttonTarget = json_decode($slide->buttonTarget);
-        $slide->middleImage  = '';
-        if($slide->image)
-        {
-            $imagePath = '/data/slides/';
-            $slide->middleImage = $imagePath . 'm_' . str_replace($imagePath, '', $slide->image);
-        }
 
         return $slide;
     }
@@ -61,12 +55,6 @@ class slideModel extends model
             $slide->buttonClass  = json_decode($slide->buttonClass);
             $slide->buttonUrl    = json_decode($slide->buttonUrl);
             $slide->buttonTarget = json_decode($slide->buttonTarget);
-            $slide->middleImage  = '';
-            if($slide->image)
-            {
-                $imagePath = '/data/slides/';
-                $slide->middleImage = $imagePath . 'm_' . str_replace($imagePath, '', $slide->image);
-            }
         }
         
         return $slides;
@@ -207,22 +195,6 @@ class slideModel extends model
             {
                 $this->dao->delete()->from(TABLE_FILE)->where('id')->eq($fileID)->exec();
                 return false;
-            }
-
-            $this->app->loadClass('phpthumb', true);
-            $imageInfo = pathinfo($imagePath);
-            if(!is_writable($imageInfo['dirname'])) return false;
-
-            $thumbPath = $this->app->getDataRoot() . 'slides/m_' . substr($file['pathname'], strlen('slides') + 1) ;
-            if(extension_loaded('gd'))
-            {
-                $thumb = phpThumbFactory::create($imagePath);
-                $thumb->resize($this->config->slide->mobileWidth);
-                $thumb->save($thumbPath);
-            }
-            else
-            {
-                copy($imagePath, $thumbPath);   
             }
 
             $imageSize = $this->file->getImageSize($imagePath);

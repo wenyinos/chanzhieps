@@ -141,11 +141,11 @@ $lang->user->resetPassword = new stdclass();
 $lang->user->resetPassword->success    = "密碼更改連結已經發送到您的郵箱中";
 $lang->user->resetPassword->failed     = "您的密保郵箱錯誤，請重新輸入";
 
-$lang->user->resetmail = new stdclass();
-$lang->user->resetmail->subject  = '重置密碼';
-$lang->user->resetmail->account  = '你好，'; 
-$lang->user->resetmail->resetUrl = '您在%s（%s）請求了重置密碼操作，請點擊下面的連結，進行重置密碼：'; 
-$lang->user->resetmail->notice   = '系統發信，請勿回覆（如果您沒有進行操作，請忽略此郵件）';
+$lang->user->resetMail = new stdclass();
+$lang->user->resetMail->subject  = '重置密碼';
+$lang->user->resetMail->account  = '你好，'; 
+$lang->user->resetMail->resetUrl = '您在%s（%s）請求了重置密碼操作，請點擊下面的連結，進行重置密碼：'; 
+$lang->user->resetMail->notice   = '系統發信，請勿回覆（如果您沒有進行操作，請忽略此郵件）';
 
 $lang->user->oauth = new stdclass();
 $lang->user->oauth->common       = '開放登錄';

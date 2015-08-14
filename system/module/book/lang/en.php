@@ -23,6 +23,7 @@ $lang->book->addedDate   = 'Added';
 $lang->book->editedDate  = 'Edited';
 $lang->book->title       = 'Title';
 $lang->book->keywords    = 'Keywords';
+$lang->book->path        = 'Path';
 $lang->book->summary     = 'Summary';
 $lang->book->content     = 'Content';
 $lang->book->alias       = 'Alias';

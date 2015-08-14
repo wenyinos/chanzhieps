@@ -43,6 +43,7 @@ $config->views  = ',html,json,xml,'; // Supported view types.
 
 $config->site = new stdclass();
 $config->site->importantValidate = 'okFile,email';
+$config->site->modules = 'article,product';
 
 $config->template = new stdclass();
 $config->template->desktop = new stdclass();
@@ -61,6 +62,11 @@ if(RUN_MODE == 'admin')
 $config->langs['zh-cn'] = '简体';
 $config->langs['zh-tw'] = '繁体';
 $config->langs['en']    = 'English';
+
+/* Suported languags label. */
+$config->langAbbrLabels['zh-cn'] = '简';
+$config->langAbbrLabels['zh-tw'] = '繁';
+$config->langAbbrLabels['en']    = 'En';
 
 /* Languags shortcuts. */
 $config->langsShortcuts['zh-cn'] = 'cn';

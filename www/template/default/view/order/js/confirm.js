@@ -58,22 +58,20 @@ $(document).ready(function()
     {
         if(response.result == 'success')
         {
-            if($('[name=payment]').eq(0).prop('checked'))
+            if(response.payLink)
             {
+                $('#payForm').attr('action', response.payLink);
+                $('#payForm').submit();
                 bootbox.dialog(
                 {  
-                    message: v.createdSuccess,  
+                    message: v.goToPay,  
                     buttons:
                     {  
-                        cart:
+                        paySuccess:
                         {  
-                            label:     v.goToPay,  
+                            label:     v.paid,  
                             className: 'btn-primary',  
-                            callback:  function()
-                            {
-                                window.open(response.locate, '_blank');
-                                setTimeout(function(){location.href = createLink('order', 'browse');}, 600);
-                            }  
+                            callback:  function() { setTimeout(function(){location.href = createLink('order', 'browse');}, 600); }  
                         }  
                     }  
                 });

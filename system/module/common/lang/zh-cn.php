@@ -191,7 +191,7 @@ $lang->ui->menu->favicon = '小图标|ui|setfavicon|';
 $lang->ui->menu->slide   = '幻灯片|slide|admin|';
 $lang->ui->menu->block   = array('link' => '区块|block|admin|', 'alias' => 'create,edit');
 $lang->ui->menu->layout  = array('link' => '布局|block|pages|', 'alias' => 'setregion');
-$lang->ui->menu->source  = '素材|file|sourcebrowse|';
+$lang->ui->menu->source  = '素材|file|browsesource|';
 $lang->ui->menu->others  = '其他|ui|others|';
 
 /* Menu of user module. */

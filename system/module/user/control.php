@@ -542,7 +542,7 @@ class user extends control
                 $resetURL = "http://". $_SERVER['HTTP_HOST'] . $this->inlink('checkreset', "key=$reset");
                 $this->user->reset($account, $reset);
                 include('view/resetpassmail.html.php');
-                $this->loadModel('mail')->send($account, $this->lang->user->resetmail->subject, $mailContent); 
+                $this->loadModel('mail')->send($account, $this->lang->user->resetMail->subject, $mailContent); 
                 if($this->mail->isError()) 
                 {
                     $this->send(array('result' => 'fail', 'message' => $this->mail->getError()));

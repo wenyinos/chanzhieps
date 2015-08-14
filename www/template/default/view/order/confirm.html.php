@@ -12,9 +12,11 @@
 ?>
 <?php include TPL_ROOT . 'common/header.html.php';?>
 <?php js::set('currencySymbol', $currencySymbol);?>
-<?php js::set('createdSuccess', $lang->order->createdSuccess);?>
+<?php js::set('goToPay', $lang->order->goToPay);?>
 <?php js::set('goToPay', $lang->order->goToPay);?>
 <?php js::set('checkStock', $this->config->product->stock);?>
+<?php js::set('paid', $lang->order->paid);?>
+<?php js::set('payFaild', $lang->order->payFaild);?>
 <?php if(!empty($products)):?>
 <?php $total = 0;?>
 <div class='panel'>
@@ -122,4 +124,5 @@
   </div>
 </div>
 <?php endif;?>
+<form id="payForm" target='_blank' class='hide'></form>
 <?php include TPL_ROOT . 'common/footer.html.php';?>

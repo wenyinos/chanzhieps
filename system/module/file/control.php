@@ -137,7 +137,7 @@ class file extends control
      * @access public
      * @return void
      */
-    public function sourceBrowse($type = '', $orderBy = 'id_desc', $pageID = 1)
+    public function browseSource($type = '', $orderBy = 'id_desc', $pageID = 1)
     {
         $this->file->setSavePath('source');
         $this->lang->file->menu = $this->lang->ui->menu;
@@ -176,7 +176,7 @@ class file extends control
 
             $result = $this->file->sourceEdit($fileID, $filename);
             if($result['result'] == 'fail') $this->send($result);
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('file', 'sourcebrowse')));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('file', 'browseSource')));
         }
         $this->view->title      = $this->lang->file->edit;
         $this->view->modalWidth = 500;

@@ -2,7 +2,7 @@ $(document).ready(function()
 {   
     $.setAjaxForm('#fileForm', function(data)
     {
-        if(data.result == 'success') location.href = createLink('file', 'sourcebrowse');
+        if(data.result == 'success') location.href = createLink('file', 'browsesource');
     }); 
 
     $('.image-view').click(function()

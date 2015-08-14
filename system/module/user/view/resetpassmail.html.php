@@ -11,7 +11,7 @@
  */
 ?>
 <?php
-$resetUrlTip = sprintf($this->lang->user->resetmail->resetUrl, $this->config->site->name, $this->server->http_host);
+$resetUrlTip = sprintf($this->lang->user->resetMail->resetUrl, $this->config->site->name, $this->server->http_host);
 $mailContent = <<<EOT
 <html>
 <head>
@@ -23,7 +23,7 @@ div{padding-left:30px;}
 <body>
 <div style='margin-top:20px;'>
 <p>
-{$this->lang->user->resetmail->account} {$account}
+{$this->lang->user->resetMail->account} {$account}
 <br>
 {$resetUrlTip}
 <br>
@@ -31,7 +31,7 @@ div{padding-left:30px;}
 </p>
 </div>
 <div style='height:20px;border-bottom:1px solid #ddd;'></div>
-<div style='margin:20px 0 0 0 ;'>{$this->lang->user->resetmail->notice}</div>
+<div style='margin:20px 0 0 0 ;'>{$this->lang->user->resetMail->notice}</div>
 </body>
 </html>
 EOT;
