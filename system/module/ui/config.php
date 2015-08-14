@@ -221,3 +221,18 @@ unset($config->ui->themes['default']['colorful']['navbar']);
 unset($config->ui->themes['default']['colorful']['button']);
 unset($config->ui->themes['default']['colorful']['block']);
 $config->ui->themes['default']['colorful']['basic']['colorset']['primary']['default'] = '#D1270A';
+
+/* Default theme of mobile template */
+$config->ui->themes['mobile']['default'] = $config->ui->selectorOptions;
+unset($config->ui->themes['mobile']['default']['basic']['pageBackground']);
+unset($config->ui->themes['mobile']['default']['basic']['border']);
+unset($config->ui->themes['mobile']['default']['basic']['aLink']);
+unset($config->ui->themes['mobile']['default']['basic']['aVisited']);
+unset($config->ui->themes['mobile']['default']['basic']['aHover']);
+unset($config->ui->themes['mobile']['default']['basic']['column']);
+unset($config->ui->themes['mobile']['default']['basic']['pageText']);
+unset($config->ui->themes['mobile']['default']['navbar']);
+unset($config->ui->themes['mobile']['default']['button']);
+unset($config->ui->themes['mobile']['default']['block']);
+unset($config->ui->themes['mobile']['default']['footer']);
+$config->ui->themes['mobile']['default']['basic']['colorset']['primary']['default'] = '#3280FC';
