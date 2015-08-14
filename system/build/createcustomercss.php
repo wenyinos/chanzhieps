@@ -4,6 +4,7 @@ $systemRoot = $baseRoot . "/system/";
 $wwwRoot     = $baseRoot . "/www/";
 
 $config = new stdclass();
+$config->ui = new stdclass();
 include $systemRoot . 'module/ui/config.php';
 
 include $systemRoot . 'lib/lessc/lessc.class.php';
@@ -12,7 +13,7 @@ $lessc = new lessc();
 $params = array();
 foreach($config->ui->themes['default'] as $theme => $defaults)
 {
-    if($theme == 'common') continue;
+    if(strpos(',default,tartan,wide,', $theme) === false) continue;
     foreach($defaults as $section => $selector)
     {
         foreach($selector as $attr => $settings)
