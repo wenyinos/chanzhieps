@@ -29,7 +29,7 @@
             <?php if($index > 4) break; ?>
             <div class='slide-item slide-item-<?php echo ++$index ?>'>
               <?php if ($slide->backgroundType == 'image'): ?>
-              <?php print(html::image($slide->middleImage));?>
+              <?php print(html::image($slide->image));?>
               <?php else: ?>
               <div class='plain-slide' style='<?php echo 'background-color: ' . $slide->backgroundColor;?>'></div>
               <?php endif; ?>
