@@ -616,11 +616,11 @@ class blockModel extends model
                 $style .= isset($content->custom->$theme->paddingLeft) ? '#block' . $block->id . ' .panel-body' . '{padding-left:' . $content->custom->$theme->paddingLeft . 'px !important;}' : '';
                 if(!empty($content->custom->$theme->css))
                 {
-                    $style .= str_replace('#blockID', "#block{$block->id}", $content->custom->$theme->css);
+                    $style .= str_ireplace('#blockID', "#block{$block->id}", $content->custom->$theme->css);
                 }
             }
             $style .= '</style>';
-            $script = !empty($content->custom->$theme->js) ? "<script language='Javascript'>" . $content->custom->$theme->js . "</script>" : '';
+            $script = !empty($content->custom->$theme->js) ? "<script language='Javascript'>" . str_ireplace('#blockID', "#block{$block->id}", $content->custom->$theme->js) . "</script>" : '';
 
             echo $containerHeader;
             if(file_exists($blockFile)) include $blockFile;
