@@ -3,7 +3,7 @@
 
 <div class='block-region region-all-top'><?php $this->block->printRegion($layouts, 'all', 'top');?></div>
 
-<?php $topNavs = $this->loadModel('nav')->getNavs('top');?>
+<?php $topNavs = $this->loadModel('nav')->getNavs('mobile_top');?>
 <header class='appbar fix-top' id='appbar'>
   <div class='appbar-title'>
     <a href='<?php echo $webRoot;?>'><?php
@@ -55,7 +55,7 @@
   <div class='mainnav'>
     <ul class='nav'>
     <?php $subnavs = '';?>
-    <?php foreach($topNavs->{$this->device} as $nav1):?>
+    <?php foreach($topNavs as $nav1):?>
       <li class='<?php echo $nav1->class?>'>
       <?php
       if(empty($nav1->children))

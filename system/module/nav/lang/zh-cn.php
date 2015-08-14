@@ -36,6 +36,9 @@ $lang->nav->system->blog    = '博客';
 $lang->nav->system->book    = '手册';
 $lang->nav->system->message = '留言';
 
+$lang->nav->desktop = '桌面';
+$lang->nav->mobile  = '移动';
+
 /* Targets setting. */
 $lang->nav->newWindow = new stdclass();
 $lang->nav->newWindow->_blank = '新开窗口';

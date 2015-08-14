@@ -1428,15 +1428,8 @@ class upgradeModel extends model
      */
     public function fixNav()
     {
-        $navs = $this->dao->setAutolang(false)->select('*')->from(TABLE_CONFIG)->where('section')->eq('nav')->andWhere('`key`')->eq('top')->fetchAll();
-        foreach($navs as $nav)
-        {
-            $settings = array();
-            $settings['desktop'] = json_decode($nav->value);
-            $settings = array($nav->key => helper::jsonEncode($settings));
-            if(!$this->loadModel('setting')->setItems('system.common.nav', $settings, $nav->lang)) return false;
-        }
-        return true;
+        $this->dao->setAutoLang(false)->update(TABLE_CONFIG)->set('`key`')->eq('desktop_top')->where('`key`')->eq('top')->andWhere('section')->eq('nav')->exec();
+        return !dao::isError();
     }
 
     /**
