@@ -111,6 +111,10 @@ class upgradeModel extends model
             case '4_3_beta':
                 $this->execSQL($this->getUpgradeFile('4.3.beta'));
                 $this->setDefaultEnableModules();
+                $this->fixTemplate();
+                $this->fixNav();
+                $this->setDefaultBlocks();
+                $this->fixLogo();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
