@@ -351,7 +351,7 @@ class blockModel extends model
         $block = fixer::input('post')->add('template', $template)->stripTags('content', $this->config->block->allowedTags)->get();
         if($this->post->type == 'phpcode') $block = fixer::input('post')->add('template', $template)->get();
 
-        $gpcOn = version_compare(phpversion(), '5.4', '<') and get_magic_quotes_gpc();
+        $gpcOn = (version_compare(phpversion(), '5.4', '<') and get_magic_quotes_gpc());
 
         if(!isset($block->params)) $block->params = array();
         $block->params['custom'][$theme]['css'] = $block->css;
@@ -385,7 +385,7 @@ class blockModel extends model
         $data = fixer::input('post')->add('template', $template)->stripTags('content', $this->config->block->allowedTags)->get();
         if($this->post->type == 'phpcode') $data = fixer::input('post')->add('template', $template)->get();
 
-        $gpcOn = version_compare(phpversion(), '5.4', '<') and get_magic_quotes_gpc();
+        $gpcOn = (version_compare(phpversion(), '5.4', '<') and get_magic_quotes_gpc());
 
         if(!isset($data->params)) $data->params = array();
         $data->params['custom'][$theme]['css'] = $data->css;
@@ -522,7 +522,7 @@ class blockModel extends model
      */
     private function parseBlockContent($block, $withGrid = false, $containerHeader, $containerFooter)
     {
-        $withGrid = $withGrid and isset($block->grid);
+        $withGrid = ($withGrid and isset($block->grid));
         if(!empty($block->children)) 
         {
             if($withGrid)

@@ -85,7 +85,7 @@ class spliter
      */
     public function unicode($c) 
     {
-        if(ord($c{0}) >= 0    && ord($c{0}) <= 127) return  ord($c{0});
+        if(ord($c{0}) >= 0   && ord($c{0}) <= 127) return  ord($c{0});
         if(ord($c{0}) >= 192 && ord($c{0}) <= 223) return (ord($c{0}) - 192) * 64         + (ord($c{1}) - 128);
         if(ord($c{0}) >= 224 && ord($c{0}) <= 239) return (ord($c{0}) - 224) * 4096       + (ord($c{1}) - 128) * 64       + (ord($c{2}) - 128);
         if(ord($c{0}) >= 240 && ord($c{0}) <= 247) return (ord($c{0}) - 240) * 262144     + (ord($c{1}) - 128) * 4096     + (ord($c{2}) - 128) * 64     + (ord($c{3}) - 128);
@@ -106,10 +106,10 @@ class spliter
     public function isLetter($letter)
     {
         $ord = ord($letter);
-        if($ord >= ord('a') and $ord <= ord('z')) return true;
-        if($ord >= ord('A') and $ord <= ord('Z')) return true;
+        if($ord >= ord('a') and $ord <= ord('z'))  return true;
+        if($ord >= ord('A') and $ord <= ord('Z'))  return true;
         if($ord >= ord(0)   and $ord <= ord(9))    return true;
-        if(strpos('._/->:<?&', $letter) !== false)      return true;
+        if(strpos('._/->:<?&', $letter) !== false) return true;
         return false;
     }
 }
