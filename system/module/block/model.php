@@ -624,7 +624,7 @@ class blockModel extends model
                 }
             }
             $style .= '</style>';
-            $script = !empty($content->custom->$theme->js) ? "<script language='Javascript'>" . str_ireplace('#blockID', "#block{$block->id}", $content->custom->$theme->js) . "</script>" : '';
+            $script = !empty($content->custom->$theme->js) ? '<script>' . str_ireplace('#blockID', "#block{$block->id}", $content->custom->$theme->js) . "</script>" : '';
 
             echo $containerHeader;
             if(file_exists($blockFile)) include $blockFile;
