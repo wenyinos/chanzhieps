@@ -32,11 +32,7 @@ $lang->order->paidSuccess    = 'Order paid successfully!';
 $lang->order->submit         = 'Submit order';
 $lang->order->cancel         = 'Cancel';
 $lang->order->pay            = 'Pay';
-<<<<<<< HEAD
-$lang->order->goToPay        = 'To pay';
-=======
 $lang->order->goToPay        = 'Please complete the payment.';
->>>>>>> c73775486ee30d2d16f52c9c318ca6d2fe679f66
 $lang->order->return         = 'Receive payment';
 $lang->order->delivery       = 'delivery';
 $lang->order->finish         = 'finish';
