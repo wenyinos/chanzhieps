@@ -41,13 +41,18 @@ $lang->ui->noJsTag                = "請填寫全局JS代碼，不需要&lt;scri
 $lang->ui->setLogoFailed          = "設置Logo失敗";
 $lang->ui->noSelectedFile         = "獲取上傳圖片失敗，可能是圖片大小超出上傳限制";
 $lang->ui->notAlloweFileType      = "請選擇正確的%s檔案";
-$lang->ui->suitableLogoSize       = '最佳高度範圍：50px~80px，最佳寬度範圍：80px~240px';
+$lang->ui->suitableLogoSize       = '最佳高度範圍：%s，最佳寬度範圍：%s';
 $lang->ui->exportedSuccess        = '導出成功';
 $lang->ui->deleteThemeSuccess     = '刪除主題成功';
 $lang->ui->deleteThemeFail        = '刪除主題失敗';
 $lang->ui->fileRequired           = '請選擇一個檔案';
 $lang->ui->importThemeSuccess     = '導入主題成功';
 $lang->ui->packagePathUnwriteable = '上傳目錄：%s 不可寫';
+$lang->ui->selectSourceImage      = '從素材庫選擇';
+
+$lang->ui->deviceList = new stdclass();
+$lang->ui->deviceList->desktop = "<i class='icon icon-desktop'></i>桌面";
+$lang->ui->deviceList->mobile  = "<i class='icon icon-tablet'></i>移動";
 
 $lang->ui->productViewList[1] = '顯示'; 
 $lang->ui->productViewList[0] = '不顯示'; 
@@ -221,3 +226,4 @@ $lang->ui->info            = '信息';
 $lang->ui->danger          = '危險';
 $lang->ui->warning         = '警告';
 $lang->ui->success         = '積極';
+$lang->ui->removeDirFaild  = "<h4>以下目錄刪除失敗</h4><pre>%s</pre> <div class='text-important'>請手動刪除，或者設置這些檔案的可寫權限後繼續。</div>";

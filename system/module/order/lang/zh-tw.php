@@ -16,30 +16,37 @@ $lang->order->deliveriedDate = '發貨時間';
 $lang->order->confirmedDate  = '收貨時間';
 $lang->order->payment        = '交易方式';
 $lang->order->createdDate    = '下單時間';
-$lang->order->express        = '快遞';
-$lang->order->waybill        = '快遞單';
+$lang->order->express        = '快遞公司';
+$lang->order->waybill        = '快遞單號';
+$lang->order->expressInfo    = '快遞詳情';
+$lang->order->receiver       = '收貨人';
+$lang->order->noRecord       = '無';
 $lang->order->status         = '狀態';
 
 $lang->order->admin          = '訂單管理';
 $lang->order->setting        = '系統設置';
 $lang->order->browse         = '我的訂單';
 $lang->order->bought         = '查看已買到的商品';
+$lang->order->createdSuccess = '訂單創建成功！';
 $lang->order->paidSuccess    = '訂單支付成功！';
 $lang->order->submit         = '提交訂單';
 $lang->order->cancel         = '取消';
 $lang->order->pay            = '支付';
+$lang->order->goToPay        = '訂單創建成功，請到支付頁面完成付款。';
 $lang->order->return         = '收款';
 $lang->order->delivery       = '發貨';
 $lang->order->finish         = '完成';
 $lang->order->confirm        = '確認訂單信息';
-$lang->order->selectProducts = "選擇了<strong class='text-danger'>%s</strong>件商品，";
+$lang->order->selectProducts = "選擇了 <strong class='text-danger'>%s</strong> 件商品，";
 $lang->order->totalToPay     = "共計：<strong id='amount' class='text-danger'>%s</strong>";
 $lang->order->payInfo        = "%s %s 商品訂單";
-$lang->order->goToBank       = "請到網上銀行完成支付。";
+$lang->order->goToBank       = "請在綫支付您的訂單。";
 $lang->order->track          = '查看物流';
 $lang->order->life           = '訂單跟蹤';
 $lang->order->days           = '天';
-$lang->order->deliveryInfo   = '發貨信息';
+$lang->order->deliveryInfo   = '查看詳情';
+$lang->order->backToCart     = '返回購物車修改';
+$lang->order->paid           = '我已付款';
 
 $lang->order->confirmLimit         = '確認收貨周期';
 $lang->order->confirmReceived      = '確認收貨';
@@ -50,6 +57,8 @@ $lang->order->cancelSuccess        = "訂單已取消";
 $lang->order->paymentRequired      = '需要至少一種交易方式';
 $lang->order->confirmLimitRequired = '需要設定確認收貨周期';
 $lang->order->finishWarning        = "確認完成";
+$lang->order->noProducts           = "訂單中沒有產品";
+$lang->order->lowStocks            = "<strong>%s</strong> 庫存不足";
 
 $lang->order->alipayPid   = '合作者ID';
 $lang->order->alipayKey   = '合作者KEY';
@@ -61,7 +70,7 @@ $lang->order->placeholder->key   = '安全檢驗碼，以數字和字母組成�
 $lang->order->placeholder->email = '支付寶商家郵箱';
 
 $lang->order->paymentList = array();
-$lang->order->paymentList['alipay'] = '支付寶及時到帳';
+$lang->order->paymentList['alipay'] = '支付寶即時到帳';
 $lang->order->paymentList['COD']    = '貨到付款';
 
 $lang->order->statusList = array();

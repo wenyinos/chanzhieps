@@ -11,6 +11,9 @@ $lang->book->catalog    = '章節';
 $lang->book->edit       = '編輯';
 $lang->book->sort       = '排序';
 
+$lang->book->searchResults     = '搜索結果';
+$lang->book->inputArticleTitle = '請輸入文章標題';
+
 $lang->book->id          = '編號';
 $lang->book->type        = '類型';
 $lang->book->parent      = '類目';
@@ -24,6 +27,7 @@ $lang->book->summary     = '簡介';
 $lang->book->content     = '內容';
 $lang->book->alias       = '別名';
 $lang->book->order       = '排序';
+$lang->book->views       = '閲讀';
 $lang->book->files       = '附件';
 $lang->book->images      = '圖片';
 $lang->book->chapterList = '目錄管理';

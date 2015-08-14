@@ -28,7 +28,7 @@ $lang->file->limit         = "(<span class='text-danger'>%sM以內</span>)";
 $lang->file->source        = '素材';
 $lang->file->sourceList    = '素材列表';
 $lang->file->uploadSource  = '上傳素材';
-$lang->file->sourceURI     = '查看地址';
+$lang->file->sourceURI     = '地址';
 $lang->file->sourceDelete  = '刪除素材';
 $lang->file->sourceEdit    = '編輯素材';
 $lang->file->selectImage   = '選擇素材';

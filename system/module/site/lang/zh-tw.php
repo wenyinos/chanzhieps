@@ -118,9 +118,12 @@ $lang->site->frontList['guest'] = '不需要登錄';
 
 $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = '會員';
-$lang->site->moduleAvailable['forum']   = '論壇';
+$lang->site->moduleAvailable['article'] = '文章';
 $lang->site->moduleAvailable['blog']    = '博客';
+$lang->site->moduleAvailable['product'] = '產品';
 $lang->site->moduleAvailable['book']    = '手冊';
+$lang->site->moduleAvailable['page']    = '單頁';
+$lang->site->moduleAvailable['forum']   = '論壇';
 $lang->site->moduleAvailable['message'] = '評論留言';
 $lang->site->moduleAvailable['search']  = '搜索';
 $lang->site->moduleAvailable['shop']    = '商城';

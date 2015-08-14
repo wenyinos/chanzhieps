@@ -161,15 +161,22 @@ $lang->user->oauth->sina->clientSecret = 'App Secret';
 $lang->user->oauth->qq = new stdclass();
 $lang->user->oauth->qq->clientID     = 'APP ID';
 $lang->user->oauth->qq->clientSecret = 'APP KEY';
-$lang->user->oauth->qq->callbackURL  = 'http://%s/user-oauthcallback-qq.html';
 
 $lang->user->oauth->providers['sina'] = '新浪微博';
 $lang->user->oauth->providers['qq']   = 'QQ';
 
-$lang->user->oauth->lblWelcome    = '開放登錄，快捷方便';
-$lang->user->oauth->lblProfile    = "設置用戶名，完成註冊";
-$lang->user->oauth->lblBind       = "或綁定已有帳號";
-$lang->user->oauth->lblBindFailed = "綁定賬戶失敗！";
+$lang->user->oauth->typeList['sina']   = '新浪微博會員';
+$lang->user->oauth->typeList['qq']     = 'QQ會員';
+$lang->user->oauth->typeList['wechat'] = '微信會員';
+
+$lang->user->oauth->lblWelcome       = '開放登錄，快捷方便';
+$lang->user->oauth->lblProfile       = "設置用戶名，完成註冊";
+$lang->user->oauth->lblBind          = "或綁定已有帳號";
+$lang->user->oauth->lblUnbind        = "解除綁定";
+$lang->user->oauth->lblUnbindSuccess = "解除綁定成功！";
+$lang->user->oauth->lblUnbindFailed  = "解除綁定失敗！";
+$lang->user->oauth->lblBindFailed    = "綁定賬戶失敗！";
+$lang->user->oauth->ignore           = "忽略";
 
 $lang->user->statusList = new stdclass();
 $lang->user->statusList->locked    = "<label class='label label-danger'>鎖定</label>";
@@ -207,6 +214,7 @@ $lang->user->log->desc        = '描述';
 $lang->user->ipDenied       = '登錄IP受限，請按提示操作。';
 $lang->user->locationDenied = '登錄地區受限，請按提示操作。';
 $lang->user->verifyFail     = '請填寫正確的驗證碼';
+$lang->user->confirmUnbind  = '您確定要解除綁定嗎？';
 
 $lang->user->placeholder = new stdclass();
 $lang->user->placeholder->password   = '請輸入您的網站登錄密碼';

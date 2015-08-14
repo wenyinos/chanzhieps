@@ -9,8 +9,8 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->slide->common = '幻燈片';
-
+$lang->slide->common     = '幻燈片';
+$lang->slide->group      = '幻燈片分組';
 $lang->slide->title      = '標題';
 $lang->slide->titleColor = '標題顏色';
 $lang->slide->image      = '圖片';
@@ -20,6 +20,7 @@ $lang->slide->label      = '按鈕文字';
 $lang->slide->button     = '按鈕';
 $lang->slide->newWindow  = '新開窗口';
 $lang->slide->upload     = '上傳';
+$lang->slide->return     = '返回分組';
 
 $lang->slide->background = new stdclass();
 
@@ -42,7 +43,7 @@ $lang->slide->sort        = '排序';
 $lang->slide->admin       = '幻燈片設置';
 $lang->slide->create      = '添加幻燈片';
 $lang->slide->edit        = '編輯幻燈片';
-$lang->slide->createGroup = '添加幻燈片分組';
+$lang->slide->createGroup = '添加分組';
 
 $lang->slide->successSort     = '排序成功保存';
 $lang->slide->noImageSelected = '沒有選擇圖片';

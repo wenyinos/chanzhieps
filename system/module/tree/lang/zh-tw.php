@@ -35,20 +35,23 @@ $lang->tree->placeholder->link = '輸入連結，可以是站外連結';
 
 /* Lang items for article, products. */
 $lang->category = new stdclass();
-$lang->category->common   = '類目';
-$lang->category->name     = '類目名稱';
-$lang->category->alias    = '別名';
-$lang->category->parent   = '上級類目';
-$lang->category->desc     = '描述';
-$lang->category->keywords = '關鍵詞';
-$lang->category->children = "子類目";
-$lang->category->isLink   = '跳轉';
-$lang->category->link     = '連結';
+$lang->category->common     = '類目';
+$lang->category->name       = '類目名稱';
+$lang->category->abbr       = '簡稱';
+$lang->category->alias      = '別名';
+$lang->category->parent     = '上級類目';
+$lang->category->desc       = '描述';
+$lang->category->keywords   = '關鍵詞';
+$lang->category->children   = "子類目";
+$lang->category->unsaleable = '非賣品';
+$lang->category->isLink     = '跳轉';
+$lang->category->link       = '連結';
 
 /* Lang items for forum. */
 $lang->board = new stdclass();
 $lang->board->common     = '版塊';
 $lang->board->name       = '版塊';
+$lang->board->abbr       = '簡稱';
 $lang->board->alias      = '別名';
 $lang->board->parent     = '上級版塊';
 $lang->board->desc       = '描述';

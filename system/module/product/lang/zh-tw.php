@@ -39,12 +39,15 @@ $lang->product->views      = '瀏覽';
 $lang->product->viewsCount = '瀏覽次數';
 $lang->product->stick      = '置頂級別';
 $lang->product->order      = '排序';
+$lang->product->unsaleable = '非賣品';
 $lang->product->attribute  = '產品屬性';
 $lang->product->custom     = '自定義屬性';
 $lang->product->sales      = '產品定價';
 $lang->product->css        = 'CSS';
 $lang->product->js         = 'JS';
-$lang->product->currency   = '貨幣設置';
+
+$lang->product->currency = '貨幣';
+$lang->product->stock    = '庫存';
 
 $lang->product->list         = '產品列表';
 $lang->product->hot          = '熱門產品';
@@ -60,6 +63,8 @@ $lang->product->addToCart    = "<i class='icon icon-shopping-cart'></i> 加入�
 $lang->product->count        = '數量';
 $lang->product->comments     = '評論';
 $lang->product->detail       = '查看詳情';
+$lang->product->setting      = '系統設置';
+$lang->product->soldout      = '已售罄';
 
 $lang->product->congratulations  = "恭喜";
 $lang->product->addToCartSuccess = "成功加入購物車。";
@@ -123,3 +128,7 @@ $lang->product->currencySymbols['aud']  = 'A$';
 $lang->product->currencySymbols['nzd']  = 'NZ$';
 $lang->product->currencySymbols['thb']  = 'B';
 $lang->product->currencySymbols['sgd']  = 'S$';
+
+$lang->product->stockOptions = array();
+$lang->product->stockOptions[0] = '關閉';
+$lang->product->stockOptions[1] = '開啟';

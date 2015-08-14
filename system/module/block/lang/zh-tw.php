@@ -25,6 +25,8 @@ $lang->block->regionList      = '區域列表';
 $lang->block->select          = '請選擇區塊';
 $lang->block->categories      = '分類';
 $lang->block->showImage       = '圖文';
+$lang->block->showCategory    = '顯示類目';
+$lang->block->showBoard       = '顯示版塊';
 $lang->block->showTime        = '顯示時間';
 $lang->block->product         = '產品';
 $lang->block->slide           = '幻燈片';
@@ -50,6 +52,7 @@ $lang->block->textExample     = '區塊文字樣式示例，<a href="###">連結
 $lang->block->customStyleTip  = '在這裡調整區塊的顏色及背景';
 $lang->block->style           = '樣式';
 $lang->block->sort            = '排序';
+$lang->block->class           = 'css類名';
 
 $lang->block->admin        = "區塊管理";
 $lang->block->pages        = "佈局設置";
@@ -70,9 +73,13 @@ $lang->block->paddingLeft   = '左';
 $lang->block->paddingRight  = '右';
 
 $lang->block->placeholder = new stdclass();
-$lang->block->placeholder->moreText = '區塊右上角文字';
-$lang->block->placeholder->moreUrl  = '區塊右上角連結地址';
-$lang->block->placeholder->padding = '0';
+$lang->block->placeholder->moreText               = '區塊右上角文字';
+$lang->block->placeholder->moreUrl                = '區塊右上角連結地址';
+$lang->block->placeholder->padding                = '0';
+$lang->block->placeholder->customStyleTip         = '樣式表支持Less語法，可以用#blockID作為id選擇器。';
+$lang->block->placeholder->desktopCustomScriptTip = '已包含 jQuery 1.9.0，可以用#blockID作為id選擇器。';
+$lang->block->placeholder->mobileCustomScriptTip  = '支持基本的jQuery語法，可以用#blockID作為id選擇器。';
+$lang->block->placeholder->class                  = '多個類名之間用空格隔開';
 
 $lang->block->gridOptions[0]  = '自動';
 $lang->block->gridOptions[6]  = '1/2';
@@ -84,8 +91,20 @@ $lang->block->gridOptions[2]  = '1/6';
 $lang->block->gridOptions[10] = '5/6';
 $lang->block->gridOptions[12] = '100%';
 
+$lang->block->categoryList['custom']  = '自定義';
+$lang->block->categoryList['article'] = '文章';
+$lang->block->categoryList['product'] = '產品';
+$lang->block->categoryList['system']  = '系統';
+
 $lang->block->category = new stdclass();
 $lang->block->category->showChildren = '顯示子分類';
+$lang->block->category->fromCurrent  = '當前類目開始';
 
 $lang->block->category->showChildrenList[1] = '是';
 $lang->block->category->showChildrenList[0] = '否';
+
+$lang->block->category->fromCurrentList[1] = '是';
+$lang->block->category->fromCurrentList[0] = '否';
+
+$lang->block->category->showCategoryList['abbr'] = '簡稱';
+$lang->block->category->showCategoryList['name'] = '全稱';
