@@ -593,7 +593,7 @@ class blockModel extends model
             {
                 $defaultIcon = $this->config->block->defaultIcons[$block->type];
                 $iconClass   = isset($content->icon) ? $content->icon : $defaultIcon;
-                $icon        = $iconClass ? "<i class='icon {$iconClass}'></i> " : "" ;
+                $icon        = $iconClass ? "<i class='icon panel-icon {$iconClass}'></i> " : "" ;
             }
 
             $style  = '<style>';
@@ -608,7 +608,7 @@ class blockModel extends model
                 $style .= !empty($content->custom->$theme->titleColor) ? 'color:' .$content->custom->$theme->titleColor . ';' : '';
                 $style .= !empty($content->custom->$theme->titleBackground) ? 'background:' .$content->custom->$theme->titleBackground . ' !important;;' : '';
                 $style .= '}';
-                $style .= !empty($content->custom->$theme->iconColor) ? '#block' . $block->id . ' i{color:' .$content->custom->$theme->iconColor . ' !important;}' : '';
+                $style .= !empty($content->custom->$theme->iconColor) ? '#block' . $block->id . ' .panel-icon {color:' .$content->custom->$theme->iconColor . ' !important;}' : '';
                 $style .= !empty($content->custom->$theme->linkColor) ? '#block' . $block->id . ' a{color:' .$content->custom->$theme->linkColor . ' !important;}' : '';
                 $style .= isset($content->custom->$theme->paddingTop) ? '#block' . $block->id . ' .panel-body' . '{padding-top:' . $content->custom->$theme->paddingTop . 'px !important;}' : '';
                 $style .= isset($content->custom->$theme->paddingRight) ? '#block' . $block->id . ' .panel-body' . '{padding-right:' . $content->custom->$theme->paddingRight . 'px !important;}' : '';
@@ -616,7 +616,11 @@ class blockModel extends model
                 $style .= isset($content->custom->$theme->paddingLeft) ? '#block' . $block->id . ' .panel-body' . '{padding-left:' . $content->custom->$theme->paddingLeft . 'px !important;}' : '';
                 if(!empty($content->custom->$theme->css))
                 {
-                    $style .= str_ireplace('#blockID', "#block{$block->id}", $content->custom->$theme->css);
+                    $customStyle = str_ireplace('#blockID', "#block{$block->id}", $content->custom->$theme->css);
+                    $lessc = $this->app->loadClass('lessc');
+                    $lessc->setFormatter("compressed");
+                    $customStyle = $lessc->compile($customStyle);
+                    $style .= $customStyle;
                 }
             }
             $style .= '</style>';

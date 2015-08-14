@@ -17,7 +17,6 @@
 js::set('type', $type);
 js::set('cancreatephp', isset($canCreatePHP) ? $canCreatePHP : '');
 js::set('setOkFile', isset($okFile) ? sprintf($lang->setOkFile, $okFile) : '');
-
 $colorPlates = '';
 foreach (explode('|', $lang->colorPlates) as $value)
 {
@@ -28,6 +27,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
   <div class='panel'>
     <div class='panel-heading'>
       <ul class='nav nav-tabs'>
+        <li class='nav-heading'><i class='icon icon-pencil'></i> <?php echo $lang->block->edit ?> [<?php echo $block->title; ?>]</li>
         <li><a href='#contentTab' data-toggle='tab'><?php echo $lang->block->content;?></a></li>
         <?php if(strpos(',htmlcode, phpcode, slide, header', $type) == false or $type == 'html'):?>
         <li><a href='#customTab' data-toggle='tab'><?php echo $lang->block->style;?></a></li>
@@ -38,7 +38,11 @@ foreach (explode('|', $lang->colorPlates) as $value)
     </div>
     <div class='panel-body'>
       <div class='row'>
+        <?php if(strpos(',htmlcode, phpcode, slide, header', $type) == false or $type == 'html'):?>
         <div class='tab-content col-md-6'>
+        <?php else: ?>
+        <div class='tab-content col-md-12'>
+        <?php endif; ?>
           <div class='tab-pane theme-control-tab-pane' id='contentTab'>
             <table align='center' class='table table-form'>
               <tr>
@@ -220,7 +224,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
           </div>
           <?php endif;?>
           <div class='tab-pane theme-control-tab-pane' id='cssTab'>
-            <?php echo html::textarea('css', isset($block->content->custom->$theme->css) ? $block->content->custom->$theme->css : '', "rows=20 class='form-control codeeditor' data-mode='css' data-height='350'");?>
+            <?php echo html::textarea('css', (isset($block->content->custom->$theme->css) && !empty($block->content->custom->$theme->css)) ? $block->content->custom->$theme->css : "#blockID\n{\n  /*.panel-heading {}*/\n  /*.panel-body    {}*/\n}", "rows=20 class='form-control codeeditor' data-mode='css' data-height='350'");?>
             <p class='text-info text-tip'><?php echo $lang->block->placeholder->customStyleTip;?></p>
           </div>
           <div class='tab-pane theme-control-tab-pane' id='jsTab'>
@@ -231,11 +235,13 @@ foreach (explode('|', $lang->colorPlates) as $value)
           </div>
         </div>
         <?php if(strpos(',htmlcode, phpcode, slide, header', $type) == false or $type == 'html'):?>
-        <div id='panelPreview' class='panel-preview col-md-6'>
-          <div class='heading'><strong><?php echo $lang->block->preview?></strong></div>
-          <div class='panel panel-block'>
-            <div class='panel-heading'><i class='icon-heart-empty <?php echo isset($block->content->icon) ? $block->content->icon : '';?> icon'></i> <strong class='title'><?php echo $block->title?></strong></div>
-            <div class='panel-body text-center'><?php echo $lang->block->textExample;?></div>
+        <div id='panelPreview' class='col-md-6'>
+          <div class='panel-preview'>
+            <div class='heading'><strong><?php echo $lang->block->preview?></strong></div>
+            <div class='panel panel-block'>
+              <div class='panel-heading'><i class='icon-heart-empty <?php echo isset($block->content->icon) ? $block->content->icon : '';?> icon'></i> <strong class='title'><?php echo $block->title?></strong></div>
+              <div class='panel-body text-center'><?php echo $lang->block->textExample;?></div>
+            </div>
           </div>
         </div>
         <?php endif;?>

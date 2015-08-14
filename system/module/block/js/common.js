@@ -48,38 +48,38 @@ $(function()
         $panelPreview.find('.icon').attr('class', 'icon ' + $(this).val());
     }).change();
 
-    $('[name="params\\[iconColor\\]"]').change(function()
+    $('[name*="\\[iconColor\\]"]').change(function()
     {
         $panelPreview.find('.icon').css('color', $(this).val());
     }).change();
 
-    $('[name="params\\[titleColor\\]"]').change(function()
+    $('[name*="\\[titleColor\\]"]').change(function()
     {
         $panelPreview.find('.title').css('color', $(this).val());
     }).change();
 
-    $('[name="params\\[titleBackground\\]"]').change(function()
+    $('[name*="\\[titleBackground\\]"]').change(function()
     {
         $panelPreview.find('.panel-heading').css('background', $(this).val());
     }).change();
 
-    $('[name="params\\[backgroundColor\\]"]').change(function()
+    $('[name*="\\[backgroundColor\\]"]').change(function()
     {
         $panelPreview.css('background', $(this).val());
     }).change();
 
-    $('[name="params\\[textColor\\]"]').change(function()
+    $('[name*="\\[textColor\\]"]').change(function()
     {
         $panelPreview.find('.panel-body').css('color', $(this).val());
     }).change();
 
-    $('[name="params\\[borderColor\\]"]').change(function()
+    $('[name*="\\[borderColor\\]"]').change(function()
     {
         $panelPreview.css('border-color', $(this).val());
         $panelPreview.find('.panel-heading').css('border-bottom-color', $(this).val());
     }).change();
 
-    $('[name="params\\[linkColor\\]"]').change(function()
+    $('[name*="\\[linkColor\\]"]').change(function()
     {
         $panelPreview.find('a').css('color', $(this).val());
     }).change();
@@ -89,7 +89,7 @@ $(function()
     {
         $form.attr('data-tab', $(this).attr('href').replace('#', ''));
 
-        var height = $($(this).attr('href')).outerHeight() - 30;
-        $('#panelPreview > .panel').css('height', height).data('height', height);
+        var height = $($(this).attr('href')).outerHeight() - 60;
+        $('#panelPreview .panel').css('height', height).data('height', height);
     }).first().tab('show');
 });
