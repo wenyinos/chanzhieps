@@ -13,12 +13,12 @@
 <header id='header' class='clearfix'>
   <div id='headTitle'>
     <div class="wrapper">
-      <?php if(isset($this->config->site->logo)):?>
       <?php $device = helper::getDevice();?>
       <?php $template    = $this->config->template->{$device}->name;?>
       <?php $theme       = $this->config->template->{$device}->theme;?>
-      <?php $logoSetting = json_decode($this->config->site->logo);?>
-      <?php $logo = isset($logoSetting->$template->$theme) ? $logoSetting->$template->$theme : (isset($logoSetting->$template->all) ? $logoSetting->$template->all : false);?>
+      <?php $logoSetting = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();?>
+      <?php $logo = isset($logoSetting->$template->themes->$theme) ? $logoSetting->$template->themes->$theme : (isset($logoSetting->$template->themes->all) ? $logoSetting->$template->themes->all : false);?>
+      <?php if($logo):?>
       <div id='siteLogo'>
         <?php echo html::a($this->config->webRoot, html::image($logo->webPath, "class='logo' title='{$this->config->company->name}'"));?>
       </div>
