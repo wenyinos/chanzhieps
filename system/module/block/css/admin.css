@@ -1,2 +1,6 @@
-.ul-list > li::before{content: none;}
-.ul-list > li{padding: 5px 0;}
+.panel.panel-pure .panel-heading {border: none; background-color: #fff; padding-left: 8px; padding-right: 8px;}
+.panel.panel-pure .panel-body {padding-top: 0; padding-left: 8px; padding-right: 8px;}
+.blocks-list .card {margin-bottom: 10px;}
+.card-add .btn-lg {font-size: 13px;}
+.heading-card, .heading-card:hover {box-shadow: none; background-color: #fafafa; position: relative; overflow: visible; margin-left: 8px; margin-right: 8px;}
+.heading-card .card-actions {position: absolute; right: -2px; top: 4px; overflow: visible;}

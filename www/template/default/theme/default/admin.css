@@ -469,10 +469,9 @@ a.tag-link {color: inherit;}
 a:hover .icon-chanzhi > i, a:hover .icon-chanzhi > i:before, a:hover .icon-chanzhi > i:after {border-color: #1152b7; text-decoration: none}
 
 /* modal with iframe */
-body.body-modal
-{
-  padding: 20px;
-}
+body.body-modal {padding: 20px;}
+body.body-modal #mainNavbar, body.body-modal #menu, body.body-modal .navbar-fixed-bottom {display: none!important;}
+
 /* global style */
 body{padding-bottom: 20px; background-color: #fafafa; background-image: -webkit-gradient(linear,0% 0%, 0% 100%, from(#FFFFFF), to(#F1F1F1), color-stop(0.2,#FFFFFF));background-repeat: repeat-x;}
 h1{font-size: 22px;}
@@ -647,7 +646,7 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
   #menu .nav {float: none; border-bottom: 1px solid #ddd;}
   #menu .pull-right {float: none!important}
 }
-
+#menu .dropdown-menu {min-width: 100px;}
 #menu .dropdown-menu > li > a  {padding-left: 15px;}
 #menu .nav > li .dropdown-menu { margin-top: 0;}
 #menu .nav > li > a:hover {background-color: none; color: #232323;}
