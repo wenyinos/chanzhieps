@@ -279,6 +279,4 @@ class slideModel extends model
     {
         return $this->dao->select('*')->from(TABLE_SLIDE)->where('`group`')->eq($groupID)->orderBy('id')->limit(1)->fetch(); 
     }
-
-
 }
