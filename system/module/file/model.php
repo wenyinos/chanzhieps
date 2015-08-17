@@ -405,8 +405,9 @@ class fileModel extends model
             $device   = helper::getDevice();
             $template = $this->config->template->{$device}->name;
             $theme    = $this->config->template->{$device}->theme;
-            foreach($files as $key => $file) $files[$key]['pathname'] = "source/{$template}/{$theme}/{$file['title']}.{$file['extension']}";
+            return "source/{$template}/{$theme}/{$file['title']}.{$file['extension']}";
         }
+        
 
         /* rand file name more */
         list($path, $file) = explode('/', $pathName);
