@@ -10,4 +10,5 @@
  * @link        http://www.chanzhi.org
 */
 ?>
-<?php echo $block->content;?>
+<?php $block->content = is_null(json_decode($block->content)) ? $block->content : json_decode($block->content);?>
+<?php echo !is_object($block->content) ? $block->content : (isset($block->content->content) ? $block->content->content : '');?>
