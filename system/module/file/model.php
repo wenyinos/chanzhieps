@@ -202,13 +202,7 @@ class fileModel extends model
     {
         $fileTitles = array();
         $now        = helper::now();
-        $files      = $this->getUpload();
-
-        /* Process file path if objectType is source. */
-        $device   = helper::getDevice();
-        $template = $this->config->template->{$device}->name;
-        $theme    = $this->config->template->{$device}->theme;
-        if($objectType == 'source') foreach($files as $key => $file) $files[$key]['pathname'] = "source/{$template}/{$theme}/{$file['title']}.{$file['extension']}";
+        $files      = $this->getUpload('files', $objectType);
 
         $imageSize = array('width' => 0, 'height' => 0);
 
@@ -313,7 +307,7 @@ class fileModel extends model
      * @access public
      * @return void
      */
-    public function getUpload($htmlTagName = 'files')
+    public function getUpload($htmlTagName = 'files', $objectType = 'upload')
     {
         $files = array();
         if(!isset($_FILES[$htmlTagName])) return $files;
@@ -333,12 +327,13 @@ class fileModel extends model
             {
                 if(empty($filename)) continue;
                 if(!validater::checkFileName($filename)) continue;
+                $file['id']        = $id;
                 $file['extension'] = $this->getExtension($filename);
-                $file['pathname']  = $this->setPathName($id, $file['extension']);
                 $file['title']     = !empty($_POST['labels'][$id]) ? htmlspecialchars($_POST['labels'][$id]) : str_replace('.' . $file['extension'], '', $filename);
                 $file['title']     = $purifier->purify($file['title']);
                 $file['size']      = $size[$id];
                 $file['tmpname']   = $tmp_name[$id];
+                $file['pathname']  = $this->setPathName($file, $objectType);
                 $files[] = $file;
             }
         }
@@ -347,11 +342,12 @@ class fileModel extends model
             if(empty($_FILES[$htmlTagName]['name'])) return array();
             extract($_FILES[$htmlTagName]);
             if(!validater::checkFileName($name)) return array();;
+            $file['id']        = 0;
             $file['extension'] = $this->getExtension($name);
-            $file['pathname']  = $this->setPathName(0, $file['extension']);
             $file['title']     = !empty($_POST['labels'][0]) ? htmlspecialchars($_POST['labels'][0]) : substr($name, 0, strpos($name, $file['extension']) - 1);
             $file['title']     = $purifier->purify($file['title']);
             $file['size']      = $size;
+            $file['pathname']  = $this->setPathName($file, $objectType);
             $file['tmpname']   = $tmp_name;
             return array($file);
         }
@@ -395,11 +391,22 @@ class fileModel extends model
      * @access public
      * @return void
      */
-    public function setPathName($fileID, $extension)
+    public function setPathName($file, $objectType = 'upload')
     {
-        $sessionID  = session_id();
-        $randString = substr($sessionID, mt_rand(0, strlen($sessionID) - 5), 3);
-        $pathName   = date('Ym/dHis', $this->now) . $fileID . mt_rand(0, 10000) . $randString;
+        if(strpos('slide,source', $objectType) === false)
+        {
+            $sessionID  = session_id();
+            $randString = substr($sessionID, mt_rand(0, strlen($sessionID) - 5), 3);
+            $pathName   = date('Ym/dHis', $this->now) . $file['id'] . mt_rand(0, 10000) . $randString;
+        }
+        elseif($objectType == 'source') 
+        {
+            /* Process file path if objectType is source. */
+            $device   = helper::getDevice();
+            $template = $this->config->template->{$device}->name;
+            $theme    = $this->config->template->{$device}->theme;
+            foreach($files as $key => $file) $files[$key]['pathname'] = "source/{$template}/{$theme}/{$file['title']}.{$file['extension']}";
+        }
 
         /* rand file name more */
         list($path, $file) = explode('/', $pathName);
@@ -490,10 +497,11 @@ class fileModel extends model
      */
     public function replaceFile($fileID, $postName = 'upFile')
     {
-        if($files = $this->getUpload($postName))
+        $fileInfo  = $this->dao->setAutoLang(false)->select('pathname, extension, objectType')->from(TABLE_FILE)->where('id')->eq($fileID)->fetch();
+        if(empty($fileInfo)) return false;
+        if($files = $this->getUpload($postName, $fileInfo->objectType))
         {
             $file      = $files[0];
-            $fileInfo  = $this->dao->setAutoLang(false)->select('pathname, extension, objectType')->from(TABLE_FILE)->where('id')->eq($fileID)->fetch();
             $extension = strtolower($file['extension']);
 
             /* Remove old file. */
@@ -564,7 +572,7 @@ class fileModel extends model
 
         $file  = $this->getByID($fileID);
 
-        $files = $this->getUpload('upFile');
+        $files = $this->getUpload('upFile', 'source');
         if(!empty($files)) 
         {
             $fileInfo = $files[0];
@@ -659,12 +667,13 @@ class fileModel extends model
             $imageData = base64_decode($base64Image);
             $imageSize = array('width' => 0, 'height' => 0);
 
+            $file['id']        = $key;
             $file['extension'] = $out[2][$key];
-            $file['pathname']  = $this->setPathName($key, $file['extension']);
             $file['size']      = strlen($imageData);
             $file['addedBy']   = $this->app->user->account;
             $file['addedDate'] = helper::today();
             $file['title']     = basename($file['pathname']);
+            $file['pathname']  = $this->setPathName($file);
             $file['editor']    = 1;
 
             file_put_contents($this->savePath . $file['pathname'], $imageData);
