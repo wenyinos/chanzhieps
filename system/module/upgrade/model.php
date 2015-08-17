@@ -1512,22 +1512,38 @@ class upgradeModel extends model
         $logosForAllThemes = $this->dao->setAutoLang(false)->select('*')->from(TABLE_CONFIG)->where('`key`')->eq('logo')->fetchGroup('lang');
 
         $logoSetting = array();
-        foreach($logos as $lang => $logoList)
+        if(!empty($logos))
         {
-            if(isset($logosForAllThemes[$lang]))
+            foreach($logos as $lang => $logoList)
             {
-                $logoForAllThemes = $logosForAllThemes[$lang][0];
-                $logoSetting['default']['themes']['all'] = json_decode($logoForAllThemes->value);
-            }
+                if(isset($logosForAllThemes[$lang]))
+                {
+                    $logoForAllThemes = $logosForAllThemes[$lang][0];
+                    $logoSetting['default']['themes']['all'] = json_decode($logoForAllThemes->value);
+                }
 
-            foreach($logoList as $logo)
+                foreach($logoList as $logo)
+                {
+                    $logoSetting['default']['themes'][$logo->key] = json_decode($logo->value);
+                }
+
+                $result = $this->loadModel('setting')->setItems('system.common.site', array('logo' => helper::jsonEncode($logoSetting)), $lang);
+
+                if(!$result) return false;
+            }
+        }
+        else
+        {
+            if(!empty($logosForAllThemes))
             {
-                $logoSetting['default']['themes'][$logo->key] = json_decode($logo->value);
+                foreach($logosForAllThemes as $lang => $logoForAllTheme)
+                {
+                    $logo = $logoForAllTheme[0];
+                    $logoSetting['default']['themes']['all'] = json_decode($logo->value);
+                    $result = $this->loadModel('setting')->setItems('system.common.site', array('logo' => helper::jsonEncode($logoSetting)), $lang);
+                    if(!$result) return false;
+                }
             }
-
-            $result = $this->loadModel('setting')->setItems('system.common.site', array('logo' => helper::jsonEncode($logoSetting)), $lang);
-
-            if(!$result) return false;
         }
 
         return true;
