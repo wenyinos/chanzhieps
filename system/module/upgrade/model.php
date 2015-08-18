@@ -1136,6 +1136,7 @@ class upgradeModel extends model
     public function reserveCurrentTheme()
     {
         $themes = $this->loadModel('ui')->getThemesByTemplate('default');
+        $this->config->template->theme = isset($this->config->template->theme) ? $this->config->template->theme : 'default';
         if(!isset($themes[$this->config->template->theme]))
         {
             $theme = new stdclass();
