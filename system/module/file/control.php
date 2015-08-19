@@ -174,9 +174,9 @@ class file extends control
             $filename = $this->post->filename;
             if(!validater::checkFileName($filename)) $this->send(array('result' => 'fail', 'message' => $this->lang->file->evilChar));
 
-            $result = $this->file->sourceEdit($fileID, $filename);
-            if($result['result'] == 'fail') $this->send($result);
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('file', 'browseSource')));
+            $result = $this->file->sourceEdit($file, $filename);
+            if($result) $this->send(array('result' => 'success','message' => $this->lang->saveSuccess, 'locate' => $this->createLink('file', 'browseSource') ));
+            $this->send(array('result' => 'fail', 'message' => dao::getError() ));
         }
         $this->view->title      = $this->lang->file->edit;
         $this->view->modalWidth = 500;

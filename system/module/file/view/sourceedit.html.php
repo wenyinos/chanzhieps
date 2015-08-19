@@ -6,6 +6,10 @@
       <td><?php echo html::input('filename',$file->title, "class='form-control'");?></td>
     </tr>
     <tr>
+      <th class='w-80px'><?php echo $lang->file->pathname;?></th> 
+      <td><?php echo $file->pathname;?></td>
+    </tr>
+    <tr>
       <th><?php echo $lang->file->editFile;?></th>
       <td><?php echo html::file('upFile', "class='form-control'");?></td>
     </tr>
