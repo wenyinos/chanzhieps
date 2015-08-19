@@ -1136,6 +1136,7 @@ class upgradeModel extends model
     public function reserveCurrentTheme()
     {
         $themes = $this->loadModel('ui')->getThemesByTemplate('default');
+        $this->config->template->theme = isset($this->config->template->theme) ? $this->config->template->theme : 'default';
         if(!isset($themes[$this->config->template->theme]))
         {
             $theme = new stdclass();
@@ -1170,7 +1171,7 @@ class upgradeModel extends model
 
         foreach($slides as $lang => $langSlides)
         {
-            if(!$langSlides) return false;
+            if(!$langSlides) continue;
 
             $this->app->loadLang('slide');
             $this->dao->insert(TABLE_CATEGORY)->set('name')->eq($this->lang->slide->defaultGroup)->set('type')->eq('slide')->set('lang')->eq($lang)->exec();
@@ -1259,7 +1260,7 @@ class upgradeModel extends model
     public function updateBlockTheme()
     {
         $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->fetchAll();
-        $theme = $this->config->template->theme;
+        $theme = $this->config->template->theme ? $this->config->template->theme : 'default';
         foreach($blocks as $block)
         {
             $content = json_decode($block->content, true);
@@ -1349,6 +1350,8 @@ class upgradeModel extends model
      */
     public function updateLayoutTheme()
     {
+        $this->config->template->name  = isset($this->config->template->name) ? $this->config->template->name : 'default';
+        $this->config->template->theme = isset($this->config->template->theme) ? $this->config->template->theme : 'default';
         $this->dao->update(TABLE_LAYOUT)->set('theme')->eq($this->config->template->theme)->where('template')->eq($this->config->template->name)->exec();
 
         $layoutList = $this->dao->setAutoLang(false)->select('*')->from(TABLE_LAYOUT)->fetchGroup('template');
@@ -1381,9 +1384,17 @@ class upgradeModel extends model
     public function moveBaseStyle()
     {
         $template = $this->config->template; 
-        $setting  = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true): array();
-        $setting[$template->name][$template->theme]['css'] = isset($this->config->site->basestyle) ? $this->config->site->basestyle : '';
-        return $this->loadModel('setting')->setItems('system.common.template', array('custom' => helper::jsonEncode($setting)), $this->config->site->lang);
+        $template->name  = isset($template->name) ? $template->name : 'default';
+        $template->theme = isset($template->theme) ? $template->theme : 'default';
+        $basestyles = $this->dao->select('*')->from(TABLE_CONFIG)->where('`key`')->eq('basestyle')->fetchGroup('lang');
+        foreach($basestyles as $lang => $basestyle)
+        {
+            $setting = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true): array();
+            $setting[$template->name][$template->theme]['css'] = isset($basestyle[0]->value) ? $basestyle[0]->value : '';
+            $result = $this->loadModel('setting')->setItems('system.common.template', array('custom' => helper::jsonEncode($setting)), $lang);
+            if(!$result) return false;
+        }
+        return true;
     }
 
     /**
@@ -1413,15 +1424,20 @@ class upgradeModel extends model
      */
     public function fixTemplate()
     {
-        $template = $this->dao->select('value')->from(TABLE_CONFIG)->where('section')->eq('template')->andWhere('`key`')->eq('name')->fetch('value');
-        $theme    = $this->dao->select('value')->from(TABLE_CONFIG)->where('section')->eq('template')->andWhere('`key`')->eq('theme')->fetch('value');
+        $templates = $this->dao->select('*')->from(TABLE_CONFIG)->where('section')->eq('template')->andWhere('`key`')->eq('name')->fetchGroup('lang');
+        $themes    = $this->dao->select('*')->from(TABLE_CONFIG)->where('section')->eq('template')->andWhere('`key`')->eq('theme')->fetchGroup('lang');
 
-        $currentTemplate = new stdclass();
-        $currentTemplate->name    = $template;
-        $currentTemplate->theme   = $theme;
-        $setting = helper::jsonEncode($currentTemplate);
+        foreach($templates as $lang => $template)
+        {
+            $currentTemplate = new stdclass();
+            $currentTemplate->name    = $template[0]->value;
+            $currentTemplate->theme   = $themes[$lang][0]->value;
+            $setting = helper::jsonEncode($currentTemplate);
 
-        return $this->loadModel('setting')->setItem('system.common.template.desktop', $setting);
+            $result = $this->loadModel('setting')->setItem('system.common.template.desktop', $setting, $lang);
+            if(!$result) return false;
+        }
+        return true;
     }
 
     /**
