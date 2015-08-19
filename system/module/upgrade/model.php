@@ -1386,9 +1386,15 @@ class upgradeModel extends model
         $template = $this->config->template; 
         $template->name  = isset($template->name) ? $template->name : 'default';
         $template->theme = isset($template->theme) ? $template->theme : 'default';
-        $setting  = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true): array();
-        $setting[$template->name][$template->theme]['css'] = isset($this->config->site->basestyle) ? $this->config->site->basestyle : '';
-        return $this->loadModel('setting')->setItems('system.common.template', array('custom' => helper::jsonEncode($setting)), $this->config->site->lang);
+        $basestyles = $this->dao->select('*')->from(TABLE_CONFIG)->where('`key`')->eq('basestyle')->fetchGroup('lang');
+        foreach($basestyles as $lang => $basestyle)
+        {
+            $setting = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true): array();
+            $setting[$template->name][$template->theme]['css'] = isset($basestyle[0]->value) ? $basestyle[0]->value : '';
+            $result = $this->loadModel('setting')->setItems('system.common.template', array('custom' => helper::jsonEncode($setting)), $lang);
+            if(!$result) return false;
+        }
+        return true;
     }
 
     /**
