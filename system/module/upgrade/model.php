@@ -1430,8 +1430,8 @@ class upgradeModel extends model
         foreach($templates as $lang => $template)
         {
             $currentTemplate = new stdclass();
-            $currentTemplate->name    = $template->value;
-            $currentTemplate->theme   = $themes[$lang]->value;
+            $currentTemplate->name    = $template[0]->value;
+            $currentTemplate->theme   = $themes[$lang][0]->value;
             $setting = helper::jsonEncode($currentTemplate);
 
             $result = $this->loadModel('setting')->setItem('system.common.template.desktop', $setting, $lang);
