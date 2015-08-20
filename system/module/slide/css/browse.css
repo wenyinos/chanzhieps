@@ -1,3 +1,4 @@
+.panel{margin: 0 8%;}
 .carousel {border-radius: 0}
 .carousel-inner .item, .carousel-inner .item > img {max-height: 150px; border-radius: 4px 4px 0 0;}
 .carousel-inner .item.show, .carousel-inner .item.show > img {max-height: inherit; border-radius: 4px; box-shadow: none}
@@ -14,5 +15,3 @@ a.btn-sm{margin-bottom:5px;padding:5px;}
 .carousel-inner>.item>img {max-height: 100%; min-height: none; max-height: none}
 .mainbutton{text-align: right; padding-bottom:5px;}
 .btn.btn-primary.return{background-color: orange; border-style: none}
-
-#sortForm{overflow-y: auto; height: 420px;}

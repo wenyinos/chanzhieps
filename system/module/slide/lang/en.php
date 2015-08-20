@@ -44,6 +44,7 @@ $lang->slide->admin       = 'Admin';
 $lang->slide->create      = 'Add';
 $lang->slide->edit        = 'Edit';
 $lang->slide->createGroup = 'Add group';
+$lang->slide->toBeAdded     = 'To be added';
 
 $lang->slide->successSort     = 'Order data saved.';
 $lang->slide->noImageSelected = 'No images selected';
