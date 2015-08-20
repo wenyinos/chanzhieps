@@ -410,9 +410,9 @@ class fileModel extends model
         
 
         /* rand file name more */
-        list($path, $file) = explode('/', $pathName);
-        $file = md5(mt_rand(0, 10000) . str_shuffle(md5($file)) . mt_rand(0, 10000));
-        return $path . '/f_' . $file . '.' . $extension;
+        list($path, $fileName) = explode('/', $pathName);
+        $fileName = md5(mt_rand(0, 10000) . str_shuffle(md5($fileName)) . mt_rand(0, 10000));
+        return $path . '/f_' . $fileName . '.' . $file['extension'];
     }
 
     /**
