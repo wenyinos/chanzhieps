@@ -14,7 +14,7 @@
 <div class='panel'>
   <div class='panel-heading'>
     <i class='icon-th'></i> <strong><?php echo $lang->slide->group;?></strong>
-    <div class='panel-actions'><?php commonModel::printLink('tree', 'browse', "type=slide", '<i class="icon-plus-sign"></i> ' . $lang->slide->createGroup, "class='btn btn-primary'");?></div>
+    <div class='panel-actions'><?php commonModel::printLink('tree', 'browse', "type=slide", '<i class="icon-plus-sign"></i> ' . $lang->slide->manageGroup, "class='btn btn-primary'");?></div>
   </div>
   <div class='panel-body'>
     <section class='row cards-borderless'>
