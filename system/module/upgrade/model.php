@@ -1202,7 +1202,7 @@ class upgradeModel extends model
                 $data->height          = $value->height;
                 $data->summary         = $value->summary;
                 $data->image           = null;
-                $data->createdDate     = date('Y-m-d H:i:s', $value->createdDate);
+                $data->createdDate     = isset($value->createdDate) ? date('Y-m-d H:i:s', $value->createdDate) : '';
                 $data->order           = $slide->key;
                 $data->lang            = $lang; 
                 $data->label           = helper::jsonEncode($value->label);
@@ -1249,6 +1249,8 @@ class upgradeModel extends model
     public function fixLocationConfig()
     {
         $this->dao->update(TABLE_CONFIG)->set('`key`')->eq('allowedLocation')->where('`key`')->eq('allowedPosition')->andWhere('section')->eq('site')->exec();
+
+        return !dao::isError();
     }
 
     /**
@@ -1514,6 +1516,8 @@ class upgradeModel extends model
                 }
             }
         }
+
+        return true;
     }
 
     /**
