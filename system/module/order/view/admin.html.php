@@ -29,8 +29,6 @@
         <th class='w-60px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->order->id);?></th>
         <th class='w-60px'><?php commonModel::printOrderLink('account', $orderBy, $vars, $lang->order->account);?></th>
         <th><?php echo $lang->order->productInfo;?></th>
-        <th><?php echo $lang->order->price;?></th>
-        <th><?php echo $lang->order->count;?></th>
         <th class='w-60px'><?php commonModel::printOrderLink('amount', $orderBy, $vars, $lang->order->amount);?></th>
         <th class='w-200px'><?php echo $lang->order->life;?></th>
         <th class='w-200px'><?php echo $lang->order->expressInfo;?></th>
@@ -46,12 +44,13 @@
         <td>
           <dl>
             <?php foreach($order->products as $product):?>
+            <dd class='text-left'>
               <span><?php echo html::a(commonModel::createFrontLink('product', 'view', "id=$product->id"), $product->productName, "target='_blank'");?></span>
+              <span><?php echo $lang->order->price . $lang->colon . $product->price . ' ' . $lang->order->count . $lang->colon . $product->count;?></span>
+            </dd>
             <?php endforeach;?>
           </dl>
         </td>
-        <td><?php echo $product->price;?></td>
-        <td><?php echo $product->count;?></td>
         <td class='text-center'><?php echo $order->amount;?></td>
         <td>
           <?php echo $lang->order->createdDate . $lang->colon .  $order->createdDate . '</br>';?>
