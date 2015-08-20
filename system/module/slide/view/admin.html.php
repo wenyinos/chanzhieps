@@ -40,7 +40,10 @@
             <?php endforeach;?>
             <?php else: ?>
             <div class='empty-holder'>
-              <i class='icon-pencil icon-3x icon'></i>
+              <i class='icon-pencil icon-2x icon'></i>
+              <div>
+                <?php echo $lang->slide->toBeAdded;?>
+              </div>
             </div>
             <?php endif; ?>
           </div>

@@ -204,7 +204,7 @@ class uiModel extends model
         if(isset($params)) $params = (array) $params;
         else $params = $this->getCustomParams($template, $theme);
 
-        $lessc = $this->app->loadClass('lessc');
+        $lessc   = $this->app->loadClass('lessc');
         $cssFile = sprintf($this->config->site->ui->customCssFile, $template, $theme);
 
         $savePath = dirname($cssFile);
