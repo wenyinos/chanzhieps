@@ -271,7 +271,7 @@ class commonModel extends model
         if(!empty($allowedDomains))
         {
             if(strpos($allowedDomains, $httpHost) !== false) return true;
-            if(!empty($mainDomain) and hepler::getSiteCode($httpHost) == hepler::getSiteCode($mainDomain)) return true;
+            if(!empty($mainDomain) and helper::getSiteCode($httpHost) == helper::getSiteCode($mainDomain)) return true;
             die('domain denied.');
         }
     }

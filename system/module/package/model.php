@@ -668,6 +668,7 @@ class packageModel extends model
     public function copyPackageFiles($package, $type = 'ext')
     {
         $appRoot    = $this->app->getAppRoot();
+        if($type != 'theme') $type = 'ext';
         $packageDir = $type . DS . $package . DS;
         if($type == 'template') $packageDir = 'ext' . DS . $package . DS;
 

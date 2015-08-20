@@ -109,8 +109,12 @@ else
 }
 ?>
 <![endif]-->
-<?php if(isset($this->config->site->basestyle)) css::internal($this->config->site->basestyle);?>
-<?php if(isset($this->config->site->basejs)) js::execute($this->config->site->basejs);?>
+<?php
+$template   = $this->config->template->{$this->device}->name ? $this->config->template->{$this->device}->name : 'default';
+$theme      = $this->config->template->{$this->device}->theme ? $this->config->template->{$this->device}->theme : 'default';
+$baseCustom = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array(); 
+if(!empty($baseCustom[$template][$theme]['js'])) js::execute($baseCustom[$template][$theme]['js']);
+?>
 </head>
 <body>
 <div class='page-container page-blog'>
@@ -118,8 +122,6 @@ else
     <div id='headNav'><div class='wrapper'><?php echo commonModel::printTopBar();?></div></div>
     <div id='headTitle'>
       <div class="wrapper">
-        <?php $template    = $this->config->template->{$this->device}->name;?>
-        <?php $theme       = $this->config->template->{$this->device}->theme;?>
         <?php $logoSetting = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();?>
         <?php $logo = isset($logoSetting->$template->themes->$theme) ? $logoSetting->$template->themes->$theme : (isset($logoSetting->$template->themes->all) ? $logoSetting->$template->themes->all : false);?>
         <?php if($logo):?>
