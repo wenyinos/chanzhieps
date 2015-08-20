@@ -2,7 +2,7 @@
 INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) VALUES
 ("block1", 'latestArticle', 'Latest Article', '{"category":"0","limit":"7"}', 'mobile','en'),
 ("block2", 'latestProduct', 'Latest Product', '{"category":"0","limit":"3","image":"show"}', 'mobile','en'),
-("block3", 'slide', 'Slide', '', 'mobile','en'),
+("block3", 'slide', 'Slides for Mobile', '', 'mobile','en'),
 ("block4", 'articleTree', 'Article Category', '{"showChildren":"0"}', 'mobile','en'),
 ("block5", 'productTree', 'Product Category', '{"showChildren":"0"}', 'mobile','en'),
 ("block6", 'pageList', 'Page List', '{"limit":"7"}', 'mobile','en'),

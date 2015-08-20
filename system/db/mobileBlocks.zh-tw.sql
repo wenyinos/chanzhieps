@@ -2,7 +2,7 @@
 INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) VALUES
 ("block1", 'latestArticle', '最新文章', '{"category":"0","limit":"7"}', 'mobile','zh-tw'),
 ("block2", 'latestProduct', '最新產品', '{"category":"0","limit":"3","image":"show"}', 'mobile','zh-tw'),
-("block3", 'slide', '幻燈片', '', 'mobile','zh-tw'),
+("block3", 'slide', '手機版幻燈片', '', 'mobile','zh-tw'),
 ("block4", 'articleTree', '文章分類', '{"showChildren":"0"}', 'mobile','zh-tw'),
 ("block5", 'productTree', '產品分類', '{"showChildren":"0"}', 'mobile','zh-tw'),
 ("block6", 'pageList', '單頁列表', '{"limit":"7"}', 'mobile','zh-tw'),
