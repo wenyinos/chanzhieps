@@ -1,5 +1,3 @@
-<?php include '../../common/view/header.modal.html.php';?>
-<?php js::import($jsRoot . 'fingerprint/fingerprint.js');?>
 <?php if(isset($pass) and !$pass):?>
 <?php 
 $url    = helper::safe64Encode($this->app->getURI());
@@ -7,6 +5,8 @@ $target = 'self';
 include '../../mail/view/captcha.html.php';
 ?>
 <?php else:?>
+<?php include '../../common/view/header.admin.html.php';?>
+<?php js::import($jsRoot . 'fingerprint/fingerprint.js');?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-eidt'></i> <?php echo $lang->user->editProfile;?></strong></div>
   <div class='panel-body'>
@@ -98,5 +98,5 @@ include '../../mail/view/captcha.html.php';
     </form>        
   </div>
 </div>
+<?php include '../../common/view/footer.admin.html.php';?>
 <?php endif;?>
-<?php include '../../common/view/footer.modal.html.php';?>
