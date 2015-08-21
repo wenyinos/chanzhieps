@@ -279,7 +279,6 @@ class productModel extends model
         $product = fixer::input('post')
             ->join('categories', ',')
             ->stripTags('content,desc', $this->config->allowedTags->admin)
-            ->setDefault('price', 0)
             ->setDefault('amount', 0)
             ->setDefault('promotion', 0)
             ->setDefault('order', 0)
