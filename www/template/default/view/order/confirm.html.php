@@ -16,7 +16,6 @@
 <?php js::set('goToPay', $lang->order->goToPay);?>
 <?php js::set('checkStock', $this->config->product->stock);?>
 <?php js::set('paid', $lang->order->paid);?>
-<?php js::set('payFaild', $lang->order->payFaild);?>
 <?php if(!empty($products)):?>
 <?php $total = 0;?>
 <div class='panel'>
