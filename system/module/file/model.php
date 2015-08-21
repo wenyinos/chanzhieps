@@ -408,7 +408,6 @@ class fileModel extends model
             return "source/{$template}/{$theme}/{$file['title']}.{$file['extension']}";
         }
         
-
         /* rand file name more */
         list($path, $fileName) = explode('/', $pathName);
         $fileName = md5(mt_rand(0, 10000) . str_shuffle(md5($fileName)) . mt_rand(0, 10000));
