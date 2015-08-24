@@ -44,6 +44,7 @@ $lang->slide->admin       = '幻燈片設置';
 $lang->slide->create      = '添加幻燈片';
 $lang->slide->edit        = '編輯幻燈片';
 $lang->slide->createGroup = '添加分組';
+$lang->slide->toBeAdded     = '待添加';
 
 $lang->slide->successSort     = '排序成功保存';
 $lang->slide->noImageSelected = '沒有選擇圖片';
