@@ -7,5 +7,5 @@ $lang->misc->userbook    = 'Manual';
 $lang->misc->forum       = 'Forum';
 
 $lang->misc->thanksTitle       = 'Chanzhi Built On Many Excellent Open Source Projects';
-$lang->misc->thanksFooter      = 'Thanks  %s for providing security audit.';
+$lang->misc->thanksFooter      = 'Thanks %s for security audit.';
 $lang->misc->thanksObjectName  = 'zzsec';
