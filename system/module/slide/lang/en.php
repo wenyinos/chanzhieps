@@ -43,6 +43,7 @@ $lang->slide->sort        = 'Order';
 $lang->slide->admin       = 'Admin';
 $lang->slide->create      = 'Add';
 $lang->slide->edit        = 'Edit';
+$lang->slide->createGroup = 'Create group';
 $lang->slide->manageGroup = 'Manage group';
 $lang->slide->toBeAdded   = 'To be added';
 

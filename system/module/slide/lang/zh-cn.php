@@ -43,6 +43,7 @@ $lang->slide->sort        = '排序';
 $lang->slide->admin       = '幻灯片设置';
 $lang->slide->create      = '添加幻灯片';
 $lang->slide->edit        = '编辑幻灯片';
+$lang->slide->createGroup = '添加分组';
 $lang->slide->manageGroup = '设置分组';
 $lang->slide->toBeAdded   = '待添加';
 
