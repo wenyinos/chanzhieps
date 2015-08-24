@@ -25,43 +25,7 @@ class tree extends control
      */
     public function browse($type = 'article', $root = 0)
     {
-        if($type == 'forum')
-        {
-            $this->lang->category   = $this->lang->board;
-            $this->lang->tree->menu = $this->lang->forum->menu;
-            $this->lang->menuGroups->tree = 'forum';
-        }
-
-        if($type == 'blog')
-        {
-            $this->lang->tree->menu = $this->lang->blog->menu;
-            $this->lang->menuGroups->tree = 'blog';
-        }
-
-        if($type == 'product')
-        {
-            $this->lang->tree->menu = $this->lang->product->menu;
-            $this->lang->menuGroups->tree = 'product';
-        }
-
-        if($type == 'express')
-        {
-            $this->lang->tree->menu = $this->lang->order->menu;
-            $this->lang->menuGroups->tree = 'order';
-            $this->lang->category->common = $this->lang->express->name;
-            $this->lang->category->name   = $this->lang->express->name;
-        }
-
-        if($type == 'slide')
-        {
-            $this->lang->category   = $this->lang->slideGroup;
-            $this->lang->tree->menu = $this->lang->ui->menu;
-            $this->lang->menuGroups->tree = 'ui';
-        }
-
         $isWechatMenu = treeModel::isWechatMenu($type);
-        $this->view->isWechatMenu = $isWechatMenu;
-
         if($isWechatMenu)
         {
             $this->lang->tree             = $this->lang->wechatMenu;
@@ -69,15 +33,26 @@ class tree extends control
             $this->lang->tree->menu       = $this->lang->wechat->menu;
             $this->lang->menuGroups->tree = 'wechat';
         }
-        
+        else
+        {
+            $this->tree->fixLang($type);
+            $this->tree->fixMenu($type);
+            if($type == 'express')
+            {
+                $this->lang->category->common = $this->lang->express->name;
+                $this->lang->category->name   = $this->lang->express->name;
+            }
+        }
+
         $modelName = class_exists('exttreeModel') ? 'exttreeModel' : 'treeModel';
         $userFunc = $isWechatMenu ? array($modelName, 'createWechatMenuLink') : array($modelName, 'createManageLink');
         $this->view->treeMenu = $this->tree->getTreeMenu($type, 0, $userFunc);
 
-        $this->view->title    = $this->lang->tree->common;
-        $this->view->type     = $type;
-        $this->view->root     = $root;
-        $this->view->children = $this->tree->getChildren($root, $type);
+        $this->view->title        = $this->lang->tree->common;
+        $this->view->type         = $type;
+        $this->view->root         = $root;
+        $this->view->children     = $this->tree->getChildren($root, $type);
+        $this->view->isWechatMenu = $isWechatMenu;
 
         $this->display();
     }
@@ -94,14 +69,13 @@ class tree extends control
         /* Get current category. */
         $category = $this->tree->getById($categoryID);
 
-        /* If type is forum, assign board to category. */
-        if($category->type == 'forum') $this->lang->category = $this->lang->board;
+        $this->tree->fixLang($category->type);
+        $this->tree->fixMenu($category->type);
 
         if(!empty($_POST))
         {
             $result = $this->tree->update($categoryID);
             if($result === true) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
-
             $this->send(array('result' => 'fail', 'message' => dao::isError() ? dao::getError() : $result));
         }
 
@@ -110,25 +84,11 @@ class tree extends control
         $families   = $this->tree->getFamily($categoryID);
         foreach($families as $member) unset($optionMenu[$member]);
 
-        /* Assign. */
         $this->view->category   = $category;
         $this->view->optionMenu = $optionMenu;
         $this->view->aliasAddon = trim("http://" . $this->server->http_host . $this->config->webRoot, '/' ). '/';
 
         if(strpos('forum,blog', $category->type) !== false) $this->view->aliasAddon .=  $category->type . '/';
-
-        if($category->type == 'forum') 
-        {
-            $this->lang->menuGroups->tree = 'forum';
-            $this->view->users = $this->loadModel('user')->getPairs('admin');
-        }
-        else if($category->type == 'blog')
-        {
-            $this->lang->menuGroups->tree = 'blog';
-        }
-
-        /* remove left menu. */
-        unset($this->lang->tree->menu);
 
         $this->display();
     }
@@ -143,28 +103,17 @@ class tree extends control
      */
     public function children($type, $category = 0)
     {
-        /* If type is forum, assign board to category. */
+        $this->tree->fixLang($type);
         if($type == 'forum')
         {
-            $this->lang->category = $this->lang->board;
             $this->view->boardChildrenCount = $this->dao->select('count(*) as count')->from(TABLE_CATEGORY)->where('grade')->eq(2)->andWhere('type')->eq('forum')->fetch('count');
         }
 
         if($type == 'express')
         {
-            $this->lang->tree->menu = $this->lang->order->menu;
-            $this->lang->menuGroups->tree = 'order';
             $this->lang->category->common = $this->lang->express->name;
             $this->lang->category->name   = $this->lang->express->name;
         }
-
-        if($type == 'slide')
-        {
-            $this->lang->category   = $this->lang->slideGroup;
-            $this->lang->tree->menu = $this->lang->ui->menu;
-            $this->lang->menuGroups->tree = 'ui';
-        }
-
 
         $isWechatMenu = treeModel::isWechatMenu($type);
         if($isWechatMenu) $this->lang->category = $this->lang->wechatMenu;
@@ -177,7 +126,7 @@ class tree extends control
             $this->send(array('result' => 'fail', 'message' => dao::isError() ? dao::getError() : $result));
         }
             
-        $this->view->isWechatMenu = $isWechatMenu;
+        $this->view->isWechatMenu  = $isWechatMenu;
         $this->view->title         = $this->lang->tree->manage;
         $this->view->type          = $type;
         $this->view->children      = $this->tree->getChildren($category, $type);

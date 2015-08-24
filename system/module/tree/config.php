@@ -1,4 +1,21 @@
 <?php
+$config->tree->langs = new stdclass();
+$config->tree->langs->forum = 'board';
+
+$config->tree->menuGroups = new stdclass();
+$config->tree->menuGroups->forum   = 'forum';
+$config->tree->menuGroups->article = 'article';
+$config->tree->menuGroups->product = 'product';
+$config->tree->menuGroups->blog    = 'blog';
+$config->tree->menuGroups->express = 'order';
+
+$config->tree->editableTypes = ",article,product,blog,forum,";
+
+$config->tree->gradeLimits = new stdclass;
+$config->tree->gradeLimits->slide   = 1;
+$config->tree->gradeLimits->forum   = 2;
+$config->tree->gradeLimits->express = 1;
+
 $config->tree->require = new stdclass();
 $config->tree->require->edit = 'name';
 $config->tree->require->link = 'name, link';
