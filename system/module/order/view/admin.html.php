@@ -45,7 +45,7 @@
           <dl>
             <?php foreach($order->products as $product):?>
             <dd class='text-left'>
-              <span><?php echo $product->productID . ' ' . html::a(commonModel::createFrontLink('product', 'view', "id=$product->productID"), $product->productName, "target='_blank'");?></span>
+              <span><?php echo html::a(commonModel::createFrontLink('product', 'view', "id=$product->productID"), $product->productName, "target='_blank'");?></span>
               <span><?php echo $lang->order->price . $lang->colon . $product->price . ' ' . $lang->order->count . $lang->colon . $product->count;?></span>
             </dd>
             <?php endforeach;?>
