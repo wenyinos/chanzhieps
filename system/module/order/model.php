@@ -501,7 +501,9 @@ class orderModel extends model
 
         if(dao::isError()) return false;
 
-        if($order->payment == 'COD' and $this->config->product->stock) return $this->fixStocks($orderID);
+        if($order->payment == 'COD' and isset($this->config->product->stock)) return $this->fixStocks($orderID);
+
+        return true;
     }
 
     /**
