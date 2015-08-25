@@ -123,7 +123,7 @@ class file extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
         }
         $this->view->title      = $this->lang->file->edit;
-        $this->view->modalWidth = 500;
+        $this->view->modalWidth = 800;
         $this->view->file       = $file;
         $this->display();
     }
