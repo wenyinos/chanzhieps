@@ -65,12 +65,12 @@
           <td></td>
         </tr>
         <tr>
-          <th><?php echo $lang->site->module;?></th>
-          <td><?php echo html::checkbox('modules', $lang->site->moduleAvailable, isset($this->config->site->modules) ? $this->config->site->modules : '');?></td><td></td>
-        </tr>
-        <tr>
           <th><?php echo $lang->site->copyright;?></th> 
           <td><?php echo html::input('copyright', $this->config->site->copyright, "class='form-control'");?></td><td></td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->site->module;?></th>
+          <td colspan='2'><?php echo html::checkbox('modules', $lang->site->moduleAvailable, isset($this->config->site->modules) ? $this->config->site->modules : '');?></td>
         </tr>
         <tr>
           <th><?php echo $lang->site->keywords;?></th> 
