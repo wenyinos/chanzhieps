@@ -687,6 +687,7 @@ class helper
             if($mobile->isMobile())
             {
                 if(!isset($config->template->mobile)) return 'desktop';
+                if(isset($config->site->mobileTemplate) and $config->site->mobileTemplate == 'close') return 'desktop';
                 return 'mobile';
             }
         }
