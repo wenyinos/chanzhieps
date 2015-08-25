@@ -122,4 +122,23 @@ class slide extends control
         if($this->slide->sort()) $this->send(array('result' => 'success', 'message' => $this->lang->slide->successSort));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
+
+    /**
+     * Create a group.
+     *
+     * @access public
+     * @return void
+     */
+    public function createGroup()
+    {
+        if($_POST) 
+        {
+            $result = $this->loadModel('tree')->createSlideGroup();
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+
+        $this->view->title = $this->lang->slide->createGroup;
+        $this->display();     
+    }
 }

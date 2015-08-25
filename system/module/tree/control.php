@@ -177,7 +177,7 @@ class tree extends control
             $this->send(array('result' => 'fail', 'message' => dao::isError() ? dao::getError() : $result));
         }
             
-        $this->view->isWechatMenu = $isWechatMenu;
+        $this->view->isWechatMenu  = $isWechatMenu;
         $this->view->title         = $this->lang->tree->manage;
         $this->view->type          = $type;
         $this->view->children      = $this->tree->getChildren($category, $type);

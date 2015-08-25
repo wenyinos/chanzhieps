@@ -12,7 +12,8 @@
 $lang->slide->common     = 'Slides';
 $lang->slide->group      = 'Slide groups';
 $lang->slide->title      = 'Title';
-$lang->slide->titleColor = 'Title Color';
+$lang->slide->groupName  = 'Group name';
+$lang->slide->titleColor = 'Title color';
 $lang->slide->image      = 'Image';
 $lang->slide->mainLink   = 'Url';
 $lang->slide->summary    = 'Summary';
@@ -20,7 +21,6 @@ $lang->slide->label      = 'Label';
 $lang->slide->button     = 'Button';
 $lang->slide->newWindow  = 'New window';
 $lang->slide->upload     = 'Upload';
-$lang->slide->return     = 'Return';
 
 $lang->slide->background = new stdclass();
 
@@ -44,11 +44,13 @@ $lang->slide->admin       = 'Admin';
 $lang->slide->create      = 'Add';
 $lang->slide->edit        = 'Edit';
 $lang->slide->manageGroup = 'Manage group';
-$lang->slide->toBeAdded   = 'To be added';
+$lang->slide->createGroup = 'Create group';
+$lang->slide->return      = 'Return';
 
 $lang->slide->successSort     = 'Order data saved.';
 $lang->slide->noImageSelected = 'No images selected';
 $lang->slide->suitableSize    = "You must use pictures of same size.";
+$lang->slide->toBeAdded   = 'To be added';
 
 $lang->slide->defaultGroup = 'Default Group';
 
