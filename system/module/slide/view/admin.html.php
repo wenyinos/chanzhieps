@@ -14,7 +14,7 @@
 <div class='panel'>
   <div class='panel-heading'>
     <i class='icon-th'></i> <strong><?php echo $lang->slide->group;?></strong>
-    <div class='panel-actions'><?php commonModel::printLink('tree', 'browse', "type=slide", '<i class="icon-plus-sign"></i> ' . $lang->slide->manageGroup, "class='btn btn-primary'");?></div>
+    <div class='panel-actions'><?php commonModel::printLink('slide', 'createGroup', '', '<i class="icon-plus-sign"></i> ' . $lang->slide->createGroup, "class='btn btn-primary' data-toggle='modal'");?></div>
   </div>
   <div class='panel-body'>
     <section class='row cards-borderless'>
@@ -40,8 +40,8 @@
             <?php endforeach;?>
             <?php else: ?>
             <div class='empty-holder'>
-              <i class='icon-pencil icon-2x icon'></i>
-              <div>
+              <i class='icon-pencil icon-3x icon'></i>
+              <div id='toBeAdded'>
                 <?php echo $lang->slide->toBeAdded;?>
               </div>
             </div>
@@ -52,7 +52,7 @@
       </div>
       <?php endforeach;?>
       <div class='col-lg-3 col-md-4 col-sm-6'>
-        <?php commonModel::printLink('tree', 'browse', "type=slide", '<div class="slides-holder create-btn"><div class="empty-holder"><i class="icon-plus-sign icon icon-3x"></i> ' . $lang->slide->createGroup . '</div></div>', "class='card card-slide'");?>
+        <?php commonModel::printLink('slide', 'createGroup', "", '<div class="slides-holder create-btn"><div class="empty-holder"><i class="icon-plus-sign icon icon-3x"></i> ' . $lang->slide->createGroup . '</div></div>', "class='card card-slide' data-toggle='modal'");?>
       </div>
     </section>
   </div>

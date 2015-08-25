@@ -357,16 +357,16 @@ class treeModel extends model
      */
     public static function createManageLink($category)
     {
-        global $lang;
+        global $lang, $config;
 
         /* Set the class of children link. */
         $childrenLinkClass = '';
-        if($category->type == 'forum' and $category->grade == 2) $childrenLinkClass = 'hidden';
 
         $linkHtml  = $category->name;
-        if($category->type != 'express' and $category->type != 'slide') $linkHtml .= ' ' . html::a(helper::createLink('tree', 'edit',     "category={$category->id}&type={$category->type}"), $lang->tree->edit, "class='ajax'");
-        if($category->type != 'express' and $category->type != 'slide') $linkHtml .= ' ' . html::a(helper::createLink('tree', 'children', "type={$category->type}&category={$category->id}"), $lang->category->children, "class='$childrenLinkClass ajax'");
-        if($category->type == 'slide') $linkHtml .= ' ' . html::a(helper::createLink('slide', 'admin', "group={$category->id}"), $lang->category->view);
+        if(strpos($config->tree->editableTypes, ",{$category->type},") !== false) $linkHtml .= ' ' . html::a(helper::createLink('tree', 'edit',     "category={$category->id}&type={$category->type}"), $lang->tree->edit, "class='ajax'");
+
+        $gradeLimit = zget($config->tree->gradeLimits, $category->type, 999); 
+        if($category->grade < $gradeLimit) $linkHtml .= ' ' . html::a(helper::createLink('tree', 'children', "type={$category->type}&category={$category->id}"), $lang->category->children, "class='$childrenLinkClass ajax'");
         $linkHtml .= ' ' . html::a(helper::createLink('tree', 'delete',   "category={$category->id}"), $lang->delete, "class='deleter'");
 
         return $linkHtml;
@@ -550,6 +550,31 @@ class treeModel extends model
 
         return !dao::isError();
     }
+
+    /**
+     * Create slide group.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function createSlideGroup()
+    {
+        $group = new stdclass();
+        $group->name     = $this->post->name;
+        $group->parent   = 0; 
+        $group->grade    = 1; 
+        $group->type     = 'slide'; 
+        $group->postedDate = helper::now(); 
+
+        $this->dao->insert(TABLE_CATEGORY)->data($group)->autoCheck()->exec();
+        if(dao::isError()) return false;
+
+        $groupID = $this->dao->lastInsertID();
+        $path = ",$groupID,";
+        $this->dao->update(TABLE_CATEGORY)->set('path')->eq($path)->exec();
+
+        return !dao::isError();
+    }
     
     /**
      * Check if alias available.
@@ -662,5 +687,33 @@ class treeModel extends model
     public static function isWechatMenu($type)
     {
         return substr($type, 0, 7) == 'wechat_';
+    }
+
+    /**
+     * Fix lang for different types.
+     * 
+     * @param  string $type 
+     * @access public
+     * @return void
+     */
+    public function fixLang($type = 'article')
+    {
+        $lang = zget($this->config->tree->langs, $type, 'category');
+        $this->lang->category = $this->lang->{$lang};
+    }
+
+    /**
+     * Fix menu and menu group of different types.
+     * 
+     * @param  string $type 
+     * @access public
+     * @return void
+     */
+    public function fixMenu($type = 'article')
+    {
+        $menuGroup = zget($this->config->tree->menuGroups, $type);
+
+        $this->lang->tree->menu       = $this->lang->{$menuGroup}->menu;
+        $this->lang->menuGroups->tree = $menuGroup;
     }
 }

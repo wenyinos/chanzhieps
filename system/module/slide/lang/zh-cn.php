@@ -12,6 +12,7 @@
 $lang->slide->common     = '幻灯片';
 $lang->slide->group      = '幻灯片分组';
 $lang->slide->title      = '标题';
+$lang->slide->groupName  = '分组名称';
 $lang->slide->titleColor = '标题颜色';
 $lang->slide->image      = '图片';
 $lang->slide->mainLink   = '链接';
@@ -20,7 +21,6 @@ $lang->slide->label      = '按钮文字';
 $lang->slide->button     = '按钮';
 $lang->slide->newWindow  = '新开窗口';
 $lang->slide->upload     = '上传';
-$lang->slide->return     = '返回分组';
 
 $lang->slide->background = new stdclass();
 
@@ -45,11 +45,13 @@ $lang->slide->create      = '添加幻灯片';
 $lang->slide->edit        = '编辑幻灯片';
 $lang->slide->createGroup = '添加分组';
 $lang->slide->manageGroup = '设置分组';
-$lang->slide->toBeAdded   = '待添加';
+$lang->slide->createGroup = '创建分组';
+$lang->slide->return      = '返回分组';
 
 $lang->slide->successSort     = '排序成功保存';
 $lang->slide->noImageSelected = '没有选择图片';
 $lang->slide->suitableSize    = '背景图片大小保持一致。';
+$lang->slide->toBeAdded       = '待添加';
 
 $lang->slide->defaultGroup = '默认分组';
 

@@ -70,16 +70,9 @@ $lang->board->placeholder->moderators  = '会员用户名, 多个用户名之间
 $lang->board->placeholder->setChildren = '论坛功能需要设置二级版块才能使用。';
 
 /* Lang items for express. */
-$lang->express = new stdclass();
+$lang->express = $lang->tree;
 $lang->express->common = '快递';
 $lang->express->name   = '快递名称';
-
-/* Lang items for express. */
-$lang->slideGroup = new stdclass();
-$lang->slideGroup->common = '分组';
-$lang->slideGroup->name   = '幻灯片分组';
-$lang->slideGroup->view   = '查看幻灯片';
-$lang->slideGroup->manage = "设置分组";
 
 /* Lang items for wechat menu. */
 $lang->wechatMenu = new stdclass();
