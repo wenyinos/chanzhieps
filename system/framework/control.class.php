@@ -699,7 +699,34 @@ class control
     public function send($data, $type = 'json')
     {
         $data = (array) $data;
-        if($type == 'json') echo json_encode($data);
+        if($type == 'json')
+        {
+            if(!helper::isAjaxRequest())
+            {
+                if(isset($data['result']) and $data['result'] == 'success')
+                {
+                    if(!empty($data['message'])) echo js::alert($data['message']);
+                    $locate = empty($data['locate']) ? $_SERVER['HTTP_REFERER'] : $data['locate'];
+                    js::locate($locate);
+                }
+
+                if(isset($data['result']) and $data['result'] == 'fail')
+                {
+                    if(!empty($data['message']))
+                    {
+                        $message = json_decode(json_encode((array)$data['message']));
+                        foreach($message as $item => $errors)
+                        {
+                            $message->$item = implode(',', $errors);
+                        }
+                        echo js::alert(strip_tags(implode(" ", (array) $message)));
+                        js::locate('back');
+                    }
+                }
+            }
+
+            echo json_encode($data);
+        }
         die(helper::removeUTF8Bom(ob_get_clean()));
     }
 
