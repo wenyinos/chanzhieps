@@ -47,7 +47,15 @@ class companyModel extends model
                 }
                 else if($item == 'phone')
                 {
-                    $contact->phone = html::a("tel:$value", $value);
+                    $mobile = $this->app->loadClass('mobile');
+                    if($mobile->isMobile())
+                    {
+                        $contact->phone = html::a("tel:$value", $value);
+                    }
+                    else
+                    {
+                        $contact->phone = $value;
+                    }
                 }
             }
             else
