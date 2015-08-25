@@ -70,7 +70,7 @@ $lang->board->placeholder->moderators  = '会员用户名, 多个用户名之间
 $lang->board->placeholder->setChildren = '论坛功能需要设置二级版块才能使用。';
 
 /* Lang items for express. */
-$lang->express = new stdclass();
+$lang->express = $lang->tree;
 $lang->express->common = '快递';
 $lang->express->name   = '快递名称';
 

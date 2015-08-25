@@ -422,7 +422,7 @@ $.extend(
         if(typeof(duration) == 'undefined') duration = 1000;
         setTimeout(function()
         { 
-            var url = $('#ajaxModal').attr('rel') || $('#ajaxModal').attr('ref');
+            var url = $('#ajaxModal').attr('ref') || $('#ajaxModal').attr('rel');
             $('#ajaxModal .modal-body').load(url + ' .modal-body', function()
             {
                 $(this).find('.modal-dialog').css('width', $(this).data('width'));

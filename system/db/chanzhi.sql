@@ -693,7 +693,7 @@ INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) V
 (22, 'hotArticle', '热门文章', '{"category":"0","limit":"7"}', 'mobile','zh-cn'),
 (23, 'latestProduct', '最新产品', '{"category":"0","limit":"3","image":"show"}', 'mobile','zh-cn'),
 (24, 'hotProduct', '热门产品', '{"category":"0","limit":"3","image":"show"}', 'mobile','zh-cn'),
-(25, 'slide', '幻灯片', '', 'default','zh-cn'),
+(25, 'slide', '幻灯片', '', 'mobile','zh-cn'),
 (26, 'articleTree', '文章分类', '{"showChildren":"0"}', 'mobile','zh-cn'),
 (27, 'productTree', '产品分类', '{"showChildren":"0"}', 'mobile','zh-cn'),
 (28, 'blogTree', '博客分类', '{"showChildren":"1"}', 'mobile','zh-cn'),
