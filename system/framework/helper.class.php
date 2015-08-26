@@ -69,6 +69,9 @@ class helper
         $clientLang = $app->getClientLang();
         $lang       = $config->langCode;
 
+        /* Set viewType is mhtml if visit with mobile.*/
+        if(RUN_MODE == 'front' and helper::getDevice() == 'mobile') $viewType = 'mhtml';
+
         /* Set vars and alias. */
         if(!is_array($vars)) parse_str($vars, $vars);
         if(!is_array($alias)) parse_str($alias, $alias);
