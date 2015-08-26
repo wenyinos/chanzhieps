@@ -26,8 +26,8 @@ $lang->cn = '簡';
 $lang->tw = '繁';
 $lang->en = 'EN';
 
-$lang->noRecord = '無';
-$lang->toBeAdd  = '待添加';
+$lang->noRecord  = '無';
+$lang->toBeAdded = '待添加';
 
 $lang->about  = '關於';
 $lang->thanks = '致謝';
@@ -85,11 +85,13 @@ $lang->selectReverse  = '反選';
 $lang->loading        = '稍候...';
 $lang->saveSuccess    = '保存成功';
 $lang->setSuccess     = '設置成功';
+$lang->createSuccess  = '創建成功';
 $lang->sendSuccess    = '發送成功';
 $lang->deleteSuccess  = '刪除成功';
 $lang->fail           = '失敗';
 $lang->noResultsMatch = '沒有匹配的選項';
 $lang->alias          = '搜索引擎優化使用，可使用英文或數字';
+$lang->keywordsHolder = '多個關鍵字中間用逗號隔開';
 
 $lang->setOkFile = <<<EOT
 <h5>請按照下面的步驟操作以確認您的管理員身份。</h5>
