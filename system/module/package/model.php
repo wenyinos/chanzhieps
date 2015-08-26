@@ -1096,6 +1096,15 @@ class packageModel extends model
          $importedBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('originID')->ne('0')->fetchAll('originID');
          foreach($importedBlocks as $block)
          {
+             $block->content = str_replace("#block{$block->originID} ", "#blocck{$block->id} ", $block->content);
+             $block->content = str_replace("#block{$block->originID}{", "#blocck{$block->id}{", $block->content);
+             $block->content = str_replace("#block{$block->originID},", "#blocck{$block->id},", $block->content);
+             $block->content = str_replace("#block{$block->originID}>", "#blocck{$block->id}>", $block->content);
+             $this->dao->replace(TABLE_BLOCK)->data($block)->exec();
+         }
+
+         foreach($importedBlocks as $block)
+         {
              $content = json_decode($block->content);
              if(!is_object($content)) continue;
              if(isset($content->category)) $content->category = 0;
