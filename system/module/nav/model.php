@@ -117,8 +117,7 @@ class navModel extends model
         $entry .= html::hidden("nav[{$grade}][key][]", '', "class='input grade{$grade}key'"); 
 
         /* nav target select. */
-        $entry .= html::checkbox("target", $this->lang->nav->newWindow, isset($nav->target) ? $nav->target : '');
-        $entry .= html::hidden("nav[{$grade}][target][]", isset($nav->target) ? $nav->target : '');
+        $entry .= html::select("nav[$grade][target][]", $this->lang->nav->targetList, isset($nav->target) ? $nav->target : '_self', "class='form-control'");
 
         /* operate buttons. */
         $entry .= html::a('javascript:;', "<i class='icon icon-plus'> </i>", "class='plus{$grade}' title='{$this->lang->nav->add}'");
