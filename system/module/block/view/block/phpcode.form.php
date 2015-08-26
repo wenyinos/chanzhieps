@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
 */
 ?>
-<?php $content = !is_object($block->content) ? $block->content : (isset($block->content->content) ? $block->content->content : '');?>
+<?php if(!empty($block->content)) $content = isset($block->content->content) ? $block->content->content : '';?>
 <tr>
   <th><?php echo $lang->block->phpcode;?></th>
   <td><?php echo html::textarea('content', !empty($content) ? $content : '<?php', "rows=20 class='form-control codeeditor' data-mode='php' data-height='350'");?></td>
