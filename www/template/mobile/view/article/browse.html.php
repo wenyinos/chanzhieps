@@ -16,7 +16,6 @@ $path = array_keys($category->pathNames);
 js::set('path', $path);
 js::set('categoryID', $category->id);
 ?>
-<?php echo $common->printPositionBar($category);?>
 <div class='block-region region-top'><?php $this->loadModel('block')->printRegion($layouts, 'article_browse', 'top');?></div>
 <div class='panel panel-section'>
   <div class='panel-heading'>

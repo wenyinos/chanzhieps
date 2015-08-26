@@ -11,10 +11,7 @@
  */
 ?>
 <?php include TPL_ROOT . 'common/header.html.php';?>
-<?php if(isset($node)) $common->printPositionBar($node->origins);?>
-<?php
-  $bookModel = $this->loadModel('book');
-?>
+<?php $bookModel = $this->loadModel('book'); ?>
 <div class='block-region region-top'><?php $this->loadModel('block')->printRegion($layouts, 'book_browse', 'top');?></div>
 <div class='panel-section panel'>
   <div class='panel-body'>

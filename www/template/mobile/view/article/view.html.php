@@ -20,10 +20,7 @@ js::set('categoryPath', explode(',', trim($category->path, ',')));
 css::internal($article->css);
 js::execute($article->js);
 ?>
-<?php $common->printPositionBar($category);?>
-
 <div class='block-region region-article-view-top'><?php $this->loadModel('block')->printRegion($layouts, 'article_view', 'top');?></div>
-
 <div class='appheader'>
   <div class='heading'>
     <h2><?php echo $article->title;?></h2>
