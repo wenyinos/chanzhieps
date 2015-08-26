@@ -10,6 +10,8 @@
       </a>
       <ul id='deviceMenu' class='dropdown-menu'>
         <?php foreach($lang->ui->deviceList as $device => $name):?>
+        <?php $mobileTemplate = isset($this->config->site->mobileTemplate) ? $this->config->site->mobileTemplate : 'close';?>
+        <?php if($mobileTemplate == 'close' and $device == 'mobile') continue;?>
         <?php $class = $device == $currentDevice ? "class='active'" : '';?>
         <li <?php echo $class;?>><a href='<?php echo helper::createLink('ui', 'setdevice', "device={$device}")?>'><?php echo $name;?><i class='icon-ok'></i></a></li>
         <?php endforeach;?>

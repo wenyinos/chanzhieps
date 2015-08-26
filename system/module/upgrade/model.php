@@ -1568,4 +1568,23 @@ class upgradeModel extends model
 
         return true;
     }
+
+    /**
+     * Set mobile template is open if set template and theme of mobile when upgrade from 4.4. 
+     * 
+     * @access public
+     * @return bool
+     */
+    public function setMobileTemplate()
+    {
+        $mobileTemplates = $this->dao->setAutoLang(false)->select('*')->from(TABLE_CONFIG)->where('section')->eq('template')->andWhere('`key`')->eq('mobile')->fetchAll();
+
+        foreach($mobileTemplates as$mobileTemplate)
+        {
+            $result = $this->loadModel('setting')->setItems('system.common.site', array('mobileTemplate' => 'open'), $mobileTemplate->lang);
+            if(!$result) return false;
+        }
+
+        return true;
+    }
 }

@@ -93,7 +93,13 @@ class user extends control
         /* If the user logon already, goto the pre page. */
         if($this->user->isLogon())
         {
-            if($this->referer and strpos($loginLink . $denyLink . $regLink, $this->referer) === false) $this->locate($this->referer);
+            if(helper::isAjaxRequest())
+            {
+                if($this->referer and strpos($loginLink . $denyLink . $regLink, $this->referer) === false and strpos($this->referer, $loginLink) === false) $this->send(array('result' => 'success', 'locate' => $this->referer));
+                $this->send(array('result' => 'success', 'locate' => $this->createLink($this->config->default->module)));
+            }
+
+            if($this->referer and strpos($loginLink . $denyLink . $regLink, $this->referer) === false and strpos($this->referer, $loginLink) === false) $this->locate($this->referer);
             $this->locate($this->createLink($this->config->default->module));
             exit;
         }
