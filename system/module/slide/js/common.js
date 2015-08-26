@@ -76,13 +76,13 @@ $('.icon-edit').click(function()
 {
     $(this).hide();
     $(this).prev('#name').hide();
-    $(this).parents('.card-heading').find('table').show();
+    $(this).parents('.card-heading').find('form').show();
     $(this).parents('.card-heading').find('#input').focus();
 });
 
 $('.cancelButton').click(function()
 {
-    $(this).parents('table').hide();
+    $(this).parents('form').hide();
     $(this).parents('.card-heading').find('#name').show();
     $(this).parents('form').prev('.icon-edit').show();
 });

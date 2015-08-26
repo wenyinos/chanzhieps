@@ -48,20 +48,16 @@
             <?php endif; ?>
           </div>
         </a>
-          <div class='card-heading text-center'>
-            <b id='name'><?php echo $group->name;?></b>
-            <i class="icon icon-edit"></i>
-            <form id="ajaxForm" action="<?php inlink('admin');?>" method='post' >
-              <table class='table table-form hide'>
-              <?php echo html::hidden('groupID', $group->id);?>
-              <td>
-                <input type='text' name='groupName' id='input' value=<?php echo $group->name;?> onfocus="this.select()" onmouseup="this.select()">
-                <?php echo html::submitButton();?>
-                <button type='button' class='cancelButton'><?php echo $lang->cancel;?></button>
-             </td>
-              </table>
-            </form>
-          </div>
+        <div class='card-heading text-center'>
+          <span id='name'><?php echo $group->name;?></span>
+          <i class="icon icon-edit"></i>
+          <form id="ajaxForm" class='hide' action="<?php inlink('admin');?>" method='post' >
+            <div class='editGroup'>
+              <input type='text' name='groupName' id='input' value=<?php echo $group->name;?> onfocus="this.select()" onmouseup="this.select()">
+              <?php echo html::submitButton('', 'btn btn-primary btn-xs') . html::commonButton($lang->cancel, 'cancelButton btn btn-xs') . html::hidden('groupID', $group->id);?>
+            </div>
+          </form>
+        </div>
       </div>
       <?php endforeach;?>
       <div class='col-lg-3 col-md-4 col-sm-6'>
