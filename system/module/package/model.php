@@ -1145,7 +1145,17 @@ class packageModel extends model
 
              if(!empty($blocks))
              {
-                 foreach($blocks as $block) $block->id = zget($blockOptions, $block->id);
+                 foreach($blocks as $block) 
+                 {
+                     if(!empty($block->children))
+                     {
+                        foreach($block->children as $child) $child->id =  zget($blockOptions, $child->id);
+                     }
+                     else
+                     {
+                         $block->id = zget($blockOptions, $block->id);
+                     }
+                 }
              }
 
              $layout->blocks = json_encode($blocks);
