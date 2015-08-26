@@ -19,6 +19,6 @@ $block->content = json_decode($block->content);
     <?php endif;?>
   </div>
   <div class='panel-body'>
-    <div class='article-content'><?php echo $this->config->company->desc;?></div>
+    <div><?php echo $this->config->company->desc;?></div>
   </div>
 </div>
