@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
 */
 ?>
-<?php 
+<?php
 $content  = json_decode($block->content);
 $type     = str_replace('product', '', strtolower($block->type));
 $method   = 'get' . $type;
@@ -19,25 +19,26 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
 ?>
 <div id="block<?php echo $block->id;?>" class="panel-cards panel panel-block <?php echo $blockClass;?>">
   <div class='panel-heading'>
-    <strong><?php echo $icon;?> <?php echo $block->title;?></strong>
+    <strong><?php echo $icon;?> <?php echo $block->title . $content->recPerRow;?></strong>
     <?php if(!empty($content->moreText) and !empty($content->moreUrl)):?>
     <div class='pull-right'><?php echo html::a($content->moreUrl, $content->moreText);?></div>
     <?php endif;?>
   </div>
   <?php if(isset($content->image)):?>
-  <div class='panel-body no-padding'>
+  <div class='panel-body no-padding with-cards'>
     <div class='row cards cards-products'>
-      <?php 
-      $leftCards  = '';
-      $rightCards = '';
+      <?php
+      $cardsCols = array();
+      $colsCount = min($content->recPerRow, count($products));
+      for ($i = 0; $i < $colsCount; $i++) $cardsCols[$i] = '';
       $index = 0;
       foreach($products as $product)
       {
           $url = helper::createLink('product', 'view', "id=$product->id", "category={$product->category->alias}&name=$product->alias");
           $card = "<div class='card'>";
-          
+
           $card .= "<a class='card-img' href='{$url}'>";
-          if(empty($product->image)) 
+          if(empty($product->image))
           {
               $imgColor = $product->id * 57 % 360;
               $card .= "<div class='media-placeholder' style='background-color: hsl({$imgColor}, 60%, 80%); color: hsl({$imgColor}, 80%, 30%);' data-id='{$product->id}'>{$product->name}</div>";
@@ -78,25 +79,24 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
               }
           }
           $card .= '</div>'; // end of .card-content
-
           $card .= '</div>';   // end of .card
-          if($index % 2 == 0) $leftCards .= $card;
-          else $rightCards .= $card;
+
+          $cardsCols[$index % $content->recPerRow] .= $card;
           $index++;
       }
       ?>
-      <div class='col-6'>
-        <?php echo $leftCards;?>
+      <?php foreach ($cardsCols as $col): ?>
+      <div class='col col-custom-<?php echo $colsCount; ?>'>
+        <?php echo $col;?>
       </div>
-      <div class='col-6'>
-        <?php echo $rightCards;?>
-      </div>
+      <?php endforeach; ?>
     </div>
+    <style><?php echo ".col-custom-{$colsCount} {width: " . (100/$colsCount) . "%}"; ?></style>
   </div>
   <?php else:?>
   <div class='panel-body no-padding'>
     <div class='list-group simple'>
-      <?php 
+      <?php
       foreach($products as $product):
       $url = helper::createLink('product', 'view', "id=$product->id", "category={$product->category->alias}&name=$product->alias");
       ?>
