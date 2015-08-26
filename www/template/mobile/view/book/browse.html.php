@@ -13,6 +13,7 @@
 <?php include TPL_ROOT . 'common/header.html.php';?>
 <?php $bookModel = $this->loadModel('book'); ?>
 <div class='block-region region-top'><?php $this->loadModel('block')->printRegion($layouts, 'book_browse', 'top');?></div>
+<hr class='space'>
 <div class='panel-section panel'>
   <div class='panel-body'>
     <div class='dropdown selector'>
@@ -46,7 +47,7 @@
     </div>
     <?php endforeach; ?>
     <?php endif; ?>
-    
+
     <hr class="space">
     <div class='list-group'>
       <?php
