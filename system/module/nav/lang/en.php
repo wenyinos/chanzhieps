@@ -42,5 +42,7 @@ $lang->nav->mobile_top    = 'Top Of Mobile';
 $lang->nav->mobile_bottom = 'Bottom Of Mobile';
 
 /* Targets setting. */
-$lang->nav->newWindow = new stdclass();
-$lang->nav->newWindow->_blank = 'New window';
+$lang->nav->targetList = array();
+$lang->nav->targetList['_self']  = 'Current window';
+$lang->nav->targetList['_blank'] = 'New window';
+$lang->nav->targetList['modal']  = 'Modal window';
