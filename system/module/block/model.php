@@ -258,22 +258,29 @@ class blockModel extends model
     public function createTypeMenu($template, $type = '', $blockID = 0, $method = '', $class = '')
     {
         if(empty($method)) $method = $this->app->getMethodName();
-        $select = "<ul class='dropdown-menu $class' role='menu'>";
-        foreach($this->lang->block->$template->typeGroups as $block => $group)
+        $select = "<ul class='dropdown-menu $class' role='menu'><li><dl>";
+        foreach($this->config->block->categoryList as $category => $groups)
         {
-            if(isset($lastGroup) and $group !== $lastGroup) $select .= "<li class='divider'></li>";
-            $lastGroup = $group;
-            $class = ($block == $type) ? "class='active'" : '';
-            if($blockID)
+            $select .= "<dt>{$this->lang->block->categoryList[$category]}</dt>";
+            $groups = explode(',', $groups);
+            foreach($groups as $group)
             {
-                $select .= "<li {$class}>" . html::a(helper::createLink('block', $method, "blockID={$blockID}&type={$block}"), $this->lang->block->$template->typeList[$block]) . "</li>";
+                if($group == '') continue;
+                if(!isset($this->lang->block->$template->typeList[$group])) continue;
+                $class = ($group == $type) ? "class='active'" : '';
+                if($blockID)
+                {
+                    $select .= "<dd {$class}>" . html::a(helper::createLink('block', $method, "blockID={$blockID}&type={$group}"), $this->lang->block->$template->typeList[$group]) . "</dd>";
+                }
+                else
+                {
+                    $select .= "<dd {$class}>" . html::a(helper::createLink('block', $method, "type={$group}"), $this->lang->block->$template->typeList[$group]) . "</dd>";
+                }
             }
-            else
-            {
-                $select .= "<li {$class}>" . html::a(helper::createLink('block', $method, "type={$block}"), $this->lang->block->$template->typeList[$block]) . "</li>";
-            }
+            $select .= "</dl></li><li><dl>";
         }
-        $select .= "</ul>";
+
+        $select .= "</dl></li></ul>";
         return $select;
     }
     
