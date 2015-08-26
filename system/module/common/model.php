@@ -13,7 +13,7 @@ class commonModel extends model
 {
     /**
      * Do some init functions.
-     * 
+     *
      * @access public
      * @return void
      */
@@ -29,7 +29,7 @@ class commonModel extends model
 
     /**
      * Load configs from database and save it to config->system and config->personal.
-     * 
+     *
      * @access public
      * @return void
      */
@@ -45,7 +45,7 @@ class commonModel extends model
         if(isset($this->config->system->common))
         {
             foreach($this->config->system->common as $record)
-            {   
+            {
                 if($record->section)
                 {
                     if(!isset($this->config->{$record->section})) $this->config->{$record->section} = new stdclass();
@@ -66,7 +66,7 @@ class commonModel extends model
 
     /**
      * Start the session.
-     * 
+     *
      * @access public
      * @return void
      */
@@ -83,7 +83,7 @@ class commonModel extends model
 
     /**
      * Check the priviledge.
-     * 
+     *
      * @access public
      * @return void
      */
@@ -136,7 +136,7 @@ class commonModel extends model
 
     /**
      * Check current user has priviledge to the module's method or not.
-     * 
+     *
      * @param mixed $module     the module
      * @param mixed $method     the method
      * @static
@@ -165,7 +165,7 @@ class commonModel extends model
 
         /* Check rights one more time to enable new created rights.*/
         if($app->user->account == 'guest')
-        { 
+        {
             if(isset($config->rights->guest[$module][$method])) return true;
         }
         else
@@ -178,8 +178,8 @@ class commonModel extends model
 
     /**
      * Check whether module is available.
-     * 
-     * @param  string $module 
+     *
+     * @param  string $module
      * @static
      * @access public
      * @return void
@@ -202,7 +202,7 @@ class commonModel extends model
 
     /**
      * Show the deny info.
-     * 
+     *
      * @param mixed $module     the module
      * @param mixed $method     the method
      * @access public
@@ -221,16 +221,16 @@ class commonModel extends model
         die(js::locate($denyLink));
     }
 
-    /** 
+    /**
      * Judge a method of one module is open or not?
-     * 
-     * @param  string $module 
-     * @param  string $method 
+     *
+     * @param  string $module
+     * @param  string $method
      * @access public
      * @return bool
      */
     public function isOpenMethod($module, $method)
-    {   
+    {
         if($module == 'user' and strpos(',login|logout|deny|resetpassword|checkresetkey', $method)) return true;
         if($module == 'cart' and $method == 'printtopbar') return true;
         if($module == 'mail' and strpos(',captcha|sendmailcode', $method)) return true;
@@ -241,11 +241,11 @@ class commonModel extends model
         if($this->loadModel('user')->isLogon() and stripos($method, 'ajax') !== false) return true;
 
         return false;
-    }   
+    }
 
     /**
      * Check domain and header 301.
-     * 
+     *
      * @access public
      * @return void
      */
@@ -254,14 +254,14 @@ class commonModel extends model
         if(RUN_MODE == 'install' or RUN_MODE == 'upgrade' or RUN_MODE == 'shell' or RUN_MODE == 'admin' or !$this->config->installed) return true;
 
         $httpHost   = $this->server->http_host;
-        $currentURI = getWebRoot(true) . $this->app->getURI();
+        $currentURI = $httpHost . $this->server->request_uri;
         $scheme     = isset($this->config->site->scheme) ? $this->config->site->scheme : 'http';
         $mainDomain = isset($this->config->site->domain) ? $this->config->site->domain : '';
         $mainDomain = str_replace(array('http://', 'https://'), '', $mainDomain);
 
         /* Check main domain and scheme. */
         $redirectURI = $currentURI;
-        if(strpos($redirectURI, $scheme . '://') !== 0) $redirectURI = $scheme . substr($redirectURI, strpos($redirectURI, '://'));
+        if(strpos($redirectURI, $scheme . '://') !== false) $redirectURI = $scheme . substr($redirectURI, strpos($redirectURI, '://'));
         if(!empty($mainDomain) and $httpHost != $mainDomain) $redirectURI = str_replace($httpHost, $mainDomain, $redirectURI);
         if($redirectURI != $currentURI) header301($redirectURI);
 
@@ -278,8 +278,8 @@ class commonModel extends model
 
     /**
      * Create the main menu.
-     * 
-     * @param  string $currentModule 
+     *
+     * @param  string $currentModule
      * @static
      * @access public
      * @return string
@@ -321,11 +321,11 @@ class commonModel extends model
             list($label, $module, $method, $vars) = explode('|', $moduleMenu);
 
             if($module != 'user' and $module != 'article' and !commonModel::isAvailable($module)) continue;
-            
+
             /* Just whether article/blog/page menu should shown. */
-            if(!commonModel::isAvailable('article') && $vars == 'type=article') continue;  
-            if(!commonModel::isAvailable('blog') && $vars == 'type=blog') continue;  
-            if(!commonModel::isAvailable('page') && $vars == 'type=page') continue;  
+            if(!commonModel::isAvailable('article') && $vars == 'type=article') continue;
+            if(!commonModel::isAvailable('blog') && $vars == 'type=blog') continue;
+            if(!commonModel::isAvailable('page') && $vars == 'type=page') continue;
 
             if(commonModel::hasPriv($module, $method))
             {
@@ -340,8 +340,8 @@ class commonModel extends model
 
     /**
      * Create the module menu.
-     * 
-     * @param  string $currentModule 
+     *
+     * @param  string $currentModule
      * @static
      * @access public
      * @return void
@@ -355,13 +355,13 @@ class commonModel extends model
         $string = "<ul class='nav " . $navClass . "'>\n";
 
         /* Get menus of current module and current method. */
-        $moduleMenus   = $lang->$currentModule->menu;  
+        $moduleMenus   = $lang->$currentModule->menu;
         $currentMethod = $app->getMethodName();
 
         /* Cycling to print every menus of current module. */
         foreach($moduleMenus as $methodName => $methodMenu)
         {
-            if(is_array($methodMenu)) 
+            if(is_array($methodMenu))
             {
                 $methodAlias = $methodMenu['alias'];
                 $methodLink  = $methodMenu['link'];
@@ -392,7 +392,7 @@ class commonModel extends model
 
     /**
      * Create menu for managers.
-     * 
+     *
      * @access public
      * @return string
      */
@@ -412,7 +412,7 @@ class commonModel extends model
     /**
      * Print the top bar.
      *
-     * @param  boolean $asListItem 
+     * @param  boolean $asListItem
      * @access public
      * @return void
      */
@@ -453,9 +453,9 @@ class commonModel extends model
 
     /**
      * Print language bar.
-     * 
+     *
      * @static
-     * @param  boolean $asListItem 
+     * @param  boolean $asListItem
      * @access public
      * @return string
      */
@@ -466,6 +466,7 @@ class commonModel extends model
         if(count($langs) == 1) return false;
         if($asListItem)
         {
+            echo "<li class='divider'></li>";
             $clientLang = $app->getClientLang();
             echo "<li class='dropdown-header'>{$app->lang->language}</li>";
             foreach($langs as $lang)
@@ -478,13 +479,13 @@ class commonModel extends model
         }
         else
         {
-            foreach($langs as $lang) echo html::a(getHomeRoot($config->langsShortcuts[$lang]), $config->langAbbrLabels[$lang]); 
+            foreach($langs as $lang) echo html::a(getHomeRoot($config->langsShortcuts[$lang]), $config->langAbbrLabels[$lang]);
         }
     }
 
     /**
      * Print the nav bar.
-     * 
+     *
      * @static
      * @access public
      * @return void
@@ -499,11 +500,11 @@ class commonModel extends model
     }
 
     /**
-     * Print position bar 
+     * Print position bar
      *
-     * @param   object $module 
-     * @param   object $object 
-     * @param   mixed  $misc    other params. 
+     * @param   object $module
+     * @param   object $object
+     * @param   mixed  $misc    other params.
      * @access  public
      * @return  void
      */
@@ -525,7 +526,7 @@ class commonModel extends model
         if(method_exists('commonModel', $funcName)) echo $this->$funcName($module, $object, $misc);
         echo '</ul>';
     }
-    
+
     /**
      * Print the link contains orderBy field.
      *
@@ -574,18 +575,18 @@ class commonModel extends model
 
     /**
      * print link;
-     * 
-     * @param  string $module 
-     * @param  string $method 
-     * @param  string $vars 
-     * @param  string $label 
-     * @param  string $misc 
+     *
+     * @param  string $module
+     * @param  string $method
+     * @param  string $vars
+     * @param  string $label
+     * @param  string $misc
      * @static
      * @access public
      * @return bool
      */
     public static function printLink($module, $method, $vars = '', $label, $misc = '')
-    {   
+    {
         if(!commonModel::hasPriv($module, $method)) return false;
         echo html::a(helper::createLink($module, $method, $vars), $label, $misc);
         return true;
@@ -593,7 +594,7 @@ class commonModel extends model
 
     /**
      * Set the user info.
-     * 
+     *
      * @access public
      * @return void
      */
@@ -615,7 +616,7 @@ class commonModel extends model
 
     /**
      * Get the run info.
-     * 
+     *
      * @param mixed $startTime  the start time of this execution
      * @access public
      * @return array    the run info array.
@@ -630,7 +631,7 @@ class commonModel extends model
 
     /**
      * Get the full url of the system.
-     * 
+     *
      * @static
      * @access public
      * @return string
@@ -645,7 +646,7 @@ class commonModel extends model
 
     /**
      * Get client IP.
-     * 
+     *
      * @access public
      * @return void
      */
@@ -673,9 +674,9 @@ class commonModel extends model
 
     /**
      * Print the positon bar of product module.
-     * 
-     * @param  object $module 
-     * @param  object $product 
+     *
+     * @param  object $module
+     * @param  object $product
      * @access public
      * @return void
      */
@@ -695,33 +696,33 @@ class commonModel extends model
 
     /**
      * Print the positon bar of company module.
-     * 
-     * @param  object $module 
+     *
+     * @param  object $module
      * @access public
      * @return void
      */
     public function printcompany($module)
     {
-        echo '<li>' . $this->lang->aboutUs . '</li>'; 
+        echo '<li>' . $this->lang->aboutUs . '</li>';
     }
 
     /**
      * Print the positon bar of links module.
-     * 
-     * @param  object $module 
+     *
+     * @param  object $module
      * @access public
      * @return void
      */
     public function printlinks($module)
     {
-        echo '<li>' . $this->lang->link . '</li>'; 
+        echo '<li>' . $this->lang->link . '</li>';
     }
 
     /**
      * Print the positon bar of article module.
-     * 
-     * @param  object $module 
-     * @param  object $article 
+     *
+     * @param  object $module
+     * @param  object $article
      * @access public
      * @return void
      */
@@ -739,9 +740,9 @@ class commonModel extends model
 
     /**
      * Print the positon bar of blog module.
-     * 
-     * @param  object $module 
-     * @param  object $article 
+     *
+     * @param  object $module
+     * @param  object $article
      * @access public
      * @return void
      */
@@ -751,7 +752,7 @@ class commonModel extends model
 
         $divider = $this->lang->divider;
         foreach($module->pathNames as $moduleID => $moduleName)
-        {   
+        {
             echo '<li>' . html::a(inlink('index', "moduleID=$moduleID", "category=" . $this->config->seo->alias->blog[$moduleID]), $moduleName) . '</li>';
         }
         if($article) echo '<li>' . $article->title . '</li>';
@@ -759,7 +760,7 @@ class commonModel extends model
 
     /**
      * Print the position bar of book module.
-     * 
+     *
      * @param   array   $families
      * @access  public
      * @return  void
@@ -778,8 +779,8 @@ class commonModel extends model
 
     /**
      * Print the position bar of forum module.
-     * 
-     * @param   object $board 
+     *
+     * @param   object $board
      * @access  public
      * @return  void
      */
@@ -802,9 +803,9 @@ class commonModel extends model
 
     /**
      * Print the position bar of thread module.
-     * 
-     * @param   object $board 
-     * @param   object $thread 
+     *
+     * @param   object $board
+     * @param   object $thread
      * @access  public
      * @return  void
      */
@@ -816,8 +817,8 @@ class commonModel extends model
 
     /**
      * Print the positon bar of page module.
-     * 
-     * @param  object $page 
+     *
+     * @param  object $page
      * @access public
      * @return void
      */
@@ -830,7 +831,7 @@ class commonModel extends model
 
     /**
      * Print the position bar of message module.
-     * 
+     *
      * @access public
      * @return void
      */
@@ -840,11 +841,11 @@ class commonModel extends model
     }
 
     /**
-     * Print the position bar of Search. 
-     * 
-     * @param  int    $module 
-     * @param  int    $object 
-     * @param  int    $keywords 
+     * Print the position bar of Search.
+     *
+     * @param  int    $module
+     * @param  int    $object
+     * @param  int    $keywords
      * @access public
      * @return void
      */
@@ -860,7 +861,7 @@ class commonModel extends model
      * @param string       $method
      * @param string|array $vars
      * @param string|array $alias
-     * return string 
+     * return string
      */
     public static function createFrontLink($module, $method, $vars = '', $alias = '')
     {
@@ -876,10 +877,10 @@ class commonModel extends model
 
         return $link;
     }
- 
+
     /**
      * Verfy administrator through ok file.
-     * 
+     *
      * @access public
      * @return array
      */
@@ -905,9 +906,9 @@ class commonModel extends model
 
         return array('result' => 'success');
     }
-   
+
     /**
-     * Load category and page alias. 
+     * Load category and page alias.
      *
      * @access public
      * @return void

@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
 */
 ?>
-<?php 
+<?php
 $content  = json_decode($block->content);
 $product  = $this->loadModel('product')->getByID($content->product);
 ?>
@@ -20,7 +20,7 @@ $category = array_shift($product->categories);
 $alias    = !empty($category) ? $category->alias : '';
 $url      = helper::createLink('product', 'view', "id={$product->id}", "category={$alias}&name={$product->alias}");
 ?>
-<div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
+<div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?> with-cards'>
   <div class='panel-body no-padding'>
     <div class='card'>
       <a href='<?php echo $url ?>' class='card-img'><?php echo html::image($product->image->primary->middleURL, "title='{$product->name}' alt='{$product->name}'"); ?></a>

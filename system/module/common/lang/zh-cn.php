@@ -85,6 +85,7 @@ $lang->selectReverse  = '反选';
 $lang->loading        = '稍候...';
 $lang->saveSuccess    = '保存成功';
 $lang->setSuccess     = '设置成功';
+$lang->createSuccess  = '创建成功';
 $lang->sendSuccess    = '发送成功';
 $lang->deleteSuccess  = '删除成功';
 $lang->fail           = '失败';

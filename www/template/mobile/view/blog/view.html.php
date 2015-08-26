@@ -35,7 +35,7 @@ include TPL_ROOT . 'common/files.html.php';
 
 <div class='panel-section article'>
   <?php if($article->summary):?>
-  <section class='abstract bg-gray-pale small with-padding'><strong><?php echo $lang->article->summary;?></strong><?php echo $lang->colon . $article->summary;?></section>
+  <section class='abstract hide bg-gray-pale small with-padding'><strong><?php echo $lang->article->summary;?></strong><?php echo $lang->colon . $article->summary;?></section>
   <?php endif; ?>
   <div class='panel-body'>
     <hr class="space">
@@ -49,10 +49,10 @@ include TPL_ROOT . 'common/files.html.php';
   </section>
   <?php endif;?>
   <div class='panel-footer'>
-    <div class='article-moreinfo clearfix'>
-      <?php if($article->editor):?> 
+    <div class='article-moreinfo hide clearfix'>
+      <?php if($article->editor):?>
       <?php $editor = $this->loadModel('user')->getByAccount($article->editor);?>
-      <?php if(!empty($editor)): ?> 
+      <?php if(!empty($editor)): ?>
       <p class='text-right pull-right'><?php printf($lang->article->lblEditor, $editor->realname, formatTime($article->editedDate));?></p>
       <?php endif;?>
       <?php endif;?>

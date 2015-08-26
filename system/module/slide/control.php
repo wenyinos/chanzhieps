@@ -25,12 +25,6 @@ class slide extends control
             $group->slides = $this->slide->getList($group->id);
         }
         $this->view->groups = $groups;
-        if($this->post->groupName) 
-        {
-            $result = $this->slide->editGroup($this->post->groupName,$this->post->groupID);
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
-            $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        }
         $this->display();
         
     }
@@ -48,6 +42,9 @@ class slide extends control
         $this->view->group  = $groupID;
         $this->view->slides = $this->slide->getList($groupID);
 
+        $groupName = $this->dao->select('name')->from(TABLE_CATEGORY)->where('id')->eq($groupID)->fetch();
+        $this->view->groupName = $groupName->name;
+        
         $this->display();
     }
     /**
@@ -138,14 +135,40 @@ class slide extends control
      */
     public function createGroup()
     {
-        if($_POST) 
+        $result = $this->loadModel('tree')->createSlideGroup();
+        if($_POST)
         {
-            $result = $this->loadModel('tree')->createSlideGroup();
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->createSuccess, 'locate' => inlink('admin')));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
         $this->view->title = $this->lang->slide->createGroup;
         $this->display();     
+    }
+
+    public function editGroup($groupID)
+    {
+        $group = $this->loadModel('tree')->getByID($groupID);
+
+        if($_POST) 
+        {
+            if($this->post->groupName == $group->name) $this->send(array('result' => 'fail', 'message' => $this->lang->slide->noChange));
+            $result = $this->loadModel('tree')->editSlideGroup($groupID);
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+    }
+    /**
+     * Remove group. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function removeGroup($groupID)
+    {
+        $result  = $this->loadModel('tree')->removeSlideGroup($groupID);
+
+        if($result) $this->send(array('result' => 'success'));
+        $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
 }

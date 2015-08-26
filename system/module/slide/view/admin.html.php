@@ -34,7 +34,7 @@
               <div class='plain-slide' style='<?php echo 'background-color: ' . $slide->backgroundColor;?>'></div>
               <?php endif; ?>
               <?php if($count > 5 && $index === 1): ?>
-              <div class='slides-count'><i class='icon-picture'></i> <?php echo $count; ?></div>
+              <div class='slides-count'><i class='icon-picture'></i><?php echo $count; ?></div>
               <?php endif; ?>
             </div>
             <?php endforeach;?>
@@ -51,10 +51,12 @@
         <div class='card-heading text-center'>
           <span id='name'><?php echo $group->name;?></span>
           <i class="icon icon-edit"></i>
-          <form id="ajaxForm" class='hide' action="<?php inlink('admin');?>" method='post' >
+          <?php echo html::a(inlink('removeGroup', "groupID=$group->id"), '<i class="icon icon-remove"> </i>', "class='deleter'");?>
+          <form class="editGroupForm<?php echo $group->id;?> hide" action="<?php echo inlink('editGroup', "groupID=$group->id");?>" method='post' >
             <div class='editGroup'>
-              <input type='text' name='groupName' id='input' value=<?php echo $group->name;?> onfocus="this.select()" onmouseup="this.select()">
-              <?php echo html::submitButton('', 'btn btn-primary btn-xs') . html::commonButton($lang->cancel, 'cancelButton btn btn-xs') . html::hidden('groupID', $group->id);?>
+              <input type='text' name='groupName' id='input' value=<?php echo $group->name;?>>
+              <?php echo html::submitButton('', 'submit btn btn-primary btn-xs') . html::commonButton($lang->cancel, 'cancelButton btn btn-xs');?>
+              <?php echo html::hidden('groupID', $group->id, "class='groupID'");?>
             </div>
           </form>
         </div>

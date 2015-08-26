@@ -438,11 +438,11 @@ class fileModel extends model
         if(!file_exists($savePath)) 
         {
             @mkdir($savePath, 0777, true);
-            if(is_writable($savePath) && !file_exists($savePath . DS . 'index.php'))
+            if(is_writable($savePath) && !file_exists($savePath . DS . 'index.html'))
             {
-                $fd = @fopen($savePath . DS . 'index.php', "a+");
+                $fd = @fopen($savePath . DS . 'index.html', "a+");
                 fclose($fd);
-                chmod($savePath . DS . 'index.php' , 0755);
+                chmod($savePath . DS . 'index.html' , 0755);
             }
         }
     }

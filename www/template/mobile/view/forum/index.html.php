@@ -35,19 +35,19 @@
         <div class='table-layout'>
           <div class='table-cell'>
             <div class='card-heading'>
-              <h4>
+              <h5>
                 <?php
                 echo $childBoard->name;
                 if(!empty($moderators)) printf('<small>' . $lang->forum->lblOwner . '</small>', $moderators);
                 ?>
-              </h4>
+              </h5>
             </div>
             <div class='card-content text-muted small'><?php echo $childBoard->desc;?></div>
             <?php
             if($childBoard->postedBy)
             {
                 echo "<div class='card-footer small text-muted'>{$lang->forum->lastPost}: ";
-                echo substr($childBoard->postedDate, 5, -3) . " {$childBoard->postedByRealname}"; 
+                echo substr($childBoard->postedDate, 5, -3) . " {$childBoard->postedByRealname}";
                 echo '</div>';
             }
             ?>
