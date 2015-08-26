@@ -37,8 +37,8 @@ foreach (explode('|', $lang->colorPlates) as $value)
     </ul>
   </div>
   <div class='panel-body'>
-    <div class='row'>
-      <div class='tab-content col-md-6'>
+    <div class='table-row'>
+      <div class='tab-content table-cell col-xs-6'>
         <div class='tab-pane theme-control-tab-pane' id='contentTab'>
           <table align='center' class='table table-form'>
             <tr>
@@ -226,7 +226,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
         </div>
       </div>
       <?php if(strpos(',htmlcode, phpcode, slide, header', $type) == false or $type == 'html'):?>
-      <div id='panelPreview' class='panel-preview col-md-6'>
+      <div id='panelPreview' class='panel-preview table-cell'>
         <div class='heading'><strong><?php echo $lang->block->preview?></strong></div>
         <div class='panel panel-block'>
           <div class='panel-heading'><i class='icon-heart-empty icon'></i> <strong class='title'><?php echo $lang->block->title;?></strong></div>
