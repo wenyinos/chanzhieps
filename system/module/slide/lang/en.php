@@ -51,7 +51,6 @@ $lang->slide->return      = 'Return';
 $lang->slide->successSort     = 'Order data saved.';
 $lang->slide->noImageSelected = 'No images selected';
 $lang->slide->suitableSize    = "You must use pictures of same size.";
-$lang->slide->toBeAdded   = 'To be added';
 
 $lang->slide->defaultGroup = 'Default Group';
 

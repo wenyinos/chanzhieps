@@ -25,7 +25,14 @@ class slide extends control
             $group->slides = $this->slide->getList($group->id);
         }
         $this->view->groups = $groups;
+        if($this->post->groupName) 
+        {
+            $result = $this->slide->editGroup($this->post->groupName,$this->post->groupID);
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
         $this->display();
+        
     }
 
     /**

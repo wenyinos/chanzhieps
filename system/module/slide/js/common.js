@@ -71,3 +71,18 @@ $(function()
 
     $('#height').parents('tr').find('.required-wrapper').eq(0).remove();
 });
+
+$('.icon-edit').click(function()
+{
+    $(this).hide();
+    $(this).prev('#name').hide();
+    $(this).parents('.card-heading').find('table').show();
+    $(this).parents('.card-heading').find('#input').focus();
+});
+
+$('.cancelButton').click(function()
+{
+    $(this).parents('table').hide();
+    $(this).parents('.card-heading').find('#name').show();
+    $(this).parents('form').prev('.icon-edit').show();
+});

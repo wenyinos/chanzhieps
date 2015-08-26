@@ -279,4 +279,18 @@ class slideModel extends model
     {
         return $this->dao->select('*')->from(TABLE_SLIDE)->where('`group`')->eq($groupID)->orderBy('id')->limit(1)->fetch(); 
     }
+
+    /**
+     * editGroup 
+     * 
+     * @param  string $newName 
+     * @param  int    $groupID 
+     * @access public
+     * @return bool 
+     */
+    public function editGroup($newName,$groupID)
+    {
+        return $result = $this->loadModel('tree')->editSlideGroup($newName,$groupID);
+        
+    }
 }

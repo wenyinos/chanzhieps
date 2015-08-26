@@ -51,7 +51,6 @@ $lang->slide->return      = '返回分组';
 $lang->slide->successSort     = '排序成功保存';
 $lang->slide->noImageSelected = '没有选择图片';
 $lang->slide->suitableSize    = '背景图片大小保持一致。';
-$lang->slide->toBeAdded       = '待添加';
 
 $lang->slide->defaultGroup = '默认分组';
 
