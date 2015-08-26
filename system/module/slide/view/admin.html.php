@@ -50,8 +50,8 @@
         </a>
         <div class='card-heading text-center'>
           <span id='name'><?php echo $group->name;?></span>
-          <i class="icon icon-edit"></i>
-          <?php echo html::a(inlink('removeGroup', "groupID=$group->id"), '<i class="icon icon-remove"> </i>', "class='deleter'");?>
+          <?php echo html::a('javascript:;', "<i class='icon icon-edit'></i>");?>
+          <?php echo html::a(inlink('removeGroup', "groupID=$group->id"), '<i class="icon icon-remove-sign"> </i>', "class='deleter'");?>
           <form id="editGroupForm<?php echo $group->id;?>" class='hide' action="<?php echo inlink('editGroup', "groupID=$group->id");?>" method='post' >
             <div class='editGroup input-group'>
               <?php echo html::input('groupName', $group->name, "class='form-control'");?>

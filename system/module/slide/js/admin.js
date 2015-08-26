@@ -15,8 +15,8 @@ $(document).ready(function()
         $('.icon-edit').prev('#name').show();
 
         $(this).hide();
-        $(this).next('.deleter').hide();
-        $(this).prev('#name').hide();
+        $(this).parent().next('.deleter').hide();
+        $(this).parent().prev('#name').hide();
         $(this).parents('.card-heading').find('form').show();
         $(this).parents('.card-heading').find('#input').focus();
     });
