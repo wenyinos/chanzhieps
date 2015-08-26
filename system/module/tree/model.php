@@ -550,6 +550,31 @@ class treeModel extends model
 
         return !dao::isError();
     }
+
+    /**
+     * Create slide group.
+     * 
+     * @access public
+     * @return bool
+     */
+    public function createSlideGroup()
+    {
+        $group = new stdclass();
+        $group->name     = $this->post->name;
+        $group->parent   = 0; 
+        $group->grade    = 1; 
+        $group->type     = 'slide'; 
+        $group->postedDate = helper::now(); 
+
+        $this->dao->insert(TABLE_CATEGORY)->data($group)->autoCheck()->exec();
+        if(dao::isError()) return false;
+
+        $groupID = $this->dao->lastInsertID();
+        $path = ",$groupID,";
+        $this->dao->update(TABLE_CATEGORY)->set('path')->eq($path)->exec();
+
+        return !dao::isError();
+    }
     
     /**
      * Check if alias available.
