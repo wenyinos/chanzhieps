@@ -21,7 +21,7 @@
         <tbody>
           <tr>
             <th class='small'><?php echo $lang->order->address;?></th>
-            <td><?php echo $order->address;?></td>
+            <td><?php echo $fullAddress;?></td>
           </tr>
           <tr>
             <th class='small'><?php echo $lang->order->deliveriedDate;?></th>

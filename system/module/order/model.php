@@ -71,18 +71,20 @@ class orderModel extends model
     {
         $order = new stdclass();
         $order->account        = $this->app->user->account;
-        $order->address        = $this->post->deliveryAddress;
         $order->payment        = $this->post->payment;
         $order->createdDate    = helper::now();
         $order->payStatus      = 'not_paid';
         $order->status         = 'normal';
         $order->deliveryStatus = 'not_send';
 
+        $address = $this->dao->select('*')->from(TABLE_ADDRESS)->where('id')->eq($this->post->deliveryAddress)->andWhere('account')->eq($this->app->user->account)->fetch();
+        $order->address = helper::jsonEncode($address);
+ 
         if($this->post->createAddress)
         {
             $address = $this->createAddress();
             if(!$address) return array('result' => 'fail', 'message' => dao::getError());
-            $order->address = $address->contact . ' [' . $address->phone . '] ' . $address->address . ' ' . $address->zipcode;
+            $order->address = helper::jsonEncode($address);
         }
 
         $this->dao->insert(TABLE_ORDER)->data($order)->autocheck()->batchCheck($this->config->order->require->create, 'notempty')->exec();
