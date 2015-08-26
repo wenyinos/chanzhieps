@@ -1448,55 +1448,15 @@ class sql
      * Create the AND part.
      * 
      * @param  string $condition 
+     * @param  bool   $addMark 
      * @access public
      * @return object the sql object.
      */
-    public function andWhere($condition)
+    public function andWhere($condition, $addMark = false)
     {
         if($this->inCondition and !$this->conditionIsTrue) return $this;
-        $this->sql .= " AND $condition ";
-        return $this;
-    }
-
-    /**
-     * Create the AND part.
-     * 
-     * @param  string $condition 
-     * @access public
-     * @return object the sql object.
-     */
-    public function andSubquery($condition)
-    {
-        if($this->inCondition and !$this->conditionIsTrue) return $this;
-        $this->sql .= " AND ( $condition";
-        return $this;
-    }
-
-    /**
-     * Create the AND part.
-     * 
-     * @param  string $condition 
-     * @access public
-     * @return object the sql object.
-     */
-    public function orSubquery($condition)
-    {
-        if($this->inCondition and !$this->conditionIsTrue) return $this;
-        $this->sql .= " OR ( $condition";
-        return $this;
-    }
-
-    /**
-     * Create the AND part.
-     * 
-     * @param  string $condition 
-     * @access public
-     * @return object the sql object.
-     */
-    public function endSubquery($condition)
-    {
-        if($this->inCondition and !$this->conditionIsTrue) return $this;
-        $this->sql .= " ) ";
+        $mark = $addMark ? '(' : '';
+        $this->sql .= " AND {$mark} $condition ";
         return $this;
     }
 

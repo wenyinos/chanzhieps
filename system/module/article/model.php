@@ -118,11 +118,11 @@ class articleModel extends model
                 ->beginIf($categories)->andWhere('t2.category')->in($categories)->fi()
 
                 ->beginIf($searchWord)
-                ->andSubquery('title')->like("%{$searchWord}%")
+                ->andWhere('title', true)->like("%{$searchWord}%")
                 ->orWhere('keywords')->like("%{$searchWord}%")
                 ->orWhere('summary')->like("%{$searchWord}%")
                 ->orWhere('content')->like("%{$searchWord}%")
-                ->endSubquery()
+                ->markRight(1)
                 ->fi()
 
                 ->groupBy('t2.id')
