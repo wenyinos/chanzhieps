@@ -29,12 +29,11 @@
         </div>
         <?php endif; ?>
         <?php if(!empty($contact->phone)): ?>
-        <?php $phones = explode(',', strip_tags($contact->phone));?>
         <div class='card'>
           <i class='icon icon-s3 icon-phone bg-special circle'></i>
           <div class='card-content'>
             <small class='text-muted'><?php echo $this->lang->company->phone?></small>
-            <div class='lead'><?php foreach($phones as $phone) echo html::a("tel:$phone", $phone) . '<br>';?></div>
+            <div class='lead'><?php echo $contact->phone;?></div>
           </div>
         </div>
         <?php endif; ?>
