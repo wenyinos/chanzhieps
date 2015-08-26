@@ -651,25 +651,10 @@ INSERT INTO `eps_layout` (template,page,region,blocks,import,lang,theme) select 
 INSERT INTO `eps_layout` (`template`, `theme`, `page`, `region`, `blocks`, `import`, `lang`) VALUES
 ('mobile','default','index_index','top','[{"id":"25","grid":"0","titleless":"0","borderless":"0"}]','no','zh-cn'),
 ('mobile','default','index_index','middle','[{"id":"31","grid":"0","titleless":"0","borderless":"0"},{"id":"23","grid":"12","titleless":"0","borderless":"0"},{"id":"21","grid":"0","titleless":"0","borderless":"0"}]','no','zh-cn'),
-('mobile','default','article_browse','top','[{"id":"26","grid":"0","titleless":"0","borderless":"0"}]','no','zh-cn'),
-('mobile','default','article_view','top','[{"id":"26","grid":"0","titleless":"0","borderless":"0"}]','no','zh-cn'),
-('mobile','default','product_browse','top','[{"id":"27","grid":"0","titleless":"0","borderless":"0"}]','no','zh-cn'),
-('mobile','default','product_view','top','[{"id":"27","grid":"0","titleless":"0","borderless":"0"}]','no','zh-cn'),
-('mobile','default','page_view','top','[{"id":"29","grid":"0","titleless":"0","borderless":"0"}]','no','zh-cn'),
 ('mobile','default','index_index','top','[{"id":"125","grid":"0","titleless":"0","borderless":"0"}]','no','en'),
 ('mobile','default','index_index','middle','[{"id":"131","grid":"0","titleless":"0","borderless":"0"},{"id":"123","grid":"12","titleless":"0","borderless":"0"},{"id":"121","grid":"0","titleless":"0","borderless":"0"}]','no','en'),
-('mobile','default','article_browse','top','[{"id":"126","grid":"0","titleless":"0","borderless":"0"}]','no','en'),
-('mobile','default','article_view','top','[{"id":"126","grid":"0","titleless":"0","borderless":"0"}]','no','en'),
-('mobile','default','product_browse','top','[{"id":"127","grid":"0","titleless":"0","borderless":"0"}]','no','en'),
-('mobile','default','product_view','top','[{"id":"127","grid":"0","titleless":"0","borderless":"0"}]','no','en'),
-('mobile','default','page_view','top','[{"id":"129","grid":"0","titleless":"0","borderless":"0"}]','no','en'),
 ('mobile','default','index_index','top','[{"id":"225","grid":"0","titleless":"0","borderless":"0"}]','no','zh-tw'),
-('mobile','default','index_index','middle','[{"id":"231","grid":"0","titleless":"0","borderless":"0"},{"id":"223","grid":"12","titleless":"0","borderless":"0"},{"id":"221","grid":"0","titleless":"0","borderless":"0"}]','no','zh-tw'),
-('mobile','default','article_browse','top','[{"id":"226","grid":"0","titleless":"0","borderless":"0"}]','no','zh-tw'),
-('mobile','default','article_view','top','[{"id":"226","grid":"0","titleless":"0","borderless":"0"}]','no','zh-tw'),
-('mobile','default','product_browse','top','[{"id":"227","grid":"0","titleless":"0","borderless":"0"}]','no','zh-tw'),
-('mobile','default','product_view','top','[{"id":"227","grid":"0","titleless":"0","borderless":"0"}]','no','zh-tw'),
-('mobile','default','page_view','top','[{"id":"229","grid":"0","titleless":"0","borderless":"0"}]','no','zh-tw');
+('mobile','default','index_index','middle','[{"id":"231","grid":"0","titleless":"0","borderless":"0"},{"id":"223","grid":"12","titleless":"0","borderless":"0"},{"id":"221","grid":"0","titleless":"0","borderless":"0"}]','no','zh-tw');
 
 -- Insert data into `eps_block`;
 INSERT INTO `eps_block` (`id`, `type`, `title`, `content`, `template`, `lang`) VALUES
