@@ -25,10 +25,7 @@ js::set('goback', $lang->product->goback);
 css::internal($product->css);
 js::execute($product->js);
 ?>
-<?php echo $common->printPositionBar($category);?>
-
 <div class='block-region region-top'><?php $this->loadModel('block')->printRegion($layouts, 'product_view', 'top');?></div>
-
 <div class='appheader'>
 <?php if(!empty($product->image->list)):?>
   <?php if(count($product->image->list) > 1): ?>

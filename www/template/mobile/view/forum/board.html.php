@@ -11,7 +11,6 @@
  */
 ?>
 <?php include TPL_ROOT . 'common/header.html.php';?>
-<?php echo $common->printPositionBar($board);?>
 <div class='block-region region-top'><?php $this->loadModel('block')->printRegion($layouts, 'forum_board', 'top');?></div>
 <div class='panel-section'>
   <?php if(count($threads) > 5 && $this->forum->canPost($board)):?>

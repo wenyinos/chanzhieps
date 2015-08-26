@@ -11,7 +11,6 @@
  */
 ?>
 <?php include TPL_ROOT . 'common/header.html.php';?>
-<?php echo $common->printPositionBar($category);?>
 <?php 
 $leftCards  = '';
 $rightCards = '';

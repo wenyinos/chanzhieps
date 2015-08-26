@@ -15,7 +15,6 @@ include TPL_ROOT . 'common/header.html.php';
 include TPL_ROOT . 'common/files.html.php';
 ?>
 <?php js::set('articleID', $article->id)?>
-<?php $common->printPositionBar($article->origins);?>
 <div class='block-region region-top'><?php $this->loadModel('block')->printRegion($layouts, 'book_read', 'top');?></div>
 <div class='appheader'>
   <div class='heading'>

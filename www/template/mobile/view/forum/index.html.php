@@ -11,7 +11,6 @@
  */
 ?>
 <?php include TPL_ROOT . 'common/header.html.php';?>
-<?php echo $common->printPositionBar($this->app->getModuleName());?>
 <div class='block-region region-top'><?php $this->loadModel('block')->printRegion($layouts, 'forum_index', 'top');?></div>
 <?php foreach($boards as $parentBoard):?>
 <div class='panel-section'>

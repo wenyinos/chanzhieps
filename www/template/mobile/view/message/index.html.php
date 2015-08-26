@@ -14,8 +14,6 @@
 include TPL_ROOT . 'common/header.html.php';
 // TODO: check follow methods: showDetail and hideDetail
 ?>
-
-<?php $common->printPositionBar();?>
 <div class='block-region region-top'><?php $this->loadModel('block')->printRegion($layouts, 'message_index', 'top');?></div>
 <div class='panel-section'>
   <div id='commentsListWrapper'><div id='commentsList'> <?php // Double div for ajax load. ?>
