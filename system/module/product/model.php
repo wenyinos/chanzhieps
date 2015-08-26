@@ -94,33 +94,20 @@ class productModel extends model
             ->where('1 = 1')
             ->beginIF($categories)->andWhere('t2.category')->in($categories)->fi()
             ->beginIF(RUN_MODE == 'front')->andWhere('t1.status')->eq('normal')->fi()
+
             ->beginIF($searchWord)
-
-            ->andWhere('name')->like("%{$searchWord}%")
-            ->beginIF($categories)->andWhere('t2.category')->in($categories)->fi()
-
+            ->andSubquery('name')->like("%{$searchWord}%")
             ->orWhere('brand')->like("%{$searchWord}%")
-            ->beginIF($categories)->andWhere('t2.category')->in($categories)->fi()
-
             ->orWhere('model')->like("%{$searchWord}%")
-            ->beginIF($categories)->andWhere('t2.category')->in($categories)->fi()
-            
             ->orWhere('color')->like("%{$searchWord}%")
-            ->beginIF($categories)->andWhere('t2.category')->in($categories)->fi()
-
             ->orWhere('origin')->like("%{$searchWord}%")
-            ->beginIF($categories)->andWhere('t2.category')->in($categories)->fi()
-
             ->orWhere('keywords')->like("%{$searchWord}%")
-            ->beginIF($categories)->andWhere('t2.category')->in($categories)->fi()
-
             ->orWhere('`desc`')->like("%{$searchWord}%")
-            ->beginIF($categories)->andWhere('t2.category')->in($categories)->fi()
-
             ->orWhere('content')->like("%{$searchWord}%")
-            ->beginIF($categories)->andWhere('t2.category')->in($categories)->fi()
-            
+            ->endSubquery()
             ->fi()
+
+            ->beginIF($categories)->andWhere('t2.category')->in($categories)->fi()
             ->groupBy('t2.id')
             ->orderBy($orderBy)
             ->page($pager)
