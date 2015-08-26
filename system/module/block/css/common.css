@@ -32,6 +32,10 @@
 .blockForm .nav-tabs > li.active > a {padding: 6px 10px 7px; color: #333; font-weight: bold;}
 #titleTDCell > .required-wrapper {width: 50%;}
 
+.table-row {display: table; width: 100%; margin: 0 -10px;}
+.table-cell {display: table-cell; vertical-align: top; float: none}
+.table-cell.tab-content {min-width: 678px}
+
 #dialogPanelPreivew.panel-preview {margin-bottom: 10px; padding: 10px 20px 15px 20px;}
 #dialogPanelPreivew.panel-preview > .panel {max-width: 500px}
 

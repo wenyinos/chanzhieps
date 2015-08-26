@@ -37,11 +37,11 @@ foreach (explode('|', $lang->colorPlates) as $value)
       </ul>
     </div>
     <div class='panel-body'>
-      <div class='row'>
+      <div class='table-row'>
         <?php if(strpos(',htmlcode, phpcode, slide, header', $type) == false or $type == 'html'):?>
-        <div class='tab-content col-md-6'>
+        <div class='tab-content table-cell col-xs-6'>
         <?php else: ?>
-        <div class='tab-content col-md-12'>
+        <div class='tab-content table-cell col-xs-12'>
         <?php endif; ?>
           <div class='tab-pane theme-control-tab-pane' id='contentTab'>
             <table align='center' class='table table-form'>
@@ -235,7 +235,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
           </div>
         </div>
         <?php if(strpos(',htmlcode, phpcode, slide, header', $type) == false or $type == 'html'):?>
-        <div id='panelPreview' class='col-md-6'>
+        <div id='panelPreview' class=' table-cell'>
           <div class='panel-preview'>
             <div class='heading'><strong><?php echo $lang->block->preview?></strong></div>
             <div class='panel panel-block'>
