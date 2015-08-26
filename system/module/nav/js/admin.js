@@ -124,6 +124,27 @@ $(document).ready(function()
     });
     
     $.setAjaxForm('#navForm');
+
+    if(v.type == 'mobile_bottom') $('.plus2, .plus3').hide();
+    $(document).on('change', 'select.navSelector', function()
+    {   
+        if(($(this).find('option:selected').val() == 'message'))
+        {
+           $(this).nextAll('select[name*=target]').find('option[value=modal]').remove();
+        }
+    }); 
+
+    $('option[selected=selected][value=message]').parent('select').change();
+
+    $(document).on('change', '.urlInput', function()
+    {   
+        if(($(this).val()) && ($(this).val().indexOf('http') !== false))
+        {
+           $(this).nextAll('select[name*=target]').find('option[value=modal]').remove();
+        }
+    }); 
+
+    $('input[class*=urlInput][value*=http]').change();
 });
 
 /**

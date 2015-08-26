@@ -31,13 +31,15 @@ $lang->nav->types['custom']  = '自定义';
 $lang->nav->system = new stdclass();
 $lang->nav->system->home    = '首页';
 $lang->nav->system->company = '关于我们';
+$lang->nav->system->contact = '联系我们';
 $lang->nav->system->forum   = '论坛';
 $lang->nav->system->blog    = '博客';
 $lang->nav->system->book    = '手册';
 $lang->nav->system->message = '留言';
 
-$lang->nav->desktop = '桌面';
-$lang->nav->mobile  = '移动';
+$lang->nav->desktop       = '桌面';
+$lang->nav->mobile_top    = '移动顶部';
+$lang->nav->mobile_bottom = '移动底部';
 
 /* Targets setting. */
 $lang->nav->targetList = array();
