@@ -576,6 +576,12 @@ class treeModel extends model
         return !dao::isError();
     }
     
+    public function editSlideGroup($newName,$groupID)
+    {
+        $this->dao->update(TABLE_CATEGORY)->set('name')->eq($newName)->autoCheck()->where('id')->eq($groupID)->exec(); 
+        return !dao::isError();
+    }
+    
     /**
      * Check if alias available.
      *
