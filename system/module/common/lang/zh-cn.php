@@ -91,6 +91,7 @@ $lang->deleteSuccess  = '删除成功';
 $lang->fail           = '失败';
 $lang->noResultsMatch = '没有匹配的选项';
 $lang->alias          = '搜索引擎优化使用，可使用英文或数字';
+$lang->keywordsHolder = '多个关键字中间用逗号隔开';
 
 $lang->setOkFile = <<<EOT
 <h5>请按照下面的步骤操作以确认您的管理员身份。</h5>
