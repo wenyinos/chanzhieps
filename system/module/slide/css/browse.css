@@ -1,4 +1,4 @@
-.panel{margin: 0 8%;}
+.panel{margin: 0 5%;}
 .carousel {border-radius: 0}
 .carousel-inner .item, .carousel-inner .item > img {max-height: 150px; border-radius: 4px 4px 0 0;}
 .carousel-inner .item.show, .carousel-inner .item.show > img {max-height: inherit; border-radius: 4px; box-shadow: none}
