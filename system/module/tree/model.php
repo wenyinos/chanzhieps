@@ -571,7 +571,7 @@ class treeModel extends model
 
         $groupID = $this->dao->lastInsertID();
         $path = ",$groupID,";
-        $this->dao->update(TABLE_CATEGORY)->set('path')->eq($path)->exec();
+        $this->dao->update(TABLE_CATEGORY)->set('path')->eq($path)->where('id')->eq($groupID)->exec();
 
         return !dao::isError();
     }
