@@ -96,7 +96,7 @@ class productModel extends model
             ->beginIF(RUN_MODE == 'front')->andWhere('t1.status')->eq('normal')->fi()
 
             ->beginIF($searchWord)
-            ->andSubquery('name')->like("%{$searchWord}%")
+            ->andWhere('name', true)->like("%{$searchWord}%")
             ->orWhere('brand')->like("%{$searchWord}%")
             ->orWhere('model')->like("%{$searchWord}%")
             ->orWhere('color')->like("%{$searchWord}%")
@@ -104,7 +104,7 @@ class productModel extends model
             ->orWhere('keywords')->like("%{$searchWord}%")
             ->orWhere('`desc`')->like("%{$searchWord}%")
             ->orWhere('content')->like("%{$searchWord}%")
-            ->endSubquery()
+            ->markRight(1)
             ->fi()
 
             ->beginIF($categories)->andWhere('t2.category')->in($categories)->fi()
