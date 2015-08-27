@@ -261,7 +261,7 @@ class commonModel extends model
 
         /* Check main domain and scheme. */
         $redirectURI = $currentURI;
-        if(strpos($redirectURI, $scheme . '://') !== 0) $redirectURI = $scheme . substr($redirectURI, strpos($redirectURI, '://'));
+        if(strpos($redirectURI, $scheme . '://') !== false) $redirectURI = $scheme . substr($redirectURI, strpos($redirectURI, '://'));
         if(!empty($mainDomain) and $httpHost != $mainDomain) $redirectURI = str_replace($httpHost, $mainDomain, $redirectURI);
         if($redirectURI != $currentURI) header301($redirectURI);
 
