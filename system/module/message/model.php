@@ -12,9 +12,9 @@
 class messageModel extends model
 {
     /**
-     * Get message by ID. 
-     * 
-     * @param  int    $messageID 
+     * Get message by ID.
+     *
+     * @param  int    $messageID
      * @access public
      * @return object
      */
@@ -22,12 +22,12 @@ class messageModel extends model
     {
         return $this->dao->select('*')->from(TABLE_MESSAGE)->findByID($messageID)->fetch();
     }
-    
+
     /**
-     * Get message list By Account 
-     * 
-     * @param  string    $account 
-     * @param  object    $pager 
+     * Get message list By Account
+     *
+     * @param  string    $account
+     * @param  object    $pager
      * @access public
      * @return array
      */
@@ -38,11 +38,11 @@ class messageModel extends model
             ->orderBy('id_desc')
             ->page($pager)
             ->fetchAll('id');
-    }   
+    }
 
     /**
      * Get messages of one object.
-     * 
+     *
      * @param  string $type          the message type
      * @param  string $objectType    the object type
      * @param  int    $objectID      the object id
@@ -66,9 +66,9 @@ class messageModel extends model
     }
 
     /**
-     * Get all replies of a message for admin. 
-     * 
-     * @param  object  $message 
+     * Get all replies of a message for admin.
+     *
+     * @param  object  $message
      * @access public
      * @return array
      */
@@ -89,9 +89,9 @@ class messageModel extends model
     }
 
     /**
-     * Get all replies of a message for front. 
-     * 
-     * @param  object  $message 
+     * Get all replies of a message for front.
+     *
+     * @param  object  $message
      * @access public
      * @return array
      */
@@ -124,7 +124,7 @@ class messageModel extends model
                     echo "<div class='reply card'>";
 
                     echo "<div class='card-heading'>";
-                    echo "<span class='text-important'><i class='icon-reply'></i> {$reply->from}</span> &nbsp; <small class='text-muted'>" . formatTime($reply->date, 'Y/m/d H:m') . "</small>";
+                    echo "<span class='text-primary'><i class='icon-reply'></i> {$reply->from}</span> &nbsp; <small class='text-muted'>" . formatTime($reply->date, 'Y/m/d H:m') . "</small>";
                     echo "<div class='actions'>" . html::a(helper::createLink('message', 'reply', "id={$reply->id}"), $this->lang->message->reply, " data-toggle='modal' data-type='ajax' id='reply{$reply->id}'") . "</div>";
                     echo '</div>';
 
@@ -140,9 +140,9 @@ class messageModel extends model
     }
 
     /**
-     * Get replies of a message. 
-     * 
-     * @param  object  $message 
+     * Get replies of a message.
+     *
+     * @param  object  $message
      * @access public
      * @return array
      */
@@ -162,9 +162,9 @@ class messageModel extends model
     }
 
     /**
-     * Get object of a message. 
-     * 
-     * @param  object  $message 
+     * Get object of a message.
+     *
+     * @param  object  $message
      * @access public
      * @return array
      */
@@ -176,10 +176,10 @@ class messageModel extends model
 
     /**
      * Get message list.
-     * 
+     *
      * @param string $type      the message type
      * @param int    $status    the message status
-     * @param object $pager 
+     * @param object $pager
      * @access public
      * @return void
      */
@@ -234,7 +234,7 @@ class messageModel extends model
 
     /**
      * Post a message.
-     * 
+     *
      * @access public
      * @return void
      */
@@ -277,8 +277,8 @@ class messageModel extends model
 
     /**
      * Reply a message.
-     * 
-     * @param  int    $messageID 
+     *
+     * @param  int    $messageID
      * @access public
      * @return void
      */
@@ -311,7 +311,7 @@ class messageModel extends model
 
         $replyID = $this->dao->lastInsertId();
 
-        if(!dao::isError()) 
+        if(!dao::isError())
         {
             if($admin == 'super')
             {
@@ -338,9 +338,9 @@ class messageModel extends model
 
     /**
      * Delete a message.
-     * 
-     * @param string $messageID 
-     * @param string $mode 
+     *
+     * @param string $messageID
+     * @param string $mode
      * @access public
      * @return void
      */
@@ -358,8 +358,8 @@ class messageModel extends model
 
     /**
      * Pass messages.
-     * 
-     * @param string $messageID 
+     *
+     * @param string $messageID
      * @param string $type          single|pr
      * @access public
      * @return void
@@ -379,8 +379,8 @@ class messageModel extends model
 
     /**
      * Mark a message readed.
-     * 
-     * @param  int    $messageID 
+     *
+     * @param  int    $messageID
      * @access public
      * @return bool
      */
@@ -392,7 +392,7 @@ class messageModel extends model
 
     /**
      * Set the message id the user posted to the cookie. Thus before approvaled, the user can view these messages.
-     * 
+     *
      * @param string $messageID
      * @access public
      * @return void
@@ -416,8 +416,8 @@ class messageModel extends model
 
     /**
      * Get the link of the object of one message.
-     * 
-     * @param string $message 
+     *
+     * @param string $message
      * @access public
      * @return sting
      */
@@ -451,8 +451,8 @@ class messageModel extends model
 
     /**
      * Delete messages of a user..
-     * 
-     * @param  int     $message 
+     *
+     * @param  int     $message
      * @access public
      * @return void
      */

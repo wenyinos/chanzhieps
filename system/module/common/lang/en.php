@@ -85,6 +85,7 @@ $lang->selectReverse  = 'Reverse';
 $lang->loading        = 'Loading...';
 $lang->saveSuccess    = 'Successfully saved.';
 $lang->setSuccess     = 'Successfully saved.';
+$lang->createSuccess  = 'Successfully created.';
 $lang->sendSuccess    = 'Successfully sended.';
 $lang->deleteSuccess  = 'Successfully deleted.';
 $lang->fail           = 'Failed';

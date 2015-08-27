@@ -571,14 +571,36 @@ class treeModel extends model
 
         $groupID = $this->dao->lastInsertID();
         $path = ",$groupID,";
-        $this->dao->update(TABLE_CATEGORY)->set('path')->eq($path)->exec();
+        $this->dao->update(TABLE_CATEGORY)->set('path')->eq($path)->where('id')->eq($groupID)->exec();
 
         return !dao::isError();
     }
     
-    public function editSlideGroup($newName,$groupID)
+    /**
+     * Edit slide group. 
+     * 
+     * @param  string $newName 
+     * @param  int    $groupID 
+     * @access public
+     * @return bool 
+     */
+    public function editSlideGroup($groupID)
     {
-        $this->dao->update(TABLE_CATEGORY)->set('name')->eq($newName)->autoCheck()->where('id')->eq($groupID)->exec(); 
+        $this->dao->update(TABLE_CATEGORY)->set('name')->eq($this->post->groupName)->autoCheck()->where('id')->eq($groupID)->exec(); 
+        return !dao::isError();
+    }
+
+    /**
+     * Remove slide group. 
+     * 
+     * @param  int    $groupID 
+     * @access public
+     * @return bool 
+     */
+    public function removeSlideGroup($groupID)
+    {
+        $this->dao->delete()->from(TABLE_SLIDE)->where('`group`')->eq($groupID)->exec();
+        $this->dao->delete()->from(TABLE_CATEGORY)->where('id')->eq($groupID)->exec();
         return !dao::isError();
     }
     

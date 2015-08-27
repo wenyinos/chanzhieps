@@ -21,7 +21,7 @@
     <?php endif;?>
     <div class="card-footer">
       <?php if($thread->editor): ?>
-      <small><i class="icon-pencil"></i> <?php printf($lang->thread->lblEdited, $thread->editorRealname, $thread->editedDate); ?></small>
+      <small class='hide last-edit'><i class="icon-pencil"></i> <?php printf($lang->thread->lblEdited, $thread->editorRealname, $thread->editedDate); ?></small>
       <?php endif; ?>
       <?php if($this->app->user->account != 'guest'): ?>
       <div class="actions text-right">
@@ -43,7 +43,7 @@
           }
           ?>
           </ul>
-        </span> &nbsp; 
+        </span> &nbsp;
         <?php
         if($thread->hidden)
         {

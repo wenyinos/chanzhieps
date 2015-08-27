@@ -1,8 +1,8 @@
 //vars
 @color-pale: mix(#fff, @color-primary, 90%);
-@color-inverse: contrast(@color-primary, #333, #fff, 40%);
-@color-inverse-dark: darken(@color-primary, 50%);
-@color-primary-text: contrast(@color-primary, @color-inverse-dark, @color-primary, 50%);
+@color-inverse: contrast(@color-primary, #333, #fff, 60%);
+@color-inverse-dark: darken(@color-primary, 60%);
+@color-primary-text: contrast(@color-primary, @color-inverse-dark, @color-primary, 60%);
 
 .override-colorset(@color) when not(@color = #3280FC)
 {
@@ -97,6 +97,16 @@
 
       .level-number, .reply-time {
         color: @color-primary-text;
+      }
+    }
+  }
+
+  .card.comment {
+    .reply {
+      background-color: @color-pale;
+
+      .reply {
+        background-color: fade(@color-primary, 8%);
       }
     }
   }

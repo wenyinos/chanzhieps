@@ -115,25 +115,16 @@ class articleModel extends model
                 ->andWhere('t1.addedDate')->le(helper::now())
                 ->andWhere('t1.status')->eq('normal')
                 ->fi()
+                ->beginIf($categories)->andWhere('t2.category')->in($categories)->fi()
+
                 ->beginIf($searchWord)
-
-                ->andWhere('title')->like("%{$searchWord}%")
-                ->andWhere('t1.type')->eq($type)
-                ->beginIf($categories)->andWhere('t2.category')->in($categories)->fi()
-
+                ->andWhere('title', true)->like("%{$searchWord}%")
                 ->orWhere('keywords')->like("%{$searchWord}%")
-                ->andWhere('t1.type')->eq($type)
-                ->beginIf($categories)->andWhere('t2.category')->in($categories)->fi()
-
                 ->orWhere('summary')->like("%{$searchWord}%")
-                ->andWhere('t1.type')->eq($type)
-                ->beginIf($categories)->andWhere('t2.category')->in($categories)->fi()
-
                 ->orWhere('content')->like("%{$searchWord}%")
-                ->andWhere('t1.type')->eq($type)
-                ->beginIf($categories)->andWhere('t2.category')->in($categories)->fi()
-
+                ->markRight(1)
                 ->fi()
+
                 ->groupBy('t2.id')
                 ->orderBy($orderBy)
                 ->page($pager)
