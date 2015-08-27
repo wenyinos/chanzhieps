@@ -42,6 +42,9 @@ class slide extends control
         $this->view->group  = $groupID;
         $this->view->slides = $this->slide->getList($groupID);
 
+        $groupName = $this->dao->select('name')->from(TABLE_CATEGORY)->where('id')->eq($groupID)->fetch();
+        $this->view->groupName = $groupName->name;
+        
         $this->display();
     }
     /**
@@ -133,8 +136,11 @@ class slide extends control
     public function createGroup()
     {
         $result = $this->loadModel('tree')->createSlideGroup();
-        if($result) $this->send(array('result' => 'success', 'message' => $this->lang->createSuccess, 'locate' => inlink('admin')));
-        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        if($_POST)
+        {
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->createSuccess, 'locate' => inlink('admin')));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
 
         $this->view->title = $this->lang->slide->createGroup;
         $this->display();     
