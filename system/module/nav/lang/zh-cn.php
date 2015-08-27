@@ -40,5 +40,7 @@ $lang->nav->desktop = '桌面';
 $lang->nav->mobile  = '移动';
 
 /* Targets setting. */
-$lang->nav->newWindow = new stdclass();
-$lang->nav->newWindow->_blank = '新开窗口';
+$lang->nav->targetList = array();
+$lang->nav->targetList['_self']  = '当前窗口';
+$lang->nav->targetList['_blank'] = '新开窗口';
+$lang->nav->targetList['modal']  = '弹出窗口';

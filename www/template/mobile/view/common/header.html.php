@@ -1,3 +1,12 @@
+<?php if(helper::isAjaxRequest()):?>
+<div class='modal-dialog'>
+  <div class='modal-content'>
+    <div class='modal-header'>
+      <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>×</span></button>
+      <h5 class='modal-title'><?php echo !empty($title) ? $title : '';?></h5>
+    </div>
+    <div class='modal-body'>
+<?php else:?>
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
 <?php include TPL_ROOT . 'common/header.lite.html.php';?>
 
@@ -61,26 +70,26 @@
       <?php
       if(empty($nav1->children))
       {
-          echo html::a($nav1->url, $nav1->title, !empty($nav1->target) ? "target='$nav1->target'" : '');
+          echo html::a($nav1->url, $nav1->title, ($nav1->target != 'modal') ? "target='$nav1->target'" : "data-toggle='modal'");
       }
       else
       {
-          echo html::a("#sub-{$nav1->class}", $nav1->title . " <i class='icon-caret-down'></i>", !empty($nav1->target) ? "target='$nav1->target'" : '');
+          echo html::a("#sub-{$nav1->class}", $nav1->title . " <i class='icon-caret-down'></i>", ($nav1->target != 'modal') ? "target='$nav1->target'" : "data-toggle='modal'");
           $subnavs .= "<ul class='nav' id='sub-{$nav1->class}'>\n";
           foreach($nav1->children as $nav2)
           {
               $subnavs .= "<li class='{$nav2->class}'>";
               if(empty($nav2->children))
               {
-                  $subnavs .= html::a($nav2->url, $nav2->title, !empty($nav2->target) ? "target='$nav2->target'" : '');
+                  $subnavs .= html::a($nav2->url, $nav2->title, ($nav2->target != 'modal') ? "target='$nav2->target'" : "data-toggle='modal' class='text-important'");
               }
               else
               {
-                  $subnavs .= html::a("javascript:;", $nav2->title . " <i class='icon-caret-down'></i>", "data-toggle='dropdown'");
+                  $subnavs .= html::a("javascript:;", $nav2->title . " <i class='icon-caret-down'></i>", "data-toggle='dropdown' class='text-important'");
                   $subnavs .= "<ul class='dropdown-menu'>";
                   foreach($nav2->children as $nav3)
                   {
-                      $subnavs .= "<li>" . html::a($nav3->url, $nav3->title, !empty($nav3->target) ? "target='$nav3->target'" : '') . '</li>';
+                      $subnavs .= "<li>" . html::a($nav3->url, $nav3->title, ($nav3->target != 'modal') ? "target='$nav3->target'" : "data-toggle='modal' class='text-important'") . '</li>';
                   }
                   $subnavs .= "</ul>\n";
               }
@@ -101,3 +110,4 @@
 <div class='block-region region-all-banner'>
   <?php $this->block->printRegion($layouts, 'all', 'banner');?>
 </div>
+<?php endif;?>
