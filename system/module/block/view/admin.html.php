@@ -17,6 +17,7 @@
     <div class='panel'>
       <div class='panel-heading'>
         <strong><?php echo $lang->block->categoryList[$category];?></strong>
+        <div class='panel-actions'><?php echo html::a(inlink('create'), "<i class='icon icon-plus'> </i>" . $lang->block->add, "class='btn btn-primary btn-sm'");?></div>
       </div>
       <div class='panel-body'>
         <?php foreach($blocks as $block):?>
@@ -30,7 +31,6 @@
         <?php endforeach;?>
         <p></p>
         <br/>
-        <?php echo html::a(inlink('create'), "<i class='icon icon-plus'> </i>" . $lang->block->create, "class='btn btn-default btn-block'");?>
       </div>
     </div>
   </div>
