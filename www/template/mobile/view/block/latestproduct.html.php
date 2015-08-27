@@ -17,7 +17,7 @@ $method   = 'get' . $type;
 if(empty($content->category)) $content->category = 0;
 $products = $this->loadModel('product')->$method($content->category, $content->limit);
 ?>
-<div id="block<?php echo $block->id;?>" class="panel-cards panel panel-block <?php echo $blockClass;?>">
+<div id="block<?php echo $block->id;?>" class="panel-cards with-cards panel panel-block <?php echo $blockClass;?>">
   <div class='panel-heading'>
     <strong><?php echo $icon;?> <?php echo $block->title . $content->recPerRow;?></strong>
     <?php if(!empty($content->moreText) and !empty($content->moreUrl)):?>
@@ -25,7 +25,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
     <?php endif;?>
   </div>
   <?php if(isset($content->image)):?>
-  <div class='panel-body no-padding with-cards'>
+  <div class='panel-body no-padding'>
     <div class='row cards cards-products'>
       <?php
       $cardsCols = array();
