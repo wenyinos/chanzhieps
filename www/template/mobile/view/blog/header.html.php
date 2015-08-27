@@ -23,7 +23,6 @@
           echo '<h4>' . $this->config->site->name . '</h4>';
       }
       ?>
-      <small class='appbar-title-label bg-primary'><?php echo $lang->blog->common;?></small>
     </a>
   </div>
   <div class='appbar-actions'>
@@ -52,7 +51,7 @@
       <li <?php if(empty($category)) echo "class='active'"?>>
          <?php echo html::a($this->inlink('index'), (isset($this->config->site->type) and $this->config->site->type == 'blog') ? $lang->home : $lang->blog->home)?>
       </li>
-      <?php 
+      <?php
       $navs = $this->tree->getChildren(0, 'blog');
       foreach($navs as $nav)
       {
