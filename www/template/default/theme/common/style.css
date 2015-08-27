@@ -131,7 +131,7 @@ table.captcha td label {padding: 0;}
 .files-list > li.file > a {line-height: 25px; padding: 40px 45px 5px 45px; max-width: 240px; white-space:nowrap; text-overflow:ellipsis; -o-text-overflow:ellipsis; overflow:hidden;}
 .files-list > li.file > a:before {display: block; width: 100%; font-size: 30px; position: absolute; top: 10px; text-align: center; left: 0; content: '\e6d4'; font-family: ZenIcon;}
 .files-list > li.files-list-heading {float: none; display: block; color: #999;font-weight: bold;}
-.files-list > li .file-actions {display: block; position: absolute; right: 0; top: 0;} 
+.files-list > li .file-actions {display: block; position: absolute; right: 0; top: 0;}
 .files-list > li .file-actions > a {opacity: 0; display: inline-block; background-color: #D9E8F5; color: #666; padding: 3px 7px;}
 .files-list > li:hover .file-actions > a,.files-list > li .file-actions > a:hover {opacity: 1; background-color: #145BCC; color: #fff; text-decoration: none;}
 
@@ -346,6 +346,7 @@ td #aliasLabel {display: table-row;}
 #headNav {position: absolute; right: 0; top: 10px;}
 #headNav nav > a, #languageBar {display: inline-block; margin-right: 5px;}
 #headNav nav > a:last-child {margin-right: 0;}
+#headNav .login-msg:empty {display: none}
 #languageBar > a {display: inline-block; margin-right: 4px;}
 #languageBar > a:last-child {margin-right: 0;}
 @media (max-width: 767px) {
