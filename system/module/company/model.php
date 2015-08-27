@@ -47,15 +47,21 @@ class companyModel extends model
                 }
                 else if($item == 'phone')
                 {
+                    $values = explode(',', $value);
                     $mobile = $this->app->loadClass('mobile');
-                    if($mobile->isMobile())
+                    $phones = array();
+                    foreach($values as $value) 
                     {
-                        $contact->phone = html::a("tel:$value", $value);
+                        if($mobile->isMobile())
+                        {
+                            $phones[] = html::a("tel:$value", $value);
+                        }
+                        else
+                        {
+                            $phones[] = $value;
+                        }
                     }
-                    else
-                    {
-                        $contact->phone = $value;
-                    }
+                    $contact->phone = join('<br/>', $phones);
                 }
             }
             else

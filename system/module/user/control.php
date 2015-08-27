@@ -131,6 +131,7 @@ class user extends control
                 if(isset($this->config->site->checkEmail) and $this->config->site->checkEmail == 'open' and $this->config->mail->turnon and !$user->emailCertified)
                 {
                     $referer = helper::safe64Encode($this->post->referer);
+                    if(!helper::isAjaxRequest()) helper::header301("http://". $_SERVER['HTTP_HOST'] . inlink('checkEmail', "referer={$referer}"));
                     $this->send(array('result'=>'success', 'locate'=> inlink('checkEmail', "referer={$referer}")));
                 }
             }
@@ -138,11 +139,13 @@ class user extends control
             /* Goto the referer or to the default module */
             if($this->post->referer != false and strpos($loginLink . $denyLink . $regLink, $this->post->referer) === false)
             {
+                if(!helper::isAjaxRequest()) helper::header301(urldecode($this->post->referer));
                 $this->send(array('result'=>'success', 'locate'=> urldecode($this->post->referer)));
             }
             else
             {
                 $default = $this->config->user->default;
+                if(!helper::isAjaxRequest()) helper::header301("http://". $_SERVER['HTTP_HOST'] . $this->createLink($default->module, $default->method));
                 $this->send(array('result'=>'success', 'locate' => $this->createLink($default->module, $default->method)));
             }
         }
@@ -846,6 +849,7 @@ class user extends control
             if(!trim($this->post->captcha) or trim($this->post->captcha) != $this->session->verifyCode) $this->send(array('result' => 'fail', 'message' => $this->lang->user->verifyFail));
             $this->user->checkEmail($this->post->email);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->app->user->emailCertified = 1;
             $this->send(array('result' => 'success', 'message' => $this->lang->user->checkEmailSuccess, 'locate' => $this->post->referer));
         }
 

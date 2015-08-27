@@ -65,6 +65,7 @@
           <th><?php echo $lang->site->customizableList->reply;?></th> 
           <td><?php echo html::input('replyRec', !empty($this->config->site->replyRec) ? $this->config->site->replyRec : $this->config->reply->recPerPage, "class='form-control'");?></td><td></td>
         </tr>
+        <?php endif;?>
         <tr>
           <th><?php echo $lang->site->setImageSize;?></th>
           <td colspan='2'>
@@ -81,7 +82,6 @@
             <?php endforeach;?>
           </td>
         </tr>
-        <?php endif;?>
         <tr><th></th><td colspan='2'><?php echo html::submitButton();?></td></tr>
       </table>
     </form>

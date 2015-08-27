@@ -28,6 +28,15 @@
           </div>
         </div>
         <?php endif; ?>
+        <?php if(!empty($contact->phone)): ?>
+        <div class='card'>
+          <i class='icon icon-s3 icon-phone bg-special circle'></i>
+          <div class='card-content'>
+            <small class='text-muted'><?php echo $this->lang->company->phone?></small>
+            <div class='lead'><?php echo $contact->phone;?></div>
+          </div>
+        </div>
+        <?php endif; ?>
         <?php if(!empty($contact->email)): ?>
         <div class='card'>
           <i class='icon icon-s3 icon-envelope bg-special circle'></i>

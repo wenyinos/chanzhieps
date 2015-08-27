@@ -13,9 +13,9 @@
 <?php
 include TPL_ROOT . 'common/header.html.php';
 include TPL_ROOT . 'common/files.html.php';
-$common->printPositionBar($board, $thread);
 ?>
 <div class='block-region region-top'><?php $this->loadModel('block')->printRegion($layouts, 'thread_view', 'top');?></div>
+<hr class='space'>
 <?php
 if($pager->pageID == 1) include TPL_ROOT . 'thread/thread.html.php';
 include TPL_ROOT . 'thread/reply.html.php';

@@ -11,10 +11,7 @@
  */
 ?>
 <?php include TPL_ROOT . 'common/header.html.php';?>
-<?php echo $common->printPositionBar();?>
-
 <div class='block-region region-top'><?php $this->loadModel('block')->printRegion($layouts, 'page_index', 'top');?></div>
-
 <div class='panel panel-section'>
   <div class='panel-heading'>
     <div class='title'><strong><?php echo $this->lang->page->list;?></strong></div>

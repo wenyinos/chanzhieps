@@ -1,8 +1,6 @@
 <?php 
 include TPL_ROOT . 'common/header.html.php';
 ?>
-<?php echo $common->printPositionBar('search', null, $words);?>
-
 <div class='panel panel-section'>
   <div class='panel-heading'>
     <div class='titile'><i class='icon-search'></i> <?php echo $lang->search->index;?></div>

@@ -17,7 +17,6 @@ js::set('pageID', $page->id);
 css::internal($page->css);
 js::execute($page->js);
 ?>
-<?php $common->printPositionBar($page);?>
 <div class='block-region region-top'><?php $this->loadModel('block')->printRegion($layouts, 'page_view', 'top');?></div>
 <div class='appheader'>
   <div class='heading'>
