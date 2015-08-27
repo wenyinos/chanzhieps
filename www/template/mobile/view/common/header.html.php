@@ -1,4 +1,15 @@
 <?php if(helper::isAjaxRequest()):?>
+<?php
+$webRoot            = $config->webRoot;
+$jsRoot             = $webRoot . "js/";
+$templateName       = $this->config->template->{$this->device}->name;
+$themeName          = $this->config->template->{$this->device}->theme;
+$templateRoot       = $webRoot . "template/{$templateName}/";
+$templateThemeRoot  = "{$templateRoot}theme/";
+$templateCommonRoot = "{$templateThemeRoot}common/";
+$thisModuleName     = $this->app->getModuleName();
+$thisMethodName     = $this->app->getMethodName();
+?>
 <div class='modal-dialog'>
   <div class='modal-content'>
     <div class='modal-header'>
@@ -70,7 +81,7 @@
       <?php
       if(empty($nav1->children))
       {
-          echo html::a($nav1->url, $nav1->title, ($nav1->target != 'modal') ? "target='$nav1->target'" : "data-toggle='modal'");
+          echo html::a($nav1->url, $nav1->title, ($nav1->target != 'modal') ? "target='$nav1->target' data-toggle='modal'" : "data-toggle='modal'");
       }
       else
       {
