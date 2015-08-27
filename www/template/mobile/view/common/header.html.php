@@ -81,7 +81,7 @@ $thisMethodName     = $this->app->getMethodName();
       <?php
       if(empty($nav1->children))
       {
-          echo html::a($nav1->url, $nav1->title, ($nav1->target != 'modal') ? "target='$nav1->target' data-toggle='modal'" : "data-toggle='modal'");
+          echo html::a($nav1->url, $nav1->title, ($nav1->target != 'modal') ? "target='$nav1->target'" : "data-toggle='modal'");
       }
       else
       {
