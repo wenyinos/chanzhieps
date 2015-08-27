@@ -27,11 +27,11 @@
       </div>
       <div class='table-layout'>
         <div class='table-cell'>
-          <div class='card-content text-muted small'><?php echo $stick->summary;?></div>
-          <div class='card-footer small text-muted'>
-            <span title="<?php echo $lang->article->views;?>"><i class='icon-eye-open'></i> <?php echo $stick->views;?></span>
-            <?php if($stick->comments):?>&nbsp;&nbsp; <span title="<?php echo $lang->article->comments;?>"><i class='icon-comments-alt'></i> <?php echo $stick->comments;?></span> &nbsp;<?php endif;?>
-            &nbsp;&nbsp; <span title="<?php echo $lang->article->addedDate;?>"><i class='icon-time'></i> <?php echo substr($stick->addedDate, 0, 10);?></span>
+          <div class='card-content text-muted small'>
+            <?php echo $stick->summary;?>
+            <div><span title="<?php echo $lang->article->views;?>"><i class='icon-eye-open'></i> <?php echo $stick->views;?></span>
+                <?php if($stick->comments):?>&nbsp;&nbsp; <span title="<?php echo $lang->article->comments;?>"><i class='icon-comments-alt'></i> <?php echo $stick->comments;?></span> &nbsp;<?php endif;?>
+                &nbsp;&nbsp; <span title="<?php echo $lang->article->addedDate;?>"><i class='icon-time'></i> <?php echo substr($stick->addedDate, 0, 10);?></span></div>
           </div>
         </div>
         <?php if(!empty($stick->image)):?>
@@ -56,11 +56,11 @@
       </div>
       <div class='table-layout'>
         <div class='table-cell'>
-          <div class='card-content text-muted small'><?php echo $article->summary;?></div>
-          <div class='card-footer small text-muted'>
-            <span title="<?php echo $lang->article->views;?>"><i class='icon-eye-open'></i> <?php echo $article->views;?></span>
-            <?php if($article->comments):?>&nbsp;&nbsp; <span title="<?php echo $lang->article->comments;?>"><i class='icon-comments-alt'></i> <?php echo $article->comments;?></span> &nbsp;<?php endif;?>
-            &nbsp;&nbsp; <span title="<?php echo $lang->article->addedDate;?>"><i class='icon-time'></i> <?php echo substr($article->addedDate, 0, 10);?></span>
+          <div class='card-content text-muted small'>
+            <?php echo $article->summary;?>
+            <div><span title="<?php echo $lang->article->views;?>"><i class='icon-eye-open'></i> <?php echo $article->views;?></span>
+              <?php if($article->comments):?>&nbsp;&nbsp; <span title="<?php echo $lang->article->comments;?>"><i class='icon-comments-alt'></i> <?php echo $article->comments;?></span> &nbsp;<?php endif;?>
+              &nbsp;&nbsp; <span title="<?php echo $lang->article->addedDate;?>"><i class='icon-time'></i> <?php echo substr($article->addedDate, 0, 10);?></span></div>
           </div>
         </div>
         <?php if(!empty($article->image)):?>

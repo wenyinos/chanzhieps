@@ -25,7 +25,7 @@ if(isset($pageCSS)) css::internal($pageCSS);
   <div id='commentsListWrapper'><div id='commentsList'> <?php // Double div for ajax load. ?>
     <?php if(isset($comments) and $comments):?>
     <div class='panel-heading'>
-      <div class='title text-info'><i class='icon-comments'></i> <?php echo $lang->message->list;?></div>
+      <div class='title'><i class='icon-comments'></i> <?php echo $lang->message->list;?></div>
     </div>
     <div class='cards condensed'>
       <?php foreach($comments as $number => $comment):?>
@@ -93,13 +93,13 @@ if(isset($pageCSS)) css::internal($pageCSS);
               <span class='text-muted'>&nbsp;(<?php echo $this->session->user->email;?>)</span>
               <?php echo html::hidden('email', $this->session->user->email); ?>
               <?php endif; ?>
-            </span>&nbsp; 
+            </span>&nbsp;
             <label class='checkbox-inline'><input type='checkbox' name='receiveEmail' value='1' checked /> <?php echo $lang->comment->receiveEmail; ?></label>
           </div>
           <?php endif; ?>
           <div class='form-group hide captcha-box'></div>
           <div class='form-group'>
-            <?php echo html::submitButton('', 'btn primary');?>&nbsp; 
+            <?php echo html::submitButton('', 'btn primary');?>&nbsp;
             <small class="text-important"><?php echo $lang->comment->needCheck;?></small>
           </div>
         </form>

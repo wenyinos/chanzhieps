@@ -55,7 +55,7 @@ js::execute($product->js);
 <?php endif;?>
   <div class='heading'>
     <h2><?php echo $product->name;?></h2>
-    <?php 
+    <?php
     if(!$product->unsaleable)
     {
         echo "<div class='caption'>";
@@ -162,17 +162,16 @@ foreach($product->attributes as $attribute)
     <?php endif;?>
   </tbody>
 </table>
-
+<hr class='space'>
 <div class='panel panel-section'>
-  <div class='panel-heading head-dividing'><i class='icon-file-text-alt text-muted'></i>&nbsp;<strong><?php echo $lang->product->content;?></strong></div>
+  <div class='panel-heading head-dividing hidden'><i class='icon-file-text-alt text-muted'></i>&nbsp;<strong><?php echo $lang->product->content;?></strong></div>
   <div class='panel-body'>
     <div class='article-content'>
       <?php echo $product->content;?>
     </div>
   </div>
   <?php if(!empty($product->files)):?>
-  <hr class='space'>
-  <section class="article-files">
+  <section class='article-files'>
     <?php $this->loadModel('file')->printFiles($product->files);?>
   </section>
   <?php endif;?>
