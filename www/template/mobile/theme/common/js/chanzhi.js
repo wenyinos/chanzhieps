@@ -26,7 +26,7 @@ $(function()
     setRequiredFields();
 
     // make company links on app navbar as modalTrigger to open content with modal
-    $('#appnav .nav-system-company a').modalTrigger();
+    $('#appnav .nav-system-company a, #appnav a[data-toggle="modal"]').modalTrigger();
 
     // set active item on #appnav
     var $appNav = $('#appnav');
