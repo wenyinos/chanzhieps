@@ -21,7 +21,7 @@
       <?php endif;?>
       <div class='card-footer'>
         <?php if($reply->editor): ?>
-        <small><i class="icon-pencil"></i> <?php printf($lang->thread->lblEdited, $reply->editorRealname, $reply->editedDate); ?></small>
+        <small class='hide last-edit'><i class="icon-pencil"></i> <?php printf($lang->thread->lblEdited, $reply->editorRealname, $reply->editedDate); ?></small>
         <?php endif; ?>
         <div class='actions text-right'>
           <?php if($this->app->user->account != 'guest'): ?>
@@ -60,7 +60,7 @@
           </div>
           <div class='form-group clearfix captcha-box hide'></div>
           <div class='form-group'><?php echo html::submitButton('', 'btn primary block');?></div>
-          <?php 
+          <?php
           echo html::hidden('recTotal',   $pager->recTotal);
           echo html::hidden('recPerPage', $pager->recPerPage);
           echo html::hidden('pageID',     $pager->pageTotal);
