@@ -15,9 +15,10 @@
 .create-btn:hover,.empty-holder:hover {color: slateblue;}
 #toBeAdded{font-size: 3px;}
 .icon.icon-edit{color: slateblue; margin: 7px; cursor: pointer;}
-.icon.icon-edit:hover{font-size: 130%;}
+.icon-remove:hover, .icon-edit:hover{font-size: 140%;}
 #input{height: 22px;}
 #removeGroup{text-align: right;}
+.icon-remove{color: #BEBEBE;}
 
 .slide-item-1 {z-index: 20}
 .slide-item-2 {bottom: 15px; right: 15px; z-index: 19;}

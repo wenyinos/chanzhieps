@@ -3,7 +3,7 @@ $(document).ready(function()
     $('.submit').click(function()
     {
         var groupID = $(this).parents('.editGroup').find('.groupID').val();
-        $.setAjaxForm('.editGroupForm' + groupID); 
+        $.setAjaxForm('#editGroupForm' + groupID); 
     });
 
     $('.icon-edit').click(function()
