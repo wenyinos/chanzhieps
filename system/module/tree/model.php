@@ -186,7 +186,7 @@ class treeModel extends model
             $categoryName = '/';
             foreach($origins as $origin)
             {
-                if(empty($origin)) continue;
+                if(isset($origin)) continue;
                 $categoryName .= $categories[$origin]->name . '/';
             }
             $categoryName = rtrim($categoryName, '/');
