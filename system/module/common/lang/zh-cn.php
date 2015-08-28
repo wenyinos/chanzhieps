@@ -373,3 +373,15 @@ $lang->k .= '蝉知门户，开源php企业建站系统！;';
 $lang->k .= '蝉知门户，微网站专家！;';
 $lang->k .= '蝉知门户，微网站首选！;';
 $lang->k .= '蝉知门户，微信营销首选！';
+
+/* Visual edit settings */
+$lang->visual = new stdclass();
+$lang->visual->common  = "可视化编辑";
+$lang->visual->info    = "您正在编辑网站";
+$lang->visual->preview = "预览";
+$lang->visual->exit    = "退出";
+
+$lang->visual->code    = new stdclass();
+$lang->visual->code->logo     = "Logo/名称";
+$lang->visual->code->slogan   = "口号";
+$lang->visual->code->search   = "搜索";
