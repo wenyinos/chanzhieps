@@ -42,7 +42,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
         <div class='tab-pane theme-control-tab-pane' id='contentTab'>
           <table align='center' class='table table-form'>
             <tr>
-              <th class='w-80px'><?php echo $lang->block->type;?></th>
+              <th class='w-100px'><?php echo $lang->block->type;?></th>
               <td><?php echo $this->block->createTypeSelector($template, $type);?></td>
             </tr>
             <tr>
