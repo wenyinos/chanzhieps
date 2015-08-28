@@ -71,7 +71,7 @@ class slide extends control
 
             if($this->slide->create($groupID, $image))
             {
-                $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->inlink('admin', "group={$groupID}")));
+                $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->inlink('browse', "group={$groupID}")));
             }
 
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
