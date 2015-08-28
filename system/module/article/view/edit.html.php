@@ -80,7 +80,7 @@
       </tr>
       <tr>
         <th><?php echo $lang->article->keywords;?></th>
-        <td colspan='2'> <?php echo html::input('keywords', $article->keywords, "class='form-control'");?></td>
+        <td colspan='2'> <?php echo html::input('keywords', $article->keywords, "class='form-control' placeholder='{$lang->keywordsHolder}'");?></td>
       </tr>
       <tr>
         <th><?php echo $lang->article->summary;?></th>

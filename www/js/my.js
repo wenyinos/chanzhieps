@@ -75,4 +75,3 @@ $(document).ready(function()
 
     $('.file-md5 a').popover();
 });
-
