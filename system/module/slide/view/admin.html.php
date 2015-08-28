@@ -53,9 +53,10 @@
           <i class="icon icon-edit"></i>
           <?php echo html::a(inlink('removeGroup', "groupID=$group->id"), '<i class="icon icon-remove"> </i>', "class='deleter'");?>
           <form id="editGroupForm<?php echo $group->id;?>" class='hide' action="<?php echo inlink('editGroup', "groupID=$group->id");?>" method='post' >
-            <div class='editGroup'>
-              <input type='text' name='groupName' id='input' value=<?php echo $group->name;?>>
-              <?php echo html::submitButton('', 'submit btn btn-primary btn-xs') . html::commonButton($lang->cancel, 'cancelButton btn btn-xs');?>
+            <div class='editGroup input-group'>
+              <?php echo html::input('groupName', $group->name, "class='form-control'");?>
+              <span class="input-group-btn"><?php echo html::submitButton('', 'submit btn btn-primary');?> </span>
+              <span class="input-group-btn"><?php echo html::commonButton($lang->cancel, 'cancelButton btn');?></span>
               <?php echo html::hidden('groupID', $group->id, "class='groupID'");?>
             </div>
           </form>
