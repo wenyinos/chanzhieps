@@ -295,7 +295,7 @@ class uri
         $link .= '.' . $viewType;
         if(isset($alias['replyID'])) $link .= '#'  . $alias['replyID'];
 
-        return  getWebRoot(true) . $link;
+        return  $config->webRoot . $link;
     }
 
     /**
