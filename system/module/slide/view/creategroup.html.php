@@ -16,7 +16,7 @@
     <tr>
       <th class='w-80px'><?php echo $lang->slide->groupName;?></th>
       <td><?php echo html::input('name', '', "class='form-control'");?></td>
-      <td><?php echo html::submitButton($lang->slide->createGroup);?></td>
+      <td class='w-200px'><?php echo html::submitButton($lang->slide->createGroup);?></td>
     </tr>
   </table>
 </form>
