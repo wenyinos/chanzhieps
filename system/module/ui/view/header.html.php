@@ -5,17 +5,20 @@
 <nav id='menu'>
   <ul class='nav'>
     <li class='nav-item-primary'>
+      <?php $mobileTemplate = isset($this->config->site->mobileTemplate) ? $this->config->site->mobileTemplate : 'close';?>
+      <?php if($mobileTemplate == 'close'):?>
+      <?php echo html::a('javascript:;', $lang->ui->deviceList->desktop);?>
+      <?php else:?>
       <a href='javascript:;' data-toggle='dropdown'>
         <?php echo $lang->ui->deviceList->{$currentDevice};?> <i class='icon-caret-down'></i>
       </a>
       <ul id='deviceMenu' class='dropdown-menu'>
         <?php foreach($lang->ui->deviceList as $device => $name):?>
-        <?php $mobileTemplate = isset($this->config->site->mobileTemplate) ? $this->config->site->mobileTemplate : 'close';?>
-        <?php if($mobileTemplate == 'close' and $device == 'mobile') continue;?>
         <?php $class = $device == $currentDevice ? "class='active'" : '';?>
         <li <?php echo $class;?>><a href='<?php echo helper::createLink('ui', 'setdevice', "device={$device}")?>'><?php echo $name;?><i class='icon-ok'></i></a></li>
         <?php endforeach;?>
       </ul>
+      <?php endif;?>
     </li>
     <li class="divider angle"></li>
     <li class='menu-theme-picker'>

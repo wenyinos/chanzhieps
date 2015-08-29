@@ -34,6 +34,7 @@ class site extends control
 
             $result = $this->loadModel('setting')->setItems('system.common.site', $setting);
             if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+            if($setting->mobileTemplate == 'close') $this->session->set('device', 'desktop');   
 
             $setting = fixer::input('post')
                 ->setDefault('cn2tw', 0)
