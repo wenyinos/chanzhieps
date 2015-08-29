@@ -26,8 +26,8 @@ $lang->cn = '简';
 $lang->tw = '繁';
 $lang->en = 'EN';
 
-$lang->noRecord = '无';
-$lang->toBeAdded  = '待添加';
+$lang->noRecord  = '无';
+$lang->toBeAdded = '待添加';
 
 $lang->about  = '关于';
 $lang->thanks = '致谢';
