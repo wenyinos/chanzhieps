@@ -3,10 +3,9 @@
 <div class='appinfo clearfix'>
   <div class='copyright pull-left'>
     <?php
-      $copyright = empty($config->site->copyright) ? '' : $config->site->copyright . '-';
       $contact   = json_decode($config->company->contact);
       $company   = (empty($contact->site) or $contact->site == $this->server->http_host) ? $config->company->name : html::a('http://' . $contact->site, $config->company->name, "target='_blank'");
-      echo "&copy; {$copyright}" . date('Y') . ' ' . $company . '&nbsp;&nbsp;';
+      echo "&copy; $company";
       ?>
   </div>
   <div class='icpinfo hide'>
