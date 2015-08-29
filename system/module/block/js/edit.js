@@ -11,4 +11,10 @@ $(document).ready(function()
             $('.captchaModal').click();
         }   
     }); 
+
+
+    $('#params').change(function()
+    {
+       $('#title').val($(this).find("option:selected").text()); 
+    });
 })
