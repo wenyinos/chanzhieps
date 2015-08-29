@@ -12,8 +12,7 @@ $(document).ready(function()
         }   
     }); 
 
-
-    $('#params').change(function()
+    $('[name*=group]').change(function()
     {
        $('#title').val($(this).find("option:selected").text()); 
     });
