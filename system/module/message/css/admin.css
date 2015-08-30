@@ -3,3 +3,4 @@
 dl.alert{margin-top: 10px;}
 dl.alert dl.alert{margin-bottom: 0;}
 .reply-alert {max-height: 100px; overflow-y: scroll;}
+dl.alert dd{display:inline-block; margin-right: 20px;}

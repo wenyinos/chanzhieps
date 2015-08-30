@@ -82,6 +82,7 @@ class messageModel extends model
             foreach($replies as $reply)
             {
                 printf($this->lang->message->replyItem, $reply->from, $reply->date, $reply->content);
+                commonModel::printLink('message', 'delete', "messageID=$reply->id&type=single&status=$reply->status", $this->lang->delete, "class='deleter'");
                 $this->getAdminReplies($reply);
             }
             echo "</dl>";
@@ -171,6 +172,7 @@ class messageModel extends model
     public function getObject($message)
     {
         $object = $this->dao->select('*')->from(TABLE_MESSAGE)->where('id')->eq($message->objectID)->fetch();
+        if(!$object) return false; 
         printf($this->lang->message->messageItem, $object->from, $object->date, $object->content);
     }
 

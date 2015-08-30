@@ -45,7 +45,6 @@ $lang->slide->create      = 'Add';
 $lang->slide->edit        = 'Edit';
 $lang->slide->createGroup = 'Create group';
 $lang->slide->manageGroup = 'Manage group';
-$lang->slide->createGroup = 'Create group';
 $lang->slide->return      = 'Return';
 
 $lang->slide->successSort     = 'Order data saved.';

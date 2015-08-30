@@ -148,27 +148,37 @@ class slide extends control
         $this->display();     
     }
 
+    /**
+     * Edit group name.
+     * 
+     * @param  int    $groupID 
+     * @access public
+     * @return void
+     */
     public function editGroup($groupID)
     {
         $group = $this->loadModel('tree')->getByID($groupID);
 
         if($_POST) 
         {
+            if(!$this->post->name) $this->send(array('result' => 'fail', 'message' => $this->lang->slide->groupNotEmpty));
             if($this->post->groupName == $group->name) $this->send(array('result' => 'fail', 'message' => $this->lang->slide->noChange));
+
             $result = $this->loadModel('tree')->editSlideGroup($groupID);
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
     }
+
     /**
-     * Remove group. 
+     * Remove a group. 
      * 
      * @access public
      * @return void
      */
     public function removeGroup($groupID)
     {
-        $result  = $this->loadModel('tree')->removeSlideGroup($groupID);
+        $result = $this->loadModel('tree')->removeSlideGroup($groupID);
 
         if($result) $this->send(array('result' => 'success'));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));

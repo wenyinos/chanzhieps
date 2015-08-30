@@ -45,7 +45,6 @@ $lang->slide->create      = '添加幻灯片';
 $lang->slide->edit        = '编辑幻灯片';
 $lang->slide->createGroup = '添加分组';
 $lang->slide->manageGroup = '设置分组';
-$lang->slide->createGroup = '创建分组';
 $lang->slide->return      = '返回分组';
 
 $lang->slide->successSort     = '排序成功保存';
