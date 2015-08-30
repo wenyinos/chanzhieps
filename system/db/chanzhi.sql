@@ -537,7 +537,7 @@ CREATE TABLE IF NOT EXISTS `eps_order` (
   `amount` decimal(8,2) NOT NULL DEFAULT '0.00',
   `payment` char(30) NOT NULL,
   `sn` char(50) NOT NULL,
-  `address` varchar(200) NOT NULL,
+  `address` text NOT NULL,
   `note` text NOT NULL,
   `createdDate` datetime NOT NULL,
   `paidDate` datetime NOT NULL,
