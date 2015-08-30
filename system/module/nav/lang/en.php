@@ -31,14 +31,18 @@ $lang->nav->types['custom']  = 'Custom';
 $lang->nav->system = new stdclass();
 $lang->nav->system->home    = 'Home';
 $lang->nav->system->company = 'About';
+$lang->nav->system->contact = 'Contact';
 $lang->nav->system->forum   = 'Forum';
 $lang->nav->system->blog    = 'Blog';
 $lang->nav->system->book    = 'Book';
 $lang->nav->system->message = 'Inquire';
 
-$lang->nav->desktop = 'Desktop';
-$lang->nav->mobile  = 'Mobile';
+$lang->nav->desktop       = 'Desktop';
+$lang->nav->mobile_top    = 'Top Of Mobile';
+$lang->nav->mobile_bottom = 'Bottom Of Mobile';
 
 /* Targets setting. */
-$lang->nav->newWindow = new stdclass();
-$lang->nav->newWindow->_blank = 'New window';
+$lang->nav->targetList = array();
+$lang->nav->targetList['_self']  = 'Current window';
+$lang->nav->targetList['_blank'] = 'New window';
+$lang->nav->targetList['modal']  = 'Modal window';

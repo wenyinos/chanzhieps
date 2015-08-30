@@ -3,10 +3,9 @@
 <div class='appinfo clearfix'>
   <div class='copyright pull-left'>
     <?php
-      $copyright = empty($config->site->copyright) ? '' : $config->site->copyright . '-';
       $contact   = json_decode($config->company->contact);
       $company   = (empty($contact->site) or $contact->site == $this->server->http_host) ? $config->company->name : html::a('http://' . $contact->site, $config->company->name, "target='_blank'");
-      echo "&copy; {$copyright}" . date('Y') . ' ' . $company . '&nbsp;&nbsp;';
+      echo "&copy; $company";
       ?>
   </div>
   <div class='icpinfo hide'>
@@ -18,10 +17,26 @@
   </div>
 </div>
 
+<?php $bottomNavs = $this->loadModel('nav')->getNavs('mobile_bottom');?>
 <footer  class="appbar fix-bottom">
   <ul class="nav">
-    <li><?php echo html::a($this->createLink('company', 'contact'), "<i class='icon icon-comments-alt'></i> {$lang->company->contactUs}", "class='text-primary' data-toggle='modal'");?></li>
-    <li><?php echo html::a($this->createLink('company', 'index'), "<i class='icon icon-group'></i> {$lang->aboutUs}", "class='text-important' data-toggle='modal'");?></li>
+    <?php foreach($bottomNavs as $nav):?>
+    <?php
+    $icon  = '';
+    $class = '';
+    if($nav->system == 'contact')
+    {
+        $icon = "<i class='icon icon-comments-alt'></i> ";
+        $class = "class='text-primary'";
+    }
+    if($nav->system == 'company')
+    {
+        $icon = "<i class='icon icon-group'></i> ";
+        $class = "class='text-important'";
+    }
+    ?>
+    <li><?php echo html::a($nav->url, $icon . $nav->title, ($nav->target != 'modal') ? "target='$nav->target' $class" : "data-toggle='modal' $class");?></li>
+    <?php endforeach;?>
   </ul>
 </footer>
 <?php

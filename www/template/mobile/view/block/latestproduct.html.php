@@ -19,7 +19,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
 ?>
 <div id="block<?php echo $block->id;?>" class="panel-cards with-cards panel panel-block <?php echo $blockClass;?>">
   <div class='panel-heading'>
-    <strong><?php echo $icon;?> <?php echo $block->title . $content->recPerRow;?></strong>
+    <strong><?php echo $icon;?> <?php echo $block->title . zget($content, 'recPerRow', 1);?></strong>
     <?php if(!empty($content->moreText) and !empty($content->moreUrl)):?>
     <div class='pull-right'><?php echo html::a($content->moreUrl, $content->moreText);?></div>
     <?php endif;?>
@@ -29,7 +29,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
     <div class='row cards cards-products'>
       <?php
       $cardsCols = array();
-      $colsCount = min($content->recPerRow, count($products));
+      $colsCount = min( zget($content, 'recPerRow', 1), count($products));
       for ($i = 0; $i < $colsCount; $i++) $cardsCols[$i] = '';
       $index = 0;
       foreach($products as $product)
@@ -75,13 +75,13 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
               }
               else if($product->price != 0)
               {
-                  $card .= "<div><strong class='text-danger'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->price . '</strong></div>';
+                  $card .= "<div><strong class='text-danger'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency, '￥') . $product->price . '</strong></div>';
               }
           }
           $card .= '</div>'; // end of .card-content
           $card .= '</div>';   // end of .card
 
-          $cardsCols[$index % $content->recPerRow] .= $card;
+          $cardsCols[$index % zget($content, 'recPerRow', 1)] .= $card;
           $index++;
       }
       ?>

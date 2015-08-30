@@ -359,8 +359,8 @@ class productModel extends model
      */
     public function saveAttributes($productID)
     {
-        $lables = $this->post->label;
-        $values = $this->post->value;
+        $lables = fixer::input('post')->get('label');
+        $values =  fixer::input('post')->get('value');
 
         $data = new stdclass();
         $data->product = $productID;

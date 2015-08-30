@@ -24,14 +24,13 @@
           <div id='createForm'></div>
           <?php foreach($addresses as $address):?>
           <?php
-          $addressText = $address->contact . ' [' . $address->phone . '] ' . $address->address . ' ' . $address->zipcode;
           if(!isset($checked)) $checked = 'checked';
           else $checked = '';
           ?>
           <div class='item'>
             <div class='address-list'>
               <?php if(helper::isAjaxRequest()):?>
-              <span><input type='radio' <?php echo $checked;?> name='deliveryAddress' value='<?php echo $addressText;?>'/></span>
+              <span><input type='radio' <?php echo $checked;?> name='deliveryAddress' value='<?php echo $address->id;?>'/></span>
               <?php endif;?>
               <strong><?php echo $address->contact;?></strong>
               <span> <?php echo $address->phone;?></span>

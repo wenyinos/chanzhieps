@@ -160,7 +160,7 @@ class seo
      */
     public static function unify($string, $to = ',')
     {
-        $labels = array('_', '、', ' ', '-', '\n', '?', '@', '&', '%', '~', '`', '+', '*', '/', '\\', '，', '。');
+        $labels = array('_', '、', '-', '\n', '?', '@', '&', '%', '~', '`', '+', '*', '/', '\\', '，', '。');
         $string = str_replace($labels, $to, $string);
         return preg_replace("/[{$to}]+/", $to, trim($string, $to));
     }
@@ -295,7 +295,7 @@ class uri
         $link .= '.' . $viewType;
         if(isset($alias['replyID'])) $link .= '#'  . $alias['replyID'];
 
-        return  getWebRoot(true) . $link;
+        return  $config->webRoot . $link;
     }
 
     /**

@@ -8,23 +8,18 @@ $(document).ready(function()
 
     $('.icon-edit').click(function()
     {
+        //Just show current edit form.
+        $('.icon-edit').parents('.card-heading').find('form').hide();
+        $('.icon-edit').show();
+        $('.icon-edit').next('.deleter').show();
+        $('.icon-edit').prev('#name').show();
+
         $(this).hide();
-        $(this).next('.deleter').hide();
-        $(this).prev('#name').hide();
+        $(this).parent().next('.deleter').hide();
+        $(this).parent().prev('#name').hide();
         $(this).parents('.card-heading').find('form').show();
         $(this).parents('.card-heading').find('#input').focus();
     });
-
-    //$('.edit.submit').click(function()
-    //{
-    //    if($(this).next('#input') == v.oldname)  
-    //    {
-    //        submitButton.popover({trigger:'manual', content:response.message, placement:'right'}).popover('show');
-    //        submitButton.next('.popover').addClass('popover-success');
-    //        function distroy(){submitButton.popover('destroy')}
-    //        setTimeout(distroy,2000);
-    //    }
-    //}
     
     $('.cancelButton').click(function()
     {

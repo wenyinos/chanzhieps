@@ -24,14 +24,13 @@
     <div class='cards condensed cards-list' id='addressList'>
       <?php foreach($addresses as $address):?>
       <?php
-        $addressText = $address->contact . ' [' . $address->phone . '] ' . $address->address . ' ' . $address->zipcode;
         if(!isset($checked)) $checked = 'checked';
         else $checked = '';
       ?>
       <div class='card'>
         <div class='card-heading'>
           <?php if(helper::isAjaxRequest()):?>
-          <input type='radio' <?php echo $checked;?> name='deliveryAddress' value='<?php echo $addressText;?>'/>
+          <input type='radio' <?php echo $checked;?> name='deliveryAddress' value='<?php echo $address->id;?>'/>
           <?php endif;?>
           <strong class='lead'><?php echo $address->contact;?></strong>
           &nbsp;&nbsp;<span class='text-special'><i class='icon icon-phone'></i> <?php echo $address->phone;?></span>

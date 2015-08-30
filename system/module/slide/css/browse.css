@@ -1,4 +1,4 @@
-.panel{margin: 0 8%;}
+.panel{margin: 0 5%;}
 .carousel {border-radius: 0}
 .carousel-inner .item, .carousel-inner .item > img {max-height: 150px; border-radius: 4px 4px 0 0;}
 .carousel-inner .item.show, .carousel-inner .item.show > img {max-height: inherit; border-radius: 4px; box-shadow: none}
@@ -12,6 +12,6 @@ a.btn-sm{margin-bottom:5px;padding:5px;}
 .table{margin-bottom: 0;}
 .table td:last-child{border-bottom: none;}
 .item.active{height: 140px; text-align: center;}
-.carousel-inner>.item>img {max-height: 100%; min-height: none; max-height: none}
+.carousel-inner>.item>img {min-height: none; max-height: none;max-width: 1000px;}
 .mainbutton{text-align: right; padding-bottom:5px;}
-.btn.btn-primary.return{background-color: orange; border-style: none}
+.btn.btn-primary.return{background-color: orange; border-style: none;}
