@@ -38,8 +38,8 @@ $lang->nav->system->book    = '手冊';
 $lang->nav->system->message = '留言';
 
 $lang->nav->desktop       = '桌面';
-$lang->nav->mobile_top    = '移動頂部';
-$lang->nav->mobile_bottom = '移動底部';
+$lang->nav->mobile_top    = '移動版頂部';
+$lang->nav->mobile_bottom = '移動版底部';
 
 /* Targets setting. */
 $lang->nav->targetList = array();

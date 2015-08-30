@@ -44,14 +44,15 @@ $lang->slide->admin       = '幻燈片設置';
 $lang->slide->create      = '添加幻燈片';
 $lang->slide->edit        = '編輯幻燈片';
 $lang->slide->createGroup = '添加分組';
-$lang->slide->manageGroup = '設置分組';
-$lang->slide->createGroup = '創建分組';
+$lang->slide->editGroup   = '編輯分組';
+$lang->slide->removeGroup = '刪除分組';
 $lang->slide->return      = '返回分組';
 
 $lang->slide->successSort     = '排序成功保存';
 $lang->slide->noImageSelected = '沒有選擇圖片';
 $lang->slide->suitableSize    = '背景圖片大小保持一致。';
 $lang->slide->noChange        = '未做更改';
+$lang->slide->groupNotEmpty   = '名稱不能為空';
 
 $lang->slide->defaultGroup = '預設分組';
 
