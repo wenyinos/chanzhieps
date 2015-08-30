@@ -1,12 +1,15 @@
 $(function()
 {
-    $.setAjaxForm('.ve-form', function(data)
+    if($('.ve-form').length)
     {
-        if(data.result === 'success')
+        $.setAjaxForm('.ve-form', function(data)
         {
-            var parent$ = window.parent.$
-            parent$.closeModal();
-            parent$.updateVisualArea(data);
-        }
-    });
+            if(data.result === 'success')
+            {
+                var parent$ = window.parent.$
+                parent$.closeModal();
+                parent$.updateVisualArea(data);
+            }
+        });
+    }
 });

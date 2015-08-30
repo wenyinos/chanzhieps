@@ -12,6 +12,19 @@
 class visual extends control
 {
     /**
+     * Visual index
+     *
+     * @access public
+     * @return void
+     */
+    public function index($referer = '/')
+    {
+        $this->view->referer = $referer;
+        $this->view->title = $this->lang->visual->common;
+        $this->display();
+    }
+
+    /**
      * Eidt logo
      *
      * @access public
