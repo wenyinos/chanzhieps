@@ -135,9 +135,11 @@ class slide extends control
      */
     public function createGroup()
     {
-        $result = $this->loadModel('tree')->createSlideGroup();
         if($_POST)
         {
+            if(!$this->post->name) $this->send(array('result' => 'fail', 'message' => $this->lang->slide->groupNotEmpty));
+
+            $result = $this->loadModel('tree')->createSlideGroup();
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->createSuccess, 'locate' => inlink('admin')));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }

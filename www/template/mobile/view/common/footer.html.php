@@ -3,10 +3,9 @@
 <div class='appinfo clearfix'>
   <div class='copyright pull-left'>
     <?php
-      $copyright = empty($config->site->copyright) ? '' : $config->site->copyright . '-';
       $contact   = json_decode($config->company->contact);
       $company   = (empty($contact->site) or $contact->site == $this->server->http_host) ? $config->company->name : html::a('http://' . $contact->site, $config->company->name, "target='_blank'");
-      echo "&copy; {$copyright}" . date('Y') . ' ' . $company . '&nbsp;&nbsp;';
+      echo "&copy; $company";
       ?>
   </div>
   <div class='icpinfo hide'>
@@ -14,7 +13,7 @@
     <?php if(empty($config->site->icpLink) and !empty($config->site->icpSN))  echo $config->site->icpSN;?>
   </div>
   <div class='powerby pull-right'>
-    <?php printf($lang->poweredBy, $config->version, k(), "<object data='{$templateCommonRoot}img/chanzhi.xml' type='image/svg+xml'>{$lang->chanzhiEPSx}</object> <span class='name hide'>" . $lang->chanzhiEPSx . '</span>' . $config->version); ?>
+    <?php printf($lang->poweredBy, $config->version, k(), "<object style='position: relative; top: 2px' data='{$templateCommonRoot}img/chanzhi.xml' type='image/svg+xml'>{$lang->chanzhiEPSx}</object> <span class='name hide'>" . $lang->chanzhiEPSx . '</span>' . $config->version); ?>
   </div>
 </div>
 
