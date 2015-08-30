@@ -1,32 +1,38 @@
 $(document).ready(function()
 {
-    $('.submit').click(function()
+    var $editGroupForm = $('#editGroupForm');
+    var hideEditForm = function()
     {
-        var groupID = $(this).parents('.editGroup').find('.groupID').val();
-        $.setAjaxForm('#editGroupForm' + groupID); 
+        $('.group-title').show();
+        $editGroupForm.hide();
+    };
+
+    $.setAjaxForm('#editGroupForm', function(response)
+    {
+        $editGroupForm.find('#submit').popover('destroy');
+        if(response.result === 'success')
+        {
+            $editGroupForm.prev('.group-title').find('.group-name').text($editGroupForm.find('#groupName').val());
+            hideEditForm();
+            if(response.message)
+            {
+                (window.messager || $.zui.messager).success(response.message);
+            }
+        }
+        else
+        {
+            (window.messager || $.zui.messager).warning(response.message);
+        }
     });
 
-    $('.icon-edit').click(function()
+    $(document).on('click', '.edit-group-btn', function()
     {
-        //Just show current edit form.
-        $('.icon-edit').parents('.card-heading').find('form').hide();
-        $('.icon-edit').show();
-        $('.icon-edit').next('.deleter').show();
-        $('.icon-edit').prev('#name').show();
-
-        $(this).hide();
-        $(this).parent().next('.deleter').hide();
-        $(this).parent().prev('#name').hide();
-        $(this).parents('.card-heading').find('form').show();
-        $(this).parents('.card-heading').find('#input').focus();
-    });
-    
-    $('.cancelButton').click(function()
-    {
-        $(this).parents('form').hide();
-        $(this).parents('.card-heading').find('#name').show();
-        $(this).parents('.card-heading').find('.icon-edit').show();
-        $(this).parents('.card-heading').find('.deleter').show();
-    });
+        var $group = $(this).closest('.group-title');
+        $editGroupForm.attr('action', $group.data('action')).find('#groupID').val($group.data('id'));
+        $editGroupForm.find('#groupName').val($group.find('.group-name').text());
+        $('.group-title').show();
+        $group.after($editGroupForm);
+        $group.hide();
+        $editGroupForm.show().find('#groupName').focus();
+    }).on('click', '.btn-close-form', hideEditForm);
 })
-
