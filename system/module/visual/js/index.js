@@ -12,7 +12,6 @@
         $ve.addClass('ve');
         var $hint = visual$('<div class="ve-hint"><i class="icon icon-pencil"></i><span class="ve-hint-name nobr"> ' + window.v.visualEdit + ' ' + visuals[code] + '</span></div>');
         $ve.append($hint);
-        console.log($hint, $ve);
         return $ve;
     };
 
