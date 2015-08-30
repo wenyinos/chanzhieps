@@ -168,8 +168,10 @@ class slide extends control
      */
     public function removeGroup($groupID)
     {
-        $result  = $this->loadModel('tree')->removeSlideGroup($groupID);
-
+        $this->dao->delete()->from(TABLE_SLIDE)->where('`group`')->eq($groupID)->exec();
+        if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        
+        $result  = $this->loadModel('tree')->delete($groupID);
         if($result) $this->send(array('result' => 'success'));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
