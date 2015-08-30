@@ -163,6 +163,12 @@ class cartModel extends model
         setcookie('cart', json_encode($cart), time() + 60 * 60 * 24);
     }
 
+    /**
+     * Merge goods in cookie to db if user is logon. 
+     * 
+     * @access public
+     * @return void
+     */
     public function mergeToDb()
     {
         if($this->app->user->account == 'guest') return true;
