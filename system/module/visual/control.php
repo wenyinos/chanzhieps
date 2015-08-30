@@ -27,7 +27,7 @@ class visual extends control
             $return = $this->loadModel('ui')->setOptionWithFile($section = 'logo', $htmlTagName = 'logo');
 
             if($nameResult || $return['result']) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
-            else $this->send(array('result' => 'fail', 'message' => $return['message'] . $_POST['name']));
+            else $this->send(array('result' => 'fail', 'message' => $return['message']));
         }
         $this->app->loadLang('ui');
         $template = $this->config->template->{$this->device}->name;
@@ -38,8 +38,23 @@ class visual extends control
 
         $this->view->title = $this->lang->ui->setLogo;
         $this->view->logo  = $logo;
+        $this->display();
+    }
 
-        $this->view->title = $this->lang->edit . ' ' . $this->lang->visual->code->logo;
+    /**
+     * Eidt slogan
+     *
+     * @access public
+     * @return void
+     */
+    public function slogan()
+    {
+        if(!empty($_POST))
+        {
+            $result = $this->loadModel('setting')->setItem('system.common.site.slogan', $_POST['slogan']);
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
+            else $this->send(array('result' => 'fail', 'message' => ''));
+        }
         $this->display();
     }
 }
