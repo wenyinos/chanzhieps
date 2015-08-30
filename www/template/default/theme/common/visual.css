@@ -17,10 +17,6 @@
   to {background: rgba(0, 255, 0, .3); border-color: #38b03f}
 }
 
-/* Visual panel */
-#visualPanel {padding: 10px; border: 1px solid #ddd; box-shadow: 0 1px 5px rgba(0,0,0,.124); position: fixed; right: -1px; top: -1px; background-color: rgba(255, 255, 255, 0.85); z-index: 950;}
-#visualPanel .btn + .btn {margin-left: 10px;}
-
 /* Visual editable area */
 .ve {position: relative; overflow: hidden;}
 .ve:before {content: ' '; display: block; position: absolute; left: 0; top: 0; right: 0; bottom: 0; border: 1px solid rgba(0, 255, 0, .2); z-index: 960; cursor: pointer; background: rgba(0, 255, 0, .1);}
