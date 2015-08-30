@@ -591,20 +591,6 @@ class treeModel extends model
     }
 
     /**
-     * Remove slide group. 
-     * 
-     * @param  int    $groupID 
-     * @access public
-     * @return bool 
-     */
-    public function removeSlideGroup($groupID)
-    {
-        $this->dao->delete()->from(TABLE_SLIDE)->where('`group`')->eq($groupID)->exec();
-        $this->dao->delete()->from(TABLE_CATEGORY)->where('id')->eq($groupID)->exec();
-        return !dao::isError();
-    }
-    
-    /**
      * Check if alias available.
      *
      * @param  object    $category 
