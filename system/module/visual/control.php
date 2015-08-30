@@ -21,9 +21,13 @@ class visual extends control
     {
         if(!empty($_POST))
         {
+            $nameResult = false;
+            if(!empty($_POST['name'])) $nameResult = $this->loadModel('setting')->setItem('system.common.site.name', $_POST['name']);
+
             $return = $this->loadModel('ui')->setOptionWithFile($section = 'logo', $htmlTagName = 'logo');
-            if($return['result']) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
-            if(!$return['result']) $this->send(array('result' => 'fail', 'message' => $return['message']));
+
+            if($nameResult || $return['result']) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
+            else $this->send(array('result' => 'fail', 'message' => $return['message'] . $_POST['name']));
         }
         $this->app->loadLang('ui');
         $template = $this->config->template->{$this->device}->name;
