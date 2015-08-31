@@ -2,10 +2,10 @@
      }
 
 .text-success{color : olivedrab;  
-              margin: 10px;
+              margin: 0 0 15px 0;
              }
 
 a:hover{color: olivedrab;}
-.text-success{padding: 0 10px 10px} 
-.right-footer{text-align: right}
-
+.text-success{padding: 0 10px 10px;} 
+.right-footer{text-align: right;}
+.modal-header{border-bottom: none;}
