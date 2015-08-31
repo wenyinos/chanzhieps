@@ -54,7 +54,6 @@ class misc extends control
      */
     public function thanks()
     {
-        $this->view->title      = $this->lang->thanks;
         $this->view->modalWidth = 700;
         $this->display();
     }
