@@ -3,7 +3,7 @@ if(RUN_MODE == 'front')
 {
     if(isset($this->config->site->front) and $this->config->site->front == 'login')
     {
-        include '../../common/view/header.admin.html.php';
+        include  TPL_ROOT . 'user/login.admin.html.php';
     }
     else
     {
@@ -12,5 +12,5 @@ if(RUN_MODE == 'front')
 }
 else
 {
-    include '../../common/view/header.admin.html.php';
+    include  TPL_ROOT . 'user/login.admin.html.php';
 }

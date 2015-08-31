@@ -11,70 +11,74 @@
  */
 ?>
 <?php include TPL_ROOT . 'common/header.html.php';?>
-<?php 
-$leftCards  = '';
-$rightCards = '';
-$index = 0;
-foreach($products as $product)
-{
-    $url   = inlink('view', "id={$product->id}", "category={$product->category->alias}&name=$product->alias");
-    $card = "<a class='card' href='{$url}'>";
-    
-    if(empty($product->image)) 
-    {
-        $imgColor = $product->id * 57 % 360;
-        $card .= "<div class='card-img holder'><div class='media-placeholder' style='background-color: hsl({$imgColor}, 60%, 80%); color: hsl({$imgColor}, 80%, 30%);' data-id='{$product->id}'>{$product->name}</div></div>";
-    }
-    else
-    {
-        $card .= "<div class='card-img'>" . html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'") . '</div>';
-    }
-
-    $card .= "<div class='card-content'>";
-    $card .= "<div>{$product->name}</div>";
-    if(!$product->unsaleable)
-    {
-        if($product->promotion != 0)
-        {
-            $card .= "<strong class='text-danger'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->promotion . '</strong>';
-            if($product->price != 0)
-            {
-                $card .= "&nbsp;&nbsp;<small class='text-muted text-line-through'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->price . '</small>';
-            }
-        }
-        else if($product->price != 0)
-        {
-            $card .= "<strong class='text-danger'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->price . '</strong>';
-        }
-    }
-    $card .= '</div>'; // end of .card-content
-
-    $card .= '</a>';   // end of .card
-    if($index % 2 == 0) $leftCards .= $card;
-    else $rightCards .= $card;
-    $index++;
-}
-?>
-
 <div class='block-region region-top'><?php $this->loadModel('block')->printRegion($layouts, 'product_browse', 'top');?></div>
-
-<div class='panel panel-section'>
+<div class='panel-section'>
   <div class='panel-heading'>
     <div class='title'><strong><?php echo $category->name;?></strong></div>
   </div>
   <div class='panel-body'>
-    <div class='row cards cards-products'>
-      <div class='col-6'>
-        <?php echo $leftCards;?>
+    <?php
+    $count = count($products);
+    $recPerRow = min($count, 2);
+    ;?>
+    <div class='cards cards-products' data-cols='<?php echo $recPerRow?>'>
+      <style><?php echo ".col-custom-{$recPerRow} {width: " . (100/$recPerRow) . "%}"; ?></style>
+      <?php
+      $index = 0;
+      foreach($products as $product):
+      ?>
+      <?php $rowIndex = $index % $recPerRow; ?>
+      <?php if($rowIndex === 0): ?>
+      <div class='row'>
+      <?php endif; ?>
+
+      <div class='col col-custom-<?php echo $recPerRow?>'>
+      <?php $url = helper::createLink('product', 'view', "id=$product->id", "category={$product->category->alias}&name=$product->alias"); ?>
+        <div class='card'>
+          <a class='card-img' href='<?php echo $url?>'>
+            <?php
+            if(empty($product->image))
+            {
+                $imgColor = $product->id * 57 % 360;
+                echo "<div class='media-placeholder' style='background-color: hsl({$imgColor}, 60%, 80%); color: hsl({$imgColor}, 80%, 30%);' data-id='{$product->id}'>{$product->name}</div>";
+            }
+            else
+            {
+                echo html::image($product->image->primary->middleURL, "title='{$product->name}' alt='{$product->name}'");
+            }
+            ?>
+          </a>
+          <div class='card-content'>
+            <?php
+            echo "<a href='{$url}'>{$product->name}</a>";
+            if(!$product->unsaleable)
+            {
+                if($product->promotion != 0)
+                {
+                    echo "<div><strong class='text-danger'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->promotion . '</strong>';
+                    if($product->price != 0)
+                    {
+                        echo "&nbsp;&nbsp;<small class='text-muted text-line-through'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->price . '</small></div>';
+                    }
+                }
+                else if($product->price != 0)
+                {
+                    echo "<div><strong class='text-danger'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency, '￥') . $product->price . '</strong></div>';
+                }
+            }
+            ?>
+          </div>
+        </div>
       </div>
-      <div class='col-6'>
-        <?php echo $rightCards;?>
+
+      <?php if($recPerRow === 1 || $rowIndex === ($recPerRow - 1)): ?>
       </div>
+      <?php endif; ?>
+      <?php $index++; ?>
+      <?php endforeach; ?>
     </div>
   </div>
-  <div class='panel-footer'>
-    <?php $pager->show('justify');?>
-  </div>
+  <?php $pager->show('justify');?>
 </div>
 
 <div class='block-region region-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'product_browse', 'bottom');?></div>
