@@ -1,9 +1,10 @@
 <?php include "header.html.php"; ?>
 <?php
-js::set('visuals', $lang->visual->code);
-js::set('visualEdit', $lang->edit);
+js::set('visuals', $lang->visual->config);
+js::set('visualActions', $lang->visual->actionsName);
+js::set('visualSaved', $lang->saveSuccess);
+js::set('visualDeleted', $lang->deleteSuccess);
 js::set('visualStyle', $themeRoot . 'common/visual.css');
-js::set('visualScript', $jsRoot . 'visual.js');
 ?>
 <div class='navbar navbar-fixed-top' id='visualPanel'>
   <div class='container'>

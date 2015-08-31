@@ -18,12 +18,17 @@
 }
 
 /* Visual editable area */
-.ve {position: relative; overflow: hidden;}
+.ve {position: relative;}
 .ve:before {content: ' '; display: block; position: absolute; left: 0; top: 0; right: 0; bottom: 0; border: 1px solid rgba(0, 255, 0, .2); z-index: 960; cursor: pointer; background: rgba(0, 255, 0, .1);}
 .ve:hover::before, .ve.ve-editing:before {animation: hightlight .8s alternate infinite}
 
-.ve-hint {background-color: #38b03f; color: #fff; font-size: 13px; position: absolute; top: 0; padding: 2px 5px; right: 0; z-index: 960; line-height: 20px; right: 0; transition: opacity .2s; opacity: 0; cursor: pointer;}
-.ve:hover .ve-hint, .ve.ve-editing .ve-hint {opacity: 1}
+.ve-heading {background-color: #38b03f; background-color: rgba(56, 176, 63, 0.8); color: #fff; font-size: 13px; position: absolute; top: 0; padding: 0; left: 0; z-index: 960; line-height: 20px; right: 0; transition: opacity .2s; opacity: 0;}
+.ve-name {display: inline-block; padding: 0 5px; text-shadow: 1px 1px 1px rgba(0,0,0,.1)}
+.ve-actions {float: right; display: block; margin: 0; padding: 0;}
+.ve-actions > li {float: left; display: block; padding: 0 3px; min-width: 20px; text-align: center; cursor: pointer; margin-left: 1px; background-color: rgba(0,0,0,.2);}
+.ve-actions > li:hover {background-color: rgba(0,0,0,.4);}
+.ve-actions > li.ve-action-delete:hover {background-color: #b93015;}
+.ve:hover .ve-heading, .ve.ve-editing .ve-heading {opacity: 1}
 
 body.ve-preview-in .ve:before {display: none!important}
 

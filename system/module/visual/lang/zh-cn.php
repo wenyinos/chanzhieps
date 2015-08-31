@@ -16,7 +16,8 @@ $lang->visual->info    = "您正在编辑网站";
 $lang->visual->preview = "预览";
 $lang->visual->exit    = "退出";
 
-$lang->visual->code    = new stdclass();
-$lang->visual->code->logo     = "Logo/名称";
-$lang->visual->code->slogan   = "口号";
-$lang->visual->code->search   = "搜索";
+$lang->visual->actionsName = array('edit' => '编辑', 'delete' => '删除', 'move' => '移动');
+
+$lang->visual->config           = new stdclass();
+$lang->visual->config->logo     = array('name' => "Logo/名称", 'width' => 900);
+$lang->visual->config->slogan   = array('name' => "口号",      'width' => 700,  'actions' => array('delete' => true, 'move' => true));
