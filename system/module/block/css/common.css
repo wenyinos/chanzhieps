@@ -39,9 +39,9 @@
 #dialogPanelPreivew.panel-preview {margin-bottom: 10px; padding: 10px 20px 15px 20px;}
 #dialogPanelPreivew.panel-preview > .panel {max-width: 500px}
 
-form .dropdown-menu {width:600px;}
+form .dropdown-menu {width:800px;}
 form .dropdown-menu > li {float:left; }
-form .dropdown-menu > li dl{ width:100px; margin: 0 20px;}
+form .dropdown-menu > li dl{ width:160px; margin: 0 10px;}
 form .dropdown-menu > li dl dt{ padding:5px; border-bottom: 1px solid #DDD; text-align:center;}
 form .dropdown-menu > li dl dd{ padding: 8px; text-align:center; border-radius:5px;}
 form .dropdown-menu > li dl dd:hover,
