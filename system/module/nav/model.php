@@ -84,7 +84,7 @@ class navModel extends model
      * @param array $nav
      * @return string
      */
-    public function createEntry($grade = 1, $nav = null)
+    public function createEntry($grade = 1, $nav = null, $type = 'desktop_top')
     {
         if(empty($nav))
         {
@@ -128,6 +128,7 @@ class navModel extends model
         $entry .= html::hidden("nav[{$grade}][key][]", '', "class='input grade{$grade}key'"); 
 
         /* nav target select. */
+        if(strpos($type, 'desktop_') !== false) unset($this->lang->nav->targetList['modal']);
         $entry .= html::select("nav[$grade][target][]", $this->lang->nav->targetList, isset($nav->target) ? $nav->target : '_self', "class='form-control'");
 
         /* operate buttons. */
