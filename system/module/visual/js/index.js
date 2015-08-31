@@ -42,8 +42,8 @@
     var updateVisualArea = function(data)
     {
         var $ve = visual$('.ve-editing').first();
-        var code = $ve.data('ve');
-        var selector = '[data-ve="' + code + '"]';
+        var id = $ve.attr('id');
+        var selector = '#' + id;
         var $wrapper = visual$('<div/>');
         $wrapper.load(visualPageUrl + ' ' + selector, function(data)
         {
