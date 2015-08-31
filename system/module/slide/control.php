@@ -161,7 +161,7 @@ class slide extends control
 
         if($_POST) 
         {
-            if(!$this->post->name) $this->send(array('result' => 'fail', 'message' => $this->lang->slide->groupNotEmpty));
+            if(!$this->post->groupName) $this->send(array('result' => 'fail', 'message' => $this->lang->slide->groupNotEmpty));
             if($this->post->groupName == $group->name) $this->send(array('result' => 'fail', 'message' => $this->lang->slide->noChange));
 
             $result = $this->loadModel('tree')->editSlideGroup($groupID);
