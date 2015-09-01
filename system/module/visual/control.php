@@ -30,7 +30,7 @@ class visual extends control
      * @access public
      * @return void
      */
-    public function logo()
+    public function editlogo()
     {
         if(!empty($_POST))
         {
@@ -60,7 +60,7 @@ class visual extends control
      * @access public
      * @return void
      */
-    public function slogan()
+    public function editslogan()
     {
         if(!empty($_POST))
         {

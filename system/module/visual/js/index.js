@@ -83,7 +83,7 @@
         var config = visuals[code];
         window.modalTrigger.show(
         {
-            url: window.config.webRoot + 'admin.php?m=visual&f=' + code,
+            url: window.config.webRoot + 'admin.php?m=visual&f=edit' + code,
             type: 'iframe',
             width: config.width,
             icon: config.icon || 'pencil',
