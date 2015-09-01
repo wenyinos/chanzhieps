@@ -21,7 +21,7 @@ if(isset($pageCSS)) css::internal($pageCSS);
 <div class='page-container'>
   <?php $this->block->printRegion($layouts, 'all', 'top');?>
   <?php $topNavs = $this->loadModel('nav')->getNavs('desktop_top');?>
-  <nav id='navbar' class='navbar' role='navigation'>
+  <nav id='navbar' class='navbar' role='navigation' data-ve='navbar'>
     <div class='navbar-header'>
       <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#navbarCollapse'>
         <span class='icon-bar'></span>

@@ -18,7 +18,7 @@
 }
 
 /* Visual editable area */
-.ve {position: relative;}
+.ve {position: relative; overflow: visible; cursor: pointer;}
 .ve:before {content: ' '; display: block; position: absolute; left: 0; top: 0; right: 0; bottom: 0; border: 1px solid rgba(0, 255, 0, .2); z-index: 960; cursor: pointer; background: rgba(0, 255, 0, .1);}
 .ve:hover::before, .ve.ve-editing:before {animation: hightlight .8s alternate infinite ease-in-out; background: transparent; border-color: #38b03f}
 

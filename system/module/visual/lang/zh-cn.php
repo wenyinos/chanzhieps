@@ -21,5 +21,6 @@ $lang->visual->actionsName = array('edit' => '编辑', 'delete' => '删除', 'mo
 $lang->visual->config           = new stdclass();
 $lang->visual->config->logo     = array('name' => "Logo/名称", 'width' => 900);
 $lang->visual->config->slogan   = array('name' => "口号", 'width' => 700, 'actions' => array('delete' => true, 'move' => true));
+$lang->visual->config->navbar   = array('name' => "导航", 'width' => '80%');
 $lang->visual->config->carousel = array('name' => "幻灯片", 'width' => 700, 'actions' => array('delete' => true, 'move' => true));
 $lang->visual->config->block    = array('name' => "区块", 'width' => 800, 'actions' => array('delete' => true, 'move' => true));
