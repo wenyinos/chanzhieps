@@ -1,26 +1,26 @@
 /* Animations */
 @keyframes hightlight
 {
-  from {background: rgba(0, 255, 0, .1); border-color: #ddf4df}
-  to {background: rgba(0, 255, 0, .3); border-color: #38b03f}
+  from {box-shadow: 0 0 12px rgba(71,164,71, 0.1);}
+  to {box-shadow: 0 0 18px rgba(26,128,26, 0.8),0 0 12px rgba(71,164,71, 0.5);}
 }
 
 @-moz-keyframes hightlight /* Firefox */
 {
-  from {background: rgba(0, 255, 0, .1); border-color: #ddf4df}
-  to {background: rgba(0, 255, 0, .3); border-color: #38b03f}
+  from {-moz-box-shadow: 0 0 12px rgba(71,164,71, 0.1);}
+  to {-moz-box-shadow: 0 0 18px rgba(26,128,26, 0.8),0 0 12px rgba(71,164,71, 0.5);}
 }
 
 @-webkit-keyframes hightlight /* Safari and Chrome */
 {
-  from {background: rgba(0, 255, 0, .1); border-color: #ddf4df}
-  to {background: rgba(0, 255, 0, .3); border-color: #38b03f}
+  from {-webkit-box-shadow: 0 0 12px rgba(71,164,71, 0.1);}
+  to {-webkit-box-shadow: 0 0 18px rgba(26,128,26, 0.8),0 0 12px rgba(71,164,71, 0.5);}
 }
 
 /* Visual editable area */
 .ve {position: relative;}
 .ve:before {content: ' '; display: block; position: absolute; left: 0; top: 0; right: 0; bottom: 0; border: 1px solid rgba(0, 255, 0, .2); z-index: 960; cursor: pointer; background: rgba(0, 255, 0, .1);}
-.ve:hover::before, .ve.ve-editing:before {animation: hightlight .8s alternate infinite}
+.ve:hover::before, .ve.ve-editing:before {animation: hightlight .8s alternate infinite ease-in-out; background: transparent; border-color: #38b03f}
 
 .ve-heading {background-color: #38b03f; background-color: rgba(56, 176, 63, 0.8); color: #fff; font-size: 13px; position: absolute; top: 0; padding: 0; left: 0; z-index: 960; line-height: 20px; right: 0; transition: opacity .2s; opacity: 0;}
 .ve-name {display: inline-block; padding: 0 5px; text-shadow: 1px 1px 1px rgba(0,0,0,.1)}
