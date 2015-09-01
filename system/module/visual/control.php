@@ -70,4 +70,15 @@ class visual extends control
         }
         $this->display();
     }
+
+    /**
+     * Eidt powerby
+     *
+     * @access public
+     * @return void
+     */
+    public function editpowerby()
+    {
+        $this->display();
+    }
 }
