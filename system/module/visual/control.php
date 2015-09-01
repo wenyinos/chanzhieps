@@ -81,4 +81,45 @@ class visual extends control
     {
         $this->display();
     }
+
+    /**
+     * Eidt block
+     *
+     * @access public
+     * @return void
+     */
+    public function editblock($blockID, $type = '')
+    {
+        $blockModel = $this->loadModel('block');
+        $this->app->loadLang('ui');
+
+        $template = $this->config->template->{$this->device}->name;
+        $theme    = $this->config->template->{$this->device}->theme;
+        $blockModel->loadTemplateLang($template);
+
+        if(!$blockID) $this->locate($this->inlink('admin'));
+
+        if($type == 'phpcode')
+        {
+            $return = $this->loadModel('common')->verfyAdmin();
+            if($return['result'] == 'fail') $this->view->okFile = $return['okFile'];
+            $canCreatePHP = $this->loadModel('mail')->checkVerify('okFile');
+
+            $this->view->canCreatePHP = $canCreatePHP;
+        }
+
+        if($_POST)
+        {
+            if($type == 'phpcode' and !$canCreatePHP) $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => dao::getError()));
+            $blockModel->update($template, $theme);
+            if(!dao::isError()) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+
+        $this->view->template = $template;
+        $this->view->theme    = $theme;
+        $this->view->block    = $blockModel->getByID($blockID);
+        $this->view->type     = $this->get->type ? $this->get->type : $this->view->block->type;
+        $this->display();
+    }
 }

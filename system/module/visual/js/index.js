@@ -20,7 +20,24 @@
     var initVisualArea = function(ve)
     {
         var $ve = ve instanceof visual$ ? ve : visual$(this);
-        var name = $ve.data('ve') || $ve.attr('id');
+        var name = '';
+
+        // init blocks
+        if($ve.hasClass('block') || $ve.hasClass('panel-block'))
+        {
+            $ve.attr({'data-ve': 'block', 'data-id': $ve.attr('id').replace('block', '')});
+            name = 'block';
+        }
+        else if($ve.hasClass('carousel'))
+        {
+            $ve.attr('data-ve', 'carousel');
+            name = 'carousel';
+        }
+        else
+        {
+            name = $ve.data('ve') || $ve.attr('id');
+        }
+
         $ve.data('ve', name);
         var setting = visuals[name];
         if($.isPlainObject(setting))
@@ -48,19 +65,7 @@
         {
             var $blocksHolder = $(this);
             var withGrid = $blocksHolder.hasClass('row');
-            var $blocks = $blocksHolder.find('.block, .panel-block');
-            $blocks.each(function()
-            {
-                var $block = visual$(this).attr('data-ve', 'block');
-                initVisualArea($block);
-            });
-
-            var $carousels = $blocksHolder.find('.carousel');
-            $carousels.each(function()
-            {
-                var $carousel = visual$(this).attr('data-ve', 'carousel');
-                initVisualArea($carousel);
-            });
+            $blocksHolder.find('.block, .panel-block, .carousel').each(initVisualArea);
         });
     };
 
@@ -80,13 +85,16 @@
     var openEditModal = function(ve)
     {
         var $ve = ve instanceof visual$ ? ve : visual$(this).closest('.ve');
-        var code = $ve.data('ve');
+        var name = $ve.data('ve');
         visual$('.ve-editing').removeClass('ve-editing');
         $ve.addClass('ve-editing');
-        var setting = visuals[code];
+        var setting = visuals[name];
+        var options = $ve.data();
         window.modalTrigger.show(
         {
-            url: window.config.webRoot + 'admin.php?m=visual&f=edit' + code,
+            name: 'veModal',
+            url: window.config.webRoot + 'admin.php?m=visual&f=edit' + name,
+            url: createLink('visual', 'edit' + name, setting.params ? setting.params.format(options) : ''),
             type: 'iframe',
             width: setting.width,
             icon: setting.icon || 'pencil',
@@ -190,5 +198,9 @@
     });
 
     // extend helper methods
-    $.updateVisualArea = updateVisualArea
+    $.updateVisualArea = updateVisualArea;
+    $.setModalTitle = function(title)
+    {
+        $('#veModal').find('.modal-title').html(title);
+    };
 }(window, jQuery));
