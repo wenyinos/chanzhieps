@@ -16,6 +16,12 @@ $lang->visual->info    = "您正在编辑网站";
 $lang->visual->preview = "预览";
 $lang->visual->exit    = "退出";
 
+$lang->visual->jsLang = new stdclass();
+$lang->visual->jsLang->saved       = $lang->saveSuccess;
+$lang->visual->jsLang->deleted     = $lang->deleteSuccess;
+$lang->visual->jsLang->preview     = '预览';
+$lang->visual->jsLang->exitPreview = '退出预览';
+
 $lang->visual->actionsName = array('edit' => '编辑', 'delete' => '删除', 'move' => '移动');
 
 $lang->visual->config           = new stdclass();

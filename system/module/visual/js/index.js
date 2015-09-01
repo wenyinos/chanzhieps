@@ -3,14 +3,16 @@
     'use strict';
     var visualPage = $('#visualPage').get(0);
     var visual$;
+    var isInPreview = false;
+    var lang = window.v.visualLang;
     var visualPageUrl = visualPage.src;
     var visuals = window.v.visuals;
-    var actionConfig = {edit: 'icon-pencil', delete: 'icon-remove', move: 'icon-move'};
+    var actionConfig = {edit: 'icon-pencil', delete: 'icon-remove', move: 'icon-move', 'info': 'icon-info-sign'};
     var actionsNames = window.v.visualActions;
     var DEFAULT_CONFIG = {width: '80%', actions: {edit: true}};
-    $.each(visuals, function(code, config)
+    $.each(visuals, function(code, setting)
     {
-        visuals[code] = $.extend(true, {}, DEFAULT_CONFIG, $.isPlainObject(config) ? config : {name: config});
+        visuals[code] = $.extend(true, {}, DEFAULT_CONFIG, $.isPlainObject(setting) ? setting : {name: setting});
     });
 
     console.log("visuals", visuals);
@@ -18,23 +20,24 @@
     var initVisualArea = function(ve)
     {
         var $ve = ve instanceof visual$ ? ve : visual$(this);
-        var code = $ve.data('ve');
-        var config = visuals[code];
-        if($.isPlainObject(config))
+        var name = $ve.data('ve') || $ve.attr('id');
+        $ve.data('ve', name);
+        var setting = visuals[name];
+        if($.isPlainObject(setting))
         {
             $ve.addClass('ve');
             var $actions = visual$('<ul class="ve-actions"></ul>');
-            var $heading = visual$('<div class="ve-heading"><div class="ve-name">' + config.name  + '</div></div>');
+            var $heading = visual$('<div class="ve-heading"><div class="ve-name">' + setting.name  + '</div></div>');
 
             $.each(actionConfig, function(action, icon)
             {
-                if(config.actions[action])
+                if(setting.actions[action])
                 {
-                    $actions.append('<li data-toggle="tooltip" class="ve-action-' + action + '" title="' + (actionsNames[action]) + '">' + (config.actions[action] === true ? '<i class="icon ' + icon + '"></i>' : config.actions[action]) + '</li>');
+                    $actions.append('<li data-toggle="tooltip" class="ve-action-' + action + '" title="' + (actionsNames[action]) + '">' + (setting.actions[action] === true ? '<i class="icon ' + icon + '"></i>' : setting.actions[action]) + '</li>');
                 }
-            })
+            });
             $heading.prepend($actions);
-            $ve.append($heading);
+            $ve.append(visual$('<div class="ve-cover"/>').append($heading));
             return $ve;
         }
     };
@@ -69,7 +72,7 @@
         var $wrapper = visual$('<div/>');
         $wrapper.load(visualPageUrl + ' ' + selector, function(data)
         {
-            $.messager.success(window.v.visualSaved);
+            $.messager.success(lang.saved);
             $ve.replaceWith(initVisualArea($wrapper.find(selector)));
         });
     };
@@ -80,14 +83,14 @@
         var code = $ve.data('ve');
         visual$('.ve-editing').removeClass('ve-editing');
         $ve.addClass('ve-editing');
-        var config = visuals[code];
+        var setting = visuals[code];
         window.modalTrigger.show(
         {
             url: window.config.webRoot + 'admin.php?m=visual&f=edit' + code,
             type: 'iframe',
-            width: config.width,
-            icon: config.icon || 'pencil',
-            title: actionsNames.edit + ' ' + config.name,
+            width: setting.width,
+            icon: setting.icon || 'pencil',
+            title: setting.title || actionsNames.edit + ' ' + setting.name,
             hidden: function()
             {
                 visual$('.ve-editing').removeClass('ve-editing');
@@ -101,7 +104,7 @@
         var code = $ve.data('ve');
         // todo: send request to remote server
         $ve.remove();
-        $.messager.success(window.v.visualDeleted);
+        $.messager.success(lang.v.deleted);
     };
 
     var initVisualPage = function()
@@ -110,11 +113,15 @@
         if(window.v.visualStyle) visual$('head').append(visual$('<link type="text/css" rel="stylesheet" />').attr('href', window.v.visualStyle));
 
         // init visual edit area
-        visual$('[data-ve]').each(initVisualArea);
+        $.each(visuals, function(name, setting)
+        {
+            visual$('[data-ve="' + name + '"], #' + name).each(initVisualArea);
+        });
+
         initBlocks();
 
         // bind event
-        visual$('body').on('click', '.ve', openEditModal)
+        visual$('body').on('click', '.ve-cover', openEditModal)
         .on('click', '.ve-action-edit', function(e)
         {
             openEditModal(visual$(this).closest('.ve'));
@@ -144,6 +151,8 @@
         {
             visual$('.ve-actions > li').tooltip({container: 'body', placement: 'bottom'});
         }
+
+        if(isInPreview) visual$('body').addClass('ve-preview-in');
     };
 
     visualPage.onload = visualPage.onreadystatechange = function()
@@ -167,10 +176,17 @@
 
     $('#visualPreviewBtn').on('mouseenter', function()
     {
-        visual$('body').addClass('ve-preview-in');
+        visual$('body').addClass('ve-preview-hover');
     }).on('mouseleave', function()
     {
-        visual$('body').removeClass('ve-preview-in');
+        visual$('body').removeClass('ve-preview-hover');
+    }).on('click', function()
+    {
+        var $body = visual$('body');
+        $body.toggleClass('ve-preview-in');
+        isInPreview = $body.hasClass('ve-preview-in');
+        $(this).toggleClass('text-danger', isInPreview).html(isInPreview ? ("<i class='icon-eye-close'></i> " + lang.exitPreview)
+            : ("<i class='icon-eye-open'></i> " + lang.preview));
     });
 
     // extend helper methods

@@ -2,8 +2,7 @@
 <?php
 js::set('visuals', $lang->visual->config);
 js::set('visualActions', $lang->visual->actionsName);
-js::set('visualSaved', $lang->saveSuccess);
-js::set('visualDeleted', $lang->deleteSuccess);
+js::set('visualLang', $lang->visual->jsLang);
 js::set('visualStyle', $themeRoot . 'common/visual.css');
 ?>
 <div class='navbar navbar-fixed-top' id='visualPanel'>
