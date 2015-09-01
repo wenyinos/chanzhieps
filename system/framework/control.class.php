@@ -707,7 +707,7 @@ class control
                 {
                     if(!empty($data['message'])) echo js::alert($data['message']);
                     $locate = empty($data['locate']) ? $_SERVER['HTTP_REFERER'] : $data['locate'];
-                    js::locate($locate);
+                    die(js::locate($locate));
                 }
 
                 if(isset($data['result']) and $data['result'] == 'fail')
@@ -720,7 +720,7 @@ class control
                             $message->$item = implode(',', $errors);
                         }
                         echo js::alert(strip_tags(implode(" ", (array) $message)));
-                        js::locate('back');
+                        die(js::locate('back'));
                     }
                 }
             }

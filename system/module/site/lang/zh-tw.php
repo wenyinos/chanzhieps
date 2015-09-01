@@ -49,6 +49,7 @@ $lang->site->checkSessionIP  = '後台檢查IP';
 $lang->site->setsecurity     = '安全設置';
 $lang->site->setsensitive    = '敏感詞設置';
 $lang->site->filterSensitive = '敏感詞過濾';
+$lang->site->mobileTemplate  = '移動模板';
 $lang->site->front           = '網站瀏覽';
 
 $lang->site->setBasic      = "基本信息設置";
@@ -115,6 +116,9 @@ $lang->site->schemeList['https'] = 'https';
 $lang->site->frontList = array();
 $lang->site->frontList['login'] = '需要登錄';
 $lang->site->frontList['guest'] = '不需要登錄';
+
+$lang->site->mobileTemplateList['open']  = '啟用';
+$lang->site->mobileTemplateList['close'] = '禁用';
 
 $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = '會員';

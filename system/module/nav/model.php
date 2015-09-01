@@ -21,18 +21,22 @@ class navModel extends model
     {
         global $config;
 
-        if(!isset($config->nav->$type)) return $this->getDefault();
+        if(!isset($config->nav->$type)) return $this->getDefault($type);
         $navs = json_decode($config->nav->$type);
+        if(empty($navs)) return $this->getDefault($type);
 
         foreach($navs as $nav)
         {
             $nav->url = $this->getUrl($nav);   
+            $nav->target = isset($nav->target) ? $nav->target : '';
             foreach($nav->children as $grade2Nav)
             {
                 $grade2Nav->url = $this->getUrl($grade2Nav);   
+                $grade2Nav->target = isset($grade2Nav->target) ? $grade2Nav->target : '';
                 foreach($grade2Nav->children as $grade3Nav)
                 {
                     $grade3Nav->url = $this->getUrl($grade3Nav);   
+                    $grade3Nav->target = isset($grade3Nav->target) ? $grade3Nav->target : '';
                 }
             }
         }
@@ -45,12 +49,18 @@ class navModel extends model
      * @access public
      * @return array   
      */
-    public function getDefault()
+    public function getDefault($type)
     {
         global $config;
         $defaultNavs = new stdclass();
         $defaultNavs->home    = $config->homeRoot;
         $defaultNavs->company = commonModel::createFrontLink('company', 'index');
+
+        if($type == 'mobile_bottom')
+        {
+            $defaultNavs->contact = commonModel::createFrontLink('company', 'contact');
+            unset($defaultNavs->home);
+        }
 
         foreach($defaultNavs as $item => $url)
         {
@@ -60,6 +70,7 @@ class navModel extends model
             $nav->class  = 'nav-system-' . $item;
             $nav->title  = $this->lang->nav->system->$item;
             $nav->url    = $url;
+            $nav->target = $type == 'mobile_bottom' ? 'modal' : '_self';
             $navs[] = $nav;
         }
 
@@ -73,7 +84,7 @@ class navModel extends model
      * @param array $nav
      * @return string
      */
-    public function createEntry($grade = 1, $nav = null)
+    public function createEntry($grade = 1, $nav = null, $type = 'desktop_top')
     {
         if(empty($nav))
         {
@@ -117,6 +128,7 @@ class navModel extends model
         $entry .= html::hidden("nav[{$grade}][key][]", '', "class='input grade{$grade}key'"); 
 
         /* nav target select. */
+        if(strpos($type, 'desktop_') !== false) unset($this->lang->nav->targetList['modal']);
         $entry .= html::select("nav[$grade][target][]", $this->lang->nav->targetList, isset($nav->target) ? $nav->target : '_self', "class='form-control'");
 
         /* operate buttons. */

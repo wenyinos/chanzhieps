@@ -129,8 +129,8 @@ $lang->site->moduleAvailable['book']    = 'Book';
 $lang->site->moduleAvailable['page']    = 'Page';
 $lang->site->moduleAvailable['forum']   = 'Forum';
 $lang->site->moduleAvailable['message'] = 'Message';
-$lang->site->moduleAvailable['search']  = 'search';
-$lang->site->moduleAvailable['shop']    = 'shop';
+$lang->site->moduleAvailable['search']  = 'Search';
+$lang->site->moduleAvailable['shop']    = 'Shop';
 
 $lang->site->metaHolder       = 'Tags liek <meta>, <script>, <style>, <link> is accepted.';
 $lang->site->fileAllowedRole  = 'Use "," to divide different extension name.';

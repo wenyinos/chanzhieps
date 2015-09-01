@@ -42,7 +42,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
         <div class='tab-pane theme-control-tab-pane' id='contentTab'>
           <table align='center' class='table table-form'>
             <tr>
-              <th class='w-80px'><?php echo $lang->block->type;?></th>
+              <th class='w-100px'><?php echo $lang->block->type;?></th>
               <td><?php echo $this->block->createTypeSelector($template, $type);?></td>
             </tr>
             <tr>
@@ -222,7 +222,9 @@ foreach (explode('|', $lang->colorPlates) as $value)
         </div>
         <div class='tab-pane theme-control-tab-pane' id='jsTab'>
           <?php echo html::textarea('js', isset($block->content->custom->$theme->js) ? $block->content->custom->$theme->js : '', "rows=20 class='form-control codeeditor' data-mode='javascript' data-height='350'");?>
-          <p class='text-info text-tip'><?php echo $lang->block->placeholder->customScriptTip; ?></p>
+          <?php $device = helper::getDevice();?>
+          <?php if($device == 'mobile'):?><p class='text-info text-tip'><?php echo $lang->block->placeholder->mobileCustomScriptTip;?></p><?php endif;?>
+          <?php if($device == 'desktop'):?><p class='text-info text-tip'><?php echo $lang->block->placeholder->desktopCustomScriptTip;?></p><?php endif;?>
         </div>
       </div>
       <?php if(strpos(',htmlcode, phpcode, slide, header', $type) == false or $type == 'html'):?>

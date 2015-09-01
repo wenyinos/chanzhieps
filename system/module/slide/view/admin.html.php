@@ -34,7 +34,7 @@
               <div class='plain-slide' style='<?php echo 'background-color: ' . $slide->backgroundColor;?>'></div>
               <?php endif; ?>
               <?php if($count > 5 && $index === 1): ?>
-              <div class='slides-count'><i class='icon-picture'></i><?php echo $count; ?></div>
+              <div class='slides-count'><i class='icon-picture'></i> <?php echo $count; ?></div>
               <?php endif; ?>
             </div>
             <?php endforeach;?>
@@ -49,16 +49,11 @@
           </div>
         </a>
         <div class='card-heading text-center'>
-          <span id='name'><?php echo $group->name;?></span>
-          <i class="icon icon-edit"></i>
-          <?php echo html::a(inlink('removeGroup', "groupID=$group->id"), '<i class="icon icon-remove"> </i>', "class='deleter'");?>
-          <form id="editGroupForm<?php echo $group->id;?>" class='hide' action="<?php echo inlink('editGroup', "groupID=$group->id");?>" method='post' >
-            <div class='editGroup'>
-              <input type='text' name='groupName' id='input' value=<?php echo $group->name;?>>
-              <?php echo html::submitButton('', 'submit btn btn-primary btn-xs') . html::commonButton($lang->cancel, 'cancelButton btn btn-xs');?>
-              <?php echo html::hidden('groupID', $group->id, "class='groupID'");?>
-            </div>
-          </form>
+          <div class='group-title' data-id='<?php echo $group->id;?>' data-action="<?php echo inlink('editGroup', "groupID=$group->id");?>">
+            <span class='group-name'><?php echo $group->name;?></span>&nbsp;
+            <?php echo html::a('javascript:;', "<i class='icon icon-pencil'></i>", "class='edit-group-btn'");?>&nbsp;
+            <?php echo html::a(inlink('removeGroup', "groupID=$group->id"), '<i class="icon icon-remove"></i>', "class='deleter'");?>
+          </div>
         </div>
       </div>
       <?php endforeach;?>
@@ -68,5 +63,12 @@
     </section>
   </div>
 </div>
+<form id="editGroupForm" class='edit-form' method='post' >
+  <div class='editGroup input-group'>
+    <?php echo html::input('groupName', $group->name, "class='form-control'");?>
+    <span class="input-group-btn fix-border"><?php echo html::submitButton('', 'submit btn btn-primary', "data-placement='left'");?> </span>
+    <span class="input-group-btn"><?php echo html::commonButton($lang->cancel, 'btn-close-form btn');?></span>
+    <?php echo html::hidden('groupID', '', "class='groupID'");?>
+  </div>
+</form>
 <?php include '../../common/view/footer.admin.html.php';?>
-  

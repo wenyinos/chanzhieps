@@ -186,7 +186,7 @@ class treeModel extends model
             $categoryName = '/';
             foreach($origins as $origin)
             {
-                if(empty($origin)) continue;
+                if(empty($categories[$origin]->name)) continue;
                 $categoryName .= $categories[$origin]->name . '/';
             }
             $categoryName = rtrim($categoryName, '/');
@@ -590,20 +590,6 @@ class treeModel extends model
         return !dao::isError();
     }
 
-    /**
-     * Remove slide group. 
-     * 
-     * @param  int    $groupID 
-     * @access public
-     * @return bool 
-     */
-    public function removeSlideGroup($groupID)
-    {
-        $this->dao->delete()->from(TABLE_SLIDE)->where('`group`')->eq($groupID)->exec();
-        $this->dao->delete()->from(TABLE_CATEGORY)->where('id')->eq($groupID)->exec();
-        return !dao::isError();
-    }
-    
     /**
      * Check if alias available.
      *

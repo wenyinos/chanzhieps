@@ -2,7 +2,7 @@
 .card {margin-bottom: 10px;}
 
 .card-slide {overflow: visible;}
-.card-heading{color: dimgray; height: 37px; padding: 7px;}
+.card-heading{color: #808080; height: 37px; padding: 7px; position: relative}
 .plain-slide {height: 120px; box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1); transition: box-shadow .2s;}
 .slides-holder {height: 200px; position: relative; background-color: #fff; margin: 0 auto;}
 .slide-item {width: auto; max-height: 170px; position: absolute; bottom: 10px; right: 10px; width: 100%; padding-left: 45px; padding-right: 5px; transition: bottom .2s, right .2s; overflow: hidden;}
@@ -12,13 +12,10 @@
 .empty-holder {height: 190px; position: absolute; bottom: 0; width: 100%; text-align: center; background-color: #FBFBFF; color: #999;}
 .empty-holder > .icon {display: block; margin-top: 60px; margin-bottom: 10px;}
 .slides-count {position: absolute; opacity: .8; background-color: #000; background-color: rgba(0,0,0,.7); color: #fff; line-height: 24px; height: 24px; padding: 0 10px 0 20px; right: 5px; bottom: 0; z-index: 25; background: -moz-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(246,246,246,0) 0%, rgba(0,0,0,0.69) 100%);background: -webkit-gradient(left top, right top, color-stop(0%, rgba(255,255,255,0)), color-stop(0%, rgba(246,246,246,0)), color-stop(100%, rgba(0,0,0,0.69)));background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(246,246,246,0) 0%, rgba(0,0,0,0.69) 100%);background: -o-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(246,246,246,0) 0%, rgba(0,0,0,0.69) 100%);background: -ms-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(246,246,246,0) 0%, rgba(0,0,0,0.69) 100%);background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(246,246,246,0) 0%, rgba(0,0,0,0.69) 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#000000', GradientType=1 );}
-.create-btn:hover,.empty-holder:hover {color: slateblue;}
-#toBeAdded{font-size: 3px;}
-.icon.icon-edit{color: slateblue; margin: 7px; cursor: pointer;}
-.icon-remove:hover, .icon-edit:hover{font-size: 140%;}
+.create-btn:hover,.empty-holder:hover {color: #347AEB;}
+#toBeAdded{font-size: 14px;}
 #input{height: 22px;}
 #removeGroup{text-align: right;}
-.icon-remove{color: #BEBEBE;}
 
 .slide-item-1 {z-index: 20}
 .slide-item-2 {bottom: 15px; right: 15px; z-index: 19;}
@@ -41,3 +38,8 @@
 .card:hover .slides-holder-4 .slide-item-2 {bottom: 10px; right: 0;}
 .card:hover .slides-holder-4 .slide-item-3 {bottom: 20px; right: 15px;}
 .card:hover .slides-holder-4 .slide-item-4 {bottom: 30px; right: 30px;}
+
+.edit-form {position: absolute; top: 0; left: 0; background: #fff; padding: 0 15px 0 25px; display: none}
+.edit-form .input-group-btn.fix-border  .btn {border-radius: 0}
+.edit-form .input-group-btn + .input-group-btn .btn {border-radius: 0 3px 3px 0}
+.edit-form .input-group-btn {white-space: }

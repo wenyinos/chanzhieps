@@ -124,6 +124,8 @@ $(document).ready(function()
     });
     
     $.setAjaxForm('#navForm');
+
+    if(v.type == 'mobile_bottom') $('.plus2, .plus3').hide();
 });
 
 /**

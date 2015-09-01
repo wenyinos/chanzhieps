@@ -11,4 +11,9 @@ $(document).ready(function()
             $('.captchaModal').click();
         }   
     }); 
+
+    $('[name*=group]').change(function()
+    {
+       $('#title').val($(this).find("option:selected").text()); 
+    });
 })

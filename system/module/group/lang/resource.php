@@ -186,11 +186,14 @@ $lang->resource->site->setsensitive = 'setsensitive';
 
 /* Slide module. */
 $lang->resource->slide = new stdclass();
-$lang->resource->slide->admin  = 'admin';
-$lang->resource->slide->create = 'create';
-$lang->resource->slide->edit   = 'edit';
-$lang->resource->slide->delete = 'delete';
-$lang->resource->slide->sort   = 'sort';
+$lang->resource->slide->admin       = 'admin';
+$lang->resource->slide->create      = 'create';
+$lang->resource->slide->edit        = 'edit';
+$lang->resource->slide->delete      = 'delete';
+$lang->resource->slide->sort        = 'sort';
+$lang->resource->slide->createGroup = 'createGroup';
+$lang->resource->slide->editGroup   = 'editGroup';
+$lang->resource->slide->removeGroup = 'removeGroup';
 
 /* Tag module. */
 $lang->resource->tag = new stdclass();

@@ -1,37 +1,38 @@
 $(document).ready(function()
 {
-    $('.submit').click(function()
+    var $editGroupForm = $('#editGroupForm');
+    var hideEditForm = function()
     {
-        var groupID = $(this).parents('.editGroup').find('.groupID').val();
-        $.setAjaxForm('#editGroupForm' + groupID); 
+        $('.group-title').show();
+        $editGroupForm.hide();
+    };
+
+    $.setAjaxForm('#editGroupForm', function(response)
+    {
+        $editGroupForm.find('#submit').popover('destroy');
+        if(response.result === 'success')
+        {
+            $editGroupForm.prev('.group-title').find('.group-name').text($editGroupForm.find('#groupName').val());
+            hideEditForm();
+            if(response.message)
+            {
+                (window.messager || $.zui.messager).success(response.message);
+            }
+        }
+        else
+        {
+            (window.messager || $.zui.messager).warning(response.message);
+        }
     });
 
-    $('.icon-edit').click(function()
+    $(document).on('click', '.edit-group-btn', function()
     {
-        $(this).hide();
-        $(this).next('.deleter').hide();
-        $(this).prev('#name').hide();
-        $(this).parents('.card-heading').find('form').show();
-        $(this).parents('.card-heading').find('#input').focus();
-    });
-
-    //$('.edit.submit').click(function()
-    //{
-    //    if($(this).next('#input') == v.oldname)  
-    //    {
-    //        submitButton.popover({trigger:'manual', content:response.message, placement:'right'}).popover('show');
-    //        submitButton.next('.popover').addClass('popover-success');
-    //        function distroy(){submitButton.popover('destroy')}
-    //        setTimeout(distroy,2000);
-    //    }
-    //}
-    
-    $('.cancelButton').click(function()
-    {
-        $(this).parents('form').hide();
-        $(this).parents('.card-heading').find('#name').show();
-        $(this).parents('.card-heading').find('.icon-edit').show();
-        $(this).parents('.card-heading').find('.deleter').show();
-    });
+        var $group = $(this).closest('.group-title');
+        $editGroupForm.attr('action', $group.data('action')).find('#groupID').val($group.data('id'));
+        $editGroupForm.find('#groupName').val($group.find('.group-name').text());
+        $('.group-title').show();
+        $group.after($editGroupForm);
+        $group.hide();
+        $editGroupForm.show().find('#groupName').focus();
+    }).on('click', '.btn-close-form', hideEditForm);
 })
-

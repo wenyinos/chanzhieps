@@ -277,10 +277,11 @@ class blockModel extends model
                     $select .= "<dd {$class}>" . html::a(helper::createLink('block', $method, "type={$group}"), $this->lang->block->$template->typeList[$group]) . "</dd>";
                 }
             }
-            $select .= "</dl></li><li><dl>";
+            $select .= "</dl></li>";
+            if($category != 'system') $select .= "<li><dl>";
         }
 
-        $select .= "</dl></li></ul>";
+        $select .= "</ul>";
         return $select;
     }
     

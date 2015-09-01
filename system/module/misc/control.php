@@ -42,7 +42,7 @@ class misc extends control
      */
     public function about()
     {
-        $this->view->title = $this->lang->about;
+        $this->view->title = "<i class='icon-heart red'></i>" . $this->lang->about;
         $this->display();
     }
 
@@ -54,7 +54,6 @@ class misc extends control
      */
     public function thanks()
     {
-        $this->view->title      = $this->lang->thanks;
         $this->view->modalWidth = 700;
         $this->display();
     }

@@ -459,6 +459,11 @@ class userModel extends model
         $user = $this->identify($account, $password);
         if(!$user) return false;
 
+        $browser = helper::getBrowser() . ' ' . helper::getBrowserVersion();
+        $os      = helper::getOS();
+        $this->dao->update(TABLE_USER)->set('browser')->eq($browser)->set('os')->eq($os)->where('id')->eq($user->id)->exec();
+        if(dao::isError()) return false;
+
         $user->rights      = $this->authorize($user);
         $user->loginIP     = helper::getRemoteIP();
         $user->fingerprint = $this->post->fingerprint ? $this->post->fingerprint : $this->session->fingerprint;

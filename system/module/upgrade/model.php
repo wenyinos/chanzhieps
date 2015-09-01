@@ -115,6 +115,10 @@ class upgradeModel extends model
                 $this->fixNav();
                 $this->setDefaultBlocks();
                 $this->fixLogo();
+            case '4_4':
+                $this->execSQL($this->getUpgradeFile('4.4'));
+                $this->setMobileTemplate();
+                $this->fixAddress();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -162,6 +166,7 @@ class upgradeModel extends model
             case '4_2';
             case '4_2_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('4.2.1'));
             case '4_3_beta' : $confirmContent .= file_get_contents($this->getUpgradeFile('4.3.beta'));
+            case '4_4'      : $confirmContent .= file_get_contents($this->getUpgradeFile('4.4'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
@@ -1586,5 +1591,37 @@ class upgradeModel extends model
         }
 
         return true;
+    }
+
+    /**
+     * Fix address data when upgrade from 4.4.
+     * 
+     * @access public
+     * @return void
+     */
+    public function fixAddress()
+    {
+        $orders = $this->dao->select('*')->from(TABLE_ORDER)->fetchAll('id');
+        foreach($orders as $order)
+        {
+            preg_match("(\[\d+\])", $order->address, $phone);
+            if(strpos($order->address, '{') !== false) continue;
+            if(empty($phone)) continue;
+            $phone = current($phone);
+            list($contact, $address) = explode($phone, $order->address);
+            preg_match("(\d{6})", $address, $zipcode);
+            $zipcode = current($zipcode);
+            $phone = str_replace(array('[', ']'), array('', ''), $phone);
+            $newAddress = new stdclass();
+            $newAddress->contact = $contact;
+            $newAddress->phone   = $phone;
+            $newAddress->address = trim(str_replace($zipcode, '', $address));
+            $newAddress->zipcode = $zipcode;
+
+            $this->dao->update(TABLE_ORDER)->set('address')->eq(json_encode($newAddress))->where('id')->eq($order->id)->exec();
+
+        }
+
+        return !dao::isError();
     }
 }

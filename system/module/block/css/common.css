@@ -20,7 +20,7 @@
 .panel-preview > .heading > .pull-right {position: relative; top: -3px}
 .panel-preview > .heading > .pull-right > .btn {padding: 2px 10px}
 .panel-preview > .panel {margin-bottom: 0;width: 100%; margin: 0 auto; line-height: 20px;}
-.form-footer {padding-left: 85px; margin-top: 5px;}
+.form-footer {padding-left: 105px; margin-top: 5px;}
 .blockForm[data-tab='cssTab'] .form-footer, .blockForm[data-tab='jsTab'] .form-footer {padding-left: 0;}
 .blockForm[data-tab='cssTab'] .tab-content, .blockForm[data-tab='jsTab'] .tab-content {width: 100%;}
 .blockForm[data-tab='cssTab'] #panelPreview, .blockForm[data-tab='jsTab'] #panelPreview {display:none;}
@@ -34,20 +34,20 @@
 
 .table-row {display: table; width: 100%; margin: 0 -10px;}
 .table-cell {display: table-cell; vertical-align: top; float: none}
-.table-cell.tab-content {min-width: 678px}
+.table-cell.tab-content {min-width: 698px}
 
 #dialogPanelPreivew.panel-preview {margin-bottom: 10px; padding: 10px 20px 15px 20px;}
 #dialogPanelPreivew.panel-preview > .panel {max-width: 500px}
 
-form .dropdown-menu {width:600px;}
-.dropdown-menu > li {float:left; }
-.dropdown-menu > li dl{ width:100px; margin: 0 20px;}
-.dropdown-menu > li dl dt{ padding:5px; border-bottom: 1px solid #DDD; text-align:center;}
-.dropdown-menu > li dl dd{ padding: 8px; text-align:center; border-radius:5px;}
-.dropdown-menu > li dl dd:hover,
-.dropdown-menu > li dl dd.active{background:#F3F3F3;}
-.dropdown-menu > li dl dd.active a:link{color:#145CCD;}
-.dropdown-menu > li dl dd.active a:visited{color:#145CCD;}
-.dropdown-menu > li dl dd a:link,
-.dropdown-menu > li dl dd a:visited{ color:#333;}
-.dropdown-menu > li dl dd a:hover{color:#145CCD;}
+form .dropdown-menu {width:800px;}
+form .dropdown-menu > li {float:left; }
+form .dropdown-menu > li dl{ width:160px; margin: 0 10px;}
+form .dropdown-menu > li dl dt{ padding:5px; border-bottom: 1px solid #DDD; text-align:center;}
+form .dropdown-menu > li dl dd{ padding: 8px; text-align:center; border-radius:5px;}
+form .dropdown-menu > li dl dd:hover,
+form .dropdown-menu > li dl dd.active{background:#F3F3F3;}
+form .dropdown-menu > li dl dd.active a:link{color:#145CCD;}
+form .dropdown-menu > li dl dd.active a:visited{color:#145CCD;}
+form .dropdown-menu > li dl dd a:link,
+form .dropdown-menu > li dl dd a:visited{ color:#333;}
+form .dropdown-menu > li dl dd a:hover{color:#145CCD;}

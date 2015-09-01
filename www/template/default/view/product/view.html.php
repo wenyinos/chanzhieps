@@ -82,7 +82,7 @@ js::execute($product->js);
                   else if($product->price != 0)
                   {
                       $attributeHtml .= "<li><span class='meta-name'>" . $lang->product->price . "</span>";
-                      $attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . $lang->product->currencySymbols[$this->config->product->currency] . "</span> <strong class='text-important text-latin text-lg'>" . $product->price . "</strong></span></li>";
+                      $attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . zget($lang->product->currencySymbols, $this->config->product->currency, '￥') . "</span> <strong class='text-important text-latin text-lg'>" . $product->price . "</strong></span></li>";
                   }
               }
               if($product->amount)

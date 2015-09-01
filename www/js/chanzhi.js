@@ -10,12 +10,12 @@ $.extend(
         appendFingerprint(formID);
         form = $(formID);
 
-        var options = 
+        var options =
         {
             target  : null,
             timeout : 60000,
             dataType:'json',
-            
+
             success: function(response)
             {
                 appendFingerprint(formID);
@@ -34,7 +34,7 @@ $.extend(
                 {
                     if(response.message && response.message.length)
                     {
-                        submitButton.popover({trigger:'manual', content:response.message, placement:'right'}).popover('show');
+                        submitButton.popover({trigger:'manual', content:response.message, placement: submitButton.data('placement') || 'right', tipClass: 'popover-danger'}).popover('show');
                         submitButton.next('.popover').addClass('popover-success');
                         function distroy(){submitButton.popover('destroy')}
                         setTimeout(distroy,2000);
@@ -47,7 +47,7 @@ $.extend(
                         $('#responser').html(response.message).addClass('red f-12px').show().delay(3000).fadeOut(100);
                     }
 
-                    if(response.locate) 
+                    if(response.locate)
                     {
                         return setTimeout(function(){location.href = response.locate;}, 1200);
                     }
@@ -56,7 +56,7 @@ $.extend(
                 }
 
                 /**
-                 * The response.result is fail. 
+                 * The response.result is fail.
                  */
 
                 /* The result.message is just a string. */
@@ -64,7 +64,7 @@ $.extend(
                 {
                     if($('#responser').length == 0)
                     {
-                        submitButton.popover({trigger:'manual', content:response.message, placement:'right'}).popover('show');
+                        submitButton.popover({trigger:'manual', content:response.message, placement: submitButton.data('placement') || 'right', tipClass: 'popover-danger'}).popover('show');
                         submitButton.next('.popover').addClass('popover-danger');
                         function distroy(){submitButton.popover('destroy')}
                         setTimeout(distroy,2000);
@@ -87,7 +87,7 @@ $.extend(
                         errorMSG += '</span>';
 
                         /* Append error message, set style and set the focus events. */
-                        $('#' + errorLabel).remove(); 
+                        $('#' + errorLabel).remove();
                         var $errorOBJ = $(errorOBJ);
                         if($errorOBJ.closest('.input-group').length > 0)
                         {
@@ -103,7 +103,7 @@ $.extend(
                         {
                             $errorOBJ.css('margin-bottom', 0);
                             $errorOBJ.css('border-color','')
-                            $('#' + errorLabel).remove(); 
+                            $('#' + errorLabel).remove();
                         });
                     })
 
@@ -116,7 +116,7 @@ $.extend(
                     {
                         topOffset = topOffset - parseInt($('.navbar-fixed-top').height());
                     }
-                    
+
                     /* Scroll to the error field and foucus it. */
                     $(document).scrollTop(topOffset);
                     firstErrorField.focus();
@@ -140,7 +140,7 @@ $.extend(
 
         /* Call ajaxSubmit to sumit the form. */
         $(document).on('submit', formID, function()
-        { 
+        {
             $.disableForm(formID);
             $(this).ajaxSubmit(options);
             return false;    // Prevent the submitting event of the browser.
@@ -166,7 +166,7 @@ $.extend(
     {
         $.setSubmitButton(formID, 'disable');
     },
-    
+
     /* Enable a form. */
     enableForm: function(formID)
     {
@@ -178,8 +178,8 @@ $.extend(
 {
     /**
      * Set ajax loader.
-     * 
-     * Bind click event for some elements thus when click them, 
+     *
+     * Bind click event for some elements thus when click them,
      * use $.load to load page into target.
      *
      * @param string selector
@@ -226,7 +226,7 @@ $.extend(
             url = $(this).attr('href');
             if(!url) url = $(this).data('rel');
             if(!url) return false;
-            
+
             $.getJSON(url, function(response)
             {
                 /* If set callback, call it. */
@@ -263,8 +263,8 @@ $.extend(
 
     /**
      * Set ajax deleter.
-     * 
-     * @param  string $selector 
+     *
+     * @param  string $selector
      * @access public
      * @return void
      */
@@ -279,7 +279,7 @@ $.extend(
                 {
                     deleter.text(v.lang.deleteing);
 
-                    $.getJSON(deleter.attr('href'), function(data) 
+                    $.getJSON(deleter.attr('href'), function(data)
                     {
                         if(data.result == 'success')
                         {
@@ -321,8 +321,8 @@ $.extend(
 
     /**
      * Set reload deleter.
-     * 
-     * @param  string $selector 
+     *
+     * @param  string $selector
      * @access public
      * @return void
      */
@@ -335,7 +335,7 @@ $.extend(
                 var deleter = $(this);
                 deleter.text(v.lang.deleteing);
 
-                $.getJSON(deleter.attr('href'), function(data) 
+                $.getJSON(deleter.attr('href'), function(data)
                 {
                     if(data.result == 'success')
                     {
@@ -344,17 +344,17 @@ $.extend(
 
                         table.wrap("<div id='tmpDiv'></div>");
                         $('#tmpDiv').load(document.location.href + ' #' + replaceID, function()
-                        {   
+                        {
                             $('#tmpDiv').replaceWith($('#tmpDiv').html());
                             if(typeof sortTable == 'function')
-                            {   
-                                sortTable(); 
-                            }   
+                            {
+                                sortTable();
+                            }
                             else
-                            {   
+                            {
                                 $('.colored').colorize();
                                 $('tfoot td').css('background', 'white').unbind('click').unbind('hover');
-                            }   
+                            }
                         });
                     }
                     else
@@ -369,8 +369,8 @@ $.extend(
 
     /**
      * Set reload.
-     * 
-     * @param  string $selector 
+     *
+     * @param  string $selector
      * @access public
      * @return void
      */
@@ -379,7 +379,7 @@ $.extend(
         $(document).on('click', selector, function()
         {
             var reload = $(this);
-            $.getJSON(reload.attr('href'), function(data) 
+            $.getJSON(reload.attr('href'), function(data)
             {
                 if(data.result == 'success')
                 {
@@ -388,17 +388,17 @@ $.extend(
 
                     table.wrap("<div id='tmpDiv'></div>");
                     $('#tmpDiv').load(document.location.href + ' #' + replaceID, function()
-                    {   
+                    {
                         $('#tmpDiv').replaceWith($('#tmpDiv').html());
                         if(typeof sortTable == 'function')
-                        {   
-                            sortTable(); 
-                        }   
+                        {
+                            sortTable();
+                        }
                         else
-                        {   
+                        {
                             $('.colored').colorize();
                             $('tfoot td').css('background', 'white').unbind('click').unbind('hover');
-                        }   
+                        }
                     });
                 }
                 else
@@ -413,7 +413,7 @@ $.extend(
     /**
      * Reload ajax modal.
      *
-     * @param int duration 
+     * @param int duration
      * @access public
      * @return void
      */
@@ -421,7 +421,7 @@ $.extend(
     {
         if(typeof(duration) == 'undefined') duration = 1000;
         setTimeout(function()
-        { 
+        {
             var url = $('#ajaxModal').attr('ref') || $('#ajaxModal').attr('rel');
             $('#ajaxModal .modal-body').load(url + ' .modal-body', function()
             {
@@ -434,7 +434,7 @@ $.extend(
 });
 
 /* jQuery extensions */
-(function($) 
+(function($)
 {
     /**
      * Resize image's max width and max height to made it center and middle.
@@ -444,14 +444,14 @@ $.extend(
      * @return void
      */
     jQuery.fn.resizeImage = function(maxWidth, maxHeight)
-    { 
+    {
         container = $(this).parent();
         parentWidth  = parseInt(container.width());
         parentHeight = parseInt(container.height());
 
         if(isNaN(maxWidth)) maxWidth   = parentWidth;
         if(isNaN(maxHeight)) maxHeight = parentHeight;
-        
+
         $(this).css('max-width',  maxWidth);
         $(this).css('max-height', maxHeight);
 
@@ -478,7 +478,7 @@ $.extend(
                 if($e.children().length) return;
                 text = $e.text();
                 if(text.length < minLen || text.indexOf(' ') > -1) return;
-                
+
                 $e.css({'word-break': 'break-all', 'white-space': 'normal'});
             });
         });
@@ -486,12 +486,12 @@ $.extend(
 })(jQuery);
 
 /**
- * Create link. 
- * 
- * @param  string $moduleName 
- * @param  string $methodName 
- * @param  string $vars 
- * @param  string $viewType 
+ * Create link.
+ *
+ * @param  string $moduleName
+ * @param  string $methodName
+ * @param  string $vars
+ * @param  string $viewType
  * @access public
  * @return string
  */
@@ -549,7 +549,7 @@ function setRequiredFields()
 
 /**
  * Set language.
- * 
+ *
  * @access public
  * @return void
  */
@@ -561,8 +561,8 @@ function selectLang(lang)
 
 /**
  * Remove anchor from the url.
- * 
- * @param  string $url 
+ *
+ * @param  string $url
  * @access public
  * @return string
  */
@@ -574,8 +574,8 @@ function removeAnchor(url)
 }
 
 /**
- * Ping to keep login 
- * 
+ * Ping to keep login
+ *
  * @access public
  * @return void
  */
@@ -588,7 +588,7 @@ if(config.runMode != 'admin') needPing = false;
 
 /**
  * Set 'go to top' button
- * 
+ *
  * @access public
  * @return void
  */
@@ -613,7 +613,7 @@ function setGo2Top()
 
 /**
  * Auto ajust block grid and size.
- * 
+ *
  * @access public
  * @return void
  */
@@ -761,7 +761,7 @@ function autoBlockGrid()
 }
 
 function appendFingerprint(formID)
-{ 
+{
     if($(formID).data('checkfingerprint'))
     {
         fingerprint = getFingerprint();

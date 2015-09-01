@@ -11,12 +11,14 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php js::set('type', $type);?>
 <?php js::set('cannotRemoveAll', $lang->nav->cannotRemoveAll); ?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class='icon-location-arrow'></i> <?php echo $lang->nav->setNav;?></strong> &nbsp; &nbsp;
     <?php echo html::a(helper::createLink('nav', 'admin', "type=desktop_top"), $lang->nav->desktop, $type == 'desktop_top' ? "class='active'" : '');?>
-    <?php echo html::a(helper::createLink('nav', 'admin', "type=mobile_top"), $lang->nav->mobile, $type == 'mobile_top' ? "class='active'" : '');?>
+    <?php echo html::a(helper::createLink('nav', 'admin', "type=mobile_top"), $lang->nav->mobile_top, $type == 'mobile_top' ? "class='active'" : '');?>
+    <?php echo html::a(helper::createLink('nav', 'admin', "type=mobile_bottom"), $lang->nav->mobile_bottom, $type == 'mobile_bottom' ? "class='active'" : '');?>
   </div>
   <div class='panel-body'>
     <form class='form-inline' id='navForm' method='post'>
@@ -25,20 +27,20 @@
         foreach($navs as $nav)
         {
             echo "<li class='liGrade1'>";
-            echo $this->nav->createEntry(1, $nav);
+            echo $this->nav->createEntry(1, $nav, $type);
             echo "<ul class='ulGrade2 hide'>";
             if(isset($nav->children))
             {
                 foreach($nav->children as $nav2)
                 {
                     echo "<li class='liGrade2'>";
-                    echo $this->nav->createEntry(2, $nav2);
+                    echo $this->nav->createEntry(2, $nav2, $type);
                     echo "<ul class='ulGrade3'>";
                     if(isset($nav2->children))
                     {
                         foreach($nav2->children as $nav3)
                         {
-                            echo  "<li class='liGrade3'>". $this->nav->createEntry(3, $nav3) .'</li>';
+                            echo  "<li class='liGrade3'>". $this->nav->createEntry(3, $nav3, $type) .'</li>';
                         }
                     }
                     echo '</ul>';
@@ -57,21 +59,21 @@
 <?php /* hidden navSource start .*/ ?>
 <div id='grade1NavSource' class='hide'>
   <li class='liGrade1'>
-    <?php echo $this->nav->createEntry(1);?>
+    <?php echo $this->nav->createEntry(1, null, $type);?>
     <ul class='ulGrade2'></ul>
   </li>
 </div>
 <div id='grade2NavSource' class='hide'>
   <ul class='ulGrade2'>
     <li class='liGrade2'>
-      <?php echo $this->nav->createEntry(2);?>
+      <?php echo $this->nav->createEntry(2, null, $type);?>
       <ul class='ulGrade3'></ul>
     </li>
   </ul>
 </div>
 <div id='grade3NavSource' class='hide'>
   <ul class='ulGrade3'>
-    <li class='liGrade3'><?php echo $this->nav->createEntry(3);?></li>
+    <li class='liGrade3'><?php echo $this->nav->createEntry(3, null, $type);?></li>
   </ul>
 </div>
 <?php /* hidden navSource end.*/ ?>

@@ -38,7 +38,7 @@ class order extends control
         $this->view->title          = $this->lang->order->confirm;
         $this->view->paymentList    = $paymentOptions;
         $this->view->addresses      = $this->loadModel('address')->getListByAccount($this->app->user->account);
-        $this->view->currencySymbol = $this->lang->product->currencySymbols[$this->config->product->currency];
+        $this->view->currencySymbol = zget($this->lang->product->currencySymbols, $this->config->product->currency, '￥');
         $this->display();
     }
 
@@ -87,7 +87,7 @@ class order extends control
         $this->view->value   = $value;
 
         $this->view->title          = $this->lang->order->admin;
-        $this->view->currencySymbol = $this->lang->product->currencySymbols[$this->config->product->currency];
+        $this->view->currencySymbol = zget($this->lang->product->currencySymbols, $this->config->product->currency, '￥');
         
         $this->display();
     }
@@ -105,8 +105,12 @@ class order extends control
         if($order->account != $this->app->user->account) die();
         $this->view->order       = $order;
         $this->view->title       = $this->lang->order->track;
-        $this->view->subtitle    = "<span class='text-danger'>$order->address</span>";
         $this->view->expressList = $this->loadModel('tree')->getPairs(0, 'express');
+
+        $address = json_decode($order->address);
+        $this->view->subtitle    = "<span class='text-important'>{$address->contact} [{$address->phone}] {$address->address} {$address->zipcode}</span>";
+        $this->view->fullAddress = $this->view->subtitle;
+
         $this->display();
     
     }
@@ -160,8 +164,11 @@ class order extends control
 
         $this->view->order       = $order;
         $this->view->title       = $this->lang->order->delivery;
-        $this->view->subtitle    = "<span class='text-danger'>$order->address</span>";
         $this->view->expressList = $this->loadModel('tree')->getOptionMenu('express');
+
+        $address = json_decode($order->address);
+        $this->view->subtitle = "<span class='text-important'>{$address->contact} [{$address->phone}] {$address->address} {$address->zipcode}</span>";
+
         $this->display();
     }
 
@@ -215,7 +222,7 @@ class order extends control
 
         $this->app->loadLang('product');
         $this->app->loadConfig('product');
-        $this->view->currencySymbol = $this->lang->product->currencySymbols[$this->config->product->currency];
+        $this->view->currencySymbol = zget($this->lang->product->currencySymbols, $this->config->product->currency, '￥');
 
         $this->view->title = $this->lang->order->browse;
         $this->display();

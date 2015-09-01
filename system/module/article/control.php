@@ -230,6 +230,7 @@ class article extends control
         }
 
         $category = $this->loadModel('tree')->getByID($category);
+        $this->session->set('articleCategory', $category->id);
 
         $title    = $article->title . ' - ' . $category->name;
         $keywords = $article->keywords . ' ' . $category->keywords . ' ' . $this->config->site->keywords;

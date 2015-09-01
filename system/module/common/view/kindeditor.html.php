@@ -35,12 +35,12 @@ js::set('uid', $uid);
 ?>
 
 <script>
-var simple = 
-[ 'formatblock', 'fontsize', '|', 'bold', 'italic','underline', '|', 
+var simple =
+[ 'formatblock', 'fontsize', '|', 'bold', 'italic','underline', '|',
 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 'insertunorderedlist', '|',
 'emoticons', 'image', 'link', '|', 'removeformat','undo', 'redo', 'source' ];
 
-var full = 
+var full =
 [ 'formatblock', 'fontsize', 'lineheight', '|', 'forecolor', 'hilitecolor', '|', 'bold', 'italic','underline', 'strikethrough', '|',
 'justifyleft', 'justifycenter', 'justifyright', '|',
 'emoticons', 'image', '|', 'link', 'unlink', 'anchor', 'flash', 'media', 'baidumap', '/',
@@ -67,7 +67,7 @@ function initKindeditor(afterInit)
             cssPath:[v.webRoot + 'zui/css/min.css'],
             cssData: '.article-content table.table-kindeditor th, .article-content table.table-kindeditor td {border-bottom: initial;} .article-content table.ke-zeroborder.table-kindeditor td {border: 1px dotted #AAA;}',
             bodyClass:'article-content',
-            urlType:'absolute', 
+            urlType:'',
             uploadJson: createLink('file', 'ajaxUpload', 'uid=' + v.uid),
             <?php if(RUN_MODE == 'admin'):?>
             fileManagerJson : createLink('file', 'fileManager'),
@@ -87,8 +87,8 @@ function initKindeditor(afterInit)
             afterChange: function(){$('#' + editorID ).change().hide();},
             afterCreate : function()
             {
-                var doc = this.edit.doc; 
-                var cmd = this.edit.cmd; 
+                var doc = this.edit.doc;
+                var cmd = this.edit.cmd;
                 /* Paste in chrome.*/
                 /* Code reference from http://www.foliotek.com/devblog/copy-images-from-clipboard-in-javascript/. */
                 if(K.WEBKIT)
@@ -99,9 +99,9 @@ function initKindeditor(afterInit)
                         var original =  ev.originalEvent;
                         var file =  original.clipboardData.items[0].getAsFile();
                         var reader = new FileReader();
-                        reader.onload = function (evt) 
+                        reader.onload = function (evt)
                         {
-                            var result = evt.target.result; 
+                            var result = evt.target.result;
                             var result = evt.target.result;
                             var arr = result.split(",");
                             var data = arr[1]; // raw base64

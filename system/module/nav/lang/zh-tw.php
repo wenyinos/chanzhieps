@@ -31,14 +31,18 @@ $lang->nav->types['custom']  = '自定義';
 $lang->nav->system = new stdclass();
 $lang->nav->system->home    = '首頁';
 $lang->nav->system->company = '關於我們';
+$lang->nav->system->contact = '聯繫我們';
 $lang->nav->system->forum   = '論壇';
 $lang->nav->system->blog    = '博客';
 $lang->nav->system->book    = '手冊';
 $lang->nav->system->message = '留言';
 
-$lang->nav->desktop = '桌面';
-$lang->nav->mobile  = '移動';
+$lang->nav->desktop       = '桌面';
+$lang->nav->mobile_top    = '移動版頂部';
+$lang->nav->mobile_bottom = '移動版底部';
 
 /* Targets setting. */
-$lang->nav->newWindow = new stdclass();
-$lang->nav->newWindow->_blank = '新開窗口';
+$lang->nav->targetList = array();
+$lang->nav->targetList['_self']  = '當前窗口';
+$lang->nav->targetList['_blank'] = '新開窗口';
+$lang->nav->targetList['modal']  = '彈出窗口';

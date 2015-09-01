@@ -44,14 +44,15 @@ $lang->slide->admin       = 'Admin';
 $lang->slide->create      = 'Add';
 $lang->slide->edit        = 'Edit';
 $lang->slide->createGroup = 'Create group';
-$lang->slide->manageGroup = 'Manage group';
-$lang->slide->createGroup = 'Create group';
+$lang->slide->editGroup   = 'Edit group';
+$lang->slide->removeGroup = 'Remove group';
 $lang->slide->return      = 'Return';
 
 $lang->slide->successSort     = 'Order data saved.';
 $lang->slide->noImageSelected = 'No images selected';
 $lang->slide->suitableSize    = "You must use pictures of same size.";
 $lang->slide->noChange        = 'No change';
+$lang->slide->groupNotEmpty   = "Name cann't be empty.";
 
 $lang->slide->defaultGroup = 'Default Group';
 

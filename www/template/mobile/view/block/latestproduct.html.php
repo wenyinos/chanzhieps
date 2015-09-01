@@ -19,79 +19,85 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
 ?>
 <div id="block<?php echo $block->id;?>" class="panel-cards with-cards panel panel-block <?php echo $blockClass;?>">
   <div class='panel-heading'>
-    <strong><?php echo $icon;?> <?php echo $block->title . $content->recPerRow;?></strong>
+    <strong><?php echo $icon;?> <?php echo $block->title . zget($content, 'recPerRow', 1);?></strong>
     <?php if(!empty($content->moreText) and !empty($content->moreUrl)):?>
     <div class='pull-right'><?php echo html::a($content->moreUrl, $content->moreText);?></div>
     <?php endif;?>
   </div>
   <?php if(isset($content->image)):?>
   <div class='panel-body no-padding'>
-    <div class='row cards cards-products'>
+    <?php
+    $count = count($products);
+    $recPerRow = min($count, max(1, zget($content, 'recPerRow', 1)));
+    ;?>
+    <div class='cards cards-products' data-cols='<?php echo $recPerRow?>'>
+      <style><?php echo ".col-custom-{$recPerRow} {width: " . (100/$recPerRow) . "%}"; ?></style>
       <?php
-      $cardsCols = array();
-      $colsCount = min($content->recPerRow, count($products));
-      for ($i = 0; $i < $colsCount; $i++) $cardsCols[$i] = '';
       $index = 0;
-      foreach($products as $product)
-      {
-          $url = helper::createLink('product', 'view', "id=$product->id", "category={$product->category->alias}&name=$product->alias");
-          $card = "<div class='card'>";
-
-          $card .= "<a class='card-img' href='{$url}'>";
-          if(empty($product->image))
-          {
-              $imgColor = $product->id * 57 % 360;
-              $card .= "<div class='media-placeholder' style='background-color: hsl({$imgColor}, 60%, 80%); color: hsl({$imgColor}, 80%, 30%);' data-id='{$product->id}'>{$product->name}</div>";
-          }
-          else
-          {
-              $card .= html::image($product->image->primary->middleURL, "title='{$product->name}' alt='{$product->name}'");
-          }
-          $card .= '</a>'; // end of .card-img
-
-          $card .= "<div class='card-content'>";
-          if(isset($content->showCategory) and $content->showCategory == 1)
-          {
-              if($content->categoryName == 'abbr')
-              {
-                  $categoryName = '[' . ($product->category->abbr ? $product->category->abbr : $product->category->name) . '] ';
-                  $card .= html::a(helper::createLink('product', 'browse', "categoryID={$product->category->id}", "category={$product->category->alias}"), $categoryName, "class='text-special'");
-              }
-              else
-              {
-                  $card .= html::a(helper::createLink('product', 'browse', "categoryID={$product->category->id}", "category={$product->category->alias}"), '[' . $product->category->name . '] ', "class='text-special'");
-              }
-          }
-          $card .= "<a href='{$url}'>{$product->name}</a>";
-          if(!$product->unsaleable)
-          {
-              if($product->promotion != 0)
-              {
-                  $card .= "<div><strong class='text-danger'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->promotion . '</strong>';
-                  if($product->price != 0)
-                  {
-                      $card .= "&nbsp;&nbsp;<small class='text-muted text-line-through'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->price . '</small></div>';
-                  }
-              }
-              else if($product->price != 0)
-              {
-                  $card .= "<div><strong class='text-danger'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->price . '</strong></div>';
-              }
-          }
-          $card .= '</div>'; // end of .card-content
-          $card .= '</div>';   // end of .card
-
-          $cardsCols[$index % $content->recPerRow] .= $card;
-          $index++;
-      }
+      foreach($products as $product):
       ?>
-      <?php foreach ($cardsCols as $col): ?>
-      <div class='col col-custom-<?php echo $colsCount; ?>'>
-        <?php echo $col;?>
+      <?php $rowIndex = $index % $recPerRow; ?>
+      <?php if($rowIndex === 0): ?>
+      <div class='row'>
+      <?php endif; ?>
+
+      <div class='col col-custom-<?php echo $recPerRow?>'>
+      <?php $url = helper::createLink('product', 'view', "id=$product->id", "category={$product->category->alias}&name=$product->alias"); ?>
+        <div class='card'>
+          <a class='card-img' href='<?php echo $url?>'>
+            <?php
+            if(empty($product->image))
+            {
+                $imgColor = $product->id * 57 % 360;
+                echo "<div class='media-placeholder' style='background-color: hsl({$imgColor}, 60%, 80%); color: hsl({$imgColor}, 80%, 30%);' data-id='{$product->id}'>{$product->name}</div>";
+            }
+            else
+            {
+                echo html::image($product->image->primary->middleURL, "title='{$product->name}' alt='{$product->name}'");
+            }
+            ?>
+          </a>
+          <div class='card-content'>
+            <?php
+            if(isset($content->showCategory) and $content->showCategory == 1)
+            {
+                if($content->categoryName == 'abbr')
+                {
+                    $categoryName = '[' . ($product->category->abbr ? $product->category->abbr : $product->category->name) . '] ';
+                    echo html::a(helper::createLink('product', 'browse', "categoryID={$product->category->id}", "category={$product->category->alias}"), $categoryName, "class='text-special'");
+                }
+                else
+                {
+                    echo html::a(helper::createLink('product', 'browse', "categoryID={$product->category->id}", "category={$product->category->alias}"), '[' . $product->category->name . '] ', "class='text-special'");
+                }
+            }
+            echo "<a href='{$url}'>{$product->name}</a>";
+            if(!$product->unsaleable)
+            {
+                if($product->promotion != 0)
+                {
+                    echo "<div><strong class='text-danger'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->promotion . '</strong>';
+                    if($product->price != 0)
+                    {
+                        echo "&nbsp;&nbsp;<small class='text-muted text-line-through'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->price . '</small></div>';
+                    }
+                }
+                else if($product->price != 0)
+                {
+                    echo "<div><strong class='text-danger'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency, '￥') . $product->price . '</strong></div>';
+                }
+            }
+            ?>
+          </div>
+        </div>
       </div>
+
+      <?php if($recPerRow === 1 || $rowIndex === ($recPerRow - 1)): ?>
+      </div>
+      <?php endif; ?>
+      <?php $index++; ?>
       <?php endforeach; ?>
     </div>
-    <style><?php echo ".col-custom-{$colsCount} {width: " . (100/$colsCount) . "%}"; ?></style>
   </div>
   <?php else:?>
   <div class='panel-body no-padding'>
