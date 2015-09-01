@@ -39,6 +39,28 @@
         }
     };
 
+    var initBlocks = function()
+    {
+        visual$('.blocks').each(function()
+        {
+            var $blocksHolder = $(this);
+            var withGrid = $blocksHolder.hasClass('row');
+            var $blocks = $blocksHolder.find('.block, .panel-block');
+            $blocks.each(function()
+            {
+                var $block = visual$(this).attr('data-ve', 'block');
+                initVisualArea($block);
+            });
+
+            var $carousels = $blocksHolder.find('.carousel');
+            $carousels.each(function()
+            {
+                var $carousel = visual$(this).attr('data-ve', 'carousel');
+                initVisualArea($carousel);
+            });
+        });
+    };
+
     var updateVisualArea = function(data)
     {
         var $ve = visual$('.ve-editing').first();
@@ -89,6 +111,7 @@
 
         // init visual edit area
         visual$('[data-ve]').each(initVisualArea);
+        initBlocks();
 
         // bind event
         visual$('body').on('click', '.ve', openEditModal)
