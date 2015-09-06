@@ -136,14 +136,15 @@
         $ve.addClass('ve-editing');
         var setting = visuals[name];
         var options = $.extend({}, setting, $ve.data());
+        var action = setting.actions.edit;
         window.modalTrigger.show(
         {
             name  : 'veModal',
-            url   : createLink('visual', 'edit' + name, (setting.actions.edit.params || setting.params || '').format(options)),
+            url   : createLink(action.module || 'visual', action.method || ('edit' + name), (action.params || setting.params || '').format(options)),
             type  : 'iframe',
             width : setting.width,
             icon  : setting.icon || 'pencil',
-            title : setting.title || lang.actions.edit + ' ' + setting.name,
+            title : setting.title || action.text + ' ' + setting.name,
             hidden: function()
             {
                 $$('.ve-editing').removeClass('ve-editing');
@@ -157,6 +158,7 @@
         var name = $ve.data('ve');
         var setting = visuals[name];
         var options = $.extend({}, setting, $ve.data());
+        var action = setting.actions.edit;
         var confirmMessage = setting.actions.delete.confirm.format(options);
         var callback = function(result)
         {
@@ -164,7 +166,7 @@
             {
                 showMessage(lang.doing, {time: 0});
                 $.post(
-                    createLink('visual', 'delete' + name, (setting.actions.delete.params || setting.params || '').format(options)),
+                    createLink(action.module || 'visual', action.method || ('delete' + name), (action.params || setting.params || '').format(options)),
                     function(data)
                     {
                         console.log('data', data);
@@ -179,22 +181,22 @@
                                     if($veParent.is('.col, [class*="col-"]')) $forRemove = $veParent;
                                 }
                                 $forRemove.remove();
-                                showMessage((data.message || setting.actions.delete.success || lang.deleted).format(options), 'success');
+                                showMessage((data.message || action.success || lang.deleted).format(options), 'success');
                             }
                             else
                             {
-                                showMessage((data.message || setting.actions.delete.fail || lang.operateFail).format(options), 'danger');
+                                showMessage((data.message || action.fail || lang.operateFail).format(options), 'danger');
                             }
                         }
                         else
                         {
-                            showMessage((setting.actions.delete.fail || lang.operateFail).format(options), 'danger');
+                            showMessage((action.fail || lang.operateFail).format(options), 'danger');
                         }
                     },
                     'json'
                 ).error(function(data)
                 {
-                    showMessage((setting.actions.delete.fail || lang.operateFail).format(options), 'danger');
+                    showMessage((action.fail || lang.operateFail).format(options), 'danger');
                 });
             }
         }
