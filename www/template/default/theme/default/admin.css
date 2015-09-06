@@ -31,6 +31,8 @@ ol {padding-left: 20px;}
 .w-type      {width:80px;}
 .w-resolution{width:60px;}
 
+.mw-800px {max-width: 800px}
+
 /* display settings */
 .inline-block {display: inline-block!important;}
 
@@ -67,7 +69,7 @@ ol {padding-left: 20px;}
 .article-files > li.file > a {line-height: 25px; padding: 40px 15px 5px 15px;max-width: 180px;white-space:nowrap; text-overflow:ellipsis; -o-text-overflow:ellipsis; overflow:hidden;}
 .article-files > li.file > a:before {display: block; width: 100%; font-size: 30px; position: absolute; top: 10px; text-align: center; left: 0; content: '\e6d4'; font-family: ZenIcon;}
 .article-files > li.article-files-heading {float: none; display: block; color: #999;font-weight: bold;}
-.article-files > li .file-actions {display: block; position: absolute; right: 0; top: 0;} 
+.article-files > li .file-actions {display: block; position: absolute; right: 0; top: 0;}
 .article-files > li .file-actions > a {opacity: 0; display: inline-block; background-color: #D9E8F5; color: #666; padding: 3px 7px;}
 .article-files > li:hover .file-actions > a,.article-files > li .file-actions > a:hover {opacity: 1; background-color: #145BCC; color: #fff; text-decoration: none;}
 
@@ -286,7 +288,7 @@ table.captcha td label {padding: 0;}
 .article {border: 1px solid #ddd; border-radius: 4px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); margin-bottom: 20px;}
 .article > header h1,.article > header h2,.article > header h3{font-size: 22px}
 .article > header > dl {margin: 0 0 10px; background: transparent; border: 0;padding: 5px 2px 0 2px;}
-.article > footer > p {padding: 0 0 10px;} 
+.article > footer > p {padding: 0 0 10px;}
 .article > header > .abstract {margin: 0; padding: 10px;}
 .article > footer {position: relative;padding-top: 15px; margin-top: 10px;}
 .article > footer .pager {margin-bottom: 0;}
@@ -693,4 +695,3 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
 #menu .theme.current .theme-card > .icon:before {position: absolute; right: -15px; top: -15px}
 #menu .theme:hover .theme-card {border-color: #145ccd; -moz-box-shadow:0px 0px 6px #145ccd; -webkit-box-shadow:0px 0px 6px #145ccd; box-shadow:0px 0px 6px #145ccd;}
 #menu .theme.current .theme-card {border-color: #47A447; -moz-box-shadow:0px 0px 6px #47A447; -webkit-box-shadow:0px 0px 6px #47A447; box-shadow:0px 0px 6px #47A447; opacity: 1}
-

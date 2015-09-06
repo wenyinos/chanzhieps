@@ -203,6 +203,8 @@ class uiModel extends model
     {
         if(isset($params)) $params = (array) $params;
         else $params = $this->getCustomParams($template, $theme);
+        $baseStyle = zget($params, 'css');
+        if(isset($params['css'])) unset($params['css']);
 
         $lessc   = $this->app->loadClass('lessc');
         $cssFile = sprintf($this->config->site->ui->customCssFile, $template, $theme);
@@ -250,7 +252,7 @@ class uiModel extends model
             $css .= $extraCss;
         }
 
-        file_put_contents($cssFile, $css);
+        file_put_contents($cssFile, $css . $baseStyle);
 
         return $lessc->errors;
     }

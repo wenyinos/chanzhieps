@@ -17,4 +17,10 @@ $(document).ready(function()
             location.href = response.locate;
         }   
     }); 
+
+    $('[name*=group]').change(function()
+    {
+       $('#title').val($(this).find("option:selected").text()); 
+    });
+    $('[name*=group]').change();
 })

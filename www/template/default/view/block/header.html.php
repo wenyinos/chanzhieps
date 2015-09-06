@@ -19,13 +19,13 @@
       <?php $logoSetting = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();?>
       <?php $logo = isset($logoSetting->$template->themes->$theme) ? $logoSetting->$template->themes->$theme : (isset($logoSetting->$template->themes->all) ? $logoSetting->$template->themes->all : false);?>
       <?php if($logo):?>
-      <div id='siteLogo'>
+      <div id='siteLogo' data-ve='logo'>
         <?php echo html::a($this->config->webRoot, html::image($logo->webPath, "class='logo' title='{$this->config->company->name}'"));?>
       </div>
       <?php else: ?>
-      <div id='siteName'><h2><?php echo $this->config->site->name;?></h2></div>
+      <div id='siteName' data-ve='logo'><h2><?php echo $this->config->site->name;?></h2></div>
       <?php endif;?>
-      <div id='siteSlogan'><span><?php echo $this->config->site->slogan;?></span></div>
+      <div id='siteSlogan' data-ve='slogan'><span><?php echo $this->config->site->slogan;?></span></div>
     </div>
   </div>
   <div id='headNav'>
@@ -37,7 +37,7 @@
     </div>
   </div>
   <?php if(commonModel::isAvailable('search')):?>
-  <div id='searchbar'>
+  <div id='searchbar' data-ve='search'>
     <form action='<?php echo helper::createLink('search')?>' method='get' role='search'>
       <div class='input-group'>
         <?php $keywords = ($this->app->getModuleName() == 'search') ? $this->session->serachIngWord : '';?>

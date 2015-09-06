@@ -15,8 +15,8 @@ class blockModel extends model
 
     /**
      * Get block by id.
-     * 
-     * @param string $blockID 
+     *
+     * @param string $blockID
      * @access public
      * @return object   the block.
      */
@@ -31,9 +31,9 @@ class blockModel extends model
 
     /**
      * Get block list of one site.
-     * 
+     *
      * @param  string    $template
-     * @param  object    $pager 
+     * @param  object    $pager
      * @access public
      * @return array
      */
@@ -44,9 +44,9 @@ class blockModel extends model
 
     /**
      * Get block list of one region.
-     * 
-     * @param  string    $module 
-     * @param  string    $method 
+     *
+     * @param  string    $module
+     * @param  string    $method
      * @access public
      * @return array
      */
@@ -63,7 +63,7 @@ class blockModel extends model
         $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->fetchAll('id');
 
         $layouts = array();
-        foreach($rawLayouts as $page => $pageBlocks) 
+        foreach($rawLayouts as $page => $pageBlocks)
         {
             $layouts[$page] = array();
             foreach($pageBlocks as $region => $regionBlock)
@@ -90,7 +90,7 @@ class blockModel extends model
                     }
 
                     $mergedBlock = new stdclass();
-                    
+
                     if(!empty($block->children))
                     {
                         $mergedBlock->id = '';
@@ -146,10 +146,10 @@ class blockModel extends model
 
     /**
      * Get block list of one region.
-     * 
-     * @param  string    $page 
-     * @param  string    $region 
-     * @param  string    $template 
+     *
+     * @param  string    $page
+     * @param  string    $region
+     * @param  string    $template
      * @access public
      * @return array
      */
@@ -162,7 +162,7 @@ class blockModel extends model
         $blocks = $this->dao->select('*')->from(TABLE_BLOCK)->fetchAll('id');
 
         $sortedBlocks = array();
-        foreach($regionBlocks as $block) 
+        foreach($regionBlocks as $block)
         {
             if(!empty($blocks[$block->id]))
             {
@@ -235,7 +235,7 @@ class blockModel extends model
 
     /**
      * Get block id => title pairs.
-     * 
+     *
      * @access public
      * @return array
      */
@@ -246,11 +246,11 @@ class blockModel extends model
 
     /**
      * Create block type dropdown menu.
-     * 
-     * @param  string    $template 
-     * @param  string    $type 
-     * @param  int       $blockID 
-     * @param  string    $method 
+     *
+     * @param  string    $template
+     * @param  string    $type
+     * @param  int       $blockID
+     * @param  string    $method
      * @param  string    $class
      * @access public
      * @return string
@@ -284,13 +284,13 @@ class blockModel extends model
         $select .= "</ul>";
         return $select;
     }
-    
+
     /**
      * Create type  select area.
-     * 
-     * @param  string    $template 
-     * @param  string    $type 
-     * @param  int       $blockID 
+     *
+     * @param  string    $template
+     * @param  string    $type
+     * @param  int       $blockID
      * @access public
      * @return string
      */
@@ -305,10 +305,10 @@ class blockModel extends model
 
     /**
      * Create form entry of one block backend.
-     * 
+     *
      * @param  string  $template
-     * @param  object  $block 
-     * @param  mix     $key 
+     * @param  object  $block
+     * @param  mix     $key
      * @param  int     $grade 1,2
      * @access public
      * @return void
@@ -369,7 +369,7 @@ class blockModel extends model
 
     /**
      * Create a block.
-     * 
+     *
      * @param  string  $template
      * @access public
      * @return bool
@@ -401,7 +401,7 @@ class blockModel extends model
 
     /**
      * Update  block.
-     * 
+     *
      * @param  string  $template
      * @access public
      * @return bool
@@ -446,9 +446,9 @@ class blockModel extends model
 
     /**
      * Delete one block.
-     * 
-     * @param  int    $blockID 
-     * @param  null    $table 
+     *
+     * @param  int    $blockID
+     * @param  null    $table
      * @access public
      * @return bool
      */
@@ -460,11 +460,11 @@ class blockModel extends model
 
     /**
      * Set block of one region.
-     * 
-     * @param string $page 
-     * @param string $region 
-     * @param string $template 
-     * @param string $theme 
+     *
+     * @param string $page
+     * @param string $region
+     * @param string $template
+     * @param string $theme
      * @access public
      * @return bool
      */
@@ -497,7 +497,7 @@ class blockModel extends model
             $parents = (array) $this->post->parent;
             foreach($parents as $key => $parent) $children[$parent][] = $key;
             foreach($blocks as $key => $block)
-            { 
+            {
                 if(empty($children[$key])) continue;
                 foreach($children[$key] as $child)
                 {
@@ -519,13 +519,13 @@ class blockModel extends model
 
     /**
      * Print blocks of one region.
-     * 
-     * @param  array    $blocks 
-     * @param  string   $method 
-     * @param  string   $region 
-     * @param  bool     $withGrid 
-     * @param  string   $containerHeader 
-     * @param  string   $containerFooter 
+     *
+     * @param  array    $blocks
+     * @param  string   $method
+     * @param  string   $region
+     * @param  bool     $withGrid
+     * @param  string   $containerHeader
+     * @param  string   $containerFooter
      * @access public
      * @return string
      */
@@ -540,18 +540,18 @@ class blockModel extends model
 
     /**
      * Parse the content of one block.
-     * 
-     * @param  object    $block 
-     * @param  bool      $withGrid          
-     * @param  string    $containerHeader 
-     * @param  string    $containerFooter 
+     *
+     * @param  object    $block
+     * @param  bool      $withGrid
+     * @param  string    $containerHeader
+     * @param  string    $containerFooter
      * @access private
      * @return string
      */
     private function parseBlockContent($block, $withGrid = false, $containerHeader, $containerFooter)
     {
         $withGrid = ($withGrid and isset($block->grid));
-        if(!empty($block->children)) 
+        if(!empty($block->children))
         {
             if($withGrid)
             {
@@ -567,7 +567,7 @@ class blockModel extends model
         {
             if($withGrid)
             {
-                if(!isset($block->grid)) $block->grid = 12; 
+                if(!isset($block->grid)) $block->grid = 12;
                 if($block->grid == 0)
                 {
                     echo "<div class='col-md-4 col-auto'>";
@@ -617,7 +617,7 @@ class blockModel extends model
             $content = is_object($block->content) ? $block->content : json_decode($block->content);
             if(isset($content->class)) $blockClass .= ' ' . $content->class;
 
-            if(isset($this->config->block->defaultIcons[$block->type])) 
+            if(isset($this->config->block->defaultIcons[$block->type]))
             {
                 $defaultIcon = $this->config->block->defaultIcons[$block->type];
                 $iconClass   = isset($content->icon) ? $content->icon : $defaultIcon;
@@ -666,7 +666,7 @@ class blockModel extends model
 
     /**
      * Load language from a template.
-     * 
+     *
      * @param  string $template
      * @access public
      * @return void

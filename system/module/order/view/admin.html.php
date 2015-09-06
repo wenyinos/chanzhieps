@@ -55,8 +55,8 @@
         <td>
           <?php echo $lang->order->createdDate . $lang->colon .  $order->createdDate . '</br>';?>
           <?php if($order->payment != 'COD' and ($order->paidDate > $order->createdDate)) echo $lang->order->paidDate . $lang->colon .  $order->paidDate . '</br>';?>
-          <?php if($order->deliveriedDate > $order->createdDate)echo $lang->order->deliveriedDate . $lang->colon .  $order->deliveriedDate . '</br>';?>
-          <?php if($order->confirmedDate > $order->deliveriedDate)echo $lang->order->confirmedDate . $lang->colon .  $order->confirmedDate . '</br>';?>
+          <?php if($order->deliveriedDate > $order->createdDate) echo $lang->order->deliveriedDate . $lang->colon .  $order->deliveriedDate . '</br>';?>
+          <?php if($order->confirmedDate > $order->deliveriedDate) echo $lang->order->confirmedDate . $lang->colon .  $order->confirmedDate . '</br>';?>
           <?php if($order->payment == 'COD' and ($order->paidDate > $order->createdDate)) echo $lang->order->paidDate . $lang->colon .  $order->paidDate . '</br>';?>
         </td>
         <td class = 'text-left'>
@@ -64,7 +64,7 @@
                 {
                     echo $lang->order->express . $lang->colon . $this->order->expressInfo($order) . '</br>';
                     echo $lang->order->waybill . $lang->colon . $order->waybill . '</br>'; 
-                    echo $lang->order->receiver . $lang->colon . $this->order->receiverInfo($order->address).'</br>';
+                    echo $lang->order->receiver . $lang->colon . json_decode($order->address)->contact . '[' . json_decode($order->address)->phone . ']' . '</br>';
                 }
                 else echo $lang->order->noRecord;
           ?>

@@ -1017,8 +1017,8 @@ class packageModel extends model
      /**
       * Fix theme code.
       * 
-      * @param  int    $package 
-      * @param  int    $themes 
+      * @param  string    $package 
+      * @param  array     $themes 
       * @access public
       * @return void
       */

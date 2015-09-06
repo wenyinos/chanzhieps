@@ -350,7 +350,7 @@ class messageModel extends model
      */
     public function delete($messageID, $mode)
     {
-        $message = $this->getByID($messageID);
+        $message = $this->dao->select('id,type')->from(TABLE_MESSAGE)->where('id')->eq($messageID)->fetch();
         $this->dao->delete()
             ->from(TABLE_MESSAGE)
             ->where('type')->eq($message->type)
@@ -370,7 +370,7 @@ class messageModel extends model
      */
     public function pass($messageID, $type)
     {
-        $message = $this->getByID($messageID);
+        $message = $this->dao->select('id,type')->from(TABLE_MESSAGE)->where('id')->eq($messageID)->fetch();
         $this->dao->update(TABLE_MESSAGE)
             ->set('status')->eq(1)
             ->where('status')->eq(0)
@@ -427,6 +427,7 @@ class messageModel extends model
      */
     public function getObjectLink($message)
     {
+        $link = '';
         if($message->objectType == 'article')
         {
             $link = $this->loadModel('article')->createPreviewLink($message->objectID);
