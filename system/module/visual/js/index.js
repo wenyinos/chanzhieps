@@ -4,16 +4,42 @@
     var visualPage = $('#visualPage').get(0);
     var $$;
     var isInPreview = false;
-    var lang = window.v.visualLang;
+    var lang = $.extend(window.v.visualLang, window.v.lang);
     var visualPageUrl = visualPage.src;
     var visuals = window.v.visuals;
-    var actionConfig = {edit: 'icon-pencil', delete: 'icon-remove', move: 'icon-move', 'info': 'icon-info-sign'};
-    var actionsNames = window.v.visualActions;
-    var DEFAULT_CONFIG = {width: '80%', actions: {edit: true}};
-    $.each(visuals, function(code, setting)
+    var DEFAULT_ACTIONS_CONFIG =
     {
-        visuals[code] = $.extend(true, {}, DEFAULT_CONFIG, $.isPlainObject(setting) ? setting : {name: setting});
+        edit: {icon: 'pencil', text: lang.actions.edit},
+        delete: {icon: 'remove', text: lang.actions.delete, confirm: lang.confirmDelete},
+        move: {icon: 'move', text: lang.actions.move}
+    };
+    var DEFAULT_CONFIG = {width: '80%', actions: {edit: true}};
+
+    // visual settings
+    $.each(visuals, function(name, setting)
+    {
+        setting = $.extend(true, {}, DEFAULT_CONFIG, $.isPlainObject(setting) ? setting : {name: setting});
+        $.each(setting.actions, function(actionName, action)
+        {
+            var actionSetting;
+            if(action === false) return;
+            else if(action === true)
+            {
+                actionSetting = {};
+            }
+            else if($.isPlainObject(action))
+            {
+                actionSetting = action;
+            }
+            else
+            {
+                actionSetting = {text: action};
+            }
+            setting.actions[actionName] = $.extend({}, DEFAULT_ACTIONS_CONFIG[actionName], actionSetting)
+        });
+        visuals[name] = setting;
     });
+    $.visuals = visuals;
 
     var initVisualArea = function(ve)
     {
@@ -42,17 +68,20 @@
         var setting = visuals[name];
         if($.isPlainObject(setting))
         {
-            $veMain.addClass('ve');
+            if(name === 'block') setting.blockID = $veMain.data('id');
+            setting.invisible = $.trim($veMain.html()) === '';
+            $veMain.addClass('ve').toggleClass('ve-invisible', setting.invisible);
             var $actions = $$('<ul class="ve-actions"></ul>');
-            var $heading = $$('<div class="ve-heading"><div class="ve-name">' + setting.name  + '</div></div>');
+            var $heading = $$('<div class="ve-heading"><div class="ve-name">'
+                + setting.name + (name === 'block' ? (' #' + setting.blockID) : '')
+                + (setting.invisible ? (' (' + lang.invisible + ')') : '') + '</div></div>');
 
-            $.each(actionConfig, function(action, icon)
+            $.each(setting.actions, function(actionName, action)
             {
-                if(setting.actions[action])
-                {
-                    $actions.append('<li data-toggle="tooltip" class="ve-action-' + action + '" title="' + (actionsNames[action]) + '">' + (setting.actions[action] === true ? '<i class="icon ' + icon + '"></i>' : setting.actions[action]) + '</li>');
-                }
+                $actions.append('<li data-toggle="tooltip" class="ve-action-' + actionName + '" title="' + action.text + '">'
+                    + (action.icon ? '<i class="icon icon-' + action.icon + '"></i>' : action.text) + '</li>');
             });
+
             $heading.prepend($actions);
             $veMain.append($$('<div class="ve-cover"/>').append($heading));
             return $ve;
@@ -100,7 +129,7 @@
             type: 'iframe',
             width: setting.width,
             icon: setting.icon || 'pencil',
-            title: setting.title || actionsNames.edit + ' ' + setting.name,
+            title: setting.title || lang.actions.edit + ' ' + setting.name,
             hidden: function()
             {
                 $$('.ve-editing').removeClass('ve-editing');
@@ -139,15 +168,16 @@
         }).on('click', '.ve-action-delete', function(e)
         {
             var $ve = $$(this).closest('.ve');
+            var confirmMessage = visuals[$ve.data('ve')].actions.delete.confirm;
             var callback = function(result)
             {
                 if(result) deleteVisualArea($ve);
             }
             if(bootbox && bootbox.confirm)
             {
-                bootbox.confirm({size: 'small', message: window.v.lang.confirmDelete, callback: callback});
+                bootbox.confirm({size: 'small', message: confirmMessage, callback: callback});
             }
-            else callback(confirm(window.v.lang.confirmDelete));
+            else callback(confirm(confirmMessage));
             e.stopPropagation();
         });
 
