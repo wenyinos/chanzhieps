@@ -1,7 +1,6 @@
 <?php include "header.html.php"; ?>
 <?php
 js::set('visuals', $lang->visual->config);
-js::set('visualActions', $lang->visual->actionsName);
 js::set('visualLang', $lang->visual->jsLang);
 js::set('visualStyle', $themeRoot . 'common/visual.css');
 ?>
