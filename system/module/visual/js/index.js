@@ -15,8 +15,6 @@
         visuals[code] = $.extend(true, {}, DEFAULT_CONFIG, $.isPlainObject(setting) ? setting : {name: setting});
     });
 
-    console.log("visuals", visuals);
-
     var initVisualArea = function(ve)
     {
         var $ve = ve instanceof visual$ ? ve : visual$(this);
@@ -25,6 +23,7 @@
         // init blocks
         if($ve.hasClass('block') || $ve.hasClass('panel-block'))
         {
+            if($ve.parent().hasClass('block')) return;
             $ve.attr({'data-ve': 'block', 'data-id': $ve.attr('id').replace('block', '')});
             name = 'block';
         }
