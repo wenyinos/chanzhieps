@@ -123,3 +123,5 @@ $config->rights->member['address']['create'] = 'create';
 $config->rights->member['address']['edit']   = 'edit';
 $config->rights->member['address']['delete'] = 'delete';
 $config->rights->member['address']['browse'] = 'browse';
+
+$config->rights->member['visual']['logo'] = 'logo';
