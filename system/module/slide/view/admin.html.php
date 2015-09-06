@@ -66,7 +66,7 @@
 <form id="editGroupForm" class='edit-form' method='post' >
   <div class='editGroup input-group'>
     <?php echo html::input('groupName', $group->name, "class='form-control'");?>
-    <span class="input-group-btn fix-border"><?php echo html::submitButton('', 'submit btn btn-primary', "data-placement='left'");?> </span>
+    <span class="input-group-btn fix-border"><?php echo html::submitButton('', 'submit btn btn-primary');?> </span>
     <span class="input-group-btn"><?php echo html::commonButton($lang->cancel, 'btn-close-form btn');?></span>
     <?php echo html::hidden('groupID', '', "class='groupID'");?>
   </div>

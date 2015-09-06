@@ -122,4 +122,17 @@ class visual extends control
         $this->view->type     = $this->get->type ? $this->get->type : $this->view->block->type;
         $this->display();
     }
+
+    /**
+     * Delete block
+     *
+     * @access public
+     * @return void
+     */
+    public function deleteBlock($blockID)
+    {
+        // TODO: remove block region from database
+        $this->send(array('result' => 'success'));
+        // $this->send(array('result' => 'fail', 'message' => 'Fail message.'));
+    }
 }

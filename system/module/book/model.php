@@ -470,7 +470,7 @@ class bookModel extends model
             ->data($book)
             ->autoCheck()
             ->batchCheck($this->config->book->require->book, 'notempty')
-            ->check('alias', 'unique', "`type`='book'")
+            ->check('alias', 'unique', "`type`='book' AND `lang`='{$this->app->getClientLang()}'")
             ->exec();
 
         if(dao::isError()) return false;
