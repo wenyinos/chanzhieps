@@ -17,7 +17,7 @@ $slides  = $this->loadModel('slide')->getList($groupID);
 $slideId = 'slide' . rand();
 if($slides):
 ?>
-<div id='<?php echo $slideId;?>' class='carousel slide' data-ride='carousel'>
+<div id='<?php echo $slideId;?>' class='carousel slide' data-ride='carousel' data-id='<?php echo $block->id?>'>
   <div class='carousel-inner'>
     <?php $height = 0;?>
     <?php foreach($slides as $slide):?>

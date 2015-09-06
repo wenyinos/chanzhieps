@@ -58,22 +58,21 @@
         var name = '';
 
         // init blocks
-        if($veMain.hasClass('block') || $veMain.hasClass('panel-block'))
+        if($veMain.is('.block, .panel-block, .carousel'))
         {
             if($veMain.parent().hasClass('block')) return;
-            var blockID = $veMain.attr('id').replace('block', '');
+            var blockID = $veMain.data('id');
+            if(!blockID)
+            {
+                blockID = $veMain.attr('id').replace('block', '');
+            }
             $veMain.attr(
             {
                 'data-ve'   : 'block',
                 'data-id'   : blockID,
-                'data-title': $.trim($ve.children('.panel-heading').children().first().text()) || ('#' + blockID)
+                'data-title': $veMain.hasClass('carousel') ? lang.carousel : ($.trim($ve.children('.panel-heading').children().first().text()) || (visuals.block.name + ' #' + blockID))
             });
             name = 'block';
-        }
-        else if($veMain.hasClass('carousel'))
-        {
-            $veMain.attr('data-ve', 'carousel');
-            name = 'carousel';
         }
         else
         {
@@ -88,7 +87,7 @@
             $veMain.addClass('ve').toggleClass('ve-invisible', setting.invisible);
             var $actions = $$('<ul class="ve-actions"></ul>');
             var $heading = $$('<div class="ve-heading"><div class="ve-name">'
-                + setting.name + (name === 'block' ? (' #' + $veMain.data('id')) : '')
+                + (name === 'block' ? $veMain.data('title') : setting.name)
                 + (setting.invisible ? (' (' + lang.invisible + ')') : '') + '</div></div>');
 
             $.each(setting.actions, function(actionName, action)
