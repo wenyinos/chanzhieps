@@ -15,6 +15,16 @@
     };
     var DEFAULT_CONFIG = {width: '80%', actions: {edit: true}};
 
+    var showMessage = function(message, type, options)
+    {
+        if($.isPlainObject(type))
+        {
+            options = type;
+            type = '';
+        }
+        $.messager[type || 'show'](message, $.extend({placement: 'center'}, options));
+    };
+
     // visual settings
     $.each(visuals, function(name, setting)
     {
@@ -51,7 +61,13 @@
         if($veMain.hasClass('block') || $veMain.hasClass('panel-block'))
         {
             if($veMain.parent().hasClass('block')) return;
-            $veMain.attr({'data-ve': 'block', 'data-id': $veMain.attr('id').replace('block', '')});
+            var blockID = $veMain.attr('id').replace('block', '');
+            $veMain.attr(
+            {
+                'data-ve'   : 'block',
+                'data-id'   : blockID,
+                'data-title': $.trim($ve.children('.panel-heading').children().first().text()) || ('#' + blockID)
+            });
             name = 'block';
         }
         else if($veMain.hasClass('carousel'))
@@ -68,12 +84,11 @@
         var setting = visuals[name];
         if($.isPlainObject(setting))
         {
-            if(name === 'block') setting.blockID = $veMain.data('id');
             setting.invisible = $.trim($veMain.html()) === '';
             $veMain.addClass('ve').toggleClass('ve-invisible', setting.invisible);
             var $actions = $$('<ul class="ve-actions"></ul>');
             var $heading = $$('<div class="ve-heading"><div class="ve-name">'
-                + setting.name + (name === 'block' ? (' #' + setting.blockID) : '')
+                + setting.name + (name === 'block' ? (' #' + $veMain.data('id')) : '')
                 + (setting.invisible ? (' (' + lang.invisible + ')') : '') + '</div></div>');
 
             $.each(setting.actions, function(actionName, action)
@@ -106,7 +121,7 @@
         var $wrapper = $$('<div/>');
         $wrapper.load(visualPageUrl + ' ' + selector, function(data)
         {
-            $.messager.success(lang.saved);
+            showMessage(lang.saved, 'success');
             var $veExtra = $ve.next();
             if($veExtra.is('style')) $veExtra.remove();
             $ve.replaceWith(initVisualArea($wrapper.find(selector)));
@@ -120,16 +135,15 @@
         $$('.ve-editing').removeClass('ve-editing');
         $ve.addClass('ve-editing');
         var setting = visuals[name];
-        var options = $ve.data();
+        var options = $.extend({}, setting, $ve.data());
         window.modalTrigger.show(
         {
-            name: 'veModal',
-            url: window.config.webRoot + 'admin.php?m=visual&f=edit' + name,
-            url: createLink('visual', 'edit' + name, setting.params ? setting.params.format(options) : ''),
-            type: 'iframe',
-            width: setting.width,
-            icon: setting.icon || 'pencil',
-            title: setting.title || lang.actions.edit + ' ' + setting.name,
+            name  : 'veModal',
+            url   : createLink('visual', 'edit' + name, (setting.actions.edit.params || setting.params || '').format(options)),
+            type  : 'iframe',
+            width : setting.width,
+            icon  : setting.icon || 'pencil',
+            title : setting.title || lang.actions.edit + ' ' + setting.name,
             hidden: function()
             {
                 $$('.ve-editing').removeClass('ve-editing');
@@ -140,10 +154,56 @@
     var deleteVisualArea = function(ve)
     {
         var $ve = ve instanceof $$ ? ve : $$(this).closest('.ve');
-        var code = $ve.data('ve');
-        // todo: send request to remote server
-        $ve.remove();
-        $.messager.success(lang.v.deleted);
+        var name = $ve.data('ve');
+        var setting = visuals[name];
+        var options = $.extend({}, setting, $ve.data());
+        var confirmMessage = setting.actions.delete.confirm.format(options);
+        var callback = function(result)
+        {
+            if(result)
+            {
+                showMessage(lang.doing, {time: 0});
+                $.post(
+                    createLink('visual', 'delete' + name, (setting.actions.delete.params || setting.params || '').format(options)),
+                    function(data)
+                    {
+                        console.log('data', data);
+                        if($.isPlainObject(data))
+                        {
+                            if(data.result === 'success')
+                            {
+                                var $forRemove = $ve;
+                                if(name === 'block')
+                                {
+                                    var $veParent = $ve.parent();
+                                    if($veParent.is('.col, [class*="col-"]')) $forRemove = $veParent;
+                                }
+                                $forRemove.remove();
+                                showMessage((data.message || setting.actions.delete.success || lang.deleted).format(options), 'success');
+                            }
+                            else
+                            {
+                                showMessage((data.message || setting.actions.delete.fail || lang.operateFail).format(options), 'danger');
+                            }
+                        }
+                        else
+                        {
+                            showMessage((setting.actions.delete.fail || lang.operateFail).format(options), 'danger');
+                        }
+                    },
+                    'json'
+                ).error(function(data)
+                {
+                    showMessage((setting.actions.delete.fail || lang.operateFail).format(options), 'danger');
+                });
+            }
+        }
+
+        if(bootbox && bootbox.confirm)
+        {
+            bootbox.confirm({size: 'small', message: confirmMessage, callback: callback});
+        }
+        else callback(confirm(confirmMessage));
     };
 
     var initVisualPage = function()
@@ -167,17 +227,7 @@
             e.stopPropagation();
         }).on('click', '.ve-action-delete', function(e)
         {
-            var $ve = $$(this).closest('.ve');
-            var confirmMessage = visuals[$ve.data('ve')].actions.delete.confirm;
-            var callback = function(result)
-            {
-                if(result) deleteVisualArea($ve);
-            }
-            if(bootbox && bootbox.confirm)
-            {
-                bootbox.confirm({size: 'small', message: confirmMessage, callback: callback});
-            }
-            else callback(confirm(confirmMessage));
+            deleteVisualArea($$(this).closest('.ve'));
             e.stopPropagation();
         });
 
