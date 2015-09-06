@@ -603,19 +603,6 @@ class orderModel extends model
      }        
 
     /**
-     * Cut address to get receiver and phone.
-     *
-     * @param $address
-     * @access public
-     * @return string 
-     */
-    public function receiverInfo($address)
-    {
-        $receiverInfo = substr($address, 0, strpos($address, "]")+1);
-        return $receiverInfo;
-    } 
-
-    /**
      * Clear an order.
      * 
      * @param  int    $orderID 
