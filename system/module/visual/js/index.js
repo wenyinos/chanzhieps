@@ -2,7 +2,7 @@
 {
     'use strict';
     var visualPage = $('#visualPage').get(0);
-    var visual$;
+    var $$;
     var isInPreview = false;
     var lang = window.v.visualLang;
     var visualPageUrl = visualPage.src;
@@ -15,36 +15,36 @@
         visuals[code] = $.extend(true, {}, DEFAULT_CONFIG, $.isPlainObject(setting) ? setting : {name: setting});
     });
 
-    console.log("visuals", visuals);
-
     var initVisualArea = function(ve)
     {
-        var $ve = ve instanceof visual$ ? ve : visual$(this);
+        var $ve = ve instanceof $$ ? ve : $$(this);
+        var $veMain = $ve.not('style, script');
         var name = '';
 
         // init blocks
-        if($ve.hasClass('block') || $ve.hasClass('panel-block'))
+        if($veMain.hasClass('block') || $veMain.hasClass('panel-block'))
         {
-            $ve.attr({'data-ve': 'block', 'data-id': $ve.attr('id').replace('block', '')});
+            if($veMain.parent().hasClass('block')) return;
+            $veMain.attr({'data-ve': 'block', 'data-id': $veMain.attr('id').replace('block', '')});
             name = 'block';
         }
-        else if($ve.hasClass('carousel'))
+        else if($veMain.hasClass('carousel'))
         {
-            $ve.attr('data-ve', 'carousel');
+            $veMain.attr('data-ve', 'carousel');
             name = 'carousel';
         }
         else
         {
-            name = $ve.data('ve') || $ve.attr('id');
+            name = $veMain.data('ve') || $veMain.attr('id');
         }
 
-        $ve.data('ve', name);
+        $veMain.data('ve', name);
         var setting = visuals[name];
         if($.isPlainObject(setting))
         {
-            $ve.addClass('ve');
-            var $actions = visual$('<ul class="ve-actions"></ul>');
-            var $heading = visual$('<div class="ve-heading"><div class="ve-name">' + setting.name  + '</div></div>');
+            $veMain.addClass('ve');
+            var $actions = $$('<ul class="ve-actions"></ul>');
+            var $heading = $$('<div class="ve-heading"><div class="ve-name">' + setting.name  + '</div></div>');
 
             $.each(actionConfig, function(action, icon)
             {
@@ -54,14 +54,14 @@
                 }
             });
             $heading.prepend($actions);
-            $ve.append(visual$('<div class="ve-cover"/>').append($heading));
+            $veMain.append($$('<div class="ve-cover"/>').append($heading));
             return $ve;
         }
     };
 
     var initBlocks = function()
     {
-        visual$('.blocks').each(function()
+        $$('.blocks').each(function()
         {
             var $blocksHolder = $(this);
             var withGrid = $blocksHolder.hasClass('row');
@@ -69,24 +69,26 @@
         });
     };
 
-    var updateVisualArea = function(data)
+    var updateVisualArea = function(response)
     {
-        var $ve = visual$('.ve-editing').first();
+        var $ve = $$('.ve-editing').first();
         var id = $ve.attr('id');
-        var selector = '#' + id;
-        var $wrapper = visual$('<div/>');
+        var selector = '#' + id + ',#' + id + '+style';
+        var $wrapper = $$('<div/>');
         $wrapper.load(visualPageUrl + ' ' + selector, function(data)
         {
             $.messager.success(lang.saved);
+            var $veExtra = $ve.next();
+            if($veExtra.is('style')) $veExtra.remove();
             $ve.replaceWith(initVisualArea($wrapper.find(selector)));
         });
     };
 
     var openEditModal = function(ve)
     {
-        var $ve = ve instanceof visual$ ? ve : visual$(this).closest('.ve');
+        var $ve = ve instanceof $$ ? ve : $$(this).closest('.ve');
         var name = $ve.data('ve');
-        visual$('.ve-editing').removeClass('ve-editing');
+        $$('.ve-editing').removeClass('ve-editing');
         $ve.addClass('ve-editing');
         var setting = visuals[name];
         var options = $ve.data();
@@ -101,14 +103,14 @@
             title: setting.title || actionsNames.edit + ' ' + setting.name,
             hidden: function()
             {
-                visual$('.ve-editing').removeClass('ve-editing');
+                $$('.ve-editing').removeClass('ve-editing');
             }
         });
     };
 
     var deleteVisualArea = function(ve)
     {
-        var $ve = ve instanceof visual$ ? ve : visual$(this).closest('.ve');
+        var $ve = ve instanceof $$ ? ve : $$(this).closest('.ve');
         var code = $ve.data('ve');
         // todo: send request to remote server
         $ve.remove();
@@ -118,25 +120,25 @@
     var initVisualPage = function()
     {
         // load visual edit style
-        if(window.v.visualStyle) visual$('head').append(visual$('<link type="text/css" rel="stylesheet" />').attr('href', window.v.visualStyle));
+        if(window.v.visualStyle) $$('head').append($$('<link type="text/css" rel="stylesheet" />').attr('href', window.v.visualStyle));
 
         // init visual edit area
         $.each(visuals, function(name, setting)
         {
-            visual$('[data-ve="' + name + '"], #' + name).each(initVisualArea);
+            $$('[data-ve="' + name + '"], #' + name).each(initVisualArea);
         });
 
         initBlocks();
 
         // bind event
-        visual$('body').on('click', '.ve-cover', openEditModal)
+        $$('body').on('click', '.ve-cover', openEditModal)
         .on('click', '.ve-action-edit', function(e)
         {
-            openEditModal(visual$(this).closest('.ve'));
+            openEditModal($$(this).closest('.ve'));
             e.stopPropagation();
         }).on('click', '.ve-action-delete', function(e)
         {
-            var $ve = visual$(this).closest('.ve');
+            var $ve = $$(this).closest('.ve');
             var callback = function(result)
             {
                 if(result) deleteVisualArea($ve);
@@ -150,17 +152,17 @@
         });
 
         // set ajax options
-        visual$.ajaxSetup({beforeSend: function (xhr)
+        $$.ajaxSetup({beforeSend: function (xhr)
         {
             xhr.setRequestHeader('X-Requested-With', {toString: function(){return 'XMLHttpRequest_VE';}});
         }});
 
-        if(visual$.fn.tooltip)
+        if($$.fn.tooltip)
         {
-            visual$('.ve-actions > li').tooltip({container: 'body', placement: 'bottom'});
+            $$('.ve-actions > li').tooltip({container: 'body', placement: 'bottom'});
         }
 
-        if(isInPreview) visual$('body').addClass('ve-preview-in');
+        if(isInPreview) $$('body').addClass('ve-preview-in');
     };
 
     visualPage.onload = visualPage.onreadystatechange = function()
@@ -176,7 +178,7 @@
                 $('#visualPageName').text((title && title.indexOf(' ') > -1) ? title.split(' ')[0] : title).attr('href', visualPageUrl);
             }
 
-            visual$ = window.frames['visualPage'].$;
+            $$ = window.frames['visualPage'].$;
             initVisualPage();
         }
         catch(e){}
@@ -184,13 +186,13 @@
 
     $('#visualPreviewBtn').on('mouseenter', function()
     {
-        visual$('body').addClass('ve-preview-hover');
+        $$('body').addClass('ve-preview-hover');
     }).on('mouseleave', function()
     {
-        visual$('body').removeClass('ve-preview-hover');
+        $$('body').removeClass('ve-preview-hover');
     }).on('click', function()
     {
-        var $body = visual$('body');
+        var $body = $$('body');
         $body.toggleClass('ve-preview-in');
         isInPreview = $body.hasClass('ve-preview-in');
         $(this).toggleClass('text-danger', isInPreview).html(isInPreview ? ("<i class='icon-eye-close'></i> " + lang.exitPreview)
