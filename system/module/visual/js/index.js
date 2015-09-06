@@ -58,7 +58,7 @@
         var name = '';
 
         // init blocks
-        if($veMain.is('.block, .panel-block, .carousel'))
+        if($veMain.is('.block, .panel-block'))
         {
             if($veMain.parent().hasClass('block')) return;
             var blockID = $veMain.data('id');
@@ -70,7 +70,7 @@
             {
                 'data-ve'   : 'block',
                 'data-id'   : blockID,
-                'data-title': $veMain.hasClass('carousel') ? lang.carousel : ($.trim($ve.children('.panel-heading').children().first().text()) || (visuals.block.name + ' #' + blockID))
+                'data-title': $veMain.children('.carousel').length ? lang.carousel : ($.trim($ve.children('.panel-heading').children().first().text()) || (visuals.block.name + ' #' + blockID))
             });
             name = 'block';
         }
@@ -108,7 +108,7 @@
         {
             var $blocksHolder = $(this);
             var withGrid = $blocksHolder.hasClass('row');
-            $blocksHolder.find('.block, .panel-block, .carousel').each(initVisualArea);
+            $blocksHolder.find('.block, .panel-block').each(initVisualArea);
         });
     };
 
@@ -116,6 +116,7 @@
     {
         var $ve = $$('.ve-editing').first();
         var id = $ve.attr('id');
+        console.log(id);
         var selector = '#' + id + ',#' + id + '+style';
         var $wrapper = $$('<div/>');
         $wrapper.load(visualPageUrl + ' ' + selector, function(data)
@@ -168,7 +169,6 @@
                     createLink(action.module || 'visual', action.method || ('delete' + name), (action.params || setting.params || '').format(options)),
                     function(data)
                     {
-                        console.log('data', data);
                         if($.isPlainObject(data))
                         {
                             if(data.result === 'success')

@@ -26,11 +26,11 @@
 .ve-name {display: inline-block; padding: 0 5px; text-shadow: 1px 1px 1px rgba(0,0,0,.1); font-weight: bold;}
 .ve-actions {float: right; display: block; margin: 0; padding: 0;}
 .ve-actions > li {float: left; display: block; padding: 0 3px; min-width: 20px; text-align: center; cursor: pointer; margin-left: 1px; background-color: rgba(0,0,0,.2);}
-.ve-actions > li:hover {background-color: rgba(0,0,0,.4);}
-.ve-actions > li.ve-action-delete:hover {background-color: #b93015;}
 .ve-invisible .ve-heading {opacity: 1; visibility: visible; background: none; color: #38b03f}
 .ve-invisible .ve-actions > li {background: none;}
 .ve-invisible:hover .ve-actions > li {background-color: rgba(0,0,0,.2);}
+.ve-actions > li:hover {background-color: rgba(0,0,0,.4)!important;}
+.ve-actions > li.ve-action-delete:hover {background-color: #b93015!important;}
 .ve:hover .ve-heading, .ve.ve-editing .ve-heading {opacity: 1; visibility: visible; background-color: #38b03f; background-color: rgba(56, 176, 63, 0.8); color: #fff;}
 
 .ve[data-ve='slogan'], .ve[data-ve='logo'] {min-width: 120px;}

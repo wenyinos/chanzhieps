@@ -17,18 +17,22 @@ $slides  = $this->loadModel('slide')->getList($groupID);
 $slideId = 'slide' . rand();
 if($slides):
 ?>
-<div id='<?php echo $slideId;?>' class='carousel slide' data-ride='carousel' data-id='<?php echo $block->id?>'>
+<div class='block' id='block<?php echo $block->id?>'>
+<div id='<?php echo $slideId;?>' class='carousel slide' data-ride='carousel'>
   <div class='carousel-inner'>
-    <?php $height = 0;?>
+    <?php $height = 0; $index = 0?>
     <?php foreach($slides as $slide):?>
-    <?php $url    = empty($slide->mainLink) ? '' : " data-url='" . $slide->mainLink . "'";?>
-    <?php $target = " data-target='" . (isset($slide->target) ? $slide->target : '') . "'";?>
-    <?php if($height == 0 and $slide->height) $height = $slide->height;?>
+    <?php
+      $url    = empty($slide->mainLink) ? '' : " data-url='" . $slide->mainLink . "'";
+      $target = " data-target='" . (isset($slide->target) ? $slide->target : '') . "'";
+      if($height == 0 and $slide->height) $height = $slide->height;
+      $itemClass = 0 === $index++ ? 'item active' : 'item';
+    ?>
     <?php if ($slide->backgroundType == 'image'): ?>
-    <div class='item'<?php echo $url . ' ' . $target;?>>
+    <div class='<?php echo $itemClass ?>'<?php echo $url . ' ' . $target;?>>
     <?php print(html::image($slide->image));?>
     <?php else: ?>
-    <div class='item'<?php echo $url . ' ' . $target;?> style='<?php echo 'background-color: ' . $slide->backgroundColor . '; height: ' . $height . 'px';?>'>
+    <div class='<?php echo $itemClass ?>'<?php echo $url . ' ' . $target;?> style='<?php echo 'background-color: ' . $slide->backgroundColor . '; height: ' . $height . 'px';?>'>
     <?php endif ?>
       <div class='carousel-caption'>
         <h2 style='color:<?php echo $slide->titleColor;?>'><?php echo $slide->title;?></h2>
@@ -50,5 +54,6 @@ if($slides):
   <a class='left carousel-control' href='#<?php echo $slideId;?>' data-slide='prev'> <i class='icon-prev'></i> </a>
   <a class='right carousel-control' href='#<?php echo $slideId;?>' data-slide='next'> <i class='icon-next'></i> </a>
   <?php endif;?>
+</div>
 </div>
 <?php endif;?>

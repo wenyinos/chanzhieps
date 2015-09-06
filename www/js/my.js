@@ -1,6 +1,6 @@
 /* Mark module and method of this page by add css class to body tag */
 $('html').addClass('m-' + config['currentModule'] + ' m-' + config['currentModule'] + '-' + config['currentMethod']);
-$(document).ready(function() 
+$(document).ready(function()
 {
     setRequiredFields();
 
@@ -13,7 +13,7 @@ $(document).ready(function()
 
     /* Ping for keep login every six minute. */
     if(needPing) setInterval('ping()', 1000 * 360);
-    
+
     /* Load message notify. */
     $('#headNav #msgBox').load(createLink('message', 'notify'), function()
     {
@@ -24,11 +24,7 @@ $(document).ready(function()
     setGo2Top();
 
     /* Slide pictures start.   */
-    $('.carousel').each(function()
-    {
-        var $carousel = $(this).carousel();
-        $carousel.find('.item').first().addClass('active');
-    }).on('click', '.item[data-url]', function()
+    $(document).on('click', '.carousel .item[data-url]', function()
     {
         var url    = $(this).data('url');
         var target = $(this).data('target');
