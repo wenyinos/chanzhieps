@@ -29,4 +29,4 @@ $config->domainPostfix .= "|menu|info|events|webcam|dating|vacations|flights|cru
 $config->domainPostfix .= "|futbol|rentals|dance|lawyer|attorney|democrat|republican|actor|condos|immobilien|";
 $config->domainPostfix .= "|villas|foundation|expert|works|tools|watch|zone|bargains|agency|best|solar|";
 $config->domainPostfix .= "|farm|pics|photo|marketing|holiday|gift|buzz|guitars|trade|construction|"; 
-$config->domainPostfix .= "|international|house|coffee|florist|rich|ceo|camp|education|repair|";
+$config->domainPostfix .= "|international|house|coffee|florist|rich|ceo|camp|education|repair|win|site|";

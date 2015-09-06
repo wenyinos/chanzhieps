@@ -1025,6 +1025,7 @@ class upgradeModel extends model
     {
         $lessc = $this->app->loadClass('lessc');
         $settings = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array();
+        if(empty($settings)) return true;
         foreach($settings as $template => $themes)
         {
             foreach($themes as $theme => $params)
@@ -1604,7 +1605,7 @@ class upgradeModel extends model
         $orders = $this->dao->select('*')->from(TABLE_ORDER)->fetchAll('id');
         foreach($orders as $order)
         {
-            preg_match("(\[\d+\])", $order->address, $phone);
+            preg_match("(\[[\d\-]+\])", $order->address, $phone);
             if(strpos($order->address, '{') !== false) continue;
             if(empty($phone)) continue;
             $phone = current($phone);
