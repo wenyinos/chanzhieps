@@ -12,7 +12,7 @@
 
 $lang->visual->common  = "可视化编辑";
 
-$lang->visual->info    = "您正在编辑网站";
+$lang->visual->info    = "编辑模式";
 $lang->visual->preview = "预览";
 $lang->visual->exit    = "退出";
 
