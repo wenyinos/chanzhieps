@@ -38,7 +38,7 @@
           <?php 
           $config->requestType = $config->frontRequestType;
 
-          if($message->objectTitle != '')
+          if(!empty($message->objectTitle))
           {
               $objectViewLink = html::a($message->objectViewURL, $message->objectTitle, "target='_blank'");
           }
