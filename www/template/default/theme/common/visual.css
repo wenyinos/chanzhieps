@@ -33,3 +33,5 @@
 body.ve-preview-in .ve-cover, body.ve-preview-hover .ve-cover {display: none!important}
 
 .ve[data-ve='slogan'], .ve[data-ve='logo'] {min-width: 120px;}
+
+.block.ve {min-height: 20px; margin-bottom: 14px;}
