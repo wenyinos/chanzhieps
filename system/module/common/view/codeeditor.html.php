@@ -60,7 +60,6 @@ jQuery.fn.codeeditor = function(options)
         }).on('mousedown', '.editor-resizer', function(e){
             var dragStartData = {y: e.screenY, height: $editor.outerHeight()};
             $wrapper.data('dragStartData', dragStartData);
-            console.log('mouse down', dragStartData);
             e.preventDefault();
         });
         $(document).on('mousemove', function(e){
