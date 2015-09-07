@@ -207,6 +207,7 @@ table.captcha td label {padding: 0;}
 .panel.panel-pure > .panel-heading {background: none;}
 
 /* Panel block */
+.panel-block {background-color: #fff;}
 .panel-block .panel-body {padding: 10px 15px}
 .panel-block.panel-borderless {border: none; box-shadow:  none;}
 .panel-block.panel-borderless .panel-heading {background: none}

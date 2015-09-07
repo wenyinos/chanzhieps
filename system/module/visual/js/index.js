@@ -25,6 +25,11 @@
         $.zui.messager[type || 'show'](message, $.extend({placement: 'center'}, options));
     };
 
+    var showLoadingMessage = function()
+    {
+        showMessage(lang.doing, {time: 0, close: false});
+    };
+
     // visual settings
     $.each(visuals, function(name, setting)
     {
@@ -106,9 +111,51 @@
     {
         $$('.blocks').each(function()
         {
-            var $blocksHolder = $(this);
+            var $blocksHolder = $$(this);
             var withGrid = $blocksHolder.hasClass('row');
             $blocksHolder.find('.block, .panel-block').each(initVisualArea);
+
+            $blocksHolder.sortable({trigger: '.ve-cover', selector: '.col', dragCssClass: '', finish: function(e)
+            {
+                var orders = [];
+                $.each(e.list, function()
+                {
+                    orders.push($(this).find('.ve').data('id'));
+                });
+                var name = 'block';
+                var setting = visuals[name];
+                var action = setting.actions.move;
+                var options = $.extend({orders: orders}, setting, $blocksHolder.data());
+
+                showLoadingMessage();
+                $.post(
+                    createLink(action.module || 'visual', action.method || ('move' + name), (action.params || setting.params || '').format(options)),
+                    {orders: orders.join(',')},
+                    function(data)
+                    {
+                        if($.isPlainObject(data))
+                        {
+                            if(data.result === 'success')
+                            {
+                                if(withGrid) $blocksHolder.trigger('tidy');
+                                showMessage((data.message || action.success || lang.deleted).format(options), 'success');
+                            }
+                            else
+                            {
+                                showMessage((data.message || action.fail || lang.operateFail).format(options), 'danger');
+                            }
+                        }
+                        else
+                        {
+                            showMessage((action.fail || lang.operateFail).format(options), 'danger');
+                        }
+                    },
+                    'json'
+                ).error(function(data)
+                {
+                    showMessage((action.fail || lang.operateFail).format(options), 'danger');
+                });
+            }});
         });
     };
 
@@ -164,7 +211,7 @@
         {
             if(result)
             {
-                showMessage(lang.doing, {time: 0});
+                showLoadingMessage();
                 $.post(
                     createLink(action.module || 'visual', action.method || ('delete' + name), (action.params || setting.params || '').format(options)),
                     function(data)

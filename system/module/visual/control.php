@@ -146,4 +146,17 @@ class visual extends control
         $this->send(array('result' => 'success'));
         // $this->send(array('result' => 'fail', 'message' => 'Fail message.'));
     }
+
+    /**
+     * Delete block
+     *
+     * @access public
+     * @return void
+     */
+    public function moveBlock($region)
+    {
+        // TODO: sort block in region from database
+        $this->send(array('result' => 'success'));
+        // $this->send(array('result' => 'fail', 'message' => 'Fail message.'));
+    }
 }
