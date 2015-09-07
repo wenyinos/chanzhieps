@@ -83,6 +83,17 @@ class visual extends control
     }
 
     /**
+     * Eidt navbar
+     *
+     * @access public
+     * @return void
+     */
+    public function editnavbar()
+    {
+        $this->display();
+    }
+
+    /**
      * Eidt block
      *
      * @access public
