@@ -15,18 +15,18 @@ LTD www.xirangit.com)
 @media (max-width: 991px) {.col-md-12, .col-xs-12, .col-sm-12, .col-lg-12 {float: none;}}
 @media (min-width: 992px) {
   .col {float: left; width: 100%}
-  .col[data-grid='1'] {width: 8.33333333%}
-  .col[data-grid='2'] {width: 16.66666667%}
-  .col[data-grid='3'] {width: 25%}
-  .col[data-grid='4'] {width: 33.33333333%}
-  .col[data-grid='5'] {width: 41.66666667%}
-  .col[data-grid='6'] {width: 50%}
-  .col[data-grid='7'] {width: 58.33333333%}
-  .col[data-grid='8'] {width: 66.66666667%}
-  .col[data-grid='9'] {width: 75%}
-  .col[data-grid='10'] {width: 83.33333333%}
-  .col[data-grid='11'] {width: 91.66666667%}
-  .col[data-grid='12'] {width: 100%}
+  .col[data-grid='1'], .col-1 {width: 8.33333333%}
+  .col[data-grid='2'], .col-2 {width: 16.66666667%}
+  .col[data-grid='3'], .col-3 {width: 25%}
+  .col[data-grid='4'], .col-4 {width: 33.33333333%}
+  .col[data-grid='5'], .col-5 {width: 41.66666667%}
+  .col[data-grid='6'], .col-6 {width: 50%}
+  .col[data-grid='7'], .col-7 {width: 58.33333333%}
+  .col[data-grid='8'], .col-8 {width: 66.66666667%}
+  .col[data-grid='9'], .col-9 {width: 75%}
+  .col[data-grid='10'], .col-10 {width: 83.33333333%}
+  .col[data-grid='11'], .col-11 {width: 91.66666667%}
+  .col[data-grid='12'], .col-12 {width: 100%}
 }
 
 .btn-link {background-color: transparent;}

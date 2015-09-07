@@ -640,7 +640,12 @@ function setGo2Top()
             if(!grid)
             {
                 grid = options.grid || 12;
-                $col.attr('data-grid', grid);
+            }
+            if(!$col.data('gridSaved'))
+            {
+                $col.attr('data-grid', null)
+                    .data('grid', grid)
+                    .addClass('col-' + grid);
             }
             var row = rows[rowIndex];
             var colHeight = $child.height();
