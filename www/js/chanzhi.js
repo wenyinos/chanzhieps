@@ -683,10 +683,14 @@ function setGo2Top()
         {
             var $this = $(this);
             tidy($this, options);
-            $this.on('tidy', function()
+            if(!$this.data('tidyEvent'))
             {
-                tidy($this, $.extend(options, {force: true}));
-            });
+                $this.on('tidy', function()
+                {
+                    tidy($this, $.extend(options, {force: true}));
+                });
+            }
+            $this.data('tidyEvent', true);
         });
     };
 

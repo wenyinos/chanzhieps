@@ -22,7 +22,7 @@
             options = type;
             type = '';
         }
-        $.messager[type || 'show'](message, $.extend({placement: 'center'}, options));
+        $.zui.messager[type || 'show'](message, $.extend({placement: 'center'}, options));
     };
 
     // visual settings
@@ -116,7 +116,6 @@
     {
         var $ve = $$('.ve-editing').first();
         var id = $ve.attr('id');
-        console.log(id);
         var selector = '#' + id + ',#' + id + '+style';
         var $wrapper = $$('<div/>');
         $wrapper.load(visualPageUrl + ' ' + selector, function(data)
@@ -125,6 +124,7 @@
             var $veExtra = $ve.next();
             if($veExtra.is('style')) $veExtra.remove();
             $ve.replaceWith(initVisualArea($wrapper.find(selector)));
+            $ve.closest('.blocks.row').trigger('tidy');
         });
     };
 
@@ -179,6 +179,8 @@
                                     var $veParent = $ve.parent();
                                     if($veParent.is('.col, [class*="col-"]')) $forRemove = $veParent;
                                 }
+                                $forRemove.hide();
+                                $ve.closest('.blocks.row').trigger('tidy');
                                 $forRemove.remove();
                                 showMessage((data.message || action.success || lang.deleted).format(options), 'success');
                             }
