@@ -51,12 +51,12 @@ $lang->order->paid           = 'I have paid';
 $lang->order->confirmLimit         = 'confirm delivery in';
 $lang->order->confirmReceived      = 'Confirm Received';
 $lang->order->deliveryConfirmed    = 'Your order delivery is received';
-$lang->order->confirmWarning       = "<span class='text-danger'>Make sure you have received good.</span>";
+$lang->order->confirmWarning       = "Make sure you have received good.";
 $lang->order->cancelWarning        = "Confirm to cancel this order?";
 $lang->order->cancelSuccess        = "order successsfully canceled";
 $lang->order->paymentRequired      = 'At least one mode required';
 $lang->order->confirmLimitRequired = 'You should set a  expiry dates of delivery receiving';
-$lang->order->finishWarning        = "<span class='text-danger'>Make sure to finish this order ?</span>";
+$lang->order->finishWarning        = "Make sure to finish this order?";
 $lang->order->noProducts           = "No products in order";
 $lang->order->lowStocks            = "<strong>%s</strong>Inventory shortage ";
 
