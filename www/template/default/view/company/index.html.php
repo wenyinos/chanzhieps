@@ -1,4 +1,4 @@
-<?php 
+<?php
 include TPL_ROOT . 'common/header.html.php';
 ?>
 <?php $common->printPositionBar($this->app->getModuleName());?>
@@ -21,7 +21,7 @@ include TPL_ROOT . 'common/header.html.php';
     <div class='row'><?php $this->block->printRegion($layouts, 'company_index', 'bottom', true);?></div>
   </div>
   <?php if(isset($layouts['company_index'])):?>
-  <div class='col-md-3 col-side'><side class='page-side'><?php $this->block->printRegion($layouts, 'company_index', 'side');?></side></div>
+  <div class='col-md-3 col-side'><side class='page-side blocks'><?php $this->block->printRegion($layouts, 'company_index', 'side');?></side></div>
   <?php endif;?>
 </div>
 <div class='row'><?php $this->block->printRegion($layouts, 'company_index', 'bottomBanner', true);?></div>

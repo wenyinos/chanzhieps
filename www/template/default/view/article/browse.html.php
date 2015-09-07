@@ -1,4 +1,4 @@
-<?php 
+<?php
 include TPL_ROOT . 'common/header.html.php';
 
 $path = array_keys($category->pathNames);
@@ -20,8 +20,8 @@ include TPL_ROOT . 'common/treeview.html.php';
         <div class='item'>
           <div class='item-heading'>
             <div class="text-muted pull-right">
-              <span title="<?php echo $lang->article->views;?>"><i class='icon-eye-open'></i> <?php echo $article->views;?></span> &nbsp; 
-              <?php if($article->comments):?><span title="<?php echo $lang->article->comments;?>"><i class='icon-comments-alt'></i> <?php echo $article->comments;?></span> &nbsp;<?php endif;?> 
+              <span title="<?php echo $lang->article->views;?>"><i class='icon-eye-open'></i> <?php echo $article->views;?></span> &nbsp;
+              <?php if($article->comments):?><span title="<?php echo $lang->article->comments;?>"><i class='icon-comments-alt'></i> <?php echo $article->comments;?></span> &nbsp;<?php endif;?>
               <span title="<?php echo $lang->article->addedDate;?>"><i class='icon-time'></i> <?php echo substr($article->addedDate, 0, 10);?></span>
             </div>
             <h4>
@@ -47,7 +47,7 @@ include TPL_ROOT . 'common/treeview.html.php';
     </div>
     <div class='row'><?php $this->block->printRegion($layouts, 'article_browse', 'bottom', true);?></div>
   </div>
-  <div class='col-md-3 col-side'><side class='page-side'><?php $this->block->printRegion($layouts, 'article_browse', 'side');?></side></div>
+  <div class='col-md-3 col-side'><side class='page-side blocks'><?php $this->block->printRegion($layouts, 'article_browse', 'side');?></side></div>
 </div>
 <div class='row'><?php $this->block->printRegion($layouts, 'article_browse', 'bottomBanner', true);?></div>
 <?php include TPL_ROOT . 'common/footer.html.php';?>

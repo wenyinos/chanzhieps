@@ -58,22 +58,21 @@
         var name = '';
 
         // init blocks
-        if($veMain.hasClass('block') || $veMain.hasClass('panel-block'))
+        if($veMain.is('.block, .panel-block'))
         {
             if($veMain.parent().hasClass('block')) return;
-            var blockID = $veMain.attr('id').replace('block', '');
+            var blockID = $veMain.data('id');
+            if(!blockID)
+            {
+                blockID = $veMain.attr('id').replace('block', '');
+            }
             $veMain.attr(
             {
                 'data-ve'   : 'block',
                 'data-id'   : blockID,
-                'data-title': $.trim($ve.children('.panel-heading').children().first().text()) || ('#' + blockID)
+                'data-title': $veMain.children('.carousel').length ? lang.carousel : ($.trim($ve.children('.panel-heading').children().first().text()) || (visuals.block.name + ' #' + blockID))
             });
             name = 'block';
-        }
-        else if($veMain.hasClass('carousel'))
-        {
-            $veMain.attr('data-ve', 'carousel');
-            name = 'carousel';
         }
         else
         {
@@ -88,7 +87,7 @@
             $veMain.addClass('ve').toggleClass('ve-invisible', setting.invisible);
             var $actions = $$('<ul class="ve-actions"></ul>');
             var $heading = $$('<div class="ve-heading"><div class="ve-name">'
-                + setting.name + (name === 'block' ? (' #' + $veMain.data('id')) : '')
+                + (name === 'block' ? $veMain.data('title') : setting.name)
                 + (setting.invisible ? (' (' + lang.invisible + ')') : '') + '</div></div>');
 
             $.each(setting.actions, function(actionName, action)
@@ -109,7 +108,7 @@
         {
             var $blocksHolder = $(this);
             var withGrid = $blocksHolder.hasClass('row');
-            $blocksHolder.find('.block, .panel-block, .carousel').each(initVisualArea);
+            $blocksHolder.find('.block, .panel-block').each(initVisualArea);
         });
     };
 
@@ -117,6 +116,7 @@
     {
         var $ve = $$('.ve-editing').first();
         var id = $ve.attr('id');
+        console.log(id);
         var selector = '#' + id + ',#' + id + '+style';
         var $wrapper = $$('<div/>');
         $wrapper.load(visualPageUrl + ' ' + selector, function(data)
@@ -136,14 +136,15 @@
         $ve.addClass('ve-editing');
         var setting = visuals[name];
         var options = $.extend({}, setting, $ve.data());
+        var action = setting.actions.edit;
         window.modalTrigger.show(
         {
             name  : 'veModal',
-            url   : createLink('visual', 'edit' + name, (setting.actions.edit.params || setting.params || '').format(options)),
+            url   : createLink(action.module || 'visual', action.method || ('edit' + name), (action.params || setting.params || '').format(options)),
             type  : 'iframe',
             width : setting.width,
             icon  : setting.icon || 'pencil',
-            title : setting.title || lang.actions.edit + ' ' + setting.name,
+            title : setting.title || action.text + ' ' + setting.name,
             hidden: function()
             {
                 $$('.ve-editing').removeClass('ve-editing');
@@ -157,6 +158,7 @@
         var name = $ve.data('ve');
         var setting = visuals[name];
         var options = $.extend({}, setting, $ve.data());
+        var action = setting.actions.edit;
         var confirmMessage = setting.actions.delete.confirm.format(options);
         var callback = function(result)
         {
@@ -164,10 +166,9 @@
             {
                 showMessage(lang.doing, {time: 0});
                 $.post(
-                    createLink('visual', 'delete' + name, (setting.actions.delete.params || setting.params || '').format(options)),
+                    createLink(action.module || 'visual', action.method || ('delete' + name), (action.params || setting.params || '').format(options)),
                     function(data)
                     {
-                        console.log('data', data);
                         if($.isPlainObject(data))
                         {
                             if(data.result === 'success')
@@ -179,22 +180,22 @@
                                     if($veParent.is('.col, [class*="col-"]')) $forRemove = $veParent;
                                 }
                                 $forRemove.remove();
-                                showMessage((data.message || setting.actions.delete.success || lang.deleted).format(options), 'success');
+                                showMessage((data.message || action.success || lang.deleted).format(options), 'success');
                             }
                             else
                             {
-                                showMessage((data.message || setting.actions.delete.fail || lang.operateFail).format(options), 'danger');
+                                showMessage((data.message || action.fail || lang.operateFail).format(options), 'danger');
                             }
                         }
                         else
                         {
-                            showMessage((setting.actions.delete.fail || lang.operateFail).format(options), 'danger');
+                            showMessage((action.fail || lang.operateFail).format(options), 'danger');
                         }
                     },
                     'json'
                 ).error(function(data)
                 {
-                    showMessage((setting.actions.delete.fail || lang.operateFail).format(options), 'danger');
+                    showMessage((action.fail || lang.operateFail).format(options), 'danger');
                 });
             }
         }

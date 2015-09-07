@@ -10,9 +10,9 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php 
-include TPL_ROOT . 'common/header.html.php'; 
-include TPL_ROOT . 'common/treeview.html.php'; 
+<?php
+include TPL_ROOT . 'common/header.html.php';
+include TPL_ROOT . 'common/treeview.html.php';
 
 /* set categoryPath for topNav highlight. */
 js::set('path',  $product->path);
@@ -176,7 +176,7 @@ js::execute($product->js);
     <div class='row'><?php $this->block->printRegion($layouts, 'product_view', 'bottom', true);?></div>
   </div>
   <div class='col-md-3 col-side'>
-    <side class='page-side'><?php $this->block->printRegion($layouts, 'product_view', 'side');?></side>
+    <side class='page-side blocks'><?php $this->block->printRegion($layouts, 'product_view', 'side');?></side>
   </div>
 </div>
 <div class='row'><?php $this->block->printRegion($layouts, 'product_view', 'bottomBanner', true);?></div>
