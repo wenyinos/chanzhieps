@@ -24,7 +24,7 @@
             <div class='text text-muted'><?php echo helper::substr($page->summary, 120, '...');?></div>
           </div>
           <div class='item-footer text-muted'>
-            <span><i class='icon-eye-open'></i> <?php echo $page->views;?></span> &nbsp; 
+            <span><i class='icon-eye-open'></i> <?php echo $page->views;?></span> &nbsp;
             <span><i class='icon-time'></i> <?php echo substr($page->addedDate, 0, 10);?></span>
           </div>
         </div>
@@ -32,7 +32,7 @@
       </section>
     </div>
   </div>
-  <div class='col-md-3'><side class='page-side'><?php $this->block->printRegion($layouts, 'page_index', 'side');?></side></div>
+  <div class='col-md-3'><side class='page-side blocks'><?php $this->block->printRegion($layouts, 'page_index', 'side');?></side></div>
 </div>
 <div class='row'><?php $this->block->printRegion($layouts, 'page_index', 'bottom', true);?></div>
 <?php include TPL_ROOT . 'common/footer.html.php'; ?>
