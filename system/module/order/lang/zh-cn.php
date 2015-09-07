@@ -51,12 +51,12 @@ $lang->order->paid           = '我已付款';
 $lang->order->confirmLimit         = '确认收货周期';
 $lang->order->confirmReceived      = '确认收货';
 $lang->order->deliveryConfirmed    = '您的订单已经确认收货成功！';
-$lang->order->confirmWarning       = "<span class='text-danger'>请收到货后，再确认收货！否则您可能钱货两空！</span>";
+$lang->order->confirmWarning       = "请收到货后，再确认收货！否则您可能钱货两空！";
 $lang->order->cancelWarning        = "确认取消订单？";
 $lang->order->cancelSuccess        = "订单已取消";
 $lang->order->paymentRequired      = '需要至少一种交易方式';
 $lang->order->confirmLimitRequired = '需要设定确认收货周期';
-$lang->order->finishWarning        = "确认完成";
+$lang->order->finishWarning        = "确认完成订单？";
 $lang->order->noProducts           = "订单中没有产品";
 $lang->order->lowStocks            = "<strong>%s</strong> 库存不足";
 
