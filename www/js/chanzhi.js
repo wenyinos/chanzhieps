@@ -34,7 +34,7 @@ $.extend(
                 {
                     if(response.message && response.message.length)
                     {
-                        submitButton.popover({trigger:'manual', content:response.message, placement: submitButton.data('placement') || 'right', tipClass: 'popover-danger'}).popover('show');
+                        submitButton.popover({container: 'body', trigger:'manual', content:response.message, placement: submitButton.data('placement') || 'right', tipClass: 'popover-success'}).popover('show');
                         submitButton.next('.popover').addClass('popover-success');
                         function distroy(){submitButton.popover('destroy')}
                         setTimeout(distroy,2000);
@@ -64,7 +64,7 @@ $.extend(
                 {
                     if($('#responser').length == 0)
                     {
-                        submitButton.popover({trigger:'manual', content:response.message, placement: submitButton.data('placement') || 'right', tipClass: 'popover-danger'}).popover('show');
+                        submitButton.popover({container: 'body', trigger:'manual', content:response.message, placement: submitButton.data('placement') || 'right', tipClass: 'popover-danger'}).popover('show');
                         submitButton.next('.popover').addClass('popover-danger');
                         function distroy(){submitButton.popover('destroy')}
                         setTimeout(distroy,2000);
