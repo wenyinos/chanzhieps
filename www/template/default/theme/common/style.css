@@ -13,6 +13,21 @@ LTD www.xirangit.com)
 /* Zui reset */
 .col-md-12, .col-xs-12, .col-sm-12, .col-lg-12 {float: left; width: 100%}
 @media (max-width: 991px) {.col-md-12, .col-xs-12, .col-sm-12, .col-lg-12 {float: none;}}
+@media (min-width: 992px) {
+  .col {float: left; width: 100%}
+  .col[data-grid='1'] {width: 8.33333333%}
+  .col[data-grid='2'] {width: 16.66666667%}
+  .col[data-grid='3'] {width: 25%}
+  .col[data-grid='4'] {width: 33.33333333%}
+  .col[data-grid='5'] {width: 41.66666667%}
+  .col[data-grid='6'] {width: 50%}
+  .col[data-grid='7'] {width: 58.33333333%}
+  .col[data-grid='8'] {width: 66.66666667%}
+  .col[data-grid='9'] {width: 75%}
+  .col[data-grid='10'] {width: 83.33333333%}
+  .col[data-grid='11'] {width: 91.66666667%}
+  .col[data-grid='12'] {width: 100%}
+}
 
 .btn-link {background-color: transparent;}
 
@@ -496,8 +511,8 @@ body.body-modal {padding: 20px;}
 .icon-rotate-180:before {display: inline-block; -webkit-transform: rotate(180deg); -moz-transform: rotate(180deg); -ms-transform: rotate(180deg); -o-transform: rotate(180deg); transform: rotate(180deg); filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);}
 .icon-rotate-90:before {display: inline-block; -webkit-transform: rotate(90deg); -moz-transform: rotate(90deg); -ms-transform: rotate(90deg); -o-transform: rotate(90deg); transform: rotate(90deg); filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);}
 
-/* Ajusted gap of grid */
+/* Ajusted grid system */
 #navbar {margin-bottom: 14px;}
 .row {margin-left: -7px; margin-right: -7px;}
-.row > [class*='col-'] {padding-left: 7px; padding-right: 7px;}
-.row > [class*='col-'] > .panel, .row > [class*='col-'] > .carousel, .page-content > .panel, #boards > .panel, .page-side > .panel, .row > [class*='col-'] > .nav, .row > [class*='col-'] > .list-group, .m-blog .card {margin-bottom: 14px;}
+.row > [class*='col-'], .row > .col {padding-left: 7px; padding-right: 7px;}
+.row > .col > .panel, .row > .col > .carousel, .row > [class*='col-'] > .panel, .row > [class*='col-'] > .carousel, .page-content > .panel, #boards > .panel, .page-side > .panel, .row > [class*='col-'] > .nav, .row > [class*='col-'] > .list-group, .m-blog .card, .row > .col > .list-group {margin-bottom: 14px;}
