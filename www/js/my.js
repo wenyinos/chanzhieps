@@ -40,9 +40,6 @@ $(document).ready(function()
         else $('#navbar .dropdown').css('position', 'relative');
     }
 
-    /* Auto ajust block grid width */
-    autoBlockGrid();
-
     /* Remove empty headNav */
     var headNav = $('#headNav');
     if(!headNav.find('nav a').length) headNav.addClass('hide');

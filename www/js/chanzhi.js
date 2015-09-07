@@ -1,5 +1,5 @@
 /* Set trigger modal default name to 'ajaxModal'. */
-(function(){$.ModalTriggerDefaults = {name: 'ajaxModal'};})();
++(function(){$.ModalTriggerDefaults = {name: 'ajaxModal'};})();
 
 $.extend(
 {
@@ -434,7 +434,7 @@ $.extend(
 });
 
 /* jQuery extensions */
-(function($)
++(function($)
 {
     /**
      * Resize image's max width and max height to made it center and middle.
@@ -610,155 +610,99 @@ function setGo2Top()
         .click(function(){$('body,html').animate({scrollTop:0},400); return false;});
  }
 
-
 /**
- * Auto ajust block grid and size.
- *
- * @access public
- * @return void
+ * Tidy blocks grid
  */
-function autoBlockGrid()
++(function($)
 {
-    $('.block-list > .row > .col-auto').each(function()
+    function tidy($blocks, options)
     {
-        var col = $(this);
-        if(col.data('handled')) return;
+        $blocks = $blocks || $(this);
+        options = $.extend({}, $blocks.data(), options);
 
-        var row      = col.closest('.row');
-        var cols     = row.children("[class*='col-']");
-        var dGrid    = row.attr('data-default-grid') || 4;
-        var count    = cols.length;
+        var winWidth = $('body').width();
+        if(!options.force && winWidth == $blocks.data('winWidth')) return;
+        else $blocks.data('winWidth', winWidth);
 
-        if(count == row.children('.col-auto').length)
+        var rows = {};
+        var rowIndex = 0;
+        var disableGrid = winWidth < 992;
+        $blocks.children('.col').each(function()
         {
-            if(count <= 3)
+            var $col = $(this);
+            var $child = $col.children().not('style, script').first().css('height', 'auto');
+            var isColRow = $child.hasClass('row');
+            if(isColRow) tidy($child);
+
+            if(disableGrid) return;
+
+            var grid = $col.data('grid');
+            if(!grid)
             {
-                cols.attr('class', 'col-auto col-md-' + (12/count)).attr('data-grid', 12/count);
+                grid = options.grid || 12;
+                $col.attr('data-grid', grid);
+            }
+            var row = rows[rowIndex];
+            var colHeight = $child.height();
+            if(isColRow) colHeight -= 14;
+            if(!row || (row.grid + grid > 12))
+            {
+                rowIndex++;
+                row =
+                {
+                    grid: grid,
+                    height: colHeight,
+                    cols: $col
+                };
             }
             else
             {
-                cols.attr('class', 'col-auto col-md-' + dGrid).attr('data-grid', dGrid);
+                row.grid += grid;
+                row.cols = row.cols.add($col);
+                row.height = Math.max(colHeight, row.height);
             }
-            cols.data('handled', true);
-        }
-        else
-        {
-            col.attr('class', 'col-auto col-md-' + dGrid).attr('data-grid', dGrid).data('handled', true);
-        }
-    });
+            $col.attr('data-row', rowIndex);
+            rows[rowIndex] = row;
+        });
 
-    $('.block-list .panel-block .cards').each(function()
-    {
-        var $this = $(this);
-        var parentGrid = $this.closest('[class*="col-"]').parent().closest('[class*="col-"]').data('grid') || 12;
-        var grid = parentGrid * $this.closest('[class*="col-"]').data('grid') / 12,
-            cards = $this.find('[class*="col-"]'),
-            layout = $this.data('layout');
-            recPerRow = cards.data('recperrow');
-
-        if(layout == 'horizontal') cards.attr('class', 'col-md-3 col-sm-4 col-xs-6');
-        else if(layout == 'vertical') cards.attr('class', 'col-lg-12');
-        else
+        $.each(rows, function(rIndex, row)
         {
-            if(recPerRow && $(window).width() > 767)
+            if(row.cols.length > 1)
             {
-                width = 1 / recPerRow * 100;
-                cards.attr('style', "width:" + width + '%');
-            }
-
-            if(grid >= 9) cards.attr('class', 'col-md-4 col-sm-6');
-            else if(grid >= 5) cards.attr('class', 'col-md-6');
-            else cards.attr('class', 'col-md-12');
-        }
-    });
-
-    /* ajust block height */
-    var lastWidth = 0, winWidth;
-    function ajustBlockHeight()
-    {
-        winWidth = $('body').width();
-        if(winWidth == lastWidth) return;
-        lastWidth = winWidth;
-        ajustRowHeight($(".block-list > .row > [class*='col-'] > .row"), true);
-        ajustRowHeight($('.block-list > .row'), false);
-    }
-
-    function ajustRowHeight($rows, isSub)
-    {
-        var $blocks = $rows.children("[class*='col-']").children('.panel-block, .row');
-        if(!$blocks.length) return;
-
-        if(winWidth < 992)
-        {
-            $blocks.css('height', 'auto');
-        }
-        else
-        {
-            $blocks.data('height', 0);
-
-            $rows.each(function()
-            {
-                var nextRow = 0, sum = 0, row = 0, grid;
-                $(this).children("[class*='col-']").each(function()
+                row.cols.each(function()
                 {
-                    var col  = $(this);
-                        row  = nextRow;
-                        grid = parseInt(col.data('grid'));
-                    sum += grid;
-                    if(grid  == 12)
-                    {
-                        if(sum > 12 || nextRow > 0)
-                        {
-                            row++;
-                        }
-                        nextRow = row + 1;
-                        sum = 0;
-                    }
-                    else if(sum == 12)
-                    {
-                        nextRow = row + 1;
-                        sum = 0;
-                    }
-                    else if(sum > 12)
-                    {
-                        row++;
-                        nextRow = row;
-                        sum = grid;
-                    }
-                    col.attr('data-row', row);
+                    $(this).children().not('style, script').first().css('height', row.height);
                 });
-            });
+            }
+        });
+    };
 
-            $blocks.each(function()
+    $.fn.tidy = function(options)
+    {
+        $(this).each(function()
+        {
+            var $this = $(this);
+            tidy($this, options);
+            $this.on('tidy', function()
             {
-                var block = $(this);
-                if(block.data('height')) return;
-
-                var row    = block.closest('.row'),
-                    col    = block.parent();
-                if(col.data('grid') == 12)
-                {
-                    block.data('height', 'auto');
-                    block.css('height', 'auto');
-                    return;
-                }
-                var rowNo  = col.data('row');
-                var height = 0;
-                row.children("[data-row='" + rowNo + "']")
-                   .each(function()
-                    {
-                        height = Math.max($(this).children('.row').outerHeight() - 20, Math.max($(this).children('.panel-block').outerHeight(), height));
-                    })
-                   .children('.panel-block')
-                   .css('height', height).data('height', height);
+                tidy($this, $.extend(options, {force: true}));
             });
-        }
-    }
+        });
+    };
 
-    $(window).resize(ajustBlockHeight);
+    var tidyBlocks = function()
+    {
+        $('.row.blocks').tidy();
+    };
 
-    setTimeout(ajustBlockHeight, 500);
-}
+    $.extend({tidyBlocks: tidyBlocks})
+    $(function()
+    {
+        tidyBlocks();
+        $(window).resize(tidyBlocks);
+        setTimeout(tidyBlocks, 500);
+    })
+}(jQuery));
 
 function appendFingerprint(formID)
 {
