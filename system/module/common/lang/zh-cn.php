@@ -236,7 +236,7 @@ $lang->site->menu->link    = '友情链接|links|admin|';
 $lang->site->menu->oauth   = '开放登录|site|setoauth|';
 $lang->site->menu->mail    = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
 $lang->site->menu->wechat  = array('link' => '微信设置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
-$lang->site->menu->search  = '更新搜索索引|search|buildindex|';
+$lang->site->menu->search  = '全文检索|search|buildindex|';
 $lang->site->menu->tag     = '关键词设置|tag|admin|';
 
 /* Menu of security module. */

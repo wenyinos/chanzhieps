@@ -236,7 +236,7 @@ $lang->site->menu->link    = 'Links|links|admin|';
 $lang->site->menu->oauth   = 'Open OAuth|site|setoauth|';
 $lang->site->menu->mail    = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
 $lang->site->menu->wechat  = array('link' => 'Wechat|wechat|admin|', 'alias' => 'create,setresponse');
-$lang->site->menu->search  = 'Update Search Index|search|buildindex|';
+$lang->site->menu->search  = 'Full text search|search|buildindex|';
 $lang->site->menu->tag     = 'Tags|tag|admin|';
 
 /* Menu of security module. */

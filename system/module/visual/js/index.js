@@ -335,4 +335,6 @@
     {
         $('#veModal').find('.modal-title').html(title);
     };
+
+    $('[data-toggle=tooltip]').tooltip();
 }(window, jQuery));
