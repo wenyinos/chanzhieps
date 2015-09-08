@@ -12,16 +12,17 @@
 
 $lang->visual->common  = "可视化编辑";
 
-$lang->visual->info    = "编辑模式";
-$lang->visual->preview = "预览";
-$lang->visual->exit    = "退出";
+$lang->visual->info              = "编辑模式";
+$lang->visual->preview           = "预览";
+$lang->visual->exit              = "退出";
+$lang->visual->exitVisualEdit    = "关闭编辑模式";
 
 $lang->visual->jsLang = new stdclass();
 $lang->visual->jsLang->saved       = $lang->saveSuccess;
 $lang->visual->jsLang->deleted     = $lang->deleteSuccess;
 $lang->visual->jsLang->preview     = '预览';
-$lang->visual->jsLang->exitPreview = '退出预览';
-$lang->visual->jsLang->removeBlock = '退出预览';
+$lang->visual->jsLang->exitPreview = '取消预览';
+$lang->visual->jsLang->removeBlock = '移除区块';
 $lang->visual->jsLang->invisible   = '不可见';
 $lang->visual->jsLang->carousel    = '幻灯片';
 $lang->visual->jsLang->operateFail = '操作失败！';

@@ -62,12 +62,6 @@ class visual extends control
      */
     public function editslogan()
     {
-        if(!empty($_POST))
-        {
-            $result = $this->loadModel('setting')->setItem('system.common.site.slogan', $_POST['slogan']);
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
-            else $this->send(array('result' => 'fail', 'message' => ''));
-        }
         $this->display();
     }
 
