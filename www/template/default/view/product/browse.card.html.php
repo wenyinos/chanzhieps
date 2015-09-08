@@ -13,29 +13,31 @@
           echo html::a(inlink('view', "id=$product->id", "category={$product->category->alias}&name=$product->alias"), html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"), "class='media-wrapper'");
       }
       ?>
-      <?php $productView = isset($this->config->ui->productView) ? $this->config->ui->productView : true;?>
-      <?php if($productView):?><div class='card-info'><span data-toggle='tooltip' class='text-muted views-count' title='<?php echo $lang->product->viewsCount;?>'><i class="icon icon-eye-open"></i> <?php echo $product->views;?></span></div><?php endif;?>
       <div class='card-heading'>
         <?php echo html::a(inlink('view', "id={$product->id}", "category={$product->category->alias}&name=$product->alias"), '<strong>' . $product->name . '</strong>');?>
-        <span class='card-content text-latin'>
-        <?php
-        if(!$product->unsaleable)
-        {
-            if($product->promotion != 0)
-            {
-                echo "<strong class='text-muted'>"  .'</strong>';
-                echo "<strong class='text-danger'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->promotion . '</strong>&nbsp;&nbsp;';
-            }
-            else
-            {
-                if($product->price != 0)
-                {
-                    echo "<strong class='text-danger'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->price . '</strong>&nbsp;&nbsp;';
-                }
-            }
-        }
-        ?>
-        </span>
+        <div style="text-align: right">
+          <span class='card-content text-latin'>
+          <?php
+          if(!$product->unsaleable)
+          {
+              if($product->promotion != 0)
+              {
+                  echo "<strong class='text-muted'>"  .'</strong>';
+                  echo "<strong class='text-danger'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->promotion . '</strong>&nbsp;&nbsp;';
+              }
+              else
+              {
+                  if($product->price != 0)
+                  {
+                      echo "<strong class='text-danger'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->price . '</strong>&nbsp;&nbsp;';
+                  }
+              }
+          }
+          ?>
+          <?php $productView = isset($this->config->ui->productView) ? $this->config->ui->productView : true;?>
+          <?php if($productView):?><span data-toggle='tooltip' class='text-muted views-count' title='<?php echo $lang->product->viewsCount;?>'><i class="icon icon-eye-open"></i> <?php echo $product->views;?></span><?php endif;?>
+          </span>
+        </div>
       </div>
     </div>
   </div>
