@@ -13,7 +13,7 @@ class site extends control
 {
     /**
      * set site basic info.
-     * 
+     *
      * @access public
      * @return void
      */
@@ -34,21 +34,23 @@ class site extends control
 
             $result = $this->loadModel('setting')->setItems('system.common.site', $setting);
             if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
-            if($setting->mobileTemplate == 'close') $this->session->set('device', 'desktop');   
+            if($setting->mobileTemplate == 'close') $this->session->set('device', 'desktop');
 
-            $setting = fixer::input('post')
-                ->setDefault('cn2tw', 0)
-                ->join('lang', ',')
-                ->join('cn2tw', '')
-                ->get('lang,cn2tw,defaultLang');
+            if(!empty($setting->lang))
+            {
+                $setting = fixer::input('post')
+                    ->setDefault('cn2tw', 0)
+                    ->join('lang', ',')
+                    ->join('cn2tw', '')
+                    ->get('lang,cn2tw,defaultLang');
 
-            if(empty($setting->lang) or empty($setting->defaultLang)) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
-            if(strpos($setting->lang, $setting->defaultLang) === false) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+                if(empty($setting->defaultLang)) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+                if(strpos($setting->lang, $setting->defaultLang) === false) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
 
-            $result = $this->loadModel('setting')->setItems('system.common.site', $setting, $lang = 'all');
-            $this->dao->delete()->from(TABLE_CONFIG)->where("`key`")->eq('defaultLang')->andWhere('lang')->ne('all')->exec();
-            if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
-
+                $result = $this->loadModel('setting')->setItems('system.common.site', $setting, $lang = 'all');
+                $this->dao->delete()->from(TABLE_CONFIG)->where("`key`")->eq('defaultLang')->andWhere('lang')->ne('all')->exec();
+                if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+            }
             $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setbasic')));
         }
 
@@ -58,7 +60,7 @@ class site extends control
 
     /**
      * set sensitive.
-     * 
+     *
      * @access public
      * @return void
      */
@@ -83,20 +85,20 @@ class site extends control
 
     /**
      * Set robots.
-     * 
+     *
      * @access public
      * @return void
      */
     public function setRobots()
     {
-        $robotsFile = $this->app->getWwwRoot() . 'robots.txt'; 
+        $robotsFile = $this->app->getWwwRoot() . 'robots.txt';
         $writeable  = ((file_exists($robotsFile) and is_writeable($robotsFile)) or is_writeable(dirname($robotsFile)));
 
         if(!empty($_POST))
         {
             if(!$writeable) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->site->robotsUnwriteable, $robotsFile)) );
             if(!$this->post->robots) $this->send(array('result' => 'fail', 'message' => array('robots' => sprintf($this->lang->error->notempty, $this->lang->site->robots) )) );
-            
+
             $result = file_put_contents($robotsFile, $this->post->robots);
             if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
             $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setrobots')));
@@ -106,14 +108,14 @@ class site extends control
         if(file_exists($robotsFile)) $this->view->robots = file_get_contents($robotsFile);
 
         $this->view->robotsFile = $robotsFile;
-        $this->view->writeable  = $writeable; 
+        $this->view->writeable  = $writeable;
         $this->view->title      = $this->lang->site->setBasic;
         $this->display();
     }
 
     /**
      * set site security info.
-     * 
+     *
      * @access public
      * @return void
      */
@@ -163,7 +165,7 @@ class site extends control
             $ips = empty($_POST['allowedIP']) ? array() : explode(',', $this->post->allowedIP);
             foreach($ips as $ip)
             {
-                if(!empty($ip) and !helper::checkIP($ip)) 
+                if(!empty($ip) and !helper::checkIP($ip))
                 {
                     dao::$errors['allowedIP'][] = $this->lang->site->wrongAllowedIP;
                     break;
@@ -191,7 +193,7 @@ class site extends control
 
     /**
      * Set upload configures.
-     * 
+     *
      * @access public
      * @return void
      */
@@ -215,18 +217,18 @@ class site extends control
             $allowedFiles = explode(',', $allowedFiles);
 
             foreach ($allowedFiles as $extension)
-            {  
+            {
                 if(strlen($extension) > 5) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
             }
 
             $allowedFiles = implode(',', $allowedFiles);
 
             foreach ($dangers as $danger)
-            {  
+            {
                 if(strpos($allowedFiles, $danger) !== false) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
             }
 
-            $allowedFiles = ',' . $allowedFiles . ','; 
+            $allowedFiles = ',' . $allowedFiles . ',';
             $result = $this->loadModel('setting')->setItem('system.common.file.allowed', $allowedFiles);
             if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
 
@@ -241,7 +243,7 @@ class site extends control
 
     /**
      * set oauth login configure.
-     * 
+     *
      * @access public
      * return void
      */
