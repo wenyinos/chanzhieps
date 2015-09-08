@@ -1,5 +1,5 @@
 <?php include "header.html.php"; ?>
-<form method='post' class='ve-form mw-800px center-block' enctype='multipart/form-data'>
+<form method='post' action='<?php echo helper::createLink('ui', 'setlogo');?>' class='ve-form mw-800px center-block' enctype='multipart/form-data'>
   <table class='table table-form'>
     <tr>
       <th><?php echo $lang->site->name;?></th>
