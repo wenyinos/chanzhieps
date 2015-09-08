@@ -70,7 +70,7 @@ class helper
         $lang       = $config->langCode;
 
         /* Set viewType is mhtml if visit with mobile.*/
-        if(RUN_MODE == 'front' and helper::getDevice() == 'mobile' and $viewType != 'xml') $viewType = 'mhtml';
+        if(RUN_MODE == 'front' and helper::getDevice() == 'mobile' and $viewType != 'xml' and $methodName != 'oauthCallback') $viewType = 'mhtml';
 
         /* Set vars and alias. */
         if(!is_array($vars)) parse_str($vars, $vars);

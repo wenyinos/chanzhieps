@@ -107,17 +107,14 @@ class cartModel extends model
     {
         $cart    = ($this->cookie->cart === false or $this->cookie->cart == '') ? array() : json_decode($this->cookie->cart);
         $newCart = array();
-        $id      = 1;
         foreach($cart as $product)
         {
             $pro = new stdclass();
-            $pro->id      = $id;
             $pro->account = 'guest';
             $pro->product = $product->product;
             $pro->count   = $product->count;
             $pro->lang    = 'zh-cn';
             $newCart[$product->product] = $pro;
-            $id += 1;
         }
         return $newCart;
     }
@@ -176,7 +173,7 @@ class cartModel extends model
         foreach($goodsList as $id => $goods)
         {
             $goods->account = $this->app->user->account;
-            $this->dao->insert(TABLE_CART)->data($goods)->exec();;
+            $this->dao->insert(TABLE_CART)->data($goods)->exec();
             unset($goodsList[$id]);
         }
         setcookie('cart', json_encode($goodsList), time() + 60 * 60 * 24);
