@@ -555,8 +555,8 @@ class blockModel extends model
         {
             if($withGrid)
             {
-                if($block->grid == 0) echo "<div class='col-md-12 col-auto'><div class='row'>";
-                else echo "<div class='col-md-{$block->grid}' data-grid='{$block->grid}'><div class='row'>";
+                if($block->grid == 0) echo "<div class='col'><div class='row'>";
+                else echo "<div class='col' data-grid='{$block->grid}'><div class='row'>";
             }
 
             foreach($block->children as $child) $this->parseBlockContent($child, $withGrid, $containerHeader, $containerFooter);
@@ -570,11 +570,11 @@ class blockModel extends model
                 if(!isset($block->grid)) $block->grid = 12;
                 if($block->grid == 0)
                 {
-                    echo "<div class='col-md-4 col-auto'>";
+                    echo "<div class='col'>";
                 }
                 else
                 {
-                    echo "<div class='col-md-{$block->grid}' data-grid='{$block->grid}'>";
+                    echo "<div class='col' data-grid='{$block->grid}'>";
                 }
             }
 

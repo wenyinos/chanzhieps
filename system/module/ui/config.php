@@ -14,7 +14,7 @@ $config->ui->selectorOptions['basic']['border'] = array();
 $config->ui->selectorOptions['basic']['border']['radius'] = array('type' => 'size', 'default' => '3px', 'name' => 'border-radius');
 
 $config->ui->selectorOptions['basic']['pageBackground'] = array();
-$config->ui->selectorOptions['basic']['pageBackground']['backcolor']       = array('type' => 'color', 'default' => 'transparent', 'name' => 'background-color');
+$config->ui->selectorOptions['basic']['pageBackground']['backcolor']       = array('type' => 'color', 'default' => '#FFF', 'name' => 'background-color');
 $config->ui->selectorOptions['basic']['pageBackground']['backgroundImage'] = array('type' => 'image', 'default' => 'none', 'name' => 'background-image');
 $config->ui->selectorOptions['basic']['pageBackground']['repeat']          = array('type' => 'repeat', 'default' => 'repeat', 'name' => 'background-image-repeat');
 $config->ui->selectorOptions['basic']['pageBackground']['position']        = array('type' => 'position', 'default' => '0 0', 'name' => 'background-image-position');
@@ -98,7 +98,7 @@ $config->ui->selectorOptions['block']['heading']['fontSize']   = array('type' =>
 $config->ui->selectorOptions['block']['heading']['fontWeight'] = array('type' => 'fontWeight', 'default' => 'inherit', 'name' => 'block-heading-font-weight');
 
 $config->ui->selectorOptions['block']['body'] = array();
-$config->ui->selectorOptions['block']['body']['backcolor'] = array('type' => 'color', 'default' => 'transparent', 'name' => 'block-body-backcolor');
+$config->ui->selectorOptions['block']['body']['backcolor'] = array('type' => 'color', 'default' => '#FFF', 'name' => 'block-body-backcolor');
 $config->ui->selectorOptions['block']['body']['color']     = array('type' => 'color', 'default' => '#333', 'name' => 'block-body-color');
 $config->ui->selectorOptions['block']['body']['linkColor'] = array('type' => 'color', 'default' => '#0D3D88', 'name' => 'block-body-link-color');
 

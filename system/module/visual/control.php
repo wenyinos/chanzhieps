@@ -83,6 +83,17 @@ class visual extends control
     }
 
     /**
+     * Eidt navbar
+     *
+     * @access public
+     * @return void
+     */
+    public function editnavbar()
+    {
+        $this->display();
+    }
+
+    /**
      * Eidt block
      *
      * @access public
@@ -132,6 +143,19 @@ class visual extends control
     public function deleteBlock($blockID)
     {
         // TODO: remove block region from database
+        $this->send(array('result' => 'success'));
+        // $this->send(array('result' => 'fail', 'message' => 'Fail message.'));
+    }
+
+    /**
+     * Delete block
+     *
+     * @access public
+     * @return void
+     */
+    public function moveBlock($region)
+    {
+        // TODO: sort block in region from database
         $this->send(array('result' => 'success'));
         // $this->send(array('result' => 'fail', 'message' => 'Fail message.'));
     }
