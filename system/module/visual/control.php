@@ -119,6 +119,24 @@ class visual extends control
     }
 
     /**
+     * Add block
+     *
+     * @access public
+     * @return void
+     */
+    public function addBlock($region)
+    {
+        $blockModel = $this->loadModel('block');
+
+        $template = $this->config->template->{$this->device}->name;
+        $blockModel->loadTemplateLang($template);
+
+        $this->view->blocks   = $blockModel->getList($template);
+        $this->view->region   = $region;
+        $this->display();
+    }
+
+    /**
      * Delete block
      *
      * @access public
