@@ -107,12 +107,49 @@
         }
     };
 
+    var sortBlocks = function($blocksHolder, orders)
+    {
+        var withGrid = $blocksHolder.hasClass('row');
+        var name = 'block';
+        var setting = visuals[name];
+        var action = setting.actions.move;
+        var options = $.extend({orders: orders}, setting, $blocksHolder.data());
+
+        showLoadingMessage();
+        $.post(
+            createLink(action.module || 'visual', action.method || ('move' + name), (action.params || setting.params || '').format(options)),
+            {orders: orders.join(',')},
+            function(data)
+            {
+                if($.isPlainObject(data))
+                {
+                    if(data.result === 'success')
+                    {
+                        if(withGrid) $blocksHolder.trigger('tidy');
+                        showMessage((data.message || action.success || lang.deleted).format(options), 'success');
+                    }
+                    else
+                    {
+                        showMessage((data.message || action.fail || lang.operateFail).format(options), 'danger');
+                    }
+                }
+                else
+                {
+                    showMessage((action.fail || lang.operateFail).format(options), 'danger');
+                }
+            },
+            'json'
+        ).error(function(data)
+        {
+            showMessage((action.fail || lang.operateFail).format(options), 'danger');
+        });
+    }
+
     var initBlocks = function()
     {
         $$('.blocks').each(function()
         {
             var $blocksHolder = $$(this);
-            var withGrid = $blocksHolder.hasClass('row');
             $blocksHolder.find('.block, .panel-block').each(initVisualArea);
 
             $blocksHolder.sortable({trigger: '.ve-cover', selector: '.col', dragCssClass: '', finish: function(e)
@@ -122,39 +159,8 @@
                 {
                     orders.push($(this).find('.ve').data('id'));
                 });
-                var name = 'block';
-                var setting = visuals[name];
-                var action = setting.actions.move;
-                var options = $.extend({orders: orders}, setting, $blocksHolder.data());
 
-                showLoadingMessage();
-                $.post(
-                    createLink(action.module || 'visual', action.method || ('move' + name), (action.params || setting.params || '').format(options)),
-                    {orders: orders.join(',')},
-                    function(data)
-                    {
-                        if($.isPlainObject(data))
-                        {
-                            if(data.result === 'success')
-                            {
-                                if(withGrid) $blocksHolder.trigger('tidy');
-                                showMessage((data.message || action.success || lang.deleted).format(options), 'success');
-                            }
-                            else
-                            {
-                                showMessage((data.message || action.fail || lang.operateFail).format(options), 'danger');
-                            }
-                        }
-                        else
-                        {
-                            showMessage((action.fail || lang.operateFail).format(options), 'danger');
-                        }
-                    },
-                    'json'
-                ).error(function(data)
-                {
-                    showMessage((action.fail || lang.operateFail).format(options), 'danger');
-                });
+                sortBlocks($blocksHolder, orders);
             }});
         });
     };
