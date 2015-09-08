@@ -2,6 +2,17 @@
 $('html').addClass('m-' + config['currentModule'] + ' m-' + config['currentModule'] + '-' + config['currentMethod']);
 $(document).ready(function()
 {
+    $('ul.navbar-nav li a').each(function()
+    {
+        if($(this).attr('href') != '/' && document.location.href.indexOf($(this).attr('href')) > -1 && $(this).parents('li').attr('class').indexOf('active') == -1)
+        {
+            if(document.location.href.substring(document.location.href.indexOf($(this).attr('href'))) == $(this).attr('href'))
+            {
+                $(this).parents('li').addClass('active');
+            }
+        }
+    });
+
     setRequiredFields();
 
     $.setAjaxForm('#ajaxForm');

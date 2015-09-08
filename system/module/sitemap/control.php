@@ -70,7 +70,7 @@ class sitemap extends control
         }
 
         $articles = $this->article->getList('article', $this->tree->getFamily(0, 'article'), 'id_desc');
-        $pages    = $this->dao->select('id, title, alias')->from(TABLE_ARTICLE)->where('type')->eq('page')->andWhere('status')->eq('normal')->fetchAll('id');
+        $pages    = $this->dao->select('id, title, alias, editedDate')->from(TABLE_ARTICLE)->where('type')->eq('page')->andWhere('status')->eq('normal')->fetchAll('id');
         $blogs    = $this->article->getList('blog', $this->tree->getFamily(0, 'blog'), 'id_desc');
         $products = $this->product->getList($this->tree->getFamily(0), 'id_desc');
         $board    = $this->tree->getFamily(0);
