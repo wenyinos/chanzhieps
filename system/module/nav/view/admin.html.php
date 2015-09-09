@@ -25,9 +25,9 @@
     <?php echo html::a(helper::createLink('nav', 'admin', "type=mobile_blog"), $lang->nav->mobile_blog, $type == 'mobile_blog' ? "class='active'" : '');?>
   </div>
   <div class='panel-body'>
-    <form class='form-inline' id='navForm' method='post'>
+    <form class='form-inline ve-form' id='navForm' method='post'>
       <ul class='navList ulGrade1' id='navList'>
-        <?php 
+        <?php
         foreach($navs as $nav)
         {
             echo "<li class='liGrade1'>";

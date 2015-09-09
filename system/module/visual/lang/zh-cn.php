@@ -33,7 +33,7 @@ $lang->visual->config           = new stdclass();
 $lang->visual->config->logo     = array('name' => "Logo/名称", 'width' => 900);
 $lang->visual->config->slogan   = array('name' => "口号", 'width' => 700, 'actions' => array('delete' => true, 'move' => true));
 $lang->visual->config->powerby  = array('name' => "蝉知标识", 'title' => '移除蝉知标识', 'width' => 600, 'actions' => array('edit' => array('icon' => 'info-sign', 'text' => '移除蝉知标识')));
-$lang->visual->config->navbar   = array('name' => "导航", 'width' => '80%');
+$lang->visual->config->navbar   = array('name' => "导航", 'width' => '80%', 'params' => 'type={type}', 'module' => 'nav', 'actions' => array('edit' => array('method' => 'admin')));
 $lang->visual->config->block    = array('name' => "区块", 'width' => '1200', 'params' => 'blockID={id}',
     'actions' => array(
           'delete' => array('confirm' => '确定从布局中移除 【{title}】？', 'success' => '【{title}】已被移除。'),

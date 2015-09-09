@@ -36,14 +36,15 @@
         window.modalTrigger.show(
         $.extend(
         {
-            iframeBodyClass: 'body-modal-ve',
-            name  : 'veModal',
-            url   : url,
-            type  : 'iframe',
-            width : '80%',
-            icon  : 'pencil',
-            title : '',
-            hidden: function()
+            iframeBodyClass : 'body-modal-ve',
+            name            : 'veModal',
+            url             : url,
+            type            : 'iframe',
+            width           : '80%',
+            icon            : 'pencil',
+            title           : '',
+            mergeOptions    : true,
+            hidden          : function()
             {
                 $$('.ve-editing, .ve-blocks-show-border').removeClass('ve-editing ve-blocks-show-border');
             }
@@ -228,11 +229,14 @@
         var $wrapper = $$('<div/>');
         $wrapper.load(visualPageUrl + ' ' + selector, function(data)
         {
-            showMessage(lang.saved, 'success');
+            showMessage(data.message || lang.saved, 'success');
             var $veExtra = $ve.next();
             if($veExtra.is('style')) $veExtra.remove();
             $ve.replaceWith(initVisualArea($wrapper.find(selector)));
-            $ve.closest('.blocks.row').trigger('tidy');
+            setTimeout(function()
+            {
+                // $ve.closest('.blocks.row').trigger('tidy');
+            }, 100);
         });
     };
 
@@ -249,7 +253,16 @@
         {
             width : action.width || setting.width,
             icon  : action.icon || 'pencil',
-            title : action.title || setting.title || action.text + ' ' + setting.name
+            title : action.title || setting.title || action.text + ' ' + setting.name,
+            loaded: function(e)
+            {
+                var modal$ = e.jQuery;
+                modal$.setAjaxForm('.ve-form', function(response)
+                {
+                    $.closeModal();
+                    updateVisualArea(response);
+                });
+            }
         });
     };
 
