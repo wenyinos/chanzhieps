@@ -5,8 +5,6 @@ $.extend(
 {
     setAjaxForm: function(formID, callback)
     {
-        if($(document).data('setAjaxForm:' + formID)) return;
-
         appendFingerprint(formID);
         form = $(formID);
 
@@ -138,13 +136,19 @@ $.extend(
             }
         };
 
-        /* Call ajaxSubmit to sumit the form. */
-        $(document).on('submit', formID, function()
+        form.data('ajaxFormOptions', options);
+
+        if(!form.data('ajaxFormSubmitEvent'))
         {
-            $.disableForm(formID);
-            $(this).ajaxSubmit(options);
-            return false;    // Prevent the submitting event of the browser.
-        }).data('setAjaxForm:' + formID, true);
+            /* Call ajaxSubmit to sumit the form. */
+            $(document).on('submit.ajaxform', formID, function()
+            {
+                $.disableForm(formID);
+                $(this).ajaxSubmit($(this).data('ajaxFormOptions'));
+                return false;    // Prevent the submitting event of the browser.
+            });
+            form.data('ajaxFormSubmitEvent', true);
+        }
     },
 
     /* Switch the label and disabled attribute for the submit button in a form. */
@@ -713,14 +717,15 @@ function setGo2Top()
     })
 }(jQuery));
 
-function appendFingerprint(formID)
+function appendFingerprint(form)
 {
-    if($(formID).data('checkfingerprint'))
+    var $form = form instanceof jQuery ? form : $(form);
+    if($form.data('checkfingerprint'))
     {
         fingerprint = getFingerprint();
-        if($(formID).find('#fingerprint').size() == 0)
+        if($form.find('#fingerprint').size() == 0)
         {
-            $(formID).append("<input type='hidden' id='fingerprint'  name='fingerprint' value='" + fingerprint + "'>");
+            $form.append("<input type='hidden' id='fingerprint'  name='fingerprint' value='" + fingerprint + "'>");
         }
         else
         {
