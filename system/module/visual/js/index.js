@@ -224,18 +224,30 @@
     var updateVisualArea = function(response)
     {
         var $ve = $$('.ve-editing').first();
+        var name = $ve.data('ve');
         var id = $ve.attr('id');
-        var selector = '#' + id + ',#' + id + '+style';
+        var parentSelector = '';
+        if(name === 'block')
+        {
+            var $blocksHolder = $ve.closest('.blocks[data-region]');
+            if($blocksHolder.length)
+            {
+                parentSelector = '.blocks[data-region="' + $blocksHolder.data('region') + '"] ';
+            }
+        }
+        var selector = parentSelector + '#' + id + ', ' + parentSelector + '#' + id + '+style';
         var $wrapper = $$('<div/>');
         $wrapper.load(visualPageUrl + ' ' + selector, function(data)
         {
             showMessage(data.message || lang.saved, 'success');
             var $veExtra = $ve.next();
             if($veExtra.is('style')) $veExtra.remove();
-            $ve.replaceWith(initVisualArea($wrapper.find(selector)));
+            selector = '#' + id + ', #' + id + '+style';
+            var $newVe = initVisualArea($wrapper.find(selector));
+            $ve.replaceWith($newVe);
             setTimeout(function()
             {
-                // $ve.closest('.blocks.row').trigger('tidy');
+                if(name === 'block') $newVe.closest('.blocks.row').trigger('tidy');
             }, 100);
         });
     };
