@@ -145,7 +145,7 @@ class article extends control
 
         $this->view->title           = $this->lang->{$type}->create;
         $this->view->currentCategory = $categoryID;
-        $this->view->categories      = $this->loadModel('tree')->getOptionMenu($type, 0, $removeRoot = true);
+        $this->view->categories      = $categories ;
         $this->view->type            = $type;
 
         $this->display();
@@ -322,5 +322,33 @@ class article extends control
 
         $message = $stick == 0 ? $this->lang->article->successUnstick : $this->lang->article->successStick;
         $this->send(array('result' => 'success', 'message' => $message, 'locate' => inlink('admin', "type={$article->type}")));
+    }
+
+    /**
+     * Forward an article to blog. 
+     * 
+     * @param  int    $articleID 
+     * @access public
+     * @return void
+     */
+    public function forward2blog($articleID)
+    {
+        $categories = $this->loadModel('tree')->getOptionMenu('blog', 0, $removeRoot = true);
+        if(empty($categories))
+        {
+            die(js::locate($this->createLink('tree', 'redirect', "type='blog'")));
+        }
+
+        if($_POST)
+        {
+            $result = $this->article->forward2blog($articleID);
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+
+        $this->view->title      = $this->lang->article->forward2blog;
+        $this->view->categories = $categories;
+        $this->view->articleID  = $articleID;
+        $this->display();
     }
 }

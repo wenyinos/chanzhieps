@@ -38,6 +38,11 @@ $lang->article->link       = 'Link';
 $lang->article->css        = 'CSS';
 $lang->article->js         = 'JS';
 
+$lang->article->forward          = 'Forward';
+$lang->article->forward2blog     = 'Forward to blog';
+$lang->article->forward2forum    = 'Forward to blog';
+$lang->article->selectCategories = 'Select categories';
+
 $lang->article->list       = 'List';
 $lang->article->admin      = 'Admin';
 $lang->article->create     = 'Create';

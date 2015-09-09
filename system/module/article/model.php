@@ -385,15 +385,13 @@ class articleModel extends model
             ->checkIF(($type == 'page') and $this->post->alias, 'alias', 'unique', "type='page'")
             ->exec();
         $articleID = $this->dao->lastInsertID();
-
-        $this->loadModel('file')->updateObjectID($this->post->uid, $articleID, $type);
+        $this->loadModel('file')->updateObjectID($this->post->uid, $articleID, $type); 
         $this->file->copyFromContent($this->post->content, $articleID, $type);
 
         if(dao::isError()) return false;
 
         /* Save article keywords. */
         $this->loadModel('tag')->save($article->keywords);
-
         if($type != 'page') $this->processCategories($articleID, $type, $this->post->categories);
 
         $article = $this->getByID($articleID);
@@ -402,6 +400,43 @@ class articleModel extends model
         return $articleID;
     }
 
+    /**
+     * forward an article to blog. 
+     * 
+     * @param  int    $articleID 
+     * @access public
+     * @return bool 
+     */
+    public function forward2blog($articleID)
+    {
+        $article = $this->getByID($articleID);
+        $category = current($article->categories);
+
+        $blog = $this->dao->select('*')->from(TABLE_ARTICLE)->where('alias')->eq($articleID)->fetch();
+        if(!$blog) $blog = $this->dao->select('*')->from(TABLE_ARTICLE)->where('id')->eq($articleID)->fetch();
+
+        if(!$blog) return false;
+        
+        $blog->source     = 'copied';
+        $blog->type       = 'blog';
+        $blog->copyURL    = $this->createPreviewLink($articleID); 
+        $blog->author     = $this->app->user->realname;
+        $blog->addedDate  = $this->post->addedDate ? $this->post->addedDate : helper::now();
+        $blog->editedDate = $blog->addedDate;
+        unset($blog->id);
+
+        $this->dao->insert(TABLE_ARTICLE)->data($blog)->autoCheck()->exec();
+        $blogID = $this->dao->lastInsertID();
+        if(dao::isError()) return false;
+
+        /* Save article keywords. */
+        $this->loadModel('tag')->save($blog->keywords);
+        $this->processCategories($blogID, 'blog', $this->post->categories);
+
+        $blog = $this->getByID($blogID);
+        return $this->loadModel('search')->save('blog', $blog);
+    }
+    
     /**
      * Update an article.
      * 
