@@ -36,6 +36,7 @@
         window.modalTrigger.show(
         $.extend(
         {
+            iframeBodyClass: 'body-modal-ve',
             name  : 'veModal',
             url   : url,
             type  : 'iframe',
