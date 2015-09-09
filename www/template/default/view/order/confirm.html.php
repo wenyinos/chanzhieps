@@ -123,5 +123,4 @@
   </div>
 </div>
 <?php endif;?>
-<form id="payForm" target='_blank' class='hide'></form>
 <?php include TPL_ROOT . 'common/footer.html.php';?>

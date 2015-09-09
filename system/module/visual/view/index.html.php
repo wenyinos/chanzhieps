@@ -1,7 +1,6 @@
 <?php include "header.html.php"; ?>
 <?php
 js::set('visuals', $lang->visual->config);
-js::set('visualActions', $lang->visual->actionsName);
 js::set('visualLang', $lang->visual->jsLang);
 js::set('visualStyle', $themeRoot . 'common/visual.css');
 ?>
@@ -15,9 +14,9 @@ js::set('visualStyle', $themeRoot . 'common/visual.css');
     </ul>
     <ul class="nav navbar-nav pull-right">
       <li><a href='###' id='visualPreviewBtn'><i class='icon-eye-open'></i> <?php echo $lang->visual->preview?></a></li>
-      <li><a href='<?php echo $referer;?>' id='visualExitBtn'><i class='icon-signout'></i> <?php echo $lang->visual->exit?></a></li>
     </ul>
   </div>
+  <a href='<?php echo $referer;?>' class='close' id='visualExitBtn' data-toggle='tooltip' data-placement='left' title='<?php echo $lang->visual->exitVisualEdit;?>'>&times;</a>
 </div>
 <div id='visualPageWrapper'>
   <iframe id='visualPage' name='visualPage' src='<?php echo $referer;?>' frameborder='no' allowtransparency='true' scrolling='auto' hidefocus='' style='width: 100%; height: 100%; left: 0; top: 0'></iframe>

@@ -43,7 +43,7 @@ class slide extends control
         $this->view->slides = $this->slide->getList($groupID);
 
         $groupName = $this->dao->select('name')->from(TABLE_CATEGORY)->where('id')->eq($groupID)->fetch();
-        $this->view->groupName = $groupName->name;
+        $this->view->groupName = isset($groupName->name) ? $groupName->name : '';
         
         $this->display();
     }

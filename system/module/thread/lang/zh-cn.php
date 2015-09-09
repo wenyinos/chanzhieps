@@ -24,8 +24,8 @@ $lang->thread->lastReply   = '最后回帖';
 $lang->thread->isLink      = '跳转';
 $lang->thread->link        = '链接';
 
-$lang->thread->post         = '发贴';
-$lang->thread->postTo       = '发布贴子到';
+$lang->thread->post         = '发帖';
+$lang->thread->postTo       = '发布帖子到';
 $lang->thread->browse       = '主题列表';
 $lang->thread->stick        = '置顶';
 $lang->thread->edit         = '编辑主题';
@@ -66,5 +66,5 @@ $lang->thread->placeholder->link = '输入链接，可以是站外连接';
 if(!isset($lang->pager->settedInForum))
 {
     $lang->pager->noRecord = '';
-    $lang->pager->digest   = str_replace('记录', '回贴', $lang->pager->digest);
+    $lang->pager->digest   = str_replace('记录', '回帖', $lang->pager->digest);
 }

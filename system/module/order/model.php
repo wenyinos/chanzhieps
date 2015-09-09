@@ -54,7 +54,7 @@ class orderModel extends model
             ->page($pager)
             ->fetchAll('id');
 
-        $products = $this->dao->select('*')->from(TABLE_ORDERPRODUCT)->where('orderID')->in(array_keys($orders))->fetchGroup('orderID');
+        $products = $this->dao->select('*')->from(TABLE_ORDER_PRODUCT)->where('orderID')->in(array_keys($orders))->fetchGroup('orderID');
 
         foreach($orders as $order) $order->products = isset($products[$order->id]) ? $products[$order->id] : array();
 
@@ -122,11 +122,11 @@ class orderModel extends model
 
             $amount += $goods->price * $goods->count;
 
-            $this->dao->insert(TABLE_ORDERPRODUCT)->data($goods)->autoCheck()->exec();
+            $this->dao->insert(TABLE_ORDER_PRODUCT)->data($goods)->autoCheck()->exec();
         }
 
         /* Check valid products count. */
-        $productCout = $this->dao->select("count(*) as count")->from(TABLE_ORDERPRODUCT)->where('orderID')->eq($orderID)->fetch('count');
+        $productCout = $this->dao->select("count(*) as count")->from(TABLE_ORDER_PRODUCT)->where('orderID')->eq($orderID)->fetch('count');
         if(!$productCout)  return array('result' => 'fail', 'message' => $this->lang->order->noProducts);
 
         $this->dao->update(TABLE_ORDER)->set('amount')->eq($amount)->where('id')->eq($orderID)->exec();
@@ -297,7 +297,7 @@ class orderModel extends model
      */
     public function fixStocks($orderID)
     {
-        $goodsList = $this->dao->select('*')->from(TABLE_ORDERPRODUCT)->where('orderID')->eq($orderID)->fetchAll();
+        $goodsList = $this->dao->select('*')->from(TABLE_ORDER_PRODUCT)->where('orderID')->eq($orderID)->fetchAll();
 
         foreach($goodsList as $goods)
         {
@@ -603,19 +603,6 @@ class orderModel extends model
      }        
 
     /**
-     * Cut address to get receiver and phone.
-     *
-     * @param $address
-     * @access public
-     * @return string 
-     */
-    public function receiverInfo($address)
-    {
-        $receiverInfo = substr($address, 0, strpos($address, "]")+1);
-        return $receiverInfo;
-    } 
-
-    /**
      * Clear an order.
      * 
      * @param  int    $orderID 
@@ -626,7 +613,7 @@ class orderModel extends model
     {
         $this->dao->delete()->from(TABLE_ORDER)->where('id')->eq($orderID)->exec();
         if(dao::isError()) return false;
-        $this->dao->delete()->from(TABLE_ORDERPRODUCT)->where('orderID')->eq($orderID)->exec();
+        $this->dao->delete()->from(TABLE_ORDER_PRODUCT)->where('orderID')->eq($orderID)->exec();
         return !dao::isError();
     }
 }

@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php 
+<?php
 include TPL_ROOT . 'common/header.html.php';
 $path = isset($category->pathNames) ? array_keys($category->pathNames) : array(0);
 js::set('path', $path);
@@ -28,7 +28,7 @@ include TPL_ROOT . 'common/treeview.html.php';
         <strong><i class='icon-th'></i> <?php echo $category->name;?></strong>
         <span class='pull-right' id="modeControl">
           <?php foreach($lang->product->listMode as $mode => $text):?>
-          <?php echo html::a("javascript:;", $text, "data-mode='{$mode}'");?> 
+          <?php echo html::a("javascript:;", $text, "data-mode='{$mode}'");?>
           <?php endforeach;?>
         </span>
       </header>
@@ -41,7 +41,7 @@ include TPL_ROOT . 'common/treeview.html.php';
     <div class='row'><?php $this->block->printRegion($layouts, 'product_browse', 'bottom', true);?></div>
   </div>
   <div class='col-md-3 col-side'>
-    <side class='page-side'><?php $this->block->printRegion($layouts, 'product_browse', 'side');?></side>
+    <side class='page-side blocks'><?php $this->block->printRegion($layouts, 'product_browse', 'side');?></side>
   </div>
 </div>
 <div class='row'><?php $this->block->printRegion($layouts, 'product_browse', 'bottomBanner', true);?></div>

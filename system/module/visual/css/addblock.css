@@ -1,0 +1,4 @@
+.row-main > .col {padding: 0 15px;}
+.row-main > .col > h4 {padding: 5px 0}
+.nav-blocks > li > a {border: 1px solid #ddd; margin-bottom: 8px; border-radius: 2px}
+.nav-blocks > li > a:hover {border-color: #347aeb;}

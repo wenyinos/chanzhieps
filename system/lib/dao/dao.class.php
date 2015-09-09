@@ -971,7 +971,7 @@ class dao
             {
                 $pos = strpos($error, '%s');
                 if($pos === false) break;
-                $error = substr($error, 0, $pos) . $replace . substr($error, $pos + 2);
+                $error = substr($error, 0, $pos) . ' ' . $replace . ' ' . substr($error, $pos + 2);
             }
         }
         /* If the error define is an array, select the one which %s counts match the $replaces.  */

@@ -1,5 +1,6 @@
-/* Visual panel */
 #visualPanel {border-bottom: 1px solid #ddd; box-shadow: 0 1px 5px rgba(0,0,0,.124); background-color: #fafafa;}
 #visualPanel .nav > li > a.text-danger {color: red}
+
+#visualExitBtn {position: absolute; right: 15px; top: 9px}
 
 #visualPageWrapper {display: block; position: fixed; top: 40px; left: 0; right: 0; bottom: 0;}

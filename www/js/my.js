@@ -1,7 +1,18 @@
 /* Mark module and method of this page by add css class to body tag */
 $('html').addClass('m-' + config['currentModule'] + ' m-' + config['currentModule'] + '-' + config['currentMethod']);
-$(document).ready(function() 
+$(document).ready(function()
 {
+    $('ul.navbar-nav li a').each(function()
+    {
+        if($(this).attr('href') != '/' && document.location.href.indexOf($(this).attr('href')) > -1 && $(this).parents('li').attr('class').indexOf('active') == -1)
+        {
+            if(document.location.href.substring(document.location.href.indexOf($(this).attr('href'))) == $(this).attr('href'))
+            {
+                $(this).parents('li').addClass('active');
+            }
+        }
+    });
+
     setRequiredFields();
 
     $.setAjaxForm('#ajaxForm');
@@ -13,7 +24,7 @@ $(document).ready(function()
 
     /* Ping for keep login every six minute. */
     if(needPing) setInterval('ping()', 1000 * 360);
-    
+
     /* Load message notify. */
     $('#headNav #msgBox').load(createLink('message', 'notify'), function()
     {
@@ -24,11 +35,7 @@ $(document).ready(function()
     setGo2Top();
 
     /* Slide pictures start.   */
-    $('.carousel').each(function()
-    {
-        var $carousel = $(this).carousel();
-        $carousel.find('.item').first().addClass('active');
-    }).on('click', '.item[data-url]', function()
+    $(document).on('click', '.carousel .item[data-url]', function()
     {
         var url    = $(this).data('url');
         var target = $(this).data('target');
@@ -43,9 +50,6 @@ $(document).ready(function()
         if(parseFloat(ver) < 30) $('#navbar .dropdown > .dropdown-menu').each(function(){$(this).css('left', $(this).closest('.dropdown').position().left - 2);});
         else $('#navbar .dropdown').css('position', 'relative');
     }
-
-    /* Auto ajust block grid width */
-    autoBlockGrid();
 
     /* Remove empty headNav */
     var headNav = $('#headNav');

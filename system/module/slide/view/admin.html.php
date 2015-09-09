@@ -50,9 +50,9 @@
         </a>
         <div class='card-heading text-center'>
           <div class='group-title' data-id='<?php echo $group->id;?>' data-action="<?php echo inlink('editGroup', "groupID=$group->id");?>">
-            <span class='group-name'><?php echo $group->name;?></span>&nbsp;
-            <?php echo html::a('javascript:;', "<i class='icon icon-pencil'></i>", "class='edit-group-btn'");?>&nbsp;
-            <?php echo html::a(inlink('removeGroup', "groupID=$group->id"), '<i class="icon icon-remove"></i>', "class='deleter'");?>
+            <span class='group-name'><?php echo $group->name;?></span>&nbsp;&nbsp;
+            <?php echo html::a('javascript:;', "<i class='icon icon-pencil'></i>{$lang->slide->rename}", "class='edit-group-btn'");?>&nbsp;
+            <?php echo html::a(inlink('removeGroup', "groupID=$group->id"), "<i class='icon icon-remove'></i>{$lang->slide->removeGroup}", "class='deleter'");?>
           </div>
         </div>
       </div>
@@ -66,7 +66,7 @@
 <form id="editGroupForm" class='edit-form' method='post' >
   <div class='editGroup input-group'>
     <?php echo html::input('groupName', $group->name, "class='form-control'");?>
-    <span class="input-group-btn fix-border"><?php echo html::submitButton('', 'submit btn btn-primary', "data-placement='left'");?> </span>
+    <span class="input-group-btn fix-border"><?php echo html::submitButton('', 'submit btn btn-primary');?> </span>
     <span class="input-group-btn"><?php echo html::commonButton($lang->cancel, 'btn-close-form btn');?></span>
     <?php echo html::hidden('groupID', '', "class='groupID'");?>
   </div>
