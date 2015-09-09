@@ -10,6 +10,7 @@
     var DEFAULT_ACTIONS_CONFIG =
     {
         edit: {icon: 'pencil', text: lang.actions.edit},
+        add: {icon: 'plus', text: lang.actions.add},
         delete: {icon: 'remove', text: lang.actions.delete, confirm: lang.confirmDelete},
         move: {icon: 'move', text: lang.actions.move}
     };
@@ -28,6 +29,24 @@
     var showLoadingMessage = function()
     {
         showMessage(lang.doing, {time: 0, close: false});
+    };
+
+    var openModal = function(url, options)
+    {
+        window.modalTrigger.show(
+        $.extend(
+        {
+            name  : 'veModal',
+            url   : url,
+            type  : 'iframe',
+            width : '80%',
+            icon  : 'pencil',
+            title : '',
+            hidden: function()
+            {
+                $$('.ve-editing, .ve-blocks-show-border').removeClass('ve-editing ve-blocks-show-border');
+            }
+        }, options));
     };
 
     // visual settings
@@ -97,6 +116,7 @@
 
             $.each(setting.actions, function(actionName, action)
             {
+                if(action.hidden) return;
                 $actions.append('<li data-toggle="tooltip" class="ve-action-' + actionName + '" title="' + action.text + '">'
                     + (action.icon ? '<i class="icon icon-' + action.icon + '"></i>' : action.text) + '</li>');
             });
@@ -107,12 +127,60 @@
         }
     };
 
+    var sortBlocks = function($blocksHolder, orders)
+    {
+        var withGrid = $blocksHolder.hasClass('row');
+        var name = 'block';
+        var setting = visuals[name];
+        var action = setting.actions.move;
+        var options = $.extend({orders: orders}, setting, $blocksHolder.data());
+
+        showLoadingMessage();
+        $.post(
+            createLink(action.module || 'visual', action.method || ('move' + name), (action.params || setting.params || '').format(options)),
+            {orders: orders.join(',')},
+            function(data)
+            {
+                if($.isPlainObject(data))
+                {
+                    if(data.result === 'success')
+                    {
+                        if(withGrid) $blocksHolder.trigger('tidy');
+                        showMessage((data.message || action.success || lang.deleted).format(options), 'success');
+                    }
+                    else
+                    {
+                        showMessage((data.message || action.fail || lang.operateFail).format(options), 'danger');
+                    }
+                }
+                else
+                {
+                    showMessage((action.fail || lang.operateFail).format(options), 'danger');
+                }
+            },
+            'json'
+        ).error(function(data)
+        {
+            showMessage((action.fail || lang.operateFail).format(options), 'danger');
+        });
+    };
+
+    var addBlock = function(region, blockID)
+    {
+        var name = 'block';
+        var setting = visuals[name];
+        var action = setting.actions.move;
+        showMessage(lang.saved, 'success');
+        $.closeModal();
+    };
+
+    $.addBlock = addBlock;
+
     var initBlocks = function()
     {
         $$('.blocks').each(function()
         {
             var $blocksHolder = $$(this);
-            var withGrid = $blocksHolder.hasClass('row');
             $blocksHolder.find('.block, .panel-block').each(initVisualArea);
 
             $blocksHolder.sortable({trigger: '.ve-cover', selector: '.col', dragCssClass: '', finish: function(e)
@@ -122,40 +190,32 @@
                 {
                     orders.push($(this).find('.ve').data('id'));
                 });
-                var name = 'block';
-                var setting = visuals[name];
-                var action = setting.actions.move;
-                var options = $.extend({orders: orders}, setting, $blocksHolder.data());
 
-                showLoadingMessage();
-                $.post(
-                    createLink(action.module || 'visual', action.method || ('move' + name), (action.params || setting.params || '').format(options)),
-                    {orders: orders.join(',')},
-                    function(data)
-                    {
-                        if($.isPlainObject(data))
-                        {
-                            if(data.result === 'success')
-                            {
-                                if(withGrid) $blocksHolder.trigger('tidy');
-                                showMessage((data.message || action.success || lang.deleted).format(options), 'success');
-                            }
-                            else
-                            {
-                                showMessage((data.message || action.fail || lang.operateFail).format(options), 'danger');
-                            }
-                        }
-                        else
-                        {
-                            showMessage((action.fail || lang.operateFail).format(options), 'danger');
-                        }
-                    },
-                    'json'
-                ).error(function(data)
-                {
-                    showMessage((action.fail || lang.operateFail).format(options), 'danger');
-                });
+                sortBlocks($blocksHolder, orders);
             }});
+
+            $blocksHolder.append('<div class="ve-block-actions"><button type="button" class="btn btn-block btn-ve ve-preview-hidden ve-action-addblock"><i class="icon icon-plus"></i> {addBlock}</button></div>'.format(lang));
+        });
+
+        $$('body').on('mouseenter', '.ve-action-addblock', function()
+        {
+            $$(this).closest('blocks').addClass('ve-blocks-show-border');
+        }).on('mouseleave', '.ve-action-addblock', function()
+        {
+            $$(this).closest('blocks').removeClass('ve-blocks-show-border');
+        }).on('click', '.ve-action-addblock', function()
+        {
+            var name = 'block';
+            var setting = visuals[name];
+            var action = setting.actions.add;
+            var $blocksHolder = $$(this).closest('.blocks');
+            var options = $.extend({}, setting, $blocksHolder.data());
+            openModal(createLink(action.module || 'visual', action.method || ('add' + name), (action.params || '').format(options)),
+            {
+                width : action.width || setting.width,
+                icon  : action.icon || 'plus',
+                title : action.title || setting.title || action.text + ' ' + setting.name
+            });
         });
     };
 
@@ -184,18 +244,11 @@
         var setting = visuals[name];
         var options = $.extend({}, setting, $ve.data());
         var action = setting.actions.edit;
-        window.modalTrigger.show(
+        openModal(createLink(action.module || setting.module || 'visual', action.method || ('edit' + name), (action.params || setting.params || '').format(options)),
         {
-            name  : 'veModal',
-            url   : createLink(action.module || 'visual', action.method || ('edit' + name), (action.params || setting.params || '').format(options)),
-            type  : 'iframe',
-            width : setting.width,
-            icon  : setting.icon || 'pencil',
-            title : setting.title || action.text + ' ' + setting.name,
-            hidden: function()
-            {
-                $$('.ve-editing').removeClass('ve-editing');
-            }
+            width : action.width || setting.width,
+            icon  : action.icon || 'pencil',
+            title : action.title || setting.title || action.text + ' ' + setting.name
         });
     };
 

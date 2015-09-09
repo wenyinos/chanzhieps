@@ -32,16 +32,6 @@ class visual extends control
      */
     public function editlogo()
     {
-        if(!empty($_POST))
-        {
-            $nameResult = false;
-            if(!empty($_POST['name'])) $nameResult = $this->loadModel('setting')->setItem('system.common.site.name', $_POST['name']);
-
-            $return = $this->loadModel('ui')->setOptionWithFile($section = 'logo', $htmlTagName = 'logo');
-
-            if($nameResult || $return['result']) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
-            else $this->send(array('result' => 'fail', 'message' => $return['message']));
-        }
         $this->app->loadLang('ui');
         $template = $this->config->template->{$this->device}->name;
         $theme    = $this->config->template->{$this->device}->theme;
@@ -125,6 +115,24 @@ class visual extends control
         $this->view->theme    = $theme;
         $this->view->block    = $blockModel->getByID($blockID);
         $this->view->type     = $this->get->type ? $this->get->type : $this->view->block->type;
+        $this->display();
+    }
+
+    /**
+     * Add block
+     *
+     * @access public
+     * @return void
+     */
+    public function addBlock($region)
+    {
+        $blockModel = $this->loadModel('block');
+
+        $template = $this->config->template->{$this->device}->name;
+        $blockModel->loadTemplateLang($template);
+
+        $this->view->blocks   = $blockModel->getList($template);
+        $this->view->region   = $region;
         $this->display();
     }
 

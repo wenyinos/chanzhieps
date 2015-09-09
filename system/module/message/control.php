@@ -65,8 +65,13 @@ class message extends control
     {
         $message = $this->message->getByID($messageID);
         if($message->to != $this->app->user->account) die();
+
         $this->message->markReaded($message->id);
         if($message->link) $this->locate($message->link);
+
+        $link = $this->message->getObjectLink($message);
+        if($link) $this->locate($link);
+
         $this->locate($this->createLink('user', 'message'));
     }
 
