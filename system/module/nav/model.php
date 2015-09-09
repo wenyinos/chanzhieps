@@ -51,6 +51,34 @@ class navModel extends model
      */
     public function getDefault($type)
     {
+        if($type == 'desktop_blog' or $type == 'mobile_blog')
+        {
+            $nav = new stdclass();
+            $nav->type   = 'system';
+            $nav->system = 'blog';
+            $nav->class  = 'nav-system-blog';
+            $nav->title  = $this->lang->nav->system->blog;
+            $nav->url    = commonModel::createFrontLink('blog', 'index'); 
+            $nav->target = '_self';
+            $navs[] = $nav;
+
+            $blogTree = $this->loadModel('tree')->getChildren(0, 'blog');
+            foreach($blogTree as $blog)
+            {
+                $nav = new stdclass();
+                $nav->type   = 'blog';
+                $nav->system = 'blog';
+                $nav->blog   = $blog->id;
+                $nav->class  = 'nav-system-blog';
+                $nav->title  = $blog->name;
+                $nav->url    = commonModel::createFrontLink('blog', 'index', "categoryID={$blog->id}");
+                $nav->target = '_self';
+                $navs[] = $nav;
+            }
+
+            return $navs;
+        }
+
         global $config;
         $defaultNavs = new stdclass();
         $defaultNavs->home    = $config->homeRoot;
@@ -89,18 +117,21 @@ class navModel extends model
         if(empty($nav))
         {
             $nav = new stdclass();
-            $nav->type   = 'system';
-            $nav->system = 'home';
-            $nav->title  = $this->lang->nav->system->home;
-            $nav->url    = '';
+            $nav->type  = 'system';
+            $nav->title = $this->lang->home;
+            $nav->url   = '';
+            if($this->config->site->type == 'portal') $nav->system = 'home';
+            if($this->config->site->type == 'blog')   $nav->system = 'blog';
         }
 
         $childGrade  = $grade + 1;
         $articleTree = $this->loadModel('tree')->getOptionMenu('article');
+        $blogTree    = $this->loadModel('tree')->getOptionMenu('blog');
         $productTree = $this->loadModel('tree')->getOptionMenu('product');
         $pages       = $this->loadModel('article')->getPagePairs();
 
         $articleHidden = ($nav->type == 'article') ? '' : 'hide'; 
+        $blogHidden    = ($nav->type == 'blog')    ? '' : 'hide'; 
         $productHidden = ($nav->type == 'product') ? '' : 'hide'; 
         $pageHidden    = ($nav->type == 'page')    ? '' : 'hide'; 
         $system        = ($nav->type == 'system')  ? '' : 'hide'; 
@@ -108,16 +139,31 @@ class navModel extends model
 
         $entry = '<i class="icon-folder-open-alt shut"></i><i class="icon icon-circle text-muted"></i>';
         if(isset($nav->children) && !empty($nav->children)) $entry = '<i class="icon-folder-close shut"></i>';
-
+        if($this->config->site->type == 'blog')
+        {
+            $this->lang->nav->system->blog = $this->lang->home;
+            unset($this->lang->nav->types['article']);
+            unset($this->lang->nav->types['product']);
+            unset($this->lang->nav->types['page']);
+            unset($this->lang->nav->system->home);
+            unset($this->lang->nav->system->company);
+            unset($this->lang->nav->system->contact);
+            unset($this->lang->nav->system->forum);
+            unset($this->lang->nav->system->book);
+            unset($this->lang->nav->system->message);
+        }
         /* nav type select tag. */
         $entry .= html::select("nav[{$grade}][type][]", $this->lang->nav->types, $nav->type, "class='navType form-control' grade='{$grade}'");
 
-        /* artcle and system select tag. */
-        $entry .= html::select("nav[{$grade}][article][]", $articleTree, isset($nav->article) ? $nav->article : '', "class='navSelector form-control {$articleHidden}'");
-        $entry .= html::select("nav[{$grade}][product][]", $productTree, isset($nav->product) ? $nav->product : '', "class='navSelector form-control {$productHidden}'");
-        $entry .= html::select("nav[{$grade}][page][]", $pages, isset($nav->page) ? $nav->page : '', "class='navSelector form-control {$pageHidden}'");
+        if($this->config->site->type != 'blog')
+        {
+            /* artcle and system select tag. */
+            $entry .= html::select("nav[{$grade}][article][]", $articleTree, isset($nav->article) ? $nav->article : '', "class='navSelector form-control {$articleHidden}'");
+            $entry .= html::select("nav[{$grade}][product][]", $productTree, isset($nav->product) ? $nav->product : '', "class='navSelector form-control {$productHidden}'");
+            $entry .= html::select("nav[{$grade}][page][]", $pages, isset($nav->page) ? $nav->page : '', "class='navSelector form-control {$pageHidden}'");
+        }
+        $entry .= html::select("nav[{$grade}][blog][]", $blogTree, isset($nav->blog) ? $nav->blog : '', "class='navSelector form-control {$blogHidden}'");
         $entry .= html::select("nav[{$grade}][system][]", $this->lang->nav->system, $nav->system, "class='navSelector form-control {$system}'");
-
         $entry .= html::input("nav[{$grade}][title][]", $nav->title, "placeholder='{$this->lang->nav->inputTitle}' class='input-default form-control titleInput'");
 
         /* url input tag. */
@@ -208,6 +254,13 @@ class navModel extends model
             $category = $this->loadModel('tree')->getByID($nav->article);
             if(empty($category)) return commonModel::createFrontLink('article', 'index');
             return commonModel::createFrontLink('article', 'browse', "categoryID={$nav->article}", "category={$category->alias}");
+        }
+
+        if($nav->type == 'blog')
+        {   
+            $category = $this->loadModel('tree')->getByID($nav->blog);
+            if(empty($category)) return commonModel::createFrontLink('blog', 'index');
+            return commonModel::createFrontLink('blog', 'index', "categoryID={$nav->blog}", "category={$category->alias}");
         }
 
         if($nav->type == 'product')
