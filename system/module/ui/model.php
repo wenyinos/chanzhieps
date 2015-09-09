@@ -212,8 +212,6 @@ class uiModel extends model
         $savePath = dirname($cssFile);
         if(!is_dir($savePath)) mkdir($savePath, 0777, true);
         $lessTemplateDir = $this->app->getWwwRoot() . 'template' . DS . $template . DS . 'theme' . DS . $theme . DS;
-        $lessTemplate = $lessTemplateDir . 'style.less';
-        $customLessFile = $lessTemplateDir . 'custom.less';
 
         foreach($this->config->ui->themes[$template][$theme] as $section => $selector)
         {
@@ -243,14 +241,24 @@ class uiModel extends model
         if(!empty($extraCss)) $extraCss = $lessc->compile($extraCss);
 
         $css  = '';
+        $lessTemplate = $lessTemplateDir . 'style.less';
         if(file_exists($lessTemplate))
         {
             $css .= '/* User custom theme style for teamplate:' . $template . ' - theme:' . $theme . '. (' . date("Y-m-d H:i:s") . ') */' . "\r\n";
             $css .= $lessc->compileFile($lessTemplate);
         }
+        else if(file_exists($lessTemplateDir . 'style.css'))
+        {
+            $css .= file_get_contents($lessTemplateDir . 'style.css');
+        }
+        $customLessFile = $lessTemplateDir . 'custom.less';
         if(file_exists($customLessFile))
         {
             $css .= $lessc->compileFile($customLessFile);
+        }
+        else if(file_exists($lessTemplateDir . 'custom.css'))
+        {
+            $css .= file_get_contents($lessTemplateDir . 'custom.css');
         }
         if($extraCss)
         {
