@@ -82,7 +82,7 @@
             {
                 actionSetting = {text: action};
             }
-            setting.actions[actionName] = $.extend({}, DEFAULT_ACTIONS_CONFIG[actionName], actionSetting)
+            setting.actions[actionName] = $.extend({name: actionName}, DEFAULT_ACTIONS_CONFIG[actionName], actionSetting)
         });
         visuals[name] = setting;
     });
@@ -140,6 +140,42 @@
         }
     };
 
+    var postActionData = function(name, action, options, callback, postData)
+    {
+        var setting = visuals[name];
+        showLoadingMessage();
+        $.post(
+            createLink(action.module || 'visual', action.method || (action.name + name), (action.params || setting.params || '').format(options)),
+            postData,
+            function(data)
+            {
+                if($.isPlainObject(data))
+                {
+                    if(data.result === 'success')
+                    {
+                        callback && callback('success', data);
+                        showMessage((data.message || action.success || lang.deleted).format(options), 'success');
+                    }
+                    else
+                    {
+                        callback && callback('fail', data);
+                        showMessage((data.message || action.fail || lang.operateFail).format(options), 'danger');
+                    }
+                }
+                else
+                {
+                    callback && callback('unknown', data);
+                    showMessage((action.fail || lang.operateFail).format(options), 'danger');
+                }
+            },
+            'json'
+        ).error(function(data)
+        {
+            callback && callback('error', data);
+            showMessage((action.fail || lang.operateFail).format(options), 'danger');
+        });
+    };
+
     var sortBlocks = function($blocksHolder, orders)
     {
         var withGrid = $blocksHolder.hasClass('row');
@@ -148,34 +184,13 @@
         var action = setting.actions.move;
         var options = $.extend({orders: orders}, setting, $blocksHolder.data());
 
-        showLoadingMessage();
-        $.post(
-            createLink(action.module || 'visual', action.method || ('move' + name), (action.params || setting.params || '').format(options)),
-            {orders: orders.join(',')},
-            function(data)
-            {
-                if($.isPlainObject(data))
-                {
-                    if(data.result === 'success')
-                    {
-                        if(withGrid) $blocksHolder.trigger('tidy');
-                        showMessage((data.message || action.success || lang.deleted).format(options), 'success');
-                    }
-                    else
-                    {
-                        showMessage((data.message || action.fail || lang.operateFail).format(options), 'danger');
-                    }
-                }
-                else
-                {
-                    showMessage((action.fail || lang.operateFail).format(options), 'danger');
-                }
-            },
-            'json'
-        ).error(function(data)
+        postActionData(name, action, options, function(result)
         {
-            showMessage((action.fail || lang.operateFail).format(options), 'danger');
-        });
+            if(result === 'success')
+            {
+                if(withGrid) $blocksHolder.trigger('tidy');
+            }
+        }, orders.join(','));
     };
 
     var addBlock = function(region, blockID)
@@ -194,7 +209,17 @@
         $$('.blocks').each(function()
         {
             var $blocksHolder = $$(this);
-            $blocksHolder.find('.block, .panel-block').each(initVisualArea);
+            var withGrid = $blocksHolder.hasClass('row');
+            $blocksHolder.find('.block, .panel-block').each(function()
+            {
+                var $ve = $$(this);
+                initVisualArea($ve);
+
+                if(withGrid)
+                {
+                    $ve.append('<div class="ve-resize-handler left"><i class="icon icon-resize-horizontal"></i></div><div class="ve-resize-handler right"><i class="icon icon-resize-horizontal"></i></div>');
+                }
+            });
 
             $blocksHolder.sortable({trigger: '.ve-cover', selector: '.col', dragCssClass: '', finish: function(e)
             {
@@ -210,7 +235,8 @@
             $blocksHolder.append('<div class="ve-block-actions"><button type="button" class="btn btn-block btn-ve ve-preview-hidden ve-action-addblock"><i class="icon icon-plus"></i> {addBlock}</button></div>'.format(lang));
         });
 
-        $$('body').on('mouseenter', '.ve-action-addblock', function()
+        var $$body = $$('body');
+        $$body.on('mouseenter', '.ve-action-addblock', function()
         {
             $$(this).closest('blocks').addClass('ve-blocks-show-border');
         }).on('mouseleave', '.ve-action-addblock', function()
@@ -229,6 +255,46 @@
                 icon  : action.icon || 'plus',
                 title : action.title || setting.title || action.text + ' ' + setting.name
             });
+        }).on('mousedown', '.ve-resize-handler', function(e)
+        {
+            var $ve = $$(this).closest('.ve');
+            var $col = $ve.parent();
+            var $row = $ve.closest('.row');
+            var $blocksHolder = $ve.closest('.row.blocks');
+            var startX = e.pageX;
+            var startWidth = $col.width();
+            var rowWidth = $row.width();
+            var oldGrid = $col.attr('data-grid');
+
+            var mouseMove = function(event)
+            {
+                $ve.addClass('ve-editing ve-editing-resize');
+                var x = event.pageX;
+                var grid = Math.max(1, Math.min(12, Math.round(12 * (startWidth + (x - startX)) / rowWidth)));
+                $col.attr('data-grid', grid);
+                event.preventDefault();
+            };
+
+            var mouseUp = function(event)
+            {
+                $ve.removeClass('ve-editing ve-editing-resize');
+                var name = 'block';
+                var setting = visuals[name];
+                var options = getVisualOptions($ve);
+                postActionData(name, setting.actions.layout, options, function(result)
+                {
+                    if(result !== 'success')
+                    {
+                        $col.attr('data-grid', oldGrid);
+                    }
+                    $blocksHolder.trigger('tidy');
+                }, {grid: $col.attr('data-grid')});
+                $$body.unbind('mousemove.ve.resize', mouseMove).unbind('mouseup.ve.resize', mouseUp);
+                event.preventDefault();
+            };
+
+            $$body.bind('mousemove.ve.resize', mouseMove).bind('mouseup.ve.resize', mouseUp);
+            e.preventDefault();
         });
     };
 
@@ -302,40 +368,20 @@
         {
             if(result)
             {
-                showLoadingMessage();
-                $.post(
-                    createLink(action.module || 'visual', action.method || ('delete' + name), (action.params || setting.params || '').format(options)),
-                    function(data)
-                    {
-                        if($.isPlainObject(data))
-                        {
-                            if(data.result === 'success')
-                            {
-                                var $forRemove = $ve;
-                                if(name === 'block')
-                                {
-                                    var $veParent = $ve.parent();
-                                    if($veParent.is('.col, [class*="col-"]')) $forRemove = $veParent;
-                                }
-                                $forRemove.hide();
-                                $ve.closest('.blocks.row').trigger('tidy');
-                                $forRemove.remove();
-                                showMessage((data.message || action.success || lang.deleted).format(options), 'success');
-                            }
-                            else
-                            {
-                                showMessage((data.message || action.fail || lang.operateFail).format(options), 'danger');
-                            }
-                        }
-                        else
-                        {
-                            showMessage((action.fail || lang.operateFail).format(options), 'danger');
-                        }
-                    },
-                    'json'
-                ).error(function(data)
+                postActionData(name, action, options, function(result)
                 {
-                    showMessage((action.fail || lang.operateFail).format(options), 'danger');
+                    if(result === 'success')
+                    {
+                        var $forRemove = $ve;
+                        if(name === 'block')
+                        {
+                            var $veParent = $ve.parent();
+                            if($veParent.is('.col, [class*="col-"]')) $forRemove = $veParent;
+                        }
+                        $forRemove.hide();
+                        $ve.closest('.blocks.row').trigger('tidy');
+                        $forRemove.remove();
+                    }
                 });
             }
         }
