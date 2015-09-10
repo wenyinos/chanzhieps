@@ -20,8 +20,10 @@ class forum extends control
     public function index()
     {
         $boards = $this->forum->getBoards();
-        $this->view->title    = $this->lang->forumHome;
-        $this->view->boards   = $boards;
+        $this->view->title      = $this->lang->forumHome;
+        $this->view->boards     = $boards;
+        $this->view->mobileURL  = helper::createLink('forum', 'index', '', '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('forum', 'index', '', '', 'html');
 
         $this->display();
     }
@@ -47,13 +49,15 @@ class forum extends control
         $pager   = new pager(0, $recPerPage, $pageID);
         $threads = $this->loadModel('thread')->getList($board->id, $orderBy = 'repliedDate_desc', $pager);
 
-        $this->view->title    = $board->name;
-        $this->view->keywords = $board->keywords . '' . $this->config->site->keywords;
-        $this->view->desc     = strip_tags($board->desc);
-        $this->view->board    = $board;
-        $this->view->sticks   = $this->thread->getSticks($board->id);
-        $this->view->threads  = $threads;
-        $this->view->pager    = $pager;
+        $this->view->title      = $board->name;
+        $this->view->keywords   = $board->keywords . '' . $this->config->site->keywords;
+        $this->view->desc       = strip_tags($board->desc);
+        $this->view->board      = $board;
+        $this->view->sticks     = $this->thread->getSticks($board->id);
+        $this->view->threads    = $threads;
+        $this->view->pager      = $pager;
+        $this->view->mobileURL  = helper::createLink('forum', 'board', "borderID=$boardID&pageID=$pageID", "category=$board->alias", 'mhtml');
+        $this->view->desktopURL = helper::createLink('forum', 'board', "borderID=$boardID&pageID=$pageID", "category=$board->alias", 'html');
 
         $this->display();
     }

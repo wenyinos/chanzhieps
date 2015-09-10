@@ -236,6 +236,7 @@ class fileModel extends model
             $file['lang']       = 'all';
             if($objectType == 'logo') $file['lang'] = $this->app->getClientLang();
             unset($file['tmpname']);
+            unset($file['id']);
             $this->dao->insert(TABLE_FILE)->data($file)->exec();
             $fileTitles[$this->dao->lastInsertId()] = $file['title'];
         }

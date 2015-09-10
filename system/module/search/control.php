@@ -32,10 +32,12 @@ class search extends control
         $begin = time();
         $this->view->results = $this->search->getList($words, $pager);
 
-        $this->view->consumed = time() - $begin;
-        $this->view->title    = $this->lang->search->index; 
-        $this->view->pager    = $pager;
-        $this->view->words    = $words;
+        $this->view->consumed   = time() - $begin;
+        $this->view->title      = $this->lang->search->index; 
+        $this->view->pager      = $pager;
+        $this->view->words      = $words;
+        $this->view->mobileURL  = helper::createLink('search', 'index', "words=$words&pageID=$pageID", '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('search', 'index', "words=$words&pageID=$pageID", '', 'html');
 
         $this->display();
     }

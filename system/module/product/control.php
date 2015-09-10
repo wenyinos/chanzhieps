@@ -74,13 +74,15 @@ class product extends control
         $desc     = strip_tags($category->desc) . ' ';
         $this->session->set('productCategory', $category->id);
 
-        $this->view->title     = $title;
-        $this->view->keywords  = $keywords;
-        $this->view->desc      = $desc;
-        $this->view->category  = $category;
-        $this->view->products  = $products;
-        $this->view->pager     = $pager;
-        $this->view->contact   = $this->loadModel('company')->getContact();
+        $this->view->title      = $title;
+        $this->view->keywords   = $keywords;
+        $this->view->desc       = $desc;
+        $this->view->category   = $category;
+        $this->view->products   = $products;
+        $this->view->pager      = $pager;
+        $this->view->contact    = $this->loadModel('company')->getContact();
+        $this->view->mobileURL  = helper::createLink('product', 'browse', "categoryID=$categoryID&pageID=$pageID", "category=$category->alias", 'mhtml');
+        $this->view->desktopURL = helper::createLink('product', 'browse', "categoryID=$categoryID&pageID=$pageID", "category=$category->alias", 'html');
 
         $this->display();
     }
@@ -251,6 +253,8 @@ class product extends control
         $this->view->category    = $category;
         $this->view->contact     = $this->loadModel('company')->getContact();
         $this->view->stockOpened = isset($this->config->product->stock) && $this->config->product->stock == 1;
+        $this->view->mobileURL   = helper::createLink('product', 'view', "productID=$productID", "category=$category->alias&name=$product->alias", 'mhtml');
+        $this->view->desktopURL  = helper::createLink('product', 'view', "productID=$productID", "category=$category->alias&name=$product->alias", 'html');
 
         $this->dao->update(TABLE_PRODUCT)->set('views = views + 1')->where('id')->eq($productID)->exec(false);
 

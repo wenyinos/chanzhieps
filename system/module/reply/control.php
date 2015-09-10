@@ -100,10 +100,12 @@ class reply extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => $this->createLink('thread', 'view', "threaID=$thread->id")));
         }
 
-        $this->view->title  = $this->lang->reply->edit . $this->lang->colon . $thread->title;
-        $this->view->reply  = $reply;
-        $this->view->thread = $thread;
-        $this->view->board  = $this->loadModel('tree')->getById($thread->board);
+        $this->view->title      = $this->lang->reply->edit . $this->lang->colon . $thread->title;
+        $this->view->reply      = $reply;
+        $this->view->thread     = $thread;
+        $this->view->board      = $this->loadModel('tree')->getById($thread->board);
+        $this->view->mobileURL  = helper::createLink('reply', 'edit', "replyID=$replyID", '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('reply', 'edit', "replyID=$replyID", '', 'html');
 
         $this->display();
     }

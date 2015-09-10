@@ -60,13 +60,15 @@ class article extends control
             die($this->fetch('error', 'index'));
         }
 
-        $this->view->title     = $title;
-        $this->view->keywords  = $keywords;
-        $this->view->desc      = $desc;
-        $this->view->category  = $category;
-        $this->view->articles  = $articles;
-        $this->view->pager     = $pager;
-        $this->view->contact   = $this->loadModel('company')->getContact();
+        $this->view->title      = $title;
+        $this->view->keywords   = $keywords;
+        $this->view->desc       = $desc;
+        $this->view->category   = $category;
+        $this->view->articles   = $articles;
+        $this->view->pager      = $pager;
+        $this->view->contact    = $this->loadModel('company')->getContact();
+        $this->view->mobileURL  = helper::createLink('article', 'browse', "categoryID={$category->id}", "category={$category->alias}", 'mhtml');
+        $this->view->desktopURL = helper::createLink('article', 'browse', "categoryID={$category->id}", "category={$category->alias}", 'html');
 
         $this->display();
     }
@@ -243,6 +245,8 @@ class article extends control
         $this->view->prevAndNext = $this->article->getPrevAndNext($article->id, $category->id);
         $this->view->category    = $category;
         $this->view->contact     = $this->loadModel('company')->getContact();
+        $this->view->mobileURL   = helper::createLink('article', 'view', "articleID={$article->id}", "category={$category->alias}&name={$article->alias}", 'mhtml');
+        $this->view->desktopURL  = helper::createLink('article', 'view', "articleID={$article->id}", "category={$category->alias}&name={$article->alias}", 'html');
 
         $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($articleID)->exec();
 
