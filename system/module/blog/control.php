@@ -36,6 +36,8 @@ class blog extends control
         $this->view->articles   = $articles;
         $this->view->sticks     = $this->article->getSticks($families, 'blog');
         $this->view->pager      = $pager;
+        $this->view->mobileURL  = helper::createLink('blog', 'index', "categoryID=$categoryID&pageID=$pageID", $category ? "category=$category->alias" : '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('blog', 'index', "categoryID=$categoryID&pageID=$pageID", $category ? "category=$category->alias" : '', 'html');
  
         if($category)
         {
@@ -85,6 +87,8 @@ class blog extends control
         $this->view->prevAndNext = $this->loadModel('article')->getPrevAndNext($article->id, $category->id);
         $this->view->category    = $category;
         $this->view->contact     = $this->loadModel('company')->getContact();
+        $this->view->mobileURL   = helper::createLink('blog', 'view', "articleID=$articleID&currentCategory=$currentCategory", "category=$category->alias&name=$article->alias", 'mhtml');
+        $this->view->desktopURL  = helper::createLink('blog', 'view', "articleID=$articleID&currentCategory=$currentCategory", "category=$category->alias&name=$article->alias", 'html');
 
         $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($articleID)->exec(false);
         $this->display();

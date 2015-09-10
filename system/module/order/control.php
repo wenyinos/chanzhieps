@@ -39,6 +39,8 @@ class order extends control
         $this->view->paymentList    = $paymentOptions;
         $this->view->addresses      = $this->loadModel('address')->getListByAccount($this->app->user->account);
         $this->view->currencySymbol = zget($this->lang->product->currencySymbols, $this->config->product->currency, '￥');
+        $this->view->mobileURL      = helper::createLink('order', 'confirm', "product=$product&count=$count", '', 'mhtml');
+        $this->view->desktopURL     = helper::createLink('order', 'confirm', "product=$product&count=$count", '', 'html');
         $this->display();
     }
 
@@ -110,6 +112,8 @@ class order extends control
         $address = json_decode($order->address);
         $this->view->subtitle    = "<span class='text-important'>{$address->contact} [{$address->phone}] {$address->address} {$address->zipcode}</span>";
         $this->view->fullAddress = $this->view->subtitle;
+        $this->view->mobileURL   = helper::createLink('order', 'track', "orderID=$orderID", '', 'mhtml');
+        $this->view->desktopURL  = helper::createLink('order', 'track', "orderID=$orderID", '', 'html');
 
         $this->display();
     
@@ -224,7 +228,9 @@ class order extends control
         $this->app->loadConfig('product');
         $this->view->currencySymbol = zget($this->lang->product->currencySymbols, $this->config->product->currency, '￥');
 
-        $this->view->title = $this->lang->order->browse;
+        $this->view->title      = $this->lang->order->browse;
+        $this->view->mobileURL  = helper::createLink('order', 'browse', '', '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('order', 'browse', '', '', 'html');
         $this->display();
     }
    

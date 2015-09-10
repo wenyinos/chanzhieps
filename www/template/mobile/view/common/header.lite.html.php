@@ -9,6 +9,7 @@ $templateThemeRoot  = "{$templateRoot}theme/";
 $templateCommonRoot = "{$templateThemeRoot}common/";
 $thisModuleName     = $this->app->getModuleName();
 $thisMethodName     = $this->app->getMethodName();
+$sysURL             = $common->getSysURL();
 ?>
 <!DOCTYPE html>
 <html xmlns:wb="http://open.weibo.com/wb" lang='<?php echo $app->getClientLang();?>' class='m-<?php echo $thisModuleName?> m-<?php echo $thisModuleName?>-<?php echo $thisMethodName?>'>
@@ -17,6 +18,7 @@ $thisMethodName     = $this->app->getMethodName();
   <meta http-equiv="Cache-Control"  content="no-transform">
   <meta name="Generator" content="<?php echo 'chanzhi' . $this->config->version . ' www.chanzhi.org'; ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="canonical" href="<?php echo $sysURL . $desktopURL;?>" >
   <?php if($thisModuleName == 'user' and $thisMethodName == 'deny'):?>
   <meta http-equiv='refresh' content="5;url='<?php echo helper::createLink('index');?>'">
   <?php endif;?>
