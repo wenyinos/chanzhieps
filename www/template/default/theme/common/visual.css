@@ -22,9 +22,12 @@
 .ve-cover {pointer-events:none; cursor: pointer; position: absolute; left: 0; top: 0; right: 0; bottom: 0; border: 1px solid rgba(0, 255, 0, .2); z-index: 960; cursor: pointer; background: rgba(0, 255, 0, .1);}
 .ve:hover .ve-cover, .ve.ve-editing .ve-cover {animation: hightlight .8s alternate infinite ease-in-out; background: transparent; border: 1px solid #38b03f!important}
 
-.ve-heading {pointer-events:auto; background-color: #38b03f; background-color: rgba(56, 176, 63, 0.9); color: #fff; font-size: 13px; position: absolute; top: 0; padding: 0; left: 0; z-index: 960; line-height: 20px; right: 0; transition: opacity .2s; opacity: 0; visibility: hidden;}
+.ve-heading {pointer-events:auto; background-color: #38b03f; background-color: rgba(56, 176, 63, 0.9); color: #fff; font-size: 13px; position: absolute; top: 0; padding: 0; z-index: 960; line-height: 20px; right: 0; transition: opacity .2s; opacity: 0; visibility: hidden; border-radius: 0 0 0 2px}
 .ve-heading:hover {background-color: rgba(56, 176, 63, 1);}
 .ve-name {display: inline-block; padding: 0 5px; text-shadow: 1px 1px 1px rgba(0,0,0,.1); font-weight: bold;}
+.ve-name .icon-move {display: none}
+.ve-movable .ve-name {cursor: move}
+.ve-movable .ve-name .icon-move {display: inline}
 .ve-actions {float: right; display: block; margin: 0; padding: 0;}
 .ve-actions > li {float: left; display: block; padding: 0 3px; min-width: 20px; text-align: center; cursor: pointer; margin-left: 1px; background-color: rgba(0,0,0,.2);}
 .ve-invisible .ve-cover {border: 1px dashed rgba(0, 255, 0, .4)}
@@ -35,7 +38,7 @@
 .ve-actions > li.ve-action-delete:hover {background-color: #b93015!important;}
 .ve:hover .ve-heading, .ve.ve-editing .ve-heading {opacity: 1; visibility: visible; background-color: #38b03f; background-color: rgba(56, 176, 63, 0.8); color: #fff;}
 
-.ve-resize-handler {position: absolute; left: -6px; top: 0; bottom: 0; z-index: 965; width: 12px; cursor: w-resize; border-radius: 4px; opacity: 0; transition: opacity .2s}
+.ve-resize-handler {position: absolute; left: -6px; top: 0; bottom: 0; z-index: 965; width: 12px; cursor: w-resize; border-radius: 4px; opacity: 0; transition: opacity .2s; pointer-events: auto}
 .ve-resize-handler.left {display: none}
 .ve-resize-handler.right {right: -6px; left: auto; cursor: e-resize}
 .ve-resize-handler:hover, .ve.ve-editing-resize .ve-resize-handler {background-color: rgba(0, 255, 0, .2);}

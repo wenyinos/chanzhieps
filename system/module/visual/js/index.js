@@ -12,7 +12,7 @@
         edit: {icon: 'pencil', text: lang.actions.edit},
         add: {icon: 'plus', text: lang.actions.add},
         delete: {icon: 'remove', text: lang.actions.delete, confirm: lang.confirmDelete},
-        move: {icon: 'move', text: lang.actions.move}
+        move: {icon: 'move', text: lang.actions.move, hidden: true}
     };
     var DEFAULT_CONFIG = {width: '80%', actions: {edit: true}};
 
@@ -123,12 +123,13 @@
             setting.invisible = $.trim($veMain.html()) === '';
             $veMain.addClass('ve').toggleClass('ve-invisible', setting.invisible);
             var $actions = $$('<ul class="ve-actions"></ul>');
-            var $heading = $$('<div class="ve-heading"><div class="ve-name">'
+            var $heading = $$('<div class="ve-heading"><div class="ve-name"><i class="icon-move"> </i>'
                 + (name === 'block' ? $veMain.data('title') : setting.name)
                 + (setting.invisible ? (' (' + lang.invisible + ')') : '') + '</div></div>');
 
             $.each(setting.actions, function(actionName, action)
             {
+                if(actionName === 'move') $veMain.addClass('ve-movable');
                 if(action.hidden) return;
                 $actions.append('<li data-toggle="tooltip" data-action="' + actionName + '" class="ve-action ve-action-' + actionName + '" title="' + action.text + '">'
                     + (action.icon ? '<i class="icon icon-' + action.icon + '"></i>' : action.text) + '</li>');
@@ -217,11 +218,11 @@
 
                 if(withGrid)
                 {
-                    $ve.append('<div class="ve-resize-handler left"><i class="icon icon-resize-horizontal"></i></div><div class="ve-resize-handler right"><i class="icon icon-resize-horizontal"></i></div>');
+                    $ve.find('.ve-cover').append('<div class="ve-resize-handler left"><i class="icon icon-resize-horizontal"></i></div><div class="ve-resize-handler right"><i class="icon icon-resize-horizontal"></i></div>');
                 }
             });
 
-            $blocksHolder.sortable({trigger: '.ve-cover', selector: '.col', dragCssClass: '', finish: function(e)
+            $blocksHolder.sortable({trigger: '.ve-name', selector: withGrid ? '.col' : '.ve', dragCssClass: '', finish: function(e)
             {
                 var orders = [];
                 $.each(e.list, function()
@@ -273,6 +274,7 @@
                 var grid = Math.max(1, Math.min(12, Math.round(12 * (startWidth + (x - startX)) / rowWidth)));
                 $col.attr('data-grid', grid);
                 event.preventDefault();
+                event.stopPropagation();
             };
 
             var mouseUp = function(event)
@@ -291,10 +293,12 @@
                 }, {grid: $col.attr('data-grid')});
                 $$body.unbind('mousemove.ve.resize', mouseMove).unbind('mouseup.ve.resize', mouseUp);
                 event.preventDefault();
+                event.stopPropagation();
             };
 
             $$body.bind('mousemove.ve.resize', mouseMove).bind('mouseup.ve.resize', mouseUp);
             e.preventDefault();
+            e.stopPropagation();
         });
     };
 
@@ -407,7 +411,7 @@
         initBlocks();
 
         // bind event
-        $$('body').on('click', '.ve-cover', openCommonActionModal)
+        $$('body').on('click', '.ve-name', openCommonActionModal)
         .on('click', '.ve-action', function(e)
         {
             var $action = $$(this);
