@@ -8,16 +8,16 @@ js::set('categoryID', $category->id);
 include TPL_ROOT . 'common/treeview.html.php';
 ?>
 <?php echo $common->printPositionBar($category);?>
-<div class='row'><?php $this->block->printRegion($layouts, 'article_browse', 'topBanner', true);?></div>
+<div class='row blocks' data-region='article_browse-topBanner'><?php $this->block->printRegion($layouts, 'article_browse', 'topBanner', true);?></div>
 <div class='row'>
   <div class='col-md-9 col-main'>
     <div class='list list-condensed'>
-    <div class='row'><?php $this->block->printRegion($layouts, 'article_browse', 'top', true);?></div>
+    <div class='row blocks' data-region='article_browse-top'><?php $this->block->printRegion($layouts, 'article_browse', 'top', true);?></div>
       <header><h2><?php echo $category->name;?></h2></header>
-      <section class='items items-hover'>
+      <section class='items items-hover' id='articleList'>
         <?php foreach($articles as $article):?>
         <?php $url = inlink('view', "id=$article->id", "category={$article->category->alias}&name=$article->alias");?>
-        <div class='item'>
+        <div class='item' id="article<?php echo $article->id?>" data-ve='article'>
           <div class='item-heading'>
             <div class="text-muted pull-right">
               <span title="<?php echo $lang->article->views;?>"><i class='icon-eye-open'></i> <?php echo $article->views;?></span> &nbsp;
@@ -45,9 +45,9 @@ include TPL_ROOT . 'common/treeview.html.php';
       </section>
       <footer class='clearfix'><?php $pager->show('right', 'short');?></footer>
     </div>
-    <div class='row'><?php $this->block->printRegion($layouts, 'article_browse', 'bottom', true);?></div>
+    <div class='row blocks' data-region='article_browse-bottom'><?php $this->block->printRegion($layouts, 'article_browse', 'bottom', true);?></div>
   </div>
   <div class='col-md-3 col-side'><side class='page-side blocks'><?php $this->block->printRegion($layouts, 'article_browse', 'side');?></side></div>
 </div>
-<div class='row'><?php $this->block->printRegion($layouts, 'article_browse', 'bottomBanner', true);?></div>
+<div class='row blocks' data-region='article_browse-bottomBanner'><?php $this->block->printRegion($layouts, 'article_browse', 'bottomBanner', true);?></div>
 <?php include TPL_ROOT . 'common/footer.html.php';?>

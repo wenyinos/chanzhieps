@@ -113,7 +113,20 @@
         }
         else
         {
-            name = $veMain.data('ve') || $veMain.attr('id');
+            var id = $veMain.attr('id');
+            name = $veMain.data('ve');
+            if(id)
+            {
+                if(name)
+                {
+                    id = parseInt(id.replace(name, ''));
+                    $veMain.attr('data-id', id);
+                }
+                else
+                {
+                    name = id;
+                }
+            }
         }
 
         $veMain.data('ve', name);
@@ -146,7 +159,7 @@
         var setting = visuals[name];
         showLoadingMessage();
         $.post(
-            createLink(action.module || 'visual', action.method || (action.name + name), (action.params || setting.params || '').format(options)),
+            createLink(action.module || setting.module || 'visual', action.method || (action.name + name), (action.params || setting.params || '').format(options)),
             postData,
             function(data)
             {
@@ -366,7 +379,7 @@
         var name = $ve.data('ve');
         var setting = visuals[name];
         var options = getVisualOptions($ve);
-        var action = setting.actions.edit;
+        var action = setting.actions.delete;
         var confirmMessage = setting.actions.delete.confirm.format(options);
         var callback = function(result)
         {
