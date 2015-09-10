@@ -43,13 +43,15 @@ class book extends control
             $book    = $this->book->getBookByNode($node);
             $serials = $this->book->computeSN($book->id);
 
-            $this->view->title    = $book->title;
-            $this->view->keywords = trim($node->keywords . ' ' . $this->config->site->keywords);
-            $this->view->node     = $node;
-            $this->view->book     = $book;
-            $this->view->serials  = $serials;
-            $this->view->books    = $this->book->getBookList();
-            $this->view->catalog  = $this->book->getFrontCatalog($node->id, $serials);
+            $this->view->title      = $book->title;
+            $this->view->keywords   = trim($node->keywords . ' ' . $this->config->site->keywords);
+            $this->view->node       = $node;
+            $this->view->book       = $book;
+            $this->view->serials    = $serials;
+            $this->view->books      = $this->book->getBookList();
+            $this->view->catalog    = $this->book->getFrontCatalog($node->id, $serials);
+            $this->view->mobileURL  = helper::createLink('book', 'browse', "nodeID=$node->id", $book->id == $node->id ? "book=$book->alias" : "book=$book->alias&node=$node->alias", 'mhtml');
+            $this->view->desktopURL = helper::createLink('book', 'browse', "nodeID=$node->id", $book->id == $node->id ? "book=$book->alias" : "book=$book->alias&node=$node->alias", 'html');
         }
         $this->display();
     }
@@ -79,6 +81,8 @@ class book extends control
         $this->view->parent      = $parent;
         $this->view->book        = $book;
         $this->view->prevAndNext = $this->book->getPrevAndNext($article);
+        $this->view->mobileURL   = helper::createLink('book', 'read', "articleID=$article->id", "book=$book->alias&node=$article->alias", 'mhtml');
+        $this->view->desktopURL  = helper::createLink('book', 'read', "articleID=$article->id", "book=$book->alias&node=$article->alias", 'html');
 
         $this->dao->update(TABLE_BOOK)->set('views = views + 1')->where('id')->eq($articleID)->exec(false);
 

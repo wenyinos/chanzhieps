@@ -18,7 +18,7 @@
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-edit'></i> <?php echo $type == 'blog' ? $lang->blog->edit : ($type == 'page' ? $lang->page->edit : $lang->article->edit);?></strong></div>
   <div class='panel-body'>
-  <form method='post' id='ajaxForm'>
+  <form method='post' id='ajaxForm' class='ve-form'>
     <table class='table table-form'>
       <?php if($type != 'page'):?>
       <tr>

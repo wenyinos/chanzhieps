@@ -12,7 +12,7 @@
         edit: {icon: 'pencil', text: lang.actions.edit},
         add: {icon: 'plus', text: lang.actions.add},
         delete: {icon: 'remove', text: lang.actions.delete, confirm: lang.confirmDelete},
-        move: {icon: 'move', text: lang.actions.move}
+        move: {icon: 'move', text: lang.actions.move, hidden: true}
     };
     var DEFAULT_CONFIG = {width: '80%', actions: {edit: true}};
 
@@ -51,6 +51,17 @@
         }, options));
     };
 
+    var getVisualOptions = function($ve)
+    {
+        var name = $ve.data('ve');
+        var options = $.extend({}, visuals[name], $ve.data());
+        if(name === 'block')
+        {
+            options = $.extend(options, $ve.closest('.blocks[data-region]').data());
+        }
+        return options;
+    };
+
     // visual settings
     $.each(visuals, function(name, setting)
     {
@@ -71,7 +82,7 @@
             {
                 actionSetting = {text: action};
             }
-            setting.actions[actionName] = $.extend({}, DEFAULT_ACTIONS_CONFIG[actionName], actionSetting)
+            setting.actions[actionName] = $.extend({name: actionName}, DEFAULT_ACTIONS_CONFIG[actionName], actionSetting)
         });
         visuals[name] = setting;
     });
@@ -102,7 +113,20 @@
         }
         else
         {
-            name = $veMain.data('ve') || $veMain.attr('id');
+            var id = $veMain.attr('id');
+            name = $veMain.data('ve');
+            if(id)
+            {
+                if(name)
+                {
+                    id = parseInt(id.replace(name, ''));
+                    $veMain.attr('data-id', id);
+                }
+                else
+                {
+                    name = id;
+                }
+            }
         }
 
         $veMain.data('ve', name);
@@ -112,14 +136,15 @@
             setting.invisible = $.trim($veMain.html()) === '';
             $veMain.addClass('ve').toggleClass('ve-invisible', setting.invisible);
             var $actions = $$('<ul class="ve-actions"></ul>');
-            var $heading = $$('<div class="ve-heading"><div class="ve-name">'
+            var $heading = $$('<div class="ve-heading"><div class="ve-name"><i class="icon-move"> </i>'
                 + (name === 'block' ? $veMain.data('title') : setting.name)
                 + (setting.invisible ? (' (' + lang.invisible + ')') : '') + '</div></div>');
 
             $.each(setting.actions, function(actionName, action)
             {
+                if(actionName === 'move') $veMain.addClass('ve-movable');
                 if(action.hidden) return;
-                $actions.append('<li data-toggle="tooltip" class="ve-action-' + actionName + '" title="' + action.text + '">'
+                $actions.append('<li data-toggle="tooltip" data-action="' + actionName + '" class="ve-action ve-action-' + actionName + '" title="' + action.text + '">'
                     + (action.icon ? '<i class="icon icon-' + action.icon + '"></i>' : action.text) + '</li>');
             });
 
@@ -127,6 +152,42 @@
             $veMain.append($$('<div class="ve-cover"/>').append($heading));
             return $ve;
         }
+    };
+
+    var postActionData = function(name, action, options, callback, postData)
+    {
+        var setting = visuals[name];
+        showLoadingMessage();
+        $.post(
+            createLink(action.module || setting.module || 'visual', action.method || (action.name + name), (action.params || setting.params || '').format(options)),
+            postData,
+            function(data)
+            {
+                if($.isPlainObject(data))
+                {
+                    if(data.result === 'success')
+                    {
+                        callback && callback('success', data);
+                        showMessage((data.message || action.success || lang.deleted).format(options), 'success');
+                    }
+                    else
+                    {
+                        callback && callback('fail', data);
+                        showMessage((data.message || action.fail || lang.operateFail).format(options), 'danger');
+                    }
+                }
+                else
+                {
+                    callback && callback('unknown', data);
+                    showMessage((action.fail || lang.operateFail).format(options), 'danger');
+                }
+            },
+            'json'
+        ).error(function(data)
+        {
+            callback && callback('error', data);
+            showMessage((action.fail || lang.operateFail).format(options), 'danger');
+        });
     };
 
     var sortBlocks = function($blocksHolder, orders)
@@ -137,34 +198,13 @@
         var action = setting.actions.move;
         var options = $.extend({orders: orders}, setting, $blocksHolder.data());
 
-        showLoadingMessage();
-        $.post(
-            createLink(action.module || 'visual', action.method || ('move' + name), (action.params || setting.params || '').format(options)),
-            {orders: orders.join(',')},
-            function(data)
-            {
-                if($.isPlainObject(data))
-                {
-                    if(data.result === 'success')
-                    {
-                        if(withGrid) $blocksHolder.trigger('tidy');
-                        showMessage((data.message || action.success || lang.deleted).format(options), 'success');
-                    }
-                    else
-                    {
-                        showMessage((data.message || action.fail || lang.operateFail).format(options), 'danger');
-                    }
-                }
-                else
-                {
-                    showMessage((action.fail || lang.operateFail).format(options), 'danger');
-                }
-            },
-            'json'
-        ).error(function(data)
+        postActionData(name, action, options, function(result)
         {
-            showMessage((action.fail || lang.operateFail).format(options), 'danger');
-        });
+            if(result === 'success')
+            {
+                if(withGrid) $blocksHolder.trigger('tidy');
+            }
+        }, orders.join(','));
     };
 
     var addBlock = function(region, blockID)
@@ -183,9 +223,19 @@
         $$('.blocks').each(function()
         {
             var $blocksHolder = $$(this);
-            $blocksHolder.find('.block, .panel-block').each(initVisualArea);
+            var withGrid = $blocksHolder.hasClass('row');
+            $blocksHolder.find('.block, .panel-block').each(function()
+            {
+                var $ve = $$(this);
+                initVisualArea($ve);
 
-            $blocksHolder.sortable({trigger: '.ve-cover', selector: '.col', dragCssClass: '', finish: function(e)
+                if(withGrid)
+                {
+                    $ve.find('.ve-cover').append('<div class="ve-resize-handler left"><i class="icon icon-resize-horizontal"></i></div><div class="ve-resize-handler right"><i class="icon icon-resize-horizontal"></i></div>');
+                }
+            });
+
+            $blocksHolder.sortable({trigger: '.ve-name', selector: withGrid ? '.col' : '.ve', dragCssClass: '', finish: function(e)
             {
                 var orders = [];
                 $.each(e.list, function()
@@ -199,7 +249,8 @@
             $blocksHolder.append('<div class="ve-block-actions"><button type="button" class="btn btn-block btn-ve ve-preview-hidden ve-action-addblock"><i class="icon icon-plus"></i> {addBlock}</button></div>'.format(lang));
         });
 
-        $$('body').on('mouseenter', '.ve-action-addblock', function()
+        var $$body = $$('body');
+        $$body.on('mouseenter', '.ve-action-addblock', function()
         {
             $$(this).closest('blocks').addClass('ve-blocks-show-border');
         }).on('mouseleave', '.ve-action-addblock', function()
@@ -218,6 +269,49 @@
                 icon  : action.icon || 'plus',
                 title : action.title || setting.title || action.text + ' ' + setting.name
             });
+        }).on('mousedown', '.ve-resize-handler', function(e)
+        {
+            var $ve = $$(this).closest('.ve');
+            var $col = $ve.parent();
+            var $row = $ve.closest('.row');
+            var $blocksHolder = $ve.closest('.row.blocks');
+            var startX = e.pageX;
+            var startWidth = $col.width();
+            var rowWidth = $row.width();
+            var oldGrid = $col.attr('data-grid');
+
+            var mouseMove = function(event)
+            {
+                $ve.addClass('ve-editing ve-editing-resize');
+                var x = event.pageX;
+                var grid = Math.max(1, Math.min(12, Math.round(12 * (startWidth + (x - startX)) / rowWidth)));
+                $col.attr('data-grid', grid);
+                event.preventDefault();
+                event.stopPropagation();
+            };
+
+            var mouseUp = function(event)
+            {
+                $ve.removeClass('ve-editing ve-editing-resize');
+                var name = 'block';
+                var setting = visuals[name];
+                var options = getVisualOptions($ve);
+                postActionData(name, setting.actions.layout, options, function(result)
+                {
+                    if(result !== 'success')
+                    {
+                        $col.attr('data-grid', oldGrid);
+                    }
+                    $blocksHolder.trigger('tidy');
+                }, {grid: $col.attr('data-grid')});
+                $$body.unbind('mousemove.ve.resize', mouseMove).unbind('mouseup.ve.resize', mouseUp);
+                event.preventDefault();
+                event.stopPropagation();
+            };
+
+            $$body.bind('mousemove.ve.resize', mouseMove).bind('mouseup.ve.resize', mouseUp);
+            e.preventDefault();
+            e.stopPropagation();
         });
     };
 
@@ -252,20 +346,21 @@
         });
     };
 
-    var openEditModal = function(ve)
+    var openCommonActionModal = function(ve, actionName)
     {
+        actionName = actionName || 'edit';
         var $ve = ve instanceof $$ ? ve : $$(this).closest('.ve');
         var name = $ve.data('ve');
         $$('.ve-editing').removeClass('ve-editing');
         $ve.addClass('ve-editing');
         var setting = visuals[name];
-        var options = $.extend({}, setting, $ve.data());
-        var action = setting.actions.edit;
-        openModal(createLink(action.module || setting.module || 'visual', action.method || ('edit' + name), (action.params || setting.params || '').format(options)),
+        var options = getVisualOptions($ve);
+        var action = setting.actions[actionName];
+        openModal(createLink(action.module || setting.module || 'visual', action.method || (actionName + name), (action.params || setting.params || '').format(options)),
         {
             width : action.width || setting.width,
             icon  : action.icon || 'pencil',
-            title : action.title || setting.title || action.text + ' ' + setting.name,
+            title : action.title || setting.title || action.text + ' ' + options.title,
             loaded: function(e)
             {
                 var modal$ = e.jQuery;
@@ -283,47 +378,27 @@
         var $ve = ve instanceof $$ ? ve : $$(this).closest('.ve');
         var name = $ve.data('ve');
         var setting = visuals[name];
-        var options = $.extend({}, setting, $ve.data());
-        var action = setting.actions.edit;
+        var options = getVisualOptions($ve);
+        var action = setting.actions.delete;
         var confirmMessage = setting.actions.delete.confirm.format(options);
         var callback = function(result)
         {
             if(result)
             {
-                showLoadingMessage();
-                $.post(
-                    createLink(action.module || 'visual', action.method || ('delete' + name), (action.params || setting.params || '').format(options)),
-                    function(data)
-                    {
-                        if($.isPlainObject(data))
-                        {
-                            if(data.result === 'success')
-                            {
-                                var $forRemove = $ve;
-                                if(name === 'block')
-                                {
-                                    var $veParent = $ve.parent();
-                                    if($veParent.is('.col, [class*="col-"]')) $forRemove = $veParent;
-                                }
-                                $forRemove.hide();
-                                $ve.closest('.blocks.row').trigger('tidy');
-                                $forRemove.remove();
-                                showMessage((data.message || action.success || lang.deleted).format(options), 'success');
-                            }
-                            else
-                            {
-                                showMessage((data.message || action.fail || lang.operateFail).format(options), 'danger');
-                            }
-                        }
-                        else
-                        {
-                            showMessage((action.fail || lang.operateFail).format(options), 'danger');
-                        }
-                    },
-                    'json'
-                ).error(function(data)
+                postActionData(name, action, options, function(result)
                 {
-                    showMessage((action.fail || lang.operateFail).format(options), 'danger');
+                    if(result === 'success')
+                    {
+                        var $forRemove = $ve;
+                        if(name === 'block')
+                        {
+                            var $veParent = $ve.parent();
+                            if($veParent.is('.col, [class*="col-"]')) $forRemove = $veParent;
+                        }
+                        $forRemove.hide();
+                        $ve.closest('.blocks.row').trigger('tidy');
+                        $forRemove.remove();
+                    }
                 });
             }
         }
@@ -349,14 +424,20 @@
         initBlocks();
 
         // bind event
-        $$('body').on('click', '.ve-cover', openEditModal)
-        .on('click', '.ve-action-edit', function(e)
+        $$('body').on('click', '.ve-name', openCommonActionModal)
+        .on('click', '.ve-action', function(e)
         {
-            openEditModal($$(this).closest('.ve'));
-            e.stopPropagation();
-        }).on('click', '.ve-action-delete', function(e)
-        {
-            deleteVisualArea($$(this).closest('.ve'));
+            var $action = $$(this);
+            var $ve = $action.closest('.ve');
+            var actionName = $action.data('action');
+            if(actionName === 'delete')
+            {
+                deleteVisualArea($ve);
+            }
+            else if(actionName !== 'move')
+            {
+                openCommonActionModal($ve, actionName);
+            }
             e.stopPropagation();
         });
 
@@ -384,6 +465,9 @@
             {
                 visualPageUrl = $frame.context.URL;
                 var title = $frame.find('head > title').text();
+                var url = createLink('visual', 'index', 'referer=' + visualPageUrl);
+                window.history.pushState({}, title, url);
+
                 $('#visualPageName').text((title && title.indexOf(' ') > -1) ? title.split(' ')[0] : title).attr('href', visualPageUrl);
             }
 
@@ -406,6 +490,11 @@
         isInPreview = $body.hasClass('ve-preview-in');
         $(this).toggleClass('text-danger', isInPreview).html(isInPreview ? ("<i class='icon-eye-close'></i> " + lang.exitPreview)
             : ("<i class='icon-eye-open'></i> " + lang.preview));
+    });
+
+    $('#visualReloadBtn').on('click', function()
+    {
+        visualPage.contentWindow.location.replace(visualPageUrl);
     });
 
     // extend helper methods

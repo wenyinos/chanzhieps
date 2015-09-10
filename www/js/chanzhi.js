@@ -640,17 +640,18 @@ function setGo2Top()
 
             if(disableGrid) return;
 
-            var grid = $col.data('grid');
+            var grid = $col.attr('data-grid');
             if(!grid)
             {
                 grid = options.grid || 12;
             }
-            if(!$col.data('gridSaved'))
+            if(typeof grid === 'string')
             {
-                $col.attr('data-grid', null)
-                    .data('grid', grid)
-                    .addClass('col-' + grid);
+                grid = parseInt(grid);
             }
+            $col.attr('data-grid', grid)
+                .attr('class', 'col col-' + grid);
+
             var row = rows[rowIndex];
             var colHeight = $child.height();
             if(isColRow) colHeight -= 14;

@@ -142,11 +142,30 @@ class visual extends control
      * @access public
      * @return void
      */
-    public function deleteBlock($blockID)
+    public function deleteBlock($region, $blockID)
     {
         // TODO: remove block region from database
         $this->send(array('result' => 'success'));
-        // $this->send(array('result' => 'fail', 'message' => 'Fail message.'));
+    }
+
+    /**
+     * Layout block
+     *
+     * @access public
+     * @return void
+     */
+    public function layoutBlock($region, $blockID)
+    {
+        $this->app->loadLang('block');
+
+        if($_POST)
+        {
+            // TODO: layout block region from database
+            $this->send(array('result' => 'success'));
+        }
+        $this->view->grid = 0;
+
+        $this->display();
     }
 
     /**

@@ -61,9 +61,11 @@ class thread extends control
 
         }
 
-        $this->view->title     = $board->name . $this->lang->minus . $this->lang->thread->post;
-        $this->view->board     = $board;
-        $this->view->canManage = $this->thread->canManage($boardID);
+        $this->view->title      = $board->name . $this->lang->minus . $this->lang->thread->post;
+        $this->view->board      = $board;
+        $this->view->canManage  = $this->thread->canManage($boardID);
+        $this->view->mobileURL  = helper::createLink('thread', 'post', "boardID=$boardID", '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('thread', 'post', "boardID=$boardID", '', 'html');
 
         $this->display();
     }
@@ -104,10 +106,12 @@ class thread extends control
 
         $board = $this->loadModel('tree')->getById($thread->board);
         
-        $this->view->title     = $this->lang->thread->edit . $this->lang->minus . $thread->title;
-        $this->view->thread    = $thread;
-        $this->view->board     = $board;
-        $this->view->canManage = $this->thread->canManage($board->id);
+        $this->view->title      = $this->lang->thread->edit . $this->lang->minus . $thread->title;
+        $this->view->thread     = $thread;
+        $this->view->board      = $board;
+        $this->view->canManage  = $this->thread->canManage($board->id);
+        $this->view->mobileURL  = helper::createLink('thread', 'edit', "threadID=$threadID", '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('thread', 'edit', "threadID=$threadID", '', 'html');
 
         $this->display();
     }
@@ -155,12 +159,14 @@ class thread extends control
         /* Set the views counter + 1; */
         $this->thread->plusCounter($threadID);
 
-        $this->view->title    = $thread->title . $this->lang->minus . $board->name;
-        $this->view->board    = $board;
-        $this->view->thread   = $thread;
-        $this->view->replies  = $replies;
-        $this->view->pager    = $pager;
-        $this->view->speakers = $speakers;
+        $this->view->title      = $thread->title . $this->lang->minus . $board->name;
+        $this->view->board      = $board;
+        $this->view->thread     = $thread;
+        $this->view->replies    = $replies;
+        $this->view->pager      = $pager;
+        $this->view->speakers   = $speakers;
+        $this->view->mobileURL  = helper::createLink('thread', 'view', "threadID=$threadID&pageID=$pageID", '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('thread', 'view', "threadID=$threadID&pageID=$pageID", '', 'html');
 
         $this->display();
     }

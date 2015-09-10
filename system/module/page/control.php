@@ -24,6 +24,8 @@ class page extends control
         
         $this->view->title = $title;
         $this->view->pages = $pages;
+        $this->view->mobileURL  = helper::createLink('page', 'index', '', '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('page', 'index', '', '', 'html');
 
         $this->display();
     }
@@ -43,10 +45,12 @@ class page extends control
         $keywords = $page->keywords . ' ' . $this->config->site->keywords;
         $desc     = $page->summary;
         
-        $this->view->title    = $title;
-        $this->view->keywords = $keywords;
-        $this->view->desc     = $desc;
-        $this->view->page     = $page;
+        $this->view->title      = $title;
+        $this->view->keywords   = $keywords;
+        $this->view->desc       = $desc;
+        $this->view->page       = $page;
+        $this->view->mobileURL  = helper::createLink('page', 'view', "pageID=$pageID", "name=$page->alias", 'mhtml');
+        $this->view->desktopURL = helper::createLink('page', 'view', "pageID=$pageID", "name=$page->alias", 'html');
 
         $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($page->id)->exec(false);
 

@@ -24,6 +24,8 @@ class company extends control
         $this->view->company    = $this->config->company;
         $this->view->contact    = $this->company->getContact();
         $this->view->publicList = $this->loadModel('wechat')->getList();
+        $this->view->mobileURL  = helper::createLink('company', 'index', '', '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('company', 'index', '', '', 'html');
 
         $this->display();
     }
@@ -36,8 +38,10 @@ class company extends control
      */
     public function contact()
     {
-        $this->view->title   = $this->lang->company->contact;
-        $this->view->contact = $this->company->getContact();
+        $this->view->title      = $this->lang->company->contact;
+        $this->view->contact    = $this->company->getContact();
+        $this->view->mobileURL  = helper::createLink('company', 'contact', '', '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('company', 'contact', '', '', 'html');
         
         $this->display();
     }

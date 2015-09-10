@@ -52,22 +52,50 @@
   </div>
 </header>
 
+<?php $navs = $this->loadModel('nav')->getNavs('mobile_blog');?>
 <nav class='appnav fix-top appnav-auto' id='appnav'>
   <div class='mainnav'>
     <ul class='nav'>
-      <li <?php if(empty($category)) echo "class='active'"?>>
-         <?php echo html::a($this->inlink('index'), (isset($this->config->site->type) and $this->config->site->type == 'blog') ? $lang->home : $lang->blog->home)?>
-      </li>
+    <?php $subnavs = '';?>
+    <?php foreach($navs as $nav1):?>
+      <li class='<?php echo $nav1->class?>'>
       <?php
-      $navs = $this->tree->getChildren(0, 'blog');
-      foreach($navs as $nav)
+      if(empty($nav1->children))
       {
-        isset($category->id) ? $categoryID = $category->id : $categoryID = 0;
-        $class = $nav->id == $categoryID ? "class='nav-blog-$nav->id active'" : "class='nav-blog-$nav->id'";
-        echo "<li {$class}>" . html::a($this->inlink('index', "id={$nav->id}", "category={$nav->alias}"), $nav->name) . '</li>';
+          echo html::a($nav1->url, $nav1->title, ($nav1->target != 'modal') ? "target='$nav1->target'" : "data-toggle='modal'");
+      }
+      else
+      {
+          echo html::a("#sub-{$nav1->class}", $nav1->title . " <i class='icon-caret-down'></i>", ($nav1->target != 'modal') ? "target='$nav1->target'" : "data-toggle='modal'");
+          $subnavs .= "<ul class='nav' id='sub-{$nav1->class}'>\n";
+          foreach($nav1->children as $nav2)
+          {
+              $subnavs .= "<li class='{$nav2->class}'>";
+              if(empty($nav2->children))
+              {
+                  $subnavs .= html::a($nav2->url, $nav2->title, ($nav2->target != 'modal') ? "target='$nav2->target'" : "data-toggle='modal' class='text-important'");
+              }
+              else
+              {
+                  $subnavs .= html::a("javascript:;", $nav2->title . " <i class='icon-caret-down'></i>", "data-toggle='dropdown' class='text-important'");
+                  $subnavs .= "<ul class='dropdown-menu'>";
+                  foreach($nav2->children as $nav3)
+                  {
+                      $subnavs .= "<li>" . html::a($nav3->url, $nav3->title, ($nav3->target != 'modal') ? "target='$nav3->target'" : "data-toggle='modal' class='text-important'") . '</li>';
+                  }
+                  $subnavs .= "</ul>\n";
+              }
+              $subnavs .= "</li>\n";
+          }
+          $subnavs .= "</ul>\n";
       }
       ?>
+      </li>
+    <?php endforeach;?><!-- end nav1 -->
     </ul>
+  </div>
+  <div class='subnavs fade'>
+    <?php echo $subnavs;?>
   </div>
 </nav>
 

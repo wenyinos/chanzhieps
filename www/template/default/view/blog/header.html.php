@@ -15,6 +15,7 @@ if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::
 $webRoot   = $config->webRoot;
 $jsRoot    = $webRoot . "js/";
 $themeRoot = $webRoot . "template/default/theme/";
+$sysURL    = $common->getSysURL();
 $navs = $this->loadModel('nav')->getNavs('desktop_blog');
 ?>
 <!DOCTYPE html>
@@ -29,6 +30,7 @@ $navs = $this->loadModel('nav')->getNavs('desktop_blog');
   <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta http-equiv="Cache-Control" content="no-transform" />
+  <link rel="alternate" media="only screen and (max-width: 640px)" href="<?php echo $sysURL . $mobileURL;?>">
   <?php
   if(!isset($title))    $title    = '';
   if(!empty($title))    $title   .= $lang->minus;

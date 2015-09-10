@@ -68,7 +68,9 @@ class user extends control
             $referer = urlencode($_SERVER['HTTP_REFERER']);
         }
 
-        $this->view->referer = $referer;
+        $this->view->referer    = $referer;
+        $this->view->mobileURL  = helper::createLink('user', 'register', '', '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('user', 'register', '', '', 'html');
         $this->display();
     }
 
@@ -154,6 +156,11 @@ class user extends control
 
         $this->view->title   = $this->lang->user->login->common;
         $this->view->referer = $this->referer;
+        if(RUN_MODE == 'front')
+        {
+            $this->view->mobileURL  = helper::createLink('user', 'login', "referer=$referer", '', 'mhtml');
+            $this->view->desktopURL = helper::createLink('user', 'login', "referer=$referer", '', 'html');
+        }
 
         $this->display();
     }
@@ -193,6 +200,8 @@ class user extends control
         $this->view->method            = $method;
         $this->view->denyPage          = $this->referer;
         $this->view->refererBeforeDeny = $refererBeforeDeny;
+        $this->view->mobileURL         = helper::createLink('user', 'deny', "module=$module&method=$method&referer=$refererBeforeDeny", '', 'mhtml');
+        $this->view->desktopURL        = helper::createLink('user', 'deny', "module=$module&method=$method&referer=$refererBeforeDeny", '', 'html');
 
         die($this->display());
     }
@@ -206,6 +215,8 @@ class user extends control
     public function control()
     {
         if($this->app->user->account == 'guest') $this->locate(inlink('login'));
+        $this->view->mobileURL  = helper::createLink('user', 'control', '', '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('user', 'control', '', '', 'html');
         $this->display();
     }
 
@@ -218,7 +229,9 @@ class user extends control
     public function profile()
     {
         if($this->app->user->account == 'guest') $this->locate(inlink('login'));
-        $this->view->user = $this->user->getByAccount($this->app->user->account);
+        $this->view->user       = $this->user->getByAccount($this->app->user->account);
+        $this->view->mobileURL  = helper::createLink('user', 'profile', '', '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('user', 'profile', '', '', 'html');
         $this->display();
     }
 
@@ -239,8 +252,10 @@ class user extends control
         /* Load the forum lang to change the pager lang items. */
         $this->app->loadLang('forum');
 
-        $this->view->threads = $this->loadModel('thread')->getByUser($this->app->user->account, $pager);
-        $this->view->pager   = $pager;
+        $this->view->threads    = $this->loadModel('thread')->getByUser($this->app->user->account, $pager);
+        $this->view->pager      = $pager;
+        $this->view->mobileURL  = helper::createLink('user', 'thread', "pageID=$pageID", '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('user', 'thread', "pageID=$pageID", '', 'html');
 
         $this->display();
     }
@@ -262,8 +277,10 @@ class user extends control
         /* Load the thread lang thus to rewrite the page lang items. */
         $this->app->loadLang('thread');    
 
-        $this->view->replies = $this->loadModel('reply')->getByUser($this->app->user->account, $pager);
-        $this->view->pager   = $pager;
+        $this->view->replies    = $this->loadModel('reply')->getByUser($this->app->user->account, $pager);
+        $this->view->pager      = $pager;
+        $this->view->mobileURL  = helper::createLink('user', 'reply', "pageID=$pageID", '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('user', 'reply', "pageID=$pageID", '', 'html');
 
         $this->display();
     }
@@ -284,8 +301,10 @@ class user extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $this->view->messages = $this->loadModel('message')->getByAccount($this->app->user->account, $pager);
-        $this->view->pager    = $pager;
+        $this->view->messages   = $this->loadModel('message')->getByAccount($this->app->user->account, $pager);
+        $this->view->pager      = $pager;
+        $this->view->mobileURL  = helper::createLink('user', 'message', "recTotal=$recTotal&recPerPage=$recPerPage&pageID=$pageID", '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('user', 'message', "recTotal=$recTotal&recPerPage=$recPerPage&pageID=$pageID", '', 'html');
 
         $this->display();
     }
@@ -337,6 +356,8 @@ class user extends control
         }
         else
         {
+            $this->view->mobileURL  = helper::createLink('user', 'edit', "account=$account", '', 'mhtml');
+            $this->view->desktopURL = helper::createLink('user', 'edit', "account=$account", '', 'html');
             $this->display();
         }
     }
@@ -367,8 +388,10 @@ class user extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess , 'locate' => $locate));
         }
 
-        $this->view->token = $this->user->getToken();
-        $this->view->user  = $user;
+        $this->view->token      = $this->user->getToken();
+        $this->view->user       = $user;
+        $this->view->mobileURL  = helper::createLink('user', 'editEmail', '', '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('user', 'editEmail', '', '', 'html');
         $this->display();
     }
 
@@ -566,6 +589,9 @@ class user extends control
                 $this->send(array('result' => 'fail', 'message' => $this->lang->user->resetPassword->failed));
             }
         }
+
+        $this->view->mobileURL  = helper::createLink('user', 'resetPassword', '', '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('user', 'resetPassword', '', '', 'html');
         $this->display();
     }
 
@@ -593,6 +619,8 @@ class user extends control
         else
         {
             $this->view->reset = $reset;
+            $this->view->mobileURL  = helper::createLink('user', 'checkReset', "reset=$reset", '', 'mhtml');
+            $this->view->desktopURL = helper::createLink('user', 'checkReset', "reset=$reset", '', 'html');
             $this->display();
         }
     }
@@ -671,8 +699,10 @@ class user extends control
         if($this->get->referer != false) $this->setReferer($referer);    // Set the referer.
         $this->config->oauth->$provider = json_encode($this->config->oauth->$provider);
 
-        $this->view->title   = $this->lang->user->login->common;
-        $this->view->referer = $referer;
+        $this->view->title      = $this->lang->user->login->common;
+        $this->view->referer    = $referer;
+        $this->view->mobileURL  = helper::createLink('user', 'oauthCallback', "provider=$provider", '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('user', 'oauthCallback', "provider=$provider", '', 'html');
         die($this->display());
     }
 
@@ -707,8 +737,10 @@ class user extends control
             $this->send(array('result' => 'fail', 'message' => 'I have registered but can\'t login, some error occers.'));
         }
 
-        $this->view->title   = $this->lang->user->oauth->lblProfile;
-        $this->view->referer = $this->post->referer;
+        $this->view->title      = $this->lang->user->oauth->lblProfile;
+        $this->view->referer    = $this->post->referer;
+        $this->view->mobileURL  = helper::createLink('user', 'oauthRegister', '', '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('user', 'oauthRegister', '', '', 'html');
         $this->display();
     }
 
@@ -739,8 +771,10 @@ class user extends control
             $this->send(array('result' => 'fail', 'message' => $this->lang->user->loginFailed));
         }
 
-        $this->view->title   = $this->lang->user->oauth->lblBind;
-        $this->view->referer = $this->post->referer;
+        $this->view->title      = $this->lang->user->oauth->lblBind;
+        $this->view->referer    = $this->post->referer;
+        $this->view->mobileURL  = helper::createLink('user', 'oauthBind', '', '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('user', 'oauthBind', '', '', 'html');
         $this->display();
     }
 
@@ -853,9 +887,11 @@ class user extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->user->checkEmailSuccess, 'locate' => $this->post->referer));
         }
 
-        $this->view->title   = $this->lang->user->checkEmail;
-        $this->view->user    = $user;
-        $this->view->referer = $this->referer;
+        $this->view->title      = $this->lang->user->checkEmail;
+        $this->view->user       = $user;
+        $this->view->referer    = $this->referer;
+        $this->view->mobileURL  = helper::createLink('user', 'checkEmail', "referer=$referer", '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('user', 'checkEmail', "referer=$referer", '', 'html');
         $this->display();
     }
 }

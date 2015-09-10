@@ -19,7 +19,9 @@ class links extends control
      */
     public function index()
     {
-        $this->view->links = $this->config->links;
+        $this->view->links     = $this->config->links;
+        $this->view->mobileURL = helper::createLink('links', 'index', '', '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('links', 'index', '', '', 'html');
         $this->display();
     }
 
