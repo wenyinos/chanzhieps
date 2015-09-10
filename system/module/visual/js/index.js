@@ -51,6 +51,17 @@
         }, options));
     };
 
+    var getVisualOptions = function($ve)
+    {
+        var name = $ve.data('ve');
+        var options = $.extend({}, visuals[name], $ve.data());
+        if(name === 'block')
+        {
+            options = $.extend(options, $ve.closest('.blocks[data-region]').data());
+        }
+        return options;
+    };
+
     // visual settings
     $.each(visuals, function(name, setting)
     {
@@ -119,7 +130,7 @@
             $.each(setting.actions, function(actionName, action)
             {
                 if(action.hidden) return;
-                $actions.append('<li data-toggle="tooltip" class="ve-action-' + actionName + '" title="' + action.text + '">'
+                $actions.append('<li data-toggle="tooltip" data-action="' + actionName + '" class="ve-action ve-action-' + actionName + '" title="' + action.text + '">'
                     + (action.icon ? '<i class="icon icon-' + action.icon + '"></i>' : action.text) + '</li>');
             });
 
@@ -252,20 +263,21 @@
         });
     };
 
-    var openEditModal = function(ve)
+    var openCommonActionModal = function(ve, actionName)
     {
+        actionName = actionName || 'edit';
         var $ve = ve instanceof $$ ? ve : $$(this).closest('.ve');
         var name = $ve.data('ve');
         $$('.ve-editing').removeClass('ve-editing');
         $ve.addClass('ve-editing');
         var setting = visuals[name];
-        var options = $.extend({}, setting, $ve.data());
-        var action = setting.actions.edit;
-        openModal(createLink(action.module || setting.module || 'visual', action.method || ('edit' + name), (action.params || setting.params || '').format(options)),
+        var options = getVisualOptions($ve);
+        var action = setting.actions[actionName];
+        openModal(createLink(action.module || setting.module || 'visual', action.method || (actionName + name), (action.params || setting.params || '').format(options)),
         {
             width : action.width || setting.width,
             icon  : action.icon || 'pencil',
-            title : action.title || setting.title || action.text + ' ' + setting.name,
+            title : action.title || setting.title || action.text + ' ' + options.title,
             loaded: function(e)
             {
                 var modal$ = e.jQuery;
@@ -283,7 +295,7 @@
         var $ve = ve instanceof $$ ? ve : $$(this).closest('.ve');
         var name = $ve.data('ve');
         var setting = visuals[name];
-        var options = $.extend({}, setting, $ve.data());
+        var options = getVisualOptions($ve);
         var action = setting.actions.edit;
         var confirmMessage = setting.actions.delete.confirm.format(options);
         var callback = function(result)
@@ -349,14 +361,20 @@
         initBlocks();
 
         // bind event
-        $$('body').on('click', '.ve-cover', openEditModal)
-        .on('click', '.ve-action-edit', function(e)
+        $$('body').on('click', '.ve-cover', openCommonActionModal)
+        .on('click', '.ve-action', function(e)
         {
-            openEditModal($$(this).closest('.ve'));
-            e.stopPropagation();
-        }).on('click', '.ve-action-delete', function(e)
-        {
-            deleteVisualArea($$(this).closest('.ve'));
+            var $action = $$(this);
+            var $ve = $action.closest('.ve');
+            var actionName = $action.data('action');
+            if(actionName === 'delete')
+            {
+                deleteVisualArea($ve);
+            }
+            else if(actionName !== 'move')
+            {
+                openCommonActionModal($ve, actionName);
+            }
             e.stopPropagation();
         });
 
