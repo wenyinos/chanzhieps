@@ -22,3 +22,9 @@ label{font-weight:500;font-size:13px;}
 
 .panel-heading > a { display: inline-block; margin: -3px 3px; line-height: 26px;padding: 0 10px}
 .panel-heading > a.active { border-radius: 13px; background-color: #3280FC;color: #fff}
+
+body.body-modal-ve {padding: 0;}
+body.body-modal-ve .row-main {padding: 0;}
+body.body-modal-ve .panel {border: none; box-shadow: none; margin: 0;}
+body.body-modal-ve .panel-heading {background: none; padding-left: 20px; padding-right: 20px; display: none}
+body.body-modal-ve .panel-body {padding: 20px;}

@@ -14,6 +14,9 @@ js::set('visualStyle', $themeRoot . 'common/visual.css');
     </ul>
     <ul class="nav navbar-nav pull-right">
       <li><a href='###' id='visualPreviewBtn'><i class='icon-eye-open'></i> <?php echo $lang->visual->preview?></a></li>
+      <li>
+        <?php commonModel::printLink('admin', 'index', '', '<i class="icon-cogs"></i> ' . $lang->visual->admin, "target='_blank'") ?>
+      </li>
     </ul>
   </div>
   <a href='<?php echo $referer;?>' class='close' id='visualExitBtn' data-toggle='tooltip' data-placement='left' title='<?php echo $lang->visual->exitVisualEdit;?>'>&times;</a>

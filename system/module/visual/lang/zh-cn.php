@@ -16,6 +16,7 @@ $lang->visual->info              = "编辑模式";
 $lang->visual->preview           = "预览";
 $lang->visual->exit              = "退出";
 $lang->visual->exitVisualEdit    = "关闭编辑模式";
+$lang->visual->admin             = "后台";
 
 $lang->visual->jsLang = new stdclass();
 $lang->visual->jsLang->saved       = $lang->saveSuccess;
@@ -31,13 +32,14 @@ $lang->visual->jsLang->actions     = array('edit' => '编辑', 'delete' => '删�
 
 $lang->visual->config           = new stdclass();
 $lang->visual->config->logo     = array('name' => "Logo/名称", 'width' => 900);
-$lang->visual->config->slogan   = array('name' => "口号", 'width' => 700, 'actions' => array('delete' => true, 'move' => true));
+$lang->visual->config->slogan   = array('name' => "口号", 'width' => 700);
 $lang->visual->config->powerby  = array('name' => "蝉知标识", 'title' => '移除蝉知标识', 'width' => 600, 'actions' => array('edit' => array('icon' => 'info-sign', 'text' => '移除蝉知标识')));
-$lang->visual->config->navbar   = array('name' => "导航", 'width' => '80%');
-$lang->visual->config->block    = array('name' => "区块", 'width' => '1200', 'params' => 'blockID={id}',
+$lang->visual->config->navbar   = array('name' => "导航", 'width' => 1200, 'params' => 'type={type}', 'module' => 'nav', 'actions' => array('edit' => array('method' => 'admin')));
+$lang->visual->config->block    = array('name' => "区块", 'width' => 1200, 'params' => 'blockID={id}',
     'actions' => array(
-          'delete' => array('confirm' => '确定从布局中移除 【{title}】？', 'success' => '【{title}】已被移除。'),
+          'delete' => array('confirm' => '确定从布局中移除 【{title}】？', 'success' => '【{title}】已被移除。', 'params' => 'region={region}&blockID={id}'),
           'move' => array('success' => '排序已保存', 'params' => 'region={region}'),
+          'layout' => array('width' => 600, 'text' => '更改布局', 'icon' => 'columns', 'success' => '布局已保存', 'params' => 'region={region}&blockID={id}'),
           'add' => array('params' => 'region={region}', 'hidden' => true, 'width' => 1000)
 ));
 

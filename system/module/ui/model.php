@@ -15,7 +15,7 @@ class uiModel extends model
 {
     /**
      * Get templates available.
-     * 
+     *
      * @access public
      * @return void
      */
@@ -58,21 +58,21 @@ class uiModel extends model
 
     /**
      * Get themes by template.
-     * 
-     * @param  string    $template 
+     *
+     * @param  string    $template
      * @access public
      * @return array
      */
     public function getThemesByTemplate($template)
     {
-        $templates = $this->getTemplates();   
+        $templates = $this->getTemplates();
         $template  = zget($templates, $template);
         return isset($template['themes']) ? $template['themes'] : array();
     }
 
     /**
      * Get installed themes in db.
-     * 
+     *
      * @access public
      * @return array
      */
@@ -82,8 +82,8 @@ class uiModel extends model
     }
 
     /**
-     * Get template option menu.   
-     * 
+     * Get template option menu.
+     *
      * @access public
      * @return void
      */
@@ -102,10 +102,10 @@ class uiModel extends model
     }
 
     /**
-     * Set UI option with file. 
-     * 
-     * @param  int    $type 
-     * @param  int    $htmlTagName 
+     * Set UI option with file.
+     *
+     * @param  int    $type
+     * @param  int    $htmlTagName
      * @access public
      * @return void
      */
@@ -113,7 +113,7 @@ class uiModel extends model
     {
         if(empty($_FILES)) return array('result' => false, 'message' => $this->lang->ui->noSelectedFile);
 
-        $fileType = substr($_FILES['files']['name'], strrpos($_FILES['files']['name'], '.') + 1); 
+        $fileType = substr($_FILES['files']['name'], strrpos($_FILES['files']['name'], '.') + 1);
         if(strpos($allowedFileType, $fileType) === false) return array('result' => false, 'message' => sprintf($this->lang->ui->notAlloweFileType, $allowedFileType));
 
         $fileModel = $this->loadModel('file');
@@ -134,7 +134,7 @@ class uiModel extends model
         if(!$uploadResult) return array('result' => false, 'message' => $this->lang->fail);
 
         $fileIdList = array_keys($uploadResult);
-        $file       = $fileModel->getById($fileIdList[0]); 
+        $file       = $fileModel->getById($fileIdList[0]);
 
         /* Save new data. */
         $setting  = new stdclass();
@@ -147,11 +147,11 @@ class uiModel extends model
         if($section == 'logo')
         {
             $device = helper::getDevice();
-            $template = $this->config->template->{$device}->name; 
-            $theme    = $this->post->theme == 'all' ? 'all' : $this->config->template->{$device}->theme; 
+            $template = $this->config->template->{$device}->name;
+            $theme    = $this->post->theme == 'all' ? 'all' : $this->config->template->{$device}->theme;
             $logo = isset($this->config->site->logo) ? json_decode($this->config->site->logo, true) : array();
             if(!isset($logo[$template])) $logo[$template] = array();
-            $logo[$template]['themes'][$theme] = $setting; 
+            $logo[$template]['themes'][$theme] = $setting;
 
             $result = $this->loadModel('setting')->setItems('system.common.site', array($section => helper::jsonEncode($logo)));
         }
@@ -166,9 +166,9 @@ class uiModel extends model
 
     /**
      * Get custom params.
-     * 
-     * @param  string    $template 
-     * @param  string    $theme 
+     *
+     * @param  string    $template
+     * @param  string    $theme
      * @access public
      * @return array
      */
@@ -192,10 +192,10 @@ class uiModel extends model
 
     /**
      * Create customer css.
-     * 
-     * @param  string    $template 
-     * @param  string    $theme 
-     * @param  array     $params 
+     *
+     * @param  string    $template
+     * @param  string    $theme
+     * @param  array     $params
      * @access public
      * @return void
      */
@@ -211,7 +211,7 @@ class uiModel extends model
 
         $savePath = dirname($cssFile);
         if(!is_dir($savePath)) mkdir($savePath, 0777, true);
-        $lessTemplate = $this->app->getWwwRoot() . 'template' . DS . $template . DS . 'theme' . DS . $theme . DS . 'style.less';
+        $lessTemplateDir = $this->app->getWwwRoot() . 'template' . DS . $template . DS . 'theme' . DS . $theme . DS;
 
         foreach($this->config->ui->themes[$template][$theme] as $section => $selector)
         {
@@ -237,14 +237,28 @@ class uiModel extends model
 
         $lessc->setFormatter("compressed");
         $lessc->setVariables($params);
-        
+
         if(!empty($extraCss)) $extraCss = $lessc->compile($extraCss);
 
         $css  = '';
+        $lessTemplate = $lessTemplateDir . 'style.less';
         if(file_exists($lessTemplate))
         {
             $css .= '/* User custom theme style for teamplate:' . $template . ' - theme:' . $theme . '. (' . date("Y-m-d H:i:s") . ') */' . "\r\n";
             $css .= $lessc->compileFile($lessTemplate);
+        }
+        else if(file_exists($lessTemplateDir . 'style.css'))
+        {
+            $css .= file_get_contents($lessTemplateDir . 'style.css');
+        }
+        $customLessFile = $lessTemplateDir . 'custom.less';
+        if(file_exists($customLessFile))
+        {
+            $css .= $lessc->compileFile($customLessFile);
+        }
+        else if(file_exists($lessTemplateDir . 'custom.css'))
+        {
+            $css .= file_get_contents($lessTemplateDir . 'custom.css');
         }
         if($extraCss)
         {
@@ -261,7 +275,7 @@ class uiModel extends model
      * Create html of color plates list.
      *
      * @param string       $plates
-     * return string 
+     * return string
      */
     public function createColorPlates($plates = '')
     {
@@ -280,11 +294,11 @@ class uiModel extends model
 
     /**
      * Print form control.
-     * 
-     * @param  string    $id 
-     * @param  string    $label 
-     * @param  array     $params 
-     * @param  mix       $value 
+     *
+     * @param  string    $id
+     * @param  string    $label
+     * @param  array     $params
+     * @param  mix       $value
      * @access public
      * @return string
      */
@@ -296,11 +310,11 @@ class uiModel extends model
 
     /**
      * Print color control.
-     * 
-     * @param  string    $id 
-     * @param  string    $label 
-     * @param  array     $params 
-     * @param  mix       $value 
+     *
+     * @param  string    $id
+     * @param  string    $label
+     * @param  array     $params
+     * @param  mix       $value
      * @access public
      * @return string
      */
@@ -501,7 +515,7 @@ class uiModel extends model
      * @param string       $class
      * @param string       $alias
      * @param string       $tooltip
-     * return string 
+     * return string
      */
     public function printTextbox($name, $value, $startLabel = '', $endLabel = '', $placeholder = false, $class = '', $alias = '', $tooltip = '')
     {
@@ -537,7 +551,7 @@ class uiModel extends model
      * @param string       $class
      * @param string       $alias
      * @param string       $tooltip
-     * return string 
+     * return string
      */
     public function printSelectList($list, $name, $value = '', $label = '', $class = '', $alias = '', $tooltip = '', $default = '')
     {
@@ -576,7 +590,7 @@ class uiModel extends model
      * @param string       $tooltip2
      * @param string       $alias1
      * @param string       $alias2
-     * return string 
+     * return string
      */
     public function printTextboxCouple($labelStart, $name, $name1, $value1, $label1, $name2, $value2, $label2, $labelEnd, $placeholder1 = false, $placeholder2 = false, $tooltip1 = '', $tooltip2 = '', $alias1 = '', $alias2 = '')
     {
@@ -625,7 +639,7 @@ class uiModel extends model
 
     /**
      * Check export params.
-     * 
+     *
      * @access public
      * @return bool
      */
@@ -637,9 +651,9 @@ class uiModel extends model
     }
     /**
      * Export theme.
-     * 
-     * @param  string    $template 
-     * @param  string    $theme 
+     *
+     * @param  string    $template
+     * @param  string    $theme
      * @access public
      * @return void
      */
@@ -649,10 +663,10 @@ class uiModel extends model
             ->add('type', 'theme')
             ->add('templateCompatible', $this->post->template)
             ->get();
-        
+
         $yaml  = $this->app->loadClass('spyc')->dump($themeInfo);
         file_put_contents($this->exportDocPath . $this->app->getClientLang() . '.yaml', $yaml);
-        
+
         $this->exportDB($template, $theme);
         if(dao::isError()) return false;
 
@@ -662,10 +676,10 @@ class uiModel extends model
 
     /**
      * Init export paths.
-     * 
-     * @param  string    $template 
-     * @param  string    $theme 
-     * @param  string    $code 
+     *
+     * @param  string    $template
+     * @param  string    $theme
+     * @param  string    $code
      * @access public
      * @return bool
      */
@@ -680,7 +694,7 @@ class uiModel extends model
         $this->exportSlidePath  = $this->exportPath . 'www' . DS . 'data' . DS . 'slidestmp' . DS;
         $this->exportConfigPath = $this->exportPath . 'system' . DS . 'module' . DS . 'ui' . DS . 'ext' . DS . 'config' . DS;
 
-        if(is_dir($this->exportPath)) $this->app->loadClass('zfile')->removeDir($this->exportPath);     
+        if(is_dir($this->exportPath)) $this->app->loadClass('zfile')->removeDir($this->exportPath);
 
         mkdir($this->exportPath, 0777, true);
 
@@ -697,9 +711,9 @@ class uiModel extends model
 
     /**
      * Get used slidegroups.
-     * 
-     * @param  string    $template 
-     * @param  string    $theme 
+     *
+     * @param  string    $template
+     * @param  string    $theme
      * @access public
      * @return void
      */
@@ -718,10 +732,10 @@ class uiModel extends model
     }
 
     /**
-     * Export theme sqls. 
-     * 
-     * @param  string    $template 
-     * @param  string    $theme 
+     * Export theme sqls.
+     *
+     * @param  string    $template
+     * @param  string    $theme
      * @access public
      * @return bool
      */
@@ -729,7 +743,7 @@ class uiModel extends model
     {
         $lang   = $this->app->getClientLang();
         $tables = array(TABLE_BLOCK, TABLE_LAYOUT, TABLE_CONFIG, TABLE_FILE);
- 
+
         $groups = $this->getUsedSlideGroups($template, $theme);
         $groups = join(",", $groups);
         if(!empty($groups))
@@ -761,7 +775,7 @@ class uiModel extends model
         $replaces[TABLE_SLIDE]    = false;
         $replaces[TABLE_CATEGORY] = false;
         $replaces[TABLE_FILE]     = false;
-    
+
         $zdb = $this->app->loadClass('zdb');
         $zdb->dump($this->exportDbPath . 'install.sql', $tables, $fields, 'data', $condations, true);
 
@@ -784,10 +798,10 @@ class uiModel extends model
 
     /**
      * Export files.
-     * 
-     * @param  string    $template 
-     * @param  string    $theme 
-     * @param  string    $code 
+     *
+     * @param  string    $template
+     * @param  string    $theme
+     * @param  string    $code
      * @access public
      * @return string
      */
@@ -824,7 +838,7 @@ class uiModel extends model
         $slidePath = $this->app->getWwwRoot() . 'data' . DS . 'slides';
         $usedSlides = array();
         foreach($groups as $group) $usedSlides[] = glob($slidePath . DS . "{$group}_*.*");
-        foreach($usedSlides as $slides) 
+        foreach($usedSlides as $slides)
         {
             foreach($slides as $slide) copy($slide, str_replace($slidePath . DS, $this->exportSlidePath, $slide));
         }
@@ -839,7 +853,7 @@ class uiModel extends model
         else
         {
             $previewImage = $this->app->getWwwRoot() . 'template' . DS . $template . DS . 'theme' . DS . $theme . DS . 'preview.png';
-            copy($previewImage, $this->exportLessPath . 'preview.png'); 
+            copy($previewImage, $this->exportLessPath . 'preview.png');
         }
 
         /* Zip theme files. */
@@ -855,9 +869,9 @@ class uiModel extends model
 
     /**
      * Delete a theme.
-     * 
-     * @param  string    $template 
-     * @param  string    $theme 
+     *
+     * @param  string    $template
+     * @param  string    $theme
      * @access public
      * @return void
      */
@@ -881,8 +895,8 @@ class uiModel extends model
 
     /**
      * Remove template data.
-     * 
-     * @param  string    $template 
+     *
+     * @param  string    $template
      * @access public
      * @return bool
      */
@@ -899,8 +913,8 @@ class uiModel extends model
 
     /**
      * Remove template files.
-     * 
-     * @param  string    $template 
+     *
+     * @param  string    $template
      * @access public
      * @return bool|array
      */

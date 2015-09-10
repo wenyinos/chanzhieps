@@ -32,7 +32,7 @@ $navs = $this->loadModel('nav')->getNavs('desktop_blog');
   <meta http-equiv="Cache-Control" content="no-transform" />
   <link rel="alternate" media="only screen and (max-width: 640px)" href="<?php echo $sysURL . $mobileURL;?>">
   <?php
-  if(!isset($title))    $title    = ''; 
+  if(!isset($title))    $title    = '';
   if(!empty($title))    $title   .= $lang->minus;
   if(!isset($keywords)) $keywords = $config->site->keywords;
   if(!isset($desc))     $desc     = $config->site->desc;
@@ -56,7 +56,7 @@ $navs = $this->loadModel('nav')->getNavs('desktop_blog');
   {
       $customCssFile = $this->app->getDataRoot() . 'css' . DS . $this->config->template->{$this->device}->name . DS . $this->config->template->{$this->device}->theme . DS . 'style.css';
       if(file_exists($customCssFile)) css::import(sprintf($webRoot . 'data/css/%s/%s/style.css?' . $this->config->template->customVersion, $config->template->{$this->device}->name, $config->template->{$this->device}->theme));
-       
+
   }
 
   js::exportConfigVars();
@@ -82,7 +82,7 @@ $navs = $this->loadModel('nav')->getNavs('desktop_blog');
 <?php
 if(!empty($config->oauth->sina)) $sina = json_decode($config->oauth->sina);
 if(!empty($config->oauth->qq))   $qq   = json_decode($config->oauth->qq);
-if(!empty($sina->verification)) echo $sina->verification; 
+if(!empty($sina->verification)) echo $sina->verification;
 if(!empty($qq->verification))   echo $qq->verification;
 if(empty($sina->verification) && !empty($sina->widget)) js::import('http://tjs.sjs.sinajs.cn/open/api/js/wb.js');
 ?>
@@ -114,7 +114,7 @@ else
 <?php
 $template   = $this->config->template->{$this->device}->name ? $this->config->template->{$this->device}->name : 'default';
 $theme      = $this->config->template->{$this->device}->theme ? $this->config->template->{$this->device}->theme : 'default';
-$baseCustom = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array(); 
+$baseCustom = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array();
 if(!empty($baseCustom[$template][$theme]['js'])) js::execute($baseCustom[$template][$theme]['js']);
 ?>
 </head>
@@ -150,7 +150,7 @@ if(!empty($baseCustom[$template][$theme]['js'])) js::execute($baseCustom[$templa
     </div>
     <?php endif;?>
   </header>
-  <nav id="blogNav" class="navbar navbar-default" role="navigation">
+  <nav id="blogNav" class="navbar navbar-default" data-ve='navbar' data-type='desktop_blog'>
     <div class='wrapper'>
       <ul class='nav navbar-nav'>
         <?php foreach($navs as $nav1):?>
