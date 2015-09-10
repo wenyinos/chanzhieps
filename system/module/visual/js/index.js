@@ -452,6 +452,9 @@
             {
                 visualPageUrl = $frame.context.URL;
                 var title = $frame.find('head > title').text();
+                var url = createLink('visual', 'index', 'referer=' + visualPageUrl);
+                window.history.pushState({}, title, url);
+
                 $('#visualPageName').text((title && title.indexOf(' ') > -1) ? title.split(' ')[0] : title).attr('href', visualPageUrl);
             }
 
