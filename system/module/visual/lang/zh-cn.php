@@ -17,6 +17,7 @@ $lang->visual->preview           = "预览";
 $lang->visual->exit              = "退出";
 $lang->visual->exitVisualEdit    = "关闭编辑模式";
 $lang->visual->admin             = "后台";
+$lang->visual->reload            = '刷新';
 
 $lang->visual->jsLang = new stdclass();
 $lang->visual->jsLang->saved       = $lang->saveSuccess;

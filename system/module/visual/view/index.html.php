@@ -13,6 +13,7 @@ js::set('visualStyle', $themeRoot . 'common/visual.css');
       <li><a href='###' id='visualPageName' target='_blank'><i class='icon icon-spinner icon-spin'></i></a></li>
     </ul>
     <ul class="nav navbar-nav pull-right">
+      <li><a href='###' id='visualReloadBtn'><i class='icon-refresh'></i> <?php echo $lang->visual->reload?></a></li>
       <li><a href='###' id='visualPreviewBtn'><i class='icon-eye-open'></i> <?php echo $lang->visual->preview?></a></li>
       <li>
         <?php commonModel::printLink('admin', 'index', '', '<i class="icon-cogs"></i> ' . $lang->visual->admin, "target='_blank'") ?>

@@ -492,6 +492,11 @@
             : ("<i class='icon-eye-open'></i> " + lang.preview));
     });
 
+    $('#visualReloadBtn').on('click', function()
+    {
+        visualPage.contentWindow.location.replace(visualPageUrl);
+    });
+
     // extend helper methods
     $.updateVisualArea = updateVisualArea;
     $.setModalTitle = function(title)
