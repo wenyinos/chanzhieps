@@ -10,9 +10,9 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php
-include TPL_ROOT . 'common/header.html.php';
-include TPL_ROOT . 'common/treeview.html.php';
+<?php 
+include TPL_ROOT . 'common/header.html.php'; 
+include TPL_ROOT . 'common/treeview.html.php'; 
 
 /* set categoryPath for topNav highlight. */
 js::set('path',  $product->path);
@@ -110,12 +110,9 @@ js::execute($product->js);
                   if(empty($attribute->label) and empty($attribute->value)) continue;
                   $attributeHtml .= "<li><span class='meta-name'>" . $attribute->label . "</span>";
 
-                  $http  = strpos($attribute->value, 'https') !== false ? 'https://' : 'http://';
-                  $attribute->value = str_replace($http, '', $attribute->value);
-                  $value = strpos($attribute->value, ':') !== false ? substr($attribute->value, 0, strpos($attribute->value, ':')) : $attribute->value;
-                  if(preg_match('/^([a-z0-9\-]+\.)+[a-z0-9\-]+$/', $value))
+                  if(strpos($attribute->value, 'http://') === 0 or strpos($attribute->value, 'https://') === 0)
                   {
-                      $attributeHtml .= "<span class='meta-value'>" . html::a($http . $attribute->value, $attribute->value, "target='_blank'") . "</span></li>";
+                      $attributeHtml .= "<span class='meta-value'>" . html::a($attribute->value, $attribute->value, "target='_blank'") . "</span></li>";
                   }
                   else
                   {
@@ -176,7 +173,7 @@ js::execute($product->js);
     <div class='row'><?php $this->block->printRegion($layouts, 'product_view', 'bottom', true);?></div>
   </div>
   <div class='col-md-3 col-side'>
-    <side class='page-side blocks'><?php $this->block->printRegion($layouts, 'product_view', 'side');?></side>
+    <side class='page-side'><?php $this->block->printRegion($layouts, 'product_view', 'side');?></side>
   </div>
 </div>
 <div class='row'><?php $this->block->printRegion($layouts, 'product_view', 'bottomBanner', true);?></div>
