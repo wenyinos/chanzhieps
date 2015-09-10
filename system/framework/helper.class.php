@@ -584,7 +584,7 @@ class helper
         if(empty($_SERVER['HTTP_USER_AGENT'])) return 'unknow';
 
         $osList = array(
-            '/windows nt 10/i'     =>  'Windows 10',
+            '/windows nt 10/i'      =>  'Windows 10',
             '/windows nt 6.3/i'     =>  'Windows 8.1',
             '/windows nt 6.2/i'     =>  'Windows 8',
             '/windows nt 6.1/i'     =>  'Windows 7',
