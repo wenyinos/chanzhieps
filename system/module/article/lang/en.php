@@ -39,9 +39,10 @@ $lang->article->css        = 'CSS';
 $lang->article->js         = 'JS';
 
 $lang->article->forward          = 'Forward';
-$lang->article->forward2blog     = 'Forward to blog';
-$lang->article->forward2forum    = 'Forward to blog';
+$lang->article->forward2Blog     = 'Forward to blog';
+$lang->article->forward2Forum    = 'Forward to blog';
 $lang->article->selectCategories = 'Select categories';
+$lang->article->selectBoard      = 'Select board';
 
 $lang->article->list       = 'List';
 $lang->article->admin      = 'Admin';
@@ -95,3 +96,6 @@ $lang->article->noJsTag   = 'No &lt;script&gt;&lt;/script&gt; tag';
 $lang->article->placeholder = new stdclass();
 $lang->article->placeholder->addedDate = 'Schedule to Publish the article after this time';
 $lang->article->placeholder->link      = 'Input link, it can be outer chain.';
+
+$lang->article->forwardFrom = 'Fowarding from';
+$lang->article->self        = 'This station';

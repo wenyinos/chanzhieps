@@ -407,11 +407,8 @@ class articleModel extends model
      * @access public
      * @return bool 
      */
-    public function forward2blog($articleID)
+    public function forward2Blog($articleID)
     {
-        $article = $this->getByID($articleID);
-        $category = current($article->categories);
-
         $blog = $this->dao->select('*')->from(TABLE_ARTICLE)->where('alias')->eq($articleID)->fetch();
         if(!$blog) $blog = $this->dao->select('*')->from(TABLE_ARTICLE)->where('id')->eq($articleID)->fetch();
 
@@ -419,17 +416,20 @@ class articleModel extends model
         
         $blog->source     = 'copied';
         $blog->type       = 'blog';
-        $blog->copyURL    = $this->createPreviewLink($articleID); 
+        $blog->categories = $this->post->categories;
+        $blog->copySite   = $this->lang->article->self;
+        $blog->copyURL    = $this->loadModel('common')->getSysURL() . $this->createPreviewLink($articleID); 
         $blog->author     = $this->app->user->realname;
         $blog->addedDate  = $this->post->addedDate ? $this->post->addedDate : helper::now();
         $blog->editedDate = $blog->addedDate;
+
         unset($blog->id);
 
-        $this->dao->insert(TABLE_ARTICLE)->data($blog)->autoCheck()->exec();
+        $this->dao->insert(TABLE_ARTICLE)->data($blog, $skip='categories')->autoCheck()->batchCheck($this->config->article->require->forward2Blog, 'notempty')->exec();
         $blogID = $this->dao->lastInsertID();
         if(dao::isError()) return false;
 
-        /* Save article keywords. */
+        /* Save blog keywords. */
         $this->loadModel('tag')->save($blog->keywords);
         $this->processCategories($blogID, 'blog', $this->post->categories);
 
@@ -437,6 +437,42 @@ class articleModel extends model
         return $this->loadModel('search')->save('blog', $blog);
     }
     
+    /**
+     * Forward an article to forum. 
+     * 
+     * @param  int    $articleID 
+     * @access public
+     * @return bool 
+     */
+    public function forward2Forum($articleID)
+    {
+        $article = $this->getByID($articleID);
+        $category = current($article->categories);
+        $address  = $this->loadModel('common')->getSysURL() . $this->createPreviewLink($articleID);
+
+        $thread = $this->dao->select('*')->from(TABLE_ARTICLE)->where('alias')->eq($articleID)->fetch();
+        if(!$thread) $thread = $this->dao->select('title, content')->from(TABLE_ARTICLE)->where('id')->eq($articleID)->fetch();
+
+        if(!$thread) return false;
+        
+        $thread->board      = $this->post->board;
+        $thread->author     = $this->app->user->realname;
+        $thread->content   .= "<div style='text-align: right'>" . $this->lang->article->forwardFrom . ' ' . html::a($address, $address) . '</div>';
+        $thread->addedDate  = $this->post->addedDate ? $this->post->addedDate : helper::now();
+        $thread->editedDate = $thread->addedDate;
+        $thread->repliedDate = $thread->addedDate;
+
+        $this->dao->insert(TABLE_THREAD)->data($thread)->autoCheck()->exec();
+            
+        $threadID = $this->dao->lastInsertID();
+        
+        if(!dao::isError())
+        {
+            $this->loadModel('search')->save('thread', $thread);
+        }
+
+        return !dao::isError(); 
+    }
     /**
      * Update an article.
      * 

@@ -95,10 +95,10 @@
           <?php endif;?>
           <?php if($type == 'article'):?>
           <span class='dropdown'>
-            <a data-toggle='dropdown'><?php echo $lang->article->forward;?><span class='caret'></span></a>
+            <a data-toggle='dropdown' href='javascript:;'><?php echo $lang->article->forward;?><span class='caret'></span></a>
             <ul class='dropdown-menu pull-right'>    
-              <li><?php commonModel::printLink('article', 'forward2blog', "articleID=$article->id", $lang->article->forward2blog, "data-toggle='modal'");?></li>
-              <li><?php commonModel::printLink('article', 'forward2forum', "articleID=$article->id", $lang->article->forward2forum, "data-toggle='modal'");?></li>
+              <li><?php commonModel::printLink('article', 'forward2Blog', "articleID=$article->id", $lang->article->forward2Blog, "data-toggle='modal'");?></li>
+              <li><?php commonModel::printLink('article', 'forward2Forum', "articleID=$article->id", $lang->article->forward2Forum, "data-toggle='modal'");?></li>
             </ul>
           </span>
           <?php endif;?>
