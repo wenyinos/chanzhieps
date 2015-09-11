@@ -47,7 +47,7 @@ include TPL_ROOT . 'common/treeview.html.php';
     </div>
     <div class='row blocks' data-region='article_browse-bottom'><?php $this->block->printRegion($layouts, 'article_browse', 'bottom', true);?></div>
   </div>
-  <div class='col-md-3 col-side'><side class='page-side blocks'><?php $this->block->printRegion($layouts, 'article_browse', 'side');?></side></div>
+  <div class='col-md-3 col-side'><side class='page-side blocks' data-region='article_browse-side'><?php $this->block->printRegion($layouts, 'article_browse', 'side');?></side></div>
 </div>
 <div class='row blocks' data-region='article_browse-bottomBanner'><?php $this->block->printRegion($layouts, 'article_browse', 'bottomBanner', true);?></div>
 <?php include TPL_ROOT . 'common/footer.html.php';?>
