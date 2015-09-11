@@ -1,5 +1,5 @@
 <?php include TPL_ROOT . 'common/header.html.php'; ?>
-<div class='row focus-top' data-default-grid='4'><?php $this->block->printRegion($layouts, 'forum_index', 'top', true);?></div>
+<div class='row blocks' data-grid='4' data-region='forum_index-top'><?php $this->block->printRegion($layouts, 'forum_index', 'top', true);?></div>
 <?php $common->printPositionBar($this->app->getModuleName());?>
 <div id='boards'>
 <?php foreach($boards as $parentBoard):?>
@@ -44,5 +44,5 @@
   </div>
 <?php endforeach;?>
 </div>
-<?php $this->block->printRegion($layouts, 'forum_index', 'bottom');?>
+<div class='blocks' data-region='forum_index-bottom'><?php $this->block->printRegion($layouts, 'forum_index', 'bottom');?></div>
 <?php include TPL_ROOT . 'common/footer.html.php'; ?>

@@ -76,13 +76,16 @@ class replyModel extends model
         
         foreach($files as $replyID => $file) $replies[$replyID]->files = $file;
 
-        if($replies)
+        if(isset($this->config->site->score) and $this->config->site->score == 'open')
         {
-            $replyScores = $this->loadModel('score')->getByObject('reply', array_keys($replies), 'valuereply');
-            foreach($replyScores as $score)
+            if($replies)
             {
-                if(!isset($replies[$score->objectID]->scoreSum))$replies[$score->objectID]->scoreSum = 0;
-                $replies[$score->objectID]->scoreSum += $score->count;
+                $replyScores = $this->loadModel('score')->getByObject('reply', array_keys($replies), 'valuereply');
+                foreach($replyScores as $score)
+                {
+                    if(!isset($replies[$score->objectID]->scoreSum))$replies[$score->objectID]->scoreSum = 0;
+                    $replies[$score->objectID]->scoreSum += $score->count;
+                }
             }
         }
 
@@ -173,7 +176,7 @@ class replyModel extends model
         {
             $this->saveCookie($replyID);                               // Save reply id to cookie.
             $this->loadModel('file')->saveUpload('reply', $replyID);   // Save file.
-            $this->loadModel('score')->earn('reply', 'reply', $replyID);
+            if(isset($this->config->site->score) and $this->config->site->score == 'open') $this->loadModel('score')->earn('reply', 'reply', $replyID);
 
             /* Update thread stats. */
             $this->thread->updateStats($threadID);
@@ -266,7 +269,7 @@ class replyModel extends model
         $this->loadModel('thread')->updateStats($thread->id);
         $this->loadModel('forum')->updateBoardStats($thread->board);
 
-        $this->loadModel('score')->punish($author, 'delReply', $this->config->score->counts->delReply, 'reply', $replyID);
+        if(isset($this->config->site->score) and $this->config->site->score == 'open') $this->loadModel('score')->punish($author, 'delReply', $this->config->score->counts->delReply, 'reply', $replyID);
 
         return !dao::isError();
     }

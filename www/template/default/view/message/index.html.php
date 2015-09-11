@@ -14,10 +14,10 @@
 <?php js::set('showDetail', $this->lang->message->showDetail);?>
 <?php js::set('hideDetail', $this->lang->message->hideDetail);?>
 <?php $common->printPositionBar();?>
-<div class='row'><?php $this->block->printRegion($layouts, 'message_index', 'topBanner', true);?></div>
+<div class='row blocks' data-region='message_index-topBanner'><?php $this->block->printRegion($layouts, 'message_index', 'topBanner', true);?></div>
 <div class='row'>
   <div class='col-md-9 col-main'>
-    <div class='row'><?php $this->block->printRegion($layouts, 'message_index', 'top', true);?></div>
+    <div class='row blocks' data-region='message_index-top'><?php $this->block->printRegion($layouts, 'message_index', 'top', true);?></div>
     <?php if(!empty($messages)):?>
     <?php $class = 'success';?>
     <?php foreach($messages as $number => $message):?>
@@ -50,7 +50,7 @@
           $from  = $this->session->user->account == 'guest' ? '' : $this->session->user->realname;
           $phone = $this->session->user->account == 'guest' ? '' : $this->session->user->phone;
           $qq    = $this->session->user->account == 'guest' ? '' : $this->session->user->qq;
-          $email = $this->session->user->account == 'guest' ? '' : $this->session->user->email; 
+          $email = $this->session->user->account == 'guest' ? '' : $this->session->user->email;
           ?>
           <div class='form-group'>
             <label for='from' class='col-sm-1 control-label'><?php echo $lang->message->from; ?></label>
@@ -83,7 +83,7 @@
           <div class='form-group'>
             <label for='content' class='col-sm-1 control-label'><?php echo $lang->message->content;?></label>
             <div class='col-sm-11 required'>
-              <?php 
+              <?php
                 echo html::textarea('content', '', "class='form-control' rows='3'");
                 echo html::hidden('objectType', 'message');
                 echo html::hidden('objectID', 0);
@@ -105,14 +105,14 @@
         </form>
       </div>
     </div>
-    <div class='row'><?php $this->block->printRegion($layouts, 'message_index', 'bottom', true);?></div>
+    <div class='row blocks' data-region='message_index-bottom'><?php $this->block->printRegion($layouts, 'message_index', 'bottom', true);?></div>
   </div>
   <div class='col-md-3 col-side'>
     <div class='nav'>
     <a href='#commentForm' class='btn btn-primary btn-lg w-p100'><i class='icon-comment-alt'></i> <?php echo $lang->message->post; ?></a>
     </div>
-    <?php $this->block->printRegion($layouts, 'message_index', 'side');?>
+    <side class='blocks' data-region='message_index-side'><?php $this->block->printRegion($layouts, 'message_index', 'side');?></side>
   </div>
 </div>
-<div class='row'><?php $this->block->printRegion($layouts, 'message_index', 'bottomBanner', true);?></div>
+<div class='row blocks' data-region='message_index-bottomBanner'><?php $this->block->printRegion($layouts, 'message_index', 'bottomBanner', true);?></div>
 <?php include TPL_ROOT . 'common/footer.html.php';?>

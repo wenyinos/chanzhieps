@@ -7,7 +7,9 @@
     <th><?php echo $lang->file->size;?></th>
     <th><?php echo $lang->file->addedDate;?></th>
     <th><?php echo $lang->file->public;?></th>
+    <?php if(isset($this->config->site->score) and $this->config->site->score == 'open'):?>
     <th><?php echo $lang->file->score;?></th>
+    <?php endif;?>
     <th><?php echo $lang->file->downloads;?></th>
     <th><?php echo $lang->file->download;?></th>
   </tr>
@@ -20,12 +22,14 @@
     <td><?php echo $file->size;?></td>
     <td><?php echo $file->addedDate;?></td>
     <td><?php $file->public or (!$file->public and $app->user->account != 'guest') ? print($lang->file->publics[$file->public]) : print(html::a($this->createLink('user', 'login'), $lang->file->publics[$file->public]));?></td>
+    <?php if(isset($this->config->site->score) and $this->config->site->score == 'open'):?>
     <td><?php echo $file->score;?>
+    <?php endif;?>
     <td><?php echo $file->downloads;?></td>
     <td><?php echo html::a($this->createLink('file', 'download', "id=$file->id"), $lang->file->download, $file->isImage ? "target='_blank' class='red'" : "class='red'");?></td>
   </tr>
   <?php endforeach;?>
-  <?php if($app->user->account != 'guest'):?>
+  <?php if(isset($this->config->site->score) and $this->config->site->score == 'open' and $app->user->account != 'guest'):?>
   <tr><td colspan='9'><?php printf($lang->file->lblInfo, $this->loadModel('user')->getByAccount($app->user->account)->score);?></td></tr>
   <?php endif;?>
 </table>

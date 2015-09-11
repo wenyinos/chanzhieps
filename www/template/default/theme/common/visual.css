@@ -26,8 +26,8 @@
 .ve-heading:hover {background-color: rgba(56, 176, 63, 1);}
 .ve-name {display: inline-block; padding: 0 5px; text-shadow: 1px 1px 1px rgba(0,0,0,.1); font-weight: bold;}
 .ve-name .icon-move {display: none}
-.ve-movable .ve-name {cursor: move}
-.ve-movable .ve-name .icon-move {display: inline}
+.ve-name.ve-move-handler {cursor: move}
+.ve-name.ve-move-handler .icon-move {display: inline}
 .ve-actions {float: right; display: block; margin: 0; padding: 0;}
 .ve-actions > li {float: left; display: block; padding: 0 3px; min-width: 20px; text-align: center; cursor: pointer; margin-left: 1px; background-color: rgba(0,0,0,.2);}
 .ve-invisible .ve-cover {border: 1px dashed rgba(0, 255, 0, .4)}
