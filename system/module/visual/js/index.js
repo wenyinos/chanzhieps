@@ -128,7 +128,7 @@
             {
                 if(name)
                 {
-                    id = parseInt(id.replace(name, ''));
+                    id = $veMain.data('id') || parseInt(id.replace(name, ''));
                     $veMain.attr('data-id', id);
                 }
                 else

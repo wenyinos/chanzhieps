@@ -22,7 +22,7 @@ include TPL_ROOT . 'common/treeview.html.php';
 <div class='row blocks' data-region='product_browse-topBanner'><?php $this->block->printRegion($layouts, 'product_browse', 'topBanner', true);?></div>
 <div class='row'>
   <div class='col-md-9 col-main'>
-    <div class='list list-condensed'>
+    <div class='list list-condensed' id='products'>
       <div class='row blocks' data-region='product_browse-top'><?php $this->block->printRegion($layouts, 'product_browse', 'top', true);?></div>
       <header>
         <strong><i class='icon-th'></i> <?php echo $category->name;?></strong>
