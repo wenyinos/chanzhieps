@@ -2,7 +2,7 @@
 {
     'use strict';
     var visualPage = $('#visualPage').get(0);
-    var $$;
+    var $$; // the jQuery object of visual page in iframe
     var isInPreview = false;
     var lang = $.extend(window.v.visualLang, window.v.lang);
     var visualPageUrl = visualPage.src;
@@ -53,9 +53,18 @@
 
     var getVisualOptions = function($ve)
     {
-        var name = $ve.data('ve');
-        var options = $.extend({}, visuals[name], $ve.data());
-        if(name === 'block')
+        var name;
+        if(typeof $ve === 'string')
+        {
+            name = $ve;
+            $ve = null;
+        }
+        else if($ve instanceof $$)
+        {
+            name = $ve.data('ve');
+        }
+        var options = $.extend({}, visuals[name], $ve ? $ve.data() : {});
+        if($ve && name === 'block')
         {
             options = $.extend(options, $ve.closest('.blocks[data-region]').data());
         }
@@ -133,23 +142,36 @@
         var setting = visuals[name];
         if($.isPlainObject(setting))
         {
-            setting.invisible = $.trim($veMain.html()) === '';
-            $veMain.addClass('ve').toggleClass('ve-invisible', setting.invisible);
-            var $actions = $$('<ul class="ve-actions"></ul>');
-            var $heading = $$('<div class="ve-heading"><div class="ve-name"><i class="icon-move"> </i>'
-                + (name === 'block' ? $veMain.data('title') : setting.name)
-                + (setting.invisible ? (' (' + lang.invisible + ')') : '') + '</div></div>');
-
-            $.each(setting.actions, function(actionName, action)
+            if(!setting.hidden)
             {
-                if(actionName === 'move') $veMain.addClass('ve-movable');
-                if(action.hidden) return;
-                $actions.append('<li data-toggle="tooltip" data-action="' + actionName + '" class="ve-action ve-action-' + actionName + '" title="' + action.text + '">'
-                    + (action.icon ? '<i class="icon icon-' + action.icon + '"></i>' : action.text) + '</li>');
-            });
+                setting.invisible = $.trim($veMain.html()) === '';
+                $veMain.addClass('ve').toggleClass('ve-invisible', setting.invisible);
+                var $heading = $$('<div class="ve-heading"><div class="ve-name"><i class="icon-move"> </i>'
+                    + (name === 'block' ? $veMain.data('title') : setting.name)
+                    + (setting.invisible ? (' (' + lang.invisible + ')') : '') + '</div></div>');
 
-            $heading.prepend($actions);
-            $veMain.append($$('<div class="ve-cover"/>').append($heading));
+                var $actions = $$('<ul class="ve-actions"></ul>');
+                $.each(setting.actions, function(actionName, action)
+                {
+                    if(actionName === 'move') $veMain.addClass('ve-movable');
+                    if(!action || action.hidden) return;
+                    $actions.append('<li data-toggle="tooltip" data-action="' + actionName + '" class="ve-action ve-action-' + actionName + '" title="' + action.text + '">'
+                        + (action.icon ? '<i class="icon icon-' + action.icon + '"></i>' : action.text) + '</li>');
+                });
+                $heading.prepend($actions);
+                $veMain.append($$('<div class="ve-cover"/>').append($heading));
+            }
+            else
+            {
+                var $actions = $$('<ul class="nav"></ul>');
+                $.each(setting.actions, function(actionName, action)
+                {
+                    if(!action || action.hidden) return;
+                    $actions.append('<li><button type="button" data-action="{name}" class="btn btn-block btn-ve ve-preview-hidden ve-action ve-action-{name} ve-action-bar"><i class="icon icon-{icon}"></i> {text}</button></li>'.format(action));
+                });
+                var position = setting.position && setting.position === 'top' ? 'prepend' : 'append';
+                $veMain[position]($$('<div class="ve-actions-bar" data-ve="' + name + '"></div>').append($actions));
+            }
             return $ve;
         }
     };
@@ -349,18 +371,26 @@
     var openCommonActionModal = function(ve, actionName)
     {
         actionName = actionName || 'edit';
-        var $ve = ve instanceof $$ ? ve : $$(this).closest('.ve');
-        var name = $ve.data('ve');
+        var $ve = null;
+        if(typeof ve === 'string')
+        {
+            name = ve;
+        }
+        else
+        {
+            $ve = ve instanceof $$ ? ve : $$(this).closest('.ve');
+            name = $ve.data('ve');
+        }
         $$('.ve-editing').removeClass('ve-editing');
-        $ve.addClass('ve-editing');
+        if($ve) $ve.addClass('ve-editing');
         var setting = visuals[name];
-        var options = getVisualOptions($ve);
+        var options = getVisualOptions($ve || name);
         var action = setting.actions[actionName];
         openModal(createLink(action.module || setting.module || 'visual', action.method || (actionName + name), (action.params || setting.params || '').format(options)),
         {
             width : action.width || setting.width,
             icon  : action.icon || 'pencil',
-            title : action.title || setting.title || action.text + ' ' + options.title,
+            title : action.title || setting.title || action.text + ' ' + (options.title || ''),
             loaded: function(e)
             {
                 var modal$ = e.jQuery;
@@ -428,15 +458,18 @@
         .on('click', '.ve-action', function(e)
         {
             var $action = $$(this);
-            var $ve = $action.closest('.ve');
             var actionName = $action.data('action');
+            var isBarAaction = $action.hasClass('ve-action-bar');
+            var $ve = isBarAaction ? null : $action.closest('.ve');
+            var name = isBarAaction ? $action.closest('.ve-actions-bar').data('ve') : $ve.data('ve');
+
             if(actionName === 'delete')
             {
-                deleteVisualArea($ve);
+                deleteVisualArea($ve || name);
             }
             else if(actionName !== 'move')
             {
-                openCommonActionModal($ve, actionName);
+                openCommonActionModal($ve || name, actionName);
             }
             e.stopPropagation();
         });

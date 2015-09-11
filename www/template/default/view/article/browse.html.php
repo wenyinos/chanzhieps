@@ -14,7 +14,7 @@ include TPL_ROOT . 'common/treeview.html.php';
     <div class='list list-condensed'>
     <div class='row blocks' data-region='article_browse-top'><?php $this->block->printRegion($layouts, 'article_browse', 'top', true);?></div>
       <header><h2><?php echo $category->name;?></h2></header>
-      <section class='items items-hover' id='articleList'>
+      <section class='items items-hover' id='articles'>
         <?php foreach($articles as $article):?>
         <?php $url = inlink('view', "id=$article->id", "category={$article->category->alias}&name=$article->alias");?>
         <div class='item' id="article<?php echo $article->id?>" data-ve='article'>

@@ -54,8 +54,12 @@
 
 .block.ve {min-height: 22px; margin-bottom: 14px;}
 
-.btn-ve {border-radius: 1px; border: 1px dashed #38b03f; color: #38b03f; background: #fff; text-shadow: none; font-size: 14px}
-.btn-ve:hover {background: rgba(0, 255, 0, .1);; color: #38b03f; text-shadow: none; border: 1px solid #38b03f}
+.btn-ve {border-radius: 1px; border: 1px dashed #38b03f; color: #38b03f; background: rgba(0, 255, 0, .04); text-shadow: none; font-size: 14px}
+.btn-ve:hover {background: rgba(0, 255, 0, .1); color: #38b03f; text-shadow: none; border: 1px solid #38b03f}
+
+.ve-actions-bar {margin: 0 -5px}
+.ve-actions-bar > .nav {display: table; width: 100%;}
+.ve-actions-bar > .nav > li {display: table-cell; padding: 10px 5px;}
 
 body.ve-preview-in .ve-cover, body.ve-preview-hover .ve-cover, body.ve-preview-in .ve-preview-hidden, body.ve-preview-hover .ve-preview-hidden {display: none!important}
 body.ve-preview-in .block.ve, body.ve-preview-hover .block.ve {min-height: none; margin-bottom: auto;}
