@@ -97,5 +97,6 @@ $lang->article->placeholder = new stdclass();
 $lang->article->placeholder->addedDate = 'Schedule to Publish the article after this time';
 $lang->article->placeholder->link      = 'Input link, it can be outer chain.';
 
+$lang->article->noCategory  = ' There is no category, please create.';
 $lang->article->forwardFrom = 'Fowarding from';
 $lang->article->self        = 'This station';

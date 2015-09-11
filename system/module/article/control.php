@@ -338,10 +338,6 @@ class article extends control
     public function forward2Blog($articleID)
     {
         $categories = $this->loadModel('tree')->getOptionMenu('blog', 0, $removeRoot = true);
-        if(empty($categories))
-        {
-            die(js::locate($this->createLink('tree', 'redirect', "type='blog'")));
-        }
 
         if($_POST)
         {
