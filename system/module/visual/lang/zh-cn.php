@@ -47,6 +47,10 @@ $lang->visual->config->article  = array('params' => 'articleID={id}', 'module' =
     'actions' => array('delete' => array('method' => 'delete'), 'edit' => array('method' => 'edit', 'params' => 'articleID={id}&type=article')));
 $lang->visual->config->articles = array('name' => '文章列表', 'module' => 'article', 'hidden' => true,
     'actions' => array('edit' => false, 'add' => array('text' => '发布新文章', 'icon' => 'plus', 'method' => 'create', "params" => 'type=article')));
+$lang->visual->config->page  = array('params' => 'articleID={id}', 'module' => 'page', 'name' => '单页',
+    'actions' => array('delete' => array('method' => 'delete'), 'edit' => array('method' => 'edit', 'params' => 'pageID={id}&type=page')));
+$lang->visual->config->pageList = array('name' => '单页列表', 'module' => 'page', 'hidden' => true,
+    'actions' => array('edit' => false, 'add' => array('text' => '发布新单页', 'icon' => 'plus', 'method' => 'create', "params" => 'type=page')));
 $lang->visual->config->blog     = array('params' => 'articleID={id}', 'module' => 'article', 'name' => '博客',
     'actions' => array('delete' => array('method' => 'delete'), 'edit' => array('method' => 'edit', 'params' => 'articleID={id}&type=blog')));
 $lang->visual->config->blogList = array('name' => '博客列表', 'module' => 'article', 'hidden' => true,
