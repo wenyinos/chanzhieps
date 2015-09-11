@@ -19,8 +19,13 @@ class visual extends control
      */
     public function index($referer = '/')
     {
+        $template = $this->config->template->{$this->device}->name;
+        $this->loadModel('block')->loadTemplateLang($template);;
+
         $this->view->referer = $referer;
-        $this->view->title = $this->lang->visual->common;
+        $this->view->title   = $this->lang->visual->common;
+        $this->view->blocks  = $this->lang->block->{$template};
+
         $this->display();
     }
 

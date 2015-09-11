@@ -4,7 +4,7 @@
     var visualPage = $('#visualPage').get(0);
     var $$; // the jQuery object of visual page in iframe
     var isInPreview = false;
-    var lang = $.extend(window.v.visualLang, window.v.lang);
+    var lang = $.extend(window.v.visualLang, window.v.lang, {blocks: window.v.visualBlocks});
     var visualPageUrl = visualPage.src;
     var visuals = window.v.visuals;
     var DEFAULT_ACTIONS_CONFIG =
@@ -246,6 +246,17 @@
         {
             var $blocksHolder = $$(this);
             var withGrid = $blocksHolder.hasClass('row');
+						var region = $blocksHolder.data('region');
+						var page = region.substring(0, region.indexOf('-'));
+						var location = region.substring(page.length + 1);
+
+						$blocksHolder.attr(
+						{
+								"data-page": page,
+								"data-location": location,
+								"data-title": lang.blocks.pages[page] + '-' + lang.blocks.regions[page][location]
+						});
+
             $blocksHolder.find('.block, .panel-block').each(function()
             {
                 var $ve = $$(this);
@@ -268,29 +279,28 @@
                 sortBlocks($blocksHolder, orders);
             }});
 
-            var region = $blocksHolder.data('region');
-            $blocksHolder.append('<div class="ve-block-actions ve-preview-hidden"><button type="button" class="btn btn-block btn-ve ve-action-addblock"><i class="icon icon-plus"></i> ' + lang.addBlock + ' (' + region + ')</button></div>');
+            $blocksHolder.append('<div class="ve-block-actions ve-preview-hidden"><button type="button" class="btn btn-block btn-ve ve-action-addblock"><i class="icon icon-plus"></i> ' + lang.addBlock + '</button><ul class="breadcrumb"><li>' + lang.blocks.pages[page] + '</li><li>' + lang.blocks.regions[page][location] + '</li></ul></div>');
         });
 
         var $$body = $$('body');
         $$body.on('mouseenter', '.ve-action-addblock', function()
         {
-            $$(this).closest('blocks').addClass('ve-blocks-show-border');
+            $$(this).closest('.blocks').addClass('ve-blocks-show-border');
         }).on('mouseleave', '.ve-action-addblock', function()
         {
-            $$(this).closest('blocks').removeClass('ve-blocks-show-border');
+            $$(this).closest('.blocks').removeClass('ve-blocks-show-border');
         }).on('click', '.ve-action-addblock', function()
         {
             var name = 'block';
             var setting = visuals[name];
             var action = setting.actions.add;
-            var $blocksHolder = $$(this).closest('.blocks');
+            var $blocksHolder = $$(this).closest('.blocks').addClass('ve-editing');
             var options = $.extend({}, setting, $blocksHolder.data());
             openModal(createLink(action.module || 'visual', action.method || ('add' + name), (action.params || '').format(options)),
             {
                 width : action.width || setting.width,
                 icon  : action.icon || 'plus',
-                title : action.title || setting.title || action.text + ' ' + setting.name
+                title : (action.title || setting.title || action.text + ' ' + setting.name).format(options)
             });
         }).on('mousedown', '.ve-resize-handler', function(e)
         {

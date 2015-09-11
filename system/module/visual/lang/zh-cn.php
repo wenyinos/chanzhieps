@@ -41,7 +41,7 @@ $lang->visual->config->block    = array('name' => "区块", 'width' => 1200, 'pa
           'delete' => array('confirm' => '确定从布局中移除 【{title}】？', 'success' => '【{title}】已被移除。', 'params' => 'region={region}&blockID={id}'),
           'move' => array('success' => '排序已保存', 'params' => 'region={region}'),
           'layout' => array('width' => 600, 'text' => '更改布局', 'icon' => 'columns', 'success' => '布局已保存', 'params' => 'region={region}&blockID={id}'),
-          'add' => array('params' => 'region={region}', 'hidden' => true, 'width' => 1000)
+          'add' => array('params' => 'region={region}', 'hidden' => true, 'width' => 1000, 'title' => '添加区块 【{title}】')
 ));
 $lang->visual->config->article  = array('params' => 'articleID={id}', 'module' => 'article', 'name' => '文章',
     'actions' => array('delete' => array('method' => 'delete'), 'edit' => array('method' => 'edit', 'params' => 'articleID={id}&type=article')));
