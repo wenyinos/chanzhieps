@@ -90,7 +90,7 @@ $lang->sendSuccess    = 'Successfully sended.';
 $lang->deleteSuccess  = 'Successfully deleted.';
 $lang->fail           = 'Failed';
 $lang->noResultsMatch = 'No matched results.';
-$lang->alias          = 'For SEO, could be numbers, words enclosed by ".';
+$lang->alias          = 'For SEO, could be numbers, words enclosed by "';
 $lang->keywordsHolder = 'Separate keywords by a comma';
 
 $lang->setOkFile = <<<EOT

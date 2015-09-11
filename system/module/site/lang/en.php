@@ -132,7 +132,7 @@ $lang->site->moduleAvailable['message'] = 'Message';
 $lang->site->moduleAvailable['search']  = 'Search';
 $lang->site->moduleAvailable['shop']    = 'Shop';
 
-$lang->site->metaHolder       = 'Tags liek <meta>, <script>, <style>, <link> is accepted.';
+$lang->site->metaHolder       = 'Tags, like <meta>, <script>, <style>, <link>, is accepted.';
 $lang->site->fileAllowedRole  = 'Use "," to divide different extension name.';
 $lang->site->domainTip        = 'Redirect all request to this domian.';
 $lang->site->allowedDomainTip = 'Use "," to divide different domain.';
@@ -146,7 +146,7 @@ $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Can not write robots file, please make sure %s writeable first.';
 $lang->site->reloadForRobots   = 'Reload this ppage';
 $lang->site->defaultTip        = 'Under maintenance.';
-$lang->site->icpTip            = 'Only for site in China mainland';
+$lang->site->icpTip            = 'For Mainland China site only';
 
 $lang->site->customizableList = new stdclass();
 $lang->site->customizableList->article = 'Article List Number';

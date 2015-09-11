@@ -9,10 +9,11 @@ td > .form-group:last-child {margin-bottom: 0;}
 td > .form-group.row .btn {position: relative; margin-top: 5px; display: block; float: left;}
 
 .tree li a.active{font-weight: bold;}
-.radio-inline{margin-left: 10px; width: 90px;}
+.radio-inline{margin-left: 10px; width: 145px;}
 
 .leftmenu > .nav{margin-bottom: 0;}
 .nav-stacked.nav-primary > li:last-child > a{border-bottom-left-radius: 0; border-bottom-right-radius: 0;}
 .leftmenu > .category-nav{border-radius: 0; border-top:none; border-bottom: none; margin-bottom: 0;}
 
 .dropdown-menu{min-width: 90px; left: -40px;}
+.pager .dropdown-menu{width: 213px;}

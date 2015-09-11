@@ -4,7 +4,7 @@
 <form method='post' id='ajaxForm' action='<?php echo inlink("forward2Blog", "articleID={$articleID}");?>'>
   <table class='table table-form'>
     <tr>
-      <th class='w-100px'><?php echo $lang->article->selectCategories;?></th>
+      <th class='w-130px'><?php echo $lang->article->selectCategories;?></th>
       <td class='w-p40'>
         <div class='required required-wrapper'></div>
         <?php echo html::select("categories[]", $categories, '', "multiple='multiple' class='form-control chosen'");?></td><td></td>

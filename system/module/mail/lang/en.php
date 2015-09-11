@@ -34,7 +34,7 @@ $lang->mail->secureList['']    = 'plain';
 $lang->mail->secureList['ssl'] = 'ssl';
 $lang->mail->secureList['tls'] = 'tls';
 
-$lang->mail->inputFromEmail = 'Please input the from email:';
+$lang->mail->inputFromEmail = 'Please enter email:';
 $lang->mail->nextStep       = 'Next';
 $lang->mail->successSaved   = 'The configuration has been successfully saved.';
 $lang->mail->subject        = "It's a testing email from zentao.";

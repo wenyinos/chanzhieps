@@ -125,7 +125,7 @@ $lang->wechat->placeholder->limit    = '<=10';
 $lang->wechat->placeholder->category = 'Max 10 categories';
 $lang->wechat->placeholder->name     = 'Name of public';
 $lang->wechat->placeholder->account  = 'gh_xxx format';
-$lang->wechat->placeholder->token    = 'Token should English or numbers, length of 3-32 characters.';
+$lang->wechat->placeholder->token    = 'English letter or number, length of 3-32 characters.';
 
 $lang->wechat->curlSSLRequired = "This function requires curl module with ssl encryption transmission supports.";
 $lang->wechat->needCertified   = "This feature needs the account to be certified.";
