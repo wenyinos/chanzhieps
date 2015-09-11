@@ -55,7 +55,7 @@ class threadModel extends model
             ->beginIf(RUN_MODE == 'front')->andWhere('hidden')->eq('0')->andWhere('addedDate')->le(helper::now())->fi()
             ->beginIf($board)->andWhere('board')->in($board)->fi()
             ->beginIf($searchWord)
-            ->andWhere('title')->like("%{$searchWord}%")
+            ->andWhere('title', true)->like("%{$searchWord}%")
             ->orWhere('content')->like("%{$searchWord}%")
             ->markRight(1)
             ->fi()
