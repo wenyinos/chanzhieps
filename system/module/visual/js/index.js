@@ -268,7 +268,8 @@
                 sortBlocks($blocksHolder, orders);
             }});
 
-            $blocksHolder.append('<div class="ve-block-actions"><button type="button" class="btn btn-block btn-ve ve-preview-hidden ve-action-addblock"><i class="icon icon-plus"></i> {addBlock}</button></div>'.format(lang));
+            var region = $blocksHolder.data('region');
+            $blocksHolder.append('<div class="ve-block-actions ve-preview-hidden"><button type="button" class="btn btn-block btn-ve ve-action-addblock"><i class="icon icon-plus"></i> ' + lang.addBlock + ' (' + region + ')</button></div>');
         });
 
         var $$body = $$('body');

@@ -73,7 +73,7 @@ body.ve-preview-in .block.ve, body.ve-preview-hover .block.ve {min-height: none;
 .blocks.sortable-sorting .drag-shadow > * {z-index: 1050; opacity: .7}
 .blocks.sortable-sorting .drag-shadow .ve-cover {border: 2px solid #38b03f; background-color: transparent; box-shadow: 1px 5px 15px rgba(0,0,0,0.5)!important;}
 
-.blocks.page-side .ve-block-actions {margin-bottom: 14px;}
+.ve-block-actions {margin-bottom: 14px;}
 .blocks.row .ve-block-actions {margin: 0 7px 14px;}
 .blocks.sortable-sorting .ve-block-actions {display: none}
 .ve-block-actions .btn-ve {padding: 10px}
