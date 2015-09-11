@@ -246,16 +246,16 @@
         {
             var $blocksHolder = $$(this);
             var withGrid = $blocksHolder.hasClass('row');
-						var region = $blocksHolder.data('region');
-						var page = region.substring(0, region.indexOf('-'));
-						var location = region.substring(page.length + 1);
+            var region = $blocksHolder.data('region');
+            var page = region.substring(0, region.indexOf('-'));
+            var location = region.substring(page.length + 1);
 
-						$blocksHolder.attr(
-						{
-								"data-page": page,
-								"data-location": location,
-								"data-title": lang.blocks.pages[page] + '-' + lang.blocks.regions[page][location]
-						});
+            $blocksHolder.attr(
+            {
+                "data-page": page,
+                "data-location": location,
+                "data-title": lang.blocks.pages[page] + '-' + lang.blocks.regions[page][location]
+            });
 
             $blocksHolder.find('.block, .panel-block').each(function()
             {
@@ -326,17 +326,22 @@
             var mouseUp = function(event)
             {
                 $ve.removeClass('ve-editing ve-editing-resize');
-                var name = 'block';
-                var setting = visuals[name];
-                var options = getVisualOptions($ve);
-                postActionData(name, setting.actions.layout, options, function(result)
+
+                if(oldGrid !== $col.attr('data-grid'))
                 {
-                    if(result !== 'success')
+                    var name = 'block';
+                    var setting = visuals[name];
+                    var options = getVisualOptions($ve);
+                    postActionData(name, setting.actions.layout, options, function(result)
                     {
-                        $col.attr('data-grid', oldGrid);
-                    }
-                    $blocksHolder.trigger('tidy');
-                }, {grid: $col.attr('data-grid')});
+                        if(result !== 'success')
+                        {
+                            $col.attr('data-grid', oldGrid);
+                        }
+                        $blocksHolder.trigger('tidy');
+                    }, {grid: $col.attr('data-grid')});
+                }
+
                 $$body.unbind('mousemove.ve.resize', mouseMove).unbind('mouseup.ve.resize', mouseUp);
                 event.preventDefault();
                 event.stopPropagation();
