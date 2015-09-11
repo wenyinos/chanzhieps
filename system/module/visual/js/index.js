@@ -286,7 +286,7 @@
         $$body.on('mouseenter', '.ve-action-addblock', function()
         {
             $$(this).closest('.blocks').addClass('ve-blocks-show-border');
-        }).on('mouseleave', '.ve-action-addblock', function()
+        }).on('mouseleave', '.ve-blocks-show-border', function()
         {
             $$(this).closest('.blocks').removeClass('ve-blocks-show-border');
         }).on('click', '.ve-action-addblock', function()
