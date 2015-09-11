@@ -19,6 +19,7 @@ class forum extends control
      */
     public function index()
     {
+        $this->forum->updateStats();
         $boards = $this->forum->getBoards();
         $this->view->title      = $this->lang->forumHome;
         $this->view->boards     = $boards;

@@ -52,13 +52,13 @@ class threadModel extends model
         $searchWord = $this->get->searchWord;
         $threads = $this->dao->select('*')->from(TABLE_THREAD)
             ->where(1)
-            ->beginIf(RUN_MODE == 'front')->andWhere('hidden')->eq('0')->fi()
+            ->beginIf(RUN_MODE == 'front')->andWhere('hidden')->eq('0')->andWhere('addedDate')->le(helper::now())->fi()
             ->beginIf($board)->andWhere('board')->in($board)->fi()
             ->beginIf($searchWord)
             ->andWhere('title')->like("%{$searchWord}%")
-            ->beginIf($board)->andWhere('board')->in($board)->fi()
             ->orWhere('content')->like("%{$searchWord}%")
-            ->beginIf($board)->andWhere('board')->in($board)->fi()
+            ->markRight(1)
+            ->fi()
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('id');
