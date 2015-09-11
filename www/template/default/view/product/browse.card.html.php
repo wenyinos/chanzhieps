@@ -1,9 +1,9 @@
 <section id="cardMode" class='cards cards-products cards-borderless hide'>
   <?php foreach($products as $product):?>
   <div class='col-sm-4 col-xs-6'>
-    <div class='card'>
-      <?php 
-      if(empty($product->image)) 
+    <div class='card' data-ve='product' id='product<?php echo $product->id?>'>
+      <?php
+      if(empty($product->image))
       {
           echo html::a(inlink('view', "id=$product->id", "category={$product->category->alias}&name=$product->alias"), '<div class="media-placeholder" data-id="' . $product->id . '">' . $product->name . '</div>', "class='media-wrapper'");
       }
