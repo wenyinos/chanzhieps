@@ -23,6 +23,7 @@ $lang->nav->cannotRemoveAll = 'Can not remove all navigation.';
 /* nav type   */
 $lang->nav->types['system']  = 'System modules';
 $lang->nav->types['article'] = 'Article categories';
+$lang->nav->types['blog']    = 'Blog categories';
 $lang->nav->types['product'] = 'Product categories';
 $lang->nav->types['page']    = 'Pages';
 $lang->nav->types['custom']  = 'Custom';
@@ -39,7 +40,9 @@ $lang->nav->system->message = 'Inquire';
 
 $lang->nav->desktop       = 'Desktop';
 $lang->nav->mobile_top    = 'Top Of Mobile';
+$lang->nav->desktop_blog  = 'Blog Of Desktop';
 $lang->nav->mobile_bottom = 'Bottom Of Mobile';
+$lang->nav->mobile_blog   = 'Blog Of Mobile';
 
 /* Targets setting. */
 $lang->nav->targetList = array();

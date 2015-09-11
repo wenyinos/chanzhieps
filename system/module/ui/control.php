@@ -14,9 +14,9 @@ class ui extends control
     /**
      * Set template.
      *
-     * @param  string   $template 
-     * @param  string   $theme 
-     * @param  bool     $custom 
+     * @param  string   $template
+     * @param  string   $theme
+     * @param  bool     $custom
      * @access public
      * @return void
      */
@@ -25,7 +25,7 @@ class ui extends control
         $templates = $this->ui->getTemplates();
 
         if($template and isset($templates[$template]))
-        {  
+        {
             $setting = array();
             $setting[$this->device]['name']  = $template;
             $setting[$this->device]['theme'] = $theme;
@@ -49,9 +49,9 @@ class ui extends control
 
     /**
      * Custom theme.
-     * 
-     * @param  string $theme 
-     * @param  string $template 
+     *
+     * @param  string $theme
+     * @param  string $template
      * @access public
      * @return void
      */
@@ -103,7 +103,7 @@ class ui extends control
 
     /**
      * set logo.
-     * 
+     *
      * @access public
      * @return void
      */
@@ -111,9 +111,12 @@ class ui extends control
     {
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
+            $setNameResult = false;
+            if(!empty($_POST['name'])) $setNameResult = $this->loadModel('setting')->setItem('system.common.site.name', $_POST['name']);
+
             $return = $this->ui->setOptionWithFile($section = 'logo', $htmlTagName = 'logo');
-            
-            if($return['result']) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate'=>inlink('setLogo')));
+
+            if($nameResult || $return['result']) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate'=>inlink('setLogo')));
             if(!$return['result']) $this->send(array('result' => 'fail', 'message' => $return['message']));
         }
 
@@ -131,16 +134,16 @@ class ui extends control
 
     /**
      * Upload favicon.
-     * 
+     *
      * @access public
      * @return void
      */
     public function setFavicon()
-    {   
+    {
         if($_SERVER['REQUEST_METHOD'] == 'POST')
-        {   
+        {
             $return = $this->ui->setOptionWithFile($section = 'favicon', $htmlTagName = 'favicon', $allowedFileType = 'ico');
-            
+
             if($return['result']) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate'=>inlink('setFavicon')));
             if(!$return['result']) $this->send(array('result' => 'fail', 'message' => $return['message']));
          }
@@ -153,12 +156,12 @@ class ui extends control
     }
 
     /**
-     * Delete favicon 
-     * 
-     * @access public          
-     * @return void            
-     */ 
-    public function deleteFavicon() 
+     * Delete favicon
+     *
+     * @access public
+     * @return void
+     */
+    public function deleteFavicon()
     {
         $defaultFavicon = $this->app->getWwwRoot() . 'favicon.ico';
         if(file_exists($defaultFavicon)) unlink($defaultFavicon);
@@ -171,12 +174,12 @@ class ui extends control
     }
 
     /**
-     * Delete logo. 
-     * 
-     * @access public          
-     * @return void            
-     */ 
-    public function deleteLogo() 
+     * Delete logo.
+     *
+     * @access public
+     * @return void
+     */
+    public function deleteLogo()
     {
         $theme = $this->config->template->{$this->device}->theme;
         $this->loadModel('setting')->deleteItems("owner=system&module=common&section=logo&key=$theme");
@@ -190,7 +193,7 @@ class ui extends control
 
     /**
      * Set others for ui.
-     * 
+     *
      * @access public
      * @return void
      */
@@ -202,7 +205,7 @@ class ui extends control
         if(strpos($this->config->site->modules, 'product') !== false) $this->app->loadConfig('product');
         if(strpos($this->config->site->modules, 'blog') !== false)    $this->app->loadConfig('blog');
         if(strpos($this->config->site->modules, 'message') !== false) $this->app->loadConfig('message');
-        if(strpos($this->config->site->modules, 'forum') !== false) 
+        if(strpos($this->config->site->modules, 'forum') !== false)
         {
             $this->app->loadConfig('forum');
             $this->app->loadConfig('reply');
@@ -230,7 +233,7 @@ class ui extends control
 
     /**
      * Export theme function.
-     * 
+     *
      * @access public
      * @return void
      */
@@ -263,8 +266,8 @@ class ui extends control
 
     /**
      * Download theme.
-     * 
-     * @param  string    $exportedFile 
+     *
+     * @param  string    $exportedFile
      * @access public
      * @return void
      */
@@ -276,8 +279,8 @@ class ui extends control
     }
 
     /**
-     * Upload a theme package. 
-     * 
+     * Upload a theme package.
+     *
      * @access public
      * @return void
      */
@@ -289,7 +292,7 @@ class ui extends control
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             if($canManage['result'] != 'success') $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->setOkFile, $canManage['okFile'])));
-            
+
             if(empty($_FILES))  $this->send(array('result' => 'fail', 'message' => $this->lang->ui->filesRequired));
 
             $tmpName  = $_FILES['file']['tmp_name'];
@@ -297,7 +300,7 @@ class ui extends control
             $package  = basename($fileName, '.zip');
 
             $packagePath = $this->app->getTmpRoot() . "package";
-            if(!is_dir($packagePath)) mkdir($packagePath, 0777, true); 
+            if(!is_dir($packagePath)) mkdir($packagePath, 0777, true);
             if(!is_writeable($packagePath)) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->ui->packagePathUnwriteable, $packagePath)));
             $result = move_uploaded_file($tmpName, $this->app->getTmpRoot() . "package/$fileName");
 
@@ -312,10 +315,10 @@ class ui extends control
 
     /**
      * Install a theme.
-     * 
-     * @param  string   $package 
-     * @param  string   $downLink 
-     * @param  string   $md5 
+     *
+     * @param  string   $package
+     * @param  string   $downLink
+     * @param  string   $md5
      * @access public
      * @return void
      */
@@ -333,7 +336,7 @@ class ui extends control
         $packageFile = $this->loadModel('package')->getPackageFile($package);
 
         /* Check the package file exists or not. */
-        if(!file_exists($packageFile)) 
+        if(!file_exists($packageFile))
         {
             $this->view->error = sprintf($this->lang->package->errorPackageNotFound, $packageFile);
             die($this->display());
@@ -358,7 +361,7 @@ class ui extends control
             $this->view->error = sprintf($this->lang->package->errorExtracted, $packageFile, $return->error);
             die($this->display());
         }
-        
+
         $packageInfo = $this->package->parsePackageCFG($package, 'theme');
 
         /* Process theme code. */
@@ -397,7 +400,7 @@ class ui extends control
 
     /**
      * Fix theme datas.
-     * 
+     *
      * @access public
      * @return void
      */
@@ -420,9 +423,9 @@ class ui extends control
 
     /**
      * Delete a theme.
-     * 
-     * @param  string    $template 
-     * @param  string    $theme 
+     *
+     * @param  string    $template
+     * @param  string    $theme
      * @access public
      * @return void
      */
@@ -435,14 +438,14 @@ class ui extends control
 
     /**
      * Set device admin.
-     * 
-     * @param  string    $device 
+     *
+     * @param  string    $device
      * @access public
      * @return void
      */
     public function setDevice($device)
     {
-        $this->session->set('device', $device);   
+        $this->session->set('device', $device);
 
         $template = $this->config->template->{$device};
         if(isset($this->config->template->{$device}) and !is_object($this->config->template->{$device})) $template = json_decode($this->config->template->{$device});
@@ -457,8 +460,8 @@ class ui extends control
 
     /**
      * Delete a template.
-     * 
-     * @param  string    $template 
+     *
+     * @param  string    $template
      * @access public
      * @return void
      */

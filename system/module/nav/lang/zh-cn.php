@@ -23,6 +23,7 @@ $lang->nav->cannotRemoveAll = '不能删除所有导航';
 /* nav type   */
 $lang->nav->types['system']  = '系统模块';
 $lang->nav->types['article'] = '文章类目';
+$lang->nav->types['blog']    = '博客类目';
 $lang->nav->types['product'] = '产品类目';
 $lang->nav->types['page']    = '单页';
 $lang->nav->types['custom']  = '自定义';
@@ -38,8 +39,10 @@ $lang->nav->system->book    = '手册';
 $lang->nav->system->message = '留言';
 
 $lang->nav->desktop       = '桌面';
+$lang->nav->desktop_blog  = '博客';
 $lang->nav->mobile_top    = '移动版顶部';
 $lang->nav->mobile_bottom = '移动版底部';
+$lang->nav->mobile_blog   = '移动版博客';
 
 /* Targets setting. */
 $lang->nav->targetList = array();

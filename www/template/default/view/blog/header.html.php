@@ -15,7 +15,8 @@ if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::
 $webRoot   = $config->webRoot;
 $jsRoot    = $webRoot . "js/";
 $themeRoot = $webRoot . "template/default/theme/";
-$navs = $this->tree->getChildren(0, 'blog');
+$sysURL    = $common->getSysURL();
+$navs = $this->loadModel('nav')->getNavs('desktop_blog');
 ?>
 <!DOCTYPE html>
 <?php if(!empty($config->oauth->sina)):?>
@@ -29,8 +30,9 @@ $navs = $this->tree->getChildren(0, 'blog');
   <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta http-equiv="Cache-Control" content="no-transform" />
+  <link rel="alternate" media="only screen and (max-width: 640px)" href="<?php echo $sysURL . $mobileURL;?>">
   <?php
-  if(!isset($title))    $title    = ''; 
+  if(!isset($title))    $title    = '';
   if(!empty($title))    $title   .= $lang->minus;
   if(!isset($keywords)) $keywords = $config->site->keywords;
   if(!isset($desc))     $desc     = $config->site->desc;
@@ -54,7 +56,7 @@ $navs = $this->tree->getChildren(0, 'blog');
   {
       $customCssFile = $this->app->getDataRoot() . 'css' . DS . $this->config->template->{$this->device}->name . DS . $this->config->template->{$this->device}->theme . DS . 'style.css';
       if(file_exists($customCssFile)) css::import(sprintf($webRoot . 'data/css/%s/%s/style.css?' . $this->config->template->customVersion, $config->template->{$this->device}->name, $config->template->{$this->device}->theme));
-       
+
   }
 
   js::exportConfigVars();
@@ -80,7 +82,7 @@ $navs = $this->tree->getChildren(0, 'blog');
 <?php
 if(!empty($config->oauth->sina)) $sina = json_decode($config->oauth->sina);
 if(!empty($config->oauth->qq))   $qq   = json_decode($config->oauth->qq);
-if(!empty($sina->verification)) echo $sina->verification; 
+if(!empty($sina->verification)) echo $sina->verification;
 if(!empty($qq->verification))   echo $qq->verification;
 if(empty($sina->verification) && !empty($sina->widget)) js::import('http://tjs.sjs.sinajs.cn/open/api/js/wb.js');
 ?>
@@ -112,7 +114,7 @@ else
 <?php
 $template   = $this->config->template->{$this->device}->name ? $this->config->template->{$this->device}->name : 'default';
 $theme      = $this->config->template->{$this->device}->theme ? $this->config->template->{$this->device}->theme : 'default';
-$baseCustom = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array(); 
+$baseCustom = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array();
 if(!empty($baseCustom[$template][$theme]['js'])) js::execute($baseCustom[$template][$theme]['js']);
 ?>
 </head>
@@ -148,20 +150,34 @@ if(!empty($baseCustom[$template][$theme]['js'])) js::execute($baseCustom[$templa
     </div>
     <?php endif;?>
   </header>
-  <nav id="blogNav" class="navbar navbar-default" role="navigation">
+  <nav id="blogNav" class="navbar navbar-default" data-ve='navbar' data-type='desktop_blog'>
     <div class='wrapper'>
-      <ul class="nav navbar-nav">
-        <li <?php if(empty($category)) echo "class='active'"?>>
-           <?php echo html::a($this->inlink('index'), (isset($this->config->site->type) and $this->config->site->type == 'blog') ? $lang->home : $lang->blog->home)?>
-        </li>
-        <?php 
-        foreach($navs as $nav)
-        {
-          isset($category->id) ? $categoryID = $category->id : $categoryID = 0;
-          $class = $nav->id == $categoryID ? "class='nav-blog-$nav->id active'" : "class='nav-blog-$nav->id'";
-          echo "<li {$class}>" . html::a($this->inlink('index', "id={$nav->id}", "category={$nav->alias}"), $nav->name) . '</li>';
-        }
-        ?>
+      <ul class='nav navbar-nav'>
+        <?php foreach($navs as $nav1):?>
+          <?php if(empty($nav1->children)):?>
+            <li class='<?php echo $nav1->class?>'><?php echo html::a($nav1->url, $nav1->title, "target='$nav1->target'");?></li>
+            <?php else: ?>
+              <li class="dropdown <?php echo $nav1->class?>">
+                <?php echo html::a($nav1->url, $nav1->title . " <b class='caret'></b>", 'class="dropdown-toggle" data-toggle="dropdown"');?>
+                <ul class='dropdown-menu' role='menu'>
+                  <?php foreach($nav1->children as $nav2):?>
+                    <?php if(empty($nav2->children)):?>
+                      <li class='<?php echo $nav2->class?>'><?php echo html::a($nav2->url, $nav2->title, "target='$nav2->target'");?></li>
+                    <?php else: ?>
+                      <li class='dropdown-submenu <?php echo $nav2->class?>'>
+                        <?php echo html::a($nav2->url, $nav2->title, ($nav2->target != 'modal') ? "target='$nav2->target'" : '');?>
+                        <ul class='dropdown-menu' role='menu'>
+                          <?php foreach($nav2->children as $nav3):?>
+                          <li><?php echo html::a($nav3->url, $nav3->title, ($nav3->target != 'modal') ? "target='$nav3->target'" : '');?></li>
+                          <?php endforeach;?>
+                        </ul>
+                      </li>
+                    <?php endif;?>
+                  <?php endforeach;?><!-- end nav2 -->
+                </ul>
+            </li>
+          <?php endif;?>
+        <?php endforeach;?><!-- end nav1 -->
       </ul>
       <?php if(!isset($this->config->site->type) or $this->config->site->type != 'blog'):?>
       <ul class="nav navbar-nav navbar-right">

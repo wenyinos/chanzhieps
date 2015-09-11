@@ -3,6 +3,7 @@
 $webRoot   = $config->webRoot;
 $jsRoot    = $webRoot . "js/";
 $themeRoot = $webRoot . "template/default/theme/";
+$sysURL    = $common->getSysURL();
 ?>
 <!DOCTYPE html>
 <html xmlns:wb="http://open.weibo.com/wb" lang='<?php echo $app->getClientLang();?>'>
@@ -13,6 +14,7 @@ $themeRoot = $webRoot . "template/default/theme/";
   <meta http-equiv="Cache-Control"  content="no-transform">
   <meta name="Generator" content="<?php echo 'chanzhi' . $this->config->version . ' www.chanzhi.org'; ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="alternate" media="only screen and (max-width: 640px)" href="<?php echo $sysURL . $mobileURL;?>">
   <?php if($this->app->getModuleName() == 'user' and $this->app->getMethodName() == 'deny'):?>
   <meta http-equiv='refresh' content="5;url='<?php echo helper::createLink('index');?>'">
   <?php endif;?>

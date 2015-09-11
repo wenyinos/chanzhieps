@@ -37,6 +37,8 @@ class index extends control
         }
 
         $this->view->title = $this->config->site->indexKeywords;
+        $this->view->mobileURL  = helper::createLink('index', 'index', '', '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('index', 'index', '', '', 'html');
         $this->display();
     }
 }

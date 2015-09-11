@@ -32,6 +32,8 @@ class site extends control
                 ->remove('uid,lang,cn2tw,defaultLang')
                 ->get();
 
+            if($setting->modules == 'initial') unset($setting->modules);
+
             $result = $this->loadModel('setting')->setItems('system.common.site', $setting);
             if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
             if($setting->mobileTemplate == 'close') $this->session->set('device', 'desktop');

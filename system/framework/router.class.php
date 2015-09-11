@@ -16,7 +16,15 @@
  * @package framework
  */
 class router
-{
+{ 
+    /**
+     * The device type of client.
+     * 
+     * @var string   
+     * @access public
+     */
+    public $device;
+
     /**
      * The base path of the ZenTaoPMS framework.
      *
@@ -362,7 +370,18 @@ class router
     {
         define('DS', DIRECTORY_SEPARATOR);
     }
-    
+ 
+    /**
+     * Set current device of visit website.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setCurrentDevice()
+    {
+        $this->device = helper::getDevice();
+    }
+   
     /**
      * Set the base path.
      *

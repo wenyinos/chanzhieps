@@ -20,7 +20,8 @@ class nav extends control
      */
     public function admin($type = '')
     {   
-        if($type == '') $type = $this->device . '_top';
+        if($type == '' and $this->config->site->type == 'portal') $type = $this->device . '_top';
+        if($type == '' and $this->config->site->type == 'blog')   $type = $this->device . '_blog';
 
         foreach($this->lang->nav->system as $module => $name)
         {

@@ -32,16 +32,6 @@ class visual extends control
      */
     public function editlogo()
     {
-        if(!empty($_POST))
-        {
-            $nameResult = false;
-            if(!empty($_POST['name'])) $nameResult = $this->loadModel('setting')->setItem('system.common.site.name', $_POST['name']);
-
-            $return = $this->loadModel('ui')->setOptionWithFile($section = 'logo', $htmlTagName = 'logo');
-
-            if($nameResult || $return['result']) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
-            else $this->send(array('result' => 'fail', 'message' => $return['message']));
-        }
         $this->app->loadLang('ui');
         $template = $this->config->template->{$this->device}->name;
         $theme    = $this->config->template->{$this->device}->theme;
@@ -129,16 +119,53 @@ class visual extends control
     }
 
     /**
+     * Add block
+     *
+     * @access public
+     * @return void
+     */
+    public function addBlock($region)
+    {
+        $blockModel = $this->loadModel('block');
+
+        $template = $this->config->template->{$this->device}->name;
+        $blockModel->loadTemplateLang($template);
+
+        $this->view->blocks   = $blockModel->getList($template);
+        $this->view->region   = $region;
+        $this->display();
+    }
+
+    /**
      * Delete block
      *
      * @access public
      * @return void
      */
-    public function deleteBlock($blockID)
+    public function deleteBlock($region, $blockID)
     {
         // TODO: remove block region from database
         $this->send(array('result' => 'success'));
-        // $this->send(array('result' => 'fail', 'message' => 'Fail message.'));
+    }
+
+    /**
+     * Layout block
+     *
+     * @access public
+     * @return void
+     */
+    public function layoutBlock($region, $blockID)
+    {
+        $this->app->loadLang('block');
+
+        if($_POST)
+        {
+            // TODO: layout block region from database
+            $this->send(array('result' => 'success'));
+        }
+        $this->view->grid = 0;
+
+        $this->display();
     }
 
     /**

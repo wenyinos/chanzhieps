@@ -70,7 +70,7 @@ class helper
         $lang       = $config->langCode;
 
         /* Set viewType is mhtml if visit with mobile.*/
-        if(RUN_MODE == 'front' and helper::getDevice() == 'mobile' and $viewType != 'xml' and $methodName != 'oauthCallback') $viewType = 'mhtml';
+        if(!$viewType and RUN_MODE == 'front' and helper::getDevice() == 'mobile' and $methodName != 'oauthCallback') $viewType = 'mhtml';
 
         /* Set vars and alias. */
         if(!is_array($vars)) parse_str($vars, $vars);
@@ -584,7 +584,7 @@ class helper
         if(empty($_SERVER['HTTP_USER_AGENT'])) return 'unknow';
 
         $osList = array(
-            '/windows nt 10/i'     =>  'Windows 10',
+            '/windows nt 10/i'      =>  'Windows 10',
             '/windows nt 6.3/i'     =>  'Windows 8.1',
             '/windows nt 6.2/i'     =>  'Windows 8',
             '/windows nt 6.1/i'     =>  'Windows 7',

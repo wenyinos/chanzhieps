@@ -16,14 +16,18 @@
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class='icon-location-arrow'></i> <?php echo $lang->nav->setNav;?></strong> &nbsp; &nbsp;
+    <?php if($this->config->site->type != 'blog'):?>
     <?php echo html::a(helper::createLink('nav', 'admin', "type=desktop_top"), $lang->nav->desktop, $type == 'desktop_top' ? "class='active'" : '');?>
     <?php echo html::a(helper::createLink('nav', 'admin', "type=mobile_top"), $lang->nav->mobile_top, $type == 'mobile_top' ? "class='active'" : '');?>
     <?php echo html::a(helper::createLink('nav', 'admin', "type=mobile_bottom"), $lang->nav->mobile_bottom, $type == 'mobile_bottom' ? "class='active'" : '');?>
+    <?php endif;?>
+    <?php echo html::a(helper::createLink('nav', 'admin', "type=desktop_blog"), $lang->nav->desktop_blog, $type == 'desktop_blog' ? "class='active'" : '');?>
+    <?php echo html::a(helper::createLink('nav', 'admin', "type=mobile_blog"), $lang->nav->mobile_blog, $type == 'mobile_blog' ? "class='active'" : '');?>
   </div>
   <div class='panel-body'>
-    <form class='form-inline' id='navForm' method='post'>
+    <form class='form-inline ve-form' id='navForm' method='post'>
       <ul class='navList ulGrade1' id='navList'>
-        <?php 
+        <?php
         foreach($navs as $nav)
         {
             echo "<li class='liGrade1'>";
