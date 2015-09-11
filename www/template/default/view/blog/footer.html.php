@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-    <div class='row all-bottom'><div class='col-md-12'><?php $this->loadModel('block')->printRegion($layouts, 'all', 'bottom', true);?></div></div>
+    <div class='blocks all-bottom' data-region='all-top'><?php $this->loadModel('block')->printRegion($layouts, 'all', 'bottom', true);?></div>
   </div></div><?php /* end .page-content then .page-wrapper in header.html.php */ ?>
   <footer id='footer'>
     <div class='wrapper'>

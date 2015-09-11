@@ -21,14 +21,15 @@ if(!empty($category->id)) js::set('categoryID', $category->id);
 $root = '<li>' . $this->lang->currentPos . $this->lang->colon .  html::a($this->inlink('index'), $lang->blog->home) . '</li>';
 if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
 ?>
-<div class='row'><?php $this->block->printRegion($layouts, 'blog_index', 'topBanner', true);?></div>
+<div class='row blocks' data-region='blog_index-topBanner'><?php $this->block->printRegion($layouts, 'blog_index', 'topBanner', true);?></div>
 <div class='row'>
-  <div class='col-md-9 col-main' id='articles'>
-  <div class='row'><?php $this->block->printRegion($layouts, 'blog_index', 'top', true);?></div>
+  <div class='col-md-9 col-main'>
+  <div class='row blocks' data-region='blog_index-top'><?php $this->block->printRegion($layouts, 'blog_index', 'top', true);?></div>
+  <div id='blogList'>
     <?php foreach($sticks as $stick):?>
     <?php if(!isset($category)) $category = array_shift($stick->categories);?>
       <?php $url = inlink('view', "id=$stick->id", "category={$category->alias}&name=$stick->alias"); ?>
-      <div class="card">
+      <div class="card" data-ve='blog' id='blog<?php echo $stick->id;?>'>
         <h4 class='card-heading'>
           <?php echo html::a($url, $stick->title);?>
           <span class='label label-danger'><?php echo $lang->article->stick;?></span>
@@ -56,7 +57,7 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
     <?php foreach($articles as $article):?>
     <?php if(!isset($category)) $category = array_shift($article->categories);?>
       <?php $url = inlink('view', "id=$article->id", "category={$category->alias}&name=$article->alias"); ?>
-      <div class="card">
+      <div class="card" data-ve='blog' id='blog<?php echo $article->id;?>'>
         <h4 class='card-heading'><?php echo html::a($url, $article->title);?></h4>
         <div class='card-content text-muted'>
           <?php if(!empty($article->image)):?>
@@ -78,7 +79,8 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
       </div>
     <?php endforeach;?>
     <div class='clearfix pager'><?php $pager->show('right', 'short');?></div>
-  <div class='row'><?php $this->block->printRegion($layouts, 'blog_index', 'bottom', true);?></div>
+  </div>
+  <div class='row blocks' data-region='blog_index-bottom'><?php $this->block->printRegion($layouts, 'blog_index', 'bottom', true);?></div>
   </div>
   <div class='col-md-3 col-side'><side class='page-side blocks'><div class='panel-pure panel'><?php echo html::a(helper::createLink('rss', 'index', '?type=blog', '', 'xml'), "<i class='icon-rss text-warning'></i> " . $lang->blog->subscribe, "target='_blank' class='btn btn-lg btn-block'"); ?></div><?php $this->block->printRegion($layouts, 'blog_index', 'side');?></side></div>
 </div>
