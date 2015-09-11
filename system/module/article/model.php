@@ -457,7 +457,7 @@ class articleModel extends model
         
         $thread->board      = $this->post->board;
         $thread->author     = $this->app->user->realname;
-        $thread->content   .= "<div style='text-align: right'>" . $this->lang->article->forwardFrom . ' ' . html::a($address, $address) . '</div>';
+        $thread->content   .= "<br><br><div style='text-align: right'>" . $this->lang->article->forwardFrom . ' ' . html::a($address, $address) . '</div>';
         $thread->addedDate  = $this->post->addedDate ? $this->post->addedDate : helper::now();
         $thread->editedDate = $thread->addedDate;
         $thread->repliedDate = $thread->addedDate;
@@ -465,7 +465,7 @@ class articleModel extends model
         $this->dao->insert(TABLE_THREAD)->data($thread)->autoCheck()->exec();
             
         $threadID = $this->dao->lastInsertID();
-        
+        $thread   = $this->getByID($threadID);
         if(!dao::isError())
         {
             $this->loadModel('search')->save('thread', $thread);

@@ -97,5 +97,6 @@ $lang->article->placeholder = new stdclass();
 $lang->article->placeholder->addedDate = '可以延迟到选定的时间发布。';
 $lang->article->placeholder->link      = '输入链接，可以是站外链接';
 
+$lang->article->noCategory  = '当前没有类目，请先创建。';
 $lang->article->forwardFrom = '转发自';
 $lang->article->self        = '本站';
