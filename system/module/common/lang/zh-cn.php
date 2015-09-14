@@ -177,7 +177,7 @@ $lang->blog->menu->browse = '所有博客|article|admin|type=blog';
 /* Menu of page module. */
 $lang->page = new stdclass();
 $lang->page->menu = new stdclass();
-$lang->page->menu->browse = array('link' => '单页列表|article|admin|type=page', 'alias' => 'edit');
+$lang->page->menu->browse = array('link' => '单页列表|article|admin|type=page', 'alias' => 'create, edit');
 
 /* Menu of product module. */
 $lang->product = new stdclass();
