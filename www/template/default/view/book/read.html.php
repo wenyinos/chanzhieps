@@ -1,17 +1,17 @@
 <?php include TPL_ROOT . 'common/header.html.php';?>
 <?php js::set('articleID', $article->id)?>
-<div class='row focus-top' data-default-grid='4'><?php $this->block->printRegion($layouts, 'book_read', 'top', true);?></div>
+<div class='row blocks' data-region='book_read-top'><?php $this->block->printRegion($layouts, 'book_read', 'top', true);?></div>
 <?php $common->printPositionBar($article->origins);?>
-<div class='article'>
+<div class='article' id='book' data-id='<?php echo $article->id?>'>
   <header>
     <h2><?php echo $article->title;?></h2>
     <dl class='dl-inline'>
       <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->book->lblAddedDate, formatTime($article->addedDate));?>'><i class='icon-time icon-large'></i> <?php echo formatTime($article->addedDate);?></dd>
       <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->book->lblAuthor, $article->author);?>'><i class='icon-user icon-large'></i> <?php echo $article->author; ?></dd>
       <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->book->lblViews, $article->views);?>'><i class='icon-eye-open'></i> <?php echo $article->views; ?></dd>
-      <?php if($article->editor):?> 
+      <?php if($article->editor):?>
       <dd data-toggle='tooltip' data-placement='top' ><i class='icon-edit icon-large'></i><?php printf($lang->book->lblEditor, $this->loadModel('user')->getByAccount($article->editor)->realname, formatTime($article->editedDate));?></dd>
-      <?php endif;?> 
+      <?php endif;?>
     </dl>
     <?php if($article->summary):?>
     <section class='abstract'><strong><?php echo $lang->book->summary;?></strong><?php echo $lang->colon . $article->summary;?></section>
@@ -42,6 +42,6 @@
   </footer>
 </div>
 <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=book&objectID=$article->id");?></div>
-<?php $this->block->printRegion($layouts, 'book_read', 'bottom');?>
+<div class='blocks' data-region='book_read-bottom'><?php $this->block->printRegion($layouts, 'book_read', 'bottom');?></div>
 <?php include TPL_ROOT . 'common/jplayer.html.php'; ?>
 <?php include TPL_ROOT . 'common/footer.html.php'; ?>

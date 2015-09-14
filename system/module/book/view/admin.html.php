@@ -11,7 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
-<?php 
+<?php
 $path = explode(',', $node->path);
 js::set('path', $path);
 ?>
@@ -19,7 +19,7 @@ js::set('path', $path);
   <div class='panel-heading'>
     <strong><i class='icon-book'></i> <?php echo $book->title;?></strong>
     <div class='panel-actions'>
-      <form method='get' class='form-inline form-search'>
+      <form method='get' class='form-inline form-search ve-form'>
         <?php echo html::hidden('m', 'book');?>
         <?php echo html::hidden('f', 'search');?>
         <?php echo html::hidden('recTotal', isset($this->get->recTotal) ? $this->get->recTotal : 0);?>

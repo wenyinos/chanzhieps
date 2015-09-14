@@ -1,6 +1,6 @@
 <?php include TPL_ROOT . 'common/header.html.php'; ?>
 <?php include TPL_ROOT . 'common/treeview.html.php'; ?>
-<div class='row focus-top' data-default-grid='4'><?php $this->block->printRegion($layouts, 'forum_board', 'top', true);?></div>
+<div class='row blocks' data-grid='4' data-region='forum_board-top'><?php $this->block->printRegion($layouts, 'forum_board', 'top', true);?></div>
 <?php $common->printPositionBar($board);?>
 <div class='panel'>
   <div class='panel-heading'>
@@ -29,8 +29,7 @@
       <tr class='text-center'>
         <td class='w-10px'><span class='sticky-thread text-danger'><i class="icon-comment-alt icon-large"></i></span></td>
         <td class='text-left'>
-          <?php echo html::a($this->createLink('thread', 'view', "id=$thread->id"), $thread->title, $style);?>
-          <?php echo "<span class='label label-danger'>{$lang->thread->stick}</span> "?>
+          <div data-ve='thread' id='thread<?php echo $thread->id;?>'><?php echo html::a($this->createLink('thread', 'view', "id=$thread->id"), $thread->title, $style);?><?php echo "<span class='label label-danger'>{$lang->thread->stick}</span> "?></div>
         </td>
         <td class='hidden-xxs'><strong><?php echo $thread->authorRealname;?></strong></td>
         <td class='hidden-xs'><?php echo substr($thread->addedDate, 5, -3);?></td>
@@ -53,7 +52,8 @@
       <?php $style = $thread->color ? "style='color:{$thread->color}'" : '';?>
       <tr class='text-center'>
         <td class='w-10px'><?php echo $thread->isNew ? "<span class='text-success'><i class='icon-comment-alt icon-large'></i></span>" : "<span class='text-muted'><i class='icon-comment-alt icon-large'></i></span>";?></td>
-        <td class='text-left'><?php echo html::a($this->createLink('thread', 'view', "id=$thread->id"), $thread->title, $style);?></td>
+        <td class='text-left'>
+          <div data-ve='thread' id='thread<?php echo $thread->id;?>'><?php echo html::a($this->createLink('thread', 'view', "id=$thread->id"), $thread->title, $style);?></td></div>
         <td class='hidden-xxs'><strong><?php echo $thread->authorRealname;?></strong></td>
         <td class='hidden-xs'><?php echo substr($thread->addedDate, 5, -3);?></td>
         <td class='hidden-xs'><?php echo $thread->views;?></td>
@@ -73,5 +73,5 @@
     <tfoot><tr><td colspan='7'><?php $pager->show('right', 'short');?></td></tr></tfoot>
   </table>
 </div>
-<?php $this->block->printRegion($layouts, 'forum_board', 'bottom');?>
+<div class='blocks' data-region='forum_board-bottom'><?php $this->block->printRegion($layouts, 'forum_board', 'bottom');?></div>
 <?php include TPL_ROOT . 'common/footer.html.php'; ?>

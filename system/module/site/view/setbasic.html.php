@@ -50,6 +50,10 @@
           <td><?php echo html::radio('mobileTemplate', $lang->site->mobileTemplateList, isset($this->config->site->mobileTemplate) ? $this->config->site->mobileTemplate : 'close', "class='checkbox'");?></td><td></td>
         </tr>
         <tr>
+          <th><?php echo $lang->site->score;?></th> 
+          <td><?php echo html::radio('score', $lang->site->scoreList, isset($this->config->site->score) ? $this->config->site->score : 'close', "class='checkbox'");?></td><td></td>
+        </tr>
+        <tr>
           <th><?php echo $lang->site->name;?></th> 
           <td><?php echo html::input('name', $this->config->site->name, "class='form-control'");?></td><td></td>
         </tr>

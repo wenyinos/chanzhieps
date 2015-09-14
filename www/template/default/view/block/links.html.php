@@ -20,6 +20,8 @@
       <?php endif;?>
     </div>
   </div>
-  <div class='panel-body'><?php echo $this->config->links->index;?></div>
+  <div class='panel-body'>
+    <div id='links<?php echo $block->id;?>' data-ve='links'><?php echo $this->config->links->index;?></div>
+  </div>
 </div>
 <?php endif;?>

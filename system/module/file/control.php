@@ -209,8 +209,9 @@ class file extends control
      * @access public
      * @return void
      */
-    public function download($fileID, $mouse = '')
+    public function download($fileID, $mouse = '', $confirm = '')
     {
+        if($confirm == 'no') die(js::close());
         $file = $this->file->getById($fileID);
 
         /* Change savePath if objectType is source or slide. */
@@ -225,7 +226,8 @@ class file extends control
         $fileTypes = 'txt|jpg|jpeg|gif|png|bmp|xml|html';
         if(stripos($fileTypes, $file->extension) !== false and $mouse == 'left') $mode = 'open';
 
-        if(!$file->public && $this->app->user->account == 'guest') $this->locate($this->createLink('user', 'login'));
+        $account = $this->app->user->account;
+        if(!$file->public && $account == 'guest') $this->locate($this->createLink('user', 'login'));
 
         /* If the mode is open, locate directly. */
         if($mode == 'open')
@@ -240,6 +242,25 @@ class file extends control
             {
                 $fileName = $file->title . '.' . $file->extension;
                 $fileData = file_get_contents($file->realPath);
+
+                if(isset($this->config->site->score) and $this->config->site->score == 'open')
+                {
+                    /* Check for update extension.*/
+                    if(!$this->loadModel('score')->hasFileDowned($account, $fileID) and $account != $file->addedBy)
+                    {
+                        if(!empty($file->score) and ($file->addedBy != $account) and $confirm != 'yes')
+                        {
+                            die(js::confirm(sprintf($this->lang->file->confirm, $file->score), inlink('download', "id=$fileID&mouse=&confirm=yes"), inlink('download', "id=$fileID&mouse=&confirm=no")));
+                        }
+
+                        if(!$this->score->cost('download', $file->score, 'file', $fileID))
+                        {
+                            $this->view->score = $file->score;
+                            die($this->display());
+                        }
+                    }
+                }
+
                 $this->file->sendDownHeader($fileName, $file->extension, $fileData, filesize($file->realPath));
             }
             else
@@ -514,5 +535,20 @@ class file extends control
         $this->view->callback = $callback;
         $this->view->id       = $id;
         $this->display();
+    }
+
+    /**
+     * Set score for file. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function score()
+    {
+        foreach($this->post->scores as $fileID => $score)
+        {
+            $this->dao->update(TABLE_FILE)->set('score')->eq($score)->set('public')->eq(0)->where('id')->eq($fileID)->exec();
+        }
+        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
     }
 }

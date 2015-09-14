@@ -176,11 +176,15 @@ define('TABLE_ORDER',          $config->db->prefix . 'order');
 define('TABLE_ORDER_PRODUCT',  $config->db->prefix . 'order_product');
 define('TABLE_ADDRESS',        $config->db->prefix . 'address');
 define('TABLE_SLIDE',          $config->db->prefix . 'slide');
+<<<<<<< HEAD
 define('TABLE_STATLOG',        $config->db->prefix . 'statlog');
 define('TABLE_STATVISITOR',    $config->db->prefix . 'statvisitor');
 define('TABLE_STATREFERER',    $config->db->prefix . 'statreferer');
 define('TABLE_STATREPORT',     $config->db->prefix . 'statreport');
 define('TABLE_STATREGION',     $config->db->prefix . 'statregion');
+=======
+define('TABLE_SCORE',          $config->db->prefix . 'score');
+>>>>>>> aadb2629c1f781b298afa27ee4906f11b6656c9a
 
 /* Include extension config files. */
 $extConfigFiles = glob($configRoot . 'ext' . DS . '*.php');

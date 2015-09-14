@@ -90,7 +90,7 @@ $lang->sendSuccess    = 'Successfully sended.';
 $lang->deleteSuccess  = 'Successfully deleted.';
 $lang->fail           = 'Failed';
 $lang->noResultsMatch = 'No matched results.';
-$lang->alias          = 'For SEO, could be numbers, words enclosed by ".';
+$lang->alias          = 'For SEO, could be numbers, words enclosed by "';
 $lang->keywordsHolder = 'Separate keywords by a comma';
 
 $lang->setOkFile = <<<EOT
@@ -177,7 +177,7 @@ $lang->blog->menu->browse = 'All blogs|article|admin|type=blog';
 /* Menu of page module. */
 $lang->page = new stdclass();
 $lang->page->menu = new stdclass();
-$lang->page->menu->browse = array('link' => 'List|article|admin|type=page', 'alias' => 'edit');
+$lang->page->menu->browse = array('link' => 'List|article|admin|type=page', 'alias' => 'create, edit');
 
 /* Menu of product module. */
 $lang->product = new stdclass();

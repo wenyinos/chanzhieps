@@ -12,3 +12,11 @@ $config->user->default->method = RUN_MODE == 'front' ? 'control' : 'index';
 $config->user->recPerPage = new stdclass();
 $config->user->recPerPage->thread = 10;
 $config->user->recPerPage->reply  = 20;
+
+$config->user->level[1] = 0;
+$config->user->level[2] = 500;
+$config->user->level[3] = 2000;
+$config->user->level[4] = 10000;
+$config->user->level[5] = 30000;
+$config->user->level[6] = 50000;
+$config->user->level[7] = 200000;

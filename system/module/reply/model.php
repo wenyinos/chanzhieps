@@ -76,6 +76,19 @@ class replyModel extends model
         
         foreach($files as $replyID => $file) $replies[$replyID]->files = $file;
 
+        if(isset($this->config->site->score) and $this->config->site->score == 'open')
+        {
+            if($replies)
+            {
+                $replyScores = $this->loadModel('score')->getByObject('reply', array_keys($replies), 'valuereply');
+                foreach($replyScores as $score)
+                {
+                    if(!isset($replies[$score->objectID]->scoreSum))$replies[$score->objectID]->scoreSum = 0;
+                    $replies[$score->objectID]->scoreSum += $score->count;
+                }
+            }
+        }
+
         return $replies;
     }
 
@@ -163,6 +176,7 @@ class replyModel extends model
         {
             $this->saveCookie($replyID);                               // Save reply id to cookie.
             $this->loadModel('file')->saveUpload('reply', $replyID);   // Save file.
+            if(isset($this->config->site->score) and $this->config->site->score == 'open') $this->loadModel('score')->earn('reply', 'reply', $replyID);
 
             /* Update thread stats. */
             $this->thread->updateStats($threadID);
@@ -240,6 +254,8 @@ class replyModel extends model
      */
     public function delete($replyID, $null = null)
     {
+        $author = $this->dao->select('author')->from(TABLE_REPLY)->where('id')->eq($replyID)->fetch('author');
+
         $thread = $this->dao->select('t2.id, t2.board')->from(TABLE_REPLY)->alias('t1')
             ->leftJoin(TABLE_THREAD)->alias('t2')
             ->on('t1.thread = t2.id')
@@ -252,6 +268,9 @@ class replyModel extends model
         /* Update thread and board stats. */
         $this->loadModel('thread')->updateStats($thread->id);
         $this->loadModel('forum')->updateBoardStats($thread->board);
+
+        if(isset($this->config->site->score) and $this->config->site->score == 'open') $this->loadModel('score')->punish($author, 'delReply', $this->config->score->counts->delReply, 'reply', $replyID);
+
         return !dao::isError();
     }
 

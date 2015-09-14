@@ -13,4 +13,4 @@ $lang->admin->shortcuts->logo     = 'Logo';
 $lang->admin->shortcuts->company  = 'Company';
 $lang->admin->shortcuts->contact  = 'Contact';
 
-$lang->admin->adminEntry = "Warning: Your management portal is still admin.php, please rename it to enhance the system security.";
+$lang->admin->adminEntry = "Warning: Your management portal is still admin.php, please rename it to enhance system security.";

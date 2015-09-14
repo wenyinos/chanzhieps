@@ -192,6 +192,7 @@ CREATE TABLE IF NOT EXISTS `eps_file` (
   `addedBy` char(30) NOT NULL DEFAULT '',
   `addedDate` datetime NOT NULL,
   `public` enum('1','0') NOT NULL DEFAULT '1',
+  `score` smallint unsigned NOT NULL DEFAULT 0,
   `downloads` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `extra` varchar(255) NOT NULL,
   `primary` enum('1','0') DEFAULT '0',
@@ -413,6 +414,9 @@ CREATE TABLE IF NOT EXISTS `eps_user` (
   `visits` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `ip` char(15) NOT NULL DEFAULT '',
   `last` datetime NOT NULL,
+  `score` mediumint NOT NULL,
+  `rank` mediumint NOT NULL,
+  `maxLogin` tinyint(4) NOT NULL DEFAULT '10',
   `fails` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `referer` varchar(255) NOT NULL,
   `join` datetime NOT NULL,
@@ -503,6 +507,28 @@ CREATE TABLE IF NOT EXISTS `eps_wx_message` (
   PRIMARY KEY (`id`),
   KEY `lang` (`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- DROP TABLE IF EXISTS `eps_score`;
+CREATE TABLE IF NOT EXISTS `eps_score` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `account` varchar(30) NOT NULL,
+  `method` varchar(30) NOT NULL,
+  `type` varchar(10) NOT NULL,
+  `count` smallint(5) unsigned NOT NULL,
+  `before` mediumint(5) NOT NULL,
+  `after` mediumint(5) NOT NULL,
+  `objectType` varchar(30) NOT NULL,
+  `objectID` mediumint(9) NOT NULL,
+  `actor` varchar(30) NOT NULL,
+  `note` varchar(255) NOT NULL,
+  `time` datetime NOT NULL,
+  `lang` char(30) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `account` (`account`),
+  KEY `method` (`method`),
+  KEY `objectType` (`objectType`),
+  KEY `objectID` (`objectID`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_search_index`;
 CREATE TABLE IF NOT EXISTS `eps_search_index` (
