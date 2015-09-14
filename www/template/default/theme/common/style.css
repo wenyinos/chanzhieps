@@ -29,6 +29,8 @@ LTD www.xirangit.com)
   .col[data-grid='12'], .col-12 {width: 100%}
 }
 
+side {display: block}
+
 .btn-link {background-color: transparent;}
 
 /* Typesetting */

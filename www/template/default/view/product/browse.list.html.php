@@ -4,8 +4,8 @@
       <?php foreach($products as $product):?>
       <tr>
         <td class='w-80px text-middle'>
-        <?php 
-        if(empty($product->image)) 
+        <?php
+        if(empty($product->image))
         {
             echo html::a(inlink('view', "id=$product->id", "category={$product->category->alias}&name=$product->alias"), '<div class="media-placeholder media-placeholder-list" data-id="' . $product->id . '">' . $product->name . '</div>', "class='w-80px'");
         }
@@ -16,7 +16,7 @@
         }
         ?>
         </td>
-        <td>
+        <td id='listProduct<?php echo $product->id?>' data-ve='product' data-id='<?php echo $product->id?>'>
           <?php echo html::a(inlink('view', "id={$product->id}", "category={$product->category->alias}&name=$product->alias"), '<strong>' . $product->name . '</strong>');?>
         </td>
         <td>

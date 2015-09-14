@@ -3,6 +3,7 @@
 js::set('visuals', $lang->visual->config);
 js::set('visualLang', $lang->visual->jsLang);
 js::set('visualStyle', $themeRoot . 'common/visual.css');
+js::set('visualBlocks', $blocks);
 ?>
 <div class='navbar navbar-fixed-top' id='visualPanel'>
   <div class='container'>

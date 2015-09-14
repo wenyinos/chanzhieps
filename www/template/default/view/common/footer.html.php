@@ -1,5 +1,5 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
-  <div class='row all-bottom'><div class='col-md-12'><?php $this->loadModel('block')->printRegion($layouts, 'all', 'bottom', true);?></div></div>
+  <div class='blocks all-bottom' data-region='all-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'all', 'bottom', true);?></div>
   </div></div><?php /* end div.page-content then div.page-wrapper in header.html.php */?>
   <footer id='footer' class='clearfix'>
     <div class='wrapper'>
@@ -13,7 +13,7 @@
       <span id='copyright'>
         <?php
         $copyright = empty($config->site->copyright) ? '' : $config->site->copyright . '-';
-        $contact   = json_decode($config->company->contact); 
+        $contact   = json_decode($config->company->contact);
         $company   = (empty($contact->site) or $contact->site == $this->server->http_host) ? $config->company->name : html::a('http://' . $contact->site, $config->company->name, "target='_blank'");
         echo "&copy; {$copyright}" . date('Y') . ' ' . $company . '&nbsp;&nbsp;';
         ?>

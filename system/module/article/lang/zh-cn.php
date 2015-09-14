@@ -38,6 +38,12 @@ $lang->article->link       = '链接';
 $lang->article->css        = 'CSS';
 $lang->article->js         = 'JS';
 
+$lang->article->forward          = '转发';
+$lang->article->forward2Blog     = '转发到博客';
+$lang->article->forward2Forum    = '转发到论坛';
+$lang->article->selectCategories = '选择类目';
+$lang->article->selectBoard      = '选择版块';
+
 $lang->article->list       = '文章列表';
 $lang->article->admin      = '维护文章';
 $lang->article->create     = '发布文章';
@@ -90,3 +96,7 @@ $lang->article->noJsTag   = '不需要&lt;script&gt;&lt;/script&gt;标签';
 $lang->article->placeholder = new stdclass();
 $lang->article->placeholder->addedDate = '可以延迟到选定的时间发布。';
 $lang->article->placeholder->link      = '输入链接，可以是站外链接';
+
+$lang->article->noCategory  = '当前没有类目，请先创建。';
+$lang->article->forwardFrom = '转发自';
+$lang->article->self        = '本站';

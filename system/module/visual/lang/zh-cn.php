@@ -41,9 +41,24 @@ $lang->visual->config->block    = array('name' => "区块", 'width' => 1200, 'pa
           'delete' => array('confirm' => '确定从布局中移除 【{title}】？', 'success' => '【{title}】已被移除。', 'params' => 'region={region}&blockID={id}'),
           'move' => array('success' => '排序已保存', 'params' => 'region={region}'),
           'layout' => array('width' => 600, 'text' => '更改布局', 'icon' => 'columns', 'success' => '布局已保存', 'params' => 'region={region}&blockID={id}'),
-          'add' => array('params' => 'region={region}', 'hidden' => true, 'width' => 1000)
+          'add' => array('params' => 'region={region}', 'hidden' => true, 'width' => 1000, 'title' => '添加区块 【{title}】')
 ));
 $lang->visual->config->article  = array('params' => 'articleID={id}', 'module' => 'article', 'name' => '文章',
     'actions' => array('delete' => array('method' => 'delete'), 'edit' => array('method' => 'edit', 'params' => 'articleID={id}&type=article')));
+$lang->visual->config->articles = array('name' => '文章列表', 'module' => 'article', 'hidden' => true,
+    'actions' => array('edit' => false, 'add' => array('text' => '发布新文章', 'icon' => 'plus', 'method' => 'create', "params" => 'type=article')));
+$lang->visual->config->page  = array('params' => 'articleID={id}', 'module' => 'page', 'name' => '单页',
+    'actions' => array('delete' => array('method' => 'delete'), 'edit' => array('method' => 'edit', 'params' => 'pageID={id}&type=page')));
+$lang->visual->config->pageList = array('name' => '单页列表', 'module' => 'page', 'hidden' => true,
+    'actions' => array('edit' => false, 'add' => array('text' => '发布新单页', 'icon' => 'plus', 'method' => 'create', "params" => 'type=page')));
+$lang->visual->config->blog     = array('params' => 'articleID={id}', 'module' => 'article', 'name' => '博客',
+    'actions' => array('delete' => array('method' => 'delete'), 'edit' => array('method' => 'edit', 'params' => 'articleID={id}&type=blog')));
+$lang->visual->config->blogList = array('name' => '博客列表', 'module' => 'article', 'hidden' => true,
+    'actions' => array('edit' => false, 'add' => array('text' => '发布新博客', 'icon' => 'plus', 'method' => 'create', "params" => 'type=blog')));
+$lang->visual->config->product  = array('params' => 'productID={id}', 'module' => 'product', 'name' => '产品',
+    'actions' => array('delete' => array('method' => 'delete'), 'edit' => array('method' => 'edit')));
+$lang->visual->config->products = array('name' => '产品列表', 'module' => 'product', 'hidden' => true,
+    'actions' => array('edit' => false, 'add' => array('text' => '发布新产品', 'icon' => 'plus', 'method' => 'create', "params" => 'category=0')));
+
 
 $lang->visual->editpowerbycontent = "<p>蝉知企业门户系统是开源免费的，但根据我们的<a href='http://www.chanzhi.org/book/chanzhieps/58_license.html' target='_blank'>授权协议</a>，去除蝉知的标识需要购买我们的商业授权。</p><p>蝉知标识并不会影响网站功能，我们建议您保留。</p><hr><div class='text-center'><a class='btn btn-success' href='http://www.chanzhi.org/vip/25_vip-support.html' target='_blank'>了解蝉知系统商业服务列表和授权 <i class='icon-arrow-right'></i></a></div>";

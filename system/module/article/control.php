@@ -147,7 +147,7 @@ class article extends control
 
         $this->view->title           = $this->lang->{$type}->create;
         $this->view->currentCategory = $categoryID;
-        $this->view->categories      = $this->loadModel('tree')->getOptionMenu($type, 0, $removeRoot = true);
+        $this->view->categories      = $categories ;
         $this->view->type            = $type;
 
         $this->display();
@@ -326,5 +326,55 @@ class article extends control
 
         $message = $stick == 0 ? $this->lang->article->successUnstick : $this->lang->article->successStick;
         $this->send(array('result' => 'success', 'message' => $message, 'locate' => inlink('admin', "type={$article->type}")));
+    }
+
+    /**
+     * Forward an article to blog. 
+     * 
+     * @param  int    $articleID 
+     * @access public
+     * @return void
+     */
+    public function forward2Blog($articleID)
+    {
+        $categories = $this->loadModel('tree')->getOptionMenu('blog', 0, $removeRoot = true);
+
+        if($_POST)
+        {
+            $result = $this->article->forward2Blog($articleID);
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+
+        $this->view->title      = $this->lang->article->forward2Blog;
+        $this->view->categories = $categories;
+        $this->view->articleID  = $articleID;
+        $this->display();
+    }
+    
+    /**
+     * Forward an article to forum. 
+     * 
+     * @param  int    $articleID 
+     * @access public
+     * @return void
+     */
+    public function forward2Forum($articleID)
+    {
+        $categories = $this->loadModel('tree')->getOptionMenu('forum', 0, $removeRoot = true);
+        if($_POST)
+        {
+            $result = $this->article->forward2Forum($articleID);
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+
+        $parents = $this->dao->select('*')->from(TABLE_CATEGORY)->where('parent')->eq(0)->andWhere('type')->eq('forum')->fetchAll('id');
+
+        $this->view->title      = $this->lang->article->forward2Forum;
+        $this->view->parents    = array_keys($parents);
+        $this->view->categories = $categories;
+        $this->view->articleID  = $articleID;
+        $this->display();
     }
 }

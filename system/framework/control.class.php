@@ -146,7 +146,7 @@ class control
     public $viewPrefix;
 
     /**
-     * The device of visit website.
+     * The device of visiting client.
      * 
      * @var string   
      * @access public
@@ -300,7 +300,8 @@ class control
      */
     public function setCurrentDevice()
     {
-        $this->device = helper::getDevice();
+        $this->app->setCurrentDevice();
+        $this->device = $this->app->device;
     }
 
     //-------------------- View related methods --------------------//
