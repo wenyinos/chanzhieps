@@ -173,9 +173,14 @@ define('TABLE_SEARCH_INDEX',   $config->db->prefix . 'search_index');
 define('TABLE_SEARCH_DICT',    $config->db->prefix . 'search_dict');
 define('TABLE_CART',           $config->db->prefix . 'cart');
 define('TABLE_ORDER',          $config->db->prefix . 'order');
-define('TABLE_ORDER_PRODUCT',   $config->db->prefix . 'order_product');
+define('TABLE_ORDER_PRODUCT',  $config->db->prefix . 'order_product');
 define('TABLE_ADDRESS',        $config->db->prefix . 'address');
 define('TABLE_SLIDE',          $config->db->prefix . 'slide');
+define('TABLE_STATLOG',        $config->db->prefix . 'statlog');
+define('TABLE_STATVISITOR',    $config->db->prefix . 'statvisitor');
+define('TABLE_STATREFERER',    $config->db->prefix . 'statreferer');
+define('TABLE_STATREPORT',     $config->db->prefix . 'statreport');
+define('TABLE_STATREGION',     $config->db->prefix . 'statregion');
 
 /* Include extension config files. */
 $extConfigFiles = glob($configRoot . 'ext' . DS . '*.php');
