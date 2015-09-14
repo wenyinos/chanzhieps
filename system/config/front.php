@@ -82,6 +82,10 @@ $config->rights->guest['cart']['count']         = 'count';
 $config->rights->guest['order']['confirm']      = 'confirm';
 $config->rights->guest['order']['processorder'] = 'processorder';
 
+$config->rights->guest['score']['rankinglist']  = 'rankinglist';
+$config->rights->guest['score']['noscore']      = 'noscore';
+$config->rights->guest['score']['processorder'] = 'processorder';
+
 /* For logged member. */
 $config->rights->member['thread']['post']         = 'post';
 $config->rights->member['thread']['reply']        = 'reply';
@@ -107,6 +111,7 @@ $config->rights->member['user']['reply']      = 'reply';
 $config->rights->member['user']['message']    = 'message';
 $config->rights->member['user']['checkemail'] = 'checkemail';
 $config->rights->member['user']['editemail']  = 'editemail';
+$config->rights->member['user']['score']      = 'score';
 
 $config->rights->member['file']['ajaxupload'] = 'ajaxupload';
 
@@ -125,3 +130,6 @@ $config->rights->member['address']['delete'] = 'delete';
 $config->rights->member['address']['browse'] = 'browse';
 
 $config->rights->member['visual']['logo'] = 'logo';
+
+$config->rights->member['score']['buyscore'] = 'buyscore';
+$config->rights->member['score']['payorder'] = 'payorder';

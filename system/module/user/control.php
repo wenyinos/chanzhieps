@@ -894,4 +894,25 @@ class user extends control
         $this->view->desktopURL = helper::createLink('user', 'checkEmail', "referer=$referer", '', 'html');
         $this->display();
     }
+
+    /**
+     * Score list for a user.
+     * 
+     * @param  int    $recTotal 
+     * @param  int    $recPerPage 
+     * @param  int    $pageID 
+     * @access public
+     * @return void
+     */
+    public function score($recTotal = 0, $recPerPage = 20, $pageID = 1)
+    {
+        if($this->app->user->account == 'guest') $this->locate(inlink('login'));
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal, $recPerPage, $pageID);
+
+        $this->view->scores = $this->loadModel('score')->getByUser($this->app->user->account, $pager);
+        $this->view->user   = $this->user->getByAccount($this->app->user->account);
+        $this->view->pager  = $pager;
+        $this->display();
+    }
 }

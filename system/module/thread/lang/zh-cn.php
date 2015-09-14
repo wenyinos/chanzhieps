@@ -59,6 +59,12 @@ $lang->thread->successShow     = '显示成功';
 $lang->thread->readonlyMessage = '该帖已被设置为 <strong>只读</strong>，您暂时无法发表新的回复。';
 $lang->thread->successTransfer = '转移成功';
 
+$lang->thread->scoreSum = "<strong class='red f-14px strong'>+%s</strong> ";
+$lang->thread->scores[5]  = '+ 5';
+$lang->thread->scores[10] = '+ 10';
+$lang->thread->scores[50] = '+ 50';
+$lang->thread->scores[100]= '+ 100';
+
 $lang->thread->placeholder = new stdclass();
 $lang->thread->placeholder->link = '输入链接，可以是站外连接';
 

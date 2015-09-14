@@ -42,6 +42,10 @@ $lang->file->addedBy   = '上传者';
 $lang->file->addedDate = '上传日期';
 $lang->file->public    = '匿名下载';
 $lang->file->downloads = '下载次数';
+$lang->file->score     = '所需积分';
+$lang->file->setScore  = '设置积分';
+$lang->file->lblInfo   = '您现在共有积分：<strong class="red">%s</strong>';
+$lang->file->confirm   = '下载此插件需要您 %s 积分';
 
 $lang->file->publics[0] = '需要登录';
 $lang->file->publics[1] = '允许';

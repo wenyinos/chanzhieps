@@ -100,7 +100,7 @@ class userModel extends model
      */
     public function getBasicInfo($users)
     {
-        $users = $this->dao->setAutolang(false)->select('account, admin, realnames, realname, `join`, last, visits')->from(TABLE_USER)->where('account')->in($users)->fetchAll('account');
+        $users = $this->dao->setAutolang(false)->select('account, admin, realnames, realname, `join`, last, visits, rank, score')->from(TABLE_USER)->where('account')->in($users)->fetchAll('account');
         if(!$users) return array();
 
         foreach($users as $account => $user)
@@ -226,6 +226,22 @@ class userModel extends model
             ->check('email', 'email')
             ->check('email', 'unique')
             ->exec();
+
+        $viewType = $this->app->getViewType();
+        if(!dao::isError())
+        {
+            $this->app->user->account = $this->post->account;
+            $this->loadModel('score')->earn('register', '', '', 'REGISTER');
+
+            /* If the user is from zentao system, award more score. */
+            if($this->post->sn) $this->score->earn('bind', '', '', 'BIND');
+
+            if($viewType == 'json') die('success');
+        }
+        else
+        {
+            if($viewType == 'json' and dao::isError()) die(js::error(dao::getError()));
+        }
     }
 
     /**
@@ -545,6 +561,28 @@ class userModel extends model
         $user->shortLast = substr($user->last, 5, -3);
         $user->shortJoin = substr($user->join, 5, -3);
         unset($_SESSION['random']);
+
+        $viewType = $this->app->getViewType();
+        if($user)
+        {
+            $this->app->user->account = $account;
+            if($user->maxLogin > 0)
+            {
+                $login = $this->app->loadConfig('score')->score->counts->login;
+                $this->dao->update(TABLE_USER)->set('maxLogin = maxLogin - '. $login)->where('account')->eq($account)->exec();
+                $this->loadModel('score')->earn('login', '', '', 'LOGIN');
+            }
+
+            if($viewType == 'json' and $this->post->sn)
+            {
+                if(!$user->sn)
+                {
+                    $this->loadModel('score')->earn('bind', '', '', 'BIND');
+                    $this->dao->update(TABLE_USER)->set('sn')->eq($this->post->sn)->where('account')->eq($account)->exec();
+                }
+                die('success');
+            }
+        }
 
         return $user;
     }
