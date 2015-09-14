@@ -312,4 +312,33 @@ class thread extends control
         }
         $this->send(array('result'=>'fail', 'message'=> 'error'));
     }
+
+    /**
+     * Add score.
+     * 
+     * @param  int    $account 
+     * @param  int    $objectType 
+     * @param  int    $objectID 
+     * @param  int    $score 
+     * @access public
+     * @return void
+     */
+    public function addScore($account, $objectType, $objectID, $score)
+    {
+        if($objectType == 'thread') $board = $this->dao->select('board')->from(TABLE_THREAD)->where('id')->eq($objectID)->fetch('board');
+        if($objectType == 'reply')  $board = $this->dao->select('t1.board')->from(TABLE_THREAD)->alias('t1')
+            ->leftJoin(TABLE_REPLY)->alias('t2')->on('t1.id=t2.thread')
+            ->where('t2.id')->eq($objectID)
+            ->fetch('board');
+        if(!isset($board) or !$this->thread->canManage($board)) die();
+
+        $max   = max(array_keys($this->lang->thread->scores));
+        $score = (int)$score;
+        if($score > $max) $score = $max;
+
+        $account = helper::safe64Decode($account);
+        if($objectType == 'thread') $this->loadModel('score')->award($account, 'valueThread', $score, $objectType, $objectID);
+        if($objectType == 'reply')  $this->loadModel('score')->award($account, 'valueReply',  $score, $objectType, $objectID);
+        $this->locate($this->server->http_referer . ($objectType == 'reply' ? '#' . $objectID : ''));
+    }
 }

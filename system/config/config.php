@@ -176,6 +176,7 @@ define('TABLE_ORDER',          $config->db->prefix . 'order');
 define('TABLE_ORDER_PRODUCT',   $config->db->prefix . 'order_product');
 define('TABLE_ADDRESS',        $config->db->prefix . 'address');
 define('TABLE_SLIDE',          $config->db->prefix . 'slide');
+define('TABLE_SCORE',          $config->db->prefix . 'score');
 
 /* Include extension config files. */
 $extConfigFiles = glob($configRoot . 'ext' . DS . '*.php');
