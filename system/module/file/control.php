@@ -243,18 +243,21 @@ class file extends control
                 $fileName = $file->title . '.' . $file->extension;
                 $fileData = file_get_contents($file->realPath);
 
-                /* Check for update extension.*/
-                if(!$this->loadModel('score')->hasFileDowned($account, $fileID) and $account != $file->addedBy)
+                if(isset($this->config->site->score) and $this->config->site->score == 'open')
                 {
-                    if(!empty($file->score) and ($file->addedBy != $account) and $confirm != 'yes')
+                    /* Check for update extension.*/
+                    if(!$this->loadModel('score')->hasFileDowned($account, $fileID) and $account != $file->addedBy)
                     {
-                        die(js::confirm(sprintf($this->lang->file->confirm, $file->score), inlink('download', "id=$fileID&mouse=&confirm=yes"), inlink('download', "id=$fileID&mouse=&confirm=no")));
-                    }
+                        if(!empty($file->score) and ($file->addedBy != $account) and $confirm != 'yes')
+                        {
+                            die(js::confirm(sprintf($this->lang->file->confirm, $file->score), inlink('download', "id=$fileID&mouse=&confirm=yes"), inlink('download', "id=$fileID&mouse=&confirm=no")));
+                        }
 
-                    if(!$this->score->cost('download', $file->score, 'file', $fileID))
-                    {
-                        $this->view->score = $file->score;
-                        die($this->display());
+                        if(!$this->score->cost('download', $file->score, 'file', $fileID))
+                        {
+                            $this->view->score = $file->score;
+                            die($this->display());
+                        }
                     }
                 }
 

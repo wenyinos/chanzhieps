@@ -31,9 +31,12 @@ class threadModel extends model
 
         $thread->files = $this->loadModel('file')->getByObject('thread', $thread->id);
 
-        if(!isset($thread->scoreSum))$thread->scoreSum = 0;
-        $scores = $this->loadModel('score')->getByObject('thread', $threadID, 'valuethread');
-        foreach($scores as $score) $thread->scoreSum += $score->count;
+        if(isset($this->config->site->score) and $this->config->site->score == 'open')
+        {
+            if(!isset($thread->scoreSum))$thread->scoreSum = 0;
+            $scores = $this->loadModel('score')->getByObject('thread', $threadID, 'valuethread');
+            foreach($scores as $score) $thread->scoreSum += $score->count;
+        }
 
         return $thread;
     }
@@ -213,7 +216,7 @@ class threadModel extends model
         {
             $this->saveCookie($threadID);
             $this->loadModel('file')->saveUpload('thread', $threadID);
-            $this->loadModel('score')->earn('thread', 'thread', $threadID);
+            if(isset($this->config->site->score) and $this->config->site->score == 'open') $this->loadModel('score')->earn('thread', 'thread', $threadID);
 
             /* Update board stats. */
             $this->loadModel('forum')->updateBoardStats($boardID);
@@ -345,7 +348,7 @@ class threadModel extends model
 
         /* Update board stats. */
         $this->loadModel('forum')->updateBoardStats($thread->board);
-        $this->loadModel('score')->punish($thread->author, 'delThread', $this->config->score->counts->delThread, 'thread', $threadID);
+        if(isset($this->config->site->score) and $this->config->site->score == 'open') $this->loadModel('score')->punish($thread->author, 'delThread', $this->config->score->counts->delThread, 'thread', $threadID);
         return $this->loadModel('search')->deleteIndex('thread', $threadID);
     }
 
@@ -484,15 +487,29 @@ class threadModel extends model
         $moderatorClass = ($speaker->admin == 'super' or $speaker->isModerator) ? "text-danger" : '';
         $moderatorTitle = ($speaker->admin == 'super' or $speaker->isModerator) ? "title='{$this->lang->forum->owners}'" : '';
 
-        echo  <<<EOT
-        <strong class='thread-author {$moderatorClass}' {$moderatorTitle}><i class='icon-user'></i> {$speaker->realname}</strong>
-        <ul class='list-unstyled'>
-          <li><small>{$this->lang->user->visits}: </small><span>{$speaker->visits}</span></li>
-          <li><small>{$this->lang->user->join}: </small><span>{$speaker->join}</span></li>
-          <li><small>{$this->lang->user->last}: </small><span>{$speaker->last}</span></li>
-          <li><small>{$this->lang->user->myScore}: </small><span>{$speaker->score}</span></li>
-        </ul>
+        if(isset($this->config->site->score) and $this->config->site->score == 'open')
+        {
+            echo  <<<EOT
+            <strong class='thread-author {$moderatorClass}' {$moderatorTitle}><i class='icon-user'></i> {$speaker->realname}</strong>
+            <ul class='list-unstyled'>
+              <li><small>{$this->lang->user->visits}: </small><span>{$speaker->visits}</span></li>
+              <li><small>{$this->lang->user->join}: </small><span>{$speaker->join}</span></li>
+              <li><small>{$this->lang->user->last}: </small><span>{$speaker->last}</span></li>
+              <li><small>{$this->lang->user->myScore}: </small><span>{$speaker->score}</span></li>
+            </ul>
 EOT;
+        }
+        else
+        {
+            echo  <<<EOT
+            <strong class='thread-author {$moderatorClass}' {$moderatorTitle}><i class='icon-user'></i> {$speaker->realname}</strong>
+            <ul class='list-unstyled'>
+              <li><small>{$this->lang->user->visits}: </small><span>{$speaker->visits}</span></li>
+              <li><small>{$this->lang->user->join}: </small><span>{$speaker->join}</span></li>
+              <li><small>{$this->lang->user->last}: </small><span>{$speaker->last}</span></li>
+            </ul>
+EOT;
+        }
     }
 
     /**

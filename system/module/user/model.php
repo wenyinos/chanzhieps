@@ -227,20 +227,23 @@ class userModel extends model
             ->check('email', 'unique')
             ->exec();
 
-        $viewType = $this->app->getViewType();
-        if(!dao::isError())
+        if(isset($this->config->site->score) and $this->config->site->score == 'open')
         {
-            $this->app->user->account = $this->post->account;
-            $this->loadModel('score')->earn('register', '', '', 'REGISTER');
+            $viewType = $this->app->getViewType();
+            if(!dao::isError())
+            {
+                $this->app->user->account = $this->post->account;
+                $this->loadModel('score')->earn('register', '', '', 'REGISTER');
 
-            /* If the user is from zentao system, award more score. */
-            if($this->post->sn) $this->score->earn('bind', '', '', 'BIND');
+                /* If the user is from zentao system, award more score. */
+                if($this->post->sn) $this->score->earn('bind', '', '', 'BIND');
 
-            if($viewType == 'json') die('success');
-        }
-        else
-        {
-            if($viewType == 'json' and dao::isError()) die(js::error(dao::getError()));
+                if($viewType == 'json') die('success');
+            }
+            else
+            {
+                if($viewType == 'json' and dao::isError()) die(js::error(dao::getError()));
+            }
         }
     }
 
@@ -562,25 +565,28 @@ class userModel extends model
         $user->shortJoin = substr($user->join, 5, -3);
         unset($_SESSION['random']);
 
-        $viewType = $this->app->getViewType();
-        if($user)
+        if(isset($this->config->site->score) and $this->config->site->score == 'open')
         {
-            $this->app->user->account = $account;
-            if($user->maxLogin > 0)
+            $viewType = $this->app->getViewType();
+            if($user)
             {
-                $login = $this->app->loadConfig('score')->score->counts->login;
-                $this->dao->update(TABLE_USER)->set('maxLogin = maxLogin - '. $login)->where('account')->eq($account)->exec();
-                $this->loadModel('score')->earn('login', '', '', 'LOGIN');
-            }
-
-            if($viewType == 'json' and $this->post->sn)
-            {
-                if(!$user->sn)
+                $this->app->user->account = $account;
+                if($user->maxLogin > 0)
                 {
-                    $this->loadModel('score')->earn('bind', '', '', 'BIND');
-                    $this->dao->update(TABLE_USER)->set('sn')->eq($this->post->sn)->where('account')->eq($account)->exec();
+                    $login = $this->app->loadConfig('score')->score->counts->login;
+                    $this->dao->update(TABLE_USER)->set('maxLogin = maxLogin - '. $login)->where('account')->eq($account)->exec();
+                    $this->loadModel('score')->earn('login', '', '', 'LOGIN');
                 }
-                die('success');
+
+                if($viewType == 'json' and $this->post->sn)
+                {
+                    if(!$user->sn)
+                    {
+                        $this->loadModel('score')->earn('bind', '', '', 'BIND');
+                        $this->dao->update(TABLE_USER)->set('sn')->eq($this->post->sn)->where('account')->eq($account)->exec();
+                    }
+                    die('success');
+                }
             }
         }
 
