@@ -11,21 +11,21 @@
       <table class='table table-hover table-striped'>
         <thead>
           <tr>
-            <th><?php echo $lang->score->id;?></th>
-            <th><?php echo $lang->score->time;?></th>
-            <th><?php echo $lang->score->method;?></th>
-            <th><?php echo $lang->score->count;?></th>
-            <th><?php echo $lang->score->before;?></th>
-            <th><?php echo $lang->score->after;?></th>
+            <th class='w-80px'><?php echo $lang->score->id;?></th>
+            <th class='w-100px'><?php echo $lang->score->time;?></th>
+            <th class='w-150px'><?php echo $lang->score->method;?></th>
+            <th class='w-150px'><?php echo $lang->score->count;?></th>
+            <th class='w-150px'><?php echo $lang->score->before;?></th>
+            <th class='w-150px'><?php echo $lang->score->after;?></th>
             <th><?php echo $lang->score->note;?></th>
           </tr>
         </thead>
         <tbody>
           <?php foreach($scores as $score):?>
-          <tr align='center'>
+          <tr>
             <th><?php echo $score->id;?></th>
             <?php $score->time = substr($score->time,0,10);?>
-            <td class='w-80px'><?php echo $score->time;?></td>
+            <td><?php echo $score->time;?></td>
             <td><?php echo $lang->score->methods[$score->method];?></td>
             <td><?php echo ($score->type == 'in' ? '+' : '-') . $score->count;?></td>
             <td><?php echo $score->before;?></td>
