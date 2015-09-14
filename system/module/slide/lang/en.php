@@ -45,7 +45,6 @@ $lang->slide->create      = 'Add';
 $lang->slide->edit        = 'Edit';
 $lang->slide->createGroup = 'Create group';
 $lang->slide->editGroup   = 'Edit group';
-$lang->slide->removeGroup = 'Remove group';
 $lang->slide->return      = 'Return';
 $lang->slide->rename      = 'Rename';
 

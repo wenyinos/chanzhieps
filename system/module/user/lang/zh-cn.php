@@ -70,6 +70,7 @@ $lang->user->checkEmail      = '绑定邮箱';
 $lang->user->getEmailCode    = '获取邮箱验证码';
 $lang->user->editEmail       = '修改邮箱';
 $lang->user->newEmail        = '新邮箱';
+$lang->user->rank            = '等级积分';
 $lang->user->score           = '积分详情';
 $lang->user->myScore         = '当前积分';
 $lang->user->buyScore        = '积分充值';

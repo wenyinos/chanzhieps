@@ -67,7 +67,7 @@
                     reloadPage();
                     return;
                 }
-                $$('.ve-editing, .ve-blocks-show-border').removeClass('ve-editing ve-blocks-show-border');
+                $$('.ve-editing, .ve-blocks-show-border, .ve-using').removeClass('ve-using ve-editing ve-blocks-show-border');
             }
         }, options));
     };
@@ -200,7 +200,7 @@
                     $actions.append('<li><button type="button" data-action="{name}" class="btn btn-block btn-ve ve-preview-hidden ve-action ve-action-{name} ve-action-bar"><i class="icon icon-{icon}"></i> {text}</button></li>'.format(action));
                 });
                 var position = setting.position && setting.position === 'top' ? 'prepend' : 'append';
-                $veMain[position]($$('<div class="ve-actions-bar" data-ve="' + name + '"></div>').append($actions));
+                $veMain[position]($$('<div class="ve-actions-bar" data-ve-name="' + name + '" data-target="#' + $veMain.attr('id') + '"></div>').append($actions));
             }
             return $ve;
         }
@@ -305,9 +305,8 @@
                 "data-page": page,
                 "data-location": location,
                 "data-region": page + '-' + location,
-                'data-veInit': true,
                 "data-title": lang.blocks.pages[page] + '-' + lang.blocks.regions[page][location]
-            });
+            }).data('veInit', true);
 
             $blocksHolder.sortable({trigger: '.ve-move-handler', selector: withGrid ? '.col' : '.ve', dragCssClass: '', finish: function(e)
             {
@@ -399,7 +398,7 @@
 
     var updateVisualArea = function($ve, response)
     {
-        $ve = $ve || $$('.ve-editing').first();
+        $ve = $ve || $$('.ve-editing, .ve-using').first();
         var name = $ve.data('ve');
         var id = $ve.attr('id');
         var parentSelector = '';
@@ -530,7 +529,17 @@
             var actionName = $action.data('action');
             var isBarAaction = $action.hasClass('ve-action-bar');
             var $ve = isBarAaction ? null : $action.closest('.ve');
-            var name = isBarAaction ? $action.closest('.ve-actions-bar').data('ve') : $ve.data('ve');
+            var name;
+            if(isBarAaction)
+            {
+                var $bar = $action.closest('.ve-actions-bar');
+                name = $bar.data('veName');
+                $$($bar.data('target')).addClass('ve-using');
+            }
+            else
+            {
+                name = $ve.data('ve');
+            }
 
             if(actionName === 'delete')
             {
