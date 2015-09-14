@@ -13,7 +13,7 @@ class company extends control
 {
     /**
      * company profile.
-     * 
+     *
      * @access public
      * @return void
      */
@@ -32,7 +32,7 @@ class company extends control
 
     /**
      * company contact.
-     * 
+     *
      * @access public
      * @return void
      */
@@ -42,17 +42,17 @@ class company extends control
         $this->view->contact    = $this->company->getContact();
         $this->view->mobileURL  = helper::createLink('company', 'contact', '', '', 'mhtml');
         $this->view->desktopURL = helper::createLink('company', 'contact', '', '', 'html');
-        
+
         $this->display();
     }
 
     /**
      * set company basic info.
-     * 
+     *
      * @access public
      * @return void
      */
-    public function setBasic()
+    public function setBasic($display = 'all')
     {
         if(!empty($_POST))
         {
@@ -68,13 +68,15 @@ class company extends control
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
 
-        $this->view->title = $this->lang->company->setBasic;
+        $this->view->title   = $this->lang->company->setBasic;
+        $this->view->display = $display;
+
         $this->display();
     }
 
     /**
      * set contact information.
-     * 
+     *
      * @access public
      * @return void
      */
@@ -84,7 +86,7 @@ class company extends control
         {
             if(!empty($_POST['email']))
             {
-                if(!validater::checkEmail($_POST['email'])) $this->send(array('result' => 'fail', 'message' => $this->lang->company->error->email)); 
+                if(!validater::checkEmail($_POST['email'])) $this->send(array('result' => 'fail', 'message' => $this->lang->company->error->email));
             }
 
             $contact = array('contact' => helper::jsonEncode($_POST));
