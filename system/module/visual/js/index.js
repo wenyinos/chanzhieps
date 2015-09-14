@@ -115,13 +115,18 @@
             setting.actions[actionName] = $.extend({name: actionName}, DEFAULT_ACTIONS_CONFIG[actionName], actionSetting)
         });
         visuals[name] = setting;
+
     });
     $.visuals = visuals;
+    if(DEBUG) console.log(visuals);
 
     var initVisualArea = function(ve)
     {
         var $ve = ve instanceof $$ ? ve : $$(this);
         var $veMain = $ve.not('style, script');
+
+        if($veMain.data('veInit')) return;
+
         var name = '';
 
         // init blocks
@@ -137,7 +142,7 @@
             {
                 'data-ve'   : 'block',
                 'data-id'   : blockID,
-                'data-title': $veMain.children('.carousel').length ? lang.carousel : ($.trim($ve.children('.panel-heading').children().first().text()) || (visuals.block.name + ' #' + blockID))
+                'data-title': '[' + ($veMain.children('.carousel').length ? lang.carousel : ($.trim($ve.children('.panel-heading').children().first().text()) || (visuals.block.name + ' #' + blockID))) + ']'
             });
             name = 'block';
         }
@@ -159,7 +164,7 @@
             }
         }
 
-        $veMain.data('ve', name);
+        $veMain.data('ve', name).data('veInit', true);
         var setting = visuals[name];
         if($.isPlainObject(setting))
         {
@@ -174,7 +179,11 @@
                 var $actions = $$('<ul class="ve-actions"></ul>');
                 $.each(setting.actions, function(actionName, action)
                 {
-                    if(actionName === 'move') $veMain.addClass('ve-movable');
+                    if(actionName === 'move')
+                    {
+                        $veMain.addClass('ve-movable');
+                        $heading.find('.ve-name').addClass('ve-move-handler');
+                    }
                     if(!action || action.hidden) return;
                     $actions.append('<li data-toggle="tooltip" data-action="' + actionName + '" class="ve-action ve-action-' + actionName + '" title="' + action.text + '">'
                         + (action.icon ? '<i class="icon icon-' + action.icon + '"></i>' : action.text) + '</li>');
@@ -267,35 +276,40 @@
         {
             var $blocksHolder = $$(this);
 
-            var region = $blocksHolder.data('region');
-            if(!region)
+            $blocksHolder.find('.block, .panel-block').each(function()
             {
-                console.error('The blocks area has no region attribute.');
-            }
+                var $ve = $$(this);
+                if($ve.data('veInit')) return;
 
+                initVisualArea($ve);
+                if(withGrid)
+                {
+                    $ve.find('.ve[data-ve="block"] > .ve-cover').append('<div class="ve-resize-handler left"><i class="icon icon-resize-horizontal"></i></div><div class="ve-resize-handler right"><i class="icon icon-resize-horizontal"></i></div>');
+                }
+            });
+
+            if($blocksHolder.data('veInit')) return;
+
+            var region = $blocksHolder.data('region');
             var withGrid = $blocksHolder.hasClass('row');
-            var page = region.substring(0, region.indexOf('-'));
-            var location = region.substring(page.length + 1);
+            var page = $blocksHolder.data('page') || region.substring(0, region.indexOf('-'));
+            var location = $blocksHolder.data('location') || region.substring(page.length + 1);
+
+            if(!region && (!page || !location))
+            {
+                console.error('The blocks area has no region or (page, location) attribute.');
+            }
 
             $blocksHolder.attr(
             {
                 "data-page": page,
                 "data-location": location,
+                "data-region": page + '-' + location,
+                'data-veInit': true,
                 "data-title": lang.blocks.pages[page] + '-' + lang.blocks.regions[page][location]
             });
 
-            $blocksHolder.find('.block, .panel-block').each(function()
-            {
-                var $ve = $$(this);
-                initVisualArea($ve);
-
-                if(withGrid)
-                {
-                    $ve.find('.ve-cover').append('<div class="ve-resize-handler left"><i class="icon icon-resize-horizontal"></i></div><div class="ve-resize-handler right"><i class="icon icon-resize-horizontal"></i></div>');
-                }
-            });
-
-            $blocksHolder.sortable({trigger: '.ve-name', selector: withGrid ? '.col' : '.ve', dragCssClass: '', finish: function(e)
+            $blocksHolder.sortable({trigger: '.ve-move-handler', selector: withGrid ? '.col' : '.ve', dragCssClass: '', finish: function(e)
             {
                 var orders = [];
                 $.each(e.list, function()
@@ -310,6 +324,9 @@
         });
 
         var $$body = $$('body');
+        if($$body.data('ve-blocks-events')) return;
+        $$body.data('ve-blocks-events', true);
+
         $$body.on('mouseenter', '.ve-action-addblock', function()
         {
             $$(this).closest('.blocks').addClass('ve-blocks-show-border');
@@ -407,6 +424,7 @@
             setTimeout(function()
             {
                 if(name === 'block') $newVe.closest('.blocks.row').trigger('tidy');
+                initVisualAreas();
             }, 100);
         });
     };
@@ -434,7 +452,7 @@
         {
             width : action.width || setting.width,
             icon  : action.icon || 'pencil',
-            title : action.title || setting.title || action.text + ' ' + (options.title || ''),
+            title : action.title || setting.title || action.text + ' ' + (options.title || setting.name || ''),
             loaded: function(e)
             {
                 var modal$ = e.jQuery;
@@ -486,18 +504,23 @@
         else callback(confirm(confirmMessage));
     };
 
-    var initVisualPage = function()
+    var initVisualAreas = function()
     {
-        // load visual edit style
-        if(window.v.visualStyle) $$('head').append($$('<link type="text/css" rel="stylesheet" />').attr('href', window.v.visualStyle));
-
-        // init visual edit area
         $.each(visuals, function(name, setting)
         {
             $$('[data-ve="' + name + '"], #' + name).each(initVisualArea);
         });
 
         initBlocks();
+    };
+
+    var initVisualPage = function()
+    {
+        // load visual edit style
+        if(window.v.visualStyle) $$('head').append($$('<link type="text/css" rel="stylesheet" />').attr('href', window.v.visualStyle));
+
+        // init visual edit area
+        initVisualAreas();
 
         // bind event
         $$('body').on('click', '.ve-name', openCommonActionModal)
