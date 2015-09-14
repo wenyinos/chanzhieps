@@ -1,6 +1,7 @@
 (function(window, $)
 {
     'use strict';
+    var DEBUG = window.v.debug;
     var visualPage = $('#visualPage').get(0);
     var $$; // the jQuery object of visual page in iframe
     var isInPreview = false;
@@ -428,7 +429,8 @@
         var setting = visuals[name];
         var options = getVisualOptions($ve || name);
         var action = setting.actions[actionName];
-        openModal(createActionLink(setting, action, options),
+        var url = createActionLink(setting, action, options);
+        openModal(url,
         {
             width : action.width || setting.width,
             icon  : action.icon || 'pencil',
@@ -441,6 +443,7 @@
                     $.closeModal();
                     updateVisualArea($ve, response);
                 });
+                if(DEBUG) console.log('Modal loaded:', url);
             },
             dismiss: action.onDismiss || setting.onDismiss
         });
