@@ -23,7 +23,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
     $colorPlates .= "<div class='color color-tile' data='#" . $value . "'><i class='icon-ok'></i></div>";
 }
 ?>
-<form method='post' id='editForm' class='blockForm'>
+<form method='post' id='editForm' class='blockForm ve-form'>
   <div class='panel'>
     <div class='panel-heading'>
       <ul class='nav nav-tabs'>
