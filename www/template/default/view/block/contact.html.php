@@ -20,13 +20,15 @@ $block->content = json_decode($block->content);
     <?php endif;?>
   </div>
   <div class='panel-body'>
-    <table class='table table-data'>
-      <?php foreach($contact as $item => $value):?>
-      <tr>
-        <th><?php echo $this->lang->company->$item . $this->lang->colon;?></th>
-        <td><?php echo $value;?></td>
-      </tr>
-      <?php endforeach;?>
-    </table>
+    <div id='companyContact<?php echo $block->id;?>' data-ve='companyContact'>
+      <table class='table table-data'>
+        <?php foreach($contact as $item => $value):?>
+        <tr>
+          <th><?php echo $this->lang->company->$item . $this->lang->colon;?></th>
+          <td><?php echo $value;?></td>
+        </tr>
+        <?php endforeach;?>
+      </table>
+    </div>
   </div>
 </div>

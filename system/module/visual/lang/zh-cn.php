@@ -37,6 +37,9 @@ $lang->visual->config->slogan   = array('name' => "口号", 'width' => 700, 'mod
 $lang->visual->config->powerby  = array('name' => "蝉知标识", 'title' => '移除蝉知标识', 'width' => 600, 'actions' => array('edit' => array('icon' => 'info-sign', 'text' => '移除蝉知标识', 'module' => 'visual', 'method' => 'editpowerby')));
 $lang->visual->config->company  = array('name' => "公司介绍", 'width' => 900, 'actions' => array('edit' => array('text' => '编辑公司介绍', 'method' => 'setbasic', 'params' => 'display=content')));
 $lang->visual->config->companyName  = array('name' => "公司名称", 'width' => 900, 'actions' => array('edit' => array('module' => 'company', 'method' => 'setbasic', 'params' => 'display=name')));
+$lang->visual->config->companyDesc  = array('name' => "公司简介", 'width' => 900, 'actions' => array('edit' => array('module' => 'company', 'method' => 'setbasic', 'params' => 'display=desc')));
+$lang->visual->config->companyContact = array('name' => "联系方式", 'width' => 900, 'actions' => array('edit' => array('module' => 'company', 'method' => 'setcontact')));
+$lang->visual->config->links = array('name' => "友情链接", 'width' => 900, 'actions' => array('edit' => array('module' => 'links', 'method' => 'admin')));
 $lang->visual->config->navbar   = array('name' => "导航", 'width' => 1200, 'params' => 'type={type}', 'module' => 'nav', 'actions' => array('edit' => array('method' => 'admin')));
 $lang->visual->config->block    = array('name' => "区块", 'width' => 1200, 'params' => 'blockID={id}', 'module' => 'visual',
     'actions' => array(

@@ -17,7 +17,7 @@
     <strong><i class='icon-link'></i> <?php echo $lang->links->common;?></strong>
   </div>
   <div class='panel-body'>
-    <form method='post' id='ajaxForm'>
+    <form method='post' id='ajaxForm' class='ve-form'>
       <table class='table table-form'>
         <tr>
           <th><?php echo $lang->links->index;?></th> 

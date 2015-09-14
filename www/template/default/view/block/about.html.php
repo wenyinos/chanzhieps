@@ -19,6 +19,6 @@ $block->content = json_decode($block->content);
     <?php endif;?>
   </div>
   <div class='panel-body'>
-    <div><?php echo $this->config->company->desc;?></div>
+    <div id='companyDesc<?php echo $block->id;?>' data-ve='companyDesc'><?php echo $this->config->company->desc;?></div>
   </div>
 </div>
