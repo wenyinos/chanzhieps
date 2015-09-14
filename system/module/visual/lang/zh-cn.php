@@ -36,6 +36,7 @@ $lang->visual->config->logo     = array('name' => "Logo/名称", 'width' => 900)
 $lang->visual->config->slogan   = array('name' => "口号", 'width' => 700);
 $lang->visual->config->powerby  = array('name' => "蝉知标识", 'title' => '移除蝉知标识', 'width' => 600, 'actions' => array('edit' => array('icon' => 'info-sign', 'text' => '移除蝉知标识')));
 $lang->visual->config->company  = array('name' => "公司介绍", 'width' => 900, 'actions' => array('edit' => array('text' => '编辑公司介绍', 'module' => 'company', 'method' => 'setbasic', 'params' => 'display=content')));
+$lang->visual->config->companyName  = array('name' => "公司名称", 'width' => 900, 'actions' => array('edit' => array('module' => 'company', 'method' => 'setbasic', 'params' => 'display=name')));
 $lang->visual->config->navbar   = array('name' => "导航", 'width' => 1200, 'params' => 'type={type}', 'module' => 'nav', 'actions' => array('edit' => array('method' => 'admin')));
 $lang->visual->config->block    = array('name' => "区块", 'width' => 1200, 'params' => 'blockID={id}',
     'actions' => array(
@@ -60,6 +61,9 @@ $lang->visual->config->product  = array('params' => 'productID={id}', 'module' =
     'actions' => array('delete' => array('method' => 'delete'), 'edit' => array('method' => 'edit')));
 $lang->visual->config->products = array('name' => '产品列表', 'module' => 'product', 'hidden' => true,
     'actions' => array('edit' => false, 'add' => array('text' => '发布新产品', 'icon' => 'plus', 'method' => 'create', "params" => 'category=0')));
-
+$lang->visual->config->books    = array('name' => '手册列表', 'module' => 'book', 'hidden' => true,
+        'actions' => array('edit' => false, 'add' => array('text' => '添加手册', 'icon' => 'plus', 'method' => 'create')));
+$lang->visual->config->bookCatalog = array('name' => "手册目录", 'width' => 1200, 'params' => 'bookID={id}', 'module' => 'book', 'actions' => array('edit' => array('method' => 'admin')));
+$lang->visual->config->book = array('name' => "手册", 'width' => 1200, 'params' => 'nodeID={id}', 'module' => 'book', 'actions' => array('edit' => array('method' => 'edit')));
 
 $lang->visual->editpowerbycontent = "<p>蝉知企业门户系统是开源免费的，但根据我们的<a href='http://www.chanzhi.org/book/chanzhieps/58_license.html' target='_blank'>授权协议</a>，去除蝉知的标识需要购买我们的商业授权。</p><p>蝉知标识并不会影响网站功能，我们建议您保留。</p><hr><div class='text-center'><a class='btn btn-success' href='http://www.chanzhi.org/vip/25_vip-support.html' target='_blank'>了解蝉知系统商业服务列表和授权 <i class='icon-arrow-right'></i></a></div>";
