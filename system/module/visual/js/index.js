@@ -46,6 +46,7 @@
             mergeOptions    : true,
             hidden          : function()
             {
+                options.dismiss && options.dismiss();
                 $$('.ve-editing, .ve-blocks-show-border').removeClass('ve-editing ve-blocks-show-border');
             }
         }, options));
@@ -359,9 +360,9 @@
         });
     };
 
-    var updateVisualArea = function(response)
+    var updateVisualArea = function($ve, response)
     {
-        var $ve = $$('.ve-editing').first();
+        $ve = $ve || $$('.ve-editing').first();
         var name = $ve.data('ve');
         var id = $ve.attr('id');
         var parentSelector = '';
@@ -421,7 +422,8 @@
                     $.closeModal();
                     updateVisualArea(response);
                 });
-            }
+            },
+            dismiss: action.updateOnDismiss ? updateVisualArea: false
         });
     };
 
