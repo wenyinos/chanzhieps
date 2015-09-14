@@ -10,9 +10,9 @@
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php 
-include TPL_ROOT . 'common/header.html.php'; 
-include TPL_ROOT . 'common/treeview.html.php'; 
+<?php
+include TPL_ROOT . 'common/header.html.php';
+include TPL_ROOT . 'common/treeview.html.php';
 
 /* set categoryPath for topNav highlight. */
 js::set('path',  $product->path);
@@ -28,11 +28,11 @@ css::internal($product->css);
 js::execute($product->js);
 ?>
 <?php $common->printPositionBar($category, $product);?>
-<div class='row'><?php $this->block->printRegion($layouts, 'product_view', 'topBanner', true);?></div>
+<div class='row blocks' data-region='product_view-topBanner'><?php $this->block->printRegion($layouts, 'product_view', 'topBanner', true);?></div>
 <div class='row'>
   <div class='col-md-9 col-main'>
-    <div class='row'><?php $this->block->printRegion($layouts, 'product_view', 'top', true);?></div>
-    <div class='panel panel-body panel-product'>
+    <div class='row blocks' data-region='product_view-top blocks' data-region='product_view-bottom'><?php $this->block->printRegion($layouts, 'product_view', 'top', true);?></div>
+    <div class='panel panel-body panel-product' id='product' data-id='<?php echo $product->id;?>'>
       <div class='row'>
         <?php if(!empty($product->image->list)):?>
         <div class='col-sm-5' id='productImageWrapper'>
@@ -170,12 +170,12 @@ js::execute($product->js);
       <?php echo html::a('', '', "name='comment'");?>
     </div>
     <?php endif;?>
-    <div class='row'><?php $this->block->printRegion($layouts, 'product_view', 'bottom', true);?></div>
+    <div class='row blocks' data-region='product_view-bottom'><?php $this->block->printRegion($layouts, 'product_view', 'bottom', true);?></div>
   </div>
   <div class='col-md-3 col-side'>
-    <side class='page-side'><?php $this->block->printRegion($layouts, 'product_view', 'side');?></side>
+    <side class='page-side blocks' data-region='product_view-side'><?php $this->block->printRegion($layouts, 'product_view', 'side');?></side>
   </div>
 </div>
-<div class='row'><?php $this->block->printRegion($layouts, 'product_view', 'bottomBanner', true);?></div>
+<div class='row blocks' data-region='product_view-bottomBanner'><?php $this->block->printRegion($layouts, 'product_view', 'bottomBanner', true);?></div>
 <?php include TPL_ROOT . 'common/jplayer.html.php'; ?>
 <?php include TPL_ROOT . 'common/footer.html.php'; ?>

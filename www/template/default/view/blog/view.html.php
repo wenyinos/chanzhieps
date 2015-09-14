@@ -24,11 +24,11 @@ include TPL_ROOT . 'common/treeview.html.php';
 $root = '<li>' . $this->lang->currentPos . $this->lang->colon .  html::a($this->inlink('index'), $lang->blog->home) . '</li>';
 $common->printPositionBar($category, $article, '', $root);
 ?>
-<div class='row'><?php $this->block->printRegion($layouts, 'blog_view', 'topBanner', true);?></div>
+<div class='row blocks' data-region='blog_view-topBanner'><?php $this->block->printRegion($layouts, 'blog_view', 'topBanner', true);?></div>
 <div class='row'>
   <div class='col-md-9 col-main'>
-    <div class='row'><?php $this->block->printRegion($layouts, 'blog_view', 'top', true);?></div>
-    <div class='article'>
+    <div class='row blocks' data-region='blog_view-top'><?php $this->block->printRegion($layouts, 'blog_view', 'top', true);?></div>
+    <div class='article' id='blog' data-id='<?php echo $article->id;?>'>
       <header>
         <h1><?php echo $article->title;?></h1>
         <dl class='dl-inline'>
@@ -82,7 +82,7 @@ $common->printPositionBar($category, $article, '', $root);
     <?php if(commonModel::isAvailable('message')):?>
     <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=article&objectID={$article->id}");?></div>
     <?php endif;?>
-    <div class='row'><?php $this->block->printRegion($layouts, 'blog_view', 'bottom', true);?></div>
+    <div class='row blocks' data-region='blog_view-bottom'><?php $this->block->printRegion($layouts, 'blog_view', 'bottom', true);?></div>
   </div>
   <div class='col-md-3 col-side'><side class='page-side blocks'><div class='panel-pure panel'><?php echo html::a(helper::createLink('rss', 'index', '?type=blog', '', 'xml'), "<i class='icon-rss text-warning'></i> " . $lang->blog->subscribe, "target='_blank' class='btn btn-lg btn-block'"); ?></div><?php $this->block->printRegion($layouts, 'blog_view', 'side');?></side></div>
 </div>

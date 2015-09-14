@@ -19,7 +19,7 @@ if(isset($pageCSS)) css::internal($pageCSS);
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
 <?php include TPL_ROOT . 'common/header.lite.html.php';?>
 <div class='page-container'>
-  <?php $this->block->printRegion($layouts, 'all', 'top');?>
+  <div class='blocks' data-region='all-top'><?php $this->block->printRegion($layouts, 'all', 'top');?></div>
   <?php $topNavs = $this->loadModel('nav')->getNavs('desktop_top');?>
   <nav id='navbar' class='navbar' data-type='desktop_top'>
     <div class='navbar-header'>
