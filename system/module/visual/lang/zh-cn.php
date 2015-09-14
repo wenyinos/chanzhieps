@@ -63,8 +63,12 @@ $lang->visual->config->products = array('name' => '产品列表', 'module' => 'p
     'actions' => array('edit' => false, 'add' => array('text' => '发布新产品', 'icon' => 'plus', 'method' => 'create', "params" => 'category=0')));
 $lang->visual->config->books    = array('name' => '手册列表', 'module' => 'book', 'hidden' => true,
     'actions' => array('edit' => false, 'add' => array('text' => '添加手册', 'icon' => 'plus', 'method' => 'create')));
-$lang->visual->config->bookCatalog = array('name' => "手册目录", 'width' => 1200, 'params' => 'bookID={id}', 'module' => 'book', 'actions' => array('edit' => array('method' => 'admin', 'updateOnDismiss' => true)));
+$lang->visual->config->bookCatalog = array('name' => "手册目录", 'width' => 1200, 'params' => 'bookID={id}', 'module' => 'book', 'actions' => array('edit' => array('method' => 'admin', 'onDismiss' => 'update')));
 $lang->visual->config->book = array('name' => "手册", 'width' => 1200, 'params' => 'nodeID={id}', 'module' => 'book',
     'actions' => array('edit' => array('method' => 'edit')));
+$lang->visual->config->boards = array('name' => '论坛板块', 'hidden' => true,
+    'actions' => array('edit' => false, 'add' => array('text' => '板块管理', 'icon' => 'sitemap', 'module' => 'tree', 'method' => 'browse', 'params' => 'type=forum', 'onDismiss' => 'update')));
+$lang->visual->config->thread = array('name' => '帖子', 'module' => 'thread', 'params' => 'treadID={id}',
+    'actions' => array('edit' => array('width' => 600, 'text' => '转移', 'icon' => 'location-arrow',  'method' => 'transfer', 'onDismiss' => 'reload'), 'delete' => array('method' => 'delete')));
 
 $lang->visual->editpowerbycontent = "<p>蝉知企业门户系统是开源免费的，但根据我们的<a href='http://www.chanzhi.org/book/chanzhieps/58_license.html' target='_blank'>授权协议</a>，去除蝉知的标识需要购买我们的商业授权。</p><p>蝉知标识并不会影响网站功能，我们建议您保留。</p><hr><div class='text-center'><a class='btn btn-success' href='http://www.chanzhi.org/vip/25_vip-support.html' target='_blank'>了解蝉知系统商业服务列表和授权 <i class='icon-arrow-right'></i></a></div>";

@@ -31,6 +31,11 @@
         showMessage(lang.doing, {time: 0, close: false});
     };
 
+    var reloadPage = function()
+    {
+        visualPage.contentWindow.location.replace(visualPageUrl);
+    };
+
     var openModal = function(url, options)
     {
         window.modalTrigger.show(
@@ -46,7 +51,15 @@
             mergeOptions    : true,
             hidden          : function()
             {
-                options.dismiss && options.dismiss();
+                if(options.dismiss === 'update')
+                {
+                    updateVisualArea();
+                }
+                else if(options.dismiss === 'reload')
+                {
+                    reloadPage();
+                    return;
+                }
                 $$('.ve-editing, .ve-blocks-show-border').removeClass('ve-editing ve-blocks-show-border');
             }
         }, options));
@@ -423,7 +436,7 @@
                     updateVisualArea(response);
                 });
             },
-            dismiss: action.updateOnDismiss ? updateVisualArea: false
+            dismiss: action.onDismiss || setting.onDismiss
         });
     };
 
@@ -549,10 +562,7 @@
             : ("<i class='icon-eye-open'></i> " + lang.preview));
     });
 
-    $('#visualReloadBtn').on('click', function()
-    {
-        visualPage.contentWindow.location.replace(visualPageUrl);
-    });
+    $('#visualReloadBtn').on('click', reloadPage);
 
     // extend helper methods
     $.updateVisualArea = updateVisualArea;
