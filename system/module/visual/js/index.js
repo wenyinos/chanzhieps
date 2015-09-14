@@ -245,8 +245,14 @@
         $$('.blocks').each(function()
         {
             var $blocksHolder = $$(this);
-            var withGrid = $blocksHolder.hasClass('row');
+
             var region = $blocksHolder.data('region');
+            if(!region)
+            {
+                console.error('The blocks area has no region attribute.');
+            }
+
+            var withGrid = $blocksHolder.hasClass('row');
             var page = region.substring(0, region.indexOf('-'));
             var location = region.substring(page.length + 1);
 

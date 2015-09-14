@@ -35,6 +35,7 @@ $lang->visual->config           = new stdclass();
 $lang->visual->config->logo     = array('name' => "Logo/名称", 'width' => 900);
 $lang->visual->config->slogan   = array('name' => "口号", 'width' => 700);
 $lang->visual->config->powerby  = array('name' => "蝉知标识", 'title' => '移除蝉知标识', 'width' => 600, 'actions' => array('edit' => array('icon' => 'info-sign', 'text' => '移除蝉知标识')));
+$lang->visual->config->company  = array('name' => "公司介绍", 'width' => 900, 'actions' => array('edit' => array('text' => '编辑公司介绍', 'module' => 'company', 'method' => 'setbasic', 'params' => 'display=content')));
 $lang->visual->config->navbar   = array('name' => "导航", 'width' => 1200, 'params' => 'type={type}', 'module' => 'nav', 'actions' => array('edit' => array('method' => 'admin')));
 $lang->visual->config->block    = array('name' => "区块", 'width' => 1200, 'params' => 'blockID={id}',
     'actions' => array(

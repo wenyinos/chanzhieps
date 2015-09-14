@@ -12,22 +12,23 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/kindeditor.html.php';?>
-<div class='panel'>
+<?php $displayAll = $display === 'all'; ?>
+<div class='panel display-<?php echo $display?>'>
   <div class='panel-heading'><strong><i class='icon-building'></i> <?php echo $lang->company->setBasic;?></strong></div>
   <div class='panel-body'>
-    <form method='post' id='ajaxForm'>
+    <form method='post' id='ajaxForm' class='ve-form'>
       <table class='table table-form'>
-        <tr>
+        <tr data-row='name'>
           <th class='w-100px'><?php echo $lang->company->name;?></th>
           <td class='w-p50'><?php echo html::input('name', isset($this->config->company->name) ? $this->config->company->name : '', "class='form-control'");?></td><td></td>
         </tr>
-        <tr>
-          <th><?php echo $lang->company->desc;?></th> 
-          <td colspan='2'><?php echo html::textarea('desc',  isset($this->config->company->desc) ? htmlspecialchars($this->config->company->desc) : '', "class='form-control' rows='5'");?></td> 
+        <tr data-row='desc'>
+          <th><?php echo $lang->company->desc;?></th>
+          <td colspan='2'><?php echo html::textarea('desc',  isset($this->config->company->desc) ? htmlspecialchars($this->config->company->desc) : '', "class='form-control' rows='5'");?></td>
         </tr>
-        <tr>
-          <th><?php echo $lang->company->content;?></th> 
-          <td colspan='2'><?php echo html::textarea('content',  isset($this->config->company->content) ? htmlspecialchars($this->config->company->content) : '', "class='form-control' rows='15'");?></td> 
+        <tr data-row='content'>
+          <th><?php echo $lang->company->content;?></th>
+          <td colspan='2'><?php echo html::textarea('content',  isset($this->config->company->content) ? htmlspecialchars($this->config->company->content) : '', "class='form-control' rows='15'");?></td>
         </tr>
         <tr>
           <th></th>
