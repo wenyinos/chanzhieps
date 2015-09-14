@@ -82,6 +82,8 @@ $config->rights->guest['cart']['count']         = 'count';
 $config->rights->guest['order']['confirm']      = 'confirm';
 $config->rights->guest['order']['processorder'] = 'processorder';
 
+$config->rights->guest['log']['record'] = 'record';
+
 /* For logged member. */
 $config->rights->member['thread']['post']         = 'post';
 $config->rights->member['thread']['reply']        = 'reply';
