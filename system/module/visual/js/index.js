@@ -31,6 +31,17 @@
         showMessage(lang.doing, {time: 0, close: false});
     };
 
+    var reloadPage = function()
+    {
+        visualPage.contentWindow.location.replace(visualPageUrl);
+    };
+
+    var createActionLink = function(setting, action, options)
+    {
+        if(!$.isPlainObject(action)) action = setting.actions[action];
+        return createLink(action.module || setting.module || setting.code, action.method || setting.method || action.name, (action.params || setting.params || '').format(options));
+    }
+
     var openModal = function(url, options)
     {
         window.modalTrigger.show(
@@ -46,7 +57,15 @@
             mergeOptions    : true,
             hidden          : function()
             {
-                options.dismiss && options.dismiss();
+                if(options.dismiss === 'update')
+                {
+                    updateVisualArea();
+                }
+                else if(options.dismiss === 'reload')
+                {
+                    reloadPage();
+                    return;
+                }
                 $$('.ve-editing, .ve-blocks-show-border').removeClass('ve-editing ve-blocks-show-border');
             }
         }, options));
@@ -75,7 +94,7 @@
     // visual settings
     $.each(visuals, function(name, setting)
     {
-        setting = $.extend(true, {}, DEFAULT_CONFIG, $.isPlainObject(setting) ? setting : {name: setting});
+        setting = $.extend(true, {code: name}, DEFAULT_CONFIG, $.isPlainObject(setting) ? setting : {name: setting});
         $.each(setting.actions, function(actionName, action)
         {
             var actionSetting;
@@ -182,7 +201,7 @@
         var setting = visuals[name];
         showLoadingMessage();
         $.post(
-            createLink(action.module || setting.module || 'visual', action.method || (action.name + name), (action.params || setting.params || '').format(options)),
+            createActionLink(setting, action, options),
             postData,
             function(data)
             {
@@ -303,7 +322,7 @@
             var action = setting.actions.add;
             var $blocksHolder = $$(this).closest('.blocks').addClass('ve-editing');
             var options = $.extend({}, setting, $blocksHolder.data());
-            openModal(createLink(action.module || 'visual', action.method || ('add' + name), (action.params || '').format(options)),
+            openModal(createActionLink(setting, action, options),
             {
                 width : action.width || setting.width,
                 icon  : action.icon || 'plus',
@@ -409,7 +428,7 @@
         var setting = visuals[name];
         var options = getVisualOptions($ve || name);
         var action = setting.actions[actionName];
-        openModal(createLink(action.module || setting.module || 'visual', action.method || (actionName + name), (action.params || setting.params || '').format(options)),
+        openModal(createActionLink(setting, action, options),
         {
             width : action.width || setting.width,
             icon  : action.icon || 'pencil',
@@ -420,10 +439,10 @@
                 modal$.setAjaxForm('.ve-form', function(response)
                 {
                     $.closeModal();
-                    updateVisualArea(response);
+                    updateVisualArea($ve, response);
                 });
             },
-            dismiss: action.updateOnDismiss ? updateVisualArea: false
+            dismiss: action.onDismiss || setting.onDismiss
         });
     };
 
@@ -549,10 +568,7 @@
             : ("<i class='icon-eye-open'></i> " + lang.preview));
     });
 
-    $('#visualReloadBtn').on('click', function()
-    {
-        visualPage.contentWindow.location.replace(visualPageUrl);
-    });
+    $('#visualReloadBtn').on('click', reloadPage);
 
     // extend helper methods
     $.updateVisualArea = updateVisualArea;

@@ -12,7 +12,7 @@
 include TPL_ROOT . 'common/header.html.php';
 include TPL_ROOT . 'common/kindeditor.html.php';
 
-echo "<div class='row focus-top' data-default-grid='4'>";
+echo "<div class='row blocks' data-grid='4' data-region='thread_view-top'>";
 $this->block->printRegion($layouts, 'thread_view', 'top', true);
 echo "</div>";
 
@@ -21,7 +21,9 @@ $common->printPositionBar($board, $thread);
 if($pager->pageID == 1) include TPL_ROOT . 'thread/thread.html.php';
 include TPL_ROOT . 'thread/reply.html.php';
 
+echo "<div class='blocks' data-region='thread_view-bottom'>";
 $this->block->printRegion($layouts, 'thread_view', 'bottom');
+echo "</div>";
 
 include TPL_ROOT . 'common/jplayer.html.php';
 include TPL_ROOT . 'common/footer.html.php';

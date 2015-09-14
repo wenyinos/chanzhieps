@@ -27,4 +27,4 @@
     </div>
   </div>
 </form>
-<?php include TPL_ROOT . 'common/footer.modal.html.php';?>
+<?php include '../../common/footer.modal.html.php';?>
