@@ -6,9 +6,9 @@
       <?php $i++;?>
       <strong><?php if($i > 3) echo '#' . $i;?></strong>
       <?php if($i == 2):?>
-      <strong class='label label-danger'><?php echo $lang->reply->sofa;?></strong>
+      <strong class='text-danger'><?php echo $lang->reply->sofa;?></strong>
       <?php elseif($i == 3):?>
-      <strong class='label label-success'><?php echo $lang->reply->stool;?></strong>
+      <strong class='text-success'><?php echo $lang->reply->stool;?></strong>
       <?php endif;?>
     </div>
     <span class='muted'><i class='icon-comment-alt'></i> <?php echo $reply->addedDate;?></span>
