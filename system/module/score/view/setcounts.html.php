@@ -1,13 +1,13 @@
 <?php
 /**
- * The xxx view file of xxx module of ZenTaoPMS.
+ * The setCounts view file of score of chanzhiEPS.
  *
- * @copyright   Copyright 2009-2010 QingDao Nature Easy Soft Network Technology Co,LTD (www.cnezsoft.com)
- * @license     LGPL (http://www.gnu.org/licenses/lgpl.html)
- * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
- * @package     xxx
+ * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
+ * @license     ZPLV1 (http://www.chanzhi.org/license/)
+ * @author      Tingting Dai <daitingting@xirangit.com>
+ * @package     Score
  * @version     $Id$
- * @link        http://www.zentao.net
+ * @link        http://www.chanzhi.org
  */
 ?>
 <?php include '../../common/view/header.modal.html.php';?>
