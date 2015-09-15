@@ -929,7 +929,7 @@ class user extends control
         $this->loadModel('score');
         if($_POST)
         {
-            $result = $this->score->award($account, 'award', $this->post->score, '', '', $this->post->note);
+            $result = $this->score->award($account, 'award', $this->post->count, '', '', $this->post->note);
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
@@ -951,7 +951,7 @@ class user extends control
         $this->loadModel('score');
         if($_POST)
         {
-            $result = $this->score->punish($account, 'punish', $this->post->score, '', '', $this->post->note);
+            $result = $this->score->punish($account, 'punish', $this->post->count, '', '', $this->post->note);
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }

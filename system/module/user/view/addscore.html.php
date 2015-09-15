@@ -14,8 +14,8 @@
 <form method='post' action='<?php echo inlink('addScore', "account=$account");?>' id='ajaxForm' class='form'>
   <table class='table table-form borderless'>
     <tr>
-      <th class="w-100px"><?php echo $lang->score->common;?></th>
-      <td><?php echo html::input('score', '', "class='form-control'");?></td><td></td>
+      <th class="w-100px"><?php echo $lang->score->count;?></th>
+      <td><?php echo html::input('count', '', "class='form-control'");?></td><td></td>
     </tr>  
     <tr>
       <th><?php echo $lang->score->note;?></th>
