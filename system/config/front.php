@@ -97,6 +97,7 @@ $config->rights->member['thread']['stick']        = 'stick';
 $config->rights->member['thread']['delete']       = 'delete';
 $config->rights->member['thread']['transfer']     = 'transfer';
 $config->rights->member['thread']['deletefile']   = 'deletefile';
+$config->rights->member['thread']['addscore']     = 'addscore';
 
 $config->rights->member['reply']['post']       = 'post';
 $config->rights->member['reply']['eidt']       = 'edit';

@@ -10,6 +10,9 @@
       <?php elseif($i == 3):?>
       <strong class='text-success'><?php echo $lang->reply->stool;?></strong>
       <?php endif;?>
+      <?php if(isset($this->config->site->score) and $this->config->site->score == 'open' and !empty($reply->scoreSum)):?>
+      <?php echo sprintf($lang->thread->scoreSum, $reply->scoreSum);?>
+      <?php endif;?>
     </div>
     <span class='muted'><i class='icon-comment-alt'></i> <?php echo $reply->addedDate;?></span>
   </div>
@@ -42,6 +45,17 @@
     <div class="pull-right reply-actions thread-actions">
     <?php if($this->app->user->account != 'guest'):?>
     <span class="thread-more-actions">
+      <?php if(isset($this->config->site->score) and $this->config->site->score == 'open' and $this->thread->canManage($board->id, $reply->author)):?>
+      <span class='dropdown dropup'>
+        <a data-toggle='dropdown' href='###'><i class='icon-sun'></i> <?php echo $lang->thread->score;?> <span class='caret'></span></a>
+        <ul class='dropdown-menu' role='menu' aria-labelledby='dLabel'>
+          <?php $account = helper::safe64Encode($reply->author);?>
+          <?php foreach($lang->thread->scores as $score => $text):?>
+          <li><?php echo html::a(inlink('addScore', "account={$account}&objectType=reply&objectID={$reply->id}&score={$score}"), $text, "class='jsoner'");?></li>
+          <?php endforeach;?>
+        </ul>
+      </span>
+      <?php endif;?>
       <?php
       if($this->thread->canManage($board->id)) echo html::a($this->createLink('reply', 'delete', "replyID=$reply->id"), '<i class="icon-trash"></i> ' . $lang->delete, "class='deleter'");
       ?>
