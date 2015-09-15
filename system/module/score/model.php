@@ -131,7 +131,7 @@ class scoreModel extends model
         $data->actor      = $this->app->user->account == 'guest' ? $account : $this->app->user->account;
         $data->time       = date('Y-m-d H:i:s');
         $this->dao->insert(TABLE_SCORE)->data($data)->exec();
-        return true;
+        return !dao::isError();
     }
 
     /**
@@ -205,7 +205,7 @@ class scoreModel extends model
      */
     public function punish($account, $method, $count, $objectType = '', $objectID = 0, $note = '')
     {
-        $type    = 'punish';
+        $type = 'punish';
         if($note == '') $note = strtoupper($objectType) . ":$objectID";
         return $this->log($account, $method, $type, $count, $note, $objectType, $objectID);
     }

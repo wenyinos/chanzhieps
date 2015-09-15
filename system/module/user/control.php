@@ -916,4 +916,49 @@ class user extends control
         $this->view->pager  = $pager;
         $this->display();
     }
+
+    /**
+     * Add score for a user.
+     * 
+     * @param  string    $account 
+     * @access public
+     * @return void
+     */
+    public function addScore($account)
+    {
+        $this->loadModel('score');
+        if($_POST)
+        {
+            $result = $this->score->award($account, 'award', $this->post->score, '', '', $this->post->note);
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+
+        $this->view->title   = $this->lang->user->addScore;
+        $this->view->account = $account;
+        $this->display();
+    }
+
+    /**
+     * Reduce score for a user.
+     * 
+     * @param  string    $account 
+     * @access public
+     * @return void
+     */
+    public function reduceScore($account)
+    {
+        $this->loadModel('score');
+        if($_POST)
+        {
+            $result = $this->score->punish($account, 'punish', $this->post->score, '', '', $this->post->note);
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+
+        $this->view->title   = $this->lang->user->reduceScore;
+        $this->view->account = $account;
+        $this->display();
+
+    }
 }

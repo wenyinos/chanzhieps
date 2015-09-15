@@ -77,6 +77,10 @@ js::set('admin', $this->get->admin);
       <td class='operate'>
         <?php //if($user->provider == 'wechat') echo html::a($this->createLink('wechat', 'message', "from={$user->openID}"), $lang->user->messages);?>
         <?php commonModel::printLink('user', 'edit', "account=$user->account", $lang->edit); ?>
+        <?php if(isset($this->config->site->score) and $this->config->site->score == 'open'):?>
+        <?php commonModel::printLink('user', 'addScore', "account=$user->account", $lang->user->addScore, "data-toggle=modal"); ?>
+        <?php commonModel::printLink('user', 'reduceScore', "account=$user->account", $lang->user->reduceScore, "data-toggle=modal"); ?>
+        <?php endif;?>
         <?php if($user->locked <= helper::now() and $forbidPriv):?>
         <span class="dropdown">
           <a href='###' class="dropdown-toggle" data-toggle="dropdown"><?php echo $lang->user->forbid?> <span class="caret"></span></a>
