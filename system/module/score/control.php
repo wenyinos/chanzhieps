@@ -223,4 +223,24 @@ class score extends control
             echo "Statement {$account} finish\n";
         }
     }
+
+    /**
+     * Set counts for score.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setCounts()
+    {
+        if($_POST)
+        {
+            $setting = fixer::input('post')->get();
+            $result = $this->loadModel('setting')->setItems('system.score.counts', $setting);
+            if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        }
+
+        $this->view->title = $this->lang->score->setCounts;
+        $this->display();
+    }
 }
