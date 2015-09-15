@@ -15,11 +15,11 @@
 <table class='table table-form borderless'>
   <tbody class="scoreCounts <?php if(isset($this->config->site->score) and $this->config->site->score == 'close') echo 'hide';?>">
     <tr>
-      <th class='w-80px'><?php echo $lang->score->methods['register'];?></th> 
+      <th class='w-120px'><?php echo $lang->score->methods['register'] . $lang->score->methods['award'];?></th> 
       <td><?php echo html::input('register', $this->config->score->counts->register, "class='form-control'");?></td><td></td>
     </tr>
     <tr>
-      <th><?php echo $lang->score->methods['login'];?></th> 
+      <th><?php echo $lang->score->methods['login'] . $lang->score->methods['award'];?></th> 
       <td><?php echo html::input('login', $this->config->score->counts->login, "class='form-control'");?></td><td></td>
     </tr>
     <tr>
@@ -27,19 +27,19 @@
       <td><?php echo html::input('maxLogin', $this->config->score->counts->maxLogin, "class='form-control'");?></td><td></td>
     </tr>
     <tr>
-      <th><?php echo $lang->score->methods['thread'];?></th> 
+      <th><?php echo $lang->score->methods['thread'] . $lang->score->methods['award'];?></th> 
       <td><?php echo html::input('thread', $this->config->score->counts->thread, "class='form-control'");?></td><td></td>
     </tr>
     <tr>
-      <th><?php echo $lang->score->methods['reply'];?></th> 
+      <th><?php echo $lang->score->methods['reply'] . $lang->score->methods['award'];?></th> 
       <td><?php echo html::input('reply', $this->config->score->counts->reply, "class='form-control'");?></td><td></td>
     </tr>
     <tr>
-      <th><?php echo $lang->score->methods['delthread'];?></th> 
+      <th><?php echo $lang->score->methods['delthread'] .$lang->score->methods['punish'];?></th> 
       <td><?php echo html::input('delThread', $this->config->score->counts->delThread, "class='form-control'");?></td><td></td>
     </tr>
     <tr>
-      <th><?php echo $lang->score->methods['delreply'];?></th> 
+      <th><?php echo $lang->score->methods['delreply'] . $lang->score->methods['punish'];?></th> 
       <td><?php echo html::input('delReply', $this->config->score->counts->delReply, "class='form-control'");?></td><td></td>
     </tr>
     <tr><td></td><td><?php echo html::submitButton();?></td></tr>
