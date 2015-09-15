@@ -337,8 +337,9 @@ class thread extends control
         if($score > $max) $score = $max;
 
         $account = helper::safe64Decode($account);
-        if($objectType == 'thread') $this->loadModel('score')->award($account, 'valueThread', $score, $objectType, $objectID);
-        if($objectType == 'reply')  $this->loadModel('score')->award($account, 'valueReply',  $score, $objectType, $objectID);
-        $this->locate($this->server->http_referer . ($objectType == 'reply' ? '#' . $objectID : ''));
+        if($objectType == 'thread') $result = $this->loadModel('score')->award($account, 'valueThread', $score, $objectType, $objectID);
+        if($objectType == 'reply')  $result = $this->loadModel('score')->award($account, 'valueReply',  $score, $objectType, $objectID);
+        if($result) $this->send(array('result' => 'success', 'locate' => $this->server->http_referer));
+        $this->send(array('result' => 'fail', 'message' => dao::isError()));
     }
 }
