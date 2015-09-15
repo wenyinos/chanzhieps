@@ -66,6 +66,7 @@ $lang->page->edit   = 'Edit';
 $lang->article->sourceList['original']      = 'Original';
 $lang->article->sourceList['copied']        = 'Copied';
 $lang->article->sourceList['translational'] = 'Translational';
+$lang->article->sourceList['article']       = 'Forwarded from article';
 
 $lang->article->statusList['normal'] = 'Normal';
 $lang->article->statusList['draft']  = 'Draft';
@@ -99,4 +100,3 @@ $lang->article->placeholder->link      = 'Input link, it can be outer chain.';
 
 $lang->article->noCategory  = ' There is no category, please create.';
 $lang->article->forwardFrom = 'Fowarding from';
-$lang->article->self        = 'This station';
