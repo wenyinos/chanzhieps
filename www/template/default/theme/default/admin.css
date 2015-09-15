@@ -309,6 +309,7 @@ a.tag-link {color: inherit;}
 .icon-border-circle {padding: 2px 8px;}
 
 /* popovers */
+.popover {max-width: 900px; z-index: 1050}
 .popover-success {background-color: #47A447; border-color: #47A447; color: #fff;}
 .popover-success.right .arrow,.popover-success.right .arrow:after {border-right-color: #47A447;}
 .popover-success .popover-content:before {content: '\e653'; font-family: ZenIcon; display: inline-block; margin-right: 6px;}
@@ -434,7 +435,6 @@ a.tag-link {color: inherit;}
 .docker-right {padding: 20px 10px; background: #e5e5e5;}
 .docker-right .table {margin-bottom: 0; font-size: 14px}
 .docker-right .table-borderless td {text-align: center; vertical-align: middle; padding: 0 15px 15px}
-.popover {max-width: 900px}
 .docker-right .icon-mobile-phone, .docker-right .icon-weixin {font-size: 28px; color: #fff; background: #145CCD; display: inline-block; width: 36px; line-height: 36px; height: 36px; border-radius: 25px; vertical-align: middle; margin-right: 10px;}
 .docker-right .icon-weixin {background: #64ab23 url(images/main/weixin.png) no-repeat center}
 .docker-right  {vertical-align: middle;}
