@@ -81,9 +81,9 @@ $lang->user->message = new stdclass();
 $lang->user->message->mine = "My message <span class='label label-badge text-latin'>%s</span>";
 $lang->user->message->from = 'From';
 
-$lang->user->inputUserName       = 'Please input your username';
-$lang->user->inputAccountOrEmail = 'Please input account or Email';
-$lang->user->inputPassword       = 'Please input password';
+$lang->user->inputUserName       = 'Please enter your username';
+$lang->user->inputAccountOrEmail = 'Please enter account or Email';
+$lang->user->inputPassword       = 'Please enter password';
 $lang->user->searchUser          = 'Search';
 
 $lang->user->errorDeny         = "Sorry, you don't have the permission to access <b>%s</b>'s<b>%s</b>. Please contact the administrator.<br/> This page will jump to homepage after 5 seconds";
