@@ -45,6 +45,7 @@ $lang->visual->config->navbar   = array('name' => "导航", 'width' => 1200, 'pa
 $lang->visual->config->block    = array('name' => "区块", 'width' => 1200, 'params' => 'blockID={id}', 'module' => 'visual',
     'actions' => array(
           'edit' => true,
+          'edit' => array('module' => 'block'),
           'delete' => array('method' => 'deleteblock', 'confirm' => '确定从布局中移除 【{title}】？', 'success' => '【{title}】已被移除。', 'params' => 'region={region}&blockID={id}'),
           'move' => array('method' => 'moveblock','success' => '排序已保存', 'params' => 'region={region}'),
           'layout' => array('method' => 'layoutblock', 'width' => 600, 'text' => '更改布局', 'icon' => 'columns', 'success' => '布局已保存', 'params' => 'region={region}&blockID={id}'),
