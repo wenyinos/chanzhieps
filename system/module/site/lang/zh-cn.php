@@ -51,6 +51,7 @@ $lang->site->setsensitive    = '敏感词设置';
 $lang->site->filterSensitive = '敏感词过滤';
 $lang->site->mobileTemplate  = '移动模板';
 $lang->site->score           = '积分';
+$lang->site->setCounts       = '设置积分规则';
 $lang->site->front           = '网站浏览';
 
 $lang->site->setBasic      = "基本信息设置";

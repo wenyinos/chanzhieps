@@ -51,7 +51,11 @@
         </tr>
         <tr>
           <th><?php echo $lang->site->score;?></th> 
-          <td><?php echo html::radio('score', $lang->site->scoreList, isset($this->config->site->score) ? $this->config->site->score : 'close', "class='checkbox'");?></td><td></td>
+          <td>
+            <?php $class = (isset($this->config->site->score) && $this->config->site->score == 'open') ? '' : 'hide';?>
+            <?php echo html::radio('score', $lang->site->scoreList, isset($this->config->site->score) ? $this->config->site->score : 'close', "class='checkbox'");?>
+            <?php echo html::a($this->createLink('score', 'setCounts'), $lang->site->setCounts, "data-toggle=modal class='setCounts {$class}'");?>
+          </td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->site->name;?></th> 
