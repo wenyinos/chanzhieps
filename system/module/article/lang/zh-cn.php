@@ -66,6 +66,7 @@ $lang->page->edit   = '编辑单页';
 $lang->article->sourceList['original']      = '原创';
 $lang->article->sourceList['copied']        = '转贴';
 $lang->article->sourceList['translational'] = '翻译';
+$lang->article->sourceList['article']       = '转自文章';
 
 $lang->article->statusList['normal'] = '正常';
 $lang->article->statusList['draft']  = '草稿';
@@ -99,4 +100,3 @@ $lang->article->placeholder->link      = '输入链接，可以是站外链接';
 
 $lang->article->noCategory  = '当前没有类目，请先创建。';
 $lang->article->forwardFrom = '转发自';
-$lang->article->self        = '本站';

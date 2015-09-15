@@ -21,6 +21,7 @@ $(document).ready(function()
         else
         {
             $('.setCounts').hide();
+            bootbox.alert(v.closeScoreTip);
         }
     });
 

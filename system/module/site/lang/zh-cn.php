@@ -53,6 +53,7 @@ $lang->site->mobileTemplate  = '移动模板';
 $lang->site->score           = '积分';
 $lang->site->setCounts       = '设置积分规则';
 $lang->site->front           = '网站浏览';
+$lang->site->closeScoreTip   = '禁用积分功能后不再记录积分，会员保持原有积分不变。';
 
 $lang->site->setBasic      = "基本信息设置";
 $lang->site->setLang       = "语言设置";

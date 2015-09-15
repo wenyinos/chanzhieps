@@ -98,7 +98,11 @@ js::set('admin', $this->get->admin);
     </tbody>
     <tfoot>
       <tr>
+        <?php if(isset($this->config->site->score) and $this->config->site->score == 'open'):?>
+        <td colspan='14'>
+        <?php else:?>
         <td colspan='12'>
+        <?php endif;?>
         <?php if($this->get->provider == 'wechat') commonModel::printLink('user', 'pullWechatFans', '', "<i class='icon-refresh '> {$lang->user->pullWechatFans} </i>", "class='btn btn-primary' id='pullBtn'")?>
         <?php $pager->show();?>
         </td>

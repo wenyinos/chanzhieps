@@ -36,6 +36,7 @@ $common->printPositionBar($category, $article, '', $root);
           <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAuthor, $article->author);?>'><i class='icon-user icon-large'></i> <?php echo $article->author; ?></dd>
           <?php if($article->source and $article->source != 'original' and $article->copyURL != ''):?>
           <dt><?php echo $lang->article->lblSource; ?></dt>
+          <?php if($article->source == 'article') $article->copyURL = $this->loadModel('common')->getSysURL() . $this->article->createPreviewLink($article->copyURL);?>
           <dd><?php $article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite); ?></dd>
           <?php endif; ?>
           <dd class='pull-right'>

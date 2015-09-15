@@ -409,24 +409,33 @@ class articleModel extends model
      */
     public function forward2Blog($articleID)
     {
+        if(!commonModel::isAvailable('blog')) return false;
         $blog = $this->dao->select('*')->from(TABLE_ARTICLE)->where('alias')->eq($articleID)->fetch();
         if(!$blog) $blog = $this->dao->select('*')->from(TABLE_ARTICLE)->where('id')->eq($articleID)->fetch();
 
         if(!$blog) return false;
         
-        $blog->source     = 'copied';
+        $blog->source     = 'article';
         $blog->type       = 'blog';
         $blog->categories = $this->post->categories;
-        $blog->copySite   = $this->lang->article->self;
-        $blog->copyURL    = $this->loadModel('common')->getSysURL() . $this->createPreviewLink($articleID); 
+        $blog->copyURL    = $articleID; 
         $blog->author     = $this->app->user->realname;
         $blog->addedDate  = $this->post->addedDate ? $this->post->addedDate : helper::now();
         $blog->editedDate = $blog->addedDate;
+        $blog->views      = 0;
+        $blog->sticky     = 0;
 
-        unset($blog->id);
-
-        $this->dao->insert(TABLE_ARTICLE)->data($blog, $skip='categories')->autoCheck()->batchCheck($this->config->article->require->forward2Blog, 'notempty')->exec();
+        $this->dao->insert(TABLE_ARTICLE)->data($blog, $skip='id,categories')->autoCheck()->batchCheck($this->config->article->require->forward2Blog, 'notempty')->exec();
         $blogID = $this->dao->lastInsertID();
+        
+        $files = $this->dao->select('*')->from(TABLE_FILE)->where('objectID')->eq($articleID)->andWhere('objectType')->eq('article')->fetchAll();
+        foreach($files as $file)
+        {
+            $file->objectType = 'blog';
+            $file->objectID   = $blogID;
+            $this->dao->insert(TABLE_FILE)->data($file, $skip='id')->autoCheck()->exec();
+        }
+
         if(dao::isError()) return false;
 
         /* Save blog keywords. */
@@ -446,7 +455,8 @@ class articleModel extends model
      */
     public function forward2Forum($articleID)
     {
-        $article = $this->getByID($articleID);
+        if(!commonModel::isAvailable('forum')) return false;
+        $article  = $this->getByID($articleID);
         $category = current($article->categories);
         $address  = $this->loadModel('common')->getSysURL() . $this->createPreviewLink($articleID);
 
@@ -455,21 +465,29 @@ class articleModel extends model
 
         if(!$thread) return false;
         
-        $thread->board      = $this->post->board;
-        $thread->author     = $this->app->user->realname;
-        $thread->content   .= "<br><br><div style='text-align: right'>" . $this->lang->article->forwardFrom . ' ' . html::a($address, $address) . '</div>';
-        $thread->addedDate  = $this->post->addedDate ? $this->post->addedDate : helper::now();
-        $thread->editedDate = $thread->addedDate;
+        $thread->board       = $this->post->board;
+        $thread->author      = $this->app->user->realname;
+        $thread->content    .= "<br><br><div style='text-align: right'>" . $this->lang->article->forwardFrom . ' ' . html::a($address, $address) . '</div>';
+        $thread->addedDate   = $this->post->addedDate ? $this->post->addedDate : helper::now();
+        $thread->editedDate  = $thread->addedDate;
         $thread->repliedDate = $thread->addedDate;
 
         $this->dao->insert(TABLE_THREAD)->data($thread)->autoCheck()->exec();
             
         $threadID = $this->dao->lastInsertID();
-        $thread   = $this->getByID($threadID);
-        if(!dao::isError())
+        $thread   = $this->loadModel('thread')->getByID($threadID);
+        if(dao::isError()) return false;
+
+        $files = $this->dao->select('*')->from(TABLE_FILE)->where('objectID')->eq($articleID)->andWhere('objectType')->eq('article')->fetchAll();
+        foreach($files as $file)
         {
-            $this->loadModel('search')->save('thread', $thread);
+            $file->objectType = 'thread';
+            $file->objectID   = $threadID;
+            $this->dao->insert(TABLE_FILE)->data($file, $skip='id')->autoCheck()->exec();
         }
+        if(dao::isError()) return false;
+
+        $this->loadModel('search')->save('thread', $thread);
 
         return !dao::isError(); 
     }

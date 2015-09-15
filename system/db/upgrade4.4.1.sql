@@ -1,3 +1,7 @@
+RENAME TABLE `eps_orderProduct` TO `eps_order_product`;
+
+ALTER TABLE `eps_article` MODIFY COLUMN `source` enum('original','copied','translational','article') NOT NULL; 
+
 CREATE TABLE IF NOT EXISTS `eps_score` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `account` varchar(30) NOT NULL,
