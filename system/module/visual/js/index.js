@@ -275,6 +275,7 @@
         $$('.blocks').each(function()
         {
             var $blocksHolder = $$(this);
+            var withGrid = $blocksHolder.hasClass('row');
 
             $blocksHolder.find('.block, .panel-block').each(function()
             {
@@ -284,14 +285,13 @@
                 initVisualArea($ve);
                 if(withGrid)
                 {
-                    $ve.find('.ve[data-ve="block"] > .ve-cover').append('<div class="ve-resize-handler left"><i class="icon icon-resize-horizontal"></i></div><div class="ve-resize-handler right"><i class="icon icon-resize-horizontal"></i></div>');
+                    $ve.children('.ve-cover').append('<div class="ve-resize-handler left"><i class="icon icon-resize-horizontal"></i></div><div class="ve-resize-handler right"><i class="icon icon-resize-horizontal"></i></div>');
                 }
             });
 
             if($blocksHolder.data('veInit')) return;
 
             var region = $blocksHolder.data('region');
-            var withGrid = $blocksHolder.hasClass('row');
             var page = $blocksHolder.data('page') || (region ? region.substring(0, region.indexOf('-')) : null);
             var location = $blocksHolder.data('location') || (region ? region.substring(page.length + 1) : null);
 
