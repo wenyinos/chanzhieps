@@ -109,14 +109,6 @@ class scoreModel extends model
         if($type == 'out' or $type == 'punish') $after = $before - $count;
         if($after < 0 and $type == 'out' and !$force) return false;
 
-        /* Update user table. */
-        $data = new stdclass();
-        $data->score = $after;
-        $data->rank  = $rank;
-        if($type == 'in')     $data->rank = $rank + $count;
-        if($type == 'punish') $data->rank = $rank - $count;
-        $this->dao->update(TABLE_USER)->data($data)->where('account')->eq($account)->exec();
-
         /* Update score table. */
         $data = new stdclass();
         $data->method     = strtolower($method);
@@ -130,8 +122,21 @@ class scoreModel extends model
         $data->objectID   = $objectID;
         $data->actor      = $this->app->user->account == 'guest' ? $account : $this->app->user->account;
         $data->time       = date('Y-m-d H:i:s');
-        $this->dao->insert(TABLE_SCORE)->data($data)->exec();
-        return !dao::isError();
+        $this->dao->insert(TABLE_SCORE)->data($data)->check('count', 'notempty')->exec();
+
+        if(!dao::isError())
+        {
+            /* Update user table. */
+            $data = new stdclass();
+            $data->score = $after;
+            $data->rank  = $rank;
+            if($type == 'in')     $data->rank = $rank + $count;
+            if($type == 'punish') $data->rank = $rank - $count;
+            $this->dao->update(TABLE_USER)->data($data)->where('account')->eq($account)->exec();
+
+            return !dao::isError();
+        }
+        return false;
     }
 
     /**

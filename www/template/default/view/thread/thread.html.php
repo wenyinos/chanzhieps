@@ -59,15 +59,8 @@
             </ul>
           </span>
           <?php if(isset($this->config->site->score) and $this->config->site->score == 'open'):?>
-          <span class='dropdown dropup'>
-            <a data-toggle='dropdown' href='###'><i class='icon-sun'></i> <?php echo $lang->thread->score;?> <span class='caret'></span></a>
-            <ul class='dropdown-menu' role='menu' aria-labelledby='dLabel'>
-              <?php $account = helper::safe64Encode($thread->author);?>
-              <?php foreach($lang->thread->scores as $score => $text):?>
-              <li><?php echo html::a(inlink('addScore', "account={$account}&objectType=thread&objectID={$thread->id}&score={$score}"), $text, "class='jsoner'");?></li>
-              <?php endforeach;?>
-            </ul>
-          </span>
+          <?php $account = helper::safe64Encode($thread->author);?>
+          <?php echo html::a(inlink('addScore', "account={$account}&objectType=thread&objectID={$thread->id}"), $lang->thread->score, "data-toggle=modal");?>
           <?php endif;?>
           <?php
           if($thread->hidden)

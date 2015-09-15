@@ -47,7 +47,7 @@ $lang->score->methods['valuereply']  = '奖励回复';
 $lang->score->methods['delthread']   = '删主题';
 $lang->score->methods['delreply']    = '删回复';
 $lang->score->methods['award']       = '奖励积分';
-$lang->score->methods['punish']      = '惩罚积分';
+$lang->score->methods['punish']      = '扣除积分';
 
 $lang->score->methods['buyscore']  = '购买积分';
 $lang->score->methods['statement'] = '积分结算';

@@ -235,9 +235,6 @@ class userModel extends model
                 $this->app->user->account = $this->post->account;
                 $this->loadModel('score')->earn('register', '', '', 'REGISTER');
 
-                /* If the user is from zentao system, award more score. */
-                if($this->post->sn) $this->score->earn('bind', '', '', 'BIND');
-
                 if($viewType == 'json') die('success');
             }
             else
