@@ -97,6 +97,7 @@ $config->rights->member['thread']['stick']        = 'stick';
 $config->rights->member['thread']['delete']       = 'delete';
 $config->rights->member['thread']['transfer']     = 'transfer';
 $config->rights->member['thread']['deletefile']   = 'deletefile';
+$config->rights->member['thread']['addscore']     = 'addscore';
 
 $config->rights->member['reply']['post']       = 'post';
 $config->rights->member['reply']['eidt']       = 'edit';
@@ -130,8 +131,6 @@ $config->rights->member['address']['create'] = 'create';
 $config->rights->member['address']['edit']   = 'edit';
 $config->rights->member['address']['delete'] = 'delete';
 $config->rights->member['address']['browse'] = 'browse';
-
-$config->rights->member['visual']['logo'] = 'logo';
 
 $config->rights->member['score']['buyscore'] = 'buyscore';
 $config->rights->member['score']['payorder'] = 'payorder';

@@ -271,7 +271,7 @@ table.captcha td label {padding: 0;}
 .wechat-block .name {font-size: 12px; margin-bottom: 6px; font-weight: bold;}
 
 /* Popovers */
-.popover {max-width: 900px}
+.popover {max-width: 900px; z-index: 1050}
 
 .popover-success {background-color: #47A447; border-color: #47A447; color: #fff;}
 .popover-success.right .arrow,.popover-success.right .arrow:after {border-right-color: #47A447;}

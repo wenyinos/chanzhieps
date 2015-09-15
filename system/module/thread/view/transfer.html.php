@@ -1,11 +1,11 @@
-<?php 
+<?php
 /**
  * The transfer view of thread module of ZenTaoMS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Xiying Guan <guanxiying@xirangit.com>
- * @package     thread 
+ * @package     thread
  * @version     $Id$
  * @link        http://www.zentao.net
  */
@@ -27,4 +27,4 @@
     </div>
   </div>
 </form>
-<?php include '../../common/footer.modal.html.php';?>
+<?php include '../../common/view/footer.modal.html.php';?>

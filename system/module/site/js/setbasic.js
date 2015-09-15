@@ -12,6 +12,19 @@ $(document).ready(function()
         }
     });
 
+    $('input[name=score]').click(function()
+    {
+        if($('#score1').prop('checked'))
+        {
+            $('.setCounts').show();
+        }
+        else
+        {
+            $('.setCounts').hide();
+            bootbox.alert(v.closeScoreTip);
+        }
+    });
+
     /* Change set lang imput. */
     $('input[type=checkbox]').change(function()
     {

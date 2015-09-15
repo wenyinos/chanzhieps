@@ -5,6 +5,9 @@
       <?php if($thread->readonly) echo "<span class='label'><i class='icon-lock'></i> " . $lang->thread->readonly . "</span> &nbsp;"; ?>
     </div>
     <strong><?php echo $thread->title; ?></strong>
+    <?php if(isset($this->config->site->score) and $this->config->site->score == 'open' and !empty($thread->scoreSum)):?>
+    <?php echo sprintf($lang->thread->scoreSum, $thread->scoreSum);?>
+    <?php endif;?>
     <div class='text-muted'><?php echo $thread->addedDate;?></div>
   </div>
   <table class='table'>
@@ -45,7 +48,7 @@
             {
                 if($thread->stick != $stick)
                 {
-                    echo '<li>' . html::a(inlink('stick', "thread=$thread->id&stick=$stick"), $label, "class='jsoner'") . '</li>';
+                    echo '<li>' . html::a(inlink('stick', "thread=$thread->id&stick=$stick"), $label, "class='stickJsoner'") . '</li>';
                 }
                 else
                 {
@@ -55,6 +58,10 @@
             ?>
             </ul>
           </span>
+          <?php if(isset($this->config->site->score) and $this->config->site->score == 'open'):?>
+          <?php $account = helper::safe64Encode($thread->author);?>
+          <?php echo html::a(inlink('addScore', "account={$account}&objectType=thread&objectID={$thread->id}"), $lang->thread->score, "data-toggle=modal");?>
+          <?php endif;?>
           <?php
           if($thread->hidden)
           {

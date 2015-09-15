@@ -38,6 +38,10 @@ js::set('admin', $this->get->admin);
         <th><?php echo $lang->user->id;?></th>
         <th><?php echo $lang->user->realname;?></th>
         <th><?php echo $lang->user->account;?></th>
+        <?php if(isset($this->config->site->score) and $this->config->site->score == 'open'):?>
+        <th><?php echo $lang->user->score;?></th>
+        <th><?php echo $lang->user->rank;?></th>
+        <?php endif;?>
         <th><?php echo $lang->user->gender;?></th>
         <th class='text-left'><?php echo $lang->user->company;?></th>
         <th><?php echo $lang->user->join;?></th>
@@ -55,6 +59,10 @@ js::set('admin', $this->get->admin);
       <td><?php echo $user->id;?></td>
       <td><?php echo $user->realname;?></td>
       <td><?php echo $user->account;?></td>
+      <?php if(isset($this->config->site->score) and $this->config->site->score == 'open'):?>
+      <td><?php echo $user->score;?></td>
+      <td><?php echo $user->rank;?></td>
+      <?php endif;?>
       <td><?php $gender = $user->gender; echo $lang->user->genderList->$gender;?></td>
       <td><?php echo $user->company;?></td>
       <td><?php echo substr($user->join, 0, 10);?></td>
@@ -69,6 +77,10 @@ js::set('admin', $this->get->admin);
       <td class='operate'>
         <?php //if($user->provider == 'wechat') echo html::a($this->createLink('wechat', 'message', "from={$user->openID}"), $lang->user->messages);?>
         <?php commonModel::printLink('user', 'edit', "account=$user->account", $lang->edit); ?>
+        <?php if(isset($this->config->site->score) and $this->config->site->score == 'open'):?>
+        <?php commonModel::printLink('user', 'addScore', "account=$user->account", $lang->user->addScore, "data-toggle=modal"); ?>
+        <?php commonModel::printLink('user', 'reduceScore', "account=$user->account", $lang->user->reduceScore, "data-toggle=modal"); ?>
+        <?php endif;?>
         <?php if($user->locked <= helper::now() and $forbidPriv):?>
         <span class="dropdown">
           <a href='###' class="dropdown-toggle" data-toggle="dropdown"><?php echo $lang->user->forbid?> <span class="caret"></span></a>

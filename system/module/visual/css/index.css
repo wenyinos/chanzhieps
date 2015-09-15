@@ -4,3 +4,12 @@
 #visualExitBtn {position: absolute; right: 15px; top: 9px}
 
 #visualPageWrapper {display: block; position: fixed; top: 40px; left: 0; right: 0; bottom: 0;}
+
+.nav-main {margin-left: -10px}
+
+#menu {margin: 0 auto; border-bottom: none; height: auto;}
+#menu .nav > li {padding: 0}
+#menu .nav > li > a {padding: 10px}
+#menu > .pull-right {margin-right: 0;}
+#menu .nav > li.nav-item-primary, #menu .nav > li.divider.angle {background-color: #fafafa;}
+#menu .nav > li.nav-item-primary + li.divider.angle:after, #menu .nav > li.divider.angle:after {border-left-color: #fafafa}

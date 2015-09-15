@@ -136,7 +136,10 @@ $.extend(
             }
         };
 
-        form.data('ajaxFormOptions', options);
+        var storageName = 'ajaxFormOptions';
+        if(!$[storageName]) $[storageName] = {};
+        $[storageName][formID] = options;
+        form.data(storageName, options);
 
         if(!form.data('ajaxFormSubmitEvent'))
         {
@@ -144,7 +147,8 @@ $.extend(
             $(document).on('submit.ajaxform', formID, function()
             {
                 $.disableForm(formID);
-                $(this).ajaxSubmit($(this).data('ajaxFormOptions'));
+                var $this = $(this);
+                $this.ajaxSubmit($this.data('ajaxFormOptions') || $.ajaxFormOptions[formID]);
                 return false;    // Prevent the submitting event of the browser.
             });
             form.data('ajaxFormSubmitEvent', true);

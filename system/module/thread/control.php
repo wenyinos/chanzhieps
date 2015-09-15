@@ -323,8 +323,9 @@ class thread extends control
      * @access public
      * @return void
      */
-    public function addScore($account, $objectType, $objectID, $score)
+    public function addScore($account, $objectType, $objectID)
     {
+        $this->loadModel('score');
         if($objectType == 'thread') $board = $this->dao->select('board')->from(TABLE_THREAD)->where('id')->eq($objectID)->fetch('board');
         if($objectType == 'reply')  $board = $this->dao->select('t1.board')->from(TABLE_THREAD)->alias('t1')
             ->leftJoin(TABLE_REPLY)->alias('t2')->on('t1.id=t2.thread')
@@ -332,13 +333,19 @@ class thread extends control
             ->fetch('board');
         if(!isset($board) or !$this->thread->canManage($board)) die();
 
-        $max   = max(array_keys($this->lang->thread->scores));
-        $score = (int)$score;
-        if($score > $max) $score = $max;
+        if($_POST)
+        {
+            $account = helper::safe64Decode($account);
+            if($objectType == 'thread') $result = $this->score->award($account, 'valueThread', $this->post->count, $objectType, $objectID, $this->post->note);
+            if($objectType == 'reply')  $result = $this->score->award($account, 'valueReply',  $this->post->count, $objectType, $objectID, $this->post->note);
+            if($result) $this->send(array('result' => 'success', 'locate' => $this->server->http_referer));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
 
-        $account = helper::safe64Decode($account);
-        if($objectType == 'thread') $this->loadModel('score')->award($account, 'valueThread', $score, $objectType, $objectID);
-        if($objectType == 'reply')  $this->loadModel('score')->award($account, 'valueReply',  $score, $objectType, $objectID);
-        $this->locate($this->server->http_referer . ($objectType == 'reply' ? '#' . $objectID : ''));
+        $this->view->title      = $this->lang->thread->score;
+        $this->view->account    = $account;
+        $this->view->objectType = $objectType;
+        $this->view->objectID   = $objectID;
+        $this->display();
     }
 }
