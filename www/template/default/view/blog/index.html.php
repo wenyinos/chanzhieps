@@ -82,7 +82,12 @@ if(!empty($category)) echo $common->printPositionBar($category, '', '', $root);
   </div>
   <div class='row blocks' data-region='blog_index-bottom'><?php $this->block->printRegion($layouts, 'blog_index', 'bottom', true);?></div>
   </div>
-  <div class='col-md-3 col-side'><side class='page-side blocks'><div class='panel-pure panel'><?php echo html::a(helper::createLink('rss', 'index', '?type=blog', '', 'xml'), "<i class='icon-rss text-warning'></i> " . $lang->blog->subscribe, "target='_blank' class='btn btn-lg btn-block'"); ?></div><?php $this->block->printRegion($layouts, 'blog_index', 'side');?></side></div>
+  <div class='col-md-3 col-side'>
+    <side class='page-side'>
+      <div class='panel-pure panel'><?php echo html::a(helper::createLink('rss', 'index', '?type=blog', '', 'xml'), "<i class='icon-rss text-warning'></i> " . $lang->blog->subscribe, "target='_blank' class='btn btn-lg btn-block'"); ?></div>
+      <div class='blocks' data-region='blog_index-side'><?php $this->block->printRegion($layouts, 'blog_index', 'side');?></div>
+    </side>
+  </div>
 </div>
 <div class='row'><?php $this->block->printRegion($layouts, 'blog_index', 'bottomBanner', true);?></div>
 <?php include TPL_ROOT . 'blog/footer.html.php';?>
