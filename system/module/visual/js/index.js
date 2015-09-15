@@ -40,7 +40,8 @@
     var createActionLink = function(setting, action, options)
     {
         if(!$.isPlainObject(action)) action = setting.actions[action];
-        return createLink(action.module || setting.module || setting.code, action.method || setting.method || action.name, (action.params || setting.params || '').format(options));
+        var link = createLink(action.module || setting.module || setting.code, action.method || setting.method || action.name, (action.params || setting.params || '').format(options));
+        console.log(setting, action, options, link);
     }
 
     var openModal = function(url, options)
@@ -607,6 +608,29 @@
     });
 
     $('#visualReloadBtn').on('click', reloadPage);
+
+    $('#customThemeBtn').on('click', function()
+    {
+        var $this = $(this);
+        var url = $(this).attr('href');
+        openModal(url,
+        {
+            width : 1200,
+            icon  : 'cog',
+            title : $this.attr('title') || $this.attr('data-original-title'),
+            loaded: function(e)
+            {
+                var modal$ = e.jQuery;
+                modal$.setAjaxForm('.ve-form', function(response)
+                {
+                    $.closeModal();
+                    reloadPage();
+                });
+                if(DEBUG) console.log('Modal loaded:', url);
+            }
+        });
+        return false;
+    });
 
     // extend helper methods
     $.updateVisualArea = updateVisualArea;

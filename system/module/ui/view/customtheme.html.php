@@ -10,7 +10,7 @@
   </div>
 </div>
 <?php else:?>
-<form method='post' action='<?php echo inlink('customtheme', "theme={$theme}&template={$template}");?>' id='customThemeForm' class='form' data-theme='<?php echo $theme?>' data-template='<?php echo $template?>'>
+<form method='post' action='<?php echo inlink('customtheme', "theme={$theme}&template={$template}");?>' id='customThemeForm' class='form ve-form' data-theme='<?php echo $theme?>' data-template='<?php echo $template?>'>
   <div class='panel' id='mainPanel'>
     <div class='panel-heading'>
       <ul class='nav nav-tabs'>

@@ -94,6 +94,7 @@ js::set('debug', $config->debug);
           </div>
         </div>
       </li>
+      <li><?php commonModel::printLink('ui', 'customtheme', '', '<i class="icon-cog"></i>', "id='customThemeBtn' data-toggle='tooltip' data-placement='bottom' title='{$lang->visual->customTheme}'") ?></li>
       <li class="divider angle"></li>
       <li><a href='###' id='visualPageName' target='_blank' data-toggle='tooltip' data-placement='bottom' title='<?php echo $lang->visual->openInNewWindow?>'><span class='page-name'><i class='icon icon-spinner icon-spin'></i></span></a></li>
       <li><a href='###' id='visualReloadBtn' data-toggle='tooltip' data-placement='bottom' title='<?php echo $lang->visual->reload?>'><i class='icon-repeat'></i></a></li>

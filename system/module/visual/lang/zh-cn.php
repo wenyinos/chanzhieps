@@ -16,6 +16,7 @@ $lang->visual->info              = "编辑模式";
 $lang->visual->preview           = "预览";
 $lang->visual->exit              = "退出";
 $lang->visual->exitVisualEdit    = "关闭编辑模式";
+$lang->visual->customTheme       = "自定义主题";
 $lang->visual->admin             = "后台";
 $lang->visual->reload            = '刷新';
 $lang->visual->openInNewWindow   = '在新窗口中打开当前编辑页面';
@@ -44,7 +45,6 @@ $lang->visual->config->links = array('name' => "友情链接", 'width' => 900, '
 $lang->visual->config->navbar   = array('name' => "导航", 'width' => 1200, 'params' => 'type={type}', 'module' => 'nav', 'actions' => array('edit' => array('method' => 'admin')));
 $lang->visual->config->block    = array('name' => "区块", 'width' => 1200, 'params' => 'blockID={id}', 'module' => 'visual',
     'actions' => array(
-          'edit' => true,
           'edit' => array('module' => 'block'),
           'delete' => array('method' => 'deleteblock', 'confirm' => '确定从布局中移除 【{title}】？', 'success' => '【{title}】已被移除。', 'params' => 'region={region}&blockID={id}'),
           'move' => array('method' => 'moveblock','success' => '排序已保存', 'params' => 'region={region}'),
