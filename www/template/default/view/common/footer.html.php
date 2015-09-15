@@ -49,5 +49,6 @@ if($extHookFiles) foreach($extHookFiles as $extHookFile) include $extHookFile;
 <?php if($qrcode) include dirname(__FILE__) . DS . 'qrcode.html.php';?>
 <div class='hide'><?php if(RUN_MODE == 'front') $this->loadModel('block')->printRegion($layouts, 'all', 'footer');?></div>
 <?php if(commonModel::isAvailable('order')) include TPL_ROOT . 'common/cart.html.php';?>
+<?php include TPL_ROOT . 'common/log.html.php';?>
 </body>
 </html>

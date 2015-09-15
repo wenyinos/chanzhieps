@@ -82,6 +82,8 @@ $config->rights->guest['cart']['count']         = 'count';
 $config->rights->guest['order']['confirm']      = 'confirm';
 $config->rights->guest['order']['processorder'] = 'processorder';
 
+$config->rights->guest['log']['record'] = 'record';
+
 $config->rights->guest['score']['rankinglist']  = 'rankinglist';
 $config->rights->guest['score']['noscore']      = 'noscore';
 $config->rights->guest['score']['processorder'] = 'processorder';
