@@ -46,15 +46,8 @@
     <?php if($this->app->user->account != 'guest'):?>
     <span class="thread-more-actions">
       <?php if(isset($this->config->site->score) and $this->config->site->score == 'open' and $this->thread->canManage($board->id, $reply->author)):?>
-      <span class='dropdown dropup'>
-        <a data-toggle='dropdown' href='###'><i class='icon-sun'></i> <?php echo $lang->thread->score;?> <span class='caret'></span></a>
-        <ul class='dropdown-menu' role='menu' aria-labelledby='dLabel'>
-          <?php $account = helper::safe64Encode($reply->author);?>
-          <?php foreach($lang->thread->scores as $score => $text):?>
-          <li><?php echo html::a(inlink('addScore', "account={$account}&objectType=reply&objectID={$reply->id}&score={$score}"), $text, "class='jsoner'");?></li>
-          <?php endforeach;?>
-        </ul>
-      </span>
+      <?php $account = helper::safe64Encode($reply->author);?>
+      <?php echo html::a(inlink('addScore', "account={$account}&objectType=reply&objectID={$reply->id}"), $lang->thread->score, "data-toggle=modal");?>
       <?php endif;?>
       <?php
       if($this->thread->canManage($board->id)) echo html::a($this->createLink('reply', 'delete', "replyID=$reply->id"), '<i class="icon-trash"></i> ' . $lang->delete, "class='deleter'");

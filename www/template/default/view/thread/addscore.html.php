@@ -1,17 +1,17 @@
 <?php
 /**
- * The reduce score view file of user module of chanzhiEPS.
+ * The award score view file of thread module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Tingting Dai <daitingting@xirangit.com>
- * @package     User
+ * @package     Thread
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
 ?>
-<?php include '../../common/view/header.modal.html.php';?>
-<form method='post' action='<?php echo inlink('reduceScore', "account=$account");?>' id='ajaxForm' class='form'>
+<?php include TPL_ROOT . 'common/header.modal.html.php';?>
+<form method='post' action='<?php echo inlink('addScore', "account=$account&objectType=$objectType&objectID=$objectID");?>' id='addScoreForm' class='form'>
   <table class='table table-form borderless'>
     <tr>
       <th class="w-100px"><?php echo $lang->score->count;?></th>
@@ -24,4 +24,4 @@
     <tr><td></td><td><?php echo html::submitButton();?></td></tr>
   </table>
 </form>
-<?php include '../../common/view/footer.modal.html.php';?>
+<?php include TPL_ROOT . 'common/footer.modal.html.php';?>
