@@ -139,7 +139,7 @@ class navModel extends model
 
         $entry = '<i class="icon-folder-open-alt shut"></i><i class="icon icon-circle text-muted"></i>';
         if(isset($nav->children) && !empty($nav->children)) $entry = '<i class="icon-folder-close shut"></i>';
-        if($this->config->site->type == 'blog')
+        if(zget($this->config->site, 'type') == 'blog')
         {
             $this->lang->nav->system->blog = $this->lang->home;
             unset($this->lang->nav->types['article']);
@@ -155,7 +155,7 @@ class navModel extends model
         /* nav type select tag. */
         $entry .= html::select("nav[{$grade}][type][]", $this->lang->nav->types, $nav->type, "class='navType form-control' grade='{$grade}'");
 
-        if($this->config->site->type != 'blog')
+        if(zget($this->config->site, 'type') == 'blog')
         {
             /* artcle and system select tag. */
             $entry .= html::select("nav[{$grade}][article][]", $articleTree, isset($nav->article) ? $nav->article : '', "class='navSelector form-control {$articleHidden}'");
