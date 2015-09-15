@@ -43,7 +43,7 @@ $lang->visual->config->links = array('name' => "友情链接", 'width' => 900, '
 $lang->visual->config->navbar   = array('name' => "导航", 'width' => 1200, 'params' => 'type={type}', 'module' => 'nav', 'actions' => array('edit' => array('method' => 'admin')));
 $lang->visual->config->block    = array('name' => "区块", 'width' => 1200, 'params' => 'blockID={id}', 'module' => 'visual',
     'actions' => array(
-          'edit' => array('module' => 'block'),
+          'edit' => true,
           'delete' => array('method' => 'deleteblock', 'confirm' => '确定从布局中移除 【{title}】？', 'success' => '【{title}】已被移除。', 'params' => 'region={region}&blockID={id}'),
           'move' => array('method' => 'moveblock','success' => '排序已保存', 'params' => 'region={region}'),
           'layout' => array('method' => 'layoutblock', 'width' => 600, 'text' => '更改布局', 'icon' => 'columns', 'success' => '布局已保存', 'params' => 'region={region}&blockID={id}'),
@@ -52,7 +52,7 @@ $lang->visual->config->block    = array('name' => "区块", 'width' => 1200, 'pa
 $lang->visual->config->article  = array('params' => 'articleID={id}', 'name' => '文章',
     'actions' => array('delete' => true, 'edit' => array('params' => 'articleID={id}&type=article')));
 $lang->visual->config->articles = array('name' => '文章列表', 'module' => 'article', 'hidden' => true,
-    'actions' => array('edit' => false, 'add' => array('text' => '发布新文章', 'icon' => 'plus', 'method' => 'create', "params" => 'type=article')));
+    'actions' => array('edit' => false, 'add' => array('text' => '发布新文章', 'icon' => 'plus', 'method' => 'create', "params" => 'type=article', 'onDismiss' => 'reload')));
 $lang->visual->config->page  = array('params' => 'articleID={id}', 'module' => 'article', 'name' => '单页',
     'actions' => array('delete' => true, 'edit' => array('params' => 'pageID={id}&type=page')));
 $lang->visual->config->pageList = array('name' => '单页列表', 'module' => 'page', 'hidden' => true,
@@ -64,10 +64,11 @@ $lang->visual->config->blogList = array('name' => '博客列表', 'module' => 'a
 $lang->visual->config->product  = array('params' => 'productID={id}', 'name' => '产品',
     'actions' => array('delete' => true, 'edit' => 'true'));
 $lang->visual->config->products = array('name' => '产品列表', 'module' => 'product', 'hidden' => true,
-    'actions' => array('edit' => false, 'add' => array('text' => '发布新产品', 'icon' => 'plus', 'method' => 'create', "params" => 'category=0')));
+    'actions' => array('edit' => false, 'add' => array('text' => '发布新产品', 'icon' => 'plus', 'method' => 'create', "params" => 'category=0', 'onDismiss' => 'reload')));
 $lang->visual->config->books    = array('name' => '手册列表', 'module' => 'book', 'hidden' => true,
-    'actions' => array('edit' => false, 'add' => array('text' => '添加手册', 'icon' => 'plus', 'method' => 'create')));
-$lang->visual->config->bookCatalog = array('name' => "手册目录", 'width' => 1200, 'params' => 'bookID={id}', 'module' => 'book', 'actions' => array('edit' => array('method' => 'admin', 'onDismiss' => 'update')));
+    'actions' => array('edit' => false, 'add' => array('text' => '添加手册', 'icon' => 'plus', 'method' => 'create', 'onDismiss' => 'reload')));
+$lang->visual->config->bookCatalog = array('name' => "手册目录", 'width' => 1200, 'params' => 'bookID={id}', 'module' => 'book',
+    'actions' => array('edit' => array('method' => 'admin', 'onDismiss' => 'update')));
 $lang->visual->config->book = array('name' => "手册", 'width' => 1200, 'params' => 'nodeID={id}',
     'actions' => array('edit' => true));
 $lang->visual->config->boards = array('name' => '论坛板块', 'hidden' => true,
