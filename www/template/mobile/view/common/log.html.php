@@ -1,7 +1,10 @@
 <?php 
 $referer     = $this->server->http_referer;
-$refererInfo = parse_url($referer);
-if($this->server->http_host == $refererInfo['host']) $referer = '';
+if(!empty($referer))
+{
+    $refererInfo = parse_url($referer);
+    if($this->server->http_host == $refererInfo['host']) $referer = '';
+}
 ?>
 <script>
 var referer         = "<?php echo urlencode($referer);?>";
