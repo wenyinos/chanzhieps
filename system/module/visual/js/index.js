@@ -292,8 +292,8 @@
 
             var region = $blocksHolder.data('region');
             var withGrid = $blocksHolder.hasClass('row');
-            var page = $blocksHolder.data('page') || region.substring(0, region.indexOf('-'));
-            var location = $blocksHolder.data('location') || region.substring(page.length + 1);
+            var page = $blocksHolder.data('page') || (region ? region.substring(0, region.indexOf('-')) : null);
+            var location = $blocksHolder.data('location') || (region ? region.substring(page.length + 1) : null);
 
             if(!region && (!page || !location))
             {
@@ -522,7 +522,10 @@
         initVisualAreas();
 
         // bind event
-        $$('body').on('click', '.ve-name', openCommonActionModal)
+        $$('body').on('click', function()
+        {
+            $(document).trigger('click.zui.dropdown.data-api');
+        }).on('click', '.ve-name', openCommonActionModal)
         .on('click', '.ve-action', function(e)
         {
             var $action = $$(this);
@@ -579,7 +582,7 @@
                 var url = createLink('visual', 'index', 'referer=' + visualPageUrl);
                 window.history.pushState({}, title, url);
 
-                $('#visualPageName').text((title && title.indexOf(' ') > -1) ? title.split(' ')[0] : title).attr('href', visualPageUrl);
+                $('#visualPageName').html('<i class="icon icon-external-link-sign"></i>' + ((title && title.indexOf(' ') > -1) ? title.split(' ')[0] : title)).attr('href', visualPageUrl);
             }
 
             $$ = window.frames['visualPage'].$;
@@ -612,5 +615,5 @@
         $('#veModal').find('.modal-title').html(title);
     };
 
-    $('[data-toggle=tooltip]').tooltip();
+    $('[data-toggle=tooltip]').tooltip({container: 'body'});
 }(window, jQuery));

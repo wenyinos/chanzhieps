@@ -18,7 +18,6 @@ $lang->visual->exit              = "退出";
 $lang->visual->exitVisualEdit    = "关闭编辑模式";
 $lang->visual->admin             = "后台";
 $lang->visual->reload            = '刷新';
-$lang->visual->openInNewWindow   = '在新窗口中打开当前编辑页面';
 
 $lang->visual->jsLang = new stdclass();
 $lang->visual->jsLang->saved       = $lang->saveSuccess;
