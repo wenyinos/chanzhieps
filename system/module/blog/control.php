@@ -90,6 +90,13 @@ class blog extends control
         $this->view->mobileURL   = helper::createLink('blog', 'view', "articleID=$articleID&currentCategory=$currentCategory", "category=$category->alias&name=$article->alias", 'mhtml');
         $this->view->desktopURL  = helper::createLink('blog', 'view', "articleID=$articleID&currentCategory=$currentCategory", "category=$category->alias&name=$article->alias", 'html');
 
+        if($article->source == 'article')
+        {
+            $copyArticle = $this->article->getByID($article->copyURL);
+            $copyArticleCategory = current(array_slice($copyArticle->categories, 0, 1));
+            $this->view->sourceURL = helper::createLink('article', 'view', "articleID=$copyArticle->id&categoryID=$copyArticleCategory->id", "category=$copyArticleCategory->alias&name=$copyArticle->alias", 'html');
+        }
+
         $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($articleID)->exec(false);
         $this->display();
     }
