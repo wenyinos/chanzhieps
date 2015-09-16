@@ -597,6 +597,7 @@ class fileModel extends model
      * Save file download log.
      *
      * @param int $file
+     * @access public
      * @return bool
      */
     public function log($file)
