@@ -14,7 +14,9 @@ $sysURL    = $common->getSysURL();
   <meta http-equiv="Cache-Control"  content="no-transform">
   <meta name="Generator" content="<?php echo 'chanzhi' . $this->config->version . ' www.chanzhi.org'; ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <?php if(isset($mobileURL)):?>
   <link rel="alternate" media="only screen and (max-width: 640px)" href="<?php echo $sysURL . $mobileURL;?>">
+  <?php endif;?>
   <?php if(isset($sourceURL)):?>
   <link rel="canonical" href="<?php echo $sysURL . $sourceURL;?>" >
   <?php endif;?>

@@ -30,7 +30,12 @@ $navs = $this->loadModel('nav')->getNavs('desktop_blog');
   <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta http-equiv="Cache-Control" content="no-transform" />
+  <?php if(isset($mobileURL)):?>
   <link rel="alternate" media="only screen and (max-width: 640px)" href="<?php echo $sysURL . $mobileURL;?>">
+  <?php endif;?>
+  <?php if(isset($sourceURL)):?>
+  <link rel="canonical" href="<?php echo $sysURL . $sourceURL;?>" >
+  <?php endif;?>
   <?php
   if(!isset($title))    $title    = '';
   if(!empty($title))    $title   .= $lang->minus;
