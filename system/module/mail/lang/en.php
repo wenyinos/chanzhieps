@@ -44,12 +44,12 @@ $lang->mail->needConfigure  = "I can not find the configuration, please configur
 $lang->mail->error          = 'Please input correct email.'; 
 $lang->mail->trySendlater   = 'Can not send email in three minutes.'; 
 
-$lang->mail->verify        = 'Verify identify of admin';
+$lang->mail->verify        = 'For security reason do the following';
 $lang->mail->okFile        = 'File';
 $lang->mail->created       = 'Created';
 $lang->mail->email         = 'Email';
 $lang->mail->captcha       = 'Email captcha';
-$lang->mail->needVerify    = 'Need to verify the identity of Administrator';
+$lang->mail->needVerify    = 'Need to verify your identity of Administrator';
 $lang->mail->verifyFail    = 'Wrong captcha';
 $lang->mail->verifySuccess = 'Right captcha';
 $lang->mail->noConfigure   = "Can't find the configuration";
