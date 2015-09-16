@@ -654,11 +654,11 @@ function setGo2Top()
                 grid = parseInt(grid);
             }
             $col.attr('data-grid', grid)
-                .attr('class', 'col col-' + grid);
+                .attr('class', 'col col-' + grid + (isColRow ? ' col-row' : ''));
 
             var row = rows[rowIndex];
             var colHeight = $child.height();
-            if(isColRow) colHeight -= 14;
+            if(isColRow) colHeight += 14 * (($child.outerHeight() - colHeight > 7) ? 1 : -1);
             if(!row || (row.grid + grid > 12))
             {
                 rowIndex++;

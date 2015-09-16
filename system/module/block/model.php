@@ -555,8 +555,8 @@ class blockModel extends model
         {
             if($withGrid)
             {
-                if($block->grid == 0) echo "<div class='col'><div class='row'>";
-                else echo "<div class='col' data-grid='{$block->grid}'><div class='row'>";
+                if($block->grid == 0) echo "<div class='col col-row'><div class='row' data-id='{$block->id}'>";
+                else echo "<div class='col col-row' data-grid='{$block->grid}'><div class='row' data-id='{$block->id}'>";
             }
 
             foreach($block->children as $child) $this->parseBlockContent($child, $withGrid, $containerHeader, $containerFooter);
