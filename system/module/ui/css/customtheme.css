@@ -1,5 +1,5 @@
 .color-tile {display: block; float: left; width: 30px; height: 30px; border-radius: 4px; border: 1px solid #ccc; margin: 2px 2px 0 0; cursor: pointer; transition: all 0.4s; text-align: center; line-height: 30px;}
-.color-tile[data="transparent"] {background-color: #eee; background-image: linear-gradient(45deg, #999 25%, transparent 25%, transparent 75%, #999 75%, #999), 
+.color-tile[data="transparent"] {background-color: #eee; background-image: linear-gradient(45deg, #999 25%, transparent 25%, transparent 75%, #999 75%, #999),
 linear-gradient(45deg, #999 25%, transparent 25%, transparent 75%, #999 75%, #999); background-size:12px 12px; background-position:0 0, 6px 6px}
 .color-tile:hover, .color-tile.active {border-color: #333; box-shadow: 0 1px 4px rgba(0,0,0,0.5)}
 .colorplate {float: left; width: 100%;}
@@ -48,3 +48,5 @@ linear-gradient(45deg, #999 25%, transparent 25%, transparent 75%, #999 75%, #99
 body.codeeditor-fullscreen .form-footer {position: fixed; left: 20px; bottom: -5px; z-index: 1010}
 body.codeeditor-fullscreen #cssTab .text-tip, body.codeeditor-fullscreen #jsTab .text-tip {position: fixed; left: 120px; bottom: 0; z-index: 1010}
 .editor-wrapper.fullscreen {z-index: 10}
+
+body.body-modal-ve .panel-heading {display: block}
