@@ -71,9 +71,10 @@
 .sortable-sorting .dragging.col-row > .row > .col .ve-cover {border-color: #ddd}
 .sortable-sorting .dragging.col-row > .row > .ve-cover {border: 2px dashed #03b8cf!important;}
 
-.ve-block-actions {margin-bottom: 14px; position: relative; clear: both}
+.ve-block-actions {position: relative; clear: both; margin-bottom: 14px;}
+.ve-block-actions.ve-actions-bar > .nav > li {display: table-cell; padding: 0 5px;}
 .ve-block-actions > .breadcrumb {pointer-events:none; position: absolute; top: 0; left: 0; background-color: rgba(0, 255, 0, .1); color: #38b03f; padding: 2px 5px; transition: top .2s, left .2s; border-radius: 0 0 4px 0}
-.blocks.row .ve-block-actions {margin: 0 7px 14px;}
+.blocks.row .ve-block-actions.ve-actions-bar {margin: 0 2px 14px;}
 .blocks.sortable-sorting .ve-block-actions {display: none}
 .ve-block-actions .btn-ve {padding: 20px 10px}
 
@@ -81,8 +82,8 @@
 .blocks {position: relative;}
 .ve-show-border.ve-show-border-in:before, .blocks.ve-show-border-in:before, .blocks.ve-editing:before, .blocks.sortable-sorting:before {opacity: 1; transform: scale(1)}
 .blocks.row:before {left: 0; right: 0; bottom: 7px;}
-.ve-show-border.ve-show-border-in .ve-block-actions, .blocks.ve-editing .ve-block-actions , .blocks.sortable-sorting .ve-block-actions {position: static}
-.blocks.sortable-sorting .ve-block-actions > .breadcrumb, .ve-show-border.ve-show-border-in .ve-block-actions > .breadcrumb, .blocks.ve-editing .ve-block-actions > .breadcrumb {background-color: #F1A325; color: #FFF; top: -7px; left: -7px;}
+.ve-show-border-in .ve-block-actions, .blocks.ve-editing .ve-block-actions , .blocks.sortable-sorting .ve-block-actions {position: static!important}
+.blocks.sortable-sorting .ve-block-actions > .breadcrumb, .ve-show-border-in .ve-block-actions > .breadcrumb, .blocks.ve-editing .ve-block-actions > .breadcrumb {background-color: #F1A325; color: #FFF; top: -7px; left: -7px;}
 .blocks.row .ve-block-actions > .breadcrumb {left: 0;}
 
 /*.blocks.row > .col.col-row {border: 1px dotted #38b03f; margin: 0 6px; padding: 0; margin-bottom: -14px;}*/

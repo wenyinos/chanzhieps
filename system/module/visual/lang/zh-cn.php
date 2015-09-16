@@ -30,7 +30,8 @@ $lang->visual->jsLang->removeBlock = '移除区块';
 $lang->visual->jsLang->invisible   = '不可见';
 $lang->visual->jsLang->carousel    = '幻灯片';
 $lang->visual->jsLang->operateFail = '操作失败！';
-$lang->visual->jsLang->addBlock    = '新增区块';
+$lang->visual->jsLang->addBlock    = '添加区块';
+$lang->visual->jsLang->addSubRegion= '添加子布局';
 $lang->visual->jsLang->subRegion   = '子布局';
 $lang->visual->jsLang->actions     = array('edit' => '编辑', 'delete' => '删除', 'move' => '移动', 'add' => '添加');
 

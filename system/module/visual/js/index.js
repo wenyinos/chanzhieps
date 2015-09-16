@@ -378,14 +378,18 @@
                   }
             });
 
-            $blocksHolder.append('<div class="ve-block-actions ve-preview-hidden"><button type="button" class="btn btn-block btn-ve ve-action-addblock"><i class="icon icon-plus"></i> ' + lang.addBlock + '</button><ul class="breadcrumb"><li>' + lang.blocks.pages[page] + '</li><li>' + lang.blocks.regions[page][location] + '</li></ul></div>');
+            var actionsBar = '<div class="ve-block-actions ve-actions-bar ve-preview-hidden"><ul class="nav"><li><button type="button" class="btn btn-block btn-ve ve-action-addblock"><i class="icon icon-plus"></i> ' + lang.addBlock + '</button></li>';
+            if(withGrid) actionsBar += '<li style="width: 35%"><button type="button" class="btn btn-block btn-ve ve-action-addSubRegion"><i class="icon icon-plus-sign"></i> ' + lang.addSubRegion + '</button></li>';
+            actionsBar += '</ul><ul class="breadcrumb"><li>' + lang.blocks.pages[page] + '</li><li>' + lang.blocks.regions[page][location] + '</li></ul></div>'
+
+            $blocksHolder.append(actionsBar);
         });
 
         var $$body = $$('body');
         if($$body.data('ve-blocks-events')) return;
         $$body.data('ve-blocks-events', true);
 
-        $$body.on('mouseenter', '.ve-action-addblock', function()
+        $$body.on('mouseenter', '.ve-block-actions', function()
         {
             $$(this).closest('.blocks').addClass('ve-show-border-in');
         }).on('mouseleave', '.ve-show-border-in', function()
