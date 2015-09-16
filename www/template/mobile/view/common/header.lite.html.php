@@ -18,7 +18,11 @@ $sysURL             = $common->getSysURL();
   <meta http-equiv="Cache-Control"  content="no-transform">
   <meta name="Generator" content="<?php echo 'chanzhi' . $this->config->version . ' www.chanzhi.org'; ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <?php if(isset($sourceURL)):?>
+  <link rel="canonical" href="<?php echo $sysURL . $sourceURL;?>" >
+  <?php elseif(isset($desktopURL)):?>
   <link rel="canonical" href="<?php echo $sysURL . $desktopURL;?>" >
+  <?php endif;?>
   <?php if($thisModuleName == 'user' and $thisMethodName == 'deny'):?>
   <meta http-equiv='refresh' content="5;url='<?php echo helper::createLink('index');?>'">
   <?php endif;?>
