@@ -15,6 +15,9 @@ $sysURL    = $common->getSysURL();
   <meta name="Generator" content="<?php echo 'chanzhi' . $this->config->version . ' www.chanzhi.org'; ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="alternate" media="only screen and (max-width: 640px)" href="<?php echo $sysURL . $mobileURL;?>">
+  <?php if(isset($sourceURL)):?>
+  <link rel="canonical" href="<?php echo $sysURL . $sourceURL;?>" >
+  <?php endif;?>
   <?php if($this->app->getModuleName() == 'user' and $this->app->getMethodName() == 'deny'):?>
   <meta http-equiv='refresh' content="5;url='<?php echo helper::createLink('index');?>'">
   <?php endif;?>
