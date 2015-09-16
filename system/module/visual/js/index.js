@@ -36,11 +36,19 @@
         visualPage.contentWindow.location.replace(visualPageUrl);
     };
 
+    var tidyBlocks = function($blocks)
+    {
+        if(typeof $blocks === 'string') $blocks = $$($blocks);
+        else if(!($blocks instanceof $$)) $blocks = $$('.row.blocks .col-row > .row');
+        else $blocks = $blocks.closest('.row');
+        $blocks.trigger('tidy');
+    };
+
     var createActionLink = function(setting, action, options)
     {
         if(!$.isPlainObject(action)) action = setting.actions[action];
         return createLink(action.module || setting.module || setting.code, action.method || setting.method || action.name, (action.params || setting.params || '').format(options));
-    }
+    };
 
     var openModal = function(url, options)
     {
@@ -268,7 +276,7 @@
         {
             if(result === 'success')
             {
-                if(withGrid) $blocksHolder.trigger('tidy');
+                if(withGrid) tidyBlocks($blocksHolder);
             }
         }, orders.join(','));
     };
@@ -432,7 +440,7 @@
                         {
                             $col.attr('data-grid', oldGrid);
                         }
-                        $blocksHolder.trigger('tidy');
+                        tidyBlocks($blocksHolder);
                     }, {grid: $col.attr('data-grid')});
                 }
 
@@ -473,7 +481,7 @@
             $ve.replaceWith($newVe);
             setTimeout(function()
             {
-                if(name === 'block') $newVe.closest('.blocks.row').trigger('tidy');
+                if(name === 'block') tidyBlocks($newVe.closest('.blocks.row'));
                 initVisualAreas();
             }, 100);
         });
@@ -540,7 +548,7 @@
                             if($veParent.is('.col, [class*="col-"]')) $forRemove = $veParent;
                         }
                         $forRemove.hide();
-                        $ve.closest('.blocks.row').trigger('tidy');
+                        tidyBlocks($ve.closest('.blocks.row'));
                         $forRemove.remove();
                     }
                 });
@@ -619,10 +627,7 @@
 
         if(isInPreview) $$('body').addClass('ve-preview-in');
 
-        setTimeout(function()
-        {
-            $$('.row.blocks .col-row > .row').trigger('tidy');
-        }, 500);
+        setTimeout(tidyBlocks, 500);
     };
 
     visualPage.onload = visualPage.onreadystatechange = function()
@@ -650,9 +655,11 @@
     $('#visualPreviewBtn').on('mouseenter', function()
     {
         $$('body').addClass('ve-preview-hover');
+        tidyBlocks();
     }).on('mouseleave', function()
     {
         $$('body').removeClass('ve-preview-hover');
+        tidyBlocks();
     }).on('click', function()
     {
         var $body = $$('body');
@@ -660,6 +667,7 @@
         isInPreview = $body.hasClass('ve-preview-in');
         $(this).toggleClass('text-danger', isInPreview).html(isInPreview ? ("<i class='icon-eye-close'></i> " + lang.exitPreview)
             : ("<i class='icon-eye-open'></i> " + lang.preview));
+        tidyBlocks();
     });
 
     $('#visualReloadBtn').on('click', reloadPage);
