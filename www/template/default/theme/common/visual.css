@@ -77,10 +77,13 @@ body.ve-preview-in .block.ve, body.ve-preview-hover .block.ve {min-height: none;
 .blocks.sortable-sorting .ve-block-actions {display: none}
 .ve-block-actions .btn-ve {padding: 20px 10px}
 
-.blocks:before {display: block; content: ' '; position: absolute; left: -7px; top: -7px; right: -7px; bottom: -7px; border: 2px dashed #F1A325; opacity: 0; transition: opacity .2s, transform .2s; pointer-events:none; z-index: 1999; transform: scale(.98)}
+.blocks:before, .ve-show-border:before, .blocks.row > .col.col-row:before {display: block; content: ' '; position: absolute; left: -7px; top: -7px; right: -7px; bottom: -7px; border: 2px dashed #F1A325; opacity: 0; transition: opacity .2s, transform .2s; pointer-events:none; z-index: 1999; transform: scale(.98)}
 .blocks {position: relative;}
-.blocks.ve-blocks-show-border:before, .blocks.ve-editing:before, .blocks.sortable-sorting:before {opacity: 1; transform: scale(1)}
+.ve-show-border.ve-show-border-in:before, .blocks.ve-show-border-in:before, .blocks.ve-editing:before, .blocks.sortable-sorting:before, .blocks.row > .col.col-row:before {opacity: 1; transform: scale(1)}
 .blocks.row:before {left: 0; right: 0; bottom: 7px;}
-.blocks.ve-blocks-show-border .ve-block-actions, .blocks.ve-editing .ve-block-actions , .blocks.sortable-sorting .ve-block-actions {position: static}
-.blocks.sortable-sorting .ve-block-actions > .breadcrumb, .blocks.ve-blocks-show-border .ve-block-actions > .breadcrumb, .blocks.ve-editing .ve-block-actions > .breadcrumb {background-color: #F1A325; color: #FFF; top: -7px; left: -7px;}
+.ve-show-border.ve-show-border-in .ve-block-actions, .blocks.ve-editing .ve-block-actions , .blocks.sortable-sorting .ve-block-actions {position: static}
+.blocks.sortable-sorting .ve-block-actions > .breadcrumb, .ve-show-border.ve-show-border-in .ve-block-actions > .breadcrumb, .blocks.ve-editing .ve-block-actions > .breadcrumb {background-color: #F1A325; color: #FFF; top: -7px; left: -7px;}
 .blocks.row .ve-block-actions > .breadcrumb {left: 0;}
+
+.blocks.row > .col.col-row {padding: 14px 21px 14px;}
+.blocks.row > .col.col-row:before {border: 1px dotted #38b03f; left: 7px; right: 7px; top: 0; bottom: 14px;}

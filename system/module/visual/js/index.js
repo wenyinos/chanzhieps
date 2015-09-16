@@ -40,8 +40,7 @@
     var createActionLink = function(setting, action, options)
     {
         if(!$.isPlainObject(action)) action = setting.actions[action];
-        var link = createLink(action.module || setting.module || setting.code, action.method || setting.method || action.name, (action.params || setting.params || '').format(options));
-        console.log(setting, action, options, link);
+        return createLink(action.module || setting.module || setting.code, action.method || setting.method || action.name, (action.params || setting.params || '').format(options));
     }
 
     var openModal = function(url, options)
