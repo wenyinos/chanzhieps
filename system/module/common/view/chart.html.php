@@ -11,7 +11,7 @@ js::import($jsRoot . 'chart/excanvas.min.js');
 <?php
 if($config->debug)
 {
-    js::import($jsRoot . 'chart/chart.min.js');
+    js::import($jsRoot . 'chart/min.js');
 }
 ?>
 <script>
