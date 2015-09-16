@@ -30,9 +30,9 @@ $lang->block->mobile->typeList['articleTree'] = 'Article Categories';
 $lang->block->mobile->typeList['productTree'] = 'Product Categories';
 $lang->block->mobile->typeList['blogTree']    = 'Blog Categories';
 
-$lang->block->mobile->typeList['contact']  = 'Contact Us';
+$lang->block->mobile->typeList['contact']  = 'Contact';
 $lang->block->mobile->typeList['followUs']  = 'Follow Us';
-$lang->block->mobile->typeList['about']    = 'About Us';
+$lang->block->mobile->typeList['about']    = 'About';
 $lang->block->mobile->typeList['links']    = 'Links';
 $lang->block->mobile->typeList['slide']    = 'Slide';
 

@@ -220,7 +220,6 @@ class file extends control
             $this->file->setSavePath('source');
             $file = $this->file->getById($fileID);
         }
-
         /* Judge the mode, down or open. */
         $mode  = 'down';
         $fileTypes = 'txt|jpg|jpeg|gif|png|bmp|xml|html';
@@ -260,8 +259,11 @@ class file extends control
                         }
                     }
                 }
+                /* Recording download times, downloads of this file plus one. */
+                $this->file->log($fileID);
 
                 $this->file->sendDownHeader($fileName, $file->extension, $fileData, filesize($file->realPath));
+
             }
             else
             {

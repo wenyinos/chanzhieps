@@ -433,6 +433,7 @@ class articleModel extends model
         {
             $file->objectType = 'blog';
             $file->objectID   = $blogID;
+            $file->downloads  = 0;
             $this->dao->insert(TABLE_FILE)->data($file, $skip='id')->autoCheck()->exec();
         }
 

@@ -233,7 +233,7 @@ $lang->site->menu->company = 'Company|company|setbasic|';
 $lang->site->menu->contact = 'Contact|company|setcontact|';
 $lang->site->menu->nav     = 'Navigation|nav|admin|';
 $lang->site->menu->link    = 'Links|links|admin|';
-$lang->site->menu->oauth   = 'Open OAuth|site|setoauth|';
+$lang->site->menu->oauth   = 'OAuth|site|setoauth|';
 $lang->site->menu->mail    = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
 $lang->site->menu->wechat  = array('link' => 'Wechat|wechat|admin|', 'alias' => 'create,setresponse');
 $lang->site->menu->search  = 'Full text search|search|buildindex|';
