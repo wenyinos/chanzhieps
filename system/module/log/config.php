@@ -1,6 +1,6 @@
 <?php
 $config->searchEngine = new stdclass();
-$config->searchengine->params = array (
+$config->searchEngine->params = array (
     '1.cz' => 
     array (
         0 => '/s\\/([^\\/]+)/',
@@ -343,7 +343,7 @@ $config->searchengine->params = array (
     'zxuso' => 'wd',
 );
 
-$config->searchengine->domains = array (
+$config->searchEngine->domains = array (
         '1.cz' => '1.cz',
         'so.360.cn' => '360search',
         'www.abacho.de' => 'abacho',
