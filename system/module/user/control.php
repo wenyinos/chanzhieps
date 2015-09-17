@@ -906,7 +906,7 @@ class user extends control
      */
     public function score($recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
-        if(!isset($this->config->site->score) or $this->config->site->score == 'close') die();
+        if(!commonModel::isAvailable('score')) die();
         if($this->app->user->account == 'guest') $this->locate(inlink('login'));
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);

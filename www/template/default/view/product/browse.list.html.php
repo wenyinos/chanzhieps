@@ -39,7 +39,7 @@
           ?>
         </td>
         <td class="w-100px">
-          <?php if(!$product->unsaleable and commonModel::isAvailable('order')):?>
+          <?php if(!$product->unsaleable and commonModel::isAvailable('shop')):?>
           <?php echo html::a(inlink('view', "id={$product->id}", "category={$product->category->alias}&name=$product->alias"), $lang->product->buyNow, "class='btn btn-xs btn-success'")?>
           <?php else:?>
           <?php echo html::a(inlink('view', "id={$product->id}", "category={$product->category->alias}&name=$product->alias"), $lang->product->detail, "class='btn btn-xs btn-success'")?>

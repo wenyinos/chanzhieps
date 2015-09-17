@@ -58,4 +58,6 @@ $(document).ready(function()
         $('.nav-left').append(setCountsMenu);
         $('#setCounts').modalTrigger();
     }
+
+    $.setAjaxForm('#setCountsForm');
 })

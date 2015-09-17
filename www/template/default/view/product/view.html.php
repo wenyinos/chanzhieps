@@ -123,7 +123,7 @@ js::execute($product->js);
               ?>
             </ul>
             <?php if(empty($attributeHtml)) echo '<div class="product-summary">' . $product->desc . '</div>'; ?>
-            <?php if(!$product->unsaleable and commonModel::isAvailable('order')):?>
+            <?php if(!$product->unsaleable and commonModel::isAvailable('shop')):?>
             <?php if(!$stockOpened or $product->amount > 0):?>
             <ul class='list-unstyled meta-list'>
               <li id='countBox'>
@@ -147,7 +147,7 @@ js::execute($product->js);
               <?php endif;?>
             </span>
             <?php endif;?>
-            <?php if(!commonModel::isAvailable('order') and !$product->unsaleable and $product->mall):?>
+            <?php if(!commonModel::isAvailable('shop') and !$product->unsaleable and $product->mall):?>
             <hr>
             <div class='btn-gobuy'>
               <?php echo html::a(inlink('redirect', "id={$product->id}"), $lang->product->buyNow, "class='btn btn-lg btn-primary' target='_blank'");?>
