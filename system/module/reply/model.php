@@ -76,7 +76,7 @@ class replyModel extends model
         
         foreach($files as $replyID => $file) $replies[$replyID]->files = $file;
 
-        if(isset($this->config->site->score) and $this->config->site->score == 'open')
+        if(commonModel::isAvailable('score'))
         {
             if($replies)
             {
@@ -176,7 +176,7 @@ class replyModel extends model
         {
             $this->saveCookie($replyID);                               // Save reply id to cookie.
             $this->loadModel('file')->saveUpload('reply', $replyID);   // Save file.
-            if(isset($this->config->site->score) and $this->config->site->score == 'open') $this->loadModel('score')->earn('reply', 'reply', $replyID);
+            if(commonModel::isAvailable('score')) $this->loadModel('score')->earn('reply', 'reply', $replyID);
 
             /* Update thread stats. */
             $this->thread->updateStats($threadID);
@@ -269,7 +269,7 @@ class replyModel extends model
         $this->loadModel('thread')->updateStats($thread->id);
         $this->loadModel('forum')->updateBoardStats($thread->board);
 
-        if(isset($this->config->site->score) and $this->config->site->score == 'open') $this->loadModel('score')->punish($author, 'delReply', $this->config->score->counts->delReply, 'reply', $replyID);
+        if(commonModel::isAvailable('score')) $this->loadModel('score')->punish($author, 'delReply', $this->config->score->counts->delReply, 'reply', $replyID);
 
         return !dao::isError();
     }

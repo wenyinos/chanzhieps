@@ -10,7 +10,7 @@
       <?php elseif($i == 3):?>
       <strong class='text-success'><?php echo $lang->reply->stool;?></strong>
       <?php endif;?>
-      <?php if(isset($this->config->site->score) and $this->config->site->score == 'open' and !empty($reply->scoreSum)):?>
+      <?php if(commonModel::isAvailable('score')):?>
       <?php echo sprintf($lang->thread->scoreSum, $reply->scoreSum);?>
       <?php endif;?>
     </div>
@@ -45,7 +45,7 @@
     <div class="pull-right reply-actions thread-actions">
     <?php if($this->app->user->account != 'guest'):?>
     <span class="thread-more-actions">
-      <?php if(isset($this->config->site->score) and $this->config->site->score == 'open' and $this->thread->canManage($board->id, $reply->author)):?>
+      <?php if(commonModel::isAvailable('score')):?>
       <?php $account = helper::safe64Encode($reply->author);?>
       <?php echo html::a(inlink('addScore', "account={$account}&objectType=reply&objectID={$reply->id}"), $lang->thread->score, "data-toggle=modal");?>
       <?php endif;?>

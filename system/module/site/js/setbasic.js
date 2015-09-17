@@ -12,15 +12,10 @@ $(document).ready(function()
         }
     });
 
-    $('input[name=score]').click(function()
+    $('input[type=checkbox][id*=modules]').change(function()
     {
-        if($('#score1').prop('checked'))
+        if(!$('input[type=checkbox][value=score]').prop('checked'))
         {
-            $('.setCounts').show();
-        }
-        else
-        {
-            $('.setCounts').hide();
             bootbox.alert(v.closeScoreTip);
         }
     });
@@ -52,5 +47,15 @@ $(document).ready(function()
         })
     });
 
-    $('input[type=checkbox]').change();
+    $('input[type=checkbox][id*=lang]').change();
+
+    if(!$('#setCounts').length && v.score)
+    {
+        var setCountsLink = createLink('score', 'setCounts');
+        var setCountsMenu = '<li><a id="setCounts" href="' + setCountsLink + '">';
+        setCountsMenu += v.setCounts + '<i class="icon-chevron-right"></i>';
+        setCountsMenu += '</a></li>';
+        $('.nav-left').append(setCountsMenu);
+        $('#setCounts').modalTrigger();
+    }
 })

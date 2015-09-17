@@ -13,6 +13,8 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/kindeditor.html.php';?>
 <?php js::set('closeScoreTip', $lang->site->closeScoreTip);?>
+<?php js::set('setCounts', $lang->site->setCounts);?>
+<?php js::set('score', commonModel::isAvailable('score'));?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-globe'></i> <?php echo $lang->site->setBasic;?></strong></div>
   <div class='panel-body'>
@@ -49,14 +51,6 @@
         <tr>
           <th><?php echo $lang->site->mobileTemplate;?></th> 
           <td><?php echo html::radio('mobileTemplate', $lang->site->mobileTemplateList, isset($this->config->site->mobileTemplate) ? $this->config->site->mobileTemplate : 'close', "class='checkbox'");?></td><td></td>
-        </tr>
-        <tr>
-          <th><?php echo $lang->site->score;?></th> 
-          <td>
-            <?php $class = (isset($this->config->site->score) && $this->config->site->score == 'open') ? '' : 'hide';?>
-            <?php echo html::radio('score', $lang->site->scoreList, isset($this->config->site->score) ? $this->config->site->score : 'close', "class='checkbox'");?>
-            <?php echo html::a($this->createLink('score', 'setCounts'), $lang->site->setCounts, "data-toggle=modal class='setCounts {$class}'");?>
-          </td><td></td>
         </tr>
         <tr>
           <th><?php echo $lang->site->name;?></th> 

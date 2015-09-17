@@ -5,7 +5,7 @@
       <?php if($thread->readonly) echo "<span class='label'><i class='icon-lock'></i> " . $lang->thread->readonly . "</span> &nbsp;"; ?>
     </div>
     <strong><?php echo $thread->title; ?></strong>
-    <?php if(isset($this->config->site->score) and $this->config->site->score == 'open' and !empty($thread->scoreSum)):?>
+    <?php if(commonModel::isAvailable('score')):?>
     <?php echo sprintf($lang->thread->scoreSum, $thread->scoreSum);?>
     <?php endif;?>
     <div class='text-muted'><?php echo $thread->addedDate;?></div>
@@ -58,7 +58,7 @@
             ?>
             </ul>
           </span>
-          <?php if(isset($this->config->site->score) and $this->config->site->score == 'open'):?>
+          <?php if(commonModel::isAvailable('score')):?>
           <?php $account = helper::safe64Encode($thread->author);?>
           <?php echo html::a(inlink('addScore', "account={$account}&objectType=thread&objectID={$thread->id}"), $lang->thread->score, "data-toggle=modal");?>
           <?php endif;?>
