@@ -15,18 +15,17 @@ class stat extends control
      * Traffic statistics.
      * 
      * @param  string $mode 
-     * @param  string $begin 
-     * @param  string $end 
      * @access public
      * @return void
      */
     public function traffic($mode = 'today')
     {
-        $this->view->todayStat    = $this->dao->select('*')->from(TABLE_STATREPORT)->where('timeType')->eq('day')->andWhere('timeValue')->eq(date('Ymd'))->fetch(); 
-        $this->view->yestodayStat = $this->dao->select('*')->from(TABLE_STATREPORT)->where('timeType')->eq('day')->andWhere('timeValue')->eq(date('Ymd', strtotime("-1 day")))->fetch();
-        $this->view->labels       = $this->config->stat->hourLabels;   
-        $this->view->title        = $this->lang->stat->traffic;
-        $this->view->mode         = $mode;
+        $this->view->todayReport    = $this->dao->select('*')->from(TABLE_STATREPORT)->where('timeType')->eq('day')->andWhere('timeValue')->eq(date('Ymd'))->fetch(); 
+        $this->view->yestodayReport = $this->dao->select('*')->from(TABLE_STATREPORT)->where('timeType')->eq('day')->andWhere('timeValue')->eq(date('Ymd', strtotime("-1 day")))->fetch();
+
+        $this->view->labels = $this->config->stat->hourLabels;   
+        $this->view->title  = $this->lang->stat->traffic;
+        $this->view->mode   = $mode;
 
         if($mode == 'today') $this->view->chart = $this->stat->getTrafficPerHour(date('Ymd'));
 
@@ -39,6 +38,23 @@ class stat extends control
             $this->view->chart  = $result['chartData'];
         }
 
+        $this->display();
+    }
+
+    /**
+     * From statistics report page.
+     * 
+     * @param  string $begin 
+     * @param  string $end 
+     * @access public
+     * @return void
+     */
+    public function from($begin = '', $end = '')
+    {
+        $begin = date('Ymd', strtotime($begin));
+        $end   = date('Ymd', strtotime($end));
+        $this->view->charts = $this->stat->getFromReport($begin, $end);
+        $this->view->title = $this->lang->stat->from; 
         $this->display();
     }
 }

@@ -1,1 +1,8 @@
-.chart-canvas{margin:0 auto;}
+.chart-canvas{margin:10px auto;}
+#switchBar {padding-top:10px;}
+#switchBar label{margin: 0 5px; font-weight:normal; cursor:pointer; color:blue;}
+#switchBar label.active{color:#333; font-weight:bold;}
+
+.table-report{ border:1px solid #ddd !important; }
+#reportData{ margin-top:50px;}
+#reportData thead tr td { font-weight:bold; background:#EFEFEF;}

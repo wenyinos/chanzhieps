@@ -65,7 +65,7 @@ class statModel extends model
      */
     public function getTrafficPerDay($mode)
     {
-        
+
         if($mode == 'weekly')  $days = 7;
         if($mode == 'monthly') $days = 30;
         $begin = date('Ymd', strtotime("-{$days} day"));
@@ -75,7 +75,7 @@ class statModel extends model
             ->andWhere('timeType')->eq('day')->andWhere('timeValue')->ge($begin)
             ->fetchAll('timeValue');
 
-        for($i = $days; $i > 0;  $i--)
+        for($i = $days; $i >= 0;  $i--)
         {
             $day = date('Ymd', strtotime("-{$i} day"));
             $pv[] = isset($traffic[$day]) ? $traffic[$day]->pv : 0;
@@ -105,5 +105,46 @@ class statModel extends model
         $chartData[] = $uvChart;
         $chartData[] = $ipChart;
         return array('labels' => $dayLabels, 'chartData' => $chartData);
+    }
+
+    public function getFromReport($begin, $end)
+    {
+        $charts    = array();
+        $reports = $this->dao->select('*, sum(ip) as ip, sum(pv) as pv, sum(uv) as uv')->from(TABLE_STATREPORT)
+            ->where('type')->eq('from')
+            ->andWhere('timeType')->eq('day')
+            ->beginIf($begin != '')->andWhere('timeValue')->ge($begin)->fi()
+            ->beginIf($end != '')->andWhere('timeValue')->le($end)->fi()
+            ->groupBy('item')
+            ->fetchAll('item');
+
+        $colorSets = array();
+        $colorSets['out']    = 'blue';
+        $colorSets['self']   = 'green';
+        $colorSets['search'] = 'red';
+
+        foreach($reports as $from => $report)
+        {
+            if(!isset($this->lang->stat->fromList->{$from})) continue;
+            $ip = new stdclass();
+            $ip->value = $report->ip;
+            $ip->color = zget($colorSets, $from);
+            $ip->label = $this->lang->stat->fromList->{$from};
+
+            $uv = new stdclass();
+            $uv->value = $report->uv;
+            $uv->color = zget($colorSets, $from);
+            $uv->label = $this->lang->stat->fromList->{$from};
+
+            $pv = new stdclass();
+            $pv->value = $report->pv;
+            $pv->color = zget($colorSets, $from);
+            $pv->label = $this->lang->stat->fromList->{$from};
+
+            $charts['pv'][] = $pv;
+            $charts['uv'][] = $uv;
+            $charts['ip'][] = $ip;
+        }
+        return $charts;
     }
 }

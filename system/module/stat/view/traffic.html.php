@@ -29,20 +29,25 @@
       </tr>
     </thead>
     <tbody>
-      <tr class='text-right'>
+      <tr class='text-center'>
+      <?php if(!empty($todayReport)):?>
         <td class='text-center'><?php echo $lang->stat->today;?></td>
-        <td><?php echo $todayStat->pv;?></td>
-        <td><?php echo $todayStat->uv;?></td>
-        <td><?php echo $todayStat->ip;?></td>
+        <td><?php echo $todayReport->pv;?></td>
+        <td><?php echo $todayReport->uv;?></td>
+        <td><?php echo $todayReport->ip;?></td>
       </tr>
-      <tr class='text-right'>
+      <?php endif;?>
+      <?php if(!empty($yestodayReport)):?>
+      <tr class='text-center'>
         <td class='text-center'><?php echo $lang->stat->yestoday;?></td>
-        <td><?php echo $yestodayStat->pv;?></td>
-        <td><?php echo $yestodayStat->uv;?></td>
-        <td><?php echo $yestodayStat->ip;?></td>
+        <td><?php echo zget($yestodayReport->pv, 0);?></td>
+        <td><?php echo zget($yestodayReport->uv, 0);?></td>
+        <td><?php echo zget($yestodayReport->ip, 0);?></td>
       </tr>
+      <?php endif;?>
     </tbody>
-  </table>
+  </table> 
+  <p></p>
 </div>
 <div class='panel'>
   <div>
