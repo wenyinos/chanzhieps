@@ -72,6 +72,7 @@ $lang->score->getScore    = '获取积分';
 $lang->score->amountUnit  = '元';
 $lang->score->buyWaring   = "最小充值%s元，1元=%s积分";
 $lang->score->errorAmount = "充值不能小于%s元";
+$lang->score->alipay      = "立即使用支付宝支付";
 $lang->score->paySuccess  = '恭喜你，支付成功';
 $lang->score->payFail     = '对不起，支付没成功，如果有问题，请联系我们。';
 $lang->score->viewHistory = '查看支付历史';
