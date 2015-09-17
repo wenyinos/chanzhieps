@@ -42,6 +42,9 @@
         <td><?php echo $order->id;?></td>
         <td class='text-left'><?php echo $order->account;?></td>
         <td>
+          <?php if($order->type == 'score'):?>
+          <?php echo $lang->order->score;?>
+          <?php else:?>
           <dl>
             <?php foreach($order->products as $product):?>
             <dd class='text-left'>
@@ -50,6 +53,7 @@
             </dd>
             <?php endforeach;?>
           </dl>
+          <?php endif;?>
         </td>
         <td class='text-center'><?php echo $order->amount;?></td>
         <td>

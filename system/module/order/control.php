@@ -22,7 +22,10 @@ class order extends control
     public function confirm($product = 0, $count = 0)
     {
         $this->loadModel('product');
-        $referer = helper::safe64Encode(inlink('confirm', "product={$product}&count={$count}"));
+        $referer    = helper::safe64Encode(inlink('confirm', "product={$product}&count={$count}"));
+        $mobileURL  = helper::createLink('order', 'confirm', "product=$product&count=$count", '', 'mhtml');
+        $desktopURL = helper::createLink('order', 'confirm', "product=$product&count=$count", '', 'html');
+
         if($_POST) $referer = helper::safe64Encode($this->createLink('cart', "browse"));
         if($this->app->user->account == 'guest') $this->locate($this->createLink('user', 'login', "referer={$referer}"));
 
@@ -39,8 +42,8 @@ class order extends control
         $this->view->paymentList    = $paymentOptions;
         $this->view->addresses      = $this->loadModel('address')->getListByAccount($this->app->user->account);
         $this->view->currencySymbol = zget($this->lang->product->currencySymbols, $this->config->product->currency, '￥');
-        $this->view->mobileURL      = helper::createLink('order', 'confirm', "product=$product&count=$count", '', 'mhtml');
-        $this->view->desktopURL     = helper::createLink('order', 'confirm', "product=$product&count=$count", '', 'html');
+        $this->view->mobileURL      = $mobileURL;
+        $this->view->desktopURL     = $desktopURL;
         $this->display();
     }
 
