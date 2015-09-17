@@ -52,6 +52,7 @@
           <div class='group-title' data-id='<?php echo $group->id;?>' data-action="<?php echo inlink('editGroup', "groupID=$group->id");?>">
             <span class='group-name'><?php echo $group->name;?></span>&nbsp;&nbsp;
             <?php echo html::a('javascript:;', $lang->slide->rename, "class='edit-group-btn'");?>
+            <?php echo html::a(inLink('browse', "groupID=$group->id"), $lang->edit);?>
             <?php echo html::a(inlink('removeGroup', "groupID=$group->id"), $lang->delete, "class='deleter'");?>
           </div>
         </div>
