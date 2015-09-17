@@ -199,7 +199,7 @@ $lang->user->control->menus[20] = '<i class="icon-comments-alt"></i> 我的消�
 if(isset($this->config->site->score) and $this->config->site->score == 'open')
 {
     $lang->user->control->menus[30] = '<i class="icon-sun"></i> 积分详情 <i class="icon-chevron-right"></i>|user|score';
-    $lang->user->control->menus[40] = '<i class="icon-bolt"></i> 积分充值 <i class="icon-chevron-right"></i>|score|buyscore';
+    if(strpos($this->config->shop->payment, 'alipay') !== false) $lang->user->control->menus[40] = '<i class="icon-bolt"></i> 积分充值 <i class="icon-chevron-right"></i>|score|buyscore';
 }
 $lang->user->control->menus[50] = '<i class="icon-share"></i> 我的主题 <i class="icon-chevron-right"></i>|user|thread';
 $lang->user->control->menus[60] = '<i class="icon-mail-reply"></i> 我的回帖 <i class="icon-chevron-right"></i>|user|reply';
