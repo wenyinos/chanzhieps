@@ -946,15 +946,15 @@ function checkCurlSSL()
  * @access public
  * @return void
  */
-function zget($var, $key, $valueWhenNone = '', $valueWhenExists = '')
+function zget($var, $key, $valueWhenNone = false, $valueWhenExists = false)
 {
     $var = (array)$var;
     if(isset($var[$key]))
     {
-        if($valueWhenExists) return $valueWhenExists;
+        if($valueWhenExists !== false) return $valueWhenExists;
         return $var[$key];
     }
-    if($valueWhenNone) return $valueWhenNone;
+    if($valueWhenNone != false) return $valueWhenNone;
     return $key;
 }
 

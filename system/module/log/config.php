@@ -372,6 +372,7 @@ $config->searchEngine->domains = array (
         'cgi.search.biglobe.ne.jp' => 'biglobe',
         'images.search.biglobe.ne.jp' => 'biglobe images',
         'bing.com' => 'bing',
+        'cn.bing.com' => 'bing',
         'bing.com/images/search' => 'bing images',
         'www.blogdigger.com' => 'blogdigger',
         'www.blogpulse.com' => 'blogpulse',
