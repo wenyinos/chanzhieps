@@ -70,7 +70,8 @@ class logModel extends model
         {
             if($this->session->referer)
             {
-                return $this->getRefererByID($this->session->referer);
+                $referer = $this->getRefererByID($this->session->referer);
+                if(!empty($referer)) return $referer;
             }
             return null;
         }
@@ -80,7 +81,7 @@ class logModel extends model
 
         if(!empty($refererInDB))
         {
-            $this->session->set('referer', $referer['id']);
+            $this->session->set('referer', $refererInDB->id);
             return $refererInDB;
         }
 
@@ -107,11 +108,9 @@ class logModel extends model
         $referer['domain'] = $referer['host'];
         $referer['url']    = $url;
 
-        $this->dao->replace(TABLE_STATREFERER)
-            ->data($referer, "host,query,path,scheme")
-            ->autoCheck()
-            ->exec();
+        $this->dao->replace(TABLE_STATREFERER)->data($referer, "host,query,path,scheme")->autoCheck()->exec();
         $referer['id'] = $this->dao->lastInsertId();
+
         $this->session->set('referer', $referer['id']);
         return (object)$referer;
     }
@@ -157,7 +156,7 @@ class logModel extends model
         $log->browserName    = $visitor->browserName;
         $log->browserVersion = $visitor->browserVersion;
 
-        $log->referer      = $referer->id;
+        $log->referer      = !empty($referer) ? $referer->id : 0;
         $log->searchEngine = isset($referer->searchEngine) ? $referer->searchEngine : '';
         $log->keywords     = isset($referer->keywords) ? $referer->keywords : '';
         $log->ip           = helper::getRemoteIp();
@@ -183,9 +182,11 @@ class logModel extends model
 
         /* Save serachengine data. */
         if(isset($referer->searchEngine) and $referer->searchEngine != '') $this->saveReportItem($type = 'search', $item = $referer->searchEngine, $time, $log);
+        if(isset($referer->keywords) and $referer->keywords != '') $this->saveReportItem($type = 'search', $item = $referer->keywords, $time, $log);
         
         /* Save referer data. */
         if(!empty($referer)) $this->saveReportItem($type = 'referer', $item = $referer->id, $time, $log);
+        if(!empty($referer)) $this->saveReportItem($type = 'domain', $item = $referer->domain, $time, $log);
 
         /* Save os data. */
         $this->saveReportItem($type = 'os', $item = $visitor->osName, $time, $log);
@@ -193,9 +194,9 @@ class logModel extends model
         $this->saveReportItem($type = 'browser', $item = $visitor->browserName, $time, $log);
 
         /* Save from data. */
-        $this->saveReportItem($type = 'from', $item = 'out', $time, $log);
-        $this->saveReportItem($type = 'from', $item = 'self', $time, $log);
-        $this->saveReportItem($type = 'from', $item = 'search', $time, $log);
+        if($log->referer != 0 and $log->searchEngine == '') $this->saveReportItem($type = 'from', $item = 'out', $time, $log);
+        if($log->referer == 0) $this->saveReportItem($type = 'from', $item = 'self', $time, $log);
+        if(!empty($log->referer) and $log->searchEngine != '') $this->saveReportItem($type = 'from', $item = 'search', $time, $log);
     }
 
     /**
@@ -241,15 +242,15 @@ class logModel extends model
                 ->andWhere('browserName')->eq($log->browserName)
                 ->fi()
 
-                ->beginIF($type == 'from' and $item = 'out')
-                ->andWhere('referer')->ne(0)
+                ->beginIF($type == 'from' and $item == 'out')
+                ->andWhere('referer')->ne(0)->andWhere('searchEngine')->eq('')
                 ->fi()
 
-                ->beginIF($type == 'from' and $item = 'self')
+                ->beginIF($type == 'from' and $item == 'self')
                 ->andWhere('referer')->eq(0)
                 ->fi()
 
-                ->beginIF($type == 'from' and $item = 'search')
+                ->beginIF($type == 'from' and $item == 'search')
                 ->andWhere('searchEngine')->ne('')
                 ->fi()
 
@@ -279,7 +280,7 @@ class logModel extends model
         foreach($time as $timeType => $timeValue)
         {
             $oldReport = $this->dao->select('*')->from(TABLE_STATREPORT)
-                ->where('type')->eq($type)
+                ->where('type')->eq($type)->andWhere('item')->eq($item)
                 ->andWhere('timeType')->eq($timeType)
                 ->andWhere('timeValue')->eq($timeValue)
                 ->fetch();
