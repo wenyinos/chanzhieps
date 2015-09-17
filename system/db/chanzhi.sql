@@ -362,7 +362,7 @@ CREATE TABLE IF NOT EXISTS `eps_statvisitor`(
   PRIMARY KEY (`id`),
   KEY `osName` (`osName`),
   KEY `browsername` (`browserName`),
-  KEY `device` (`device`)
+  KEY `device` (`device`),
   KEY `lang` (`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
