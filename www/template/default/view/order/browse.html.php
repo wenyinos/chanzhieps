@@ -25,6 +25,9 @@
             <tr>
               <td class='text-center text-middle'><?php echo $order->id;?></td>
               <td class='text-middle'>
+                <?php if($order->type == 'score'):?>
+                <?php echo $lang->order->score;?>
+                <?php else:?>
                 <dl>
                   <?php foreach($order->products as $product):?>
                   <dd class='text-left'>
@@ -35,6 +38,7 @@
                   </dd>
                   <?php endforeach;?>
                 </dl>
+                <?php endif;?>
               </td>
               <td class='text-right text-middle'><?php echo $order->amount;?></td>
               <td class='text-middle'>
