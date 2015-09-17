@@ -109,3 +109,5 @@ CREATE TABLE IF NOT EXISTS `eps_statregion`(
   KEY `region` (`country`, `province`, `city`),
   KEY `time` (`timeType`, `timeValue`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+ALTER TABLE `eps_order` ADD `type` varchar(30) NOT NULL AFTER `status`; 
