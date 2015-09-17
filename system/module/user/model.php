@@ -227,7 +227,7 @@ class userModel extends model
             ->check('email', 'unique')
             ->exec();
 
-        if(isset($this->config->site->score) and $this->config->site->score == 'open')
+        if(commonModel::isAvailable('score'))
         {
             $viewType = $this->app->getViewType();
             if(!dao::isError())
@@ -562,7 +562,7 @@ class userModel extends model
         $user->shortJoin = substr($user->join, 5, -3);
         unset($_SESSION['random']);
 
-        if(isset($this->config->site->score) and $this->config->site->score == 'open')
+        if(commonModel::isAvailable('score'))
         {
             $viewType = $this->app->getViewType();
             if($user)

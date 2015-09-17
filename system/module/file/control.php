@@ -174,8 +174,14 @@ class file extends control
             $filename = $this->post->filename;
             if(!validater::checkFileName($filename)) $this->send(array('result' => 'fail', 'message' => $this->lang->file->evilChar));
 
+            if(!$this->post->continue)
+            {
+                $extension = $this->file->getExtension($_FILES['upFile']['name']);
+                if(!empty($this->file->checkSameFile(str_replace('.' . $extension, '', $_FILES['upFile']['name']), $fileID)) or !empty($this->file->checkSameFile($this->post->filename, $fileID))) $this->send(array('result' => 'fail', 'error' => $this->lang->file->sameName));
+            }
+
             $result = $this->file->sourceEdit($file, $filename);
-            if($result) $this->send(array('result' => 'success','message' => $this->lang->saveSuccess, 'locate' => $this->createLink('file', 'browseSource') ));
+            if($result) $this->send(array('result' => 'success','message' => $this->lang->saveSuccess, 'locate' => $this->createLink('file', 'browseSource')));
             $this->send(array('result' => 'fail', 'message' => dao::getError() ));
         }
         $this->view->title      = $this->lang->file->edit;
@@ -196,6 +202,17 @@ class file extends control
     {
         $this->file->setSavePath($objectType);
         if(!$this->file->checkSavePath()) $this->send(array('result' => 'fail', 'message' => $this->lang->file->errorUnwritable));
+
+        if($objectType == 'source' and !$this->post->continue)
+        {
+            foreach($_FILES['files']['name'] as $id => $name)
+            {
+                $extension = $this->file->getExtension($name);
+                $filename  = !empty($_POST['labels'][$id]) ? htmlspecialchars($_POST['labels'][$id]) : str_replace('.' . $extension, '', $name);
+                if(!empty($this->file->checkSameFile($filename))) $this->send(array('result' => 'fail', 'error' => $this->lang->file->sameName));
+            }
+        }
+
         $files = $this->file->getUpload('files', $objectType);
         if($files) $this->file->saveUpload($objectType, $objectID);
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
@@ -242,7 +259,7 @@ class file extends control
                 $fileName = $file->title . '.' . $file->extension;
                 $fileData = file_get_contents($file->realPath);
 
-                if(isset($this->config->site->score) and $this->config->site->score == 'open')
+                if(commonModel::isAvailable('score'))
                 {
                     /* Check for update extension.*/
                     if(!$this->loadModel('score')->hasFileDowned($account, $fileID) and $account != $file->addedBy)

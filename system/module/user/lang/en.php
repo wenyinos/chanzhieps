@@ -193,11 +193,8 @@ $lang->user->control->menus[20] = '<i class="icon-large icon-comments-alt"></i> 
 $lang->user->control->menus[30] = '<i class="icon-large icon-share"></i> Threads <i class="icon-chevron-right"></i>|user|thread';
 $lang->user->control->menus[40] = '<i class="icon-large icon-mail-reply"></i> Replies <i class="icon-chevron-right"></i>|user|reply';
 
-if(RUN_MODE != 'install' and commonModel::isAvailable('order'))
-{
-    $lang->user->control->menus[25] = '<i class="icon-shopping-cart"></i> My Orders <i class="icon-chevron-right"></i>|order|browse';
-    $lang->user->control->menus[26] = '<i class="icon-map-marker"> </i> Addresses <i class="icon-chevron-right"></i>|address|browse';
-}
+if(RUN_MODE != 'install' and commonModel::isAvailable('order')) $lang->user->control->menus[25] = '<i class="icon-shopping-cart"></i> My Orders <i class="icon-chevron-right"></i>|order|browse';
+if(RUN_MODE != 'install' and commonModel::isAvailable('shop')) $lang->user->control->menus[26] = '<i class="icon-map-marker"> </i> Addresses <i class="icon-chevron-right"></i>|address|browse';
 
 $lang->user->log = new stdclass();
 $lang->user->log->common = 'Log';

@@ -112,11 +112,14 @@ $config->dependence->forum[]   = 'user';
 $config->dependence->reply[]   = 'forum';
 $config->dependence->reply[]   = 'user';
 $config->dependence->message[] = 'message';
+$config->dependence->shop[]    = 'shop';
+$config->dependence->shop[]    = 'user';
 $config->dependence->cart[]    = 'shop';
 $config->dependence->address[] = 'shop';
-$config->dependence->order[]   = 'shop';
 $config->dependence->order[]   = 'user';
 $config->dependence->search[]  = 'search';
+$config->dependence->score[]   = 'score';
+$config->dependence->score[]   = 'user';
 
 /* Database settings. */
 $config->db = new stdclass();          

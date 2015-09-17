@@ -1,9 +1,41 @@
 $(document).ready(function()
 {   
-    $.setAjaxForm('#fileForm', function(data)
+    $.setAjaxForm('#fileForm', function(response)
     {
-        if(data.result == 'success') location.href = createLink('file', 'browsesource');
-    }); 
+        if(response.result == 'fail')
+        {
+            if(response.error && response.error.length)
+            {
+                bootbox.dialog(
+                {  
+                    message: response.error,  
+                    buttons:
+                    {  
+                        back:
+                        {  
+                            label:     v.lang.back,
+                            className: 'btn-primary',  
+                            callback:  function(){location.reload();}  
+                        },
+                        continue:
+                        {  
+                            label:     v.lang.continue,  
+                            className: 'btn-primary',  
+                            callback:  function()
+                                       {
+                                           $('#fileForm #submit').append("<input value='1' name='continue' class='hide'>");
+                                           $('#fileForm #submit').click();
+                                       }  
+                        }  
+                    }  
+                });
+            }
+        }
+        else
+        {
+            setTimeout(function(){location.href = createLink('file', 'browsesource');}, 1200);
+        }
+    })
 
     $('.image-view').click(function()
     {

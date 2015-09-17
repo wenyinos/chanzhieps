@@ -237,7 +237,7 @@ class score extends control
             $setting = fixer::input('post')->get();
             $result = $this->loadModel('setting')->setItems('system.score.counts', $setting);
             if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => helper::createLink('site', 'setBasic')));
         }
 
         $this->view->title = $this->lang->score->setCounts;

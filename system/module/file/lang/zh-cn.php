@@ -64,6 +64,6 @@ $lang->file->invalidParameter = '参数无效。';
 $lang->file->unWritable       = '目录不可写或不存在。';
 $lang->file->uploadForbidden  = '附件上传功能已禁用。';
 $lang->file->sizeLimit        = "<p class='text-danger'>附件大小不能大于%sM</p>";
-$lang->file->sameName         = "已存在同名文件";
+$lang->file->sameName         = "已存在同名文件，如果继续将覆盖原文件。";
 $lang->file->nameEmpty        = "文件名不能为空";
 $lang->file->evilChar         = "包含非法字符";

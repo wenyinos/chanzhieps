@@ -188,6 +188,7 @@ class commonModel extends model
     {
         global $app, $config;
 
+        if($module == 'order' and (!isset($config->site->modules) or strpos($config->site->modules, 'score') === false  and strpos($config->site->modules, 'shop') === false))  return false;
         /* Check whether dependence modules is available. */
         if(!empty($config->dependence->$module))
         {
