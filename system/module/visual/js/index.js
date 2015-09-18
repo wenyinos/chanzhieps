@@ -414,20 +414,26 @@
         }).on('mousedown', '.ve-resize-handler', function(e)
         {
             var $ve = $$(this).closest('.ve');
-            var $col = $ve.parent();
+            var $col = $ve.parent().addClass('ve-resizing');
             var $row = $ve.closest('.row' + ($ve.hasClass('row') ? ':not(.ve)' : ''));
             var $blocksHolder = $ve.closest('.row.blocks');
             var startX = e.pageX;
             var startWidth = $col.width();
             var rowWidth = $row.width();
             var oldGrid = $col.attr('data-grid');
+            var lastGrid = oldGrid;
 
             var mouseMove = function(event)
             {
                 $ve.addClass('ve-editing ve-editing-resize');
                 var x = event.pageX;
                 var grid = Math.max(1, Math.min(12, Math.round(12 * (startWidth + (x - startX)) / rowWidth)));
-                $col.attr('data-grid', grid);
+                if(lastGrid != grid)
+                {
+                    $col.attr('data-grid', grid);
+                    showMessage(lang.gridWidth + ': ' + Math.round(100*grid/12) + '% (' + grid + '/12)', 'show', {scale:  false});
+                    lastGrid = grid;
+                }
                 event.preventDefault();
                 event.stopPropagation();
             };
@@ -435,6 +441,7 @@
             var mouseUp = function(event)
             {
                 $ve.removeClass('ve-editing ve-editing-resize');
+                $col.removeClass('ve-resizing');
 
                 if(oldGrid !== $col.attr('data-grid'))
                 {
