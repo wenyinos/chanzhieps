@@ -315,11 +315,11 @@ $lang->package = new stdclass();
 /* Menu of stat module. */
 $lang->stat = new stdclass();
 $lang->stat->menu = new stdclass();
-$lang->stat->menu->traffic  = '流量统计|stat|traffic|';
-$lang->stat->menu->from     = '来源统计|stat|from|';
-$lang->stat->menu->search   = '搜索引擎统计|stat|search|';
+$lang->stat->menu->traffic  = '概况|stat|traffic|';
+$lang->stat->menu->from     = '来源统计|stat|report|type=from';
+$lang->stat->menu->search   = '搜索引擎统计|stat|report|type=search';
 $lang->stat->menu->keywords = '关键词统计|stat|keywords|';
-$lang->stat->menu->client   = '终端统计|stat|client|';
+$lang->stat->menu->os       = '终端统计|stat|report|type=os';
 
 /* The error messages. */
 $lang->error = new stdclass();
