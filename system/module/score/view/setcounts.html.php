@@ -11,9 +11,9 @@
  */
 ?>
 <?php include '../../common/view/header.modal.html.php';?>
-<form method='post' action='<?php echo inlink('setCounts');?>' id='ajaxForm' class='form'>
+<form method='post' action='<?php echo $this->createLink('score', 'setCounts');?>' id='setCountsForm' class='form'>
 <table class='table table-form borderless'>
-  <tbody class="scoreCounts <?php if(isset($this->config->site->score) and $this->config->site->score == 'close') echo 'hide';?>">
+  <tbody class='scoreCounts'>
     <tr>
       <th class='w-120px'><?php echo $lang->score->methods['register'] . $lang->score->methods['award'];?></th> 
       <td><?php echo html::input('register', $this->config->score->counts->register, "class='form-control'");?></td><td></td>

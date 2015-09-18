@@ -16,7 +16,7 @@
           <?php endif;?>
           <th width='50'><?php echo $lang->score->amount;?></th>
         </tr>
-        <tr class='a-center'> 
+        <tr class='text-center'> 
           <td><?php echo $order->humanOrder;?></td>
           <td><?php echo $order->subject;?></td>
           <?php if(!empty($order->ip)):?>
@@ -27,8 +27,10 @@
           <?php endif;?>
           <td><?php echo $order->amount;?></td>
         </tr>
+        <tr class='text-center'>
+          <td colspan='5'><?php echo html::a($payLink, $lang->score->alipay, "class='btn btn-primary btn-lg'");?></td>
+        </tr>
       </table>
-      <p class='text-center'><?php echo html::a($payLink, html::image($themeRoot . 'default/images/main/alipay.gif'));?></p>
     </div>
   </div>
 </div>

@@ -31,7 +31,7 @@ class threadModel extends model
 
         $thread->files = $this->loadModel('file')->getByObject('thread', $thread->id);
 
-        if(isset($this->config->site->score) and $this->config->site->score == 'open')
+        if(commonModel::isAvailable('score'))
         {
             if(!isset($thread->scoreSum))$thread->scoreSum = 0;
             $scores = $this->loadModel('score')->getByObject('thread', $threadID, 'valuethread');
@@ -216,7 +216,7 @@ class threadModel extends model
         {
             $this->saveCookie($threadID);
             $this->loadModel('file')->saveUpload('thread', $threadID);
-            if(isset($this->config->site->score) and $this->config->site->score == 'open') $this->loadModel('score')->earn('thread', 'thread', $threadID);
+            if(commonModel::isAvailable('score')) $this->loadModel('score')->earn('thread', 'thread', $threadID);
 
             /* Update board stats. */
             $this->loadModel('forum')->updateBoardStats($boardID);
@@ -348,7 +348,7 @@ class threadModel extends model
 
         /* Update board stats. */
         $this->loadModel('forum')->updateBoardStats($thread->board);
-        if(isset($this->config->site->score) and $this->config->site->score == 'open') $this->loadModel('score')->punish($thread->author, 'delThread', $this->config->score->counts->delThread, 'thread', $threadID);
+        if(commonModel::isAvailable('score')) $this->loadModel('score')->punish($thread->author, 'delThread', $this->config->score->counts->delThread, 'thread', $threadID);
         return $this->loadModel('search')->deleteIndex('thread', $threadID);
     }
 
@@ -487,7 +487,7 @@ class threadModel extends model
         $moderatorClass = ($speaker->admin == 'super' or $speaker->isModerator) ? "text-danger" : '';
         $moderatorTitle = ($speaker->admin == 'super' or $speaker->isModerator) ? "title='{$this->lang->forum->owners}'" : '';
 
-        if(isset($this->config->site->score) and $this->config->site->score == 'open')
+        if(commonModel::isAvailable('score')) 
         {
             echo  <<<EOT
             <strong class='thread-author {$moderatorClass}' {$moderatorTitle}><i class='icon-user'></i> {$speaker->realname}</strong>

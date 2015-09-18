@@ -38,7 +38,7 @@ js::set('admin', $this->get->admin);
         <th><?php echo $lang->user->id;?></th>
         <th><?php echo $lang->user->realname;?></th>
         <th><?php echo $lang->user->account;?></th>
-        <?php if(isset($this->config->site->score) and $this->config->site->score == 'open'):?>
+        <?php if(commonModel::isAvailable('score')):?>
         <th><?php echo $lang->user->score;?></th>
         <th><?php echo $lang->user->rank;?></th>
         <?php endif;?>
@@ -59,7 +59,7 @@ js::set('admin', $this->get->admin);
       <td><?php echo $user->id;?></td>
       <td><?php echo $user->realname;?></td>
       <td><?php echo $user->account;?></td>
-      <?php if(isset($this->config->site->score) and $this->config->site->score == 'open'):?>
+      <?php if(commonModel::isAvailable('score')):?>
       <td><?php echo $user->score;?></td>
       <td><?php echo $user->rank;?></td>
       <?php endif;?>
@@ -77,7 +77,7 @@ js::set('admin', $this->get->admin);
       <td class='operate'>
         <?php //if($user->provider == 'wechat') echo html::a($this->createLink('wechat', 'message', "from={$user->openID}"), $lang->user->messages);?>
         <?php commonModel::printLink('user', 'edit', "account=$user->account", $lang->edit); ?>
-        <?php if(isset($this->config->site->score) and $this->config->site->score == 'open'):?>
+        <?php if(commonModel::isAvailable('score')):?>
         <?php commonModel::printLink('user', 'addScore', "account=$user->account", $lang->user->addScore, "data-toggle=modal"); ?>
         <?php commonModel::printLink('user', 'reduceScore', "account=$user->account", $lang->user->reduceScore, "data-toggle=modal"); ?>
         <?php endif;?>
@@ -98,7 +98,7 @@ js::set('admin', $this->get->admin);
     </tbody>
     <tfoot>
       <tr>
-        <?php if(isset($this->config->site->score) and $this->config->site->score == 'open'):?>
+        <?php if(commonModel::isAvailable('score')):?>
         <td colspan='14'>
         <?php else:?>
         <td colspan='12'>

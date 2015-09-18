@@ -125,7 +125,14 @@ class fileModel extends model
             ->fetchAll('id');
 
         /* Process these files. */
-        foreach($files as $objectFiles) $this->processFile($objectFiles);
+        $filePathnams = array();
+        foreach($files as $id => $objectFiles)
+        {
+            $this->processFile($objectFiles);
+            $filePathnames[$id] = $objectFiles->pathname;
+        }
+        $filePathnames = array_unique($filePathnames);
+
 
         return $files;
     }
@@ -554,6 +561,28 @@ class fileModel extends model
         {
             return false;
         }
+    }
+
+    /**
+     * Check title conflict or not.
+     * 
+     * @param  int     $fileID 
+     * @param  string  $filename 
+     * @access public
+     * @return void
+     */
+    public function checkSameFile($filename, $fileID = 0)
+    {
+        $device   = helper::getDevice();
+        $template = $this->config->template->{$device}->name;
+        $theme    = $this->config->template->{$device}->theme;
+
+        return $this->dao->select('*')->from(TABLE_FILE)
+            ->where('title')->eq($filename)
+            ->andWhere('objectType')->eq('source')
+            ->andWhere('objectID')->eq("{$template}_{$theme}")
+            ->beginIF($fileID)->andWhere('id')->ne($fileID)->fi()
+            ->fetch();
     }
 
     /**

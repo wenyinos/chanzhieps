@@ -3,7 +3,6 @@
     'use strict';
     var DEBUG = window.v.debug;
     var visualPage = $('#visualPage').get(0);
-    var $$; // the jQuery object of visual page in iframe
     var isInPreview = false;
     var lang = $.extend(window.v.visualLang, window.v.lang, {blocks: window.v.visualBlocks});
     var visualPageUrl = visualPage.src;
@@ -37,11 +36,19 @@
         visualPage.contentWindow.location.replace(visualPageUrl);
     };
 
+    var tidyBlocks = function($blocks)
+    {
+        if(typeof $blocks === 'string') $blocks = $$($blocks);
+        else if(!($blocks instanceof $$)) $blocks = $$('.row.blocks .col-row > .row');
+        else $blocks = $blocks.closest('.row');
+        $blocks.trigger('tidy');
+    };
+
     var createActionLink = function(setting, action, options)
     {
         if(!$.isPlainObject(action)) action = setting.actions[action];
         return createLink(action.module || setting.module || setting.code, action.method || setting.method || action.name, (action.params || setting.params || '').format(options));
-    }
+    };
 
     var openModal = function(url, options)
     {
@@ -67,7 +74,7 @@
                     reloadPage();
                     return;
                 }
-                $$('.ve-editing, .ve-blocks-show-border, .ve-using').removeClass('ve-using ve-editing ve-blocks-show-border');
+                $$('.ve-editing, .ve-show-border-in-in, .ve-using').removeClass('ve-using ve-editing ve-show-border-in-in');
             }
         }, options));
     };
@@ -127,29 +134,39 @@
 
         if($veMain.data('veInit')) return;
 
-        var name = '';
+        var name = $veMain.data('ve');
 
         // init blocks
-        if($veMain.is('.block, .panel-block'))
+        if(name === 'block')
         {
             if($veMain.parent().hasClass('block')) return;
+
             var blockID = $veMain.data('id');
+            var isCarousel = $veMain.children('.carousel').length;
+            var isRow = $veMain.hasClass('row');
+            var title = $veMain.attr('data-title');
+            if(!title)
+            {
+                if(isCarousel) title = lang.carousel;
+                else if(isRow) title = lang.subRegion;
+                else title = $.trim($ve.children('.panel-heading').children().first().text()) || (visuals.block.name + ' #' + blockID);
+            }
+
             if(!blockID)
             {
-                blockID = $veMain.attr('id').replace('block', '');
+                var idAttr = $veMain.attr('id');
+                if(idAttr) blockID = idAttr.replace('block', '');
             }
             $veMain.attr(
             {
                 'data-ve'   : 'block',
                 'data-id'   : blockID,
-                'data-title': '[' + ($veMain.children('.carousel').length ? lang.carousel : ($.trim($ve.children('.panel-heading').children().first().text()) || (visuals.block.name + ' #' + blockID))) + ']'
+                'data-title': '[' + title + ']'
             });
-            name = 'block';
         }
         else
         {
             var id = $veMain.attr('id');
-            name = $veMain.data('ve');
             if(id)
             {
                 if(name)
@@ -184,6 +201,11 @@
                         $veMain.addClass('ve-movable');
                         $heading.find('.ve-name').addClass('ve-move-handler');
                     }
+                    else if(actionName === 'edit' && !(name === 'block' && $veMain.hasClass('row')))
+                    {
+                        $heading.find('.ve-name').addClass('ve-action ve-action-edit').attr('action', 'edit');
+                    }
+
                     if(!action || action.hidden) return;
                     $actions.append('<li data-toggle="tooltip" data-action="' + actionName + '" class="ve-action ve-action-' + actionName + '" title="' + action.text + '">'
                         + (action.icon ? '<i class="icon icon-' + action.icon + '"></i>' : action.text) + '</li>');
@@ -254,7 +276,7 @@
         {
             if(result === 'success')
             {
-                if(withGrid) $blocksHolder.trigger('tidy');
+                if(withGrid) tidyBlocks($blocksHolder);
             }
         }, orders.join(','));
     };
@@ -277,10 +299,12 @@
             var $blocksHolder = $$(this);
             var withGrid = $blocksHolder.hasClass('row');
 
-            $blocksHolder.find('.block, .panel-block').each(function()
+            $blocksHolder.find('.block, .panel-block, .col-row > .row').each(function()
             {
                 var $ve = $$(this);
                 if($ve.data('veInit')) return;
+
+                $ve.attr('data-ve', 'block');
 
                 initVisualArea($ve);
                 if(withGrid)
@@ -288,6 +312,32 @@
                     $ve.children('.ve-cover').append('<div class="ve-resize-handler left"><i class="icon icon-resize-horizontal"></i></div><div class="ve-resize-handler right"><i class="icon icon-resize-horizontal"></i></div>');
                 }
             });
+
+            if(withGrid)
+            {
+                $blocksHolder.children('.col-row').each(function()
+                {
+                    var $row = $$(this);
+                    if($row.data('veInit')) return;
+
+                    $row = $row.data('veInit', true).children('.row').sortable(
+                    {
+                          trigger: '.ve-move-handler',
+                          selector: '.col',
+                          dragCssClass: '',
+                          finish: function(e)
+                          {
+                              var orders = [];
+                              $.each(e.list, function()
+                              {
+                                  orders.push($$(this).find('.ve').data('id'));
+                              });
+
+                              sortBlocks($row, orders);
+                          }
+                    });
+                });
+            }
 
             if($blocksHolder.data('veInit')) return;
 
@@ -308,30 +358,43 @@
                 "data-title": lang.blocks.pages[page] + '-' + lang.blocks.regions[page][location]
             }).data('veInit', true);
 
-            $blocksHolder.sortable({trigger: '.ve-move-handler', selector: withGrid ? '.col' : '.ve', dragCssClass: '', finish: function(e)
+            $blocksHolder.sortable(
             {
-                var orders = [];
-                $.each(e.list, function()
-                {
-                    orders.push($(this).find('.ve').data('id'));
-                });
+                  trigger: function($e)
+                  {
+                      return $e.find(($e.hasClass('col-row') ? '.row.ve > .ve-cover ' : '') + '.ve-move-handler');
+                  },
+                  selector: withGrid ? '.col' : '.ve',
+                  dragCssClass: '',
+                  finish: function(e)
+                  {
+                      var orders = [];
+                      $.each(e.list, function()
+                      {
+                          orders.push($$(this).find('.ve').data('id'));
+                      });
 
-                sortBlocks($blocksHolder, orders);
-            }});
+                      sortBlocks($blocksHolder, orders);
+                  }
+            });
 
-            $blocksHolder.append('<div class="ve-block-actions ve-preview-hidden"><button type="button" class="btn btn-block btn-ve ve-action-addblock"><i class="icon icon-plus"></i> ' + lang.addBlock + '</button><ul class="breadcrumb"><li>' + lang.blocks.pages[page] + '</li><li>' + lang.blocks.regions[page][location] + '</li></ul></div>');
+            var actionsBar = '<div class="ve-block-actions ve-actions-bar ve-preview-hidden"><ul class="nav"><li><button type="button" class="btn btn-block btn-ve ve-action-addblock"><i class="icon icon-plus"></i> ' + lang.addBlock + '</button></li>';
+            if(withGrid) actionsBar += '<li style="width: 35%"><button type="button" class="btn btn-block btn-ve ve-action-addSubRegion"><i class="icon icon-plus-sign"></i> ' + lang.addSubRegion + '</button></li>';
+            actionsBar += '</ul><ul class="breadcrumb"><li>' + lang.blocks.pages[page] + '</li><li>' + lang.blocks.regions[page][location] + '</li></ul></div>'
+
+            $blocksHolder.append(actionsBar);
         });
 
         var $$body = $$('body');
         if($$body.data('ve-blocks-events')) return;
         $$body.data('ve-blocks-events', true);
 
-        $$body.on('mouseenter', '.ve-action-addblock', function()
+        $$body.on('mouseenter', '.ve-block-actions', function()
         {
-            $$(this).closest('.blocks').addClass('ve-blocks-show-border');
-        }).on('mouseleave', '.ve-blocks-show-border', function()
+            $$(this).closest('.blocks').addClass('ve-show-border-in');
+        }).on('mouseleave', '.ve-show-border-in', function()
         {
-            $$(this).closest('.blocks').removeClass('ve-blocks-show-border');
+            $$(this).closest('.blocks').removeClass('ve-show-border-in');
         }).on('click', '.ve-action-addblock', function()
         {
             var name = 'block';
@@ -349,7 +412,7 @@
         {
             var $ve = $$(this).closest('.ve');
             var $col = $ve.parent();
-            var $row = $ve.closest('.row');
+            var $row = $ve.closest('.row' + ($ve.hasClass('row') ? ':not(.ve)' : ''));
             var $blocksHolder = $ve.closest('.row.blocks');
             var startX = e.pageX;
             var startWidth = $col.width();
@@ -381,7 +444,7 @@
                         {
                             $col.attr('data-grid', oldGrid);
                         }
-                        $blocksHolder.trigger('tidy');
+                        tidyBlocks($blocksHolder);
                     }, {grid: $col.attr('data-grid')});
                 }
 
@@ -422,7 +485,7 @@
             $ve.replaceWith($newVe);
             setTimeout(function()
             {
-                if(name === 'block') $newVe.closest('.blocks.row').trigger('tidy');
+                if(name === 'block') tidyBlocks($newVe.closest('.blocks.row'));
                 initVisualAreas();
             }, 100);
         });
@@ -489,7 +552,7 @@
                             if($veParent.is('.col, [class*="col-"]')) $forRemove = $veParent;
                         }
                         $forRemove.hide();
-                        $ve.closest('.blocks.row').trigger('tidy');
+                        tidyBlocks($ve.closest('.blocks.row'));
                         $forRemove.remove();
                     }
                 });
@@ -525,7 +588,7 @@
         $$('body').on('click', function()
         {
             $(document).trigger('click.zui.dropdown.data-api');
-        }).on('click', '.ve-name', openCommonActionModal)
+        })
         .on('click', '.ve-action', function(e)
         {
             var $action = $$(this);
@@ -567,6 +630,8 @@
         }
 
         if(isInPreview) $$('body').addClass('ve-preview-in');
+
+        setTimeout(tidyBlocks, 500);
     };
 
     visualPage.onload = visualPage.onreadystatechange = function()
@@ -585,7 +650,7 @@
                 $('#visualPageName').html('<i class="icon icon-external-link-sign"></i>' + ((title && title.indexOf(' ') > -1) ? title.split(' ')[0] : title)).attr('href', visualPageUrl);
             }
 
-            $$ = window.frames['visualPage'].$;
+            window.$$ = window.frames['visualPage'].$;
             initVisualPage();
         }
         catch(e){}
@@ -594,9 +659,11 @@
     $('#visualPreviewBtn').on('mouseenter', function()
     {
         $$('body').addClass('ve-preview-hover');
+        tidyBlocks();
     }).on('mouseleave', function()
     {
         $$('body').removeClass('ve-preview-hover');
+        tidyBlocks();
     }).on('click', function()
     {
         var $body = $$('body');
@@ -604,6 +671,7 @@
         isInPreview = $body.hasClass('ve-preview-in');
         $(this).toggleClass('text-danger', isInPreview).html(isInPreview ? ("<i class='icon-eye-close'></i> " + lang.exitPreview)
             : ("<i class='icon-eye-open'></i> " + lang.preview));
+        tidyBlocks();
     });
 
     $('#visualReloadBtn').on('click', reloadPage);

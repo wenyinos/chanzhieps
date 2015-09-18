@@ -129,7 +129,7 @@ foreach($product->attributes as $attribute)
         echo $attributeHtml;
     }
     ?>
-    <?php if(!$product->unsaleable and commonModel::isAvailable('order')):?>
+    <?php if(!$product->unsaleable and commonModel::isAvailable('shop')):?>
     <tr>
       <th><?php echo $lang->product->count; ?></th>
       <td>
@@ -153,7 +153,7 @@ foreach($product->attributes as $attribute)
       </td>
     </tr>
     <?php endif;?>
-    <?php if(!commonModel::isAvailable('order') and !$product->unsaleable and $product->mall):?>
+    <?php if(!commonModel::isAvailable('shop') and !$product->unsaleable and $product->mall):?>
     <tr>
       <td colspan='2'>
       <?php echo html::a(inlink('redirect', "id={$product->id}"), $lang->product->buyNow . ' <i class="icon icon-external-link"></i>', "class='btn block primary' target='_blank'");?>

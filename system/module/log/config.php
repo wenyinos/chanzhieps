@@ -1,6 +1,6 @@
 <?php
 $config->searchEngine = new stdclass();
-$config->searchengine->params = array (
+$config->searchEngine->params = array (
     '1.cz' => 
     array (
         0 => '/s\\/([^\\/]+)/',
@@ -343,7 +343,7 @@ $config->searchengine->params = array (
     'zxuso' => 'wd',
 );
 
-$config->searchengine->domains = array (
+$config->searchEngine->domains = array (
         '1.cz' => '1.cz',
         'so.360.cn' => '360search',
         'www.abacho.de' => 'abacho',
@@ -372,6 +372,7 @@ $config->searchengine->domains = array (
         'cgi.search.biglobe.ne.jp' => 'biglobe',
         'images.search.biglobe.ne.jp' => 'biglobe images',
         'bing.com' => 'bing',
+        'cn.bing.com' => 'bing',
         'bing.com/images/search' => 'bing images',
         'www.blogdigger.com' => 'blogdigger',
         'www.blogpulse.com' => 'blogpulse',

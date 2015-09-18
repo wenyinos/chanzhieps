@@ -63,6 +63,7 @@ $lang->order->lowStocks            = "<strong>%s</strong> 库存不足";
 $lang->order->alipayPid   = '合作者ID';
 $lang->order->alipayKey   = '合作者KEY';
 $lang->order->alipayEmail = '支付宝邮箱';
+$lang->order->score       = '积分充值';
 
 $lang->order->placeholder = new stdclass();
 $lang->order->placeholder->pid   = '合作身份者id，以2088开头的16位纯数字';

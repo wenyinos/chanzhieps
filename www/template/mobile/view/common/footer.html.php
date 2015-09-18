@@ -55,7 +55,7 @@ $extHookFiles = glob($extHookRule);
 if($extHookFiles) foreach($extHookFiles as $extHookFile) include $extHookFile;
 ?>
 <div class='block-region region-footer hidden'><?php $this->loadModel('block')->printRegion($layouts, 'all', 'footer');?></div>
-<?php if(commonModel::isAvailable('order')) include TPL_ROOT . 'common/cart.html.php';?>
+<?php if(commonModel::isAvailable('shop')) include TPL_ROOT . 'common/cart.html.php';?>
 <?php include TPL_ROOT . 'common/log.html.php';?>
 </body>
 </html>

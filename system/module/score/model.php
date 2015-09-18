@@ -288,7 +288,7 @@ class scoreModel extends model
             ->add('payment', 'alipay')
             ->add('status', 'normal')
             ->add('payStatus', 'not_paid')
-            //->add('type', 'score')
+            ->add('type', 'score')
             ->get();
         $this->dao->insert(TABLE_ORDER)->data($data)->check('amount', 'notempty')->exec();
         if(!dao::isError()) return $this->dao->lastInsertID();
