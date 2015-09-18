@@ -24,18 +24,24 @@ class stat extends control
         $this->view->yestodayReport = $this->dao->select('*')->from(TABLE_STATREPORT)->where('timeType')->eq('day')->andWhere('timeValue')->eq(date('Ymd', strtotime("-1 day")))->fetch();
 
         $this->view->labels = $this->config->stat->hourLabels;   
-        $this->view->title  = $this->lang->stat->traffic;
-        $this->view->mode   = $mode;
+        $this->view->title      = $this->lang->stat->traffic;
+        $this->view->mode       = $mode;
 
-        if($mode == 'today') $this->view->chart = $this->stat->getTrafficPerHour(date('Ymd'));
+        if($mode == 'today') $this->view->lineChart = $this->stat->getBasicLine('total', 'hour', $this->stat->getHourLabels(date('Ymd')));
+        if($mode == 'yestoday') $this->view->lineChart = $this->stat->getBasicLine('total', 'hour', $this->stat->getHourLabels(date('Ymd', strtotime('-1 day'))));
 
-        if($mode == 'yestoday') $this->view->chart = $this->stat->getTrafficPerHour(date('Ymd', strtotime("-1 day")));
-
-        if($mode == 'weekly' or $mode == 'monthly') 
+        if($mode != 'today' and $mode != 'yestoday') 
         {
-            $result = $this->stat->getTrafficPerDay($mode);
-            $this->view->labels = $result['labels'];
-            $this->view->chart  = $result['chartData'];
+            if($mode == 'weekly') $days  = 7;
+            if($mode == 'monthly') $days = 30;
+            if($mode != 'fixed')
+            {
+                $begin = date('Ymd', strtotime("-{$days} day"));
+                $end   = date('Ymd');
+            }
+            $labels = $this->stat->getDayLabels($begin, $end);
+            $this->view->labels = $labels;
+            $this->view->lineChart = $this->stat->getBasicLine('total', 'day', $labels);
         }
 
         $this->display();
@@ -49,12 +55,42 @@ class stat extends control
      * @access public
      * @return void
      */
-    public function from($begin = '', $end = '')
+    public function report($type, $mode = 'weekly', $begin = '', $end = '')
     {
-        $begin = date('Ymd', strtotime($begin));
-        $end   = date('Ymd', strtotime($end));
-        $this->view->charts = $this->stat->getFromReport($begin, $end);
-        $this->view->title = $this->lang->stat->from; 
+        if($begin) $begin = date('Ymd', strtotime($begin));
+        if($end)   $end   = date('Ymd', strtotime($end));
+
+        if($mode != 'fixed')
+        {
+            if($mode == 'weekly') $days  = 7;
+            if($mode == 'monthly') $days = 30;
+
+            $begin = date('Ymd', strtotime("-{$days} day"));
+            $end   = date('Ymd');
+        }
+
+        if($begin > $end) 
+        {
+            $this->view->error = $this->lang->stat->dateError;
+            $this->display();
+            exit;
+        }
+
+        $this->view->pieCharts  = $this->stat->getPieByType($type, $begin, $end);
+
+        $this->view->lineLabels = $this->stat->getDayLabels($begin, $end);
+        if(empty($this->view->lineLabels)) 
+        {
+            $this->view->error = $this->lang->stat->dateError;
+            $this->display();
+            exit;
+        }
+
+        $this->view->lineCharts = $this->stat->getItemLine($type, 'day', $this->view->lineLabels);
+
+        $this->view->title = $this->lang->stat->{$type}; 
+        $this->view->mode  = $mode; 
+        $this->view->type  = $type; 
         $this->display();
     }
 }
