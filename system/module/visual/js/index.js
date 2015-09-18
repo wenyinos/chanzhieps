@@ -1,6 +1,7 @@
 (function(window, $)
 {
     'use strict';
+
     var DEBUG = window.v.debug;
     var visualPage = $('#visualPage').get(0);
     var isInPreview = false;
@@ -145,6 +146,13 @@
             var isCarousel = $veMain.children('.carousel').length;
             var isRow = $veMain.hasClass('row');
             var title = $veMain.attr('data-title');
+
+            if(!blockID)
+            {
+                var idAttr = $veMain.attr('id');
+                if(idAttr) blockID = idAttr.replace('block', '');
+            }
+
             if(!title)
             {
                 if(isCarousel) title = lang.carousel;
@@ -152,11 +160,6 @@
                 else title = $.trim($ve.children('.panel-heading').children().first().text()) || (visuals.block.name + ' #' + blockID);
             }
 
-            if(!blockID)
-            {
-                var idAttr = $veMain.attr('id');
-                if(idAttr) blockID = idAttr.replace('block', '');
-            }
             $veMain.attr(
             {
                 'data-ve'   : 'block',
@@ -401,7 +404,7 @@
             var setting = visuals[name];
             var action = setting.actions.add;
             var $blocksHolder = $$(this).closest('.blocks').addClass('ve-editing');
-            var options = $.extend({}, setting, $blocksHolder.data());
+            var options = $.extend({title: $blocksHolder.attr('data-title'), location: $blocksHolder.attr('data-location'), page: $blocksHolder.attr('data-page')}, setting, $blocksHolder.data());
             openModal(createActionLink(setting, action, options),
             {
                 width : action.width || setting.width,
@@ -645,7 +648,7 @@
                 visualPageUrl = $frame.context.URL;
                 var title = $frame.find('head > title').text();
                 var url = createLink('visual', 'index', 'referer=' + visualPageUrl);
-                window.history.pushState({}, title, url);
+                window.history.replaceState({}, title, url);
 
                 $('#visualPageName').html('<i class="icon icon-external-link-sign"></i>' + ((title && title.indexOf(' ') > -1) ? title.split(' ')[0] : title)).attr('href', visualPageUrl);
             }
