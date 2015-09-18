@@ -457,6 +457,7 @@
                         tidyBlocks($blocksHolder);
                     }, {grid: $col.attr('data-grid')});
                 }
+                else $.zui.messager.hide();
 
                 $$body.unbind('mousemove.ve.resize', mouseMove).unbind('mouseup.ve.resize', mouseUp);
                 event.preventDefault();
