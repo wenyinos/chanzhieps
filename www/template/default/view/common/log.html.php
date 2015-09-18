@@ -1,5 +1,5 @@
 <?php 
-$referer     = $this->server->http_referer;
+$referer = $this->server->http_referer;
 if(!empty($referer))
 {
     $refererInfo = parse_url($referer);

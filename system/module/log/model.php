@@ -313,8 +313,22 @@ class logModel extends model
         }
     }
 
-    public function saveRegin()
+    public function saveRegion()
     {
 
+    }
+
+    /**
+     * Clear report.
+     * 
+     * @access public
+     * @return void
+     */
+    public function clearLog()
+    { 
+        $saveDays = !empty($this->config->site->saveDays) ? $this->config->site->saveDays : 30;
+        $date = date('Ymd', strtotime("-{$saveDays} day"));
+        $this->dao->delete()->from(TABLE_STATLOG)->where('day')->lt($date)->exec();
+        return !dao::isError();
     }
 }

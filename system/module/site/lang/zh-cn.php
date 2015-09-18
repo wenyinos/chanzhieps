@@ -39,6 +39,7 @@ $lang->site->cn2tw           = '自动从简体版复制';
 $lang->site->cdn             = 'CDN地址';
 $lang->site->sensitive       = '敏感词';
 $lang->site->scheme          = '默认访问协议';
+$lang->site->saveDays        = '保存天数';
 
 $lang->site->importantOption = '重要操作';
 $lang->site->checkIP         = '后台登录IP白名单';
@@ -67,6 +68,7 @@ $lang->site->oauthHelp     = "使用帮助";
 $lang->site->setRecPerPage = "列表数量设置";
 $lang->site->useLocation   = "使用当前登录地址: <span>%s</span>";
 $lang->site->changeSetting = "更改设置";
+$lang->site->setLog        = "访问日志设置";
 
 $lang->site->typeList = new stdclass();
 $lang->site->typeList->portal = '企业门户';
@@ -148,6 +150,7 @@ $lang->site->wrongAllowedIP   = 'IP 格式错误';
 $lang->site->changeLocation   = '您当前的登录地区与允许登录地区不一致。';
 $lang->site->sessionIpTip     = '开启后，如IP变化将自动退出登录。';
 $lang->site->schemeTip        = '所有访问会跳转至默认访问协议。';
+$lang->site->saveDaysTip      = '访问日志保存天数必须为为 >0 的数字。';
 
 $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Robots文件%s 不可写，请修改权限后设置。';
