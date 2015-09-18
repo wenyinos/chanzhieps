@@ -32,7 +32,7 @@
     <div class='wrapper'>
       <nav>
         <?php echo commonModel::printTopBar();?>
-        <span id='languageBar'><?php echo commonModel::printLanguageBar();?></span>
+        <?php commonModel::printLanguageBar();?>
       </nav>
     </div>
   </div>
