@@ -488,7 +488,7 @@
             $ve.replaceWith($newVe);
             setTimeout(function()
             {
-                if(name === 'block') tidyBlocks($newVe.closest('.blocks.row'));
+                if(name === 'block') tidyBlocks($ve.closest('.blocks.row'));
                 initVisualAreas();
             }, 100);
         });
