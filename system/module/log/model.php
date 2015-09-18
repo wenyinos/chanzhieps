@@ -19,13 +19,15 @@ class logModel extends model
      */
     public function saveVisitor()
     {
+        $browserName    = helper::getBrowser();
+        $browserVersion = helper::getBrowserVersion();
         if(!empty($_COOKIE['vid']))
         {           
             $visitor = $this->getVisitorByID($this->cookie->vid); 
             if(!empty($visitor))
             {
                 $visitor->new = false;
-                return $visitor;
+                if($visitor->browserName == $browserName and $visitor->browserVersion = $browserVersion and $visitor->os == helper::getOS()) return $visitor;
             }
         }
 
@@ -36,6 +38,8 @@ class logModel extends model
             ->add('browserVersion', helper::getBrowserVersion())
             ->add('createdTime', helper::now())
             ->get();
+
+        if($visitor->browserName == 'ie') $visitor->browserName .= $visitor->browserVersion;
 
         $this->dao->insert(TABLE_STATVISITOR)->data($visitor, 'referer')->autocheck()->exec();
         $visitor->new = true;
@@ -182,7 +186,7 @@ class logModel extends model
 
         /* Save serachengine data. */
         if(isset($referer->searchEngine) and $referer->searchEngine != '') $this->saveReportItem($type = 'search', $item = $referer->searchEngine, $time, $log);
-        if(isset($referer->keywords) and $referer->keywords != '') $this->saveReportItem($type = 'search', $item = $referer->keywords, $time, $log);
+        if(isset($referer->keywords) and $referer->keywords != '') $this->saveReportItem($type = 'keywords', $item = $referer->keywords, $time, $log);
         
         /* Save referer data. */
         if(!empty($referer)) $this->saveReportItem($type = 'referer', $item = $referer->id, $time, $log);
