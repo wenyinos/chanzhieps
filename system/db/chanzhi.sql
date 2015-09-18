@@ -433,7 +433,7 @@ CREATE TABLE IF NOT EXISTS `eps_statreport`(
 -- DROP TABLE IF EXISTS `eps_statregion`;
 CREATE TABLE IF NOT EXISTS `eps_statregion`(
   `id` int(9) unsigned NOT NULL auto_increment,
-  `timeType` enum('year', 'month', 'date', 'hour') NOT NULL default 'hour',
+  `timeType` enum('year', 'month', 'day', 'hour') NOT NULL default 'hour',
   `timeValue` char(10) NOT NULL default 0,
   `country` varchar(100) NOT NULL,
   `province` varchar(100) NOT NULL,
@@ -441,6 +441,7 @@ CREATE TABLE IF NOT EXISTS `eps_statregion`(
   `pv` mediumint(9) unsigned NOT NULL default 0,
   `uv` mediumint(9) unsigned NOT NULL default 0,
   `ip` mediumint(9) unsigned NOT NULL default 0,
+  `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `region` (`country`, `province`, `city`),
   KEY `time` (`timeType`, `timeValue`)

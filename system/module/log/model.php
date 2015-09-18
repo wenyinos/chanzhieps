@@ -19,13 +19,15 @@ class logModel extends model
      */
     public function saveVisitor()
     {
+        $browserName    = helper::getBrowser();
+        $browserVersion = helper::getBrowserVersion();
         if(!empty($_COOKIE['vid']))
         {           
             $visitor = $this->getVisitorByID($this->cookie->vid); 
             if(!empty($visitor))
             {
                 $visitor->new = false;
-                return $visitor;
+                if($visitor->browserName == $browserName and $visitor->browserVersion = $browserVersion and $visitor->os == helper::getOS()) return $visitor;
             }
         }
 
@@ -36,6 +38,8 @@ class logModel extends model
             ->add('browserVersion', helper::getBrowserVersion())
             ->add('createdTime', helper::now())
             ->get();
+
+        if($visitor->browserName == 'ie') $visitor->browserName .= $visitor->browserVersion;
 
         $this->dao->insert(TABLE_STATVISITOR)->data($visitor, 'referer')->autocheck()->exec();
         $visitor->new = true;
@@ -182,7 +186,7 @@ class logModel extends model
 
         /* Save serachengine data. */
         if(isset($referer->searchEngine) and $referer->searchEngine != '') $this->saveReportItem($type = 'search', $item = $referer->searchEngine, $time, $log);
-        if(isset($referer->keywords) and $referer->keywords != '') $this->saveReportItem($type = 'search', $item = $referer->keywords, $time, $log);
+        if(isset($referer->keywords) and $referer->keywords != '') $this->saveReportItem($type = 'keywords', $item = $referer->keywords, $time, $log);
         
         /* Save referer data. */
         if(!empty($referer)) $this->saveReportItem($type = 'referer', $item = $referer->id, $time, $log);
@@ -313,9 +317,65 @@ class logModel extends model
         }
     }
 
+    /**
+     * Save region data.
+     * 
+     * @access public
+     * @return void
+     */
     public function saveRegion()
     {
+        $year  = date('Y');
+        $month = date('Ym');
+        $day   = date('Ymd');
+        $hour  = date('YmdH');
 
+        $time = new stdclass();
+        $time->year  = $year;
+        $time->month = $month;
+        $time->day   = $day;
+        $time->hour  = $hour;
+
+        foreach($time as $type => $value)
+        {
+            $oldRegion = $this->dao->select('*')->from(TABLE_STATREGION)
+                ->where('timeType')->eq($type)
+                ->andWhere('timeValue')->eq($value)
+                ->fetch();
+
+            if(!empty($oldRegion))
+            {
+                $ipAndUv = $this->dao->select('count(distinct(ip)) as ip, count(distinct(visitor)) as uv')
+                    ->from(TABLE_STATLOG)
+                    ->where($type)->eq($value)
+                    ->fetch();
+
+                $this->dao->update(TABLE_STATREGION)
+                    ->set('pv = pv + 1')
+                    ->set('uv')->eq($ipAndUv->uv)
+                    ->set('ip')->eq($ipAndUv->ip)
+                    ->where('id')->eq($oldRegion->id)
+                    ->exec();
+            }
+            else
+            {
+                $location = $this->app->loadClass('IP')->find(helper::getRemoteIp());
+                $region = new stdclass();
+                $region->timeType  = $type;
+                $region->timeValue = $value;
+                $region->country   = $location[0];
+                $region->province  = $location[1];
+                $region->city      = $location[2];
+                $region->pv        = 1; 
+                $region->uv        = 1; 
+                $region->ip        = 1;
+                $region->lang      = 'all';
+
+                $this->dao->insert(TABLE_STATREGION)->data($region)->exec();
+            }
+        }
+
+        return !dao::isError();
     }
 
     /**

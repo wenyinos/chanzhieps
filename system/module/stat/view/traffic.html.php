@@ -12,8 +12,8 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/chart.html.php';?>
-<?php js::set('labels', $labels);?>
-<?php js::set('chartData', $chart);?>
+<?php js::set('lineLabels', $labels);?>
+<?php js::set('lineChart', $lineChart);?>
 <div class='panel'>
   <div class="panel-heading">
     <strong><i class='icon icon-bar-chart'></i> <?php echo $lang->stat->traffic;?></strong>
@@ -52,13 +52,13 @@
 <div class='panel'>
   <div>
     <ul class='nav nav-tabs'>
-    <?php foreach($lang->stat->trafficModes as $code => $modeName):?>
-    <?php $class = $mode == $code ? "class='active'" : '';?>
-    <li <?php echo $class?>><?php echo html::a(inlink('traffic', "mode=$code"), $modeName);?></li>
-    <?php endforeach;?>
+      <?php foreach($lang->stat->trafficModes as $code => $modeName):?>
+      <?php $class = $mode == $code ? "class='active'" : '';?>
+      <li <?php echo $class?>><?php echo html::a(inlink('traffic', "mode=$code"), $modeName);?></li>
+      <?php endforeach;?>
     </ul>
+    <?php if(!empty($dayCharts)):?> <div><?php echo html::radio('lineType', $lang->stat->dataTypes, 'pv');?></div><?php endif;?>
   </div>
-  <div class='chart-canvas'><canvas height='260' width='900' id='chartBox'></canvas></div>
+  <div class='chart-canvas'><canvas height='260' width='900' id='lineChart'></canvas></div>
 </div>
-
 <?php include '../../common/view/footer.admin.html.php';?>
