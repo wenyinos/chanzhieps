@@ -13,10 +13,11 @@ class log extends control
 {
     public function record()
     {
-       $visitor = $this->log->saveVisitor();
-       $referer = $this->log->saveReferer();
-       $this->log->saveReport($visitor, $referer);
-       $this->log->saveRegin();
-       exit('success');
+        $this->log->clearLog();
+        $visitor = $this->log->saveVisitor();
+        $referer = $this->log->saveReferer();
+        $this->log->saveReport($visitor, $referer);
+        $this->log->saveRegion();
+        exit('success');
     }
 }

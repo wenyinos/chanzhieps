@@ -50,6 +50,8 @@
 .ve:hover > .ve-cover .ve-resize-handler.left > .icon {left: -4px}
 .ve:hover > .ve-cover .ve-resize-handler.right > .icon {right: -4px}
 
+.ve-resizing.col {transition: width .2s}
+
 .ve[data-ve='slogan'], .ve[data-ve='logo'] {min-width: 120px;}
 
 .block.ve {min-height: 22px; margin-bottom: 14px;}
@@ -73,7 +75,7 @@
 
 .ve-block-actions {position: relative; clear: both; margin-bottom: 14px;}
 .ve-block-actions.ve-actions-bar > .nav > li {display: table-cell; padding: 0 5px;}
-.ve-block-actions > .breadcrumb {pointer-events:none; position: absolute; top: 0; left: 0; background-color: rgba(0, 255, 0, .1); color: #38b03f; padding: 2px 5px; transition: top .2s, left .2s; border-radius: 0 0 4px 0}
+.ve-block-actions > .breadcrumb {pointer-events:none; position: absolute; top: 0; left: 7px; background-color: rgba(0, 255, 0, .1); color: #38b03f; padding: 2px 5px; transition: top .2s, left .2s; border-radius: 0 0 4px 0}
 .blocks.row .ve-block-actions.ve-actions-bar {margin: 0 2px 14px;}
 .blocks.sortable-sorting .ve-block-actions {display: none}
 .ve-block-actions .btn-ve {padding: 20px 10px}
@@ -84,9 +86,8 @@
 .blocks.row:before {left: 0; right: 0; bottom: 7px;}
 .ve-show-border-in .ve-block-actions, .blocks.ve-editing .ve-block-actions , .blocks.sortable-sorting .ve-block-actions {position: static!important}
 .blocks.sortable-sorting .ve-block-actions > .breadcrumb, .ve-show-border-in .ve-block-actions > .breadcrumb, .blocks.ve-editing .ve-block-actions > .breadcrumb {background-color: #F1A325; color: #FFF; top: -7px; left: -7px;}
-.blocks.row .ve-block-actions > .breadcrumb {left: 0;}
+.blocks.row.ve-editing .ve-block-actions > .breadcrumb, .blocks.row.ve-show-border-in .ve-block-actions > .breadcrumb {left: 0;}
 
-/*.blocks.row > .col.col-row {border: 1px dotted #38b03f; margin: 0 6px; padding: 0; margin-bottom: -14px;}*/
 .blocks.row > .col.col-row > .row.ve {margin: 0 0 14px; padding: 14px 7px 0;}
 .blocks.row > .col.col-row > .row.ve > .ve-cover {box-shadow: none; border: 1px dotted #03b8cf; background: none}
 .blocks.row > .col.col-row > .row.ve > .ve-cover > .ve-heading {background: #03b8cf; top: -2px; left: -2px; right: auto; border-radius: 0 0 2px 0;}

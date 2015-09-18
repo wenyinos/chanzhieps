@@ -1,6 +1,7 @@
 (function(window, $)
 {
     'use strict';
+
     var DEBUG = window.v.debug;
     var visualPage = $('#visualPage').get(0);
     var isInPreview = false;
@@ -145,6 +146,13 @@
             var isCarousel = $veMain.children('.carousel').length;
             var isRow = $veMain.hasClass('row');
             var title = $veMain.attr('data-title');
+
+            if(!blockID)
+            {
+                var idAttr = $veMain.attr('id');
+                if(idAttr) blockID = idAttr.replace('block', '');
+            }
+
             if(!title)
             {
                 if(isCarousel) title = lang.carousel;
@@ -152,11 +160,6 @@
                 else title = $.trim($ve.children('.panel-heading').children().first().text()) || (visuals.block.name + ' #' + blockID);
             }
 
-            if(!blockID)
-            {
-                var idAttr = $veMain.attr('id');
-                if(idAttr) blockID = idAttr.replace('block', '');
-            }
             $veMain.attr(
             {
                 'data-ve'   : 'block',
@@ -401,7 +404,7 @@
             var setting = visuals[name];
             var action = setting.actions.add;
             var $blocksHolder = $$(this).closest('.blocks').addClass('ve-editing');
-            var options = $.extend({}, setting, $blocksHolder.data());
+            var options = $.extend({title: $blocksHolder.attr('data-title'), location: $blocksHolder.attr('data-location'), page: $blocksHolder.attr('data-page')}, setting, $blocksHolder.data());
             openModal(createActionLink(setting, action, options),
             {
                 width : action.width || setting.width,
@@ -411,20 +414,26 @@
         }).on('mousedown', '.ve-resize-handler', function(e)
         {
             var $ve = $$(this).closest('.ve');
-            var $col = $ve.parent();
+            var $col = $ve.parent().addClass('ve-resizing');
             var $row = $ve.closest('.row' + ($ve.hasClass('row') ? ':not(.ve)' : ''));
             var $blocksHolder = $ve.closest('.row.blocks');
             var startX = e.pageX;
             var startWidth = $col.width();
             var rowWidth = $row.width();
             var oldGrid = $col.attr('data-grid');
+            var lastGrid = oldGrid;
 
             var mouseMove = function(event)
             {
                 $ve.addClass('ve-editing ve-editing-resize');
                 var x = event.pageX;
                 var grid = Math.max(1, Math.min(12, Math.round(12 * (startWidth + (x - startX)) / rowWidth)));
-                $col.attr('data-grid', grid);
+                if(lastGrid != grid)
+                {
+                    $col.attr('data-grid', grid);
+                    showMessage(lang.gridWidth + ': ' + Math.round(100*grid/12) + '% (' + grid + '/12)', 'show', {scale:  false});
+                    lastGrid = grid;
+                }
                 event.preventDefault();
                 event.stopPropagation();
             };
@@ -432,6 +441,7 @@
             var mouseUp = function(event)
             {
                 $ve.removeClass('ve-editing ve-editing-resize');
+                $col.removeClass('ve-resizing');
 
                 if(oldGrid !== $col.attr('data-grid'))
                 {
@@ -485,7 +495,7 @@
             $ve.replaceWith($newVe);
             setTimeout(function()
             {
-                if(name === 'block') tidyBlocks($newVe.closest('.blocks.row'));
+                if(name === 'block') tidyBlocks($ve.closest('.blocks.row'));
                 initVisualAreas();
             }, 100);
         });
@@ -645,7 +655,7 @@
                 visualPageUrl = $frame.context.URL;
                 var title = $frame.find('head > title').text();
                 var url = createLink('visual', 'index', 'referer=' + visualPageUrl);
-                window.history.pushState({}, title, url);
+                window.history.replaceState({}, title, url);
 
                 $('#visualPageName').html('<i class="icon icon-external-link-sign"></i>' + ((title && title.indexOf(' ') > -1) ? title.split(' ')[0] : title)).attr('href', visualPageUrl);
             }
