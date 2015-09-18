@@ -50,6 +50,8 @@
 .ve:hover > .ve-cover .ve-resize-handler.left > .icon {left: -4px}
 .ve:hover > .ve-cover .ve-resize-handler.right > .icon {right: -4px}
 
+.ve-resizing.col {transition: width .2s}
+
 .ve[data-ve='slogan'], .ve[data-ve='logo'] {min-width: 120px;}
 
 .block.ve {min-height: 22px; margin-bottom: 14px;}
