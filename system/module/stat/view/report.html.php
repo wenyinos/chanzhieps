@@ -20,11 +20,15 @@
 <div class='panel'>
   <div class="panel-heading">
     <strong>
-      <i class='icon icon-bar-chart'></i> <?php echo strpos(',os,browser,', ",$type,") === false ? $lang->stat->{$type} : $lang->stat->client;?>
+      <i class='icon icon-bar-chart'></i> <?php echo strpos(',os,browser,device,', ",$type,") === false ? $lang->stat->{$type} : $lang->stat->client;?>
     </strong>
     <?php
-    echo html::a(inlink('report', "type=os"), $lang->stat->os, $type == 'os' ? "class='active'" : '');
-    echo html::a(inlink('report', "type=browser"), $lang->stat->browser, $type == 'browser' ? "class='active'" : '');
+    if(strpos(',os,browser,device,', ",$type,") !== false)
+    {
+        echo html::a(inlink('report', "type=browser"), $lang->stat->browser, $type == 'browser' ? "class='active'" : '');
+        echo html::a(inlink('report', "type=os"), $lang->stat->os, $type == 'os' ? "class='active'" : '');
+        echo html::a(inlink('report', "type=device"), $lang->stat->device, $type == 'device' ? "class='active'" : '');
+    }
     ?>
     <div class="panel-actions">
       <form method='get' action="<?php echo inlink('from')?>">
@@ -67,11 +71,11 @@
         <tr class='text-center'>
           <td><?php echo $item;?></td>
           <?php foreach($reports as $report):?>
-        <td><?php echo $report->value;?></td>
+          <td><?php echo $report->value;?></td>
+          <?php endforeach;?>
+        </tr>
         <?php endforeach;?>
-      </tr>
-      <?php endforeach;?>
-    </table>
+      </table>
   </div>  
   <?php else:?>
   <div class='panel-body text-danger'><?php echo $lang->stat->noData;?></div>

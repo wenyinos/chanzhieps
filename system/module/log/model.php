@@ -1,4 +1,4 @@
-<?php
+  <?php
 /**
  * The model file of log module of ZenTaoCMS.
  *
@@ -182,7 +182,8 @@ class logModel extends model
         /* Save basic report data. */
         $this->saveReportItem($type = 'basic', $item = 'total', $time, $log);
         if(!$visitor->new and time() - strtotime($visitor->createdTime) > 60 * 60 * 24) $this->saveReportItem($type = 'basic', $item = 'return', $time, $log);
-        if($log->mobile) $this->saveReportItem($type = 'basic', $item = 'mobile', $time, $log);
+        if($log->mobile) $this->saveReportItem($type = 'device', $item = 'mobile', $time, $log);
+        if(!$log->mobile) $this->saveReportItem($type = 'device', $item = 'desktop', $time, $log);
 
         /* Save serachengine data. */
         if(isset($referer->searchEngine) and $referer->searchEngine != '') $this->saveReportItem($type = 'search', $item = $referer->searchEngine, $time, $log);
