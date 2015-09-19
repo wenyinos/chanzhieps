@@ -23,7 +23,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-edit'></i> <?php echo $lang->slide->edit;?></strong></div>
   <div class='panel-body'>
-    <form id='ajaxForm' method='post' enctype='multipart/form-data'>
+    <form id='ajaxForm' class='ve-form' method='post' enctype='multipart/form-data'>
       <table class='table table-form'>
         <tr>
           <th class='w-100px'><?php echo $lang->slide->title;?></th>
@@ -71,7 +71,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
                   <?php echo html::input('backgroundColor', $slide->backgroundColor, "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'");?>
                   <span class='input-group-btn'>
                     <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
-                      <i class='icon icon-question'></i> 
+                      <i class='icon icon-question'></i>
                       <span class='caret'></span>
                     </button>
                     <div class='dropdown-menu colors'>

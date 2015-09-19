@@ -14,11 +14,11 @@
 $block->content = json_decode($block->content);
 $groupID = !empty($block->content->group) ? $block->content->group : '';
 $slides  = $this->loadModel('slide')->getList($groupID);
-$slideId = 'slide' . rand();
+$slideId = 'slide' . $block->id . '-' . $groupID;
 if($slides):
 ?>
 <div class='block' id='block<?php echo $block->id?>'>
-<div id='<?php echo $slideId;?>' class='carousel slide' data-ride='carousel'>
+<div id='<?php echo $slideId;?>' class='carousel slide' data-ride='carousel' data-ve='carousel' data-id='<?php echo $groupID?>'>
   <div class='carousel-inner'>
     <?php $height = 0; $index = 0?>
     <?php foreach($slides as $slide):?>
@@ -29,10 +29,10 @@ if($slides):
       $itemClass = 0 === $index++ ? 'item active' : 'item';
     ?>
     <?php if ($slide->backgroundType == 'image'): ?>
-    <div class='<?php echo $itemClass ?>'<?php echo $url . ' ' . $target;?>>
+    <div data-id='<?php echo $slide->id?>' class='<?php echo $itemClass ?>'<?php echo $url . ' ' . $target;?>>
     <?php print(html::image($slide->image));?>
     <?php else: ?>
-    <div class='<?php echo $itemClass ?>'<?php echo $url . ' ' . $target;?> style='<?php echo 'background-color: ' . $slide->backgroundColor . '; height: ' . $height . 'px';?>'>
+    <div data-id='<?php echo $slide->id?>' class='<?php echo $itemClass ?>'<?php echo $url . ' ' . $target;?> style='<?php echo 'background-color: ' . $slide->backgroundColor . '; height: ' . $height . 'px';?>'>
     <?php endif ?>
       <div class='carousel-caption'>
         <h2 style='color:<?php echo $slide->titleColor;?>'><?php echo $slide->title;?></h2>
