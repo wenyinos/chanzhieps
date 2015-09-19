@@ -3,6 +3,7 @@ $lang->stat->common   = '统计';
 $lang->stat->view     = '查看';
 $lang->stat->traffic  = '流量统计';
 $lang->stat->client   = '终端统计';
+$lang->stat->device   = '设备类型';
 $lang->stat->os       = '操作系统';
 $lang->stat->browser  = '浏览器';
 $lang->stat->from     = '来源统计';
@@ -21,9 +22,11 @@ $lang->stat->noData    = '没有数据';
 $lang->stat->dateError = '时间错误';
 
 $lang->stat->itemList = new stdclass();
-$lang->stat->itemList->self   = '直接访问';
-$lang->stat->itemList->out    = '外链访问';
-$lang->stat->itemList->search = '搜索引擎';
+$lang->stat->itemList->self    = '直接访问';
+$lang->stat->itemList->out     = '外链访问';
+$lang->stat->itemList->search  = '搜索引擎';
+$lang->stat->itemList->desktop = '桌面设备';
+$lang->stat->itemList->mobile  = '移动设备';
 
 $lang->stat->trafficModes = new stdclass();
 $lang->stat->trafficModes->today    = '今日';
