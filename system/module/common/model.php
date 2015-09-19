@@ -42,21 +42,44 @@ class commonModel extends model
         $this->config->personal = isset($config[$account]) ? $config[$account] : array();
 
         /* Overide the items defined in config/config.php and config/my.php. */
-        if(isset($this->config->system->common))
+        foreach($this->config->system as $module => $records)
         {
-            foreach($this->config->system->common as $record)
+            if($module == 'common')
             {
-                if($record->section)
+                foreach($this->config->system->common as $record)
                 {
-                    if(!isset($this->config->{$record->section})) $this->config->{$record->section} = new stdclass();
-                    if($record->key) $this->config->{$record->section}->{$record->key} = $record->value;
+                    if($record->section)
+                    {
+                        if(!isset($this->config->{$record->section})) $this->config->{$record->section} = new stdclass();
+                        if($record->key) $this->config->{$record->section}->{$record->key} = $record->value;
+                    }
+                    else
+                    {
+                        if(!$record->section) $this->config->{$record->key} = $record->value;
+                    }
                 }
-                else
+            }
+            else
+            {
+                foreach($this->config->system->$module as $record)
                 {
-                    if(!$record->section) $this->config->{$record->key} = $record->value;
+                    if($record->module)
+                    {
+                        if(!isset($this->config->{$record->module})) $this->config->{$record->module} = new stdclass();
+                        if($record->section)
+                        {
+                            if(!isset($this->config->{$record->module}->{$record->section})) $this->config->{$record->module}->{$record->section} = new stdclass();
+                            if($record->key) $this->config->{$record->module}->{$record->section}->{$record->key} = $record->value;
+                        }
+                        else
+                        {
+                            if(!$record->section) $this->config->{$record->module}->{$record->key} = $record->value;
+                        }
+                    }
                 }
             }
         }
+
         $device = helper::getDevice();
         if(isset($this->config->template->{$device}) and !is_object($this->config->template->{$device})) $this->config->template->{$device} = json_decode($this->config->template->{$device});
 
