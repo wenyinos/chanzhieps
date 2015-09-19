@@ -1625,4 +1625,35 @@ class upgradeModel extends model
 
         return !dao::isError();
     }
+
+    /**
+     * Compute score for user.
+     * 
+     * @access public
+     * @return void
+     */
+    public function computeScore()
+    {
+        $threads = $this->dao->select('*')->from(TABLE_THREAD)->fetchGroup('author');
+        $replies = $this->dao->select('*')->from(TABLE_REPLY)->fetchGroup('author');
+
+        foreach($threads as $author => $threadList)
+        {
+            $score = $this->config->score->counts->thread * count($threadList);
+            if(isset($replies[$author]))
+            {
+                $score += $this->config->score->counts->reply * count($replies[$author]);
+                unset($replies[$author]);
+            }
+            $this->dao->update(TABLE_USER)->set('score')->eq($score)->set('rank')->eq($score)->where('account')->eq($author)->exec();
+        }
+
+        foreach($replies as $author => $replyList)
+        {
+            $score = $this->config->score->counts->reply * count($replyList);
+            $this->dao->update(TABLE_USER)->set('score')->eq($score)->set('rank')->eq($score)->where('account')->eq($author)->exec();
+        }
+
+        return !dao::isError();
+    }
 }
