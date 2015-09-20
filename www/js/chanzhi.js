@@ -778,6 +778,9 @@ function fixFooterOfWideTheme()
     };
 
     var theme = $('#themeStyle').data();
-    if(theme.theme === 'wide') fit();
-    $(window).resize(fit);
+    if(theme && theme.theme === 'wide')
+    {
+       fit();
+       $(window).resize(fit);
+    }
 }
