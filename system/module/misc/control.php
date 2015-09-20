@@ -16,23 +16,23 @@ class misc extends control
         die();
     }
 
-    /** 
+    /**
      * Create qrcode for mobile visit.
-     * 
+     *
      * @access public
      * @return void
      */
     public function qrcode()
-    {   
+    {
         if(!extension_loaded('gd'))
-        {   
+        {
             $this->view->noGDLib = sprintf($this->lang->misc->noGDLib, $loginAPI);
             $this->display();
-        }   
+        }
 
         $this->app->loadClass('qrcode');
-        QRcode::png($this->server->http_referer, false, 4, 6); 
-    }   
+        QRcode::png($this->server->http_referer, false, 4, 6);
+    }
 
     /**
      * Show about info of chanzhi.
@@ -42,7 +42,7 @@ class misc extends control
      */
     public function about()
     {
-        $this->view->title = "<i class='icon-heart red'></i>" . $this->lang->about;
+        $this->view->title = $this->lang->about;
         $this->display();
     }
 
