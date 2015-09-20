@@ -56,13 +56,13 @@ $sysURL             = $common->getSysURL();
   $siteCustomCssFile = $this->app->getDataRoot() . 'css' . DS . $config->site->code . DS . $templateName . DS . $themeName . DS . 'style.css';
   if($config->multi && file_exists($siteCustomCssFile))
   {
-      css::import(sprintf($webRoot . 'data/css/%s/%s/%s/style.css?' . $this->config->template->customVersion, $config->site->code, $config->template->{$this->device}->name, $config->template->{$this->device}->theme));
+      css::import(sprintf($webRoot . 'data/css/%s/%s/%s/style.css?' . $this->config->template->customVersion, $config->site->code, $config->template->{$this->device}->name, $config->template->{$this->device}->theme), "id='themeStyle' data-template='{$templateName}' data-theme='{$themeName}'");
   }
   else
   {
       $customCssFile = $this->app->getDataRoot() . 'css' . DS . $templateName . DS . $themeName . DS . 'style.css';
-      if(file_exists($customCssFile)) css::import(sprintf($webRoot . 'data/css/%s/%s/style.css?' . $this->config->template->customVersion, $config->template->{$this->device}->name, $config->template->{$this->device}->theme));
-       
+      if(file_exists($customCssFile)) css::import(sprintf($webRoot . 'data/css/%s/%s/style.css?' . $this->config->template->customVersion, $config->template->{$this->device}->name, $config->template->{$this->device}->theme), "id='themeStyle' data-template='{$templateName}' data-theme='{$themeName}'");
+
   }
 
   if(isset($pageCSS)) css::internal($pageCSS);
@@ -73,7 +73,7 @@ $sysURL             = $common->getSysURL();
 <?php
 if(!empty($config->oauth->sina)) $sina = json_decode($config->oauth->sina);
 if(!empty($config->oauth->qq))   $qq   = json_decode($config->oauth->qq);
-if(!empty($sina->verification)) echo $sina->verification; 
+if(!empty($sina->verification)) echo $sina->verification;
 if(!empty($qq->verification))   echo $qq->verification;
 if(!empty($sina->widget)) js::import('http://tjs.sjs.sinajs.cn/open/api/js/wb.js');
 
