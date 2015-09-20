@@ -616,6 +616,11 @@ table.tablesorter thead tr .headerSortDown:after{font-family: ZenIcon; font-weig
   #mainNavbar .navbar-nav.navbar-right > li > a {padding-left: 4px; padding-right: 4px; font-size: 12px;}
   #navbarSwitcher a {padding-left: 5px;padding-right: 5px;}
 }
+.navbar-header-item {float: left;}
+.navbar-header-item > a {padding: 10px 12px; line-height: 20px; display: block; float: left;}
+.navbar-inverse .navbar-header-item > a {color: #ddd;}
+.navbar-inverse .navbar-header-item > a .caret {border-top-color: #ddd; border-bottom-color: #ddd;}
+.navbar-header-item > a:hover {background-color: rgba(255,255,255,.1)}
 
 /* Pager. */
 .pager {margin-bottom:0;line-height: 20px; color: #999}
