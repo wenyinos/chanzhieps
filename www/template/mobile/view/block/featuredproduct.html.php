@@ -23,7 +23,7 @@ $url      = helper::createLink('product', 'view', "id={$product->id}", "category
 <div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?> with-cards'>
   <div class='panel-body no-padding'>
     <div class='card'>
-      <a href='<?php echo $url ?>' class='card-img'><?php echo html::image($product->image->primary->middleURL, "title='{$product->name}' alt='{$product->name}'"); ?></a>
+      <a href='<?php echo $url ?>' class='card-img'><?php echo "<img class='lazy' alt='{$product->name}' title='{$product->name}' data-src='{$product->image->primary->middleURL}'> ";?></a>
       <div class='card-heading'>
         <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
         <?php if($content->categoryName == 'abbr'):?>

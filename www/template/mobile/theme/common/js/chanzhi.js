@@ -65,7 +65,7 @@ $(function()
         {
             var $col = $(this).css('width', width + '%');
             contentHeight = Math.max(contentHeight, $col.find('.card-content').height());
-            var $img = $col.find('.card-img');
+            var $img = $col.find('.card-img').css('height', 'auto');
             var imgHeight = $img.height();
             if(!$img.find('.media-placeholder').length) minImgHeight = Math.min(minImgHeight, imgHeight);
             maxImgHeight = Math.max(maxImgHeight, imgHeight);
@@ -88,4 +88,10 @@ $(function()
         });
     };
     $('.cards-products').tidyCards();
+
+    $(window).on('lazyloaded', function(e, $img)
+    {
+        var $row = $img.closest('.row');
+        if($row.parent().hasClass('cards-products')) tidyCardsRow($row);
+    })
 });
