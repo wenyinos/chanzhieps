@@ -76,4 +76,6 @@ $(document).ready(function()
     $('.article-content').breakAll('a');
 
     $('.file-md5 a').popover();
+
+    fixFooterOfWideTheme(); // Fit footer style of the 'wide' theme
 });

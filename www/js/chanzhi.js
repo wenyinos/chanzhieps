@@ -764,3 +764,20 @@ function associateSelect(first, sencond, data, firstVal, sencondVal)
         })
     }).change();
 }
+
+/*
+ * Fit footer style of the 'wide' theme
+ */
+function fixFooterOfWideTheme()
+{
+    var fit = function()
+    {
+        var $wrapper = $('.page-wrapper');
+        var fitHeight = $(window).height() - $wrapper.offset().top - $('#footer').outerHeight() - 10;
+        $wrapper.css('min-height', $wrapper.height() < fitHeight ? fitHeight : 'initial');
+    };
+
+    var theme = $('#themeStyle').data();
+    if(theme.theme === 'wide') fit();
+    $(window).resize(fit);
+}
