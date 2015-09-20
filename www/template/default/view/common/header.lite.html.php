@@ -1,12 +1,14 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
 <?php
-$webRoot   = $config->webRoot;
-$jsRoot    = $webRoot . "js/";
-$themeRoot = $webRoot . "template/default/theme/";
-$sysURL    = $common->getSysURL();
+$webRoot        = $config->webRoot;
+$jsRoot         = $webRoot . "js/";
+$themeRoot      = $webRoot . "template/default/theme/";
+$sysURL         = $common->getSysURL();
+$thisModuleName = $this->app->getModuleName();
+$thisMethodName = $this->app->getMethodName();
 ?>
 <!DOCTYPE html>
-<html xmlns:wb="http://open.weibo.com/wb" lang='<?php echo $app->getClientLang();?>'>
+<html xmlns:wb="http://open.weibo.com/wb" lang='<?php echo $app->getClientLang();?>' class='m-<?php echo $thisModuleName?> m-<?php echo $thisModuleName?>-<?php echo $thisMethodName?>'>
 <head profile="http://www.w3.org/2005/10/profile">
   <meta charset="utf-8">
   <meta name="renderer" content="webkit">

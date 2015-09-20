@@ -1,5 +1,3 @@
-/* Mark module and method of this page by add css class to body tag */
-$('html').addClass('m-' + config['currentModule'] + ' m-' + config['currentModule'] + '-' + config['currentMethod']);
 $(document).ready(function()
 {
     $('#navbar, #blogNav').find('ul.navbar-nav li a').each(function()
