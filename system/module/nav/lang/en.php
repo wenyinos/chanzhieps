@@ -39,8 +39,8 @@ $lang->nav->system->book    = 'Book';
 $lang->nav->system->message = 'Inquire';
 
 $lang->nav->desktop       = 'Desktop';
+$lang->nav->desktop_blog  = 'Blog';
 $lang->nav->mobile_top    = 'Top Of Mobile';
-$lang->nav->desktop_blog  = 'Blog Of Desktop';
 $lang->nav->mobile_bottom = 'Bottom Of Mobile';
 $lang->nav->mobile_blog   = 'Blog Of Mobile';
 
