@@ -14,7 +14,7 @@
 <form id='ajaxForm' method='post' action="<?php echo inlink('createGroup');?>">
   <table class='table table-form'>
     <tr>
-      <th class='w-80px'><?php echo $lang->slide->groupName;?></th>
+      <th class='w-100px'><?php echo $lang->slide->groupName;?></th>
       <td><?php echo html::input('name', '', "class='form-control'");?></td>
       <td class='w-200px'><?php echo html::submitButton($lang->slide->createGroup);?></td>
     </tr>

@@ -51,8 +51,8 @@ if($slides):
     <?php endforeach;?>
   </div>
   <?php if(count($slides) > 1):?>
-  <a class='left carousel-control' href='#<?php echo $slideId;?>' data-slide='prev'> <i class='icon-prev'></i> </a>
-  <a class='right carousel-control' href='#<?php echo $slideId;?>' data-slide='next'> <i class='icon-next'></i> </a>
+  <a class='left carousel-control' href='#<?php echo $slideId;?>' data-slide='prev'><i class='icon icon-chevron-left'></i></a>
+  <a class='right carousel-control' href='#<?php echo $slideId;?>' data-slide='next'><i class='icon icon-chevron-right'></i></a>
   <?php endif;?>
 </div>
 </div>

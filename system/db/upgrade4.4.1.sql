@@ -128,4 +128,4 @@ CREATE TABLE IF NOT EXISTS `eps_statregion`(
   KEY `time` (`timeType`, `timeValue`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-ALTER TABLE `eps_order` ADD `type` varchar(30) NOT NULL AFTER `status`; 
+ALTER TABLE `eps_order` ADD `type` varchar(30) NOT NULL default 'shop' AFTER `status`; 

@@ -54,6 +54,7 @@
             <td class='text-left'><?php echo $lang->order->price;?></td>
             <td><?php echo $lang->order->count;?></td>
             <td><?php echo $lang->order->amount;?></td>
+            <td><?php echo $lang->order->note;?></td>
             <td><?php echo $lang->actions;?></td>
           </tr>
         </thead>
@@ -96,6 +97,7 @@
             <strong class='text-danger'><?php echo $currencySymbol;?></strong>
             <strong class='text-danger amountContainer'><?php echo $amount?></strong>
           </td>
+          <td><?php echo html::textarea('note', '', "class='form-control' rows=1")?></td>
           <td class='text-middle text-center'>
             <?php echo html::a(helper::createLink('cart', 'delete', "product={$product->id}"), $lang->delete, "class='cartDeleter'");?>
             <?php echo html::hidden("product[]", $product->id);?>
@@ -109,6 +111,10 @@
       <?php printf($lang->order->totalToPay, $currencySymbol . $total);?>
       <?php echo html::submitButton($lang->order->submit, 'btn-order-submit'); ?>
     </div>
+  </form>
+  <form class='hide' id='payForm' method='post' action="<?php echo inlink('redirect')?>" target='_blank'>
+    <?php echo html::hidden('payLink', '');?>
+    <input class='submitBtn' type='submit' value="<?php echo $lang->confirm;?>" />
   </form>
 </div>
 <?php else:?>

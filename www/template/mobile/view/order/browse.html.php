@@ -73,6 +73,7 @@
             if($order->deliveriedDate > $order->createdDate) $history .= '<li>' . $lang->order->deliveriedDate . $lang->colon .  $order->deliveriedDate . '</li>';
             if($order->confirmedDate > $order->deliveriedDate) $history .= '<li>' . $lang->order->confirmedDate . $lang->colon .  $order->confirmedDate . '</li>';
             if($order->payment == 'COD' and ($order->paidDate > $order->createdDate)) $history .= '<li>' . $lang->order->paidDate . $lang->colon .  $order->paidDate . '</li>';
+            if($order->note) $history .= '<li>' . $lang->order->note . $lang->colon . $order->note . '</li>';
             echo "<ul class='order-track-list text-muted'>{$history}</ul>";
           ?>
         </div>
