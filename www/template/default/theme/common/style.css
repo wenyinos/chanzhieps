@@ -358,7 +358,7 @@ td #aliasLabel {display: table-row;}
 #siteName,
 #siteSlogan {display: table-cell; padding: 10px 10px 10px 0; vertical-align: middle;}
 #siteLogo > a {min-height: 50px; display: block;}
-#siteSlogan {padding-left: 10px; font-size: 18px; color: #777; font-weight: bold;}
+#siteSlogan {padding-left: 10px; font-size: 18px; color: #777; font-weight: 500;}
 #siteLogo {padding: 0;}
 #siteName h2 {margin: 6px 0}
 #headNav {position: absolute; right: 0; top: 8px;}

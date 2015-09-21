@@ -11,6 +11,14 @@
 */
 ?>
 <header id='header' class='clearfix'>
+  <div id='headNav'>
+    <div class='wrapper'>
+      <nav>
+        <?php echo commonModel::printTopBar();?>
+        <?php commonModel::printLanguageBar();?>
+      </nav>
+    </div>
+  </div>
   <div id='headTitle'>
     <div class="wrapper">
       <?php $device = helper::getDevice();?>
@@ -26,14 +34,6 @@
       <div id='siteName' data-ve='logo'><h2><?php echo $this->config->site->name;?></h2></div>
       <?php endif;?>
       <div id='siteSlogan' data-ve='slogan'><span><?php echo $this->config->site->slogan;?></span></div>
-    </div>
-  </div>
-  <div id='headNav'>
-    <div class='wrapper'>
-      <nav>
-        <?php echo commonModel::printTopBar();?>
-        <?php commonModel::printLanguageBar();?>
-      </nav>
     </div>
   </div>
   <?php if(commonModel::isAvailable('search')):?>
