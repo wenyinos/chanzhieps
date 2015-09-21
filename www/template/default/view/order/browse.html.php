@@ -13,11 +13,12 @@
           <tdead>
             <tr class='text-center'>
               <td class='w-60px'><?php echo $lang->order->id;?></td>
-              <td class='text-left'><?php echo $lang->order->productInfo;?></td>
+              <td class='w-300px text-left'><?php echo $lang->order->productInfo;?></td>
               <td class='w-80px text-right'><?php echo $lang->order->amount;?></td>
               <td class='w-220px'><?php echo $lang->order->life;?></td>
               <td class='w-70px'><?php echo $lang->product->status;?></td>
-              <td class='w-150px'><?php echo $lang->actions;?></td>
+              <td><?php echo $lang->order->note;?></td>
+              <td class='w-80px'><?php echo $lang->actions;?></td>
             </tr>
           </thead>
           <tbody>
@@ -51,6 +52,7 @@
               <td class='text-center text-middle'>
                 <?php echo $this->order->processStatus($order);?>
               </td>
+              <td><?php echo $order->note;?></td>
               <td class='text-center text-middle'><?php $this->order->printActions($order);?></td>
             </tr>
             <?php endforeach;?>
