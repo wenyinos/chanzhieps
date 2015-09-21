@@ -240,19 +240,12 @@ class book extends control
         $articles = $this->dao->select('*')->from(TABLE_BOOK)
             ->where(1)
             ->beginIf($searchWord)
-
-            ->andwhere('type')->eq('article')
+            ->andwhere('type', true)->eq('article')
             ->andWhere('title')->like("%{$searchWord}%")
-            
             ->orWhere('keywords')->like("%{$searchWord}%")
-            ->andwhere('type')->eq('article')
-            
             ->orWhere('content')->like("%{$searchWord}%")
-            ->andwhere('type')->eq('article')
-
             ->orWhere('summary')->like("%{$searchWord}%")
-            ->andwhere('type')->eq('article')
-
+            ->markRight(1)
             ->fi()
             ->orderBy('id_desc')
             ->page($pager)

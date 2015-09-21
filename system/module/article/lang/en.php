@@ -95,7 +95,7 @@ $lang->article->noCssTag  = 'No &lt;style&gt;&lt;/style&gt; tag';
 $lang->article->noJsTag   = 'No &lt;script&gt;&lt;/script&gt; tag';
 
 $lang->article->placeholder = new stdclass();
-$lang->article->placeholder->addedDate = 'Schedule to Publish the article after this time';
+$lang->article->placeholder->addedDate = 'Support delay publishing of article';
 $lang->article->placeholder->link      = 'Input link, it can be outer chain.';
 
 $lang->article->forwardFrom = 'Fowarding from';
