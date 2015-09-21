@@ -50,12 +50,12 @@ $lang->slide->rename      = 'Rename';
 
 $lang->slide->successSort     = 'Order data saved.';
 $lang->slide->noImageSelected = 'No images selected';
-$lang->slide->suitableSize    = "You must use pictures of same size.";
-$lang->slide->noChange        = 'No change';
-$lang->slide->groupNotEmpty   = "Name cann't be empty.";
+$lang->slide->suitableSize    = "Size of background images should remain consistent.";
+$lang->slide->noChange        = 'No Change';
+$lang->slide->groupNotEmpty   = "The group name cannnot be blank.";
 
 $lang->slide->defaultGroup = 'Default Group';
 
 /* Targets setting. */
 $lang->slide->target = new stdclass();
-$lang->slide->target->_blank = 'New window';
+$lang->slide->target->_blank = 'New Window';

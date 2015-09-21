@@ -42,7 +42,7 @@ $lang->message->passPre        = 'Pass previous';
 $lang->message->deletePre      = 'Delete previous';
 $lang->message->commentAt      = 'Comment at ';
 $lang->message->deletedObject  = 'Deleted';
-$lang->message->contactHidden  = "Your phone,email,qq only will be send to administrator, will not be exposed.";
+$lang->message->contactHidden  = "Your contant information will be sent to administrator and  is invisible to others.";
 
 $lang->message->confirmDeleteSingle = 'Are you sure to delete this comment?';
 $lang->message->confirmDeletePre    = 'Are you sure to delete comments previous?';

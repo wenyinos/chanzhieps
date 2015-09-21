@@ -11,7 +11,7 @@
  */
 $lang->thread->common    = 'Thread';
 
-$lang->thread->id          = 'Id';
+$lang->thread->id          = 'ID';
 $lang->thread->title       = 'Title';
 $lang->thread->board       = 'Board';
 $lang->thread->author      = 'Autuor';
@@ -40,8 +40,8 @@ $lang->thread->sticks[0] = 'Don\'t stick';
 $lang->thread->sticks[1] = 'Stick on board';
 $lang->thread->sticks[2] = 'Global stick';
 
-$lang->thread->statusList['hidden'] = 'hidden';
-$lang->thread->statusList['normal'] = 'normal';
+$lang->thread->statusList['hidden'] = 'Hidden';
+$lang->thread->statusList['normal'] = 'Normal';
 
 $lang->thread->confirmDeleteThread = "Are you sure to delete this thread?";
 $lang->thread->confirmHideReply    = "Are you sure to hide this reply?";

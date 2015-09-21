@@ -61,7 +61,7 @@
         <tr>
           <th class='w-200px'><?php echo $lang->site->checkIP;?></th>
           <td colspan='3'>
-            <?php echo html::textarea('allowedIP', isset($this->config->site->allowedIP) ? $this->config->site->allowedIP : '', "class='form-control' placeholder='{$lang->site->allowedIPTip}'");?>
+            <?php echo html::textarea('allowedIP', isset($this->config->site->allowedIP) ? $this->config->site->allowedIP : '', "class='form-control'");?>
             <span class='text-important'><?php echo $lang->site->allowedIPTip;?></span>
           </td>
         </tr>
