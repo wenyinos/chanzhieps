@@ -203,9 +203,6 @@ class block extends control
         $region = $this->post->region;
         $block  = $this->post->block;
 
-        $template = 'default';
-        $page   = 'index_index';
-        $region = 'middle';
         $block  = $this->get->block;
 
         $result = $this->block->removeBlock($template, $theme, $page, $region, $block);
