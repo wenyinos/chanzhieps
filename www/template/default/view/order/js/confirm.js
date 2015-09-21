@@ -60,7 +60,10 @@ $(document).ready(function()
         {
             if(response.payLink)
             {
-                window.open(response.payLink);
+                $('#payLink').val(response.payLink);
+                $('#payForm .submitBtn').click(function(){$('#payForm').submit();});
+                $('#payForm .submitBtn').click();
+
                 bootbox.dialog(
                 {  
                     message: v.goToPay,  

@@ -110,6 +110,10 @@
       <?php echo html::submitButton($lang->order->submit, 'btn-order-submit'); ?>
     </div>
   </form>
+  <form class='hide' id='payForm' method='post' action="<?php echo inlink('redirect')?>" target='_blank'>
+    <?php echo html::hidden('payLink', '');?>
+    <input class='submitBtn' type='submit' value="<?php echo $lang->confirm;?>" />
+  </form>
 </div>
 <?php else:?>
 <div class='panel'>
