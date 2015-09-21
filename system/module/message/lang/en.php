@@ -9,7 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->message->common            = 'Comment';
+$lang->message->common            = 'Comments';
 $lang->message->id                = 'ID';
 $lang->message->type              = 'Type';
 $lang->message->from              = 'Name';
@@ -25,9 +25,9 @@ $lang->message->list              = 'List';
 $lang->message->post              = 'Post a comment';
 $lang->message->viewArticle       = 'View article';
 $lang->message->viewComment       = 'View comment';
-$lang->message->thanks            = 'Thanks for your message, it will display after approved!';
+$lang->message->thanks            = 'Thanks for your message,';
 $lang->message->noSelectedMessage = 'No message selected.';
-$lang->message->needCheck         = 'Message will display after approved.';
+$lang->message->needCheck         = 'It will be published after approved.';
 $lang->message->showDetail        = 'Show Detail';
 $lang->message->hideDetail        = 'Hide abstract';
 
@@ -70,8 +70,8 @@ $lang->comment->post         = 'Post a comment';
 $lang->comment->viewArticle  = 'View article';
 $lang->comment->viewComment  = 'View comment';
 $lang->comment->thanks       = 'Thanks for your comment, it will display after approved!';
-$lang->comment->needCheck    = 'Comment will display after approved.';
-$lang->comment->receiveEmail = 'Receive email reminder.';
+$lang->comment->needCheck    = 'It will be published after approved.';
+$lang->comment->receiveEmail = 'Accept email reminder.';
 
 $lang->comment->pass          = 'Pass';
 $lang->comment->reply         = 'Reply';

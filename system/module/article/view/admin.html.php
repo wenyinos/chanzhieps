@@ -46,7 +46,7 @@
         <?php endif;?>
         <th class='text-center w-160px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->article->addedDate);?></th>
         <th class='text-center w-70px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->article->views);?></th>
-        <?php $actionClass = $type == 'page' ? 'w-200px' : 'w-220px';?>
+        <?php $actionClass = $type == 'page' ? 'w-200px' : 'w-260px';?>
         <th class='text-center <?php echo $actionClass;?>' style='<?php if($type == 'article') echo 'width: 340px';?>'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
