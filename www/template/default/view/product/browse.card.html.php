@@ -14,9 +14,7 @@
       }
       ?>
       <div class='card-heading'>
-        <?php echo html::a(inlink('view', "id={$product->id}", "category={$product->category->alias}&name=$product->alias"), '<strong>' . $product->name . '</strong>');?>
-        <div style="text-align: right">
-          <span class='card-content text-latin'>
+        <span class='pull-right'>
           <?php
           if(!$product->unsaleable)
           {
@@ -36,8 +34,10 @@
           ?>
           <?php $productView = isset($this->config->ui->productView) ? $this->config->ui->productView : true;?>
           <?php if($productView):?><span data-toggle='tooltip' class='text-muted views-count' title='<?php echo $lang->product->viewsCount;?>'><i class="icon icon-eye-open"></i> <?php echo $product->views;?></span><?php endif;?>
-          </span>
-        </div>
+        </span>
+        <span class='pull-left w-180px text-nowrap text-ellipsis'>
+        <?php echo html::a(inlink('view', "id={$product->id}", "category={$product->category->alias}&name=$product->alias"), '<strong>' . $product->name . '</strong>');?>
+        </span>
       </div>
     </div>
   </div>
