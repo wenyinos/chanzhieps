@@ -351,8 +351,8 @@ td #aliasLabel {display: table-row;}
 
 /* === Specail part === */
 /* Header */
-#header {position: relative; padding-bottom: 10px;}
-#headTitle {display: table; margin-top: 10px;}
+#header {position: relative; padding: 10px 0}
+#headTitle {display: table;}
 #headTitle > .wrapper {display: table-row;}
 #siteLogo,
 #siteName,
@@ -361,20 +361,20 @@ td #aliasLabel {display: table-row;}
 #siteSlogan {padding-left: 10px; font-size: 18px; color: #777; font-weight: bold;}
 #siteLogo {padding: 0;}
 #siteName h2 {margin: 6px 0}
-#headNav {position: absolute; right: 0; top: 10px;}
+#headNav {position: absolute; right: 0; top: 8px;}
 #headNav nav > a, #languageBar {display: inline-block; margin-right: 5px;}
 #headNav nav > a:last-child {margin-right: 0;}
 #headNav .login-msg:empty {display: none}
 #languageBar > a {display: inline-block; margin-right: 4px;}
 #languageBar > a:last-child {margin-right: 0;}
 @media (max-width: 767px) {
-  #header {margin-left: -10px; margin-right: -10px;}
+  #header {padding: 0;}
   #siteSlogan {display: none}
-  #headTitle {margin-top: 22px; padding: 0 10px; position: absolute; z-index: 10010; bottom: -49px; left: 10px;}
+  #headTitle {top: 35px; padding: 0 10px; position: absolute; z-index: 10010;}
   #siteLogo {padding: 0;}
   #siteName {padding: 0;}
   #siteName h2 {margin: 12px 0}
-  #headNav {position: static; top: 0; width: 100%; text-align: right; background-color: #e5e5e5; padding: 5px 15px}
+  #headNav {position: static; top: 0; width: 100%; text-align: right; background-color: #e5e5e5; padding: 5px 10px}
   #headTitle img {height: 45px; max-width: inherit; min-width: 50px; width: auto;}
 
   .navbar-header {min-height: 50px}
@@ -470,12 +470,14 @@ body.body-modal {padding: 20px;}
 
 /* Search bar */
 #searchbar {position: absolute; right: 0; top: 45%; max-width: 200px;}
-#searchbar .form-control {border-radius: 16px 0 0 16px}
-#searchbar .btn {border-radius: 0 16px 16px 0}
+#searchbar .input-group {position: relative;}
+#searchbar .form-control {border-radius: 16px; padding-right: 30px;}
+#searchbar .btn {position: absolute; right: 0; top: 1px; z-index: 10; border: none; box-shadow: none; background: none; color: #808080}
+#searchbar .btn:hover {color: #347aeb}
 @media (max-width: 767px) {
   #searchbar {right: auto; left: 10px; top: 2px; max-width: 150px}
   #searchbar .form-control, #searchbar .btn {padding: 3px 8px; height: 26px}
-  #searchbar .btn {padding: 3px}
+  #searchbar .btn {padding: 3px; right: 5px; top: 1px;}
   #headNav.hide {display: block; height: 30px}
   #headNav.hide + #searchbar {max-width: 400px; left: auto; right: 0; padding: 0 10px;}
 }

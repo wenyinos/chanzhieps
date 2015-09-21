@@ -675,4 +675,38 @@ class blockModel extends model
     {
         $this->app->loadLang('block');
     }
+
+    /**
+     * removeBlock 
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @param  string    $page 
+     * @param  string    $region 
+     * @param  int       $blockID 
+     * @access public
+     * @return void
+     */
+    public function removeBlock($template, $theme, $page, $region, $blockID)
+    {
+        $layout = $this->dao->select('*')->from(TABLE_LAYOUT)
+            ->where('template')->eq($template)
+            ->andWhere('page')->eq($page)
+            ->andWhere('region')->eq($region)
+            ->fetch();
+        if(empty($layout)) return array('result' => 'fail', 'message' => $this->lang->fail);
+        $blocks = json_decode($layout->blocks);
+
+        $newBlocks = array();
+        foreach($blocks as $block) 
+        {
+            if($block->id != $blockID) $newBlocks[] = $block;
+        }
+
+        $layout->blocks = helper::jsonEncode($newBlocks);
+        $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
+
+        if(!dao::isError()) return array('result' => 'success');
+        return array('result' => 'fail', 'message' => dao::getError());
+    }
 }
