@@ -78,6 +78,7 @@ class orderModel extends model
         $order->payStatus      = 'not_paid';
         $order->status         = 'normal';
         $order->deliveryStatus = 'not_send';
+        $order->type           = 'shop';
 
         $address = $this->dao->select('*')->from(TABLE_ADDRESS)->where('id')->eq($this->post->deliveryAddress)->andWhere('account')->eq($this->app->user->account)->fetch();
         $order->address = helper::jsonEncode($address);
