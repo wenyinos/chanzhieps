@@ -219,6 +219,14 @@ class statModel extends model
         return $charts;
     }
 
+    /**
+     * Get day labels between begin and end date.
+     * 
+     * @param  int    $begin 
+     * @param  int    $end 
+     * @access public
+     * @return void
+     */
     public function getDayLabels($begin, $end)
     {
         $days = (strtotime($end) - strtotime($begin)) / (24 * 60 * 60);
@@ -226,10 +234,27 @@ class statModel extends model
         return $dayLabels;
     }
 
+    /**
+     * Get hour labels of one date.
+     * 
+     * @param  int    $day 
+     * @access public
+     * @return void
+     */
     public function getHourLabels($day)
     {
         foreach($this->config->stat->hourLabels as $hour) $labels[] = $day . $hour;
         return $labels;
     }
-
+    
+    public function getKeywordsList($orderBy, $pager)
+    {
+        return $this->dao->select('*, sum(pv) as pv, sum(uv) as uv, sum(ip) as ip')->from(TABLE_STATREPORT)
+            ->where('type')->eq('keywords')
+            ->andWhere('timeType')->eq('day')
+            ->groupBy('item')
+            ->orderBy($orderBy)
+            ->page($pager)
+            ->fetchAll('item');
+    }
 }

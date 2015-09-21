@@ -93,4 +93,26 @@ class stat extends control
         $this->view->type  = $type; 
         $this->display();
     }
+
+    /**
+     * keywords 
+     * 
+     * @param  string $orderBy 
+     * @param  int    $recTotal 
+     * @param  int    $recPerPage 
+     * @param  int    $pageID 
+     * @access public
+     * @return void
+     */
+    public function keywords($orderBy = 'pv_desc', $recTotal = 0, $recPerPage = 10, $pageID = 1)
+    {   
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal, $recPerPage, $pageID);
+
+        $this->view->keywordList = $this->stat->getKeywordsList($orderBy, $pager);
+        $this->view->title       = $this->lang->stat->keywords;
+        $this->view->orderBy     = $orderBy;
+        $this->view->pager       = $pager;
+        $this->display();
+    }
 }
