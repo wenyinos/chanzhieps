@@ -39,6 +39,7 @@ $lang->site->cn2tw           = 'Copy from simplified Chinese content';
 $lang->site->cdn             = 'CND Site';
 $lang->site->sensitive       = 'Sensitive Words';
 $lang->site->scheme          = 'Default scheme';
+$lang->site->saveDays        = 'Save days';
 
 $lang->site->importantOption = 'Important option';
 $lang->site->checkIP         = 'Check login IP';
@@ -50,7 +51,10 @@ $lang->site->setsecurity     = 'Security setting';
 $lang->site->setsensitive    = 'Set sensitive words';
 $lang->site->filterSensitive = 'Filter sensitive words';
 $lang->site->mobileTemplate  = 'Mobile Template';
+$lang->site->score           = 'Score';
+$lang->site->setCounts       = 'Set score rule';
 $lang->site->front           = 'Visit website';
+$lang->site->closeScoreTip   = 'After disabling the integral function, CV will not be cummulative and remain unchanged.';
 
 $lang->site->setBasic      = "Baisc";
 $lang->site->setLang       = "Languages";
@@ -106,16 +110,16 @@ $lang->site->captchaList['auto']  = 'Automatic';
 $lang->site->captchaList['close'] = 'Close';
 
 $lang->site->validateTypes = new stdclass();
-$lang->site->validateTypes->okFile = 'file';
-$lang->site->validateTypes->email  = 'email';
+$lang->site->validateTypes->okFile = 'File';
+$lang->site->validateTypes->email  = 'Email';
 
 $lang->site->schemeList = array();
 $lang->site->schemeList['http']  = 'http';
 $lang->site->schemeList['https'] = 'https';
 
 $lang->site->frontList = array();
-$lang->site->frontList['login'] = 'need login';
-$lang->site->frontList['guest'] = "needn't login";
+$lang->site->frontList['login'] = 'Need login';
+$lang->site->frontList['guest'] = "Needn't login";
 
 $lang->site->mobileTemplateList['open']  = 'Open';
 $lang->site->mobileTemplateList['close'] = 'Close';

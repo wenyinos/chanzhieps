@@ -59,16 +59,16 @@ $lang->product->setcss       = 'Set CSS';
 $lang->product->setjs        = 'Set JS';
 $lang->product->files        = 'Files';
 $lang->product->images       = 'Images';
-$lang->product->addToCart    = "<i class='icon icon-shopping-cart'></i> 加入购物车";
+$lang->product->addToCart    = "<i class='icon icon-shopping-cart'></i> Add to Cart";
 $lang->product->count        = 'Count';
 $lang->product->comments     = 'Comments';
 $lang->product->detail       = 'Detail';
 $lang->product->setting      = 'Setting';
 $lang->product->soldout      = 'Sold out';
 
-$lang->product->congratulations  = "congratulations";
-$lang->product->addToCartSuccess = "Add to cart successfully.";
-$lang->product->gotoCart         = "Go to cart";
+$lang->product->congratulations  = "Congratulations";
+$lang->product->addToCartSuccess = "Added to Cart.";
+$lang->product->gotoCart         = "Go to Cart";
 $lang->product->goback           = "Go Back";
 
 $lang->product->confirmDelete = 'Are you sure to delete it?';
