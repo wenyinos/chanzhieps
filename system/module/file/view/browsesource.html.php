@@ -1,4 +1,5 @@
 <?php include '../../common/view/header.admin.html.php';?>
+<?php js::import($jsRoot . 'zeroclipboard/zeroclipboard.min.js');?>
 <div class='modal fade' id='uploadModal'>
   <div class='modal-dialog'>
     <div class='modal-content'>
@@ -43,7 +44,7 @@
         {
             $imageHtml .= "<li class='file-image file-{$file->extension}'>";
             $imageHtml .= html::a(helper::createLink('file', 'download', "fileID=$file->id&mose=left"), html::image($file->fullURL), "target='_blank' data-toggle='lightbox'");
-            $imageHtml .= "<div class='file-source'><input type='text' value='" . $file->fullURL . "'/></div>";
+            $imageHtml .= "<div class='file-source'><input id='fullURL{$file->id}' type='text' value='{$file->fullURL}'/><button class='copyBtn' data-clipboard-target='fullURL{$file->id}'>{$lang->copy}</button></div>";
             $imageHtml .= "<span class='file-actions'>";
             $imageHtml .= html::a(helper::createLink('file', 'sourcedelete', "id=$file->id"), "<i class='icon-trash'></i>", "class='deleter'");
             $imageHtml .= html::a(helper::createLink('file', 'sourceedit', "id=$file->id"), "<i class='icon-edit'></i>", "data-toggle='modal'");
@@ -116,4 +117,8 @@
     </table>
   </div>
 </div>
+<script type="text/javascript">
+var doms = $('.copyBtn');
+var clip = new ZeroClipboard( doms );
+</script>
 <?php include '../../common/view/footer.admin.html.php';?>
