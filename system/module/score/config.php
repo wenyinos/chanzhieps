@@ -1,4 +1,5 @@
 <?php
+$config->score = new stdclass();
 $config->score->counts = new stdclass();
 $config->score->counts->register     = 50;
 $config->score->counts->login        = 2;

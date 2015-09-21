@@ -50,6 +50,8 @@
 .ve:hover > .ve-cover .ve-resize-handler.left > .icon {left: -4px}
 .ve:hover > .ve-cover .ve-resize-handler.right > .icon {right: -4px}
 
+.ve-resizing.col {transition: width .2s}
+
 .ve[data-ve='slogan'], .ve[data-ve='logo'] {min-width: 120px;}
 
 .block.ve {min-height: 22px; margin-bottom: 14px;}
@@ -93,6 +95,16 @@
 .blocks.row > .col.col-row > .row.ve:hover > .ve-cover, .blocks.row > .col.col-row > .row.ve.ve-editing > .ve-cover {animation: none; box-shadow: none; border: 1px solid #03b8cf!important;}
 .blocks.row > .col.col-row > .row.ve > .ve-cover .ve-resize-handler > .icon {background-color: rgba(3, 184, 207, 0.2); color: #03b8cf;}
 .blocks.row > .col.col-row > .row.ve.ve-editing-resize > .ve-cover .ve-resize-handler, .blocks.row > .col.col-row > .row.ve > .ve-cover .ve-resize-handler:hover {background-color: rgba(3, 184, 207, 0.2);}
+
+.carousel > .ve-actions-bar {position: absolute; right: 20px; bottom: 20px; z-index: 20}
+.carousel-inner > .item .ve-actions-bar {position: absolute; text-align: center; left: 0; right: 0; bottom: 0; padding: 20px; transition: background-color .2s; z-index: 15;}
+.carousel:hover .carousel-inner > .item .ve-actions-bar {background-color: #38b03f; }
+a.ve-btn-carousel, a.ve-btn-carousel:active, a.ve-btn-carousel:focus, a.ve-btn-carousel:visited, .ve-carousel-order {background-color: #38b03f; color: #fff; display: inline-block; min-width: 34px; width: 34px; height: 34px;  text-align: center; border-radius: 17px; border: rgba(255,255,255,.25) solid 2px; line-height: 30px;}
+.ve-btn-carousel + .ve-btn-carousel {margin-left: 10px;}
+.ve-btn-carousel:hover {background-color: #2c8931; color: #fff; border-color: rgba(255, 255, 255, .8)}
+.ve-btn-carousel.disabled, .ve-btn-carousel.disabled:hover {background-color: #38b03f; opacity: .3}
+.ve-btn-carousel > .icon {line-height: 30px;}
+.ve-carousel-order {font-size: 18px; margin: 0 10px; width: auto; padding-left: 10px; padding-right: 10px; border-style: dotted}
 
 body.ve-preview-in .ve-cover, body.ve-preview-hover .ve-cover, body.ve-preview-in .ve-preview-hidden, body.ve-preview-hover .ve-preview-hidden {display: none!important}
 body.ve-preview-in .block.ve, body.ve-preview-hover .block.ve {min-height: none; margin-bottom: auto;}

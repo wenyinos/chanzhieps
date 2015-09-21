@@ -18,9 +18,9 @@
 class html
 {
     /**
-     * Create the title tag. 
-     * 
-     * @param  mixed $title 
+     * Create the title tag.
+     *
+     * @param  mixed $title
      * @access public
      * @return string.
      */
@@ -31,11 +31,11 @@ class html
 
     /**
      * Create a meta.
-     * 
+     *
      * @param mixed $name   the meta name
      * @param mixed $value  the meta value
      * @access public
-     * @return string          
+     * @return string
      */
     public static function meta($name, $value)
     {
@@ -44,23 +44,23 @@ class html
 
     /**
      * Create icon tag
-     * 
+     *
      * @param mixed $url  the url of the icon.
      * @access public
-     * @return string          
+     * @return string
      */
     public static function icon($url)
     {
-        return "<link rel='icon' href='$url' type='image/x-icon' />\n" . 
+        return "<link rel='icon' href='$url' type='image/x-icon' />\n" .
                "<link rel='shortcut icon' href='$url' type='image/x-icon' />\n";
 
     }
 
     /**
      * Create the rss tag.
-     * 
-     * @param  string $url 
-     * @param  string $title 
+     *
+     * @param  string $url
+     * @param  string $title
      * @static
      * @access public
      * @return string
@@ -190,7 +190,7 @@ class html
             $string .= ($key == $checked) ? " checked ='checked'" : "";
             $string .= $attrib;
             $string .= " /> $value</label>\n";
-            
+
             $i++;
         }
         return $string;
@@ -228,7 +228,7 @@ class html
 
     /**
      * Create select buttons include 'selectAll' and 'selectAll'.
-     * 
+     *
      * @param  string $scope  the scope of select reverse.
      * @return string
      */
@@ -335,7 +335,7 @@ EOT;
 
     /**
      * Create submit button.
-     * 
+     *
      * @param  string $label    the label of the button
      * @param  string $class    the class of the button
      * @param  string $misc     other params
@@ -355,7 +355,7 @@ EOT;
 
     /**
      * Create reset button.
-     * 
+     *
      * @static
      * @access public
      * @return string the reset button tag.
@@ -368,7 +368,7 @@ EOT;
 
     /**
      * Create common button.
-     * 
+     *
      * @param  string $label the label of the button
      * @param  string $class the class of the button
      * @param  string $misc  other params
@@ -383,7 +383,7 @@ EOT;
 
     /**
      * create a button, when click, go to a link.
-     * 
+     *
      * @param  string $label    the link title
      * @param  string $link     the link url
      * @param  string $class    the link style
@@ -427,7 +427,7 @@ EOT;
 
     /**
      * Print the star images.
-     * 
+     *
      * @param  float    $stars 0 1 1.5 2 2.5 3 3.5 4 4.5 5
      * @access public
      * @return void
@@ -436,7 +436,7 @@ EOT;
     {
         $redStars   = 0;
         $halfStars  = 0;
-        $whiteStars = 5; 
+        $whiteStars = 5;
         if($stars)
         {
             $redStars  = floor($stars);
@@ -453,16 +453,16 @@ EOT;
 
 /**
  * JS class.
- * 
+ *
  * @package framework
  */
 class js
 {
     /**
      * Import a js file.
-     * 
-     * @param  string $url 
-     * @param  string $version 
+     *
+     * @param  string $url
+     * @param  string $version
      * @access public
      * @return string
      */
@@ -477,8 +477,8 @@ class js
     }
 
     /**
-     * The start of javascript. 
-     * 
+     * The start of javascript.
+     *
      * @static
      * @access private
      * @return string
@@ -490,9 +490,9 @@ class js
     }
 
     /**
-     * The end of javascript. 
-     * 
-     * @param  bool    $newline 
+     * The end of javascript.
+     *
+     * @param  bool    $newline
      * @static
      * @access private
      * @return void
@@ -504,9 +504,9 @@ class js
     }
 
     /**
-     * Show a alert box. 
-     * 
-     * @param  string $message 
+     * Show a alert box.
+     *
+     * @param  string $message
      * @static
      * @access public
      * @return string
@@ -517,8 +517,8 @@ class js
     }
 
     /**
-     * Close window 
-     * 
+     * Close window
+     *
      * @static
      * @access public
      * @return void
@@ -530,8 +530,8 @@ class js
 
     /**
      * Show error info.
-     * 
-     * @param  string|array $message 
+     *
+     * @param  string|array $message
      * @static
      * @access public
      * @return string
@@ -554,8 +554,8 @@ class js
     }
 
     /**
-     * Reset the submit form. 
-     * 
+     * Reset the submit form.
+     *
      * @static
      * @access public
      * @return string
@@ -636,7 +636,7 @@ EOT;
 
     /**
      * Close current window.
-     * 
+     *
      * @static
      * @access public
      * @return string
@@ -678,7 +678,7 @@ EOT;
 
     /**
      * Export the config vars for createLink() js version.
-     * 
+     *
      * @static
      * @access public
      * @return void
@@ -722,8 +722,8 @@ EOT;
 
     /**
      * Execute some js code.
-     * 
-     * @param string $code 
+     *
+     * @param string $code
      * @static
      * @access public
      * @return string
@@ -735,12 +735,12 @@ EOT;
         $js .= self::end();
         echo $js;
     }
-    
+
     /**
      * Set js value.
-     * 
-     * @param  string   $key 
-     * @param  mix      $value 
+     *
+     * @param  string   $key
+     * @param  mix      $value
      * @static
      * @access public
      * @return void
@@ -751,7 +751,7 @@ EOT;
         $js  = self::start(false);
         if(!$viewOBJOut)
         {
-            $js .= 'if(typeof(v) != "object") v = {};'; 
+            $js .= 'if(typeof(v) != "object") v = {};';
             $viewOBJOut = true;
         }
 
@@ -788,22 +788,23 @@ class css
 {
     /**
      * Import a css file.
-     * 
-     * @param  string $url 
-     * @param  string $version 
+     *
+     * @param  string $url
+     * @param  string $version
      * @access public
      * @return vod
      */
-    public static function import($url)
+    public static function import($url, $attrib = '')
     {
         global $config;
-        echo "<link rel='stylesheet' href='$url?v={$config->version}' type='text/css' media='screen' />\n";
+        if(!empty($attrib)) $attrib = ' ' . $attrib;
+        echo "<link rel='stylesheet' href='$url?v={$config->version}' type='text/css' media='screen'{$attrib}/>\n";
     }
 
     /**
      * Print a css code.
-     * 
-     * @param  string    $css 
+     *
+     * @param  string    $css
      * @static
      * @access public
      * @return void

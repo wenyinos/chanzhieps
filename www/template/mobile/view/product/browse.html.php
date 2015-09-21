@@ -44,7 +44,7 @@
             }
             else
             {
-                echo html::image($product->image->primary->middleURL, "title='{$product->name}' alt='{$product->name}'");
+                echo "<img class='lazy' alt='{$product->name}' title='{$product->name}' data-src='{$product->image->primary->middleURL}'> ";
             }
             ?>
           </a>

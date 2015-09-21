@@ -22,7 +22,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-plus'></i> <?php echo $lang->slide->create;?></strong></div>
   <div class='panel-body'>
-    <form id='ajaxForm' method='post' enctype='multipart/form-data'>
+    <form id='ajaxForm' method='post' class='ve-form' enctype='multipart/form-data'>
       <table class='table table-form'>
         <tr>
           <th class='w-100px'><?php echo $lang->slide->title;?></th>
@@ -69,7 +69,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
                   <?php echo html::input('backgroundColor', '#114DAD', "class='form-control input-color text-latin' placeholder='" . $lang->colorTip . "'");?>
                   <span class='input-group-btn'>
                     <button type='button' class='btn dropdown-toggle' data-toggle='dropdown'>
-                      <i class='icon icon-question'></i> 
+                      <i class='icon icon-question'></i>
                       <span class='caret'></span>
                     </button>
                     <div class='dropdown-menu colors'>
@@ -149,7 +149,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
             <?php echo html::input('label[key]', '', "class='form-control' placeholder='{$lang->slide->label}'");?>
             <div class='input-group-btn'>
               <button type='button' class='btn btn-primary dropdown-toggle' data-toggle='dropdown'>
-                <?php echo $lang->slide->buttonColor;?> 
+                <?php echo $lang->slide->buttonColor;?>
                 <span class='caret'></span>
               </button>
               <?php echo html::hidden('buttonClass[key]', 'primary');?>
@@ -171,7 +171,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
               <?php echo html::checkbox('buttonTarget', $lang->slide->target, '', "class='button-target'") . html::hidden('buttonTarget[key]', '');?>
             </div>
           </div>
-        </td> 
+        </td>
         <td><?php echo html::a('javascript:;', "<i class='icon-plus'></i>", "class='plus btn btn-mini'") . html::a('javascript:;', "<i class='icon-remove'></i>", "class='delete btn-mini btn'");?></td>
       </tr>
     </tbody>

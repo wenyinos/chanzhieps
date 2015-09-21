@@ -68,7 +68,7 @@
             {
                 if(options.dismiss === 'update')
                 {
-                    updateVisualArea();
+                    $.updateVisualArea();
                 }
                 else if(options.dismiss === 'reload')
                 {
@@ -128,6 +128,139 @@
     $.visuals = visuals;
     if(DEBUG) console.log(visuals);
 
+    var initCarouselArea = function($carousel, setting)
+    {
+        var createAction = setting.groupActions.add;
+        createAction.url = createActionLink(setting, createAction, $carousel.data());
+        $carousel.append('<div class="ve-actions-bar"><a href="{url}" class="ve-slide-action ve-action-addslide ve-btn-carousel" title="{text}" data-toggle="tooltip" data-action="add"><i class="icon icon-{icon}"></i></a></div>'.format(createAction));
+
+        var $items = $carousel.find('.carousel-inner > .item');
+        var actions = setting.itemActions;
+
+        $.each(actions, function(actionName, action)
+        {
+            action.url = createActionLink(setting, action);
+            action.name = actionName;
+        });
+        var itemsCount = $items.length;
+        $items.each(function(idx)
+        {
+            idx += 1;
+            var $item = $$(this).attr('data-order', idx);
+            var itemData = $item.data();
+            var $actions = $$('<div class="ve-actions-bar" />');
+            $.each(actions, function(actionName, action)
+            {
+                var $a = $$(('<a href="' + action.url.format(itemData) + '" class="ve-btn-carousel ve-action-{name}slide ve-slide-action ve-btn-carousel" title="{text}" data-toggle="tooltip" data-action="{name}"><i class="icon icon-{icon}"></i></a>').format(action));
+
+                if(actionName === 'up')
+                {
+                    if(idx === 1) $a.attr({title: lang.alreadyFirstSlide, disabled: 'disabled'}).addClass('disabled');
+                    else $a.attr('title', action.text.format(idx - 1));
+
+                    $a = $a.add('<span class="ve-carousel-order" data-toggle="tooltip" title="' + lang.slideOrder + '"> ' + idx + ' <small>/ ' + itemsCount + '</small></span>');
+                }
+                else if(actionName === 'down')
+                {
+                    if(idx === itemsCount) $a.attr({title: lang.alreadyLastSlide, disabled: 'disabled'}).addClass('disabled');
+                    else $a.attr('title', action.text.format(idx + 1));
+                }
+
+                $actions.append($a);
+            });
+            $item.append($actions);
+        });
+
+        $carousel.find('[data-toggle="tooltip"]').tooltip({container: 'body'});
+
+        $carousel.on('click', '.ve-slide-action', function()
+        {
+            var $this = $$(this);
+            if($this.hasClass('disabled')) return false;
+
+            var actionName = $this.data('action');
+            var action = actions[actionName] || setting.groupActions[actionName];
+            var actionUrl = $this.attr('href');
+            $carousel.addClass('ve-using');
+            $this.tooltip('hide');
+
+            if(actionName === 'delete')
+            {
+                var confirmMessage = action.confirm || lang.confirmDelete;
+                var callback = function(result)
+                {
+                    if(result)
+                    {
+                        postActionData(actionUrl, action, null, function(result)
+                        {
+                            if(result === 'success')
+                            {
+                                if($.updateVisualArea) $.updateVisualArea($carousel, result);
+                            }
+                        });
+                    }
+                }
+
+                if(bootbox && bootbox.confirm)
+                {
+                    bootbox.confirm({size: 'small', message: confirmMessage, callback: callback});
+                }
+                else callback(confirm(confirmMessage));
+            }
+            else if(actionName === 'up' || actionName === 'down')
+            {
+                var $item = $this.closest('.item');
+                var order = $item.data('order');
+                if(actionName === 'up')
+                {
+                    $item.attr('data-order', order - 1);
+                    $item.prev('.item').attr('data-order', order);
+                }
+                else
+                {
+                    $item.attr('data-order', order + 1);
+                    $item.next('.item').attr('data-order', order);
+                }
+                var orders = {};
+                $carousel.find('.carousel-inner > .item').each(function()
+                {
+                    $item = $(this);
+                    orders['order[' + $item.data('id') + ']'] = $item.data('order');
+                });
+
+                postActionData(actionUrl, action, null, function(result)
+                {
+                    if(result === 'success')
+                    {
+                        if($.updateVisualArea) $.updateVisualArea($carousel, result);
+                    }
+                }, orders);
+            }
+            else
+            {
+                openModal(actionUrl,
+                {
+                    width : action.width,
+                    icon  : action.icon,
+                    height: 'auto',
+                    title : action.title || action.text,
+                    loaded: function(e)
+                    {
+                        var modal$ = e.jQuery;
+                        modal$.setAjaxForm('.ve-form', function(response)
+                        {
+                            $.closeModal();
+                            if($.updateVisualArea) $.updateVisualArea($carousel, response);
+                        });
+                    },
+                    dismiss: action.onDismiss
+                });
+            }
+
+            return false;
+        });
+    };
+
     var initVisualArea = function(ve)
     {
         var $ve = ve instanceof $$ ? ve : $$(this);
@@ -135,7 +268,7 @@
 
         if($veMain.data('veInit')) return;
 
-        var name = $veMain.data('ve');
+        var name = $veMain.data('ve') || $veMain.attr('data-ve');
 
         // init blocks
         if(name === 'block')
@@ -186,6 +319,7 @@
 
         $veMain.data('ve', name).data('veInit', true);
         var setting = visuals[name];
+
         if($.isPlainObject(setting))
         {
             if(!setting.hidden)
@@ -210,7 +344,7 @@
                     }
 
                     if(!action || action.hidden) return;
-                    $actions.append('<li data-toggle="tooltip" data-action="' + actionName + '" class="ve-action ve-action-' + actionName + '" title="' + action.text + '">'
+                    $actions.append('<li data-action="' + actionName + '" class="ve-action ve-action-' + actionName + '" title="' + action.text + '">'
                         + (action.icon ? '<i class="icon icon-' + action.icon + '"></i>' : action.text) + '</li>');
                 });
                 $heading.prepend($actions);
@@ -227,6 +361,8 @@
                 var position = setting.position && setting.position === 'top' ? 'prepend' : 'append';
                 $veMain[position]($$('<div class="ve-actions-bar" data-ve-name="' + name + '" data-target="#' + $veMain.attr('id') + '"></div>').append($actions));
             }
+
+            if(name === 'carousel') initCarouselArea($ve, setting);
             return $ve;
         }
     };
@@ -236,7 +372,7 @@
         var setting = visuals[name];
         showLoadingMessage();
         $.post(
-            createActionLink(setting, action, options),
+            setting ? createActionLink(setting, action, options) : name,
             postData,
             function(data)
             {
@@ -245,7 +381,7 @@
                     if(data.result === 'success')
                     {
                         callback && callback('success', data);
-                        showMessage((data.message || action.success || lang.deleted).format(options), 'success');
+                        showMessage((data.message || action.success).format(options), 'success');
                     }
                     else
                     {
@@ -414,20 +550,26 @@
         }).on('mousedown', '.ve-resize-handler', function(e)
         {
             var $ve = $$(this).closest('.ve');
-            var $col = $ve.parent();
+            var $col = $ve.parent().addClass('ve-resizing');
             var $row = $ve.closest('.row' + ($ve.hasClass('row') ? ':not(.ve)' : ''));
             var $blocksHolder = $ve.closest('.row.blocks');
             var startX = e.pageX;
             var startWidth = $col.width();
             var rowWidth = $row.width();
             var oldGrid = $col.attr('data-grid');
+            var lastGrid = oldGrid;
 
             var mouseMove = function(event)
             {
                 $ve.addClass('ve-editing ve-editing-resize');
                 var x = event.pageX;
                 var grid = Math.max(1, Math.min(12, Math.round(12 * (startWidth + (x - startX)) / rowWidth)));
-                $col.attr('data-grid', grid);
+                if(lastGrid != grid)
+                {
+                    $col.attr('data-grid', grid);
+                    showMessage(lang.gridWidth + ': ' + Math.round(100*grid/12) + '% (' + grid + '/12)', 'show', {scale:  false});
+                    lastGrid = grid;
+                }
                 event.preventDefault();
                 event.stopPropagation();
             };
@@ -435,6 +577,7 @@
             var mouseUp = function(event)
             {
                 $ve.removeClass('ve-editing ve-editing-resize');
+                $col.removeClass('ve-resizing');
 
                 if(oldGrid !== $col.attr('data-grid'))
                 {
@@ -450,6 +593,7 @@
                         tidyBlocks($blocksHolder);
                     }, {grid: $col.attr('data-grid')});
                 }
+                else $.zui.messager.hide();
 
                 $$body.unbind('mousemove.ve.resize', mouseMove).unbind('mouseup.ve.resize', mouseUp);
                 event.preventDefault();
@@ -480,17 +624,19 @@
         var $wrapper = $$('<div/>');
         $wrapper.load(visualPageUrl + ' ' + selector, function(data)
         {
-            showMessage(data.message || lang.saved, 'success');
             var $veExtra = $ve.next();
             if($veExtra.is('style')) $veExtra.remove();
             selector = '#' + id + ', #' + id + '+style';
-            var $newVe = initVisualArea($wrapper.find(selector));
+            var $newVe = $wrapper.find(selector);
+            $newVe.first().data('ve', name);
+            $newVe = initVisualArea($newVe);
             $ve.replaceWith($newVe);
             setTimeout(function()
             {
-                if(name === 'block') tidyBlocks($newVe.closest('.blocks.row'));
+                if(name === 'block') tidyBlocks($ve.closest('.blocks.row'));
                 initVisualAreas();
             }, 100);
+            showMessage(data.message || lang.saved, 'success');
         });
     };
 
@@ -619,6 +765,7 @@
                 openCommonActionModal($ve || name, actionName);
             }
             e.stopPropagation();
+            return false;
         });
 
         // set ajax options
@@ -630,6 +777,7 @@
         if($$.fn.tooltip)
         {
             $$('.ve-actions > li').tooltip({container: 'body', placement: 'bottom'});
+            $$('[data-toggle=tooltip]').tooltip({container: 'body'});
         }
 
         if(isInPreview) $$('body').addClass('ve-preview-in');

@@ -1,12 +1,16 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
 <?php
-$webRoot   = $config->webRoot;
-$jsRoot    = $webRoot . "js/";
-$themeRoot = $webRoot . "template/default/theme/";
-$sysURL    = $common->getSysURL();
+$webRoot        = $config->webRoot;
+$jsRoot         = $webRoot . "js/";
+$themeRoot      = $webRoot . "template/default/theme/";
+$sysURL         = $common->getSysURL();
+$thisModuleName = $this->app->getModuleName();
+$thisMethodName = $this->app->getMethodName();
+$template       = $this->config->template->{$this->device}->name ? $this->config->template->{$this->device}->name : 'default';
+$theme          = $this->config->template->{$this->device}->theme ? $this->config->template->{$this->device}->theme : 'default';
 ?>
 <!DOCTYPE html>
-<html xmlns:wb="http://open.weibo.com/wb" lang='<?php echo $app->getClientLang();?>'>
+<html xmlns:wb="http://open.weibo.com/wb" lang='<?php echo $app->getClientLang();?>' class='m-<?php echo $thisModuleName?> m-<?php echo $thisModuleName?>-<?php echo $thisMethodName?>'>
 <head profile="http://www.w3.org/2005/10/profile">
   <meta charset="utf-8">
   <meta name="renderer" content="webkit">
@@ -57,13 +61,12 @@ $sysURL    = $common->getSysURL();
   $siteCustomCssFile = $this->app->getDataRoot() . 'css' . DS . $config->site->code . DS . $this->config->template->{$this->device}->name . DS . $this->config->template->{$this->device}->theme . DS . 'style.css';
   if($config->multi && file_exists($siteCustomCssFile))
   {
-      css::import(sprintf($webRoot . 'data/css/%s/%s/%s/style.css?' . $this->config->template->customVersion, $config->site->code, $config->template->{$this->device}->name, $config->template->{$this->device}->theme));
+      css::import(sprintf($webRoot . 'data/css/%s/%s/%s/style.css?' . $this->config->template->customVersion, $config->site->code, $config->template->{$this->device}->name, $config->template->{$this->device}->theme), "id='themeStyle' data-template='{$template}' data-theme='{$theme}'");
   }
   else
   {
       $customCssFile = $this->app->getDataRoot() . 'css' . DS . $this->config->template->{$this->device}->name . DS . $this->config->template->{$this->device}->theme . DS . 'style.css';
-      if(file_exists($customCssFile)) css::import(sprintf($webRoot . 'data/css/%s/%s/style.css?' . $this->config->template->customVersion, $config->template->{$this->device}->name, $config->template->{$this->device}->theme));
-       
+      if(file_exists($customCssFile)) css::import(sprintf($webRoot . 'data/css/%s/%s/style.css?' . $this->config->template->customVersion, $config->template->{$this->device}->name, $config->template->{$this->device}->theme), "id='themeStyle' data-template='{$template}' data-theme='{$theme}'");
   }
 
   if(isset($pageCSS)) css::internal($pageCSS);
@@ -98,18 +101,16 @@ $sysURL    = $common->getSysURL();
   <![endif]-->
   <?php
   js::set('lang', $lang->js);
-  
-  $template   = $this->config->template->{$this->device}->name ? $this->config->template->{$this->device}->name : 'default';
-  $theme      = $this->config->template->{$this->device}->theme ? $this->config->template->{$this->device}->theme : 'default';
-  $baseCustom = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array(); 
+
+  $baseCustom = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array();
   if(!empty($baseCustom[$template][$theme]['js'])) js::execute($baseCustom[$template][$theme]['js']);
-  
+
   if(!empty($config->oauth->sina) and !is_object($config->oauth->qq)) $sina = json_decode($config->oauth->sina);
   if(!empty($config->oauth->qq) and !is_object($config->oauth->qq))   $qq   = json_decode($config->oauth->qq);
-  if(!empty($sina->verification)) echo $sina->verification; 
+  if(!empty($sina->verification)) echo $sina->verification;
   if(!empty($qq->verification))   echo $qq->verification;
   if(!empty($sina->widget)) js::import('http://tjs.sjs.sinajs.cn/open/api/js/wb.js');
-  
+
   $this->block->printRegion($layouts, 'all', 'header');
   ?>
 </head>

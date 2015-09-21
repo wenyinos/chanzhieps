@@ -241,6 +241,7 @@ $lang->site->menu->mail    = array('link' => '发信设置|mail|admin|', 'alias'
 $lang->site->menu->wechat  = array('link' => '微信设置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
 $lang->site->menu->search  = '全文检索|search|buildindex|';
 $lang->site->menu->tag     = '关键词设置|tag|admin|';
+$lang->site->menu->setLog  = '访问日志设置|site|setLog|';
 
 /* Menu of security module. */
 $lang->security = new stdclass();
@@ -315,11 +316,11 @@ $lang->package = new stdclass();
 /* Menu of stat module. */
 $lang->stat = new stdclass();
 $lang->stat->menu = new stdclass();
-$lang->stat->menu->traffic  = '流量统计|stat|traffic|';
-$lang->stat->menu->from     = '来源统计|stat|from|';
-$lang->stat->menu->search   = '搜索引擎统计|stat|search|';
+$lang->stat->menu->traffic  = '概况|stat|traffic|';
+$lang->stat->menu->from     = '来源统计|stat|report|type=from';
+$lang->stat->menu->search   = '搜索引擎统计|stat|report|type=search';
 $lang->stat->menu->keywords = '关键词统计|stat|keywords|';
-$lang->stat->menu->client   = '终端统计|stat|client|';
+$lang->stat->menu->os       = '终端统计|stat|report|type=os';
 
 /* The error messages. */
 $lang->error = new stdclass();

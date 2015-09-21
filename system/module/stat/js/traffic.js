@@ -1,7 +1,6 @@
 $(document).ready(function()
 {
-    var data = {labels: v.labels, datasets: v.chartData};
-
-    var options = {multiTooltipTemplate: "<%= datasetLabel %> <%= value %>"}
-    chart = $('#chartBox').lineChart(data, options);
+    var data    = {labels: v.lineLabels, datasets: v.lineChart};
+    var options = {multiTooltipTemplate: "<%= datasetLabel %> <%= value %>", datasetFill : false}
+    lineChart   = $('#lineChart').lineChart(data, options);
 })

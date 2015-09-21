@@ -2,21 +2,18 @@
 <?php include 'header.lite.html.php';?>
 <nav class='navbar navbar-inverse navbar-fixed-top' role='navigation' id='mainNavbar'>
   <div class='navbar-header'>
-    <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-ex1-collapse'>
-      <span class='sr-only'>Toggle navigation</span>
+    <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='#mainNavbarCollapse'>
       <span class='icon-bar'></span>
       <span class='icon-bar'></span>
       <span class='icon-bar'></span>
     </button>
     <?php echo html::a($this->createLink($this->config->default->module), $lang->chanzhiEPSx, "class='navbar-brand'");?>
+    <div class='dropdown navbar-header-item'><?php include 'selectlang.html.php';?></div>
   </div>
-  <div class='collapse navbar-collapse navbar-ex1-collapse'>
+  <div class='collapse navbar-collapse' id='mainNavbarCollapse'>
     <?php echo commonModel::createMainMenu($this->moduleName);?>
     <ul class='nav navbar-nav' id='navbarSwitcher'>
       <li><a href='###'><i class='icon-chevron-sign-right icon-large'></i></a></li>
-    </ul>
-    <ul class='nav navbar-nav navbar-right'>
-      <li class='dropdown'><?php include 'selectlang.html.php';?></li>
     </ul>
     <?php echo commonModel::createManagerMenu();?>
   </div>
