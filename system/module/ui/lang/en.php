@@ -22,7 +22,7 @@ $lang->ui->exportTheme     = 'Export Theme';
 $lang->ui->setTheme        = 'Set Theme';
 $lang->ui->customTheme     = 'Custom theme';
 $lang->ui->setFavicon      = "Set favicon";
-$lang->ui->deleteFavicon   = "Do not display favicon";
+$lang->ui->deleteFavicon   = "Not display favicon";
 $lang->ui->deleteLogo      = "Delete logo";
 $lang->ui->others          = "Set others";
 $lang->ui->productView     = "Product view";
@@ -110,7 +110,7 @@ $lang->ui->unWritable  = "Failed to save css file Please check %s is writable.";
 $lang->ui->codeHolder  = "Code must be a combination of number and letters.";
 
 $lang->ui->theme = new stdclass();
-$lang->ui->theme->reset                                = 'Apply default settings';
+$lang->ui->theme->reset                                = 'Reset';
 $lang->ui->theme->default                              = 'Default';
 $lang->ui->theme->resetTip                             = 'Setting changed, take effect after saved.';
 $lang->ui->theme->sizeTip                              = 'The default unit is pixels, such as 1px';

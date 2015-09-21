@@ -22,6 +22,7 @@ $lang->order->expressInfo    = '快递详情';
 $lang->order->receiver       = '收货人';
 $lang->order->noRecord       = '无';
 $lang->order->status         = '状态';
+$lang->order->note           = '备注';
 
 $lang->order->admin          = '订单管理';
 $lang->order->setting        = '系统设置';

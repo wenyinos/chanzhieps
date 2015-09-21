@@ -319,4 +319,15 @@ class order extends control
         }
         $this->display();
     }
+
+    /**
+     * Redirect to payLink.
+     * 
+     * @access public
+     * @return void
+     */
+    public function redirect()
+    {
+        die(js::locate($this->post->payLink));
+    }
 }

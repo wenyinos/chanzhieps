@@ -18,7 +18,7 @@
     <form method='post' id='ajaxForm' class='form-inline'>
       <table class='table table-form'>
         <tr>
-          <th class='w-120px'><?php echo $lang->site->allowUpload;?></th>
+          <th class='w-130px'><?php echo $lang->site->allowUpload;?></th>
           <td class='w-p40'><input type='checkbox' name='allowUpload' value='1' <?php if(isset($this->config->site->allowUpload) and $this->config->site->allowUpload) echo 'checked'?>/></td><td></td>
         </tr>
         <tr>

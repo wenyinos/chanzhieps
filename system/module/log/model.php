@@ -27,11 +27,11 @@ class logModel extends model
             if(!empty($visitor))
             {
                 $visitor->new = false;
-                if($visitor->browserName == $browserName and $visitor->browserVersion = $browserVersion and $visitor->os == helper::getOS()) return $visitor;
+                if($visitor->browserName == $browserName and $visitor->browserVersion = $browserVersion and $visitor->osName == helper::getOS()) return $visitor;
             }
         }
 
-        $visitor = fixer::input('post')
+        $visitor = fixer::input('get')
             ->add('device', $this->app->device)
             ->add('osName', helper::getOS())
             ->add('browserName', helper::getBrowser())
@@ -70,7 +70,7 @@ class logModel extends model
      */
     public function saveReferer()
     {
-        if(!$this->post->referer)
+        if(!$this->get->referer)
         {
             if($this->session->referer)
             {
@@ -80,7 +80,7 @@ class logModel extends model
             return null;
         }
 
-        $url = urldecode($this->post->referer);
+        $url = urldecode($this->get->referer);
         $refererInDB = $this->dao->select("*")->from(TABLE_STATREFERER)->where('url')->eq($url)->fetch();
 
         if(!empty($refererInDB))
@@ -176,7 +176,6 @@ class logModel extends model
         $log->hour     = $hour;
         $log->new      = $visitor->new ? 1 : 0;
         $log->mobile   = $this->app->device == 'mobile' ? 1 : 0;
-        $log->lang     = 'all';
         $this->dao->insert(TABLE_STATLOG)->data($log)->exec();
 
         /* Save basic report data. */
@@ -187,11 +186,12 @@ class logModel extends model
 
         /* Save serachengine data. */
         if(isset($referer->searchEngine) and $referer->searchEngine != '') $this->saveReportItem($type = 'search', $item = $referer->searchEngine, $time, $log);
-        if(isset($referer->keywords) and $referer->keywords != '') $this->saveReportItem($type = 'keywords', $item = $referer->keywords, $time, $log);
+        if(isset($referer->keywords) and $referer->keywords != '') $this->saveReportItem($type = 'keywords', $item = $referer->keywords, $time, $log, $referer->searchEngine);
         
         /* Save referer data. */
         if(!empty($referer)) $this->saveReportItem($type = 'referer', $item = $referer->id, $time, $log);
-        if(!empty($referer)) $this->saveReportItem($type = 'domain', $item = $referer->domain, $time, $log);
+        if(!empty($referer)) $this->saveReportItem($type = 'domain', $item = $referer->domain, $time, $log, $referer->url);
+        if(!empty($referer)) $this->saveReportItem($type = 'url', $item = $this->server->http_referer, $time, $log);
 
         /* Save os data. */
         $this->saveReportItem($type = 'os', $item = $visitor->osName, $time, $log);
@@ -199,6 +199,7 @@ class logModel extends model
         $this->saveReportItem($type = 'browser', $item = $visitor->browserName, $time, $log);
 
         /* Save from data. */
+        if($log->referer != 0) $this->saveReportItem($type = 'domain', $item = $referer->domain, $time, $log, $referer->url);
         if($log->referer != 0 and $log->searchEngine == '') $this->saveReportItem($type = 'from', $item = 'out', $time, $log);
         if($log->referer == 0) $this->saveReportItem($type = 'from', $item = 'self', $time, $log);
         if(!empty($log->referer) and $log->searchEngine != '') $this->saveReportItem($type = 'from', $item = 'search', $time, $log);
@@ -212,10 +213,11 @@ class logModel extends model
      * @param  string    $timeType 
      * @param  string    $timeValue
      * @param  object    $log 
+     * @param  string    $extra
      * @access public
      * @return object
      */
-    public function getIpAndUv($type, $item, $timeType, $timeValue, $log)
+    public function getIpAndUv($type, $item, $timeType, $timeValue, $log, $extra = '')
     {
         if($type != 'year')
         {
@@ -237,6 +239,7 @@ class logModel extends model
 
                 ->beginIF($type == 'keywords')
                 ->andWhere('keywords')->eq($log->keywords)
+                ->andWhere('extra')->eq($extra)
                 ->fi()
 
                 ->beginIF($type == 'os')
@@ -277,10 +280,11 @@ class logModel extends model
      * @param  string    $item 
      * @param  object    $time 
      * @param  object    $log 
+     * @param  string    extra
      * @access public
      * @return void
      */
-    public function saveReportItem($type, $item, $time, $log)
+    public function saveReportItem($type, $item, $time, $log, $extra = '')
     {
         foreach($time as $timeType => $timeValue)
         {
@@ -288,11 +292,12 @@ class logModel extends model
                 ->where('type')->eq($type)->andWhere('item')->eq($item)
                 ->andWhere('timeType')->eq($timeType)
                 ->andWhere('timeValue')->eq($timeValue)
+                ->beginIf($extra)->andWhere('extra')->eq($extra)->fi()
                 ->fetch();
 
             if(!empty($oldReport))
             {
-                $ipAndUv = $this->getIpAndUv($type, $item, $timeType, $timeValue, $log);
+                $ipAndUv = $this->getIpAndUv($type, $item, $timeType, $timeValue, $log, $extra);
 
                 $this->dao->update(TABLE_STATREPORT)
                     ->set('pv = pv + 1')
@@ -311,8 +316,7 @@ class logModel extends model
                 $report->pv        = 1;
                 $report->uv        = 1;
                 $report->ip        = 1;
-                $report->lang      = 'all';
-                if($type == 'keyword') $report->extral = $log->searchEngine;
+                $report->extra     = $extra;
                 $this->dao->insert(TABLE_STATREPORT)->data($report)->exec();
             }
         }
@@ -370,7 +374,6 @@ class logModel extends model
                 $region->pv        = 1; 
                 $region->uv        = 1; 
                 $region->ip        = 1;
-                $region->lang      = 'all';
 
                 $this->dao->insert(TABLE_STATREGION)->data($region)->exec();
             }

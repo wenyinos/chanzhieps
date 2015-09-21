@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `eps_statreport`(
   `id` int(9) unsigned NOT NULL auto_increment,
   `type` char(30) not null,
   `item` char(100) NOT NULL default 0,
-  `extral` varchar(200) NOT NULL default 0,
+  `extra` varchar(200) NOT NULL default 0,
   `timeType` enum('year', 'month', 'day', 'hour') NOT NULL default 'hour',
   `timeValue` char(10) NOT NULL default 0,
   `pv` mediumint(9) unsigned NOT NULL default 0,
@@ -128,4 +128,4 @@ CREATE TABLE IF NOT EXISTS `eps_statregion`(
   KEY `time` (`timeType`, `timeValue`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-ALTER TABLE `eps_order` ADD `type` varchar(30) NOT NULL AFTER `status`; 
+ALTER TABLE `eps_order` ADD `type` varchar(30) NOT NULL default 'shop' AFTER `status`; 

@@ -17,7 +17,7 @@
     <form method='post' id='ajaxForm' class='form-inline'>
       <table class='table table-form'>
         <tr>
-          <th class='w-100px'><?php echo $lang->site->filterSensitive;?></th>
+          <th class='w-150px'><?php echo $lang->site->filterSensitive;?></th>
           <td><?php echo html::radio('filterSensitive', $lang->site->filterSensitiveList, isset($this->config->site->filterSensitive) ? $this->config->site->filterSensitive : 'close');?></td>
         </tr>
         <tr>

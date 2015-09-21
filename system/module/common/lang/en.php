@@ -26,7 +26,6 @@ $lang->cn = 'CNS';
 $lang->tw = 'CNT';
 $lang->en = 'EN';
 
-$lang->noRecord  = 'No record';
 $lang->toBeAdded = 'To be add';
 
 $lang->about  = 'About';
@@ -90,8 +89,8 @@ $lang->sendSuccess    = 'Successfully sended.';
 $lang->deleteSuccess  = 'Successfully deleted.';
 $lang->fail           = 'Failed';
 $lang->noResultsMatch = 'No matched results.';
-$lang->alias          = 'For SEO, could be numbers, words enclosed by "';
-$lang->keywordsHolder = 'Separate keywords by a comma';
+$lang->alias          = 'For SEO, can be numeric, alphabetic.';
+$lang->keywordsHolder = 'Please divide keywords with commas';
 
 $lang->setOkFile = <<<EOT
 <h5>For security reason, please do these steps. </h5>
@@ -337,7 +336,7 @@ $lang->error->sensitive    = 'There can be no sensitive words in the content.';
 
 /* The pager items. */
 $lang->pager = new stdclass();
-$lang->pager->noRecord     = "No records yet.";
+$lang->pager->noRecord     = "No record yet.";
 $lang->pager->digest       = "<strong>%s</strong> records, %s <strong>%s/%s</strong> &nbsp; ";
 $lang->pager->recPerPage   = "<strong>%s</strong> per page";
 $lang->pager->first        = "<i class='icon-step-backward' title='First'></i>";

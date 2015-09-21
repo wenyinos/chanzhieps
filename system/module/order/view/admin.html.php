@@ -27,13 +27,14 @@
       <tr class='text-center'>
         <?php $vars = "mode=$mode&value={$value}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
         <th class='w-60px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->order->id);?></th>
-        <th class='w-60px'><?php commonModel::printOrderLink('account', $orderBy, $vars, $lang->order->account);?></th>
+        <th class='w-80px'><?php commonModel::printOrderLink('account', $orderBy, $vars, $lang->order->account);?></th>
         <th><?php echo $lang->order->productInfo;?></th>
-        <th class='w-60px'><?php commonModel::printOrderLink('amount', $orderBy, $vars, $lang->order->amount);?></th>
-        <th class='w-200px'><?php echo $lang->order->life;?></th>
+        <th class='w-80px'><?php commonModel::printOrderLink('amount', $orderBy, $vars, $lang->order->amount);?></th>
+        <th class='w-220px'><?php echo $lang->order->life;?></th>
         <th class='w-200px'><?php echo $lang->order->expressInfo;?></th>
-        <th class='w-60px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->product->status);?></th>
-        <th class='w-150px'><?php echo $lang->actions;?></th>
+        <th class='w-80px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->product->status);?></th>
+        <th class='w-120px'><?php echo $lang->order->note;?></th>
+        <th class='w-80px'><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
@@ -73,14 +74,13 @@
                 else echo $lang->order->noRecord;
           ?>
         </td>
-        <td>
-          <?php echo $this->order->processStatus($order);?>
-        </td>
+        <td><?php echo $this->order->processStatus($order);?></td>
+        <td><?php echo $order->note;?></td>
         <td><?php $this->order->printActions($order);?></td>
       </tr>
       <?php endforeach;?>
     </tbody>
-    <tfoot><tr><td colspan='8'><?php $pager->show();?></td></tr></tfoot>
+    <tfoot><tr><td colspan='9'><?php $pager->show();?></td></tr></tfoot>
   </table>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>
