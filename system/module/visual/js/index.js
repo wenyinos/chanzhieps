@@ -734,7 +734,7 @@
         initVisualAreas();
 
         // bind event
-        $$('body').on('click', function()
+        var $$body = $$('body').on('click', function()
         {
             $(document).trigger('click.zui.dropdown.data-api');
         })
@@ -780,7 +780,9 @@
             $$('[data-toggle=tooltip]').tooltip({container: 'body'});
         }
 
-        if(isInPreview) $$('body').addClass('ve-preview-in');
+        if(isInPreview) $$body.addClass('ve-preview-in');
+
+        $$body.addClass('ve-mode');
 
         setTimeout(tidyBlocks, 500);
     };
