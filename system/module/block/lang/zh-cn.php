@@ -53,6 +53,7 @@ $lang->block->customStyleTip  = '在这里调整区块的颜色及背景';
 $lang->block->style           = '样式';
 $lang->block->sort            = '排序';
 $lang->block->class           = 'css类名';
+$lang->block->subRegion       = '子布局';
 
 $lang->block->admin        = "区块管理";
 $lang->block->pages        = "布局设置";

@@ -22,7 +22,10 @@ $(document).ready(function()
         $('#child').find('[name*=parent]').val($(this).parents('.block-item').data('block'));
         var entry = $('#child').html().replace(/key/g, v.key);
         $(this).parent().parent().find('.children').append(entry);
-        $(this).parent().siblings(0).children('.block').val(0).attr('readonly', true);
+        if($(this).parent().parent().find('[name=isRegion]').val() != 1)
+        {
+            $(this).parent().siblings(0).children('.block').val(0).attr('readonly', true);
+        }
         computeParent();
     });
 
