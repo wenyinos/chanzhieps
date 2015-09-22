@@ -402,19 +402,26 @@
         });
     };
 
-    var sortBlocks = function($blocksHolder, orders)
+    var sortBlocks = function($holder, orders)
     {
-        var withGrid = $blocksHolder.hasClass('row');
+        console.log('sortBlocks', orders, $holder);
+        var withGrid = $holder.hasClass('row');
+        var subRegion = $holder.hasClass('ve');
         var name = 'block';
         var setting = visuals[name];
         var action = setting.actions.move;
-        var options = $.extend({orders: orders}, setting, $blocksHolder.data());
+        var options = $.extend({orders: orders}, setting, $holder.closest('.blocks').data(), $holder.data());
+
+        if(subRegion)
+        {
+            options.region = $holder.data('id');
+        }
 
         postActionData(name, action, options, function(result)
         {
             if(result === 'success')
             {
-                if(withGrid) tidyBlocks($blocksHolder);
+                if(withGrid) tidyBlocks($holder);
             }
         }, orders.join(','));
     };
@@ -464,9 +471,19 @@
                 {
                     var $row = $ve.parent();
                     if($row.data('veInit')) return;
-                    $row.data('veInit', true);
 
-                    $ve.sortable(
+                    $ve.append('<div class="ve-block-actions ve-actions-bar ve-preview-hidden"><ul class="nav"><li><button data-title="' + $ve.data('title') + '" data-region="' + $ve.data('id') + '" type="button" class="btn btn-block btn-ve ve-action-addblock"><i class="icon icon-plus"></i> ' + lang.addSubBlock + '</button></li></ul></div>');
+                }
+            });
+
+            if(withGrid)
+            {
+                $blocksHolder.children('.col-row').each(function()
+                {
+                    var $row = $$(this);
+                    if($row.data('veInit')) return;
+
+                    $row = $row.data('veInit', true).children('.row').sortable(
                     {
                           trigger: '.ve-move-handler',
                           selector: '.col',
@@ -479,13 +496,11 @@
                                   orders.push($$(this).find('.ve').data('id'));
                               });
 
-                              sortBlocks($ve, orders);
+                              sortBlocks($row, orders);
                           }
                     });
-
-                    $ve.append('<div class="ve-block-actions ve-actions-bar ve-preview-hidden"><ul class="nav"><li><button data-title="' + $ve.data('title') + '" data-region="' + $ve.data('id') + '" type="button" class="btn btn-block btn-ve ve-action-addblock"><i class="icon icon-plus"></i> ' + lang.addSubBlock + '</button></li></ul></div>');
-                }
-            });
+                });
+            }
 
             if($blocksHolder.data('veInit')) return;
 
@@ -521,7 +536,10 @@
                       var orders = [];
                       $.each(e.list, function()
                       {
-                          orders.push($$(this).find('.ve').data('id'));
+                          var $item = $$(this).children('.ve');
+                          var id = $item.data('id');
+                          if($item.hasClass('row')) id = '[' + id + ']';
+                          orders.push(id);
                       });
 
                       sortBlocks($blocksHolder, orders);
