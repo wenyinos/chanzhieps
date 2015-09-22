@@ -120,14 +120,10 @@ class visual extends control
 
         if($_POST)
         {
-            $page   = $this->post->page;
-            $region = $this->post->region;
-            $block  = $this->post->block;
-            
             $block = fixer::input('post')
                 ->setDefault('titleless', 0)
                 ->setDefault('borderless', 0)
-                ->add('id', $this->post->block)
+                ->add('id', $blockID)
                 ->get();
 
             $this->block->fixBlock($layout, $block);

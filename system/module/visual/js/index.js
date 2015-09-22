@@ -41,8 +41,9 @@
     {
         if(typeof $blocks === 'string') $blocks = $$($blocks);
         else if(!($blocks instanceof $$)) $blocks = $$('.row.blocks .col-row > .row');
-        else $blocks = $blocks.closest('.row');
+        $blocks = $blocks.closest('.row');
         $blocks.trigger('tidy');
+
     };
 
     var createActionLink = function(setting, action, options)
@@ -389,7 +390,7 @@
                 else
                 {
                     callback && callback('unknown', data);
-                    showMessage((action.fail || lang.operateFail).format(options), 'danger');
+                    showMessage((action.fail || lang.operateFail).format(options), 'warning');
                 }
             },
             'json'
@@ -593,12 +594,12 @@
                 }
                 else $.zui.messager.hide();
 
-                $$body.unbind('mousemove.ve.resize', mouseMove).unbind('mouseup.ve.resize', mouseUp);
+                $$body.off('mousemove.ve.resize', mouseMove).off('mouseup.ve.resize', mouseUp);
                 event.preventDefault();
                 event.stopPropagation();
             };
 
-            $$body.bind('mousemove.ve.resize', mouseMove).bind('mouseup.ve.resize', mouseUp);
+            $$body.on('mousemove.ve.resize', mouseMove).on('mouseup.ve.resize', mouseUp);
             e.preventDefault();
             e.stopPropagation();
         });
@@ -609,30 +610,27 @@
         $ve = $ve || $$('.ve-editing, .ve-using').first();
         var name = $ve.data('ve');
         var id = $ve.attr('id');
-        var parentSelector = '';
+        var selector = '#' + id;
         if(name === 'block')
         {
-            var $blocksHolder = $ve.closest('.blocks[data-region]');
-            if($blocksHolder.length)
+            $ve = $ve.closest('.blocks[data-region]');
+            if($ve.length)
             {
-                parentSelector = '.blocks[data-region="' + $blocksHolder.data('region') + '"] ';
+                selector = '.blocks[data-region="' + $ve.attr('data-region') + '"]';
+            }
+            else if(DEBUG)
+            {
+                console.error('Cant\'t find a region for the block on update visual area.');
             }
         }
-        var selector = parentSelector + '#' + id + ', ' + parentSelector + '#' + id + '+style';
         var $wrapper = $$('<div/>');
         $wrapper.load(visualPageUrl + ' ' + selector, function(data)
         {
-            var $veExtra = $ve.next();
-            if($veExtra.is('style')) $veExtra.remove();
-            selector = '#' + id + ', #' + id + '+style';
-            var $newVe = $wrapper.find(selector);
-            $newVe.first().data('ve', name);
-            $newVe = initVisualArea($newVe);
-            $ve.replaceWith($newVe);
+            $ve.replaceWith($wrapper.find(selector));
+            initVisualAreas();
             setTimeout(function()
             {
-                if(name === 'block') tidyBlocks($ve.closest('.blocks.row'));
-                initVisualAreas();
+                if(name === 'block') tidyBlocks($ve);
             }, 100);
             showMessage(data.message || lang.saved, 'success');
         });
