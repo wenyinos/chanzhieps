@@ -480,8 +480,8 @@
 
             if($blocksHolder.data('veInit')) return;
 
-            var region = $blocksHolder.data('region');
-            var page = $blocksHolder.data('page') || (region ? region.substring(0, region.indexOf('-')) : null);
+            var region   = $blocksHolder.data('region');
+            var page     = $blocksHolder.data('page') || (region ? region.substring(0, region.indexOf('-')) : null);
             var location = $blocksHolder.data('location') || (region ? region.substring(page.length + 1) : null);
 
             if(!region && (!page || !location))
