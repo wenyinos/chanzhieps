@@ -136,7 +136,7 @@ if(!empty($baseCustom[$template][$theme]['js'])) js::execute($baseCustom[$templa
           <?php echo html::a($this->config->webRoot, html::image($logo->webPath, "class='logo' title='{$this->config->company->name}'"));?>
         </div>
         <?php else: ?>
-        <div id='siteName' data-ve='logo'><h2><?php echo $config->site->name;?></h2></div>
+        <div id='siteName' data-ve='logo'><h2><?php echo html::a($this->config->webRoot, $this->config->site->name);?></h2></div>
         <?php endif;?>
       </div>
     </div>
