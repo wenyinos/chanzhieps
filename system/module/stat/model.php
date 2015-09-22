@@ -368,8 +368,8 @@ class statModel extends model
             ->where('type')->eq('keywords')
             ->andWhere('item')->eq($keyword)
             ->andWhere('timeType')->eq('day')
-            ->beginIf($begin != '')->andWhere('timeValue')->ge($begin)->fi()
-            ->beginIf($end != '')->andWhere('timeValue')->le($end)->fi()
+            ->andWhere('timeValue')->ge($begin)
+            ->andWhere('timeValue')->le($end)
             ->groupBy('extra')
             ->fetchAll('extra');
 
