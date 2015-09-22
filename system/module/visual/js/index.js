@@ -12,7 +12,7 @@
     {
         edit: {icon: 'pencil', text: lang.actions.edit},
         add: {icon: 'plus', text: lang.actions.add},
-        delete: {icon: 'remove', text: lang.actions.delete, confirm: lang.confirmDelete},
+        "delete": {icon: 'remove', text: lang.actions["delete"], confirm: lang.confirmDelete},
         move: {icon: 'move', text: lang.actions.move, hidden: true}
     };
     var DEFAULT_CONFIG = {width: '80%', actions: {edit: true}};
@@ -41,8 +41,9 @@
     {
         if(typeof $blocks === 'string') $blocks = $$($blocks);
         else if(!($blocks instanceof $$)) $blocks = $$('.row.blocks .col-row > .row');
-        else $blocks = $blocks.closest('.row');
+        $blocks = $blocks.closest('.row');
         $blocks.trigger('tidy');
+
     };
 
     var createActionLink = function(setting, action, options)
@@ -92,11 +93,8 @@
         {
             name = $ve.data('ve');
         }
-        var options = $.extend({}, visuals[name], $ve ? $ve.data() : {});
-        if($ve && name === 'block')
-        {
-            options = $.extend(options, $ve.closest('.blocks[data-region]').data());
-        }
+        var parentOptions = ($ve && name === 'block') ? $ve.closest('.blocks[data-region]').data() : {};
+        var options = $.extend(parentOptions, visuals[name], $ve ? $ve.data() : {});
         return options;
     };
 
@@ -293,11 +291,11 @@
                 else title = $.trim($ve.children('.panel-heading').children().first().text()) || (visuals.block.name + ' #' + blockID);
             }
 
-            $veMain.attr(
+            $veMain.data(
             {
-                'data-ve'   : 'block',
-                'data-id'   : blockID,
-                'data-title': '[' + title + ']'
+                ve    : 'block',
+                id    : blockID,
+                title : '[' + title + ']'
             });
         }
         else
@@ -392,7 +390,7 @@
                 else
                 {
                     callback && callback('unknown', data);
-                    showMessage((action.fail || lang.operateFail).format(options), 'danger');
+                    showMessage((action.fail || lang.operateFail).format(options), 'warning');
                 }
             },
             'json'
@@ -443,7 +441,7 @@
                 var $ve = $$(this);
                 if($ve.data('veInit')) return;
 
-                $ve.attr('data-ve', 'block');
+                $ve.attr('data-ve', 'block').data('ve', 'block');
 
                 initVisualArea($ve);
                 if(withGrid)
@@ -489,13 +487,14 @@
                 console.error('The blocks area has no region or (page, location) attribute.');
             }
 
-            $blocksHolder.attr(
+            $blocksHolder.data(
             {
-                "data-page": page,
-                "data-location": location,
-                "data-region": page + '-' + location,
-                "data-title": lang.blocks.pages[page] + '-' + lang.blocks.regions[page][location]
-            }).data('veInit', true);
+                veInit: true,
+                page: page,
+                region: location,
+                location:page + '-' + location,
+                title: lang.blocks.pages[page] + '-' + lang.blocks.regions[page][location]
+            });
 
             $blocksHolder.sortable(
             {
@@ -595,12 +594,12 @@
                 }
                 else $.zui.messager.hide();
 
-                $$body.unbind('mousemove.ve.resize', mouseMove).unbind('mouseup.ve.resize', mouseUp);
+                $$body.off('mousemove.ve.resize', mouseMove).off('mouseup.ve.resize', mouseUp);
                 event.preventDefault();
                 event.stopPropagation();
             };
 
-            $$body.bind('mousemove.ve.resize', mouseMove).bind('mouseup.ve.resize', mouseUp);
+            $$body.on('mousemove.ve.resize', mouseMove).on('mouseup.ve.resize', mouseUp);
             e.preventDefault();
             e.stopPropagation();
         });
@@ -611,30 +610,27 @@
         $ve = $ve || $$('.ve-editing, .ve-using').first();
         var name = $ve.data('ve');
         var id = $ve.attr('id');
-        var parentSelector = '';
+        var selector = '#' + id;
         if(name === 'block')
         {
-            var $blocksHolder = $ve.closest('.blocks[data-region]');
-            if($blocksHolder.length)
+            $ve = $ve.closest('.blocks[data-region]');
+            if($ve.length)
             {
-                parentSelector = '.blocks[data-region="' + $blocksHolder.data('region') + '"] ';
+                selector = '.blocks[data-region="' + $ve.attr('data-region') + '"]';
+            }
+            else if(DEBUG)
+            {
+                console.error('Cant\'t find a region for the block on update visual area.');
             }
         }
-        var selector = parentSelector + '#' + id + ', ' + parentSelector + '#' + id + '+style';
         var $wrapper = $$('<div/>');
         $wrapper.load(visualPageUrl + ' ' + selector, function(data)
         {
-            var $veExtra = $ve.next();
-            if($veExtra.is('style')) $veExtra.remove();
-            selector = '#' + id + ', #' + id + '+style';
-            var $newVe = $wrapper.find(selector);
-            $newVe.first().data('ve', name);
-            $newVe = initVisualArea($newVe);
-            $ve.replaceWith($newVe);
+            $ve.replaceWith($wrapper.find(selector));
+            initVisualAreas();
             setTimeout(function()
             {
-                if(name === 'block') tidyBlocks($ve.closest('.blocks.row'));
-                initVisualAreas();
+                if(name === 'block') tidyBlocks($ve);
             }, 100);
             showMessage(data.message || lang.saved, 'success');
         });
@@ -684,8 +680,9 @@
         var name = $ve.data('ve');
         var setting = visuals[name];
         var options = getVisualOptions($ve);
-        var action = setting.actions.delete;
-        var confirmMessage = setting.actions.delete.confirm.format(options);
+        console.log('deleteVisualArea', name, $ve, options);
+        var action = setting.actions["delete"];
+        var confirmMessage = setting.actions["delete"].confirm.format(options);
         var callback = function(result)
         {
             if(result)

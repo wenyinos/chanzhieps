@@ -308,6 +308,15 @@ $lang->group->menu = $lang->security->menu;
 /* Menu of package module. */
 $lang->package = new stdclass();
 
+/* Menu of stat module. */
+$lang->stat = new stdclass();
+$lang->stat->menu = new stdclass();
+$lang->stat->menu->traffic  = 'Summary|stat|traffic|';
+$lang->stat->menu->from     = 'Source Stats|stat|report|type=from';
+$lang->stat->menu->search   = 'Search Engine Stats|stat|report|type=search';
+$lang->stat->menu->keywords = 'Keyswords Stats|stat|keywords|';
+$lang->stat->menu->os       = 'Operating System Stats|stat|report|type=os';
+
 /* Error info. */
 $lang->error = new stdclass();
 $lang->error->length       = array("<strong>%s</strong>length should be<strong>%s</strong>", "<strong>%s</strong>length should between<strong>%s</strong>and <strong>%s</strong>.");

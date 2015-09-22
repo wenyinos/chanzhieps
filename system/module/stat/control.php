@@ -128,6 +128,11 @@ class stat extends control
             $begin =  date("Ymd", strtotime("-30 day"));
             $end   = date('Ymd');
         }
+        else
+        {
+            $begin = date('Ymd', strtotime($begin));
+            $end   = date('Ymd', strtotime($end));
+        }
 
         $this->view->totalInfo   = $this->stat->getSearchTraffic($begin, $end);
         $this->view->keywordList = $this->stat->getKeywordsList($begin, $end, $orderBy, $pager);
@@ -140,7 +145,7 @@ class stat extends control
         $this->display();
     }
 
-    public function keywordReport($keyword, $dataType = 'pv', $mode = 'weekly', $begin = '', $end = '')
+    public function keywordReport($keyword, $mode = 'weekly', $begin = '', $end = '')
     {
         if($mode == 'today')
         {
@@ -160,12 +165,35 @@ class stat extends control
             $begin =  date("Ymd", strtotime("-30 day"));
             $end   = date('Ymd');
         }
+        else
+        {
+            $begin = date('Ymd', strtotime($begin));
+            $end   = date('Ymd', strtotime($end));
+        }
 
         $this->view->keyword     = $keyword;
         $this->view->labels      = $this->stat->getDayLabels($begin, $end);
         $this->view->totalInfo   = $this->stat->getTrafficByKeyword($keyword, $begin, $end);
         $this->view->keywordLine = $this->stat->getKeywordLine($keyword, $begin, $end);
         $this->view->pieCharts   = $this->stat->getKeywordSearchPie($keyword, $begin, $end);
+        $this->display();
+    }
+
+    /**
+     * Page ranking.
+     * 
+     * @access public
+     * @return void
+     */
+    public function page()
+    {
+        $pages = $this->dao->select('*')->from(TABLE_STATREPORT)
+            ->where('type')->eq('url')
+            ->andWhere('timeType')->eq('year')
+            ->orderBy('pv')->limit(100)->fetchAll();
+
+        $this->view->title = $this->lang->stat->page->common;
+        $this->view->pages = $pages;
         $this->display();
     }
 }

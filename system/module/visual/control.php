@@ -120,14 +120,10 @@ class visual extends control
 
         if($_POST)
         {
-            $page   = $this->post->page;
-            $region = $this->post->region;
-            $block  = $this->post->block;
-            
             $block = fixer::input('post')
                 ->setDefault('titleless', 0)
                 ->setDefault('borderless', 0)
-                ->add('id', $this->post->block)
+                ->add('id', $blockID)
                 ->get();
 
             $this->block->fixBlock($layout, $block);
@@ -144,16 +140,12 @@ class visual extends control
      * @access public
      * @return void
      */
-    public function removeBlock()
+    public function removeBlock($blockID, $page, $region)
     {
         $template = $this->config->template->{$this->device}->name;
         $theme    = $this->config->template->{$this->device}->theme;
 
-        $page   = $this->post->page;
-        $region = $this->post->region;
-        $block  = $this->post->block;
-
-        $result = $this->loadModel('block')->removeBlock($template, $theme, $page, $region, $block);
+        $result = $this->loadModel('block')->removeBlock($template, $theme, $page, $region, $blockID);
         $this->send($result);
     }
 
