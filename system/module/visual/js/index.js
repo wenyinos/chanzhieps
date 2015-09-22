@@ -12,7 +12,7 @@
     {
         edit: {icon: 'pencil', text: lang.actions.edit},
         add: {icon: 'plus', text: lang.actions.add},
-        delete: {icon: 'remove', text: lang.actions.delete, confirm: lang.confirmDelete},
+        "delete": {icon: 'remove', text: lang.actions["delete"], confirm: lang.confirmDelete},
         move: {icon: 'move', text: lang.actions.move, hidden: true}
     };
     var DEFAULT_CONFIG = {width: '80%', actions: {edit: true}};
@@ -92,11 +92,8 @@
         {
             name = $ve.data('ve');
         }
-        var options = $.extend({}, visuals[name], $ve ? $ve.data() : {});
-        if($ve && name === 'block')
-        {
-            options = $.extend(options, $ve.closest('.blocks[data-region]').data());
-        }
+        var parentOptions = ($ve && name === 'block') ? $ve.closest('.blocks[data-region]').data() : {};
+        var options = $.extend(parentOptions, visuals[name], $ve ? $ve.data() : {});
         return options;
     };
 
@@ -293,11 +290,11 @@
                 else title = $.trim($ve.children('.panel-heading').children().first().text()) || (visuals.block.name + ' #' + blockID);
             }
 
-            $veMain.attr(
+            $veMain.data(
             {
-                'data-ve'   : 'block',
-                'data-id'   : blockID,
-                'data-title': '[' + title + ']'
+                ve    : 'block',
+                id    : blockID,
+                title : '[' + title + ']'
             });
         }
         else
@@ -443,7 +440,7 @@
                 var $ve = $$(this);
                 if($ve.data('veInit')) return;
 
-                $ve.attr('data-ve', 'block');
+                $ve.attr('data-ve', 'block').data('ve', 'block');
 
                 initVisualArea($ve);
                 if(withGrid)
@@ -489,13 +486,14 @@
                 console.error('The blocks area has no region or (page, location) attribute.');
             }
 
-            $blocksHolder.attr(
+            $blocksHolder.data(
             {
-                "data-page": page,
-                "data-location": location,
-                "data-region": page + '-' + location,
-                "data-title": lang.blocks.pages[page] + '-' + lang.blocks.regions[page][location]
-            }).data('veInit', true);
+                veInit: true,
+                page: page,
+                region: location,
+                location:page + '-' + location,
+                title: lang.blocks.pages[page] + '-' + lang.blocks.regions[page][location]
+            });
 
             $blocksHolder.sortable(
             {
@@ -684,8 +682,9 @@
         var name = $ve.data('ve');
         var setting = visuals[name];
         var options = getVisualOptions($ve);
-        var action = setting.actions.delete;
-        var confirmMessage = setting.actions.delete.confirm.format(options);
+        console.log('deleteVisualArea', name, $ve, options);
+        var action = setting.actions["delete"];
+        var confirmMessage = setting.actions["delete"].confirm.format(options);
         var callback = function(result)
         {
             if(result)

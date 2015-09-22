@@ -144,16 +144,12 @@ class visual extends control
      * @access public
      * @return void
      */
-    public function removeBlock()
+    public function removeBlock($blockID, $page, $region)
     {
         $template = $this->config->template->{$this->device}->name;
         $theme    = $this->config->template->{$this->device}->theme;
 
-        $page   = $this->post->page;
-        $region = $this->post->region;
-        $block  = $this->post->block;
-
-        $result = $this->loadModel('block')->removeBlock($template, $theme, $page, $region, $block);
+        $result = $this->loadModel('block')->removeBlock($template, $theme, $page, $region, $blockID);
         $this->send($result);
     }
 

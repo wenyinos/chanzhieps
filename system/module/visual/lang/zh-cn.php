@@ -60,10 +60,10 @@ $lang->visual->config->carousel = array('hidden' => 'true', 'module' => 'slide',
 $lang->visual->config->block    = array('name' => "区块", 'width' => 1200, 'params' => 'blockID={id}', 'module' => 'visual',
     'actions' => array(
           'edit'    => array('module' => 'block'),
-          'delete'  => array('method' => 'deleteblock', 'confirm' => '确定从布局中移除 【{title}】？', 'success' => '【{title}】已被移除。', 'params' => 'region={region}&blockID={id}'),
+          'delete'  => array('method' => 'removeBlock', 'confirm' => '确定从布局中移除 {title}？', 'success' => '{title} 已被移除。', 'params' => 'blockID={id}&page={page}&region={region}'),
           'move'    => array('method' => 'moveblock','success' => '排序已保存', 'params' => 'region={region}'),
           'layout'  => array('method' => 'fixblock', 'width' => 600, 'text' => '更改布局', 'icon' => 'columns', 'success' => '布局已保存', 'params' => 'region={region}&blockID={id}'),
-          'add'     => array('method' => 'addblock', 'params' => 'region={region}', 'hidden' => true, 'width' => 1000, 'title' => '添加区块 【{title}】')
+          'add'     => array('method' => 'addblock', 'params' => 'region={region}', 'hidden' => true, 'width' => 1000, 'title' => '添加区块 {title}')
 ));
 $lang->visual->config->article  = array('params' => 'articleID={id}', 'name' => '文章',
     'actions' => array('delete' => true, 'edit' => array('params' => 'articleID={id}&type=article')));
