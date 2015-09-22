@@ -1,0 +1,281 @@
+/*
+ * Chanzhi custom theme
+ *
+ * This file built by machine at {buildTime} automatically.
+ * Template: default
+ * Theme:    default
+ */
+
+@color-pale: mix(#fff, @color-primary, 90%);
+@color-inverse: contrast(@color-primary, #333, #fff, 60%);
+@color-inverse-dark: darken(@color-primary, 60%);
+@color-primary-text: contrast(@color-primary, @color-inverse-dark, @color-primary, 60%);
+
+// Mixins
+.line-gradient(@top; @bottom)
+{
+    background-image: -moz-linear-gradient(top, @top 0%, @bottom 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@top), color-stop(100%,@bottom));
+    background-image: -webkit-linear-gradient(top, @top 0%,@bottom 100%);
+    background-image: -o-linear-gradient(top, @top 0%,@bottom 100%);
+    background-image: linear-gradient(top, @top 0%,@bottom 100%);
+}
+.line-gradient(@color;)
+{
+    .line-gradient(lighten(@color, 2.5%), darken(@color, 1%));
+}
+
+.line-gradient-with-image(@color; @image) when (@image = 'default'), (@image = 'none')
+{
+    .line-gradient(@color);
+}
+
+.box-shadow(@shadow)
+{
+    -moz-box-shadow    : @shadow;
+    -webkit-box-shadow : @shadow; // iOS <4.3 & Android <4.1
+    box-shadow         : @shadow;
+}
+.background-image(@image; @imageRepeat; @imagePositionX; @imagePositionY) when not(@image = inherit)
+{
+    background-image: @image;
+    background-repeat: @imageRepeat;
+    background-position: @imagePositionX @imagePositionY;
+}
+
+.font(@color; @size; @font; @weight)
+{
+    color: @color;
+    font-size: @size;
+    font-family: @font;
+    font-weight: @weight;
+}
+.textstyle(@color; @size; @weight)
+{
+    color: @color;
+    font-size: @size;
+    font-weight: @weight;
+}
+.border(@style; @color; @width; @radius)
+{
+    border: @style @color @width;
+    border-radius: @radius;
+}
+.caret(@color)
+{
+    border-top-color: @color;
+    border-bottom-color: @color;
+}
+
+.panel(@color)
+{
+    .panel,
+    .article,
+    .list
+    {
+        background-color: #fff;
+        border-radius: 0;
+        box-shadow: none;
+        border-bottom-width: 2px; 
+    }
+
+    .panel > .panel-heading,
+    .list > header
+    {
+        background: #f5f5f5;
+    }
+
+    .panel-heading > h4 {margin: 0; line-height: 20px}
+
+    .nav-primary.nav-stacked
+    {
+        > li:first-child > a,
+        > li:first-child.nav-heading
+        {
+            border-radius: 2px 2px 0 0;
+        }
+
+        > li.nav-heading
+        {
+            background: #f5f5f5;
+        }
+    }
+}
+
+.navbarLayout(@layout; @radius; @backcolor) when (@layout = true)
+{
+    @media (min-width: 768px)
+    {
+        #navbar .navbar-nav {width: 100%}
+        .navbar-nav > li:first-child > a {border-radius: @radius 0 0 @radius}
+
+        #navbar .navbar-collapse {padding: 0;}
+        #navbar .navbar-nav > li {float: none; display: table-cell; width: 1%}
+        #navbar .navbar-nav > li > a {text-align: center; white-space:nowrap; box-shadow: inset 1px 0 0 lighten(@backcolor, 10%), inset -1px 0 0 darken(@backcolor, 10%);}
+
+        #navbar .navbar-nav > li:first-child > a {border-radius: @radius 0 0 @radius; box-shadow: inset -1px 0 0 darken(@backcolor, 10%);}
+        #navbar .navbar-nav > li:last-child > a {border-radius: 0 @radius @radius 0; box-shadow: inset 1px 0 0 lighten(@backcolor, 10%);}
+    }
+}
+.navbarLayout(@layout; @radius) when (@layout = false)
+{
+    @radiusX: @radius + 3px;
+    @media (min-width: 768px)
+    {
+        .navbar-nav > li:first-child > a {border-radius: @radius 0 0 @radius}
+        .navbar-nav.navbar-right > li:last-child > a {border-radius: 0 @radius @radius 0}
+    }
+}
+
+.columnLayout(@inverse) when (@inverse)
+{
+    .col-main {float: right;}
+    .col-side {float: left;}
+}
+
+.footerLayout(@borderStyle; @backColor) when not(@borderStyle = none), not(@backColor = transparent)
+{
+    #footer {padding: 20px 15px;}
+    #footNav {left: 15px;}
+    #powerby {right: 15px;}
+}
+
+.btn(@color;)
+{
+    @textColor: contrast(darken(@color, 10%), @fore-color, @back-color);
+    @border: darken(@color, 12%);
+
+    color: @textColor;
+    border-color: @border;
+    background-color: @color;
+
+    &:hover
+    {
+        background-color: darken(@color, 6%);
+        border-color: darken(@border, 6% + 4%);
+    }
+    &:focus,
+    &:active,
+    &.active,
+    .open .dropdown-toggle&
+    {
+        color: @textColor;
+        background-color: lighten(@color, 10%);
+        border-color: lighten(@border, 10% - 4%);
+    }
+    &.disabled,
+    &[disabled],
+    fieldset[disabled] &
+    {
+        &,
+        &:hover,
+        &:focus,
+        &:active,
+        &.active
+        {
+          background-color: @color;
+              border-color: @border;
+        }
+    }
+}
+
+.panel(@color-primary);
+
+/* Global style */
+body
+{
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGkAAABpCAMAAAAOXP0IAAAAElBMVEXv7+/8/Pzm5uby8vL4+Pjr6+s8Y2RHAAAAiUlEQVR42u3ZMQrAMAgFUJPo/a/csQRKoRSEljc4OJhAHp8MRsQYPRVzrXlWzq3PtfW1tr6ezMZ4c9aT2b6b+l6PEydOnO6dsio7ipM8ceLE6ftOfb8GJ3nixInTH5wqszqKkzxx4sTp+059vwYneeLEiZO9hr2GPHHixMlew15Dnjhx4sTpavYAfp9zffLSX1UAAAAASUVORK5CYII=");
+    .background(@background-color, @background-image, @background-image-repeat, @background-image-position-x, @background-image-position-y);
+}
+
+/* Links */
+a
+{
+  color: darken(@color-primary-text, 20%);
+
+  &.primary, &.text-primary 
+  {
+    color: @color-primary-text;
+  }
+
+  &:hover,
+  &:focus 
+  {
+    color: lighten(@color-primary-text, 5%);
+  }
+}
+
+/* Containers. */
+.page-container {padding: 0 15px; margin: 0 auto 20px auto; position: relative;}
+.ie-8 .page-container {max-width: 1170px}
+.page-container:before,.page-container:after {content: " "; display: table;}
+.page-container:after {clear: both;}
+@media (min-width: 768px) {.page-container {max-width: 750px;}}
+@media (min-width: 992px) {.page-container {max-width: 970px;}}
+@media (min-width: 1200px) {.page-container {max-width: 1170px;}}
+@media (max-width: 767px) {.page-container {padding: 0 10px;}}
+
+body > .page-container
+{
+    background-color: #fff;
+    background-color:rgba(255,255,255,0.9);
+    -moz-border-radius:2px;
+    -webkit-border-radius:2px;
+    border-radius:2px;
+    margin-top: 20px;
+    border:1px solid #ccc;
+    box-shadow:0px 1px 6px rgba(0,0,0,0.15);
+}
+
+/* Header */
+#headNav {top: 25px;}
+
+/* Search bar */
+#searchbar {top: auto; bottom: -43px; z-index: 1010; max-width: 160px;}
+#searchbar .form-control {border-radius: 0; border: none; border-bottom: 2px solid transparent; box-shadow: none; padding-left: 8px; background: none; padding-top: 11px; padding-bottom: 9px; height: 43px; color: #808080}
+#searchbar .form-control:hover, #searchbar .form-control:focus {border-bottom-color: @color-primary; }
+#searchbar .form-control:hover {background-color: @color-pale; color: #333}
+#searchbar .btn {padding: 8px; top: 5px; right: 4px;}
+#searchbar .btn:hover, #searchbar .btn:focus {color: @color-primary}
+
+/* Navbar */
+.navbar
+{
+    border-bottom: 2px solid #ccc; 
+    border-radius: 0; 
+    font-weight: 500;
+}
+
+.navbar-nav > li > a:hover,
+.navbar-nav > li > a:focus,
+.navbar-brand:hover,
+.navbar-brand:focus
+{
+    color: @color-primary;
+    background-color: @color-pale;
+}
+
+.navbar-nav > li.active > a,
+.navbar-nav > li.active > a:hover,
+.navbar-nav > li.active > a:focus,
+.navbar-nav > li.active > a:visited
+{
+    color: @color-primary;
+    box-shadow: inset 0 -2px 0 @color-primary;
+    margin-bottom: -2px;
+    padding: 11px 15px;
+    z-index: 10;
+}
+
+
+@media (max-width: 767px)
+{
+    body > .page-container {margin-top: 0;}
+    #header {margin-left: -10px; margin-right: -10px;}
+    #searchbar {bottom: auto; top: 3px;}
+    #searchbar .form-control {padding-top: 2px; padding-bottom: 2px; border: none; background-color: #fafafa; height: 24px;}
+    #searchbar .btn {top: 0; padding: 3px;}
+    #searchbar .form-control:hover {background-color: #fff}
+
+    .navbar {margin-left: -10px; margin-right: -10px;}
+}
