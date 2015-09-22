@@ -93,7 +93,7 @@ class blockModel extends model
 
                     if(!empty($block->children))
                     {
-                        $mergedBlock->id = '';
+                        $mergedBlock->id = $block->id;
                         $children = array();
                         foreach($block->children as $child)
                         {
@@ -581,11 +581,11 @@ class blockModel extends model
                 if(!isset($block->grid)) $block->grid = 12;
                 if($block->grid == 0)
                 {
-                    echo "<div class='col'>";
+                    echo "<div class='col' data-id='{$block->id}'>";
                 }
                 else
                 {
-                    echo "<div class='col' data-grid='{$block->grid}'>";
+                    echo "<div class='col' data-grid='{$block->grid}' data-id='{$block->id}'>";
                 }
             }
 
