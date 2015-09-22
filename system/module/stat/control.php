@@ -60,7 +60,15 @@ class stat extends control
         if($begin) $begin = date('Ymd', strtotime($begin));
         if($end)   $end   = date('Ymd', strtotime($end));
 
-        if($mode != 'fixed')
+        if($mode == 'today')
+        {
+            $begin = $end = date("Ymd");
+        }
+        elseif($mode == 'yestoday')
+        {
+            $begin = $end = date("Ymd", strtotime("-1 day"));
+        }
+        elseif($mode != 'fixed')
         {
             if($mode == 'weekly') $days  = 7;
             if($mode == 'monthly') $days = 30;
