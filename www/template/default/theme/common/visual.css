@@ -31,7 +31,7 @@
 .ve-actions {float: right; display: block; margin: 0; padding: 0;}
 .ve-actions > li {float: left; display: block; padding: 0 3px; min-width: 20px; text-align: center; cursor: pointer; margin-left: 1px; background-color: rgba(0,0,0,.2);}
 .ve-invisible .ve-cover {border: 1px dashed rgba(0, 255, 0, .4)}
-.ve-invisible .ve-heading {opacity: 1; visibility: visible; background: none; color: #38b03f}
+.ve-invisible .ve-heading {opacity: 1; visibility: visible; background: none; color: #38b03f; text-shadow: none;}
 .ve-invisible .ve-actions > li {background: none;}
 .ve-invisible:hover .ve-actions > li {background-color: rgba(0,0,0,.2);}
 .ve-actions > li:hover {background-color: rgba(0,0,0,.4)!important;}
@@ -91,6 +91,8 @@
 .blocks.row > .col.col-row > .row.ve {margin: 0 0 14px; padding: 14px 7px 0;}
 .blocks.row > .col.col-row > .row.ve > .ve-cover {box-shadow: none; border: 1px dotted #03b8cf; background: none}
 .blocks.row > .col.col-row > .row.ve > .ve-cover > .ve-heading {background: #03b8cf; top: -2px; left: -2px; right: auto; border-radius: 0 0 2px 0;}
+.blocks.row > .col.col-row > .row.ve.ve-invisible > .ve-cover > .ve-heading {background: rgba(3, 184, 207, 0.2); color: #03b8cf; top: 0; left: 0;}
+.blocks.row > .col.col-row > .row.ve.ve-invisible:hover .ve-actions > li {color: #fff}
 .blocks.row > .col.col-row > .row.ve > .ve-cover > .ve-heading .ve-action-edit {display: none}
 .blocks.row > .col.col-row > .row.ve:hover > .ve-cover, .blocks.row > .col.col-row > .row.ve.ve-editing > .ve-cover {animation: none; box-shadow: none; border: 1px solid #03b8cf!important;}
 .blocks.row > .col.col-row > .row.ve > .ve-cover .ve-resize-handler > .icon {background-color: rgba(3, 184, 207, 0.2); color: #03b8cf;}

@@ -629,8 +629,8 @@ function setGo2Top()
         options = $.extend({}, $blocks.data(), options);
 
         var winWidth = $('body').width();
-        if(!options.force && winWidth == $blocks.data('winWidth')) return;
-        else $blocks.data('winWidth', winWidth);
+        if(!options.force && winWidth == $blocks.data('tidyWinWidth')) return;
+        else $blocks.data('tidyWinWidth', winWidth);
 
         var rows = {};
         var rowIndex = 0;
