@@ -93,7 +93,7 @@ class blockModel extends model
 
                     if(!empty($block->children))
                     {
-                        $mergedBlock->id = '';
+                        $mergedBlock->id = $block->id;
                         $children = array();
                         foreach($block->children as $child)
                         {
@@ -183,7 +183,7 @@ class blockModel extends model
             $rawBlock = new stdclass();
             if(!empty($block->children))
             {
-                $rawBlock->id = '';
+                $rawBlock->id = $block->id;
                 $children = array();
                 foreach($block->children as $child)
                 {
@@ -241,7 +241,7 @@ class blockModel extends model
      */
     public function getPairs($template)
     {
-        return $this->dao->select('id, title')->from(TABLE_BLOCK)->where('template')->eq($template)->fetchPairs();
+        return $this->dao->select('id, title')->from(TABLE_BLOCK)->where('template')->eq($template)->andWhere('type')->ne('region')->fetchPairs();
     }
 
     /**
@@ -322,10 +322,20 @@ class blockModel extends model
         $type    = isset($block->type) ? $block->type : '';
         $grid    = isset($block->grid) ? $block->grid : '';
 
-        $entry = "<div class='block-item row' data-block='{$key}' data-id='{$blockID}'>";
+        $entry    = "<div class='block-item row' data-block='{$key}' data-id='{$blockID}'>";
         $readonly = !empty($block->children) ? "readonly='readonly'" : '';
-        $entry .= "<div class='col col-type'>" . html::select("blocks[{$key}]", $blockOptions, $blockID, "class='form-control block' id='block_{$key}' $readonly") . "</div>";
-        $entry .= "<div class='col col-grid'><div class='input-group'><span class='input-group-addon'>{$this->lang->block->grid}</span>" . html::select("grid[{$key}]", $this->lang->block->gridOptions, $grid, "class='form-control'") . '</div></div>';
+        if(!empty($block->children)) 
+        {
+            $entry .= "<div class='col col-type text-center'>" . html::hidden("blocks[{$key}]", $blockID) . html::input('', $this->lang->block->subRegion, "class='form-control text-center' readonly") . "</div>";
+            $entry .= html::hidden('isRegion', 1);
+        }
+        else
+        {
+            $entry .= "<div class='col col-type'>" . html::select("blocks[{$key}]", $blockOptions, $blockID, "class='form-control block' id='block_{$key}' $readonly") . "</div>";
+            $entry .= html::hidden('isRegion', 0);
+        }
+
+        $entry   .= "<div class='col col-grid'><div class='input-group'><span class='input-group-addon'>{$this->lang->block->grid}</span>" . html::select("grid[{$key}]", $this->lang->block->gridOptions, $grid, "class='form-control'") . '</div></div>';
 
         $titlelessChecked  = isset($block->titleless) && $block->titleless ? 'checked' : '';
         $borderlessChecked = isset($block->borderless) && $block->borderless ? 'checked' : '';
@@ -485,6 +495,7 @@ class blockModel extends model
         $blocks = array();
         foreach($this->post->blocks as $key => $block)
         {
+            if($block == 0) $block = $this->createRegion($template, $page, $region);
             $blocks[$key]['id']         = $block;
             $blocks[$key]['grid']       = $this->post->grid[$key];
             $blocks[$key]['titleless']  = $this->post->titleless[$key];
@@ -570,11 +581,11 @@ class blockModel extends model
                 if(!isset($block->grid)) $block->grid = 12;
                 if($block->grid == 0)
                 {
-                    echo "<div class='col'>";
+                    echo "<div class='col' data-id='{$block->id}'>";
                 }
                 else
                 {
-                    echo "<div class='col' data-grid='{$block->grid}'>";
+                    echo "<div class='col' data-grid='{$block->grid}' data-id='{$block->id}'>";
                 }
             }
 
@@ -677,7 +688,27 @@ class blockModel extends model
     }
 
     /**
-     * removeBlock 
+     * Get layout of one region.
+     * 
+     * @param  string   $template 
+     * @param  string   $theme 
+     * @param  string   $page 
+     * @param  string   $region 
+     * @access public
+     * @return object
+     */
+    public function getLayout($template, $theme, $page, $region)
+    {
+        return $this->dao->select('*')->from(TABLE_LAYOUT)
+            ->where('template')->eq($template)
+            ->andWhere('theme')->eq($theme)
+            ->andWhere('page')->eq($page)
+            ->andWhere('region')->eq($region)
+            ->fetch();
+    }
+
+    /**
+     * Remove a block from on region or from one subRegion.
      * 
      * @param  string    $template 
      * @param  string    $theme 
@@ -689,11 +720,8 @@ class blockModel extends model
      */
     public function removeBlock($template, $theme, $page, $region, $blockID)
     {
-        $layout = $this->dao->select('*')->from(TABLE_LAYOUT)
-            ->where('template')->eq($template)
-            ->andWhere('page')->eq($page)
-            ->andWhere('region')->eq($region)
-            ->fetch();
+        $layout = $this->getLayout($template, $theme, $page, $region);
+
         if(empty($layout)) return array('result' => 'fail', 'message' => $this->lang->fail);
         $blocks = json_decode($layout->blocks);
 
@@ -708,5 +736,89 @@ class blockModel extends model
 
         if(!dao::isError()) return array('result' => 'success');
         return array('result' => 'fail', 'message' => dao::getError());
+    }
+
+    /**
+     * Append a block to region.
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @param  string    $page 
+     * @param  string    $region 
+     * @param  int    $block 
+     * @access public
+     * @return void
+     */
+    public function appendBlock($template, $theme, $page, $region, $block)
+    {
+        $layout  = $this->getLayout($template, $theme, $page, $region);
+        $blocks  = json_decode($layout->blocks);
+
+        $newBlock = new stdclass();
+        if($block == 'region')
+        {
+            $newBlock->id = $this->createRegion($template, $page, $region);
+        }
+        else
+        {
+            $newBlock->id   = $block;
+        }
+
+        $newBlock->grid = 4;
+        $blocks[]       = $newBlock;
+
+        $layout->blocks = helper::jsonEncode($blocks);
+        $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
+        if(!dao::isError()) return array('result' => 'success');
+        return array('result' => 'fail', 'message' => dao::getError());
+    }
+
+    /**
+     * Fix block attribute in one layout.
+     * 
+     * @param  obvject    $layout 
+     * @param  object     $setting 
+     * @access public
+     * @return array
+     */
+    public function fixBlock($layout, $setting)
+    {
+        $blocks = json_decode($layout->blocks);
+        foreach($blocks as $block)
+        {
+            if($block->id == $setting->id)
+            {
+                $block->grid       = $setting->grid;
+                $block->titleless  = $setting->titleless;
+                $block->borderless = $setting->borderless;
+            }
+        }
+        $layout->blocks = helper::jsonEncode($blocks);
+        $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
+        if(!dao::isError()) return array('result' => 'success');
+        return array('result' => 'fail', 'message' => dao::getError());
+    }
+
+    /**
+     * Create a region block for one region.
+     * 
+     * @param  string $template 
+     * @param  string $page 
+     * @param  string $region 
+     * @access public
+     * @return int $blockID
+     */
+    public function createRegion($template = '', $page, $region)
+    {
+        if($template == '') $template = $this->config->template->{$this->app->device}->name;
+
+        $block = new stdclass();
+
+        $block->type     = 'region';
+        $block->template = $template;
+        $regions         = $this->lang->{$template}->regions->{$page};
+        $block->title    = $this->lang->block->subRegion;
+        $this->dao->insert(TABLE_BLOCK)->data($block)->exec();
+        return $this->dao->lastInsertID();
     }
 }

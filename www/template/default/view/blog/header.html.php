@@ -12,15 +12,17 @@
 ?>
 <?php
 if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}
-$webRoot   = $config->webRoot;
-$jsRoot    = $webRoot . "js/";
-$themeRoot = $webRoot . "template/default/theme/";
-$sysURL    = $common->getSysURL();
-$navs = $this->loadModel('nav')->getNavs('desktop_blog');
+$webRoot        = $config->webRoot;
+$jsRoot         = $webRoot . "js/";
+$themeRoot      = $webRoot . "template/default/theme/";
+$sysURL         = $common->getSysURL();
+$thisModuleName = $this->app->getModuleName();
+$thisMethodName = $this->app->getMethodName();
+$navs           = $this->loadModel('nav')->getNavs('desktop_blog');
 ?>
 <!DOCTYPE html>
 <?php if(!empty($config->oauth->sina)):?>
-<html xmlns:wb="http://open.weibo.com/wb">
+<html xmlns:wb="http://open.weibo.com/wb" class='m-<?php echo $thisModuleName?> m-<?php echo $thisModuleName?>-<?php echo $thisMethodName?>'>
 <?php else:?>
 <html lang="en">
 <?php endif;?>
@@ -136,7 +138,7 @@ if(!empty($baseCustom[$template][$theme]['js'])) js::execute($baseCustom[$templa
           <?php echo html::a($this->config->webRoot, html::image($logo->webPath, "class='logo' title='{$this->config->company->name}'"));?>
         </div>
         <?php else: ?>
-        <div id='siteName' data-ve='logo'><h2><?php echo $config->site->name;?></h2></div>
+        <div id='siteName' data-ve='logo'><h2><?php echo html::a($this->config->webRoot, $this->config->site->name);?></h2></div>
         <?php endif;?>
       </div>
     </div>

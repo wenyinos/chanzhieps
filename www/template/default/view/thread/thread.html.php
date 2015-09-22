@@ -5,7 +5,7 @@
       <?php if($thread->readonly) echo "<span class='label'><i class='icon-lock'></i> " . $lang->thread->readonly . "</span> &nbsp;"; ?>
     </div>
     <strong><?php echo $thread->title; ?></strong>
-    <?php if(commonModel::isAvailable('score')):?>
+    <?php if(commonModel::isAvailable('score') and !empty($thread->scoreSum)):?>
     <?php echo sprintf($lang->thread->scoreSum, $thread->scoreSum);?>
     <?php endif;?>
     <div class='text-muted'><?php echo $thread->addedDate;?></div>
