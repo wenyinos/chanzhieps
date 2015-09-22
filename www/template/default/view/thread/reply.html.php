@@ -10,7 +10,7 @@
       <?php elseif($i == 3):?>
       <strong class='text-success'><?php echo $lang->reply->stool;?></strong>
       <?php endif;?>
-      <?php if(commonModel::isAvailable('score')):?>
+      <?php if(commonModel::isAvailable('score') and !empty($reply->scoreSum)):?>
       <?php echo sprintf($lang->thread->scoreSum, $reply->scoreSum);?>
       <?php endif;?>
     </div>
