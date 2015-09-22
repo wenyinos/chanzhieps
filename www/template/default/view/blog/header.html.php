@@ -12,15 +12,17 @@
 ?>
 <?php
 if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}
-$webRoot   = $config->webRoot;
-$jsRoot    = $webRoot . "js/";
-$themeRoot = $webRoot . "template/default/theme/";
-$sysURL    = $common->getSysURL();
-$navs = $this->loadModel('nav')->getNavs('desktop_blog');
+$webRoot        = $config->webRoot;
+$jsRoot         = $webRoot . "js/";
+$themeRoot      = $webRoot . "template/default/theme/";
+$sysURL         = $common->getSysURL();
+$thisModuleName = $this->app->getModuleName();
+$thisMethodName = $this->app->getMethodName();
+$navs           = $this->loadModel('nav')->getNavs('desktop_blog');
 ?>
 <!DOCTYPE html>
 <?php if(!empty($config->oauth->sina)):?>
-<html xmlns:wb="http://open.weibo.com/wb">
+<html xmlns:wb="http://open.weibo.com/wb" class='m-<?php echo $thisModuleName?> m-<?php echo $thisModuleName?>-<?php echo $thisMethodName?>'>
 <?php else:?>
 <html lang="en">
 <?php endif;?>
