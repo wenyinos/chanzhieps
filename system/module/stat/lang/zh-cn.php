@@ -45,4 +45,10 @@ $lang->stat->dataTypes = new stdclass();
 $lang->stat->dataTypes->pv = '浏览量(PV)';
 $lang->stat->dataTypes->uv = '访客数(UV)';
 $lang->stat->dataTypes->ip = 'IP数';
+<<<<<<< HEAD
 
+$lang->stat->page = new stdclass();
+$lang->stat->page->common = '页面访问量';
+$lang->stat->page->url    = '页面地址';
+=======
+>>>>>>> 9e8c2e2c3765d50885a2d003fcef86663e4755c3
