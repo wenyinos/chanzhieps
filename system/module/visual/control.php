@@ -155,16 +155,25 @@ class visual extends control
      * @access public
      * @return void
      */
-    public function appendBlock()
+    public function appendBlock($page, $region)
     {
+        $blockModel = $this->loadModel('block');
+        
         $template = $this->config->template->{$this->device}->name;
         $theme    = $this->config->template->{$this->device}->theme;
 
-        $page   = $this->post->page;
-        $region = $this->post->region;
-        $block  = $this->post->block;
+        if($_POST)
+        {
+            $block  = $this->post->block;
+            $result = $blockModel->appendBlock($template, $theme, $page, $region, $block);
+            $this->send($result);
+        }
 
-        $result = $this->loadModel('block')->appendBlock($template, $theme, $page, $region, $block);
-        $this->send($result);
+        $blockModel->loadTemplateLang($template);
+
+        $this->view->blocks   = $blockModel->getList($template);
+        $this->view->region   = $region;
+        $this->view->page   = $page;
+        $this->display();
     }
 }

@@ -562,7 +562,8 @@ class blockModel extends model
     private function parseBlockContent($block, $withGrid = false, $containerHeader, $containerFooter)
     {
         $withGrid = ($withGrid and isset($block->grid));
-        if(!empty($block->children))
+        $isRegion = isset($block->type) && $block->type === 'region';
+        if($isRegion || !empty($block->children))
         {
             if($withGrid)
             {
@@ -570,7 +571,7 @@ class blockModel extends model
                 else echo "<div class='col col-row' data-grid='{$block->grid}'><div class='row' data-id='{$block->id}'>";
             }
 
-            foreach($block->children as $child) $this->parseBlockContent($child, $withGrid, $containerHeader, $containerFooter);
+            if(!empty($block->children)) foreach($block->children as $child) $this->parseBlockContent($child, $withGrid, $containerHeader, $containerFooter);
 
             if($withGrid) echo '</div></div>';
         }
@@ -581,11 +582,11 @@ class blockModel extends model
                 if(!isset($block->grid)) $block->grid = 12;
                 if($block->grid == 0)
                 {
-                    echo "<div class='col' data-id='{$block->id}'>";
+                    echo "<div class='col'>";
                 }
                 else
                 {
-                    echo "<div class='col' data-grid='{$block->grid}' data-id='{$block->id}'>";
+                    echo "<div class='col' data-grid='{$block->grid}'>";
                 }
             }
 

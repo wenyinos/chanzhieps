@@ -32,6 +32,7 @@ $lang->visual->jsLang->carousel           = '幻灯片';
 $lang->visual->jsLang->operateFail        = '操作失败！';
 $lang->visual->jsLang->addBlock           = '添加区块';
 $lang->visual->jsLang->addSubRegion       = '添加子布局';
+$lang->visual->jsLang->addSubBlock        = '添加子区块';
 $lang->visual->jsLang->subRegion          = '子布局';
 $lang->visual->jsLang->alreadyLastSlide   = '已是最后一张';
 $lang->visual->jsLang->alreadyFirstSlide  = '已是第一张';
@@ -63,7 +64,7 @@ $lang->visual->config->block    = array('name' => "区块", 'width' => 1200, 'pa
           'delete'  => array('method' => 'removeBlock', 'confirm' => '确定从布局中移除 {title}？', 'success' => '{title} 已被移除。', 'params' => 'blockID={id}&page={page}&region={region}'),
           'move'    => array('method' => 'moveblock','success' => '排序已保存', 'params' => 'region={region}'),
           'layout'  => array('method' => 'fixblock', 'width' => 600, 'text' => '更改布局', 'icon' => 'columns', 'success' => '布局已保存', 'params' => 'page={page}&region={region}&blockID={id}'),
-          'add'     => array('method' => 'addblock', 'params' => 'region={region}', 'hidden' => true, 'width' => 1000, 'title' => '添加区块 {title}')
+          'add'     => array('method' => 'appendBlock', 'params' => 'page={page}&region={region}', 'hidden' => true, 'width' => 1000, 'title' => '添加区块 {title}')
 ));
 $lang->visual->config->article  = array('params' => 'articleID={id}', 'name' => '文章',
     'actions' => array('delete' => true, 'edit' => array('params' => 'articleID={id}&type=article')));
