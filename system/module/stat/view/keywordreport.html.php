@@ -13,26 +13,18 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/chart.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
-<?php if(isset($pieCharts)) js::set('pieCharts', $pieCharts);?>
-<?php if(isset($lineCharts)) js::set('lineCharts', $lineCharts);?>
-<?php if(isset($lineLabels)) js::set('lineLabels', $lineLabels);?>
-<?php js::set('type', $type);?>
+<?php js::set('lineLabels', $labels);?>
+<?php js::set('lineChart', $keywordLine);?>
+<?php js::set('pieCharts', $pieCharts);?>
 <div class='panel'>
   <div class="panel-heading">
     <strong>
-      <i class='icon icon-bar-chart'></i> <?php echo strpos(',os,browser,device,', ",$type,") === false ? $lang->stat->{$type} : $lang->stat->client;?>
+      <i class='icon icon-bar-chart'></i> <?php echo $lang->stat->keywords;?>
     </strong>
-    <?php
-    if(strpos(',os,browser,device,', ",$type,") !== false)
-    {
-        echo html::a(inlink('report', "type=browser"), $lang->stat->browser, $type == 'browser' ? "class='active'" : '');
-        echo html::a(inlink('report', "type=os"), $lang->stat->os, $type == 'os' ? "class='active'" : '');
-        echo html::a(inlink('report', "type=device"), $lang->stat->device, $type == 'device' ? "class='active'" : '');
-    }
-    ?>
+    <label class='text-important'><?php echo $keyword?></label>
     <div class="panel-actions">
-      <form method='get'>
-        <?php echo html::hidden('m', 'stat') . html::hidden('f', 'report') . html::hidden('mode', 'fixed') . html::hidden('type', $type);?>
+      <form method='get' action="<?php echo inlink('keywordreport')?>">
+        <?php echo html::hidden('m', 'stat') . html::hidden('f', 'keywordreport') . html::hidden('mode', 'fixed') . html::hidden('keyword', $keyword);?>
         <table class='table table-borderless'>
           <tr>
             <td><?php echo html::a(inlink('from'), $lang->stat->all);?></td>
@@ -46,7 +38,9 @@
       </form>
     </div>
   </div>
-  <?php if(!empty($lineCharts)) include 'linechart.html.php';?>
+  <?php if(!empty($keywordLine)):?>
+  <div class='chart-canvas'><canvas height='260' width='900' id='lineChart'></canvas></div>
+  <?php endif;?>
   <?php if(!empty($pieCharts)):?>
   <div class='panel-body'>
     <div class='col-md-6'>
