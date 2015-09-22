@@ -11,19 +11,10 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php include '../../common/view/datepicker.html.php';?>
 <div class='panel'>
   <div class="panel-heading">
     <strong><i class='icon-stats'></i> <?php echo $lang->stat->keywords;?></strong>
-    <div class="panel-actions">
-      <form method='post' class='form-inline form-search'>
-        <div class="input-group">
-          <?php echo html::input('stat', $this->post->stat, "class='form-control search-query'");?>
-          <span class="input-group-btn">
-            <?php echo html::submitButton($lang->stat->search, "btn btn-primary"); ?>
-          </span>
-        </div>
-      </form>
-    </div>
   </div>
   <div>
     <ul class='nav nav-tabs'>
@@ -31,7 +22,22 @@
       <?php $class = $mode == $code ? "class='active'" : '';?>
       <li <?php echo $class?>><?php echo html::a(inlink('keywords', "mode=$code"), $modeName);?></li>
       <?php endforeach;?>
+    <li>
+      <form method='get' action="<?php echo inlink('keywordreport')?>">
+        <?php echo html::hidden('m', 'stat') . html::hidden('f', 'keywords') . html::hidden('mode', 'fixed');?>
+        <table class='table table-borderless'>
+          <tr>
+            <td style='padding:4px'>
+              <?php echo html::input('begin', $this->get->begin, "placeholder='{$lang->stat->begin}' class='form-date w-120px'")?> 
+              <?php echo html::input('end', $this->get->end, "placeholder='{$lang->stat->end}' class='form-date w-120px'")?>
+              <?php echo html::submitButton($lang->stat->view, "btn btn-xs btn-info");?>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </li>
     </ul>
+
   </div>
   <table class='table table-list text-center'>
     <thead>
