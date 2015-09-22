@@ -183,6 +183,21 @@ $config->ui->themes['default']['tartan']['basic']['aHover']['color']['default'] 
 $config->ui->themes['default']['tartan']['footer']['border']['border']['default'] = 'none';
 $config->ui->themes['default']['tartan']['footer']['background']['backcolor']['default'] = '#F5F0CC';
 
+/* Tartan2 theme setting */
+$config->ui->themes['default']['tartan2'] = $config->ui->selectorOptions;
+unset($config->ui->themes['default']['tartan2']['basic']['pageBackground']['backcolor']);
+unset($config->ui->themes['default']['tartan2']['basic']['pageText']);
+unset($config->ui->themes['default']['tartan2']['basic']['border']);
+unset($config->ui->themes['default']['tartan2']['basic']['aLink']);
+unset($config->ui->themes['default']['tartan2']['basic']['aVisited']);
+unset($config->ui->themes['default']['tartan2']['basic']['aHover']);
+unset($config->ui->themes['default']['tartan2']['navbar']);
+unset($config->ui->themes['default']['tartan2']['button']);
+unset($config->ui->themes['default']['tartan2']['block']);
+unset($config->ui->themes['default']['tartan2']['footer']);
+$config->ui->themes['default']['tartan2']['basic']['colorset']['primary']['default'] = '#254952';
+$config->ui->themes['default']['tartan2']['basic']['pageBackground']['backgroundImage']['default'] = 'inherit';
+
 /* Tree theme setting */
 $config->ui->themes['default']['tree'] = $config->ui->selectorOptions;
 unset($config->ui->themes['default']['tree']['basic']['aVisited']);

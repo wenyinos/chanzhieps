@@ -480,8 +480,8 @@
 
             if($blocksHolder.data('veInit')) return;
 
-            var region = $blocksHolder.data('region');
-            var page = $blocksHolder.data('page') || (region ? region.substring(0, region.indexOf('-')) : null);
+            var region   = $blocksHolder.data('region');
+            var page     = $blocksHolder.data('page') || (region ? region.substring(0, region.indexOf('-')) : null);
             var location = $blocksHolder.data('location') || (region ? region.substring(page.length + 1) : null);
 
             if(!region && (!page || !location))
@@ -734,7 +734,7 @@
         initVisualAreas();
 
         // bind event
-        $$('body').on('click', function()
+        var $$body = $$('body').on('click', function()
         {
             $(document).trigger('click.zui.dropdown.data-api');
         })
@@ -780,7 +780,9 @@
             $$('[data-toggle=tooltip]').tooltip({container: 'body'});
         }
 
-        if(isInPreview) $$('body').addClass('ve-preview-in');
+        if(isInPreview) $$body.addClass('ve-preview-in');
+
+        $$body.addClass('ve-mode');
 
         setTimeout(tidyBlocks, 500);
     };
