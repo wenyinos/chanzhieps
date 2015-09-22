@@ -101,18 +101,6 @@ class visual extends control
     }
 
     /**
-     * Delete block
-     *
-     * @access public
-     * @return void
-     */
-    public function deleteBlock($region, $blockID)
-    {
-        // TODO: remove block region from database
-        $this->send(array('result' => 'success'));
-    }
-
-    /**
      * Fix a block in a region.
      *
      * @access public
@@ -148,19 +136,6 @@ class visual extends control
 
         $this->view->layout = $layout;
         $this->display();
-    }
-
-    /**
-     * Delete block
-     *
-     * @access public
-     * @return void
-     */
-    public function moveBlock($region)
-    {
-        // TODO: sort block in region from database
-        $this->send(array('result' => 'success'));
-        // $this->send(array('result' => 'fail', 'message' => 'Fail message.'));
     }
 
     /**
