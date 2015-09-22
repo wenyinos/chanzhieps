@@ -113,22 +113,40 @@ class visual extends control
     }
 
     /**
-     * Layout block
+     * Fix a block in a region.
      *
      * @access public
      * @return void
      */
-    public function layoutBlock($region, $blockID)
+    public function fixBlock($page, $region, $blockID)
     {
-        $this->app->loadLang('block');
+        $template = $this->config->template->{$this->device}->name;
+        $theme    = $this->config->template->{$this->device}->theme;
+        $layout   = $this->loadModel('block')->getLayout($template, $theme, $page, $region);
+
+        $blocks   = json_decode($layout->blocks);
+        foreach($blocks as $block)
+        {
+            if($block->id == $blockID) $this->view->block = $block;
+        }
 
         if($_POST)
         {
-            // TODO: layout block region from database
+            $page   = $this->post->page;
+            $region = $this->post->region;
+            $block  = $this->post->block;
+            
+            $block = fixer::input('post')
+                ->setDefault('titleless', 0)
+                ->setDefault('borderless', 0)
+                ->add('id', $this->post->block)
+                ->get();
+
+            $this->block->fixBlock($layout, $block);
             $this->send(array('result' => 'success'));
         }
-        $this->view->grid = 0;
 
+        $this->view->layout = $layout;
         $this->display();
     }
 
@@ -143,5 +161,43 @@ class visual extends control
         // TODO: sort block in region from database
         $this->send(array('result' => 'success'));
         // $this->send(array('result' => 'fail', 'message' => 'Fail message.'));
+    }
+
+    /**
+     * Remove block from a region.
+     * 
+     * @access public
+     * @return void
+     */
+    public function removeBlock()
+    {
+        $template = $this->config->template->{$this->device}->name;
+        $theme    = $this->config->template->{$this->device}->theme;
+
+        $page   = $this->post->page;
+        $region = $this->post->region;
+        $block  = $this->post->block;
+
+        $result = $this->loadModel('block')->removeBlock($template, $theme, $page, $region, $block);
+        $this->send($result);
+    }
+
+    /**
+     * Append a block to region.
+     * 
+     * @access public
+     * @return void
+     */
+    public function appendBlock()
+    {
+        $template = $this->config->template->{$this->device}->name;
+        $theme    = $this->config->template->{$this->device}->theme;
+
+        $page   = $this->post->page;
+        $region = $this->post->region;
+        $block  = $this->post->block;
+
+        $result = $this->loadModel('block')->appendBlock($template, $theme, $page, $region, $block);
+        $this->send($result);
     }
 }

@@ -677,7 +677,27 @@ class blockModel extends model
     }
 
     /**
-     * removeBlock 
+     * Get layout of one region.
+     * 
+     * @param  string   $template 
+     * @param  string   $theme 
+     * @param  string   $page 
+     * @param  string   $region 
+     * @access public
+     * @return object
+     */
+    public function getLayout($template, $theme, $page, $region)
+    {
+        return $this->dao->select('*')->from(TABLE_LAYOUT)
+            ->where('template')->eq($template)
+            ->andWhere('theme')->eq($theme)
+            ->andWhere('page')->eq($page)
+            ->andWhere('region')->eq($region)
+            ->fetch();
+    }
+
+    /**
+     * Remove a block from on region or from one subregion.
      * 
      * @param  string    $template 
      * @param  string    $theme 
@@ -689,11 +709,8 @@ class blockModel extends model
      */
     public function removeBlock($template, $theme, $page, $region, $blockID)
     {
-        $layout = $this->dao->select('*')->from(TABLE_LAYOUT)
-            ->where('template')->eq($template)
-            ->andWhere('page')->eq($page)
-            ->andWhere('region')->eq($region)
-            ->fetch();
+        $layout = $this->getLayout($template, $theme, $page, $region);
+
         if(empty($layout)) return array('result' => 'fail', 'message' => $this->lang->fail);
         $blocks = json_decode($layout->blocks);
 
@@ -706,6 +723,59 @@ class blockModel extends model
         $layout->blocks = helper::jsonEncode($newBlocks);
         $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
 
+        if(!dao::isError()) return array('result' => 'success');
+        return array('result' => 'fail', 'message' => dao::getError());
+    }
+
+    /**
+     * Append a block to region.
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @param  string    $page 
+     * @param  string    $region 
+     * @param  int    $block 
+     * @access public
+     * @return void
+     */
+    public function appendBlock($template, $theme, $page, $region, $block)
+    {
+        $layout  = $this->getLayout($template, $theme, $page, $region);
+        $blocks  = json_decode($layout->blocks);
+
+        $newBlock = new stdclass();
+        $newBlock->id   = $block;
+        $newBlock->grid = 4;
+        $blocks[]       = $newBlock;
+
+        $layout->blocks = helper::jsonEncode($blocks);
+        $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
+        if(!dao::isError()) return array('result' => 'success');
+        return array('result' => 'fail', 'message' => dao::getError());
+    }
+
+    /**
+     * Fix block attribute in one layout.
+     * 
+     * @param  obvject    $layout 
+     * @param  object     $setting 
+     * @access public
+     * @return array
+     */
+    public function fixBlock($layout, $setting)
+    {
+        $blocks = json_decode($layout->blocks);
+        foreach($blocks as $block)
+        {
+            if($block->id == $setting->id)
+            {
+                $block->grid       = $setting->grid;
+                $block->titleless  = $setting->titleless;
+                $block->borderless = $setting->borderless;
+            }
+        }
+        $layout->blocks = helper::jsonEncode($blocks);
+        $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
         if(!dao::isError()) return array('result' => 'success');
         return array('result' => 'fail', 'message' => dao::getError());
     }

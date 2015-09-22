@@ -188,24 +188,4 @@ class block extends control
         $this->view->type = $type;
         $this->display();
     }
-
-    /**
-     * Remove block from a region.
-     * 
-     * @access public
-     * @return void
-     */
-    public function removeBlock()
-    {
-        $template = $this->config->template->{$this->device}->name;
-        $theme    = $this->config->template->{$this->device}->theme;
-        $page   = $this->post->block;
-        $region = $this->post->region;
-        $block  = $this->post->block;
-
-        $block  = $this->get->block;
-
-        $result = $this->block->removeBlock($template, $theme, $page, $region, $block);
-        $this->send($result);
-    }
 }
