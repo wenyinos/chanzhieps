@@ -46,3 +46,6 @@ $lang->stat->dataTypes->pv = '浏览量(PV)';
 $lang->stat->dataTypes->uv = '访客数(UV)';
 $lang->stat->dataTypes->ip = 'IP数';
 
+$lang->stat->page = new stdclass();
+$lang->stat->page->common = '页面访问量';
+$lang->stat->page->url    = '页面地址';

@@ -115,4 +115,22 @@ class stat extends control
         $this->view->pager       = $pager;
         $this->display();
     }
+
+    /**
+     * Page ranking.
+     * 
+     * @access public
+     * @return void
+     */
+    public function page()
+    {
+        $pages = $this->dao->select('*')->from(TABLE_STATREPORT)
+            ->where('type')->eq('url')
+            ->andWhere('timeType')->eq('year')
+            ->orderBy('pv')->limit(100)->fetchAll();
+
+        $this->view->title = $this->lang->stat->page->common;
+        $this->view->pages = $pages;
+        $this->display();
+    }
 }
