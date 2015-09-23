@@ -11,6 +11,7 @@
 @color-inverse: contrast(@color-primary, #333, #fff, 60%);
 @color-inverse-dark: darken(@color-primary, 60%);
 @color-primary-text: contrast(@color-primary, @color-inverse-dark, @color-primary, 60%);
+@color-link: darken(@color-primary-text, 15%);
 
 // Mixins
 .background-image(@image; @imageRepeat; @imagePositionX; @imagePositionY) when not(@image = inherit)
@@ -165,7 +166,11 @@
 }
 
 .panel(@color-primary);
+
 .btn {.button(@color-primary);}
+.btn-group .btn {border-radius: 1px!important; color: @color-link;}
+.btn-group .btn:hover {color: #fff}
+.btn-group .btn.active {color: @color-primary; background-color: @color-pale}
 
 /* Global style */
 body
@@ -177,7 +182,7 @@ body
 /* Links */
 a
 {
-  color: darken(@color-primary-text, 20%);
+  color: @color-link;
 
   &.primary, &.text-primary 
   {
