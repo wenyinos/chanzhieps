@@ -566,7 +566,7 @@ class file extends control
     {
         foreach($this->post->scores as $fileID => $score)
         {
-            $this->dao->update(TABLE_FILE)->set('score')->eq($score)->set('public')->eq(0)->where('id')->eq($fileID)->exec();
+            if($score) $this->dao->update(TABLE_FILE)->set('score')->eq($score)->set('public')->eq(0)->where('id')->eq($fileID)->exec();
         }
         $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
     }
