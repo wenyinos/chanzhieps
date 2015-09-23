@@ -22,7 +22,7 @@ $url      = helper::createLink('product', 'view', "id={$product->id}", "category
 ?>
 <div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
   <div class='panel-body'>
-    <a class='card' href="<?php echo $url;?>">
+    <div class='card'>
       <div class='media' style='background-image: url(<?php echo $product->image->primary->middleURL; ?>);'><?php echo html::image($product->image->primary->middleURL, "title='{$product->name}' alt='{$product->name}'"); ?></div>
       <div class='card-heading'>
         <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
@@ -33,7 +33,7 @@ $url      = helper::createLink('product', 'view', "id={$product->id}", "category
         <?php echo html::a(helper::createLink('product', 'browse', "categoryID={$category->id}", "category={$category->alias}"), '[' . $category->name . '] ');?>
         <?php endif;?>
         <?php endif;?>
-        <strong><?php echo $product->name; ?></strong>
+        <strong><?php echo html::a($url, $product->name);?></strong>
         <span class='text-latin'>
         <?php
         if(!$product->unsaleable)
@@ -59,7 +59,7 @@ $url      = helper::createLink('product', 'view', "id={$product->id}", "category
         </span>
       </div>
       <div class='card-content text-muted'><?php echo helper::substr(strip_tags($product->desc), 80);?></div>
-    </a>
+    </div>
   </div>
 </div>
 <?php endif;?>
