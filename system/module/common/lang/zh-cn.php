@@ -50,6 +50,7 @@ $lang->frontHome      = '前台';
 $lang->forumHome      = '论坛';
 $lang->bookHome       = '手册';
 $lang->dashboard      = '用户中心';
+$lang->visualEdit     = '可视化编辑';
 $lang->register       = '注册';
 $lang->logout         = '退出';
 $lang->login          = '登录';
@@ -319,7 +320,9 @@ $lang->stat->menu->traffic  = '概况|stat|traffic|';
 $lang->stat->menu->from     = '来源统计|stat|report|type=from';
 $lang->stat->menu->search   = '搜索引擎统计|stat|report|type=search';
 $lang->stat->menu->keywords = '关键词统计|stat|keywords|';
+$lang->stat->menu->domains  = '来路域名|stat|report|type=domain|';
 $lang->stat->menu->os       = '终端统计|stat|report|type=os';
+$lang->stat->menu->page     = '页面访问量排名|stat|page|';
 
 /* The error messages. */
 $lang->error = new stdclass();

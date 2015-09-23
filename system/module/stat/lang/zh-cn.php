@@ -10,13 +10,15 @@ $lang->stat->from     = '来源统计';
 $lang->stat->keywords = '关键词统计';
 $lang->stat->outSite  = '来源网站统计';
 $lang->stat->search   = '搜索引擎统计';
+$lang->stat->domain   = '来路域名';
 $lang->stat->today    = '今天';
 $lang->stat->yestoday = '昨天';
 $lang->stat->pv       = '浏览量(PV)';
 $lang->stat->uv       = '访客数(UV)';
 $lang->stat->ipCount  = 'IP数';
+$lang->stat->totalPV  = '总访问数';
 
-$lang->stat->all   = '全部数据';
+$lang->stat->all   = '全部';
 $lang->stat->begin = '开始日期';
 $lang->stat->end   = '结束日期';
 
@@ -45,3 +47,7 @@ $lang->stat->dataTypes = new stdclass();
 $lang->stat->dataTypes->pv = '浏览量(PV)';
 $lang->stat->dataTypes->uv = '访客数(UV)';
 $lang->stat->dataTypes->ip = 'IP数';
+
+$lang->stat->page = new stdclass();
+$lang->stat->page->common = '页面访问量';
+$lang->stat->page->url    = '页面地址';

@@ -31,7 +31,12 @@ LTD www.xirangit.com)
 
 side {display: block}
 
+/* Button */
 .btn-link {background-color: transparent;}
+
+.btn-group .btn {min-width: 30px; text-shadow: none; padding: 3px; border-color: transparent; border-radius: 2px!important; background: none;}
+.btn-group .btn > .icon {position: relative; top: 1px;}
+.btn-group .btn.active {color: #3280FC;}
 
 /* Typesetting */
 .small, small, .label {font-size: 12px;}
@@ -186,6 +191,7 @@ table.captcha td label {padding: 0;}
 .list {border: 1px solid #ddd; border-radius: 2px; box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); margin-bottom: 20px;}
 .list > header {padding: 8px 15px; background-color: #f1f1f1; color: #333}
 .list > header h2 {font-size: 14px; font-weight: bold; margin: 0; padding: 0; line-height: 20px}
+.list > header > .btn-group.pull-right {margin-top: -3px; margin-right: -5px;}
 
 /* Carousel */
 .carousel {margin-bottom: 20px; overflow: hidden;}
@@ -374,7 +380,7 @@ td #aliasLabel {display: table-row;}
   #siteLogo {padding: 0;}
   #siteName {padding: 0;}
   #siteName h2 {margin: 12px 0}
-  #headNav {position: static; top: 0; width: 100%; text-align: right; background-color: #e5e5e5; padding: 5px 10px}
+  #headNav {position: static; text-align: right; background-color: #e5e5e5; padding: 5px 10px}
   #headTitle img {height: 45px; max-width: inherit; min-width: 50px; width: auto;}
 
   .navbar-header {min-height: 50px}

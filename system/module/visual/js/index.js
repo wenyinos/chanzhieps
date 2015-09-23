@@ -12,7 +12,7 @@
     {
         edit: {icon: 'pencil', text: lang.actions.edit},
         add: {icon: 'plus', text: lang.actions.add},
-        delete: {icon: 'remove', text: lang.actions.delete, confirm: lang.confirmDelete},
+        "delete": {icon: 'remove', text: lang.actions["delete"], confirm: lang.confirmDelete},
         move: {icon: 'move', text: lang.actions.move, hidden: true}
     };
     var DEFAULT_CONFIG = {width: '80%', actions: {edit: true}};
@@ -40,9 +40,11 @@
     var tidyBlocks = function($blocks)
     {
         if(typeof $blocks === 'string') $blocks = $$($blocks);
-        else if(!($blocks instanceof $$)) $blocks = $$('.row.blocks .col-row > .row');
-        else $blocks = $blocks.closest('.row');
-        $blocks.trigger('tidy');
+        else if(!($blocks instanceof $$)) $blocks = $$('.row.blocks');
+        $blocks = $blocks.closest('.row');
+
+        if($blocks.hasClass('blocks')) $blocks.tidy({force: true});
+        else $blocks.trigger('tidy');
     };
 
     var createActionLink = function(setting, action, options)
@@ -92,11 +94,8 @@
         {
             name = $ve.data('ve');
         }
-        var options = $.extend({}, visuals[name], $ve ? $ve.data() : {});
-        if($ve && name === 'block')
-        {
-            options = $.extend(options, $ve.closest('.blocks[data-region]').data());
-        }
+        var parentOptions = ($ve && name === 'block') ? $ve.closest('.blocks[data-region]').data() : {};
+        var options = $.extend(parentOptions, visuals[name], $ve ? $ve.data() : {});
         return options;
     };
 
@@ -132,7 +131,7 @@
     {
         var createAction = setting.groupActions.add;
         createAction.url = createActionLink(setting, createAction, $carousel.data());
-        $carousel.append('<div class="ve-actions-bar"><a href="{url}" class="ve-slide-action ve-action-addslide ve-btn-carousel" title="{text}" data-toggle="tooltip" data-action="add"><i class="icon icon-{icon}"></i></a></div>'.format(createAction));
+        $carousel.append('<div class="ve-actions-bar ve-preview-hidden"><a href="{url}" class="ve-slide-action ve-action-addslide ve-btn-carousel" title="{text}" data-toggle="tooltip" data-action="add"><i class="icon icon-{icon}"></i></a></div>'.format(createAction));
 
         var $items = $carousel.find('.carousel-inner > .item');
         var actions = setting.itemActions;
@@ -148,7 +147,7 @@
             idx += 1;
             var $item = $$(this).attr('data-order', idx);
             var itemData = $item.data();
-            var $actions = $$('<div class="ve-actions-bar" />');
+            var $actions = $$('<div class="ve-actions-bar ve-preview-hidden" />');
             $.each(actions, function(actionName, action)
             {
                 var $a = $$(('<a href="' + action.url.format(itemData) + '" class="ve-btn-carousel ve-action-{name}slide ve-slide-action ve-btn-carousel" title="{text}" data-toggle="tooltip" data-action="{name}"><i class="icon icon-{icon}"></i></a>').format(action));
@@ -289,15 +288,15 @@
             if(!title)
             {
                 if(isCarousel) title = lang.carousel;
-                else if(isRow) title = lang.subRegion;
+                else if(isRow) title = lang.subRegion + ' #' + blockID;
                 else title = $.trim($ve.children('.panel-heading').children().first().text()) || (visuals.block.name + ' #' + blockID);
             }
 
-            $veMain.attr(
+            $veMain.data(
             {
-                'data-ve'   : 'block',
-                'data-id'   : blockID,
-                'data-title': '[' + title + ']'
+                ve    : 'block',
+                id    : blockID,
+                title : '[' + title + ']'
             });
         }
         else
@@ -381,7 +380,7 @@
                     if(data.result === 'success')
                     {
                         callback && callback('success', data);
-                        showMessage((data.message || action.success).format(options), 'success');
+                        showMessage((data.message || action.success || lang.saved).format(options), 'success');
                     }
                     else
                     {
@@ -392,7 +391,7 @@
                 else
                 {
                     callback && callback('unknown', data);
-                    showMessage((action.fail || lang.operateFail).format(options), 'danger');
+                    showMessage((action.fail || lang.operateFail).format(options), 'warning');
                 }
             },
             'json'
@@ -403,30 +402,44 @@
         });
     };
 
-    var sortBlocks = function($blocksHolder, orders)
+    var sortBlocks = function($holder, orders)
     {
-        var withGrid = $blocksHolder.hasClass('row');
+        if(DEBUG) console.log('sortBlocks', orders, $holder);
+        var withGrid = $holder.hasClass('row');
+        var subRegion = $holder.hasClass('ve');
         var name = 'block';
         var setting = visuals[name];
         var action = setting.actions.move;
-        var options = $.extend({orders: orders}, setting, $blocksHolder.data());
+        var options = $.extend(
+        {
+            orders: orders,
+            parent: subRegion ? $holder.data('id') : ''
+        }, setting, $holder.closest('.blocks').data(), $holder.data());
 
         postActionData(name, action, options, function(result)
         {
             if(result === 'success')
             {
-                if(withGrid) tidyBlocks($blocksHolder);
+                if(withGrid) tidyBlocks($holder);
             }
-        }, orders.join(','));
+        }, {orders: orders.join(',')});
     };
 
-    var addBlock = function(region, blockID)
+    var addBlock = function(page, region, blockID, parent)
     {
         var name = 'block';
         var setting = visuals[name];
-        var action = setting.actions.move;
-        showMessage(lang.saved, 'success');
-        $.closeModal();
+        var action = setting.actions.add;
+        var options = {page: page, region: region, block: blockID, parent: parent || ''};
+
+        postActionData(name, action, options, function(result)
+        {
+            if(result === 'success')
+            {
+                updateVisualArea($$('[data-region="' + page + '-' + region + '"]'));
+                $.closeModal();
+            }
+        }, options);
     };
 
     $.addBlock = addBlock;
@@ -443,12 +456,20 @@
                 var $ve = $$(this);
                 if($ve.data('veInit')) return;
 
-                $ve.attr('data-ve', 'block');
+                $ve.attr('data-ve', 'block').data('ve', 'block');
 
                 initVisualArea($ve);
                 if(withGrid)
                 {
                     $ve.children('.ve-cover').append('<div class="ve-resize-handler left"><i class="icon icon-resize-horizontal"></i></div><div class="ve-resize-handler right"><i class="icon icon-resize-horizontal"></i></div>');
+                }
+
+                if($ve.hasClass('row'))
+                {
+                    var $row = $ve.parent();
+                    if($row.data('veInit')) return;
+
+                    $ve.append('<div class="ve-block-actions ve-actions-bar ve-preview-hidden"><ul class="nav"><li><button data-title="' + $ve.data('title') + '" data-parent="' + $ve.data('id') + '" type="button" class="btn btn-block btn-ve ve-action-addblock"><i class="icon icon-plus"></i> ' + lang.addSubBlock + '</button></li></ul></div>');
                 }
             });
 
@@ -489,13 +510,15 @@
                 console.error('The blocks area has no region or (page, location) attribute.');
             }
 
-            $blocksHolder.attr(
+            $blocksHolder.data(
             {
-                "data-page": page,
-                "data-location": location,
-                "data-region": page + '-' + location,
-                "data-title": lang.blocks.pages[page] + '-' + lang.blocks.regions[page][location]
-            }).data('veInit', true);
+                ve: 'blocks',
+                veInit: true,
+                page: page,
+                region: location,
+                location:page + '-' + location,
+                title: lang.blocks.pages[page] + '-' + lang.blocks.regions[page][location]
+            });
 
             $blocksHolder.sortable(
             {
@@ -510,7 +533,10 @@
                       var orders = [];
                       $.each(e.list, function()
                       {
-                          orders.push($$(this).find('.ve').data('id'));
+                          var $item = $$(this).children('.ve');
+                          var id = $item.data('id');
+                          if($item.hasClass('row')) id = '[' + id + ']';
+                          orders.push(id);
                       });
 
                       sortBlocks($blocksHolder, orders);
@@ -518,7 +544,7 @@
             });
 
             var actionsBar = '<div class="ve-block-actions ve-actions-bar ve-preview-hidden"><ul class="nav"><li><button type="button" class="btn btn-block btn-ve ve-action-addblock"><i class="icon icon-plus"></i> ' + lang.addBlock + '</button></li>';
-            if(withGrid) actionsBar += '<li style="width: 35%"><button type="button" class="btn btn-block btn-ve ve-action-addSubRegion"><i class="icon icon-plus-sign"></i> ' + lang.addSubRegion + '</button></li>';
+            if(withGrid) actionsBar += '<li style="width: 35%"><button type="button" class="btn btn-block btn-ve ve-action-addregion"><i class="icon icon-plus-sign"></i> ' + lang.addSubRegion + '</button></li>';
             actionsBar += '</ul><ul class="breadcrumb"><li>' + lang.blocks.pages[page] + '</li><li>' + lang.blocks.regions[page][location] + '</li></ul></div>'
 
             $blocksHolder.append(actionsBar);
@@ -539,14 +565,20 @@
             var name = 'block';
             var setting = visuals[name];
             var action = setting.actions.add;
-            var $blocksHolder = $$(this).closest('.blocks').addClass('ve-editing');
-            var options = $.extend({title: $blocksHolder.attr('data-title'), location: $blocksHolder.attr('data-location'), page: $blocksHolder.attr('data-page')}, setting, $blocksHolder.data());
+            var $btn = $$(this);
+            var $blocksHolder = $btn.closest('.blocks').addClass('ve-editing');
+            var options = $.extend({parent: 0}, setting, $blocksHolder.data(), $btn.data());
             openModal(createActionLink(setting, action, options),
             {
                 width : action.width || setting.width,
                 icon  : action.icon || 'plus',
-                title : (action.title || setting.title || action.text + ' ' + setting.name).format(options)
+                title : (action.title || (action.text + ' ' + setting.name)).format(options)
             });
+        }).on('click', '.ve-action-addregion', function()
+        {
+            var $blocksHolder = $$(this).closest('.blocks').addClass('ve-editing');
+            var options = $blocksHolder.data();
+            addBlock(options.page, options.region, 'region');
         }).on('mousedown', '.ve-resize-handler', function(e)
         {
             var $ve = $$(this).closest('.ve');
@@ -595,47 +627,45 @@
                 }
                 else $.zui.messager.hide();
 
-                $$body.unbind('mousemove.ve.resize', mouseMove).unbind('mouseup.ve.resize', mouseUp);
+                $$body.off('mousemove.ve.resize', mouseMove).off('mouseup.ve.resize', mouseUp);
                 event.preventDefault();
                 event.stopPropagation();
             };
 
-            $$body.bind('mousemove.ve.resize', mouseMove).bind('mouseup.ve.resize', mouseUp);
+            $$body.on('mousemove.ve.resize', mouseMove).on('mouseup.ve.resize', mouseUp);
             e.preventDefault();
             e.stopPropagation();
         });
     };
 
-    var updateVisualArea = function($ve, response)
+    var updateVisualArea = function($ve)
     {
         $ve = $ve || $$('.ve-editing, .ve-using').first();
         var name = $ve.data('ve');
-        var id = $ve.attr('id');
-        var parentSelector = '';
-        if(name === 'block')
+        var selector;
+        var isBlocks = name === 'block' || name === 'blocks';
+        if(isBlocks)
         {
-            var $blocksHolder = $ve.closest('.blocks[data-region]');
-            if($blocksHolder.length)
+            $ve = $ve.closest('.blocks[data-region]');
+            if($ve.length)
             {
-                parentSelector = '.blocks[data-region="' + $blocksHolder.data('region') + '"] ';
+                selector = '.blocks[data-region="' + $ve.attr('data-region') + '"]';
+            }
+            else if(DEBUG)
+            {
+                console.error('Cant\'t find a region for the block on update visual area.');
             }
         }
-        var selector = parentSelector + '#' + id + ', ' + parentSelector + '#' + id + '+style';
+        else
+        {
+            selector = '#' + $ve.attr('id');
+        }
         var $wrapper = $$('<div/>');
         $wrapper.load(visualPageUrl + ' ' + selector, function(data)
         {
-            var $veExtra = $ve.next();
-            if($veExtra.is('style')) $veExtra.remove();
-            selector = '#' + id + ', #' + id + '+style';
-            var $newVe = $wrapper.find(selector);
-            $newVe.first().data('ve', name);
-            $newVe = initVisualArea($newVe);
-            $ve.replaceWith($newVe);
-            setTimeout(function()
-            {
-                if(name === 'block') tidyBlocks($ve.closest('.blocks.row'));
-                initVisualAreas();
-            }, 100);
+            $ve.replaceWith($wrapper.find(selector));
+            initVisualAreas();
+            if(isBlocks) setTimeout(function(){tidyBlocks($$(selector));}, 100);
             showMessage(data.message || lang.saved, 'success');
         });
     };
@@ -684,8 +714,9 @@
         var name = $ve.data('ve');
         var setting = visuals[name];
         var options = getVisualOptions($ve);
-        var action = setting.actions.delete;
-        var confirmMessage = setting.actions.delete.confirm.format(options);
+        console.log('deleteVisualArea', name, $ve, options);
+        var action = setting.actions["delete"];
+        var confirmMessage = setting.actions["delete"].confirm.format(options);
         var callback = function(result)
         {
             if(result)
@@ -700,9 +731,9 @@
                             var $veParent = $ve.parent();
                             if($veParent.is('.col, [class*="col-"]')) $forRemove = $veParent;
                         }
-                        $forRemove.hide();
-                        tidyBlocks($ve.closest('.blocks.row'));
+                        var $row = $ve.closest('.row');
                         $forRemove.remove();
+                        tidyBlocks($row);
                     }
                 });
             }
@@ -811,17 +842,19 @@
 
     $('#visualPreviewBtn').on('mouseenter', function()
     {
-        $$('body').addClass('ve-preview-hover');
+        $$('body').addClass('ve-preview-hover').removeClass('ve-mode');
         tidyBlocks();
     }).on('mouseleave', function()
     {
-        $$('body').removeClass('ve-preview-hover');
+        $$('body').removeClass('ve-preview-hover').addClass('ve-mode');
         tidyBlocks();
     }).on('click', function()
     {
         var $body = $$('body');
         $body.toggleClass('ve-preview-in');
         isInPreview = $body.hasClass('ve-preview-in');
+        if(!isInPreview) $$('body').removeClass('ve-preview-hover');
+        $body.toggleClass('ve-mode', !isInPreview);
         $(this).toggleClass('text-danger', isInPreview).html(isInPreview ? ("<i class='icon-eye-close'></i> " + lang.exitPreview)
             : ("<i class='icon-eye-open'></i> " + lang.preview));
         tidyBlocks();

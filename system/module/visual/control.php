@@ -120,14 +120,10 @@ class visual extends control
 
         if($_POST)
         {
-            $page   = $this->post->page;
-            $region = $this->post->region;
-            $block  = $this->post->block;
-            
             $block = fixer::input('post')
                 ->setDefault('titleless', 0)
                 ->setDefault('borderless', 0)
-                ->add('id', $this->post->block)
+                ->add('id', $blockID)
                 ->get();
 
             $this->block->fixBlock($layout, $block);
@@ -144,16 +140,12 @@ class visual extends control
      * @access public
      * @return void
      */
-    public function removeBlock()
+    public function removeBlock($blockID, $page, $region)
     {
         $template = $this->config->template->{$this->device}->name;
         $theme    = $this->config->template->{$this->device}->theme;
 
-        $page   = $this->post->page;
-        $region = $this->post->region;
-        $block  = $this->post->block;
-
-        $result = $this->loadModel('block')->removeBlock($template, $theme, $page, $region, $block);
+        $result = $this->loadModel('block')->removeBlock($template, $theme, $page, $region, $blockID);
         $this->send($result);
     }
 
@@ -163,16 +155,50 @@ class visual extends control
      * @access public
      * @return void
      */
-    public function appendBlock()
+    public function appendBlock($page, $region, $parent = 0)
+    {
+        $blockModel = $this->loadModel('block');
+        
+        $template = $this->config->template->{$this->device}->name;
+        $theme    = $this->config->template->{$this->device}->theme;
+
+        if($_POST)
+        {
+            $block  = $this->post->block;
+            $result = $blockModel->appendBlock($template, $theme, $page, $region, $parent, $block);
+            $this->send($result);
+        }
+
+        $blockModel->loadTemplateLang($template);
+
+        $this->view->blocks   = $blockModel->getList($template);
+        $this->view->page     = $page;
+        $this->view->region   = $region;
+
+        $this->view->page     = $page;
+        $this->view->parent   = $parent;
+        $this->display();
+    }
+
+    /**
+     * Sort blocks.
+     * 
+     * @param  string    $page 
+     * @param  string    $region 
+     * @param  int       $parent 
+     * @access public
+     * @return void
+     */
+    public function sortBlocks($page, $region, $parent = 0)
     {
         $template = $this->config->template->{$this->device}->name;
         $theme    = $this->config->template->{$this->device}->theme;
 
-        $page   = $this->post->page;
-        $region = $this->post->region;
-        $block  = $this->post->block;
-
-        $result = $this->loadModel('block')->appendBlock($template, $theme, $page, $region, $block);
-        $this->send($result);
+        if($_POST)
+        {
+            $return = $this->loadModel('block')->sortBlocks($template, $theme, $page, $region, $parent, $this->post->orders);
+            if($return) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
     }
 }

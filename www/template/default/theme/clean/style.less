@@ -11,6 +11,7 @@
 @color-inverse: contrast(@color-primary, #333, #fff, 60%);
 @color-inverse-dark: darken(@color-primary, 60%);
 @color-primary-text: contrast(@color-primary, @color-inverse-dark, @color-primary, 60%);
+@color-link: darken(@color-primary-text, 15%);
 
 // Mixins
 .background-image(@image; @imageRepeat; @imagePositionX; @imagePositionY) when not(@image = inherit)
@@ -46,7 +47,8 @@
 
     .panel-heading > h4 {margin: 0; line-height: 20px}
 
-    .nav-primary.nav-stacked
+    .nav-primary,
+    .nav-secondary
     {
         background-color: #fff;
 
@@ -164,7 +166,11 @@
 }
 
 .panel(@color-primary);
+
 .btn {.button(@color-primary);}
+.btn-group .btn {border-radius: 1px!important; color: @color-link;}
+.btn-group .btn:hover {color: #fff}
+.btn-group .btn.active {color: @color-primary; background-color: @color-pale}
 
 /* Global style */
 body
@@ -176,7 +182,7 @@ body
 /* Links */
 a
 {
-  color: darken(@color-primary-text, 20%);
+  color: @color-link;
 
   &.primary, &.text-primary 
   {
@@ -206,7 +212,7 @@ body > .page-container
     background-color:rgba(255,255,255,0.9);
     -moz-border-radius:2px;
     -webkit-border-radius:2px;
-    border-radius:2px;
+    border-radius:1px;
     margin-top: 20px;
     border:1px solid #ccc;
     box-shadow:0px 1px 6px rgba(0,0,0,0.15);
@@ -232,8 +238,6 @@ body > .page-container
     font-weight: 500;
 }
 
-.navbar .nav .caret {border-top-color: #666}
-
 .navbar-nav > li > a:hover,
 .navbar-nav > li > a:focus,
 .navbar-brand:hover,
@@ -243,12 +247,17 @@ body > .page-container
     background-color: @color-pale;
 }
 
-.navbar-nav > li.open > a,
-.navbar-nav > li.open > a:hover,
-.navbar-nav > li.open > a:focus
-.navbar-nav > li > a:hover,
-.navbar-nav > li > a:focus {
-    .caret {border-top-color: @color-primary}
+.nav .caret {border-top-color: #666}
+.nav a:hover,
+.nav > li.open > a,
+.nav > li.open > a:hover,
+.nav > li.open > a:focus
+.nav > li > a:hover,
+.nav > li > a:focus {
+    .caret {
+        border-top-color: @color-primary;
+        border-bottom-color: @color-primary;
+    }
 }
 
 .navbar-nav > li.active > a,
@@ -289,6 +298,9 @@ body > .page-container
 
 /* Dropdown */
 .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {background-color: @color-primary;}
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus {background-color: @color-pale; color: @color-primary;}
 
 /* Table */
 .table-hover > tbody > tr:hover > td,

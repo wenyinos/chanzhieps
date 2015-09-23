@@ -11,28 +11,64 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php include '../../common/view/datepicker.html.php';?>
 <div class='panel'>
   <div class="panel-heading">
     <strong><i class='icon-stats'></i> <?php echo $lang->stat->keywords;?></strong>
-    <div class="panel-actions">
-      <form method='post' class='form-inline form-search'>
-        <div class="input-group">
-          <?php echo html::input('stat', $this->post->stat, "class='form-control search-query'");?>
-          <span class="input-group-btn">
-            <?php echo html::submitButton($lang->stat->search, "btn btn-primary"); ?>
-          </span>
-        </div>
-      </form>
+    <div class='panel-actions'>
+      <ul class='nav nav-tabs'>
+        <?php foreach($lang->stat->trafficModes as $code => $modeName):?>
+        <?php $class = $mode == $code ? "class='active'" : '';?>
+        <li <?php echo $class?>><?php echo html::a(inlink('keywords', "mode=$code"), $modeName);?></li>
+        <?php endforeach;?>
+        <li>
+          <form method='get' action="<?php echo inlink('keywordreport')?>">
+            <?php echo html::hidden('m', 'stat') . html::hidden('f', 'keywords') . html::hidden('mode', 'fixed');?>
+            <table class='table table-borderless'>
+              <tr>
+                <td style='padding:4px'>
+                  <?php echo html::input('begin', $this->get->begin, "placeholder='{$lang->stat->begin}' class='form-date w-120px'")?> 
+                  <?php echo html::input('end', $this->get->end, "placeholder='{$lang->stat->end}' class='form-date w-120px'")?>
+                  <?php echo html::submitButton($lang->stat->view, "btn btn-xs btn-info");?>
+                </td>
+              </tr>
+            </table>
+          </form>
+        </li>
+      </ul>
     </div>
   </div>
+  <table class='table table-list text-center'>
+    <thead>
+      <tr class='text-center'>
+        <?php foreach($totalInfo as $searchEngin => $report):?>
+        <th><?php echo $searchEngin?></th>
+        <?php endforeach;?>
+        <th><?php echo $lang->stat->totalPV?></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <?php $total = 0;?>
+        <?php foreach($totalInfo as $searchEngin => $report):?>
+        <?php $total += $report->pv;?>
+        <td><?php echo $report->pv?></td>
+        <?php endforeach;?>
+        <td><?php echo $total?></td>
+      </tr>
+    </tbody>
+  </table>
+  <br/>
+  <div class='panel'>
   <table class='table table-hover table-bordered table-striped tablesorter'>
     <thead>
       <tr class='text-center'>
-        <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
+        <?php $vars = "mode={$mode}&begin={$begin}&end={$end}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
         <th class='col-xs-3'> <?php commonModel::printOrderLink('item',  $orderBy, $vars, $lang->stat->keywords);?></th>
         <th class='col-xs-3'> <?php commonModel::printOrderLink('pv',  $orderBy, $vars, $lang->stat->pv);?></th>
         <th class='col-xs-3'><?php commonModel::printOrderLink('uv', $orderBy, $vars, $lang->stat->uv);?></th>
         <th>               <?php commonModel::printOrderLink('ip', $orderBy, $vars, $lang->stat->ipCount);?></th>
+        <th><?php echo $lang->actions?></th>
       </tr>
     </thead>
     <tbody>
@@ -42,10 +78,12 @@
         <td><?php echo $keyword->pv;?></td>
         <td><?php echo $keyword->uv;?></td>
         <td><?php echo $keyword->ip;?></td>
+        <td><?php echo html::a(inlink('keywordreport', "keyword={$keyword->item}"), $lang->stat->view);?></td>
       </tr>
       <?php endforeach;?>
     </tbody>
     <tfoot><tr><td colspan='4'><?php $pager->show();?></td></tr></tfoot>
   </table>
+  </div>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>

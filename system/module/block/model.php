@@ -562,7 +562,8 @@ class blockModel extends model
     private function parseBlockContent($block, $withGrid = false, $containerHeader, $containerFooter)
     {
         $withGrid = ($withGrid and isset($block->grid));
-        if(!empty($block->children))
+        $isRegion = isset($block->type) && $block->type === 'region';
+        if($isRegion || !empty($block->children))
         {
             if($withGrid)
             {
@@ -570,7 +571,7 @@ class blockModel extends model
                 else echo "<div class='col col-row' data-grid='{$block->grid}'><div class='row' data-id='{$block->id}'>";
             }
 
-            foreach($block->children as $child) $this->parseBlockContent($child, $withGrid, $containerHeader, $containerFooter);
+            if(!empty($block->children)) foreach($block->children as $child) $this->parseBlockContent($child, $withGrid, $containerHeader, $containerFooter);
 
             if($withGrid) echo '</div></div>';
         }
@@ -581,11 +582,11 @@ class blockModel extends model
                 if(!isset($block->grid)) $block->grid = 12;
                 if($block->grid == 0)
                 {
-                    echo "<div class='col' data-id='{$block->id}'>";
+                    echo "<div class='col'>";
                 }
                 else
                 {
-                    echo "<div class='col' data-grid='{$block->grid}' data-id='{$block->id}'>";
+                    echo "<div class='col' data-grid='{$block->grid}'>";
                 }
             }
 
@@ -728,6 +729,15 @@ class blockModel extends model
         $newBlocks = array();
         foreach($blocks as $block) 
         {
+            if(isset($block->children))
+            {
+                $children = array();
+                foreach($block->children as $child)
+                {
+                    if($child->id != $blockID) $children[] = $child;
+                }
+                $block->children = $children;
+            }
             if($block->id != $blockID) $newBlocks[] = $block;
         }
 
@@ -745,27 +755,46 @@ class blockModel extends model
      * @param  string    $theme 
      * @param  string    $page 
      * @param  string    $region 
+     * @param  string    $parent 
      * @param  int    $block 
      * @access public
      * @return void
      */
-    public function appendBlock($template, $theme, $page, $region, $block)
+    public function appendBlock($template, $theme, $page, $region, $parent, $block)
     {
         $layout  = $this->getLayout($template, $theme, $page, $region);
         $blocks  = json_decode($layout->blocks);
 
         $newBlock = new stdclass();
+        $newBlock->grid       = 4;
+        $newBlock->borderless = 0;
+        $newBlock->titleless  = 0;
+
         if($block == 'region')
         {
-            $newBlock->id = $this->createRegion($template, $page, $region);
+            $newBlock->id       = $this->createRegion($template, $page, $region);
+            $newBlock->children = array();
         }
         else
         {
-            $newBlock->id   = $block;
+            $newBlock->id = $block;
         }
 
-        $newBlock->grid = 4;
-        $blocks[]       = $newBlock;
+        if($parent)
+        {
+            foreach($blocks as $block)
+            {
+                if($block->id == $parent)
+                {
+                    if(!isset($block->children)) $block->children = array();
+                    $block->children[] = $newBlock; 
+                } 
+            }
+        }
+        else
+        {
+            $blocks[] = $newBlock;
+        }
 
         $layout->blocks = helper::jsonEncode($blocks);
         $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
@@ -792,11 +821,72 @@ class blockModel extends model
                 $block->titleless  = $setting->titleless;
                 $block->borderless = $setting->borderless;
             }
+            if(isset($block->children))
+            {
+                foreach($block->children as $child)
+                {
+                    if($child->id == $setting->id)
+                    {
+                        $child->grid       = $setting->grid;
+                        $child->titleless  = $setting->titleless;
+                        $child->borderless = $setting->borderless;
+                    }
+                }
+            }
         }
         $layout->blocks = helper::jsonEncode($blocks);
         $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
         if(!dao::isError()) return array('result' => 'success');
         return array('result' => 'fail', 'message' => dao::getError());
+    }
+
+    /**
+     * Sort blocks.
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @param  string    $page 
+     * @param  string    $region 
+     * @param  int       $parent 
+     * @param  string    $orders 
+     * @access public
+     * @return bool
+     */
+    public function sortBlocks($template, $theme, $page, $region, $parent = 0, $orders = '')
+    {
+        $layout = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->andWhere('theme')->eq($theme)->fetch();
+        $blocks = json_decode($layout->blocks);
+        $orders = explode(',', $orders);
+        if($parent)
+        {
+            foreach($blocks as $block)
+            {
+                if($block->id == $parent)
+                {
+                    $sortedBlocks = array();
+                    foreach($orders as $order)
+                    {
+                        foreach($block->children as $child) if($child->id == $order) $sortedBlocks[] = $child;
+                    }
+
+                    $block->children = $sortedBlocks;
+                }
+            }
+        }
+        else
+        {
+            $sortedBlocks = array();
+            foreach($orders as $order)
+            {
+                foreach($blocks as $block) if($block->id == $order) $sortedBlocks[] = $block;
+            }
+            $blocks = $sortedBlocks;
+        }
+
+        $layout->blocks = helper::jsonEncode($blocks);
+        $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
+
+        return !dao::isError();
     }
 
     /**
@@ -816,7 +906,6 @@ class blockModel extends model
 
         $block->type     = 'region';
         $block->template = $template;
-        $regions         = $this->lang->{$template}->regions->{$page};
         $block->title    = $this->lang->block->subRegion;
         $this->dao->insert(TABLE_BLOCK)->data($block)->exec();
         return $this->dao->lastInsertID();
