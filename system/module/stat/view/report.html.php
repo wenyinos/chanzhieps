@@ -30,29 +30,31 @@
         echo html::a(inlink('report', "type=device"), $lang->stat->device, $type == 'device' ? "class='active'" : '');
     }
     ?>
-  </div>
-  <div>
-    <ul class='nav nav-tabs'>
-      <?php foreach($lang->stat->trafficModes as $code => $modeName):?>
-      <?php $class = $mode == $code ? "class='active'" : '';?>
-      <li <?php echo $class?>><?php echo html::a(inlink('report', "type={$type}&mode=$code"), $modeName);?></li>
-      <?php endforeach;?>
-      <li>
-        <form method='get'>
-          <?php echo html::hidden('m', 'stat') . html::hidden('f', 'report') . html::hidden('mode', 'fixed') . html::hidden('type', $type);?>
-          <table class='table table-borderless'>
-            <tr>
-              <td style='padding:4px'>
-                <?php echo html::input('begin', $this->get->begin, "placeholder='{$lang->stat->begin}' class='form-date w-120px'")?> 
-                <?php echo html::input('end', $this->get->end, "placeholder='{$lang->stat->end}' class='form-date w-120px'")?>
-                <?php echo html::submitButton($lang->stat->view, "btn btn-xs btn-info");?>
-              </td>
-            </tr>
-          </table>
-        </form>
-      </li>
-     </ul>
+    <div class='panel-actions'>
+      <ul class='nav nav-tabs'>
+        <?php foreach($lang->stat->trafficModes as $code => $modeName):?>
+        <?php $class = $mode == $code ? "class='active'" : '';?>
+        <li <?php echo $class?>><?php echo html::a(inlink('report', "type={$type}&mode=$code"), $modeName);?></li>
+        <?php endforeach;?>
+        <li>
+          <form method='get'>
+            <?php echo html::hidden('m', 'stat') . html::hidden('f', 'report');?>
+            <?php echo  html::hidden('type', $type);?>
+            <?php echo html::hidden('mode', 'fixed');?>
+            <table class='table table-borderless'>
+              <tr>
+                <td style='padding:4px'>
+                  <?php echo html::input('begin', $this->get->begin, "placeholder='{$lang->stat->begin}' class='form-date w-120px'")?> 
+                  <?php echo html::input('end', $this->get->end, "placeholder='{$lang->stat->end}' class='form-date w-120px'")?>
+                  <?php echo html::submitButton($lang->stat->view, "btn btn-xs btn-info");?>
+                </td>
+              </tr>
+            </table>
+          </form>
+        </li>
+       </ul>
     </div>
+  </div>
   <?php if(!empty($lineCharts)) include 'linechart.html.php';?>
   <?php if(!empty($pieCharts)):?>
   <div class='panel-body'>

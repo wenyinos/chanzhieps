@@ -14,10 +14,35 @@
 <?php include '../../common/view/chart.html.php';?>
 <?php js::set('lineLabels', $labels);?>
 <?php js::set('lineChart', $lineChart);?>
+<?php include '../../common/view/datepicker.html.php';?>
 <div class='panel'>
   <div class="panel-heading">
     <strong><i class='icon icon-bar-chart'></i> <?php echo $lang->stat->traffic;?></strong>
-    <div class="panel-actions"> </div>
+    <div class="panel-actions"> 
+      <ul class='nav nav-tabs'>
+        <?php foreach($lang->stat->trafficModes as $code => $modeName):?>
+        <?php $class = $mode == $code ? "class='active'" : '';?>
+        <li <?php echo $class?>><?php echo html::a(inlink('traffic', "mode=$code"), $modeName);?></li>
+        <?php endforeach;?>
+        <li>
+          <form method='get' action="<?php echo inlink('traffic')?>">
+            <?php echo html::hidden('m', 'stat') . html::hidden('f', 'traffic') . html::hidden('mode', 'fixed');?>
+            <table class='table table-borderless'>
+              <tr>
+                <td style='padding:4px'>
+                  <?php echo html::input('begin', $this->get->begin, "placeholder='{$lang->stat->begin}' class='form-date w-120px'")?> 
+                  <?php echo html::input('end', $this->get->end, "placeholder='{$lang->stat->end}' class='form-date w-120px'")?>
+                  <?php echo html::submitButton($lang->stat->view, "btn btn-xs btn-info");?>
+                </td>
+              </tr>
+            </table>
+          </form>
+        </li>
+
+      </ul>
+    <?php if(!empty($dayCharts)):?> <div><?php echo html::radio('lineType', $lang->stat->dataTypes, 'pv');?></div><?php endif;?>
+  </div>
+
   </div>
   <table class='table table-bordered table-condensed'>
     <thead>
@@ -50,15 +75,6 @@
   <p></p>
 </div>
 <div class='panel'>
-  <div>
-    <ul class='nav nav-tabs'>
-      <?php foreach($lang->stat->trafficModes as $code => $modeName):?>
-      <?php $class = $mode == $code ? "class='active'" : '';?>
-      <li <?php echo $class?>><?php echo html::a(inlink('traffic', "mode=$code"), $modeName);?></li>
-      <?php endforeach;?>
-    </ul>
-    <?php if(!empty($dayCharts)):?> <div><?php echo html::radio('lineType', $lang->stat->dataTypes, 'pv');?></div><?php endif;?>
-  </div>
   <div class='chart-canvas'><canvas height='260' width='900' id='lineChart'></canvas></div>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>
