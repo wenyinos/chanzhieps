@@ -18,7 +18,7 @@ $(function()
 {
     $(document).on('click', '.btn-add-block:not(.disabled)', function()
     {
-        window.parent.$.addBlock('<?php echo $page?>', '<?php echo $region?>', $(this).data('id'));
+        window.parent.$.addBlock('<?php echo $page?>', '<?php echo $region?>', $(this).data('id'), '<?php echo $parent?>');
     });
 });
 </script>

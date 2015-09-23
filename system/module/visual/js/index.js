@@ -404,18 +404,17 @@
 
     var sortBlocks = function($holder, orders)
     {
-        console.log('sortBlocks', orders, $holder);
+        if(DEBUG) console.log('sortBlocks', orders, $holder);
         var withGrid = $holder.hasClass('row');
         var subRegion = $holder.hasClass('ve');
         var name = 'block';
         var setting = visuals[name];
         var action = setting.actions.move;
-        var options = $.extend({orders: orders}, setting, $holder.closest('.blocks').data(), $holder.data());
-
-        if(subRegion)
+        var options = $.extend(
         {
-            options.region = $holder.data('id');
-        }
+            orders: orders,
+            parent: subRegion ? $holder.data('id') : ''
+        }, setting, $holder.closest('.blocks').data(), $holder.data());
 
         postActionData(name, action, options, function(result)
         {
@@ -426,14 +425,12 @@
         }, orders.join(','));
     };
 
-    var addBlock = function(page, region, blockID)
+    var addBlock = function(page, region, blockID, parent)
     {
         var name = 'block';
         var setting = visuals[name];
         var action = setting.actions.add;
-        var options = {page: page, region: region, block: blockID};
-
-        console.log('addBlock', page, region, blockID);
+        var options = {page: page, region: region, block: blockID, parent: parent || ''};
 
         postActionData(name, action, options, function(result)
         {
@@ -472,7 +469,7 @@
                     var $row = $ve.parent();
                     if($row.data('veInit')) return;
 
-                    $ve.append('<div class="ve-block-actions ve-actions-bar ve-preview-hidden"><ul class="nav"><li><button data-title="' + $ve.data('title') + '" data-region="' + $ve.data('id') + '" type="button" class="btn btn-block btn-ve ve-action-addblock"><i class="icon icon-plus"></i> ' + lang.addSubBlock + '</button></li></ul></div>');
+                    $ve.append('<div class="ve-block-actions ve-actions-bar ve-preview-hidden"><ul class="nav"><li><button data-title="' + $ve.data('title') + '" data-parent="' + $ve.data('id') + '" type="button" class="btn btn-block btn-ve ve-action-addblock"><i class="icon icon-plus"></i> ' + lang.addSubBlock + '</button></li></ul></div>');
                 }
             });
 
