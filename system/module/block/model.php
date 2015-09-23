@@ -729,6 +729,15 @@ class blockModel extends model
         $newBlocks = array();
         foreach($blocks as $block) 
         {
+            if(isset($block->children))
+            {
+                $children = array();
+                foreach($block->children as $child)
+                {
+                    if($child->id != $setting->id) $children[] = $child;
+                }
+            }
+            $block->children = $children;
             if($block->id != $blockID) $newBlocks[] = $block;
         }
 
