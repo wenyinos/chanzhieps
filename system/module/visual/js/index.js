@@ -567,7 +567,7 @@
             var action = setting.actions.add;
             var $btn = $$(this);
             var $blocksHolder = $btn.closest('.blocks').addClass('ve-editing');
-            var options = $.extend(setting, $blocksHolder.data(), $btn.data());
+            var options = $.extend({parent: 0}, setting, $blocksHolder.data(), $btn.data());
             openModal(createActionLink(setting, action, options),
             {
                 width : action.width || setting.width,
