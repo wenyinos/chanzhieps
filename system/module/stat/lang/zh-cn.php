@@ -18,7 +18,7 @@ $lang->stat->uv       = '访客数(UV)';
 $lang->stat->ipCount  = 'IP数';
 $lang->stat->totalPV  = '总访问数';
 
-$lang->stat->all   = '全部数据';
+$lang->stat->all   = '全部';
 $lang->stat->begin = '开始日期';
 $lang->stat->end   = '结束日期';
 
