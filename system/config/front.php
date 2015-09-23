@@ -133,5 +133,6 @@ $config->rights->member['address']['edit']   = 'edit';
 $config->rights->member['address']['delete'] = 'delete';
 $config->rights->member['address']['browse'] = 'browse';
 
-$config->rights->member['score']['buyscore'] = 'buyscore';
-$config->rights->member['score']['payorder'] = 'payorder';
+$config->rights->member['score']['buyscore']      = 'buyscore';
+$config->rights->member['score']['payorder']      = 'payorder';
+$config->rights->member['score']['resetmaxlogin'] = 'resetmaxlogin';

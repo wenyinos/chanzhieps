@@ -46,17 +46,8 @@ class score extends control
     public function resetMaxLogin()
     {
         $this->dao->update(TABLE_USER)->set('maxLogin')->eq($this->config->score->counts->maxLogin)->exec();
-        echo helper::now() . 'Reset max login ';
-        if(!dao::isError())
-        {
-            echo "success \n";
-        }
-        else
-        {
-            echo "failed\n";
-            echo "Reason:";
-            print_r(dao::getError());
-        }
+        if(!dao::isError()) return $this->loadModel('setting')->setItem('system.common.site.resetMaxLoginDate', date('Y-m-d'));
+        return false;
     }
 
     /**
@@ -151,23 +142,6 @@ class score extends control
         $this->view->dayScore   = $dayScore;
         $this->view->users      = $this->loadModel('user')->getBasicInfo($users);
         $this->display();
-    }
-
-    public function awardDownExtension()
-    {
-        $files = $this->dao->select('*')->from(TABLE_FILE)->where('public')->eq('1')->andWhere('downloads')->ne('0')->fetchAll();
-        $extensions = $this->dao->select('id, code, account')->from(TABLE_EXTENSION)->fetchAll();
-        foreach($files as $file)
-        {
-            foreach($extensions as $extension)
-            {
-                if($file->title == $extension->code)
-                {
-                    $score = 10 * $file->downloads;
-                    $this->score->award($extension->account, 'system', $score, 'extension', $extension->id, "EXTENSION:$extension->id");
-                }
-            }
-        }
     }
 
     public function statement($date = 'lastMonth')
