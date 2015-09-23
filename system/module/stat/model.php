@@ -281,18 +281,14 @@ class statModel extends model
     /**
      * Set searchengine traffic grouped by serachengine.
      * 
-     * @param  int    $begin 
-     * @param  int    $end 
      * @access public
-     * @return void
+     * @return array
      */
-    public function getSearchTraffic($begin, $end)
+    public function getSearchTraffic()
     {
          return $this->dao->select('*, sum(pv) as pv, sum(uv) as uv, sum(ip) as ip')->from(TABLE_STATREPORT)
             ->where('type')->eq('keywords')
             ->andWhere('timeType')->eq('day')
-            ->andWhere('timeValue')->ge($begin)
-            ->andWhere('timeValue')->le($end)
             ->groupBy('extra')
             ->fetchAll('extra');
     }
@@ -414,5 +410,49 @@ class statModel extends model
         }
 
         return $charts;
+    }
+
+    /**
+     * Parse begin and end date.
+     * 
+     * @param  string    $mode 
+     * @param  int       $begin 
+     * @param  int       $end 
+     * @access public
+     * @return void
+     */
+    public function parseDate($mode, $begin, $end)
+    {
+        if($mode == 'today')
+        {
+            $begin = $end = date("Ymd");
+        }
+        elseif($mode == 'yestoday')
+        {
+            $begin = $end = date("Ymd", strtotime("-1 day"));
+        }
+        elseif($mode == 'weekly')
+        {
+            $begin =  date("Ymd", strtotime("-7 day"));
+            $end   = date('Ymd');
+        }
+        elseif($mode == 'monthly')
+        {
+            $begin =  date("Ymd", strtotime("-30 day"));
+            $end   = date('Ymd');
+        }
+        else
+        {
+            $begin = date('Ymd', strtotime($begin));
+            $end   = date('Ymd', strtotime($end));
+        }
+
+        if(!$begin) $begin = date('Ymd', strtotime($begin));
+        if(!$end)   $end   = date('Ymd', strtotime($end));
+
+        $params = new stdclass();
+        $params->begin = $begin;
+        $params->end   = $end;
+        return $params;
     }
 }

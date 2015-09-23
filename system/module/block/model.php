@@ -772,7 +772,8 @@ class blockModel extends model
 
         if($block == 'region')
         {
-            $newBlock->id = $this->createRegion($template, $page, $region);
+            $newBlock->id       = $this->createRegion($template, $page, $region);
+            $newBlock->children = array();
         }
         else
         {
@@ -840,6 +841,55 @@ class blockModel extends model
     }
 
     /**
+     * Sort blocks.
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @param  string    $page 
+     * @param  string    $region 
+     * @param  int       $parent 
+     * @param  string    $orders 
+     * @access public
+     * @return bool
+     */
+    public function sortBlocks($template, $theme, $page, $region, $parent = 0, $orders = '')
+    {
+        $layout = $this->dao->select('*')->from(TABLE_LAYOUT)->where('page')->eq($page)->andWhere('region')->eq($region)->andWhere('template')->eq($template)->andWhere('theme')->eq($theme)->fetch();
+        $blocks = json_decode($layout->blocks);
+        $orders = explode(',', $orders);
+        if($parent)
+        {
+            foreach($blocks as $block)
+            {
+                if($block->id == $parent)
+                {
+                    $sortedBlocks = array();
+                    foreach($orders as $order)
+                    {
+                        foreach($block->children as $child) if($child->id == $order) $sortedBlocks[] = $child;
+                    }
+
+                    $block->children = $sortedBlocks;
+                }
+            }
+        }
+        else
+        {
+            $sortedBlocks = array();
+            foreach($orders as $order)
+            {
+                foreach($blocks as $block) if($block->id == $order) $sortedBlocks[] = $block;
+            }
+            $blocks = $sortedBlocks;
+        }
+
+        $layout->blocks = helper::jsonEncode($blocks);
+        $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
+
+        return !dao::isError();
+    }
+
+    /**
      * Create a region block for one region.
      * 
      * @param  string $template 
@@ -856,7 +906,6 @@ class blockModel extends model
 
         $block->type     = 'region';
         $block->template = $template;
-        $regions         = $this->lang->{$template}->regions->{$page};
         $block->title    = $this->lang->block->subRegion;
         $this->dao->insert(TABLE_BLOCK)->data($block)->exec();
         return $this->dao->lastInsertID();

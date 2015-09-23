@@ -179,4 +179,26 @@ class visual extends control
         $this->view->parent   = $parent;
         $this->display();
     }
+
+    /**
+     * Sort blocks.
+     * 
+     * @param  string    $page 
+     * @param  string    $region 
+     * @param  int       $parent 
+     * @access public
+     * @return void
+     */
+    public function sortBlocks($page, $region, $parent = 0)
+    {
+        $template = $this->config->template->{$this->device}->name;
+        $theme    = $this->config->template->{$this->device}->theme;
+
+        if($_POST)
+        {
+            $return = $this->loadModel('block')->sortBlocks($template, $theme, $page, $region, $parent, $this->post->orders);
+            if($return) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+    }
 }

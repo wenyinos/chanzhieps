@@ -1656,4 +1656,28 @@ class upgradeModel extends model
 
         return !dao::isError();
     }
+
+    /**
+     * Append ID for subRegion.
+     * 
+     * @access public
+     * @return void
+     */
+    public function appendIDForRegion()
+    {
+        $layouts = $this->dao->select('*')->from(TABLE_LAYOUT)->fetchAll();
+        foreach($layouts as $layout)
+        {
+            $blocks = json_decode($layout->blocks);
+            foreach($blocks as $block)
+            {
+                if(!isset($block->children)) continue;
+                $regionID = $this->loadModel('block')->createRegion($layout->template, $layout->page, $layout->region);
+                $block->id = $regionID;
+            }
+            $blocks = helper::jsonEncode($blocks);
+
+            if($blocks != $layout->blocks) $this->dao->update(TABLE_LAYOUT)->set('blocks')->eq($blocks)->where('id')->eq($layout->id)->exec();
+        }
+    }
 }
