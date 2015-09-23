@@ -734,10 +734,10 @@ class blockModel extends model
                 $children = array();
                 foreach($block->children as $child)
                 {
-                    if($child->id != $setting->id) $children[] = $child;
+                    if($child->id != $blockID) $children[] = $child;
                 }
+                $block->children = $children;
             }
-            $block->children = $children;
             if($block->id != $blockID) $newBlocks[] = $block;
         }
 
@@ -786,7 +786,8 @@ class blockModel extends model
             {
                 if($block->id == $parent)
                 {
-                    if(isset($block->children)) $block->children[] = $newBlock; 
+                    if(!isset($block->children)) $block->children = array();
+                    $block->children[] = $newBlock; 
                 } 
             }
         }

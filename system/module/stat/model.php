@@ -71,7 +71,7 @@ class statModel extends model
     {
         $traffic = $this->dao->select('*')->from(TABLE_STATREPORT)
             ->where('type')->eq($type)
-            ->andWhere('timeType')->eq('day')
+            ->andWhere('timeType')->eq($timeType)
             ->andWhere('timeValue')->in($labels)
             ->fetchGroup('item', 'timeValue');
 
@@ -237,13 +237,21 @@ class statModel extends model
     /**
      * Get hour labels of one date.
      * 
-     * @param  int    $day 
+     * @param  int     $day 
+     * @param  bool    $showDate
      * @access public
-     * @return void
+     * @return array
      */
-    public function getHourLabels($day)
+    public function getHourLabels($day, $showDate = true)
     {
-        foreach($this->config->stat->hourLabels as $hour) $labels[] = $day . $hour;
+        if($showDate)
+        {
+            foreach($this->config->stat->hourLabels as $hour) $labels[] = $day . $hour;
+        }
+        else
+        {
+            foreach($this->config->stat->hourLabels as $hour) $labels[] = $hour . ':00';
+        }
         return $labels;
     }
     
@@ -273,18 +281,14 @@ class statModel extends model
     /**
      * Set searchengine traffic grouped by serachengine.
      * 
-     * @param  int    $begin 
-     * @param  int    $end 
      * @access public
-     * @return void
+     * @return array
      */
-    public function getSearchTraffic($begin, $end)
+    public function getSearchTraffic()
     {
          return $this->dao->select('*, sum(pv) as pv, sum(uv) as uv, sum(ip) as ip')->from(TABLE_STATREPORT)
             ->where('type')->eq('keywords')
             ->andWhere('timeType')->eq('day')
-            ->andWhere('timeValue')->ge($begin)
-            ->andWhere('timeValue')->le($end)
             ->groupBy('extra')
             ->fetchAll('extra');
     }
@@ -321,10 +325,12 @@ class statModel extends model
     public function getKeywordLine($keyword, $begin, $end)
     {
         $labels  = $this->getDayLabels($begin, $end);
+        if($begin == $end) $labels = $this->getHourLabels($begin);
         $traffic = $this->dao->select('*')->from(TABLE_STATREPORT)
             ->where('type')->eq('keywords')
             ->andWhere('item')->eq($keyword)
-            ->andWhere('timeType')->eq('day')
+            ->beginIf($begin == $end)->andWhere('timeType')->eq('hour')->fi()
+            ->beginIf($begin != $end)->andWhere('timeType')->eq('day')->fi()
             ->andWhere('timeValue')->in($labels)
             ->fetchAll('timeValue');
 
@@ -358,7 +364,6 @@ class statModel extends model
         $chartData[] = $uvChart;
         $chartData[] = $ipChart;
         return $chartData;
-
     }
 
     public function getKeywordSearchPie($keyword, $begin, $end)
@@ -405,5 +410,49 @@ class statModel extends model
         }
 
         return $charts;
+    }
+
+    /**
+     * Parse begin and end date.
+     * 
+     * @param  string    $mode 
+     * @param  int       $begin 
+     * @param  int       $end 
+     * @access public
+     * @return void
+     */
+    public function parseDate($mode, $begin, $end)
+    {
+        if($mode == 'today')
+        {
+            $begin = $end = date("Ymd");
+        }
+        elseif($mode == 'yestoday')
+        {
+            $begin = $end = date("Ymd", strtotime("-1 day"));
+        }
+        elseif($mode == 'weekly')
+        {
+            $begin =  date("Ymd", strtotime("-7 day"));
+            $end   = date('Ymd');
+        }
+        elseif($mode == 'monthly')
+        {
+            $begin =  date("Ymd", strtotime("-30 day"));
+            $end   = date('Ymd');
+        }
+        else
+        {
+            $begin = date('Ymd', strtotime($begin));
+            $end   = date('Ymd', strtotime($end));
+        }
+
+        if(!$begin) $begin = date('Ymd', strtotime($begin));
+        if(!$end)   $end   = date('Ymd', strtotime($end));
+
+        $params = new stdclass();
+        $params->begin = $begin;
+        $params->end   = $end;
+        return $params;
     }
 }

@@ -24,10 +24,9 @@
     <label class='text-important'><?php echo $keyword?></label>
     <div class="panel-actions">
       <form method='get' action="<?php echo inlink('keywordreport')?>">
-        <?php echo html::hidden('m', 'stat') . html::hidden('f', 'keywordreport') . html::hidden('mode', 'fixed') . html::hidden('keyword', $keyword);?>
+        <?php echo html::hidden('m', 'stat') . html::hidden('f', 'keywordreport') . html::hidden('keyword', $keyword) . html::hidden('mode', 'fixed');?>
         <table class='table table-borderless'>
           <tr>
-            <td><?php echo html::a(inlink('from'), $lang->stat->all);?></td>
             <td style='padding:4px'>
               <?php echo html::input('begin', $this->get->begin, "placeholder='{$lang->stat->begin}' class='form-date w-120px'")?> 
               <?php echo html::input('end', $this->get->end, "placeholder='{$lang->stat->end}' class='form-date w-120px'")?>

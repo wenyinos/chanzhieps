@@ -781,6 +781,5 @@ function fixFooterOfWideTheme()
     if(theme && theme.theme === 'wide')
     {
        fit();
-       $(window).resize(fit);
     }
 }
