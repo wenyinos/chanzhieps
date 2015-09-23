@@ -198,6 +198,10 @@ unset($config->ui->themes['default']['clean']['footer']);
 $config->ui->themes['default']['clean']['basic']['colorset']['primary']['default'] = '#254952';
 $config->ui->themes['default']['clean']['basic']['pageBackground']['backgroundImage']['default'] = 'inherit';
 
+/* Simple theme */
+$config->ui->themes['default']['simple'] = $config->ui->themes['default']['clean'];
+$config->ui->themes['default']['simple']['basic']['colorset']['primary']['default'] = '#3280FC';
+
 /* Tree theme setting */
 $config->ui->themes['default']['tree'] = $config->ui->selectorOptions;
 unset($config->ui->themes['default']['tree']['basic']['aVisited']);
