@@ -746,27 +746,44 @@ class blockModel extends model
      * @param  string    $theme 
      * @param  string    $page 
      * @param  string    $region 
+     * @param  string    $parent 
      * @param  int    $block 
      * @access public
      * @return void
      */
-    public function appendBlock($template, $theme, $page, $region, $block)
+    public function appendBlock($template, $theme, $page, $region, $parent, $block)
     {
         $layout  = $this->getLayout($template, $theme, $page, $region);
         $blocks  = json_decode($layout->blocks);
 
         $newBlock = new stdclass();
+        $newBlock->grid       = 4;
+        $newBlock->borderless = 0;
+        $newBlock->titleless  = 0;
+
         if($block == 'region')
         {
             $newBlock->id = $this->createRegion($template, $page, $region);
         }
         else
         {
-            $newBlock->id   = $block;
+            $newBlock->id = $block;
         }
 
-        $newBlock->grid = 4;
-        $blocks[]       = $newBlock;
+        if($parent)
+        {
+            foreach($blocks as $block)
+            {
+                if($block->id == $parent)
+                {
+                    if(isset($block->children)) $block->children[] = $newBlock; 
+                } 
+            }
+        }
+        else
+        {
+            $blocks[] = $newBlock;
+        }
 
         $layout->blocks = helper::jsonEncode($blocks);
         $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
@@ -792,6 +809,18 @@ class blockModel extends model
                 $block->grid       = $setting->grid;
                 $block->titleless  = $setting->titleless;
                 $block->borderless = $setting->borderless;
+            }
+            if(isset($block->children))
+            {
+                foreach($block->children as $child)
+                {
+                    if($child->id == $setting->id)
+                    {
+                        $child->grid       = $setting->grid;
+                        $child->titleless  = $setting->titleless;
+                        $child->borderless = $setting->borderless;
+                    }
+                }
             }
         }
         $layout->blocks = helper::jsonEncode($blocks);

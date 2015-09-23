@@ -155,7 +155,7 @@ class visual extends control
      * @access public
      * @return void
      */
-    public function appendBlock($page, $region)
+    public function appendBlock($page, $region, $parent = 0)
     {
         $blockModel = $this->loadModel('block');
         
@@ -165,7 +165,7 @@ class visual extends control
         if($_POST)
         {
             $block  = $this->post->block;
-            $result = $blockModel->appendBlock($template, $theme, $page, $region, $block);
+            $result = $blockModel->appendBlock($template, $theme, $page, $region, $parent, $block);
             $this->send($result);
         }
 
