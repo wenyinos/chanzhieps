@@ -38,19 +38,6 @@ class score extends control
     }
 
     /**
-     * Reset the max login field.
-     * 
-     * @access public
-     * @return void
-     */
-    public function resetMaxLogin()
-    {
-        $this->dao->update(TABLE_USER)->set('maxLogin')->eq($this->config->score->counts->maxLogin)->exec();
-        if(!dao::isError()) return $this->loadModel('setting')->setItem('system.common.site.resetMaxLoginDate', date('Y-m-d'));
-        return false;
-    }
-
-    /**
      * Buy score use money.
      * 
      * @access public
@@ -144,6 +131,46 @@ class score extends control
         $this->display();
     }
 
+    /**
+     * Set counts for score.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setCounts()
+    {
+        if($_POST)
+        {
+            $setting = fixer::input('post')->get();
+            $result = $this->loadModel('setting')->setItems('system.score.counts', $setting);
+            if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => helper::createLink('site', 'setBasic')));
+        }
+
+        $this->view->title = $this->lang->score->setCounts;
+        $this->display();
+    }
+
+    /**
+     * Reset the max login field.
+     * 
+     * @access public
+     * @return void
+     */
+    public function resetMaxLogin()
+    {
+        $this->dao->update(TABLE_USER)->set('maxLogin')->eq($this->config->score->counts->maxLogin)->exec();
+        if(!dao::isError()) return $this->loadModel('setting')->setItem('system.common.site.resetMaxLoginDate', date('Y-m-d'));
+        return false;
+    }
+
+    /**
+     * Statement score.
+     * 
+     * @param  string  $date 
+     * @access public
+     * @return void
+     */
     public function statement($date = 'lastMonth')
     {
         $date   = $date == 'lastMonth' ? date('Y-m-d', strtotime('-1 month')) : '';
@@ -196,25 +223,5 @@ class score extends control
             }
             echo "Statement {$account} finish\n";
         }
-    }
-
-    /**
-     * Set counts for score.
-     * 
-     * @access public
-     * @return void
-     */
-    public function setCounts()
-    {
-        if($_POST)
-        {
-            $setting = fixer::input('post')->get();
-            $result = $this->loadModel('setting')->setItems('system.score.counts', $setting);
-            if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => helper::createLink('site', 'setBasic')));
-        }
-
-        $this->view->title = $this->lang->score->setCounts;
-        $this->display();
     }
 }
