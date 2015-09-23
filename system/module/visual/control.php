@@ -174,6 +174,8 @@ class visual extends control
         $this->view->blocks   = $blockModel->getList($template);
         $this->view->page     = $page;
         $this->view->region   = $region;
+
+        $this->view->page     = $page;
         $this->view->parent   = $parent;
         $this->display();
     }
