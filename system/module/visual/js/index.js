@@ -422,7 +422,7 @@
             {
                 if(withGrid) tidyBlocks($holder);
             }
-        }, orders.join(','));
+        }, {orders: orders.join(',')});
     };
 
     var addBlock = function(page, region, blockID, parent)
