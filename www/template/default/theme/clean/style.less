@@ -1,9 +1,5 @@
 /*
- * Chanzhi custom theme
- *
- * This file built by machine at {buildTime} automatically.
- * Template: default
- * Theme:    default
+ * The theme 'clean'
  */
 @color-fore: #333;
 @color-back: #fff;
@@ -172,6 +168,14 @@
 .btn-group .btn:hover {color: #fff}
 .btn-group .btn.active {color: @color-primary; background-color: @color-pale}
 
+/* Column style */
+@media (min-width: 992px)
+{
+    .columnLayout(@sidebar-pull-left);
+    .col-main {width: 100% - @sidebar-width;}
+    .col-side {width: @sidebar-width}
+}
+
 /* Global style */
 body
 {
@@ -302,6 +306,9 @@ body > .page-container
 .dropdown-menu > .active > a:hover,
 .dropdown-menu > .active > a:focus {background-color: @color-pale; color: @color-primary;}
 
+/* Carousel */
+.carousel-control.left, .carousel-control.right {background-image: none}
+
 /* Table */
 .table-hover > tbody > tr:hover > td,
 .table-hover > tbody > tr:hover > th {background-color: @color-pale}
@@ -311,6 +318,9 @@ body > .page-container
 #go2top {border-radius: 0; background-color: #fff; font-size: 18px;}
 #footNav a:hover, #powerby a:hover {color: @color-primary}
 #powerby a:hover, #powerby:hover .icon-chanzhi > i, #powerby:hover .icon-chanzhi > i:before, #powerby:hover .icon-chanzhi > i:after {border-color: @color-primary;}
+
+/* Popover */
+.popover {border-radius: 0}
 
 /* Card */
 .card {box-shadow: none; border-radius: 1px; border-bottom-width: 2px}
