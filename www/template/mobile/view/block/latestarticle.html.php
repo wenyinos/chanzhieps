@@ -22,7 +22,7 @@ $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 :
 <div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
   <div class='panel-heading'>
     <strong><?php echo $icon . $block->title;?></strong>
-    <?php if(!empty($content->moreText) and !empty($content->moreUrl)):?>
+    <?php if(isset($content->moreText) and isset($content->moreUrl)):?>
     <div class='pull-right'><?php echo html::a($content->moreUrl, $content->moreText);?></div>
     <?php endif;?>
   </div>

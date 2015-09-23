@@ -6,39 +6,6 @@
  * Theme:    wide
  */
 
-/* === OLD STYLE === */
-
-/* --- GLOBAL STYLE --- */
-ul {padding-left: 16px;}
-ol {padding-left: 20px;}
-.small, small {font-size: 12px;}
-
-/* --- CSS HELPERS --- */
-/* width settings. */
-.w-p5  {width: 5%} .w-p10 {width: 10%} .w-p15 {width: 15%} .w-p20 {width: 20%} .w-p25 {width: 25%} .w-p30 {width: 30%} .w-p35 {width: 35%} .w-p40 {width: 40%} .w-p45 {width: 45%} .w-p50 {width: 50%} .w-p55 {width: 55%} .w-p60 {width: 60%} .w-p65 {width: 65%} .w-p70 {width: 70%} .w-p75 {width: 75%} .w-p80 {width: 80%} .w-p85 {width: 85%} .w-p90 {width: 90%} .w-p94 {width: 94%} .w-p95 {width: 95%} .w-p98 {width: 98%} .w-p99 {width: 99%} .w-p100{width: 100%}
-
-.w-10px {width:10px} .w-20px {width:20px} .w-30px {width:30px} .w-35px {width:35px} .w-40px {width:40px} .w-45px {width:45px} .w-50px {width:50px} .w-60px {width:60px} .w-70px {width:70px} .w-80px {width:80px} .w-90px {width:90px} .w-100px {width:100px} .w-110px {width: 110px} .w-120px {width:120px} .w-130px {width:130px} .w-140px {width:140px} .w-150px {width:150px} .w-160px {width:160px} .w-180px {width:180px} .w-200px {width:200px} .w-300px {width:300px} .w-400px {width:400px} .w-450px {width:450px} .w-500px {width:500px} .w-600px {width:600px} .w-700px {width:700px} .w-800px {width:800px} .w-1000px {width:1000px}
-
-.w-id        {width:55px;}
-.w-pri       {width:30px;}
-.w-severity  {width:40px;}
-.w-hour      {width:40px;}
-.w-date      {width:80px;}
-.w-user      {width:60px;}
-.w-status    {width:50px;}
-.w-type      {width:80px;}
-.w-resolution{width:60px;}
-
-/* display settings */
-.inline-block {display: inline-block!important;}
-
-/* border settings */
-.borderless {border: none}
-.hiding {display: none}
-
-/* margin and padding settings */
-.mg-0 {margin: 0!important}
-
 /* --- LAYOUT SETTING --- */
 /* containers. */
 .page-container {padding: 0 15px; margin: 0 auto 20px auto;position: relative;}
@@ -603,7 +570,7 @@ body {background: #232323;}
 .carousel:hover .carousel-control.right {right: 5%;}
 .carousel-control:hover {background: #e91b23; text-align: center;}
 .ie-8 .carousel-control:hover {background: none}
-.carousel-control .icon-prev, .carousel-control .icon-next {display: block; text-align: center; font-size: 60px; height: 60px; width: 60px; top: -3px; margin: 0; line-height: 50px; right: auto; left: auto;}
+.carousel-control .icon {display: block; text-align: center; font-size: 28px; height: 60px; width: 60px; line-height: 60px; right: auto; left: auto; top: 0;}
 .carousel-caption {left: 19%}
 
 /* List */
@@ -758,7 +725,7 @@ body.m-message-reply{background:#fff;}
 @border-style: solid;
 @border-radius: 3px;
 
-@text-color-inverse : contrast(darken(@color-primary, 10%), #666, #fff);
+@text-color-inverse : contrast(@color-primary, #666, #fff, 67%);
 @color-primary-dark : darken(@color-primary, 8%);
 @color-pale         : spin(hsl(hue(@color-primary), 54%, 95%), -7);
 
@@ -830,6 +797,9 @@ a:hover, a:focus {color: @color-primary}
 .btn-link {color: @color-primary}
 .btn-link:hover, .btn-link:focus {color: @color-primary-dark}
 a.btn-primary:visited, a.btn-danger:visited, a.btn-info:visited, a.warning-info:visited, a.btn-success:visited {color: @text-color-inverse;}
+
+.btn-group .btn {border-radius: 0px!important;}
+.btn-group .btn.active {color: @color-primary;}
 
 .label-primary {background-color: @color-primary}
 .label-primary[href]:hover, .label-primary[href]:focus {background-color: @color-primary-dark}

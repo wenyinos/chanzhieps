@@ -707,8 +707,9 @@ class control
                 if(isset($data['result']) and $data['result'] == 'success')
                 {
                     if(!empty($data['message'])) echo js::alert($data['message']);
-                    $locate = empty($data['locate']) ? $_SERVER['HTTP_REFERER'] : $data['locate'];
+                    $locate = isset($data['locate']) ? $data['locate'] : (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '');
                     if(!empty($locate)) die(js::locate($locate));
+                    die(isset($data['message']) ? $data['message'] : 'success');
                 }
 
                 if(isset($data['result']) and $data['result'] == 'fail')
@@ -716,7 +717,7 @@ class control
                     if(!empty($data['message']))
                     {
                         $message = json_decode(json_encode((array)$data['message']));
-                        foreach($message as $item => $errors)
+                        foreach((array)$message as $item => $errors)
                         {
                             $message->$item = implode(',', $errors);
                         }

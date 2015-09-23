@@ -842,11 +842,11 @@
 
     $('#visualPreviewBtn').on('mouseenter', function()
     {
-        $$('body').addClass('ve-preview-hover');
+        $$('body').addClass('ve-preview-hover').removeClass('ve-mode');
         tidyBlocks();
     }).on('mouseleave', function()
     {
-        $$('body').removeClass('ve-preview-hover');
+        $$('body').removeClass('ve-preview-hover').addClass('ve-mode');
         tidyBlocks();
     }).on('click', function()
     {
@@ -854,6 +854,7 @@
         $body.toggleClass('ve-preview-in');
         isInPreview = $body.hasClass('ve-preview-in');
         if(!isInPreview) $$('body').removeClass('ve-preview-hover');
+        $body.toggleClass('ve-mode', !isInPreview);
         $(this).toggleClass('text-danger', isInPreview).html(isInPreview ? ("<i class='icon-eye-close'></i> " + lang.exitPreview)
             : ("<i class='icon-eye-open'></i> " + lang.preview));
         tidyBlocks();

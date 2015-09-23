@@ -22,7 +22,7 @@ $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 :
 <div id="block<?php echo $block->id;?>" class='panel panel-block <?php echo $blockClass;?>'>
   <div class='panel-heading'>
     <strong><?php echo $icon . $block->title;?></strong>
-    <?php if(!empty($content->moreText) and !empty($content->moreUrl)):?>
+    <?php if(isset($content->moreText) and isset($content->moreUrl)):?>
     <div class='pull-right'><?php echo html::a($content->moreUrl, $content->moreText);?></div>
     <?php endif;?>
   </div>
@@ -73,6 +73,8 @@ $articles = $this->loadModel('article')->$method(empty($content->category) ? 0 :
     <ul class='ul-list'>
       <?php foreach($articles as $article):?>
       <?php 
+      $article->category->alias = isset($article->category->alias) ? $article->category->alias : '';
+      $article->alias = isset($article->alias) ? $article->alias : '';
       $alias = "category={$article->category->alias}&name={$article->alias}";
       $url   = helper::createLink('article', 'view', "id={$article->id}", $alias);
       ?>

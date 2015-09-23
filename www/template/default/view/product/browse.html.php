@@ -26,11 +26,11 @@ include TPL_ROOT . 'common/treeview.html.php';
       <div class='row blocks' data-region='product_browse-top'><?php $this->block->printRegion($layouts, 'product_browse', 'top', true);?></div>
       <header>
         <strong><i class='icon-th'></i> <?php echo $category->name;?></strong>
-        <span class='pull-right' id="modeControl">
+        <div class='pull-right btn-group' id="modeControl">
           <?php foreach($lang->product->listMode as $mode => $text):?>
-          <?php echo html::a("javascript:;", $text, "data-mode='{$mode}'");?>
+          <?php echo html::a("javascript:;", $text, "data-mode='{$mode}' class='btn'");?>
           <?php endforeach;?>
-        </span>
+        </div>
       </header>
       <?php include 'browse.card.html.php';?>
       <?php include 'browse.list.html.php';?>

@@ -21,6 +21,7 @@ class wechatModel extends model
     public function loadApi($public)
     {
         $public = $this->getByID($public);
+        if(empty($public)) return false;
         $this->app->loadClass('wechatapi', true);
         return new wechatapi($public->token, $public->appID, $public->appSecret, $this->config->debug);
     }
@@ -47,6 +48,7 @@ class wechatModel extends model
     public function getByID($id)
     {
         $public = $this->dao->findByID($id)->from(TABLE_WX_PUBLIC)->fetch();
+        if(empty($public)) return false;
         $public->url = 'http://' . $this->server->http_host . commonModel::createFrontLink('wechat', 'response', "id=$public->id");
         return $public;
     }
@@ -632,7 +634,7 @@ class wechatModel extends model
             $article = new stdclass();
             $article->title       = $product->name;
             $article->url         = rtrim(getWebRoot(true), '/') . commonModel::createFrontLink('product', 'view',  "productID=$product->id", "name=$product->alias&category=$categoryAlias");
-            $article->description = $product->summary;
+            $article->description = isset($product->summary) ? $product->summary : '';
             if(!empty($product->image)) $article->picUrl = rtrim(getWebRoot(true), '/') . $product->image->primary->smallURL;
             $response->articles[] = $article;
         }

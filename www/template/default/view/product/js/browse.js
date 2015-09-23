@@ -10,8 +10,8 @@ $(function()
 
     $('#modeControl a').click(function()
     {
-        $('#modeControl a').removeClass('selected');
-        $(this).addClass('selected');
+        $('#modeControl a').removeClass('active');
+        $(this).addClass('active');
         $('#modeControl').parents('.list-condensed').find('section').hide();
         $('#' + $(this).data('mode') + 'Mode').show();
         $.cookie('productViewType', $(this).data('mode'), {path: "/"});
