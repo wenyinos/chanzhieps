@@ -60,7 +60,15 @@ class stat extends control
         if($begin) $begin = date('Ymd', strtotime($begin));
         if($end)   $end   = date('Ymd', strtotime($end));
 
-        if($mode != 'fixed')
+        if($mode == 'today')
+        {
+            $begin = $end = date("Ymd");
+        }
+        elseif($mode == 'yestoday')
+        {
+            $begin = $end = date("Ymd", strtotime("-1 day"));
+        }
+        elseif($mode != 'fixed')
         {
             if($mode == 'weekly') $days  = 7;
             if($mode == 'monthly') $days = 30;
@@ -104,15 +112,78 @@ class stat extends control
      * @access public
      * @return void
      */
-    public function keywords($orderBy = 'pv_desc', $recTotal = 0, $recPerPage = 10, $pageID = 1)
+    public function keywords($mode = 'today', $begin = '', $end = '', $orderBy = 'pv_desc',  $recTotal = 0, $recPerPage = 10, $pageID = 1)
     {   
+        
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $this->view->keywordList = $this->stat->getKeywordsList($orderBy, $pager);
+        if($mode == 'today')
+        {
+            $begin = $end = date("Ymd");
+        }
+        elseif($mode == 'yestoday')
+        {
+            $begin = $end = date("Ymd", strtotime("-1 day"));
+        }
+        elseif($mode == 'weekly')
+        {
+            $begin =  date("Ymd", strtotime("-7 day"));
+            $end   = date('Ymd');
+        }
+        elseif($mode == 'monthly')
+        {
+            $begin =  date("Ymd", strtotime("-30 day"));
+            $end   = date('Ymd');
+        }
+        else
+        {
+            $begin = date('Ymd', strtotime($begin));
+            $end   = date('Ymd', strtotime($end));
+        }
+
+        $this->view->totalInfo   = $this->stat->getSearchTraffic($begin, $end);
+        $this->view->keywordList = $this->stat->getKeywordsList($begin, $end, $orderBy, $pager);
         $this->view->title       = $this->lang->stat->keywords;
+        $this->view->mode        = $mode;
+        $this->view->begin       = $begin;
+        $this->view->end         = $end;
         $this->view->orderBy     = $orderBy;
         $this->view->pager       = $pager;
+        $this->display();
+    }
+
+    public function keywordReport($keyword, $mode = 'weekly', $begin = '', $end = '')
+    {
+        if($mode == 'today')
+        {
+            $begin = $end = date("Ymd");
+        }
+        elseif($mode == 'yestoday')
+        {
+            $begin = $end = date("Ymd", strtotime("-1 day"));
+        }
+        elseif($mode == 'weekly')
+        {
+            $begin =  date("Ymd", strtotime("-7 day"));
+            $end   = date('Ymd');
+        }
+        elseif($mode == 'monthly')
+        {
+            $begin =  date("Ymd", strtotime("-30 day"));
+            $end   = date('Ymd');
+        }
+        else
+        {
+            $begin = date('Ymd', strtotime($begin));
+            $end   = date('Ymd', strtotime($end));
+        }
+
+        $this->view->keyword     = $keyword;
+        $this->view->labels      = $this->stat->getDayLabels($begin, $end);
+        $this->view->totalInfo   = $this->stat->getTrafficByKeyword($keyword, $begin, $end);
+        $this->view->keywordLine = $this->stat->getKeywordLine($keyword, $begin, $end);
+        $this->view->pieCharts   = $this->stat->getKeywordSearchPie($keyword, $begin, $end);
         $this->display();
     }
 

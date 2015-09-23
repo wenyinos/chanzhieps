@@ -15,6 +15,7 @@ $lang->stat->yestoday = '昨天';
 $lang->stat->pv       = '浏览量(PV)';
 $lang->stat->uv       = '访客数(UV)';
 $lang->stat->ipCount  = 'IP数';
+$lang->stat->totalPV  = '总访问数';
 
 $lang->stat->all   = '全部数据';
 $lang->stat->begin = '开始日期';
@@ -45,10 +46,7 @@ $lang->stat->dataTypes = new stdclass();
 $lang->stat->dataTypes->pv = '浏览量(PV)';
 $lang->stat->dataTypes->uv = '访客数(UV)';
 $lang->stat->dataTypes->ip = 'IP数';
-<<<<<<< HEAD
 
 $lang->stat->page = new stdclass();
 $lang->stat->page->common = '页面访问量';
 $lang->stat->page->url    = '页面地址';
-=======
->>>>>>> 9e8c2e2c3765d50885a2d003fcef86663e4755c3
