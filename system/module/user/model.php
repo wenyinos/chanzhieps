@@ -574,16 +574,6 @@ class userModel extends model
                     $this->dao->update(TABLE_USER)->set('maxLogin = maxLogin - '. $login)->where('account')->eq($account)->exec();
                     $this->loadModel('score')->earn('login', '', '', 'LOGIN');
                 }
-
-                if($viewType == 'json' and $this->post->sn)
-                {
-                    if(!$user->sn)
-                    {
-                        $this->loadModel('score')->earn('bind', '', '', 'BIND');
-                        $this->dao->update(TABLE_USER)->set('sn')->eq($this->post->sn)->where('account')->eq($account)->exec();
-                    }
-                    die('success');
-                }
             }
         }
 

@@ -50,5 +50,8 @@ if($extHookFiles) foreach($extHookFiles as $extHookFile) include $extHookFile;
 <div class='hide'><?php if(RUN_MODE == 'front') $this->loadModel('block')->printRegion($layouts, 'all', 'footer');?></div>
 <?php if(commonModel::isAvailable('shop')) include TPL_ROOT . 'common/cart.html.php';?>
 <?php include TPL_ROOT . 'common/log.html.php';?>
+<?php if(commonModel::isAvailable('score') and (!isset($this->config->site->resetMaxLoginDate) or $this->config->site->resetMaxLoginDate < date('Y-m-d'))):?>
+<script>$.get(createLink('score', 'resetMaxLogin'));</script>
+<?php endif;?>
 </body>
 </html>
