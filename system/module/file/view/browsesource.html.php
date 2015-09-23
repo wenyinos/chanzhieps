@@ -118,7 +118,7 @@
   </div>
 </div>
 <script type="text/javascript">
-var doms = $('.copyBtn');
-var clip = new ZeroClipboard( doms );
+var copyBtns = $('.copyBtn');
+var clip = new ZeroClipboard(copyBtns);
 </script>
 <?php include '../../common/view/footer.admin.html.php';?>
