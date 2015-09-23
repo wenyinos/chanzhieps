@@ -20,7 +20,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
 <div id="block<?php echo $block->id;?>" class="panel-cards with-cards panel panel-block <?php echo $blockClass;?>">
   <div class='panel-heading'>
     <strong><?php echo $icon;?> <?php echo $block->title . zget($content, 'recPerRow', 1);?></strong>
-    <?php if(!empty($content->moreText) and !empty($content->moreUrl)):?>
+    <?php if(isset($content->moreText) and isset($content->moreUrl)):?>
     <div class='pull-right'><?php echo html::a($content->moreUrl, $content->moreText);?></div>
     <?php endif;?>
   </div>
@@ -28,6 +28,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
   <div class='panel-body no-padding'>
     <?php
     $count = count($products);
+    if($count == 0) $count = 1;
     $recPerRow = min($count, max(1, zget($content, 'recPerRow', 1)));
     ;?>
     <div class='cards cards-products' data-cols='<?php echo $recPerRow?>'>

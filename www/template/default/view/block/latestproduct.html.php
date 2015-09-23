@@ -20,7 +20,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
 <div id="block<?php echo $block->id;?>" class="panel-cards panel panel-block <?php echo $blockClass;?>">
   <div class='panel-heading'>
     <strong><?php echo $icon;?> <?php echo $block->title;?></strong>
-    <?php if(!empty($content->moreText) and !empty($content->moreUrl)):?>
+    <?php if(isset($content->moreText) and isset($content->moreUrl)):?>
     <div class='pull-right'><?php echo html::a($content->moreUrl, $content->moreText);?></div>
     <?php endif;?>
   </div>
@@ -32,7 +32,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
       $url = helper::createLink('product', 'view', "id=$product->id", "category={$product->category->alias}&name=$product->alias");
       ?>
       <?php if(!empty($product->image)): ?>
-      <div class='col-md-12' data-recperrow="<?php echo $content->recPerRow;?>">
+      <div class='col-md-12' data-recperrow="<?php echo isset($content->recPerRow) ? $content->recPerRow : '3';?>">
         <a class='card' href="<?php echo $url;?>">
           <?php $title = $product->image->primary->title ? $product->image->primary->title : $product->name;?>
           <div class='media' style='background-image: url(<?php echo $product->image->primary->middleURL; ?>);'><?php echo html::image($product->image->primary->middleURL, "title='{$title}' alt='{$product->name}'"); ?></div>
