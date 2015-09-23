@@ -141,17 +141,34 @@ class stat extends control
     /**
      * Page ranking.
      * 
+     * @param  string   $mode 
+     * @param  int      $begin 
+     * @param  int      $end 
      * @access public
      * @return void
      */
-    public function page()
+    public function page($mode = 'all', $begin = '', $end = '')
     {
-        $pages = $this->dao->select('*')->from(TABLE_STATREPORT)
+        $date  = $this->stat->parseDate($mode, $begin, $end);
+        $begin = $date->begin;
+        $end   = $date->end;
+
+        $pages = $this->dao->select('*, sum(pv) as pv')->from(TABLE_STATREPORT)
             ->where('type')->eq('url')
-            ->andWhere('timeType')->eq('year')
-            ->orderBy('pv')->limit(100)->fetchAll();
+            ->andWhere('item')->ne('')
+            ->beginIf($mode == 'all')->andWhere('timeType')->eq('year')->fi()
+            ->beginIf($mode != 'all')
+            ->andWhere('timeType')->eq('day')
+            ->andWhere('timeValue')->ge($begin)
+            ->andWhere('timeValue')->le($end)
+            ->fi()
+            ->groupBy('item')
+            ->orderBy('pv_desc')
+            ->limit(100)
+            ->fetchAll();
 
         $this->view->title = $this->lang->stat->page->common;
+        $this->view->mode  = $mode;
         $this->view->pages = $pages;
         $this->display();
     }
