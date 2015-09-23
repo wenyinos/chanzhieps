@@ -10,6 +10,7 @@ $lang->stat->from     = '来源统计';
 $lang->stat->keywords = '关键词统计';
 $lang->stat->outSite  = '来源网站统计';
 $lang->stat->search   = '搜索引擎统计';
+$lang->stat->domain   = '来路域名';
 $lang->stat->today    = '今天';
 $lang->stat->yestoday = '昨天';
 $lang->stat->pv       = '浏览量(PV)';

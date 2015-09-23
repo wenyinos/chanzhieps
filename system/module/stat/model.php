@@ -71,7 +71,7 @@ class statModel extends model
     {
         $traffic = $this->dao->select('*')->from(TABLE_STATREPORT)
             ->where('type')->eq($type)
-            ->andWhere('timeType')->eq('day')
+            ->andWhere('timeType')->eq($timeType)
             ->andWhere('timeValue')->in($labels)
             ->fetchGroup('item', 'timeValue');
 
@@ -237,13 +237,21 @@ class statModel extends model
     /**
      * Get hour labels of one date.
      * 
-     * @param  int    $day 
+     * @param  int     $day 
+     * @param  bool    $showDate
      * @access public
-     * @return void
+     * @return array
      */
-    public function getHourLabels($day)
+    public function getHourLabels($day, $showDate = true)
     {
-        foreach($this->config->stat->hourLabels as $hour) $labels[] = $day . $hour;
+        if($showDate)
+        {
+            foreach($this->config->stat->hourLabels as $hour) $labels[] = $day . $hour;
+        }
+        else
+        {
+            foreach($this->config->stat->hourLabels as $hour) $labels[] = $hour . ':00';
+        }
         return $labels;
     }
     
@@ -321,10 +329,12 @@ class statModel extends model
     public function getKeywordLine($keyword, $begin, $end)
     {
         $labels  = $this->getDayLabels($begin, $end);
+        if($begin == $end) $labels = $this->getHourLabels($begin);
         $traffic = $this->dao->select('*')->from(TABLE_STATREPORT)
             ->where('type')->eq('keywords')
             ->andWhere('item')->eq($keyword)
-            ->andWhere('timeType')->eq('day')
+            ->beginIf($begin == $end)->andWhere('timeType')->eq('hour')->fi()
+            ->beginIf($begin != $end)->andWhere('timeType')->eq('day')->fi()
             ->andWhere('timeValue')->in($labels)
             ->fetchAll('timeValue');
 
@@ -358,7 +368,6 @@ class statModel extends model
         $chartData[] = $uvChart;
         $chartData[] = $ipChart;
         return $chartData;
-
     }
 
     public function getKeywordSearchPie($keyword, $begin, $end)

@@ -57,9 +57,6 @@ class stat extends control
      */
     public function report($type, $mode = 'weekly', $begin = '', $end = '')
     {
-        if($begin) $begin = date('Ymd', strtotime($begin));
-        if($end)   $end   = date('Ymd', strtotime($end));
-
         if($mode == 'today')
         {
             $begin = $end = date("Ymd");
@@ -84,9 +81,16 @@ class stat extends control
             exit;
         }
 
+        if(!$begin) $begin = date('Ymd', strtotime($begin));
+        if(!$end)   $end   = date('Ymd', strtotime($end));
+
+        if($begin < $end)  $labels = $this->stat->getDayLabels($begin, $end);
+        if($begin == $end) $labels = $this->stat->getHourLabels($begin);
+        
+        $this->view->lineLabels = $labels;
+        if($begin == $end) $this->view->lineLabels = $this->stat->getHourLabels($begin, false);
         $this->view->pieCharts  = $this->stat->getPieByType($type, $begin, $end);
 
-        $this->view->lineLabels = $this->stat->getDayLabels($begin, $end);
         if(empty($this->view->lineLabels)) 
         {
             $this->view->error = $this->lang->stat->dateError;
@@ -94,7 +98,8 @@ class stat extends control
             exit;
         }
 
-        $this->view->lineCharts = $this->stat->getItemLine($type, 'day', $this->view->lineLabels);
+        $timeType = $begin == $end ? 'hour' : 'day';
+        $this->view->lineCharts = $this->stat->getItemLine($type, $timeType, $labels);
 
         $this->view->title = $this->lang->stat->{$type}; 
         $this->view->mode  = $mode; 
@@ -114,7 +119,7 @@ class stat extends control
      */
     public function keywords($mode = 'today', $begin = '', $end = '', $orderBy = 'pv_desc',  $recTotal = 0, $recPerPage = 10, $pageID = 1)
     {   
-        
+      
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
@@ -142,6 +147,9 @@ class stat extends control
             $end   = date('Ymd', strtotime($end));
         }
 
+        if(!$begin) $begin = date('Ymd', strtotime($begin));
+        if(!$end)   $end   = date('Ymd', strtotime($end));
+ 
         $this->view->totalInfo   = $this->stat->getSearchTraffic($begin, $end);
         $this->view->keywordList = $this->stat->getKeywordsList($begin, $end, $orderBy, $pager);
         $this->view->title       = $this->lang->stat->keywords;
@@ -153,8 +161,21 @@ class stat extends control
         $this->display();
     }
 
+    /**
+     * Report page of one keyword.
+     * 
+     * @param  string    $keyword 
+     * @param  string    $mode 
+     * @param  string    $begin 
+     * @param  string    $end 
+     * @access public
+     * @return void
+     */
     public function keywordReport($keyword, $mode = 'weekly', $begin = '', $end = '')
     {
+        if(!$begin) $begin = date("Ymd", strtotime("-7 day"));
+        if(!$end)   $end   = date("Ymd");
+
         if($mode == 'today')
         {
             $begin = $end = date("Ymd");
@@ -178,9 +199,10 @@ class stat extends control
             $begin = date('Ymd', strtotime($begin));
             $end   = date('Ymd', strtotime($end));
         }
-
+        if($begin < $end)  $labels = $this->stat->getDayLabels($begin, $end);
+        if($begin == $end) $labels = $this->stat->getHourLabels($begin, false);
         $this->view->keyword     = $keyword;
-        $this->view->labels      = $this->stat->getDayLabels($begin, $end);
+        $this->view->labels      = $labels;
         $this->view->totalInfo   = $this->stat->getTrafficByKeyword($keyword, $begin, $end);
         $this->view->keywordLine = $this->stat->getKeywordLine($keyword, $begin, $end);
         $this->view->pieCharts   = $this->stat->getKeywordSearchPie($keyword, $begin, $end);
