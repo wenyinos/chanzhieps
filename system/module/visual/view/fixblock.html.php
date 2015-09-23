@@ -6,13 +6,13 @@
       <td><?php echo html::select("grid", $this->lang->block->gridOptions, $block->grid, "class='form-control'");?></td>
       <td class='w-100px'>
         <label>
-          <input type='checkbox' name='titleless' value='1' <?php if($block->borderless) echo 'checked';?>/>
+          <input type='checkbox' name='titleless' value='1' <?php if(zget($block, 'borderless') == 1) echo 'checked';?>/>
           <?php echo $this->lang->block->titleless?>
         <label>
       </td>
       <td class='w-100px'>
         <label>
-        <input type='checkbox' name='borderless' value='1' <?php if($block->borderless) echo 'checked';?>/>
+        <input type='checkbox' name='borderless' value='1' <?php if(zget($block, 'borderless') == 1) echo 'checked';?>/>
           <?php echo $this->lang->block->borderless?>
         <label>
       </td>
