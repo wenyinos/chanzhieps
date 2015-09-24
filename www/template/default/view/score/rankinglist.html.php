@@ -15,7 +15,7 @@
             <span class='strong'>Top<?php echo $i?></span>
             <?php
             $basicInfo = $users[$ranking->account];
-            echo $basicInfo->realname . " [{$lang->user->sectList[$basicInfo->sect]}]";
+            echo $basicInfo->realname;
             ?>
           </dt>
           <dd><?php echo $ranking->score?></dd>
@@ -40,7 +40,7 @@
             <?php
             $ranking->account = trim($ranking->account);
             $basicInfo = $users[$ranking->account];
-            echo $basicInfo->realname . " [{$lang->user->sectList[$basicInfo->sect]}]";
+            echo $basicInfo->realname;
             ?>
           </dt>
           <dd><?php echo $ranking->sumScore?></dd>
@@ -65,7 +65,7 @@
             <?php
             $ranking->account = trim($ranking->account);
             $basicInfo = $users[$ranking->account];
-            echo $basicInfo->realname . " [{$lang->user->sectList[$basicInfo->sect]}]";
+            echo $basicInfo->realname;
             ?>
           </dt>
           <dd><?php echo $ranking->sumScore?></dd>
@@ -90,7 +90,7 @@
             <?php
             $ranking->account = trim($ranking->account);
             $basicInfo = $users[$ranking->account];
-            echo $basicInfo->realname . " [{$lang->user->sectList[$basicInfo->sect]}]";
+            echo $basicInfo->realname;
             ?>
           </dt>
           <dd><?php echo $ranking->sumScore?></dd>
