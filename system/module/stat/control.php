@@ -74,7 +74,7 @@ class stat extends control
         }
 
         $timeType = $begin == $end ? 'hour' : 'day';
-        $this->view->lineCharts = $this->stat->getItemLine($type, $timeType, $labels);
+        $this->view->lineCharts = $this->stat->getTypeLine($type, $timeType, $labels);
 
         $this->view->title = $this->lang->stat->{$type}; 
         $this->view->mode  = $mode; 
@@ -130,11 +130,12 @@ class stat extends control
 
         if($begin < $end)  $labels = $this->stat->getDayLabels($begin, $end);
         if($begin == $end) $labels = $this->stat->getHourLabels($begin, false);
+
         $this->view->keyword     = $keyword;
         $this->view->labels      = $labels;
         $this->view->totalInfo   = $this->stat->getTrafficByKeyword($keyword, $begin, $end);
-        $this->view->keywordLine = $this->stat->getKeywordLine($keyword, $begin, $end);
-        $this->view->pieCharts   = $this->stat->getKeywordSearchPie($keyword, $begin, $end);
+        $this->view->keywordLine = $this->stat->getItemLine('keywords', $keyword, $begin, $end);
+        $this->view->pieCharts   = $this->stat->getItemExtraPie('keywords', $keyword, $begin, $end);
         $this->display();
     }
 
@@ -142,12 +143,13 @@ class stat extends control
      * Page ranking.
      * 
      * @param  string   $mode 
+     * @param  string   $orderBy 
      * @param  int      $begin 
      * @param  int      $end 
      * @access public
      * @return void
      */
-    public function page($mode = 'all', $begin = '', $end = '')
+    public function page($mode = 'all', $orderBy = 'pv_desc', $begin = '', $end = '')
     {
         $date  = $this->stat->parseDate($mode, $begin, $end);
         $begin = $date->begin;
@@ -156,20 +158,50 @@ class stat extends control
         $pages = $this->dao->select('*, sum(pv) as pv')->from(TABLE_STATREPORT)
             ->where('type')->eq('url')
             ->andWhere('item')->ne('')
-            ->beginIf($mode == 'all')->andWhere('timeType')->eq('year')->fi()
             ->beginIf($mode != 'all')
             ->andWhere('timeType')->eq('day')
             ->andWhere('timeValue')->ge($begin)
             ->andWhere('timeValue')->le($end)
             ->fi()
             ->groupBy('item')
-            ->orderBy('pv_desc')
+            ->orderBy($orderBy)
             ->limit(100)
             ->fetchAll();
 
-        $this->view->title = $this->lang->stat->page->common;
-        $this->view->mode  = $mode;
-        $this->view->pages = $pages;
+        $this->view->title   = $this->lang->stat->page->common;
+        $this->view->mode    = $mode;
+        $this->view->orderBy = $orderBy;
+        $this->view->pages   = $pages;
+        $this->view->begin   = $begin;
+        $this->view->end     = $end;
+        $this->display();
+    }
+
+    /**
+     * Domain report.
+     * 
+     * @param  string    $domain 
+     * @param  string    $mode 
+     * @param  string    $begin 
+     * @param  string    $end 
+     * @access public
+     * @return void
+     */
+    public function domain($domain, $mode = 'weekly', $begin = '', $end = '')
+    {
+        $date  = $this->stat->parseDate($mode, $begin, $end);
+        $begin = $date->begin;
+        $end   = $date->end;
+
+        if($begin < $end)  $labels = $this->stat->getDayLabels($begin, $end);
+        if($begin == $end) $labels = $this->stat->getHourLabels($begin, false);
+
+        $this->view->type      = $this->lang->stat->domain . ' - ' . $domain;
+        $this->view->domain    = $domain;
+        $this->view->labels    = $labels;
+        $this->view->lineChart = $this->stat->getItemLine('domain', $domain, $begin, $end);
+        $this->view->pieCharts = $this->stat->getItemExtraPie('domain', $domain, $begin, $end);
+
         $this->display();
     }
 }

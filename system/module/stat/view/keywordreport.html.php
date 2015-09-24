@@ -54,20 +54,21 @@
       <table class='table table-bordered table-report w-500px' id='reportData'>
         <thead>
           <tr class='text-center'>
-            <td></td>
-            <?php foreach($pieCharts['pv'] as $report):?>
-            <td><?php echo $report->label;?></td>
-            <?php endforeach;?>
+            <td><?php echo $lang->stat->searchEngine?></td>
+            <td><?php echo $lang->stat->pv;?></td>
+            <td><?php echo $lang->stat->uv;?></td>
+            <td><?php echo $lang->stat->ipCount;?></td>
           </tr>
         </thead>
-        <?php foreach($pieCharts as $item => $reports):?>
+        <?php for($i = 0 ; $i < count($pieCharts['pv']); $i ++):?>
+        <?php $report = $pieCharts['pv'][$i];?>
         <tr class='text-center'>
-          <td><?php echo $item;?></td>
-          <?php foreach($reports as $report):?>
+          <td><?php echo $report->label;?></td>
           <td><?php echo $report->value;?></td>
-          <?php endforeach;?>
+          <td><?php echo $pieCharts['uv'][$i]->value;?></td>
+          <td><?php echo $pieCharts['ip'][$i]->value;?></td>
         </tr>
-        <?php endforeach;?>
+        <?php endfor;?>
       </table>
   </div>  
   <?php else:?>
