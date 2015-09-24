@@ -67,6 +67,8 @@ $lang->resource->article->delete = 'delete';
 $lang->resource->article->setcss = 'setcss';
 $lang->resource->article->setjs  = 'setjs';
 $lang->resource->article->stick  = 'stick';
+$lang->resource->article->forward2Block  = 'forward2Block';
+$lang->resource->article->forward2Forum  = 'forward2Forum';
 
 /* Block module. */
 $lang->resource->block = new stdclass();
