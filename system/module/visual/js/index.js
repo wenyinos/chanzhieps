@@ -8,6 +8,7 @@
     var lang = $.extend(window.v.visualLang, window.v.lang, {blocks: window.v.visualBlocks});
     var visualPageUrl = visualPage.src;
     var visuals = window.v.visuals;
+    var visualsLang = window.v.visualsLang;
     var DEFAULT_ACTIONS_CONFIG =
     {
         edit: {icon: 'pencil', text: lang.actions.edit},
@@ -102,7 +103,7 @@
     // visual settings
     $.each(visuals, function(name, setting)
     {
-        setting = $.extend(true, {code: name}, DEFAULT_CONFIG, $.isPlainObject(setting) ? setting : {name: setting});
+        setting = $.extend(true, {code: name}, DEFAULT_CONFIG, $.isPlainObject(setting) ? setting : {name: setting}, visualsLang[name]);
         $.each(setting.actions, function(actionName, action)
         {
             var actionSetting;

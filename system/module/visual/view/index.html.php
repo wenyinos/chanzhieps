@@ -4,8 +4,9 @@
 <?php $currentDevice   = $this->session->device ? $this->session->device : 'desktop';?>
 <?php include "header.html.php"; ?>
 <?php
-js::set('visuals', $lang->visual->config);
-js::set('visualLang', $lang->visual->jsLang);
+js::set('visuals', $config->visual->setting);
+js::set('visualsLang', $lang->visual->setting);
+js::set('visualLang', $lang->visual->js);
 js::set('visualStyle', $themeRoot . 'common/visual.css');
 js::set('visualBlocks', $blocks);
 js::set('debug', $config->debug);
