@@ -67,13 +67,13 @@ class statModel extends model
      * @access public
      * @return array
      */
-    public function getItemLine($type = '', $timeType, $labels)
+    public function getTypeLine($type = '', $timeType, $labels, $groupBy = 'item')
     {
         $traffic = $this->dao->select('*')->from(TABLE_STATREPORT)
             ->where('type')->eq($type)
             ->andWhere('timeType')->eq($timeType)
             ->andWhere('timeValue')->in($labels)
-            ->fetchGroup('item', 'timeValue');
+            ->fetchGroup($groupBy, 'timeValue');
 
         if(empty($traffic)) return array();
 
@@ -123,7 +123,7 @@ class statModel extends model
      * @access public
      * @return array
      */
-    public function getPieByType($type, $begin, $end)
+    public function getPieByType($type, $begin, $end, $groupBy = 'item')
     {
         $charts    = array();
         $reports = $this->dao->select('*, sum(ip) as ip, sum(pv) as pv, sum(uv) as uv')->from(TABLE_STATREPORT)
@@ -131,8 +131,8 @@ class statModel extends model
             ->andWhere('timeType')->eq('day')
             ->beginIf($begin != '')->andWhere('timeValue')->ge($begin)->fi()
             ->beginIf($end != '')->andWhere('timeValue')->le($end)->fi()
-            ->groupBy('item')
-            ->fetchAll('item');
+            ->groupBy($groupBy)
+            ->fetchAll($groupBy);
 
         $colors = $this->config->stat->chartColors;
         $this->loadModel('log');
@@ -322,13 +322,13 @@ class statModel extends model
      * @access public
      * @return array
      */
-    public function getKeywordLine($keyword, $begin, $end)
+    public function getItemLine($type, $item, $begin, $end)
     {
         $labels  = $this->getDayLabels($begin, $end);
         if($begin == $end) $labels = $this->getHourLabels($begin);
         $traffic = $this->dao->select('*')->from(TABLE_STATREPORT)
-            ->where('type')->eq('keywords')
-            ->andWhere('item')->eq($keyword)
+            ->where('type')->eq($type)
+            ->andWhere('item')->eq($item)
             ->beginIf($begin == $end)->andWhere('timeType')->eq('hour')->fi()
             ->beginIf($begin != $end)->andWhere('timeType')->eq('day')->fi()
             ->andWhere('timeValue')->in($labels)
@@ -364,52 +364,6 @@ class statModel extends model
         $chartData[] = $uvChart;
         $chartData[] = $ipChart;
         return $chartData;
-    }
-
-    public function getKeywordSearchPie($keyword, $begin, $end)
-    {
-        $charts    = array();
-        $reports = $this->dao->select('*, sum(ip) as ip, sum(pv) as pv, sum(uv) as uv')->from(TABLE_STATREPORT)
-            ->where('type')->eq('keywords')
-            ->andWhere('item')->eq($keyword)
-            ->andWhere('timeType')->eq('day')
-            ->andWhere('timeValue')->ge($begin)
-            ->andWhere('timeValue')->le($end)
-            ->groupBy('extra')
-            ->fetchAll('extra');
-
-        $colors = $this->config->stat->chartColors;
-        $this->loadModel('log');
-        
-        $i = 0;       
-        foreach($reports as $searchEngine => $report)
-        {
-            $color[$searchEngine] = isset($color[$searchEngine]) ? $color[$searchEngine] : $colors[$i];
-            $i ++;
-
-            if(!isset($this->config->searchEngine->params[$searchEngine])) continue;
-
-            $pv = new stdclass();
-            $pv->value = $report->pv;
-            $pv->color = $color[$searchEngine];
-            $pv->label = $report->extra;
-
-            $uv = new stdclass();
-            $uv->value = $report->uv;
-            $uv->color = $color[$searchEngine];
-            $uv->label = $report->extra;
-
-            $ip = new stdclass();
-            $ip->value = $report->ip;
-            $ip->color = $color[$searchEngine];
-            $ip->label = $report->extra;
-
-            $charts['pv'][] = $pv;
-            $charts['uv'][] = $uv;
-            $charts['ip'][] = $ip;
-        }
-
-        return $charts;
     }
 
     /**
@@ -455,4 +409,58 @@ class statModel extends model
         $params->end   = $end;
         return $params;
     }
+
+    /**
+     * Get item extra pie data.
+     * 
+     * @param  string   $domain 
+     * @param  int      $begin 
+     * @param  int      $end 
+     * @access public
+     * @return void
+     */
+    public function getItemExtraPie($type, $item, $begin, $end)
+    {
+        $charts  = array();
+        $reports = $this->dao->select('*, sum(ip) as ip, sum(pv) as pv, sum(uv) as uv')->from(TABLE_STATREPORT)
+            ->where('type')->eq($type)
+            ->andWhere('item')->eq($item)
+            ->andWhere('timeType')->eq('day')
+            ->andWhere('timeValue')->ge($begin)
+            ->andWhere('timeValue')->le($end)
+            ->groupBy('extra')
+            ->fetchAll('extra');
+
+        $colors = $this->config->stat->chartColors;
+        $this->loadModel('log');
+        
+        $i = 0;       
+        foreach($reports as $extra => $report)
+        {
+            $color[$extra] = isset($color[$extra]) ? $color[$extra] : $colors[$i];
+            $i ++;
+
+            $pv = new stdclass();
+            $pv->value = $report->pv;
+            $pv->color = $color[$extra];
+            $pv->label = $report->extra;
+
+            $uv = new stdclass();
+            $uv->value = $report->uv;
+            $uv->color = $color[$extra];
+            $uv->label = $report->extra;
+
+            $ip = new stdclass();
+            $ip->value = $report->ip;
+            $ip->color = $color[$extra];
+            $ip->label = $report->extra;
+
+            $charts['pv'][] = $pv;
+            $charts['uv'][] = $uv;
+            $charts['ip'][] = $ip;
+        }
+
+        return $charts;
+    }
+
 }
