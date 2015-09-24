@@ -134,6 +134,7 @@ class stat extends control
 
         $this->view->keyword     = $keyword;
         $this->view->labels      = $labels;
+        $this->view->mode        = $mode;
         $this->view->totalInfo   = $this->stat->getTrafficByKeyword($keyword, $begin, $end);
         $this->view->keywordLine = $this->stat->getItemLine('keywords', $keyword, $begin, $end);
         $this->view->pieCharts   = $this->stat->getItemExtraPie('keywords', $keyword, $begin, $end);

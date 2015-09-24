@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php include '../../common/view/datepicker.html.php';?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon icon-bar-chart'></i> <?php echo $lang->stat->page->common;?></strong>
     <div class='panel-actions'>
