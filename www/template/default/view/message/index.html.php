@@ -42,7 +42,7 @@
     <?php endif;?>
     <div class='text-right'><div class='pager clearfix'><?php $pager->show('right', 'short');?></div></div>
 
-    <div class='panel'>
+    <div class='panel panel-form'>
       <div class='panel-heading'><strong><i class='icon-comment-alt'></i> <?php echo $lang->message->post;?></strong></div>
       <div class='panel-body'>
         <form method='post' class='form-horizontal' id='commentForm' action="<?php echo $this->createLink('message', 'post', 'type=message');?>">

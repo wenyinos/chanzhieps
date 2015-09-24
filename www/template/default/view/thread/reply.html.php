@@ -68,7 +68,7 @@
 <?php if($thread->readonly):?>
 <div class='alert alert-info'><?php echo $lang->thread->readonlyMessage;?></div>
 <?php elseif($this->session->user->account != 'guest'):?>
-<div class='panel'>
+<div class='panel panel-form'>
   <div class='panel-heading'><strong><i class='icon-edit'></i> <?php echo $lang->thread->replies; ?></strong></div>
   <div class='panel-body'>
     <form method='post' enctype='multipart/form-data' id='replyForm' action='<?php echo $this->createLink('reply', 'post', "thread=$thread->id");?>'>

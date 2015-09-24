@@ -913,6 +913,29 @@ function checkAdminEntry()
 }
 
 /**
+ * Get admin entry.
+ * 
+ * @access public
+ * @return string
+ */
+function getAdminEntry()
+{
+    $path  = dirname($_SERVER['SCRIPT_FILENAME']);
+    $files = scandir($path);
+    $defaultFiles = array('admin.php', 'index.php', 'install.php', 'loader.php', 'upgrade.php');
+    foreach($files as $file)
+    {
+        if(strpos($file, '.php') !== false and !in_array($file, $defaultFiles))
+        {
+            $contents = file_get_contents($path . '/' . $file);
+
+            if(strpos($contents, "'RUN_MODE', 'admin'") !== false) return $file;
+        }
+    }
+    return 'admin.php';
+}
+
+/**
  * Format time.
  * 
  * @param  int    $time 
