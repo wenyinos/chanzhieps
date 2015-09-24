@@ -23,18 +23,26 @@
     </strong>
     <label class='text-important'><?php echo $domain?></label>
     <div class="panel-actions">
-      <form method='get' action="<?php echo inlink('domain')?>">
-        <?php echo html::hidden('m', 'stat') . html::hidden('f', 'domain') . html::hidden('domain', $domain) . html::hidden('mode', 'fixed');?>
-        <table class='table table-borderless'>
-          <tr>
-            <td style='padding:4px'>
-              <?php echo html::input('begin', $this->get->begin, "placeholder='{$lang->stat->begin}' class='form-date w-120px'")?> 
-              <?php echo html::input('end', $this->get->end, "placeholder='{$lang->stat->end}' class='form-date w-120px'")?>
-              <?php echo html::submitButton($lang->stat->view, "btn btn-xs btn-info");?>
-            </td>
-          </tr>
-        </table>
-      </form>
+      <ul class='nav nav-tabs'>
+        <?php foreach($lang->stat->trafficModes as $code => $modeName):?>
+        <?php $class = $mode == $code ? "class='active'" : '';?>
+        <li <?php echo $class?>><?php echo html::a(inlink('domain', "domain={$domain}&mode=$code"), $modeName);?></li>
+        <?php endforeach;?>
+        <li>
+          <form method='get' action="<?php echo inlink('domain')?>">
+            <?php echo html::hidden('m', 'stat') . html::hidden('f', 'domain') . html::hidden('domain', $domain) . html::hidden('mode', 'fixed');?>
+            <table class='table table-borderless'>
+              <tr>
+                <td style='padding:4px'>
+                  <?php echo html::input('begin', $this->get->begin, "placeholder='{$lang->stat->begin}' class='form-date w-120px'")?> 
+                  <?php echo html::input('end', $this->get->end, "placeholder='{$lang->stat->end}' class='form-date w-120px'")?>
+                  <?php echo html::submitButton($lang->stat->view, "btn btn-xs btn-info");?>
+                </td>
+              </tr>
+            </table>
+          </form>
+        </li>
+      <ul>
     </div>
   </div>
   <?php if(!empty($lineChart)):?>

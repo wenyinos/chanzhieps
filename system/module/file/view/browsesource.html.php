@@ -1,5 +1,6 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php js::import($jsRoot . 'zeroclipboard/zeroclipboard.min.js');?>
+<?php js::set('copySuccess', $lang->file->copySuccess);?>
 <div class='modal fade' id='uploadModal'>
   <div class='modal-dialog'>
     <div class='modal-content'>
@@ -120,5 +121,6 @@
 <script type="text/javascript">
 var copyBtns = $('.copyBtn');
 var clip = new ZeroClipboard(copyBtns);
+clip.on('aftercopy', function(){window.messager.success(v.copySuccess); });
 </script>
 <?php include '../../common/view/footer.admin.html.php';?>

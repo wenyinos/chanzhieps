@@ -7,8 +7,9 @@ if(!empty($referer))
 }
 ?>
 <script>
+var logLink = "<?php echo helper::createLink('log', 'record')?>";
 var referer         = "<?php echo urlencode($referer);?>";
 var browserLanguage = navigator.language || navigator.userLanguage; 
 var resolution      = screen.availWidth + ' X ' + screen.availHeight;
-$.get(createLink('log', 'record'), {referer:referer, browserLanguage:browserLanguage, resolution:resolution});
+$.get(logLink, {referer:referer, browserLanguage:browserLanguage, resolution:resolution});
 </script>

@@ -281,13 +281,17 @@ class statModel extends model
     /**
      * Set searchengine traffic grouped by serachengine.
      * 
+     * @param  int       $begin 
+     * @param  int       $end 
      * @access public
      * @return array
      */
-    public function getSearchTraffic()
+    public function getSearchTraffic($begin, $end)
     {
          return $this->dao->select('*, sum(pv) as pv, sum(uv) as uv, sum(ip) as ip')->from(TABLE_STATREPORT)
             ->where('type')->eq('keywords')
+            ->andWhere('timeValue')->ge($begin)
+            ->andWhere('timeValue')->le($end)
             ->andWhere('timeType')->eq('day')
             ->groupBy('extra')
             ->fetchAll('extra');
@@ -459,7 +463,20 @@ class statModel extends model
             $charts['uv'][] = $uv;
             $charts['ip'][] = $ip;
         }
-
         return $charts;
+    }
+
+    /**
+     * Get search engines.
+     * 
+     * @access public
+     * @return array
+     */
+    public function getSearchEngines()
+    {
+        return $this->dao->select('*,extra as searchEngine')->from(TABLE_STATREPORT)
+            ->where('type')->eq('keywords')
+            ->andWhere('extra')->ne('')
+            ->fetchAll('extra');
     }
 }
