@@ -35,7 +35,7 @@ class stat extends control
         else
         {
             $labels = $this->stat->getDayLabels($begin, $end);
-            $this->view->labels    = $labels;
+            foreach($labels as $label ) $this->view->labels[] = date('Y-m-d', strtotime($label));
             $this->view->lineChart = $this->stat->getBasicLine('total', 'day', $labels);
        
         }
@@ -59,11 +59,17 @@ class stat extends control
         $date  = $this->stat->parseDate($mode, $begin, $end);
         $begin = $date->begin;
         $end   = $date->end;
-        if($begin < $end)  $labels = $this->stat->getDayLabels($begin, $end);
-        if($begin == $end) $labels = $this->stat->getHourLabels($begin);
+        if($begin < $end) 
+        {
+            $labels = $this->stat->getDayLabels($begin, $end);
+            foreach($labels as $label ) $this->view->lineLabels[] = date('Y-m-d', strtotime($label));
+        }
+        if($begin == $end) 
+        {
+            $labels = $this->stat->getHourLabels($begin);
+            $this->view->lineLabels = $this->stat->getHourLabels($begin, false);
+        }
         
-        $this->view->lineLabels = $labels;
-        if($begin == $end) $this->view->lineLabels = $this->stat->getHourLabels($begin, false);
         $this->view->pieCharts  = $this->stat->getPieByType($type, $begin, $end);
 
         if(empty($this->view->lineLabels)) 
@@ -101,9 +107,25 @@ class stat extends control
         $begin = $date->begin;
         $end   = $date->end;
 
-        $this->view->searchEngines = $this->stat->getSearchEngines();
-        $this->view->totalInfo     = $this->stat->getSearchTraffic($begin, $end);
-        $this->view->keywordList   = $this->stat->getKeywordsList($begin, $end, $orderBy, $pager);
+        $keywordList = $this->stat->getKeywordsList($begin, $end, $orderBy, $pager);
+        foreach($keywordList as $keyword => $reports)
+        {
+            $other = new stdclass();
+            $other->pv = 0; 
+            $other->uv = 0;
+            $other->ip = 0;
+            foreach($reports as $engine => $report)
+            {
+                if(in_array($engine, $this->config->stat->searchEngines)) continue;
+                $other->pv += $report->pv;
+                $other->uv += $report->uv;
+                $other->ip += $report->ip;
+            }
+            $keywordList[$keyword]['other'] = $other;
+        }
+
+        $this->view->searchEngines = $this->config->stat->searchEngines;
+        $this->view->keywordList   = $keywordList;
         $this->view->title         = $this->lang->stat->keywords;
         $this->view->mode          = $mode;
         $this->view->begin         = $begin;
@@ -182,6 +204,36 @@ class stat extends control
     /**
      * Domain report.
      * 
+     * @param  string    $mode 
+     * @param  string    $begin 
+     * @param  string    $end 
+     * @access public
+     * @return void
+     */
+    public function domainList($mode = 'weekly', $begin = '', $end = '', $orderBy = 'pv_desc',  $recTotal = 0, $recPerPage = 10, $pageID = 1)
+
+    {
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal, $recPerPage, $pageID);
+
+        $date  = $this->stat->parseDate($mode, $begin, $end);
+        $begin = $date->begin;
+        $end   = $date->end;
+
+        if($begin < $end)  $labels = $this->stat->getDayLabels($begin, $end);
+        if($begin == $end) $labels = $this->stat->getHourLabels($begin, false);
+
+        $this->view->labels  = $labels;
+        $this->view->mode    = $mode;
+        $this->view->domains = $this->stat->getDomainList($begin, $end, $orderBy, $pager);
+        $this->view->pager   = $pager;
+
+        $this->display();
+    }
+
+    /**
+     * Domain trend report.
+     * 
      * @param  string    $domain 
      * @param  string    $mode 
      * @param  string    $begin 
@@ -189,7 +241,7 @@ class stat extends control
      * @access public
      * @return void
      */
-    public function domain($domain, $mode = 'weekly', $begin = '', $end = '')
+    public function domainTrend($domain, $mode = 'weekly', $begin = '', $end = '')
     {
         $date  = $this->stat->parseDate($mode, $begin, $end);
         $begin = $date->begin;
@@ -207,4 +259,34 @@ class stat extends control
 
         $this->display();
     }
+
+    /**
+     * Domain pages report.
+     * 
+     * @param  string    $domain 
+     * @param  string    $mode 
+     * @param  string    $begin 
+     * @param  string    $end 
+     * @access public
+     * @return void
+     */
+    public function domainPage($domain, $mode = 'weekly', $begin = '', $end = '')
+    {
+        $date  = $this->stat->parseDate($mode, $begin, $end);
+        $begin = $date->begin;
+        $end   = $date->end;
+
+        if($begin < $end)  $labels = $this->stat->getDayLabels($begin, $end);
+        if($begin == $end) $labels = $this->stat->getHourLabels($begin, false);
+
+        $this->view->type      = $this->lang->stat->domain . ' - ' . $domain;
+        $this->view->domain    = $domain;
+        $this->view->labels    = $labels;
+        $this->view->mode      = $mode;
+        $this->view->lineChart = $this->stat->getItemLine('domain', $domain, $begin, $end);
+        $this->view->pieCharts = $this->stat->getItemExtraPie('domain', $domain, $begin, $end);
+
+        $this->display();
+    }
+
 }

@@ -322,7 +322,7 @@ $lang->stat->menu->traffic  = '概况|stat|traffic|';
 $lang->stat->menu->from     = '来源统计|stat|report|type=from';
 $lang->stat->menu->search   = '搜索引擎统计|stat|report|type=search';
 $lang->stat->menu->keywords = '关键词统计|stat|keywords|';
-$lang->stat->menu->domains  = '来路域名|stat|report|type=domain|';
+$lang->stat->menu->domains  = '来路域名|stat|domainList|';
 $lang->stat->menu->os       = '终端统计|stat|report|type=os';
 $lang->stat->menu->page     = '页面访问量排名|stat|page|';
 
