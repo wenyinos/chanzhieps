@@ -462,5 +462,4 @@ class statModel extends model
 
         return $charts;
     }
-
 }

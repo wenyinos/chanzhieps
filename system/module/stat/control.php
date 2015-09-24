@@ -177,6 +177,16 @@ class stat extends control
         $this->display();
     }
 
+    /**
+     * Domain report.
+     * 
+     * @param  string    $domain 
+     * @param  string    $mode 
+     * @param  string    $begin 
+     * @param  string    $end 
+     * @access public
+     * @return void
+     */
     public function domain($domain, $mode = 'weekly', $begin = '', $end = '')
     {
         $date  = $this->stat->parseDate($mode, $begin, $end);
@@ -186,12 +196,12 @@ class stat extends control
         if($begin < $end)  $labels = $this->stat->getDayLabels($begin, $end);
         if($begin == $end) $labels = $this->stat->getHourLabels($begin, false);
 
+        $this->view->type      = $this->lang->stat->domain . ' - ' . $domain;
         $this->view->domain    = $domain;
         $this->view->labels    = $labels;
         $this->view->lineChart = $this->stat->getItemLine('domain', $domain, $begin, $end);
         $this->view->pieCharts = $this->stat->getItemExtraPie('domain', $domain, $begin, $end);
 
         $this->display();
-       
     }
 }
