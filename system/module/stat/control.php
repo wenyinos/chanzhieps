@@ -35,7 +35,7 @@ class stat extends control
         else
         {
             $labels = $this->stat->getDayLabels($begin, $end);
-            $this->view->labels    = $labels;
+            foreach($labels as $label ) $this->view->labels[] = date('Y-m-d', strtotime($label));
             $this->view->lineChart = $this->stat->getBasicLine('total', 'day', $labels);
        
         }
@@ -59,11 +59,17 @@ class stat extends control
         $date  = $this->stat->parseDate($mode, $begin, $end);
         $begin = $date->begin;
         $end   = $date->end;
-        if($begin < $end)  $labels = $this->stat->getDayLabels($begin, $end);
-        if($begin == $end) $labels = $this->stat->getHourLabels($begin);
+        if($begin < $end) 
+        {
+            $labels = $this->stat->getDayLabels($begin, $end);
+            foreach($labels as $label ) $this->view->lineLabels[] = date('Y-m-d', strtotime($label));
+        }
+        if($begin == $end) 
+        {
+            $labels = $this->stat->getHourLabels($begin);
+            $this->view->lineLabels = $this->stat->getHourLabels($begin, false);
+        }
         
-        $this->view->lineLabels = $labels;
-        if($begin == $end) $this->view->lineLabels = $this->stat->getHourLabels($begin, false);
         $this->view->pieCharts  = $this->stat->getPieByType($type, $begin, $end);
 
         if(empty($this->view->lineLabels)) 
@@ -101,8 +107,7 @@ class stat extends control
         $begin = $date->begin;
         $end   = $date->end;
 
-        $this->view->searchEngines = $this->stat->getSearchEngines();
-        $this->view->totalInfo     = $this->stat->getSearchTraffic($begin, $end);
+        $this->view->searchEngines = $this->config->stat->searchEngines;
         $this->view->keywordList   = $this->stat->getKeywordsList($begin, $end, $orderBy, $pager);
         $this->view->title         = $this->lang->stat->keywords;
         $this->view->mode          = $mode;

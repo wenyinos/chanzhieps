@@ -38,62 +38,45 @@
       </ul>
     </div>
   </div>
-  <table class='table table-list text-center'>
+</div>
+  <div class="panel-">
+  <table class='table table-hover table-bordered'>
     <thead>
       <tr class='text-center'>
-        <?php foreach($searchEngines as $searchEngine):?>
-        <th><?php echo $searchEngine->searchEngine?></th>
+        <th class='text-middle' rowspan='2'><?php echo $lang->stat->keywords;?></th>
+        <?php foreach($searchEngines as $engine):?>
+        <th colspan='3'> <?php echo $engine;?></th>
         <?php endforeach;?>
-        <th><?php echo $lang->stat->totalPV?></th>
+        <th class='text-middle' rowspan='2'><?php echo $lang->actions?></th>
+      </tr>
+      <tr class='text-center'>
+        <?php foreach($searchEngines as $engine):?>
+        <th>pv</th>
+        <th>uv</th>
+        <th>ip</th>
+        <?php endforeach;?>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <?php $total = 0;?>
-        <?php foreach($searchEngines as $searchEngine => $info):?>
-        <?php if(isset($totalInfo[$searchEngine])) $report = $totalInfo[$searchEngine];?>
-<?php
-if(!isset($totalInfo[$searchEngine]))
-{
-    $report = new stdclass();
-    $report->pv = 0;  
-    $report->uv = 0;  
-    $report->ip = 0;  
-}
-?>
-        <?php $total += $report->pv;?>
-        <td><?php echo $report->pv?></td>
-        <?php endforeach;?>
-        <td><?php echo $total?></td>
-      </tr>
-    </tbody>
-  </table>
-  <br/>
-  <div class='panel'>
-  <table class='table table-hover table-bordered table-striped tablesorter'>
-    <thead>
-      <tr class='text-center'>
-        <?php $vars = "mode={$mode}&begin={$begin}&end={$end}&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
-        <th class='col-xs-3'> <?php commonModel::printOrderLink('item',  $orderBy, $vars, $lang->stat->keywords);?></th>
-        <th class='col-xs-3'> <?php commonModel::printOrderLink('pv',  $orderBy, $vars, $lang->stat->pv);?></th>
-        <th class='col-xs-3'><?php commonModel::printOrderLink('uv', $orderBy, $vars, $lang->stat->uv);?></th>
-        <th>               <?php commonModel::printOrderLink('ip', $orderBy, $vars, $lang->stat->ipCount);?></th>
-        <th><?php echo $lang->actions?></th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php foreach($keywordList as $keyword):?>
+      <?php foreach($keywordList as $keyword => $reports):?>
       <tr class='text-center text-middle'>
-        <td><?php echo html::a(inlink('source', "stat=$keyword->item"), $keyword->item, "data-toggle='modal'");?></td>
-        <td><?php echo $keyword->pv;?></td>
-        <td><?php echo $keyword->uv;?></td>
-        <td><?php echo $keyword->ip;?></td>
-        <td><?php echo html::a(inlink('keywordreport', "keyword={$keyword->item}"), $lang->stat->view);?></td>
+        <td><?php echo $keyword;?></td>
+        <?php foreach($searchEngines as $engine):?>
+        <?php if(isset($reports[$engine])):?>
+        <td class='<?php echo $engine;?>'><?php echo $reports[$engine]->pv;?></td>
+        <td class='<?php echo $engine;?>'><?php echo $reports[$engine]->uv;?></td>
+        <td class='<?php echo $engine;?>'><?php echo $reports[$engine]->ip;?></td>
+        <?php else:?>
+        <td class='<?php echo $engine;?>'>0</td>
+        <td class='<?php echo $engine;?>'>0</td>
+        <td class='<?php echo $engine;?>'>0</td>
+        <?php endif;?>
+        <?php endforeach;?>
+        <td><?php echo html::a(inlink('keywordreport', "keyword={$keyword}"), $lang->stat->view);?></td>
       </tr>
       <?php endforeach;?>
     </tbody>
-    <tfoot><tr><td colspan='5'><?php $pager->show();?></td></tr></tfoot>
+    <tfoot><tr><td colspan='17'><?php $pager->show();?></td></tr></tfoot>
   </table>
-  </div>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>

@@ -272,10 +272,10 @@ class statModel extends model
             ->andWhere('timeType')->eq('day')
             ->andWhere('timeValue')->ge($begin)
             ->andWhere('timeValue')->le($end)
-            ->groupBy('item')
+            ->groupBy('concat(item, extra)')
             ->orderBy($orderBy)
             ->page($pager)
-            ->fetchAll('item');
+            ->fetchGroup('item', 'extra');
     }
 
     /**
