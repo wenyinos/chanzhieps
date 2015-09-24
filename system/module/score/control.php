@@ -141,9 +141,14 @@ class score extends control
     {
         if($_POST)
         {
-            $setting = fixer::input('post')->get();
+            $setting = fixer::input('post')->remove('perYuan, minAmount')->get();
             $result = $this->loadModel('setting')->setItems('system.score.counts', $setting);
             if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+
+            $buyScore = fixer::input('post')->get('perYuan, minAmount');
+            $result = $this->loadModel('setting')->setItems('system.score.buyScore', $buyScore);
+            if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => helper::createLink('site', 'setBasic')));
         }
 

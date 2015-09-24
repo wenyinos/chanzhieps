@@ -81,7 +81,8 @@ class commonModel extends model
         }
 
         $device = helper::getDevice();
-        if(isset($this->config->template->{$device}) and !is_object($this->config->template->{$device})) $this->config->template->{$device} = json_decode($this->config->template->{$device});
+        if(isset($this->config->template->desktop) and !is_object($this->config->template->desktop)) $this->config->template->desktop = json_decode($this->config->template->desktop);
+        if(isset($this->config->template->mobile) and !is_object($this->config->template->mobile)) $this->config->template->mobile = json_decode($this->config->template->mobile);
 
         if(!isset($this->config->site->status)) $this->config->site->status = 'normal';
         if(($this->loadModel('wechat')->getList())) $this->config->site->wechat = true;
@@ -459,7 +460,8 @@ class commonModel extends model
                 printf('<span class="login-msg"></span>');
                 echo html::a(helper::createLink('user', 'control'), "<i class='icon-user icon-small'> </i>" . $app->session->user->realname);
                 echo "<span id='msgBox' class='hiding'></span>";
-                echo html::a(helper::createLink('visual', 'index', 'referer=' . getHomeRoot(true)), $app->lang->visualEdit);
+                $visualEditLink = getHomeRoot() . getAdminEntry() . "?m=visual&f=index&referer=" . getHomeRoot() . trim($_SERVER['REQUEST_URI'], '/');
+                echo html::a($visualEditLink, "<i class='icon icon-magic'></i>" . $app->lang->editMode);
                 echo html::a(helper::createLink('user', 'logout'),  $app->lang->logout);
             }
         }

@@ -49,6 +49,8 @@ $lang->moduleOrder[110] = 'file';
 $lang->moduleOrder[115] = 'search';
 
 $lang->moduleOrder[120] = 'order';
+$lang->moduleOrder[125] = 'stat';
+$lang->moduleOrder[130] = 'score';
 
 $lang->resource = new stdclass();
 
@@ -66,6 +68,8 @@ $lang->resource->article->delete = 'delete';
 $lang->resource->article->setcss = 'setcss';
 $lang->resource->article->setjs  = 'setjs';
 $lang->resource->article->stick  = 'stick';
+$lang->resource->article->forward2Block  = 'forward2Block';
+$lang->resource->article->forward2Forum  = 'forward2Forum';
 
 /* Block module. */
 $lang->resource->block = new stdclass();
@@ -255,6 +259,18 @@ $lang->resource->order->delivery = 'delivery';
 $lang->resource->order->finish   = 'finish';
 $lang->resource->order->pay      = 'pay';
 $lang->resource->order->setting  = 'setting';
+
+/* Stat module. */
+$lang->resource->stat = new stdclass();
+$lang->resource->stat->traffic  = 'traffic';
+$lang->resource->stat->report   = 'report';
+$lang->resource->stat->keywords = 'keywords';
+$lang->resource->stat->keywordreport = 'keywordReport';
+$lang->resource->stat->domain   = 'domain';
+
+/* Stat module. */
+$lang->resource->score = new stdclass();
+$lang->resource->score->setCounts = 'setCounts';
 
 /* Search module. */
 if(!isset($lang->resource->search))$lang->resource->search = new stdclass();

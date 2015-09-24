@@ -4,13 +4,14 @@ code:default
 type:template
 author:蝉知官方
 desc:这是蝉知企业门户系统默认模板
-version:4.4
-chanzhiVersion:4.4
+version:4.5
+chanzhiVersion:4.5
 charge:free
 device:,desktop,
 license:http://www.chanzhi.org/book/chanzhieps/58_license.html
 themes:
    default:默认
-   tartan:蝉之格
-   wide:宽屏
    clean:清晰
+   simple:简单
+   wide:宽屏
+   tartan:蝉之格

@@ -442,7 +442,37 @@
         }, options);
     };
 
+    var createBlock = function(page, region, parent)
+    {
+        $.closeModal();
+        var name = 'block', actionName='create';
+        var setting = visuals[name];
+        var options = getVisualOptions(name);
+        var action = setting.actions[actionName];
+        var url = createActionLink(setting, action, options);
+        setTimeout(function()
+        {
+            openModal(url,
+            {
+                width : action.width || setting.width,
+                icon  : action.icon || 'plus',
+                title : action.title,
+                loaded: function(e)
+                {
+                    var modal$ = e.jQuery;
+                    modal$.setAjaxForm('.ve-form', function(response)
+                    {
+                        addBlock(page, region, response.blockID, parent);
+                    });
+                    if(DEBUG) console.log('Modal loaded:', url);
+                },
+                dismiss: action.onDismiss || setting.onDismiss
+            });
+        }, 500);
+    };
+
     $.addBlock = addBlock;
+    $.createBlock = createBlock;
 
     var initBlocks = function()
     {

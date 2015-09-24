@@ -19,6 +19,8 @@ $lang->visual->exitVisualEdit    = "关闭编辑模式";
 $lang->visual->customTheme       = "自定义主题";
 $lang->visual->admin             = "后台";
 $lang->visual->reload            = '刷新';
+$lang->visual->createBlock       = '创建区块';
+$lang->visual->manageBlock       = '区块管理';
 $lang->visual->openInNewWindow   = '在新窗口中打开当前编辑页面';
 
 $lang->visual->jsLang = new stdclass();
@@ -64,7 +66,8 @@ $lang->visual->config->block    = array('name' => "区块", 'width' => 1200, 'pa
           'delete'  => array('method' => 'removeBlock', 'confirm' => '确定从布局中移除 {title}？', 'success' => '{title} 已被移除。', 'params' => 'blockID={id}&page={page}&region={region}'),
           'move'    => array('method' => 'sortblocks','success' => '排序已保存', 'params' => 'page={page}&region={region}&pagent={parent}'),
           'layout'  => array('method' => 'fixblock', 'width' => 600, 'text' => '更改布局', 'icon' => 'columns', 'success' => '布局已保存', 'params' => 'page={page}&region={region}&blockID={id}'),
-          'add'     => array('method' => 'appendBlock', 'params' => 'page={page}&region={region}&parent={parent}', 'hidden' => true, 'width' => 1000, 'title' => '添加区块 {title}')
+          'add'     => array('method' => 'appendBlock', 'params' => 'page={page}&region={region}&parent={parent}', 'hidden' => true, 'width' => 1000, 'title' => '添加区块 {title}'),
+          'create'  => array('method' => 'create', 'params' => 'type=html', 'module' => 'block', 'title' => '创建并添加区块', 'width' => 1000, 'hidden' => true)
 ));
 $lang->visual->config->article  = array('params' => 'articleID={id}', 'name' => '文章',
     'actions' => array('delete' => true, 'edit' => array('params' => 'articleID={id}&type=article')));

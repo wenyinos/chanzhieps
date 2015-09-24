@@ -23,18 +23,27 @@
     </strong>
     <label class='text-important'><?php echo $keyword?></label>
     <div class="panel-actions">
-      <form method='get' action="<?php echo inlink('keywordreport')?>">
-        <?php echo html::hidden('m', 'stat') . html::hidden('f', 'keywordreport') . html::hidden('keyword', $keyword) . html::hidden('mode', 'fixed');?>
-        <table class='table table-borderless'>
-          <tr>
-            <td style='padding:4px'>
-              <?php echo html::input('begin', $this->get->begin, "placeholder='{$lang->stat->begin}' class='form-date w-120px'")?> 
-              <?php echo html::input('end', $this->get->end, "placeholder='{$lang->stat->end}' class='form-date w-120px'")?>
-              <?php echo html::submitButton($lang->stat->view, "btn btn-xs btn-info");?>
-            </td>
-          </tr>
-        </table>
-      </form>
+      <ul class='nav nav-tabs'>
+        <li <?php echo $mode == 'all' ? "class='active'" : '' ?>><?php echo html::a(inlink('page', "mode=all"), $lang->stat->all);?></li>
+        <?php foreach($lang->stat->trafficModes as $code => $modeName):?>
+        <?php $class = $mode == $code ? "class='active'" : '';?>
+        <li <?php echo $class?>><?php echo html::a(inlink('keywordreport', "keyword={$keyword}&mode=$code"), $modeName);?></li>
+        <?php endforeach;?>
+         <li>
+         <form method='get' action="<?php echo inlink('keywordreport')?>">
+            <?php echo html::hidden('m', 'stat') . html::hidden('f', 'keywordreport') . html::hidden('keyword', $keyword) . html::hidden('mode', 'fixed');?>
+            <table class='table table-borderless'>
+              <tr>
+                <td style='padding:4px'>
+                  <?php echo html::input('begin', $this->get->begin, "placeholder='{$lang->stat->begin}' class='form-date w-120px'")?> 
+                  <?php echo html::input('end', $this->get->end, "placeholder='{$lang->stat->end}' class='form-date w-120px'")?>
+                  <?php echo html::submitButton($lang->stat->view, "btn btn-xs btn-info");?>
+                </td>
+              </tr>
+            </table>
+          </form>
+        </li>
+      </ul>
     </div>
   </div>
   <?php if(!empty($keywordLine)):?>
@@ -54,20 +63,21 @@
       <table class='table table-bordered table-report w-500px' id='reportData'>
         <thead>
           <tr class='text-center'>
-            <td></td>
-            <?php foreach($pieCharts['pv'] as $report):?>
-            <td><?php echo $report->label;?></td>
-            <?php endforeach;?>
+            <td><?php echo $lang->stat->searchEngine?></td>
+            <td><?php echo $lang->stat->pv;?></td>
+            <td><?php echo $lang->stat->uv;?></td>
+            <td><?php echo $lang->stat->ipCount;?></td>
           </tr>
         </thead>
-        <?php foreach($pieCharts as $item => $reports):?>
+        <?php for($i = 0 ; $i < count($pieCharts['pv']); $i ++):?>
+        <?php $report = $pieCharts['pv'][$i];?>
         <tr class='text-center'>
-          <td><?php echo $item;?></td>
-          <?php foreach($reports as $report):?>
+          <td><?php echo $report->label;?></td>
           <td><?php echo $report->value;?></td>
-          <?php endforeach;?>
+          <td><?php echo $pieCharts['uv'][$i]->value;?></td>
+          <td><?php echo $pieCharts['ip'][$i]->value;?></td>
         </tr>
-        <?php endforeach;?>
+        <?php endfor;?>
       </table>
   </div>  
   <?php else:?>

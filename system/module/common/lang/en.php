@@ -19,7 +19,7 @@ $lang->minus      = ' - ';
 $lang->dollarSign = '$';
 $lang->divider    = "<span class='divider'>{$lang->raquo}</span> ";
 $lang->back2Top   = 'T<br/>O<br/>P';
-$lang->cancel = 'cancel';
+$lang->cancel     = 'cancel';
 
 /*Language shorthand*/
 $lang->cn = 'CNS';
@@ -50,6 +50,8 @@ $lang->frontHome      = 'Front';
 $lang->forumHome      = 'Forum';
 $lang->bookHome       = 'Book';
 $lang->dashboard      = 'Dashboard';
+$lang->visualEdit     = 'Visual Edit';
+$lang->editMode       = 'Edit Mode';
 $lang->register       = 'Register';
 $lang->logout         = 'Logout';
 $lang->login          = 'Login';

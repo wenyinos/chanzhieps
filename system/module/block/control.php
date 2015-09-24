@@ -71,8 +71,8 @@ class block extends control
         {
             if($type == 'phpcode' and !$canCreatePHP) $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => dao::getError()));
 
-            $this->block->create($template, $theme);
-            if(!dao::isError()) $this->send(array('result' => 'success', 'locate' => $this->inlink('admin')));
+            $blockID = $this->block->create($template, $theme);
+            if(!dao::isError()) $this->send(array('result' => 'success', 'locate' => $this->inlink('admin'), 'blockID' => $blockID));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 

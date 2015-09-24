@@ -727,6 +727,10 @@ class helper
     public static function getDevice()
     {
         global $app, $config;
+
+        $viewType = $app->getViewType();
+        if($viewType == 'mhtml') return 'mobile';
+
         if(RUN_MODE == 'admin')
         {
             if($app->session->device) return $app->session->device;
@@ -906,6 +910,29 @@ function checkAdminEntry()
             if(strpos($contents, "'RUN_MODE', 'admin'") && strpos($_SERVER['PHP_SELF'], '/admin.php') !== false) die(header('location: index.php'));
         }
     }
+}
+
+/**
+ * Get admin entry.
+ * 
+ * @access public
+ * @return string
+ */
+function getAdminEntry()
+{
+    $path  = dirname($_SERVER['SCRIPT_FILENAME']);
+    $files = scandir($path);
+    $defaultFiles = array('admin.php', 'index.php', 'install.php', 'loader.php', 'upgrade.php');
+    foreach($files as $file)
+    {
+        if(strpos($file, '.php') !== false and !in_array($file, $defaultFiles))
+        {
+            $contents = file_get_contents($path . '/' . $file);
+
+            if(strpos($contents, "'RUN_MODE', 'admin'") !== false) return $file;
+        }
+    }
+    return 'admin.php';
 }
 
 /**

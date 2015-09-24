@@ -13,34 +13,24 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/chart.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
-<?php if(isset($pieCharts)) js::set('pieCharts', $pieCharts);?>
-<?php if(isset($lineCharts)) js::set('lineCharts', $lineCharts);?>
-<?php if(isset($lineLabels)) js::set('lineLabels', $lineLabels);?>
-<?php js::set('type', $type);?>
+<?php js::set('lineLabels', $labels);?>
+<?php js::set('lineChart',  $lineChart);?>
+<?php js::set('pieCharts',  $pieCharts);?>
 <div class='panel'>
   <div class="panel-heading">
     <strong>
-      <i class='icon icon-bar-chart'></i> <?php echo strpos(',os,browser,device,', ",$type,") === false ? $lang->stat->{$type} : $lang->stat->client;?>
+      <i class='icon icon-bar-chart'></i> <?php echo $lang->stat->domain;?>
     </strong>
-    <?php
-    if(strpos(',os,browser,device,', ",$type,") !== false)
-    {
-        echo html::a(inlink('report', "type=browser"), $lang->stat->browser, $type == 'browser' ? "class='active'" : '');
-        echo html::a(inlink('report', "type=os"), $lang->stat->os, $type == 'os' ? "class='active'" : '');
-        echo html::a(inlink('report', "type=device"), $lang->stat->device, $type == 'device' ? "class='active'" : '');
-    }
-    ?>
-    <div class='panel-actions'>
+    <label class='text-important'><?php echo $domain?></label>
+    <div class="panel-actions">
       <ul class='nav nav-tabs'>
         <?php foreach($lang->stat->trafficModes as $code => $modeName):?>
         <?php $class = $mode == $code ? "class='active'" : '';?>
-        <li <?php echo $class?>><?php echo html::a(inlink('report', "type={$type}&mode=$code"), $modeName);?></li>
+        <li <?php echo $class?>><?php echo html::a(inlink('domain', "domain={$domain}&mode=$code"), $modeName);?></li>
         <?php endforeach;?>
         <li>
-          <form method='get'>
-            <?php echo html::hidden('m', 'stat') . html::hidden('f', 'report');?>
-            <?php echo  html::hidden('type', $type);?>
-            <?php echo html::hidden('mode', 'fixed');?>
+          <form method='get' action="<?php echo inlink('domain')?>">
+            <?php echo html::hidden('m', 'stat') . html::hidden('f', 'domain') . html::hidden('domain', $domain) . html::hidden('mode', 'fixed');?>
             <table class='table table-borderless'>
               <tr>
                 <td style='padding:4px'>
@@ -52,10 +42,12 @@
             </table>
           </form>
         </li>
-       </ul>
+      <ul>
     </div>
   </div>
-  <?php if(!empty($lineCharts)) include 'linechart.html.php';?>
+  <?php if(!empty($lineChart)):?>
+  <div class='chart-canvas'><canvas height='260' width='900' id='lineChart'></canvas></div>
+  <?php endif;?>
   <?php if(!empty($pieCharts)):?>
   <div class='panel-body'>
     <div class='col-md-6'>
@@ -70,7 +62,7 @@
       <table class='table table-bordered table-report w-500px' id='reportData'>
         <thead>
           <tr class='text-center'>
-            <td><?php echo zget($lang->stat, $type);?></td>
+            <td><?php echo $lang->stat->link?></td>
             <td><?php echo $lang->stat->pv;?></td>
             <td><?php echo $lang->stat->uv;?></td>
             <td><?php echo $lang->stat->ipCount;?></td>
@@ -79,11 +71,7 @@
         <?php for($i = 0 ; $i < count($pieCharts['pv']); $i ++):?>
         <?php $report = $pieCharts['pv'][$i];?>
         <tr class='text-center'>
-          <?php if($type == 'domain'):?>
-          <td><?php echo $report->label . ' ' . html::a(inlink('domain', "domain=" . urlencode($report->label)), " <i class='icon icon-search'></i>");?></td>
-          <?php else:?>
           <td><?php echo $report->label;?></td>
-          <?php endif;?>
           <td><?php echo $report->value;?></td>
           <td><?php echo $pieCharts['uv'][$i]->value;?></td>
           <td><?php echo $pieCharts['ip'][$i]->value;?></td>

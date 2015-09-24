@@ -119,6 +119,10 @@ class upgradeModel extends model
                 $this->execSQL($this->getUpgradeFile('4.4'));
                 $this->setMobileTemplate();
                 $this->fixAddress();
+            case '4_4_1':
+                $this->execSQL($this->getUpgradeFile('4.4.1'));
+                $this->computeScore();
+                $this->appendIDForRegion();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -167,6 +171,7 @@ class upgradeModel extends model
             case '4_2_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('4.2.1'));
             case '4_3_beta' : $confirmContent .= file_get_contents($this->getUpgradeFile('4.3.beta'));
             case '4_4'      : $confirmContent .= file_get_contents($this->getUpgradeFile('4.4'));
+            case '4_4_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('4.4.1'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
@@ -1627,7 +1632,7 @@ class upgradeModel extends model
     }
 
     /**
-     * Compute score for user.
+     * Compute score for user when upgrade from 4.4.1.
      * 
      * @access public
      * @return void
@@ -1658,7 +1663,7 @@ class upgradeModel extends model
     }
 
     /**
-     * Append ID for subRegion.
+     * Append ID for subRegion when upgrade from 4.4.1.
      * 
      * @access public
      * @return void

@@ -42,6 +42,25 @@
       <th><?php echo $lang->score->methods['delreply'] . $lang->score->methods['punish'];?></th> 
       <td><?php echo html::input('delReply', $this->config->score->counts->delReply, "class='form-control'");?></td><td></td>
     </tr>
+    <tr>
+      <th><?php echo $lang->score->methods['buyscore'];?></th> 
+      <td>
+        <div class='input-group'>
+          <span class='input-group-addon'><?php echo '1' . $lang->score->amountUnit . ' ' . $lang->equal;?></span>
+          <?php echo html::input('perYuan', $this->config->score->buyScore->perYuan, "class='form-control'");?>
+          <span class='input-group-addon'><?php echo $lang->score->common;?></span>
+        </div>
+      </td><td></td>
+    </tr>
+    <tr>
+      <th><?php echo $lang->score->minAmount;?></th> 
+      <td>
+        <div class='input-group'>
+          <?php echo html::input('minAmount', $this->config->score->buyScore->minAmount, "class='form-control'");?>
+          <span class='input-group-addon'><?php echo $lang->score->amountUnit;?></span>
+        </div>
+      </td><td></td>
+    </tr>
     <tr><td></td><td><?php echo html::submitButton();?></td></tr>
   </tbody>
 </table>

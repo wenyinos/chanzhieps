@@ -41,8 +41,8 @@
   <table class='table table-list text-center'>
     <thead>
       <tr class='text-center'>
-        <?php foreach($totalInfo as $searchEngin => $report):?>
-        <th><?php echo $searchEngin?></th>
+        <?php foreach($searchEngines as $searchEngine):?>
+        <th><?php echo $searchEngine->searchEngine?></th>
         <?php endforeach;?>
         <th><?php echo $lang->stat->totalPV?></th>
       </tr>
@@ -50,7 +50,17 @@
     <tbody>
       <tr>
         <?php $total = 0;?>
-        <?php foreach($totalInfo as $searchEngin => $report):?>
+        <?php foreach($searchEngines as $searchEngine => $info):?>
+        <?php if(isset($totalInfo[$searchEngine])) $report = $totalInfo[$searchEngine];?>
+<?php
+if(!isset($totalInfo[$searchEngine]))
+{
+    $report = new stdclass();
+    $report->pv = 0;  
+    $report->uv = 0;  
+    $report->ip = 0;  
+}
+?>
         <?php $total += $report->pv;?>
         <td><?php echo $report->pv?></td>
         <?php endforeach;?>
