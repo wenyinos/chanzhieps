@@ -151,8 +151,8 @@ $lang->menu->security = '安全|site|setsecurity|';
 $lang->menu->user     = '会员|user|admin|';
 $lang->menu->order    = '订单|order|admin|';
 $lang->menu->feedback = '反馈|message|admin|';
-$lang->menu->package  = '扩展|package|browse|';
 $lang->menu->stat     = '统计|stat|traffic|';
+$lang->menu->package  = '扩展|package|browse|';
 
 /* Menu groups setting. */
 $lang->menuGroups = new stdclass();
