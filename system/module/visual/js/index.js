@@ -562,18 +562,19 @@
                   finish: function(e)
                   {
                       var orders = [];
+                      console.log(e.list);
                       $.each(e.list, function()
                       {
-                          var $item = $$(this).children('.ve');
-                          var id = $item.data('id');
-                          orders.push(id);
+                          var $item = $$(this);
+                          if(withGrid) $item = $item.children('.ve');
+                          orders.push($item.data('id'));
                       });
 
                       sortBlocks($blocksHolder, orders);
                   }
             });
 
-            var actionsBar = '<div class="ve-block-actions ve-actions-bar ve-preview-hidden"><ul class="nav"><li><button type="button" class="btn btn-block btn-ve ve-action-addcontent" data-grid="' + (withGrid ? 'true' : '') + '"><i class="icon icon-plus"></i> ' + lang.addContent + '</button></li>';
+            var actionsBar = '<div class="ve-block-actions ve-actions-bar ve-preview-hidden"><ul class="nav"><li><button type="button" class="btn btn-block btn-ve ve-action-addcontent" data-grid="' + withGrid + '"><i class="icon icon-plus"></i> ' + lang.addContent + '</button></li>';
             actionsBar += '</ul><ul class="breadcrumb"><li>' + lang.blocks.pages[page] + '</li><li>' + lang.blocks.regions[page][location] + '</li></ul></div>'
 
             $blocksHolder.append(actionsBar);
@@ -592,11 +593,11 @@
         }).on('click', '.ve-action-addcontent', function()
         {
             var $btn = $$(this);
-            var $blocksHolder = $btn.closest('.blocks').addClass('ve-editing');
+            var $blocksHolder = $btn.closest('.blocks');
             var options = $.extend({parent: 0}, $blocksHolder.data(), $btn.data());
             if(options.parent) options.title = $blocksHolder.data('title') + '-' + options.title;
             var $modal = $('#addContentModal');
-            $modal.find('.ve-btn-addcontent[data-type="region"]').toggle(!options.parent && options.grid);
+            $modal.find('.ve-btn-addcontent[data-type="region"]').toggleClass('hidden', !options.grid);
             $modal.find('.modal-title').text(lang.addContentTo.format(options.title));
             $modal.data('options', options).modal('show');
         }).on('mousedown', '.ve-resize-handler', function(e)
