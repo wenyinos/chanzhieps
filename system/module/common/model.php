@@ -460,7 +460,8 @@ class commonModel extends model
                 printf('<span class="login-msg"></span>');
                 echo html::a(helper::createLink('user', 'control'), "<i class='icon-user icon-small'> </i>" . $app->session->user->realname);
                 echo "<span id='msgBox' class='hiding'></span>";
-                echo html::a(helper::createLink('visual', 'index', 'referer=' . getHomeRoot(true)), $app->lang->visualEdit);
+                $visualEditLink = getHomeRoot() . getAdminEntry() . "?m=visual&f=index&referer=" . getHomeRoot() . trim($_SERVER['REQUEST_URI'], '/');
+                echo html::a($visualEditLink, "<i class='icon icon-magic'></i>" . $app->lang->editMode);
                 echo html::a(helper::createLink('user', 'logout'),  $app->lang->logout);
             }
         }

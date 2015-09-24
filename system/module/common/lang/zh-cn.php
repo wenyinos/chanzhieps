@@ -52,6 +52,7 @@ $lang->forumHome      = '论坛';
 $lang->bookHome       = '手册';
 $lang->dashboard      = '用户中心';
 $lang->visualEdit     = '可视化编辑';
+$lang->editMode       = '编辑模式';
 $lang->register       = '注册';
 $lang->logout         = '退出';
 $lang->login          = '登录';
