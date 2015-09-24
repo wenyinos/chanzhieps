@@ -12,6 +12,8 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/kindeditor.html.php';?>
+<?php js::set('score', commonModel::isAvailable('score'));?>
+<?php js::set('setCounts', $lang->site->setCounts);?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class='icon-link'></i> <?php echo $lang->links->common;?></strong>

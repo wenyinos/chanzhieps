@@ -11,6 +11,8 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php js::set('score', commonModel::isAvailable('score'));?>
+<?php js::set('setCounts', $lang->site->setCounts);?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-refresh'></i> <?php echo $lang->search->buildIndex;?></strong></div>
   <div class='panel-body'>
