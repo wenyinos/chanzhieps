@@ -727,6 +727,10 @@ class helper
     public static function getDevice()
     {
         global $app, $config;
+
+        $viewType = $app->getViewType();
+        if($viewType == 'mhtml') return 'mobile';
+
         if(RUN_MODE == 'admin')
         {
             if($app->session->device) return $app->session->device;
