@@ -7,7 +7,7 @@
 @color-inverse: contrast(@color-primary, #333, #fff, 60%);
 @color-inverse-dark: darken(@color-primary, 60%);
 @color-primary-text: contrast(@color-primary, @color-inverse-dark, @color-primary, 60%);
-@color-link: darken(@color-primary-text, 15%);
+@color-link: darken(@color-primary-text, 10%);
 
 // Mixins
 .background-image(@image; @imageRepeat; @imagePositionX; @imagePositionY) when not(@image = inherit)
@@ -34,14 +34,14 @@
         border: none;
     }
 
-    .panel > .panel-heading,
-    .list > header
+    .panel > .panel-heading
     {
         background: none;
         border-bottom: none;
         position: relative;
 
-        &:before {
+        &:before 
+        {
             display: block;
             content: ' ';
             position: absolute;
@@ -56,6 +56,7 @@
     .panel-heading > h4 {margin: 0; line-height: 20px}
 
     .nav-primary,
+    .nav-stacked.nav-primary,
     .nav-secondary
     {
         background-color: #fff;
@@ -89,6 +90,80 @@
             color: @color-inverse;
             background-color: @color;
             border-color: @color;
+        }
+    }
+
+    .list 
+    {
+        padding: 20px 0;
+        
+        > header
+        {
+            background: none;
+            padding: 10px 10px 20px 10px;
+        }
+    }
+
+    .article
+    {
+        > header
+        {
+            padding-left: 0;
+            padding-right: 0;
+
+            > .dl-inline, > .abstract
+            {
+                margin: 0;
+            }
+
+            > .dl-inline {padding: 10px 0}
+        }
+
+        > .article-content {padding: 0!important;}
+
+        > footer {border-top: none;}
+        > footer, > footer > p {padding-left: 0; padding-right: 0;}
+    }
+
+    #commentBox
+    {
+        .panel
+        {
+            background: #f1f1f1;
+
+            &.mgb-0 {background: none; margin-bottom: 10px;}
+
+            .panel-heading:before {display: none}
+        }
+    }
+
+    #boards, .page-content > .panel
+    {
+        .panel-heading:before {display: none;}
+
+        .panel-heading { padding: 10px 0;}
+
+        .panel-actions {margin-right: 0;}
+    }
+
+    .panel.thread
+    {
+        border-width: 1px;
+        border-style: solid;
+        box-shadow: none;
+
+        .panel-heading {padding: 10px; background-image: none}
+    }
+
+    .panel-form.panel
+    {
+        background: #f1f1f1;
+
+        > .panel-heading
+        {
+            padding: 15px 20px 0 20px;
+
+            &:before {display: none;}
         }
     }
 }
@@ -265,6 +340,7 @@ a
 .make-container(~"#navbar");
 .make-container(~"#searchbar > form");
 .make-container(~"#footer > .wrapper");
+.make-container(~"#blogNav > .wrapper");
 
 /* Header */
 #header {padding: 0;}
@@ -289,6 +365,8 @@ a
             margin-right: 10px
         }
     }
+
+    .text-danger {color: #f1a325}
 }
 #headTitle {display: block; padding: 20px 0;}
 #siteSlogan {display: none}
@@ -352,12 +430,14 @@ a
 {
     body > .page-container {margin-top: 0;}
     #header {margin-left: -10px; margin-right: -10px;}
+    #headTitle {padding: 0; top: 28px; left: 10px;}
     #searchbar {bottom: auto; top: 3px;}
     #searchbar .form-control {padding-top: 2px; padding-bottom: 2px; border: none; background-color: #fafafa; height: 24px;}
     #searchbar .btn {top: 0; padding: 3px;}
     #searchbar .form-control:hover {background-color: #fff}
 
     .navbar {margin-left: -10px; margin-right: -10px;}
+    .navbar-collapse {position: static;}
 }
 
 /* Form control */
@@ -393,6 +473,9 @@ a
 #footNav a:hover, #powerby a:hover {color: @color-primary}
 #powerby a:hover, #powerby:hover .icon-chanzhi > i, #powerby:hover .icon-chanzhi > i:before, #powerby:hover .icon-chanzhi > i:after {border-color: @color-primary;}
 #powerby, #footNav {top: 0;}
+#footNav {left: 10px;}
+#powerby {right: 10px;}
+
 
 /* Popover */
 .popover {border-radius: 0}
@@ -403,8 +486,15 @@ a
 /* Blog */
 .m-blog #searchbar {bottom: auto}
 .m-blog #searchbar .form-control {background-color: #f5f5f5}
+.m-blog #headTitle {margin-top: 0;}
+#blogNav {border-left: none; border-right: none; border-top: none}
+.m-blog #pager {margin-bottom: 20px;}
 @media (max-width: 767px)
 {
+    #headNav.hide {display: none;}
     #blogNav {margin-left: 0; margin-right: 0;}
+    #blogNav .navbar-nav {float: left;}
+    #blogNav .navbar-nav.navbar-right {float: right;}
+    #blogNav .navbar-nav > li {width: auto;}
     #blogNav .navbar-nav > li > a {border-radius: 0}
 }

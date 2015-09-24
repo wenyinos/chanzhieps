@@ -22,7 +22,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
 }
 ?>
 
-<div class='panel'>
+<div class='panel panel-form'>
   <div class='panel-heading'><strong><i class='icon-edit'></i> <?php echo $lang->thread->postTo . ' [ ' . $board->name . ' ]'; ?></strong></div>
   <div class='panel-body'>
     <form method='post' class='form-horizontal' id='threadForm' enctype='multipart/form-data'>
