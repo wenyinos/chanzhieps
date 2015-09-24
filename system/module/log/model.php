@@ -1,4 +1,4 @@
-  <?php
+<?php
 /**
  * The model file of log module of ZenTaoCMS.
  *
@@ -155,12 +155,15 @@ class logModel extends model
         /* Save data to eps_statlog. */
         $log = new stdclass();
 
+        $log->url            = $this->server->http_referer;
         $log->visitor        = $visitor->id;
         $log->osName         = $visitor->osName;
         $log->browserName    = $visitor->browserName;
         $log->browserVersion = $visitor->browserVersion;
 
         $log->referer      = !empty($referer) ? $referer->id : 0;
+        $log->domain       = isset($referer->domain);
+        $log->link         = isset($referer->url);
         $log->searchEngine = isset($referer->searchEngine) ? $referer->searchEngine : '';
         $log->keywords     = isset($referer->keywords) ? $referer->keywords : '';
         $log->ip           = helper::getRemoteIp();
@@ -244,6 +247,14 @@ class logModel extends model
 
                 ->beginIF($type == 'os')
                 ->andWhere('osName')->eq($log->osName)
+                ->fi()
+
+                ->beginIF($type == 'url')
+                ->andWhere('url')->eq($log->url)
+                ->fi()
+
+                ->beginIF($type == 'domain')
+                ->andWhere('link')->eq($log->link)
                 ->fi()
 
                 ->beginIF($type == 'browser')
