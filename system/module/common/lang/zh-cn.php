@@ -243,7 +243,7 @@ $lang->site->menu->mail    = array('link' => '发信设置|mail|admin|', 'alias'
 $lang->site->menu->wechat  = array('link' => '微信设置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
 $lang->site->menu->search  = '全文检索|search|buildindex|';
 $lang->site->menu->tag     = '关键词设置|tag|admin|';
-$lang->site->menu->setLog  = '访问日志设置|site|setLog|';
+$lang->site->menu->setStat = '流量统计设置|site|setStat|';
 
 /* Menu of security module. */
 $lang->security = new stdclass();
