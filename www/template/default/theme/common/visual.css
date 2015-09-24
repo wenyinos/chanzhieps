@@ -56,8 +56,8 @@
 
 .block.ve {min-height: 22px; margin-bottom: 14px;}
 
-.btn-ve {border-radius: 1px; border: 1px dashed #38b03f; color: #38b03f; background: rgba(0, 255, 0, .04); text-shadow: none; font-size: 14px}
-.btn-ve:hover {background: rgba(0, 255, 0, .1); color: #38b03f; text-shadow: none; border: 1px solid #38b03f}
+.btn-ve {border-radius: 2px; border: 2px solid #38b03f; color: #38b03f; background: #fff; text-shadow: none; font-size: 14px}
+.btn-ve:hover {background: #38b03f; color: #fff; text-shadow: none;}
 
 .ve-actions-bar {margin: 0 -5px}
 .ve-actions-bar > .nav {display: table; width: 100%;}
@@ -75,10 +75,9 @@
 
 .ve-block-actions {position: relative; clear: both; margin-bottom: 14px;}
 .ve-block-actions.ve-actions-bar > .nav > li {display: table-cell; padding: 0 5px;}
-.ve-block-actions > .breadcrumb {pointer-events:none; position: absolute; top: 0; left: 7px; background-color: rgba(0, 255, 0, .1); color: #38b03f; padding: 2px 5px; transition: top .2s, left .2s; border-radius: 0 0 4px 0}
+.ve-block-actions > .breadcrumb {pointer-events:none; position: absolute; top: 0; left: 6px; background-color: #F1A325; color: #fff; padding: 2px 5px; transition: top .2s, left .2s; border-radius: 0 0 4px 0}
 .blocks.row .ve-block-actions.ve-actions-bar {margin: 0 2px 14px;}
 .blocks.sortable-sorting .ve-block-actions {display: none}
-.ve-block-actions .btn-ve {padding: 20px 10px}
 
 .blocks:before, .ve-show-border:before {display: block; content: ' '; position: absolute; left: -7px; top: -7px; right: -7px; bottom: -7px; border: 2px dashed #F1A325; opacity: 0; transition: opacity .2s, transform .2s; pointer-events:none; z-index: 1999; transform: scale(.98)}
 .blocks {position: relative;}
@@ -87,6 +86,11 @@
 .ve-show-border-in .ve-block-actions, .blocks.ve-editing .ve-block-actions , .blocks.sortable-sorting .ve-block-actions {position: static!important}
 .blocks.sortable-sorting .ve-block-actions > .breadcrumb, .ve-show-border-in .ve-block-actions > .breadcrumb, .blocks.ve-editing .ve-block-actions > .breadcrumb {background-color: #F1A325; color: #FFF; top: -7px; left: -7px;}
 .blocks.row.ve-editing .ve-block-actions > .breadcrumb, .blocks.row.ve-show-border-in .ve-block-actions > .breadcrumb {left: 0;}
+
+.blocks > .ve-block-actions .btn-ve {color: #F1A325; border-color: #F1A325}
+.blocks > .ve-block-actions .btn-ve:hover {color: #fff; background-color: #F1A325}
+.blocks .row > .ve-block-actions .btn-ve {color: #03b8cf; border-color: #03b8cf}
+.blocks .row > .ve-block-actions .btn-ve:hover {color: #fff; background-color: #03b8cf}
 
 .blocks.row > .col.col-row > .row.ve {margin: 0 0 14px; padding: 14px 7px 0;}
 .blocks.row > .col.col-row > .row.ve > .ve-cover {box-shadow: none; border: 1px dotted #03b8cf; background: none}
