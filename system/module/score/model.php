@@ -172,6 +172,7 @@ class scoreModel extends model
      */
     public function cost($method, $count, $objectType, $objectID = 0, $note = '', $account = '', $force = false)
     {
+        if(!$count) return true;
         $account = empty($account) ? $this->app->user->account : $account;
         $type    = 'out';
         if($note == '') $note = strtoupper($objectType) . ":$objectID";

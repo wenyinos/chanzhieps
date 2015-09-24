@@ -10,6 +10,7 @@
  */
 $moduleName = isset($lang->$module->common)  ? $lang->$module->common  : $module;
 $methodName = isset($lang->$module->$method) ? $lang->$module->$method : $method;
+$methodName = is_object($methodName) ? $methodName->common : $methodName; 
 include TPL_ROOT . 'common/header.lite.html.php';
 ?>
 <script>

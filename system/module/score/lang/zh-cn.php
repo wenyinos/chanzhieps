@@ -70,6 +70,7 @@ $lang->score->lblDetail = "详情可参考<a href='http://www.chanzhi.net/thread
 $lang->score->setAmount   = '充值金额';
 $lang->score->getScore    = '获取积分';
 $lang->score->amountUnit  = '元';
+$lang->score->minAmount   = '最小充值';
 $lang->score->buyWaring   = "最小充值%s元，1元=%s积分";
 $lang->score->errorAmount = "充值不能小于%s元";
 $lang->score->alipay      = "立即使用支付宝支付";

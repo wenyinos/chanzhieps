@@ -38,28 +38,6 @@ class score extends control
     }
 
     /**
-     * Reset the max login field.
-     * 
-     * @access public
-     * @return void
-     */
-    public function resetMaxLogin()
-    {
-        $this->dao->update(TABLE_USER)->set('maxLogin')->eq($this->config->score->counts->maxLogin)->exec();
-        echo helper::now() . 'Reset max login ';
-        if(!dao::isError())
-        {
-            echo "success \n";
-        }
-        else
-        {
-            echo "failed\n";
-            echo "Reason:";
-            print_r(dao::getError());
-        }
-    }
-
-    /**
      * Buy score use money.
      * 
      * @access public
@@ -153,23 +131,51 @@ class score extends control
         $this->display();
     }
 
-    public function awardDownExtension()
+    /**
+     * Set counts for score.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setCounts()
     {
-        $files = $this->dao->select('*')->from(TABLE_FILE)->where('public')->eq('1')->andWhere('downloads')->ne('0')->fetchAll();
-        $extensions = $this->dao->select('id, code, account')->from(TABLE_EXTENSION)->fetchAll();
-        foreach($files as $file)
+        if($_POST)
         {
-            foreach($extensions as $extension)
-            {
-                if($file->title == $extension->code)
-                {
-                    $score = 10 * $file->downloads;
-                    $this->score->award($extension->account, 'system', $score, 'extension', $extension->id, "EXTENSION:$extension->id");
-                }
-            }
+            $setting = fixer::input('post')->remove('perYuan, minAmount')->get();
+            $result = $this->loadModel('setting')->setItems('system.score.counts', $setting);
+            if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+
+            $buyScore = fixer::input('post')->get('perYuan, minAmount');
+            $result = $this->loadModel('setting')->setItems('system.score.buyScore', $buyScore);
+            if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => helper::createLink('site', 'setBasic')));
         }
+
+        $this->view->title = $this->lang->score->setCounts;
+        $this->display();
     }
 
+    /**
+     * Reset the max login field.
+     * 
+     * @access public
+     * @return void
+     */
+    public function resetMaxLogin()
+    {
+        $this->dao->update(TABLE_USER)->set('maxLogin')->eq($this->config->score->counts->maxLogin)->exec();
+        if(!dao::isError()) return $this->loadModel('setting')->setItem('system.common.site.resetMaxLoginDate', date('Y-m-d'));
+        return false;
+    }
+
+    /**
+     * Statement score.
+     * 
+     * @param  string  $date 
+     * @access public
+     * @return void
+     */
     public function statement($date = 'lastMonth')
     {
         $date   = $date == 'lastMonth' ? date('Y-m-d', strtotime('-1 month')) : '';
@@ -222,25 +228,5 @@ class score extends control
             }
             echo "Statement {$account} finish\n";
         }
-    }
-
-    /**
-     * Set counts for score.
-     * 
-     * @access public
-     * @return void
-     */
-    public function setCounts()
-    {
-        if($_POST)
-        {
-            $setting = fixer::input('post')->get();
-            $result = $this->loadModel('setting')->setItems('system.score.counts', $setting);
-            if(!$result) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => helper::createLink('site', 'setBasic')));
-        }
-
-        $this->view->title = $this->lang->score->setCounts;
-        $this->display();
     }
 }

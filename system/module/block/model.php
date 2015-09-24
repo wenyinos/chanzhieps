@@ -72,7 +72,7 @@ class blockModel extends model
 
                 $regionBlocks = json_decode($regionBlock->blocks);
 
-                foreach($regionBlocks as $block)
+                foreach((array)$regionBlocks as $block)
                 {
                     if(!empty($blocks[$block->id]))
                     {
@@ -619,7 +619,7 @@ class blockModel extends model
 
             foreach($this->config->block->categoryList as $category => $typeList)
             {
-                if(strpos($typeList, ",{$block->type},") !== false) $blockCategory = $category;
+                if(is_numeric(strpos($typeList, ",{$block->type},"))) $blockCategory = $category;
             }
 
             $blockClass = "block-{$blockCategory}-{$block->type}";

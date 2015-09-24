@@ -183,20 +183,24 @@ $config->ui->themes['default']['tartan']['basic']['aHover']['color']['default'] 
 $config->ui->themes['default']['tartan']['footer']['border']['border']['default'] = 'none';
 $config->ui->themes['default']['tartan']['footer']['background']['backcolor']['default'] = '#F5F0CC';
 
-/* Tartan2 theme setting */
-$config->ui->themes['default']['tartan2'] = $config->ui->selectorOptions;
-unset($config->ui->themes['default']['tartan2']['basic']['pageBackground']['backcolor']);
-unset($config->ui->themes['default']['tartan2']['basic']['pageText']);
-unset($config->ui->themes['default']['tartan2']['basic']['border']);
-unset($config->ui->themes['default']['tartan2']['basic']['aLink']);
-unset($config->ui->themes['default']['tartan2']['basic']['aVisited']);
-unset($config->ui->themes['default']['tartan2']['basic']['aHover']);
-unset($config->ui->themes['default']['tartan2']['navbar']);
-unset($config->ui->themes['default']['tartan2']['button']);
-unset($config->ui->themes['default']['tartan2']['block']);
-unset($config->ui->themes['default']['tartan2']['footer']);
-$config->ui->themes['default']['tartan2']['basic']['colorset']['primary']['default'] = '#254952';
-$config->ui->themes['default']['tartan2']['basic']['pageBackground']['backgroundImage']['default'] = 'inherit';
+/* Clean theme setting */
+$config->ui->themes['default']['clean'] = $config->ui->selectorOptions;
+unset($config->ui->themes['default']['clean']['basic']['pageBackground']['backcolor']);
+unset($config->ui->themes['default']['clean']['basic']['pageText']);
+unset($config->ui->themes['default']['clean']['basic']['border']);
+unset($config->ui->themes['default']['clean']['basic']['aLink']);
+unset($config->ui->themes['default']['clean']['basic']['aVisited']);
+unset($config->ui->themes['default']['clean']['basic']['aHover']);
+unset($config->ui->themes['default']['clean']['navbar']);
+unset($config->ui->themes['default']['clean']['button']);
+unset($config->ui->themes['default']['clean']['block']);
+unset($config->ui->themes['default']['clean']['footer']);
+$config->ui->themes['default']['clean']['basic']['colorset']['primary']['default'] = '#254952';
+$config->ui->themes['default']['clean']['basic']['pageBackground']['backgroundImage']['default'] = 'inherit';
+
+/* Simple theme */
+$config->ui->themes['default']['simple'] = $config->ui->themes['default']['clean'];
+$config->ui->themes['default']['simple']['basic']['colorset']['primary']['default'] = '#3280FC';
 
 /* Tree theme setting */
 $config->ui->themes['default']['tree'] = $config->ui->selectorOptions;
