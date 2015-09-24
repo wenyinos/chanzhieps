@@ -12,7 +12,7 @@ $(document).ready(function()
         }
     });
 
-    $('input[type=checkbox][id*=modules]').change(function()
+    $('input[type=checkbox][value=score]').change(function()
     {
         if(!$('input[type=checkbox][value=score]').prop('checked'))
         {
