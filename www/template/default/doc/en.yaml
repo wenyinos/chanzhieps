@@ -3,8 +3,8 @@ parser:default
 code:default
 author:Chanzhi
 desc:This is the default template of chanzhieps.
-version:4.4
-chanzhiVersion:4.4
+version:4.5
+chanzhiVersion:4.5
 charge:free
 device:,desktop,
 license:http://www.chanzhi.org/book/chanzhieps/58_license.html

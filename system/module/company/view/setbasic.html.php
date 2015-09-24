@@ -12,6 +12,8 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/kindeditor.html.php';?>
+<?php js::set('score', commonModel::isAvailable('score'));?>
+<?php js::set('setCounts', $lang->site->setCounts);?>
 <?php $displayAll = $display === 'all'; ?>
 <div class='panel display-<?php echo $display?>'>
   <div class='panel-heading'><strong><i class='icon-building'></i> <?php echo $lang->company->setBasic;?></strong></div>

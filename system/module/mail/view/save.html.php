@@ -1,4 +1,6 @@
 <?php include '../../common/view/header.admin.html.php';?>
+<?php js::set('setCounts', $lang->site->setCounts);?>
+<?php js::set('score', commonModel::isAvailable('score'));?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-envelope'></i> <?php echo $lang->mail->common;?> <i class='icon-arrow-right'></i> <?php echo $lang->mail->save; ?></strong></div>
   <div class='panel-body'>

@@ -80,6 +80,7 @@ class order extends control
      */
     public function admin($mode = 'status', $value = 'normal', $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 0,  $pageID = 1)
     {
+        if(!commonModel::isAvailable('shop')) unset($this->lang->order->menu->express);
         $this->app->loadClass('pager', $static = true);
         $this->app->loadLang('product');
         $this->app->loadConfig('product');
@@ -312,6 +313,12 @@ class order extends control
      */
     public function setting()
     {
+        if(!commonModel::isAvailable('shop'))
+        {
+            unset($this->lang->order->menu->express);
+            unset($this->lang->order->paymentList['COD']);
+        }
+
         if($_POST)
         {
             $return = $this->order->saveSetting();

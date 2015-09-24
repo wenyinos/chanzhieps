@@ -1,7 +1,8 @@
 <?php
 $lang->stat->common       = '统计';
 $lang->stat->view         = '查看';
-$lang->stat->traffic      = '流量统计';
+$lang->stat->traffic      = '概况';
+$lang->stat->report       = '详细报告';
 $lang->stat->client       = '终端统计';
 $lang->stat->device       = '设备类型';
 $lang->stat->os           = '操作系统';
@@ -19,6 +20,7 @@ $lang->stat->uv           = '访客数(UV)';
 $lang->stat->ipCount      = 'IP数';
 $lang->stat->totalPV      = '总访问数';
 $lang->stat->searchEngine = '搜索引擎';
+$lang->stat->keywordReport = '关键词详细';
 
 $lang->stat->all   = '全部';
 $lang->stat->begin = '开始日期';

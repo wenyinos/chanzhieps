@@ -13,6 +13,8 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php js::set('type', $type);?>
 <?php js::set('cannotRemoveAll', $lang->nav->cannotRemoveAll); ?>
+<?php js::set('score', commonModel::isAvailable('score'));?>
+<?php js::set('setCounts', $lang->site->setCounts);?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class='icon-location-arrow'></i> <?php echo $lang->nav->setNav;?></strong> &nbsp; &nbsp;

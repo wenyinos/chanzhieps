@@ -11,6 +11,8 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php js::set('setCounts', $lang->site->setCounts);?>
+<?php js::set('score', commonModel::isAvailable('score'));?>
 <?php if(!checkCurlSSL()):?>
   <div class='alert alert-danger'>
     <?php echo $lang->wechat->curlSSLRequired;?>

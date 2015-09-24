@@ -48,16 +48,4 @@ $(document).ready(function()
     });
 
     $('input[type=checkbox][id*=lang]').change();
-
-    if(!$('#setCounts').length && v.score)
-    {
-        var setCountsLink = createLink('score', 'setCounts');
-        var setCountsMenu = '<li><a id="setCounts" href="' + setCountsLink + '">';
-        setCountsMenu += v.setCounts + '<i class="icon-chevron-right"></i>';
-        setCountsMenu += '</a></li>';
-        $('.nav-left').append(setCountsMenu);
-        $('#setCounts').modalTrigger();
-    }
-
-    $.setAjaxForm('#setCountsForm');
 })

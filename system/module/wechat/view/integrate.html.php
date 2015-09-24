@@ -11,6 +11,8 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php js::set('setCounts', $lang->site->setCounts);?>
+<?php js::set('score', commonModel::isAvailable('score'));?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong class='text-info'><i class="icon-plus-sign"></i> <?php echo $lang->wechat->integrateInfo;?></strong>
