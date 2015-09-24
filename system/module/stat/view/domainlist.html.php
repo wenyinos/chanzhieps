@@ -43,17 +43,17 @@
   <table class='table table-hover table-bordered'>
     <thead>
       <tr class='text-center'>
-        <th class='text-middle' rowspan='2'><?php echo $lang->stat->domain;?></th>
+        <th class='text-middle'><?php echo $lang->stat->domain;?></th>
         <th>pv</th>
         <th>uv</th>
         <th>ip</th>
-        <th class='text-middle' rowspan='2'><?php echo $lang->actions?></th>
+        <th class='text-middle'><?php echo $lang->actions?></th>
       </tr>
     </thead>
     <tbody>
       <?php foreach($domains as $domain => $report):?>
       <tr class='text-center text-middle'>
-        <td><?php echo $domain;?></td>
+        <td class='text-left'><?php echo $domain;?></td>
         <td class='w-100px'><?php echo $report->pv;?></td>
         <td class='w-100px'><?php echo $report->uv;?></td>
         <td class='w-100px'><?php echo $report->ip;?></td>
