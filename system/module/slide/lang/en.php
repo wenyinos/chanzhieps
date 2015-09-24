@@ -47,6 +47,7 @@ $lang->slide->createGroup = 'Create group';
 $lang->slide->editGroup   = 'Edit group';
 $lang->slide->return      = 'Return';
 $lang->slide->rename      = 'Rename';
+$lang->slide->removeGroup = 'Remove group';
 
 $lang->slide->successSort     = 'Order data saved.';
 $lang->slide->noImageSelected = 'No images selected';
