@@ -79,7 +79,7 @@
         <?php for($i = 0 ; $i < count($pieCharts['pv']); $i ++):?>
         <?php $report = $pieCharts['pv'][$i];?>
         <tr class='text-center'>
-          <?php if($type = 'domain'):?>
+          <?php if($type == 'domain'):?>
           <td><?php echo $report->label . ' ' . html::a(inlink('domain', "domain=" . urlencode($report->label)), " <i class='icon icon-search'></i>");?></td>
           <?php else:?>
           <td><?php echo $report->label;?></td>

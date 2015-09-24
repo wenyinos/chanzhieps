@@ -199,6 +199,7 @@ class stat extends control
         $this->view->type      = $this->lang->stat->domain . ' - ' . $domain;
         $this->view->domain    = $domain;
         $this->view->labels    = $labels;
+        $this->view->mode      = $mode;
         $this->view->lineChart = $this->stat->getItemLine('domain', $domain, $begin, $end);
         $this->view->pieCharts = $this->stat->getItemExtraPie('domain', $domain, $begin, $end);
 
