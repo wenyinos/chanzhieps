@@ -9,6 +9,7 @@ $lang->stat->os           = '操作系统';
 $lang->stat->browser      = '浏览器';
 $lang->stat->from         = '来源统计';
 $lang->stat->keywords     = '关键词统计';
+$lang->stat->keyword      = '关键词';
 $lang->stat->outSite      = '来源网站统计';
 $lang->stat->search       = '搜索引擎统计';
 $lang->stat->domain       = '来路域名';
@@ -21,10 +22,13 @@ $lang->stat->ipCount      = 'IP数';
 $lang->stat->totalPV      = '总访问数';
 $lang->stat->searchEngine = '搜索引擎';
 $lang->stat->keywordReport = '关键词详细';
+$lang->stat->domainTrend   = '趋势';
+$lang->stat->domainPage    = '页面';
 
 $lang->stat->all   = '全部';
 $lang->stat->begin = '开始日期';
 $lang->stat->end   = '结束日期';
+$lang->stat->date  = '日期';
 
 $lang->stat->noData    = '没有数据';
 $lang->stat->dateError = '时间错误';
