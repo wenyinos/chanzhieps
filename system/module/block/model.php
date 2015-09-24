@@ -406,7 +406,7 @@ class blockModel extends model
         $blockID = $this->dao->lastInsertID();
         $this->loadModel('file')->updateObjectID($this->post->uid, $blockID, 'block');
 
-        return true;
+        return $blockID;
     }
 
     /**
