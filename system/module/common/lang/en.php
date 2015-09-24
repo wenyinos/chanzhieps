@@ -339,7 +339,7 @@ $lang->error->passwordsame = "Two passwords must be the same";
 $lang->error->passwordrule = "Password should more than six letters.";
 $lang->error->captcha      = 'Captcah wrong.';
 $lang->error->noWritable   = '%s maybe not write, please modify permissions!';
-$lang->error->fingerprint  = 'identity authent faild';
+$lang->error->fingerprint  = 'identity authent failed';
 $lang->error->token        = 'Should English or numbers, length of 3-32 characters.';
 $lang->error->sensitive    = 'There can be no sensitive words in the content.';
 
