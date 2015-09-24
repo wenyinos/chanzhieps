@@ -50,6 +50,7 @@ $lang->moduleOrder[115] = 'search';
 
 $lang->moduleOrder[120] = 'order';
 $lang->moduleOrder[125] = 'stat';
+$lang->moduleOrder[130] = 'score';
 
 $lang->resource = new stdclass();
 
@@ -267,6 +268,9 @@ $lang->resource->stat->keywords = 'keywords';
 $lang->resource->stat->keywordreport = 'keywordReport';
 $lang->resource->stat->domain   = 'domain';
 
+/* Stat module. */
+$lang->resource->score = new stdclass();
+$lang->resource->score->setCounts = 'setCounts';
 
 /* Search module. */
 if(!isset($lang->resource->search))$lang->resource->search = new stdclass();
