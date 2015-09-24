@@ -597,7 +597,7 @@
             var options = $.extend({parent: 0}, $blocksHolder.data(), $btn.data());
             if(options.parent) options.title = $blocksHolder.data('title') + '-' + options.title;
             var $modal = $('#addContentModal');
-            $modal.find('.ve-btn-addcontent[data-type="region"]').toggleClass('hidden', !options.grid);
+            $modal.find('.ve-btn-addcontent[data-type="region"]').toggleClass('hidden', options.grid !== true);
             $modal.find('.modal-title').text(lang.addContentTo.format(options.title));
             $modal.data('options', options).modal('show');
         }).on('mousedown', '.ve-resize-handler', function(e)

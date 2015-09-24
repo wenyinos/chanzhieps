@@ -121,9 +121,9 @@ js::set('debug', $config->debug);
       <h4 class='modal-title'><?php echo $lang->visual->js->addContent ?></h4>
     </div>
     <div class='modal-body'>
-      <button type='button' class='btn btn-block btn-primary ve-btn-addcontent' data-type='create'><?php echo $lang->visual->js->createBlock ?></button>
-      <button type='button' class='btn btn-block ve-btn-addcontent' data-type='add'><?php echo $lang->visual->js->addBlock ?></button>
-      <button type='button' class='btn btn-block ve-btn-addcontent' data-type='region'><?php echo $lang->visual->js->addSubRegion ?></button>
+      <button type='button' class='btn btn-lg btn-block btn-primary ve-btn-addcontent' data-type='create'><?php echo $lang->visual->js->createBlock ?></button>
+      <button type='button' class='btn btn-lg btn-block ve-btn-addcontent' data-type='add'><?php echo $lang->visual->js->addBlock ?></button>
+      <button type='button' class='btn btn-lg btn-block ve-btn-addcontent' data-type='region'><?php echo $lang->visual->js->addSubRegion ?></button>
     </div>
   </div>
 </div>
