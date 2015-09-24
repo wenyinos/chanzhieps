@@ -18,6 +18,8 @@ js::set('root', $root);
 js::set('type', $type);
 js::set('isWechatMenu', $isWechatMenu);
 js::set('lang', $lang->js);
+js::set('score', commonModel::isAvailable('score'));
+js::set('setCounts', $lang->site->setCounts);
 ?>
 <?php if(strpos($treeMenu, '<li>') !== false):?>
 <div class='row'>
