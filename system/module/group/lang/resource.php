@@ -49,6 +49,7 @@ $lang->moduleOrder[110] = 'file';
 $lang->moduleOrder[115] = 'search';
 
 $lang->moduleOrder[120] = 'order';
+$lang->moduleOrder[125] = 'stat';
 
 $lang->resource = new stdclass();
 
@@ -255,6 +256,15 @@ $lang->resource->order->delivery = 'delivery';
 $lang->resource->order->finish   = 'finish';
 $lang->resource->order->pay      = 'pay';
 $lang->resource->order->setting  = 'setting';
+
+/* Stat module. */
+$lang->resource->stat = new stdclass();
+$lang->resource->stat->traffic  = 'traffic';
+$lang->resource->stat->report   = 'report';
+$lang->resource->stat->keywords = 'keywords';
+$lang->resource->stat->keywordreport = 'keywordReport';
+$lang->resource->stat->domain   = 'domain';
+
 
 /* Search module. */
 if(!isset($lang->resource->search))$lang->resource->search = new stdclass();
