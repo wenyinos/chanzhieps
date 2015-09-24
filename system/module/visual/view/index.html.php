@@ -86,7 +86,7 @@ js::set('debug', $config->debug);
                 <?php endforeach;?>
               </ul>
               <div class='actions'>
-                <?php commonModel::printLink('ui', 'setTemplate', '', '<i class="icon-cog"></i> ' . $lang->ui->manageTemplate)?>
+                <?php commonModel::printLink('ui', 'setTemplate', '', '<i class="icon-cog"></i> ' . $lang->ui->manageTemplate, "target='_blank'")?>
               </div>
             </div>
             <div class='menu-themes-list'>

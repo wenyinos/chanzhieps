@@ -696,7 +696,12 @@
         {
             $ve.replaceWith($wrapper.find(selector));
             initVisualAreas();
-            if(isBlocks) setTimeout(function(){tidyBlocks($$(selector));}, 100);
+            if(isBlocks) setTimeout(function()
+            {
+                var $area = $$(selector);
+                tidyBlocks($area);
+                $area.find('[data-toggle="tooltip"]').tooltip('hide');
+            }, 100);
             showMessage(data.message || lang.saved, 'success');
         });
     };
