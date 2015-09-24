@@ -13,6 +13,7 @@
 $lang->colon      = '：';
 $lang->prev       = '‹';
 $lang->next       = '›';
+$lang->equal      = '=';
 $lang->laquo      = '&laquo;';
 $lang->raquo      = '&raquo;';
 $lang->minus      = ' - ';
