@@ -3,12 +3,14 @@ parser:default
 code:default
 author:蟬知官方
 desc:這是蟬知默認模板
-version:4.4
-chanzhiVersion:4.4
+version:4.5
+chanzhiVersion:4.5
 charge:free
 device:,desktop,
 license:http://www.chanzhi.org/book/chanzhieps/58_license.html
 themes:
    default:默認
+   clean:清晰
+   simple:簡單
    tartan:蟬之格
    wide:寬屏
