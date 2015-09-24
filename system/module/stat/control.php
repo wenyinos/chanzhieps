@@ -101,14 +101,15 @@ class stat extends control
         $begin = $date->begin;
         $end   = $date->end;
 
-        $this->view->totalInfo   = $this->stat->getSearchTraffic();
-        $this->view->keywordList = $this->stat->getKeywordsList($begin, $end, $orderBy, $pager);
-        $this->view->title       = $this->lang->stat->keywords;
-        $this->view->mode        = $mode;
-        $this->view->begin       = $begin;
-        $this->view->end         = $end;
-        $this->view->orderBy     = $orderBy;
-        $this->view->pager       = $pager;
+        $this->view->searchEngines = $this->stat->getSearchEngines();
+        $this->view->totalInfo     = $this->stat->getSearchTraffic($begin, $end);
+        $this->view->keywordList   = $this->stat->getKeywordsList($begin, $end, $orderBy, $pager);
+        $this->view->title         = $this->lang->stat->keywords;
+        $this->view->mode          = $mode;
+        $this->view->begin         = $begin;
+        $this->view->end           = $end;
+        $this->view->orderBy       = $orderBy;
+        $this->view->pager         = $pager;
         $this->display();
     }
 
