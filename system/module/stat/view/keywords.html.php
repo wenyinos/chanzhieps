@@ -13,7 +13,7 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
 <div class='panel'>
-  <div class="panel-heading">
+  <div class="panel-heading pd-l0">
     <strong><i class='icon-stats'></i> <?php echo $lang->stat->keywords;?></strong>
     <div class='panel-actions'>
       <ul class='nav nav-tabs'>

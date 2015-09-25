@@ -1,6 +1,6 @@
 <?php
 /**
- * The domain list view file of stat module of chanzhiEPS.
+ * The admin browse view file of stat module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPLV1 (http://www.chanzhi.org/license/)
@@ -18,11 +18,11 @@
       <ul class='nav nav-tabs'>
         <?php foreach($lang->stat->trafficModes as $code => $modeName):?>
         <?php $class = $mode == $code ? "class='active'" : '';?>
-        <li <?php echo $class?>><?php echo html::a(inlink('domainlist', "mode=$code"), $modeName);?></li>
+        <li <?php echo $class?>><?php echo html::a(inlink('domainpage', "$domain={$domain}&mode=$code"), $modeName);?></li>
         <?php endforeach;?>
         <li>
-          <form method='get' action="<?php echo inlink('domainreport')?>">
-            <?php echo html::hidden('m', 'stat') . html::hidden('f', 'domain') . html::hidden('mode', 'fixed');?>
+          <form method='get' action="<?php echo inlink('domainpage')?>">
+            <?php echo html::hidden('m', 'stat') . html::hidden('f', 'domainpage') . html::hidden('domain', $domain) . html::hidden('mode', 'fixed');?>
             <table class='table table-borderless'>
               <tr>
                 <td style='padding:4px'>
@@ -36,36 +36,38 @@
         </li>
       </ul>
     </div>
-    <strong><i class='icon-stats'></i> &nbsp;</strong>
+    <strong>&nbsp;</strong>
   </div>
 </div>
-<div class="panel">
+  <div class="panel-">
   <table class='table table-hover table-bordered'>
     <thead>
       <tr class='text-center'>
-        <th class='text-middle'><?php echo $lang->stat->domain;?></th>
-        <th>pv</th>
-        <th>uv</th>
-        <th>ip</th>
-        <th class='text-middle'><?php echo $lang->actions?></th>
+        <th class='text-middle'><?php echo $lang->stat->domainPage;?></th>
+        <?php foreach($labels as $label):?>
+        <th><?php echo date('Y-m-d', strtotime($label));?></th>
+        <?php endforeach;?>
+        <th class='text-middle'><?php echo $lang->stat->totalPV;?></th>
       </tr>
     </thead>
     <tbody>
-      <?php foreach($domains as $domain => $report):?>
+      <?php foreach($pages as $page => $reports):?>
+      <?php $pv = 0;?>
       <tr class='text-center text-middle'>
-        <td class='text-left'><?php echo $domain;?></td>
-        <td class='w-100px'><?php echo $report->pv;?></td>
-        <td class='w-100px'><?php echo $report->uv;?></td>
-        <td class='w-100px'><?php echo $report->ip;?></td>
-        <td class='w-100px'>
-          <?php $domain = helper::safe64Encode($domain);?>
-          <?php echo html::a(inlink('domaintrend', "domain={$domain}"), $lang->stat->domainTrend);?>
-          <?php echo html::a(inlink('domainpage', "domain={$domain}"), $lang->stat->domainPage);?>
-        </td>
+        <td><?php echo $page;?></td>
+        <?php foreach($labels as $label):?>
+        <?php if(isset($reports[$label])):?>
+        <td class='<?php echo $label;?>'><?php echo $reports[$label]->pv;?></td>
+      <?php $pv += $reports[$label]->pv;?>
+        <?php else:?>
+        <td class='<?php echo $label;?>'>0</td>
+        <?php endif;?>
+        <?php endforeach;?>
+        <td><?php echo $pv;?></td>
       </tr>
       <?php endforeach;?>
     </tbody>
-    <tfoot><tr><td colspan='5'><?php $pager->show();?></td></tr></tfoot>
+    <tfoot><tr><td colspan='20'><?php $pager->show();?></td></tr></tfoot>
   </table>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>

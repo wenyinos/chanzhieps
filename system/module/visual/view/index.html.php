@@ -8,6 +8,7 @@ js::set('visuals', $config->visual->setting);
 js::set('visualsLang', $lang->visual->setting);
 js::set('visualLang', $lang->visual->js);
 js::set('visualStyle', $themeRoot . 'common/visual.css');
+js::set('jQueryUrl', $jsRoot . 'jquery/min.js');
 js::set('visualBlocks', $blocks);
 js::set('debug', $config->debug);
 ?>

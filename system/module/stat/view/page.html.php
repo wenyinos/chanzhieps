@@ -13,8 +13,8 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
 <div class='panel'>
-  <div class='panel-heading'><strong><i class='icon icon-bar-chart'></i> <?php echo $lang->stat->page->common;?></strong>
-    <div class='panel-actions'>
+  <div class="panel-heading pd-l0">
+    <div class='panel-actions pull-left'>
       <ul class='nav nav-tabs'>
         <li <?php echo $mode == 'all' ? "class='active'" : '' ?>><?php echo html::a(inlink('page', "mode=all"), $lang->stat->all);?></li>
         <?php foreach($lang->stat->trafficModes as $code => $modeName):?>
@@ -39,6 +39,7 @@
         </li>
        </ul>
     </div>
+    <strong>&nbsp;</strong>
   </div>
   <table class='table table-hover table-bordered table-striped tablesorter'>
     <thead>
