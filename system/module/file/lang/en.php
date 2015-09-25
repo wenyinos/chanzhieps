@@ -42,6 +42,10 @@ $lang->file->addedBy   = 'Added by';
 $lang->file->addedDate = 'Added date';
 $lang->file->public    = 'Public';
 $lang->file->downloads = 'Downloads';
+$lang->file->score     = 'Score Required';
+$lang->file->setScore  = 'Set Score';
+$lang->file->lblInfo   = 'Now you have: <strong class="red">%s</strong> scores.';
+$lang->file->confirm   = 'This Plug-in Requires %s Scores.';
 
 $lang->file->publics[0] = 'Needed login';
 $lang->file->publics[1] = 'ok';
@@ -62,4 +66,5 @@ $lang->file->uploadForbidden  = 'Upload function is forbidden.';
 $lang->file->sizeLimit        = "<p class='text-danger'>The size of file must be less than %sM</p>";
 $lang->file->sameName         = "Have a same name file";
 $lang->file->nameEmpty        = "File name con'n empty";
+$lang->file->copySuccess      = "Copied to Clipboard";
 $lang->file->evilChar         = "Please remove evil char";

@@ -46,8 +46,8 @@
         <?php endif;?>
         <th class='text-center w-160px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->article->addedDate);?></th>
         <th class='text-center w-70px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->article->views);?></th>
-        <?php $actionClass = $type == 'page' ? 'w-200px' : 'w-260px';?>
-        <th class='text-center <?php echo $actionClass;?>' style='<?php if($type == 'article') echo 'width: 340px';?>'><?php echo $lang->actions;?></th>
+        <?php $actionClass = $type == 'page' ? 'w-220px' : 'w-260px';?>
+        <th class="text-center <?php echo $actionClass;?>"><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <tbody>
@@ -93,21 +93,16 @@
             </ul>
           </span>
           <?php endif;?>
-          <?php if($type == 'article'):?>
-          <span class='dropdown'>
-            <a data-toggle='dropdown' href='javascript:;'><?php echo $lang->article->forward;?><span class='caret'></span></a>
-            <ul class='dropdown-menu pull-right'>    
-              <li><?php commonModel::printLink('article', 'forward2Blog', "articleID=$article->id", $lang->article->forward2Blog, "data-toggle='modal'");?></li>
-              <li><?php commonModel::printLink('article', 'forward2Forum', "articleID=$article->id", $lang->article->forward2Forum, "data-toggle='modal'");?></li>
-            </ul>
-          </span>
-          <?php endif;?>
           <span class='dropdown'>
             <a data-toggle='dropdown' href='javascript:;'><?php echo $this->lang->more;?><span class='caret'></span></a>
             <ul class='dropdown-menu pull-right'>    
               <li><?php commonModel::printLink('article', 'delete', "articleID=$article->id", $lang->delete, 'class="deleter"');?></li>
               <li><?php commonModel::printLink('article', 'setcss', "articleID=$article->id", $lang->article->css, "data-toggle='modal'");?></li>
               <li><?php commonModel::printLink('article', 'setjs',  "articleID=$article->id", $lang->article->js, "data-toggle='modal'");?></li>
+              <?php if($type == 'article'):?>
+              <li><?php commonmodel::printlink('article', 'forward2blog', "articleid=$article->id", $lang->article->forward2Blog, "data-toggle='modal'");?></li>
+              <li><?php commonmodel::printlink('article', 'forward2forum', "articleid=$article->id", $lang->article->forward2Forum, "data-toggle='modal'");?></li>
+              <?php endif;?>
             </ul>
           </span>
         </td>
