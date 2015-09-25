@@ -56,12 +56,12 @@ $sysURL             = $common->getSysURL();
   $siteCustomCssFile = $this->app->getDataRoot() . 'css' . DS . $config->site->code . DS . $templateName . DS . $themeName . DS . 'style.css';
   if($config->multi && file_exists($siteCustomCssFile))
   {
-      css::import(sprintf($webRoot . 'data/css/%s/%s/%s/style.css?' . $this->config->template->customVersion, $config->site->code, $config->template->{$this->device}->name, $config->template->{$this->device}->theme), "id='themeStyle' data-template='{$templateName}' data-theme='{$themeName}'");
+      css::import(sprintf($webRoot . 'data/css/%s/%s/%s/style.css?' . $this->config->template->customVersion, $config->site->code, $config->template->{$this->device}->name, $config->template->{$this->device}->theme), "id='themeStyle' data-template='{$templateName}' data-theme='{$themeName}' data-device='{$this->device}'");
   }
   else
   {
       $customCssFile = $this->app->getDataRoot() . 'css' . DS . $templateName . DS . $themeName . DS . 'style.css';
-      if(file_exists($customCssFile)) css::import(sprintf($webRoot . 'data/css/%s/%s/style.css?' . $this->config->template->customVersion, $config->template->{$this->device}->name, $config->template->{$this->device}->theme), "id='themeStyle' data-template='{$templateName}' data-theme='{$themeName}'");
+      if(file_exists($customCssFile)) css::import(sprintf($webRoot . 'data/css/%s/%s/style.css?' . $this->config->template->customVersion, $config->template->{$this->device}->name, $config->template->{$this->device}->theme), "id='themeStyle' data-template='{$templateName}' data-theme='{$themeName}' data-device='{$this->device}'");
 
   }
 
