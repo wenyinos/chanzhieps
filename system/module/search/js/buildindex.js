@@ -8,13 +8,13 @@ $(document).ready(function()
         {
            if(response.result == 'finished')
            {
-              $('#resultBox').append("<li class='text-success'>" + response.message + "</li>");
+              $('#resultBox').append("<li>" + response.message + "</li>");
               return false;
            }
            else
           {
               $('#execButton').attr('href', response.next);
-              $('#resultBox').append("<li class='text-success'>" + response.message + "</li>");
+              $('#resultBox').append("<li>" + response.message + "</li>");
               return $('#execButton').click();
           }
         }); 
