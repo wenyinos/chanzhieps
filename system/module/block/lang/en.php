@@ -53,6 +53,7 @@ $lang->block->customStyleTip  = 'Change block color and background here.';
 $lang->block->style           = 'Style';
 $lang->block->sort            = 'Sort';
 $lang->block->class           = 'Class selector';
+$lang->block->subRegion       = 'Sub Region';
 
 $lang->block->admin        = "Block management";
 $lang->block->pages        = "Layout settings";

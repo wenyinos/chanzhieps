@@ -912,7 +912,7 @@
                 var url = createLink('visual', 'index', 'referer=' + visualPageUrl);
                 window.history.replaceState({}, title, url);
 
-                $('#visualPageName').html('<i class="icon icon-external-link-sign"></i>' + ((title && title.indexOf(' ') > -1) ? title.split(' ')[0] : title)).attr('href', visualPageUrl);
+                $('#visualPageName').html(((title && title.indexOf(' ') > -1) ? title.split(' ')[0] : title)).attr('href', visualPageUrl);
             }
 
             if(iframe.jQuery)
