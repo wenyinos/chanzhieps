@@ -192,7 +192,11 @@ $lang->user->control->menus[10] = '<i class="icon-large icon-user"></i> Profile 
 $lang->user->control->menus[20] = '<i class="icon-large icon-comments-alt"></i> Messages <i class="icon-chevron-right"></i>|user|message';
 $lang->user->control->menus[30] = '<i class="icon-large icon-comment"></i> Threads <i class="icon-chevron-right"></i>|user|thread';
 $lang->user->control->menus[40] = '<i class="icon-large icon-mail-reply"></i> Replies <i class="icon-chevron-right"></i>|user|reply';
-
+if(RUN_MODE != 'install' and commonModel::isAvailable('score'))
+{
+    $lang->user->control->menus[30] = '<i class="icon-sun"></i> Score <i class="icon-chevron-right"></i>|user|score';
+    if(strpos($this->config->shop->payment, 'alipay') !== false) $lang->user->control->menus[40] = '<i class="icon-bolt"></i> Recharge Score <i class="icon-chevron-right"></i>|score|buyscore';
+}
 if(RUN_MODE != 'install' and commonModel::isAvailable('order')) $lang->user->control->menus[25] = '<i class="icon-shopping-cart"></i> My Orders <i class="icon-chevron-right"></i>|order|browse';
 if(RUN_MODE != 'install' and commonModel::isAvailable('shop')) $lang->user->control->menus[26] = '<i class="icon-map-marker"> </i> Addresses <i class="icon-chevron-right"></i>|address|browse';
 
