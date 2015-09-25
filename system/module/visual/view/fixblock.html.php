@@ -10,7 +10,7 @@
           <?php echo $this->lang->block->titleless?>
         <label>
       </td>
-      <td class='w-100px'>
+      <td class='w-120px'>
         <label>
         <input type='checkbox' name='borderless' value='1' <?php if(zget($block, 'borderless') == 1) echo 'checked';?>/>
           <?php echo $this->lang->block->borderless?>
