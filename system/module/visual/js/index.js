@@ -983,7 +983,8 @@
                 modal$.setAjaxForm('.ve-form', function(response)
                 {
                     $.closeModal();
-                    reloadPage();
+                    var $style = $$('#themeStyle');
+                    $style.attr('href', $style.href());
                 });
                 if(DEBUG) console.log('Modal loaded:', url);
             }
