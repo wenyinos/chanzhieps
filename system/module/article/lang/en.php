@@ -38,7 +38,6 @@ $lang->article->link       = 'Link';
 $lang->article->css        = 'CSS';
 $lang->article->js         = 'JS';
 
-$lang->article->forward          = 'Forward';
 $lang->article->forward2Blog     = 'Forward to blog';
 $lang->article->forward2Forum    = 'Forward to forum';
 $lang->article->selectCategories = 'Select categories';
