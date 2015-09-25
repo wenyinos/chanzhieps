@@ -8,13 +8,39 @@ js::set('visuals', $config->visual->setting);
 js::set('visualsLang', $lang->visual->setting);
 js::set('visualLang', $lang->visual->js);
 js::set('visualStyle', $themeRoot . 'common/visual.css');
+js::set('zuiJsUrl', $jsRoot . 'zui/min.js');
 js::set('jQueryUrl', $jsRoot . 'jquery/min.js');
 js::set('visualBlocks', $blocks);
 js::set('debug', $config->debug);
+js::set('device', $this->device);
 ?>
 <div class='navbar navbar-fixed-top' id='visualPanel'>
   <div class='container' id='menu'>
     <ul class='nav navbar-nav nav-main'>
+      <li class='dropdown'>
+        <?php
+        $clientLang  = $this->app->getClientLang();
+        $enableLangs = explode(',', $config->site->lang);
+        $enableLangs = array_flip($enableLangs);
+        $langs       = $config->langs;
+        foreach($langs as $key => $value)
+        {
+            if(!isset($enableLangs[$key])) unset($langs[$key]);
+        }
+        if(count($langs) > 1):
+        ?>
+        <a href='###' class='dropdown-toggle' data-toggle='dropdown'><i class='icon-globe icon-large'></i> &nbsp;<?php echo $langs[$clientLang]?><span class='caret'></span></a>
+        <ul class='dropdown-menu'>
+          <?php unset($langs[$clientLang]); ?>
+          <?php foreach($langs as $langKey => $currentLang): ?>
+          <li>
+            <?php commonModel::printLink('visual', 'index', 'referer=' . getHomeRoot($config->langsShortcuts[$langKey]), $currentLang) ?>
+          </li>
+          <?php endforeach; ?>
+        </ul>
+        <?php endif;?>
+      </li>
+      <li class="divider"></li>
       <li class='nav-item-primary'>
         <?php $mobileTemplate = isset($this->config->site->mobileTemplate) ? $this->config->site->mobileTemplate : 'close';?>
         <?php if($mobileTemplate == 'close'):?>
@@ -26,7 +52,7 @@ js::set('debug', $config->debug);
         <ul id='deviceMenu' class='dropdown-menu'>
           <?php foreach($lang->ui->deviceList as $device => $name):?>
           <?php $class = $device == $currentDevice ? "class='active'" : '';?>
-          <li <?php echo $class;?>><a href='<?php echo helper::createLink('ui', 'setdevice', "device={$device}")?>'><?php echo $name;?><i class='icon-ok'></i></a></li>
+          <li <?php echo $class;?>><a href='###' data-href='<?php echo helper::createLink('ui', 'setdevice', "device={$device}")?>' class='ve-change-device'><?php echo $name;?><i class='icon-ok'></i></a></li>
           <?php endforeach;?>
         </ul>
         <?php endif;?>
@@ -88,21 +114,5 @@ js::set('debug', $config->debug);
 </div>
 <div id='visualPageWrapper'>
   <iframe id='visualPage' name='visualPage' src='<?php echo empty($referer) ? '/' : $referer;?>' frameborder='no' allowtransparency='true' scrolling='auto' hidefocus='' style='width: 100%; height: 100%; left: 0; top: 0'></iframe>
-</div>
-
-<div class='modal fade' id='addContentModal'>
-<div class='modal-dialog modal-sm'>
-  <div class='modal-content'>
-    <div class='modal-header'>
-      <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>×</span></button>
-      <h4 class='modal-title'><?php echo $lang->visual->js->addContent ?></h4>
-    </div>
-    <div class='modal-body'>
-      <button type='button' class='btn btn-lg btn-block btn-primary ve-btn-addcontent' data-type='create'><?php echo $lang->visual->js->createBlock ?></button>
-      <button type='button' class='btn btn-lg btn-block ve-btn-addcontent' data-type='add'><?php echo $lang->visual->js->addBlock ?></button>
-      <button type='button' class='btn btn-lg btn-block ve-btn-addcontent' data-type='region'><?php echo $lang->visual->js->addSubRegion ?></button>
-    </div>
-  </div>
-</div>
 </div>
 <?php include "footer.html.php"; ?>

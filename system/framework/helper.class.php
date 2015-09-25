@@ -738,6 +738,8 @@ class helper
         }
         elseif(RUN_MODE == 'front')
         {
+            if(isset($_COOKIE['visualDevice'])) return $_COOKIE['visualDevice'];
+
             /* Detect mobile. */
             $mobile = $app->loadClass('mobile');
             if($mobile->isMobile())

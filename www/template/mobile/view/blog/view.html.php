@@ -15,7 +15,7 @@ include TPL_ROOT . 'blog/header.html.php';
 include TPL_ROOT . 'common/files.html.php';
 ?>
 
-<div class='block-region region-top'><?php $this->loadModel('block')->printRegion($layouts, 'blog_view', 'top');?></div>
+<div class='block-region region-top blocks' data-region='blog_view-top'><?php $this->loadModel('block')->printRegion($layouts, 'blog_view', 'top');?></div>
 
 <div class='appheader'>
   <div class='heading'>
@@ -33,7 +33,7 @@ include TPL_ROOT . 'common/files.html.php';
   </div>
 </div>
 
-<div class='panel-section article'>
+<div class='panel-section article' id="blog<?php echo $article->id?>" data-ve='blog'>
   <?php if($article->summary):?>
   <section class='abstract hide bg-gray-pale small with-padding'><strong><?php echo $lang->article->summary;?></strong><?php echo $lang->colon . $article->summary;?></section>
   <?php endif; ?>
@@ -80,6 +80,6 @@ include TPL_ROOT . 'common/files.html.php';
 <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=article&objectID={$article->id}");?></div>
 <?php endif;?>
 
-<div class='block-region region-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'blog_view', 'bottom');?></div>
+<div class='block-region region-bottom blocks' data-region='blog_view-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'blog_view', 'bottom');?></div>
 
 <?php include TPL_ROOT . 'blog/footer.html.php';?>

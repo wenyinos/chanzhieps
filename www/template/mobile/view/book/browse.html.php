@@ -12,9 +12,9 @@
 ?>
 <?php include TPL_ROOT . 'common/header.html.php';?>
 <?php $bookModel = $this->loadModel('book'); ?>
-<div class='block-region region-top'><?php $this->loadModel('block')->printRegion($layouts, 'book_browse', 'top');?></div>
+<div class='block-region region-top blocks' data-region='book_browse-top'><?php $this->loadModel('block')->printRegion($layouts, 'book_browse', 'top');?></div>
 <hr class='space'>
-<div class='panel-section panel'>
+<div class='panel-section panel' id='bookCatalog' data-id='<?php echo $node->id?>'>
   <div class='panel-body'>
     <div class='dropdown selector'>
       <a data-toggle='dropdown' href='###' class='btn strong block primary text-left'><i class='icon icon-book'></i> <?php if(!empty($book) && $book->title) echo $book->title; else echo $lang->book->list; ?><div class='pull-right'><i class='icon-caret-down pull-right'></i></div></a>
@@ -63,5 +63,5 @@
     </div>
   </div>
 </div>
-<div class='block-region region-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'book_browse', 'bottom');?></div>
+<div class='block-region region-bottom blocks' data-region='book_browse-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'book_browse', 'bottom');?></div>
 <?php include TPL_ROOT . 'common/footer.html.php';?>

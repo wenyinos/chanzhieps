@@ -14,10 +14,11 @@
 $block->content = json_decode($block->content);
 $groupID = !empty($block->content->group) ? $block->content->group : '';
 $slides  = $this->loadModel('slide')->getList($groupID);
-$slideId = 'slide' . rand();
+$slideId = 'slide' . $block->id . '-' . $groupID;
 if($slides):
 ?>
-<div id='<?php echo $slideId;?>' class='carousel slide panel-block panel-block-slide' data-ride='carousel'>
+<div class='block' id='block<?php echo $block->id?>'>
+<div id='<?php echo $slideId;?>' class='carousel slide' class='carousel slide' data-ride='carousel' data-ve='carousel' data-id='<?php echo $groupID?>'>
   <div class='carousel-inner'>
     <?php $height = 0; $index = 0;?>
     <?php foreach($slides as $slide):?>
@@ -51,5 +52,6 @@ if($slides):
   <a class='left carousel-control' href='#<?php echo $slideId;?>' data-slide='prev'> <i class='icon icon-chevron-left'></i> </a>
   <a class='right carousel-control' href='#<?php echo $slideId;?>' data-slide='next'> <i class='icon icon-chevron-right'></i> </a>
   <?php endif;?>
+</div>
 </div>
 <?php endif;?>

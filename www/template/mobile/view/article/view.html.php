@@ -20,7 +20,7 @@ js::set('categoryPath', explode(',', trim($category->path, ',')));
 css::internal($article->css);
 js::execute($article->js);
 ?>
-<div class='block-region region-article-view-top'><?php $this->loadModel('block')->printRegion($layouts, 'article_view', 'top');?></div>
+<div class='block-region region-article-view-top blocks' data-region='article_view-top'><?php $this->loadModel('block')->printRegion($layouts, 'article_view', 'top');?></div>
 <div class='appheader'>
   <div class='heading'>
     <h2><?php echo $article->title;?></h2>
@@ -37,7 +37,7 @@ js::execute($article->js);
   </div>
 </div>
 
-<div class='panel-section article'>
+<div class='panel-section article' id="article<?php echo $article->id?>" data-ve='article'>
   <?php if($article->summary):?>
   <section class='abstract hide bg-gray-pale small with-padding'><strong><?php echo $lang->article->summary;?></strong><?php echo $lang->colon . $article->summary;?></section>
   <?php endif; ?>
@@ -84,6 +84,6 @@ js::execute($article->js);
 <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=article&objectID={$article->id}");?></div>
 <?php endif;?>
 
-<div class='block-region region-article-view-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'article_view', 'bottom');?></div>
+<div class='block-region region-article-view-bottom blocks' data-region='article_view-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'article_view', 'bottom');?></div>
 
 <?php include TPL_ROOT . 'common/footer.html.php';?>

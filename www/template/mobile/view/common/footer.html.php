@@ -1,5 +1,5 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
-<div class='block-region region-all-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'all', 'bottom');?></div>
+<div class='block-region region-all-bottom blocks' data-region='all-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'all', 'bottom');?></div>
 <div class='appinfo clearfix'>
   <div class='copyright pull-left'>
     <?php
@@ -12,13 +12,13 @@
     <?php if(!empty($config->site->icpLink) and !empty($config->site->icpSN)) echo html::a(strpos($config->site->icpLink, 'http://') !== false ? $config->site->icpLink : 'http://' . $config->site->icpLink, $config->site->icpSN, "target='_blank'");?>
     <?php if(empty($config->site->icpLink) and !empty($config->site->icpSN))  echo $config->site->icpSN;?>
   </div>
-  <div class='powerby pull-right'>
+  <div class='powerby pull-right' id='powerby'>
     <?php printf($lang->poweredBy, $config->version, k(), "<object style='position: relative; top: 2px' data='{$templateCommonRoot}img/chanzhi.xml' type='image/svg+xml'>{$lang->chanzhiEPSx}</object> <span class='name hide'>" . $lang->chanzhiEPSx . '</span>' . $config->version); ?>
   </div>
 </div>
 
 <?php $bottomNavs = $this->loadModel('nav')->getNavs('mobile_bottom');?>
-<footer  class="appbar fix-bottom">
+<footer class="appbar fix-bottom" id='footerNav' data-ve='navbar' data-type='mobile_bottom'>
   <ul class="nav">
     <?php foreach($bottomNavs as $nav):?>
     <?php
@@ -54,7 +54,7 @@ $extHookRule  = $siteExtPath . 'footer.front.*.hook.php';
 $extHookFiles = glob($extHookRule);
 if($extHookFiles) foreach($extHookFiles as $extHookFile) include $extHookFile;
 ?>
-<div class='block-region region-footer hidden'><?php $this->loadModel('block')->printRegion($layouts, 'all', 'footer');?></div>
+<div class='block-region region-footer hidden blocks' data-region='all-footer'><?php $this->loadModel('block')->printRegion($layouts, 'all', 'footer');?></div>
 <?php if(commonModel::isAvailable('shop')) include TPL_ROOT . 'common/cart.html.php';?>
 <?php include TPL_ROOT . 'common/log.html.php';?>
 </body>

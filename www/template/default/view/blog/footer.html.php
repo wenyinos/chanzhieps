@@ -36,5 +36,6 @@ if($config->debug) js::import($jsRoot . 'jquery/form/min.js');
 if(isset($pageJS)) js::execute($pageJS);
 ?>
 <div class='hide'><?php if(RUN_MODE == 'front') $this->loadModel('block')->printRegion($layouts, 'all', 'footer');?></div>
+<?php include TPL_ROOT . 'common/log.html.php';?>
 </body>
 </html>

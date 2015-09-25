@@ -80,7 +80,7 @@ class logModel extends model
             return null;
         }
 
-        $url = urldecode($this->get->referer);
+        $url = helper::safe64decode($this->get->referer);
         $refererInDB = $this->dao->select("*")->from(TABLE_STATREFERER)->where('url')->eq($url)->fetch();
 
         if(!empty($refererInDB))

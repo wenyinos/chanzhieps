@@ -17,7 +17,8 @@ js::set('pageID', $page->id);
 css::internal($page->css);
 js::execute($page->js);
 ?>
-<div class='block-region region-top'><?php $this->loadModel('block')->printRegion($layouts, 'page_view', 'top');?></div>
+<div class='block-region region-top blocks' data-region='page_view-top'><?php $this->loadModel('block')->printRegion($layouts, 'page_view', 'top');?></div>
+<div id='page' data-id='<?php echo $page->id ?>'>
 <div class='appheader'>
   <div class='heading'>
     <h2><?php echo $page->title;?></h2>
@@ -44,5 +45,6 @@ js::execute($page->js);
     </div>
   </div>
 </div>
-<div class='block-region region-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'page_view', 'bottom');?></div>
+</div>
+<div class='block-region region-bottom blocks' data-region='page_view-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'page_view', 'bottom');?></div>
 <?php include TPL_ROOT . 'common/footer.html.php';?>

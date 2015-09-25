@@ -21,12 +21,12 @@ $thisMethodName     = $this->app->getMethodName();
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
 <?php include TPL_ROOT . 'common/header.lite.html.php';?>
 
-<div class='block-region region-all-top'><?php $this->block->printRegion($layouts, 'all', 'top');?></div>
+<div class='block-region region-all-top blocks' data-region='all-top'><?php $this->block->printRegion($layouts, 'all', 'top');?></div>
 
 <?php $topNavs = $this->loadModel('nav')->getNavs('mobile_top');?>
 <header class='appbar fix-top' id='appbar'>
   <div class='appbar-title'>
-    <a href='<?php echo $webRoot;?>'>
+    <a href='<?php echo $webRoot;?>' id='logo'>
       <?php
       $logoSetting = isset($this->config->site->logo) ? json_decode($this->config->site->logo) : new stdclass();
       $logo = isset($logoSetting->$templateName->themes->$themeName) ? $logoSetting->$templateName->themes->$themeName : (isset($logoSetting->$templateName->themes->all) ? $logoSetting->$templateName->themes->all : false);
@@ -72,7 +72,7 @@ $thisMethodName     = $this->app->getMethodName();
   </div>
 </header>
 
-<nav class='appnav fix-top appnav-auto' id='appnav'>
+<nav class='appnav fix-top appnav-auto' id='appnav' data-ve='navbar' data-type='mobile_top'>
   <div class='mainnav'>
     <ul class='nav'>
     <?php $subnavs = '';?>
@@ -118,7 +118,7 @@ $thisMethodName     = $this->app->getMethodName();
   </div>
 </nav>
 
-<div class='block-region region-all-banner'>
+<div class='block-region region-all-banner blocks' data-region='all-banner'>
   <?php $this->block->printRegion($layouts, 'all', 'banner');?>
 </div>
 <?php endif;?>

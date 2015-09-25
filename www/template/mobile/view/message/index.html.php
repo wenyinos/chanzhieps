@@ -14,7 +14,7 @@
 include TPL_ROOT . 'common/header.html.php';
 // TODO: check follow methods: showDetail and hideDetail
 ?>
-<div class='block-region region-top'><?php $this->loadModel('block')->printRegion($layouts, 'message_index', 'top');?></div>
+<div class='block-region region-top blocks' data-region='message_index-top'><?php $this->loadModel('block')->printRegion($layouts, 'message_index', 'top');?></div>
 <div class='panel-section'>
   <div id='commentsListWrapper'><div id='commentsList'> <?php // Double div for ajax load. ?>
     <?php if(!empty($messages)):?>
@@ -116,7 +116,7 @@ include TPL_ROOT . 'common/header.html.php';
     </div>
   </div>
 </div>
-<div class='block-region region-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'message_index', 'bottom');?></div>
+<div class='block-region region-bottom blocks' data-region='message_index-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'message_index', 'bottom');?></div>
 <?php include TPL_ROOT . 'common/form.html.php'; ?>
 <?php if(isset($pageJS)) js::execute($pageJS);?>
 <script>

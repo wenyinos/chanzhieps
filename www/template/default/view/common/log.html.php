@@ -8,7 +8,7 @@ if(!empty($referer))
 }
 ?>
 <script>
-var referer         = "<?php echo urlencode($referer);?>";
+var referer         = "<?php echo helper::safe64encode($referer);?>";
 var browserLanguage = navigator.language || navigator.userLanguage; 
 var resolution      = screen.availWidth + ' X ' + screen.availHeight;
 $.get(createLink('log', 'record'), {referer:referer, browserLanguage:browserLanguage, resolution:resolution});

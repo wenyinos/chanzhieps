@@ -1,7 +1,7 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
 <?php include TPL_ROOT . 'common/header.lite.html.php';?>
 
-<div class='block-region region-all-top'><?php $this->block->printRegion($layouts, 'all', 'top');?></div>
+<div class='block-region region-all-top blocks' data-region='all-top'><?php $this->block->printRegion($layouts, 'all', 'top');?></div>
 <header class='appbar fix-top' id='appbar'>
   <div class='appbar-title'>
     <a href='<?php echo $webRoot;?>'>
@@ -99,6 +99,6 @@
   </div>
 </nav>
 
-<div class='block-region region-all-banner'>
+<div class='block-region region-all-banner blocks' data-region='all-banner'>
   <?php $this->block->printRegion($layouts, 'all', 'banner');?>
 </div>

@@ -911,6 +911,7 @@ class user extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
+        $this->view->title  = $this->lang->user->score;
         $this->view->scores = $this->loadModel('score')->getByUser($this->app->user->account, $pager);
         $this->view->user   = $this->user->getByAccount($this->app->user->account);
         $this->view->pager  = $pager;
