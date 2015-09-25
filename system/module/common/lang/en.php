@@ -319,10 +319,10 @@ $lang->package = new stdclass();
 $lang->stat = new stdclass();
 $lang->stat->menu = new stdclass();
 $lang->stat->menu->traffic  = 'Summary|stat|traffic|';
-$lang->stat->menu->from     = 'Source Stats|stat|report|type=from';
-$lang->stat->menu->search   = 'Search Engine Stats|stat|report|type=search';
+$lang->stat->menu->from     = 'Source Stats|stat|from|';
+$lang->stat->menu->search   = 'Search Engine Stats|stat|search|';
 $lang->stat->menu->keywords = 'Keyswords Stats|stat|keywords|';
-$lang->stat->menu->domains  = 'Domains|stat|domainList|';
+$lang->stat->menu->domains  = 'Antecedents Domains|stat|domainList|';
 $lang->stat->menu->client   = 'Client Stats|stat|client|type=browser';
 $lang->stat->menu->page     = 'Page Views Ranking|stat|page|';
 
