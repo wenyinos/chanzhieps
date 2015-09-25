@@ -446,7 +446,7 @@ class commonModel extends model
     {
         if(!commonModel::isAvailable('user')) return '';
 
-        global $app;
+        global $app, $config;
         if($app->session->user->account != 'guest')
         {
             if($asListItem)
@@ -460,7 +460,7 @@ class commonModel extends model
                 printf('<span class="login-msg"></span>');
                 echo html::a(helper::createLink('user', 'control'), "<i class='icon-user icon-small'> </i>" . $app->session->user->realname);
                 echo "<span id='msgBox' class='hiding'></span>";
-                $visualEditLink = getHomeRoot() . getAdminEntry() . "?m=visual&f=index&referer=" . getHomeRoot() . trim($_SERVER['REQUEST_URI'], '/');
+                $visualEditLink = $config->webRoot . getAdminEntry() . "?m=visual&f=index&referer=" . trim($_SERVER['REQUEST_URI'], '/');
                 echo html::a($visualEditLink, $app->lang->editMode, "class='text-important'");
                 echo html::a(helper::createLink('user', 'logout'),  $app->lang->logout);
             }
