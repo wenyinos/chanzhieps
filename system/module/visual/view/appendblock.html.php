@@ -20,6 +20,11 @@ $(function()
     {
         window.parent.$.addBlock('<?php echo $page?>', '<?php echo $region?>', $(this).data('id'), '<?php echo $parent?>');
     });
+
+    $('#createBlockBtn').on('click', function()
+    {
+        window.parent.$.createBlock('<?php echo $page?>', '<?php echo $region?>', '<?php echo $parent?>');
+    });
 });
 </script>
 <?php include "footer.html.php"; ?>

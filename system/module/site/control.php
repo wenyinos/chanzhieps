@@ -269,7 +269,7 @@ class site extends control
      * @access public
      * @return void
      */
-    public function setLog()
+    public function setStat()
     {
         if(!empty($_POST))
         {
@@ -280,7 +280,7 @@ class site extends control
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
 
-        $this->view->title = $this->lang->site->setLog;
+        $this->view->title = $this->lang->site->setStat;
         $this->display();
     }
 }

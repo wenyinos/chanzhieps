@@ -14,16 +14,16 @@
 <?php include '../../common/view/datepicker.html.php';?>
 <div class='panel'>
   <div class="panel-heading">
-    <strong><i class='icon-stats'></i> <?php echo $lang->stat->keywords;?></strong>
+    <strong><i class='icon-stats'></i> <?php echo $lang->stat->domain;?></strong>
     <div class='panel-actions'>
       <ul class='nav nav-tabs'>
         <?php foreach($lang->stat->trafficModes as $code => $modeName):?>
         <?php $class = $mode == $code ? "class='active'" : '';?>
-        <li <?php echo $class?>><?php echo html::a(inlink('keywords', "mode=$code"), $modeName);?></li>
+        <li <?php echo $class?>><?php echo html::a(inlink('domainlist', "mode=$code"), $modeName);?></li>
         <?php endforeach;?>
         <li>
-          <form method='get' action="<?php echo inlink('keywordreport')?>">
-            <?php echo html::hidden('m', 'stat') . html::hidden('f', 'keywords') . html::hidden('mode', 'fixed');?>
+          <form method='get' action="<?php echo inlink('domainreport')?>">
+            <?php echo html::hidden('m', 'stat') . html::hidden('f', 'domain') . html::hidden('mode', 'fixed');?>
             <table class='table table-borderless'>
               <tr>
                 <td style='padding:4px'>
@@ -39,44 +39,32 @@
     </div>
   </div>
 </div>
-  <div class="panel-">
+<div class="panel">
   <table class='table table-hover table-bordered'>
     <thead>
       <tr class='text-center'>
-        <th class='text-middle' rowspan='2'><?php echo $lang->stat->keyword;?></th>
-        <?php foreach($searchEngines as $engine):?>
-        <th colspan='3'> <?php echo $engine;?></th>
-        <?php endforeach;?>
-        <th class='text-middle' rowspan='2'><?php echo $lang->actions?></th>
-      </tr>
-      <tr class='text-center'>
-        <?php foreach($searchEngines as $engine):?>
+        <th class='text-middle'><?php echo $lang->stat->domain;?></th>
         <th>pv</th>
         <th>uv</th>
         <th>ip</th>
-        <?php endforeach;?>
+        <th class='text-middle'><?php echo $lang->actions?></th>
       </tr>
     </thead>
     <tbody>
-      <?php foreach($keywordList as $keyword => $reports):?>
+      <?php foreach($domains as $domain => $report):?>
       <tr class='text-center text-middle'>
-        <td><?php echo $keyword;?></td>
-        <?php foreach($searchEngines as $engine):?>
-        <?php if(isset($reports[$engine])):?>
-        <td class='<?php echo $engine;?>'><?php echo $reports[$engine]->pv;?></td>
-        <td class='<?php echo $engine;?>'><?php echo $reports[$engine]->uv;?></td>
-        <td class='<?php echo $engine;?>'><?php echo $reports[$engine]->ip;?></td>
-        <?php else:?>
-        <td class='<?php echo $engine;?>'>0</td>
-        <td class='<?php echo $engine;?>'>0</td>
-        <td class='<?php echo $engine;?>'>0</td>
-        <?php endif;?>
-        <?php endforeach;?>
-        <td><?php echo html::a(inlink('keywordreport', "keyword={$keyword}"), $lang->stat->view);?></td>
+        <td class='text-left'><?php echo $domain;?></td>
+        <td class='w-100px'><?php echo $report->pv;?></td>
+        <td class='w-100px'><?php echo $report->uv;?></td>
+        <td class='w-100px'><?php echo $report->ip;?></td>
+        <td class='w-100px'>
+          <?php echo html::a(inlink('domaintrend', "domain={$domain}"), $lang->stat->domainTrend);?>
+          <?php echo html::a(inlink('domainpage', "domain={$domain}"), $lang->stat->domainPage);?>
+        </td>
       </tr>
       <?php endforeach;?>
     </tbody>
-    <tfoot><tr><td colspan='20'><?php $pager->show();?></td></tr></tfoot>
+    <tfoot><tr><td colspan='5'><?php $pager->show();?></td></tr></tfoot>
   </table>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>

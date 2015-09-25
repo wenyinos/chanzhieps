@@ -272,6 +272,29 @@ class statModel extends model
             ->andWhere('timeType')->eq('day')
             ->andWhere('timeValue')->ge($begin)
             ->andWhere('timeValue')->le($end)
+            ->groupBy('concat(item, extra)')
+            ->orderBy($orderBy)
+            ->page($pager)
+            ->fetchGroup('item', 'extra');
+    }
+
+    /**
+     * Get keywords list.
+     * 
+     * @param  int       $begin 
+     * @param  int       $end 
+     * @param  string    $orderBy 
+     * @param  object    $pager 
+     * @access public
+     * @return void
+     */
+    public function getDomainList($begin, $end, $orderBy, $pager)
+    {
+        return $this->dao->select('*, sum(pv) as pv, sum(uv) as uv, sum(ip) as ip')->from(TABLE_STATREPORT)
+            ->where('type')->eq('domain')
+            ->andWhere('timeType')->eq('day')
+            ->andWhere('timeValue')->ge($begin)
+            ->andWhere('timeValue')->le($end)
             ->groupBy('item')
             ->orderBy($orderBy)
             ->page($pager)
@@ -281,13 +304,17 @@ class statModel extends model
     /**
      * Set searchengine traffic grouped by serachengine.
      * 
+     * @param  int       $begin 
+     * @param  int       $end 
      * @access public
      * @return array
      */
-    public function getSearchTraffic()
+    public function getSearchTraffic($begin, $end)
     {
          return $this->dao->select('*, sum(pv) as pv, sum(uv) as uv, sum(ip) as ip')->from(TABLE_STATREPORT)
             ->where('type')->eq('keywords')
+            ->andWhere('timeValue')->ge($begin)
+            ->andWhere('timeValue')->le($end)
             ->andWhere('timeType')->eq('day')
             ->groupBy('extra')
             ->fetchAll('extra');
@@ -459,7 +486,6 @@ class statModel extends model
             $charts['uv'][] = $uv;
             $charts['ip'][] = $ip;
         }
-
         return $charts;
     }
 }

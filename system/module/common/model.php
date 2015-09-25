@@ -461,7 +461,7 @@ class commonModel extends model
                 echo html::a(helper::createLink('user', 'control'), "<i class='icon-user icon-small'> </i>" . $app->session->user->realname);
                 echo "<span id='msgBox' class='hiding'></span>";
                 $visualEditLink = getHomeRoot() . getAdminEntry() . "?m=visual&f=index&referer=" . getHomeRoot() . trim($_SERVER['REQUEST_URI'], '/');
-                echo html::a($visualEditLink, "<i class='icon icon-magic'></i>" . $app->lang->editMode);
+                echo html::a($visualEditLink, $app->lang->editMode, "class='text-important'");
                 echo html::a(helper::createLink('user', 'logout'),  $app->lang->logout);
             }
         }

@@ -45,6 +45,7 @@ $lang->slide->create      = '添加幻灯片';
 $lang->slide->edit        = '编辑幻灯片';
 $lang->slide->createGroup = '添加分组';
 $lang->slide->editGroup   = '编辑分组';
+$lang->slide->removeGroup = '删除分组';
 $lang->slide->return      = '返回分组';
 $lang->slide->rename      = '重命名';
 $lang->slide->removeGroup = '删除分组';
