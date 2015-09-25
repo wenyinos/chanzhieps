@@ -654,7 +654,7 @@
             {
                 var $area = $$(selector);
                 tidyBlocks($area);
-                $area.find('[data-toggle="tooltip"]').tooltip('hide');
+                $$('.tooltip').remove();
             }, 100);
             showMessage(data.message || lang.saved, 'success');
         });
@@ -723,6 +723,7 @@
                         var $row = $ve.closest('.row');
                         $forRemove.remove();
                         tidyBlocks($row);
+                        $$('.tooltip').remove();
                     }
                 });
             }
