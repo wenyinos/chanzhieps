@@ -912,8 +912,7 @@
             {
                 visualPageUrl = $frame.context.URL;
                 var title = $frame.find('head > title').text();
-                var url = '{router}?{moduleVar}=visual&{methodVar}=index&{viewVar}={defaultView}&referer='.format(config) + Base64.encode(visualPageUrl);
-
+                var url = createLink('visual', 'index', 'referer=' + Base64.encode(visualPageUrl));
                 window.history.replaceState({}, title, url);
 
                 $('#visualPageName').html(((title && title.indexOf(' ') > -1) ? title.split(' ')[0] : title)).attr('href', visualPageUrl);
