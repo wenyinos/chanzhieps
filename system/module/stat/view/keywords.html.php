@@ -43,7 +43,7 @@
   <table class='table table-hover table-bordered'>
     <thead>
       <tr class='text-center'>
-        <th class='text-middle' rowspan='2'><?php echo $lang->stat->keyword;?></th>
+        <th class='text-middle' rowspan='2'><?php echo $lang->stat->keywords;?></th>
         <?php foreach($searchEngines as $engine):?>
         <th colspan='3'> <?php echo $engine;?></th>
         <?php endforeach;?>
