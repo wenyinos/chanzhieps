@@ -826,7 +826,8 @@
         if(window.v.visualStyle) $$('head').append($$('<link type="text/css" rel="stylesheet" />').attr('href', window.v.visualStyle));
 
         themesConfig = $$('#themeStyle').data();
-        $('body').addClass('ve-device-' + themesConfig.device);
+        $('body').addClass('ve-device-' + window.v.device);
+        if(themesConfig.device != window.v.device) reloadPage();
 
         // init visual edit area
         initVisualAreas();
@@ -923,6 +924,16 @@
         }
         catch(e){}
     };
+
+    $('.ve-change-device').click(function()
+    {
+        var href = $(this).data('href');
+        $.get(href, function()
+        {
+            window.location.reload();
+        });
+        return false;
+    });
 
     $(document).on('click', '.ve-btn-addcontent', function()
     {

@@ -28,7 +28,7 @@ js::set('device', $this->device);
         <ul id='deviceMenu' class='dropdown-menu'>
           <?php foreach($lang->ui->deviceList as $device => $name):?>
           <?php $class = $device == $currentDevice ? "class='active'" : '';?>
-          <li <?php echo $class;?>><a href='<?php echo helper::createLink('ui', 'setdevice', "device={$device}")?>'><?php echo $name;?><i class='icon-ok'></i></a></li>
+          <li <?php echo $class;?>><a href='###' data-href='<?php echo helper::createLink('ui', 'setdevice', "device={$device}")?>' class='ve-change-device'><?php echo $name;?><i class='icon-ok'></i></a></li>
           <?php endforeach;?>
         </ul>
         <?php endif;?>
