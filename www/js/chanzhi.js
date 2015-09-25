@@ -774,7 +774,7 @@ function fixFooterOfWideTheme()
     {
         var $wrapper = $('.page-wrapper');
         var fitHeight = $(window).height() - $wrapper.offset().top - $('#footer').outerHeight() - 10;
-        $wrapper.css('min-height', $wrapper.height() < fitHeight ? fitHeight : 'initial');
+        $wrapper.css('min-height', $wrapper.height() >= fitHeight ? fitHeight : 'initial');
     };
 
     var theme = $('#themeStyle').data();
