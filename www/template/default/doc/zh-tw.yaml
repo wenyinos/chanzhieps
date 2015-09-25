@@ -10,7 +10,6 @@ device:,desktop,
 license:http://www.chanzhi.org/book/chanzhieps/58_license.html
 themes:
    default:默認
-   clean:清晰
-   simple:簡單
    tartan:蟬之格
+   clean:清晰
    wide:寬屏

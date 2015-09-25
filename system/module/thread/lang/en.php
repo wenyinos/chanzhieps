@@ -59,6 +59,13 @@ $lang->thread->successShow     = 'Successfully show.';
 $lang->thread->readonlyMessage = 'The thread has been set <strong>READONLY</strong>，you can not post new reply。';
 $lang->thread->successTransfer = 'Successfully Transfered';
 
+$lang->thread->score    = 'Reward Scores';
+$lang->thread->scoreSum = "<strong class='red f-14px strong'>+%s</strong> ";
+$lang->thread->scores[5]  = '+ 5';
+$lang->thread->scores[10] = '+ 10';
+$lang->thread->scores[50] = '+ 50';
+$lang->thread->scores[100]= '+ 100';
+
 $lang->thread->placeholder = new stdclass();
 $lang->thread->placeholder->link = 'Input link, it can be outer chain.';
 

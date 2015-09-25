@@ -8,8 +8,9 @@
  * @version     $Id$
  * @link        http://www.chanzhi.net
  */
-$lang->score->common = 'Score';
-$lang->score->back   = 'Back';
+$lang->score->common      = 'Score';
+$lang->score->back        = 'Back';
+$lang->score->rankingList = 'Score Ranking';
 
 $lang->score->id      = 'ID';
 $lang->score->account = 'Account';
@@ -25,6 +26,8 @@ $lang->score->product = 'Product';
 $lang->score->confirm = 'Confirm order';
 $lang->score->details = 'Score details';
 
+$lang->score->setCounts = 'Set score rule';
+
 $lang->score->totalRank = 'Total rank';
 $lang->score->rank      = 'Rank';
 $lang->score->username  = 'Username';
@@ -34,9 +37,8 @@ $lang->score->dayRank   = 'Daily rank';
 
 $lang->score->methods['register']     = 'Register';
 $lang->score->methods['login']        = 'Login';
+$lang->score->methods['maxlogin']     = 'Max Scores of Daily Loging';
 $lang->score->methods['download']     = 'Download';
-$lang->score->methods['bind']         = 'Bind ChanzhiEPS';
-$lang->score->methods['exchangegift'] = 'Exchange gift';
 
 $lang->score->methods['thread']      = 'Thread';
 $lang->score->methods['reply']       = 'Reply';
@@ -44,45 +46,20 @@ $lang->score->methods['valuethread'] = 'Valueable thread';
 $lang->score->methods['valuereply']  = 'Valueable reply';
 $lang->score->methods['delthread']   = 'Delete thread';
 $lang->score->methods['delreply']    = 'Delete reply';
-$lang->score->methods['threadtoask'] = 'Thread to ask';
+$lang->score->methods['award']       = 'Reward Scores';
+$lang->score->methods['punish']      = 'Deduct Scores';
 
-$lang->score->methods['question']        = 'Question';
-$lang->score->methods['rewardquestion']  = 'Reward question';
-$lang->score->methods['delquestion']     = 'Delete question';
-$lang->score->methods['answer']          = 'Answer';
-$lang->score->methods['bestanswer']      = 'Best answer';
-$lang->score->methods['awardanswer']     = 'Award answer';
-$lang->score->methods['delanswer']       = 'Delete answer';
-$lang->score->methods['setasfaq']        = 'Set as FAQ'; 
-$lang->score->methods['closequestion']   = 'Close question';
-$lang->score->methods['system']          = 'system';
+$lang->score->methods['buyscore']  = 'Buy score';
+$lang->score->methods['statement'] = 'Integral Settlement';
 
-$lang->score->methods['usercase']        = 'User case';
-$lang->score->methods['classicalcase']   = 'Classical case';
-$lang->score->methods['showcase']        = 'Show case';
-$lang->score->methods['delcase']         = 'Delete case';
-$lang->score->methods['valuecase']       = 'Award case';
-$lang->score->methods['archivecase']     = 'Archive case';
+$lang->score->methods['vip'] = 'VIP';
+$lang->score->methods['co']  = 'Partner';
 
-$lang->score->methods['extension']       = 'Extension';
-$lang->score->methods['valueextension']  = 'Award extension';
-$lang->score->methods['delextension']    = 'Delete extension';
-$lang->score->methods['earnExtension']   = 'Extension earn';
-$lang->score->methods['downextension']   = '插件下载奖励';
+$lang->score->types['in']  = 'Increase';
+$lang->score->types['out'] = 'Decreate';
 
-$lang->score->methods['addlink']         = 'Add link';
-$lang->score->methods['clicklink']       = 'Click link';
-$lang->score->methods['buyscore']        = 'Buy score';
-$lang->score->methods['translate']       = 'Translation';
-
-$lang->score->methods['vip']      = 'VIP';
-$lang->score->methods['co']       = 'Partner';
-$lang->score->types['in']         = 'Increase';
-$lang->score->types['out']        = 'Decreate';
-
-$lang->score->getByCase = 'Add user case';
-$lang->score->getByLink = 'Add promotion link';  
-$lang->score->getByAsk  = 'Answer'; 
+$lang->score->getByThread = 'Published Thread'; 
+$lang->score->getByReply  = 'Replied Thread'; 
 
 $lang->score->lblTotal   = "Consume score：%s, Rank score: %s ";
 $lang->score->lblNoScore = "Sorry, your score isn't enouth.";
@@ -93,8 +70,10 @@ $lang->score->lblDetail = "You can refer to <a href='http://www.chanzhi.net/thre
 $lang->score->setAmount   = 'Amount';
 $lang->score->getScore    = 'Get scores';
 $lang->score->amountUnit  = 'yuan';
+$lang->score->minAmount   = 'Minimum Amount';
 $lang->score->buyWaring   = "at least %s yuan,1 yuan = %s scores";
 $lang->score->errorAmount = "At least %s yuan";
+$lang->score->alipay      = "Immediately use Alipay";
 $lang->score->paySuccess  = 'Congratulations, paid successfully!';
 $lang->score->payFail     = 'Sorry, paid failed. If you have problems, please contact us.';
 $lang->score->viewHistory = 'View payment history';

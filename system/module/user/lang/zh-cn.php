@@ -196,7 +196,7 @@ $lang->user->control->lblPassword = "留空，则保持不变。";
 
 $lang->user->control->menus[10] = '<i class="icon-user"></i> 个人信息 <i class="icon-chevron-right"></i>|user|profile';
 $lang->user->control->menus[20] = '<i class="icon-comments-alt"></i> 我的消息 <i class="icon-chevron-right"></i>|user|message';
-if(commonModel::isAvailable('score'))
+if(RUN_MODE != 'install' and commonModel::isAvailable('score'))
 {
     $lang->user->control->menus[30] = '<i class="icon-sun"></i> 积分详情 <i class="icon-chevron-right"></i>|user|score';
     if(strpos($this->config->shop->payment, 'alipay') !== false) $lang->user->control->menus[40] = '<i class="icon-bolt"></i> 积分充值 <i class="icon-chevron-right"></i>|score|buyscore';
