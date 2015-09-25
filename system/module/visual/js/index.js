@@ -924,6 +924,16 @@
         catch(e){}
     };
 
+    $('.ve-change-device').click(function()
+    {
+        var href = $(this).data('href');
+        $.get(href, function()
+        {
+            window.location.reload();
+        });
+        return false;
+    });
+
     $(document).on('click', '.ve-btn-addcontent', function()
     {
         var type = $(this).data('type');
