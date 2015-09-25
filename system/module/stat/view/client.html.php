@@ -48,7 +48,7 @@
   <?php if(!empty($pieCharts)):?>
   <div class='panel-body'>
     <div class='col-md-6'>
-      <ul id='typeMenu' class='nav w-100px'>
+      <ul id='typeMenu' class='nav nav-pills pull-right'>
         <?php
         echo "<li>" . html::a(inlink('client', "type=browser"), $lang->stat->browser, "class='w-p100'") . '</li>';
         echo '<li>' . html::a(inlink('client', "type=os"), $lang->stat->os,           "class='w-p100'") . '</li>';

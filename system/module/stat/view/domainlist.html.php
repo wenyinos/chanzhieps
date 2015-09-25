@@ -58,6 +58,7 @@
         <td class='w-100px'><?php echo $report->uv;?></td>
         <td class='w-100px'><?php echo $report->ip;?></td>
         <td class='w-100px'>
+          <?php $domain = helper::safe64Encode($domain);?>
           <?php echo html::a(inlink('domaintrend', "domain={$domain}"), $lang->stat->domainTrend);?>
           <?php echo html::a(inlink('domainpage', "domain={$domain}"), $lang->stat->domainPage);?>
         </td>

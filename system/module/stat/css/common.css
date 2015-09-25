@@ -30,5 +30,6 @@
 .table tr td.sogou{background:#F5F5F5}
 .pd-l0{padding-left:0}
 
-#typeMenu li a{padding:5px 0;}
-#typeMenu li.active a{ color:blue; font-weight:bold;}
+#typeMenu {padding-right:20px;}
+#typeMenu li a{padding:5px;}
+#typeMenu li.active a{ background:none; color:blue; font-weight:bold;}
