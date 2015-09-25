@@ -98,15 +98,15 @@
         window.modalTrigger.show(
         $.extend(
         {
-            iframeBodyClass : 'body-modal-ve',
-            name            : 'veModal',
-            url             : url,
-            type            : 'iframe',
-            width           : '80%',
-            icon            : 'pencil',
-            title           : '',
-            mergeOptions    : true,
-            hidden          : function()
+            iframeBodyClass    : 'body-modal-ve',
+            name               : 'veModal',
+            url                : url,
+            type               : 'iframe',
+            width              : '80%',
+            icon               : 'pencil',
+            title              : '',
+            mergeOptions       : true,
+            hidden             : function()
             {
                 if(options.dismiss === 'update')
                 {

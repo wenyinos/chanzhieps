@@ -21,6 +21,7 @@ $lang->visual->admin              = "后台";
 $lang->visual->reload             = '刷新';
 $lang->visual->createBlock        = '创建区块';
 $lang->visual->manageBlock        = '区块管理';
+$lang->visual->searchBlock        = '搜索区块';
 $lang->visual->allBlock           = '全部';
 $lang->visual->openInNewWindow    = '在新窗口中打开当前编辑页面';
 $lang->visual->editpowerbycontent = "<p>蝉知企业门户系统是开源免费的，但根据我们的<a href='http://www.chanzhi.org/book/chanzhieps/58_license.html' target='_blank'>授权协议</a>，去除蝉知的标识需要购买我们的商业授权。</p><p>蝉知标识并不会影响网站功能，我们建议您保留。</p><hr><div class='text-center'><a class='btn btn-success' href='http://www.chanzhi.org/vip/25_vip-support.html' target='_blank'>了解蝉知系统商业服务列表和授权 <i class='icon-arrow-right'></i></a></div>";

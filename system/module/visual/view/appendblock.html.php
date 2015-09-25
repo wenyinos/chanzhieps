@@ -1,16 +1,22 @@
 <?php include "header.html.php"; ?>
-<div class='pull-right'><a href='###' id='createBlockBtn' class='btn btn-primary'><i class='icon icon-plus'> </i><?php echo $lang->visual->js->createBlock ?></a></div>
+<div class='pull-right'>
+  <div id='searchbox'>
+    <input type='text' placeholder='<?php echo $lang->visual->searchBlock ?>' class='form-control'>
+    <i class='icon icon-search'></i>
+  </div>
+  <a href='###' id='createBlockBtn' class='btn btn-primary'><i class='icon icon-plus'> </i><?php echo $lang->visual->js->createBlock ?></a>
+</div>
 <ul class='nav nav-tabs'>
-  <li class='active'><a href='###' data-key=''><?php echo $lang->visual->allBlock; ?></a></li>
+  <li class='active' data-key=''><a href='###' data-key=''><?php echo $lang->visual->allBlock; ?></a></li>
   <?php foreach ($lang->block->categoryList as $category => $name):?>
-  <li><a href='###' data-key='<?php echo $category ?>'><?php echo $name ?></a></li>
+  <li data-key='<?php echo $category ?>'><a href='###' data-key='<?php echo $category ?>'><?php echo $name ?></a></li>
   <?php endforeach ?>
 </ul>
 <ul class='nav nav-blocks clearfix'>
   <?php if($allowregionblock): ?>
     <li data-keys='#region <?php echo $lang->visual->js->subRegion ?>'>
       <a href='###' class='btn-add-block' data-id='region' id='addRegionBlock'>
-      <strong class='text-special'><?php echo $lang->visual->js->subRegion;?></strong>
+      <strong class='text-special nobr'><?php echo $lang->visual->js->subRegion;?></strong>
       <small class='text-muted'><?php echo $lang->visual->js->subRegionDesc ?></small>
       </a>
     </li>
@@ -21,7 +27,7 @@
     <?php if(strpos($blockList, ",$block->type,") === false) continue;?>
     <li data-keys='<?php echo "={$block->type} {$typeList[$block->type]} @{$category} {$block->title} #{$block->id}"?>'>
       <a href='###' class='btn-add-block' title="<?php echo $block->title?>" data-id='<?php echo $block->id;?>'>
-        <strong><?php echo helper::subStr($block->title, 20);?></strong>
+        <strong class='nobr'><?php echo helper::subStr($block->title, 20);?></strong>
         <small class='text-muted'><?php echo $lang->block->categoryList[$category];?> / <?php echo $typeList[$block->type] ?></small>
       </a>
     </li>
@@ -40,6 +46,8 @@ $(function()
             var $block = $(this);
             $block.toggleClass('hidden', $(this).data('keys').indexOf(key) < 0);
         });
+        $('.nav-tabs > li.active').removeClass('active');
+        $('.nav-tabs > li[data-key="' + key + '"]').addClass('active');
     };
 
     $(document).on('click', '.btn-add-block:not(.disabled)', function()
@@ -61,6 +69,12 @@ $(function()
     $('#addRegionBlock').on('click', function()
     {
         window.parent.$.addBlock('<?php echo $page?>', '<?php echo $region?>', 'region');
+    });
+
+    $('#searchbox > .form-control').on('keyup paste input change', function()
+    {
+        var key = $(this).val();
+        searchBlocks(key);
     });
 });
 </script>

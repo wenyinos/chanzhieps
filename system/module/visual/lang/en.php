@@ -21,6 +21,7 @@ $lang->visual->admin              = "Admin";
 $lang->visual->reload             = 'Reload';
 $lang->visual->createBlock        = 'Create block';
 $lang->visual->manageBlock        = 'Manage blocks';
+$lang->visual->searchBlock        = 'Search blocks';
 $lang->visual->allBlock           = 'All';
 $lang->visual->openInNewWindow    = 'Open current page in new window(or tab)';
 $lang->visual->editpowerbycontent = "<p>ChanzhiEps is free, according to our <a href='http://www.chanzhi.org/book/chanzhieps/58_license.html' target='_blank'>license</a>, you should buy our commercial license to chanzhi mark.</p><hr><div class='text-center'><a class='btn btn-success' href='http://www.chanzhi.org/vip/25_vip-support.html' target='_blank'>Learn more about commercial license <i class='icon-arrow-right'></i></a></div>";
