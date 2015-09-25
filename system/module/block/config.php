@@ -42,5 +42,6 @@ $config->block->defaultMoreUrl['latestArticle'] = '';
 $config->block->defaultMoreUrl['hotArticle']    = '';
 $config->block->defaultMoreUrl['latestProduct'] = '';
 $config->block->defaultMoreUrl['hotProduct']    = '';
+$config->block->defaultMoreUrl['latestThread']  = '';
 $config->block->defaultMoreUrl['about']         = commonModel::createFrontLink('company', 'index');
 $config->block->defaultMoreUrl['contact']       = commonModel::createFrontLink('company', 'index');
