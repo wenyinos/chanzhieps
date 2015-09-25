@@ -6,6 +6,7 @@ $config->article->require->link          = 'categories, title, link';
 $config->article->require->pageLink      = 'title, link';
 $config->article->require->edit          = 'categories, title, content';
 $config->article->require->forward2Blog  = 'categories';
+$config->article->require->forward2Forum  = 'board';
 
 $config->article->editor = new stdclass();
 $config->article->editor->create = array('id' => 'content', 'tools' => 'full');

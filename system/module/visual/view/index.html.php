@@ -8,36 +8,13 @@ js::set('visuals', $config->visual->setting);
 js::set('visualsLang', $lang->visual->setting);
 js::set('visualLang', $lang->visual->js);
 js::set('visualStyle', $themeRoot . 'common/visual.css');
+js::set('jQueryUrl', $jsRoot . 'jquery/min.js');
 js::set('visualBlocks', $blocks);
 js::set('debug', $config->debug);
 ?>
 <div class='navbar navbar-fixed-top' id='visualPanel'>
   <div class='container' id='menu'>
     <ul class='nav navbar-nav nav-main'>
-      <li class='dropdown'>
-        <?php
-        $clientLang  = $this->app->getClientLang();
-        $enableLangs = explode(',', $config->site->lang);
-        $enableLangs = array_flip($enableLangs);
-        $langs       = $config->langs;
-        foreach($langs as $key => $value)
-        {
-            if(!isset($enableLangs[$key])) unset($langs[$key]);
-        }
-        if(count($langs) > 1):
-        ?>
-        <a href='###' class='dropdown-toggle' data-toggle='dropdown'><i class='icon-globe icon-large'></i> &nbsp;<?php echo $langs[$clientLang]?><span class='caret'></span></a>
-        <ul class='dropdown-menu'>
-          <?php unset($langs[$clientLang]); ?>
-          <?php foreach($langs as $langKey => $currentLang): ?>
-          <li>
-            <?php commonModel::printLink('visual', 'index', 'referer=' . getHomeRoot($config->langsShortcuts[$langKey]), $currentLang) ?>
-          </li>
-          <?php endforeach; ?>
-        </ul>
-        <?php endif;?>
-      </li>
-      <li class="divider"></li>
       <li class='nav-item-primary'>
         <?php $mobileTemplate = isset($this->config->site->mobileTemplate) ? $this->config->site->mobileTemplate : 'close';?>
         <?php if($mobileTemplate == 'close'):?>

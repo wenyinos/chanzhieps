@@ -38,9 +38,8 @@ $lang->article->link       = '链接';
 $lang->article->css        = 'CSS';
 $lang->article->js         = 'JS';
 
-$lang->article->forward          = '转发';
-$lang->article->forward2Blog     = '转发到博客';
-$lang->article->forward2Forum    = '转发到论坛';
+$lang->article->forward2Blog     = '转至博客';
+$lang->article->forward2Forum    = '转至论坛';
 $lang->article->selectCategories = '选择类目';
 $lang->article->selectBoard      = '选择版块';
 
@@ -52,8 +51,6 @@ $lang->article->setjs         = '设置JS';
 $lang->article->edit          = '编辑文章';
 $lang->article->files         = '附件';
 $lang->article->images        = '图片';
-$lang->article->forward2Block = '转发到博客';
-$lang->article->forward2Forum = '转发到论坛';
 
 $lang->blog->admin  = '维护博客';
 $lang->blog->list   = '博客列表';

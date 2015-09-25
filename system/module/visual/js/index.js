@@ -9,6 +9,7 @@
     var visualPageUrl = visualPage.src;
     var visuals = window.v.visuals;
     var visualsLang = window.v.visualsLang;
+    var themesConfig;
     var DEFAULT_ACTIONS_CONFIG =
     {
         edit: {icon: 'pencil', text: lang.actions.edit},
@@ -17,6 +18,42 @@
         move: {icon: 'move', text: lang.actions.move, hidden: true}
     };
     var DEFAULT_CONFIG = {width: '80%', actions: {edit: true}};
+
+    var loadJs = function(sid, jsurl, doc, callback)
+    {
+        var nodeHead = doc.getElementsByTagName('head')[0];
+        var nodeScript = null;
+        if(doc.getElementById(sid) == null)
+        {
+            nodeScript = doc.createElement('script');
+            nodeScript.setAttribute('type', 'text/javascript');
+            nodeScript.setAttribute('src', jsurl);
+            nodeScript.setAttribute('id',sid);
+            if (callback != null)
+            {
+                nodeScript.onload = nodeScript.onreadystatechange = function()
+                {
+                    if (nodeScript.ready)
+                    {
+                        return false;
+                    }
+                    if (!nodeScript.readyState || nodeScript.readyState == "loaded" || nodeScript.readyState == 'complete')
+                    {
+                        nodeScript.ready = true;
+                        callback();
+                    }
+                };
+            }
+            nodeHead.appendChild(nodeScript);
+        }
+        else 
+        {
+            if(callback != null)
+            {
+                callback();
+            }
+        }
+    };
 
     var showMessage = function(message, type, options)
     {
@@ -582,7 +619,7 @@
 
         var $$body = $$('body');
         if($$body.data('ve-blocks-events')) return;
-        $$body.data('ve-blocks-events', true);
+        $$body.data('ve.blocks-events', true);
 
         $$body.on('mouseenter', '.blocks', function()
         {
@@ -787,6 +824,8 @@
         // load visual edit style
         if(window.v.visualStyle) $$('head').append($$('<link type="text/css" rel="stylesheet" />').attr('href', window.v.visualStyle));
 
+        themesConfig = $$('#themeStyle').data();
+
         // init visual edit area
         initVisualAreas();
 
@@ -842,6 +881,8 @@
         $$body.addClass('ve-mode');
 
         setTimeout(tidyBlocks, 500);
+
+        if(DEBUG) console.log('visual page inited.');
     };
 
     visualPage.onload = visualPage.onreadystatechange = function()
@@ -849,7 +890,10 @@
         if (this.readyState && this.readyState != 'complete') return;
         try
         {
-            var $frame = $(window.frames['visualPage'].document);
+            var iframe = visualPage.contentWindow || window.frames['visualPage'];
+            var iframeDocument = iframe.document || visualPage.contentDocument;
+
+            var $frame = $(iframeDocument);
             if($frame.length)
             {
                 visualPageUrl = $frame.context.URL;
@@ -860,8 +904,19 @@
                 $('#visualPageName').html('<i class="icon icon-external-link-sign"></i>' + ((title && title.indexOf(' ') > -1) ? title.split(' ')[0] : title)).attr('href', visualPageUrl);
             }
 
-            window.$$ = window.frames['visualPage'].$;
-            initVisualPage();
+            if(iframe.jQuery)
+            {
+                window.$$ = iframe.jQuery;
+                initVisualPage();
+            }
+            else
+            {
+                loadJs('jQuery', window.v.jQueryUrl, iframeDocument, function()
+                {
+                    window.$$ = iframe.jQuery.noConflict();
+                    initVisualPage();
+                });
+            }
         }
         catch(e){}
     };
