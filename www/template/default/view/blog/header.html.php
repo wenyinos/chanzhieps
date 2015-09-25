@@ -18,6 +18,8 @@ $themeRoot      = $webRoot . "template/default/theme/";
 $sysURL         = $common->getSysURL();
 $thisModuleName = $this->app->getModuleName();
 $thisMethodName = $this->app->getMethodName();
+$template       = $this->config->template->{$this->device}->name ? $this->config->template->{$this->device}->name : 'default';
+$theme          = $this->config->template->{$this->device}->theme ? $this->config->template->{$this->device}->theme : 'default';
 $navs           = $this->loadModel('nav')->getNavs('desktop_blog');
 ?>
 <!DOCTYPE html>
@@ -57,12 +59,12 @@ $navs           = $this->loadModel('nav')->getNavs('desktop_blog');
   $siteCustomCssFile = $this->app->getDataRoot() . 'css' . DS . $this->config->site->code . DS . $this->config->template->{$this->device}->name . DS . $this->config->template->{$this->device}->theme . DS . 'style.css';
   if($this->config->multi && file_exists($siteCustomCssFile))
   {
-      css::import(sprintf($webRoot . 'data/css/%s/%s/%s/style.css?' . $this->config->template->customVersion, $config->site->code, $config->template->{$this->device}->name, $config->template->{$this->device}->theme));
+      css::import(sprintf($webRoot . 'data/css/%s/%s/%s/style.css?' . $this->config->template->customVersion, $config->site->code, $config->template->{$this->device}->name, $config->template->{$this->device}->theme), "id='themeStyle' data-template='{$template}' data-theme='{$theme}' data-device='{$this->device}'");
   }
   else
   {
       $customCssFile = $this->app->getDataRoot() . 'css' . DS . $this->config->template->{$this->device}->name . DS . $this->config->template->{$this->device}->theme . DS . 'style.css';
-      if(file_exists($customCssFile)) css::import(sprintf($webRoot . 'data/css/%s/%s/style.css?' . $this->config->template->customVersion, $config->template->{$this->device}->name, $config->template->{$this->device}->theme));
+      if(file_exists($customCssFile)) css::import(sprintf($webRoot . 'data/css/%s/%s/style.css?' . $this->config->template->customVersion, $config->template->{$this->device}->name, $config->template->{$this->device}->theme), "id='themeStyle' data-template='{$template}' data-theme='{$theme}' data-device='{$this->device}'");
 
   }
 
