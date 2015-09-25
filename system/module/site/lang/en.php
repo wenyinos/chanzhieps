@@ -151,7 +151,7 @@ $lang->site->wrongAllowedIP   = 'Wrong IP';
 $lang->site->changeLocation   = 'Your current login location not in allowed location.';
 $lang->site->sessionIpTip     = 'If opened login ip would be checked.';
 $lang->site->schemeTip        = 'Redirect all request to this scheme.';
-$lang->site->saveDaysTip      = "The access logs' save day must be a positive number.';
+$lang->site->saveDaysTip      = "The access logs' save day must be a positive number.";
 
 $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Can not write robots file, please make sure %s writeable first.';
