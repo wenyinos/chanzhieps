@@ -582,7 +582,7 @@
 
         var $$body = $$('body');
         if($$body.data('ve-blocks-events')) return;
-        $$body.data('ve-blocks-events', true);
+        $$body.data('ve.blocks-events', true);
 
         $$body.on('mouseenter', '.blocks', function()
         {
