@@ -467,7 +467,7 @@ class articleModel extends model
         $thread->editedDate  = $thread->addedDate;
         $thread->repliedDate = $thread->addedDate;
 
-        $this->dao->insert(TABLE_THREAD)->data($thread)->autoCheck()->exec();
+        $this->dao->insert(TABLE_THREAD)->data($thread)->autoCheck()->batchCheck($this->config->article->require->forward2Forum, 'notempty')->exec();
             
         $threadID = $this->dao->lastInsertID();
         $thread   = $this->loadModel('thread')->getByID($threadID);

@@ -7,6 +7,7 @@
     <tr>
       <th class='w-100px'><?php echo $lang->article->selectBoard;?></th>
       <td class='w-p40'>
+        <div class='required required-wrapper'></div>
         <?php echo html::select('board', $categories, '', "class='form-control'");?>
       </td><td></td>
     </tr>
