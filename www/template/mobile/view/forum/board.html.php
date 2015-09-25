@@ -11,7 +11,7 @@
  */
 ?>
 <?php include TPL_ROOT . 'common/header.html.php';?>
-<div class='block-region region-top'><?php $this->loadModel('block')->printRegion($layouts, 'forum_board', 'top');?></div>
+<div class='block-region region-top blocks' data-region='forum_board-top'><?php $this->loadModel('block')->printRegion($layouts, 'forum_board', 'top');?></div>
 <div class='panel-section'>
   <?php if(count($threads) > 5 && $this->forum->canPost($board)):?>
   <div class='panel-heading'>
@@ -27,7 +27,7 @@
   <div class='cards cards-list condensed'>
     <?php foreach($sticks as $thread):?>
     <?php $style = $thread->color ? " style='color:{$thread->color}'" : '';?>
-    <a class='card' href='<?php echo $this->createLink('thread', 'view', "id=$thread->id");?>'>
+    <a class='card' href='<?php echo $this->createLink('thread', 'view', "id=$thread->id");?>' data-ve='thread' id='thread<?php echo $thread->id;?>'>
       <div class='table-layout'>
         <div class='table-cell'>
           <div class='card-heading text-danger'><h5<?php echo $style;?>><i class='icon-comment-alt'></i> <?php echo $thread->title;?> [<?php echo $lang->thread->stick?>]</h5></div>
@@ -43,7 +43,7 @@
 
     <?php foreach($threads as $thread):?>
     <?php $style = $thread->color ? " style='color:{$thread->color}'" : '';?>
-    <a class='card' href='<?php echo $this->createLink('thread', 'view', "id=$thread->id");?>'>
+    <a class='card' href='<?php echo $this->createLink('thread', 'view', "id=$thread->id");?>' data-ve='thread' id='thread<?php echo $thread->id;?>'>
       <div class='table-layout'>
         <div class='table-cell'>
           <div class='card-heading<?php if($thread->isNew) echo ' text-success';?>'><h5<?php echo $style;?>><i class='icon-comment-alt'></i> <?php echo $thread->title;?></h5></div>
@@ -63,6 +63,6 @@
     <?php if($this->forum->canPost($board)) echo html::a($this->createLink('thread', 'post', "boardID=$board->id"), '<i class="icon-pencil"></i>&nbsp;&nbsp;' . $lang->forum->post, "class='btn primary block' data-toggle='modal'");?>
   </div>
 </div>
-<div class='block-region region-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'forum_board', 'bottom');?></div>
+<div class='block-region region-bottom blocks' data-region='forum_board-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'forum_board', 'bottom');?></div>
 <?php include TPL_ROOT . 'common/form.html.php'; ?>
 <?php include TPL_ROOT . 'common/footer.html.php';?>

@@ -1,4 +1,4 @@
-<div class='block-region region-all-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'all', 'bottom');?></div>
+<div class='block-region region-all-bottom blocks' data-region='all-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'all', 'bottom');?></div>
 
 <footer  class="appbar fix-bottom">
   <ul class="nav">
@@ -11,6 +11,6 @@
 <?php
 if(isset($pageJS)) js::execute($pageJS);
 ?>
-<div class='block-region region-all-footer hidden'><?php $this->loadModel('block')->printRegion($layouts, 'all', 'footer');?></div>
+<div class='block-region region-all-footer hidden blocks' data-region='all-footer'><?php $this->loadModel('block')->printRegion($layouts, 'all', 'footer');?></div>
 </body>
 </html>

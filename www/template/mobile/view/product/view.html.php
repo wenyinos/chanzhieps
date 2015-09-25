@@ -25,7 +25,8 @@ js::set('goback', $lang->product->goback);
 css::internal($product->css);
 js::execute($product->js);
 ?>
-<div class='block-region region-top'><?php $this->loadModel('block')->printRegion($layouts, 'product_view', 'top');?></div>
+<div class='block-region region-top blocks' data-region='product_view-top'><?php $this->loadModel('block')->printRegion($layouts, 'product_view', 'top');?></div>
+<div id='product' data-id='<?php echo $product->id; ?>'>
 <div class='appheader'>
 <?php if(!empty($product->image->list)):?>
   <?php if(count($product->image->list) > 1): ?>
@@ -176,11 +177,11 @@ foreach($product->attributes as $attribute)
   </section>
   <?php endif;?>
 </div>
-
+</div>
 <?php if(commonModel::isAvailable('message')):?>
 <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=product&objectID={$product->id}");?></div>
 <?php endif;?>
 
-<div class='block-region region-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'product_view', 'bottom');?></div>
+<div class='block-region region-bottom blocks' data-region='product_view-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'product_view', 'bottom');?></div>
 
 <?php include TPL_ROOT . 'common/footer.html.php';?>

@@ -16,15 +16,15 @@ $path = array_keys($category->pathNames);
 js::set('path', $path);
 js::set('categoryID', $category->id);
 ?>
-<div class='block-region region-top'><?php $this->loadModel('block')->printRegion($layouts, 'article_browse', 'top');?></div>
+<div class='block-region blocks region-top' data-region='article_browse-top'><?php $this->loadModel('block')->printRegion($layouts, 'article_browse', 'top');?></div>
 <div class='panel panel-section'>
   <div class='panel-heading'>
     <div class='title'><strong><?php echo $category->name;?></strong></div>
   </div>
-  <div class='cards condensed cards-list'>
+  <div class='cards condensed cards-list' id='articles'>
     <?php foreach($articles as $article):?>
     <?php $url = inlink('view', "id=$article->id", "category={$article->category->alias}&name=$article->alias");?>
-    <a class='card' href='<?php echo $url?>'>
+    <a class='card' href='<?php echo $url?>' id="article<?php echo $article->id?>" data-ve='article'>
       <div class='card-heading'>
         <?php if($article->sticky):?>
         <div class='pull-right'>
@@ -60,6 +60,6 @@ js::set('categoryID', $category->id);
   </div>
 </div>
 
-<div class='block-region region-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'article_browse', 'bottom');?></div>
+<div class='block-region blocks region-bottom' data-region='article_browse-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'article_browse', 'bottom');?></div>
 
 <?php include TPL_ROOT . 'common/footer.html.php';?>

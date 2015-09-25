@@ -15,7 +15,7 @@ include TPL_ROOT . 'common/header.html.php';
 include TPL_ROOT . 'common/files.html.php';
 ?>
 <?php js::set('articleID', $article->id)?>
-<div class='block-region region-top'><?php $this->loadModel('block')->printRegion($layouts, 'book_read', 'top');?></div>
+<div class='block-region region-top blocks' data-region='book_read-top'><?php $this->loadModel('block')->printRegion($layouts, 'book_read', 'top');?></div>
 <div class='appheader'>
   <div class='heading'>
     <h2><?php echo $article->title;?></h2>
@@ -27,7 +27,7 @@ include TPL_ROOT . 'common/files.html.php';
   </div>
 </div>
 
-<div class='panel-section article'>
+<div class='panel-section article' id='book' data-id='<?php echo $article->id?>'>
   <?php if($article->summary):?>
   <section class='abstract hidden bg-gray-pale small with-padding'><strong><?php echo $lang->book->summary;?></strong><?php echo $lang->colon . $article->summary;?></section>
   <?php endif; ?>
@@ -73,5 +73,5 @@ include TPL_ROOT . 'common/files.html.php';
 <?php if(commonModel::isAvailable('message')):?>
 <div id='commentBox'><?php echo $this->fetch('message', 'comment', "objectType=article&objectID={$article->id}");?></div>
 <?php endif;?>
-<div class='block-region region-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'book_read', 'bottom');?></div>
+<div class='block-region region-bottom blocks' data-region='book_read-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'book_read', 'bottom');?></div>
 <?php include TPL_ROOT . 'common/footer.html.php';?>
