@@ -93,7 +93,9 @@ $(function()
                 $themePicker.find('.menu-theme.current').removeClass('current');
                 if($this.hasClass('menu-theme')) $this.addClass('current');
                 messager.success(response.message);
-                setTimeout(function(){window.location.reload();}, 1000);
+
+                if($.updateTheme) $.updateTheme();
+                else setTimeout(function(){window.location.reload();}, 1000);
             }
             else
             {
