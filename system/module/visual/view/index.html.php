@@ -34,7 +34,7 @@ js::set('device', $this->device);
           <?php unset($langs[$clientLang]); ?>
           <?php foreach($langs as $langKey => $currentLang): ?>
           <li>
-            <?php commonModel::printLink('visual', 'index', 'referer=' . getHomeRoot($config->langsShortcuts[$langKey]), $currentLang) ?>
+            <?php echo "<a rel='nofollow' href='javascript:selectLang(\"$langKey\")'>$currentLang</a>"; ?>
           </li>
           <?php endforeach; ?>
         </ul>
