@@ -25,7 +25,6 @@
           <form method='get'>
             <?php echo html::hidden('m', 'stat') . html::hidden('f', 'report');?>
             <?php echo html::hidden('mode', 'fixed');?>
-            <?php echo html::hidden('orderBy', 'pv_desc');?>
             <table class='table table-borderless'>
               <tr>
                 <td style='padding:4px'>
@@ -41,14 +40,13 @@
     </div>
     <strong>&nbsp;</strong>
   </div>
+</div>
+<div class='panel'>
   <table class='table table-hover table-bordered table-striped tablesorter'>
     <thead>
       <tr class='text-center'>
-        <?php $vars = "mode={$mode}&orderBy=%s&begin={$begin}&end={$end}";?>
-        <th class='text-center'><?php echo $lang->stat->page->url;?></th>
-        <th class='w-100px'> <?php commonModel::printOrderLink('pv',  $orderBy, $vars, $lang->stat->pv);?></th>
-        <th class='w-100px'> <?php commonModel::printOrderLink('uv',  $orderBy, $vars, $lang->stat->uv);?></th>
-        <th class='w-100px'> <?php commonModel::printOrderLink('ip',  $orderBy, $vars, $lang->stat->ipCount);?></th>
+        <th class='text-left'><?php echo $lang->stat->page->url;?></th>
+        <th class='w-120px'> <?php echo $lang->stat->pv;?></th>
       </tr>
     </thead>
     <?php $i = 0;?>
@@ -56,12 +54,10 @@
     <?php $i ++;?>
     <tr>
       <td>
-        <label class='label label-info label-badge'><?php echo $i;?></label>
+        <label class='w-30px'><?php echo $i;?></label>
         <?php echo html::a($page->item, $page->item);?>
       </td>
       <td class='w-100px text-center'><?php echo $page->pv;?></td>
-      <td class='w-100px text-center'><?php echo $page->uv;?></td>
-      <td class='w-100px text-center'><?php echo $page->ip;?></td>
     </tr>
     <?php endforeach;?>
   </table>
