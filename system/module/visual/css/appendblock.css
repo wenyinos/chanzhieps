@@ -1,4 +1,7 @@
-.row-main > .col {padding: 0 15px;}
-.row-main > .col > h4 {padding: 5px 0}
+.nav-tabs {margin-bottom: 10px;}
+.nav-tabs > li.active > a {color: #347aeb}
+.nav-blocks > li {float: left; width: 200px; margin-right: 8px;}
 .nav-blocks > li > a {border: 1px solid #ddd; margin-bottom: 8px; border-radius: 2px}
-.nav-blocks > li > a:hover {border-color: #347aeb;}
+.nav-blocks > li > a > strong {font-weight: 500;}
+.nav-blocks > li > a > small {display: block; color: #aaa}
+.nav-blocks > li > a:hover {border-color: #347aeb; background-color: #ebf2f9}
