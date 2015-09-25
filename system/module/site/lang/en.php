@@ -135,6 +135,8 @@ $lang->site->moduleAvailable['forum']   = 'Forum';
 $lang->site->moduleAvailable['message'] = 'Message';
 $lang->site->moduleAvailable['search']  = 'Search';
 $lang->site->moduleAvailable['shop']    = 'Shop';
+$lang->site->moduleAvailable['score']   = 'Score';
+$lang->site->moduleAvailable['stat']    = 'Statistics';
 
 $lang->site->metaHolder       = 'Tags, like <meta>, <script>, <style>, <link>, is accepted.';
 $lang->site->fileAllowedRole  = 'Use "," to divide different extension name.';
