@@ -68,6 +68,7 @@ $lang->site->oauthHelp     = "Help";
 $lang->site->setRecPerPage = "Record per page";
 $lang->site->useLocation   = "Use current Location";
 $lang->site->changeSetting = "Change settings";
+$lang->site->setStat       = "Stats Settings";
 
 $lang->site->typeList = new stdclass();
 $lang->site->typeList->portal = 'Portal';
@@ -124,6 +125,9 @@ $lang->site->frontList['guest'] = "Needn't login";
 $lang->site->mobileTemplateList['open']  = 'Open';
 $lang->site->mobileTemplateList['close'] = 'Close';
 
+$lang->site->scoreList['open']  = 'Open';
+$lang->site->scoreList['close'] = 'Close';
+
 $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = 'Member';
 $lang->site->moduleAvailable['article'] = 'Article';
@@ -147,6 +151,7 @@ $lang->site->wrongAllowedIP   = 'Wrong IP';
 $lang->site->changeLocation   = 'Your current login location not in allowed location.';
 $lang->site->sessionIpTip     = 'If opened login ip would be checked.';
 $lang->site->schemeTip        = 'Redirect all request to this scheme.';
+$lang->site->saveDaysTip      = "The access logs' save day must be a positive number.";
 
 $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Can not write robots file, please make sure %s writeable first.';

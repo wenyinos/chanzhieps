@@ -61,9 +61,10 @@ $lang->order->finishWarning        = "Make sure to finish this order?";
 $lang->order->noProducts           = "No products in order";
 $lang->order->lowStocks            = "<strong>%s</strong>Inventory shortage ";
 
-$lang->order->alipayPid = 'Partner ID';
-$lang->order->alipayKey = 'Partner KEY';
+$lang->order->alipayPid   = 'Partner ID';
+$lang->order->alipayKey   = 'Partner KEY';
 $lang->order->alipayEmail = 'Alipay Email';
+$lang->order->score       = 'Score Recharge';
 
 $lang->order->placeholder = new stdclass();
 $lang->order->placeholder->pid = 'Corporate identity to ID, 16 pure number begin with 2088.';
