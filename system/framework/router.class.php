@@ -766,7 +766,7 @@ class router
         }
         elseif(RUN_MODE == 'front')
         {
-            if(strpos($this->server->http_referer, 'm=visual') !== false and $_COOKIE['adminLang']) 
+            if(strpos($this->server->http_referer, 'm=visual') !== false and !empty($_COOKIE['adminLang'])) 
             {
                 $this->clientLang = $_COOKIE['adminLang'];
             }
