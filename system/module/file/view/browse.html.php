@@ -1,7 +1,4 @@
 <?php include TPL_ROOT . 'common/header.modal.html.php';?>
-<?php if(commonModel::isAvailable('score')):?>
-<form id='ajaxForm' method='post' action='<?php echo inlink('score')?>'>
-<?php endif;?>
 <table class='table table-bordered'>
   <thead>
     <tr>
@@ -12,9 +9,6 @@
       <th class='text-center'><?php echo $lang->file->addedBy;?></th>
       <th class='text-center'><?php echo $lang->file->addedDate;?></th>
       <th class='text-center'><?php echo $lang->file->downloads;?></th>
-      <?php if(commonModel::isAvailable('score')):?>
-      <th class='text-center'><?php echo $lang->file->score;?></th>
-      <?php endif;?>
       <th class='text-center'><?php echo $lang->actions;?></th>
     </tr>          
   </thead>
@@ -40,9 +34,6 @@
       <td><?php echo $file->addedBy;?></td>
       <td><?php echo $file->addedDate;?></td>
       <td><?php echo $file->downloads;?></td>
-      <?php if(commonModel::isAvailable('score')):?>
-      <td><?php echo html::input("scores[{$file->id}]", $file->score, 'size=2');?></td>
-      <?php endif;?>
       <td>
       <?php
       echo html::a(inlink('edit',   "id=$file->id"), $lang->edit, "class='edit'");
@@ -52,15 +43,9 @@
       </td>
     </tr>
     <?php endforeach;?>
-    <?php if(commonModel::isAvailable('score')):?>
-    <tr><td colspan='9'><?php echo html::submitButton($lang->file->setScore);?></td></tr>
-    <?php endif;?>
   </tbody>
 
 </table>
-<?php if(commonModel::isAvailable('score')):?>
-</form>
-<?php endif;?>
 <form id="fileForm" method='post' enctype='multipart/form-data' action='<?php echo inlink('upload', "objectType=$objectType&objectID=$objectID");?>'>
   <table class='table table-form'>
     <?php if($writeable):?>
