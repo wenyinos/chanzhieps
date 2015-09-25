@@ -766,14 +766,21 @@ class router
         }
         elseif(RUN_MODE == 'front')
         {
-            $flipedLangs = array_flip($this->config->langsShortcuts);
-            if($this->config->requestType == 'GET' and isset($_GET[$this->config->langVar])) $this->clientLang = $flipedLangs[$_GET[$this->config->langVar]];
-            if($this->config->requestType == 'PATH_INFO')
+            if(strpos($this->server->http_referer, 'm=visual') !== false and $_COOKIE['adminLang']) 
             {
-                $pathInfo = $this->getPathInfo('PATH_INFO');
-                foreach($this->config->langsShortcuts as $language => $code)
+                $this->clientLang = $_COOKIE['adminLang'];
+            }
+            else
+            {
+                $flipedLangs = array_flip($this->config->langsShortcuts);
+                if($this->config->requestType == 'GET' and isset($_GET[$this->config->langVar])) $this->clientLang = $flipedLangs[$_GET[$this->config->langVar]];
+                if($this->config->requestType == 'PATH_INFO')
                 {
-                    if(strpos(trim($pathInfo, '/'), $code) === 0) $this->clientLang = $language;
+                    $pathInfo = $this->getPathInfo('PATH_INFO');
+                    foreach($this->config->langsShortcuts as $language => $code)
+                    {
+                        if(strpos(trim($pathInfo, '/'), $code) === 0) $this->clientLang = $language;
+                    }
                 }
             }
         }

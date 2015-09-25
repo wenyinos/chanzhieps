@@ -11,6 +11,7 @@ js::set('visualStyle', $themeRoot . 'common/visual.css');
 js::set('jQueryUrl', $jsRoot . 'jquery/min.js');
 js::set('visualBlocks', $blocks);
 js::set('debug', $config->debug);
+js::set('device', $this->device);
 ?>
 <div class='navbar navbar-fixed-top' id='visualPanel'>
   <div class='container' id='menu'>

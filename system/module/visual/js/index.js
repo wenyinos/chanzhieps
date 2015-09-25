@@ -1,5 +1,7 @@
 (function(window, $)
 {
+    $.cookie('visualDevice', v.device, {expires:config.cookieLife, path:config.webRoot});
+
     'use strict';
 
     var DEBUG = window.v.debug;
