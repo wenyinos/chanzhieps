@@ -2,23 +2,35 @@
 $lang->stat->common   = 'Statistics';
 $lang->stat->view     = 'View';
 $lang->stat->traffic  = 'Traffic Stats';
+$lang->stat->report   = 'Detailed Report';
 $lang->stat->client   = 'Client Stats';
 $lang->stat->device   = 'Type of Device';
 $lang->stat->os       = 'Operating System(OS)';
 $lang->stat->browser  = 'Browsers';
 $lang->stat->from     = 'Sources Stats';
 $lang->stat->keywords = 'Keywords Stats';
+$lang->stat->keyword  = 'Keyword';
 $lang->stat->outSite  = 'Came from Stats';
 $lang->stat->search   = 'Search Engine Stats';
+$lang->stat->domain   = 'Antecedents Domain';
+$lang->stat->link     = 'Link';
 $lang->stat->today    = 'Today';
 $lang->stat->yestoday = 'Yestoday';
 $lang->stat->pv       = 'Page Views(PV)';
 $lang->stat->uv       = 'Unique visits(UV)';
 $lang->stat->ipCount  = 'IP Counts';
+$lang->stat->totalPV       = 'Total PV';
+$lang->stat->searchEngine  = 'Search Engine';
+$lang->stat->keywordReport = 'KeywordReport';
+$lang->stat->domainList    = 'Antecedents Domain List';
+$lang->stat->domainTrend   = 'Trend';
+$lang->stat->domainPage    = 'Page';
+$lang->stat->percentage    = 'Percentage';
 
 $lang->stat->all   = 'All Data';
 $lang->stat->begin = 'Start Date';
 $lang->stat->end   = 'End Date';
+$lang->stat->date  = 'Date';
 
 $lang->stat->noData    = 'No Data';
 $lang->stat->dateError = 'Date Error';
@@ -45,3 +57,7 @@ $lang->stat->dataTypes = new stdclass();
 $lang->stat->dataTypes->pv = 'Page Views(PV)';
 $lang->stat->dataTypes->uv = 'Unique Visits(UV)';
 $lang->stat->dataTypes->ip = 'IP Counts';
+
+$lang->stat->page = new stdclass();
+$lang->stat->page->common = 'Page View';
+$lang->stat->page->url    = 'Page URL';
