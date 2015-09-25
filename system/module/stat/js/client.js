@@ -1,5 +1,6 @@
 $(document).ready(function()
 {
+    $('#typeMenu [href*=' + v.type  + '] ').parent().addClass('active');
     var options = { scaleShowLabels: true, scaleLabel: "<%=label%> \: <%=value%>",};
     if(v.pieCharts) chart = $('#pieChart').pieChart(v.pieCharts.pv, options);
     $('#switchBar label').click(function()

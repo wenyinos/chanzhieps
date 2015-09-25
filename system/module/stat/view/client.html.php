@@ -23,12 +23,12 @@
       <ul class='nav nav-tabs'>
         <?php foreach($lang->stat->trafficModes as $code => $modeName):?>
         <?php $class = $mode == $code ? "class='active'" : '';?>
-        <li <?php echo $class?>><?php echo html::a(inlink($type, "&mode=$code"), $modeName);?></li>
+        <li <?php echo $class?>><?php echo html::a(inlink('report', "type={$type}&mode=$code"), $modeName);?></li>
         <?php endforeach;?>
         <li>
           <form method='get'>
-            <?php echo html::hidden('m', 'stat');?>
-            <?php echo  html::hidden('f', $type);?>
+            <?php echo html::hidden('m', 'stat') . html::hidden('f', 'client');?>
+            <?php echo  html::hidden('type', $type);?>
             <?php echo html::hidden('mode', 'fixed');?>
             <table class='table table-borderless'>
               <tr>
@@ -45,10 +45,16 @@
     </div>
     <strong>&nbsp; </strong>
   </div>
-  <?php if(!empty($lineCharts)) include 'linechart.html.php';?>
   <?php if(!empty($pieCharts)):?>
   <div class='panel-body'>
     <div class='col-md-6'>
+      <ul id='typeMenu' class='nav nav-pills pull-right'>
+        <?php
+        echo "<li>" . html::a(inlink('client', "type=browser"), $lang->stat->browser, "class='w-p100'") . '</li>';
+        echo '<li>' . html::a(inlink('client', "type=os"), $lang->stat->os,           "class='w-p100'") . '</li>';
+        echo '<li>' . html::a(inlink('client', "type=device"), $lang->stat->device,   "class='w-p100'") . '</li>';
+        ?>
+      </ul>
       <div class='chart-canvas'><canvas height='260' width='400' id='pieChart'></canvas></div>
       <div class='text-center w-400px' id='switchBar'>
         <label data-type='pv' class='active'> <?php echo $lang->stat->pv;?></label>

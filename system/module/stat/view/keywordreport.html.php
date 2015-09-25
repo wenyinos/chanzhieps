@@ -16,13 +16,9 @@
 <?php js::set('lineLabels', $labels);?>
 <?php js::set('lineChart', $keywordLine);?>
 <?php js::set('pieCharts', $pieCharts);?>
-<div class='panel'>
-  <div class="panel-heading">
-    <strong>
-      <i class='icon icon-bar-chart'></i> <?php echo $lang->stat->keywords;?>
-    </strong>
-    <label class='text-important'><?php echo $keyword?></label>
-    <div class="panel-actions">
+<div class='panel pd-l0'>
+  <div class="panel-heading pd-l0">
+    <div class="panel-actions pull-left">
       <ul class='nav nav-tabs'>
         <li <?php echo $mode == 'all' ? "class='active'" : '' ?>><?php echo html::a(inlink('page', "mode=all"), $lang->stat->all);?></li>
         <?php foreach($lang->stat->trafficModes as $code => $modeName):?>
@@ -45,6 +41,7 @@
         </li>
       </ul>
     </div>
+    <strong>&nbsp; </strong>
   </div>
   <?php if(!empty($keywordLine)):?>
   <div class='chart-canvas'><canvas height='260' width='900' id='lineChart'></canvas></div>
