@@ -37,7 +37,7 @@ $lang->score->dayRank   = '日排行榜';
 
 $lang->score->methods['register'] = '注册';
 $lang->score->methods['login']    = '登录';
-$lang->score->methods['maxlogin'] = '登录获得积分上线';
+$lang->score->methods['maxlogin'] = '每日登录获得积分上限';
 $lang->score->methods['download'] = '下载';
 
 $lang->score->methods['thread']      = '发贴';

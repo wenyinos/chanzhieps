@@ -2,11 +2,15 @@
 <div class='row'>
   <?php include TPL_ROOT . 'user/side.html.php';?>
   <div class='col-md-10'>
-    <div class='panel'>
+    <div class='panel-section'>
+      <div class='panel-heading'><?php echo html::a($this->createLink('score', 'buyScore'), $lang->user->buyScore, "class='btn primary block' data-toggle='modal'")?></div>
+      <div class='panel-heading'>
+        <strong class='red'><?php printf($lang->score->lblTotal, $user->score, $user->rank);?></strong>
+      </div>
+      <div class='panel-body'>
       <table class='table table-hover table-striped'>
         <thead>
           <tr>
-            <th class='w-80px'><?php echo $lang->score->id;?></th>
             <th class='w-100px'><?php echo $lang->score->time;?></th>
             <th class='w-150px'><?php echo $lang->score->method;?></th>
             <th class='w-150px'><?php echo $lang->score->count;?></th>
@@ -18,7 +22,6 @@
         <tbody>
           <?php foreach($scores as $score):?>
           <tr>
-            <th><?php echo $score->id;?></th>
             <?php $score->time = substr($score->time,0,10);?>
             <td><?php echo $score->time;?></td>
             <td><?php echo $lang->score->methods[$score->method];?></td>
@@ -30,16 +33,12 @@
           <?php endforeach;?>
         </tbody>
         <tfoot>
-          <tr>
-            <td colspan='4'>
-              <strong class='red'><?php printf($lang->score->lblTotal, $user->score, $user->rank);?></strong>
-              <?php if(strpos($this->config->shop->payment, 'alipay') !== false) echo html::a($this->createLink('score', 'buyScore'), $this->lang->user->buyScore, "class='btn'");?>
-            </td>
-            <td colspan='4' class='a-right'><?php $pager->show();?></td>
-          </tr>
+          <tr><td colspan='8' class='a-right'><?php $pager->show('justify');?></td></tr>
         </tfoot>
       </table>
+      </div>
     </div>
   </div>
 </div>
+<?php include TPL_ROOT . 'common/form.html.php'; ?>
 <?php include TPL_ROOT . 'common/footer.html.php';?>

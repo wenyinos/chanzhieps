@@ -125,7 +125,7 @@ class statModel extends model
      */
     public function getPieByType($type, $begin, $end, $groupBy = 'item')
     {
-        $charts    = array();
+        $charts  = array();
         $reports = $this->dao->select('*, sum(ip) as ip, sum(pv) as pv, sum(uv) as uv')->from(TABLE_STATREPORT)
             ->where('type')->eq($type)
             ->andWhere('timeType')->eq('day')
@@ -157,59 +157,6 @@ class statModel extends model
             $ip->value = $report->ip;
             $ip->color = $color[$item];
             $ip->label = zget($this->lang->stat->itemList, $item);
-
-            $charts['pv'][] = $pv;
-            $charts['uv'][] = $uv;
-            $charts['ip'][] = $ip;
-        }
-
-        return $charts;
-    }
-
-    /**
-     * Get searchengine pie chart data.
-     * 
-     * @param  int    $begin 
-     * @param  int    $end 
-     * @access public
-     * @return void
-     */
-    public function getsearchPie($begin, $end)
-    {
-        $charts    = array();
-        $reports = $this->dao->select('*, sum(ip) as ip, sum(pv) as pv, sum(uv) as uv')->from(TABLE_STATREPORT)
-            ->where('type')->eq('search')
-            ->andWhere('timeType')->eq('day')
-            ->beginIf($begin != '')->andWhere('timeValue')->ge($begin)->fi()
-            ->beginIf($end != '')->andWhere('timeValue')->le($end)->fi()
-            ->groupBy('item')
-            ->fetchAll('item');
-
-        $colors = $this->config->stat->chartColors;
-        $this->loadModel('log');
-        
-        $i = 0;       
-        foreach($reports as $searchEngine => $report)
-        {
-            $color[$searchEngine] = isset($color[$searchEngine]) ? $color[$searchEngine] : $colors[$i];
-            $i ++;
-
-            if(!isset($this->config->searchEngine->params[$searchEngine])) continue;
-
-            $pv = new stdclass();
-            $pv->value = $report->pv;
-            $pv->color = $color[$searchEngine];
-            $pv->label = $report->item;
-
-            $uv = new stdclass();
-            $uv->value = $report->uv;
-            $uv->color = $color[$searchEngine];
-            $uv->label = $report->item;
-
-            $ip = new stdclass();
-            $ip->value = $report->ip;
-            $ip->color = $color[$searchEngine];
-            $ip->label = $report->item;
 
             $charts['pv'][] = $pv;
             $charts['uv'][] = $uv;
@@ -272,29 +219,33 @@ class statModel extends model
             ->andWhere('timeType')->eq('day')
             ->andWhere('timeValue')->ge($begin)
             ->andWhere('timeValue')->le($end)
+            ->groupBy('concat(item, extra)')
+            ->orderBy($orderBy)
+            ->page($pager)
+            ->fetchGroup('item', 'extra');
+    }
+
+    /**
+     * Get keywords list.
+     * 
+     * @param  int       $begin 
+     * @param  int       $end 
+     * @param  string    $orderBy 
+     * @param  object    $pager 
+     * @access public
+     * @return void
+     */
+    public function getDomainList($begin, $end, $orderBy, $pager)
+    {
+        return $this->dao->select('*, sum(pv) as pv, sum(uv) as uv, sum(ip) as ip')->from(TABLE_STATREPORT)
+            ->where('type')->eq('domain')
+            ->andWhere('timeType')->eq('day')
+            ->andWhere('timeValue')->ge($begin)
+            ->andWhere('timeValue')->le($end)
             ->groupBy('item')
             ->orderBy($orderBy)
             ->page($pager)
             ->fetchAll('item');
-    }
-
-    /**
-     * Set searchengine traffic grouped by serachengine.
-     * 
-     * @param  int       $begin 
-     * @param  int       $end 
-     * @access public
-     * @return array
-     */
-    public function getSearchTraffic($begin, $end)
-    {
-         return $this->dao->select('*, sum(pv) as pv, sum(uv) as uv, sum(ip) as ip')->from(TABLE_STATREPORT)
-            ->where('type')->eq('keywords')
-            ->andWhere('timeValue')->ge($begin)
-            ->andWhere('timeValue')->le($end)
-            ->andWhere('timeType')->eq('day')
-            ->groupBy('extra')
-            ->fetchAll('extra');
     }
 
     /**
@@ -464,19 +415,5 @@ class statModel extends model
             $charts['ip'][] = $ip;
         }
         return $charts;
-    }
-
-    /**
-     * Get search engines.
-     * 
-     * @access public
-     * @return array
-     */
-    public function getSearchEngines()
-    {
-        return $this->dao->select('*,extra as searchEngine')->from(TABLE_STATREPORT)
-            ->where('type')->eq('keywords')
-            ->andWhere('extra')->ne('')
-            ->fetchAll('extra');
     }
 }

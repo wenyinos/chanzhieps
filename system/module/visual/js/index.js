@@ -8,6 +8,7 @@
     var lang = $.extend(window.v.visualLang, window.v.lang, {blocks: window.v.visualBlocks});
     var visualPageUrl = visualPage.src;
     var visuals = window.v.visuals;
+    var visualsLang = window.v.visualsLang;
     var DEFAULT_ACTIONS_CONFIG =
     {
         edit: {icon: 'pencil', text: lang.actions.edit},
@@ -102,7 +103,7 @@
     // visual settings
     $.each(visuals, function(name, setting)
     {
-        setting = $.extend(true, {code: name}, DEFAULT_CONFIG, $.isPlainObject(setting) ? setting : {name: setting});
+        setting = $.extend(true, {code: name}, DEFAULT_CONFIG, $.isPlainObject(setting) ? setting : {name: setting}, visualsLang[name]);
         $.each(setting.actions, function(actionName, action)
         {
             var actionSetting;
@@ -288,15 +289,15 @@
             if(!title)
             {
                 if(isCarousel) title = lang.carousel;
-                else if(isRow) title = lang.subRegion + ' #' + blockID;
-                else title = $.trim($ve.children('.panel-heading').children().first().text()) || (visuals.block.name + ' #' + blockID);
+                else if(isRow) title = lang.subRegion + '#' + blockID;
+                else title = '';
             }
 
             $veMain.data(
             {
                 ve    : 'block',
                 id    : blockID,
-                title : '[' + title + ']'
+                title : title
             });
         }
         else
@@ -499,7 +500,7 @@
                     var $row = $ve.parent();
                     if($row.data('veInit')) return;
 
-                    $ve.append('<div class="ve-block-actions ve-actions-bar ve-preview-hidden"><ul class="nav"><li><button data-title="' + $ve.data('title') + '" data-parent="' + $ve.data('id') + '" type="button" class="btn btn-block btn-ve ve-action-addblock"><i class="icon icon-plus"></i> ' + lang.addSubBlock + '</button></li></ul></div>');
+                    $ve.append('<div class="ve-block-actions ve-actions-bar ve-preview-hidden"><ul class="nav"><li><button data-title="' + $ve.data('title') + '" data-parent="' + $ve.data('id') + '" type="button" class="btn btn-block btn-ve ve-action-addcontent"><i class="icon icon-plus"></i> ' + lang.addContent + '</button></li></ul></div>');
                 }
             });
 
@@ -561,20 +562,19 @@
                   finish: function(e)
                   {
                       var orders = [];
+                      console.log(e.list);
                       $.each(e.list, function()
                       {
-                          var $item = $$(this).children('.ve');
-                          var id = $item.data('id');
-                          if($item.hasClass('row')) id = '[' + id + ']';
-                          orders.push(id);
+                          var $item = $$(this);
+                          if(withGrid) $item = $item.children('.ve');
+                          orders.push($item.data('id'));
                       });
 
                       sortBlocks($blocksHolder, orders);
                   }
             });
 
-            var actionsBar = '<div class="ve-block-actions ve-actions-bar ve-preview-hidden"><ul class="nav"><li><button type="button" class="btn btn-block btn-ve ve-action-addblock"><i class="icon icon-plus"></i> ' + lang.addBlock + '</button></li>';
-            if(withGrid) actionsBar += '<li style="width: 35%"><button type="button" class="btn btn-block btn-ve ve-action-addregion"><i class="icon icon-plus-sign"></i> ' + lang.addSubRegion + '</button></li>';
+            var actionsBar = '<div class="ve-block-actions ve-actions-bar ve-preview-hidden"><ul class="nav"><li><button type="button" class="btn btn-block btn-ve ve-action-addcontent" data-grid="' + withGrid + '"><i class="icon icon-plus"></i> ' + lang.addContent + '</button></li>';
             actionsBar += '</ul><ul class="breadcrumb"><li>' + lang.blocks.pages[page] + '</li><li>' + lang.blocks.regions[page][location] + '</li></ul></div>'
 
             $blocksHolder.append(actionsBar);
@@ -584,31 +584,22 @@
         if($$body.data('ve-blocks-events')) return;
         $$body.data('ve-blocks-events', true);
 
-        $$body.on('mouseenter', '.ve-block-actions', function()
+        $$body.on('mouseenter', '.blocks', function()
         {
             $$(this).closest('.blocks').addClass('ve-show-border-in');
         }).on('mouseleave', '.ve-show-border-in', function()
         {
             $$(this).closest('.blocks').removeClass('ve-show-border-in');
-        }).on('click', '.ve-action-addblock', function()
+        }).on('click', '.ve-action-addcontent', function()
         {
-            var name = 'block';
-            var setting = visuals[name];
-            var action = setting.actions.add;
             var $btn = $$(this);
-            var $blocksHolder = $btn.closest('.blocks').addClass('ve-editing');
-            var options = $.extend({parent: 0}, setting, $blocksHolder.data(), $btn.data());
-            openModal(createActionLink(setting, action, options),
-            {
-                width : action.width || setting.width,
-                icon  : action.icon || 'plus',
-                title : (action.title || (action.text + ' ' + setting.name)).format(options)
-            });
-        }).on('click', '.ve-action-addregion', function()
-        {
-            var $blocksHolder = $$(this).closest('.blocks').addClass('ve-editing');
-            var options = $blocksHolder.data();
-            addBlock(options.page, options.region, 'region');
+            var $blocksHolder = $btn.closest('.blocks');
+            var options = $.extend({parent: 0}, $blocksHolder.data(), $btn.data());
+            if(options.parent) options.title = $blocksHolder.data('title') + '-' + options.title;
+            var $modal = $('#addContentModal');
+            $modal.find('.ve-btn-addcontent[data-type="region"]').toggleClass('hidden', options.grid !== true);
+            $modal.find('.modal-title').text(lang.addContentTo.format(options.title));
+            $modal.data('options', options).modal('show');
         }).on('mousedown', '.ve-resize-handler', function(e)
         {
             var $ve = $$(this).closest('.ve');
@@ -695,7 +686,12 @@
         {
             $ve.replaceWith($wrapper.find(selector));
             initVisualAreas();
-            if(isBlocks) setTimeout(function(){tidyBlocks($$(selector));}, 100);
+            if(isBlocks) setTimeout(function()
+            {
+                var $area = $$(selector);
+                tidyBlocks($area);
+                $area.find('[data-toggle="tooltip"]').tooltip('hide');
+            }, 100);
             showMessage(data.message || lang.saved, 'success');
         });
     };
@@ -869,6 +865,43 @@
         }
         catch(e){}
     };
+
+    $(document).on('click', '.ve-btn-addcontent', function()
+    {
+        var type = $(this).data('type');
+        var options = $('#addContentModal').modal('hide').data('options');
+        var setting = visuals['block'];
+        var actionFunc;
+
+        if(type === 'add')
+        {
+            actionFunc = function()
+            {
+                var action = setting.actions.add;
+                openModal(createActionLink(setting, action, options),
+                {
+                    width : action.width || setting.width,
+                    icon  : action.icon || 'plus',
+                    title : (action.title || (action.text + ' ' + setting.name)).format(options)
+                });
+            };
+        }
+        else if(type === 'region')
+        {
+            actionFunc = function()
+            {
+                addBlock(options.page, options.region, 'region');
+            };
+        }
+        else if(type === 'create')
+        {
+            actionFunc = function()
+            {
+                createBlock(options.page, options.region, options.parent);
+            }
+        }
+        setTimeout(actionFunc, 200);
+    });
 
     $('#visualPreviewBtn').on('mouseenter', function()
     {

@@ -1,9 +1,4 @@
 <?php include "header.html.php"; ?>
-<?php
-echo html::a('###', "<i class='icon icon-plus'> </i>" . $lang->visual->createBlock, "class='btn btn-primary' id='createBlockBtn'");
-commonModel::printLink('block', 'admin', '', "<i class='icon icon-cog'> </i>" . $lang->visual->manageBlock, "class='btn' target='_blank'");
-?>
-<hr>
 <div class='row row-main'>
   <?php foreach($config->block->categoryList as $category => $blockList):?>
   <div class='col col-xs-3'>

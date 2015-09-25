@@ -117,6 +117,8 @@ $config->dependence->order[]   = 'user';
 $config->dependence->search[]  = 'search';
 $config->dependence->score[]   = 'score';
 $config->dependence->score[]   = 'user';
+$config->dependence->stat[]    = 'stat';
+$config->dependence->log[]     = 'stat';
 
 /* Database settings. */
 $config->db = new stdclass();          

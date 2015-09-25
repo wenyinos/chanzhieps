@@ -14,7 +14,7 @@
 <?php js::set('score', commonModel::isAvailable('score'));?>
 <?php js::set('setCounts', $lang->site->setCounts);?>
 <div class='panel'>
-  <div class='panel-heading'><strong><i class='icon-globe'></i> <?php echo $lang->site->setLog;?></strong></div>
+  <div class='panel-heading'><strong><i class='icon-globe'></i> <?php echo $lang->site->setStat;?></strong></div>
   <div class='panel-body'>
     <form method='post' id='ajaxForm' class='form-inline'>
       <table class='table table-form'>

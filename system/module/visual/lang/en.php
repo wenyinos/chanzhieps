@@ -4,92 +4,90 @@
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPLV1 (http://www.chanzhi.org/license/)
- * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
+ * @author      Hao Sun <sunhao@cnezsoft.com>
  * @package     site
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
 
-$lang->visual->common  = "Visible Edit";
+$lang->visual->common  = "Visual edit mode";
 
-$lang->visual->info              = "Edit Mode";
-$lang->visual->preview           = "Preview";
-$lang->visual->exit              = "Exit";
-$lang->visual->exitVisualEdit    = "Exit Visible Edit";
-$lang->visual->customTheme       = "Custom Theme";
-$lang->visual->admin             = "Admin";
-$lang->visual->reload            = 'Reload';
-$lang->visual->openInNewWindow   = 'Open in A New Window';
+$lang->visual->info               = "Edit mode";
+$lang->visual->preview            = "Preview";
+$lang->visual->exit               = "Exit";
+$lang->visual->exitVisualEdit     = "Exit visual edit mode";
+$lang->visual->customTheme        = "Custom theme";
+$lang->visual->admin              = "Admin";
+$lang->visual->reload             = 'Reload';
+$lang->visual->createBlock        = 'Create block';
+$lang->visual->manageBlock        = 'Manage blocks';
+$lang->visual->openInNewWindow    = 'Open current page in new window(or tab)';
+$lang->visual->editpowerbycontent = "<p>ChanzhiEps is free, according to our <a href='http://www.chanzhi.org/book/chanzhieps/58_license.html' target='_blank'>license</a>, you should buy our commercial license to chanzhi mark.</p><hr><div class='text-center'><a class='btn btn-success' href='http://www.chanzhi.org/vip/25_vip-support.html' target='_blank'>Learn more about commercial license <i class='icon-arrow-right'></i></a></div>";
 
-$lang->visual->jsLang = new stdclass();
-$lang->visual->jsLang->saved              = $lang->saveSuccess;
-$lang->visual->jsLang->deleted            = $lang->deleteSuccess;
-$lang->visual->jsLang->preview            = 'Preview';
-$lang->visual->jsLang->exitPreview        = 'Exit Preview';
-$lang->visual->jsLang->removeBlock        = 'Remove Block';
-$lang->visual->jsLang->invisible          = 'Invisible';
-$lang->visual->jsLang->carousel           = 'Carousel';
-$lang->visual->jsLang->operateFail        = 'Failed';
-$lang->visual->jsLang->addBlock           = 'Add Block';
-$lang->visual->jsLang->addSubRegion       = 'Add Region Block';
-$lang->visual->jsLang->addSubBlock        = 'Add Sub Block';
-$lang->visual->jsLang->subRegion          = 'Region Block';
-$lang->visual->jsLang->alreadyLastSlide   = 'Already Last Slide';
-$lang->visual->jsLang->alreadyFirstSlide  = 'Already First Slide';
-$lang->visual->jsLang->slideOrder         = 'Playing Order';
-$lang->visual->jsLang->gridWidth          = 'Grid Width';
-$lang->visual->jsLang->actions            = array('edit' => 'Edit', 'delete' => 'Delete', 'move' => 'Move', 'add' => 'Add');
+$lang->visual->js = new stdclass();
+$lang->visual->js->saved              = $lang->saveSuccess;
+$lang->visual->js->deleted            = $lang->deleteSuccess;
+$lang->visual->js->preview            = 'Preview';
+$lang->visual->js->exitPreview        = 'Exit preview';
+$lang->visual->js->removeBlock        = 'Remove block';
+$lang->visual->js->invisible          = 'Invisible';
+$lang->visual->js->carousel           = 'Carousel';
+$lang->visual->js->operateFail        = 'Failed!';
+$lang->visual->js->addContent         = 'Append content...';
+$lang->visual->js->addContentTo       = 'Append content to 【{0}】';
+$lang->visual->js->createBlock        = 'Create block';
+$lang->visual->js->addSubRegion       = 'Add subregion';
+$lang->visual->js->addBlock           = 'Add block';
+$lang->visual->js->subRegion          = 'Subregion';
+$lang->visual->js->alreadyLastSlide   = 'Already last';
+$lang->visual->js->alreadyFirstSlide  = 'Already first';
+$lang->visual->js->slideOrder         = 'Current play order';
+$lang->visual->js->gridWidth          = 'Grid value';
+$lang->visual->js->actions            = array('edit' => 'Edit', 'delete' => 'Delete', 'move' => 'Move', 'add' => 'Add');
 
-$lang->visual->config                   = new stdclass();
-$lang->visual->config->logo             = array('name' => "Logo/Name",    'width' => 900, 'module' => 'visual', 'method' => 'editlogo');
-$lang->visual->config->slogan           = array('name' => "Slogan",       'width' => 700, 'module' => 'visual', 'method' => 'editslogan');
-$lang->visual->config->powerby          = array('name' => "Chanzhi Logo", 'title' => 'Remove Chanzhi Logo', 'width' => 600, 'actions' => array('edit' => array('icon' => 'info-sign', 'text' => 'Remove Chanzhi Logo', 'module' => 'visual', 'method' => 'editpowerby')));
-$lang->visual->config->company        = array('name' => "Company Information", 'width' => 900, 'actions' => array('edit' => array('text'   => 'Edit Company Information', 'method' => 'setbasic', 'params' => 'display=content')));
-$lang->visual->config->companyName    = array('name' => "Company Name",        'width' => 900, 'actions' => array('edit' => array('module' => 'company', 'method' => 'setbasic', 'params' => 'display=name')));
-$lang->visual->config->companyDesc    = array('name' => "Company Profiles",    'width' => 900, 'actions' => array('edit' => array('module' => 'company', 'method' => 'setbasic', 'params' => 'display=desc')));
-$lang->visual->config->companyContact = array('name' => "Contact Information", 'width' => 900, 'actions' => array('edit' => array('module' => 'company', 'method' => 'setcontact')));
-$lang->visual->config->links    = array('name'   => "Friendship Chain",        'width' => 900, 'actions' => array('edit' => array('module' => 'links', 'method' => 'admin')));
-$lang->visual->config->navbar   = array('name'   => "Navigation", 'width' => 1200, 'params' => 'type={type}', 'module' => 'nav', 'actions' => array('edit' => array('method' => 'admin')));
-$lang->visual->config->carousel = array('hidden' => 'true',     'module' => 'slide', 'actions' => array('edit' => false),
-                                        'groupActions' => array('add'    => array('icon' => 'plus',        'text' => 'Add One Slide', 'method' => 'create', 'params' => 'groupID={id}')),
-                                        'itemActions'  => array('edit'   => array('icon' => 'pencil',      'text' => 'Edit',    'title' => 'Edit Slides', 'method' => 'edit',     'params' => 'id={id}'),
-                                                                'delete' => array('icon' => 'remove',      'text' => 'Remove', 'method' => 'delete',      'params' => 'id={id}', 'confirm' => 'Are you sure to delete this slide?'),
-                                                                'up'     => array('icon' => 'arrow-left',  'text' => 'Playing Order in Advance for {0}',  'method' => 'sort'),
-                                                                'down'   => array('icon' => 'arrow-right', 'text' => 'Playing Order Delay to {0}',        'method' => 'sort')
-                                      ));
-$lang->visual->config->block    = array('name' => "Block", 'width' => 1200, 'params' => 'blockID={id}', 'module' => 'visual', 'actions' => array(
-    'edit'    => array('module' => 'block'),
-    'delete'  => array('method' => 'removeBlock', 'confirm' => 'Are you sure to delete {title}？', 'success' => 'Removed{title}.', 'params' => 'blockID={id}&page={page}&region={region}'),
-    'move'    => array('method' => 'sortblocks',  'success' => 'Saved Order', 'params' => 'page={page}&region={region}&pagent={parent}'),
-    'layout'  => array('method' => 'fixblock',      'width' => 600, 'text' => 'Change Layout', 'icon' => 'columns', 'success' => 'Saved Region', 'params' => 'page={page}&region={region}&blockID={id}'),
-    'add'     => array('method' => 'appendBlock',  'params' => 'page={page}&region={region}&parent={parent}', 'hidden' => true, 'width' => 1000, 'title' => 'Add Block{title}')
-));
-$lang->visual->config->article  = array('params'  => 'articleID={id}', 'name' => 'Article',
-                                        'actions' => array('delete' => true, 'edit' => array('params' => 'articleID={id}&type=article')));
-$lang->visual->config->articles = array('name'    => 'Article List', 'module' => 'article', 'hidden' => true,
-                                        'actions' => array('edit' => false, 'add' => array('text' => 'Publish New Article', 'icon' => 'plus', 'method' => 'create', "params" => 'type=article', 'onDismiss' => 'reload')));
-$lang->visual->config->page  = array('params' => 'articleID={id}', 'module' => 'article', 'name' => 'Page',
-    'actions' => array('delete' => true, 'edit' => array('params' => 'pageID={id}&type=page')));
-$lang->visual->config->pageList = array('name' => 'Page List', 'module' => 'page', 'hidden' => true,
-    'actions' => array('edit' => false, 'add' => array('text' => 'Publish New Page', 'icon' => 'plus', 'method' => 'create', "params" => 'type=page')));
-$lang->visual->config->blog     = array('params' => 'articleID={id}', 'module' => 'article', 'name' => 'Blog',
-    'actions' => array('delete' => true, 'edit' => array('params' => 'articleID={id}&type=blog')));
-$lang->visual->config->blogList = array('name' => 'Blog List', 'module' => 'article', 'hidden' => true,
-    'actions' => array('edit' => false, 'add' => array('text' => 'Publish New Blog', 'icon' => 'plus', 'method' => 'create', "params" => 'type=blog')));
-$lang->visual->config->product  = array('params' => 'productID={id}', 'name' => 'Product',
-    'actions' => array('delete' => true, 'edit' => 'true'));
-$lang->visual->config->products = array('name' => 'Product List', 'module' => 'product', 'hidden' => true,
-    'actions' => array('edit' => false, 'add' => array('text' => 'Publish New Product', 'icon' => 'plus', 'method' => 'create', "params" => 'category=0', 'onDismiss' => 'reload')));
-$lang->visual->config->books    = array('name' => 'Book List', 'module' => 'book', 'hidden' => true,
-    'actions' => array('edit' => false, 'add' => array('text' => 'Add Book', 'icon' => 'plus', 'method' => 'create', 'onDismiss' => 'reload')));
-$lang->visual->config->bookCatalog = array('name' => "Book Catalogue", 'width' => 1200, 'params' => 'bookID={id}', 'module' => 'book',
-    'actions' => array('edit' => array('method' => 'admin', 'onDismiss' => 'update')));
-$lang->visual->config->book = array('name' => "Book", 'width' => 1200, 'params' => 'nodeID={id}',
-    'actions' => array('edit' => true));
-$lang->visual->config->boards = array('name' => 'Forum Board', 'hidden' => true,
-    'actions' => array('edit' => false, 'add' => array('text' => 'Board Management', 'icon' => 'sitemap', 'module' => 'tree', 'method' => 'browse', 'params' => 'type=forum', 'onDismiss' => 'update')));
-$lang->visual->config->thread = array('name' => 'Thread', 'params' => 'treadID={id}',
-    'actions' => array('edit' => array('width' => 600, 'text' => 'Transfer', 'icon' => 'location-arrow',  'method' => 'transfer', 'onDismiss' => 'reload'), 'delete' => true));
-
-$lang->visual->editpowerbycontent = "<p>ChanzhiEPS is open-source and free, but according to our <a href='http://www.chanzhi.org/book/chanzhieps/58_license.html' target='_blank'>license agreement</a>, if you want to remove chanzhi logo, you have to buy our business authorization. </p><p>Chanzhi logo will not affect site function，we suggest keeping it. </p><hr><div class='text-center'><a class='btn btn-success' href='http://www.chanzhi.org/vip/25_vip-support.html' target='_blank'> Learn more about chanzhi business services and authorization <i class='icon-arrow-right'></i></a></div>";
-
+/* Language for config */
+$lang->visual->setting = new stdclass();
+$lang->visual->setting->logo                               = array('name' => "Logo/Sitename");
+$lang->visual->setting->slogan                             = array('name' => "Slogan");
+$lang->visual->setting->powerby                            = array('name' => "Chanzhi mark", 'actions' => array());
+$lang->visual->setting->powerby['actions']['edit']         = array('title' => 'Remove chanzhi mark', 'text' => 'Remove chanzhi mark');
+$lang->visual->setting->company                            = array('name' => "Company profile", 'actions' => array());
+$lang->visual->setting->company['actions']['edit']         = array('text' => 'Eidt company profile');
+$lang->visual->setting->companyName                        = array('name' => "Company name");
+$lang->visual->setting->companyDesc                        = array('name' => "Company description");
+$lang->visual->setting->companyContact                     = array('name' => "Contact information");
+$lang->visual->setting->links                              = array('name' => "Links");
+$lang->visual->setting->navbar                             = array('name' => "Navbar");
+$lang->visual->setting->carousel                           = array();
+$lang->visual->setting->carousel['groupActions']           = array();
+$lang->visual->setting->carousel['groupActions']['add']    = array('text' => 'create a slide');
+$lang->visual->setting->carousel['itemActions']            = array();
+$lang->visual->setting->carousel['itemActions']['edit']    = array('text' => 'Edit', 'title' => 'Edit slide');
+$lang->visual->setting->carousel['itemActions']['delete']  = array('text' => 'Delete', 'confirm' => 'Delete the slide?');
+$lang->visual->setting->carousel['itemActions']['up']      = array('text' => 'Change play order to {0}');
+$lang->visual->setting->carousel['itemActions']['down']    = array('text' => 'Change play order to {0}');
+$lang->visual->setting->block                              = array('name' => "Block", 'actions' => array());
+$lang->visual->setting->block['actions']['delete']         = array('confirm' => 'Remove {title} from the region？', 'success' => 'Removed {title}.'); 
+$lang->visual->setting->block['actions']['layout']         = array('text' => 'Change layout', 'success' => 'Layout changes saved.');
+$lang->visual->setting->block['actions']['add']            = array('title' => 'Add block {title}');
+$lang->visual->setting->block['actions']['create']         = array('title' => 'Create and add block');
+$lang->visual->setting->article                            = array('name' => 'Article');
+$lang->visual->setting->articles                           = array('name' => 'Article list', 'actions' => array());
+$lang->visual->setting->articles['actions']['add']         = array('text' => 'Publish article');
+$lang->visual->setting->page                               = array('name' => 'Page');
+$lang->visual->setting->pageList                           = array('name' => 'Page list', 'actions' => array());
+$lang->visual->setting->pageList['actions']['add']         = array('text' => 'Publish page');
+$lang->visual->setting->blog                               = array('name' => 'Blog');
+$lang->visual->setting->blogList                           = array('name' => 'Blog list', 'actions' => array());
+$lang->visual->setting->blogList['actions']['add']         = array('text' => 'Publish blog');
+$lang->visual->setting->product                            = array('name' => 'Product');
+$lang->visual->setting->products                           = array('name' => 'Product list', 'actions' => array());
+$lang->visual->setting->products['actions']['add']         = array('text' => 'Publish product');
+$lang->visual->setting->books                              = array('name' => 'Book catalog', 'actions' => array());
+$lang->visual->setting->books['actions']['add']            = array('text' => 'Create book item');
+$lang->visual->setting->bookCatalog                        = array('name' => "Book catalog");
+$lang->visual->setting->book                               = array('name' => "Book");
+$lang->visual->setting->boards                             = array('name' => 'Forum boards', 'actions' => array());
+$lang->visual->setting->boards['actions']['add']           = array('text' => 'Manage boards');
+$lang->visual->setting->thread                             = array('name' => 'Thread', 'actions' => array());
+$lang->visual->setting->thread['actions']['edit']          = array('text' => 'Transfer');

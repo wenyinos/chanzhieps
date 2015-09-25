@@ -8,7 +8,6 @@
   ?>
   <url>
     <loc><?php echo $url;?></loc>
-    <mobile:mobile type='pc,mobile'/> 
     <lastmod><?php echo substr($product->editedDate, 0, 10);?></lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
@@ -28,7 +27,6 @@
   ?>
   <url>
     <loc><?php echo $url;?></loc>
-    <mobile:mobile type='pc,mobile'/>
     <lastmod><?php echo substr($article->editedDate, 0, 10);?></lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
@@ -49,7 +47,6 @@
   ?>
   <url>
     <loc><?php echo $url;?></loc>
-    <mobile:mobile type='pc,mobile'/>
     <lastmod><?php echo substr($blog->editedDate, 0, 10);?></lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
@@ -73,7 +70,6 @@
   ?>
   <url>
     <loc><?php echo $url;?></loc>
-    <mobile:mobile type='pc,mobile'/>
     <lastmod><?php echo substr($node->editedDate, 0, 10);?></lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
@@ -95,7 +91,6 @@
   ?>
   <url>
     <loc><?php echo $url;?></loc>
-    <mobile:mobile type='pc,mobile'/>
     <lastmod><?php echo substr($editedDate, 0, 10);?></lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
@@ -116,7 +111,6 @@
   ?>
   <url>
     <loc><?php echo $url;?></loc>
-    <mobile:mobile type='pc,mobile'/>
     <lastmod><?php echo substr($page->editedDate, 0, 10);?></lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>

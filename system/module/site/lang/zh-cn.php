@@ -22,7 +22,7 @@ $lang->site->domain          = '主域名';
 $lang->site->allowedDomain   = '可访问域名';
 $lang->site->keywords        = '关键词';
 $lang->site->indexKeywords   = '首页关键词';
-$lang->site->meta            = 'Meta信息';
+$lang->site->meta            = 'Meta 标签';
 $lang->site->desc            = '站点描述';
 $lang->site->icpSN           = '备案编号';
 $lang->site->icpLink         = '备案链接';
@@ -39,7 +39,7 @@ $lang->site->cn2tw           = '自动从简体版复制';
 $lang->site->cdn             = 'CDN地址';
 $lang->site->sensitive       = '敏感词';
 $lang->site->scheme          = '默认访问协议';
-$lang->site->saveDays        = '保存天数';
+$lang->site->saveDays        = '日志保存天数';
 
 $lang->site->importantOption = '重要操作';
 $lang->site->checkIP         = '后台登录IP白名单';
@@ -68,7 +68,7 @@ $lang->site->oauthHelp     = "使用帮助";
 $lang->site->setRecPerPage = "列表数量设置";
 $lang->site->useLocation   = "使用当前登录地址: <span>%s</span>";
 $lang->site->changeSetting = "更改设置";
-$lang->site->setLog        = "访问日志设置";
+$lang->site->setStat       = "流量统计设置";
 
 $lang->site->typeList = new stdclass();
 $lang->site->typeList->portal = '企业门户';
@@ -140,6 +140,7 @@ $lang->site->moduleAvailable['message'] = '评论留言';
 $lang->site->moduleAvailable['search']  = '搜索';
 $lang->site->moduleAvailable['shop']    = '商城';
 $lang->site->moduleAvailable['score']   = '积分';
+$lang->site->moduleAvailable['stat']    = '统计';
 
 $lang->site->metaHolder       = '可放置<meta><script><style>和<link>标签。';
 $lang->site->fileAllowedRole  = '多个后缀名之间请用 "," 隔开';

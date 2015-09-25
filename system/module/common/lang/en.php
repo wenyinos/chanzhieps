@@ -148,6 +148,7 @@ $lang->menu->security = 'Security|site|setsecurity|';
 $lang->menu->user     = 'User|user|admin|';
 $lang->menu->order    = 'Order|order|admin|';
 $lang->menu->feedback = 'Feedback|message|admin|';
+$lang->menu->stat     = 'Statistics|stat|traffic|';
 $lang->menu->package  = 'Extension|package|browse|';
 
 /* Menu groups setting. */

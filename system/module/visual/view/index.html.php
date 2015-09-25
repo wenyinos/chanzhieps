@@ -4,8 +4,9 @@
 <?php $currentDevice   = $this->session->device ? $this->session->device : 'desktop';?>
 <?php include "header.html.php"; ?>
 <?php
-js::set('visuals', $lang->visual->config);
-js::set('visualLang', $lang->visual->jsLang);
+js::set('visuals', $config->visual->setting);
+js::set('visualsLang', $lang->visual->setting);
+js::set('visualLang', $lang->visual->js);
 js::set('visualStyle', $themeRoot . 'common/visual.css');
 js::set('visualBlocks', $blocks);
 js::set('debug', $config->debug);
@@ -85,7 +86,7 @@ js::set('debug', $config->debug);
                 <?php endforeach;?>
               </ul>
               <div class='actions'>
-                <?php commonModel::printLink('ui', 'setTemplate', '', '<i class="icon-cog"></i> ' . $lang->ui->manageTemplate)?>
+                <?php commonModel::printLink('ui', 'setTemplate', '', '<i class="icon-cog"></i> ' . $lang->ui->manageTemplate, "target='_blank'")?>
               </div>
             </div>
             <div class='menu-themes-list'>
@@ -110,5 +111,21 @@ js::set('debug', $config->debug);
 </div>
 <div id='visualPageWrapper'>
   <iframe id='visualPage' name='visualPage' src='<?php echo empty($referer) ? '/' : $referer;?>' frameborder='no' allowtransparency='true' scrolling='auto' hidefocus='' style='width: 100%; height: 100%; left: 0; top: 0'></iframe>
+</div>
+
+<div class='modal fade' id='addContentModal'>
+<div class='modal-dialog modal-sm'>
+  <div class='modal-content'>
+    <div class='modal-header'>
+      <button type='button' class='close' data-dismiss='modal'><span aria-hidden='true'>×</span></button>
+      <h4 class='modal-title'><?php echo $lang->visual->js->addContent ?></h4>
+    </div>
+    <div class='modal-body'>
+      <button type='button' class='btn btn-lg btn-block btn-primary ve-btn-addcontent' data-type='create'><?php echo $lang->visual->js->createBlock ?></button>
+      <button type='button' class='btn btn-lg btn-block ve-btn-addcontent' data-type='add'><?php echo $lang->visual->js->addBlock ?></button>
+      <button type='button' class='btn btn-lg btn-block ve-btn-addcontent' data-type='region'><?php echo $lang->visual->js->addSubRegion ?></button>
+    </div>
+  </div>
+</div>
 </div>
 <?php include "footer.html.php"; ?>

@@ -226,9 +226,8 @@ class file extends control
      * @access public
      * @return void
      */
-    public function download($fileID, $mouse = '', $confirm = '')
+    public function download($fileID, $mouse = '')
     {
-        if($confirm == 'no') die(js::close());
         $file = $this->file->getById($fileID);
 
         /* Change savePath if objectType is source or slide. */
@@ -242,8 +241,7 @@ class file extends control
         $fileTypes = 'txt|jpg|jpeg|gif|png|bmp|xml|html';
         if(stripos($fileTypes, $file->extension) !== false and $mouse == 'left') $mode = 'open';
 
-        $account = $this->app->user->account;
-        if(!$file->public && $account == 'guest') $this->locate($this->createLink('user', 'login'));
+        if(!$file->public && $this->app->user->account == 'guest') $this->locate($this->createLink('user', 'login'));
 
         /* If the mode is open, locate directly. */
         if($mode == 'open')
@@ -259,23 +257,6 @@ class file extends control
                 $fileName = $file->title . '.' . $file->extension;
                 $fileData = file_get_contents($file->realPath);
 
-                if(commonModel::isAvailable('score'))
-                {
-                    /* Check for update extension.*/
-                    if(!$this->loadModel('score')->hasFileDowned($account, $fileID) and $account != $file->addedBy)
-                    {
-                        if(!empty($file->score) and ($file->addedBy != $account) and $confirm != 'yes')
-                        {
-                            die(js::confirm(sprintf($this->lang->file->confirm, $file->score), inlink('download', "id=$fileID&mouse=&confirm=yes"), inlink('download', "id=$fileID&mouse=&confirm=no")));
-                        }
-
-                        if(!$this->score->cost('download', $file->score, 'file', $fileID))
-                        {
-                            $this->view->score = $file->score;
-                            die($this->display());
-                        }
-                    }
-                }
                 /* Recording download times, downloads of this file plus one. */
                 $this->file->log($fileID);
 
