@@ -13,3 +13,7 @@
 #menu > .pull-right {margin-right: 0;}
 #menu .nav > li.nav-item-primary, #menu .nav > li.divider.angle {background-color: #fafafa;}
 #menu .nav > li.nav-item-primary + li.divider.angle:after, #menu .nav > li.divider.angle:after {border-left-color: #fafafa}
+
+#visualPage {transition: width .2s;}
+.ve-device-mobile {background-color: #aaa}
+.ve-device-mobile #visualPage {width: 600px!important; margin: 0 auto; display: block;}

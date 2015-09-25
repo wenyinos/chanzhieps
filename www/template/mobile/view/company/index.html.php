@@ -12,8 +12,8 @@
  */
 ?>
 <?php include TPL_ROOT . 'common/header.html.php';?>
-<div class='block-region region-top no-padding'><?php $this->block->printRegion($layouts, 'company_index', 'top');?></div>
-<div class='article-content'>
+<div class='block-region region-top no-padding blocks' data-region='company_index-top'><?php $this->block->printRegion($layouts, 'company_index', 'top');?></div>
+<div class='article-content' id='company'>
   <?php echo $company->content;?>
 </div>
-<div class='block-region region-bottom no-padding'><?php $this->block->printRegion($layouts, 'company_index', 'bottom');?></div>
+<div class='block-region region-bottom no-padding blocks' data-region='company_index-bottom'><?php $this->block->printRegion($layouts, 'company_index', 'bottom');?></div>

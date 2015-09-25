@@ -2,7 +2,7 @@
 include TPL_ROOT . 'common/header.html.php';
 ?>
 <?php $common->printPositionBar($this->app->getModuleName());?>
-<div class='panel'>
+<div class='panel' id='companyContact'>
   <div class='panel-heading'>
     <strong><i class='icon icon-comments-alt'></i> <?php echo $lang->company->contact;?></strong>
     <?php if(!empty($block->content->moreText) and !empty($block->content->moreUrl)):?>

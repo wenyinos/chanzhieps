@@ -11,7 +11,7 @@
  */
 ?>
 <?php include TPL_ROOT . 'common/header.html.php';?>
-<div class='block-region region-top'><?php $this->loadModel('block')->printRegion($layouts, 'product_browse', 'top');?></div>
+<div class='block-region region-top blocks' data-region='product_browse-top'><?php $this->loadModel('block')->printRegion($layouts, 'product_browse', 'top');?></div>
 <div class='panel-section'>
   <div class='panel-heading'>
     <div class='title'><strong><?php echo $category->name;?></strong></div>
@@ -21,7 +21,7 @@
     $count = count($products);
     $recPerRow = min($count, 2);
     ;?>
-    <div class='cards cards-products' data-cols='<?php echo $recPerRow?>'>
+    <div class='cards cards-products' data-cols='<?php echo $recPerRow?>' id='products'>
       <style><?php echo ".col-custom-{$recPerRow} {width: " . (100/$recPerRow) . "%}"; ?></style>
       <?php
       $index = 0;
@@ -34,7 +34,7 @@
 
       <div class='col col-custom-<?php echo $recPerRow?>'>
       <?php $url = helper::createLink('product', 'view', "id=$product->id", "category={$product->category->alias}&name=$product->alias"); ?>
-        <div class='card'>
+        <div class='card' id='product<?php echo $product->id?>' data-ve='product'>
           <a class='card-img' href='<?php echo $url?>'>
             <?php
             if(empty($product->image))
@@ -81,5 +81,5 @@
   <?php $pager->show('justify');?>
 </div>
 
-<div class='block-region region-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'product_browse', 'bottom');?></div>
+<div class='block-region region-bottom blocks' data-region='product_browse-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'product_browse', 'bottom');?></div>
 <?php include TPL_ROOT . 'common/footer.html.php';?>

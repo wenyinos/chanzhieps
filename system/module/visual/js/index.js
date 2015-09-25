@@ -777,7 +777,6 @@
         var name = $ve.data('ve');
         var setting = visuals[name];
         var options = getVisualOptions($ve);
-        console.log('deleteVisualArea', name, $ve, options);
         var action = setting.actions["delete"];
         var confirmMessage = setting.actions["delete"].confirm.format(options);
         var callback = function(result)
@@ -825,12 +824,14 @@
         if(window.v.visualStyle) $$('head').append($$('<link type="text/css" rel="stylesheet" />').attr('href', window.v.visualStyle));
 
         themesConfig = $$('#themeStyle').data();
+        $('body').addClass('ve-device-' + themesConfig.device);
 
         // init visual edit area
         initVisualAreas();
 
         // bind event
-        var $$body = $$('body').on('click', function()
+        var $$body = $$('body').addClass('ve-device-' + themesConfig.device);
+        $$body.on('click', function()
         {
             $(document).trigger('click.zui.dropdown.data-api');
         })
@@ -914,7 +915,7 @@
                 loadJs('jQuery', window.v.jQueryUrl, iframeDocument, function()
                 {
                     window.$$ = iframe.jQuery.noConflict();
-                    initVisualPage();
+                    loadJs('zui', window.v.zuiJsUrl, iframeDocument, initVisualPage);
                 });
             }
         }

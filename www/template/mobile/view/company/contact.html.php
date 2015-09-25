@@ -12,7 +12,7 @@
  */
 ?>
 <?php include TPL_ROOT . 'common/header.html.php';?>
-<div class='cards borderless with-icon'>
+<div class='cards borderless with-icon' id='companyContact'>
   <?php if(!empty($contact->contacts)): ?>
   <div class='card'>
     <i class='icon icon-s3 icon-user bg-important circle'></i>

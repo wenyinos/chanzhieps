@@ -11,15 +11,15 @@
  */
 ?>
 <?php include TPL_ROOT . 'common/header.html.php';?>
-<div class='block-region region-top'><?php $this->loadModel('block')->printRegion($layouts, 'page_index', 'top');?></div>
+<div class='block-region region-top blocks' data-region='page_index-top'><?php $this->loadModel('block')->printRegion($layouts, 'page_index', 'top');?></div>
 <div class='panel panel-section'>
   <div class='panel-heading'>
     <div class='title'><strong><?php echo $this->lang->page->list;?></strong></div>
   </div>
-  <div class='cards condensed cards-list'>
+  <div class='cards condensed cards-list' id='pageList'>
     <?php foreach($pages as $page):?>
     <?php $url = inlink('view', "id=$page->id", "name=$page->alias");?>
-    <a class='card' href='<?php echo $url?>'>
+    <a class='card' href='<?php echo $url?>' id='page<?php echo $page->id?>' data-ve='page'>
       <div class='card-heading'>
         <h5><?php echo $page->title?></h5>
       </div>
@@ -46,6 +46,6 @@
   </div>
 </div>
 
-<div class='block-region region-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'page_index', 'bottom');?></div>
+<div class='block-region region-bottom blocks' data-region='page_index-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'page_index', 'bottom');?></div>
 
 <?php include TPL_ROOT . 'common/footer.html.php';?>
