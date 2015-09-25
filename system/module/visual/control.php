@@ -22,7 +22,7 @@ class visual extends control
         $template = $this->config->template->{$this->device}->name;
         $this->loadModel('block')->loadTemplateLang($template);;
 
-        $this->view->referer = $referer;
+        $this->view->referer = helper::safe64decode($referer);
         $this->view->title   = $this->lang->visual->common;
         $this->view->blocks  = $this->lang->block->{$template};
 
