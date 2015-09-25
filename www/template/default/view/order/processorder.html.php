@@ -17,5 +17,6 @@
   <div class='modal-footer'><?php echo html::a(inlink('browse'), $lang->order->bought, "class='btn btn-success'");?></div>
 </div>
 <?php if(isset($pageJS)) js::execute($pageJS);?>
+<?php include TPL_ROOT . 'common/log.html.php';?>
 </body>
 </html>

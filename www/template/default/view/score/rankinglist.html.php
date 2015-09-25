@@ -6,8 +6,6 @@
 	  <div class='panel-heading'><?php echo $lang->score->totalRank;?></div>
       <div class='panel-body'>
         <dl>
-          <dt><strong><span><?php echo $lang->score->rank;?></span><?php echo $lang->score->username;?></strong></dt>
-		  <dd class='strong'><?php echo $lang->score->common;?></dd>
           <?php $i = 1;?>
           <?php foreach($allScore as $ranking):?>
           <?php if($ranking->account == 'guest') continue;?>
@@ -30,8 +28,6 @@
       <div class='panel-heading'><?php echo $lang->score->monthRank;?></div>
       <div class='panel-body'>
         <dl>
-          <dt><strong><span><?php echo $lang->score->rank;?></span><?php echo $lang->score->username;?></strong></dt>
-          <dd class='strong'><?php echo $lang->score->common;?></dd>
           <?php $i = 1;?>
           <?php foreach($monthScore as $ranking):?>
           <?php if($ranking->account == 'guest') continue;?>
@@ -55,8 +51,6 @@
       <div class='panel-heading'><?php echo $lang->score->weekRank;?></div>
       <div class='panel-body'>
         <dl>
-          <dt><strong><span><?php echo $lang->score->rank;?></span><?php echo $lang->score->username;?></strong></dt>
-          <dd class='strong'><?php echo $lang->score->common;?></dd>
           <?php $i = 1;?>
           <?php foreach($weekScore as $ranking):?>
           <?php if($ranking->account == 'guest') continue;?>
@@ -80,8 +74,6 @@
       <div class='panel-heading'><?php echo $lang->score->dayRank;?></div>
       <div class='panel-body'>
         <dl>
-          <dt><strong><span><?php echo $lang->score->rank;?></span><?php echo $lang->score->username;?></strong></dt>
-          <dd class='strong'><?php echo $lang->score->common;?></dd>
           <?php $i = 1;?>
           <?php foreach($dayScore as $ranking):?>
           <?php if($ranking->account == 'guest') continue;?>

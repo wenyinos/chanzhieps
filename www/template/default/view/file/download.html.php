@@ -14,5 +14,6 @@ include TPL_ROOT . 'common/header.lite.html.php';
   <?php echo $this->fetch('score', 'noscore', array('method' => 'download', 'score' => $score));?>
   </div>
 </div>
+<?php include TPL_ROOT . 'common/header.lite.html.php';?>
 </body>
 </html>

@@ -33,7 +33,7 @@
           <tr>
             <td colspan='4'>
               <strong class='red'><?php printf($lang->score->lblTotal, $user->score, $user->rank);?></strong>
-              <?php if(strpos($this->config->shop->payment, 'alipay') !== false) echo html::a($this->createLink('score', 'buyScore'), $this->lang->user->buyScore, "class='btn'");?>
+              <?php if(strpos($this->config->shop->payment, 'alipay') !== false) echo html::a($this->createLink('score', 'buyScore'), $this->lang->user->buyScore, "class='btn btn-primary btn-xs'");?>
             </td>
             <td colspan='4' class='a-right'><?php $pager->show();?></td>
           </tr>

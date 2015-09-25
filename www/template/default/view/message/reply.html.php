@@ -29,5 +29,6 @@ $email = $this->session->user->account == 'guest' ? '' : $this->session->user->e
 </form>
 <?php if($config->debug) js::import($jsRoot . 'jquery/form/min.js');?>
 <?php if(isset($pageJS)) js::execute($pageJS);?>
+<?php include TPL_ROOT . 'common/log.html.php';?>
 </body>
 </html>
