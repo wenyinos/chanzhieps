@@ -22,6 +22,7 @@ $lang->order->expressInfo    = 'Express Information';
 $lang->order->receiver       = 'Receiver';
 $lang->order->noRecord       = 'No record';
 $lang->order->status         = 'Status';
+$lang->order->note           = 'Note';
 
 $lang->order->admin          = 'Admin Orders';
 $lang->order->setting        = 'Settings';
