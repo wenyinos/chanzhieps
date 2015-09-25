@@ -105,6 +105,18 @@ $(document).ready(function()
             $('#' + name).val($('[data-sid="' + name + '-1"]').val() + ' ' + $('[data-sid="' + name + '-2"]').val());
         });
     });
+
+    if(window.parent && window.parent.$)
+    {
+        setTimeout(function()
+        {
+            $(window).resize(function()
+            {
+                var $modal = window.parent.$('#veModal .modal-body');
+                $modal.css('min-height', Math.max($modal.height(), $('body').height()));
+            });
+        }, 200);
+    }
 });
 
 function fileHide(){$('#uploadFile').show();}

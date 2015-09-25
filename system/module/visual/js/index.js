@@ -974,7 +974,7 @@
         var url = $(this).attr('href');
         openModal(url,
         {
-            width : 1200,
+            width : '80%',
             icon  : 'cog',
             title : $this.attr('title') || $this.attr('data-original-title'),
             loaded: function(e)
