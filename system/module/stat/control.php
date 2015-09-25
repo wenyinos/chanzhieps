@@ -53,7 +53,82 @@ class stat extends control
      * @access public
      * @return void
      */
-    public function report($type, $mode = 'weekly', $begin = '', $end = '')
+    public function from($mode = 'weekly', $begin = '', $end = '')
+    {
+        $type = 'from';
+        $date  = $this->stat->parseDate($mode, $begin, $end);
+        $begin = $date->begin;
+        $end   = $date->end;
+        if($begin < $end) 
+        {
+            $labels = $this->stat->getDayLabels($begin, $end);
+            foreach($labels as $label ) $this->view->lineLabels[] = date('Y-m-d', strtotime($label));
+        }
+        if($begin == $end) 
+        {
+            $labels = $this->stat->getHourLabels($begin);
+            $this->view->lineLabels = $this->stat->getHourLabels($begin, false);
+        }
+        
+        $this->view->pieCharts  = $this->stat->getPieByType($type, $begin, $end);
+
+        $timeType = $begin == $end ? 'hour' : 'day';
+        $this->view->lineCharts = $this->stat->getTypeLine($type, $timeType, $labels);
+        
+        $this->view->title = $this->lang->stat->from;
+        $this->view->mode  = $mode; 
+        $this->view->type  = $type;
+        
+        $this->display();
+    }
+
+    /**
+     * Search statistics report page.
+     * 
+     * @param  string $begin 
+     * @param  string $end 
+     * @access public
+     * @return void
+     */
+    public function search($mode = 'weekly', $begin = '', $end = '')
+    {
+        $type = 'search';
+        $date  = $this->stat->parseDate($mode, $begin, $end);
+        $begin = $date->begin;
+        $end   = $date->end;
+        if($begin < $end) 
+        {
+            $labels = $this->stat->getDayLabels($begin, $end);
+            foreach($labels as $label ) $this->view->lineLabels[] = date('Y-m-d', strtotime($label));
+        }
+        if($begin == $end) 
+        {
+            $labels = $this->stat->getHourLabels($begin);
+            $this->view->lineLabels = $this->stat->getHourLabels($begin, false);
+        }
+        
+        $this->view->pieCharts  = $this->stat->getPieByType($type, $begin, $end);
+
+        $timeType = $begin == $end ? 'hour' : 'day';
+        $this->view->lineCharts = $this->stat->getTypeLine($type, $timeType, $labels);
+        
+        $this->view->title = $this->lang->stat->from;
+        $this->view->mode  = $mode; 
+        $this->view->type  = $type;
+        
+        $this->display();
+    }
+
+
+    /**
+     * From statistics report page.
+     * 
+     * @param  string $begin 
+     * @param  string $end 
+     * @access public
+     * @return void
+     */
+    public function client($type = 'browser', $mode = 'weekly', $begin = '', $end = '')
     {
         $date  = $this->stat->parseDate($mode, $begin, $end);
         $begin = $date->begin;
@@ -78,21 +153,13 @@ class stat extends control
             exit;
         }
 
-        
         $timeType = $begin == $end ? 'hour' : 'day';
-        if(in_array($type, array('from', 'search')))
-        {
-            $this->view->lineCharts = $this->stat->getTypeLine($type, $timeType, $labels);
-        }
-        else
-        {
-            $this->view->totalPV = $this->dao->select('sum(pv) as pv')->from(TABLE_STATREPORT)
-                ->where('type')->eq('basic')
-                ->andWhere('item')->eq('total')
-                ->beginIf($begin != '')->andWhere('timeValue')->ge($begin)->fi()
-                ->beginIf($end != '')->andWhere('timeValue')->le($end)->fi()
-                ->fetch('pv');
-        }
+        $this->view->totalPV = $this->dao->select('sum(pv) as pv')->from(TABLE_STATREPORT)
+            ->where('type')->eq('basic')
+            ->andWhere('item')->eq('total')
+            ->beginIf($begin != '')->andWhere('timeValue')->ge($begin)->fi()
+            ->beginIf($end != '')->andWhere('timeValue')->le($end)->fi()
+            ->fetch('pv');
 
         $this->view->title = $this->lang->stat->{$type}; 
         $this->view->mode  = $mode; 
@@ -267,7 +334,7 @@ class stat extends control
         if($begin < $end)  $labels = $this->stat->getDayLabels($begin, $end);
         if($begin == $end) $labels = $this->stat->getHourLabels($begin, false);
 
-        $this->view->type      = $this->lang->stat->domain . ' - ' . $domain;
+        $this->view->title     = $this->lang->stat->domain . ' - ' . $domain;
         $this->view->domain    = $domain;
         $this->view->labels    = $labels;
         $this->view->mode      = $mode;
@@ -287,20 +354,24 @@ class stat extends control
      * @access public
      * @return void
      */
-    public function domainPage($domain, $mode = 'weekly', $begin = '', $end = '')
+    public function domainPage($domain, $mode = 'weekly', $begin = '', $end = '', $recTotal = 0, $recPerPage = 50, $pageID = 1)
+
     {
         $date  = $this->stat->parseDate($mode, $begin, $end);
         $begin = $date->begin;
         $end   = $date->end;
 
-        if($begin < $end)  $labels = $this->stat->getDayLabels($begin, $end);
-        if($begin == $end) $labels = $this->stat->getHourLabels($begin, false);
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal, $recPerPage, $pageID);
 
-        $this->view->type      = $this->lang->stat->domain . ' - ' . $domain;
-        $this->view->domain    = $domain;
-        $this->view->labels    = $labels;
-        $this->view->mode      = $mode;
-        $this->view->pieCharts = $this->stat->getItemExtra('domain', $domain, $begin, $end);
+        $labels = $this->stat->getDayLabels($begin, $end);
+
+        $this->view->type   = $this->lang->stat->domain . ' - ' . $domain;
+        $this->view->domain = $domain;
+        $this->view->labels = $labels;
+        $this->view->mode   = $mode;
+        $this->view->pages  = $this->stat->getPageReport($domain, $begin, $end, $pager);
+        $this->view->pager  = $pager;
 
         $this->display();
     }

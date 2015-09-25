@@ -416,4 +416,17 @@ class statModel extends model
         }
         return $charts;
     }
+
+    public function getPageReport($domain, $begin, $end, $pager)
+    {
+        return $this->dao->select('*')->from(TABLE_STATREPORT)
+            ->where('type')->eq('domain')
+            ->andWhere('item')->eq($domain)
+            ->andWhere('timeType')->eq('day')
+            ->andWhere('timeValue')->ge($begin)
+            ->andWhere('timeValue')->le($end)
+            ->orderBy('pv_desc')
+            ->page($pager)
+            ->fetchGroup('extra', 'timeValue');
+    }
 }

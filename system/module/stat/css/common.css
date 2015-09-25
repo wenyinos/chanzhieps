@@ -16,7 +16,7 @@
   background-color: transparent;
   border-color: #ddd #ddd transparent;
   font-weight: bold;
-  color: #252525;
+  color: blue;
   border-image: none;
   border-style: solid;
   cursor: default;
@@ -29,3 +29,6 @@
 .table tr td.haosou{background:#FFFFFF;}
 .table tr td.sogou{background:#F5F5F5}
 .pd-l0{padding-left:0}
+
+#typeMenu li a{padding:5px 0;}
+#typeMenu li.active a{ color:blue; font-weight:bold;}

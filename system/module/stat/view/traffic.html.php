@@ -16,9 +16,8 @@
 <?php js::set('lineChart', $lineChart);?>
 <?php include '../../common/view/datepicker.html.php';?>
 <div class='panel'>
-  <div class="panel-heading">
-    <strong><i class='icon icon-bar-chart'></i> <?php echo $lang->stat->traffic;?></strong>
-    <div class="panel-actions"> 
+  <div class="panel-heading pd-l0">
+    <div class="panel-actions pull-left"> 
       <ul class='nav nav-tabs'>
         <?php foreach($lang->stat->trafficModes as $code => $modeName):?>
         <?php $class = $mode == $code ? "class='active'" : '';?>
@@ -38,12 +37,13 @@
             </table>
           </form>
         </li>
-
       </ul>
-    <?php if(!empty($dayCharts)):?> <div><?php echo html::radio('lineType', $lang->stat->dataTypes, 'pv');?></div><?php endif;?>
+    </div>
+    <strong>&nbsp;</strong>
   </div>
-
-  </div>
+</div>
+<div class='panel'>
+  <?php if(!empty($dayCharts)):?> <div><?php echo html::radio('lineType', $lang->stat->dataTypes, 'pv');?></div><?php endif;?>
   <table class='table table-bordered table-condensed'>
     <thead>
       <tr class='text-center'>
@@ -72,7 +72,6 @@
       <?php endif;?>
     </tbody>
   </table> 
-  <p></p>
 </div>
 <div class='panel'>
   <div class='chart-canvas'><canvas height='260' width='900' id='lineChart'></canvas></div>
