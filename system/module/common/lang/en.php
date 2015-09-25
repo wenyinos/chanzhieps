@@ -13,6 +13,7 @@
 $lang->colon      = ' : ';
 $lang->prev       = '‹';
 $lang->next       = '›';
+$lang->equal      = '=';
 $lang->laquo      = '&laquo;';
 $lang->raquo      = '&raquo;';
 $lang->minus      = ' - ';
@@ -113,6 +114,8 @@ $lang->js->timeout          = 'Timeout';
 $lang->js->errorThrown      = '<h4>Something error ：</h4>';
 $lang->js->continueShopping = 'Continue Shopping';
 $lang->js->required         = 'Required';
+$lang->js->back             = 'Return';
+$lang->js->continue         = 'Continue';
 
 /* Contact fields*/
 $lang->company = new stdclass();
@@ -240,6 +243,7 @@ $lang->site->menu->mail    = array('link' => 'Mail|mail|admin|', 'alias' => 'det
 $lang->site->menu->wechat  = array('link' => 'Wechat|wechat|admin|', 'alias' => 'create,setresponse');
 $lang->site->menu->search  = 'Full text search|search|buildindex|';
 $lang->site->menu->tag     = 'Tags|tag|admin|';
+$lang->site->menu->setStat = 'Set Stat|site|setStat|';
 
 /* Menu of security module. */
 $lang->security = new stdclass();
@@ -318,7 +322,9 @@ $lang->stat->menu->traffic  = 'Summary|stat|traffic|';
 $lang->stat->menu->from     = 'Source Stats|stat|report|type=from';
 $lang->stat->menu->search   = 'Search Engine Stats|stat|report|type=search';
 $lang->stat->menu->keywords = 'Keyswords Stats|stat|keywords|';
-$lang->stat->menu->os       = 'Operating System Stats|stat|report|type=os';
+$lang->stat->menu->domains  = 'Domains|stat|domainList|';
+$lang->stat->menu->client   = 'Client Stats|stat|client|type=browser';
+$lang->stat->menu->page     = 'Page Views Ranking|stat|page|';
 
 /* Error info. */
 $lang->error = new stdclass();
