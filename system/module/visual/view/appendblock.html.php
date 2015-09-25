@@ -16,7 +16,7 @@
   <?php if($allowregionblock): ?>
     <li data-keys='#region <?php echo $lang->visual->js->subRegion ?>'>
       <a href='###' class='btn-add-block' data-id='region' id='addRegionBlock'>
-      <strong class='text-special nobr'><?php echo $lang->visual->js->subRegion;?></strong>
+      <strong class='nobr'><?php echo $lang->visual->js->subRegion;?></strong>
       <small class='text-muted'><?php echo $lang->visual->js->subRegionDesc ?></small>
       </a>
     </li>

@@ -10,3 +10,6 @@
 #createBlockBtn {display: block; float: left;}
 #searchbox > .icon {position: absolute; left: 10px; top: 8px; color: #aaa}
 #searchbox > .form-control {padding-left: 30px;}
+
+#addRegionBlock {border-color: #03b8cf; color: #03b8cf;}
+#addRegionBlock:hover {border-color: #039eb2; color: #03b8cf; background-color: #ddf3f5}
