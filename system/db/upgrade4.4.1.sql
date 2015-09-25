@@ -34,7 +34,6 @@ ADD `maxLogin` tinyint(4) NOT NULL DEFAULT '10' AFTER `rank`;
 
 ALTER TABLE `eps_file` ADD `score` smallint unsigned NOT NULL DEFAULT 0 AFTER `public`;
 
--- DROP TABLE IF EXISTS `eps_statvisitor`
 CREATE TABLE IF NOT EXISTS `eps_statvisitor`(
   `id` int(9) unsigned NOT NULL AUTO_INCREMENT,
   `osName` varchar(100) NOT NULL,
@@ -53,7 +52,6 @@ CREATE TABLE IF NOT EXISTS `eps_statvisitor`(
   KEY `lang` (`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- DROP TABLE IF EXISTS `eps_statreferer`
 CREATE TABLE IF NOT EXISTS `eps_statreferer`(
   `id` int(9) unsigned NOT NULL AUTO_INCREMENT,
   `url` text NOT NULL,
@@ -66,10 +64,12 @@ CREATE TABLE IF NOT EXISTS `eps_statreferer`(
   KEY `lang` (`lang`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- DROP TABLE IF EXISTS `eps_statlog`;
 CREATE TABLE IF NOT EXISTS `eps_statlog`(
   `id` int(9) unsigned NOT NULL auto_increment,
   `referer` int(8) NOT NULL,
+  `domain` varchar(200) NOT NULL,
+  `url` text NOT NULL,
+  `link` text NOT NULL,
   `searchEngine` varchar(100) NOT NULL,
   `keywords` varchar(100) NOT NULL,
   `visitor` int(8) NOT NULL,

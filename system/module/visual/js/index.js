@@ -909,10 +909,10 @@
             {
                 visualPageUrl = $frame.context.URL;
                 var title = $frame.find('head > title').text();
-                var url = createLink('visual', 'index', 'referer=' + visualPageUrl);
+                var url = '{router}?{moduleVar}=visual&{methodVar}=index&{viewVar}={defaultView}&referer='.format(config) + encodeURI(visualPageUrl);
                 window.history.replaceState({}, title, url);
 
-                $('#visualPageName').html('<i class="icon icon-external-link-sign"></i>' + ((title && title.indexOf(' ') > -1) ? title.split(' ')[0] : title)).attr('href', visualPageUrl);
+                $('#visualPageName').html(((title && title.indexOf(' ') > -1) ? title.split(' ')[0] : title)).attr('href', visualPageUrl);
             }
 
             if(iframe.jQuery)
