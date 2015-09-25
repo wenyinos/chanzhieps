@@ -68,8 +68,8 @@ $lang->resource->article->delete = 'delete';
 $lang->resource->article->setcss = 'setcss';
 $lang->resource->article->setjs  = 'setjs';
 $lang->resource->article->stick  = 'stick';
-$lang->resource->article->forward2Block  = 'forward2Block';
-$lang->resource->article->forward2Forum  = 'forward2Forum';
+$lang->resource->article->forward2Blog  = 'forward2Blog';
+$lang->resource->article->forward2Forum = 'forward2Forum';
 
 /* Block module. */
 $lang->resource->block = new stdclass();
@@ -263,11 +263,15 @@ $lang->resource->order->setting  = 'setting';
 
 /* Stat module. */
 $lang->resource->stat = new stdclass();
-$lang->resource->stat->traffic  = 'traffic';
-$lang->resource->stat->report   = 'report';
-$lang->resource->stat->keywords = 'keywords';
+$lang->resource->stat->traffic       = 'traffic';
+$lang->resource->stat->from          = 'from';
+$lang->resource->stat->search        = 'search';
+$lang->resource->stat->client        = 'client';
+$lang->resource->stat->keywords      = 'keywordList';
 $lang->resource->stat->keywordreport = 'keywordReport';
-$lang->resource->stat->domain   = 'domain';
+$lang->resource->stat->domainlist    = 'domainList';
+$lang->resource->stat->domaintrend   = 'domainTrend';
+$lang->resource->stat->domainpage    = 'domainPage';
 
 /* Stat module. */
 $lang->resource->score = new stdclass();
