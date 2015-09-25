@@ -613,88 +613,10 @@
                   }
             });
 
-            var actionsBar = '<div class="ve-block-actions ve-actions-bar ve-preview-hidden"><ul class="nav"><li><button type="button" class="btn btn-block btn-ve ve-action-addcontent" data-grid="' + withGrid + '"><i class="icon icon-plus"></i> ' + lang.addContent + '</button></li>';
+            var actionsBar = '<div class="ve-block-actions ve-actions-bar ve-preview-hidden"><ul class="nav"><li><button type="button" class="btn btn-block btn-ve ve-action-addcontent" data-allowregionblock="' + (withGrid ? 1 : 0) + '"><i class="icon icon-plus"></i> ' + lang.addContent + '</button></li>';
             actionsBar += '</ul><ul class="breadcrumb"><li>' + lang.blocks.pages[page] + '</li><li>' + lang.blocks.regions[page][location] + '</li></ul></div>'
 
             $blocksHolder.append(actionsBar);
-        });
-
-        var $$body = $$('body');
-        if($$body.data('ve-blocks-events')) return;
-        $$body.data('ve.blocks-events', true);
-
-        $$body.on('mouseenter', '.blocks', function()
-        {
-            $$(this).closest('.blocks').addClass('ve-show-border-in');
-        }).on('mouseleave', '.ve-show-border-in', function()
-        {
-            $$(this).closest('.blocks').removeClass('ve-show-border-in');
-        }).on('click', '.ve-action-addcontent', function()
-        {
-            var $btn = $$(this);
-            var $blocksHolder = $btn.closest('.blocks');
-            var options = $.extend({parent: 0}, $blocksHolder.data(), $btn.data());
-            if(options.parent) options.title = $blocksHolder.data('title') + '-' + options.title;
-            var $modal = $('#addContentModal');
-            $modal.find('.ve-btn-addcontent[data-type="region"]').toggleClass('hidden', options.grid !== true);
-            $modal.find('.modal-title').text(lang.addContentTo.format(options.title));
-            $modal.data('options', options).modal('show');
-        }).on('mousedown', '.ve-resize-handler', function(e)
-        {
-            var $ve = $$(this).closest('.ve');
-            var $col = $ve.parent().addClass('ve-resizing');
-            var $row = $ve.closest('.row' + ($ve.hasClass('row') ? ':not(.ve)' : ''));
-            var $blocksHolder = $ve.closest('.row.blocks');
-            var startX = e.pageX;
-            var startWidth = $col.width();
-            var rowWidth = $row.width();
-            var oldGrid = $col.attr('data-grid');
-            var lastGrid = oldGrid;
-
-            var mouseMove = function(event)
-            {
-                $ve.addClass('ve-editing ve-editing-resize');
-                var x = event.pageX;
-                var grid = Math.max(1, Math.min(12, Math.round(12 * (startWidth + (x - startX)) / rowWidth)));
-                if(lastGrid != grid)
-                {
-                    $col.attr('data-grid', grid);
-                    showMessage(lang.gridWidth + ': ' + Math.round(100*grid/12) + '% (' + grid + '/12)', 'show', {scale:  false});
-                    lastGrid = grid;
-                }
-                event.preventDefault();
-                event.stopPropagation();
-            };
-
-            var mouseUp = function(event)
-            {
-                $ve.removeClass('ve-editing ve-editing-resize');
-                $col.removeClass('ve-resizing');
-
-                if(oldGrid !== $col.attr('data-grid'))
-                {
-                    var name = 'block';
-                    var setting = visuals[name];
-                    var options = getVisualOptions($ve);
-                    postActionData(name, setting.actions.layout, options, function(result)
-                    {
-                        if(result !== 'success')
-                        {
-                            $col.attr('data-grid', oldGrid);
-                        }
-                        tidyBlocks($blocksHolder);
-                    }, {grid: $col.attr('data-grid')});
-                }
-                else $.zui.messager.hide();
-
-                $$body.off('mousemove.ve.resize', mouseMove).off('mouseup.ve.resize', mouseUp);
-                event.preventDefault();
-                event.stopPropagation();
-            };
-
-            $$body.on('mousemove.ve.resize', mouseMove).on('mouseup.ve.resize', mouseUp);
-            e.preventDefault();
-            e.stopPropagation();
         });
     };
 
@@ -868,6 +790,89 @@
             return false;
         });
 
+        if($$body.data('ve-blocks-events')) return;
+        $$body.data('ve.blocks-events', true);
+
+        $$body.on('mouseenter', '.blocks', function()
+        {
+            $$(this).closest('.blocks').addClass('ve-show-border-in');
+        }).on('mouseleave', '.ve-show-border-in', function()
+        {
+            $$(this).closest('.blocks').removeClass('ve-show-border-in');
+        }).on('click', '.ve-action-addcontent', function()
+        {
+            var $btn = $$(this);
+            var $blocksHolder = $btn.closest('.blocks');
+            var setting = visuals['block'];
+            var options = $.extend({parent: 0, allowregionblock: 0}, $blocksHolder.data(), $btn.data());
+            if(options.parent) options.title = $blocksHolder.data('title') + '-' + options.title;
+
+            var action = setting.actions.add;
+            openModal(createActionLink(setting, action, options),
+            {
+                width : action.width || setting.width,
+                icon  : action.icon || 'plus',
+                title : (action.title || (action.text + ' ' + setting.name)).format(options)
+            });
+
+        }).on('mousedown', '.ve-resize-handler', function(e)
+        {
+            var $ve = $$(this).closest('.ve');
+            var $col = $ve.parent().addClass('ve-resizing');
+            var $row = $ve.closest('.row' + ($ve.hasClass('row') ? ':not(.ve)' : ''));
+            var $blocksHolder = $ve.closest('.row.blocks');
+            var startX = e.pageX;
+            var startWidth = $col.width();
+            var rowWidth = $row.width();
+            var oldGrid = $col.attr('data-grid');
+            var lastGrid = oldGrid;
+
+            var mouseMove = function(event)
+            {
+                $ve.addClass('ve-editing ve-editing-resize');
+                var x = event.pageX;
+                var grid = Math.max(1, Math.min(12, Math.round(12 * (startWidth + (x - startX)) / rowWidth)));
+                if(lastGrid != grid)
+                {
+                    $col.attr('data-grid', grid);
+                    showMessage(lang.gridWidth + ': ' + Math.round(100*grid/12) + '% (' + grid + '/12)', 'show', {scale:  false});
+                    lastGrid = grid;
+                }
+                event.preventDefault();
+                event.stopPropagation();
+            };
+
+            var mouseUp = function(event)
+            {
+                $ve.removeClass('ve-editing ve-editing-resize');
+                $col.removeClass('ve-resizing');
+
+                if(oldGrid !== $col.attr('data-grid'))
+                {
+                    var name = 'block';
+                    var setting = visuals[name];
+                    var options = getVisualOptions($ve);
+                    postActionData(name, setting.actions.layout, options, function(result)
+                    {
+                        if(result !== 'success')
+                        {
+                            $col.attr('data-grid', oldGrid);
+                        }
+                        tidyBlocks($blocksHolder);
+                    }, {grid: $col.attr('data-grid')});
+                }
+                else $.zui.messager.hide();
+
+                $$body.off('mousemove.ve.resize', mouseMove).off('mouseup.ve.resize', mouseUp);
+                event.preventDefault();
+                event.stopPropagation();
+            };
+
+            $$body.on('mousemove.ve.resize', mouseMove).on('mouseup.ve.resize', mouseUp);
+            e.preventDefault();
+            e.stopPropagation();
+        });
+
         // set ajax options
         $$.ajaxSetup({beforeSend: function (xhr)
         {
@@ -933,43 +938,6 @@
             window.location.reload();
         });
         return false;
-    });
-
-    $(document).on('click', '.ve-btn-addcontent', function()
-    {
-        var type = $(this).data('type');
-        var options = $('#addContentModal').modal('hide').data('options');
-        var setting = visuals['block'];
-        var actionFunc;
-
-        if(type === 'add')
-        {
-            actionFunc = function()
-            {
-                var action = setting.actions.add;
-                openModal(createActionLink(setting, action, options),
-                {
-                    width : action.width || setting.width,
-                    icon  : action.icon || 'plus',
-                    title : (action.title || (action.text + ' ' + setting.name)).format(options)
-                });
-            };
-        }
-        else if(type === 'region')
-        {
-            actionFunc = function()
-            {
-                addBlock(options.page, options.region, 'region');
-            };
-        }
-        else if(type === 'create')
-        {
-            actionFunc = function()
-            {
-                createBlock(options.page, options.region, options.parent);
-            }
-        }
-        setTimeout(actionFunc, 200);
     });
 
     $('#visualPreviewBtn').on('mouseenter', function()

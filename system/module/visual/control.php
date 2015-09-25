@@ -72,35 +72,6 @@ class visual extends control
     }
 
     /**
-     * Eidt navbar
-     *
-     * @access public
-     * @return void
-     */
-    public function editnavbar()
-    {
-        $this->display();
-    }
-
-    /**
-     * Add block
-     *
-     * @access public
-     * @return void
-     */
-    public function addBlock($region)
-    {
-        $blockModel = $this->loadModel('block');
-
-        $template = $this->config->template->{$this->device}->name;
-        $blockModel->loadTemplateLang($template);
-
-        $this->view->blocks   = $blockModel->getList($template);
-        $this->view->region   = $region;
-        $this->display();
-    }
-
-    /**
      * Fix a block in a region.
      *
      * @access public
@@ -155,7 +126,7 @@ class visual extends control
      * @access public
      * @return void
      */
-    public function appendBlock($page, $region, $parent = 0)
+    public function appendBlock($page, $region, $parent = 0, $allowregionblock = false)
     {
         $blockModel = $this->loadModel('block');
         
@@ -175,8 +146,10 @@ class visual extends control
         $this->view->page     = $page;
         $this->view->region   = $region;
 
-        $this->view->page     = $page;
-        $this->view->parent   = $parent;
+        $this->view->page             = $page;
+        $this->view->parent           = $parent;
+        $this->view->allowregionblock = $allowregionblock;
+        $this->view->typeList         = $this->lang->block->{$template}->typeList;
         $this->display();
     }
 
