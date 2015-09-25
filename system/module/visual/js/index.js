@@ -793,6 +793,8 @@
         if($$body.data('ve-blocks-events')) return;
         $$body.data('ve.blocks-events', true);
 
+        $$('#visualEditBtn').remove();
+
         $$body.on('mouseenter', '.blocks', function()
         {
             $$(this).closest('.blocks').addClass('ve-show-border-in');
