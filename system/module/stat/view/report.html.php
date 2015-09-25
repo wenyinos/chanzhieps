@@ -74,6 +74,9 @@
             <td><?php echo $lang->stat->pv;?></td>
             <td><?php echo $lang->stat->uv;?></td>
             <td><?php echo $lang->stat->ipCount;?></td>
+            <?php if(isset($totalPV)):?>
+            <td><?php echo $lang->stat->percentage;?></td>
+            <?php endif;?>
           </tr>
         </thead>
         <?php for($i = 0 ; $i < count($pieCharts['pv']); $i ++):?>
@@ -87,6 +90,9 @@
           <td><?php echo $report->value;?></td>
           <td><?php echo $pieCharts['uv'][$i]->value;?></td>
           <td><?php echo $pieCharts['ip'][$i]->value;?></td>
+          <?php if(isset($totalPV)):?>
+          <td><?php echo number_format($pieCharts['pv'][$i]->value * 100 / $totalPV, 2);?>%</td>
+          <?php endif;?>
         </tr>
         <?php endfor;?>
       </table>

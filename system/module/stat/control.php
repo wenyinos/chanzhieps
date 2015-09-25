@@ -37,7 +37,6 @@ class stat extends control
             $labels = $this->stat->getDayLabels($begin, $end);
             foreach($labels as $label ) $this->view->labels[] = date('Y-m-d', strtotime($label));
             $this->view->lineChart = $this->stat->getBasicLine('total', 'day', $labels);
-       
         }
 
         $this->view->title = $this->lang->stat->traffic;
@@ -79,8 +78,21 @@ class stat extends control
             exit;
         }
 
+        
         $timeType = $begin == $end ? 'hour' : 'day';
-        $this->view->lineCharts = $this->stat->getTypeLine($type, $timeType, $labels);
+        if(in_array($type, array('from', 'search')))
+        {
+            $this->view->lineCharts = $this->stat->getTypeLine($type, $timeType, $labels);
+        }
+        else
+        {
+            $this->view->totalPV = $this->dao->select('sum(pv) as pv')->from(TABLE_STATREPORT)
+                ->where('type')->eq('basic')
+                ->andWhere('item')->eq('total')
+                ->beginIf($begin != '')->andWhere('timeValue')->ge($begin)->fi()
+                ->beginIf($end != '')->andWhere('timeValue')->le($end)->fi()
+                ->fetch('pv');
+        }
 
         $this->view->title = $this->lang->stat->{$type}; 
         $this->view->mode  = $mode; 
@@ -151,7 +163,12 @@ class stat extends control
         $begin = $date->begin;
         $end   = $date->end;
 
-        if($begin < $end)  $labels = $this->stat->getDayLabels($begin, $end);
+        if($begin < $end) 
+        {
+            $labels = $this->stat->getDayLabels($begin, $end);
+            foreach($labels as &$label) $label = date('Y-m-d', strtotime($label));
+        }
+
         if($begin == $end) $labels = $this->stat->getHourLabels($begin, false);
 
         $this->view->keyword     = $keyword;
@@ -283,8 +300,7 @@ class stat extends control
         $this->view->domain    = $domain;
         $this->view->labels    = $labels;
         $this->view->mode      = $mode;
-        $this->view->lineChart = $this->stat->getItemLine('domain', $domain, $begin, $end);
-        $this->view->pieCharts = $this->stat->getItemExtraPie('domain', $domain, $begin, $end);
+        $this->view->pieCharts = $this->stat->getItemExtra('domain', $domain, $begin, $end);
 
         $this->display();
     }

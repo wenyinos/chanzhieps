@@ -13,9 +13,8 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/datepicker.html.php';?>
 <div class='panel'>
-  <div class="panel-heading">
-    <strong><i class='icon-stats'></i> <?php echo $lang->stat->domain;?></strong>
-    <div class='panel-actions'>
+  <div class="panel-heading pd-l0">
+    <div class='panel-actions pull-left'>
       <ul class='nav nav-tabs'>
         <?php foreach($lang->stat->trafficModes as $code => $modeName):?>
         <?php $class = $mode == $code ? "class='active'" : '';?>
@@ -37,6 +36,7 @@
         </li>
       </ul>
     </div>
+    <strong><i class='icon-stats'></i> &nbsp;</strong>
   </div>
 </div>
 <div class="panel">
