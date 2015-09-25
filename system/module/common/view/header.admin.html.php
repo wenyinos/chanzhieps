@@ -9,6 +9,7 @@
     </button>
     <?php echo html::a($this->createLink($this->config->default->module), $lang->chanzhiEPSx, "class='navbar-brand'");?>
     <div class='dropdown navbar-header-item'><?php include 'selectlang.html.php';?></div>
+    <div class='navbar-header-divider angle'></div>
   </div>
   <div class='collapse navbar-collapse' id='mainNavbarCollapse'>
     <?php echo commonModel::createMainMenu($this->moduleName);?>
