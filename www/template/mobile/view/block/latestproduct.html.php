@@ -19,7 +19,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
 ?>
 <div id="block<?php echo $block->id;?>" class="panel-cards with-cards panel panel-block <?php echo $blockClass;?>">
   <div class='panel-heading'>
-    <strong><?php echo $icon;?> <?php echo $block->title . zget($content, 'recPerRow', 1);?></strong>
+    <strong><?php echo $icon;?> <?php echo $block->title;?></strong>
     <?php if(isset($content->moreText) and isset($content->moreUrl)):?>
     <div class='pull-right'><?php echo html::a($content->moreUrl, $content->moreText);?></div>
     <?php endif;?>
