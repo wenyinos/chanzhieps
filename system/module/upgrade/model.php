@@ -1639,6 +1639,7 @@ class upgradeModel extends model
      */
     public function computeScore()
     {
+        $this->loadModel('score');
         $threads = $this->dao->select('*')->from(TABLE_THREAD)->fetchGroup('author');
         $replies = $this->dao->select('*')->from(TABLE_REPLY)->fetchGroup('author');
 
