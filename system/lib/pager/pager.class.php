@@ -300,6 +300,7 @@ class pager
     {
         if($this->recTotal <= 0) return '';
 
+        $this->setParams();
         $pager = '';
 
         $pager .= "<li class='previous" . ($this->pageID == 1 ? ' disabled' : '') . "'>";
