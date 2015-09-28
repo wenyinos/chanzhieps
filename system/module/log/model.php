@@ -182,7 +182,8 @@ class logModel extends model
         $this->dao->insert(TABLE_STATLOG)->data($log)->exec();
 
         /* Save basic report data. */
-        $this->saveReportItem($type = 'basic', $item = 'total', $time, $log);
+        $this->saveReportItem('basic', 'total', $time, $log);
+        $this->saveReportItem('url', $this->server->http_referer, $time, $log);
         if(!$visitor->new and time() - strtotime($visitor->createdTime) > 60 * 60 * 24) $this->saveReportItem($type = 'basic', $item = 'return', $time, $log);
         if($log->mobile) $this->saveReportItem($type = 'device', $item = 'mobile', $time, $log);
         if(!$log->mobile) $this->saveReportItem($type = 'device', $item = 'desktop', $time, $log);
@@ -194,7 +195,6 @@ class logModel extends model
         /* Save referer data. */
         if(!empty($referer)) $this->saveReportItem($type = 'referer', $item = $referer->id, $time, $log);
         if(!empty($referer)) $this->saveReportItem($type = 'domain', $item = $referer->domain, $time, $log, $referer->url);
-        if(!empty($referer)) $this->saveReportItem($type = 'url', $item = $this->server->http_referer, $time, $log);
 
         /* Save os data. */
         $this->saveReportItem($type = 'os', $item = $visitor->osName, $time, $log);
