@@ -762,7 +762,17 @@ class blockModel extends model
      */
     public function appendBlock($template, $theme, $page, $region, $parent, $block)
     {
+        if(!$this->checkRegion($template, $theme, $page, $region)) return array('result' => 'fail', 'message' => 'region not exisits.');
         $layout  = $this->getLayout($template, $theme, $page, $region);
+        if(empty($layout))
+        {
+            $layout = new stdclass();
+            $layout->template = $template;
+            $layout->theme    = $theme;
+            $layout->page     = $page;
+            $layout->region   = $region;
+            $layout->blocks   = json_encode(array());
+        }
         $blocks  = json_decode($layout->blocks);
 
         $newBlock = new stdclass();
@@ -909,5 +919,23 @@ class blockModel extends model
         $block->title    = $this->lang->block->subRegion;
         $this->dao->insert(TABLE_BLOCK)->data($block)->exec();
         return $this->dao->lastInsertID();
+    }
+
+    /**
+     * Check a region is exisits.
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @param  string    $page 
+     * @param  string    $region 
+     * @access public
+     * @return bool
+     */
+    public function checkRegion($template, $theme, $page, $region)
+    {
+        $this->loadTemplateLang($template);
+        if(!isset($this->lang->block->{$template}->pages[$page])) return false;
+        if(!isset($this->lang->block->{$template}->regions->{$page}[$region])) return false;
+        return true;
     }
 }
