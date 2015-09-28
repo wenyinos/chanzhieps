@@ -1682,10 +1682,10 @@ class upgradeModel extends model
                 $block->id = $regionID;
             }
             $blocks = helper::jsonEncode($blocks);
-            if($blocks != $layout->blocks) continue;
+            if($blocks == $layout->blocks) continue;
 
             $layout->blocks = $blocks;
-            $this->dao->replace(TABLE_LAYOUT)->data($blocks)->exec();
+            $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
         }
     }
 }
