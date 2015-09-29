@@ -105,7 +105,7 @@ $theme          = $this->config->template->{$this->device}->theme ? $this->confi
   $baseCustom = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array();
   if(!empty($baseCustom[$template][$theme]['js'])) js::execute($baseCustom[$template][$theme]['js']);
 
-  if(!empty($config->oauth->sina) and !is_object($config->oauth->qq)) $sina = json_decode($config->oauth->sina);
+  if(!empty($config->oauth->sina) and !is_object($config->oauth->sina)) $sina = json_decode($config->oauth->sina);
   if(!empty($config->oauth->qq) and !is_object($config->oauth->qq))   $qq   = json_decode($config->oauth->qq);
   if(!empty($sina->verification)) echo $sina->verification;
   if(!empty($qq->verification))   echo $qq->verification;
