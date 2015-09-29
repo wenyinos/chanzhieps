@@ -428,6 +428,8 @@ class helper
         if(strpos($domain, ':') !== false) $domain = substr($domain, 0, strpos($domain, ':')); // Remove port from domain.
         $domain = strtolower($domain);
 
+        if(isset($config->siteCode[$domain])) return $config->siteCode[$domain];
+
         if($domain == 'localhost') return $domain;
         if(!preg_match('/^([a-z0-9\-]+\.)+[a-z0-9\-]+$/', $domain)) die('domain denied');
 
