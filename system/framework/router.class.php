@@ -903,6 +903,7 @@ class router
     {
         $pathInfo = $this->getPathInfo('PATH_INFO');
         if(empty($pathInfo)) $pathInfo = $this->getPathInfo('ORIG_PATH_INFO');
+        if(empty($pathInfo)) $pathInfo = $this->getPathInfo('REQUEST_URI');
         if(!empty($pathInfo))
         {
             $dotPos = strrpos($pathInfo, '.');
