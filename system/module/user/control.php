@@ -217,6 +217,8 @@ class user extends control
         if($this->app->user->account == 'guest') $this->locate(inlink('login'));
         $this->view->mobileURL  = helper::createLink('user', 'control', '', '', 'mhtml');
         $this->view->desktopURL = helper::createLink('user', 'control', '', '', 'html');
+        $this->view->realname   = $this->user->getRealnameByID($this->app->user->id);
+
         $this->display();
     }
 

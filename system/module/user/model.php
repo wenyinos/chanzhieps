@@ -1016,6 +1016,21 @@ class userModel extends model
 
         return $realname ? $realname : $user->account;
     }
+    
+    /**
+     * Get realname by userID.
+     * 
+     * @param  int    $id 
+     * @access public
+     * @return string 
+     */
+    public function getRealnameByID($id)
+    {
+        $user = $this->dao->setAutoLang(false)->select('realnames, realname, account')->from(TABLE_USER)->where('id')->eq($id)->fetch();
+        if($user) $realname = $this->computeRealname($user);
+        return $realname;
+    }
+
 
     /**
      * check client IP is allowed. 
