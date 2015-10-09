@@ -60,6 +60,11 @@
         }
     };
 
+    var resetAjaxSetup = function (xhr)
+    {
+        xhr.setRequestHeader('X-Requested-With', {toString: function(){return 'XMLHttpRequest_VE';}});
+    };
+
     var showMessage = function(message, type, options)
     {
         if($.isPlainObject(type))
@@ -604,7 +609,6 @@
                   finish: function(e)
                   {
                       var orders = [];
-                      console.log(e.list);
                       $.each(e.list, function()
                       {
                           var $item = $$(this);
@@ -880,10 +884,7 @@
         });
 
         // set ajax options
-        $$.ajaxSetup({beforeSend: function (xhr)
-        {
-            xhr.setRequestHeader('X-Requested-With', {toString: function(){return 'XMLHttpRequest_VE';}});
-        }});
+        $$.ajaxSetup({beforeSend: resetAjaxSetup});
 
         if($$.fn.tooltip)
         {
@@ -974,7 +975,7 @@
         var url = $(this).attr('href');
         openModal(url,
         {
-            width : 1200,
+            width : '80%',
             icon  : 'cog',
             title : $this.attr('title') || $this.attr('data-original-title'),
             loaded: function(e)
@@ -983,13 +984,44 @@
                 modal$.setAjaxForm('.ve-form', function(response)
                 {
                     $.closeModal();
-                    reloadPage();
+                    var $style = $$('#themeStyle');
+                    $style.attr('href', $style.href());
                 });
                 if(DEBUG) console.log('Modal loaded:', url);
             }
         });
         return false;
     });
+
+    $.updateTheme = function()
+    {
+        $.ajax(
+        {
+            type: 'get',
+            url: visualPageUrl,
+            beforeSend: resetAjaxSetup,
+            success: function(response)
+            {
+                var $page = $(response);
+                var $style = $page.filter('link#themeStyle');
+                window.$page = $page;
+                themesConfig = $style.data();
+                $$('#themeStyle').attr(
+                {
+                    href: $style.attr('href'),
+                    'data-theme': themesConfig.theme
+                });
+                var $currentTheme = $('#menu .menu-theme').removeClass('current').filter('[data-theme="' + themesConfig.theme + '"]').addClass('current');
+                $('#menu .theme-picker').attr('data-theme', themesConfig.theme);
+                $('#menu .menu-theme-name').text($currentTheme.find('.theme-name').text());
+            },
+            error: function(e)
+            {
+                reloadPage();
+            }
+        });
+        $(document).trigger('click.zui.dropdown.data-api');
+    };
 
     // extend helper methods
     $.updateVisualArea = updateVisualArea;

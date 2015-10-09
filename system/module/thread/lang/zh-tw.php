@@ -24,8 +24,8 @@ $lang->thread->lastReply   = '最後回帖';
 $lang->thread->isLink      = '跳轉';
 $lang->thread->link        = '連結';
 
-$lang->thread->post         = '發貼';
-$lang->thread->postTo       = '發佈貼子到';
+$lang->thread->post         = '發帖';
+$lang->thread->postTo       = '發佈帖子到';
 $lang->thread->browse       = '主題列表';
 $lang->thread->stick        = '置頂';
 $lang->thread->edit         = '編輯主題';
@@ -59,6 +59,13 @@ $lang->thread->successShow     = '顯示成功';
 $lang->thread->readonlyMessage = '該帖已被設置為 <strong>只讀</strong>，您暫時無法發表新的回覆。';
 $lang->thread->successTransfer = '轉移成功';
 
+$lang->thread->score    = '獎勵積分';
+$lang->thread->scoreSum = "<strong class='red f-14px strong'>+%s</strong> ";
+$lang->thread->scores[5]  = '+ 5';
+$lang->thread->scores[10] = '+ 10';
+$lang->thread->scores[50] = '+ 50';
+$lang->thread->scores[100]= '+ 100';
+
 $lang->thread->placeholder = new stdclass();
 $lang->thread->placeholder->link = '輸入連結，可以是站外連接';
 
@@ -66,5 +73,5 @@ $lang->thread->placeholder->link = '輸入連結，可以是站外連接';
 if(!isset($lang->pager->settedInForum))
 {
     $lang->pager->noRecord = '';
-    $lang->pager->digest   = str_replace('記錄', '回貼', $lang->pager->digest);
+    $lang->pager->digest   = str_replace('記錄', '回帖', $lang->pager->digest);
 }

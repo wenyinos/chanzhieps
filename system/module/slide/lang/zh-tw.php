@@ -47,6 +47,8 @@ $lang->slide->createGroup = '添加分組';
 $lang->slide->editGroup   = '編輯分組';
 $lang->slide->removeGroup = '刪除分組';
 $lang->slide->return      = '返回分組';
+$lang->slide->rename      = '重命名';
+$lang->slide->removeGroup = '刪除分組';
 
 $lang->slide->successSort     = '排序成功保存';
 $lang->slide->noImageSelected = '沒有選擇圖片';

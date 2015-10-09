@@ -428,12 +428,15 @@ class helper
         if(strpos($domain, ':') !== false) $domain = substr($domain, 0, strpos($domain, ':')); // Remove port from domain.
         $domain = strtolower($domain);
 
+        if(isset($config->siteCode[$domain])) return $config->siteCode[$domain];
+
         if($domain == 'localhost') return $domain;
         if(!preg_match('/^([a-z0-9\-]+\.)+[a-z0-9\-]+$/', $domain)) die('domain denied');
 
         $domain  = str_replace('-', '_', $domain);    // Replace '-' by '_'.
         $items   = explode('.', $domain);
         $postfix = str_replace($items[0] . '.', '', $domain);
+        if(isset($config->chanzhi->node->domain) and $postfix == $config->chanzhi->node->domain) return $items[0];
         if(strpos($config->domainPostfix, "|$postfix|") !== false) return $items[0];
 
         $postfix = str_replace($items[0] . '.' . $items[1] . '.', '', $domain);

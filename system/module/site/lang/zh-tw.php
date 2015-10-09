@@ -22,7 +22,7 @@ $lang->site->domain          = '主域名';
 $lang->site->allowedDomain   = '可訪問域名';
 $lang->site->keywords        = '關鍵詞';
 $lang->site->indexKeywords   = '首頁關鍵詞';
-$lang->site->meta            = 'Meta信息';
+$lang->site->meta            = 'Meta 標籤';
 $lang->site->desc            = '站點描述';
 $lang->site->icpSN           = '備案編號';
 $lang->site->icpLink         = '備案連結';
@@ -39,6 +39,7 @@ $lang->site->cn2tw           = '自動從簡體版複製';
 $lang->site->cdn             = 'CDN地址';
 $lang->site->sensitive       = '敏感詞';
 $lang->site->scheme          = '預設訪問協議';
+$lang->site->saveDays        = '日誌保存天數';
 
 $lang->site->importantOption = '重要操作';
 $lang->site->checkIP         = '後台登錄IP白名單';
@@ -50,7 +51,10 @@ $lang->site->setsecurity     = '安全設置';
 $lang->site->setsensitive    = '敏感詞設置';
 $lang->site->filterSensitive = '敏感詞過濾';
 $lang->site->mobileTemplate  = '移動模板';
+$lang->site->score           = '積分';
+$lang->site->setCounts       = '設置積分規則';
 $lang->site->front           = '網站瀏覽';
+$lang->site->closeScoreTip   = '禁用積分功能後不再記錄積分，會員保持原有積分不變。';
 
 $lang->site->setBasic      = "基本信息設置";
 $lang->site->setLang       = "語言設置";
@@ -64,6 +68,7 @@ $lang->site->oauthHelp     = "使用幫助";
 $lang->site->setRecPerPage = "列表數量設置";
 $lang->site->useLocation   = "使用當前登錄地址: <span>%s</span>";
 $lang->site->changeSetting = "更改設置";
+$lang->site->setStat       = "流量統計設置";
 
 $lang->site->typeList = new stdclass();
 $lang->site->typeList->portal = '企業門戶';
@@ -120,6 +125,9 @@ $lang->site->frontList['guest'] = '不需要登錄';
 $lang->site->mobileTemplateList['open']  = '啟用';
 $lang->site->mobileTemplateList['close'] = '禁用';
 
+$lang->site->scoreList['open']  = '啟用';
+$lang->site->scoreList['close'] = '禁用';
+
 $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = '會員';
 $lang->site->moduleAvailable['article'] = '文章';
@@ -131,6 +139,8 @@ $lang->site->moduleAvailable['forum']   = '論壇';
 $lang->site->moduleAvailable['message'] = '評論留言';
 $lang->site->moduleAvailable['search']  = '搜索';
 $lang->site->moduleAvailable['shop']    = '商城';
+$lang->site->moduleAvailable['score']   = '積分';
+$lang->site->moduleAvailable['stat']    = '統計';
 
 $lang->site->metaHolder       = '可放置<meta><script><style>和<link>標籤。';
 $lang->site->fileAllowedRole  = '多個尾碼名之間請用 "," 隔開';
@@ -141,6 +151,7 @@ $lang->site->wrongAllowedIP   = 'IP 格式錯誤';
 $lang->site->changeLocation   = '您當前的登錄地區與允許登錄地區不一致。';
 $lang->site->sessionIpTip     = '開啟後，如IP變化將自動退出登錄。';
 $lang->site->schemeTip        = '所有訪問會跳轉至預設訪問協議。';
+$lang->site->saveDaysTip      = '訪問日誌保存天數必須為為 >0 的數字。';
 
 $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Robots檔案%s 不可寫，請修改權限後設置。';

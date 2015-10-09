@@ -691,7 +691,7 @@ CREATE TABLE IF NOT EXISTS `eps_order` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_orderProduct`;
-CREATE TABLE IF NOT EXISTS `eps_orderProduct` (
+CREATE TABLE IF NOT EXISTS `eps_order_product` (
   `id`          mediumint(9) NOT NULL AUTO_INCREMENT,
   `orderID`     mediumint(9) UNSIGNED NOT NULL default 0, 
   `productID`   mediumint(8) UNSIGNED Not null default 0,

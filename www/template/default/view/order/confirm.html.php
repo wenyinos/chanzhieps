@@ -54,7 +54,6 @@
             <td class='text-left'><?php echo $lang->order->price;?></td>
             <td><?php echo $lang->order->count;?></td>
             <td><?php echo $lang->order->amount;?></td>
-            <td><?php echo $lang->order->note;?></td>
             <td><?php echo $lang->actions;?></td>
           </tr>
         </thead>
@@ -97,13 +96,16 @@
             <strong class='text-danger'><?php echo $currencySymbol;?></strong>
             <strong class='text-danger amountContainer'><?php echo $amount?></strong>
           </td>
-          <td><?php echo html::textarea('note', '', "class='form-control' rows=1")?></td>
           <td class='text-middle text-center'>
             <?php echo html::a(helper::createLink('cart', 'delete', "product={$product->id}"), $lang->delete, "class='cartDeleter'");?>
             <?php echo html::hidden("product[]", $product->id);?>
           </td>
         </tr>
         <?php endforeach;?>
+        <tr>
+          <th class='text-center text-middle'><?php echo $lang->order->note?></th>
+          <td colspan='5'><?php echo html::textarea('note', '', "class='form-control' rows=1")?></td>
+        </tr>
       </table>
     </div>
     <div class='panel-footer text-right'>

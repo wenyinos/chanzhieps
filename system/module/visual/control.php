@@ -17,7 +17,7 @@ class visual extends control
      * @access public
      * @return void
      */
-    public function index($referer = '/')
+    public function index($referer = '')
     {
         $template = $this->config->template->{$this->device}->name;
         $this->loadModel('block')->loadTemplateLang($template);;
@@ -26,6 +26,7 @@ class visual extends control
         $this->view->title   = $this->lang->visual->common;
         $this->view->blocks  = $this->lang->block->{$template};
 
+        if($referer == '') $this->view->referer = getWebRoot();
         $this->display();
     }
 

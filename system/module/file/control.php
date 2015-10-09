@@ -176,8 +176,10 @@ class file extends control
 
             if(!$this->post->continue)
             {
-                $extension = $this->file->getExtension($_FILES['upFile']['name']);
-                if(!empty($this->file->checkSameFile(str_replace('.' . $extension, '', $_FILES['upFile']['name']), $fileID)) or !empty($this->file->checkSameFile($this->post->filename, $fileID))) $this->send(array('result' => 'fail', 'error' => $this->lang->file->sameName));
+                $extension    = $this->file->getExtension($_FILES['upFile']['name']);
+                $sameUpFile   = $this->file->checkSameFile(str_replace('.' . $extension, '', $_FILES['upFile']['name']), $fileID);
+                $sameFilename = $this->file->checkSameFile($this->post->filename, $fileID);
+                if(!empty($sameUpFile) or !empty($sameFilename))$this->send(array('result' => 'fail', 'error' => $this->lang->file->sameName));
             }
 
             $result = $this->file->sourceEdit($file, $filename);
@@ -207,9 +209,10 @@ class file extends control
         {
             foreach($_FILES['files']['name'] as $id => $name)
             {
-                $extension = $this->file->getExtension($name);
-                $filename  = !empty($_POST['labels'][$id]) ? htmlspecialchars($_POST['labels'][$id]) : str_replace('.' . $extension, '', $name);
-                if(!empty($this->file->checkSameFile($filename))) $this->send(array('result' => 'fail', 'error' => $this->lang->file->sameName));
+                $extension    = $this->file->getExtension($name);
+                $filename     = !empty($_POST['labels'][$id]) ? htmlspecialchars($_POST['labels'][$id]) : str_replace('.' . $extension, '', $name);
+                $sameFilename = $this->file->checkSameFile($filename);
+                if(!empty($sameFilename)) $this->send(array('result' => 'fail', 'error' => $this->lang->file->sameName));
             }
         }
 

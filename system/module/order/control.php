@@ -22,6 +22,7 @@ class order extends control
     public function confirm($product = 0, $count = 0)
     {
         $this->loadModel('product');
+        $this->app->loadLang('cart');
         $referer    = helper::safe64Encode(inlink('confirm', "product={$product}&count={$count}"));
         $mobileURL  = helper::createLink('order', 'confirm', "product=$product&count=$count", '', 'mhtml');
         $desktopURL = helper::createLink('order', 'confirm', "product=$product&count=$count", '', 'html');

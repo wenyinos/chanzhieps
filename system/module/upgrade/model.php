@@ -123,6 +123,7 @@ class upgradeModel extends model
                 $this->execSQL($this->getUpgradeFile('4.4.1'));
                 $this->computeScore();
                 $this->appendIDForRegion();
+            case '4_5';
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -172,6 +173,7 @@ class upgradeModel extends model
             case '4_3_beta' : $confirmContent .= file_get_contents($this->getUpgradeFile('4.3.beta'));
             case '4_4'      : $confirmContent .= file_get_contents($this->getUpgradeFile('4.4'));
             case '4_4_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('4.4.1'));
+            case '4_5';
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
@@ -1639,6 +1641,7 @@ class upgradeModel extends model
      */
     public function computeScore()
     {
+        $this->loadModel('score');
         $threads = $this->dao->select('*')->from(TABLE_THREAD)->fetchGroup('author');
         $replies = $this->dao->select('*')->from(TABLE_REPLY)->fetchGroup('author');
 
@@ -1681,8 +1684,10 @@ class upgradeModel extends model
                 $block->id = $regionID;
             }
             $blocks = helper::jsonEncode($blocks);
+            if($blocks == $layout->blocks) continue;
 
-            if($blocks != $layout->blocks) $this->dao->update(TABLE_LAYOUT)->set('blocks')->eq($blocks)->where('id')->eq($layout->id)->exec();
+            $layout->blocks = $blocks;
+            $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
         }
     }
 }

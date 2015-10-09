@@ -462,7 +462,7 @@ class commonModel extends model
                 echo "<span id='msgBox' class='hiding'></span>";
                 $referer = helper::safe64encode(trim($_SERVER['REQUEST_URI'], '/'));
                 $visualEditLink = $config->webRoot . getAdminEntry() . "?m=visual&f=index&referer={$referer}" ;
-                echo html::a($visualEditLink, $app->lang->editMode, "class='text-important' id='visualEditBtn'");
+                if($app->session->user->admin == 'super') echo html::a($visualEditLink, $app->lang->editMode, "class='text-important' id='visualEditBtn'");
                 echo html::a(helper::createLink('user', 'logout'),  $app->lang->logout);
             }
         }

@@ -22,6 +22,7 @@ $lang->order->expressInfo    = '快遞詳情';
 $lang->order->receiver       = '收貨人';
 $lang->order->noRecord       = '無';
 $lang->order->status         = '狀態';
+$lang->order->note           = '備註';
 
 $lang->order->admin          = '訂單管理';
 $lang->order->setting        = '系統設置';
@@ -63,6 +64,7 @@ $lang->order->lowStocks            = "<strong>%s</strong> 庫存不足";
 $lang->order->alipayPid   = '合作者ID';
 $lang->order->alipayKey   = '合作者KEY';
 $lang->order->alipayEmail = '支付寶郵箱';
+$lang->order->score       = '積分充值';
 
 $lang->order->placeholder = new stdclass();
 $lang->order->placeholder->pid   = '合作身份者id，以2088開頭的16位純數字';

@@ -91,16 +91,16 @@
                         <?php echo html::hidden("count[$product->id]", $product->count);?>
                       </td>
                     </tr>
-                    <tr>
-                      <th class='small'><?php echo $lang->order->note;?></th>
-                      <td><?php echo html::textarea('note', '', "class='form-control' rows=1");?></td>
-                    </tr>
                   </tbody>
                 </table>
               </div>
             </div>
           </div>
         <?php endforeach;?>
+        <div class='panel-body'>
+          <div class='alert bg-gray-pale'><strong><?php echo $lang->order->note; ?>)</strong></div>
+          <div><?php echo html::textarea('note', '', "class='form-control' rows=1");?></div>
+        </div>
       </div>
       <hr class='space'>
       <div class='alert bg-primary-pale'>

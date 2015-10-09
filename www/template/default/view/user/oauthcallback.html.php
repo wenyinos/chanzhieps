@@ -13,7 +13,7 @@
           </div>
           <div class='form-group'>
             <label class='col-sm-2 control-label' for='realname'><?php echo $lang->user->realname;?></label>
-            <div class='col-sm-9 required'><?php echo html::input('realname', '', "class='form-control'");?></div>
+            <div class='col-sm-9 required'><?php echo html::input('realname', $realname, "class='form-control'");?></div>
           </div>
           <div class='form-group'>
             <label class='col-sm-2 control-label' for='email'><?php echo $lang->user->email;?></label>

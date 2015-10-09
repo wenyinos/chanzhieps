@@ -17,7 +17,7 @@
     <li data-keys='#region <?php echo $lang->visual->js->subRegion ?>'>
       <a href='###' class='btn-add-block' data-id='region' id='addRegionBlock'>
       <strong class='nobr'><?php echo $lang->visual->js->subRegion;?></strong>
-      <small class='text-muted'><?php echo $lang->visual->js->subRegionDesc ?></small>
+      <small class='text-muted nobr'><?php echo $lang->visual->js->subRegionDesc ?></small>
       </a>
     </li>
   <?php endif; ?>
@@ -28,7 +28,7 @@
     <li data-keys='<?php echo "={$block->type} {$typeList[$block->type]} @{$category} {$block->title} #{$block->id}"?>'>
       <a href='###' class='btn-add-block' title="<?php echo $block->title?>" data-id='<?php echo $block->id;?>'>
         <strong class='nobr'><?php echo helper::subStr($block->title, 20);?></strong>
-        <small class='text-muted'><?php echo $lang->block->categoryList[$category];?> / <?php echo $typeList[$block->type] ?></small>
+        <small class='text-muted nobr'><?php echo $lang->block->categoryList[$category];?> / <?php echo $typeList[$block->type] ?></small>
       </a>
     </li>
     <?php endforeach;?>
