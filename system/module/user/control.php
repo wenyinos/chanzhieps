@@ -703,6 +703,8 @@ class user extends control
         $this->view->referer    = $referer;
         $this->view->mobileURL  = helper::createLink('user', 'oauthCallback', "provider=$provider", '', 'mhtml');
         $this->view->desktopURL = helper::createLink('user', 'oauthCallback', "provider=$provider", '', 'html');
+        if($provider == 'qq')   $this->view->realname = !empty($openUser->nickname) ? htmlspecialchars($openUser->nickname) : '';
+        if($provider == 'sina') $this->view->realname = !empty($openUser->name) ? htmlspecialchars($openUser->name) : '';
         die($this->display());
     }
 

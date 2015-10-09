@@ -121,8 +121,6 @@ else
 ?>
 <![endif]-->
 <?php
-$template   = $this->config->template->{$this->device}->name ? $this->config->template->{$this->device}->name : 'default';
-$theme      = $this->config->template->{$this->device}->theme ? $this->config->template->{$this->device}->theme : 'default';
 $baseCustom = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array();
 if(!empty($baseCustom[$template][$theme]['js'])) js::execute($baseCustom[$template][$theme]['js']);
 ?>
