@@ -690,7 +690,7 @@ CREATE TABLE IF NOT EXISTS `eps_order` (
   KEY `deliveriedDate` (`deliveriedDate`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- DROP TABLE IF EXISTS `eps_orderProduct`;
+-- DROP TABLE IF EXISTS `eps_order_product`;
 CREATE TABLE IF NOT EXISTS `eps_order_product` (
   `id`          mediumint(9) NOT NULL AUTO_INCREMENT,
   `orderID`     mediumint(9) UNSIGNED NOT NULL default 0, 
