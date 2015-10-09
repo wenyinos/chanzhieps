@@ -1,6 +1,5 @@
 <?php
 $config->product->recPerPage = 15;
-$config->product->currency   = 'rmb';
 
 $config->product->require = new stdclass();
 $config->product->require->create = 'categories, name, content';

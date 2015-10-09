@@ -10,6 +10,7 @@
         list($label, $module, $method) = explode('|', $menu);
 
         if(in_array($method, array('thread', 'reply')) && !commonModel::isAvailable('forum')) continue;
+        if($method == 'message' && !commonModel::isAvailable('message')) continue;
 
         if($module == $this->app->getModuleName() && $method == $this->app->getMethodName()) $class .= 'active';
 

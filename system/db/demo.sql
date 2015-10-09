@@ -86,7 +86,7 @@ INSERT INTO `eps_order` (`id`, `account`, `amount`, `payment`, `sn`, `address`, 
 (1,	'demo',	0.01,	'COD',	'',	'张三丰 [15988898558] 位于湖北省西北部的十堰市丹江口市境内 266555',	'',	'2015-02-12 14:24:53',	'0000-00-00 00:00:00',	'not_paid',	'0000-00-00 00:00:00',	'',	'not_send',	0,	'',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00',	'',	'normal',	'zh-cn'),
 (2,	'demo',	0.01,	'alipay',	'2015021200001000280046649527',	'张三丰 [15988898558] 位于湖北省西北部的十堰市丹江口市境内 266555',	'',	'2015-02-12 14:25:25',	'2015-02-12 14:26:05',	'paid',	'0000-00-00 00:00:00',	'',	'not_send',	0,	'',	'0000-00-00 00:00:00',	'0000-00-00 00:00:00',	'',	'normal',	'zh-cn');
 
-INSERT INTO `eps_orderProduct` (`id`, `orderID`, `productID`, `productName`, `price`, `count`, `lang`) VALUES
+INSERT INTO `eps_order_product` (`id`, `orderID`, `productID`, `productName`, `price`, `count`, `lang`) VALUES
 (1,	1,	2,	'云蝉知',	0.01,	1,	'zh-cn'),
 (2,	2,	2,	'云蝉知',	0.01,	1,	'zh-cn');
 

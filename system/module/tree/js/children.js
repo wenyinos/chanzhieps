@@ -26,5 +26,4 @@ $(document).ready(function()
         setTimeout(setChildrenKey, 200);
     })
 
-    $.setAjaxForm('#childForm');
 });
