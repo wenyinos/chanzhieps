@@ -70,6 +70,12 @@ $lang->user->checkEmail      = '綁定郵箱';
 $lang->user->getEmailCode    = '獲取郵箱驗證碼';
 $lang->user->editEmail       = '修改郵箱';
 $lang->user->newEmail        = '新郵箱';
+$lang->user->rank            = '等級積分';
+$lang->user->score           = '積分詳情';
+$lang->user->myScore         = '當前積分';
+$lang->user->buyScore        = '積分充值';
+$lang->user->addScore        = '獎勵積分';
+$lang->user->reduceScore     = '扣除積分';
 
 $lang->user->profile     = '個人信息';
 $lang->user->editProfile = '編輯信息';
@@ -190,8 +196,13 @@ $lang->user->control->lblPassword = "留空，則保持不變。";
 
 $lang->user->control->menus[10] = '<i class="icon-user"></i> 個人信息 <i class="icon-chevron-right"></i>|user|profile';
 $lang->user->control->menus[20] = '<i class="icon-comments-alt"></i> 我的消息 <i class="icon-chevron-right"></i>|user|message';
-$lang->user->control->menus[30] = '<i class="icon-share"></i> 我的主題 <i class="icon-chevron-right"></i>|user|thread';
-$lang->user->control->menus[40] = '<i class="icon-mail-reply"></i> 我的回帖 <i class="icon-chevron-right"></i>|user|reply';
+if(RUN_MODE != 'install' and commonModel::isAvailable('score'))
+{
+    $lang->user->control->menus[30] = '<i class="icon-sun"></i> 積分詳情 <i class="icon-chevron-right"></i>|user|score';
+    if(strpos($this->config->shop->payment, 'alipay') !== false) $lang->user->control->menus[40] = '<i class="icon-bolt"></i> 積分充值 <i class="icon-chevron-right"></i>|score|buyscore';
+}
+$lang->user->control->menus[50] = '<i class="icon-comment"></i> 我的主題 <i class="icon-chevron-right"></i>|user|thread';
+$lang->user->control->menus[60] = '<i class="icon-mail-reply"></i> 我的回帖 <i class="icon-chevron-right"></i>|user|reply';
 
 if(RUN_MODE != 'install' and commonModel::isAvailable('order')) $lang->user->control->menus[25] = '<i class="icon-shopping-cart"></i> 我的訂單 <i class="icon-chevron-right"></i>|order|browse';
 if(RUN_MODE != 'install' and commonModel::isAvailable('shop')) $lang->user->control->menus[26] = '<i class="icon-map-marker"> </i> 地址管理 <i class="icon-chevron-right"></i>|address|browse';

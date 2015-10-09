@@ -13,6 +13,7 @@
 $lang->colon      = '：';
 $lang->prev       = '‹';
 $lang->next       = '›';
+$lang->equal      = '=';
 $lang->laquo      = '&laquo;';
 $lang->raquo      = '&raquo;';
 $lang->minus      = ' - ';
@@ -26,7 +27,6 @@ $lang->cn = '簡';
 $lang->tw = '繁';
 $lang->en = 'EN';
 
-$lang->noRecord  = '無';
 $lang->toBeAdded = '待添加';
 
 $lang->about  = '關於';
@@ -51,6 +51,8 @@ $lang->frontHome      = '前台';
 $lang->forumHome      = '論壇';
 $lang->bookHome       = '手冊';
 $lang->dashboard      = '用戶中心';
+$lang->visualEdit     = '可視化編輯';
+$lang->editMode       = '編輯模式';
 $lang->register       = '註冊';
 $lang->logout         = '退出';
 $lang->login          = '登錄';
@@ -112,6 +114,8 @@ $lang->js->timeout          = '網絡超時,請重試';
 $lang->js->errorThrown      = '<h4>執行出錯：</h4>';
 $lang->js->continueShopping = '繼續購物';
 $lang->js->required         = '必填';
+$lang->js->back             = '返回';
+$lang->js->continue         = '繼續';
 
 /* Contact fields*/
 $lang->company = new stdclass();
@@ -147,6 +151,7 @@ $lang->menu->security = '安全|site|setsecurity|';
 $lang->menu->user     = '會員|user|admin|';
 $lang->menu->order    = '訂單|order|admin|';
 $lang->menu->feedback = '反饋|message|admin|';
+$lang->menu->stat     = '統計|stat|traffic|';
 $lang->menu->package  = '擴展|package|browse|';
 
 /* Menu groups setting. */
@@ -177,7 +182,7 @@ $lang->blog->menu->browse = '所有博客|article|admin|type=blog';
 /* Menu of page module. */
 $lang->page = new stdclass();
 $lang->page->menu = new stdclass();
-$lang->page->menu->browse = array('link' => '單頁列表|article|admin|type=page', 'alias' => 'edit');
+$lang->page->menu->browse = array('link' => '單頁列表|article|admin|type=page', 'alias' => 'create, edit');
 
 /* Menu of product module. */
 $lang->product = new stdclass();
@@ -236,8 +241,9 @@ $lang->site->menu->link    = '友情連結|links|admin|';
 $lang->site->menu->oauth   = '開放登錄|site|setoauth|';
 $lang->site->menu->mail    = array('link' => '發信設置|mail|admin|', 'alias' => 'detect,edit,save,test');
 $lang->site->menu->wechat  = array('link' => '微信設置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
-$lang->site->menu->search  = '更新搜索索引|search|buildindex|';
+$lang->site->menu->search  = '全文檢索|search|buildindex|';
 $lang->site->menu->tag     = '關鍵詞設置|tag|admin|';
+$lang->site->menu->setStat = '流量統計設置|site|setStat|';
 
 /* Menu of security module. */
 $lang->security = new stdclass();
@@ -308,6 +314,17 @@ $lang->group->menu = $lang->security->menu;
 
 /* Menu of package module. */
 $lang->package = new stdclass();
+
+/* Menu of stat module. */
+$lang->stat = new stdclass();
+$lang->stat->menu = new stdclass();
+$lang->stat->menu->traffic  = '概況|stat|traffic|';
+$lang->stat->menu->from     = '來源統計|stat|from|';
+$lang->stat->menu->search   = '搜索引擎統計|stat|search|';
+$lang->stat->menu->keywords = '關鍵詞統計|stat|keywords|';
+$lang->stat->menu->domains  = '來路域名|stat|domainList|';
+$lang->stat->menu->client   = '終端統計|stat|client|type=browser';
+$lang->stat->menu->page     = '頁面訪問量排名|stat|page|';
 
 /* The error messages. */
 $lang->error = new stdclass();

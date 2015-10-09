@@ -38,14 +38,19 @@ $lang->article->link       = '連結';
 $lang->article->css        = 'CSS';
 $lang->article->js         = 'JS';
 
-$lang->article->list       = '文章列表';
-$lang->article->admin      = '維護文章';
-$lang->article->create     = '發佈文章';
-$lang->article->setcss     = '設置CSS';
-$lang->article->setjs      = '設置JS';
-$lang->article->edit       = '編輯文章';
-$lang->article->files      = '附件';
-$lang->article->images     = '圖片';
+$lang->article->forward2Blog     = '轉至博客';
+$lang->article->forward2Forum    = '轉至論壇';
+$lang->article->selectCategories = '選擇類目';
+$lang->article->selectBoard      = '選擇版塊';
+
+$lang->article->list          = '文章列表';
+$lang->article->admin         = '維護文章';
+$lang->article->create        = '發佈文章';
+$lang->article->setcss        = '設置CSS';
+$lang->article->setjs         = '設置JS';
+$lang->article->edit          = '編輯文章';
+$lang->article->files         = '附件';
+$lang->article->images        = '圖片';
 
 $lang->blog->admin  = '維護博客';
 $lang->blog->list   = '博客列表';
@@ -60,6 +65,7 @@ $lang->page->edit   = '編輯單頁';
 $lang->article->sourceList['original']      = '原創';
 $lang->article->sourceList['copied']        = '轉貼';
 $lang->article->sourceList['translational'] = '翻譯';
+$lang->article->sourceList['article']       = '轉自文章';
 
 $lang->article->statusList['normal'] = '正常';
 $lang->article->statusList['draft']  = '草稿';
@@ -90,3 +96,5 @@ $lang->article->noJsTag   = '不需要&lt;script&gt;&lt;/script&gt;標籤';
 $lang->article->placeholder = new stdclass();
 $lang->article->placeholder->addedDate = '可以延遲到選定的時間發佈。';
 $lang->article->placeholder->link      = '輸入連結，可以是站外連結';
+
+$lang->article->forwardFrom = '轉發自';
