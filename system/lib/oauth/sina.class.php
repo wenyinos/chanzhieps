@@ -65,8 +65,8 @@ class sina extends OAuth
         $data = json_decode($data);
 
         $token = new stdclass();
-        $token->openID      = $data->uid;
-        $token->accessToken = $data->access_token;
+        $token->openID      = isset($data->uid) ? $data->uid : '';
+        $token->accessToken = isset($data->access_token) ? $data->access_token : '';
 
         return $token;
     }
