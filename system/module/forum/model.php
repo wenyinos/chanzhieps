@@ -117,7 +117,7 @@ class forumModel extends model
             $data->postedBy = '';
         } 
 
-        $this->dao->update(TABLE_CATEGORY)->data($data)->where('id')->eq($boardID)->exec();
+        $this->dao->setAutoLang(false)->update(TABLE_CATEGORY)->data($data)->where('id')->eq($boardID)->exec();
     }
 
     /**
