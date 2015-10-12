@@ -5,7 +5,7 @@
     <div class="col-md-10">
       <div class="panel panel-body">
         <div class="jumbotron-bg">
-          <?php printf($lang->user->control->welcome, $this->app->user->realname);?>
+          <?php printf($lang->user->control->welcome, $realname);?>
         </div>
       </div>
     </div>

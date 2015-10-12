@@ -71,8 +71,7 @@ $lang->board->placeholder->setChildren = '論壇功能需要設置二級版塊�
 
 /* Lang items for express. */
 $lang->express = $lang->tree;
-$lang->express->common = '快遞';
-$lang->express->name   = '快遞名稱';
+$lang->express->name = '快遞名稱';
 
 /* Lang items for wechat menu. */
 $lang->wechatMenu = new stdclass();

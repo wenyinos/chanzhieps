@@ -48,7 +48,7 @@ class tree extends control
         $userFunc = $isWechatMenu ? array($modelName, 'createWechatMenuLink') : array($modelName, 'createManageLink');
         $this->view->treeMenu = $this->tree->getTreeMenu($type, 0, $userFunc);
 
-        $this->view->title        = $this->lang->tree->common;
+        $this->view->title        = $this->lang->category->common;
         $this->view->type         = $type;
         $this->view->root         = $root;
         $this->view->children     = $this->tree->getChildren($root, $type);
