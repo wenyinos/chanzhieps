@@ -19,8 +19,9 @@
   <div class='panel-body'>
     <?php
     $count = count($products);
+    if($count == 0) $count = 1;
     $recPerRow = min($count, 2);
-    ;?>
+    ?>
     <div class='cards cards-products' data-cols='<?php echo $recPerRow?>' id='products'>
       <style><?php echo ".col-custom-{$recPerRow} {width: " . (100/$recPerRow) . "%}"; ?></style>
       <?php

@@ -32,7 +32,7 @@ js::execute($article->js);
             if(!empty($this->config->oauth->sina))
             {
                 $sina = json_decode($this->config->oauth->sina);
-                if($sina->widget) echo "<div class='sina-widget'>" . $sina->widget . '</div>';
+                if(isset($sina->widget)) echo "<div class='sina-widget'>" . $sina->widget . '</div>';
             }
             ?>
             <span class='label label-warning' data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblViews, $article->views);?>'><i class='icon-eye-open'></i> <?php echo $article->views; ?></span>

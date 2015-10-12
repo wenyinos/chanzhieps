@@ -1003,7 +1003,8 @@ class userModel extends model
      */
     public function computeRealname($user)
     {
-        if(!$user->realnames)
+        if(empty($user->account)) return 'guest';
+        if(empty($user->realnames))
         {
             $realname = $user->realname;
         }
