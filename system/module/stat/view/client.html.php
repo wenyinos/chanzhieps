@@ -23,7 +23,7 @@
       <ul class='nav nav-tabs'>
         <?php foreach($lang->stat->trafficModes as $code => $modeName):?>
         <?php $class = $mode == $code ? "class='active'" : '';?>
-        <li <?php echo $class?>><?php echo html::a(inlink('report', "type={$type}&mode=$code"), $modeName);?></li>
+        <li <?php echo $class?>><?php echo html::a(inlink('client', "type={$type}&mode=$code"), $modeName);?></li>
         <?php endforeach;?>
         <li>
           <form method='get'>
