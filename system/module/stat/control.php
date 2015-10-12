@@ -53,7 +53,7 @@ class stat extends control
      * @access public
      * @return void
      */
-    public function from($mode = 'weekly', $begin = '', $end = '')
+    public function from($mode = 'today', $begin = '', $end = '')
     {
         $type = 'from';
         $date  = $this->stat->parseDate($mode, $begin, $end);
@@ -90,7 +90,7 @@ class stat extends control
      * @access public
      * @return void
      */
-    public function search($mode = 'weekly', $begin = '', $end = '')
+    public function search($mode = 'today', $begin = '', $end = '')
     {
         $type = 'search';
         $date  = $this->stat->parseDate($mode, $begin, $end);
@@ -128,7 +128,7 @@ class stat extends control
      * @access public
      * @return void
      */
-    public function client($type = 'browser', $mode = 'weekly', $begin = '', $end = '')
+    public function client($type = 'browser', $mode = 'today', $begin = '', $end = '')
     {
         $date  = $this->stat->parseDate($mode, $begin, $end);
         $begin = $date->begin;
@@ -224,7 +224,7 @@ class stat extends control
      * @access public
      * @return void
      */
-    public function keywordReport($keyword, $mode = 'weekly', $begin = '', $end = '')
+    public function keywordReport($keyword, $mode = 'today', $begin = '', $end = '')
     {
         $date  = $this->stat->parseDate($mode, $begin, $end);
         $begin = $date->begin;
@@ -256,7 +256,7 @@ class stat extends control
      * @access public
      * @return void
      */
-    public function domainList($mode = 'weekly', $begin = '', $end = '', $orderBy = 'pv_desc',  $recTotal = 0, $recPerPage = 10, $pageID = 1)
+    public function domainList($mode = 'today', $begin = '', $end = '', $orderBy = 'pv_desc',  $recTotal = 0, $recPerPage = 10, $pageID = 1)
 
     {
         $this->app->loadClass('pager', $static = true);
@@ -287,7 +287,7 @@ class stat extends control
      * @access public
      * @return void
      */
-    public function domainTrend($domain, $mode = 'weekly', $begin = '', $end = '')
+    public function domainTrend($domain, $mode = 'today', $begin = '', $end = '')
     {
         $domain = helper::safe64decode($domain);
         $date  = $this->stat->parseDate($mode, $begin, $end);
@@ -317,7 +317,7 @@ class stat extends control
      * @access public
      * @return void
      */
-    public function domainPage($domain, $mode = 'weekly', $begin = '', $end = '', $recTotal = 0, $recPerPage = 50, $pageID = 1)
+    public function domainPage($domain, $mode = 'today', $begin = '', $end = '', $recTotal = 0, $recPerPage = 50, $pageID = 1)
 
     {
         $date  = $this->stat->parseDate($mode, $begin, $end);
@@ -348,7 +348,7 @@ class stat extends control
      * @access public
      * @return void
      */
-    public function page($mode = 'all', $begin = '', $end = '')
+    public function page($mode = 'today', $begin = '', $end = '')
     {
         $date  = $this->stat->parseDate($mode, $begin, $end);
         $begin = $date->begin;
