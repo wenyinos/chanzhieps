@@ -62,7 +62,7 @@
         <label data-type='ip'> <?php echo $lang->stat->ipCount;?></label>
       </div>
     </div>
-    <div class='clo-md-6'>
+    <div class='col-md-6'>
       <table class='table table-bordered table-report w-500px' id='reportData'>
         <thead>
           <tr class='text-center'>
