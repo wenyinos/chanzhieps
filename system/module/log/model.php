@@ -104,7 +104,7 @@ class logModel extends model
             }
             else
             {
-                $keywods = $queryInfo[$param];
+                $keywords = $queryInfo[$param];
             }
             $referer['searchEngine'] = $searchEngine;
             $referer['keywords']     = $keywords;
@@ -242,7 +242,7 @@ class logModel extends model
 
                 ->beginIF($type == 'keywords')
                 ->andWhere('keywords')->eq($log->keywords)
-                ->andWhere('extra')->eq($extra)
+                ->andWhere('searchEngine')->eq($extra)
                 ->fi()
 
                 ->beginIF($type == 'os')
