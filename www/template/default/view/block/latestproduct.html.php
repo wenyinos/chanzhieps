@@ -48,18 +48,19 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
             <?php echo $product->name;?>
             <span class='text-latin'>
             <?php
+            $currencySymbol = isset($this->config->product->currencySymbol) ? $this->config->product->currencySymbol : '￥';
             if(!$product->unsaleable)
             {
                 if($product->promotion != 0)
                 {
                     echo "&nbsp;&nbsp;";
-                    echo "<strong class='text-danger'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency) . $product->promotion . '</strong>';
+                    echo "<strong class='text-danger'>" . $currencySymbol . $product->promotion . '</strong>';
                 }
                 else
                 {
                     if($product->price != 0)
                     {
-                        echo "<strong class='text-danger'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency) . $product->price . '</strong>';
+                        echo "<strong class='text-danger'>" . $currencySymbol . $product->price . '</strong>';
                     }
                 }
             }
@@ -88,15 +89,15 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
             {
                 if($product->price != 0)
                 {
-                    echo "<small class='text-muted'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency) . "</small> ";
+                    echo "<small class='text-muted'>" . $this->config->product->currencySymbol . "</small> ";
                     echo "<del><small class='text-muted'>" . $product->price . "</small></del>";
                 }
-                echo "&nbsp; <small class='text-muted'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency) . "</small> ";
+                echo "&nbsp; <small class='text-muted'>" . $this->config->product->currencySymbol . "</small> ";
                 echo "<strong class='text-danger'>" . $product->promotion . "</strong>";
             }
             else if($product->price != 0)
             {
-                echo "&nbsp; <small class='text-muted'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency) . "</small> ";
+                echo "&nbsp; <small class='text-muted'>" . $this->config->product->currencySymbol . "</small> ";
                 echo "<strong class='text-important'>" . $product->price . "</strong>";
             }
         }

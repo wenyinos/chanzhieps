@@ -50,7 +50,7 @@ class cart extends control
         $this->app->loadLang('product');
         $this->app->loadConfig('product');
         $this->app->loadLang('order');
-        $this->view->currencySymbol = $this->lang->product->currencySymbols[$this->config->product->currency];
+        $this->view->currencySymbol = $this->config->product->currencySymbol;
         $this->view->title      = $this->lang->cart->browse;
         $this->view->products   = $this->cart->getListByAccount($this->app->user->account);
         $this->view->mobileURL  = helper::createLink('cart', 'browse', '', '', 'mhtml');

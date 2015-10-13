@@ -482,6 +482,7 @@ class productModel extends model
         $setting = new stdclass();
         $setting->stock    = $this->post->stock;
         $setting->currency = $this->post->currency;
+        $setting->currencySymbol = $this->lang->product->currencySymbols[$this->post->currency];
 
         $this->loadModel('setting')->setItems('system.common.product', $setting);
         return !dao::isError();

@@ -47,52 +47,55 @@
   </div>
   <?php if(!empty($pieCharts)):?>
   <div class='panel-body'>
-    <div class='col-md-6'>
-      <ul id='typeMenu' class='nav nav-pills pull-right'>
-        <?php
-        echo "<li>" . html::a(inlink('client', "type=browser"), $lang->stat->browser, "class='w-p100'") . '</li>';
-        echo '<li>' . html::a(inlink('client', "type=os"), $lang->stat->os,           "class='w-p100'") . '</li>';
-        echo '<li>' . html::a(inlink('client', "type=device"), $lang->stat->device,   "class='w-p100'") . '</li>';
-        ?>
-      </ul>
-      <div class='chart-canvas'><canvas height='260' width='400' id='pieChart'></canvas></div>
-      <div class='text-center w-400px' id='switchBar'>
-        <label data-type='pv' class='active'> <?php echo $lang->stat->pv;?></label>
-        <label data-type='uv'> <?php echo $lang->stat->uv;?></label>
-        <label data-type='ip'> <?php echo $lang->stat->ipCount;?></label>
+    <ul id='typeMenu' class='nav nav-pills pull-right'>
+      <?php
+      echo "<li>" . html::a(inlink('client', "type=browser"), $lang->stat->browser, "class='w-p100'") . '</li>';
+      echo '<li>' . html::a(inlink('client', "type=os"), $lang->stat->os,           "class='w-p100'") . '</li>';
+      echo '<li>' . html::a(inlink('client', "type=device"), $lang->stat->device,   "class='w-p100'") . '</li>';
+      ?>
+    </ul>
+    <div class='row' style='clear:both'>
+      <div class='col-md-6'>
+        <div class='chart-canvas'><canvas height='260' width='400' id='pieChart'></canvas></div>
+        <div class='text-center w-400px' id='switchBar'>
+          <label data-type='pv' class='active'> <?php echo $lang->stat->pv;?></label>
+          <label data-type='uv'> <?php echo $lang->stat->uv;?></label>
+          <label data-type='ip'> <?php echo $lang->stat->ipCount;?></label>
+        </div>
       </div>
-    </div>
-    <div class='clo-md-6'>
-      <table class='table table-bordered table-report w-500px' id='reportData'>
-        <thead>
+      <div class='col-md-6'>
+        <table class='table table-bordered table-report' id='reportData'>
+          <thead>
+            <tr class='text-center'>
+              <td><?php echo zget($lang->stat, $type);?></td>
+              <td><?php echo $lang->stat->pv;?></td>
+              <td><?php echo $lang->stat->uv;?></td>
+              <td><?php echo $lang->stat->ipCount;?></td>
+              <?php if(isset($totalPV)):?>
+              <td><?php echo $lang->stat->percentage;?></td>
+              <?php endif;?>
+            </tr>
+          </thead>
+          <?php for($i = 0 ; $i < count($pieCharts['pv']); $i ++):?>
+          <?php $report = $pieCharts['pv'][$i];?>
           <tr class='text-center'>
-            <td><?php echo zget($lang->stat, $type);?></td>
-            <td><?php echo $lang->stat->pv;?></td>
-            <td><?php echo $lang->stat->uv;?></td>
-            <td><?php echo $lang->stat->ipCount;?></td>
+            <?php if($type == 'domain'):?>
+            <td><?php echo $report->label . ' ' . html::a(inlink('domain', "domain=" . urlencode($report->label)), " <i class='icon icon-search'></i>");?></td>
+            <?php else:?>
+            <td><?php echo $report->label;?></td>
+            <?php endif;?>
+            <td><?php echo $report->value;?></td>
+            <td><?php echo $pieCharts['uv'][$i]->value;?></td>
+            <td><?php echo $pieCharts['ip'][$i]->value;?></td>
             <?php if(isset($totalPV)):?>
-            <td><?php echo $lang->stat->percentage;?></td>
+            <td><?php echo number_format($pieCharts['pv'][$i]->value * 100 / $totalPV, 2);?>%</td>
             <?php endif;?>
           </tr>
-        </thead>
-        <?php for($i = 0 ; $i < count($pieCharts['pv']); $i ++):?>
-        <?php $report = $pieCharts['pv'][$i];?>
-        <tr class='text-center'>
-          <?php if($type == 'domain'):?>
-          <td><?php echo $report->label . ' ' . html::a(inlink('domain', "domain=" . urlencode($report->label)), " <i class='icon icon-search'></i>");?></td>
-          <?php else:?>
-          <td><?php echo $report->label;?></td>
-          <?php endif;?>
-          <td><?php echo $report->value;?></td>
-          <td><?php echo $pieCharts['uv'][$i]->value;?></td>
-          <td><?php echo $pieCharts['ip'][$i]->value;?></td>
-          <?php if(isset($totalPV)):?>
-          <td><?php echo number_format($pieCharts['pv'][$i]->value * 100 / $totalPV, 2);?>%</td>
-          <?php endif;?>
-        </tr>
-        <?php endfor;?>
-      </table>
-  </div>  
+          <?php endfor;?>
+        </table>
+      </div>  
+    </div>
+  </div>
   <?php else:?>
   <div class='panel-body text-danger'><?php echo $lang->stat->noData;?></div>
   <?php endif;?>
