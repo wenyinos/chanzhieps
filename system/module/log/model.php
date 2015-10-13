@@ -198,11 +198,11 @@ class logModel extends model
 
         /* Save os data. */
         $this->saveReportItem($type = 'os', $item = $visitor->osName, $time, $log);
+
         /* Save browser data. */
         $this->saveReportItem($type = 'browser', $item = $visitor->browserName, $time, $log);
 
         /* Save from data. */
-        if($log->referer != 0) $this->saveReportItem($type = 'domain', $item = $referer->domain, $time, $log, $referer->url);
         if($log->referer != 0 and $log->searchEngine == '') $this->saveReportItem($type = 'from', $item = 'out', $time, $log);
         if($log->referer == 0) $this->saveReportItem($type = 'from', $item = 'self', $time, $log);
         if(!empty($log->referer) and $log->searchEngine != '') $this->saveReportItem($type = 'from', $item = 'search', $time, $log);
