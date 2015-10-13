@@ -47,14 +47,14 @@
   </div>
   <?php if(!empty($pieCharts)):?>
   <div class='panel-body'>
+    <ul id='typeMenu' class='nav nav-pills pull-right'>
+      <?php
+      echo "<li>" . html::a(inlink('client', "type=browser"), $lang->stat->browser, "class='w-p100'") . '</li>';
+      echo '<li>' . html::a(inlink('client', "type=os"), $lang->stat->os,           "class='w-p100'") . '</li>';
+      echo '<li>' . html::a(inlink('client', "type=device"), $lang->stat->device,   "class='w-p100'") . '</li>';
+      ?>
+    </ul>
     <div class='col-md-6'>
-      <ul id='typeMenu' class='nav nav-pills pull-right'>
-        <?php
-        echo "<li>" . html::a(inlink('client', "type=browser"), $lang->stat->browser, "class='w-p100'") . '</li>';
-        echo '<li>' . html::a(inlink('client', "type=os"), $lang->stat->os,           "class='w-p100'") . '</li>';
-        echo '<li>' . html::a(inlink('client', "type=device"), $lang->stat->device,   "class='w-p100'") . '</li>';
-        ?>
-      </ul>
       <div class='chart-canvas'><canvas height='260' width='400' id='pieChart'></canvas></div>
       <div class='text-center w-400px' id='switchBar'>
         <label data-type='pv' class='active'> <?php echo $lang->stat->pv;?></label>
@@ -63,7 +63,7 @@
       </div>
     </div>
     <div class='col-md-6'>
-      <table class='table table-bordered table-report w-500px' id='reportData'>
+      <table class='table table-bordered table-report' id='reportData'>
         <thead>
           <tr class='text-center'>
             <td><?php echo zget($lang->stat, $type);?></td>
