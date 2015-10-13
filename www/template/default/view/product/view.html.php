@@ -74,10 +74,10 @@ js::execute($product->js);
                       if($product->price != 0)
                       {
                           $attributeHtml .= "<li><span class='meta-name'>" . $lang->product->price . "</span>";
-                          $attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . $lang->product->currencySymbols[$this->config->product->currency] . "</span> <del><strong class='text-latin'>" . $product->price . "</del></strong></span></li>";
+                          $attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . $this->config->product->currencySymbol . "</span> <del><strong class='text-latin'>" . $product->price . "</del></strong></span></li>";
                       }
                       $attributeHtml .= "<li><span class='meta-name'>" . $lang->product->promotion . "</span>";
-                      $attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . $lang->product->currencySymbols[$this->config->product->currency] . "</span> <strong class='text-danger text-latin text-lg'>" . $product->promotion . "</strong></span></li>";
+                      $attributeHtml .= "<span class='meta-value'><span class='text-muted text-latin'>" . $this->config->product->currencySymbol . "</span> <strong class='text-danger text-latin text-lg'>" . $product->promotion . "</strong></span></li>";
                   }
                   else if($product->price != 0)
                   {
