@@ -20,6 +20,7 @@ class sitemap extends control
      */
     public function index($onlyBody = 'no')
     {
+       if($this->app->getviewType() == 'mhtml') die($this->sitemapHTML($onlyBody));
        if($this->app->getviewType() == 'html') die($this->sitemapHTML($onlyBody));
        if($this->app->getviewType() == 'xml')  die($this->sitemapXML());
     }

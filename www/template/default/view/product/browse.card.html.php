@@ -16,18 +16,19 @@
       <div class='card-heading'>
         <span class='pull-right'>
           <?php
+          $currencySymbol = isset($this->config->product->currencySymbol) ? $this->config->product->currencySymbol : '￥';
           if(!$product->unsaleable)
           {
               if($product->promotion != 0)
               {
                   echo "<strong class='text-muted'>"  .'</strong>';
-                  echo "<strong class='text-danger'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->promotion . '</strong>&nbsp;&nbsp;';
+                  echo "<strong class='text-danger'>" . $currencySymbol . $product->promotion . '</strong>&nbsp;&nbsp;';
               }
               else
               {
                   if($product->price != 0)
                   {
-                      echo "<strong class='text-danger'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->price . '</strong>&nbsp;&nbsp;';
+                      echo "<strong class='text-danger'>" . $currencySymbol . $product->price . '</strong>&nbsp;&nbsp;';
                   }
               }
           }

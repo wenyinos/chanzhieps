@@ -77,15 +77,15 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
             {
                 if($product->promotion != 0)
                 {
-                    echo "<div><strong class='text-danger'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->promotion . '</strong>';
+                    echo "<div><strong class='text-danger'>" . $this->config->product->currencySymbol . $product->promotion . '</strong>';
                     if($product->price != 0)
                     {
-                        echo "&nbsp;&nbsp;<small class='text-muted text-line-through'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->price . '</small></div>';
+                        echo "&nbsp;&nbsp;<small class='text-muted text-line-through'>" . $this->config->product->currencySymbol . $product->price . '</small></div>';
                     }
                 }
                 else if($product->price != 0)
                 {
-                    echo "<div><strong class='text-danger'>" . zget($this->lang->product->currencySymbols, $this->config->product->currency, '￥') . $product->price . '</strong></div>';
+                    echo "<div><strong class='text-danger'>" . $this->config->product->currencySymbol . $product->price . '</strong></div>';
                 }
             }
             ?>
@@ -116,13 +116,13 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
             {
                 if($product->price != 0)
                 {
-                    echo "<small class='text-muted text-line-through'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->price . '</small>&nbsp;&nbsp;';
+                    echo "<small class='text-muted text-line-through'>" . $this->config->product->currencySymbol . $product->price . '</small>&nbsp;&nbsp;';
                 }
-                echo "<strong class='text-danger'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->promotion . '</strong>';
+                echo "<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->promotion . '</strong>';
             }
             else if($product->price != 0)
             {
-                echo "<strong class='text-danger'>" . $this->lang->product->currencySymbols[$this->config->product->currency] . $product->price . '</strong>';
+                echo "<strong class='text-danger'>" . $this->config->product->currencySymbol . $product->price . '</strong>';
             }
         }
         ?>

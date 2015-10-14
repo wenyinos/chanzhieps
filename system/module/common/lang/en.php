@@ -322,7 +322,7 @@ $lang->stat->menu->traffic  = 'Summary|stat|traffic|';
 $lang->stat->menu->from     = 'Source Stats|stat|from|';
 $lang->stat->menu->search   = 'Search Engine Stats|stat|search|';
 $lang->stat->menu->keywords = 'Keyswords Stats|stat|keywords|';
-$lang->stat->menu->domains  = 'Antecedents Domains|stat|domainList|';
+$lang->stat->menu->domains  = 'Antecedents Domains|stat|domainlist|';
 $lang->stat->menu->client   = 'Client Stats|stat|client|type=browser';
 $lang->stat->menu->page     = 'Page Views Ranking|stat|page|';
 
