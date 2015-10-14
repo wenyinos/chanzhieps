@@ -98,6 +98,8 @@ class scoreModel extends model
      */
     public function log($account, $method, $type, $count, $note, $objectType = '', $objectID = '', $force = false)
     {
+        if(empty($count)) return true;
+
         /* Get the user info. */
         $account = strip_tags($account);
         $user    = $this->loadModel('user')->getByAccount($account);
