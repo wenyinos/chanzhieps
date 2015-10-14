@@ -42,7 +42,7 @@ class order extends control
         $this->view->title          = $this->lang->order->confirm;
         $this->view->paymentList    = $paymentOptions;
         $this->view->addresses      = $this->loadModel('address')->getListByAccount($this->app->user->account);
-        $this->view->currencySymbol = zget($this->lang->product->currencySymbols, $this->config->product->currency, '￥');
+        $this->view->currencySymbol = isset($this->config->product->currencySymbol) ? $this->config->product->currencySymbol : '￥';
         $this->view->mobileURL      = $mobileURL;
         $this->view->desktopURL     = $desktopURL;
         $this->display();
@@ -94,7 +94,7 @@ class order extends control
         $this->view->value   = $value;
 
         $this->view->title          = $this->lang->order->admin;
-        $this->view->currencySymbol = zget($this->lang->product->currencySymbols, $this->config->product->currency, '￥');
+        $this->view->currencySymbol = isset($this->config->product->currencySymbol) ? $this->config->product->currencySymbol : '￥';
         
         $this->display();
     }
@@ -231,7 +231,7 @@ class order extends control
 
         $this->app->loadLang('product');
         $this->app->loadConfig('product');
-        $this->view->currencySymbol = zget($this->lang->product->currencySymbols, $this->config->product->currency, '￥');
+        $this->view->currencySymbol = isset($this->config->product->currencySymbol) ? $this->config->product->currencySymbol : '￥';
 
         $this->view->title      = $this->lang->order->browse;
         $this->view->mobileURL  = helper::createLink('order', 'browse', '', '', 'mhtml');

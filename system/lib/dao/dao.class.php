@@ -417,7 +417,12 @@ class dao
     public function data($data, $skipFields = '')
     {
         if(!is_object($data)) $data = (object)$data;
-        if($this->autoLang and !isset($data->lang)) $data->lang = $this->app->getClientLang();
+        if($this->autoLang and !isset($data->lang)) 
+        {
+            $data->lang = $this->app->getClientLang();
+            if(RUN_MODE == 'front' and $this->app->config->cn2tw) $data->lang = str_replace('zh-tw', 'zh-cn', $data->lang);
+        }
+
         $this->sqlobj->data($data, $skipFields);
         return $this;
     }

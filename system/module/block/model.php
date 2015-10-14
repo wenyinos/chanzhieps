@@ -547,6 +547,7 @@ class blockModel extends model
         $html   = '';
         foreach($blocks as $block)
         {
+            $block->type = isset($block->type) ? $block->type : '';
             if($block->type == 'links' and empty($block->grid)) $block->grid = 12;
         }
         foreach($blocks as $block) $html .= $this->parseBlockContent($block, $withGrid, $containerHeader, $containerFooter);
