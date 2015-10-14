@@ -124,6 +124,8 @@ class upgradeModel extends model
                 $this->computeScore();
                 $this->appendIDForRegion();
             case '4_5';
+            case '4_5_1':
+                $this->modifyLinksGrid();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -807,6 +809,36 @@ class upgradeModel extends model
         $this->dao->update(TABLE_LAYOUT)->set('region')->eq('bottom')->where('region')->eq('footer')->exec();
         $this->dao->update(TABLE_LAYOUT)->set('region')->eq('header')->where('region')->eq('start')->exec();
 
+        return !dao::isError();
+    }
+
+    /**
+     * Modify links grid equal 12 if it is empty. 
+     * 
+     * @access public
+     * @return bool 
+     */
+    public function modifyLinksGrid()
+    {
+        $layouts = $this->dao->setAutoLang(false)->select('*')->from(TABLE_LAYOUT)->where('page')->eq('index_index')->andWhere('region')->eq('bottom')->fetchAll();
+        $origionBlocks  = $this->dao->setAutoLang(false)->select('*')->from(TABLE_BLOCK)->fetchAll('id');
+
+        if(empty($layouts)) return true;
+        foreach($layouts as $layout)
+        {
+            $blocks = json_decode($layout->blocks);
+            foreach($blocks as $block)
+            {
+                if($block->grid !=='') continue;
+                if(!isset($origionBlocks[$block->id])) continue;
+                $origionBlock = $origionBlocks[$block->id];
+                a($origionBlock);
+                if($origionBlock->type != 'links') continue;
+                $block->grid = 12;
+            }
+            $layout->blocks = json_encode($blocks);
+            $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
+        }
         return !dao::isError();
     }
 
