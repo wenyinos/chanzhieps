@@ -257,7 +257,6 @@ class stat extends control
      * @return void
      */
     public function domainList($mode = 'today', $begin = '', $end = '', $orderBy = 'pv_desc',  $recTotal = 0, $recPerPage = 10, $pageID = 1)
-
     {
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
@@ -318,8 +317,8 @@ class stat extends control
      * @return void
      */
     public function domainPage($domain, $mode = 'today', $begin = '', $end = '', $recTotal = 0, $recPerPage = 50, $pageID = 1)
-
     {
+        $domain = helper::safe64Decode($domain);
         $date  = $this->stat->parseDate($mode, $begin, $end);
         $begin = $date->begin;
         $end   = $date->end;
