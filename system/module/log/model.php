@@ -162,8 +162,8 @@ class logModel extends model
         $log->browserVersion = $visitor->browserVersion;
 
         $log->referer      = !empty($referer) ? $referer->id : 0;
-        $log->domain       = isset($referer->domain);
-        $log->link         = isset($referer->url);
+        $log->domain       = isset($referer->domain) ? $referer->domain : '';
+        $log->link         = isset($referer->url) ? $referer->url : '';
         $log->searchEngine = isset($referer->searchEngine) ? $referer->searchEngine : '';
         $log->keywords     = isset($referer->keywords) ? $referer->keywords : '';
         $log->ip           = helper::getRemoteIp();
@@ -250,7 +250,7 @@ class logModel extends model
                 ->fi()
 
                 ->beginIF($type == 'url')
-                ->andWhere('url')->eq($log->url)
+                ->andWhere('link')->eq($log->url)
                 ->fi()
 
                 ->beginIF($type == 'domain')
