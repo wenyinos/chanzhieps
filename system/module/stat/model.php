@@ -417,10 +417,20 @@ class statModel extends model
         return $charts;
     }
 
+    /**
+     * Get page report data.
+     * 
+     * @param  int    $domain 
+     * @param  int    $begin 
+     * @param  int    $end 
+     * @param  int    $pager 
+     * @access public
+     * @return void
+     */
     public function getPageReport($domain, $begin, $end, $pager)
     {
         return $this->dao->select('*')->from(TABLE_STATREPORT)
-            ->where('type')->eq('domain')
+            ->where('type')->eq('url')
             ->andWhere('item')->eq($domain)
             ->andWhere('timeType')->eq('day')
             ->andWhere('timeValue')->ge($begin)
