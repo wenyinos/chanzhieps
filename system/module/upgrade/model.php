@@ -126,6 +126,7 @@ class upgradeModel extends model
             case '4_5';
             case '4_5_1':
                 $this->modifyLinksGrid();
+                $this->addOrderType();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -832,7 +833,6 @@ class upgradeModel extends model
                 if($block->grid !=='') continue;
                 if(!isset($origionBlocks[$block->id])) continue;
                 $origionBlock = $origionBlocks[$block->id];
-                a($origionBlock);
                 if($origionBlock->type != 'links') continue;
                 $block->grid = 12;
             }
@@ -1721,5 +1721,22 @@ class upgradeModel extends model
             $layout->blocks = $blocks;
             $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
         }
+    }
+
+    /**
+     * Add order type if table order have no type field. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function addOrderType()
+    {
+        $order = new stdclass();
+        $order->status = 'normal';
+        $this->dao->insert(TABLE_ORDER)->data($order)->exec();
+        $orderID = $this->dao->lastInsertID();
+        $order = $this->dao->select('*')->from(TABLE_ORDER)->where('id')->eq($orderID)->fetch();
+        if(empty($order->type)) $this->dbh->exec("ALTER TABLE `eps_order` ADD `type` varchar(30) NOT NULL default 'shop'");
+        $this->dao->delete()->from(TABLE_ORDER)->where('id')->eq($orderID)->exec();
     }
 }
