@@ -682,6 +682,7 @@ CREATE TABLE IF NOT EXISTS `eps_order` (
   `finishedDate` datetime NOT NULL,
   `finishedBy` char(30) NOT NULL,
   `status` enum('normal', 'canceled', 'finished') NOT NULL DEFAULT 'normal',
+  `type` varchar(30) NOT NULL default 'shop',
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `account` (`account`),

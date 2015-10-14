@@ -158,7 +158,13 @@ class messageModel extends model
     {
         $userMessages = $this->cookie->cmts;
         $userMessages = trim($userMessages, ',');
+        $idList       = explode(',', $userMessages);
         if(empty($userMessages)) $userMessages = '0';
+
+        foreach($idList as $id) 
+        {
+            if(!is_numeric($id)) $userMessages = '0';
+        }
 
         if(!$message) return false;
         return $this->dao->select('*')->from(TABLE_MESSAGE)
