@@ -5,6 +5,16 @@ $.extend(
 {
     setAjaxForm: function(formID, callback)
     {
+        if(typeof(ajaxForms) != "string")
+        {
+            ajaxForms = ',' + formID  + ',';
+        }
+        else
+        {
+            if(ajaxForms.indexOf(formID) != -1) return;
+            ajaxForms = ',' + formID  + ',';
+        }
+        
         appendFingerprint(formID);
         form = $(formID);
 
