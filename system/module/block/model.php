@@ -545,11 +545,6 @@ class blockModel extends model
         if(!isset($blocks[$method][$region])) return '';
         $blocks = $blocks[$method][$region];
         $html   = '';
-        foreach($blocks as $block)
-        {
-            $block->type = isset($block->type) ? $block->type : '';
-            if($block->type == 'links' and empty($block->grid)) $block->grid = 12;
-        }
         foreach($blocks as $block) $html .= $this->parseBlockContent($block, $withGrid, $containerHeader, $containerFooter);
         echo $html;
     }
