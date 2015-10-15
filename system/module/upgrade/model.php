@@ -125,6 +125,7 @@ class upgradeModel extends model
                 $this->appendIDForRegion();
             case '4_5';
             case '4_5_1':
+                $this->execSQL($this->getUpgradeFile('4.5.1'));
                 $this->modifyLinksGrid();
                 $this->addOrderType();
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
@@ -177,6 +178,7 @@ class upgradeModel extends model
             case '4_4'      : $confirmContent .= file_get_contents($this->getUpgradeFile('4.4'));
             case '4_4_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('4.4.1'));
             case '4_5';
+            case '4_5_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('4.5.1'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }
