@@ -1,6 +1,6 @@
-INSERT INTO `eps_layout` (template,page,region,blocks,import,lang,theme) select template,page,region,blocks,import,lang, 'clean' as theme from `eps_layout` where theme='default';
+REPLACE INTO `eps_layout` (template,page,region,blocks,import,lang,theme) select template,page,region,blocks,import,lang, 'clean' as theme from `eps_layout` where theme='default';
 
-INSERT INTO `eps_layout` (template,page,region,blocks,import,lang,theme) select template,page,region,blocks,import,lang, 'simple' as theme from `eps_layout` where theme='default';
+REPLACE INTO `eps_layout` (template,page,region,blocks,import,lang,theme) select template,page,region,blocks,import,lang, 'simple' as theme from `eps_layout` where theme='default';
 
 RENAME TABLE `eps_orderProduct` TO `eps_order_product`;
 
