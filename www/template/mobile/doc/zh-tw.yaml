@@ -5,7 +5,7 @@ type:template
 author:蟬知官方
 desc:這是蟬知默認模板
 version:1.0
-chanzhiVersion:4.4
+chanzhiVersion:4.5.2
 charge:free
 device:,mobile,
 license:http://www.chanzhi.org/book/chanzhieps/58_license.html

@@ -420,7 +420,7 @@ CREATE TABLE IF NOT EXISTS `eps_statreport`(
   `id` int(9) unsigned NOT NULL AUTO_INCREMENT,
   `type` char(30) NOT NULL,
   `item` char(100) NOT NULL DEFAULT '0',
-  `extra` varchar(200) NOT NULL DEFAULT '0',
+  `extra` text NOT NULL DEFAULT '0',
   `timeType` enum('year','month','day','hour') NOT NULL DEFAULT 'hour',
   `timeValue` char(10) NOT NULL DEFAULT '0',
   `pv` mediumint(9) unsigned NOT NULL DEFAULT '0',
