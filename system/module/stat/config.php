@@ -2,10 +2,8 @@
 $config->stat = new stdclass();
 
 $config->stat->searchEngines = array();
-$config->stat->searchEngines[] = 'baidu';
 $config->stat->searchEngines[] = 'haosou';
 $config->stat->searchEngines[] = 'bing';
-$config->stat->searchEngines[] = 'google';
 $config->stat->searchEngines[] = 'sogou';
 $config->stat->searchEngines[] = 'other';
 
