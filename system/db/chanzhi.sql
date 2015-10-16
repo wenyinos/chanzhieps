@@ -483,6 +483,7 @@ CREATE TABLE IF NOT EXISTS `eps_thread` (
   `repliedDate` datetime NOT NULL,
   `replyID` mediumint(8) unsigned NOT NULL,
   `hidden` enum('0','1') NOT NULL DEFAULT '0',
+  `status` enum('wait','normal','fail') NOT NULL DEFAULT 'wait';
   `link` varchar(255) NOT NULL,
   `lang` char(30) NOT NULL,
   PRIMARY KEY (`id`),

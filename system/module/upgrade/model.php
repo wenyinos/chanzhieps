@@ -128,6 +128,8 @@ class upgradeModel extends model
                 $this->execSQL($this->getUpgradeFile('4.5.1'));
                 $this->modifyLinksGrid();
                 $this->addOrderType();
+            case '4_5_2':
+                $this->execSQL($this->getUpgradeFile('4.5.2'));
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
