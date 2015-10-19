@@ -154,4 +154,18 @@ class forumModel extends model
 
         return false;
     }
+
+    /**
+     * Saving setting in config table. 
+     * 
+     * @access public
+     * @return bool 
+     */
+    public function saveSetting()
+    {
+        $setting = new stdclass();
+        $setting->threadCheck = $this->post->threadCheck; 
+        $this->loadModel('setting')->setItems('system.common.forum', $setting);
+        return !dao::isError();
+    }
 }

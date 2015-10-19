@@ -475,7 +475,7 @@ class productModel extends model
      * Save settings.
      * 
      * @access public
-     * @return void
+     * @return bool 
      */
     public function saveSetting()
     {

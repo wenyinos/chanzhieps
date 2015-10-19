@@ -117,4 +117,23 @@ class forum extends control
         $this->view->title = $this->lang->forum->update;
         $this->display();
     }
+
+    /**
+     * Forum settings.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setting()
+    {
+        if(!empty($_POST)) 
+        {
+            $result = $this->forum->saveSetting();
+            if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+        }
+        
+        $this->view->title = $this->lang->forum->setting;
+        $this->display();
+    }
 }
