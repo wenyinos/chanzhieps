@@ -30,7 +30,7 @@
         <th class='w-70px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->thread->views);?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('replies', $orderBy, $vars, $lang->thread->replies);?></th>
         <th class='w-200px'><?php commonModel::printOrderLink('repliedDate', $orderBy, $vars, $lang->thread->lastReply);?></th>
-        <th class='w-80px'><?php commonModel::printOrderLink('hidden', $orderBy, $vars, $lang->thread->status);?></th>
+        <th class='w-80px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->thread->status);?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('hidden', $orderBy, $vars, $lang->thread->display);?></th>
         <th class='w-150px'><?php echo $lang->actions;?></th>
       </tr>  
