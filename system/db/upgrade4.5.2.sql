@@ -20,3 +20,5 @@ CREATE TABLE IF NOT EXISTS  `eps_operationlog` (
   KEY operation (`type`, `operation`, `operateTime`),
   KEY `lang` (`lang`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+alter table eps_thread add `status` char(10) NOT NULL;

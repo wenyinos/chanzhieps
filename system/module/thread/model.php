@@ -200,6 +200,12 @@ class threadModel extends model
             if(!validater::checkSensitive($thread, $dicts)) return array('result' => 'fail', 'message' => $this->lang->error->sensitive);
         }
 
+        if($this->config->forum->postReview == 'open') 
+        {
+            $thread->status = 'wait';
+        }
+        else $thread->status = 'approved';
+
         $this->dao->insert(TABLE_THREAD)
             ->data($thread, $skip = 'captcha, uid, isLink')
             ->autoCheck()
@@ -212,22 +218,44 @@ class threadModel extends model
 
         $this->loadModel('file')->updateObjectID($this->post->uid, $threadID, 'thread');
 
-        if(!dao::isError())
-        {
-            $this->saveCookie($threadID);
-            $this->loadModel('file')->saveUpload('thread', $threadID);
-            if(commonModel::isAvailable('score')) $this->loadModel('score')->earn('thread', 'thread', $threadID);
+        if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
+       
+        $this->saveCookie($threadID);
+        $this->loadModel('file')->saveUpload('thread', $threadID);
 
-            /* Update board stats. */
-            $this->loadModel('forum')->updateBoardStats($boardID);
+        if($this->config->forum->postReview == 'open') return array('result' => 'success', 'message' => $this->lang->thread->thanks, 'locate' => helper::createLink('forum', 'board', "boardID=$boardID"));
+        if(commonModel::isAvailable('score')) $this->loadModel('score')->earn('thread', 'thread', $threadID);
 
-            $thread = $this->getByID($threadID);
-            $this->loadModel('search')->save('thread', $thread);
+        /* Update board stats. */
+        $this->loadModel('forum')->updateBoardStats($boardID);
 
-            return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => helper::createLink('thread', 'view', "threadID=$threadID"));
-        }
+        $thread = $this->getByID($threadID);
+        $this->loadModel('search')->save('thread', $thread);
 
-        return array('result' => 'fail', 'message' => dao::getError());
+        return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => helper::createLink('thread', 'view', "threadID=$threadID"));
+      
+
+    }
+
+    /**
+     * Approved post.
+     * 
+     * @param  int    $threadID 
+     * @param  int    $boardID 
+     * @access public
+     * @return void
+     */
+    public function approved($threadID, $boardID)
+    {
+        $this->dao->update(TABLE_THREAD)->set('status')->eq('approved')->where('id')->eq($threadID)->exec();
+        if(commonModel::isAvailable('score')) $this->loadModel('score')->earn('thread', 'thread', $threadID);
+
+        /* Update board stats. */
+        $this->loadModel('forum')->updateBoardStats($boardID);
+
+        $thread = $this->getByID($threadID);
+        $this->loadModel('search')->save('thread', $thread);
+        return !dao::isError();
     }
 
     /**
@@ -353,7 +381,7 @@ class threadModel extends model
     }
 
     /**
-     * Switch a thread's status.
+     * Switch a thread's display status.
      * 
      * @param  int    $threadID 
      * @access public

@@ -30,7 +30,8 @@
         <th class='w-70px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->thread->views);?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('replies', $orderBy, $vars, $lang->thread->replies);?></th>
         <th class='w-200px'><?php commonModel::printOrderLink('repliedDate', $orderBy, $vars, $lang->thread->lastReply);?></th>
-        <th class='w-80px'><?php commonModel::printOrderLink('hidden', $orderBy, $vars, $lang->thread->status);?></th>
+        <th class='w-80px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->thread->status);?></th>
+        <th class='w-80px'><?php commonModel::printOrderLink('hidden', $orderBy, $vars, $lang->thread->display);?></th>
         <th class='w-150px'><?php echo $lang->actions;?></th>
       </tr>  
     </thead>
@@ -51,20 +52,26 @@
         <td><?php echo $thread->views;?></td>
         <td><?php echo $thread->replies;?></td>
         <td class='text-left'><?php if($thread->replies) echo substr($thread->repliedDate, 5, -3) . ' ' . $thread->repliedByRealname;?></td>  
-        <td class='text-left'><?php echo $thread->hidden ? '<span class="text-warning"><i class="icon-eye-close"></i> ' . $lang->thread->statusList['hidden'] .'</span>' : '<span class="text-success"><i class="icon-ok-sign"></i> ' . $lang->thread->statusList['normal'] . '</span>';?></td>
+        <td class='text-left'><?php if(isset($thread->status)) echo $thread->status == 'wait' ? '<span class="text-warning"><i class="icon-eye-close"></i> ' . $lang->thread->statusList[$thread->status] .'</span>' : '<span class="text-success"><i class="icon-ok-sign"></i> ' . $lang->thread->statusList[$thread->status] . '</span>';?></td>
+        <td class='text-left'><?php echo $thread->hidden ? '<span class="text-warning"><i class="icon-eye-close"></i> ' . $lang->thread->displayList['hidden'] .'</span>' : '<span class="text-success"><i class="icon-ok-sign"></i> ' . $lang->thread->displayList['normal'] . '</span>';?></td>
         <td>
         <?php 
-        if($thread->hidden)
+        if($this->config->forum->postReview == 'open' and $thread->status =='wait')
+             commonModel::printLink('thread', 'approved', "threadID=$thread->id&$boardID=$thread->board", $lang->thread->approved, "class='reload'"); 
+        if($thread->status != 'wait')
         {
-            commonModel::printLink('thread', 'switchStatus', "threadID=$thread->id", $lang->thread->show, "class='reload'"); 
+            if($thread->hidden)
+            {
+                commonModel::printLink('thread', 'switchStatus', "threadID=$thread->id", $lang->thread->show, "class='reload'"); 
+            }
+            else
+            {
+                commonModel::printLink('thread', 'switchStatus', "threadID=$thread->id", $lang->thread->hide, "class='reload'"); 
+            }
+            
+            commonModel::printLink('thread', 'transfer', "threadID=$thread->id", $lang->thread->transfer, "data-toggle='modal'");
         }
-        else
-        {
-            commonModel::printLink('thread', 'switchStatus', "threadID=$thread->id", $lang->thread->hide, "class='reload'"); 
-        }
-        ?>
-        <?php commonModel::printLink('thread', 'transfer', "threadID=$thread->id", $lang->thread->transfer, "data-toggle='modal'");?>
-        <?php commonModel::printLink('thread', 'delete', "threadID=$thread->id", $lang->delete, "class='deleter'");?>
+        commonModel::printLink('thread', 'delete', "threadID=$thread->id", $lang->delete, "class='deleter'");?>
         </td>
       </tr>  
       <?php endforeach;?>

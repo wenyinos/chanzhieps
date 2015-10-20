@@ -87,6 +87,7 @@ class forumModel extends model
         /* Get threads and replies. */
         $stats = $this->dao->select('COUNT(id) as threads, SUM(replies) as replies')->from(TABLE_THREAD)
             ->where('board')->eq($boardID)
+            ->andWhere('status')->ne('wait')
             ->andWhere('addedDate')->le(helper::now())
             ->andWhere('hidden')->eq('0')
             ->fetch();
@@ -153,5 +154,19 @@ class forumModel extends model
         if(strpos($moderators, $user) !== false) return true;
 
         return false;
+    }
+
+    /**
+     * Saving setting in config table. 
+     * 
+     * @access public
+     * @return bool 
+     */
+    public function saveSetting()
+    {
+        $setting = new stdclass();
+        $setting->postReview = $this->post->postReview; 
+        $this->loadModel('setting')->setItems('system.common.forum', $setting);
+        return !dao::isError();
     }
 }

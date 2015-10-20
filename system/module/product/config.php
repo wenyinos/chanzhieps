@@ -10,3 +10,4 @@ $config->product->editor->create = array('id' => 'desc,content', 'tools' => 'ful
 $config->product->editor->edit   = array('id' => 'desc,content', 'tools' => 'full');
 
 if(!isset($config->product->currency)) $config->product->currency = 'rmb';
+if(!isset($config->product->currencySymbol)) $config->product->currencySymbol = '￥';

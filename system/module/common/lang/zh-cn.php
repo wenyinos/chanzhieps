@@ -225,10 +225,11 @@ $lang->message->menu = $lang->feedback->menu;
 /* Menu of forum module. */
 $lang->forum = new stdclass();
 $lang->forum->menu = new stdclass();
-$lang->forum->menu->browse = '主题列表|forum|admin|';
-$lang->forum->menu->reply  = '回帖列表|reply|admin|';
-$lang->forum->menu->tree   = '版块管理|tree|browse|type=forum';
-$lang->forum->menu->update = '更新数据|forum|update|';
+$lang->forum->menu->browse  = '主题列表|forum|admin|';
+$lang->forum->menu->reply   = '回帖列表|reply|admin|';
+$lang->forum->menu->tree    = '版块管理|tree|browse|type=forum';
+$lang->forum->menu->update  = '更新数据|forum|update|';
+$lang->forum->menu->setting = '论坛设置|forum|setting|';
 
 /* Menu of site module. */
 $lang->site = new stdclass();

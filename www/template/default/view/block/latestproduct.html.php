@@ -48,7 +48,7 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
             <?php echo $product->name;?>
             <span class='text-latin'>
             <?php
-            $currencySymbol = isset($this->config->product->currencySymbol) ? $this->config->product->currencySymbol : '￥';
+            $currencySymbol = $this->config->product->currencySymbol;
             if(!$product->unsaleable)
             {
                 if($product->promotion != 0)
