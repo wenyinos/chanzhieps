@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
+$lang->article->setting     = '文章设置';
 $lang->article->common      = '文章维护';
 $lang->article->createDraft = '保存草稿';
 
@@ -51,6 +52,11 @@ $lang->article->setjs         = '设置JS';
 $lang->article->edit          = '编辑文章';
 $lang->article->files         = '附件';
 $lang->article->images        = '图片';
+
+$lang->article->contribution = '投稿';
+$lang->article->contributionOptions = new stdclass;
+$lang->article->contributionOptions->open  = '开启';
+$lang->article->contributionOptions->close = '关闭';
 
 $lang->blog->admin  = '维护博客';
 $lang->blog->list   = '博客列表';

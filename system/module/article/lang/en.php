@@ -9,6 +9,7 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
+$lang->article->setting     = 'Setting';
 $lang->article->common      = 'Article';
 $lang->article->createDraft = 'Create draft';
 
@@ -51,6 +52,11 @@ $lang->article->setjs      = 'Set JS';
 $lang->article->edit       = 'Edit';
 $lang->article->files      = 'Files';
 $lang->article->images     = 'Images';
+
+$lang->article->contribution = 'Contribution';
+$lang->article->contributionOptions = new stdclass;
+$lang->article->contributionOptions->open  = 'Open';
+$lang->article->contributionOptions->close = 'Close';
 
 $lang->blog->admin  = 'Admin';
 $lang->blog->list   = 'List';
