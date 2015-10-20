@@ -9,10 +9,10 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->captcha = new stdclass();
+$lang->guarder = new stdclass();
 
-$lang->captcha->common      = 'Captcha';
-$lang->captcha->numbers     = array('Zero', 'I', 'II', 'III', 'Four', 'Five', '6', '7', '8', '9', '10');
-$lang->captcha->operators   = array('*' => 'x', '-' => '-', '+' => '+');
-$lang->captcha->equal       = '=';
-$lang->captcha->placeholder = 'Nubmer';
+$lang->guarder->common      = 'Captcha';
+$lang->guarder->numbers     = array('Zero', 'I', 'II', 'III', 'Four', 'Five', '6', '7', '8', '9', '10');
+$lang->guarder->operators   = array('*' => 'x', '-' => '-', '+' => '+');
+$lang->guarder->equal       = '=';
+$lang->guarder->placeholder = 'Nubmer';

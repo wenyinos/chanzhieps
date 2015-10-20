@@ -1,15 +1,15 @@
 <?php
 /**
- * The model file of captcha module of chanzhiEPS.
+ * The model file of guarder module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
  * @license     ZPLV1 (http://www.chanzhi.org/license/)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
- * @package     captcha
+ * @package     guarder
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-class captchaModel extends model
+class guarderModel extends model
 {
     /**
      * Check something is evil or not.
@@ -33,45 +33,45 @@ class captchaModel extends model
     }
 
     /**
-     * Create captcha for comment.
+     * Create guarder for comment.
      * 
      * @access public
      * @return string
      */
     public function create4Comment()
     {
-        $captcha = $this->create();     
+        $guarder = $this->create();     
         return <<<EOT
-<label for='captcha' class='col-sm-1 control-label'>{$this->lang->captcha->common}</label>
+<label for='captcha' class='col-sm-1 control-label'>{$this->lang->guarder->captcha}</label>
 <div class='col-sm-11 required'>
   <table class='captcha'>
       <tr class='text-middle'>
-        <td class='text-lg w-110px'><span class='label label-danger'>{$captcha->first} {$captcha->operator} {$captcha->second}</span></td>
-        <td class='text-lg text-center w-40px'> {$this->lang->captcha->equal} </td>
-        <td><input type='text' name='captcha' id='captcha' class='w-80px inline-block form-control text-center' placeholder='{$this->lang->captcha->placeholder}'/> &nbsp;</td>
+        <td class='text-lg w-110px'><span class='label label-danger'>{$guarder->first} {$guarder->operator} {$guarder->second}</span></td>
+        <td class='text-lg text-center w-40px'> {$this->lang->guarder->equal} </td>
+        <td><input type='text'  name='captcha' id='captcha' class='w-80px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;</td>
       </tr>
   </table>
 </div>
 EOT;
     }
 
-        /**
-     * Create captcha for comment.
+    /**
+     * Create guarder for comment.
      * 
      * @access public
      * @return string
      */
     public function create4Reply()
     {
-        $captcha = $this->create();     
+        $guarder = $this->create();     
         return <<<EOT
 <table class='captcha'>
   <tr class='text-middle'>
-    <td class='w-80px text-center'><label for='captcha'>{$this->lang->captcha->common}</label></td>
-    <td class='w-110px text-lg'><span class='label label-danger'>{$captcha->first} {$captcha->operator} {$captcha->second}</span></td>
-    <td class='w-40px text-lg text-center'>{$this->lang->captcha->equal}</td>
+    <td class='w-80px text-center'><label for='captcha'>{$this->lang->guarder->captcha}</label></td>
+    <td class='w-110px text-lg'><span class='label label-danger'>{$guarder->first} {$guarder->operator} {$guarder->second}</span></td>
+    <td class='w-40px text-lg text-center'>{$this->lang->guarder->equal}</td>
     <td>
-      <input type='text' name='captcha' id='captcha' class='w-80px inline-block form-control text-center' placeholder='{$this->lang->captcha->placeholder}'/> &nbsp;
+      <input type='text'  name='captcha' id='captcha' class='w-80px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;
     </td>
   </tr>
 </table>
@@ -79,22 +79,22 @@ EOT;
     }
 
     /**
-     * Create captcha for thread.
+     * Create guarder for thread.
      * 
      * @access public
      * @return string
      */
     public function create4Thread()
     {
-        $captcha = $this->create();
+        $guarder = $this->create();
         return <<<EOT
-<label for='captcha' class='col-md-1 col-sm-2 control-label'>{$this->lang->captcha->common}</label>
+<label for='captcha' class='col-md-1 col-sm-2 control-label'>{$this->lang->guarder->captcha}</label>
 <div class='col-md-7 col-sm-8 col-xs-11 required'>
   <table class='captcha'>
       <tr class='text-middle'>
-        <td class='text-lg w-110px'><span class='label label-danger'>{$captcha->first} {$captcha->operator} {$captcha->second}</span></td>
-        <td class='text-lg text-center w-40px'> {$this->lang->captcha->equal} </td>
-        <td><input type='text' name='captcha' id='captcha' class='w-80px inline-block form-control text-center' placeholder='{$this->lang->captcha->placeholder}'/> &nbsp;</td>
+        <td class='text-lg w-110px'><span class='label label-danger'>{$guarder->first} {$guarder->operator} {$guarder->second}</span></td>
+        <td class='text-lg text-center w-40px'> {$this->lang->guarder->equal} </td>
+        <td><input type='text'  name='captcha' id='captcha' class='w-80px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;</td>
       </tr>
   </table>
 </div>
@@ -102,22 +102,22 @@ EOT;
     }
 
     /**
-     * Create captcha for message reply.
+     * Create guarder for message reply.
      * 
      * @access public
      * @return string
      */
     public function create4MessageReply()
     {
-        $captcha = $this->create();
+        $guarder = $this->create();
         return <<<EOT
-<th>{$this->lang->captcha->common}</th>
+<th>{$this->lang->guarder->captcha}</th>
 <td>
   <table class='captcha'>
     <tr class='text-middle'>
-      <td class='text-lg w-110px'><span class='label label-danger'>{$captcha->first} {$captcha->operator} {$captcha->second}</span></td>
-      <td class='text-lg text-center w-40px'> {$this->lang->captcha->equal} </td>
-      <td><input type='text' name='captcha' id='captcha' class='w-80px inline-block form-control text-center' placeholder='{$this->lang->captcha->placeholder}'/> &nbsp;</td>
+      <td class='text-lg w-110px'><span class='label label-danger'>{$guarder->first} {$guarder->operator} {$guarder->second}</span></td>
+      <td class='text-lg text-center w-40px'> {$this->lang->guarder->equal} </td>
+      <td><input type='text'  name='captcha' id='captcha' class='w-80px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;</td>
     </tr>
   </table>
 </td>
@@ -125,15 +125,15 @@ EOT;
     }
 
     /**
-     * Create captcha.
+     * Create guarder.
      * 
      * @access public
      * @return object.
      */
-    public function create()
+    public function createCaptcha()
     {
         /* Get random two numbers and random operator. */
-        $operators      = array_keys($this->lang->captcha->operators);
+        $operators      = array_keys($this->lang->guarder->operators);
         $firstRand      = mt_rand(0, 10);
         $secondRand     = mt_rand(0, 10);
         $randomOperator = $operators[array_rand($operators)];
@@ -143,11 +143,11 @@ EOT;
         eval($expression);
         $this->session->set('captcha', $captcha);
 
-        /* Return the captcha data. */
+        /* Return the guarder data. */
         $captcha = new stdclass();
-        $captcha->first    = $this->lang->captcha->numbers[$firstRand];
-        $captcha->second   = $this->lang->captcha->numbers[$secondRand];
-        $captcha->operator = $this->lang->captcha->operators[$randomOperator];
+        $captcha->first    = $this->lang->guarder->numbers[$firstRand];
+        $captcha->second   = $this->lang->guarder->numbers[$secondRand];
+        $captcha->operator = $this->lang->guarder->operators[$randomOperator];
 
         return $captcha;
     }
