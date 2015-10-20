@@ -129,12 +129,12 @@ class message extends control
         {
             $captchaConfig = isset($this->config->site->captcha) ? $this->config->site->captcha : 'auto';
             $needCaptcha   = false;
-            if(($captchaConfig == 'auto' and $this->loadModel('captcha')->isEvil($this->post->content)) or $captchaConfig == 'open') $needCaptcha = true;
+            if(($captchaConfig == 'auto' and $this->loadModel('guarder')->isEvil($this->post->content)) or $captchaConfig == 'open') $needCaptcha = true;
 
             /* If no captcha but is garbage, return the error info. */
             if($this->post->captcha === false and $needCaptcha)
             {
-                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->loadModel('captcha')->create4Comment()));
+                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->loadModel('guarder')->create4Comment()));
             }
 
             $result = $this->message->post($type);
@@ -157,14 +157,14 @@ class message extends control
             {
                 $captchaConfig = isset($this->config->site->captcha) ? $this->config->site->captcha : 'auto';
                 $needCaptcha   = false;
-                if($captchaConfig == 'auto' and $this->loadModel('captcha')->isEvil($this->post->content)) $needCaptcha = true;
+                if($captchaConfig == 'auto' and $this->loadModel('guarder')->isEvil($this->post->content)) $needCaptcha = true;
                 if($captchaConfig == 'open')  $needCaptcha = true;
                 if($captchaConfig == 'close') $needCaptcha = false;
 
                 /* If no captcha but is garbage, return the error info. */
                 if($this->post->captcha === false and $needCaptcha)
                 {
-                    $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->loadModel('captcha')->create4MessageReply()));
+                    $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->loadModel('guarder')->create4MessageReply()));
                 }
             }
 

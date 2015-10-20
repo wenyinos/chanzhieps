@@ -151,4 +151,17 @@ EOT;
 
         return $captcha;
     }
+
+    /**
+     * Save operation log.
+     * 
+     * @param  string    $type 
+     * @param  string    $operation 
+     * @access public
+     * @return void
+     */
+    public function log($type, $operation)
+    {
+        
+    }
 }

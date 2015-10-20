@@ -26,12 +26,12 @@ class reply extends control
         {
             $captchaConfig = isset($this->config->site->captcha) ? $this->config->site->captcha : 'auto';
             $needCaptcha   = false;
-            if($captchaConfig == 'open' or ($captchaConfig == 'auto' and $this->loadModel('captcha')->isEvil($this->post->content))) $needCaptcha = true;
+            if($captchaConfig == 'open' or ($captchaConfig == 'auto' and $this->loadModel('guarder')->isEvil($this->post->content))) $needCaptcha = true;
 
             /* If no captcha but is garbage, return the error info. */
             if($this->post->captcha === false and $needCaptcha)
             {
-                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->loadModel('captcha')->create4Reply()));
+                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->loadModel('guarder')->create4Reply()));
             }
 
             $result = $this->reply->post($threadID);
@@ -89,7 +89,7 @@ class reply extends control
         if($_POST)
         {
             /* If no captcha but is garbage, return the error info. */
-            if($this->post->captcha === false and $this->loadModel('captcha')->isEvil($_POST['content']))
+            if($this->post->captcha === false and $this->loadModel('guarder')->isEvil($_POST['content']))
             {
                 $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->captcha->create4Thread()));
             }
