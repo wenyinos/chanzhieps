@@ -30,6 +30,8 @@ $lang->thread->browse       = 'Threads';
 $lang->thread->stick        = 'Sticky';
 $lang->thread->edit         = 'Edit';
 $lang->thread->status       = 'Status';
+$lang->thread->approved     = 'Approved';
+$lang->thread->display      = 'Display';
 $lang->thread->hide         = 'Hide';
 $lang->thread->show         = 'Show';
 $lang->thread->transfer     = 'Transfer';
@@ -42,6 +44,9 @@ $lang->thread->sticks[2] = 'Global stick';
 
 $lang->thread->statusList['hidden'] = 'Hidden';
 $lang->thread->statusList['normal'] = 'Normal';
+
+$lang->thread->statusList['wait']     = 'Wait';
+$lang->thread->statusList['approved'] = 'Approved';
 
 $lang->thread->confirmDeleteThread = "Are you sure to delete this thread?";
 $lang->thread->confirmHideReply    = "Are you sure to hide this reply?";
@@ -58,6 +63,7 @@ $lang->thread->successHide     = 'Successfully hide.';
 $lang->thread->successShow     = 'Successfully show.';
 $lang->thread->readonlyMessage = 'The thread has been set <strong>READONLY</strong>，you can not post new reply。';
 $lang->thread->successTransfer = 'Successfully Transfered';
+$lang->thread->thanks          = 'This thread will be posted after approved, have a good day~';
 
 $lang->thread->score    = 'Reward Scores';
 $lang->thread->scoreSum = "<strong class='red f-14px strong'>+%s</strong> ";

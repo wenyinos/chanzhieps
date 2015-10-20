@@ -164,7 +164,7 @@ class forumModel extends model
     public function saveSetting()
     {
         $setting = new stdclass();
-        $setting->threadCheck = $this->post->threadCheck; 
+        $setting->postReview = $this->post->postReview; 
         $this->loadModel('setting')->setItems('system.common.forum', $setting);
         return !dao::isError();
     }

@@ -1,1 +1,1 @@
-alter table eps_thread add `status` enum('wait','normal','fail') NOT NULL DEFAULT 'wait';
+alter table eps_thread add `status` char(10) NOT NULL;
