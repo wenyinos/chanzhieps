@@ -100,8 +100,10 @@ class article extends control
         if($type != 'page') 
         {
             $this->view->treeModuleMenu = $this->loadModel('tree')->getTreeMenu($type, 0, array('treeModel', 'createAdminLink'));
-            $this->view->treeManageLink = html::a(helper::createLink('tree', 'browse', "type={$type}"), $this->lang->tree->manage);
+            $this->view->treeManageLink = html::a(helper::createLink('article', 'setting', "type={$type}"), $this->lang->article->setting);
         }
+        if($type == 'article')
+            $this->view->treeManageLink .= '&nbsp;&nbsp;' . html::a(helper::createLink('tree', 'browse', "type={$type}"), $this->lang->tree->manage);
 
         $this->view->title      = $this->lang->$type->admin;
         $this->view->type       = $type;
@@ -375,6 +377,24 @@ class article extends control
         $this->view->parents    = array_keys($parents);
         $this->view->categories = $categories;
         $this->view->articleID  = $articleID;
+        $this->display();
+    }
+
+    /**
+     * Article setting. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function setting()
+    {
+        if($_POST)
+        {
+            $result = $this->article->saveSetting();
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+        $this->view->title = $this->lang->article->setting;
         $this->display();
     }
 }

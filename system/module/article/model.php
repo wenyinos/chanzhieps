@@ -675,4 +675,18 @@ class articleModel extends model
         
         return !dao::isError();
     }
+
+    /**
+     * Saving setting in config table. 
+     * 
+     * @access public
+     * @return bool 
+     */
+    public function saveSetting()
+    {
+        $setting = new stdclass();
+        $setting->contribution = $this->post->contribution; 
+        $this->loadModel('setting')->setItems('system.common.article', $setting);
+        return !dao::isError();
+    }
 }
