@@ -203,7 +203,6 @@ class threadModel extends model
         if($this->config->forum->postReview == 'open') 
         {
             $thread->status = 'wait';
-            $thread->hidden = 1;
         }
         else $thread->status = 'approved';
 
@@ -248,7 +247,7 @@ class threadModel extends model
      */
     public function approved($threadID, $boardID)
     {
-        $this->dao->update(TABLE_THREAD)->set('status')->eq('approved')->set('hidden')->eq(0)->where('id')->eq($threadID)->exec();
+        $this->dao->update(TABLE_THREAD)->set('status')->eq('approved')->where('id')->eq($threadID)->exec();
         if(commonModel::isAvailable('score')) $this->loadModel('score')->earn('thread', 'thread', $threadID);
 
         /* Update board stats. */

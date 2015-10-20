@@ -87,6 +87,7 @@ class forumModel extends model
         /* Get threads and replies. */
         $stats = $this->dao->select('COUNT(id) as threads, SUM(replies) as replies')->from(TABLE_THREAD)
             ->where('board')->eq($boardID)
+            ->andWhere('status')->ne('wait')
             ->andWhere('addedDate')->le(helper::now())
             ->andWhere('hidden')->eq('0')
             ->fetch();
