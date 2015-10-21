@@ -2,12 +2,14 @@ $(document).ready(function()
 {
     $('#navbar, #blogNav').find('ul.navbar-nav li a').each(function()
     {
-        if($(this).attr('href') != '/' && document.location.href.indexOf($(this).attr('href')) > -1 && $(this).parents('li').attr('class').indexOf('active') == -1)
+        var $a        = $(this);
+        var href      = $a.attr('href'), 
+            $li       = $a.parents('li'),
+            url       = document.location.href;
+        var hrefIndex = url.indexOf(href);
+        if(href !== '/' && hrefIndex > -1 && !$li.hasClass('active') && url.substring(hrefIndex) == href)
         {
-            if(document.location.href.substring(document.location.href.indexOf($(this).attr('href'))) == $(this).attr('href'))
-            {
-                $(this).parents('li').addClass('active');
-            }
+            $li.addClass('active');
         }
     });
 
