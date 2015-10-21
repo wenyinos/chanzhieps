@@ -77,11 +77,12 @@ $lang->user->buyScore        = 'Score Recharge';
 $lang->user->addScore        = 'Reward Score';
 $lang->user->reduceScore     = 'Deduct Score';
 
-$lang->user->profile     = 'Profile';
-$lang->user->editProfile = 'Edit profile';
-$lang->user->thread      = 'My threads';
-$lang->user->messages    = 'My Messages';
-$lang->user->reply       = 'My replies';
+$lang->user->profile      = 'Profile';
+$lang->user->editProfile  = 'Edit profile';
+$lang->user->thread       = 'My threads';
+$lang->user->messages     = 'My Messages';
+$lang->user->reply        = 'My replies';
+$lang->user->contribution = 'My Contribution';
 
 $lang->user->message = new stdclass();
 $lang->user->message->mine = "My message <span class='label label-badge text-latin'>%s</span>";
@@ -203,6 +204,8 @@ if(RUN_MODE != 'install' and commonModel::isAvailable('score'))
 }
 $lang->user->control->menus[50] = '<i class="icon-comment"></i> My Theme <i class="icon-chevron-right"></i>|user|thread';
 $lang->user->control->menus[60] = '<i class="icon-mail-reply"></i> My Replies <i class="icon-chevron-right"></i>|user|reply';
+
+if($this->config->article->contribution == 'open') $lang->user->control->menus[90] = '<i class="icon-envelope-alt"></i> My Contribution <i class="icon-chevron-right"></i>|article|contribution'; 
 
 if(RUN_MODE != 'install' and commonModel::isAvailable('order')) $lang->user->control->menus[25] = '<i class="icon-shopping-cart"></i> My Orders <i class="icon-chevron-right"></i>|order|browse';
 if(RUN_MODE != 'install' and commonModel::isAvailable('shop')) $lang->user->control->menus[26] = '<i class="icon-map-marker"> </i> Addresses <i class="icon-chevron-right"></i>|address|browse';

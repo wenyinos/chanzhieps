@@ -548,6 +548,9 @@ class articleModel extends model
         $article = $this->getByID($articleID);
         if(!$article) return false;
 
+        /* If this article is a contribution and has been adopt, front cannot delete it.*/
+        if(RUN_MODE == 'front' and $article->contribution == 2) die();
+
         $this->dao->delete()->from(TABLE_RELATION)->where('id')->eq($articleID)->andWhere('type')->eq($article->type)->exec();
         $this->dao->delete()->from(TABLE_ARTICLE)->where('id')->eq($articleID)->exec();
         return $this->loadModel('search')->deleteIndex($article->type, $articleID);

@@ -44,6 +44,12 @@ $lang->article->forward2Forum    = '转至论坛';
 $lang->article->selectCategories = '选择类目';
 $lang->article->selectBoard      = '选择版块';
 
+$lang->article->contributionStatus = new stdclass;
+$lang->article->contributionStatus->status[1] = '<span class="label label-xsm label-primary">' . '待审核' .'</span>';
+$lang->article->contributionStatus->status[2] = '<span class="label label-xsm label-success">' . '通过' . '</span>';
+$lang->article->contributionStatus->status[3] = '<span class="label label-xsm label-warning">' . '驳回' . '</span>';
+
+
 $lang->article->list          = '文章列表';
 $lang->article->admin         = '维护文章';
 $lang->article->create        = '发布文章';
@@ -53,7 +59,9 @@ $lang->article->edit          = '编辑文章';
 $lang->article->files         = '附件';
 $lang->article->images        = '图片';
 
-$lang->article->contribution = '投稿';
+$lang->article->contribution    = '投稿';
+$lang->article->submissionTime  = '投递时间';
+
 $lang->article->contributionOptions = new stdclass;
 $lang->article->contributionOptions->open  = '开启';
 $lang->article->contributionOptions->close = '关闭';
