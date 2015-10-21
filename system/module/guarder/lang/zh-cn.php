@@ -9,10 +9,11 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
-$lang->captcha = new stdclass();
+$lang->guarder = new stdclass();
 
-$lang->captcha->common      = '验证码';
-$lang->captcha->numbers     = array('零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖', '拾');
-$lang->captcha->operators   = array('*' => '乘', '-' => '减', '+' => '加');
-$lang->captcha->equal       = '=';
-$lang->captcha->placeholder = '数字';
+$lang->guarder->common      = '';
+$lang->guarder->captcha     = '验证码';
+$lang->guarder->numbers     = array('零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖', '拾');
+$lang->guarder->operators   = array('*' => '乘', '-' => '减', '+' => '加');
+$lang->guarder->equal       = '=';
+$lang->guarder->placeholder = '数字';
