@@ -89,6 +89,11 @@ $config->rights->guest['score']['noscore']      = 'noscore';
 $config->rights->guest['score']['processorder'] = 'processorder';
 
 /* For logged member. */
+$config->rights->member['article']['contribution'] = 'contribution';
+$config->rights->member['article']['create']       = 'create';
+$config->rights->member['article']['edit']         = 'edit';
+$config->rights->member['article']['delete']       = 'delete';
+
 $config->rights->member['thread']['post']         = 'post';
 $config->rights->member['thread']['reply']        = 'reply';
 $config->rights->member['thread']['edit']         = 'edit';
