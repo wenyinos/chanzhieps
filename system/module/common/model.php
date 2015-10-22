@@ -113,6 +113,8 @@ class commonModel extends model
      */
     public function checkPriv()
     {
+        $inBlackList = $this->loadModel('guarder')->isInBlackList();
+        if($inBlackList) die('Request Forbidden');
         $module = $this->app->getModuleName();
         $method = $this->app->getMethodName();
 

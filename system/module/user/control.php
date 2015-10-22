@@ -41,6 +41,7 @@ class user extends control
      */
     public function register()
     {
+        $this->loadModel('guarder')->logOperation('ip', 'register', $this->server->remote_addr);
         if($this->app->user->account != 'guest')
         {
             $this->locate(inlink('control'));   

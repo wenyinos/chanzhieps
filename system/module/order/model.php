@@ -71,15 +71,14 @@ class orderModel extends model
      */
     public function create()
     {
-        $order = new stdclass();
-        $order->account        = $this->app->user->account;
-        $order->payment        = $this->post->payment;
-        $order->createdDate    = helper::now();
-        $order->payStatus      = 'not_paid';
-        $order->status         = 'normal';
-        $order->deliveryStatus = 'not_send';
-        $order->type           = 'shop';
-        $order->note           = $this->post->note;
+        $order = fixer::input('post')
+            ->add('account', $this->app->user->account)
+            ->add('createdDate', helper::now())
+            ->add('payStatus', 'not_paid')
+            ->add('status', 'normal')
+            ->add('deliveryStatus', 'not_send')
+            ->add('type', 'shop')
+            ->get();
 
         $address = $this->dao->select('*')->from(TABLE_ADDRESS)->where('id')->eq($this->post->deliveryAddress)->andWhere('account')->eq($this->app->user->account)->fetch();
         $order->address = helper::jsonEncode($address);
