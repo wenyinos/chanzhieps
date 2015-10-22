@@ -40,7 +40,7 @@ class guarderModel extends model
      */
     public function create4Comment()
     {
-        $guarder = $this->createCaptcha);     
+        $guarder = $this->createCaptcha();     
         return <<<EOT
 <label for='captcha' class='col-sm-1 control-label'>{$this->lang->guarder->captcha}</label>
 <div class='col-sm-11 required'>
@@ -63,7 +63,7 @@ EOT;
      */
     public function create4Reply()
     {
-        $guarder = $this->createCaptcha);     
+        $guarder = $this->createCaptcha();     
         return <<<EOT
 <table class='captcha'>
   <tr class='text-middle'>
@@ -86,7 +86,7 @@ EOT;
      */
     public function create4Thread()
     {
-        $guarder = $this->createCaptcha);
+        $guarder = $this->createCaptcha();
         return <<<EOT
 <label for='captcha' class='col-md-1 col-sm-2 control-label'>{$this->lang->guarder->captcha}</label>
 <div class='col-md-7 col-sm-8 col-xs-11 required'>
@@ -109,7 +109,7 @@ EOT;
      */
     public function create4MessageReply()
     {
-        $guarder = $this->createCaptcha);
+        $guarder = $this->createCaptcha();
         return <<<EOT
 <th>{$this->lang->guarder->captcha}</th>
 <td>
@@ -153,6 +153,37 @@ EOT;
     }
 
     /**
+     * check a request in blacklist.
+     * 
+     * @access public
+     * @return void
+     */
+    public function isInBlackList()
+    {
+        $ip = $this->server->remote_addr;
+
+        $blackList = $this->dao->select('*')->from(TABLE_BLACKLIST)
+            ->where('identity')->eq($ip)
+            ->andWhere('type')->eq('ip')
+            ->andWhere('expiredDate')->ge(helper::now())
+            ->fetch();
+
+        if(!empty($blackList)) return true;
+
+        if($this->app->user->account != 'guest')
+        {
+            $blackList = $this->dao->select('*')->from(TABLE_BLACKLIST)
+                ->where('identity')->eq($this->app->user->account)
+                ->andWhere('type')->eq('account')
+                ->andWhere('expiredDate')->le(helper::now())
+                ->fetch();
+            if(!empty($blacklist)) return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Save operation log.
      * 
      * @param  string    $type 
@@ -160,8 +191,57 @@ EOT;
      * @access public
      * @return void
      */
-    public function log($type, $operation)
+    public function logOperation($type = 'ip', $action, $identity)
     {
-        
+        $operation = new stdclass();
+        $operation->type       = $type;
+        $operation->count      = 1;
+        $operation->operation  = $action;
+        $operation->identity   = $identity;
+        $operation->createDtime  = date('Y-m-d H:i:s');
+
+        $interval = $this->config->guarder->interval[$action][$type]['minute'];
+        $limit    = $this->config->guarder->limits[$action][$type]['minute']['limit'];
+        $last     = date('Y-m-d H:i:s', time() - (60 * $interval));
+
+        $log = $this->dao->select('*')->from(TABLE_OPERATIONLOG)
+            ->where('type')->eq($type)
+            ->andWhere('identity')->eq($identity)
+            ->andWhere('operation')->eq($action)
+            ->andWhere('createdTime')->ge($last)
+            ->fetch();
+
+        if(!empty($log))
+        {
+            $log->count ++;
+            if($log->count > $limit) $this->punish($type, $identity, $action, $this->config->guarder->punishment[$type][$action]);
+            $this->dao->replace(TABLE_OPERATIONLOG)->data($log)->exec();
+        }
+        else
+        {
+            $this->dao->insert(TABLE_OPERATIONLOG)->data($operation)->exec();
+        }
+    }
+
+    /**
+     * Punish a ip or account to blacklist.
+     * 
+     * @param  string    $type 
+     * @param  string    $identity 
+     * @param  string    $reason 
+     * @param  string    $expired
+     * @access public
+     * @return void
+     */
+    public function punish($type, $identity, $reason, $expired)
+    {
+       $blacklist = new stdclass(); 
+       $blacklist->type        = $type;
+       $blacklist->identity    = $identity;
+       $blacklist->reason      = $reason;
+       $blacklist->expiredDate = date('Y-m-d H:i:s', $expired * 3600 + time());
+       $blacklist->lang        = 'all';
+
+       $this->dao->replace(TABLE_BLACKLIST)->data($blacklist)->exec();
     }
 }
