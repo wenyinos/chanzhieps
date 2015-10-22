@@ -193,12 +193,25 @@ EOT;
      */
     public function logOperation($type = 'ip', $action, $identity)
     {
-        $operation = new stdclass();
-        $operation->type       = $type;
-        $operation->count      = 1;
-        $operation->operation  = $action;
-        $operation->identity   = $identity;
-        $operation->createDtime  = date('Y-m-d H:i:s');
+        $this->dao->delete()->from(TABLE_OPERATIONLOG)
+            ->where('type')->eq($type)
+            ->andWhere('identity')->eq($identity)
+            ->andWhere('operation')->eq($action)
+            ->andWhere('createdTime')->lt(date('Y-m-d'))
+            ->exec();
+
+        $dayLimit = $this->config->guarder->limits[$action][$type]['day']['limit'];
+        $dayCount = $this->dao->select('sum(count) as count')->from(TABLE_OPERATIONLOG)
+            ->where('type')->eq($type)
+            ->andWhere('identity')->eq($identity)
+            ->andWhere('operation')->eq($action)
+            ->fetch('count');
+
+        if(($dayCount + 1) >= $dayLimit)
+        {
+            $this->punish($type, $identity, $action, $this->config->guarder->punishment[$type][$action]); 
+            return true;
+        }
 
         $interval = $this->config->guarder->interval[$action][$type]['minute'];
         $limit    = $this->config->guarder->limits[$action][$type]['minute']['limit'];
@@ -219,8 +232,16 @@ EOT;
         }
         else
         {
+            $operation = new stdclass();
+            $operation->type         = $type;
+            $operation->count        = 1;
+            $operation->operation    = $action;
+            $operation->identity     = $identity;
+            $operation->createdTime  = date('Y-m-d H:i:s');
+
             $this->dao->insert(TABLE_OPERATIONLOG)->data($operation)->exec();
         }
+        return true;
     }
 
     /**
