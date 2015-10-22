@@ -238,22 +238,22 @@ class threadModel extends model
     }
 
     /**
-     * Approved post.
+     * Approve a post.
      * 
      * @param  int    $threadID 
      * @param  int    $boardID 
      * @access public
      * @return void
      */
-    public function approved($threadID, $boardID)
+    public function approve($threadID, $boardID)
     {
         $this->dao->update(TABLE_THREAD)->set('status')->eq('approved')->where('id')->eq($threadID)->exec();
-        if(commonModel::isAvailable('score')) $this->loadModel('score')->earn('thread', 'thread', $threadID);
+        $thread = $this->getByID($threadID);
+        if(commonModel::isAvailable('score')) $this->loadModel('score')->earn('thread', 'thread', $threadID, '', $thread->author);
 
         /* Update board stats. */
         $this->loadModel('forum')->updateBoardStats($boardID);
 
-        $thread = $this->getByID($threadID);
         $this->loadModel('search')->save('thread', $thread);
         return !dao::isError();
     }

@@ -57,7 +57,7 @@
         <td>
         <?php 
         if($this->config->forum->postReview == 'open' and $thread->status =='wait')
-             commonModel::printLink('thread', 'approved', "threadID=$thread->id&$boardID=$thread->board", $lang->thread->approved, "class='reload'"); 
+             commonmodel::printlink('thread', 'approve', "threadid=$thread->id&boardid=$thread->board", $lang->thread->approve, "class='reload'"); 
         if($thread->status != 'wait')
         {
             if($thread->hidden)

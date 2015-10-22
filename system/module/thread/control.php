@@ -240,16 +240,16 @@ class thread extends control
     }
    
     /**
-     * Approved post.
+     * Approve a thread.
      * 
      * @param  int    $threadID 
      * @param  int    $boardID 
      * @access public
      * @return void
      */
-    public function approved($threadID, $boardID)
+    public function approve($threadID, $boardID)
     {
-        $result = $this->thread->approved($threadID, $boardID);
+        $result = $this->thread->approve($threadID, $boardID);
         if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
         $locate = helper::createLink('forum', 'admin');
         $this->send(array('result' => 'success', 'message' => '',  'locate' => $locate));
