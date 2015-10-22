@@ -7,7 +7,7 @@
       <table class='table table-form'>
         <tr>
           <th class='col-xs-2'><?php echo $lang->article->contribution;?></th> 
-          <td class='col-xs-2'><?php echo html::radio('contribution', $lang->article->contributionOptions, isset($config->article->contribution) ? $config->article->contribution : 'close', "class='checkbox'");?></td><td></td>
+          <td class='col-xs-2'><?php echo html::radio('contribution', $lang->article->contributionOptions, $config->article->contribution, "class='checkbox'");?></td><td></td>
         </tr>
         <tr>
           <th></th>

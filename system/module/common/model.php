@@ -511,7 +511,7 @@ class commonModel extends model
         }
         else
         {
-            foreach($langs as $lang) echo html::a(getHomeRoot($config->langsShortcuts[$lang]), $config->langAbbrLabels[$lang]);
+            foreach($langs as $lang) echo html::a(getHomeRoot($config->langsShortcuts[$lang]) . ($lang =='zh-cn' ? '' : '/'), $config->langAbbrLabels[$lang]);
         }
     }
 

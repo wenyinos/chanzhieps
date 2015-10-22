@@ -128,6 +128,10 @@ $config->db->encoding   = 'UTF8';              // The encoding of the database.
 $config->db->strictMode = false;               // Turn off the strict mode.
 $config->db->prefix     = 'eps_';              // The prefix of the table name.
 
+
+$config->article = new stdclass();          
+$config->article->contribution = 'close';
+
 /* Include my.php, domain.php and front or admin.php. */
 $configRoot      = dirname(__FILE__) . DS;
 $myConfig        = $configRoot . 'my.php';
