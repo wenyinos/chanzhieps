@@ -1,5 +1,12 @@
 $(document).ready(function()
 {
+    $('#copyBox').hide().find(':input').attr('disabled', true);
+    $('#source').change(function()
+    {
+        $('#copyBox').hide().find(':input').attr('disabled', true);
+        if($(this).val() != 'original') $('#copyBox').show().find(':input').attr('disabled', false);
+    });
+
     /* Set current active topNav. */
     var hasActive = false;
     if(v.categoryID > 0 && $('.nav-article-' + v.categoryID).length >= 1)

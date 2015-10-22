@@ -1,8 +1,5 @@
 <?php include TPL_ROOT . 'common/header.html.php';?>
-<?php include TPL_ROOT . 'common/datepicker.html.php';?>
 <?php js::set('type', $type);?>
-<?php include TPL_ROOT . 'common/kindeditor.html.php';?>
-<?php include TPL_ROOT . 'common/chosen.html.php';?>
 
 <div class='page-user-control'>
   <div class='row'>

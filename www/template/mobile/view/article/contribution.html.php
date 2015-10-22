@@ -35,7 +35,7 @@
               <td class='text-center'>
                 <?php
                     echo html::a($this->article->createPreviewLink($article->id), $lang->preview, "target='_blank'");
-                    if($article->contribution !== 2)
+                    if($article->contribution != 2)
                     {
                         commonModel::printLink('article', 'edit', "articleID=$article->id&type=$article->type", $lang->edit);
                         commonModel::printLink('article', 'delete', "articleID=$article->id", $lang->delete, 'class="deleter"');

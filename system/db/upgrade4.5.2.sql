@@ -1,4 +1,3 @@
-ALTER TABLE `eps_thread` ADD `status` enum('wait','normal','fail') NOT NULL DEFAULT 'wait';
 ALTER TABLE `eps_article` ADD `addedBy` varchar(60) NOT NULL;
 ALTER TABLE `eps_article` ADD `contribution` int(1) NOT NULL DEFAULT '0';
 
