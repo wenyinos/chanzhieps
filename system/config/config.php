@@ -184,6 +184,8 @@ define('TABLE_STATREFERER',    $config->db->prefix . 'statreferer');
 define('TABLE_STATREPORT',     $config->db->prefix . 'statreport');
 define('TABLE_STATREGION',     $config->db->prefix . 'statregion');
 define('TABLE_SCORE',          $config->db->prefix . 'score');
+define('TABLE_BLACKLIST',      $config->db->prefix . 'blacklist');
+define('TABLE_OPERATIONLOG',   $config->db->prefix . 'operationlog');
 
 /* Include extension config files. */
 $extConfigFiles = glob($configRoot . 'ext' . DS . '*.php');
