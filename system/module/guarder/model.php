@@ -195,6 +195,7 @@ EOT;
     {
         if($type == 'ip')     $identity = $this->server->remote_addr;
         if($type == 'acount') $identity = $this->app->user->account;
+
         $this->dao->delete()->from(TABLE_OPERATIONLOG)
             ->where('type')->eq($type)
             ->andWhere('identity')->eq($identity)
