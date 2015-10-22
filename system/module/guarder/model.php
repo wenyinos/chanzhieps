@@ -187,12 +187,14 @@ EOT;
      * Save operation log.
      * 
      * @param  string    $type 
-     * @param  string    $operation 
+     * @param  string    $action 
      * @access public
      * @return void
      */
-    public function logOperation($type = 'ip', $action, $identity)
+    public function logOperation($type = 'ip', $action)
     {
+        if($type == 'ip')     $identity = $this->server->remote_addr;
+        if($type == 'acount') $identity = $this->app->user->account;
         $this->dao->delete()->from(TABLE_OPERATIONLOG)
             ->where('type')->eq($type)
             ->andWhere('identity')->eq($identity)
@@ -200,8 +202,8 @@ EOT;
             ->andWhere('createdTime')->lt(date('Y-m-d'))
             ->exec();
 
-        $dayLimit = $this->config->guarder->limits[$action][$type]['day']['limit'];
-        $dayCount = $this->dao->select('sum(count) as count')->from(TABLE_OPERATIONLOG)
+        $dayLimit = $this->config->guarder->limits->{$type}[$action]['day'];
+        $dayCount = (int)$this->dao->select('sum(count) as count')->from(TABLE_OPERATIONLOG)
             ->where('type')->eq($type)
             ->andWhere('identity')->eq($identity)
             ->andWhere('operation')->eq($action)
@@ -209,12 +211,12 @@ EOT;
 
         if(($dayCount + 1) >= $dayLimit)
         {
-            $this->punish($type, $identity, $action, $this->config->guarder->punishment[$type][$action]); 
+            $this->punish($type, $identity, $action, zget($this->config->guarder->punishment->$type, $action)); 
             return true;
         }
 
-        $interval = $this->config->guarder->interval[$action][$type]['minute'];
-        $limit    = $this->config->guarder->limits[$action][$type]['minute']['limit'];
+        $interval = $this->config->guarder->interval->{$type}[$action];
+        $limit    = $this->config->guarder->limits->{$type}[$action]['minute'];
         $last     = date('Y-m-d H:i:s', time() - (60 * $interval));
 
         $log = $this->dao->select('*')->from(TABLE_OPERATIONLOG)
@@ -227,7 +229,7 @@ EOT;
         if(!empty($log))
         {
             $log->count ++;
-            if($log->count > $limit) $this->punish($type, $identity, $action, $this->config->guarder->punishment[$type][$action]);
+            if($log->count > $limit) $this->punish($type, $identity, $action, $this->config->guarder->punishment->{$type}[$action]);
             $this->dao->replace(TABLE_OPERATIONLOG)->data($log)->exec();
         }
         else

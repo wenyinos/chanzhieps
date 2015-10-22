@@ -127,7 +127,12 @@ class user extends control
                 }
             }
 
-            if(!$this->user->login($this->post->account, $this->post->password)) $this->send(array('result'=>'fail', 'message' => $this->lang->user->loginFailed));
+            if(!$this->user->login($this->post->account, $this->post->password))
+            {
+                $this->loadModel('guarder')->logOperation('ip', 'loginFailure');
+                $this->loadModel('guarder')->logOperation('account', 'loginFailure');
+                $this->send(array('result'=>'fail', 'message' => $this->lang->user->loginFailed));
+            }
 
             if(RUN_MODE == 'front')
             {
