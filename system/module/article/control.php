@@ -168,7 +168,11 @@ class article extends control
         $this->lang->article->menu = $this->lang->$type->menu;
         $this->lang->menuGroups->article = $type;
 
-        $article    = $this->article->getByID($articleID, $replaceTag = false);
+        $article  = $this->article->getByID($articleID, $replaceTag = false);
+
+        /* If this article is a contribution and has been adopt, front cannot edit it.*/
+        if(RUN_MODE == 'front' and $article->contribution == 2) die();
+
         $categories = $this->loadModel('tree')->getOptionMenu($type, 0, $removeRoot = true);
         if(empty($categories) && $type != 'page')
         {
@@ -395,6 +399,34 @@ class article extends control
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
         $this->view->title = $this->lang->article->setting;
+        $this->display();
+    }
+
+    /**
+     * Manage article contribution.
+     * 
+     * @access public
+     * @return void
+     */
+    public function contribution($orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    {
+        $this->app->loadLang('user');
+
+        $this->app->loadClass('pager', $static = true);
+        $pager = new pager($recTotal, $recPerPage, $pageID);
+        $type  = $this->config->site->type == 'portal' ? 'article' : 'blog';
+
+        $articles = $this->dao->select('*')->from(TABLE_ARTICLE)->where('contribution')->ne(0)->andWhere('type')->eq($type)->orderBy('id_desc')->page($pager)->fetchall(); 
+        
+        $this->view->title      = $this->lang->article->contribution;
+        $this->view->type       = $type;
+        $this->view->articles   = $this->article->processArticleList($articles, $type);
+
+        $this->view->pager      = $pager;
+        $this->view->orderBy    = $orderBy;
+
+        $this->view->mobileURL  = helper::createLink('article', 'contribution', '', '', 'mhtml');
+        $this->view->desktopURL = helper::createLink('article', 'contribution', '', '', 'html');
         $this->display();
     }
 }
