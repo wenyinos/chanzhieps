@@ -152,9 +152,9 @@ class scoreModel extends model
      * @access public
      * @return bool
      */
-    public function earn($method, $objectType = '', $objectID = '', $note = '')
+    public function earn($method, $objectType = '', $objectID = '', $note = '', $account = '')
     {
-        $account = $this->app->user->account;
+        if($account == '') $account = $this->app->user->account;
         $count   = $this->config->score->counts->$method;
         $type    = 'in';
         if($note == '') $note = strtoupper($objectType) . ":$objectID";

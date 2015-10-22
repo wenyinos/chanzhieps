@@ -479,4 +479,24 @@ class messageModel extends model
         $this->dao->delete()->from(TABLE_MESSAGE)->where('`to`')->eq($this->app->user->account)->andWhere('id')->eq($message)->exec();
         return !dao::isError();
     }
+    /**
+     * Send a message.
+     * 
+     * @param  string    $from 
+     * @param  string    $to 
+     * @param  string    $content 
+     * @access public
+     * @return bool 
+     */
+    public function send($from, $to, $content)
+    {
+        $message = new stdclass();
+        $message->from    = $from;
+        $message->to      = $to;
+        $message->content = $content;
+        $message->status  = 1;
+        $message->date    = helper::now();
+        $this->dao->insert(TABLE_MESSAGE)->data($message)->batchCheck('from,to,content', 'notempty')->autocheck()->exec();
+        return !dao::isError();
+    }
 }

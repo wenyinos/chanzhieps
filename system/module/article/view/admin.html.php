@@ -57,7 +57,8 @@
         <td>
           <?php echo $article->title;?>
           <?php if($article->sticky):?><span class='label label-danger'><?php echo $lang->article->stick;?></span><?php endif;?>
-          <?php if($article->status == 'draft') echo '<span class="label label-xsm label-warning">' . $lang->article->statusList[$article->status] .'</span>';?>
+          <?php if($article->status == 'draft' and $article->contribution == 0) echo '<span class="label label-xsm label-warning">' . $lang->article->statusList[$article->status] .'</span>';
+                elseif($article->contribution != 0) echo $lang->article->contributionStatus->status[$article->contribution];?>
         </td>
         <?php if($type != 'page'):?>
         <td class='text-center'><?php foreach($article->categories as $category) echo $category->name . ' ';?></td>
@@ -65,10 +66,19 @@
         <td class='text-center'><?php echo $article->addedDate;?></td>
         <td class='text-center'><?php echo $article->views;?></td>
         <td class='text-center'>
+          <?php if($article->contribution != 0):?>
+          <?php
+          if($article->contribution != 2) commonmodel::printlink('article', 'approve', "articleID=$article->id&type=$article->type", $lang->article->publish, "class='jsoner'"); 
+          if($article->contribution != 3) commonmodel::printlink('article', 'reject', "articleID=$article->id&type=$article->type", $lang->article->reject, "class='jsoner'"); 
+          ?>
+          <?php endif;?>
           <?php
           commonModel::printLink('article', 'edit', "articleID=$article->id&type=$article->type", $lang->edit);
-          commonModel::printLink('file', 'browse', "objectType=$article->type&objectID=$article->id&isImage=1", $lang->article->images, "data-toggle='modal'");
-          commonModel::printLink('file', 'browse', "objectType=$article->type&objectID=$article->id&isImage=0", $lang->article->files, "data-toggle='modal'");
+          if($article->contribution == 0)
+          {
+              commonModel::printLink('file', 'browse', "objectType=$article->type&objectID=$article->id&isImage=1", $lang->article->images, "data-toggle='modal'");
+              commonModel::printLink('file', 'browse', "objectType=$article->type&objectID=$article->id&isImage=0", $lang->article->files, "data-toggle='modal'");
+          }
           echo html::a($this->article->createPreviewLink($article->id), $lang->preview, "target='_blank'");
           ?>
           <?php if($type != 'page'):?>
@@ -92,7 +102,6 @@
               ?>
             </ul>
           </span>
-          <?php endif;?>
           <span class='dropdown'>
             <a data-toggle='dropdown' href='javascript:;'><?php echo $this->lang->more;?><span class='caret'></span></a>
             <ul class='dropdown-menu pull-right'>    
@@ -107,6 +116,7 @@
           </span>
         </td>
       </tr>
+      <?php endif;?>
       <?php endforeach;?>
     </tbody>
     <tfoot><tr><td colspan='7'><?php $pager->show();?></td></tr></tfoot>

@@ -42,6 +42,12 @@
       <th><?php echo $lang->score->methods['delreply'] . $lang->score->methods['punish'];?></th> 
       <td><?php echo html::input('delReply', $this->config->score->counts->delReply, "class='form-control'");?></td><td></td>
     </tr>
+    <?php if($this->config->article->contribution == 'open'):?>
+    <tr>
+      <th><?php echo $lang->score->methods['approveContribution'] . $lang->score->methods['award'];?></th> 
+      <td><?php echo html::input('approveContribution', $this->config->score->counts->approveContribution, "class='form-control'");?></td><td></td>
+    </tr>
+    <?php endif;?>
     <tr>
       <th><?php echo $lang->score->methods['buyscore'];?></th> 
       <td>

@@ -1,15 +1,3 @@
-<?php
-/**
- * The create view file of article module of chanzhiEPS.
- *
- * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV1 (http://www.chanzhi.org/license/)
- * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
- * @package     article
- * @version     $Id$
- * @link        http://www.chanzhi.org
- */
-?>
 <?php include TPL_ROOT . 'common/header.html.php';?>
 <?php include TPL_ROOT . 'common/datepicker.html.php';?>
 <?php js::set('type', $type);?>
@@ -25,8 +13,6 @@
       <div class='panel-heading'><strong><i class='icon-plus'></i>&nbsp;<?php echo $lang->article->contribution;?></strong></div>
       <div class='panel-body'>
         <form method='post' role='form' id='ajaxForm'>
-      <?php echo html::hidden('contribution', 1);?>
-      <?php echo html::hidden('status', 'draft');?>
           <table class='table table-form'>
             <tr>
               <th class='w-100px'><?php echo $lang->article->category;?></th>

@@ -138,6 +138,7 @@ class article extends control
         {
             $this->article->create($type);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            if(RUN_MODE == 'front') $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('contribution')));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin', "type=$type")));
         }
 
@@ -416,7 +417,7 @@ class article extends control
         $pager = new pager($recTotal, $recPerPage, $pageID);
         $type  = $this->config->site->type == 'portal' ? 'article' : 'blog';
 
-        $articles = $this->dao->select('*')->from(TABLE_ARTICLE)->where('contribution')->ne(0)->andWhere('type')->eq($type)->orderBy('id_desc')->page($pager)->fetchall(); 
+        $articles = $this->dao->select('*')->from(TABLE_ARTICLE)->where('contribution')->ne(0)->andWhere('type')->eq($type)->andWhere('addedBy')->eq($this->app->user->account)->orderBy('id_desc')->page($pager)->fetchall(); 
         
         $this->view->title      = $this->lang->article->contribution;
         $this->view->type       = $type;
@@ -428,5 +429,33 @@ class article extends control
         $this->view->mobileURL  = helper::createLink('article', 'contribution', '', '', 'mhtml');
         $this->view->desktopURL = helper::createLink('article', 'contribution', '', '', 'html');
         $this->display();
+    }
+
+    /**
+     * Approve an contribution. 
+     * 
+     * @param  int    $articleID 
+     * @access public
+     * @return void
+     */
+    public function approve($articleID, $type)
+    {
+        $result = $this->article->approve($articleID);
+        if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin', "type=$type")));
+    }
+
+    /**
+     * Reject an article.
+     * 
+     * @param  int    $articleID 
+     * @access public
+     * @return void
+     */
+    public function reject($articleID, $type)
+    {
+        $result = $this->article->reject($articleID);
+        if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin', "type=$type")));
     }
 }

@@ -29,7 +29,7 @@
                 <?php echo $article->title;?>
               </td>
               <td class='text-center'><?php foreach($article->categories as $category) echo $category->name . ' ';?></td>
-              <td class='text-center'><?php echo $article->addedDate;?></td>
+              <td class='text-center'><?php echo $article->editedDate;?></td>
               <td class='text-center'><?php echo $lang->article->contributionStatus->status[$article->contribution];?></td>
               <td class='text-center'><?php echo $article->views;?></td>
               <td class='text-center'>

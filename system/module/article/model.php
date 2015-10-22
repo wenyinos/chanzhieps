@@ -360,8 +360,11 @@ class articleModel extends model
             ->setDefault('addedDate', $now)
             ->add('editedDate', $now)
             ->add('type', $type)
+            ->add('addedBy', $this->app->user->account)
             ->add('order', 0)
             ->setIF(!$this->post->isLink, 'link', '')
+            ->setIF(RUN_MODE == 'front', 'contribution', 1)
+            ->setIF(RUN_MODE == 'front', 'status', 'draft')
             ->stripTags('content,link', $this->config->allowedTags->admin)
             ->get();
 
@@ -388,8 +391,11 @@ class articleModel extends model
         $this->loadModel('tag')->save($article->keywords);
         if($type != 'page') $this->processCategories($articleID, $type, $this->post->categories);
 
-        $article = $this->getByID($articleID);
-        $this->loadModel('search')->save($type, $article);
+        if($article->contribution == 0)
+        {
+            $article = $this->getByID($articleID);
+            $this->loadModel('search')->save($type, $article);
+        }
 
         return $articleID;
     }
@@ -690,6 +696,41 @@ class articleModel extends model
         $setting = new stdclass();
         $setting->contribution = $this->post->contribution; 
         $this->loadModel('setting')->setItems('system.common.article', $setting);
+        return !dao::isError();
+    }
+
+    /**
+     * Approve an contribution. 
+     * 
+     * @param  int    $articleID 
+     * @access public
+     * @return void
+     */
+    public function approve($articleID)
+    {
+        $this->dao->update(TABLE_ARTICLE)->set('status')->eq('normal')->set('contribution')->eq(2)->where('id')->eq($articleID)->exec();
+        $article = $this->getByID($articleID);
+        if(commonModel::isAvailable('score')) $this->loadModel('score')->earn('approveContribution', 'article', $articleID, '', $article->addedBy);
+        
+        $this->loadModel('search')->save($article->type, $article);
+        $this->loadModel('message')->send($this->app->user->account, $article->addedBy, sprintf($this->lang->article->approveMessage, $article->title, $this->config->score->counts->approveContribution));
+
+        return !dao::isError();
+    }
+
+    /**
+     * Reject article.
+     * 
+     * @param  int    $articleID 
+     * @access public
+     * @return void
+     */
+    public function reject($articleID)
+    {
+        $this->dao->update(TABLE_ARTICLE)->set('status')->eq('draft')->set('contribution')->eq(3)->where('id')->eq($articleID)->exec();
+        $article = $this->getByID($articleID);
+        $this->loadModel('message')->send($this->app->user->account, $article->addedBy, sprintf($this->lang->article->rejectMessage, $article->title));
+
         return !dao::isError();
     }
 }

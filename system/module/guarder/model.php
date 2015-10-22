@@ -40,7 +40,7 @@ class guarderModel extends model
      */
     public function create4Comment()
     {
-        $guarder = $this->createCaptcha);     
+        $guarder = $this->createCaptcha();     
         return <<<EOT
 <label for='captcha' class='col-sm-1 control-label'>{$this->lang->guarder->captcha}</label>
 <div class='col-sm-11 required'>
@@ -63,7 +63,7 @@ EOT;
      */
     public function create4Reply()
     {
-        $guarder = $this->createCaptcha);     
+        $guarder = $this->createCaptcha();     
         return <<<EOT
 <table class='captcha'>
   <tr class='text-middle'>
@@ -86,7 +86,7 @@ EOT;
      */
     public function create4Thread()
     {
-        $guarder = $this->createCaptcha);
+        $guarder = $this->createCaptcha();
         return <<<EOT
 <label for='captcha' class='col-md-1 col-sm-2 control-label'>{$this->lang->guarder->captcha}</label>
 <div class='col-md-7 col-sm-8 col-xs-11 required'>
@@ -109,7 +109,7 @@ EOT;
      */
     public function create4MessageReply()
     {
-        $guarder = $this->createCaptcha);
+        $guarder = $this->createCaptcha();
         return <<<EOT
 <th>{$this->lang->guarder->captcha}</th>
 <td>

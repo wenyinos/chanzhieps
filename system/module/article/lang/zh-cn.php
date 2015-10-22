@@ -44,11 +44,13 @@ $lang->article->forward2Forum    = '转至论坛';
 $lang->article->selectCategories = '选择类目';
 $lang->article->selectBoard      = '选择版块';
 
+$lang->article->publish = '发布';
+$lang->article->reject  = '驳回';
+
 $lang->article->contributionStatus = new stdclass;
 $lang->article->contributionStatus->status[1] = '<span class="label label-xsm label-primary">' . '待审核' .'</span>';
 $lang->article->contributionStatus->status[2] = '<span class="label label-xsm label-success">' . '通过' . '</span>';
 $lang->article->contributionStatus->status[3] = '<span class="label label-xsm label-warning">' . '驳回' . '</span>';
-
 
 $lang->article->list          = '文章列表';
 $lang->article->admin         = '维护文章';
@@ -110,5 +112,8 @@ $lang->article->noJsTag   = '不需要&lt;script&gt;&lt;/script&gt;标签';
 $lang->article->placeholder = new stdclass();
 $lang->article->placeholder->addedDate = '可以延迟到选定的时间发布。';
 $lang->article->placeholder->link      = '输入链接，可以是站外链接';
+
+$lang->article->approveMessage = '您投递的文章 <strong>《%s》</strong> 已通过审核，奖励 <strong>+%s</strong> 积分，感谢您的支持。';
+$lang->article->rejectMessage  = '您投递的文章 <strong>《%s》</strong> 未通过审核，您可以编辑后再次提交审核，感谢您的支持。';
 
 $lang->article->forwardFrom = '转发自';

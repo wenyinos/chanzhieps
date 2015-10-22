@@ -44,6 +44,14 @@ $lang->article->forward2Forum    = 'Forward to forum';
 $lang->article->selectCategories = 'Select categories';
 $lang->article->selectBoard      = 'Select board';
 
+$lang->article->publish = 'Publish';
+$lang->article->reject  = 'Reject';
+
+$lang->article->contributionStatus = new stdclass;
+$lang->article->contributionStatus->status[1] = '<span class="label label-xsm label-primary">' . 'Moderated' .'</span>';
+$lang->article->contributionStatus->status[2] = '<span class="label label-xsm label-success">' . 'Approved' . '</span>';
+$lang->article->contributionStatus->status[3] = '<span class="label label-xsm label-warning">' . 'Not Approved' . '</span>';
+
 $lang->article->list       = 'List';
 $lang->article->admin      = 'Admin';
 $lang->article->create     = 'Create';
@@ -102,5 +110,8 @@ $lang->article->noJsTag   = 'No &lt;script&gt;&lt;/script&gt; tag';
 $lang->article->placeholder = new stdclass();
 $lang->article->placeholder->addedDate = 'Support delay publishing of article';
 $lang->article->placeholder->link      = 'Input link, it can be outer chain.';
+
+$lang->article->approveMessage = 'Your contribution <strong>《%s》</strong> has been approved，award <strong>+%s</strong> scores.';
+$lang->article->rejectMessage  = 'Your contribution <strong>《%s》</strong> has not been approved, you can edit it, then submit it for review again.';
 
 $lang->article->forwardFrom = 'Fowarding from';

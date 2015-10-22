@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS `eps_article` (
   `copySite` varchar(60) NOT NULL,
   `copyURL` varchar(255) NOT NULL,
   `author` varchar(60) NOT NULL,
+  `addedBy` varchar(60) NOT NULL,
   `editor` varchar(60) NOT NULL,
   `addedDate` datetime NOT NULL,
   `editedDate` datetime NOT NULL,
@@ -27,6 +28,7 @@ CREATE TABLE IF NOT EXISTS `eps_article` (
   KEY `lang` (`lang`),
   KEY `views` (`views`),
   KEY `sticky` (`sticky`)
+  `contribution` int(1) NOT NULL DEFAULT '0';
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_block`;
