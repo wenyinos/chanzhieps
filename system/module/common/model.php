@@ -51,7 +51,11 @@ class commonModel extends model
                     if($record->section)
                     {
                         if(!isset($this->config->{$record->section})) $this->config->{$record->section} = new stdclass();
-                        if($record->key) $this->config->{$record->section}->{$record->key} = $record->value;
+                        if($record->key)
+                        {
+                            if($record->section == 'guarder') $record->value = json_decode($record->value);
+                            $this->config->{$record->section}->{$record->key} = $record->value;
+                        }
                     }
                     else
                     {
