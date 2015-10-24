@@ -17,3 +17,21 @@ $lang->guarder->numbers     = array('零', '壹', '贰', '叁', '肆', '伍', '�
 $lang->guarder->operators   = array('*' => '乘', '-' => '减', '+' => '加');
 $lang->guarder->equal       = '=';
 $lang->guarder->placeholder = '数字';
+
+$lang->guarder->interval = '分钟内';
+$lang->guarder->perDay   = '每天超过';
+$lang->guarder->exceed   = '超过';
+$lang->guarder->disable  = '禁用';
+$lang->guarder->hours    = '小时';
+
+$lang->guarder->operationList = new stdclass;
+$lang->guarder->operationList->logonFailure  = '登录失败';
+$lang->guarder->operationList->register      = '注册数量';
+$lang->guarder->operationList->resetPassword = '找回密码';
+$lang->guarder->operationList->postThread    = '发表主题';
+$lang->guarder->operationList->postComment   = '发表评论';
+$lang->guarder->operationList->postReply     = '回复帖子';
+$lang->guarder->operationList->search        = '搜索次数';
+$lang->guarder->operationList->threadFail    = '帖子被禁';
+$lang->guarder->operationList->commentFail   = '评论被禁';
+$lang->guarder->operationList->error404      = '404次数';

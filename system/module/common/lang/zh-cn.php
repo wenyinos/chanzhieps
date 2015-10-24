@@ -254,6 +254,7 @@ $lang->security->menu->upload    = '附件上传|site|setupload|';
 $lang->security->menu->sensitive = '敏感词设置|site|setsensitive|';
 $lang->security->menu->admin     = '管理员|user|admin|admin=1';
 $lang->security->menu->group     = array('link' => '分组权限|group|browse|', 'alias' => 'managepriv,managemember');
+$lang->security->menu->filter    = '过滤设置|site|setfilter|';
 $lang->security->menu->log       = '登录日志|user|adminlog|';
 
 /* Menu of company module. */

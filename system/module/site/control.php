@@ -283,4 +283,67 @@ class site extends control
         $this->view->title = $this->lang->site->setStat;
         $this->display();
     }
+
+    /**
+     * Set filter rule.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setFilter($type = 'ip')
+    {
+        if(!empty($_POST))
+        {
+            $setting = new stdclass;
+            $setting->owner   = 'system';
+            $setting->module  = 'common';
+            $setting->section = 'guarder';
+            $setting->key     = 'limits';
+            $setting->lang    = 'all';
+
+            $limits = $this->config->guarder->limits;
+            $limits->$type  = $this->post->limits;
+            $setting->value = helper::jsonEncode($limits);
+
+            $this->dao->replace(TABLE_CONFIG)->data($setting)->exec();
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+
+            $setting = new stdclass;
+            $setting->owner   = 'system';
+            $setting->module  = 'common';
+            $setting->section = 'guarder';
+            $setting->key     = 'punishment';
+            $setting->lang    = 'all';
+
+            $punishment = $this->config->guarder->punishment;
+            $punishment->$type  = $this->post->punishment;
+            $setting->value = helper::jsonEncode($punishment);
+
+            $this->dao->replace(TABLE_CONFIG)->data($setting)->exec();
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+
+            $interval = $this->post->interval;
+            foreach($interval as $action => $value) $interval[$action] = (int)$value;
+            $setting = new stdclass;
+            $setting->owner   = 'system';
+            $setting->module  = 'common';
+            $setting->section = 'guarder';
+            $setting->key     = 'interval';
+            $setting->lang    = 'all';
+
+            $config = $this->config->guarder->interval;
+            $config->$type  = $interval;
+            $setting->value = helper::jsonEncode($config);
+
+            $this->dao->replace(TABLE_CONFIG)->data($setting)->exec();
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+
+            $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
+        }
+
+        $this->view->title = $this->lang->site->setFilter;
+        $this->view->type  = $type;
+        $this->display();
+   
+    }
 }
