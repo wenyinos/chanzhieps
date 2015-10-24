@@ -134,6 +134,7 @@ $config->article->contribution = 'close';
 
 /* Include my.php, domain.php and front or admin.php. */
 $configRoot      = dirname(__FILE__) . DS;
+$guarderConfig   = $configRoot . 'guarder.php';
 $myConfig        = $configRoot . 'my.php';
 $routeConfig     = $configRoot . 'route.php';
 $domainConfig    = $configRoot . 'domain.php';
@@ -141,6 +142,7 @@ $modeConfig      = $configRoot . RUN_MODE . '.php';
 $shopConfig      = $configRoot . 'shop.php';
 $sensitiveConfig = $configRoot . 'sensitive.php';
 
+if(file_exists($guarderConfig))   include $guarderConfig;
 if(file_exists($myConfig))        include $myConfig;
 if(file_exists($routeConfig))     include $routeConfig;
 if(file_exists($domainConfig))    include $domainConfig;
