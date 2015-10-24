@@ -212,7 +212,7 @@ EOT;
 
         if(($dayCount + 1) >= $dayLimit)
         {
-            $this->punish($type, $identity, $action, zget($this->config->guarder->punishment->$type->day->$action)); 
+            $this->punish($type, $identity, $action, $this->config->guarder->punishment->$type->day->$action); 
             return true;
         }
 
@@ -230,7 +230,10 @@ EOT;
         if(!empty($log))
         {
             $log->count ++;
-            if($log->count > $limit) $this->punish($type, $identity, $action, $this->config->guarder->punishment->{$type}->minute->$action);
+            if($log->count >= $limit)
+            {
+                $this->punish($type, $identity, $action, $this->config->guarder->punishment->{$type}->minute->$action);
+            }
             $this->dao->replace(TABLE_OPERATIONLOG)->data($log)->exec();
         }
         else

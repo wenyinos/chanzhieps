@@ -16,7 +16,7 @@
     <strong><i class='icon-globe'></i> <?php echo $lang->site->setFilter;?></strong>
   </div>
   <div class='panel-body'>
-    <form method='post' id='jaxForm' class='form-inline'>
+    <form method='post' id='ajaxForm' class='form-inline'>
       <table class='table table-form w-600px'>
         <?php foreach($lang->guarder->operationList as $item => $operation):?>
         <tr>
