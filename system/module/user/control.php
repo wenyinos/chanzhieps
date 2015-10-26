@@ -41,13 +41,13 @@ class user extends control
      */
     public function register()
     {
-        $this->loadModel('guarder')->logOperation('ip', 'register', $this->server->remote_addr);
         if($this->app->user->account != 'guest')
         {
             $this->locate(inlink('control'));   
         }
         if(!empty($_POST))
         {
+            $this->loadModel('guarder')->logOperation('ip', 'register', $this->server->remote_addr);
             $this->user->create();
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
 
