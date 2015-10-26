@@ -195,6 +195,7 @@ EOT;
     {
         if($type == 'ip')     $identity = $this->server->remote_addr;
         if($type == 'acount') $identity = $this->app->user->account;
+
         $this->dao->delete()->from(TABLE_OPERATIONLOG)
             ->where('type')->eq($type)
             ->andWhere('identity')->eq($identity)
@@ -202,7 +203,7 @@ EOT;
             ->andWhere('createdTime')->lt(date('Y-m-d'))
             ->exec();
 
-        $dayLimit = $this->config->guarder->limits->{$type}[$action]['day'];
+        $dayLimit = $this->config->guarder->limits->{$type}->day->$action;
         $dayCount = (int)$this->dao->select('sum(count) as count')->from(TABLE_OPERATIONLOG)
             ->where('type')->eq($type)
             ->andWhere('identity')->eq($identity)
@@ -211,12 +212,12 @@ EOT;
 
         if(($dayCount + 1) >= $dayLimit)
         {
-            $this->punish($type, $identity, $action, zget($this->config->guarder->punishment->$type, $action)); 
+            $this->punish($type, $identity, $action, $this->config->guarder->punishment->$type->day->$action); 
             return true;
         }
 
-        $interval = $this->config->guarder->interval->{$type}[$action];
-        $limit    = $this->config->guarder->limits->{$type}[$action]['minute'];
+        $interval = $this->config->guarder->interval->{$type}->$action;
+        $limit    = $this->config->guarder->limits->{$type}->minute->$action;
         $last     = date('Y-m-d H:i:s', time() - (60 * $interval));
 
         $log = $this->dao->select('*')->from(TABLE_OPERATIONLOG)
@@ -229,7 +230,10 @@ EOT;
         if(!empty($log))
         {
             $log->count ++;
-            if($log->count > $limit) $this->punish($type, $identity, $action, $this->config->guarder->punishment->{$type}[$action]);
+            if($log->count >= $limit)
+            {
+                $this->punish($type, $identity, $action, $this->config->guarder->punishment->{$type}->minute->$action);
+            }
             $this->dao->replace(TABLE_OPERATIONLOG)->data($log)->exec();
         }
         else

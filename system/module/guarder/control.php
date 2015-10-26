@@ -18,7 +18,7 @@ class guarder extends control
      * @access public
      * @return void
      */
-    public function manageBlacklist($mode='keywords', $pageID = 1)
+    public function setBlacklist($mode='keywords', $pageID = 1)
     {
         $this->lang->guarder->menu = $this->lang->security->menu;
         $this->lang->menuGroups->site = 'security';
@@ -29,7 +29,7 @@ class guarder extends control
 
         $blacklist = $this->dao->select('*')->from(TABLE_BLACKLIST)->where('type')->eq($mode)->page($pager)->fetchAll();
         
-        $this->view->title = $this->lang->site->manageBlacklist;
+        $this->view->title = $this->lang->site->setBlacklist;
         $this->view->blacklist = $blacklist;
         $this->view->pager = $pager;
         $this->view->mode  = $mode;
@@ -49,8 +49,8 @@ class guarder extends control
         if($_POST)
         {
             $result = $this->guarder->punish($this->post->type, $this->post->identity, $this->post->reason, $this->post->expired);
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('manageBlacklist')));
-            $this->send(array('result' => 'fail', 'message' => $this->lang->fail, 'locate' => inlink('manageBlacklist')));
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setBlacklist')));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->fail, 'locate' => inlink('setBlacklist')));
         }
 
         $this->view->title       = $this->lang->guarder->add;
@@ -69,10 +69,10 @@ class guarder extends control
     public function delete($type, $identity)
     {
         $result = $this->dao->delete()->from(TABLE_BLACKLIST)->where('identity')->eq($identity)->andWhere('type')->eq($type)->exec();
-        if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('manageBlacklist')));
+        if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setBlacklist')));
         $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
 
-        $this->view->title = $this->lang->site->manageBlacklist;
+        $this->view->title = $this->lang->site->setBlacklist;
         $this->display();
     }
 }

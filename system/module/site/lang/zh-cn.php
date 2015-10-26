@@ -50,7 +50,7 @@ $lang->site->checkSessionIP  = '后台检查IP';
 $lang->site->setsecurity     = '安全设置';
 $lang->site->setsensitive    = '敏感词设置';
 $lang->site->filterSensitive = '敏感词过滤';
-$lang->site->manageBlacklist = '黑名单管理';
+$lang->site->setBlacklist    = '黑名单管理';
 $lang->site->mobileTemplate  = '移动模板';
 $lang->site->score           = '积分';
 $lang->site->setCounts       = '设置积分规则';
@@ -59,6 +59,7 @@ $lang->site->closeScoreTip   = '禁用积分功能后不再记录积分，会员
 
 $lang->site->setBasic      = "基本信息设置";
 $lang->site->setLang       = "语言设置";
+$lang->site->setFilter     = "过滤设置";
 $lang->site->setSecurity   = "安全设置";
 $lang->site->setUpload     = "文件上传设置";
 $lang->site->setRobots     = "Robots 设置";
