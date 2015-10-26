@@ -258,7 +258,7 @@ EOT;
      * @param  string    $reason 
      * @param  string    $expired
      * @access public
-     * @return void
+     * @return bool 
      */
     public function punish($type, $identity, $reason, $expired)
     {
@@ -266,9 +266,12 @@ EOT;
        $blacklist->type        = $type;
        $blacklist->identity    = $identity;
        $blacklist->reason      = $reason;
+       if(!empty($expired))
        $blacklist->expiredDate = date('Y-m-d H:i:s', $expired * 3600 + time());
        $blacklist->lang        = 'all';
 
        $this->dao->replace(TABLE_BLACKLIST)->data($blacklist)->exec();
+
+       return !dao::isError();
     }
 }

@@ -18,11 +18,24 @@ $lang->guarder->operators   = array('*' => '乘', '-' => '减', '+' => '加');
 $lang->guarder->equal       = '=';
 $lang->guarder->placeholder = '数字';
 
-$lang->guarder->interval = '分钟内';
-$lang->guarder->perDay   = '每天超过';
-$lang->guarder->exceed   = '超过';
-$lang->guarder->disable  = '禁用';
-$lang->guarder->hours    = '小时';
+$lang->guarder->blacklistModes['keywords'] = '关键词';
+$lang->guarder->blacklistModes['ip']       = 'ip地址';
+$lang->guarder->blacklistModes['guard']    = '网址';
+$lang->guarder->blacklistModes['email']    = '邮箱地址';
+
+$lang->guarder->type       = '类型';
+$lang->guarder->content    = '内容';
+$lang->guarder->reason     = '原因';
+$lang->guarder->expiration = '过期时间';
+$lang->guarder->action     = '操作';
+$lang->guarder->add        = '添加';
+
+$lang->guarder->permanent = '永久';
+$lang->guarder->interval  = '分钟内';
+$lang->guarder->perDay    = '每天超过';
+$lang->guarder->exceed    = '超过';
+$lang->guarder->disable   = '禁用';
+$lang->guarder->hours     = '小时';
 
 $lang->guarder->operationList = new stdclass;
 $lang->guarder->operationList->logonFailure  = '登录失败';
