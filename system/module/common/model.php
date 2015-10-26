@@ -950,14 +950,17 @@ class commonModel extends model
     public function loadAlias()
     {
         if(version_compare($this->loadModel('setting')->getVersion(), 1.4) <= 0) return true;
-        $categories = $this->dao->select('*, id as category')->from(TABLE_CATEGORY)->where('alias')->ne('')->fetchGroup('type', 'id');
+        $categories = $this->dao->select('*, id as category')->from(TABLE_CATEGORY)->where('type')->in('article,product,blog,forum,page')->fetchGroup('type', 'id');
+        $this->config->categories = $categories;
         $this->config->seo->alias->category = array();
+        $this->config->seo->alias->blog     = array();
         
         if(!empty($categories['article'] ))
         {
             foreach($categories['article'] as $category) 
             {
                 if(empty($category->alias)) continue;
+                $categories['article'][$category->alias] = $category;
                 $category->module = 'article';
                 $this->config->seo->alias->category[$category->alias] = $category;
             }
@@ -968,6 +971,7 @@ class commonModel extends model
             foreach($categories['product'] as $category) 
             {
                 if(empty($category->alias)) continue;
+                $categories['product'][$category->alias] = $category;
                 $category->module = 'product';
                 $this->config->seo->alias->category[$category->alias] = $category;
             }
@@ -978,8 +982,9 @@ class commonModel extends model
             foreach($categories['page'] as $category) 
             {
                 if(empty($category->alias)) continue;
+                $categories['page'][$category->alias] = $category;
                 $category->module = 'page';
-                $this->config->seo->alias->category[$category->alias] = $category;
+                $this->config->seo->alias->page[$category->alias] = $category;
             }
         }
 
@@ -988,6 +993,7 @@ class commonModel extends model
             foreach($categories['blog'] as $category) 
             {
                 if(empty($category->alias)) continue;
+                $categories['blog'][$category->alias] = $category;
                 $category->module = 'blog';
                 $this->config->seo->alias->blog[$category->id] = $category->alias;
             }
@@ -998,6 +1004,7 @@ class commonModel extends model
             foreach($categories['forum'] as $category) 
             {
                 if(empty($category->alias)) continue;
+                $categories['forum'][$category->alias] = $category;
                 $category->module = 'forum';
                 $this->config->seo->alias->forum[$category->id] = $category->alias;
             }
