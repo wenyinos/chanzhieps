@@ -89,7 +89,6 @@ class commonModel extends model
         if(isset($this->config->template->mobile) and !is_object($this->config->template->mobile)) $this->config->template->mobile = json_decode($this->config->template->mobile);
 
         if(!isset($this->config->site->status)) $this->config->site->status = 'normal';
-        if(($this->loadModel('wechat')->getList())) $this->config->site->wechat = true;
     }
 
     /**
@@ -319,7 +318,7 @@ class commonModel extends model
      */
     public static function createMainMenu($currentModule)
     {
-        global $app, $lang, $config;
+        global $app, $lang;
 
         /* Set current module. */
         if(isset($lang->menuGroups->$currentModule)) $currentModule = $lang->menuGroups->$currentModule;
@@ -339,13 +338,11 @@ class commonModel extends model
                     {
                         $moduleMenu = "$label|forum|admin|tab=feedback";
                     }
-                    elseif(isset($config->site->wechat))
-                    {
-                        $moduleMenu = "$label|wechat|message|mode=replied&replied=0";
-                    }
                     else
                     {
-                        continue;
+                        $dao = new dao();
+                        $publics = $dao->select('*')->from(TABLE_WX_PUBLIC)->fetchAll('id');
+                        if(!empty($publics)) $moduleMenu = "$label|wechat|message|mode=replied&replied=0";
                     }
                 }
             }
