@@ -649,6 +649,7 @@ class uiModel extends model
         $this->dao->insert('exportlang')->data($_POST)->batchCheck($this->config->ui->require->exportTheme, 'notempty');
         return !dao::isError();
     }
+
     /**
      * Export theme.
      *
