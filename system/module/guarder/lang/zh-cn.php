@@ -17,3 +17,18 @@ $lang->guarder->numbers     = array('零', '壹', '贰', '叁', '肆', '伍', '�
 $lang->guarder->operators   = array('*' => '乘', '-' => '减', '+' => '加');
 $lang->guarder->equal       = '=';
 $lang->guarder->placeholder = '数字';
+
+$lang->guarder->blacklistModes['keywords'] = '关键词';
+$lang->guarder->blacklistModes['ip']       = 'ip地址';
+$lang->guarder->blacklistModes['guard']    = '网址';
+$lang->guarder->blacklistModes['email']    = '邮箱地址';
+
+$lang->guarder->type       = '类型';
+$lang->guarder->content    = '内容';
+$lang->guarder->reason     = '原因';
+$lang->guarder->expiration = '过期时间';
+$lang->guarder->action     = '操作';
+
+$lang->guarder->add = '添加';
+
+$lang->guarder->permanent = '永久';

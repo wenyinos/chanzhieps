@@ -249,12 +249,13 @@ $lang->site->menu->setStat = 'Set Stat|site|setStat|';
 /* Menu of security module. */
 $lang->security = new stdclass();
 $lang->security->menu = new stdclass();
-$lang->security->menu->basic     = 'Basic|site|setsecurity|';
-$lang->security->menu->upload    = 'Uploads|site|setupload|';
-$lang->security->menu->sensitive = 'Sensitive Words|site|setsensitive|';
-$lang->security->menu->admin     = 'Admin User|user|admin|admin=1';
-$lang->security->menu->group     = array('link' => 'Group|group|browse|', 'alias' => 'managepriv,managemember');
-$lang->security->menu->log       = 'Login log|user|adminlog|';
+$lang->security->menu->basic           = 'Basic|site|setsecurity|';
+$lang->security->menu->upload          = 'Uploads|site|setupload|';
+$lang->security->menu->sensitive       = 'Sensitive Words|site|setsensitive|';
+$lang->security->menu->ManageBlacklist = 'Blacklist Management|guarder|manageblacklist|';
+$lang->security->menu->admin           = 'Admin User|user|admin|admin=1';
+$lang->security->menu->group           = array('link' => 'Group|group|browse|', 'alias' => 'managepriv,managemember');
+$lang->security->menu->log             = 'Login log|user|adminlog|';
 
 /* Menu of company module. */
 $lang->company->menu = $lang->site->menu;

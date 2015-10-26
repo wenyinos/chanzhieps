@@ -50,6 +50,7 @@ $lang->site->checkSessionIP  = 'Check admin ip';
 $lang->site->setsecurity     = 'Security setting';
 $lang->site->setsensitive    = 'Set sensitive words';
 $lang->site->filterSensitive = 'Filter sensitive words';
+$lang->site->manageBlacklist = 'Blacklist Management';
 $lang->site->mobileTemplate  = 'Mobile Template';
 $lang->site->score           = 'Score';
 $lang->site->setCounts       = 'Set score rule';

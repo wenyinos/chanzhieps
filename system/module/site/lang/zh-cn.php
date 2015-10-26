@@ -50,6 +50,7 @@ $lang->site->checkSessionIP  = '后台检查IP';
 $lang->site->setsecurity     = '安全设置';
 $lang->site->setsensitive    = '敏感词设置';
 $lang->site->filterSensitive = '敏感词过滤';
+$lang->site->manageBlacklist = '黑名单管理';
 $lang->site->mobileTemplate  = '移动模板';
 $lang->site->score           = '积分';
 $lang->site->setCounts       = '设置积分规则';
