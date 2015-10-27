@@ -49,7 +49,7 @@ class guarder extends control
         if($_POST)
         {
             $result = $this->guarder->punish($this->post->type, $this->post->identity, $this->post->reason, $this->post->expired);
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setBlacklist')));
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setBlacklist', "mode=$type")));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail, 'locate' => inlink('setBlacklist')));
         }
 
@@ -69,7 +69,7 @@ class guarder extends control
     public function delete($type, $identity)
     {
         $result = $this->dao->delete()->from(TABLE_BLACKLIST)->where('identity')->eq($identity)->andWhere('type')->eq($type)->exec();
-        if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setBlacklist')));
+        if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setBlacklist', "mode=$type")));
         $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
 
         $this->view->title = $this->lang->site->setBlacklist;

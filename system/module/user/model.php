@@ -725,6 +725,7 @@ class userModel extends model
             ->set('reset')->eq('')
             ->where('reset')->eq($reset)
             ->exec();
+
         return !dao::isError();
     }
 

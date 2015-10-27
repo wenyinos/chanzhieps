@@ -485,9 +485,10 @@ CREATE TABLE IF NOT EXISTS `eps_thread` (
   `repliedDate` datetime NOT NULL,
   `replyID` mediumint(8) unsigned NOT NULL,
   `hidden` enum('0','1') NOT NULL DEFAULT '0',
-  `status` char(10) NOT NULL;
   `link` varchar(255) NOT NULL,
   `lang` char(30) NOT NULL,
+  `status` char(10) NOT NULL,
+  `ip` char(15) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `lang` (`lang`),
   KEY `category` (`board`)

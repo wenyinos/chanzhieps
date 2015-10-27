@@ -22,6 +22,9 @@ class error extends control
         @header("http/1.1 404 not found");
         @header("status: 404 not found");
 
+        /* Record post number. */
+        $this->loadModel('guarder')->logOperation('ip', 'error404');
+
         $this->display();
     }
 }
