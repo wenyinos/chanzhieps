@@ -108,14 +108,25 @@ class articleModel extends model
         else
         {
             /*Get articles containing the search word (use groupBy to distinct articles).  */
-            $articles = $this->dao->select('t1.*, t2.category')->from(TABLE_ARTICLE)->alias('t1')
-                ->leftJoin(TABLE_RELATION)->alias('t2')->on('t1.id = t2.id')
-                ->where('t1.type')->eq($type)
+            if(!empty($categories))
+            {
+                $articleIdList = $this->dao->select('id')->from(TABLE_RELATION)
+                    ->where('type')->eq($type)
+                    ->andWhere('category')->in($categories)
+                    ->fetchAll('id');
+            }
+            else
+            {
+                $articleIdList = array();
+            }
+
+            $articles = $this->dao->select('*')->from(TABLE_ARTICLE)
+                ->where('type')->eq($type)
                 ->beginIf(defined('RUN_MODE') and RUN_MODE == 'front')
-                ->andWhere('t1.addedDate')->le(helper::now())
-                ->andWhere('t1.status')->eq('normal')
+                ->andWhere('addedDate')->le(helper::now())
+                ->andWhere('status')->eq('normal')
                 ->fi()
-                ->beginIf($categories)->andWhere('t2.category')->in($categories)->fi()
+                ->beginIf(!empty($categories))->andWhere('id')->in(array_keys($articleIdList))->fi()
 
                 ->beginIf($searchWord)
                 ->andWhere('title', true)->like("%{$searchWord}%")
@@ -125,7 +136,6 @@ class articleModel extends model
                 ->markRight(1)
                 ->fi()
 
-                ->groupBy('t2.id')
                 ->orderBy($orderBy)
                 ->page($pager)
                 ->fetchAll('id');
