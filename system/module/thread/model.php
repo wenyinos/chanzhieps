@@ -187,6 +187,7 @@ class threadModel extends model
             ->setIF(!$this->post->isLink, 'link', '')
             ->setForce('board', $boardID)
             ->setForce('author', $this->app->user->account)
+            ->setForce('ip', $this->server->remote_addr)
             ->setForce('addedDate', $now) 
             ->setForce('editedDate', $now) 
             ->setForce('repliedDate', $now)
@@ -222,6 +223,10 @@ class threadModel extends model
        
         $this->saveCookie($threadID);
         $this->loadModel('file')->saveUpload('thread', $threadID);
+
+        /* Record post number. */
+        $this->loadModel('guarder')->logOperation('ip', 'postThread');
+        $this->loadModel('guarder')->logOperation('account', 'postThread');
 
         if($this->config->forum->postReview == 'open') return array('result' => 'success', 'message' => $this->lang->thread->thanks, 'locate' => helper::createLink('forum', 'board', "boardID=$boardID"));
         if(commonModel::isAvailable('score')) $this->loadModel('score')->earn('thread', 'thread', $threadID);
@@ -374,6 +379,13 @@ class threadModel extends model
         $this->dao->delete()->from(TABLE_REPLY)->where('thread')->eq($threadID)->exec(false);
         if(dao::isError()) return false;
 
+        if(RUN_MODE == 'admin')
+        {
+            /* Record delete number. */
+            $this->loadModel('guarder')->logOperation('ip', 'threadFail', $thread->ip);
+            $this->loadModel('guarder')->logOperation('account', 'threadFail', $thread->author);
+        }
+        
         /* Update board stats. */
         $this->loadModel('forum')->updateBoardStats($thread->board);
         if(commonModel::isAvailable('score')) $this->loadModel('score')->punish($thread->author, 'delThread', $this->config->score->counts->delThread, 'thread', $threadID);

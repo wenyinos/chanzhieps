@@ -32,6 +32,10 @@ class search extends control
         $begin = time();
         $this->view->results = $this->search->getList($words, $pager);
 
+        /* Record post number. */
+        $this->loadModel('guarder')->logOperation('ip', 'search');
+        $this->loadModel('guarder')->logOperation('account', 'search');
+
         $this->view->consumed   = time() - $begin;
         $this->view->title      = $this->lang->search->index; 
         $this->view->pager      = $pager;

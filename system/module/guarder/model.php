@@ -191,10 +191,13 @@ EOT;
      * @access public
      * @return void
      */
-    public function logOperation($type = 'ip', $action)
+    public function logOperation($type = 'ip', $action, $identity = '')
     {
-        if($type == 'ip')     $identity = $this->server->remote_addr;
-        if($type == 'acount') $identity = $this->app->user->account;
+        if($identity == '')
+        {
+            if($type == 'ip')      $identity = $this->server->remote_addr;
+            if($type == 'account') $identity = $this->app->user->account;
+        }
 
         $this->dao->delete()->from(TABLE_OPERATIONLOG)
             ->where('type')->eq($type)

@@ -130,7 +130,7 @@ class user extends control
             if(!$this->user->login($this->post->account, $this->post->password))
             {
                 $this->loadModel('guarder')->logOperation('ip', 'loginFailure');
-                $this->loadModel('guarder')->logOperation('account', 'loginFailure');
+                $this->loadModel('guarder')->logOperation('account', 'loginFailure', $this->post->account);
                 $this->send(array('result'=>'fail', 'message' => $this->lang->user->loginFailed));
             }
 
@@ -589,6 +589,8 @@ class user extends control
                 }
                 else
                 {
+                    $this->loadModel('guarder')->logOperation('account', 'resetPassword');
+                    $this->loadModel('guarder')->logOperation('ip', 'resetPassword');
                     $this->send(array('result' => 'success', 'message' => $this->lang->user->resetPassword->success));
                 }
             }

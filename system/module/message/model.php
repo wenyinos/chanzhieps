@@ -287,6 +287,10 @@ class messageModel extends model
             ->batchCheck($this->config->message->require->post, 'notempty')
             ->exec();
 
+        /* Record post number. */
+        $this->loadModel('guarder')->logOperation('ip', 'postComment');
+        $this->loadModel('guarder')->logOperation('account', 'postComment');
+
         if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
         $this->setCookie($this->dao->lastInsertId());
         return array('result' => 'success', 'message' => $this->lang->message->thanks);
@@ -370,6 +374,11 @@ class messageModel extends model
             ->beginIF($mode == 'single')->andWhere('id')->eq($messageID)->fi()
             ->beginIF($mode == 'pre')->andWhere('id')->ge($messageID)->andWhere('status')->ne('1')->fi()
             ->exec(false);
+
+        /* Record post number. */
+        $this->loadModel('guarder')->logOperation('ip', 'commentFail');
+        $this->loadModel('guarder')->logOperation('account', 'commentFail');
+
         return !dao::isError();
     }
 

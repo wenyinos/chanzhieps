@@ -172,6 +172,10 @@ class replyModel extends model
 
         $this->loadModel('file')->updateObjectID($this->post->uid, $replyID, 'reply');
 
+        /* Record reply number. */
+        $this->loadModel('guarder')->logOperation('ip', 'postReply');
+        $this->loadModel('guarder')->logOperation('account', 'postReply');
+
         if(!dao::isError())
         {
             $this->saveCookie($replyID);                               // Save reply id to cookie.
