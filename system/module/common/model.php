@@ -89,7 +89,6 @@ class commonModel extends model
         if(isset($this->config->template->mobile) and !is_object($this->config->template->mobile)) $this->config->template->mobile = json_decode($this->config->template->mobile);
 
         if(!isset($this->config->site->status)) $this->config->site->status = 'normal';
-        if(($this->loadModel('wechat')->getList())) $this->config->site->wechat = true;
     }
 
     /**
@@ -319,7 +318,7 @@ class commonModel extends model
      */
     public static function createMainMenu($currentModule)
     {
-        global $app, $lang, $config;
+        global $app, $lang;
 
         /* Set current module. */
         if(isset($lang->menuGroups->$currentModule)) $currentModule = $lang->menuGroups->$currentModule;
@@ -339,13 +338,11 @@ class commonModel extends model
                     {
                         $moduleMenu = "$label|forum|admin|tab=feedback";
                     }
-                    elseif(isset($config->site->wechat))
-                    {
-                        $moduleMenu = "$label|wechat|message|mode=replied&replied=0";
-                    }
                     else
                     {
-                        continue;
+                        $dao = new dao();
+                        $publics = $dao->select('*')->from(TABLE_WX_PUBLIC)->fetchAll('id');
+                        if(!empty($publics)) $moduleMenu = "$label|wechat|message|mode=replied&replied=0";
                     }
                 }
             }
@@ -953,12 +950,66 @@ class commonModel extends model
     public function loadAlias()
     {
         if(version_compare($this->loadModel('setting')->getVersion(), 1.4) <= 0) return true;
+        $categories = $this->dao->select('*, id as category')->from(TABLE_CATEGORY)->where('type')->in('article,product,blog,forum,page')->fetchGroup('type', 'id');
+        $this->config->categories = $categories;
+        $this->config->seo->alias->category = array();
+        $this->config->seo->alias->blog     = array();
+        
+        if(!empty($categories['article'] ))
+        {
+            foreach($categories['article'] as $category) 
+            {
+                if(empty($category->alias)) continue;
+                $categories['article'][$category->alias] = $category;
+                $category->module = 'article';
+                $this->config->seo->alias->category[$category->alias] = $category;
+            }
+        }
 
-        $this->config->seo->alias->category = $this->dao->select('alias, id as category, type as module')->from(TABLE_CATEGORY)->where('alias')->ne('')->andWhere('type')->in('article,product')->fetchAll('alias');
-        $this->config->seo->alias->page     = $this->dao->select("alias, id, 'page' as module")->from(TABLE_ARTICLE)->where('type')->eq('page')->fetchAll('alias');
-        $this->config->seo->alias->forum    = $this->dao->select("id, alias")->from(TABLE_CATEGORY)->where('type')->eq('forum')->fetchPairs('id');
-        $this->config->seo->alias->blog     = $this->dao->select("id, alias")->from(TABLE_CATEGORY)->where('type')->eq('blog')->fetchPairs('id');
+        if(!empty($categories['product'] ))
+        {
+            foreach($categories['product'] as $category) 
+            {
+                if(empty($category->alias)) continue;
+                $categories['product'][$category->alias] = $category;
+                $category->module = 'product';
+                $this->config->seo->alias->category[$category->alias] = $category;
+            }
+        }
 
+        if(!empty($categories['page'] ))
+        {
+            foreach($categories['page'] as $category) 
+            {
+                if(empty($category->alias)) continue;
+                $categories['page'][$category->alias] = $category;
+                $category->module = 'page';
+                $this->config->seo->alias->page[$category->alias] = $category;
+            }
+        }
+
+        if(!empty($categories['blog'] ))
+        {
+            foreach($categories['blog'] as $category) 
+            {
+                if(empty($category->alias)) continue;
+                $categories['blog'][$category->alias] = $category;
+                $category->module = 'blog';
+                $this->config->seo->alias->blog[$category->id] = $category->alias;
+            }
+        }
+
+        if(!empty($categories['forum'] ))
+        {
+            foreach($categories['forum'] as $category) 
+            {
+                if(empty($category->alias)) continue;
+                $categories['forum'][$category->alias] = $category;
+                $category->module = 'forum';
+                $this->config->seo->alias->forum[$category->id] = $category->alias;
+            }
+        }
+    
         $this->config->categoryAlias = array();
         foreach($this->config->seo->alias->category as $alias => $category) $this->config->categoryAlias[$category->category] = $alias;
     }
