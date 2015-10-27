@@ -49,6 +49,8 @@ class message extends control
 
         $this->view->objectType  = $objectType;
         $this->view->objectID    = $objectID;
+        $this->view->showDetail  = $this->lang->message->showDetail;
+        $this->view->hideDetail  = $this->lang->message->hideDetail;
         $this->view->comments    = $this->message->getByObject($type = 'comment', $objectType, $objectID, $pager);
         $this->view->pager       = $pager;
         $this->view->startNumber = ($pageID - 1) * 10;
