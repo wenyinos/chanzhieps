@@ -23,11 +23,17 @@ class treeModel extends model
      */
     public function getByID($categoryID, $type = 'article')
     {
-        if(isset($this->config->categories[$type][$categoryID])) return $this->config->categories[$type][$categoryID];
-        $category = $this->dao->select('*')->from(TABLE_CATEGORY)->where('alias')->eq($categoryID)->andWhere('type')->eq($type)->fetch();
-        if(!$category) $category = $this->dao->findById((int)$categoryID)->from(TABLE_CATEGORY)->fetch();
+        if(isset($this->config->categories[$type][$categoryID])) 
+        {
+           $category = $this->config->categories[$type][$categoryID];
+        }
+        else
+        {
+            $category = $this->dao->select('*')->from(TABLE_CATEGORY)->where('alias')->eq($categoryID)->andWhere('type')->eq($type)->fetch();
+            if(!$category) $category = $this->dao->findById((int)$categoryID)->from(TABLE_CATEGORY)->fetch();
 
-        if(!$category) return false;
+            if(!$category) return false;
+        }
 
         if($type == 'forum') 
         {
