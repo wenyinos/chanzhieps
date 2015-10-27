@@ -120,7 +120,7 @@ class treeModel extends model
     public function getFamily($categoryID, $type = '')
     {
         if($categoryID == 0 and empty($type)) return array();
-        $category = $this->getById($categoryID);
+        $category = $this->getByID($categoryID, $type);
 
         if($category)  return $this->dao->select('id')->from(TABLE_CATEGORY)->where('path')->like($category->path . '%')->fetchPairs();
         if(!$category) return $this->dao->select('id')->from(TABLE_CATEGORY)->where('type')->eq($type)->fetchPairs();

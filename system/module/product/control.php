@@ -55,7 +55,7 @@ class product extends control
         $pager = new pager(0, $recPerPage, $pageID);
 
         $categoryID = is_numeric($categoryID) ? $categoryID : $category->id;
-        $products   = $this->product->getList($this->tree->getFamily($categoryID), '`order` desc', $pager);
+        $products   = $this->product->getList($this->tree->getFamily($categoryID, 'product'), '`order` desc', $pager);
 
         if(!$category and $categoryID != 0) die($this->fetch('error', 'index'));
 
@@ -142,7 +142,7 @@ class product extends control
 
         $maxID = $this->dao->select('max(id) as maxID')->from(TABLE_PRODUCT)->fetch('maxID');
 
-        if($categoryID) $this->view->currentCategory = $this->tree->getByID($categoryID);
+        if($categoryID) $this->view->currentCategory = $this->tree->getByID($categoryID, 'product');
 
         $this->view->title      = $this->lang->product->create;
         $this->view->categoryID = $categoryID;
@@ -239,7 +239,7 @@ class product extends control
                 }
             }
         }
-        $category = $this->loadModel('tree')->getByID($category);
+        $category = $this->loadModel('tree')->getByID($category, 'product');
 
         $title    = $product->name . ' - ' . $category->name;
         $keywords = $product->keywords . ' ' . $category->keywords . ' ' . $this->config->site->keywords;
