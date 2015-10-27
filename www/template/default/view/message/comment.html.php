@@ -1,6 +1,8 @@
 <?php
 js::set('objectType', $objectType);
 js::set('objectID',   $objectID);
+js::set('showDetail',$showDetail);
+js::set('hideDetail', $hideDetail);
 if(isset($pageCSS)) css::internal($pageCSS);
 ?>
 <?php if(isset($comments) and $comments):?>
@@ -22,7 +24,7 @@ if(isset($pageCSS)) css::internal($pageCSS);
       <span class='time'><?php echo formatTime($comment->date, 'Y/m/d');?> </span>
     </th>
     <td class='td-content'>
-      <?php echo nl2br($comment->content);?>
+      <div class='content-detail'><?php echo nl2br($comment->content);?></div>
     </td>
     <td class='td-action'> <?php echo html::a($this->createLink('message', 'reply', "commentID=$comment->id"), $lang->comment->reply, "data-toggle='modal' data-type='iframe' data-icon='reply' data-title='{$lang->comment->reply}'");?> </td>
     </tr>

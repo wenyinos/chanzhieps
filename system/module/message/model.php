@@ -287,12 +287,13 @@ class messageModel extends model
             ->batchCheck($this->config->message->require->post, 'notempty')
             ->exec();
 
+        $this->setCookie($this->dao->lastInsertId());
+
         /* Record post number. */
         $this->loadModel('guarder')->logOperation('ip', 'postComment');
         $this->loadModel('guarder')->logOperation('account', 'postComment');
 
         if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
-        $this->setCookie($this->dao->lastInsertId());
         return array('result' => 'success', 'message' => $this->lang->message->thanks);
     }
 
