@@ -140,6 +140,14 @@ class dao
     static public $errors = array();
 
     /**
+     * The cache.
+     * 
+     * @var array
+     * @access public
+     */
+    static public $cache = array();
+
+    /**
      * The construct method.
      *
      * @access public
@@ -555,6 +563,8 @@ class dao
         if(!empty(dao::$errors)) return new PDOStatement();   // If any error, return an empty statement object to make sure the remain method to execute.
 
         $sql = $this->processSQL();
+        $key = md5($sql);
+
         try
         {
             $method = $this->method;
@@ -562,10 +572,21 @@ class dao
 
             if($this->slaveDBH and $method == 'select')
             {
-                return $this->slaveDBH->query($sql);
+                if(isset(dao::$cache[$key])) return dao::$cache[$key];
+                $result = $this->slaveDBH->query($sql);
+                dao::$cache[$key] = $result;
+                return $result;
             }
             else
             {
+                if($this->method == 'select')
+                {
+                    if(isset(dao::$cache[$key])) return dao::$cache[$key];
+                    $result = $this->slaveDBH->query($sql);
+                    dao::$cache[$key] = $result;
+                    return $result;
+                }
+
                 return $this->dbh->query($sql);
             }
         }
@@ -657,6 +678,7 @@ class dao
     {
         if(empty($field)) return $this->query()->fetch();
         $this->setFields($field);
+        
         $result = $this->query()->fetch(PDO::FETCH_OBJ);
         if($result) return $result->$field;
     }
