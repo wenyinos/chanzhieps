@@ -20,7 +20,7 @@ $config->guarder->limits->ip->minute->postComment   = 10;
 $config->guarder->limits->ip->minute->postReply     = 10;
 $config->guarder->limits->ip->minute->threadFail    = 10;
 $config->guarder->limits->ip->minute->commentFail   = 10;
-$config->guarder->limits->ip->minute->error404      = 10;
+$config->guarder->limits->ip->minute->error404      = 20;
 $config->guarder->limits->ip->minute->search        = 10;
 
 $config->guarder->limits->ip->day = $config->guarder->limits->ip->minute;
@@ -40,7 +40,7 @@ $config->guarder->interval->ip->postComment   = 3;
 $config->guarder->interval->ip->postReply     = 3;
 $config->guarder->interval->ip->threadFail    = 3;
 $config->guarder->interval->ip->commentFail   = 3;
-$config->guarder->interval->ip->error404      = 3;
+$config->guarder->interval->ip->error404      = 1;
 $config->guarder->interval->ip->search        = 3;
 
 $config->guarder->interval->account = $config->guarder->interval->ip;
