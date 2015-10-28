@@ -972,6 +972,48 @@ class user extends control
         $this->view->title   = $this->lang->user->reduceScore;
         $this->view->account = $account;
         $this->display();
+    }
 
+    /**
+     * Yangcong login.
+     * 
+     * @param  string $referer 
+     * @access public
+     * @return void
+     */
+    public function yangcongLogin($referer = '')
+    {
+        $uid  = $this->session->openID;
+        $user = $this->user->getUserByOpenID('yangcong', $uid);
+
+        /* If user exists login derectly.*/
+        if($user)
+        {
+            if($this->user->login($user->account, md5($user->password . $this->session->random)))
+            {
+                if($referer) $this->locate(helper::safe64Decode($referer));
+
+                /* No referer, go to the user control panel. */
+                $default = $this->config->user->default;
+                $this->locate($this->createLink($default->module, $default->method));
+            }
+            exit;
+        }
+
+        if($this->get->referer != false)
+        {
+            if(!empty($referer))
+            {
+                $this->referer = helper::safe64Decode($referer);
+            }
+            else
+            {
+                $this->referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
+            }
+        }
+
+        $this->view->title   = $this->lang->user->login->common;
+        $this->view->referer = $referer;
+        die($this->display());
     }
 }

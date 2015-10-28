@@ -76,6 +76,8 @@ $lang->user->myScore         = '当前积分';
 $lang->user->buyScore        = '积分充值';
 $lang->user->addScore        = '奖励积分';
 $lang->user->reduceScore     = '扣除积分';
+$lang->user->yangcongLogin   = '洋葱登录';
+$lang->user->bindAccount     = '绑定帐号';
 
 $lang->user->profile      = '个人信息';
 $lang->user->editProfile  = '编辑信息';

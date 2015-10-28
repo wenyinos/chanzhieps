@@ -65,6 +65,7 @@ $lang->site->setUpload     = "文件上传设置";
 $lang->site->setRobots     = "Robots 设置";
 $lang->site->setOauth      = "开放登录设置";
 $lang->site->setSinaOauth  = "新浪微博接入";
+$lang->site->setYangcong   = "洋葱登录设置";
 $lang->site->setQQOauth    = "QQ接入";
 $lang->site->oauthHelp     = "使用帮助";
 $lang->site->setRecPerPage = "列表数量设置";
@@ -169,3 +170,8 @@ $lang->site->customizableList->forum   = '论坛列表数量';
 $lang->site->customizableList->reply   = '回帖列表数量';
 $lang->site->customizableList->message = '留言列表数量';
 $lang->site->customizableList->comment = '评论列表数量';
+
+$lang->site->yangcong = new stdclass();
+$lang->site->yangcong->appID = 'APP ID';
+$lang->site->yangcong->key   = 'APP KEY';
+$lang->site->yangcong->auth  = 'Auth ID';
