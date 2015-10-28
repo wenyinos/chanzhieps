@@ -63,7 +63,7 @@ js::set('admin', $this->get->admin);
       <td><?php echo $user->score;?></td>
       <td><?php echo $user->rank;?></td>
       <?php endif;?>
-      <td><?php $gender = $user->gender; echo $lang->user->genderList->$gender;?></td>
+      <td><?php $gender = $user->gender; echo zget($lang->user->genderList, $gender);?></td>
       <td><?php echo $user->company;?></td>
       <td><?php echo substr($user->join, 0, 10);?></td>
       <td><?php echo $user->visits;?></td>

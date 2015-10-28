@@ -341,9 +341,39 @@ class site extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
         }
 
+        $this->lang->site->menu = $this->lang->security->menu;
+        $this->lang->menuGroups->site = 'security';
+
         $this->view->title = $this->lang->site->setFilter;
         $this->view->type  = $type;
         $this->display();
+    }
    
+    /**
+     * set yangcong configure.
+     * 
+     * @access public
+     * return void
+     */
+    public function setYangcong()
+    {
+        if(!empty($_POST))
+        {
+            $setting = fixer::input('post')->get();
+
+            $result  = $this->loadModel('setting')->setItem('system.common.site.yangcong', helper::jsonEncode($setting), "all");
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
+            $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+        }
+
+        $this->view->title   = $this->lang->site->setYangcong;
+        $this->view->setting = array();
+
+        if(!empty($this->config->site->yangcong))
+        {
+            $this->view->setting = json_decode($this->config->site->yangcong);
+        }
+
+        $this->display();
     }
 }

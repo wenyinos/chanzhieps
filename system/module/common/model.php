@@ -262,11 +262,12 @@ class commonModel extends model
      */
     public function isOpenMethod($module, $method)
     {
-        if($module == 'user' and strpos(',login|logout|deny|resetpassword|checkresetkey', $method)) return true;
+        if($module == 'user' and strpos(',login|logout|deny|resetpassword|checkresetkey|yangconglogin|oauthbind|', $method)) return true;
         if($module == 'cart' and $method == 'printtopbar') return true;
         if($module == 'mail' and strpos(',captcha|sendmailcode', $method)) return true;
         if($module == 'misc' and strtolower($method) == 'ajaxgetfingerprint') return true;
         if($module == 'wechat' and $method == 'response') return true;
+        if($module == 'yangcong') return true;
         if(RUN_MODE == 'admin' and $module == 'misc' and $method == 'ping') return true;
 
         if($this->loadModel('user')->isLogon() and stripos($method, 'ajax') !== false) return true;

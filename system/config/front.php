@@ -88,6 +88,9 @@ $config->rights->guest['score']['rankinglist']  = 'rankinglist';
 $config->rights->guest['score']['noscore']      = 'noscore';
 $config->rights->guest['score']['processorder'] = 'processorder';
 
+$config->rights->guest['yangcong']['qrcode']    = 'qrcode';
+$config->rights->guest['yangcong']['getresult'] = 'getresult';
+
 /* For logged member. */
 $config->rights->member['article']['contribution'] = 'contribution';
 $config->rights->member['article']['create']       = 'create';

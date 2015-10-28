@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `eps_slide` (
   `backgroundType` char(20) NOT NULL,
   `backgroundColor` char(10) NOT NULL,
   `height` smallint(5) unsigned NOT NULL DEFAULT '0',
-  `image` char(60) NOT NULL,
+  `image` varchar(100) NOT NULL,
   `label` varchar(255) NOT NULL,
   `buttonClass` varchar(255) NOT NULL,
   `buttonUrl` varchar(255) NOT NULL,

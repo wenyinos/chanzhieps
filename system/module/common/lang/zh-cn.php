@@ -234,17 +234,18 @@ $lang->forum->menu->setting = '论坛设置|forum|setting|';
 /* Menu of site module. */
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
-$lang->site->menu->basic   = '站点设置|site|setbasic|';
-$lang->site->menu->company = '公司信息|company|setbasic|';
-$lang->site->menu->contact = '联系方式|company|setcontact|';
-$lang->site->menu->nav     = '导航设置|nav|admin|';
-$lang->site->menu->link    = '友情链接|links|admin|';
-$lang->site->menu->oauth   = '开放登录|site|setoauth|';
-$lang->site->menu->mail    = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->site->menu->wechat  = array('link' => '微信设置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
-$lang->site->menu->search  = '全文检索|search|buildindex|';
-$lang->site->menu->tag     = '关键词设置|tag|admin|';
-$lang->site->menu->setStat = '流量统计设置|site|setStat|';
+$lang->site->menu->basic    = '站点设置|site|setbasic|';
+$lang->site->menu->company  = '公司信息|company|setbasic|';
+$lang->site->menu->contact  = '联系方式|company|setcontact|';
+$lang->site->menu->nav      = '导航设置|nav|admin|';
+$lang->site->menu->link     = '友情链接|links|admin|';
+$lang->site->menu->oauth    = '开放登录|site|setoauth|';
+$lang->site->menu->yangcong = '洋葱登录|site|setyangcong|';
+$lang->site->menu->mail     = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->site->menu->wechat   = array('link' => '微信设置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
+$lang->site->menu->search   = '全文检索|search|buildindex|';
+$lang->site->menu->tag      = '关键词设置|tag|admin|';
+$lang->site->menu->setStat  = '流量统计设置|site|setStat|';
 
 /* Menu of security module. */
 $lang->security = new stdclass();
