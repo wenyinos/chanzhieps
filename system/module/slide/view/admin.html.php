@@ -22,22 +22,17 @@
       <div class='col-lg-3 col-md-4 col-sm-6'>
         <a class='card card-slide' href='<?php echo inLink('browse', "groupID=$group->id") ?>'>
           <?php $count = count($group->slides); ?>
+          <?php $slide = $group->slide;?>
           <div class='slides-holder slides-holder-<?php echo min(5, $count);?>'>
             <?php if(!empty($group->slides)): ?>
-            <?php $index = 0; ?>
-            <?php foreach($group->slides as $slide):?>
-            <?php if($index > 4) break; ?>
-            <div class='slide-item slide-item-<?php echo ++$index ?>'>
+            <div class='slide-item'>
               <?php if ($slide->backgroundType == 'image'): ?>
               <?php print(html::image($slide->image));?>
               <?php else: ?>
               <div class='plain-slide' style='<?php echo 'background-color: ' . $slide->backgroundColor;?>'></div>
               <?php endif; ?>
-              <?php if($count > 5 && $index === 1): ?>
               <div class='slides-count'><i class='icon-picture'></i> <?php echo $count; ?></div>
-              <?php endif; ?>
             </div>
-            <?php endforeach;?>
             <?php else: ?>
             <div class='empty-holder'>
               <i class='icon-pencil icon-3x icon'></i>

@@ -252,7 +252,7 @@ $lang->security = new stdclass();
 $lang->security->menu = new stdclass();
 $lang->security->menu->basic     = '基本设置|site|setsecurity|';
 $lang->security->menu->upload    = '附件上传|site|setupload|';
-$lang->security->menu->blacklist = '黑名单管理|guarder|setBlacklist|';
+$lang->security->menu->blacklist = '黑名单管理|guarder|setblacklist|';
 $lang->security->menu->sensitive = '敏感词设置|site|setsensitive|';
 $lang->security->menu->admin     = '管理员|user|admin|admin=1';
 $lang->security->menu->group     = array('link' => '分组权限|group|browse|', 'alias' => 'managepriv,managemember');

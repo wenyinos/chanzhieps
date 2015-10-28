@@ -23,6 +23,7 @@ class slide extends control
         foreach ($groups as $group)
         {
             $group->slides = $this->slide->getList($group->id);
+            $group->slide = $this->slide->getFirstSlide($group->id);
         }
         $this->view->groups = $groups;
         $this->display();
