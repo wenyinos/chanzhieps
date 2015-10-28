@@ -341,6 +341,9 @@ class site extends control
             $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
         }
 
+        $this->lang->site->menu = $this->lang->security->menu;
+        $this->lang->menuGroups->site = 'security';
+
         $this->view->title = $this->lang->site->setFilter;
         $this->view->type  = $type;
         $this->display();
