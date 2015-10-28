@@ -577,6 +577,7 @@ class user extends control
             $user = $this->user->getByAccount(trim($this->post->account));
             if($user)
             {
+                if($user->admin != 'no') $this->send(array('result' => 'fail', 'message' => $this->lang->user->resetPassword->failed));
                 $account  = $user->account;
                 $reset    = md5(str_shuffle(md5($account . mt_rand(0, 99999999) . microtime())) . microtime()) . time();
                 $resetURL = "http://". $_SERVER['HTTP_HOST'] . $this->inlink('checkreset', "key=$reset");
