@@ -37,6 +37,45 @@ class guarder extends control
     }
 
     /**
+     * Manage whitelist. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function setWhitelist($type='account')
+    {
+        $this->lang->guarder->menu = $this->lang->security->menu;
+        $this->lang->menuGroups->site = 'security';
+
+        if(!empty($_POST))
+        {
+            $setting = fixer::input('post')
+                ->setDefault('IPWhitelist', '')
+                ->setDefault('ACWhitelist', '')
+                ->get();
+
+            /* check IP. */
+            $ips = empty($_POST['IPWhitelist']) ? array() : explode(',', $this->post->IPWhitelist);
+            foreach($ips as $ip)
+            {
+                if(!empty($ip) and !helper::checkIP($ip))
+                {
+                    dao::$errors['allowedIP'][] = $this->lang->guarder->wrongIP;
+                    break;
+                }
+            }
+
+            $result = $this->loadModel('setting')->setItems('system.common.guarder', $setting, 'all');
+
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setWhitelist')));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+
+        $this->view->title = $this->lang->guarder->setWhitelist;
+        $this->display();
+    }
+
+    /**
      * Add a blacklist object. 
      * 
      * @param string    $type 

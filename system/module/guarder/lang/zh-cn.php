@@ -30,6 +30,11 @@ $lang->guarder->expiration = '过期时间';
 $lang->guarder->action     = '操作';
 $lang->guarder->add        = '添加';
 
+$lang->guarder->setWhitelist = '白名单管理';
+$lang->guarder->IPWhitelist  = 'IP白名单';
+$lang->guarder->ACWhitelist  = '账号白名单';
+$lang->guarder->confirm      = '密码验证';
+
 $lang->guarder->permanent = '永久';
 $lang->guarder->interval  = '分钟内';
 $lang->guarder->perDay    = '每天超过';
@@ -48,3 +53,8 @@ $lang->guarder->operationList->search        = '搜索次数';
 $lang->guarder->operationList->threadFail    = '帖子被禁';
 $lang->guarder->operationList->commentFail   = '评论被禁';
 $lang->guarder->operationList->error404      = '404次数';
+
+$lang->guarder->confirm = '请输入管理员密码:';
+$lang->guarder->IPTip   = '多个IP使用 , 隔开如202.194.133.1,202.194.132.0/28';
+$lang->guarder->ACTip   = '多个账户使用 , 隔开如zhangsan,lisi';
+$lang->guarder->wrongIP = 'IP 格式错误';
