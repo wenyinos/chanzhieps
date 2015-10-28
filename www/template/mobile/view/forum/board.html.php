@@ -19,12 +19,12 @@
   </div>
   <?php endif;?>
 
-  <div class='panel-heading'>
+  <div class='panel-heading page-header'>
     <div class='title'><i class='icon icon-comments-alt'></i> <strong><?php echo $board->name; ?></strong>
     <?php if($board->moderators) printf(" <small class='text-muted'>" . $lang->forum->lblOwner . '</small>', trim($board->moderators, ',')); ?></div>
   </div>
 
-  <div class='cards cards-list condensed'>
+  <div class='cards cards-list condensed bordered'>
     <?php foreach($sticks as $thread):?>
     <?php $style = $thread->color ? " style='color:{$thread->color}'" : '';?>
     <a class='card' href='<?php echo $this->createLink('thread', 'view', "id=$thread->id");?>' data-ve='thread' id='thread<?php echo $thread->id;?>'>

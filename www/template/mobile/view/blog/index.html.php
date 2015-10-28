@@ -14,7 +14,7 @@
 <div class='block-region region-top blocks' data-region='blog_index-top'><?php $this->loadModel('block')->printRegion($layouts, 'blog_index', 'top');?></div>
 <hr class='space'>
 <div class='panel panel-section'>
-  <div class='cards condensed cards-list' id='blogList'>
+  <div class='cards condensed cards-list bordered' id='blogList'>
     <?php foreach($sticks as $stick):?>
     <?php if(!isset($category)) $category = array_shift($stick->categories);?>
     <?php $url = inlink('view', "id=$stick->id", "category={$category->alias}&name=$stick->alias"); ?>

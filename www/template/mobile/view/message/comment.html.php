@@ -27,7 +27,7 @@ if(isset($pageCSS)) css::internal($pageCSS);
     <div class='panel-heading'>
       <div class='title'><i class='icon-comments'></i> <?php echo $lang->message->list;?></div>
     </div>
-    <div class='cards condensed'>
+    <div class='cards condensed bordered'>
       <?php foreach($comments as $number => $comment):?>
         <div class='card comment'>
           <div class='card-heading'>
@@ -40,11 +40,10 @@ if(isset($pageCSS)) css::internal($pageCSS);
           <?php $this->message->getFrontReplies($comment, 'simple');?>
         </div>
       <?php endforeach;?>
-      <div class='panel-body'>
-        <hr class='space'>
-        <?php $pager->show('justify');?>
-      </div>
     </div>
+    <div class='panel-body'>
+      <hr class='space'>
+      <?php $pager->show('justify');?>
     </div>
     <div class='panel-footer'>
       <?php if(count($comments) > 5): ?>

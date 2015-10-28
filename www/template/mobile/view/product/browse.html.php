@@ -13,7 +13,7 @@
 <?php include TPL_ROOT . 'common/header.html.php';?>
 <div class='block-region region-top blocks' data-region='product_browse-top'><?php $this->loadModel('block')->printRegion($layouts, 'product_browse', 'top');?></div>
 <div class='panel-section'>
-  <div class='panel-heading'>
+  <div class='panel-heading page-header'>
     <div class='title'><strong><?php echo $category->name;?></strong></div>
   </div>
   <div class='panel-body'>
@@ -79,7 +79,7 @@
       <?php endforeach; ?>
     </div>
   </div>
-  <?php $pager->show('justify');?>
+  <div class='panel-footer'><?php $pager->show('justify');?></div>
 </div>
 
 <div class='block-region region-bottom blocks' data-region='product_browse-bottom'><?php $this->loadModel('block')->printRegion($layouts, 'product_browse', 'bottom');?></div>
