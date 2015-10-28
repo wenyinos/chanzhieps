@@ -161,7 +161,7 @@ class searchModel extends model
             }
         }
 
-        $content = str_replace('<span class', ' <spanclass', $content);
+        $content = str_replace('<span class', '<spanclass', $content);
         $content = explode(' ', $content);
 
         $pos     = array_search(str_replace('<span class', '<spanclass', $needle), $content);
