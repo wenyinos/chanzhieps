@@ -1,6 +1,6 @@
 <?php 
 foreach($lang->user->oauth->providers as $providerCode => $providerName) $providerConfig[$providerCode] = isset($config->oauth->$providerCode) ? json_decode($config->oauth->$providerCode) : '';
-if(!empty($providerConfig['sina']->clientID) or !empty($providerConfig['qq']->clientID)):
+if(!empty($providerConfig['sina']->clientID) or !empty($providerConfig['qq']->clientID) or !empty($this->config->site->yangcong)):
 ?>
   <div class='col-md-6'>
     <div class='panel panel-pure'>
@@ -16,6 +16,7 @@ if(!empty($providerConfig['sina']->clientID) or !empty($providerConfig['qq']->cl
             echo html::a(inlink('oauthLogin', $params), "<i class='icon-{$providerCode} icon'></i> " . $providerName, "class='btn btn-default btn-oauth btn-lg btn-block btn-{$providerCode}'");
         }
         ?>
+        <?php if(!empty($this->config->site->yangcong)) echo html::a(helper::createLink('yangcong', 'qrcode', "referer=" . helper::safe64Encode($referer)), "<i class='icon icon-qrcode icon-lg'> {$lang->user->yangcongLogin}</i>", "class='btn btn-lg btn-block btn-default btn-yangcong' data-toggle='modal'");?>
       </div>
     </div>
   </div>
