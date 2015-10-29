@@ -47,23 +47,23 @@ class guarder extends control
         $this->lang->guarder->menu = $this->lang->security->menu;
         $this->lang->menuGroups->site = 'security';
 
-        if(!empty($_POST))
+        if($_POST)
         {
-            $setting = fixer::input('post')
-                ->setDefault('allowedIP', '')
-                ->setDefault('allowedAC', '')
-                ->get();
+            $user = $this->loadModel('user')->identify($this->app->user->account, $this->post->password);
+            if(!$user) $this->send(array( 'result' => 'fail', 'message' => $this->lang->user->identifyFailed ) );
+
+            $setting = fixer::input('post')->get();
 
             /* check IP. */
-            $ips = empty($_POST['allowedIP']) ? array() : explode(',', $this->post->allowedIP);
+            $ips = explode(',', $setting->ip);
             foreach($ips as $ip)
             {
                 if(!empty($ip) and !helper::checkIP($ip))
                 {
-                    dao::$errors['allowedIP'][] = $this->lang->guarder->wrongIP;
-                    break;
+                    $this->send(array('result' => 'fail', 'message' => $this->lang->guarder->whitelist->wrongIP));
                 }
             }
+            $setting = array('whitelist' => helper::jsonEncode($setting));
 
             $result = $this->loadModel('setting')->setItems('system.common.guarder', $setting, 'all');
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setWhitelist')));
