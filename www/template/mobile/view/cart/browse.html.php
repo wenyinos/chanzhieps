@@ -13,7 +13,7 @@
 <?php include TPL_ROOT . 'common/header.html.php';?>
 <?php js::set('currencySymbol', $currencySymbol);?>
 <div class='panel panel-section'>
-  <div class='panel-heading'>
+  <div class='panel-heading page-header'>
     <div class='title'><i class='icon icon-shopping-cart'></i> <strong><?php echo $lang->cart->browse;?></strong><?php if(!empty($products)) echo ' (' . count($products) . ')' ?></div>
   </div>
   <?php if(!empty($products)):?>

@@ -289,7 +289,8 @@ class productModel extends model
 
         if(!$this->post->order) $this->dao->update(TABLE_PRODUCT)->set('order')->eq($productID)->where('id')->eq($productID)->exec();
 
-        if(!$this->saveAttributes($productID)) return false;
+        $attributes = $this->saveAttributes($productID);
+        if($attributes === false) return false;
 
         $this->loadModel('file')->updateObjectID($this->post->uid, $productID, 'product');
         $this->file->copyFromContent($this->post->content, $productID, 'product');
@@ -300,6 +301,7 @@ class productModel extends model
         $this->processCategories($productID, $this->post->categories);
 
         $product = $this->getByID($productID);
+        $product->attributes = $attributes; 
         $this->loadModel('search')->save('product', $product);
 
         return $productID;
@@ -336,7 +338,9 @@ class productModel extends model
             ->where('id')->eq($productID)
             ->exec();
 
-        if(!$this->saveAttributes($productID)) return false;
+        $attributes = $this->saveAttributes($productID);
+        if($attributes === false) return false;
+
 
         $this->loadModel('file')->updateObjectID($this->post->uid, $productID, 'product');
         $this->file->copyFromContent($this->post->content, $productID, 'product');
@@ -348,6 +352,7 @@ class productModel extends model
 
         $product = $this->getByID($productID);
         if(empty($product)) return false;
+        $product->attributes = $attributes; 
         return $this->loadModel('search')->save('product', $product);
     }
 
@@ -368,14 +373,17 @@ class productModel extends model
 
         $this->dao->delete()->from(TABLE_PRODUCT_CUSTOM)->where('product')->eq($productID)->exec();
 
+        $attributes = '';
         foreach($lables as $key => $label)
         {
             $data->label = $label;
             $data->order = $key;
             $data->value = isset($values[$key]) ? $values[$key] : '';
+            $attributes .= $label . $this->lang->colon . $data->value; 
             $this->dao->replace(TABLE_PRODUCT_CUSTOM)->data($data)->exec();
         }
-        return !dao::isError();
+        if(dao::isError()) return false;
+        return $attributes;
     }
 
     /**

@@ -17,7 +17,7 @@
 <?php js::set('goToPay', $lang->order->goToPay);?>
 
 <div class='panel panel-section'>
-  <div class='panel-heading'>
+  <div class='panel-heading page-header'>
     <div class='title'><i class='icon icon-shopping-cart'></i> <strong><?php echo $lang->order->confirm;?></strong></div>
   </div>
   <?php if(!empty($products)):?>
@@ -97,10 +97,6 @@
             </div>
           </div>
         <?php endforeach;?>
-        <div class='panel-body'>
-          <div class='alert bg-gray-pale'><strong><?php echo $lang->order->note; ?>)</strong></div>
-          <div><?php echo html::textarea('note', '', "class='form-control' rows=1");?></div>
-        </div>
       </div>
       <hr class='space'>
       <div class='alert bg-primary-pale'>
@@ -108,6 +104,10 @@
         <?php printf($lang->order->totalToPay, $currencySymbol . $total);?>
         <?php echo html::a(helper::createLink('cart', 'browse'), "<i class='icon icon-shopping-cart'></i> " . $lang->order->backToCart, "class='text-primary pull-right'");?>
       </div>
+    </div>
+    <div class='panel-body'>
+      <div class='alert bg-gray-pale'><strong><?php echo $lang->order->note; ?></strong></div>
+      <div><?php echo html::textarea('note', '', "class='form-control' rows=1");?></div>
     </div>
     <div class='panel-footer'>
       <?php echo html::submitButton($lang->order->submit, 'btn-order-submit btn danger block'); ?>

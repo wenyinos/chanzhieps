@@ -24,7 +24,7 @@ include TPL_ROOT . 'common/header.html.php';
     <div class='panel-heading'>
       <div class='title'><i class='icon-comments'></i> <?php echo $lang->message->list;?></div>
     </div>
-    <div class='cards condensed'>
+    <div class='cards condensed bordered'>
       <?php foreach($messages as $number => $message):?>
       <div class='card comment'>
         <div class='card-heading'>
@@ -37,10 +37,10 @@ include TPL_ROOT . 'common/header.html.php';
         <?php $this->message->getFrontReplies($message, 'simple');?>
       </div>
       <?php endforeach; ?>
-      <div class='panel-body'>
-        <hr class='space'>
-        <?php $pager->show('justify');?>
-      </div>
+    </div>
+    <div class='panel-body'>
+      <hr class='space'>
+      <?php $pager->show('justify');?>
     </div>
     <?php else: ?>
     <div class='panel-body'>

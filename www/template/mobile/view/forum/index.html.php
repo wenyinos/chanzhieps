@@ -15,7 +15,7 @@
 <div id='boards'>
 <?php foreach($boards as $parentBoard):?>
 <div class='panel-section'>
-  <div class='panel-heading'>
+  <div class='panel-heading page-header'>
     <div class='title'><i class='icon icon-comments'></i> <strong><?php echo $parentBoard->name;?></strong></div>
   </div>
   <div class='panel-body'>

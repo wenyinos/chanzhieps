@@ -18,10 +18,10 @@ js::set('categoryID', $category->id);
 ?>
 <div class='block-region blocks region-top' data-region='article_browse-top'><?php $this->loadModel('block')->printRegion($layouts, 'article_browse', 'top');?></div>
 <div class='panel panel-section'>
-  <div class='panel-heading'>
+  <div class='panel-heading page-header'>
     <div class='title'><strong><?php echo $category->name;?></strong></div>
   </div>
-  <div class='cards condensed cards-list' id='articles'>
+  <div class='cards condensed cards-list bordered' id='articles'>
     <?php foreach($articles as $article):?>
     <?php $url = inlink('view', "id=$article->id", "category={$article->category->alias}&name=$article->alias");?>
     <a class='card' href='<?php echo $url?>' id="article<?php echo $article->id?>" data-ve='article'>
