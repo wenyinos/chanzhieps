@@ -89,7 +89,7 @@ if(isset($pageCSS)) css::internal($pageCSS);
       <div class='form-group hiding' id='captchaBox'></div>
       <div class='form-group'>
         <div class='col-sm-11 col-sm-offset-1'>
-          <span><?php echo html::submitButton();?></span>
+          <span><?php echo html::submitButton('', 'btn btn-primary', 'data-popover-container="false"');?></span>
           <span><small class="text-important"><?php echo $lang->comment->needCheck;?></small></span>
         </div>
       </div>

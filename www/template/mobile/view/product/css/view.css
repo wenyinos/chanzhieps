@@ -2,3 +2,5 @@
 .input-number input {border-left: none; border-right: none}
 .breadcrumb+.block-region {margin-top: 0;}
 .article-content {padding: 10px; border: 1px solid #ddd;}
+
+.appheader > img {width: 100%}
