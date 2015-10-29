@@ -37,16 +37,19 @@ $.extend(
                     return bootbox.alert('No response.');
                 }
 
+                var showPopover = function(type, message) {
+                    type = type || 'success';
+                    message = message || response.message;
+                    var container = submitButton.data('popoverContainer');
+                    if(container === undefined) container = 'body';
+                    submitButton.popover({container: container, trigger:'manual', content:message, placement: submitButton.data('placement') || 'right', tipClass: 'popover-' + type + ' popover-ajaxform'}).popover('show');
+                    setTimeout(function(){submitButton.popover('destroy');}, 2000);
+                };
+
                 /* The response.result is success. */
                 if(response.result == 'success')
                 {
-                    if(response.message && response.message.length)
-                    {
-                        submitButton.popover({container: 'body', trigger:'manual', content:response.message, placement: submitButton.data('placement') || 'right', tipClass: 'popover-success'}).popover('show');
-                        submitButton.next('.popover').addClass('popover-success');
-                        function distroy(){submitButton.popover('destroy')}
-                        setTimeout(distroy,2000);
-                    }
+                    if(response.message && response.message.length) showPopover();
 
                     if($.isFunction(callback)) return callback(response);
 
@@ -72,10 +75,7 @@ $.extend(
                 {
                     if($('#responser').length == 0)
                     {
-                        submitButton.popover({container: 'body', trigger:'manual', content:response.message, placement: submitButton.data('placement') || 'right', tipClass: 'popover-danger'}).popover('show');
-                        submitButton.next('.popover').addClass('popover-danger');
-                        function distroy(){submitButton.popover('destroy')}
-                        setTimeout(distroy,2000);
+                        showPopover('danger');
                     }
                     else $('#responser').html(response.message).addClass('red f-12px').show().delay(5000).fadeOut(100);
                 }
