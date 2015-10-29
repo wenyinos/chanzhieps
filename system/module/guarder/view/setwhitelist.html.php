@@ -17,24 +17,29 @@
     <form method='post' id='ajaxForm' class='form-inline'>
       <table class='table table-form'>
         <tr>
-          <th class='w-200px'><?php echo $lang->guarder->IPWhitelist;?></th>
-          <td colspan='3'>
-            <?php echo html::textarea('allowedIP', !empty($this->config->guarder->allowedIP) ? $this->config->guarder->allowedIP : '', "class='form-control'");?>
-            <span class='text-important'><?php echo $lang->guarder->IPTip;?></span>
+          <th class='w-100px'><?php echo $lang->guarder->whitelist->ip;?></th>
+          <td colspan='2'>
+            <?php echo html::textarea('ip', !empty($this->config->guarder->whitelist->ip) ? $this->config->guarder->whitelist->ip : '', "class='form-control'");?>
+            <span class='text-important'><?php echo $lang->guarder->whitelist->ipHolder;?></span>
           </td>
         </tr>
         <tr>
-          <th class='w-200px'><?php echo $lang->guarder->ACWhitelist;?></th>
-          <td colspan='3'>
-            <?php echo html::textarea('allowedAC', !empty($this->config->guarder->allowedAC) ? $this->config->guarder->allowedAC : '', "class='form-control'");?>
-            <span class='text-important'><?php echo $lang->guarder->ACTip;?></span>
+          <th><?php echo $lang->guarder->whitelist->account;?></th>
+          <td colspan='2'>
+            <?php echo html::textarea('account', !empty($this->config->guarder->whitelist->account) ? $this->config->guarder->whitelist->account : '', "class='form-control'");?>
+            <span class='text-important'><?php echo $lang->guarder->whitelist->accountHolder;?></span>
           </td>
+        </tr>
+        <tr>
+          <th><?php echo $lang->guarder->password;?></th>
+          <td class='w-200px'>
+            <?php echo html::password('password', '', "placeholder='{$lang->guarder->passwordHolder}' class='form-control'");?>
+          </td>
+          <td></td>
         </tr>
         <tr>
           <th></th>
-          <td colspan='2'>
-            <?php echo html::submitButton();?>
-          </td>
+          <td><?php echo html::submitButton();?></td>
         </tr>
       </table>
     </div>

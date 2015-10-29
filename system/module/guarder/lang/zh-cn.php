@@ -11,12 +11,16 @@
  */
 $lang->guarder = new stdclass();
 
-$lang->guarder->common      = '';
-$lang->guarder->captcha     = '验证码';
-$lang->guarder->numbers     = array('零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖', '拾');
-$lang->guarder->operators   = array('*' => '乘', '-' => '减', '+' => '加');
-$lang->guarder->equal       = '=';
-$lang->guarder->placeholder = '数字';
+$lang->guarder->setWhitelist = '白名单管理';
+
+$lang->guarder->common         = '';
+$lang->guarder->captcha        = '验证码';
+$lang->guarder->numbers        = array('零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖', '拾');
+$lang->guarder->operators      = array('*' => '乘', '-' => '减', '+' => '加');
+$lang->guarder->equal          = '=';
+$lang->guarder->placeholder    = '数字';
+$lang->guarder->password       = '管理密码';
+$lang->guarder->passwordHolder = '请输入当前帐号的密码';
 
 $lang->guarder->blacklistModes['keywords'] = '关键词';
 $lang->guarder->blacklistModes['ip']       = 'ip地址';
@@ -30,10 +34,12 @@ $lang->guarder->expiration = '过期时间';
 $lang->guarder->action     = '操作';
 $lang->guarder->add        = '添加';
 
-$lang->guarder->setWhitelist = '白名单管理';
-$lang->guarder->IPWhitelist  = 'IP白名单';
-$lang->guarder->ACWhitelist  = '账号白名单';
-$lang->guarder->confirm      = '密码验证';
+$lang->guarder->whitelist = new stdclass();
+$lang->guarder->whitelist->ip            = 'IP白名单';
+$lang->guarder->whitelist->account       = '账号白名单';
+$lang->guarder->whitelist->accountHolder = '多个账户使用 , 隔开如zhangsan,lisi';
+$lang->guarder->whitelist->ipHolder      = '多个IP使用 , 隔开如202.194.133.1,202.194.132.0/28';
+$lang->guarder->whitelist->wrongIP       = 'IP 格式错误';
 
 $lang->guarder->permanent = '永久';
 $lang->guarder->interval  = '分钟内';
@@ -53,8 +59,3 @@ $lang->guarder->operationList->search        = '搜索次数';
 $lang->guarder->operationList->threadFail    = '帖子被禁';
 $lang->guarder->operationList->commentFail   = '评论被禁';
 $lang->guarder->operationList->error404      = '404次数';
-
-$lang->guarder->confirm = '请输入管理员密码:';
-$lang->guarder->IPTip   = '多个IP使用 , 隔开如202.194.133.1,202.194.132.0/28';
-$lang->guarder->ACTip   = '多个账户使用 , 隔开如zhangsan,lisi';
-$lang->guarder->wrongIP = 'IP 格式错误';

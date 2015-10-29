@@ -290,8 +290,9 @@ class messageModel extends model
         $this->setCookie($this->dao->lastInsertId());
 
         /* Record post number. */
-        $this->loadModel('guarder')->logOperation('ip', 'postComment');
-        $this->loadModel('guarder')->logOperation('account', 'postComment');
+        $guarder = $this->loadModel('guarder');
+        $guarder->logOperation('account', 'postComment');
+        $guarder->logOperation('ip', 'postComment');
 
         if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
         return array('result' => 'success', 'message' => $this->lang->message->thanks);

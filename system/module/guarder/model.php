@@ -199,6 +199,9 @@ EOT;
             if($type == 'account') $identity = $this->app->user->account;
         }
 
+        $whitelist = $this->config->guarder->whitelist->$type;
+        if(strpos(",$whitelist,", ",$identity,") !== false) return true;
+
         $this->dao->delete()->from(TABLE_OPERATIONLOG)
             ->where('type')->eq($type)
             ->andWhere('identity')->eq($identity)
