@@ -42,7 +42,7 @@ class guarder extends control
      * @access public
      * @return void
      */
-    public function setWhitelist($type='account')
+    public function setWhitelist()
     {
         $this->lang->guarder->menu = $this->lang->security->menu;
         $this->lang->menuGroups->site = 'security';
@@ -50,12 +50,12 @@ class guarder extends control
         if(!empty($_POST))
         {
             $setting = fixer::input('post')
-                ->setDefault('IPWhitelist', '')
-                ->setDefault('ACWhitelist', '')
+                ->setDefault('allowedIP', '')
+                ->setDefault('allowedAC', '')
                 ->get();
 
             /* check IP. */
-            $ips = empty($_POST['IPWhitelist']) ? array() : explode(',', $this->post->IPWhitelist);
+            $ips = empty($_POST['allowedIP']) ? array() : explode(',', $this->post->allowedIP);
             foreach($ips as $ip)
             {
                 if(!empty($ip) and !helper::checkIP($ip))
@@ -66,7 +66,6 @@ class guarder extends control
             }
 
             $result = $this->loadModel('setting')->setItems('system.common.guarder', $setting, 'all');
-
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setWhitelist')));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
