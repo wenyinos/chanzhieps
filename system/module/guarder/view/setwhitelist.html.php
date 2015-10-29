@@ -17,16 +17,16 @@
     <form method='post' id='ajaxForm' class='form-inline'>
       <table class='table table-form'>
         <tr>
-          <th class='w-100px'><?php echo $lang->guarder->IPWhitelist;?></th>
+          <th class='w-200px'><?php echo $lang->guarder->IPWhitelist;?></th>
           <td colspan='3'>
-            <?php echo html::textarea('IPWhitelist', isset($this->config->guarder->IPWhitelist) ? $this->config->guarder->IPWhitelist : '', "class='form-control'");?>
+            <?php echo html::textarea('allowedIP', !empty($this->config->guarder->allowedIP) ? $this->config->guarder->allowedIP : '', "class='form-control'");?>
             <span class='text-important'><?php echo $lang->guarder->IPTip;?></span>
           </td>
         </tr>
         <tr>
-          <th class='w-100px'><?php echo $lang->guarder->ACWhitelist;?></th>
+          <th class='w-200px'><?php echo $lang->guarder->ACWhitelist;?></th>
           <td colspan='3'>
-            <?php echo html::textarea('ACWhitelist', isset($this->config->guarder->ACWhitelist) ? $this->config->guarder->ACWhitelist : '', "class='form-control'");?>
+            <?php echo html::textarea('allowedAC', !empty($this->config->guarder->allowedAC) ? $this->config->guarder->allowedAC : '', "class='form-control'");?>
             <span class='text-important'><?php echo $lang->guarder->ACTip;?></span>
           </td>
         </tr>
