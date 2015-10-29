@@ -11,14 +11,13 @@
  */
 class guarder extends control
 {
-
     /**
      * Manage blacklist. 
      * 
      * @access public
      * @return void
      */
-    public function setBlacklist($mode='keywords', $pageID = 1)
+    public function blacklist($mode='keywords', $pageID = 1)
     {
         $this->lang->guarder->menu = $this->lang->security->menu;
         $this->lang->menuGroups->site = 'security';
@@ -75,23 +74,33 @@ class guarder extends control
     }
 
     /**
-     * Add a blacklist object. 
+     * Add a blacklist item. 
      * 
-     * @param string    $type 
      * @access public
      * @return void
      */
-    public function add($type)
+    public function addBlacklist()
     {
         $typeList = $this->lang->guarder->blacklistModes;
         if($_POST)
         {
-            $result = $this->guarder->punish($this->post->type, $this->post->identity, $this->post->reason, $this->post->expired);
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setBlacklist', "mode=$type")));
-            $this->send(array('result' => 'fail', 'message' => $this->lang->fail, 'locate' => inlink('setBlacklist')));
+            $item = $this->post->identity;
+
+            $type = 'keywords';
+            if(validater::checkIP($item))    $type = 'ip';
+            if(validater::checkEmail($item)) $type = 'email';
+            if(validater::checkAccount($item))
+            {
+                $user = $this->loadModel('user')->getByAccount($item);
+                if(!empty($user)) $type = 'account';
+            }
+            
+            $result = $this->guarder->punish($type, $item, $this->post->reason, $this->post->expired);
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('blacklist', "mode=$type")));
+            $this->send(array('result' => 'fail', 'message' => dao::geterror()));
         }
 
-        $this->view->title       = $this->lang->guarder->add;
+        $this->view->title       = $this->lang->guarder->addBlacklist;
         $this->view->typeList    = $typeList;
         $this->view->currentType = $type;
         $this->display();

@@ -233,4 +233,18 @@ class message extends control
 
         $this->send(array('result' => 'success', 'message' => $this->lang->deleteSuccess, 'locate' => $this->createLink('user', 'message')));
     }
+
+    /**
+     * Add to blacklist. 
+     * 
+     * @param  int    $id 
+     * @access public
+     * @return void
+     */
+    public function addToBlacklist($id)
+    {
+        $this->view->message = $this->message->getByID($id);
+        $this->view->title   = $this->lang->message->addToBlacklist;
+        $this->display();
+    }
 }

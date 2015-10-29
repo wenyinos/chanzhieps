@@ -276,7 +276,9 @@ EOT;
        $blacklist->expiredDate = date('Y-m-d H:i:s', $expired * 3600 + time());
        $blacklist->lang        = 'all';
 
-       $this->dao->replace(TABLE_BLACKLIST)->data($blacklist)->exec();
+       $this->dao->replace(TABLE_BLACKLIST)->data($blacklist)
+           ->batchCheck($this->config->guarder->require->addblacklist, 'notempty')
+           ->exec();
 
        return !dao::isError();
     }

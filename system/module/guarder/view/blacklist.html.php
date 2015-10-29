@@ -17,18 +17,18 @@
       <ul class='nav nav-tabs'>
         <?php foreach($lang->guarder->blacklistModes as $code => $modeName):?>
         <?php $class = $mode == $code ? "class='active'" : '';?>
-        <li <?php echo $class?>><?php echo html::a(inlink('setBlacklist', "mode=$code"), $modeName);?></li>
+        <li <?php echo $class?>><?php echo html::a(inlink('blacklist', "mode=$code"), $modeName);?></li>
         <?php endforeach;?>
       </ul>
     </div>
-    <span class='panel-actions pull-right'><?php commonModel::printLink('guarder', 'add', "type={$mode}", '<i class="icon-plus"></i> ' . $lang->guarder->add, 'class="btn btn-primary" data-toggle="modal"');?></span>
+    <span class='panel-actions pull-right'><?php commonModel::printLink('guarder', 'addblacklist', '', '<i class="icon-plus"></i> ' . $lang->guarder->addBlacklist, 'class="btn btn-primary" data-toggle="modal"');?></span>
   </div>
   <table class='table table-bordered'>
     <thead>
       <tr>
-        <th><?php echo $lang->guarder->content;?></th>
-        <th class='text-center w-300px'><?php echo $lang->guarder->expiration;?></th>
-        <th><?php echo $lang->guarder->reason;?></th>
+        <th><?php echo $lang->blacklist->identity;?></th>
+        <th class='text-center w-300px'><?php echo $lang->blacklist->expiredDate;?></th>
+        <th><?php echo $lang->blacklist->reason;?></th>
         <th class='text-center w-200px'><?php echo $lang->guarder->action;?></th>
       </tr>
     </thead>

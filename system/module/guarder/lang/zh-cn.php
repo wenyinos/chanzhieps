@@ -22,17 +22,14 @@ $lang->guarder->placeholder    = '数字';
 $lang->guarder->password       = '管理密码';
 $lang->guarder->passwordHolder = '请输入当前帐号的密码';
 
-$lang->guarder->blacklistModes['keywords'] = '关键词';
 $lang->guarder->blacklistModes['ip']       = 'ip地址';
+$lang->guarder->blacklistModes['account']  = '帐号';
+$lang->guarder->blacklistModes['keywords'] = '关键词';
 $lang->guarder->blacklistModes['guard']    = '网址';
 $lang->guarder->blacklistModes['email']    = '邮箱地址';
 
-$lang->guarder->type       = '类型';
-$lang->guarder->content    = '内容';
-$lang->guarder->reason     = '原因';
-$lang->guarder->expiration = '过期时间';
-$lang->guarder->action     = '操作';
-$lang->guarder->add        = '添加';
+$lang->guarder->action       = '操作';
+$lang->guarder->addBlacklist = '添加黑名单';
 
 $lang->guarder->whitelist = new stdclass();
 $lang->guarder->whitelist->ip            = 'IP白名单';
@@ -59,3 +56,10 @@ $lang->guarder->operationList->search        = '搜索次数';
 $lang->guarder->operationList->threadFail    = '帖子被禁';
 $lang->guarder->operationList->commentFail   = '评论被禁';
 $lang->guarder->operationList->error404      = '404次数';
+
+$lang->blacklist = new stdclass();
+$lang->blacklist->type        = '类型';
+$lang->blacklist->identity    = '值';
+$lang->blacklist->reason      = '原因';
+$lang->blacklist->expiredDate = '禁用时间';
+$lang->blacklist->hour        = '小时';
