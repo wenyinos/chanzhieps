@@ -35,8 +35,26 @@ $(function()
     {
         if(config && config.currentModule)
         {
-            if(config.currentModule === 'article' || config.currentModule === 'product') activedNav = '.nav-' + config.currentModule + '-0';
-            else activedNav = '.nav-system-' + (config.currentModule === 'index' ? 'home' : config.currentModule);
+            var moduleName = config.currentModule;
+            if(moduleName === 'article' || moduleName === 'product' || moduleName === 'blog')
+            {
+                var liFinded = false;
+                $appNav.find('li > a').each(function()
+                {
+                    var $a        = $(this);
+                    var href      = $a.attr('href'), 
+                        $li       = $a.parents('li'),
+                        pathName  = document.location.pathname;
+                    var hrefIndex = href.indexOf(pathName);
+                    if(href !== '/' && hrefIndex === 0 && !$li.hasClass('active'))
+                    {
+                        $li.addClass('active');
+                        liFinded = true;
+                    }
+                });
+                if(!liFinded) activedNav = '.nav-' + moduleName + '-0';
+            }
+            else activedNav = '.nav-system-' + (moduleName === 'index' ? 'home' : moduleName);
         }
     }
     $appNav.find(activedNav).addClass('active');
