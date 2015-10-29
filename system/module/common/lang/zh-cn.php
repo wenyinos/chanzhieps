@@ -252,7 +252,7 @@ $lang->security = new stdclass();
 $lang->security->menu = new stdclass();
 $lang->security->menu->basic     = '基本设置|site|setsecurity|';
 $lang->security->menu->upload    = '附件上传|site|setupload|';
-$lang->security->menu->blacklist = '黑名单管理|guarder|setblacklist|';
+$lang->security->menu->blacklist = '黑名单管理|guarder|blacklist|';
 $lang->security->menu->whitelist = '白名单管理|guarder|setwhitelist|';
 $lang->security->menu->sensitive = '敏感词设置|site|setsensitive|';
 $lang->security->menu->admin     = '管理员|user|admin|admin=1';
