@@ -17,7 +17,6 @@ body.codeeditor-fullscreen .form-action {position: fixed; bottom: 5px; left: 50p
 
 .editor-resizer {position: absolute; bottom: 0; width: 16px; right: 0; text-align: center; cursor: s-resize; z-index: 4; opacity: .8; transition: opacity .2s; border: 1px solid #ccc; line-height: 16px; height: 16px; background: #f1f1f1; color: #808080; background: rgba(255,255,255,.8);}
 .editor-resizer:hover {opacity: 1}
-.ace_content {font-size: 15px;}
 </style>
 <script>
 jQuery.fn.codeeditor = function(options)
@@ -34,6 +33,7 @@ jQuery.fn.codeeditor = function(options)
             editor = ace.edit(id);
         var $wrapper = $editor.closest('.editor-wrapper'),
             session = editor.getSession();
+        editor.setOptions({fontSize: '15px'});
         editor.setValue($this.val());
         editor.setShowPrintMargin(false);
         editor.clearSelection();
