@@ -187,7 +187,8 @@
 
     &.active > a {
       opacity: 1;
-      box-shadow: inset 0 -2px 0 @color-inverse;
+      background-color: fade(@color-inverse, 15%);
+      box-shadow: inset 0 -2px 0 fade(@color-inverse, 60%);
 
       &.sub-open {
         box-shadow: none;
