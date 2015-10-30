@@ -11,10 +11,10 @@
  */
 class thread extends control
 {
-    /** 
+    /**
      * Post a thread.
-     * 
-     * @param  int      $boardID 
+     *
+     * @param  int      $boardID
      * @access public
      * @return void
      */
@@ -49,7 +49,7 @@ class thread extends control
             if($captchaConfig == 'auto' and $this->loadModel('guarder')->isEvil($this->post->content)) $needCaptcha = true;
             if($captchaConfig == 'open')  $needCaptcha = true;
             if($captchaConfig == 'close') $needCaptcha = false;
-            
+           
             /* If no captcha but is garbage, return the error info. */
             if($this->post->captcha === false and $needCaptcha)
             {
@@ -58,7 +58,6 @@ class thread extends control
 
             $result = $this->thread->post($boardID);
             $this->send($result);
-
         }
 
         $this->view->title      = $board->name . $this->lang->minus . $this->lang->thread->post;
@@ -72,8 +71,8 @@ class thread extends control
 
     /**
      * Edit a thread.
-     * 
-     * @param string $threadID 
+     *
+     * @param string $threadID
      * @access public
      * @return void
      */
@@ -105,7 +104,7 @@ class thread extends control
         }
 
         $board = $this->loadModel('tree')->getById($thread->board);
-        
+       
         $this->view->title      = $this->lang->thread->edit . $this->lang->minus . $thread->title;
         $this->view->thread     = $thread;
         $this->view->board      = $board;
@@ -118,9 +117,9 @@ class thread extends control
 
     /**
      * View a thread.
-     * 
-     * @param  int    $threadID 
-     * @param  int    $pageID 
+     *
+     * @param  int    $threadID
+     * @param  int    $pageID
      * @access public
      * @return void
      */
@@ -153,7 +152,7 @@ class thread extends control
         $speakers = $this->loadModel('user')->getBasicInfo($speakers);
         foreach($speakers as $account => $speaker)
         {
-            $speaker->isModerator = strpos(",{$board->moderators},", ",{$account},") !== false;       
+            $speaker->isModerator = strpos(",{$board->moderators},", ",{$account},") !== false;      
         }
 
         /* Set the views counter + 1; */
@@ -173,8 +172,8 @@ class thread extends control
 
     /**
      * transfer a thread.
-     * 
-     * @param  int    $threadID 
+     *
+     * @param  int    $threadID
      * @access public
      * @return void
      */
@@ -205,23 +204,23 @@ class thread extends control
 
     /**
      * Locate to the thread and reply.
-     * 
-     * @param  int    $threadID 
-     * @param  int    $replyID 
+     *
+     * @param  int    $threadID
+     * @param  int    $replyID
      * @access public
      * @return void
      */
     public function locate($threadID, $replyID = 0)
     {
-        $position = $replyID ? $this->loadModel('reply')->getPosition($replyID) : ''; 
+        $position = $replyID ? $this->loadModel('reply')->getPosition($replyID) : '';
         $location = $this->createLink('thread', 'view', "threadID=$threadID", $position);
         header("location:$location");
     }
 
     /**
      * Delete a thread.
-     * 
-     * @param  int      $threadID 
+     *
+     * @param  int      $threadID
      * @access public
      * @return void
      */
@@ -233,17 +232,17 @@ class thread extends control
         if(!$this->thread->canManage($thread->board)) $this->send(array('result' => 'fail'));
 
         if(RUN_MODE == 'admin') $locate = helper::createLink('forum', 'admin');
-        if(RUN_MODE == 'front') $locate = helper::createLink('forum', 'board', "board=$thread->board"); 
+        if(RUN_MODE == 'front') $locate = helper::createLink('forum', 'board', "board=$thread->board");
 
         if($this->thread->delete($threadID)) $this->send(array('result' => 'success', 'locate' => $locate));
         $this->send(array('result' => 'fail', 'message' => dao::getError()));
     }
-   
+  
     /**
      * Approve a thread.
-     * 
-     * @param  int    $threadID 
-     * @param  int    $boardID 
+     *
+     * @param  int    $threadID
+     * @param  int    $boardID
      * @access public
      * @return void
      */
@@ -257,8 +256,8 @@ class thread extends control
 
     /**
      * Switch a thread's status.
-     * 
-     * @param  int    $threadID 
+     *
+     * @param  int    $threadID
      * @access public
      * @return void
      */
@@ -288,9 +287,9 @@ class thread extends control
 
     /**
      * Set the stick level of a thread.
-     * 
-     * @param  int    $threadID 
-     * @param  int    $stick 
+     *
+     * @param  int    $threadID
+     * @param  int    $stick
      * @access public
      * @return void
      */
@@ -308,9 +307,9 @@ class thread extends control
 
     /**
      * Delete a file.
-     * 
-     * @param  int    $threadID 
-     * @param  int    $fileID 
+     *
+     * @param  int    $threadID
+     * @param  int    $fileID
      * @access public
      * @return void
      */
@@ -331,11 +330,11 @@ class thread extends control
 
     /**
      * Add score.
-     * 
-     * @param  int    $account 
-     * @param  int    $objectType 
-     * @param  int    $objectID 
-     * @param  int    $score 
+     *
+     * @param  int    $account
+     * @param  int    $objectType
+     * @param  int    $objectID
+     * @param  int    $score
      * @access public
      * @return void
      */
@@ -362,6 +361,41 @@ class thread extends control
         $this->view->account    = $account;
         $this->view->objectType = $objectType;
         $this->view->objectID   = $objectID;
+        $this->display();
+    }
+
+    /**
+     * Add to blacklist.
+     *
+     * @param  int    $id
+     * @access public
+     * @return void
+     */
+    public function addToBlacklist($id)
+    {
+        if($_POST)
+        {
+            $post = fixer::input('post')->get();
+            //save keywords items.
+            $keywords = explode(',', $post->keywords);
+            $this->loadModel('guarder');
+            foreach($keywords as $keyword)
+            {
+                if(empty($keyword)) continue;
+                $this->guarder->punish('keywords', $keyword, 'thread');
+                if(dao::isError()) $this->send(array('result' => 'fail', 'thread' => dao::getError()));
+            }
+
+            foreach($this->post->item as $type => $item)
+            {
+                $this->guarder->punish($type, current($item), 'thread', $this->post->hour[$type]);
+            }
+            if(dao::isError()) $this->send(array('result' => 'fail', 'thread' => dao::getError()));
+            $this->send(array('result' => 'success', 'thread' => $this->lang->setSuccess, 'locate' => $this->server->http_referer));
+        }
+        $this->app->loadLang('guarder');
+        $this->view->thread = $this->thread->getByID($id);
+        $this->view->title  = $this->lang->thread->addToBlacklist;
         $this->display();
     }
 }

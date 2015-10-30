@@ -451,6 +451,7 @@ class messageModel extends model
      */
     public function getObjectLink($message)
     {
+        if(empty($message)) return '';
         $link = '';
         if($message->objectType == 'article')
         {

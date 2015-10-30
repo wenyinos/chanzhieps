@@ -33,7 +33,7 @@
         <th class='w-80px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->thread->status);?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('hidden', $orderBy, $vars, $lang->thread->display);?></th>
         <th class='w-150px'><?php echo $lang->actions;?></th>
-      </tr>  
+      </tr>
     </thead>
     <?php endif;?>
     <tbody>
@@ -51,29 +51,30 @@
         <td><?php echo substr($thread->addedDate, 5, -3);?></td>
         <td><?php echo $thread->views;?></td>
         <td><?php echo $thread->replies;?></td>
-        <td class='text-left'><?php if($thread->replies) echo substr($thread->repliedDate, 5, -3) . ' ' . $thread->repliedByRealname;?></td>  
-        <td class='text-left'><?php if(isset($thread->status)) echo $thread->status == 'wait' ? '<span class="text-warning"><i class="icon-eye-close"></i> ' . $lang->thread->statusList[$thread->status] .'</span>' : '<span class="text-success"><i class="icon-ok-sign"></i> ' . $lang->thread->statusList[$thread->status] . '</span>';?></td>
-        <td class='text-left'><?php echo $thread->hidden ? '<span class="text-warning"><i class="icon-eye-close"></i> ' . $lang->thread->displayList['hidden'] .'</span>' : '<span class="text-success"><i class="icon-ok-sign"></i> ' . $lang->thread->displayList['normal'] . '</span>';?></td>
+        <td class='text-left'><?php if($thread->replies) echo substr($thread->repliedDate, 5, -3) . ' ' . $thread->repliedByRealname;?></td>
         <td>
-        <?php 
-        if($this->config->forum->postReview == 'open' and $thread->status =='wait')
-             commonmodel::printlink('thread', 'approve', "threadid=$thread->id&boardid=$thread->board", $lang->thread->approve, "class='reload'"); 
-        if($thread->status != 'wait')
-        {
-            if($thread->hidden)
-            {
-                commonModel::printLink('thread', 'switchStatus', "threadID=$thread->id", $lang->thread->show, "class='reload'"); 
-            }
-            else
-            {
-                commonModel::printLink('thread', 'switchStatus', "threadID=$thread->id", $lang->thread->hide, "class='reload'"); 
-            }
-            
-            commonModel::printLink('thread', 'transfer', "threadID=$thread->id", $lang->thread->transfer, "data-toggle='modal'");
-        }
-        commonModel::printLink('thread', 'delete', "threadID=$thread->id", $lang->delete, "class='deleter'");?>
+          <span class="<?php echo $thread->status == 'approved' ? 'text-success' : ''?>">
+            <?php echo zget($lang->thread->statusList, $thread->status);?>
+          </span>
         </td>
-      </tr>  
+        <td><?php echo $thread->hidden ? '<span class="text-warning"><i class="icon-eye-close"></i> ' . $lang->thread->displayList['hidden'] .'</span>' : '<span class="text-success"><i class="icon-ok-sign"></i> ' . $lang->thread->displayList['normal'] . '</span>';?></td>
+        <td>
+          <?php
+          if($thread->status != 'wait')
+          {
+              $text = $thread->hidden ? $lang->thread->show : $lang->thread->hide;
+              commonModel::printLink('thread', 'switchStatus', "threadID=$thread->id", $text, "class='reload'");
+              commonModel::printLink('thread', 'transfer', "threadID=$thread->id", $lang->thread->transfer, "data-toggle='modal'");
+          }
+          elseif($this->config->forum->postReview == 'open')
+          {
+               commonmodel::printlink('thread', 'approve', "threadid=$thread->id&boardid=$thread->board", $lang->thread->approve, "class='reload'");
+          }
+          commonModel::printLink('thread', 'delete', "threadID=$thread->id", $lang->delete, "class='deleter'");
+          commonModel::printLink('thread', 'addToBlacklist', "threadID=$thread->id", $lang->thread->addToBlacklist, "data-toggle='modal'");
+          ?>
+        </td>
+      </tr>
       <?php endforeach;?>
     </tbody>
     <tfoot><tr><td colspan='12'><?php $pager->show();?></td></tr></tfoot>
