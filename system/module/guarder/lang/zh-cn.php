@@ -56,6 +56,7 @@ $lang->guarder->operationList->search        = '搜索次数';
 $lang->guarder->operationList->threadFail    = '帖子被禁';
 $lang->guarder->operationList->commentFail   = '评论被禁';
 $lang->guarder->operationList->error404      = '404次数';
+$lang->guarder->operationList->captchaFail   = '验证码错误';
 
 $lang->blacklist = new stdclass();
 $lang->blacklist->type        = '类型';

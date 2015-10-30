@@ -40,7 +40,9 @@ class guarderModel extends model
      */
     public function create4Comment()
     {
-        $guarder = $this->createCaptcha();     
+        $guarder = $this->createCaptcha();
+        $input = 'captcha_' . mt_rand(); 
+        $this->session->set('captchaInput', $input);
         return <<<EOT
 <label for='captcha' class='col-sm-1 control-label'>{$this->lang->guarder->captcha}</label>
 <div class='col-sm-11 required'>
@@ -48,7 +50,7 @@ class guarderModel extends model
       <tr class='text-middle'>
         <td class='text-lg w-110px'><span class='label label-danger'>{$guarder->first} {$guarder->operator} {$guarder->second}</span></td>
         <td class='text-lg text-center w-40px'> {$this->lang->guarder->equal} </td>
-        <td><input type='text'  name='captcha' id='captcha' class='w-80px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;</td>
+        <td><input type='text' name='{$input}' id='{$input}' class='w-80px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;</td>
       </tr>
   </table>
 </div>
@@ -64,6 +66,8 @@ EOT;
     public function create4Reply()
     {
         $guarder = $this->createCaptcha();     
+        $input = 'captcha_' . mt_rand(); 
+        $this->session->set('captchaInput', $input);
         return <<<EOT
 <table class='captcha'>
   <tr class='text-middle'>
@@ -71,7 +75,7 @@ EOT;
     <td class='w-110px text-lg'><span class='label label-danger'>{$guarder->first} {$guarder->operator} {$guarder->second}</span></td>
     <td class='w-40px text-lg text-center'>{$this->lang->guarder->equal}</td>
     <td>
-      <input type='text'  name='captcha' id='captcha' class='w-80px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;
+      <input type='text'  name="{$input}" id='{$input}' class='w-80px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;
     </td>
   </tr>
 </table>
@@ -87,6 +91,8 @@ EOT;
     public function create4Thread()
     {
         $guarder = $this->createCaptcha();
+        $input = 'captcha_' . mt_rand(); 
+        $this->session->set('captchaInput', $input);
         return <<<EOT
 <label for='captcha' class='col-md-1 col-sm-2 control-label'>{$this->lang->guarder->captcha}</label>
 <div class='col-md-7 col-sm-8 col-xs-11 required'>
@@ -94,7 +100,7 @@ EOT;
       <tr class='text-middle'>
         <td class='text-lg w-110px'><span class='label label-danger'>{$guarder->first} {$guarder->operator} {$guarder->second}</span></td>
         <td class='text-lg text-center w-40px'> {$this->lang->guarder->equal} </td>
-        <td><input type='text'  name='captcha' id='captcha' class='w-80px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;</td>
+        <td><input type='text'  name='{$input}' id='{$input}' class='w-80px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;</td>
       </tr>
   </table>
 </div>
@@ -110,6 +116,8 @@ EOT;
     public function create4MessageReply()
     {
         $guarder = $this->createCaptcha();
+        $input = 'captcha_' . mt_rand(); 
+        $this->session->set('captchaInput', $input);
         return <<<EOT
 <th>{$this->lang->guarder->captcha}</th>
 <td>
@@ -117,7 +125,7 @@ EOT;
     <tr class='text-middle'>
       <td class='text-lg w-110px'><span class='label label-danger'>{$guarder->first} {$guarder->operator} {$guarder->second}</span></td>
       <td class='text-lg text-center w-40px'> {$this->lang->guarder->equal} </td>
-      <td><input type='text'  name='captcha' id='captcha' class='w-80px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;</td>
+      <td><input type='text'  name='{$input}' id='{$input}' class='w-80px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;</td>
     </tr>
   </table>
 </td>
