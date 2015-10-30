@@ -270,6 +270,7 @@ class messageModel extends model
             ->setIF($admin == 'super', 'status', '1')
             ->add('ip', $this->server->REMOTE_ADDR)
             ->get();
+        if($this->loadModel('guarder')->matchList($message))  return array('result' => 'fail', 'reason' => 'error', 'message' => $this->lang->error->sensitive);
 
         if(isset($this->config->site->filterSensitive) and $this->config->site->filterSensitive == 'open')
         {

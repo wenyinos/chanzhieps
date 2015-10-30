@@ -117,8 +117,8 @@ class commonModel extends model
     public function checkPriv()
     {
         if($this->server->request_method == 'post')$inBlackList = $this->loadModel('guarder')->logOperation('ip', 'post');
-        $inBlackList = $this->loadModel('guarder')->isInBlackList();
-        if($inBlackList) die('Request Forbidden');
+        $inList = $this->loadModel('guarder')->inList();
+        if($inList) die('Request Forbidden');
         $module = $this->app->getModuleName();
         $method = $this->app->getMethodName();
 

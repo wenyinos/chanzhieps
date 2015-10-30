@@ -154,6 +154,8 @@ class replyModel extends model
             ->remove('recTotal, recPerPage, pageID, files, labels, hidden')
             ->get();
 
+        if($this->loadModel('guarder')->matchList($reply))  return array('result' => 'fail', 'reason' => 'error', 'message' => $this->lang->error->sensitive);
+
         if(isset($this->config->site->filterSensitive) and $this->config->site->filterSensitive == 'open')
         {
             $dicts = !empty($this->config->site->sensitive) ? $this->config->site->sensitive : $this->config->sensitive;

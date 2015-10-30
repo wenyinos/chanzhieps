@@ -156,30 +156,45 @@ EOT;
      * check a request in blacklist.
      * 
      * @access public
-     * @return void
+     * @return bool
      */
-    public function isInBlackList()
+    public function inList()
     {
-        $ip = $this->server->remote_addr;
+        $ip      = $this->server->remote_addr;
+        $account = $this->app->user->account;
 
         $blackList = $this->dao->select('*')->from(TABLE_BLACKLIST)
-            ->where('identity')->eq($ip)
-            ->andWhere('type')->eq('ip')
-            ->andWhere('expiredDate')->ge(helper::now())
-            ->fetch();
+            ->where('identity')->in("{$ip},{$account}")
+            ->andWhere('type')->in('ip,account')
+            ->andWhere('expiredDate', true)->ge(helper::now())
+            ->orWhere('expiredDate')->eq('000-00-00 00:00:00')
+            ->markRight(1)
+            ->fetchAll();
 
         if(!empty($blackList)) return true;
-
-        if($this->app->user->account != 'guest')
+        return false;
+    }
+    
+    /**
+     * Check whether content matched keywords in blacklist.
+     * 
+     * @param  string    $content 
+     * @access public
+     * @return bool
+     */
+    public function matchList($content)
+    {
+        if(!is_string($content))
         {
-            $blackList = $this->dao->select('*')->from(TABLE_BLACKLIST)
-                ->where('identity')->eq($this->app->user->account)
-                ->andWhere('type')->eq('account')
-                ->andWhere('expiredDate')->le(helper::now())
-                ->fetch();
-            if(!empty($blacklist)) return true;
+            $content = (array) $content;
+            $content = join(',', $content);
         }
 
+        $blacklist = $this->dao->select('*')->from(TABLE_BLACKLIST)->where('type')->eq('keywords')->fetchAll();
+        foreach($blacklist as $item)
+        {
+            if(strpos($content, $item->identity) !== false) return true; 
+        }
         return false;
     }
 

@@ -194,6 +194,7 @@ class threadModel extends model
             ->remove('files, labels, views, replies, hidden, stick')
             ->get();
 
+        if($this->loadModel('guarder')->matchList($thread))  return array('result' => 'fail', 'reason' => 'error', 'message' => $this->lang->error->sensitive);
         if(isset($this->config->site->filterSensitive) and $this->config->site->filterSensitive == 'open')
         {
             $dicts = !empty($this->config->site->sensitive) ? $this->config->site->sensitive : $this->config->sensitive;
