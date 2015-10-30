@@ -265,7 +265,7 @@ class message extends control
         }
         $this->app->loadLang('guarder');
         $this->view->message = $this->message->getByID($id);
-        $this->view->title   = $this->lang->message->addToBlacklist;
+        $this->view->title   = $this->lang->addToBlacklist;
         $this->display();
     }
 }

@@ -39,6 +39,7 @@
         <td><?php echo substr($reply->addedDate, 5, -3);?></td>
         <td>
           <?php commonModel::printLink('reply', 'delete', "replyID=$reply->id", $lang->delete, "class='deleter'"); ?>
+          <?php commonModel::printLink('reply', 'addToBlacklist', "id=$reply->id", $lang->addToBlacklist, "data-toggle='modal'"); ?>
         </td>
       </tr>  
       <?php endforeach;?>

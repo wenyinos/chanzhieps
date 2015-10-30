@@ -71,7 +71,7 @@
                commonmodel::printlink('thread', 'approve', "threadid=$thread->id&boardid=$thread->board", $lang->thread->approve, "class='reload'");
           }
           commonModel::printLink('thread', 'delete', "threadID=$thread->id", $lang->delete, "class='deleter'");
-          commonModel::printLink('thread', 'addToBlacklist', "threadID=$thread->id", $lang->thread->addToBlacklist, "data-toggle='modal'");
+          commonModel::printLink('thread', 'addToBlacklist', "threadID=$thread->id", $lang->addToBlacklist, "data-toggle='modal'");
           ?>
         </td>
       </tr>

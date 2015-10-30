@@ -395,7 +395,7 @@ class thread extends control
         }
         $this->app->loadLang('guarder');
         $this->view->thread = $this->thread->getByID($id);
-        $this->view->title  = $this->lang->thread->addToBlacklist;
+        $this->view->title  = $this->lang->addToBlacklist;
         $this->display();
     }
 }

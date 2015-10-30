@@ -163,4 +163,39 @@ class reply extends control
         }
         $this->send(array('result'=>'fail', 'message'=> 'error'));
     }
+
+    /**
+     * Add to blacklist.
+     *
+     * @param  int    $id
+     * @access public
+     * @return void
+     */
+    public function addToBlacklist($id)
+    {
+        if($_POST)
+        {
+            $post = fixer::input('post')->get();
+            //save keywords items.
+            $keywords = explode(',', $post->keywords);
+            $this->loadModel('guarder');
+            foreach($keywords as $keyword)
+            {
+                if(empty($keyword)) continue;
+                $this->guarder->punish('keywords', $keyword, 'thread');
+                if(dao::isError()) $this->send(array('result' => 'fail', 'thread' => dao::getError()));
+            }
+
+            foreach($this->post->item as $type => $item)
+            {
+                $this->guarder->punish($type, current($item), 'thread', $this->post->hour[$type]);
+            }
+            if(dao::isError()) $this->send(array('result' => 'fail', 'thread' => dao::getError()));
+            $this->send(array('result' => 'success', 'thread' => $this->lang->setSuccess, 'locate' => $this->server->http_referer));
+        }
+        $this->app->loadLang('guarder');
+        $this->view->reply = $this->reply->getByID($id);
+        $this->view->title = $this->lang->addToBlacklist;
+        $this->display();
+    }
 }
