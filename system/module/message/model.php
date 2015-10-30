@@ -280,9 +280,9 @@ class messageModel extends model
         }
 
         $this->dao->insert(TABLE_MESSAGE)
-            ->data($message, $skip = 'captcha, secret')
+            ->data($message, $skip = $this->session->captchaInput . ', secret')
             ->autoCheck()
-            ->check('captcha', 'captcha')
+            ->check($this->session->captchaInput, 'captcha')
             ->check('type', 'in', $this->config->message->types)
             ->checkIF(!empty($message->email), 'email', 'email')
             ->batchCheck($this->config->message->require->post, 'notempty')
@@ -294,8 +294,16 @@ class messageModel extends model
         $guarder = $this->loadModel('guarder');
         $guarder->logOperation('account', 'postComment');
         $guarder->logOperation('ip', 'postComment');
-
-        if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
+        if(dao::isError()) 
+        {
+            $errors = dao::getError();   
+            if(isset($errors[$captchaInput]))
+            {
+                $guarder->logOperation('ip', 'captchaFail');
+                $guarder->logOperation('account', 'captchaFail');
+            }
+            return array('result' => 'fail', 'message' => $errors);
+        }
         return array('result' => 'success', 'message' => $this->lang->message->thanks);
     }
 
@@ -326,9 +334,9 @@ class messageModel extends model
             ->get();
 
         $this->dao->insert(TABLE_MESSAGE)
-            ->data($reply, $skip = 'captcha')
+            ->data($reply, $skip = $this->session->captchaInput)
             ->autoCheck()
-            ->check('captcha', 'captcha')
+            ->check($this->session->captchaInput, 'captcha')
             ->check('type', 'in', $this->config->message->types)
             ->batchCheck($this->config->message->require->reply, 'notempty')
             ->exec();

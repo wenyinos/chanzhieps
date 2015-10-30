@@ -164,10 +164,10 @@ class replyModel extends model
         }
 
         $this->dao->insert(TABLE_REPLY)
-            ->data($reply, $skip = 'captcha, uid')
+            ->data($reply, $skip = $this->session->captchaInput . ',uid')
             ->autoCheck()
             ->batchCheck($this->config->reply->require->edit, 'notempty')
-            ->check('captcha', 'captcha')
+            ->check($this->session->captchaInput, 'captcha')
             ->exec();
 
         $replyID = $this->dao->lastInsertID();                     // Get reply id.

@@ -209,11 +209,11 @@ class threadModel extends model
         else $thread->status = 'approved';
 
         $this->dao->insert(TABLE_THREAD)
-            ->data($thread, $skip = 'captcha, uid, isLink')
+            ->data($thread, $skip = $this->session->captchaInput . ', uid, isLink')
             ->autoCheck()
             ->batchCheckIF(!$this->post->isLink, $this->config->thread->require->post, 'notempty')
             ->batchCheckIF($this->post->isLink, $this->config->thread->require->link, 'notempty')
-            ->check('captcha', 'captcha')
+            ->check($this->session->captchaInput, 'captcha')
             ->exec();
 
         $threadID = $this->dao->lastInsertID();

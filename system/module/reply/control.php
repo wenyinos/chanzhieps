@@ -29,7 +29,8 @@ class reply extends control
             if($captchaConfig == 'open' or ($captchaConfig == 'auto' and $this->loadModel('guarder')->isEvil($this->post->content))) $needCaptcha = true;
 
             /* If no captcha but is garbage, return the error info. */
-            if($this->post->captcha === false and $needCaptcha)
+            $captchaInput = $this->session->captchaInput;
+            if($this->post->$captchaInput === false and $needCaptcha)
             {
                 $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->loadModel('guarder')->create4Reply()));
             }
@@ -89,7 +90,8 @@ class reply extends control
         if($_POST)
         {
             /* If no captcha but is garbage, return the error info. */
-            if($this->post->captcha === false and $this->loadModel('guarder')->isEvil($_POST['content']))
+            $captchaInput = $this->session->captchaInput;
+            if($this->post->$captchaInput === false and $this->loadModel('guarder')->isEvil($_POST['content']))
             {
                 $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->captcha->create4Thread()));
             }
