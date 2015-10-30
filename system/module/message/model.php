@@ -297,7 +297,7 @@ class messageModel extends model
         if(dao::isError()) 
         {
             $errors = dao::getError();   
-            if(isset($errors[$captchaInput]))
+            if(isset($errors[$this->session->captchaInput]))
             {
                 $guarder->logOperation('ip', 'captchaFail');
                 $guarder->logOperation('account', 'captchaFail');
