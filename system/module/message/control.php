@@ -134,7 +134,8 @@ class message extends control
             if(($captchaConfig == 'auto' and $this->loadModel('guarder')->isEvil($this->post->content)) or $captchaConfig == 'open') $needCaptcha = true;
 
             /* If no captcha but is garbage, return the error info. */
-            if($this->post->captcha === false and $needCaptcha)
+            $captchaInput = $this->session->captchaInput;
+            if($this->post->{$captchaInput} === false and $needCaptcha)
             {
                 $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->loadModel('guarder')->create4Comment()));
             }
@@ -164,7 +165,8 @@ class message extends control
                 if($captchaConfig == 'close') $needCaptcha = false;
 
                 /* If no captcha but is garbage, return the error info. */
-                if($this->post->captcha === false and $needCaptcha)
+                $captchaInput = $this->session->captchaInput;
+                if($this->post->$captchaInput === false and $needCaptcha)
                 {
                     $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->loadModel('guarder')->create4MessageReply()));
                 }
