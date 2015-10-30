@@ -29,7 +29,7 @@ include TPL_ROOT . 'common/header.html.php';
     <div class='form-group'><?php echo html::password('password','',"placeholder='{$lang->user->inputPassword}' class='form-control'");?></div>
     <div class='form-group'><?php echo html::submitButton($lang->user->login->common, 'btn primary block');?></div>
     <div class='form-group'>
-      <?php if($config->mail->turnon) echo html::a(inlink('resetpassword'), $lang->user->recoverPassword, "class='btn btn-link'") . ' ';?>
+      <?php if($config->mail->turnon and $this->config->site->resetPassword == 'open') echo html::a(inlink('resetpassword'), $lang->user->recoverPassword, "class='btn btn-link'") . ' ';?>
       <?php echo html::a(inlink('register'), $lang->user->register->common, "class='btn btn-link'");?>
       <?php echo html::hidden('referer', $referer);?>
     </div>

@@ -16,7 +16,7 @@ js::set('random', $this->session->random);
             <div class='form-group'><?php echo html::password('password','',"placeholder='{$lang->user->inputPassword}' class='form-control input-lg'");?></div>
             <?php echo html::submitButton($lang->user->login->common, 'btn btn-primary btn-wider btn-lg');?> &nbsp; &nbsp; 
             <?php echo html::a(inlink('register'), $lang->user->register->common);?> &nbsp; &nbsp; 
-            <?php if($config->mail->turnon) echo html::a(inlink('resetpassword'), $lang->user->recoverPassword);?>
+            <?php if($config->mail->turnon and $this->config->site->resetPassword == 'open') echo html::a(inlink('resetpassword'), $lang->user->recoverPassword);?>
             <?php echo html::hidden('referer', $referer);?>
           </form>
         </div>

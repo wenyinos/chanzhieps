@@ -27,6 +27,12 @@
           <td></td>
         </tr>
         <tr>
+        <tr>
+          <th class='w-200px'><?php echo $lang->site->resetPassword;?></th>
+          <td colspan='2'><?php echo html::radio('resetPassword', $lang->site->resetPasswordList, isset($this->config->site->resetPassword) ? $this->config->site->resetPassword : 'open');?></td>
+          <td></td>
+        </tr>
+        <tr>
           <th><?php echo $lang->site->importantOption;?></th>
           <td colspan='3'>
             <?php echo html::checkbox('importantValidate', $lang->site->validateTypes, $this->config->site->importantValidate);?><br>

@@ -572,6 +572,7 @@ class user extends control
      */
     public function resetPassword()
     {
+        if($this->config->site->resetPassword != 'open') $this->locate(helper::createLink('error'));
         if(!empty($_POST))
         {
             $user = $this->user->getByAccount(trim($this->post->account));

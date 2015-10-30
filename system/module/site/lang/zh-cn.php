@@ -42,6 +42,7 @@ $lang->site->scheme          = '默认访问协议';
 $lang->site->saveDays        = '日志保存天数';
 
 $lang->site->importantOption = '重要操作';
+$lang->site->resetPassword   = '前台找回密码';
 $lang->site->checkIP         = '后台登录IP白名单';
 $lang->site->checkLocation   = '后台登录地区验证';
 $lang->site->checkEmail      = '会员邮箱绑定';
@@ -81,20 +82,24 @@ $lang->site->statusList = new stdclass();
 $lang->site->statusList->normal = '正常';
 $lang->site->statusList->pause  = '暂停';
 
+$lang->site->resetPasswordList = array();
+$lang->site->resetPasswordList['open']  = '开启';
+$lang->site->resetPasswordList['close'] = '关闭';
+
 $lang->site->checkIPList = array();
-$lang->site->checkIPList['open']  = '打开';
+$lang->site->checkIPList['open']  = '开启';
 $lang->site->checkIPList['close'] = '关闭';
 
 $lang->site->filterSensitiveList = array();
-$lang->site->filterSensitiveList['open']  = '打开';
+$lang->site->filterSensitiveList['open']  = '开启';
 $lang->site->filterSensitiveList['close'] = '关闭';
 
 $lang->site->checkLocationList = array();
-$lang->site->checkLocationList['open']  = '打开';
+$lang->site->checkLocationList['open']  = '开启';
 $lang->site->checkLocationList['close'] = '关闭';
 
 $lang->site->checkEmailList = array();
-$lang->site->checkEmailList['open']  = '打开';
+$lang->site->checkEmailList['open']  = '开启';
 $lang->site->checkEmailList['close'] = '关闭';
 
 $lang->site->sessionIpoptions = array();

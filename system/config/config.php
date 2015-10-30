@@ -42,6 +42,7 @@ $config->allowedTags->admin = $config->allowedTags->front . '<dd><dt><dl><div><t
 $config->views  = ',html,mhtml,json,xml,'; // Supported view types.
 
 $config->site = new stdclass();
+$config->site->resetPassword     = 'open'; 
 $config->site->importantValidate = 'okFile,email';
 $config->site->modules = 'article,product';
 
