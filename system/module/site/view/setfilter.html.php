@@ -14,6 +14,8 @@
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class='icon-globe'></i> <?php echo $lang->site->setFilter;?></strong>
+    <?php echo html::a(inlink('setfilter', "type=ip"), $lang->site->ipFilter, $class = $type == 'ip' ? "class='active'" : '');?>
+    <?php echo html::a(inlink('setfilter', "type=account"), $lang->site->accountFilter, $class = $type == 'account' ? "class='active'" : '');?>
   </div>
   <div class='panel-body'>
     <form method='post' id='ajaxForm' class='form-inline'>
