@@ -49,6 +49,11 @@
           <td></td>
         </tr>
         <tr>
+          <th class='w-200px'><?php echo $lang->site->forceYangcong;?></th>
+          <td colspan='2'><?php echo html::radio('forceYangcong', $lang->site->forceYangcongList, isset($this->config->site->forceYangcong) ? $this->config->site->forceYangcong : 'close');?></td>
+          <td></td>
+        </tr>
+        <tr>
           <?php $allowedLocation = isset($this->config->site->allowedLocation) ? $this->config->site->allowedLocation : '';?>
           <th class='w-200px'><?php echo $lang->site->allowedLocation;?></th>
           <td colspan='2'><?php echo html::input('allowedLocationShow', $allowedLocation, "class='form-control' disabled='disabled'");?></td>

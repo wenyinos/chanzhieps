@@ -472,6 +472,7 @@ class userModel extends model
      */
     public function login($account, $password)
     {
+        if(RUN_MODE == 'admin' and zget($this->config->site, 'forceYangcong') == 'open') return false;
         $user = $this->identify($account, $password);
         if(!$user) return false;
 
