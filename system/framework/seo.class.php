@@ -32,9 +32,6 @@ class seo
         $methodAlias   = $config->seo->alias->method;
         $params = array();
 
-        /* Get module and params from the uri. Like article/2@alias.html, we fetch article/2.  */
-        if(strpos($uri, '_') !== false) $uri = substr($uri, 0, strpos($uri, '_'));
-
         /* Is there a pageID variable in the url?  */
         $pageID = 0;
         if(preg_match('/\/p\d+$/', $uri, $matches))
@@ -82,6 +79,19 @@ class seo
             {
                 $params['id'] = $items[1];
                 return seo::convertURI($module, 'view', $params, $pageID);
+            }
+            else
+            {
+                if(!empty($items[1]))
+                {
+                    $viewparams = explode('-', $items[1]);
+                    $id = end($viewparams);
+                }
+                if(is_numeric($id))
+                {
+                    $params['id'] = $id;
+                    return seo::convertURI($module, 'view', $params, $pageID);
+                }
             }
 
             $params['category'] = $category;
@@ -207,8 +217,8 @@ class uri
 
         $link = 'article/';
         if(!empty($alias['category'])) $link = $alias['category'] . '/';
+        if(!empty($alias['name'])) $link .= $alias['name'] . '-';
         $link .= array_shift($params);
-        if(!empty($alias['name'])) $link .= '_' . $alias['name'];
 
         $viewType = $viewType ? $viewType : $config->default->view;
 
@@ -250,8 +260,8 @@ class uri
 
         $link = 'product/';
         if(!empty($alias['category'])) $link = $alias['category'] . '/';
+        if(!empty($alias['name'])) $link .= $alias['name'] . '-';
         $link .= array_shift($params);
-        if(!empty($alias['name'])) $link .= '_' . $alias['name'];
 
         $viewType = $viewType ? $viewType : $config->default->view;
         return $config->webRoot . $link . '.' . $viewType;
