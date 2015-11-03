@@ -511,7 +511,7 @@ class wechatModel extends model
 
             $article = new stdclass();
             $article->title       = $category->name;
-            $article->url         = rtrim(getWebRoot(true), '/') . commonModel::createFrontLink($type, 'browse', "categoryID={$category->id}", "category={$category->alias}");
+            $article->url         = getHostURL() . commonModel::createFrontLink($type, 'browse', "categoryID={$category->id}", "category={$category->alias}");
             $article->description =  $category->desc;
 
             if($isFirst) $article->picUrl = getWebRoot(true) . "theme/default/images/main/wechat{$type}.png";
@@ -570,7 +570,7 @@ class wechatModel extends model
         {
             $item = new stdclass();
             $item->title       = $article->title;
-            $item->url         = rtrim(getWebRoot(true), '/') . $this->article->createPreviewLink($article->id);
+            $item->url         = getHostURL() . $this->article->createPreviewLink($article->id);
             $item->description = $article->summary;
             if(!empty($article->image))
             {
@@ -633,7 +633,7 @@ class wechatModel extends model
 
             $article = new stdclass();
             $article->title       = $product->name;
-            $article->url         = rtrim(getWebRoot(true), '/') . commonModel::createFrontLink('product', 'view',  "productID=$product->id", "name=$product->alias&category=$categoryAlias");
+            $article->url         = getHostURL() . commonModel::createFrontLink('product', 'view',  "productID=$product->id", "name=$product->alias&category=$categoryAlias");
             $article->description = isset($product->summary) ? $product->summary : '';
             if(!empty($product->image)) $article->picUrl = rtrim(getWebRoot(true), '/') . $product->image->primary->smallURL;
             $response->articles[] = $article;
@@ -884,10 +884,10 @@ class wechatModel extends model
      */
     public function getModuleList()
     {
-        $webRoot = rtrim(getWebRoot(true), '/');
+        $hostURL = getHostURL();
         foreach($this->lang->wechat->response->moduleList as $module => $title)
         {
-            if($module != 'manual') $moduleList[$webRoot . $this->loadModel('common')->createFrontLink($module, 'index')] = $title;
+            if($module != 'manual') $moduleList[$hostURL . $this->loadModel('common')->createFrontLink($module, 'index')] = $title;
             if($module == 'manual') $moduleList[$module] = $title;
         }
         return $moduleList;

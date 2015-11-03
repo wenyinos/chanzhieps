@@ -1051,3 +1051,14 @@ function processArrayEvils($params)
     }
     return $params;
 }
+
+/**
+ * Get host URL.
+ * 
+ * @access public
+ * @return bool
+ */
+function getHostURL()
+{
+    return ((isset($_SERVER['HTTPS']) and strtolower($_SERVER['HTTPS']) != 'off') ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'];
+}
