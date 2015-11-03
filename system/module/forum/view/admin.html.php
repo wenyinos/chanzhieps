@@ -25,14 +25,16 @@
         <?php $vars = "boardID=$boardID&orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
         <th class='text-center w-60px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->thread->id);?></th>
         <th><?php echo $lang->thread->title;?></th>
-        <th class='w-120px'><?php commonModel::printOrderLink('author', $orderBy, $vars, $lang->thread->author);?></th>
+        <th class='w-80px'><?php commonModel::printOrderLink('author', $orderBy, $vars, $lang->thread->author);?></th>
         <th class='w-110px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->thread->postedDate);?></th>
         <th class='w-70px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->thread->views);?></th>
         <th class='w-80px'><?php commonModel::printOrderLink('replies', $orderBy, $vars, $lang->thread->replies);?></th>
-        <th class='w-200px'><?php commonModel::printOrderLink('repliedDate', $orderBy, $vars, $lang->thread->lastReply);?></th>
-        <th class='w-80px'><?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->thread->status);?></th>
+        <th class='w-150px'><?php commonModel::printOrderLink('repliedDate', $orderBy, $vars, $lang->thread->lastReply);?></th>
+        <?php if($this->config->forum->postReview == 'open'):?>
+        <th class='w-80px'> <?php commonModel::printOrderLink('status', $orderBy, $vars, $lang->thread->status);?></th>
+        <?php endif;?>
         <th class='w-80px'><?php commonModel::printOrderLink('hidden', $orderBy, $vars, $lang->thread->display);?></th>
-        <th class='w-150px'><?php echo $lang->actions;?></th>
+        <th><?php echo $lang->actions;?></th>
       </tr>
     </thead>
     <?php endif;?>
@@ -52,23 +54,29 @@
         <td><?php echo $thread->views;?></td>
         <td><?php echo $thread->replies;?></td>
         <td class='text-left'><?php if($thread->replies) echo substr($thread->repliedDate, 5, -3) . ' ' . $thread->repliedByRealname;?></td>
+        <?php if($this->config->forum->postReview == 'open'):?>
         <td>
           <span class="<?php echo $thread->status == 'approved' ? 'text-success' : ''?>">
             <?php echo zget($lang->thread->statusList, $thread->status);?>
           </span>
         </td>
+        <?php endif;?>
         <td><?php echo $thread->hidden ? '<span class="text-warning"><i class="icon-eye-close"></i> ' . $lang->thread->displayList['hidden'] .'</span>' : '<span class="text-success"><i class="icon-ok-sign"></i> ' . $lang->thread->displayList['normal'] . '</span>';?></td>
         <td>
           <?php
+          if($this->config->forum->postReview == 'open')
+          {
+              commonmodel::printlink('thread', 'approve', "threadid=$thread->id&boardid=$thread->board", $lang->thread->approve, "class='reload'");
+          }
+          $text = $thread->hidden ? $lang->thread->show : $lang->thread->hide;
+          commonModel::printLink('thread', 'switchStatus', "threadID=$thread->id", $text, "class='reload'");
           if($thread->status != 'wait')
           {
-              $text = $thread->hidden ? $lang->thread->show : $lang->thread->hide;
-              commonModel::printLink('thread', 'switchStatus', "threadID=$thread->id", $text, "class='reload'");
               commonModel::printLink('thread', 'transfer', "threadID=$thread->id", $lang->thread->transfer, "data-toggle='modal'");
           }
-          elseif($this->config->forum->postReview == 'open')
+          else
           {
-               commonmodel::printlink('thread', 'approve', "threadid=$thread->id&boardid=$thread->board", $lang->thread->approve, "class='reload'");
+              commonModel::printLink('', '', "", $lang->thread->transfer, "class='disabled'");
           }
           commonModel::printLink('thread', 'delete', "threadID=$thread->id", $lang->delete, "class='deleter'");
           commonModel::printLink('thread', 'addToBlacklist', "threadID=$thread->id", $lang->addToBlacklist, "data-toggle='modal'");
