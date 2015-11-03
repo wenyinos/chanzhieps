@@ -174,12 +174,14 @@ $lang->menuGroups->company = 'site';
 /* Menu of article module. */
 $lang->article = new stdclass();
 $lang->article->menu = new stdclass();
-$lang->article->menu->browse = '所有文章|article|admin|';
+$lang->article->menu->browse       = '我的文章|article|admin|type=article&categoryID=0&orderBy=id_desc&recTotal=0&recPerPage=20&pageID=1&contribution=false';
+$lang->article->menu->contribution = '投稿文章|article|admin|type=article&categoryID=0&orderBy=id_desc&recTotal=0&recPerPage=20&pageID=1&contribution=true';
 
 /* Menu of blog module. */
 $lang->blog = new stdclass();
 $lang->blog->menu = new stdclass();
-$lang->blog->menu->browse = '所有博客|article|admin|type=blog';
+$lang->blog->menu->browse       = '我的博客|article|admin|type=blog&categoryID=0&orderBy=id_desc&recTotal=0&recPerPage=20&pageID=1&contribution=false';
+$lang->blog->menu->contribution = '投稿博客|article|admin|type=blog&categoryID=0&orderBy=id_desc&recTotal=0&recPerPage=20&pageID=1&contribution=true';
 
 /* Menu of page module. */
 $lang->page = new stdclass();

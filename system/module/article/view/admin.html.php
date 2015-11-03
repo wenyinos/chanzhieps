@@ -12,6 +12,7 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/treeview.html.php';?>
+<?php js::set('contribution', $contribution);?>
 <?php js::set('categoryID', $categoryID);?>
 <div class='panel'>
   <div class='panel-heading'>
@@ -46,6 +47,14 @@
         <?php endif;?>
         <th class='text-center w-160px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->article->addedDate);?></th>
         <th class='text-center w-70px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->article->views);?></th>
+        <?php
+        if($this->config->article->contribution == 'open' and $contribution == 'true')
+        {
+            echo "<th class='text-center w-70px'>"; 
+            commonModel::printOrderLink('contribution', $orderBy, $vars, $lang->article->status);
+            echo '</th>';
+        }
+        ?>
         <?php $actionClass = $type == 'page' ? 'w-220px' : 'w-260px';?>
         <th class="text-center <?php echo $actionClass;?>"><?php echo $lang->actions;?></th>
       </tr>
@@ -57,19 +66,27 @@
         <td>
           <?php echo $article->title;?>
           <?php if($article->sticky):?><span class='label label-danger'><?php echo $lang->article->stick;?></span><?php endif;?>
-          <?php if($article->status == 'draft' and $article->contribution == 0) echo '<span class="label label-xsm label-warning">' . $lang->article->statusList[$article->status] .'</span>';
-                elseif($article->contribution != 0) echo $lang->article->contributionStatus->status[$article->contribution];?>
+          <?php if($article->status == 'draft') echo '<span class="label label-xsm label-warning">' . $lang->article->statusList[$article->status] .'</span>';?>
         </td>
         <?php if($type != 'page'):?>
         <td class='text-center'><?php foreach($article->categories as $category) echo $category->name . ' ';?></td>
         <?php endif;?>
         <td class='text-center'><?php echo $article->addedDate;?></td>
         <td class='text-center'><?php echo $article->views;?></td>
+        <?php
+        if($this->config->article->contribution == 'open' and $contribution == 'true')
+        {
+            echo "<td class='text-center'>" . $lang->article->contributionStatus->status[$article->contribution] . '</td>';
+        }
+        ?>
         <td class='text-center'>
-          <?php if($article->contribution != 0):?>
+          <?php echo html::a($this->article->createPreviewLink($article->id), $lang->preview, "target='_blank'");?>
+          <?php if($this->config->article->contribution == 'open' and $article->contribution != 0):?>
           <?php
-          if($article->contribution != 2) commonmodel::printlink('article', 'approve', "articleID=$article->id&type=$article->type", $lang->article->publish, "class='jsoner'"); 
+          if($article->contribution != 2) commonmodel::printlink('article', 'approve', "articleid=$article->id&type=$article->type", $lang->article->publish, "class='jsoner'"); 
+          else echo html::a('', $lang->article->publish, "class='disabled'");
           if($article->contribution != 3) commonmodel::printlink('article', 'reject', "articleID=$article->id&type=$article->type", $lang->article->reject, "class='jsoner'"); 
+          else echo html::a('', $lang->article->reject, "class='disabled'");
           ?>
           <?php endif;?>
           <?php
@@ -79,7 +96,6 @@
               commonModel::printLink('file', 'browse', "objectType=$article->type&objectID=$article->id&isImage=1", $lang->article->images, "data-toggle='modal'");
               commonModel::printLink('file', 'browse', "objectType=$article->type&objectID=$article->id&isImage=0", $lang->article->files, "data-toggle='modal'");
           }
-          echo html::a($this->article->createPreviewLink($article->id), $lang->preview, "target='_blank'");
           ?>
           <?php if($type != 'page'):?>
           <span class='dropdown'>

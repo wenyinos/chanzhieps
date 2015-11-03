@@ -83,7 +83,7 @@ class articleModel extends model
      * @access public
      * @return array
      */
-    public function getList($type, $categories, $orderBy, $pager = null)
+    public function getList($type, $categories, $orderBy, $pager = null, $contribution = 'false')
     {
         $searchWord = $this->get->searchWord;
         $categoryID = $this->get->categoryID;
@@ -127,6 +127,14 @@ class articleModel extends model
                 ->andWhere('status')->eq('normal')
                 ->fi()
                 ->beginIf(!empty($categories))->andWhere('id')->in(array_keys($articleIdList))->fi()
+
+                ->beginIf($contribution == 'true')
+                ->andWhere('contribution')->ne(0)
+                ->fi()
+
+                ->beginIf($contribution == 'false')
+                ->andWhere('contribution')->eq(0)
+                ->fi()
 
                 ->beginIf($searchWord)
                 ->andWhere('title', true)->like("%{$searchWord}%")

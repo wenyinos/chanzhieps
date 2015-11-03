@@ -1,5 +1,9 @@
 $(document).ready(function()
 {
+    /* Set active menu. */
+    $('.leftmenu li.active').removeClass('active');
+    $(".leftmenu a[href*='contribution=" + v.contribution + "']").parent().addClass('active');
+
     /* Set the orginal and copySite, copyURL fields. */
     $('#source').change(function()
     {
