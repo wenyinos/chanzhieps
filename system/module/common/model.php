@@ -514,7 +514,7 @@ class commonModel extends model
         }
         else
         {
-            foreach($langs as $lang) echo html::a(getHomeRoot($config->langsShortcuts[$lang]) . ($lang =='zh-cn' ? '' : '/'), $config->langAbbrLabels[$lang]);
+            foreach($langs as $lang) echo html::a(getHomeRoot($config->langsShortcuts[$lang]), $config->langAbbrLabels[$lang]);
         }
     }
 
@@ -906,7 +906,7 @@ class commonModel extends model
 
         $requestType = $config->requestType;
         $config->requestType = $config->frontRequestType;
-        $link = helper::createLink($module, $method, $vars, $alias);
+        $link = helper::createLink($module, $method, $vars, $alias, '',  $front = true);
         $link = str_replace($_SERVER['SCRIPT_NAME'], $config->webRoot . 'index.php', $link);
         $config->requestType = $requestType;
 

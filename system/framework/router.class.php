@@ -773,8 +773,8 @@ class router
             else
             {
                 $flipedLangs = array_flip($this->config->langsShortcuts);
-                if($this->config->requestType == 'GET' and isset($_GET[$this->config->langVar])) $this->clientLang = $flipedLangs[$_GET[$this->config->langVar]];
-                if($this->config->requestType == 'PATH_INFO')
+                if(RUN_MODE != 'front' and isset($_GET[$this->config->langVar])) $this->clientLang = $flipedLangs[$_GET[$this->config->langVar]];
+                if(RUN_MODE == 'front')
                 {
                     $pathInfo = $this->getPathInfo('PATH_INFO');
                     foreach($this->config->langsShortcuts as $language => $code)
@@ -871,7 +871,7 @@ class router
      */
     public function parseRequest()
     {
-        if($this->config->requestType == 'PATH_INFO')
+        if(RUN_MODE == 'front')
         {
             $this->parsePathInfo();
 
@@ -1255,11 +1255,11 @@ class router
         }
 
         /* Set params according PATH_INFO or GET. */
-        if($this->config->requestType == 'PATH_INFO')
+        if(RUN_MODE == 'front')
         {   
             $this->setParamsByPathInfo($defaultParams);
         }
-        elseif($this->config->requestType == 'GET')
+        else
         {
             $this->setParamsByGET($defaultParams);
         }
