@@ -50,7 +50,7 @@ $lang->article->reject  = '驳回';
 $lang->article->contributionStatus = new stdclass;
 $lang->article->contributionStatus->status[1] = '<span class="label label-xsm label-primary">' . '待审核' .'</span>';
 $lang->article->contributionStatus->status[2] = '<span class="label label-xsm label-success">' . '通过' . '</span>';
-$lang->article->contributionStatus->status[3] = '<span class="label label-xsm label-warning">' . '驳回' . '</span>';
+$lang->article->contributionStatus->status[3] = '驳回';
 
 $lang->article->list          = '文章列表';
 $lang->article->admin         = '维护文章';

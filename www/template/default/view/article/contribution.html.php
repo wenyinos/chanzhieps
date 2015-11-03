@@ -11,14 +11,13 @@
           <thead>
             <tr>
               <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
-              <th class='text-center w-60px'><?php commonModel::printOrderLink('id', $orderBy, $vars, $lang->article->id);?></th>
-              <th class='text-center'><?php commonModel::printOrderLink('title', $orderBy, $vars, $lang->article->title);?></th>
-              <th class='text-center w-200px'><?php commonModel::printOrderLink('category', $orderBy, $vars, $lang->article->category);?></th>
-              <th class='text-center w-160px'><?php commonModel::printOrderLink('editedDate', $orderBy, $vars, $lang->article->submissionTime);?></th>
-              <th class='text-center w-160px'><?php commonModel::printOrderLink('contribution', $orderBy, $vars, $lang->article->status);?></th>
-              <th class='text-center w-70px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->article->views);?></th>
-              <?php $actionClass = 'w-260px';?>
-              <th class="text-center <?php echo $actionClass;?>"><?php echo $lang->actions;?></th>
+              <th class='text-center w-60px'><?php echo $lang->article->id;?></th>
+              <th class='text-center'><?php echo $lang->article->title;?></th>
+              <th class='text-center w-200px'><?php echo $lang->article->category;?></th>
+              <th class='text-center w-160px'><?php echo $lang->article->submissionTime;?></th>
+              <th class='text-center w-160px'><?php echo $lang->article->status;?></th>
+              <th class='text-center w-70px'><?php echo $lang->article->views;?></th>
+              <th class="text-center w-260px"><?php echo $lang->actions;?></th>
             </tr>
           </thead>
           <tbody>
@@ -40,6 +39,7 @@
                         commonModel::printLink('article', 'edit', "articleID=$article->id&type=$article->type", $lang->edit);
                         commonModel::printLink('article', 'delete', "articleID=$article->id", $lang->delete, 'class="deleter"');
                     }
+                    else echo html::a('', $lang->edit, "class='disabled'") . html::a('', $lang->delete, "class='disabled'");
                 ?>
               </td>
             </tr>

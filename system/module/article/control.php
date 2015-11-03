@@ -84,7 +84,7 @@ class article extends control
      * @access public
      * @return void
      */
-    public function admin($type = 'article', $categoryID = 0, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function admin($type = 'article', $categoryID = 0, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1, $contribution = 'false')
     {   
         $this->lang->article->menu = $this->lang->$type->menu;
         $this->lang->menuGroups->article = $type;
@@ -93,8 +93,8 @@ class article extends control
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $families = $categoryID ? $this->loadModel('tree')->getFamily($categoryID, $type) : '';
-        $sticks   = $this->article->getSticks($families, $type);
-        $articles = $this->article->getList($type, $families, $orderBy, $pager);
+        $sticks   = $contribution==false ? $this->article->getSticks($families, $type) : array();
+        $articles = $this->article->getList($type, $families, $orderBy, $pager, $contribution);
         $articles = $sticks + $articles;
 
         if($type != 'page') 
@@ -107,6 +107,7 @@ class article extends control
 
         $this->view->title      = $this->lang->$type->admin;
         $this->view->type       = $type;
+        $this->view->contribution = $contribution;
         $this->view->categoryID = $categoryID;
         $this->view->articles   = $articles;
         $this->view->pager      = $pager;
@@ -417,7 +418,13 @@ class article extends control
         $pager = new pager($recTotal, $recPerPage, $pageID);
         $type  = $this->config->site->type == 'portal' ? 'article' : 'blog';
 
-        $articles = $this->dao->select('*')->from(TABLE_ARTICLE)->where('contribution')->ne(0)->andWhere('type')->eq($type)->andWhere('addedBy')->eq($this->app->user->account)->orderBy('id_desc')->page($pager)->fetchall(); 
+        $articles = $this->dao->select('*')->from(TABLE_ARTICLE)
+            ->where('contribution')->ne(0)
+            ->andWhere('type')->eq($type)
+            ->andWhere('addedBy')->eq($this->app->user->account)
+            ->orderBy('id_desc')
+            ->page($pager)
+            ->fetchall('id'); 
         
         $this->view->title      = $this->lang->article->contribution;
         $this->view->type       = $type;
