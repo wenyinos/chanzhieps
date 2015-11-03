@@ -31,7 +31,7 @@ foreach (explode('|', $lang->colorPlates) as $value)
         <div class='col-md-11 col-sm-10'>
           <?php if($canManage):?>
           <div class='input-group'>
-            <?php echo html::input('title', '', "class='form-control'");?>
+            <?php echo html::input($titleInput, '', "class='form-control'");?>
             <div class='input-group-addon colorplate clearfix'>
               <div class='input-group color active' data=''>
                 <label class='input-group-addon'><?php echo $lang->color;?></label>
@@ -58,14 +58,14 @@ foreach (explode('|', $lang->colorPlates) as $value)
             </span>
           </div>
           <?php else:?>
-          <?php echo html::input('title', '', "class='form-control'");?>
+          <?php echo html::input($titleInput, '', "class='form-control'");?>
           <?php endif;?>
         </div>
       </div>
       <div class='threadInfo'>
         <div class='form-group'>
           <label class='col-md-1 col-sm-2 control-label'><?php echo $lang->thread->content;?></label>
-          <div class='col-md-11 col-sm-10'><?php echo html::textarea('content', '', "rows='15' class='form-control'");?></div>
+          <div class='col-md-11 col-sm-10'><?php echo html::textarea($contentInput, '', "rows='15' class='form-control'");?></div>
         </div>
         <?php if($this->loadModel('file')->canUpload()):?>
         <div class='form-group'>

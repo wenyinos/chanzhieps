@@ -56,18 +56,19 @@
         <td class='text-left'><?php if($thread->replies) echo substr($thread->repliedDate, 5, -3) . ' ' . $thread->repliedByRealname;?></td>
         <?php if($this->config->forum->postReview == 'open'):?>
         <td>
-          <span class="<?php echo $thread->status == 'approved' ? 'text-success' : ''?>">
+          <span class="<?php echo $thread->status == 'approved' ? 'text-success' : 'text-warning'?>">
             <?php echo zget($lang->thread->statusList, $thread->status);?>
           </span>
         </td>
         <?php endif;?>
-        <td><?php echo $thread->hidden ? '<span class="text-warning"><i class="icon-eye-close"></i> ' . $lang->thread->displayList['hidden'] .'</span>' : '<span class="text-success"><i class="icon-ok-sign"></i> ' . $lang->thread->displayList['normal'] . '</span>';?></td>
+        <td><?php if($thread->status != 'wait')echo $thread->hidden ? '<span class="text-warning"><i class="icon-eye-close"></i> ' . $lang->thread->displayList['hidden'] .'</span>' : '<span class="text-success"><i class="icon-ok-sign"></i> ' . $lang->thread->displayList['normal'] . '</span>';?></td>
         <td>
           <?php
-          if($this->config->forum->postReview == 'open')
+          if($this->config->forum->postReview == 'open' and $thread->status == 'wait')
           {
               commonmodel::printlink('thread', 'approve', "threadid=$thread->id&boardid=$thread->board", $lang->thread->approve, "class='reload'");
           }
+          else commonmodel::printlink('', '', "", $lang->thread->approve, "class='disabled'");
           $text = $thread->hidden ? $lang->thread->show : $lang->thread->hide;
           commonModel::printLink('thread', 'switchStatus', "threadID=$thread->id", $text, "class='reload'");
           if($thread->status != 'wait')
