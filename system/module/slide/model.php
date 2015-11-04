@@ -23,12 +23,8 @@ class slideModel extends model
     public function getByID($id)
     {
         $slide = $this->dao->select('*')->from(TABLE_SLIDE)->where('id')->eq($id)->fetch();
-
-        $slide->label        = json_decode($slide->label);
-        $slide->buttonClass  = json_decode($slide->buttonClass);
-        $slide->buttonUrl    = json_decode($slide->buttonUrl);
-        $slide->buttonTarget = json_decode($slide->buttonTarget);
-
+        if(!$slide) return false;
+        $this->process($slide);
         return $slide;
     }
 
@@ -48,15 +44,9 @@ class slideModel extends model
         }
 
         $slides = $this->dao->select('*')->from(TABLE_SLIDE)->where('`group`')->eq($groupID)->orderBy('`order`')->fetchAll('id');
+        if(empty($slides)) return array();
 
-        foreach($slides as $slide)
-        {
-            $slide->label        = json_decode($slide->label);
-            $slide->buttonClass  = json_decode($slide->buttonClass);
-            $slide->buttonUrl    = json_decode($slide->buttonUrl);
-            $slide->buttonTarget = json_decode($slide->buttonTarget);
-        }
-        
+        foreach($slides as $slide) $this->process($slide);
         return $slides;
     }
 
@@ -277,6 +267,25 @@ class slideModel extends model
       */
     public function getFirstSlide($groupID) 
     {
-        return $this->dao->select('*')->from(TABLE_SLIDE)->where('`group`')->eq($groupID)->orderBy('id')->limit(1)->fetch(); 
+        $slide = $this->dao->select('*')->from(TABLE_SLIDE)->where('`group`')->eq($groupID)->orderBy('id')->limit(1)->fetch(); 
+        if(!$slide) return false;
+        $this->process($slide);
+        return $slide;
+    }
+
+    /**
+     * Process slide.
+     * 
+     * @param  object    $slide 
+     * @access public
+     * @return void
+     */
+    public function process($slide)
+    {
+        $slide->label        = json_decode($slide->label);
+        $slide->buttonClass  = json_decode($slide->buttonClass);
+        $slide->buttonUrl    = json_decode($slide->buttonUrl);
+        $slide->buttonTarget = json_decode($slide->buttonTarget);
+        if($slide->backgroundType == 'image') $slide->image = rtrim($this->app->getWebRoot(), '/') . $slide->image;
     }
 }

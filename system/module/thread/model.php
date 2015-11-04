@@ -181,7 +181,13 @@ class threadModel extends model
         $canManage   = $this->canManage($boardID);
         $allowedTags = $this->app->user->admin == 'super' ? $this->config->allowedTags->admin : $this->config->allowedTags->front;
 
+        $titleInput   = $this->session->titleInput;
+        $contentInput = $this->session->contentInput;
+        
         $thread = fixer::input('post')
+            ->remove("$titleInput, $contentInput, files, labels, views, replies, hidden, stick")
+            ->setForce('title', $this->post->$titleInput)
+            ->setForce('content', $this->post->$contentInput)
             ->stripTags('content,link', $allowedTags)
             ->setIF(!$canManage, 'readonly', 0)
             ->setIF(!$this->post->isLink, 'link', '')
@@ -191,7 +197,6 @@ class threadModel extends model
             ->setForce('addedDate', $now) 
             ->setForce('editedDate', $now) 
             ->setForce('repliedDate', $now)
-            ->remove('files, labels, views, replies, hidden, stick')
             ->get();
 
         if($this->loadModel('guarder')->matchList($thread))  return array('result' => 'fail', 'reason' => 'error', 'message' => $this->lang->error->sensitive);

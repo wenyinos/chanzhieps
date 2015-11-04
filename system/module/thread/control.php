@@ -61,11 +61,20 @@ class thread extends control
             $this->send($result);
         }
 
-        $this->view->title      = $board->name . $this->lang->minus . $this->lang->thread->post;
-        $this->view->board      = $board;
-        $this->view->canManage  = $this->thread->canManage($boardID);
-        $this->view->mobileURL  = helper::createLink('thread', 'post', "boardID=$boardID", '', 'mhtml');
-        $this->view->desktopURL = helper::createLink('thread', 'post', "boardID=$boardID", '', 'html');
+        $titleInput   = 'title' . mt_rand(); 
+        $contentInput = 'content' . mt_rand(); 
+        $this->session->set('titleInput', $titleInput);
+        $this->session->set('contentInput', $contentInput);
+        $this->config->thread->require->post = "{$this->session->titleInput}, {$this->session->contentInput}";
+
+        $this->view->title        = $board->name . $this->lang->minus . $this->lang->thread->post;
+        $this->view->board        = $board;
+        $this->view->canManage    = $this->thread->canManage($boardID);
+        $this->view->titleInput   = $titleInput;
+        $this->view->contentInput = $contentInput;
+        $this->view->board        = $board;
+        $this->view->mobileURL    = helper::createLink('thread', 'post', "boardID=$boardID", '', 'mhtml');
+        $this->view->desktopURL   = helper::createLink('thread', 'post', "boardID=$boardID", '', 'html');
 
         $this->display();
     }
