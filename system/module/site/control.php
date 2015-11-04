@@ -164,7 +164,7 @@ class site extends control
                 ->get();
 
             /* check IP. */
-            $ips = empty($_POST['allowedIP']) ? array() : explode(',', $this->post->allowedIP);
+            $ips = !$this->post->allowedIP ? array() : explode(',', $this->post->allowedIP);
             foreach($ips as $ip)
             {
                 if(!empty($ip) and !helper::checkIP($ip))

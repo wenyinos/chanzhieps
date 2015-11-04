@@ -112,7 +112,7 @@ class ui extends control
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             $setNameResult = false;
-            if(!empty($_POST['name'])) $setNameResult = $this->loadModel('setting')->setItem('system.common.site.name', $_POST['name']);
+            if(!empty($_POST['name'])) $setNameResult = $this->loadModel('setting')->setItem('system.common.site.name', $this->post->name);
 
             $return = $this->ui->setOptionWithFile($section = 'logo', $htmlTagName = 'logo');
 
