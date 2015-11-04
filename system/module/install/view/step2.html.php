@@ -57,7 +57,7 @@
         </table>
       </div>
       <div class='modal-footer'>
-        <?php echo html::hidden('requestType','GET');?>
+        <?php echo html::hidden('requestType','PATH_INFO2');?>
         <?php echo html::submitButton();?>
       </div>
     </form>

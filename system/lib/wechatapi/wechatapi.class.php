@@ -203,7 +203,7 @@ class wechatapi
         $this->message = new stdclass();
         if(isset($GLOBALS["HTTP_RAW_POST_DATA"]))
         {
-            $this->rawData = $GLOBALS["HTTP_RAW_POST_DATA"];
+            $this->rawData = str_replace('&', '&amp;', $GLOBALS["HTTP_RAW_POST_DATA"]);
             $message = new simpleXMLElement($this->rawData);
             foreach($message as $key => $value)
             {

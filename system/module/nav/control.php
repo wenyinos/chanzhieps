@@ -30,7 +30,7 @@ class nav extends control
 
         if($_POST)
         {
-            $navs = $_POST['nav'];
+            $navs = $this->post->nav;
             foreach($navs as $key => $nav)
             {
                 $navs[$key] = $this->nav->organizeNav($nav);

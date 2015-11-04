@@ -62,14 +62,13 @@ class helper
      * @access public
      * @return string the link string.
      */
-    static public function createLink($moduleName, $methodName = 'index', $vars = '', $alias = array(), $viewType = '', $front = false)
+    static public function createLink($moduleName, $methodName = 'index', $vars = '', $alias = array(), $viewType = '')
     {
         global $app, $config;
 
         $clientLang = $app->getClientLang();
         $lang       = $config->langCode;
 
-        if(RUN_MODE == 'front') $front = true;
         /* Set viewType is mhtml if visit with mobile.*/
         if(!$viewType and RUN_MODE == 'front' and helper::getDevice() == 'mobile' and $methodName != 'oauthCallback') $viewType = 'mhtml';
 
@@ -79,30 +78,32 @@ class helper
         foreach($alias as $key => $value) $alias[$key] = urlencode($value);
 
         /* Seo modules return directly. */
-        if(helper::inSeoMode() and $front and method_exists('uri', 'create' . $moduleName . $methodName))
+        if(helper::inSeoMode() and method_exists('uri', 'create' . $moduleName . $methodName))
         {
             $link = call_user_func_array('uri::create' . $moduleName . $methodName, array('param'=> $vars, 'alias'=>$alias, 'viewType'=>$viewType));
-            $scriptName = $config->requestType == 'GET' ? 'index.php' : '';
+
+            $scriptName = $config->requestType == 'PATH_INFO2' ? $_SERVER['SCRIPT_NAME'] : '';
             /* Add client lang. */
-            if($lang and $link and strpos($link, $config->webRoot) === 0)
+            if($lang and $link)
             {
-                $link = $config->webRoot . $scriptName . '/' .  $lang . '/' . substr($link, strlen($config->webRoot));
+                $link = $config->webRoot . $scriptName .  $lang . '/' . substr($link, strlen($config->webRoot));
             }
             else
             {
-                $link = $config->webRoot . $scriptName . $link;
+                $link = $scriptName . $link;
             }
             if($link) return $link;
         }
         
         /* Set the view type. */
         if(empty($viewType)) $viewType = $app->getViewType();
-        $link = $config->requestType == 'PATH_INFO' ? $config->webRoot : $_SERVER['SCRIPT_NAME'];
-        if($config->requestType == 'GET' and $front) $link .= "/";
-        if($front and $lang) $link .= "$lang/";
+        if($config->requestType == 'PATH_INFO')  $link = $config->webRoot;
+        if($config->requestType == 'PATH_INFO2') $link = $_SERVER['SCRIPT_NAME'] . '/';
+        if($config->requestType == 'GET') $link = $_SERVER['SCRIPT_NAME'];
+        if($config->requestType != 'GET' and $lang) $link .= "$lang/";
 
-        /* Common front method. */
-        if($front)
+        /* Common method. */
+        if(helper::inSeoMode())
         {
             /* If the method equal the default method defined in the config file and the vars is empty, convert the link. */
             if($methodName == $config->default->method and empty($vars))
@@ -127,7 +128,6 @@ class helper
                 foreach($vars as $value) $link .= "{$config->requestFix}$value";
                 $link .= '.' . $viewType;
             }
-            if($config->requestType == 'GET') $link = str_replace($_SERVER['SCRIPT_NAME'], $config->webRoot . 'index.php', $link);
         }
         else
         {
@@ -136,7 +136,6 @@ class helper
             foreach($vars as $key => $value) $link .= "&$key=$value";
             if($lang and RUN_MODE != 'admin') $link .= "&l=$lang";
         }
-
         return $link;
     }
 
@@ -481,7 +480,7 @@ class helper
     public static function inSeoMode()
     {
         global $config;
-        return $config->seoMode;
+        return ($config->seoMode and ($config->requestType != 'GET'));
     }
 
     /**
@@ -899,8 +898,8 @@ function getHomeRoot($langCode = '')
     if($langCode == $config->langsShortcuts[$defaultLang]) return $config->webRoot;
     $homeRoot = $config->webRoot;
 
-    if($langCode and $config->requestType == 'PATH_INFO') $homeRoot = $config->webRoot . $langCode; 
-    if($langCode and $config->requestType == 'GET')       $homeRoot = $config->webRoot . 'index.php/' . "$langCode";
+    if($langCode and $config->requestType != 'GET') $homeRoot = $config->webRoot . $langCode; 
+    if($langCode and $config->requestType == 'GET') $homeRoot = $config->webRoot . 'index.php/' . "$langCode";
     return rtrim($homeRoot, '/') . '/';
 
 }
