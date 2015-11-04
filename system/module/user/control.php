@@ -587,6 +587,7 @@ class user extends control
                 $this->loadModel('mail')->send($account, $this->lang->user->resetMail->subject, $mailContent); 
                 if($this->mail->isError()) 
                 {
+                    $this->loadModel('guarder')->logOperation('ip', 'resetPWDFailure');
                     $this->send(array('result' => 'fail', 'message' => $this->mail->getError()));
                 }
                 else
@@ -598,6 +599,7 @@ class user extends control
             }
             else
             {
+                $this->loadModel('guarder')->logOperation('ip', 'resetPWDFailure');
                 $this->send(array('result' => 'fail', 'message' => $this->lang->user->resetPassword->failed));
             }
         }
