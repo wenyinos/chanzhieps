@@ -31,7 +31,7 @@ class messageModel extends model
      * @access public
      * @return array
      */
-    public function getByAccount($account, $pager)
+    public function getByAccount($account, $pager = null)
     {
         return $this->dao->select('*')->from(TABLE_MESSAGE)
             ->where('`to`')->eq($account)

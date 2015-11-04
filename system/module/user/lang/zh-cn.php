@@ -52,7 +52,6 @@ $lang->user->changePassword  = "更改密码";
 $lang->user->recoverPassword = "忘记密码";
 $lang->user->newPassword     = "新密码";
 $lang->user->update          = "编辑用户";
-$lang->user->delete          = "删除用户";
 $lang->user->browse          = "浏览用户";
 $lang->user->deny            = "访问受限";
 $lang->user->confirmDelete   = "您确认删除该用户吗？";
@@ -85,6 +84,16 @@ $lang->user->thread       = '我的主题';
 $lang->user->messages     = '我的消息';
 $lang->user->reply        = '我的回贴';
 $lang->user->contribution = '我的投稿';
+
+$lang->user->delete = new stdclass;
+$lang->user->delete->common       = "删除用户";
+$lang->user->delete->thread       = "删除发帖";
+$lang->user->delete->reply        = "删除回帖";
+$lang->user->delete->comment      = "删除评论";
+$lang->user->delete->message      = "删除留言";
+$lang->user->delete->order        = "删除订单";
+$lang->user->delete->address      = "删除地址";
+$lang->user->delete->contribution = "删除投稿";
 
 $lang->user->message = new stdclass();
 $lang->user->message->mine = "我的消息 <span class='label label-badge text-latin'>%s</span>";

@@ -1,5 +1,4 @@
 <?php include '../../common/view/header.modal.html.php';?>
-<?php include '../../common/view/datepick.html.php';?>
 <form method='post' action='<?php echo $this->inLink('addblacklist');?>' id='ajaxForm' class='form'>
 <table class='table table-form borderless'>
   <tbody class='addBlacklist'>

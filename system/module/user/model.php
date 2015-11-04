@@ -1143,4 +1143,134 @@ class userModel extends model
 
         return !dao::isError();
     }
+    
+    /**
+     * Get user history by user account. 
+     * 
+     * @param  int    $account 
+     * @access public
+     * @return array 
+     */
+    public function getUserHistory($account)
+    {
+        $user = new stdclass;
+        $user->threads       = $this->getThreads($account);
+        $user->replies       = $this->getReplies($account);
+        $user->comments      = $this->getMessages($account, 'comment');
+        $user->messages      = $this->getMessages($account, 'message');
+        $user->orders        = $this->getOrders($account);
+        $user->addresses     = $this->getAddresses($account);
+        $user->contributions = $this->getContributions($account);
+
+        return $user;
+    }
+
+    /**
+     * Get threads by user account. 
+     * 
+     * @param  int    $account 
+     * @param  int    $type 
+     * @access public
+     * @return array 
+     */
+    public function getThreads($account)
+    {
+        $threads = $this->dao->select('id, title')->setAutoLang(false)->from(TABLE_THREAD)
+            ->where('author')->eq($account)
+            ->fetchAll();
+        
+        if(dao::isError()) return dao::getError();
+        return $threads;
+    }
+
+    /**
+     * Get replies by user account. 
+     * 
+     * @param  int    $account 
+     * @access public
+     * @return array 
+     */
+    public function getReplies($account)
+    {
+        $replies = $this->dao->select('content')->setAutoLang(false)->from(TABLE_REPLY)
+            ->where('author')->eq($account)
+            ->fetchAll();
+        
+        if(dao::isError()) return dao::getError();
+        return $replies;
+    }
+
+    /**
+     * Get messages or comments by user account. 
+     * 
+     * @param  int    $account 
+     * @param  int    $type 
+     * @access public
+     * @return array 
+     */
+    public function getMessages($account, $type)
+    {
+        $messages = $this->dao->select('content')->setAutoLang(false)->from(TABLE_MESSAGE)
+            ->where('type')->eq($type)
+            ->andWhere('account', true)->eq($account)
+            ->orWhere('`to`')->eq($account)
+            ->markRight(1)
+            ->fetchAll();
+
+        if(dao::isError()) return dao::getError();
+        return $messages;
+    }
+    
+    /**
+     * Get orders by user account. 
+     * 
+     * @param  int    $account 
+     * @access public
+     * @return array 
+     */
+    public function getOrders($account)
+    {
+        $orders = $this->dao->select('id')->setAutoLang(false)->from(TABLE_ORDER)
+            ->where('account')->eq($account)
+            ->fetchAll('id');
+
+        $products = $this->dao->select('orderID, productID, productName')->from(TABLE_ORDER_PRODUCT)->where('orderID')->in(array_keys($orders))->fetchGroup('orderID');
+        
+        if(dao::isError()) return dao::getError();
+        return $products;
+    }
+
+    /**
+     * Get addresses by user account. 
+     * 
+     * @param  int    $account 
+     * @access public
+     * @return array 
+     */
+    public function getAddresses($account)
+    {
+        $addresses = $this->dao->select('address')->setAutoLang(false)->from(TABLE_ADDRESS)
+            ->where('account')->eq($account)
+            ->fetchAll();
+        
+        if(dao::isError()) return dao::getError();
+        return $addresses;
+    }
+
+    /**
+     * Get contributions by user account. 
+     * 
+     * @param  int    $account 
+     * @access public
+     * @return array 
+     */
+    public function getContributions($account)
+    {
+        $contributions = $this->dao->select('id, title')->setAutoLang(false)->from(TABLE_ARTICLE)
+            ->where('addedBy')->eq($account)
+            ->fetchAll();
+        
+        if(dao::isError()) return dao::getError();
+        return $contributions;
+    }
 }
