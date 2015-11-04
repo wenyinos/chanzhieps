@@ -238,6 +238,7 @@ EOT;
             if($type == 'ip')      $identity = $this->server->remote_addr;
             if($type == 'account') $identity = $this->app->user->account;
         }
+        if($identity == 'guest') return true;
 
         $whitelist = $this->config->guarder->whitelist->$type;
         if(strpos(",$whitelist,", ",$identity,") !== false) return true;
