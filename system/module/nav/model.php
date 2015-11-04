@@ -247,7 +247,11 @@ class navModel extends model
     {
         global $config;
 
-        if($nav->type == 'system') return $config->nav->system->{$nav->system};   
+        if($nav->type == 'system')
+        {
+            list($module, $method) = explode('|', $config->nav->system->{$nav->system});
+            return helper::createLink($module, $method);
+        }
 
         if($nav->type == 'article')
         {   
