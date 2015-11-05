@@ -32,6 +32,7 @@ class seo
         $methodAlias   = $config->seo->alias->method;
         $params = array();
 
+        if(strpos($uri, '_') !== false) $uri = substr($uri, 0, strpos($uri, '_'));
         /* Is there a pageID variable in the url?  */
         $pageID = 0;
         if(preg_match('/\/p\d+$/', $uri, $matches))
