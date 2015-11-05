@@ -59,6 +59,16 @@ $lang->guarder->operationList->commentFail     = '评论被禁';
 $lang->guarder->operationList->error404        = '404次数';
 $lang->guarder->operationList->captchaFail     = '验证码错误';
 
+$lang->guarder->punishOptions = array();
+$lang->guarder->punishOptions[1]    = '一小时'; 
+$lang->guarder->punishOptions[3]    = '三小时'; 
+$lang->guarder->punishOptions[12]   = '12小时'; 
+$lang->guarder->punishOptions[24]   = '24小时'; 
+$lang->guarder->punishOptions[168]  = '一周'; 
+$lang->guarder->punishOptions[720]  = '一个月'; 
+$lang->guarder->punishOptions[2160] = '三个月'; 
+$lang->guarder->punishOptions[0]    = '永久'; 
+
 $lang->blacklist = new stdclass();
 $lang->blacklist->type        = '类型';
 $lang->blacklist->identity    = '值';
