@@ -91,6 +91,7 @@ js::set('admin', $this->get->admin);
           </ul>
         </span>
         <?php endif;?>
+        <?php commonModel::printLink('user', 'delete', "account=$user->account", $lang->delete); ?>
         <?php if($user->locked > helper::now()) commonModel::printLink('user', 'activate', "id=$user->id", $lang->user->activate, "class='forbider'");?>
       </td>
     </tr>

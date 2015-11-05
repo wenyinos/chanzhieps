@@ -406,15 +406,31 @@ class user extends control
     /**
      * Delete a user.
      * 
-     * @param mixed $userID 
-     * @param string $confirm 
+     * @param  int    $account 
      * @access public
      * @return void
      */
     public function delete($account)
     {
-        if($this->user->delete($account)) $this->send(array('result' => 'success'));
-        $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        /* Change menu when browse all admin user. */
+        if($this->get->admin == 1)
+        {
+            $this->lang->user->menu = $this->lang->security->menu;
+            $this->lang->menuGroups->user = 'security';
+        }
+
+        if($_POST)
+        {
+            if($this->user->delete($account)) $this->send(array('result' => 'success'));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+
+        $userHistory = $this->user->getUserHistory($account); 
+
+        $this->view->title       = $this->lang->user->delete->common;
+        $this->view->account     = $account;
+        $this->view->userHistory = $userHistory;
+        $this->display();
     }
 
     /**
