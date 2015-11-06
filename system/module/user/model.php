@@ -672,10 +672,60 @@ class userModel extends model
      */
     public function delete($account, $id = null) 
     {
-        $user = $this->getByAccount($account);
-        if(!$user) return false;
-
         $this->dao->setAutolang(false)->delete()->from(TABLE_USER)->where('account')->eq($account)->exec();
+
+        return !dao::isError();
+    }
+
+    /**
+     * Delete user history. 
+     * 
+     * @param  int    $account 
+     * @access public
+     * @return void
+     */
+    public function deleteHistory($account = null)
+    {
+        /* Delete threads, replies and index of user. */
+        $this->dao->setAutolang(false)->delete()->from(TABLE_THREAD)
+            ->where('id')->in($this->post->threads)
+            ->exec();
+
+        $this->dao->setAutolang(false)->delete()->from(TABLE_REPLY)
+            ->where('thread')->in($this->post->threads)
+            ->orWhere('id')->in($this->post->replies)
+            ->exec();
+
+        $this->dao->setAutolang(false)->delete()->from(TABLE_SEARCH_INDEX)
+            ->where('objectType')->eq('thread')
+            ->andWhere('objectID')->in($this->post->threads)
+            ->exec();
+
+        /* Delete messages and comments of user. */
+        $this->dao->setAutolang(false)->delete()->from(TABLE_MESSAGE)
+            ->where('id')->in($this->post->messages)
+            ->orWhere('id')->in($this->post->comments)
+            ->exec();
+        
+        /* Delete orders of user. */
+        $this->dao->setAutoLang(false)->delete()->from(TABLE_ORDER)->where('id')->in($this->post->orders)->exec();
+        $this->dao->setAutoLang(false)->delete()->from(TABLE_ORDER_PRODUCT)->where('orderID')->in($this->post->orders)->exec();
+
+        /* Delete contributions of user. */
+        $this->dao->setAutoLang(false)->delete()->from(TABLE_RELATION)
+            ->where('id')->in($this->post->contributions)
+            ->andWhere('type')->in('article, blog')
+            ->exec();
+        $this->dao->setAutoLang(false)->delete()->from(TABLE_ARTICLE)->where('id')->in($this->post->contributions)->exec();
+        $this->dao->setAutolang(false)->delete()->from(TABLE_SEARCH_INDEX)
+            ->where('objectType')->in('article, blog')
+            ->andWhere('objectID')->in($this->post->contributions)
+            ->exec();
+
+        /* Delete addresses of user. */
+        $this->dao->setAutolang(false)->delete()->from(TABLE_ADDRESS)
+            ->where('id')->in($this->post->addresses)
+            ->exec();
 
         return !dao::isError();
     }
@@ -1175,7 +1225,7 @@ class userModel extends model
      */
     public function getThreads($account)
     {
-        $threads = $this->dao->select('id, title')->setAutoLang(false)->from(TABLE_THREAD)
+        $threads = $this->dao->setAutoLang(false)->select('id, title')->from(TABLE_THREAD)
             ->where('author')->eq($account)
             ->fetchAll();
         
@@ -1192,7 +1242,7 @@ class userModel extends model
      */
     public function getReplies($account)
     {
-        $replies = $this->dao->select('content')->setAutoLang(false)->from(TABLE_REPLY)
+        $replies = $this->dao->setAutoLang(false)->select('id, content, thread')->from(TABLE_REPLY)
             ->where('author')->eq($account)
             ->fetchAll();
         
@@ -1210,7 +1260,7 @@ class userModel extends model
      */
     public function getMessages($account, $type)
     {
-        $messages = $this->dao->select('content')->setAutoLang(false)->from(TABLE_MESSAGE)
+        $messages = $this->dao->setAutoLang(false)->select('id, content')->from(TABLE_MESSAGE)
             ->where('type')->eq($type)
             ->andWhere('account', true)->eq($account)
             ->orWhere('`to`')->eq($account)
@@ -1230,11 +1280,13 @@ class userModel extends model
      */
     public function getOrders($account)
     {
-        $orders = $this->dao->select('id')->setAutoLang(false)->from(TABLE_ORDER)
+        $orders = $this->dao->setAutoLang(false)->select('id')->from(TABLE_ORDER)
             ->where('account')->eq($account)
             ->fetchAll('id');
 
-        $products = $this->dao->select('orderID, productID, productName')->from(TABLE_ORDER_PRODUCT)->where('orderID')->in(array_keys($orders))->fetchGroup('orderID');
+        $products = $this->dao->setAutoLang(false)->select('orderID, productID, productName')->from(TABLE_ORDER_PRODUCT)
+            ->where('orderID')->in(array_keys($orders))
+            ->fetchGroup('orderID');
         
         if(dao::isError()) return dao::getError();
         return $products;
@@ -1249,7 +1301,7 @@ class userModel extends model
      */
     public function getAddresses($account)
     {
-        $addresses = $this->dao->select('address')->setAutoLang(false)->from(TABLE_ADDRESS)
+        $addresses = $this->dao->setAutoLang(false)->select('id, address')->from(TABLE_ADDRESS)
             ->where('account')->eq($account)
             ->fetchAll();
         
@@ -1266,7 +1318,7 @@ class userModel extends model
      */
     public function getContributions($account)
     {
-        $contributions = $this->dao->select('id, title')->setAutoLang(false)->from(TABLE_ARTICLE)
+        $contributions = $this->dao->setAutoLang(false)->select('id, title')->from(TABLE_ARTICLE)
             ->where('addedBy')->eq($account)
             ->fetchAll();
         

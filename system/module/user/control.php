@@ -129,8 +129,8 @@ class user extends control
 
             if(!$this->user->login($this->post->account, $this->post->password))
             {
-                $this->loadModel('guarder')->logOperation('ip', 'loginFailure');
-                $this->loadModel('guarder')->logOperation('account', 'loginFailure', $this->post->account);
+                $this->loadModel('guarder')->logOperation('ip', 'logonFailure');
+                $this->loadModel('guarder')->logOperation('account', 'logonFailure', $this->post->account);
                 $this->send(array('result'=>'fail', 'message' => $this->lang->user->loginFailed));
             }
 
@@ -421,13 +421,19 @@ class user extends control
 
         if($_POST)
         {
-            if($this->user->delete($account)) $this->send(array('result' => 'success'));
+            $user = $this->loadModel('user')->identify($this->app->user->account, $this->post->password);
+            if(!$user) $this->send(array( 'result' => 'fail', 'message' => $this->lang->user->identifyFailed ) );
+
+            /* Delete user history. */
+            $this->user->deleteHistory();
+
+            if($this->user->delete($account)) $this->send(array('result' => 'success', 'message' =>$this->lang->deleteSuccess, 'locate' => inlink('admin')));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
 
         $userHistory = $this->user->getUserHistory($account); 
 
-        $this->view->title       = $this->lang->user->delete->common;
+        $this->view->title       = $this->lang->user->delete;
         $this->view->account     = $account;
         $this->view->userHistory = $userHistory;
         $this->display();
