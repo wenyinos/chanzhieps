@@ -270,6 +270,14 @@ class messageModel extends model
             ->setIF($admin == 'super', 'status', '1')
             ->add('ip', $this->server->REMOTE_ADDR)
             ->get();
+
+        if(strlen($message->content) > 29)
+        {
+            $repeat = $this->loadModel('guarder')->checkRepeat($message->content); 
+            if($repeat) return array('result' => 'fail', 'message' => $this->lang->error->noRepeat);
+        }
+
+
         if($this->loadModel('guarder')->matchList($message))  return array('result' => 'fail', 'reason' => 'error', 'message' => $this->lang->error->sensitive);
 
         if(isset($this->config->site->filterSensitive) and $this->config->site->filterSensitive == 'open')

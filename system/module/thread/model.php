@@ -183,7 +183,7 @@ class threadModel extends model
 
         $titleInput   = $this->session->titleInput;
         $contentInput = $this->session->contentInput;
-        
+
         $thread = fixer::input('post')
             ->remove("$titleInput, $contentInput, files, labels, views, replies, hidden, stick")
             ->setForce('title', $this->post->$titleInput)
@@ -199,6 +199,9 @@ class threadModel extends model
             ->setForce('repliedDate', $now)
             ->get();
 
+        $repeat = $this->loadModel('guarder')->checkRepeat($thread->content, $thread->title); 
+        if($repeat) return array('result' => 'fail', 'message' => $this->lang->error->noRepeat);
+        
         if($this->loadModel('guarder')->matchList($thread))  return array('result' => 'fail', 'reason' => 'error', 'message' => $this->lang->error->sensitive);
         if(isset($this->config->site->filterSensitive) and $this->config->site->filterSensitive == 'open')
         {

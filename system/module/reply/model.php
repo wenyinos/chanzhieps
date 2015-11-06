@@ -154,6 +154,12 @@ class replyModel extends model
             ->remove('recTotal, recPerPage, pageID, files, labels, hidden')
             ->get();
 
+        if(strlen($reply->content) > 40)
+        {
+            $repeat = $this->loadModel('guarder')->checkRepeat($reply->content); 
+            if($repeat) return array('result' => 'fail', 'message' => $this->lang->error->noRepeat);
+        }
+
         if($this->loadModel('guarder')->matchList($reply))  return array('result' => 'fail', 'reason' => 'error', 'message' => $this->lang->error->sensitive);
 
         if(isset($this->config->site->filterSensitive) and $this->config->site->filterSensitive == 'open')
