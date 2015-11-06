@@ -668,6 +668,7 @@ class uiModel extends model
         $yaml  = $this->app->loadClass('spyc')->dump($themeInfo);
         file_put_contents($this->exportDocPath . $this->app->getClientLang() . '.yaml', $yaml);
 
+        $this->clearSources();
         $this->exportDB($template, $theme);
         if(dao::isError()) return false;
 
@@ -795,6 +796,28 @@ class uiModel extends model
         $sqls = str_replace("data\\\/source\\\/{$template}\\\/{$theme}\\\/", "data\\\/source\\\/{$template}\\\/THEME_CODEFIX\\\/", $sqls);
 
         return file_put_contents($this->exportDbPath . 'install.sql', $sqls);
+    }
+
+    /**
+     * Clear sources not exists.
+     * 
+     * @access public
+     * @return void
+     */
+    public function clearSources()
+    {
+        $files = $this->dao->select('*')
+            ->from(TABLE_FILE)
+            ->where('objectType')->in('slide,source')
+            ->fetchAll();
+        $filesToRemove = array();
+        foreach($files as $file)
+        {
+            $realPath = $this->app->getDataRoot() . $file->pathname;
+            if(!file_exists($realPath)) $filesToRemove[] = $file->id;
+        }
+        $this->dao->delete()->from(TABLE_FILE)->where('id')->in($filesToRemove)->exec();
+        return !dao::isError();
     }
 
     /**
