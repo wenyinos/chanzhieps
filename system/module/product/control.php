@@ -256,7 +256,7 @@ class product extends control
         $this->view->mobileURL   = helper::createLink('product', 'view', "productID=$productID", "category=$category->alias&name=$product->alias", 'mhtml');
         $this->view->desktopURL  = helper::createLink('product', 'view', "productID=$productID", "category=$category->alias&name=$product->alias", 'html');
 
-        $this->dao->update(TABLE_PRODUCT)->set('views = views + 1')->where('id')->eq($productID)->exec(false);
+        $this->dao->update(TABLE_PRODUCT)->set('views = views + 1')->where('id')->eq($productID)->exec();
 
         $this->display();
     }

@@ -84,7 +84,7 @@ class book extends control
         $this->view->mobileURL   = helper::createLink('book', 'read', "articleID=$article->id", "book=$book->alias&node=$article->alias", 'mhtml');
         $this->view->desktopURL  = helper::createLink('book', 'read', "articleID=$article->id", "book=$book->alias&node=$article->alias", 'html');
 
-        $this->dao->update(TABLE_BOOK)->set('views = views + 1')->where('id')->eq($articleID)->exec(false);
+        $this->dao->update(TABLE_BOOK)->set('views = views + 1')->where('id')->eq($articleID)->exec();
 
         $this->display();
     }

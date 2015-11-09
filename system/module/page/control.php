@@ -52,7 +52,7 @@ class page extends control
         $this->view->mobileURL  = helper::createLink('page', 'view', "pageID=$pageID", "name=$page->alias", 'mhtml');
         $this->view->desktopURL = helper::createLink('page', 'view', "pageID=$pageID", "name=$page->alias", 'html');
 
-        $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($page->id)->exec(false);
+        $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($page->id)->exec();
 
         $this->display();
     }

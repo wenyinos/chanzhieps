@@ -274,7 +274,7 @@ class replyModel extends model
             ->where('t1.id')->eq($replyID)
             ->fetch();
 
-        $this->dao->delete()->from(TABLE_REPLY)->where('id')->eq($replyID)->exec(false);
+        $this->dao->delete()->from(TABLE_REPLY)->where('id')->eq($replyID)->exec();
         if(dao::isError()) return false;
 
         /* Update thread and board stats. */

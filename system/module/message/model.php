@@ -392,7 +392,7 @@ class messageModel extends model
             ->where('type')->eq($message->type)
             ->beginIF($mode == 'single')->andWhere('id')->eq($messageID)->fi()
             ->beginIF($mode == 'pre')->andWhere('id')->ge($messageID)->andWhere('status')->ne('1')->fi()
-            ->exec(false);
+            ->exec();
 
         /* Record post number. */
         $this->loadModel('guarder')->logOperation('ip', 'commentFail');
@@ -418,7 +418,7 @@ class messageModel extends model
             ->andWhere('type')->eq($message->type)
             ->beginIF($type == 'single')->andWhere('id')->eq($messageID)->fi()
             ->beginIF($type == 'pre')->andWhere('id')->ge($messageID)->fi()
-            ->exec(false);
+            ->exec();
         return !dao::isError();
     }
 

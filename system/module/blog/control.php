@@ -97,7 +97,7 @@ class blog extends control
             $this->view->sourceURL = helper::createLink('article', 'view', "articleID=$copyArticle->id&categoryID=$copyArticleCategory->id", "category=$copyArticleCategory->alias&name=$copyArticle->alias", 'html');
         }
 
-        $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($articleID)->exec(false);
+        $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($articleID)->exec();
         $this->display();
     }
 }

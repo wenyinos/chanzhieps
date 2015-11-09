@@ -282,7 +282,7 @@ class file extends control
      */
     public function allow($fileID)
     {
-        $this->dao->update(TABLE_FILE)->set('public')->eq(1)->where('id')->eq($fileID)->exec(false);
+        $this->dao->update(TABLE_FILE)->set('public')->eq(1)->where('id')->eq($fileID)->exec();
         $this->send(array( 'result' => 'success', 'message' => $this->lang->setSuccess));
     }
 
@@ -295,7 +295,7 @@ class file extends control
      */
     public function deny($fileID)
     {
-        $this->dao->update(TABLE_FILE)->set('public')->eq(0)->where('id')->eq($fileID)->exec(false);
+        $this->dao->update(TABLE_FILE)->set('public')->eq(0)->where('id')->eq($fileID)->exec();
         $this->send(array( 'result' => 'success', 'message' => $this->lang->setSuccess));
     }
 
@@ -318,7 +318,7 @@ class file extends control
                 ->where('id')->ne($fileID)
                 ->andWhere('objectType')->eq($file->objectType)
                 ->andWhere('objectID')->eq($file->objectID)
-                ->exec(false);
+                ->exec();
 
             $this->dao->update(TABLE_FILE)->set('primary')->eq(1)->where('id')->eq($fileID)->exec();
         }
