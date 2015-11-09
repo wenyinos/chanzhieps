@@ -52,7 +52,6 @@ $lang->user->changePassword  = "Change password";
 $lang->user->recoverPassword = "recover password";
 $lang->user->newPassword     = "New password";
 $lang->user->update          = "Edit user";
-$lang->user->delete          = "Delete user";
 $lang->user->browse          = "Borwse";
 $lang->user->deny            = "Access denied";
 $lang->user->confirmDelete   = "Are you sure to delete this user?";

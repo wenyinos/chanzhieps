@@ -11,9 +11,10 @@
  */
 $lang->guarder = new stdclass();
 
+$lang->guarder->action       = '操作';
+$lang->guarder->addBlacklist = '添加黑名单';
 $lang->guarder->setWhitelist = '白名单管理';
 
-$lang->guarder->common         = '';
 $lang->guarder->captcha        = '验证码';
 $lang->guarder->numbers        = array('零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖', '拾');
 $lang->guarder->operators      = array('*' => '乘', '-' => '减', '+' => '加');
@@ -27,9 +28,6 @@ $lang->guarder->blacklistModes['account']  = '帐号';
 $lang->guarder->blacklistModes['keywords'] = '关键词';
 $lang->guarder->blacklistModes['guard']    = '网址';
 $lang->guarder->blacklistModes['email']    = '邮箱地址';
-
-$lang->guarder->action       = '操作';
-$lang->guarder->addBlacklist = '添加黑名单';
 
 $lang->guarder->whitelist = new stdclass();
 $lang->guarder->whitelist->ip            = 'IP白名单';

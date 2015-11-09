@@ -42,11 +42,13 @@ $lang->site->scheme          = 'Default scheme';
 $lang->site->saveDays        = 'Save days';
 
 $lang->site->importantOption = 'Important option';
+$lang->site->resetPassword   = 'Member Reset Password';
 $lang->site->checkIP         = 'Check login IP';
 $lang->site->checkLocation   = 'Check login location';
 $lang->site->checkEmail      = 'Check Email';
 $lang->site->allowedLocation = 'Allowed location';
 $lang->site->checkSessionIP  = 'Check admin ip';
+$lang->site->forceYangcong   = 'Enforce Admin login by yangcong';
 $lang->site->setsecurity     = 'Security setting';
 $lang->site->setsensitive    = 'Set sensitive words';
 $lang->site->filterSensitive = 'Filter sensitive words';
@@ -59,15 +61,19 @@ $lang->site->closeScoreTip   = 'After disabling the integral function, CV will n
 
 $lang->site->setBasic      = "Baisc";
 $lang->site->setLang       = "Languages";
+$lang->site->setFilter     = "Filter Settings";
+$lang->site->ipFilter      = "ip Filter";
+$lang->site->accountFilter = "Account Filter";
 $lang->site->setSecurity   = "Security";
 $lang->site->setUpload     = "Upload";
 $lang->site->setRobots     = "Robots";
 $lang->site->setOauth      = "Oauth";
 $lang->site->setSinaOauth  = "Weibo Oauth";
+$lang->site->setYangcong   = "Yangcong Login";
 $lang->site->setQQOauth    = "QQ Oauth";
 $lang->site->oauthHelp     = "Help";
 $lang->site->setRecPerPage = "Record per page";
-$lang->site->useLocation   = "Use current Location";
+$lang->site->useLocation   = "Use current Location: <span>%s</span>";
 $lang->site->changeSetting = "Change settings";
 $lang->site->setStat       = "Stats Settings";
 
@@ -78,6 +84,14 @@ $lang->site->typeList->blog   = 'Blog';
 $lang->site->statusList = new stdclass();
 $lang->site->statusList->normal = 'Normal';
 $lang->site->statusList->pause  = 'Pause';
+
+$lang->site->resetPasswordList = array();
+$lang->site->resetPasswordList['open']  = 'Open';
+$lang->site->resetPasswordList['close'] = 'Close';
+
+$lang->site->forceYangcongList = array();
+$lang->site->forceYangcongList['open']  = 'Open';
+$lang->site->forceYangcongList['close'] = 'Close';
 
 $lang->site->checkIPList = array();
 $lang->site->checkIPList['open']  = 'Open';
@@ -168,3 +182,8 @@ $lang->site->customizableList->forum   = 'Thread List Number';
 $lang->site->customizableList->reply   = 'Reply List Number';
 $lang->site->customizableList->message = 'Message List Number';
 $lang->site->customizableList->comment = 'Comment List Number';
+
+$lang->site->yangcong = new stdclass();
+$lang->site->yangcong->appID = 'APP ID';
+$lang->site->yangcong->key   = 'APP KEY';
+$lang->site->yangcong->auth  = 'Auth ID';

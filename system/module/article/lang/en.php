@@ -61,7 +61,9 @@ $lang->article->edit       = 'Edit';
 $lang->article->files      = 'Files';
 $lang->article->images     = 'Images';
 
-$lang->article->contribution = 'Contribution';
+$lang->article->contribution    = 'Contribution';
+$lang->article->submissionTime  = 'Submission Time';
+
 $lang->article->contributionOptions = new stdclass;
 $lang->article->contributionOptions->open  = 'Open';
 $lang->article->contributionOptions->close = 'Close';
