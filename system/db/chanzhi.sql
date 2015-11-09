@@ -733,6 +733,32 @@ CREATE TABLE IF NOT EXISTS `eps_address` (
   KEY `account` (`account`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+-- DROP TABLE IF EXISTS `eps_blacklist`;
+CREATE TABLE IF NOT EXISTS  `eps_blacklist` (
+  `type` varchar(30) NOT NULL,
+  `identity` varchar(100) NOT NULL,
+  `reason` varchar(100) NOT NULL,
+  `expiredDate` datetime NOT NULL,
+  `times` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `lang` char(30) NOT NULL,
+  UNIQUE KEY `identity` (`type`, `identity`, `lang`),
+  KEY `expiredDate` (`expiredDate`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- DROP TABLE IF EXISTS `eps_operationlog`;
+CREATE TABLE IF NOT EXISTS  `eps_operationlog` (
+  `id` mediumint(8) NOT NULL AUTO_INCREMENT,
+  `type` varchar(30) NOT NULL,
+  `identity` varchar(100) NOT NULL,
+  `operation` varchar(200) NOT NULL,
+  `count` smallint(5) unsigned not null default 0,
+  `createdTime` datetime NOT NULL,
+  `lang` char(30) NOT NULL,
+  primary key (`id`),
+  KEY operation (`type`, `identity`, `operation`, `createdTime`),
+  KEY `lang` (`lang`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
 -- Insert data into `eps_layout`;
 INSERT INTO `eps_layout` (`page`, `region`, `blocks`, `template`,`lang`) VALUES
 ('all', 'top', '[{"id":"13","grid":"","titleless":0,"borderless":0}]', 'default','zh-cn'),
