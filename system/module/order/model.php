@@ -90,15 +90,11 @@ class orderModel extends model
             $order->address = helper::jsonEncode($address);
         }
 
-<<<<<<< HEAD
         $this->dao->insert(TABLE_ORDER)
             ->data($order, 'createAddress,deliveryAddress,phone,contact,zipcode,price,count,product')
             ->autocheck()
             ->batchCheck($this->config->order->require->create, 'notempty')
             ->exec();
-=======
-        $this->dao->insert(TABLE_ORDER)->data($order, $skip='createAddress, deliveryAddress, contact, phone, zipcode, price, count, product')->autocheck()->batchCheck($this->config->order->require->create, 'notempty')->exec();
->>>>>>> 6385488851f07a44d3d93aaaaf36f8198ecaab07
         if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
 
         $orderID = $this->dao->lastInsertID();
