@@ -90,7 +90,11 @@ class orderModel extends model
             $order->address = helper::jsonEncode($address);
         }
 
-        $this->dao->insert(TABLE_ORDER)->data($order)->autocheck()->batchCheck($this->config->order->require->create, 'notempty')->exec();
+        $this->dao->insert(TABLE_ORDER)
+            ->data($order, 'createAddress,deliveryAddress,phone,contact,zipcode,price,count,product')
+            ->autocheck()
+            ->batchCheck($this->config->order->require->create, 'notempty')
+            ->exec();
         if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
 
         $orderID = $this->dao->lastInsertID();
@@ -167,7 +171,7 @@ class orderModel extends model
      */
     public function createPayLink($order)
     {
-        if($order->payment == 'alipay') return $this->createAlipayLink($order);
+        if($order->payment == 'alipay' or $order->payment == 'alipaySecured') return $this->createAlipayLink($order, $order->payment);
         return false;
     }
 
@@ -202,14 +206,18 @@ class orderModel extends model
      * @access public
      * @return string
      */
-    public function createAlipayLink($order)
+    public function createAlipayLink($order, $type)
     {
         $this->app->loadClass('alipay', true);
 
-        $this->config->alipay->notifyURL = getWebRoot(true) . ltrim(inlink('processorder', "type=alipay&mode=notify"), '/');
-        $this->config->alipay->returnURL = getWebRoot(true) . ltrim(inlink('processorder', "type=alipay&mode=return"), '/');
-
-        $alipay = new alipay($this->config->alipay);
+        $alipayConfig = $type == 'alipay' ? $this->config->alipay->direct : $this->config->alipay->secured;
+        $alipayConfig->notifyURL = getWebRoot(true) . ltrim(inlink('processorder', "type=alipay&mode=notify"), '/');
+        $alipayConfig->returnURL = getWebRoot(true) . ltrim(inlink('processorder', "type=alipay&mode=return"), '/');
+        $alipayConfig->pid   = $this->config->alipay->pid;
+        $alipayConfig->key   = $this->config->alipay->key;
+        $alipayConfig->email = $this->config->alipay->email;
+        
+        $alipay = new alipay($alipayConfig);
 
         $subject = sprintf($this->lang->order->payInfo, $this->config->site->name, date('Y-m-d'));
 
@@ -458,7 +466,6 @@ class orderModel extends model
         return !dao::isError();
     }
 
-
     /**
      * Get order by id 
      * 
@@ -509,6 +516,28 @@ class orderModel extends model
         if($order->payment == 'COD' and isset($this->config->product->stock)) return $this->fixStocks($orderID);
 
         return true;
+    }
+
+    /**
+     * postDeliveryToAlipay 
+     * 
+     * @param  int    $order 
+     * @access public
+     * @return void
+     */
+    public function postDeliveryToAlipay($order)
+    {
+        $this->app->loadClass('alipay', true);
+
+        $alipayConfig = $this->config->alipay->secured;
+        $alipayConfig->pid   = $this->config->alipay->pid;
+        $alipayConfig->key   = $this->config->alipay->key;
+        $alipayConfig->email = $this->config->alipay->email;
+        
+        $alipay = new alipay($alipayConfig);
+        $expressList = $this->loadModel('tree')->getPairs(0, 'express');
+        $express     = zget($expressList, $this->post->express);
+        return $alipay->postDelivery($order->sn, $express, $this->post->waybill);
     }
 
     /**
@@ -603,7 +632,7 @@ class orderModel extends model
          $expressList = $this->loadModel('tree')->getPairs(0, 'express');                                       
          $expressInfo = zget($expressList, $order->express);                                                    
          return $expressInfo;                                                                                   
-     }        
+     }
 
     /**
      * Clear an order.
