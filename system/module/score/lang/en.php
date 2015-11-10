@@ -49,7 +49,7 @@ $lang->score->methods['delreply']    = 'Delete reply';
 $lang->score->methods['award']       = 'Reward Scores';
 $lang->score->methods['punish']      = 'Deduct Scores';
 
-$lang->score->methods['approveContribution'] = 'Contributors Adoption';
+$lang->score->methods['approvecontribution'] = 'Contributors Adoption';
 
 $lang->score->methods['buyscore']  = 'Buy score';
 $lang->score->methods['statement'] = 'Integral Settlement';

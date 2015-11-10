@@ -49,7 +49,7 @@ $lang->score->methods['delreply']    = '删回复';
 $lang->score->methods['award']       = '奖励积分';
 $lang->score->methods['punish']      = '扣除积分';
 
-$lang->score->methods['approveContribution'] = '投稿成功';
+$lang->score->methods['approvecontribution'] = '投稿成功';
 
 $lang->score->methods['buyscore']  = '购买积分';
 $lang->score->methods['statement'] = '积分结算';

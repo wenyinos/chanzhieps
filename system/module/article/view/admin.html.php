@@ -12,7 +12,8 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/treeview.html.php';?>
-<?php js::set('contribution', $contribution);?>
+<?php js::set('contribution', $this->config->article->contribution);?>
+<?php js::set('isContribution', $contribution);?>
 <?php js::set('categoryID', $categoryID);?>
 <div class='panel'>
   <div class='panel-heading'>
@@ -47,14 +48,9 @@
         <?php endif;?>
         <th class='text-center w-160px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->article->addedDate);?></th>
         <th class='text-center w-70px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->article->views);?></th>
-        <?php
-        if($this->config->article->contribution == 'open' and $contribution == 'true')
-        {
-            echo "<th class='text-center w-70px'>"; 
-            commonModel::printOrderLink('contribution', $orderBy, $vars, $lang->article->status);
-            echo '</th>';
-        }
-        ?>
+        <?php if($this->config->article->contribution == 'open' and $contribution == 'true'):?>
+        <th class='text-center w-70px'> <?php commonModel::printOrderLink('contribution', $orderBy, $vars, $lang->article->status);?></th>
+        <?php endif;?>
         <?php $actionClass = $type == 'page' ? 'w-220px' : 'w-260px';?>
         <th class="text-center <?php echo $actionClass;?>"><?php echo $lang->actions;?></th>
       </tr>

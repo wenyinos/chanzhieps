@@ -68,7 +68,10 @@
           {
               commonmodel::printlink('thread', 'approve', "threadid=$thread->id&boardid=$thread->board", $lang->thread->approve, "class='reload'");
           }
-          else commonmodel::printlink('', '', "", $lang->thread->approve, "class='disabled'");
+          else
+          {
+              echo html::a('', $lang->thread->approve, "class='disabled'");
+          }
           $text = $thread->hidden ? $lang->thread->show : $lang->thread->hide;
           commonModel::printLink('thread', 'switchStatus', "threadID=$thread->id", $text, "class='reload'");
           if($thread->status != 'wait')
@@ -77,7 +80,7 @@
           }
           else
           {
-              commonModel::printLink('', '', "", $lang->thread->transfer, "class='disabled'");
+              echo html::a('', $lang->thread->transfer, "class='disabled'");
           }
           commonModel::printLink('thread', 'delete', "threadID=$thread->id", $lang->delete, "class='deleter'");
           commonModel::printLink('thread', 'addToBlacklist', "threadID=$thread->id", $lang->addToBlacklist, "data-toggle='modal'");
