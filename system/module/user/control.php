@@ -433,7 +433,7 @@ class user extends control
 
         $userHistory = $this->user->getUserHistory($account); 
 
-        $this->view->title       = $this->lang->user->delete;
+        $this->view->title       = $this->lang->user->userHistory;
         $this->view->account     = $account;
         $this->view->userHistory = $userHistory;
         $this->display();

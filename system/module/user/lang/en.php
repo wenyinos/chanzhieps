@@ -75,6 +75,8 @@ $lang->user->myScore         = 'My Score';
 $lang->user->buyScore        = 'Score Recharge';
 $lang->user->addScore        = 'Reward Score';
 $lang->user->reduceScore     = 'Deduct Score';
+$lang->user->yangcongLogin   = 'Yangcong Login';
+$lang->user->bindAccount     = 'Bind Account';
 
 $lang->user->profile      = 'Profile';
 $lang->user->editProfile  = 'Edit profile';
@@ -82,6 +84,15 @@ $lang->user->thread       = 'My threads';
 $lang->user->messages     = 'My Messages';
 $lang->user->reply        = 'My replies';
 $lang->user->contribution = 'My Contribution';
+
+$lang->user->userHistory         = "User History Data";
+$lang->user->threadHistory       = "Post Data";
+$lang->user->replyHistory        = "Reply Data";
+$lang->user->commentHistory      = "Comment Data";
+$lang->user->messageHistory      = "Message Data";
+$lang->user->orderHistory        = "Order Data";
+$lang->user->addressHistory      = "Address Data";
+$lang->user->contributionHistory = "Contribution Data";
 
 $lang->user->message = new stdclass();
 $lang->user->message->mine = "My message <span class='label label-badge text-latin'>%s</span>";
@@ -108,14 +119,13 @@ $lang->user->checkEmailSuccess = 'Check email successfully';
 $lang->user->sendRecoverEmail  = 'Send recover password email.';
 $lang->user->resetSuccess      = 'Reset password successed, please login';
 
-$lang->user->forbidUser = 'Manage user';
+$lang->user->forbidUser = 'Forbid User';
 $lang->user->forbidDate = array();
 $lang->user->forbidDate['1']     = '1d';
 $lang->user->forbidDate['2']     = '2d';
 $lang->user->forbidDate['3']     = '3d';
 $lang->user->forbidDate['7']     = '7d';
 $lang->user->forbidDate['30']    = '30d';
-$lang->user->forbidDate['3000']  = 'ever';
 $lang->user->operate             = 'Operate';
 
 $lang->user->adminList['super']  = 'Super administrator';

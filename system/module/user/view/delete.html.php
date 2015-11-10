@@ -1,6 +1,6 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel'>
-  <div class='panel-heading'><strong><i class='icon-globe'></i> <?php echo $lang->user->delete;?></strong></div>
+  <div class='panel-heading'><strong><i class='icon-globe'></i> <?php echo $lang->user->userHistory;?></strong></div>
   <form id='ajaxForm' method='post' action="<?php echo inlink('delete', "account={$account}");?>">
     <div class='panel'>
     <?php if(!empty($userHistory->threads)):?>

@@ -85,7 +85,7 @@ $lang->user->messages     = '我的消息';
 $lang->user->reply        = '我的回贴';
 $lang->user->contribution = '我的投稿';
 
-$lang->user->delete              = "用户相关数据";
+$lang->user->userHistory         = "用户历史数据";
 $lang->user->threadHistory       = "发帖数据";
 $lang->user->replyHistory        = "回帖数据";
 $lang->user->commentHistory      = "评论数据";
