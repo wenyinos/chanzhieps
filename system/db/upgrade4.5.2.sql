@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS  `eps_blacklist` (
   `identity` varchar(100) NOT NULL,
   `reason` varchar(100) NOT NULL,
   `expiredDate` datetime NOT NULL,
+  `times` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `lang` char(30) NOT NULL,
   UNIQUE KEY `identity` (`type`, `identity`, `lang`),
   KEY `expiredDate` (`expiredDate`)

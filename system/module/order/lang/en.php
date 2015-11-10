@@ -72,8 +72,9 @@ $lang->order->placeholder->key = 'Security checking code, 32 characters to numbe
 $lang->order->placeholder->email = 'Alipay Email';
 
 $lang->order->paymentList = array();
-$lang->order->paymentList['alipay'] = 'Alipay Payment';
-$lang->order->paymentList['COD']    = 'Cash on Delivery';
+$lang->order->paymentList['alipay']        = 'Alipay Payment';
+$lang->order->paymentList['alipaySecured'] = 'Alipay Secured';
+$lang->order->paymentList['COD']           = 'Cash on Delivery';
 
 $lang->order->statusList = array();
 $lang->order->statusList['not_paid']  = 'Not Paid';

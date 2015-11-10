@@ -243,6 +243,13 @@ EOT;
         $whitelist = isset($this->config->guarder->whitelist->$type) ? $this->config->guarder->whitelist->$type : '';
         if(strpos(",$whitelist,", ",$identity,") !== false) return true;
 
+        $records = $this->dao->setAutoLang(false)
+            ->select('times')->from(TABLE_BLACKLIST)
+            ->where('type')->eq($type)
+            ->andWhere('identity')->eq($identity)
+            ->fetch('times');
+        $records = (int) $records + 1;
+
         $this->dao->delete()->from(TABLE_OPERATIONLOG)
             ->where('type')->eq($type)
             ->andWhere('identity')->eq($identity)
@@ -259,7 +266,7 @@ EOT;
 
         if(($dayCount + 1) >= $dayLimit)
         {
-            $this->punish($type, $identity, $action, $this->config->guarder->punishment->$type->day->$action); 
+            $this->punish($type, $identity, $action, $this->config->guarder->punishment->$type->day->$action, $records); 
             return true;
         }
 
@@ -279,7 +286,7 @@ EOT;
             $log->count ++;
             if($log->count >= $limit)
             {
-                $this->punish($type, $identity, $action, $this->config->guarder->punishment->{$type}->minute->$action);
+                $this->punish($type, $identity, $action, $this->config->guarder->punishment->{$type}->minute->$action, $records);
             }
             $this->dao->replace(TABLE_OPERATIONLOG)->data($log)->exec();
         }
@@ -304,18 +311,19 @@ EOT;
      * @param  string    $identity 
      * @param  string    $reason 
      * @param  string    $expired
+     * @param  int       $times
      * @access public
      * @return bool 
      */
-    public function punish($type, $identity, $reason, $expired)
+    public function punish($type, $identity, $reason, $expired, $times)
     {
        $blacklist = new stdclass(); 
-       $blacklist->type        = $type;
-       $blacklist->identity    = $identity;
-       $blacklist->reason      = $reason;
-       if(!empty($expired))
-       $blacklist->expiredDate = date('Y-m-d H:i:s', $expired * 3600 + time());
-       $blacklist->lang        = 'all';
+       $blacklist->type     = $type;
+       $blacklist->identity = $identity;
+       $blacklist->reason   = $reason;
+       $blacklist->times    = $times;
+       $blacklist->lang     = 'all';
+       if(!empty($expired)) $blacklist->expiredDate = date('Y-m-d H:i:s', $expired * 3600 * $times + time());
 
        $this->dao->replace(TABLE_BLACKLIST)->data($blacklist)
            ->batchCheck($this->config->guarder->require->addblacklist, 'notempty')

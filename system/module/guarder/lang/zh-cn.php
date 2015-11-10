@@ -40,6 +40,7 @@ $lang->guarder->permanent = '永久';
 $lang->guarder->interval  = '分钟内';
 $lang->guarder->perDay    = '每天超过';
 $lang->guarder->exceed    = '超过';
+$lang->guarder->times     = '次';
 $lang->guarder->disable   = '禁用';
 $lang->guarder->hours     = '小时';
 

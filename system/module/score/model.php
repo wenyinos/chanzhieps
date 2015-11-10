@@ -21,7 +21,7 @@ class scoreModel extends model
      */
     public function getByUser($account, $pager = null)
     {
-        return $this->dao->select('*')->from(TABLE_SCORE)->where('account')->eq($account)->orderBy('time_desc')->page($pager)->fetchAll('id');
+        return $this->dao->setAutoLang(false)->select('*')->from(TABLE_SCORE)->where('account')->eq($account)->orderBy('time_desc')->page($pager)->fetchAll('id');
     }
 
     /**
@@ -35,7 +35,7 @@ class scoreModel extends model
      */
     public function getByObject($objectType, $objectID, $method = 'all')
     {
-        return $this->dao->select('*')->from(TABLE_SCORE)
+        return $this->dao->setAutoLang(false)->select('*')->from(TABLE_SCORE)
             ->where('objectType')->eq($objectType)
             ->andWhere('objectID')->in($objectID)
             ->beginIF($method != 'all')->andWhere('method')->eq($method)->fi()
@@ -52,7 +52,7 @@ class scoreModel extends model
      */
     public function getTotalScoreOfDomain($domain)
     {
-        $totalScore = $this->dao->select('SUM(score) as sum')->from(TABLE_REFERER)
+        $totalScore = $this->dao->setAutoLang(false)->select('SUM(score) as sum')->from(TABLE_REFERER)
             ->where('domain')->eq($domain)
             ->andWhere('status')->eq('verified')
             ->fetch();
@@ -134,7 +134,7 @@ class scoreModel extends model
             $data->rank  = $rank;
             if($type == 'in')     $data->rank = $rank + $count;
             if($type == 'punish') $data->rank = $rank - $count;
-            $this->dao->update(TABLE_USER)->data($data)->where('account')->eq($account)->exec();
+            $this->dao->setAutoLang(false)->update(TABLE_USER)->data($data)->where('account')->eq($account)->exec();
 
             return !dao::isError();
         }
@@ -228,7 +228,7 @@ class scoreModel extends model
      */
     public function hasFileDowned($account, $fileID)
     {
-        return $this->dao->select('id')->from(TABLE_SCORE)
+        return $this->dao->setAutoLang(false)->select('id')->from(TABLE_SCORE)
             ->where('account')->eq($account)
             ->andWhere('objectType')->eq('file')
             ->andWhere('objectID')->eq($fileID)
@@ -247,7 +247,7 @@ class scoreModel extends model
      */
     public function hasIpScored($account, $ip, $objectType, $objectID = 0)
     {
-        return $this->dao->select('count(*) AS count')->from(TABLE_IP)
+        return $this->dao->setAutoLang(false)->select('count(*) AS count')->from(TABLE_IP)
             ->where('account')->eq($account)
             ->andWhere('objectType')->eq($objectType)
             ->andWhere('ip')->eq($ip)
@@ -307,7 +307,7 @@ class scoreModel extends model
      */
     public function getOrderByRawID($rawOrder)
     {
-        $order = $this->dao->select('*')->from(TABLE_ORDER)->where('id')->eq((int)$rawOrder)->fetch();
+        $order = $this->dao->setAutoLang(false)->select('*')->from(TABLE_ORDER)->where('id')->eq((int)$rawOrder)->fetch();
         $order->subject = $this->lang->user->buyScore;
         if(!$order) return false;
         $order->humanOrder = $this->loadModel('order')->getHumanOrder($order->id);
@@ -350,7 +350,7 @@ class scoreModel extends model
      */
     public function getRankingList($type)
     {
-        return $this->dao->select('t1.account, SUM(t1.count) as sumScore, t2.score')->from(TABLE_SCORE)->alias('t1')
+        return $this->dao->setAutoLang(false)->select('t1.account, SUM(t1.count) as sumScore, t2.score')->from(TABLE_SCORE)->alias('t1')
             ->leftJoin(TABLE_USER)->alias('t2')->on('t1.account=t2.account')
             ->where('t1.type')->eq('in')
             ->andWhere('t1.account')->ne('')

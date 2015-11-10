@@ -150,7 +150,6 @@ class order extends control
         $this->display();
     }
 
-
     /**
      * Delivery order.
      * 
@@ -166,6 +165,7 @@ class order extends control
 
         if($_POST)
         {
+            if($order->payment == 'alipaySecured') $this->order->postDeliveryToAlipay($order);
             $result = $this->order->delivery($orderID);
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
             $this->send(array('result' => 'fail', 'message' => dao::geterror()));
