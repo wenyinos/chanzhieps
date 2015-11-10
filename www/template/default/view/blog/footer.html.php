@@ -29,6 +29,7 @@
       </div>
     </div>
   </footer>
+<a href='#' id='go2top' class='icon-arrow-up' data-toggle='tooltip' title='<?php echo $lang->back2Top; ?>'></a>
 </div><?php /* end .page-container in header.html.php */ ?>
 <?php include TPL_ROOT . 'common/qrcode.html.php';?>
 <?php
