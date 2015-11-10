@@ -40,6 +40,7 @@ $lang->guarder->permanent = 'Permanent';
 $lang->guarder->interval  = 'Minutes';
 $lang->guarder->perDay    = 'A Day More Than';
 $lang->guarder->exceed    = 'Exceed';
+$lang->guarder->times     = 'Times';
 $lang->guarder->disable   = 'Disabled';
 $lang->guarder->hours     = 'Hour';
 
