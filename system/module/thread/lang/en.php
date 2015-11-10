@@ -3,7 +3,7 @@
  * The thread module english file of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV1 (http://www.chanzhi.org/license/)
+ * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     thread
  * @version     $Id$
@@ -30,7 +30,7 @@ $lang->thread->browse       = 'Threads';
 $lang->thread->stick        = 'Sticky';
 $lang->thread->edit         = 'Edit';
 $lang->thread->status       = 'Status';
-$lang->thread->approved     = 'Approved';
+$lang->thread->approve      = 'Approve';
 $lang->thread->display      = 'Display';
 $lang->thread->hide         = 'Hide';
 $lang->thread->show         = 'Show';
@@ -42,8 +42,8 @@ $lang->thread->sticks[0] = 'Don\'t stick';
 $lang->thread->sticks[1] = 'Stick on board';
 $lang->thread->sticks[2] = 'Global stick';
 
-$lang->thread->statusList['hidden'] = 'Hidden';
-$lang->thread->statusList['normal'] = 'Normal';
+$lang->thread->displayList['hidden'] = 'Hidden';
+$lang->thread->displayList['normal'] = 'Normal';
 
 $lang->thread->statusList['wait']     = 'Wait';
 $lang->thread->statusList['approved'] = 'Approved';

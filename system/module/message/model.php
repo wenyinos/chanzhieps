@@ -3,7 +3,7 @@
  * The model file of message module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV1 (http://www.chanzhi.org/license/)
+ * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     message
  * @version     $Id$
@@ -270,6 +270,14 @@ class messageModel extends model
             ->setIF($admin == 'super', 'status', '1')
             ->add('ip', $this->server->REMOTE_ADDR)
             ->get();
+
+        if(strlen($message->content) > 29)
+        {
+            $repeat = $this->loadModel('guarder')->checkRepeat($message->content); 
+            if($repeat) return array('result' => 'fail', 'message' => $this->lang->error->noRepeat);
+        }
+
+
         if($this->loadModel('guarder')->matchList($message))  return array('result' => 'fail', 'reason' => 'error', 'message' => $this->lang->error->sensitive);
 
         if(isset($this->config->site->filterSensitive) and $this->config->site->filterSensitive == 'open')
@@ -384,7 +392,7 @@ class messageModel extends model
             ->where('type')->eq($message->type)
             ->beginIF($mode == 'single')->andWhere('id')->eq($messageID)->fi()
             ->beginIF($mode == 'pre')->andWhere('id')->ge($messageID)->andWhere('status')->ne('1')->fi()
-            ->exec(false);
+            ->exec();
 
         /* Record post number. */
         $this->loadModel('guarder')->logOperation('ip', 'commentFail');
@@ -410,7 +418,7 @@ class messageModel extends model
             ->andWhere('type')->eq($message->type)
             ->beginIF($type == 'single')->andWhere('id')->eq($messageID)->fi()
             ->beginIF($type == 'pre')->andWhere('id')->ge($messageID)->fi()
-            ->exec(false);
+            ->exec();
         return !dao::isError();
     }
 

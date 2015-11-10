@@ -3,7 +3,7 @@
  * The common simplified chinese file of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV1 (http://www.chanzhi.org/license/)
+ * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     chanzhiEPS
  * @version     $Id$
@@ -35,7 +35,7 @@ $lang->thanks = 'Thanks';
 /* Lang items for xirang. */
 $lang->chanzhiEPS     = 'chanzhiEPS';
 $lang->chanzhiEPSx    = 'Chanzhi';
-$lang->agreement      = "I Agree to the <a href='http://zpl.pub/page/zplv11.html' target='_blank'>Z PUBLIC LICENSE 1.1</a>, <span class='text-danger'>and promise to keep the logo, link of ChanZhi.</span>";
+$lang->agreement      = "I Agree to the <a href='http://zpl.pub/page/zplv12.html' target='_blank'>Z PUBLIC LICENSE 1.2</a>, <span class='text-danger'>and promise to keep the logo, link of ChanZhi.</span>";
 $lang->poweredBy      = "<a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>%s</a>";
 $lang->poweredByAdmin = "<span id='poweredBy'>Powered by <a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>ChanzhiEPS %s</a></span>";
 $lang->newVersion     = "Notice: ChanzhiEPS has been upgraded to version: <span id='version'></span> at <span id='releaseDate'></span>. <a href='' target='_blank' id='upgradeLink'>DownLoad Now</a>";
@@ -75,6 +75,8 @@ $lang->delete         = 'Delete';
 $lang->close          = 'Close';
 $lang->save           = 'Save';
 $lang->confirm        = 'Confirm';
+$lang->addToBlacklist = 'Add To Blacklist';
+$lang->edit           = 'Edit';
 $lang->send           = 'Send';
 $lang->preview        = 'Preview';
 $lang->goback         = 'Back';
@@ -172,12 +174,14 @@ $lang->menuGroups->company = 'site';
 /* Menu of article module. */
 $lang->article = new stdclass();
 $lang->article->menu = new stdclass();
-$lang->article->menu->browse = 'All articles|article|admin|';
+$lang->article->menu->browse       = 'All articles|article|admin|';
+$lang->article->menu->contribution = 'Contribution|article|admin|type=article&categoryID=0&orderBy=id_desc&recTotal=0&recPerPage=20&pageID=1&contribution=true';
 
 /* Menu of blog module. */
 $lang->blog = new stdclass();
 $lang->blog->menu = new stdclass();
-$lang->blog->menu->browse = 'All blogs|article|admin|type=blog';
+$lang->blog->menu->browse       = 'All blogs|article|admin|type=blog';
+$lang->blog->menu->contribution = 'Contributors Blog|article|admin|type=blog&categoryID=0&orderBy=id_desc&recTotal=0&recPerPage=20&pageID=1&contribution=true';
 
 /* Menu of page module. */
 $lang->page = new stdclass();
@@ -234,22 +238,24 @@ $lang->forum->menu->setting = 'Forum Settings|forum|setting|';
 /* Menu of site module. */
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
-$lang->site->menu->basic   = 'Basic|site|setbasic|';
-$lang->site->menu->company = 'Company|company|setbasic|';
-$lang->site->menu->contact = 'Contact|company|setcontact|';
-$lang->site->menu->nav     = 'Navigation|nav|admin|';
-$lang->site->menu->link    = 'Links|links|admin|';
-$lang->site->menu->oauth   = 'OAuth|site|setoauth|';
-$lang->site->menu->mail    = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->site->menu->wechat  = array('link' => 'Wechat|wechat|admin|', 'alias' => 'create,setresponse');
-$lang->site->menu->search  = 'Full text search|search|buildindex|';
-$lang->site->menu->tag     = 'Tags|tag|admin|';
-$lang->site->menu->setStat = 'Set Stat|site|setStat|';
+$lang->site->menu->basic    = 'Basic|site|setbasic|';
+$lang->site->menu->company  = 'Company|company|setbasic|';
+$lang->site->menu->contact  = 'Contact|company|setcontact|';
+$lang->site->menu->nav      = 'Navigation|nav|admin|';
+$lang->site->menu->link     = 'Links|links|admin|';
+$lang->site->menu->oauth    = 'OAuth|site|setoauth|';
+$lang->site->menu->yangcong = 'Yangcong Login|site|setyangcong|';
+$lang->site->menu->mail     = array('link' => 'Mail|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->site->menu->wechat   = array('link' => 'Wechat|wechat|admin|', 'alias' => 'create,setresponse');
+$lang->site->menu->search   = 'Full text search|search|buildindex|';
+$lang->site->menu->tag      = 'Tags|tag|admin|';
+$lang->site->menu->setStat  = 'Set Stat|site|setStat|';
 
 /* Menu of security module. */
 $lang->security = new stdclass();
 $lang->security->menu = new stdclass();
 $lang->security->menu->basic     = 'Basic|site|setsecurity|';
+$lang->security->menu->filter    = 'Filter|site|setfilter|';
 $lang->security->menu->upload    = 'Uploads|site|setupload|';
 $lang->security->menu->blacklist = 'Blacklist|guarder|setblacklist|';
 $lang->security->menu->whitelist = 'Whitelist|guarder|setwhitelist|';
@@ -354,6 +360,7 @@ $lang->error->noWritable   = '%s maybe not write, please modify permissions!';
 $lang->error->fingerprint  = 'identity authent failed';
 $lang->error->token        = 'Should English or numbers, length of 3-32 characters.';
 $lang->error->sensitive    = 'There can be no sensitive words in the content.';
+$lang->error->noRepeat     = 'Theme or content already exists, prohibiting repeat';
 
 /* The pager items. */
 $lang->pager = new stdclass();

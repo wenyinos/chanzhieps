@@ -3,7 +3,7 @@
  * The control file of file module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV1 (http://www.chanzhi.org/license/)
+ * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     file
  * @version     $Id: control.php 1042 2010-08-19 09:02:39Z yuren_@126.com $
@@ -282,7 +282,7 @@ class file extends control
      */
     public function allow($fileID)
     {
-        $this->dao->update(TABLE_FILE)->set('public')->eq(1)->where('id')->eq($fileID)->exec(false);
+        $this->dao->update(TABLE_FILE)->set('public')->eq(1)->where('id')->eq($fileID)->exec();
         $this->send(array( 'result' => 'success', 'message' => $this->lang->setSuccess));
     }
 
@@ -295,7 +295,7 @@ class file extends control
      */
     public function deny($fileID)
     {
-        $this->dao->update(TABLE_FILE)->set('public')->eq(0)->where('id')->eq($fileID)->exec(false);
+        $this->dao->update(TABLE_FILE)->set('public')->eq(0)->where('id')->eq($fileID)->exec();
         $this->send(array( 'result' => 'success', 'message' => $this->lang->setSuccess));
     }
 
@@ -318,7 +318,7 @@ class file extends control
                 ->where('id')->ne($fileID)
                 ->andWhere('objectType')->eq($file->objectType)
                 ->andWhere('objectID')->eq($file->objectID)
-                ->exec(false);
+                ->exec();
 
             $this->dao->update(TABLE_FILE)->set('primary')->eq(1)->where('id')->eq($fileID)->exec();
         }

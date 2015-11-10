@@ -1,5 +1,6 @@
 <?php if($extView = $this->getExtViewFile(__FILE__)){include $extView; return helper::cd();}?>
 <?php include_once '../../common/view/header.modal.html.php';?>
+<?php js::set('emailSending', sprintf($lang->mail->sending, $user->email));?>
 <?php if(isset($pass) and $pass):?>
 <script>
 $(document).ready(function()
@@ -64,6 +65,11 @@ $(document).ready(function()
   {
       $('#mailSender').click(function()
       {
+          $('#mailSender').popover({trigger:'manual', content: v.emailSending, placement:'right'}).popover('show');
+          $('#mailSender').next('.popover').addClass('popover-success').css('width', '320px');
+          function distroy(){$('#mailSender').popover('destroy')}
+          setTimeout(distroy,1000);
+  
           var url = $(this).attr('href');
 
           $.getJSON(url, function(response)

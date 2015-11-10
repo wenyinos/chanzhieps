@@ -3,7 +3,7 @@
  * The user module zh-cn file of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV1 (http://www.chanzhi.org/license/)
+ * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     user
  * @version     $Id: zh-cn.php 824 2010-05-02 15:32:06Z wwccss $
@@ -85,15 +85,14 @@ $lang->user->messages     = '我的消息';
 $lang->user->reply        = '我的回贴';
 $lang->user->contribution = '我的投稿';
 
-$lang->user->delete = new stdclass;
-$lang->user->delete->common       = "删除用户";
-$lang->user->delete->thread       = "删除发帖";
-$lang->user->delete->reply        = "删除回帖";
-$lang->user->delete->comment      = "删除评论";
-$lang->user->delete->message      = "删除留言";
-$lang->user->delete->order        = "删除订单";
-$lang->user->delete->address      = "删除地址";
-$lang->user->delete->contribution = "删除投稿";
+$lang->user->userHistory         = "用户历史数据";
+$lang->user->threadHistory       = "发帖数据";
+$lang->user->replyHistory        = "回帖数据";
+$lang->user->commentHistory      = "评论数据";
+$lang->user->messageHistory      = "留言数据";
+$lang->user->orderHistory        = "订单数据";
+$lang->user->addressHistory      = "地址数据";
+$lang->user->contributionHistory = "投稿数据";
 
 $lang->user->message = new stdclass();
 $lang->user->message->mine = "我的消息 <span class='label label-badge text-latin'>%s</span>";
@@ -127,7 +126,6 @@ $lang->user->forbidDate['2']     = '两天';
 $lang->user->forbidDate['3']     = '三天';
 $lang->user->forbidDate['7']     = '一周';
 $lang->user->forbidDate['30']    = '一个月';
-$lang->user->forbidDate['3000']  = '永久';
 $lang->user->operate             = '操作';
 
 $lang->user->adminList['super']  = '超级管理员';

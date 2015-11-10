@@ -3,7 +3,7 @@
  * The model file of reply module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV1 (http://www.chanzhi.org/license/)
+ * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     reply
  * @version     $Id$
@@ -154,6 +154,12 @@ class replyModel extends model
             ->remove('recTotal, recPerPage, pageID, files, labels, hidden')
             ->get();
 
+        if(strlen($reply->content) > 40)
+        {
+            $repeat = $this->loadModel('guarder')->checkRepeat($reply->content); 
+            if($repeat) return array('result' => 'fail', 'message' => $this->lang->error->noRepeat);
+        }
+
         if($this->loadModel('guarder')->matchList($reply))  return array('result' => 'fail', 'reason' => 'error', 'message' => $this->lang->error->sensitive);
 
         if(isset($this->config->site->filterSensitive) and $this->config->site->filterSensitive == 'open')
@@ -268,7 +274,7 @@ class replyModel extends model
             ->where('t1.id')->eq($replyID)
             ->fetch();
 
-        $this->dao->delete()->from(TABLE_REPLY)->where('id')->eq($replyID)->exec(false);
+        $this->dao->delete()->from(TABLE_REPLY)->where('id')->eq($replyID)->exec();
         if(dao::isError()) return false;
 
         /* Update thread and board stats. */

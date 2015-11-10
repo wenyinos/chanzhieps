@@ -3,7 +3,7 @@
  * The model file of thread module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV1 (http://www.chanzhi.org/license/)
+ * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     thread
  * @version     $Id$
@@ -183,7 +183,7 @@ class threadModel extends model
 
         $titleInput   = $this->session->titleInput;
         $contentInput = $this->session->contentInput;
-        
+
         $thread = fixer::input('post')
             ->remove("$titleInput, $contentInput, files, labels, views, replies, hidden, stick")
             ->setForce('title', $this->post->$titleInput)
@@ -199,6 +199,9 @@ class threadModel extends model
             ->setForce('repliedDate', $now)
             ->get();
 
+        $repeat = $this->loadModel('guarder')->checkRepeat($thread->content, $thread->title); 
+        if($repeat) return array('result' => 'fail', 'message' => $this->lang->error->noRepeat);
+        
         if($this->loadModel('guarder')->matchList($thread))  return array('result' => 'fail', 'reason' => 'error', 'message' => $this->lang->error->sensitive);
         if(isset($this->config->site->filterSensitive) and $this->config->site->filterSensitive == 'open')
         {
@@ -381,8 +384,8 @@ class threadModel extends model
     public function delete($threadID , $null = null)
     {
         $thread = $this->getByID($threadID);
-        $this->dao->delete()->from(TABLE_THREAD)->where('id')->eq($threadID)->exec(false);
-        $this->dao->delete()->from(TABLE_REPLY)->where('thread')->eq($threadID)->exec(false);
+        $this->dao->delete()->from(TABLE_THREAD)->where('id')->eq($threadID)->exec();
+        $this->dao->delete()->from(TABLE_REPLY)->where('thread')->eq($threadID)->exec();
         if(dao::isError()) return false;
 
         if(RUN_MODE == 'admin')

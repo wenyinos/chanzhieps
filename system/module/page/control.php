@@ -3,7 +3,7 @@
  * The control file of page module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV1 (http://www.chanzhi.org/license/)
+ * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
  * @author      Tingting Dai <daitingting@xirangit.com>
  * @package     page
  * @version     $Id$
@@ -52,7 +52,7 @@ class page extends control
         $this->view->mobileURL  = helper::createLink('page', 'view', "pageID=$pageID", "name=$page->alias", 'mhtml');
         $this->view->desktopURL = helper::createLink('page', 'view', "pageID=$pageID", "name=$page->alias", 'html');
 
-        $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($page->id)->exec(false);
+        $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($page->id)->exec();
 
         $this->display();
     }

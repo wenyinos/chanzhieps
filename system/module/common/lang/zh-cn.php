@@ -3,7 +3,7 @@
  * The common simplified chinese file of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV1 (http://www.chanzhi.org/license/)
+ * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     chanzhiEPS
  * @version     $Id$
@@ -35,7 +35,7 @@ $lang->thanks = '致谢';
 /* Lang items for xirang. */
 $lang->chanzhiEPS     = '蝉知企业门户系统';
 $lang->chanzhiEPSx    = '蝉知';
-$lang->agreement      = "已阅读并同意<a href='http://zpl.pub/page/zplv11.html' target='_blank'>《Z PUBLIC LICENSE授权协议1.1》</a>。<span class='text-danger'>未经许可，不得去除、隐藏或遮掩蝉知系统的任何标志及链接。</span>";
+$lang->agreement      = "已阅读并同意<a href='http://zpl.pub/page/zplv12.html' target='_blank'>《Z PUBLIC LICENSE授权协议1.2》</a>。<span class='text-danger'>未经许可，不得去除、隐藏或遮掩蝉知系统的任何标志及链接。</span>";
 $lang->poweredBy      = "<a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>%s</a>";
 $lang->poweredByAdmin = "<span id='poweredBy'>由 <a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>蝉知企业门户系统 %s</a> 强力驱动！</span>";
 $lang->newVersion     = "提示：蝉知系统已于 <span id='releaseDate'></span> 发布 <span id='version'></span>版本。<a href='' target='_blank' id='upgradeLink'>马上下载</a>";
@@ -255,13 +255,13 @@ $lang->site->menu->setStat  = '流量统计设置|site|setStat|';
 $lang->security = new stdclass();
 $lang->security->menu = new stdclass();
 $lang->security->menu->basic     = '基本设置|site|setsecurity|';
+$lang->security->menu->filter    = '过滤设置|site|setfilter|';
 $lang->security->menu->upload    = '附件上传|site|setupload|';
 $lang->security->menu->blacklist = '黑名单管理|guarder|blacklist|';
 $lang->security->menu->whitelist = '白名单管理|guarder|setwhitelist|';
 $lang->security->menu->sensitive = '敏感词设置|site|setsensitive|';
 $lang->security->menu->admin     = '管理员|user|admin|admin=1';
 $lang->security->menu->group     = array('link' => '分组权限|group|browse|', 'alias' => 'managepriv,managemember');
-$lang->security->menu->filter    = '过滤设置|site|setfilter|';
 $lang->security->menu->log       = '登录日志|user|adminlog|';
 
 /* Menu of company module. */
@@ -360,6 +360,7 @@ $lang->error->noWritable   = '%s 可能不可写，请修改权限！';
 $lang->error->fingerprint  = '身份认证过期，请重试！';
 $lang->error->token        = '必须为英文或数字，长度为3-32字符！';
 $lang->error->sensitive    = '内容中不能存在敏感词!';
+$lang->error->noRepeat     = '主题或内容已存在，禁止重复';
 
 /* The pager items. */
 $lang->pager = new stdclass();

@@ -3,7 +3,7 @@
  * The admin view file of user module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV1 (http://www.chanzhi.org/license/)
+ * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
  * @author      Yangyang Shi <shiyangyangwork@yahoo.cn>
  * @package     User
  * @version     $Id$
@@ -81,6 +81,7 @@ js::set('admin', $this->get->admin);
         <?php commonModel::printLink('user', 'addScore', "account=$user->account", $lang->user->addScore, "data-toggle=modal"); ?>
         <?php commonModel::printLink('user', 'reduceScore', "account=$user->account", $lang->user->reduceScore, "data-toggle=modal"); ?>
         <?php endif;?>
+        <?php commonModel::printLink('user', 'delete', "account=$user->account", $lang->delete); ?>
         <?php if($user->locked <= helper::now() and $forbidPriv):?>
         <span class="dropdown">
           <a href='###' class="dropdown-toggle" data-toggle="dropdown"><?php echo $lang->user->forbid?> <span class="caret"></span></a>
@@ -91,7 +92,6 @@ js::set('admin', $this->get->admin);
           </ul>
         </span>
         <?php endif;?>
-        <?php commonModel::printLink('user', 'delete', "account=$user->account", $lang->delete); ?>
         <?php if($user->locked > helper::now()) commonModel::printLink('user', 'activate', "id=$user->id", $lang->user->activate, "class='forbider'");?>
       </td>
     </tr>

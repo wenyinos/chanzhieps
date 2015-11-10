@@ -3,7 +3,7 @@
  * The model file of guarder module of chanzhiEPS.
  *
  * @copyright   Copyright 2009-2015 青岛易软天创网络科技有限公司(QingDao Nature Easy Soft Network Technology Co,LTD, www.cnezsoft.com)
- * @license     ZPLV1 (http://www.chanzhi.org/license/)
+ * @license     ZPLV12 (http://zpl.pub/page/zplv12.html)
  * @author      Chunsheng Wang <chunsheng@cnezsoft.com>
  * @package     guarder
  * @version     $Id$
@@ -240,7 +240,7 @@ EOT;
         }
         if($identity == 'guest') return true;
 
-        $whitelist = $this->config->guarder->whitelist->$type;
+        $whitelist = isset($this->config->guarder->whitelist->$type) ? $this->config->guarder->whitelist->$type : '';
         if(strpos(",$whitelist,", ",$identity,") !== false) return true;
 
         $records = $this->dao->setAutoLang(false)
@@ -330,5 +330,24 @@ EOT;
            ->exec();
 
        return !dao::isError();
+    }
+    
+    /**
+     * Check whether is repeat.
+     * 
+     * @param  string    $content 
+     * @param  string $title 
+     * @access public
+     * @return bool
+     */
+    public function checkRepeat($content, $title = '')
+    {
+        if(empty($title)) $title = $content;
+        $repeat = $this->dao->select('id')->from(TABLE_THREAD)->where('title')->eq($title)->orWhere('content')->eq($content)->fetch();
+        if(empty($repeat)) $repeat = $this->dao->select('id')->from(TABLE_MESSAGE)->where('content')->eq($content)->fetch();
+        if(empty($repeat)) $repeat = $this->dao->select('id')->from(TABLE_REPLY)->where('content')->eq($content)->fetch();
+
+        if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
+        return !empty($repeat);
     }
 }
