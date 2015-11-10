@@ -21,6 +21,7 @@ class alipay
 
         /* 生成支付所需要的参数，并生成链接。*/
         $params = $this->createPayParams();
+
         $link = $this->config->payGW . http_build_query($params);
         return $link;
     }
@@ -80,5 +81,69 @@ class alipay
 
         /* 加密。*/
         return md5($queryString);
+    }
+
+    /**
+     * Post delivery to alipay.
+     * 
+     * @param  int    $sn 
+     * @param  int    $logistics 
+     * @param  int    $waybill 
+     * @param  int    $type 
+     * @access public
+     * @return void
+     */
+    public function postDelivery($sn, $logistics, $waybill, $type)
+    {
+        $params = array();
+        $params["service"]        = "send_goods_confirm_by_platform";
+        $params["partner"]        = $this->config->pid;
+        $params["seller_email"]   = $this->config->email;
+        $params["trade_no"]       = $sn;
+        $params["logistics_name"] = $logistics;
+        $params["invoice_no"]     = $waybill;
+        $params["transport_type"] = 'EXPRESS';
+        $params["_input_charset"] = $this->config->charset;
+        $params['sign']           = $this->createSign($params);
+        $params['sign_type']      = 'MD5';
+        
+        $url  = $this->config->payGW . "_input_charset=" . $this->config->charset;
+        $curl = curl_init($url);
+
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        //curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
+        //curl_setopt($curl, CURLOPT_CAINFO, $this->config->cacert);
+        curl_setopt($curl, CURLOPT_HEADER, 0);
+        curl_setopt($curl,CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl,CURLOPT_POST, true);
+        curl_setopt($curl,CURLOPT_POSTFIELDS, $params);
+
+        $response = curl_exec($curl);
+        $errors   = curl_error($curl);
+        curl_close($curl);
+        if(!empty($errors)) 
+        {
+            return false;
+        }
+
+        $message = new simpleXMLElement($response);
+        $result = new stdclass();
+
+        foreach($message as $key => $value)
+        {
+            if( function_exists('lcfirst')) 
+            {
+                $key = lcfirst($key);
+            }
+            else
+            {
+                $first = strtolower(substr($key, 0, 1));   
+                $key   = $first . substr($key, 1);
+            }
+
+            $value = $key == 'event' ? strtolower($value) : $value;
+            $result->$key = (string)$value;
+        }
+        return $result->is_success == 'T';
     }
 }
