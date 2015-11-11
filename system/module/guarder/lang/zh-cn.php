@@ -43,7 +43,6 @@ $lang->guarder->perDay    = '每天超过';
 $lang->guarder->exceed    = '超过';
 $lang->guarder->times     = '次';
 $lang->guarder->disable   = '禁用';
-$lang->guarder->hours     = '小时';
 
 $lang->guarder->operationList = new stdclass;
 $lang->guarder->operationList->logonFailure    = '登录失败';
@@ -73,7 +72,6 @@ $lang->blacklist->type        = '类型';
 $lang->blacklist->identity    = '值';
 $lang->blacklist->reason      = '原因';
 $lang->blacklist->expiredDate = '禁用时间';
-$lang->blacklist->hour        = '小时';
 $lang->blacklist->ip          = 'IP';
 $lang->blacklist->keywords    = '关键词';
 $lang->blacklist->account     = '账户';

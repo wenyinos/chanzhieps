@@ -22,8 +22,7 @@
       <td class='w-200px'>
         <div class='input-group'>
         <span class='input-group-addon'><?php echo $lang->guarder->disable;?></span>
-        <?php echo html::input('hour[ip]', '', "class='form-control'");?>
-        <span class='input-group-addon'><?php echo $lang->blacklist->hour;?></span>
+        <?php echo html::select('hour[ip]', $lang->guarder->punishOptions, '', "class='form-control'");?>
         </div>
       </td>
       <td></td>
@@ -38,8 +37,7 @@
       <td class='w-200px'>
         <div class='input-group'>
         <span class='input-group-addon'><?php echo $lang->guarder->disable;?></span>
-        <?php echo html::input('hour[account]', '', "class='form-control'");?>
-        <span class='input-group-addon'><?php echo $lang->blacklist->hour;?></span>
+        <?php echo html::select('hour[account]', $lang->guarder->punishOptions, '', "class='form-control'");?>
         </div>
       </td>
       <td></td>
@@ -55,7 +53,6 @@
         <div class='input-group'>
         <span class='input-group-addon'><?php echo $lang->guarder->disable;?></span>
         <?php echo html::input('hour[email]', '', "class='form-control'");?>
-        <span class='input-group-addon'><?php echo $lang->blacklist->hour;?></span>
         </div>
       </td>
       <td></td>

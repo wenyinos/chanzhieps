@@ -43,7 +43,6 @@ $lang->guarder->perDay    = 'A Day More Than';
 $lang->guarder->exceed    = 'Exceed';
 $lang->guarder->times     = 'Times';
 $lang->guarder->disable   = 'Disabled';
-$lang->guarder->hours     = 'Hour';
 
 $lang->guarder->operationList = new stdclass;
 $lang->guarder->operationList->logonFailure    = 'Login Failed';
@@ -74,7 +73,6 @@ $lang->blacklist->type        = 'Type';
 $lang->blacklist->identity    = 'Value';
 $lang->blacklist->reason      = 'Reason';
 $lang->blacklist->expiredDate = 'Expiration';
-$lang->blacklist->hour        = 'hour';
 $lang->blacklist->ip          = 'IP';
 $lang->blacklist->keywords    = 'keywords';
 $lang->blacklist->account     = 'Account';

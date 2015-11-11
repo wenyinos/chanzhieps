@@ -14,8 +14,7 @@
       <th class='w-120px'><?php echo $lang->blacklist->expiredDate;?></th> 
       <td class='w-200px'>
         <div class='input-group'>
-          <?php echo html::input('expired', '', "class='form-control'");?>
-          <span class='input-group-addon'><?php echo $lang->blacklist->hour?></span>
+          <?php echo html::select('expired', $lang->guarder->punishOptions, '', "class='form-control'");?>
         </div>
       </td><td></td>
     </tr>
