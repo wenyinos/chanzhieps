@@ -184,8 +184,10 @@ class threadModel extends model
         $titleInput   = $this->session->titleInput;
         $contentInput = $this->session->contentInput;
 
+        $this->lang->thread->$titleInput   = $this->lang->thread->title;
+        $this->lang->thread->$contentInput = $this->lang->thread->content;
         $thread = fixer::input('post')
-            ->remove("$titleInput, $contentInput, files, labels, views, replies, hidden, stick")
+            ->remove("files, labels, views, replies, hidden, stick")
             ->setForce('title', $this->post->$titleInput)
             ->setForce('content', $this->post->$contentInput)
             ->stripTags('content,link', $allowedTags)
@@ -217,9 +219,9 @@ class threadModel extends model
         else $thread->status = 'approved';
 
         $this->dao->insert(TABLE_THREAD)
-            ->data($thread, $skip = $this->session->captchaInput . ', uid, isLink')
+            ->data($thread, $skip = "$titleInput, $contentInput, uid, isLink")
             ->autoCheck()
-            ->batchCheckIF(!$this->post->isLink, $this->config->thread->require->post, 'notempty')
+            ->batchCheckIF(!$this->post->isLink, "$titleInput, $contentInput", 'notempty')
             ->batchCheckIF($this->post->isLink, $this->config->thread->require->link, 'notempty')
             ->check($this->session->captchaInput, 'captcha')
             ->exec();
