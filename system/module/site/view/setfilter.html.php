@@ -11,6 +11,7 @@
  */
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
+<?php if($type == 'ip') unset($lang->guarder->punishOptions[0]);?>
 <div class='panel'>
   <div class='panel-heading'>
     <strong><i class='icon-globe'></i> <?php echo $lang->site->setFilter;?></strong>
@@ -20,7 +21,7 @@
   <div class='panel-body'>
     <form method='post' id='ajaxForm' class='form-inline'>
       <table class='table table-form'>
-        <?php foreach($lang->guarder->operationList as $item => $operation):?>
+        <?php foreach($lang->guarder->operationList->$type as $item => $operation):?>
         <tr>
           <th class='text-middle text-center w-100px'><?php echo $operation;?></th>
           <td>
