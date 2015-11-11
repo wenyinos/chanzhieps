@@ -62,13 +62,22 @@ $thisMethodName     = $this->app->getMethodName();
     <?php if(commonModel::isAvailable('shop')):?>
     <a class='btn with-badge' href='<?php echo $this->createLink('cart', 'browse');?>'><i class='icon icon-shopping-cart'></i><strong class='cart-count badge small text-danger circle hide'>12</strong></a>
     <?php endif; ?>
+    <?php
+    $isMultiLangAvailable = count(explode(',', $config->site->lang)) > 1;
+    $isUserAvailable = commonModel::isAvailable('user');
+    ?>
+    <?php if($isUserAvailable || $isMultiLangAvailable):?>
     <div class='dropdown'>
       <button type='button' class='btn' data-toggle='dropdown'><i class='icon-bars circle'></i></button>
       <ul class='dropdown-menu dropdown-menu-right'>
-        <?php echo commonModel::printTopBar(true);?>
-        <?php echo commonModel::printLanguageBar(true);?>
+        <?php
+        if($isUserAvailable) echo commonModel::printTopBar(true);
+        if($isUserAvailable && $isMultiLangAvailable) echo "<li class='divider'></li>";
+        if($isMultiLangAvailable) echo commonModel::printLanguageBar(true);
+        ?>
       </ul>
     </div>
+    <?php endif; ?>
   </div>
 </header>
 

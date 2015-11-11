@@ -501,7 +501,6 @@ class commonModel extends model
         if(count($langs) == 1) return false;
         if($asListItem)
         {
-            echo "<li class='divider'></li>";
             $clientLang = $app->getClientLang();
             echo "<li class='dropdown-header'>{$app->lang->language}</li>";
             foreach($langs as $lang)
