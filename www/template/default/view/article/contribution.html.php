@@ -11,13 +11,13 @@
           <thead>
             <tr>
               <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
-              <th class='text-center w-60px'><?php echo $lang->article->id;?></th>
+              <th class='text-center w-50px'><?php echo $lang->article->id;?></th>
               <th class='text-center'><?php echo $lang->article->title;?></th>
-              <th class='text-center w-200px'><?php echo $lang->article->category;?></th>
+              <th class='text-center w-180px'><?php echo $lang->article->category;?></th>
               <th class='text-center w-160px'><?php echo $lang->article->submissionTime;?></th>
-              <th class='text-center w-160px'><?php echo $lang->article->status;?></th>
-              <th class='text-center w-70px'><?php echo $lang->article->views;?></th>
-              <th class="text-center w-260px"><?php echo $lang->actions;?></th>
+              <th class='text-center w-60px'><?php echo $lang->article->status;?></th>
+              <th class='text-center w-60px'><?php echo $lang->article->views;?></th>
+              <th class="text-center w-120px"><?php echo $lang->actions;?></th>
             </tr>
           </thead>
           <tbody>

@@ -14,10 +14,6 @@
       <div class='panel-body'>
         <form method='post' role='form' id='ajaxForm'>
           <table class='table table-form'>
-            <tr>
-              <th class='w-100px'><?php echo $lang->article->category;?></th>
-              <td class='w-p40'><?php echo html::select("categories[]", $categories, $currentCategory, "multiple='multiple' class='form-control chosen'");?></td><td></td>
-            </tr>
             <tbody class='articleInfo'> 
             <tr>
               <th><?php echo $lang->article->author;?></th>
@@ -25,7 +21,7 @@
             </tr>
             <tr>
               <th><?php echo $lang->article->source;?></th>
-              <td><?php echo html::select('source', $lang->article->sourceList, 'original', "class='form-control chosen'");?></td>
+              <td class='w-30px'><?php echo html::select('source', $lang->article->sourceList, 'original', "class='form-control chosen'");?></td>
               <td>
                 <div class='row' id='copyBox'>
                   <div class='col-md-4'><?php echo html::input('copySite', '', "class='form-control' placeholder='{$lang->article->copySite}'"); ?> </div>
@@ -43,16 +39,6 @@
               </td>
             </tr>
             <tbody class='articleInfo'>
-            <tr>
-              <th><?php echo $lang->article->alias;?></th>
-              <td colspan='2'>
-                <div class='input-group'>
-                  <span class='input-group-addon'>http://<?php echo $this->server->http_host . $config->webRoot . $type;?>/id_</span>
-                  <?php echo html::input('alias', '', "class='form-control' placeholder='{$lang->alias}'");?>
-                  <span class="input-group-addon w-70px">.html</span>
-                </div>
-              </td>
-            </tr>
             <tr>
               <th><?php echo $lang->article->keywords;?></th>
               <td colspan='2'><?php echo html::input('keywords', '', "class='form-control' placeholder='{$lang->keywordsHolder}'");?></td>

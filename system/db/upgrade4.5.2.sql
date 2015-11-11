@@ -1,4 +1,4 @@
-ALTER TABLE `eps_article` ADD `addedBy` varchar(60) NOT NULL;
+ALTER TABLE `eps_article` ADD `addedBy` varchar(60) NOT NULL after `author`;
 ALTER TABLE `eps_article` ADD `contribution` int(1) NOT NULL DEFAULT 0 after `type`;
 
 ALTER table `eps_slide`  CHANGE `image` `image` varchar(100) NOT NULL;

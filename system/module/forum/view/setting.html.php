@@ -5,7 +5,7 @@
     <form id='ajaxForm' action="<?php echo inlink('setting');?>" method='post'>
       <table class='table table-form'>
         <tr>
-          <th class='col-xs-2'><?php echo $lang->forum->postReview;?></th> 
+          <th class='col-xs-2 w-100px'><?php echo $lang->forum->postReview;?></th> 
           <td class='col-xs-2'><?php echo html::radio('postReview', $lang->forum->postReviewOptions, isset($config->forum->postReview) ? $config->forum->postReview : 'close', "class='checkbox'");?></td><td></td>
         </tr>
         <tr>
