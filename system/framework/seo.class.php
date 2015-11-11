@@ -135,6 +135,13 @@ class seo
             $method = $methodAlias[$module]['view'];
             return seo::convertURI($module, $method, $params, $pageID);
         }
+        else
+        {
+             $viewparams = explode('-', $items[1]);
+             $params['id'] = end($viewparams);
+             $method = $methodAlias[$module]['view'];
+             return seo::convertURI($module, $method, $params, $pageID);
+        }
 
         /* The first param is a category alias. */
         $params['category'] = $items[1]; 
