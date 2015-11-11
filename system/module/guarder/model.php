@@ -271,7 +271,7 @@ EOT;
         }
 
         $interval = $this->config->guarder->interval->{$type}->$action;
-        $limit    = $this->config->guarder->limits->{$type}->minute->$action;
+        $limit    = $this->config->guarder->limits->{$type}->interval->$action;
         $last     = date('Y-m-d H:i:s', time() - (60 * $interval));
 
         $log = $this->dao->select('*')->from(TABLE_OPERATIONLOG)
@@ -286,7 +286,7 @@ EOT;
             $log->count ++;
             if($log->count >= $limit)
             {
-                $this->punish($type, $identity, $action, $this->config->guarder->punishment->{$type}->minute->$action, $records);
+                $this->punish($type, $identity, $action, $this->config->guarder->punishment->{$type}->interval->$action, $records);
             }
             $this->dao->replace(TABLE_OPERATIONLOG)->data($log)->exec();
         }

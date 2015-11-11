@@ -12,14 +12,15 @@
 $lang->guarder = new stdclass();
 
 $lang->guarder->action       = 'Action';
+$lang->guarder->then         = 'Then';
 $lang->guarder->addBlacklist = 'Add Blacklist';
 $lang->guarder->setWhitelist = 'Whitelist';
 
-$lang->guarder->captcha     = 'Captcha';
-$lang->guarder->numbers     = array('Zero', 'I', 'II', 'III', 'Four', 'Five', '6', '7', '8', '9', '10');
-$lang->guarder->operators   = array('*' => 'x', '-' => '-', '+' => '+');
-$lang->guarder->equal       = '=';
-$lang->guarder->placeholder = 'Nubmer';
+$lang->guarder->captcha        = 'Captcha';
+$lang->guarder->numbers        = array('Zero', 'I', 'II', 'III', 'Four', 'Five', '6', '7', '8', '9', '10');
+$lang->guarder->operators      = array('*' => 'x', '-' => '-', '+' => '+');
+$lang->guarder->equal          = '=';
+$lang->guarder->placeholder    = 'Nubmer';
 $lang->guarder->password       = 'Admin Password';
 $lang->guarder->passwordHolder = 'Please enter password of current account';
 

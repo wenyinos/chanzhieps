@@ -12,6 +12,7 @@
 $lang->guarder = new stdclass();
 
 $lang->guarder->action       = '操作';
+$lang->guarder->then         = '则';
 $lang->guarder->addBlacklist = '添加黑名单';
 $lang->guarder->setWhitelist = '白名单管理';
 
@@ -52,9 +53,8 @@ $lang->guarder->operationList->resetPWDFailure = '重置密码失败';
 $lang->guarder->operationList->postThread      = '发表主题';
 $lang->guarder->operationList->postComment     = '发表评论';
 $lang->guarder->operationList->postReply       = '回复帖子';
+$lang->guarder->operationList->post            = 'POST请求';
 $lang->guarder->operationList->search          = '搜索次数';
-$lang->guarder->operationList->threadFail      = '帖子被禁';
-$lang->guarder->operationList->commentFail     = '评论被禁';
 $lang->guarder->operationList->error404        = '404次数';
 $lang->guarder->operationList->captchaFail     = '验证码错误';
 
