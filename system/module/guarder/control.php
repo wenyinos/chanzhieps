@@ -100,7 +100,7 @@ class guarder extends control
             $this->send(array('result' => 'fail', 'message' => dao::geterror()));
         }
 
-        $this->view->title       = $this->lang->guarder->addBlacklist;
+        $this->view->title       = $this->lang->addBlacklist;
         $this->view->typeList    = $typeList;
         $this->view->currentType = $type;
         $this->display();

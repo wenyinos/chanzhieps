@@ -13,7 +13,6 @@ $lang->guarder = new stdclass();
 
 $lang->guarder->action       = 'Action';
 $lang->guarder->then         = 'Then';
-$lang->guarder->addBlacklist = 'Add Blacklist';
 $lang->guarder->setWhitelist = 'Whitelist';
 
 $lang->guarder->captcha        = 'Captcha';
@@ -45,18 +44,19 @@ $lang->guarder->times     = 'Times';
 $lang->guarder->disable   = 'Disabled';
 
 $lang->guarder->operationList = new stdclass;
-$lang->guarder->operationList->logonFailure    = 'Login Failed';
-$lang->guarder->operationList->register        = 'Registration Number';
-$lang->guarder->operationList->resetPassword   = 'Reset Password';
-$lang->guarder->operationList->resetPWDFailure = 'Reset Password Failure';
-$lang->guarder->operationList->postThread      = 'Post Topic';
-$lang->guarder->operationList->postComment     = 'Post Comment';
-$lang->guarder->operationList->postReply       = 'Reply To Post';
-$lang->guarder->operationList->search          = 'Searches';
-$lang->guarder->operationList->threadFail      = 'Post Banned';
-$lang->guarder->operationList->commentFail     = 'Comment Banned';
-$lang->guarder->operationList->error404        = '404 Times';
-$lang->guarder->operationList->captchaFail     = 'Validation Error';
+$lang->guarder->operationList->ip = new stdclass;
+$lang->guarder->operationList->ip->logonFailure    = 'Login Failed';
+$lang->guarder->operationList->ip->register        = 'Registration Number';
+$lang->guarder->operationList->ip->resetPassword   = 'Reset Password';
+$lang->guarder->operationList->ip->resetPWDFailure = 'Reset Password Failure';
+$lang->guarder->operationList->ip->postThread      = 'Post Topic';
+$lang->guarder->operationList->ip->postComment     = 'Post Comment';
+$lang->guarder->operationList->ip->postReply       = 'Reply To Post';
+$lang->guarder->operationList->ip->search          = 'Searches';
+$lang->guarder->operationList->ip->threadFail      = 'Post Banned';
+$lang->guarder->operationList->ip->commentFail     = 'Comment Banned';
+$lang->guarder->operationList->ip->error404        = '404 Times';
+$lang->guarder->operationList->ip->captchaFail     = 'Validation Error';
 
 $lang->guarder->punishOptions = array();
 $lang->guarder->punishOptions[1]    = '1h'; 
