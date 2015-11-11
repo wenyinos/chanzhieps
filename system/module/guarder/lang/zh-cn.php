@@ -13,7 +13,6 @@ $lang->guarder = new stdclass();
 
 $lang->guarder->action       = '操作';
 $lang->guarder->then         = '则';
-$lang->guarder->addBlacklist = '添加黑名单';
 $lang->guarder->setWhitelist = '白名单管理';
 
 $lang->guarder->captcha        = '验证码';
@@ -44,18 +43,32 @@ $lang->guarder->exceed    = '超过';
 $lang->guarder->times     = '次';
 $lang->guarder->disable   = '禁用';
 
-$lang->guarder->operationList = new stdclass;
-$lang->guarder->operationList->logonFailure    = '登录失败';
-$lang->guarder->operationList->register        = '注册数量';
-$lang->guarder->operationList->resetPassword   = '找回密码';
-$lang->guarder->operationList->resetPWDFailure = '重置密码失败';
-$lang->guarder->operationList->postThread      = '发表主题';
-$lang->guarder->operationList->postComment     = '发表评论';
-$lang->guarder->operationList->postReply       = '回复帖子';
-$lang->guarder->operationList->post            = 'POST请求';
-$lang->guarder->operationList->search          = '搜索次数';
-$lang->guarder->operationList->error404        = '404次数';
-$lang->guarder->operationList->captchaFail     = '验证码错误';
+$lang->guarder->operationList = new stdclass();
+
+$lang->guarder->operationList->ip = new stdclass();
+$lang->guarder->operationList->ip->logonFailure    = '登录失败';
+$lang->guarder->operationList->ip->register        = '注册数量';
+$lang->guarder->operationList->ip->resetPassword   = '找回密码';
+$lang->guarder->operationList->ip->resetPWDFailure = '重置密码失败';
+$lang->guarder->operationList->ip->postThread      = '发表主题';
+$lang->guarder->operationList->ip->postComment     = '发表评论';
+$lang->guarder->operationList->ip->postReply       = '回复帖子';
+$lang->guarder->operationList->ip->post            = 'POST请求';
+$lang->guarder->operationList->ip->search          = '搜索次数';
+$lang->guarder->operationList->ip->error404        = '404次数';
+$lang->guarder->operationList->ip->captchaFail     = '验证码错误';
+
+$lang->guarder->operationList->account = new stdclass();
+$lang->guarder->operationList->account->logonFailure    = '登录失败';
+$lang->guarder->operationList->account->resetPassword   = '找回密码';
+$lang->guarder->operationList->account->resetPWDFailure = '重置密码失败';
+$lang->guarder->operationList->account->postThread      = '发表主题';
+$lang->guarder->operationList->account->postComment     = '发表评论';
+$lang->guarder->operationList->account->postReply       = '回复帖子';
+$lang->guarder->operationList->account->post            = 'POST请求';
+$lang->guarder->operationList->account->search          = '搜索次数';
+$lang->guarder->operationList->account->error404        = '404次数';
+$lang->guarder->operationList->account->captchaFail     = '验证码错误';
 
 $lang->guarder->punishOptions = array();
 $lang->guarder->punishOptions[1]    = '一小时'; 
