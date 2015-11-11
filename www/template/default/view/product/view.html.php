@@ -31,7 +31,7 @@ js::execute($product->js);
 <div class='row blocks' data-region='product_view-topBanner'><?php $this->block->printRegion($layouts, 'product_view', 'topBanner', true);?></div>
 <div class='row'>
   <div class='col-md-9 col-main'>
-    <div class='row blocks' data-region='product_view-top blocks' data-region='product_view-bottom'><?php $this->block->printRegion($layouts, 'product_view', 'top', true);?></div>
+    <div class='row blocks' data-region='product_view-top'><?php $this->block->printRegion($layouts, 'product_view', 'top', true);?></div>
     <div class='panel panel-body panel-product' id='product' data-id='<?php echo $product->id;?>'>
       <div class='row'>
         <?php if(!empty($product->image->list)):?>
