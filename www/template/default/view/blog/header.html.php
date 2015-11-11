@@ -24,9 +24,9 @@ $navs           = $this->loadModel('nav')->getNavs('desktop_blog');
 ?>
 <!DOCTYPE html>
 <?php if(!empty($config->oauth->sina)):?>
-<html xmlns:wb="http://open.weibo.com/wb" class='m-<?php echo $thisModuleName?> m-<?php echo $thisModuleName?>-<?php echo $thisMethodName?>'>
+<html lang='<?php echo $app->getClientLang();?>' xmlns:wb="http://open.weibo.com/wb" class='m-<?php echo $thisModuleName?> m-<?php echo $thisModuleName?>-<?php echo $thisMethodName?>'>
 <?php else:?>
-<html lang="en">
+<html lang='<?php echo $app->getClientLang();?>' class='m-<?php echo $thisModuleName?> m-<?php echo $thisModuleName?>-<?php echo $thisMethodName?>'>
 <?php endif;?>
 <head>
   <meta name="renderer" content="webkit">
