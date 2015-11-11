@@ -100,7 +100,6 @@ class seo
         }
 
         //------------- The module is an system module-------------- */
-
         /* Is the module an alias of a page. */
         if($module == 'page' && isset($pageAlias[$items[1]]))
         {
@@ -135,16 +134,18 @@ class seo
             $method = $methodAlias[$module]['view'];
             return seo::convertURI($module, $method, $params, $pageID);
         }
+
+        $viewparams = explode('-', $items[1]);
+        if(count($viewparams) > 1 and is_numeric($params['id']))
+        {
+            $params['id'] = end($viewparams);
+        }
         else
         {
-             $viewparams = explode('-', $items[1]);
-             $params['id'] = end($viewparams);
-             $method = $methodAlias[$module]['view'];
-             return seo::convertURI($module, $method, $params, $pageID);
+            /* The first param is a category alias. */
+            $params['category'] = $items[1]; 
         }
 
-        /* The first param is a category alias. */
-        $params['category'] = $items[1]; 
         $method = isset($methodAlias[$module]['browse']) ? $methodAlias[$module]['browse'] : 'browse';
 
         return seo::convertURI($module, $method, $params, $pageID);
