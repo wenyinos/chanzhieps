@@ -555,8 +555,14 @@ EOT;
 
             if(preg_match('/\/p\d+/', $link)) return html::a(preg_replace('/\/p\d+\./', '/p' . $this->params['pageID'] . '.', $link), $title);
 
-            return html::a(str_replace('.', "/p{$this->params['pageID']}.", $link), $title);
+            if($config->requestType == 'PATH_INFO2') $link = str_replace('index.php/', 'index_php', $link);
+            $link = str_replace('.', "/p{$this->params['pageID']}.", $link);
+            if($config->requestType == 'PATH_INFO2') $link =  str_replace('index_php/', 'index.php/', $link);
+            return html::a($link, $title);
         }
+        a($this->moduleName);
+        a($this->methodName);
+        exit;
         return html::a(helper::createLink($this->moduleName, $this->methodName, $this->params), $title);
     }
 }
