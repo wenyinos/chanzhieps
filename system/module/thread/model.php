@@ -216,10 +216,13 @@ class threadModel extends model
         {
             $thread->status = 'wait';
         }
-        else $thread->status = 'approved';
+        else
+        {
+            $thread->status = 'approved';
+        }
 
         $this->dao->insert(TABLE_THREAD)
-            ->data($thread, $skip = "$titleInput, $contentInput, uid, isLink")
+            ->data($thread, $skip = "$titleInput, $contentInput, {$this->session->captchaInput}, uid, isLink")
             ->autoCheck()
             ->batchCheckIF(!$this->post->isLink, "$titleInput, $contentInput", 'notempty')
             ->batchCheckIF($this->post->isLink, $this->config->thread->require->link, 'notempty')
