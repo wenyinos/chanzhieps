@@ -5,6 +5,10 @@ ALTER table `eps_slide`  CHANGE `image` `image` varchar(100) NOT NULL;
 ALTER table `eps_thread` ADD `status` char(10) NOT NULL; 
 ALTER table `eps_thread` ADD `ip` char(15) NOT NULL;
 
+ALTER table eps_order CHANGE amount amount decimal(10,2) UNSIGNED  NOT NULL DEFAULT '0.00';
+ALTER table eps_product CHANGE promotion promotion decimal(10,2) UNSIGNED  NOT NULL DEFAULT '0.00';
+ALTER table eps_product CHANGE price price decimal(10,2) UNSIGNED  NOT NULL DEFAULT '0.00';
+
 CREATE TABLE IF NOT EXISTS  `eps_blacklist` (
   `type` varchar(30) NOT NULL,
   `identity` varchar(100) NOT NULL,
