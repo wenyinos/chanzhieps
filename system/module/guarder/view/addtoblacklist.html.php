@@ -13,7 +13,7 @@
     <?php endif;?> 
     <tr>
       <th class='w-80px content'><?php echo $lang->blacklist->identity;?></th>
-      <td colspan='3'>
+      <td colspan='3' class='w-180px'>
         <div class='objectContent'>
         <?php echo $object->content;?>
         </div>
@@ -28,10 +28,10 @@
     <?php if(!empty($object->ip)):?>
     <tr>
       <th><?php echo $lang->blacklist->ip;?></th>
-      <td>
+      <td class='w-180px'>
         <?php echo html::checkbox('item[ip]', array($object->ip => $object->ip), '', "checkbox-inline");?>
       </td>
-      <td>
+      <td class='w-180px'>
         <div class='input-group'>
         <span class='input-group-addon'><?php echo $lang->guarder->disable;?></span>
         <?php echo html::select('hour[ip]', $lang->guarder->punishOptions, '', "class='form-control'");?>
@@ -43,10 +43,10 @@
     <?php if(!empty($object->author)):?>
     <tr>
       <th><?php echo $lang->blacklist->account;?></th>
-      <td>
+      <td class='w-180px'>
         <?php echo html::checkbox('item[account]', array($object->author => $object->author), '', "checkbox-inline");?>
       </td>
-      <td>
+      <td class='w-180px'>
         <div class='input-group'>
         <span class='input-group-addon'><?php echo $lang->guarder->disable;?></span>
         <?php echo html::select('hour[account]', $lang->guarder->punishOptions, '', "class='form-control'");?>
@@ -61,7 +61,7 @@
       <td class='w-180px'>
         <?php echo html::checkbox('item[email]', array($object->email => $object->email), '', "checkbox-inline");?>
       </td>
-      <td class='w-200px'>
+      <td class='w-180px'>
         <div class='input-group'>
         <span class='input-group-addon'><?php echo $lang->guarder->disable;?></span>
         <?php echo html::select('hour[email]', $lang->guarder->punishOptions, '', "class='form-control'");?>
