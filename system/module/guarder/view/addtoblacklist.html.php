@@ -1,25 +1,37 @@
 <?php include '../../common/view/header.modal.html.php';?>
-<form id='ajaxForm' method='post' action="<?php echo inlink('addToBlacklist', "id={$thread->id}");?>">
+<form id='ajaxForm' method='post' action="<?php echo inlink('addToBlacklist', "objectType={$objectType}&objectID={$object->id}");?>">
   <table class='table table-form form-inline table-borderd'>
+  <?php if($objectType == 'thread'):?>
     <tr>
-      <th class='w-80px'><?php echo $lang->thread->content;?></th>
+      <th class='w-80px'><?php echo $lang->blacklist->title;?></th>
       <td colspan='3'>
-        <?php echo $thread->content;?>
+        <div class='objectTitle'>
+        <?php echo $object->title;?>
+        </div>
+      </td>
+    </tr>
+    <?php endif;?> 
+    <tr>
+      <th class='w-80px content'><?php echo $lang->blacklist->identity;?></th>
+      <td colspan='3'>
+        <div class='objectContent'>
+        <?php echo $object->content;?>
+        </div>
       </td>
     </tr>
     <tr>
       <th><?php echo $lang->blacklist->keywords;?></th>
       <td colspan='3'>
-        <?php echo html::textarea('keywords', '', "class='form-control'");?>
+        <?php echo html::textarea('keywords', '', "placeholder='{$lang->keywordsHolder}'class='form-control'");?>
       </td>
     </tr>
-    <?php if(!empty($thread->ip)):?>
+    <?php if(!empty($object->ip)):?>
     <tr>
       <th><?php echo $lang->blacklist->ip;?></th>
-      <td class='w-160px'>
-        <?php echo html::checkbox('item[ip]', array($thread->ip => $thread->ip), '', "checkbox-inline");?>
+      <td>
+        <?php echo html::checkbox('item[ip]', array($object->ip => $object->ip), '', "checkbox-inline");?>
       </td>
-      <td class='w-200px'>
+      <td>
         <div class='input-group'>
         <span class='input-group-addon'><?php echo $lang->guarder->disable;?></span>
         <?php echo html::select('hour[ip]', $lang->guarder->punishOptions, '', "class='form-control'");?>
@@ -28,13 +40,13 @@
       <td></td>
     </tr>
     <?php endif;?>
-    <?php if(!empty($thread->author)):?>
+    <?php if(!empty($object->author)):?>
     <tr>
       <th><?php echo $lang->blacklist->account;?></th>
       <td>
-        <?php echo html::checkbox('item[account]', array($thread->author => $thread->author), '', "checkbox-inline");?>
+        <?php echo html::checkbox('item[account]', array($object->author => $object->author), '', "checkbox-inline");?>
       </td>
-      <td class='w-200px'>
+      <td>
         <div class='input-group'>
         <span class='input-group-addon'><?php echo $lang->guarder->disable;?></span>
         <?php echo html::select('hour[account]', $lang->guarder->punishOptions, '', "class='form-control'");?>
@@ -43,16 +55,16 @@
       <td></td>
     </tr>
     <?php endif;?>
-    <?php if(!empty($thread->email)):?>
+    <?php if(!empty($object->email)):?>
     <tr>
       <th><?php echo $lang->blacklist->email;?></th>
-      <td>
-        <?php echo html::checkbox('item[email]', array($thread->email => $thread->email), '', "checkbox-inline");?>
+      <td class='w-180px'>
+        <?php echo html::checkbox('item[email]', array($object->email => $object->email), '', "checkbox-inline");?>
       </td>
       <td class='w-200px'>
         <div class='input-group'>
         <span class='input-group-addon'><?php echo $lang->guarder->disable;?></span>
-        <?php echo html::input('hour[email]', '', "class='form-control'");?>
+        <?php echo html::select('hour[email]', $lang->guarder->punishOptions, '', "class='form-control'");?>
         </div>
       </td>
       <td></td>
@@ -62,3 +74,4 @@
   </table>
 </form>
 <?php include '../../common/view/footer.modal.html.php';?>
+

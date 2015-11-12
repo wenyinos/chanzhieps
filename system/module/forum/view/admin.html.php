@@ -83,7 +83,7 @@
               echo html::a('', $lang->thread->transfer, "class='disabled'");
           }
           commonModel::printLink('thread', 'delete', "threadID=$thread->id", $lang->delete, "class='deleter'");
-          commonModel::printLink('thread', 'addToBlacklist', "threadID=$thread->id", $lang->addToBlacklist, "data-toggle='modal'");
+          commonModel::printLink('guarder', 'addToBlacklist', "type=thread&id=$thread->id", $lang->addToBlacklist, "data-toggle='modal'");
           ?>
         </td>
       </tr>

@@ -82,7 +82,8 @@ $lang->guarder->punishOptions[0]    = '永久';
 
 $lang->blacklist = new stdclass();
 $lang->blacklist->type        = '类型';
-$lang->blacklist->identity    = '值';
+$lang->blacklist->title       = '标题';
+$lang->blacklist->identity    = '内容';
 $lang->blacklist->reason      = '原因';
 $lang->blacklist->expiredDate = '禁用时间';
 $lang->blacklist->ip          = 'IP';
