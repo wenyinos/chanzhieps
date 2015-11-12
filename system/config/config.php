@@ -44,8 +44,9 @@ $config->views  = ',html,mhtml,json,xml,'; // Supported view types.
 $config->site = new stdclass();
 $config->site->resetPassword     = 'open'; 
 $config->site->importantValidate = 'okFile,email';
-$config->site->modules = 'article,product';
-$config->site->type    = 'portal';
+$config->site->modules           = 'article,product';
+$config->site->type              = 'portal';
+$config->site->filterFunction    = 'close';
 
 $config->template = new stdclass();
 $config->template->desktop = new stdclass();
