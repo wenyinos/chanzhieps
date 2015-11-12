@@ -68,12 +68,13 @@ $(document).ready(function()
           $('#mailSender').popover({trigger:'manual', content: v.emailSending, placement:'right'}).popover('show');
           $('#mailSender').next('.popover').addClass('popover-success').css('width', '320px');
           function distroy(){$('#mailSender').popover('destroy')}
-          setTimeout(distroy,1000);
+          setTimeout(distroy, 2000);
   
           var url = $(this).attr('href');
 
           $.getJSON(url, function(response)
           {
+              $('#mailSender').popover('destroy');
               if(response.result == 'success')
               {
                    $('#mailSender').attr('disabled', 'disabled');
