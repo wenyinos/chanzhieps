@@ -93,8 +93,7 @@ $config->rights->guest['yangcong']['getresult'] = 'getresult';
 
 /* For logged member. */
 $config->rights->member['article']['contribution'] = 'contribution';
-$config->rights->member['article']['create']       = 'create';
-$config->rights->member['article']['edit']         = 'edit';
+$config->rights->member['article']['post']         = 'post';
 $config->rights->member['article']['delete']       = 'delete';
 
 $config->rights->member['thread']['post']         = 'post';

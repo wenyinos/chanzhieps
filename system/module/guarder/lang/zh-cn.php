@@ -14,6 +14,7 @@ $lang->guarder = new stdclass();
 $lang->guarder->action       = '操作';
 $lang->guarder->then         = '则';
 $lang->guarder->setWhitelist = '白名单管理';
+$lang->guarder->addBlacklist = '添加黑名单';
 
 $lang->guarder->captcha        = '验证码';
 $lang->guarder->numbers        = array('零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖', '拾');
