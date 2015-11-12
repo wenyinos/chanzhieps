@@ -276,6 +276,9 @@ table.captcha td label {padding: 0;}
 .wechat-block .qrcode img {width: 160px; border: 1px solid #ddd;}
 .wechat-block .name {font-size: 12px; margin-bottom: 6px; font-weight: bold;}
 
+/* product cards */
+.card > .media-wrapper > img {max-height: 100%}
+
 /* Popovers */
 .popover {max-width: 900px; z-index: 1050}
 
