@@ -46,6 +46,7 @@ $lang->site->resetPassword   = '前台找回密码';
 $lang->site->checkIP         = '后台登录IP白名单';
 $lang->site->checkLocation   = '后台登录地区验证';
 $lang->site->checkEmail      = '会员邮箱绑定';
+$lang->site->filterFunction  = '过滤功能';
 $lang->site->allowedLocation = '允许登录地区';
 $lang->site->checkSessionIP  = '后台检查IP';
 $lang->site->forceYangcong   = '后台强制洋葱登录';
@@ -142,6 +143,9 @@ $lang->site->mobileTemplateList['close'] = '禁用';
 
 $lang->site->scoreList['open']  = '启用';
 $lang->site->scoreList['close'] = '禁用';
+
+$lang->site->filterFunctionList['open']  = '启用';
+$lang->site->filterFunctionList['close'] = '关闭';
 
 $lang->site->moduleAvailable = array();
 $lang->site->moduleAvailable['user']    = '会员';

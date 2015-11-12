@@ -27,9 +27,13 @@
           <td></td>
         </tr>
         <tr>
-        <tr>
           <th class='w-200px'><?php echo $lang->site->resetPassword;?></th>
           <td colspan='2'><?php echo html::radio('resetPassword', $lang->site->resetPasswordList, isset($this->config->site->resetPassword) ? $this->config->site->resetPassword : 'open');?></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th class='w-200px'><?php echo $lang->site->filterFunction;?></th>
+          <td colspan='2'><?php echo html::radio('filterFunction', $lang->site->filterFunctionList, isset($this->config->site->filterFunction) ? $this->config->site->filterFunction : 'close');?></td>
           <td></td>
         </tr>
         <tr>
