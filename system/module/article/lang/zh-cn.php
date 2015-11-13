@@ -13,6 +13,8 @@ $lang->article->setting     = '文章设置';
 $lang->article->common      = '文章维护';
 $lang->article->createDraft = '保存草稿';
 $lang->article->post        = '创建投稿';
+$lang->article->check       = '审核投稿';
+$lang->article->reject      = '驳回投稿';
 
 $lang->article->id         = '编号';
 $lang->article->category   = '类目';

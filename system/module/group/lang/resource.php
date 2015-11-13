@@ -61,15 +61,17 @@ $lang->resource->admin->ignoreupgrade = 'ignoreupgrade';
 
 /* Article module. */
 $lang->resource->article = new stdclass();
-$lang->resource->article->admin  = 'admin';
-$lang->resource->article->create = 'create';
-$lang->resource->article->edit   = 'edit';
-$lang->resource->article->delete = 'delete';
-$lang->resource->article->setcss = 'setcss';
-$lang->resource->article->setjs  = 'setjs';
-$lang->resource->article->stick  = 'stick';
+$lang->resource->article->admin         = 'admin';
+$lang->resource->article->create        = 'create';
+$lang->resource->article->edit          = 'edit';
+$lang->resource->article->delete        = 'delete';
+$lang->resource->article->setcss        = 'setcss';
+$lang->resource->article->setjs         = 'setjs';
+$lang->resource->article->stick         = 'stick';
 $lang->resource->article->forward2Blog  = 'forward2Blog';
 $lang->resource->article->forward2Forum = 'forward2Forum';
+$lang->resource->article->check         = 'check';
+$lang->resource->article->reject        = 'reject';
 
 /* Block module. */
 $lang->resource->block = new stdclass();
