@@ -871,7 +871,13 @@ class router
      */
     public function parseRequest()
     {
-        if($this->config->requestType != 'GET')
+        if(isGetUrl())
+        {
+            if($this->config->requestType == 'PATH_INFO2') define('FIX_PATH_INFO2', true);
+            $this->config->requestType = 'GET';
+        }
+
+        if($this->config->requestType == 'PATH_INFO' or $this->config->requestType == 'PATH_INFO2')
         {
             $this->parsePathInfo();
 
