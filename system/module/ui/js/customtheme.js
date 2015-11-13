@@ -104,6 +104,8 @@ $(document).ready(function()
             else if(type === 'image' && val != 'inherit' && val != 'none' && val.indexOf('url(') != 0)
             {
                 $this.val('url(' + val + ')');
+            } else if(type === 'color') {
+                $this.val(val.replace(';', ''));
             }
         });
 
