@@ -25,6 +25,7 @@ $lang->guarder->placeholder    = '数字';
 $lang->guarder->password       = '管理密码';
 $lang->guarder->passwordHolder = '请输入当前帐号的密码';
 
+$lang->guarder->blacklistModes['all']      = '全部';
 $lang->guarder->blacklistModes['ip']       = 'ip地址';
 $lang->guarder->blacklistModes['account']  = '帐号';
 $lang->guarder->blacklistModes['keywords'] = '关键词';

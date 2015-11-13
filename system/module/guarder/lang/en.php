@@ -23,6 +23,7 @@ $lang->guarder->placeholder    = 'Nubmer';
 $lang->guarder->password       = 'Admin Password';
 $lang->guarder->passwordHolder = 'Please enter password of current account';
 
+$lang->guarder->blacklistModes['all']      = 'all';
 $lang->guarder->blacklistModes['ip']       = 'ip';
 $lang->guarder->blacklistModes['account']  = 'Account';
 $lang->guarder->blacklistModes['keywords'] = 'Keywords';
