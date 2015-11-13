@@ -29,7 +29,7 @@ class seo
 
         $categoryAlias = $config->seo->alias->category;
         $pageAlias     = $config->seo->alias->page;
-        $forumAlias    = $config->seo->alias->forum;
+        $forumAlias    = isset($config->seo->alias->forum) ? $config->seo->alias->forum : array();
         $methodAlias   = $config->seo->alias->method;
 
         $params = array();
