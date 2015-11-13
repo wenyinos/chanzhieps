@@ -174,6 +174,7 @@ class article extends control
      */
     public function post()
     {
+        if(!commonModel::isAvailable('contribution')) die();
         if($_POST)
         {
             $this->article->create('contribution');
@@ -195,6 +196,7 @@ class article extends control
      */
     public function modify($articleID)
     {
+        if(!commonModel::isAvailable('contribution')) die();
         $article = $this->article->getByID($articleID);
         if(RUN_MODE == 'front' and $article->addedBy != $this->app->user->account) return false;
 
@@ -491,6 +493,7 @@ class article extends control
      */
     public function contribution($orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {
+        if(!commonModel::isAvailable('contribution')) die();
         $this->app->loadLang('user');
 
         $this->app->loadClass('pager', $static = true);
@@ -521,10 +524,10 @@ class article extends control
      * @access public
      * @return void
      */
-    public function reject($articleID, $type)
+    public function reject($articleID)
     {
         $result = $this->article->reject($articleID);
         if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin', "type=$type")));
+        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin', "type=contribution&tab=feedback")));
     }
 }

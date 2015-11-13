@@ -574,7 +574,6 @@ class articleModel extends model
         $article = $this->getByID($articleID);
         if(!$article) return false;
         if(RUN_MODE == 'front' and $article->addedBy != $this->app->user->account) die();
-
         /* If this article is a contribution and has been adopt, front cannot delete it.*/
         if(RUN_MODE == 'front' and $article->contribution == 2) die();
 
@@ -749,7 +748,7 @@ class articleModel extends model
      */
     public function reject($articleID)
     {
-        $this->dao->update(TABLE_ARTICLE)->set('status')->eq('draft')->set('contribution')->eq(3)->where('id')->eq($articleID)->exec();
+        $this->dao->update(TABLE_ARTICLE)->set('contribution')->eq(3)->where('id')->eq($articleID)->exec();
         $article = $this->getByID($articleID);
         $this->loadModel('message')->send($this->app->user->account, $article->addedBy, sprintf($this->lang->article->rejectMessage, $article->title));
 

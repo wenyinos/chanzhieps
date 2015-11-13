@@ -44,6 +44,7 @@ $lang->article->forward2Blog     = '转至博客';
 $lang->article->forward2Forum    = '转至论坛';
 $lang->article->selectCategories = '选择类目';
 $lang->article->selectBoard      = '选择版块';
+$lang->article->confirmReject    = '确认驳回这篇投稿？';
 
 $lang->contribution= new stdclass();
 $lang->contribution->check   = '审核';

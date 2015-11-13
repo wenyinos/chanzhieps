@@ -12,6 +12,7 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/chosen.html.php';?>
+<?php js::set('confirmReject', $lang->article->confirmReject);?>
 <div class='panel'>
   <div class='panel-heading'><strong><i class='icon-edit'></i> <?php echo $lang->contribution->check;?></strong></div>
   <div class='panel-body'>
@@ -60,7 +61,7 @@
         <td class='blogTD'><?php echo html::select("blogCategories[]", $blogCategories, array_keys($article->categories), "multiple='multiple' class='form-control chosen'");?></td>
       </tr>
       <tr>
-        <th></th><td colspan='2'><?php echo html::submitButton($lang->contribution->publish);?></td>
+        <th></th><td colspan='2'><?php echo html::submitButton($lang->contribution->publish) . html::a(inlink('reject', "id={$article->id}"), $lang->contribution->reject, "class='btn btn-warning rejecter'");?></td>
       </tr>
     </table>
   </form>

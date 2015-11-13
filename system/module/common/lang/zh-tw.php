@@ -174,14 +174,12 @@ $lang->menuGroups->company = 'site';
 /* Menu of article module. */
 $lang->article = new stdclass();
 $lang->article->menu = new stdclass();
-$lang->article->menu->browse       = '我的文章|article|admin|type=article&categoryID=0&orderBy=id_desc&recTotal=0&recPerPage=20&pageID=1&contribution=false';
-$lang->article->menu->contribution = '投稿文章|article|admin|type=article&categoryID=0&orderBy=id_desc&recTotal=0&recPerPage=20&pageID=1&contribution=true';
+$lang->article->menu->browse       = '文章列表|article|admin|';
 
 /* Menu of blog module. */
 $lang->blog = new stdclass();
 $lang->blog->menu = new stdclass();
-$lang->blog->menu->browse       = '我的博客|article|admin|type=blog&categoryID=0&orderBy=id_desc&recTotal=0&recPerPage=20&pageID=1&contribution=false';
-$lang->blog->menu->contribution = '投稿博客|article|admin|type=blog&categoryID=0&orderBy=id_desc&recTotal=0&recPerPage=20&pageID=1&contribution=true';
+$lang->blog->menu->browse       = '博客列表|article|admin|type=blog';
 
 /* Menu of page module. */
 $lang->page = new stdclass();
@@ -216,12 +214,13 @@ $lang->user->menu->qq     = 'QQ會員|user|admin|provider=qq';
 /* Menu of comment module. */
 $lang->feedback = new stdclass();
 $lang->feedback->menu = new stdclass();
-$lang->feedback->menu->message = '留言|message|admin|type=message';
-$lang->feedback->menu->comment = '評論|message|admin|type=comment';
-$lang->feedback->menu->answer  = '回覆|message|admin|type=reply';
-$lang->feedback->menu->thread  = '主題|forum|admin|tab=feedback';
-$lang->feedback->menu->reply   = '回帖|reply|admin|order=id_desc&tab=feedback';
-$lang->feedback->menu->wechat  = '微信|wechat|message|mode=replied&replied=0';
+$lang->feedback->menu->message      = '留言|message|admin|type=message';
+$lang->feedback->menu->comment      = '評論|message|admin|type=comment';
+$lang->feedback->menu->answer       = '回覆|message|admin|type=reply';
+$lang->feedback->menu->thread       = '主題|forum|admin|tab=feedback';
+$lang->feedback->menu->reply        = '回帖|reply|admin|order=id_desc&tab=feedback';
+$lang->feedback->menu->contribution = '投稿|article|admin|type=contribution&tab=feedback';
+$lang->feedback->menu->wechat       = '微信|wechat|message|mode=replied&replied=0';
 
 $lang->message = new stdclass();
 $lang->message->menu = $lang->feedback->menu;

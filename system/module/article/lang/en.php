@@ -44,6 +44,7 @@ $lang->article->forward2Blog     = 'Forward to blog';
 $lang->article->forward2Forum    = 'Forward to forum';
 $lang->article->selectCategories = 'Select categories';
 $lang->article->selectBoard      = 'Select board';
+$lang->article->confirmReject    = 'Are you sure to reject this post ?';
 
 $lang->contribution= new stdclass();
 $lang->contribution->check   = 'Check';

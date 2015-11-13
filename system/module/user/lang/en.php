@@ -206,6 +206,7 @@ $lang->user->control->lblPassword = "Keep empty, will not change it.";
 
 $lang->user->control->menus[10] = '<i class="icon-large icon-user"></i> Profile <i class="icon-chevron-right"></i>|user|profile';
 $lang->user->control->menus[20] = '<i class="icon-large icon-comments-alt"></i> Messages <i class="icon-chevron-right"></i>|user|message';
+if(RUN_MODE != 'install' and commonModel::isAvailable('contribution')) $lang->user->control->menus[21] = '<i class="icon-envelope-alt"></i> My Contribution <i class="icon-chevron-right"></i>|article|contribution'; 
 if(RUN_MODE != 'install' and commonModel::isAvailable('score'))
 {
     $lang->user->control->menus[30] = '<i class="icon-sun"></i> Score <i class="icon-chevron-right"></i>|user|score';
@@ -214,7 +215,6 @@ if(RUN_MODE != 'install' and commonModel::isAvailable('score'))
 $lang->user->control->menus[50] = '<i class="icon-comment"></i> My Theme <i class="icon-chevron-right"></i>|user|thread';
 $lang->user->control->menus[60] = '<i class="icon-mail-reply"></i> My Replies <i class="icon-chevron-right"></i>|user|reply';
 
-if($this->config->article->contribution == 'open') $lang->user->control->menus[90] = '<i class="icon-envelope-alt"></i> My Contribution <i class="icon-chevron-right"></i>|article|contribution'; 
 if(RUN_MODE != 'install' and commonModel::isAvailable('order')) $lang->user->control->menus[25] = '<i class="icon-shopping-cart"></i> My Orders <i class="icon-chevron-right"></i>|order|browse';
 if(RUN_MODE != 'install' and commonModel::isAvailable('shop')) $lang->user->control->menus[26] = '<i class="icon-map-marker"> </i> Addresses <i class="icon-chevron-right"></i>|address|browse';
 
