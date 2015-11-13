@@ -1,10 +1,7 @@
 <?php include TPL_ROOT . 'common/header.html.php';?>
 <?php include TPL_ROOT . 'common/datepicker.html.php';?>
-<?php js::set('type', $type);?>
-<?php js::set('categoryID', $currentCategory);?>
 <?php include TPL_ROOT . 'common/kindeditor.html.php';?>
 <?php include TPL_ROOT . 'common/chosen.html.php';?>
-
 <div class='page-user-control'>
   <div class='row'>
     <?php include TPL_ROOT . 'user/side.html.php';?>
@@ -15,10 +12,6 @@
         <form method='post' role='form' id='ajaxForm'>
           <table class='table table-form'>
             <tbody class='articleInfo'> 
-            <tr>
-              <th><?php echo $lang->article->author;?></th>
-              <td><?php echo html::input('author', $app->user->realname, "class='form-control'");?></td>
-            </tr>
             <tr>
               <th><?php echo $lang->article->source;?></th>
               <td class='w-30px'><?php echo html::select('source', $lang->article->sourceList, 'original', "class='form-control chosen'");?></td>

@@ -246,7 +246,7 @@ EOT;
         $whitelist = isset($this->config->guarder->whitelist->$type) ? $this->config->guarder->whitelist->$type : '';
         if(strpos(",$whitelist,", ",$identity,") !== false) return true;
 
-        $records = $this->dao->setAutoLang(false)
+        $records = $this->dao->setAutolang(false)
             ->select('times')->from(TABLE_BLACKLIST)
             ->where('type')->eq($type)
             ->andWhere('identity')->eq($identity)
@@ -318,7 +318,7 @@ EOT;
      * @access public
      * @return bool 
      */
-    public function punish($type, $identity, $reason, $expired, $times)
+    public function punish($type, $identity, $reason, $expired, $times = 1)
     {
        $blacklist = new stdclass(); 
        $blacklist->type     = $type;

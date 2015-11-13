@@ -158,6 +158,28 @@ class article extends control
     }
 
     /**
+     * Create an contribution.
+     * 
+     * @param  string $type 
+     * @param  int    $categoryID
+     * @access public
+     * @return void
+     */
+    public function post()
+    {
+        if($_POST)
+        {
+            $this->article->create($type);
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            if(RUN_MODE == 'front') $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('contribution')));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin', "type=$type")));
+        }
+
+        $this->view->title = $this->lang->article->create;
+        $this->display();
+    }
+
+    /**
      * Edit an article.
      * 
      * @param  int    $articleID 

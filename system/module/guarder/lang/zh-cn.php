@@ -15,6 +15,7 @@ $lang->guarder->action       = '操作';
 $lang->guarder->then         = '则';
 $lang->guarder->addBlacklist = '加黑名单';
 $lang->guarder->setWhitelist = '白名单管理';
+$lang->guarder->addBlacklist = '添加黑名单';
 
 $lang->guarder->captcha        = '验证码';
 $lang->guarder->numbers        = array('零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖', '拾');
@@ -84,7 +85,8 @@ $lang->guarder->punishOptions[0]     = '永久';
 
 $lang->blacklist = new stdclass();
 $lang->blacklist->type        = '类型';
-$lang->blacklist->identity    = '值';
+$lang->blacklist->title       = '标题';
+$lang->blacklist->identity    = '内容';
 $lang->blacklist->reason      = '原因';
 $lang->blacklist->expiredDate = '禁用时间';
 $lang->blacklist->ip          = 'IP';

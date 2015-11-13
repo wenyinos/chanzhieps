@@ -22,4 +22,5 @@
   </tbody>
 </table>
 </form>
+</div>
 <?php include '../../common/view/footer.modal.html.php';?>

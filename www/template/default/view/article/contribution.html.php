@@ -5,7 +5,7 @@
     <div class='col-md-10'>
       <div class='panel'>
         <div class='panel-heading'><strong><i class='icon-envelope-alt'></i> <?php echo $lang->user->contribution;?></strong>
-          <div class='panel-actions'><?php commonModel::printLink('article', 'create', "type={$type}&category=0", '<i class="icon-plus"></i> ' . $lang->article->contribution, 'class="btn btn-primary"');?></div>
+          <div class='panel-actions'><?php commonModel::printLink('article', 'post', '', '<i class="icon-plus"></i> ' . $lang->article->post, 'class="btn btn-primary"');?></div>
         </div>
         <table class='table table-hover table-striped tablesorter'>
           <thead>
