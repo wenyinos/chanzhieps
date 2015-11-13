@@ -185,7 +185,7 @@ EOT;
      */
     public function inList()
     {
-        if($this->config->site->filterFunction != 'open') return true;
+        if($this->config->site->filterFunction != 'open') return false;
         $ip      = $this->server->remote_addr;
         $account = $this->app->user->account;
 
@@ -210,7 +210,7 @@ EOT;
      */
     public function matchList($content)
     {
-        if($this->config->site->filterFunction != 'open') return true;
+        if($this->config->site->filterFunction != 'open') return false;
         if(!is_string($content))
         {
             $content = (array) $content;
@@ -345,7 +345,7 @@ EOT;
      */
     public function checkRepeat($content, $title = '')
     {
-        if($this->config->site->filterFunction != 'open') return true;
+        if($this->config->site->filterFunction != 'open') return false;
         if(empty($title)) $title = $content;
         $repeat = $this->dao->select('id')->from(TABLE_THREAD)->where('title')->eq($title)->orWhere('content')->eq($content)->fetch();
         if(empty($repeat)) $repeat = $this->dao->select('id')->from(TABLE_MESSAGE)->where('content')->eq($content)->fetch();
