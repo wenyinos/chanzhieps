@@ -125,7 +125,7 @@ class fileModel extends model
             ->fetchAll('id');
 
         /* Process these files. */
-        $filePathnams = array();
+        $filePathnames = array();
         foreach($files as $id => $objectFiles)
         {
             $this->processFile($objectFiles);
