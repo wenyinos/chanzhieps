@@ -42,14 +42,18 @@ $lang->site->scheme          = '預設訪問協議';
 $lang->site->saveDays        = '日誌保存天數';
 
 $lang->site->importantOption = '重要操作';
+$lang->site->resetPassword   = '前台找回密碼';
 $lang->site->checkIP         = '後台登錄IP白名單';
 $lang->site->checkLocation   = '後台登錄地區驗證';
 $lang->site->checkEmail      = '會員郵箱綁定';
+$lang->site->filterFunction  = '過濾功能';
 $lang->site->allowedLocation = '允許登錄地區';
 $lang->site->checkSessionIP  = '後台檢查IP';
+$lang->site->forceYangcong   = '後台強制洋蔥登錄';
 $lang->site->setsecurity     = '安全設置';
 $lang->site->setsensitive    = '敏感詞設置';
 $lang->site->filterSensitive = '敏感詞過濾';
+$lang->site->setBlacklist    = '黑名單管理';
 $lang->site->mobileTemplate  = '移動模板';
 $lang->site->score           = '積分';
 $lang->site->setCounts       = '設置積分規則';
@@ -58,11 +62,15 @@ $lang->site->closeScoreTip   = '禁用積分功能後不再記錄積分，會員
 
 $lang->site->setBasic      = "基本信息設置";
 $lang->site->setLang       = "語言設置";
+$lang->site->setFilter     = "過濾設置";
+$lang->site->ipFilter      = "ip過濾";
+$lang->site->accountFilter = "賬號過濾";
 $lang->site->setSecurity   = "安全設置";
 $lang->site->setUpload     = "檔案上傳設置";
 $lang->site->setRobots     = "Robots 設置";
 $lang->site->setOauth      = "開放登錄設置";
 $lang->site->setSinaOauth  = "新浪微博接入";
+$lang->site->setYangcong   = "洋蔥登錄設置";
 $lang->site->setQQOauth    = "QQ接入";
 $lang->site->oauthHelp     = "使用幫助";
 $lang->site->setRecPerPage = "列表數量設置";
@@ -78,20 +86,28 @@ $lang->site->statusList = new stdclass();
 $lang->site->statusList->normal = '正常';
 $lang->site->statusList->pause  = '暫停';
 
+$lang->site->resetPasswordList = array();
+$lang->site->resetPasswordList['open']  = '開啟';
+$lang->site->resetPasswordList['close'] = '關閉';
+
+$lang->site->forceYangcongList = array();
+$lang->site->forceYangcongList['open']  = '開啟';
+$lang->site->forceYangcongList['close'] = '關閉';
+
 $lang->site->checkIPList = array();
-$lang->site->checkIPList['open']  = '打開';
+$lang->site->checkIPList['open']  = '開啟';
 $lang->site->checkIPList['close'] = '關閉';
 
 $lang->site->filterSensitiveList = array();
-$lang->site->filterSensitiveList['open']  = '打開';
+$lang->site->filterSensitiveList['open']  = '開啟';
 $lang->site->filterSensitiveList['close'] = '關閉';
 
 $lang->site->checkLocationList = array();
-$lang->site->checkLocationList['open']  = '打開';
+$lang->site->checkLocationList['open']  = '開啟';
 $lang->site->checkLocationList['close'] = '關閉';
 
 $lang->site->checkEmailList = array();
-$lang->site->checkEmailList['open']  = '打開';
+$lang->site->checkEmailList['open']  = '開啟';
 $lang->site->checkEmailList['close'] = '關閉';
 
 $lang->site->sessionIpoptions = array();
@@ -128,19 +144,23 @@ $lang->site->mobileTemplateList['close'] = '禁用';
 $lang->site->scoreList['open']  = '啟用';
 $lang->site->scoreList['close'] = '禁用';
 
+$lang->site->filterFunctionList['open']  = '啟用';
+$lang->site->filterFunctionList['close'] = '關閉';
+
 $lang->site->moduleAvailable = array();
-$lang->site->moduleAvailable['user']    = '會員';
-$lang->site->moduleAvailable['article'] = '文章';
-$lang->site->moduleAvailable['blog']    = '博客';
-$lang->site->moduleAvailable['product'] = '產品';
-$lang->site->moduleAvailable['book']    = '手冊';
-$lang->site->moduleAvailable['page']    = '單頁';
-$lang->site->moduleAvailable['forum']   = '論壇';
-$lang->site->moduleAvailable['message'] = '評論留言';
-$lang->site->moduleAvailable['search']  = '搜索';
-$lang->site->moduleAvailable['shop']    = '商城';
-$lang->site->moduleAvailable['score']   = '積分';
-$lang->site->moduleAvailable['stat']    = '統計';
+$lang->site->moduleAvailable['user']         = '會員';
+$lang->site->moduleAvailable['article']      = '文章';
+$lang->site->moduleAvailable['blog']         = '博客';
+$lang->site->moduleAvailable['product']      = '產品';
+$lang->site->moduleAvailable['book']         = '手冊';
+$lang->site->moduleAvailable['page']         = '單頁';
+$lang->site->moduleAvailable['forum']        = '論壇';
+$lang->site->moduleAvailable['message']      = '評論留言';
+$lang->site->moduleAvailable['search']       = '搜索';
+$lang->site->moduleAvailable['shop']         = '商城';
+$lang->site->moduleAvailable['score']        = '積分';
+$lang->site->moduleAvailable['stat']         = '統計';
+$lang->site->moduleAvailable['contribution'] = '投稿';
 
 $lang->site->metaHolder       = '可放置<meta><script><style>和<link>標籤。';
 $lang->site->fileAllowedRole  = '多個尾碼名之間請用 "," 隔開';
@@ -167,3 +187,8 @@ $lang->site->customizableList->forum   = '論壇列表數量';
 $lang->site->customizableList->reply   = '回帖列表數量';
 $lang->site->customizableList->message = '留言列表數量';
 $lang->site->customizableList->comment = '評論列表數量';
+
+$lang->site->yangcong = new stdclass();
+$lang->site->yangcong->appID = 'APP ID';
+$lang->site->yangcong->key   = 'APP KEY';
+$lang->site->yangcong->auth  = 'Auth ID';

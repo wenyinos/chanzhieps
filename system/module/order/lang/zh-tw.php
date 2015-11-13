@@ -72,8 +72,9 @@ $lang->order->placeholder->key   = '安全檢驗碼，以數字和字母組成�
 $lang->order->placeholder->email = '支付寶商家郵箱';
 
 $lang->order->paymentList = array();
-$lang->order->paymentList['alipay'] = '支付寶即時到帳';
-$lang->order->paymentList['COD']    = '貨到付款';
+$lang->order->paymentList['alipay']        = '支付寶即時到帳';
+$lang->order->paymentList['alipaySecured'] = '支付寶擔保交易';
+$lang->order->paymentList['COD']           = '貨到付款';
 
 $lang->order->statusList = array();
 $lang->order->statusList['not_paid']  = '待付款';

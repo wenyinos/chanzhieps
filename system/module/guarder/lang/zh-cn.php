@@ -13,7 +13,6 @@ $lang->guarder = new stdclass();
 
 $lang->guarder->action       = '操作';
 $lang->guarder->then         = '则';
-$lang->guarder->addBlacklist = '加黑名单';
 $lang->guarder->setWhitelist = '白名单管理';
 $lang->guarder->addBlacklist = '添加黑名单';
 

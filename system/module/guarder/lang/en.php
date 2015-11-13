@@ -14,6 +14,7 @@ $lang->guarder = new stdclass();
 $lang->guarder->action       = 'Action';
 $lang->guarder->then         = 'Then';
 $lang->guarder->setWhitelist = 'Whitelist';
+$lang->guarder->addBlacklist = 'Add blacklist';
 
 $lang->guarder->captcha        = 'Captcha';
 $lang->guarder->numbers        = array('Zero', 'I', 'II', 'III', 'Four', 'Five', '6', '7', '8', '9', '10');
@@ -45,6 +46,7 @@ $lang->guarder->times     = 'Times';
 $lang->guarder->disable   = 'Disabled';
 
 $lang->guarder->operationList = new stdclass;
+
 $lang->guarder->operationList->ip = new stdclass;
 $lang->guarder->operationList->ip->logonFailure    = 'Login Failed';
 $lang->guarder->operationList->ip->register        = 'Registration Number';
@@ -53,24 +55,37 @@ $lang->guarder->operationList->ip->resetPWDFailure = 'Reset Password Failure';
 $lang->guarder->operationList->ip->postThread      = 'Post Topic';
 $lang->guarder->operationList->ip->postComment     = 'Post Comment';
 $lang->guarder->operationList->ip->postReply       = 'Reply To Post';
+$lang->guarder->operationList->ip->post            = 'Post Requests';
 $lang->guarder->operationList->ip->search          = 'Searches';
-$lang->guarder->operationList->ip->threadFail      = 'Post Banned';
-$lang->guarder->operationList->ip->commentFail     = 'Comment Banned';
 $lang->guarder->operationList->ip->error404        = '404 Times';
 $lang->guarder->operationList->ip->captchaFail     = 'Validation Error';
 
+$lang->guarder->operationList->account = new stdclass;
+$lang->guarder->operationList->account->logonFailure    = 'Login Failed';
+$lang->guarder->operationList->account->resetPassword   = 'Reset Password';
+$lang->guarder->operationList->account->resetPWDFailure = 'Reset Password Failure';
+$lang->guarder->operationList->account->postThread      = 'Post Topic';
+$lang->guarder->operationList->account->postComment     = 'Post Comment';
+$lang->guarder->operationList->account->postReply       = 'Reply To Post';
+$lang->guarder->operationList->account->post            = 'Post Requests';
+$lang->guarder->operationList->account->search          = 'Searches';
+$lang->guarder->operationList->account->error404        = '404 Times';
+$lang->guarder->operationList->account->captchaFail     = 'Validation Error';
+
 $lang->guarder->punishOptions = array();
-$lang->guarder->punishOptions[1]    = '1h'; 
-$lang->guarder->punishOptions[3]    = '3h'; 
-$lang->guarder->punishOptions[12]   = '12h'; 
-$lang->guarder->punishOptions[24]   = '24h'; 
-$lang->guarder->punishOptions[168]  = '1 Week'; 
-$lang->guarder->punishOptions[720]  = '1 Month'; 
-$lang->guarder->punishOptions[2160] = '3 Months'; 
-$lang->guarder->punishOptions[0]    = 'Permanent'; 
+$lang->guarder->punishOptions[5]     = '5min'; 
+$lang->guarder->punishOptions[10]    = '10min'; 
+$lang->guarder->punishOptions[30]    = '30min'; 
+$lang->guarder->punishOptions[60]    = '1h'; 
+$lang->guarder->punishOptions[720]   = '12h'; 
+$lang->guarder->punishOptions[1440]  = '24h'; 
+$lang->guarder->punishOptions[10080] = 'one week'; 
+$lang->guarder->punishOptions[43200] = 'one month'; 
+$lang->guarder->punishOptions[0]     = 'Permanently'; 
 
 $lang->blacklist = new stdclass();
 $lang->blacklist->type        = 'Type';
+$lang->blacklist->title       = 'Title';
 $lang->blacklist->identity    = 'Value';
 $lang->blacklist->reason      = 'Reason';
 $lang->blacklist->expiredDate = 'Expiration';

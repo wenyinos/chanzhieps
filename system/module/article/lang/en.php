@@ -12,6 +12,7 @@
 $lang->article->setting     = 'Setting';
 $lang->article->common      = 'Article';
 $lang->article->createDraft = 'Create draft';
+$lang->article->post        = 'Post Contribution';
 
 $lang->article->id         = 'Id';
 $lang->article->category   = 'Categories';

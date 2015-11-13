@@ -9,8 +9,10 @@
  * @version     $Id$
  * @link        http://www.chanzhi.org
  */
+$lang->article->setting     = '文章設置';
 $lang->article->common      = '文章維護';
 $lang->article->createDraft = '保存草稿';
+$lang->article->post        = '創建投稿';
 
 $lang->article->id         = '編號';
 $lang->article->category   = '類目';
@@ -43,6 +45,14 @@ $lang->article->forward2Forum    = '轉至論壇';
 $lang->article->selectCategories = '選擇類目';
 $lang->article->selectBoard      = '選擇版塊';
 
+$lang->article->publish = '發佈';
+$lang->article->reject  = '駁回';
+
+$lang->article->contributionStatus = new stdclass;
+$lang->article->contributionStatus->status[1] = '<span class="label label-xsm label-primary">' . '待審核' .'</span>';
+$lang->article->contributionStatus->status[2] = '<span class="label label-xsm label-success">' . '通過' . '</span>';
+$lang->article->contributionStatus->status[3] = '駁回';
+
 $lang->article->list          = '文章列表';
 $lang->article->admin         = '維護文章';
 $lang->article->create        = '發佈文章';
@@ -51,6 +61,13 @@ $lang->article->setjs         = '設置JS';
 $lang->article->edit          = '編輯文章';
 $lang->article->files         = '附件';
 $lang->article->images        = '圖片';
+
+$lang->article->contribution    = '投稿';
+$lang->article->submissionTime  = '投遞時間';
+
+$lang->article->contributionOptions = new stdclass;
+$lang->article->contributionOptions->open  = '開啟';
+$lang->article->contributionOptions->close = '關閉';
 
 $lang->blog->admin  = '維護博客';
 $lang->blog->list   = '博客列表';
@@ -96,5 +113,8 @@ $lang->article->noJsTag   = '不需要&lt;script&gt;&lt;/script&gt;標籤';
 $lang->article->placeholder = new stdclass();
 $lang->article->placeholder->addedDate = '可以延遲到選定的時間發佈。';
 $lang->article->placeholder->link      = '輸入連結，可以是站外連結';
+
+$lang->article->approveMessage = '您投遞的文章 <strong>《%s》</strong> 已通過審核，獎勵 <strong>+%s</strong> 積分，感謝您的支持。';
+$lang->article->rejectMessage  = '您投遞的文章 <strong>《%s》</strong> 未通過審核，您可以編輯後再次提交審核，感謝您的支持。';
 
 $lang->article->forwardFrom = '轉發自';

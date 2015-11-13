@@ -52,7 +52,6 @@ $lang->user->changePassword  = "更改密碼";
 $lang->user->recoverPassword = "忘記密碼";
 $lang->user->newPassword     = "新密碼";
 $lang->user->update          = "編輯用戶";
-$lang->user->delete          = "刪除用戶";
 $lang->user->browse          = "瀏覽用戶";
 $lang->user->deny            = "訪問受限";
 $lang->user->confirmDelete   = "您確認刪除該用戶嗎？";
@@ -76,12 +75,24 @@ $lang->user->myScore         = '當前積分';
 $lang->user->buyScore        = '積分充值';
 $lang->user->addScore        = '獎勵積分';
 $lang->user->reduceScore     = '扣除積分';
+$lang->user->yangcongLogin   = '洋蔥登錄';
+$lang->user->bindAccount     = '綁定帳號';
 
-$lang->user->profile     = '個人信息';
-$lang->user->editProfile = '編輯信息';
-$lang->user->thread      = '我的主題';
-$lang->user->messages    = '我的消息';
-$lang->user->reply       = '我的回貼';
+$lang->user->profile      = '個人信息';
+$lang->user->editProfile  = '編輯信息';
+$lang->user->thread       = '我的主題';
+$lang->user->messages     = '我的消息';
+$lang->user->reply        = '我的回貼';
+$lang->user->contribution = '我的投稿';
+
+$lang->user->userHistory         = "用戶歷史數據";
+$lang->user->threadHistory       = "發帖數據";
+$lang->user->replyHistory        = "回帖數據";
+$lang->user->commentHistory      = "評論數據";
+$lang->user->messageHistory      = "留言數據";
+$lang->user->orderHistory        = "訂單數據";
+$lang->user->addressHistory      = "地址數據";
+$lang->user->contributionHistory = "投稿數據";
 
 $lang->user->message = new stdclass();
 $lang->user->message->mine = "我的消息 <span class='label label-badge text-latin'>%s</span>";
@@ -115,7 +126,6 @@ $lang->user->forbidDate['2']     = '兩天';
 $lang->user->forbidDate['3']     = '三天';
 $lang->user->forbidDate['7']     = '一周';
 $lang->user->forbidDate['30']    = '一個月';
-$lang->user->forbidDate['3000']  = '永久';
 $lang->user->operate             = '操作';
 
 $lang->user->adminList['super']  = '超級管理員';
@@ -204,6 +214,7 @@ if(RUN_MODE != 'install' and commonModel::isAvailable('score'))
 $lang->user->control->menus[50] = '<i class="icon-comment"></i> 我的主題 <i class="icon-chevron-right"></i>|user|thread';
 $lang->user->control->menus[60] = '<i class="icon-mail-reply"></i> 我的回帖 <i class="icon-chevron-right"></i>|user|reply';
 
+if($this->config->article->contribution == 'open') $lang->user->control->menus[21] = '<i class="icon-envelope-alt"></i> 我的投稿 <i class="icon-chevron-right"></i>|article|contribution'; 
 if(RUN_MODE != 'install' and commonModel::isAvailable('order')) $lang->user->control->menus[25] = '<i class="icon-shopping-cart"></i> 我的訂單 <i class="icon-chevron-right"></i>|order|browse';
 if(RUN_MODE != 'install' and commonModel::isAvailable('shop')) $lang->user->control->menus[26] = '<i class="icon-map-marker"> </i> 地址管理 <i class="icon-chevron-right"></i>|address|browse';
 

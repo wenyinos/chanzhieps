@@ -21,7 +21,7 @@ $lang->upgrade->selectVersion = '確認升級之前的版本';
 $lang->upgrade->confirm       = '確認要執行的SQL語句';
 $lang->upgrade->execute       = '確認執行';
 $lang->upgrade->next          = '下一步';
-$lang->upgrade->updateLicense = '蟬知 4.0 已更換授權協議至 Z PUBLIC LICENSE(ZPL) 1.1。';
+$lang->upgrade->updateLicense = '蟬知 4.0 已更換授權協議至 Z PUBLIC LICENSE(ZPL) 1.2。';
 
 $lang->upgrade->backupData = <<<EOT
 <pre>
@@ -68,3 +68,4 @@ $lang->upgrade->fromVersions['4_3_beta'] = '4.3.beta';
 $lang->upgrade->fromVersions['4_4']      = '4.4';
 $lang->upgrade->fromVersions['4_4_1']    = '4.4.1';
 $lang->upgrade->fromVersions['4_5']      = '4.5';
+$lang->upgrade->fromVersions['4_5_1']    = '4.5.1';
