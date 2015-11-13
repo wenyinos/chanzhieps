@@ -32,3 +32,5 @@ CREATE TABLE IF NOT EXISTS  `eps_operationlog` (
   KEY operation (`type`, `identity`, `operation`, `createdTime`),
   KEY `lang` (`lang`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+INSERT INTO `eps_layout` (template,page,region,blocks,import,lang,theme) select template,page,region,blocks,import,lang, 'blank' as theme from `eps_layout` where theme='default';
