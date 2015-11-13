@@ -45,13 +45,20 @@ $lang->article->forward2Forum    = '转至论坛';
 $lang->article->selectCategories = '选择类目';
 $lang->article->selectBoard      = '选择版块';
 
-$lang->article->publish = '发布';
-$lang->article->reject  = '驳回';
+$lang->contribution= new stdclass();
+$lang->contribution->check   = '审核';
+$lang->contribution->list    = '投稿列表';
+$lang->contribution->publish = '发布';
+$lang->contribution->reject  = '驳回';
 
-$lang->article->contributionStatus = new stdclass;
-$lang->article->contributionStatus->status[1] = '<span class="label label-xsm label-primary">' . '待审核' .'</span>';
-$lang->article->contributionStatus->status[2] = '<span class="label label-xsm label-success">' . '通过' . '</span>';
-$lang->article->contributionStatus->status[3] = '驳回';
+$lang->contribution->status[0] = '';
+$lang->contribution->status[1] = '<span class="label label-xsm label-primary">' . '待审核' .'</span>';
+$lang->contribution->status[2] = '<span class="label label-xsm label-success">' . '通过' . '</span>';
+$lang->contribution->status[3] = '驳回';
+
+$lang->contribution->typeList = array();
+$lang->contribution->typeList['article'] = '文章';
+$lang->contribution->typeList['blog']    = '博客';
 
 $lang->article->list          = '文章列表';
 $lang->article->admin         = '维护文章';

@@ -206,6 +206,7 @@ $lang->user->control->lblPassword = "留空，则保持不变。";
 
 $lang->user->control->menus[10] = '<i class="icon-user"></i> 个人信息 <i class="icon-chevron-right"></i>|user|profile';
 $lang->user->control->menus[20] = '<i class="icon-comments-alt"></i> 我的消息 <i class="icon-chevron-right"></i>|user|message';
+if(RUN_MODE != 'install' and commonModel::isAvailable('contribution')) $lang->user->control->menus[21] = '<i class="icon-envelope-alt"></i> 我的投稿 <i class="icon-chevron-right"></i>|article|contribution'; 
 if(RUN_MODE != 'install' and commonModel::isAvailable('score'))
 {
     $lang->user->control->menus[30] = '<i class="icon-sun"></i> 积分详情 <i class="icon-chevron-right"></i>|user|score';
@@ -214,7 +215,6 @@ if(RUN_MODE != 'install' and commonModel::isAvailable('score'))
 $lang->user->control->menus[50] = '<i class="icon-comment"></i> 我的主题 <i class="icon-chevron-right"></i>|user|thread';
 $lang->user->control->menus[60] = '<i class="icon-mail-reply"></i> 我的回帖 <i class="icon-chevron-right"></i>|user|reply';
 
-if($this->config->article->contribution == 'open') $lang->user->control->menus[21] = '<i class="icon-envelope-alt"></i> 我的投稿 <i class="icon-chevron-right"></i>|article|contribution'; 
 if(RUN_MODE != 'install' and commonModel::isAvailable('order')) $lang->user->control->menus[25] = '<i class="icon-shopping-cart"></i> 我的订单 <i class="icon-chevron-right"></i>|order|browse';
 if(RUN_MODE != 'install' and commonModel::isAvailable('shop')) $lang->user->control->menus[26] = '<i class="icon-map-marker"> </i> 地址管理 <i class="icon-chevron-right"></i>|address|browse';
 

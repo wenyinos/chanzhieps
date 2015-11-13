@@ -12,12 +12,11 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <?php include '../../common/view/treeview.html.php';?>
-<?php js::set('contribution', $this->config->article->contribution);?>
-<?php js::set('isContribution', $contribution);?>
 <?php js::set('categoryID', $categoryID);?>
 <div class='panel'>
   <div class='panel-heading'>
   <strong><i class="icon-th-large"></i> <?php echo $lang->$type->list;?></strong>
+  <?php if($type != 'contribution'):?>
   <div class='panel-actions'>
     <form method='get' class='form-inline form-search'>
       <?php echo html::hidden('m', 'article');?>
@@ -36,6 +35,7 @@
      <?php if($type == 'page') commonModel::printLink('article', 'create', "type={$type}", '<i class="icon-plus"></i> ' . $lang->page->create, 'class="btn btn-primary"');?>
      <?php if($type != 'page') commonModel::printLink('article', 'create', "type={$type}&category={$categoryID}", '<i class="icon-plus"></i> ' . $lang->article->create, 'class="btn btn-primary"');?>
    </div>
+  <?php endif;?>
   </div>
   <table class='table table-hover table-striped tablesorter'>
     <thead>
@@ -48,7 +48,7 @@
         <?php endif;?>
         <th class='text-center w-160px'><?php commonModel::printOrderLink('addedDate', $orderBy, $vars, $lang->article->addedDate);?></th>
         <th class='text-center w-70px'><?php commonModel::printOrderLink('views', $orderBy, $vars, $lang->article->views);?></th>
-        <?php if($this->config->article->contribution == 'open' and $contribution == 'true'):?>
+        <?php if($type != 'page' and commonModel::isAvailable('contribution')):?>
         <th class='text-center w-70px'> <?php commonModel::printOrderLink('contribution', $orderBy, $vars, $lang->article->status);?></th>
         <?php endif;?>
         <?php $actionClass = $type == 'page' ? 'w-220px' : 'w-260px';?>
@@ -70,28 +70,24 @@
         <td class='text-center'><?php echo $article->addedDate;?></td>
         <td class='text-center'><?php echo $article->views;?></td>
         <?php
-        if($this->config->article->contribution == 'open' and $contribution == 'true')
+        if($type != 'page' and commonModel::isAvailable('contribution'))
         {
-            echo "<td class='text-center'>" . $lang->article->contributionStatus->status[$article->contribution] . '</td>';
+            echo "<td class='text-center'>" . $lang->contribution->status[$article->contribution] . '</td>';
         }
         ?>
         <td class='text-center'>
-          <?php echo html::a($this->article->createPreviewLink($article->id), $lang->preview, "target='_blank'");?>
-          <?php if($this->config->article->contribution == 'open' and $article->contribution != 0):?>
+          <?php if($type == 'contribution'):?>
           <?php
-          if($article->contribution != 2) commonmodel::printlink('article', 'approve', "articleid=$article->id&type=$article->type", $lang->article->publish, "class='jsoner'"); 
-          else echo html::a('', $lang->article->publish, "class='disabled'");
-          if($article->contribution != 3) commonmodel::printlink('article', 'reject', "articleID=$article->id&type=$article->type", $lang->article->reject, "class='jsoner'"); 
-          else echo html::a('', $lang->article->reject, "class='disabled'");
+          if($article->contribution != 2) commonmodel::printlink('article', 'check', "articleid=$article->id", $lang->contribution->check); 
+          else commonModel::printLink('article', 'edit', "articleID=$article->id&type=$article->type", $lang->edit);
+          commonModel::printLink('article', 'delete', "articleID=$article->id", $lang->delete, 'class="deleter"');
           ?>
-          <?php endif;?>
+          <?php else:?>
           <?php
           commonModel::printLink('article', 'edit', "articleID=$article->id&type=$article->type", $lang->edit);
-          if($article->contribution == 0)
-          {
-              commonModel::printLink('file', 'browse', "objectType=$article->type&objectID=$article->id&isImage=1", $lang->article->images, "data-toggle='modal'");
-              commonModel::printLink('file', 'browse', "objectType=$article->type&objectID=$article->id&isImage=0", $lang->article->files, "data-toggle='modal'");
-          }
+          echo html::a($this->article->createPreviewLink($article->id), $lang->preview, "target='_blank'");
+          commonModel::printLink('file', 'browse', "objectType=$article->type&objectID=$article->id&isImage=1", $lang->article->images, "data-toggle='modal'");
+          commonModel::printLink('file', 'browse', "objectType=$article->type&objectID=$article->id&isImage=0", $lang->article->files, "data-toggle='modal'");
           ?>
           <?php if($type != 'page'):?>
           <span class='dropdown'>
@@ -128,6 +124,7 @@
           </span>
         </td>
       </tr>
+      <?php endif;?>
       <?php endif;?>
       <?php endforeach;?>
     </tbody>

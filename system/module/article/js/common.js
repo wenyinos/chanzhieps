@@ -1,11 +1,5 @@
 $(document).ready(function()
 {
-    if(v.contribution == 'close') $(".leftmenu a[href*='contribution=true']").parent().hide();
-
-    /* Set active menu. */
-    $('.leftmenu li.active').removeClass('active');
-    $(".leftmenu a[href*='contribution=" + v.isContribution + "']").parent().addClass('active');
-
     /* Set the orginal and copySite, copyURL fields. */
     $('#source').change(function()
     {

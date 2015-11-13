@@ -12,6 +12,7 @@
 $lang->article->setting     = 'Setting';
 $lang->article->common      = 'Article';
 $lang->article->createDraft = 'Create draft';
+$lang->article->post        = 'Create Contribution';
 
 $lang->article->id         = 'Id';
 $lang->article->category   = 'Categories';
@@ -44,13 +45,20 @@ $lang->article->forward2Forum    = 'Forward to forum';
 $lang->article->selectCategories = 'Select categories';
 $lang->article->selectBoard      = 'Select board';
 
-$lang->article->publish = 'Publish';
-$lang->article->reject  = 'Reject';
+$lang->contribution= new stdclass();
+$lang->contribution->check   = 'Check';
+$lang->contribution->list    = 'Contribution List';
+$lang->contribution->publish = 'Publish';
+$lang->contribution->reject  = 'Reject';
 
-$lang->article->contributionStatus = new stdclass;
-$lang->article->contributionStatus->status[1] = '<span class="label label-xsm label-primary">' . 'Moderated' .'</span>';
-$lang->article->contributionStatus->status[2] = '<span class="label label-xsm label-success">' . 'Approved' . '</span>';
-$lang->article->contributionStatus->status[3] = '<span class="label label-xsm label-warning">' . 'Not Approved' . '</span>';
+$lang->contribution->status[0] = '';
+$lang->contribution->status[1] = '<span class="label label-xsm label-primary">' . 'Moderated' .'</span>';
+$lang->contribution->status[2] = '<span class="label label-xsm label-success">' . 'Approbed' . '</span>';
+$lang->contribution->status[3] = 'Reject';
+
+$lang->contribution->typeList = array();
+$lang->contribution->typeList['article'] = 'Article';
+$lang->contribution->typeList['blog']    = 'Blog';
 
 $lang->article->list       = 'List';
 $lang->article->admin      = 'Admin';

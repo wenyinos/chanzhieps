@@ -13,7 +13,6 @@
               <?php $vars = "orderBy=%s&recTotal={$pager->recTotal}&recPerPage={$pager->recPerPage}";?>
               <th class='text-center w-50px'><?php echo $lang->article->id;?></th>
               <th class='text-center'><?php echo $lang->article->title;?></th>
-              <th class='text-center w-180px'><?php echo $lang->article->category;?></th>
               <th class='text-center w-160px'><?php echo $lang->article->submissionTime;?></th>
               <th class='text-center w-60px'><?php echo $lang->article->status;?></th>
               <th class='text-center w-60px'><?php echo $lang->article->views;?></th>
@@ -25,21 +24,22 @@
             <tr>
               <td class='text-center'><?php echo $article->id;?></td>
               <td>
-                <?php echo $article->title;?>
+                <?php 
+                    if($article->contribution == 2) echo html::a($this->article->createPreviewLink($article->id), $article->title, "target='_blank'");
+                    else echo $article->title;
+                ?>
               </td>
-              <td class='text-center'><?php foreach($article->categories as $category) echo $category->name . ' ';?></td>
               <td class='text-center'><?php echo $article->editedDate;?></td>
-              <td class='text-center'><?php echo $lang->article->contributionStatus->status[$article->contribution];?></td>
+              <td class='text-center'><?php echo $lang->contribution->status[$article->contribution];?></td>
               <td class='text-center'><?php echo $article->views;?></td>
               <td class='text-center'>
                 <?php
-                    echo html::a($this->article->createPreviewLink($article->id), $lang->preview, "target='_blank'");
                     if($article->contribution != 2)
                     {
-                        commonModel::printLink('article', 'edit', "articleID=$article->id&type=$article->type", $lang->edit);
+                        commonModel::printLink('article', 'modify', "articleID=$article->id", $lang->edit);
                         commonModel::printLink('article', 'delete', "articleID=$article->id", $lang->delete, 'class="deleter"');
                     }
-                    else echo html::a('', $lang->edit, "class='disabled'") . html::a('', $lang->delete, "class='disabled'");
+                    else echo html::a('javascript:;', $lang->edit, "class='disabled'") . html::a('javascript:;', $lang->delete, "class='disabled'");
                 ?>
               </td>
             </tr>

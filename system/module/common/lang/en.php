@@ -175,13 +175,11 @@ $lang->menuGroups->company = 'site';
 $lang->article = new stdclass();
 $lang->article->menu = new stdclass();
 $lang->article->menu->browse       = 'All articles|article|admin|';
-$lang->article->menu->contribution = 'Contribution|article|admin|type=article&categoryID=0&orderBy=id_desc&recTotal=0&recPerPage=20&pageID=1&contribution=true';
 
 /* Menu of blog module. */
 $lang->blog = new stdclass();
 $lang->blog->menu = new stdclass();
 $lang->blog->menu->browse       = 'All blogs|article|admin|type=blog';
-$lang->blog->menu->contribution = 'Contributors Blog|article|admin|type=blog&categoryID=0&orderBy=id_desc&recTotal=0&recPerPage=20&pageID=1&contribution=true';
 
 /* Menu of page module. */
 $lang->page = new stdclass();

@@ -13,6 +13,10 @@
           <table class='table table-form'>
             <tbody class='articleInfo'> 
             <tr>
+              <th class='w-100px'><?php echo $lang->article->author;?></th>
+              <td><?php echo html::input('author', $this->app->user->account, "class='form-control w-150px'");?></td>
+            </tr>
+            <tr>
               <th><?php echo $lang->article->source;?></th>
               <td class='w-30px'><?php echo html::select('source', $lang->article->sourceList, 'original', "class='form-control chosen'");?></td>
               <td>

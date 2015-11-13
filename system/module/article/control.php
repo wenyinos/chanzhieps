@@ -84,30 +84,37 @@ class article extends control
      * @access public
      * @return void
      */
-    public function admin($type = 'article', $categoryID = 0, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1, $contribution = 'false')
+    public function admin($type = 'article', $categoryID = 0, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {   
-        $this->lang->article->menu = $this->lang->$type->menu;
-        $this->lang->menuGroups->article = $type;
+        if($this->get->tab == 'feedback') 
+        {
+            $type = 'contribution';
+            $this->lang->menuGroups->article = 'feedback';
+            $this->lang->article->menu       = $this->lang->feedback->menu;
+            $this->view->title = $this->lang->contribution->check;
+        }
+        else
+        {
+            $this->lang->article->menu = $this->lang->$type->menu;
+            $this->lang->menuGroups->article = $type;
+            $this->view->title = $this->lang->$type->admin;
+        }
 
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
 
         $families = $categoryID ? $this->loadModel('tree')->getFamily($categoryID, $type) : '';
-        $sticks   = $contribution==false ? $this->article->getSticks($families, $type) : array();
-        $articles = $this->article->getList($type, $families, $orderBy, $pager, $contribution);
+        $sticks   = $this->get->tab != 'feedback' ? $this->article->getSticks($families, $type) : array();
+        $articles = $this->article->getList($type, $families, $orderBy, $pager);
         $articles = $sticks + $articles;
 
-        if($type != 'page') 
+        if($type != 'page' and $type != 'contribution') 
         {
             $this->view->treeModuleMenu = $this->loadModel('tree')->getTreeMenu($type, 0, array('treeModel', 'createAdminLink'));
-            $this->view->treeManageLink = html::a(helper::createLink('article', 'setting', "type={$type}"), $this->lang->article->setting);
+            $this->view->treeManageLink =  html::a(helper::createLink('tree', 'browse', "type={$type}"), $this->lang->tree->manage);
         }
-        if($type == 'article')
-            $this->view->treeManageLink .= '&nbsp;&nbsp;' . html::a(helper::createLink('tree', 'browse', "type={$type}"), $this->lang->tree->manage);
 
-        $this->view->title      = $this->lang->$type->admin;
         $this->view->type       = $type;
-        $this->view->contribution = $contribution;
         $this->view->categoryID = $categoryID;
         $this->view->articles   = $articles;
         $this->view->pager      = $pager;
@@ -169,14 +176,67 @@ class article extends control
     {
         if($_POST)
         {
-            $this->article->create($type);
+            $this->article->create('contribution');
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             if(RUN_MODE == 'front') $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('contribution')));
-            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate'=>inlink('admin', "type=$type")));
         }
 
         $this->view->title = $this->lang->article->create;
         $this->display();
+    }
+
+    /**
+     * edit an contribution.
+     * 
+     * @param  string $type 
+     * @param  int    $categoryID
+     * @access public
+     * @return void
+     */
+    public function modify($articleID)
+    {
+        $article = $this->article->getByID($articleID);
+        if(RUN_MODE == 'front' and $article->addedBy != $this->app->user->account) return false;
+
+        if($_POST)
+        {
+            $this->article->update($articleID, 'contribution');
+            if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('contribution')));
+        }
+
+        $this->view->title      = $this->lang->article->edit;
+        $this->view->article    = $article;
+        $this->display();
+    }
+
+    /**
+     * check contribution.
+     * 
+     * @param  int    $id 
+     * @access public
+     * @return void
+     */
+    public function check($id)
+    {
+        if($_POST)
+        {
+            $type = $this->post->type;
+            $categories = $type == 'article' ? $this->post->articleCategories : $this->post->blogCategories;
+            $result = $this->article->approve($id, $type, $categories);
+            if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin', "type=contribution&tab=feedback")));
+        }
+
+        $this->lang->article->menu       = $this->lang->feedback->menu;
+        $this->lang->menuGroups->article = 'feedback';
+        
+        $this->view->title             = $this->lang->contribution->check;
+        $this->view->article           = $this->article->getByID($id);
+        $this->view->articleCategories = $this->loadModel('tree')->getOptionMenu('article', 0, $removeRoot = true);
+        $this->view->blogCategories    = $this->loadModel('tree')->getOptionMenu('blog', 0, $removeRoot = true);
+        $this->display();
+
     }
 
     /**
@@ -193,9 +253,6 @@ class article extends control
         $this->lang->menuGroups->article = $type;
 
         $article  = $this->article->getByID($articleID, $replaceTag = false);
-
-        /* If this article is a contribution and has been adopt, front cannot edit it.*/
-        if(RUN_MODE == 'front' and $article->contribution == 2) die();
 
         $categories = $this->loadModel('tree')->getOptionMenu($type, 0, $removeRoot = true);
         if(empty($categories) && $type != 'page')
@@ -438,19 +495,16 @@ class article extends control
 
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal, $recPerPage, $pageID);
-        $type  = $this->config->site->type == 'portal' ? 'article' : 'blog';
 
         $articles = $this->dao->select('*')->from(TABLE_ARTICLE)
             ->where('contribution')->ne(0)
-            ->andWhere('type')->eq($type)
             ->andWhere('addedBy')->eq($this->app->user->account)
             ->orderBy('id_desc')
             ->page($pager)
             ->fetchall('id'); 
         
-        $this->view->title      = $this->lang->article->contribution;
-        $this->view->type       = $type;
-        $this->view->articles   = $this->article->processArticleList($articles, $type);
+        $this->view->title    = $this->lang->article->contribution;
+        $this->view->articles = $articles;
 
         $this->view->pager      = $pager;
         $this->view->orderBy    = $orderBy;
@@ -458,20 +512,6 @@ class article extends control
         $this->view->mobileURL  = helper::createLink('article', 'contribution', '', '', 'mhtml');
         $this->view->desktopURL = helper::createLink('article', 'contribution', '', '', 'html');
         $this->display();
-    }
-
-    /**
-     * Approve an contribution. 
-     * 
-     * @param  int    $articleID 
-     * @access public
-     * @return void
-     */
-    public function approve($articleID, $type)
-    {
-        $result = $this->article->approve($articleID);
-        if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin', "type=$type")));
     }
 
     /**
