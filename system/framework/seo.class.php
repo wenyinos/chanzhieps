@@ -29,7 +29,9 @@ class seo
 
         $categoryAlias = $config->seo->alias->category;
         $pageAlias     = $config->seo->alias->page;
+        $forumAlias    = $config->seo->alias->forum;
         $methodAlias   = $config->seo->alias->method;
+
         $params = array();
 
         if(strpos($uri, '_') !== false) $uri = substr($uri, 0, strpos($uri, '_'));
@@ -119,6 +121,12 @@ class seo
             $items[1] = $items[2];
         }
 
+        if($module == 'forum' && isset($pageAlias[$items[1]]))
+        {
+            $method = $methodAlias[$module]['browse'];
+            return seo::convertURI($module, $method, $params, $pageID);
+        }
+
         /*  If the first param is a category id, like news/c123.html. */
         if(preg_match('/^c\d+$/', $items[1]))
         {
@@ -136,9 +144,15 @@ class seo
         }
 
         $viewparams = explode('-', $items[1]);
-        if(count($viewparams) > 1 and is_numeric($params['id']))
+        if(count($viewparams) > 1)
         {
-            $params['id'] = end($viewparams);
+            $id = end($viewparams);
+            if(is_numeric($id))
+            {
+                $params['id'] = $id;
+                $method = $methodAlias[$module]['view'];
+                return seo::convertURI($module, $method, $params, $pageID);
+            }
         }
         else
         {
