@@ -74,7 +74,7 @@ $config->guarder->punishment->ip->interval->post            = 60;
 $config->guarder->punishment->ip->interval->postThread      = 60;
 $config->guarder->punishment->ip->interval->postReply       = 30;
 $config->guarder->punishment->ip->interval->postComment     = 30;
-$config->guarder->punishment->ip->interval->error404        = 5;
+$config->guarder->punishment->ip->interval->error404        = 10;
 $config->guarder->punishment->ip->interval->search          = 5;
 $config->guarder->punishment->ip->interval->captchaFail     = 30;
 
@@ -86,7 +86,7 @@ $config->guarder->punishment->ip->day->post            = 60;
 $config->guarder->punishment->ip->day->postThread      = 60;
 $config->guarder->punishment->ip->day->postReply       = 60;
 $config->guarder->punishment->ip->day->postComment     = 60;
-$config->guarder->punishment->ip->day->error404        = 5;
+$config->guarder->punishment->ip->day->error404        = 10;
 $config->guarder->punishment->ip->day->search          = 5;
 $config->guarder->punishment->ip->day->captchaFail     = 30;
 
