@@ -49,6 +49,8 @@ $lang->score->methods['delreply']    = '刪回覆';
 $lang->score->methods['award']       = '獎勵積分';
 $lang->score->methods['punish']      = '扣除積分';
 
+$lang->score->methods['approvecontribution'] = '投稿成功';
+
 $lang->score->methods['buyscore']  = '購買積分';
 $lang->score->methods['statement'] = '積分結算';
 

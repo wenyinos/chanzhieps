@@ -17,7 +17,7 @@ class guarder extends control
      * @access public
      * @return void
      */
-    public function blacklist($mode='keywords', $pageID = 1)
+    public function blacklist($mode='all', $pageID = 1)
     {
         $this->lang->guarder->menu = $this->lang->security->menu;
         $this->lang->menuGroups->site = 'security';
@@ -26,7 +26,10 @@ class guarder extends control
         $this->app->loadClass('pager', $static = true);
         $pager = new pager($recTotal=0, $recPerPage=30, $pageID);
 
-        $blacklist = $this->dao->select('*')->from(TABLE_BLACKLIST)->where('type')->eq($mode)->page($pager)->fetchAll();
+        $blacklist = $this->dao->select('*')->from(TABLE_BLACKLIST)
+            ->beginIf($mode != 'all')->where('type')->eq($mode)->fi()
+            ->page($pager)
+            ->fetchAll();
         
         $this->view->title = $this->lang->site->setBlacklist;
         $this->view->blacklist = $blacklist;

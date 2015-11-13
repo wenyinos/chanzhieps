@@ -24,6 +24,7 @@ $lang->guarder->placeholder    = '数字';
 $lang->guarder->password       = '管理密码';
 $lang->guarder->passwordHolder = '请输入当前帐号的密码';
 
+$lang->guarder->blacklistModes['all']      = '全部';
 $lang->guarder->blacklistModes['ip']       = 'ip地址';
 $lang->guarder->blacklistModes['account']  = '帐号';
 $lang->guarder->blacklistModes['keywords'] = '关键词';
@@ -72,14 +73,15 @@ $lang->guarder->operationList->account->error404        = '404次数';
 $lang->guarder->operationList->account->captchaFail     = '验证码错误';
 
 $lang->guarder->punishOptions = array();
-$lang->guarder->punishOptions[1]    = '一小时'; 
-$lang->guarder->punishOptions[3]    = '三小时'; 
-$lang->guarder->punishOptions[12]   = '12小时'; 
-$lang->guarder->punishOptions[24]   = '24小时'; 
-$lang->guarder->punishOptions[168]  = '一周'; 
-$lang->guarder->punishOptions[720]  = '一个月'; 
-$lang->guarder->punishOptions[2160] = '三个月'; 
-$lang->guarder->punishOptions[0]    = '永久'; 
+$lang->guarder->punishOptions[5]     = '5分钟'; 
+$lang->guarder->punishOptions[10]    = '10分钟'; 
+$lang->guarder->punishOptions[30]    = '半小时'; 
+$lang->guarder->punishOptions[60]    = '1小时'; 
+$lang->guarder->punishOptions[720]   = '12小时'; 
+$lang->guarder->punishOptions[1440]  = '24小时'; 
+$lang->guarder->punishOptions[10080] = '一周'; 
+$lang->guarder->punishOptions[43200] = '一个月'; 
+$lang->guarder->punishOptions[0]     = '永久'; 
 
 $lang->blacklist = new stdclass();
 $lang->blacklist->type        = '类型';

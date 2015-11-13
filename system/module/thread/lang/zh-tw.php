@@ -24,24 +24,29 @@ $lang->thread->lastReply   = '最後回帖';
 $lang->thread->isLink      = '跳轉';
 $lang->thread->link        = '連結';
 
-$lang->thread->post         = '發帖';
-$lang->thread->postTo       = '發佈帖子到';
-$lang->thread->browse       = '主題列表';
-$lang->thread->stick        = '置頂';
-$lang->thread->edit         = '編輯主題';
-$lang->thread->status       = '狀態';
-$lang->thread->hide         = '隱藏';
-$lang->thread->show         = '顯示';
-$lang->thread->transfer     = '轉移';
-$lang->thread->switchStatus = '隱藏/顯示';
-$lang->thread->deleteFile   = '刪除附件';
+$lang->thread->post           = '發帖';
+$lang->thread->postTo         = '發佈帖子到';
+$lang->thread->browse         = '主題列表';
+$lang->thread->stick          = '置頂';
+$lang->thread->edit           = '編輯主題';
+$lang->thread->status         = '狀態';
+$lang->thread->approve        = '通過';
+$lang->thread->display        = '顯示';
+$lang->thread->hide           = '隱藏';
+$lang->thread->show           = '顯示';
+$lang->thread->transfer       = '轉移';
+$lang->thread->switchStatus   = '隱藏/顯示';
+$lang->thread->deleteFile     = '刪除附件';
 
 $lang->thread->sticks[0] = '不置頂';
 $lang->thread->sticks[1] = '版塊置頂';
 $lang->thread->sticks[2] = '全局置頂';
 
-$lang->thread->statusList['hidden'] = '已隱藏';
-$lang->thread->statusList['normal'] = '正常';
+$lang->thread->displayList['hidden'] = '已隱藏';
+$lang->thread->displayList['normal'] = '正常';
+
+$lang->thread->statusList['wait']     = '未審核';
+$lang->thread->statusList['approved'] = '通過';
 
 $lang->thread->confirmDeleteThread = "您確定刪除該主題嗎？";
 $lang->thread->confirmHideReply    = "您確定隱藏回帖嗎？";
@@ -58,6 +63,7 @@ $lang->thread->successHide     = '帖子已經成功隱藏';
 $lang->thread->successShow     = '顯示成功';
 $lang->thread->readonlyMessage = '該帖已被設置為 <strong>只讀</strong>，您暫時無法發表新的回覆。';
 $lang->thread->successTransfer = '轉移成功';
+$lang->thread->thanks          = '帖子將在審核通過後顯示，祝您生活愉快~';
 
 $lang->thread->score    = '獎勵積分';
 $lang->thread->scoreSum = "<strong class='red f-14px strong'>+%s</strong> ";

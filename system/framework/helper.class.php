@@ -65,6 +65,11 @@ class helper
     static public function createLink($moduleName, $methodName = 'index', $vars = '', $alias = array(), $viewType = '')
     {
         global $app, $config;
+        $requestType = $config->requestType;
+        if(defined('FIX_PATH_INFO2') and FIX_PATH_INFO2) 
+        {
+            $config->requestType = 'PATH_INFO2';
+        }
 
         $clientLang = $app->getClientLang();
         $lang       = $config->langCode;
@@ -92,7 +97,11 @@ class helper
             {
                 $link = $scriptName . $link;
             }
-            if($link) return $link;
+            if($link)
+            {
+                $config->requestType = $requestType;
+                return $link;
+            }
         }
         
         /* Set the view type. */
@@ -136,6 +145,7 @@ class helper
             foreach($vars as $key => $value) $link .= "&$key=$value";
             if($lang and RUN_MODE != 'admin') $link .= "&l=$lang";
         }
+        $config->requestType = $requestType;
         return $link;
     }
 
@@ -1071,4 +1081,19 @@ function processArrayEvils($params)
 function getHostURL()
 {
     return ((isset($_SERVER['HTTPS']) and strtolower($_SERVER['HTTPS']) != 'off') ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'];
+}
+
+/**
+ * Check current request is GET.
+ * 
+ * @access public
+ * @return void
+ */
+function isGetUrl()
+{
+    $webRoot = getWebRoot();
+    if(strpos($_SERVER['REQUEST_URI'], "{$webRoot}?") === 0) return true;
+    if(strpos($_SERVER['REQUEST_URI'], "{$webRoot}index.php?") === 0) return true;
+    if(strpos($_SERVER['REQUEST_URI'], "{$webRoot}index.php/?") === 0) return true;
+    return false;
 }

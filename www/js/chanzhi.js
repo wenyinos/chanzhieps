@@ -521,12 +521,13 @@ function createLink(moduleName, methodName, vars, viewType)
         vars = vars.split('&');
         for(i = 0; i < vars.length; i ++) vars[i] = vars[i].split('=');
     }
+
     if(config.runMode == 'front')
     {
-        link = config.webRoot + moduleName + config.requestFix + methodName;
+        if(config.requestType != 'GET') link = config.webRoot + moduleName + config.requestFix + methodName;
+        if(config.requestType == 'GET') link = config.router + '?' + config.moduleVar + '=' + moduleName + '&' + config.methodVar + '=' + methodName + '&' + config.viewVar + '=' + viewType;
         if(config.langCode != '') link = '/' + config.langCode + link;
-        if(config.requestType == 'GET') link = '/index.php' + link;
-
+          
         if(vars)
         {
             if(config.pathType == "full")

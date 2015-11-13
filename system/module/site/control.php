@@ -292,6 +292,7 @@ class site extends control
      */
     public function setFilter($type = 'ip')
     {
+        $this->loadModel('guarder');
         if(!empty($_POST))
         {
             $setting = new stdclass;

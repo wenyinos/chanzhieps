@@ -1,5 +1,11 @@
 $(document).ready(function()
 {
+    var parseColor = function(c)
+    {
+        try {return new Color(c);}
+        catch(e) {return null;}
+    };
+
     $.setAjaxForm('#customThemeForm');
 
     var $form = $('#customThemeForm');
@@ -13,9 +19,11 @@ $(document).ready(function()
     $('.color').each(function()
     {
         var $this = $(this);
-        var c = $this.attr('data');
+        var c = $this.attr('data').replace(';', '');
         if(!c) return;
-        var cc = new Color(c).contrast().toCssStr();
+        var cc = parseColor(c);
+        if(!cc) return;
+        cc = cc.contrast().toCssStr();
 
         var $inputColor = ($this.hasClass('input-group') ? $this.find('.input-group-btn .dropdown-toggle') : $this).css({'background': c === 'transparent' ? '' : c, 'color': cc}).find('.caret').css('border-top-color', cc).closest('.input-group').find('.input-color');
         if(!$inputColor.attr('placeholder'))
@@ -96,6 +104,8 @@ $(document).ready(function()
             else if(type === 'image' && val != 'inherit' && val != 'none' && val.indexOf('url(') != 0)
             {
                 $this.val('url(' + val + ')');
+            } else if(type === 'color') {
+                $this.val(val.replace(';', ''));
             }
         });
 

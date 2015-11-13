@@ -215,7 +215,6 @@ $lang->user->control->menus[50] = '<i class="icon-comment"></i> My Theme <i clas
 $lang->user->control->menus[60] = '<i class="icon-mail-reply"></i> My Replies <i class="icon-chevron-right"></i>|user|reply';
 
 if($this->config->article->contribution == 'open') $lang->user->control->menus[90] = '<i class="icon-envelope-alt"></i> My Contribution <i class="icon-chevron-right"></i>|article|contribution'; 
-
 if(RUN_MODE != 'install' and commonModel::isAvailable('order')) $lang->user->control->menus[25] = '<i class="icon-shopping-cart"></i> My Orders <i class="icon-chevron-right"></i>|order|browse';
 if(RUN_MODE != 'install' and commonModel::isAvailable('shop')) $lang->user->control->menus[26] = '<i class="icon-map-marker"> </i> Addresses <i class="icon-chevron-right"></i>|address|browse';
 

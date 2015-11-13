@@ -35,7 +35,7 @@ $lang->thanks = '致謝';
 /* Lang items for xirang. */
 $lang->chanzhiEPS     = '蟬知企業門戶系統';
 $lang->chanzhiEPSx    = '蟬知';
-$lang->agreement      = "已閲讀並同意<a href='http://zpl.pub/page/zplv11.html' target='_blank'>《Z PUBLIC LICENSE授權協議1.1》</a>。<span class='text-danger'>未經許可，不得去除、隱藏或遮掩蟬知系統的任何標誌及連結。</span>";
+$lang->agreement      = "已閲讀並同意<a href='http://zpl.pub/page/zplv12.html' target='_blank'>《Z PUBLIC LICENSE授權協議1.2》</a>。<span class='text-danger'>未經許可，不得去除、隱藏或遮掩蟬知系統的任何標誌及連結。</span>";
 $lang->poweredBy      = "<a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>%s</a>";
 $lang->poweredByAdmin = "<span id='poweredBy'>由 <a href='http://www.chanzhi.org/?v=%s' target='_blank' title='%s'>蟬知企業門戶系統 %s</a> 強力驅動！</span>";
 $lang->newVersion     = "提示：蟬知系統已于 <span id='releaseDate'></span> 發佈 <span id='version'></span>版本。<a href='' target='_blank' id='upgradeLink'>馬上下載</a>";
@@ -75,6 +75,8 @@ $lang->delete         = '刪除';
 $lang->close          = '關閉';
 $lang->save           = '保存';
 $lang->confirm        = '確認';
+$lang->addToBlacklist = '加黑';
+$lang->edit           = '編輯';
 $lang->send           = '發送';
 $lang->preview        = '預覽';
 $lang->goback         = '返回';
@@ -172,12 +174,14 @@ $lang->menuGroups->company = 'site';
 /* Menu of article module. */
 $lang->article = new stdclass();
 $lang->article->menu = new stdclass();
-$lang->article->menu->browse = '所有文章|article|admin|';
+$lang->article->menu->browse       = '我的文章|article|admin|type=article&categoryID=0&orderBy=id_desc&recTotal=0&recPerPage=20&pageID=1&contribution=false';
+$lang->article->menu->contribution = '投稿文章|article|admin|type=article&categoryID=0&orderBy=id_desc&recTotal=0&recPerPage=20&pageID=1&contribution=true';
 
 /* Menu of blog module. */
 $lang->blog = new stdclass();
 $lang->blog->menu = new stdclass();
-$lang->blog->menu->browse = '所有博客|article|admin|type=blog';
+$lang->blog->menu->browse       = '我的博客|article|admin|type=blog&categoryID=0&orderBy=id_desc&recTotal=0&recPerPage=20&pageID=1&contribution=false';
+$lang->blog->menu->contribution = '投稿博客|article|admin|type=blog&categoryID=0&orderBy=id_desc&recTotal=0&recPerPage=20&pageID=1&contribution=true';
 
 /* Menu of page module. */
 $lang->page = new stdclass();
@@ -225,32 +229,37 @@ $lang->message->menu = $lang->feedback->menu;
 /* Menu of forum module. */
 $lang->forum = new stdclass();
 $lang->forum->menu = new stdclass();
-$lang->forum->menu->browse = '主題列表|forum|admin|';
-$lang->forum->menu->reply  = '回帖列表|reply|admin|';
-$lang->forum->menu->tree   = '版塊管理|tree|browse|type=forum';
-$lang->forum->menu->update = '更新數據|forum|update|';
+$lang->forum->menu->browse  = '主題列表|forum|admin|';
+$lang->forum->menu->reply   = '回帖列表|reply|admin|';
+$lang->forum->menu->tree    = '版塊管理|tree|browse|type=forum';
+$lang->forum->menu->update  = '更新數據|forum|update|';
+$lang->forum->menu->setting = '論壇設置|forum|setting|';
 
 /* Menu of site module. */
 $lang->site = new stdclass();
 $lang->site->menu = new stdclass();
-$lang->site->menu->basic   = '站點設置|site|setbasic|';
-$lang->site->menu->company = '公司信息|company|setbasic|';
-$lang->site->menu->contact = '聯繫方式|company|setcontact|';
-$lang->site->menu->nav     = '導航設置|nav|admin|';
-$lang->site->menu->link    = '友情連結|links|admin|';
-$lang->site->menu->oauth   = '開放登錄|site|setoauth|';
-$lang->site->menu->mail    = array('link' => '發信設置|mail|admin|', 'alias' => 'detect,edit,save,test');
-$lang->site->menu->wechat  = array('link' => '微信設置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
-$lang->site->menu->search  = '全文檢索|search|buildindex|';
-$lang->site->menu->tag     = '關鍵詞設置|tag|admin|';
-$lang->site->menu->setStat = '流量統計設置|site|setStat|';
+$lang->site->menu->basic    = '站點設置|site|setbasic|';
+$lang->site->menu->company  = '公司信息|company|setbasic|';
+$lang->site->menu->contact  = '聯繫方式|company|setcontact|';
+$lang->site->menu->nav      = '導航設置|nav|admin|';
+$lang->site->menu->link     = '友情連結|links|admin|';
+$lang->site->menu->oauth    = '開放登錄|site|setoauth|';
+$lang->site->menu->yangcong = '洋蔥登錄|site|setyangcong|';
+$lang->site->menu->mail     = array('link' => '發信設置|mail|admin|', 'alias' => 'detect,edit,save,test');
+$lang->site->menu->wechat   = array('link' => '微信設置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
+$lang->site->menu->search   = '全文檢索|search|buildindex|';
+$lang->site->menu->tag      = '關鍵詞設置|tag|admin|';
+$lang->site->menu->setStat  = '流量統計設置|site|setStat|';
 
 /* Menu of security module. */
 $lang->security = new stdclass();
 $lang->security->menu = new stdclass();
 $lang->security->menu->basic     = '基本設置|site|setsecurity|';
-$lang->security->menu->upload    = '附件上傳|site|setupload|';
+$lang->security->menu->filter    = '過濾設置|site|setfilter|';
+$lang->security->menu->blacklist = '黑名單管理|guarder|blacklist|';
+$lang->security->menu->whitelist = '白名單管理|guarder|setwhitelist|';
 $lang->security->menu->sensitive = '敏感詞設置|site|setsensitive|';
+$lang->security->menu->upload    = '附件上傳|site|setupload|';
 $lang->security->menu->admin     = '管理員|user|admin|admin=1';
 $lang->security->menu->group     = array('link' => '分組權限|group|browse|', 'alias' => 'managepriv,managemember');
 $lang->security->menu->log       = '登錄日誌|user|adminlog|';
@@ -322,7 +331,7 @@ $lang->stat->menu->traffic  = '概況|stat|traffic|';
 $lang->stat->menu->from     = '來源統計|stat|from|';
 $lang->stat->menu->search   = '搜索引擎統計|stat|search|';
 $lang->stat->menu->keywords = '關鍵詞統計|stat|keywords|';
-$lang->stat->menu->domains  = '來路域名|stat|domainList|';
+$lang->stat->menu->domains  = '來路域名|stat|domainlist|';
 $lang->stat->menu->client   = '終端統計|stat|client|type=browser';
 $lang->stat->menu->page     = '頁面訪問量排名|stat|page|';
 
@@ -351,6 +360,7 @@ $lang->error->noWritable   = '%s 可能不可寫，請修改權限！';
 $lang->error->fingerprint  = '身份認證過期，請重試！';
 $lang->error->token        = '必須為英文或數字，長度為3-32字元！';
 $lang->error->sensitive    = '內容中不能存在敏感詞!';
+$lang->error->noRepeat     = '主題或內容已存在，禁止重複';
 
 /* The pager items. */
 $lang->pager = new stdclass();

@@ -185,6 +185,7 @@ EOT;
      */
     public function inList()
     {
+        if($this->config->site->filterFunction != 'open') return true;
         $ip      = $this->server->remote_addr;
         $account = $this->app->user->account;
 
@@ -209,6 +210,7 @@ EOT;
      */
     public function matchList($content)
     {
+        if($this->config->site->filterFunction != 'open') return true;
         if(!is_string($content))
         {
             $content = (array) $content;
@@ -233,6 +235,7 @@ EOT;
      */
     public function logOperation($type = 'ip', $action, $identity = '')
     {
+        if($this->config->site->filterFunction != 'open') return true;
         if($identity == '')
         {
             if($type == 'ip')      $identity = $this->server->remote_addr;
@@ -323,7 +326,7 @@ EOT;
        $blacklist->reason   = $reason;
        $blacklist->times    = $times;
        $blacklist->lang     = 'all';
-       if(!empty($expired)) $blacklist->expiredDate = date('Y-m-d H:i:s', $expired * 3600 * $times + time());
+       if(!empty($expired)) $blacklist->expiredDate = date('Y-m-d H:i:s', $expired * 60 * $times + time());
 
        $this->dao->replace(TABLE_BLACKLIST)->data($blacklist)
            ->batchCheck($this->config->guarder->require->addblacklist, 'notempty')
@@ -342,6 +345,7 @@ EOT;
      */
     public function checkRepeat($content, $title = '')
     {
+        if($this->config->site->filterFunction != 'open') return true;
         if(empty($title)) $title = $content;
         $repeat = $this->dao->select('id')->from(TABLE_THREAD)->where('title')->eq($title)->orWhere('content')->eq($content)->fetch();
         if(empty($repeat)) $repeat = $this->dao->select('id')->from(TABLE_MESSAGE)->where('content')->eq($content)->fetch();

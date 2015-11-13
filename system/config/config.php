@@ -122,6 +122,7 @@ $config->dependence->score[]   = 'score';
 $config->dependence->score[]   = 'user';
 $config->dependence->stat[]    = 'stat';
 $config->dependence->log[]     = 'stat';
+$config->dependence->contribution[] = 'contribution';
 
 /* Database settings. */
 $config->db = new stdclass();          

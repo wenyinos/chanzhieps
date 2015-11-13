@@ -39,6 +39,7 @@ $lang->mail->nextStep       = '下一步';
 $lang->mail->successSaved   = '配置信息已經成功保存。';
 $lang->mail->subject        = '測試郵件';
 $lang->mail->content        = '郵箱設置成功';
+$lang->mail->sending        = "郵件正在發往 %s ,請稍侯...";
 $lang->mail->successSended  = '成功發送！';
 $lang->mail->needConfigure  = '無法找到郵件配置信息，請先配置郵件發送參數。';
 $lang->mail->error          = '你的郵箱地址有誤，請填寫正確的郵箱地址。'; 
