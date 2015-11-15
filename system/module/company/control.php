@@ -86,7 +86,7 @@ class company extends control
         {
             if(!empty($_POST['email']))
             {
-                if(!validater::checkEmail($this->post['email'])) $this->send(array('result' => 'fail', 'message' => $this->lang->company->error->email));
+                if(!validater::checkEmail($this->post->email)) $this->send(array('result' => 'fail', 'message' => $this->lang->company->error->email));
             }
 
             $contact = array('contact' => helper::jsonEncode($_POST));
