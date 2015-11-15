@@ -522,11 +522,19 @@ function createLink(moduleName, methodName, vars, viewType)
         for(i = 0; i < vars.length; i ++) vars[i] = vars[i].split('=');
     }
 
-    if(config.runMode == 'front')
+    if(config.requestType != 'GET')
     {
-        if(config.requestType != 'GET') link = config.webRoot + moduleName + config.requestFix + methodName;
-        if(config.requestType == 'GET') link = config.router + '?' + config.moduleVar + '=' + moduleName + '&' + config.methodVar + '=' + methodName + '&' + config.viewVar + '=' + viewType;
-        if(config.langCode != '') link = '/' + config.langCode + link;
+        if(config.requestType == 'PATH_INFO')
+        {
+            link = config.webRoot + moduleName + config.requestFix + methodName;
+            if(config.langCode != '') link = '/' + config.langCode + link;
+        }
+
+        if(config.requestType == 'PATH_INFO2')
+        {
+            link = config.webRoot + 'index.php/'  + moduleName + config.requestFix + methodName;
+            if(config.langCode != '') link = config.webRoot + 'index.php/' + config.langCode + '/' + moduleName + config.requestFix + methodName;
+        }
           
         if(vars)
         {
