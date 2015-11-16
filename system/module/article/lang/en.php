@@ -105,6 +105,7 @@ $lang->article->successStick   = 'Stick successfully';
 $lang->article->successUnstick = 'Unstick successfully';
 
 $lang->article->confirmDelete = 'Are you sure to delete this article?';
+$lang->article->categoryEmpty = 'Category can not be empty';
 
 $lang->article->lblAddedDate = '<strong>Added:</strong> %s &nbsp;&nbsp;';
 $lang->article->lblAuthor    = "<strong>Author:</strong> %s &nbsp;&nbsp;";

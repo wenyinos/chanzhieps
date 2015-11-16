@@ -225,6 +225,7 @@ class article extends control
         {
             $type = $this->post->type;
             $categories = $type == 'article' ? $this->post->articleCategories : $this->post->blogCategories;
+            if(empty($categories))$this->send(array('result' => 'fail', 'message' => $this->lang->article->categoryEmpty));
             $result = $this->article->approve($id, $type, $categories);
             if(!$result) $this->send(array('result' => 'fail', 'message' => dao::getError()));
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin', "type=contribution&tab=feedback")));

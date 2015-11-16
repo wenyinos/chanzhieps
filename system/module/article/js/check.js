@@ -15,34 +15,13 @@ $(document).ready(function()
         {
             if(result)
             {
-                deleter.text(v.lang.deleteing);
+                deleter.text(v.lang.doing);
 
                 $.getJSON(deleter.attr('href'), function(data)
                 {
                     if(data.result == 'success')
                     {
-                        if(deleter.parents('#ajaxModal').size())
-                        {
-                            if(typeof(data.locate) != 'undefined' && data.locate)
-                            {
-                                $('#ajaxModal').attr('rel', data.locate).load(data.locate);
-                            }
-                            else
-                            {
-                                $.reloadAjaxModal(1200);
-                            }
-                        }
-                        else
-                        {
-                            if(typeof(data.locate) != 'undefined' && data.locate)
-                            {
-                                location.href = data.locate;
-                            }
-                            else
-                            {
-                                location.reload();
-                            }
-                        }
+                        location.href = data.locate;
                         return true;
                     }
                     else
