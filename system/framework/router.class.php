@@ -297,6 +297,7 @@ class router
         $this->setSuperVars();
 
         $this->loadConfig('common');
+        $this->setTimezone();
         $this->setDebug();
         $this->setErrorHandler();
 
@@ -309,7 +310,6 @@ class router
         $this->setClientLang();
         $this->fixLangConfig();
         $this->loadLang('common');
-        $this->setTimezone();
 
         $this->loadClass('front',  $static = true);
         $this->loadClass('filter', $static = true);
