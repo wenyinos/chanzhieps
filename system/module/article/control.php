@@ -90,7 +90,7 @@ class article extends control
         {
             $type = 'contribution';
             $this->lang->menuGroups->article = 'feedback';
-            $this->lang->article->menu       = $this->lang->feedback->menu;
+            $this->lang->article->menu = $this->lang->feedback->menu;
             $this->view->title = $this->lang->contribution->check;
         }
         else
