@@ -65,7 +65,7 @@
     <?php endif;?>
       <div class='panel-footer'>
       <?php echo $lang->guarder->password;?>
-      <?php echo html::password('password', '', "placeholder='{$lang->guarder->passwordHolder}'") . '</br>';?>
+      <?php echo html::password('password', '', "placeholder='{$lang->guarder->passwordHolder}'") . '<br />';?>
       <?php echo html::a('javascript:;', $lang->delete, "class='btn btn-primary submit'");?>
       </div>
     </div>
