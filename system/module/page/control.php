@@ -41,6 +41,12 @@ class page extends control
     {
         $page = $this->loadModel('article')->getPageByID($pageID);
 
+        if($page->link)
+        {
+            $this->dao->update(TABLE_ARTICLE)->set('views = views + 1')->where('id')->eq($pageID)->exec();
+            helper::header301($page->link);
+        }
+
         $title    = $page->title;
         $keywords = $page->keywords . ' ' . $this->config->site->keywords;
         $desc     = $page->summary;
