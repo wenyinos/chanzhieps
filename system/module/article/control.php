@@ -468,24 +468,6 @@ class article extends control
     }
 
     /**
-     * Article setting. 
-     * 
-     * @access public
-     * @return void
-     */
-    public function setting()
-    {
-        if($_POST)
-        {
-            $result = $this->article->saveSetting();
-            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin')));
-            $this->send(array('result' => 'fail', 'message' => dao::getError()));
-        }
-        $this->view->title = $this->lang->article->setting;
-        $this->display();
-    }
-
-    /**
      * Manage article contribution.
      * 
      * @access public
