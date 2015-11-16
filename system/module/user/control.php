@@ -412,6 +412,7 @@ class user extends control
      */
     public function delete($account)
     {
+        $this->app->loadLang('guarder');
         /* Change menu when browse all admin user. */
         if($this->get->admin == 1)
         {
