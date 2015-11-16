@@ -110,6 +110,7 @@
               ?>
             </ul>
           </span>
+      <?php endif;?>
           <span class='dropdown'>
             <a data-toggle='dropdown' href='javascript:;'><?php echo $this->lang->more;?><span class='caret'></span></a>
             <ul class='dropdown-menu pull-right'>    
@@ -124,7 +125,6 @@
           </span>
         </td>
       </tr>
-      <?php endif;?>
       <?php endif;?>
       <?php endforeach;?>
     </tbody>
