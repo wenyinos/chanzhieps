@@ -290,14 +290,14 @@ class helper
     {
         if(is_array($ids)) 
         {
-            if(!get_magic_quotes_gpc())
+            if(!function_exists('get_magic_quotes_gpc') or !get_magic_quotes_gpc())
             {
                 foreach ($ids as $key=>$value)  $ids[$key] = addslashes($value); 
             }
             return "IN ('" . join("','", $ids) . "')";
         }
 
-        if(!get_magic_quotes_gpc()) $ids = addslashes($ids);
+        if(!function_exists('get_magic_quotes_gpc') or !get_magic_quotes_gpc()) $ids = addslashes($ids);
         return "IN ('" . str_replace(',', "','", str_replace(' ', '', $ids)) . "')";
     }
 
@@ -337,7 +337,7 @@ class helper
      */
     static public function jsonEncode($data)
     {
-        return (version_compare(phpversion(), '5.4', '<') and get_magic_quotes_gpc()) ? addslashes(json_encode($data)) : json_encode($data);
+        return (version_compare(phpversion(), '5.4', '<') and function_exists('get_magic_quotes_gpc') and get_magic_quotes_gpc()) ? addslashes(json_encode($data)) : json_encode($data);
     }
 
     /**
