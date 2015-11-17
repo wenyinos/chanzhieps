@@ -52,9 +52,9 @@ class statModel extends model
         $ipChart->color = 'red';
         $ipChart->data  = $ip;
 
-        $chartData[] = $pvChart;
-        $chartData[] = $uvChart;
-        $chartData[] = $ipChart;
+        $chartData['pv'] = $pvChart;
+        $chartData['uv'] = $uvChart;
+        $chartData['ip'] = $ipChart;
         return $chartData;
     }
 
