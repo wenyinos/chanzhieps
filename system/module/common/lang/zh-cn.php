@@ -330,7 +330,7 @@ $lang->stat->menu->traffic  = '概况|stat|traffic|';
 $lang->stat->menu->from     = '来源统计|stat|from|';
 $lang->stat->menu->search   = '搜索引擎统计|stat|search|';
 $lang->stat->menu->keywords = '关键词统计|stat|keywords|';
-$lang->stat->menu->domains  = '来路域名|stat|domainlist|';
+$lang->stat->menu->domains  = array('link' => '来路域名|stat|domainlist|', 'alias' => 'domaintrend,domainpage');
 $lang->stat->menu->client   = '终端统计|stat|client|type=browser';
 $lang->stat->menu->page     = '页面访问量排名|stat|page|';
 

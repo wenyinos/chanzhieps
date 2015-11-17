@@ -49,9 +49,9 @@
   <div class='panel-body'>
     <ul id='typeMenu' class='nav nav-pills pull-right'>
       <?php
-      echo "<li>" . html::a(inlink('client', "type=browser"), $lang->stat->browser, "class='w-p100'") . '</li>';
-      echo '<li>' . html::a(inlink('client', "type=os"), $lang->stat->os,           "class='w-p100'") . '</li>';
-      echo '<li>' . html::a(inlink('client', "type=device"), $lang->stat->device,   "class='w-p100'") . '</li>';
+      echo "<li>" . html::a(inlink('client', "type=browser&mode=$mode&begin={$this->get->begin}&end={$this->get->end}"), $lang->stat->browser, "class='w-p100'") . '</li>';
+      echo '<li>' . html::a(inlink('client', "type=os&mode=$mode&begin={$this->get->begin}&end={$this->get->end}"), $lang->stat->os,           "class='w-p100'") . '</li>';
+      echo '<li>' . html::a(inlink('client', "type=device&mode=$mode&begin={$this->get->begin}&end={$this->get->end}"), $lang->stat->device,   "class='w-p100'") . '</li>';
       ?>
     </ul>
     <div class='row' style='clear:both'>
