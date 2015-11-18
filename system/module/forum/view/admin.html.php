@@ -70,17 +70,18 @@
           }
           else
           {
-              echo html::a('', $lang->thread->approve, "class='disabled'");
+              echo html::a('javascript:;', $lang->thread->approve, "class='disabled'");
           }
           $text = $thread->hidden ? $lang->thread->show : $lang->thread->hide;
-          commonModel::printLink('thread', 'switchStatus', "threadID=$thread->id", $text, "class='reload'");
           if($thread->status != 'wait')
           {
+              commonModel::printLink('thread', 'switchStatus', "threadID=$thread->id", $text, "class='reload'");
               commonModel::printLink('thread', 'transfer', "threadID=$thread->id", $lang->thread->transfer, "data-toggle='modal'");
           }
           else
           {
-              echo html::a('', $lang->thread->transfer, "class='disabled'");
+              echo html::a('javascript:;', $text, "class='disabled'");
+              echo html::a('javascript:;', $lang->thread->transfer, "class='disabled'");
           }
           commonModel::printLink('thread', 'delete', "threadID=$thread->id", $lang->delete, "class='deleter'");
           commonModel::printLink('guarder', 'addToBlacklist', "type=thread&id=$thread->id", $lang->addToBlacklist, "data-toggle='modal'");

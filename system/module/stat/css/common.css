@@ -1,4 +1,4 @@
-.chart-canvas{margin:10px auto;}
+.chart-canvas{margin:10px;}
 #switchBar {padding-top:10px;}
 #switchBar label{margin: 0 5px; font-weight:normal; cursor:pointer; color:blue;}
 #switchBar label.active{color:#333; font-weight:bold;}
