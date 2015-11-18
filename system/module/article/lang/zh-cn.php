@@ -92,7 +92,8 @@ $lang->page->edit   = '编辑单页';
 $lang->article->sourceList['original']      = '原创';
 $lang->article->sourceList['copied']        = '转贴';
 $lang->article->sourceList['translational'] = '翻译';
-$lang->article->sourceList['article']       = '转自文章';
+
+$lang->article->fromArticle = '转自文章';
 
 $lang->article->statusList['normal'] = '正常';
 $lang->article->statusList['draft']  = '草稿';

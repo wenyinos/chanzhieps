@@ -92,7 +92,8 @@ $lang->page->edit   = 'Edit';
 $lang->article->sourceList['original']      = 'Original';
 $lang->article->sourceList['copied']        = 'Copied';
 $lang->article->sourceList['translational'] = 'Translational';
-$lang->article->sourceList['article']       = 'Forwarded from article';
+
+$lang->article->formArticle = 'Forwarded from article';
 
 $lang->article->statusList['normal'] = 'Normal';
 $lang->article->statusList['draft']  = 'Draft';
