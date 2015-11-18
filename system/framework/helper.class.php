@@ -85,23 +85,15 @@ class helper
         /* Seo modules return directly. */
         if(helper::inSeoMode() and method_exists('uri', 'create' . $moduleName . $methodName))
         {
+            if($config->requestType == 'PATH_INFO2') $config->webRoot = $_SERVER['SCRIPT_NAME'] . '/';
             $link = call_user_func_array('uri::create' . $moduleName . $methodName, array('param'=> $vars, 'alias'=>$alias, 'viewType'=>$viewType));
 
-            $scriptName = $config->requestType == 'PATH_INFO2' ? $_SERVER['SCRIPT_NAME'] : '';
             /* Add client lang. */
-            if($lang and $link)
-            {
-                $link = $config->webRoot . $scriptName .  $lang . '/' . substr($link, strlen($config->webRoot));
-            }
-            else
-            {
-                $link = $scriptName . $link;
-            }
-            if($link)
-            {
-                $config->requestType = $requestType;
-                return $link;
-            }
+            if($lang and $link) $link = $config->webRoot .  $lang . '/' . substr($link, strlen($config->webRoot));
+
+            if($config->requestType == 'PATH_INFO2') $config->webRoot = getWebRoot();
+            $config->requestType = $requestType;
+            if($link) return $link;
         }
         
         /* Set the view type. */
@@ -290,14 +282,14 @@ class helper
     {
         if(is_array($ids)) 
         {
-            if(!get_magic_quotes_gpc())
+            if(!function_exists('get_magic_quotes_gpc') or !get_magic_quotes_gpc())
             {
                 foreach ($ids as $key=>$value)  $ids[$key] = addslashes($value); 
             }
             return "IN ('" . join("','", $ids) . "')";
         }
 
-        if(!get_magic_quotes_gpc()) $ids = addslashes($ids);
+        if(!function_exists('get_magic_quotes_gpc') or !get_magic_quotes_gpc()) $ids = addslashes($ids);
         return "IN ('" . str_replace(',', "','", str_replace(' ', '', $ids)) . "')";
     }
 
@@ -337,7 +329,7 @@ class helper
      */
     static public function jsonEncode($data)
     {
-        return (version_compare(phpversion(), '5.4', '<') and get_magic_quotes_gpc()) ? addslashes(json_encode($data)) : json_encode($data);
+        return (version_compare(phpversion(), '5.4', '<') and function_exists('get_magic_quotes_gpc') and get_magic_quotes_gpc()) ? addslashes(json_encode($data)) : json_encode($data);
     }
 
     /**

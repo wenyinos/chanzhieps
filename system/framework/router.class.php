@@ -910,6 +910,7 @@ class router
         $pathInfo = $this->getPathInfo('PATH_INFO');
         if(empty($pathInfo)) $pathInfo = $this->getPathInfo('ORIG_PATH_INFO');
         if(empty($pathInfo)) $pathInfo = $this->getPathInfo('REQUEST_URI');
+        if(trim($pathInfo, '/') == trim($this->config->webRoot, '/')) $pathInfo = '';
         if(!empty($pathInfo))
         {
             $dotPos = strrpos($pathInfo, '.');

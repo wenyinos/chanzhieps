@@ -59,8 +59,8 @@
         <td class='w-100px'><?php echo $report->ip;?></td>
         <td class='w-100px'>
           <?php $domain = helper::safe64Encode($domain);?>
-          <?php echo html::a(inlink('domaintrend', "domain={$domain}"), $lang->stat->domainTrend);?>
-          <?php echo html::a(inlink('domainpage', "domain={$domain}"), $lang->stat->domainPage);?>
+          <?php echo html::a(inlink('domaintrend', "domain={$domain}&mode={$mode}&begin={$this->get->begin}&end={$this->get->end}"), $lang->stat->domainTrend);?>
+          <?php echo html::a(inlink('domainpage', "domain={$domain}&mode={$mode}&begin={$this->get->begin}&end={$this->get->end}"), $lang->stat->domainPage);?>
         </td>
       </tr>
       <?php endforeach;?>

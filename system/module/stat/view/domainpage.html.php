@@ -18,7 +18,7 @@
       <ul class='nav nav-tabs'>
         <?php foreach($lang->stat->trafficModes as $code => $modeName):?>
         <?php $class = $mode == $code ? "class='active'" : '';?>
-        <li <?php echo $class?>><?php echo html::a(inlink('domainpage', "$domain={$domain}&mode=$code"), $modeName);?></li>
+        <li <?php echo $class?>><?php $domainx = helper::safe64Encode($domain); echo html::a(inlink('domainpage', "domain={$domainx}&mode=$code"), $modeName);?></li>
         <?php endforeach;?>
         <li>
           <form method='get' action="<?php echo inlink('domainpage')?>">
