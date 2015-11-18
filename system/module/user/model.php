@@ -663,6 +663,23 @@ class userModel extends model
     }
 
     /**
+     * Batch delete users. 
+     * 
+     * @param  int    $id 
+     * @access public
+     * @return bool 
+     */
+    public function batchDelete($accounts)
+    {
+        foreach($accounts as $account)
+        {
+            $this->delete($account);
+            $this->deleteHistory($account);
+        }
+        return !dao::isError();
+    }
+
+    /**
      * Delete user.
      * 
      * @param  string    $account 
