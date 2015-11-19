@@ -185,7 +185,7 @@ class bookModel extends model
         $anchor      = "name='node{$node->id}' id='node{$node->id}'";
         $titleLink   = $node->type == 'book' ? $node->title : html::a(helper::createLink('book', 'admin', "bookID=$node->id"), $node->title);
         $editLink    = commonModel::hasPriv('book', 'edit') ? html::a(helper::createLink('book', 'edit', "nodeID=$node->id"), $this->lang->edit, $anchor) : '';
-        $delLink     = empty($children) ? (commonModel::hasPriv('book', 'edit') ? html::a(helper::createLink('book', 'delete', "bookID=$node->id"), $this->lang->delete, "class='deleter'") : '') : '';
+        $delLink     = commonModel::hasPriv('book', 'edit') ? html::a(helper::createLink('book', 'delete', "bookID=$node->id"), $this->lang->delete, "class='deleter'") : '';
         $filesLink   = commonModel::hasPriv('file', 'browse') ? html::a(helper::createLink('file', 'browse', "objectType=book&objectID=$node->id&isImage=0"), $this->lang->book->files, "data-toggle='modal' data-width='1000'") : '';
         $catalogLink = commonModel::hasPriv('book', 'catalog') ? html::a(helper::createLink('book', 'catalog', "nodeID=$node->id"), $this->lang->book->catalog) : '';
         $moveLink    = commonModel::hasPriv('book', 'sort') ? html::a('javascript:;', "<i class='icon-move'></i>", "class='sort sort-handle'") : '';
@@ -730,8 +730,12 @@ class bookModel extends model
     {
         $book = $this->getNodeByID($id);
         if(!$book) return false;
+        $families = $this->getFamilies($book);
 
-        $this->dao->delete()->from(TABLE_BOOK)->where('id')->eq($id)->exec();
+        foreach($families as $node)
+        {
+            $this->dao->delete()->from(TABLE_BOOK)->where('id')->eq($node->id)->exec();
+        }
         return $this->loadModel('search')->deleteIndex('book', $bookID);
     }
 
