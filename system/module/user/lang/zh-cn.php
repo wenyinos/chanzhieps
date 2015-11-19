@@ -77,6 +77,7 @@ $lang->user->addScore        = '奖励积分';
 $lang->user->reduceScore     = '扣除积分';
 $lang->user->yangcongLogin   = '洋葱登录';
 $lang->user->bindAccount     = '绑定帐号';
+$lang->user->batchDelete     = '批量删除用户';
 
 $lang->user->profile      = '个人信息';
 $lang->user->editProfile  = '编辑信息';
