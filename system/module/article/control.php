@@ -84,7 +84,7 @@ class article extends control
      * @access public
      * @return void
      */
-    public function admin($type = 'article', $categoryID = 0, $orderBy = 'id_desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
+    public function admin($type = 'article', $categoryID = 0, $orderBy = '`order` desc', $recTotal = 0, $recPerPage = 20, $pageID = 1)
     {   
         if($this->get->tab == 'feedback') 
         {
@@ -155,10 +155,12 @@ class article extends control
             $this->view->treeModuleMenu = $this->loadModel('tree')->getTreeMenu($type, 0, array('treeModel', 'createAdminLink'));
             $this->view->treeManageLink = html::a(helper::createLink('tree', 'browse', "type={$type}"), $this->lang->tree->manage);
         }
+        $maxID = $this->dao->select('max(id) as maxID')->from(TABLE_ARTICLE)->fetch('maxID');
 
         $this->view->title           = $this->lang->{$type}->create;
         $this->view->currentCategory = $categoryID;
         $this->view->categories      = $categories ;
+        $this->view->order           = $maxID + 1;
         $this->view->type            = $type;
 
         $this->display();
