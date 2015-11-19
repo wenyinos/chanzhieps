@@ -101,7 +101,7 @@ class articleModel extends model
                 ->orWhere('summary')->like("%{$searchWord}%")->andWhere('type')->eq($type)
                 ->orWhere('content')->like("%{$searchWord}%")->andWhere('type')->eq($type)
                 ->fi()
-                ->orderBy('id_desc')
+                ->orderBy('`order` desc')
                 ->page($pager)
                 ->fetchAll('id');
         }
