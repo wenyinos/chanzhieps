@@ -43,8 +43,8 @@ $lang->stat->itemList->desktop = '桌面设备';
 $lang->stat->itemList->mobile  = '移动设备';
 
 $lang->stat->trafficModes = new stdclass();
-$lang->stat->trafficModes->today    = '今日';
 $lang->stat->trafficModes->yestoday = '昨日';
+$lang->stat->trafficModes->today    = '今日';
 $lang->stat->trafficModes->weekly   = '最近一周';
 $lang->stat->trafficModes->monthly  = '最近30天';
 

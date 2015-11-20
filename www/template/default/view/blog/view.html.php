@@ -47,7 +47,7 @@ $common->printPositionBar($category, $article, '', $root);
                 if($sina->widget) echo "<div class='sina-widget'>" . $sina->widget . '</div>';
             }
             ?>
-                <?php if($article->source):?><span class='label label-success'><?php echo $lang->article->sourceList[$article->source]; ?></span><?php endif;?>
+                <?php if($article->source):?><span class='label label-success'><?php echo $article->source == 'article' ? $lang->article->fromArticle : $lang->article->sourceList[$article->source]; ?></span><?php endif;?>
             <span class='label label-warning' data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblViews, $article->views);?>'><i class='icon-eye-open'></i> <?php echo $article->views; ?></span>
           </dd>
         </dl>

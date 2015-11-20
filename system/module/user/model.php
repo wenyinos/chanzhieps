@@ -678,6 +678,20 @@ class userModel extends model
     }
 
     /**
+     * Batch delete users.
+     * 
+     * @param  string $users 
+     * @access public
+     * @return void
+     */
+    public function batchDelete($users) 
+    {
+        $this->dao->setAutolang(false)->delete()->from(TABLE_USER)->where('account')->in($users)->exec();
+
+        return !dao::isError();
+    }
+
+    /**
      * Delete user history. 
      * 
      * @param  int    $account 
@@ -726,6 +740,32 @@ class userModel extends model
         $this->dao->setAutolang(false)->delete()->from(TABLE_ADDRESS)
             ->where('id')->in($this->post->addresses)
             ->exec();
+
+        return !dao::isError();
+    }
+
+    /**
+     * Batch belete history.
+     * 
+     * @param  string $users 
+     * @access public
+     * @return void
+     */
+    public function batchDeleteHistory($users)
+    {
+        $this->dao->setAutolang(false)->delete()->from(TABLE_THREAD)->where('author')->in($users)->exec();
+        $this->dao->setAutolang(false)->delete()->from(TABLE_ARTICLE)->where('addedBy')->in($users)->exec();
+        $this->dao->setAutolang(false)->delete()->from(TABLE_REPLY)->where('author')->in($users)->exec();
+        $this->dao->setAutolang(false)->delete()->from(TABLE_MESSAGE)
+            ->where('account')->in($users)
+            ->andWhere('type')->eq('comment')
+            ->exec();
+        $this->dao->setAutolang(false)->delete()->from(TABLE_MESSAGE)
+            ->where('account')->in($users)
+            ->andWhere('type')->eq('message')
+            ->exec();
+        $this->dao->setAutolang(false)->delete()->from(TABLE_ORDER)->where('account')->in($users)->exec();
+        $this->dao->setAutolang(false)->delete()->from(TABLE_ADDRESS)->where('account')->in($users)->exec();
 
         return !dao::isError();
     }
@@ -1213,6 +1253,72 @@ class userModel extends model
         $user->contributions = $this->getContributions($account);
 
         return $user;
+    }
+
+    /**
+     * Get history of users.
+     * 
+     * @param  string|array $users 
+     * @access public
+     * @return void
+     */
+    public function getHistoryOfUsers($users)
+    {
+        $threads = $this->dao->setAutoLang(false)->select('author,count(*) as count')->from(TABLE_THREAD)
+            ->where('author')->in($users)
+            ->groupBy('author')
+            ->fetchAll('author');
+        $contributions = $this->dao->setAutoLang(false)->select('addedBy,count(*) as count')->from(TABLE_ARTICLE)
+            ->where('addedBy')->in($users)
+            ->groupBy('addedBy')
+            ->fetchPairs('addedBy');
+        $replies = $this->dao->setAutoLang(false)->select('author,count(*) as count')->from(TABLE_REPLY)
+            ->where('author')->in($users)
+            ->groupBy('author')
+            ->fetchPairs('author');
+        $fromComments = $this->dao->setAutoLang(false)->select('account,count(*)')->from(TABLE_MESSAGE)
+            ->where('type')->eq('comment')
+            ->andWhere('account')->in($users)
+            ->groupBy('account')
+            ->fetchPairs('account');
+        $toComments = $this->dao->setAutoLang(false)->select('`to`,count(*)')->from(TABLE_MESSAGE)
+            ->where('type')->eq('comment')
+            ->andWhere('`to`')->in($users)
+            ->groupBy('`to`')
+            ->fetchPairs('to');
+        $fromMessages = $this->dao->setAutoLang(false)->select('account,count(*)')->from(TABLE_MESSAGE)
+            ->where('type')->eq('message')
+            ->andWhere('account')->in($users)
+            ->groupBy('account')
+            ->fetchPairs('account');
+        $toMessages = $this->dao->setAutoLang(false)->select('`to`,count(*)')->from(TABLE_MESSAGE)
+            ->where('type')->eq('message')
+            ->andWhere('`to`')->in($users)
+            ->groupBy('`to`')
+            ->fetchPairs('`to`');
+        $orders = $this->dao->setAutoLang(false)->select('account,count(*)')->from(TABLE_ORDER)
+            ->where('account')->in($users)
+            ->groupBy('account')
+            ->fetchPairs('account');
+        $addresses = $this->dao->setAutoLang(false)->select('account,count(*)')->from(TABLE_ADDRESS)
+            ->where('account')->in($users)
+            ->groupBy('account')
+            ->fetchPairs('account');
+        $history = array();
+        foreach($users as $user)
+        {
+           $history[$user] = new stdClass();
+           $history[$user]->thread       = isset($threads[$user]) ? $threads[$user] : 0;
+           $history[$user]->reply        = isset($replies[$user]) ? $replies[$user] : 0;
+           $history[$user]->contribution = isset($contributions[$user]) ? $contributions[$user] : 0;
+           $history[$user]->comment      = isset($fromComments[$user]) ? $fromComments[$user] : 0;
+           $history[$user]->comment     += isset($toComments[$user]) ? $toComments[$user] : 0;
+           $history[$user]->message      = isset($fromMessages[$user]) ? $fromMessages[$user] : 0;
+           $history[$user]->message     += isset($toMessages[$user]) ? $toMessages[$user] : 0;
+           $history[$user]->order        = isset($orders[$user]) ? $fromMessages[$user] : 0;
+           $history[$user]->address      = isset($addresses[$user]) ? $addresses[$user] : 0;
+        }
+        return $history;
     }
 
     /**
