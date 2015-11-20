@@ -1174,6 +1174,31 @@ class userModel extends model
     }
 
     /**
+     * Check last login location.
+     *
+     * @param  string $account
+     * @access public
+     * @return void
+     */
+    public function checkLoginLocation($account)
+    {
+        $this->app->loadClass('IP');
+        $ip = helper::getRemoteIP();
+        $location = IP::find($ip);
+        $location = is_array($location) ? join(' ', $location) : $location;
+
+        $lastLocation = $this->dao->select('location')->from(TABLE_LOG)
+            ->where('account')->eq($account)
+            ->andWhere('`desc`')->eq('success')
+            ->andWhere('type')->eq('adminlogin')
+            ->orderBy('date_desc')
+            ->limit(1)
+            ->fetch('location');
+        if($lastLocation and $location != $lastLocation) return false;
+        return true;
+    }
+
+    /**
      * Create a token.
      * 
      * @access public
