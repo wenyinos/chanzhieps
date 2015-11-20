@@ -33,3 +33,5 @@
 #typeMenu {padding-right:20px;}
 #typeMenu li a{padding:5px;}
 #typeMenu li.active a{ background:none; color:blue; font-weight:bold;}
+
+.close { float: none; }

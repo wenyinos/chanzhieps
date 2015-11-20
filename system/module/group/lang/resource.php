@@ -274,6 +274,7 @@ $lang->resource->stat->keywordreport = 'keywordReport';
 $lang->resource->stat->domainlist    = 'domainList';
 $lang->resource->stat->domaintrend   = 'domainTrend';
 $lang->resource->stat->domainpage    = 'domainPage';
+$lang->resource->stat->ignorekeyword = 'ignoreKeyword';
 
 /* Stat module. */
 $lang->resource->score = new stdclass();
