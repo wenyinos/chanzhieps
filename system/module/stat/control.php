@@ -20,6 +20,7 @@ class stat extends control
      */
     public function traffic($mode = 'today', $begin = '', $end = '')
     {
+        if(!isset($this->get->mode) and date("h") < 10) $mode = 'yestoday';
         $date  = $this->stat->parseDate($mode, $begin, $end);
         $begin = $date->begin;
         $end   = $date->end;

@@ -43,8 +43,8 @@ $lang->stat->itemList->desktop = 'Desktop';
 $lang->stat->itemList->mobile  = 'Mobile';
 
 $lang->stat->trafficModes = new stdclass();
-$lang->stat->trafficModes->today    = 'Today';
 $lang->stat->trafficModes->yestoday = 'Yestoday';
+$lang->stat->trafficModes->today    = 'Today';
 $lang->stat->trafficModes->weekly   = 'Weekly';
 $lang->stat->trafficModes->monthly  = 'Monthly';
 
