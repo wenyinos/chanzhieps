@@ -373,4 +373,17 @@ class stat extends control
         $this->view->end     = $end;
         $this->display();
     }
+
+    /**
+     * Ignore keyword notice.
+     *
+     * @access public
+     * @return void
+     */
+    public function ignoreKeyword()
+    {
+        $result = $this->loadModel('setting')->setItems('system.common.global', array('ignoreKeyword' => true));
+        if($result) $this->send(array('result' => 'success', 'locate' => inlink('keywords')));
+        $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
+    }
 }

@@ -26,6 +26,8 @@ $lang->stat->domainList    = '来路域名';
 $lang->stat->domainTrend   = '趋势';
 $lang->stat->domainPage    = '页面';
 $lang->stat->percentage    = '百分比';
+$lang->stat->ignoreKeyword = '忽略关键词说明';
+$lang->stat->keywordNotice = 'Google和百度取消了来路链接的关键词显示，因此无法统计其关键词信息。';
 
 $lang->stat->all   = '全部';
 $lang->stat->begin = '开始日期';

@@ -39,7 +39,7 @@
     </div>
   </div>
 </div>
-  <div class="panel-">
+<div>
   <table class='table table-hover table-bordered'>
     <thead>
       <tr class='text-center'>
@@ -79,4 +79,12 @@
     <tfoot><tr><td colspan='20'><?php $pager->show();?></td></tr></tfoot>
   </table>
 </div>
+<?php if(!isset($this->config->global->ignoreKeyword) or !$this->config->global->ignoreKeyword):?>
+<form method='post' id='ajaxForm' action='<?php echo $this->createLink('stat', 'ignorekeyword');?>'>
+  <div class="text-important">
+    <?php echo $lang->stat->keywordNotice;?>
+    <span><button type="submit" class="close">&times;</button></span>
+  </div>
+</form>
+<?php endif;?>
 <?php include '../../common/view/footer.admin.html.php';?>

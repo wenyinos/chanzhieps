@@ -26,6 +26,8 @@ $lang->stat->domainList    = 'Antecedents Domain List';
 $lang->stat->domainTrend   = 'Trend';
 $lang->stat->domainPage    = 'Page';
 $lang->stat->percentage    = 'Percentage';
+$lang->stat->ignoreKeyword = 'Ignore keyword notice';
+$lang->stat->keywordNotice = 'Google and Baidu have been disabled keywords in the source url, so we cannot show the statistics.';
 
 $lang->stat->all   = 'All Data';
 $lang->stat->begin = 'Start Date';
