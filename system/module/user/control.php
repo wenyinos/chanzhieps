@@ -441,6 +441,47 @@ class user extends control
     }
 
     /**
+     * Batch delete users.
+     * 
+     * @access public
+     * @return void
+     */
+    public function batchDelete()
+    {
+        $this->app->loadLang('guarder');
+        /* Change menu when browse all admin user. */
+        if($this->get->admin == 1)
+        {
+            $this->lang->user->menu = $this->lang->security->menu;
+            $this->lang->menuGroups->user = 'security';
+        }
+
+        if($_POST)
+        {
+            if(isset($_POST['password']))
+            {
+                $user = $this->loadModel('user')->identify($this->app->user->account, $this->post->password);
+                if(!$user) $this->send(array( 'result' => 'fail', 'message' => $this->lang->user->identifyFailed ) );
+
+                /* Delete history. */
+                $this->user->batchDeleteHistory($this->post->users);
+
+                if($this->user->batchDelete($this->post->users)) $this->send(array('result' => 'success', 'message' =>$this->lang->deleteSuccess, 'locate' => inlink('admin')));
+                $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            }
+            else
+            {
+                $accounts = $this->post->account;
+            }
+        }
+
+        $this->view->title       = $this->lang->user->userHistory;
+        $this->view->userHistory = $this->user->getHistoryOfUsers($accounts);
+        $this->view->users       = $this->user->getRealNamePairs($accounts);
+        $this->display();
+    }
+
+    /**
      *  Admin users list.
      *
      * @access public
@@ -474,7 +515,7 @@ class user extends control
         $this->view->title = $this->lang->user->list;
         $this->display();
     }
-        
+
     /**
      * Pull wechat fans. 
      * 
