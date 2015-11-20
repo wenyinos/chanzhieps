@@ -112,6 +112,7 @@ $lang->js->confirmDelete    = 'Are you sure to delete it?';
 $lang->js->deleteing        = 'Deleting...';
 $lang->js->doing            = 'Processing...';
 $lang->js->loading          = 'Loading...';
+$lang->js->updating         = 'Updating...';
 $lang->js->timeout          = 'Timeout';
 $lang->js->errorThrown      = '<h4>Something error ：</h4>';
 $lang->js->continueShopping = 'Continue Shopping';
