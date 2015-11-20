@@ -115,12 +115,14 @@ class user extends control
             /* check client ip and location if login is admin. */
             if(RUN_MODE == 'admin')
             {
-                $checkIP       = $this->user->checkIP();
-                $checkLocation = $this->user->checkLocation();
-                if($user and (!$checkIP or !$checkLocation))
+                $checkIP            = $this->user->checkIP();
+                $checkLocation      = $this->user->checkLocation();
+                $checkLoginLocation = $this->user->checkLoginLocation($this->post->account);
+                if($user and (!$checkIP or !$checkLocation or !$checkLoginLocation))
                 {
                     $error  = $checkIP ? '' : $this->lang->user->ipDenied;
                     $error .= $checkLocation ? '' : $this->lang->user->locationDenied;
+                    $error .= $checkLoginLocation ? '' : $this->lang->user->loginLocationChanged;
                     $pass   = $this->loadModel('mail')->checkVerify();
                     $captchaUrl = $this->createLink('mail', 'captcha', "url=&target=modal&account={$this->post->account}");
                     if(!$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => $error, 'url' => $captchaUrl));
