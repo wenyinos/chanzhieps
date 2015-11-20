@@ -834,7 +834,8 @@ class commonModel extends model
         unset($board->pathNames[key($board->pathNames)]);
         foreach($board->pathNames as $boardID => $boardName)
         {
-            echo '<li>' . html::a(helper::createLink('forum', 'board', "boardID={$boardID}", "category=" . $this->config->seo->alias->forum[$boardID]), $boardName) . '</li>';
+            $categoryAlias = isset($this->config->seo->alias->forum[$boardID]) ? $this->config->seo->alias->forum[$boardID] : '';
+            echo '<li>' . html::a(helper::createLink('forum', 'board', "boardID={$boardID}", "category=" . $categoryAlias), $boardName) . '</li>';
         }
     }
 
