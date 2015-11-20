@@ -55,6 +55,7 @@ $(document).ready(function()
     {
         if(v.checkStock && $(this).val() > $(this).data('stock')) $(this).val($(this).data('stock'));
         amount = $(this).val() * $(this).parents('tr').find('input[name*=price]').val();
+        amount = amount.toFixed(2);
         $(this).parents('tr').find('.amountContainer').text(amount);
         countAmount();
     });
