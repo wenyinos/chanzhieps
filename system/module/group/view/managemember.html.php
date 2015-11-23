@@ -13,7 +13,7 @@
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel'>
   <div class='panel-heading'>
-    <strong><?php echo $lang->group->manageMember;?></strong>
+    <strong><i class='icon-user'></i> <?php echo $lang->group->manageMember;?></strong>
   </div>
   <div class='panel-body'>
     <form class='form-condensed pdb-20' method='post' id='ajaxForm'>
