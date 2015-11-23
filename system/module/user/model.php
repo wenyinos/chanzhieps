@@ -1194,7 +1194,7 @@ class userModel extends model
             ->orderBy('date_desc')
             ->limit(1)
             ->fetch('location');
-        if($lastLocation and $location != $lastLocation) return false;
+        if($lastLocation and trim($location) != $lastLocation) return false;
         return true;
     }
 

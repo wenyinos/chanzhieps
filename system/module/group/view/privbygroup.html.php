@@ -12,7 +12,7 @@
 ?>
 <form class='form-condensed' method='post' id='ajaxForm'>
   <div class='panel'>
-    <div class='panel-heading'><i class='icon-lock'> <?php echo $group->name;?></i></div>
+    <div class='panel-heading'><strong><i class='icon-lock'></i> <?php echo $group->name;?></strong></div>
     <table class='table table-hover table-striped table-bordered table-form'> 
       <thead>
         <tr>
