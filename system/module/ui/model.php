@@ -666,7 +666,7 @@ class uiModel extends model
             ->get();
 
         $yaml  = $this->app->loadClass('spyc')->dump($themeInfo);
-        file_put_contents($this->exportDocPath . $this->app->getClientLang() . '.yaml', $yaml);
+        file_put_contents($this->directories->exportDocPath . $this->app->getClientLang() . '.yaml', $yaml);
 
         $this->clearSources();
         $this->exportDB($template, $theme);
@@ -687,28 +687,37 @@ class uiModel extends model
      */
     public function initExportPath($template, $theme, $code)
     {
-        $this->exportPath       = $this->app->getTmpRoot() . 'theme' . DS . $template . DS . $code . DS;
-        $this->exportDocPath    = $this->exportPath . 'doc' . DS;
-        $this->exportDbPath     = $this->exportPath . 'db' . DS;
-        $this->exportCssPath    = $this->exportPath . 'www' . DS . 'data' . DS . 'css' . DS . $template . DS . $code . DS;
-        $this->exportLessPath   = $this->exportPath . 'www' . DS . 'template' . DS . $template . DS . 'theme' . DS . $code . DS;
-        $this->exportSourcePath = $this->exportPath . 'www' . DS . 'data' . DS . 'source' . DS . $template . DS . $code . DS;
-        $this->exportSlidePath  = $this->exportPath . 'www' . DS . 'data' . DS . 'slidestmp' . DS;
-        $this->exportConfigPath = $this->exportPath . 'system' . DS . 'module' . DS . 'ui' . DS . 'ext' . DS . 'config' . DS;
+        $this->directories = new stdclass();
+        $this->directories->exportPath       = $this->app->getTmpRoot() . 'theme' . DS . $template . DS . $code . DS;
+        $this->directories->exportDocPath    = $this->directories->exportPath . 'doc' . DS;
+        $this->directories->exportDbPath     = $this->directories->exportPath . 'db' . DS;
+        $this->directories->exportCssPath    = $this->directories->exportPath . 'www' . DS . 'data' . DS . 'css' . DS . $template . DS . $code . DS;
+        $this->directories->exportLessPath   = $this->directories->exportPath . 'www' . DS . 'template' . DS . $template . DS . 'theme' . DS . $code . DS;
+        $this->directories->exportSourcePath = $this->directories->exportPath . 'www' . DS . 'data' . DS . 'source' . DS . $template . DS . $code . DS;
+        $this->directories->exportSlidePath  = $this->directories->exportPath . 'www' . DS . 'data' . DS . 'slidestmp' . DS;
+        $this->directories->exportConfigPath = $this->directories->exportPath . 'system' . DS . 'module' . DS . 'ui' . DS . 'ext' . DS . 'config' . DS;
 
-        if(is_dir($this->exportPath)) $this->app->loadClass('zfile')->removeDir($this->exportPath);
+        $this->directories->encryptPath       = $this->directories->exportPath . 'encrypt' . DS;
+        $this->directories->encryptDocPath    = $this->directories->encryptPath . 'doc' . DS;
+        $this->directories->encryptDbPath     = $this->directories->encryptPath . 'db'  . DS;
+        $this->directories->encryptCssPath    = $this->directories->encryptPath . 'www' . DS . 'data' . DS . 'css' . DS . $template . DS . $code . DS;
+        $this->directories->encryptLessPath   = $this->directories->encryptPath . 'www' . DS . 'template' . DS . $template . DS . 'theme' . DS . $code . DS;
+        $this->directories->encryptSourcePath = $this->directories->encryptPath . 'www' . DS . 'data' . DS . 'source' . DS . $template . DS . $code . DS;
+        $this->directories->encryptSlidePath  = $this->directories->encryptPath . 'www' . DS . 'data' . DS . 'slidestmp' . DS;
+        $this->directories->encryptConfigPath = $this->directories->encryptPath . 'system' . DS . 'module' . DS . 'ui' . DS . 'ext' . DS . 'config' . DS;
 
-        mkdir($this->exportPath, 0777, true);
+        if(is_dir($this->directories->exportPath)) $this->app->loadClass('zfile')->removeDir($this->directories->exportPath);
+        foreach($this->directories as $path)
+        {
+            if(!is_dir($path)) mkdir($path, 0777, true);
+        }
 
-        if(!is_dir($this->exportDocPath))    mkdir($this->exportDocPath,    0777, true);
-        if(!is_dir($this->exportDbPath))     mkdir($this->exportDbPath,     0777, true);
-        if(!is_dir($this->exportCssPath))    mkdir($this->exportCssPath,    0777, true);
-        if(!is_dir($this->exportLessPath))   mkdir($this->exportLessPath,   0777, true);
-        if(!is_dir($this->exportSourcePath)) mkdir($this->exportSourcePath, 0777, true);
-        if(!is_dir($this->exportConfigPath)) mkdir($this->exportConfigPath, 0777, true);
-        if(!is_dir($this->exportSlidePath))  mkdir($this->exportSlidePath,  0777, true);
+        foreach($this->directories as $path)
+        {
+            if(!is_dir($path)) return false;
+        }
 
-        return (is_dir($this->exportPath) and is_dir($this->exportDbPath) and is_dir($this->exportSourcePath) and is_dir($this->exportCssPath));
+        return true;
     }
 
     /**
@@ -779,9 +788,9 @@ class uiModel extends model
         $replaces[TABLE_FILE]     = false;
 
         $zdb = $this->app->loadClass('zdb');
-        $zdb->dump($this->exportDbPath . 'install.sql', $tables, $fields, 'data', $condations, true);
+        $zdb->dump($this->directories->exportDbPath . 'install.sql', $tables, $fields, 'data', $condations, true);
 
-        $sqls = file_get_contents($this->exportDbPath . 'install.sql');
+        $sqls = file_get_contents($this->directories->exportDbPath . 'install.sql');
         $sqls = str_replace(TABLE_BLOCK,  "eps_block",  $sqls);
         $sqls = str_replace(TABLE_LAYOUT, "eps_layout", $sqls);
         $sqls = str_replace(TABLE_SLIDE,  "eps_slide",  $sqls);
@@ -795,7 +804,7 @@ class uiModel extends model
         $sqls = str_replace("data\/source\/{$template}\/{$theme}\/", "data\/source\/{$template}\/THEME_CODEFIX\/", $sqls);
         $sqls = str_replace("data\\\/source\\\/{$template}\\\/{$theme}\\\/", "data\\\/source\\\/{$template}\\\/THEME_CODEFIX\\\/", $sqls);
 
-        return file_put_contents($this->exportDbPath . 'install.sql', $sqls);
+        return file_put_contents($this->directories->exportDbPath . 'install.sql', $sqls);
     }
 
     /**
@@ -839,23 +848,23 @@ class uiModel extends model
             $configCode .= "\n";
             $configCode .= var_export($this->config->ui->themes[$template][$theme], true);
             $configCode .= ";";
-            file_put_contents($this->exportConfigPath . "$code.php", $configCode);
+            file_put_contents($this->directories->exportConfigPath . "$code.php", $configCode);
         }
 
         $zfile = $this->app->loadClass('zfile');
 
         /* Copy customed css file. */
-        $customCssFile = $this->exportCssPath . 'style.css';
+        $customCssFile = $this->directories->exportCssPath . 'style.css';
         $originCssFile = sprintf($this->config->site->ui->customCssFile, $template, $theme);
-        copy($originCssFile, $this->exportCssPath . 'style.css');
+        copy($originCssFile, $this->directories->exportCssPath . 'style.css');
 
         /* Copy less file. */
         $lessFile = $this->app->getWwwRoot() . 'template' . DS . $template . DS . 'theme' . DS . $theme . DS . 'style.less';
-        if(file_exists($lessFile)) copy($lessFile, $this->exportLessPath . 'style.less');
+        if(file_exists($lessFile)) copy($lessFile, $this->directories->exportLessPath . 'style.less');
 
         /* Copy source files. */
         $sourcePath = $this->app->getWwwRoot() . 'data' . DS . 'source' . DS . $template . DS . $theme;
-        if(is_dir($sourcePath)) $zfile->copyDir($sourcePath, $this->exportSourcePath);
+        if(is_dir($sourcePath)) $zfile->copyDir($sourcePath, $this->directories->exportSourcePath);
 
         /* Copy slide files. */
         $groups = $this->getUsedSlideGroups($template, $theme);
@@ -864,31 +873,123 @@ class uiModel extends model
         foreach($groups as $group) $usedSlides[] = glob($slidePath . DS . "{$group}_*.*");
         foreach($usedSlides as $slides)
         {
-            foreach($slides as $slide) copy($slide, str_replace($slidePath . DS, $this->exportSlidePath, $slide));
+            foreach($slides as $slide) copy($slide, str_replace($slidePath . DS, $this->directories->exportSlidePath, $slide));
         }
+
+        /* Export encrypt files. */
+        $this->exportEncrypt($template, $theme, $code);
 
         /* Upload preview picture. */
         if($_FILES)
         {
             $tmpName  = $_FILES['file']['tmp_name'];
             $fileName = $_FILES['file']['name'];
-            move_uploaded_file($tmpName, $this->exportLessPath . 'preview.png');
+            move_uploaded_file($tmpName, $this->directories->exportLessPath . 'preview.png');
         }
         else
         {
             $previewImage = $this->app->getWwwRoot() . 'template' . DS . $template . DS . 'theme' . DS . $theme . DS . 'preview.png';
-            copy($previewImage, $this->exportLessPath . 'preview.png');
+            copy($previewImage, $this->directories->exportLessPath . 'preview.png');
         }
 
         /* Zip theme files. */
         $this->app->loadClass('pclzip', true);
-        $zipFile = dirname($this->exportPath) . DS . $code . '.zip';
+        $zipFile = dirname($this->directories->exportPath) . DS . $code . '.zip';
         if(file_exists($zipFile)) unlink($zipFile);
         $archive = new PclZip($zipFile);
-        $list    = $archive->create($this->exportPath, PCLZIP_OPT_REMOVE_PATH, dirname($this->exportPath));
+        $list    = $archive->create($this->directories->exportPath, PCLZIP_OPT_REMOVE_PATH, dirname($this->directories->exportPath));
 
-        if(empty($list)) $this->app->loadClass('zfile')->removeDir(dirname($this->exportPath));
+        if(empty($list)) $this->app->loadClass('zfile')->removeDir(dirname($this->directories->exportPath));
         return $zipFile;
+    }
+
+    /**
+     * Export encrypt files.
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @param  string    $code 
+     * @access public
+     * @return bool
+     */
+    public function exportEncrypt($template, $theme, $code)
+    {
+        $this->createHookFile($template, $theme, $code);
+
+        $encryptFiles = array();
+        /* Save encrypt sources. */
+        $sourceList = glob($this->directories->exportSourcePath . '*');
+        foreach($sourceList as $file)
+        {
+            $fileInfo = pathinfo($file);
+            if($fileInfo['extension'] == 'php') continue;
+            $target   = $this->directories->encryptSourcePath . $fileInfo['filename'] . '.php'; 
+
+            $encryptFiles[$fileInfo['basename']] = $fileInfo['filename'] . '.php';
+            $this->save2php($file, $target);
+        }
+
+        /* Save slides to php sources. */
+        $slideList =  glob($this->directories->exportSlidePath . '*');
+        foreach($slideList as $file)
+        {
+            $fileInfo = pathinfo($file);
+            if($fileInfo['extension'] == 'php') continue;
+            $encryptFiles[$fileInfo['basename']] = $fileInfo['filename'] . '.php';
+            $target   = $this->directories->encryptSlidePath . $fileInfo['filename'] . '.php'; 
+            $this->save2php($file, $target);
+        }
+
+        /* Create encrypt sql file. */
+        $sql = file_get_contents($this->directories->exportDocPath . 'install.sql');
+        foreach($encryptFiles as $file => $encrypt)
+        {
+            $sql = str_replace('/' . $file, '/' . $encrypt);
+        }
+        file_put_contents($this->directories->exportDbPath . 'install.sql', $sqls);
+
+        /* Copy doc, config, less files. */
+        $zfile = $this->app->loadClass('zfile');
+        $zfile->copyDir($this->directories->exportDocPath,    $this->directories->encryptDocPath);
+        $zfile->copyDir($this->directories->exportLessPath,   $this->directories->encryptLessPath);
+        $zfile->copyDir($this->directories->exportConfigPath, $this->directories->encryptConfigPath);
+        
+        return true;
+    }
+
+    /**
+     * Save sources to php file.
+     * 
+     * @param  string    $file 
+     * @param  string    $target 
+     * @access public
+     * @return bool
+     */
+    public function save2php($file, $target)
+    {
+        $contentType = mime_content_type($file);
+        $content     = var_export(file_get_contents($file), true);
+        $phpCodes    = <<<EOT
+<?php\n
+header('Content-type: $contentType');\n
+echo $content;\n
+exit;
+EOT;
+       $result = file_put_contents($target, $phpCodes);
+    }
+
+    /**
+     * Create hook file.
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @param  string    $code 
+     * @access public
+     * @return bool
+     */
+    public function createHookFile($template, $theme, $code)
+    {
+        
     }
 
     /**
