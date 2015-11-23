@@ -186,7 +186,7 @@ class messageModel extends model
     {
         $object = $this->dao->select('*')->from(TABLE_MESSAGE)->where('id')->eq($message->objectID)->fetch();
         if(!$object) return false; 
-        echo "<dl class='alert alert-info'>";
+        echo "<dl class='alert'>";
         printf($this->lang->message->messageItem, $object->from, $object->date, $object->content);
         echo "</dl>";
     }
