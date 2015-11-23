@@ -85,7 +85,7 @@ EOT;
           <?php if($message->type == 'reply'):?>
           <?php $this->message->getObject($message);?>
           <?php endif;?>
-          <?php echo html::textarea('', $message->content, "rows='2' class='form-control borderless' spellcheck='false'");?>
+          <?php echo $message->content;?>
           <?php if($message->type != 'reply') $this->message->getAdminReplies($message);?>
         </td>
       </tr>
