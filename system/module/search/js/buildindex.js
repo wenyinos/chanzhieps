@@ -2,7 +2,7 @@ $(document).ready(function()
 {
     $('#execButton').click(function()
     {
-        $('#execButton').text(v.lang.updating);
+        $(this).text(v.lang.updating);
         
         $.getJSON($(this).attr('href'), function(response)
         {
