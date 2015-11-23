@@ -114,9 +114,8 @@ class threadModel extends model
     {
         $sticks = $this->dao->select('*')->from(TABLE_THREAD)
             ->where('board')->eq($board)
-            ->andWhere('stick', 1)->eq(2)
-            ->orWhere('stick')->eq(1)
-            ->markRight(1)
+            ->andWhere('stick')->eq(1)
+            ->orWhere('stick')->eq(2)
             ->orderBy('id desc')
             ->fetchAll();
 

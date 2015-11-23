@@ -1340,7 +1340,7 @@ class userModel extends model
            $history[$user]->comment     += isset($toComments[$user]) ? $toComments[$user] : 0;
            $history[$user]->message      = isset($fromMessages[$user]) ? $fromMessages[$user] : 0;
            $history[$user]->message     += isset($toMessages[$user]) ? $toMessages[$user] : 0;
-           $history[$user]->order        = isset($orders[$user]) ? $fromMessages[$user] : 0;
+           $history[$user]->order        = isset($orders[$user]) ? $orders[$user] : 0;
            $history[$user]->address      = isset($addresses[$user]) ? $addresses[$user] : 0;
         }
         return $history;
