@@ -2,8 +2,9 @@
 $config->user->resetExpired = 3*86400;
 
 $config->user->require = new stdclass();
-$config->user->require->register = 'account,realname,email,password1';
-$config->user->require->edit     = 'realname';
+$config->user->require->register         = 'account,realname,email,password1';
+$config->user->require->edit             = 'realname';
+$config->user->require->securityQuestion = 'question, answer, securityQuestion';
 
 $config->user->default = new stdclass();
 $config->user->default->module = RUN_MODE == 'front' ? 'user'    : 'admin';

@@ -50,7 +50,6 @@ $lang->site->filterFunction   = 'Filter function';
 $lang->site->allowedLocation  = 'Allowed location';
 $lang->site->checkSessionIP   = 'Check admin ip';
 $lang->site->forceYangcong    = 'Enforce Admin login by yangcong';
-$lang->site->securityQuestion = 'Security question setting';
 $lang->site->setsecurity      = 'Security setting';
 $lang->site->setsensitive     = 'Set sensitive words';
 $lang->site->filterSensitive  = 'Filter sensitive words';
@@ -98,10 +97,6 @@ $lang->site->forceYangcongList['close'] = 'Close';
 $lang->site->checkIPList = array();
 $lang->site->checkIPList['open']  = 'Open';
 $lang->site->checkIPList['close'] = 'Close';
-
-$lang->site->securityQuestionList = array();
-$lang->site->securityQuestionList['open']  = 'Open';
-$lang->site->securityQuestionList['close'] = 'Close';
 
 $lang->site->filterSensitiveList = array();
 $lang->site->filterSensitiveList['open']  = 'Open';

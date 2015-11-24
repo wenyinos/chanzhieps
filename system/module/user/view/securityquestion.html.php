@@ -4,8 +4,8 @@
 <form method='post' action='<?php echo inlink('securityquestion');?>' id='questionForm' class='form' data-checkfingerprint='1'>
   <table class='table table-form borderless'>
     <tr>
-      <th class='w-100px'><?php echo $lang->user->securityQuestion;?></th>
-      <td><?php echo html::input('securityQuestion','', "class='form-control'");?></td>
+      <th class='w-100px'><?php echo $lang->user->question;?></th>
+      <td><?php echo html::input('question','', "class='form-control'");?></td>
     </tr>
     <tr>
       <th><?php echo $lang->user->answer;?></th>

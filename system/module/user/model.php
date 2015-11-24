@@ -1466,15 +1466,15 @@ class userModel extends model
      */
     public function setQuestion($account)
     {
-        $question = $this->post->securityQuestion;
-        $answer   = $this->post->answer;
-        if(!empty($question) and !empty($answer))
-        {
-            $securityQuestion = array('question' => $question, 'answer' => md5($answer));
-            $this->dao->update(TABLE_USER)->set('securityQuestion')->eq(json_encode($securityQuestion))
-                ->where('account')->eq($account)
-                ->exec();
-        }
+        $data = fixer::input('post')
+            ->get();
+
+        $data->securityQuestion = json_encode(array('question' => $data->question, 'answer' => md5($data->answer)));
+        $this->dao->update(TABLE_USER)
+            ->data($data, $skip = 'question, answer, fingerprint')
+            ->batchCheck($this->config->user->require->securityQuestion, 'notempty')
+            ->where('account')->eq($account)
+            ->exec();
 
         return !dao::isError();
     }
