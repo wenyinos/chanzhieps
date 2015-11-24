@@ -177,6 +177,7 @@ class uiModel extends model
         $userSetting = $setting = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array();
         $userSetting = !empty($userSetting[$template][$theme]) ? $userSetting[$template][$theme] : array();
         $params = array();
+
         foreach($this->config->ui->selectorOptions as $groupName => $group)
         {
             foreach($group as $name => $style)
@@ -187,6 +188,10 @@ class uiModel extends model
                 }
             }
         }
+
+        $params['css'] = isset($userSetting['css']) ? $userSetting['css'] : '';
+        $params['js']  = isset($userSetting['js']) ? $userSetting['js'] : '';
+
         return $params;
     }
 
@@ -670,6 +675,7 @@ class uiModel extends model
 
         $this->clearSources();
         $this->exportDB($template, $theme);
+        $this->createHookFile($template, $theme, $code);
         if(dao::isError()) return false;
 
         $exportedFile = $this->exportFiles($template, $theme, $code);
@@ -752,8 +758,12 @@ class uiModel extends model
      */
     public function exportDB($template, $theme)
     {
-        $lang   = $this->app->getClientLang();
-        $tables = array(TABLE_BLOCK, TABLE_LAYOUT, TABLE_CONFIG, TABLE_FILE);
+        $lang        = $this->app->getClientLang();
+        $zdb         = $this->app->loadClass('zdb');
+        $dbFile      = $this->directories->exportDbPath  . 'install.sql';
+        $encryptFile = $this->directories->encryptDbPath . 'install.sql';
+
+        $tables = array(TABLE_BLOCK, TABLE_LAYOUT, TABLE_FILE);
 
         $groups = $this->getUsedSlideGroups($template, $theme);
         $groups = join(",", $groups);
@@ -787,10 +797,25 @@ class uiModel extends model
         $replaces[TABLE_CATEGORY] = false;
         $replaces[TABLE_FILE]     = false;
 
-        $zdb = $this->app->loadClass('zdb');
-        $zdb->dump($this->directories->exportDbPath . 'install.sql', $tables, $fields, 'data', $condations, true);
+        $zdb->dump($encryptFile, $tables, $fields, 'data', $condations, true);
+        $tables[] = TABLE_CONFIG;
+        $zdb->dump($dbFile, $tables, $fields, 'data', $condations, true);
+        $this->fixSqlFile($template, $theme, $encryptFile);
+        $this->fixSqlFile($template, $theme, $dbFile);
+        return true;
+    }
 
-        $sqls = file_get_contents($this->directories->exportDbPath . 'install.sql');
+    /**
+     * Replace themeCode.
+     * 
+     * @param  string    $template 
+     * @param  string    $theme 
+     * @access public
+     * @return bool
+     */
+    public function fixSqlFile($template, $theme, $file)
+    {
+        $sqls = file_get_contents($file);
         $sqls = str_replace(TABLE_BLOCK,  "eps_block",  $sqls);
         $sqls = str_replace(TABLE_LAYOUT, "eps_layout", $sqls);
         $sqls = str_replace(TABLE_SLIDE,  "eps_slide",  $sqls);
@@ -803,8 +828,7 @@ class uiModel extends model
         $sqls = str_replace("source/{$template}/{$theme}/", "source/{$template}/THEME_CODEFIX/", $sqls);
         $sqls = str_replace("data\/source\/{$template}\/{$theme}\/", "data\/source\/{$template}\/THEME_CODEFIX\/", $sqls);
         $sqls = str_replace("data\\\/source\\\/{$template}\\\/{$theme}\\\/", "data\\\/source\\\/{$template}\\\/THEME_CODEFIX\\\/", $sqls);
-
-        return file_put_contents($this->directories->exportDbPath . 'install.sql', $sqls);
+        return file_put_contents($file, $sqls);
     }
 
     /**
@@ -941,12 +965,12 @@ class uiModel extends model
         }
 
         /* Create encrypt sql file. */
-        $sql = file_get_contents($this->directories->exportDocPath . 'install.sql');
+        $sql = file_get_contents($this->directories->exportDbPath . 'install.sql');
         foreach($encryptFiles as $file => $encrypt)
         {
-            $sql = str_replace('/' . $file, '/' . $encrypt);
+            $sql = str_replace('/' . $file, '/' . $encrypt, $sql);
         }
-        file_put_contents($this->directories->exportDbPath . 'install.sql', $sqls);
+        file_put_contents($this->directories->exportDbPath . 'install.sql', $sql);
 
         /* Copy doc, config, less files. */
         $zfile = $this->app->loadClass('zfile');
@@ -975,7 +999,7 @@ header('Content-type: $contentType');\n
 echo $content;\n
 exit;
 EOT;
-       $result = file_put_contents($target, $phpCodes);
+       return file_put_contents($target, $phpCodes);
     }
 
     /**
@@ -989,7 +1013,30 @@ EOT;
      */
     public function createHookFile($template, $theme, $code)
     {
-        
+        $hookPath = $this->directories->encryptPath . 'system' . DS . 'module' . DS . 'ui' . DS . 'ext' . DS . 'model' . DS;
+        if(!is_dir($hookPath)) mkdir($hookPath, 0777, true);
+        $hookFile = $hookPath . "{$code}.theme.php";
+        $params   = $this->getCustomParams($template, $theme);
+
+        $css = var_export($params['css'], true);
+        $js  = var_export($params['js'],  true);
+
+        $params = var_export($params, true);
+        $code   = "<?php
+public function show_THEME_CODEFIX_CSS()
+{
+    echo $css;
+}
+public function show_THEME_CODEFIX_JS()
+{
+    echo $js;
+}
+public function get_THEME_CODEFIX_params()
+{
+    return $params;
+}
+";
+        return file_put_contents($hookFile, $code);
     }
 
     /**
