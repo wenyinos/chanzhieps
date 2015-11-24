@@ -472,12 +472,12 @@ class userModel extends model
      */
     public function login($account, $password)
     {
-        if(RUN_MODE == 'admin' and zget($this->config->site, 'forceYangcong') == 'open')
-        {
-            if(strtolower($this->app->getMethodName()) != 'yangconglogin') return false;
-        }
         $user = $this->identify($account, $password);
         if(!$user) return false;
+        if(RUN_MODE == 'admin' and zget($this->config->site, 'forceYangcong') == 'open')
+        {
+            if(strtolower($this->app->getMethodName()) != 'yangconglogin' and empty($user->securityQuestion)) return false;
+        }
 
         $browser = helper::getBrowser() . ' ' . helper::getBrowserVersion();
         $os      = helper::getOS();
