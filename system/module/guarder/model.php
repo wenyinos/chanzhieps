@@ -23,11 +23,16 @@ class guarderModel extends model
         $isEvil = false;
         if(strpos($content, 'http://') !== false) return true;
 
-        $lineCount = preg_match_all('/(?<=href=)([^\>]*)(?=\>)/ ', $content, $out);
-        if($lineCount > 1) $isEvil = true;
+        $linkCount = preg_match_all('/(?<=href=)([^\>]*)(?=\>)/ ', $content, $out);
+        if($linkCount > 1) $isEvil = true;
+        if($linkCount > 5) die();
 
-        if($lineCount > 5) die();
         if(preg_match('/\[url=.*\].*\[\/url\]/U', $content)) die();
+
+        if($this->app->getClientLang() == 'zh-cn' or $this->app->getClientLang() == 'zh-tw')
+        {
+            if(!preg_match('/[\x{4e00}-\x{9fa5}]/u', $content)) return true;
+        }
 
         return false;
     }
