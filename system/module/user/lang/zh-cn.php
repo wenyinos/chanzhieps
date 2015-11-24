@@ -49,6 +49,7 @@ $lang->user->view            = "用户详情";
 $lang->user->create          = "添加用户";
 $lang->user->edit            = "编辑用户";
 $lang->user->changePassword  = "更改密码";
+$lang->user->changeEmail     = "邮箱设置";
 $lang->user->recoverPassword = "忘记密码";
 $lang->user->newPassword     = "新密码";
 $lang->user->update          = "编辑用户";
