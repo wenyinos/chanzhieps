@@ -23,6 +23,7 @@ $lang->guarder->equal          = '=';
 $lang->guarder->placeholder    = '数字';
 $lang->guarder->password       = '管理密码';
 $lang->guarder->passwordHolder = '请输入当前帐号的密码';
+$lang->guarder->identityTip    = '请输入IP、 Email、用户名或敏感词';
 
 $lang->guarder->blacklistModes['all']      = '全部';
 $lang->guarder->blacklistModes['ip']       = 'ip地址';

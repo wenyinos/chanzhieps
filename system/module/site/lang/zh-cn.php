@@ -41,25 +41,25 @@ $lang->site->sensitive       = '敏感词';
 $lang->site->scheme          = '默认访问协议';
 $lang->site->saveDays        = '日志保存天数';
 
-$lang->site->importantOption = '重要操作';
-$lang->site->resetPassword   = '前台找回密码';
-$lang->site->checkIP         = '后台登录IP白名单';
-$lang->site->checkLocation   = '后台登录地区验证';
-$lang->site->checkEmail      = '会员邮箱绑定';
-$lang->site->filterFunction  = '过滤功能';
-$lang->site->allowedLocation = '允许登录地区';
-$lang->site->checkSessionIP  = '后台检查IP';
-$lang->site->forceYangcong   = '后台强制洋葱登录';
-$lang->site->safeQuestion    = '后台安全问题验证';
-$lang->site->setsecurity     = '安全设置';
-$lang->site->setsensitive    = '敏感词设置';
-$lang->site->filterSensitive = '敏感词过滤';
-$lang->site->setBlacklist    = '黑名单管理';
-$lang->site->mobileTemplate  = '移动模板';
-$lang->site->score           = '积分';
-$lang->site->setCounts       = '设置积分规则';
-$lang->site->front           = '网站浏览';
-$lang->site->closeScoreTip   = '禁用积分功能后不再记录积分，会员保持原有积分不变。';
+$lang->site->importantOption  = '重要操作';
+$lang->site->resetPassword    = '前台找回密码';
+$lang->site->checkIP          = '后台登录IP白名单';
+$lang->site->checkLocation    = '后台登录地区验证';
+$lang->site->checkEmail       = '会员邮箱绑定';
+$lang->site->filterFunction   = '过滤功能';
+$lang->site->allowedLocation  = '允许登录地区';
+$lang->site->checkSessionIP   = '后台检查IP';
+$lang->site->forceYangcong    = '后台强制洋葱登录';
+$lang->site->securityQuestion = '后台密保问题验证';
+$lang->site->setsecurity      = '安全设置';
+$lang->site->setsensitive     = '敏感词设置';
+$lang->site->filterSensitive  = '敏感词过滤';
+$lang->site->setBlacklist     = '黑名单管理';
+$lang->site->mobileTemplate   = '移动模板';
+$lang->site->score            = '积分';
+$lang->site->setCounts        = '设置积分规则';
+$lang->site->front            = '网站浏览';
+$lang->site->closeScoreTip    = '禁用积分功能后不再记录积分，会员保持原有积分不变。';
 
 $lang->site->setBasic      = "基本信息设置";
 $lang->site->setLang       = "语言设置";
@@ -96,9 +96,9 @@ $lang->site->forceYangcongList['open']  = '开启';
 $lang->site->forceYangcongList['close'] = '关闭';
 
 
-$lang->site->safeQuestionList = array();
-$lang->site->safeQuestionList['open']  = '开启';
-$lang->site->safeQuestionList['close'] = '关闭';
+$lang->site->securityQuestionList = array();
+$lang->site->securityQuestionList['open']  = '开启';
+$lang->site->securityQuestionList['close'] = '关闭';
 
 $lang->site->checkIPList = array();
 $lang->site->checkIPList['open']  = '开启';

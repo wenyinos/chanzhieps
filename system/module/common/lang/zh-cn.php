@@ -41,31 +41,31 @@ $lang->poweredByAdmin = "<span id='poweredBy'>由 <a href='http://www.chanzhi.or
 $lang->newVersion     = "提示：蝉知系统已于 <span id='releaseDate'></span> 发布 <span id='version'></span>版本。<a href='' target='_blank' id='upgradeLink'>马上下载</a>";
 
 /* Global lang items. */
-$lang->home           = '首页';
-$lang->welcome        = '欢迎您，<strong>%s</strong>！';
-$lang->messages       = "<strong><i class='icon-comment-alt'></i> %s</strong>";
-$lang->todayIs        = '今天是%s，';
-$lang->aboutUs        = '关于我们';
-$lang->link           = '友情链接';
-$lang->frontHome      = '前台';
-$lang->forumHome      = '论坛';
-$lang->bookHome       = '手册';
-$lang->dashboard      = '用户中心';
-$lang->visualEdit     = '可视化编辑';
-$lang->editMode       = '编辑模式';
-$lang->register       = '注册';
-$lang->logout         = '退出';
-$lang->login          = '登录';
-$lang->account        = '帐号';
-$lang->password       = '密码';
-$lang->changePassword = '修改密码';
-$lang->accountSetting = '账户设置';
-$lang->forgotPassword = '忘记密码?';
-$lang->currentPos     = '当前位置';
-$lang->categoryMenu   = '分类导航';
-$lang->wechatTip      = '微信订阅';
-$lang->qrcodeTip      = '移动访问';
-$lang->language       = '语言';
+$lang->home             = '首页';
+$lang->welcome          = '欢迎您，<strong>%s</strong>！';
+$lang->messages         = "<strong><i class='icon-comment-alt'></i> %s</strong>";
+$lang->todayIs          = '今天是%s，';
+$lang->aboutUs          = '关于我们';
+$lang->link             = '友情链接';
+$lang->frontHome        = '前台';
+$lang->forumHome        = '论坛';
+$lang->bookHome         = '手册';
+$lang->dashboard        = '用户中心';
+$lang->visualEdit       = '可视化编辑';
+$lang->editMode         = '编辑模式';
+$lang->register         = '注册';
+$lang->logout           = '退出';
+$lang->login            = '登录';
+$lang->account          = '帐号';
+$lang->password         = '密码';
+$lang->changePassword   = '修改密码';
+$lang->securityQuestion = '密保设置';
+$lang->forgotPassword   = '忘记密码?';
+$lang->currentPos       = '当前位置';
+$lang->categoryMenu     = '分类导航';
+$lang->wechatTip        = '微信订阅';
+$lang->qrcodeTip        = '移动访问';
+$lang->language         = '语言';
 
 /* Global action items. */
 $lang->reset          = '重置';

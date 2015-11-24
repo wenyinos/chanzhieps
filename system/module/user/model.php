@@ -1443,7 +1443,7 @@ class userModel extends model
     /**
      * Get contributions by user account. 
      * 
-     * @param  int    $account 
+     * @param  string $account 
      * @access public
      * @return array 
      */
@@ -1458,20 +1458,22 @@ class userModel extends model
     }
 
     /**
-     * Account setting. 
+     * Set security question. 
      * 
-     * @param  int    $account 
+     * @param  string $account 
      * @access public
      * @return bool
      */
-    public function accountSetting($account)
+    public function setQuestion($account)
     {
-        $question = $this->post->safeQuestion;
-        $answer = $this->post->answer;
+        $question = $this->post->securityQuestion;
+        $answer   = $this->post->answer;
         if(!empty($question) and !empty($answer))
         {
-            $safeQuestion = array('question' => $this->post->safeQuestion, 'answer' => md5($this->post->answer));
-            $this->dao->update(TABLE_USER)->set('safeQuestion')->eq(json_encode($safeQuestion))->where('account')->eq($account)->exec();
+            $securityQuestion = array('question' => $question, 'answer' => md5($answer));
+            $this->dao->update(TABLE_USER)->set('securityQuestion')->eq(json_encode($securityQuestion))
+                ->where('account')->eq($account)
+                ->exec();
         }
 
         return !dao::isError();

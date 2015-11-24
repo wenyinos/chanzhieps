@@ -53,8 +53,8 @@
           <td></td>
         </tr>
         <tr>
-          <th class='w-200px'><?php echo $lang->site->safeQuestion;?></th>
-          <td colspan='2'><?php echo html::radio('safeQuestion', $lang->site->safeQuestionList, isset($this->config->site->safeQuestion) ? $this->config->site->safeQuestion : 'close');?></td>
+          <th class='w-200px'><?php echo $lang->site->securityQuestion;?></th>
+          <td colspan='2'><?php echo html::radio('securityQuestion', $lang->site->securityQuestionList, isset($this->config->site->safeQuestion) ? $this->config->site->safeQuestion : 'close');?></td>
           <td></td>
         </tr>
         <tr>

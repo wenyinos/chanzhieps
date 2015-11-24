@@ -23,6 +23,7 @@ $lang->guarder->equal          = '=';
 $lang->guarder->placeholder    = 'Nubmer';
 $lang->guarder->password       = 'Admin Password';
 $lang->guarder->passwordHolder = 'Please enter password of current account';
+$lang->guarder->identityTip    = 'Please input IP, Email, Account or Sensitive words';
 
 $lang->guarder->blacklistModes['all']      = 'all';
 $lang->guarder->blacklistModes['ip']       = 'ip';

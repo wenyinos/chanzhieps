@@ -1088,20 +1088,26 @@ class user extends control
     }
 
     /**
-     * Account setting. 
-     * 
+     * Set security question.
+     *
      * @access public
      * @return void
      */
-    public function accountSetting()
+    public function securityQuestion()
     {
+        /* use email captcha. */
+        $okFile = $this->loadModel('common')->verfyAdmin();
+        $pass   = $this->loadModel('mail')->checkVerify();
+        $this->view->okFile = $okFile;
+        $this->view->pass   = $pass;
+
         if($_POST)
         {
-            $result = $this->user->accountSetting($this->app->user->account); 
+            $result = $this->user->setQuestion($this->app->user->account); 
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));
         }
-        $this->view->title = $this->lang->accountSetting;
+        $this->view->title = $this->lang->securityQuestion;
         $this->display();
     }
 }
