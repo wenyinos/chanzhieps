@@ -50,6 +50,7 @@ $lang->site->filterFunction  = '过滤功能';
 $lang->site->allowedLocation = '允许登录地区';
 $lang->site->checkSessionIP  = '后台检查IP';
 $lang->site->forceYangcong   = '后台强制洋葱登录';
+$lang->site->safeQuestion    = '后台安全问题验证';
 $lang->site->setsecurity     = '安全设置';
 $lang->site->setsensitive    = '敏感词设置';
 $lang->site->filterSensitive = '敏感词过滤';
@@ -93,6 +94,11 @@ $lang->site->resetPasswordList['close'] = '关闭';
 $lang->site->forceYangcongList = array();
 $lang->site->forceYangcongList['open']  = '开启';
 $lang->site->forceYangcongList['close'] = '关闭';
+
+
+$lang->site->safeQuestionList = array();
+$lang->site->safeQuestionList['open']  = '开启';
+$lang->site->safeQuestionList['close'] = '关闭';
 
 $lang->site->checkIPList = array();
 $lang->site->checkIPList['open']  = '开启';

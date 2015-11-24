@@ -1086,4 +1086,22 @@ class user extends control
         $this->view->referer = $referer;
         die($this->display());
     }
+
+    /**
+     * Account setting. 
+     * 
+     * @access public
+     * @return void
+     */
+    public function accountSetting()
+    {
+        if($_POST)
+        {
+            $result = $this->user->accountSetting($this->app->user->account); 
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+        $this->view->title = $this->lang->accountSetting;
+        $this->display();
+    }
 }

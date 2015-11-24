@@ -1456,4 +1456,25 @@ class userModel extends model
         if(dao::isError()) return dao::getError();
         return $contributions;
     }
+
+    /**
+     * Account setting. 
+     * 
+     * @param  int    $account 
+     * @access public
+     * @return bool
+     */
+    public function accountSetting($account)
+    {
+        $question = $this->post->safeQuestion;
+        $answer = $this->post->answer;
+        if(!empty($question) and !empty($answer))
+        {
+            $safeQuestion = array('question' => $this->post->safeQuestion, 'answer' => md5($this->post->answer));
+            $this->dao->update(TABLE_USER)->set('safeQuestion')->eq(json_encode($safeQuestion))->where('account')->eq($account)->exec();
+        }
+
+        return !dao::isError();
+    }
+    
 }
