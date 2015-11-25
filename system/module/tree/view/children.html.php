@@ -55,7 +55,7 @@
       }
       echo "<div class='form-group'><div class='col-xs-8 col-md-offset-2'>" . html::submitButton() . "</div></div>";
 
-      echo html::hidden('parent',   $parent);
+      echo html::hidden('parent', $parent);
       ?>      
     </div>
   </div>
@@ -72,5 +72,5 @@
     <?php echo html::hidden('mode[]', 'new');?>
   </div>
 </div>
-<?php js::set('maxID', $maxID)?>
+<?php js::set('maxID', $maxID);?>
 <?php if(isset($pageJS)) js::execute($pageJS);?>

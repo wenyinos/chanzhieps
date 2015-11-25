@@ -260,6 +260,7 @@ $lang->security->menu->filter    = 'Filter|site|setfilter|';
 $lang->security->menu->blacklist = 'Blacklist|guarder|setblacklist|';
 $lang->security->menu->whitelist = 'Whitelist|guarder|setwhitelist|';
 $lang->security->menu->sensitive = 'Sensitive Words|site|setsensitive|';
+$lang->security->menu->captcha   = 'Captcha Setting|guarder|captcha|';
 $lang->security->menu->upload    = 'Uploads|site|setupload|';
 $lang->security->menu->admin     = 'Admin User|user|admin|admin=1';
 $lang->security->menu->group     = array('link' => 'Group|group|browse|', 'alias' => 'managepriv,managemember');

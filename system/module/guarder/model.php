@@ -359,4 +359,29 @@ EOT;
         if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
         return !empty($repeat);
     }
+
+    /**
+     * set captcha 
+     * 
+     * @access public
+     * @return bool 
+     */
+    public function setCaptcha()
+    {
+        $data = fixer::input('post')->get();
+        $captchas = array();
+        
+        foreach($data->question as $key => $question)
+        {
+            if(!empty($question) and !empty($data->answer[$key]))
+            {
+                $captchas[] = array('question' => $question, 'answer' => $data->answer[$key]);
+            }
+        }
+        $captchas = json_encode($captchas);
+
+        $result = $this->loadModel('setting')->setItem('system.common.guarder.captchas', $captchas, $this->app->getClientLang());
+        
+        return $result;
+    }
 }
