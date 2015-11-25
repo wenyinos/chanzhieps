@@ -437,8 +437,14 @@ class commonModel extends model
         $string  = '<ul class="nav navbar-nav navbar-right">';
         $string .= sprintf('<li>%s</li>', html::a($config->homeRoot, '<i class="icon-home icon-large"></i> ' . $lang->frontHome, "target='_blank' class='navbar-link'"));
         $string .= sprintf('<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-large"></i> %s <b class="caret"></b></a>', $app->user->realname);
-        $string .= sprintf('<ul class="dropdown-menu"><li>%s</li><li>%s</li><li>%s</li><li>%s</li></ul>', html::a(helper::createLink('user', 'changePassword'), $lang->changePassword, "data-toggle='modal'"), html::a(helper::createLink('misc', 'about'), $lang->about, "data-toggle='modal'"), html::a(helper::createLink('misc','thanks'), $lang->thanks, "data-toggle='modal'"), html::a(helper::createLink('user','logout'), $lang->logout));
-        $string .= '</li></ul>';
+        $string .= '<ul class="dropdown-menu">';
+        $string .= '<li>' . html::a(helper::createLink('user', 'changePassword'), $lang->changePassword, "data-toggle='modal'") . '</li>';
+        $string .= '<li>' . html::a(helper::createLink('user', 'editEmail'), $lang->editEmail, "data-toggle='modal'") . '</li>';
+        $string .= '<li>' . html::a(helper::createLink('user', 'securityQuestion'), $lang->securityQuestion, "data-toggle='modal'") . '</li>';
+        $string .= '<li>' . html::a(helper::createLink('misc', 'about'), $lang->about, "data-toggle='modal'") . '</li>';
+        $string .= '<li>' . html::a(helper::createLink('misc','thanks'), $lang->thanks, "data-toggle='modal'") . '</li>';
+        $string .= '<li>' . html::a(helper::createLink('user','logout'), $lang->logout) . '</li>';
+        $string .= '</ul></li></ul>';
 
         return $string;
     }

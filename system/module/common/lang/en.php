@@ -41,30 +41,32 @@ $lang->poweredByAdmin = "<span id='poweredBy'>Powered by <a href='http://www.cha
 $lang->newVersion     = "Notice: ChanzhiEPS has been upgraded to version: <span id='version'></span> at <span id='releaseDate'></span>. <a href='' target='_blank' id='upgradeLink'>DownLoad Now</a>";
 
 /* Global lang items. */
-$lang->home           = 'Home';
-$lang->welcome        = 'Welcome, <strong>%s</strong>!';
-$lang->messages       = "<strong><i class='icon-comment-alt'></i> %s</strong>";
-$lang->todayIs        = 'Today is %s, ';
-$lang->aboutUs        = 'About';
-$lang->link           = 'Links';
-$lang->frontHome      = 'Front';
-$lang->forumHome      = 'Forum';
-$lang->bookHome       = 'Book';
-$lang->dashboard      = 'Dashboard';
-$lang->visualEdit     = 'Visual Edit';
-$lang->editMode       = 'Edit Mode';
-$lang->register       = 'Register';
-$lang->logout         = 'Logout';
-$lang->login          = 'Login';
-$lang->account        = 'Account';
-$lang->password       = 'Password';
-$lang->changePassword = 'Change password';
-$lang->forgotPassword = 'Forgot password?';
-$lang->currentPos     = 'Positon';
-$lang->categoryMenu   = 'Categories';
-$lang->wechatTip      = 'Wechat';
-$lang->qrcodeTip      = 'Mobile';
-$lang->language       = 'Language';
+$lang->home             = 'Home';
+$lang->welcome          = 'Welcome, <strong>%s</strong>!';
+$lang->messages         = "<strong><i class='icon-comment-alt'></i> %s</strong>";
+$lang->todayIs          = 'Today is %s, ';
+$lang->aboutUs          = 'About';
+$lang->link             = 'Links';
+$lang->frontHome        = 'Front';
+$lang->forumHome        = 'Forum';
+$lang->bookHome         = 'Book';
+$lang->dashboard        = 'Dashboard';
+$lang->visualEdit       = 'Visual Edit';
+$lang->editMode         = 'Edit Mode';
+$lang->register         = 'Register';
+$lang->logout           = 'Logout';
+$lang->login            = 'Login';
+$lang->account          = 'Account';
+$lang->password         = 'Password';
+$lang->changePassword   = 'Change password';
+$lang->editEmail        = "Email setting";
+$lang->securityQuestion = 'Security question';
+$lang->forgotPassword   = 'Forgot password?';
+$lang->currentPos       = 'Positon';
+$lang->categoryMenu     = 'Categories';
+$lang->wechatTip        = 'Wechat';
+$lang->qrcodeTip        = 'Mobile';
+$lang->language         = 'Language';
 
 /* Global action items. */
 $lang->reset          = 'Reset';

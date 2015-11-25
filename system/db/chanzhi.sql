@@ -531,6 +531,7 @@ CREATE TABLE IF NOT EXISTS `eps_user` (
   `locked` datetime NOT NULL,
   `public` varchar(30) NOT NULL DEFAULT '0',
   `emailCertified` enum('0', '1') NOT NULL DEFAULT '0',
+  `securityQuestion` text;
   `os` char(30) NOT NULL,
   `browser` varchar(100) NOT NULL,
   `lang` char(30) NOT NULL,

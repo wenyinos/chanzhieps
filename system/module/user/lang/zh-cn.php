@@ -49,6 +49,7 @@ $lang->user->view            = "用户详情";
 $lang->user->create          = "添加用户";
 $lang->user->edit            = "编辑用户";
 $lang->user->changePassword  = "更改密码";
+$lang->user->changeEmail     = "邮箱设置";
 $lang->user->recoverPassword = "忘记密码";
 $lang->user->newPassword     = "新密码";
 $lang->user->update          = "编辑用户";
@@ -79,6 +80,8 @@ $lang->user->yangcongLogin   = '洋葱登录';
 $lang->user->bindAccount     = '绑定帐号';
 $lang->user->batchDelete     = '批量删除用户';
 $lang->user->deleteHistory   = '删除用户及历史数据';
+$lang->user->question        = '密保问题';
+$lang->user->answer          = '答案';
 
 $lang->user->profile      = '个人信息';
 $lang->user->editProfile  = '编辑信息';

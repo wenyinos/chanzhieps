@@ -36,7 +36,7 @@ $(document).ready(function()
       <?php if(strpos($this->config->site->importantValidate, 'okFile') !== false):?>
       <tr>
         <?php if(strpos($this->config->site->importantValidate, 'email') !== false):?>
-        <th class='w-80px'><?php echo $lang->mail->okFile;?></th>
+        <th class='w-100px'><?php echo $lang->mail->okFile;?></th>
         <?php endif;?>
         <td colspan='3'><?php printf($lang->mail->okFileVerfy, $okFile['okFile'], $fileBtn);?></td>
       </tr>

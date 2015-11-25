@@ -4,7 +4,7 @@
   <tbody class='addBlacklist'>
     <tr>
       <th class='w-120px'><?php echo $lang->blacklist->identity;?></th> 
-      <td colspan='2'><?php echo html::input('identity', '', "class='form-control'");?></td>
+      <td colspan='2'><?php echo html::input('identity', '', "class='form-control' placeholder='{$lang->guarder->identityTip}'");?></td>
     </tr>
     <tr>
       <th class='w-120px'><?php echo $lang->blacklist->reason;?></th> 

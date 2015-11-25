@@ -472,12 +472,12 @@ class userModel extends model
      */
     public function login($account, $password)
     {
-        if(RUN_MODE == 'admin' and zget($this->config->site, 'forceYangcong') == 'open')
-        {
-            if(strtolower($this->app->getMethodName()) != 'yangconglogin') return false;
-        }
         $user = $this->identify($account, $password);
         if(!$user) return false;
+        if(RUN_MODE == 'admin' and zget($this->config->site, 'forceYangcong') == 'open')
+        {
+            if(strtolower($this->app->getMethodName()) != 'yangconglogin' and empty($user->securityQuestion)) return false;
+        }
 
         $browser = helper::getBrowser() . ' ' . helper::getBrowserVersion();
         $os      = helper::getOS();
@@ -1443,7 +1443,7 @@ class userModel extends model
     /**
      * Get contributions by user account. 
      * 
-     * @param  int    $account 
+     * @param  string $account 
      * @access public
      * @return array 
      */
@@ -1456,4 +1456,27 @@ class userModel extends model
         if(dao::isError()) return dao::getError();
         return $contributions;
     }
+
+    /**
+     * Set security question. 
+     * 
+     * @param  string $account 
+     * @access public
+     * @return bool
+     */
+    public function setQuestion($account)
+    {
+        $data = fixer::input('post')
+            ->get();
+
+        $data->securityQuestion = json_encode(array('question' => $data->question, 'answer' => md5($data->answer)));
+        $this->dao->update(TABLE_USER)
+            ->data($data, $skip = 'question, answer, fingerprint')
+            ->batchCheck($this->config->user->require->securityQuestion, 'notempty')
+            ->where('account')->eq($account)
+            ->exec();
+
+        return !dao::isError();
+    }
+    
 }

@@ -49,6 +49,7 @@ $lang->user->view            = "User info";
 $lang->user->create          = "Add a user";
 $lang->user->edit            = "Edit user";
 $lang->user->changePassword  = "Change password";
+$lang->user->changeEmail     = "Email setting";
 $lang->user->recoverPassword = "recover password";
 $lang->user->newPassword     = "New password";
 $lang->user->update          = "Edit user";
@@ -78,6 +79,7 @@ $lang->user->reduceScore     = 'Deduct Score';
 $lang->user->yangcongLogin   = 'Yangcong Login';
 $lang->user->bindAccount     = 'Bind Account';
 $lang->user->batchDelete     = 'Batch delete users';
+$lang->user->question        = 'Security question';
 $lang->user->deleteHistory   = 'Delete user and history data';
 
 $lang->user->profile      = 'Profile';
