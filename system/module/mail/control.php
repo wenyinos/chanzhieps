@@ -139,14 +139,13 @@ class mail extends control
             die(js::alert($this->lang->mail->needConfigure) . js::locate('back'));
         }
 
-
         if($_POST)
         {
             $this->mail->send($this->post->to, $this->lang->mail->subject, $this->lang->mail->content, true);
             if($this->mail->isError())
             {
                 $error = str_replace('\n', "<br />", join('', $this->mail->getError()));
-                $this->send(array('result' => 'fail', 'message' => $error));
+                $this->send(array('result' => 'fail', 'data' => $error));
             }
             $this->send(array('result' => 'success', 'message' => $this->lang->mail->successSended));
         }
