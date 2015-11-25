@@ -23,7 +23,7 @@ $lang->guarder->captcha        = '验证码';
 $lang->guarder->numbers        = array('零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖', '拾');
 $lang->guarder->operators      = array('*' => '乘', '-' => '减', '+' => '加');
 $lang->guarder->equal          = '=';
-$lang->guarder->placeholder    = '数字';
+$lang->guarder->placeholder    = '数字、文字';
 $lang->guarder->password       = '管理密码';
 $lang->guarder->passwordHolder = '请输入当前帐号的密码';
 $lang->guarder->identityTip    = '请输入IP、 Email、用户名或敏感词';

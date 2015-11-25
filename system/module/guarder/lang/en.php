@@ -20,7 +20,7 @@ $lang->guarder->captcha        = 'Captcha';
 $lang->guarder->numbers        = array('Zero', 'I', 'II', 'III', 'Four', 'Five', '6', '7', '8', '9', '10');
 $lang->guarder->operators      = array('*' => 'x', '-' => '-', '+' => '+');
 $lang->guarder->equal          = '=';
-$lang->guarder->placeholder    = 'Nubmer';
+$lang->guarder->placeholder    = 'Nubmer 、words';
 $lang->guarder->password       = 'Admin Password';
 $lang->guarder->passwordHolder = 'Please enter password of current account';
 $lang->guarder->identityTip    = 'Please input IP, Email, Account or Sensitive words';
