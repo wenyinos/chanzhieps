@@ -54,7 +54,10 @@
         </tr>
         <tr>
           <th class='w-200px'><?php echo $lang->site->forceYangcong;?></th>
-          <td colspan='2'><?php echo html::radio('forceYangcong', $lang->site->forceYangcongList, isset($this->config->site->forceYangcong) ? $this->config->site->forceYangcong : 'close');?></td>
+          <td colspan='2'>
+            <?php echo html::radio('forceYangcong', $lang->site->forceYangcongList, isset($this->config->site->forceYangcong) ? $this->config->site->forceYangcong : 'close');?>
+            <br/><span class='text-important'><?php echo $lang->site->yangcongTip;?></span>
+          </td>
           <td></td>
         </tr>
         <tr>
