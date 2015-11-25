@@ -995,6 +995,7 @@ class uiModel extends model
         $content     = var_export(file_get_contents($file), true);
         $phpCodes    = <<<EOT
 <?php\n
+if(!in_array(\$_SERVER['HTTP_HOST'], DOMAIN_FIX)) die();
 header('Content-type: $contentType');\n
 echo $content;\n
 exit;
@@ -1023,6 +1024,7 @@ EOT;
 
         $params = var_export($params, true);
         $code   = "<?php
+if(!in_array(\$_SERVER['HTTP_HOST'], DOMAIN_FIX)) die();
 public function show_THEME_CODEFIX_CSS()
 {
     echo $css;
