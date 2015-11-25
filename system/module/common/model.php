@@ -439,7 +439,7 @@ class commonModel extends model
         $string .= sprintf('<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-large"></i> %s <b class="caret"></b></a>', $app->user->realname);
         $string .= '<ul class="dropdown-menu">';
         $string .= '<li>' . html::a(helper::createLink('user', 'changePassword'), $lang->changePassword, "data-toggle='modal'") . '</li>';
-        $string .= '<li>' . html::a(helper::createLink('user', 'changeEmail'), $lang->changeEmail, "data-toggle='modal'") . '</li>';
+        $string .= '<li>' . html::a(helper::createLink('user', 'editEmail'), $lang->editEmail, "data-toggle='modal'") . '</li>';
         $string .= '<li>' . html::a(helper::createLink('user', 'securityQuestion'), $lang->securityQuestion, "data-toggle='modal'") . '</li>';
         $string .= '<li>' . html::a(helper::createLink('misc', 'about'), $lang->about, "data-toggle='modal'") . '</li>';
         $string .= '<li>' . html::a(helper::createLink('misc','thanks'), $lang->thanks, "data-toggle='modal'") . '</li>';
