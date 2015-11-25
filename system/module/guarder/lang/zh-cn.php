@@ -29,6 +29,7 @@ $lang->guarder->passwordHolder = '请输入当前帐号的密码';
 $lang->guarder->identityTip    = '请输入IP、 Email、用户名或敏感词';
 $lang->guarder->question       = '问题';
 $lang->guarder->answer         = '答案';
+$lang->guarder->captchaTip     = '自定义验证码后, 前台将只随机调用此组验证码';
 
 $lang->guarder->blacklistModes['all']      = '全部';
 $lang->guarder->blacklistModes['ip']       = 'ip地址';

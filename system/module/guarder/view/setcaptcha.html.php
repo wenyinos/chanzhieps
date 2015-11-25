@@ -35,7 +35,7 @@
         </div>
       </div>
       <?php endfor;?>
-      <?php echo "<div class='form-group'><div class='col-xs-8 col-md-offset-2'>" . html::submitButton() . "</div></div>";?>
+      <?php echo "<div class='form-group'><div class='col-xs-8 col-md-offset-2'>" . html::submitButton() . "<span class='text-important'>{$lang->guarder->captchaTip}</span></div></div>";?>
     </div>
   </div>
 </form>
