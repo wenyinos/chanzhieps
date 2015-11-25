@@ -14,20 +14,18 @@
                 <?php echo html::password('oldPwd', '', "class='form-control' placeholder='{$lang->user->placeholder->password}'");?>
               </div>
             </div>
-            <?php if($user->email != ''):?>
+            <div class='form-group'>
+              <label for='email' class='col-md-2 col-sm-3 control-label'><?php echo $lang->user->newEmail;?></label>
+              <div class='col-md-6 col-sm-6'>
+                <?php echo html::input('email', '', "class='form-control'");?>
+              </div>
+            </div>
             <div class='form-group'>
               <label for='captcha' class='col-md-2 col-sm-3 control-label'><?php echo $lang->user->captcha;?></label>
               <div class='col-md-6 col-sm-6'>
                 <?php echo html::input('captcha', '', "class='form-control' placeholder='{$lang->user->placeholder->verifyCode}'");?>
               </div>
                 <?php echo html::a($this->createLink('mail', 'sendmailcode'), $lang->user->getEmailCode, "id='mailSender' class='btn btn-sm btn-primary'");?>
-            </div>
-            <?php endif;?>
-            <div class='form-group'>
-              <label for='email' class='col-md-2 col-sm-3 control-label'><?php echo $lang->user->newEmail;?></label>
-              <div class='col-md-6 col-sm-6'>
-                <?php echo html::input('email', '', "class='form-control'");?>
-              </div>
             </div>
             <div class='form-group'>
               <div class='col-md-6 col-sm-6 col-md-offset-2 col-sm-offset-3'><?php echo html::submitButton() . html::hidden('token', $token);?></div>

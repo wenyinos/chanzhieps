@@ -59,6 +59,7 @@ $lang->login            = 'Login';
 $lang->account          = 'Account';
 $lang->password         = 'Password';
 $lang->changePassword   = 'Change password';
+$lang->editEmail        = "Email setting";
 $lang->securityQuestion = 'Security question';
 $lang->forgotPassword   = 'Forgot password?';
 $lang->currentPos       = 'Positon';

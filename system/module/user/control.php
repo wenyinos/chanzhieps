@@ -394,10 +394,11 @@ class user extends control
 
             $this->user->updateEmail($account);
             if(dao::isError()) $this->send(array('result' => 'fail', 'message' => dao::getError()));
-            $locate = inlink('checkemail');
+            $locate = inlink('control');
             $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess , 'locate' => $locate));
         }
 
+        $this->view->title      = $this->lang->user->editEmail;
         $this->view->token      = $this->user->getToken();
         $this->view->user       = $user;
         $this->view->mobileURL  = helper::createLink('user', 'editEmail', '', '', 'mhtml');
@@ -1095,12 +1096,6 @@ class user extends control
      */
     public function securityQuestion()
     {
-        /* use email captcha. */
-        $okFile = $this->loadModel('common')->verfyAdmin();
-        $pass   = $this->loadModel('mail')->checkVerify();
-        $this->view->okFile = $okFile;
-        $this->view->pass   = $pass;
-
         if($_POST)
         {
             $result = $this->user->setQuestion($this->app->user->account); 

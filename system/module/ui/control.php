@@ -29,8 +29,9 @@ class ui extends control
             $setting = array();
             $setting[$this->device]['name']  = $template;
             $setting[$this->device]['theme'] = $theme;
-            $setting[$this->device]  = helper::jsonEncode($setting[$this->device]);
-            $setting['parser'] = isset($templates[$template]['parser']) ? $templates[$template]['parser'] : 'default';
+
+            $setting[$this->device] = helper::jsonEncode($setting[$this->device]);
+            $setting['parser']      = isset($templates[$template]['parser']) ? $templates[$template]['parser'] : 'default';
             $setting['customTheme'] =  $custom ? $theme : '';
 
             $cssFile = sprintf($this->config->site->ui->customCssFile, $template, $theme);

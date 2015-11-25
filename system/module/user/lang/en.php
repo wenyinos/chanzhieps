@@ -49,6 +49,7 @@ $lang->user->view            = "User info";
 $lang->user->create          = "Add a user";
 $lang->user->edit            = "Edit user";
 $lang->user->changePassword  = "Change password";
+$lang->user->changeEmail     = "Email setting";
 $lang->user->recoverPassword = "recover password";
 $lang->user->newPassword     = "New password";
 $lang->user->update          = "Edit user";
