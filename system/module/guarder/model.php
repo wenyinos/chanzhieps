@@ -58,9 +58,9 @@ class guarderModel extends model
 <div class='col-sm-11 required'>
   <table class='captcha'>
       <tr class='text-middle'>
-        <td class='text-lg w-110px'>{$leftTag}{$guarder->first} {$guarder->operator} {$guarder->second}{$rightTag}</td>
+        <td class='text-lg w-110px'>{$leftTag}{$guarder}{$rightTag}</td>
         <td class='text-lg text-center w-40px'> {$this->lang->guarder->equal} </td>
-        <td><input type='text' name='{$input}' id='{$input}' class='w-80px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;</td>
+        <td><input type='text' name='{$input}' id='{$input}' class='w-100px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;</td>
       </tr>
   </table>
 </div>
@@ -86,10 +86,10 @@ EOT;
 <table class='captcha'>
   <tr class='text-middle'>
     <td class='w-80px text-center'><label for='captcha'>{$this->lang->guarder->captcha}</label></td>
-    <td class='text-lg w-110px'>{$leftTag}{$guarder->first} {$guarder->operator} {$guarder->second}{$rightTag}</td>
+    <td class='text-lg w-110px'>{$leftTag}{$guarder}{$rightTag}</td>
     <td class='w-40px text-lg text-center'>{$this->lang->guarder->equal}</td>
     <td>
-      <input type='text'  name="{$input}" id='{$input}' class='w-80px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;
+      <input type='text'  name="{$input}" id='{$input}' class='w-100px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;
     </td>
   </tr>
 </table>
@@ -116,9 +116,9 @@ EOT;
 <div class='col-md-7 col-sm-8 col-xs-11 required'>
   <table class='captcha'>
       <tr class='text-middle'>
-        <td class='text-lg w-110px'>{$leftTag}{$guarder->first} {$guarder->operator} {$guarder->second}{$rightTag}</td>
+        <td class='text-lg w-110px'>{$leftTag}{$guarder}{$rightTag}</td>
         <td class='text-lg text-center w-40px'> {$this->lang->guarder->equal} </td>
-        <td><input type='text'  name='{$input}' id='{$input}' class='w-80px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;</td>
+        <td><input type='text'  name='{$input}' id='{$input}' class='w-100px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;</td>
       </tr>
   </table>
 </div>
@@ -145,9 +145,9 @@ EOT;
 <td>
   <table class='captcha'>
     <tr class='text-middle'>
-      <td class='text-lg w-110px'>{$leftTag}{$guarder->first} {$guarder->operator} {$guarder->second}{$rightTag}</td>
+      <td class='text-lg w-110px'>{$leftTag}{$guarder}{$rightTag}</td>
       <td class='text-lg text-center w-40px'> {$this->lang->guarder->equal} </td>
-      <td><input type='text'  name='{$input}' id='{$input}' class='w-80px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;</td>
+      <td><input type='text'  name='{$input}' id='{$input}' class='w-100px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;</td>
     </tr>
   </table>
 </td>
@@ -162,6 +162,14 @@ EOT;
      */
     public function createCaptcha()
     {
+        $captchas = isset($this->config->guarder->captchas) ? $this->config->guarder->captchas : array();
+        if(!empty($captchas))
+        {
+            $captcha = zget($captchas, array_rand($captchas, 1));
+            $this->session->set('captcha', $captcha->answer);
+            return $captcha->question;
+        }
+            
         /* Get random two numbers and random operator. */
         $operators      = array_keys($this->lang->guarder->operators);
         $firstRand      = mt_rand(0, 10);
@@ -174,10 +182,7 @@ EOT;
         $this->session->set('captcha', $captcha);
 
         /* Return the guarder data. */
-        $captcha = new stdclass();
-        $captcha->first    = $this->lang->guarder->numbers[$firstRand];
-        $captcha->second   = $this->lang->guarder->numbers[$secondRand];
-        $captcha->operator = $this->lang->guarder->operators[$randomOperator];
+        $captcha = $this->lang->guarder->numbers[$firstRand] . ' '. $this->lang->guarder->operators[$randomOperator] . ' ' . $this->lang->guarder->numbers[$secondRand];
 
         return $captcha;
     }
@@ -358,5 +363,30 @@ EOT;
 
         if(dao::isError()) return array('result' => 'fail', 'message' => dao::getError());
         return !empty($repeat);
+    }
+
+    /**
+     * set captcha 
+     * 
+     * @access public
+     * @return bool 
+     */
+    public function setCaptcha()
+    {
+        $data = fixer::input('post')->get();
+        $captchas = array();
+        
+        foreach($data->question as $key => $question)
+        {
+            if(!empty($question) and !empty($data->answer[$key]))
+            {
+                $captchas[] = array('question' => $question, 'answer' => $data->answer[$key]);
+            }
+        }
+        $captchas = json_encode($captchas);
+
+        $result = $this->loadModel('setting')->setItem('system.common.guarder.captchas', $captchas, $this->app->getClientLang());
+        
+        return $result;
     }
 }

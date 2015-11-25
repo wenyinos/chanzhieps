@@ -476,7 +476,7 @@ class userModel extends model
         if(!$user) return false;
         if(RUN_MODE == 'admin' and zget($this->config->site, 'forceYangcong') == 'open')
         {
-            if(strtolower($this->app->getMethodName()) != 'yangconglogin' and empty($user->securityQuestion)) return false;
+            if(strtolower($this->app->getMethodName()) != 'yangconglogin') return false;
         }
 
         $browser = helper::getBrowser() . ' ' . helper::getBrowserVersion();

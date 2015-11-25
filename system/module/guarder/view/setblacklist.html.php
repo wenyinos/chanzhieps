@@ -12,16 +12,14 @@
 ?>
 <?php include '../../common/view/header.admin.html.php';?>
 <div class='panel'>
-  <div class="panel-heading pd-l0">
-    <div class="panel-actions pull-left"> 
-      <ul class='nav nav-tabs'>
-        <?php foreach($lang->guarder->blacklistModes as $code => $modeName):?>
-        <?php $class = $mode == $code ? "class='active'" : '';?>
-        <li <?php echo $class?>><?php echo html::a(inlink('blacklist', "mode=$code"), $modeName);?></li>
-        <?php endforeach;?>
-      </ul>
-    </div>
-    <span class='panel-actions pull-right'><?php commonModel::printLink('guarder', 'addblacklist', '', '<i class="icon-plus"></i> ' . $lang->guarder->addBlacklist, 'class="btn btn-primary" data-toggle="modal"');?></span>
+  <div class='panel-heading'>
+    <strong><i class='icon-globe'></i> <?php echo $lang->guarder->setBlacklist;?></strong>
+    <?php echo '&nbsp; &nbsp; &nbsp;';?>
+    <?php foreach($lang->guarder->blacklistModes as $code => $modeName):?>
+    <?php $class = $mode == $code ? "class='active'" : '';?>
+    <?php echo html::a(inlink('setBlacklist', "mode=$code"), $modeName, $class);?>
+    <?php endforeach;?>
+    <span class='panel-actions'><?php commonModel::printLink('guarder', 'addblacklist', '', '<i class="icon-plus"></i> ' . $lang->guarder->addBlacklist, 'class="btn btn-primary" data-toggle="modal"');?></span>
   </div>
   <table class='table table-bordered'>
     <thead>

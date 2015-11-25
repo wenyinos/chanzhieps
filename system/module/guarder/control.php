@@ -17,7 +17,7 @@ class guarder extends control
      * @access public
      * @return void
      */
-    public function blacklist($mode='all', $pageID = 1)
+    public function setBlacklist($mode='all', $pageID = 1)
     {
         $this->lang->guarder->menu = $this->lang->security->menu;
         $this->lang->menuGroups->site = 'security';
@@ -73,6 +73,30 @@ class guarder extends control
         }
 
         $this->view->title = $this->lang->guarder->setWhitelist;
+        $this->display();
+    }
+
+    /**
+     * Set captcha.
+     * 
+     * @access public
+     * @return void
+     */
+    public function setCaptcha()
+    {
+        $this->lang->guarder->menu = $this->lang->security->menu;
+        $this->lang->menuGroups->site = 'security';
+
+        $captchas = isset($this->config->guarder->captchas) ? $this->config->guarder->captchas : array();
+        if($_POST)
+        {
+            $result = $this->guarder->setCaptcha();
+            if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess, 'locate' => inlink('setCaptcha')));
+            $this->send(array('result' => 'fail', 'message' => dao::getError()));
+        }
+
+        $this->view->title    = $this->lang->guarder->setCaptcha;
+        $this->view->captchas = $captchas;
         $this->display();
     }
 
