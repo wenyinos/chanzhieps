@@ -528,4 +528,22 @@ class messageModel extends model
         $this->dao->insert(TABLE_MESSAGE)->data($message)->batchCheck('from,to,content', 'notempty')->autocheck()->exec();
         return !dao::isError();
     }
+
+    /**
+     * Get messages not checked. 
+     * 
+     * @param  int    $type 
+     * @access public
+     * @return void
+     */
+    public function getMessages($type)
+    {
+        $messages = $this->dao->select('id')->from(TABLE_MESSAGE)
+            ->where('type')->eq($type)
+            ->andWhere('status')->eq(0)
+            ->fetchAll();
+        if(dao::isError()) return false;
+
+        return count($messages);
+    }
 }

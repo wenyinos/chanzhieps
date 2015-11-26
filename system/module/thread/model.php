@@ -674,4 +674,22 @@ EOT;
 
         return $board;
     }
+
+    /**
+     * Get new threads.
+     * 
+     * @access public
+     * @return array 
+     */
+    public function getNewThreads()
+    {
+        $newThreads = $this->dao->select('*')->from(TABLE_THREAD)
+            ->where('editedDate')->like(date("Y-m-d") . '%')
+            ->beginIf($this->config->forum->postReview == 'open')
+            ->orWhere('status')->eq('wait')
+            ->fi()
+            ->fetchAll('id');
+
+        return $newThreads;
+    }
 }

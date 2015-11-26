@@ -19,8 +19,24 @@ class admin extends control
      */
     public function index()
     {
+        $summary = new stdclass();
+        if(commonModel::isAvailable('message'))
+        {
+           $summary->comments = $this->loadModel('message')->getMessages('comment');
+           $summary->messages = $this->loadModel('message')->getMessages('message');
+           $summary->replies  = $this->loadModel('message')->getMessages('reply');
+        }
+        if(commonModel::isAvailable('forum'))
+        {
+            $summary->newthreads = $this->loadModel('thread')->getNewThreads();
+            $summary->newReplies = $this->loadModel('reply')->getNewReplies();
+        }
+        if(commonModel::isAvailable('order')) $summary->newOrders = $this->loadModel('order')->getNewOrders();
+        if(commonModel::isAvailable('contribution')) $summary->contribution = $this->loadModel('article')->getContribution();
+
         $this->view->ignoreUpgrade = isset($this->config->global->ignoreUpgrade) and $this->config->global->ignoreUpgrade;
         $this->view->checkLocation = $this->loadModel('user')->checkLocation();
+        $this->view->summary       = $summary;
         $this->display();
     }
 
