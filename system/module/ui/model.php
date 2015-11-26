@@ -965,12 +965,12 @@ class uiModel extends model
         }
 
         /* Create encrypt sql file. */
-        $sql = file_get_contents($this->directories->exportDbPath . 'install.sql');
+        $sql = file_get_contents($this->directories->encryptDbPath . 'install.sql');
         foreach($encryptFiles as $file => $encrypt)
         {
             $sql = str_replace('/' . $file, '/' . $encrypt, $sql);
         }
-        file_put_contents($this->directories->exportDbPath . 'install.sql', $sql);
+        file_put_contents($this->directories->encryptDbPath . 'install.sql', $sql);
 
         /* Copy doc, config, less files. */
         $zfile = $this->app->loadClass('zfile');
@@ -995,7 +995,7 @@ class uiModel extends model
         $content     = var_export(file_get_contents($file), true);
         $phpCodes    = <<<EOT
 <?php\n
-if(!in_array(\$_SERVER['HTTP_HOST'], DOMAIN_FIX)) die();
+if(strpos(DOMAIN_FIX, ",{\$_SERVER['HTTP_HOST']},") !== false) die();
 header('Content-type: $contentType');\n
 echo $content;\n
 exit;
@@ -1016,25 +1016,30 @@ EOT;
     {
         $hookPath = $this->directories->encryptPath . 'system' . DS . 'module' . DS . 'ui' . DS . 'ext' . DS . 'model' . DS;
         if(!is_dir($hookPath)) mkdir($hookPath, 0777, true);
-        $hookFile = $hookPath . "{$code}.theme.php";
+        $hookFile = $hookPath . "{$template}.{$code}.theme.php";
         $params   = $this->getCustomParams($template, $theme);
 
         $css = var_export($params['css'], true);
         $js  = var_export($params['js'],  true);
 
+        unset($params['css']);
+        unset($params['js']);
+
         $params = var_export($params, true);
         $code   = "<?php
-if(!in_array(\$_SERVER['HTTP_HOST'], DOMAIN_FIX)) die();
 public function show_THEME_CODEFIX_CSS()
 {
-    echo $css;
+    if(strpos(DOMAIN_FIX, \",{\$_SERVER['HTTP_HOST']},\") !== false) die();
+    return $css;
 }
 public function show_THEME_CODEFIX_JS()
 {
-    echo $js;
+    if(strpos(DOMAIN_FIX, \",{\$_SERVER['HTTP_HOST']},\") !== false) die();
+    return $js;
 }
 public function get_THEME_CODEFIX_params()
 {
+    if(strpos(DOMAIN_FIX, \",{\$_SERVER['HTTP_HOST']},\") !== false) die();
     return $params;
 }
 ";
