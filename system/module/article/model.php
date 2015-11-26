@@ -754,4 +754,19 @@ class articleModel extends model
 
         return !dao::isError();
     }
+
+    /**
+     * Get new contributions.
+     * 
+     * @access public
+     * @return array
+     */
+    public function getContribution()
+    {
+        $contribution = $this->dao->select('*')->from(TABLE_ARTICLE)
+            ->where('type')->eq('contribution')
+            ->andWhere('contribution')->ne(3)
+            ->fetchAll();
+        return $contribution;
+    }
 }

@@ -124,7 +124,7 @@ class replyModel extends model
      * @access public
      * @return array
      */
-    public function getByUser($account, $pager)
+    public function getByUser($account, $pager = null)
     {
         $replies = $this->dao->select('t1.*, t2.title')->from(TABLE_REPLY)->alias('t1')
             ->leftJoin(TABLE_THREAD)->alias('t2')->on('t1.thread = t2.id')
@@ -149,6 +149,7 @@ class replyModel extends model
         $reply = fixer::input('post')
             ->setForce('author', $this->app->user->account)
             ->setForce('addedDate', helper::now())
+            ->setForce('editedDate', helper::now())
             ->setForce('thread', $threadID)
             ->stripTags('content', $allowedTags)
             ->remove('recTotal, recPerPage, pageID, files, labels, hidden')
@@ -359,5 +360,20 @@ class replyModel extends model
            $reply->authorRealname    = !empty($reply->author) ? $speakers[$reply->author] : '';
            $reply->editorRealname    = !empty($reply->editor) ? $speakers[$reply->editor] : '';
         }
+    }
+
+    /**
+     * Get new replies 
+     * 
+     * @access public
+     * @return int 
+     */
+    public function getNewReplies()
+    {
+        $newReplies = $this->dao->select('count(*) as count')->from(TABLE_REPLY)
+            ->where('editedDate')->like(date("Y-m-d") . '%')
+            ->fetch();
+
+        return $newReplies->count;
     }
 }
