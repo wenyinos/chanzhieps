@@ -476,7 +476,7 @@ class userModel extends model
         if(!$user) return false;
         if(RUN_MODE == 'admin' and zget($this->config->site, 'forceYangcong') == 'open')
         {
-            if(strtolower($this->app->getMethodName()) != 'yangconglogin' and empty($user->securityQuestion)) return false;
+            if(strtolower($this->app->getMethodName()) != 'yangconglogin') return false;
         }
 
         $browser = helper::getBrowser() . ' ' . helper::getBrowserVersion();
@@ -1212,7 +1212,7 @@ class userModel extends model
         }
         else
         {
-            $this->app->user->tokenExpired = time() + 180;
+            $this->app->user->tokenExpired = time() + 300;
             $this->app->user->token = uniqid(md5($this->app->user->fingerprint . $this->app->user->tokenExpired));
         }
         return $this->app->user->token;
@@ -1466,12 +1466,12 @@ class userModel extends model
      */
     public function setQuestion($account)
     {
-        $data = fixer::input('post')
-            ->get();
+        $this->checkOldPassword();
+        $data = fixer::input('post')->get();
 
         $data->securityQuestion = json_encode(array('question' => $data->question, 'answer' => md5($data->answer)));
         $this->dao->update(TABLE_USER)
-            ->data($data, $skip = 'question, answer, fingerprint')
+            ->data($data, $skip = 'question, answer, fingerprint, oldPwd')
             ->batchCheck($this->config->user->require->securityQuestion, 'notempty')
             ->where('account')->eq($account)
             ->exec();
