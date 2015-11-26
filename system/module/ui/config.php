@@ -1,5 +1,5 @@
 <?php
-$config->ui->systemThemes = array('default.default', 'default.tartan', 'default.wide');
+$config->ui->systemThemes = array('default.default', 'default.tartan', 'default.wide', 'default.blank');
 
 $config->ui->groups = array('basic', 'navbar', 'block', 'button', 'footer');
 $config->ui->require = new stdclass();
