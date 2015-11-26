@@ -87,6 +87,8 @@ class ui extends control
         $setting = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array();
 
         $this->view->setting = !empty($setting[$template][$theme]) ? $setting[$template][$theme] : array();
+        $getParamFun = "get{$theme}params";
+        if(empty($setting[$template][$theme]) and method_exists('extuiModel', $getParamFun)) $this->view->setting = $this->ui->$getParamFun();
 
         $this->view->title      = $this->lang->ui->customtheme;
         $this->view->theme      = $theme;
