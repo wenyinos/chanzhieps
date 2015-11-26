@@ -277,7 +277,7 @@ class mailModel extends model
         }
         catch (phpmailerException $e) 
         {
-            $this->errors[] = trim(strip_tags($e->errorMessage()));
+            $this->errors[] = nl2br(trim(strip_tags($e->errorMessage())));
         } 
         catch (Exception $e) 
         {

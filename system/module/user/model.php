@@ -1292,7 +1292,7 @@ class userModel extends model
         $threads = $this->dao->setAutoLang(false)->select('author,count(*) as count')->from(TABLE_THREAD)
             ->where('author')->in($users)
             ->groupBy('author')
-            ->fetchAll('author');
+            ->fetchPairs('author');
         $contributions = $this->dao->setAutoLang(false)->select('addedBy,count(*) as count')->from(TABLE_ARTICLE)
             ->where('addedBy')->in($users)
             ->groupBy('addedBy')
