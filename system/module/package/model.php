@@ -789,245 +789,245 @@ class packageModel extends model
      * @access public
      * @return array     the remove commands need executed manually.
      */
-     public function erasePackage($package)
-     {
-         $removeCommands = array();
+    public function erasePackage($package)
+    {
+        $removeCommands = array();
 
-         $this->dao->setAutoLang(false)->delete()->from(TABLE_PACKAGE)->where('code')->eq($package)->exec();
+        $this->dao->setAutoLang(false)->delete()->from(TABLE_PACKAGE)->where('code')->eq($package)->exec();
 
-         /* Remove the zip file. */
-         $packageFile = $this->getPackageFile($package);
-         if(!file_exists($packageFile)) return false;
-         if(file_exists($packageFile) and !@unlink($packageFile))
-         {
-             $removeCommands[] = PHP_OS == 'Linux' ? "rm -fr $packageFile" : "del $packageFile";
-         }
+        /* Remove the zip file. */
+        $packageFile = $this->getPackageFile($package);
+        if(!file_exists($packageFile)) return false;
+        if(file_exists($packageFile) and !@unlink($packageFile))
+        {
+            $removeCommands[] = PHP_OS == 'Linux' ? "rm -fr $packageFile" : "del $packageFile";
+        }
 
-         /* Remove the extracted files. */
-         $extractedDir = realpath("ext/$package");
-         if($extractedDir != '/' and !$this->classFile->removeDir($extractedDir))
-         {
-             $removeCommands[] = PHP_OS == 'Linux' ? "rm -fr $extractedDir" : "rmdir $extractedDir /s";
-         }
+        /* Remove the extracted files. */
+        $extractedDir = realpath("ext/$package");
+        if($extractedDir != '/' and !$this->classFile->removeDir($extractedDir))
+        {
+            $removeCommands[] = PHP_OS == 'Linux' ? "rm -fr $extractedDir" : "rmdir $extractedDir /s";
+        }
 
-         return $removeCommands;
-     }
+        return $removeCommands;
+    }
 
-     /**
-      * Judge need execute db install or not.
-      * 
-      * @param  string    $package 
-      * @param  string    $method 
-      * @access public
-      * @return bool
-      */
-     public function needExecuteDB($package, $method = 'install')
-     {
-         return file_exists($this->getDBFile($package, $method));
-     }
+    /**
+     * Judge need execute db install or not.
+     * 
+     * @param  string    $package 
+     * @param  string    $method 
+     * @access public
+     * @return bool
+     */
+    public function needExecuteDB($package, $method = 'install')
+    {
+        return file_exists($this->getDBFile($package, $method));
+    }
 
-     /**
-      * Install the db.
-      * 
-      * @param  int    $package 
-      * @access public
-      * @return object
-      */
-     public function executeDB($package, $method = 'install', $type = 'ext')
-     {
-         $return = new stdclass();
-         $return->result = 'ok';
-         $return->error  = '';
+    /**
+     * Install the db.
+     * 
+     * @param  int    $package 
+     * @access public
+     * @return object
+     */
+    public function executeDB($package, $method = 'install', $type = 'ext')
+    {
+        $return = new stdclass();
+        $return->result = 'ok';
+        $return->error  = '';
 
-         $dbFile = $this->getDBFile($package, $method, $type);
-         if(!file_exists($dbFile)) return $return;
+        $dbFile = $this->getDBFile($package, $method, $type);
+        if(!file_exists($dbFile)) return $return;
 
-         $sqls = file_get_contents($this->getDBFile($package, $method, $type));
-         $sqls = explode(';\n', $sqls);
+        $sqls = file_get_contents($this->getDBFile($package, $method, $type));
+        $sqls = explode(';\n', $sqls);
 
-         foreach($sqls as $sql)
-         {
-             $sql = trim($sql);
-             if(empty($sql)) continue;
-             $sql = str_replace('eps_', $this->config->db->prefix, $sql);
-             try
-             {
-                 $this->dbh->query($sql);
-             }
-             catch (PDOException $e) 
-             {
-                 $return->error .= '<p>' . $e->getMessage() . "<br />THE SQL IS: $sql</p>";
-             }
-         }
-         if($return->error) $return->result = 'fail';
-         return $return;
-     }
+        foreach($sqls as $sql)
+        {
+            $sql = trim($sql);
+            if(empty($sql)) continue;
+            $sql = str_replace('eps_', $this->config->db->prefix, $sql);
+            try
+            {
+                $this->dbh->query($sql);
+            }
+            catch (PDOException $e) 
+            {
+                $return->error .= '<p>' . $e->getMessage() . "<br />THE SQL IS: $sql</p>";
+            }
+        }
+        if($return->error) $return->result = 'fail';
+        return $return;
+    }
 
-     /**
-      * Backup db when uninstall package. 
-      * 
-      * @param  string    $package 
-      * @access public
-      * @return bool|string
-      */
-     public function backupDB($package)
-     {
-         $zdb = $this->app->loadClass('zdb');
+    /**
+     * Backup db when uninstall package. 
+     * 
+     * @param  string    $package 
+     * @access public
+     * @return bool|string
+     */
+    public function backupDB($package)
+    {
+        $zdb = $this->app->loadClass('zdb');
 
-         $sqls = file_get_contents($this->getDBFile($package, 'uninstall'));
-         $sqls = explode(';', $sqls);
+        $sqls = file_get_contents($this->getDBFile($package, 'uninstall'));
+        $sqls = explode(';', $sqls);
 
-         /* Get tables for backup. */
-         $backupTables = array();
-         foreach($sqls as $sql)
-         {
-             $sql = str_replace('eps_', $this->config->db->prefix, $sql);
-             $sql = preg_replace('/IF EXISTS /i', '', trim($sql));
-             if(preg_match('/TABLE +`?([^` ]*)`?/i', $sql, $out))
-             {
-                 if(!empty($out[1])) $backupTables[$out[1]] = $out[1];
-             }
-         }
+        /* Get tables for backup. */
+        $backupTables = array();
+        foreach($sqls as $sql)
+        {
+            $sql = str_replace('eps_', $this->config->db->prefix, $sql);
+            $sql = preg_replace('/IF EXISTS /i', '', trim($sql));
+            if(preg_match('/TABLE +`?([^` ]*)`?/i', $sql, $out))
+            {
+                if(!empty($out[1])) $backupTables[$out[1]] = $out[1];
+            }
+        }
 
-         /* Back up database. */
-         if($backupTables)
-         {
-             $backupFile = $this->app->getTmpRoot() . $package . '.' . date('Ymd') . '.sql';
-             $result     = $zdb->dump($backupFile, $backupTables);
-             if($result->result) return $backupFile;
-             return false; 
-         }
-         return false; 
-     }
+        /* Back up database. */
+        if($backupTables)
+        {
+            $backupFile = $this->app->getTmpRoot() . $package . '.' . date('Ymd') . '.sql';
+            $result     = $zdb->dump($backupFile, $backupTables);
+            if($result->result) return $backupFile;
+            return false; 
+        }
+        return false; 
+    }
 
-     /**
-      * Save the package to database.
-      * 
-      * @param  string    $package     the package code
-      * @param  string    $type          the package type
-      * @access public
-      * @return void
-      */
-     public function savePackage($package, $type)
-     {
-         $code    = $package;
-         $package = $this->getInfoFromPackage($package, $type);
-         $package->status = 'available';
-         $package->code   = $code;
-         $package->lang   = 'all';
-         $package->type   = empty($type) ? $package->type : $type;
-        
-         $this->dao->replace(TABLE_PACKAGE)->data($package)->exec();
-     }
+    /**
+     * Save the package to database.
+     * 
+     * @param  string    $package     the package code
+     * @param  string    $type          the package type
+     * @access public
+     * @return void
+     */
+    public function savePackage($package, $type)
+    {
+        $code    = $package;
+        $package = $this->getInfoFromPackage($package, $type);
+        $package->status = 'available';
+        $package->code   = $code;
+        $package->lang   = 'all';
+        $package->type   = empty($type) ? $package->type : $type;
 
-     /**
-      * Update an package.
-      * 
-      * @param  string    $package 
-      * @param  string    $status 
-      * @param  array     $files 
-      * @access public
-      * @return void
-      */
-     public function updatePackage($package, $data)
-     {
-         $data = (object)$data;
-         $appRoot = $this->app->getAppRoot();
-         $wwwRoot = $this->app->getWwwRoot();
+        $this->dao->replace(TABLE_PACKAGE)->data($package)->exec();
+    }
 
-         if(isset($data->dirs))
-         {
-             if($data->dirs)
-             {
-                 foreach($data->dirs as $key => $dir)
-                 {
-                     $data->dirs[$key] = str_replace($appRoot, '', $dir);
-                 }
-             }
-             $data->dirs = json_encode($data->dirs);
-         }
+    /**
+     * Update an package.
+     * 
+     * @param  string    $package 
+     * @param  string    $status 
+     * @param  array     $files 
+     * @access public
+     * @return void
+     */
+    public function updatePackage($package, $data)
+    {
+        $data = (object)$data;
+        $appRoot = $this->app->getAppRoot();
+        $wwwRoot = $this->app->getWwwRoot();
 
-         if(isset($data->files))
-         {
-             foreach($data->files as $fullFilePath => $md5)
-             {
-                 if(strpos($fullFilePath, $appRoot) !== false) $relativeFilePath = str_replace($appRoot, '', $fullFilePath);
-                 if(strpos($fullFilePath, $wwwRoot) !== false) $relativeFilePath = str_replace($wwwRoot, '', $fullFilePath);
-                 
-                 $data->files[$relativeFilePath] = $md5;
-                 unset($data->files[$fullFilePath]);
-             }
-             $data->files = json_encode($data->files);
-         }
-         return $this->dao->setAutoLang(false)->update(TABLE_PACKAGE)->data($data)->where('code')->eq($package)->exec();
-     }
+        if(isset($data->dirs))
+        {
+            if($data->dirs)
+            {
+                foreach($data->dirs as $key => $dir)
+                {
+                    $data->dirs[$key] = str_replace($appRoot, '', $dir);
+                }
+            }
+            $data->dirs = json_encode($data->dirs);
+        }
 
-     /**
-      * Check depends package.
-      * 
-      * @param  string    $package 
-      * @access public
-      * @return array
-      */
-     public function checkDepends($package)
-     {
-         $result      = array();
-         $packageInfo = $this->dao->setAutoLang(false)->select('*')->from(TABLE_PACKAGE)->where('code')->eq($package)->fetch();
-         $dependsExts = $this->dao->setAutoLang(false)->select('*')->from(TABLE_PACKAGE)->where('depends')->like("%$package%")->andWhere('status')->ne('available')->fetchAll();
-         if($dependsExts)
-         {
-             foreach($dependsExts as $dependsExt)
-             {
-                 $depends = json_decode($dependsExt->depends, true);
-                 if($this->compare4Limit($packageInfo->version, $depends[$package])) $result[] = $dependsExt->name;
-             }
-         }
-         return $result;
-     }
+        if(isset($data->files))
+        {
+            foreach($data->files as $fullFilePath => $md5)
+            {
+                if(strpos($fullFilePath, $appRoot) !== false) $relativeFilePath = str_replace($appRoot, '', $fullFilePath);
+                if(strpos($fullFilePath, $wwwRoot) !== false) $relativeFilePath = str_replace($wwwRoot, '', $fullFilePath);
 
-     /**
-      * Compare for limit data.
-      * 
-      * @param  string $version 
-      * @param  array  $limit 
-      * @param  string $type 
-      * @access public
-      * @return void
-      */
-     public function compare4Limit($version, $limit, $type = 'between')
-     {
-         $result = false;
-         if(empty($limit)) return true;
+                $data->files[$relativeFilePath] = $md5;
+                unset($data->files[$fullFilePath]);
+            }
+            $data->files = json_encode($data->files);
+        }
+        return $this->dao->setAutoLang(false)->update(TABLE_PACKAGE)->data($data)->where('code')->eq($package)->exec();
+    }
 
-         if($limit == 'all')
-         {
-             $result = true;
-         }
-         else
-         {
-             if(!empty($limit['min']) and $version >= $limit['min']) $result = true;
-             if(!empty($limit['max']) and $version <= $limit['max']) $result = true;
-             if(!empty($limit['max']) and $version > $limit['max'] and $result) $result = false;
-         }
+    /**
+     * Check depends package.
+     * 
+     * @param  string    $package 
+     * @access public
+     * @return array
+     */
+    public function checkDepends($package)
+    {
+        $result      = array();
+        $packageInfo = $this->dao->setAutoLang(false)->select('*')->from(TABLE_PACKAGE)->where('code')->eq($package)->fetch();
+        $dependsExts = $this->dao->setAutoLang(false)->select('*')->from(TABLE_PACKAGE)->where('depends')->like("%$package%")->andWhere('status')->ne('available')->fetchAll();
+        if($dependsExts)
+        {
+            foreach($dependsExts as $dependsExt)
+            {
+                $depends = json_decode($dependsExt->depends, true);
+                if($this->compare4Limit($packageInfo->version, $depends[$package])) $result[] = $dependsExt->name;
+            }
+        }
+        return $result;
+    }
 
-         if($type != 'between') return !$result;
-         return $result;
-     }
+    /**
+     * Compare for limit data.
+     * 
+     * @param  string $version 
+     * @param  array  $limit 
+     * @param  string $type 
+     * @access public
+     * @return void
+     */
+    public function compare4Limit($version, $limit, $type = 'between')
+    {
+        $result = false;
+        if(empty($limit)) return true;
 
-     /**
-      * Fix theme code.
-      * 
-      * @param  string    $package 
-      * @param  array     $themes 
-      * @access public
-      * @return void
-      */
-     public function fixThemeCode($package, $themes)
-     {
+        if($limit == 'all')
+        {
+            $result = true;
+        }
+        else
+        {
+            if(!empty($limit['min']) and $version >= $limit['min']) $result = true;
+            if(!empty($limit['max']) and $version <= $limit['max']) $result = true;
+            if(!empty($limit['max']) and $version > $limit['max'] and $result) $result = false;
+        }
+
+        if($type != 'between') return !$result;
+        return $result;
+    }
+
+    /**
+     * Fix theme code.
+     * 
+     * @param  string    $package 
+     * @param  array     $themes 
+     * @access public
+     * @return void
+     */
+    public function fixThemeCode($package, $themes)
+    {
         $themeInfo = $this->parsePackageCFG($package, 'theme');
         $themeInfo->templateCompatible = $themeInfo->template;
-        $code      = $themeInfo->code;
 
+        $code       = $themeInfo->code;
         $renameCode = isset($themes[$themeInfo->code]);
         if($renameCode)
         {
@@ -1049,6 +1049,15 @@ class packageModel extends model
         $content = str_replace('THEME_CODEFIX', $newCode, $content);
         file_put_contents($dbFile, $content);
 
+        $hookFile = "./theme/{$package}/system/module/ui/ext/model/{$themeInfo->template}.{$code}.theme.php";
+
+        if(!$renameCode and file_exists($hookFile))
+        {
+            $hookCode = file_get_contents($hookFile);
+            $hookCode = str_replace('_THEME_CODEFIX_', $code, $hookCode);
+            file_put_contents("./theme/{$package}/system/module/ui/ext/model/{$themeInfo->template}.{$code}.theme.php", $hookCode);
+        }
+
         if($renameCode)
         {
             /* Write new newCode to yaml file. */
@@ -1061,6 +1070,14 @@ class packageModel extends model
             $configCode = file_get_contents("./theme/{$package}/system/module/ui/ext/config/{$code}.php");
             $configCode = str_replace('$this->config->ui->themes["' . $code . '"] = ', '$this->config->ui->themes["' . $newCode . '"] = ', $configCode);
             file_put_contents("./theme/{$package}/system/module/ui/ext/config/{$code}.php", $configCode);
+
+            /* Change code in hook file. */
+            if(file_exists($hookFile))
+            {
+                $hookCode = file_get_contents($hookFile);
+                $hookCode = str_replace('_THEME_CODEFIX_', $newCode, $hookCode);
+                file_put_contents("./theme/{$package}/system/module/ui/ext/model/{$themeInfo->template}.{$newCode}.theme.php", $hookCode);
+            }
 
             /* Rename files named by old newCode. */
             $files2Move = array();
@@ -1083,103 +1100,103 @@ class packageModel extends model
             $this->classFile->removeDir("theme/{$package}");
         }
         return $newPackage;
-     }
+    }
 
-     /**
-      * Merge blocks.
-      * 
-      * @access public
-      * @return void
-      */
-     public function mergeBlocks($packageInfo)
-     {
-         $importedBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('originID')->ne('0')->fetchAll('originID');
-         foreach($importedBlocks as $block)
-         {
-             $block->content = str_replace("#block{$block->originID} ", "#blocck{$block->id} ", $block->content);
-             $block->content = str_replace("#block{$block->originID}{", "#blocck{$block->id}{", $block->content);
-             $block->content = str_replace("#block{$block->originID},", "#blocck{$block->id},", $block->content);
-             $block->content = str_replace("#block{$block->originID}>", "#blocck{$block->id}>", $block->content);
-             $this->dao->replace(TABLE_BLOCK)->data($block)->exec();
-         }
+    /**
+     * Merge blocks.
+     * 
+     * @access public
+     * @return void
+     */
+    public function mergeBlocks($packageInfo)
+    {
+        $importedBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('originID')->ne('0')->fetchAll('originID');
+        foreach($importedBlocks as $block)
+        {
+            $block->content = str_replace("#block{$block->originID} ", "#blocck{$block->id} ", $block->content);
+            $block->content = str_replace("#block{$block->originID}{", "#blocck{$block->id}{", $block->content);
+            $block->content = str_replace("#block{$block->originID},", "#blocck{$block->id},", $block->content);
+            $block->content = str_replace("#block{$block->originID}>", "#blocck{$block->id}>", $block->content);
+            $this->dao->replace(TABLE_BLOCK)->data($block)->exec();
+        }
 
-         foreach($importedBlocks as $block)
-         {
-             $content = json_decode($block->content);
-             if(!is_object($content)) continue;
-             if(isset($content->category)) $content->category = 0;
-             if(isset($content->custom->{$packageInfo->theme}))
-             { 
-                 $custom = $content->custom->{$packageInfo->theme};
-                 $content->custom = new stdclass();
-                 $content->custom->{$packageInfo->code} = $custom;
-             }
-             $block->content = json_encode($content);
-             $this->dao->replace(TABLE_BLOCK)->data($block)->exec();
-         }
+        foreach($importedBlocks as $block)
+        {
+            $content = json_decode($block->content);
+            if(!is_object($content)) continue;
+            if(isset($content->category)) $content->category = 0;
+            if(isset($content->custom->{$packageInfo->theme}))
+            { 
+                $custom = $content->custom->{$packageInfo->theme};
+                $content->custom = new stdclass();
+                $content->custom->{$packageInfo->code} = $custom;
+            }
+            $block->content = json_encode($content);
+            $this->dao->replace(TABLE_BLOCK)->data($block)->exec();
+        }
 
-         $merged = array();
-         $blocks2Merge  = $this->post->blocks2Merge;
-         $blocks2Create = $this->post->blocks2Create;
+        $merged = array();
+        $blocks2Merge  = $this->post->blocks2Merge;
+        $blocks2Create = $this->post->blocks2Create;
 
-         $blockOptions = $this->dao->select('originID, id')->from(TABLE_BLOCK)->where('originID')->in($blocks2Create)->eq($packageInfo->template)->fetchPairs();
+        $blockOptions = $this->dao->select('originID, id')->from(TABLE_BLOCK)->where('originID')->in($blocks2Create)->eq($packageInfo->template)->fetchPairs();
 
-         $blocks2Delete = array();
-         $oldBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('id')->in(array_values($blocks2Merge))->fetchAll('id');
-         $newBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('originID')->ne('0')->fetchAll('originID');
-         foreach($blocks2Merge as $originID => $blockID)
-         {
-             if($blockID == 0) continue;
-             $old = zget($oldBlocks, $blockID);
-             if(!is_object($old->content)) $old->content = json_decode($old->content); 
+        $blocks2Delete = array();
+        $oldBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('id')->in(array_values($blocks2Merge))->fetchAll('id');
+        $newBlocks = $this->dao->select('*')->from(TABLE_BLOCK)->where('originID')->ne('0')->fetchAll('originID');
+        foreach($blocks2Merge as $originID => $blockID)
+        {
+            if($blockID == 0) continue;
+            $old = zget($oldBlocks, $blockID);
+            if(!is_object($old->content)) $old->content = json_decode($old->content); 
 
-             $new = zget($newBlocks, $blockID);
-             if(!is_object($new)) continue;
-             if(!is_object($new->content)) $new->content = json_decode($new->content); 
-             if(!isset($old->content)) $old->content = new stdclass();
-             if(!isset($old->content->custom)) $old->content->custom = new stdclass();
-             $old->content->custom->{$packageInfo->code} = zget($old->content->custom, $packageInfo->code);
+            $new = zget($newBlocks, $blockID);
+            if(!is_object($new)) continue;
+            if(!is_object($new->content)) $new->content = json_decode($new->content); 
+            if(!isset($old->content)) $old->content = new stdclass();
+            if(!isset($old->content->custom)) $old->content->custom = new stdclass();
+            $old->content->custom->{$packageInfo->code} = zget($old->content->custom, $packageInfo->code);
 
-             $old->content = json_encode($old->content);
-             $this->dao->replace(TABLE_BLOCK)->data($old)->exec();
-             $blockOptions[$originID] = $blockID;
-             $blocks2Delete[] = $originID;
-         }
+            $old->content = json_encode($old->content);
+            $this->dao->replace(TABLE_BLOCK)->data($old)->exec();
+            $blockOptions[$originID] = $blockID;
+            $blocks2Delete[] = $originID;
+        }
 
-         $layouts = $this->dao->select('*')->from(TABLE_LAYOUT)->where('template')->eq($packageInfo->template)->andWhere('import')->eq('doing')->fetchAll();
-         foreach($layouts as $layout)
-         {
-             $layout->import = 'finished';
-             $blocks = json_decode($layout->blocks);
+        $layouts = $this->dao->select('*')->from(TABLE_LAYOUT)->where('template')->eq($packageInfo->template)->andWhere('import')->eq('doing')->fetchAll();
+        foreach($layouts as $layout)
+        {
+            $layout->import = 'finished';
+            $blocks = json_decode($layout->blocks);
 
-             if(!empty($blocks))
-             {
-                 foreach($blocks as $block) 
-                 {
-                     if(!empty($block->children))
-                     {
+            if(!empty($blocks))
+            {
+                foreach($blocks as $block) 
+                {
+                    if(!empty($block->children))
+                    {
                         foreach($block->children as $child) $child->id =  zget($blockOptions, $child->id);
-                     }
-                     else
-                     {
-                         $block->id = zget($blockOptions, $block->id);
-                     }
-                 }
-             }
+                    }
+                    else
+                    {
+                        $block->id = zget($blockOptions, $block->id);
+                    }
+                }
+            }
 
-             $layout->blocks = json_encode($blocks);
-             $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
-         }
+            $layout->blocks = json_encode($blocks);
+            $this->dao->replace(TABLE_LAYOUT)->data($layout)->exec();
+        }
 
-         $this->dao->delete()->from(TABLE_BLOCK)->where('originID')->in($blocks2Delete)->exec();
-         $this->dao->update(TABLE_BLOCK)->set('originID')->eq('0')->exec();
+        $this->dao->delete()->from(TABLE_BLOCK)->where('originID')->in($blocks2Delete)->exec();
+        $this->dao->update(TABLE_BLOCK)->set('originID')->eq('0')->exec();
 
-         $custom = json_decode($this->config->template->custom);
-         $css = $custom->{$packageInfo->template}->{$packageInfo->code}->css;
-         $js  = $custom->{$packageInfo->template}->{$packageInfo->code}->js;
+        $custom = json_decode($this->config->template->custom);
+        $css = $custom->{$packageInfo->template}->{$packageInfo->code}->css;
+        $js  = $custom->{$packageInfo->template}->{$packageInfo->code}->js;
 
-         foreach($blockOptions as $originID => $blockID)
-         {
+        foreach($blockOptions as $originID => $blockID)
+        {
             $css = str_replace('#block' . $originID . ",", '#block' . $blockID . ',', $css);
             $css = str_replace('#block' . $originID . " ", '#block' . $blockID . ' ', $css);
             $css = str_replace('#block' . $originID . "{", '#block' . $blockID . '{', $css);
@@ -1187,62 +1204,62 @@ class packageModel extends model
             $js  = str_replace('#block' . $originID . ",", '#block' . $blockID . ',', $js);
             $js  = str_replace('#block' . $originID . " ", '#block' . $blockID . ' ', $js);
             $js  = str_replace('#block' . $originID . "{", '#block' . $blockID . '{', $js);
-         }
+        }
 
-         $custom->{$packageInfo->template}->{$packageInfo->code}->css = $css;
-         $custom->{$packageInfo->template}->{$packageInfo->code}->js  = $js;
-         $custom = json_encode($custom);
-         return $this->loadModel('setting')->setItems('system.common.template', array('custom' => $custom));
-     }
+        $custom->{$packageInfo->template}->{$packageInfo->code}->css = $css;
+        $custom->{$packageInfo->template}->{$packageInfo->code}->js  = $js;
+        $custom = json_encode($custom);
+        return $this->loadModel('setting')->setItems('system.common.template', array('custom' => $custom));
+    }
 
-     /**
-      * Fix slides data.
-      * 
-      * @param  int    $package 
-      * @access public
-      * @return void
-      */
-     public function fixSlides($package)
-     {
-         $importedSlides = glob('theme' . DS . $package . DS . 'www' . DS . 'data' . DS . 'slidestmp' . DS . '*');
-         $importedGroups = $this->dao->select('`alias`,id')->from(TABLE_CATEGORY)->where('type')->eq('tmpSlide')->fetchPairs();
-         foreach($importedSlides as $slide)
-         {
-             $slideInfo = pathinfo($slide);
-             $basename  = $slideInfo['basename'];
-             list($group, $fileID) = explode('_', $slideInfo['filename']);
+    /**
+     * Fix slides data.
+     * 
+     * @param  int    $package 
+     * @access public
+     * @return void
+     */
+    public function fixSlides($package)
+    {
+        $importedSlides = glob('theme' . DS . $package . DS . 'www' . DS . 'data' . DS . 'slidestmp' . DS . '*');
+        $importedGroups = $this->dao->select('`alias`,id')->from(TABLE_CATEGORY)->where('type')->eq('tmpSlide')->fetchPairs();
+        foreach($importedSlides as $slide)
+        {
+            $slideInfo = pathinfo($slide);
+            $basename  = $slideInfo['basename'];
+            list($group, $fileID) = explode('_', $slideInfo['filename']);
 
-             $newGroup = zget($importedGroups, $group);
-             $newFile  = $this->app->getWwwRoot() . 'data' . DS . 'slides' . DS . $newGroup . '_' . $fileID . '.' . $slideInfo['extension'];
-             rename($slide, $newFile);
-             $this->dao->setAutoLang(false)->update(TABLE_SLIDE)->set('group')->eq($newGroup)->where('`group`')->eq($group)->andWhere('lang')->eq('imported')->exec();
-             $this->dao->setAutoLang(false)->update(TABLE_SLIDE)->set("image")->eq("/data/slides/{$newGroup}_{$fileID}.{$slideInfo['extension']}")->where('image')->like("%{$slideInfo['basename']}")->andWhere('lang')->eq('imported')->exec();
-             $this->dao->update(TABLE_BLOCK)->set('content')->eq(json_encode(array("group" => $newGroup)))->where('originID')->ne('0')->andWhere('type')->eq('slide')->andWhere('content')->like("%\"{$group}\"%")->exec();
+            $newGroup = zget($importedGroups, $group);
+            $newFile  = $this->app->getWwwRoot() . 'data' . DS . 'slides' . DS . $newGroup . '_' . $fileID . '.' . $slideInfo['extension'];
+            rename($slide, $newFile);
+            $this->dao->setAutoLang(false)->update(TABLE_SLIDE)->set('group')->eq($newGroup)->where('`group`')->eq($group)->andWhere('lang')->eq('imported')->exec();
+            $this->dao->setAutoLang(false)->update(TABLE_SLIDE)->set("image")->eq("/data/slides/{$newGroup}_{$fileID}.{$slideInfo['extension']}")->where('image')->like("%{$slideInfo['basename']}")->andWhere('lang')->eq('imported')->exec();
+            $this->dao->update(TABLE_BLOCK)->set('content')->eq(json_encode(array("group" => $newGroup)))->where('originID')->ne('0')->andWhere('type')->eq('slide')->andWhere('content')->like("%\"{$group}\"%")->exec();
 
-             $this->dao->setAutoLang(false)->update(TABLE_FILE)->set("pathname")->eq("slides/{$newGroup}_{$fileID}.{$slideInfo['extension']}")->where('pathname')->like("%{$slideInfo['basename']}")->andWhere('addedBy')->eq('')->exec();
-             $this->dao->setAutoLang(false)->update(TABLE_FILE)->set("addedBy")->eq($this->app->user->account)->where('addedBy')->eq('IMPORTED')->exec();
-         }
+            $this->dao->setAutoLang(false)->update(TABLE_FILE)->set("pathname")->eq("slides/{$newGroup}_{$fileID}.{$slideInfo['extension']}")->where('pathname')->like("%{$slideInfo['basename']}")->andWhere('addedBy')->eq('')->exec();
+            $this->dao->setAutoLang(false)->update(TABLE_FILE)->set("addedBy")->eq($this->app->user->account)->where('addedBy')->eq('IMPORTED')->exec();
+        }
 
-         $this->dao->setAutoLang(false)->update(TABLE_SLIDE)->set('lang')->eq($this->app->getClientLang())->where('lang')->eq('imported')->exec();
-         $this->dao->update(TABLE_CATEGORY)->set('type')->eq('slide')->where('type')->eq('tmpSlide')->exec();
-     }
+        $this->dao->setAutoLang(false)->update(TABLE_SLIDE)->set('lang')->eq($this->app->getClientLang())->where('lang')->eq('imported')->exec();
+        $this->dao->update(TABLE_CATEGORY)->set('type')->eq('slide')->where('type')->eq('tmpSlide')->exec();
+    }
 
-     /**
-      * Merge custom.
-      * 
-      * @param  object    $info 
-      * @access public
-      * @return void
-      */
-     public function mergeCustom($info)
-     {
+    /**
+     * Merge custom.
+     * 
+     * @param  object    $info 
+     * @access public
+     * @return void
+     */
+    public function mergeCustom($info)
+    {
         $importedCustom = $this->dao->setAutoLang(false)->select('*')->from(TABLE_CONFIG)->where('lang')->eq('imported')->andWhere('`key`')->eq('custom')->fetch('value');
         $custom = json_decode($importedCustom, true);
-        
+
         $setting = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true): array();
 
         if(isset($custom[$info->template][$info->theme])) $setting[$info->template][$info->code] = $custom[$info->template][$info->theme];
         $this->loadModel('setting')->setItems('system.common.template', array('custom' => helper::jsonEncode($setting)));
         $this->dao->delete()->from(TABLE_CONFIG)->where('lang')->eq('imported')->andWhere('`key`')->eq('custom')->exec();
-     }
+    }
 }
