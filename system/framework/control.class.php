@@ -588,9 +588,25 @@ class control
         /* Get css and js. */
         $css = $this->getCSS($moduleName, $methodName);
         $js  = $this->getJS($moduleName, $methodName);
+        if(RUN_MODE == 'front')
+        {
+            $template    = $this->config->template->{$this->device}->name;
+            $theme       = $this->config->template->{$this->device}->theme;
+            $customParam = json_decode($this->config->template->custom, true);
+
+            if(file_exists($this->app->getModulePath('ui') . 'ext' . DS . 'model' . DS . "{$template}.{$theme}.theme.php"))
+            {
+                $this->loadModel('ui');
+                $cssFunction = "show{$theme}CSS";
+                $jsFunction  = "show{$theme}JS";
+
+                if(method_exists('extuiModel', $cssFunction)) $css = $this->ui->$cssFunction() . $customParam[$template][$theme]['css'] . $css;
+                if(method_exists('ui', $jsFunction)) $js = $this->ui->$jsFunction() . $customParam[$template][$theme]['js'] . $js;
+            }
+        }
         if($css) $this->view->pageCSS = $css;
         if($js)  $this->view->pageJS  = $js;
-
+        
         /* Change the dir to the view file to keep the relative pathes work. */
         $currentPWD = getcwd();
         chdir(dirname($viewFile));
