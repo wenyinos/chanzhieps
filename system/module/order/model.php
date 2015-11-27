@@ -648,4 +648,19 @@ class orderModel extends model
         $this->dao->delete()->from(TABLE_ORDER_PRODUCT)->where('orderID')->eq($orderID)->exec();
         return !dao::isError();
     }
+
+    /**
+     * Get new orders 
+     * 
+     * @access public
+     * @return array 
+     */
+    public function getNewOrders()
+    {
+        $newOrders = $this->dao->select('*')->from(TABLE_ORDER)
+            ->where('createdDate')->like(date("Y-m-d") . '%')
+            ->fetchAll();
+        
+        return $newOrders;
+    }
 }
