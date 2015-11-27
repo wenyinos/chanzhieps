@@ -12,10 +12,11 @@ $(document).ready(function()
 <div class='alert'><?php echo $lang->mail->verifySuccess;?></div>
 <?php else:?>
   <?php
-  if(!isset($target))  $target  = 'modal';
-  if(!isset($account)) $account = '';
-  if(!isset($method))  $method  = '';
-  if(!isset($email))   $email   = $this->app->user->email;
+  if(!isset($target))   $target   = 'modal';
+  if(!isset($account))  $account  = '';
+  if(!isset($method))   $method   = '';
+  if(!isset($email))    $email    = $this->app->user->email;
+  if(!isset($question)) $question = $this->app->user->securityQuestion;
   if(isset($type) and $type != '') $this->config->site->importantValidate = $type;
   ?>
   <?php if(!helper::isAjaxRequest()):?>
@@ -32,19 +33,21 @@ $(document).ready(function()
     <?php $refUrl  = helper::safe64Decode($url) == 'close' ? $this->app->getURI() : helper::safe64Decode($url);?>
     <?php $fileBtn = html::a($refUrl, $lang->mail->created, "class='btn btn-sm btn-primary okFile'")?>
     <?php $mailBtn = html::submitButton();?>
+    <?php $questionBtn = html::submitButton();?>
+    <?php $options = explode(',', $this->config->site->importantValidate); $multi = count($options) > 1 ? true : false;?>
     <table class='table table-form'>
-      <?php if(strpos($this->config->site->importantValidate, 'okFile') !== false):?>
+      <?php if(in_array('okFile', $options)):?>
       <tr>
-        <?php if(strpos($this->config->site->importantValidate, 'email') !== false):?>
+        <?php if($multi):?>
         <th class='w-100px'><?php echo $lang->mail->okFile;?></th>
         <?php endif;?>
         <td colspan='3'><?php printf($lang->mail->okFileVerfy, $okFile['okFile'], $fileBtn);?></td>
       </tr>
       <?php endif;?>
-      <?php if(strpos($this->config->site->importantValidate, 'email')  !== false):?>
+      <?php if(in_array('email', $options)):?>
       <tr>
-        <?php if(strpos($this->config->site->importantValidate, 'okFile') !== false):?>
-        <th><?php echo $lang->mail->email;?></th>
+        <?php if($multi):?>
+        <th class='w-100px'><?php echo $lang->mail->email;?></th>
         <?php endif;?>
         <?php if(!empty($email) and $this->config->mail->turnon):?>
         <td class='w-250px'><?php echo html::input('captcha', '', "class='form-control' placeholder={$lang->mail->captcha}");?></td>
@@ -55,6 +58,25 @@ $(document).ready(function()
         <?php if(empty($email)) echo $lang->mail->noEmail;?>
         <?php if(!$this->config->mail->turnon) echo '&nbsp;' . $lang->mail->noConfigure;?>
         <?php if(!$this->config->mail->turnon or empty($email)) echo $lang->mail->noCaptcha;?>
+        </td>
+      </tr>
+      <?php endif;?>
+      <?php if(in_array('securityQuestion', $options)):?>
+      <tr>
+        <?php if($multi):?>
+        <th class='w-100px'><?php echo $lang->mail->securityQuestion;?></th>
+        <?php endif;?>
+        <?php if(!empty($question)):?>
+        <td class='w-300px' colspan='2'>
+          <div class='input-group'>
+            <span class='input-group-addon'><?php echo json_decode($question)->question;?></span>
+            <?php echo html::input('answer', '', "class='form-control' placeholder={$lang->mail->answer}");?>
+          </div>
+        </td>
+        <td class='w-50px'><?php echo $questionBtn;?></td>
+        <?php endif;?>
+        <td>
+        <?php if(empty($question)) echo $lang->mail->noQuestion;?>
         </td>
       </tr>
       <?php endif;?>

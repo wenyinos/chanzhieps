@@ -33,7 +33,7 @@ js::execute($page->js);
     <div class='row blocks' data-region='page_view-bottom'><?php $this->block->printRegion($layouts, 'page_view', 'bottom', true);?></div>
   </div>
   <?php if(!empty($layouts['page_view'])):?>
-  <div class='col-md-3 col-side blocks' data-region='page_view-side'><?php $this->block->printRegion($layouts, 'page_view', 'side');?></div>
+  <div class='col-md-3 col-side'><side class='page-side blocks blocks' data-region='page_view-side'><?php $this->block->printRegion($layouts, 'page_view', 'side');?></side></div>
   <?php endif;?>
 </div>
 <div class='row blocks' data-region='page_view-bottomBanner'><?php $this->block->printRegion($layouts, 'page_view', 'bottomBanner', true);?></div>

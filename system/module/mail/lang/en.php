@@ -55,6 +55,7 @@ $lang->mail->verifyFail    = 'Wrong captcha';
 $lang->mail->verifySuccess = 'Right captcha';
 $lang->mail->noConfigure   = "Can't find the configuration";
 $lang->mail->noEmail       = "Can't find your email address";
+$lang->mail->noQuestion    = "Can't find your security question";
 $lang->mail->noCaptcha     = "can't send email captcha.";
 $lang->mail->okFileVerfy   = "Create %s file.%s<br />";
 $lang->mail->sendSuccess   = 'Captcha has been sent to %s.';
