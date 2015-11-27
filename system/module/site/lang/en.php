@@ -127,8 +127,9 @@ $lang->site->captchaList['auto']  = 'Automatic';
 $lang->site->captchaList['close'] = 'Close';
 
 $lang->site->validateTypes = new stdclass();
-$lang->site->validateTypes->okFile = 'File';
-$lang->site->validateTypes->email  = 'Email';
+$lang->site->validateTypes->okFile           = 'File';
+$lang->site->validateTypes->email            = 'Email';
+$lang->site->validateTypes->securityQuestion = 'Question';
 
 $lang->site->schemeList = array();
 $lang->site->schemeList['http']  = 'http';
