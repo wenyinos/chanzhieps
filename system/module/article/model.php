@@ -761,12 +761,14 @@ class articleModel extends model
      * @access public
      * @return array
      */
-    public function getContribution()
+    public function getContributions()
     {
-        $contribution = $this->dao->select('*')->from(TABLE_ARTICLE)
+        $contributions = $this->dao->select('*')->from(TABLE_ARTICLE)
             ->where('type')->eq('contribution')
             ->andWhere('contribution')->ne(3)
+            ->andWhere('editedDate')->like(date("Y-m-d") . '%')
             ->fetchAll();
-        return $contribution;
+
+        return $contributions;
     }
 }
