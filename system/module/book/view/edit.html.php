@@ -35,17 +35,20 @@ js::set('path', $path);
           <td><?php echo html::select('parent', $optionMenu, $node->parent, "class='chosen form-control'");?></td>
         </tr>
         <?php endif; ?>
-        <?php if($node->type == 'book'):?>
-        <tr>
-          <th><?php echo $lang->book->order;?></th>
-          <td><?php echo html::input('order', $node->order, 'class="form-control"');?></td>
-        </tr>
-        <?php endif;?>
         <tr>
           <th><?php echo $lang->book->title;?></th>
           <td colspan='2'>
-            <div class='required required-wrapper'></div>
-            <?php echo html::input('title', $node->title, 'class="form-control"');?>
+            <div class='row order'>
+              <div class="col-sm-<?php echo $node->type == 'book' ? '9' : '12';?>"><?php echo html::input('title', $node->title, 'class="form-control"');?></div>
+              <?php if($node->type == 'book'):?>
+              <div class='col-sm-3 order'>
+                <div class='input-group'>
+                  <span class="input-group-addon"><?php echo $lang->book->order;?></span>
+                  <?php echo html::input('order', $node->order, "class='form-control'");?>
+                </div>
+              </div>
+              <?php endif;?>
+            </div>
           </td>
         </tr>
         <tr>
