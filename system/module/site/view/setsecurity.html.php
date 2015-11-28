@@ -86,7 +86,7 @@
         <tr>
           <th></th>
           <td colspan='2'>
-            <?php echo html::a($this->createLink('mail', 'captcha', "url=&target=modal&account=&type=okFile"), $lang->save, "data-toggle='modal' class='hidden captchaModal'")?>
+            <?php echo html::a($this->createLink('guarder', 'validate', "url=&target=modal&account=&type=okFile"), $lang->save, "data-toggle='modal' class='hidden captchaModal'")?>
             <?php echo html::submitButton();?>
           </td>
         </tr>

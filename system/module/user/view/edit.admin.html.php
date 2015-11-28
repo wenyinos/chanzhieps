@@ -2,7 +2,7 @@
 <?php 
 $url    = helper::safe64Encode($this->app->getURI());
 $target = 'self';
-include '../../mail/view/captcha.html.php';
+include '../../guarder/view/validate.html.php';
 ?>
 <?php else:?>
 <?php include '../../common/view/header.admin.html.php';?>
@@ -91,7 +91,7 @@ include '../../mail/view/captcha.html.php';
           <td><?php echo html::input('gtalk', $user->gtalk, "class='form-control'");?></td><td></td>
         </tr>  
         <tr>
-          <th><?php echo html::a($this->createLink('mail', 'captcha'), $lang->save, "data-toggle='modal' class='hidden captchaModal'")?></th>
+          <th><?php echo html::a($this->createLink('guarder', 'validate'), $lang->save, "data-toggle='modal' class='hidden captchaModal'")?></th>
           <td colspan="2"><?php echo html::hidden('token', $token) . html::submitButton();?></td>
         </tr>
       </table>

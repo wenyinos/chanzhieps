@@ -45,9 +45,12 @@ $(document).ready(function()
           if(in_array('okFile', $options)) $types['okFile'] = $lang->site->validateTypes->okFile;
           if(in_array('email', $options)) $types['email'] = $lang->site->validateTypes->email;
           ?>
-          <?php echo html::radio('type[]', $types, $this->cookie->validate ? $this->cookie->validate : key($types));?>
+          <?php 
+          echo html::radio('type[]', $types, isset($types[$this->cookie->validate]) ? $this->cookie->validate : key($types));
+          ?>
         </td>
       </tr>
+      <?php if(in_array('securityQuestion', $options)):?>
       <tr class='option-question'>
         <th></th>
         <?php if(!empty($question)):?>
@@ -58,6 +61,8 @@ $(document).ready(function()
         <?php endif;?>
         <td><?php if(empty($question)) echo $lang->guarder->noQuestion;?></td>
       </tr>
+      <?php endif;?>
+      <?php if(in_array('okFile', $options)):?>
       <tr class='option-okfile'>
         <th></th>
         <td colspan='3'>
@@ -65,6 +70,8 @@ $(document).ready(function()
           <p><?php echo $fileBtn?></p>
         </td>
       </tr>
+      <?php endif;?>
+      <?php if(in_array('email', $options)):?>
       <?php if(!empty($email) and $this->config->mail->turnon):?>
       <tr class='option-email'>
         <th></th>
@@ -83,6 +90,7 @@ $(document).ready(function()
           <?php if(!$this->config->mail->turnon or empty($email)) echo $lang->guarder->noCaptcha;?>
         </td>
       </tr>
+      <?php endif;?>
       <?php endif;?>
       <tr class='submit-button'>
         <th></th>
