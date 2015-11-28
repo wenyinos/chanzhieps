@@ -389,4 +389,32 @@ EOT;
         
         return $result;
     }
+
+    /**
+     * Verify.
+     *
+     * @param  string $importantValidate
+     * @access public
+     * @return bool
+     */
+    public function verify($importantValidate = '')
+    {
+        if($importantValidate != '') $this->config->site->importantValidate = $importantValidate;
+        $importantValidate = explode(',', $importantValidate);
+        if(empty($importantValidate)) return true;
+
+        if(in_array('okFile', $importantValidate))
+        {
+            $okFile = $this->loadModel('common')->verfyAdmin();
+            if($okFile['result'] == 'success') return true;
+        }
+
+        if($this->session->verify and $this->session->verify > 0)
+        {
+            $this->session->set('verify', $this->session->verify - 1);
+            return true;
+        }
+
+        return false;
+    }
 }

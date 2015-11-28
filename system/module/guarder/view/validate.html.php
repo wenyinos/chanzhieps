@@ -9,12 +9,12 @@ $(document).ready(function()
     setTimeout(function(){$('#ajaxModal button.close').click()}, 500);
 });
 </script>
-<div class='alert'><?php echo $lang->mail->verifySuccess;?></div>
+<div class='alert'><?php echo $lang->guarder->verifySuccess;?></div>
 <?php else:?>
   <?php
   if(!isset($target))   $target   = 'modal';
-  if(!isset($account))  $account  = '';
   if(!isset($method))   $method   = '';
+  if(!isset($account))  $account  = $this->app->user->account;
   if(!isset($email))    $email    = $this->app->user->email;
   if(!isset($question)) $question = $this->app->user->securityQuestion;
   if(isset($type) and $type != '') $this->config->site->importantValidate = $type;
@@ -25,61 +25,69 @@ $(document).ready(function()
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">X</span></button>
-          <h4 class="modal-title"><?php echo $lang->mail->verify?></h4>
+          <h4 class="modal-title"><?php echo $lang->validate->verify?></h4>
         </div>
         <div class="modal-body">
   <?php endif;?>
-  <form class='form-inline' id='captchaForm' action="<?php echo $this->createLink('mail', 'captcha', "url=$url&target=$target&account=$account&method=$method");?>" method='post'>
+  <form class='form-inline' id='validateForm' action="<?php echo $this->createLink('guarder', 'validate', "url=$url&target=$target&account=$account&method=$method");?>" method='post' style='min-height:165px'>
     <?php $refUrl  = helper::safe64Decode($url) == 'close' ? $this->app->getURI() : helper::safe64Decode($url);?>
-    <?php $fileBtn = html::a($refUrl, $lang->mail->created, "class='btn btn-sm btn-primary okFile'")?>
+    <?php $fileBtn = html::a($refUrl, $lang->guarder->created, "class='btn btn-sm btn-primary okFile'")?>
     <?php $mailBtn = html::submitButton();?>
     <?php $questionBtn = html::submitButton();?>
-    <?php $options = explode(',', $this->config->site->importantValidate); $multi = count($options) > 1 ? true : false;?>
     <table class='table table-form'>
-      <?php if(in_array('okFile', $options)):?>
       <tr>
-        <?php if($multi):?>
-        <th class='w-100px'><?php echo $lang->mail->okFile;?></th>
-        <?php endif;?>
-        <td colspan='3'><?php printf($lang->mail->okFileVerfy, $okFile['okFile'], $fileBtn);?></td>
-      </tr>
-      <?php endif;?>
-      <?php if(in_array('email', $options)):?>
-      <tr>
-        <?php if($multi):?>
-        <th class='w-100px'><?php echo $lang->mail->email;?></th>
-        <?php endif;?>
-        <?php if(!empty($email) and $this->config->mail->turnon):?>
-        <td class='w-250px'><?php echo html::input('captcha', '', "class='form-control' placeholder={$lang->mail->captcha}");?></td>
-        <td class='w-50px'><?php echo $mailBtn;?></td>
-        <td><?php echo html::a($this->createLink('mail', 'sendmailcode', "account=$account"), $lang->mail->getEmailCode, "id='mailSender' class='btn btn-success'");?></td>
-        <?php endif;?>
-        <td>
-        <?php if(empty($email)) echo $lang->mail->noEmail;?>
-        <?php if(!$this->config->mail->turnon) echo '&nbsp;' . $lang->mail->noConfigure;?>
-        <?php if(!$this->config->mail->turnon or empty($email)) echo $lang->mail->noCaptcha;?>
+        <th class='w-100px'><?php echo $lang->guarder->options;?></th>
+        <td colspan='3'>
+          <?php
+          $types   = array();
+          $options = explode(',', $this->config->site->importantValidate);
+          if(in_array('securityQuestion', $options)) $types['securityQuestion'] = $lang->site->validateTypes->securityQuestion;
+          if(in_array('okFile', $options)) $types['okFile'] = $lang->site->validateTypes->okFile;
+          if(in_array('email', $options)) $types['email'] = $lang->site->validateTypes->email;
+          ?>
+          <?php echo html::radio('type[]', $types, $this->cookie->validate ? $this->cookie->validate : key($types));?>
         </td>
       </tr>
-      <?php endif;?>
-      <?php if(in_array('securityQuestion', $options)):?>
-      <tr>
-        <?php if($multi):?>
-        <th class='w-100px'><?php echo $lang->mail->securityQuestion;?></th>
-        <?php endif;?>
+      <tr class='option-question'>
+        <th></th>
         <?php if(!empty($question)):?>
         <td class='w-300px' colspan='2'>
-          <div class='input-group'>
-            <span class='input-group-addon'><?php echo json_decode($question)->question;?></span>
-            <?php echo html::input('answer', '', "class='form-control' placeholder={$lang->mail->answer}");?>
-          </div>
+          <p><?php echo json_decode($question)->question;?></p>
+          <p><?php echo html::input('answer', '', "class='form-control' placeholder={$lang->guarder->answer}");?></p>
         </td>
-        <td class='w-50px'><?php echo $questionBtn;?></td>
         <?php endif;?>
+        <td><?php if(empty($question)) echo $lang->guarder->noQuestion;?></td>
+      </tr>
+      <tr class='option-okfile'>
+        <th></th>
+        <td colspan='3'>
+          <p><?php printf($lang->guarder->okFileVerfy, $okFile['okFile'], $okFile['okFile']);?></p>
+          <p><?php echo $fileBtn?></p>
+        </td>
+      </tr>
+      <?php if(!empty($email) and $this->config->mail->turnon):?>
+      <tr class='option-email'>
+        <th></th>
         <td>
-        <?php if(empty($question)) echo $lang->mail->noQuestion;?>
+          <?php echo html::input('captcha', '', "class='form-control' placeholder={$lang->guarder->captcha}");?>
+        </td>
+        <td>
+          <?php echo html::a($this->createLink('mail', 'sendmailcode', "account=$account"), $lang->guarder->getEmailCode, "id='mailSender' class='btn btn-success'");?>
+        </td>
+      </tr>
+      <?php else:?>
+      <tr>
+        <td>
+          <?php if(empty($email)) echo $lang->guarder->noEmail;?>
+          <?php if(!$this->config->mail->turnon) echo '&nbsp;' . $lang->guarder->noConfigure;?>
+          <?php if(!$this->config->mail->turnon or empty($email)) echo $lang->guarder->noCaptcha;?>
         </td>
       </tr>
       <?php endif;?>
+      <tr class='submit-button'>
+        <th></th>
+        <td colspan='3'><?php echo $mailBtn;?></td>
+      </tr>
     </table>
   </form>
   <script>
@@ -113,7 +121,7 @@ $(document).ready(function()
           return false;
       })
 
-      $.setAjaxForm('#captchaForm', function(response)
+      $.setAjaxForm('#validateForm', function(response)
       {
           if(response.result == 'success')
           {
@@ -146,6 +154,38 @@ $(document).ready(function()
               }
           }
       });
+
+      function checkOptions()
+      {
+          if($('[name*=type][value=okFile]').prop('checked'))
+          {
+              $('.option-okfile').show();
+              $('.option-email').hide();
+              $('.option-question').hide();
+              $('.submit-button').hide();
+              $.cookie('validate', 'okFile');
+          }
+
+          if($('[name*=type][value=securityQuestion]').prop('checked'))
+          {
+              $('.option-question').show();
+              $('.option-okfile').hide();
+              $('.option-email').hide();
+              $('.submit-button').show();
+              $.cookie('validate', 'securityQuestion');
+          }
+
+          if($('[name*=type][value=email]').prop('checked'))
+          {
+              $('.option-email').show();
+              $('.option-question').hide();
+              $('.option-okfile').hide();
+              $('.submit-button').show();
+              $.cookie('validate', 'email');
+          }
+      }
+      checkOptions();
+      $('[name*=type]').click(checkOptions);
 
       <?php if($target == 'modal'):?>
       $.setAjaxLoader('.okFile', '#ajaxModal');

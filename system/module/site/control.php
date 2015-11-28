@@ -142,7 +142,7 @@ class site extends control
         if($captcha or $checkEmail or $front or $checkLocation or $checkSessionIP or $allowedIP or $importantValidate)
         {
             $okFile = $this->loadModel('common')->verfyAdmin();
-            $pass   = $this->loadModel('mail')->checkVerify('okFile');
+            $pass   = $this->loadModel('guarder')->verify('okFile');
             $this->view->pass   = $pass;
             $this->view->okFile = $okFile;
             if(!empty($_POST) && !$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha'));

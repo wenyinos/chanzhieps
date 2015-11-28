@@ -45,22 +45,8 @@ $lang->mail->needConfigure  = "I can not find the configuration, please configur
 $lang->mail->error          = 'Please input correct email.'; 
 $lang->mail->trySendlater   = 'Can not send email in three minutes.'; 
 
-$lang->mail->verify        = 'For security reason do the following';
-$lang->mail->okFile        = 'File';
-$lang->mail->created       = 'Created';
-$lang->mail->email         = 'Email';
-$lang->mail->captcha       = 'Email captcha';
-$lang->mail->needVerify    = 'Need to verify your identity of Administrator';
-$lang->mail->verifyFail    = 'Wrong captcha';
-$lang->mail->verifySuccess = 'Right captcha';
-$lang->mail->noConfigure   = "Can't find the configuration";
-$lang->mail->noEmail       = "Can't find your email address";
-$lang->mail->noQuestion    = "Can't find your security question";
-$lang->mail->noCaptcha     = "can't send email captcha.";
-$lang->mail->okFileVerfy   = "Create %s file.%s<br />";
-$lang->mail->sendSuccess   = 'Captcha has been sent to %s.';
-
-$lang->mail->sendContent   = <<<EOT
+$lang->mail->captcha     = 'Email captcha';
+$lang->mail->sendContent = <<<EOT
 %s：
 <br />You are requesting the verification code:%s from <strong>%s</strong>(%s).
 <br />If not your request, please ignore it.

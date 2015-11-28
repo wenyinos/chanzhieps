@@ -169,47 +169,6 @@ class mail extends control
     }
 
     /**
-     * check admin.
-     * 
-     * @param  string $url 
-     * @param  string $target 
-     * @param  string $account 
-     * @param  string $type    okFile|email 
-     * @access public
-     * @return void
-     */
-    public function captcha($url = '', $target = 'modal', $account = '', $type = '')
-    {
-        if($url == '')     $url     = helper::safe64Encode('close');
-        if($account == '') $account = $this->app->user->account;
-        if($type != '' and $type != 'okFile' and $type != 'email') $type = '';
-
-        if($_POST)
-        {
-            if(!($this->post->captcha) or trim($this->post->captcha) != $this->session->verifyCode) $this->send(array('result' => 'fail', 'message' => $this->lang->mail->verifyFail));
-            $this->session->set('verifyCode', '');
-            $this->session->set('verify', 6);
-            $this->send(array('result' => 'success', 'message' => $this->lang->mail->verifySuccess, 'locate' => helper::safe64Decode($url), 'target' => $target));
-        }
-
-        $this->session->set('verify', '');
-
-        $okFile = $this->loadModel('common')->verfyAdmin();
-        $pass   = $this->mail->checkVerify($type);
-
-        $user = $this->loadModel('user')->getByAccount($account);
-        $this->view->title   = $this->lang->mail->verify;
-        $this->view->url     = $url;
-        $this->view->target  = $target;
-        $this->view->account = $account;
-        $this->view->type    = $type;
-        $this->view->email   = $user->email;
-        $this->view->okFile  = $okFile;
-        $this->view->pass    = $pass;
-        $this->display();
-    }
-
-    /**
      * Send mail code. 
      * 
      * @access public
