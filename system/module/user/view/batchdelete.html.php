@@ -19,7 +19,7 @@
       </table>
       <div class='panel-footer'>
       <?php echo $lang->guarder->password;?>
-      <?php echo html::password('password', '', "placeholder='{$lang->guarder->passwordHolder}'") . '<br />';?>
+      <?php echo html::password('password', '', "placeholder='{$lang->guarder->passwordHolder}'");?>
       <?php echo html::a('javascript:;', $lang->delete, "class='btn btn-primary submit'");?>
       <?php echo html::hidden('users', implode(',', array_keys($userHistory)));?>
       </div>

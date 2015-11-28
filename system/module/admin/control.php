@@ -19,24 +19,25 @@ class admin extends control
      */
     public function index()
     {
-        $summary = new stdclass();
-        if(commonModel::isAvailable('message'))
-        {
-           $summary->comments = $this->loadModel('message')->getMessages('comment');
-           $summary->messages = $this->loadModel('message')->getMessages('message');
-           $summary->replies  = $this->loadModel('message')->getMessages('reply');
-        }
+        $messages = new stdclass();
         if(commonModel::isAvailable('forum'))
         {
-            $summary->newthreads = $this->loadModel('thread')->getNewThreads();
-            $summary->newReplies = $this->loadModel('reply')->getNewReplies();
+            $this->view->newThreads = $this->loadModel('thread')->getNewThreads();
+            $this->view->threadReply  = $this->loadModel('reply')->getNewReplies();
         }
-        if(commonModel::isAvailable('order')) $summary->newOrders = $this->loadModel('order')->getNewOrders();
-        if(commonModel::isAvailable('contribution')) $summary->contribution = $this->loadModel('article')->getContribution();
+        if(commonModel::isAvailable('message'))
+        {
+            $messages->comment = $this->loadModel('message')->getMessages('comment');
+            $messages->message = $this->loadModel('message')->getMessages('message');
+            $messages->reply   = $this->loadModel('message')->getMessages('reply');
+        }
+        if(commonModel::isAvailable('order')) $this->view->newOrders = $this->loadModel('order')->getNewOrders();
+        if(commonModel::isAvailable('contribution')) $this->view->newContributions = $this->loadModel('article')->getContributions();
+        if(commonModel::isAvailable('article')) $this->view->categories = $this->loadModel('tree')->getOptionMenu('article', 0, $removeRoot = true);
 
         $this->view->ignoreUpgrade = isset($this->config->global->ignoreUpgrade) and $this->config->global->ignoreUpgrade;
         $this->view->checkLocation = $this->loadModel('user')->checkLocation();
-        $this->view->summary       = $summary;
+        $this->view->messages      = $messages;
         $this->display();
     }
 
