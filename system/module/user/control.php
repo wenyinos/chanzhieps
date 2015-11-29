@@ -124,7 +124,7 @@ class user extends control
                     $error .= $checkLocation ? '' : $this->lang->user->locationDenied;
                     $error .= $checkLoginLocation ? '' : $this->lang->user->loginLocationChanged;
                     $pass   = $this->loadModel('guarder')->verify();
-                    $captchaUrl = $this->createLink('mail', 'captcha', "url=&target=modal&account={$this->post->account}");
+                    $captchaUrl = $this->createLink('guarder', 'validate', "url=&target=modal&account={$this->post->account}");
                     if(!$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => $error, 'url' => $captchaUrl));
                 }
             }
@@ -336,7 +336,7 @@ class user extends control
         /* use email captcha. */
         if(RUN_MODE == 'admin' and ($user->admin == 'super' or $user->admin == 'common' or $this->post->admin == 'super' or $this->post->admin == 'common')) 
         { 
-            $okFile = $this->loadModel('common')->verfyAdmin();
+            $okFile = $this->loadModel('common')->verifyAdmin();
             $pass   = $this->loadModel('guarder')->verify();
             $this->view->pass   = $pass;
             $this->view->okFile = $okFile;
@@ -605,7 +605,7 @@ class user extends control
         if($this->app->user->account == 'guest') $this->locate(inlink('login'));
 
         /* use email captcha. */
-        $okFile = $this->loadModel('common')->verfyAdmin();
+        $okFile = $this->loadModel('common')->verifyAdmin();
         $pass   = $this->loadModel('guarder')->verify();
         $this->view->okFile = $okFile;
         $this->view->pass   = $pass;

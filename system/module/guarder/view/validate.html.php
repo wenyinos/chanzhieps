@@ -16,7 +16,7 @@ $(document).ready(function()
   if(!isset($method))   $method   = '';
   if(!isset($account))  $account  = $this->app->user->account;
   if(!isset($email))    $email    = $this->app->user->email;
-  if(!isset($question)) $question = $this->app->user->securityQuestion;
+  if(!isset($question)) $question = json_decode($this->app->user->securityQuestion);
   if(isset($type) and $type != '') $this->config->site->importantValidate = $type;
   ?>
   <?php if(!helper::isAjaxRequest()):?>
@@ -32,8 +32,6 @@ $(document).ready(function()
   <form class='form-inline' id='validateForm' action="<?php echo $this->createLink('guarder', 'validate', "url=$url&target=$target&account=$account&method=$method");?>" method='post' style='min-height:165px'>
     <?php $refUrl  = helper::safe64Decode($url) == 'close' ? $this->app->getURI() : helper::safe64Decode($url);?>
     <?php $fileBtn = html::a($refUrl, $lang->guarder->created, "class='btn btn-sm btn-primary okFile'")?>
-    <?php $mailBtn = html::submitButton();?>
-    <?php $questionBtn = html::submitButton();?>
     <table class='table table-form'>
       <tr>
         <th class='w-100px'><?php echo $lang->guarder->options;?></th>
@@ -55,7 +53,7 @@ $(document).ready(function()
         <th></th>
         <?php if(!empty($question)):?>
         <td class='w-300px' colspan='2'>
-          <p><?php echo json_decode($question)->question;?></p>
+          <p><?php echo $question->question;?></p>
           <p><?php echo html::input('answer', '', "class='form-control' placeholder={$lang->guarder->answer}");?></p>
         </td>
         <?php endif;?>
@@ -94,7 +92,7 @@ $(document).ready(function()
       <?php endif;?>
       <tr class='submit-button'>
         <th></th>
-        <td colspan='3'><?php echo $mailBtn;?></td>
+        <td colspan='3'><?php echo html::submitButton();?></td>
       </tr>
     </table>
   </form>

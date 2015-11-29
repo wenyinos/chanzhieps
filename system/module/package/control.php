@@ -111,7 +111,7 @@ class package extends control
     public function install($package, $downLink = '', $md5 = '', $type = '', $overridePackage = 'no', $ignoreCompatible = 'no', $overrideFile = 'no', $agreeLicense = 'no', $upgrade = 'no')
     {
         $this->view->canManage = array('result' => 'success');
-        if($downLink) $this->view->canManage = $this->loadModel('common')->verfyAdmin();
+        if($downLink) $this->view->canManage = $this->loadModel('common')->verifyAdmin();
         set_time_limit(0);
         unset($this->lang->package->menu);
         
@@ -400,7 +400,7 @@ class package extends control
      */
     public function upload($type = 'extension')
     {
-        $canManage = $this->loadModel('common')->verfyAdmin();
+        $canManage = $this->loadModel('common')->verifyAdmin();
         $this->view->canManage = $canManage;
 
         if($_SERVER['REQUEST_METHOD'] == 'POST')

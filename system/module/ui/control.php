@@ -289,7 +289,7 @@ class ui extends control
      */
     public function uploadTheme()
     {
-        $canManage = $this->loadModel('common')->verfyAdmin();
+        $canManage = $this->loadModel('common')->verifyAdmin();
         $this->view->canManage = $canManage;
 
         if($_SERVER['REQUEST_METHOD'] == 'POST')

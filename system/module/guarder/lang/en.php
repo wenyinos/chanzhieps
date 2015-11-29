@@ -111,5 +111,5 @@ $lang->guarder->noConfigure   = "Can't find the configuration";
 $lang->guarder->noEmail       = "Can't find your email address";
 $lang->guarder->noQuestion    = "Can't find your security question";
 $lang->guarder->noCaptcha     = "can't send email captcha.";
-$lang->guarder->okFileVerfy   = "Create %s file.%s<br />";
+$lang->guarder->okFileVerfy   = "Create %s file.";
 $lang->guarder->sendSuccess   = 'Captcha has been sent to %s.';

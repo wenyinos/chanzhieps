@@ -60,7 +60,7 @@ class block extends control
 
         if($type == 'phpcode')
         {
-            $return = $this->loadModel('common')->verfyAdmin();
+            $return = $this->loadModel('common')->verifyAdmin();
             if($return['result'] == 'fail') $this->view->okFile = $return['okFile'];
             $canCreatePHP = $this->loadModel('guarder')->verify('okFile');
 
@@ -100,7 +100,7 @@ class block extends control
 
         if($type == 'phpcode')
         {
-            $return = $this->loadModel('common')->verfyAdmin();
+            $return = $this->loadModel('common')->verifyAdmin();
             if($return['result'] == 'fail') $this->view->okFile = $return['okFile'];
             $canCreatePHP = $this->loadModel('guarder')->verify('okFile');
 

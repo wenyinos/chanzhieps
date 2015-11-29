@@ -201,6 +201,7 @@ class guarder extends control
         if($url == '')     $url     = helper::safe64Encode('close');
         if($account == '') $account = $this->app->user->account;
         if($type != '' and $type != 'okFile' and $type != 'email') $type = '';
+        $question = $this->guarder->getSecurityQuestion($account);;
 
         if($_POST)
         {
@@ -213,7 +214,7 @@ class guarder extends control
             }
             elseif($type == 'securityQuestion')
             {
-                if(!($this->post->answer) or md5(trim($this->post->answer)) != json_decode($this->app->user->securityQuestion)->answer) $this->send(array('result' => 'fail', 'message' => $this->lang->guarder->questionFail));
+                if(!($this->post->answer) or md5(trim($this->post->answer)) != $question->answer) $this->send(array('result' => 'fail', 'message' => $this->lang->guarder->questionFail));
                 $this->session->set('verify', 6);
             }
             $this->send(array('result' => 'success', 'message' => $this->lang->mail->verifySuccess, 'locate' => helper::safe64Decode($url), 'target' => $target));
@@ -221,18 +222,19 @@ class guarder extends control
 
         $this->session->set('verify', '');
 
-        $okFile = $this->loadModel('common')->verfyAdmin();
+        $okFile = $this->loadModel('common')->verifyAdmin();
         $pass   = $this->guarder->verify($type);
 
         $user = $this->loadModel('user')->getByAccount($account);
-        $this->view->title   = $this->lang->mail->verify;
-        $this->view->url     = $url;
-        $this->view->target  = $target;
-        $this->view->account = $account;
-        $this->view->type    = $type;
-        $this->view->email   = $user->email;
-        $this->view->okFile  = $okFile;
-        $this->view->pass    = $pass;
+        $this->view->title    = $this->lang->mail->verify;
+        $this->view->url      = $url;
+        $this->view->target   = $target;
+        $this->view->account  = $account;
+        $this->view->question = $question;
+        $this->view->type     = $type;
+        $this->view->email    = $user->email;
+        $this->view->okFile   = $okFile;
+        $this->view->pass     = $pass;
         $this->display();
     }
 }

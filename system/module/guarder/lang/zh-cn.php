@@ -47,7 +47,7 @@ $lang->guarder->noConfigure      = "无法找到发信配置信息";
 $lang->guarder->noEmail          = "未填写个人邮箱";
 $lang->guarder->noQuestion       = "未设置密保问题";
 $lang->guarder->noCaptcha        = "邮箱验证无法启用。";
-$lang->guarder->okFileVerfy      = "请创建并编辑 %s 文件，填写内容： %s 。";
+$lang->guarder->okFileVerfy      = "请在服务器创建 %s 文件。";
 $lang->guarder->sendSuccess      = '验证码已发送至 %s';
 $lang->guarder->options          = '验证方式';
 

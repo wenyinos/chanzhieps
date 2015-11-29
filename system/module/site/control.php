@@ -148,7 +148,7 @@ class site extends control
 
         if($captcha or $checkEmail or $front or $checkLocation or $checkSessionIP or $allowedIP or $importantChange)
         {
-            $okFile = $this->loadModel('common')->verfyAdmin();
+            $okFile = $this->loadModel('common')->verifyAdmin();
             $pass   = $this->loadModel('guarder')->verify('okFile');
             $this->view->pass   = $pass;
             $this->view->okFile = $okFile;
