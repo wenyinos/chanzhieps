@@ -240,6 +240,7 @@ $lang->user->locationDenied       = '登录地区受限，请按提示操作。'
 $lang->user->loginLocationChanged = '登录地址发生变化，请按提示操作。';
 $lang->user->verifyFail           = '请填写正确的验证码';
 $lang->user->confirmUnbind        = '您确定要解除绑定吗？';
+$lang->user->forceYangcong        = '已开启强制洋葱登录，普通登录需要进行验证。';
 
 $lang->user->placeholder = new stdclass();
 $lang->user->placeholder->password   = '请输入您的网站登录密码';
