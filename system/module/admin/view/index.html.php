@@ -64,7 +64,7 @@
         <div class='panel-body'>
           <table class='table table-hover table-condensed'>
           <?php foreach($newOrders as $order):?> 
-          <?php $orderTitle = sprintf($lang->admin->orderTitle, $order->account, $order->amount);?>
+          <?php $orderTitle = sprintf($lang->admin->orderTitle, $order->account, $currencySymbol . $order->amount);?>
           <tr>
             <td><?php commonModel::printLink('order', 'admin','', $orderTitle, "target='_blank'");?></td>
             <td><?php echo substr($order->createdDate, -8);?></td>

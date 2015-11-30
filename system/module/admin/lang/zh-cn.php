@@ -19,10 +19,9 @@ $lang->admin->thread       = '最新帖子';
 $lang->admin->order        = '最新订单';
 $lang->admin->contribution = '最新投稿';
 $lang->admin->feedback     = '最新反馈';
-$lang->admin->category     = '文章类目';
 
 $lang->admin->adminEntry  = '警告：您现在的管理入口还是默认的admin.php，建议将admin.php改名以增强系统安全!';
-$lang->admin->orderTitle  = '用户 %s 创建了一笔 %s 元的订单';
+$lang->admin->orderTitle  = '用户 %s 创建了一笔 %s 的订单';
 $lang->admin->message     = '您今天有 %s 条留言待审核';
 $lang->admin->reply       = '您今天有 %s 条回复待审核';
 $lang->admin->comment     = '您今天有 %s 条评论待审核';

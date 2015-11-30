@@ -36,6 +36,7 @@ class admin extends control
         $this->view->articleCategories = $this->loadModel('tree')->getOptionMenu('article', 0, $removeRoot = true);
         $this->view->ignoreUpgrade     = isset($this->config->global->ignoreUpgrade) and $this->config->global->ignoreUpgrade;
         $this->view->checkLocation     = $this->loadModel('user')->checkLocation();
+        $this->view->currencySymbol    = $this->config->product->currencySymbol;
         $this->view->messages          = $messages;
         $this->display();
     }
