@@ -21,6 +21,8 @@ $lang->guarder->addCaptcha   = '添加验证码';
 $lang->guarder->getEmailCode = '获取邮箱验证码';
 
 $lang->guarder->captcha        = '验证码';
+$lang->guarder->question       = '问题';
+$lang->guarder->answer         = '答案';
 $lang->guarder->numbers        = array('零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖', '拾');
 $lang->guarder->operators      = array('*' => '乘', '-' => '减', '+' => '加');
 $lang->guarder->equal          = '=';
@@ -28,8 +30,6 @@ $lang->guarder->placeholder    = '数字、文字';
 $lang->guarder->password       = '管理密码';
 $lang->guarder->passwordHolder = '请输入当前帐号的密码';
 $lang->guarder->identityTip    = '请输入IP、 Email、用户名或敏感词';
-$lang->guarder->question       = '问题';
-$lang->guarder->answer         = '答案';
 $lang->guarder->captchaTip     = '自定义验证码后, 前台将只随机调用此组验证码';
 
 $lang->guarder->verify           = '为了安全起见，当前操作需要验证您的管理员权限';

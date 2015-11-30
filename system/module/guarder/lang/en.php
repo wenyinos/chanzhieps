@@ -13,12 +13,16 @@ $lang->guarder = new stdclass();
 
 $lang->guarder->action       = 'Action';
 $lang->guarder->then         = 'Then';
+$lang->guarder->setBlacklist = 'Blacklist';
 $lang->guarder->setWhitelist = 'Whitelist';
+$lang->guarder->setCaptcha   = 'Captcha';
 $lang->guarder->addBlacklist = 'Add blacklist';
 $lang->guarder->addCaptcha   = 'Add captcha';
 $lang->guarder->getEmailCode = 'Get email code';
 
 $lang->guarder->captcha        = 'Captcha';
+$lang->guarder->question       = 'Question';
+$lang->guarder->answer         = 'Answer';
 $lang->guarder->numbers        = array('Zero', 'I', 'II', 'III', 'Four', 'Five', '6', '7', '8', '9', '10');
 $lang->guarder->operators      = array('*' => 'x', '-' => '-', '+' => '+');
 $lang->guarder->equal          = '=';
@@ -26,6 +30,7 @@ $lang->guarder->placeholder    = 'Nubmer 、words';
 $lang->guarder->password       = 'Admin Password';
 $lang->guarder->passwordHolder = 'Please enter password of current account';
 $lang->guarder->identityTip    = 'Please input IP, Email, Account or Sensitive words';
+$lang->guarder->captchaTip     = 'The front desk will call this group captchas randomly after setting them.';
 
 $lang->guarder->blacklistModes['all']      = 'all';
 $lang->guarder->blacklistModes['ip']       = 'ip';

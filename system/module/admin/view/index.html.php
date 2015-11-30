@@ -60,45 +60,11 @@
     </div>
     <div class='col-xs-4'>
       <div class='panel'>
-        <div class='col-md-4'> 
-          <div class="shortcut article-admin">
-            <?php echo html::a($this->createLink('article', 'create'), '<h3>' . $lang->admin->shortcuts->article . '</h3>')?>
-          </div>
-        </div>
-        <div class='col-md-4'>
-          <div class="shortcut product-admin">
-            <?php echo html::a($this->createLink('product', 'create'), '<h3>' . $lang->admin->shortcuts->product . '</h3>')?>
-          </div>
-        </div>
-        <div class='col-md-4'>
-          <div class="shortcut feedback-admin">
-            <?php echo html::a($this->createLink('message', 'admin'), '<h3>' . $lang->admin->shortcuts->feedback . '</h3>')?>  
-          </div>
-        </div>
-        <div class='col-md-4'>
-          <div class="shortcut site-admin">
-            <?php echo html::a($this->createLink('site', 'setBasic'), '<h3>' . $lang->admin->shortcuts->site . '</h3>')?>
-          </div>
-        </div>
-        <div class='col-md-4'>
-          <div class="shortcut company-admin">
-            <?php echo html::a($this->createLink('company', 'setBasic'), '<h3>' . $lang->admin->shortcuts->company . '</h3>')?>
-          </div>
-        </div>
-        <div class='col-md-4'>
-          <div class="shortcut contact-admin">
-            <?php echo html::a($this->createLink('company', 'setcontact'), '<h3>' . $lang->admin->shortcuts->contact . '</h3>')?>  
-          </div>
-        </div>      
-      </div>
-    </div>
-    <div class='col-xs-4'>
-      <div class='panel'>
         <div class='panel-heading'><strong><?php echo $lang->admin->order;?></strong></div>
         <div class='panel-body'>
           <table class='table table-hover table-condensed'>
           <?php foreach($newOrders as $order):?> 
-          <?php $orderTitle = sprintf($lang->admin->orderTitle, $order->account, $order->amount);?>
+          <?php $orderTitle = sprintf($lang->admin->orderTitle, $order->account, $currencySymbol . $order->amount);?>
           <tr>
             <td><?php commonModel::printLink('order', 'admin','', $orderTitle, "target='_blank'");?></td>
             <td><?php echo substr($order->createdDate, -8);?></td>
@@ -146,16 +112,30 @@
       </div>
     </div>
     <div class='col-xs-4'>
-      <div class='panel'>
-        <div class='panel-heading'><strong><?php echo $lang->admin->category;?></strong></div>
-        <div class='panel-body'>
-          <table class='table table-hover table-condensed'>
-          <?php foreach($categories as $key => $category):?> 
-          <tr>
-            <td><?php commonmodel::printLink('article', 'admin', "type=article&categoryID={$key}", $category, "target='_blank'");?></td>
-          </tr>
-          <?php endforeach;?>
-          </table>
+      <div class='row panel'>
+        <div class='panel-heading'><strong><?php echo $lang->admin->shortcuts->common;?></strong></div>
+        <div class='panel-body shortcutGroup'>
+          <div class='btn btn-success shortcut'> 
+          <?php 
+            if(!empty($articleCategories)) echo html::a($this->createLink('article', 'create'), $lang->admin->shortcuts->article);
+            else echo html::a($this->createLink('tree', 'browse',"type=article"), $lang->admin->shortcuts->articleCategories)
+          ?>
+          </div>
+          <div class='btn btn-success shortcut'>
+            <?php echo html::a($this->createLink('product', 'create'), $lang->admin->shortcuts->product);?>
+          </div>
+          <div class='btn btn-success shortcut'>
+            <?php echo html::a($this->createLink('message', 'admin'), $lang->admin->shortcuts->feedback);?>  
+          </div>
+          <div class='btn btn-success shortcut'>
+            <?php echo html::a($this->createLink('site', 'setBasic'), $lang->admin->shortcuts->site);?>
+          </div>
+          <div class='btn btn-success shortcut'>
+            <?php echo html::a($this->createLink('company', 'setBasic'), $lang->admin->shortcuts->company);?>
+          </div>
+          <div class='btn btn-success shortcut'>
+            <?php echo html::a($this->createLink('company', 'setcontact'), $lang->admin->shortcuts->contact)?>  
+          </div>      
         </div>
       </div>
     </div>

@@ -1,19 +1,4 @@
-#shortcutBox {margin-top:30px;}
-.col-md-4{padding: 0;}
-#shortcutBox .shortcut {transition: all .3s; -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; text-align:center;}
-#shortcutBox .shortcut:hover {opacity: 0.8; -moz-opacity: 0.8;}
-
-#shortcutBox h3 {margin: 0; line-height: 100px; font-size: 18px; color: #FFFFFF; font-weight: 500;}
-#shortcutBox a:hover {text-decoration: none;}
-
-@media(max-width:992px){#shortcutBox{margin-top: 20px;}}
-@media(max-width:768px){#shortcutBox{margin-top: -20px;}}
-
-.article-admin  {background: #FA9A5B;}
-.feedback-admin {background: #FA9A5B;}
-.company-admin  {background: #FA9A5B;}
-.site-admin     {background: #6685FF;}
-.product-admin  {background: #6685FF;}
-.contact-admin  {background: #6685FF;}
-
 .panel-body{padding: 0; height: 170px; overflow: auto;}
+.panel-body.shortcutGroup{text-align: center; padding-top: 32px;}
+.shortcut{margin: 10px 15px;}
+.shortcut > a{color: #fff;}
