@@ -995,7 +995,6 @@ class uiModel extends model
         $content     = var_export(file_get_contents($file), true);
         $phpCodes    = <<<EOT
 <?php\n
-if(strpos(DOMAIN_FIX, ",{\$_SERVER['HTTP_HOST']},") !== false) die();
 header('Content-type: $contentType');\n
 echo $content;\n
 exit;
@@ -1014,9 +1013,8 @@ EOT;
      */
     public function createHookFile($template, $theme, $code)
     {
-        $hookPath = $this->directories->encryptPath . 'system' . DS . 'module' . DS . 'ui' . DS . 'ext' . DS . 'model' . DS;
         if(!is_dir($hookPath)) mkdir($hookPath, 0777, true);
-        $hookFile = $hookPath . "{$template}.{$code}.theme.php";
+        $hookFile = $this->directories->encryptLessPath . helper::createRandomStr(6, $skip = '0-9A-Z') . ".theme.php";
         $params   = $this->getCustomParams($template, $theme);
 
         $css = var_export($params['css'], true);
@@ -1027,20 +1025,26 @@ EOT;
 
         $params = var_export($params, true);
         $code   = "<?php
-public function show_THEME_CODEFIX_CSS()
+if(!function_exists('get_THEME_CODEFIX_CSS'))
 {
-    if(strpos(DOMAIN_FIX, \",{\$_SERVER['HTTP_HOST']},\") !== false) die();
-    return $css;
+    function get_THEME_CODEFIX_CSS()
+    {
+        return $css;
+    }
 }
-public function show_THEME_CODEFIX_JS()
+if(!function_exists('get_THEME_CODEFIX_JS'))
 {
-    if(strpos(DOMAIN_FIX, \",{\$_SERVER['HTTP_HOST']},\") !== false) die();
-    return $js;
+    function get_THEME_CODEFIX_JS()
+    {
+        return $js;
+    }
 }
-public function get_THEME_CODEFIX_params()
+if(!function_exists('get_THEME_CODEFIX_params'))
 {
-    if(strpos(DOMAIN_FIX, \",{\$_SERVER['HTTP_HOST']},\") !== false) die();
-    return $params;
+    function get_THEME_CODEFIX_params()
+    {
+        return $params;
+    }
 }
 ";
         return file_put_contents($hookFile, $code);
