@@ -79,8 +79,9 @@ $lang->user->reduceScore     = 'Deduct Score';
 $lang->user->yangcongLogin   = 'Yangcong Login';
 $lang->user->bindAccount     = 'Bind Account';
 $lang->user->batchDelete     = 'Batch delete users';
-$lang->user->question        = 'Security question';
 $lang->user->deleteHistory   = 'Delete user and history data';
+$lang->user->question        = 'Security question';
+$lang->user->answer          = 'Answer';
 
 $lang->user->profile      = 'Profile';
 $lang->user->editProfile  = 'Edit profile';

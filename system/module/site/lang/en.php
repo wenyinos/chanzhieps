@@ -173,6 +173,7 @@ $lang->site->changeLocation   = 'Your current login location not in allowed loca
 $lang->site->sessionIpTip     = 'If opened login ip would be checked.';
 $lang->site->schemeTip        = 'Redirect all request to this scheme.';
 $lang->site->saveDaysTip      = "The access logs' save day must be a positive number.";
+$lang->site->yangcongTip      = 'After opening force yangcong login, you can open security question login as a backup through setting security question.';
 
 $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Can not write robots file, please make sure %s writeable first.';
