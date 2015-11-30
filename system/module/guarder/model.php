@@ -46,7 +46,7 @@ class guarderModel extends model
     public function create4Comment()
     {
         $guarder = $this->createCaptcha();
-        $input = 'captcha_' . mt_rand(); 
+        $input   = helper::createRandomStr(8, $skip='A-Z'); 
 
         $this->session->set('captchaInput', $input);
         shuffle($this->config->guarder->captchaTags);
@@ -76,7 +76,7 @@ EOT;
     public function create4Reply()
     {
         $guarder = $this->createCaptcha();     
-        $input = 'captcha_' . mt_rand(); 
+        $input   = helper::createRandomStr(8, $skip='A-Z'); 
         $this->session->set('captchaInput', $input);
         shuffle($this->config->guarder->captchaTags);
         $htmlTag = current($this->config->guarder->captchaTags);
@@ -105,7 +105,7 @@ EOT;
     public function create4Thread()
     {
         $guarder = $this->createCaptcha();
-        $input = 'captcha_' . mt_rand(); 
+        $input   = helper::createRandomStr(8, $skip='A-Z'); 
         $this->session->set('captchaInput', $input);
         shuffle($this->config->guarder->captchaTags);
         $htmlTag = current($this->config->guarder->captchaTags);
@@ -134,7 +134,7 @@ EOT;
     public function create4MessageReply()
     {
         $guarder = $this->createCaptcha();
-        $input = 'captcha_' . mt_rand(); 
+        $input   = helper::createRandomStr(8, $skip='A-Z'); 
         $this->session->set('captchaInput', $input);
         shuffle($this->config->guarder->captchaTags);
         $htmlTag = current($this->config->guarder->captchaTags);
@@ -399,13 +399,13 @@ EOT;
      */
     public function verify($importantValidate = '')
     {
-        if($importantValidate != '') $this->config->site->importantValidate = $importantValidate;
+        if($importantValidate == '') $importantValidate = $this->config->site->importantValidate;
         $importantValidate = explode(',', $importantValidate);
-        if(empty($importantValidate)) return true;
+        if(empty($importantValidate)) return true;;
 
         if(in_array('okFile', $importantValidate))
         {
-            $okFile = $this->loadModel('common')->verfyAdmin();
+            $okFile = $this->loadModel('common')->verifyAdmin();
             if($okFile['result'] == 'success') return true;
         }
 
@@ -416,5 +416,20 @@ EOT;
         }
 
         return false;
+    }
+
+    /**
+     * Get security question.
+     *
+     * @param  string $account
+     * @access public
+     * @return void
+     */
+    public function getSecurityQuestion($account)
+    {
+        $question = $this->dao->select('securityQuestion')->from(TABLE_USER)
+            ->where('account')->eq($account)
+            ->fetch('securityQuestion');
+        return json_decode($question);
     }
 }

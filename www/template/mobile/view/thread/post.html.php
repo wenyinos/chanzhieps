@@ -30,10 +30,10 @@
 <?php endif;?>
 <form id='postThreadForm' method='post' action='<?php echo $this->createLink('thread', 'post', "boardID=$board->id");?>'>
   <div class='form-group'>
-    <?php echo html::input('title', '', "class='form-control' placeholder='{$lang->thread->title}'");?>
+    <?php echo html::input($titleInput, '', "class='form-control' placeholder='{$lang->thread->title}'");?>
   </div>
   <div class='form-group'>
-    <?php echo html::textarea('content', '', "class='form-control' rows='15' placeholder='{$lang->thread->content}'");?>
+    <?php echo html::textarea($contentInput, '', "class='form-control' rows='15' placeholder='{$lang->thread->content}'");?>
   </div>
   <?php if($this->loadModel('file')->canUpload()):?>
   <?php // TODO: support upload files ?>

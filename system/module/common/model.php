@@ -924,12 +924,12 @@ class commonModel extends model
     }
 
     /**
-     * Verfy administrator through ok file.
+     * Verify administrator through ok file.
      *
      * @access public
      * @return array
      */
-    public function verfyAdmin()
+    public function verifyAdmin()
     {
         if($this->session->okFileName == false or $this->session->okFileName == '')
         {

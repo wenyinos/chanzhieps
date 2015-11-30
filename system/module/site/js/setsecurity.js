@@ -24,10 +24,10 @@ $(document).ready(function()
     });
 
     $.setAjaxForm('#securityForm', function(response)
-    {   
+    {
         if(response.result == 'fail' && response.reason == 'captcha')
         {
             $('.captchaModal').click();
-        }   
-    }); 
+        }
+    });
 });
