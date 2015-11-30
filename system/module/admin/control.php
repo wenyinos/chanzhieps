@@ -33,11 +33,10 @@ class admin extends control
         }
         if(commonModel::isAvailable('order')) $this->view->newOrders = $this->loadModel('order')->getNewOrders();
         if(commonModel::isAvailable('contribution')) $this->view->newContributions = $this->loadModel('article')->getContributions();
-        if(commonModel::isAvailable('article')) $this->view->categories = $this->loadModel('tree')->getOptionMenu('article', 0, $removeRoot = true);
-
-        $this->view->ignoreUpgrade = isset($this->config->global->ignoreUpgrade) and $this->config->global->ignoreUpgrade;
-        $this->view->checkLocation = $this->loadModel('user')->checkLocation();
-        $this->view->messages      = $messages;
+        $this->view->articleCategories = $this->loadModel('tree')->getOptionMenu('article', 0, $removeRoot = true);
+        $this->view->ignoreUpgrade     = isset($this->config->global->ignoreUpgrade) and $this->config->global->ignoreUpgrade;
+        $this->view->checkLocation     = $this->loadModel('user')->checkLocation();
+        $this->view->messages          = $messages;
         $this->display();
     }
 
