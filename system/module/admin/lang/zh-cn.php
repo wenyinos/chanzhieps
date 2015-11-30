@@ -5,7 +5,7 @@ $lang->admin->ignore        = '忽略安全警告';
 $lang->admin->ignoreupgrade = '忽略升级提示';
 
 $lang->admin->shortcuts = new stdclass();
-$lang->admin->shortcuts->common             = '快捷按钮';
+$lang->admin->shortcuts->common             = '快捷入口';
 $lang->admin->shortcuts->articleCategories  = '文章类目';
 $lang->admin->shortcuts->article            = '发布文章';
 $lang->admin->shortcuts->product            = '添加产品';

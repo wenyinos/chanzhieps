@@ -5,7 +5,7 @@ $lang->admin->ignore        = 'Ignore safety warning';
 $lang->admin->ignoreupgrade = 'Ignore upgrade prompt';
 
 $lang->admin->shortcuts = new stdclass();
-$lang->admin->shortcuts->common             = 'Shortcut Button';
+$lang->admin->shortcuts->common             = 'Quick Entry';
 $lang->admin->shortcuts->articleCategories  = 'Article Categories';
 $lang->admin->shortcuts->article            = 'Article';
 $lang->admin->shortcuts->product            = 'Product';

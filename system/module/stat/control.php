@@ -18,9 +18,9 @@ class stat extends control
      * @access public
      * @return void
      */
-    public function traffic($mode = 'today', $begin = '', $end = '')
+    public function traffic($mode = '', $begin = '', $end = '')
     {
-        if(!isset($this->get->mode) and date("h") < 10) $mode = 'yestoday';
+        if(!$mode) $mode = date("H") < 10 ? 'yestoday' : 'today';
         $date  = $this->stat->parseDate($mode, $begin, $end);
         $begin = $date->begin;
         $end   = $date->end;

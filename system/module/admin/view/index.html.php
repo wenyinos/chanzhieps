@@ -44,6 +44,22 @@
   <div class='row'>
     <div class='col-xs-4'>
       <div class='panel'>
+        <div class='panel-heading'><strong><?php echo $lang->admin->order;?></strong></div>
+        <div class='panel-body'>
+          <table class='table table-hover table-condensed'>
+          <?php foreach($newOrders as $order):?> 
+          <?php $orderTitle = sprintf($lang->admin->orderTitle, $order->account, $currencySymbol . $order->amount);?>
+          <tr>
+            <td><?php commonModel::printLink('order', 'admin','', $orderTitle, "target='_blank'");?></td>
+            <td><?php echo substr($order->createdDate, -8);?></td>
+          </tr>
+          <?php endforeach;?>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class='col-xs-4'>
+      <div class='panel'>
         <div class='panel-heading'><strong><?php echo $lang->admin->thread;?></strong></div>
         <div class='panel-body'>
           <table class='table table-hover table-condensed'>
@@ -60,16 +76,19 @@
     </div>
     <div class='col-xs-4'>
       <div class='panel'>
-        <div class='panel-heading'><strong><?php echo $lang->admin->order;?></strong></div>
+        <div class='panel-heading'><strong><?php echo $lang->admin->feedback;?></strong></div>
         <div class='panel-body'>
           <table class='table table-hover table-condensed'>
-          <?php foreach($newOrders as $order):?> 
-          <?php $orderTitle = sprintf($lang->admin->orderTitle, $order->account, $currencySymbol . $order->amount);?>
+          <?php foreach($messages as $type => $message):?> 
+          <?php $messageTitle     = sprintf($lang->admin->$type, $message);?>
           <tr>
-            <td><?php commonModel::printLink('order', 'admin','', $orderTitle, "target='_blank'");?></td>
-            <td><?php echo substr($order->createdDate, -8);?></td>
+            <td><?php commonModel::printLink('message', 'admin', "type={$type}", $messageTitle, "target='_blank'");?></td>
           </tr>
           <?php endforeach;?>
+          <tr>
+            <?php $threadReplyTitle = sprintf($lang->admin->threadReply, $threadReply);?>
+            <td><?php commonModel::printLink('reply', 'admin', "order=id_desc&tab=feedback", $threadReplyTitle, "target='_blank'");?></td>
+          </tr>
           </table>
         </div>
       </div>
@@ -92,25 +111,6 @@
       </div>
     </div>
     <?php endif;?>
-    <div class='col-xs-4'>
-      <div class='panel'>
-        <div class='panel-heading'><strong><?php echo $lang->admin->feedback;?></strong></div>
-        <div class='panel-body'>
-          <table class='table table-hover table-condensed'>
-          <?php foreach($messages as $type => $message):?> 
-          <?php $messageTitle     = sprintf($lang->admin->$type, $message);?>
-          <tr>
-            <td><?php commonModel::printLink('message', 'admin', "type={$type}", $messageTitle, "target='_blank'");?></td>
-          </tr>
-          <?php endforeach;?>
-          <tr>
-            <?php $threadReplyTitle = sprintf($lang->admin->threadReply, $threadReply);?>
-            <td><?php commonModel::printLink('reply', 'admin', "order=id_desc&tab=feedback", $threadReplyTitle, "target='_blank'");?></td>
-          </tr>
-          </table>
-        </div>
-      </div>
-    </div>
     <div class='col-xs-4'>
       <div class='row panel'>
         <div class='panel-heading'><strong><?php echo $lang->admin->shortcuts->common;?></strong></div>

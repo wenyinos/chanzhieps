@@ -81,8 +81,9 @@ $(document).ready(function()
         <td><?php echo html::a($this->createLink('mail', 'sendmailcode', "account=$account"), $lang->guarder->getEmailCode, "id='mailSender' class='btn btn-success'");?></td>
       </tr>
       <?php else:?>
-      <tr>
-        <td>
+      <tr class='option-email'>
+        <th></th>
+        <td colspan='3'>
           <?php if(empty($email)) echo $lang->guarder->noEmail;?>
           <?php if(!$this->config->mail->turnon) echo '&nbsp;' . $lang->guarder->noConfigure;?>
           <?php if(!$this->config->mail->turnon or empty($email)) echo $lang->guarder->noCaptcha;?>
