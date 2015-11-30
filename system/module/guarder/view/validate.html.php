@@ -5,8 +5,12 @@
 <script>
 $(document).ready(function()
 {
-    $('#formError').remove();
-    setTimeout(function(){$('#ajaxModal button.close').click()}, 500);
+    $('#formError').hide();
+    setTimeout(function()
+    {
+        $('#ajaxModal button.close').click();
+        $('#submit').click();
+    }, 500);
 });
 </script>
 <div class='alert'><?php echo $lang->guarder->verifySuccess;?></div>
@@ -25,7 +29,7 @@ $(document).ready(function()
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">X</span></button>
-          <h4 class="modal-title"><?php echo $lang->validate->verify?></h4>
+          <h4 class="modal-title"><?php echo $lang->guarder->verify?></h4>
         </div>
         <div class="modal-body">
   <?php endif;?>
@@ -43,7 +47,7 @@ $(document).ready(function()
           if(in_array('okFile', $options)) $types['okFile'] = $lang->site->validateTypes->okFile;
           if(in_array('email', $options)) $types['email'] = $lang->site->validateTypes->email;
           ?>
-          <?php 
+          <?php
           echo html::radio('type[]', $types, isset($types[$this->cookie->validate]) ? $this->cookie->validate : key($types));
           ?>
         </td>
@@ -73,12 +77,8 @@ $(document).ready(function()
       <?php if(!empty($email) and $this->config->mail->turnon):?>
       <tr class='option-email'>
         <th></th>
-        <td>
-          <?php echo html::input('captcha', '', "class='form-control' placeholder={$lang->guarder->captcha}");?>
-        </td>
-        <td>
-          <?php echo html::a($this->createLink('mail', 'sendmailcode', "account=$account"), $lang->guarder->getEmailCode, "id='mailSender' class='btn btn-success'");?>
-        </td>
+        <td><?php echo html::input('captcha', '', "class='form-control' placeholder={$lang->guarder->captcha}");?></td>
+        <td><?php echo html::a($this->createLink('mail', 'sendmailcode', "account=$account"), $lang->guarder->getEmailCode, "id='mailSender' class='btn btn-success'");?></td>
       </tr>
       <?php else:?>
       <tr>
@@ -133,8 +133,12 @@ $(document).ready(function()
           {
               if(response.locate == 'close')
               {
-                  $('#formError').remove();
-                  return setTimeout(function(){$('#ajaxModal button.close').click()}, 1200);
+                  $('#formError').hide();
+                  return setTimeout(function()
+                  {
+                      $('#ajaxModal button.close').click();
+                      $('#submit').click();
+                  }, 1200);
               }
               if(response.target == 'modal')
               {

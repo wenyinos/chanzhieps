@@ -37,7 +37,6 @@ $lang->guarder->okFile           = '文件方式';
 $lang->guarder->created          = '我已创建';
 $lang->guarder->email            = '邮箱验证码';
 $lang->guarder->securityQuestion = '密保问题';
-$lang->guarder->answer           = '密保答案';
 $lang->guarder->captcha          = '验证码';
 $lang->guarder->needVerify       = '需要验证管理员身份';
 $lang->guarder->emailFail        = '请填写正确的验证码';

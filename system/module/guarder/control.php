@@ -205,14 +205,14 @@ class guarder extends control
 
         if($_POST)
         {
-            $type = current($this->post->type);
-            if($type == 'email')
+            $validateType = current($this->post->type);
+            if($validateType == 'email')
             {
                 if(!($this->post->captcha) or trim($this->post->captcha) != $this->session->verifyCode) $this->send(array('result' => 'fail', 'message' => $this->lang->guarder->emailFail));
                 $this->session->set('verifyCode', '');
                 $this->session->set('verify', 6);
             }
-            elseif($type == 'securityQuestion')
+            elseif($validateType == 'securityQuestion')
             {
                 if(!($this->post->answer) or md5(trim($this->post->answer)) != $question->answer) $this->send(array('result' => 'fail', 'message' => $this->lang->guarder->questionFail));
                 $this->session->set('verify', 6);
@@ -226,7 +226,7 @@ class guarder extends control
         $pass   = $this->guarder->verify($type);
 
         $user = $this->loadModel('user')->getByAccount($account);
-        $this->view->title    = $this->lang->mail->verify;
+        $this->view->title    = $this->lang->guarder->verify;
         $this->view->url      = $url;
         $this->view->target   = $target;
         $this->view->account  = $account;
