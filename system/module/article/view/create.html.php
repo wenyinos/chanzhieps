@@ -54,7 +54,7 @@
         </tbody>
         <?php endif; ?>
         <tr>
-          <th><?php echo $lang->article->title;?></th>
+          <th class='w-100px'><?php echo $lang->article->title;?></th>
           <td colspan='2'>
             <div class='row order input-group'>
               <div class="col-sm-<?php echo $type == 'page' ? '9' : '12';?>"><?php echo html::input('title', '', "class='form-control'");?></div>
