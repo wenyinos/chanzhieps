@@ -593,15 +593,19 @@ class control
             $template    = $this->config->template->{$this->device}->name;
             $theme       = $this->config->template->{$this->device}->theme;
             $customParam = json_decode($this->config->template->custom, true);
-
-            if(file_exists($this->app->getModulePath('ui') . 'ext' . DS . 'model' . DS . "{$template}.{$theme}.theme.php"))
+            $themeHooks  = $this->loadThemeHooks();
+            if(!empty($themeHooks))
             {
                 $this->loadModel('ui');
-                $cssFunction = "show{$theme}CSS";
-                $jsFunction  = "show{$theme}JS";
+                $cssFunction = "get{$theme}CSS";
+                $jsFunction  = "get{$theme}JS";
+                $encryptCSS  = function_exists($cssFunction) ? $cssFunction() : '';
+                $customCSS   = isset($customParam[$template][$theme]['css']) ? $customParam[$template][$theme]['css'] : '';
+                $encryptJS   = function_exists($jsFunction) ? $jsFunction() : '';
+                $customJS    = isset($customParam[$template][$theme]['js']) ? $customParam[$template][$theme]['js'] : '';
 
-                if(method_exists('extuiModel', $cssFunction)) $css = $this->ui->$cssFunction() . $customParam[$template][$theme]['css'] . $css;
-                if(method_exists('ui', $jsFunction)) $js = $this->ui->$jsFunction() . $customParam[$template][$theme]['js'] . $js;
+                $css = $encryptCSS . $customCSS . $css;
+                $js  = $encryptJS  . $customJS  . $js;
             }
         }
         if($css) $this->view->pageCSS = $css;
@@ -790,5 +794,21 @@ class control
     {
         header("location: $url");
         exit;
+    }
+
+    /**
+     * Load theme hooks.
+     * 
+     * @access public
+     * @return array
+     */
+    public function loadThemeHooks()
+    {
+        $theme    = $this->config->template->{$this->device}->theme;
+        $hookPath = dirname(TPL_ROOT) . DS . 'theme' . DS . $theme . DS;
+        $hookFiles = glob("{$hookPath}*.theme.php");
+
+        foreach($hookFiles as $file) include $file;
+        return $hookFiles;
     }
 }
