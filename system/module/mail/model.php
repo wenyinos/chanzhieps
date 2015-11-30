@@ -378,56 +378,6 @@ class mailModel extends model
     }
 
     /**
-     * Check verify.
-     * 
-     * @param  string $importantValidate 
-     * @access public
-     * @return bool
-     */
-    public function checkVerify($importantValidate = '')
-    {
-        if($importantValidate != '') $this->config->site->importantValidate = $importantValidate;
-        $okFileChecked = false;
-        $checkOkFile   = true;
-
-        if(isset($this->config->site->importantValidate) and strpos($this->config->site->importantValidate, 'okFile') === false)
-        {
-            $checkOkFile = false;
-        }
-
-        $okFile = $this->loadModel('common')->verfyAdmin();
-        if($okFile['result'] == 'success') $okFileChecked = true;
-
-        $captchaChecked = false;
-        $checkCaptcha   = true;
-
-        /* check session.*/
-        if(isset($this->config->site->importantValidate) and strpos($this->config->site->importantValidate, 'email') === false)
-        {
-            $checkCaptcha = false;
-        }
-
-        if($this->session->verify and $this->session->verify > 0) 
-        {
-            $this->session->set('verify', $this->session->verify - 1);
-            if(empty($_POST))
-            {
-                if($this->session->verify > 0) $captchaChecked = true;
-            }
-            else
-            {
-                $captchaChecked = true;
-            }
-        }
-
-        if(!$checkCaptcha  and !$checkOkFile) return true;
-        if($okFileChecked  and $checkOkFile)  return true;
-        if($captchaChecked and $checkCaptcha) return true;
-
-        return false;
-    }
-
-    /**
      * Is error?
      * 
      * @access public

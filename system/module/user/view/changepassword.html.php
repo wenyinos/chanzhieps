@@ -23,9 +23,9 @@
   </table>
 </form>
 <?php else:?>
-<?php 
+<?php
 $url = helper::safe64Encode($this->createLink('user', 'changepassword'));
-include '../../mail/view/captcha.html.php';
+include '../../guarder/view/validate.html.php';
 ?>
 <?php endif;?>
 <?php include '../../common/view/footer.modal.html.php';?>

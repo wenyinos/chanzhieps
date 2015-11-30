@@ -133,16 +133,23 @@ class site extends control
         $checkSessionIP = (isset($this->config->site->checkSessionIP) and $this->config->site->checkSessionIP == 1 and $this->post->checkSessionIP == 0);
         $allowedIP      = (isset($this->config->site->allowedIP) and ($this->config->site->allowedIP != $this->post->allowedIP));
 
-        $newImportantValidate = $this->post->importantValidate ? implode(',', $this->post->importantValidate) : '';
-        $oldImportantValidate = $this->config->site->importantValidate;
-        $importantValidate    = (($oldImportantValidate == 'okFile,email' and (!$newImportantValidate or $newImportantValidate == 'okFile' or $newImportantValidate == 'email'))
-                                or ($oldImportantValidate == 'okFile' and (!$newImportantValidate or $newImportantValidate == 'email'))
-                                or ($oldImportantValidate == 'email' and (!$newImportantValidate or $newImportantValidate == 'okFile')));
+        $newImportantValidate = $this->post->importantValidate ? $this->post->importantValidate : array();
+        $oldImportantValidate = explode(',', $this->config->site->importantValidate);
 
-        if($captcha or $checkEmail or $front or $checkLocation or $checkSessionIP or $allowedIP or $importantValidate)
+        $importantChange = false;
+        foreach($oldImportantValidate as $validate)
+        {
+            if(!in_array($validate, $newImportantValidate))
+            {
+                $importantChange = true;
+                break;
+            }
+        }
+
+        if($captcha or $checkEmail or $front or $checkLocation or $checkSessionIP or $allowedIP or $importantChange)
         {
             $okFile = $this->loadModel('common')->verfyAdmin();
-            $pass   = $this->loadModel('mail')->checkVerify('okFile');
+            $pass   = $this->loadModel('guarder')->verify('okFile');
             $this->view->pass   = $pass;
             $this->view->okFile = $okFile;
             if(!empty($_POST) && !$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha'));

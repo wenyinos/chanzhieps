@@ -18,6 +18,7 @@ $lang->guarder->setWhitelist = '白名单管理';
 $lang->guarder->setCaptcha   = '验证码管理';
 $lang->guarder->addBlacklist = '添加黑名单';
 $lang->guarder->addCaptcha   = '添加验证码';
+$lang->guarder->getEmailCode = '获取邮箱验证码';
 
 $lang->guarder->captcha        = '验证码';
 $lang->guarder->numbers        = array('零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖', '拾');
@@ -30,6 +31,25 @@ $lang->guarder->identityTip    = '请输入IP、 Email、用户名或敏感词';
 $lang->guarder->question       = '问题';
 $lang->guarder->answer         = '答案';
 $lang->guarder->captchaTip     = '自定义验证码后, 前台将只随机调用此组验证码';
+
+$lang->guarder->verify           = '为了安全起见，当前操作需要验证您的管理员权限';
+$lang->guarder->okFile           = '文件方式';
+$lang->guarder->created          = '我已创建';
+$lang->guarder->email            = '邮箱验证码';
+$lang->guarder->securityQuestion = '密保问题';
+$lang->guarder->answer           = '密保答案';
+$lang->guarder->captcha          = '验证码';
+$lang->guarder->needVerify       = '需要验证管理员身份';
+$lang->guarder->emailFail        = '请填写正确的验证码';
+$lang->guarder->questionFail     = '请填写正确的密保答案';
+$lang->guarder->verifySuccess    = '验证通过，请继续操作';
+$lang->guarder->noConfigure      = "无法找到发信配置信息";
+$lang->guarder->noEmail          = "未填写个人邮箱";
+$lang->guarder->noQuestion       = "未设置密保问题";
+$lang->guarder->noCaptcha        = "邮箱验证无法启用。";
+$lang->guarder->okFileVerfy      = "请创建并编辑 %s 文件，填写内容： %s 。";
+$lang->guarder->sendSuccess      = '验证码已发送至 %s';
+$lang->guarder->options          = '验证方式';
 
 $lang->guarder->blacklistModes['all']      = '全部';
 $lang->guarder->blacklistModes['ip']       = 'ip地址';
