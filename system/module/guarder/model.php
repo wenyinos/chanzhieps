@@ -46,7 +46,7 @@ class guarderModel extends model
     public function create4Comment()
     {
         $guarder = $this->createCaptcha();
-        $input = 'captcha_' . mt_rand(); 
+        $input   = helper::createRandomStr(8, $skip='A-Z'); 
 
         $this->session->set('captchaInput', $input);
         shuffle($this->config->guarder->captchaTags);
@@ -76,7 +76,7 @@ EOT;
     public function create4Reply()
     {
         $guarder = $this->createCaptcha();     
-        $input = 'captcha_' . mt_rand(); 
+        $input   = helper::createRandomStr(8, $skip='A-Z'); 
         $this->session->set('captchaInput', $input);
         shuffle($this->config->guarder->captchaTags);
         $htmlTag = current($this->config->guarder->captchaTags);
@@ -105,7 +105,7 @@ EOT;
     public function create4Thread()
     {
         $guarder = $this->createCaptcha();
-        $input = 'captcha_' . mt_rand(); 
+        $input   = helper::createRandomStr(8, $skip='A-Z'); 
         $this->session->set('captchaInput', $input);
         shuffle($this->config->guarder->captchaTags);
         $htmlTag = current($this->config->guarder->captchaTags);
@@ -134,7 +134,7 @@ EOT;
     public function create4MessageReply()
     {
         $guarder = $this->createCaptcha();
-        $input = 'captcha_' . mt_rand(); 
+        $input   = helper::createRandomStr(8, $skip='A-Z'); 
         $this->session->set('captchaInput', $input);
         shuffle($this->config->guarder->captchaTags);
         $htmlTag = current($this->config->guarder->captchaTags);

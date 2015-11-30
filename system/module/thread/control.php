@@ -61,8 +61,8 @@ class thread extends control
             $this->send($result);
         }
 
-        $titleInput   = 'title' . mt_rand(); 
-        $contentInput = 'content' . mt_rand(); 
+        $titleInput   = helper::createRandomStr(6, $skip='A-Z'); 
+        $contentInput = helper::createRandomStr(7, $skip='A-Z'); 
         $this->session->set('titleInput', $titleInput);
         $this->session->set('contentInput', $contentInput);
         $this->config->thread->require->post = "{$this->session->titleInput}, {$this->session->contentInput}";
