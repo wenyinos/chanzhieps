@@ -123,13 +123,13 @@ class user extends control
                     if(!$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => $error, 'url' => $captchaUrl));
                 }
 
-                $checkIP            = $this->user->checkIP();
-                $checkLocation      = $this->user->checkLocation();
-                $checkLoginLocation = $this->user->checkLoginLocation($this->post->account);
-                if($user and (!$checkIP or !$checkLocation or !$checkLoginLocation))
+                $checkIP              = $this->user->checkIP();
+                $checkAllowedLocation = $this->user->checkAllowedLocation();
+                $checkLoginLocation   = $this->user->checkLoginLocation($this->post->account);
+                if($user and (!$checkIP or !$checkAllowedLocation or !$checkLoginLocation))
                 {
                     $error  = $checkIP ? '' : $this->lang->user->ipDenied;
-                    $error .= $checkLocation ? '' : $this->lang->user->locationDenied;
+                    $error .= $checkAllowedLocation ? '' : $this->lang->user->locationDenied;
                     $error .= $checkLoginLocation ? '' : $this->lang->user->loginLocationChanged;
                     $pass   = $this->loadModel('guarder')->verify();
                     $captchaUrl = $this->createLink('guarder', 'validate', "url=&target=modal&account={$this->post->account}");

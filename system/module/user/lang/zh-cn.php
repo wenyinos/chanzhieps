@@ -91,13 +91,13 @@ $lang->user->reply        = '我的回贴';
 $lang->user->contribution = '我的投稿';
 
 $lang->user->userHistory         = "用户历史数据";
-$lang->user->threadHistory       = "发帖数据";
-$lang->user->replyHistory        = "回帖数据";
-$lang->user->commentHistory      = "评论数据";
-$lang->user->messageHistory      = "留言数据";
-$lang->user->orderHistory        = "订单数据";
-$lang->user->addressHistory      = "地址数据";
-$lang->user->contributionHistory = "投稿数据";
+$lang->user->threadHistory       = "发帖";
+$lang->user->replyHistory        = "回帖";
+$lang->user->commentHistory      = "评论";
+$lang->user->messageHistory      = "留言";
+$lang->user->orderHistory        = "订单";
+$lang->user->addressHistory      = "地址";
+$lang->user->contributionHistory = "投稿";
 
 $lang->user->message = new stdclass();
 $lang->user->message->mine = "我的消息 <span class='label label-badge text-latin'>%s</span>";

@@ -47,9 +47,7 @@ $(document).ready(function()
           if(in_array('okFile', $options)) $types['okFile'] = $lang->site->validateTypes->okFile;
           if(in_array('email', $options)) $types['email'] = $lang->site->validateTypes->email;
           ?>
-          <?php
-          echo html::radio('type[]', $types, isset($types[$this->cookie->validate]) ? $this->cookie->validate : key($types));
-          ?>
+          <?php echo html::radio('type[]', $types, isset($types[$this->cookie->validate]) ? $this->cookie->validate : key($types));?>
         </td>
       </tr>
       <?php if(in_array('securityQuestion', $options)):?>
@@ -68,7 +66,7 @@ $(document).ready(function()
       <tr class='option-okfile'>
         <th></th>
         <td colspan='3'>
-          <p><?php printf($lang->guarder->okFileVerfy, $okFile['okFile'], $okFile['okFile']);?></p>
+          <p><?php printf($lang->guarder->okFileVerfy, $okFile['name'], $okFile['content']);?></p>
           <p><?php echo $fileBtn?></p>
         </td>
       </tr>
@@ -199,7 +197,12 @@ $(document).ready(function()
       $('[name*=type]').click(checkOptions);
 
       <?php if($target == 'modal'):?>
-      $.setAjaxLoader('.okFile', '#ajaxModal');
+      //$.setAjaxLoader('.okFile', '#ajaxModal');
+      $('.okFile').click(function()
+      {
+          $('#ajaxModal').load($(this).attr('href'));
+          return false;
+      })
       <?php endif;?>
   })
   </script>
