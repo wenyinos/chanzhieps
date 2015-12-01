@@ -209,6 +209,7 @@ class uiModel extends model
         if(isset($params)) $params = (array) $params;
         else $params = $this->getCustomParams($template, $theme);
         $baseStyle = zget($params, 'css');
+        $extraCss = isset($params['css']) ? $params['css'] : '';
         if(isset($params['css'])) unset($params['css']);
 
         $lessc   = $this->app->loadClass('lessc');
@@ -233,8 +234,6 @@ class uiModel extends model
             if(empty($value)) $params[$item] = 0;
             if(isset($fontsList[$value])) $params[$item] = $fontsList[$value];
         }
-
-        $extraCss = isset($params['css']) ? $params['css'] : '';
 
         unset($params['background-image-position']);
         unset($params['navbar-background-image-position']);

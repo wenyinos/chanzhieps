@@ -44,7 +44,7 @@
       </tbody>
       <?php endif; ?>
         <tr>
-          <th><?php echo $lang->article->title;?></th>
+          <th class='w-100px'><?php echo $lang->article->title;?></th>
           <td colspan='2'>
             <div class='row order input-group'>
               <div class="col-sm-<?php echo $type == 'page' ? '9' : '12';?>"><?php echo html::input('title', $article->title, "class='form-control'");?></div>
@@ -58,7 +58,8 @@
               <?php endif;?>
               <span class="input-group-addon w-70px">
                 <label class='checkbox'>
-                <?php echo "<input type='checkbox' name='isLink' id='isLink' value='1' /><span>{$lang->article->isLink}</span>" ?>
+                <?php $checked = $article->link ? 'checked' : '';?>
+                <?php echo "<input type='checkbox' name='isLink' id='isLink' value='1' {$checked}/><span>{$lang->article->isLink}</span>" ?>
                 </label>
               </span>
             </div>
