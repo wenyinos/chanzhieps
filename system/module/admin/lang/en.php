@@ -26,5 +26,6 @@ $lang->admin->message        = 'There are %s messages awaiting moderation';
 $lang->admin->reply          = 'There are %s replies awaiting moderation';
 $lang->admin->comment        = 'There are %s comments awaiting moderation';
 $lang->admin->threadReply    = 'There are %s replies to your thread today';
+$lang->admin->contribution   = 'There are %s contributions awaiting moderation today';
 $lang->admin->todayReport    = 'Today this site has %s PV,  %s UV , %s IP';
 $lang->admin->yestodayReport = 'Yestoday this site has %s PV,  %s UV , %s IP';

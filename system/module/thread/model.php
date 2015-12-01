@@ -683,6 +683,7 @@ EOT;
      */
     public function getNewThreads()
     {
+        $this->app->loadConfig('forum');
         $newThreads = $this->dao->select('*')->from(TABLE_THREAD)
             ->where('editedDate')->like(date("Y-m-d") . '%')
             ->beginIf($this->config->forum->postReview == 'open')

@@ -26,5 +26,6 @@ $lang->admin->message        = '您今天有 %s 条留言待审核';
 $lang->admin->reply          = '您今天有 %s 条回复待审核';
 $lang->admin->comment        = '您今天有 %s 条评论待审核';
 $lang->admin->threadReply    = '您今天有 %s 篇回帖';
+$lang->admin->contribution   = '您今天有 %s 篇投稿待审核';
 $lang->admin->todayReport    = '网站今日浏览量 %s , 访客数 %s , IP数 %s';
 $lang->admin->yestodayReport = '网站昨日浏览量 %s , 访客数 %s , IP数 %s';

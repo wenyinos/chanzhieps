@@ -19,6 +19,7 @@ class admin extends control
      */
     public function index()
     {
+        $this->app->loadConfig('product');
         $messages = new stdclass();
         if(commonModel::isAvailable('forum'))
         {
