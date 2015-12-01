@@ -439,4 +439,36 @@ class statModel extends model
             ->page($pager)
             ->fetchGroup('extra', 'timeValue');
     }
+
+    /**
+     * Get today report 
+     * 
+     * @access public
+     * @return array 
+     */
+    public function getTodayReport()
+    {
+        $todayReport = $this->dao->select('*')->from(TABLE_STATREPORT)
+            ->where('timeType')->eq('day')
+            ->andWhere('timeValue')->eq(date('Ymd'))
+            ->fetch(); 
+
+        return $todayReport;
+    }
+
+    /**
+     * Get yestoday report 
+     * 
+     * @access public
+     * @return array 
+     */
+    public function getYestodayReport()
+    {
+        $yestodayReport = $this->dao->select('*')->from(TABLE_STATREPORT)
+            ->where('timeType')->eq('day')
+            ->andWhere('timeValue')->eq(date('Ymd', strtotime("-1 day")))
+            ->fetch();
+
+        return $yestodayReport;
+    }
 }

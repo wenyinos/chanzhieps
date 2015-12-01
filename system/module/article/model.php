@@ -762,12 +762,12 @@ class articleModel extends model
      */
     public function getContributions()
     {
-        $contributions = $this->dao->select('*')->from(TABLE_ARTICLE)
+        $contributions = $this->dao->select('count(*) as count')->from(TABLE_ARTICLE)
             ->where('type')->eq('contribution')
             ->andWhere('contribution')->ne(3)
             ->andWhere('editedDate')->like(date("Y-m-d") . '%')
-            ->fetchAll();
+            ->fetch();
 
-        return $contributions;
+        return $contributions->count;
     }
 }

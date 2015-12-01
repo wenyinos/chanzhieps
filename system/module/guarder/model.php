@@ -52,15 +52,16 @@ class guarderModel extends model
         shuffle($this->config->guarder->captchaTags);
         $htmlTag = current($this->config->guarder->captchaTags);
         list($leftTag, $rightTag) = explode('|', $htmlTag);
+        $equal = empty($this->config->guarder->captchas) ? "</td><td class='text-lg text-center w-40px'> {$this->lang->guarder->equal} </td><td>" : '';
 
         return <<<EOT
 <label for='captcha' class='col-sm-1 control-label'>{$this->lang->guarder->captcha}</label>
 <div class='col-sm-11 required'>
   <table class='captcha'>
       <tr class='text-middle'>
-        <td class='text-lg w-110px'>{$leftTag}{$guarder}{$rightTag}</td>
-        <td class='text-lg text-center w-40px'> {$this->lang->guarder->equal} </td>
-        <td><input type='text' name='{$input}' id='{$input}' class='w-100px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;</td>
+        <td class='text-lg w-110px'>{$leftTag}{$guarder}{$rightTag}
+        {$equal}
+        <input type='text' name='{$input}' id='{$input}' class='w-100px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;</td>
       </tr>
   </table>
 </div>
@@ -81,14 +82,14 @@ EOT;
         shuffle($this->config->guarder->captchaTags);
         $htmlTag = current($this->config->guarder->captchaTags);
         list($leftTag, $rightTag) = explode('|', $htmlTag);
+        $equal = empty($this->config->guarder->captchas) ? "</td><td class='text-lg text-center w-40px'> {$this->lang->guarder->equal} </td><td>" : '';
 
         return <<<EOT
 <table class='captcha'>
   <tr class='text-middle'>
     <td class='w-80px text-center'><label for='captcha'>{$this->lang->guarder->captcha}</label></td>
-    <td class='text-lg w-110px'>{$leftTag}{$guarder}{$rightTag}</td>
-    <td class='w-40px text-lg text-center'>{$this->lang->guarder->equal}</td>
-    <td>
+    <td class='text-lg w-110px'>{$leftTag}{$guarder}{$rightTag}
+    {$equal} 
       <input type='text'  name="{$input}" id='{$input}' class='w-100px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;
     </td>
   </tr>
@@ -110,15 +111,16 @@ EOT;
         shuffle($this->config->guarder->captchaTags);
         $htmlTag = current($this->config->guarder->captchaTags);
         list($leftTag, $rightTag) = explode('|', $htmlTag);
+        $equal = empty($this->config->guarder->captchas) ? "</td><td class='text-lg text-center w-40px'> {$this->lang->guarder->equal} </td><td>" : '';
 
         return <<<EOT
 <label for='captcha' class='col-md-1 col-sm-2 control-label'>{$this->lang->guarder->captcha}</label>
 <div class='col-md-7 col-sm-8 col-xs-11 required'>
   <table class='captcha'>
       <tr class='text-middle'>
-        <td class='text-lg w-110px'>{$leftTag}{$guarder}{$rightTag}</td>
-        <td class='text-lg text-center w-40px'> {$this->lang->guarder->equal} </td>
-        <td><input type='text'  name='{$input}' id='{$input}' class='w-100px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;</td>
+        <td class='text-lg w-110px'>{$leftTag}{$guarder}{$rightTag}
+        {$equal}
+        <input type='text'  name='{$input}' id='{$input}' class='w-100px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;</td>
       </tr>
   </table>
 </div>
@@ -139,15 +141,16 @@ EOT;
         shuffle($this->config->guarder->captchaTags);
         $htmlTag = current($this->config->guarder->captchaTags);
         list($leftTag, $rightTag) = explode('|', $htmlTag);
+        $equal = empty($this->config->guarder->captchas) ? "</td><td class='text-lg text-center w-40px'> {$this->lang->guarder->equal} </td><td>" : '';
 
         return <<<EOT
 <th>{$this->lang->guarder->captcha}</th>
 <td>
   <table class='captcha'>
     <tr class='text-middle'>
-      <td class='text-lg w-110px'>{$leftTag}{$guarder}{$rightTag}</td>
-      <td class='text-lg text-center w-40px'> {$this->lang->guarder->equal} </td>
-      <td><input type='text'  name='{$input}' id='{$input}' class='w-100px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;</td>
+      <td class='text-lg w-110px'>{$leftTag}{$guarder}{$rightTag}
+      {$equal}
+      <input type='text'  name='{$input}' id='{$input}' class='w-100px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;</td>
     </tr>
   </table>
 </td>

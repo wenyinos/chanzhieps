@@ -1,4 +1,7 @@
-.panel-body{padding: 0; height: 170px; overflow: auto;}
-.panel-body.shortcutGroup{text-align: center; padding-top: 32px;}
+.row.summary{padding-top: 50px; padding-left: 80px;}
+.col-xs-6{ width: 500px;}
+.table, .row.panel{margin: 0;}
+.panel-body{padding: 0; height: 250px; overflow: auto;}
+.panel-body.shortcutGroup{text-align: center; padding-top: 55px;}
 .shortcut{margin: 10px 15px;}
-.shortcut > a{color: #fff;}
+.shortcut > a{color: #fff; font-size: 20px;}

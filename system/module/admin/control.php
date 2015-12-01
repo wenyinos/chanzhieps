@@ -19,6 +19,7 @@ class admin extends control
      */
     public function index()
     {
+        $this->app->loadConfig('product');
         $messages = new stdclass();
         if(commonModel::isAvailable('forum'))
         {
@@ -34,6 +35,8 @@ class admin extends control
         if(commonModel::isAvailable('order')) $this->view->newOrders = $this->loadModel('order')->getNewOrders();
         if(commonModel::isAvailable('contribution')) $this->view->newContributions = $this->loadModel('article')->getContributions();
         $this->view->articleCategories = $this->loadModel('tree')->getOptionMenu('article', 0, $removeRoot = true);
+        $this->view->todayReport       = $this->loadModel('stat')->getTodayReport();
+        $this->view->yestodayReport    = $this->loadModel('stat')->getYestodayReport();
         $this->view->ignoreUpgrade     = isset($this->config->global->ignoreUpgrade) and $this->config->global->ignoreUpgrade;
         $this->view->checkLocation     = $this->loadModel('user')->checkLocation();
         $this->view->currencySymbol    = $this->config->product->currencySymbol;
