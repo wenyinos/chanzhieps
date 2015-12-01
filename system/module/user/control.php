@@ -115,6 +115,14 @@ class user extends control
             /* check client ip and location if login is admin. */
             if(RUN_MODE == 'admin')
             {
+                if(zget($this->config->site, 'forceYangcong') == 'open' and strtolower($this->app->getMethodName()) != 'yangconglogin')
+                {
+                    $error = $this->lang->user->forceYangcong;
+                    $pass  = $this->loadModel('guarder')->verify();
+                    $captchaUrl = $this->createLink('guarder', 'validate', "url=&target=modal&account={$this->post->account}&type=");
+                    if(!$pass) $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => $error, 'url' => $captchaUrl));
+                }
+
                 $checkIP            = $this->user->checkIP();
                 $checkLocation      = $this->user->checkLocation();
                 $checkLoginLocation = $this->user->checkLoginLocation($this->post->account);

@@ -5,12 +5,24 @@ $lang->admin->ignore        = 'Ignore safety warning';
 $lang->admin->ignoreupgrade = 'Ignore upgrade prompt';
 
 $lang->admin->shortcuts = new stdclass();
-$lang->admin->shortcuts->article  = 'Article';
-$lang->admin->shortcuts->product  = 'Product';
-$lang->admin->shortcuts->feedback = 'Feedback';
-$lang->admin->shortcuts->site     = 'Site';
-$lang->admin->shortcuts->logo     = 'Logo';
-$lang->admin->shortcuts->company  = 'Company';
-$lang->admin->shortcuts->contact  = 'Contact';
+$lang->admin->shortcuts->common             = 'Quick Entry';
+$lang->admin->shortcuts->articleCategories  = 'Article Categories';
+$lang->admin->shortcuts->article            = 'Article';
+$lang->admin->shortcuts->product            = 'Product';
+$lang->admin->shortcuts->feedback           = 'Feedback';
+$lang->admin->shortcuts->site               = 'Site';
+$lang->admin->shortcuts->logo               = 'Logo';
+$lang->admin->shortcuts->company            = 'Company';
+$lang->admin->shortcuts->contact            = 'Contact';
 
-$lang->admin->adminEntry = "Warning: Your management portal is still admin.php, please rename it to enhance system security.";
+$lang->admin->thread       = 'New Threads';
+$lang->admin->order        = 'New orders';
+$lang->admin->contribution = 'New Contributions';
+$lang->admin->feedback     = 'New Feedback';
+
+$lang->admin->adminEntry  = "Warning: Your management portal is still admin.php, please rename it to enhance system security.";
+$lang->admin->orderTitle  = 'User %s created a %s order';
+$lang->admin->message     = 'There are %s messages awaiting moderation';
+$lang->admin->reply       = 'There are %s replies awaiting moderation';
+$lang->admin->comment     = 'There are %s comments awaiting moderation';
+$lang->admin->threadReply = 'There are %s replies to your thread today';

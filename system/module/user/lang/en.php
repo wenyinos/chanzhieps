@@ -79,8 +79,9 @@ $lang->user->reduceScore     = 'Deduct Score';
 $lang->user->yangcongLogin   = 'Yangcong Login';
 $lang->user->bindAccount     = 'Bind Account';
 $lang->user->batchDelete     = 'Batch delete users';
-$lang->user->question        = 'Security question';
 $lang->user->deleteHistory   = 'Delete user and history data';
+$lang->user->question        = 'Security question';
+$lang->user->answer          = 'Answer';
 
 $lang->user->profile      = 'Profile';
 $lang->user->editProfile  = 'Edit profile';
@@ -239,6 +240,7 @@ $lang->user->locationDenied       = 'This location not allowed login, please do 
 $lang->user->loginLocationChanged = 'Location has been changed, please do these steps.';
 $lang->user->verifyFail           = 'Check email fail,Please input correct email.';
 $lang->user->confirmUnbind        = 'Are you sure you want to remove the binding?';
+$lang->user->forceYangcong        = 'Yangcong has been open, please confirm your identity.';
 
 $lang->user->placeholder = new stdclass();
 $lang->user->placeholder->password   = 'Please enter your website login password';

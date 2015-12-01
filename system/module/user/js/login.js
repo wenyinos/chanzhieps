@@ -47,5 +47,5 @@ function showFormError(text)
     var error = $('#formError').text(text);
     var parent = error.closest('.form-group');
     if(parent.length) parent.show();
-    else error.show();
+    else $('#formError').show();
 }

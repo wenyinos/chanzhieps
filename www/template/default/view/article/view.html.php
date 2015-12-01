@@ -22,7 +22,8 @@ js::execute($article->js);
           <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAddedDate, formatTime($article->addedDate));?>'><i class='icon-time icon-large'></i> <?php echo formatTime($article->addedDate); ?></dd>
           <dd data-toggle='tooltip' data-placement='top' data-original-title='<?php printf($lang->article->lblAuthor, $article->author);?>'><i class='icon-user icon-large'></i> <?php echo $article->author; ?></dd>
           <?php if($article->source != 'original' and $article->copyURL != ''):?>
-          <dt><?php echo $lang->article->sourceList[$article->source] . $lang->colon;?></dt>
+          <dt><?php echo ($article->source == 'article' ? $lang->article->fromArticle : $lang->article->sourceList[$article->source]) . $lang->colon;?></dt>
+          <?php if($article->source == 'article') $article->copyURL = $this->loadModel('common')->getSysURL() . $this->article->createPreviewLink($article->copyURL);?>
           <dd><?php $article->copyURL ? print(html::a($article->copyURL, $article->copySite, "target='_blank'")) : print($article->copySite); ?></dd>
           <?php else: ?>
           <span class='label label-success'><?php echo $lang->article->sourceList[$article->source]; ?></span>

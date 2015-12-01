@@ -46,7 +46,7 @@ class thread extends control
         {
             $captchaConfig = isset($this->config->site->captcha) ? $this->config->site->captcha : 'auto';
             $needCaptcha   = false;
-            if($captchaConfig == 'auto' and $this->loadModel('guarder')->isEvil($this->post->content)) $needCaptcha = true;
+            if($captchaConfig == 'auto' and $this->loadModel('guarder')->isEvil($this->post->{$this->session->contentInput})) $needCaptcha = true;
             if($captchaConfig == 'open')  $needCaptcha = true;
             if($captchaConfig == 'close') $needCaptcha = false;
            

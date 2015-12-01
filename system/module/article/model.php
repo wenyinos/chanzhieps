@@ -379,7 +379,6 @@ class articleModel extends model
             ->add('editedDate', $now)
             ->add('type', $type)
             ->add('addedBy', $this->app->user->account)
-            ->add('order', 0)
             ->setIF(!$this->post->isLink, 'link', '')
             ->setIF(RUN_MODE == 'front', 'contribution', 1)
             ->stripTags('content,link', $this->config->allowedTags->admin)
