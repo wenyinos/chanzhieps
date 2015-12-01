@@ -24,8 +24,8 @@ class stat extends control
         $date  = $this->stat->parseDate($mode, $begin, $end);
         $begin = $date->begin;
         $end   = $date->end;
-        $this->view->todayReport    = $this->dao->select('*')->from(TABLE_STATREPORT)->where('timeType')->eq('day')->andWhere('timeValue')->eq(date('Ymd'))->fetch(); 
-        $this->view->yestodayReport = $this->dao->select('*')->from(TABLE_STATREPORT)->where('timeType')->eq('day')->andWhere('timeValue')->eq(date('Ymd', strtotime("-1 day")))->fetch();
+        $this->view->todayReport    = $this->stat->getTodayReport(); 
+        $this->view->yestodayReport = $this->stat->getYestodayReport(); 
 
         if($begin == $end)
         {

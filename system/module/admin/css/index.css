@@ -1,4 +1,5 @@
-.panel-body{padding: 0; height: 170px; overflow: auto;}
-.panel-body.shortcutGroup{text-align: center; padding-top: 32px;}
+.table, .row.panel{margin: 0;}
+.panel-body{padding: 0; height: 186px; overflow: auto;}
+.panel-body.shortcutGroup{text-align: center; padding-top: 40px;}
 .shortcut{margin: 10px 15px;}
 .shortcut > a{color: #fff;}

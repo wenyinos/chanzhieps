@@ -89,6 +89,14 @@
             <?php $threadReplyTitle = sprintf($lang->admin->threadReply, $threadReply);?>
             <td><?php commonModel::printLink('reply', 'admin', "order=id_desc&tab=feedback", $threadReplyTitle, "target='_blank'");?></td>
           </tr>
+          <tr>
+            <?php $todayReportTitle = sprintf($lang->admin->todayReport, $todayReport->pv, $todayReport->uv, $todayReport->ip);?>
+            <td><?php commonModel::printLink('stat', 'traffic', "mode=today", $todayReportTitle, "target='_blank'");?></td>
+          </tr>
+          <tr>
+            <?php $yestodayReportTitle = sprintf($lang->admin->yestodayReport, $yestodayReport->pv, $yestodayReport->uv, $yestodayReport->ip);?>
+            <td><?php commonModel::printLink('stat', 'traffic', "mode=yestoday", $yestodayReportTitle, "target='_blank'");?></td>
+          </tr>
           </table>
         </div>
       </div>
