@@ -208,7 +208,6 @@ class uiModel extends model
     {
         if(isset($params)) $params = (array) $params;
         else $params = $this->getCustomParams($template, $theme);
-        $baseStyle = zget($params, 'css');
         $extraCss = isset($params['css']) ? $params['css'] : '';
         if(isset($params['css'])) unset($params['css']);
 
@@ -242,13 +241,10 @@ class uiModel extends model
         $lessc->setFormatter("compressed");
         $lessc->setVariables($params);
 
-        if(!empty($extraCss)) $extraCss = $lessc->compile($extraCss);
-
-        $css  = '';
+        $css = '/* Theme for teamplate:' . $template . ' - theme:' . $theme . '. (' . date("Y-m-d H:i:s") . ') */' . "\r\n";
         $lessTemplate = $lessTemplateDir . 'style.less';
         if(file_exists($lessTemplate))
         {
-            $css .= '/* User custom theme style for teamplate:' . $template . ' - theme:' . $theme . '. (' . date("Y-m-d H:i:s") . ') */' . "\r\n";
             $css .= $lessc->compileFile($lessTemplate);
         }
         else if(file_exists($lessTemplateDir . 'style.css'))
@@ -264,13 +260,13 @@ class uiModel extends model
         {
             $css .= file_get_contents($lessTemplateDir . 'custom.css');
         }
-        if($extraCss)
+        if(!empty($extraCss))
         {
-            $css .= "\r\n\r\n" . '/* Extra css for teamplate:' . $template . ' - theme:' . $theme . ' */' . "\r\n";
-            $css .= $extraCss;
+            $css .= "\r\n\r\n" . '/* User custom extra style for teamplate:' . $template . ' - theme:' . $theme . ' */' . "\r\n";
+            $css .= $lessc->compile($extraCss);
         }
 
-        file_put_contents($cssFile, $css . $baseStyle);
+        file_put_contents($cssFile, $css);
 
         return $lessc->errors;
     }
