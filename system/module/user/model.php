@@ -1147,12 +1147,12 @@ class userModel extends model
     }
 
     /**
-     * checkLocation 
-     * 
+     * Check allowed location.
+     *
      * @access public
      * @return bool
      */
-    public function checkLocation()
+    public function checkAllowedLocation()
     {
         if(isset($this->config->site->safeMode) and $this->config->site->safeMode == '1') return true;
         if(!isset($this->config->site->checkLocation) or $this->config->site->checkLocation == 'close') return true;
@@ -1178,10 +1178,14 @@ class userModel extends model
      */
     public function checkLoginLocation($account)
     {
-        $this->app->loadClass('IP');
-        $ip = helper::getRemoteIP();
-        $location = IP::find($ip);
-        $location = is_array($location) ? join(' ', $location) : $location;
+        if(!isset($this->config->site->checkLocation) or $this->config->site->checkLocation == 'close') return true;
+        $location = $this->app->loadClass('IP')->find(helper::getRemoteIp());
+        if(is_array($location))
+        {
+            $locations = $location;
+            $location  = join(' ', $locations);
+            if(count($location) > 3) $location = $locations[0] . ' ' . $locations[1] . ' ' . $locations[2];
+        }
 
         $lastLocation = $this->dao->select('location')->from(TABLE_LOG)
             ->where('account')->eq($account)
@@ -1466,7 +1470,7 @@ class userModel extends model
         $data = fixer::input('post')->get();
 
         $data->securityQuestion = json_encode(array('question' => $data->question, 'answer' => md5($data->answer)));
-        $this->dao->update(TABLE_USER)
+        $this->dao->setAutoLang(false)->update(TABLE_USER)
             ->data($data, $skip = 'question, answer, fingerprint, oldPwd')
             ->batchCheck($this->config->user->require->securityQuestion, 'notempty')
             ->where('account')->eq($account)
