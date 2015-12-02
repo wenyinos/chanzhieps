@@ -797,7 +797,8 @@ class commonModel extends model
         $divider = $this->lang->divider;
         foreach($module->pathNames as $moduleID => $moduleName)
         {
-            echo '<li>' . html::a(inlink('index', "moduleID=$moduleID", "category=" . $this->config->seo->alias->blog[$moduleID]), $moduleName) . '</li>';
+            $categoryAlias = isset($this->config->seo->alias->blog[$moduleID]) ? $this->config->seo->alias->blog[$moduleID] : '';
+            echo '<li>' . html::a(inlink('index', "moduleID=$moduleID", "category=" . $categoryAlias), $moduleName) . '</li>';
         }
         if($article) echo '<li>' . $article->title . '</li>';
     }
