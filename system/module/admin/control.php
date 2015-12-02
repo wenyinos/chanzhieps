@@ -38,7 +38,7 @@ class admin extends control
         $this->view->todayReport       = $this->loadModel('stat')->getTodayReport();
         $this->view->yestodayReport    = $this->loadModel('stat')->getYestodayReport();
         $this->view->ignoreUpgrade     = isset($this->config->global->ignoreUpgrade) and $this->config->global->ignoreUpgrade;
-        $this->view->checkLocation     = $this->loadModel('user')->checkLocation();
+        $this->view->checkLocation     = $this->loadModel('user')->checkAllowedLocation();
         $this->view->currencySymbol    = $this->config->product->currencySymbol;
         $this->view->messages          = $messages;
         $this->display();
