@@ -17,7 +17,6 @@ $lang->admin->shortcuts->contact            = 'Contact';
 
 $lang->admin->thread       = 'New Threads';
 $lang->admin->order        = 'New orders';
-$lang->admin->contribution = 'New Contributions';
 $lang->admin->feedback     = 'New Feedback';
 
 $lang->admin->adminEntry     = "Warning: Your management portal is still admin.php, please rename it to enhance system security.";
