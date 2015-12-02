@@ -20,7 +20,7 @@ $(document).ready(function()
   if(!isset($method))   $method   = '';
   if(!isset($account))  $account  = $this->app->user->account;
   if(!isset($email))    $email    = $this->app->user->email;
-  if(!isset($question)) $question = json_decode($this->app->user->securityQuestion);
+  if(!isset($question)) $question = json_decode($this->app->user->security);
   if(isset($type) and $type != '') $this->config->site->importantValidate = $type;
   ?>
   <?php if(!helper::isAjaxRequest()):?>
