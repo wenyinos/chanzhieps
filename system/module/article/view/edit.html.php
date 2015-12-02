@@ -33,6 +33,7 @@
       </tr>
       <tr>
         <th><?php echo $lang->article->source;?></th>
+        <?php if($article->source != 'article') array_pop($lang->article->sourceList);?>
         <td><?php echo html::select('source', $lang->article->sourceList, $article->source, "class='form-control chosen'");?></td>
         <td>
           <div id='copyBox' class='row'>

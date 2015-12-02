@@ -43,6 +43,7 @@
         </tr>
         <tr>
           <th><?php echo $lang->article->source;?></th>
+          <?php array_pop($lang->article->sourceList);?>
           <td><?php echo html::select('source', $lang->article->sourceList, 'original', "class='form-control chosen'");?></td>
           <td>
             <div class='row' id='copyBox'>
