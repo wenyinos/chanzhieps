@@ -691,9 +691,10 @@ EOT;
         $threads = $this->dao->select('*')->from(TABLE_THREAD)
             ->where('addedDate')->like(date("Y-m-d") . '%')
             ->beginIf($this->config->forum->postReview == 'open')
-            ->orWhere('status')->eq('wait')
+            ->andWhere('status')->eq('wait')
             ->fi()
-            ->limit(7)
+            ->orderBy('`addedDate` desc')
+            ->limit(5)
             ->fetchAll('id');
 
         return $threads;

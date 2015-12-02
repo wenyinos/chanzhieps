@@ -55,7 +55,7 @@
               <td><?php echo substr($order->createdDate, -8);?></td>
             </tr>
           <?php endforeach;?>
-          <?php if(count($orders) == 7):?>
+          <?php if(count($orders) == 5):?>
             <tr>
               <td></td><td align='right'><?php commonModel::printLink('order', 'admin', '', $lang->more . '...', "target='_blank'");?></td>
             </tr>
@@ -72,13 +72,13 @@
         <div class='panel-body'>
           <table class='table table-hover table-condensed table-borderless'>
           <?php foreach($threads as $thread):?> 
-          <?php $threadTitle = $thread->author . '&nbsp&nbsp' . helper::substr($thread->title, 17);?>
+          <?php $threadTitle = $thread->author . '&nbsp&nbsp' . helper::substr($thread->title, 25);?>
             <tr>
               <td><?php echo html::a(commonmodel::createFrontLink('thread', 'view', "threadid=$thread->id"), $threadTitle, "target='_blank'");?></td>
               <td><?php echo substr($thread->addedDate, -8);?></td>
             </tr>
           <?php endforeach;?>
-          <?php if(count($threads) == 7):?>
+          <?php if(count($threads) == 5):?>
             <tr>
               <td></td><td align='right'><?php commonModel::printLink('forum', 'admin', "tab=feedback", $lang->more . '...', "target='_blank'");?></td>
             </tr>

@@ -23,8 +23,8 @@ class admin extends control
         $messages = new stdclass();
         if(commonModel::isAvailable('forum'))
         {
-            $this->view->threads      = $this->loadModel('thread')->getThreads();
-            $this->view->threadReply  = $this->loadModel('reply')->getReplies();
+            $this->view->threads     = $this->loadModel('thread')->getThreads();
+            $this->view->threadReply = $this->loadModel('reply')->getReplies();
         }
         if(commonModel::isAvailable('message'))
         {

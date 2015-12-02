@@ -1,6 +1,6 @@
-.row.summary{padding-top: 50px; padding-left: 80px;}
+.row.summary{padding-top: 15px; padding-left: 80px;}
 .col-xs-6{width: 500px;}
 .table, .row.panel{margin: 0;}
-.panel-body{padding: 0; height: 250px;}
-.panel-body.shortcutGroup{text-align: center; padding-top: 55px;}
+.panel-body{padding: 0; height: 180px;}
+.panel-body.shortcutGroup{text-align: center; padding-top: 35px;}
 .shortcutGroup > a{margin: 10px 15px; font-size: 16px;}

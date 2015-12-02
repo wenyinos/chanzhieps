@@ -659,7 +659,8 @@ class orderModel extends model
     {
         $orders = $this->dao->select('*')->from(TABLE_ORDER)
             ->where('createdDate')->like(date("Y-m-d") . '%')
-            ->limit(7)
+            ->orderBy('`createdDate` desc')
+            ->limit(5)
             ->fetchAll();
         
         return $orders;
