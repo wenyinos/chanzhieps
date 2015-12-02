@@ -199,7 +199,7 @@ class productModel extends model
 
         $this->app->loadClass('pager', true);
         $pager = new pager($recTotal = 0, $recPerPage = $count, 1);
-        return $this->getList($family, 'addedDate_desc', $pager);
+        return $this->getList($family, '`order` desc', $pager);
     }
 
     /**
