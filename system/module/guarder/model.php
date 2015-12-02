@@ -430,9 +430,9 @@ EOT;
      */
     public function getSecurityQuestion($account)
     {
-        $question = $this->dao->select('securityQuestion')->from(TABLE_USER)
+        $question = $this->dao->select('security')->from(TABLE_USER)
             ->where('account')->eq($account)
-            ->fetch('securityQuestion');
+            ->fetch('security');
         return json_decode($question);
     }
 }

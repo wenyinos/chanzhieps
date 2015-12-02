@@ -693,6 +693,7 @@ EOT;
             ->beginIf($this->config->forum->postReview == 'open')
             ->orWhere('status')->eq('wait')
             ->fi()
+            ->limit(7)
             ->fetchAll('id');
 
         return $newThreads;
