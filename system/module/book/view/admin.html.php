@@ -14,6 +14,7 @@
 <?php
 $path = explode(',', $node->path);
 js::set('path', $path);
+js::set('deleteBook', $lang->book->deleteBook);
 ?>
 <div class='panel'>
   <div class='panel-heading'>
