@@ -406,16 +406,16 @@ EOT;
         $importantValidate = explode(',', $importantValidate);
         if(empty($importantValidate)) return true;;
 
-        if(in_array('okFile', $importantValidate))
-        {
-            $okFile = $this->loadModel('common')->verifyAdmin();
-            if($okFile['result'] == 'success') return true;
-        }
-
         if($this->session->verify and $this->session->verify > 0)
         {
             $this->session->set('verify', $this->session->verify - 1);
             return true;
+        }
+
+        if(in_array('okFile', $importantValidate))
+        {
+            $okFile = $this->loadModel('common')->verifyAdmin();
+            if($okFile['result'] == 'success') return true;
         }
 
         return false;

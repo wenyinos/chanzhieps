@@ -91,13 +91,13 @@ $lang->user->reply        = 'My replies';
 $lang->user->contribution = 'My Contribution';
 
 $lang->user->userHistory         = "User History Data";
-$lang->user->threadHistory       = "Post Data";
-$lang->user->replyHistory        = "Reply Data";
-$lang->user->commentHistory      = "Comment Data";
-$lang->user->messageHistory      = "Message Data";
-$lang->user->orderHistory        = "Order Data";
-$lang->user->addressHistory      = "Address Data";
-$lang->user->contributionHistory = "Contribution Data";
+$lang->user->threadHistory       = "Post";
+$lang->user->replyHistory        = "Reply";
+$lang->user->commentHistory      = "Comment";
+$lang->user->messageHistory      = "Message";
+$lang->user->orderHistory        = "Order";
+$lang->user->addressHistory      = "Address";
+$lang->user->contributionHistory = "Contribution";
 
 $lang->user->message = new stdclass();
 $lang->user->message->mine = "My message <span class='label label-badge text-latin'>%s</span>";

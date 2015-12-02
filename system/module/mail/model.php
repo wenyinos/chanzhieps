@@ -277,12 +277,16 @@ class mailModel extends model
         }
         catch (phpmailerException $e) 
         {
-            $this->errors[] = nl2br(trim(strip_tags($e->errorMessage())));
+            $this->errors[] = nl2br(trim(strip_tags($e->errorMessage()))) . '<br />' . ob_get_contents();
         } 
         catch (Exception $e) 
         {
             $this->errors[] = trim(strip_tags($e->getMessage()));
         }
+        if($this->config->mail->mta == 'smtp') $this->mta->smtpClose();
+
+        /* save errors. */
+        if($this->isError()) $this->app->saveError('E_MAIL', join(' ', $this->errors), __FILE__, __LINE__, true);
 
         $message = ob_get_contents();
         ob_clean();

@@ -416,7 +416,7 @@ class commonModel extends model
             {
                 $class = '';
                 if($module == $currentModule && $method == $currentMethod) $class = " class='active'";
-                if($module == $currentModule && strpos($methodAlias, $currentMethod) !== false) $class = " class='active'";
+                if($module == $currentModule && strpos(",$methodAlias,", ",$currentMethod,") !== false) $class = " class='active'";
                 $string .= "<li{$class}>" . html::a(helper::createLink($module, $method, $vars), $label) . "</li>\n";
             }
         }
@@ -934,20 +934,25 @@ class commonModel extends model
         if($this->session->okFileName == false or $this->session->okFileName == '')
         {
             $this->session->set('okFileName', helper::createRandomStr(4, $skip = '0-9A-Z') . '.txt');
+            $this->session->set('okFileContent', helper::createRandomStr(4, $skip = '0-9A-Z'));
         }
         $okFile = $this->app->getTmpRoot() . $this->session->okFileName;
 
-        if(file_exists($okFile) and time() - filemtime($okFile) > 3600)
+        if(file_exists($okFile) and (trim(file_get_contents($okFile)) != $this->session->okFileContent) or !$this->session->okFileContent)
         {
             @unlink($okFile);
             $this->session->set('okFileName', helper::createRandomStr(4, $skip = '0-9A-Z') . '.txt');
+            $this->session->set('okFileContent', helper::createRandomStr(4, $skip = '0-9A-Z'));
             $okFile = $this->app->getTmpRoot() . $this->session->okFileName;
         }
 
-        if(!file_exists($okFile) or time() - filemtime($okFile) > 3600)
+        if(!file_exists($okFile) or trim(file_get_contents($okFile)) != $this->session->okFileContent)
         {
-            return array('result' => 'fail', 'okFile' => $okFile);
+            return array('result' => 'fail', 'name' => $okFile, 'content' => $this->session->okFileContent);
         }
+
+        $this->session->set('verify', 6);
+        $this->session->set('okFileName', '');
 
         return array('result' => 'success');
     }
