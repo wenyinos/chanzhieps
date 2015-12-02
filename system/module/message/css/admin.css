@@ -8,7 +8,7 @@ dl.alert dd{display:inline-block; margin-right: 20px;}
 .panel {border: none; box-shadow:none;}
 .panel-heading {border: 1px solid #ddd;}
 .separator {border-top:1px solid #ddd;}
-.original {background-color:#fbfbfb;}
+.original, .original textarea {background-color:#fbfbfb;}
 .message table {margin-bottom:0;}
 .message
 {
