@@ -680,22 +680,22 @@ EOT;
     }
 
     /**
-     * Get new threads.
+     * Get lastest threads.
      * 
      * @access public
      * @return array 
      */
-    public function getNewThreads()
+    public function getThreads()
     {
         $this->app->loadConfig('forum');
-        $newThreads = $this->dao->select('*')->from(TABLE_THREAD)
-            ->where('editedDate')->like(date("Y-m-d") . '%')
+        $threads = $this->dao->select('*')->from(TABLE_THREAD)
+            ->where('addedDate')->like(date("Y-m-d") . '%')
             ->beginIf($this->config->forum->postReview == 'open')
             ->orWhere('status')->eq('wait')
             ->fi()
             ->limit(7)
             ->fetchAll('id');
 
-        return $newThreads;
+        return $threads;
     }
 }

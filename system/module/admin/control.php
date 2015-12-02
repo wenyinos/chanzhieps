@@ -23,8 +23,8 @@ class admin extends control
         $messages = new stdclass();
         if(commonModel::isAvailable('forum'))
         {
-            $this->view->newThreads = $this->loadModel('thread')->getNewThreads();
-            $this->view->threadReply  = $this->loadModel('reply')->getNewReplies();
+            $this->view->threads      = $this->loadModel('thread')->getThreads();
+            $this->view->threadReply  = $this->loadModel('reply')->getReplies();
         }
         if(commonModel::isAvailable('message'))
         {
@@ -32,8 +32,8 @@ class admin extends control
             $messages->message = $this->loadModel('message')->getMessages('message');
             $messages->reply   = $this->loadModel('message')->getMessages('reply');
         }
-        if(commonModel::isAvailable('order')) $this->view->newOrders = $this->loadModel('order')->getNewOrders();
-        if(commonModel::isAvailable('contribution')) $this->view->newContributions = $this->loadModel('article')->getContributions();
+        if(commonModel::isAvailable('order')) $this->view->orders = $this->loadModel('order')->getOrders();
+        if(commonModel::isAvailable('contribution')) $this->view->contributions = $this->loadModel('article')->getContributions();
         $this->view->articleCategories = $this->loadModel('tree')->getOptionMenu('article', 0, $removeRoot = true);
         $this->view->todayReport       = $this->loadModel('stat')->getTodayReport();
         $this->view->yestodayReport    = $this->loadModel('stat')->getYestodayReport();

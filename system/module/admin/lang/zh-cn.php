@@ -17,7 +17,6 @@ $lang->admin->shortcuts->contact            = '联系方式';
 
 $lang->admin->thread       = '最新帖子';
 $lang->admin->order        = '最新订单';
-$lang->admin->contribution = '最新投稿';
 $lang->admin->feedback     = '最新反馈';
 
 $lang->admin->adminEntry     = '警告：您现在的管理入口还是默认的admin.php，建议将admin.php改名以增强系统安全!';

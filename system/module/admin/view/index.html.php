@@ -48,14 +48,14 @@
         <div class='panel-heading'><strong><?php echo $lang->admin->order;?></strong></div>
         <div class='panel-body'>
           <table class='table table-hover table-condensed table-borderless'>
-          <?php foreach($newOrders as $order):?> 
+          <?php foreach($orders as $order):?> 
           <?php $orderTitle = sprintf($lang->admin->orderTitle, $order->account, $currencySymbol . $order->amount);?>
             <tr>
               <td><?php commonModel::printLink('order', 'admin','', $orderTitle, "target='_blank'");?></td>
               <td><?php echo substr($order->createdDate, -8);?></td>
             </tr>
           <?php endforeach;?>
-          <?php if(count($newOrders) == 7):?>
+          <?php if(count($orders) == 7):?>
             <tr>
               <td></td><td align='right'><?php commonModel::printLink('order', 'admin', '', $lang->more . '...', "target='_blank'");?></td>
             </tr>
@@ -71,14 +71,14 @@
         <div class='panel-heading'><strong><?php echo $lang->admin->thread;?></strong></div>
         <div class='panel-body'>
           <table class='table table-hover table-condensed table-borderless'>
-          <?php foreach($newThreads as $thread):?> 
+          <?php foreach($threads as $thread):?> 
           <?php $threadTitle = $thread->author . '&nbsp&nbsp' . helper::substr($thread->title, 17);?>
             <tr>
               <td><?php echo html::a(commonmodel::createFrontLink('thread', 'view', "threadid=$thread->id"), $threadTitle, "target='_blank'");?></td>
               <td><?php echo substr($thread->addedDate, -8);?></td>
             </tr>
           <?php endforeach;?>
-          <?php if(count($newThreads) == 7):?>
+          <?php if(count($threads) == 7):?>
             <tr>
               <td></td><td align='right'><?php commonModel::printLink('forum', 'admin', "tab=feedback", $lang->more . '...', "target='_blank'");?></td>
             </tr>
@@ -107,8 +107,8 @@
             <td><?php commonModel::printLink('reply', 'admin', "order=id_desc&tab=feedback", $threadReplyTitle, "target='_blank'");?></td>
           </tr>
           <?php endif;?>
-          <?php if(commonModel::isAvailable('contribution') and $newContributions != '0'):?>
-          <?php $contributionTitle = sprintf($lang->admin->contribution, $newContributions);?>
+          <?php if(commonModel::isAvailable('contribution') and $contributions != '0'):?>
+          <?php $contributionTitle = sprintf($lang->admin->contribution, $contributions);?>
           <tr>
             <td><?php commonModel::printLink('article', 'admin','type=contribution&tab=feedback', $contributionTitle, "target='_blank'");?></td>
           </tr>
