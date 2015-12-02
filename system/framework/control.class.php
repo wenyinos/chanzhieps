@@ -592,7 +592,7 @@ class control
         {
             $template    = $this->config->template->{$this->device}->name;
             $theme       = $this->config->template->{$this->device}->theme;
-            $customParam = json_decode($this->config->template->custom, true);
+            $customParam = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array();
             $themeHooks  = $this->loadThemeHooks();
             if(!empty($themeHooks))
             {
