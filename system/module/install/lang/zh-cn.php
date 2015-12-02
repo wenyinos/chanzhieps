@@ -70,7 +70,7 @@ $lang->install->dbPassword     = '数据库密码';
 $lang->install->dbName         = '数据库名';
 $lang->install->dbPrefix       = '建表使用的前缀';
 $lang->install->createDB       = '自动创建数据库';
-$lang->install->clearDB        = '清空现有数据';
+$lang->install->clearDB        = '清空已有蝉知数据';
 $lang->install->importDemoData = '导入demo数据';
 
 $lang->install->errorDBName        = "数据库名不能带'.'";

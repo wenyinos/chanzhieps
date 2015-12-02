@@ -70,7 +70,7 @@ $lang->install->dbPassword     = 'Database password';
 $lang->install->dbName         = 'Database name';
 $lang->install->dbPrefix       = 'Table prefix';
 $lang->install->createDB       = 'Auto create database';
-$lang->install->clearDB        = 'Clear data if database exists.';
+$lang->install->clearDB        = 'Clear chanzhi tables if already exists.';
 $lang->install->importDemoData = 'Import demo data';
 
 $lang->install->errorDBName        = "'.' are not allowed in database name";

@@ -30,7 +30,7 @@
             </tr>
             <tr>
               <th><?php echo $lang->install->dbPort;?></th>
-              <td><?php echo html::input('dbPort', '', "class='form-control'");?></td>
+              <td><?php echo html::input('dbPort', '3306', "class='form-control'");?></td>
               <td></td>
             </tr>
             <tr>
@@ -45,7 +45,7 @@
             </tr>
             <tr>
               <th><?php echo $lang->install->dbName;?></th>
-              <td><?php echo html::input('dbName', 'chanzhi', "class='form-control'");?></td>
+              <td><?php echo html::input('dbName', '', "class='form-control'");?></td>
               <td></td>
             </tr>
             <tr>
