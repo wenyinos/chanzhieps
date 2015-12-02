@@ -176,6 +176,20 @@ class messageModel extends model
     }
 
     /**
+     * Get original message.
+     *
+     * @param  int    $messageID
+     * @access public
+     * @return bool | object
+     */
+    public function getOriginal($messageID)
+    {
+        $message = $this->dao->select('*')->from(TABLE_MESSAGE)->where('id')->eq($messageID)->fetch();
+        if(strpos('message,reply,comment', $message->objectType) === false or $message->objectID == 0) return false;
+        return $this->dao->select('*')->from(TABLE_MESSAGE)->where('id')->eq($message->objectID)->fetch();
+    }
+
+    /**
      * Get object of a message.
      *
      * @param  object  $message
