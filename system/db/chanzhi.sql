@@ -491,7 +491,8 @@ CREATE TABLE IF NOT EXISTS `eps_thread` (
   `ip` char(15) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `lang` (`lang`),
-  KEY `category` (`board`)
+  KEY `category` (`board`),
+  KEY `stick` (`stick`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- DROP TABLE IF EXISTS `eps_user`;
