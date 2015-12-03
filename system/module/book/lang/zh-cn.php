@@ -46,8 +46,8 @@ $lang->book->none     = '没有了';
 $lang->book->chapter  = '返回目录';
 $lang->book->back2Top = '返回顶部';
 
-$lang->book->aliasRepeat = '别名:<strong> %s </strong>不能重复添加。';
-$lang->book->deleteBook  = '您确定要删除该手册及其所有章节和文章吗?';
+$lang->book->aliasRepeat   = '别名:<strong> %s </strong>不能重复添加。';
+$lang->book->confirmDelete = "<span class='text-danger'>此操作将删除该手册所有章节和文章，确认删除?</span>";
 
 $lang->book->note = new stdclass();
 $lang->book->note->addedDate = '可以延迟到选定的时间发布。';

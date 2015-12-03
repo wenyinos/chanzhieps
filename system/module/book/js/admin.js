@@ -89,7 +89,7 @@ $(document).ready(function()
     $('.book').children('.actions').find('.deleter').click(function()
     {
         var deleter = $(this);
-        bootbox.confirm(v.deleteBook, function(result)
+        bootbox.confirm(v.confirmDelete, function(result)
         {
            if(result)
            {

@@ -46,8 +46,8 @@ $lang->book->none     = 'None';
 $lang->book->chapter  = 'List';
 $lang->book->back2Top = 'Top';
 
-$lang->book->aliasRepeat = 'Alias:<strong> %s </strong> can not be repeated' ;
-$lang->book->deleteBook  = 'Are you sure to delete this book and all its chapters and articles?';
+$lang->book->aliasRepeat   = 'Alias:<strong> %s </strong> can not be repeated' ;
+$lang->book->confirmDelete = "<span class='text-danger'> Are you sure to delete this book and all its chapters and articles?</span>";
 
 $lang->book->note = new stdclass();
 $lang->book->note->addedDate = 'Schedule to publish this Article after this time.';
