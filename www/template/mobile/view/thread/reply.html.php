@@ -17,7 +17,7 @@
       </div>
       <section class='card-content article-content'><?php echo $reply->content;?></section>
       <?php if(!empty($reply->files)):?>
-      <div class='card-content'><?php $this->reply->printFiles($reply, $this->reply->canManage($board->id, $reply->author));?></div>
+      <div class='card-content'><?php $this->reply->printFiles($reply, $this->thread->canManage($board->id, $reply->author));?></div>
       <?php endif;?>
       <div class='card-footer'>
         <?php if($reply->editor): ?>
