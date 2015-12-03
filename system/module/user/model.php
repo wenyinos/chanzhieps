@@ -1310,7 +1310,7 @@ class userModel extends model
             ->where('type')->eq('comment')
             ->andWhere('`to`')->in($users)
             ->groupBy('`to`')
-            ->fetchPairs('to');
+            ->fetchPairs('`to`');
         $fromMessages = $this->dao->setAutoLang(false)->select('account,count(*)')->from(TABLE_MESSAGE)
             ->where('type')->eq('message')
             ->andWhere('account')->in($users)
