@@ -101,7 +101,7 @@ class articleModel extends model
                 ->orWhere('summary')->like("%{$searchWord}%")->andWhere('type')->eq($type)
                 ->orWhere('content')->like("%{$searchWord}%")->andWhere('type')->eq($type)
                 ->fi()
-                ->orderBy('`order` desc')
+                ->orderBy($orderBy)
                 ->page($pager)
                 ->fetchAll('id');
         }
@@ -247,7 +247,7 @@ class articleModel extends model
     {
         $this->app->loadClass('pager', true);
         $pager = new pager($recTotal = 0, $recPerPage = $count, 1);
-        return $this->getList('page', '', 'id_desc', $pager);
+        return $this->getList('page', '', '`order` desc', $pager);
     }
 
     /**
