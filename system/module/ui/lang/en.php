@@ -228,3 +228,13 @@ $lang->ui->danger          = 'Danger';
 $lang->ui->warning         = 'Warning';
 $lang->ui->success         = 'Success';
 $lang->ui->removeDirFaild  = "<h4>Delete the following directories failed</h4><pre>%s</pre> <div class='text-important'>Please manually delete, or set up these files writable. </div>";
+
+$lang->ui->themeColors = array();
+$lang->ui->themeColors[] = 'FF2A2A';
+$lang->ui->themeColors[] = 'F8F100';
+$lang->ui->themeColors[] = '7AE441';
+$lang->ui->themeColors[] = '0084FF';
+$lang->ui->themeColors[] = 'FF63E8';
+$lang->ui->themeColors[] = '964B00';
+$lang->ui->themeColors[] = '7F7F7F';
+$lang->ui->themeColors[] = '000000';

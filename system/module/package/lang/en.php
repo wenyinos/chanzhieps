@@ -62,6 +62,8 @@ $lang->package->byAddedTime   = 'New added';
 $lang->package->byUpdatedTime = 'Last updated';
 $lang->package->bySearch      = 'Search';
 $lang->package->byCategory    = 'By Category';
+$lang->package->byIndustry    = 'By Industry';
+$lang->package->byColor       = 'By color';
 
 $lang->package->installFailed            = '%s failed, the reason is:';
 $lang->package->uninstallFailed          = 'Uninstall failed, the reason is:';
