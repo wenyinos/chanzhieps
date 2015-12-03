@@ -150,7 +150,6 @@ class package extends control
 
             /* Download the package file. */
             if(!file_exists($packageFile) or ($md5 != '' and md5_file($packageFile) != $md5))  $this->package->downloadPackage($package, helper::safe64Decode($downLink));
-
             if(!file_exists($packageFile))
             {
                 $this->view->error = sprintf($this->lang->package->errorDownloadFailed, $packageFile);
@@ -158,9 +157,12 @@ class package extends control
             }
             elseif($md5 != '' and md5_file($packageFile) != $md5)
             {
-                unlink($packageFile);
-                $this->view->error = sprintf($this->lang->package->errorMd5Checking, $packageFile);
-                die($this->display());
+                if(md5_file($packageFile) . '1' != $md5)
+                {
+                    unlink($packageFile);
+                    $this->view->error = sprintf($this->lang->package->errorMd5Checking, $packageFile);
+                    die($this->display());
+                }
             }
         }
 
@@ -174,6 +176,12 @@ class package extends control
         $packageInfo = $this->package->parsePackageCFG($package);
 
         $type = isset($packageInfo->type) ? $packageInfo->type : 'extension';
+
+        if($type == 'theme')
+        {
+            $link = helper::createLink('ui','installtheme', "package=$package&downLink=&md5=");    
+            $this->locate($link);
+        }
 
         /* Checking the package pathes. */
         $return = $this->package->checkPackagePathes($package, $type);
