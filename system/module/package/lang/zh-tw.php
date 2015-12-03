@@ -62,6 +62,8 @@ $lang->package->byAddedTime   = '最新添加';
 $lang->package->byUpdatedTime = '最近更新';
 $lang->package->bySearch      = '搜索';
 $lang->package->byCategory    = '分類瀏覽';
+$lang->package->byIndustry    = '行業分組';
+$lang->package->byColor       = '主題色調';
 
 $lang->package->installFailed            = '%s失敗，錯誤原因如下:';
 $lang->package->uninstallFailed          = '卸載失敗，錯誤原因如下:';

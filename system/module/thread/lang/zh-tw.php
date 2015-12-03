@@ -63,7 +63,7 @@ $lang->thread->successHide     = '帖子已經成功隱藏';
 $lang->thread->successShow     = '顯示成功';
 $lang->thread->readonlyMessage = '該帖已被設置為 <strong>只讀</strong>，您暫時無法發表新的回覆。';
 $lang->thread->successTransfer = '轉移成功';
-$lang->thread->thanks          = '帖子將在審核通過後顯示，祝您生活愉快~';
+$lang->thread->thanks          = '帖子將在審核通過後顯示';
 
 $lang->thread->score    = '獎勵積分';
 $lang->thread->scoreSum = "<strong class='red f-14px strong'>+%s</strong> ";

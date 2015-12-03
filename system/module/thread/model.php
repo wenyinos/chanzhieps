@@ -639,6 +639,7 @@ EOT;
            $thread->editorRealname    = !empty($thread->editor) ? $speakers[$thread->editor] : '';
            $thread->repliedByRealname = !empty($thread->repliedBy) ? $speakers[$thread->repliedBy] : '';
         }
+        return $threads;
     }
 
     /**
