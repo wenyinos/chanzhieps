@@ -63,7 +63,7 @@ $lang->thread->successHide     = 'Successfully hide.';
 $lang->thread->successShow     = 'Successfully show.';
 $lang->thread->readonlyMessage = 'The thread has been set <strong>READONLY</strong>，you can not post new reply。';
 $lang->thread->successTransfer = 'Successfully Transfered';
-$lang->thread->thanks          = 'This thread will be posted after approved, have a good day~';
+$lang->thread->thanks          = 'This thread will be shown by audit';
 
 $lang->thread->score    = 'Reward Scores';
 $lang->thread->scoreSum = "<strong class='red f-14px strong'>+%s</strong> ";
