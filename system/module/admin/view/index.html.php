@@ -47,14 +47,19 @@
       <div class='panel'>
         <div class='panel-heading'><strong><?php echo $lang->admin->order;?></strong></div>
         <div class='panel-body'>
-          <table class='table table-hover table-condensed'>
-          <?php foreach($newOrders as $order):?> 
+          <table class='table table-hover table-condensed table-borderless'>
+          <?php foreach($orders as $order):?> 
           <?php $orderTitle = sprintf($lang->admin->orderTitle, $order->account, $currencySymbol . $order->amount);?>
-          <tr>
-            <td><?php commonModel::printLink('order', 'admin','', $orderTitle, "target='_blank'");?></td>
-            <td><?php echo substr($order->createdDate, -8);?></td>
-          </tr>
+            <tr>
+              <td><?php commonModel::printLink('order', 'admin','', $orderTitle, "target='_blank'");?></td>
+              <td><?php echo substr($order->createdDate, -8);?></td>
+            </tr>
           <?php endforeach;?>
+          <?php if(count($orders) == 5):?>
+            <tr>
+              <td></td><td align='right'><?php commonModel::printLink('order', 'admin', '', $lang->more . '...', "target='_blank'");?></td>
+            </tr>
+          <?php endif;?>
           </table>
         </div>
       </div>
@@ -65,14 +70,19 @@
       <div class='panel'>
         <div class='panel-heading'><strong><?php echo $lang->admin->thread;?></strong></div>
         <div class='panel-body'>
-          <table class='table table-hover table-condensed'>
-          <?php foreach($newThreads as $thread):?> 
-          <tr>
-            <td><?php echo html::a(commonmodel::createFrontLink('thread', 'view', "threadid=$thread->id"), $thread->title, "target='_blank'");?></td>
-            <td><?php echo $thread->author;?></td>
-            <td><?php echo substr($thread->editedDate, -8);?></td>
-          </tr>
+          <table class='table table-hover table-condensed table-borderless'>
+          <?php foreach($threads as $thread):?> 
+          <?php $threadTitle = $thread->author . '&nbsp&nbsp' . helper::substr($thread->title, 25);?>
+            <tr>
+              <td><?php echo html::a(commonmodel::createFrontLink('thread', 'view', "threadid=$thread->id"), $threadTitle, "target='_blank'");?></td>
+              <td><?php echo substr($thread->addedDate, -8);?></td>
+            </tr>
           <?php endforeach;?>
+          <?php if(count($threads) == 5):?>
+            <tr>
+              <td></td><td align='right'><?php commonModel::printLink('forum', 'admin', "tab=feedback", $lang->more . '...', "target='_blank'");?></td>
+            </tr>
+          <?php endif;?>
           </table>
         </div>
       </div>
@@ -82,7 +92,7 @@
       <div class='panel'>
         <div class='panel-heading'><strong><?php echo $lang->admin->feedback;?></strong></div>
         <div class='panel-body'>
-          <table class='table table-hover table-condensed'>
+          <table class='table table-hover table-condensed table-borderless'>
           <?php foreach($messages as $type => $message):?> 
           <?php if($message != '0'):?>
           <?php $messageTitle = sprintf($lang->admin->$type, $message);?>
@@ -97,8 +107,8 @@
             <td><?php commonModel::printLink('reply', 'admin', "order=id_desc&tab=feedback", $threadReplyTitle, "target='_blank'");?></td>
           </tr>
           <?php endif;?>
-          <?php if(commonModel::isAvailable('contribution') and $newContributions != '0'):?>
-          <?php $contributionTitle = sprintf($lang->admin->contribution, $newContributions);?>
+          <?php if(commonModel::isAvailable('contribution') and $contributions != '0'):?>
+          <?php $contributionTitle = sprintf($lang->admin->contribution, $contributions);?>
           <tr>
             <td><?php commonModel::printLink('article', 'admin','type=contribution&tab=feedback', $contributionTitle, "target='_blank'");?></td>
           </tr>
@@ -123,27 +133,15 @@
       <div class='row panel'>
         <div class='panel-heading'><strong><?php echo $lang->admin->shortcuts->common;?></strong></div>
         <div class='panel-body shortcutGroup'>
-          <div class='btn btn-success shortcut'> 
           <?php 
-            if(!empty($articleCategories)) echo html::a($this->createLink('article', 'create'), $lang->admin->shortcuts->article);
-            else echo html::a($this->createLink('tree', 'browse',"type=article"), $lang->admin->shortcuts->articleCategories)
+            if(!empty($articleCategories)) echo html::a($this->createLink('article', 'create'), $lang->admin->shortcuts->article, "class='btn btn-default'");
+            else echo html::a($this->createLink('tree', 'browse',"type=article"), $lang->admin->shortcuts->articleCategories, "class='btn btn-default'")
           ?>
-          </div>
-          <div class='btn btn-success shortcut'>
-            <?php echo html::a($this->createLink('product', 'create'), $lang->admin->shortcuts->product);?>
-          </div>
-          <div class='btn btn-success shortcut'>
-            <?php echo html::a($this->createLink('message', 'admin'), $lang->admin->shortcuts->feedback);?>  
-          </div>
-          <div class='btn btn-success shortcut'>
-            <?php echo html::a($this->createLink('site', 'setBasic'), $lang->admin->shortcuts->site);?>
-          </div>
-          <div class='btn btn-success shortcut'>
-            <?php echo html::a($this->createLink('company', 'setBasic'), $lang->admin->shortcuts->company);?>
-          </div>
-          <div class='btn btn-success shortcut'>
-            <?php echo html::a($this->createLink('company', 'setcontact'), $lang->admin->shortcuts->contact)?>  
-          </div>      
+          <?php echo html::a($this->createLink('product', 'create'), $lang->admin->shortcuts->product, "class='btn btn-default'");?>
+          <?php echo html::a($this->createLink('message', 'admin'), $lang->admin->shortcuts->feedback, "class='btn btn-default'");?>  
+          <?php echo html::a($this->createLink('site', 'setBasic'), $lang->admin->shortcuts->site, "class='btn btn-default'");?>
+          <?php echo html::a($this->createLink('company', 'setBasic'), $lang->admin->shortcuts->company, "class='btn btn-default'");?>
+          <?php echo html::a($this->createLink('company', 'setcontact'), $lang->admin->shortcuts->contact, "class='btn btn-default'")?>  
         </div>
       </div>
     </div>

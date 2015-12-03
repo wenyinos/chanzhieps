@@ -20,7 +20,7 @@ $(document).ready(function()
   if(!isset($method))   $method   = '';
   if(!isset($account))  $account  = $this->app->user->account;
   if(!isset($email))    $email    = $this->app->user->email;
-  if(!isset($question)) $question = json_decode($this->app->user->security);
+  if(!isset($question)) $question = $this->guarder->getSecurityQuestion($this->app->user->account);
   if(isset($type) and $type != '') $this->config->site->importantValidate = $type;
   ?>
   <?php if(!helper::isAjaxRequest()):?>
@@ -66,7 +66,7 @@ $(document).ready(function()
       <tr class='option-okfile'>
         <th></th>
         <td colspan='3'>
-          <p><?php printf($lang->guarder->okFileVerfy, $okFile['name'], $okFile['content']);?></p>
+          <p><?php printf($lang->guarder->okFileVerify, $okFile['name'], $okFile['content']);?></p>
           <p><?php echo $fileBtn?></p>
         </td>
       </tr>

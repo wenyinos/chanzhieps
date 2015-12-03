@@ -80,7 +80,7 @@ EOT;
       </tr>
       <tr class='original'>
         <td class='content-box'>
-          <?php echo $original->content;?>
+          <textarea name="" id="" rows="2" class="form-control borderless" spellcheck="false"><?php echo $original->content;?></textarea>
         </td>
       </tr>
       <?php endif;?>
@@ -122,7 +122,7 @@ EOT;
       </tr>
       <tr>
         <td class='content-box'>
-          <?php echo $message->content;?>
+          <textarea name="" id="" rows="2" class="form-control borderless" spellcheck="false"><?php echo $message->content;?></textarea>
         </td>
       </tr>
     </table>
@@ -140,5 +140,6 @@ EOT;
     </div>
   </div>
   <?php endforeach;?>
+  <?php $pager->show();?>
 </div>
 <?php include '../../common/view/footer.admin.html.php';?>

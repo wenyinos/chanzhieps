@@ -363,17 +363,17 @@ class replyModel extends model
     }
 
     /**
-     * Get new replies 
+     * Get lastest replies 
      * 
      * @access public
      * @return int 
      */
-    public function getNewReplies()
+    public function getReplies()
     {
-        $newReplies = $this->dao->select('count(*) as count')->from(TABLE_REPLY)
+        $replies = $this->dao->select('count(*) as count')->from(TABLE_REPLY)
             ->where('editedDate')->like(date("Y-m-d") . '%')
             ->fetch();
 
-        return $newReplies->count;
+        return $replies->count;
     }
 }

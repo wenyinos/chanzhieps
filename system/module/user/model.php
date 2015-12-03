@@ -1469,7 +1469,7 @@ class userModel extends model
         $this->checkOldPassword();
         $data = fixer::input('post')->get();
 
-        $data->securityQuestion = json_encode(array('question' => $data->question, 'answer' => md5($data->answer)));
+        $data->security = json_encode(array('question' => $data->question, 'answer' => md5(trim($data->answer))));
         $this->dao->setAutoLang(false)->update(TABLE_USER)
             ->data($data, $skip = 'question, answer, fingerprint, oldPwd')
             ->batchCheck($this->config->user->require->securityQuestion, 'notempty')

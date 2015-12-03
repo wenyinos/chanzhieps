@@ -1,7 +1,9 @@
-.row.summary{padding-top: 50px; padding-left: 80px;}
-.col-xs-6{ width: 500px;}
+.row.summary{padding-top: 15px; padding-left: 80px;}
+.col-xs-6{width: 500px;}
 .table, .row.panel{margin: 0;}
-.panel-body{padding: 0; height: 250px; overflow: auto;}
-.panel-body.shortcutGroup{text-align: center; padding-top: 55px;}
-.shortcut{margin: 10px 15px;}
-.shortcut > a{color: #fff; font-size: 20px;}
+.panel-body{padding: 0; height: 180px;}
+.panel-body.shortcutGroup{text-align: center; padding-top: 35px;}
+.shortcutGroup > a{margin: 10px 20px; font-size: 13px;}
+@media(min-width:768px){#shortcutBox{margin-top: 20px;}}
+@media(min-width:1200px){#shortcutBox{margin-top: 30px;}}
+@media(min-width:1400px){#shortcutBox{margin-top: 60px;}}

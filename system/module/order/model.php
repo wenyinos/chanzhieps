@@ -650,18 +650,19 @@ class orderModel extends model
     }
 
     /**
-     * Get new orders 
+     * Get lastest orders 
      * 
      * @access public
      * @return array 
      */
-    public function getNewOrders()
+    public function getOrders()
     {
-        $newOrders = $this->dao->select('*')->from(TABLE_ORDER)
+        $orders = $this->dao->select('*')->from(TABLE_ORDER)
             ->where('createdDate')->like(date("Y-m-d") . '%')
-            ->limit(7)
+            ->orderBy('`createdDate` desc')
+            ->limit(5)
             ->fetchAll();
         
-        return $newOrders;
+        return $orders;
     }
 }
