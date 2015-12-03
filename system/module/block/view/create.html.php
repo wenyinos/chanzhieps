@@ -15,8 +15,6 @@
 <?php include '../../common/view/codeeditor.html.php';?>
 <?php
 js::set('type', $type);
-js::set('cancreatephp', isset($canCreatePHP) ? $canCreatePHP : '');
-js::set('setOkFile', isset($okFile) ? sprintf($lang->setOkFile, $okFile) : '');
 
 $colorPlates = '';
 foreach (explode('|', $lang->colorPlates) as $value)

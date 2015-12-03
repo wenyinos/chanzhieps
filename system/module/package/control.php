@@ -112,7 +112,7 @@ class package extends control
     {
         $this->loadModel('guarder');
         $this->view->canManage = array('result' => 'success');
-        if($downLink) $this->view->canManage = $this->loadModel('common')->verifyAdmin();
+        if($downLink and !$this->guarder->verify()) $this->view->canManage = $this->loadModel('common')->verifyAdmin();
         set_time_limit(0);
         unset($this->lang->package->menu);
         
@@ -150,7 +150,6 @@ class package extends control
 
             /* Download the package file. */
             if(!file_exists($packageFile) or ($md5 != '' and md5_file($packageFile) != $md5))  $this->package->downloadPackage($package, helper::safe64Decode($downLink));
-
             if(!file_exists($packageFile))
             {
                 $this->view->error = sprintf($this->lang->package->errorDownloadFailed, $packageFile);
@@ -158,9 +157,12 @@ class package extends control
             }
             elseif($md5 != '' and md5_file($packageFile) != $md5)
             {
-                unlink($packageFile);
-                $this->view->error = sprintf($this->lang->package->errorMd5Checking, $packageFile);
-                die($this->display());
+                if(md5_file($packageFile) . '1' != $md5)
+                {
+                    unlink($packageFile);
+                    $this->view->error = sprintf($this->lang->package->errorMd5Checking, $packageFile);
+                    die($this->display());
+                }
             }
         }
 
@@ -174,6 +176,12 @@ class package extends control
         $packageInfo = $this->package->parsePackageCFG($package);
 
         $type = isset($packageInfo->type) ? $packageInfo->type : 'extension';
+
+        if($type == 'theme')
+        {
+            $link = helper::createLink('ui','installtheme', "package=$package&downLink=&md5=");    
+            $this->locate($link);
+        }
 
         /* Checking the package pathes. */
         $return = $this->package->checkPackagePathes($package, $type);
@@ -401,12 +409,12 @@ class package extends control
      */
     public function upload($type = 'extension')
     {
-        $canManage = $this->loadModel('common')->verifyAdmin();
-        $this->view->canManage = $canManage;
+        $this->view->canManage = array('result' => 'success');
+        if(!$this->loadModel('guarder')->verify()) $this->view->canManage = $this->loadModel('common')->verifyAdmin();
 
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            if($canManage['result'] != 'success') $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->setOkFile, $canManage['okFile'])));
+            if($canManage['result'] != 'success') $this->send(array('result' => 'fail', 'message' => sprintf($lang->guarder->okFileVerify, $canManage['name'], $canManage['content'])));
             
             if(empty($_FILES))  $this->send(array('result' => 'fail', 'message' => '' ));
 

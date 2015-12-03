@@ -952,7 +952,7 @@ class commonModel extends model
             return array('result' => 'fail', 'name' => $okFile, 'content' => $this->session->okFileContent);
         }
 
-        $this->session->set('verify', 6);
+        $this->session->set('verify', 'pass');
         $this->session->set('okFileName', '');
 
         return array('result' => 'success');

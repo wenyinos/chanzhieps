@@ -2,3 +2,5 @@
 .export-theme-form .table-form {width: 100%;}
 
 .input-group-btn .popover-success {min-width: 130px}
+.colorbox{display:inline-block; width:30px; cursor:pointer;border:4px solid #FFF;}
+dd.selected{border:4px solid #AAA;}

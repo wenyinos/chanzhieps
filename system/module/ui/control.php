@@ -294,7 +294,7 @@ class ui extends control
 
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            if($canManage['result'] != 'success') $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->setOkFile, $canManage['okFile'])));
+            if($canManage['result'] != 'success') $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->guarder->okFileVerify, $canManage['name'], $canManage['content'])));
 
             if(empty($_FILES))  $this->send(array('result' => 'fail', 'message' => $this->lang->ui->filesRequired));
 
@@ -475,5 +475,41 @@ class ui extends control
         $result = $this->ui->removeTemplateFiles($template);
         if($result !== true) $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->ui->removeDirFaild, join('<br/>', $result))) );
         $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
+    }
+
+    /**
+     * Theme store page.
+     * 
+     * @param  string $industry 
+     * @param  string $color 
+     * @param  int    $recTotal 
+     * @param  int    $recPerPage 
+     * @param  int    $pageID 
+     * @access public
+     * @return void
+     */
+    public function themeStore($type = 'byindustry', $param = 'all', $recTotal = 0, $recPerPage = 10, $pageID = 1)
+    {
+        $pager = null;
+
+        /* Get results from the api. */
+        $results = $this->loadModel('package')->getThemesByApi($type, $param, $recTotal, $recPerPage, $pageID);
+        if($results)
+        {
+            $this->app->loadClass('pager', $static = true);
+            $pager  = new pager($results->dbPager->recTotal, $results->dbPager->recPerPage, $results->dbPager->pageID);
+            $themes = $results->themes;
+        }
+
+        $this->view->title        = $this->lang->ui->themeStore;
+        $this->view->position[]   = $this->lang->package->obtain;
+        $this->view->industryTree = str_replace('/index.php', $this->server->script_name, $this->package->getIndustriesByAPI());
+        $this->view->themes       = $themes;
+        $this->view->installeds   = $this->package->getLocalPackages('installed');
+        $this->view->pager        = $pager;
+        $this->view->tab          = 'obtain';
+        $this->view->type         = $type;
+        $this->view->param        = $param;
+        $this->display();
     }
 }

@@ -21,7 +21,7 @@
 </form>
 <?php else:?>
 <div>
-  <?php printf($lang->setOkFile, $canManage['okFile']);?>
+  <?php printf($lang->guarder->okFileVerify, $canManage['name'], $canManage['content']);?>
   <div class='text-right'><?php echo html::a($this->inlink('upload'), $lang->confirm, "class='btn btn-primary okFile'");?></div>
 </div>
 <?php endif;?>
