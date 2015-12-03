@@ -122,9 +122,7 @@ class threadModel extends model
             ->orderBy('id desc')
             ->fetchAll();
 
-
         $this->setRealNames($sticks);
-
         return $sticks;
     }
 

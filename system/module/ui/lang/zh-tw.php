@@ -35,6 +35,7 @@ $lang->ui->importedBlocks  = '導入區塊';
 $lang->ui->matchedBlock    = '對應區塊';
 $lang->ui->createBlock     = '導入新區塊';
 $lang->ui->useOldBlock     = '使用已有區塊';
+$lang->ui->themeStore      = '主題市場';
 
 $lang->ui->noStyleTag             = "請填寫全局CSS樣式代碼，不需要&lt;style&gt;&lt;/style&gt;標籤";
 $lang->ui->noJsTag                = "請填寫全局JS代碼，不需要&lt;script&gt;&lt;/script&gt;標籤";
@@ -227,3 +228,13 @@ $lang->ui->danger          = '危險';
 $lang->ui->warning         = '警告';
 $lang->ui->success         = '積極';
 $lang->ui->removeDirFaild  = "<h4>以下目錄刪除失敗</h4><pre>%s</pre> <div class='text-important'>請手動刪除，或者設置這些檔案的可寫權限後繼續。</div>";
+
+$lang->ui->themeColors = array();
+$lang->ui->themeColors[] = 'FF2A2A';
+$lang->ui->themeColors[] = 'F8F100';
+$lang->ui->themeColors[] = '7AE441';
+$lang->ui->themeColors[] = '0084FF';
+$lang->ui->themeColors[] = 'FF63E8';
+$lang->ui->themeColors[] = '964B00';
+$lang->ui->themeColors[] = '7F7F7F';
+$lang->ui->themeColors[] = '000000';
