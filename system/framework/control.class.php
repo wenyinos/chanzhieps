@@ -806,7 +806,7 @@ class control
     {
         $theme    = $this->config->template->{$this->device}->theme;
         $hookPath = dirname(TPL_ROOT) . DS . 'theme' . DS . $theme . DS;
-        $hookFiles = glob("{$hookPath}*.theme.php");
+        $hookFiles = glob("{$hookPath}*.php");
 
         foreach($hookFiles as $file) include $file;
         return $hookFiles;
