@@ -26,6 +26,8 @@ $lang->stat->domainList    = '來路域名';
 $lang->stat->domainTrend   = '趨勢';
 $lang->stat->domainPage    = '頁面';
 $lang->stat->percentage    = '百分比';
+$lang->stat->ignoreKeyword = '忽略關鍵詞說明';
+$lang->stat->keywordNotice = 'Google和百度取消了來路連結的關鍵詞顯示，因此無法統計其關鍵詞信息。';
 
 $lang->stat->all   = '全部';
 $lang->stat->begin = '開始日期';
@@ -43,8 +45,8 @@ $lang->stat->itemList->desktop = '桌面設備';
 $lang->stat->itemList->mobile  = '移動設備';
 
 $lang->stat->trafficModes = new stdclass();
-$lang->stat->trafficModes->today    = '今日';
 $lang->stat->trafficModes->yestoday = '昨日';
+$lang->stat->trafficModes->today    = '今日';
 $lang->stat->trafficModes->weekly   = '最近一周';
 $lang->stat->trafficModes->monthly  = '最近30天';
 

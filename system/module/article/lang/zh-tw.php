@@ -105,6 +105,7 @@ $lang->article->successStick   = '置頂成功';
 $lang->article->successUnstick = '取消置頂成功';
 
 $lang->article->confirmDelete = '您確定刪除該文章嗎？';
+$lang->article->categoryEmpty = '類目不能為空';
 
 $lang->article->lblAddedDate = '<strong>添加時間：</strong> %s &nbsp;&nbsp;';
 $lang->article->lblAuthor    = "<strong>作者：</strong> %s &nbsp;&nbsp;";

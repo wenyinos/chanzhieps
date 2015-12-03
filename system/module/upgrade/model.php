@@ -130,6 +130,8 @@ class upgradeModel extends model
                 $this->addOrderType();
             case '4_5_2':
                 $this->execSQL($this->getUpgradeFile('4.5.2'));
+            case '4_6':
+                $this->execSQL($this->getUpgradeFile('4.6'));
             default: if(!$this->isError()) $this->loadModel('setting')->updateVersion($this->config->version);
         }
 
@@ -182,6 +184,7 @@ class upgradeModel extends model
             case '4_5';
             case '4_5_1'    : $confirmContent .= file_get_contents($this->getUpgradeFile('4.5.1'));
             case '4_5_2'    : $confirmContent .= file_get_contents($this->getUpgradeFile('4.5.2'));
+            case '4_6'      : $confirmContent .= file_get_contents($this->getUpgradeFile('4.6'));
         }
         return str_replace(array('xr_', 'eps_'), $this->config->db->prefix, $confirmContent);
     }

@@ -49,6 +49,7 @@ $lang->user->view            = "用戶詳情";
 $lang->user->create          = "添加用戶";
 $lang->user->edit            = "編輯用戶";
 $lang->user->changePassword  = "更改密碼";
+$lang->user->changeEmail     = "郵箱設置";
 $lang->user->recoverPassword = "忘記密碼";
 $lang->user->newPassword     = "新密碼";
 $lang->user->update          = "編輯用戶";
@@ -77,6 +78,10 @@ $lang->user->addScore        = '獎勵積分';
 $lang->user->reduceScore     = '扣除積分';
 $lang->user->yangcongLogin   = '洋蔥登錄';
 $lang->user->bindAccount     = '綁定帳號';
+$lang->user->batchDelete     = '批量刪除用戶';
+$lang->user->deleteHistory   = '刪除用戶及歷史數據';
+$lang->user->question        = '密保問題';
+$lang->user->answer          = '答案';
 
 $lang->user->profile      = '個人信息';
 $lang->user->editProfile  = '編輯信息';
@@ -86,13 +91,13 @@ $lang->user->reply        = '我的回貼';
 $lang->user->contribution = '我的投稿';
 
 $lang->user->userHistory         = "用戶歷史數據";
-$lang->user->threadHistory       = "發帖數據";
-$lang->user->replyHistory        = "回帖數據";
-$lang->user->commentHistory      = "評論數據";
-$lang->user->messageHistory      = "留言數據";
-$lang->user->orderHistory        = "訂單數據";
-$lang->user->addressHistory      = "地址數據";
-$lang->user->contributionHistory = "投稿數據";
+$lang->user->threadHistory       = "發帖";
+$lang->user->replyHistory        = "回帖";
+$lang->user->commentHistory      = "評論";
+$lang->user->messageHistory      = "留言";
+$lang->user->orderHistory        = "訂單";
+$lang->user->addressHistory      = "地址";
+$lang->user->contributionHistory = "投稿";
 
 $lang->user->message = new stdclass();
 $lang->user->message->mine = "我的消息 <span class='label label-badge text-latin'>%s</span>";
@@ -230,10 +235,12 @@ $lang->user->log->location    = '登錄地址';
 $lang->user->log->date        = '登錄時間';
 $lang->user->log->desc        = '描述';
 
-$lang->user->ipDenied       = '登錄IP受限，請按提示操作。';
-$lang->user->locationDenied = '登錄地區受限，請按提示操作。';
-$lang->user->verifyFail     = '請填寫正確的驗證碼';
-$lang->user->confirmUnbind  = '您確定要解除綁定嗎？';
+$lang->user->ipDenied             = '登錄IP受限，請按提示操作。';
+$lang->user->locationDenied       = '登錄地區受限，請按提示操作。';
+$lang->user->loginLocationChanged = '登錄地址發生變化，請按提示操作。';
+$lang->user->verifyFail           = '請填寫正確的驗證碼';
+$lang->user->confirmUnbind        = '您確定要解除綁定嗎？';
+$lang->user->forceYangcong        = '已開啟強制洋蔥登錄，普通登錄需要進行驗證。';
 
 $lang->user->placeholder = new stdclass();
 $lang->user->placeholder->password   = '請輸入您的網站登錄密碼';

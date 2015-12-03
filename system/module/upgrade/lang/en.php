@@ -70,3 +70,4 @@ $lang->upgrade->fromVersions['4_4_1']    = '4.4.1';
 $lang->upgrade->fromVersions['4_5']      = '4.5'
 $lang->upgrade->fromVersions['4_5_1']    = '4.5.1'
 $lang->upgrade->fromVersions['4_5_2']    = '4.5.2'
+$lang->upgrade->fromVersions['4_6']      = '4.6';

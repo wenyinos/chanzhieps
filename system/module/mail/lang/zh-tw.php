@@ -45,21 +45,8 @@ $lang->mail->needConfigure  = '無法找到郵件配置信息，請先配置郵�
 $lang->mail->error          = '你的郵箱地址有誤，請填寫正確的郵箱地址。'; 
 $lang->mail->trySendlater   = '三分鐘內不能重複發送郵件。'; 
 
-$lang->mail->verify        = '為了安全起見，當前操作需要驗證您的管理員權限';
-$lang->mail->okFile        = '檔案方式';
-$lang->mail->created       = '我已創建';
-$lang->mail->email         = '郵箱驗證碼';
-$lang->mail->captcha       = '驗證碼';
-$lang->mail->needVerify    = '需要驗證管理員身份';
-$lang->mail->verifyFail    = '請填寫正確的驗證碼';
-$lang->mail->verifySuccess = '驗證通過，請繼續操作';
-$lang->mail->noConfigure   = "無法找到發信配置信息";
-$lang->mail->noEmail       = "未填寫個人郵箱";
-$lang->mail->noCaptcha     = "郵箱驗證無法啟用。";
-$lang->mail->okFileVerfy   = "請創建 %s 檔案。%s<br />";
-$lang->mail->sendSuccess   = '驗證碼已發送至 %s';
-
-$lang->mail->sendContent   = <<<EOT
+$lang->mail->captcha     = '驗證碼';
+$lang->mail->sendContent = <<<EOT
 %s 您好：
 <br />您在<strong>%s</strong>(%s)上面的驗證碼為：%s
 <br />如非您本人操作，請忽略。
