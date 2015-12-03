@@ -173,7 +173,7 @@ $lang->site->changeLocation   = '您當前的登錄地區與允許登錄地區�
 $lang->site->sessionIpTip     = '開啟後，如IP變化將自動退出登錄。';
 $lang->site->schemeTip        = '所有訪問會跳轉至預設訪問協議。';
 $lang->site->saveDaysTip      = '訪問日誌保存天數必須為為 >0 的數字。';
-$lang->site->yangcongTip      = '開啟強制洋蔥登錄後，您可以通過設置密保問題，開啟密保登錄作為備用。';
+$lang->site->yangcongTip      = '開啟強制洋蔥登錄後，您可以通過設置密保問題開啟密保登錄作為備用。';
 
 $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Robots檔案%s 不可寫，請修改權限後設置。';

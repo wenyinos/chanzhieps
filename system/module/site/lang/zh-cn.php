@@ -173,7 +173,7 @@ $lang->site->changeLocation   = '您当前的登录地区与允许登录地区�
 $lang->site->sessionIpTip     = '开启后，如IP变化将自动退出登录。';
 $lang->site->schemeTip        = '所有访问会跳转至默认访问协议。';
 $lang->site->saveDaysTip      = '访问日志保存天数必须为为 >0 的数字。';
-$lang->site->yangcongTip      = '开启强制洋葱登录后，您可以通过设置密保问题，开启密保登录作为备用。';
+$lang->site->yangcongTip      = '开启强制洋葱登录后，您可以通过设置密保问题开启密保登录作为备用。';
 
 $lang->site->robots            = 'Robots';
 $lang->site->robotsUnwriteable = 'Robots文件%s 不可写，请修改权限后设置。';
