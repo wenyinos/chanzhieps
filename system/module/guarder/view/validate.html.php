@@ -197,7 +197,6 @@ $(document).ready(function()
       $('[name*=type]').click(checkOptions);
 
       <?php if($target == 'modal'):?>
-      //$.setAjaxLoader('.okFile', '#ajaxModal');
       $('.okFile').click(function()
       {
           $('#ajaxModal').load($(this).attr('href'));

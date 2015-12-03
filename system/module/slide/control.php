@@ -39,7 +39,7 @@ class slide extends control
      */
     public function browse($groupID= '')
     {
-        $this->view->title  = $this->lang->slide->admin;
+        $this->view->title  = $this->lang->slide->browse;
         $this->view->group  = $groupID;
         $this->view->slides = $this->slide->getList($groupID);
 

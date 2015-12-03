@@ -41,6 +41,7 @@ $lang->slide->sourceImage = 'Source image';
 
 $lang->slide->sort        = 'Order';
 $lang->slide->admin       = 'Admin';
+$lang->slide->browse      = 'Browse';
 $lang->slide->create      = 'Add';
 $lang->slide->edit        = 'Edit';
 $lang->slide->createGroup = 'Create Group';

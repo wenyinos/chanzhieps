@@ -194,6 +194,7 @@ $lang->resource->site->setstat      = 'setStat';
 /* Slide module. */
 $lang->resource->slide = new stdclass();
 $lang->resource->slide->admin       = 'admin';
+$lang->resource->slide->browse      = 'browse';
 $lang->resource->slide->create      = 'create';
 $lang->resource->slide->edit        = 'edit';
 $lang->resource->slide->delete      = 'delete';
