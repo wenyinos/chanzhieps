@@ -35,6 +35,7 @@ $lang->ui->importedBlocks  = 'Import Blocks';
 $lang->ui->matchedBlock    = 'Matched Blocks';
 $lang->ui->createBlock     = 'Create Block';
 $lang->ui->useOldBlock     = 'Use Old Blocks';
+$lang->ui->themeStore      = 'Theme store';
 
 $lang->ui->noStyleTag             = "Please write base CSS file code, No &lt;style&gt;&lt;/style&gt; tag.";
 $lang->ui->noJsTag                = "Please write base JS file code, No &lt;script&gt;&lt;/script&gt; tag.";
