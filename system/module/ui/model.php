@@ -1009,7 +1009,7 @@ EOT;
     public function createHookFile($template, $theme, $code)
     {
         if(!is_dir($hookPath)) mkdir($hookPath, 0777, true);
-        $hookFile = $this->directories->encryptLessPath . helper::createRandomStr(6, $skip = '0-9A-Z') . ".theme.php";
+        $hookFile = $this->directories->encryptLessPath . helper::createRandomStr(6, $skip = '0-9A-Z') . ".php";
         $params   = $this->getCustomParams($template, $theme);
 
         $css = var_export($params['css'], true);
