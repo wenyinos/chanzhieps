@@ -35,6 +35,7 @@ $lang->ui->importedBlocks  = '导入区块';
 $lang->ui->matchedBlock    = '对应区块';
 $lang->ui->createBlock     = '导入新区块';
 $lang->ui->useOldBlock     = '使用已有区块';
+$lang->ui->themeStore      = '主题市场';
 
 $lang->ui->noStyleTag             = "请填写全局CSS样式代码，不需要&lt;style&gt;&lt;/style&gt;标签";
 $lang->ui->noJsTag                = "请填写全局JS代码，不需要&lt;script&gt;&lt;/script&gt;标签";
@@ -227,3 +228,13 @@ $lang->ui->danger          = '危险';
 $lang->ui->warning         = '警告';
 $lang->ui->success         = '积极';
 $lang->ui->removeDirFaild  = "<h4>以下目录删除失败</h4><pre>%s</pre> <div class='text-important'>请手动删除，或者设置这些文件的可写权限后继续。</div>";
+
+$lang->ui->themeColors = array();
+$lang->ui->themeColors[] = 'FF2A2A';
+$lang->ui->themeColors[] = 'F8F100';
+$lang->ui->themeColors[] = '7AE441';
+$lang->ui->themeColors[] = '0084FF';
+$lang->ui->themeColors[] = 'FF63E8';
+$lang->ui->themeColors[] = '964B00';
+$lang->ui->themeColors[] = '7F7F7F';
+$lang->ui->themeColors[] = '000000';
