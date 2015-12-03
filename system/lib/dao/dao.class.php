@@ -730,6 +730,9 @@ class dao
      */
     public function fetchPairs($keyField = '', $valueField = '')
     {
+        $keyField   = trim($keyField, '`');
+        $valueField = trim($valueField, '`');
+
         $pairs = array();
         $ready = false;
         $stmt  = $this->query();
