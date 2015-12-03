@@ -406,11 +406,7 @@ EOT;
         $importantValidate = explode(',', $importantValidate);
         if(empty($importantValidate)) return true;;
 
-        if($this->session->verify and $this->session->verify > 0)
-        {
-            $this->session->set('verify', $this->session->verify - 1);
-            return true;
-        }
+        if($this->session->verify == 'pass') return true;
 
         if(in_array('okFile', $importantValidate))
         {

@@ -112,7 +112,7 @@ class package extends control
     {
         $this->loadModel('guarder');
         $this->view->canManage = array('result' => 'success');
-        if($downLink) $this->view->canManage = $this->loadModel('common')->verifyAdmin();
+        if($downLink and !$this->guarder->verify()) $this->view->canManage = $this->loadModel('common')->verifyAdmin();
         set_time_limit(0);
         unset($this->lang->package->menu);
         
