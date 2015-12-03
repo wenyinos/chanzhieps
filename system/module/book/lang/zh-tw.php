@@ -47,6 +47,7 @@ $lang->book->chapter  = '返回目錄';
 $lang->book->back2Top = '返回頂部';
 
 $lang->book->aliasRepeat = '別名:<strong> %s </strong>不能重複添加。';
+$lang->book->deleteBook  = '您確定要刪除該手冊及其所有章節和文章嗎?';
 
 $lang->book->note = new stdclass();
 $lang->book->note->addedDate = '可以延遲到選定的時間發佈。';
