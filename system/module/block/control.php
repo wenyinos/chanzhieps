@@ -58,18 +58,9 @@ class block extends control
         $theme    = $this->config->template->{$this->device}->theme;
         $this->block->loadTemplateLang($template);
 
-        if($type == 'phpcode')
-        {
-            $return = $this->loadModel('common')->verifyAdmin();
-            if($return['result'] == 'fail') $this->view->okFile = $return['okFile'];
-            $canCreatePHP = $this->loadModel('guarder')->verify('okFile');
-
-            $this->view->canCreatePHP = $canCreatePHP;
-        }
-
         if($_POST)
         {
-            if($type == 'phpcode' and !$canCreatePHP) $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => dao::getError()));
+            if($type == 'phpcode' and !$this->loadModel('guarder')->verify()) $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => dao::getError()));
 
             $blockID = $this->block->create($template, $theme);
             if(!dao::isError()) $this->send(array('result' => 'success', 'locate' => $this->inlink('admin'), 'blockID' => $blockID));
@@ -98,18 +89,10 @@ class block extends control
 
         if(!$blockID) $this->locate($this->inlink('admin'));
 
-        if($type == 'phpcode')
-        {
-            $return = $this->loadModel('common')->verifyAdmin();
-            if($return['result'] == 'fail') $this->view->okFile = $return['okFile'];
-            $canCreatePHP = $this->loadModel('guarder')->verify('okFile');
-
-            $this->view->canCreatePHP = $canCreatePHP;
-        }
-
         if($_POST)
         {
-            if($type == 'phpcode' and !$canCreatePHP) $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => dao::getError()));
+            if($this->post->type == 'phpcode' and !$this->loadModel('guarder')->verify()) $this->send(array('result' => 'fail', 'reason' => 'captcha', 'message' => dao::getError()));
+
             $this->block->update($template, $theme);
             if(!dao::isError()) $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess));
             $this->send(array('result' => 'fail', 'message' => dao::getError()));

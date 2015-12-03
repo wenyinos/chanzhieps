@@ -294,7 +294,7 @@ class ui extends control
 
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            if($canManage['result'] != 'success') $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->setOkFile, $canManage['okFile'])));
+            if($canManage['result'] != 'success') $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->guarder->okFileVerify, $canManage['name'], $canManage['content'])));
 
             if(empty($_FILES))  $this->send(array('result' => 'fail', 'message' => $this->lang->ui->filesRequired));
 

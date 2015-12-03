@@ -401,12 +401,12 @@ class package extends control
      */
     public function upload($type = 'extension')
     {
-        $canManage = $this->loadModel('common')->verifyAdmin();
-        $this->view->canManage = $canManage;
+        $this->view->canManage = array('result' => 'success');
+        if(!$this->loadModel('guarder')->verify()) $this->view->canManage = $this->loadModel('common')->verifyAdmin();
 
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            if($canManage['result'] != 'success') $this->send(array('result' => 'fail', 'message' => sprintf($this->lang->setOkFile, $canManage['okFile'])));
+            if($canManage['result'] != 'success') $this->send(array('result' => 'fail', 'message' => sprintf($lang->guarder->okFileVerify, $canManage['name'], $canManage['content'])));
             
             if(empty($_FILES))  $this->send(array('result' => 'fail', 'message' => '' ));
 
