@@ -2,6 +2,13 @@ VERSION=$(shell head -n 1 VERSION)
 
 all: zip
 
+trunk:
+	git archive --format=zip --output=code.zip master
+	rm -rf /tmp/chanzhirelease
+	mkdir /tmp/chanzhirelease
+	mv code.zip /tmp/chanzhirelease
+	cd /tmp/chanzhirelease; unzip code.zip; rm /tmp/chanzhirelease/code.zip; make zip
+
 clean:
 	rm -fr chanzhieps
 	rm -fr *.zip
@@ -28,7 +35,7 @@ zip:
 	mkdir -pv chanzhieps/system/build/ && cp system/build/minifyfront.php chanzhieps/system/build/
 	cd chanzhieps/system/build/ && php ./minifyfront.php && php ./createcustomercss.php
 	rm -frv chanzhieps/system/build
-	# delee the unused files.
+	# delete the unused files.
 	find chanzhieps -name '.git*' |xargs rm -frv
 	find chanzhieps -name '.svn*' |xargs rm -frv
 	find chanzhieps -name tests |xargs rm -frv
