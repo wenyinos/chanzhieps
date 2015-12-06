@@ -1528,9 +1528,9 @@ class router
      */
     public function exportConfig()
     {
+        $view = new stdClass();
         $view->version     = $this->config->version;
         $view->requestType = $this->config->requestType;
-        $view->pathType    = $this->config->pathType;
         $view->requestFix  = $this->config->requestFix;
         $view->moduleVar   = $this->config->moduleVar;
         $view->methodVar   = $this->config->methodVar;
