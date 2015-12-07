@@ -1049,13 +1049,15 @@ class packageModel extends model
         $content = str_replace('THEME_CODEFIX', $newCode, $content);
         file_put_contents($dbFile, $content);
 
-        $hookFile = "./theme/{$package}/system/module/ui/ext/model/{$themeInfo->template}.{$code}.theme.php";
-
-        if(!$renameCode and file_exists($hookFile))
+        $hookFiles = glob("./theme/{$package}/www/template/{$themeInfo->template}/theme/{$code}/*.php");
+        if(!$renameCode and !empty($hookFiles))
         {
-            $hookCode = file_get_contents($hookFile);
-            $hookCode = str_replace('_THEME_CODEFIX_', $code, $hookCode);
-            file_put_contents("./theme/{$package}/system/module/ui/ext/model/{$themeInfo->template}.{$code}.theme.php", $hookCode);
+            foreach($hookFiles as $hookFile)
+            {
+                $hookCode = file_get_contents($hookFile);
+                $hookCode = str_replace('_THEME_CODEFIX_', $code, $hookCode);
+                file_put_contents($hookFile, $hookCode);
+            }
         }
 
         if($renameCode)

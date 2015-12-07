@@ -230,6 +230,7 @@ class uiModel extends model
         $fontsList = array_flip($this->lang->ui->theme->fontList);
         foreach($params as $item => $value)
         {
+            $value = str_replace('&gt;', '>', $value);
             if(empty($value)) $params[$item] = 0;
             if(isset($fontsList[$value])) $params[$item] = $fontsList[$value];
         }
