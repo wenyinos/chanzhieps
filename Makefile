@@ -7,7 +7,7 @@ trunk:
 	rm -rf /tmp/chanzhirelease
 	mkdir /tmp/chanzhirelease
 	mv code.zip /tmp/chanzhirelease
-	cd /tmp/chanzhirelease; unzip code.zip; rm /tmp/chanzhirelease/code.zip; make zip
+	cd /tmp/chanzhirelease; unzip code.zip; rm code.zip; make zip
 
 clean:
 	rm -fr chanzhieps
