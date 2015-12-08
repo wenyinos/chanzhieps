@@ -266,7 +266,7 @@ class order extends control
 
         /* Get the orderID from the alipay. */
         $order = $this->order->getOrderFromAlipay($mode);
-        if(empty($order)) die('STOP!');
+        if(!$order) die('STOP!');
 
         /* Process the order. */
         $result = $this->order->processOrder($order);
