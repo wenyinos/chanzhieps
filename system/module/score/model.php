@@ -317,17 +317,16 @@ class scoreModel extends model
     /**
      * Process an order.
      * 
-     * @param  int    $orderID 
+     * @param  object $order
      * @access public
-     * @return string|bool
+     * @return string | bool
      */
-    public function processOrder($orderID)
+    public function processOrder($order)
     {
-        /* Get order and site. */
-        $order = $this->getOrderByRawID($orderID);
+        if($order->payStatus == 'paid') return true;
 
         $result = $this->loadModel('order')->processOrder($order);
-        if($result == 'success' and $order->status == 'wait')
+        if($result and $order->status == 'wait')
         {
             $account = $order->account;
             $count   = round($order->amount * $this->config->score->buyScore->perYuan);
