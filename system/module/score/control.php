@@ -69,7 +69,7 @@ class score extends control
         if($this->app->user->account == 'guest') $this->locate($this->createLink('user', 'login'));
 
         $order = $this->score->getOrderByRawID($orderID);
-        $this->view->payLink = $this->loadModel('order')->createAlipayLink($order, 'score');
+        $this->view->payLink = $this->loadModel('order')->createPayLink($order);
         $this->view->order   = $order;
         $this->display();
     }
@@ -77,29 +77,29 @@ class score extends control
     /**
      * Process order.
      * 
-     * @param  string $mode retur|notify
+     * @param  string $type
+     * @param  string $mode return|notify
      * @access public
      * @return object
      */
-    public function processOrder($mode = 'return')
+    public function processOrder($type = 'alipay', $mode = 'return')
     {
         /* Get the orderID from the order. */
-        $orderID = $this->loadModel('order')->getOrderFromAlipay($mode, 'score');
-        if(!$orderID) die('STOP!');
+        $order = $this->loadModel('order')->getOrderFromAlipay($mode);
+        if(!$order) die('STOP!');
 
         /* Process the order. */
-        $result = $this->score->processOrder($orderID);
+        $result = $this->score->processOrder($order);
 
         /* Notify mode. */
         if($mode == 'notify')
         {
             $this->order->saveAlipayLog();
-            if($result == 'success') die('success');
+            if($result) die('success');
             die('fail');
         }
-
         $this->view->result  = $result;
-        $this->view->orderID = $orderID;
+        $this->view->orderID = $order->id;
         $this->display();
     }
 

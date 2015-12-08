@@ -165,13 +165,13 @@ class orderModel extends model
     /**
      * Create pay link of an order.
      * 
-     * @param  int    $order 
+     * @param  object $order
      * @access public
      * @return void
      */
     public function createPayLink($order)
     {
-        if($order->payment == 'alipay' or $order->payment == 'alipaySecured') return $this->createAlipayLink($order, $order->payment);
+        if($order->payment == 'alipay' or $order->payment == 'alipaySecured') return $this->createAlipayLink($order);
         return false;
     }
 
@@ -202,15 +202,15 @@ class orderModel extends model
     /**
      * Create a alipay link. 
      * 
-     * @param  string    $orderNO 
+     * @param  object $order
      * @access public
      * @return string
      */
-    public function createAlipayLink($order, $type)
+    public function createAlipayLink($order)
     {
         $this->app->loadClass('alipay', true);
 
-        $alipayConfig = $type == 'alipay' ? $this->config->alipay->direct : $this->config->alipay->secured;
+        $alipayConfig = $order->payment == 'alipay' ? $this->config->alipay->direct : $this->config->alipay->secured;
         $alipayConfig->notifyURL = getWebRoot(true) . ltrim(inlink('processorder', "type=alipay&mode=notify"), '/');
         $alipayConfig->returnURL = getWebRoot(true) . ltrim(inlink('processorder', "type=alipay&mode=return"), '/');
         $alipayConfig->pid   = $this->config->alipay->pid;
@@ -239,7 +239,7 @@ class orderModel extends model
         $orderID = 0;
         if($mode == 'return')
         {
-            if(1 or $alipay->checkNotify($_GET) and $this->get->trade_status == 'TRADE_FINISHED' || $this->get->trade_status == 'TRADE_SUCCESS')
+            if($alipay->checkNotify($_GET) and ($this->get->trade_status == 'TRADE_FINISHED' or $this->get->trade_status == 'TRADE_SUCCESS'))
             {
                 $orderID = $this->get->out_trade_no;
                 $sn      = $this->get->trade_no;
@@ -247,7 +247,7 @@ class orderModel extends model
         }
         elseif($mode == 'notify')
         {
-            if($alipay->checkNotify($_POST) and $this->post->trade_status == 'TRADE_FINISHED' || $this->post->trade_status == 'TRADE_SUCCESS')
+            if($alipay->checkNotify($_POST) and ($this->post->trade_status == 'TRADE_FINISHED' or $this->post->trade_status == 'TRADE_SUCCESS'))
             {
                 $orderID = $this->post->out_trade_no;
                 $sn      = $this->post->trade_no;
@@ -256,6 +256,8 @@ class orderModel extends model
 
         if($orderID) $orderID = $this->getRawOrder($orderID);
         $order = $this->getByID($orderID);
+
+        if(!$order) return false;
 
         $order->sn = $sn;
         return $order;
@@ -281,13 +283,13 @@ class orderModel extends model
     /**
      * Process an order.
      * 
-     * @param  object    $order 
+     * @param  object $order
      * @access public
      * @return bool
      */
     public function processOrder($order)
     {
-        if($order->payStatus == 'Y') return true; 
+        if($order->payStatus == 'paid') return true;
 
         $this->dao->update(TABLE_ORDER)
             ->set('sn')->eq($order->sn)

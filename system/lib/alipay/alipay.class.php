@@ -55,7 +55,15 @@ class alipay
 
         /* 检查是否通知信息是否真实有效。*/
         $noticeID = $params['notify_id'];
-        $checkURL = $this->config->checkGW . "partner={$this->config->pid}&notify_id=$noticeID";
+        $exterface = $params['exterface'];
+        if($exterface == 'create_direct_pay_by_user')
+        {
+            $checkURL = $this->config->direct->checkGW . "partner={$this->config->pid}&notify_id=$noticeID";
+        }
+        else
+        {
+            $checkURL = $this->config->secured->checkGW . "partner={$this->config->pid}&notify_id=$noticeID";
+        }
         $result = strtolower(trim(file_get_contents($checkURL)));
         if($result != 'true') return false;
 
