@@ -324,9 +324,8 @@ class scoreModel extends model
     public function processOrder($order)
     {
         if($order->payStatus == 'paid') return true;
-
         $result = $this->loadModel('order')->processOrder($order);
-        if($result and $order->status == 'wait')
+        if($result)
         {
             $account = $order->account;
             $count   = round($order->amount * $this->config->score->buyScore->perYuan);
