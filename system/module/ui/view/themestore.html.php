@@ -41,7 +41,7 @@
       $latestRelease  = isset($theme->latestRelease) ? $theme->latestRelease : '';
       ?>
       <div class='card'>
-      <?php if(isset($theme->image)):?><div class='col-md-2'> <?php echo html::image("http://www.chanzhi.com/data/upload/" . $theme->image);?> </div><?php endif;?>
+      <?php if(isset($theme->image)):?><div class='col-md-2'> <?php echo html::image($this->config->ui->themeSnapRoot . $theme->image);?> </div><?php endif;?>
         <div class='col-md-10'>
         <div class='card-heading'>
           <small class='pull-right text-important'>
