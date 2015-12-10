@@ -58,6 +58,7 @@ $lang->logout           = '退出';
 $lang->login            = '登录';
 $lang->account          = '帐号';
 $lang->password         = '密码';
+$lang->score            = '积分';
 $lang->changePassword   = '修改密码';
 $lang->editEmail        = "邮箱设置";
 $lang->securityQuestion = '密保问题';

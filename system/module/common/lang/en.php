@@ -58,6 +58,7 @@ $lang->logout           = 'Logout';
 $lang->login            = 'Login';
 $lang->account          = 'Account';
 $lang->password         = 'Password';
+$lang->score            = 'Score';
 $lang->changePassword   = 'Change password';
 $lang->editEmail        = "Email setting";
 $lang->securityQuestion = 'Security question';
