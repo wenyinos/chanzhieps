@@ -25,9 +25,8 @@ $lang->message->list              = '留言列表';
 $lang->message->post              = '发表留言';
 $lang->message->viewArticle       = '正文';
 $lang->message->viewComment       = '留言';
-$lang->message->thanks            = '感谢您的留言，通过审核之后才会显示！';
 $lang->message->noSelectedMessage = '您没有选择任何留言。';
-$lang->message->needCheck         = '留言通过审核之后才会显示。';
+$lang->message->needCheck         = '留言通过审核后显示。';
 $lang->message->showDetail        = '显示全部';
 $lang->message->hideDetail        = '收起';
 
@@ -69,8 +68,7 @@ $lang->comment->list         = '评论列表';
 $lang->comment->post         = '发表评论';
 $lang->comment->viewArticle  = '正文';
 $lang->comment->viewComment  = '评论';
-$lang->comment->thanks       = '感谢您的评论，通过审核之后才会显示！';
-$lang->comment->needCheck    = '评论通过审核之后才会显示。';
+$lang->comment->needCheck    = '评论通过审核后显示。';
 $lang->comment->receiveEmail = '接收邮件提醒';
 
 $lang->comment->pass          = '通过';

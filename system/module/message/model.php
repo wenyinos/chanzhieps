@@ -326,7 +326,7 @@ class messageModel extends model
             }
             return array('result' => 'fail', 'message' => $errors);
         }
-        return array('result' => 'success', 'message' => $this->lang->message->thanks);
+        return array('result' => 'success', 'message' => $this->lang->message->needCheck);
     }
 
     /**
