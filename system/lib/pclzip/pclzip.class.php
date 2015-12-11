@@ -4010,9 +4010,9 @@
 
     // ----- Open the temporary gz file
     if(function_exists('gzopen')) {
-        $v_src_file = gzopen($v_gzip_temp_name, 'rb')
+        $v_src_file = gzopen($v_gzip_temp_name, 'rb');
     } else {
-        $v_src_file = @gzopen64($v_gzip_temp_name, 'rb')
+        $v_src_file = @gzopen64($v_gzip_temp_name, 'rb');
     }
     if ($v_src_file == 0) {
       @fclose($v_dest_file);
