@@ -238,6 +238,7 @@ class uiModel extends model
         unset($params['background-image-position']);
         unset($params['navbar-background-image-position']);
         unset($params['css']);
+        unset($params['js']);
 
         $lessc->setFormatter("compressed");
         $lessc->setVariables($params);

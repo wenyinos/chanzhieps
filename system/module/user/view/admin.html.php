@@ -82,8 +82,13 @@ js::set('admin', $this->get->admin);
           <?php //if($user->provider == 'wechat') echo html::a($this->createLink('wechat', 'message', "from={$user->openID}"), $lang->user->messages);?>
           <?php commonModel::printLink('user', 'edit', "account=$user->account", $lang->edit); ?>
           <?php if(commonModel::isAvailable('score')):?>
-          <?php commonModel::printLink('user', 'addScore', "account=$user->account", $lang->user->addScore, "data-toggle=modal"); ?>
-          <?php commonModel::printLink('user', 'reduceScore', "account=$user->account", $lang->user->reduceScore, "data-toggle=modal"); ?>
+          <span class="dropdown">
+            <a href='###' class="dropdown-toggle" data-toggle="dropdown"><?php echo $lang->score?><span class="caret"></span></a>
+            <ul class="dropdown-menu pull-right text-center" role="menu">
+              <li><?php commonModel::printLink('user', 'addScore', "account=$user->account", $lang->user->addScore, "data-toggle=modal"); ?></li>
+              <li><?php commonModel::printLink('user', 'reduceScore', "account=$user->account", $lang->user->reduceScore, "data-toggle=modal"); ?></li>
+            </ul>
+          </span>
           <?php endif;?>
           <?php commonModel::printLink('user', 'delete', "account=$user->account", $lang->delete); ?>
           <?php if($user->locked <= helper::now() and $forbidPriv):?>

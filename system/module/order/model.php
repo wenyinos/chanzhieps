@@ -169,9 +169,9 @@ class orderModel extends model
      * @access public
      * @return void
      */
-    public function createPayLink($order)
+    public function createPayLink($order, $type = '')
     {
-        if($order->payment == 'alipay' or $order->payment == 'alipaySecured') return $this->createAlipayLink($order);
+        if($order->payment == 'alipay' or $order->payment == 'alipaySecured') return $this->createAlipayLink($order, $type);
         return false;
     }
 
@@ -206,13 +206,17 @@ class orderModel extends model
      * @access public
      * @return string
      */
-    public function createAlipayLink($order)
+    public function createAlipayLink($order, $type = '')
     {
         $this->app->loadClass('alipay', true);
 
         $alipayConfig = $order->payment == 'alipay' ? $this->config->alipay->direct : $this->config->alipay->secured;
-        $alipayConfig->notifyURL = getWebRoot(true) . ltrim(inlink('processorder', "type=alipay&mode=notify"), '/');
-        $alipayConfig->returnURL = getWebRoot(true) . ltrim(inlink('processorder', "type=alipay&mode=return"), '/');
+        /* Create right link that module is not order in order-browse page, such as score. */
+        $notifyURL = empty($type) ? inlink('processorder', "type=alipay&mode=notify") : helper::createLink($type, 'processorder', "type=alipay&mode=notify");
+        $returnURL = empty($type) ? inlink('processorder', "type=alipay&mode=return") : helper::createLink($type, 'processorder', "type=alipay&mode=return");
+
+        $alipayConfig->notifyURL = getWebRoot(true) . ltrim($notifyURL, '/');
+        $alipayConfig->returnURL = getWebRoot(true) . ltrim($returnURL, '/');
         $alipayConfig->pid   = $this->config->alipay->pid;
         $alipayConfig->key   = $this->config->alipay->key;
         $alipayConfig->email = $this->config->alipay->email;
@@ -422,7 +426,7 @@ class orderModel extends model
             if($btnLink)
             {
                 /* Pay link. */
-                if($order->payment != 'COD' and $order->payStatus != 'paid') echo html::a($this->createPayLink($order), $this->lang->order->pay, "target='_blank' class='btn-go2pay btn warning'");
+                if($order->payment != 'COD' and $order->payStatus != 'paid') echo html::a($this->createPayLink($order, $order->type), $this->lang->order->pay, "target='_blank' class='btn-go2pay btn warning'");
 
                 /* Track link. */
                 if($order->deliveryStatus != 'not_send') echo html::a(inlink('track', "orderID={$order->id}"), $this->lang->order->track, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' data-toggle='modal' class='btn btn-link'");
@@ -436,7 +440,7 @@ class orderModel extends model
             else
             {
                 /* Pay link. */
-                if($order->payment != 'COD' and $order->payStatus != 'paid') echo html::a($this->createPayLink($order), $this->lang->order->pay, "target='_blank' class='btn-go2pay'");
+                if($order->payment != 'COD' and $order->payStatus != 'paid') echo html::a($this->createPayLink($order, $order->type), $this->lang->order->pay, "target='_blank' class='btn-go2pay'");
 
                 /* Track link. */
                 if($order->deliveryStatus != 'not_send') echo html::a(inlink('track', "orderID={$order->id}"), $this->lang->order->track, "data-rel='" . helper::createLink('order', 'confirmDelivery', "orderID=$order->id") . "' data-toggle='modal'") . '<br>';
