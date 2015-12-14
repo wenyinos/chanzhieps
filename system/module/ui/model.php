@@ -206,13 +206,13 @@ class uiModel extends model
      */
     public function createCustomerCss($template, $theme, $params = null)
     {
-        if(isset($params)) $params = (array) $params;
-        else $params = $this->getCustomParams($template, $theme);
-        $extraCss = isset($params['css']) ? $params['css'] : '';
-        if(isset($params['css'])) unset($params['css']);
-
         $lessc   = $this->app->loadClass('lessc');
         $cssFile = sprintf($this->config->site->ui->customCssFile, $template, $theme);
+
+        if(!empty($params)) $params = (array) $params;
+        if(empty($params))  $params = $this->getCustomParams($template, $theme);
+        $extraCss = isset($params['css']) ? $params['css'] : '';
+        if(isset($params['css'])) unset($params['css']);
 
         $savePath = dirname($cssFile);
         if(!is_dir($savePath)) mkdir($savePath, 0777, true);
@@ -262,15 +262,17 @@ class uiModel extends model
         {
             $css .= file_get_contents($lessTemplateDir . 'custom.css');
         }
+
         if(!empty($extraCss))
         {
             $css .= "\r\n\r\n" . '/* User custom extra style for teamplate:' . $template . ' - theme:' . $theme . ' */' . "\r\n";
             $css .= $lessc->compile($extraCss);
         }
 
+        if(!empty($lessc->errors)) return array('result' => 'fail', 'message' => $lessc->errors);
         file_put_contents($cssFile, $css);
 
-        return $lessc->errors;
+        return array('result' => 'success', 'css' => $css);
     }
 
     /**
