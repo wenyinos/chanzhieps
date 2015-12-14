@@ -91,6 +91,7 @@ $config->rights->guest['score']['processorder'] = 'processorder';
 $config->rights->guest['yangcong']['qrcode']    = 'qrcode';
 $config->rights->guest['yangcong']['getresult'] = 'getresult';
 
+$config->rights->guest['ui']['getencrypt'] = 'getencrypt';
 /* For logged member. */
 $config->rights->member['article']['contribution'] = 'contribution';
 $config->rights->member['article']['post']         = 'post';

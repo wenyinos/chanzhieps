@@ -72,8 +72,8 @@ class ui extends control
         {
             $params = $_POST;
 
-            $errors = $this->ui->createCustomerCss($template, $theme, $params);
-            if(!empty($errors)) $this->send(array('result' => 'fail', 'message' => $errors));
+            $lessResult = $this->ui->createCustomerCss($template, $theme, $params);
+            if($lessResult['result'] != 'success') $this->send(array('result' => 'fail', 'message' => $errors));
             $setting       = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true): array();
             $postedSetting = fixer::input('post')->remove('template,theme')->get();
 
@@ -512,5 +512,43 @@ class ui extends control
         $this->view->type         = $type;
         $this->view->param        = $param;
         $this->display();
+    }
+
+    /**
+     * Get encrypt css and js.
+     * 
+     * @param  int    $type 
+     * @param  int    $template 
+     * @param  int    $theme 
+     * @access public
+     * @return void
+     */
+    public function getEncrypt($type, $template, $theme)
+    {
+        $this->loadThemeHooks();
+
+        if($type == 'css')
+        {
+            //header('Content-type: text/css');
+            $cssFun = "get{$theme}CSS";
+            if(!function_exists($cssFun)) die('/*no css*/');
+            $params = $this->ui->getCustomParams($template, $theme);
+            $encryptCss = $cssFun();
+            $customCss = zget($params, 'css', '');
+            $params['css'] = $encryptCss . $customCss;
+            $lessResult = $this->ui->createCustomerCss($template, $theme, $params);
+            if($lessResult['result'] != 'success') die();
+            exit($lessResult['css']);
+        }
+
+        if($type == 'js')
+        {
+            header('Content-type: text/javascript');  
+            $jsFun = "get{$theme}js";
+            if(!function_exists($jsFun)) die('');
+            $js = $jsFun();
+            exit($js);
+        }
+        exit;
     }
 }

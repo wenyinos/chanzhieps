@@ -596,16 +596,18 @@ class control
             $themeHooks  = $this->loadThemeHooks();
             if(!empty($themeHooks))
             {
-                $this->loadModel('ui');
-                $cssFunction = "get{$theme}CSS";
-                $jsFunction  = "get{$theme}JS";
-                $encryptCSS  = function_exists($cssFunction) ? $cssFunction() : '';
-                $customCSS   = isset($customParam[$template][$theme]['css']) ? $customParam[$template][$theme]['css'] : '';
-                $encryptJS   = function_exists($jsFunction) ? $jsFunction() : '';
-                $customJS    = isset($customParam[$template][$theme]['js']) ? $customParam[$template][$theme]['js'] : '';
-
-                $css = $encryptCSS . $customCSS . $css;
-                $js  = $encryptJS  . $customJS  . $js;
+                $importCode = '@import url(' . helper::createLink('ui', 'getencrypt', "type=css&template={$template}&theme={$theme}") . ');';
+                $css = $importCode . $css;
+                $jsFun = "get{$theme}JS";
+                if(function_exists($jsFun)) 
+                {
+                    $baseCustom = isset($this->config->template->custom) ? json_decode($this->config->template->custom, true) : array();
+                    $customJS = ''; 
+                    if(!empty($baseCustom[$template][$theme]['js'])) $customJS = $baseCustom[$template][$theme]['js'];
+                    $customJS = $jsFun() . $customJS;
+                    $baseCustom[$template][$theme]['js'] = $customJS;
+                    $this->config->template->custom =json_encode($baseCustom);
+                }
             }
         }
         if($css) $this->view->pageCSS = $css;
