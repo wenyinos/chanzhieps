@@ -28,13 +28,17 @@ class uiModel extends model
         foreach($folders as $folder)
         {
             if(!is_dir($folder)) continue;
+
             $templateName = str_replace($this->app->getTplRoot(), '', $folder);
             $docFile      = $folder . DS . 'doc' . DS . $this->app->getClientLang() . '.yaml';
             if(!is_file($docFile)) continue;
+
             $config = Spyc::YAMLLoadString(file_get_contents($docFile));
             if(empty($config)) continue;
+
             if(isset($config['device']) and strpos($config['device'], ",{$device},") === false) continue;;
             $templates[$templateName] = $config;
+
             if(!isset($templates[$templateName]['themes']))
             {
                 $templates[$templateName]['themes'] = array('default' => 'default');

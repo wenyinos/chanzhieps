@@ -326,7 +326,7 @@ class ui extends control
      * @access public
      * @return void
      */
-    public function installtheme($package, $downLink = '', $md5 = '')
+    public function installTheme($package, $downLink = '', $md5 = '')
     {
         set_time_limit(0);
 
