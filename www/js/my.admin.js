@@ -99,7 +99,7 @@ $(function()
             }
             else
             {
-                bootbox.alert(data.message);
+                messager.danger(response.message);
             }
         });
         return false;
