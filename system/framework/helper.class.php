@@ -443,7 +443,7 @@ class helper
         if(isset($config->siteCode[$domain])) return $config->siteCode[$domain];
 
         if($domain == 'localhost') return $domain;
-        if(!preg_match('/^([a-z0-9\-]+\.)+[a-z0-9\-]+$/', $domain)) die('domain denied');
+        if(!preg_match('/^([a-z0-9\-_]+\.)+[a-z0-9\-]+$/', $domain)) die('domain denied');
 
         $domain  = str_replace('-', '_', $domain);    // Replace '-' by '_'.
         $items   = explode('.', $domain);
@@ -900,10 +900,11 @@ function getHomeRoot($langCode = '')
     if($langCode == $config->langsShortcuts[$defaultLang]) return $config->webRoot;
     $homeRoot = $config->webRoot;
 
-    if($langCode and $config->requestType != 'GET') $homeRoot = $config->webRoot . $langCode; 
-    if($langCode and $config->requestType == 'GET') $homeRoot = $config->webRoot . 'index.php/' . "$langCode";
-    return rtrim($homeRoot, '/') . '/';
-
+    if($langCode and $config->requestType == 'PATH_INFO') $homeRoot = $config->webRoot . $langCode; 
+    if($langCode and $config->requestType == 'PATH_INFO2') $homeRoot = $config->webRoot . 'index.php/' . "$langCode";
+    if($langCode and $config->requestType == 'GET') $homeRoot = $config->webRoot . 'index.php?l=' . "$langCode";
+    if($config->requestType != 'GET') $homeRoot = rtrim($homeRoot, '/') . '/';
+    return $homeRoot;
 }
 
 /**
