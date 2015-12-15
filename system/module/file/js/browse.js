@@ -2,7 +2,11 @@ $(document).ready(function()
 {   
     $.setAjaxForm('#fileForm', function(data)
     {
-        if(data.result == 'success') $.reloadAjaxModal(1500);
+        if(data.result == 'success') 
+        {
+            setTimeout(function(){submitButton.popover('destroy');}, 1500);
+            $.reloadAjaxModal(2000);
+        }
     }); 
     $.setAjaxLoader('.edit', '#ajaxModal');
     $(document).on('click', 'a.option', function(data)
