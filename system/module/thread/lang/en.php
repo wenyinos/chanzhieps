@@ -66,7 +66,7 @@ $lang->thread->successTransfer = 'Successfully Transfered';
 $lang->thread->thanks          = 'This thread will be shown by audit';
 
 $lang->thread->score    = 'Reward Scores';
-$lang->thread->scoreSum = "<strong class='red f-14px strong'>+%s</strong> ";
+$lang->thread->scoreSum = "<i class='text-warning icon icon-plus'><b>%s</b></i> ";
 $lang->thread->scores[5]  = '+ 5';
 $lang->thread->scores[10] = '+ 10';
 $lang->thread->scores[50] = '+ 50';

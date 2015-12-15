@@ -10,9 +10,6 @@
       <?php elseif($i == 3):?>
       <strong class='text-success'><?php echo $lang->reply->stool;?></strong>
       <?php endif;?>
-      <?php if(commonModel::isAvailable('score') and !empty($reply->scoreSum)):?>
-      <?php echo sprintf($lang->thread->scoreSum, $reply->scoreSum);?>
-      <?php endif;?>
     </div>
     <span class='muted'><i class='icon-comment-alt'></i> <?php echo $reply->addedDate;?></span>
   </div>
@@ -39,6 +36,9 @@
     </tr>
   </table>
   <div class='thread-foot'>
+    <?php if(commonModel::isAvailable('score') and !empty($reply->scoreSum)):?>
+    <?php echo sprintf($lang->thread->scoreSum, $reply->scoreSum);?>
+    <?php endif;?>
     <?php if($reply->editor): ?>
     <small class='text-muted'><?php printf($lang->thread->lblEdited, $reply->editorRealname, $reply->editedDate); ?></small>
     <?php endif; ?>
