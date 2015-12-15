@@ -585,7 +585,10 @@ class fixer
         $fields = $this->processFields($fieldName);
         foreach($fields as $fieldName) 
         {
-            if(version_compare(phpversion(), '5.4', '<') and get_magic_quotes_gpc()) $this->data->$fieldName = stripslashes($this->data->$fieldName);
+            if(version_compare(phpversion(), '5.4', '<') and function_exists('get_magic_quotes_gpc') and get_magic_quotes_gpc())
+            {
+                $this->data->$fieldName = stripslashes($this->data->$fieldName);
+            }
 
             if(!in_array($fieldName, $this->stripedFields))
             {
