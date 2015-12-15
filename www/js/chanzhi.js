@@ -754,9 +754,11 @@ function setGo2Top()
         });
     };
 
+    var lastTidyTask = null;
     var tidyBlocks = function()
     {
-        $('.row.blocks').tidy();
+        clearTimeout(lastTidyTask);
+        lastTidyTask = setTimeout(function(){$('.row.blocks').tidy();}, 300)
     };
 
     $.extend({tidyBlocks: tidyBlocks})
@@ -765,6 +767,10 @@ function setGo2Top()
         tidyBlocks();
         $(window).resize(tidyBlocks);
         setTimeout(tidyBlocks, 500);
+        $('.row.blocks img').load(tidyBlocks).each(function()
+        {
+            if(this.complete) $(this).load();
+        });
     })
 }(jQuery));
 
