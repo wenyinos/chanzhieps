@@ -20,12 +20,11 @@ class guarderModel extends model
      */
     public function isEvil($content = '')
     {
-        $isEvil = false;
         if(strpos($content, 'http://') !== false) return true;
 
         $linkCount = preg_match_all('/(?<=href=)([^\>]*)(?=\>)/ ', $content, $out);
-        if($linkCount > 1) $isEvil = true;
         if($linkCount > 5) die();
+        if($linkCount > 1) return true;
 
         if(preg_match('/\[url=.*\].*\[\/url\]/U', $content)) die();
 
