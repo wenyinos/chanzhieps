@@ -5,9 +5,6 @@
       <?php if($thread->readonly) echo "<span class='label'><i class='icon-lock'></i> " . $lang->thread->readonly . "</span> &nbsp;"; ?>
     </div>
     <strong><?php echo $thread->title; ?></strong>
-    <?php if(commonModel::isAvailable('score') and !empty($thread->scoreSum)):?>
-    <?php echo sprintf($lang->thread->scoreSum, $thread->scoreSum);?>
-    <?php endif;?>
     <div class='text-muted'><?php echo $thread->addedDate;?></div>
   </div>
   <table class='table'>
@@ -33,6 +30,9 @@
     </tr>
   </table>
   <div class='thread-foot'>
+    <?php if(commonModel::isAvailable('score') and !empty($thread->scoreSum)):?>
+    <span ><?php echo sprintf($lang->thread->scoreSum, $thread->scoreSum);?></span>
+    <?php endif;?>
     <?php if($thread->editor): ?>
     <small class='text-muted'><?php printf($lang->thread->lblEdited, $thread->editorRealname, $thread->editedDate); ?></small>
     <?php endif; ?>
