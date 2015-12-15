@@ -362,9 +362,9 @@ class uri
     {
         global $config;
 
-        $link = 'blog/' . array_shift($params);
-        if($alias['name']) $link .= '_' . $alias['name'];
-
+        $link = 'blog/';
+        if($alias['name']) $link .= $alias['name'] . '-';
+        $link .= array_shift($params);
         $viewType = $viewType ? $viewType : $config->default->view;
         return $config->webRoot . $link . '.' . $viewType;
     }
@@ -402,8 +402,8 @@ class uri
         $viewType = $viewType ? $viewType : $config->default->view;
 
         $link = 'book/' . $alias['book'] . '/';
+        if($alias['node']) $link .= $alias['node'] . '-';
         $link .= array_shift($params);
-        if($alias['node']) $link .= '_' . $alias['node'];
 
         return $config->webRoot . $link . '.' . $viewType;
     }
