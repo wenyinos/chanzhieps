@@ -266,6 +266,13 @@ class site extends control
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
+        $this->view->setting = array();
+
+        if(!empty($this->config->site->yangcong))
+        {
+            $this->view->setting = json_decode($this->config->site->yangcong);
+        }
+
         $this->view->title = $this->lang->site->setOauth;
         $this->display();
     }
@@ -373,15 +380,5 @@ class site extends control
             if($result) $this->send(array('result' => 'success', 'message' => $this->lang->setSuccess));
             $this->send(array('result' => 'fail', 'message' => $this->lang->fail));
         }
-
-        $this->view->title   = $this->lang->site->setYangcong;
-        $this->view->setting = array();
-
-        if(!empty($this->config->site->yangcong))
-        {
-            $this->view->setting = json_decode($this->config->site->yangcong);
-        }
-
-        $this->display();
     }
 }

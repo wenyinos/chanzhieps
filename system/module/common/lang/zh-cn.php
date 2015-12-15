@@ -249,7 +249,6 @@ $lang->site->menu->contact  = '联系方式|company|setcontact|';
 $lang->site->menu->nav      = '导航设置|nav|admin|';
 $lang->site->menu->link     = '友情链接|links|admin|';
 $lang->site->menu->oauth    = '开放登录|site|setoauth|';
-$lang->site->menu->yangcong = '洋葱登录|site|setyangcong|';
 $lang->site->menu->mail     = array('link' => '发信设置|mail|admin|', 'alias' => 'detect,edit,save,test');
 $lang->site->menu->wechat   = array('link' => '微信设置|wechat|admin|', 'alias' => 'create, edit, adminresponse');
 $lang->site->menu->search   = '全文检索|search|buildindex|';
