@@ -317,11 +317,11 @@ class threadModel extends model
         }
 
         $this->dao->update(TABLE_THREAD)
-            ->data($thread, $skip = 'captcha, uid, isLink')
+            ->data($thread, $skip = "{$this->session->captchaInput}, uid, isLink")
             ->autoCheck()
             ->batchCheckIF(!$this->post->isLink, $this->config->thread->require->edit, 'notempty')
             ->batchCheckIF($this->post->isLink, $this->config->thread->require->link, 'notempty')
-            ->check('captcha', 'captcha')
+            ->check($this->session->captchaInput, 'captcha')
             ->where('id')->eq($threadID)
             ->exec();
 

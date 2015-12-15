@@ -103,9 +103,10 @@ class thread extends control
         if($_POST)
         {
             /* If no captcha but is garbage, return the error info. */
-            if($this->post->captcha === false and $this->loadModel('guarder')->isEvil($this->post->content))
+            if($this->loadModel('guarder')->isEvil($this->post->content))
             {
-                $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->captcha->create4Thread()));
+                $captchaInput = $this->session->captchaInput;
+                if(!$captchaInput or $this->post->$captchaInput === false) $this->send(array('result' => 'fail', 'reason' => 'needChecking', 'captcha' => $this->guarder->create4Thread()));
             }
 
             $return = $this->thread->update($threadID);
