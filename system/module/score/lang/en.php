@@ -8,7 +8,6 @@
  * @version     $Id$
  * @link        http://www.chanzhi.net
  */
-$lang->score->common      = 'Score';
 $lang->score->back        = 'Back';
 $lang->score->rankingList = 'Score Ranking';
 
