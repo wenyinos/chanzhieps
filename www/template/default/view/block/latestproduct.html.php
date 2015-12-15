@@ -40,9 +40,9 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
             <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
             <?php if($content->categoryName == 'abbr'):?>
             <?php $categoryName = '[' . ($product->category->abbr ? $product->category->abbr : $product->category->name) . '] ';?>
-            <?php echo html::a(helper::createLink('product', 'browse', "categoryID={$product->category->id}", "category={$product->category->alias}"), $categoryName);?>
+            <?php echo  $categoryName;?>
             <?php else:?>
-            <?php echo html::a(helper::createLink('product', 'browse', "categoryID={$product->category->id}", "category={$product->category->alias}"), '[' . $product->category->name . '] ');?>
+            <?php echo ' [' . $product->category->name . '] ';?>
             <?php endif;?>
             <?php endif;?>
             <?php echo $product->name;?>
@@ -104,12 +104,12 @@ $products = $this->loadModel('product')->$method($content->category, $content->l
         ?>
         </span>
         <?php if(isset($content->showCategory) and $content->showCategory == 1):?>
-        <?php if($content->categoryName == 'abbr'):?>
-        <?php $categoryName = '[' . ($product->category->abbr ? $product->category->abbr : $product->category->name) . '] ';?>
-        <?php echo html::a(helper::createLink('product', 'browse', "categoryID={$product->category->id}", "category={$product->category->alias}"), $categoryName);?>
-        <?php else:?>
-        <?php echo html::a(helper::createLink('product', 'browse', "categoryID={$product->category->id}", "category={$product->category->alias}"), '[' . $product->category->name . '] ');?>
-        <?php endif;?>
+          <?php if($content->categoryName == 'abbr'):?>
+          <?php $categoryName = '[' . ($product->category->abbr ? $product->category->abbr : $product->category->name) . '] ';?>
+          <?php echo html::a(helper::createLink('product', 'browse', "categoryID={$product->category->id}", "category={$product->category->alias}"), $categoryName);?>
+          <?php else:?>
+          <?php echo html::a(helper::createLink('product', 'browse', "categoryID={$product->category->id}", "category={$product->category->alias}"), '[' . $product->category->name . '] ');?>
+          <?php endif;?>
         <?php endif;?>
         <?php echo html::a($url, $product->name);?>
       </li>
