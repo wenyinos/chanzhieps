@@ -66,7 +66,7 @@ $lang->visual->setting->carousel['groupActions']           = array();
 $lang->visual->setting->carousel['groupActions']['add']    = array('text' => '添加一张幻灯片');
 $lang->visual->setting->carousel['itemActions']            = array();
 $lang->visual->setting->carousel['itemActions']['edit']    = array('text' => '编辑', 'title' => '编辑幻灯片');
-$lang->visual->setting->carousel['itemActions']['delete']  = array('text' => '删除', 'confirm' => '是否删除此幻灯片？');
+$lang->visual->setting->carousel['itemActions']['delete']  = array('text' => '删除这一张', 'confirm' => '是否删除此幻灯片？');
 $lang->visual->setting->carousel['itemActions']['up']      = array('text' => '播放顺序提前为 {0}');
 $lang->visual->setting->carousel['itemActions']['down']    = array('text' => '播放顺序延后为 {0}');
 $lang->visual->setting->block                              = array('name' => "区块", 'actions' => array());
