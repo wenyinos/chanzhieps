@@ -76,6 +76,30 @@ class user extends control
     }
 
     /**
+     * Create an account.
+     * 
+     * @access public
+     * @return void
+     */
+    public function create()
+    {
+        $this->loadModel('guarder');
+        if($_POST)
+        {
+            $user = $this->user->identify($this->app->user->account, $this->post->password);
+            if(!$user) $this->send(array( 'result' => 'fail', 'message' => $this->lang->user->identifyFailed ) );
+
+            $this->user->create();
+            if(dao::isError())  $this->send(array('result' => 'fail', 'message' => dao::getError()));
+            $this->send(array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => inlink('admin', "user={$this->post->account}")));
+
+        }
+        $this->view->title = $this->lang->user->create;
+        $this->view->groups   = $this->loadModel('group')->getPairs();
+        $this->display();
+    }
+
+    /**
      * Login.
      * 
      * @param string $referer 
