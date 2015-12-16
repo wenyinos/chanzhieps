@@ -251,6 +251,12 @@ class commonModel extends model
             $referer  = helper::safe64Encode($_SERVER['HTTP_REFERER']);
             $vars .= "&referer=$referer";
         }
+
+        if(RUN_MODE == 'admin')
+        {
+            if(strpos($_SERVER['HTTP_REFERER'], "m=user&f=login") !== false) die(js::locate(helper::createLink('admin', 'index')));
+        }
+
         $denyLink = helper::createLink('user', 'deny', $vars);
         die(js::locate($denyLink));
     }
