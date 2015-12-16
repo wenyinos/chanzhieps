@@ -1027,6 +1027,11 @@ EOT;
         unset($params['js']);
 
         $params = var_export($params, true);
+        
+        $css    = str_replace("{$template}/{$theme}/", "{$template}/_THEME_CODEFIX_/", $css);
+        $js     = str_replace("{$template}/{$theme}/", "{$template}/_THEME_CODEFIX_/", $js);
+        $params = str_replace("{$template}/{$theme}/", "{$template}/_THEME_CODEFIX_/", $params);
+
         $code   = "<?php
 if(!function_exists('get_THEME_CODEFIX_CSS'))
 {
