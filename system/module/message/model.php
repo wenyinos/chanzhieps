@@ -307,6 +307,7 @@ class messageModel extends model
             ->check($this->session->captchaInput, 'captcha')
             ->check('type', 'in', $this->config->message->types)
             ->checkIF(!empty($message->email), 'email', 'email')
+            ->checkIF(!empty($message->phone), 'phone', 'phone')
             ->batchCheck($this->config->message->require->post, 'notempty')
             ->exec();
 

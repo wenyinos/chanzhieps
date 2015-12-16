@@ -97,6 +97,45 @@ class validater
     }
 
     /**
+     * Check phone number.
+     * 
+     * @param  string    $var 
+     * @static
+     * @access public
+     * @return void
+     */
+    public static function checkPhone($var)
+    {
+        return (validater::checkTel($var) or validater::checkMobile($var));
+    }
+
+    /**
+     * Check tel number.
+     * 
+     * @param  int    $var 
+     * @static
+     * @access public
+     * @return void
+     */
+    public static function checkTel($var)
+    {
+        return preg_match("/^([0-9]{3,4}-)?[0-9]{7,8}$/", $var);
+    }
+
+    /**
+     * Check mobile number.
+     * 
+     * @param  string    $var 
+     * @static
+     * @access public
+     * @return void
+     */
+    public static function checkMobile($var)
+    {
+        return preg_match("/^1[3-5,8]{1}[0-9]{9}$/", $var);
+    }
+
+    /**
      * URL checking. 
      *
      * The check rule of filter don't support chinese.

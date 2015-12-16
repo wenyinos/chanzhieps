@@ -23,6 +23,7 @@ class addressModel extends model
         $address = fixer::input('post')->add('account', $this->app->user->account)->get();
         $this->dao->insert(TABLE_ADDRESS)
             ->data($address)
+            ->check('phone', 'phone')
             ->batchCheck($this->config->address->require->create, 'notempty')
             ->exec();
         return !dao::isError();
