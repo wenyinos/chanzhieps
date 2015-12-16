@@ -90,7 +90,13 @@
               ?>
             </div>
           </div>
+          <?php if(zget($this->config->site, 'captcha', 'auto') == 'open'):?>
+          <div class='form-group' id='captchaBox'>
+            <?php echo $this->loadModel('guarder')->create4Comment();?>
+          </div>
+          <?php else:?>
           <div class='form-group hiding' id='captchaBox'></div>
+          <?php endif;?>
           <div class='form-group'>
             <div class='col-sm-1'></div>
             <div class='col-sm-11'><label class='checkbox'><input type='checkbox' name='secret' value='1' /><?php echo $lang->message->secret;?></label></div>
