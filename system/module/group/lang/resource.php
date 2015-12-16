@@ -237,6 +237,7 @@ $lang->resource->ui->others        = 'others';
 $lang->resource->user = new stdclass();
 $lang->resource->user->admin    = 'list';
 $lang->resource->user->edit     = 'edit';
+$lang->resource->user->create   = 'create';
 $lang->resource->user->forbid   = 'forbid';
 $lang->resource->user->adminlog = 'adminlog';
 
