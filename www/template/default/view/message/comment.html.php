@@ -86,8 +86,14 @@ if(isset($pageCSS)) css::internal($pageCSS);
           ?>
         </div>
       </div>
+      <?php if(zget($this->config->site, 'captcha', 'auto') == 'open'):?>
+      <div class='form-group' id='captchaBox'>
+        <?php echo $this->loadModel('guarder')->create4Comment();?>
+      </div>
+      <?php else:?>
       <div class='form-group hiding' id='captchaBox'></div>
-      <div class='form-group'>
+      <?php endif;?>
+       <div class='form-group'>
         <div class='col-sm-11 col-sm-offset-1'>
           <span><?php echo html::submitButton('', 'btn btn-primary', 'data-popover-container="false"');?></span>
           <span><small class="text-important"><?php echo $lang->comment->needCheck;?></small></span>
