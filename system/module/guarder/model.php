@@ -87,7 +87,7 @@ EOT;
 <table class='captcha'>
   <tr class='text-middle'>
     <td class='w-80px text-center'><label for='captcha'>{$this->lang->guarder->captcha}</label></td>
-    <td class='text-lg w-110px'>{$leftTag}{$guarder}{$rightTag}
+    <td class='text-lg'>{$leftTag}{$guarder}{$rightTag}
     {$equal} 
       <input type='text'  name="{$input}" id='{$input}' class='w-100px inline-block form-control text-center' placeholder='{$this->lang->guarder->placeholder}'/> &nbsp;
     </td>
