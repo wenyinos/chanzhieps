@@ -3,9 +3,9 @@
 
 (function(window, $)
 {
-    $.cookie('visualDevice', v.device, {expires:config.cookieLife, path:config.webRoot});
-
     'use strict';
+
+    $.cookie('visualDevice', v.device, {expires:config.cookieLife, path:config.webRoot});
 
     var DEBUG = window.v.debug;
     var visualPage = $('#visualPage').get(0);

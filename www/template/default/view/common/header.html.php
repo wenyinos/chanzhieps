@@ -63,5 +63,5 @@ if(isset($pageCSS)) css::internal($pageCSS);
 
   <div class='page-wrapper'>
     <div class='page-content'>
-      <?php $this->block->printRegion($layouts, 'all', 'banner');?>
+      <div class='blocks' data-region='all-banner'><?php $this->block->printRegion($layouts, 'all', 'banner');?></div>
 <?php endif;?>

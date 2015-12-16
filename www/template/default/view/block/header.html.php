@@ -10,7 +10,7 @@
  * @link        http://www.chanzhi.org
 */
 ?>
-<header id='header' class='clearfix'>
+<header id='header' class='clearfix' data-ve='block' data-id='<?php echo $block->id;?>'>
   <div id='headNav'>
     <div class='wrapper'>
       <nav>
