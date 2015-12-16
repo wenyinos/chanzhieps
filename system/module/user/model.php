@@ -217,6 +217,11 @@ class userModel extends model
             ->get();
         $user->password = $this->createPassword($this->post->password1, $user->account); 
 
+        if((isset($user->admin) and $user->admin == 'super') or !empty($user->realnames))
+        {
+            $user->realnames = helper::jsonEncode($user->realnames);
+        }
+
         $this->dao->insert(TABLE_USER)
             ->data($user, $skip = 'password1,password2')
             ->autoCheck()
@@ -232,8 +237,7 @@ class userModel extends model
             $viewType = $this->app->getViewType();
             if(!dao::isError())
             {
-                $this->app->user->account = $this->post->account;
-                $this->loadModel('score')->earn('register', '', '', 'REGISTER');
+                $this->loadModel('score')->earn('register', '', '', 'REGISTER', $user->account);
 
                 if($viewType == 'json') die('success');
             }

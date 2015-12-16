@@ -30,6 +30,7 @@ js::set('admin', $this->get->admin);
           </span>
         </div>
       </form>
+      <?php echo html::a(inlink('create'), "<i class='icon icon-plus'></i>" .  $lang->user->create, "data-toggle='modal' class='btn btn-primary'");?>
     </div>
   </div>
   <form method='post' action='<?php echo inlink('batchdelete');?>'>
