@@ -73,7 +73,13 @@ foreach (explode('|', $lang->colorPlates) as $value)
           <div class='col-md-7 col-sm-8 col-xs-11'><?php echo $this->fetch('file', 'buildForm');?></div>
         </div>
         <?php endif;?>
+        <?php if(zget($this->config->site, 'captcha', 'auto') == 'open'):?>
+        <div class='form-group' id='captchaBox'>
+        <?php echo $this->loadModel('guarder')->create4thread();?>
+        </div>
+        <?php else:?>
         <div class='form-group hiding' id='captchaBox'></div>
+        <?php endif;?>
       </div>
       <?php if($this->app->user->admin == 'super'):?>
       <div class='form-group link'>

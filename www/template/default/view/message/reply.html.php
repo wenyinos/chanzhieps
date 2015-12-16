@@ -23,7 +23,11 @@ $email = $this->session->user->account == 'guest' ? '' : $this->session->user->e
         <?php echo html::textarea('content', '', "class='form-control' rows='5'");?>
       </td>
     </tr>
+    <?php if(zget($this->config->site, 'captcha', 'auto') == 'open'):?>
+    <tr id='captchaBox'><?php echo $this->loadModel('guarder')->create4MessageReply();?></tr>
+    <?php else:?>
     <tr id='captchaBox' class='hiding'></tr>
+   <?php endif;?>
     <tr><td></td><td><?php echo html::submitButton();?></td></tr>
   </table>
 </form>

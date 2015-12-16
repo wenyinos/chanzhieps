@@ -31,7 +31,11 @@
           ?>
         </div>
       </div>
+      <?php if(zget($this->config->site, 'captcha', 'auto') == 'open'):?>
+      <div class='form-group' id='captchaBox'><?php echo $this->loadModel('guarder')->create4thread();?></div>
+      <?php else:?>
       <div class='form-group hiding' id='captchaBox'></div>
+      <?php endif;?>
       <div class='form-group'>
         <label class='col-md-1 col-sm-2'></label>
         <div class='col-md-11 col-sm-10'><?php echo html::submitButton() . ' &nbsp; ' . html::backButton();?></div>

@@ -78,7 +78,11 @@
       <div class='row'>
         <div class='col-md-8 col-sm-12'>
           <?php echo $this->fetch('file', 'buildForm'); ?>
+          <?php if(zget($this->config->site, 'captcha', 'auto') == 'open'):?>
+          <div class='form-group clearfix' id='captchaBox'><?php echo $this->loadModel('guarder')->create4reply();?></div>
+          <?php else:?>
           <div class='form-group clearfix' id='captchaBox' style='display:none;'></div>
+          <?php endif;?>
         </div>
       </div>
       
