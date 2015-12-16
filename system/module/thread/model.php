@@ -245,8 +245,6 @@ class threadModel extends model
         $this->loadModel('search')->save('thread', $thread);
 
         return array('result' => 'success', 'message' => $this->lang->saveSuccess, 'locate' => helper::createLink('thread', 'view', "threadID=$threadID"));
-      
-
     }
 
     /**
